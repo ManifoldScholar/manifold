@@ -30,6 +30,7 @@ exports[`Frontend.ProjectList.Filters component renders correctly 1`] = `
     </option>
   </select>
   <i
+    aria-hidden="true"
     className="manicon manicon-caret-down"
   />
 </div>

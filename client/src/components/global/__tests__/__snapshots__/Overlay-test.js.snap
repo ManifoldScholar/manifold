@@ -12,6 +12,7 @@ exports[`Global.Overlay component renders correctly 1`] = `
     >
       Close
       <i
+        aria-hidden="true"
         className="manicon manicon-x"
       />
     </button>

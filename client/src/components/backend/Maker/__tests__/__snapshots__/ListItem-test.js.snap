@@ -12,10 +12,16 @@ exports[`Backend.Maker.ListItem component renders correctly 1`] = `
       <figure
         className="avatar"
       >
+        <figcaption
+          className="screen-reader-text"
+        >
+          Maker Avatar
+        </figcaption>
         <div
           className="no-image"
         >
           <i
+            aria-label="hidden"
             className="manicon manicon-person"
           />
         </div>

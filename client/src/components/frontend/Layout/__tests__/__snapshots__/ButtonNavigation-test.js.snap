@@ -19,6 +19,7 @@ exports[`Frontend.Layout.ButtonNavigation component renders correctly 1`] = `
       >
         <span>
           <i
+            aria-hidden="true"
             className="manicon manicon-books-on-shelf"
           />
           See more projects
@@ -31,6 +32,7 @@ exports[`Frontend.Layout.ButtonNavigation component renders correctly 1`] = `
       >
         <span>
           <i
+            aria-hidden="true"
             className="manicon manicon-books-with-glasses"
           />
           Projects You're Following 
@@ -58,6 +60,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the grayBg prop 1`]
       >
         <span>
           <i
+            aria-hidden="true"
             className="manicon manicon-books-on-shelf"
           />
           See more projects
@@ -70,6 +73,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the grayBg prop 1`]
       >
         <span>
           <i
+            aria-hidden="true"
             className="manicon manicon-books-with-glasses"
           />
           Projects You're Following 
@@ -97,6 +101,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showBrowse prop
       >
         <span>
           <i
+            aria-hidden="true"
             className="manicon manicon-books-with-glasses"
           />
           Projects You're Following 
@@ -124,6 +129,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showFollowing p
       >
         <span>
           <i
+            aria-hidden="true"
             className="manicon manicon-books-on-shelf"
           />
           See more projects

@@ -19,6 +19,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
           className="button selected"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-cube-outline"
           />
           resources
@@ -27,6 +28,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
           className="button"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-file-box"
           />
           collections
@@ -43,6 +45,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
         >
           <button>
             <i
+              aria-hidden="true"
               className="manicon manicon-magnify"
             />
             <span
@@ -245,10 +248,18 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-arrow-long-left"
               />
-              <span>
+              <span
+                aria-hidden="true"
+              >
                 Prev
+              </span>
+              <span
+                className="screen-reader-text"
+              >
+                Previous Page
               </span>
             </a>
           </li>
@@ -259,7 +270,17 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
               href="#pagination-target"
               onClick={[Function]}
             >
-              1
+              <span
+                aria-hidden="true"
+              >
+                1
+              </span>
+              <span
+                className="screen-reader-text"
+              >
+                Go to page: 
+                1
+              </span>
             </a>
           </li>
           <li
@@ -269,7 +290,17 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
               href="#pagination-target"
               onClick={[Function]}
             >
-              2
+              <span
+                aria-hidden="true"
+              >
+                2
+              </span>
+              <span
+                className="screen-reader-text"
+              >
+                Go to page: 
+                2
+              </span>
             </a>
           </li>
           <li
@@ -280,10 +311,18 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
               href="#pagination-target"
               onClick={[Function]}
             >
-              <span>
+              <span
+                className="screen-reader-text"
+              >
+                Next Page
+              </span>
+              <span
+                aria-hidden="true"
+              >
                 Next
               </span>
               <i
+                aria-hidden="true"
                 className="manicon manicon-arrow-long-right"
               />
             </a>

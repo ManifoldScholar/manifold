@@ -14,6 +14,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
         className="container flush"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-arrow-left"
         />
         Back to Project
@@ -34,6 +35,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
           className="main"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-pulse"
           />
           <div
@@ -90,6 +92,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
                 >
                   Start Reading
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-arrow-long-right"
                   />
                 </a>
@@ -135,6 +138,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
                 >
                   Start Reading
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-arrow-long-right"
                   />
                 </a>
@@ -154,10 +158,18 @@ exports[`Frontend EventList Container renders correctly 1`] = `
                 onClick={[Function]}
               >
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-arrow-long-left"
                 />
-                <span>
+                <span
+                  aria-hidden="true"
+                >
                   Prev
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Previous Page
                 </span>
               </a>
             </li>
@@ -168,7 +180,17 @@ exports[`Frontend EventList Container renders correctly 1`] = `
                 href="/project/slug-1/events/1"
                 onClick={[Function]}
               >
-                1
+                <span
+                  aria-hidden="true"
+                >
+                  1
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Go to page: 
+                  1
+                </span>
               </a>
             </li>
             <li
@@ -178,7 +200,17 @@ exports[`Frontend EventList Container renders correctly 1`] = `
                 href="/project/slug-1/events/2"
                 onClick={[Function]}
               >
-                2
+                <span
+                  aria-hidden="true"
+                >
+                  2
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Go to page: 
+                  2
+                </span>
               </a>
             </li>
             <li
@@ -188,10 +220,18 @@ exports[`Frontend EventList Container renders correctly 1`] = `
                 href="/project/slug-1/events/2"
                 onClick={[Function]}
               >
-                <span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Next Page
+                </span>
+                <span
+                  aria-hidden="true"
+                >
                   Next
                 </span>
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-arrow-long-right"
                 />
               </a>
@@ -217,6 +257,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
         >
           <span>
             <i
+              aria-hidden="true"
               className="manicon manicon-books-on-shelf"
             />
             See more projects

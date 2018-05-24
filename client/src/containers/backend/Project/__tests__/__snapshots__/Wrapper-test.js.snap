@@ -17,6 +17,7 @@ Array [
           onClick={[Function]}
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-arrow-left"
           />
           Back to:
@@ -64,8 +65,10 @@ Array [
                 className="button-bare-primary"
                 onClick={[Function]}
               >
-                Preview 
+                Preview
+                 
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-eye-outline"
                 />
               </button>
@@ -75,6 +78,7 @@ Array [
               >
                 Delete 
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-trashcan"
                 />
               </button>

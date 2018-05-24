@@ -8,7 +8,9 @@ exports[`Backend Ingest Container when the ingestion state is analyzed renders c
     <header
       className="entity-header-primary"
     >
-      <figure>
+      <figure
+        aria-hidden="true"
+      >
         <i
           className="manicon manicon-text-placeholder"
         />
@@ -91,6 +93,7 @@ exports[`Backend Ingest Container when the ingestion state is analyzed renders c
       >
         Restart Ingestion
         <i
+          aria-hidden="true"
           className="manicon manicon-x-bold"
         />
       </button>
@@ -109,6 +112,7 @@ exports[`Backend Ingest Container when the ingestion state is analyzed renders c
       onClick={[Function]}
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-x small"
       />
       Back
@@ -125,7 +129,9 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
     <header
       className="entity-header-primary"
     >
-      <figure>
+      <figure
+        aria-hidden="true"
+      >
         <i
           className="manicon manicon-text-placeholder"
         />
@@ -208,6 +214,7 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
       >
         Restart Ingestion
         <i
+          aria-hidden="true"
           className="manicon manicon-x-bold"
         />
       </button>
@@ -226,6 +233,7 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
       onClick={[Function]}
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-x small"
       />
       Back
@@ -242,7 +250,9 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
     <header
       className="entity-header-primary"
     >
-      <figure>
+      <figure
+        aria-hidden="true"
+      >
         <i
           className="manicon manicon-text-placeholder"
         />
@@ -325,6 +335,7 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
       >
         Restart Ingestion
         <i
+          aria-hidden="true"
           className="manicon manicon-x-bold"
         />
       </button>
@@ -343,6 +354,7 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
       onClick={[Function]}
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-x small"
       />
       Back

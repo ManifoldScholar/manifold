@@ -27,6 +27,7 @@ exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = 
             className="icon"
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-file-box"
             />
             <span>
@@ -58,6 +59,7 @@ exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = 
             className="icon"
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-file-box"
             />
             <span>

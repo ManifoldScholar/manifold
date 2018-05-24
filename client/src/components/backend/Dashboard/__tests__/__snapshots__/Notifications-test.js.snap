@@ -16,7 +16,13 @@ exports[`Backend.Dashboard.Notification component renders correctly 1`] = `
       </p>
       <button
         className="manicon manicon-x"
-      />
+      >
+        <span
+          className="screen-reader-text"
+        >
+          Close Notification
+        </span>
+      </button>
     </li>
     <li>
       <p>
@@ -29,7 +35,13 @@ exports[`Backend.Dashboard.Notification component renders correctly 1`] = `
       </p>
       <button
         className="manicon manicon-x"
-      />
+      >
+        <span
+          className="screen-reader-text"
+        >
+          Close Notification
+        </span>
+      </button>
     </li>
   </ul>
   <a

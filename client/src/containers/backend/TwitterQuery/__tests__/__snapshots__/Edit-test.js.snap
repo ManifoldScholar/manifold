@@ -9,6 +9,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
       className="heading-quaternary"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-twitter"
       />
       <span />
@@ -22,6 +23,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
       >
         Fetch Tweets
         <i
+          aria-hidden="true"
           className="manicon manicon-check"
         />
       </button>
@@ -32,6 +34,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
       >
         Delete Query
         <i
+          aria-hidden="true"
           className="manicon manicon-trashcan"
         />
       </button>
@@ -89,6 +92,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
               className="form-select"
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-caret-down"
               />
               <select

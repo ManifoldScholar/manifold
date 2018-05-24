@@ -14,7 +14,13 @@ exports[`Global.UserMenu.UserMenuButton Component renders correctly 1`] = `
     className="avatar"
     style={undefined}
   >
+    <span
+      className="screen-reader-text"
+    >
+      Avatar
+    </span>
     <i
+      aria-hidden="true"
       className="manicon manicon-person"
     />
   </figure>

@@ -23,6 +23,7 @@ exports[`Frontend.ResourceCollection.Cover component renders correctly 1`] = `
         className="icon"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-file-box"
         />
         <span>

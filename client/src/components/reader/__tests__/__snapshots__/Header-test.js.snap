@@ -20,6 +20,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
     >
       Contents
       <i
+        aria-hidden="true"
         className="manicon manicon-caret-down"
       />
     </button>
@@ -34,6 +35,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-eye-outline"
             />
             <span
@@ -50,6 +52,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-aa"
             />
             <span
@@ -66,6 +69,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-magnify"
             />
             <span
@@ -89,7 +93,13 @@ exports[`Reader.Header Component renders correctly 1`] = `
               className="avatar"
               style={undefined}
             >
+              <span
+                className="screen-reader-text"
+              >
+                Avatar
+              </span>
               <i
+                aria-hidden="true"
                 className="manicon manicon-person"
               />
             </figure>
@@ -114,6 +124,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-arrow-round-left"
               />
               Project Home
@@ -128,6 +139,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-books-with-glasses-simple"
               />
               Projects
@@ -140,6 +152,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
               onClick={[MockFunction]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-manifold-logo"
               />
               Sign-in
@@ -211,6 +224,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
                   onClick={[Function]}
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-dash"
                   />
                   <span
@@ -224,6 +238,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
                   onClick={[Function]}
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-plus"
                   />
                   <span
@@ -251,6 +266,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
                   onClick={[Function]}
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-dash"
                   />
                   <span
@@ -264,6 +280,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
                   onClick={[Function]}
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-plus"
                   />
                   <span
@@ -284,6 +301,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
                 onClick={[Function]}
               >
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-check"
                 />
                 <span
@@ -297,6 +315,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
                 onClick={[Function]}
               >
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-check"
                 />
                 <span
@@ -316,6 +335,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
                 onClick={[Function]}
               >
                 <i
+                  aria-hidden="true"
                   className="compound-icon"
                 >
                   <i
@@ -336,6 +356,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
                 onClick={[Function]}
               >
                 <i
+                  aria-hidden="true"
                   className="compound-icon"
                 >
                   <i
@@ -371,6 +392,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-person-pencil-simple"
               />
               Edit Profile
@@ -381,6 +403,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-circle-arrow-out-right"
               />
               Logout
@@ -427,6 +450,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-eye-outline"
             />
             <span
@@ -443,6 +467,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-aa"
             />
             <span
@@ -459,6 +484,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-magnify"
             />
             <span
@@ -482,7 +508,13 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               className="avatar"
               style={undefined}
             >
+              <span
+                className="screen-reader-text"
+              >
+                Avatar
+              </span>
               <i
+                aria-hidden="true"
                 className="manicon manicon-person"
               />
             </figure>
@@ -507,6 +539,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-arrow-round-left"
               />
               Project Home
@@ -521,6 +554,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-books-with-glasses-simple"
               />
               Projects
@@ -533,6 +567,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               onClick={[MockFunction]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-manifold-logo"
               />
               Sign-in
@@ -604,6 +639,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
                   onClick={[Function]}
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-dash"
                   />
                   <span
@@ -617,6 +653,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
                   onClick={[Function]}
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-plus"
                   />
                   <span
@@ -644,6 +681,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
                   onClick={[Function]}
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-dash"
                   />
                   <span
@@ -657,6 +695,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
                   onClick={[Function]}
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-plus"
                   />
                   <span
@@ -677,6 +716,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
                 onClick={[Function]}
               >
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-check"
                 />
                 <span
@@ -690,6 +730,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
                 onClick={[Function]}
               >
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-check"
                 />
                 <span
@@ -709,6 +750,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
                 onClick={[Function]}
               >
                 <i
+                  aria-hidden="true"
                   className="compound-icon"
                 >
                   <i
@@ -729,6 +771,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
                 onClick={[Function]}
               >
                 <i
+                  aria-hidden="true"
                   className="compound-icon"
                 >
                   <i
@@ -764,6 +807,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-person-pencil-simple"
               />
               Edit Profile
@@ -774,6 +818,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-circle-arrow-out-right"
               />
               Logout

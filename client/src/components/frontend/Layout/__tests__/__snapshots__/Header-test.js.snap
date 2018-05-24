@@ -17,6 +17,7 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
       >
         <div>
           <i
+            aria-hidden="true"
             className="manicon manicon-manifold-logo"
           />
           <span
@@ -54,6 +55,7 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-magnify"
             />
             <span
@@ -86,7 +88,13 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
               className="avatar"
               style={undefined}
             >
+              <span
+                className="screen-reader-text"
+              >
+                Avatar
+              </span>
               <i
+                aria-hidden="true"
                 className="manicon manicon-person"
               />
             </figure>
@@ -106,6 +114,7 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
                     onClick={[Function]}
                   >
                     <i
+                      aria-hidden="true"
                       className="manicon manicon-person-pencil-simple"
                     />
                     Edit Profile
@@ -116,6 +125,7 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
                     onClick={[Function]}
                   >
                     <i
+                      aria-hidden="true"
                       className="manicon manicon-circle-arrow-out-right"
                     />
                     Logout

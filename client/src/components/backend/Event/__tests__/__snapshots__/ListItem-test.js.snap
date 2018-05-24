@@ -44,8 +44,14 @@ exports[`Event.ListItem component renders correctly 1`] = `
     onClick={[Function]}
   >
     <i
+      aria-hidden="true"
       className="manicon manicon-trashcan"
     />
+    <span
+      className="screen-reader-text"
+    >
+      Delete Event
+    </span>
   </div>
 </li>
 `;

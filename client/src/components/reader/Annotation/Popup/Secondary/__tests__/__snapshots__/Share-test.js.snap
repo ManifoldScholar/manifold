@@ -14,6 +14,7 @@ exports[`Reader.Annotation.Popup.Secondary.Share Component renders correctly 1`]
     target="_blank"
   >
     <i
+      aria-hidden="true"
       className="manicon manicon-twitter"
     />
     Twitter

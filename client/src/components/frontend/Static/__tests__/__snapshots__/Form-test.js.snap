@@ -28,6 +28,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
               type="text"
             />
             <i
+              aria-hidden="true"
               className="manicon manicon-stop"
             />
             <span
@@ -65,6 +66,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
               className="form-select"
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-caret-down"
               />
               <select>
@@ -107,6 +109,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
           >
             <header>
               <i
+                aria-hidden="true"
                 className="manicon manicon-bugle"
               />
               Notifications
@@ -171,6 +174,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="checkbox"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               >
                 <i
@@ -190,6 +194,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="checkbox"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               >
                 <i
@@ -209,6 +214,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="checkbox"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               >
                 <i
@@ -236,6 +242,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="radio"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               />
               <span
@@ -252,6 +259,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="radio"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               />
               <span
@@ -268,6 +276,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="radio"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               />
               <span
@@ -298,6 +307,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="checkbox"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               >
                 <i
@@ -317,6 +327,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="checkbox"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               >
                 <i
@@ -336,6 +347,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="checkbox"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               >
                 <i
@@ -362,6 +374,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="radio"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               />
               <span
@@ -377,6 +390,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="radio"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               />
               <span
@@ -392,6 +406,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 type="radio"
               />
               <span
+                aria-hidden="true"
                 className="toggle-indicator"
               />
               <span

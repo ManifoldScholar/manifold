@@ -17,6 +17,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         className="form-select"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-caret-down"
         />
         <select
@@ -94,7 +95,14 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         >
           <figure>
             <figcaption>
-              Image
+              <span>
+                Image
+                <span
+                  className="screen-reader-text"
+                >
+                  Selected Kind
+                </span>
+              </span>
             </figcaption>
             <div
               className="resource-icon image"
@@ -123,7 +131,9 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         >
           <figure>
             <figcaption>
-              Video
+              <span>
+                Video
+              </span>
             </figcaption>
             <div
               className="resource-icon video"
@@ -152,7 +162,9 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         >
           <figure>
             <figcaption>
-              Audio
+              <span>
+                Audio
+              </span>
             </figcaption>
             <div
               className="resource-icon audio"
@@ -190,7 +202,9 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         >
           <figure>
             <figcaption>
-              File
+              <span>
+                File
+              </span>
             </figcaption>
             <div
               className="resource-icon file"
@@ -216,7 +230,9 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         >
           <figure>
             <figcaption>
-              Link
+              <span>
+                Link
+              </span>
             </figcaption>
             <div
               className="resource-icon link"
@@ -251,7 +267,9 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         >
           <figure>
             <figcaption>
-              PDF
+              <span>
+                PDF
+              </span>
             </figcaption>
             <div
               className="resource-icon pdf"
@@ -280,7 +298,9 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         >
           <figure>
             <figcaption>
-              Document
+              <span>
+                Document
+              </span>
             </figcaption>
             <div
               className="resource-icon document"
@@ -321,7 +341,9 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         >
           <figure>
             <figcaption>
-              Spreadsheet
+              <span>
+                Spreadsheet
+              </span>
             </figcaption>
             <div
               className="resource-icon spreadsheet"
@@ -347,7 +369,9 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         >
           <figure>
             <figcaption>
-              Presentation
+              <span>
+                Presentation
+              </span>
             </figcaption>
             <div
               className="resource-icon presentation"
@@ -376,7 +400,9 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         >
           <figure>
             <figcaption>
-              Interactive
+              <span>
+                Interactive
+              </span>
             </figcaption>
             <div
               className="resource-icon interactive"

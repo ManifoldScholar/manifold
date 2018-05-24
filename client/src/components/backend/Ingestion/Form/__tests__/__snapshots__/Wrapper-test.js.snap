@@ -34,6 +34,7 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
             value="epub"
           />
           <span
+            aria-hidden="true"
             className="toggle-indicator"
           />
           <span
@@ -54,6 +55,7 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
             value="markdown"
           />
           <span
+            aria-hidden="true"
             className="toggle-indicator"
           />
           <span
@@ -74,6 +76,7 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
             value="googledoc"
           />
           <span
+            aria-hidden="true"
             className="toggle-indicator"
           />
           <span
@@ -94,6 +97,7 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
             value="html"
           />
           <span
+            aria-hidden="true"
             className="toggle-indicator"
           />
           <span
@@ -117,6 +121,7 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
           onClick={[Function]}
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-check small"
           />
           Continue

@@ -36,6 +36,7 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
             disabled={false}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-word-bubble-lines"
             />
             Update

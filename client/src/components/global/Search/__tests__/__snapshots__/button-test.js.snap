@@ -7,6 +7,7 @@ exports[`Reader.Search.Button component renders correctly when active 1`] = `
   onClick={[Function]}
 >
   <i
+    aria-hidden="true"
     className="manicon manicon-magnify"
   />
   <span
@@ -24,6 +25,7 @@ exports[`Reader.Search.Button component renders correctly when inactive 1`] = `
   onClick={[Function]}
 >
   <i
+    aria-hidden="true"
     className="manicon manicon-magnify"
   />
   <span

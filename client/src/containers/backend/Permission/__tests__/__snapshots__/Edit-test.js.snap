@@ -19,6 +19,7 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
       >
         Remove All Permissions
         <i
+          aria-hidden="true"
           className="manicon manicon-trashcan"
         />
       </button>

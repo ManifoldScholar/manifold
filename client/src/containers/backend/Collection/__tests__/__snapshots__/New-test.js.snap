@@ -17,6 +17,7 @@ exports[`Backend Collection New Container renders correctly 1`] = `
           onClick={[Function]}
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-arrow-left"
           />
           Back to:
@@ -145,6 +146,7 @@ exports[`Backend Collection New Container renders correctly 1`] = `
                     className="contents-empty"
                   >
                     <i
+                      aria-hidden="true"
                       className="manicon manicon-cloud-up"
                     />
                     <div
@@ -155,6 +157,7 @@ exports[`Backend Collection New Container renders correctly 1`] = `
                       >
                         <span
                           className="fake-link"
+                          role="button"
                         >
                           Upload a file
                         </span>

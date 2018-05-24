@@ -11,6 +11,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
     >
       <button>
         <i
+          aria-hidden="true"
           className="manicon manicon-magnify"
         />
         <span
@@ -218,10 +219,18 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
           onClick={[MockFunction]}
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-arrow-long-left"
           />
-          <span>
+          <span
+            aria-hidden="true"
+          >
             Prev
+          </span>
+          <span
+            className="screen-reader-text"
+          >
+            Previous Page
           </span>
         </a>
       </li>
@@ -232,7 +241,17 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
           href="#pagination-target"
           onClick={[MockFunction]}
         >
-          1
+          <span
+            aria-hidden="true"
+          >
+            1
+          </span>
+          <span
+            className="screen-reader-text"
+          >
+            Go to page: 
+            1
+          </span>
         </a>
       </li>
       <li
@@ -242,7 +261,17 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
           href="#pagination-target"
           onClick={[MockFunction]}
         >
-          2
+          <span
+            aria-hidden="true"
+          >
+            2
+          </span>
+          <span
+            className="screen-reader-text"
+          >
+            Go to page: 
+            2
+          </span>
         </a>
       </li>
       <li
@@ -252,7 +281,17 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
           href="#pagination-target"
           onClick={[MockFunction]}
         >
-          3
+          <span
+            aria-hidden="true"
+          >
+            3
+          </span>
+          <span
+            className="screen-reader-text"
+          >
+            Go to page: 
+            3
+          </span>
         </a>
       </li>
       <li
@@ -262,7 +301,17 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
           href="#pagination-target"
           onClick={[MockFunction]}
         >
-          4
+          <span
+            aria-hidden="true"
+          >
+            4
+          </span>
+          <span
+            className="screen-reader-text"
+          >
+            Go to page: 
+            4
+          </span>
         </a>
       </li>
       <li
@@ -273,10 +322,18 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
           href="#pagination-target"
           onClick={[MockFunction]}
         >
-          <span>
+          <span
+            className="screen-reader-text"
+          >
+            Next Page
+          </span>
+          <span
+            aria-hidden="true"
+          >
             Next
           </span>
           <i
+            aria-hidden="true"
             className="manicon manicon-arrow-long-right"
           />
         </a>
@@ -297,6 +354,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
     >
       <button>
         <i
+          aria-hidden="true"
           className="manicon manicon-magnify"
         />
         <span
@@ -382,10 +440,18 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
           onClick={[MockFunction]}
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-arrow-long-left"
           />
-          <span>
+          <span
+            aria-hidden="true"
+          >
             Prev
+          </span>
+          <span
+            className="screen-reader-text"
+          >
+            Previous Page
           </span>
         </a>
       </li>
@@ -396,7 +462,17 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
           href="#pagination-target"
           onClick={[MockFunction]}
         >
-          1
+          <span
+            aria-hidden="true"
+          >
+            1
+          </span>
+          <span
+            className="screen-reader-text"
+          >
+            Go to page: 
+            1
+          </span>
         </a>
       </li>
       <li
@@ -406,7 +482,17 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
           href="#pagination-target"
           onClick={[MockFunction]}
         >
-          2
+          <span
+            aria-hidden="true"
+          >
+            2
+          </span>
+          <span
+            className="screen-reader-text"
+          >
+            Go to page: 
+            2
+          </span>
         </a>
       </li>
       <li
@@ -416,7 +502,17 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
           href="#pagination-target"
           onClick={[MockFunction]}
         >
-          3
+          <span
+            aria-hidden="true"
+          >
+            3
+          </span>
+          <span
+            className="screen-reader-text"
+          >
+            Go to page: 
+            3
+          </span>
         </a>
       </li>
       <li
@@ -426,7 +522,17 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
           href="#pagination-target"
           onClick={[MockFunction]}
         >
-          4
+          <span
+            aria-hidden="true"
+          >
+            4
+          </span>
+          <span
+            className="screen-reader-text"
+          >
+            Go to page: 
+            4
+          </span>
         </a>
       </li>
       <li
@@ -437,10 +543,18 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
           href="#pagination-target"
           onClick={[MockFunction]}
         >
-          <span>
+          <span
+            className="screen-reader-text"
+          >
+            Next Page
+          </span>
+          <span
+            aria-hidden="true"
+          >
             Next
           </span>
           <i
+            aria-hidden="true"
             className="manicon manicon-arrow-long-right"
           />
         </a>

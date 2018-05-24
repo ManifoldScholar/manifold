@@ -11,7 +11,14 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
       <div
         className="no-image"
       >
+        <span
+          className="screen-reader-text"
+        >
+          Avatar for 
+          Rowan Ida
+        </span>
         <i
+          aria-hidden="true"
           className="manicon manicon-person"
         />
       </div>

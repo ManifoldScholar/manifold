@@ -24,6 +24,7 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
         className="contents-empty"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-cloud-up"
         />
         <div
@@ -34,6 +35,7 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
           >
             <span
               className="fake-link"
+              role="button"
             >
               Upload a file
             </span>
@@ -92,17 +94,20 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
           <p
             className="secondary"
           >
-            <a
-              data-id="remove"
-              href="#"
-              onClick={[Function]}
-            >
-              Remove this image
-            </a>
-            <br />
-            or 
             <span
               className="fake-link"
+              data-id="remove"
+              onClick={[Function]}
+              role="button"
+            >
+              Remove this image
+            </span>
+            <br />
+            or
+             
+            <span
+              className="fake-link"
+              role="button"
             >
               Upload an image
             </span>
@@ -152,17 +157,20 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
           <p
             className="secondary"
           >
-            <a
-              data-id="remove"
-              href="#"
-              onClick={[Function]}
-            >
-              Remove this image
-            </a>
-            <br />
-            or 
             <span
               className="fake-link"
+              data-id="remove"
+              onClick={[Function]}
+              role="button"
+            >
+              Remove this image
+            </span>
+            <br />
+            or
+             
+            <span
+              className="fake-link"
+              role="button"
             >
               Upload an image
             </span>
@@ -212,17 +220,20 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
           <p
             className="secondary"
           >
-            <a
-              data-id="remove"
-              href="#"
-              onClick={[Function]}
-            >
-              Remove this image
-            </a>
-            <br />
-            or 
             <span
               className="fake-link"
+              data-id="remove"
+              onClick={[Function]}
+              role="button"
+            >
+              Remove this image
+            </span>
+            <br />
+            or
+             
+            <span
+              className="fake-link"
+              role="button"
             >
               Upload an image
             </span>

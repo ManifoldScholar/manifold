@@ -83,6 +83,7 @@ exports[`Global.SignInUp.Login component renders correctly 1`] = `
       onClick={[Function]}
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-envelope"
       />
       <span>
@@ -94,6 +95,7 @@ exports[`Global.SignInUp.Login component renders correctly 1`] = `
       onClick={[Function]}
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-twitter"
       />
       <span>

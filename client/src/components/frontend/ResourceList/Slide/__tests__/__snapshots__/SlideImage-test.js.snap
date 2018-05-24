@@ -15,6 +15,7 @@ exports[`Frontend.ResourceList.Slide.SlideImage component renders correctly 1`] 
       >
         Zoom
         <i
+          aria-hidden="true"
           className="manicon manicon-magnify-plus"
         />
       </div>

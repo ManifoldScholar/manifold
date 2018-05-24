@@ -39,6 +39,7 @@ exports[`Reader.Annotation.Editor component renders correctly 1`] = `
             value="1"
           />
           <span
+            aria-hidden="true"
             className="toggle-indicator"
           >
             <i

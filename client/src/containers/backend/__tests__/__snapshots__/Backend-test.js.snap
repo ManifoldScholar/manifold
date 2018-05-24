@@ -23,7 +23,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                             <PressLogo>
                               <figure className=\\"\\">
                                 <div>
-                                  <i className=\\"manicon manicon-manifold-logo\\" />
+                                  <i className=\\"manicon manicon-manifold-logo\\" aria-hidden=\\"true\\" />
                                   <span className=\\"screen-reader-text\\">
                                     Manifold Logo: Click to return to the browse page
                                   </span>
@@ -73,7 +73,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                   </span>
                                   <Avatar url={[undefined]}>
                                     <figure style={[undefined]} className=\\"avatar\\">
-                                      <i className=\\"manicon manicon-person\\" />
+                                      <span className=\\"screen-reader-text\\">
+                                        Avatar
+                                      </span>
+                                      <i className=\\"manicon manicon-person\\" aria-hidden=\\"true\\" />
                                     </figure>
                                   </Avatar>
                                 </button>
@@ -86,13 +89,13 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                       <ul>
                                         <li>
                                           <button onClick={[Function]}>
-                                            <i className=\\"manicon manicon-person-pencil-simple\\" />
+                                            <i className=\\"manicon manicon-person-pencil-simple\\" aria-hidden=\\"true\\" />
                                             Edit Profile
                                           </button>
                                         </li>
                                         <li>
                                           <button onClick={[Function]}>
-                                            <i className=\\"manicon manicon-circle-arrow-out-right\\" />
+                                            <i className=\\"manicon manicon-circle-arrow-out-right\\" aria-hidden=\\"true\\" />
                                             Logout
                                           </button>
                                         </li>
@@ -135,7 +138,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                       <div className=\\"container\\">
                         <div className=\\"rel\\">
                           <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"logo\\">
-                            <i className=\\"manicon manicon-manifold-logo\\" />
+                            <i className=\\"manicon manicon-manifold-logo\\" aria-hidden=\\"true\\" />
                             <span className=\\"text\\">
                               Powered by Manifold
                               <span className=\\"small\\">

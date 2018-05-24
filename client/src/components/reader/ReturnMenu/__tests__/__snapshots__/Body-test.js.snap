@@ -11,6 +11,7 @@ exports[`Reader.ReturnMenu.Body component renders correctly 1`] = `
         onClick={[Function]}
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-arrow-round-left"
         />
         Project Home
@@ -25,6 +26,7 @@ exports[`Reader.ReturnMenu.Body component renders correctly 1`] = `
         onClick={[Function]}
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-books-with-glasses-simple"
         />
         Projects
@@ -37,6 +39,7 @@ exports[`Reader.ReturnMenu.Body component renders correctly 1`] = `
         onClick={[MockFunction]}
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-manifold-logo"
         />
         Sign-in

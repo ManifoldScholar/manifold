@@ -5,6 +5,11 @@ exports[`Global.Avatar component renders correctly 1`] = `
   className="avatar"
   style={undefined}
 >
+  <span
+    className="screen-reader-text"
+  >
+    Avatar
+  </span>
   <div
     style={
       Object {

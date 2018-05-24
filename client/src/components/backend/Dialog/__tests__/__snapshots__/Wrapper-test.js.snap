@@ -14,7 +14,7 @@ exports[`Backend.Dialog.Wrapper Component renders correctly 1`] = `
                     <div className=\\"dialog-overlay\\" onClick={[Function]} />
                     <div className=\\"dialog-box dialog-confirm\\" style={{...}}>
                       <div onClick={[Function]} className=\\"close-button-primary\\">
-                        <i className=\\"manicon manicon-x\\" />
+                        <i className=\\"manicon manicon-x\\" aria-hidden=\\"true\\" />
                         <span className=\\"screen-reader-text\\">
                           Close Dialog
                         </span>

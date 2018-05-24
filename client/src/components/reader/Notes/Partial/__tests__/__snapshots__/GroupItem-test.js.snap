@@ -6,6 +6,7 @@ exports[`Reader.Notes.Partial.GroupItem Component renders correctly 1`] = `
   onClick={[Function]}
 >
   <i
+    aria-hidden="true"
     className="manicon manicon-null"
   />
   <span>

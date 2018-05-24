@@ -44,6 +44,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
           className="contents-empty"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-cloud-up"
           />
           <div
@@ -54,6 +55,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
             >
               <span
                 className="fake-link"
+                role="button"
               >
                 Upload a file
               </span>
@@ -129,6 +131,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
           className="form-select"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-caret-down"
           />
           <select

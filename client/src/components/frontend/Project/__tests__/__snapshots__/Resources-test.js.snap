@@ -12,6 +12,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
         className="main"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-cube-shine"
         />
         <div
@@ -36,7 +37,13 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
           className="search-button"
           type="submit"
         >
+          <span
+            className="screen-reader-text"
+          >
+            Search
+          </span>
           <i
+            aria-hidden="true"
             className="manicon manicon-magnify"
           />
         </button>
@@ -64,6 +71,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
             </option>
           </select>
           <i
+            aria-hidden="true"
             className="manicon manicon-caret-down"
           />
         </div>
@@ -81,6 +89,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
             </option>
           </select>
           <i
+            aria-hidden="true"
             className="manicon manicon-caret-down"
           />
         </div>
@@ -108,6 +117,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
             </option>
           </select>
           <i
+            aria-hidden="true"
             className="manicon manicon-caret-down"
           />
         </div>
@@ -199,6 +209,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                     <span>
                       Preview
                       <i
+                        aria-hidden="true"
                         className="manicon manicon-eye-outline"
                       />
                     </span>
@@ -238,6 +249,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                   to="/project/slug-1/resource/slug-2"
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-arrow-right"
                   />
                 </div>
@@ -337,6 +349,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                     <span>
                       Preview
                       <i
+                        aria-hidden="true"
                         className="manicon manicon-eye-outline"
                       />
                     </span>
@@ -376,6 +389,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                   to="/project/slug-1/resource/slug-3"
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-arrow-right"
                   />
                 </div>
@@ -431,10 +445,18 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                 onClick={undefined}
               >
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-arrow-long-left"
                 />
-                <span>
+                <span
+                  aria-hidden="true"
+                >
                   Prev
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Previous Page
                 </span>
               </a>
             </li>
@@ -445,7 +467,17 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                 href="#pagination-target"
                 onClick={undefined}
               >
-                1
+                <span
+                  aria-hidden="true"
+                >
+                  1
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Go to page: 
+                  1
+                </span>
               </a>
             </li>
             <li
@@ -455,7 +487,17 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                 href="#pagination-target"
                 onClick={undefined}
               >
-                2
+                <span
+                  aria-hidden="true"
+                >
+                  2
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Go to page: 
+                  2
+                </span>
               </a>
             </li>
             <li
@@ -466,10 +508,18 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                 href="#pagination-target"
                 onClick={undefined}
               >
-                <span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Next Page
+                </span>
+                <span
+                  aria-hidden="true"
+                >
                   Next
                 </span>
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-arrow-long-right"
                 />
               </a>

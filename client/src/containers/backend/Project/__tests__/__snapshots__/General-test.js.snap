@@ -156,6 +156,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               className="form-select input-month"
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-caret-down"
               />
               <select
@@ -229,6 +230,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               className="form-select input-day"
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-caret-down"
               />
               <select
@@ -396,6 +398,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                 className="input"
               >
                 <button
+                  aria-hidden="true"
                   className="manicon manicon-plus"
                 />
                 <input
@@ -439,9 +442,15 @@ exports[`Backend Project General Container renders correctly 1`] = `
               className="section current"
             >
               <span
+                aria-hidden="true"
                 className="label"
               >
                 Current
+              </span>
+              <span
+                className="label screen-reader-text"
+              >
+                Current Project Thumbnail
               </span>
             </div>
             <div
@@ -451,6 +460,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
                 className="label"
               >
                 Default
+              </span>
+              <span
+                className="label screen-reader-text"
+              >
+                Select a Project Thumbnail Background Color
               </span>
               <div
                 className="color-picker"
@@ -465,6 +479,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
                       className="form-toggle radio primary"
                       htmlFor="primary"
                     >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Primary Background Color
+                      </span>
                       <input
                         checked={false}
                         id="primary"
@@ -473,18 +492,19 @@ exports[`Backend Project General Container renders correctly 1`] = `
                         value="primary"
                       />
                       <span
+                        aria-hidden="true"
                         className="toggle-indicator"
                       />
-                      <span
-                        className="toggle-label"
-                      >
-                        
-                      </span>
                     </label>
                     <label
                       className="form-toggle radio secondary"
                       htmlFor="secondary"
                     >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Secondary Background Color
+                      </span>
                       <input
                         checked={false}
                         id="secondary"
@@ -493,18 +513,19 @@ exports[`Backend Project General Container renders correctly 1`] = `
                         value="secondary"
                       />
                       <span
+                        aria-hidden="true"
                         className="toggle-indicator"
                       />
-                      <span
-                        className="toggle-label"
-                      >
-                        
-                      </span>
                     </label>
                     <label
                       className="form-toggle radio tertiary"
                       htmlFor="tertiary"
                     >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Tertiary Background Color
+                      </span>
                       <input
                         checked={false}
                         id="tertiary"
@@ -513,18 +534,19 @@ exports[`Backend Project General Container renders correctly 1`] = `
                         value="tertiary"
                       />
                       <span
+                        aria-hidden="true"
                         className="toggle-indicator"
                       />
-                      <span
-                        className="toggle-label"
-                      >
-                        
-                      </span>
                     </label>
                     <label
                       className="form-toggle radio quaternary"
                       htmlFor="quaternary"
                     >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Quaternary Background Color
+                      </span>
                       <input
                         checked={false}
                         id="quaternary"
@@ -533,18 +555,19 @@ exports[`Backend Project General Container renders correctly 1`] = `
                         value="quaternary"
                       />
                       <span
+                        aria-hidden="true"
                         className="toggle-indicator"
                       />
-                      <span
-                        className="toggle-label"
-                      >
-                        
-                      </span>
                     </label>
                     <label
                       className="form-toggle radio quinary"
                       htmlFor="quinary"
                     >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Quinary Background Color
+                      </span>
                       <input
                         checked={false}
                         id="quinary"
@@ -553,18 +576,19 @@ exports[`Backend Project General Container renders correctly 1`] = `
                         value="quinary"
                       />
                       <span
+                        aria-hidden="true"
                         className="toggle-indicator"
                       />
-                      <span
-                        className="toggle-label"
-                      >
-                        
-                      </span>
                     </label>
                     <label
                       className="form-toggle radio sentary"
                       htmlFor="sentary"
                     >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Sentary Background Color
+                      </span>
                       <input
                         checked={false}
                         id="sentary"
@@ -573,17 +597,14 @@ exports[`Backend Project General Container renders correctly 1`] = `
                         value="sentary"
                       />
                       <span
+                        aria-hidden="true"
                         className="toggle-indicator"
                       />
-                      <span
-                        className="toggle-label"
-                      >
-                        
-                      </span>
                     </label>
                   </div>
                 </div>
                 <div
+                  aria-hidden="true"
                   className="default-description"
                 >
                   Select A Different Background Color
@@ -594,9 +615,15 @@ exports[`Backend Project General Container renders correctly 1`] = `
               className="section upload"
             >
               <span
+                aria-hidden="true"
                 className="label"
               >
                 Custom
+              </span>
+              <span
+                className="label screen-reader-text"
+              >
+                Custom Project Thumnail Image
               </span>
               <div
                 className="form-input"
@@ -673,6 +700,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                         >
                           <span
                             className="fake-link"
+                            role="button"
                           >
                             Upload a file
                           </span>

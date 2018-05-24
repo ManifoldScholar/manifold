@@ -23,6 +23,7 @@ exports[`Frontend.ResourceList.Totals Component renders correctly 1`] = `
     View All Project Resources
      
     <i
+      aria-hidden="true"
       className="manicon manicon-arrow-right"
     />
   </a>

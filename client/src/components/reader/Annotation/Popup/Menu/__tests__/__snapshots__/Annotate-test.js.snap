@@ -14,6 +14,7 @@ exports[`Reader.Annotation.Popup.Menu.Annotate Component renders correctly when 
     onClick={[Function]}
   >
     <i
+      aria-hidden="true"
       className="manicon manicon-person-pencil"
     />
     Login to Annotate

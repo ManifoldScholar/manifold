@@ -11,6 +11,7 @@ exports[`Reader.Annotation.Selection.Wrapper component renders correctly 1`] = `
       className="container"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-quote"
       />
       Gods, Earths, and 85ers
@@ -60,6 +61,7 @@ exports[`Reader.Annotation.Selection.Wrapper component renders correctly 1`] = `
               value="1"
             />
             <span
+              aria-hidden="true"
               className="toggle-indicator"
             >
               <i

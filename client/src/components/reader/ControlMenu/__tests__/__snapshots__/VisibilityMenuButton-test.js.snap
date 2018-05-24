@@ -7,6 +7,7 @@ exports[`Reader.ControlMenu.VisibilityMenuButton Component renders correctly 1`]
   onClick={[Function]}
 >
   <i
+    aria-hidden="true"
     className="manicon manicon-eye-outline"
   />
   <span

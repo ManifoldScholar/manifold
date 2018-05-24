@@ -89,6 +89,7 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
             className="main"
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-tag"
             />
             <div
@@ -144,6 +145,7 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
           >
             <span>
               <i
+                aria-hidden="true"
                 className="manicon manicon-books-on-shelf"
               />
               See more projects

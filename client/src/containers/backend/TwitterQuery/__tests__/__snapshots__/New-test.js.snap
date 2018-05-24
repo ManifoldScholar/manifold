@@ -60,6 +60,7 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
             className="form-select"
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-caret-down"
             />
             <select

@@ -14,6 +14,7 @@ exports[`Frontend.ResourceList.Slide.Slide component renders correctly 1`] = `
       className="resource-info"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-resource-image"
       />
       <span

@@ -12,6 +12,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
     >
       Close
       <i
+        aria-hidden="true"
         className="manicon manicon-x"
       />
     </button>
@@ -199,6 +200,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
               >
                 Download 
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-arrow-down"
                 />
               </a>
@@ -210,6 +212,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
               >
                 Visit Resource Page
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-arrow-right"
                 />
               </a>
@@ -220,6 +223,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
                 onClick={undefined}
               >
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-arrow-left"
                 />
                 Return to Reader

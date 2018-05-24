@@ -17,6 +17,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
           onClick={[Function]}
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-arrow-left"
           />
           Back to:

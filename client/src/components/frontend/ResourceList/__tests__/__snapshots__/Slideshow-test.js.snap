@@ -32,6 +32,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
                   >
                     Zoom
                     <i
+                      aria-hidden="true"
                       className="manicon manicon-magnify-plus"
                     />
                   </div>
@@ -95,6 +96,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
             >
               Download
               <i
+                aria-hidden="true"
                 className="manicon manicon-arrow-down"
               />
             </a>
@@ -127,12 +129,15 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-arrow-left"
             />
             <i
+              aria-hidden="true"
               className="manicon manicon-arrow-round-left"
             />
             <span
+              aria-hidden="true"
               className="text"
             >
               Prev
@@ -149,6 +154,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
             onClick={[Function]}
           >
             <span
+              aria-hidden="true"
               className="text"
             >
               Next
@@ -159,9 +165,11 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
               Click to load next slide
             </span>
             <i
+              aria-hidden="true"
               className="manicon manicon-arrow-round-right"
             />
             <i
+              aria-hidden="true"
               className="manicon manicon-arrow-right"
             />
           </button>
@@ -202,6 +210,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly with no res
                 className="resource-info"
               >
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-file-box"
                 />
                 <span

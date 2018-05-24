@@ -11,6 +11,7 @@ exports[`Event.Thumbnail component renders thumbnail for ANNOTATION_ADD correctl
       className="event-type"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-undefined"
       />
     </figure>
@@ -29,6 +30,7 @@ exports[`Event.Thumbnail component renders thumbnail for PROJECT_CREATED correct
       className="event-type"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-egg"
       />
     </figure>
@@ -47,6 +49,7 @@ exports[`Event.Thumbnail component renders thumbnail for RESOURCE_ADDED correctl
       className="event-type"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-cube-shine"
       />
     </figure>
@@ -65,6 +68,7 @@ exports[`Event.Thumbnail component renders thumbnail for TEXT_ADDED correctly 1`
       className="event-type"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-book-opening"
       />
     </figure>
@@ -83,6 +87,7 @@ exports[`Event.Thumbnail component renders thumbnail for TWEET correctly 1`] = `
       className="event-type"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-twitter"
       />
     </figure>

@@ -14,6 +14,7 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
         className="rel"
       >
         <figure
+          aria-hidden="true"
           className="logo"
         >
           <i
@@ -27,6 +28,7 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
         >
           Cancel
           <i
+            aria-hidden="true"
             className="manicon manicon-x"
           />
         </button>
@@ -124,6 +126,7 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-envelope"
               />
               <span>
@@ -135,6 +138,7 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-twitter"
               />
               <span>
