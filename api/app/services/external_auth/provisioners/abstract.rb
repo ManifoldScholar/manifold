@@ -34,6 +34,10 @@ module ExternalAuth
         @user = nil
       end
 
+      def custom?
+        !facebook_or_google? && !twitter?
+      end
+
       alias google? google_oauth2?
 
       def facebook_or_google?

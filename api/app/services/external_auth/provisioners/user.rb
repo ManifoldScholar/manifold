@@ -10,6 +10,7 @@ module ExternalAuth
       end
 
       before_provision :twitter_details, if: :twitter?
+      before_provision :extract_custom_details!, if: :custom?
 
       def random_password
         user.password = user.password_confirmation = SecureRandom.hex(32)
@@ -32,6 +33,12 @@ module ExternalAuth
         user.nickname = "@#{auth_info.nickname}"
         user.first_name = "Twitter"
         user.last_name = "User"
+      end
+
+      # @return [void]
+      def extract_custom_details!
+        user.name = auth_info["name"]
+        user.nickname = auth_info["nickname"]
       end
     end
   end

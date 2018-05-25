@@ -40,7 +40,21 @@ module ManifoldEnv
     # @return [(String, String)] if {#has_credentials?}
     # @return [nil]
     def credentials
-      [app_id.value, secret.value] if has_credentials?
+      return nil unless has_credentials?
+
+      custom? ? custom.credentials : [app_id.value, secret.value]
+    end
+
+    # @!attribute [r] custom
+    # @return [ManifoldEnv::CustomOauthProvider, nil]
+    def custom
+      @custom = ManifoldEnv.oauth.custom(name) unless instance_variable_defined?(:@custom)
+
+      @custom
+    end
+
+    def custom?
+      custom.present?
     end
 
     alias enabled? valid?
@@ -56,7 +70,11 @@ module ManifoldEnv
     configurable_hash :strategy_options
 
     def has_app_id?
-      app_id.value.present?
+      if custom?
+        custom.client_id.present?
+      else
+        app_id.value.present?
+      end
     end
 
     def has_credentials?
@@ -64,7 +82,11 @@ module ManifoldEnv
     end
 
     def has_secret?
-      secret.value.present?
+      if custom?
+        custom.client_secret.present?
+      else
+        secret.value.present?
+      end
     end
 
     # Generates a list of args to be consumed by {Omniauth::Builder#provider}
@@ -72,10 +94,25 @@ module ManifoldEnv
     # @return [(Symbol, String, String)]
     # @return [(Symbol, String, String, Hash)]
     def provider_args
-      [strategy_name, *credentials, strategy_options].compact
+      [strategy_name, *credentials, full_strategy_options].compact
+    end
+
+    def as_json(_options = nil)
+      {}.tap do |h|
+        h[:custom] = custom?
+        h[:enabled] = enabled?
+        h[:name] = name
+        h[:descriptive_name] = custom? ? custom.descriptive_name : name.to_s.titleize
+      end
     end
 
     private
+
+    def full_strategy_options
+      {}.merge(strategy_options || {}).tap do |h|
+        h[:strategy_class] = custom.strategy_class if custom?
+      end.presence
+    end
 
     # rubocop:disable Style/CaseEquality
     def indifferently_compare(left, right)

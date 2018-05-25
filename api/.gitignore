@@ -27,4 +27,5 @@ doc
 .rakeTasks
 .generators
 
+config/oauth.yml
 examples.txt

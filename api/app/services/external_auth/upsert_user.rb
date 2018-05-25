@@ -62,8 +62,6 @@ module ExternalAuth
       user.errors.full_messages.each do |message|
         errors.add :base, message
       end
-
-      throw :interrupt
     end
   end
 end

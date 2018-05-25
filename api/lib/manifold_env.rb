@@ -2,6 +2,8 @@ module ManifoldEnv
   extend ActiveSupport::Autoload
 
   eager_autoload do
+    autoload :CustomOauthEndpoint
+    autoload :CustomOauthProvider
     autoload :HasConfigurationDSL
     autoload :OauthConfig
     autoload :OauthProvider

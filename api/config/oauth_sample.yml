@@ -1,0 +1,27 @@
+oauth:
+  custom_provider:
+    client_id: AAABBBCCCDDDEEEFFF
+    client_secret: AAABBBCCCDDDEEEFFF
+    descriptive_name: Custom Provider
+    host: external-provider.com
+    protocol: https
+    email_key: 'email'
+    name_key: 'name'
+    nickname_key: 'nickname'
+    uid_key: 'id'
+    endpoints:
+      authorize:
+        uri: '/oauth/authorize'
+        method: 'GET'
+        query:
+          another: 'param'
+      token:
+        uri: '/oauth/token'
+        method: 'POST'
+        query:
+          another: 'param'
+      userinfo:
+        uri: '/api/v1/me'
+        method: 'GET'
+        query:
+          another: 'param'
