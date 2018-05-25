@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { currentUserActions } from "actions";
-import { get } from "lodash";
+import { get, values } from "lodash";
 import classNames from "classnames";
 import { SignInUp } from "components/global";
 
@@ -57,6 +57,19 @@ export default class Login extends Component {
       "form-input": true,
       "form-error": this.authenticationError()
     });
+
+    const customOAuthProviders = values(get(this.props, 'settings.attributes.oauth')).filter((provider) => provider.custom);
+
+    const customOAuthButtons = customOAuthProviders.map(
+      (provider) =>
+        <SignInUp.Oauth.Button
+          dispatch={this.props.dispatch}
+          provider={provider.name}
+          hasIcon={false}
+        >
+          Log in with {provider.descriptiveName}
+        </SignInUp.Oauth.Button>
+    );
 
     return (
       <div>
@@ -142,6 +155,7 @@ export default class Login extends Component {
           >
             <span>Log in with Twitter</span>
           </SignInUp.Oauth.Button>
+          {customOAuthButtons}
         </section>
       </div>
     );
