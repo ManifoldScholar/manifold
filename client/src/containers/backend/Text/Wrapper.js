@@ -7,7 +7,7 @@ import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { textsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
+import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 
 const { request } = entityStoreActions;
 
@@ -60,7 +60,9 @@ export class TextWrapperContainer extends PureComponent {
       {
         path: lh.link("backendTextGeneral", text.id),
         label: "General",
-        key: "general"
+        key: "general",
+        entity: text,
+        ability: "update"
       },
       {
         path: lh.link("backendTextCollaborators", text.id),
@@ -183,9 +185,8 @@ export class TextWrapperContainer extends PureComponent {
         }}
         ability={["update"]}
       >
-        <RedirectIfNoChildRouteMatches
-          route={this.props.route}
-          to={lh.link("backendTextGeneral", text.id)}
+        <RedirectToFirstMatch
+          candidates={this.secondaryNavigationLinks(text)}
         />
 
         {this.state.confirmation ? (

@@ -62,7 +62,6 @@ Authority.configure do |config|
     manage_socials: "socials_manageable",
     read_secrets: "secrets_readable",
     read_log: "log_readable",
-    update_limited_to_resource_metadata: "only_resource_metadata_updatable",
     notate: "notatable"
   }
 

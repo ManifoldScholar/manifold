@@ -7,7 +7,7 @@ import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
+import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 
 const { request, flush } = entityStoreActions;
 
@@ -120,12 +120,16 @@ export class CollectionWrapperContainer extends PureComponent {
       {
         path: lh.link("backendCollectionGeneral", collection.id),
         label: "General",
-        key: "general"
+        key: "general",
+        entity: collection,
+        ability: "update"
       },
       {
         path: lh.link("backendCollectionResources", collection.id),
         label: "Resources",
-        key: "resources"
+        key: "resources",
+        entity: collection,
+        ability: "update"
       }
     ];
   }
@@ -166,9 +170,8 @@ export class CollectionWrapperContainer extends PureComponent {
         }}
         ability="update"
       >
-        <RedirectIfNoChildRouteMatches
-          route={this.props.route}
-          to={lh.link("backendCollectionGeneral", collection.id)}
+        <RedirectToFirstMatch
+          candidates={this.secondaryNavigationLinks(collection)}
         />
 
         {this.state.confirmation ? (

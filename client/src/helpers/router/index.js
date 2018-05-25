@@ -1,2 +1,2 @@
 export childRoutes from "./childRoutes";
-export RedirectIfNoChildRouteMatches from "./RedirectIfNoChildRouteMatches";
+export RedirectToFirstMatch from "./RedirectToFirstMatch";

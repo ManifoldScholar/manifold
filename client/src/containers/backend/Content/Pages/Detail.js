@@ -5,7 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import entityUtils from "utils/entityUtils";
 import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
-import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
+import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import { HigherOrder } from "containers/global";
 import { Dialog, Navigation } from "components/backend";
 
@@ -121,12 +121,16 @@ class PageDetailContainer extends PureComponent {
       {
         path: lh.link("backendContentPageGeneral", this.id(props)),
         label: "General",
-        key: "general"
+        key: "general",
+        entity: this.page(props),
+        ability: "update"
       },
       {
         path: lh.link("backendContentPageBody", this.id(props)),
         label: "Body",
-        key: "body"
+        key: "body",
+        entity: this.page(props),
+        ability: "update"
       }
     ];
   }
@@ -221,10 +225,10 @@ class PageDetailContainer extends PureComponent {
 
     return (
       <div>
-        <RedirectIfNoChildRouteMatches
-          route={this.props.route}
-          to={lh.link("backendContentPageGeneral", page.id)}
+        <RedirectToFirstMatch
+          candidates={this.secondaryNavigationLinks(this.props)}
         />
+
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}

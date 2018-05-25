@@ -4,7 +4,7 @@ import { Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
-import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
+import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 
 export class UsersWrapperContainer extends PureComponent {
   static displayName = "Users.Wrapper";
@@ -45,10 +45,7 @@ export class UsersWrapperContainer extends PureComponent {
           detail: "You are not allowed to manage users and makers."
         }}
       >
-        <RedirectIfNoChildRouteMatches
-          route={this.props.route}
-          to={lh.link("backendPeopleMakers")}
-        />
+        <RedirectToFirstMatch candidates={this.secondaryNavigationLinks()} />
 
         <section className="backend-panel">
           <aside className="scrollable">
