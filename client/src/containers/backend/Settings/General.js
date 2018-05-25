@@ -91,7 +91,7 @@ export class SettingsGeneralContainer extends PureComponent {
             label="Terms and Conditions Link URL"
             name="attributes[general][termsUrl]"
             placeholder="Enter a URL or slug"
-            instructions="Enter a full absolute URL or a Manifold page slug."
+            instructions="Enter a full absolute URL or a Manifold page slug.  If present, the registration form will contain a link to the page."
           />
           <Form.Save text="Save Settings" />
         </FormContainer.Form>
