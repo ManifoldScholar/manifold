@@ -6,7 +6,7 @@ import { HigherOrder } from "containers/global";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
-import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
+import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
@@ -217,18 +217,8 @@ export class ProjectWrapperContainer extends PureComponent {
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}
 
-        <RedirectIfNoChildRouteMatches
-          entity={project}
-          ability={"update"}
-          route={this.props.route}
-          to={lh.link("backendProjectGeneral", project.id)}
-        />
-
-        <RedirectIfNoChildRouteMatches
-          entity={project}
-          ability={"updateLimitedToResourceMetadata"}
-          route={this.props.route}
-          to={lh.link("backendProjectResources", project.id)}
+        <RedirectToFirstMatch
+          candidates={this.secondaryNavigationLinks(project)}
         />
 
         <Navigation.DetailHeader

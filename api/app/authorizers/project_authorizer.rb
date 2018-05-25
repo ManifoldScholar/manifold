@@ -4,7 +4,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
                     :manage_collections, :create_collections, :manage_permissions,
                     :create_permissions, :manage_texts, :create_texts,
                     :manage_twitter_queries, :create_twitter_queries, :manage_events,
-                    :manage_socials, :update_makers, :update_limited_to_resource_metadata]
+                    :manage_socials, :update_makers]
 
   # Any user who is a project_editor might be able to create, update, or delete it.
   def self.default(_able, _user, _options = {})
@@ -64,11 +64,6 @@ class ProjectAuthorizer < ApplicationAuthorizer
   def drafts_readable_by?(user, _options = {})
     marketeer_permissions?(user) ||
       user.project_editor_of?(resource) ||
-      user.project_resource_editor_of?(resource)
-  end
-
-  def only_resource_metadata_updatable_by?(user, _options = {})
-    !updatable_by?(user) &&
       user.project_resource_editor_of?(resource)
   end
 

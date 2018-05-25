@@ -7,7 +7,7 @@ import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { resourcesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
+import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 
 const { request, flush } = entityStoreActions;
 
@@ -187,20 +187,13 @@ export class ResourceWrapperContainer extends PureComponent {
         }}
         ability="update"
       >
-        <RedirectIfNoChildRouteMatches
-          entity={resource}
-          successBehavior="show"
-          ability={"updateLimitedToResourceMetadata"}
-          route={this.props.route}
-          to={lh.link("backendResourceMetadata", resource.id)}
+        <RedirectToFirstMatch
+          candidates={this.secondaryNavigationLinks(
+            resource,
+            resource.attributes.kind
+          )}
         />
-        <RedirectIfNoChildRouteMatches
-          entity={resource}
-          successBehavior="hide"
-          ability={"updateLimitedToResourceMetadata"}
-          route={this.props.route}
-          to={lh.link("backendResourceGeneral", resource.id)}
-        />
+
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}

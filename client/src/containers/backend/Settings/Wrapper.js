@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
-import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
+import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 
 export class SettingsWrapperContainer extends PureComponent {
   static propTypes = {
@@ -16,23 +16,37 @@ export class SettingsWrapperContainer extends PureComponent {
       {
         path: lh.link("backendSettingsGeneral"),
         label: "General",
-        key: "general"
+        key: "general",
+        entity: "settings",
+        ability: "update"
       },
-      { path: lh.link("backendSettingsTheme"), label: "Theme", key: "theme" },
+      {
+        path: lh.link("backendSettingsTheme"),
+        label: "Theme",
+        key: "theme",
+        entity: "settings",
+        ability: "update"
+      },
       {
         path: lh.link("backendSettingsIntegrations"),
         label: "Integrations",
-        key: "integrations"
+        key: "integrations",
+        entity: "settings",
+        ability: "update"
       },
       {
         path: lh.link("backendSettingsSubjects"),
         label: "Subjects",
-        key: "subjects"
+        key: "subjects",
+        entity: "settings",
+        ability: "update"
       },
       {
         path: lh.link("backendSettingsEmail"),
         label: "Email",
-        key: "email"
+        key: "email",
+        entity: "settings",
+        ability: "update"
       }
     ];
   }
@@ -46,10 +60,7 @@ export class SettingsWrapperContainer extends PureComponent {
         }}
         ability="update"
       >
-        <RedirectIfNoChildRouteMatches
-          route={this.props.route}
-          to={lh.link("backendSettingsGeneral")}
-        />
+        <RedirectToFirstMatch candidates={this.secondaryNavigationLinks()} />
 
         <section className="backend-panel">
           <aside className="scrollable">

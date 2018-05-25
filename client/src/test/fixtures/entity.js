@@ -63,8 +63,7 @@ const abilities = {
   manageEvents: true,
   updateMakers: true,
   readSecrets: true,
-  readLog: true,
-  updateLimitedToResourceMetadata: false
+  readLog: true
 };
 
 const classAbilities = {

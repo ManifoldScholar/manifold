@@ -29,7 +29,9 @@ module Api
 
       def update
         @resource = load_and_authorize_zresource
-        only_meta = @resource.project.only_resource_metadata_updatable_by? current_user
+        project = @resource.project
+        only_meta = !project.updatable_by?(current_user) &&
+                    project.resources_manageable_by?(current_user)
         authorized_params = only_meta ? resource_metadata_params : resource_params
         ::Updaters::Resource.new(authorized_params).update(@resource)
         render_single_resource(@resource, include: INCLUDES)
