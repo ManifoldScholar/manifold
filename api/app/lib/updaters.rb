@@ -31,8 +31,7 @@ module Updaters
   def update(model, creator: nil)
     @model = model
     update_without_save(model, creator: creator)
-    save_model(model)
-    post_update(model) if model.persisted?
+    post_update(model) if save_model(model)
     model
   end
 
@@ -44,12 +43,12 @@ module Updaters
   protected
 
   def save_model(model)
-    @saved = false
+    saved = false
     run_callbacks "save" do
-      @saved = model.save
+      saved = model.save
     end
-    model.reload if model.id && @saved
-    @saved = false
+    model.reload if model.id && saved
+    saved
   end
 
   def attachment_fields
