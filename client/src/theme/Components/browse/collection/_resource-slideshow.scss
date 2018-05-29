@@ -54,14 +54,22 @@
 
   .resource-description {
     @include templateCopy;
-    height: 5em;
     max-width: $slideCopyFocus;
+    height: 5em;
     overflow: hidden;
     font-size: 15px;
     color: $neutral40;
 
     p + p {
       margin-top: 1em;
+    }
+
+    a {
+      color: $neutral40;
+
+      &:visited {
+        color: $neutral40;
+      }
     }
 
     &.transition-height {
@@ -90,8 +98,8 @@
       display: inline-block;
       padding: 11px 0 13px;
       font-size: 13px;
-      letter-spacing: 0.05em;
       color: $neutral50;
+      letter-spacing: 0.05em;
 
       @include respond($break60) {
         padding: 0;
@@ -106,8 +114,8 @@
       top: 50%;
       margin-top: -9px;
       font-size: 13px;
-      letter-spacing: 0.05em;
       color: $neutral40;
+      letter-spacing: 0.05em;
 
       @include respond($break60) {
         position: static;
