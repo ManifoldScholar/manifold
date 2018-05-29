@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import { Dialog } from "components/backend";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
@@ -174,66 +175,36 @@ class ContentFeaturesList extends PureComponent {
                           >
                             Edit
                           </Link>
-                          {index !== 0 ? (
-                            <button
-                              onClick={event => {
-                                this.handleMoveUp(event, feature);
-                              }}
-                            >
-                              <span className="screen-reader-text">
-                                Click to move feature up
-                              </span>
-                              <i
-                                className="manicon manicon-arrow-up"
-                                aria-hidden="true"
-                              />
-                            </button>
-                          ) : (
-                            <button
-                              style={{ visibility: "hidden" }}
-                              onClick={event => {
-                                this.handleMoveUp(event, feature);
-                              }}
-                            >
-                              <span className="screen-reader-text">
-                                Click to move feature up
-                              </span>
-                              <i
-                                className="manicon manicon-arrow-up"
-                                aria-hidden="true"
-                              />
-                            </button>
-                          )}
-                          {index + 1 < collection.length ? (
-                            <button
-                              onClick={event => {
-                                this.handleMoveDown(event, feature);
-                              }}
-                            >
-                              <span className="screen-reader-text">
-                                Click to move feature down
-                              </span>
-                              <i
-                                className="manicon manicon-arrow-down"
-                                aria-hidden="true"
-                              />
-                            </button>
-                          ) : (
-                            <button
-                              onClick={event => {
-                                this.handleMoveDown(event, feature);
-                              }}
-                              style={{ visibility: "hidden" }}
-                            >
-                              <span className="screen-reader-text">
-                                Click to move feature down
-                              </span>
-                              <i
-                                className="manicon manicon-arrow-down"
-                                aria-hidden="true"
-                              />
-                            </button>
-                          )}
+                          <button
+                            className={classNames({ invisible: index === 0 })}
+                            onClick={event => {
+                              this.handleMoveUp(event, feature);
+                            }}
+                          >
+                            <span className="screen-reader-text">
+                              Click to move feature up
+                            </span>
+                            <i
+                              className="manicon manicon-arrow-up"
+                              aria-hidden="true"
+                            />
+                          </button>
+                          <button
+                            className={classNames({
+                              invisible: index >= collection.length - 1
+                            })}
+                            onClick={event => {
+                              this.handleMoveDown(event, feature);
+                            }}
+                          >
+                            <span className="screen-reader-text">
+                              Click to move feature down
+                            </span>
+                            <i
+                              className="manicon manicon-arrow-down"
+                              aria-hidden="true"
+                            />
+                          </button>
                           <HigherOrder.Authorize
                             entity={feature}
                             ability="delete"
@@ -243,7 +214,9 @@ class ContentFeaturesList extends PureComponent {
                                 this.handleDestroy(feature);
                               }}
                             >
-                              <span>Delete Feature</span>
+                              <span className="screen-reader-text">
+                                Click to delete Feature
+                              </span>
                               <i
                                 className="manicon manicon-x"
                                 aria-hidden="true"
