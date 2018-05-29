@@ -79,7 +79,8 @@ module ManifoldApi
       "#{config.root}/app/jobs",
       "#{config.root}/app/services",
       "#{config.root}/app/presenters",
-      "#{config.root}/app/lib"
+      "#{config.root}/app/lib",
+      "#{config.root}/app/enums"
     ]
 
     config.active_job.queue_adapter = :sidekiq

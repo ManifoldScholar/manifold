@@ -4,6 +4,7 @@ import { pagesAPI } from "api";
 import { Form } from "components/backend";
 import { Form as FormContainer } from "containers/backend";
 import connectAndFetch from "utils/connectAndFetch";
+import HigherOrder from "containers/global/HigherOrder";
 import lh from "helpers/linkHandler";
 
 class PagesNewContainer extends PureComponent {
@@ -11,8 +12,16 @@ class PagesNewContainer extends PureComponent {
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    form: PropTypes.object
   };
+
+  constructor() {
+    super();
+    this.defaultPage = {
+      attributes: { isExternalLink: false, kind: "default" }
+    };
+  }
 
   redirectToPage(page) {
     const path = lh.link("backendContentPageGeneral", page.id);
@@ -23,31 +32,54 @@ class PagesNewContainer extends PureComponent {
     this.redirectToPage(page);
   };
 
+  renderPath() {
+    const isExternal = this.props.form.getModelValue(
+      "attributes[isExternalLink]"
+    );
+    if (isExternal)
+      return (
+        <Form.TextInput
+          validation={["required"]}
+          label="External URL"
+          name="attributes[externalLink]"
+          placeholder="Enter External URL"
+          instructions="The absolute URL for the page."
+        />
+      );
+    return (
+      <Form.TextInput
+        validation={["required"]}
+        label="Slug"
+        name="attributes[slug]"
+        placeholder="Enter URL Slug"
+        instructions="The page URL is based on the slug."
+      />
+    );
+  }
+
   render() {
     return (
       <section>
         <section>
           <FormContainer.Form
             onSuccess={this.handleSuccess}
-            name="backend-page-update"
+            model={this.defaultPage}
+            name="backend-page-create"
             update={pagesAPI.update}
             create={pagesAPI.create}
             className="form-secondary"
           >
             <Form.TextInput
-              validation={["required"]}
               focusOnMount
               label="Page Title"
               name="attributes[title]"
               placeholder="Enter Page Title"
             />
-            <Form.TextInput
-              validation={["required"]}
-              label="Slug"
-              name="attributes[slug]"
-              placeholder="Enter URL Slug"
-              instructions="The page URL is based on the slug."
+            <Form.Switch
+              label="External Page?"
+              name="attributes[isExternalLink]"
             />
+            {this.renderPath()}
             <Form.Save text="Save Page" />
           </FormContainer.Form>
         </section>
@@ -56,4 +88,7 @@ class PagesNewContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(PagesNewContainer);
+export default HigherOrder.withFormSession(
+  connectAndFetch(PagesNewContainer),
+  "backend-page-create"
+);

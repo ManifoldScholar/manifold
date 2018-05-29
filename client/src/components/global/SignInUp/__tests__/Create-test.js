@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { mount } from "enzyme";
-import Create from "../Create";
+import { CreateContainer } from "../Create";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
@@ -11,13 +11,15 @@ describe("Global.SignInUp.Create component", () => {
 
   const handleViewChange = jest.fn();
   const user = build.entity.user("1");
+  const pages = [build.entity.page("1")];
 
   const root = wrapWithRouter(
     <Provider store={store}>
-      <Create
+      <CreateContainer
         dispatch={store.dispatch}
         handleViewChange={handleViewChange}
         settings={build.entity.settings("1")}
+        pages={pages}
         user={user}
       />
     </Provider>

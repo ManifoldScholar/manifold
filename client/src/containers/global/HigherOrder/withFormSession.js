@@ -23,7 +23,7 @@ export default function withFormSession(WrappedComponent, sessionKey) {
     static propTypes = {
       session: PropTypes.object,
       response: PropTypes.object,
-      errors: PropTypes.object
+      errors: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
     };
 
     static mapStateToProps = state => {

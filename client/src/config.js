@@ -65,6 +65,17 @@ const applicationConfiguration = {
       ]
     },
     locale: {
+      errors: {
+        // These pointers should _really_ be scoped to resource type. However, ASM's
+        // current implementation of json-api error objects doesn't allow us to include
+        // the resource type in the response. We could pass the type down on the client
+        // side, but that adds other kinds of complexity that we'd rather avoid. For now,
+        // these pointer overrides will have to be unscoped. When this becomes a problem
+        // in the future, perhaps ASM will have improved around this.
+        pointers: {
+          "/data/attributes/purpose": "A purpose"
+        }
+      },
       event_types: {
         PROJECT_CREATED: "Project Created",
         TEXT_ADDED: "Text Added",

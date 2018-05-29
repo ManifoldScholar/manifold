@@ -87,12 +87,6 @@ export class SettingsGeneralContainer extends PureComponent {
             placeholder="Enter an email address"
             instructions="If present, the footer will contain a link to a contact form that will be delivered to this address."
           />
-          <Form.TextInput
-            label="Terms and Conditions Link URL"
-            name="attributes[general][termsUrl]"
-            placeholder="Enter a URL or slug"
-            instructions="Enter a full absolute URL or a Manifold page slug.  If present, the registration form will contain a link to the page."
-          />
           <Form.Save text="Save Settings" />
         </FormContainer.Form>
       </section>

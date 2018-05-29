@@ -54,14 +54,39 @@ class LayoutFooter extends Component {
     });
   }
 
-  buildContentPages() {
-    return this.visiblePages(this.props).map(page => {
-      return (
-        <Link to={lh.link("frontendPage", page.attributes.slug)}>
-          {page.attributes.navTitle || page.attributes.title}
-        </Link>
-      );
+  sortedPages(props) {
+    const out = [];
+    this.visiblePages(props).map(page => {
+      return page.attributes.purpose === "supplemental_content"
+        ? out.unshift(page)
+        : out.push(page);
     });
+
+    return out;
+  }
+
+  buildContentPages() {
+    return this.sortedPages(this.props).map(page => {
+      return page.attributes.isExternalLink
+        ? this.buildExternalPageLink(page)
+        : this.buildInternalPageLink(page);
+    });
+  }
+
+  buildInternalPageLink(page) {
+    return (
+      <Link to={lh.link("frontendPage", page.attributes.slug)}>
+        {page.attributes.navTitle || page.attributes.title}
+      </Link>
+    );
+  }
+
+  buildExternalPageLink(page) {
+    return (
+      <a href={page.attributes.externalLink} target="_blank">
+        {page.attributes.navTitle || page.attributes.title}
+      </a>
+    );
   }
 
   buildAuthLink() {
