@@ -62,11 +62,7 @@ class FormSwitch extends Component {
       this.props.labelClass
     );
     const wrapperClasses = classnames("form-input", this.props.className);
-    const label = (
-      <label aria-hidden="true" className={labelClasses}>
-        {this.props.label}
-      </label>
-    );
+    const label = <h4 className={labelClasses}>{this.props.label}</h4>;
 
     return (
       <div className={wrapperClasses}>

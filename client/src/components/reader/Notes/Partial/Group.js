@@ -112,12 +112,7 @@ export default class Group extends Component {
       <li>
         <div className={classes} onClick={this.handleClick} role="button">
           <i className={`manicon manicon-caret-down`} aria-hidden="true" />
-          <label>{this.props.sectionName}</label>
-          {this.state.expanded ? (
-            <span className="screen-reader-text">Collapse Notes</span>
-          ) : (
-            <span className="screen-reader-text">Expand Notes</span>
-          )}
+          <h4 className="item-label">{this.props.sectionName}</h4>
         </div>
         {this.renderGroupItems(this.props.annotations)}
       </li>

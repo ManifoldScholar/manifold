@@ -76,7 +76,7 @@ export default class Login extends Component {
         <form method="post" onSubmit={this.handleLogin}>
           <div className="row-1-p">
             <div className="form-input form-error">
-              <label>Email</label>
+              <label htmlFor="login-email">Email</label>
               <input
                 type="text"
                 name="email"

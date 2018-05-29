@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import uniqueId from "lodash/uniqueId";
 import { Form as GlobalForm } from "components/global";
 import setter from "./setter";
 import isNull from "lodash/isNull";
@@ -23,6 +24,10 @@ class FormSelect extends Component {
     ).isRequired
   };
 
+  componentDidMount() {
+    this.id = uniqueId("select-");
+  }
+
   render() {
     const value = isNull(this.props.value) ? "" : this.props.value;
 
@@ -42,11 +47,11 @@ class FormSelect extends Component {
           errors={this.props.errors}
           label={this.props.label}
         >
-          <label>{this.props.label}</label>
+          <label htmlFor={this.id}>{this.props.label}</label>
           <Instructions instructions={this.props.instructions} />
           <div className="form-select">
             <i className="manicon manicon-caret-down" aria-hidden="true" />
-            <select onChange={this.props.onChange} value={value}>
+            <select id={this.id} onChange={this.props.onChange} value={value}>
               {options}
             </select>
           </div>

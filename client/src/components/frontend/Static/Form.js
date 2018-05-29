@@ -20,8 +20,12 @@ export default class StaticForm extends Component {
             <div className="row-3-p">
               <div className="col-33">
                 <div className="form-input form-error">
-                  <label>Text Entry Field</label>
-                  <input type="text" placeholder="Text Entry Field" />
+                  <label htmlFor="text-1">Text Entry Field</label>
+                  <input
+                    id="text-1"
+                    type="text"
+                    placeholder="Text Entry Field"
+                  />
                   <i className="manicon manicon-stop" aria-hidden="true" />
                   <span className="form-error-message">something happened</span>
                 </div>
@@ -29,20 +33,24 @@ export default class StaticForm extends Component {
 
               <div className="col-33">
                 <div className="form-input">
-                  <label>Text Entry Field</label>
-                  <input type="text" placeholder="Text Entry Field" />
+                  <label htmlFor="text-2">Text Entry Field</label>
+                  <input
+                    id="text-2"
+                    type="text"
+                    placeholder="Text Entry Field"
+                  />
                 </div>
               </div>
 
               <div className="col-33">
                 <div className="form-input">
-                  <label>&nbsp;</label>
+                  <label htmlFor="select-1">&nbsp;</label>
                   <div className="form-select">
                     <i
                       className="manicon manicon-caret-down"
                       aria-hidden="true"
                     />
-                    <select>
+                    <select id="select-1">
                       <option>Select Dropdown</option>
                       <option>Select an option</option>
                       <option>If you please</option>
@@ -55,8 +63,11 @@ export default class StaticForm extends Component {
             <div className="row-3-p">
               <div className="col-66">
                 <div className="form-input">
-                  <label>Editable text field</label>
-                  <textarea placeholder="Start typing annotation here..." />
+                  <label htmlFor="textarea-1">Editable text field</label>
+                  <textarea
+                    id="textarea-1"
+                    placeholder="Start typing annotation here..."
+                  />
                 </div>
               </div>
 
@@ -95,7 +106,7 @@ export default class StaticForm extends Component {
                 </div>
 
                 <div className="form-input">
-                  <label>Checkboxes Vertical</label>
+                  <h4 className="form-input-heading">Checkboxes Vertical</h4>
                   {/* Radio buttons and checkboxes get wrapped in a toggle class */}
                   <label className="form-toggle checkbox">
                     <input type="checkbox" />
@@ -127,7 +138,7 @@ export default class StaticForm extends Component {
                 </div>
 
                 <div className="form-input">
-                  <label>Radios Vertical</label>
+                  <h4 className="form-input-heading">Radios Vertical</h4>
                   <label className="form-toggle radio">
                     <input type="radio" name="test" />
                     <span className="toggle-indicator" aria-hidden="true">
@@ -154,7 +165,7 @@ export default class StaticForm extends Component {
             <div className="row-3-p">
               <div className="col-66">
                 <div className="form-input">
-                  <label>Checkboxes Horizontal</label>
+                  <h4 className="form-input-heading">Checkboxes Horizontal</h4>
 
                   <label className="form-toggle checkbox horizontal">
                     <input type="checkbox" />
@@ -182,7 +193,7 @@ export default class StaticForm extends Component {
                 </div>
 
                 <div className="form-input">
-                  <label>Checkboxes Horizontal</label>
+                  <h4 className="form-input-heading">Checkboxes Horizontal</h4>
 
                   <label className="form-toggle radio horizontal">
                     <input type="radio" />

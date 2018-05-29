@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import uniqueId from "lodash/uniqueId";
 import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
 import fill from "lodash/fill";
@@ -26,6 +27,10 @@ class FormMaskedTextInput extends Component {
   constructor() {
     super();
     this.placeholderChar = "\u005F"; // react-text-mask default "_"
+  }
+
+  componentDidMount() {
+    this.id = uniqueId("masked-text-");
   }
 
   currencyMask() {
@@ -86,11 +91,14 @@ class FormMaskedTextInput extends Component {
 
     return (
       <div className="form-input">
-        <label className={labelClass}>{this.props.label}</label>
+        <label htmlFor={this.id} className={labelClass}>
+          {this.props.label}
+        </label>
         <Instructions instructions={this.props.instructions} />
         <MaskedInput
           onChange={this.props.onChange}
           value={this.props.value}
+          id={this.id}
           type="text"
           mask={mask}
           placeholder={this.props.placeholder}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import uniqueId from "lodash/uniqueId";
 import Dropzone from "react-dropzone";
 import { Form as GlobalForm } from "components/global";
 import classnames from "classnames";
@@ -102,6 +103,10 @@ export class FormUpload extends Component {
       removed: false,
       attachment: null
     };
+  }
+
+  componentDidMount() {
+    this.id = uniqueId("upload-");
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -287,10 +292,13 @@ export class FormUpload extends Component {
           label={this.props.label}
         >
           {this.props.label ? (
-            <label className={labelClass}>{this.props.label}</label>
+            <label htmlFor={this.id} className={labelClass}>
+              {this.props.label}
+            </label>
           ) : null}
           <Instructions instructions={this.props.instructions} />
           <Dropzone
+            id={this.id}
             style={this.props.inlineStyle}
             className={`form-dropzone style-${this.props.layout}`}
             multiple={false}

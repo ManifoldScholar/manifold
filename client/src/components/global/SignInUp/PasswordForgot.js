@@ -104,7 +104,7 @@ class PasswordForgotContainer extends Component {
         <form method="" onSubmit={event => this.handleSubmit(event)}>
           <div className="row-1-p">
             <div className="form-input form-error">
-              <label>Email</label>
+              <label htmlFor="password-forgot-email">Email</label>
               <Form.HigherOrder.Validation
                 submitted={this.state.submitted}
                 value={this.state.email}

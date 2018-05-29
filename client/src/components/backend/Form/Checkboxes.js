@@ -24,7 +24,9 @@ class FormCheckboxes extends Component {
     return (
       <div className="form-input">
         {this.props.label ? (
-          <label style={{ marginBottom: "1.5em" }}>{this.props.label}</label>
+          <h4 className="form-input-heading" style={{ marginBottom: "1.5em" }}>
+            {this.props.label}
+          </h4>
         ) : null}
         {this.props.options.map(option => {
           const checked = this.props.value === option.value;

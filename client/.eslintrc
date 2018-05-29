@@ -112,21 +112,31 @@
     "jsx-a11y/anchor-has-content": 2,
     "jsx-a11y/anchor-is-valid": 2,
 
+    // Rules for WCAG related to form labels
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        "components": [ "Label" ],
+        "required": {
+          "some": [ "nesting", "id" ]
+        },
+        "allowChildren": false
+      }
+    ],
+
     // Rules for WCAG we should eventually enable
     "jsx-a11y/aria-activedescendant-has-tabindex": 0,
-    "jsx-a11y/click-events-have-key-events": 0,
-    "jsx-a11y/heading-has-content": 0,
+    "jsx-a11y/no-noninteractive-tabindex": 0,
     "jsx-a11y/interactive-supports-focus": 0,
-    "jsx-a11y/label-has-for": 0,
-    "jsx-a11y/media-has-caption": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/mouse-events-have-key-events": 0,
     "jsx-a11y/no-access-key": 0,
+    "jsx-a11y/no-onchange": 0,
+    "jsx-a11y/media-has-caption": 0,
+    "jsx-a11y/heading-has-content": 0,
     "jsx-a11y/no-autofocus": 0,
     "jsx-a11y/no-distracting-elements": 0,
-    "jsx-a11y/no-noninteractive-tabindex": 0,
-    "jsx-a11y/no-onchange": 0,
     "jsx-a11y/scope": 0,
-
   },
   "plugins": [
     "react", "import", "prettier", "jsx-a11y"

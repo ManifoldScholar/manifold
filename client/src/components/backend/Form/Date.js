@@ -170,7 +170,7 @@ class FormDate extends Component {
   render() {
     return (
       <div className="form-input">
-        <label>{this.props.label}</label>
+        <h4 className="form-input-heading">{this.props.label}</h4>
         <div className="form-date">
           <div className="form-select input-month">
             <i className="manicon manicon-caret-down" aria-hidden="true" />

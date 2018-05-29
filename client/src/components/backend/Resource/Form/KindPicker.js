@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import uniqueId from "lodash/uniqueId";
 import classNames from "classnames";
 import { Resource } from "components/frontend";
 import setter from "components/backend/Form/setter";
@@ -12,6 +13,10 @@ class KindPicker extends PureComponent {
     includeButtons: PropTypes.bool,
     set: PropTypes.func
   };
+
+  componentDidMount() {
+    this.id = uniqueId("kind-");
+  }
 
   renderKindPickerButtons(kindList) {
     if (!kindList) return null;
@@ -81,11 +86,12 @@ class KindPicker extends PureComponent {
     return (
       <div className="resource-kind-picker form-secondary">
         <div className="form-input">
-          <label>Kind</label>
+          <label htmlFor={this.id}>Kind</label>
           <div className={selectClass}>
             <div className="form-select">
               <i className="manicon manicon-caret-down" aria-hidden="true" />
               <select
+                id={this.id}
                 onChange={event => {
                   this.props.set(event.target.value);
                 }}

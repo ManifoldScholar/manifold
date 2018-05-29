@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import uniqueId from "lodash/uniqueId";
 import { Utility } from "components/global";
 import { HigherOrder } from "containers/global";
 import withCurrentUser from "containers/global/HigherOrder/withCurrentUser";
@@ -71,6 +72,8 @@ export class ListSearchable extends PureComponent {
 
   componentDidMount() {
     this.searchId = uniqueId("list-search-");
+    this.filterId = uniqueId("filter-");
+    this.sortId = uniqueId("sort-");
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -137,7 +140,7 @@ export class ListSearchable extends PureComponent {
 
     return (
       <div className="select-group">
-        <label>Sort By:</label>
+        <label htmlFor={this.sortId}>Sort By:</label>
         {this.renderSortSelect(adjustedOptions)}
       </div>
     );
@@ -147,7 +150,7 @@ export class ListSearchable extends PureComponent {
     if (!this.state.showOptions || !this.props.filterOptions) return null;
     return (
       <div className="select-group">
-        <label>Filter Results:</label>
+        <label htmlFor={this.filterId}>Filter Results:</label>
         {Object.keys(this.props.filterOptions).map(filter =>
           this.renderFilterSelect(filter)
         )}
@@ -159,6 +162,7 @@ export class ListSearchable extends PureComponent {
     return (
       <div className="select" key="filter[order]">
         <select
+          id={this.sortId}
           onChange={event => this.setFilter(event, "order")}
           value={this.state.filter.order || ""}
           data-id={"filter"}
@@ -175,6 +179,7 @@ export class ListSearchable extends PureComponent {
     return (
       <div className="select" key={filter}>
         <select
+          id={this.filterId}
           onChange={event => this.setFilter(event, filter)}
           value={this.state.filter[filter] || ""}
           data-id={"filter"}

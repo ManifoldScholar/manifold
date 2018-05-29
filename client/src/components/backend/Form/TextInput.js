@@ -1,3 +1,4 @@
+import uniqueId from "lodash/uniqueId";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
@@ -33,8 +34,9 @@ class FormTextInput extends Component {
   componentDidMount() {
     this.id = uniqueId("text-input-");
 
-    if (this.props.focusOnMount === true && this.inputElement)
+    if (this.props.focusOnMount === true && this.inputElement) {
       this.inputElement.focus();
+    }
   }
 
   renderValue(value) {

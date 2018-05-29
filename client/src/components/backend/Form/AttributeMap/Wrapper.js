@@ -102,7 +102,7 @@ class FormColumnMap extends PureComponent {
           <div className="form-input">
             <div className="form-column-map">
               <div className="column column-mappable">
-                <label>{"Spreadsheet Columns"}</label>
+                <h4 className="column-heading">{"Spreadsheet Columns"}</h4>
                 <ul className="mappable">
                   {sortedHeaders.map((header, index) => {
                     const position = this.getHeaderPosition(header, this.props);
@@ -121,7 +121,7 @@ class FormColumnMap extends PureComponent {
                 </ul>
               </div>
               <div className="column column-available">
-                <label>{"Available Attributes"}</label>
+                <h4 className="column-heading">{"Available Attributes"}</h4>
                 <Droppable droppableId="attributesAvailable" isDropDisabled>
                   {(provided, snapshotIgnored) => (
                     <div className="available" ref={provided.innerRef}>

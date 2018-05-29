@@ -263,7 +263,7 @@ class UpdateFormContainer extends Component {
             name="attributes[firstName]"
             errors={errors}
           >
-            <label>First Name</label>
+            <label htmlFor="update-firstName">First Name</label>
             <input
               value={this.state.firstName}
               type="text"
@@ -278,7 +278,7 @@ class UpdateFormContainer extends Component {
             name="attributes[lastName]"
             errors={errors}
           >
-            <label>Last Name</label>
+            <label htmlFor="update-lastName">Last Name</label>
             <input
               value={this.state.lastName}
               type="text"
@@ -293,7 +293,7 @@ class UpdateFormContainer extends Component {
             name="attributes[email]"
             errors={errors}
           >
-            <label>Email</label>
+            <label htmlFor="update-email">Email</label>
             <input
               value={this.state.email}
               type="text"

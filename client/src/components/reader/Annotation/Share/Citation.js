@@ -76,7 +76,9 @@ export default class AnnotationShareEditor extends PureComponent {
       <div className="annotation-editor citation">
         <div>
           <nav className="utility styles">
+            {/* eslint-disable jsx-a11y/label-has-for */}
             <label>Citation Style:</label>
+            {/* eslint-enable jsx-a11y/label-has-for */}
             <ul>{this.renderStyleButtons()}</ul>
           </nav>
           <div

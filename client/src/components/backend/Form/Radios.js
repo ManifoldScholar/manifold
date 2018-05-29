@@ -24,7 +24,18 @@ class FormRadios extends Component {
     return (
       <div className="form-input">
         {this.props.label ? (
-          <label style={{ marginBottom: "1.5em" }}>{this.props.label}</label>
+          <div>
+            <span className="screen-reader-text">
+              Select a {this.props.label}
+            </span>
+            <h4
+              className="form-input-heading"
+              style={{ marginBottom: "1.5em" }}
+              aria-hidden="true"
+            >
+              {this.props.label}
+            </h4>
+          </div>
         ) : null}
         {this.props.options.map(option => {
           const checked = this.props.value === option.value;
