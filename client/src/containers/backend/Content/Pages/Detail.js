@@ -268,6 +268,8 @@ class PageDetailContainer extends PureComponent {
       ? { entity: "page", ability: "create" }
       : { entity: page, ability: "update" };
 
+    if (!authProps.entity) return null;
+
     return (
       <HigherOrder.Authorize
         failureFatalError={{
