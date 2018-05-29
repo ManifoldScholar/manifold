@@ -92,8 +92,7 @@ const defaults = {
       general: {
         installationName: "Manifold",
         contactUrl: "http://www.dailyrowan.com",
-        copyright: "2015-2016 6 University of Minnesota Press",
-        termsUrl: "http://www.dailyrowan.com"
+        copyright: "2015-2016 6 University of Minnesota Press"
       },
       theme: {
         typekitId: "typekitId",
@@ -334,6 +333,19 @@ const defaults = {
     relationships: {}
   },
 
+  page: {
+    type: "pages",
+    attributes: {
+      isExternalLink: true,
+      externalLink: "http://www.dailyrowan.com",
+      title: "Daily Rowan",
+      purpose: "terms_and_conditions",
+      slug: "daily-rowan",
+      showInFooter: true,
+      hidden: false
+    }
+  },
+
   feature: {
     type: "features",
     attributes: {
@@ -534,6 +546,10 @@ const version = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("version", id, attributes, relationships);
 };
 
+const page = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("page", id, attributes, relationships);
+};
+
 export default {
   defaults,
   project,
@@ -555,5 +571,6 @@ export default {
   subject,
   twitterQuery,
   permission,
-  version
+  version,
+  page
 };

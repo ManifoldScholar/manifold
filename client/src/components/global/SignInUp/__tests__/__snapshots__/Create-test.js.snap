@@ -153,6 +153,7 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
     By creating this account, you agree to Manifold's 
     <a
       href="http://www.dailyrowan.com"
+      target="_blank"
     >
       terms and conditions
     </a>

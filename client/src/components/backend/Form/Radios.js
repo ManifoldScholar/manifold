@@ -49,14 +49,14 @@ class FormRadios extends Component {
           const iconClassNames = classNames("manicon", this.props.toggleIcon);
           return (
             <label
-              htmlFor={option.value}
+              htmlFor={option.value.toString()}
               className={inputClassNames}
               key={option.value}
             >
               <input
                 type="radio"
                 value={option.value}
-                id={option.value}
+                id={option.value.toString()}
                 checked={checked}
                 onChange={() => {
                   this.props.set(option.value);

@@ -12,4 +12,19 @@ RSpec.describe Page, type: :model do
     expect(page.slug).to eq("my-page")
   end
 
+  context "when external page" do
+    it "is invalid without an external_link" do
+      page = FactoryBot.build(:page, is_external_link: true, external_link: nil)
+      expect(page).to_not be_valid
+    end
+  end
+
+  context "when purpose is a policy" do
+    it "is invalid with a duplicate purpose" do
+      FactoryBot.create(:page, purpose: "privacy_policy")
+      page = FactoryBot.build(:page, purpose: "privacy_policy")
+      expect(page).to_not be_valid
+    end
+  end
+
 end

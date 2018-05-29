@@ -55,7 +55,7 @@ module Validation
   def page_params
     params.require(:data)
     attributes = [:title, :slug, :nav_title, :body, :show_in_footer, :show_in_header,
-                  :hidden]
+                  :hidden, :external_link, :is_external_link, :purpose]
     relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -302,6 +302,10 @@ module Validation
 
   def version_filter_params
     params.permit(filter: [])[:filter]
+  end
+
+  def page_filter_params
+    params.permit(filter: [:purpose])[:filter]
   end
 
   def user_filter_params

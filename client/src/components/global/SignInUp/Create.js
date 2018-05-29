@@ -7,10 +7,11 @@ import { Form, SignInUp } from "components/global";
 import { possessivize } from "utils/string";
 import connectAndFetch from "utils/connectAndFetch";
 import get from "lodash/get";
+import find from "lodash/find";
 
 const { request, flush } = entityStoreActions;
 
-class CreateContainer extends Component {
+export class CreateContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     response: PropTypes.object,
@@ -23,6 +24,7 @@ class CreateContainer extends Component {
   static mapStateToProps = state => {
     const myState = {
       user: select(requests.gCreateUser, state.entityStore),
+      pages: select(requests.gPages, state.entityStore),
       response: state.entityStore.responses[requests.gCreateUser]
     };
     return myState;
@@ -84,16 +86,22 @@ class CreateContainer extends Component {
   };
 
   renderTermsAndConditions(props) {
-    const terms = props.settings.attributes.general.termsUrl;
-    if (!terms) return null;
+    const termsPage = find(
+      props.pages,
+      p => p.attributes.purpose === "terms_and_conditions"
+    );
+    if (!termsPage) return null;
+    const attr = termsPage.attributes;
     const name = props.settings.attributes.general.installationName;
-    const absoluteUrl = /^https?:\/\//i;
-    const url = absoluteUrl.test(terms) ? terms : `/page/${terms}`;
+
+    const linkProps = attr.isExternalLink
+      ? { href: attr.externalLink, target: "_blank" }
+      : { href: `/page/${attr.slug}` };
 
     return (
       <p className="login-links">
         {`By creating this account, you agree to ${possessivize(name)} `}
-        <a href={url}>terms and conditions</a>
+        <a {...linkProps}>terms and conditions</a>
         {`.`}
       </p>
     );

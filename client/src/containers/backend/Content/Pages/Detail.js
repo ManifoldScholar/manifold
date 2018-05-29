@@ -124,13 +124,6 @@ class PageDetailContainer extends PureComponent {
         key: "general",
         entity: this.page(props),
         ability: "update"
-      },
-      {
-        path: lh.link("backendContentPageBody", this.id(props)),
-        label: "Body",
-        key: "body",
-        entity: this.page(props),
-        ability: "update"
       }
     ];
   }

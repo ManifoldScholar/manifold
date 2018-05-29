@@ -78,6 +78,8 @@ GEM
     citeproc-ruby (1.1.8)
       citeproc (>= 1.0.4, < 2.0)
       csl (~> 1.4)
+    classy_enum (4.0.0)
+      activerecord (>= 3.2)
     climate_control (0.2.0)
     clockwork (2.0.0)
       activesupport
@@ -467,6 +469,7 @@ DEPENDENCIES
   charlock_holmes (~> 0.7)
   chroma (~> 0.2)
   citeproc-ruby (~> 1.1.0)
+  classy_enum (~> 4.0.0)
   clockwork (~> 2.0.0)
   closure_tree (~> 6.0)
   colorize (~> 0.8.0)

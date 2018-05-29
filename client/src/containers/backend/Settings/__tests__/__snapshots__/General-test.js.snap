@@ -206,29 +206,6 @@ exports[`Backend Settings General Container renders correctly 1`] = `
         />
       </div>
       <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor={undefined}
-        >
-          Terms and Conditions Link URL
-        </label>
-        <span
-          className="instructions"
-        >
-          Enter a full absolute URL or a Manifold page slug.  If present, the registration form will contain a link to the page.
-        </span>
-        <input
-          id={undefined}
-          onChange={[Function]}
-          placeholder="Enter a URL or slug"
-          type="text"
-          value="http://www.dailyrowan.com"
-        />
-      </div>
-      <div
         className="form-input submit"
       >
         <input

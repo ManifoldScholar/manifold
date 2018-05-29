@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180511173451) do
+ActiveRecord::Schema.define(version: 20180525215619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -248,12 +248,13 @@ ActiveRecord::Schema.define(version: 20180511173451) do
     t.string   "slug"
     t.boolean  "hidden",           default: true
     t.text     "body"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.boolean  "is_external_link", default: false
     t.text     "external_link"
     t.boolean  "open_in_new_tab",  default: false
     t.uuid     "creator_id"
+    t.string   "purpose",          default: "supplemental_content"
     t.index ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
   end
 

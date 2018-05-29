@@ -21,8 +21,13 @@
 
 en:
   activerecord:
+    attributes:
     errors:
       models:
+        page:
+          attributes:
+            purpose:
+              in_use: "cannot be assigned to more than one page"
         resource_import:
           attributes:
             url:

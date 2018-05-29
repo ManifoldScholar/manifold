@@ -10,9 +10,7 @@ describe("Backend Collection New Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={build.store()}>
-        <CollectionNewContainer
-          project={project}
-        />
+        <CollectionNewContainer project={project} />
       </Provider>
     )
   );
