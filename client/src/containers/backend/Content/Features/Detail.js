@@ -205,6 +205,9 @@ class FeatureDetailContainer extends PureComponent {
       ? { entity: "feature", ability: "create" }
       : { entity: feature, ability: "update" };
     const previewFeature = this.previewableFeature(this.props);
+
+    if (!authProps.entity) return null;
+
     return (
       <HigherOrder.Authorize
         failureFatalError={{
