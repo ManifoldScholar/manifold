@@ -111,7 +111,7 @@ class CreateContainer extends Component {
               name="attributes[email]"
               errors={errors}
             >
-              <label>Email</label>
+              <label htmlFor="create-email">Email</label>
               <input
                 value={this.state.user.email}
                 type="text"
@@ -128,7 +128,7 @@ class CreateContainer extends Component {
               name={["attributes[firstName]", "attributes[lastName]"]}
               errors={errors}
             >
-              <label>Name</label>
+              <label htmlFor="create-name">Name</label>
               <input
                 value={this.state.user.name}
                 type="text"

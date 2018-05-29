@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import uniqueId from "lodash/uniqueId";
 import setter from "./setter";
 import { Form as GlobalForm } from "components/global";
 import isString from "lodash/isString";
@@ -24,6 +25,10 @@ class FormTextArea extends Component {
     height: 100
   };
 
+  componentDidMount() {
+    this.id = uniqueId("textarea-");
+  }
+
   render() {
     const labelClass = classnames({
       "has-instructions": isString(this.props.instructions)
@@ -37,9 +42,12 @@ class FormTextArea extends Component {
           errors={this.props.errors}
           label={this.props.label}
         >
-          <label className={labelClass}>{this.props.label}</label>
+          <label htmlFor={this.id} className={labelClass}>
+            {this.props.label}
+          </label>
           <Instructions instructions={this.props.instructions} />
           <textarea
+            id={this.id}
             style={{ height: this.props.height }}
             placeholder={this.props.placeholder}
             onChange={this.props.onChange}

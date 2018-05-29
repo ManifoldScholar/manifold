@@ -228,7 +228,9 @@ class FeatureDetailContainer extends PureComponent {
                     {previewFeature ? (
                       <div className="form-secondary">
                         <div className="form-input">
-                          <label>Feature Preview</label>
+                          <h4 className="form-input-heading">
+                            Feature Preview
+                          </h4>
                           <span className="instructions">
                             This is an approximate preview of your feature.
                             Foreground, background, and markdown will not be

@@ -403,8 +403,8 @@
   }
 
   .column-mappable {
-    width: 100%;
     flex-grow: 1;
+    width: 100%;
 
     @include respond($break80) {
       width: calc(100% - 28vw);

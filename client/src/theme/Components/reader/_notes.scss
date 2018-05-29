@@ -65,13 +65,13 @@
       .item {
         display: flex;
         align-items: center;
-        padding: 18px 20px;
-        max-height: 52px;
         justify-content: flex-start;
+        max-height: 52px;
+        padding: 18px 20px;
         color: $neutral90;
         border-bottom: 2px solid $neutral40;
         transition: color $duration $timing,
-        background-color $duration $timing;
+          background-color $duration $timing;
 
         @include respond($break65) {
           padding: 18px 32px;
@@ -86,19 +86,20 @@
 
         i {
           font-size: 8px;
-          transform: rotate(-.25turn);
           transition: transform $duration $timing;
+          transform: rotate(-0.25turn);
         }
 
-        label, span {
+        label, span, .item-label {
           @include utilityPrimary;
           margin-top: -2px;
+          margin-bottom: 0;
           margin-left: 20px;
-          color: inherit;
-          cursor: inherit;
-          text-transform: none;
           font-size: 16px;
+          color: inherit;
+          text-transform: none;
           letter-spacing: 0;
+          cursor: inherit;
 
           @include respond($break50) {
             font-size: 18px;
@@ -106,8 +107,8 @@
         }
 
         &:hover {
-          cursor: pointer;
           color: $neutral75;
+          cursor: pointer;
           background-color: $accentPrimaryLight;
         }
       }
@@ -116,12 +117,12 @@
         overflow: hidden;
 
         .item {
-          padding: 18px 20px 18px 20px;
           justify-content: flex-start;
+          padding: 18px 20px;
           color: $neutral90;
           border-bottom: none;
           transition: color $duration $timing,
-          background-color $duration $timing;
+            background-color $duration $timing;
 
           @include respond($break65) {
             padding: 18px 32px 18px 60px;
@@ -129,8 +130,8 @@
 
           i {
             font-size: 20px;
-            transform: rotate(0);
             color: $neutral50;
+            transform: rotate(0);
 
             @include respond($break50) {
               font-size: 21px;
@@ -180,9 +181,13 @@
       }
 
       .label {
-        color: $neutral70;
+        @include utilityPrimary;
+        display: inline-block;
         padding-right: 18px;
         margin-top: -2px;
+        margin-bottom: 0;
+        font-size: 14px;
+        color: $neutral70;
       }
 
       .checkbox-group {

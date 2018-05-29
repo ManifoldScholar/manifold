@@ -129,7 +129,7 @@ export default class FormHasMany extends PureComponent {
         </header>
       );
     } else {
-      out = <label>{this.props.label}</label>;
+      out = <h4 className="form-input-heading">{this.props.label}</h4>;
     }
     return out;
   }
@@ -183,8 +183,8 @@ export default class FormHasMany extends PureComponent {
                       className="manicon manicon-x"
                     >
                       <span className="screen-reader-text">
-                        Click to remove {this.label(entity, this.props)}
-                        from the {this.props.label} list.
+                        Click to remove {this.label(entity, this.props)} from
+                        the {this.props.label} list.
                       </span>
                     </button>
                   </div>

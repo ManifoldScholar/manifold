@@ -162,11 +162,11 @@ export default class SearchQuery extends PureComponent {
         {this.props.scopes.length > 0 ? (
           <div className="filters">
             {this.props.searchType !== "reader" ? (
-              <label className="group-label">{"Search within:"}</label>
+              <h4 className="group-label">{"Search within:"}</h4>
             ) : null}
             <div className="checkbox-group">
               {this.props.searchType === "reader" ? (
-                <label className="group-label">{"Search within:"}</label>
+                <h4 className="group-label">{"Search within:"}</h4>
               ) : null}
               {this.props.scopes.map(scope => {
                 const filterCheckboxId = uniqueId(scope.value + "-");
@@ -196,7 +196,7 @@ export default class SearchQuery extends PureComponent {
 
         {this.props.facets.length > 0 ? (
           <div className="filters">
-            <label className="group-label">{"Show Results For:"}</label>
+            <h4 className="group-label">{"Show Results For:"}</h4>
             <div className="checkbox-group">
               <label htmlFor="all-filters" key={"all"} className="checkbox">
                 <input

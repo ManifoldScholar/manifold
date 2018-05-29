@@ -28,6 +28,7 @@
       // Important required to override chrome default
       // scss-lint:disable ImportantRule
       -webkit-text-fill-color: $accentPrimaryPale !important;
+      // scss-lint:enable ImportantRule
     }
   }
 
@@ -65,7 +66,7 @@
   .instructions {
     @include templateCopy;
     display: block;
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
     font-size: 15px;
     font-style: italic;
     color: $neutral50;
@@ -85,19 +86,20 @@
   }
 
   .form-input {
-    label:not(.checkbox):not(.radio) {
+    .form-input-heading, .column-heading, label:not(.checkbox):not(.radio) {
       @include formLabelPrimary;
       display: block;
-      margin-bottom: .5em;
+      margin-top: 0;
+      margin-bottom: 0.5em;
       color: $neutral75;
 
       &.below {
-        margin-top: .6em;
+        margin-top: 0.6em;
         margin-bottom: 0;
       }
 
       &.has-instructions {
-        margin-bottom: .5em;
+        margin-bottom: 0.5em;
       }
 
       &.secondary {

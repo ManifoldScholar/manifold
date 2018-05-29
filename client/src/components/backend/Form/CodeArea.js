@@ -21,7 +21,7 @@ const CodeAreaInput = Loadable({
           errors={props.errors}
           label={props.label}
         >
-          <label>{props.label}</label>
+          <h4 className="form-input-heading">{props.label}</h4>
           {isString(props.instructions) ? (
             <span className="instructions">{props.instructions}</span>
           ) : null}

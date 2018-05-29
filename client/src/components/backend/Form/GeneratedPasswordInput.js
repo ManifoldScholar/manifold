@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import uniqueId from "lodash/uniqueId";
 import setter from "./setter";
 import classnames from "classnames";
 import { Form as GlobalForm } from "components/global";
@@ -30,6 +31,7 @@ class FormGeneratedPasswordInput extends Component {
   }
 
   componentDidMount() {
+    this.id = uniqueId("generated-password-");
     if (this.props.focusOnMount === true && this.inputElement)
       this.inputElement.focus();
     this.setValueFromCurrentState();
@@ -71,6 +73,7 @@ class FormGeneratedPasswordInput extends Component {
         ref={input => {
           this.inputElement = input;
         }}
+        id={this.id}
         type={type}
         placeholder={"Enter a password"}
         onChange={event => this.handlePasswordChange(event)}
@@ -93,18 +96,16 @@ class FormGeneratedPasswordInput extends Component {
         errors={this.props.errors}
         label="Password"
       >
-        <label>Password</label>
+        <label htmlFor={this.id}>Password</label>
         <span
           className="password-visibility-toggle"
           onClick={event => this.togglePassword(event)}
           role="button"
         >
           <i className={iconClass} aria-hidden="true" />
-          {this.state.showPassword ? (
-            <span className="screen-reader-text">hide password</span>
-          ) : (
-            <span className="screen-reader-text">show password</span>
-          )}
+          <span className="screen-reader-text">
+            {this.state.showPassword ? "hide password" : "show password"}
+          </span>
         </span>
         {this.renderInput()}
       </GlobalForm.Errorable>

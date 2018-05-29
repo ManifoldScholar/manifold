@@ -75,7 +75,7 @@ export class ContactContainer extends Component {
                 name="attributes[email]"
                 errors={errors}
               >
-                <label>Email</label>
+                <label htmlFor="create-email">Email</label>
                 <input
                   value={this.state.contact.email}
                   type="text"
@@ -92,7 +92,7 @@ export class ContactContainer extends Component {
                 name={"attributes[fullName]"}
                 errors={errors}
               >
-                <label>Name</label>
+                <label htmlFor="create-name">Name</label>
                 <input
                   value={this.state.contact.fullName}
                   type="text"
@@ -109,7 +109,7 @@ export class ContactContainer extends Component {
                 name="attributes[message]"
                 errors={errors}
               >
-                <label>Message</label>
+                <label htmlFor="create-message">Message</label>
                 <textarea
                   value={this.state.contact.message}
                   type="message"

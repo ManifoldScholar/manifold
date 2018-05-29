@@ -27,7 +27,7 @@ export default class ConfirmableButton extends Component {
   renderConfirmation() {
     return (
       <div className="confirmation">
-        <label>{this.props.label}</label>
+        <div className="confirmation-label">{this.props.label}</div>
         <button className="confirm" onClick={this.handleConfirm}>
           Confirm
         </button>
