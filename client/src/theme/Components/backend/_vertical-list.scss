@@ -116,10 +116,10 @@
     // Use .list-item on li if the items don't link
     a {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
       width: 100%;
       padding: 20px 0 17px;
-      flex-direction: column;
       color: $neutral30;
       text-decoration: none;
       transition: color $duration ease-out;
@@ -134,23 +134,15 @@
           border-color: $accentPrimary;
         }
 
-        figure svg .highlight {
+        figure svg, figure svg .highlight {
           fill: $accentPrimary;
         }
 
-        .project-title {
+        .project-title, .subtitle, .project-makers {
           color: $neutral20;
         }
 
-        .subtitle {
-          color: $neutral20;
-        }
-
-        .project-makers {
-          color: $neutral20;
-        }
-
-        .label {
+        .name, .label {
           color: $accentPrimary;
 
           &.secondary {
@@ -203,10 +195,10 @@
       }
 
       .manicon-twitter {
-        font-size: 22px;
         padding-right: 12px;
+        font-size: 22px;
 
-        &:before {
+        &::before {
           vertical-align: bottom;
         }
       }
@@ -236,16 +228,16 @@
     .label {
       @include utilityPrimary;
       display: table-cell;
+      padding-top: 15px;
       font-size: 14px;
       color: $neutral75;
-      padding-top: 15px;
-      vertical-align: top;
       white-space: nowrap;
+      vertical-align: top;
       transition: color $duration $timing;
 
       @include respond($break70) {
-        padding-left: 19px;
         padding-top: 0;
+        padding-left: 19px;
       }
 
       span + span {
