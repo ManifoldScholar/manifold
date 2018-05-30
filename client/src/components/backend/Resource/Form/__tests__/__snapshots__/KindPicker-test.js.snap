@@ -87,11 +87,15 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
         </select>
       </div>
     </div>
-    <ul>
+    <ul
+      role="radiogroup"
+    >
       <li>
         <div
+          aria-checked={true}
           className="button active"
           onClick={[Function]}
+          role="radio"
         >
           <figure>
             <figcaption>
@@ -126,8 +130,10 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
       </li>
       <li>
         <div
+          aria-checked={false}
           className="button"
           onClick={[Function]}
+          role="radio"
         >
           <figure>
             <figcaption>
@@ -157,8 +163,10 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
       </li>
       <li>
         <div
+          aria-checked={false}
           className="button"
           onClick={[Function]}
+          role="radio"
         >
           <figure>
             <figcaption>
@@ -197,8 +205,10 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
       </li>
       <li>
         <div
+          aria-checked={false}
           className="button"
           onClick={[Function]}
+          role="radio"
         >
           <figure>
             <figcaption>
@@ -225,8 +235,10 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
       </li>
       <li>
         <div
+          aria-checked={false}
           className="button"
           onClick={[Function]}
+          role="radio"
         >
           <figure>
             <figcaption>
@@ -262,8 +274,10 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
       </li>
       <li>
         <div
+          aria-checked={false}
           className="button"
           onClick={[Function]}
+          role="radio"
         >
           <figure>
             <figcaption>
@@ -293,8 +307,10 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
       </li>
       <li>
         <div
+          aria-checked={false}
           className="button"
           onClick={[Function]}
+          role="radio"
         >
           <figure>
             <figcaption>
@@ -336,8 +352,10 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
       </li>
       <li>
         <div
+          aria-checked={false}
           className="button"
           onClick={[Function]}
+          role="radio"
         >
           <figure>
             <figcaption>
@@ -364,8 +382,10 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
       </li>
       <li>
         <div
+          aria-checked={false}
           className="button"
           onClick={[Function]}
+          role="radio"
         >
           <figure>
             <figcaption>
@@ -395,8 +415,10 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
       </li>
       <li>
         <div
+          aria-checked={false}
           className="button"
           onClick={[Function]}
+          role="radio"
         >
           <figure>
             <figcaption>

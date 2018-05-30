@@ -103,7 +103,6 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
               >
                 <div
                   className="slide-caption"
-                  onClick={[Function]}
                 >
                   <header>
                     <h2

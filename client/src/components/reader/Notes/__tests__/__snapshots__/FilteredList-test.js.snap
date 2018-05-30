@@ -7,9 +7,13 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
   >
     <h2
       className="drawer-title"
-      onClick={[MockFunction]}
     >
-      Your Notes
+      <div
+        onClick={[MockFunction]}
+        role="button"
+      >
+        Your Notes
+      </div>
     </h2>
     <button
       className="button-primary"
@@ -73,6 +77,7 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
         <div
           className="item"
           onClick={[Function]}
+          role="button"
         >
           <i
             aria-hidden="true"
@@ -81,6 +86,11 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
           <label>
             Test
           </label>
+          <span
+            className="screen-reader-text"
+          >
+            Expand Notes
+          </span>
         </div>
         <ul
           className=""
@@ -89,6 +99,9 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
             className="item"
             onClick={[Function]}
           >
+            <span
+              className="screen-reader-text"
+            />
             <i
               aria-hidden="true"
               className="manicon manicon-null"
@@ -101,6 +114,9 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
             className="item"
             onClick={[Function]}
           >
+            <span
+              className="screen-reader-text"
+            />
             <i
               aria-hidden="true"
               className="manicon manicon-null"

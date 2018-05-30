@@ -90,6 +90,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                   <div
                     className="resource-preview-wrapper"
                     onClick={[Function]}
+                    role="button"
                   >
                     <div
                       className="zoom-indicator"
@@ -120,7 +121,6 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
       >
         <div
           className="slide-caption"
-          onClick={[Function]}
         >
           <header>
             <h2
@@ -411,10 +411,12 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
               <div
                 className="resource-preview-wrapper"
                 onClick={[Function]}
+                role="button"
               >
                 <div
                   className="resource-link"
                   onClick={[Function]}
+                  role="link"
                 >
                   <div
                     className="icon-thumbnail-primary "
@@ -472,6 +474,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
               onClick={[Function]}
               onMouseOut={[Function]}
               onMouseOver={[Function]}
+              role="link"
             >
               <div>
                 <header
@@ -508,7 +511,13 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                 className="resource-tag-list"
                 onClick={[Function]}
                 onMouseOver={[Function]}
+                role="presentation"
               >
+                <span
+                  className="screen-reader-text"
+                >
+                  Tags list
+                </span>
                 <ul>
                   <li>
                     <a

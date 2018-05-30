@@ -66,7 +66,13 @@ exports[`Frontend.Resource.Meta component renders correctly 1`] = `
     className="resource-tag-list"
     onClick={[Function]}
     onMouseOver={[Function]}
+    role="presentation"
   >
+    <span
+      className="screen-reader-text"
+    >
+      Tags list
+    </span>
     <ul>
       <li>
         <a

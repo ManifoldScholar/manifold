@@ -14,6 +14,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
       <div
         className="wrapper"
         onClick={[Function]}
+        role="button"
       >
         <div
           className="button selected"
@@ -92,9 +93,10 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
           <section>
             <ul>
               <li>
-                <a
-                  href="#"
+                <span
+                  className="fake-link"
                   onClick={[Function]}
+                  role="button"
                 >
                   <header>
                     <figure
@@ -159,12 +161,13 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                       </h3>
                     </div>
                   </header>
-                </a>
+                </span>
               </li>
               <li>
-                <a
-                  href="#"
+                <span
+                  className="fake-link"
                   onClick={[Function]}
+                  role="button"
                 >
                   <header>
                     <figure
@@ -229,7 +232,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                       </h3>
                     </div>
                   </header>
-                </a>
+                </span>
               </li>
             </ul>
           </section>

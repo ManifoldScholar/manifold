@@ -53,7 +53,8 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
               className="form-input"
             >
               <label
-                className="above"
+                aria-hidden="true"
+                className="form-input-heading above"
               >
                 Can modify project?
               </label>
@@ -61,16 +62,25 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                 className="toggle-indicator"
               >
                 <div
+                  aria-pressed={false}
                   className="boolean-primary"
                   onClick={[Function]}
-                />
+                  role="button"
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Can modify project?
+                  </span>
+                </div>
               </div>
             </div>
             <div
               className="form-input"
             >
               <label
-                className="above"
+                aria-hidden="true"
+                className="form-input-heading above"
               >
                 Can modify resource metadata?
               </label>
@@ -78,16 +88,25 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                 className="toggle-indicator"
               >
                 <div
+                  aria-pressed={false}
                   className="boolean-primary"
                   onClick={[Function]}
-                />
+                  role="button"
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Can modify resource metadata?
+                  </span>
+                </div>
               </div>
             </div>
             <div
               className="form-input"
             >
               <label
-                className="above"
+                aria-hidden="true"
+                className="form-input-heading above"
               >
                 Is a project author?
               </label>
@@ -95,9 +114,17 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                 className="toggle-indicator"
               >
                 <div
+                  aria-pressed={false}
                   className="boolean-primary"
                   onClick={[Function]}
-                />
+                  role="button"
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Is a project author?
+                  </span>
+                </div>
               </div>
             </div>
           </div>

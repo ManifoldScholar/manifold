@@ -77,7 +77,6 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
       >
         <div
           className="slide-caption"
-          onClick={[Function]}
         >
           <header>
             <h2

@@ -156,9 +156,9 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                   <li>
                                     <ul className=\\"footer-nav\\">
                                       <li>
-                                        <a onClick={[Function]} href=\\"#\\">
+                                        <span className=\\"fake-link\\" role=\\"button\\" onClick={[Function]}>
                                           Log Out
-                                        </a>
+                                        </span>
                                       </li>
                                       <li>
                                         <Link to=\\"/\\" replace={false}>

@@ -112,6 +112,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                 className="utility"
                 data-id="destroy"
                 onClick={[Function]}
+                role="button"
               >
                 <i
                   aria-hidden="true"
@@ -159,6 +160,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                 className="utility"
                 data-id="destroy"
                 onClick={[Function]}
+                role="button"
               >
                 <i
                   aria-hidden="true"

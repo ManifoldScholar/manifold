@@ -13,7 +13,7 @@ exports[`Reader.ControlMenu.VisibilityMenuButton Component renders correctly 1`]
   <span
     className="screen-reader-text"
   >
-    Click to hide or show annotation/resources in the reader
+    Open the visibility menu
   </span>
 </button>
 `;

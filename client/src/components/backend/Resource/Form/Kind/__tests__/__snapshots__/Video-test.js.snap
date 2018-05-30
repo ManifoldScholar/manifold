@@ -8,7 +8,8 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
     className="form-input"
   >
     <label
-      className="above"
+      aria-hidden="true"
+      className="form-input-heading above"
     >
       Is this an externally linked video?
     </label>
@@ -16,9 +17,17 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
       className="toggle-indicator"
     >
       <div
+        aria-pressed={false}
         className="boolean-primary"
         onClick={[Function]}
-      />
+        role="button"
+      >
+        <span
+          className="screen-reader-text"
+        >
+          Is this an externally linked video?
+        </span>
+      </div>
     </div>
   </div>
   <div
@@ -85,7 +94,8 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
     className="form-input"
   >
     <label
-      className="above"
+      aria-hidden="true"
+      className="form-input-heading above"
     >
       Is this an externally linked video?
     </label>
@@ -93,9 +103,17 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
       className="toggle-indicator"
     >
       <div
+        aria-pressed={false}
         className="boolean-primary"
         onClick={[Function]}
-      />
+        role="button"
+      >
+        <span
+          className="screen-reader-text"
+        >
+          Is this an externally linked video?
+        </span>
+      </div>
     </div>
   </div>
   <div

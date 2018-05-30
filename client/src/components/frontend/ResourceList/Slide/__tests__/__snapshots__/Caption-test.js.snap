@@ -3,7 +3,6 @@
 exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
 <div
   className="slide-caption"
-  onClick={[Function]}
 >
   <header>
     <h2

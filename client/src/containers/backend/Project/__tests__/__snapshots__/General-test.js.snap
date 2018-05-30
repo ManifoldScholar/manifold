@@ -89,12 +89,21 @@ exports[`Backend Project General Container renders correctly 1`] = `
             className="toggle-indicator"
           >
             <div
+              aria-pressed={false}
               className="boolean-primary"
               onClick={[Function]}
-            />
+              role="button"
+            >
+              <span
+                className="screen-reader-text"
+              >
+                Draft Mode
+              </span>
+            </div>
           </div>
           <label
-            className="below secondary"
+            aria-hidden="true"
+            className="form-input-heading below secondary"
           >
             Draft Mode
           </label>
@@ -106,12 +115,21 @@ exports[`Backend Project General Container renders correctly 1`] = `
             className="toggle-indicator"
           >
             <div
+              aria-pressed={false}
               className="boolean-primary"
               onClick={[Function]}
-            />
+              role="button"
+            >
+              <span
+                className="screen-reader-text"
+              >
+                Featured
+              </span>
+            </div>
           </div>
           <label
-            className="below secondary"
+            aria-hidden="true"
+            className="form-input-heading below secondary"
           >
             Featured
           </label>

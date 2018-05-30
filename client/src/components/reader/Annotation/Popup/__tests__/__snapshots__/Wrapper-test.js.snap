@@ -5,6 +5,7 @@ exports[`Reader.Annotation.Popup.Wrapper Component renders correctly when not lo
   className="annotation-popup"
   onClick={[Function]}
   onMouseDown={[Function]}
+  role="presentation"
   style={
     Object {
       "bottom": "auto",
