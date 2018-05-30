@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Ingestor::Ingestion do
 
-  describe "When moving inline styles to a style block" do
+  describe "when preprocessing HTML ingestions" do
 
     before(:all) do
       @markup = <<~HEREDOC
@@ -19,11 +19,13 @@ RSpec.describe Ingestor::Ingestion do
           </style>
         </head>
         <body>
+          <h1>Header</h1>
           <p>
             <span class="some-class" style="font-weight: bold">A</span>
             <span style="font-weight: bold">B</span>
             <span style="text-decoration: underline">C</span>
           </p>
+          <h2>Header 2</h2>
         </body>
         </html>
       HEREDOC
@@ -50,11 +52,13 @@ RSpec.describe Ingestor::Ingestion do
         </style>
         </head>
         <body>
+          <h1 id="7bb1d4bc782b85bab1c21794a97a30df">Header</h1>
           <p>
             <span class="some-class extracted-inline-style-1">A</span>
             <span class="extracted-inline-style-1">B</span>
             <span class="extracted-inline-style-2">C</span>
           </p>
+          <h2 id="c58aad67287546f0ffcdb54c1b1f5b0c">Header 2</h2>
         </body>
         </html>
       HEREDOC
@@ -71,7 +75,7 @@ RSpec.describe Ingestor::Ingestion do
       @file.unlink
     end
 
-    it "extracts styles into the head" do
+    it "correctly processes the HTML" do
       ::Ingestor::Preprocessor::HTML.process!(@path)
       expect(File.open(@path).read).to eq @processed
     end
