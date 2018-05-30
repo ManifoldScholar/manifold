@@ -158,7 +158,14 @@ exports[`Backend Collection Resources Container renders correctly 1`] = `
                     <div
                       className="boolean-primary checked"
                       onClick={[Function]}
-                    />
+                      role="button"
+                    >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Remove Image Resource from Collection
+                      </span>
+                    </div>
                   </div>
                 </div>
               </li>
@@ -239,7 +246,14 @@ exports[`Backend Collection Resources Container renders correctly 1`] = `
                     <div
                       className="boolean-primary"
                       onClick={[Function]}
-                    />
+                      role="button"
+                    >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Add Image Resource to Collection
+                      </span>
+                    </div>
                   </div>
                 </div>
               </li>

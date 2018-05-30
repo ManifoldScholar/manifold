@@ -18,6 +18,7 @@ exports[`Frontend.Resource.Hero component renders correctly 1`] = `
           <div
             className="resource-preview-wrapper"
             onClick={[Function]}
+            role="button"
           >
             <div
               className="zoom-indicator"

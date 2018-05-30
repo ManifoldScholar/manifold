@@ -42,6 +42,7 @@ exports[`Event.ListItem component renders correctly 1`] = `
     className="utility"
     data-id="destroy"
     onClick={[Function]}
+    role="button"
   >
     <i
       aria-hidden="true"

@@ -13,7 +13,7 @@ exports[`Reader.ControlMenu.AppearanceMenuButton Component renders correctly 1`]
   <span
     className="screen-reader-text"
   >
-    Click to open reader appearance menu
+    Open reader appearance menu
   </span>
 </button>
 `;

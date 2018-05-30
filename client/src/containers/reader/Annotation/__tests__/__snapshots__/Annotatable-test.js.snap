@@ -17,6 +17,7 @@ exports[`Reader Annotation Annotatable Container renders correctly 1`] = `
     className="annotation-popup"
     onClick={[Function]}
     onMouseDown={[Function]}
+    role="presentation"
     style={
       Object {
         "bottom": "auto",

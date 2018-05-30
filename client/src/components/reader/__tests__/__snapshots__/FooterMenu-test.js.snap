@@ -24,7 +24,7 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Click to hide or show user annotations overlay
+              Open the notes menu
             </span>
           </button>
         </li>
@@ -41,7 +41,7 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Click to hide or show annotation/resources in the reader
+              Open the visibility menu
             </span>
           </button>
         </li>
@@ -58,7 +58,7 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Click to open reader appearance menu
+              Open reader appearance menu
             </span>
           </button>
         </li>

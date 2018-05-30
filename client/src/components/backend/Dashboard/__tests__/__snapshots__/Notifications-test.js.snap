@@ -46,7 +46,7 @@ exports[`Backend.Dashboard.Notification component renders correctly 1`] = `
   </ul>
   <a
     className="button-bare-primary"
-    href="#"
+    href="https://en.wikipedia.org/wiki/Placeholder"
   >
     Notification History
   </a>

@@ -8,6 +8,7 @@ exports[`Frontend.Resource.Preview component renders correctly 1`] = `
   <div
     className="resource-preview-wrapper"
     onClick={[Function]}
+    role="button"
   >
     <div>
       Test Button

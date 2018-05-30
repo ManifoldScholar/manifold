@@ -211,12 +211,13 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                     className="footer-nav"
                   >
                     <li>
-                      <a
-                        href="#"
+                      <span
+                        className="fake-link"
                         onClick={[Function]}
+                        role="button"
                       >
                         Log Out
-                      </a>
+                      </span>
                     </li>
                     <li>
                       <a

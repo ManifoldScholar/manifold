@@ -41,7 +41,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Click to hide or show annotation/resources in the reader
+              Open the visibility menu
             </span>
           </button>
         </li>
@@ -58,7 +58,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Click to open reader appearance menu
+              Open reader appearance menu
             </span>
           </button>
         </li>
@@ -456,7 +456,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
             <span
               className="screen-reader-text"
             >
-              Click to hide or show annotation/resources in the reader
+              Open the visibility menu
             </span>
           </button>
         </li>
@@ -473,7 +473,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
             <span
               className="screen-reader-text"
             >
-              Click to open reader appearance menu
+              Open reader appearance menu
             </span>
           </button>
         </li>

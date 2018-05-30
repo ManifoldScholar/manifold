@@ -2,9 +2,10 @@
 
 exports[`Reader.Notation.Collection.PickerListItem component renders correctly 1`] = `
 <li>
-  <a
-    href="#"
+  <span
+    className="fake-link"
     onClick={[Function]}
+    role="button"
   >
     <header>
       <figure
@@ -66,6 +67,6 @@ exports[`Reader.Notation.Collection.PickerListItem component renders correctly 1
         </h3>
       </div>
     </header>
-  </a>
+  </span>
 </li>
 `;

@@ -6,11 +6,18 @@ exports[`Reader.TextTitles Component renders correctly 1`] = `
   onClick={[Function]}
 >
   <h3
+    className="screen-reader-text"
+  >
+    Rowan: Greatest Dog Chapter 1
+  </h3>
+  <h3
+    aria-hidden="true"
     className="text-title"
   >
     Rowan: Greatest Dog
   </h3>
   <h2
+    aria-hidden="true"
     className="section-title"
   >
     Chapter 1

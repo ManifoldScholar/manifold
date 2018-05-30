@@ -67,6 +67,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   <div
                     className="resource-preview-wrapper"
                     onClick={[Function]}
+                    role="button"
                   >
                     <div
                       className="zoom-indicator"
@@ -197,7 +198,13 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                 className="resource-tag-list"
                 onClick={[Function]}
                 onMouseOver={[Function]}
+                role="presentation"
               >
+                <span
+                  className="screen-reader-text"
+                >
+                  Tags list
+                </span>
                 <ul>
                   <li>
                     <a
@@ -298,7 +305,13 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                 className="resource-tag-list"
                 onClick={[Function]}
                 onMouseOver={[Function]}
+                role="presentation"
               >
+                <span
+                  className="screen-reader-text"
+                >
+                  Tags list
+                </span>
                 <ul>
                   <li>
                     <a

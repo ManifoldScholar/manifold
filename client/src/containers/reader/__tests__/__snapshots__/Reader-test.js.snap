@@ -33,11 +33,18 @@ exports[`Reader Reader Container renders correctly 1`] = `
           onClick={[Function]}
         >
           <h3
+            className="screen-reader-text"
+          >
+            Ain't No Thang Title Page
+          </h3>
+          <h3
+            aria-hidden="true"
             className="text-title"
           >
             Ain't No Thang
           </h3>
           <h2
+            aria-hidden="true"
             className="section-title"
           >
             Title Page
@@ -60,7 +67,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to hide or show annotation/resources in the reader
+                  Open the visibility menu
                 </span>
               </button>
             </li>
@@ -77,7 +84,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to open reader appearance menu
+                  Open reader appearance menu
                 </span>
               </button>
             </li>
@@ -503,7 +510,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
               <span
                 className="screen-reader-text"
               >
-                Click to hide or show user annotations overlay
+                Open the notes menu
               </span>
             </button>
           </li>
@@ -520,7 +527,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
               <span
                 className="screen-reader-text"
               >
-                Click to hide or show annotation/resources in the reader
+                Open the visibility menu
               </span>
             </button>
           </li>
@@ -537,7 +544,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
               <span
                 className="screen-reader-text"
               >
-                Click to open reader appearance menu
+                Open reader appearance menu
               </span>
             </button>
           </li>

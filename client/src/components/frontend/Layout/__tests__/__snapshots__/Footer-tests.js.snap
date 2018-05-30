@@ -53,12 +53,13 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
                   className="footer-nav"
                 >
                   <li>
-                    <a
-                      href="#"
+                    <span
+                      className="fake-link"
                       onClick={[Function]}
+                      role="button"
                     >
                       Log In
-                    </a>
+                    </span>
                   </li>
                   <li>
                     <a
