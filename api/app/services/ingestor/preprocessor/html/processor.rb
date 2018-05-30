@@ -8,6 +8,7 @@ module Ingestor
           File.open(source_path, "r") do |file|
             contents = file.read
             # contents = Noop.new.run(contents)
+            contents = HeaderIds.new.run(contents)
             contents = InlineStyles.new.run(contents)
           end
           File.open(source_path, "w+") do |file|
