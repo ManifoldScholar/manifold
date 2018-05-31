@@ -10,12 +10,14 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       Presentation File
     </label>
     <react-dropzone
       accept="application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint,application/vnd.oasis.opendocument.presentation"
       className="form-dropzone style-square"
+      id={undefined}
       multiple={false}
       onDrop={[Function]}
       style={undefined}

@@ -101,12 +101,14 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
           >
             <label
               className=""
+              htmlFor={undefined}
             >
               Avatar Image
             </label>
             <react-dropzone
               accept="image/*"
               className="form-dropzone style-square"
+              id={undefined}
               multiple={false}
               onDrop={[Function]}
               style={undefined}

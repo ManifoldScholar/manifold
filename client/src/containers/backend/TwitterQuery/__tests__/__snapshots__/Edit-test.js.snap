@@ -87,7 +87,9 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
             className="form-input"
             style={Object {}}
           >
-            <label>
+            <label
+              htmlFor={undefined}
+            >
               Fetch tweets by:
             </label>
             <div
@@ -98,6 +100,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
                 className="manicon manicon-caret-down"
               />
               <select
+                id={undefined}
                 onChange={[Function]}
                 value={undefined}
               >
@@ -118,12 +121,11 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
         <div
           className="form-input"
         >
-          <label
-            aria-hidden="true"
+          <h4
             className="form-input-heading above"
           >
             Active
-          </label>
+          </h4>
           <div
             className="toggle-indicator"
           >

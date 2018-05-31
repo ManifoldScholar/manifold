@@ -4,12 +4,11 @@ exports[`Backend.Form.Switch component renders correctly 1`] = `
 <div
   className="form-input"
 >
-  <label
-    aria-hidden="true"
+  <h4
     className="form-input-heading above"
   >
     Label this
-  </label>
+  </h4>
   <div
     className="toggle-indicator"
   >

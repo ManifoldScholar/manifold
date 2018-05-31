@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
 import { Utility } from "components/global";
 import { HigherOrder } from "containers/global";
 import withCurrentUser from "containers/global/HigherOrder/withCurrentUser";

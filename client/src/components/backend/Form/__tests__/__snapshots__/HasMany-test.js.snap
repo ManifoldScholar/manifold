@@ -5,9 +5,11 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
   className="form-input"
   style={Object {}}
 >
-  <label>
+  <h4
+    className="form-input-heading"
+  >
     makers
-  </label>
+  </h4>
   <nav
     className="has-many-list"
   >
@@ -48,7 +50,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
             >
               Click to remove 
               John
-              from the 
+               from the 
               makers
                list.
             </span>
@@ -91,7 +93,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
             >
               Click to remove 
               Jane
-              from the 
+               from the 
               makers
                list.
             </span>

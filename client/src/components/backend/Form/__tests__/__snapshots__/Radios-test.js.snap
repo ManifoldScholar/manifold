@@ -4,15 +4,25 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
 <div
   className="form-input"
 >
-  <label
-    style={
-      Object {
-        "marginBottom": "1.5em",
+  <div>
+    <span
+      className="screen-reader-text"
+    >
+      Select a 
+      Label this
+    </span>
+    <h4
+      aria-hidden="true"
+      className="form-input-heading"
+      style={
+        Object {
+          "marginBottom": "1.5em",
+        }
       }
-    }
-  >
-    Label this
-  </label>
+    >
+      Label this
+    </h4>
+  </div>
   <label
     className="form-toggle radio"
     htmlFor="1"

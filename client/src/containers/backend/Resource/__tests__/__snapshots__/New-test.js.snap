@@ -89,7 +89,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
               <div
                 className="form-input"
               >
-                <label>
+                <label
+                  htmlFor={undefined}
+                >
                   Kind
                 </label>
                 <div
@@ -103,6 +105,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="manicon manicon-caret-down"
                     />
                     <select
+                      id={undefined}
                       onChange={[Function]}
                       value="image"
                     >
@@ -570,10 +573,12 @@ exports[`Backend Resource New Container renders correctly 1`] = `
               >
                 <label
                   className=""
+                  htmlFor={undefined}
                 >
                   Description
                 </label>
                 <textarea
+                  id={undefined}
                   onChange={[Function]}
                   placeholder="Enter a description"
                   style={
@@ -594,12 +599,14 @@ exports[`Backend Resource New Container renders correctly 1`] = `
               >
                 <label
                   className=""
+                  htmlFor={undefined}
                 >
                   Image File
                 </label>
                 <react-dropzone
                   accept="image/*"
                   className="form-dropzone style-square"
+                  id={undefined}
                   multiple={false}
                   onDrop={[Function]}
                   style={undefined}

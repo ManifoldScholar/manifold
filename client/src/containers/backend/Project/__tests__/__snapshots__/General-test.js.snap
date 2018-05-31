@@ -107,12 +107,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
               </span>
             </div>
           </div>
-          <label
-            aria-hidden="true"
+          <h4
             className="form-input-heading below secondary"
           >
             Draft Mode
-          </label>
+          </h4>
         </div>
         <div
           className="form-input"
@@ -133,12 +132,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
               </span>
             </div>
           </div>
-          <label
-            aria-hidden="true"
+          <h4
             className="form-input-heading below secondary"
           >
             Featured
-          </label>
+          </h4>
         </div>
       </div>
       <div
@@ -156,6 +154,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             Hashtag
           </label>
@@ -247,9 +246,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
         <div
           className="form-input"
         >
-          <label>
+          <h4
+            className="form-input-heading"
+          >
             Publication Date
-          </label>
+          </h4>
           <div
             className="form-date"
           >
@@ -445,9 +446,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <h4
+            className="form-input-heading"
+          >
             Subjects
-          </label>
+          </h4>
           <nav
             className="has-many-list"
           >
@@ -474,7 +477,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                     >
                       Click to remove 
                       Hip Hop
-                      from the 
+                       from the 
                       Subjects
                        list.
                     </span>
@@ -522,11 +525,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
         <div
           className="form-input avatar-builder"
         >
-          <label
-            className="section-header"
+          <h4
+            className="form-input-heading"
           >
             Project Thumbnail
-          </label>
+          </h4>
           <div
             className="grid"
           >
@@ -728,6 +731,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                   <react-dropzone
                     accept="image/*"
                     className="form-dropzone style-embed"
+                    id={undefined}
                     multiple={false}
                     onDrop={[Function]}
                     style={undefined}

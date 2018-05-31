@@ -18,7 +18,9 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
         className="form-input"
         style={Object {}}
       >
-        <label>
+        <label
+          htmlFor="create-email"
+        >
           Email
         </label>
         <input
@@ -38,7 +40,9 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
         className="form-input"
         style={Object {}}
       >
-        <label>
+        <label
+          htmlFor="create-name"
+        >
           Name
         </label>
         <input

@@ -63,12 +63,11 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <label
-              aria-hidden="true"
+            <h4
               className="form-input-heading above"
             >
               Can modify project?
-            </label>
+            </h4>
             <div
               className="toggle-indicator"
             >
@@ -89,12 +88,11 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <label
-              aria-hidden="true"
+            <h4
               className="form-input-heading above"
             >
               Can modify resource metadata?
-            </label>
+            </h4>
             <div
               className="toggle-indicator"
             >
@@ -115,12 +113,11 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <label
-              aria-hidden="true"
+            <h4
               className="form-input-heading above"
             >
               Is a project author?
-            </label>
+            </h4>
             <div
               className="toggle-indicator"
             >

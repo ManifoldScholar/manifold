@@ -56,7 +56,9 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-firstName"
+      >
         First Name
       </label>
       <input
@@ -72,7 +74,9 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-lastName"
+      >
         Last Name
       </label>
       <input
@@ -88,7 +92,9 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-email"
+      >
         Email
       </label>
       <input

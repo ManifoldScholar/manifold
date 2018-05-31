@@ -56,7 +56,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-firstName"
+      >
         First Name
       </label>
       <input
@@ -72,7 +74,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-lastName"
+      >
         Last Name
       </label>
       <input
@@ -88,7 +92,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-email"
+      >
         Email
       </label>
       <input
@@ -213,7 +219,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-firstName"
+      >
         First Name
       </label>
       <input
@@ -229,7 +237,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-lastName"
+      >
         Last Name
       </label>
       <input
@@ -245,7 +255,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-email"
+      >
         Email
       </label>
       <input

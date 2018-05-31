@@ -5,9 +5,11 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
   className="form-input"
   style={Object {}}
 >
-  <label>
+  <h4
+    className="form-input-heading"
+  >
     Subjects
-  </label>
+  </h4>
   <nav
     className="has-many-list"
   >
@@ -34,7 +36,7 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
             >
               Click to remove 
               Hip Hop
-              from the 
+               from the 
               Subjects
                list.
             </span>

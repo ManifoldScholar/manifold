@@ -29,9 +29,11 @@ exports[`Backend Text General Container renders correctly 1`] = `
       <div
         className="form-input"
       >
-        <label>
+        <h4
+          className="form-input-heading"
+        >
           Publication Date
-        </label>
+        </h4>
         <div
           className="form-date"
         >
@@ -245,10 +247,12 @@ exports[`Backend Text General Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             Description
           </label>
           <textarea
+            id={undefined}
             onChange={[Function]}
             placeholder="Enter a Brief Description"
             style={

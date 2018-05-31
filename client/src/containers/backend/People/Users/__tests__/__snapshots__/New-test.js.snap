@@ -42,7 +42,9 @@ exports[`Backend Users New Container renders correctly 1`] = `
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            htmlFor="select-2"
+          >
             Role
           </label>
           <div
@@ -53,6 +55,7 @@ exports[`Backend Users New Container renders correctly 1`] = `
               className="manicon manicon-caret-down"
             />
             <select
+              id="select-2"
               onChange={[Function]}
               value="reader"
             >
@@ -91,12 +94,12 @@ exports[`Backend Users New Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-2"
+          htmlFor="text-input-3"
         >
           First Name
         </label>
         <input
-          id="text-input-2"
+          id="text-input-3"
           onChange={[Function]}
           placeholder="First Name"
           type="text"
@@ -109,12 +112,12 @@ exports[`Backend Users New Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-3"
+          htmlFor="text-input-4"
         >
           Last Name
         </label>
         <input
-          id="text-input-3"
+          id="text-input-4"
           onChange={[Function]}
           placeholder="Last Name"
           type="text"
@@ -125,7 +128,9 @@ exports[`Backend Users New Container renders correctly 1`] = `
         className="form-input password-input"
         style={Object {}}
       >
-        <label>
+        <label
+          htmlFor="generated-password-5"
+        >
           Password
         </label>
         <span
@@ -144,6 +149,7 @@ exports[`Backend Users New Container renders correctly 1`] = `
           </span>
         </span>
         <input
+          id="generated-password-5"
           onChange={[Function]}
           placeholder="Enter a password"
           type="password"

@@ -14,15 +14,25 @@ exports[`Project Text Ingestion Edit Container renders correctly 1`] = `
         <div
           className="form-input"
         >
-          <label
-            style={
-              Object {
-                "marginBottom": "1.5em",
+          <div>
+            <span
+              className="screen-reader-text"
+            >
+              Select a 
+              Text Format
+            </span>
+            <h4
+              aria-hidden="true"
+              className="form-input-heading"
+              style={
+                Object {
+                  "marginBottom": "1.5em",
+                }
               }
-            }
-          >
-            Text Format
-          </label>
+            >
+              Text Format
+            </h4>
+          </div>
           <label
             className="form-toggle radio"
             htmlFor="epub"

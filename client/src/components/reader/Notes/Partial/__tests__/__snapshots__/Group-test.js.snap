@@ -11,14 +11,11 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
       aria-hidden="true"
       className="manicon manicon-caret-down"
     />
-    <label>
-      Test
-    </label>
-    <span
-      className="screen-reader-text"
+    <h4
+      className="item-label"
     >
-      Expand Notes
-    </span>
+      Test
+    </h4>
   </div>
   <ul
     className=""

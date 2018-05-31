@@ -158,12 +158,14 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             Google Service Config File
           </label>
           <react-dropzone
             accept="application/json"
             className="form-dropzone style-square"
+            id={undefined}
             multiple={false}
             onDrop={[Function]}
             style={undefined}
@@ -211,10 +213,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             Google Private Key
           </label>
           <textarea
+            id={undefined}
             onChange={[Function]}
             placeholder={undefined}
             style={
@@ -361,10 +365,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Google Analytics Profile ID
         </label>
         <react-text-mask
+          id={undefined}
           mask={
             Array [
               "g",

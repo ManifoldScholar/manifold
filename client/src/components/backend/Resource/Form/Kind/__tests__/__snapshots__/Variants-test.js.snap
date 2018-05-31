@@ -13,11 +13,13 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
     >
       <label
         className=""
+        htmlFor={undefined}
       >
         Variant
       </label>
       <react-dropzone
         className="form-dropzone style-square"
+        id={undefined}
         multiple={false}
         onDrop={[Function]}
         style={undefined}
@@ -60,11 +62,13 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
     >
       <label
         className=""
+        htmlFor={undefined}
       >
         Variant
       </label>
       <react-dropzone
         className="form-dropzone style-square"
+        id={undefined}
         multiple={false}
         onDrop={[Function]}
         style={undefined}
@@ -114,12 +118,14 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
     >
       <label
         className=""
+        htmlFor={undefined}
       >
         High Resolution Image
       </label>
       <react-dropzone
         accept="image/*"
         className="form-dropzone style-square"
+        id={undefined}
         multiple={false}
         onDrop={[Function]}
         style={undefined}
@@ -167,12 +173,14 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
     >
       <label
         className=""
+        htmlFor={undefined}
       >
         Thumbnail Image
       </label>
       <react-dropzone
         accept="image/*"
         className="form-dropzone style-square"
+        id={undefined}
         multiple={false}
         onDrop={[Function]}
         style={undefined}
@@ -227,12 +235,14 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
     >
       <label
         className=""
+        htmlFor={undefined}
       >
         Thumbnail Image
       </label>
       <react-dropzone
         accept="image/*"
         className="form-dropzone style-square"
+        id={undefined}
         multiple={false}
         onDrop={[Function]}
         style={undefined}
