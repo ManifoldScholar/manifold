@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
 import omitBy from "lodash/omitBy";
+import uniqueId from "lodash/uniqueId";
 
 export default class ResourceListFilters extends Component {
   static displayName = "ResourceList.Filters";
@@ -24,6 +25,10 @@ export default class ResourceListFilters extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState(props.initialFilterState);
+  }
+
+  componentDidMount() {
+    this.searchId = uniqueId("filters-search-");
   }
 
   setFilters = (event, label) => {
@@ -59,9 +64,13 @@ export default class ResourceListFilters extends Component {
             <span className="screen-reader-text">Search</span>
             <i className="manicon manicon-magnify" aria-hidden="true" />
           </button>
+          <label htmlFor={this.searchId} className="screen-reader-text">
+            Enter Search Criteria
+          </label>
           <input
             value={this.state.filters.keyword || ""}
             type="text"
+            id={this.searchId}
             onChange={event => this.setFilters(event, "keyword")}
             placeholder="Search"
           />

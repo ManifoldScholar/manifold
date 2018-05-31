@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import uniqueId from "lodash/uniqueId";
 
 export default class SearchQuery extends PureComponent {
   static displayName = "Search.Query";
@@ -42,6 +43,10 @@ export default class SearchQuery extends PureComponent {
     } else {
       this.state = Object.assign({}, defaultState);
     }
+  }
+
+  componentDidMount() {
+    this.searchId = uniqueId("query-search-");
   }
 
   componentDidUpdate() {
@@ -139,8 +144,12 @@ export default class SearchQuery extends PureComponent {
     return (
       <form className="search-query" onSubmit={this.doSearch}>
         <div className="input-magnify">
+          <label htmlFor={this.searchId} className="screen-reader-text">
+            Enter Search Criteria
+          </label>
           <input
             type="text"
+            id={this.searchId}
             autoFocus
             onChange={this.setKeyword}
             value={this.state.keyword}

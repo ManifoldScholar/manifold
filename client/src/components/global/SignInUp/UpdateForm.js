@@ -173,7 +173,7 @@ class UpdateFormContainer extends Component {
             <h4 className="form-heading">
               Hello, <span className="nickname">{this.displayNickname()}</span>.
             </h4>
-            <p className="overlay-copy">
+            <p className="overlay-copy" id="update-nickname-label">
               Would you like to update your Nickname?
             </p>
           </div>
@@ -189,6 +189,7 @@ class UpdateFormContainer extends Component {
               type="text"
               name="nickname"
               id="update-nickname"
+              aria-labelledby="update-nickname-label"
               onChange={this.handleInputChange}
               placeholder="Nickname"
             />
