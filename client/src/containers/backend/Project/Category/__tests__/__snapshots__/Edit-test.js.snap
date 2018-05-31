@@ -23,10 +23,12 @@ exports[`Backend Project Category Edit Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Title
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="What would you like to call this category?"
           type="text"

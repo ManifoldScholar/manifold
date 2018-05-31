@@ -47,7 +47,14 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
             className="manicon manicon-magnify"
           />
         </button>
+        <label
+          className="screen-reader-text"
+          htmlFor={undefined}
+        >
+          Enter Search Criteria
+        </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Search"
           type="text"

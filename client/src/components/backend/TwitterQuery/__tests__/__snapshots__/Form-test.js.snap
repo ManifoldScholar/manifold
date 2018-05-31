@@ -13,6 +13,7 @@ exports[`Backend.TwitterQuery.Form Component renders correctly 1`] = `
     >
       <label
         className=""
+        htmlFor={undefined}
       >
         Query
       </label>
@@ -30,6 +31,7 @@ exports[`Backend.TwitterQuery.Form Component renders correctly 1`] = `
         .
       </p>
       <input
+        id={undefined}
         onChange={[Function]}
         placeholder="Enter query"
         type="text"

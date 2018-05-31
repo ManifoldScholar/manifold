@@ -125,10 +125,12 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
     >
       <label
         className=""
+        htmlFor={undefined}
       >
         Video ID
       </label>
       <input
+        id={undefined}
         onChange={[Function]}
         placeholder="Video ID"
         type="text"

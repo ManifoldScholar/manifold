@@ -163,6 +163,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
+          htmlFor={undefined}
         >
           Purchase URL
         </label>
@@ -172,6 +173,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           A URL where users can purchase the published edition
         </span>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Enter Purchase URL"
           type="text"
@@ -184,6 +186,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
+          htmlFor={undefined}
         >
           Purchase Call To Action
         </label>
@@ -193,6 +196,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           If set, this text will appear in the buy button on the project page
         </span>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Buy Print Version"
           type="text"
@@ -227,6 +231,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
+          htmlFor={undefined}
         >
           Currency
         </label>
@@ -236,6 +241,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           For example, USD for US Dollars
         </span>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Enter Purchase Price Currency Code"
           type="text"
@@ -248,6 +254,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
+          htmlFor={undefined}
         >
           Twitter Username
         </label>
@@ -257,6 +264,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           If set, a twitter icon linked to the account will appear below the description.
         </span>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Enter Twitter username"
           type="text"
@@ -269,6 +277,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
+          htmlFor={undefined}
         >
           Instagram Username
         </label>
@@ -278,6 +287,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           If set, a instagram icon linked to the account will appear below the description.
         </span>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Enter Instagram username"
           type="text"

@@ -40,10 +40,12 @@ exports[`Backend Settings Subjects Edit Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             Name
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="Name"
             type="text"

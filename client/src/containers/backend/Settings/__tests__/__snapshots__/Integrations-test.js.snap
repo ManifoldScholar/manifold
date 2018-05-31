@@ -25,10 +25,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Facebook App ID
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -41,10 +43,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Facebook App Secret
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="password"
@@ -68,10 +72,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Twitter Consumer Key
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -84,10 +90,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Twitter Consumer Secret
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="password"
@@ -100,10 +108,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Twitter Access Token
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -116,10 +126,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Twitter Access Token Secret
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="password"
@@ -220,10 +232,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Google Project Id
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -236,10 +250,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Google Private Key ID
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -252,10 +268,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Google Client Email
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -268,10 +286,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Google Client ID
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -295,10 +315,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Google OAuth Client ID
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -311,10 +333,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Google Client Secret
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder={undefined}
           type="password"
@@ -370,10 +394,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Google Analytics Tracking ID
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="UA-000000-00"
           type="text"

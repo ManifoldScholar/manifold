@@ -38,6 +38,7 @@ exports[`Global.SignInUp.CreateUpdate component renders correctly 1`] = `
       style={Object {}}
     >
       <input
+        aria-labelledby="update-nickname-label"
         id="update-nickname"
         name="nickname"
         onChange={[Function]}

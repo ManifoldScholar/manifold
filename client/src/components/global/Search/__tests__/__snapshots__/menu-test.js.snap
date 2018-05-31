@@ -20,8 +20,15 @@ exports[`Reader.Search.Menu component renders correctly when search is visible 1
       <div
         className="input-magnify"
       >
+        <label
+          className="screen-reader-text"
+          htmlFor={undefined}
+        >
+          Enter Search Criteria
+        </label>
         <input
           autoFocus={true}
+          id={undefined}
           onChange={[Function]}
           placeholder="Search for..."
           type="text"

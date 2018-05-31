@@ -110,6 +110,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
           className="manicon manicon-plus"
         />
         <input
+          aria-label={undefined}
           className="text-input"
           onBlur={[Function]}
           onChange={[Function]}

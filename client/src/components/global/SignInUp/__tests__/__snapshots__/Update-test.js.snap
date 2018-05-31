@@ -21,6 +21,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
     </h4>
     <p
       className="overlay-copy"
+      id="update-nickname-label"
     >
       Would you like to update your Nickname?
     </p>
@@ -33,6 +34,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
       style={Object {}}
     >
       <input
+        aria-labelledby="update-nickname-label"
         id="update-nickname"
         name="nickname"
         onChange={[Function]}

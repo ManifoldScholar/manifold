@@ -24,10 +24,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             isbn
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="International Standard Book Number"
             type="text"
@@ -40,10 +42,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             issn
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="International Standard Serial Number"
             type="text"
@@ -67,10 +71,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             publisher
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="The Publisher"
             type="text"
@@ -83,6 +89,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
+            htmlFor={undefined}
           >
             publisher place
           </label>
@@ -92,6 +99,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             e.g "Minneapolis, MN"
           </span>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="Geographic location of the publisher"
             type="text"
@@ -104,10 +112,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             original publisher
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="Original publisher, for items that have been republished by a different publisher"
             type="text"
@@ -120,10 +130,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             original publisher place
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="Geographic location of the original publisher"
             type="text"
@@ -147,6 +159,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
+            htmlFor={undefined}
           >
             container title
           </label>
@@ -156,6 +169,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             e.g. the book title for a book chapter, the journal title for a journal article
           </span>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="Title of the container holding the item"
             type="text"
@@ -168,10 +182,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             version
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="Version of the item"
             type="text"
@@ -184,6 +200,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
+            htmlFor={undefined}
           >
             edition
           </label>
@@ -193,6 +210,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             e.g. "3" when citing a chapter in the third edition of a book
           </span>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="(Container) edition holding the item"
             type="text"
@@ -205,6 +223,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
+            htmlFor={undefined}
           >
             issue
           </label>
@@ -214,6 +233,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             e.g. "5" when citing a journal article from journal volume 2, issue 5
           </span>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="(Container) issue holding the item"
             type="text"
@@ -226,6 +246,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
+            htmlFor={undefined}
           >
             volume
           </label>
@@ -235,6 +256,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             e.g. “2” when citing a chapter from book volume 2
           </span>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="(Container) volume holding the item "
             type="text"
@@ -247,10 +269,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             original title
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder="Title of the original version"
             type="text"
@@ -274,10 +298,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             abstract
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -290,10 +316,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             archive
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -306,10 +334,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             archive location
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -322,10 +352,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             archive place
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -338,10 +370,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             authority
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -354,10 +388,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             call number
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -370,10 +406,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             chapter number
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -386,10 +424,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             collection number
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -402,10 +442,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             collection title
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -418,10 +460,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             dimensions
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -434,10 +478,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             event
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -450,10 +496,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             event place
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -466,10 +514,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             jurisdiction
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -482,10 +532,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             medium
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -498,10 +550,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             number
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -514,10 +568,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             number of pages
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -530,10 +586,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             number of volumes
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -546,10 +604,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             pmcid
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -562,10 +622,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             pmid
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -578,10 +640,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             reviewed title
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -594,10 +658,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             section
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -610,10 +676,12 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             year suffix
           </label>
           <input
+            id={undefined}
             onChange={[Function]}
             placeholder={null}
             type="text"

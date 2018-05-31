@@ -23,10 +23,12 @@ exports[`Backend Users New Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor="text-input-1"
         >
           Email
         </label>
         <input
+          id="text-input-1"
           onChange={[Function]}
           placeholder="Email"
           type="text"
@@ -89,10 +91,12 @@ exports[`Backend Users New Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor="text-input-2"
         >
           First Name
         </label>
         <input
+          id="text-input-2"
           onChange={[Function]}
           placeholder="First Name"
           type="text"
@@ -105,10 +109,12 @@ exports[`Backend Users New Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor="text-input-3"
         >
           Last Name
         </label>
         <input
+          id="text-input-3"
           onChange={[Function]}
           placeholder="Last Name"
           type="text"

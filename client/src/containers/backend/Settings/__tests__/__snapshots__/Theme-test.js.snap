@@ -72,6 +72,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
+          htmlFor={undefined}
         >
           Press Website URL
         </label>
@@ -81,6 +82,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           If present, the press logo image will link to this URL.
         </span>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Enter URL"
           type="text"
@@ -93,6 +95,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
+          htmlFor={undefined}
         >
           Logo Styles
         </label>
@@ -102,6 +105,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           Enter a JSON style object, which will be applied to the logo image. For example: {"left": -1}
         </span>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Additional Logo CSS"
           type="text"
@@ -114,10 +118,12 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Typekit ID
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Enter Typekit ID"
           type="text"

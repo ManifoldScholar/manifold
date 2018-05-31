@@ -23,7 +23,14 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
             <div
               className="search-button-inline"
             >
+              <label
+                className="screen-reader-text"
+                htmlFor="footer-search"
+              >
+                Site Search
+              </label>
               <input
+                id="footer-search"
                 onChange={[Function]}
                 placeholder="Search"
                 type="text"

@@ -21,6 +21,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
     </h4>
     <p
       className="overlay-copy"
+      id="update-nickname-label"
     >
       Would you like to update your Nickname?
     </p>
@@ -33,6 +34,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
       style={Object {}}
     >
       <input
+        aria-labelledby="update-nickname-label"
         id="update-nickname"
         name="nickname"
         onChange={[Function]}
@@ -185,6 +187,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
       style={Object {}}
     >
       <input
+        aria-labelledby="update-nickname-label"
         id="update-nickname"
         name="nickname"
         onChange={[Function]}

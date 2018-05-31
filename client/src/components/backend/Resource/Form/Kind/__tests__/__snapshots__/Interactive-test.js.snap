@@ -10,10 +10,12 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       Minimum Width
     </label>
     <input
+      id={undefined}
       onChange={[Function]}
       placeholder="The minimum display width"
       type="text"
@@ -26,10 +28,12 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       Minimum Height
     </label>
     <input
+      id={undefined}
       onChange={[Function]}
       placeholder="The minimum display height"
       type="text"
@@ -42,10 +46,12 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       iFrame URL
     </label>
     <input
+      id={undefined}
       onChange={[Function]}
       placeholder="Enter iFrame URL"
       type="text"
@@ -65,10 +71,12 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       Minimum Width
     </label>
     <input
+      id={undefined}
       onChange={[Function]}
       placeholder="The minimum display width"
       type="text"
@@ -81,10 +89,12 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       Minimum Height
     </label>
     <input
+      id={undefined}
       onChange={[Function]}
       placeholder="The minimum display height"
       type="text"
@@ -97,10 +107,12 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       iFrame URL
     </label>
     <input
+      id={undefined}
       onChange={[Function]}
       placeholder="Enter iFrame URL"
       type="text"
