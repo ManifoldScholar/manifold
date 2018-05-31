@@ -34,7 +34,14 @@ exports[`Backend People Users List Container renders correctly 1`] = `
             Click to search
           </span>
         </button>
+        <label
+          className="screen-reader-text"
+          htmlFor={undefined}
+        >
+          Enter Search Criteria
+        </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Search..."
           type="text"

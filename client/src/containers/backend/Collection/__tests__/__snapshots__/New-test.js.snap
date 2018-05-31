@@ -89,10 +89,12 @@ exports[`Backend Collection New Container renders correctly 1`] = `
             >
               <label
                 className=""
+                htmlFor={undefined}
               >
                 Title
               </label>
               <input
+                id={undefined}
                 onChange={[Function]}
                 placeholder="Enter a title"
                 type="text"

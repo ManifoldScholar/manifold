@@ -10,10 +10,12 @@ exports[`Backend.Resource.Form.Link component renders correctly 1`] = `
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       Link URL
     </label>
     <input
+      id={undefined}
       onChange={[Function]}
       placeholder="Enter link URL"
       type="text"

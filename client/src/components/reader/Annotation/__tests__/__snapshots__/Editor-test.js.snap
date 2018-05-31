@@ -11,7 +11,14 @@ exports[`Reader.Annotation.Editor component renders correctly 1`] = `
       className=""
       style={Object {}}
     >
+      <label
+        className="screen-reader-text"
+        htmlFor="annotation-textarea"
+      >
+        Annotate this passage
+      </label>
       <textarea
+        id="annotation-textarea"
         onChange={[Function]}
         placeholder="Annotate this passage..."
         style={

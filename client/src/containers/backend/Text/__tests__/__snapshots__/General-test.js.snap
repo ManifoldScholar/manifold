@@ -14,10 +14,12 @@ exports[`Backend Text General Container renders correctly 1`] = `
       >
         <label
           className=""
+          htmlFor={undefined}
         >
           Title
         </label>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Enter Text Title"
           type="text"
@@ -264,6 +266,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
+          htmlFor={undefined}
         >
           Section Label
         </label>
@@ -273,6 +276,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
           For example, “chapter” for books or “article” for journals
         </span>
         <input
+          id={undefined}
           onChange={[Function]}
           placeholder="Enter a label for sections in this text"
           type="text"

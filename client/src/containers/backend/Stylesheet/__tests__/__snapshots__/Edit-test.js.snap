@@ -38,11 +38,11 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                                         <Form.TextInput label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false} join={[Function: join]}>
                                           <Errorable className=\\"form-input\\" name=\\"attributes[name]\\" errors={{...}} label=\\"Name\\" containerStyle={{...}}>
                                             <div style={{...}} className=\\"form-input\\">
-                                              <label className=\\"\\">
+                                              <label htmlFor={[undefined]} className=\\"\\">
                                                 Name
                                               </label>
                                               <Instructions instructions={{...}} />
-                                              <input type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" />
+                                              <input id={[undefined]} type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" />
                                             </div>
                                           </Errorable>
                                         </Form.TextInput>

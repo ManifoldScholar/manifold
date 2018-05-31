@@ -141,7 +141,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                             <div className=\\"right\\">
                               <form className=\\"search-form\\" onSubmit={[Function]}>
                                 <div className=\\"search-button-inline\\">
-                                  <input type=\\"text\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
+                                  <label htmlFor=\\"footer-search\\" className=\\"screen-reader-text\\">
+                                    Site Search
+                                  </label>
+                                  <input type=\\"text\\" id=\\"footer-search\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
                                   <button className=\\"manicon manicon-magnify\\">
                                     <span className=\\"screen-reader-text\\">
                                       Click to submit search query

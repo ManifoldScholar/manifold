@@ -11,8 +11,15 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
       className=""
       style={Object {}}
     >
+      <label
+        className="screen-reader-text"
+        htmlFor={undefined}
+      >
+        Edit this comment...
+      </label>
       <textarea
         className="expanded"
+        id={undefined}
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="Edit this comment..."

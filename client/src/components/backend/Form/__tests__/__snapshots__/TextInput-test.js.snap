@@ -7,10 +7,12 @@ exports[`Backend.Form.TextInput component renders correctly 1`] = `
 >
   <label
     className=""
+    htmlFor={undefined}
   >
     A form label
   </label>
   <input
+    id={undefined}
     onChange={[Function]}
     placeholder={undefined}
     type="text"

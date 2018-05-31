@@ -10,10 +10,12 @@ exports[`Backend Settings Placeholder Container renders correctly 1`] = `
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       A All temporary stuff setting
     </label>
     <input
+      id={undefined}
       onChange={[Function]}
       placeholder="Some setting could go here"
       type="text"
@@ -26,10 +28,12 @@ exports[`Backend Settings Placeholder Container renders correctly 1`] = `
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       Another All temporary stuff setting
     </label>
     <input
+      id={undefined}
       onChange={[Function]}
       placeholder="Some other setting could go here"
       type="text"

@@ -36,6 +36,7 @@ exports[`Backend Permission New Container renders correctly 1`] = `
                   className="manicon manicon-plus"
                 />
                 <input
+                  aria-label="Select User"
                   className="text-input"
                   onBlur={[Function]}
                   onChange={[Function]}
