@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import update from "immutability-helper";
 import debounce from "lodash/debounce";
+import uniqueId from "lodash/uniqueId";
 import classNames from "classnames";
 import { ApiClient } from "api";
 
@@ -40,6 +41,10 @@ class PredictiveInput extends PureComponent {
       options: [],
       highlighted: false
     };
+  }
+
+  componentDidMount() {
+    this.id = uniqueId("predictive-input-");
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -234,6 +239,7 @@ class PredictiveInput extends PureComponent {
             onChange={this.handleChange}
             value={this.state.value}
             placeholder={this.props.placeholder}
+            aria-label={this.props.placeholder}
             onBlur={this.handleBlur}
             onFocus={this.handleFocus}
             onKeyPress={this.handleKeyPress}

@@ -8,6 +8,7 @@ import { singularEntityName } from "utils/entityUtils";
 import { bindActionCreators } from "redux";
 import { commentsAPI } from "api";
 import { HigherOrder } from "containers/global";
+import uniqueId from "lodash/uniqueId";
 
 const { request } = entityStoreActions;
 import { Form as GlobalForm } from "components/global";
@@ -43,6 +44,8 @@ export class CommentEditor extends PureComponent {
   }
 
   componentDidMount() {
+    this.id = uniqueId("cooment-textarea-");
+
     if (!this.ci) return null;
     if (this.props.focus) {
       this.ci.focus();
@@ -179,10 +182,14 @@ export class CommentEditor extends PureComponent {
               name="attributes[body]"
               errors={this.state.errors}
             >
+              <label htmlFor={this.id} className="screen-reader-text">
+                {this.placeholder(this.props)}
+              </label>
               <textarea
                 ref={ci => {
                   this.ci = ci;
                 }}
+                id={this.id}
                 onKeyDown={this.submitOnReturnKey}
                 className={textClass}
                 placeholder={this.placeholder(this.props)}

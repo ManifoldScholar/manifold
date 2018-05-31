@@ -4,6 +4,7 @@ import setter from "./setter";
 import { Form as GlobalForm } from "components/global";
 import classnames from "classnames";
 import isString from "lodash/isString";
+import uniqueId from "lodash/uniqueId";
 import Instructions from "./Instructions";
 
 class FormTextInput extends Component {
@@ -30,6 +31,8 @@ class FormTextInput extends Component {
   };
 
   componentDidMount() {
+    this.id = uniqueId("text-input-");
+
     if (this.props.focusOnMount === true && this.inputElement)
       this.inputElement.focus();
   }
@@ -53,12 +56,15 @@ class FormTextInput extends Component {
         errors={this.props.errors}
         label={this.props.label}
       >
-        <label className={labelClass}>{this.props.label}</label>
+        <label htmlFor={this.id} className={labelClass}>
+          {this.props.label}
+        </label>
         <Instructions instructions={this.props.instructions} />
         <input
           ref={input => {
             this.inputElement = input;
           }}
+          id={this.id}
           type={inputType}
           placeholder={this.props.placeholder}
           onChange={this.props.onChange}

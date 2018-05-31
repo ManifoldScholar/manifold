@@ -186,8 +186,12 @@ class LayoutFooter extends Component {
     return (
       <form className="search-form" onSubmit={this.doSearch}>
         <div className="search-button-inline">
+          <label htmlFor="footer-search" className="screen-reader-text">
+            Site Search
+          </label>
           <input
             type="text"
+            id="footer-search"
             placeholder="Search"
             value={this.state.keyword}
             onChange={this.updateSearchWord}

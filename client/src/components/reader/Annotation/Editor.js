@@ -106,10 +106,14 @@ export default class AnnotationSelectionEditor extends PureComponent {
             name="attributes[body]"
             errors={this.state.errors}
           >
+            <label htmlFor="annotation-textarea" className="screen-reader-text">
+              Annotate this passage
+            </label>
             <textarea
               ref={ci => {
                 this.ci = ci;
               }}
+              id="annotation-textarea"
               style={{ width: "100%" }}
               placeholder={"Annotate this passage..."}
               onChange={this.handleBodyChange}

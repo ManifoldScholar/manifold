@@ -7,8 +7,9 @@ import { List } from "components/backend";
 import { Link } from "react-router-dom";
 import Authorization from "helpers/authorization";
 import get from "lodash/get";
-import classnames from "classnames";
+import uniqueId from "lodash/uniqueId";
 import omitBy from "lodash/omitBy";
+import classnames from "classnames";
 
 export class ListSearchable extends PureComponent {
   static mapStateToProps = state => ({
@@ -66,6 +67,10 @@ export class ListSearchable extends PureComponent {
     super(props);
     this.state = this.initialState(props);
     this.authorization = new Authorization();
+  }
+
+  componentDidMount() {
+    this.searchId = uniqueId("list-search-");
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -307,7 +312,11 @@ export class ListSearchable extends PureComponent {
               <i className="manicon manicon-magnify" aria-hidden="true" />
               <span className="screen-reader-text">Click to search</span>
             </button>
+            <label htmlFor={this.searchId} className="screen-reader-text">
+              Enter Search Criteria
+            </label>
             <input
+              id={this.searchId}
               value={this.state.filter.keyword || ""}
               type="text"
               placeholder="Search..."
