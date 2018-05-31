@@ -29,7 +29,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-9"
+          htmlFor="text-input-11"
         >
           Email from address
         </label>
@@ -37,52 +37,6 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
           className="instructions"
         >
           All emails sent by manifold will be from this address.
-        </span>
-        <input
-          id="text-input-9"
-          onChange={[Function]}
-          placeholder="do-not-reply@manifoldapp.org"
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor="text-input-10"
-        >
-          Email from name
-        </label>
-        <span
-          className="instructions"
-        >
-          All emails sent by manifold will appear to be sent by this name.
-        </span>
-        <input
-          id="text-input-10"
-          onChange={[Function]}
-          placeholder="Manifold Scholarship"
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor="text-input-11"
-        >
-          Email reply-to address
-        </label>
-        <span
-          className="instructions"
-        >
-          Replies to emails sent by Manifold will go to this address.
         </span>
         <input
           id="text-input-11"
@@ -100,6 +54,52 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
           className="has-instructions"
           htmlFor="text-input-12"
         >
+          Email from name
+        </label>
+        <span
+          className="instructions"
+        >
+          All emails sent by manifold will appear to be sent by this name.
+        </span>
+        <input
+          id="text-input-12"
+          onChange={[Function]}
+          placeholder="Manifold Scholarship"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+          htmlFor="text-input-13"
+        >
+          Email reply-to address
+        </label>
+        <span
+          className="instructions"
+        >
+          Replies to emails sent by Manifold will go to this address.
+        </span>
+        <input
+          id="text-input-13"
+          onChange={[Function]}
+          placeholder="do-not-reply@manifoldapp.org"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+          htmlFor="text-input-14"
+        >
           Email reply-to name
         </label>
         <span
@@ -108,7 +108,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
           Replies to emails sent by Manifold will appear to be sent by this name.
         </span>
         <input
-          id="text-input-12"
+          id="text-input-14"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -124,6 +124,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
         >
           <label
             className="has-instructions"
+            htmlFor="textarea-15"
           >
             Email closing
           </label>
@@ -133,6 +134,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
             How do you want to close emails sent by Manifold?
           </span>
           <textarea
+            id="textarea-15"
             onChange={[Function]}
             placeholder="Sincerely,
 The Manifold Team"
@@ -152,7 +154,9 @@ The Manifold Team"
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            htmlFor="select-16"
+          >
             Email Delivery Method
           </label>
           <div
@@ -163,6 +167,7 @@ The Manifold Team"
               className="manicon manicon-caret-down"
             />
             <select
+              id="select-16"
               onChange={[Function]}
               value={undefined}
             >
@@ -194,7 +199,7 @@ The Manifold Team"
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-13"
+            htmlFor="text-input-17"
           >
             Sendmail Location
           </label>
@@ -204,7 +209,7 @@ The Manifold Team"
             The location of the sendmail executable. Defaults to /usr/sbin/sendmail.
           </span>
           <input
-            id="text-input-13"
+            id="text-input-17"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -217,7 +222,7 @@ The Manifold Team"
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-14"
+            htmlFor="text-input-18"
           >
             Sendmail Arguments
           </label>
@@ -227,7 +232,7 @@ The Manifold Team"
             The command line arguments. Defaults to -i with -f sender@address added automatically before the message is sent.
           </span>
           <input
-            id="text-input-14"
+            id="text-input-18"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -373,6 +378,7 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
         >
           <label
             className="has-instructions"
+            htmlFor="textarea-5"
           >
             Email closing
           </label>
@@ -382,6 +388,7 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
             How do you want to close emails sent by Manifold?
           </span>
           <textarea
+            id="textarea-5"
             onChange={[Function]}
             placeholder="Sincerely,
 The Manifold Team"
@@ -401,7 +408,9 @@ The Manifold Team"
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            htmlFor="select-6"
+          >
             Email Delivery Method
           </label>
           <div
@@ -412,6 +421,7 @@ The Manifold Team"
               className="manicon manicon-caret-down"
             />
             <select
+              id="select-6"
               onChange={[Function]}
               value={undefined}
             >
@@ -443,7 +453,7 @@ The Manifold Team"
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-5"
+            htmlFor="text-input-7"
           >
             SMTP Address
           </label>
@@ -451,52 +461,6 @@ The Manifold Team"
             className="instructions"
           >
             Allows you to use a remote mail server.
-          </span>
-          <input
-            id="text-input-5"
-            onChange={[Function]}
-            placeholder={undefined}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className="has-instructions"
-            htmlFor="text-input-6"
-          >
-            SMTP Port
-          </label>
-          <span
-            className="instructions"
-          >
-            On the off chance that your mail server doesn't run on port 25, you can change it.
-          </span>
-          <input
-            id="text-input-6"
-            onChange={[Function]}
-            placeholder={undefined}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className="has-instructions"
-            htmlFor="text-input-7"
-          >
-            SMTP Username
-          </label>
-          <span
-            className="instructions"
-          >
-            If your mail server requires authentication, set the username in this setting.
           </span>
           <input
             id="text-input-7"
@@ -514,6 +478,52 @@ The Manifold Team"
             className="has-instructions"
             htmlFor="text-input-8"
           >
+            SMTP Port
+          </label>
+          <span
+            className="instructions"
+          >
+            On the off chance that your mail server doesn't run on port 25, you can change it.
+          </span>
+          <input
+            id="text-input-8"
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+            htmlFor="text-input-9"
+          >
+            SMTP Username
+          </label>
+          <span
+            className="instructions"
+          >
+            If your mail server requires authentication, set the username in this setting.
+          </span>
+          <input
+            id="text-input-9"
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+            htmlFor="text-input-10"
+          >
             SMTP Password
           </label>
           <span
@@ -522,7 +532,7 @@ The Manifold Team"
             If your mail server requires authentication, set the password in this setting.
           </span>
           <input
-            id="text-input-8"
+            id="text-input-10"
             onChange={[Function]}
             placeholder={undefined}
             type="password"

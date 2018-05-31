@@ -4,11 +4,11 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
 <nav
   className="filters"
 >
-  <label
+  <h4
     className="label"
   >
     Show your:
-  </label>
+  </h4>
   <div
     className="checkbox-group"
   >

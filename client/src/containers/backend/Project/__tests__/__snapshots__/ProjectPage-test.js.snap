@@ -17,6 +17,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
+            htmlFor={undefined}
           >
             Description
           </label>
@@ -26,6 +27,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             Enter a brief description of your project. This field accepts basic Markdown.
           </span>
           <textarea
+            id={undefined}
             onChange={[Function]}
             placeholder={undefined}
             style={
@@ -46,6 +48,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             Hero Image
           </label>
@@ -61,6 +64,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           <react-dropzone
             accept="image/*"
             className="form-dropzone style-landscape"
+            id={undefined}
             multiple={false}
             onDrop={[Function]}
             style={undefined}
@@ -108,6 +112,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
+            htmlFor={undefined}
           >
             Cover
           </label>
@@ -119,6 +124,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           <react-dropzone
             accept="image/*"
             className="form-dropzone style-portrait"
+            id={undefined}
             multiple={false}
             onDrop={[Function]}
             style={undefined}
@@ -208,6 +214,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
+          htmlFor={undefined}
         >
           Purchase Price
         </label>
@@ -217,6 +224,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           The cost of the published edition
         </span>
         <react-text-mask
+          id={undefined}
           mask={[Function]}
           onChange={[Function]}
           placeholder={undefined}
@@ -297,12 +305,11 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       <div
         className="form-input"
       >
-        <label
-          aria-hidden="true"
+        <h4
           className="form-input-heading above"
         >
           Hide Project Activity
-        </label>
+        </h4>
         <div
           className="toggle-indicator"
         >

@@ -10,11 +10,13 @@ exports[`Backend.Resource.Form.File component renders correctly 1`] = `
   >
     <label
       className=""
+      htmlFor={undefined}
     >
       File
     </label>
     <react-dropzone
       className="form-dropzone style-square"
+      id={undefined}
       multiple={false}
       onDrop={[Function]}
       style={undefined}

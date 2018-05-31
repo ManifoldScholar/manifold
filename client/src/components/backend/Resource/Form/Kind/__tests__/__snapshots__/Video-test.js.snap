@@ -7,12 +7,11 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
   <div
     className="form-input"
   >
-    <label
-      aria-hidden="true"
+    <h4
       className="form-input-heading above"
     >
       Is this an externally linked video?
-    </label>
+    </h4>
     <div
       className="toggle-indicator"
     >
@@ -39,12 +38,14 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
     >
       <label
         className=""
+        htmlFor={undefined}
       >
         Video File
       </label>
       <react-dropzone
         accept="video/*"
         className="form-dropzone style-square"
+        id={undefined}
         multiple={false}
         onDrop={[Function]}
         style={undefined}
@@ -93,12 +94,11 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
   <div
     className="form-input"
   >
-    <label
-      aria-hidden="true"
+    <h4
       className="form-input-heading above"
     >
       Is this an externally linked video?
-    </label>
+    </h4>
     <div
       className="toggle-indicator"
     >
@@ -144,7 +144,9 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
         className="form-input"
         style={Object {}}
       >
-        <label>
+        <label
+          htmlFor={undefined}
+        >
           External Video Type
         </label>
         <div
@@ -155,6 +157,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
             className="manicon manicon-caret-down"
           />
           <select
+            id={undefined}
             onChange={[Function]}
             value={undefined}
           >

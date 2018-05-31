@@ -35,10 +35,12 @@ exports[`Backend Collection General Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             Description
           </label>
           <textarea
+            id={undefined}
             onChange={[Function]}
             placeholder="Enter a description"
             style={
@@ -59,12 +61,14 @@ exports[`Backend Collection General Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor={undefined}
           >
             Cover Image
           </label>
           <react-dropzone
             accept="image/*"
             className="form-dropzone style-landscape"
+            id={undefined}
             multiple={false}
             onDrop={[Function]}
             style={undefined}

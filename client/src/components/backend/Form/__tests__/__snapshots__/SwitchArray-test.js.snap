@@ -18,12 +18,11 @@ exports[`Backend.Form.SwitchArray component renders correctly 1`] = `
     <div
       className="form-input"
     >
-      <label
-        aria-hidden="true"
+      <h4
         className="form-input-heading above"
       >
         Option one
-      </label>
+      </h4>
       <div
         className="toggle-indicator"
       >
@@ -44,12 +43,11 @@ exports[`Backend.Form.SwitchArray component renders correctly 1`] = `
     <div
       className="form-input"
     >
-      <label
-        aria-hidden="true"
+      <h4
         className="form-input-heading above"
       >
         Option two
-      </label>
+      </h4>
       <div
         className="toggle-indicator"
       >

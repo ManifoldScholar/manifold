@@ -1,4 +1,3 @@
-import uniqueId from "lodash/uniqueId";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";

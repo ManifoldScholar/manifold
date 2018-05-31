@@ -10,9 +10,11 @@ exports[`Backend Project Collaborators Container renders correctly 1`] = `
         className="form-input"
         style={Object {}}
       >
-        <label>
+        <h4
+          className="form-input-heading"
+        >
           Authors
-        </label>
+        </h4>
         <nav
           className="has-many-list"
         >
@@ -63,7 +65,7 @@ exports[`Backend Project Collaborators Container renders correctly 1`] = `
                   >
                     Click to remove 
                     Rowan Ida
-                    from the 
+                     from the 
                     Authors
                      list.
                   </span>
@@ -112,9 +114,11 @@ exports[`Backend Project Collaborators Container renders correctly 1`] = `
         className="form-input"
         style={Object {}}
       >
-        <label>
+        <h4
+          className="form-input-heading"
+        >
           Contributors
-        </label>
+        </h4>
         <nav
           className="has-many-list"
         >
@@ -165,7 +169,7 @@ exports[`Backend Project Collaborators Container renders correctly 1`] = `
                   >
                     Click to remove 
                     Rowan Ida
-                    from the 
+                     from the 
                     Contributors
                      list.
                   </span>

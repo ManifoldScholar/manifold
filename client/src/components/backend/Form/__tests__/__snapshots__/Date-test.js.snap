@@ -4,9 +4,11 @@ exports[`Backend.Form.Date component renders correctly 1`] = `
 <div
   className="form-input"
 >
-  <label>
+  <h4
+    className="form-input-heading"
+  >
     Some date
-  </label>
+  </h4>
   <div
     className="form-date"
   >

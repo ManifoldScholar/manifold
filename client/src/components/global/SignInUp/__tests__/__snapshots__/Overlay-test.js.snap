@@ -55,7 +55,9 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
               <div
                 className="form-input form-error"
               >
-                <label>
+                <label
+                  htmlFor="login-email"
+                >
                   Email
                 </label>
                 <input

@@ -20,10 +20,13 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
           <div
             className="form-input form-error"
           >
-            <label>
+            <label
+              htmlFor="text-1"
+            >
               Text Entry Field
             </label>
             <input
+              id="text-1"
               placeholder="Text Entry Field"
               type="text"
             />
@@ -44,10 +47,13 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <label>
+            <label
+              htmlFor="text-2"
+            >
               Text Entry Field
             </label>
             <input
+              id="text-2"
               placeholder="Text Entry Field"
               type="text"
             />
@@ -59,7 +65,9 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <label>
+            <label
+              htmlFor="select-1"
+            >
                
             </label>
             <div
@@ -69,7 +77,9 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 aria-hidden="true"
                 className="manicon manicon-caret-down"
               />
-              <select>
+              <select
+                id="select-1"
+              >
                 <option>
                   Select Dropdown
                 </option>
@@ -93,10 +103,13 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <label>
+            <label
+              htmlFor="textarea-1"
+            >
               Editable text field
             </label>
             <textarea
+              id="textarea-1"
               placeholder="Start typing annotation here..."
             />
           </div>
@@ -164,9 +177,11 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <label>
+            <h4
+              className="form-input-heading"
+            >
               Checkboxes Vertical
-            </label>
+            </h4>
             <label
               className="form-toggle checkbox"
             >
@@ -231,9 +246,11 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <label>
+            <h4
+              className="form-input-heading"
+            >
               Radios Vertical
-            </label>
+            </h4>
             <label
               className="form-toggle radio"
             >
@@ -297,9 +314,11 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <label>
+            <h4
+              className="form-input-heading"
+            >
               Checkboxes Horizontal
-            </label>
+            </h4>
             <label
               className="form-toggle checkbox horizontal"
             >
@@ -364,9 +383,11 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <label>
+            <h4
+              className="form-input-heading"
+            >
               Checkboxes Horizontal
-            </label>
+            </h4>
             <label
               className="form-toggle radio horizontal"
             >
