@@ -10,9 +10,11 @@
 
   .manicon {
     @include buttonUnstyled;
+    display: inline-block;
     min-width: 50px;
     font-size: 13px;
     color: $accentPrimary;
+    text-align: center;
   }
 
   // Required for override
