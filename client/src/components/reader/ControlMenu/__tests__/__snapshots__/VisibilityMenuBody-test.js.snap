@@ -18,9 +18,11 @@ exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] =
       >
         <label
           className="checkbox"
+          htmlFor="Yours-checkbox-1"
         >
           <input
             checked={true}
+            id="Yours-checkbox-1"
             onChange={[Function]}
             type="checkbox"
           />
@@ -36,9 +38,11 @@ exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] =
         </label>
         <label
           className="checkbox"
+          htmlFor="Others-checkbox-2"
         >
           <input
             checked={true}
+            id="Others-checkbox-2"
             onChange={[Function]}
             type="checkbox"
           />
@@ -67,9 +71,11 @@ exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] =
       >
         <label
           className="checkbox"
+          htmlFor="Yours-checkbox-3"
         >
           <input
             checked={true}
+            id="Yours-checkbox-3"
             onChange={[Function]}
             type="checkbox"
           />
@@ -85,9 +91,11 @@ exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] =
         </label>
         <label
           className="checkbox"
+          htmlFor="Others-checkbox-4"
         >
           <input
             checked={true}
+            id="Others-checkbox-4"
             onChange={[Function]}
             type="checkbox"
           />
@@ -116,9 +124,11 @@ exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] =
       >
         <label
           className="checkbox"
+          htmlFor="All-checkbox-5"
         >
           <input
             checked={true}
+            id="All-checkbox-5"
             onChange={[Function]}
             type="checkbox"
           />
