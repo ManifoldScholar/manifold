@@ -31,7 +31,9 @@ exports[`Global.SignInUp.Login component renders correctly 1`] = `
       <div
         className="form-input"
       >
-        <label>
+        <label
+          htmlFor="login-password"
+        >
           Password
         </label>
         <input

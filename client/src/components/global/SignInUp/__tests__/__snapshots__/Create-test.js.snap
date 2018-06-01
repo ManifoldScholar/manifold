@@ -58,7 +58,9 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
         className="form-input"
         style={Object {}}
       >
-        <label>
+        <label
+          htmlFor="create-password"
+        >
           Password
         </label>
         <input
@@ -78,7 +80,9 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
         className="form-input"
         style={Object {}}
       >
-        <label>
+        <label
+          htmlFor="create-password-confirmation"
+        >
           Confirm Password
         </label>
         <input
