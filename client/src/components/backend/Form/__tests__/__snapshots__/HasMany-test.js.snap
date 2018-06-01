@@ -105,7 +105,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
       <div
         className="input"
       >
-        <button
+        <i
           aria-hidden="true"
           className="manicon manicon-plus"
         />

@@ -488,7 +488,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               <div
                 className="input"
               >
-                <button
+                <i
                   aria-hidden="true"
                   className="manicon manicon-plus"
                 />

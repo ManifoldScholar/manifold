@@ -31,7 +31,7 @@ exports[`Backend Permission New Container renders correctly 1`] = `
               <div
                 className="input"
               >
-                <button
+                <i
                   aria-hidden="true"
                   className="manicon manicon-plus"
                 />
