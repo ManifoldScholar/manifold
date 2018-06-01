@@ -30,9 +30,11 @@ exports[`Reader.Annotation.Editor component renders correctly 1`] = `
       >
         <label
           className="form-toggle checkbox"
+          htmlFor="private-annotation"
         >
           <input
             checked={false}
+            id="private-annotation"
             name="isPrivate"
             onChange={[Function]}
             type="checkbox"

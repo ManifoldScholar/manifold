@@ -14,9 +14,11 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
   >
     <label
       className="checkbox"
+      htmlFor="Highlights-checkbox-1"
     >
       <input
         checked={true}
+        id="Highlights-checkbox-1"
         onChange={[Function]}
         type="checkbox"
       />
@@ -32,9 +34,11 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
     </label>
     <label
       className="checkbox"
+      htmlFor="Annotations-checkbox-2"
     >
       <input
         checked={true}
+        id="Annotations-checkbox-2"
         onChange={[Function]}
         type="checkbox"
       />
