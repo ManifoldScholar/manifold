@@ -145,7 +145,7 @@ class CreateContainer extends Component {
               name="attributes[password]"
               errors={errors}
             >
-              <label>Password</label>
+              <label htmlFor="create-password">Password</label>
               <input
                 value={this.state.user.password}
                 type="password"
@@ -162,7 +162,9 @@ class CreateContainer extends Component {
               name="attributes[passwordConfirmation]"
               errors={errors}
             >
-              <label>Confirm Password</label>
+              <label htmlFor="create-password-confirmation">
+                Confirm Password
+              </label>
               <input
                 value={this.state.user.passwordConfirmation}
                 type="password"

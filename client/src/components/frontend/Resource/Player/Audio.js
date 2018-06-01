@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import debounce from "lodash/debounce";
 import throttle from "lodash/throttle";
+import uniqueId from "lodash/uniqueId";
 
 export default class ResourcePlayerAudio extends Component {
   static propTypes = {
@@ -26,6 +27,8 @@ export default class ResourcePlayerAudio extends Component {
 
   componentDidMount() {
     // https://github.com/katspaugh/wavesurfer.js/issues/1334
+    this.progressBarId = uniqueId("progress-bar-");
+    this.volumeBarId = uniqueId("volume-bar-");
     this.WaveSurfer = require("wavesurfer"); // eslint-disable-line global-require
     this.throttleUpdateTime = throttle(this.updateTime, 900);
     this.debouncedResize = debounce(this.resizeWaveform, 120);
@@ -188,7 +191,14 @@ export default class ResourcePlayerAudio extends Component {
                   left: `calc(${this.state.percent}% - 10px)`
                 }}
               />
+              <label
+                htmlFor={this.progressBarId}
+                className="screen-reader-text"
+              >
+                Progress Bar
+              </label>
               <input
+                id={this.progressBarId}
                 type="range"
                 min="0"
                 max="100"
@@ -212,7 +222,11 @@ export default class ResourcePlayerAudio extends Component {
                   left: `${volume * 0.7 - 10}px`
                 }}
               />
+              <label htmlFor={this.volumeBarId} className="screen-reader-text">
+                Adjust Volume
+              </label>
               <input
+                id={this.volumeBarId}
                 type="range"
                 min="0"
                 max="100"

@@ -308,7 +308,7 @@ class UpdateFormContainer extends Component {
             name="attributes[password]"
             errors={errors}
           >
-            <label>Password</label>
+            <label htmlFor="update-password">Password</label>
             <input
               value={this.state.password}
               type="password"
@@ -323,7 +323,9 @@ class UpdateFormContainer extends Component {
             name="attributes[passwordConfirmation]"
             errors={errors}
           >
-            <label>Confirm Password</label>
+            <label htmlFor="update-passwordConfirmation">
+              Confirm Password
+            </label>
             <input
               value={this.state.passwordConfirmation}
               type="password"

@@ -87,7 +87,7 @@ export class PasswordResetContainer extends Component {
                 name="attributes[password]"
                 errors={errors}
               >
-                <label>New Password</label>
+                <label htmlFor="reset-password">New Password</label>
                 <input
                   value={this.state.password}
                   type="password"
@@ -104,7 +104,9 @@ export class PasswordResetContainer extends Component {
                 name="attributes[passwordConfirmation]"
                 errors={errors}
               >
-                <label>Confirm Password</label>
+                <label htmlFor="reset-password-confirmation">
+                  Confirm Password
+                </label>
                 <input
                   value={this.state.passwordConfirmation}
                   type="password"
