@@ -118,9 +118,10 @@ export default class AnnotationSelectionEditor extends PureComponent {
           </GlobalForm.Errorable>
           <div className="utility">
             <div className="form-input">
-              <label className={checkClass}>
+              <label htmlFor="private-annotation" className={checkClass}>
                 <input
                   type="checkbox"
+                  id="private-annotation"
                   name="isPrivate"
                   value="1"
                   checked={this.state.isPrivate}
