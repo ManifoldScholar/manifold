@@ -76,7 +76,7 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
           <div
             className="input"
           >
-            <button
+            <i
               aria-hidden="true"
               className="manicon manicon-plus"
             />
@@ -177,7 +177,7 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
           <div
             className="input"
           >
-            <button
+            <i
               aria-hidden="true"
               className="manicon manicon-plus"
             />
