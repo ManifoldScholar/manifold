@@ -104,7 +104,9 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-password"
+      >
         Password
       </label>
       <input
@@ -120,7 +122,9 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="update-passwordConfirmation"
+      >
         Confirm Password
       </label>
       <input
