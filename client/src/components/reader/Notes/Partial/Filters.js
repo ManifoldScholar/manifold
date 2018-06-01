@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import uniqueId from "lodash/uniqueId";
 
 export default class Filters extends Component {
   static displayName = "Notes.List.Filters";
@@ -27,11 +28,13 @@ export default class Filters extends Component {
   renderCheckBox(label, format) {
     const formats = this.props.filter.formats;
     const checked = this.filteredBy(formats, format);
+    const checkboxId = uniqueId(label + "-checkbox-");
 
     return (
-      <label className="checkbox">
+      <label htmlFor={checkboxId} className="checkbox">
         <input
           type="checkbox"
+          id={checkboxId}
           checked={checked}
           onChange={e => this.toggleFormat(e, format)}
         />

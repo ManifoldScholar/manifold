@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
+import uniqueId from "lodash/uniqueId";
 
 export default class VisibilityMenuBody extends PureComponent {
   static displayName = "ControlMenu.VisibilityMenuBody";
@@ -54,12 +55,14 @@ export default class VisibilityMenuBody extends PureComponent {
 
   renderCheckbox(key, filterState, format) {
     let label = capitalize(key);
+    const checkboxId = uniqueId(label + "-checkbox-");
     if (key === "all") label = "Show All";
 
     return (
-      <label className="checkbox" key={`${format}-${key}`}>
+      <label htmlFor={checkboxId} className="checkbox" key={`${format}-${key}`}>
         <input
           type="checkbox"
+          id={checkboxId}
           checked={filterState[key]}
           onChange={() => this.handleFilterClick(format, key)}
         />

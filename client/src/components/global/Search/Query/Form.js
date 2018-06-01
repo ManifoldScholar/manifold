@@ -169,10 +169,17 @@ export default class SearchQuery extends PureComponent {
                 <label className="group-label">{"Search within:"}</label>
               ) : null}
               {this.props.scopes.map(scope => {
+                const filterCheckboxId = uniqueId(scope.value + "-");
+
                 return (
-                  <label key={scope.value} className="checkbox">
+                  <label
+                    htmlFor={filterCheckboxId}
+                    key={scope.value}
+                    className="checkbox"
+                  >
                     <input
                       type="checkbox"
+                      id={filterCheckboxId}
                       checked={this.state.scope === scope.value}
                       onChange={this.makeScopeHandler(scope.value)}
                     />
@@ -191,9 +198,10 @@ export default class SearchQuery extends PureComponent {
           <div className="filters">
             <label className="group-label">{"Show Results For:"}</label>
             <div className="checkbox-group">
-              <label key={"all"} className="checkbox">
+              <label htmlFor="all-filters" key={"all"} className="checkbox">
                 <input
                   type="checkbox"
+                  id="all-filters"
                   checked={this.existsInState("facets", "All")}
                   onChange={this.makeFacetHandler("facets", "All")}
                 />
@@ -204,10 +212,17 @@ export default class SearchQuery extends PureComponent {
                 {"Everything"}
               </label>
               {this.props.facets.map(facet => {
+                const facetCheckboxId = uniqueId(facet.value + "-");
+
                 return (
-                  <label key={facet.value} className="checkbox">
+                  <label
+                    htmlFor={facetCheckboxId}
+                    key={facet.value}
+                    className="checkbox"
+                  >
                     <input
                       type="checkbox"
+                      id={facetCheckboxId}
                       checked={this.existsInState("facets", facet.value)}
                       onChange={this.makeFacetHandler("facets", facet.value)}
                     />
