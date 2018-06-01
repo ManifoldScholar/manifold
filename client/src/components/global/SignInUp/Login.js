@@ -76,7 +76,7 @@ export default class Login extends Component {
           </div>
           <div className="row-1-p">
             <div className="form-input">
-              <label>Password</label>
+              <label htmlFor="login-password">Password</label>
               <input
                 type="password"
                 name="password"
