@@ -232,7 +232,7 @@ class PredictiveInput extends PureComponent {
     return (
       <div className={classes}>
         <div className="input">
-          <button className="manicon manicon-plus" aria-hidden="true" />
+          <i className="manicon manicon-plus" aria-hidden="true" />
           <input
             className="text-input"
             type="text"
