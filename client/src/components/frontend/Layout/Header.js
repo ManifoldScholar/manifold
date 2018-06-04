@@ -134,6 +134,7 @@ export default class LayoutHeader extends PureComponent {
                     facets: ["Project", "Resource", "Text"]
                   }}
                   description="Search accross all content and projects"
+                  hidePanel={this.props.commonActions.hideSearchPanel}
                 />
               </li>
               <li>
@@ -154,6 +155,7 @@ export default class LayoutHeader extends PureComponent {
                   }
                   startLogout={this.props.commonActions.logout}
                   hideUserMenu={this.props.commonActions.toggleUserPanel}
+                  hidePanel={this.props.commonActions.hideUserPanel}
                 />
               </li>
             </ul>
