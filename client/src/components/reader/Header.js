@@ -168,6 +168,7 @@ export default class Header extends Component {
             toggleSignInUpOverlay={
               this.props.commonActions.toggleSignInUpOverlay
             }
+            hidePanel={this.props.commonActions.hideReaderReturnPanel}
             // TODO: More link (and eventually, the link text) should be pulled from settings
             moreLink="http://manifold.umn.edu/about/"
           />
@@ -179,6 +180,7 @@ export default class Header extends Component {
             visibility={this.props.visibility.uiPanels}
             visible={this.props.visibility.uiPanels.notes}
             bodyComponent={Notes.ReaderDrawer}
+            hidePanel={this.props.commonActions.hideNotesPanel}
           />
           <UIPanel
             id="visibility"
@@ -186,6 +188,7 @@ export default class Header extends Component {
             filter={this.props.visibility.visibilityFilters}
             filterChangeHandler={this.handleVisibilityFilterChange}
             bodyComponent={ControlMenu.VisibilityMenuBody}
+            hidePanel={this.props.commonActions.hideVisibilityPanel}
           />
           <UIPanel
             id="search"
@@ -203,6 +206,7 @@ export default class Header extends Component {
             }}
             searchType="reader"
             bodyComponent={Search.Menu.Body}
+            hidePanel={this.props.commonActions.hideSearchPanel}
           />
           <UIPanel
             id="appearance"
@@ -216,6 +220,7 @@ export default class Header extends Component {
             decrementFontSize={this.props.decrementFontSize}
             incrementMargins={this.props.incrementMargins}
             decrementMargins={this.props.decrementMargins}
+            hidePanel={this.props.commonActions.hideAppearancePanel}
           />
           <UIPanel
             id="user"
@@ -225,6 +230,7 @@ export default class Header extends Component {
             showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
             startLogout={this.props.commonActions.logout}
             hideUserMenu={this.props.commonActions.toggleUserPanel}
+            hidePanel={this.props.commonActions.hideUserPanel}
           />
         </nav>
         <HeaderNotifications />
