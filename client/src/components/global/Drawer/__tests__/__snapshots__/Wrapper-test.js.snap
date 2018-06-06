@@ -3,7 +3,7 @@
 exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
-    <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} connected={false} lockScroll=\\"hover\\" entrySide=\\"right\\">
+    <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} connected={false} lockScroll=\\"hover\\" entrySide=\\"right\\" includeDrawerFrontMatter={true}>
       <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
         <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
           <span>
@@ -12,17 +12,19 @@ exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
                 <Utility.EdgeLockScroll>
                   <div className=\\"edge-lock-scroll\\">
                     <div className=\\"drawer-backend \\">
-                      <div className=\\"drawer-bar\\">
-                        <div className=\\"drawer-title\\">
-                          wrapper
+                      <focus-trap-react active={false} focusTrapOptions={{...}}>
+                        <div className=\\"drawer-bar\\">
+                          <div className=\\"drawer-title\\">
+                            wrapper
+                          </div>
+                          <div onClick={[Function]} role=\\"button\\" tabIndex=\\"0\\" className=\\"close-button-primary\\">
+                            <span className=\\"close-text\\">
+                              Close
+                            </span>
+                            <i className=\\"manicon manicon-x\\" aria-hidden=\\"true\\" />
+                          </div>
                         </div>
-                        <div onClick={[Function]} role=\\"button\\" tabIndex=\\"0\\" className=\\"close-button-primary\\">
-                          <span className=\\"close-text\\">
-                            Close
-                          </span>
-                          <i className=\\"manicon manicon-x\\" aria-hidden=\\"true\\" />
-                        </div>
-                      </div>
+                      </focus-trap-react>
                     </div>
                   </div>
                 </Utility.EdgeLockScroll>

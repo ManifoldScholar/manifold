@@ -11,45 +11,55 @@ exports[`Reader.Toc Component renders correctly 1`] = `
       <div
         className="drawer-reader left"
       >
-        <nav
-          className="table-of-contents"
+        <focus-trap-react
+          active={false}
+          focusTrapOptions={
+            Object {
+              "clickOutsideDeactivates": true,
+              "onDeactivate": [Function],
+            }
+          }
         >
-          <ul
-            className="toc-list"
+          <nav
+            className="table-of-contents"
           >
-            <li>
-              <a
-                className={null}
-                data-id="hide-drawer"
-                href="/read/slug-1/section/undefined#function anchor() { [native code] }"
-                onClick={[Function]}
-              />
-            </li>
-            <li>
-              <a
-                className={null}
-                data-id="hide-drawer"
-                href="/read/slug-1/section/undefined#function anchor() { [native code] }"
-                onClick={[Function]}
-              />
-            </li>
-          </ul>
-          <div
-            className="toc-footer"
-          >
-            <button
-              onClick={[Function]}
+            <ul
+              className="toc-list"
             >
-              <h4>
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-i-round"
+              <li>
+                <a
+                  className={null}
+                  data-id="hide-drawer"
+                  href="/read/slug-1/section/undefined#function anchor() { [native code] }"
+                  onClick={[Function]}
                 />
-                About This Text
-              </h4>
-            </button>
-          </div>
-        </nav>
+              </li>
+              <li>
+                <a
+                  className={null}
+                  data-id="hide-drawer"
+                  href="/read/slug-1/section/undefined#function anchor() { [native code] }"
+                  onClick={[Function]}
+                />
+              </li>
+            </ul>
+            <div
+              className="toc-footer"
+            >
+              <button
+                onClick={[Function]}
+              >
+                <h4>
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-i-round"
+                  />
+                  About This Text
+                </h4>
+              </button>
+            </div>
+          </nav>
+        </focus-trap-react>
       </div>
     </div>
   </div>
@@ -67,31 +77,41 @@ exports[`Reader.Toc Component renders correctly with empty toc 1`] = `
       <div
         className="drawer-reader left"
       >
-        <nav
-          className="table-of-contents"
+        <focus-trap-react
+          active={false}
+          focusTrapOptions={
+            Object {
+              "clickOutsideDeactivates": true,
+              "onDeactivate": [Function],
+            }
+          }
         >
-          <div
-            className="toc-empty"
+          <nav
+            className="table-of-contents"
           >
-            This text does not have a table of contents.
-          </div>
-          <hr />
-          <div
-            className="toc-footer"
-          >
-            <button
-              onClick={[Function]}
+            <div
+              className="toc-empty"
             >
-              <h4>
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-i-round"
-                />
-                About This Text
-              </h4>
-            </button>
-          </div>
-        </nav>
+              This text does not have a table of contents.
+            </div>
+            <hr />
+            <div
+              className="toc-footer"
+            >
+              <button
+                onClick={[Function]}
+              >
+                <h4>
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-i-round"
+                  />
+                  About This Text
+                </h4>
+              </button>
+            </div>
+          </nav>
+        </focus-trap-react>
       </div>
     </div>
   </div>

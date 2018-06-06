@@ -25,7 +25,8 @@ export default class ReaderDrawer extends PureComponent {
       open: this.props.visible,
       style: "reader",
       identifier: "notes-drawer",
-      lockScroll: "always"
+      lockScroll: "always",
+      includeDrawerFrontMatter: false
     };
 
     return (
