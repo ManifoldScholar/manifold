@@ -1,9 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
-<div>
-  <div
-    className="overlay-full bg-neutral90"
+<div
+  className="overlay-full bg-neutral90"
+>
+  <focus-trap-react
+    focusTrapOptions={
+      Object {
+        "onDeactivate": [Function],
+      }
+    }
   >
     <button
       className="overlay-close"
@@ -270,6 +276,6 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
         </div>
       </div>
     </div>
-  </div>
+  </focus-trap-react>
 </div>
 `;

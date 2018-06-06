@@ -5,6 +5,7 @@ jest.mock("react-text-mask", () => "react-text-mask");
 jest.mock("helpers/passwordGenerator", () => {
   return jest.fn(() => "testtest123");
 });
+jest.mock("focus-trap-react", () => "focus-trap-react");
 
 // Mocked fetch-data is a noop component that renders it's child.
 // see src/components/global/HigherOrder/__mocks__/fetchData.js
