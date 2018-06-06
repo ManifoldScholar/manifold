@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import FocusTrap from "focus-trap-react";
 import { HigherOrder } from "components/global";
 import PasswordForgot from "./PasswordForgot";
 import Login from "./Login";
@@ -80,28 +81,34 @@ export default class Overlay extends Component {
     return (
       <HigherOrder.BodyClass className={"no-scroll"}>
         <div className="overlay-full-primary">
-          <header className="overlay-header">
-            <div className="container">
-              <div className="rel">
-                <figure className="logo" aria-hidden="true">
-                  <i className="manicon manicon-manifold-logo" />
-                </figure>
-                <button
-                  onClick={this.props.hideSignInUpOverlay}
-                  className="overlay-close"
-                  data-id="overlay-close"
-                >
-                  Cancel
-                  <i className="manicon manicon-x" aria-hidden="true" />
-                </button>
+          <FocusTrap
+            focusTrapOptions={{
+              onDeactivate: this.props.hideSignInUpOverlay
+            }}
+          >
+            <header className="overlay-header">
+              <div className="container">
+                <div className="rel">
+                  <figure className="logo" aria-hidden="true">
+                    <i className="manicon manicon-manifold-logo" />
+                  </figure>
+                  <button
+                    onClick={this.props.hideSignInUpOverlay}
+                    className="overlay-close"
+                    data-id="overlay-close"
+                  >
+                    Cancel
+                    <i className="manicon manicon-x" aria-hidden="true" />
+                  </button>
+                </div>
+              </div>
+            </header>
+            <div className="overlay-content focus">
+              <div className="container">
+                <div className="inner">{this.renderChild()}</div>
               </div>
             </div>
-          </header>
-          <div className="overlay-content focus">
-            <div className="container">
-              <div className="inner">{this.renderChild()}</div>
-            </div>
-          </div>
+          </FocusTrap>
         </div>
       </HigherOrder.BodyClass>
     );

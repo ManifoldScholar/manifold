@@ -33,6 +33,7 @@ const commonActions = dispatch => {
       () => visibilityToggle("signInUpOverlay"),
       dispatch
     ),
+    closeSignInUpOverlay: b(() => visibilityHide("signInUpOverlay"), dispatch),
     addNotification: b(opts => addNotification(opts), dispatch),
     removeNotification: b(opts => removeNotification(opts), dispatch),
     clearNotifications: b(removeAllNotifications, dispatch),
