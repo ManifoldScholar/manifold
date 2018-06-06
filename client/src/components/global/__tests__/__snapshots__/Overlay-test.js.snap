@@ -1,9 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Global.Overlay component renders correctly 1`] = `
-<div>
-  <div
-    className="overlay-full"
+<div
+  className="overlay-full"
+>
+  <focus-trap-react
+    focusTrapOptions={
+      Object {
+        "onDeactivate": [Function],
+      }
+    }
   >
     <button
       className="overlay-close"
@@ -28,6 +34,6 @@ exports[`Global.Overlay component renders correctly 1`] = `
         Test me
       </div>
     </div>
-  </div>
+  </focus-trap-react>
 </div>
 `;
