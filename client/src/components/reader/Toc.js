@@ -127,7 +127,9 @@ class Toc extends PureComponent {
       open: this.props.tocDrawerVisible,
       style: "reader",
       identifier: "toc-drawer",
-      entrySide: "left"
+      entrySide: "left",
+      closeCallback: this.UIHideTocDrawer,
+      includeDrawerFrontMatter: false
     };
 
     return (

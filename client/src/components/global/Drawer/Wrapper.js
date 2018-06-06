@@ -4,6 +4,9 @@ import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-
 import Utility from "components/global/Utility";
 import { Notifications } from "containers/global";
 import isString from "lodash/isString";
+import FocusTrap from "focus-trap-react";
+import tabbable from "tabbable";
+import has from "lodash/has";
 import { notificationActions } from "actions";
 
 export default class DrawerWrapper extends PureComponent {
@@ -28,7 +31,8 @@ export default class DrawerWrapper extends PureComponent {
     lockScroll: PropTypes.string,
     entrySide: PropTypes.string,
     style: PropTypes.string,
-    history: PropTypes.object
+    history: PropTypes.object,
+    includeDrawerFrontMatter: PropTypes.bool
   };
 
   static childContextTypes = {
@@ -46,15 +50,18 @@ export default class DrawerWrapper extends PureComponent {
     lockScroll: "hover",
     open: false,
     style: "backend",
-    entrySide: "right"
+    entrySide: "right",
+    includeDrawerFrontMatter: true
   };
 
   constructor(props) {
     super(props);
     this.state = {
       leaving: false,
-      keyboardEventsPaused: false
+      keyboardEventsPaused: false,
+      focusable: false
     };
+    this.focusTrapNode = React.createRef();
     if (props.open) {
       this.onOpen();
     }
@@ -71,8 +78,22 @@ export default class DrawerWrapper extends PureComponent {
     document.addEventListener("keyup", this.handleLeaveKey);
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (React.Children.count(nextProps.children) <= 0) {
+      this.setState({ focusable: false });
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    if (!prevProps.open && this.props.open) this.onOpen();
+    if (!prevProps.open && this.props.open) {
+      this.onOpen();
+    }
+
+    if (this.props.open && has(this.focusTrapNode, "current.node")) {
+      if (tabbable(this.focusTrapNode.current.node).length > 0) {
+        this.setState({ focusable: true });
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -132,17 +153,22 @@ export default class DrawerWrapper extends PureComponent {
   };
 
   renderDrawerFrontMatter(props) {
-    const hasTitle = props.icon || props.title;
+    if (!props.includeDrawerFrontMatter) return null;
+    const hasTitle = props.title || props.icon;
     const hasClose = props.closeCallback || props.closeUrl;
-    if (!hasTitle && !hasClose) return null;
     return (
       <div className="drawer-bar">
-        <div className="drawer-title">
-          {props.icon ? (
-            <i className={`manicon manicon-${props.icon}`} aria-hidden="true" />
-          ) : null}
-          {props.title ? props.title : null}
-        </div>
+        {hasTitle ? (
+          <div className="drawer-title">
+            {props.icon ? (
+              <i
+                className={`manicon manicon-${props.icon}`}
+                aria-hidden="true"
+              />
+            ) : null}
+            {props.title ? props.title : null}
+          </div>
+        ) : null}
         {hasClose ? (
           <div
             onClick={this.handleLeaveEvent}
@@ -166,12 +192,21 @@ export default class DrawerWrapper extends PureComponent {
         key="drawer"
         className={`drawer-${this.props.style} ${entrySideClass}`}
       >
-        {this.renderDrawerFrontMatter(this.props)}
-        {this.props.connected && (
-          <Notifications scope="drawer" style="drawer" animate={false} />
-        )}
-        {/* Render children without props if they aren't a component */}
-        {this.renderChildren()}
+        <FocusTrap
+          ref={this.focusTrapNode}
+          active={this.state.focusable}
+          focusTrapOptions={{
+            onDeactivate: this.handleLeaveEvent,
+            clickOutsideDeactivates: true
+          }}
+        >
+          {this.renderDrawerFrontMatter(this.props)}
+          {this.props.connected && (
+            <Notifications scope="drawer" style="drawer" animate={false} />
+          )}
+          {/* Render children without props if they aren't a component */}
+          {this.renderChildren()}
+        </FocusTrap>
       </div>
     );
   }

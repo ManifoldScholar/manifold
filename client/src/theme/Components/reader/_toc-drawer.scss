@@ -53,6 +53,10 @@
           background-color: $accentPrimaryPale;
         }
 
+        &:focus {
+          outline: 0;
+        }
+
         &.active {
           background-color: $neutral10;
         }
