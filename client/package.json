@@ -82,6 +82,7 @@
     "es6-promise": "^4.0.5",
     "express-session": "^1.12.1",
     "filesize": "^3.3.0",
+    "focus-trap-react": "^3.1.2",
     "glob": "^7.0.0",
     "hoist-non-react-statics": "^2.0.0",
     "http-proxy-middleware": ">=0.17.2",

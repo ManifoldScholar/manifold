@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { HigherOrder } from "components/global";
+import FocusTrap from "focus-trap-react";
 import isString from "lodash/isString";
 
 export default class Overlay extends Component {
@@ -84,12 +85,16 @@ export default class Overlay extends Component {
   render() {
     return (
       <HigherOrder.BodyClass className={"no-scroll overlay"}>
-        <div>
-          <div
-            className={this.overlayClass()}
-            key={"globalOverlay"}
-            ref={el => {
-              this.scrollableEl = el;
+        <div
+          className={this.overlayClass()}
+          key={"globalOverlay"}
+          ref={el => {
+            this.scrollableEl = el;
+          }}
+        >
+          <FocusTrap
+            focusTrapOptions={{
+              onDeactivate: this.handleCloseEvent
             }}
           >
             {this.renderHeader(this.props)}
@@ -109,7 +114,7 @@ export default class Overlay extends Component {
             >
               {this.renderChildren()}
             </div>
-          </div>
+          </FocusTrap>
         </div>
       </HigherOrder.BodyClass>
     );
