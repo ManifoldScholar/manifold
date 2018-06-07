@@ -141,7 +141,12 @@ export default class ResourcePlayerAudio extends Component {
   renderUnstarted() {
     if (this.state.started) return null;
     return (
-      <div className="cover" onClick={this.startPlayback} role="button">
+      <div
+        className="cover"
+        onClick={this.startPlayback}
+        role="button"
+        tabIndex="0"
+      >
         <span className="screen-reader-text">Start Playback</span>
         <div className="play-button-indicator">
           <i

@@ -30,7 +30,6 @@ export default class ProjectPlaceholder extends Component {
         height="200.68436px"
         viewBox="0 0 200.34735 200.68436"
         role="group"
-        tabIndex="0"
         aria-label="Default Project Thumbnail"
       >
         {/* Disable max-length on linter for long SVG path declarations */}

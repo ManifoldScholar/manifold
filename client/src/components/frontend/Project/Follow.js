@@ -124,6 +124,7 @@ export default class ProjectFollow extends Component {
         onMouseLeave={this.deactivate}
         className={wrapperClasses}
         role="button"
+        tabIndex="0"
       >
         <div className="following-button">
           <div className="icons" aria-hidden="true">

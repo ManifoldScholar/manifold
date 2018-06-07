@@ -166,6 +166,7 @@ class ResourceCard extends Component {
             className="resource-link"
             onClick={this.handlePreviewClick}
             role="link"
+            tabIndex="0"
           >
             <Resourceish.Thumbnail resourceish={resource} />
             <div className="preview-text">{this.getPreviewText(attr)}</div>
@@ -177,6 +178,7 @@ class ResourceCard extends Component {
           onMouseOut={this.handleInfoMouseOut}
           onClick={this.handleInfoClick}
           role="link"
+          tabIndex="0"
         >
           <div>
             <header className="resource-title">

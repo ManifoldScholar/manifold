@@ -38,6 +38,7 @@ class KindPicker extends PureComponent {
                 }}
                 className={buttonClass}
                 role="radio"
+                tabIndex="0"
                 aria-checked={isActive}
               >
                 <figure>

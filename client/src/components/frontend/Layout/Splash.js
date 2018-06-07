@@ -200,6 +200,7 @@ export default class Splash extends Component {
                     target="blank"
                     className="button-bare-primary"
                     role="button"
+                    tabIndex="0"
                   >
                     {"Sign Up"}
                   </span>

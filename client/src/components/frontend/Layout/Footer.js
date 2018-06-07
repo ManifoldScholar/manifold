@@ -95,6 +95,7 @@ class LayoutFooter extends Component {
         <span
           className="fake-link"
           role="button"
+          tabIndex="0"
           onClick={this.handleLogoutClick}
         >
           {"Log Out"}

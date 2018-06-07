@@ -68,6 +68,13 @@
   .dropzone-button-dotted {
     border: 2px dotted $neutral50;
   }
+
+  input {
+    @include screenReaderText;
+    /* stylelint-disable declaration-no-important */
+    display: block !important;
+    /* stylelint-enable declaration-no-important */
+  }
 }
 
 // Browse specific form select
