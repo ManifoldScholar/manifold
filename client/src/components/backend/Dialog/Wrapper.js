@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
+import FocusTrap from "focus-trap-react";
 import isString from "lodash/isString";
 
 class DialogWrapper extends PureComponent {
@@ -114,19 +115,12 @@ class DialogWrapper extends PureComponent {
         transitionLeaveTimeout={200}
       >
         {this.state.leaving ? null : (
-          <div key="dialog" className="dialog-primary dialog-appear">
-            {this.props.closeOnOverlayClick ? (
-              <div
-                className="dialog-overlay"
-                onClick={this.handleOverlayClick}
-                role="button"
-                tabIndex="0"
-              >
-                <span className="screen-reader-text">Close Dialog</span>
-              </div>
-            ) : (
-              <div className="dialog-overlay" />
-            )}
+          <FocusTrap key="dialog" className="dialog-primary dialog-appear">
+            <div
+              className="dialog-overlay"
+              onClick={this.handleOverlayClick}
+              role="button"
+            />
             <div
               className={classnames(
                 "dialog-box",
@@ -148,7 +142,7 @@ class DialogWrapper extends PureComponent {
               ) : null}
               {this.renderChildren()}
             </div>
-          </div>
+          </FocusTrap>
         )}
       </ReactCSSTransitionGroup>
     );
