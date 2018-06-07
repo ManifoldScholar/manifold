@@ -73,6 +73,7 @@ class FormSwitch extends Component {
             onClick={this.handleClick}
             className={classes}
             role="button"
+            tabIndex="0"
             aria-pressed={checked}
           >
             <span className="screen-reader-text">{this.props.label}</span>

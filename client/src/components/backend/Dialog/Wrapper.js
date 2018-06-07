@@ -115,11 +115,18 @@ class DialogWrapper extends PureComponent {
       >
         {this.state.leaving ? null : (
           <div key="dialog" className="dialog-primary dialog-appear">
-            <div
-              className="dialog-overlay"
-              onClick={this.handleOverlayClick}
-              role="button"
-            />
+            {this.props.closeOnOverlayClick ? (
+              <div
+                className="dialog-overlay"
+                onClick={this.handleOverlayClick}
+                role="button"
+                tabIndex="0"
+              >
+                <span className="screen-reader-text">Close Dialog</span>
+              </div>
+            ) : (
+              <div className="dialog-overlay" />
+            )}
             <div
               className={classnames(
                 "dialog-box",
@@ -133,6 +140,7 @@ class DialogWrapper extends PureComponent {
                   onClick={this.handleCloseClick}
                   className="close-button-primary"
                   role="button"
+                  tabIndex="0"
                 >
                   <i className="manicon manicon-x" aria-hidden="true" />
                   <span className="screen-reader-text">Close Dialog</span>

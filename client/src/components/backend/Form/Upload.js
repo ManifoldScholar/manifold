@@ -198,6 +198,7 @@ export class FormUpload extends Component {
           <p className="secondary">
             <span
               role="button"
+              tabIndex="0"
               data-id="remove"
               className="fake-link"
               onClick={this.handleRemove}
@@ -206,7 +207,7 @@ export class FormUpload extends Component {
             </span>
             <br />
             or{" "}
-            <span className="fake-link" role="button">
+            <span className="fake-link" role="button" tabIndex="0">
               Upload an image
             </span>
           </p>
@@ -226,6 +227,7 @@ export class FormUpload extends Component {
           <p className="secondary">
             <span
               role="button"
+              tabIndex="0"
               className="fake-link"
               onClick={this.handleRemove}
               href="#"
@@ -234,7 +236,7 @@ export class FormUpload extends Component {
             </span>
             <br />
             or{" "}
-            <span className="fake-link" role="button">
+            <span className="fake-link" role="button" tabIndex="0">
               Upload a new file
             </span>
           </p>
@@ -254,7 +256,7 @@ export class FormUpload extends Component {
         )}
         <div className="message">
           <p className="primary">
-            <span className="fake-link" role="button">
+            <span className="fake-link" role="button" tabIndex="0">
               {"Upload a file"}
             </span>
             {" or "}

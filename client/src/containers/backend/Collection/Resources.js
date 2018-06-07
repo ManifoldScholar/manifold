@@ -187,18 +187,15 @@ export class CollectionResourcesContainer extends Component {
               onClick={event => this.handleSelect(event, resource)}
               className={classes}
               role="button"
+              tabIndex="0"
             >
               {this.isInCollection(resource) ? (
                 <span className="screen-reader-text">
-                  {`Remove ${
-                    resource.attributes.titleFormatted
-                  } Resource from Collection`}
+                  {`Remove Resource from Collection`}
                 </span>
               ) : (
                 <span className="screen-reader-text">
-                  {`Add ${
-                    resource.attributes.titleFormatted
-                  } Resource to Collection`}
+                  {`Add Resource to Collection`}
                 </span>
               )}
             </div>

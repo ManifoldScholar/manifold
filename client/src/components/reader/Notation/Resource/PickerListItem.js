@@ -23,7 +23,12 @@ export default class ResourcePickerListItem extends PureComponent {
     const attr = resource.attributes;
     return (
       <li>
-        <span role="button" className="fake-link" onClick={this.handleClick}>
+        <span
+          role="button"
+          tabIndex="0"
+          className="fake-link"
+          onClick={this.handleClick}
+        >
           <header>
             <figure className="cover">
               <Resourceish.Thumbnail

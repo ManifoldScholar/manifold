@@ -147,6 +147,7 @@ export default class DrawerWrapper extends PureComponent {
           <div
             onClick={this.handleLeaveEvent}
             role="button"
+            tabIndex="0"
             className="close-button-primary"
           >
             <span className="close-text">Close</span>
@@ -200,6 +201,7 @@ export default class DrawerWrapper extends PureComponent {
                 className="drawer-overlay"
                 onClick={this.handleLeaveEvent}
                 role="button"
+                tabIndex="0"
               />
               {this.renderDrawer()}
             </div>

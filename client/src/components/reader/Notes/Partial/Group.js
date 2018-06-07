@@ -110,7 +110,12 @@ export default class Group extends Component {
     });
     return (
       <li>
-        <div className={classes} onClick={this.handleClick} role="button">
+        <div
+          className={classes}
+          onClick={this.handleClick}
+          role="button"
+          tabIndex="0"
+        >
           <i className={`manicon manicon-caret-down`} aria-hidden="true" />
           <h4 className="item-label">{this.props.sectionName}</h4>
         </div>

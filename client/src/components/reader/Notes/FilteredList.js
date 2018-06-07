@@ -30,7 +30,11 @@ export default class FilteredList extends PureComponent {
     return (
       <div className="drawer-bar">
         <h2 className="drawer-title">
-          <div role="button" onClick={this.props.handleSeeAllClick}>
+          <div
+            role="button"
+            tabIndex="0"
+            onClick={this.props.handleSeeAllClick}
+          >
             Your Notes
           </div>
         </h2>

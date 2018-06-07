@@ -101,6 +101,7 @@ class FormGeneratedPasswordInput extends Component {
           className="password-visibility-toggle"
           onClick={event => this.togglePassword(event)}
           role="button"
+          tabIndex="0"
         >
           <i className={iconClass} aria-hidden="true" />
           <span className="screen-reader-text">
