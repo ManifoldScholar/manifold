@@ -58,18 +58,19 @@ export default class Login extends Component {
       "form-error": this.authenticationError()
     });
 
-    const customOAuthProviders = values(get(this.props, 'settings.attributes.oauth')).filter((provider) => provider.custom);
+    const customOAuthProviders = values(
+      get(this.props, "settings.attributes.oauth")
+    ).filter(provider => provider.custom);
 
-    const customOAuthButtons = customOAuthProviders.map(
-      (provider) =>
-        <SignInUp.Oauth.Button
-          dispatch={this.props.dispatch}
-          provider={provider.name}
-          hasIcon={false}
-        >
-          Log in with {provider.descriptiveName}
-        </SignInUp.Oauth.Button>
-    );
+    const customOAuthButtons = customOAuthProviders.map(provider => (
+      <SignInUp.Oauth.Button
+        dispatch={this.props.dispatch}
+        provider={provider.name}
+        hasIcon={false}
+      >
+        Log in with {provider.descriptiveName}
+      </SignInUp.Oauth.Button>
+    ));
 
     return (
       <div>
