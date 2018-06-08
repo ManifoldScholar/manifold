@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
+import has from "lodash/has";
 import capitalize from "lodash/capitalize";
 import humps from "humps";
+import config from "../../../config";
 
 export default class InputError extends Component {
   static propTypes = {
@@ -15,7 +17,14 @@ export default class InputError extends Component {
   };
 
   nameFromPointer(pointer) {
-    return humps.decamelize(pointer.split("/").pop(), { separator: " " });
+    const attribute = humps.decamelize(pointer.split("/").pop(), {
+      separator: " "
+    });
+    const lookup = `app.locale.errors.pointers.${pointer}`;
+    if (has(config, lookup)) {
+      return get(config, lookup);
+    }
+    return attribute;
   }
 
   errorString(error) {
