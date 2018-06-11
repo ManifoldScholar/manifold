@@ -19,17 +19,26 @@ export default class UIPanel extends Component {
     });
 
     return (
-      <div className={visibilityClass}>
-        <FocusTrap
-          focusTrapOptions={{
-            onDeactivate: this.props.hidePanel,
-            clickOutsideDeactivates: true
-          }}
-          active={visibility}
-        >
-          {/* Second argument as props */}
-          {React.createElement(this.props.bodyComponent, { ...this.props })}
-        </FocusTrap>
+      <div>
+        {visibility ? (
+          <div className={visibilityClass}>
+            <FocusTrap
+              focusTrapOptions={{
+                clickOutsideDeactivates: true,
+                escapeDeactivates: false
+              }}
+            >
+              <button
+                className="screen-reader-text"
+                onClick={this.props.hidePanel}
+              >
+                Close Panel
+              </button>
+              {/* Second argument as props */}
+              {React.createElement(this.props.bodyComponent, { ...this.props })}
+            </FocusTrap>
+          </div>
+        ) : null}
       </div>
     );
   }

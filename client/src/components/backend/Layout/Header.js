@@ -124,7 +124,7 @@ export default class LayoutHeader extends Component {
                   }
                   startLogout={this.props.commonActions.logout}
                   hideUserMenu={this.props.commonActions.toggleUserPanel}
-                  hidePanel={this.props.commonActions.hideUserPanel}
+                  hidePanel={this.props.commonActions.toggleUserPanel}
                 />
               </li>
             </ul>
