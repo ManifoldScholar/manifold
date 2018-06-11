@@ -230,7 +230,7 @@ export default class Header extends Component {
             showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
             startLogout={this.props.commonActions.logout}
             hideUserMenu={this.props.commonActions.toggleUserPanel}
-            hidePanel={this.props.commonActions.hideUserPanel}
+            hidePanel={this.props.commonActions.toggleUserPanel}
           />
         </nav>
         <HeaderNotifications />
