@@ -14,7 +14,7 @@ module Ingestor
         # @author Zach Davis
         class TOC
           extend Memoist
-          include Ingestor::Loggable
+          include Ingestions::Concerns::Loggable
 
           def initialize(epub_inspector, ingestion)
             @ingestion = ingestion

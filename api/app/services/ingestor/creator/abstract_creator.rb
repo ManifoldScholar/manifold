@@ -4,7 +4,7 @@ module Ingestor
     #
     # @author Zach Davis
     class AbstractCreator
-      include ::Ingestor::Loggable
+      include ::Ingestions::Concerns::Loggable
       attr_writer :existing
 
       def initialize(logger, text)
