@@ -1,0 +1,95 @@
+upstream manifold-api.<%= tld.strip %> {
+ server unix:<%= socket_dir %>/manifold-api;
+}
+
+upstream manifold-cable.<%= tld.strip %> {
+ server unix:<%= socket_dir %>/manifold-cable;
+}
+
+upstream manifold-client.<%= tld.strip %> {
+ server 127.0.0.1:3010;
+}
+
+server {
+  access_log <%= log_dir %>/nginx.access.log combined;
+  listen 80;
+  root <%= root %>/api/public;
+  server_name manifold.<%= tld.strip %>;
+
+  client_max_body_size 100M;
+  client_body_timeout 600s;
+  proxy_send_timeout 600s;
+  proxy_read_timeout 600s;
+
+  error_page 500 502 503 504 /50x.html;
+
+  listen 443;
+  ssl    on;
+  ssl_certificate <%= root %>/config/dev/ssl/<%= name %>.<%= tld.strip %>.crt;
+  ssl_certificate_key <%= root %>/config/dev/ssl/<%= name %>.<%= tld.strip %>.key;
+  ssl_protocols  SSLv2 SSLv3 TLSv1;
+  ssl_ciphers  HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers   on;
+  ssl_session_timeout 10m;
+
+  if ($host ~* "www") {
+    rewrite ^(.*)$ http://<%= server_name %>$1 permanent;
+    break;
+  }
+
+  location = /50x.html {
+    root html;
+  }
+
+  location /sidekiq {
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_pass http://manifold-api.<%= tld.strip %>;
+  }
+
+  location /rails {
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_pass http://manifold-api.<%= tld.strip %>;
+  }
+
+  location /api {
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_pass http://manifold-api.<%= tld.strip %>;
+  }
+
+  location /auth {
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_pass http://manifold-api.<%= tld.strip %>;
+  }
+
+  location /cable {
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_pass http://manifold-cable.<%= tld.strip %>;
+  }
+
+  location / {
+
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+
+    if (-f $request_filename/index.html) {
+      rewrite (.*) $1/index.html break;
+    }
+
+    if (-f $request_filename.html) {
+      rewrite (.*) $1.html break;
+    }
+
+    if (!-f $request_filename) {
+      proxy_pass http://manifold-client.<%= tld.strip %>;
+      break;
+    }
+  }
+}
