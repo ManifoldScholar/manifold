@@ -23,7 +23,7 @@ module Demonstration
     end
 
     def import_projects
-      cli_user = User.find_by(is_cli_user: true)
+      cli_user = User.cli_user
       children = Pathname.new("../import").children.select(&:directory?)
       children.each do |child|
         next if File.file?(File.join(child, ".skip"))

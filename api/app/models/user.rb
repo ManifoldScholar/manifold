@@ -103,10 +103,6 @@ class User < ApplicationRecord
     end
   end
 
-  def self.cli_user
-    User.find_by(is_cli_user: true)
-  end
-
   def favorite(favoritable)
     favorites.create(favoritable: favoritable)
   end
@@ -176,5 +172,11 @@ class User < ApplicationRecord
   def password_not_blank!
     return if password.nil?
     errors.add(:password, "can't be blank") if password.blank?
+  end
+
+  class << self
+    def cli_user
+      find_by(is_cli_user: true)
+    end
   end
 end

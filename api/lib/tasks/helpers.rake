@@ -16,7 +16,7 @@ module Manifold
     end
 
     def self.cli_user
-      User.find_by(is_cli_user: true)
+      User.cli_user
     end
 
     def self.logger
