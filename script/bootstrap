@@ -31,4 +31,4 @@ fi
 cd .. &>/dev/null
 
 echo "==> Installing a local instance of ElasticSearch"
-m install elasticsearch
+bin/m install elasticsearch

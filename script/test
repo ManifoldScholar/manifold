@@ -27,4 +27,4 @@ else
 fi
 
 echo "==> Running tests…"
-m test
+bin/m test
