@@ -1,7 +1,6 @@
 module Ingestions
   module Pickers
     class AbstractPicker < AbstractInteraction
-      object :context, class: "Ingestions::Context"
       string :source_path, default: nil
 
       def execute
