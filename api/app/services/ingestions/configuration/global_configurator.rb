@@ -6,6 +6,7 @@ module Ingestions
       def initialize
         @converters = Ingestions::Configuration::ConverterRegistry.new
         @strategies = Ingestions::Configuration::StrategyRegistry.new
+        @fetchers = Ingestions::Configuration::FetcherRegistry.new
       end
 
       def configure(&block)
@@ -13,6 +14,12 @@ module Ingestions
 
         self
       end
+
+      def fetchers(&block)
+        @fetchers.configure(&block)
+      end
+
+      expose :fetchers
 
       def converters(&block)
         @converters.configure(&block)
