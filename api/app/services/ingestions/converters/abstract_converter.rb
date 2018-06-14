@@ -30,16 +30,23 @@ module Ingestions
 
       attr_reader :manifest
 
-      # @abstract
-      # @return [Boolean]
-      def determine_convertibility
-        raise NotImplementedError, "Must implement #{self.class}##{__method__}"
-      end
-
       # @return [Manifest]
       def perform
         raise NotImplementedError, "Must implement #{self.class}##{__method__}"
       end
+
+      # @abstract
+      # @return [Boolean]
+      def self.convertible_extensions
+        raise NotImplementedError, "Must implement #{self.class}##{__method__}"
+      end
+
+      protected
+
+      def determine_convertibility
+        self.class.convertible_extensions.include? File.extname(source_path).delete(".")
+      end
+
     end
   end
 end

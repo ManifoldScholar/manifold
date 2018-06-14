@@ -6,11 +6,11 @@ module Ingestions
         convert_to_html
       end
 
-      private
-
-      def determine_convertibility
-        File.extname(source_path).delete(".") == "md"
+      def self.convertible_extensions
+        %w(md markdown)
       end
+
+      protected
 
       def markdown_contents
         @markdown_contents ||= parse_document

@@ -6,10 +6,8 @@ module Ingestions
         contents
       end
 
-      private
-
-      def determine_convertibility
-        %w(htm html).include? File.extname(source_path).delete(".")
+      def self.convertible_extensions
+        %w(htm html)
       end
 
     end
