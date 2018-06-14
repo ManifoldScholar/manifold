@@ -152,4 +152,31 @@ RSpec.describe Ingestions::Strategies::Document do
 
     include_examples "outcome assertions"
   end
+
+  context "when google doc", slow: true do
+
+    before(:all) do
+      url = "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing"
+      @ingestion = FactoryBot.create(:ingestion, external_source_url: url)
+      WebMock.allow_net_connect!
+      @context = Ingestions::Context.new(@ingestion)
+      WebMock.disable_net_connect!
+      @manifest = described_class.run(context: @context).result
+    end
+
+    it "has the correct text section attributes" do
+      expected = [{"source_identifier"=>"GoogleDocPrime.html", "name"=>"Edit?Usp=Sharing", "kind"=>"section", "position"=>1, "build"=>"build/GoogleDocPrime.html"}]
+      expect(@manifest[:relationships][:text_sections]).to eq expected
+    end
+
+    it "has the correct number of stylesheets" do
+      expect(@manifest[:relationships][:stylesheets].length).to eq 1
+    end
+
+    it "has the correct number of ingestion sources" do
+      expect(@manifest[:relationships][:ingestion_sources].length).to eq 2
+    end
+
+  end
+
 end
