@@ -32,12 +32,16 @@ export class FormUpload extends Component {
     accepts: PropTypes.string,
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
-    errors: PropTypes.array
+    errors: PropTypes.array,
+    inputId: PropTypes.string,
+    idForError: PropTypes.string
   };
 
   static defaultProps = {
     layout: "square",
-    accepts: "any"
+    accepts: "any",
+    inputId: uniqueId("upload-"),
+    idForError: uniqueId("upload-error-")
   };
 
   static types = {
@@ -103,10 +107,6 @@ export class FormUpload extends Component {
       removed: false,
       attachment: null
     };
-  }
-
-  componentDidMount() {
-    this.id = uniqueId("upload-");
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -281,10 +281,13 @@ export class FormUpload extends Component {
     const labelClass = classnames({
       "has-instructions": isString(this.props.instructions)
     });
+    const inputProps = {
+      id: this.props.inputId,
+      "aria-describedby": this.props.idForError
+    };
     const dropzoneProps = {};
     const { accepts } = this.accepts(this.props);
     if (accepts) dropzoneProps.accept = accepts;
-
     return (
       <div className="form-input">
         <GlobalForm.Errorable
@@ -292,15 +295,16 @@ export class FormUpload extends Component {
           name={this.props.name}
           errors={this.props.errors}
           label={this.props.label}
+          idForError={this.props.idForError}
         >
           {this.props.label ? (
-            <label htmlFor={this.id} className={labelClass}>
+            <label htmlFor={this.props.inputId} className={labelClass}>
               {this.props.label}
             </label>
           ) : null}
           <Instructions instructions={this.props.instructions} />
           <Dropzone
-            id={this.id}
+            inputProps={inputProps}
             style={this.props.inlineStyle}
             className={`form-dropzone style-${this.props.layout}`}
             multiple={false}

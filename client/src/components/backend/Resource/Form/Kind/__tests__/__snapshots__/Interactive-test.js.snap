@@ -10,12 +10,13 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="text-input-15"
     >
       Minimum Width
     </label>
     <input
-      id={undefined}
+      aria-describedby="text-input-error-16"
+      id="text-input-15"
       onChange={[Function]}
       placeholder="The minimum display width"
       type="text"
@@ -28,12 +29,13 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="text-input-15"
     >
       Minimum Height
     </label>
     <input
-      id={undefined}
+      aria-describedby="text-input-error-16"
+      id="text-input-15"
       onChange={[Function]}
       placeholder="The minimum display height"
       type="text"
@@ -46,12 +48,13 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="text-input-15"
     >
       iFrame URL
     </label>
     <input
-      id={undefined}
+      aria-describedby="text-input-error-16"
+      id="text-input-15"
       onChange={[Function]}
       placeholder="Enter iFrame URL"
       type="text"
@@ -71,12 +74,13 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="text-input-15"
     >
       Minimum Width
     </label>
     <input
-      id={undefined}
+      aria-describedby="text-input-error-16"
+      id="text-input-15"
       onChange={[Function]}
       placeholder="The minimum display width"
       type="text"
@@ -89,12 +93,13 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="text-input-15"
     >
       Minimum Height
     </label>
     <input
-      id={undefined}
+      aria-describedby="text-input-error-16"
+      id="text-input-15"
       onChange={[Function]}
       placeholder="The minimum display height"
       type="text"
@@ -107,12 +112,13 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="text-input-15"
     >
       iFrame URL
     </label>
     <input
-      id={undefined}
+      aria-describedby="text-input-error-16"
+      id="text-input-15"
       onChange={[Function]}
       placeholder="Enter iFrame URL"
       type="text"

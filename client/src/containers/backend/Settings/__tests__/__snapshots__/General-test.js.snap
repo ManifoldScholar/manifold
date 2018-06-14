@@ -14,7 +14,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           How do you refer to your Manifold installation?
         </label>
@@ -24,7 +24,8 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           There are various places throughout the application where             Manifold refers to itself. If you set a value here, Manifold will use it where             appropriate. For example, you could call it "Manifold at the University of             Minnesota Press" or just "University of Minnesota Digital Books." Or, if you            prefer, you can leave this blank, and Manifold will just refer to itself as             "Manifold."
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Manifold"
           type="text"
@@ -37,7 +38,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Default Page Title
         </label>
@@ -47,7 +48,8 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           This field will be used as the page title on the home page, and will be appended to the page title on core Manifold pages. Defaults to 'Manifold Scholarship'.
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter page title"
           type="text"
@@ -60,12 +62,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Default Publisher
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter Default Publisher"
           type="text"
@@ -78,12 +81,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Default Place of Publication
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter Default Place of Publication"
           type="text"
@@ -96,7 +100,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Copyright
         </label>
@@ -106,7 +110,8 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           Enter the installation copyright information to be displayed in the footer.
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter Copyright Information"
           type="text"
@@ -119,7 +124,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Social Sharing Message
         </label>
@@ -129,7 +134,8 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           Enter the text you would like to appear when a page is shared.
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -142,7 +148,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Twitter Account
         </label>
@@ -152,7 +158,8 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           Enter the twitter account associated with this installation.
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter Twitter account"
           type="text"
@@ -165,7 +172,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Facebook Page ID
         </label>
@@ -175,7 +182,8 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           Enter an ID for this installation/organization's Facebook page.
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter Facebook ID"
           type="text"
@@ -188,7 +196,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Contact Email
         </label>
@@ -198,7 +206,8 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           If present, the footer will contain a link to a contact form that will be delivered to this address.
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter an email address"
           type="text"

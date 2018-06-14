@@ -26,12 +26,13 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-9"
           >
             First Name
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-10"
+            id="text-input-9"
             onChange={[Function]}
             placeholder="First Name"
             type="text"
@@ -44,12 +45,13 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-9"
           >
             Middle Name
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-10"
+            id="text-input-9"
             onChange={[Function]}
             placeholder="Middle Name"
             type="text"
@@ -62,12 +64,13 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-9"
           >
             Last Name
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-10"
+            id="text-input-9"
             onChange={[Function]}
             placeholder="Last Name"
             type="text"
@@ -80,12 +83,13 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-9"
           >
             Suffix
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-10"
+            id="text-input-9"
             onChange={[Function]}
             placeholder="Suffix"
             type="text"
@@ -101,14 +105,19 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor={undefined}
+              htmlFor="upload-11"
             >
               Avatar Image
             </label>
             <react-dropzone
               accept="image/*"
               className="form-dropzone style-square"
-              id={undefined}
+              inputProps={
+                Object {
+                  "aria-describedby": "upload-error-12",
+                  "id": "upload-11",
+                }
+              }
               multiple={false}
               onDrop={[Function]}
               style={undefined}

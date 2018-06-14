@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
-import uniqueId from "lodash/uniqueId";
 
 export default class VisibilityMenuBody extends PureComponent {
   static displayName = "ControlMenu.VisibilityMenuBody";
@@ -45,17 +44,17 @@ export default class VisibilityMenuBody extends PureComponent {
         <i className={this.iconClasses(format)} aria-hidden="true" />
         <span>{label}</span>
         <div className="filters">
-          {Object.keys(filterState).map(key => {
-            return this.renderCheckbox(key, filterState, format);
+          {Object.keys(filterState).map((key, index) => {
+            return this.renderCheckbox(key, filterState, format, index);
           })}
         </div>
       </li>
     );
   }
 
-  renderCheckbox(key, filterState, format) {
+  renderCheckbox(key, filterState, format, index) {
     let label = capitalize(key);
-    const checkboxId = uniqueId(label + "-checkbox-");
+    const checkboxId = key + "-checkbox-" + index;
     if (key === "all") label = "Show All";
 
     return (

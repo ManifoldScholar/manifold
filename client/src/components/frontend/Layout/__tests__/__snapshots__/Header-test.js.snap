@@ -143,6 +143,7 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
   />
   <section
     className="notifications-container"
+    role="alert"
   >
     <div
       className="notifications-list-header notifications-list"

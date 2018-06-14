@@ -29,7 +29,10 @@ exports[`Frontend Not Found Container renders correctly 1`] = `
         </h3>
       </header>
       <div
+        aria-atomic="true"
+        aria-live="assertive"
         className="error-description"
+        role="alert"
       >
         <h1>
           404 error.

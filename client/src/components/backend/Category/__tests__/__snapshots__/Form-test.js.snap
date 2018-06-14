@@ -13,12 +13,13 @@ exports[`Backend.Category.Form Component renders correctly 1`] = `
     >
       <label
         className=""
-        htmlFor={undefined}
+        htmlFor="text-input-15"
       >
         Title
       </label>
       <input
-        id={undefined}
+        aria-describedby="text-input-error-16"
+        id="text-input-15"
         onChange={[Function]}
         placeholder="What would you like to call this category?"
         type="text"

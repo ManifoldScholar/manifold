@@ -51,7 +51,10 @@ export class ListSearchable extends PureComponent {
     filterChangeHandler: PropTypes.func,
     currentUser: PropTypes.object,
     initialFilter: PropTypes.object, // Initial filter is to set filter state from an existing state
-    defaultFilter: PropTypes.object // Default filter is what filter is set to when resetSearch() is called
+    defaultFilter: PropTypes.object, // Default filter is what filter is set to when resetSearch() is called
+    searchId: PropTypes.string,
+    filterId: PropTypes.string,
+    sortId: PropTypes.string
   };
 
   static defaultProps = {
@@ -60,19 +63,16 @@ export class ListSearchable extends PureComponent {
     secondaryButton: null,
     paginationPadding: 3,
     requireAbility: null,
-    initialFilter: null
+    initialFilter: null,
+    searchId: uniqueId("list-search-"),
+    filterId: uniqueId("list-filter-"),
+    sortId: uniqueId("list-sort-")
   };
 
   constructor(props) {
     super(props);
     this.state = this.initialState(props);
     this.authorization = new Authorization();
-  }
-
-  componentDidMount() {
-    this.searchId = uniqueId("list-search-");
-    this.filterId = uniqueId("filter-");
-    this.sortId = uniqueId("sort-");
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -139,7 +139,7 @@ export class ListSearchable extends PureComponent {
 
     return (
       <div className="select-group">
-        <label htmlFor={this.sortId}>Sort By:</label>
+        <label htmlFor={this.props.sortId}>Sort By:</label>
         {this.renderSortSelect(adjustedOptions)}
       </div>
     );
@@ -149,7 +149,7 @@ export class ListSearchable extends PureComponent {
     if (!this.state.showOptions || !this.props.filterOptions) return null;
     return (
       <div className="select-group">
-        <label htmlFor={this.filterId}>Filter Results:</label>
+        <label htmlFor={this.props.filterId}>Filter Results:</label>
         {Object.keys(this.props.filterOptions).map(filter =>
           this.renderFilterSelect(filter)
         )}
@@ -161,7 +161,7 @@ export class ListSearchable extends PureComponent {
     return (
       <div className="select" key="filter[order]">
         <select
-          id={this.sortId}
+          id={this.props.sortId}
           onChange={event => this.setFilter(event, "order")}
           value={this.state.filter.order || ""}
           data-id={"filter"}
@@ -178,7 +178,7 @@ export class ListSearchable extends PureComponent {
     return (
       <div className="select" key={filter}>
         <select
-          id={this.filterId}
+          id={this.props.filterId}
           onChange={event => this.setFilter(event, filter)}
           value={this.state.filter[filter] || ""}
           data-id={"filter"}
@@ -316,11 +316,11 @@ export class ListSearchable extends PureComponent {
               <i className="manicon manicon-magnify" aria-hidden="true" />
               <span className="screen-reader-text">Click to search</span>
             </button>
-            <label htmlFor={this.searchId} className="screen-reader-text">
+            <label htmlFor={this.props.searchId} className="screen-reader-text">
               Enter Search Criteria
             </label>
             <input
-              id={this.searchId}
+              id={this.props.searchId}
               value={this.state.filter.keyword || ""}
               type="text"
               placeholder="Search..."

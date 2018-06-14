@@ -17,7 +17,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor={undefined}
+            htmlFor="upload-17"
           >
             Press Logo
           </label>
@@ -29,7 +29,12 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           <react-dropzone
             accept="image/*"
             className="form-dropzone style-square"
-            id={undefined}
+            inputProps={
+              Object {
+                "aria-describedby": "upload-error-18",
+                "id": "upload-17",
+              }
+            }
             multiple={false}
             onDrop={[Function]}
             style={undefined}
@@ -75,7 +80,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Press Website URL
         </label>
@@ -85,7 +90,8 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           If present, the press logo image will link to this URL.
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter URL"
           type="text"
@@ -98,7 +104,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Logo Styles
         </label>
@@ -108,7 +114,8 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           Enter a JSON style object, which will be applied to the logo image. For example: {"left": -1}
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Additional Logo CSS"
           type="text"
@@ -121,12 +128,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Typekit ID
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter Typekit ID"
           type="text"

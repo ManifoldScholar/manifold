@@ -2,7 +2,11 @@
 
 exports[`Global.Form.InputError component renders correctly 1`] = `
 <span
+  aria-atomic="true"
+  aria-live="polite"
   className="errors"
+  id={null}
+  role="alert"
 >
   <span
     className="error"

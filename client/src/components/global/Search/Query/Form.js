@@ -12,7 +12,8 @@ export default class SearchQuery extends PureComponent {
     facets: PropTypes.array,
     scopes: PropTypes.array,
     description: PropTypes.string,
-    searchType: PropTypes.string
+    searchType: PropTypes.string,
+    searchId: PropTypes.string
   };
 
   /* eslint-disable no-console */
@@ -23,7 +24,8 @@ export default class SearchQuery extends PureComponent {
       console.warn("The SearchQuery component expects an doSearch callback.");
       console.warn("Current SearchQuery State");
       console.warn(state);
-    }
+    },
+    searchId: uniqueId("query-search-")
   };
   /* eslint-enable no-console */
 
@@ -43,10 +45,6 @@ export default class SearchQuery extends PureComponent {
     } else {
       this.state = Object.assign({}, defaultState);
     }
-  }
-
-  componentDidMount() {
-    this.searchId = uniqueId("query-search-");
   }
 
   componentDidUpdate() {
@@ -144,12 +142,12 @@ export default class SearchQuery extends PureComponent {
     return (
       <form className="search-query" onSubmit={this.doSearch}>
         <div className="input-magnify">
-          <label htmlFor={this.searchId} className="screen-reader-text">
+          <label htmlFor={this.props.searchId} className="screen-reader-text">
             Enter Search Criteria
           </label>
           <input
             type="text"
-            id={this.searchId}
+            id={this.props.searchId}
             autoFocus
             onChange={this.setKeyword}
             value={this.state.keyword}
@@ -168,8 +166,8 @@ export default class SearchQuery extends PureComponent {
               {this.props.searchType === "reader" ? (
                 <h4 className="group-label">{"Search within:"}</h4>
               ) : null}
-              {this.props.scopes.map(scope => {
-                const filterCheckboxId = uniqueId(scope.value + "-");
+              {this.props.scopes.map((scope, index) => {
+                const filterCheckboxId = scope.value + "-" + index;
 
                 return (
                   <label
@@ -211,8 +209,8 @@ export default class SearchQuery extends PureComponent {
                 </div>
                 {"Everything"}
               </label>
-              {this.props.facets.map(facet => {
-                const facetCheckboxId = uniqueId(facet.value + "-");
+              {this.props.facets.map((facet, index) => {
+                const facetCheckboxId = facet.value + "-" + index;
 
                 return (
                   <label

@@ -105,6 +105,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
           <GlobalForm.Errorable
             name="attributes[body]"
             errors={this.state.errors}
+            idForError="annotation-textarea-error"
           >
             <label htmlFor="annotation-textarea" className="screen-reader-text">
               Annotate this passage
@@ -114,6 +115,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
                 this.ci = ci;
               }}
               id="annotation-textarea"
+              aria-describedby="annotation-textarea-error"
               style={{ width: "100%" }}
               placeholder={"Annotate this passage..."}
               onChange={this.handleBodyChange}

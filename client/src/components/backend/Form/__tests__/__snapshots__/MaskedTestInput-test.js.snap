@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Form.MaskedTextInput component renders correctly 1`] = `"<div class=\\"form-input\\"><label class=\\"\\">Label this</label>ReactTextMask</div>"`;
+exports[`Backend.Form.MaskedTextInput component renders correctly 1`] = `"<div class=\\"form-input\\"><label for=\\"masked-text-1\\" class=\\"\\">Label this</label>ReactTextMask</div>"`;

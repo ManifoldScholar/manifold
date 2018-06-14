@@ -18,16 +18,16 @@ class FormTextArea extends Component {
     value: PropTypes.string,
     errors: PropTypes.array,
     name: PropTypes.string,
+    id: PropTypes.string,
+    idForError: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
   static defaultProps = {
-    height: 100
+    height: 100,
+    id: uniqueId("textarea-"),
+    idForError: uniqueId("textarea-error-")
   };
-
-  componentDidMount() {
-    this.id = uniqueId("textarea-");
-  }
 
   render() {
     const labelClass = classnames({
@@ -41,13 +41,15 @@ class FormTextArea extends Component {
           name={this.props.name}
           errors={this.props.errors}
           label={this.props.label}
+          idForError={this.props.idForError}
         >
-          <label htmlFor={this.id} className={labelClass}>
+          <label htmlFor={this.props.id} className={labelClass}>
             {this.props.label}
           </label>
           <Instructions instructions={this.props.instructions} />
           <textarea
-            id={this.id}
+            id={this.props.id}
+            aria-describedby={this.props.idForError}
             style={{ height: this.props.height }}
             placeholder={this.props.placeholder}
             onChange={this.props.onChange}

@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
+import uniqueId from "lodash/uniqueId";
 import { Form as FormContainer } from "containers/backend";
 import { Form as GlobalForm } from "components/global";
 
@@ -17,7 +18,8 @@ class FormPredictiveBelongsTo extends PureComponent {
     getModelValue: PropTypes.func,
     readOnly: PropTypes.bool,
     relationName: PropTypes.string,
-    errors: PropTypes.array
+    errors: PropTypes.array,
+    idForError: PropTypes.string
   };
 
   handleSelect = entity => {
@@ -37,6 +39,7 @@ class FormPredictiveBelongsTo extends PureComponent {
             className="form-input"
             name={`attributes[${this.props.relationName}]`}
             errors={this.props.errors}
+            idForError={this.props.idForError}
           >
             <FormContainer.PredictiveInput
               className="input-predictive"
@@ -45,6 +48,7 @@ class FormPredictiveBelongsTo extends PureComponent {
               placeholder="Select User"
               label={this.props.label}
               onSelect={entity => this.handleSelect(entity)}
+              idForError={this.props.idForError}
             />
           </GlobalForm.Errorable>
         ) : null}

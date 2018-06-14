@@ -31,11 +31,15 @@ export class CommentEditor extends PureComponent {
     onSuccess: PropTypes.func,
     subject: PropTypes.object.isRequired,
     parentId: PropTypes.string,
-    focus: PropTypes.bool
+    focus: PropTypes.bool,
+    id: PropTypes.string,
+    idForError: PropTypes.string
   };
 
   static defaultProps = {
-    focus: true
+    focus: true,
+    id: uniqueId("comment-textarea-"),
+    idForError: uniqueId("comment-textarea-error-")
   };
 
   constructor(props) {
@@ -44,8 +48,6 @@ export class CommentEditor extends PureComponent {
   }
 
   componentDidMount() {
-    this.id = uniqueId("cooment-textarea-");
-
     if (!this.ci) return null;
     if (this.props.focus) {
       this.ci.focus();
@@ -181,20 +183,22 @@ export class CommentEditor extends PureComponent {
             <GlobalForm.Errorable
               name="attributes[body]"
               errors={this.state.errors}
+              idForError={this.props.idForError}
             >
-              <label htmlFor={this.id} className="screen-reader-text">
+              <label htmlFor={this.props.id} className="screen-reader-text">
                 {this.placeholder(this.props)}
               </label>
               <textarea
                 ref={ci => {
                   this.ci = ci;
                 }}
-                id={this.id}
+                id={this.props.id}
                 onKeyDown={this.submitOnReturnKey}
                 className={textClass}
                 placeholder={this.placeholder(this.props)}
                 onChange={this.handleBodyChange}
                 value={this.state.body}
+                aria-describedby={this.props.idForError}
               />
               <div className="utility">
                 <div className="buttons">

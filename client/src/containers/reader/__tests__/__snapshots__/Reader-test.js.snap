@@ -441,6 +441,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
       </nav>
       <section
         className="notifications-container"
+        role="alert"
       >
         <div
           className="notifications-list-header notifications-list"

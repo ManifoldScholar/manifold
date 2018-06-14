@@ -112,7 +112,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                       <HeaderNotification scope=\\"global\\">
                         <Connect(NotificationsComponent) scope=\\"global\\">
                           <NotificationsComponent scope=\\"global\\" notifications={{...}} dispatch={[Function]} animate={true} style=\\"header\\">
-                            <section className=\\"notifications-container\\">
+                            <section className=\\"notifications-container\\" role=\\"alert\\">
                               <div className=\\"notifications-list-header notifications-list\\">
                                 <CSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
                                   <TransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">

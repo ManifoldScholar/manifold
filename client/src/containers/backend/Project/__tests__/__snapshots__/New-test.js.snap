@@ -90,12 +90,13 @@ exports[`Backend Project New Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor={undefined}
+                  htmlFor="text-input-15"
                 >
                   Title
                 </label>
                 <input
-                  id={undefined}
+                  aria-describedby="text-input-error-16"
+                  id="text-input-15"
                   onChange={[Function]}
                   placeholder="Enter Project Title"
                   type="text"
@@ -108,12 +109,13 @@ exports[`Backend Project New Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor={undefined}
+                  htmlFor="text-input-15"
                 >
                   Subtitle
                 </label>
                 <input
-                  id={undefined}
+                  aria-describedby="text-input-error-16"
+                  id="text-input-15"
                   onChange={[Function]}
                   placeholder="Enter Project Subtitle"
                   type="text"
@@ -129,12 +131,13 @@ exports[`Backend Project New Container renders correctly 1`] = `
                 >
                   <label
                     className=""
-                    htmlFor={undefined}
+                    htmlFor="textarea-13"
                   >
                     Description
                   </label>
                   <textarea
-                    id={undefined}
+                    aria-describedby="textarea-error-14"
+                    id="textarea-13"
                     onChange={[Function]}
                     placeholder={undefined}
                     style={

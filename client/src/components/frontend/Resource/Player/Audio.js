@@ -7,7 +7,14 @@ import uniqueId from "lodash/uniqueId";
 
 export default class ResourcePlayerAudio extends Component {
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    progressBarId: PropTypes.string,
+    volumeBarId: PropTypes.string
+  };
+
+  static defaultProps = {
+    progressBarId: uniqueId("progress-bar-"),
+    volumeBarId: uniqueId("volume-bar-")
   };
 
   constructor() {
@@ -27,8 +34,6 @@ export default class ResourcePlayerAudio extends Component {
 
   componentDidMount() {
     // https://github.com/katspaugh/wavesurfer.js/issues/1334
-    this.progressBarId = uniqueId("progress-bar-");
-    this.volumeBarId = uniqueId("volume-bar-");
     this.WaveSurfer = require("wavesurfer"); // eslint-disable-line global-require
     this.throttleUpdateTime = throttle(this.updateTime, 900);
     this.debouncedResize = debounce(this.resizeWaveform, 120);
@@ -197,13 +202,13 @@ export default class ResourcePlayerAudio extends Component {
                 }}
               />
               <label
-                htmlFor={this.progressBarId}
+                htmlFor={this.props.progressBarId}
                 className="screen-reader-text"
               >
                 Progress Bar
               </label>
               <input
-                id={this.progressBarId}
+                id={this.props.progressBarId}
                 type="range"
                 min="0"
                 max="100"
@@ -227,11 +232,14 @@ export default class ResourcePlayerAudio extends Component {
                   left: `${volume * 0.7 - 10}px`
                 }}
               />
-              <label htmlFor={this.volumeBarId} className="screen-reader-text">
+              <label
+                htmlFor={this.props.volumeBarId}
+                className="screen-reader-text"
+              >
                 Adjust Volume
               </label>
               <input
-                id={this.volumeBarId}
+                id={this.props.volumeBarId}
                 type="range"
                 min="0"
                 max="100"

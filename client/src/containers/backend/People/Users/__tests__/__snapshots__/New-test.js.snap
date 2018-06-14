@@ -23,12 +23,13 @@ exports[`Backend Users New Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-1"
+          htmlFor="text-input-15"
         >
           Email
         </label>
         <input
-          id="text-input-1"
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Email"
           type="text"
@@ -43,7 +44,7 @@ exports[`Backend Users New Container renders correctly 1`] = `
           style={Object {}}
         >
           <label
-            htmlFor="select-2"
+            htmlFor={undefined}
           >
             Role
           </label>
@@ -55,7 +56,8 @@ exports[`Backend Users New Container renders correctly 1`] = `
               className="manicon manicon-caret-down"
             />
             <select
-              id="select-2"
+              aria-describedby="select-error-12"
+              id={undefined}
               onChange={[Function]}
               value="reader"
             >
@@ -94,12 +96,13 @@ exports[`Backend Users New Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-3"
+          htmlFor="text-input-15"
         >
           First Name
         </label>
         <input
-          id="text-input-3"
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="First Name"
           type="text"
@@ -112,12 +115,13 @@ exports[`Backend Users New Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-4"
+          htmlFor="text-input-15"
         >
           Last Name
         </label>
         <input
-          id="text-input-4"
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Last Name"
           type="text"
@@ -129,7 +133,7 @@ exports[`Backend Users New Container renders correctly 1`] = `
         style={Object {}}
       >
         <label
-          htmlFor="generated-password-5"
+          htmlFor="generated-password-7"
         >
           Password
         </label>
@@ -150,7 +154,8 @@ exports[`Backend Users New Container renders correctly 1`] = `
           </span>
         </span>
         <input
-          id="generated-password-5"
+          aria-describedby="generated-password-error-8"
+          id="generated-password-7"
           onChange={[Function]}
           placeholder="Enter a password"
           type="password"

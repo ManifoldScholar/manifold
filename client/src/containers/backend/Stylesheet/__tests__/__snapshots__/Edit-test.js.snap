@@ -35,14 +35,14 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                                         <p className=\\"instructions\\" />
                                       </div>
                                       <Form.Setter('Form.TextInput) label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}}>
-                                        <Form.TextInput label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false} join={[Function: join]}>
-                                          <Errorable className=\\"form-input\\" name=\\"attributes[name]\\" errors={{...}} label=\\"Name\\" containerStyle={{...}}>
+                                        <Form.TextInput label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                          <Errorable className=\\"form-input\\" name=\\"attributes[name]\\" errors={{...}} label=\\"Name\\" idForError=\\"text-input-error-16\\" containerStyle={{...}}>
                                             <div style={{...}} className=\\"form-input\\">
-                                              <label htmlFor={[undefined]} className=\\"\\">
+                                              <label htmlFor=\\"text-input-15\\" className=\\"\\">
                                                 Name
                                               </label>
                                               <Instructions instructions={{...}} />
-                                              <input id={[undefined]} type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" />
+                                              <input id=\\"text-input-15\\" type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"text-input-error-16\\" />
                                             </div>
                                           </Errorable>
                                         </Form.TextInput>

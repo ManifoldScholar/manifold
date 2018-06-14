@@ -21,16 +21,17 @@ class FormMaskedTextInput extends Component {
     label: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.string,
-    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    id: PropTypes.string
+  };
+
+  static defaultProps = {
+    id: uniqueId("masked-text-")
   };
 
   constructor() {
     super();
     this.placeholderChar = "\u005F"; // react-text-mask default "_"
-  }
-
-  componentDidMount() {
-    this.id = uniqueId("masked-text-");
   }
 
   currencyMask() {
@@ -91,14 +92,14 @@ class FormMaskedTextInput extends Component {
 
     return (
       <div className="form-input">
-        <label htmlFor={this.id} className={labelClass}>
+        <label htmlFor={this.props.id} className={labelClass}>
           {this.props.label}
         </label>
         <Instructions instructions={this.props.instructions} />
         <MaskedInput
           onChange={this.props.onChange}
           value={this.props.value}
-          id={this.id}
+          id={this.props.id}
           type="text"
           mask={mask}
           placeholder={this.props.placeholder}

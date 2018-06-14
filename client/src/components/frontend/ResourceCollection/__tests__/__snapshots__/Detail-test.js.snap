@@ -285,12 +285,12 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
         </button>
         <label
           className="screen-reader-text"
-          htmlFor={undefined}
+          htmlFor="filters-search-20"
         >
           Enter Search Criteria
         </label>
         <input
-          id={undefined}
+          id="filters-search-20"
           onChange={[Function]}
           placeholder="Search"
           type="text"

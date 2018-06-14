@@ -9,7 +9,8 @@ import config from "../../../config";
 export default class InputError extends Component {
   static propTypes = {
     errors: PropTypes.array,
-    name: PropTypes.string
+    name: PropTypes.string,
+    idForError: PropTypes.string
   };
 
   hasErrors = () => {
@@ -38,7 +39,13 @@ export default class InputError extends Component {
   render() {
     if (this.hasErrors()) {
       return (
-        <span className="errors">
+        <span
+          id={this.props.idForError ? this.props.idForError : null}
+          className="errors"
+          role="alert"
+          aria-live="polite"
+          aria-atomic="true"
+        >
           {this.props.errors.map((e, i) => {
             return (
               <span key={i} className="error">

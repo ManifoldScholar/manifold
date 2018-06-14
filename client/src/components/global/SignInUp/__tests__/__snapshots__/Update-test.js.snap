@@ -34,6 +34,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
       style={Object {}}
     >
       <input
+        aria-describedby="update-nickname-error"
         aria-labelledby="update-nickname-label"
         id="update-nickname"
         name="nickname"
@@ -62,6 +63,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
         First Name
       </label>
       <input
+        aria-describedby="update-firstName-error"
         id="update-firstName"
         name="firstName"
         onChange={[Function]}
@@ -80,6 +82,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
         Last Name
       </label>
       <input
+        aria-describedby="update-lastName-error"
         id="update-lastName"
         name="lastName"
         onChange={[Function]}
@@ -98,6 +101,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
         Email
       </label>
       <input
+        aria-describedby="update-email-error"
         id="update-email"
         name="email"
         onChange={[Function]}
@@ -116,6 +120,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
         Password
       </label>
       <input
+        aria-describedby="update-password-error"
         id="update-password"
         name="password"
         onChange={[Function]}
@@ -134,6 +139,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
         Confirm Password
       </label>
       <input
+        aria-describedby="update-passwordConfirmation-error"
         id="update-passwordConfirmation"
         name="passwordConfirmation"
         onChange={[Function]}

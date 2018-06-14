@@ -14,12 +14,13 @@ exports[`Backend Collection General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Title
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter a title"
           type="text"
@@ -35,12 +36,13 @@ exports[`Backend Collection General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="textarea-13"
           >
             Description
           </label>
           <textarea
-            id={undefined}
+            aria-describedby="textarea-error-14"
+            id="textarea-13"
             onChange={[Function]}
             placeholder="Enter a description"
             style={
@@ -61,14 +63,19 @@ exports[`Backend Collection General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="upload-17"
           >
             Cover Image
           </label>
           <react-dropzone
             accept="image/*"
             className="form-dropzone style-landscape"
-            id={undefined}
+            inputProps={
+              Object {
+                "aria-describedby": "upload-error-18",
+                "id": "upload-17",
+              }
+            }
             multiple={false}
             onDrop={[Function]}
             style={undefined}

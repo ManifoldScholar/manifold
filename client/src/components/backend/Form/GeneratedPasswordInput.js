@@ -15,11 +15,15 @@ class FormGeneratedPasswordInput extends Component {
     value: PropTypes.any,
     focusOnMount: PropTypes.bool,
     errors: PropTypes.array,
-    set: PropTypes.func
+    set: PropTypes.func,
+    id: PropTypes.string,
+    idForError: PropTypes.string
   };
 
   static defaultProps = {
-    focusOnMount: false
+    focusOnMount: false,
+    id: uniqueId("generated-password-"),
+    idForError: uniqueId("generated-password-error-")
   };
 
   constructor(props) {
@@ -31,7 +35,6 @@ class FormGeneratedPasswordInput extends Component {
   }
 
   componentDidMount() {
-    this.id = uniqueId("generated-password-");
     if (this.props.focusOnMount === true && this.inputElement)
       this.inputElement.focus();
     this.setValueFromCurrentState();
@@ -68,12 +71,14 @@ class FormGeneratedPasswordInput extends Component {
     // });
     //
     const type = this.state.showPassword ? "text" : "password";
+
     return (
       <input
         ref={input => {
           this.inputElement = input;
         }}
-        id={this.id}
+        id={this.props.id}
+        aria-describedby={this.props.idForError}
         type={type}
         placeholder={"Enter a password"}
         onChange={event => this.handlePasswordChange(event)}
@@ -95,8 +100,9 @@ class FormGeneratedPasswordInput extends Component {
         name={this.props.name}
         errors={this.props.errors}
         label="Password"
+        idForError={this.props.idForError}
       >
-        <label htmlFor={this.id}>Password</label>
+        <label htmlFor={this.props.id}>Password</label>
         <span
           className="password-visibility-toggle"
           onClick={event => this.togglePassword(event)}

@@ -25,12 +25,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Facebook App ID
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -43,12 +44,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Facebook App Secret
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="password"
@@ -72,12 +74,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Twitter Consumer Key
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -90,12 +93,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Twitter Consumer Secret
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="password"
@@ -108,12 +112,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Twitter Access Token
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -126,12 +131,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Twitter Access Token Secret
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="password"
@@ -158,14 +164,19 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="upload-17"
           >
             Google Service Config File
           </label>
           <react-dropzone
             accept="application/json"
             className="form-dropzone style-square"
-            id={undefined}
+            inputProps={
+              Object {
+                "aria-describedby": "upload-error-18",
+                "id": "upload-17",
+              }
+            }
             multiple={false}
             onDrop={[Function]}
             style={undefined}
@@ -214,12 +225,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="textarea-13"
           >
             Google Private Key
           </label>
           <textarea
-            id={undefined}
+            aria-describedby="textarea-error-14"
+            id="textarea-13"
             onChange={[Function]}
             placeholder={undefined}
             style={
@@ -237,12 +249,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Google Project Id
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -255,12 +268,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Google Private Key ID
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -273,12 +287,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Google Client Email
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -291,12 +306,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Google Client ID
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -320,12 +336,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Google OAuth Client ID
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -338,12 +355,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Google Client Secret
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="password"
@@ -366,12 +384,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="masked-text-10"
         >
           Google Analytics Profile ID
         </label>
         <react-text-mask
-          id={undefined}
+          id="masked-text-10"
           mask={
             Array [
               "g",
@@ -401,12 +419,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Google Analytics Tracking ID
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="UA-000000-00"
           type="text"

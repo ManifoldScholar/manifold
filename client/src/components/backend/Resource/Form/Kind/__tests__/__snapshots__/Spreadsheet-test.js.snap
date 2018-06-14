@@ -10,14 +10,19 @@ exports[`Backend.Resource.Form.Spreadsheet component renders correctly 1`] = `
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="upload-17"
     >
       Spreadsheet File
     </label>
     <react-dropzone
       accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.oasis.opendocument.spreadsheet,"
       className="form-dropzone style-square"
-      id={undefined}
+      inputProps={
+        Object {
+          "aria-describedby": "upload-error-18",
+          "id": "upload-17",
+        }
+      }
       multiple={false}
       onDrop={[Function]}
       style={undefined}

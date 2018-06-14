@@ -10,14 +10,19 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="upload-21"
     >
       Cover
     </label>
     <react-dropzone
       accept="image/*"
       className="form-dropzone style-portrait"
-      id={undefined}
+      inputProps={
+        Object {
+          "aria-describedby": "upload-error-22",
+          "id": "upload-21",
+        }
+      }
       multiple={false}
       onDrop={[Function]}
       style={undefined}
@@ -69,14 +74,19 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="upload-21"
     >
       Cover
     </label>
     <react-dropzone
       accept="image/*"
       className="form-dropzone style-portrait"
-      id={undefined}
+      inputProps={
+        Object {
+          "aria-describedby": "upload-error-22",
+          "id": "upload-21",
+        }
+      }
       multiple={false}
       onDrop={[Function]}
       style={undefined}
@@ -142,14 +152,19 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="upload-21"
     >
       Cover
     </label>
     <react-dropzone
       accept="image/*"
       className="form-dropzone style-portrait"
-      id={undefined}
+      inputProps={
+        Object {
+          "aria-describedby": "upload-error-22",
+          "id": "upload-21",
+        }
+      }
       multiple={false}
       onDrop={[Function]}
       style={undefined}
@@ -215,14 +230,19 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="upload-21"
     >
       Cover
     </label>
     <react-dropzone
       accept="image/*"
       className="form-dropzone style-portrait"
-      id={undefined}
+      inputProps={
+        Object {
+          "aria-describedby": "upload-error-22",
+          "id": "upload-21",
+        }
+      }
       multiple={false}
       onDrop={[Function]}
       style={undefined}

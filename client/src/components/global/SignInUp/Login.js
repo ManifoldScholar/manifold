@@ -104,7 +104,7 @@ export default class Login extends Component {
           <div className="row-1-p">
             <div className={submitClass}>
               {this.authenticationError() ? (
-                <span style={{ marginTop: 0 }} className="error">
+                <span style={{ marginTop: 0 }} role="alert" className="error">
                   {this.authenticationError()}
                 </span>
               ) : null}

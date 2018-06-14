@@ -20,14 +20,19 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor={undefined}
+              htmlFor="upload-17"
             >
               High Resolution Image
             </label>
             <react-dropzone
               accept="image/*"
               className="form-dropzone style-square"
-              id={undefined}
+              inputProps={
+                Object {
+                  "aria-describedby": "upload-error-18",
+                  "id": "upload-17",
+                }
+              }
               multiple={false}
               onDrop={[Function]}
               style={undefined}
@@ -76,14 +81,19 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor={undefined}
+              htmlFor="upload-17"
             >
               Thumbnail Image
             </label>
             <react-dropzone
               accept="image/*"
               className="form-dropzone style-square"
-              id={undefined}
+              inputProps={
+                Object {
+                  "aria-describedby": "upload-error-18",
+                  "id": "upload-17",
+                }
+              }
               multiple={false}
               onDrop={[Function]}
               style={undefined}

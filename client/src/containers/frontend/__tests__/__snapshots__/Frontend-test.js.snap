@@ -147,6 +147,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
       />
       <section
         className="notifications-container"
+        role="alert"
       >
         <div
           className="notifications-list-header notifications-list"

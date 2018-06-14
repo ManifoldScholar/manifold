@@ -86,6 +86,7 @@ export class PasswordResetContainer extends Component {
                 className="form-input"
                 name="attributes[password]"
                 errors={errors}
+                idForError="reset-password-error"
               >
                 <label htmlFor="reset-password">New Password</label>
                 <input
@@ -95,6 +96,7 @@ export class PasswordResetContainer extends Component {
                   id="reset-password"
                   onChange={this.handleInputChange}
                   placeholder="Password"
+                  aria-describedby="reset-password-error"
                 />
               </Form.Errorable>
             </div>
@@ -103,6 +105,7 @@ export class PasswordResetContainer extends Component {
                 className="form-input"
                 name="attributes[passwordConfirmation]"
                 errors={errors}
+                idForError="reset-password-confirmation-error"
               >
                 <label htmlFor="reset-password-confirmation">
                   Confirm Password
@@ -114,6 +117,7 @@ export class PasswordResetContainer extends Component {
                   id="reset-password-confirmation"
                   onChange={this.handleInputChange}
                   placeholder="Confirm Password"
+                  aria-describedby="reset-password-confirmation-error"
                 />
               </Form.Errorable>
             </div>

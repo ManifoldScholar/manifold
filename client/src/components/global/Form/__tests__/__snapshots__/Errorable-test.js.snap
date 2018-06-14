@@ -6,7 +6,11 @@ exports[`Global.Form.Errorable component renders correctly 1`] = `
   style={Object {}}
 >
   <span
+    aria-atomic="true"
+    aria-live="polite"
     className="errors"
+    id={null}
+    role="alert"
   >
     <span
       className="error"
