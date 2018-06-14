@@ -1,12 +1,14 @@
 module Ingestions
   module Fetchers
     # @abstract
-    class AbstractFetcher < Ingestions::AbstractInteraction
+    class AbstractFetcher < ActiveInteraction::Base
+      include Ingestions::Concerns::CatchesExceptions
+
       define_model_callbacks :fetchability_check, :perform
-
-      string :url, default: nil
-
+      string :url
       boolean :test_only, default: false
+
+      attr_reader :tempfile
 
       def execute
         run_callbacks :fetchability_check do
@@ -17,17 +19,15 @@ module Ingestions
         return nil unless fetchable?
 
         run_callbacks :perform do
-          @manifest = perform
+          @tempfile = perform
         end
 
-        manifest
+        @tempfile
       end
 
       def fetchable?
         @fetchable
       end
-
-      attr_reader :manifest
 
       # @abstract
       # @return [Boolean]
@@ -39,6 +39,15 @@ module Ingestions
       def perform
         raise NotImplementedError, "Must implement #{self.class}##{__method__}"
       end
+
+      protected
+
+      def tmp_pointer(name, ext)
+        tmp = Tempfile.new([name, ".#{ext}"])
+        tmp.close
+        tmp
+      end
+
     end
   end
 end

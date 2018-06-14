@@ -13,33 +13,33 @@ module Ingestions
       @creator = ingestion.creator
 
       initialize_working_dirs
+      fetched = maybe_fetch_external_source
+      source = fetched.present? ? fetched.path : source_path
+      update_working_dirs source
+    end
+
+    def maybe_fetch_external_source
+      return unless url?
+      outcome = fetch
+      handle_fetch_error(outcome) unless outcome.valid?
+      outcome.result
+    end
+
+    def handle_fetch_error(result)
+      raise Ingestions::Fetchers::FetchFailed, result.errors.full_messages
     end
 
     # Makes the working directories and sets up the source files
-    # for an ingestion.  If the source is a URL, we fetch the file
-    # first.  Then we extract the files (if zip, epub, etc.) or copy
-    # the files into the /source working dir.
+    # for an ingestion.
     def initialize_working_dirs
       ensure_root
       ensure_working_dirs
-      path = source_path
-      tmp_file = nil
-
-      tmp_file, path = fetch if url?
-
-      update_working_dirs path
-    ensure
-      tmp_file.unlink if tmp_file.present?
     end
 
     def fetch
-      outcome = if google_doc_url?
-                  Fetchers::GoogleDoc.run context: self
-                else
-                  Fetchers::URL.run context: self
-                end
-
-      outcome.result
+      pick = Ingestions::Pickers::Fetcher.run url: source_path
+      fetcher = pick.result.interaction
+      fetcher.run url: source_path
     end
 
     def google_doc_url?

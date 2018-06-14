@@ -1,25 +1,29 @@
 module Ingestions
   module Fetchers
-    class URL < Ingestions::AbstractInteraction
+    class Url < Ingestions::Fetchers::AbstractFetcher
 
-      def execute
-        tmp_file, tmp_path = fetch
-        [tmp_file, tmp_path]
+      def perform
+        fetch
+        temp_file
       end
 
-      private
+      def determine_fetchability
+        url.start_with?("http")
+      end
+
+      protected
 
       def extension
-        File.extname(URI.parse(context.source_url).path).delete(".")
+        File.extname(URI.parse(url).path).delete(".")
       end
 
-      def tmp_pointer
-        context.tmp_pointer("ingestion", extension, root_dir: context.source_root)
+      def temp_file
+        @temp_file ||=
+          tmp_pointer("source", extension)
       end
 
       def fetch
-        tmp = tmp_pointer
-        IO.copy_stream(URI(context.source_path).open, tmp.path)
+        IO.copy_stream(URI(url).open, temp_file.path)
       end
 
     end

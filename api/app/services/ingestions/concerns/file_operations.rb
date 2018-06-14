@@ -58,20 +58,6 @@ module Ingestions
         path
       end
 
-      def tmp_pointer(name, ext, root_dir: root_path)
-        tmp = Tempfile.new([name, ".#{ext}"], root_dir)
-        tmp.close
-        tmp
-      end
-
-      def write_tmp(name, ext, contents = nil, url: nil, root_dir: root_path)
-        tmp = tmp_pointer(name, ext, root_dir)
-        File.open(tmp.path, "wb") do |f|
-          f.write(contents)
-        end
-        [tmp, tmp.path]
-      end
-
       def dir?(rel_path)
         file_operation(:directory?, rel_path)
       end
