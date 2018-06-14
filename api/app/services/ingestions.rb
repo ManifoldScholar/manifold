@@ -15,7 +15,6 @@ module Ingestions
 
     converters do
       converter :markdown
-      converter :google_doc
       converter :html
     end
 
