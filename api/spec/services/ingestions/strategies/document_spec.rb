@@ -159,6 +159,23 @@ RSpec.describe Ingestions::Strategies::Document do
     include_examples "outcome assertions"
   end
 
+  context "when latex" do
+
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "latex", "example.tex") }
+    let(:ingestion) do
+      ingestion = FactoryBot.create(:ingestion, text: nil)
+      allow(ingestion).to receive(:ingestion_source).and_return(path)
+      ingestion
+    end
+    let(:context) { Ingestions::Context.new(ingestion) }
+    let!(:manifest) { described_class.run(context: context).result }
+
+    it "has the correct number of ingestion sources" do
+      expect(manifest[:relationships][:ingestion_sources].length).to eq 1
+    end
+
+  end
+
   context "when google doc", slow: true do
 
     before(:all) do
