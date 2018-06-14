@@ -166,7 +166,7 @@ export class NotificationsComponent extends Component {
 
   render() {
     return (
-      <section className="notifications-container">
+      <section className="notifications-container" role="alert">
         <div
           ref={notificationList => {
             this.notificationList = notificationList;

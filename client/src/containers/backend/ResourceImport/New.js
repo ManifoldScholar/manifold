@@ -74,7 +74,7 @@ export class ResourceImportNew extends PureComponent {
         {resourceImport && resourceImport.attributes.parseError ? (
           <div className="form-error form-input form-error-grouped">
             <span className="errors">
-              <span className="error">
+              <span className="error" role="alert">
                 {`Manifold was unable to parse the import data. If the source is a google
                 sheet, check to be sure that the sheet is publicly accessible (or that
                 it's accessible to your Google integration service account) and that the

@@ -15,7 +15,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           className="form-input"
         >
           <label
-            htmlFor={undefined}
+            htmlFor="kind-22"
           >
             Kind
           </label>
@@ -30,7 +30,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
                 className="manicon manicon-caret-down"
               />
               <select
-                id={undefined}
+                id="kind-22"
                 onChange={[Function]}
                 value="image"
               >
@@ -105,12 +105,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Title
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter a title"
           type="text"
@@ -123,12 +124,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Fingerprint
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter fingerprint"
           type="text"
@@ -141,12 +143,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Slug
         </label>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter slug"
           type="text"
@@ -159,7 +162,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Tags
         </label>
@@ -169,7 +172,8 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           Separate tags with "," or ";"
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter tags"
           type="text"
@@ -185,12 +189,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="textarea-13"
           >
             Description
           </label>
           <textarea
-            id={undefined}
+            aria-describedby="textarea-error-14"
+            id="textarea-13"
             onChange={[Function]}
             placeholder="Enter a description"
             style={
@@ -211,12 +216,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="textarea-13"
           >
             Caption
           </label>
           <textarea
-            id={undefined}
+            aria-describedby="textarea-error-14"
+            id="textarea-13"
             onChange={[Function]}
             placeholder="Enter a short description"
             style={
@@ -237,14 +243,19 @@ exports[`Backend Resource General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="upload-17"
           >
             Image File
           </label>
           <react-dropzone
             accept="image/*"
             className="form-dropzone style-square"
-            id={undefined}
+            inputProps={
+              Object {
+                "aria-describedby": "upload-error-18",
+                "id": "upload-17",
+              }
+            }
             multiple={false}
             onDrop={[Function]}
             style={undefined}

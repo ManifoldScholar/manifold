@@ -10,12 +10,13 @@ exports[`Backend.Form.TextArea component renders correctly 1`] = `
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="textarea-21"
     >
       Label this
     </label>
     <textarea
-      id={undefined}
+      aria-describedby="textarea-error-22"
+      id="textarea-21"
       onChange={[Function]}
       placeholder={undefined}
       style={

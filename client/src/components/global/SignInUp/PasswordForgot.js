@@ -112,6 +112,7 @@ class PasswordForgotContainer extends Component {
                 validation={["required"]}
                 name="email"
                 onChange={event => this.handleInputChange(event)}
+                idForError="password-forgot-email-error"
               >
                 <input
                   value={this.state.email}
@@ -119,6 +120,7 @@ class PasswordForgotContainer extends Component {
                   type="text"
                   id="password-forgot-email"
                   placeholder="Email"
+                  aria-describedby="password-forgot-email-error"
                 />
               </Form.HigherOrder.Validation>
             </div>

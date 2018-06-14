@@ -24,12 +24,12 @@ exports[`Frontend.ResourceList.Filters Component renders correctly 1`] = `
     </button>
     <label
       className="screen-reader-text"
-      htmlFor={undefined}
+      htmlFor="filters-search-1"
     >
       Enter Search Criteria
     </label>
     <input
-      id={undefined}
+      id="filters-search-1"
       onChange={[Function]}
       placeholder="Search"
       type="text"

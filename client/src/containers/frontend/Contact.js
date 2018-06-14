@@ -74,6 +74,7 @@ export class ContactContainer extends Component {
                 className="form-input"
                 name="attributes[email]"
                 errors={errors}
+                idForError="create-email-error"
               >
                 <label htmlFor="create-email">Email</label>
                 <input
@@ -81,6 +82,7 @@ export class ContactContainer extends Component {
                   type="text"
                   name="email"
                   id="create-email"
+                  aria-describedby="create-email-error"
                   onChange={this.handleInputChange}
                   placeholder="Email"
                 />
@@ -91,12 +93,14 @@ export class ContactContainer extends Component {
                 className="form-input"
                 name={"attributes[fullName]"}
                 errors={errors}
+                idForError="create-name-error"
               >
                 <label htmlFor="create-name">Name</label>
                 <input
                   value={this.state.contact.fullName}
                   type="text"
                   id="create-name"
+                  aria-describedby="create-name-error"
                   name="fullName"
                   onChange={this.handleInputChange}
                   placeholder="Name"
@@ -108,6 +112,7 @@ export class ContactContainer extends Component {
                 className="form-input"
                 name="attributes[message]"
                 errors={errors}
+                idForError="create-message-error"
               >
                 <label htmlFor="create-message">Message</label>
                 <textarea
@@ -118,6 +123,7 @@ export class ContactContainer extends Component {
                   onChange={this.handleInputChange}
                   placeholder="Message"
                   className="dark-placeholder wide large"
+                  aria-describedby="create-message-error"
                 />
               </Form.Errorable>
             </div>

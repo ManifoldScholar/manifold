@@ -24,12 +24,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             Title
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder="Enter Project Title"
             type="text"
@@ -42,12 +43,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             Subtitle
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder="Enter Project Subtitle"
             type="text"
@@ -60,12 +62,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             Slug
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder="Enter Project Slug"
             type="text"
@@ -156,7 +159,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="masked-text-10"
           >
             Hashtag
           </label>
@@ -168,12 +171,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             Facebook ID
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -186,12 +190,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             Twitter ID
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -204,12 +209,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             Instagram ID
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -233,12 +239,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             Publisher
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -498,6 +505,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                   className="manicon manicon-plus"
                 />
                 <input
+                  aria-describedby={null}
                   aria-label="Add a Subject"
                   className="text-input"
                   onBlur={[Function]}
@@ -733,7 +741,12 @@ exports[`Backend Project General Container renders correctly 1`] = `
                   <react-dropzone
                     accept="image/*"
                     className="form-dropzone style-embed"
-                    id={undefined}
+                    inputProps={
+                      Object {
+                        "aria-describedby": "upload-error-18",
+                        "id": "upload-17",
+                      }
+                    }
                     multiple={false}
                     onDrop={[Function]}
                     style={undefined}

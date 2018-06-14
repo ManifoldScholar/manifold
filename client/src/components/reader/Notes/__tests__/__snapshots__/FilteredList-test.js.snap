@@ -36,11 +36,11 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
     >
       <label
         className="checkbox"
-        htmlFor="Highlights-checkbox-1"
+        htmlFor="highlight-checkbox"
       >
         <input
           checked={true}
-          id="Highlights-checkbox-1"
+          id="highlight-checkbox"
           onChange={[Function]}
           type="checkbox"
         />
@@ -56,11 +56,11 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
       </label>
       <label
         className="checkbox"
-        htmlFor="Annotations-checkbox-2"
+        htmlFor="annotation-checkbox"
       >
         <input
           checked={true}
-          id="Annotations-checkbox-2"
+          id="annotation-checkbox"
           onChange={[Function]}
           type="checkbox"
         />

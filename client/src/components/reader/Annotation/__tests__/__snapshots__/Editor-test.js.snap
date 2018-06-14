@@ -18,6 +18,7 @@ exports[`Reader.Annotation.Editor component renders correctly 1`] = `
         Annotate this passage
       </label>
       <textarea
+        aria-describedby="annotation-textarea-error"
         id="annotation-textarea"
         onChange={[Function]}
         placeholder="Annotate this passage..."

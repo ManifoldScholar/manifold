@@ -17,7 +17,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor={undefined}
+            htmlFor="textarea-13"
           >
             Description
           </label>
@@ -27,7 +27,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             Enter a brief description of your project. This field accepts basic Markdown.
           </span>
           <textarea
-            id={undefined}
+            aria-describedby="textarea-error-14"
+            id="textarea-13"
             onChange={[Function]}
             placeholder={undefined}
             style={
@@ -48,7 +49,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="upload-17"
           >
             Hero Image
           </label>
@@ -64,7 +65,12 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           <react-dropzone
             accept="image/*"
             className="form-dropzone style-landscape"
-            id={undefined}
+            inputProps={
+              Object {
+                "aria-describedby": "upload-error-18",
+                "id": "upload-17",
+              }
+            }
             multiple={false}
             onDrop={[Function]}
             style={undefined}
@@ -113,7 +119,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor={undefined}
+            htmlFor="upload-17"
           >
             Cover
           </label>
@@ -125,7 +131,12 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           <react-dropzone
             accept="image/*"
             className="form-dropzone style-portrait"
-            id={undefined}
+            inputProps={
+              Object {
+                "aria-describedby": "upload-error-18",
+                "id": "upload-17",
+              }
+            }
             multiple={false}
             onDrop={[Function]}
             style={undefined}
@@ -171,7 +182,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Purchase URL
         </label>
@@ -181,7 +192,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           A URL where users can purchase the published edition
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter Purchase URL"
           type="text"
@@ -194,7 +206,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Purchase Call To Action
         </label>
@@ -204,7 +216,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           If set, this text will appear in the buy button on the project page
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Buy Print Version"
           type="text"
@@ -216,7 +229,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="masked-text-10"
         >
           Purchase Price
         </label>
@@ -226,7 +239,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           The cost of the published edition
         </span>
         <react-text-mask
-          id={undefined}
+          id="masked-text-10"
           mask={[Function]}
           onChange={[Function]}
           placeholder={undefined}
@@ -241,7 +254,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Currency
         </label>
@@ -251,7 +264,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           For example, USD for US Dollars
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter Purchase Price Currency Code"
           type="text"
@@ -264,7 +278,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Twitter Username
         </label>
@@ -274,7 +288,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           If set, a twitter icon linked to the account will appear below the description.
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter Twitter username"
           type="text"
@@ -287,7 +302,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor={undefined}
+          htmlFor="text-input-15"
         >
           Instagram Username
         </label>
@@ -297,7 +312,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           If set, a instagram icon linked to the account will appear below the description.
         </span>
         <input
-          id={undefined}
+          aria-describedby="text-input-error-16"
+          id="text-input-15"
           onChange={[Function]}
           placeholder="Enter Instagram username"
           type="text"

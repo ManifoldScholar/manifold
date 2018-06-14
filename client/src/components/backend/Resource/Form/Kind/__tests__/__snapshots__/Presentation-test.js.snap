@@ -10,14 +10,19 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="upload-17"
     >
       Presentation File
     </label>
     <react-dropzone
       accept="application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint,application/vnd.oasis.opendocument.presentation"
       className="form-dropzone style-square"
-      id={undefined}
+      inputProps={
+        Object {
+          "aria-describedby": "upload-error-18",
+          "id": "upload-17",
+        }
+      }
       multiple={false}
       onDrop={[Function]}
       style={undefined}

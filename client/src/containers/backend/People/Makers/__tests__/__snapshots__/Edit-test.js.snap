@@ -40,12 +40,13 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             First Name
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder="First Name"
             type="text"
@@ -58,12 +59,13 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             Middle Name
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder="Middle Name"
             type="text"
@@ -76,12 +78,13 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             Last Name
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder="Last Name"
             type="text"
@@ -94,12 +97,13 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor={undefined}
+            htmlFor="text-input-15"
           >
             Suffix
           </label>
           <input
-            id={undefined}
+            aria-describedby="text-input-error-16"
+            id="text-input-15"
             onChange={[Function]}
             placeholder="Suffix"
             type="text"
@@ -115,14 +119,19 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor={undefined}
+              htmlFor="upload-17"
             >
               Avatar Image
             </label>
             <react-dropzone
               accept="image/*"
               className="form-dropzone style-square"
-              id={undefined}
+              inputProps={
+                Object {
+                  "aria-describedby": "upload-error-18",
+                  "id": "upload-17",
+                }
+              }
               multiple={false}
               onDrop={[Function]}
               style={undefined}

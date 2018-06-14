@@ -21,12 +21,15 @@ class FormSelect extends Component {
         value: PropTypes.any.isRequired,
         label: PropTypes.string.isRequired
       })
-    ).isRequired
+    ).isRequired,
+    id: PropTypes.string,
+    idForError: PropTypes.string
   };
 
-  componentDidMount() {
-    this.id = uniqueId("select-");
-  }
+  static defaultProps = {
+    id: uniqueId("select-"),
+    idForError: uniqueId("select-error-")
+  };
 
   render() {
     const value = isNull(this.props.value) ? "" : this.props.value;
@@ -46,12 +49,18 @@ class FormSelect extends Component {
           name={this.props.name}
           errors={this.props.errors}
           label={this.props.label}
+          idForError={this.props.idForError}
         >
           <label htmlFor={this.id}>{this.props.label}</label>
           <Instructions instructions={this.props.instructions} />
           <div className="form-select">
             <i className="manicon manicon-caret-down" aria-hidden="true" />
-            <select id={this.id} onChange={this.props.onChange} value={value}>
+            <select
+              id={this.id}
+              aria-describedby={this.props.idForError}
+              onChange={this.props.onChange}
+              value={value}
+            >
               {options}
             </select>
           </div>

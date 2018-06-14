@@ -15,7 +15,8 @@ export default class FormHigherOrderValidation extends Component {
     children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
       .isRequired,
     onChange: PropTypes.func,
-    setValue: PropTypes.func
+    setValue: PropTypes.func,
+    idForError: PropTypes.string
   };
 
   static defaultProps = {};
@@ -105,10 +106,10 @@ export default class FormHigherOrderValidation extends Component {
       children,
       errorHandler,
       submitted,
+      idForError,
       ...transfer
     } = this.props;
     /* eslint-enable no-unused-vars */
-
     if (!this.props.validation) {
       return React.cloneElement(children, transfer);
     }
@@ -123,7 +124,10 @@ export default class FormHigherOrderValidation extends Component {
       <div>
         {React.cloneElement(this.props.children, transfer)}
         <div className="form-error">
-          <GlobalForm.InputError errors={Object.values(this.state.errors)} />
+          <GlobalForm.InputError
+            idForError={idForError}
+            errors={Object.values(this.state.errors)}
+          />
         </div>
       </div>
     );

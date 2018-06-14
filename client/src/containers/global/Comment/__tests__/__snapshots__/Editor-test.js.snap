@@ -13,13 +13,14 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
     >
       <label
         className="screen-reader-text"
-        htmlFor={undefined}
+        htmlFor="comment-textarea-21"
       >
         Edit this comment...
       </label>
       <textarea
+        aria-describedby="comment-textarea-error-22"
         className="expanded"
-        id={undefined}
+        id="comment-textarea-21"
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="Edit this comment..."

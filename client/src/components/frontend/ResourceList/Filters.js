@@ -11,7 +11,12 @@ export default class ResourceListFilters extends Component {
     kinds: PropTypes.array,
     tags: PropTypes.array,
     filterChangeHandler: PropTypes.func.isRequired,
-    initialFilterState: PropTypes.object
+    initialFilterState: PropTypes.object,
+    searchId: PropTypes.string
+  };
+
+  static defaultProps = {
+    searchId: uniqueId("filters-search-")
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -25,10 +30,6 @@ export default class ResourceListFilters extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState(props.initialFilterState);
-  }
-
-  componentDidMount() {
-    this.searchId = uniqueId("filters-search-");
   }
 
   setFilters = (event, label) => {
@@ -64,13 +65,13 @@ export default class ResourceListFilters extends Component {
             <span className="screen-reader-text">Search</span>
             <i className="manicon manicon-magnify" aria-hidden="true" />
           </button>
-          <label htmlFor={this.searchId} className="screen-reader-text">
+          <label htmlFor={this.props.searchId} className="screen-reader-text">
             Enter Search Criteria
           </label>
           <input
             value={this.state.filters.keyword || ""}
             type="text"
-            id={this.searchId}
+            id={this.props.searchId}
             onChange={event => this.setFilters(event, "keyword")}
             placeholder="Search"
           />

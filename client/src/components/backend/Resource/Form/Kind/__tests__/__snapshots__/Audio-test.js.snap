@@ -13,14 +13,19 @@ exports[`Backend.Resource.Form.Audio component renders correctly 1`] = `
     >
       <label
         className=""
-        htmlFor={undefined}
+        htmlFor="upload-17"
       >
         Audio File
       </label>
       <react-dropzone
         accept="audio/*"
         className="form-dropzone style-square"
-        id={undefined}
+        inputProps={
+          Object {
+            "aria-describedby": "upload-error-18",
+            "id": "upload-17",
+          }
+        }
         multiple={false}
         onDrop={[Function]}
         style={undefined}

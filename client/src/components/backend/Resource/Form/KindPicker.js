@@ -11,12 +11,13 @@ class KindPicker extends PureComponent {
   static propTypes = {
     getModelValue: PropTypes.func,
     includeButtons: PropTypes.bool,
-    set: PropTypes.func
+    set: PropTypes.func,
+    id: PropTypes.string
   };
 
-  componentDidMount() {
-    this.id = uniqueId("kind-");
-  }
+  static defaultProps = {
+    id: uniqueId("kind-")
+  };
 
   renderKindPickerButtons(kindList) {
     if (!kindList) return null;
@@ -87,12 +88,12 @@ class KindPicker extends PureComponent {
     return (
       <div className="resource-kind-picker form-secondary">
         <div className="form-input">
-          <label htmlFor={this.id}>Kind</label>
+          <label htmlFor={this.props.id}>Kind</label>
           <div className={selectClass}>
             <div className="form-select">
               <i className="manicon manicon-caret-down" aria-hidden="true" />
               <select
-                id={this.id}
+                id={this.props.id}
                 onChange={event => {
                   this.props.set(event.target.value);
                 }}

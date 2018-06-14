@@ -21,18 +21,20 @@ class FormTextInput extends Component {
     focusOnMount: PropTypes.bool,
     errors: PropTypes.array,
     password: PropTypes.bool,
-    join: PropTypes.func
+    join: PropTypes.func,
+    id: PropTypes.string,
+    idForError: PropTypes.string
   };
 
   static defaultProps = {
     focusOnMount: false,
     password: false,
-    join: array => array.join(", ")
+    join: array => array.join(", "),
+    id: uniqueId("text-input-"),
+    idForError: uniqueId("text-input-error-")
   };
 
   componentDidMount() {
-    this.id = uniqueId("text-input-");
-
     if (this.props.focusOnMount === true && this.inputElement) {
       this.inputElement.focus();
     }
@@ -56,8 +58,9 @@ class FormTextInput extends Component {
         name={this.props.name}
         errors={this.props.errors}
         label={this.props.label}
+        idForError={this.props.idForError}
       >
-        <label htmlFor={this.id} className={labelClass}>
+        <label htmlFor={this.props.id} className={labelClass}>
           {this.props.label}
         </label>
         <Instructions instructions={this.props.instructions} />
@@ -65,11 +68,12 @@ class FormTextInput extends Component {
           ref={input => {
             this.inputElement = input;
           }}
-          id={this.id}
+          id={this.props.id}
           type={inputType}
           placeholder={this.props.placeholder}
           onChange={this.props.onChange}
           value={this.renderValue(this.props.value)}
+          aria-describedby={this.props.idForError}
         />
       </GlobalForm.Errorable>
     );

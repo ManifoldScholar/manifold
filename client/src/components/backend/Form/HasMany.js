@@ -5,6 +5,7 @@ import { Form as FormContainer } from "containers/backend";
 import { Form as GlobalForm } from "components/global";
 import indexOf from "lodash/indexOf";
 import get from "lodash/get";
+import uniqueId from "lodash/uniqueId";
 
 export default class FormHasMany extends PureComponent {
   static displayName = "Form.HasMany";
@@ -21,7 +22,12 @@ export default class FormHasMany extends PureComponent {
     entityLabelAttribute: PropTypes.string.isRequired,
     entityAvatarAttribute: PropTypes.string,
     placeholder: PropTypes.string,
-    errors: PropTypes.array
+    errors: PropTypes.array,
+    idForError: PropTypes.string
+  };
+
+  static defaultProps = {
+    idForError: uniqueId("predictive-text-belongs-to-error-")
   };
 
   onMove = (event, entity, direction) => {
@@ -143,6 +149,7 @@ export default class FormHasMany extends PureComponent {
         name="*"
         errors={this.props.errors}
         label={this.props.label}
+        idForError={this.props.idForError}
       >
         {this.renderHeader()}
         <nav className="has-many-list">
@@ -202,6 +209,7 @@ export default class FormHasMany extends PureComponent {
             onNew={this.props.onNew ? this.onNew : null}
             onSelect={this.onSelect}
             fetch={this.props.optionsFetch}
+            idForError={this.props.idForError}
           />
         </nav>
       </GlobalForm.Errorable>

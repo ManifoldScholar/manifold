@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
 
 export default class Filters extends Component {
   static displayName = "Notes.List.Filters";
@@ -28,7 +27,7 @@ export default class Filters extends Component {
   renderCheckBox(label, format) {
     const formats = this.props.filter.formats;
     const checked = this.filteredBy(formats, format);
-    const checkboxId = uniqueId(label + "-checkbox-");
+    const checkboxId = format + "-checkbox";
 
     return (
       <label htmlFor={checkboxId} className="checkbox">

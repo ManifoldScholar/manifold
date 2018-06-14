@@ -84,6 +84,7 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
                 className="manicon manicon-plus"
               />
               <input
+                aria-describedby={null}
                 aria-label="Add an Author"
                 className="text-input"
                 onBlur={[Function]}
@@ -188,6 +189,7 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
                 className="manicon manicon-plus"
               />
               <input
+                aria-describedby={null}
                 aria-label="Add a Contributor"
                 className="text-input"
                 onBlur={[Function]}

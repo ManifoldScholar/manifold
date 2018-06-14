@@ -415,6 +415,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
   </nav>
   <section
     className="notifications-container"
+    role="alert"
   >
     <div
       className="notifications-list-header notifications-list"
@@ -830,6 +831,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
   </nav>
   <section
     className="notifications-container"
+    role="alert"
   >
     <div
       className="notifications-list-header notifications-list"

@@ -34,6 +34,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
       style={Object {}}
     >
       <input
+        aria-describedby="update-nickname-error"
         aria-labelledby="update-nickname-label"
         id="update-nickname"
         name="nickname"
@@ -62,6 +63,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
         First Name
       </label>
       <input
+        aria-describedby="update-firstName-error"
         id="update-firstName"
         name="firstName"
         onChange={[Function]}
@@ -80,6 +82,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
         Last Name
       </label>
       <input
+        aria-describedby="update-lastName-error"
         id="update-lastName"
         name="lastName"
         onChange={[Function]}
@@ -98,6 +101,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
         Email
       </label>
       <input
+        aria-describedby="update-email-error"
         id="update-email"
         name="email"
         onChange={[Function]}
@@ -116,6 +120,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
         Password
       </label>
       <input
+        aria-describedby="update-password-error"
         id="update-password"
         name="password"
         onChange={[Function]}
@@ -134,6 +139,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
         Confirm Password
       </label>
       <input
+        aria-describedby="update-passwordConfirmation-error"
         id="update-passwordConfirmation"
         name="passwordConfirmation"
         onChange={[Function]}
@@ -197,6 +203,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
       style={Object {}}
     >
       <input
+        aria-describedby="update-nickname-error"
         aria-labelledby="update-nickname-label"
         id="update-nickname"
         name="nickname"
@@ -225,6 +232,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
         First Name
       </label>
       <input
+        aria-describedby="update-firstName-error"
         id="update-firstName"
         name="firstName"
         onChange={[Function]}
@@ -243,6 +251,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
         Last Name
       </label>
       <input
+        aria-describedby="update-lastName-error"
         id="update-lastName"
         name="lastName"
         onChange={[Function]}
@@ -261,6 +270,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
         Email
       </label>
       <input
+        aria-describedby="update-email-error"
         id="update-email"
         name="email"
         onChange={[Function]}
@@ -279,6 +289,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
         Password
       </label>
       <input
+        aria-describedby="update-password-error"
         id="update-password"
         name="password"
         onChange={[Function]}
@@ -297,6 +308,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
         Confirm Password
       </label>
       <input
+        aria-describedby="update-passwordConfirmation-error"
         id="update-passwordConfirmation"
         name="passwordConfirmation"
         onChange={[Function]}

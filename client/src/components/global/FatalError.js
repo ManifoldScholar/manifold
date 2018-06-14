@@ -36,7 +36,12 @@ export default class FatalError extends Component {
               </h3>
             </header>
 
-            <div className="error-description">
+            <div
+              className="error-description"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+            >
               <h1>
                 {statusMessage} {title}
               </h1>

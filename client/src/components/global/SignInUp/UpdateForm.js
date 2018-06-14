@@ -183,6 +183,7 @@ class UpdateFormContainer extends Component {
             className="form-input"
             name="attributes[nickname]"
             errors={errors}
+            idForError="update-nickname-error"
           >
             <input
               value={this.state.nickname}
@@ -190,6 +191,7 @@ class UpdateFormContainer extends Component {
               name="nickname"
               id="update-nickname"
               aria-labelledby="update-nickname-label"
+              aria-describedby="update-nickname-error"
               onChange={this.handleInputChange}
               placeholder="Nickname"
             />
@@ -204,10 +206,15 @@ class UpdateFormContainer extends Component {
             )}
             <Form.Errorable
               className="form-input"
+              idForError="avatar-update-error"
               name="attributes[avatar]"
               errors={errors}
             >
               <Dropzone
+                inputProps={{
+                  id: "avatar-update",
+                  "aria-describedby": "avatar-update-error"
+                }}
                 className="form-dropzone"
                 style={{}}
                 activeStyle={{}}
@@ -263,6 +270,7 @@ class UpdateFormContainer extends Component {
             className="form-input"
             name="attributes[firstName]"
             errors={errors}
+            idForError="update-firstName-error"
           >
             <label htmlFor="update-firstName">First Name</label>
             <input
@@ -270,6 +278,7 @@ class UpdateFormContainer extends Component {
               type="text"
               name="firstName"
               id="update-firstName"
+              aria-describedby="update-firstName-error"
               onChange={this.handleInputChange}
               placeholder="First name"
             />
@@ -278,6 +287,7 @@ class UpdateFormContainer extends Component {
             className="form-input"
             name="attributes[lastName]"
             errors={errors}
+            idForError="update-lastName-error"
           >
             <label htmlFor="update-lastName">Last Name</label>
             <input
@@ -285,6 +295,7 @@ class UpdateFormContainer extends Component {
               type="text"
               name="lastName"
               id="update-lastName"
+              aria-describedby="update-lastName-error"
               onChange={this.handleInputChange}
               placeholder="Last name"
             />
@@ -293,6 +304,7 @@ class UpdateFormContainer extends Component {
             className="form-input"
             name="attributes[email]"
             errors={errors}
+            idForError="update-email-error"
           >
             <label htmlFor="update-email">Email</label>
             <input
@@ -300,6 +312,7 @@ class UpdateFormContainer extends Component {
               type="text"
               name="email"
               id="update-email"
+              aria-describedby="update-email-error"
               onChange={this.handleInputChange}
               placeholder="Email"
             />
@@ -308,6 +321,7 @@ class UpdateFormContainer extends Component {
             className="form-input"
             name="attributes[password]"
             errors={errors}
+            idForError="update-password-error"
           >
             <label htmlFor="update-password">Password</label>
             <input
@@ -315,6 +329,7 @@ class UpdateFormContainer extends Component {
               type="password"
               name="password"
               id="update-password"
+              aria-describedby="update-password-error"
               onChange={this.handleInputChange}
               placeholder="New password"
             />
@@ -323,6 +338,7 @@ class UpdateFormContainer extends Component {
             className="form-input"
             name="attributes[passwordConfirmation]"
             errors={errors}
+            idForError="update-passwordConfirmation-error"
           >
             <label htmlFor="update-passwordConfirmation">
               Confirm Password
@@ -332,6 +348,7 @@ class UpdateFormContainer extends Component {
               type="password"
               name="passwordConfirmation"
               id="update-passwordConfirmation"
+              aria-describedby="update-passwordConfirmation-error"
               onChange={this.handleInputChange}
               placeholder="Confirm new password"
             />

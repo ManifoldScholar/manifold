@@ -39,14 +39,19 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
     >
       <label
         className=""
-        htmlFor={undefined}
+        htmlFor="upload-17"
       >
         Video File
       </label>
       <react-dropzone
         accept="video/*"
         className="form-dropzone style-square"
-        id={undefined}
+        inputProps={
+          Object {
+            "aria-describedby": "upload-error-18",
+            "id": "upload-17",
+          }
+        }
         multiple={false}
         onDrop={[Function]}
         style={undefined}
@@ -128,12 +133,13 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
     >
       <label
         className=""
-        htmlFor={undefined}
+        htmlFor="text-input-15"
       >
         Video ID
       </label>
       <input
-        id={undefined}
+        aria-describedby="text-input-error-16"
+        id="text-input-15"
         onChange={[Function]}
         placeholder="Video ID"
         type="text"
@@ -160,6 +166,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
             className="manicon manicon-caret-down"
           />
           <select
+            aria-describedby="select-error-12"
             id={undefined}
             onChange={[Function]}
             value={undefined}

@@ -24,6 +24,7 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
           Email
         </label>
         <input
+          aria-describedby="create-email-error"
           id="create-email"
           name="email"
           onChange={[Function]}
@@ -46,6 +47,7 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
           Name
         </label>
         <input
+          aria-describedby="create-name-error"
           id="create-name"
           name="name"
           onChange={[Function]}
@@ -68,6 +70,7 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
           Password
         </label>
         <input
+          aria-describedby="create-password-error"
           id="create-password"
           name="password"
           onChange={[Function]}
@@ -90,6 +93,7 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
           Confirm Password
         </label>
         <input
+          aria-describedby="create-password-confirmation-error"
           id="create-password-confirmation"
           name="passwordConfirmation"
           onChange={[Function]}

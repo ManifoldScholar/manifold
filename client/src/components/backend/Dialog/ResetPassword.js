@@ -110,6 +110,8 @@ class ResetPasswordWrapper extends PureComponent {
 
   renderResetForm() {
     const errors = get(this.props.response, "errors") || [];
+    const id = "reset-password";
+    const errorId = id + "-error";
 
     return (
       <form
@@ -121,15 +123,17 @@ class ResetPasswordWrapper extends PureComponent {
             className="form-input"
             name="attributes[password]"
             errors={errors}
+            idForError={errorId}
           >
-            <label htmlFor="reset-password">New Password</label>
+            <label htmlFor={id}>New Password</label>
             <input
               value={this.state.password}
               onChange={event => this.handleInputChange(event)}
               name="password"
               type="password"
-              id="reset-password"
+              id={id}
               placeholder="New Password"
+              aria-describedby={errorId}
             />
           </Form.Errorable>
         </div>

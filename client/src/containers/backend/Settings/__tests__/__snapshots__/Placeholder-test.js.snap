@@ -10,12 +10,13 @@ exports[`Backend Settings Placeholder Container renders correctly 1`] = `
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="text-input-15"
     >
       A All temporary stuff setting
     </label>
     <input
-      id={undefined}
+      aria-describedby="text-input-error-16"
+      id="text-input-15"
       onChange={[Function]}
       placeholder="Some setting could go here"
       type="text"
@@ -28,12 +29,13 @@ exports[`Backend Settings Placeholder Container renders correctly 1`] = `
   >
     <label
       className=""
-      htmlFor={undefined}
+      htmlFor="text-input-15"
     >
       Another All temporary stuff setting
     </label>
     <input
-      id={undefined}
+      aria-describedby="text-input-error-16"
+      id="text-input-15"
       onChange={[Function]}
       placeholder="Some other setting could go here"
       type="text"

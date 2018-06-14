@@ -22,13 +22,13 @@ exports[`Reader.Search.Menu component renders correctly when search is visible 1
       >
         <label
           className="screen-reader-text"
-          htmlFor={undefined}
+          htmlFor="query-search-22"
         >
           Enter Search Criteria
         </label>
         <input
           autoFocus={true}
-          id={undefined}
+          id="query-search-22"
           onChange={[Function]}
           placeholder="Search for..."
           type="text"

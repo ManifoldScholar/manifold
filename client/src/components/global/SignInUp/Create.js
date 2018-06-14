@@ -118,6 +118,7 @@ export class CreateContainer extends Component {
               className="form-input"
               name="attributes[email]"
               errors={errors}
+              idForError="create-email-error"
             >
               <label htmlFor="create-email">Email</label>
               <input
@@ -125,6 +126,7 @@ export class CreateContainer extends Component {
                 type="text"
                 name="email"
                 id="create-email"
+                aria-describedby="create-email-error"
                 onChange={this.handleInputChange}
                 placeholder="Email"
               />
@@ -133,6 +135,7 @@ export class CreateContainer extends Component {
           <div className="row-1-p">
             <Form.Errorable
               className="form-input"
+              idForError="create-name-error"
               name={["attributes[firstName]", "attributes[lastName]"]}
               errors={errors}
             >
@@ -141,6 +144,7 @@ export class CreateContainer extends Component {
                 value={this.state.user.name}
                 type="text"
                 id="create-name"
+                aria-describedby="create-name-error"
                 name="name"
                 onChange={this.handleInputChange}
                 placeholder="Name"
@@ -150,6 +154,7 @@ export class CreateContainer extends Component {
           <div className="row-1-p">
             <Form.Errorable
               className="form-input"
+              idForError="create-password-error"
               name="attributes[password]"
               errors={errors}
             >
@@ -159,6 +164,7 @@ export class CreateContainer extends Component {
                 type="password"
                 name="password"
                 id="create-password"
+                aria-describedby="create-password-error"
                 onChange={this.handleInputChange}
                 placeholder="Password"
               />
@@ -167,6 +173,7 @@ export class CreateContainer extends Component {
           <div className="row-1-p">
             <Form.Errorable
               className="form-input"
+              idForError="create-password-confirmation-error"
               name="attributes[passwordConfirmation]"
               errors={errors}
             >
@@ -178,6 +185,7 @@ export class CreateContainer extends Component {
                 type="password"
                 name="passwordConfirmation"
                 id="create-password-confirmation"
+                aria-describedby="create-password-confirmation-error"
                 onChange={this.handleInputChange}
                 placeholder="Confirm Password"
               />
