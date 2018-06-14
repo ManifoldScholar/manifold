@@ -89,4 +89,10 @@ RSpec.describe Ingestions::Pickers::Strategy do
     the_subject_behaves_like "strategy picker fails", path, :document
   end
 
+  context "when a latex file" do
+    path = Rails.root.join("spec", "data", "ingestion", "latex", "example.tex")
+
+    the_subject_behaves_like "assigned strategy", path, :document
+  end
+
 end
