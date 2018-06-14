@@ -76,12 +76,16 @@ module Ingestions
           index_parsed.at("//meta[@name=\"#{name}\"]")&.attribute("content")&.value
         end
 
-        def non_stylesheet_sources
-          context.sources.reject { |source| File.extname(source).delete(".") == "css" }
+        def html_sources
+          allowed = %w(htm html)
+          context.sources.select do |source|
+            ext = File.extname(source).delete(".")
+            allowed.include?(ext)
+          end
         end
 
         def source
-          non_stylesheet_sources.first
+          html_sources.first
         end
 
         def basename

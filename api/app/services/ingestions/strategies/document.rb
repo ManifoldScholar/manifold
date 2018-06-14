@@ -9,7 +9,7 @@ module Ingestions
       end
 
       def determine_ingestibility
-        inspector.non_stylesheet_sources.length == 1
+        inspector.source.present?
       end
 
       private
