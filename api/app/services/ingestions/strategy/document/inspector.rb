@@ -76,16 +76,19 @@ module Ingestions
           index_parsed.at("//meta[@name=\"#{name}\"]")&.attribute("content")&.value
         end
 
-        def html_sources
-          allowed = %w(htm html)
+        def convertible_sources
+          convertible = Ingestions.converters.convertible_extensions
           context.sources.select do |source|
             ext = File.extname(source).delete(".")
-            allowed.include?(ext)
+            convertible.include?(ext)
           end
         end
 
         def source
-          html_sources.first
+          return convertible_sources.first if convertible_sources.length == 1
+          convertible_sources.find do |convertible_source|
+            File.basename(convertible_source).downcase.start_with? "index."
+          end
         end
 
         def basename

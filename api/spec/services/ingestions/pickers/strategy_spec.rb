@@ -2,19 +2,18 @@ require "rails_helper"
 
 RSpec.describe Ingestions::Pickers::Strategy do
 
-  context "when no strategy is found" do
-    it "is not valid" do
+  shared_examples_for "strategy picker fails" do |path|
+    it "to find a valid strategy" do
       ingestion = FactoryBot.create(:ingestion)
-      allow(ingestion).to receive(:ingestion_source).and_return("/some/path/and/file.txt")
+      allow(ingestion).to receive(:ingestion_source).and_return(path)
       @context = Ingestions::Context.new(ingestion)
-
       outcome = Ingestions::Pickers::Strategy.run context: @context
       expect(outcome).to_not be_valid
     end
   end
 
-  shared_examples_for "an ingestion strategy determination" do |path, expected|
-    it "returns the correct strategy definition" do
+  shared_examples_for "assigned strategy" do |path, expected|
+    it "is the #{expected} strategy" do
       ingestion = FactoryBot.create(:ingestion)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
       @context = Ingestions::Context.new(ingestion)
@@ -24,21 +23,70 @@ RSpec.describe Ingestions::Pickers::Strategy do
     end
   end
 
+  context "when an uningestible source" do
+    path = "/some/path/and/file.txt"
+
+    the_subject_behaves_like "strategy picker fails", path
+  end
+
   context "when EPUB" do
     path = Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip")
 
-    it_behaves_like "an ingestion strategy determination", path, :epub
+    the_subject_behaves_like "assigned strategy", path, :epub
   end
 
   context "when manifest" do
     path = Rails.root.join("spec", "data", "ingestion", "google-doc", "manifest.yml")
 
-    it_behaves_like "an ingestion strategy determination", path, :manifest
+    the_subject_behaves_like "assigned strategy", path, :manifest
   end
 
-  context "when document" do
+  context "when a single HTML file" do
     path = Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html")
 
-    it_behaves_like "an ingestion strategy determination", path, :document
+    the_subject_behaves_like "assigned strategy", path, :document
   end
+
+  context "when a directory containing a single HTML file" do
+    path = Rails.root.join("spec", "data", "ingestion", "html", "minimal-single")
+
+    the_subject_behaves_like "assigned strategy", path, :document
+  end
+
+  context "when a directory containing an HTML file with sibling assets" do
+    path = Rails.root.join("spec", "data", "ingestion", "html", "minimal-assets")
+
+    the_subject_behaves_like "assigned strategy", path, :document
+  end
+
+  context "when a google doc", slow: true do
+    url = "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing"
+
+    the_subject_behaves_like "assigned strategy", url, :document
+  end
+
+  context "when a single markdown file" do
+    path = Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single", "minimal-single.md")
+
+    the_subject_behaves_like "assigned strategy", path, :document
+  end
+
+  context "when a directory containing a single markdown file" do
+    path = Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single")
+
+    the_subject_behaves_like "assigned strategy", path, :document
+  end
+
+  context "when a directory containing multiple html files, one of which is index.html" do
+    path = Rails.root.join("spec", "data", "ingestion", "html", "minimal-multi-index")
+
+    the_subject_behaves_like "assigned strategy", path, :document
+  end
+
+  context "when a directory containing multiple html files, none of which is index.html" do
+    path = Rails.root.join("spec", "data", "ingestion", "html", "minimal-multi")
+
+    the_subject_behaves_like "strategy picker fails", path, :document
+  end
+
 end
