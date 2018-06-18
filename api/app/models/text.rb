@@ -8,6 +8,7 @@ class Text < ApplicationRecord
   # Authorization
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
+  include Concerns::ValidatesSlugPresence
 
   # Default Scope
   default_scope { order(position: :asc).includes(:titles, :text_subjects, :category) }

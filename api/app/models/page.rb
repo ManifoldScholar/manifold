@@ -9,6 +9,7 @@ class Page < ApplicationRecord
   include FriendlyId
   include TrackedCreator
   include Concerns::HasFormattedAttributes
+  include Concerns::ValidatesSlugPresence
   include ClassyEnum::ActiveRecord
 
   classy_enum_attr :purpose, class_name: "PagePurpose"
