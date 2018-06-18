@@ -13,13 +13,13 @@
     }
 
     .button-menu {
-      background-color: $neutral100;
       color: $neutral40;
+      background-color: $neutral100;
     }
 
     .button-index {
-      background-color: $neutral95;
       color: $neutral20;
+      background-color: $neutral95;
     }
 
     .menu-buttons ul li button.button-active {
@@ -103,7 +103,7 @@
 
   // <header>
   .title {
-    @include templateHead();
+    @include templateHead;
     position: relative;
     display: none;
     height: 100%;
@@ -114,10 +114,10 @@
     }
 
     .text-title, .section-title {
-      @include templateHead();
+      @include templateHead;
       position: relative;
       height: 100%;
-      padding: 10px 190px 0 18px;
+      padding: 10px 287px 0 18px;
       margin: 0;
       overflow: hidden;
       font-size: $type70;
