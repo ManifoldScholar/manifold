@@ -29,6 +29,7 @@ class Resource < ApplicationRecord
   include Concerns::HasFormattedAttributes
   include Concerns::HasSortTitle
   include Concerns::Fingerprinted
+  include Concerns::ValidatesSlugPresence
   include Metadata
   extend FriendlyId
 

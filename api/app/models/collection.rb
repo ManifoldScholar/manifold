@@ -14,6 +14,7 @@ class Collection < ApplicationRecord
   # Authorization
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
+  include Concerns::ValidatesSlugPresence
   self.authorizer_name = "ProjectChildAuthorizer"
 
   friendly_id :title, use: :slugged

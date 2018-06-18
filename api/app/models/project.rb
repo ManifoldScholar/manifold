@@ -32,6 +32,7 @@ class Project < ApplicationRecord
   include Metadata
   include Concerns::HasFormattedAttributes
   include Concerns::HasSortTitle
+  include Concerns::ValidatesSlugPresence
   include WithPermittedUsers
   extend FriendlyId
 
