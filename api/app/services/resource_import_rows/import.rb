@@ -94,6 +94,11 @@ module ResourceImportRows
       [adjusted, attribute_type(attribute), "default"]
     end
 
+    def transform_slug(value)
+      return nil if value.blank?
+      value
+    end
+
     def transform_sub_kind(value)
       return nil if value.blank?
       value
