@@ -7,18 +7,18 @@
 
   @for $i from 1 through length($readerContainerWidths) {
     &.container-width-#{$i - 1} {
-      right: calc((100vw - #{nth($readerContainerWidths, $i)})/2 + #{nth($readerContainerWidths, $i)});
+      right: calc((100% - #{nth($readerContainerWidths, $i)}) / 2 + #{nth($readerContainerWidths, $i)});
 
       // Responsively show/hide notation viewer list
       .viewer-list {
-        @include respond(nth($readerContainerWidths, $i) + 245) {
+        @include respond(nth($readerContainerWidths, $i) + 392) {
           display: block;
         }
       }
 
       // Responsively show/hide notation footer preview
       .notation-preview-footer {
-        @include respond(nth($readerContainerWidths, $i) + 245) {
+        @include respond(nth($readerContainerWidths, $i) + 392) {
           display: none;
         }
       }
