@@ -102,6 +102,7 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
             className="boolean-primary checked"
             onClick={[Function]}
             role="button"
+            tabIndex="0"
           >
             <span
               className="screen-reader-text"

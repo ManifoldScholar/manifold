@@ -20,6 +20,7 @@ exports[`Frontend.ProjectList.SummaryGrid component renders correctly 1`] = `
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               role="button"
+              tabIndex="0"
             >
               <div
                 className="following-button"
@@ -80,6 +81,7 @@ exports[`Frontend.ProjectList.SummaryGrid component renders correctly 1`] = `
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               role="button"
+              tabIndex="0"
             >
               <div
                 className="following-button"

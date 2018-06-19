@@ -38,6 +38,7 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
             <span
               className="fake-link"
               role="button"
+              tabIndex="0"
             >
               Upload a file
             </span>
@@ -109,6 +110,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
               data-id="remove"
               onClick={[Function]}
               role="button"
+              tabIndex="0"
             >
               Remove this image
             </span>
@@ -118,6 +120,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
             <span
               className="fake-link"
               role="button"
+              tabIndex="0"
             >
               Upload an image
             </span>
@@ -180,6 +183,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
               data-id="remove"
               onClick={[Function]}
               role="button"
+              tabIndex="0"
             >
               Remove this image
             </span>
@@ -189,6 +193,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
             <span
               className="fake-link"
               role="button"
+              tabIndex="0"
             >
               Upload an image
             </span>
@@ -251,6 +256,7 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
               data-id="remove"
               onClick={[Function]}
               role="button"
+              tabIndex="0"
             >
               Remove this image
             </span>
@@ -260,6 +266,7 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
             <span
               className="fake-link"
               role="button"
+              tabIndex="0"
             >
               Upload an image
             </span>

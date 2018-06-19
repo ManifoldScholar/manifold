@@ -16,7 +16,7 @@ exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
                         <div className=\\"drawer-title\\">
                           wrapper
                         </div>
-                        <div onClick={[Function]} role=\\"button\\" className=\\"close-button-primary\\">
+                        <div onClick={[Function]} role=\\"button\\" tabIndex=\\"0\\" className=\\"close-button-primary\\">
                           <span className=\\"close-text\\">
                             Close
                           </span>

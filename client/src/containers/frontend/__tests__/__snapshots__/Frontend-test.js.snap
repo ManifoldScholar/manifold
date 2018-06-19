@@ -222,6 +222,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                         className="fake-link"
                         onClick={[Function]}
                         role="button"
+                        tabIndex="0"
                       >
                         Log Out
                       </span>

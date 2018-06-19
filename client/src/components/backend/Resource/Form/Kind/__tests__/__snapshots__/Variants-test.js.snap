@@ -40,6 +40,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
               <span
                 className="fake-link"
                 role="button"
+                tabIndex="0"
               >
                 Upload a file
               </span>
@@ -89,6 +90,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
               <span
                 className="fake-link"
                 role="button"
+                tabIndex="0"
               >
                 Upload a file
               </span>
@@ -146,6 +148,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
               <span
                 className="fake-link"
                 role="button"
+                tabIndex="0"
               >
                 Upload a file
               </span>
@@ -201,6 +204,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
               <span
                 className="fake-link"
                 role="button"
+                tabIndex="0"
               >
                 Upload a file
               </span>
@@ -263,6 +267,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
               <span
                 className="fake-link"
                 role="button"
+                tabIndex="0"
               >
                 Upload a file
               </span>

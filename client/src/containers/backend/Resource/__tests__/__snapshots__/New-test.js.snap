@@ -181,6 +181,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="button active"
                       onClick={[Function]}
                       role="radio"
+                      tabIndex="0"
                     >
                       <figure>
                         <figcaption>
@@ -219,6 +220,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="button"
                       onClick={[Function]}
                       role="radio"
+                      tabIndex="0"
                     >
                       <figure>
                         <figcaption>
@@ -252,6 +254,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="button"
                       onClick={[Function]}
                       role="radio"
+                      tabIndex="0"
                     >
                       <figure>
                         <figcaption>
@@ -294,6 +297,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="button"
                       onClick={[Function]}
                       role="radio"
+                      tabIndex="0"
                     >
                       <figure>
                         <figcaption>
@@ -324,6 +328,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="button"
                       onClick={[Function]}
                       role="radio"
+                      tabIndex="0"
                     >
                       <figure>
                         <figcaption>
@@ -363,6 +368,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="button"
                       onClick={[Function]}
                       role="radio"
+                      tabIndex="0"
                     >
                       <figure>
                         <figcaption>
@@ -396,6 +402,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="button"
                       onClick={[Function]}
                       role="radio"
+                      tabIndex="0"
                     >
                       <figure>
                         <figcaption>
@@ -441,6 +448,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="button"
                       onClick={[Function]}
                       role="radio"
+                      tabIndex="0"
                     >
                       <figure>
                         <figcaption>
@@ -471,6 +479,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="button"
                       onClick={[Function]}
                       role="radio"
+                      tabIndex="0"
                     >
                       <figure>
                         <figcaption>
@@ -504,6 +513,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="button"
                       onClick={[Function]}
                       role="radio"
+                      tabIndex="0"
                     >
                       <figure>
                         <figcaption>
@@ -627,6 +637,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                         <span
                           className="fake-link"
                           role="button"
+                          tabIndex="0"
                         >
                           Upload a file
                         </span>

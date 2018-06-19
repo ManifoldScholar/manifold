@@ -27,6 +27,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
                   className="resource-preview-wrapper"
                   onClick={[Function]}
                   role="button"
+                  tabIndex="0"
                 >
                   <div
                     className="zoom-indicator"

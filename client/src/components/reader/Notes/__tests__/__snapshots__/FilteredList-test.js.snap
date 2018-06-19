@@ -11,6 +11,7 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
       <div
         onClick={[MockFunction]}
         role="button"
+        tabIndex="0"
       >
         Your Notes
       </div>
@@ -82,6 +83,7 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
           className="item"
           onClick={[Function]}
           role="button"
+          tabIndex="0"
         >
           <i
             aria-hidden="true"

@@ -12,11 +12,13 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
       className="resource-preview-wrapper"
       onClick={[Function]}
       role="button"
+      tabIndex="0"
     >
       <div
         className="resource-link"
         onClick={[Function]}
         role="link"
+        tabIndex="0"
       >
         <div
           className="icon-thumbnail-primary "
@@ -75,6 +77,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
     onMouseOut={[Function]}
     onMouseOver={[Function]}
     role="link"
+    tabIndex="0"
   >
     <div>
       <header

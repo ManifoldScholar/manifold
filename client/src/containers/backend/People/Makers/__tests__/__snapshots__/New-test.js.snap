@@ -129,6 +129,7 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
                     <span
                       className="fake-link"
                       role="button"
+                      tabIndex="0"
                     >
                       Upload a file
                     </span>

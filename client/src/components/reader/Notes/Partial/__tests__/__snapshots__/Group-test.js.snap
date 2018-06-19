@@ -6,6 +6,7 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
     className="item"
     onClick={[Function]}
     role="button"
+    tabIndex="0"
   >
     <i
       aria-hidden="true"

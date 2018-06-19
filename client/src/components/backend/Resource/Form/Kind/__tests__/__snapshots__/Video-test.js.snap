@@ -20,6 +20,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
         className="boolean-primary"
         onClick={[Function]}
         role="button"
+        tabIndex="0"
       >
         <span
           className="screen-reader-text"
@@ -66,6 +67,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
               <span
                 className="fake-link"
                 role="button"
+                tabIndex="0"
               >
                 Upload a file
               </span>
@@ -107,6 +109,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
         className="boolean-primary"
         onClick={[Function]}
         role="button"
+        tabIndex="0"
       >
         <span
           className="screen-reader-text"

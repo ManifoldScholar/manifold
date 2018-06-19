@@ -159,7 +159,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                   <li>
                                     <ul className=\\"footer-nav\\">
                                       <li>
-                                        <span className=\\"fake-link\\" role=\\"button\\" onClick={[Function]}>
+                                        <span className=\\"fake-link\\" role=\\"button\\" tabIndex=\\"0\\" onClick={[Function]}>
                                           Log Out
                                         </span>
                                       </li>
