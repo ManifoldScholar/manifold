@@ -37,7 +37,7 @@ export default class FormColumnMapAttribute extends PureComponent {
 
               <button className="cancel" onClick={this.handleCancel}>
                 <span className="screen-reader-text">
-                  {"Click to cancel mapping of "}
+                  {"Cancel mapping of "}
                   {`${this.props.name} to ${this.props.mapping}`}
                 </span>
                 <i className="manicon manicon-x-bold" aria-hidden="true" />

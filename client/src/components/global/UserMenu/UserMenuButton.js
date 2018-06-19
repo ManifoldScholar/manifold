@@ -29,7 +29,7 @@ export default class UserMenuButton extends Component {
     return (
       <button onClick={this.clickHandler} className={buttonClass}>
         <span className="screen-reader-text">
-          {"Click to login or open user settings"}
+          {"Login or open user settings"}
         </span>
         <Avatar
           url={get(

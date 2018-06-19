@@ -24,7 +24,7 @@ export default class Footer extends Component {
                 <li>
                   <button className="button-bookmarks">
                     <i className="manicon manicon-bookmark-outline" aria-hidden="true"></i>
-                    <span className="Click to see text bookmarks"></span>
+                    <span className="Show text bookmarks"></span>
                   </button>
                 </li>
                */}

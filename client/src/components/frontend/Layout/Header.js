@@ -79,12 +79,14 @@ export default class LayoutHeader extends PureComponent {
       <header className={"header-app"}>
         <div className="header-container">
           <Link to={lh.link("frontend")} className="logo">
+            <span className="screen-reader-text">Return to home</span>
             <PressLogo
               url={get(
                 this.props.settings,
                 "attributes.pressLogoStyles.original"
               )}
               styles={get(this.props.settings, "attributes.theme.logoStyles")}
+              aria-hidden="true"
             />
           </Link>
           {/* Use show-50 utility class to hide text-nav on mobile */}

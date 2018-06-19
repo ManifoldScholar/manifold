@@ -254,7 +254,7 @@ export default class ResourceListSlideshow extends PureComponent {
                       Prev
                     </span>
                     <span className="screen-reader-text">
-                      {"Click to load previous slide"}
+                      {"Go to previous slide"}
                     </span>
                   </button>
                   <button
@@ -266,7 +266,7 @@ export default class ResourceListSlideshow extends PureComponent {
                       Next
                     </span>
                     <span className="screen-reader-text">
-                      {"Click to load next slide"}
+                      {"Go to next slide"}
                     </span>
                     <i
                       className="manicon manicon-arrow-round-right"

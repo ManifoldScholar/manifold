@@ -227,9 +227,7 @@ class LayoutFooter extends Component {
             onChange={this.updateSearchWord}
           />
           <button className="manicon manicon-magnify">
-            <span className="screen-reader-text">
-              Click to submit search query
-            </span>
+            <span className="screen-reader-text">Search</span>
           </button>
         </div>
       </form>
@@ -298,13 +296,10 @@ class LayoutFooter extends Component {
           rel="noopener noreferrer"
           className="footer-tertiary"
         >
-          <section>
+          <section aria-hidden="true">
             <div className="container flush">
               <span className={isPressLogo ? "logo dull" : "logo"}>
-                <i
-                  className="manicon manicon-manifold-logo"
-                  aria-hidden="true"
-                />
+                <i className="manicon manicon-manifold-logo" />
                 <span className="text">
                   <span className="neutral-text">Powered by</span>
                   <span className="white-text"> Manifold</span>
@@ -312,6 +307,9 @@ class LayoutFooter extends Component {
               </span>
             </div>
           </section>
+          <span className="screen-reader-text">
+            Learn more about the Manifold App
+          </span>
         </a>
       </footer>
     );

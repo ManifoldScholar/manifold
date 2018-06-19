@@ -12,9 +12,7 @@ export default class PressLogo extends Component {
     return (
       <div>
         <i className="manicon manicon-manifold-logo" aria-hidden="true" />
-        <span className="screen-reader-text">
-          {"Manifold Logo: Click to return to the browse page"}
-        </span>
+        <span className="screen-reader-text">{"Manifold Logo"}</span>
       </div>
     );
   }

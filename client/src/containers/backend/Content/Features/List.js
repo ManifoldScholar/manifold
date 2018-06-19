@@ -128,7 +128,7 @@ class ContentFeaturesList extends PureComponent {
             <div className="instructional-copy margin-top">
               <p>
                 {`Features populate the featured content area at the top of the home
-                  page. Click the button below to create a featured content element.`}
+                  page. Use the button below to create a featured content element.`}
               </p>
             </div>
 
@@ -182,7 +182,7 @@ class ContentFeaturesList extends PureComponent {
                             }}
                           >
                             <span className="screen-reader-text">
-                              Click to move feature up
+                              Move feature up
                             </span>
                             <i
                               className="manicon manicon-arrow-up"
@@ -198,7 +198,7 @@ class ContentFeaturesList extends PureComponent {
                             }}
                           >
                             <span className="screen-reader-text">
-                              Click to move feature down
+                              Move feature down
                             </span>
                             <i
                               className="manicon manicon-arrow-down"
@@ -215,7 +215,7 @@ class ContentFeaturesList extends PureComponent {
                               }}
                             >
                               <span className="screen-reader-text">
-                                Click to delete Feature
+                                Delete Feature
                               </span>
                               <i
                                 className="manicon manicon-x"
