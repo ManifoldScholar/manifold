@@ -115,7 +115,7 @@ export default class AppearanceMenuBody extends Component {
                 >
                   <i className="manicon manicon-dash" aria-hidden="true" />
                   <span className="screen-reader-text">
-                    {"Click to decrease font-size"}
+                    {"Decrease font size"}
                   </span>
                 </button>
                 <button
@@ -126,7 +126,7 @@ export default class AppearanceMenuBody extends Component {
                 >
                   <i className="manicon manicon-plus" aria-hidden="true" />
                   <span className="screen-reader-text">
-                    {"Click to increase font-size"}
+                    {"Increase font size"}
                   </span>
                 </button>
               </div>
@@ -148,7 +148,7 @@ export default class AppearanceMenuBody extends Component {
                 >
                   <i className="manicon manicon-dash" aria-hidden="true" />
                   <span className="screen-reader-text">
-                    {"Click to decrease font-size"}
+                    {"Decrease font size"}
                   </span>
                 </button>
                 <button
@@ -159,7 +159,7 @@ export default class AppearanceMenuBody extends Component {
                 >
                   <i className="manicon manicon-plus" aria-hidden="true" />
                   <span className="screen-reader-text">
-                    {"Click to increase font-size"}
+                    {"Increase font size"}
                   </span>
                 </button>
               </div>
@@ -173,7 +173,7 @@ export default class AppearanceMenuBody extends Component {
               >
                 <i className="manicon manicon-check" aria-hidden="true" />
                 <span className="screen-reader-text">
-                  {"Click to use light color scheme in reader"}
+                  {"Use light color scheme in reader"}
                 </span>
               </button>
               <button
@@ -182,7 +182,7 @@ export default class AppearanceMenuBody extends Component {
               >
                 <i className="manicon manicon-check" aria-hidden="true" />
                 <span className="screen-reader-text">
-                  {"Click to use dark color scheme in reader"}
+                  {"Use dark color scheme in reader"}
                 </span>
               </button>
             </div>
@@ -198,7 +198,7 @@ export default class AppearanceMenuBody extends Component {
                   <i className="manicon manicon-margins-narrow-text" />
                 </i>
                 <span className="screen-reader-text">
-                  {"Click to increase text margins"}
+                  {"Increase text margins"}
                 </span>
               </button>
               <button
@@ -210,7 +210,7 @@ export default class AppearanceMenuBody extends Component {
                   <i className="manicon manicon-margins-wide-text" />
                 </i>
                 <span className="screen-reader-text">
-                  {"Click to increase text margins"}
+                  {"Decrease text margins"}
                 </span>
               </button>
             </div>

@@ -46,7 +46,8 @@ export default class LayoutHeader extends Component {
       <header className={"header-app dark"}>
         <div className="header-container">
           <Link to={lh.link("frontend")} className="logo">
-            <PressLogo />
+            <span className="screen-reader-text">Return to home</span>
+            <PressLogo aria-hidden="true" />
           </Link>
           <nav className="text-nav">
             <ul>

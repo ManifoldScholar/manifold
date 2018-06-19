@@ -81,8 +81,8 @@ export default class FormHasMany extends PureComponent {
         onClick={e => this.onEdit(e, entity)}
       >
         <span className="screen-reader-text">
-          Click to edit {this.label(entity, this.props)}
-          from the {this.props.label} list.
+          Edit {this.label(entity, this.props)}
+          in the {this.props.label} list.
         </span>
       </button>
     );
@@ -110,8 +110,8 @@ export default class FormHasMany extends PureComponent {
           className={buttonClass}
         >
           <span className="screen-reader-text">
-            Click to move {this.label(entity, this.props)} up in the order of
-            {this.props.label}.
+            Move {this.label(entity, this.props)} {direction} in the{" "}
+            {this.props.label} list
           </span>
         </button>
       );
@@ -183,8 +183,8 @@ export default class FormHasMany extends PureComponent {
                       className="manicon manicon-x"
                     >
                       <span className="screen-reader-text">
-                        Click to remove {this.label(entity, this.props)} from
-                        the {this.props.label} list.
+                        Remove {this.label(entity, this.props)} from the{" "}
+                        {this.props.label} list.
                       </span>
                     </button>
                   </div>

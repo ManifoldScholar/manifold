@@ -314,7 +314,7 @@ export class ListSearchable extends PureComponent {
           <div className="search">
             <button>
               <i className="manicon manicon-magnify" aria-hidden="true" />
-              <span className="screen-reader-text">Click to search</span>
+              <span className="screen-reader-text">Search</span>
             </button>
             <label htmlFor={this.searchId} className="screen-reader-text">
               Enter Search Criteria

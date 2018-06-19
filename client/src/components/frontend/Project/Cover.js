@@ -16,9 +16,7 @@ export default class ProjectCover extends Component {
       meta.width >= meta.height
         ? project.attributes.avatarStyles.smallSquare
         : project.attributes.avatarStyles.small;
-    return (
-      <img src={imageStyle} alt={`Click to view ${project.attributes.title}`} />
-    );
+    return <img src={imageStyle} alt={`View ${project.attributes.title}`} />;
   }
 
   renderPlaceholderImage(project) {

@@ -247,7 +247,7 @@ class UpdateFormContainer extends Component {
                     <Avatar style={{ margin: 0 }} url={this.displayAvatar()} />
                   </div>
                   <span className="dropzone-button-text">
-                    Click to browse or<br />drag and drop
+                    Upload a file or<br />drag and drop
                   </span>
                 </div>
               </Dropzone>
