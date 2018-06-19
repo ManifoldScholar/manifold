@@ -15,6 +15,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
         className="wrapper"
         onClick={[Function]}
         role="button"
+        tabIndex="0"
       >
         <div
           className="button selected"
@@ -104,6 +105,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                   className="fake-link"
                   onClick={[Function]}
                   role="button"
+                  tabIndex="0"
                 >
                   <header>
                     <figure
@@ -175,6 +177,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                   className="fake-link"
                   onClick={[Function]}
                   role="button"
+                  tabIndex="0"
                 >
                   <header>
                     <figure

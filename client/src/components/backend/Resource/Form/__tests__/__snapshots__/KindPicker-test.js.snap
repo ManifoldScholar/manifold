@@ -99,6 +99,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           className="button active"
           onClick={[Function]}
           role="radio"
+          tabIndex="0"
         >
           <figure>
             <figcaption>
@@ -137,6 +138,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           className="button"
           onClick={[Function]}
           role="radio"
+          tabIndex="0"
         >
           <figure>
             <figcaption>
@@ -170,6 +172,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           className="button"
           onClick={[Function]}
           role="radio"
+          tabIndex="0"
         >
           <figure>
             <figcaption>
@@ -212,6 +215,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           className="button"
           onClick={[Function]}
           role="radio"
+          tabIndex="0"
         >
           <figure>
             <figcaption>
@@ -242,6 +246,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           className="button"
           onClick={[Function]}
           role="radio"
+          tabIndex="0"
         >
           <figure>
             <figcaption>
@@ -281,6 +286,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           className="button"
           onClick={[Function]}
           role="radio"
+          tabIndex="0"
         >
           <figure>
             <figcaption>
@@ -314,6 +320,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           className="button"
           onClick={[Function]}
           role="radio"
+          tabIndex="0"
         >
           <figure>
             <figcaption>
@@ -359,6 +366,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           className="button"
           onClick={[Function]}
           role="radio"
+          tabIndex="0"
         >
           <figure>
             <figcaption>
@@ -389,6 +397,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           className="button"
           onClick={[Function]}
           role="radio"
+          tabIndex="0"
         >
           <figure>
             <figcaption>
@@ -422,6 +431,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           className="button"
           onClick={[Function]}
           role="radio"
+          tabIndex="0"
         >
           <figure>
             <figcaption>

@@ -38,6 +38,7 @@ exports[`Backend.Resource.Form.KindAttributes component when kind is audio rende
             <span
               className="fake-link"
               role="button"
+              tabIndex="0"
             >
               Upload a file
             </span>

@@ -265,6 +265,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
                   <span
                     className="fake-link"
                     role="button"
+                    tabIndex="0"
                   >
                     Upload a file
                   </span>

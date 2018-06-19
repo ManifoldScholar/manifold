@@ -17,6 +17,7 @@ exports[`Backend.Form.Switch component renders correctly 1`] = `
       className="boolean-primary"
       onClick={[Function]}
       role="button"
+      tabIndex="0"
     >
       <span
         className="screen-reader-text"

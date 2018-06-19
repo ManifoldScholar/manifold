@@ -6,6 +6,7 @@ exports[`Reader.Notation.Resource.PickerListItem component renders correctly 1`]
     className="fake-link"
     onClick={[Function]}
     role="button"
+    tabIndex="0"
   >
     <header>
       <figure

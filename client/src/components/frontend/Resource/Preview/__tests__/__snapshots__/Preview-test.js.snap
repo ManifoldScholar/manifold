@@ -9,6 +9,7 @@ exports[`Frontend.Resource.Preview component renders correctly 1`] = `
     className="resource-preview-wrapper"
     onClick={[Function]}
     role="button"
+    tabIndex="0"
   >
     <div>
       Test Button

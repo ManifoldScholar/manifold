@@ -120,6 +120,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                 data-id="destroy"
                 onClick={[Function]}
                 role="button"
+                tabIndex="0"
               >
                 <i
                   aria-hidden="true"
@@ -168,6 +169,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                 data-id="destroy"
                 onClick={[Function]}
                 role="button"
+                tabIndex="0"
               >
                 <i
                   aria-hidden="true"

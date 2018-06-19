@@ -15,7 +15,6 @@ exports[`Backend.Project.ListItem component renders correctly 1`] = `
           className="project-thumb-placeholder"
           height="200.68436px"
           role="group"
-          tabIndex="0"
           version="1.1"
           viewBox="0 0 200.34735 200.68436"
           width="200.34735px"

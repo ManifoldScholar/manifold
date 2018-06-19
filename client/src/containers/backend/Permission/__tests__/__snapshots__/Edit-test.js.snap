@@ -65,6 +65,7 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                   className="boolean-primary"
                   onClick={[Function]}
                   role="button"
+                  tabIndex="0"
                 >
                   <span
                     className="screen-reader-text"
@@ -90,6 +91,7 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                   className="boolean-primary"
                   onClick={[Function]}
                   role="button"
+                  tabIndex="0"
                 >
                   <span
                     className="screen-reader-text"
@@ -115,6 +117,7 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                   className="boolean-primary"
                   onClick={[Function]}
                   role="button"
+                  tabIndex="0"
                 >
                   <span
                     className="screen-reader-text"
