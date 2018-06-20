@@ -13,7 +13,7 @@ exports[`Reader.Search.Button component renders correctly when active 1`] = `
   <span
     className="screen-reader-text"
   >
-    Click to open search
+    Open search
   </span>
 </button>
 `;
@@ -31,7 +31,7 @@ exports[`Reader.Search.Button component renders correctly when inactive 1`] = `
   <span
     className="screen-reader-text"
   >
-    Click to open search
+    Open search
   </span>
 </button>
 `;

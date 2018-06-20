@@ -101,7 +101,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to open search
+                  Open search
                 </span>
               </button>
             </li>
@@ -113,7 +113,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to login or open user settings
+                  Login or open user settings
                 </span>
                 <figure
                   className="avatar"
@@ -256,7 +256,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                       <span
                         className="screen-reader-text"
                       >
-                        Click to decrease font-size
+                        Decrease font size
                       </span>
                     </button>
                     <button
@@ -270,7 +270,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                       <span
                         className="screen-reader-text"
                       >
-                        Click to increase font-size
+                        Increase font size
                       </span>
                     </button>
                   </div>
@@ -298,7 +298,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                       <span
                         className="screen-reader-text"
                       >
-                        Click to decrease font-size
+                        Decrease font size
                       </span>
                     </button>
                     <button
@@ -312,7 +312,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                       <span
                         className="screen-reader-text"
                       >
-                        Click to increase font-size
+                        Increase font size
                       </span>
                     </button>
                   </div>
@@ -333,7 +333,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                     <span
                       className="screen-reader-text"
                     >
-                      Click to use light color scheme in reader
+                      Use light color scheme in reader
                     </span>
                   </button>
                   <button
@@ -347,7 +347,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                     <span
                       className="screen-reader-text"
                     >
-                      Click to use dark color scheme in reader
+                      Use dark color scheme in reader
                     </span>
                   </button>
                 </div>
@@ -374,7 +374,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                     <span
                       className="screen-reader-text"
                     >
-                      Click to increase text margins
+                      Increase text margins
                     </span>
                   </button>
                   <button
@@ -395,7 +395,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                     <span
                       className="screen-reader-text"
                     >
-                      Click to increase text margins
+                      Decrease text margins
                     </span>
                   </button>
                 </div>

@@ -12,6 +12,11 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
       href="/"
       onClick={[Function]}
     >
+      <span
+        className="screen-reader-text"
+      >
+        Return to home
+      </span>
       <figure
         className=""
       >
@@ -23,7 +28,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
           <span
             className="screen-reader-text"
           >
-            Manifold Logo: Click to return to the browse page
+            Manifold Logo
           </span>
         </div>
       </figure>
@@ -90,7 +95,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Click to login or open user settings
+              Login or open user settings
             </span>
             <figure
               className="avatar"

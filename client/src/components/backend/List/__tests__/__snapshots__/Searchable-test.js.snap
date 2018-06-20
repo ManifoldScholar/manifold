@@ -17,7 +17,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
         <span
           className="screen-reader-text"
         >
-          Click to search
+          Search
         </span>
       </button>
       <label
@@ -367,7 +367,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
         <span
           className="screen-reader-text"
         >
-          Click to search
+          Search
         </span>
       </button>
       <label

@@ -48,9 +48,9 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to edit 
+                  Edit 
                   Rowan Ida
-                  from the 
+                  in the 
                   Authors
                    list.
                 </span>
@@ -62,9 +62,10 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to remove 
+                  Remove 
                   Rowan Ida
-                   from the 
+                   from the
+                   
                   Authors
                    list.
                 </span>
@@ -152,9 +153,9 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to edit 
+                  Edit 
                   Rowan Ida
-                  from the 
+                  in the 
                   Contributors
                    list.
                 </span>
@@ -166,9 +167,10 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to remove 
+                  Remove 
                   Rowan Ida
-                   from the 
+                   from the
+                   
                   Contributors
                    list.
                 </span>

@@ -20,12 +20,15 @@ exports[`Backend Backend Container renders correctly 1`] = `
                       <div className=\\"header-container\\">
                         <Link to=\\"/\\" className=\\"logo\\" replace={false}>
                           <a className=\\"logo\\" onClick={[Function]} href=\\"/\\">
-                            <PressLogo>
+                            <span className=\\"screen-reader-text\\">
+                              Return to home
+                            </span>
+                            <PressLogo aria-hidden=\\"true\\">
                               <figure className=\\"\\">
                                 <div>
                                   <i className=\\"manicon manicon-manifold-logo\\" aria-hidden=\\"true\\" />
                                   <span className=\\"screen-reader-text\\">
-                                    Manifold Logo: Click to return to the browse page
+                                    Manifold Logo
                                   </span>
                                 </div>
                               </figure>
@@ -69,7 +72,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                               <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
                                 <button onClick={[Function]} className=\\"button-avatar\\">
                                   <span className=\\"screen-reader-text\\">
-                                    Click to login or open user settings
+                                    Login or open user settings
                                   </span>
                                   <Avatar url={[undefined]}>
                                     <figure style={[undefined]} className=\\"avatar\\">
@@ -147,7 +150,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                   <input type=\\"text\\" id=\\"footer-search\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
                                   <button className=\\"manicon manicon-magnify\\">
                                     <span className=\\"screen-reader-text\\">
-                                      Click to submit search query
+                                      Search
                                     </span>
                                   </button>
                                 </div>
@@ -190,10 +193,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                         </div>
                       </section>
                       <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"footer-tertiary\\">
-                        <section>
+                        <section aria-hidden=\\"true\\">
                           <div className=\\"container flush\\">
                             <span className=\\"logo\\">
-                              <i className=\\"manicon manicon-manifold-logo\\" aria-hidden=\\"true\\" />
+                              <i className=\\"manicon manicon-manifold-logo\\" />
                               <span className=\\"text\\">
                                 <span className=\\"neutral-text\\">
                                   Powered by
@@ -205,6 +208,9 @@ exports[`Backend Backend Container renders correctly 1`] = `
                             </span>
                           </div>
                         </section>
+                        <span className=\\"screen-reader-text\\">
+                          Learn more about the Manifold App
+                        </span>
                       </a>
                     </footer>
                   </Layout.Footer>
