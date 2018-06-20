@@ -162,6 +162,9 @@ export default class ResourceListSlideCaption extends Component {
             className="resource-title"
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
           />
+          <span className="screen-reader-text" role="alert">
+            Showing {attr.type} resource: {attr.title}
+          </span>
         </header>
         {this.hasCaption(resource) ? (
           <Velocity {...animation}>
