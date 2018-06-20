@@ -119,6 +119,14 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
                         }
                       }
                     />
+                    <span
+                      className="screen-reader-text"
+                      role="alert"
+                    >
+                      Showing 
+                       resource: 
+                      Image
+                    </span>
                   </header>
                   <div
                     className="resource-description"

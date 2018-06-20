@@ -13,6 +13,14 @@ exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
         }
       }
     />
+    <span
+      className="screen-reader-text"
+      role="alert"
+    >
+      Showing 
+       resource: 
+      Image
+    </span>
   </header>
   <div
     className="resource-utility with-shadow"
