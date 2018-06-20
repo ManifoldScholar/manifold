@@ -68,6 +68,31 @@ export default class ProjectFollow extends Component {
     }
   };
 
+  toggleFollow = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    const followed = this.getFollowed(this.props);
+    if (followed) {
+      this.props.dispatch(
+        currentUserActions.unfollow(this.props.project.id, followed.id)
+      );
+    } else {
+      const { id, type } = this.props.project;
+      this.props.dispatch(currentUserActions.follow({ id, type }));
+    }
+  };
+
+  screenReaderButtonText() {
+    if (this.state.view === "follow" || this.state.view === "follow-active") {
+      return "Unfollow " + this.props.project.attributes.title;
+    } else if (
+      this.state.view === "unfollow" ||
+      this.state.view === "unfollow-active"
+    ) {
+      return "Follow " + this.props.project.attributes.title;
+    }
+  }
+
   activate = () => {
     if (this.state.view === "follow") {
       this.setView("follow-active");
@@ -118,51 +143,56 @@ export default class ProjectFollow extends Component {
       clickHandler = this.handleUnfollowConfirmed;
 
     return (
-      <div
-        onClick={clickHandler}
-        onMouseEnter={this.activate}
-        onMouseLeave={this.deactivate}
-        className={wrapperClasses}
-        role="button"
-        tabIndex="0"
-      >
-        <div className="following-button">
-          <div className="icons" aria-hidden="true">
-            <i key="minus" className="manicon manicon-minus-bold" />
-            <i key="check" className="manicon manicon-check-bold" />
-            <i key="plus" className="manicon manicon-plus-bold" />
-          </div>
+      <div>
+        <button className="screen-reader-text" onClick={this.toggleFollow}>
+          {this.screenReaderButtonText()}
+        </button>
+        <div
+          onClick={clickHandler}
+          onMouseEnter={this.activate}
+          onMouseLeave={this.deactivate}
+          className={wrapperClasses}
+          role="presentation"
+          aria-hidden="true"
+        >
+          <div className="following-button" aria-hidden="true">
+            <div className="icons">
+              <i key="minus" className="manicon manicon-minus-bold" />
+              <i key="check" className="manicon manicon-check-bold" />
+              <i key="plus" className="manicon manicon-plus-bold" />
+            </div>
 
-          <ReactCSSTransitionGroup
-            transitionName="following"
-            transitionEnterTimeout={300}
-            transitionLeaveTimeout={300}
-          >
-            {this.state.view === "follow" ||
-            this.state.view === "follow-active" ? (
-              <span key="follow" className="follow-text">
-                Follow
-              </span>
-            ) : null}
-            {this.state.view === "unfollow" ||
-            this.state.view === "unfollow-active" ? (
-              <span
-                key="unfollow"
-                className="follow-text follow-text-hide-immediately"
-              >
-                Unfollow
-              </span>
-            ) : null}
-            {this.state.view === "unfollow-confirm" ||
-            this.state.view === "unfollow-confirm-active" ? (
-              <span
-                key="unfollow-confirm"
-                className="follow-text follow-text-show-immediately"
-              >
-                Are You Sure?
-              </span>
-            ) : null}
-          </ReactCSSTransitionGroup>
+            <ReactCSSTransitionGroup
+              transitionName="following"
+              transitionEnterTimeout={300}
+              transitionLeaveTimeout={300}
+            >
+              {this.state.view === "follow" ||
+              this.state.view === "follow-active" ? (
+                <span key="follow" className="follow-text">
+                  Follow
+                </span>
+              ) : null}
+              {this.state.view === "unfollow" ||
+              this.state.view === "unfollow-active" ? (
+                <span
+                  key="unfollow"
+                  className="follow-text follow-text-hide-immediately"
+                >
+                  Unfollow
+                </span>
+              ) : null}
+              {this.state.view === "unfollow-confirm" ||
+              this.state.view === "unfollow-confirm-active" ? (
+                <span
+                  key="unfollow-confirm"
+                  className="follow-text follow-text-show-immediately"
+                >
+                  Are You Sure?
+                </span>
+              ) : null}
+            </ReactCSSTransitionGroup>
+          </div>
         </div>
       </div>
     );

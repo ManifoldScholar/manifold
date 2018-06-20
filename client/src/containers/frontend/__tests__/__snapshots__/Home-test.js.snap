@@ -46,38 +46,46 @@ exports[`Frontend Home Container renders correctly 1`] = `
                 className="figure-wrapper"
               >
                 <figure>
-                  <div
-                    className="follow-button-wrapper follow"
-                    onClick={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                    role="button"
-                    tabIndex="0"
-                  >
+                  <div>
+                    <button
+                      className="screen-reader-text"
+                      onClick={[Function]}
+                    >
+                      Unfollow Rowan Test
+                    </button>
                     <div
-                      className="following-button"
+                      aria-hidden="true"
+                      className="follow-button-wrapper follow"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="presentation"
                     >
                       <div
                         aria-hidden="true"
-                        className="icons"
+                        className="following-button"
                       >
-                        <i
-                          className="manicon manicon-minus-bold"
-                        />
-                        <i
-                          className="manicon manicon-check-bold"
-                        />
-                        <i
-                          className="manicon manicon-plus-bold"
-                        />
-                      </div>
-                      <span>
-                        <span
-                          className="follow-text"
+                        <div
+                          className="icons"
                         >
-                          Follow
+                          <i
+                            className="manicon manicon-minus-bold"
+                          />
+                          <i
+                            className="manicon manicon-check-bold"
+                          />
+                          <i
+                            className="manicon manicon-plus-bold"
+                          />
+                        </div>
+                        <span>
+                          <span
+                            className="follow-text"
+                          >
+                            Follow
+                          </span>
                         </span>
-                      </span>
+                      </div>
                     </div>
                   </div>
                 </figure>
@@ -102,38 +110,46 @@ exports[`Frontend Home Container renders correctly 1`] = `
                 className="figure-wrapper"
               >
                 <figure>
-                  <div
-                    className="follow-button-wrapper follow"
-                    onClick={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                    role="button"
-                    tabIndex="0"
-                  >
+                  <div>
+                    <button
+                      className="screen-reader-text"
+                      onClick={[Function]}
+                    >
+                      Unfollow Rowan Test
+                    </button>
                     <div
-                      className="following-button"
+                      aria-hidden="true"
+                      className="follow-button-wrapper follow"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="presentation"
                     >
                       <div
                         aria-hidden="true"
-                        className="icons"
+                        className="following-button"
                       >
-                        <i
-                          className="manicon manicon-minus-bold"
-                        />
-                        <i
-                          className="manicon manicon-check-bold"
-                        />
-                        <i
-                          className="manicon manicon-plus-bold"
-                        />
-                      </div>
-                      <span>
-                        <span
-                          className="follow-text"
+                        <div
+                          className="icons"
                         >
-                          Follow
+                          <i
+                            className="manicon manicon-minus-bold"
+                          />
+                          <i
+                            className="manicon manicon-check-bold"
+                          />
+                          <i
+                            className="manicon manicon-plus-bold"
+                          />
+                        </div>
+                        <span>
+                          <span
+                            className="follow-text"
+                          >
+                            Follow
+                          </span>
                         </span>
-                      </span>
+                      </div>
                     </div>
                   </div>
                 </figure>
