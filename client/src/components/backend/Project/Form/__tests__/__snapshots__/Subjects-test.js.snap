@@ -34,9 +34,10 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Click to remove 
+              Remove 
               Hip Hop
-               from the 
+               from the
+               
               Subjects
                list.
             </span>

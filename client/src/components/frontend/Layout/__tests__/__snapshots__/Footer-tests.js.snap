@@ -42,7 +42,7 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to submit search query
+                  Search
                 </span>
               </button>
             </div>
@@ -107,7 +107,9 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
     rel="noopener noreferrer"
     target="_blank"
   >
-    <section>
+    <section
+      aria-hidden="true"
+    >
       <div
         className="container flush"
       >
@@ -115,7 +117,6 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
           className="logo"
         >
           <i
-            aria-hidden="true"
             className="manicon manicon-manifold-logo"
           />
           <span
@@ -135,6 +136,11 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
         </span>
       </div>
     </section>
+    <span
+      className="screen-reader-text"
+    >
+      Learn more about the Manifold App
+    </span>
   </a>
 </footer>
 `;

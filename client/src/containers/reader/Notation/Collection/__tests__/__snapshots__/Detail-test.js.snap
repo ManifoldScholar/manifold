@@ -208,7 +208,7 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
                       <span
                         className="screen-reader-text"
                       >
-                        Click to load previous slide
+                        Go to previous slide
                       </span>
                     </button>
                     <button
@@ -225,7 +225,7 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
                       <span
                         className="screen-reader-text"
                       >
-                        Click to load next slide
+                        Go to next slide
                       </span>
                       <i
                         aria-hidden="true"

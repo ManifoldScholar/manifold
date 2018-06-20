@@ -29,7 +29,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
             <span
               className="screen-reader-text"
             >
-              Click to decrease font-size
+              Decrease font size
             </span>
           </button>
           <button
@@ -43,7 +43,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
             <span
               className="screen-reader-text"
             >
-              Click to increase font-size
+              Increase font size
             </span>
           </button>
         </div>
@@ -71,7 +71,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
             <span
               className="screen-reader-text"
             >
-              Click to decrease font-size
+              Decrease font size
             </span>
           </button>
           <button
@@ -85,7 +85,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
             <span
               className="screen-reader-text"
             >
-              Click to increase font-size
+              Increase font size
             </span>
           </button>
         </div>
@@ -106,7 +106,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           <span
             className="screen-reader-text"
           >
-            Click to use light color scheme in reader
+            Use light color scheme in reader
           </span>
         </button>
         <button
@@ -120,7 +120,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           <span
             className="screen-reader-text"
           >
-            Click to use dark color scheme in reader
+            Use dark color scheme in reader
           </span>
         </button>
       </div>
@@ -147,7 +147,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           <span
             className="screen-reader-text"
           >
-            Click to increase text margins
+            Increase text margins
           </span>
         </button>
         <button
@@ -168,7 +168,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           <span
             className="screen-reader-text"
           >
-            Click to increase text margins
+            Decrease text margins
           </span>
         </button>
       </div>

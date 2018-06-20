@@ -16,6 +16,11 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
           href="/"
           onClick={[Function]}
         >
+          <span
+            className="screen-reader-text"
+          >
+            Return to home
+          </span>
           <figure
             className=""
           >
@@ -27,7 +32,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
               <span
                 className="screen-reader-text"
               >
-                Manifold Logo: Click to return to the browse page
+                Manifold Logo
               </span>
             </div>
           </figure>
@@ -65,7 +70,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to open search
+                  Open search
                 </span>
               </button>
               <div
@@ -86,7 +91,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 >
-                  Click to login or open user settings
+                  Login or open user settings
                 </span>
                 <figure
                   className="avatar"
@@ -201,7 +206,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                   <span
                     className="screen-reader-text"
                   >
-                    Click to submit search query
+                    Search
                   </span>
                 </button>
               </div>
@@ -267,7 +272,9 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
       rel="noopener noreferrer"
       target="_blank"
     >
-      <section>
+      <section
+        aria-hidden="true"
+      >
         <div
           className="container flush"
         >
@@ -275,7 +282,6 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
             className="logo"
           >
             <i
-              aria-hidden="true"
               className="manicon manicon-manifold-logo"
             />
             <span
@@ -295,6 +301,11 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
           </span>
         </div>
       </section>
+      <span
+        className="screen-reader-text"
+      >
+        Learn more about the Manifold App
+      </span>
     </a>
   </footer>
 </div>
