@@ -72,9 +72,12 @@ export class FrontendContainer extends Component {
 
   render() {
     const fatalError = this.props.notifications.fatalError;
+    const skipId = "skip-to-main";
+
     return (
       <HigherOrder.BodyClass className={"browse"}>
         <div>
+          <Utility.SkipLink skipId={skipId} />
           <Utility.ScrollToTop />
           <HigherOrder.ScrollAware>
             <Layout.Header
@@ -94,6 +97,7 @@ export class FrontendContainer extends Component {
             ref={mainContainer => {
               this.mainContainer = mainContainer;
             }}
+            id={skipId}
           >
             {fatalError ? (
               <div className="global-container">
