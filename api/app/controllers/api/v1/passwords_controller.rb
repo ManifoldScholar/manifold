@@ -9,9 +9,15 @@ module Api
         { only: [:admin_reset_password], actions: { admin_reset_password: :update } }
 
       def create
-        @user = User.find_by(email: params[:email])
-        @user&.generate_reset_token
-        render status: :no_content
+        if params[:email].present?
+          @user = User.find_by(email: params[:email])
+          @user&.generate_reset_token
+          render status: :no_content
+        else
+          render json: { errors: [{ source: { pointer: "/data/email" },
+                                    detail: "is required" }] },
+                 status: :unprocessable_entity
+        end
       end
 
       def update

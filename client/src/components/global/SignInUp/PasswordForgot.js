@@ -4,8 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { passwordsAPI, requests } from "api";
 import { entityStoreActions, notificationActions } from "actions";
 import get from "lodash/get";
-import pull from "lodash/pull";
-import { Form } from "components/backend";
+import { Form as GlobalForm } from "components/global";
 
 const { request, flush } = entityStoreActions;
 
@@ -43,12 +42,15 @@ class PasswordForgotContainer extends Component {
     const action = passwordsAPI.create(this.state.email);
     const resetRequest = request(action, requests.gPasswordRequest);
     this.setState({ submitted: true }, () => {
-      if (!this.hasErrors()) {
-        this.props.dispatch(resetRequest).promise.then(() => {
+      this.props
+        .dispatch(resetRequest)
+        .promise.then(() => {
           this.postSubmit();
+        })
+        .catch(res => {
+          const errors = res.body.errors;
+          this.setState({ errors, submitted: false });
         });
-      }
-      this.setState({ submitted: false });
     });
   };
 
@@ -81,23 +83,6 @@ class PasswordForgotContainer extends Component {
     this.setState({ email: event.target.value });
   };
 
-  hasErrors() {
-    return this.state.errors.length > 0;
-  }
-
-  clientErrorHandler = (fieldName, hasError) => {
-    const alreadyIncluded = this.state.errors.includes(fieldName);
-    if (alreadyIncluded && hasError === false) {
-      const errors = pull(this.state.errors.slice(0), fieldName);
-      this.setState({ errors });
-    }
-    if (!alreadyIncluded && hasError === true) {
-      const errors = this.state.errors.slice(0);
-      errors.push(fieldName);
-      this.setState({ errors });
-    }
-  };
-
   render() {
     return (
       <div>
@@ -105,24 +90,17 @@ class PasswordForgotContainer extends Component {
           <div className="row-1-p">
             <div className="form-input form-error">
               <label htmlFor="password-forgot-email">Email</label>
-              <Form.HigherOrder.Validation
-                submitted={this.state.submitted}
-                value={this.state.email}
-                errorHandler={this.clientErrorHandler}
-                validation={["required"]}
-                name="email"
-                onChange={event => this.handleInputChange(event)}
-                idForError="password-forgot-email-error"
-              >
+              <GlobalForm.Errorable name="email" errors={this.state.errors}>
                 <input
                   value={this.state.email}
+                  onChange={this.handleInputChange}
                   name="email"
                   type="text"
                   id="password-forgot-email"
                   placeholder="Email"
                   aria-describedby="password-forgot-email-error"
                 />
-              </Form.HigherOrder.Validation>
+              </GlobalForm.Errorable>
             </div>
           </div>
           <div className="row-1-p">
