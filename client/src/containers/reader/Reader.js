@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { bindActionCreators } from "redux";
-import { HigherOrder, Overlay } from "components/global";
+import { HigherOrder, Overlay, Utility } from "components/global";
 import {
   Header,
   Footer,
@@ -239,11 +239,13 @@ export class ReaderContainer extends Component {
     if (!this.props.text) return null;
     if (this.shouldRedirect(this.props)) return this.renderRedirect(this.props);
     if (!this.props.text) return null;
+    const skipId = "skip-to-main";
 
     return (
       <HigherOrder.BodyClass className="reader">
         <div>
           {this.renderStyles()}
+          <Utility.SkipLink skipId={skipId} />
           <HigherOrder.ScrollAware>
             {/* Header inside scroll-aware HOC */}
             <Header
@@ -267,7 +269,7 @@ export class ReaderContainer extends Component {
             hideTocDrawer={this.hideTocDrawer}
             showMeta={this.toggleMeta}
           />
-          <main>
+          <main id={skipId}>
             <ReactCSSTransitionGroup
               transitionName="overlay-full"
               transitionEnterTimeout={200}

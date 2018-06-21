@@ -138,10 +138,12 @@ export class BackendContainer extends PureComponent {
   render() {
     if (this.hasFatalError()) return this.renderFatalError();
     if (this.hasAuthenticationError()) return this.renderAuthenticationError();
+    const skipId = "skip-to-main";
 
     return (
       <HigherOrder.BodyClass className={"backend bg-neutral90"}>
         <div>
+          <Utility.SkipLink skipId={skipId} />
           <Utility.ScrollToTop />
           <HigherOrder.ScrollAware>
             <LayoutBackend.Header
@@ -157,6 +159,7 @@ export class BackendContainer extends PureComponent {
             ref={mainContainer => {
               this.mainContainer = mainContainer;
             }}
+            id={skipId}
           >
             {childRoutes(this.props.route, { childProps: this.childProps() })}
           </main>
