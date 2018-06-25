@@ -12,6 +12,10 @@
     padding-left: 20px;
     margin-bottom: 20px;
 
+    &:nth-last-of-type(-n + 3) {
+      display: none;
+    }
+
     @include respond($break60) {
       width: 33.333%;
     };
@@ -22,6 +26,10 @@
 
     @include respond($break90) {
       width: 20%;
+
+      &:nth-last-of-type(-n + 3) {
+        display: flex;
+      }
     }
   }
 
