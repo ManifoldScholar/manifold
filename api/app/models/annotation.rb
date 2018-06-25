@@ -32,8 +32,7 @@ class Annotation < ApplicationRecord
     where(format: formats) if formats.present?
   }
   scope :with_orphaned, lambda { |orphaned|
-    next all if orphaned.blank?
-    where.not(text_section: nil).where(orphaned: orphaned)
+    where.not(text_section: nil).where(orphaned: orphaned) unless orphaned.blank?
   }
 
   # Constants
