@@ -140,6 +140,7 @@ class Annotation < ApplicationRecord
 
   def end_text_node
     text_section_text_node_for end_node
+  end
 
   def public?
     !private
