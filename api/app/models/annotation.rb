@@ -24,9 +24,9 @@ class Annotation < ApplicationRecord
   scope :by_ids, lambda { |ids|
     where(id: ids) if ids.present?
   }
-  scope :excluding_private, lambda { |creator|
-    return all unless creator.present?
-    where("(private = true AND creator_id = ?) OR (private = false)", creator.id)
+  scope :with_read_ability, lambda { |creator|
+    next where(private: false) unless creator.present?
+    where(creator: creator).or(where(private: false))
   }
   scope :by_formats, lambda { |formats|
     where(format: formats) if formats.present?
@@ -126,6 +126,10 @@ class Annotation < ApplicationRecord
 
   def author_created
     creator.project_author_of? project
+  end
+
+  def public?
+    !private
   end
 
 end
