@@ -18,4 +18,9 @@ class AnnotationAuthorizer < ApplicationAuthorizer
   def updatable_by?(user, _options = {})
     creator_or_has_editor_permissions?(user, resource)
   end
+
+  def readable_by?(user, _options = {})
+    return true if user.created?(resource)
+    resource.public?
+  end
 end
