@@ -63,7 +63,8 @@ export class SectionContainer extends Component {
     collections: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
     text: PropTypes.object.isRequired,
-    appearance: PropTypes.object.isRequired
+    appearance: PropTypes.object.isRequired,
+    authentication: PropTypes.object
   };
 
   componentDidMount() {
@@ -83,6 +84,18 @@ export class SectionContainer extends Component {
       this.fetchResources(nextProps);
       this.fetchCollections(nextProps);
     }
+
+    // If the user just logged in, we need to refetch annotations in case they had private
+    // ones. We check authToken here rather than just authentication.currentUser because
+    // the API relies on the authToken, which is set after currentUser,
+    // to be present in the request header to identify the reader.
+    if (
+      !prevProps.authentication.authToken &&
+      this.props.authentication.authToken
+    ) {
+      this.fetchAnnotations(this.props);
+    }
+
     // Check if we need to fetch more resources when annotations change
     // Needs to be deep comparison
     if (!isEqual(nextProps.annotations, this.props.annotations)) {
