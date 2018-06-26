@@ -44,7 +44,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
         Video File
       </label>
       <react-dropzone
-        accept="video/*"
+        accept="video/x-flv,video/*"
         className="form-dropzone style-square"
         inputProps={
           Object {
