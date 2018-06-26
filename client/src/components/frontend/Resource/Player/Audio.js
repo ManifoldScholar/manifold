@@ -38,6 +38,9 @@ export default class ResourcePlayerAudio extends Component {
   }
 
   componentWillUnmount() {
+    this.audio.pause();
+    this.audio.destroy();
+    this.audio = null;
     window.removeEventListener("resize", this.debouncedResize);
   }
 
@@ -127,6 +130,8 @@ export default class ResourcePlayerAudio extends Component {
   };
 
   updateTime = () => {
+    if (!this.audio) return null;
+
     this.setState({
       currentTime: this.calcTime(this.audio.getCurrentTime())
     });
