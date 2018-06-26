@@ -317,12 +317,6 @@ common: &1
           - !ruby/regexp '/wmv\Z/i'
           - !ruby/regexp '/mov\Z/i'
           - !ruby/regexp '/avi\Z/i'
-          - !ruby/regexp '/mp4\Z/i'
-          - !ruby/regexp '/webm\Z/i'
-          - !ruby/regexp '/flv\Z/i'
-          - !ruby/regexp '/wmv\Z/i'
-          - !ruby/regexp '/mov\Z/i'
-          - !ruby/regexp '/avi\Z/i'
           # Audio
           - !ruby/regexp '/flac\Z/i'
           - !ruby/regexp '/mp3\Z/i'
