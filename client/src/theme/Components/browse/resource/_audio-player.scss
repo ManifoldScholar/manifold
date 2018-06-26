@@ -14,7 +14,22 @@
     cursor: pointer;
     background: transparentize($neutralBlack, 0.5);
 
-    .play-button-indicator {
+    &.error {
+      pointer-events: none;
+      cursor: default;
+
+      .message {
+        @include utilityPrimary;
+        position: absolute;
+        top: calc(50% + (60px - 7px));
+        width: 100%;
+        font-size: 14px;
+        color: $neutralWhite;
+        text-align: center;
+      }
+    }
+
+    .indicator {
       position: absolute;
       top: calc(50% - 35px);
       left: calc(50% - 35px);
@@ -31,8 +46,16 @@
       border-radius: 50%;
 
       .manicon {
-        margin-left: 4px;
         font-size: 32px;
+
+        &.manicon-octagon-bang {
+          margin-top: 2px;
+          font-size: 46px;
+        }
+
+        &.manicon-triangle-right-fill {
+          margin-left: 4px;
+        }
       }
     }
   }
@@ -44,14 +67,14 @@
   .waveform {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     flex-grow: 1;
+    justify-content: center;
   }
 
   .control-bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding: 0 15px 10px;
 
     @include respond($break60) {
@@ -59,18 +82,18 @@
     }
 
     button {
-      outline: none;
+      padding: 0;
       background-color: transparent;
       border: 0;
-      padding: 0;
+      outline: none;
     }
 
     .progress {
-      flex-grow: 1;
       display: none;
-      padding: 0 20px;
-      justify-content: space-between;
+      flex-grow: 1;
       align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
 
       @include respond($break40) {
         display: flex;
@@ -80,7 +103,7 @@
         flex-grow: 1;
         margin: 0 15px;
 
-        input[type="range"] {
+        input[type='range'] {
           width: 100%;
 
           &::-webkit-slider-thumb {
@@ -109,8 +132,8 @@
 
       .mute {
         display: inline-block;
-        text-align: left;
         width: 35px;
+        text-align: left;
 
         @include respond($break60) {
           margin-right: 7px;
@@ -127,48 +150,48 @@
     }
 
     .slider {
-      display: inline-block;
       position: relative;
+      display: inline-block;
 
       .input-thumb {
         position: absolute;
+        left: 0;
         width: 20px;
         height: 20px;
-        left: 0;
-        border-radius: 50%;
-        border: 3px solid $neutralBlack;
-        background: $accentPrimary;
         pointer-events: none;
+        background: $accentPrimary;
+        border: 3px solid $neutralBlack;
+        border-radius: 50%;
 
       }
 
-      input[type="range"] {
-        appearance: none;
-        outline: 0;
-        height: 5px;
+      input[type='range'] {
         width: 70px;
-        vertical-align: middle;
+        height: 5px;
         margin-top: 1px;
-        border-radius: 0;
-        background: $neutral80;
         overflow: hidden;
+        vertical-align: middle;
+        background: $neutral80;
+        border-radius: 0;
+        outline: 0;
+        appearance: none;
 
         &:hover {
           cursor: pointer;
         }
 
         &::-webkit-slider-runnable-track {
-          appearance: none;
           height: 3px;
+          appearance: none;
         }
 
         &::-webkit-slider-thumb {
-          appearance: none;
           width: 1px;
           height: 1px;
           margin-top: -9px;
           background: transparent;
           box-shadow: -70px 0 0 70px $neutralWhite;
+          appearance: none;
         }
 
         &::-ms-fill-lower,
