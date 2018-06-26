@@ -28,6 +28,7 @@ export default class ResourcePlayerAudio extends Component {
       durationFormatted: null,
       playing: false,
       muted: false,
+      error: false,
       volume: 100
     };
   }
@@ -93,6 +94,7 @@ export default class ResourcePlayerAudio extends Component {
       barHeight: 1,
       cursorWidth: 0
     });
+    this.audio.on("error", this.handleError);
     this.audio.on("ready", this.setReady);
     this.audio.on("seek", progress => this.handleSeek(progress));
     this.audio.on("audioprocess", currentTime =>
@@ -126,6 +128,10 @@ export default class ResourcePlayerAudio extends Component {
     this.audio.seekTo(progress);
   };
 
+  handleError = error => {
+    this.setState({ error });
+  };
+
   updateProgress = progress => {
     const percent = progress * 100;
     this.setState({ percent });
@@ -143,8 +149,24 @@ export default class ResourcePlayerAudio extends Component {
     this.setState({ started: true, playing: true }, () => this.audio.play());
   };
 
+  renderError() {
+    if (!this.state.error) return null;
+
+    return (
+      <div className="audio-player">
+        <div className="cover error">
+          <div className="indicator">
+            <i className="manicon manicon-octagon-bang" aria-hidden="true" />
+          </div>
+          <div className="message">{this.state.error}</div>
+        </div>
+      </div>
+    );
+  }
+
   renderUnstarted() {
     if (this.state.started) return null;
+
     return (
       <div
         className="cover"
@@ -153,7 +175,7 @@ export default class ResourcePlayerAudio extends Component {
         tabIndex="0"
       >
         <span className="screen-reader-text">Start Playback</span>
-        <div className="play-button-indicator">
+        <div className="indicator">
           <i
             className="manicon manicon-triangle-right-fill"
             aria-hidden="true"
@@ -177,6 +199,8 @@ export default class ResourcePlayerAudio extends Component {
     });
 
     const volume = this.state.muted ? 0 : this.state.volume;
+
+    if (this.state.error) return this.renderError();
 
     return (
       <div className="audio-player">
