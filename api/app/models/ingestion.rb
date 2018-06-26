@@ -24,7 +24,7 @@ class Ingestion < ApplicationRecord
   manifold_has_attached_file :source, :ingestion
 
   # Validations
-  validates :ingestion_type, presence: true
+  # validates :ingestion_type, presence: true
   validates :source, presence: true, if: :file_based_ingestion?
   validates :external_source_url, presence: true, unless: :file_based_ingestion?
 

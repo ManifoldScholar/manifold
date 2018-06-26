@@ -3,7 +3,7 @@ module Ingestor
     module EPUB
       module Inspector
         # Inspects a single epub ingestion source
-        class IngestionSource < ::Ingestor::Inspector::IngestionSourceInspector
+        class IngestionSource
 
           def initialize(source_node, epub_inspector)
             @source_node = source_node

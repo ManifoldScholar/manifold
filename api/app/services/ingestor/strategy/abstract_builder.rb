@@ -2,7 +2,7 @@ module Ingestor
   module Strategy
     # rubocop: disable Metrics/ClassLength
     class AbstractBuilder
-      include Ingestor::Loggable
+      include Ingestions::Concerns::Loggable
 
       def initialize(inspector, logger = nil)
         @inspector = inspector

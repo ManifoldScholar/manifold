@@ -17,7 +17,7 @@ module Ingestor
     # @todo Replace hard-coded reader paths with a custom link syntax. We
     #   don't want to hard-code front-end routes in our content.
     class TextSection
-      include Ingestor::Loggable
+      include Ingestions::Concerns::Loggable
 
       # A multidimensional array of tags and attributes that the
       # TextSection transformer will transform.
