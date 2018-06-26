@@ -188,6 +188,7 @@ common: &1
       :audio:
         :allowed_mime:
           - !ruby/regexp '/audio\/.*/'
+          - !ruby/regexp '/video\/ogg/'
         :allowed_ext:
           - !ruby/regexp '/flac\Z/i'
           - !ruby/regexp '/mp3\Z/i'
@@ -195,6 +196,7 @@ common: &1
           - !ruby/regexp '/wav\Z/i'
           - !ruby/regexp '/mid\Z/i'
           - !ruby/regexp '/ogg\Z/i'
+          - !ruby/regexp '/oga\Z/i'
       :spreadsheet:
         :allowed_mime:
           - "application/vnd.ms-excel"
@@ -330,6 +332,7 @@ common: &1
           - !ruby/regexp '/wav\Z/i'
           - !ruby/regexp '/mid\Z/i'
           - !ruby/regexp '/ogg\Z/i'
+          - !ruby/regexp '/oga\Z/i'
           # Spreadsheet
           - !ruby/regexp '/xls\Z/i'
           - !ruby/regexp '/xlt\Z/i'
