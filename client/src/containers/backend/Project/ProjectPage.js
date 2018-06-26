@@ -86,18 +86,6 @@ export default class ProjectProjectPageContainer extends PureComponent {
               placeholder="Enter Purchase Price Currency Code"
               instructions="For example, USD for US Dollars"
             />
-            <Form.TextInput
-              label="Twitter Username"
-              name="attributes[twitterId]"
-              placeholder="Enter Twitter username"
-              instructions="If set, a twitter icon linked to the account will appear below the description."
-            />
-            <Form.TextInput
-              label="Instagram Username"
-              name="attributes[instagramId]"
-              placeholder="Enter Instagram username"
-              instructions="If set, a instagram icon linked to the account will appear below the description."
-            />
             <Form.Switch
               label="Hide Project Activity"
               name="attributes[hideActivity]"

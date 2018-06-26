@@ -274,54 +274,6 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       </div>
       <div
         className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor="text-input-15"
-        >
-          Twitter Username
-        </label>
-        <span
-          className="instructions"
-        >
-          If set, a twitter icon linked to the account will appear below the description.
-        </span>
-        <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
-          onChange={[Function]}
-          placeholder="Enter Twitter username"
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor="text-input-15"
-        >
-          Instagram Username
-        </label>
-        <span
-          className="instructions"
-        >
-          If set, a instagram icon linked to the account will appear below the description.
-        </span>
-        <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
-          onChange={[Function]}
-          placeholder="Enter Instagram username"
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="form-input"
       >
         <h4
           className="form-input-heading above"
