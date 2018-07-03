@@ -3,6 +3,7 @@
 module Ingestions
   class Ingestor < AbstractInteraction
     record :ingestion
+    object :logger, default: nil
 
     set_callback :execute, :before, :report_start
     set_callback :execute, :after, :set_ingestion_text, :report_end
@@ -18,7 +19,8 @@ module Ingestions
     end
 
     def context
-      @context ||= Ingestions::Context.new ingestion
+      @context ||= Ingestions::Context.new ingestion,
+                                           logger
     end
 
     private

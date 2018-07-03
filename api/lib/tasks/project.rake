@@ -10,20 +10,18 @@ namespace :manifold do
     desc "Ingest a project text"
     task :ingest, [:project_id, :path] => :environment do |_t, args|
       Manifold::Rake.logger.info "Ingesting #{args[:path]}"
-      Ingestor.logger = Logger.new(STDOUT)
       cli_user = User.find_by(is_cli_user: true)
-      text = Ingestor.ingest(args[:path], cli_user)
-      Ingestor.reset_logger
       project = Project.find(args[:project_id])
-      text.project = project
-      text.save
-      Manifold::Rake.logger.info "Ingested text: #{text.id}"
-    end
-
-    desc "Reingest a project text"
-    task :reingest, [:project_id, :text_id, :path] => :environment do |_t, args|
-      Manifold::Rake.logger.info "Reingesting #{args[:path]} for #{arg[:text_id]}"
-      Manifold::IngestTask.ingest(args[:path], "debug", args[:text_id])
+      ingestion = Ingestion.create(source: File.open(args[:path]),
+                                   creator: cli_user,
+                                   project: project)
+      outcome = Ingestions::Ingestor.run ingestion: ingestion,
+                                         logger: Logger.new(STDOUT)
+      if outcome.valid?
+        Manifold::Rake.logger.info "Ingested text: #{outcome.result.id}"
+      else
+        Manifold::Rake.logger.info "Could not ingest #{args[:path]}"
+      end
     end
 
     desc "Import a project form a JSON definition"
