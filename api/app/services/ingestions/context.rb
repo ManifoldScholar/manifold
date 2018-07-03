@@ -3,13 +3,14 @@ module Ingestions
     include Ingestions::Concerns::Loggable
     include Ingestions::Concerns::FileOperations
 
-    attr_reader :ingestion, :source_path, :identifier, :creator
+    attr_reader :ingestion, :source_path, :identifier, :creator, :loggable
 
-    def initialize(ingestion)
+    def initialize(ingestion, loggable = nil)
       @ingestion = ingestion
       @source_path = ingestion.ingestion_source
       @identifier = ingestion.id
       @creator = ingestion.creator
+      @loggable = loggable
 
       initialize_working_dirs
       fetched = maybe_fetch_external_source
@@ -18,7 +19,7 @@ module Ingestions
     end
 
     def logger
-      ingestion || Rails.logger
+      loggable || ingestion || Rails.logger
     end
 
     def maybe_fetch_external_source
