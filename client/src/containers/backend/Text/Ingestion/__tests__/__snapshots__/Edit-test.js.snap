@@ -8,115 +8,115 @@ exports[`Backend Text Ingestion Edit Container renders correctly 1`] = `
       data-id="submit"
       onSubmit={[Function]}
     >
-      <div
-        className="form-section"
-      >
+      <div>
         <div
-          className="form-input"
+          className="form-section"
         >
-          <div>
-            <span
-              className="screen-reader-text"
+          <div
+            className="form-input"
+          >
+            <div
+              className="form-input"
+              style={Object {}}
             >
-              Select a 
-              Text Format
-            </span>
-            <h4
-              aria-hidden="true"
-              className="form-input-heading"
-              style={
-                Object {
-                  "marginBottom": "1.5em",
+              <label
+                className=""
+                htmlFor="upload-17"
+              >
+                Upload a file
+              </label>
+              <span
+                className="instructions"
+              >
+                Manifold can ingest texts from single files or a .zip collection.
+                <br />
+                See the
+                 
+                <a
+                  href="https://manifoldapp.org/docs/projects/preparing"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  documentation
+                </a>
+                 
+                for supported file types and directory structure.
+              </span>
+              <react-dropzone
+                className="form-dropzone style-landscape"
+                inputProps={
+                  Object {
+                    "aria-describedby": "upload-error-18",
+                    "id": "upload-17",
+                  }
                 }
-              }
-            >
-              Text Format
-            </h4>
+                multiple={false}
+                onDrop={[Function]}
+                style={
+                  Object {
+                    "width": "100%",
+                  }
+                }
+              >
+                <div
+                  className="contents-empty"
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-cloud-up"
+                  />
+                  <div
+                    className="message"
+                  >
+                    <p
+                      className="primary"
+                    >
+                      <span
+                        className="fake-link"
+                        role="button"
+                        tabIndex="0"
+                      >
+                        Upload a file
+                      </span>
+                       or 
+                      <br />
+                      drag and drop here
+                      <br />
+                    </p>
+                  </div>
+                </div>
+              </react-dropzone>
+            </div>
           </div>
-          <label
-            className="form-toggle radio"
-            htmlFor="epub"
+          <div
+            className="form-divider"
           >
-            <input
-              checked={false}
-              id="epub"
-              onChange={[Function]}
-              type="radio"
-              value="epub"
-            />
-            <span
-              aria-hidden="true"
-              className="toggle-indicator"
-            />
-            <span
-              className="toggle-label"
-            >
-              EPUB v2 or v3
-            </span>
-          </label>
-          <label
-            className="form-toggle radio"
-            htmlFor="markdown"
+            or
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            <input
-              checked={false}
-              id="markdown"
-              onChange={[Function]}
-              type="radio"
-              value="markdown"
-            />
-            <span
-              aria-hidden="true"
-              className="toggle-indicator"
-            />
-            <span
-              className="toggle-label"
+            <label
+              className="has-instructions"
+              htmlFor="text-input-15"
             >
-              Markdown document(s)
-            </span>
-          </label>
-          <label
-            className="form-toggle radio"
-            htmlFor="googledoc"
-          >
-            <input
-              checked={false}
-              id="googledoc"
-              onChange={[Function]}
-              type="radio"
-              value="googledoc"
-            />
+              URL
+            </label>
             <span
-              aria-hidden="true"
-              className="toggle-indicator"
-            />
-            <span
-              className="toggle-label"
+              className="instructions"
             >
-              Google Doc
+              Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file.
             </span>
-          </label>
-          <label
-            className="form-toggle radio"
-            htmlFor="html"
-          >
             <input
-              checked={false}
-              id="html"
+              aria-describedby="text-input-error-16"
+              id="text-input-15"
               onChange={[Function]}
-              type="radio"
-              value="html"
+              placeholder={undefined}
+              type="text"
+              value=""
             />
-            <span
-              aria-hidden="true"
-              className="toggle-indicator"
-            />
-            <span
-              className="toggle-label"
-            >
-              HTML document
-            </span>
-          </label>
+          </div>
         </div>
         <div
           className="buttons-icon-horizontal"
@@ -127,9 +127,19 @@ exports[`Backend Text Ingestion Edit Container renders correctly 1`] = `
           }
         >
           <button
+            className="button-icon-secondary dull"
+            onClick={[Function]}
+          >
+            <i
+              aria-hidden="true"
+              className="manicon manicon-x small"
+            />
+            Cancel
+          </button>
+          <button
             className="button-icon-secondary"
             disabled={true}
-            onClick={[Function]}
+            type="submit"
           >
             <i
               aria-hidden="true"

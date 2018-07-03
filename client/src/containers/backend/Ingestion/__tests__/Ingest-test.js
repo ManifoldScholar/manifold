@@ -31,25 +31,6 @@ describe("Backend Ingest Container", () => {
     });
   });
 
-  describe("when the ingestion state is analyzed", () => {
-    const attr = { state: "analyzed", availableEvents: ["reset", "process"] };
-    props.ingestion = build.entity.ingestion("1", attr);
-
-    const component = renderer.create(
-      wrapWithRouter(<IngestionIngest {...props} />)
-    );
-
-    it("renders correctly", () => {
-      let tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-
-    it("doesn't render to null", () => {
-      let tree = component.toJSON();
-      expect(tree).not.toBe(null);
-    });
-  });
-
   describe("when the ingestion state is finished", () => {
     const attr = { state: "finish", availableEvents: ["reset"] };
     props.ingestion = build.entity.ingestion("1", attr);
