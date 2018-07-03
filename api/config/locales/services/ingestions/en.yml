@@ -1,0 +1,68 @@
+en:
+  services:
+    ingestions:
+      logging:
+        ingestion_start: 'Ingesting "%{name}"'
+        using_strategy: 'Using strategy %{strategy}'
+        ingestion_end: 'Ingestion complete.'
+      fetcher:
+        log:
+          download_external: 'Downloading external resource: %{url}'
+      compiler:
+        text:
+          log:
+            new: 'Created new text "%{id}"'
+            updated: 'Updated text "%{id}"'
+            cover: 'Cover is "%{cover}"'
+            lang: 'Language is "%{lang}"'
+            date: 'Publication date is "%{date}"'
+            rights: 'Rights are "%{rights}"'
+            desc: 'Description is "%{desc}"'
+        maker:
+          log:
+            new: 'Created new %{role} "%{name}"'
+            updated: 'Updated %{role} "%{name}"'
+        title:
+          log:
+            new: 'Created new %{kind} title "%{name}"'
+            updated: 'Updated %{kind} title "%{name}"'
+        ingestion_source:
+          log:
+            new: 'Created new ingestion_source "%{source_path}"'
+            updated: 'Updated ingestion_source "%{source_path}"'
+        stylesheet:
+          log:
+            new: 'Created new stylesheet "%{name}"'
+            updated: 'Updated stylesheet "%{name}"'
+        text_section:
+          log:
+            new: 'Created new text_section "%{name}"'
+            updated: 'Updated text_section "%{name}"'
+      inspector:
+        log:
+          landmark_nav_title: 'Landmark nav title is "%{text}"'
+          toc_nav_title: 'TOC nav title is "%{text}"'
+          page_list_nav_title: 'Page list nav title is "%{text}"'
+      post_processor:
+        log:
+          transform_toc_structure: 'Transforming TOC structure'
+          toc_empty: 'TOC has no items'
+          find_page_list_structure: 'Looking for page list structure'
+          find_landmark_structure: 'Looking for landmark structure'
+          spine_populated: 'Spine has %{number} items'
+          spine_empty: 'Spine did not find any items'
+          transform_ts: 'Transforming text section "%{name}"'
+          transforming_ts: 'Transforming text sections'
+          transform_ss: 'Transforming stylesheet "%{name}"'
+          transforming_ss: 'Transforming stylesheets'
+          remove_text_section: 'Destroyed stale text section "%{id}"'
+          start_section: 'Starting section is "%{source_identifier}"'
+    factory:
+      event:
+        event_title:
+          project_created: "Project Kickoff"
+          text_added: "Text Added"
+          resource_added: "Resource Added"
+        event_subtitle:
+          project_created: "A %{global_installation_name} project is born!"
+

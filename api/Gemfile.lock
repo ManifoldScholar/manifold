@@ -80,6 +80,7 @@ GEM
       csl (~> 1.4)
     classy_enum (4.0.0)
       activerecord (>= 3.2)
+    cleanroom (1.0.0)
     climate_control (0.2.0)
     clockwork (2.0.0)
       activesupport
@@ -114,6 +115,8 @@ GEM
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
+    dux (0.8.0)
+      yard_types
     elasticsearch (5.0.4)
       elasticsearch-api (= 5.0.4)
       elasticsearch-transport (= 5.0.4)
@@ -209,7 +212,7 @@ GEM
     memoist (0.16.0)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
-    metadown (1.0.1)
+    metadown (1.1.0.beta)
       redcarpet
     method_source (0.8.2)
     mime-types (3.1)
@@ -451,6 +454,7 @@ GEM
     with_advisory_lock (3.1.1)
       activerecord (>= 3.2)
       thread_safe
+    yard_types (0.2.0)
 
 PLATFORMS
   ruby
@@ -470,6 +474,7 @@ DEPENDENCIES
   chroma (~> 0.2)
   citeproc-ruby (~> 1.1.0)
   classy_enum (~> 4.0.0)
+  cleanroom
   clockwork (~> 2.0.0)
   closure_tree (~> 6.0)
   colorize (~> 0.8.0)
@@ -478,7 +483,9 @@ DEPENDENCIES
   data_uri (~> 0.1.0)
   database_cleaner (~> 1.0)
   dotenv-rails (~> 2.0)
+  dux
   elasticsearch (~> 5.0)
+  equalizer
   factory_bot_rails (~> 4.0)
   faker (~> 1.0)
   filesize (~> 0.1.0)
@@ -542,4 +549,4 @@ DEPENDENCIES
   webmock (~> 3.0)
 
 BUNDLED WITH
-   1.16.1
+   1.16.2

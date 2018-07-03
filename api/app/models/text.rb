@@ -146,15 +146,11 @@ class Text < ApplicationRecord
     text_sections.find_by(position: position)
   end
 
-  def find_ingestion_source_by_identifier(identifier)
-    ingestion_sources.to_ary.find { |is| is.source_identifier == identifier }
-  end
-
   def find_text_section_by_source_path(path)
     source = ingestion_sources.find_by(source_path: path)
     return unless source
     source_id = source.source_identifier
-    text_sections.to_ary.find { |cd| cd.source_identifier == source_id }
+    text_sections.find_by(source_identifier: source_id)
   end
 
   def section_source_map
@@ -184,7 +180,7 @@ class Text < ApplicationRecord
   def cover_styles
     cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
     return nil unless cover_source
-    cover_source.try(:attachment_styles)
+    cover_source&.attachment_styles
   end
 
   def toc_section

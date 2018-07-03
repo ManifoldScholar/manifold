@@ -222,10 +222,10 @@ const defaults = {
   ingestion: {
     type: "ingestions",
     attributes: {
-      state: "analyzed",
+      state: "sleeping",
       sourceFileName: "some-file.epub",
       externalSourceUrl: null,
-      strategy: "Ingestor::Strategy::EPUB::Strategy",
+      strategy: "Ingestions::Strategies::Epub",
       availableEvents: ["reset", "process"]
     }
   },

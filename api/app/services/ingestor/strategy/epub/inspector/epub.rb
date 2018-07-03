@@ -12,7 +12,7 @@ module Ingestor
         class EPUB
 
           extend Memoist
-          include Ingestor::Loggable
+          include Ingestions::Concerns::Loggable
 
           attr_reader :logger, :ingestion
 

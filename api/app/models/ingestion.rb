@@ -24,32 +24,17 @@ class Ingestion < ApplicationRecord
   manifold_has_attached_file :source, :ingestion
 
   # Validations
-  validates :ingestion_type, presence: true
   validates :source, presence: true, if: :file_based_ingestion?
   validates :external_source_url, presence: true, unless: :file_based_ingestion?
 
   # rubocop:disable Metrics/BlockLength
   aasm column: "state" do
     state :sleeping, initial: true
-    state :analyzing
-    state :analyzed
     state :processing
     state :finished
 
-    event :analyze, after: :begin_analysis do
-      transitions from: :sleeping, to: :analyzing, guard: :ingestable?
-    end
-
-    event :analysis_success do
-      transitions from: :analyzing, to: :analyzed
-    end
-
-    event :analysis_failure do
-      transitions from: :analyzing, to: :sleeping
-    end
-
     event :process, after: :begin_processing do
-      transitions from: :analyzed, to: :processing
+      transitions from: :sleeping, to: :processing
     end
 
     event :processing_success do
@@ -61,8 +46,6 @@ class Ingestion < ApplicationRecord
     end
 
     event :reset, after: :reset_strategy do
-      transitions from: :analyzing, to: :sleeping
-      transitions from: :analyzed, to: :sleeping
       transitions from: :processing, to: :sleeping
       transitions from: :finished, to: :sleeping
     end
@@ -85,7 +68,7 @@ class Ingestion < ApplicationRecord
   end
 
   def file_based_ingestion?
-    external_source_url.blank? if %w(html epub googledoc).include? ingestion_type
+    external_source_url.blank?
   end
 
   def ingestable?
@@ -123,18 +106,6 @@ class Ingestion < ApplicationRecord
     external_source_url
   end
 
-  def begin_analysis
-    Ingestor.logger = self
-    begin
-      self.strategy = Ingestor.determine_strategy(ingestion_source, creator)
-      analysis_success
-    rescue StandardError => e
-      error("Analysis failed: #{e}")
-      analysis_failure
-      return
-    end
-  end
-
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def begin_processing(processing_user = nil)
@@ -146,31 +117,24 @@ class Ingestion < ApplicationRecord
     )
     IngestionChannel.broadcast_to self, type: "entity", payload: serialization
 
-    Ingestor.logger = self
-    begin
-      if text
-        Ingestor.ingest_update(ingestion_source, creator, text)
-      else
-        self.text = Ingestor.ingest_new(ingestion_source, creator)
-      end
-      text.project = project
-      text.save
+    outcome = Ingestions::Ingestor.run ingestion: self
+    if outcome.valid?
+      self.text = outcome.result
       processing_success
-    rescue StandardError => e
-      handle_ingestion_exception(e)
+    else
+      handle_ingestion_exception(outcome.errors)
     end
-    Ingestor.reset_logger
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
 
   private
 
-  def handle_ingestion_exception(error)
-    error("Processing failed: #{error}")
+  def handle_ingestion_exception(errors)
+    error("Processing failed.\n")
     if Rails.env.development?
-      Rails.backtrace_cleaner.clean(error.backtrace).each do |line|
-        error(line)
+      errors.full_messages.each do |e|
+        error(e)
       end
     end
     processing_failure
