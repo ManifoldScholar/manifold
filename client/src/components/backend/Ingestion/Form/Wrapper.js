@@ -1,10 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Form as FormContainer } from "containers/backend";
-import Type from "./Type";
 import Upload from "./Upload";
 import cloneDeep from "lodash/cloneDeep";
-import get from "lodash/get";
 import { ingestionsAPI } from "api";
 
 export default class IngestionFormWrapper extends PureComponent {
@@ -43,18 +41,10 @@ export default class IngestionFormWrapper extends PureComponent {
     return ingestionsAPI.create(this.props.project.id, data);
   };
 
-  stageComponent() {
-    const stage = get(this.props.location, "state.stage");
-    if (stage === "upload") return Upload;
-    return Type;
-  }
-
   render() {
     /* eslint-disable no-unused-vars */
     const { ingestion, onSuccess } = this.props;
     /* eslint-enable no-unused-vars */
-    const StageComponent = this.stageComponent();
-    if (!StageComponent) return null;
 
     return (
       <FormContainer.Form
@@ -67,7 +57,7 @@ export default class IngestionFormWrapper extends PureComponent {
         className="form-secondary"
         onSuccess={this.props.onSuccess}
       >
-        <StageComponent
+        <Upload
           history={this.props.history}
           location={this.props.location}
           triggerClose={this.props.triggerClose}

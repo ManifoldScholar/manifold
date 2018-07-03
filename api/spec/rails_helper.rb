@@ -73,6 +73,12 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:deletion, except: %w(settings))
   end
 
+  config.after(:suite) do
+    Rails.root.join("tmp", "ingestion").children.each do |child|
+      child.rmtree
+    end
+  end
+
   # Allow elastic search for tests tagged with elasticsearch
   config.around(:all) do |example|
     if (example.metadata[:elasticsearch])

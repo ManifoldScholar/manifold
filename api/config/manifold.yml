@@ -302,6 +302,7 @@ common: &1
           - "application/vnd.oasis.opendocument.text"
           - "application/vnd.oasis.opendocument.presentation"
           - "text/csv"
+          - "text/plain"
           - !ruby/regexp '/text\/.*/'
           - !ruby/regexp '/audio\/.*/'
           - !ruby/regexp '/video\/.*/'
@@ -383,6 +384,7 @@ common: &1
           - !ruby/regexp '/css\Z/i'
           - !ruby/regexp '/xml\Z/i'
           - !ruby/regexp '/smil\Z/i'
+          - !ruby/regexp '/ya?ml\Z/i'
 production: *1
 development: *1
 test: *1

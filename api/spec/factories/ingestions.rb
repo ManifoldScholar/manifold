@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :ingestion do
-    state "analyzed"
-    ingestion_type "epub"
+    state "sleeping"
     external_source_url "http://www.dailyrowan.com"
     association :creator, factory: :user
     project

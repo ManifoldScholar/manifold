@@ -126,39 +126,38 @@ module Importer
       collaborator
     end
 
+    def import_text(project, path)
+      ingestion = Ingestion.create(project: project,
+                                   source: File.open(path),
+                                   creator: @creator)
+      @logger.info "  Importing project text at #{path}"
+      outcome = Ingestions::Ingestor.run ingestion: ingestion,
+                                         logger: @logger
+      outcome.result if outcome.valid?
+    end
+
     def import_other_texts(project, texts)
       return unless texts
       texts.each do |text_file_name|
         text_path = "#{@path}/texts/#{text_file_name}"
-        @logger.info "  Importing project text at #{text_path}"
-        Ingestor.logger = @logger
-        text = Ingestor.ingest(text_path, @creator)
-        unless text.is_a? Text
-          @logger.error "Unable to import project text at #{text_path}"
-          # rubocop:disable Lint/NonLocalExitFromIterator
-          return
-          # rubocop:enable Lint/NonLocalExitFromIterator
+        text = import_text(project, text_path)
+        if text.present?
+          @logger.info "Created text #{text.title}"
+        else
+          @logger.error "Unable to import project published text at #{text_path}"
         end
-        text.project = project
-        text.save
-        project.save
       end
     end
 
     def import_published_text(project, text_file_name)
       text_path = "#{@path}/texts/#{text_file_name}"
-      @logger.info "  Importing project text at #{text_path}"
-      Ingestor.logger = @logger
-      text = Ingestor.ingest(text_path, @creator)
-      unless text.is_a? Text
-        @logger.error "Unable to import project text at #{text_path}"
-        return
+      text = import_text(project, text_path)
+      if text.present?
+        project.update published_text: text
+        @logger.info "Created published text #{text.title}"
+      else
+        @logger.error "Unable to import project published text at #{text_path}"
       end
-      Ingestor.reset_logger
-      text.project = project
-      project.published_text = text
-      text.save
-      project.save
     end
 
     def create_twitter_queries(project)

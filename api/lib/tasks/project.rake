@@ -1,24 +1,4 @@
 # rubocop:disable Metrics/BlockLength
-module Manifold
-  module ProjectTask
-    # rubocop:disable Metrics/AbcSize
-    def ingest(path, log_level, text_id = nil)
-      path ||= raise I18n.t("rake.ingest.errors.missing_path")
-      log_level ||= "info"
-      Ingestor.logger = Manifold::Rake.logger
-      Ingestor.logger.level = Logger.const_get(log_level.upcase.to_sym)
-      text = text_id ? Text.find(text_id) : nil
-      if text_id && text
-        Ingestor.ingest_update(path, Manifold::Rake.cli_user, text)
-      else
-        Ingestor.ingest(path, Manifold::Rake.cli_user)
-      end
-      Ingestor.reset_logger
-    end
-  end
-  # rubocop:enable Metrics/AbcSize
-end
-
 namespace :manifold do
   namespace :project do
     desc "Fetch the project's tweets"

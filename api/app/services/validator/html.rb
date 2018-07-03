@@ -5,7 +5,7 @@ module Validator
   # structure will work with ReactDom.
   class Html
     def validate(html)
-      source = html.encoding == Encoding::ASCII_8BIT ? html.encode("UTF-8") : html
+      source = html.encoding == ::Encoding::ASCII_8BIT ? html.encode("UTF-8") : html
       fragment = Nokogiri::HTML.fragment(source)
       fragment = ensure_one_parent_node(fragment)
       ensure_valid_parent_nodes(fragment)
@@ -29,8 +29,7 @@ module Validator
         tag = node.name
         ancestors = []
         node.ancestors.each { |n| ancestors.push(n.name) }
-        case tag
-        when "p"
+        if tag == "p"
           strip = true if ancestors.include?("p")
         end
         node.remove if strip

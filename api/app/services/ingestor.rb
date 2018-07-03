@@ -13,7 +13,7 @@
 # @author Zach Davis
 module Ingestor
   class << self
-    include Ingestor::Loggable
+    include Ingestions::Concerns::Loggable
 
     attr_writer :logger
 

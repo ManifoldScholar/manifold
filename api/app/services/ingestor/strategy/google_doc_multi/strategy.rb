@@ -11,7 +11,7 @@ module Ingestor
       # @author Zach Davis
       class Strategy < Ingestor::Strategy::Base
 
-        include Ingestor::Loggable
+        include Ingestions::Concerns::Loggable
         extend Memoist
 
         def initialize(ingestion)

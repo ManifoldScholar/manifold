@@ -69,17 +69,6 @@ export class IngestionIngest extends Component {
     this.setDialogClassName();
   }
 
-  // I don't think we will need these anymore.  If we do they need to be broadened a little bit to include webSocketConnected and channel
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (this.props.webSocketConnected !== nextProps.webSocketConnected) return true;
-  //   if (this.props.webSocketFailure !== nextProps.webSocketFailure) return true;
-  //   if (this.props.channel !== nextProps.channel) return true;
-  //   if (this.state.loading !== nextState.loading) return true;
-  //   if (this.props.ingestion !== nextProps.ingestion) return true;
-  //   if (this.state.textLog !== nextState.textLog) return true;
-  //   return false;
-  // }
-
   componentDidUpdate(prevProps, prevState) {
     if (this.props.ingestion && !prevProps.ingestion)
       this.openSocket(this.props.ingestion.id);
@@ -111,12 +100,6 @@ export class IngestionIngest extends Component {
     return ingestion.attributes.availableEvents.includes("process");
   }
 
-  get canAnalyze() {
-    const { ingestion, webSocketConnected } = this.props;
-    if (!ingestion || !webSocketConnected) return false;
-    return ingestion.attributes.availableEvents.includes("analyze");
-  }
-
   get canReset() {
     const { ingestion, webSocketConnected } = this.props;
     if (!ingestion || !webSocketConnected) return false;
@@ -126,13 +109,6 @@ export class IngestionIngest extends Component {
   get isModal() {
     return this.props.route.modal;
   }
-
-  analyze = () => {
-    if (this.state.loading) return;
-    this.props.dispatch(
-      websocketActions.triggerAction(this.channelName, "analyze")
-    );
-  };
 
   reset = () => {
     if (this.state.loading) return;
@@ -335,15 +311,6 @@ export class IngestionIngest extends Component {
                 aria-hidden="true"
               />
               {"Ingest"}
-            </button>
-          ) : null}
-          {this.canAnalyze ? (
-            <button onClick={this.analyze} className="button-icon-secondary">
-              <i
-                className="manicon manicon-arrow-right small"
-                aria-hidden="true"
-              />
-              {"Analyze"}
             </button>
           ) : null}
           {this.props.ingestion.attributes.state === "finished"
