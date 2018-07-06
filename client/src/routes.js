@@ -637,6 +637,13 @@ export default () => {
       path: "/",
       routes: [
         {
+          name: "frontendSandbox",
+          exact: true,
+          component: Frontend.Sandbox,
+          path: "/sandbox",
+          helper: () => "/sandbox"
+        },
+        {
           name: "frontendProject",
           exact: true,
           component: Frontend.ProjectDetail,

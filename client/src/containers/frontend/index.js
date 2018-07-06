@@ -13,6 +13,7 @@ import Page from "./Page";
 import ResourceDetail from "./ResourceDetail";
 import EventList from "./EventList";
 import Search from "./Search";
+import Sandbox from "./Sandbox";
 
 export {
   CollectionDetail,
@@ -29,5 +30,6 @@ export {
   Page,
   ResourceDetail,
   EventList,
-  Search
+  Search,
+  Sandbox
 };
