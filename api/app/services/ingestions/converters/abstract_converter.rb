@@ -4,7 +4,6 @@ module Ingestions
     class AbstractConverter < Ingestions::AbstractInteraction
       define_model_callbacks :convertibility_check, :perform
 
-      string :contents, default: nil
       string :source_path, default: nil
 
       boolean :test_only, default: false
@@ -42,6 +41,10 @@ module Ingestions
       end
 
       protected
+
+      def contents
+        @contents ||= context.read(source_path)
+      end
 
       def determine_convertibility
         self.class.convertible_extensions.include? File.extname(source_path).delete(".")

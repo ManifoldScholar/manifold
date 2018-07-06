@@ -261,7 +261,7 @@ GEM
       rack
     os (0.9.6)
     paleta (0.3.0)
-    pandoc-ruby (1.0.0)
+    pandoc-ruby (2.0.2)
     paper_trail (8.1.2)
       activerecord (>= 4.2, < 5.2)
       request_store (~> 1.1)
@@ -511,7 +511,7 @@ DEPENDENCIES
   omniauth-google-oauth2 (~> 0.4.1)
   omniauth-twitter (~> 1.4.0)
   paleta (~> 0.3.0)
-  pandoc-ruby (~> 1.0)
+  pandoc-ruby (~> 2.0)
   paper_trail (~> 8.0)
   paper_trail-globalid (~> 0.2)
   paperclip (~> 5.0)

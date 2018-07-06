@@ -160,6 +160,11 @@ common: &1
           - "application/x-yaml"
           - "application/epub+zip"
           - "application/xhtml+xml"
+          - "application/msword"
+          - "application/vnd.ms-word.document.macroEnabled.12"
+          - "application/vnd.ms-word.template.macroEnabled.12"
+          - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          - "application/vnd.openxmlformats-officedocument.wordprocessingml.template"
         :allowed_ext:
           - !ruby/regexp '/\*/i'
           - !ruby/regexp '/md\Z/i'
@@ -167,6 +172,7 @@ common: &1
           - !ruby/regexp '/epub\Z/i'
           - !ruby/regexp '/html?\Z/i'
           - !ruby/regexp '/ya?ml\Z/i'
+          - !ruby/regexp '/docx\Z/i'
       :image:
         :allowed_mime:
           - !ruby/regexp '/image\/.*/'
