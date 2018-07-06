@@ -13,7 +13,7 @@ exports[`Backend.TwitterQuery.Form Component renders correctly 1`] = `
     >
       <label
         className=""
-        htmlFor="text-input-9"
+        htmlFor="text-input-15"
       >
         Query
       </label>
@@ -31,8 +31,8 @@ exports[`Backend.TwitterQuery.Form Component renders correctly 1`] = `
         .
       </p>
       <input
-        aria-describedby="text-input-error-10"
-        id="text-input-9"
+        aria-describedby="text-input-error-16"
+        id="text-input-15"
         onChange={[Function]}
         placeholder="Enter query"
         type="text"
@@ -59,7 +59,7 @@ exports[`Backend.TwitterQuery.Form Component renders correctly 1`] = `
             className="manicon manicon-caret-down"
           />
           <select
-            aria-describedby="select-error-6"
+            aria-describedby="select-error-12"
             id={undefined}
             onChange={[Function]}
             value={undefined}
