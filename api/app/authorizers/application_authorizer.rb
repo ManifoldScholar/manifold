@@ -6,7 +6,7 @@ class ApplicationAuthorizer < Authority::Authorizer
   delegate :admin_permissions?, :editor_permissions?,
            :project_creator_permissions?, :marketeer_permissions?,
            :creator_or_has_editor_permissions?, :reader_permissions?,
-           :creator_or_has_editor_permissions?, :creator_or_has_admin_permissions?,
+           :creator_or_has_admin_permissions?,
            :editor_of_any_project?, to: :class
 
   # Any class method from Authority::Authorizer that isn't overridden

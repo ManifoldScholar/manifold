@@ -9,7 +9,7 @@ module Api
 
           resourceful! Annotation, authorize_options: { except: [:index] } do
             scope = @text_section.nil? ? Annotation : @text_section.annotations
-            scope = scope.excluding_private(current_user)
+            scope = scope.with_read_ability(current_user)
             Annotation.filter(
               annotation_filter_params || {},
               scope: scope

@@ -16,24 +16,20 @@ class Annotation < ApplicationRecord
   scope :only_highlights, -> { where(format: "highlight") }
   scope :created_by, ->(user) { where(creator: user) }
   scope :by_text, lambda { |text|
-    return all unless text.present?
-    joins(:text_section).where("text_sections.text_id = ?", text)
+    joins(:text_section).where(text_sections: { text: text }) if text.present?
   }
   scope :by_text_section, lambda { |text_section|
-    return all unless text_section.present?
-    where(text_section: text_section)
+    where(text_section: text_section) if text_section.present?
   }
   scope :by_ids, lambda { |ids|
-    return all unless ids.present?
-    where(id: ids)
+    where(id: ids) if ids.present?
   }
-  scope :excluding_private, lambda { |creator|
-    return all unless creator.present?
-    where("(private = true AND creator_id = ?) OR (private = false)", creator.id)
+  scope :with_read_ability, lambda { |creator|
+    next where(private: false) unless creator.present?
+    where(creator: creator).or(where(private: false))
   }
   scope :by_formats, lambda { |formats|
-    return all unless formats.present?
-    where(format: formats)
+    where(format: formats) if formats.present?
   }
   scope :with_orphaned, lambda { |orphaned|
     next all if orphaned.blank?
@@ -145,6 +141,9 @@ class Annotation < ApplicationRecord
 
   def end_text_node
     text_section_text_node_for end_node
+
+  def public?
+    !private
   end
 
 end
