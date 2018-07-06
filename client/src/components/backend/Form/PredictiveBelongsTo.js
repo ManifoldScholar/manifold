@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
-import uniqueId from "lodash/uniqueId";
 import { Form as FormContainer } from "containers/backend";
 import { Form as GlobalForm } from "components/global";
 
