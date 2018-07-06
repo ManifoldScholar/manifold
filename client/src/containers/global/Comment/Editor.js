@@ -112,7 +112,7 @@ export class CommentEditor extends PureComponent {
   }
 
   handleSuccess() {
-    this.setState(this.initialState());
+    this.setState(this.initialState(this.props));
     this.props.cancel();
   }
 
