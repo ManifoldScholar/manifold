@@ -89,13 +89,13 @@ exports[`Backend Collection New Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="text-input-9"
+                htmlFor="text-input-15"
               >
                 Title
               </label>
               <input
-                aria-describedby="text-input-error-10"
-                id="text-input-9"
+                aria-describedby="text-input-error-16"
+                id="text-input-15"
                 onChange={[Function]}
                 placeholder="Enter a title"
                 type="text"
@@ -111,13 +111,13 @@ exports[`Backend Collection New Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="textarea-7"
+                  htmlFor="textarea-13"
                 >
                   Description
                 </label>
                 <textarea
-                  aria-describedby="textarea-error-8"
-                  id="textarea-7"
+                  aria-describedby="textarea-error-14"
+                  id="textarea-13"
                   onChange={[Function]}
                   placeholder="Enter a description"
                   style={
@@ -138,7 +138,7 @@ exports[`Backend Collection New Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="upload-11"
+                  htmlFor="upload-17"
                 >
                   Cover Image
                 </label>
@@ -147,8 +147,8 @@ exports[`Backend Collection New Container renders correctly 1`] = `
                   className="form-dropzone style-landscape"
                   inputProps={
                     Object {
-                      "aria-describedby": "upload-error-12",
-                      "id": "upload-11",
+                      "aria-describedby": "upload-error-18",
+                      "id": "upload-17",
                     }
                   }
                   multiple={false}
