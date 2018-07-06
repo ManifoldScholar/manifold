@@ -17,6 +17,7 @@ module Ingestions
       converter :markdown
       converter :html
       converter :latex
+      converter :ms_word
     end
 
     strategies do

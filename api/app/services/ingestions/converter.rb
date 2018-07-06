@@ -5,9 +5,7 @@ module Ingestions
     def execute
       converter = compose Pickers::Converter
 
-      contents = context.read(source_path)
-
-      compose converter.interaction, contents: contents
+      compose converter.interaction
     end
 
   end

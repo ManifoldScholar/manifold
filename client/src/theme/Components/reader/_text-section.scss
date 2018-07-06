@@ -94,6 +94,20 @@
     margin: 1em 0;
   }
 
+  table {
+    margin: 1em 0;
+
+    tr th {
+      padding-right: 1em;
+    }
+  }
+
+  dl {
+    dt {
+      font-weight: 700;
+    }
+  }
+
   // Link with notation marker cube
   .notation-marker {
     cursor: pointer;
