@@ -85,6 +85,10 @@ class Resource < ApplicationRecord
             uniqueness: { scope: :project,
                           message: "has already been taken. " \
                                    "Verify resource content is unique to project" }
+  validates :minimum_height, :minimum_width,
+            numericality: true,
+            allow_nil: true,
+            allow_blank: true
   validate :validate_kind_fields
 
   # Scopes
