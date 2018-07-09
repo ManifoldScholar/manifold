@@ -174,9 +174,58 @@ class User < ApplicationRecord
     errors.add(:password, "can't be blank") if password.blank?
   end
 
-  class << self
-    def cli_user
-      find_by(is_cli_user: true)
+  # rubocop:disable Metrics/BlockLength, Style/MultilineBlockChain
+  concerning :Classification do
+    included do
+      include ClassyEnum::ActiveRecord
+
+      classy_enum_attr :classification, enum: "UserClassification", allow_blank: false
+
+      delegate :anonymous?, :cli?, :command_line?, to: :classification
+    end
+
+    def default_classification?
+      classification.default?
+    end
+
+    def unique_classification?
+      classification.unique?
+    end
+
+    class_methods do
+      def classification?(value)
+        value.in? UserClassification
+      end
+
+      def anonymous_user(&block)
+        fetch_by_classification :anonymous, &block
+      end
+
+      def cli_user(&block)
+        fetch_by_classification :command_line, &block
+      end
+
+      # @api private
+      # @param [Symbol, UserClassification] classification
+      # @yield [created, user]
+      # @yieldparam [Boolean] created
+      # @yieldparam [User] user
+      # @yieldreturn [void]
+      # @return [User]
+      def fetch_by_classification(classification)
+        enum = UserClassification.fetch classification
+
+        created = false
+
+        where(classification: enum.to_s).first_or_create! do |user|
+          enum.populate_values!(user)
+
+          created = true
+        end.tap do |user|
+          yield created, user if block_given?
+        end
+      end
     end
   end
+  # rubocop:enable Metrics/BlockLength, Style/MultilineBlockChain
 end
