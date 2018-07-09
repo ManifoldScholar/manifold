@@ -34,6 +34,10 @@ en:
               blank: "for the google sheet should not be blank. Please upload a valid CSV file or enter a public Google sheet URL"
             source:
               inclusion: "data is not valid. Please upload a valid CSV file or enter a public Google sheet URL"
+  classy_enum:
+    user_classification:
+      anonymous: "Anonymous"
+      command_line: "CLI"
   controllers:
     errors:
       auth_timeout:

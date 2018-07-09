@@ -194,4 +194,41 @@ RSpec.describe User, type: :model do
       expect(u).to eq(nil)
     end
   end
+
+  context "when fetching a specially-classified user" do
+    shared_examples "unique user classification" do
+      let(:classification) { raise "override in inherited contexts" }
+      let(:method_name) { raise "override in inherited contexts" }
+
+      it "can create a user that does not already exist" do
+        expect do
+          User.__send__(method_name)
+        end.to change { User.where(classification: classification).count }.from(0).to(1)
+      end
+
+      it "exposes a way to tell if a user was created or not" do
+        expect do |b|
+          User.__send__(method_name, &b)
+        end.to yield_with_args(true, a_kind_of(User))
+
+        expect do |b|
+          User.__send__(method_name, &b)
+        end.to yield_with_args(false, a_kind_of(User))
+      end
+    end
+
+    context "when fetching the anonymous user" do
+      include_examples "unique user classification" do
+        let(:classification) { :anonymous }
+        let(:method_name) { :anonymous_user }
+      end
+    end
+
+    context "when fetching the CLI user" do
+      include_examples "unique user classification" do
+        let(:classification) { :command_line }
+        let(:method_name) { :cli_user }
+      end
+    end
+  end
 end

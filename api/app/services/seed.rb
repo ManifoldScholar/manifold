@@ -5,13 +5,14 @@ class Seed
   def self.execute(logger = nil)
     logger ||= Logger.new(STDOUT)
     maybe_update_settings(logger)
+    _anonymous_user = make_anonymous_user(logger)
     cli_user = make_cli_user(logger)
     make_feature(logger, cli_user)
     upgrade_system(logger)
   end
 
   def self.make_feature(logger, creator)
-    return unless Feature.count.zero?
+    return if Feature.exists?
     logger.info("Creating placeholder feature".green)
     # rubocop:disable Metrics/LineLength
     Feature.create(
@@ -33,28 +34,30 @@ class Seed
     Settings.potentially_update_from_environment!
   end
 
+  def self.make_anonymous_user(logger)
+    make_system_user(logger, :anonymous)
+  end
+
   def self.make_cli_user(logger)
-    cli_user = User.find_or_initialize_by(
-      email: "cli@manifold.app",
-      first_name: "CLI",
-      last_name: "User",
-      is_cli_user: true
-    )
-    if cli_user.new_record?
-      logger.info("Creating CLI user: #{cli_user.email}".green)
-      pw = SecureRandom.hex
-      cli_user.password = pw
-      cli_user.password_confirmation = pw
-      cli_user.save
-    else
-      logger.info("CLI User exists: #{cli_user.id}".green)
-    end
-    cli_user
+    make_system_user(logger, :command_line)
   end
 
   def self.upgrade_system(logger)
     SystemUpgrades::Perform.run force: false, noop: true, stdout: true
     logger.info("Running system upgrades".green)
+  end
+
+  # @api private
+  def self.make_system_user(logger, classification)
+    classification = UserClassification.fetch(classification)
+
+    User.fetch_by_classification(classification.to_s) do |created, user|
+      if created
+        logger.info "Creating #{classification.text} user: #{user.email}".green
+      else
+        logger.info "#{classification.text} user exists: #{user.id}".green
+      end
+    end
   end
 
   # rubocop:enable Metrics/MethodLength

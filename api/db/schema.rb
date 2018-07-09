@@ -610,10 +610,12 @@ ActiveRecord::Schema.define(version: 20180710155830) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.boolean  "is_cli_user",            default: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.jsonb    "raw_persistent_ui",      default: {},    null: false
+    t.jsonb    "raw_persistent_ui",      default: {},        null: false
+    t.string   "classification",         default: "default", null: false
+    t.index ["classification"], name: "udx_users_anonymous", unique: true, where: "((classification)::text = 'anonymous'::text)", using: :btree
+    t.index ["classification"], name: "udx_users_cli", unique: true, where: "((classification)::text = 'command_line'::text)", using: :btree
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
