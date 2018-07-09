@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Utility, ResourceList, ResourceCollection } from "components/frontend";
-import { Meta } from "components/global";
 
 export default class ResourceCollectionDetail extends PureComponent {
   static displayName = "ResourceCollection.Detail";
@@ -44,7 +43,6 @@ export default class ResourceCollectionDetail extends PureComponent {
           {this.renderDescription(attr.descriptionFormatted)}
           <div className="utility">
             <Utility.ShareBar url={this.props.collectionUrl} />
-            <Meta.DOI doi={project.attributes.metadataFormatted.resourcesDoi} />
           </div>
         </div>
         <ResourceList.Slideshow
