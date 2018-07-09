@@ -102,37 +102,39 @@ class ManifoldContainer extends PureComponent {
     this.gaInitialized = false;
   }
 
-  // TODO: Refactor to use new lifecycle methods for React 17
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps, prevStateIgnored) {
+    if (this.receivedGaTrackingId(this.props.settings) && !this.gaInitialized) {
+      ReactGA.initialize(
+        this.props.settings.attributes.integrations.gaTrackingId
+      );
+      this.gaInitialized = true;
+      if (this.props.gaInitCallback) this.props.gaInitCallback();
+    }
+
+    if (this.routeChanged(prevProps.location, this.props.location)) {
+      this.props.dispatch(routingActions.update(this.props.location.state));
+    }
+
     if (
       this.userJustLoggedOut(
-        this.props.authentication,
-        nextProps.authentication
+        prevProps.authentication,
+        this.props.authentication
       )
-    ) {
+    )
       this.doPostLogout();
-    }
-    if (this.receivedGaTrackingId(nextProps.settings) && !this.gaInitialized) {
-      ReactGA.initialize(nextProps.settings.attributes.general.gaTrackingId);
-      this.gaInitialized = true;
-      if (nextProps.gaInitCallback) nextProps.gaInitCallback();
-    }
-    if (this.routeChanged(this.props.location, nextProps.location)) {
-      this.props.dispatch(routingActions.update(nextProps.location.state));
-    }
   }
 
-  routeChanged(location, nextLocation) {
-    return location.pathname !== nextLocation.pathname;
+  routeChanged(prevLocation, location) {
+    return prevLocation.pathname !== location.pathname;
   }
 
-  receivedGaTrackingId(nextSettings) {
-    const path = "attributes.general.gaTrackingId";
-    return has(nextSettings, path) && get(nextSettings, path) !== "";
+  receivedGaTrackingId(settings) {
+    const path = "attributes.integrations.gaTrackingId";
+    return has(settings, path) && get(settings, path) !== "";
   }
 
-  userJustLoggedOut(auth, nextAuth) {
-    return nextAuth.authenticated === false && auth.authenticated === true;
+  userJustLoggedOut(prevAuth, auth) {
+    return auth.authenticated === false && prevAuth.authenticated === true;
   }
 
   doPostLogout() {

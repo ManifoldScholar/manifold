@@ -18,62 +18,65 @@ class App extends Component {
     staticRequest: PropTypes.object
   };
 
+  static getDerivedStateFromProps(props, state) {
+    if (state.bootstrapped) return null;
+
+    if (__SERVER__) return { bootstrapped: true, store: props.store };
+    let initialState = {};
+    let bootstrapped = false;
+
+    if (window.__INITIAL_STATE__) {
+      initialState = window.__INITIAL_STATE__;
+      ch.info("Bootstrapped on the server.", "sparkles");
+      bootstrapped = true;
+    }
+    const store = createStore(initialState);
+
+    if (bootstrapped) return { bootstrapped, store };
+
+    return null;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       bootstrapped: false,
+      store: null,
       routerConfirm: false,
       routerConfirmCallback: null,
       routerConfirmMessage: null
     };
   }
 
-  // TODO: Refactor to use new lifecycle methods for React 17
-  UNSAFE_componentWillMount() {
-    if (__SERVER__) {
-      this.store = this.props.store;
-      const bootstrapped = true;
-      this.setState({ bootstrapped });
-    } else {
-      // Create the Redux store using our store creator function. Note that we're passing the
-      // store state, which was dumped by the server-side render.
-      let initialState = {};
-      let bootstrapped = false;
-      if (window.__INITIAL_STATE__) {
-        initialState = window.__INITIAL_STATE__;
-        bootstrapped = true;
-        ch.info("Bootstrapped on the server.", "sparkles");
-        this.setState({ bootstrapped });
-      }
-      this.store = createStore(initialState);
-
-      // if there is no initial state, then we bootstrap on the client.
-      if (!bootstrapped) {
-        ch.error("Bootstrapping on the client.", "rain_cloud");
-        const manifoldCookie = cookie.parse(document.cookie);
-        Manifold.bootstrap(
-          this.store.getState,
-          this.store.dispatch,
-          manifoldCookie
-        ).then(
-          () => {
-            this.setState({ bootstrapped: true });
-          },
-          () => {
-            ch.error("Bootstrapping failed unexpectedly.", "fire");
-          }
-        );
-      }
-    }
+  componentDidMount() {
+    if (this.state.bootstrapped) return this.clientLoaded();
+    this.bootstrapClient();
   }
 
-  componentDidMount() {
-    this.store.dispatch({ type: "CLIENT_LOADED", payload: {} });
+  bootstrapClient() {
+    const store = createStore({});
+
+    ch.error("Bootstrapping on the client.", "rain_cloud");
+    const manifoldCookie = cookie.parse(document.cookie);
+    Manifold.bootstrap(store.getState, store.dispatch, manifoldCookie).then(
+      () => {
+        ch.info("Bootstrapped on the server.", "sparkles");
+        return this.setState({ bootstrapped: true, store }, this.clientLoaded);
+      },
+      () => {
+        ch.error("Bootstrapping failed unexpectedly.", "fire");
+        return null;
+      }
+    );
+  }
+
+  clientLoaded() {
+    this.state.store.dispatch({ type: "CLIENT_LOADED", payload: {} });
   }
 
   settings() {
     return get(
-      this.store.getState(),
+      this.state.store.getState(),
       "entityStore.entities.settings.0.attributes"
     );
   }
@@ -129,7 +132,7 @@ class App extends Component {
     if (!this.state.bootstrapped) return null;
     const { routerProps, Router } = this.getRouter();
     return (
-      <Provider store={this.store} key="provider">
+      <Provider store={this.state.store} key="provider">
         <Router {...routerProps}>
           <HigherOrder.Analytics settings={this.settings()}>
             <Manifold confirm={this.renderConfirm()} />
