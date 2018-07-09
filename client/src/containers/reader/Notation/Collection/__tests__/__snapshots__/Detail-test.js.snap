@@ -68,9 +68,6 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
                   </div>
                 </div>
               </header>
-              <div
-                className="utility"
-              />
             </div>
           </div>
           <div
