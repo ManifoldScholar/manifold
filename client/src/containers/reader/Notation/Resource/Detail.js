@@ -6,6 +6,7 @@ import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { Overlay } from "components/global";
 import { Notation } from "components/reader";
+import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
 
@@ -42,17 +43,23 @@ export class NotationResourceDetailContainer extends PureComponent {
     this.props.dispatch(flush(requests.rResource));
   }
 
+  handleClose = event => {
+    if (event) event.preventDefault();
+    const { textId, sectionId } = this.props.match.params;
+    this.props.history.push(lh.link("readerSection", textId, sectionId));
+  };
+
   render() {
     if (!this.props.resource) return null;
     return (
       <Overlay
-        closeCallback={this.props.history.goBack}
+        closeCallback={this.handleClose}
         appearance="overlay-full bg-neutral90"
       >
         <div className="notation-detail">
           <Notation.Resource.Detail
             resource={this.props.resource}
-            handleClose={this.props.history.goBack}
+            handleClose={this.handleClose}
           />
         </div>
       </Overlay>
