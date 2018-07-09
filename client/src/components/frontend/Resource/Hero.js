@@ -50,7 +50,7 @@ export default class ResourceHero extends Component {
         break;
       case "audio":
         output = (
-          <div className="resource-slide-figure">
+          <div className="resource-slide-figure resource-slide-audio">
             <ResourceList.Slide.SlideAudio
               resource={resource}
               {...this.props.slideOptions}
