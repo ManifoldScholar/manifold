@@ -6,6 +6,7 @@ import { entityStoreActions } from "actions";
 import { select, meta, loaded } from "utils/entityUtils";
 import { Overlay } from "components/global";
 import { Notation } from "components/reader";
+import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
 const page = 1;
@@ -62,11 +63,17 @@ export class NotationCollectionDetailContainer extends PureComponent {
     this.props.dispatch(flush(requests.feCollectionResources));
   }
 
+  handleClose = event => {
+    if (event) event.preventDefault();
+    const { textId, sectionId } = this.props.match.params;
+    this.props.history.push(lh.link("readerSection", textId, sectionId));
+  };
+
   render() {
     if (!this.props.collection || !this.props.slideshowResources) return null;
     return (
       <Overlay
-        closeCallback={this.props.history.goBack}
+        closeCallback={this.handleClose}
         appearance="overlay-full bg-neutral90"
       >
         <div className="notation-detail">
@@ -75,7 +82,7 @@ export class NotationCollectionDetailContainer extends PureComponent {
             collection={this.props.collection}
             slideshowResources={this.props.slideshowResources}
             slideshowPagination={this.props.slideshowResourcesMeta.pagination}
-            handleClose={this.props.history.goBack}
+            handleClose={this.handleClose}
           />
         </div>
       </Overlay>

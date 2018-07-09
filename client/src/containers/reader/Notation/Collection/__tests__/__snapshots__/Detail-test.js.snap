@@ -271,7 +271,7 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
               <button
                 className="button-secondary outlined dull"
                 data-id="close-overlay"
-                onClick={undefined}
+                onClick={[Function]}
               >
                 <i
                   aria-hidden="true"
