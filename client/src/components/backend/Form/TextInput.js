@@ -4,6 +4,7 @@ import setter from "./setter";
 import { Form as GlobalForm } from "components/global";
 import classnames from "classnames";
 import isString from "lodash/isString";
+import isArray from "lodash/isArray";
 import uniqueId from "lodash/uniqueId";
 import Instructions from "./Instructions";
 
@@ -42,7 +43,7 @@ class FormTextInput extends Component {
 
   renderValue(value) {
     if (!value) return "";
-    if (isString(value)) return value;
+    if (!isArray(value)) return value;
     return this.props.join(value);
   }
 
