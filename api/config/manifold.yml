@@ -188,7 +188,6 @@ common: &1
           - !ruby/regexp '/mp4\Z/i'
           - !ruby/regexp '/webm\Z/i'
           - !ruby/regexp '/flv\Z/i'
-          - !ruby/regexp '/wmv\Z/i'
           - !ruby/regexp '/mov\Z/i'
           - !ruby/regexp '/avi\Z/i'
       :audio:
@@ -198,9 +197,7 @@ common: &1
         :allowed_ext:
           - !ruby/regexp '/flac\Z/i'
           - !ruby/regexp '/mp3\Z/i'
-          - !ruby/regexp '/wma\Z/i'
           - !ruby/regexp '/wav\Z/i'
-          - !ruby/regexp '/mid\Z/i'
           - !ruby/regexp '/ogg\Z/i'
           - !ruby/regexp '/oga\Z/i'
       :spreadsheet:
@@ -323,15 +320,12 @@ common: &1
           - !ruby/regexp '/mp4\Z/i'
           - !ruby/regexp '/webm\Z/i'
           - !ruby/regexp '/flv\Z/i'
-          - !ruby/regexp '/wmv\Z/i'
           - !ruby/regexp '/mov\Z/i'
           - !ruby/regexp '/avi\Z/i'
           # Audio
           - !ruby/regexp '/flac\Z/i'
           - !ruby/regexp '/mp3\Z/i'
-          - !ruby/regexp '/wma\Z/i'
           - !ruby/regexp '/wav\Z/i'
-          - !ruby/regexp '/mid\Z/i'
           - !ruby/regexp '/ogg\Z/i'
           - !ruby/regexp '/oga\Z/i'
           # Spreadsheet
@@ -379,6 +373,9 @@ common: &1
           - !ruby/regexp '/pls\Z/i'
           - !ruby/regexp '/ncx\Z/i'
           - !ruby/regexp '/dmg\Z/i'
+          - !ruby/regexp '/mid\Z/i'
+          - !ruby/regexp '/wma\Z/i'
+          - !ruby/regexp '/wmv\Z/i'
           # PDF
           - !ruby/regexp '/pdf\Z/'
           # Misc

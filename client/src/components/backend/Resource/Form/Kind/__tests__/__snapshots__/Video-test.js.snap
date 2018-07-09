@@ -84,7 +84,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
             <p
               className="secondary"
             >
-              mp4, webm, flv, wmv, mov, avi
+              mp4, webm, flv, mov, avi
             </p>
           </div>
         </div>

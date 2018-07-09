@@ -51,11 +51,11 @@ export class FormUpload extends Component {
     },
     audio: {
       accepts: "audio/*",
-      extensions: "mp3, flac, wma, wav, mid, ogg, oga"
+      extensions: "mp3, flac, wav, ogg, oga"
     },
     video: {
       accepts: "video/x-flv,video/*",
-      extensions: "mp4, webm, flv, wmv, mov, avi"
+      extensions: "mp4, webm, flv, mov, avi"
     },
     pdf: {
       accepts: "application/pdf",
