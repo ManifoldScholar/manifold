@@ -14,11 +14,14 @@ export default class EntityCount extends PureComponent {
 
   render() {
     const { perPage, currentPage, totalCount } = this.props.pagination;
-    const start = perPage * (currentPage - 1) + 1;
+    let start = perPage * (currentPage - 1);
+    if (totalCount > 0) start += 1;
     let end = totalCount < perPage ? totalCount : perPage * currentPage;
     if (end > totalCount) end = totalCount;
     const label =
-      totalCount > 1 ? this.props.pluralUnit : this.props.singularUnit;
+      totalCount > 1 || totalCount === 0
+        ? this.props.pluralUnit
+        : this.props.singularUnit;
     return (
       <p className="list-total">
         {"Showing "}
