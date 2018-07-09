@@ -58,7 +58,7 @@ exports[`Backend.Resource.Form.Audio component renders correctly 1`] = `
             <p
               className="secondary"
             >
-              mp3, flac, wma, wav, mid, ogg, oga
+              mp3, flac, wav, ogg, oga
             </p>
           </div>
         </div>
