@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-export default class ResourceDetail extends Component {
-  static displayName = "Resource.Detail";
+export default class ResourceLink extends Component {
+  static displayName = "Resource.Link";
 
   static propTypes = {
     attributes: PropTypes.object,

@@ -8,6 +8,7 @@ import Preview from "./Preview/Preview";
 import TagList from "./TagList";
 import Title from "./Title";
 import Player from "./Player";
+import VariantList from "./VariantList";
 
 export default {
   Card,
@@ -19,5 +20,6 @@ export default {
   Preview,
   TagList,
   Title,
-  Player
+  Player,
+  VariantList
 };
