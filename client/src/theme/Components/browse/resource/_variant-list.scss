@@ -1,0 +1,55 @@
+.resource-variant-list {
+  @include listUnstyled;
+  @include utilityPrimary;
+  display: none;
+  font-size: 13px;
+
+  @include respond($break65) {
+    display: block;
+  }
+
+  .section-title {
+    color: $neutral40;
+    margin-bottom: 10px;
+  }
+
+  li {
+    white-space: nowrap;
+
+    a {
+      display: inline-flex;
+      color: $neutralBlack;
+      text-decoration: none;
+      transition: color $duration $timing;
+
+      span {
+        white-space: pre-wrap;
+      }
+
+      &:hover {
+        color: $accentPrimary;
+      }
+    }
+
+    .manicon {
+      display: inline-block;
+      color: $accentPrimary;
+      text-decoration: none;
+      font-size: 15px;
+      margin-right: 7px;
+    }
+
+    + li {
+      margin-top: 10px;
+    }
+  }
+}
+
+.resource-variants-mobile .resource-variant-list {
+  display: block;
+  margin-bottom: 25px;
+
+  @include respond($break65) {
+    display: none;
+  }
+}

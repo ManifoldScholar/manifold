@@ -63,8 +63,7 @@ module ResourceAttributeResets
 
   def reset_non_external_video_attributes
     attributes = %w()
-    attachments = %w(attachment variant_format_one variant_format_two
-                     high_res variant_poster)
+    attachments = %w(attachment high_res variant_poster)
     reset_attributes(attributes, attachments)
   end
 

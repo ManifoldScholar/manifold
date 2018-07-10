@@ -327,6 +327,9 @@ exports[`Frontend.Resource.Detail component renders correctly 1`] = `
           </section>
         </div>
         <div
+          className="resource-variants-mobile"
+        />
+        <div
           className="resource-content left"
         >
           <div

@@ -52,9 +52,13 @@ export default class ResourceDetail extends Component {
                 */}
                 <Utility.ShareBar url={resourceUrl} />
                 <Resource.Meta resource={resource} layout={"secondary"} />
+                <Resource.VariantList resource={resource} />
               </aside>
               <div className="resource-meta-mobile">
                 <Resource.Meta resource={resource} layout={"secondary"} />
+              </div>
+              <div className="resource-variants-mobile">
+                <Resource.VariantList resource={resource} />
               </div>
               <div className="resource-content left">
                 <div
