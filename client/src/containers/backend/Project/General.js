@@ -73,22 +73,25 @@ export default class ProjectGeneralContainer extends PureComponent {
                 label="Hashtag"
                 name="attributes[hashtag]"
                 mask="hashtag"
+                placeholder="Enter Project Hashtag"
               />
               <Form.TextInput
                 label="Facebook ID"
                 name="attributes[facebookId]"
+                placeholder="Enter Project Facebook ID"
               />
-              <Form.TextInput label="Twitter ID" name="attributes[twitterId]" />
+              <Form.TextInput
+                label="Twitter ID"
+                name="attributes[twitterId]"
+                placeholder="Enter Project Twitter ID"
+              />
               <Form.TextInput
                 label="Instagram ID"
                 name="attributes[instagramId]"
+                placeholder="Enter Project Instagram ID"
               />
             </Form.FieldGroup>
             <Form.FieldGroup label="Other">
-              <Form.TextInput
-                label="Publisher"
-                name={`attributes[metadata][publisher]`}
-              />
               <Form.Date
                 label="Publication Date"
                 name="attributes[publicationDate]"

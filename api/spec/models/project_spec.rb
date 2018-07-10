@@ -282,4 +282,18 @@ RSpec.describe Project, type: :model do
     end
   end
 
+  context "when default publisher info is set" do
+    before(:each) do
+      settings = Settings.instance
+      settings.general = { default_publisher: "Cast Iron Coding", default_publisher_place: "Portland, OR" }
+      settings.save
+    end
+
+    it "assigns the default values on create" do
+      project = FactoryBot.create(:project)
+      expect(project.metadata["publisher"]).to eq "Cast Iron Coding"
+      expect(project.metadata["publisher_place"]).to eq "Portland, OR"
+    end
+  end
+
 end

@@ -197,7 +197,7 @@ module Validation
         general: [
           :installation_name,
           :default_publisher,
-          :default_place_of_publication,
+          :default_publisher_place,
           :social_share_message,
           :contact_email,
           :copyright,
