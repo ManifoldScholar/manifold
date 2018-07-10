@@ -179,7 +179,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
             aria-describedby="text-input-error-16"
             id="text-input-15"
             onChange={[Function]}
-            placeholder={undefined}
+            placeholder="Enter Project Facebook ID"
             type="text"
             value=""
           />
@@ -198,7 +198,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
             aria-describedby="text-input-error-16"
             id="text-input-15"
             onChange={[Function]}
-            placeholder={undefined}
+            placeholder="Enter Project Twitter ID"
             type="text"
             value=""
           />
@@ -217,7 +217,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
             aria-describedby="text-input-error-16"
             id="text-input-15"
             onChange={[Function]}
-            placeholder={undefined}
+            placeholder="Enter Project Instagram ID"
             type="text"
             value=""
           />
@@ -233,25 +233,6 @@ exports[`Backend Project General Container renders correctly 1`] = `
             Other
           </span>
         </header>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="text-input-15"
-          >
-            Publisher
-          </label>
-          <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
-            onChange={[Function]}
-            placeholder={undefined}
-            type="text"
-            value=""
-          />
-        </div>
         <div
           className="form-input"
         >

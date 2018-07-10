@@ -106,6 +106,7 @@ class Project < ApplicationRecord
 
   # Callbacks
   before_save :prepare_to_reindex_children, on: [:update], if: :draft_changed?
+  before_create :assign_publisher_defaults!
   after_commit :trigger_creation_event, on: [:create]
   after_commit :queue_reindex_children_job
 
@@ -242,6 +243,20 @@ class Project < ApplicationRecord
   end
 
   private
+
+  def assign_publisher_defaults!
+    assign_default_meta :publisher
+    assign_default_meta :publisher_place
+  end
+
+  def assign_default_meta(attr)
+    return if metadata[attr].present?
+    settings = Settings.instance
+    default = settings.general.dig("default_#{attr}")
+
+    return unless default.present?
+    metadata[attr] = default
+  end
 
   def prepare_to_reindex_children
     @reindex_children = true

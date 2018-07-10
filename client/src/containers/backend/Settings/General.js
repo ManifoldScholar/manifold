@@ -55,7 +55,7 @@ export class SettingsGeneralContainer extends PureComponent {
           />
           <Form.TextInput
             label="Default Place of Publication"
-            name="attributes[general][defaultPlaceOfPublication]"
+            name="attributes[general][defaultPublisherPlace]"
             placeholder="Enter Default Place of Publication"
           />
           <Form.TextInput
