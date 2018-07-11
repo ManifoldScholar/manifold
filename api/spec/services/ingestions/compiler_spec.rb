@@ -50,6 +50,7 @@ RSpec.describe Ingestions::Compiler do
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
+      allow(ingestion).to receive(:source_file_name).and_return("index.html")
       ingestion
     end
     let(:context) { Ingestions::Context.new(ingestion) }
@@ -72,6 +73,7 @@ RSpec.describe Ingestions::Compiler do
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
+      allow(ingestion).to receive(:source_file_name).and_return("minimal-single.md")
       ingestion
     end
     let(:context) { Ingestions::Context.new(ingestion) }
