@@ -25,10 +25,18 @@ export default class Overlay extends Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener("keyup", this.handleEscape);
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.triggerScrollToTop !== this.props.triggerScrollToTop) {
-      this.scrollableEl.scrollTo(0, 0);
+      this.scrollableEl.scrollTop = 0;
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keyup", this.handleEscape);
   }
 
   handleCloseEvent = event => {
@@ -39,6 +47,12 @@ export default class Overlay extends Component {
       setTimeout(() => {
         this.props.history.push(this.props.closeUrl);
       }, 200);
+    }
+  };
+
+  handleEscape = event => {
+    if (event.keyCode === 27) {
+      this.handleCloseEvent(event);
     }
   };
 
