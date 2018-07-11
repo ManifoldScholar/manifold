@@ -83,11 +83,27 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
               <div
                 className="panel-hidden"
               >
-                <nav
-                  className="search-menu"
+                <focus-trap-react
+                  active={undefined}
+                  focusTrapOptions={
+                    Object {
+                      "clickOutsideDeactivates": true,
+                      "escapeDeactivates": false,
+                    }
+                  }
                 >
-                  <span />
-                </nav>
+                  <button
+                    className="screen-reader-text"
+                    onClick={[Function]}
+                  >
+                    Close Panel
+                  </button>
+                  <nav
+                    className="search-menu"
+                  >
+                    <span />
+                  </nav>
+                </focus-trap-react>
               </div>
             </li>
             <li>
@@ -118,37 +134,53 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
               <div
                 className="panel-hidden"
               >
-                <nav
-                  className="user-menu menu-hidden"
+                <focus-trap-react
+                  active={undefined}
+                  focusTrapOptions={
+                    Object {
+                      "clickOutsideDeactivates": true,
+                      "escapeDeactivates": false,
+                    }
+                  }
                 >
-                  <i
-                    className="tail"
-                  />
-                  <ul>
-                    <li>
-                      <button
-                        onClick={[Function]}
-                      >
-                        <i
-                          aria-hidden="true"
-                          className="manicon manicon-person-pencil-simple"
-                        />
-                        Edit Profile
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        onClick={[Function]}
-                      >
-                        <i
-                          aria-hidden="true"
-                          className="manicon manicon-circle-arrow-out-right"
-                        />
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
+                  <button
+                    className="screen-reader-text"
+                    onClick={[Function]}
+                  >
+                    Close Panel
+                  </button>
+                  <nav
+                    className="user-menu menu-hidden"
+                  >
+                    <i
+                      className="tail"
+                    />
+                    <ul>
+                      <li>
+                        <button
+                          onClick={[Function]}
+                        >
+                          <i
+                            aria-hidden="true"
+                            className="manicon manicon-person-pencil-simple"
+                          />
+                          Edit Profile
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          onClick={[Function]}
+                        >
+                          <i
+                            aria-hidden="true"
+                            className="manicon manicon-circle-arrow-out-right"
+                          />
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
+                </focus-trap-react>
               </div>
             </li>
           </ul>
