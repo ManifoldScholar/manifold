@@ -155,10 +155,10 @@ common: &1
           - "text/plain"
           - "text/html"
           - "text/yaml"
-          - "application/markdown",
-          - "application/x-latex",
-          - "text/x-latex",
-          - "application/x-tex",
+          - "application/markdown"
+          - "application/x-latex"
+          - "text/x-latex"
+          - "application/x-tex"
           - "application/zip"
           - "application/x-yaml"
           - "application/epub+zip"
