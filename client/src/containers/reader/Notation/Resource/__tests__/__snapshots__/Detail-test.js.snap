@@ -4,13 +4,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
 <div
   className="overlay-full bg-neutral90"
 >
-  <focus-trap-react
-    focusTrapOptions={
-      Object {
-        "onDeactivate": [Function],
-      }
-    }
-  >
+  <focus-trap-react>
     <button
       className="overlay-close"
       data-id="overlay-close"
