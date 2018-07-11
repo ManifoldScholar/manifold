@@ -155,7 +155,10 @@ common: &1
           - "text/plain"
           - "text/html"
           - "text/yaml"
-          - "application/markdown"
+          - "application/markdown",
+          - "application/x-latex",
+          - "text/x-latex",
+          - "application/x-tex",
           - "application/zip"
           - "application/x-yaml"
           - "application/epub+zip"
@@ -173,6 +176,8 @@ common: &1
           - !ruby/regexp '/html?\Z/i'
           - !ruby/regexp '/ya?ml\Z/i'
           - !ruby/regexp '/docx\Z/i'
+          - !ruby/regexp '/tex\Z/i'
+          - !ruby/regexp '/latex\Z/i'
       :image:
         :allowed_mime:
           - !ruby/regexp '/image\/.*/'
