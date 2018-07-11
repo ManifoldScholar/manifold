@@ -4,7 +4,13 @@ exports[`Global.Overlay component renders correctly 1`] = `
 <div
   className="overlay-full"
 >
-  <focus-trap-react>
+  <focus-trap-react
+    focusTrapOptions={
+      Object {
+        "escapeDeactivates": false,
+      }
+    }
+  >
     <button
       className="overlay-close"
       data-id="overlay-close"
