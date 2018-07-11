@@ -11,11 +11,15 @@ module Ingestions
 
         def attributes
           {
-            source_identifier: @context.basename(@ingestion_source),
+            source_identifier: source_identifier,
             source_path: source_path,
             kind: kind,
             attachment: @context.open(@ingestion_source)
           }
+        end
+
+        def source_identifier
+          Digest::MD5.hexdigest @inspector.source_file_name
         end
 
         def source_path

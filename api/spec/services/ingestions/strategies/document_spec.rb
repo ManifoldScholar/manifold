@@ -62,6 +62,7 @@ RSpec.describe Ingestions::Strategies::Document do
       let(:ingestion) do
         ingestion = FactoryBot.create(:ingestion, text: nil)
         allow(ingestion).to receive(:ingestion_source).and_return(path)
+        allow(ingestion).to receive(:source_file_name).and_return("index.html")
         ingestion
       end
       let(:context) { Ingestions::Context.new(ingestion) }
@@ -70,7 +71,7 @@ RSpec.describe Ingestions::Strategies::Document do
       include_examples "outcome assertions"
 
       it "has the correct text section attributes" do
-        expected = [{ "source_identifier" => "index.html", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
+        expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
         expect(manifest[:relationships][:text_sections]).to eq expected
       end
 
@@ -89,6 +90,7 @@ RSpec.describe Ingestions::Strategies::Document do
         let(:ingestion) do
           ingestion = FactoryBot.create(:ingestion, text: nil)
           allow(ingestion).to receive(:ingestion_source).and_return(path)
+          allow(ingestion).to receive(:source_file_name).and_return("minimal.zip")
           ingestion
         end
         let(:context) { Ingestions::Context.new(ingestion) }
@@ -97,7 +99,7 @@ RSpec.describe Ingestions::Strategies::Document do
         include_examples "outcome assertions"
 
         it "has the correct text section attributes" do
-          expected = [{ "source_identifier" => "index.html", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
+          expected = [{ "source_identifier" => "1f74eed25a83913ec399efe9e43da579", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 
@@ -119,6 +121,7 @@ RSpec.describe Ingestions::Strategies::Document do
         let(:ingestion) do
           ingestion = FactoryBot.create(:ingestion, text: nil)
           allow(ingestion).to receive(:ingestion_source).and_return(path)
+          allow(ingestion).to receive(:source_file_name).and_return("minimal")
           ingestion
         end
         let(:context) { Ingestions::Context.new(ingestion) }
@@ -127,7 +130,7 @@ RSpec.describe Ingestions::Strategies::Document do
         include_examples "outcome assertions"
 
         it "has the correct text section attributes" do
-          expected = [{ "source_identifier" => "index.html", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
+          expected = [{ "source_identifier" => "dc43e863c176e9b9f2a0b6054b24bd1a", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 
@@ -151,12 +154,22 @@ RSpec.describe Ingestions::Strategies::Document do
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
+      allow(ingestion).to receive(:source_file_name).and_return("minimal-single.md")
       ingestion
     end
     let(:context) { Ingestions::Context.new(ingestion) }
     let!(:manifest) { described_class.run(context: context).result }
 
     include_examples "outcome assertions"
+
+    it "has the correct text section attributes" do
+      expected = [{ "source_identifier" => "69eebbb931829488741b846417d9d064", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/minimal-single.md" }]
+      expect(manifest[:relationships][:text_sections]).to eq expected
+    end
+
+    it "has the correct number of ingestion sources" do
+      expect(manifest[:relationships][:ingestion_sources].length).to eq 1
+    end
   end
 
   context "when latex" do
@@ -165,10 +178,16 @@ RSpec.describe Ingestions::Strategies::Document do
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
+      allow(ingestion).to receive(:source_file_name).and_return("example.tex")
       ingestion
     end
     let(:context) { Ingestions::Context.new(ingestion) }
     let!(:manifest) { described_class.run(context: context).result }
+
+    it "has the correct text section attributes" do
+      expected = [{ "source_identifier" => "5fa29616ec9ee64b6fe8fb0dd4e33e49", "name" => "Example", "kind" => "section", "position" => 1, "build" => "build/example.tex" }]
+      expect(manifest[:relationships][:text_sections]).to eq expected
+    end
 
     it "has the correct number of ingestion sources" do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 1
@@ -213,6 +232,7 @@ RSpec.describe Ingestions::Strategies::Document do
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
+      allow(ingestion).to receive(:source_file_name).and_return("example.docx")
       ingestion
     end
     let(:context) { Ingestions::Context.new(ingestion) }
