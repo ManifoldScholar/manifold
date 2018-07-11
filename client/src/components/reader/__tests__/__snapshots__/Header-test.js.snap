@@ -114,63 +114,79 @@ exports[`Reader.Header Component renders correctly 1`] = `
     <div
       className="panel-hidden"
     >
-      <nav
-        className="reader-return-menu"
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
       >
-        <ul>
-          <li>
-            <a
-              href="/project/slug-2"
-              onClick={[Function]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-arrow-round-left"
-              />
-              Project Home
-              <span>
-                Rowan Test
-              </span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-              onClick={[Function]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-books-with-glasses-simple"
-              />
-              Projects
-            </a>
-          </li>
-          <li>
-            <button
-              className="flush-bottom"
-              data-id="toggle-overlay"
-              onClick={[MockFunction]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-manifold-logo"
-              />
-              Sign-in
-            </button>
-            <a
-              className="note"
-              href="http://manifold.umn.edu/about/"
-              target="_blank"
-            >
-              Learn More About 
-              <br />
-              <span>
-                Manifold
-              </span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+        <button
+          className="screen-reader-text"
+          onClick={undefined}
+        >
+          Close Panel
+        </button>
+        <nav
+          className="reader-return-menu"
+        >
+          <ul>
+            <li>
+              <a
+                href="/project/slug-2"
+                onClick={[Function]}
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-arrow-round-left"
+                />
+                Project Home
+                <span>
+                  Rowan Test
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/"
+                onClick={[Function]}
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-books-with-glasses-simple"
+                />
+                Projects
+              </a>
+            </li>
+            <li>
+              <button
+                className="flush-bottom"
+                data-id="toggle-overlay"
+                onClick={[MockFunction]}
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-manifold-logo"
+                />
+                Sign-in
+              </button>
+              <a
+                className="note"
+                href="http://manifold.umn.edu/about/"
+                target="_blank"
+              >
+                Learn More About 
+                <br />
+                <span>
+                  Manifold
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </focus-trap-react>
     </div>
   </nav>
   <nav
@@ -179,238 +195,318 @@ exports[`Reader.Header Component renders correctly 1`] = `
     <div
       className="panel-hidden"
     >
-      <span />
-    </div>
-    <div
-      className="panel-hidden"
-    >
-      <nav
-        className="visibility-menu"
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
       >
-        <ul />
-      </nav>
-    </div>
-    <div
-      className="panel-hidden"
-    >
-      <nav
-        className="search-menu"
-      >
+        <button
+          className="screen-reader-text"
+          onClick={undefined}
+        >
+          Close Panel
+        </button>
         <span />
-      </nav>
+      </focus-trap-react>
     </div>
     <div
       className="panel-hidden"
     >
-      <nav
-        className="appearance-menu"
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
       >
-        <ul>
-          <li>
-            <div
-              className="control-font"
-            >
-              <button
-                className="font-type serif"
-                onClick={[Function]}
-              >
-                Serif
-              </button>
-              <div
-                className="font-size"
-              >
-                <button
-                  disabled={true}
-                  onClick={[Function]}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-dash"
-                  />
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Decrease font size
-                  </span>
-                </button>
-                <button
-                  disabled={true}
-                  onClick={[Function]}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-plus"
-                  />
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Increase font size
-                  </span>
-                </button>
-              </div>
-            </div>
-            <div
-              className="control-font"
-            >
-              <button
-                className="font-type sans-serif"
-                onClick={[Function]}
-              >
-                Sans-serif
-              </button>
-              <div
-                className="font-size"
-              >
-                <button
-                  disabled={true}
-                  onClick={[Function]}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-dash"
-                  />
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Decrease font size
-                  </span>
-                </button>
-                <button
-                  disabled={true}
-                  onClick={[Function]}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-plus"
-                  />
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Increase font size
-                  </span>
-                </button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div
-              className="control-colors"
-            >
-              <button
-                className="color-scheme light"
-                onClick={[Function]}
-              >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-check"
-                />
-                <span
-                  className="screen-reader-text"
-                >
-                  Use light color scheme in reader
-                </span>
-              </button>
-              <button
-                className="color-scheme dark"
-                onClick={[Function]}
-              >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-check"
-                />
-                <span
-                  className="screen-reader-text"
-                >
-                  Use dark color scheme in reader
-                </span>
-              </button>
-            </div>
-          </li>
-          <li>
-            <div
-              className="control-margins"
-            >
-              <button
-                className="margin-increase"
-                onClick={[Function]}
-              >
-                <i
-                  aria-hidden="true"
-                  className="compound-icon"
-                >
-                  <i
-                    className="manicon manicon-margins-narrow-arrows"
-                  />
-                  <i
-                    className="manicon manicon-margins-narrow-text"
-                  />
-                </i>
-                <span
-                  className="screen-reader-text"
-                >
-                  Increase text margins
-                </span>
-              </button>
-              <button
-                className="margin-decrease"
-                onClick={[Function]}
-              >
-                <i
-                  aria-hidden="true"
-                  className="compound-icon"
-                >
-                  <i
-                    className="manicon manicon-margins-wide-arrows"
-                  />
-                  <i
-                    className="manicon manicon-margins-wide-text"
-                  />
-                </i>
-                <span
-                  className="screen-reader-text"
-                >
-                  Decrease text margins
-                </span>
-              </button>
-            </div>
-          </li>
-        </ul>
-      </nav>
+        <button
+          className="screen-reader-text"
+          onClick={undefined}
+        >
+          Close Panel
+        </button>
+        <nav
+          className="visibility-menu"
+        >
+          <ul />
+        </nav>
+      </focus-trap-react>
     </div>
     <div
       className="panel-hidden"
     >
-      <nav
-        className="user-menu menu-hidden"
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
       >
-        <i
-          className="tail"
-        />
-        <ul>
-          <li>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-person-pencil-simple"
-              />
-              Edit Profile
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-circle-arrow-out-right"
-              />
-              Logout
-            </button>
-          </li>
-        </ul>
-      </nav>
+        <button
+          className="screen-reader-text"
+          onClick={undefined}
+        >
+          Close Panel
+        </button>
+        <nav
+          className="search-menu"
+        >
+          <span />
+        </nav>
+      </focus-trap-react>
+    </div>
+    <div
+      className="panel-hidden"
+    >
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
+      >
+        <button
+          className="screen-reader-text"
+          onClick={undefined}
+        >
+          Close Panel
+        </button>
+        <nav
+          className="appearance-menu"
+        >
+          <ul>
+            <li>
+              <div
+                className="control-font"
+              >
+                <button
+                  className="font-type serif"
+                  onClick={[Function]}
+                >
+                  Serif
+                </button>
+                <div
+                  className="font-size"
+                >
+                  <button
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-dash"
+                    />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Decrease font size
+                    </span>
+                  </button>
+                  <button
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-plus"
+                    />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Increase font size
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className="control-font"
+              >
+                <button
+                  className="font-type sans-serif"
+                  onClick={[Function]}
+                >
+                  Sans-serif
+                </button>
+                <div
+                  className="font-size"
+                >
+                  <button
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-dash"
+                    />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Decrease font size
+                    </span>
+                  </button>
+                  <button
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-plus"
+                    />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Increase font size
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div
+                className="control-colors"
+              >
+                <button
+                  className="color-scheme light"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-check"
+                  />
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Use light color scheme in reader
+                  </span>
+                </button>
+                <button
+                  className="color-scheme dark"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-check"
+                  />
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Use dark color scheme in reader
+                  </span>
+                </button>
+              </div>
+            </li>
+            <li>
+              <div
+                className="control-margins"
+              >
+                <button
+                  className="margin-increase"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="compound-icon"
+                  >
+                    <i
+                      className="manicon manicon-margins-narrow-arrows"
+                    />
+                    <i
+                      className="manicon manicon-margins-narrow-text"
+                    />
+                  </i>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Increase text margins
+                  </span>
+                </button>
+                <button
+                  className="margin-decrease"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="compound-icon"
+                  >
+                    <i
+                      className="manicon manicon-margins-wide-arrows"
+                    />
+                    <i
+                      className="manicon manicon-margins-wide-text"
+                    />
+                  </i>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Decrease text margins
+                  </span>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </focus-trap-react>
+    </div>
+    <div
+      className="panel-hidden"
+    >
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
+      >
+        <button
+          className="screen-reader-text"
+          onClick={[MockFunction]}
+        >
+          Close Panel
+        </button>
+        <nav
+          className="user-menu menu-hidden"
+        >
+          <i
+            className="tail"
+          />
+          <ul>
+            <li>
+              <button
+                onClick={[Function]}
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-person-pencil-simple"
+                />
+                Edit Profile
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={[Function]}
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-circle-arrow-out-right"
+                />
+                Logout
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </focus-trap-react>
     </div>
   </nav>
   <section
@@ -530,63 +626,79 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
     <div
       className="panel-hidden"
     >
-      <nav
-        className="reader-return-menu"
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
       >
-        <ul>
-          <li>
-            <a
-              href="/project/slug-2"
-              onClick={[Function]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-arrow-round-left"
-              />
-              Project Home
-              <span>
-                Rowan Test
-              </span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-              onClick={[Function]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-books-with-glasses-simple"
-              />
-              Projects
-            </a>
-          </li>
-          <li>
-            <button
-              className="flush-bottom"
-              data-id="toggle-overlay"
-              onClick={[MockFunction]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-manifold-logo"
-              />
-              Sign-in
-            </button>
-            <a
-              className="note"
-              href="http://manifold.umn.edu/about/"
-              target="_blank"
-            >
-              Learn More About 
-              <br />
-              <span>
-                Manifold
-              </span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+        <button
+          className="screen-reader-text"
+          onClick={undefined}
+        >
+          Close Panel
+        </button>
+        <nav
+          className="reader-return-menu"
+        >
+          <ul>
+            <li>
+              <a
+                href="/project/slug-2"
+                onClick={[Function]}
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-arrow-round-left"
+                />
+                Project Home
+                <span>
+                  Rowan Test
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/"
+                onClick={[Function]}
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-books-with-glasses-simple"
+                />
+                Projects
+              </a>
+            </li>
+            <li>
+              <button
+                className="flush-bottom"
+                data-id="toggle-overlay"
+                onClick={[MockFunction]}
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-manifold-logo"
+                />
+                Sign-in
+              </button>
+              <a
+                className="note"
+                href="http://manifold.umn.edu/about/"
+                target="_blank"
+              >
+                Learn More About 
+                <br />
+                <span>
+                  Manifold
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </focus-trap-react>
     </div>
   </nav>
   <nav
@@ -595,238 +707,318 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
     <div
       className="panel-hidden"
     >
-      <span />
-    </div>
-    <div
-      className="panel-hidden"
-    >
-      <nav
-        className="visibility-menu"
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
       >
-        <ul />
-      </nav>
-    </div>
-    <div
-      className="panel-hidden"
-    >
-      <nav
-        className="search-menu"
-      >
+        <button
+          className="screen-reader-text"
+          onClick={undefined}
+        >
+          Close Panel
+        </button>
         <span />
-      </nav>
+      </focus-trap-react>
     </div>
     <div
       className="panel-hidden"
     >
-      <nav
-        className="appearance-menu"
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
       >
-        <ul>
-          <li>
-            <div
-              className="control-font"
-            >
-              <button
-                className="font-type serif"
-                onClick={[Function]}
-              >
-                Serif
-              </button>
-              <div
-                className="font-size"
-              >
-                <button
-                  disabled={true}
-                  onClick={[Function]}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-dash"
-                  />
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Decrease font size
-                  </span>
-                </button>
-                <button
-                  disabled={true}
-                  onClick={[Function]}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-plus"
-                  />
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Increase font size
-                  </span>
-                </button>
-              </div>
-            </div>
-            <div
-              className="control-font"
-            >
-              <button
-                className="font-type sans-serif"
-                onClick={[Function]}
-              >
-                Sans-serif
-              </button>
-              <div
-                className="font-size"
-              >
-                <button
-                  disabled={true}
-                  onClick={[Function]}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-dash"
-                  />
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Decrease font size
-                  </span>
-                </button>
-                <button
-                  disabled={true}
-                  onClick={[Function]}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-plus"
-                  />
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Increase font size
-                  </span>
-                </button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div
-              className="control-colors"
-            >
-              <button
-                className="color-scheme light"
-                onClick={[Function]}
-              >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-check"
-                />
-                <span
-                  className="screen-reader-text"
-                >
-                  Use light color scheme in reader
-                </span>
-              </button>
-              <button
-                className="color-scheme dark"
-                onClick={[Function]}
-              >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-check"
-                />
-                <span
-                  className="screen-reader-text"
-                >
-                  Use dark color scheme in reader
-                </span>
-              </button>
-            </div>
-          </li>
-          <li>
-            <div
-              className="control-margins"
-            >
-              <button
-                className="margin-increase"
-                onClick={[Function]}
-              >
-                <i
-                  aria-hidden="true"
-                  className="compound-icon"
-                >
-                  <i
-                    className="manicon manicon-margins-narrow-arrows"
-                  />
-                  <i
-                    className="manicon manicon-margins-narrow-text"
-                  />
-                </i>
-                <span
-                  className="screen-reader-text"
-                >
-                  Increase text margins
-                </span>
-              </button>
-              <button
-                className="margin-decrease"
-                onClick={[Function]}
-              >
-                <i
-                  aria-hidden="true"
-                  className="compound-icon"
-                >
-                  <i
-                    className="manicon manicon-margins-wide-arrows"
-                  />
-                  <i
-                    className="manicon manicon-margins-wide-text"
-                  />
-                </i>
-                <span
-                  className="screen-reader-text"
-                >
-                  Decrease text margins
-                </span>
-              </button>
-            </div>
-          </li>
-        </ul>
-      </nav>
+        <button
+          className="screen-reader-text"
+          onClick={undefined}
+        >
+          Close Panel
+        </button>
+        <nav
+          className="visibility-menu"
+        >
+          <ul />
+        </nav>
+      </focus-trap-react>
     </div>
     <div
       className="panel-hidden"
     >
-      <nav
-        className="user-menu menu-hidden"
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
       >
-        <i
-          className="tail"
-        />
-        <ul>
-          <li>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-person-pencil-simple"
-              />
-              Edit Profile
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={[Function]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-circle-arrow-out-right"
-              />
-              Logout
-            </button>
-          </li>
-        </ul>
-      </nav>
+        <button
+          className="screen-reader-text"
+          onClick={undefined}
+        >
+          Close Panel
+        </button>
+        <nav
+          className="search-menu"
+        >
+          <span />
+        </nav>
+      </focus-trap-react>
+    </div>
+    <div
+      className="panel-hidden"
+    >
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
+      >
+        <button
+          className="screen-reader-text"
+          onClick={undefined}
+        >
+          Close Panel
+        </button>
+        <nav
+          className="appearance-menu"
+        >
+          <ul>
+            <li>
+              <div
+                className="control-font"
+              >
+                <button
+                  className="font-type serif"
+                  onClick={[Function]}
+                >
+                  Serif
+                </button>
+                <div
+                  className="font-size"
+                >
+                  <button
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-dash"
+                    />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Decrease font size
+                    </span>
+                  </button>
+                  <button
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-plus"
+                    />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Increase font size
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className="control-font"
+              >
+                <button
+                  className="font-type sans-serif"
+                  onClick={[Function]}
+                >
+                  Sans-serif
+                </button>
+                <div
+                  className="font-size"
+                >
+                  <button
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-dash"
+                    />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Decrease font size
+                    </span>
+                  </button>
+                  <button
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-plus"
+                    />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Increase font size
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div
+                className="control-colors"
+              >
+                <button
+                  className="color-scheme light"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-check"
+                  />
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Use light color scheme in reader
+                  </span>
+                </button>
+                <button
+                  className="color-scheme dark"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-check"
+                  />
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Use dark color scheme in reader
+                  </span>
+                </button>
+              </div>
+            </li>
+            <li>
+              <div
+                className="control-margins"
+              >
+                <button
+                  className="margin-increase"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="compound-icon"
+                  >
+                    <i
+                      className="manicon manicon-margins-narrow-arrows"
+                    />
+                    <i
+                      className="manicon manicon-margins-narrow-text"
+                    />
+                  </i>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Increase text margins
+                  </span>
+                </button>
+                <button
+                  className="margin-decrease"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="compound-icon"
+                  >
+                    <i
+                      className="manicon manicon-margins-wide-arrows"
+                    />
+                    <i
+                      className="manicon manicon-margins-wide-text"
+                    />
+                  </i>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Decrease text margins
+                  </span>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </focus-trap-react>
+    </div>
+    <div
+      className="panel-hidden"
+    >
+      <focus-trap-react
+        active={undefined}
+        focusTrapOptions={
+          Object {
+            "clickOutsideDeactivates": true,
+            "escapeDeactivates": false,
+          }
+        }
+      >
+        <button
+          className="screen-reader-text"
+          onClick={[MockFunction]}
+        >
+          Close Panel
+        </button>
+        <nav
+          className="user-menu menu-hidden"
+        >
+          <i
+            className="tail"
+          />
+          <ul>
+            <li>
+              <button
+                onClick={[Function]}
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-person-pencil-simple"
+                />
+                Edit Profile
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={[Function]}
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-circle-arrow-out-right"
+                />
+                Logout
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </focus-trap-react>
     </div>
   </nav>
   <section
