@@ -92,11 +92,7 @@ export default class Overlay extends Component {
             this.scrollableEl = el;
           }}
         >
-          <FocusTrap
-            focusTrapOptions={{
-              onDeactivate: this.handleCloseEvent
-            }}
-          >
+          <FocusTrap>
             {this.renderHeader(this.props)}
             {!this.props.title ? (
               <button
