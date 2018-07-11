@@ -39,7 +39,6 @@ export default class ResourcePlayerAudio extends Component {
     this.throttleUpdateTime = throttle(this.updateTime, 900);
     this.debouncedResize = debounce(this.resizeWaveform, 120);
     window.addEventListener("resize", this.debouncedResize);
-
     this.initializeWaveform(this.props.resource);
   }
 
@@ -88,15 +87,25 @@ export default class ResourcePlayerAudio extends Component {
   initializeWaveform(resource) {
     if (!this.WaveSurfer || !resource) return null;
 
-    this.audio = this.WaveSurfer.create({
-      container: this.container,
-      height: 275,
-      waveColor: "#555", // $neutral80
-      progressColor: "#52e3ac", // $accentPrimary
-      barWidth: 5,
-      barHeight: 1,
-      cursorWidth: 0
-    });
+    const WebAudioApi =
+      window.AudioContext ||
+      window.webkitAudioContext ||
+      window.mozAudioContext ||
+      window.oAudioContext ||
+      window.msAudioContext;
+
+    if (WebAudioApi) {
+      this.audio = this.WaveSurfer.create({
+        container: this.container,
+        height: 275,
+        waveColor: "#555", // $neutral80
+        progressColor: "#52e3ac", // $accentPrimary
+        barWidth: 5,
+        barHeight: 1,
+        cursorWidth: 0
+      });
+    }
+
     this.audio.on("error", this.handleError);
     this.audio.on("ready", this.setReady);
     this.audio.on("seek", progress => this.handleSeek(progress));
