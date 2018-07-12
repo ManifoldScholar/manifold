@@ -8,6 +8,11 @@ exports[`Backend Backend Container renders correctly 1`] = `
         <SideEffect(BodyClass) className=\\"backend bg-neutral90\\">
           <BodyClass className=\\"backend bg-neutral90\\">
             <div>
+              <SkipLink skipId=\\"skip-to-main\\" skipLinkText=\\"Skip to main content\\" skipMessage=\\"Skipped to Main Content\\">
+                <a className=\\"screen-reader-text\\" href=\\"#skip-to-main\\" onClick={[Function]}>
+                  Skip to main content
+                </a>
+              </SkipLink>
               <withRouter(ScrollToTop)>
                 <Route render={[Function: render]}>
                   <ScrollToTop match={{...}} location={{...}} history={{...}} staticContext={[undefined]} />
@@ -131,7 +136,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                   </Layout.Header>
                 </div>
               </ScrollAware>
-              <main>
+              <main id=\\"skip-to-main\\">
                 <Switch />
               </main>
               <withRouter(Layout.Footer) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}}>
