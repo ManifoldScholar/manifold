@@ -26,7 +26,10 @@ module Ingestions
       end
 
       def raw_html
-        @raw_html ||= `pandoc -s #{context.abs(source_path)}`
+        @raw_html ||= PandocRuby.convert([context.abs(source_path)],
+                                         :s,
+                                         from: :docx,
+                                         to: :html)
       end
 
       def styles

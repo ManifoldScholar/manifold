@@ -159,6 +159,7 @@ common: &1
           - "application/x-latex"
           - "text/x-latex"
           - "application/x-tex"
+          - "text/x-tex"
           - "application/zip"
           - "application/x-yaml"
           - "application/epub+zip"
@@ -309,6 +310,10 @@ common: &1
           - "application/vnd.oasis.opendocument.spreadsheet"
           - "application/vnd.oasis.opendocument.text"
           - "application/vnd.oasis.opendocument.presentation"
+          - "application/x-latex"
+          - "text/x-latex"
+          - "application/x-tex"
+          - "text/x-tex"
           - "text/csv"
           - "text/plain"
           - !ruby/regexp '/text\/.*/'
@@ -381,6 +386,8 @@ common: &1
           - !ruby/regexp '/mid\Z/i'
           - !ruby/regexp '/wma\Z/i'
           - !ruby/regexp '/wmv\Z/i'
+          - !ruby/regexp '/tex\Z/i'
+          - !ruby/regexp '/latex\Z/i'
           # PDF
           - !ruby/regexp '/pdf\Z/'
           # Misc
