@@ -122,7 +122,7 @@ export default class AnnotationPopup extends Component {
     const documentScrollTop =
       document.documentElement.scrollTop ||
       document.body.scrollTop ||
-      window.scrollY;
+      window.pageYOffset;
     const topVisiblePosition = documentScrollTop + 100;
     const bottomVisiblePosition = documentScrollTop + window.innerHeight;
     const popupTopEdgeIfUp = documentScrollTop + rect.top - popupHeight;

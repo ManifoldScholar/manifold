@@ -60,6 +60,7 @@ class NotationViewerList extends PureComponent {
     this.updateEntries(this.props);
     this.height = this.bodyNodeHeight(this.props);
     window.addEventListener("scroll", this.updateScrollY, scrollOptions());
+
     this.timer = setInterval(() => {
       this.updateIfHeightChanged();
     }, 500);
@@ -151,7 +152,7 @@ class NotationViewerList extends PureComponent {
   };
 
   updateScrollY = throttle(eventIgnored => {
-    const { scrollY } = window;
+    const scrollY = window.pageYOffset;
     if (!this.listIsVisible()) this.autoSetActive(this.props);
     this.setState({ scrollY });
   }, 250);
@@ -184,7 +185,7 @@ class NotationViewerList extends PureComponent {
     const annotation = props.annotations.find(a => a.id === aId);
     const notation = this.notationForAnnotation(props, annotation);
     if (!notation || !annotation) return null;
-    const top = markerNode.getBoundingClientRect().top + window.scrollY;
+    const top = markerNode.getBoundingClientRect().top + window.pageYOffset;
     const location = this.getNotationLocation(top);
     return { annotation, notation, location, key: annotation.id };
   }
@@ -278,6 +279,7 @@ class NotationViewerList extends PureComponent {
       top: group.location,
       height: group.height
     };
+
     return (
       <div style={wrapperStyle} className="notation-wrapper">
         <Notation.Viewer.Fader scrollY={this.state.scrollY}>
@@ -296,6 +298,7 @@ class NotationViewerList extends PureComponent {
   renderSingle(entry) {
     const { activeAnnotation, textId, sectionId } = this.props;
     const wrapperStyle = { top: entry.location + "px" };
+
     return (
       <div style={wrapperStyle} className="notation-wrapper">
         <Notation.Viewer.Fader scrollY={this.state.scrollY}>
@@ -317,7 +320,6 @@ class NotationViewerList extends PureComponent {
     const viewerClass = `notation-viewer container-width-${
       this.props.containerSize
     }`;
-
     return (
       <nav className={viewerClass}>
         {this.state.confirmation ? (
