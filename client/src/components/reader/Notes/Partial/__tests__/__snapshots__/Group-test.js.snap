@@ -18,39 +18,53 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
       Test
     </h4>
   </div>
-  <ul
-    className=""
+  <div
+    className="ReactCollapse--collapse"
+    style={
+      Object {
+        "height": 0,
+        "overflow": "hidden",
+      }
+    }
   >
-    <li
-      className="item"
-      onClick={[Function]}
+    <div
+      className="ReactCollapse--content"
     >
-      <span
-        className="screen-reader-text"
-      />
-      <i
-        aria-hidden="true"
-        className="manicon manicon-null"
-      />
-      <span>
-        Gods, Earths, and 85ers
-      </span>
-    </li>
-    <li
-      className="item"
-      onClick={[Function]}
-    >
-      <span
-        className="screen-reader-text"
-      />
-      <i
-        aria-hidden="true"
-        className="manicon manicon-null"
-      />
-      <span>
-        Gods, Earths, and 85ers
-      </span>
-    </li>
-  </ul>
+      <ul
+        className=""
+      >
+        <li
+          className="item"
+          onClick={[Function]}
+        >
+          <span
+            className="screen-reader-text"
+          />
+          <i
+            aria-hidden="true"
+            className="manicon manicon-null"
+          />
+          <span>
+            Gods, Earths, and 85ers
+          </span>
+        </li>
+        <li
+          className="item"
+          onClick={[Function]}
+        >
+          <span
+            className="screen-reader-text"
+          />
+          <i
+            aria-hidden="true"
+            className="manicon manicon-null"
+          />
+          <span>
+            Gods, Earths, and 85ers
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
 </li>
 `;

@@ -126,17 +126,6 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
                     </span>
                   </header>
                   <div
-                    className="resource-description"
-                  >
-                    <div
-                      dangerouslySetInnerHTML={
-                        Object {
-                          "__html": "World's Greatest Dog",
-                        }
-                      }
-                    />
-                  </div>
-                  <div
                     className="resource-utility with-shadow"
                   >
                     <div

@@ -6,15 +6,7 @@ import get from "lodash/get";
 import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
-import Loadable from "react-loadable";
-
-const Velocity = Loadable({
-  loader: () =>
-    import(/* webpackChunkName: "velocity-react" */ "velocity-react").then(
-      velocity => velocity.VelocityComponent
-    ),
-  loading: () => null
-});
+import { Collapse } from "react-collapse";
 
 export default class ResourceListSlideCaption extends Component {
   static visibleCaptionHeight = 48;
@@ -35,8 +27,7 @@ export default class ResourceListSlideCaption extends Component {
     super();
     this.state = {
       init: true,
-      expanded: false,
-      targetHeight: "5em"
+      expanded: false
     };
   }
 
@@ -52,14 +43,6 @@ export default class ResourceListSlideCaption extends Component {
     this.checkExpandable();
   }
 
-  getFullDescriptionHeight() {
-    if (!this._description) return;
-    this._description.style.height = "auto";
-    const measuredHeight = this._description.offsetHeight;
-    this._description.style.height = "3em";
-    return measuredHeight + "px";
-  }
-
   canDownload(resource) {
     if (this.props.hideDownload) return false;
     return get(resource, "attributes.downloadable") || false;
@@ -71,11 +54,6 @@ export default class ResourceListSlideCaption extends Component {
 
   handleReadMore = () => {
     if (!this.canExpand()) return;
-    if (!this.state.expanded) {
-      this.setState({
-        targetHeight: this.getFullDescriptionHeight()
-      });
-    }
 
     this.setState({
       expanded: !this.state.expanded
@@ -111,6 +89,15 @@ export default class ResourceListSlideCaption extends Component {
     this._utility.classList.add("expandable");
   }
 
+  checkCollapsed = () => {
+    if (!this._description) return null;
+    if (this.state.expanded) {
+      this._description.classList.remove("collapsed")
+    } else {
+      this._description.classList.add("collapsed")
+    }
+  };
+
   detailUrl() {
     const { resource, collection } = this.props;
     if (collection) {
@@ -128,6 +115,29 @@ export default class ResourceListSlideCaption extends Component {
     );
   }
 
+  renderDescription(resource) {
+    if (!this.hasCaption(resource)) return null;
+    const attr = resource.attributes;
+    const descriptionClasses = classNames({
+      "resource-description": true,
+      expanded: this.state.expanded
+    });
+    const contents = this.createDescription(attr.captionFormatted);
+
+    return (
+      <Collapse isOpened onRest={this.checkCollapsed}>
+        <div className={descriptionClasses} ref={e => this._description = e}>
+          <div
+            ref={e => {
+              this._descriptionContents = e;
+            }}
+            dangerouslySetInnerHTML={contents}
+          />
+        </div>
+      </Collapse>
+    );
+  }
+
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
@@ -142,19 +152,6 @@ export default class ResourceListSlideCaption extends Component {
 
     const detailUrl = this.detailUrl();
 
-    // Animation to open description
-    const animation = {
-      animation: {
-        height: this.state.expanded ? this.state.targetHeight : "3em"
-      },
-      duration: 250,
-      complete: () => {
-        if (this.state.expanded) {
-          this._description.style.height = "auto";
-        }
-      }
-    };
-
     return (
       <div className="slide-caption">
         <header>
@@ -166,25 +163,7 @@ export default class ResourceListSlideCaption extends Component {
             Showing {attr.type} resource: {attr.title}
           </span>
         </header>
-        {this.hasCaption(resource) ? (
-          <Velocity {...animation}>
-            <div
-              className="resource-description"
-              ref={e => {
-                this._description = e;
-              }}
-            >
-              <div
-                ref={e => {
-                  this._descriptionContents = e;
-                }}
-                dangerouslySetInnerHTML={this.createDescription(
-                  attr.captionFormatted
-                )}
-              />
-            </div>
-          </Velocity>
-        ) : null}
+        {this.renderDescription(resource)}
         <div
           className={utilityClass}
           ref={e => {
