@@ -25,8 +25,7 @@ export default class NotationFader extends PureComponent {
 
   render() {
     const { children } = this.props;
-    const classes = classNames({
-      "notation-preview-fader": true,
+    const classes = classNames("notation-preview-fader", {
       "transition-out": !this.state.visible,
       "transition-in": this.state.visible
     });
