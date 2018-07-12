@@ -1,3 +1,5 @@
+jest.mock("react-collapse");
+
 import React from "react";
 import renderer from "react-test-renderer";
 import { ResourceCollection } from "components/frontend";

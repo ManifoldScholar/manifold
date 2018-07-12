@@ -1,5 +1,6 @@
+jest.mock("react-collapse");
+
 import React from "react";
-import { mount } from "enzyme";
 import Detail from "../Detail";
 import renderer from "react-test-renderer";
 import build from "test/fixtures/build";
@@ -7,7 +8,6 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Reader.Notation.Collection.Detail component", () => {
   const pagination = build.pagination();
-  const store = build.store();
 
   const project = build.entity.project("1");
   const collectionResource = build.entity.collectionResource("4", {});

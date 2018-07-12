@@ -3,15 +3,7 @@ import { Notes } from "components/reader";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import debounce from "lodash/debounce";
-import Loadable from "react-loadable";
-
-const Velocity = Loadable({
-  loader: () =>
-    import(/* webpackChunkName: "velocity-react" */ "velocity-react").then(
-      velocity => velocity.VelocityComponent
-    ),
-  loading: () => null
-});
+import { Collapse } from "react-collapse";
 
 export default class Group extends Component {
   static displayName = "Notes.List.Group";
@@ -26,69 +18,36 @@ export default class Group extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: false,
-      targetHeight: "5em"
+      expanded: false
     };
   }
   componentDidMount() {
     this.preOpenItem();
   }
 
-  getFullGroupHeight() {
-    if (!this._group) return;
-    this._group.style.height = "auto";
-    const measuredHeight = this._group.offsetHeight;
-    this._group.style.height = "1em";
-    return measuredHeight + "px";
-  }
-
   preOpenItem = debounce(() => {
     const expanded =
       this.props.readerSection.attributes.name === this.props.sectionName;
 
-    return this.setState({
-      expanded,
-      targetHeight: expanded
-        ? this.getFullGroupHeight()
-        : this.state.targetHeight
-    });
+    return this.setState({ expanded });
   }, 200);
 
   handleClick = event => {
     event.stopPropagation();
-    if (!this.state.expanded) {
-      this.setState({
-        targetHeight: this.getFullGroupHeight()
-      });
-    }
     return this.setState({ expanded: !this.state.expanded });
   };
 
   renderGroupItems(annotations) {
-    const animation = {
-      animation: {
-        height: this.state.expanded ? this.state.targetHeight : ""
-      },
-      duration: 250,
-      complete: () => {
-        if (this.state.expanded) {
-          this._group.style.height = "auto";
-        }
-      }
-    };
-
     const classes = classNames({
       open: this.state.expanded
     });
 
     return (
-      <Velocity {...animation}>
-        <ul
-          className={classes}
-          ref={e => {
-            this._group = e;
-          }}
-        >
+      <Collapse
+        isOpened={this.state.expanded}
+        springConfig={{ stiffness: 270 }}
+      >
+        <ul className={classes}>
           {annotations.map(annotation => {
             return (
               <Notes.Partial.GroupItem
@@ -99,7 +58,7 @@ export default class Group extends Component {
             );
           })}
         </ul>
-      </Velocity>
+      </Collapse>
     );
   }
 

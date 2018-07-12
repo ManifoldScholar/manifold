@@ -2812,7 +2812,7 @@ dom-converter@~0.1:
   dependencies:
     utila "~0.3"
 
-dom-helpers@^3.2.0, dom-helpers@^3.3.1:
+dom-helpers@^3.2.0:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.3.1.tgz#fc1a4e15ffdf60ddde03a480a9c0fece821dd4a6"
 
@@ -7512,8 +7512,8 @@ postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.13, postcss@^6.0.14, postcss@^6.0.1
     supports-color "^5.4.0"
 
 postcss@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.0.tgz#163f70d2fe2715c6d4a4b3d300051c1ea9594aa9"
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.1.tgz#db20ca4fc90aa56809674eea75864148c66b67fa"
   dependencies:
     chalk "^2.4.1"
     source-map "^0.6.1"
@@ -7832,6 +7832,12 @@ react-beautiful-dnd@^4.0.1:
     redux-thunk "^2.2.0"
     reselect "^3.0.1"
 
+react-collapse@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/react-collapse/-/react-collapse-4.0.3.tgz#b96de959ed0092a43534630b599a4753dd76d543"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-cookie@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-cookie/-/react-cookie-1.0.5.tgz#234190bd55ddfea361444a89c873077ab6abf651"
@@ -8018,15 +8024,6 @@ react-transition-group@1.x:
     loose-envify "^1.3.1"
     prop-types "^15.5.6"
     warning "^3.0.0"
-
-react-transition-group@^2.0.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.4.0.tgz#1d9391fabfd82e016f26fabd1eec329dbd922b5a"
-  dependencies:
-    dom-helpers "^3.3.1"
-    loose-envify "^1.3.1"
-    prop-types "^15.6.2"
-    react-lifecycles-compat "^3.0.4"
 
 react-typekit@^1.0.8:
   version "1.1.3"
@@ -10104,19 +10101,6 @@ varstream@^0.3.2:
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
-
-velocity-animate@^1.4.0:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/velocity-animate/-/velocity-animate-1.5.1.tgz#606837047bab8fbfb59a636d1d82ecc3f7bd71a6"
-
-velocity-react@^1.3.3:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/velocity-react/-/velocity-react-1.4.1.tgz#1d0b41859cdf2521c08a8b57f44e93ed2d54b5fc"
-  dependencies:
-    lodash "^4.17.5"
-    prop-types "^15.5.8"
-    react-transition-group "^2.0.0"
-    velocity-animate "^1.4.0"
 
 vendors@^1.0.0:
   version "1.0.2"

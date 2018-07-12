@@ -55,10 +55,15 @@
   .resource-description {
     @include templateCopy;
     max-width: $slideCopyFocus;
-    height: 5em;
-    overflow: hidden;
+    overflow: visible;
     font-size: 15px;
     color: $neutral40;
+    height: 48px;
+    padding-bottom: 5em;
+
+    @include respond($break40) {
+      padding-bottom: 3.5em;
+    }
 
     p + p {
       margin-top: 1em;
@@ -72,8 +77,12 @@
       }
     }
 
-    &.transition-height {
-      transition: height $duration $timing;
+    &.collapsed {
+      overflow: hidden;
+    }
+
+    &.expanded {
+      height: auto;
     }
   }
 
@@ -196,8 +205,6 @@
 
     &.expandable {
       &.expanded {
-        margin-top: 33px;
-
         .wrapper {
           margin-top: 0;
         }

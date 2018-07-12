@@ -47,14 +47,6 @@
       margin-top: 25px;
     }
 
-    .resource-description {
-      padding-bottom: 5em;
-
-      @include respond($break40) {
-        padding-bottom: 3.5em;
-      }
-    }
-
     .slide-footer {
       padding-right: 0;
       padding-left: 0;
