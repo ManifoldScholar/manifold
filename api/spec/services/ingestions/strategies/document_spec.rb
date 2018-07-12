@@ -185,7 +185,7 @@ RSpec.describe Ingestions::Strategies::Document do
     let!(:manifest) { described_class.run(context: context).result }
 
     it "has the correct text section attributes" do
-      expected = [{ "source_identifier" => "5fa29616ec9ee64b6fe8fb0dd4e33e49", "name" => "Example", "kind" => "section", "position" => 1, "build" => "build/example.tex" }]
+      expected = [{ "source_identifier" => "5fa29616ec9ee64b6fe8fb0dd4e33e49", "name" => "Pandoc User’s Guide", "kind" => "section", "position" => 1, "build" => "build/example.tex" }]
       expect(manifest[:relationships][:text_sections]).to eq expected
     end
 

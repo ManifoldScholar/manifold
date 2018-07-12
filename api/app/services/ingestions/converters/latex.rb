@@ -14,8 +14,7 @@ module Ingestions
       end
 
       def convert_to_html
-        converter = PandocRuby.new(contents, from: :latex, to: :html)
-        converter.convert
+        PandocRuby.latex(contents, :s).to_html
       end
 
     end
