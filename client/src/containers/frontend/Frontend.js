@@ -27,7 +27,7 @@ export class FrontendContainer extends Component {
       const pagesRes = dispatch(pages);
       const subjectsRes = dispatch(subjects);
       if (pagesRes) promises.push(pagesRes.promise);
-      if (subjectsRes) promises.push(pagesRes.promise);
+      if (subjectsRes) promises.push(subjectsRes.promise);
       return Promise.all(promises);
     }
   };
