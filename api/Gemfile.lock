@@ -141,6 +141,7 @@ GEM
       thor (~> 0.19.1)
     friendly_id (5.2.3)
       activerecord (>= 4.0.0)
+    fuzzy_match (2.1.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     google-api-client (0.13.6)
@@ -484,7 +485,7 @@ DEPENDENCIES
   data_uri (~> 0.1.0)
   database_cleaner (~> 1.0)
   dotenv-rails (~> 2.0)
-  dux
+  dux (~> 0.8.0)
   elasticsearch (~> 5.0)
   equalizer
   factory_bot_rails (~> 4.0)
@@ -492,6 +493,7 @@ DEPENDENCIES
   filesize (~> 0.1.0)
   foreman (~> 0.84.0)
   friendly_id (~> 5.0)
+  fuzzy_match (~> 2.1.0)
   google-api-client (~> 0.13.0)
   google_drive (~> 2.0)
   has_scope (~> 0.7.0)

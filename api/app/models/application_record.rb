@@ -2,6 +2,8 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
+  include Concerns::ArelHelpers
+
   class << self
     def in_the_week_of(date)
       where(created_at: date.to_week_range)
