@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180710155830) do
+ActiveRecord::Schema.define(version: 20180711222801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,41 @@ ActiveRecord::Schema.define(version: 20180710155830) do
     t.datetime "updated_at",                null: false
     t.index ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true, using: :btree
     t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
+  end
+
+  create_table "import_selection_matches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "import_selection_id", null: false
+    t.uuid     "searchable_node_id"
+    t.uuid     "text_section_id",     null: false
+    t.uuid     "annotation_id"
+    t.integer  "start_char"
+    t.integer  "end_char"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["annotation_id"], name: "index_import_selection_matches_on_annotation_id", using: :btree
+    t.index ["import_selection_id"], name: "index_import_selection_matches_on_import_selection_id", using: :btree
+    t.index ["searchable_node_id"], name: "index_import_selection_matches_on_searchable_node_id", using: :btree
+    t.index ["text_section_id"], name: "index_import_selection_matches_on_text_section_id", using: :btree
+  end
+
+  create_table "import_selections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "text_id",                     null: false
+    t.string   "source_text_id",              null: false
+    t.text     "previous_text"
+    t.text     "previous_body"
+    t.text     "body",                        null: false
+    t.text     "next_body"
+    t.text     "next_text"
+    t.integer  "matches_count",  default: 0,  null: false
+    t.jsonb    "comments",       default: [], null: false
+    t.jsonb    "highlights",     default: [], null: false
+    t.datetime "imported_at"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["imported_at"], name: "index_import_selections_on_imported_at", using: :btree
+    t.index ["matches_count"], name: "index_import_selections_on_matches_count", using: :btree
+    t.index ["source_text_id"], name: "index_import_selections_on_source_text_id", using: :btree
+    t.index ["text_id"], name: "index_import_selections_on_text_id", using: :btree
   end
 
   create_table "ingestion_sources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -614,8 +649,11 @@ ActiveRecord::Schema.define(version: 20180710155830) do
     t.datetime "reset_password_sent_at"
     t.jsonb    "raw_persistent_ui",      default: {},        null: false
     t.string   "classification",         default: "default", null: false
+    t.datetime "imported_at"
+    t.string   "import_source_id"
     t.index ["classification"], name: "udx_users_anonymous", unique: true, where: "((classification)::text = 'anonymous'::text)", using: :btree
     t.index ["classification"], name: "udx_users_cli", unique: true, where: "((classification)::text = 'command_line'::text)", using: :btree
+    t.index ["import_source_id"], name: "index_users_on_import_source_id", unique: true, where: "(import_source_id IS NOT NULL)", using: :btree
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -642,6 +680,11 @@ ActiveRecord::Schema.define(version: 20180710155830) do
   end
 
   add_foreign_key "identities", "users", on_delete: :cascade
+  add_foreign_key "import_selection_matches", "annotations", on_delete: :nullify
+  add_foreign_key "import_selection_matches", "import_selections", on_delete: :cascade
+  add_foreign_key "import_selection_matches", "searchable_nodes", on_delete: :cascade
+  add_foreign_key "import_selection_matches", "text_sections", on_delete: :cascade
+  add_foreign_key "import_selections", "texts", on_delete: :cascade
   add_foreign_key "resource_import_row_transitions", "resource_import_rows"
   add_foreign_key "resource_import_rows", "resource_imports", on_delete: :cascade
   add_foreign_key "resource_import_transitions", "resource_imports"

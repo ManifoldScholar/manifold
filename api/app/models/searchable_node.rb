@@ -2,14 +2,16 @@ class SearchableNode < ApplicationRecord
 
   belongs_to :text_section
 
+  has_one :text, through: :text_section
+
   # Search
   searchkick(callbacks: :async,
              batch_size: 500,
              highlight: [:title, :body])
 
-  scope :in_texts, lambda { |texts|
-    joins(text_section: :text).where("texts.id" => texts)
-  }
+  # rubocop:disable Metrics/LineLength
+  scope :in_texts, ->(texts) { joins(:text_section).where(text_sections: { text: texts }) }
+  # rubocop:enable Metrics/LineLength
 
   scope :search_import, lambda {
     includes(text_section: { text: [:project] })
@@ -30,4 +32,15 @@ class SearchableNode < ApplicationRecord
 
   delegate :search_hidden, to: :text_section
 
+  class << self
+    def containing_sentence(text)
+      sanitized = ActionView::Base.full_sanitizer.sanitize text
+
+      query = arel_named_fn("plainto_tsquery", sanitized)
+
+      body_vector = arel_named_fn("to_tsvector", "english", arel_table[:content])
+
+      where arel_infix("@@", body_vector, query)
+    end
+  end
 end
