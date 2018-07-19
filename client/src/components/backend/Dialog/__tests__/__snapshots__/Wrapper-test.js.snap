@@ -4,7 +4,7 @@ exports[`Backend.Dialog.Wrapper Component renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
     <withRouter(Dialog.Wrapper) className=\\"dialog-confirm\\" maxWidth={400}>
-      <Route render={[Function: render]}>
+      <Route>
         <Dialog.Wrapper className=\\"dialog-confirm\\" maxWidth={400} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} showCloseButton={true} closeOnOverlayClick={true}>
           <CSSTransitionGroup transitionName=\\"dialog\\" transitionAppear={true} transitionEnter={false} transitionAppearTimeout={1} transitionLeaveTimeout={200} transitionLeave={true}>
             <TransitionGroup transitionName=\\"dialog\\" transitionAppear={true} transitionEnter={false} transitionAppearTimeout={1} transitionLeaveTimeout={200} transitionLeave={true} childFactory={[Function]} component=\\"span\\">

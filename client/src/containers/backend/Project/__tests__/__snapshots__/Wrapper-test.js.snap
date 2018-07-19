@@ -103,7 +103,7 @@ Array [
           <ul>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/general"
                 onClick={[Function]}
@@ -114,7 +114,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/project-page"
                 onClick={[Function]}
@@ -125,7 +125,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/permissions"
                 onClick={[Function]}
@@ -136,7 +136,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/collaborators"
                 onClick={[Function]}
@@ -147,7 +147,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/texts"
                 onClick={[Function]}
@@ -158,7 +158,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/resources"
                 onClick={[Function]}
@@ -169,7 +169,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/collections"
                 onClick={[Function]}
@@ -180,7 +180,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/events"
                 onClick={[Function]}
@@ -191,7 +191,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/metadata"
                 onClick={[Function]}
@@ -202,7 +202,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/social"
                 onClick={[Function]}
@@ -213,7 +213,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/log"
                 onClick={[Function]}
@@ -238,7 +238,7 @@ Array [
           <ul>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/general"
                 onClick={[Function]}
@@ -249,7 +249,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/project-page"
                 onClick={[Function]}
@@ -260,7 +260,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/permissions"
                 onClick={[Function]}
@@ -271,7 +271,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/collaborators"
                 onClick={[Function]}
@@ -282,7 +282,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/texts"
                 onClick={[Function]}
@@ -293,7 +293,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/resources"
                 onClick={[Function]}
@@ -304,7 +304,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/collections"
                 onClick={[Function]}
@@ -315,7 +315,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/events"
                 onClick={[Function]}
@@ -326,7 +326,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/metadata"
                 onClick={[Function]}
@@ -337,7 +337,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/social"
                 onClick={[Function]}
@@ -348,7 +348,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/project/1/log"
                 onClick={[Function]}

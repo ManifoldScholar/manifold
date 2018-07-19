@@ -6,7 +6,7 @@ exports[`Frontend.Utility.BackLinkSecondary component renders correctly 1`] = `
 >
   <a
     className="back-link-secondary"
-    href="test/link"
+    href="/test/link"
     onClick={[Function]}
   >
     <i

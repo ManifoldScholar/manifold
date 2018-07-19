@@ -6,7 +6,7 @@ exports[`Backend.Form.Save component renders correctly 1`] = `
 >
   <a
     className="button-secondary outlined dull"
-    href="cancel/this"
+    href="/cancel/this"
     onClick={[Function]}
   >
     Cancel

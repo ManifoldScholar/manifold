@@ -116,7 +116,7 @@ Array [
           <ul>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/resource/1/general"
                 onClick={[Function]}
@@ -127,7 +127,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/resource/1/variants"
                 onClick={[Function]}
@@ -138,7 +138,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/resource/1/metadata"
                 onClick={[Function]}
@@ -163,7 +163,7 @@ Array [
           <ul>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/resource/1/general"
                 onClick={[Function]}
@@ -174,7 +174,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/resource/1/variants"
                 onClick={[Function]}
@@ -185,7 +185,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/resource/1/metadata"
                 onClick={[Function]}
