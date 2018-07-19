@@ -5,7 +5,7 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
   <Router history={{...}}>
     <Provider store={{...}}>
       <withRouter(Connect(HigherOrder.FetchData('Stylesheet.Edit))) stylesheet={{...}}>
-        <Route render={[Function: render]}>
+        <Route>
           <Connect(HigherOrder.FetchData('Stylesheet.Edit)) stylesheet={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
             <HigherOrder.FetchData('Stylesheet.Edit) stylesheet={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} dispatch={[Function]}>
               <Stylesheet.Edit stylesheet={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} dispatch={[Function]} fetchData={[Function]}>
@@ -24,7 +24,7 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                       </header>
                       <section className=\\"form-section\\">
                         <withRouter(Connect(HigherOrder.FetchData('Form.Form))) model={[undefined]} name=\\"backend-stylesheet-create\\" update={[Function: update]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\">
-                          <Route render={[Function: render]}>
+                          <Route>
                             <Connect(HigherOrder.FetchData('Form.Form)) model={[undefined]} name=\\"backend-stylesheet-create\\" update={[Function: update]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
                               <HigherOrder.FetchData('Form.Form) model={[undefined]} name=\\"backend-stylesheet-create\\" update={[Function: update]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} session={{...}} response={[undefined]} errors={[undefined]} dispatch={[Function]}>
                                 <Form.Form model={{...}} name=\\"backend-stylesheet-create\\" update={[Function: update]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} session={{...}} response={[undefined]} errors={[undefined]} dispatch={[Function]} fetchData={[Function]} doNotWarn={false} notificationScope=\\"global\\" debug={false} groupErrors={false} options={{...}}>

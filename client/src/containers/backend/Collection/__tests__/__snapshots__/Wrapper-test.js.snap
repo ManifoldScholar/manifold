@@ -116,7 +116,7 @@ Array [
           <ul>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/collection/1/general"
                 onClick={[Function]}
@@ -127,7 +127,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/collection/1/resources"
                 onClick={[Function]}
@@ -152,7 +152,7 @@ Array [
           <ul>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/collection/1/general"
                 onClick={[Function]}
@@ -163,7 +163,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/collection/1/resources"
                 onClick={[Function]}

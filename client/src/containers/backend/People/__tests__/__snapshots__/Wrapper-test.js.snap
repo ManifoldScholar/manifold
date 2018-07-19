@@ -16,7 +16,7 @@ exports[`Backend People Wrapper Container renders correctly 1`] = `
         <ul>
           <li>
             <a
-              aria-current={false}
+              aria-current={null}
               className={undefined}
               href="/backend/people/users"
               onClick={[Function]}
@@ -41,7 +41,7 @@ exports[`Backend People Wrapper Container renders correctly 1`] = `
         <ul>
           <li>
             <a
-              aria-current={false}
+              aria-current={null}
               className={undefined}
               href="/backend/people/users"
               onClick={[Function]}

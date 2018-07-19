@@ -110,7 +110,7 @@ Array [
           <ul>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/text/1/general"
                 onClick={[Function]}
@@ -121,7 +121,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/text/1/collaborators"
                 onClick={[Function]}
@@ -132,7 +132,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/text/1/metadata"
                 onClick={[Function]}
@@ -143,7 +143,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/text/1/styles"
                 onClick={[Function]}
@@ -154,7 +154,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/text/1/ingestions/new"
                 onClick={[Function]}
@@ -179,7 +179,7 @@ Array [
           <ul>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/text/1/general"
                 onClick={[Function]}
@@ -190,7 +190,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/text/1/collaborators"
                 onClick={[Function]}
@@ -201,7 +201,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/text/1/metadata"
                 onClick={[Function]}
@@ -212,7 +212,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/text/1/styles"
                 onClick={[Function]}
@@ -223,7 +223,7 @@ Array [
             </li>
             <li>
               <a
-                aria-current={false}
+                aria-current={null}
                 className={undefined}
                 href="/backend/text/1/ingestions/new"
                 onClick={[Function]}

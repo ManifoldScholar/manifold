@@ -14,7 +14,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                 </a>
               </SkipLink>
               <withRouter(ScrollToTop)>
-                <Route render={[Function: render]}>
+                <Route>
                   <ScrollToTop match={{...}} location={{...}} history={{...}} staticContext={[undefined]} />
                 </Route>
               </withRouter(ScrollToTop)>
@@ -43,10 +43,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                         <nav className=\\"text-nav\\">
                           <ul>
                             <li>
-                              <NavLink isActive={[Function]} activeClassName=\\"active\\" to=\\"/backend\\" ariaCurrent=\\"true\\">
-                                <Route path=\\"/backend\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
-                                  <Link to=\\"/backend\\" className={[undefined]} style={[undefined]} aria-current={false} replace={false}>
-                                    <a className={[undefined]} style={[undefined]} aria-current={false} onClick={[Function]} href=\\"/backend\\">
+                              <NavLink isActive={[Function]} activeClassName=\\"active\\" to=\\"/backend\\" aria-current=\\"page\\">
+                                <Route path=\\"\\\\\\\\/backend\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
+                                  <Link to=\\"/backend\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
+                                    <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend\\">
                                       Projects
                                     </a>
                                   </Link>
@@ -145,7 +145,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                 <Switch />
               </main>
               <withRouter(Layout.Footer) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}}>
-                <Route render={[Function: render]}>
+                <Route>
                   <Layout.Footer pages={{...}} authentication={{...}} commonActions={{...}} settings={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
                     <footer className=\\"footer-browse\\">
                       <section className=\\"footer-primary\\">

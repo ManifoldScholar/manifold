@@ -3,7 +3,7 @@
 exports[`Frontend.Utility.BackLinkPrimary component renders correctly 1`] = `
 <a
   className="back-link-primary full"
-  href="test/link"
+  href="/test/link"
   onClick={[Function]}
 >
   <div
