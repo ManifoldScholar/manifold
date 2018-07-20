@@ -99,6 +99,7 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
             <button
               className="submit"
               onClick={[Function]}
+              type="button"
             >
               Create New
             </button>
@@ -205,6 +206,7 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
             <button
               className="submit"
               onClick={[Function]}
+              type="button"
             >
               Create New
             </button>

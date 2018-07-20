@@ -243,7 +243,7 @@ class PredictiveInput extends PureComponent {
             aria-describedby={this.idForError ? this.idForError : null}
           />
           {this.props.onNew ? (
-            <button className="submit" onClick={this.handleNew}>
+            <button type="button" className="submit" onClick={this.handleNew}>
               {"Create New"}
             </button>
           ) : null}
