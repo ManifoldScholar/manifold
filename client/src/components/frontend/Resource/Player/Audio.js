@@ -135,13 +135,14 @@ export default class ResourcePlayerAudio extends Component {
   };
 
   handleProgressClick = event => {
-    const current = event.target.value / 100 * this.state.duration;
+    const current = (event.target.value / 100) * this.state.duration;
     const progress = current / this.state.duration;
     this.audio.seekTo(progress);
   };
 
   handleError = error => {
-    this.setState({ error });
+    const message = `${error}.<br/>This audio file is not playable in your browser.<br/><br/>Click the download button to listen to the file on your device.`;
+    this.setState({ error: message });
   };
 
   updateProgress = progress => {
@@ -172,7 +173,10 @@ export default class ResourcePlayerAudio extends Component {
           <div className="indicator">
             <i className="manicon manicon-octagon-bang" aria-hidden="true" />
           </div>
-          <div className="message">{this.state.error}</div>
+          <div
+            className="message"
+            dangerouslySetInnerHTML={{ __html: this.state.error }}
+          />
         </div>
       </div>
     );
