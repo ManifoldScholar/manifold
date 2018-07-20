@@ -59,7 +59,7 @@ RSpec.describe Ingestions::Strategies::Manifest do
         end
 
         it "has the correct number of stylesheets" do
-          expect(manifest[:relationships][:stylesheets].length).to eq 3
+          expect(manifest[:relationships][:stylesheets].length).to eq 4
         end
 
         it "has the correct text section attributes" do
@@ -70,7 +70,7 @@ RSpec.describe Ingestions::Strategies::Manifest do
         end
 
         it "has the correct number of ingestion sources" do
-          expect(manifest[:relationships][:ingestion_sources].length).to eq 5
+          expect(manifest[:relationships][:ingestion_sources].length).to eq 6
         end
       end
     end
