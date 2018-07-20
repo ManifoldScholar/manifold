@@ -2,12 +2,14 @@ require "rails_helper"
 
 # rubocop:disable Metrics/LineLength
 RSpec.describe Ingestions::Concerns::FileOperations do
+  include TestHelpers::IngestionHelper
+
   let(:ingestion) { FactoryBot.create(:ingestion) }
 
   subject do
     path = Rails.root.join("spec","data","ingestion", "epubs","minimal-v3")
     allow(ingestion).to receive(:ingestion_source).and_return path
-    Ingestions::Context.new(ingestion)
+    create_context(ingestion)
   end
 
   after(:each) do

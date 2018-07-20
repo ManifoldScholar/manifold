@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Ingestions::Strategies::Document do
+  include TestHelpers::IngestionHelper
+
   shared_examples "outcome assertions" do
     it "sets the ingestion type to document" do
       expect(context.ingestion.ingestion_type).to eq "document"
@@ -65,7 +67,7 @@ RSpec.describe Ingestions::Strategies::Document do
         allow(ingestion).to receive(:source_file_name).and_return("index.html")
         ingestion
       end
-      let(:context) { Ingestions::Context.new(ingestion) }
+      let(:context) { create_context(ingestion) }
       let!(:manifest) { described_class.run(context: context).result }
 
       include_examples "outcome assertions"
@@ -93,7 +95,7 @@ RSpec.describe Ingestions::Strategies::Document do
           allow(ingestion).to receive(:source_file_name).and_return("minimal.zip")
           ingestion
         end
-        let(:context) { Ingestions::Context.new(ingestion) }
+        let(:context) { create_context(ingestion) }
         let!(:manifest) { described_class.run(context: context).result }
 
         include_examples "outcome assertions"
@@ -124,7 +126,7 @@ RSpec.describe Ingestions::Strategies::Document do
           allow(ingestion).to receive(:source_file_name).and_return("minimal")
           ingestion
         end
-        let(:context) { Ingestions::Context.new(ingestion) }
+        let(:context) { create_context(ingestion) }
         let!(:manifest) { described_class.run(context: context).result }
 
         include_examples "outcome assertions"
@@ -157,7 +159,7 @@ RSpec.describe Ingestions::Strategies::Document do
       allow(ingestion).to receive(:source_file_name).and_return("minimal-single.md")
       ingestion
     end
-    let(:context) { Ingestions::Context.new(ingestion) }
+    let(:context) { create_context(ingestion) }
     let!(:manifest) { described_class.run(context: context).result }
 
     include_examples "outcome assertions"
@@ -181,7 +183,7 @@ RSpec.describe Ingestions::Strategies::Document do
       allow(ingestion).to receive(:source_file_name).and_return("example.tex")
       ingestion
     end
-    let(:context) { Ingestions::Context.new(ingestion) }
+    let(:context) { create_context(ingestion) }
     let!(:manifest) { described_class.run(context: context).result }
 
     it "has the correct text section attributes" do
@@ -201,7 +203,7 @@ RSpec.describe Ingestions::Strategies::Document do
       url = "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing"
       @ingestion = FactoryBot.create(:ingestion, external_source_url: url)
       WebMock.allow_net_connect!
-      @context = Ingestions::Context.new(@ingestion)
+      @context = create_context(ingestion)
       WebMock.disable_net_connect!
       @manifest = described_class.run(context: @context).result
     end
@@ -235,7 +237,7 @@ RSpec.describe Ingestions::Strategies::Document do
       allow(ingestion).to receive(:source_file_name).and_return("example.docx")
       ingestion
     end
-    let(:context) { Ingestions::Context.new(ingestion) }
+    let(:context) { create_context(ingestion) }
     let!(:manifest) { described_class.run(context: context).result }
 
     it "has the correct number of ingestion sources" do

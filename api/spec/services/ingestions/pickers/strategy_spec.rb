@@ -1,12 +1,13 @@
 require "rails_helper"
 
 RSpec.describe Ingestions::Pickers::Strategy do
+  include TestHelpers::IngestionHelper
 
   shared_examples_for "strategy picker fails" do |path|
     it "to find a valid strategy" do
       ingestion = FactoryBot.create(:ingestion)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
-      @context = Ingestions::Context.new(ingestion)
+      @context = create_context(ingestion)
       outcome = Ingestions::Pickers::Strategy.run context: @context
       expect(outcome).to_not be_valid
     end
@@ -16,7 +17,7 @@ RSpec.describe Ingestions::Pickers::Strategy do
     it "is the #{expected} strategy" do
       ingestion = FactoryBot.create(:ingestion)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
-      @context = Ingestions::Context.new(ingestion)
+      @context = create_context(ingestion)
 
       @outcome = Ingestions::Pickers::Strategy.run context: @context
       expect(@outcome.result.name).to be expected
