@@ -72,6 +72,11 @@ module Ingestions
         Dir.glob("#{source_root}/#{filename}.{#{exts.join(',')}}").first
       end
 
+      def rel_path_without_ext(rel_path, path_from = source_root)
+        path = rel(abs(rel_path), path_from)
+        path.split(".").first
+      end
+
       def rel_path_for_file(filename, exts)
         file = source_path_for_file filename, exts
         return nil unless file.present?
