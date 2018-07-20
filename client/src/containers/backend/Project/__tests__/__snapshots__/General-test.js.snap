@@ -502,6 +502,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                 <button
                   className="submit"
                   onClick={[Function]}
+                  type="button"
                 >
                   Create New
                 </button>

@@ -135,6 +135,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
         <button
           className="submit"
           onClick={[Function]}
+          type="button"
         >
           Create New
         </button>
