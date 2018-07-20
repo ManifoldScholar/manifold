@@ -20,13 +20,11 @@ class TextPartialSerializer < ApplicationSerializer
   end
 
   def annotations_count
-    return object.annotations.only_annotations.count unless authenticated?
-    object.annotations.only_annotations.created_by(current_user).count
+    object.annotations.only_annotations.count
   end
 
   def highlights_count
-    return object.annotations.only_highlights.count unless authenticated?
-    object.annotations.only_highlights.created_by(current_user).count
+    object.annotations.only_highlights.count
   end
 
   # TODO: Implement bookmarks
