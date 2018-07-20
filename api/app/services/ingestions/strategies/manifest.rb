@@ -35,10 +35,8 @@ module Ingestions
         inspector.convertible_sources.each do |source|
           raw_html = compose Ingestions::Converter,
                              source_path: source
-          path_without_ext = context.rel(context.abs(source), context.source_root)
-                                    .split(".")
-                                    .first
-          context.write_build_file "#{path_without_ext}.html", raw_html
+          rel_path = context.rel_path_without_ext source
+          context.write_build_file "#{rel_path}.html", raw_html
         end
       end
 

@@ -71,7 +71,9 @@ module Ingestions
                     //style"
 
           convertible_sources.map do |source|
-            file_parsed(source).search(xpath)
+            rel_path = context.rel_path_without_ext source
+            path = File.join "build", "#{rel_path}.html"
+            file_parsed(path).search(xpath)
           end.flatten
         end
 
