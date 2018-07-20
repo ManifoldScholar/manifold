@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Ingestions::Strategies::Manifest do
+  include TestHelpers::IngestionHelper
+
   shared_examples "outcome assertions" do
     it "sets the ingestion type to manifest" do
       expect(context.ingestion.ingestion_type).to eq "manifest"
@@ -83,7 +85,7 @@ RSpec.describe Ingestions::Strategies::Manifest do
       allow(ingestion).to receive(:ingestion_source).and_return(path)
       ingestion
     end
-    let(:context) { Ingestions::Context.new(ingestion) }
+    let(:context) { create_context(ingestion) }
     let!(:manifest) { described_class.run(context: context).result }
 
     include_examples "outcome assertions"

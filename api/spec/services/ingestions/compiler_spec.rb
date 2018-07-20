@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Ingestions::Compiler do
+  include TestHelpers::IngestionHelper
+
   describe "an epub ingestion" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
     let(:ingestion) do
@@ -8,7 +10,7 @@ RSpec.describe Ingestions::Compiler do
       allow(ingestion).to receive(:ingestion_source).and_return(path)
       ingestion
     end
-    let(:context) { Ingestions::Context.new(ingestion) }
+    let(:context) { create_context(ingestion) }
     let(:manifest) { Ingestions::Strategies::Epub.run(context: context).result }
 
     it "creates the correct number of records" do
@@ -30,7 +32,7 @@ RSpec.describe Ingestions::Compiler do
       allow(ingestion).to receive(:ingestion_source).and_return(path)
       ingestion
     end
-    let(:context) { Ingestions::Context.new(ingestion) }
+    let(:context) { create_context(ingestion) }
     let(:manifest) { Ingestions::Strategies::Manifest.run(context: context).result }
 
     it "creates the correct number of records" do
@@ -53,7 +55,7 @@ RSpec.describe Ingestions::Compiler do
       allow(ingestion).to receive(:source_file_name).and_return("index.html")
       ingestion
     end
-    let(:context) { Ingestions::Context.new(ingestion) }
+    let(:context) { create_context(ingestion) }
     let(:manifest) { Ingestions::Strategies::Document.run(context: context).result }
 
     it "creates the correct number of records" do
@@ -76,7 +78,7 @@ RSpec.describe Ingestions::Compiler do
       allow(ingestion).to receive(:source_file_name).and_return("minimal-single.md")
       ingestion
     end
-    let(:context) { Ingestions::Context.new(ingestion) }
+    let(:context) { create_context(ingestion) }
     let(:manifest) { Ingestions::Strategies::Document.run(context: context).result }
 
     it "creates the correct number of records" do
@@ -98,7 +100,7 @@ RSpec.describe Ingestions::Compiler do
       allow(ingestion).to receive(:ingestion_source).and_return(path)
       ingestion
     end
-    let(:context) { Ingestions::Context.new(ingestion) }
+    let(:context) { create_context(ingestion) }
     let(:manifest) { Ingestions::Strategies::Document.run(context: context).result }
 
     it "creates the correct number of records" do
