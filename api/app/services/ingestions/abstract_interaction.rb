@@ -1,24 +1,18 @@
 module Ingestions
-  class AbstractInteraction < ActiveInteraction::Base
-    include Ingestions::Concerns::CatchesExceptions
-    include Ingestions::Concerns::IncludesContext
+  class AbstractInteraction < AbstractBaseInteraction
+
+    object :context, class: "Ingestions::Context"
 
     delegate :ingestion, to: :context
 
-    def execute; end
+    delegate :significant, to: :context
+    delegate :info, to: :context
+    delegate :debug_string, to: :context
+    delegate :debug, to: :context
+    delegate :error, to: :context
+    delegate :error_string, to: :context
+    delegate :warn, to: :context
+    delegate :log_structure, to: :context
 
-    private
-
-    def compose(interaction_klass, **composed_inputs)
-      super interaction_klass, composed_inputs.merge(shared_inputs)
-    end
-
-    def compose_into(target, interaction_klass, **composed_inputs)
-      shared_inputs[target] = compose interaction_klass, **composed_inputs
-    end
-
-    def shared_inputs
-      @shared_inputs ||= {}.merge(inputs)
-    end
   end
 end

@@ -11,34 +11,29 @@ module Ingestions
       @identifier = ingestion.id
       @creator = ingestion.creator
       @loggable = loggable
+      @source_provided = false
 
       initialize_working_dirs
-      fetched = maybe_fetch_external_source
-      source = fetched.present? ? fetched[:file].path : source_path
-      update_working_dirs source
+
+      yield self if block_given?
     end
 
     def logger
       loggable || ingestion || Rails.logger
     end
 
-    def maybe_fetch_external_source
-      return unless url?
-      outcome = Ingestions::Fetcher.run context: self,
-                                        url: source_path
-      handle_fetch_error(outcome) unless outcome.valid?
-      outcome.result
+    def source_provided?
+      @source_provided.present?
     end
 
-    def handle_fetch_error(result)
-      raise Ingestions::Fetchers::FetchFailed, result.errors.full_messages
-    end
+    def source=(fetched)
+      raise "Already provided source" if source_provided?
 
-    # Makes the working directories and sets up the source files
-    # for an ingestion.
-    def initialize_working_dirs
-      ensure_root
-      ensure_working_dirs
+      source = fetched.present? ? fetched[:file].path : source_path
+
+      update_working_dirs source
+
+      @source_provided = true
     end
 
     def google_doc_url?
@@ -53,6 +48,22 @@ module Ingestions
                        strategy: strategy_name.to_s
     end
     # rubocop:enable Naming/AccessorMethodName
+
+    def to_fetcher_inputs
+      {
+        context: self,
+        url: source_path
+      }
+    end
+
+    private
+
+    # Makes the working directories and sets up the source files
+    # for an ingestion.
+    def initialize_working_dirs
+      ensure_root
+      ensure_working_dirs
+    end
 
   end
 end
