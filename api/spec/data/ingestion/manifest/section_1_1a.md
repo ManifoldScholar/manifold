@@ -5,5 +5,6 @@ language: language
 rights: rights
 description: description
 ---
+<link rel="stylesheet" type="text/css" media="all" href="markdown_styles.css" />
 
 some text

@@ -39,9 +39,9 @@ RSpec.describe Ingestions::Compiler do
       end.to change(Text, :count).by(1)
                .and change(TextSection, :count).by(3)
                       .and change(TextTitle, :count).by(1)
-                             .and change(IngestionSource, :count).by(5)
+                             .and change(IngestionSource, :count).by(6)
                                     .and change(Maker, :count).by(2)
-                                           .and change(Stylesheet, :count).by(3)
+                                           .and change(Stylesheet, :count).by(4)
     end
   end
 
