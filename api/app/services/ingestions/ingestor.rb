@@ -1,14 +1,17 @@
 # This class takes an Ingestion record and
 # returns a new Text record.
 module Ingestions
-  class Ingestor < AbstractInteraction
+  class Ingestor < AbstractBaseInteraction
     record :ingestion
     object :logger, default: nil
 
-    set_callback :execute, :before, :report_start
-    set_callback :execute, :after, :set_ingestion_text, :report_end
+    define_model_callbacks :initialize_context, :post_process
 
     def execute
+      @context = shared_inputs[:context] = build_context
+
+      report_start
+
       strategy = compose Ingestions::Pickers::Strategy
 
       compose_into :manifest, strategy.interaction
@@ -16,26 +19,31 @@ module Ingestions
       compose_into :text, Ingestions::Compiler
 
       compose Ingestions::PostProcessor
-    end
 
-    def context
-      @context ||= Ingestions::Context.new ingestion,
-                                           logger
+      text
     end
 
     private
+
+    def build_context
+      Ingestions::Context.new(ingestion, logger) do |context|
+        fetched = compose Ingestions::Fetcher, context.to_fetcher_inputs if context.url?
+
+        context.source = fetched
+      end
+    end
 
     def text
       shared_inputs[:text]
     end
 
     def report_start
-      info "services.ingestions.logging.ingestion_start",
-           name: context.basename
+      @context.info "services.ingestions.logging.ingestion_start",
+                    name: @context.basename
     end
 
     def report_end
-      info "services.ingestions.logging.ingestion_end"
+      @context.info "services.ingestions.logging.ingestion_end"
     end
 
     def set_ingestion_text
@@ -45,12 +53,11 @@ module Ingestions
 
     # Removes temporary dir
     def clean_up
-      context.teardown
+      @context.teardown
     end
 
     def shared_inputs
       @shared_inputs ||= {}.merge(inputs)
-                           .merge(context: context)
     end
   end
 end
