@@ -13,6 +13,13 @@ import lh from "helpers/linkHandler";
 const { request, flush } = entityStoreActions;
 
 export class MakersEditContainer extends PureComponent {
+  static mapStateToProps = (state, ownPropsIgnored) => {
+    return {
+      maker: select(requests.beMaker, state.entityStore),
+      updateMakers: get(state.entityStore.responses, requests.beMakerUpdate)
+    };
+  };
+
   static displayName = "Makers.Edit";
 
   static propTypes = {
@@ -21,13 +28,6 @@ export class MakersEditContainer extends PureComponent {
     history: PropTypes.object,
     afterDestroy: PropTypes.func,
     dispatch: PropTypes.func
-  };
-
-  static mapStateToProps = (state, ownPropsIgnored) => {
-    return {
-      maker: select(requests.beMaker, state.entityStore),
-      updateMakers: get(state.entityStore.responses, requests.beMakerUpdate)
-    };
   };
 
   constructor(props) {

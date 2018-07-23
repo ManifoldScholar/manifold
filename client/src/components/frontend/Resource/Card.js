@@ -172,6 +172,7 @@ class ResourceCard extends Component {
             <div className="preview-text">{this.getPreviewText(attr)}</div>
           </div>
         </Resource.Preview>
+        {/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */}
         <section
           className={infoClass}
           onMouseOver={this.handleInfoMouseOver}
@@ -180,6 +181,7 @@ class ResourceCard extends Component {
           role="link"
           tabIndex="0"
         >
+          {/* eslint-enable jsx-a11y/no-noninteractive-element-to-interactive-role */}
           <div>
             <header className="resource-title">
               <h4 dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />

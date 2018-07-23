@@ -135,7 +135,7 @@ export default class ResourcePlayerAudio extends Component {
   };
 
   handleProgressClick = event => {
-    const current = event.target.value / 100 * this.state.duration;
+    const current = (event.target.value / 100) * this.state.duration;
     const progress = current / this.state.duration;
     this.audio.seekTo(progress);
   };

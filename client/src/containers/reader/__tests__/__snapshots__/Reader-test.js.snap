@@ -208,6 +208,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                   <a
                     className="note"
                     href="http://manifold.umn.edu/about/"
+                    rel="noopener noreferrer"
                     target="_blank"
                   >
                     Learn More About 

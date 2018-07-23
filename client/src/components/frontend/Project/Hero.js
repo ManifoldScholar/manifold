@@ -157,6 +157,7 @@ export default class ProjectHero extends Component {
                 <li key={service}>
                   <a
                     target="_blank"
+                    rel="noopener noreferrer"
                     href={this.socialUrl(service, attr[key])}
                     className={service}
                   >
@@ -211,6 +212,7 @@ export default class ProjectHero extends Component {
     if (!attr.purchaseUrl) return null;
     return (
       <a
+        rel="noopener noreferrer"
         target="_blank"
         href={attr.purchaseUrl}
         className="button-tagged outline"

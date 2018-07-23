@@ -13,15 +13,6 @@ import lh from "helpers/linkHandler";
 const { request, flush } = entityStoreActions;
 
 export class UsersEditContainer extends PureComponent {
-  static displayName = "Users.Edit";
-
-  static propTypes = {
-    match: PropTypes.object,
-    dispatch: PropTypes.func,
-    user: PropTypes.object,
-    history: PropTypes.object
-  };
-
   static mapStateToProps = state => {
     return {
       user: select(requests.beUser, state.entityStore),
@@ -30,6 +21,15 @@ export class UsersEditContainer extends PureComponent {
         requests.beMakerCreate
       )
     };
+  };
+
+  static displayName = "Users.Edit";
+
+  static propTypes = {
+    match: PropTypes.object,
+    dispatch: PropTypes.func,
+    user: PropTypes.object,
+    history: PropTypes.object
   };
 
   constructor(props) {

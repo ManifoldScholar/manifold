@@ -32,6 +32,17 @@ export class FrontendContainer extends Component {
     }
   };
 
+  static mapStateToProps = state => {
+    return {
+      authentication: state.authentication,
+      visibility: state.ui.transitory.visibility,
+      loading: state.ui.transitory.loading.active,
+      notifications: state.notifications,
+      pages: select(requests.gPages, state.entityStore),
+      settings: select(requests.settings, state.entityStore)
+    };
+  };
+
   static propTypes = {
     location: PropTypes.object,
     dispatch: PropTypes.func,
@@ -42,17 +53,6 @@ export class FrontendContainer extends Component {
     pages: PropTypes.array,
     settings: PropTypes.object,
     route: PropTypes.object
-  };
-
-  static mapStateToProps = state => {
-    return {
-      authentication: state.authentication,
-      visibility: state.ui.transitory.visibility,
-      loading: state.ui.transitory.loading.active,
-      notifications: state.notifications,
-      pages: select(requests.gPages, state.entityStore),
-      settings: select(requests.settings, state.entityStore)
-    };
   };
 
   constructor(props) {

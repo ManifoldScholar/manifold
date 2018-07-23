@@ -15,6 +15,24 @@ import { Ingestion } from "components/backend";
 const { request, flush } = entityStoreActions;
 
 export class IngestionIngest extends Component {
+  static fetchData = (getState, dispatch, location, match) => {
+    if (isLoaded(requests.beIngestionShow, getState())) return;
+    const call = ingestionsAPI.show(match.params.ingestionId);
+    const ingestion = request(call, requests.beIngestionShow);
+    const { promise: one } = dispatch(ingestion);
+    return Promise.all([one]);
+  };
+
+  static mapStateToProps = (state, ownPropsIgnored) => {
+    return {
+      webSocketFailure: state.websocket.failure,
+      webSocketConnecting: state.websocket.connecting,
+      webSocketConnected: state.websocket.connected,
+      channel: get(state.websocket.channels, "IngestionChannel"),
+      ingestion: select(requests.beIngestionShow, state.entityStore)
+    };
+  };
+
   static displayName = "ProjectDetail.Text.Ingest";
 
   static propTypes = {
@@ -33,24 +51,6 @@ export class IngestionIngest extends Component {
 
   static defaultProps = {
     setDialogClassName: () => {} // noop
-  };
-
-  static fetchData = (getState, dispatch, location, match) => {
-    if (isLoaded(requests.beIngestionShow, getState())) return;
-    const call = ingestionsAPI.show(match.params.ingestionId);
-    const ingestion = request(call, requests.beIngestionShow);
-    const { promise: one } = dispatch(ingestion);
-    return Promise.all([one]);
-  };
-
-  static mapStateToProps = (state, ownPropsIgnored) => {
-    return {
-      webSocketFailure: state.websocket.failure,
-      webSocketConnecting: state.websocket.connecting,
-      webSocketConnected: state.websocket.connected,
-      channel: get(state.websocket.channels, "IngestionChannel"),
-      ingestion: select(requests.beIngestionShow, state.entityStore)
-    };
   };
 
   constructor(props) {

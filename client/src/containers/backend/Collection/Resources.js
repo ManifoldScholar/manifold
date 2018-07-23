@@ -16,14 +16,14 @@ const { request, flush } = entityStoreActions;
 const perPage = 5;
 
 export class CollectionResourcesContainer extends Component {
-  static displayName = "Collection.Resources";
-
   static mapStateToProps = state => {
     return {
       resources: select(requests.beResources, state.entityStore),
       resourcesMeta: meta(requests.beResources, state.entityStore)
     };
   };
+
+  static displayName = "Collection.Resources";
 
   static propTypes = {
     dispatch: PropTypes.func,

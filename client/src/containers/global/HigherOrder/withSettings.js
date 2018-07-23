@@ -12,14 +12,14 @@ export default function withSettings(WrappedComponent) {
   const displayName = `WithSettings('${getDisplayName(WrappedComponent)})`;
 
   class WithSettings extends React.PureComponent {
-    static displayName = displayName;
-    static WrappedComponent = WrappedComponent;
-
     static mapStateToProps = state => {
       return {
         settings: select(requests.settings, state.entityStore)
       };
     };
+
+    static WrappedComponent = WrappedComponent;
+    static displayName = displayName;
 
     render() {
       const props = Object.assign({}, this.props);

@@ -12,6 +12,7 @@ Array [
   >
     <a
       href="https://doi.org/10.12345.6789"
+      rel="noopener noreferrer"
       target="_blank"
     >
       https://doi.org/10.12345.6789

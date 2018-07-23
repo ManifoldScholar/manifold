@@ -11,39 +11,6 @@ import setter from "./setter";
 import Instructions from "./Instructions";
 
 export class FormUpload extends Component {
-  static displayName = "Form.Upload";
-
-  static propTypes = {
-    set: PropTypes.func.isRequired, // set is called when the value changes
-    setOther: PropTypes.func, // used to set another prop, eg removed, in session
-    label: PropTypes.string,
-    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    inlineStyle: PropTypes.object,
-    name: PropTypes.string, // name of the model field: attributes[avatar]
-    layout: PropTypes.oneOf([
-      "square",
-      "portrait",
-      "landscape",
-      "horizontal",
-      "embed"
-    ]),
-    placeholder: PropTypes.string, // Allows override of placeholder graphic
-    remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
-    accepts: PropTypes.string,
-    value: PropTypes.any, // the current value of the field in the connected model
-    initialValue: PropTypes.string, // the initial value of the input when it's rendered
-    errors: PropTypes.array,
-    inputId: PropTypes.string,
-    idForError: PropTypes.string
-  };
-
-  static defaultProps = {
-    layout: "square",
-    accepts: "any",
-    inputId: uniqueId("upload-"),
-    idForError: uniqueId("upload-error-")
-  };
-
   static types = {
     images: {
       accepts: "image/*",
@@ -98,6 +65,39 @@ export class FormUpload extends Component {
       accepts: null,
       extensions: null
     }
+  };
+
+  static displayName = "Form.Upload";
+
+  static propTypes = {
+    set: PropTypes.func.isRequired, // set is called when the value changes
+    setOther: PropTypes.func, // used to set another prop, eg removed, in session
+    label: PropTypes.string,
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    inlineStyle: PropTypes.object,
+    name: PropTypes.string, // name of the model field: attributes[avatar]
+    layout: PropTypes.oneOf([
+      "square",
+      "portrait",
+      "landscape",
+      "horizontal",
+      "embed"
+    ]),
+    placeholder: PropTypes.string, // Allows override of placeholder graphic
+    remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
+    accepts: PropTypes.string,
+    value: PropTypes.any, // the current value of the field in the connected model
+    initialValue: PropTypes.string, // the initial value of the input when it's rendered
+    errors: PropTypes.array,
+    inputId: PropTypes.string,
+    idForError: PropTypes.string
+  };
+
+  static defaultProps = {
+    layout: "square",
+    accepts: "any",
+    inputId: uniqueId("upload-"),
+    idForError: uniqueId("upload-error-")
   };
 
   constructor(props) {

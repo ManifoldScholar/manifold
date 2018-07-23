@@ -4,6 +4,7 @@ exports[`Frontend.Resource.Link component renders correctly 1`] = `
 <a
   className="button-primary"
   href="http://www.dailyrowan.com"
+  rel="noopener noreferrer"
   target="_blank"
 >
   Visit Page

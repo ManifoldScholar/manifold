@@ -7,25 +7,15 @@ import has from "lodash/has";
 import capitalize from "lodash/capitalize";
 
 export default class ResourcePreview extends Component {
+  static canPreview = resource => {
+    return ResourcePreview.getPreviewableComponent(resource) !== null;
+  };
+
   static displayName = "Resource.Preview";
 
   static propTypes = {
     resource: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired
-  };
-
-  static getPreviewableComponent = resource => {
-    let component = null;
-    const kind = resource.attributes.kind;
-    const key = capitalize(kind);
-    if (has(Preview, key)) {
-      component = Preview[key];
-    }
-    return component;
-  };
-
-  static canPreview = resource => {
-    return ResourcePreview.getPreviewableComponent(resource) !== null;
   };
 
   constructor() {
@@ -42,6 +32,16 @@ export default class ResourcePreview extends Component {
   componentWillUnmount() {
     window.removeEventListener("keyup", this.handleEscape);
   }
+
+  static getPreviewableComponent = resource => {
+    let component = null;
+    const kind = resource.attributes.kind;
+    const key = capitalize(kind);
+    if (has(Preview, key)) {
+      component = Preview[key];
+    }
+    return component;
+  };
 
   getPreviewComponent(resource) {
     return ResourcePreview.getPreviewableComponent(resource);

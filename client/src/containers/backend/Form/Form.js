@@ -15,6 +15,14 @@ const { request, flush } = entityStoreActions;
 const { close, open, set } = entityEditorActions;
 
 export class FormContainer extends PureComponent {
+  static mapStateToProps = (state, ownProps) => {
+    return {
+      session: get(state.entityEditor.sessions, ownProps.name),
+      response: get(state.entityStore.responses, ownProps.name),
+      errors: get(state.entityStore.responses, `${ownProps.name}.errors`)
+    };
+  };
+
   static displayName = "Form.Form";
 
   static propTypes = {
@@ -46,14 +54,6 @@ export class FormContainer extends PureComponent {
     debug: false,
     groupErrors: false,
     options: {}
-  };
-
-  static mapStateToProps = (state, ownProps) => {
-    return {
-      session: get(state.entityEditor.sessions, ownProps.name),
-      response: get(state.entityStore.responses, ownProps.name),
-      errors: get(state.entityStore.responses, `${ownProps.name}.errors`)
-    };
   };
 
   constructor(props) {

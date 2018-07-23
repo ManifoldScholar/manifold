@@ -13,13 +13,13 @@ const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class PageDetailContainer extends PureComponent {
-  static displayName = "Pages.Edit";
-
   static mapStateToProps = state => {
     return {
       page: select(requests.bePage, state.entityStore)
     };
   };
+
+  static displayName = "Pages.Edit";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,

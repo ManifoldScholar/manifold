@@ -13,14 +13,14 @@ const perPage = 5;
 const { request } = entityStoreActions;
 
 export class LogContainer extends PureComponent {
-  static displayName = "Project.Log";
-
   static mapStateToProps = state => {
     return {
       versions: select(requests.beVersions, state.entityStore),
       versionsMeta: meta(requests.beVersions, state.entityStore)
     };
   };
+
+  static displayName = "Project.Log";
 
   static propTypes = {
     versions: PropTypes.array,

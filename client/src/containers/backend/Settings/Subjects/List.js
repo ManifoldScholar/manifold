@@ -14,8 +14,6 @@ const { request } = entityStoreActions;
 const perPage = 10;
 
 export class SettingsSubjectsListContainer extends PureComponent {
-  static displayName = "Settings.Subjects.List";
-
   static mapStateToProps = state => {
     return {
       subjects: select(requests.beSubjects, state.entityStore),
@@ -23,6 +21,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
     };
   };
 
+  static displayName = "Settings.Subjects.List";
   static propTypes = {
     subjects: PropTypes.array,
     subjectsMeta: PropTypes.object,

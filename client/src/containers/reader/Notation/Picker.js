@@ -13,8 +13,6 @@ const { request } = entityStoreActions;
 const perPage = 5;
 
 export class NotationPickerContainer extends PureComponent {
-  static displayName = "ReaderContainer.Notation.Picker";
-
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       resources: select(requests.beResources, state.entityStore),
@@ -24,6 +22,8 @@ export class NotationPickerContainer extends PureComponent {
     };
     return Object.assign({}, newState, ownProps);
   };
+
+  static displayName = "ReaderContainer.Notation.Picker";
 
   static propTypes = {
     projectId: PropTypes.string,

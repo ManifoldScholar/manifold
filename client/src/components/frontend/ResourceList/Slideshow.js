@@ -28,22 +28,6 @@ export default class ResourceListSlideshow extends PureComponent {
     hideDownload: false
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const nextState = {};
-    if (nextProps.pagination.totalCount > 0) {
-      nextState.totalCount = nextProps.pagination.totalCount;
-    }
-
-    const loadedPages = prevState.loadedPages.slice(0);
-    const page = nextProps.pagination.currentPage;
-    if (!includes(loadedPages, page)) {
-      loadedPages.push(page);
-      nextState.loadedPages = loadedPages;
-    }
-
-    return nextState === {} ? null : nextState;
-  }
-
   constructor(props) {
     super();
 
@@ -61,6 +45,22 @@ export default class ResourceListSlideshow extends PureComponent {
       props.pagination
     );
     this.state.totalCount = props.pagination.totalCount || 0;
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextState = {};
+    if (nextProps.pagination.totalCount > 0) {
+      nextState.totalCount = nextProps.pagination.totalCount;
+    }
+
+    const loadedPages = prevState.loadedPages.slice(0);
+    const page = nextProps.pagination.currentPage;
+    if (!includes(loadedPages, page)) {
+      loadedPages.push(page);
+      nextState.loadedPages = loadedPages;
+    }
+
+    return nextState === {} ? null : nextState;
   }
 
   componentDidMount() {

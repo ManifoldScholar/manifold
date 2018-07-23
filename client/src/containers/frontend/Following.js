@@ -36,6 +36,16 @@ export class FollowingContainer extends Component {
     return Promise.all([]);
   };
 
+  static mapStateToProps = state => {
+    return {
+      projectFilters: state.ui.transitory.filters.project,
+      followedProjects: select(requests.feProjectsFollowed, state.entityStore),
+      featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
+      subjects: select(requests.feSubjects, state.entityStore),
+      authentication: state.authentication
+    };
+  };
+
   static propTypes = {
     featuredProjects: PropTypes.array,
     followedProjects: PropTypes.array,
@@ -45,23 +55,13 @@ export class FollowingContainer extends Component {
     subjects: PropTypes.array
   };
 
-  static defaultProps = {
-    featuredProjects: [],
-    followedProjects: []
-  };
-
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
 
-  static mapStateToProps = state => {
-    return {
-      projectFilters: state.ui.transitory.filters.project,
-      followedProjects: select(requests.feProjectsFollowed, state.entityStore),
-      featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
-      subjects: select(requests.feSubjects, state.entityStore),
-      authentication: state.authentication
-    };
+  static defaultProps = {
+    featuredProjects: [],
+    followedProjects: []
   };
 
   componentDidMount() {

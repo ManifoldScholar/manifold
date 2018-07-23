@@ -7,6 +7,11 @@ import Notation from "./Notation";
 import Link from "./Link";
 
 export default class NotationViewerGroup extends PureComponent {
+  static mapStateToProps = (state, ownProps) => {
+    const activeNotation = state.ui.transitory.reader.activeNotation;
+    return Object.assign({}, { activeNotation }, ownProps);
+  };
+
   static displayName = "NotationViewer.Group";
 
   static propTypes = {
@@ -21,11 +26,6 @@ export default class NotationViewerGroup extends PureComponent {
       sectionId: PropTypes.string,
       textId: PropTypes.string
     })
-  };
-
-  static mapStateToProps = (state, ownProps) => {
-    const activeNotation = state.ui.transitory.reader.activeNotation;
-    return Object.assign({}, { activeNotation }, ownProps);
   };
 
   constructor(props) {

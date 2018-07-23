@@ -83,7 +83,11 @@ class LayoutFooter extends Component {
 
   buildExternalPageLink(page) {
     return (
-      <a href={page.attributes.externalLink} target="_blank">
+      <a
+        href={page.attributes.externalLink}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {page.attributes.navTitle || page.attributes.title}
       </a>
     );

@@ -11,13 +11,8 @@ export default function switchFactory(Wrapper) {
   const displayName = `Router.Switch('${getDisplayName(Wrapper)})`;
 
   class RouterSwitch extends React.PureComponent {
+    static Wrapper = Wrapper;
     static displayName = displayName;
-
-    static contextTypes = {
-      router: PropTypes.shape({
-        route: PropTypes.object.isRequired
-      }).isRequired
-    };
 
     static propTypes = {
       location: PropTypes.object.isRequired,
@@ -26,7 +21,12 @@ export default function switchFactory(Wrapper) {
       history: PropTypes.object,
       staticContext: PropTypes.object
     };
-    static Wrapper = Wrapper;
+
+    static contextTypes = {
+      router: PropTypes.shape({
+        route: PropTypes.object.isRequired
+      }).isRequired
+    };
 
     match() {
       const { route } = this.context.router;

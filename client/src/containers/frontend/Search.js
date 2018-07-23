@@ -10,6 +10,13 @@ import { withRouter } from "react-router-dom";
 const { request, flush } = entityStoreActions;
 
 class SearchContainer extends PureComponent {
+  static mapStateToProps = state => {
+    return {
+      results: select(requests.rSearchResults, state.entityStore),
+      resultsMeta: meta(requests.rSearchResults, state.entityStore)
+    };
+  };
+
   static displayName = "Frontend.SearchContainer";
 
   static propTypes = {
@@ -21,13 +28,6 @@ class SearchContainer extends PureComponent {
     resultsMeta: PropTypes.object,
     text: PropTypes.object,
     section: PropTypes.object
-  };
-
-  static mapStateToProps = state => {
-    return {
-      results: select(requests.rSearchResults, state.entityStore),
-      resultsMeta: meta(requests.rSearchResults, state.entityStore)
-    };
   };
 
   constructor(props) {

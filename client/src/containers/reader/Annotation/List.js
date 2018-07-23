@@ -11,6 +11,13 @@ const { request } = entityStoreActions;
 import { hash } from "utils/string";
 
 export class AnnotationList extends PureComponent {
+  static mapStateToProps = (state, ownProps) => {
+    const newState = {
+      annotations: select(requests.rDrawerAnnotations, state.entityStore) || []
+    };
+    return Object.assign({}, newState, ownProps);
+  };
+
   static displayName = "Annotation.List";
 
   static propTypes = {
@@ -24,13 +31,6 @@ export class AnnotationList extends PureComponent {
 
   static defaultProps = {
     annotations: []
-  };
-
-  static mapStateToProps = (state, ownProps) => {
-    const newState = {
-      annotations: select(requests.rDrawerAnnotations, state.entityStore) || []
-    };
-    return Object.assign({}, newState, ownProps);
   };
 
   componentDidMount() {

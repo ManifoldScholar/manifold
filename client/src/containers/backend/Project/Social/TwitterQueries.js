@@ -15,14 +15,14 @@ const { request } = entityStoreActions;
 const perPage = 10;
 
 export class ProjectSocialTwitterQueriesContainer extends Component {
-  static displayName = "Project.Social.TwitterQueries";
-
   static mapStateToProps = state => {
     return {
       twitterQueries: select(requests.beTwitterQueries, state.entityStore),
       twitterQueriesMeta: meta(requests.beTwitterQueries, state.entityStore)
     };
   };
+
+  static displayName = "Project.Social.TwitterQueries";
 
   static propTypes = {
     project: PropTypes.object,

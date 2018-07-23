@@ -16,22 +16,21 @@ export default function withFormSession(WrappedComponent, sessionKey) {
   )})`;
 
   class WithFormSession extends React.PureComponent {
-    static displayName = displayName;
-
-    static WrappedComponent = WrappedComponent;
-
-    static propTypes = {
-      session: PropTypes.object,
-      response: PropTypes.object,
-      errors: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
-    };
-
     static mapStateToProps = state => {
       return {
         session: get(state.entityEditor.sessions, sessionKey),
         response: get(state.entityStore.responses, sessionKey),
         errors: get(state.entityStore.responses, `${sessionKey}.errors`)
       };
+    };
+
+    static WrappedComponent = WrappedComponent;
+    static displayName = displayName;
+
+    static propTypes = {
+      session: PropTypes.object,
+      response: PropTypes.object,
+      errors: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
     };
 
     nameToPath(name) {

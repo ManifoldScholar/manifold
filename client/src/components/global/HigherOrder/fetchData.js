@@ -19,18 +19,18 @@ export default function fetchData(WrappedComponent) {
   )})`;
 
   class FetchData extends React.PureComponent {
-    static displayName = displayName;
-
-    static contextTypes = {
-      store: PropTypes.object
-    };
-
     static WrappedComponent = WrappedComponent;
+
+    static displayName = displayName;
 
     static propTypes = {
       location: PropTypes.object,
       staticContext: PropTypes.object,
       match: PropTypes.object
+    };
+
+    static contextTypes = {
+      store: PropTypes.object
     };
 
     componentDidMount() {

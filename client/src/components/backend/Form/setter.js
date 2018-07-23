@@ -13,8 +13,8 @@ export default function setter(WrappedComponent) {
   const displayName = `Form.Setter('${getDisplayName(WrappedComponent)})`;
 
   class Setter extends React.PureComponent {
-    static displayName = displayName;
     static WrappedComponent = WrappedComponent;
+    static displayName = displayName;
 
     static propTypes = {
       sessionKey: PropTypes.string,

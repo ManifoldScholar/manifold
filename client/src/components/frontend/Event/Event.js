@@ -62,6 +62,7 @@ export default class Event extends PureComponent {
       preAttribution: (
         <a
           target="_blank"
+          rel="noopener noreferrer"
           href={`https://twitter.com/${attr.attributionIdentifier}`}
         >
           {"@" + attr.attributionIdentifier}

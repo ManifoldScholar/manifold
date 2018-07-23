@@ -12,13 +12,13 @@ import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 const { request } = entityStoreActions;
 
 export class TextWrapperContainer extends PureComponent {
-  static displayName = "Text.Wrapper";
-
   static mapStateToProps = state => {
     return {
       text: select(requests.beText, state.entityStore)
     };
   };
+
+  static displayName = "Text.Wrapper";
 
   static propTypes = {
     children: PropTypes.object,

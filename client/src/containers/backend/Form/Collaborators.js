@@ -9,8 +9,6 @@ import get from "lodash/get";
 const { request, flush } = entityStoreActions;
 
 export class FormCollaborators extends Component {
-  static displayName = "Form.Collaborators";
-
   static mapStateToProps = state => {
     return {
       updateCreators: get(state.entityStore.responses, "update-creators"),
@@ -22,6 +20,8 @@ export class FormCollaborators extends Component {
       createContributor: get(state.entityStore.responses, "create-contributor")
     };
   };
+
+  static displayName = "Form.Collaborators";
 
   static propTypes = {
     entity: PropTypes.object,

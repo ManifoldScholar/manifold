@@ -56,13 +56,13 @@ export default class SearchResultsList extends PureComponent {
 
     return (
       <div className="search-results">
-        <label className="label-count">
+        <span className="label-count">
           <Utility.EntityCount
             pagination={this.props.pagination}
             singularUnit={"result"}
             pluralUnit={"results"}
           />
-        </label>
+        </span>
         <ul className="results">
           {this.props.results.map(result => {
             return this.renderResult(result);

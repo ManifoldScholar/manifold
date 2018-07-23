@@ -11,7 +11,13 @@ import lh from "helpers/linkHandler";
 const { request, flush } = entityStoreActions;
 
 export class NotationResourceDetailContainer extends PureComponent {
-  static displayName = "ReaderContainer.Notation.Resource.Detail";
+  static mapStateToProps = (state, ownProps) => {
+    const newState = {
+      resource: select(requests.rResource, state.entityStore),
+      resourceMeta: meta(requests.rResource, state.entityStore)
+    };
+    return Object.assign({}, newState, ownProps);
+  };
 
   static fetchData = (getState, dispatch, location, match) => {
     const promises = [];
@@ -23,13 +29,7 @@ export class NotationResourceDetailContainer extends PureComponent {
     return Promise.all(promises);
   };
 
-  static mapStateToProps = (state, ownProps) => {
-    const newState = {
-      resource: select(requests.rResource, state.entityStore),
-      resourceMeta: meta(requests.rResource, state.entityStore)
-    };
-    return Object.assign({}, newState, ownProps);
-  };
+  static displayName = "ReaderContainer.Notation.Resource.Detail";
 
   static propTypes = {
     route: PropTypes.object,

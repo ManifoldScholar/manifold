@@ -18,6 +18,17 @@ class App extends Component {
     staticRequest: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      bootstrapped: false,
+      store: null,
+      routerConfirm: false,
+      routerConfirmCallback: null,
+      routerConfirmMessage: null
+    };
+  }
+
   static getDerivedStateFromProps(props, state) {
     if (state.bootstrapped) return null;
 
@@ -37,48 +48,9 @@ class App extends Component {
     return null;
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      bootstrapped: false,
-      store: null,
-      routerConfirm: false,
-      routerConfirmCallback: null,
-      routerConfirmMessage: null
-    };
-  }
-
   componentDidMount() {
     if (this.state.bootstrapped) return this.clientLoaded();
     this.bootstrapClient();
-  }
-
-  bootstrapClient() {
-    const store = createStore({});
-
-    ch.error("Bootstrapping on the client.", "rain_cloud");
-    const manifoldCookie = cookie.parse(document.cookie);
-    Manifold.bootstrap(store.getState, store.dispatch, manifoldCookie).then(
-      () => {
-        ch.info("Bootstrapped on the server.", "sparkles");
-        return this.setState({ bootstrapped: true, store }, this.clientLoaded);
-      },
-      () => {
-        ch.error("Bootstrapping failed unexpectedly.", "fire");
-        return null;
-      }
-    );
-  }
-
-  clientLoaded() {
-    this.state.store.dispatch({ type: "CLIENT_LOADED", payload: {} });
-  }
-
-  settings() {
-    return get(
-      this.state.store.getState(),
-      "entityStore.entities.settings.0.attributes"
-    );
   }
 
   getConfirmation = (message, callback) => {
@@ -105,6 +77,34 @@ class App extends Component {
         getUserConfirmation: this.getConfirmation
       }
     };
+  }
+
+  settings() {
+    return get(
+      this.state.store.getState(),
+      "entityStore.entities.settings.0.attributes"
+    );
+  }
+
+  bootstrapClient() {
+    const store = createStore({});
+
+    ch.error("Bootstrapping on the client.", "rain_cloud");
+    const manifoldCookie = cookie.parse(document.cookie);
+    Manifold.bootstrap(store.getState, store.dispatch, manifoldCookie).then(
+      () => {
+        ch.info("Bootstrapped on the server.", "sparkles");
+        return this.setState({ bootstrapped: true, store }, this.clientLoaded);
+      },
+      () => {
+        ch.error("Bootstrapping failed unexpectedly.", "fire");
+        return null;
+      }
+    );
+  }
+
+  clientLoaded() {
+    this.state.store.dispatch({ type: "CLIENT_LOADED", payload: {} });
   }
 
   resolveRouterConfirm = answer => {

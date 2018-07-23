@@ -92,9 +92,9 @@ export default class ResourceListSlideCaption extends Component {
   checkCollapsed = () => {
     if (!this._description) return null;
     if (this.state.expanded) {
-      this._description.classList.remove("collapsed")
+      this._description.classList.remove("collapsed");
     } else {
-      this._description.classList.add("collapsed")
+      this._description.classList.add("collapsed");
     }
   };
 
@@ -126,7 +126,7 @@ export default class ResourceListSlideCaption extends Component {
 
     return (
       <Collapse isOpened onRest={this.checkCollapsed}>
-        <div className={descriptionClasses} ref={e => this._description = e}>
+        <div className={descriptionClasses} ref={e => (this._description = e)}>
           <div
             ref={e => {
               this._descriptionContents = e;
@@ -180,6 +180,7 @@ export default class ResourceListSlideCaption extends Component {
                 href={attr.attachmentStyles.original}
                 target="_blank"
                 className="download-link"
+                rel="noopener noreferrer"
               >
                 {"Download"}
                 <i className="manicon manicon-arrow-down" aria-hidden="true" />

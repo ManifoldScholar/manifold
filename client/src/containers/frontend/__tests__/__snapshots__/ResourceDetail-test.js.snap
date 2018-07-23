@@ -100,6 +100,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
             <a
               className="button-primary"
               href="original-image.mock"
+              rel="noopener noreferrer"
               target="_blank"
             >
               Download
@@ -188,6 +189,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   >
                     <a
                       href="https://doi.org/10.12345.6789"
+                      rel="noopener noreferrer"
                       target="_blank"
                     >
                       https://doi.org/10.12345.6789
@@ -295,6 +297,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   >
                     <a
                       href="https://doi.org/10.12345.6789"
+                      rel="noopener noreferrer"
                       target="_blank"
                     >
                       https://doi.org/10.12345.6789

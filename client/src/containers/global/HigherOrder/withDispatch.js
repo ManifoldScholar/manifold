@@ -12,13 +12,12 @@ export default function withDispatch(WrappedComponent) {
   )})`;
 
   class WithDispatch extends React.PureComponent {
-    static displayName = displayName;
-
-    static WrappedComponent = WrappedComponent;
-
     static mapDispatchToProps = dispatch => {
       return { dispatch };
     };
+
+    static WrappedComponent = WrappedComponent;
+    static displayName = displayName;
 
     render() {
       const props = Object.assign({}, this.props);
@@ -26,9 +25,10 @@ export default function withDispatch(WrappedComponent) {
     }
   }
 
-  const ConnectedWithSettings = connect(null, WithDispatch.mapDispatchToProps)(
-    WithDispatch
-  );
+  const ConnectedWithSettings = connect(
+    null,
+    WithDispatch.mapDispatchToProps
+  )(WithDispatch);
 
   return hoistStatics(ConnectedWithSettings, WrappedComponent);
 }

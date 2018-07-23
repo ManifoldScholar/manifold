@@ -10,8 +10,6 @@ import Authorization from "helpers/authorization";
 const { request, flush } = entityStoreActions;
 
 export class ProjectSubjects extends PureComponent {
-  static displayName = "Project.Form.Subjects";
-
   static mapStateToProps = state => {
     return {
       createSubject: get(state.entityStore.responses, "create-subject"),
@@ -19,6 +17,8 @@ export class ProjectSubjects extends PureComponent {
       authentication: state.authentication
     };
   };
+
+  static displayName = "Project.Form.Subjects";
 
   static propTypes = {
     project: PropTypes.object,

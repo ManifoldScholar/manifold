@@ -28,6 +28,11 @@ export default class MetaList extends Component {
     metadata: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+    this.state = regenerateState(props.metadata);
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     const newState = regenerateState(nextProps.metadata);
     if (newState !== prevState) {
@@ -35,11 +40,6 @@ export default class MetaList extends Component {
     }
 
     return null;
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = regenerateState(props.metadata);
   }
 
   render() {

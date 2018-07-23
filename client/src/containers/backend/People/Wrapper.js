@@ -7,11 +7,11 @@ import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 
 export class UsersWrapperContainer extends PureComponent {
-  static displayName = "Users.Wrapper";
-
   static mapStateToProps = (stateIgnored, ownPropsIgnored) => {
     return {};
   };
+
+  static displayName = "Users.Wrapper";
 
   static propTypes = {
     route: PropTypes.object

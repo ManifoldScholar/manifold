@@ -7,6 +7,12 @@ import isString from "lodash/isString";
 import { notificationActions } from "actions";
 
 export default class DrawerWrapper extends PureComponent {
+  static mapStateToProps() {
+    return {
+      connected: true
+    };
+  }
+
   static displayName = "Drawer.Wrapper";
 
   static propTypes = {
@@ -25,11 +31,10 @@ export default class DrawerWrapper extends PureComponent {
     history: PropTypes.object
   };
 
-  static mapStateToProps() {
-    return {
-      connected: true
-    };
-  }
+  static childContextTypes = {
+    pauseKeyboardEvents: PropTypes.func,
+    unpauseKeyboardEvents: PropTypes.func
+  };
 
   // NB lockScroll can be:
   // Hover (default): User can scroll the drawer on hover, but it doesn't effect body scroll
@@ -42,11 +47,6 @@ export default class DrawerWrapper extends PureComponent {
     open: false,
     style: "backend",
     entrySide: "right"
-  };
-
-  static childContextTypes = {
-    pauseKeyboardEvents: PropTypes.func,
-    unpauseKeyboardEvents: PropTypes.func
   };
 
   constructor(props) {
