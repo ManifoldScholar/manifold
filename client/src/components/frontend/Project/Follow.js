@@ -15,17 +15,17 @@ export default class ProjectFollow extends Component {
     project: PropTypes.object
   };
 
-  static getDerivedStateFromProps(nextProps) {
-    const followed = get(nextProps.favorites, nextProps.project.id);
-    if (followed) return { view: "unfollow" };
-    return { view: "follow" };
-  }
-
   constructor() {
     super();
     this.state = {
       view: "follow"
     };
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    const followed = get(nextProps.favorites, nextProps.project.id);
+    if (followed) return { view: "unfollow" };
+    return { view: "follow" };
   }
 
   componentDidMount() {

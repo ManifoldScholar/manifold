@@ -7,16 +7,16 @@ import { settingsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
 
 export class SettingsThemeContainer extends PureComponent {
-  static displayName = "Settings.Theme";
-
-  static propTypes = {
-    settings: PropTypes.object
-  };
-
   static mapStateToProps = state => {
     return {
       settings: select(requests.settings, state.entityStore)
     };
+  };
+
+  static displayName = "Settings.Theme";
+
+  static propTypes = {
+    settings: PropTypes.object
   };
 
   render() {

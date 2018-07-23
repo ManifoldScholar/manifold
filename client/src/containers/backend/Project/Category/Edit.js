@@ -9,13 +9,13 @@ import { textCategoriesAPI, requests } from "api";
 const { request } = entityStoreActions;
 
 export class ProjectCategoryEditContainer extends Component {
-  static displayName = "Project.Category.Edit";
-
   static mapStateToProps = state => {
     return {
       category: select(requests.beTextCategory, state.entityStore)
     };
   };
+
+  static displayName = "Project.Category.Edit";
 
   static propTypes = {
     match: PropTypes.object.isRequired,

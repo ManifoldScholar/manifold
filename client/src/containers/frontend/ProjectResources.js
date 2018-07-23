@@ -39,6 +39,15 @@ class ProjectResourcesContainer extends Component {
     return Promise.all([one, two]);
   };
 
+  static mapStateToProps = state => {
+    const props = {
+      project: select(requests.feProject, state.entityStore),
+      resources: select(requests.feResources, state.entityStore),
+      meta: meta(requests.feResources, state.entityStore)
+    };
+    return omitBy(props, isNull);
+  };
+
   static propTypes = {
     project: PropTypes.object,
     settings: PropTypes.object.isRequired,
@@ -47,15 +56,6 @@ class ProjectResourcesContainer extends Component {
     dispatch: PropTypes.func,
     location: PropTypes.object.isRequired,
     history: PropTypes.object
-  };
-
-  static mapStateToProps = state => {
-    const props = {
-      project: select(requests.feProject, state.entityStore),
-      resources: select(requests.feResources, state.entityStore),
-      meta: meta(requests.feResources, state.entityStore)
-    };
-    return omitBy(props, isNull);
   };
 
   constructor(props) {

@@ -11,14 +11,14 @@ const { request } = entityStoreActions;
 const perPage = 5;
 
 export class ProjectResourcesListContainer extends PureComponent {
-  static displayName = "Project.ResourcesList";
-
   static mapStateToProps = state => {
     return {
       resources: select(requests.beResources, state.entityStore),
       resourcesMeta: meta(requests.beResources, state.entityStore)
     };
   };
+
+  static displayName = "Project.ResourcesList";
 
   static propTypes = {
     project: PropTypes.object,

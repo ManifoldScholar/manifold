@@ -11,6 +11,12 @@ import lh from "helpers/linkHandler";
 const { request, flush } = entityStoreActions;
 
 export class SettingsSubjectsEditContainer extends PureComponent {
+  static mapStateToProps = state => {
+    return {
+      subject: select(requests.beSubject, state.entityStore)
+    };
+  };
+
   static displayName = "Settings.Subjects.Edit";
 
   static propTypes = {
@@ -18,12 +24,6 @@ export class SettingsSubjectsEditContainer extends PureComponent {
     dispatch: PropTypes.func,
     subject: PropTypes.object,
     history: PropTypes.object
-  };
-
-  static mapStateToProps = state => {
-    return {
-      subject: select(requests.beSubject, state.entityStore)
-    };
   };
 
   constructor(props) {

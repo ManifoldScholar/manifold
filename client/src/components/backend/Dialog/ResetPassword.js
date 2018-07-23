@@ -10,6 +10,11 @@ import { get } from "lodash";
 const { request, flush } = entityStoreActions;
 
 class ResetPasswordWrapper extends PureComponent {
+  static mapStateToProps = (state, ownPropsIgnored) => {
+    return {
+      response: get(state.entityStore.responses, requests.beUserUpdate)
+    };
+  };
   static displayName = "ResetPassword.Confirm";
 
   static propTypes = {
@@ -24,18 +29,12 @@ class ResetPasswordWrapper extends PureComponent {
     response: PropTypes.object
   };
 
-  static defaultProps = {};
-
   static contextTypes = {
     pauseKeyboardEvents: PropTypes.func,
     unpauseKeyboardEvents: PropTypes.func
   };
 
-  static mapStateToProps = (state, ownPropsIgnored) => {
-    return {
-      response: get(state.entityStore.responses, requests.beUserUpdate)
-    };
-  };
+  static defaultProps = {};
 
   constructor(props) {
     super(props);

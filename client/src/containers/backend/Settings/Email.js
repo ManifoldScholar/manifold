@@ -11,16 +11,16 @@ import { select } from "utils/entityUtils";
 const { request } = entityStoreActions;
 
 export class SettingsEmailContainer extends PureComponent {
-  static propTypes = {
-    form: PropTypes.object,
-    settings: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
-  };
-
   static mapStateToProps = state => {
     return {
       settings: select(requests.settings, state.entityStore)
     };
+  };
+
+  static propTypes = {
+    form: PropTypes.object,
+    settings: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
   };
 
   sendTestEmail = event => {

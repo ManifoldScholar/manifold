@@ -16,8 +16,6 @@ const { request } = entityStoreActions;
 // The list is the out wrapper and is responsible for interacting with the store,
 // managing the visibility and positioning of its entities, etc.
 class NotationViewerList extends PureComponent {
-  static displayName = "NotationViewer.List";
-
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       activeAnnotation: state.ui.transitory.reader.activeAnnotation || null,
@@ -26,6 +24,8 @@ class NotationViewerList extends PureComponent {
     };
     return Object.assign({}, newState, ownProps);
   };
+
+  static displayName = "NotationViewer.List";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,

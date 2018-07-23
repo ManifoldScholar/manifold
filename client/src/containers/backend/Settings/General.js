@@ -7,14 +7,14 @@ import { settingsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
 
 export class SettingsGeneralContainer extends PureComponent {
-  static propTypes = {
-    settings: PropTypes.object
-  };
-
   static mapStateToProps = state => {
     return {
       settings: select(requests.settings, state.entityStore)
     };
+  };
+
+  static propTypes = {
+    settings: PropTypes.object
   };
 
   render() {

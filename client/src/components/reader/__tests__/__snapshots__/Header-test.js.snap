@@ -175,6 +175,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
               <a
                 className="note"
                 href="http://manifold.umn.edu/about/"
+                rel="noopener noreferrer"
                 target="_blank"
               >
                 Learn More About 
@@ -687,6 +688,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               <a
                 className="note"
                 href="http://manifold.umn.edu/about/"
+                rel="noopener noreferrer"
                 target="_blank"
               >
                 Learn More About 

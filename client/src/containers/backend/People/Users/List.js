@@ -15,8 +15,6 @@ const { request } = entityStoreActions;
 const perPage = 10;
 
 export class UsersListContainer extends PureComponent {
-  static displayName = "Users.List";
-
   static mapStateToProps = state => {
     return {
       users: select(requests.beUsers, state.entityStore),
@@ -24,6 +22,8 @@ export class UsersListContainer extends PureComponent {
       currentUserId: get(state, "authentication.currentUser.id")
     };
   };
+
+  static displayName = "Users.List";
 
   static propTypes = {
     users: PropTypes.array,

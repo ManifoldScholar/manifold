@@ -15,8 +15,6 @@ const { request } = entityStoreActions;
 const INITIAL_FORMATS = ["highlight", "annotation", "bookmark"];
 
 export class ReaderNotesContainer extends Component {
-  static displayName = "Reader.ReaderNotes";
-
   static mapStateToProps = (state, ownProps) => {
     const requestName = ownProps.filterable
       ? requests.rMyFilteredAnnotationsForText
@@ -35,6 +33,8 @@ export class ReaderNotesContainer extends Component {
     };
     return Object.assign({}, newState, ownProps);
   };
+
+  static displayName = "Reader.ReaderNotes";
 
   static propTypes = {
     myAnnotations: PropTypes.array,

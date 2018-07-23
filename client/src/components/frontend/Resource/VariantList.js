@@ -15,7 +15,7 @@ export default class ResourceVariantList extends Component {
 
     return (
       <li key={url}>
-        <a href={url} target="_blank">
+        <a href={url} target="_blank" rel="noopener noreferrer">
           <i className="manicon manicon-arrow-down" />
           <span>{filename}</span>
         </a>

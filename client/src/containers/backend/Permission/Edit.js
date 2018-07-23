@@ -10,13 +10,13 @@ import { select } from "utils/entityUtils";
 const { request, flush } = entityStoreActions;
 
 export class PermissionEdit extends PureComponent {
-  static displayName = "Permission.Edit";
-
   static mapStateToProps = state => {
     return {
       permission: select(requests.bePermission, state.entityStore)
     };
   };
+
+  static displayName = "Permission.Edit";
 
   static propTypes = {
     entity: PropTypes.object,

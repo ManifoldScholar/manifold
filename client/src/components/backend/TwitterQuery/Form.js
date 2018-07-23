@@ -31,7 +31,7 @@ export default class TwitterQueryForm extends PureComponent {
     const instructions = (
       <p className="instructions">
         Learn more about Twitter{" "}
-        <a target="_blank" href={twitterHelpUrl}>
+        <a target="_blank" rel="noopener noreferrer" href={twitterHelpUrl}>
           search operators
         </a>.
       </p>

@@ -10,6 +10,12 @@ import lh from "helpers/linkHandler";
 const { request, flush } = entityStoreActions;
 
 export class TwitterQueryEditContainer extends PureComponent {
+  static mapStateToProps = (state, ownPropsIgnored) => {
+    return {
+      twitterQuery: select(requests.beTwitterQuery, state.entityStore)
+    };
+  };
+
   static displayName = "TwitterQuery.Edit";
 
   static propTypes = {
@@ -17,12 +23,6 @@ export class TwitterQueryEditContainer extends PureComponent {
     match: PropTypes.object,
     history: PropTypes.object,
     dispatch: PropTypes.func
-  };
-
-  static mapStateToProps = (state, ownPropsIgnored) => {
-    return {
-      twitterQuery: select(requests.beTwitterQuery, state.entityStore)
-    };
   };
 
   constructor(props) {

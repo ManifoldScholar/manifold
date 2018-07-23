@@ -31,6 +31,14 @@ class FormColumnMap extends PureComponent {
     value: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      sortedHeaders: sortHeaders(props),
+      sortedAttributes: sortAttributes(props)
+    };
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (!prevState) return null;
     const nextAttributes = sortAttributes(nextProps);
@@ -41,14 +49,6 @@ class FormColumnMap extends PureComponent {
     }
 
     return null;
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      sortedHeaders: sortHeaders(props),
-      sortedAttributes: sortAttributes(props)
-    };
   }
 
   onDragEnd = result => {

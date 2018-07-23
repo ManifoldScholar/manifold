@@ -15,14 +15,14 @@ const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class FeatureDetailContainer extends PureComponent {
-  static displayName = "Content.Feature.Detail";
-
   static mapStateToProps = state => {
     return {
       feature: select(requests.beFeature, state.entityStore),
       session: get(state.entityEditor.sessions, "backend-feature-update")
     };
   };
+
+  static displayName = "Content.Feature.Detail";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,

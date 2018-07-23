@@ -12,13 +12,13 @@ import lh from "helpers/linkHandler";
 const { request, flush } = entityStoreActions;
 
 export class ProjectWrapperContainer extends PureComponent {
-  static displayName = "Project.Wrapper";
-
   static mapStateToProps = state => {
     return {
       project: select(requests.feProject, state.entityStore)
     };
   };
+
+  static displayName = "Project.Wrapper";
 
   static propTypes = {
     project: PropTypes.object,

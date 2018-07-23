@@ -8,19 +8,19 @@ import lh from "helpers/linkHandler";
 export default class LayoutButtonNavigation extends Component {
   static displayName = "Layout.ButtonNavigation";
 
-  static defaultProps = {
-    grayBg: true,
-    showBrowse: true,
-    showFollowing: true,
-    authenticated: false
-  };
-
   static propTypes = {
     grayBg: PropTypes.bool,
     showBrowse: PropTypes.bool,
     showFollowing: PropTypes.bool,
     hideAtNarrow: PropTypes.bool,
     authenticated: PropTypes.bool
+  };
+
+  static defaultProps = {
+    grayBg: true,
+    showBrowse: true,
+    showFollowing: true,
+    authenticated: false
   };
 
   constructor() {

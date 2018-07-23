@@ -12,16 +12,6 @@ import { entityStoreActions } from "actions";
 const { request } = entityStoreActions;
 
 export class ResourceImportWrapper extends PureComponent {
-  static displayName = "ResourceImport.Wrapper";
-  static propTypes = {
-    history: PropTypes.object,
-    match: PropTypes.object,
-    project: PropTypes.object,
-    resourceImport: PropTypes.object,
-    route: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
-  };
-
   static fetchData = (getState, dispatch, location, match) => {
     if (isEntityLoaded("resourceImports", match.params.id, getState())) return;
     if (!match.params.projectId || !match.params.id) return;
@@ -42,6 +32,15 @@ export class ResourceImportWrapper extends PureComponent {
       ),
       project: select(requests.feProject, state.entityStore)
     };
+  };
+  static displayName = "ResourceImport.Wrapper";
+  static propTypes = {
+    history: PropTypes.object,
+    match: PropTypes.object,
+    project: PropTypes.object,
+    resourceImport: PropTypes.object,
+    route: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
   };
 
   constructor(props) {

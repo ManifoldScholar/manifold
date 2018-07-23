@@ -12,15 +12,6 @@ import find from "lodash/find";
 const { request, flush } = entityStoreActions;
 
 export class CreateContainer extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func,
-    response: PropTypes.object,
-    user: PropTypes.object,
-    settings: PropTypes.object.isRequired,
-    authentication: PropTypes.object,
-    handleViewChange: PropTypes.func.isRequired
-  };
-
   static mapStateToProps = state => {
     const myState = {
       user: select(requests.gCreateUser, state.entityStore),
@@ -28,6 +19,15 @@ export class CreateContainer extends Component {
       response: state.entityStore.responses[requests.gCreateUser]
     };
     return myState;
+  };
+
+  static propTypes = {
+    dispatch: PropTypes.func,
+    response: PropTypes.object,
+    user: PropTypes.object,
+    settings: PropTypes.object.isRequired,
+    authentication: PropTypes.object,
+    handleViewChange: PropTypes.func.isRequired
   };
 
   constructor() {

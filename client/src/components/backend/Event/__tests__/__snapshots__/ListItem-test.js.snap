@@ -19,6 +19,7 @@ exports[`Event.ListItem component renders correctly 1`] = `
         >
           <a
             href="https://twitter.com/undefined"
+            rel="noopener noreferrer"
             target="_blank"
           >
             @undefined

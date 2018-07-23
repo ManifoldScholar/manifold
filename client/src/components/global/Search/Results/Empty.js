@@ -9,9 +9,9 @@ export default class SearchResultsEmpty extends PureComponent {
   render() {
     return (
       <div className="search-results">
-        <label className="label-count">
+        <span className="label-count">
           <span className="count">0</span> results found
-        </label>
+        </span>
       </div>
     );
   }

@@ -16,6 +16,18 @@ const { request } = entityStoreActions;
 const pageNumber = 1;
 
 export class BackendContainer extends PureComponent {
+  static mapStateToProps = state => {
+    return {
+      authentication: state.authentication,
+      visibility: state.ui.transitory.visibility,
+      loading: state.ui.transitory.loading.active,
+      notifications: state.notifications,
+      routing: state.routing,
+      pages: entityUtils.select(requests.gPages, state.entityStore),
+      settings: entityUtils.select(requests.settings, state.entityStore)
+    };
+  };
+
   static fetchData = (getState, dispatch) => {
     if (!entityUtils.isLoaded(requests.gPages, getState())) {
       const pages = request(pagesAPI.index(), requests.gPages, {
@@ -36,18 +48,6 @@ export class BackendContainer extends PureComponent {
     settings: PropTypes.object,
     route: PropTypes.object,
     match: PropTypes.object
-  };
-
-  static mapStateToProps = state => {
-    return {
-      authentication: state.authentication,
-      visibility: state.ui.transitory.visibility,
-      loading: state.ui.transitory.loading.active,
-      notifications: state.notifications,
-      routing: state.routing,
-      pages: entityUtils.select(requests.gPages, state.entityStore),
-      settings: entityUtils.select(requests.settings, state.entityStore)
-    };
   };
 
   constructor(props) {

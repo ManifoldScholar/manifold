@@ -7,13 +7,13 @@ import classNames from "classnames";
 import { ApiClient } from "api";
 
 class PredictiveInput extends PureComponent {
-  static displayName = "Form.PredictiveInput";
-
   static mapStateToProps = state => {
     return {
       authToken: state.authentication.authToken
     };
   };
+
+  static displayName = "Form.PredictiveInput";
 
   static propTypes = {
     className: PropTypes.string,

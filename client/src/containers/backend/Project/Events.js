@@ -14,14 +14,14 @@ const { request } = entityStoreActions;
 const perPage = 6;
 
 export class ProjectEventsContainer extends PureComponent {
-  static displayName = "Project.Events";
-
   static mapStateToProps = state => {
     return {
       events: select(requests.beEvents, state.entityStore),
       eventsMeta: meta(requests.beEvents, state.entityStore)
     };
   };
+
+  static displayName = "Project.Events";
 
   static propTypes = {
     project: PropTypes.object,

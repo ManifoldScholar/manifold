@@ -7,13 +7,13 @@ import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 
 export class IngestionNewContainer extends PureComponent {
-  static displayName = "Project.Text.Ingestion.New";
-
   static mapStateToProps = state => {
     return {
       ingestion: select(requests.beIngestionCreate, state.entityStore)
     };
   };
+
+  static displayName = "Project.Text.Ingestion.New";
 
   static propTypes = {
     project: PropTypes.object.isRequired,

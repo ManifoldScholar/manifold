@@ -9,16 +9,16 @@ import { Form } from "components/global";
 const { request, flush } = entityStoreActions;
 
 export class ContactContainer extends Component {
-  static propTypes = {
-    history: PropTypes.object,
-    dispatch: PropTypes.func,
-    response: PropTypes.object
-  };
-
   static mapStateToProps = state => {
     return {
       response: state.entityStore.responses[requests.gContactForm]
     };
+  };
+
+  static propTypes = {
+    history: PropTypes.object,
+    dispatch: PropTypes.func,
+    response: PropTypes.object
   };
 
   constructor() {

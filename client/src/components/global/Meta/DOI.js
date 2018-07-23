@@ -16,7 +16,7 @@ export default class DOI extends Component {
 
     return (
       <Meta.Item label={label}>
-        <a href={doi} target="_blank">
+        <a href={doi} target="_blank" rel="noopener noreferrer">
           {doi}
         </a>
       </Meta.Item>

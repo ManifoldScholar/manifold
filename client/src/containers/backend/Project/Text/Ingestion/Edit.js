@@ -10,8 +10,6 @@ const { request } = entityStoreActions;
 import lh from "helpers/linkHandler";
 
 export class IngestionEditContainer extends PureComponent {
-  static displayName = "Project.Text.Ingestion.Edit";
-
   static fetchData = (getState, dispatch, location, match) => {
     if (isLoaded(requests.beIngestionShow, getState())) return;
     const call = ingestionsAPI.show(match.params.ingestionId);
@@ -24,6 +22,8 @@ export class IngestionEditContainer extends PureComponent {
       ingestion: select(requests.beIngestionShow, state.entityStore)
     };
   };
+
+  static displayName = "Project.Text.Ingestion.Edit";
 
   static propTypes = {
     project: PropTypes.object.isRequired,

@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 export default class UtilityBackLinkSecondary extends Component {
   static displayName = "Utility.BackLinkSecondary";
 
-  static defaultProps = {
-    backText: "Back to Project"
-  };
-
   static propTypes = {
     link: PropTypes.string,
     backText: PropTypes.string,
     title: PropTypes.string
+  };
+
+  static defaultProps = {
+    backText: "Back to Project"
   };
 
   render() {

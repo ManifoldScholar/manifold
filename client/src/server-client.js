@@ -27,8 +27,9 @@ import getRoutes from "/routes";
 // we no longer need to support Node 8 and 9.
 // See https://github.com/nodejs/node/issues/21513
 // See https://github.com/nodejs/node/issues/16196#issuecomment-393091912
-const tls = require('tls');
-tls.DEFAULT_ECDH_CURVE = "auto"
+const tls = require("tls");
+
+tls.DEFAULT_ECDH_CURVE = "auto";
 
 let port;
 let socket;

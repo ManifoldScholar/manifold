@@ -13,13 +13,13 @@ export default class DialogConfirm extends PureComponent {
     message: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
-  static defaultProps = {
-    heading: "Are you sure?"
-  };
-
   static contextTypes = {
     pauseKeyboardEvents: PropTypes.func,
     unpauseKeyboardEvents: PropTypes.func
+  };
+
+  static defaultProps = {
+    heading: "Are you sure?"
   };
 
   componentDidMount() {

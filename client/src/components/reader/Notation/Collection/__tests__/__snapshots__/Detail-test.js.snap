@@ -117,6 +117,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
               <a
                 className="download-link"
                 href="original-image.mock"
+                rel="noopener noreferrer"
                 target="_blank"
               >
                 Download

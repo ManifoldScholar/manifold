@@ -8,13 +8,13 @@ import HigherOrder from "containers/global/HigherOrder";
 import connectAndFetch from "utils/connectAndFetch";
 
 class PagesGeneralContainer extends PureComponent {
-  static displayName = "Content.Pages.General";
-
   static mapStateToProps = state => {
     return {
       page: select("backend-page", state.entityStore)
     };
   };
+
+  static displayName = "Content.Pages.General";
 
   static propTypes = {
     page: PropTypes.object.isRequired,

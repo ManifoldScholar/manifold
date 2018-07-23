@@ -9,6 +9,12 @@ import { get } from "lodash";
 const { request, flush } = entityStoreActions;
 
 export class PasswordResetContainer extends Component {
+  static mapStateToProps = state => {
+    return {
+      response: get(state.entityStore.responses, requests.gPasswordReset)
+    };
+  };
+
   static propTypes = {
     dispatch: PropTypes.func,
     match: PropTypes.shape({
@@ -18,12 +24,6 @@ export class PasswordResetContainer extends Component {
     }).isRequired,
     history: PropTypes.object.isRequired,
     response: PropTypes.object
-  };
-
-  static mapStateToProps = state => {
-    return {
-      response: get(state.entityStore.responses, requests.gPasswordReset)
-    };
   };
 
   constructor() {

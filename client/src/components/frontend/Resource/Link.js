@@ -22,6 +22,7 @@ export default class ResourceLink extends Component {
             href={attr.externalUrl}
             className={this.props.buttonClass}
             target="_blank"
+            rel="noopener noreferrer"
           >
             Visit Page{" "}
             <i className="manicon manicon-arrow-right" aria-hidden="true" />
@@ -34,6 +35,7 @@ export default class ResourceLink extends Component {
             href={attr.attachmentStyles.original}
             className={this.props.buttonClass}
             target="_blank"
+            rel="noopener noreferrer"
           >
             Download{" "}
             <i className="manicon manicon-arrow-down" aria-hidden="true" />

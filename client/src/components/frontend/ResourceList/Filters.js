@@ -19,17 +19,17 @@ export default class ResourceListFilters extends Component {
     searchId: uniqueId("filters-search-")
   };
 
+  constructor(props) {
+    super(props);
+    this.state = this.initialState(props.initialFilterState);
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.initialFilterState !== prevState.filters) {
       return Object.assign({}, nextProps.initialFilterState);
     }
 
     return null;
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = this.initialState(props.initialFilterState);
   }
 
   setFilters = (event, label) => {

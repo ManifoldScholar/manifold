@@ -9,6 +9,12 @@ import { Form as GlobalForm } from "components/global";
 const { request, flush } = entityStoreActions;
 
 class PasswordForgotContainer extends Component {
+  static mapStateToProps = (state, ownPropsIgnored) => {
+    return {
+      response: get(state.entityStore.responses, "request-reset-password")
+    };
+  };
+
   static displayName = "PasswordForgotContainer";
 
   static propTypes = {
@@ -16,12 +22,6 @@ class PasswordForgotContainer extends Component {
     hideSignInUpOverlay: PropTypes.func,
     dispatch: PropTypes.func,
     response: PropTypes.object
-  };
-
-  static mapStateToProps = (state, ownPropsIgnored) => {
-    return {
-      response: get(state.entityStore.responses, "request-reset-password")
-    };
   };
 
   constructor(propsIgnored) {

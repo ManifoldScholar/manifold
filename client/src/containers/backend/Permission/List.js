@@ -13,13 +13,13 @@ const { select } = entityUtils;
 const { request } = entityStoreActions;
 
 export class PermissionContainer extends PureComponent {
-  static displayName = "PermissionContainer";
-
   static mapStateToProps = state => {
     return {
       permissions: select(requests.bePermissions, state.entityStore)
     };
   };
+
+  static displayName = "PermissionContainer";
 
   static propTypes = {
     entity: PropTypes.object.isRequired,

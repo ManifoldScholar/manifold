@@ -15,8 +15,8 @@ export default function fetchData(WrappedComponent) {
   )})`;
 
   class FetchData extends React.PureComponent {
-    static displayName = displayName;
     static WrappedComponent = WrappedComponent;
+    static displayName = displayName;
 
     fetchData = propsIgnored => {
       // Noop in test

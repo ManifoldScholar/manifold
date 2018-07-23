@@ -15,8 +15,6 @@ import { childRoutes } from "helpers/router";
 const { request } = entityStoreActions;
 
 export class ProjectTextsContainer extends PureComponent {
-  static displayName = "Project.Texts";
-
   static mapStateToProps = state => {
     return {
       moveTextResponse: get(state.entityStore.responses, requests.beTextUpdate),
@@ -26,6 +24,8 @@ export class ProjectTextsContainer extends PureComponent {
       )
     };
   };
+
+  static displayName = "Project.Texts";
 
   static propTypes = {
     project: PropTypes.object,

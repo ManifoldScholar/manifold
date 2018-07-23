@@ -12,10 +12,6 @@ export default function withCurrentUser(WrappedComponent) {
   )})`;
 
   class WithCurrentUser extends React.PureComponent {
-    static displayName = displayName;
-
-    static WrappedComponent = WrappedComponent;
-
     static mapStateToProps = state => {
       const user = state.authentication.authenticated
         ? state.authentication.currentUser
@@ -24,6 +20,9 @@ export default function withCurrentUser(WrappedComponent) {
         currentUser: user
       };
     };
+
+    static WrappedComponent = WrappedComponent;
+    static displayName = displayName;
 
     render() {
       const props = Object.assign({}, this.props);
