@@ -14,6 +14,10 @@
     cursor: pointer;
     background: transparentize($neutralBlack, 0.5);
 
+    &:focus {
+      @include focusOutline;
+    }
+
     &.error {
       pointer-events: none;
       cursor: default;
@@ -87,6 +91,14 @@
       background-color: transparent;
       border: 0;
       outline: none;
+
+      &:hover, &:focus {
+        outline: 0;
+
+        .manicon {
+          color: $accentPrimary;
+        }
+      }
     }
 
     .progress {
@@ -109,6 +121,12 @@
 
           &::-webkit-slider-thumb {
             box-shadow: -1024px 0 0 1024px $neutralWhite;
+          }
+
+          &:focus {
+            @include focusOutline;
+            outline-color: $neutralWhite;
+            outline-offset: 4px;
           }
         }
       }
@@ -182,6 +200,12 @@
           cursor: pointer;
         }
 
+        &:focus {
+          @include focusOutline;
+          outline-color: $neutralWhite;
+          outline-offset: 4px;
+        }
+
         &::-webkit-slider-runnable-track {
           height: 3px;
           appearance: none;
@@ -208,15 +232,11 @@
       color: $neutralWhite;
       transition: color $durationFast $timing;
 
-      &:hover {
-        color: $accentPrimary;
-      }
-
       @include respond($break60) {
         font-size: 24px;
       }
 
-      &:before {
+      &::before {
         vertical-align: middle;
       }
     }

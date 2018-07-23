@@ -46,7 +46,7 @@
   @include utilityPrimary;
   display: inline-block;
   padding: 9px 23px 10px;
-  color: $neutral80;
+  color: $neutral95;
   text-align: center;
   text-decoration: none;
   border: 2px solid $accentPrimary;
@@ -58,12 +58,36 @@
     border-color: $neutral50;
 
     &:hover {
+      background-color: $neutral05;
+    }
+
+    &:focus {
+      background-color: $focusSecondary;
+    }
+
+    &:active {
       color: $neutralWhite;
       background-color: $neutral50;
+    }
+
+    .bg-neutral05 & {
+      &:hover {
+        color: $neutralWhite;
+        background-color: $neutral50;
+      }
     }
   }
 
   &:hover {
+    background-color: $accentPrimaryOffWhite;
+  }
+
+  &:focus {
+    background-color: $focusPrimary;
+    outline: 0;
+  }
+
+  &:active {
     color: $neutralWhite;
     background-color: $accentPrimary;
   }
@@ -77,7 +101,7 @@
   padding: 14px 20px 16px;
   font-size: 15px;
   font-weight: $bold;
-  color: $neutral75;
+  color: $neutral95;
   text-align: center;
   text-decoration: none;
   border: 2px solid $accentPrimary;
@@ -90,8 +114,32 @@
   }
 
   &:hover {
+    background-color: $accentPrimaryOffWhite;
+  }
+
+  &:focus {
+    background-color: $focusPrimary;
+    outline: 0;
+  }
+
+  &:active {
     color: $neutralWhite;
     background-color: $accentPrimary;
+
+    .manicon {
+      color: $neutralWhite;
+    }
+  }
+
+  .bg-neutral05 & {
+    &:hover {
+      color: $neutralWhite;
+      background-color: $accentPrimary;
+
+      .manicon {
+        color: $neutralWhite;
+      }
+    }
   }
 
   span {
@@ -105,6 +153,8 @@
   .manicon {
     display: block;
     padding-bottom: 10px;
+    color: $neutral70;
+    transition: color $duration $timing;
 
     @include respond($break60) {
       display: inline-block;
@@ -164,8 +214,32 @@
   }
 
   &:hover {
-    color: $neutral90;
+    background-color: $accentPrimaryOffWhite;
+  }
+
+  &:focus {
+    background-color: $focusPrimary;
+    outline: 0;
+  }
+
+  &:active {
+    color: $neutralWhite;
     background-color: $accentPrimary;
+
+    .manicon {
+      color: $neutralWhite;
+    }
+  }
+
+  .bg-neutral05 &, .bg-neutral90 & {
+    &:hover {
+      color: $neutralWhite;
+      background-color: $accentPrimary;
+
+      .manicon {
+        color: $neutralWhite;
+      }
+    }
   }
 
   &.dull {
@@ -173,9 +247,35 @@
     border-color: $neutral50;
 
     &:hover {
-      color: $neutralWhite;
-      background-color: $neutral70;
+      color: $neutral50;
+      background-color: $neutral20;
+
+      .manicon {
+        color: $neutral50;
+      }
     }
+
+    &:focus {
+      color: $neutral50;
+      background-color: $focusTertiary;
+
+      .manicon {
+        color: $neutral50;
+      }
+    }
+
+    &:active {
+      color: $neutralWhite;
+      background-color: $neutral50;
+
+      .manicon {
+        color: $neutralWhite;
+      }
+    }
+  }
+
+  .manicon {
+    transition: color $duration $timing;
   }
 
   .manicon-copy {
@@ -291,8 +391,32 @@
     background-color: $accentPrimaryMedium;
   }
 
+  &:focus {
+    background-color: $focusPrimary;
+    outline: 0;
+  }
+
+  &:active{
+    color: $neutralWhite;
+    background-color: $accentPrimaryDark;
+  }
+
   &.dull {
     background-color: $neutral10;
+
+    &:hover {
+      background-color: $neutral10;
+    }
+
+    &:focus {
+      background-color: $neutral30;
+      outline: 0;
+    }
+
+    &:active {
+      color: $neutralWhite;
+      background-color: $neutral50;
+    }
   }
 
   &.outlined {
@@ -626,15 +750,21 @@
   .bg-neutral95 & {
     background-color: $neutral95;
 
-    &:hover {
+    &:hover, &:focus {
       color: $accentPrimary;
       background-color: $neutral95;
+      outline: 0;
     }
   }
 
-  &:hover {
+  &:hover, &:active {
+    background-color: $neutral20;
+  }
+
+  &:focus {
     color: $neutral80;
-    background-color: $neutral10;
+    background-color: $focusTertiary;
+    outline: 0;
   }
 
   .container {
@@ -673,12 +803,33 @@
   padding: 34px 0 25px;
   text-decoration: none;
 
+  &:hover {
+    .manicon, .back-text, .project-title {
+      color: $neutral45;
+    }
+  }
+
+  &:focus {
+    outline: 0;
+
+    .manicon, .back-text, .project-title{
+      color: $neutral80;
+    }
+  }
+
+  &:active {
+    .manicon, .back-text, .project-title{
+      color: $accentPrimary;
+    }
+  }
+
   .manicon {
     display: table-cell;
     padding-right: 22px;
     font-size: 42px;
-    color: $neutral40;
+    color: $neutral50;
     vertical-align: top;
+    transition: color $duration $timing;
 
     + div {
       display: table-cell;
@@ -691,6 +842,7 @@
     @include utilityPrimary;
     font-size: 14px;
     color: $neutral70;
+    transition: color $duration $timing;
   }
 
   .project-title {
@@ -699,6 +851,7 @@
     font-size: 17px;
     line-height: 1.556;
     color: $neutral50;
+    transition: color $duration $timing;
   }
 }
 

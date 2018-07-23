@@ -38,6 +38,7 @@ export default class MakersFormContainer extends PureComponent {
             label="First Name"
             name="attributes[firstName]"
             placeholder="First Name"
+            focusOnMount
           />
           <Form.TextInput
             label="Middle Name"

@@ -23,12 +23,23 @@
     height: 620px;
 
     .figure-video {
-      height: 100%;
       width: 100%;
+      height: 100%;
 
       iframe {
-        height: 100%;
         width: 100%;
+        height: 100%;
+      }
+
+      button {
+        &:hover, &:focus {
+          color: $accentPrimary;
+          outline: 0;
+
+          svg {
+            fill: $accentPrimary;
+          }
+        }
       }
     }
   }
@@ -40,6 +51,4 @@
   iframe {
     border: 0;
   }
-
 }
-

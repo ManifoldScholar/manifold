@@ -13,6 +13,7 @@ $neutral10: #ececec;
 $neutral20: #e6e6e6;
 $neutral30: #d6d6d6;
 $neutral40: #c3c3c3;
+$neutral45: #b3b2b3;
 $neutral50: #9a9a9a;
 $neutral70: #828282;
 $neutral75: #696969;
@@ -37,6 +38,10 @@ $accentPrimaryLight: #75e9bd !default;
 $accentPrimaryDull: #b1ead2 !default;
 $accentPrimaryPale: #c1f7e4 !default;
 $accentPrimaryOffWhite: #f0faf7 !default;
+
+$focusPrimary: #c0f8e5;
+$focusSecondary: $neutral20;
+$focusTertiary: $neutral30;
 
 // ---> For SVG interpolation
 $accentPrimaryHex: str-slice(#{$accentPrimary}, 2);

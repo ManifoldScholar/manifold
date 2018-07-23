@@ -46,7 +46,7 @@
           color: $neutral50;
         }
 
-        &:hover {
+        &:hover, &:focus {
           color: $accentPrimary;
 
           i {

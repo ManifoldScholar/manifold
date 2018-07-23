@@ -32,11 +32,13 @@
     text-decoration: none;
     cursor: pointer;
     background-color: $neutral10;
-    background-position: 50% 50%;
     background-repeat: no-repeat;
+    background-position: 50% 50%;
     background-size: cover;
 
-    &:hover {
+    &:hover, &:focus {
+      outline: 0;
+
       .preview-text {
         color: $neutralWhite;
         background-color: $accentPrimary;
@@ -101,8 +103,9 @@
       width: calc(100% - 155px);
     }
 
-    &.hover {
+    &.hover, &:focus {
       cursor: pointer;
+      outline: 0;
 
       .arrow-link {
         color: $neutralWhite;

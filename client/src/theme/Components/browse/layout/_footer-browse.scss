@@ -95,8 +95,9 @@
       text-decoration: none;
       transition: color $duration $timing;
 
-      &:hover {
+      &:hover, &:focus {
         color: $accentPrimary;
+        outline: 0;
       }
     }
 
@@ -129,6 +130,12 @@
 
   .search-form {
     max-width: 250px;
+
+    button {
+      &:focus {
+        color: $accentPrimary;
+      }
+    }
   }
 
   .footer-secondary {
@@ -158,8 +165,9 @@
     background-color: $neutral80;
     transition: background-color $duration $timing;
 
-    &:hover {
+    &:hover, &:focus {
       background-color: $accentPrimary;
+      outline: 0;
 
       .logo, .logo.dull {
         color: $neutral80;

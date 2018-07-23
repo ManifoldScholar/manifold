@@ -4,33 +4,33 @@
 .form-list-filter {
   // Height Defined in em units to be responsive to type size
   $inputHeight: 2.857em;
+  display: block;
   padding-bottom: 26px;
   font-size: 0;
-  display: block;
 
   @include respond($break75) {
   }
 
   @include respond($break90) {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
     flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
   }
 
   .resource-totals + & {
     padding-top: 40px;
   }
 
-  input[type="text"] {
+  input[type='text'] {
     @include templateHead;
     width: 100%;
     height: $inputHeight;
     padding-right: 15px;
     padding-left: 15px;
     font-size: 14px;
-    letter-spacing: 0.01em;
     color: $neutral75;
+    letter-spacing: 0.01em;
     background-color: $neutral05;
     border: 0;
   }
@@ -55,26 +55,34 @@
       left: 13px;
       font-size: 13px;
       color: $neutral75;
+
+      &:focus {
+        color: $accentPrimary;
+      }
     }
 
-    input[type="text"] {
+    input[type='text'] {
       padding-left: 40px;
+
+      &:focus {
+        outline: 0;
+      }
     }
   }
 
   .select-group {
-    display: block;
     position: relative;
-    margin-left: -10px;
-    padding-top: 15px;
+    display: block;
     max-width: 100%;
+    padding-top: 15px;
+    margin-left: -10px;
 
     + .select-group {
       margin-top: 25px;
 
       @include respond($break90) {
-        margin-left: 0;
         margin-top: 0;
+        margin-left: 0;
       }
     }
 
@@ -102,8 +110,8 @@
       @include respond($break95) {
         display: inline-block;
         width: 60%;
-        margin-top: 0;
         padding-top: 0;
+        margin-top: 0;
         white-space: nowrap;
       }
 
@@ -123,9 +131,9 @@
 
     .select {
       position: relative;
+      width: 100%;
       margin-top: 10px;
       margin-left: 10px;
-      width: 100%;
 
       @include respond($break75) {
         display: inline-block;
@@ -142,6 +150,11 @@
         font-size: 14px;
         color: $neutral50;
         border: 2px solid $neutral30;
+        transition: border-color $duration $timing;
+
+        &:focus {
+          border-color: $focusPrimary;
+        }
       }
     }
 
@@ -172,5 +185,9 @@
     margin-top: 8px;
     font-size: 14px;
     color: $neutral40;
+
+    &:focus {
+      color: $accentPrimary;
+    }
   }
 }

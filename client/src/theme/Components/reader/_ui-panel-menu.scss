@@ -6,7 +6,7 @@
   width: 100%;
   background-color: $neutral10;
   transition: right $duration $timing,
-  bottom $duration $timing;
+    bottom $duration $timing;
 
   @include respond($break50) {
     position: absolute;
@@ -36,5 +36,11 @@
       right: 0;
       bottom: auto;
     }
+  }
+}
+
+.panel-hidden {
+  .screen-reader-text {
+    visibility: hidden;
   }
 }

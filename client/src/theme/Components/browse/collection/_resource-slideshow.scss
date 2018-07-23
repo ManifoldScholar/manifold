@@ -169,7 +169,7 @@
         opacity: 0.4;
       }
 
-      &:not(:disabled):hover {
+      &:not(:disabled):hover, &:not(:disabled):focus {
         color: $accentPrimary;
       }
     }
@@ -262,7 +262,7 @@
         color: $neutral50;
       }
 
-      &:hover {
+      &:hover, &:focus {
         color: $accentPrimary;
       }
     }
