@@ -4,5 +4,8 @@ ruby:
 scss:
   enabled: false
 
+eslint:
+  enabled: true
+
 javascript:
   enabled: false
