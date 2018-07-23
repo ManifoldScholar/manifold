@@ -29,6 +29,7 @@
       min-width: 380px;
     }
 
+
     input {
       padding-left: 46px;
     }
@@ -44,7 +45,7 @@
       color: $neutral50;
     }
 
-    input:focus + .manicon-magnify {
+    input:focus + .manicon-magnify, .manicon-magnify:focus {
       color: $accentPrimary;
     }
   }
@@ -161,6 +162,10 @@
         .manicon-check {
           visibility: visible;
         }
+      }
+
+      input:focus ~ .control-indicator {
+        background-color:  $focusPrimary;
       }
 
       + .checkbox {

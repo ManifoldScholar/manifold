@@ -122,10 +122,17 @@
         visibility: visible;
         opacity: 1;
       }
+
+      button.screen-reader-text {
+        &:focus {
+          @include focusOutline;
+        }
+      }
     }
 
-    &:hover {
+    &:hover, &:focus {
       background-color: $neutral10;
+      outline: 0;
 
       img {
         border-color: $accentPrimary;

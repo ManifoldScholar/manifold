@@ -307,8 +307,9 @@
         line-height: 11px;
       }
 
-      &:hover {
+      &:hover, &:focus {
         color: $accentPrimary;
+        outline: 0;
 
         @include respond($break60) {
           color: $neutral75;

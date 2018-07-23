@@ -46,3 +46,27 @@ body {
 p {
   margin: 0;
 }
+
+// Normalize focus outlines
+[role='button'] {
+}
+
+@mixin focusOutline {
+  outline: thin dotted;
+}
+
+button:focus, a:focus, .fake-link:focus, input:focus {
+  @include focusOutline;
+}
+
+div[role='button']:focus  {
+  border: 1px dotted rgb(154, 154, 154);
+}
+
+.has-focus {
+  outline: thin dotted rgb(154, 154, 154);
+
+  :focus {
+    outline: none;
+  }
+}

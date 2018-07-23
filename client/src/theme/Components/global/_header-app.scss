@@ -87,8 +87,9 @@
           font-size: 16px;
         }
 
-        &:hover {
+        &:hover, &:focus {
           color: $accentPrimary;
+          outline: 0;
         }
       }
 
@@ -104,6 +105,15 @@
           height: 2px;
           content: '';
           background-color: $neutral90;
+        }
+
+        &:focus {
+          color: $accentPrimary;
+          outline: 0;
+
+          &::before {
+            background-color: $accentPrimary;
+          }
         }
       }
     }
@@ -157,9 +167,10 @@
       transition: color $duration $timing,
         background-color $duration $timing;
 
-      &:hover {
+      &:hover, &:focus {
         color: $neutralWhite;
         background-color: $accentPrimary;
+        outline: 0;
       }
     }
 
@@ -170,6 +181,11 @@
       font-size: 19px;
       color: $neutral80;
       vertical-align: middle;
+
+      &:focus {
+        color: $accentPrimary;
+        outline: 0;
+      }
 
       &::after {
         @include tailUp;
@@ -225,15 +241,12 @@
       }
     }
 
-    // Panel default states
-    // I'm not sure how to fix this, leaving it for Naomi
-    // scss-lint:disable TransitionAll
     .search-menu, .user-menu {
       // Default state
       margin-top: -20px;
       visibility: hidden;
       opacity: 0;
-      transition: all, $duration, $timing;
+      transition: opacity $duration $timing, margin-top $duration $timing;
     }
 
     // Panel active states

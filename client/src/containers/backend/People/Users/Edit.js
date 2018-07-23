@@ -162,6 +162,7 @@ export class UsersEditContainer extends PureComponent {
             notificationScope="drawer"
           >
             <Form.TextInput
+              focusOnMount
               label="Email"
               name="attributes[email]"
               placeholder="Email"

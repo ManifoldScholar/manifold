@@ -143,6 +143,10 @@
         }
       }
 
+      &:focus {
+        border: none;
+      }
+
       &:hover {
         color: $neutral75;
       }

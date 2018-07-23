@@ -35,21 +35,19 @@
     width: 100%;
     padding-top: 120px;
     text-decoration: none;
-    background-position: 50% 50%;
     background-repeat: no-repeat;
+    background-position: 50% 50%;
     background-size: cover;
 
     @include respond($break80) {
       padding-top: 160px;
     };
 
-    &:hover {
+    &:hover, &:focus {
+      outline: 0;
+
       .collection-title {
         color: $accentPrimaryDark;
-      }
-
-      .title-overlay {
-        //background-color: transparentize($neutralBlack, 0.4);
       }
     }
   }

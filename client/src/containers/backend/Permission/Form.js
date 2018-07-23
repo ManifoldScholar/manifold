@@ -103,6 +103,7 @@ export class PermissionForm extends PureComponent {
             placeholder="Select User"
             label={this.labelUser}
             relationName="user"
+            focusOnMount
           />
           <Form.SwitchArray
             name="attributes[roleNames]"

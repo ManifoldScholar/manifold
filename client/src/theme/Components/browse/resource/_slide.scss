@@ -40,8 +40,8 @@
   }
 
   .slide-left-enter-active figure {
-    transform: translate3d(0, 0, 0);
     transition: transform 0.4s $timing;
+    transform: translate3d(0, 0, 0);
   }
 
   .slide-left-leave figure {
@@ -49,8 +49,8 @@
   }
 
   .slide-left-leave-active figure {
-    transform: translate3d(-100%, 0, 0);
     transition: transform 0.4s $timing;
+    transform: translate3d(-100%, 0, 0);
   }
 
   .slide-right-enter figure {
@@ -58,8 +58,8 @@
   }
 
   .slide-right-enter-active figure {
-    transform: translate3d(0, 0, 0);
     transition: transform 0.4s $timing;
+    transform: translate3d(0, 0, 0);
   }
 
   .slide-right-leave figure {
@@ -67,13 +67,9 @@
   }
 
   .slide-right-leave-active figure {
-    transform: translate3d(100%, 0, 0);
     transition: transform 0.4s $timing;
+    transform: translate3d(100%, 0, 0);
   }
-
-  //.figure-enter figure {
-  //  opacity: 0;
-  //}
 
   .figure-image {
     position: absolute;
@@ -102,6 +98,17 @@
       height: 100%;
       background-color: $neutralBlack;
     }
+
+    button {
+      &:hover, &:focus {
+        color: $accentPrimary;
+        outline: 0;
+
+        svg {
+          fill: $accentPrimary;
+        }
+      }
+    }
   }
 
   .figure-interactive {
@@ -129,7 +136,7 @@
 
       &.with-background {
         background-color: $neutral90;
-        opacity: .75;
+        opacity: 0.75;
       }
     }
 
@@ -178,8 +185,9 @@
     opacity: 0.9;
     transition: color $duration $timing;
 
-    &:hover {
+    &:hover, &:focus {
       color: $accentPrimary;
+      outline: 0;
     }
 
     .manicon-magnify-plus {
@@ -189,7 +197,17 @@
         display: inline-block;
         margin-top: 2px;
         margin-left: 7px;
+      }
+    }
+  }
 
+  .resource-preview-wrapper {
+    &:focus {
+      border: 0;
+      outline: 0;
+
+      .zoom-indicator {
+        color: $accentPrimary;
       }
     }
   }

@@ -23,6 +23,11 @@ class FormSwitch extends Component {
     labelPos: "above"
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { focused: false };
+  }
+
   truthy(value) {
     return value === true || value === "true";
   }
@@ -49,6 +54,15 @@ class FormSwitch extends Component {
     return this.truthy(value);
   }
 
+  focus = () => {
+    console.log('focusing');
+    this.setState({ focused: true });
+  };
+
+  blur = () => {
+    this.setState({ focused: false });
+  };
+
   render() {
     const checked = this.determineChecked(this.props.value);
     const classes = classnames({
@@ -61,15 +75,25 @@ class FormSwitch extends Component {
       this.props.labelPos,
       this.props.labelClass
     );
-    const wrapperClasses = classnames("form-input", this.props.className);
+    const wrapperClasses = classnames(
+      "form-input",
+      this.props.className
+    );
+    const indicatorClasses = classnames(
+      "toggle-indicator",
+      { "has-focus": this.state.focused }
+    );
+
     const label = <h4 className={labelClasses}>{this.props.label}</h4>;
 
     return (
       <div className={wrapperClasses}>
         {this.props.labelPos === "above" ? label : null}
-        <div className="toggle-indicator">
+        <div className={indicatorClasses}>
           {/* Add .checked to .boolean-primary to change visual state */}
           <div
+            onFocus={this.focus}
+            onBlur={this.blur}
             onClick={this.handleClick}
             className={classes}
             role="button"

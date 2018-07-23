@@ -49,12 +49,14 @@
           color: $sp40Tertiary;
         }
 
-        &:hover, &.active {
+        &:hover, &.active, &:focus {
           color: $accentPrimaryDark;
+          outline: 0;
         }
 
-        &.deny:hover {
+        &.deny:hover, &.deny:focus {
           color: $sp40Tertiary;
+          outline: 0;
         }
       }
     }
