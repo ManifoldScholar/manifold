@@ -10,6 +10,14 @@
     padding-top: 67px;
   }
 
+  .browse & {
+    padding-bottom: 35px;
+
+    @include respond($break50) {
+      padding-bottom: 0;
+    }
+  }
+
   .footer-primary {
     @include clearfix;
     @include respond($break65) {
