@@ -54,13 +54,19 @@
       text-decoration: none;
       transition: color $duration $timing;
 
-      &:hover {
+      &:hover{
         color: $neutral20;
       }
 
       &.active {
         color: $neutral20;
         border-bottom: 2px solid $neutral20;
+      }
+
+      &:focus {
+        color: $accentPrimary;
+        border-color: $accentPrimary;
+        outline: 0;
       }
     }
   }

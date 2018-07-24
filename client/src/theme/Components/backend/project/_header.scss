@@ -4,8 +4,9 @@
     color: $neutral75;
     transition: color $duration $timing;
 
-    &:hover {
+    &:hover, &:focus {
       color: $neutral20;
+      outline: 0;
 
       .manicon {
         color: $neutral20;

@@ -61,6 +61,7 @@ button:focus, a:focus, .fake-link:focus, input:focus {
 
 div[role='button']:focus  {
   border: 1px dotted rgb(154, 154, 154);
+  outline: 0;
 }
 
 .has-focus {

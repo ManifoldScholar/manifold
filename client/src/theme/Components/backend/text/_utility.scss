@@ -7,8 +7,17 @@
     text-decoration: none;
     transition: color $duration $timing;
 
-    &:hover {
+    &:hover, &:focus {
       color: $accentPrimary;
+      outline: 0;
+
+      .manicon-arrow-up, .manicon-arrow-down, .manicon-x {
+        color: $accentPrimary;
+      }
+
+      .manicon-x {
+        color: $sp40Tertiary;
+      }
     }
   }
 
@@ -18,6 +27,7 @@
 
     &:hover {
       color: $accentPrimary;
+      outline: 0;
     }
   }
 
@@ -34,6 +44,7 @@
 
     &:hover {
       color: $sp40Tertiary;
+      outline: 0;
     }
   }
 }

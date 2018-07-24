@@ -230,8 +230,9 @@
     a, .fake-link {
       transition: color $duration $timing;
 
-      &:hover {
+      &:hover, &:focus {
         color: $accentPrimary;
+        outline: 0;
       }
     }
 

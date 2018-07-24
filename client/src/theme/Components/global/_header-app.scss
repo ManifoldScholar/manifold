@@ -18,13 +18,19 @@
       color: $neutral50;
       transition: color $duration $timing;
 
-      &:hover {
+      &:hover, &:focus {
         color: $accentPrimary;
+        outline: 0;
       }
     }
 
     .text-nav .active {
       color: $neutralWhite;
+
+      &:focus {
+        color: $accentPrimary;
+        outline: 0;
+      }
 
       &::before {
         background-color: $neutralWhite;

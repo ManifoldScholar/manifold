@@ -102,7 +102,15 @@
     cursor: pointer;
     background: none;
     border: 0;
-    outline: 0;
+
+    &:focus {
+      outline: 0;
+
+      .manicon {
+        @include focusOutline;
+        outline-offset: 2px;
+      }
+    }
 
     .manicon {
       position: absolute;

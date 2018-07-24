@@ -128,7 +128,9 @@
         flex-direction: row;
       }
 
-      &:hover {
+      &:hover, &:focus {
+        outline: 0;
+
         figure img {
           background-color: $accentPrimary;
           border-color: $accentPrimary;
