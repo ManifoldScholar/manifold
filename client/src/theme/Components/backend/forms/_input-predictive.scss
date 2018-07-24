@@ -19,7 +19,7 @@
 
   // Required for override
   .form-secondary .form-input & {
-    input[type="text"] {
+    input[type='text'] {
       height: auto;
       padding: 8px 0 13px;
       border: 0;
@@ -45,6 +45,10 @@
 
     @include respond($break50) {
       display: block;
+    }
+
+    &:focus {
+      @include focusOutline;
     }
   }
 }

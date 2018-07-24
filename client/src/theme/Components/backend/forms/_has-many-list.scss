@@ -88,14 +88,16 @@
       }
 
       .manicon-arrow-up, .manicon-arrow-down, .manicon-pencil-simple {
-        &:hover {
+        &:hover, &:focus {
           color: $accentPrimary;
+          outline: 0;
         }
       }
 
       .manicon-x {
-        &:hover {
+        &:hover, &:focus {
           color: $sp40Tertiary;
+          outline: 0;
         }
       }
     }

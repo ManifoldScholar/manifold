@@ -40,13 +40,14 @@
       transition: background-color $durationFast $timing,
         border-color $duration $timing;
 
-      &:hover {
-        border-color: $accentPrimary;
-      }
-
       &.active {
         background-color: $neutral80;
         border-color: $neutral80;
+      }
+
+      &:hover, &:focus {
+        border-color: $accentPrimary;
+        outline: 0;
       }
     }
 

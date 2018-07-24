@@ -59,7 +59,7 @@
       @include respond($break60) {
         padding: 19px 0 14px; // OD
       }
-      
+
       @include respond($break65) {
         display: table;
       }
@@ -88,7 +88,9 @@
         vertical-align: middle;
       }
 
-      &:hover {
+      &:hover, &:focus {
+        outline: 0;
+
         .asset-image svg path {
           fill: $neutral20;
         }

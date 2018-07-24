@@ -52,6 +52,12 @@ class FormTextInput extends Component {
       "has-instructions": isString(this.props.instructions)
     });
     const inputType = this.props.password ? "password" : "text";
+    const id = this.props.name
+      ? this.props.name + "-" + this.props.id
+      : this.props.id;
+    const errorId = this.props.name
+      ? this.props.name + "-" + this.props.id
+      : this.props.id;
 
     return (
       <GlobalForm.Errorable
@@ -59,9 +65,9 @@ class FormTextInput extends Component {
         name={this.props.name}
         errors={this.props.errors}
         label={this.props.label}
-        idForError={this.props.idForError}
+        idForError={errorId}
       >
-        <label htmlFor={this.props.id} className={labelClass}>
+        <label htmlFor={id} className={labelClass}>
           {this.props.label}
         </label>
         <Instructions instructions={this.props.instructions} />
@@ -69,12 +75,12 @@ class FormTextInput extends Component {
           ref={input => {
             this.inputElement = input;
           }}
-          id={this.props.id}
+          id={id}
           type={inputType}
           placeholder={this.props.placeholder}
           onChange={this.props.onChange}
           value={this.renderValue(this.props.value)}
-          aria-describedby={this.props.idForError}
+          aria-describedby={errorId}
         />
       </GlobalForm.Errorable>
     );

@@ -285,6 +285,13 @@
   &.radio {
     line-height: 1.25em;
 
+    input[type='radio'] {
+      &:focus ~ .toggle-indicator {
+        @include focusOutline;
+        outline-offset: 2px;
+      }
+    }
+
     .toggle-indicator {
       width: 1.25em;
       height: 1.25em;

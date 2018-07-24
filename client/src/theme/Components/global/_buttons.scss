@@ -429,9 +429,10 @@
       color: $neutralWhite;
     }
 
-    &:hover {
+    &:hover, &:focus {
       color: $neutral90;
       background-color: $accentPrimary;
+      outline: 0;
 
       .manicon {
         color: $neutral90;
@@ -442,9 +443,10 @@
       color: $neutral70;
       border-color: $neutral70;
 
-      &:hover {
+      &:hover, &:focus {
         color: $neutral90;
         background-color: $neutral70;
+        outline: 0;
 
         .manicon {
           color: $neutral90;
@@ -642,7 +644,8 @@
   white-space: nowrap;
   background-color: $accentPrimary;
   border-radius: 22.5px;
-  transition: max-width $duration $timing, background-color $duration $timing;
+  transition: max-width $duration $timing,
+    background-color $duration $timing;
 
   .unfollow & {
     background-color: $sp20Primary;
