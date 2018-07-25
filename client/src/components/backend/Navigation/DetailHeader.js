@@ -42,11 +42,11 @@ export default class DetailHeader extends PureComponent {
   render() {
     const breadcrumb = this.props.breadcrumb;
     return (
-      <section className="bg-neutral95">
+      <section className="backend-header">
         {breadcrumb && breadcrumb.length > 0 ? (
           <Navigation.Breadcrumb links={this.props.breadcrumb} />
         ) : null}
-        <div className="container flush">
+        <div className="wrapper">
           <header className="entity-header-primary">
             {this.props.type === "user" ? null : (
               <figure>

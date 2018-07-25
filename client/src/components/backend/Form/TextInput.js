@@ -70,7 +70,6 @@ class FormTextInput extends Component {
         <label htmlFor={id} className={labelClass}>
           {this.props.label}
         </label>
-        <Instructions instructions={this.props.instructions} />
         <input
           ref={input => {
             this.inputElement = input;
@@ -82,6 +81,7 @@ class FormTextInput extends Component {
           value={this.renderValue(this.props.value)}
           aria-describedby={errorId}
         />
+        <Instructions instructions={this.props.instructions} />
       </GlobalForm.Errorable>
     );
   }

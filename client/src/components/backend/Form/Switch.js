@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import setter from "./setter";
+import Instructions from "./Instructions";
 
 class FormSwitch extends Component {
   static displayName = "Form.Switch";
@@ -11,6 +12,7 @@ class FormSwitch extends Component {
     labelPos: PropTypes.string,
     className: PropTypes.string,
     labelClass: PropTypes.string,
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     set: PropTypes.func,
     value: PropTypes.any,
     customValues: PropTypes.shape({
@@ -131,6 +133,7 @@ class FormSwitch extends Component {
           </div>
         </div>
         {this.props.labelPos === "below" ? label : null}
+        <Instructions instructions={this.props.instructions} />
       </div>
     );
   }
