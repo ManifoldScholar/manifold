@@ -16,10 +16,10 @@
 
     .subtitle {
       @include templateCopy;
+      margin-top: 0.429em;
       font-size: 14px;
       font-style: italic;
       color: $neutral70;
-      margin-top: 0.429em;
     }
   }
 

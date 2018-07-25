@@ -8,8 +8,8 @@
   margin-bottom: 30px;
 
   @include respond($break95) {
-    align-items: center;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
   }
 
@@ -27,8 +27,8 @@
 
       .title {
         @include headingPrimary;
-        color: $neutral80;
         margin-bottom: 2px;
+        color: $neutral80;
 
         .bg-neutral90 & {
           color: $neutral30;

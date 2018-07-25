@@ -47,8 +47,8 @@
         left: 0;
         width: 100%;
         height: 4em;
-        background: linear-gradient(to top, $accentPrimary 10%, transparentize($accentPrimary, 1) 100%);
         content: '';
+        background: linear-gradient(to top, $accentPrimary 10%, transparentize($accentPrimary, 1) 100%);
         opacity: 0;
         transition: opacity $durationSlow $timing $duration;
       }
@@ -62,9 +62,9 @@
       position: relative;
       margin-top: -8px;
       color: $neutralOffBlack;
+      visibility: visible;
       background-color: $accentPrimary;
       opacity: 1;
-      visibility: visible;
       transition: margin $duration linear,
         color $duration $timing,
         opacity $duration $timing $durationFast,
@@ -76,8 +76,8 @@
 
       &.hidden {
         margin-top: -38px;
-        opacity: 0;
         visibility: hidden;
+        opacity: 0;
       }
     }
   }
@@ -91,8 +91,9 @@
     color: $neutralWhite;
     transition: color $duration $timing;
 
-    &:hover {
+    &:hover, &:focus {
       color: $accentPrimaryPale;
+      outline: 0;
     }
   }
 }

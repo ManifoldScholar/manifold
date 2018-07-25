@@ -64,9 +64,9 @@
   .note {
     @include templateHead;
     padding: 1em 17px 1.063em;
-    text-align: center;
     font-size: 16px;
     color: $neutralWhite;
+    text-align: center;
     letter-spacing: 0.005em;
     background-color: $neutral90;
   }

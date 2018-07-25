@@ -43,8 +43,8 @@
 
 .annotation-underline {
   cursor: pointer;
-  background-position: 0 100%;
   background-repeat: repeat-x;
+  background-position: 0 100%;
   background-size: 2px 2px;
 
   &.primary {
@@ -59,8 +59,8 @@
     .multiple {
       // Adds an additional background image
       background-image: linear-gradient($sp20Primary, $sp20Primary);
-      background-position: 0 100%;
       background-repeat: repeat-x;
+      background-position: 0 100%;
       background-size: 2px 2px;
 
       .scheme-dark & {
@@ -83,8 +83,8 @@
       // Built in css function
       // scss-lint:disable NameFormat
       background-image: linear-gradient($sp20Secondary, $sp20Secondary);
-      background-position: 0% 100%;
       background-repeat: repeat-x;
+      background-position: 0% 100%;
       background-size: 2px 2px;
     }
   }
@@ -103,8 +103,8 @@
       // Built in css function
       // scss-lint:disable NameFormat
       background-image: linear-gradient($sp20Tertiary, $sp20Tertiary);
-      background-position: 0% 100%;
       background-repeat: repeat-x;
+      background-position: 0% 100%;
       background-size: 2px 2px;
     }
   }

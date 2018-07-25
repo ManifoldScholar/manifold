@@ -1,9 +1,8 @@
 .login-page {
-
   .login-form {
     @include loginFormPrimary;
 
-    input[type="text"], input[type="password"] {
+    input[type='text'], input[type='password'] {
       width: 300px;
       border-color: $neutral40;
     }

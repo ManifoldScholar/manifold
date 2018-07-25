@@ -68,9 +68,9 @@
   .overlay-content {
     position: absolute;
     top: 80px;
-    width: 100%;
     bottom: 0;
     z-index: 0; // Local z-index inside overlay
+    width: 100%;
     overflow: scroll;
 
     &.focus {
@@ -96,7 +96,7 @@
   .login-form {
     @include loginFormPrimary;
 
-    input[type="text"], input[type="password"], input[type="submit"] {
+    input[type='text'], input[type='password'], input[type='submit'] {
       width: 100%;
     }
   }
@@ -107,8 +107,8 @@
     button {
       @include buttonUnstyled;
       display: block;
-      text-decoration: underline;
       font-style: italic;
+      text-decoration: underline;
 
       + button {
         margin-top: 14px;

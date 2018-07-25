@@ -48,8 +48,9 @@
         color: $accentPrimaryMedium;
       }
 
-      &:hover {
+      &:hover, &:focus {
         color: $accentPrimaryDark;
+        outline: 0;
       }
     }
 

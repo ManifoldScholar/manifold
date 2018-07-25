@@ -19,20 +19,21 @@
     @include buttonUnstyled;
     @include templateHead;
     display: block;
-    font-size: 18px;
     padding: 22px 20px;
+    font-size: 18px;
     color: $neutral75;
     text-decoration: none;
     letter-spacing: 0.004em;
     transition: color $duration $timing;
 
     @include respond($break60) {
-      padding: 26px 26px;
+      padding: 26px;
       font-size: 22px;
     }
 
-    &:hover {
+    &:hover, &:focus {
       color: $accentPrimary;
+      outline: 0;
 
       i, span {
         color: $accentPrimary;

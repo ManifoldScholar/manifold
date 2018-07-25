@@ -78,8 +78,8 @@
 
   .pagination-previous, .pagination-next {
     &.disabled a {
-      pointer-events: none;
       color: $neutral30;
+      pointer-events: none;
     }
   }
 }
@@ -101,8 +101,8 @@
 
   .pagination-previous, .pagination-next {
     &.disabled a {
-      pointer-events: none;
       color: $neutral80;
+      pointer-events: none;
     }
   }
 }

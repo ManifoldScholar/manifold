@@ -61,9 +61,10 @@
       padding: 0 25px 1px;
     }
 
-    &:hover {
+    &:hover, &:focus {
       color: $neutralWhite;
       background-color: $accentPrimary;
+      outline: 0;
     }
   }
 
@@ -84,9 +85,10 @@
     @include respond($break50) {
     }
 
-    &.active, &:hover {
+    &.active, &:hover, &:focus {
       color: $neutralWhite;
       background-color: $accentPrimaryLight;
+      outline: 0;
     }
 
     .manicon {

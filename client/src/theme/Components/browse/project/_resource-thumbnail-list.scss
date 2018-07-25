@@ -18,7 +18,7 @@
 
     @include respond($break60) {
       width: 33.333%;
-    };
+    }
 
     @include respond($break75) {
       width: 25%;

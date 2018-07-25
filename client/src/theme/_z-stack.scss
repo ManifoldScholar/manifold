@@ -79,6 +79,8 @@
   z-index: 100;
 }
 
+/* stylelint-disable selector-max-id */
 #global-notification-container .notifications-list {
   z-index: 200;
 }
+/* stylelint-enable selector-max-id */

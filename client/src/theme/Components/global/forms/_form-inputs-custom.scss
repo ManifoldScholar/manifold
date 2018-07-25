@@ -93,9 +93,8 @@
 }
 
 .repeater-primary {
-
   .buttons-icon-horizontal {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   .repeatable-input {
@@ -103,8 +102,8 @@
 
     .manicon-x {
       position: absolute;
-      right: 7px;
       top: 7px;
+      right: 7px;
       color: $sp40Tertiary;
 
       @include respond($break60) {

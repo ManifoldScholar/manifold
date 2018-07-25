@@ -147,7 +147,7 @@
   &::before, &::after {
     width: 45%;
     height: 1px;
-    background-color: $neutral80;
     content: '';
+    background-color: $neutral80;
   }
 }

@@ -49,4 +49,16 @@
       visibility: visible;
     }
   }
+
+  input:focus {
+    outline: 0;
+
+    ~ .control-indicator {
+      background-color: $focusPrimary;
+
+      .manicon-check {
+        color: $neutral90;
+      }
+    }
+  }
 }

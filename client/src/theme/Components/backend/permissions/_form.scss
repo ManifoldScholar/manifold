@@ -1,5 +1,4 @@
 .permissions-form {
-
   .user {
     display: flex;
     align-items: center;
@@ -15,9 +14,9 @@
         margin: 0;
         font-size: 16px;
         line-height: 21px;
+        color: $neutral30;
         letter-spacing: 0.015em;
         transition: color $duration $timing;
-        color: $neutral30;
 
         @include respond($break80) {
           font-size: 18px;

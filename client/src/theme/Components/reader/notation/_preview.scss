@@ -48,8 +48,9 @@
     text-decoration: none;
     transition: color $duration $timing;
 
-    &:hover, &.active {
+    &:hover, &.active, &:focus {
       color: $accentPrimary;
+      outline: 0;
 
       .icon-thumbnail-primary {
         background-color: $accentPrimary;

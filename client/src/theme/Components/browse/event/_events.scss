@@ -1,6 +1,6 @@
 // <ul>
 .event-list-primary {
-  @include listUnstyled();
+  @include listUnstyled;
   display: flex;
   flex-wrap: wrap;
   padding-top: 20px;
@@ -35,7 +35,7 @@
 }
 
 .event-list-secondary {
-  @include listUnstyled();
+  @include listUnstyled;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: -28px;
@@ -117,8 +117,8 @@
   .event-data {
     position: relative;
     display: flex;
-    align-items: center;
     flex-grow: 2;
+    align-items: center;
     padding-left: 50px;
 
     @include respond($break60) {

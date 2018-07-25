@@ -40,9 +40,10 @@
       text-transform: none;
       transition: color $duration $timing;
 
-      &:hover {
+      &:hover, div[role='button']:focus {
         color: $neutral70;
         cursor: pointer;
+        border: 0;
       }
     }
 
@@ -106,55 +107,77 @@
           }
         }
 
-        &:hover {
+        &:hover, &:focus {
           color: $neutral75;
           cursor: pointer;
           background-color: $accentPrimaryLight;
+          border: 0;
+          border-bottom: 2px solid $neutral40;
+          outline: 0;
         }
       }
+    }
 
-      ul {
-        overflow: hidden;
+    ul ul {
+      overflow: hidden;
 
-        .item {
-          justify-content: flex-start;
-          padding: 18px 20px;
-          color: $neutral90;
-          border-bottom: none;
-          transition: color $duration $timing,
-            background-color $duration $timing;
+      .item {
+        justify-content: flex-start;
+        padding: 18px 20px;
+        color: $neutral90;
+        border-bottom: none;
+        transition: color $duration $timing,
+          background-color $duration $timing;
 
-          @include respond($break65) {
-            padding: 18px 32px 18px 60px;
+        @include respond($break65) {
+          padding: 18px 32px 18px 60px;
+        }
+
+        i {
+          font-size: 20px;
+          color: $neutral50;
+          transform: rotate(0);
+
+          @include respond($break50) {
+            font-size: 21px;
           }
+        }
 
-          i {
-            font-size: 20px;
-            color: $neutral50;
-            transform: rotate(0);
+        span {
+          font-weight: 400;
+        }
 
-            @include respond($break50) {
-              font-size: 21px;
-            }
-          }
+        &:hover {
+          color: $neutral75;
+        }
 
-          span {
-            font-weight: 400;
-          }
+        &:focus {
+          color: $neutral75;
+          background-color: $accentPrimaryLight;
+          border: 0;
+          outline: 0;
+        }
+
+        &:nth-child(odd) {
+          background-color: $neutral20;
 
           &:hover {
+            background-color: $accentPrimaryLight;
+            border: 0;
+          }
+
+          &:focus {
             color: $neutral75;
+            background-color: $accentPrimaryLight;
+            border: 0;
+            outline: 0;
           }
+        }
 
-          &:nth-child(odd) {
-            background-color: $neutral20;
+        &:last-child {
+          border-bottom: 2px solid $neutral40;
 
-            &:hover {
-              background-color: $accentPrimaryLight;
-            }
-          }
-
-          &:last-child {
+          &:hover, &:focus {
             border-bottom: 2px solid $neutral40;
           }
         }

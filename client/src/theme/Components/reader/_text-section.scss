@@ -1,5 +1,5 @@
 @mixin chapterHeading {
-  @include readerHead();
+  @include readerHead;
   // NB: All styles within text-sections use relative font sizes
   font-size: 2.682em;
   font-weight: $semibold;
@@ -31,7 +31,7 @@
 
 .text-section {
   // Reader text temporary defaults
-  font-family: "freight-text-pro", serif;
+  font-family: 'freight-text-pro', serif;
   font-weight: $regular;
   line-height: 1.761;
   letter-spacing: 0.01em;
@@ -45,7 +45,7 @@
   }
 
   &.font-sans-serif {
-    font-family: "sofia-pro",sans-serif;
+    font-family: 'sofia-pro', sans-serif;
     font-weight: $light;
   }
 
@@ -110,14 +110,15 @@
 
   // Link with notation marker cube
   .notation-marker {
-    cursor: pointer;
-    font-size: 1em;
     display: inline-flex;
     align-self: center;
     margin: 0 0.18em;
+    font-size: 1em;
     text-decoration: none;
-    letter-spacing: normal;
     text-indent: 0;
+    letter-spacing: normal;
+    cursor: pointer;
+
     i {
       position: relative;
     }
@@ -132,13 +133,4 @@
     background-color: $sp20SecondaryLight;
     transition: background-color 1s ease;
   }
-
-
-  //h2 {
-  //  @include chapterHeading;
-  //
-  //  &:first-child {
-  //    margin-bottom: 96px;
-  //  }
-  //}
 }

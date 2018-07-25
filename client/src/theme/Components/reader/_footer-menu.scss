@@ -44,6 +44,10 @@
       &.button-active {
         background-color: $neutral10;
       }
+
+      &:focus {
+        @include focusOutline;
+      }
     }
   }
 }
