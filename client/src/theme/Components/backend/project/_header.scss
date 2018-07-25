@@ -1,7 +1,9 @@
 %header-utility-button {
   .button-bare-primary {
     // Scoped colors/hovers
-    color: $neutral75;
+    color: $neutral50;
+    font-size: 12px;
+    letter-spacing: 0.125em;
     transition: color $duration $timing;
 
     &:hover, &:focus {
@@ -62,7 +64,7 @@
 
       @include respond($break30) {
         margin-top: -0.429em;
-        font-size: 0.875em;
+        font-size: 0.917em;
       }
     }
 
@@ -91,8 +93,8 @@
       color: $sp40Tertiary;
 
       @include respond($break30) {
-        margin-top: -0.471em;
-        font-size: 1.063em;
+        margin-top: -0.371em;
+        font-size: 1.333em;
       }
     }
 
@@ -100,10 +102,10 @@
 }
 
 .entity-header-primary {
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 
   @include respond($break60) {
-    padding-bottom: 39px;
+    // padding-bottom: 39px;
   }
 
   @include respond($break65) {
@@ -164,13 +166,12 @@
       }
 
       @include respond($break60) {
-        font-size: 24px;
+        font-size: 23px;
       }
 
       @include respond($break65) {
         float: none;
         max-width: none;
-        font-size: 28px;
       }
 
       .subtitle {

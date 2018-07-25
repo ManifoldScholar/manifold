@@ -341,3 +341,10 @@
     color: $accentPrimary;
   }
 }
+
+// Dark panel with rounded corners
+// used widely on the backend
+@mixin panelRounded {
+  background-color: $neutral95;
+  border-radius: 8px;
+}

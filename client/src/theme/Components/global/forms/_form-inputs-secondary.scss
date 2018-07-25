@@ -8,7 +8,7 @@
   height: 32px;
 
   // Declared in em as it should change with font size
-  padding: 0;
+  padding: 0 0 0.25em;
   color: $neutral40;
   vertical-align: top;
   background-color: transparent;
@@ -19,7 +19,7 @@
   transition: border-color $duration $timing;
 
   @include respond($break60) {
-    height: 41px;
+    height: 48px;
   }
 
   .bg-neutral90 & {
@@ -66,7 +66,7 @@
   .instructions {
     @include templateCopy;
     display: block;
-    margin-bottom: 0.5em;
+    margin-top: 0.75em;
     font-size: 15px;
     font-style: italic;
     color: $neutral50;
@@ -91,7 +91,7 @@
       display: block;
       margin-top: 0;
       margin-bottom: 0.5em;
-      color: $neutral75;
+      color: $neutral70;
 
       &.below {
         margin-top: 0.6em;
@@ -145,13 +145,42 @@
       }
     }
 
+    &.form-toggle-secondary {
+      // styled is fudged to look like other inputs
+      // though functionality is different
+      position: relative;
+
+      .form-input-heading {
+        @include formInputSecondary;
+        letter-spacing: inherit;
+        text-transform: inherit;
+
+        @include respond($break60) {
+          height: 38px;
+        }
+      }
+
+      .toggle-indicator {
+        position: absolute;
+        top: 2px;
+        right: 0;
+      }
+
+      .instructions {
+        margin-bottom: 0;
+      }
+    }
+
     .button-secondary {
       display: inline-block;
       width: auto;
     }
 
     &.submit {
-      .button-secondary {
+      margin-left: 24px;
+      margin-right: 24px;
+
+      .button-secondary, .button-secondary-dull {
         line-height: normal;
 
         + .button-secondary {
@@ -182,13 +211,11 @@
 
     select {
       @include formInputSecondary;
-      height: auto;
       padding: 0 42px 0 0; // OD
       line-height: 1.8;
       text-transform: none; // OD
 
       @include respond($break60) {
-        height: auto; // OD
         padding-bottom: 3px;
         line-height: 1.7;
       }

@@ -51,21 +51,19 @@ export default class ProjectGeneralContainer extends PureComponent {
               />
             </Form.FieldGroup>
             <Form.FieldGroup
-              horizontal
               label="Visibility"
-              instructions="Draft projects are only visible to admins. Featured projects are highlighted on the home page."
             >
               <Form.Switch
+                className="form-toggle-secondary"
                 label="Draft Mode"
-                labelClass="secondary"
-                labelPos="below"
                 name="attributes[draft]"
+                instructions="Draft projects are only visible to admins."
               />
               <Form.Switch
+                className="form-toggle-secondary"
                 label="Featured"
-                labelClass="secondary"
-                labelPos="below"
                 name="attributes[featured]"
+                instructions="Featured projects are highlighted on the home page."
               />
             </Form.FieldGroup>
             <Form.FieldGroup label="Social">
@@ -96,8 +94,16 @@ export default class ProjectGeneralContainer extends PureComponent {
                 label="Publication Date"
                 name="attributes[publicationDate]"
               />
-              <Project.Form.Subjects project={project} {...this.props} />
-              <Project.Form.AvatarBuilder project={project} {...this.props} />
+              <Project.Form.Subjects
+                wide
+                project={project}
+                {...this.props}
+              />
+              <Project.Form.AvatarBuilder
+                wide
+                project={project}
+                {...this.props}
+              />
             </Form.FieldGroup>
             <Form.Save text="Save Project" />
           </FormContainer.Form>

@@ -1,10 +1,11 @@
 .breadcrumb-primary {
   @include utilityPrimary;
   display: block;
-  padding: 20px 0 18px;
+  padding: 18px 0 16px;
   font-size: 13px;
   line-height: 1.4;
   color: $neutral70;
+  background-color: #262626;
   text-decoration: none;
 
   @include respond($break40) {

@@ -3,21 +3,29 @@
 
   .container {
     @include clearfix;
+
+    // CABS abstract rather than override the mixin
+    // if used elsewhere
+    &:not(.flush) {
+      padding-top: 42px;
+    }
   }
 
   .aside {
+    @include panelRounded;
     display: none;
     float: left;
     width: 130px;
-    padding-right: 20px;
+    margin-right: 20px;
 
     @include respond($break40) {
       display: block;
     }
 
     @include respond($break75) {
-      width: 200px;
-      padding-right: 24px;
+      width: 192px;
+      margin-right: 46px;
+      padding: 25px 31px 45px;
     }
   }
 
@@ -30,7 +38,7 @@
     }
 
     @include respond($break75) {
-      width: calc(100% - 200px);
+      width: calc(100% - 238px);
     }
   }
 
@@ -43,18 +51,25 @@
 
     li {
       + li {
-        margin-top: 2.375em;
-        font-size: 16px;
+        margin-top: 0.89em;
       }
     }
 
     a {
+      // CABS create a new mixin for this if repeated
       @include utilityPrimary;
-      color: $neutral50;
+      color: $neutral75;
+      text-transform: none;
       text-decoration: none;
+      font-size: 17px;
+      letter-spacing: 0;
       transition: color $duration $timing;
 
       &:hover{
+        color: $neutral20;
+      }
+
+      &.active {
         color: $neutral20;
       }
 

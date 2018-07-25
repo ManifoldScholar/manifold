@@ -1,0 +1,18 @@
+// Global backend header design
+.backend-header {
+  @include panelRounded;
+  max-width: 1135px;
+  margin: 42px auto 0;
+
+  > * {
+    @include containerPrototype;
+  }
+
+  .breadcrumb-primary {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .wrapper {
+    padding-top: 25px;
+  }
+}

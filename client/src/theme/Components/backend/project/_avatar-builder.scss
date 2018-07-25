@@ -3,13 +3,10 @@
   @mixin sectionLabel {
     @include templateHead;
     font-size: 14px;
-    color: $neutral30;
+    color: $neutral20;
+    font-weight: $semibold;
     text-transform: uppercase;
-    letter-spacing: 0.075em;
-
-    @include respond($break50) {
-      font-size: 16px;
-    }
+    letter-spacing: 0.107em;
   }
 
   @mixin utilityMessage {
@@ -19,7 +16,7 @@
     line-height: 1.533em;
     color: $neutral70;
     text-transform: uppercase;
-    letter-spacing: 0.075em;
+    letter-spacing: 0.125em;
 
     @include respond($break50) {
       font-size: 12px;
@@ -31,10 +28,10 @@
   .grid {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 20px;
     text-align: center;
 
     @include respond($break95) {
-      display: flex;
       flex-wrap: nowrap;
       justify-content: center;
     }

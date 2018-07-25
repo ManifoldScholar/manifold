@@ -8,19 +8,45 @@
   }
 
   .form-section-label {
+    @include panelRounded;
     display: table;
     width: 100%;
-    padding: 1.063em 19px 0.938em;
-    margin-bottom: 19px;
+    padding: 0.563em 1.5em 1em;
+    margin-bottom: 20px;
     font-size: 16px;
-    background-color: $neutral95;
 
     span {
       @include utilityPrimary;
       display: table-cell;
       width: 100%;
-      font-weight: $medium;
       color: $accentPrimary;
+      font-size: 14px;
+      font-weight: $semibold;
+      letter-spacing: 0.1em;
+    }
+  }
+
+  .form-input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-right: 24px;
+    padding-left: 24px;
+
+    > .form-input {
+      flex: 0 1 47.64%;
+      margin-top: 18px;
+      margin-bottom: 20px;
+
+      &.wide {
+        flex-basis: 100%;
+      }
+
+      // &:nth-child(2n+1) {
+      //   @include respond($break60) {
+      //     // margin-right: 40px;
+      //   }
+      // }
     }
   }
 
