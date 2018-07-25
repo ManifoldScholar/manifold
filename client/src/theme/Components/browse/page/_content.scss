@@ -6,11 +6,11 @@
 
   @mixin pageContentHeading {
     @include templateHead;
-    color: $neutral80;
     margin-top: 0;
     margin-bottom: 1em;
     font-weight: $medium;
     line-height: 1.32;
+    color: $neutral80;
   }
 
   h1 {

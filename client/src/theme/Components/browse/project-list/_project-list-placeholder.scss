@@ -1,17 +1,17 @@
 .container {
   .project-list-placeholder {
-    text-align: center;
     padding-top: 50px;
     padding-bottom: 50px;
+    text-align: center;
 
     .section-heading {
       margin-bottom: 20px;
 
       .main {
         display: block;
-        text-align: center;
         width: 100%;
         padding: 0;
+        text-align: center;
 
         .title {
           color: $neutral75;
@@ -30,11 +30,11 @@
 
   .centered-message {
     @include templateCopy;
+    width: 90%;
+    margin: 0 auto 35px;
     font-size: 19px;
     line-height: 1.3;
-    margin: 0 auto 35px;
     color: $neutral75;
-    width: 90%;
 
     @include respond($break90) {
       width: 60%;

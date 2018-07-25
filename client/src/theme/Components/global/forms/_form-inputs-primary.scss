@@ -647,9 +647,9 @@
     @include templateHead;
     display: block;
     padding: 0.6em 0.8em;
+    overflow: hidden;
     font-weight: $semibold;
     color: $neutral90;
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     background-color: $neutral20;

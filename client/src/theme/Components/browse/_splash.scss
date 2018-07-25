@@ -41,7 +41,7 @@
       @include templateCopy;
       line-height: 1.353em;
 
-      & + p {
+      + p {
         margin-top: 1em;
       }
     }
@@ -73,7 +73,7 @@
     margin-top: 1.5em;
 
     .button-bare-primary, .button-bare-primary {
-      font-size: .8em;
+      font-size: 0.8em;
     }
 
     .button-bare-primary + .button-bare-primary {
@@ -102,7 +102,7 @@
   }
 
   .heading-primary + .heading-secondary {
-    margin-top: .3em;
+    margin-top: 0.3em;
   }
 
   &.feature-dark-style {

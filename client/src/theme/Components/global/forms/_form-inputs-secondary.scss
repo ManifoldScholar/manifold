@@ -26,9 +26,9 @@
     &:-webkit-autofill {
       box-shadow: 0 0 0 1000px $neutral90 inset;
       // Important required to override chrome default
-      // scss-lint:disable ImportantRule
+      /* stylelint-disable declaration-no-important */
       -webkit-text-fill-color: $accentPrimaryPale !important;
-      // scss-lint:enable ImportantRule
+      /* stylelint-enable declaration-no-important */
     }
   }
 
@@ -108,7 +108,7 @@
 
     }
 
-    input[type="text"], input[type="password"] {
+    input[type='text'], input[type='password'] {
       @include formInputSecondary;
       transition: border-color $duration $timing;
 
@@ -131,7 +131,7 @@
 
       @include respond($break70) {
         padding: 1.579em;
-        font-size: 19px
+        font-size: 19px;
       }
     }
 
@@ -299,8 +299,8 @@
     }
 
     .contents-empty {
-      margin: auto;
       padding: 15px;
+      margin: auto;
     }
 
     .remove {
@@ -383,7 +383,7 @@
     }
 
     &.style-horizontal {
-      padding: 34px 0 37px 0;
+      padding: 34px 0 37px;
 
       .contents-empty .secondary {
         display: none;

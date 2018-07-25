@@ -21,9 +21,9 @@
   }
 
   ul li > i {
+    margin-right: 10px;
     font-size: 23px;
     color: $neutral75;
-    margin-right: 10px;
 
     &::before {
       vertical-align: middle;
@@ -32,19 +32,19 @@
 
   label, span {
     @include utilityPrimary;
-    color: $neutral75;
     font-size: 14px;
+    color: $neutral75;
   }
 
   .filters {
-    padding-top: 22px;
     display: flex;
     justify-content: space-between;
+    padding-top: 22px;
 
     .checkbox {
-      text-transform: none;
       font-size: 17px;
       font-weight: 400;
+      text-transform: none;
     }
   }
 }

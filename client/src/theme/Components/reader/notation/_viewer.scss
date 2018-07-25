@@ -54,7 +54,9 @@
         opacity: 0;
       }
 
-      &:hover, &.highlighted, .highlighted & {
+      &:hover, &:focus, &.highlighted, .highlighted & {
+        outline: 0;
+
         .icon-thumbnail-title {
           color: $accentPrimary;
         }
@@ -180,8 +182,9 @@
     background-color: $neutral40;
     transition: background-color $duration $timing;
 
-    &:hover {
+    &:hover, &:focus {
       background-color: $sp30Tertiary;
+      outline: 0;
     }
   }
 }
@@ -242,7 +245,9 @@
       position: relative;
       cursor: pointer;
 
-      &.highlighted {
+      &.highlighted, a:focus {
+        outline: 0;
+
         .icon-thumbnail-primary::before {
           opacity: 0.5;
         }

@@ -18,8 +18,9 @@
       font-size: 18px;
     }
 
-    &:hover {
+    &:hover, &:focus {
       color: $accentPrimary;
+      outline: 0;
     }
 
     .manicon {

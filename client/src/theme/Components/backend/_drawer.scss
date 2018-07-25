@@ -56,7 +56,7 @@
   }
 
   @include respond($break120 + (500 * 2)) {
-    width: calc((100vw - #{$containerWidthInner})/2);
+    width: calc((100vw - #{$containerWidthInner}) / 2);
     padding: 33px 70px;
 
     .drawer-enter & {
@@ -119,11 +119,11 @@
   }
 
   .heading-quaternary {
-    padding: 5px 0 1em;
-    color: $neutralWhite;
     display: flex;
     align-items: center;
     min-width: 0;
+    padding: 5px 0 1em;
+    color: $neutralWhite;
 
     @include respond($break50) {
       padding: 32px 0 1.1em;
@@ -134,9 +134,9 @@
     }
 
     span {
-      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &.less-space-bottom {

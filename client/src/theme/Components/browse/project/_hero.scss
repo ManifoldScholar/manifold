@@ -16,8 +16,8 @@
 
   // When a hero image is present, set background properties and an overlay
   &.hero-image {
-    background-position: 50% 50%;
     background-repeat: no-repeat;
+    background-position: 50% 50%;
     background-size: cover;
 
     &::before {
@@ -27,8 +27,8 @@
       display: block;
       width: 100%;
       height: 100%;
-      background-color: transparentize($neutralBlack, 0.3);
       content: '';
+      background-color: transparentize($neutralBlack, 0.3);
     }
   }
 
@@ -201,8 +201,8 @@
       }
 
       img {
-        height: auto;
         max-width: 100%;
+        height: auto;
       }
     }
 
@@ -480,8 +480,8 @@
     }
 
     img {
-      height: auto;
       max-width: 100%;
+      height: auto;
     }
 
     .button-tagged {

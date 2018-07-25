@@ -22,7 +22,9 @@
       padding: 64px 0 101px;
     }
 
-    &:hover {
+    &:hover, &:focus {
+      outline: 0;
+
       h3 {
         color: $accentPrimary;
       }
@@ -39,7 +41,7 @@
   }
 
   h3 {
-    @include templateHead();
+    @include templateHead;
     font-size: 24px;
     font-weight: $semibold;
     color: $neutral70;

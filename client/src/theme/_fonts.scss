@@ -7,67 +7,67 @@
 // --------------------------
 @font-face {
   font-family: 'aleo';
+  font-style: normal;
+  font-weight: $regular;
   src: url('assets/fonts/aleo/aleo-regular/Aleo-Regular.woff') format('woff');
-  font-weight: $regular;
-  font-style: normal;
 }
 
 @font-face {
   font-family: 'aleo';
-  src: url('assets/fonts/aleo/aleo-italic/Aleo-Italic.woff') format('woff');
-  font-weight: $regular;
   font-style: italic;
+  font-weight: $regular;
+  src: url('assets/fonts/aleo/aleo-italic/Aleo-Italic.woff') format('woff');
 }
 
 @font-face {
   font-family: 'aleo';
-  src: url('assets/fonts/aleo/aleo-light/Aleo-Light.woff') format('woff');
+  font-style: normal;
   font-weight: $light;
-  font-style: normal;
+  src: url('assets/fonts/aleo/aleo-light/Aleo-Light.woff') format('woff');
 }
 
 @font-face {
   font-family: 'aleo';
-  src: url('assets/fonts/aleo/aleo-bold/Aleo-Bold.woff') format('woff');
-  font-weight: $bold;
   font-style: normal;
+  font-weight: $bold;
+  src: url('assets/fonts/aleo/aleo-bold/Aleo-Bold.woff') format('woff');
 }
 
 // TypeKit fallback san-serif font
 // --------------------------
 @font-face {
   font-family: 'trueno';
+  font-style: normal;
+  font-weight: $regular;
   src: url('assets/fonts/trueno/trueno-regular/TruenoRg.woff') format('woff');
-  font-weight: $regular;
-  font-style: normal;
 }
 
 @font-face {
   font-family: 'trueno';
-  src: url('assets/fonts/trueno/trueno-italic/TruenoRgIt.woff') format('woff');
-  font-weight: $regular;
   font-style: italic;
+  font-weight: $regular;
+  src: url('assets/fonts/trueno/trueno-italic/TruenoRgIt.woff') format('woff');
 }
 
 @font-face {
   font-family: 'trueno';
-  src: url('assets/fonts/trueno/trueno-bold/TruenoBd.woff') format('woff');
+  font-style: normal;
   font-weight: $bold;
-  font-style: normal;
+  src: url('assets/fonts/trueno/trueno-bold/TruenoBd.woff') format('woff');
 }
 
 @font-face {
   font-family: 'trueno';
-  src: url('assets/fonts/trueno/trueno-semi/TruenoSBd.woff') format('woff');
+  font-style: normal;
   font-weight: $semibold;
-  font-style: normal;
+  src: url('assets/fonts/trueno/trueno-semi/TruenoSBd.woff') format('woff');
 }
 
 @font-face {
   font-family: 'trueno';
-  src: url('assets/fonts/trueno/trueno-light/TruenoLt.woff') format('woff');
-  font-weight: $light;
   font-style: normal;
+  font-weight: $light;
+  src: url('assets/fonts/trueno/trueno-light/TruenoLt.woff') format('woff');
 }
 
 // Mixins

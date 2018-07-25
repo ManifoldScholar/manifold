@@ -12,8 +12,8 @@
       @include templateHead;
       padding: 6px 20px 8px 0;
       font-size: 15px;
-      letter-spacing: 0.015em;
       color: $neutral50;
+      letter-spacing: 0.015em;
       border-bottom: 1px solid $neutral80;
 
       @include respond($break40) {

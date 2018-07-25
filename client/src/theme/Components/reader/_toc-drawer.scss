@@ -1,10 +1,10 @@
 .toc-drawer {
   .drawer-reader {
     $drawerWidth: 565px;
-    padding: 47px 0 0;
-    height: 100%;
     width: $drawerWidth;
     max-width: 90vw;
+    height: 100%;
+    padding: 47px 0 0;
   }
 
   .no-scroll.overlay & {
@@ -48,12 +48,9 @@
         transition: color $duration $timing,
           background-color $duration $timing;
 
-        &:hover {
+        &:hover, &:focus {
           color: $neutral75;
           background-color: $accentPrimaryPale;
-        }
-
-        &:focus {
           outline: 0;
         }
 
@@ -66,7 +63,7 @@
     // Top Level links
     > ul > li {
       > a {
-        @include tocBasePadding();
+        @include tocBasePadding;
         padding-top: 1.091em;
         padding-bottom: 1.136em;
         font-size: 18px;
@@ -79,7 +76,7 @@
       > ul > li {
         // Secondary level globals
         a {
-          @include tocBasePadding();
+          @include tocBasePadding;
           padding-top: 0.5em;
           padding-bottom: 0.667em;
           font-size: 16px;
@@ -108,8 +105,8 @@
     @include headingSecondary;
     padding: 50px 40px;
     margin: 0;
-    color: $neutral50;
     font-style: italic;
+    color: $neutral50;
 
     @include respond($break50) {
       padding: 60px 85px;
@@ -122,7 +119,7 @@
   }
 
   .toc-footer {
-    @include tocBasePadding();
+    @include tocBasePadding;
     display: block;
     padding-top: 30px;
     padding-bottom: 71px;
@@ -136,6 +133,10 @@
       @include buttonUnstyled;
       color: $neutral50;
       text-decoration: none;
+
+      &:focus {
+        @include focusOutline;
+      }
     }
 
     h4 {

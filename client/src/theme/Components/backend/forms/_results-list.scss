@@ -16,9 +16,9 @@
 
     li {
       display: flex;
-      justify-content: space-between;
       flex-direction: column;
       align-items: flext-start;
+      justify-content: space-between;
       width: 100%;
       padding: 10px 0 14px;
       color: $neutral30;
@@ -43,7 +43,7 @@
       &.state-pending{
         color: $sp30Primary;
 
-        & a {
+        a {
           color: $sp30Primary;
         }
       }
@@ -55,7 +55,7 @@
       &.state-queued, &.state-importing {
         color: $sp30Secondary;
 
-        & a {
+        a {
           color: $sp30Secondary;
         }
       }
@@ -67,7 +67,7 @@
       &.state-imported {
         color: $accentPrimaryDull;
 
-        & a {
+        a {
           color: $accentPrimaryDull;
         }
       }
@@ -102,9 +102,9 @@
 
       .subtitle {
         @include headingSecondary;
-        line-height: 1.4;
-        font-size: 16px;
         margin: 5px 0;
+        font-size: 16px;
+        line-height: 1.4;
 
         @include respond($break60) {
           font-size: 18px;
@@ -130,19 +130,19 @@
       }
 
       .specifier {
-        color: $neutral30;
         padding-left: 5px;
+        color: $neutral30;
       }
     }
 
     .results-secondary {
       @include utilityPrimary;
       order: 0;
+      margin-bottom: 2px; // NP
       font-size: 14px;
       color: $neutral70;
       white-space: nowrap;
       vertical-align: middle;
-      margin-bottom: 2px; // NP
 
       @include respond($break60) {
         order: 1;

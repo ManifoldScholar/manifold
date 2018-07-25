@@ -9,8 +9,8 @@
   }
 
   .section-title {
-    color: $neutral40;
     margin-bottom: 10px;
+    color: $neutral40;
   }
 
   li {
@@ -33,10 +33,10 @@
 
     .manicon {
       display: inline-block;
+      margin-right: 7px;
+      font-size: 15px;
       color: $accentPrimary;
       text-decoration: none;
-      font-size: 15px;
-      margin-right: 7px;
     }
 
     + li {

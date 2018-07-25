@@ -30,8 +30,7 @@
   }
 
   .utility {
-
-    padding-top: 0px;
+    padding-top: 0;
 
     @include respond($break70) {
       padding-top: 25px;
@@ -46,6 +45,7 @@
 
     ul {
       @include listHorizontal;
+
       li {
         + li {
           margin-left: 1.571em;
@@ -59,11 +59,12 @@
         color: $neutral40;
         transition: color $duration $timing;
 
-        &:hover, &.active {
+        &:hover, &.active, &:focus {
           color: $accentPrimaryDark;
+          outline: 0;
         }
 
-        &.deny:hover {
+        &.deny:hover, &.deny:focus {
           color: $sp40Tertiary;
         }
       }

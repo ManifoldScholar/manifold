@@ -50,7 +50,7 @@
   .results {
     @include listUnstyled;
 
-    & + .list-pagination-primary {
+    + .list-pagination-primary {
       margin-top: 65px;
     }
 
@@ -62,8 +62,8 @@
     // <a>
     .result {
       display: flex;
-      align-items: flex-start;
       flex-wrap: wrap;
+      align-items: flex-start;
       padding: 28px 14px;
       font-weight: $light;
       color: $neutral80;
@@ -86,17 +86,13 @@
       .title {
         @include templateHead;
         margin: 0 0 8px;
-        color: $neutralOffBlack;
         font-size: 15px;
         font-weight: $semibold;
+        color: $neutralOffBlack;
 
         @include respond($break70) {
           font-size: 18px;
         }
-      }
-
-      .highlights {
-
       }
 
       .title-parent {
@@ -112,16 +108,15 @@
         }
       }
 
-
       .image {
-        margin-right: 12px;
         min-width: 50px;
         max-width: 50px;
+        margin-right: 12px;
 
         @include respond($break65) {
-          margin-right: 20px;
           width: 7.813vw;
           max-width: 7.813vw;
+          margin-right: 20px;
         }
 
         @include respond($break90) {
@@ -155,14 +150,14 @@
       }
 
       .date {
-        @include resultSubtitle();
+        @include resultSubtitle;
         font-style: italic;
       }
 
       .marker {
         @include blockLabel;
-        white-space: nowrap;
         margin-top: 16px;
+        white-space: nowrap;
 
         @include respond($break75) {
           margin-top: 0;
@@ -192,7 +187,7 @@
         display: inline;
 
         &::after {
-          content: ', ',
+          content: ', ';
         }
 
         &:last-child::after {

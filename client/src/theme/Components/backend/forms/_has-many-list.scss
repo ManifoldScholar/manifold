@@ -7,7 +7,7 @@
     li {
       display: table;
       width: 100%;
-      padding: 10px 0 10px;
+      padding: 10px 0;
 
       @include respond($break60) {
         padding: 17px 0 9px;

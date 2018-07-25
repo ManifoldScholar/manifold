@@ -55,11 +55,11 @@
   .resource-description {
     @include templateCopy;
     max-width: $slideCopyFocus;
+    height: 48px;
+    padding-bottom: 5em;
     overflow: visible;
     font-size: 15px;
     color: $neutral40;
-    height: 48px;
-    padding-bottom: 5em;
 
     @include respond($break40) {
       padding-bottom: 3.5em;

@@ -14,8 +14,8 @@
       p {
         @include templateHead;
         font-size: 16px;
-        letter-spacing: 0.015em;
         color: $neutral40;
+        letter-spacing: 0.015em;
 
         @include respond($break30) {
           font-size: 18px;

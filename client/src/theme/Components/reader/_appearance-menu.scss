@@ -18,18 +18,19 @@
 
   ul li {
     &:last-child {
-      border-top: none;
       padding: 0;
+      border-top: none;
 
       @include respond($break50) {
         border-top: 2px solid $neutral30;
+
         &:last-child {
-          border-top: none;
           padding: 0;
+          border-top: none;
 
           @include respond($break40) {
-            border-top: 2px solid $neutral30;
             padding: 30px 28px;
+            border-top: 2px solid $neutral30;
           }
         }
       }
@@ -63,9 +64,10 @@
       border-color: $neutralOffBlack;
     }
 
-    &:hover {
+    &:hover, &:focus {
       color: $accentPrimary;
       border-color: $accentPrimary;
+      outline: 0;
     }
 
     &.serif {
@@ -105,9 +107,10 @@
         height: 35px;
       }
 
-      &:hover {
+      &:hover, &:focus {
         color: $neutralWhite;
         background-color: $accentPrimary;
+        outline: 0;
       }
 
       &:disabled {
@@ -171,8 +174,9 @@
       }
     }
 
-    &:hover {
+    &:hover, &:focus {
       border-color: $accentPrimary;
+      outline: 0;
 
       .manicon {
         opacity: 1;
@@ -193,7 +197,7 @@
     }
 
     button {
-      @include buttonUnstyled();
+      @include buttonUnstyled;
       width: calc(50% - 10px);
       height: 46px;
       background-color: $neutralWhite;
@@ -232,7 +236,7 @@
       }
 
       // Icon coloring
-      .manicon-margins-narrow-text,  .manicon-margins-wide-text {
+      .manicon-margins-narrow-text, .manicon-margins-wide-text {
         color: $neutral40;
       }
 
@@ -240,8 +244,9 @@
         color: $neutralOffBlack;
       }
 
-      &:hover {
+      &:hover, &:focus {
         background-color: $accentPrimary;
+        outline: 0;
 
         i {
           color: $neutralWhite;

@@ -10,7 +10,7 @@
     margin-bottom: 1.313em;
     font-size: 14px;
     color: $neutral70;
-    
+
     @include respond($break60) {
       font-size: 16px;
     }
@@ -35,11 +35,11 @@
     padding: 18px 27px;
     font-size: 16px;
     line-height: 1.375;
+    resize: none;
     background-color: $neutralWhite;
     border: 0;
     outline: 0;
     transition: height $durationFast $timing;
-    resize: none;
 
     &.expanded {
       height: 145px;
@@ -84,7 +84,7 @@
       }
     }
 
-    .button-secondary[disabled=disabled], .button-secondary:disabled {
+    .button-secondary[disabled='disabled'], .button-secondary:disabled {
       background-color: $accentPrimaryDull;
     }
   }
