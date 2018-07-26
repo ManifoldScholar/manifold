@@ -71,11 +71,10 @@ RSpec.describe Ingestions::Compiler do
   end
 
   describe "a markdown document ingestion" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single", "minimal-single.md") }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single") }
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
-      allow(ingestion).to receive(:source_file_name).and_return("minimal-single.md")
       ingestion
     end
     let(:context) { create_context(ingestion) }
@@ -87,9 +86,9 @@ RSpec.describe Ingestions::Compiler do
       end.to change(Text, :count).by(1)
                .and change(TextSection, :count).by(1)
                       .and change(TextTitle, :count).by(1)
-                             .and change(IngestionSource, :count).by(1)
+                             .and change(IngestionSource, :count).by(2)
                                     .and change(Maker, :count).by(2)
-                                           .and change(Stylesheet, :count).by(0)
+                                           .and change(Stylesheet, :count).by(1)
     end
   end
 

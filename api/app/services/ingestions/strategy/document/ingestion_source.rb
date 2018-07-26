@@ -19,7 +19,7 @@ module Ingestions
         end
 
         def source_identifier
-          Digest::MD5.hexdigest @inspector.source_file_name
+          Digest::MD5.hexdigest source_path
         end
 
         def source_path

@@ -95,10 +95,6 @@ module Ingestions
           end
         end
 
-        def source_file_name
-          context.ingestion.source_file_name || basename
-        end
-
         def basename
           context.basename(source)
         end
