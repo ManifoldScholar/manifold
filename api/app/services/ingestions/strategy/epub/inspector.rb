@@ -171,6 +171,10 @@ module Ingestions
         end
         memoize :rendition_href_to_path
 
+        def rel_source_root
+          context.rel(context.source_root)
+        end
+
         protected
 
         def v3_start_section_identifier
@@ -213,11 +217,11 @@ module Ingestions
         end
 
         def read_rendition_source_by_path(rel_path)
-          context.read(File.join("source", rel_path))
+          context.read(File.join(rel_source_root, rel_path))
         end
 
         def open_rendition_source_by_path(rel_path)
-          context.open(File.join("source", rel_path))
+          context.open(File.join(rel_source_root, rel_path))
         end
 
         def open_rendition_source_by_id(id)
@@ -267,7 +271,7 @@ module Ingestions
         end
 
         def xml_parse(rel_path, remove_namespaces: false)
-          doc = Nokogiri::XML(context.open(File.join("source", rel_path)), nil)
+          doc = Nokogiri::XML(context.open(File.join(rel_source_root, rel_path)), nil)
           doc.remove_namespaces! if remove_namespaces
           doc
         end

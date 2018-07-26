@@ -7,6 +7,7 @@ module Ingestions
         string :name
         integer :position, default: nil
         string :source_identifier, default: nil
+        string :hashed_content
         string :build
       end
 

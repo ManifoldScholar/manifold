@@ -27,7 +27,7 @@ module Ingestions
         end
 
         def source_path
-          File.join("source", text_section_resource_path)
+          File.join(@epub_inspector.rel_source_root, text_section_resource_path)
         end
 
         def name
@@ -43,9 +43,8 @@ module Ingestions
           ::TextSection::KIND_SECTION
         end
 
-        def body_parsed
-          doc = Nokogiri::XML(@context.open(source_path), nil)
-          doc.css("body").children.to_s.strip
+        def raw_html
+          @context.read(source_path)
         end
 
         protected

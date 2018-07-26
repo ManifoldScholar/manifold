@@ -21,6 +21,7 @@ import isEqual from "lodash/isEqual";
 import { childRoutes } from "helpers/router";
 import { HeadContent } from "components/global";
 import HigherOrder from "containers/global/HigherOrder";
+import values from "lodash/values";
 
 const { request, flush } = entityStoreActions;
 
@@ -169,6 +170,17 @@ export class SectionContainer extends Component {
     return false;
   }
 
+  renderStyles = props => {
+    return values(props.section.relationships.stylesheets).map(stylesheet => {
+      return (
+        <style
+          key={stylesheet.id}
+          dangerouslySetInnerHTML={{ __html: stylesheet.attributes.styles }}
+        />
+      );
+    });
+  };
+
   render() {
     if (!this.props.section || !this.props.text) return null;
     const { text, section, settings, appearance } = this.props;
@@ -195,6 +207,7 @@ export class SectionContainer extends Component {
 
     return (
       <div>
+        {this.renderStyles(this.props)}
         <HeadContent
           title={metaTitle}
           image={projectImage}

@@ -17,7 +17,7 @@ RSpec.describe Ingestions::Ingestor do
     end
 
     context "when V2" do
-      let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
+      let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.zip") }
       let(:ingestion) do
         ingestion = FactoryBot.create(:ingestion, text: nil)
         allow(ingestion).to receive(:ingestion_source).and_return(path)

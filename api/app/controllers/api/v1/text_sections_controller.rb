@@ -7,7 +7,8 @@ module Api
 
       def show
         @text_section = load_text_section
-        render_single_resource(@text_section)
+        includes = %w(stylesheets)
+        render_single_resource(@text_section, inlcude: includes)
       end
 
     end

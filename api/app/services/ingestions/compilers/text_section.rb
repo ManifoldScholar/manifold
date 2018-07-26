@@ -8,6 +8,7 @@ module Ingestions
         string :source_identifier
         string :name
         string :kind
+        array :stylesheet_contents
         integer :position
       end
 
@@ -37,7 +38,8 @@ module Ingestions
           hash[:text] = text
           hash[:ingestion_source] = ingestion_source
           hash[:source_body] = source_body
-        end.except(:build)
+          hash[:stylesheets] = stylesheets
+        end.except(:build, :stylesheet_contents)
       end
 
       def source_body
@@ -46,6 +48,10 @@ module Ingestions
 
       def ingestion_source
         text.ingestion_sources.find_by(source_identifier: attributes[:source_identifier])
+      end
+
+      def stylesheets
+        text.stylesheets.where(hashed_content: attributes[:stylesheet_contents])
       end
 
       def report

@@ -26,10 +26,6 @@ RSpec.describe Ingestions::Strategies::Epub do
           expect(manifest[:attributes][:publication_date]).to eq ""
         end
 
-        it "has the correct landmarks" do
-          expect(manifest[:attributes][:landmarks]).to eq []
-        end
-
         it "has the correct page list" do
           expect(manifest[:attributes][:page_list]).to eq []
         end
@@ -47,13 +43,6 @@ RSpec.describe Ingestions::Strategies::Epub do
           { "name" => "Andrew Culp", "sort_name" => "" }
         ]
         expect(manifest[:relationships][:creators]).to eq expected
-      end
-
-      it "has the correct stylesheet attributes" do
-        expected = [
-          { "source_identifier" => "css", "name" => "css", "build" => "build/css.css" }
-        ]
-        expect(manifest[:relationships][:stylesheets]).to eq expected
       end
 
       it "has the correct number of ingestion sources" do
@@ -97,6 +86,10 @@ RSpec.describe Ingestions::Strategies::Epub do
         { "source_identifier"=>"section0003.xhtml",  "name" => "Section 3", "kind" => "section", "position" => 3, "build" => "build/section0003.xhtml" }]
       expect(manifest[:relationships][:text_sections]).to eq expected
     end
+
+    it "has the correct landmarks" do
+      expect(manifest[:attributes][:landmarks]).to eq []
+    end
   end
 
   context "when V2" do
@@ -127,22 +120,27 @@ RSpec.describe Ingestions::Strategies::Epub do
 
     it "has the correct text section attributes" do
       expected = [
-        { "source_identifier"=>"section0001.xhtml",  "name" => "Section 1", "kind" => "section", "position" => 0, "build" => "build/section0001.xhtml" },
+        { "source_identifier"=>"section0001.xhtml",  "name" => "Section 1", "kind" => "navigation", "position" => 0, "build" => "build/section0001.xhtml" },
         { "source_identifier"=>"section0002.xhtml",  "name" => "Section 2", "kind" => "section", "position" => 1, "build" => "build/section0002.xhtml" },
         { "source_identifier"=>"section0002a.xhtml",  "name" => "Section 2.a", "kind" => "section", "position" => 2, "build" => "build/section0002a.xhtml" },
         { "source_identifier"=>"section0003.xhtml",  "name" => "Section 3", "kind" => "section", "position" => 3, "build" => "build/section0003.xhtml" }]
       expect(manifest[:relationships][:text_sections]).to eq expected
+    end
+
+    it "has the correct landmarks" do
+      expect(manifest[:attributes][:landmarks]).to eq [{"label"=>"Table of Contents", "anchor"=>nil, "source_path"=>"OEBPS/xhtml/section0001.xhtml", "type"=>"toc"},
+                                                       {"label"=>"Start", "anchor"=>nil, "source_path"=>"OEBPS/xhtml/section0002.xhtml", "type"=>"text"}]
     end
   end
 
   context "when url", slow: true do
     before(:all) do
       @path = "https://storage.googleapis.com/manifold-assets/spec/e-t-a-hoffmann_master-flea.epub3"
-      @ingestion = FactoryBot.create(:ingestion, external_source_url: @path, text: nil)
+      ingestion = FactoryBot.create(:ingestion, external_source_url: @path, text: nil)
       WebMock.allow_net_connect!
-      let(:context) { create_context(ingestion) }
+      context = create_context(ingestion)
       WebMock.disable_net_connect!
-      @manifest = described_class.run(context: @context).result
+      @manifest = described_class.run(context: context).result
     end
 
     describe "the returned manifest" do
@@ -225,14 +223,6 @@ RSpec.describe Ingestions::Strategies::Epub do
 
 
           expect(@manifest[:relationships][:text_sections]).to eq expected
-      end
-
-      it "has the correct stylesheet attributes" do
-        expected = [
-          { "source_identifier" => "core.css", "name" => "core.css", "build" => "build/core.css.css" },
-          { "source_identifier" => "local.css", "name" => "local.css", "build" => "build/local.css.css" }
-        ]
-        expect(@manifest[:relationships][:stylesheets]).to eq expected
       end
 
       it "has the correct number of ingestion sources" do

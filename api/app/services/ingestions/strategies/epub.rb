@@ -7,7 +7,7 @@ module Ingestions
       end
 
       def determine_ingestibility
-        context.dir?("source/META-INF")
+        context.dir?(File.join(inspector.rel_source_root, "/META-INF"))
       end
 
       private
@@ -40,7 +40,6 @@ module Ingestions
           hash[:text_sections] = text_sections
           hash[:creators] = creators || []
           hash[:contributors] = contributors || []
-          hash[:stylesheets] = stylesheets
         end
       end
 
@@ -57,19 +56,8 @@ module Ingestions
           examiner = Strategy::Epub::TextSection.new self, node, position
           attributes = examiner.attributes
           build_path = context.write_build_file attributes[:source_identifier],
-                                                examiner.body_parsed
+                                                examiner.raw_html
           attributes.merge(build: build_path)
-        end
-      end
-
-      def stylesheets
-        inspector.stylesheet_nodes.map do |node|
-          examiner = Strategy::Epub::Stylesheet.new node, inspector
-          attributes = examiner.attributes
-          path = context.write_build_file "#{attributes[:source_identifier]}.css",
-                                          examiner.raw_styles
-
-          attributes.merge(build: path)
         end
       end
 

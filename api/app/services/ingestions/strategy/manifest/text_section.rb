@@ -43,8 +43,8 @@ module Ingestions
           ::TextSection::KIND_SECTION
         end
 
-        def body_parsed
-          section_parsed.css("body").children.to_s.strip
+        def raw_html
+          @context.read("build/#{path_without_ext}.html")
         end
 
         protected
@@ -57,7 +57,7 @@ module Ingestions
         end
 
         def section_parsed
-          Nokogiri::HTML(@context.open("build/#{path_without_ext}.html"), nil)
+          Nokogiri::HTML(raw_html, nil)
         end
 
         def ingestion_source

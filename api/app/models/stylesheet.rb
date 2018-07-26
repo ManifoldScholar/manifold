@@ -13,12 +13,18 @@ class Stylesheet < ApplicationRecord
   belongs_to :text
   has_one :project, through: :text
   belongs_to :ingestion_source, optional: true
+  has_many :text_section_stylesheets, dependent: :destroy
+  has_many :text_sections,
+           -> { order(position: :asc) },
+           through: :text_section_stylesheets,
+           dependent: :nullify,
+           inverse_of: :stylesheets
 
   # Validations
   validates :name, presence: true
 
   # AR Callbacks
-  before_save :revalidate, if: :raw_styles_changed?
+  before_save :revalidate, :set_hashed_content, if: :raw_styles_changed?
 
   # Concerns
   acts_as_list scope: :text_id
@@ -29,6 +35,10 @@ class Stylesheet < ApplicationRecord
 
   def revalidate
     self.styles = ::Validator::Stylesheet.new.validate(raw_styles)
+  end
+
+  def set_hashed_content
+    self.hashed_content = Digest::MD5.hexdigest raw_styles
   end
 
 end
