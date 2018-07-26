@@ -449,7 +449,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
             className="form-input"
           >
             <input
-              className="button-secondary-dull"
+              className="button-secondary dull"
               disabled={true}
               type="submit"
             />
