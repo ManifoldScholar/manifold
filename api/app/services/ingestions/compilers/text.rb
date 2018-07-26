@@ -13,11 +13,18 @@ module Ingestions
       private
 
       def find_or_create_text
-        existing = ingestion.project
-                            .texts
-                            .joins(:titles)
-                            .where(text_titles: { value: main_title&.dig(:value) }).first
-        existing || ::Text.create(text_attributes)
+        context.ingestion.reingestion? ? find_text : create_text
+      end
+
+      def find_text
+        ingestion.project
+                 .texts
+                 .joins(:titles)
+                 .where(text_titles: { value: main_title&.dig(:value) }).first
+      end
+
+      def create_text
+        ::Text.create(text_attributes)
       end
 
       def text_attributes
