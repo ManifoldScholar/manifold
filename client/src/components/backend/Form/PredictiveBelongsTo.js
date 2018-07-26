@@ -18,8 +18,19 @@ class FormPredictiveBelongsTo extends PureComponent {
     readOnly: PropTypes.bool,
     relationName: PropTypes.string,
     errors: PropTypes.array,
-    idForError: PropTypes.string
+    idForError: PropTypes.string,
+    focusOnMount: PropTypes.bool
   };
+
+  static defaultProps = {
+    focusOnMount: false
+  };
+
+  componentDidMount() {
+    if (this.props.focusOnMount === true && this.inputElement) {
+      this.inputElement.focus();
+    }
+  }
 
   handleSelect = entity => {
     this.props.setOther(entity, `relationships[${this.props.relationName}]`);
@@ -48,6 +59,7 @@ class FormPredictiveBelongsTo extends PureComponent {
               label={this.props.label}
               onSelect={entity => this.handleSelect(entity)}
               idForError={this.props.idForError}
+              focusOnMount={this.props.focusOnMount}
             />
           </GlobalForm.Errorable>
         ) : null}
