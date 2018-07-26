@@ -7,5 +7,6 @@ description: description
 creator: Rowan Ono
 contributor: Ida Davis
 ---
+<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 
 some text

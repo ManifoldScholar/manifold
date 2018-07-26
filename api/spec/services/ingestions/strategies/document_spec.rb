@@ -101,7 +101,7 @@ RSpec.describe Ingestions::Strategies::Document do
         include_examples "outcome assertions"
 
         it "has the correct text section attributes" do
-          expected = [{ "source_identifier" => "1f74eed25a83913ec399efe9e43da579", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
+          expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 
@@ -132,7 +132,7 @@ RSpec.describe Ingestions::Strategies::Document do
         include_examples "outcome assertions"
 
         it "has the correct text section attributes" do
-          expected = [{ "source_identifier" => "dc43e863c176e9b9f2a0b6054b24bd1a", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
+          expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 
@@ -201,20 +201,20 @@ RSpec.describe Ingestions::Strategies::Document do
 
     before(:all) do
       url = "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing"
-      @ingestion = FactoryBot.create(:ingestion, external_source_url: url)
+      ingestion = FactoryBot.create(:ingestion, external_source_url: url)
       WebMock.allow_net_connect!
-      @context = create_context(ingestion)
+      context = create_context(ingestion)
       WebMock.disable_net_connect!
-      @manifest = described_class.run(context: @context).result
+      @manifest = described_class.run(context: context).result
     end
 
     it "has the correct title attributes" do
       expected = [{ "value" => "Google Doc Prime", "position" => 1, "kind" => TextTitle::KIND_MAIN }]
-      expect(manifest[:relationships][:text_titles]).to eq expected
+      expect(@manifest[:relationships][:text_titles]).to eq expected
     end
 
     it "has the correct text section attributes" do
-      expected = [{"source_identifier"=>"GoogleDocPrime.html", "name"=>"Google Doc Prime", "kind"=>"section", "position"=>1, "build"=>"build/GoogleDocPrime.html"}]
+      expected = [{"source_identifier"=>"aa71f2445216ee119319375ebca37fc8", "name"=>"Google Doc Prime", "kind"=>"section", "position"=>1, "build"=>"build/GoogleDocPrime.html"}]
       expect(@manifest[:relationships][:text_sections]).to eq expected
     end
 

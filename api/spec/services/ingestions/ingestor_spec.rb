@@ -62,11 +62,10 @@ RSpec.describe Ingestions::Ingestor do
     end
 
     context "when Markdown" do
-      let(:path) { Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single", "minimal-single.md") }
+      let(:path) { Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single") }
       let(:ingestion) do
         ingestion = FactoryBot.create(:ingestion, text: nil)
         allow(ingestion).to receive(:ingestion_source).and_return(path)
-        allow(ingestion).to receive(:source_file_name).and_return("minimal-single.md")
         ingestion
       end
       let!(:text) { Ingestions::Ingestor.run ingestion: ingestion }

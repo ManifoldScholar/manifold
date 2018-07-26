@@ -80,7 +80,7 @@ module Ingestions
 
       def text_section
         {
-          source_identifier: Digest::MD5.hexdigest(inspector.source_file_name),
+          source_identifier: Digest::MD5.hexdigest(inspector.basename),
           name: inspector.title,
           kind: ::TextSection::KIND_SECTION,
           position: 1,
