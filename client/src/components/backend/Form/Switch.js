@@ -55,7 +55,6 @@ class FormSwitch extends Component {
   }
 
   focus = () => {
-    console.log('focusing');
     this.setState({ focused: true });
   };
 

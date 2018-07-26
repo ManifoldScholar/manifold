@@ -24,11 +24,13 @@ class PredictiveInput extends PureComponent {
     fetchOptions: PropTypes.object,
     placeholder: PropTypes.string,
     authToken: PropTypes.string,
-    idForError: PropTypes.string
+    idForError: PropTypes.string,
+    focusOnMount: PropTypes.bool
   };
 
   static defaultProps = {
-    fetchOptions: null
+    fetchOptions: null,
+    focusOnMount: false
   };
 
   constructor(props) {
@@ -41,6 +43,12 @@ class PredictiveInput extends PureComponent {
       options: [],
       highlighted: false
     };
+  }
+
+  componentDidMount() {
+    if (this.props.focusOnMount === true && this.inputElement) {
+      this.inputElement.focus();
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -230,6 +238,9 @@ class PredictiveInput extends PureComponent {
         <div className="input">
           <i className="manicon manicon-plus" aria-hidden="true" />
           <input
+            ref={input => {
+              this.inputElement = input;
+            }}
             className="text-input"
             type="text"
             onChange={this.handleChange}
