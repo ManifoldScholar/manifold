@@ -5,8 +5,6 @@ module Ingestions
     record :ingestion
     object :logger, default: nil
 
-    define_model_callbacks :initialize_context, :post_process
-
     def execute
       @context = shared_inputs[:context] = build_context
 
@@ -15,6 +13,7 @@ module Ingestions
       strategy = compose Ingestions::Pickers::Strategy
 
       compose_into :manifest, strategy.interaction
+      compose_into :manifest, Ingestions::PreProcessor
 
       compose_into :text, Ingestions::Compiler
 
@@ -42,10 +41,6 @@ module Ingestions
                     name: @context.basename
     end
 
-    def report_end
-      @context.info "services.ingestions.logging.ingestion_end"
-    end
-
     def set_ingestion_text
       return unless text.present?
       ingestion.update text: text
@@ -54,10 +49,6 @@ module Ingestions
     # Removes temporary dir
     def clean_up
       @context.teardown
-    end
-
-    def shared_inputs
-      @shared_inputs ||= {}.merge(inputs)
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180711222801) do
+ActiveRecord::Schema.define(version: 20180727145952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -515,6 +515,7 @@ ActiveRecord::Schema.define(version: 20180711222801) do
     t.datetime "updated_at",                          null: false
     t.integer  "position"
     t.uuid     "creator_id"
+    t.string   "hashed_content"
   end
 
   create_table "subjects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -546,6 +547,15 @@ ActiveRecord::Schema.define(version: 20180711222801) do
     t.string  "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  end
+
+  create_table "text_section_stylesheets", force: :cascade do |t|
+    t.uuid     "text_section_id", null: false
+    t.uuid     "stylesheet_id",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["stylesheet_id"], name: "index_text_section_stylesheets_on_stylesheet_id", using: :btree
+    t.index ["text_section_id"], name: "index_text_section_stylesheets_on_text_section_id", using: :btree
   end
 
   create_table "text_sections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

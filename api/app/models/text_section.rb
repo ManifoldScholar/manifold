@@ -34,6 +34,12 @@ class TextSection < ApplicationRecord
   has_many :searchable_nodes, -> { order(position: :asc) }, inverse_of: :text_section
   has_many :resources, through: :annotations
   has_many :collections, through: :annotations
+  has_many :text_section_stylesheets, dependent: :destroy
+  has_many :stylesheets,
+           -> { order(position: :asc) },
+           through: :text_section_stylesheets,
+           dependent: :nullify,
+           inverse_of: :text_sections
 
   # Delegation
   delegate :citation_parts, to: :text, prefix: true, allow_nil: true

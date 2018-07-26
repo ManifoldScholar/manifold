@@ -60,10 +60,6 @@ RSpec.describe Ingestions::Strategies::Manifest do
           expect(manifest[:relationships][:contributors]).to eq expected
         end
 
-        it "has the correct number of stylesheets" do
-          expect(manifest[:relationships][:stylesheets].length).to eq 4
-        end
-
         it "has the correct text section attributes" do
           expected = [{ "source_identifier" => "02e9b3b8b5268c3fe8bd4150fd546a55", "name" => "Title Set From TOC", "kind" => "section", "position"  => 0, "build" => "build/02e9b3b8b5268c3fe8bd4150fd546a55.html" },
                       { "source_identifier" => "9fef2b7e781641e6861d1aa79a597a57", "name" => "Section 1.1", "kind" => "section", "position" => 1, "build" => "build/9fef2b7e781641e6861d1aa79a597a57.html" },

@@ -8,8 +8,8 @@ module Ingestions
       create_records :creators
       create_records :contributors
       create_records :ingestion_sources
-      create_records :text_sections
       create_records :stylesheets
+      create_records :text_sections
 
       text
     end
@@ -26,6 +26,8 @@ module Ingestions
 
     def create_records(klass)
       klass_attributes = manifest[:relationships][klass]
+      return unless klass_attributes.present?
+
       klass_attributes.each do |attributes|
         compose "Ingestions::Compilers::#{klass.to_s.classify}".constantize,
                 attributes: attributes

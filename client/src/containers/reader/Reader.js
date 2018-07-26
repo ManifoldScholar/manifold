@@ -16,7 +16,6 @@ import { ReaderNotes } from "containers/reader";
 import { select, grab, isEntityLoaded } from "utils/entityUtils";
 import { commonActions } from "actions/helpers";
 import { textsAPI, sectionsAPI, requests } from "api";
-import values from "lodash/values";
 import lh from "helpers/linkHandler";
 import locationHelper from "helpers/location";
 import { childRoutes } from "helpers/router";
@@ -216,17 +215,6 @@ export class ReaderContainer extends Component {
     return <Redirect to={path} />;
   }
 
-  renderStyles = () => {
-    return values(this.props.text.relationships.stylesheets).map(stylesheet => {
-      return (
-        <style
-          key={stylesheet.id}
-          dangerouslySetInnerHTML={{ __html: stylesheet.attributes.styles }}
-        />
-      );
-    });
-  };
-
   renderRoutes() {
     /* eslint-disable no-unused-vars */
     const { route, ...otherProps } = this.props;
@@ -244,7 +232,6 @@ export class ReaderContainer extends Component {
     return (
       <HigherOrder.BodyClass className="reader">
         <div>
-          {this.renderStyles()}
           <Utility.SkipLink skipId={skipId} />
           <HigherOrder.ScrollAware>
             {/* Header inside scroll-aware HOC */}

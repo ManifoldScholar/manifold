@@ -77,10 +77,6 @@ RSpec.describe Ingestions::Strategies::Document do
         expect(manifest[:relationships][:text_sections]).to eq expected
       end
 
-      it "has the correct number of stylesheets" do
-        expect(manifest[:relationships][:stylesheets].length).to eq 1
-      end
-
       it "has the correct number of ingestion sources" do
         expect(manifest[:relationships][:ingestion_sources].length).to eq 1
       end
@@ -105,14 +101,6 @@ RSpec.describe Ingestions::Strategies::Document do
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 
-        it "has the correct stylesheet attributes" do
-          expected = [
-            { "source_identifier" => "a-stylesheet.css", "name" => "stylesheet-1", "position" => 1, "build" => "build/stylesheet-1.css" },
-            { "source_identifier" => nil, "name" => "head-2", "position" => 2, "build" => "build/head-2.css" }
-          ]
-          expect(manifest[:relationships][:stylesheets]).to eq expected
-        end
-
         it "has the correct number of ingestion sources" do
           expect(manifest[:relationships][:ingestion_sources].length).to eq 2
         end
@@ -134,14 +122,6 @@ RSpec.describe Ingestions::Strategies::Document do
         it "has the correct text section attributes" do
           expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
-        end
-
-        it "has the correct stylesheet attributes" do
-          expected = [
-            { "source_identifier" => "a-stylesheet.css", "name" => "stylesheet-1", "position" => 1, "build" => "build/stylesheet-1.css" },
-            { "source_identifier" => nil ,"name" => "head-2", "position" => 2, "build" => "build/head-2.css" }
-          ]
-          expect(manifest[:relationships][:stylesheets]).to eq expected
         end
 
         it "has the correct number of ingestion sources" do
@@ -218,10 +198,6 @@ RSpec.describe Ingestions::Strategies::Document do
       expect(@manifest[:relationships][:text_sections]).to eq expected
     end
 
-    it "has the correct number of stylesheets" do
-      expect(@manifest[:relationships][:stylesheets].length).to eq 1
-    end
-
     it "has the correct number of ingestion sources" do
       expect(@manifest[:relationships][:ingestion_sources].length).to eq 2
     end
@@ -242,10 +218,6 @@ RSpec.describe Ingestions::Strategies::Document do
 
     it "has the correct number of ingestion sources" do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 1
-    end
-
-    it "has the correct number of stylesheets" do
-      expect(manifest[:relationships][:stylesheets].length).to eq 2
     end
 
   end

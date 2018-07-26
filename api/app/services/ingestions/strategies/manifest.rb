@@ -65,7 +65,6 @@ module Ingestions
           hash[:creators] = creators || []
           hash[:contributors] = contributors || []
           hash[:ingestion_sources] = ingestion_sources
-          hash[:stylesheets] = stylesheets
           hash[:text_sections] = text_sections
         end
       end
@@ -108,18 +107,8 @@ module Ingestions
                                                          index
           attributes = examiner.attributes
           build_path = context.write_build_file "#{examiner.source_identifier}.html",
-                                                examiner.body_parsed
+                                                examiner.raw_html
           attributes.merge(build: build_path)
-        end
-      end
-
-      def stylesheets
-        inspector.style_nodes.map.with_index do |source, index|
-          examiner = Strategy::Document::Stylesheet.new self, source, index
-          attributes = examiner.attributes
-          path = context.write_build_file "#{attributes[:name]}.css",
-                                          examiner.raw_styles
-          attributes.merge(build: path)
         end
       end
     end

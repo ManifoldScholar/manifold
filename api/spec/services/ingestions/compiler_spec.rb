@@ -11,7 +11,11 @@ RSpec.describe Ingestions::Compiler do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let(:manifest) { Ingestions::Strategies::Epub.run(context: context).result }
+    let(:manifest) do
+      manifest = Ingestions::Strategies::Epub.run(context: context).result
+      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest
+    end
 
     it "creates the correct number of records" do
       expect do
@@ -21,7 +25,7 @@ RSpec.describe Ingestions::Compiler do
                       .and change(TextTitle, :count).by(1)
                              .and change(IngestionSource, :count).by(7)
                                     .and change(Maker, :count).by(1)
-                                           .and change(Stylesheet, :count).by(1)
+                                            .and change(Stylesheet, :count).by(0)
     end
   end
 
@@ -33,7 +37,11 @@ RSpec.describe Ingestions::Compiler do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let(:manifest) { Ingestions::Strategies::Manifest.run(context: context).result }
+    let(:manifest) do
+      manifest = Ingestions::Strategies::Manifest.run(context: context).result
+      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest
+    end
 
     it "creates the correct number of records" do
       expect do
@@ -43,7 +51,7 @@ RSpec.describe Ingestions::Compiler do
                       .and change(TextTitle, :count).by(1)
                              .and change(IngestionSource, :count).by(6)
                                     .and change(Maker, :count).by(2)
-                                           .and change(Stylesheet, :count).by(4)
+                                           .and change(Stylesheet, :count).by(3)
     end
   end
 
@@ -56,7 +64,11 @@ RSpec.describe Ingestions::Compiler do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let(:manifest) { Ingestions::Strategies::Document.run(context: context).result }
+    let(:manifest) do
+      manifest = Ingestions::Strategies::Document.run(context: context).result
+      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest
+    end
 
     it "creates the correct number of records" do
       expect do
@@ -78,7 +90,11 @@ RSpec.describe Ingestions::Compiler do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let(:manifest) { Ingestions::Strategies::Document.run(context: context).result }
+    let(:manifest) do
+      manifest = Ingestions::Strategies::Document.run(context: context).result
+      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest
+    end
 
     it "creates the correct number of records" do
       expect do
@@ -100,7 +116,11 @@ RSpec.describe Ingestions::Compiler do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let(:manifest) { Ingestions::Strategies::Document.run(context: context).result }
+    let(:manifest) do
+      manifest = Ingestions::Strategies::Document.run(context: context).result
+      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest
+    end
 
     it "creates the correct number of records" do
       expect do
