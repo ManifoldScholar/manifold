@@ -107,7 +107,7 @@
   }
 
   // Default button appearance
-  .button-secondary, .button-secondary-dull {
+  .button-secondary {
     display: block;
     width: 100%;
 
@@ -115,7 +115,7 @@
       margin-top: 40px;
     }
 
-    + .button-secondary, .button-secondary-dull {
+    + .button-secondary {
       margin-top: 21px;
     }
   }

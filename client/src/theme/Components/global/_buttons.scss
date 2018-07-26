@@ -529,12 +529,6 @@
   @extend %button-secondary-prototype;
 }
 
-.button-secondary-dull {
-  @extend %button-secondary-prototype;
-  color: $neutral50;
-  background-color: $neutral10;
-}
-
 // Left aligned and dark
 .button-secondary-dark {
   @extend %button-secondary-prototype;

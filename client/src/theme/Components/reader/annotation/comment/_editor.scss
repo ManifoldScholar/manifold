@@ -60,7 +60,7 @@
       margin: 0;
     }
 
-    .button-secondary, .button-secondary-dull {
+    .button-secondary {
       min-width: 98px;
       transition: background-color $duration $timing;
     }
@@ -74,7 +74,7 @@
       }
     }
 
-    .button-secondary-dull {
+    .button-secondary.dull {
       color: $neutral70;
       background-color: $neutral30;
 
