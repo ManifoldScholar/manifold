@@ -218,11 +218,11 @@ export default class StaticForm extends Component {
 
             <div className="row-3-p">
               <div className="col-33">
-                {/* Use button-secondary-dull when button is disabled */}
+                {/* Use 'button-secondary dull' when button is disabled */}
                 <div className="form-input">
                   <input
                     type="submit"
-                    className="button-secondary-dull"
+                    className="button-secondary dull"
                     disabled
                   />
                   <input type="submit" className="button-secondary" />
