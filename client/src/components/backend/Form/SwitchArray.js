@@ -15,11 +15,13 @@ class FormSwitchArray extends Component {
     ).isRequired,
     name: PropTypes.string,
     errors: PropTypes.array,
-    label: PropTypes.string
+    label: PropTypes.string,
+    focusOnMount: PropTypes.bool
   };
 
   static defaultProps = {
-    value: []
+    value: [],
+    focusOnMount: false
   };
 
   handleChange(value) {
@@ -30,13 +32,16 @@ class FormSwitchArray extends Component {
     this.props.set(adjustedValues);
   }
 
-  renderSwitch(option) {
+  renderSwitch(option, index) {
+    const focusOnMount = this.props.focusOnMount && index === 0;
+
     return (
       <Form.Switch
         key={option.value}
         label={option.label}
         set={() => this.handleChange(option.value)}
         value={this.props.value.includes(option.value)}
+        focusOnMount={focusOnMount}
       />
     );
   }
@@ -50,8 +55,8 @@ class FormSwitchArray extends Component {
         errors={this.props.errors}
       >
         <Form.FieldGroup label={this.props.label} horizontal>
-          {this.props.options.map(option => {
-            return this.renderSwitch(option);
+          {this.props.options.map((option, index) => {
+            return this.renderSwitch(option, index);
           })}
         </Form.FieldGroup>
       </GlobalForm.Errorable>

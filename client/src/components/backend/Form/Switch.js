@@ -16,16 +16,32 @@ class FormSwitch extends Component {
     customValues: PropTypes.shape({
       true: PropTypes.string,
       false: PropTypes.string
-    })
+    }),
+    focusOnMount: PropTypes.bool
   };
 
   static defaultProps = {
-    labelPos: "above"
+    labelPos: "above",
+    focusOnMount: false
   };
 
   constructor(props) {
     super(props);
     this.state = { focused: false };
+  }
+
+  componentDidMount() {
+    if (this.props.focusOnMount) {
+      this.focus();
+    }
+
+    window.addEventListener("keydown", event => {
+      this.handleKeyPress(event);
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.handleKeyPress);
   }
 
   truthy(value) {
@@ -36,6 +52,16 @@ class FormSwitch extends Component {
     event.preventDefault();
     if (this.props.customValues) return this.handleCustomValues();
     return this.handleBooleans();
+  };
+
+  handleKeyPress = event => {
+    const spaceOrEnter = event.keyCode === 32 || event.keyCode === 13;
+    if (spaceOrEnter && this.state.focused) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (this.props.customValues) return this.handleCustomValues();
+      return this.handleBooleans();
+    }
   };
 
   handleCustomValues() {
@@ -56,6 +82,9 @@ class FormSwitch extends Component {
 
   focus = () => {
     this.setState({ focused: true });
+    if (this.button) {
+      this.button.focus();
+    }
   };
 
   blur = () => {
@@ -74,14 +103,10 @@ class FormSwitch extends Component {
       this.props.labelPos,
       this.props.labelClass
     );
-    const wrapperClasses = classnames(
-      "form-input",
-      this.props.className
-    );
-    const indicatorClasses = classnames(
-      "toggle-indicator",
-      { "has-focus": this.state.focused }
-    );
+    const wrapperClasses = classnames("form-input", this.props.className);
+    const indicatorClasses = classnames("toggle-indicator", {
+      "has-focus": this.state.focused
+    });
 
     const label = <h4 className={labelClasses}>{this.props.label}</h4>;
 
@@ -91,6 +116,9 @@ class FormSwitch extends Component {
         <div className={indicatorClasses}>
           {/* Add .checked to .boolean-primary to change visual state */}
           <div
+            ref={b => {
+              this.button = b;
+            }}
             onFocus={this.focus}
             onBlur={this.blur}
             onClick={this.handleClick}
