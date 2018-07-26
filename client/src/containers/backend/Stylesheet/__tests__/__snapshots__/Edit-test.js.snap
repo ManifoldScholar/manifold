@@ -36,13 +36,13 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                                       </div>
                                       <Form.Setter('Form.TextInput) label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}}>
                                         <Form.TextInput label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                          <Errorable className=\\"form-input\\" name=\\"attributes[name]\\" errors={{...}} label=\\"Name\\" idForError=\\"text-input-error-16\\" containerStyle={{...}}>
+                                          <Errorable className=\\"form-input\\" name=\\"attributes[name]\\" errors={{...}} label=\\"Name\\" idForError=\\"attributes[name]-text-input-15\\" containerStyle={{...}}>
                                             <div style={{...}} className=\\"form-input\\">
-                                              <label htmlFor=\\"text-input-15\\" className=\\"\\">
+                                              <label htmlFor=\\"attributes[name]-text-input-15\\" className=\\"\\">
                                                 Name
                                               </label>
                                               <Instructions instructions={{...}} />
-                                              <input id=\\"text-input-15\\" type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"text-input-error-16\\" />
+                                              <input id=\\"attributes[name]-text-input-15\\" type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[name]-text-input-15\\" />
                                             </div>
                                           </Errorable>
                                         </Form.TextInput>

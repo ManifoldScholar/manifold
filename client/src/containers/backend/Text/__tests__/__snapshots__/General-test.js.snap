@@ -14,13 +14,13 @@ exports[`Backend Text General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-15"
+          htmlFor="attributes[title]-text-input-15"
         >
           Title
         </label>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[title]-text-input-15"
+          id="attributes[title]-text-input-15"
           onChange={[Function]}
           placeholder="Enter Text Title"
           type="text"
@@ -272,7 +272,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[sectionKind]-text-input-15"
         >
           Section Label
         </label>
@@ -282,8 +282,8 @@ exports[`Backend Text General Container renders correctly 1`] = `
           For example, “chapter” for books or “article” for journals
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[sectionKind]-text-input-15"
+          id="attributes[sectionKind]-text-input-15"
           onChange={[Function]}
           placeholder="Enter a label for sections in this text"
           type="text"

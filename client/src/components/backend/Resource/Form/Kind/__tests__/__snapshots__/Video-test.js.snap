@@ -18,7 +18,9 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
       <div
         aria-pressed={false}
         className="boolean-primary"
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         role="button"
         tabIndex="0"
       >
@@ -112,7 +114,9 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
       <div
         aria-pressed={false}
         className="boolean-primary"
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         role="button"
         tabIndex="0"
       >
@@ -133,13 +137,13 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
     >
       <label
         className=""
-        htmlFor="text-input-15"
+        htmlFor="attributes[externalId]-text-input-15"
       >
         Video ID
       </label>
       <input
-        aria-describedby="text-input-error-16"
-        id="text-input-15"
+        aria-describedby="attributes[externalId]-text-input-15"
+        id="attributes[externalId]-text-input-15"
         onChange={[Function]}
         placeholder="Video ID"
         type="text"

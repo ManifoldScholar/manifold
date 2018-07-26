@@ -23,7 +23,7 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-15"
+          htmlFor="attributes[query]-text-input-15"
         >
           Query
         </label>
@@ -42,8 +42,8 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
           .
         </p>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[query]-text-input-15"
+          id="attributes[query]-text-input-15"
           onChange={[Function]}
           placeholder="Enter query"
           type="text"
@@ -103,7 +103,9 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
           <div
             aria-pressed={true}
             className="boolean-primary checked"
+            onBlur={[Function]}
             onClick={[Function]}
+            onFocus={[Function]}
             role="button"
             tabIndex="0"
           >

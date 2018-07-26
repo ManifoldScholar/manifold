@@ -182,7 +182,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[purchaseUrl]-text-input-15"
         >
           Purchase URL
         </label>
@@ -192,8 +192,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           A URL where users can purchase the published edition
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[purchaseUrl]-text-input-15"
+          id="attributes[purchaseUrl]-text-input-15"
           onChange={[Function]}
           placeholder="Enter Purchase URL"
           type="text"
@@ -206,7 +206,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[purchaseCallToAction]-text-input-15"
         >
           Purchase Call To Action
         </label>
@@ -216,8 +216,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           If set, this text will appear in the buy button on the project page
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[purchaseCallToAction]-text-input-15"
+          id="attributes[purchaseCallToAction]-text-input-15"
           onChange={[Function]}
           placeholder="Buy Print Version"
           type="text"
@@ -254,7 +254,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[purchasePriceCurrency]-text-input-15"
         >
           Currency
         </label>
@@ -264,8 +264,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           For example, USD for US Dollars
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[purchasePriceCurrency]-text-input-15"
+          id="attributes[purchasePriceCurrency]-text-input-15"
           onChange={[Function]}
           placeholder="Enter Purchase Price Currency Code"
           type="text"
@@ -286,7 +286,9 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           <div
             aria-pressed={false}
             className="boolean-primary"
+            onBlur={[Function]}
             onClick={[Function]}
+            onFocus={[Function]}
             role="button"
             tabIndex="0"
           >

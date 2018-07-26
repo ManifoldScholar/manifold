@@ -51,13 +51,13 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[email]-text-input-15"
           >
             Email
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[email]-text-input-15"
+            id="attributes[email]-text-input-15"
             onChange={[Function]}
             placeholder="Email"
             type="text"
@@ -70,13 +70,13 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[firstName]-text-input-15"
           >
             First Name
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[firstName]-text-input-15"
+            id="attributes[firstName]-text-input-15"
             onChange={[Function]}
             placeholder="First Name"
             type="text"
@@ -89,13 +89,13 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[lastName]-text-input-15"
           >
             Last Name
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[lastName]-text-input-15"
+            id="attributes[lastName]-text-input-15"
             onChange={[Function]}
             placeholder="Last Name"
             type="text"

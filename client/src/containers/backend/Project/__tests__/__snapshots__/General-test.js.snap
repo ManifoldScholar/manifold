@@ -24,13 +24,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[title]-text-input-15"
           >
             Title
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[title]-text-input-15"
+            id="attributes[title]-text-input-15"
             onChange={[Function]}
             placeholder="Enter Project Title"
             type="text"
@@ -43,13 +43,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[subtitle]-text-input-15"
           >
             Subtitle
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[subtitle]-text-input-15"
+            id="attributes[subtitle]-text-input-15"
             onChange={[Function]}
             placeholder="Enter Project Subtitle"
             type="text"
@@ -62,13 +62,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[slug]-text-input-15"
           >
             Slug
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[slug]-text-input-15"
+            id="attributes[slug]-text-input-15"
             onChange={[Function]}
             placeholder="Enter Project Slug"
             type="text"
@@ -100,7 +100,9 @@ exports[`Backend Project General Container renders correctly 1`] = `
             <div
               aria-pressed={false}
               className="boolean-primary"
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               role="button"
               tabIndex="0"
             >
@@ -126,7 +128,9 @@ exports[`Backend Project General Container renders correctly 1`] = `
             <div
               aria-pressed={false}
               className="boolean-primary"
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               role="button"
               tabIndex="0"
             >
@@ -171,13 +175,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[facebookId]-text-input-15"
           >
             Facebook ID
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[facebookId]-text-input-15"
+            id="attributes[facebookId]-text-input-15"
             onChange={[Function]}
             placeholder="Enter Project Facebook ID"
             type="text"
@@ -190,13 +194,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[twitterId]-text-input-15"
           >
             Twitter ID
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[twitterId]-text-input-15"
+            id="attributes[twitterId]-text-input-15"
             onChange={[Function]}
             placeholder="Enter Project Twitter ID"
             type="text"
@@ -209,13 +213,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[instagramId]-text-input-15"
           >
             Instagram ID
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[instagramId]-text-input-15"
+            id="attributes[instagramId]-text-input-15"
             onChange={[Function]}
             placeholder="Enter Project Instagram ID"
             type="text"

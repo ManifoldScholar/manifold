@@ -113,6 +113,8 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
               <li
                 className="item"
                 onClick={[Function]}
+                role="button"
+                tabIndex="0"
               >
                 <span
                   className="screen-reader-text"
@@ -128,6 +130,8 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
               <li
                 className="item"
                 onClick={[Function]}
+                role="button"
+                tabIndex="0"
               >
                 <span
                   className="screen-reader-text"

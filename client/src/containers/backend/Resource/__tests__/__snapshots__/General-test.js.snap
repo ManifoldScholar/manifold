@@ -105,13 +105,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-15"
+          htmlFor="attributes[title]-text-input-15"
         >
           Title
         </label>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[title]-text-input-15"
+          id="attributes[title]-text-input-15"
           onChange={[Function]}
           placeholder="Enter a title"
           type="text"
@@ -124,13 +124,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-15"
+          htmlFor="attributes[fingerprint]-text-input-15"
         >
           Fingerprint
         </label>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[fingerprint]-text-input-15"
+          id="attributes[fingerprint]-text-input-15"
           onChange={[Function]}
           placeholder="Enter fingerprint"
           type="text"
@@ -143,13 +143,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-15"
+          htmlFor="attributes[slug]-text-input-15"
         >
           Slug
         </label>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[slug]-text-input-15"
+          id="attributes[slug]-text-input-15"
           onChange={[Function]}
           placeholder="Enter slug"
           type="text"
@@ -162,7 +162,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[tagList]-text-input-15"
         >
           Tags
         </label>
@@ -172,8 +172,8 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           Separate tags with "," or ";"
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[tagList]-text-input-15"
+          id="attributes[tagList]-text-input-15"
           onChange={[Function]}
           placeholder="Enter tags"
           type="text"
