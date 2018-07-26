@@ -151,43 +151,50 @@ module Attachments
         def #{field}_is_image?
           return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
-          !#{field}_content_type.match(Regexp.union(config[:image][:allowed_mime])).nil?          
+          !#{field}_content_type.match(Regexp.union(config[:image][:allowed_mime])).nil?
+          !#{field}_extension.match(Regexp.union(config[:image][:allowed_ext])).nil?
         end
 
         def #{field}_is_video?
           return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
           !#{field}_content_type.match(Regexp.union(config[:video][:allowed_mime])).nil?  
+          !#{field}_extension.match(Regexp.union(config[:video][:allowed_ext])).nil?
         end
       
         def #{field}_is_audio?
           return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
           !#{field}_content_type.match(Regexp.union(config[:audio][:allowed_mime])).nil?  
+          !#{field}_extension.match(Regexp.union(config[:audio][:allowed_ext])).nil?
         end
       
         def #{field}_is_spreadsheet?
           return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
           !#{field}_content_type.match(Regexp.union(config[:spreadsheet][:allowed_mime])).nil?  
+          !#{field}_extension.match(Regexp.union(config[:spreadsheet][:allowed_ext])).nil?
         end
       
         def #{field}_is_text_document?
           return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
           !#{field}_content_type.match(Regexp.union(config[:text_document][:allowed_mime])).nil?  
+          !#{field}_extension.match(Regexp.union(config[:text_document][:allowed_ext])).nil?
         end
       
         def #{field}_is_presentation?
           return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
           !#{field}_content_type.match(Regexp.union(config[:presentation][:allowed_mime])).nil?  
+          !#{field}_extension.match(Regexp.union(config[:presentation][:allowed_ext])).nil?
         end
       
         def #{field}_is_pdf?
           return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
           !#{field}_content_type.match(Regexp.union(config[:pdf][:allowed_mime])).nil?  
+          !#{field}_extension.match(Regexp.union(config[:pdf][:allowed_ext])).nil?
         end
   
         def can_process_#{field}_styles?
