@@ -10,6 +10,16 @@
   font-size: 13px;
   color: $neutral50;
   text-decoration: none;
+  transition: color $duration $timing;
+
+  &:hover, &:active {
+    color: $accentPrimary;
+  }
+
+  &:focus {
+    color: $neutral95;
+    outline: 0;
+  }
 }
 
 // Vertical arrangement for bare buttons.
@@ -388,7 +398,7 @@
   }
 
   &:hover {
-    background-color: $accentPrimaryMedium;
+    background-color: $accentPrimaryDull;
   }
 
   &:focus {
@@ -601,12 +611,26 @@
   color: $accentPrimaryDark;
   text-align: left;
   border-bottom: 1px solid $neutral40;
+  transition: color $duration $timing;
 
   &.trim-top {
     padding-top: 11px;
     padding-bottom: 0;
     border: 0; // OD
     border-top: 2px solid $neutral90;
+  }
+
+  &:hover {
+    color: $accentPrimaryMedium;
+  }
+
+  &:focus {
+    color: $neutral95;
+    outline: 0;
+  }
+
+  &:active {
+    color: $accentPrimary;
   }
 }
 
@@ -730,14 +754,15 @@
   }
 }
 
+/* stylelint-disable declaration-no-important */
 .back-link-primary {
   @include utilityPrimary;
   display: inline-block;
   padding: 20px 0 18px;
   font-size: 13px;
   line-height: 1.4;
-  color: $neutral70;
-  text-decoration: none;
+  color: $neutral70 !important;
+  text-decoration: none !important;
   background-color: $neutral05;
   transition: color $duration $timing,
     background-color $duration $timing;
@@ -754,7 +779,7 @@
     background-color: $neutral95;
 
     &:hover, &:focus {
-      color: $accentPrimary;
+      color: $accentPrimary !important;
       background-color: $neutral95;
       outline: 0;
     }
@@ -765,7 +790,7 @@
   }
 
   &:focus {
-    color: $neutral80;
+    color: $neutral80 !important;
     background-color: $focusTertiary;
     outline: 0;
   }
@@ -794,7 +819,6 @@
     margin-left: 0.733em;
     font-size: 14px;
     font-weight: $regular;
-    color: $neutral50;
     text-transform: uppercase;
     letter-spacing: 0.01em;
   }
@@ -804,7 +828,7 @@
   @include clearfix;
   display: table;
   padding: 34px 0 25px;
-  text-decoration: none;
+  text-decoration: none !important;
 
   &:hover {
     .manicon, .back-text, .project-title {
@@ -857,6 +881,7 @@
     transition: color $duration $timing;
   }
 }
+/* stylelint-enable  declaration-no-important */
 
 .close-button-primary {
   font-size: 15px;

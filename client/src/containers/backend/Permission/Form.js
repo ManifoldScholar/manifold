@@ -103,7 +103,7 @@ export class PermissionForm extends PureComponent {
             placeholder="Select User"
             label={this.labelUser}
             relationName="user"
-            focusOnMount
+            focusOnMount={!this.props.showUserInput}
           />
           <Form.SwitchArray
             name="attributes[roleNames]"
@@ -116,6 +116,7 @@ export class PermissionForm extends PureComponent {
               },
               { label: "Is a project author?", value: "project_author" }
             ]}
+            focusOnMount={this.props.showUserInput}
           />
           <Form.Save text="Save Permissions" />
         </FormContainer.Form>
