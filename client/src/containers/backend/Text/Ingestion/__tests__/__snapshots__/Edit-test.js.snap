@@ -109,7 +109,7 @@ exports[`Backend Text Ingestion Edit Container renders correctly 1`] = `
               Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file.
             </span>
             <input
-              aria-describedby="text-input-error-16"
+              aria-describedby="text-input-15"
               id="text-input-15"
               onChange={[Function]}
               placeholder={undefined}

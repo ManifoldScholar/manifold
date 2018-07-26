@@ -80,7 +80,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[general][pressSite]-text-input-15"
         >
           Press Website URL
         </label>
@@ -90,8 +90,8 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           If present, the press logo image will link to this URL.
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[general][pressSite]-text-input-15"
+          id="attributes[general][pressSite]-text-input-15"
           onChange={[Function]}
           placeholder="Enter URL"
           type="text"
@@ -104,7 +104,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[theme][logoStyles]-text-input-15"
         >
           Logo Styles
         </label>
@@ -114,8 +114,8 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           Enter a JSON style object, which will be applied to the logo image. For example: {"left": -1}
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[theme][logoStyles]-text-input-15"
+          id="attributes[theme][logoStyles]-text-input-15"
           onChange={[Function]}
           placeholder="Additional Logo CSS"
           type="text"
@@ -128,13 +128,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="text-input-15"
+          htmlFor="attributes[theme][typekitId]-text-input-15"
         >
           Typekit ID
         </label>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[theme][typekitId]-text-input-15"
+          id="attributes[theme][typekitId]-text-input-15"
           onChange={[Function]}
           placeholder="Enter Typekit ID"
           type="text"

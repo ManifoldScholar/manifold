@@ -24,13 +24,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][isbn]-text-input-15"
           >
             isbn
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][isbn]-text-input-15"
+            id="attributes[metadata][isbn]-text-input-15"
             onChange={[Function]}
             placeholder="International Standard Book Number"
             type="text"
@@ -43,13 +43,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][issn]-text-input-15"
           >
             issn
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][issn]-text-input-15"
+            id="attributes[metadata][issn]-text-input-15"
             onChange={[Function]}
             placeholder="International Standard Serial Number"
             type="text"
@@ -73,13 +73,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][publisher]-text-input-15"
           >
             publisher
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][publisher]-text-input-15"
+            id="attributes[metadata][publisher]-text-input-15"
             onChange={[Function]}
             placeholder="The Publisher"
             type="text"
@@ -92,7 +92,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][publisherPlace]-text-input-15"
           >
             publisher place
           </label>
@@ -102,8 +102,8 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             e.g "Minneapolis, MN"
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][publisherPlace]-text-input-15"
+            id="attributes[metadata][publisherPlace]-text-input-15"
             onChange={[Function]}
             placeholder="Geographic location of the publisher"
             type="text"
@@ -116,13 +116,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][originalPublisher]-text-input-15"
           >
             original publisher
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][originalPublisher]-text-input-15"
+            id="attributes[metadata][originalPublisher]-text-input-15"
             onChange={[Function]}
             placeholder="Original publisher, for items that have been republished by a different publisher"
             type="text"
@@ -135,13 +135,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][originalPublisherPlace]-text-input-15"
           >
             original publisher place
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][originalPublisherPlace]-text-input-15"
+            id="attributes[metadata][originalPublisherPlace]-text-input-15"
             onChange={[Function]}
             placeholder="Geographic location of the original publisher"
             type="text"
@@ -165,7 +165,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][containerTitle]-text-input-15"
           >
             container title
           </label>
@@ -175,8 +175,8 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             e.g. the book title for a book chapter, the journal title for a journal article
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][containerTitle]-text-input-15"
+            id="attributes[metadata][containerTitle]-text-input-15"
             onChange={[Function]}
             placeholder="Title of the container holding the item"
             type="text"
@@ -189,13 +189,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][version]-text-input-15"
           >
             version
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][version]-text-input-15"
+            id="attributes[metadata][version]-text-input-15"
             onChange={[Function]}
             placeholder="Version of the item"
             type="text"
@@ -208,7 +208,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][edition]-text-input-15"
           >
             edition
           </label>
@@ -218,8 +218,8 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             e.g. "3" when citing a chapter in the third edition of a book
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][edition]-text-input-15"
+            id="attributes[metadata][edition]-text-input-15"
             onChange={[Function]}
             placeholder="(Container) edition holding the item"
             type="text"
@@ -232,7 +232,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][issue]-text-input-15"
           >
             issue
           </label>
@@ -242,8 +242,8 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             e.g. "5" when citing a journal article from journal volume 2, issue 5
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][issue]-text-input-15"
+            id="attributes[metadata][issue]-text-input-15"
             onChange={[Function]}
             placeholder="(Container) issue holding the item"
             type="text"
@@ -256,7 +256,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][volume]-text-input-15"
           >
             volume
           </label>
@@ -266,8 +266,8 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             e.g. “2” when citing a chapter from book volume 2
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][volume]-text-input-15"
+            id="attributes[metadata][volume]-text-input-15"
             onChange={[Function]}
             placeholder="(Container) volume holding the item "
             type="text"
@@ -280,13 +280,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][originalTitle]-text-input-15"
           >
             original title
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][originalTitle]-text-input-15"
+            id="attributes[metadata][originalTitle]-text-input-15"
             onChange={[Function]}
             placeholder="Title of the original version"
             type="text"
@@ -310,13 +310,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][abstract]-text-input-15"
           >
             abstract
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][abstract]-text-input-15"
+            id="attributes[metadata][abstract]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -329,13 +329,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][archive]-text-input-15"
           >
             archive
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][archive]-text-input-15"
+            id="attributes[metadata][archive]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -348,13 +348,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][archiveLocation]-text-input-15"
           >
             archive location
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][archiveLocation]-text-input-15"
+            id="attributes[metadata][archiveLocation]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -367,13 +367,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][archivePlace]-text-input-15"
           >
             archive place
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][archivePlace]-text-input-15"
+            id="attributes[metadata][archivePlace]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -386,13 +386,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][authority]-text-input-15"
           >
             authority
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][authority]-text-input-15"
+            id="attributes[metadata][authority]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -405,13 +405,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][callNumber]-text-input-15"
           >
             call number
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][callNumber]-text-input-15"
+            id="attributes[metadata][callNumber]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -424,13 +424,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][chapterNumber]-text-input-15"
           >
             chapter number
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][chapterNumber]-text-input-15"
+            id="attributes[metadata][chapterNumber]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -443,13 +443,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][collectionNumber]-text-input-15"
           >
             collection number
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][collectionNumber]-text-input-15"
+            id="attributes[metadata][collectionNumber]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -462,13 +462,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][collectionTitle]-text-input-15"
           >
             collection title
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][collectionTitle]-text-input-15"
+            id="attributes[metadata][collectionTitle]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -481,13 +481,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][dimensions]-text-input-15"
           >
             dimensions
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][dimensions]-text-input-15"
+            id="attributes[metadata][dimensions]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -500,13 +500,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][event]-text-input-15"
           >
             event
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][event]-text-input-15"
+            id="attributes[metadata][event]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -519,13 +519,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][eventPlace]-text-input-15"
           >
             event place
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][eventPlace]-text-input-15"
+            id="attributes[metadata][eventPlace]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -538,13 +538,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][jurisdiction]-text-input-15"
           >
             jurisdiction
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][jurisdiction]-text-input-15"
+            id="attributes[metadata][jurisdiction]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -557,13 +557,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][medium]-text-input-15"
           >
             medium
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][medium]-text-input-15"
+            id="attributes[metadata][medium]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -576,13 +576,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][number]-text-input-15"
           >
             number
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][number]-text-input-15"
+            id="attributes[metadata][number]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -595,13 +595,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][numberOfPages]-text-input-15"
           >
             number of pages
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][numberOfPages]-text-input-15"
+            id="attributes[metadata][numberOfPages]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -614,13 +614,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][numberOfVolumes]-text-input-15"
           >
             number of volumes
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][numberOfVolumes]-text-input-15"
+            id="attributes[metadata][numberOfVolumes]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -633,13 +633,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][pmcid]-text-input-15"
           >
             pmcid
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][pmcid]-text-input-15"
+            id="attributes[metadata][pmcid]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -652,13 +652,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][pmid]-text-input-15"
           >
             pmid
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][pmid]-text-input-15"
+            id="attributes[metadata][pmid]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -671,13 +671,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][reviewedTitle]-text-input-15"
           >
             reviewed title
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][reviewedTitle]-text-input-15"
+            id="attributes[metadata][reviewedTitle]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -690,13 +690,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][section]-text-input-15"
           >
             section
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][section]-text-input-15"
+            id="attributes[metadata][section]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"
@@ -709,13 +709,13 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="text-input-15"
+            htmlFor="attributes[metadata][yearSuffix]-text-input-15"
           >
             year suffix
           </label>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[metadata][yearSuffix]-text-input-15"
+            id="attributes[metadata][yearSuffix]-text-input-15"
             onChange={[Function]}
             placeholder={null}
             type="text"

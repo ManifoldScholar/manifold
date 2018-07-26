@@ -29,7 +29,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[email][fromAddress]-text-input-15"
         >
           Email from address
         </label>
@@ -39,8 +39,8 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
           All emails sent by manifold will be from this address.
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[email][fromAddress]-text-input-15"
+          id="attributes[email][fromAddress]-text-input-15"
           onChange={[Function]}
           placeholder="do-not-reply@manifoldapp.org"
           type="text"
@@ -53,7 +53,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[email][fromName]-text-input-15"
         >
           Email from name
         </label>
@@ -63,8 +63,8 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
           All emails sent by manifold will appear to be sent by this name.
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[email][fromName]-text-input-15"
+          id="attributes[email][fromName]-text-input-15"
           onChange={[Function]}
           placeholder="Manifold Scholarship"
           type="text"
@@ -77,7 +77,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[email][replyToAddress]-text-input-15"
         >
           Email reply-to address
         </label>
@@ -87,8 +87,8 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
           Replies to emails sent by Manifold will go to this address.
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[email][replyToAddress]-text-input-15"
+          id="attributes[email][replyToAddress]-text-input-15"
           onChange={[Function]}
           placeholder="do-not-reply@manifoldapp.org"
           type="text"
@@ -101,7 +101,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[email][replyToName]-text-input-15"
         >
           Email reply-to name
         </label>
@@ -111,8 +111,8 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
           Replies to emails sent by Manifold will appear to be sent by this name.
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[email][replyToName]-text-input-15"
+          id="attributes[email][replyToName]-text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -205,7 +205,7 @@ The Manifold Team"
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[email][sendmailSettingsLocation]-text-input-15"
           >
             Sendmail Location
           </label>
@@ -215,8 +215,8 @@ The Manifold Team"
             The location of the sendmail executable. Defaults to /usr/sbin/sendmail.
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[email][sendmailSettingsLocation]-text-input-15"
+            id="attributes[email][sendmailSettingsLocation]-text-input-15"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -229,7 +229,7 @@ The Manifold Team"
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[email][sendmailSettingsArguments]-text-input-15"
           >
             Sendmail Arguments
           </label>
@@ -239,8 +239,8 @@ The Manifold Team"
             The command line arguments. Defaults to -i with -f sender@address added automatically before the message is sent.
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[email][sendmailSettingsArguments]-text-input-15"
+            id="attributes[email][sendmailSettingsArguments]-text-input-15"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -291,7 +291,7 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[email][fromAddress]-text-input-15"
         >
           Email from address
         </label>
@@ -301,8 +301,8 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
           All emails sent by manifold will be from this address.
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[email][fromAddress]-text-input-15"
+          id="attributes[email][fromAddress]-text-input-15"
           onChange={[Function]}
           placeholder="do-not-reply@manifoldapp.org"
           type="text"
@@ -315,7 +315,7 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[email][fromName]-text-input-15"
         >
           Email from name
         </label>
@@ -325,8 +325,8 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
           All emails sent by manifold will appear to be sent by this name.
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[email][fromName]-text-input-15"
+          id="attributes[email][fromName]-text-input-15"
           onChange={[Function]}
           placeholder="Manifold Scholarship"
           type="text"
@@ -339,7 +339,7 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[email][replyToAddress]-text-input-15"
         >
           Email reply-to address
         </label>
@@ -349,8 +349,8 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
           Replies to emails sent by Manifold will go to this address.
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[email][replyToAddress]-text-input-15"
+          id="attributes[email][replyToAddress]-text-input-15"
           onChange={[Function]}
           placeholder="do-not-reply@manifoldapp.org"
           type="text"
@@ -363,7 +363,7 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-15"
+          htmlFor="attributes[email][replyToName]-text-input-15"
         >
           Email reply-to name
         </label>
@@ -373,8 +373,8 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
           Replies to emails sent by Manifold will appear to be sent by this name.
         </span>
         <input
-          aria-describedby="text-input-error-16"
-          id="text-input-15"
+          aria-describedby="attributes[email][replyToName]-text-input-15"
+          id="attributes[email][replyToName]-text-input-15"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
@@ -467,7 +467,7 @@ The Manifold Team"
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[email][smtpSettingsAddress]-text-input-15"
           >
             SMTP Address
           </label>
@@ -477,8 +477,8 @@ The Manifold Team"
             Allows you to use a remote mail server.
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[email][smtpSettingsAddress]-text-input-15"
+            id="attributes[email][smtpSettingsAddress]-text-input-15"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -491,7 +491,7 @@ The Manifold Team"
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[email][smtpSettingsPort]-text-input-15"
           >
             SMTP Port
           </label>
@@ -501,8 +501,8 @@ The Manifold Team"
             On the off chance that your mail server doesn't run on port 25, you can change it.
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[email][smtpSettingsPort]-text-input-15"
+            id="attributes[email][smtpSettingsPort]-text-input-15"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -515,7 +515,7 @@ The Manifold Team"
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[email][smtpSettingsUserName]-text-input-15"
           >
             SMTP Username
           </label>
@@ -525,8 +525,8 @@ The Manifold Team"
             If your mail server requires authentication, set the username in this setting.
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[email][smtpSettingsUserName]-text-input-15"
+            id="attributes[email][smtpSettingsUserName]-text-input-15"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
@@ -539,7 +539,7 @@ The Manifold Team"
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="attributes[secrets][smtpSettingsPassword]-text-input-15"
           >
             SMTP Password
           </label>
@@ -549,8 +549,8 @@ The Manifold Team"
             If your mail server requires authentication, set the password in this setting.
           </span>
           <input
-            aria-describedby="text-input-error-16"
-            id="text-input-15"
+            aria-describedby="attributes[secrets][smtpSettingsPassword]-text-input-15"
+            id="attributes[secrets][smtpSettingsPassword]-text-input-15"
             onChange={[Function]}
             placeholder={undefined}
             type="password"

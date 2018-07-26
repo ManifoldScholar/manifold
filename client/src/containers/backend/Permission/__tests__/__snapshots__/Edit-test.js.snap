@@ -63,7 +63,9 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                 <div
                   aria-pressed={false}
                   className="boolean-primary"
+                  onBlur={[Function]}
                   onClick={[Function]}
+                  onFocus={[Function]}
                   role="button"
                   tabIndex="0"
                 >
@@ -89,7 +91,9 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                 <div
                   aria-pressed={false}
                   className="boolean-primary"
+                  onBlur={[Function]}
                   onClick={[Function]}
+                  onFocus={[Function]}
                   role="button"
                   tabIndex="0"
                 >
@@ -115,7 +119,9 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                 <div
                   aria-pressed={false}
                   className="boolean-primary"
+                  onBlur={[Function]}
                   onClick={[Function]}
+                  onFocus={[Function]}
                   role="button"
                   tabIndex="0"
                 >
