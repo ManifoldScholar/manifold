@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Dialog, Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
+import { Utility } from "components/global";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
@@ -204,6 +205,7 @@ export class ProjectWrapperContainer extends PureComponent {
   render() {
     if (!this.props.project) return null;
     const { project } = this.props;
+    const skipId = "skip-to-project-panel";
 
     return (
       <HigherOrder.Authorize
@@ -231,6 +233,7 @@ export class ProjectWrapperContainer extends PureComponent {
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">
+              <Utility.SkipLink skipId={skipId} />
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(project)}
               />
@@ -238,11 +241,14 @@ export class ProjectWrapperContainer extends PureComponent {
           </aside>
           <div className="container">
             <aside className="aside">
+              <Utility.SkipLink skipId={skipId} />
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(project)}
               />
             </aside>
-            <div className="panel">{this.renderRoutes()}</div>
+            <div id={skipId} className="panel">
+              {this.renderRoutes()}
+            </div>
           </div>
         </section>
       </HigherOrder.Authorize>

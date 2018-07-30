@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
+import { Utility } from "components/global";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
@@ -37,6 +38,8 @@ export class PagesWrapperContainer extends PureComponent {
   }
 
   render() {
+    const skipId = "skip-to-content-panel";
+
     return (
       <HigherOrder.Authorize
         entity={["page", "feature"]}
@@ -48,14 +51,18 @@ export class PagesWrapperContainer extends PureComponent {
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">
+              <Utility.SkipLink skipId={skipId} />
               <Navigation.Secondary links={this.secondaryNavigationLinks()} />
             </div>
           </aside>
           <div className="container">
             <aside className="aside">
+              <Utility.SkipLink skipId={skipId} />
               <Navigation.Secondary links={this.secondaryNavigationLinks()} />
             </aside>
-            <div className="panel">{childRoutes(this.props.route)}</div>
+            <div id={skipId} className="panel">
+              {childRoutes(this.props.route)}
+            </div>
           </div>
         </section>
       </HigherOrder.Authorize>

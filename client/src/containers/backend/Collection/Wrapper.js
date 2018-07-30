@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Navigation, Dialog } from "components/backend";
 import { HigherOrder } from "containers/global";
+import { Utility } from "components/global";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { collectionsAPI, requests } from "api";
@@ -161,6 +162,7 @@ export class CollectionWrapperContainer extends PureComponent {
     const { collection, match } = this.props;
     /* eslint-enable no-unused-vars */
     if (!collection) return null;
+    const skipId = "skip-to-collection-panel";
 
     return (
       <HigherOrder.Authorize
@@ -196,6 +198,7 @@ export class CollectionWrapperContainer extends PureComponent {
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">
+              <Utility.SkipLink skipId={skipId} />
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(collection)}
               />
@@ -203,11 +206,14 @@ export class CollectionWrapperContainer extends PureComponent {
           </aside>
           <div className="container">
             <aside className="aside">
+              <Utility.SkipLink skipId={skipId} />
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(collection)}
               />
             </aside>
-            <div className="panel">{this.renderRoutes()}</div>
+            <div id={skipId} className="panel">
+              {this.renderRoutes()}
+            </div>
           </div>
         </section>
       </HigherOrder.Authorize>

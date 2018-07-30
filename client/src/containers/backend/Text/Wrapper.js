@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Dialog, Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
+import { Utility } from "components/global";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { textsAPI, requests } from "api";
@@ -177,6 +178,8 @@ export class TextWrapperContainer extends PureComponent {
   render() {
     const { text } = this.props;
     if (!text) return null;
+    const skipId = "skip-to-text-panel";
+
     return (
       <HigherOrder.Authorize
         entity={text}
@@ -211,6 +214,7 @@ export class TextWrapperContainer extends PureComponent {
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">
+              <Utility.SkipLink skipId={skipId} />
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(text)}
               />
@@ -218,11 +222,14 @@ export class TextWrapperContainer extends PureComponent {
           </aside>
           <div className="container">
             <aside className="aside">
+              <Utility.SkipLink skipId={skipId} />
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(text)}
               />
             </aside>
-            <div className="panel">{this.renderRoutes()}</div>
+            <div id={skipId} className="panel">
+              {this.renderRoutes()}
+            </div>
           </div>
         </section>
       </HigherOrder.Authorize>
