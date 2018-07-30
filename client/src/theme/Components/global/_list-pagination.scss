@@ -106,3 +106,53 @@
     }
   }
 }
+
+// CABS may override .list-pagination-secondary if used globally
+.list-pagination-wide {
+  @extend %list-pagination;
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  li.active a {
+    color: $accentPrimaryDull;
+  }
+
+  a {
+    color: $neutral50;
+  }
+
+  a:hover {
+    color: $accentPrimary;
+  }
+
+  .pagination-previous, .pagination-next {
+    margin: 0;
+    flex: 1;
+
+    &.disabled a {
+      pointer-events: none;
+      color: $neutral80;
+    }
+  }
+
+  .pagination-previous {
+    text-align: left;
+  }
+
+  .pagination-next {
+    text-align: right;
+  }
+
+  .ordinal {
+    flex: 0;
+  }
+}
+
+.list-total {
+  @include utilityPrimary;
+  color: $neutral50;
+  font-size: 14px;
+}
