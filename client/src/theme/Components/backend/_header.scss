@@ -15,4 +15,33 @@
   .wrapper {
     padding-top: 25px;
   }
+
+  &.section-heading-secondary {
+    padding-top: 1em;
+    padding-bottom: 1.125em;
+
+    h1 {
+      // CABS abstract to all .section-heading-secondary?
+      padding-left: 25px;
+      color: $neutral70;
+      text-transform: none;
+      font-size: 30px;
+      font-weight: $medium;
+      letter-spacing: 0;
+
+      .manicon.manicon-stack {
+        margin-right: 18px;
+      }
+    }
+
+    .list-total {
+      font-size: inherit;
+      color: $accentPrimary;
+    }
+
+    .manicon.manicon-stack {
+      margin-right: 9px;
+      margin-left: 0;
+    }
+  }
 }

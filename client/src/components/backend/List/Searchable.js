@@ -21,6 +21,7 @@ export class ListSearchable extends PureComponent {
   static propTypes = {
     entities: PropTypes.array,
     listClassName: PropTypes.string,
+    columnarNav: PropTypes.bool,
     singularUnit: PropTypes.string,
     pluralUnit: PropTypes.string,
     pagination: PropTypes.object,
@@ -59,6 +60,7 @@ export class ListSearchable extends PureComponent {
 
   static defaultProps = {
     entityComponentProps: {},
+    columnarNav: false,
     newButton: null,
     secondaryButton: null,
     paginationPadding: 3,
@@ -66,7 +68,8 @@ export class ListSearchable extends PureComponent {
     initialFilter: null,
     searchId: uniqueId("list-search-"),
     filterId: uniqueId("list-filter-"),
-    sortId: uniqueId("list-sort-")
+    sortId: uniqueId("list-sort-"),
+    listClassName: "vertical-list-primary"
   };
 
   constructor(props) {
@@ -251,6 +254,9 @@ export class ListSearchable extends PureComponent {
     let newButtonAuthorized = null;
     let secondaryButtonAuthorized = null;
 
+    const groupClass =
+      props.columnarNav ? "list-nav-horizontal" : "buttons-icon-horizontal";
+
     if (props.newButton && props.newButton.authorizedFor) {
       newButtonAuthorized = this.authorization.authorizeAbility({
         currentUser: props.currentUser,
@@ -269,10 +275,52 @@ export class ListSearchable extends PureComponent {
 
     if (!newButtonAuthorized && !secondaryButtonAuthorized) return null;
     return (
-      <div className="buttons-icon-horizontal">
+      <div className={groupClass}>
+        {props.columnarNav && this.renderForm()}
         {this.renderButton(props.newButton)}
         {this.renderButton(props.secondaryButton)}
       </div>
+    );
+  }
+
+  renderForm = () => {
+    return (
+      <form className="form-search-filter" onSubmit={this.handleSubmit}>
+        <div className="search">
+          <button>
+            <i className="manicon manicon-magnify" aria-hidden="true" />
+            <span className="screen-reader-text">Search</span>
+          </button>
+          <label htmlFor={this.props.searchId} className="screen-reader-text">
+            Enter Search Criteria
+          </label>
+          <input
+            id={this.props.searchId}
+            value={this.state.filter.keyword || ""}
+            type="text"
+            placeholder="Search..."
+            onChange={e => this.setFilter(e, "keyword")}
+          />
+        </div>
+        {this.renderSearchOptions()}
+        <div className="button-row">
+          {this.showOptionsButton(this.props) ? (
+            <button
+              onClick={this.toggleOptions}
+              className="button-bare-primary"
+              data-id={"filter-toggle"}
+            >
+              {this.renderOptionsText()}
+            </button>
+          ) : null}
+          <button
+            onClick={this.resetSearch}
+            className="button-bare-primary reset"
+          >
+            {"Reset Search"}
+          </button>
+        </div>
+      </form>
     );
   }
 
@@ -282,12 +330,14 @@ export class ListSearchable extends PureComponent {
 
     return (
       <div>
-        <Utility.EntityCount
-          pagination={this.props.pagination}
-          singularUnit={this.props.singularUnit}
-          pluralUnit={this.props.pluralUnit}
-        />
-        {this.renderButtonRow(this.props)}
+        {!this.props.columnarNav && (
+          <Utility.EntityCount
+            pagination={this.props.pagination}
+            singularUnit={this.props.singularUnit}
+            pluralUnit={this.props.pluralUnit}
+          />
+        )}
+        {!this.props.columnarNav && this.renderButtonRow(this.props)}
         {entities.length > 0 ? (
           <List.SimpleList
             entities={entities}
@@ -303,49 +353,15 @@ export class ListSearchable extends PureComponent {
   };
 
   render() {
-    const listClassName = classnames(
-      "vertical-list-primary",
-      this.props.listClassName
-    );
+    const listClassName = this.props.listClassName;
 
     return (
       <div>
-        <form className="form-search-filter" onSubmit={this.handleSubmit}>
-          <div className="search">
-            <button>
-              <i className="manicon manicon-magnify" aria-hidden="true" />
-              <span className="screen-reader-text">Search</span>
-            </button>
-            <label htmlFor={this.props.searchId} className="screen-reader-text">
-              Enter Search Criteria
-            </label>
-            <input
-              id={this.props.searchId}
-              value={this.state.filter.keyword || ""}
-              type="text"
-              placeholder="Search..."
-              onChange={e => this.setFilter(e, "keyword")}
-            />
-          </div>
-          {this.renderSearchOptions()}
-          <div className="button-row">
-            {this.showOptionsButton(this.props) ? (
-              <button
-                onClick={this.toggleOptions}
-                className="button-bare-primary"
-                data-id={"filter-toggle"}
-              >
-                {this.renderOptionsText()}
-              </button>
-            ) : null}
-            <button
-              onClick={this.resetSearch}
-              className="button-bare-primary reset"
-            >
-              {"Reset Search"}
-            </button>
-          </div>
-        </form>
+        {
+          this.props.columnarNav
+            ? this.renderButtonRow(this.props)
+            : this.renderForm()
+        }
         <nav className={listClassName}>{this.renderEntityList()}</nav>
         <Utility.Pagination
           pagination={this.props.pagination}

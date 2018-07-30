@@ -120,6 +120,13 @@ export default () => {
           helper: () => "/backend/project/new"
         },
         {
+          name: "backendProjects",
+          exact: true,
+          component: Backend.Projects,
+          path: "/backend/projects",
+          helper: () => "/backend/projects"
+        },
+        {
           name: "backendProject",
           exact: false,
           component: Backend.Project.Wrapper,
