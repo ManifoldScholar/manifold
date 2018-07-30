@@ -10,9 +10,7 @@ describe("Backend Resource New Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={build.store()}>
-        <ResourceNewContainer
-          project={project}
-        />
+        <ResourceNewContainer project={project} />
       </Provider>
     )
   );

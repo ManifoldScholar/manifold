@@ -23,7 +23,11 @@ describe("Reader.Toc Component", () => {
   it("renders correctly with empty toc", () => {
     const component = renderer.create(
       wrapWithRouter(
-        <Toc text={textWithoutToc} tocDrawerVisible hideTocDrawer={hideTocMock} />
+        <Toc
+          text={textWithoutToc}
+          tocDrawerVisible
+          hideTocDrawer={hideTocMock}
+        />
       )
     );
     let tree = component.toJSON();

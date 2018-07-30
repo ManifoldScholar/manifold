@@ -9,8 +9,10 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("Global.Helper.SimpleFormat component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
-      <SimpleFormat text="Basketball is my favorite sport.
-        I like the way they dribble up and down the court." />
+      <SimpleFormat
+        text="Basketball is my favorite sport.
+        I like the way they dribble up and down the court."
+      />
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -18,8 +20,10 @@ describe("Global.Helper.SimpleFormat component", () => {
 
   it("removes line breaks", () => {
     const component = Enzyme.shallow(
-      <SimpleFormat text="Basketball is my favorite sport.
-        I like the way they dribble up and down the court." />
+      <SimpleFormat
+        text="Basketball is my favorite sport.
+        I like the way they dribble up and down the court."
+      />
     );
     expect(component.text()).toEqual(
       "Basketball is my favorite sport. I like the way they dribble up and down the court."

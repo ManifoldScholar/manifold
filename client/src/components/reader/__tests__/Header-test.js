@@ -8,7 +8,11 @@ import { Provider } from "react-redux";
 describe("Reader.Header Component", () => {
   const project = build.entity.project("2");
   const text = build.entity.text("1", {}, { project });
-  const textWithoutContents = build.entity.text("2", { toc: [], metadata: {} }, { project });
+  const textWithoutContents = build.entity.text(
+    "2",
+    { toc: [], metadata: {} },
+    { project }
+  );
 
   const store = build.store();
 
