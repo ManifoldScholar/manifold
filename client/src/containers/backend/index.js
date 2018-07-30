@@ -2,6 +2,7 @@ import Backend from "./Backend";
 import Dashboard from "./Dashboard";
 import Dashboards from "./Dashboards";
 import Project from "./Project";
+import Projects from "./ProjectsContainer";
 import Resource from "./Resource";
 import ResourceImport from "./ResourceImport";
 import Collection from "./Collection";
@@ -21,6 +22,7 @@ export {
   Dashboard,
   Dashboards,
   Project,
+  Projects,
   Resource,
   ResourceImport,
   Collection,

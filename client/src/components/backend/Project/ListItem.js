@@ -77,9 +77,11 @@ export default class ProjectListItem extends PureComponent {
       <li key={project.id}>
         <Link to={this.projectLink(project)}>
           <header>
-            <figure className="cover">
-              {this.renderProjectImage(project)}
-            </figure>
+            <div className="figure-wrapper">
+              <figure className="cover">
+                {this.renderProjectImage(project)}
+              </figure>
+            </div>
             <div className="meta">
               <h3 className="name">
                 <span className="title-text">{attr.title}</span>

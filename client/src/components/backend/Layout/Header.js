@@ -58,6 +58,15 @@ export default class LayoutHeader extends Component {
                     activeClassName="active"
                     to={lh.link("backend")}
                   >
+                    {"Dashboard"}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    isActive={this.props.isProjects}
+                    activeClassName="active"
+                    to={lh.link("backendProjects")}
+                  >
                     {"Projects"}
                   </NavLink>
                 </li>

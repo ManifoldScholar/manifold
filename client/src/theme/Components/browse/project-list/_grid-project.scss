@@ -78,56 +78,7 @@
 
     // Figure
     figure {
-      position: relative;
-      left: -4px;
-      max-width: 100%;
-      height: 0;
-      padding-top: 94%;
-      margin-bottom: 20px;
-
-      .figure-border {
-        display: inline-block;
-      }
-
-      img, svg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        // Relative z-index
-        z-index: 0;
-        width: auto;
-        max-width: 100%;
-        height: 100%;
-        max-height: 100%;
-        border: 4px solid transparent;
-
-        // Sub class used only by SVG
-        .background {
-          stroke: transparent;
-          stroke-linecap: square;
-          stroke-width: 5px;
-        }
-      }
-
-      svg {
-        border: 0;
-      }
-
-      // Follow button
-      .follow-button {
-        z-index: 1;
-      }
-
-      .manicon-plus-bold:hover ~ .thumbnail-follow-overlay {
-        visibility: visible;
-        opacity: 1;
-      }
-
-      button.screen-reader-text {
-        &:focus {
-          @include focusOutline;
-        }
-      }
+      @include projectGridFigure;
     }
 
     &:hover, &:focus {
