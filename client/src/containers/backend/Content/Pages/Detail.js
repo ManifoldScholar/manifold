@@ -7,6 +7,7 @@ import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import { HigherOrder } from "containers/global";
+import { Utility } from "components/global";
 import { Dialog, Navigation } from "components/backend";
 
 const { select } = entityUtils;
@@ -215,6 +216,7 @@ class PageDetailContainer extends PureComponent {
 
   renderExisting(page) {
     if (!page) return null;
+    const skipId = "skip-to-pages-body-panel";
 
     return (
       <div>
@@ -229,6 +231,7 @@ class PageDetailContainer extends PureComponent {
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">
+              <Utility.SkipLink skipId={skipId} />
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(this.props)}
               />
@@ -236,11 +239,12 @@ class PageDetailContainer extends PureComponent {
           </aside>
           <div className="container">
             <aside className="aside">
+              <Utility.SkipLink skipId={skipId} />
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(this.props)}
               />
             </aside>
-            <div className="panel">
+            <div id={skipId} className="panel">
               <section>{this.renderRoutes()}</section>
             </div>
           </div>
