@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
+import startsWith from "lodash/startsWith";
 import { currentUserActions } from "actions";
 import classNames from "classnames";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
@@ -22,10 +23,11 @@ export default class ProjectFollow extends Component {
     };
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    const followed = get(nextProps.favorites, nextProps.project.id);
-    if (followed) return { view: "unfollow" };
-    return { view: "follow" };
+  static getDerivedStateFromProps(props, state) {
+    const followed = get(props.favorites, props.project.id);
+    const view = followed ? "unfollow" : "follow";
+    if (startsWith(state.view, view)) return null;
+    return { view };
   }
 
   componentDidMount() {
