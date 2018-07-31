@@ -4,6 +4,10 @@ module Validator
   # frontend. This mainly involves insuring proper nesting, and making sure that the
   # structure will work with ReactDom.
   class Html
+
+    VOID_ELEMENTS = %w(area base br col embed hr img input keygen
+                       link meta param source track wbr).freeze
+
     def validate(html)
       source = html.encoding == ::Encoding::ASCII_8BIT ? html.encode("UTF-8") : html
       fragment = Nokogiri::HTML.fragment(source)
@@ -11,10 +15,20 @@ module Validator
       ensure_valid_parent_nodes(fragment)
       strip_invalid_children(fragment)
       validate_tags(fragment)
-      fragment.to_s
+      close_void_tags(fragment.to_s)
     end
 
     private
+
+    def close_void_tags(html)
+      output = html
+      VOID_ELEMENTS.each do |element|
+        output.gsub!(%r(<#{element}(.+?)?\/?>), "<#{element}\\1 />")
+        output.gsub!(%r(<\/#{element}>), "")
+      end
+
+      output
+    end
 
     def validate_tags(fragment)
       tag_validator = Tag.new

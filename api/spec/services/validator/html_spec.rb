@@ -65,6 +65,18 @@ RSpec.describe Validator::Html do
     expect(validator.validate(fragment).delete("\n")).to eq(fragment)
   end
 
+  it "should close void tags" do
+    fragment = '<video><source src="sample.webm" type="video/webm"></video>'
+    valid = '<video><source src="sample.webm" type="video/webm" /></video>'
+    expect(validator.validate(fragment).delete("\n")).to eq(valid)
+  end
+
+  it "should remove closing void tags" do
+    fragment = '<div><input type="text"></input></div>'
+    valid = '<div><input type="text" /></div>'
+    expect(validator.validate(fragment).delete("\n")).to eq(valid)
+  end
+
   describe "excluded attributes" do
     html_config.attribute_exclusions.each do |attr|
       it "are removed: #{attr}" do
@@ -101,43 +113,43 @@ RSpec.describe Validator::Html do
 
   it "should remove max-width style attributes" do
     fragment = "<img style=\"max-width: 650px\">"
-    valid = "<img>"
+    valid = "<img />"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
   it "should rewrite width attribute to width style" do
     fragment = "<img width=\"650px\">"
-    valid = "<img style=\"width: 650px\">"
+    valid = "<img style=\"width: 650px\" />"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
   it "should cap the width" do
     fragment = "<img width=\"700px\">"
-    valid = "<img style=\"width: 650px\">"
+    valid = "<img style=\"width: 650px\" />"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
   it "should maintain units when rewriting measured attribute" do
     fragment = "<img width=\"50%\">"
-    valid = "<img style=\"width: 50%\">"
+    valid = "<img style=\"width: 50%\" />"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
   it "should default to pixels when rewriting measured attributes that have no unit" do
     fragment = "<img width=\"50\">"
-    valid = "<img style=\"width: 50px\">"
+    valid = "<img style=\"width: 50px\" />"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
   it "should rewrite bgcolor attribute to background-color style" do
     fragment = "<img bgcolor=\"red\">"
-    valid = "<img style=\"background-color: red\">"
+    valid = "<img style=\"background-color: red\" />"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
   it "should rewrite align attribute to text-align style" do
     fragment = "<img align=\"left\">"
-    valid = "<img style=\"text-align: left\">"
+    valid = "<img style=\"text-align: left\" />"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
