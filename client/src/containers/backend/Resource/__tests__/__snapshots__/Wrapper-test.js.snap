@@ -110,6 +110,13 @@ Array [
       <div
         className="wrapper"
       >
+        <a
+          className="screen-reader-text"
+          href="#skip-to-resource-panel"
+          onClick={[Function]}
+        >
+          Skip to main content
+        </a>
         <nav
           className="panel-nav"
         >
@@ -157,6 +164,13 @@ Array [
       <aside
         className="aside"
       >
+        <a
+          className="screen-reader-text"
+          href="#skip-to-resource-panel"
+          onClick={[Function]}
+        >
+          Skip to main content
+        </a>
         <nav
           className="panel-nav"
         >
@@ -199,6 +213,7 @@ Array [
       </aside>
       <div
         className="panel"
+        id="skip-to-resource-panel"
       />
     </div>
   </section>,

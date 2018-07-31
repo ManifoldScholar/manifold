@@ -10,6 +10,13 @@ exports[`Backend People Wrapper Container renders correctly 1`] = `
     <div
       className="wrapper"
     >
+      <a
+        className="screen-reader-text"
+        href="#skip-to-people-panel"
+        onClick={[Function]}
+      >
+        Skip to main content
+      </a>
       <nav
         className="panel-nav"
       >
@@ -35,6 +42,13 @@ exports[`Backend People Wrapper Container renders correctly 1`] = `
     <aside
       className="aside"
     >
+      <a
+        className="screen-reader-text"
+        href="#skip-to-people-panel"
+        onClick={[Function]}
+      >
+        Skip to main content
+      </a>
       <nav
         className="panel-nav"
       >
@@ -55,6 +69,7 @@ exports[`Backend People Wrapper Container renders correctly 1`] = `
     </aside>
     <div
       className="panel"
+      id="skip-to-people-panel"
     />
   </div>
 </section>

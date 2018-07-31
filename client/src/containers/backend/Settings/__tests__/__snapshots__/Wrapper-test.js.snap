@@ -10,6 +10,13 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
     <div
       className="wrapper"
     >
+      <a
+        className="screen-reader-text"
+        href="#skip-to-settings-panel"
+        onClick={[Function]}
+      >
+        Skip to main content
+      </a>
       <nav
         className="panel-nav"
       >
@@ -79,6 +86,13 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
     <aside
       className="aside"
     >
+      <a
+        className="screen-reader-text"
+        href="#skip-to-settings-panel"
+        onClick={[Function]}
+      >
+        Skip to main content
+      </a>
       <nav
         className="panel-nav"
       >
@@ -143,6 +157,7 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
     </aside>
     <div
       className="panel"
+      id="skip-to-settings-panel"
     />
   </div>
 </section>
