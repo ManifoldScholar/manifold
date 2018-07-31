@@ -42,6 +42,10 @@ common: &1
         :tag: "image"
         :type: "attribute_name"
       -
+        :name: "controls"
+        :to: true
+        :type: "attribute_value"
+      -
         :name: "*"
         :type: "namespaced"
     :attribute_exclusions:

@@ -155,6 +155,12 @@ module Validator
       node.delete(attribute_name(attribute))
     end
 
+    def transform_attribute_value!(node, attribute, transform)
+      value = transform[:to]
+      name = attribute_name(attribute)
+      node[name] = value
+    end
+
     # @param attribute [Array] containing exactly two elements: key and value
     # @return [String]
     def attribute_value(attribute)
