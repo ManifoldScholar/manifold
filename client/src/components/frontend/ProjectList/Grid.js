@@ -30,8 +30,10 @@ export default class ProjectListGrid extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const currentIds = this.props.projects.map(p => p.id);
-    const prevIds = prevProps.projects.map(p => p.id);
+    const prevProjects = prevProps.projects || [];
+    const currentProjects = this.props.projects || [];
+    const currentIds = currentProjects.map(p => p.id);
+    const prevIds = prevProjects.map(p => p.id);
     const diffA = difference(currentIds, prevIds).length;
     const diffB = difference(prevIds, currentIds).length;
     if (diffA + diffB === 1) {
