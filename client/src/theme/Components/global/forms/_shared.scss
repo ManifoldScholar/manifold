@@ -63,6 +63,12 @@
     + .dropzone-button {
       margin-top: 25px;
     }
+
+    .manicon {
+      &:focus {
+        @include focusOutline;
+      }
+    }
   }
 
   .dropzone-button-dotted {

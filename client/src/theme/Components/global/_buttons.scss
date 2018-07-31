@@ -223,16 +223,20 @@
     border: 1px solid $neutral80;
   }
 
-  &:hover {
+  &:hover:not([disabled]) {
     background-color: $accentPrimaryOffWhite;
   }
 
-  &:focus {
+  &:focus:not([disabled]) {
     background-color: $focusPrimary;
     outline: 0;
   }
 
-  &:active {
+  &:focus:disabled {
+    outline-offset: 2px;
+  }
+
+  &:active:not([disabled]) {
     color: $neutralWhite;
     background-color: $accentPrimary;
 
@@ -241,7 +245,7 @@
     }
   }
 
-  .bg-neutral05 &, .bg-neutral90 & {
+  .bg-neutral05 &:not([disabled]) {
     &:hover {
       color: $neutralWhite;
       background-color: $accentPrimary;
@@ -250,15 +254,67 @@
         color: $neutralWhite;
       }
     }
+
+    &:focus {
+      color: $accentPrimary;
+      background-color: $neutral30;
+      outline: 0;
+
+      .manicon {
+        color: $accentPrimary;
+      }
+    }
   }
 
-  &.dull {
+  .bg-neutral90 &:not([disabled]) {
+    &:hover {
+      color: $neutral90;
+      background-color: $accentPrimary;
+
+      .manicon {
+        color: $neutral90;
+      }
+    }
+
+    &:focus {
+      color: $accentPrimary;
+      background-color: $neutral95;
+      outline: 0;
+
+      .manicon {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  .dialog-primary .dialog-box &:not([disabled]) {
+    &:hover {
+      color: $neutral100;
+      background-color: $accentPrimary;
+
+      .manicon {
+        color: $neutral100;
+      }
+    }
+
+    &:focus {
+      color: $accentPrimary;
+      background-color: $neutral100;
+      outline: 0;
+
+      .manicon {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  .dialog-primary .dialog-box &.dull, &.dull {
     color: $neutral50;
     border-color: $neutral50;
 
     &:hover {
       color: $neutral50;
-      background-color: $neutral20;
+      background-color: $neutral05;
 
       .manicon {
         color: $neutral50;
@@ -267,7 +323,7 @@
 
     &:focus {
       color: $neutral50;
-      background-color: $focusTertiary;
+      background-color: $focusSecondary;
 
       .manicon {
         color: $neutral50;
@@ -283,10 +339,10 @@
       }
     }
   }
-
-  .manicon {
-    transition: color $duration $timing;
-  }
+  //
+  // .manicon {
+  //   transition: color $duration $timing;
+  // }
 
   .manicon-copy {
     display: inline-block;
@@ -429,15 +485,29 @@
     }
   }
 
+  .bg-neutral90 & {
+    &:hover {
+      color: $neutral90;
+      background-color: $accentPrimaryDull;
+    }
+
+    &:focus {
+      color: $neutralWhite;
+      background-color: $neutral95;
+      outline: 0;
+    }
+
+    &:active{
+      color: $neutral90;
+      background-color: $accentPrimaryDark;
+    }
+  }
+
   &.outlined {
     padding: 1em 30px 1.2em;
     color: $accentPrimary;
     background: none;
     border: 1px solid $accentPrimary;
-
-    .bg-neutral90 & {
-      color: $neutralWhite;
-    }
 
     &:hover, &:focus {
       color: $neutral90;
@@ -446,6 +516,43 @@
 
       .manicon {
         color: $neutral90;
+      }
+    }
+
+    .bg-neutral90 & {
+      color: $neutralWhite;
+
+      &:hover {
+        color: $neutral90;
+        background-color: $accentPrimary;
+
+        .manicon {
+          color: $neutral90;
+        }
+      }
+
+      &:focus {
+        color: $neutralWhite;
+        background-color: $neutral95;
+        outline: 0;
+
+        .manicon {
+          color: $neutralWhite;
+        }
+      }
+    }
+
+    .bg-neutral100 &, .drawer-backend &, .dialog-primary .dialog-box & {
+      color: $neutralWhite;
+
+      &:focus {
+        color: $neutralWhite;
+        background-color: $neutralBlack;
+        outline: 0;
+
+        .manicon {
+          color: $neutralWhite;
+        }
       }
     }
 
@@ -535,6 +642,20 @@
   color: $neutral40;
   text-align: left;
   background-color: $neutral80;
+
+  .bg-neutral90 & {
+    &:hover {
+      color: $neutral95;
+    }
+
+    &:focus {
+      background-color: $neutral95;
+    }
+
+    &:active {
+      color: $neutral95;
+    }
+  }
 }
 
 // Button with price-tag
