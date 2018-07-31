@@ -71,7 +71,7 @@ export default class ProjectListPlaceholder extends Component {
             </HigherOrder.Authorize>
             <SVG.BooksOnShelf />
             <div className="button">
-              <Link to={lh.link("backend")} className="button-icon-primary">
+              <Link to={lh.link("backendProjects")} className="button-icon-primary">
                 <span>{"Publish a Project Now"}</span>
               </Link>
             </div>

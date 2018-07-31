@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { People } from "containers/backend";
+import { Makers } from "containers/backend";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
 
@@ -13,7 +13,7 @@ export class MakersNewContainer extends PureComponent {
   };
 
   redirectToMaker(maker) {
-    const path = lh.link("backendPeopleMaker", maker.id);
+    const path = lh.link("backendRecordsMaker", maker.id);
     this.props.history.push(path, { keepNotifications: true });
   }
 
@@ -27,7 +27,7 @@ export class MakersNewContainer extends PureComponent {
         <header className="drawer-header">
           <h2 className="heading-quaternary">New Maker</h2>
         </header>
-        <People.Makers.Form
+        <Makers.Form
           successHandler={this.handleSuccess}
           options={{ adds: requests.beMakers }}
         />

@@ -14,7 +14,7 @@ class PagesGeneralContainer extends PureComponent {
     };
   };
 
-  static displayName = "Content.Pages.General";
+  static displayName = "Pages.General";
 
   static propTypes = {
     page: PropTypes.object.isRequired,

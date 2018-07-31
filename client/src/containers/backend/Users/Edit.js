@@ -84,7 +84,7 @@ export class UsersEditContainer extends PureComponent {
     const options = { removes: user };
     const userRequest = request(call, requests.beUserDestroy, options);
     this.props.dispatch(userRequest).promise.then(() => {
-      this.props.history.push(lh.link("backendPeopleUsers"));
+      this.props.history.push(lh.link("backendRecordsUsers"));
     });
   }
 

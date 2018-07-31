@@ -70,15 +70,12 @@ export class BackendContainer extends PureComponent {
     this.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
   }
 
-  isProjects = (match, location) => {
+  isBackendRoot = (match, location) => {
     if (!match) {
       return false;
     }
     const { pathname } = location;
     if (pathname === "/backend") return true;
-    if (startsWith(pathname, "/backend/project")) return true;
-    if (startsWith(pathname, "/backend/resource")) return true;
-    return startsWith(pathname, "/backend/text");
   };
 
   hasFatalError() {
@@ -132,7 +129,7 @@ export class BackendContainer extends PureComponent {
               authentication={this.props.authentication}
               commonActions={this.commonActions}
               settings={this.props.settings}
-              isProjects={this.isProjects}
+              isBackendRoot={this.isBackendRoot}
             />
           </HigherOrder.ScrollAware>
           <main

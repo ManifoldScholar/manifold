@@ -24,7 +24,7 @@ class PagesNewContainer extends PureComponent {
   }
 
   redirectToPage(page) {
-    const path = lh.link("backendContentPageGeneral", page.id);
+    const path = lh.link("backendRecordsPageGeneral", page.id);
     this.props.history.push(path);
   }
 

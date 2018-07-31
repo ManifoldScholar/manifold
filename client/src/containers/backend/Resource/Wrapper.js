@@ -202,7 +202,7 @@ export class ResourceWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="resource"
           breadcrumb={[
-            { path: lh.link("backend"), label: "ALL PROJECTS" },
+            { path: lh.link("backendProjects"), label: "ALL PROJECTS" },
             {
               path: lh.link(
                 "backendProjectResources",

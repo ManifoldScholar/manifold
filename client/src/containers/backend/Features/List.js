@@ -23,7 +23,7 @@ class ContentFeaturesList extends PureComponent {
     };
   };
 
-  static displayName = "Content.Features.List";
+  static displayName = "Features.List";
 
   static propTypes = {
     features: PropTypes.array,
@@ -139,7 +139,7 @@ class ContentFeaturesList extends PureComponent {
                     <div>
                       <Link
                         className="asset-thumb"
-                        to={lh.link("backendContentFeature", feature.id)}
+                        to={lh.link("backendRecordsFeature", feature.id)}
                       >
                         <figure className="asset-image">
                           <div className="asset-image-placeholder">
@@ -171,7 +171,7 @@ class ContentFeaturesList extends PureComponent {
                         <div className="text-category-list-utility">
                           <Link
                             className="button"
-                            to={lh.link("backendContentFeature", feature.id)}
+                            to={lh.link("backendRecordsFeature", feature.id)}
                           >
                             Edit
                           </Link>
@@ -237,7 +237,7 @@ class ContentFeaturesList extends PureComponent {
           <div className="buttons-icon-horizontal">
             <Link
               className="button-icon-secondary"
-              to={lh.link("backendContentFeatureNew")}
+              to={lh.link("backendRecordsFeatureNew")}
             >
               <i className="manicon manicon-plus" />
               Add a New Feature

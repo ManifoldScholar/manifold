@@ -22,7 +22,7 @@ class FeatureDetailContainer extends PureComponent {
     };
   };
 
-  static displayName = "Content.Feature.Detail";
+  static displayName = "Feature.Detail";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -63,7 +63,7 @@ class FeatureDetailContainer extends PureComponent {
   }
 
   redirectToFeatures() {
-    const path = lh.link("backendContentFeatures");
+    const path = lh.link("backendRecordsFeatures");
     this.props.history.push(path);
   }
 
@@ -106,7 +106,7 @@ class FeatureDetailContainer extends PureComponent {
   };
 
   redirectToList() {
-    const path = lh.link("backendContentFeatures");
+    const path = lh.link("backendRecordsFeatures");
     this.props.history.push(path);
   }
 
@@ -153,7 +153,7 @@ class FeatureDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="feature"
         breadcrumb={[
-          { path: lh.link("backendContentFeatures"), label: "ALL FEATURES" }
+          { path: lh.link("backendRecordsFeatures"), label: "ALL FEATURES" }
         ]}
         title="New Feature"
         showUtility={false}
@@ -170,7 +170,7 @@ class FeatureDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="feature"
         breadcrumb={[
-          { path: lh.link("backendContentFeatures"), label: "ALL FEATURES" }
+          { path: lh.link("backendRecordsFeatures"), label: "ALL FEATURES" }
         ]}
         title={
           feature.attributes.header ||
