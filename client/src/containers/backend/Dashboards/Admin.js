@@ -25,7 +25,9 @@ export class DashboardsAdminContainer extends PureComponent {
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore),
       recentProjects: select(requests.beRecentProjects, state.entityStore),
-      authentication: state.authentication
+      authentication: state.authentication,
+      projectsListSnapshot:
+        state.ui.transitory.stateSnapshots.dashboardProjectsList
     };
   };
 
@@ -36,7 +38,7 @@ export class DashboardsAdminContainer extends PureComponent {
     projectsMeta: PropTypes.object,
     recentProjects: PropTypes.array,
     authentication: PropTypes.object,
-    projectListSnapshot: PropTypes.object.isRequired,
+    projectsListSnapshot: PropTypes.object.isRequired,
     snapshotCreator: PropTypes.func.isRequired
   };
 
@@ -50,7 +52,7 @@ export class DashboardsAdminContainer extends PureComponent {
   componentDidMount() {
     const projectsRequest = request(
       projectsAPI.index(this.buildFetchFilter(this.props, this.state.filter), {
-        number: this.props.projectListSnapshot.page,
+        number: this.props.projectsListSnapshot.page,
         size: perPage
       }),
       requests.beProjects
@@ -82,9 +84,7 @@ export class DashboardsAdminContainer extends PureComponent {
   }
 
   initialState(props) {
-    if (props.projectListSnapshot)
-      return Object.assign({}, { filter: props.projectListSnapshot.filter });
-    return { filter: { order: "sort_title ASC" } };
+    return Object.assign({}, { filter: props.projectsListSnapshot.filter });
   }
 
   buildFetchFilter = (props, base) => {

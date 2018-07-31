@@ -21,7 +21,7 @@ describe("Backend Dashboards Admin Container", () => {
           projectsMeta={projectsMeta}
           recentProjects={recentProjects}
           dispatch={store.dispatch}
-          projectListSnapshot={{ page: 1 }}
+          projectsListSnapshot={{ page: 1 }}
           authentication={{
             authenticated: true,
             currentUser: build.entity.user("5", {
