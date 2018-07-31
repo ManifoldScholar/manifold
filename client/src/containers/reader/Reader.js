@@ -26,7 +26,7 @@ import {
   uiTypographyActions,
   entityStoreActions
 } from "actions";
-import { setPersistentUI } from "../../actions/ui/persistent_ui";
+import { setPersistentUI } from "../../actions/ui/persistentUi";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 
 const {

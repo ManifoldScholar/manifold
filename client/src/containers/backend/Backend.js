@@ -6,14 +6,13 @@ import { Layout as LayoutFrontend } from "components/frontend";
 import { Layout as LayoutBackend } from "components/backend";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, requests } from "api";
-import { entityStoreActions } from "actions";
+import { uiStateSnapshotActions, entityStoreActions } from "actions";
 import entityUtils from "utils/entityUtils";
 import { childRoutes } from "helpers/router";
 import startsWith from "lodash/startsWith";
 
 const { request } = entityStoreActions;
-
-const pageNumber = 1;
+const { resetDashboardProjectsListSnapshot } = uiStateSnapshotActions;
 
 export class BackendContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -52,11 +51,6 @@ export class BackendContainer extends PureComponent {
 
   constructor(props) {
     super();
-    this.projectListSnapshot = {
-      filter: { order: "sort_title ASC" },
-      page: pageNumber
-    };
-
     this.commonActions = commonActions(props.dispatch);
   }
 
@@ -64,13 +58,8 @@ export class BackendContainer extends PureComponent {
     this.setMinHeight();
   }
 
-  componentDidUpdate() {
-    if (!this.isProjects(this.props.match, this.props.location)) {
-      this.projectListSnapshot = {
-        filter: { order: "sort_title ASC" },
-        page: pageNumber
-      };
-    }
+  componentWillUnmount() {
+    this.props.dispatch(resetDashboardProjectsListSnapshot());
   }
 
   setMinHeight() {
@@ -80,14 +69,6 @@ export class BackendContainer extends PureComponent {
       this.mainContainer.parentNode.offsetHeight - mainHeight;
     this.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
   }
-
-  snapshotProjectList = snapshot => {
-    this.projectListSnapshot = Object.assign(
-      {},
-      this.projectListSnapshot,
-      snapshot
-    );
-  };
 
   isProjects = (match, location) => {
     if (!match) {
@@ -110,8 +91,7 @@ export class BackendContainer extends PureComponent {
 
   childProps() {
     return {
-      projectListSnapshot: this.projectListSnapshot,
-      snapshotCreator: this.snapshotProjectList
+      dispatch: this.props.dispatch
     };
   }
 
