@@ -28,8 +28,9 @@
       color: $neutralWhite;
 
       &:focus {
-        color: $accentPrimary;
-        outline: 0;
+        @include focusOutline;
+        color: $neutralWhite;
+        outline-offset: 2px;
       }
 
       &::before {
@@ -114,12 +115,8 @@
         }
 
         &:focus {
-          color: $accentPrimary;
-          outline: 0;
-
-          &::before {
-            background-color: $accentPrimary;
-          }
+          @include focusOutline;
+          outline-offset: 2px;
         }
       }
     }
@@ -177,6 +174,19 @@
         color: $neutralWhite;
         background-color: $accentPrimary;
         outline: 0;
+      }
+
+      .bg-neutral90 & {
+        &:hover {
+          color: $neutral90;
+          background-color: $accentPrimary;
+        }
+
+        &:focus {
+          color: $accentPrimary;
+          background-color: $neutral95;
+          outline: 0;
+        }
       }
     }
 

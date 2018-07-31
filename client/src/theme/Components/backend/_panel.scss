@@ -58,15 +58,22 @@
         color: $neutral20;
       }
 
-      &.active {
-        color: $neutral20;
-        border-bottom: 2px solid $neutral20;
-      }
-
       &:focus {
         color: $accentPrimary;
         border-color: $accentPrimary;
         outline: 0;
+      }
+
+      &.active {
+        color: $neutral20;
+        border-bottom: 2px solid $neutral20;
+
+        &:focus {
+          @include focusOutline;
+          color: $neutral20;
+          border-bottom: 2px solid $neutral20;
+          outline-offset: 2px;
+        }
       }
     }
   }
