@@ -17,7 +17,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor="upload-17"
+            htmlFor="upload-19"
           >
             Press Logo
           </label>
@@ -31,8 +31,8 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
             className="form-dropzone style-square"
             inputProps={
               Object {
-                "aria-describedby": "upload-error-18",
-                "id": "upload-17",
+                "aria-describedby": "upload-error-20",
+                "id": "upload-19",
               }
             }
             multiple={false}

@@ -16,10 +16,12 @@ RSpec.describe Ingestions::Pickers::Strategy do
   shared_examples_for "assigned strategy" do |path, expected|
     it "is the #{expected} strategy" do
       ingestion = FactoryBot.create(:ingestion)
-      allow(ingestion).to receive(:ingestion_source).and_return(path)
+      allow(ingestion).to receive(:ingestion_source).and_return(path.to_s)
       @context = create_context(ingestion)
 
       @outcome = Ingestions::Pickers::Strategy.run context: @context
+
+      expect(@outcome).to be_valid
       expect(@outcome.result.name).to be expected
     end
   end

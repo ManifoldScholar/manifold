@@ -7,12 +7,9 @@ module Updaters
       [:source]
     end
 
-    # def adjusted_attributes
-    #   return {} unless attributes
-    #   clone = attributes.to_h
-    #   update_source!(clone)
-    #   clone
-    # end
-
+    # We use Shrine for supporting tus instead of paperclip
+    def attachment_from_params!(attributes, key)
+      attributes.extract!(key)[key].presence
+    end
   end
 end

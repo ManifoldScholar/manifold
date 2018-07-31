@@ -49,7 +49,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="upload-17"
+            htmlFor="upload-19"
           >
             Hero Image
           </label>
@@ -67,8 +67,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             className="form-dropzone style-landscape"
             inputProps={
               Object {
-                "aria-describedby": "upload-error-18",
-                "id": "upload-17",
+                "aria-describedby": "upload-error-20",
+                "id": "upload-19",
               }
             }
             multiple={false}
@@ -119,7 +119,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor="upload-17"
+            htmlFor="upload-19"
           >
             Cover
           </label>
@@ -133,8 +133,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             className="form-dropzone style-portrait"
             inputProps={
               Object {
-                "aria-describedby": "upload-error-18",
-                "id": "upload-17",
+                "aria-describedby": "upload-error-20",
+                "id": "upload-19",
               }
             }
             multiple={false}

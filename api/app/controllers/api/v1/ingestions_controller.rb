@@ -1,6 +1,6 @@
 module Api
   module V1
-    # Texts controller
+    # {Ingestion} controller
     class IngestionsController < ApplicationController
       before_action :set_project
 
@@ -52,7 +52,6 @@ module Api
       def set_project
         @project = Project.friendly.find(params[:project_id]) if params[:project_id]
       end
-
     end
   end
 end

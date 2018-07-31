@@ -44,21 +44,37 @@ RSpec.shared_context "param helpers" do
     }
   end
 
-  let(:image_params) {
+  def put_temporary_tus_file(filename, mime_type:, data:, id: SecureRandom.hex)
+    io = StringIO.new
+
+    io << data
+
+    Shrine.storages[:tus].upload(io, id)
+
+    {
+      id: id,
+      storage: 'cache',
+      metadata: {
+        filename: filename,
+        size: io.size,
+        mime_type: mime_type
+      }      
+    }
+  end
+
+  let(:image_params) do
     {
       content_type: "image/png",
       data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAA8SURBVDhPY2RgYPgPxFQBjCDDFjExU2xY3L+/DEwUm4JkwKhhpIfmaJiNhhmOEBhNGqQnDXDhSLo27DoAUSQGIRjvqU4AAAAASUVORK5CYII=",
       filename: "box.png"
     }
-  }
+  end
 
-  let(:markdown_source_params) {
-    {
-      content_type: "text/markdown",
-      data: "data:text/markdown;base64,IyBUaGlzIGlzIGEgaGVhZGVyDQoNClRoaXMgaXMgc29tZSB0ZXh0",
-      filename: "something.md"
-    }
-  }
-
+  let(:markdown_source_params) do
+    put_temporary_tus_file(
+      "something.md",
+      data: "# This is a header\r\n\r\nThis is some text",
+      mime_type: "text/markdown"
+    )
+  end
 end
-

@@ -90,7 +90,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                 className="form-input"
               >
                 <label
-                  htmlFor="kind-22"
+                  htmlFor="kind-24"
                 >
                   Kind
                 </label>
@@ -105,7 +105,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       className="manicon manicon-caret-down"
                     />
                     <select
-                      id="kind-22"
+                      id="kind-24"
                       onChange={[Function]}
                       value="image"
                     >
@@ -611,7 +611,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="upload-17"
+                  htmlFor="upload-19"
                 >
                   Image File
                 </label>
@@ -620,8 +620,8 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                   className="form-dropzone style-square"
                   inputProps={
                     Object {
-                      "aria-describedby": "upload-error-18",
-                      "id": "upload-17",
+                      "aria-describedby": "upload-error-20",
+                      "id": "upload-19",
                     }
                   }
                   multiple={false}

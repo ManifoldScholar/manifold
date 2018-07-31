@@ -246,10 +246,6 @@ ActiveRecord::Schema.define(version: 20180731223301) do
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "state"
     t.string   "log",                                              array: true
-    t.string   "source_file_name"
-    t.string   "source_content_type"
-    t.integer  "source_file_size"
-    t.datetime "source_updated_at"
     t.string   "strategy"
     t.string   "external_source_url"
     t.string   "ingestion_type"
@@ -259,6 +255,7 @@ ActiveRecord::Schema.define(version: 20180731223301) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.boolean  "reingestion",         default: false, null: false
+    t.jsonb    "source_data",         default: {},    null: false
   end
 
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

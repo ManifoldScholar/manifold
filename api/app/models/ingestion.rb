@@ -3,10 +3,9 @@ require "stringio"
 
 # Connects texts to resources that were sources for text sections during ingestion
 class Ingestion < ApplicationRecord
-
-  # Concerns
   include Concerns::SerializedAbilitiesFor
   include Attachments
+  include IngestionUploader::Attachment.new(:source)
   include TrackedCreator
   include AASM
 
@@ -19,9 +18,6 @@ class Ingestion < ApplicationRecord
   # Associations
   belongs_to :text, optional: true
   belongs_to :project
-
-  # Attachments
-  manifold_has_attached_file :source, :ingestion, validate_content_type: false
 
   # Validations
   validates :source, presence: true, if: :file_based_ingestion?
@@ -102,7 +98,7 @@ class Ingestion < ApplicationRecord
   end
 
   def ingestion_source
-    return source.path if file_based_ingestion?
+    return source_path if file_based_ingestion?
     external_source_url
   end
 

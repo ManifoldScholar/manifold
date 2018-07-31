@@ -18,7 +18,6 @@ RSpec.describe Ingestion, type: :model do
   end
 
   it "has a source attachment" do
-    is_expected.to have_attached_file(:source)
+    is_expected.to respond_to(:source).and respond_to(:source=)
   end
-
 end
