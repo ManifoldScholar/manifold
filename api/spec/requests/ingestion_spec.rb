@@ -37,7 +37,5 @@ RSpec.describe "Ingestions API", type: :request do
       file = api_response["data"]["attributes"]["sourceFileName"]
       expect(file).to eq "something.md"
     end
-
   end
-
 end

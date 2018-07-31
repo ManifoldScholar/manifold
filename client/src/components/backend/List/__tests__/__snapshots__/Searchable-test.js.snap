@@ -22,12 +22,12 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
       </button>
       <label
         className="screen-reader-text"
-        htmlFor="list-search-20"
+        htmlFor="list-search-22"
       >
         Enter Search Criteria
       </label>
       <input
-        id="list-search-20"
+        id="list-search-22"
         onChange={[Function]}
         placeholder="Search..."
         type="text"
@@ -372,12 +372,12 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
       </button>
       <label
         className="screen-reader-text"
-        htmlFor="list-search-20"
+        htmlFor="list-search-22"
       >
         Enter Search Criteria
       </label>
       <input
-        id="list-search-20"
+        id="list-search-22"
         onChange={[Function]}
         placeholder="Search..."
         type="text"

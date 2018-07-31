@@ -38,12 +38,12 @@ exports[`Backend Project Collections Container renders correctly 1`] = `
           </button>
           <label
             className="screen-reader-text"
-            htmlFor="list-search-19"
+            htmlFor="list-search-21"
           >
             Enter Search Criteria
           </label>
           <input
-            id="list-search-19"
+            id="list-search-21"
             onChange={[Function]}
             placeholder="Search..."
             type="text"

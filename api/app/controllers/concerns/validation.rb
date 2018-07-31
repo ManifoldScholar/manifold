@@ -122,14 +122,32 @@ module Validation
     params.permit(param_config)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def ingestion_params
     params.require(:data)
-    attributes = [attachment(:source), :external_source_url, :ingestion_type,
-                  :reingestion]
+
+    attributes = [
+      :external_source_url,
+      :ingestion_type,
+      :reingestion,
+      {
+        source: [
+          :id,
+          :storage, { metadata: [:filename, :size, :mime_type] }
+        ]
+      }
+    ]
+
     relationships = [:text]
-    param_config = structure_params(attributes: attributes, relationships: relationships)
+
+    param_config = structure_params(
+      attributes: attributes,
+      relationships: relationships
+    )
+
     params.permit(param_config)
   end
+  # rubocop:enable Metrics/MethodLength
 
   def stylesheet_params
     params.require(:data)

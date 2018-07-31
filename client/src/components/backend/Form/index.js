@@ -18,6 +18,7 @@ import Switch from "./Switch";
 import SwitchArray from "./SwitchArray";
 import TextArea from "./TextArea";
 import TextInput from "./TextInput";
+import TusUpload from "./TusUpload";
 import Upload from "./Upload";
 
 export default {
@@ -41,5 +42,6 @@ export default {
   SwitchArray,
   TextArea,
   TextInput,
+  TusUpload,
   Upload
 };

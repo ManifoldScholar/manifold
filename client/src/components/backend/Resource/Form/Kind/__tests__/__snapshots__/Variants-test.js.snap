@@ -13,7 +13,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
     >
       <label
         className=""
-        htmlFor="upload-17"
+        htmlFor="upload-19"
       >
         Variant
       </label>
@@ -21,8 +21,8 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-18",
-            "id": "upload-17",
+            "aria-describedby": "upload-error-20",
+            "id": "upload-19",
           }
         }
         multiple={false}
@@ -68,7 +68,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
     >
       <label
         className=""
-        htmlFor="upload-17"
+        htmlFor="upload-19"
       >
         Variant
       </label>
@@ -76,8 +76,8 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-18",
-            "id": "upload-17",
+            "aria-describedby": "upload-error-20",
+            "id": "upload-19",
           }
         }
         multiple={false}
@@ -130,7 +130,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
     >
       <label
         className=""
-        htmlFor="upload-17"
+        htmlFor="upload-19"
       >
         High Resolution Image
       </label>
@@ -139,8 +139,8 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-18",
-            "id": "upload-17",
+            "aria-describedby": "upload-error-20",
+            "id": "upload-19",
           }
         }
         multiple={false}
@@ -191,7 +191,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
     >
       <label
         className=""
-        htmlFor="upload-17"
+        htmlFor="upload-19"
       >
         Thumbnail Image
       </label>
@@ -200,8 +200,8 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-18",
-            "id": "upload-17",
+            "aria-describedby": "upload-error-20",
+            "id": "upload-19",
           }
         }
         multiple={false}
@@ -259,7 +259,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
     >
       <label
         className=""
-        htmlFor="upload-17"
+        htmlFor="upload-19"
       >
         Thumbnail Image
       </label>
@@ -268,8 +268,8 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-18",
-            "id": "upload-17",
+            "aria-describedby": "upload-error-20",
+            "id": "upload-19",
           }
         }
         multiple={false}

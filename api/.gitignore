@@ -28,4 +28,5 @@ doc
 .generators
 
 config/oauth.yml
+/data/
 examples.txt

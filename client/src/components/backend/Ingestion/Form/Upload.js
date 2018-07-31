@@ -64,7 +64,7 @@ class IngestionFormUpload extends PureComponent {
     return (
       <div>
         <Form.FieldGroup {...this.props}>
-          <Form.Upload
+          <Form.TusUpload
             inlineStyle={{ width: "100%" }}
             layout="landscape"
             instructions={fileInstructions}

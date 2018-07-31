@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get "auth/:provider/callback", to: "oauth#authorize"
 
   namespace :api do
+    mount Tus::Server => "/files"
+
     namespace :v1 do
       resources :contacts, only: [:create]
       resources :test_mails, only: [:create]
