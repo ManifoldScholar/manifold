@@ -89,7 +89,7 @@ export class MakersListContainer extends PureComponent {
     const active = match.params.id;
 
     const drawerProps = {
-      closeUrl: lh.link("backendPeopleMakers")
+      closeUrl: lh.link("backendRecordsMakers")
     };
 
     return (
@@ -104,7 +104,7 @@ export class MakersListContainer extends PureComponent {
         {makers ? (
           <List.Searchable
             newButton={{
-              path: lh.link("backendPeopleMakersNew"),
+              path: lh.link("backendRecordsMakersNew"),
               text: "Add a New Maker",
               authorizedFor: "maker"
             }}

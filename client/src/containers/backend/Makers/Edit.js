@@ -2,10 +2,10 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Dialog } from "components/backend";
+import { Makers } from "containers/backend";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { makersAPI, requests } from "api";
-import { People } from "containers/backend";
 import { HigherOrder } from "containers/global";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
@@ -87,7 +87,7 @@ export class MakersEditContainer extends PureComponent {
 
   doAfterDestroy(props) {
     if (props.afterDestroy) return props.afterDestroy();
-    return props.history.push(lh.link("backendPeopleMakers"));
+    return props.history.push(lh.link("backendRecordsMakers"));
   }
 
   closeDialog() {
@@ -118,7 +118,7 @@ export class MakersEditContainer extends PureComponent {
             </div>
           </HigherOrder.Authorize>
         </header>
-        <People.Makers.Form maker={maker} />
+        <Makers.Form maker={maker} />
       </div>
     );
   }

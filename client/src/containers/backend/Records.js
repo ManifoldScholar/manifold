@@ -7,12 +7,12 @@ import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 
-export class UsersWrapperContainer extends PureComponent {
+export class RecordsContainer extends PureComponent {
   static mapStateToProps = (stateIgnored, ownPropsIgnored) => {
     return {};
   };
 
-  static displayName = "Users.Wrapper";
+  static displayName = "RecordsContainer";
 
   static propTypes = {
     route: PropTypes.object
@@ -21,16 +21,30 @@ export class UsersWrapperContainer extends PureComponent {
   secondaryNavigationLinks() {
     return [
       {
-        path: lh.link("backendPeopleMakers"),
+        path: lh.link("backendRecordsMakers"),
         label: "Makers",
         key: "makers",
         entity: "maker",
         ability: "update"
       },
       {
-        path: lh.link("backendPeopleUsers"),
+        path: lh.link("backendRecordsUsers"),
         label: "Users",
         key: "users",
+        entity: "user",
+        ability: "update"
+      },
+      {
+        path: lh.link("backendRecordsPages"),
+        label: "Pages",
+        key: "pages",
+        entity: "page",
+        ability: "update"
+      },
+      {
+        path: lh.link("backendRecordsFeatures"),
+        label: "Features",
+        key: "features",
         entity: "user",
         ability: "update"
       }
@@ -43,38 +57,29 @@ export class UsersWrapperContainer extends PureComponent {
     return (
       <HigherOrder.Authorize
         ability="update"
-        entity={["user", "maker"]}
+        entity={["user", "maker", "page", "feature"]}
         failureFatalError={{
-          detail: "You are not allowed to manage users and makers."
+          detail: "You are not allowed to manage records."
         }}
       >
         <RedirectToFirstMatch
-          from={lh.link("backendPeople")}
+          from={lh.link("backendRecords")}
           candidates={this.secondaryNavigationLinks()}
         />
-
-        <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary links={this.secondaryNavigationLinks()} />
-            </div>
-          </aside>
-          <div className="container">
-            <aside className="aside">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary links={this.secondaryNavigationLinks()} />
-            </aside>
+        <div>
+          <Utility.SkipLink skipId={skipId} />
+          <Navigation.Secondary links={this.secondaryNavigationLinks()} inline scrollable />
+          <section className="container">
             <div id={skipId} className="panel">
               {childRoutes(this.props.route)}
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </HigherOrder.Authorize>
     );
   }
 }
 
-export default connect(UsersWrapperContainer.mapStateToProps)(
-  UsersWrapperContainer
+export default connect(RecordsContainer.mapStateToProps)(
+  RecordsContainer
 );

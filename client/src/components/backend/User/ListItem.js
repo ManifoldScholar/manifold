@@ -34,7 +34,7 @@ export default class UserListItem extends PureComponent {
             <i className="manicon manicon-check" />
           </div>
         </div> */}
-        <Link to={lh.link("backendPeopleUser", user.id)}>
+        <Link to={lh.link("backendRecordsUser", user.id)}>
           <header>
             <figure className="avatar">
               <figcaption className="screen-reader-text">

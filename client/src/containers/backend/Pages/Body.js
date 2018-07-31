@@ -6,7 +6,7 @@ import { pagesAPI } from "api";
 import connectAndFetch from "utils/connectAndFetch";
 
 class PagesEditContainer extends PureComponent {
-  static displayName = "Content.Pages.Body";
+  static displayName = "Pages.Body";
 
   static propTypes = {
     page: PropTypes.object.isRequired,

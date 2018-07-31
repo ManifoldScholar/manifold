@@ -6,7 +6,7 @@ import { featuresAPI } from "api";
 import connectAndFetch from "utils/connectAndFetch";
 
 class FeaturesGeneralContainer extends PureComponent {
-  static displayName = "Content.Features.General";
+  static displayName = "Features.General";
 
   static propTypes = {
     feature: PropTypes.object,

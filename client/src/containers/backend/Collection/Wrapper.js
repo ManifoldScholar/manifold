@@ -183,7 +183,7 @@ export class CollectionWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="collection"
           breadcrumb={[
-            { path: lh.link("backend"), label: "ALL PROJECTS" },
+            { path: lh.link("backendProjects"), label: "ALL PROJECTS" },
             {
               path: lh.link(
                 "backendProjectCollections",

@@ -60,12 +60,12 @@ class PageDetailContainer extends PureComponent {
   }
 
   redirectToPages() {
-    const path = lh.link("backendContentPages");
+    const path = lh.link("backendRecordsPages");
     this.props.history.push(path);
   }
 
   redirectToList() {
-    const path = lh.link("backendContentPages");
+    const path = lh.link("backendRecordsPages");
     this.props.history.push(path);
   }
 
@@ -120,7 +120,7 @@ class PageDetailContainer extends PureComponent {
   secondaryNavigationLinks(props) {
     return [
       {
-        path: lh.link("backendContentPageGeneral", this.id(props)),
+        path: lh.link("backendRecordsPageGeneral", this.id(props)),
         label: "General",
         key: "general",
         entity: this.page(props),
@@ -155,7 +155,7 @@ class PageDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="page"
         breadcrumb={[
-          { path: lh.link("backendContentPages"), label: "ALL PAGES" }
+          { path: lh.link("backendRecordsPages"), label: "ALL PAGES" }
         ]}
         title="New Page"
         showUtility={false}
@@ -172,7 +172,7 @@ class PageDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="page"
         breadcrumb={[
-          { path: lh.link("backendContentPages"), label: "ALL PAGES" }
+          { path: lh.link("backendRecordsPages"), label: "ALL PAGES" }
         ]}
         title={page.attributes.title}
         subtitle={`/page/${page.attributes.slug}`}
@@ -221,7 +221,7 @@ class PageDetailContainer extends PureComponent {
     return (
       <div>
         <RedirectToFirstMatch
-          from={lh.link("backendContentPage", this.id(this.props))}
+          from={lh.link("backendRecordsPage", this.id(this.props))}
           candidates={this.secondaryNavigationLinks(this.props)}
         />
         {this.state.confirmation ? (

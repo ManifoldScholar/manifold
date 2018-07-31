@@ -226,7 +226,7 @@ export class ProjectWrapperContainer extends PureComponent {
 
         <Navigation.DetailHeader
           type="project"
-          breadcrumb={[{ path: lh.link("backend"), label: "ALL PROJECTS" }]}
+          breadcrumb={[{ path: lh.link("backendProjects"), label: "ALL PROJECTS" }]}
           title={project.attributes.title}
           subtitle={project.attributes.subtitle}
           utility={this.renderUtility(project)}

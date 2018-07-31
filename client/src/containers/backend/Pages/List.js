@@ -112,7 +112,7 @@ class PagesDashboardContainer extends PureComponent {
                     <div>
                       <Link
                         className="asset-thumb"
-                        to={lh.link("backendContentPage", page.id)}
+                        to={lh.link("backendRecordsPage", page.id)}
                       >
                         <figure className="asset-image">
                           <div className="asset-image-placeholder">
@@ -140,7 +140,7 @@ class PagesDashboardContainer extends PureComponent {
                         <HigherOrder.Authorize entity={page} ability="update">
                           <Link
                             className="button"
-                            to={lh.link("backendContentPage", page.id)}
+                            to={lh.link("backendRecordsPage", page.id)}
                           >
                             Edit
                           </Link>
@@ -173,7 +173,7 @@ class PagesDashboardContainer extends PureComponent {
           <div className="buttons-icon-horizontal">
             <Link
               className="button-icon-secondary"
-              to={lh.link("backendContentPageNew")}
+              to={lh.link("backendRecordsPageNew")}
             >
               <i className="manicon manicon-plus" />
               Add a New Page

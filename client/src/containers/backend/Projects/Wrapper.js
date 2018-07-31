@@ -13,7 +13,7 @@ const { request } = entityStoreActions;
 
 const perPage = 10;
 
-export class ProjectsContainer extends PureComponent {
+export class ProjectsWrapper extends PureComponent {
 
   static mapStateToProps = state => {
     return {
@@ -100,6 +100,7 @@ export class ProjectsContainer extends PureComponent {
   };
 
   render() {
+    if (!this.props.projectsMeta) return null;
     const { totalCount } = this.props.projectsMeta.pagination;
     return (
       <div>
@@ -140,4 +141,4 @@ export class ProjectsContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ProjectsContainer);
+export default connectAndFetch(ProjectsWrapper);

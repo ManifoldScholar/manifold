@@ -9,7 +9,7 @@ import get from "lodash/get";
 import { User, List } from "components/backend";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import config from "../../../../config";
+import config from "../../../config";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -94,7 +94,7 @@ export class UsersListContainer extends PureComponent {
     const active = match.params.id;
 
     const drawerProps = {
-      closeUrl: lh.link("backendPeopleUsers")
+      closeUrl: lh.link("backendRecordsUsers")
     };
 
     return (
@@ -108,7 +108,7 @@ export class UsersListContainer extends PureComponent {
         {users ? (
           <List.Searchable
             newButton={{
-              path: lh.link("backendPeopleUsersNew"),
+              path: lh.link("backendRecordsUsersNew"),
               text: "Add a New User",
               authorizedFor: "user"
             }}

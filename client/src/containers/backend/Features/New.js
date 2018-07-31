@@ -14,7 +14,7 @@ class FeaturesNewContainer extends PureComponent {
   };
 
   redirectToFeature(feature) {
-    const path = lh.link("backendContentFeatureGeneral", feature.id);
+    const path = lh.link("backendRecordsFeatureGeneral", feature.id);
     this.props.history.push(path);
   }
 
