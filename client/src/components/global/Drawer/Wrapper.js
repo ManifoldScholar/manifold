@@ -33,7 +33,8 @@ export default class DrawerWrapper extends PureComponent {
     style: PropTypes.string,
     history: PropTypes.object,
     includeDrawerFrontMatter: PropTypes.bool,
-    returnFocusOnDeactivate: PropTypes.bool
+    returnFocusOnDeactivate: PropTypes.bool,
+    focusTrap: PropTypes.bool
   };
 
   static childContextTypes = {
@@ -53,7 +54,8 @@ export default class DrawerWrapper extends PureComponent {
     style: "backend",
     entrySide: "right",
     includeDrawerFrontMatter: true,
-    returnFocusOnDeactivate: true
+    returnFocusOnDeactivate: true,
+    focusTrap: true
   };
 
   constructor(props) {
@@ -155,40 +157,52 @@ export default class DrawerWrapper extends PureComponent {
   };
 
   renderDrawerFrontMatter(props) {
-    if (!props.includeDrawerFrontMatter) return null;
     const hasTitle = props.title || props.icon;
     const hasClose = props.closeCallback || props.closeUrl;
     return (
-      <div className="drawer-bar">
-        {hasTitle ? (
-          <div className="drawer-title">
-            {props.icon ? (
-              <i
-                className={`manicon manicon-${props.icon}`}
-                aria-hidden="true"
-              />
+      <React.Fragment>
+        {props.includeDrawerFrontMatter ? (
+          <div className="drawer-bar">
+            {hasTitle ? (
+              <div className="drawer-title">
+                {props.icon ? (
+                  <i
+                    className={`manicon manicon-${props.icon}`}
+                    aria-hidden="true"
+                  />
+                ) : null}
+                {props.title ? props.title : null}
+              </div>
             ) : null}
-            {props.title ? props.title : null}
+            {hasClose ? (
+              <div
+                onClick={this.handleLeaveEvent}
+                role="button"
+                tabIndex="0"
+                className="close-button-primary"
+              >
+                <span className="close-text">Close</span>
+                <i className="manicon manicon-x" aria-hidden="true" />
+              </div>
+            ) : null}
           </div>
-        ) : null}
-        {hasClose ? (
-          <div
+        ) : (
+          <button
             onClick={this.handleLeaveEvent}
-            role="button"
             tabIndex="0"
-            className="close-button-primary"
+            className="screen-reader-text"
           >
-            <span className="close-text">Close</span>
-            <i className="manicon manicon-x" aria-hidden="true" />
-          </div>
-        ) : null}
-      </div>
+            Close
+          </button>
+        )}
+      </React.Fragment>
     );
   }
 
   renderDrawer() {
     const entrySideClass =
       this.props.entrySide === "left" ? this.props.entrySide : "";
+
     return (
       <div
         key="drawer"
@@ -196,7 +210,7 @@ export default class DrawerWrapper extends PureComponent {
       >
         <FocusTrap
           ref={this.focusTrapNode}
-          active={this.state.focusable}
+          active={this.state.focusable && this.props.focusTrap}
           focusTrapOptions={{
             clickOutsideDeactivates: true,
             escapeDeactivates: false,
