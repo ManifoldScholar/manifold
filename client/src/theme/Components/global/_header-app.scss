@@ -225,6 +225,21 @@
     .button-avatar {
       height: 100%;
       vertical-align: middle;
+
+      &:focus {
+        outline: 0;
+
+        .avatar {
+          @include focusOutline;
+          outline-offset: 2px;
+        }
+
+        &:active {
+          .avatar {
+            outline: 0;
+          }
+        }
+      }
     }
 
     .search-menu {
