@@ -3,7 +3,7 @@
 exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
-    <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} connected={false} lockScroll=\\"hover\\" entrySide=\\"right\\" includeDrawerFrontMatter={true}>
+    <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} connected={false} lockScroll=\\"hover\\" entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true}>
       <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
         <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
           <span>
