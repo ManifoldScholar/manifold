@@ -2,9 +2,12 @@
   .button-bare-primary {
     // Scoped colors/hovers
     color: $neutral50;
-    font-size: 12px;
     letter-spacing: 0.125em;
     transition: color $duration $timing;
+
+    @include respond($break40) {
+      font-size: 12px;
+    }
 
     &:hover, &:focus {
       color: $neutral20;
@@ -19,7 +22,7 @@
   button {
     font-size: 0;
 
-    @include respond($break30) {
+    @include respond($break40) {
       font-size: 14px;
     }
 
@@ -28,60 +31,56 @@
     }
 
     + button {
-      margin-left: 22px;
+      margin-left: 15px;
 
       @include respond($break60) {
-        margin-left: 38px;
+        margin-left: 25px;
       }
     }
 
     .manicon {
       display: inline-block;
-      margin-left: 6px;
+      margin-right: 6px;
       color: $accentPrimary;
       vertical-align: middle;
       transition: color $duration $timing;
-
-      @include respond($break60) {
-        margin-left: 11px;
-      }
     }
 
     // Relative sizes to make resizing simple,
     // but fixed sizes at mobile since parents
     // get size 0
     .manicon-check-double {
-      font-size: 14px;
+      font-size: 11px;
 
-      @include respond($break30) {
+      @include respond($break40) {
         margin-top: -0.533em; // NP
         font-size: 0.938em;
       }
     }
 
     .manicon-eye-outline {
-      font-size: 15px;
+      font-size: 12px;
 
-      @include respond($break30) {
+      @include respond($break40) {
         margin-top: -0.429em;
         font-size: 0.917em;
       }
     }
 
     .manicon-x-bold {
-      font-size: 15px;
+      font-size: 12px;
       color: $sp40Tertiary;
 
-      @include respond($break30) {
+      @include respond($break40) {
         margin-top: -0.2em;
         font-size: 0.8em;
       }
     }
 
     .manicon-magnify {
-      font-size: 15px;
+      font-size: 12px;
 
-      @include respond($break30) {
+      @include respond($break40) {
         margin-top: -0.14em;
         font-size: 0.95em;
       }
@@ -89,10 +88,10 @@
 
 
     .manicon-trashcan {
-      font-size: 19px;
+      font-size: 16px;
       color: $sp40Tertiary;
 
-      @include respond($break30) {
+      @include respond($break40) {
         margin-top: -0.371em;
         font-size: 1.333em;
       }
@@ -102,35 +101,21 @@
 }
 
 .entity-header-primary {
+  display: table;
   padding-bottom: 20px;
 
-  @include respond($break60) {
-    // padding-bottom: 39px;
-  }
-
   @include respond($break65) {
-    display: table;
   }
 
   figure {
-    display: none;
-    float: left;
-    width: 68px;
+    display: table-cell;
+    width: auto;
     margin-bottom: 15px;
-
-    @include respond($break30) {
-      width: 75px;
-    }
-
-    @include respond($break40) {
-      display: block;
-    }
+    padding-right: 16px;
+    vertical-align: top;
 
     @include respond($break65) {
-      display: table-cell;
-      width: auto;
       padding-right: 36px;
-      vertical-align: top;
     }
 
     .manicon {
@@ -144,28 +129,19 @@
   }
 
   .title {
-    @include respond($break65) {
-      display: table-cell;
-      vertical-align: top;
-    }
+    display: table-cell;
+    vertical-align: top;
+    width: 100%;
 
     h1, h2, h3, h4, h5, h6 {
       @include templateHead;
       float: left;
       margin: 0 0 15px;
-      font-size: 21px;
+      font-size: 16px;
       font-weight: $medium;
       color: $neutral20;
 
-      @include respond($break40) {
-        max-width: calc(100% - 75px);
-      }
-
-      @include respond($break30) {
-        max-width: calc(100% - 86px);
-      }
-
-      @include respond($break60) {
+      @include respond($break65) {
         font-size: 23px;
       }
 

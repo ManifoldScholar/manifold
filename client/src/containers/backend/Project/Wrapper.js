@@ -181,15 +181,16 @@ export class ProjectWrapperContainer extends PureComponent {
     return (
       <div>
         <button onClick={this.doPreview} className="button-bare-primary">
-          Preview{" "}
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
+          Preview{" "}
         </button>
         <HigherOrder.Authorize entity={project} ability={"delete"}>
           <button
             onClick={this.handleProjectDestroy}
             className="button-bare-primary"
           >
-            Delete <i className="manicon manicon-trashcan" aria-hidden="true" />
+            <i className="manicon manicon-trashcan" aria-hidden="true" />
+            Delete
           </button>
         </HigherOrder.Authorize>
       </div>
@@ -226,7 +227,6 @@ export class ProjectWrapperContainer extends PureComponent {
 
         <Navigation.DetailHeader
           type="project"
-          breadcrumb={[{ path: lh.link("backendProjects"), label: "ALL PROJECTS" }]}
           title={project.attributes.title}
           subtitle={project.attributes.subtitle}
           utility={this.renderUtility(project)}

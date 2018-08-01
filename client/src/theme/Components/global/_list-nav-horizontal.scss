@@ -4,21 +4,37 @@ Currently found on Projects route on backend
 */
 .list-nav-horizontal {
   display: flex;
-  flex-wrap: nowrap;
-  align-items: flex-start;
+  flex-direction: column;
   margin-bottom: 56px;
+
+  @include respond($break60) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
 
   > * {
     flex: 1;
-    margin-right: 11px;
-    margin-left: 11px;
 
-    &:first-child {
-      margin-left: 0;
+    &:not(:first-child) {
+      margin-top: 20px;
     }
 
-    &:last-child {
-      margin-right: 0;
+    @include respond($break60) {
+      margin-right: 11px;
+      margin-left: 11px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:not(:first-child) {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 

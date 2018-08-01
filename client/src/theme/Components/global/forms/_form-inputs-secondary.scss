@@ -6,12 +6,12 @@
   width: 100%;
   // Explicit height so that elements can line up
   height: 32px;
-
   // Declared in em as it should change with font size
-  padding: 0 0 0.25em;
+  padding: 0 0 0.75em;
   color: $neutral40;
   vertical-align: top;
   background-color: transparent;
+  font-size: 16px;
   // Override border
   border: 0;
   border-bottom: 1px solid $neutral80;
@@ -19,7 +19,8 @@
   transition: border-color $duration $timing;
 
   @include respond($break60) {
-    height: 48px;
+    height: 42px;
+    font-size: 18px;
   }
 
   .bg-neutral90 & {
@@ -46,7 +47,7 @@
   .form-input + .form-section,
   .form-section + .form-section,
   .form-section + .form-input {
-    margin-top: 32px;
+    margin-top: 20px;
 
     @include respond($break60) {
       margin-top: 40px;
@@ -90,7 +91,7 @@
       @include formLabelPrimary;
       display: block;
       margin-top: 0;
-      margin-bottom: 0.5em;
+      margin-bottom: 1em;
       color: $neutral70;
 
       &.below {
@@ -105,7 +106,6 @@
       &.secondary {
         font-weight: normal;
       }
-
     }
 
     input[type='text'], input[type='password'] {
@@ -121,7 +121,7 @@
       @include templateCopy;
       width: 100%;
       padding: 1.2em;
-      font-size: 17px;
+      font-size: 16px;
       color: $neutral30;
       resize: vertical;
       background-color: transparent;
@@ -131,7 +131,7 @@
 
       @include respond($break70) {
         padding: 1.579em;
-        font-size: 19px;
+        font-size: 18px;
       }
     }
 
@@ -152,6 +152,7 @@
 
       .form-input-heading {
         @include formInputSecondary;
+        margin-bottom: 0.5em;
         letter-spacing: inherit;
         text-transform: inherit;
 
@@ -191,6 +192,48 @@
     }
   }
 
+  // CABS scoped to secondary for now, may become global
+  .form-date {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    @include respond($break90) {
+      flex-wrap: nowrap;
+    }
+
+    > * {
+      display: block;
+      flex: 0 1 47.64%;
+      margin-left: 0;
+
+      @include respond($break90) {
+        flex: auto;
+
+        &:not(:first-child) {
+          margin-left: 15px;
+        }
+      }
+    }
+
+    .form-select {
+      select {
+        width: auto;
+        min-width: 100%;
+      }
+    }
+
+    .form-input {
+      flex-basis: 100%;
+      margin-top: 1em;
+
+      @include respond($break90) {
+        flex-basis: auto;
+        margin-top: 0;
+      }
+    }
+  }
+
   // Dropdown
   .form-select {
     width: auto;
@@ -211,13 +254,12 @@
 
     select {
       @include formInputSecondary;
-      padding: 0 42px 0 0; // OD
-      line-height: 1.8;
+      padding: 0 42px 0.75em 0; // OD
       text-transform: none; // OD
+      font-size: 16px;
 
       @include respond($break60) {
-        padding-bottom: 3px;
-        line-height: 1.7;
+        font-size: 18px;
       }
 
       &:focus {
