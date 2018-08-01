@@ -74,14 +74,16 @@ export default class DrawerWrapper extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    document.addEventListener("keyup", this.handleLeaveKey);
+  static getDerivedStateFromProps(nextProps, prevStateIgnored) {
+    if (React.Children.count(nextProps.children) <= 0) {
+      return { focusable: false };
+    }
+
+    return null;
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (React.Children.count(nextProps.children) <= 0) {
-      this.setState({ focusable: false });
-    }
+  componentDidMount() {
+    document.addEventListener("keyup", this.handleLeaveKey);
   }
 
   componentDidUpdate(prevProps) {
