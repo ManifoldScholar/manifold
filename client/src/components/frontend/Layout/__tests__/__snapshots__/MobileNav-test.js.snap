@@ -1,30 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.Layout.MobileNav component renders correctly 1`] = `
-<nav
-  className="footer-fixed"
->
-  <ul
-    className="text-nav"
+<div>
+  <nav
+    className="footer-fixed"
   >
-    <li>
-      <a
-        className="active"
-        href="/"
-        onClick={[Function]}
-      >
-        Projects
-      </a>
-    </li>
-    <li>
-      <a
-        className=""
-        href="/following"
-        onClick={[Function]}
-      >
-        Following
-      </a>
-    </li>
-  </ul>
-</nav>
+    <ul
+      className="text-nav"
+    >
+      <li>
+        <a
+          className="active"
+          href="/"
+          onClick={[Function]}
+        >
+          Projects
+        </a>
+      </li>
+      <li>
+        <a
+          className=""
+          href="/following"
+          onClick={[Function]}
+        >
+          Following
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
 `;

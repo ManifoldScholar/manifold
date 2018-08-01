@@ -21,123 +21,127 @@ exports[`Backend Backend Container renders correctly 1`] = `
               <ScrollAware threshold={200} topClass=\\"top\\" notTopClass=\\"not-top\\" startPinned={true} pinnedClass=\\"pinned\\" notPinnedClass=\\"not-pinned\\" pinThreshold={50}>
                 <div className=\\"scroll-aware top pinned\\">
                   <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} isProjects={[Function]} scrollAware={{...}}>
-                    <header className=\\"header-app dark\\">
-                      <div className=\\"header-container\\">
-                        <Link to=\\"/\\" className=\\"logo\\" replace={false}>
-                          <a className=\\"logo\\" onClick={[Function]} href=\\"/\\">
-                            <span className=\\"screen-reader-text\\">
-                              Return to home
-                            </span>
-                            <PressLogo aria-hidden=\\"true\\">
-                              <figure className=\\"\\">
-                                <div>
-                                  <i className=\\"manicon manicon-manifold-logo\\" aria-hidden=\\"true\\" />
-                                  <span className=\\"screen-reader-text\\">
-                                    Manifold Logo
-                                  </span>
-                                </div>
-                              </figure>
-                            </PressLogo>
-                          </a>
-                        </Link>
-                        <nav className=\\"text-nav\\">
-                          <ul>
-                            <li>
-                              <NavLink isActive={[Function]} activeClassName=\\"active\\" to=\\"/backend\\" aria-current=\\"page\\">
-                                <Route path=\\"\\\\\\\\/backend\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
-                                  <Link to=\\"/backend\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
-                                    <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend\\">
-                                      Projects
+                    <BlurOnLocationChange location={[undefined]}>
+                      <div>
+                        <header className=\\"header-app dark\\">
+                          <div className=\\"header-container\\">
+                            <Link to=\\"/\\" className=\\"logo\\" replace={false}>
+                              <a className=\\"logo\\" onClick={[Function]} href=\\"/\\">
+                                <span className=\\"screen-reader-text\\">
+                                  Return to home
+                                </span>
+                                <PressLogo aria-hidden=\\"true\\">
+                                  <figure className=\\"\\">
+                                    <div>
+                                      <i className=\\"manicon manicon-manifold-logo\\" aria-hidden=\\"true\\" />
+                                      <span className=\\"screen-reader-text\\">
+                                        Manifold Logo
+                                      </span>
+                                    </div>
+                                  </figure>
+                                </PressLogo>
+                              </a>
+                            </Link>
+                            <nav className=\\"text-nav\\">
+                              <ul>
+                                <li>
+                                  <NavLink isActive={[Function]} activeClassName=\\"active\\" to=\\"/backend\\" aria-current=\\"page\\">
+                                    <Route path=\\"\\\\\\\\/backend\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
+                                      <Link to=\\"/backend\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
+                                        <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend\\">
+                                          Projects
+                                        </a>
+                                      </Link>
+                                    </Route>
+                                  </NavLink>
+                                </li>
+                                <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
+                                  <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                </Connect(AuthorizeComponent)>
+                                <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
+                                  <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                </Connect(AuthorizeComponent)>
+                                <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
+                                  <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                </Connect(AuthorizeComponent)>
+                              </ul>
+                            </nav>
+                            <nav className=\\"menu-dropdowns\\">
+                              <ul>
+                                <li className=\\"show-60\\">
+                                  <Link className=\\"button-mode\\" to=\\"/\\" replace={false}>
+                                    <a className=\\"button-mode\\" onClick={[Function]} href=\\"/\\">
+                                      Exit Admin Mode
                                     </a>
                                   </Link>
-                                </Route>
-                              </NavLink>
-                            </li>
-                            <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
-                              <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                            </Connect(AuthorizeComponent)>
-                            <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
-                              <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                            </Connect(AuthorizeComponent)>
-                            <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
-                              <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                            </Connect(AuthorizeComponent)>
-                          </ul>
-                        </nav>
-                        <nav className=\\"menu-dropdowns\\">
-                          <ul>
-                            <li className=\\"show-60\\">
-                              <Link className=\\"button-mode\\" to=\\"/\\" replace={false}>
-                                <a className=\\"button-mode\\" onClick={[Function]} href=\\"/\\">
-                                  Exit Admin Mode
-                                </a>
-                              </Link>
-                            </li>
-                            <li>
-                              <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
-                                <button onClick={[Function]} className=\\"button-avatar\\">
-                                  <span className=\\"screen-reader-text\\">
-                                    Login or open user settings
-                                  </span>
-                                  <Avatar url={[undefined]}>
-                                    <figure style={[undefined]} className=\\"avatar\\">
+                                </li>
+                                <li>
+                                  <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
+                                    <button onClick={[Function]} className=\\"button-avatar\\">
                                       <span className=\\"screen-reader-text\\">
-                                        Avatar
+                                        Login or open user settings
                                       </span>
-                                      <i className=\\"manicon manicon-person\\" aria-hidden=\\"true\\" />
-                                    </figure>
-                                  </Avatar>
-                                </button>
-                              </UserMenuButton>
-                              <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: UserMenuBody]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
-                                <div className=\\"panel-hidden\\">
-                                  <focus-trap-react active={[undefined]} focusTrapOptions={{...}}>
-                                    <button className=\\"screen-reader-text\\" onClick={[Function]}>
-                                      Close Panel
+                                      <Avatar url={[undefined]}>
+                                        <figure style={[undefined]} className=\\"avatar\\">
+                                          <span className=\\"screen-reader-text\\">
+                                            Avatar
+                                          </span>
+                                          <i className=\\"manicon manicon-person\\" aria-hidden=\\"true\\" />
+                                        </figure>
+                                      </Avatar>
                                     </button>
-                                    <UserMenuBody id=\\"user\\" visibility={{...}} bodyComponent={[Function: UserMenuBody]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
-                                      <nav className=\\"user-menu menu-hidden\\">
-                                        <i className=\\"tail\\" />
-                                        <ul>
-                                          <li>
-                                            <button onClick={[Function]}>
-                                              <i className=\\"manicon manicon-person-pencil-simple\\" aria-hidden=\\"true\\" />
-                                              Edit Profile
-                                            </button>
-                                          </li>
-                                          <li>
-                                            <button onClick={[Function]}>
-                                              <i className=\\"manicon manicon-circle-arrow-out-right\\" aria-hidden=\\"true\\" />
-                                              Logout
-                                            </button>
-                                          </li>
-                                        </ul>
-                                      </nav>
-                                    </UserMenuBody>
-                                  </focus-trap-react>
-                                </div>
-                              </UIPanel>
-                            </li>
-                          </ul>
-                        </nav>
+                                  </UserMenuButton>
+                                  <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: UserMenuBody]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
+                                    <div className=\\"panel-hidden\\">
+                                      <focus-trap-react active={[undefined]} focusTrapOptions={{...}}>
+                                        <button className=\\"screen-reader-text\\" onClick={[Function]}>
+                                          Close Panel
+                                        </button>
+                                        <UserMenuBody id=\\"user\\" visibility={{...}} bodyComponent={[Function: UserMenuBody]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
+                                          <nav className=\\"user-menu menu-hidden\\">
+                                            <i className=\\"tail\\" />
+                                            <ul>
+                                              <li>
+                                                <button onClick={[Function]}>
+                                                  <i className=\\"manicon manicon-person-pencil-simple\\" aria-hidden=\\"true\\" />
+                                                  Edit Profile
+                                                </button>
+                                              </li>
+                                              <li>
+                                                <button onClick={[Function]}>
+                                                  <i className=\\"manicon manicon-circle-arrow-out-right\\" aria-hidden=\\"true\\" />
+                                                  Logout
+                                                </button>
+                                              </li>
+                                            </ul>
+                                          </nav>
+                                        </UserMenuBody>
+                                      </focus-trap-react>
+                                    </div>
+                                  </UIPanel>
+                                </li>
+                              </ul>
+                            </nav>
+                          </div>
+                          <div className=\\"header-border\\" />
+                          <HeaderNotification scope=\\"global\\">
+                            <Connect(NotificationsComponent) scope=\\"global\\">
+                              <NotificationsComponent scope=\\"global\\" notifications={{...}} dispatch={[Function]} animate={true} style=\\"header\\">
+                                <section className=\\"notifications-container\\" role=\\"alert\\">
+                                  <div className=\\"notifications-list-header notifications-list\\">
+                                    <CSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+                                      <TransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                                        <span />
+                                      </TransitionGroup>
+                                    </CSSTransitionGroup>
+                                  </div>
+                                </section>
+                              </NotificationsComponent>
+                            </Connect(NotificationsComponent)>
+                          </HeaderNotification>
+                        </header>
                       </div>
-                      <div className=\\"header-border\\" />
-                      <HeaderNotification scope=\\"global\\">
-                        <Connect(NotificationsComponent) scope=\\"global\\">
-                          <NotificationsComponent scope=\\"global\\" notifications={{...}} dispatch={[Function]} animate={true} style=\\"header\\">
-                            <section className=\\"notifications-container\\" role=\\"alert\\">
-                              <div className=\\"notifications-list-header notifications-list\\">
-                                <CSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-                                  <TransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                                    <span />
-                                  </TransitionGroup>
-                                </CSSTransitionGroup>
-                              </div>
-                            </section>
-                          </NotificationsComponent>
-                        </Connect(NotificationsComponent)>
-                      </HeaderNotification>
-                    </header>
+                    </BlurOnLocationChange>
                   </Layout.Header>
                 </div>
               </ScrollAware>
@@ -147,82 +151,86 @@ exports[`Backend Backend Container renders correctly 1`] = `
               <withRouter(Layout.Footer) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}}>
                 <Route>
                   <Layout.Footer pages={{...}} authentication={{...}} commonActions={{...}} settings={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
-                    <footer className=\\"footer-browse\\">
-                      <section className=\\"footer-primary\\">
-                        <div className=\\"container flush\\">
-                          <div className=\\"flex-row\\">
-                            <div className=\\"right\\">
-                              <form className=\\"search-form\\" onSubmit={[Function]}>
-                                <div className=\\"search-button-inline\\">
-                                  <label htmlFor=\\"footer-search\\" className=\\"screen-reader-text\\">
-                                    Site Search
-                                  </label>
-                                  <input type=\\"text\\" id=\\"footer-search\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
-                                  <button className=\\"manicon manicon-magnify\\">
-                                    <span className=\\"screen-reader-text\\">
-                                      Search
-                                    </span>
-                                  </button>
-                                </div>
-                              </form>
-                            </div>
-                            <div className=\\"rel left\\">
-                              <nav className=\\"text-nav\\">
-                                <ul>
-                                  <li>
-                                    <ul className=\\"footer-nav\\">
-                                      <li>
-                                        <span className=\\"fake-link\\" role=\\"button\\" tabIndex=\\"0\\" onClick={[Function]}>
-                                          Log Out
+                    <BlurOnLocationChange location={{...}}>
+                      <div>
+                        <footer className=\\"footer-browse\\">
+                          <section className=\\"footer-primary\\">
+                            <div className=\\"container flush\\">
+                              <div className=\\"flex-row\\">
+                                <div className=\\"right\\">
+                                  <form className=\\"search-form\\" onSubmit={[Function]}>
+                                    <div className=\\"search-button-inline\\">
+                                      <label htmlFor=\\"footer-search\\" className=\\"screen-reader-text\\">
+                                        Site Search
+                                      </label>
+                                      <input type=\\"text\\" id=\\"footer-search\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
+                                      <button className=\\"manicon manicon-magnify\\">
+                                        <span className=\\"screen-reader-text\\">
+                                          Search
                                         </span>
-                                      </li>
+                                      </button>
+                                    </div>
+                                  </form>
+                                </div>
+                                <div className=\\"rel left\\">
+                                  <nav className=\\"text-nav\\">
+                                    <ul>
                                       <li>
-                                        <Link to=\\"/\\" replace={false}>
-                                          <a onClick={[Function]} href=\\"/\\">
-                                            Projects
-                                          </a>
-                                        </Link>
+                                        <ul className=\\"footer-nav\\">
+                                          <li>
+                                            <span className=\\"fake-link\\" role=\\"button\\" tabIndex=\\"0\\" onClick={[Function]}>
+                                              Log Out
+                                            </span>
+                                          </li>
+                                          <li>
+                                            <Link to=\\"/\\" replace={false}>
+                                              <a onClick={[Function]} href=\\"/\\">
+                                                Projects
+                                              </a>
+                                            </Link>
+                                          </li>
+                                        </ul>
                                       </li>
+                                      <li />
                                     </ul>
-                                  </li>
-                                  <li />
-                                </ul>
-                              </nav>
+                                  </nav>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      </section>
-                      <section className=\\"footer-secondary\\">
-                        <div className=\\"container flush\\">
-                          <div className=\\"colophon\\">
-                            <div>
-                              © 2015-2016 6 University of Minnesota Press.
-                              <br />
+                          </section>
+                          <section className=\\"footer-secondary\\">
+                            <div className=\\"container flush\\">
+                              <div className=\\"colophon\\">
+                                <div>
+                                  © 2015-2016 6 University of Minnesota Press.
+                                  <br />
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      </section>
-                      <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"footer-tertiary\\">
-                        <section aria-hidden=\\"true\\">
-                          <div className=\\"container flush\\">
-                            <span className=\\"logo\\">
-                              <i className=\\"manicon manicon-manifold-logo\\" />
-                              <span className=\\"text\\">
-                                <span className=\\"neutral-text\\">
-                                  Powered by
+                          </section>
+                          <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"footer-tertiary\\">
+                            <section aria-hidden=\\"true\\">
+                              <div className=\\"container flush\\">
+                                <span className=\\"logo\\">
+                                  <i className=\\"manicon manicon-manifold-logo\\" />
+                                  <span className=\\"text\\">
+                                    <span className=\\"neutral-text\\">
+                                      Powered by
+                                    </span>
+                                    <span className=\\"white-text\\">
+                                       Manifold
+                                    </span>
+                                  </span>
                                 </span>
-                                <span className=\\"white-text\\">
-                                   Manifold
-                                </span>
-                              </span>
+                              </div>
+                            </section>
+                            <span className=\\"screen-reader-text\\">
+                              Learn more about the Manifold App
                             </span>
-                          </div>
-                        </section>
-                        <span className=\\"screen-reader-text\\">
-                          Learn more about the Manifold App
-                        </span>
-                      </a>
-                    </footer>
+                          </a>
+                        </footer>
+                      </div>
+                    </BlurOnLocationChange>
                   </Layout.Footer>
                 </Route>
               </withRouter(Layout.Footer)>

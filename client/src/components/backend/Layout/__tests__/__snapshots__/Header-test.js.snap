@@ -1,177 +1,179 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend.Layout.Header component renders correctly 1`] = `
-<header
-  className="header-app dark"
->
-  <div
-    className="header-container"
+<div>
+  <header
+    className="header-app dark"
   >
-    <a
-      className="logo"
-      href="/"
-      onClick={[Function]}
+    <div
+      className="header-container"
     >
-      <span
-        className="screen-reader-text"
+      <a
+        className="logo"
+        href="/"
+        onClick={[Function]}
       >
-        Return to home
-      </span>
-      <figure
-        className=""
-      >
-        <div>
-          <i
-            aria-hidden="true"
-            className="manicon manicon-manifold-logo"
-          />
-          <span
-            className="screen-reader-text"
-          >
-            Manifold Logo
-          </span>
-        </div>
-      </figure>
-    </a>
-    <nav
-      className="text-nav"
-    >
-      <ul>
-        <li>
-          <a
-            aria-current={null}
-            className={undefined}
-            href="/backend"
-            onClick={[Function]}
-            style={undefined}
-          >
-            Projects
-          </a>
-        </li>
-        <li>
-          <a
-            aria-current={null}
-            className={undefined}
-            href="/backend/people"
-            onClick={[Function]}
-            style={undefined}
-          >
-            People
-          </a>
-        </li>
-        <li>
-          <a
-            aria-current={null}
-            className={undefined}
-            href="/backend/settings"
-            onClick={[Function]}
-            style={undefined}
-          >
-            Settings
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <nav
-      className="menu-dropdowns"
-    >
-      <ul>
-        <li
-          className="show-60"
+        <span
+          className="screen-reader-text"
         >
-          <a
-            className="button-mode"
-            href="/"
-            onClick={[Function]}
-          >
-            Exit Admin Mode
-          </a>
-        </li>
-        <li>
-          <button
-            className="button-avatar"
-            onClick={[Function]}
-          >
+          Return to home
+        </span>
+        <figure
+          className=""
+        >
+          <div>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-manifold-logo"
+            />
             <span
               className="screen-reader-text"
             >
-              Login or open user settings
+              Manifold Logo
             </span>
-            <figure
-              className="avatar"
+          </div>
+        </figure>
+      </a>
+      <nav
+        className="text-nav"
+      >
+        <ul>
+          <li>
+            <a
+              aria-current={null}
+              className={undefined}
+              href="/backend"
+              onClick={[Function]}
               style={undefined}
+            >
+              Projects
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current={null}
+              className={undefined}
+              href="/backend/people"
+              onClick={[Function]}
+              style={undefined}
+            >
+              People
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current={null}
+              className={undefined}
+              href="/backend/settings"
+              onClick={[Function]}
+              style={undefined}
+            >
+              Settings
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav
+        className="menu-dropdowns"
+      >
+        <ul>
+          <li
+            className="show-60"
+          >
+            <a
+              className="button-mode"
+              href="/"
+              onClick={[Function]}
+            >
+              Exit Admin Mode
+            </a>
+          </li>
+          <li>
+            <button
+              className="button-avatar"
+              onClick={[Function]}
             >
               <span
                 className="screen-reader-text"
               >
-                Avatar
+                Login or open user settings
               </span>
-              <i
-                aria-hidden="true"
-                className="manicon manicon-person"
-              />
-            </figure>
-          </button>
-          <div
-            className="panel-hidden"
-          >
-            <focus-trap-react
-              active={undefined}
-              focusTrapOptions={
-                Object {
-                  "clickOutsideDeactivates": true,
-                  "escapeDeactivates": false,
-                }
-              }
-            >
-              <button
-                className="screen-reader-text"
-                onClick={[MockFunction]}
+              <figure
+                className="avatar"
+                style={undefined}
               >
-                Close Panel
-              </button>
-              <nav
-                className="user-menu menu-hidden"
-              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Avatar
+                </span>
                 <i
-                  className="tail"
+                  aria-hidden="true"
+                  className="manicon manicon-person"
                 />
-                <ul>
-                  <li>
-                    <button
-                      onClick={[Function]}
-                    >
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-person-pencil-simple"
-                      />
-                      Edit Profile
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={[Function]}
-                    >
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-circle-arrow-out-right"
-                      />
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </focus-trap-react>
-          </div>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div
-    className="header-border"
-  />
-  <notifications
-    scope="global"
-  />
-</header>
+              </figure>
+            </button>
+            <div
+              className="panel-hidden"
+            >
+              <focus-trap-react
+                active={undefined}
+                focusTrapOptions={
+                  Object {
+                    "clickOutsideDeactivates": true,
+                    "escapeDeactivates": false,
+                  }
+                }
+              >
+                <button
+                  className="screen-reader-text"
+                  onClick={[MockFunction]}
+                >
+                  Close Panel
+                </button>
+                <nav
+                  className="user-menu menu-hidden"
+                >
+                  <i
+                    className="tail"
+                  />
+                  <ul>
+                    <li>
+                      <button
+                        onClick={[Function]}
+                      >
+                        <i
+                          aria-hidden="true"
+                          className="manicon manicon-person-pencil-simple"
+                        />
+                        Edit Profile
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        onClick={[Function]}
+                      >
+                        <i
+                          aria-hidden="true"
+                          className="manicon manicon-circle-arrow-out-right"
+                        />
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </focus-trap-react>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div
+      className="header-border"
+    />
+    <notifications
+      scope="global"
+    />
+  </header>
+</div>
 `;

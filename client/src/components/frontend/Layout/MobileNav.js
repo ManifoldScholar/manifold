@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import HigherOrder from "containers/global/HigherOrder";
 
 export default class MobileNav extends Component {
   static displayName = "Layout.MobileNav";
@@ -30,26 +31,28 @@ export default class MobileNav extends Component {
     const active = this.getActiveLink(this.props);
 
     return (
-      <nav className="footer-fixed">
-        <ul className="text-nav">
-          <li>
-            <Link
-              to={lh.link("frontend")}
-              className={active === "browse" ? "active" : ""}
-            >
-              Projects
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={lh.link("frontendFollowing")}
-              className={active === "following" ? "active" : ""}
-            >
-              Following
-            </Link>
-          </li>
-        </ul>
-      </nav>
+      <HigherOrder.BlurOnLocationChange location={this.props.location}>
+        <nav className="footer-fixed">
+          <ul className="text-nav">
+            <li>
+              <Link
+                to={lh.link("frontend")}
+                className={active === "browse" ? "active" : ""}
+              >
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={lh.link("frontendFollowing")}
+                className={active === "following" ? "active" : ""}
+              >
+                Following
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </HigherOrder.BlurOnLocationChange>
     );
   }
 }
