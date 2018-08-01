@@ -26,7 +26,8 @@ export default class ReaderDrawer extends PureComponent {
       style: "reader",
       identifier: "notes-drawer",
       lockScroll: "always",
-      includeDrawerFrontMatter: false
+      includeDrawerFrontMatter: false,
+      focusTrap: false
     };
 
     return (
