@@ -241,6 +241,7 @@ export class ReaderContainer extends Component {
               section={this.props.section}
               authentication={this.props.authentication}
               visibility={this.props.visibility}
+              location={this.props.location}
               appearance={this.props.appearance}
               notifications={this.props.notifications}
               commonActions={this.commonActions}

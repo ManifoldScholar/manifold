@@ -61,7 +61,13 @@
       padding: 0 25px 1px;
     }
 
-    &:hover, &:focus {
+    &:focus {
+      color: $neutral80;
+      background-color: $focusTertiary;
+      outline: 0;
+    }
+
+    &:hover {
       color: $neutralWhite;
       background-color: $accentPrimary;
       outline: 0;
@@ -82,10 +88,18 @@
     transition: color $duration $timing,
       background-color $duration $timing;
 
-    @include respond($break50) {
+    &:focus {
+      color: $neutral80;
+      background-color: $focusTertiary;
+      outline: 0;
+
+      &:active {
+        color: $neutral70;
+        background-color: $neutral05;
+      }
     }
 
-    &.active, &:hover, &:focus {
+    &:hover {
       color: $neutralWhite;
       background-color: $accentPrimaryLight;
       outline: 0;

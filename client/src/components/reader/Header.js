@@ -20,6 +20,7 @@ export default class Header extends Component {
     section: PropTypes.object,
     authentication: PropTypes.object,
     visibility: PropTypes.object,
+    location: PropTypes.object,
     appearance: PropTypes.object,
     notifications: PropTypes.object,
     selectFont: PropTypes.func,
@@ -100,141 +101,143 @@ export default class Header extends Component {
     });
 
     return (
-      <header className={headerClass}>
-        <nav className={containerClass}>
-          <ReturnMenu.Button
-            toggleReaderMenu={this.panelToggleHandler("readerReturn")}
-          />
-          {this.renderContentsButton(this.props.text.attributes)}
-          {this.props.section ? (
-            <TextTitles
-              textTitle={this.props.text.attributes.title}
-              sectionTitle={this.props.section.attributes.name}
-              showSection={!this.props.scrollAware.top}
+      <HigherOrder.BlurOnLocationChange location={this.props.location}>
+        <header className={headerClass}>
+          <nav className={containerClass}>
+            <ReturnMenu.Button
+              toggleReaderMenu={this.panelToggleHandler("readerReturn")}
             />
-          ) : null}
-          <nav className="menu-buttons">
-            <ul>
-              <HigherOrder.Authorize kind={"any"}>
+            {this.renderContentsButton(this.props.text.attributes)}
+            {this.props.section ? (
+              <TextTitles
+                textTitle={this.props.text.attributes.title}
+                sectionTitle={this.props.section.attributes.name}
+                showSection={!this.props.scrollAware.top}
+              />
+            ) : null}
+            <nav className="menu-buttons">
+              <ul>
+                <HigherOrder.Authorize kind={"any"}>
+                  <li>
+                    <ControlMenu.NotesButton
+                      toggle={this.panelToggleHandler("notes")}
+                      active={this.props.visibility.uiPanels.notes}
+                    />
+                  </li>
+                </HigherOrder.Authorize>
                 <li>
-                  <ControlMenu.NotesButton
-                    toggle={this.panelToggleHandler("notes")}
-                    active={this.props.visibility.uiPanels.notes}
+                  <ControlMenu.VisibilityMenuButton
+                    toggle={this.panelToggleHandler("visibility")}
+                    active={this.props.visibility.uiPanels.visibility}
                   />
                 </li>
-              </HigherOrder.Authorize>
-              <li>
-                <ControlMenu.VisibilityMenuButton
-                  toggle={this.panelToggleHandler("visibility")}
-                  active={this.props.visibility.uiPanels.visibility}
-                />
-              </li>
-              <li>
-                <ControlMenu.AppearanceMenuButton
-                  toggleAppearanceMenu={this.panelToggleHandler("appearance")}
-                  active={this.props.visibility.uiPanels.appearance}
-                />
-              </li>
-              <li>
-                <Search.Menu.Button
-                  toggleSearchMenu={this.panelToggleHandler("search")}
-                  active={this.props.visibility.uiPanels.search}
-                />
-              </li>
-              <li>
-                <UserMenuButton
-                  authentication={this.props.authentication}
-                  active={this.props.visibility.uiPanels.user}
-                  showLoginOverlay={this.triggerShowSignInUpOverlay}
-                  toggleUserMenu={this.panelToggleHandler("user")}
-                />
-              </li>
-            </ul>
+                <li>
+                  <ControlMenu.AppearanceMenuButton
+                    toggleAppearanceMenu={this.panelToggleHandler("appearance")}
+                    active={this.props.visibility.uiPanels.appearance}
+                  />
+                </li>
+                <li>
+                  <Search.Menu.Button
+                    toggleSearchMenu={this.panelToggleHandler("search")}
+                    active={this.props.visibility.uiPanels.search}
+                  />
+                </li>
+                <li>
+                  <UserMenuButton
+                    authentication={this.props.authentication}
+                    active={this.props.visibility.uiPanels.user}
+                    showLoginOverlay={this.triggerShowSignInUpOverlay}
+                    toggleUserMenu={this.panelToggleHandler("user")}
+                  />
+                </li>
+              </ul>
+            </nav>
           </nav>
-        </nav>
-        <nav className="menu-panels-left">
-          <UIPanel
-            id="readerReturn"
-            visibility={this.props.visibility.uiPanels}
-            bodyComponent={ReturnMenu.Body}
-            returnUrl={lh.link(
-              "frontendProject",
-              this.props.text.relationships.project.attributes.slug
-            )}
-            projectId={this.props.text.relationships.project.id}
-            projectTitle={
-              this.props.text.relationships.project.attributes.title
-            }
-            toggleSignInUpOverlay={
-              this.props.commonActions.toggleSignInUpOverlay
-            }
-            hidePanel={this.props.commonActions.hideReaderReturnPanel}
-            // TODO: More link (and eventually, the link text) should be pulled from settings
-            moreLink="http://manifold.umn.edu/about/"
-          />
-        </nav>
+          <nav className="menu-panels-left">
+            <UIPanel
+              id="readerReturn"
+              visibility={this.props.visibility.uiPanels}
+              bodyComponent={ReturnMenu.Body}
+              returnUrl={lh.link(
+                "frontendProject",
+                this.props.text.relationships.project.attributes.slug
+              )}
+              projectId={this.props.text.relationships.project.id}
+              projectTitle={
+                this.props.text.relationships.project.attributes.title
+              }
+              toggleSignInUpOverlay={
+                this.props.commonActions.toggleSignInUpOverlay
+              }
+              hidePanel={this.props.commonActions.hideReaderReturnPanel}
+              // TODO: More link (and eventually, the link text) should be pulled from settings
+              moreLink="http://manifold.umn.edu/about/"
+            />
+          </nav>
 
-        <nav className="menu-panels-right">
-          <UIPanel
-            id="notes"
-            visibility={this.props.visibility.uiPanels}
-            visible={this.props.visibility.uiPanels.notes}
-            bodyComponent={Notes.ReaderDrawer}
-            hidePanel={this.props.commonActions.hideNotesPanel}
-          />
-          <UIPanel
-            id="visibility"
-            visibility={this.props.visibility.uiPanels}
-            filter={this.props.visibility.visibilityFilters}
-            filterChangeHandler={this.handleVisibilityFilterChange}
-            bodyComponent={ControlMenu.VisibilityMenuBody}
-            hidePanel={this.props.commonActions.hideVisibilityPanel}
-          />
-          <UIPanel
-            id="search"
-            visibility={this.props.visibility.uiPanels}
-            toggleVisibility={this.panelToggleHandler("search")}
-            scopes={[
-              { label: "Chapter", value: "section" },
-              { label: "Text", value: "text" },
-              { label: "Project", value: "project" }
-            ]}
-            initialState={{
-              keyword: "",
-              scope: "text",
-              facets: ["SearchableNode", "Annotation"]
-            }}
-            searchType="reader"
-            bodyComponent={Search.Menu.Body}
-            hidePanel={this.props.commonActions.hideSearchPanel}
-          />
-          <UIPanel
-            id="appearance"
-            visibility={this.props.visibility.uiPanels}
-            bodyComponent={ControlMenu.AppearanceMenuBody}
-            // Props required by body component
-            appearance={this.props.appearance}
-            selectFont={this.props.selectFont}
-            setColorScheme={this.props.setColorScheme}
-            incrementFontSize={this.props.incrementFontSize}
-            decrementFontSize={this.props.decrementFontSize}
-            incrementMargins={this.props.incrementMargins}
-            decrementMargins={this.props.decrementMargins}
-            hidePanel={this.props.commonActions.hideAppearancePanel}
-          />
-          <UIPanel
-            id="user"
-            visibility={this.props.visibility.uiPanels}
-            bodyComponent={UserMenuBody}
-            // Props required by body component
-            showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
-            startLogout={this.props.commonActions.logout}
-            hideUserMenu={this.props.commonActions.toggleUserPanel}
-            hidePanel={this.props.commonActions.toggleUserPanel}
-          />
-        </nav>
-        <HeaderNotifications />
-      </header>
+          <nav className="menu-panels-right">
+            <UIPanel
+              id="notes"
+              visibility={this.props.visibility.uiPanels}
+              visible={this.props.visibility.uiPanels.notes}
+              bodyComponent={Notes.ReaderDrawer}
+              hidePanel={this.props.commonActions.hideNotesPanel}
+            />
+            <UIPanel
+              id="visibility"
+              visibility={this.props.visibility.uiPanels}
+              filter={this.props.visibility.visibilityFilters}
+              filterChangeHandler={this.handleVisibilityFilterChange}
+              bodyComponent={ControlMenu.VisibilityMenuBody}
+              hidePanel={this.props.commonActions.hideVisibilityPanel}
+            />
+            <UIPanel
+              id="search"
+              visibility={this.props.visibility.uiPanels}
+              toggleVisibility={this.panelToggleHandler("search")}
+              scopes={[
+                { label: "Chapter", value: "section" },
+                { label: "Text", value: "text" },
+                { label: "Project", value: "project" }
+              ]}
+              initialState={{
+                keyword: "",
+                scope: "text",
+                facets: ["SearchableNode", "Annotation"]
+              }}
+              searchType="reader"
+              bodyComponent={Search.Menu.Body}
+              hidePanel={this.props.commonActions.hideSearchPanel}
+            />
+            <UIPanel
+              id="appearance"
+              visibility={this.props.visibility.uiPanels}
+              bodyComponent={ControlMenu.AppearanceMenuBody}
+              // Props required by body component
+              appearance={this.props.appearance}
+              selectFont={this.props.selectFont}
+              setColorScheme={this.props.setColorScheme}
+              incrementFontSize={this.props.incrementFontSize}
+              decrementFontSize={this.props.decrementFontSize}
+              incrementMargins={this.props.incrementMargins}
+              decrementMargins={this.props.decrementMargins}
+              hidePanel={this.props.commonActions.hideAppearancePanel}
+            />
+            <UIPanel
+              id="user"
+              visibility={this.props.visibility.uiPanels}
+              bodyComponent={UserMenuBody}
+              // Props required by body component
+              showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
+              startLogout={this.props.commonActions.logout}
+              hideUserMenu={this.props.commonActions.toggleUserPanel}
+              hidePanel={this.props.commonActions.toggleUserPanel}
+            />
+          </nav>
+          <HeaderNotifications />
+        </header>
+      </HigherOrder.BlurOnLocationChange>
     );
   }
 }

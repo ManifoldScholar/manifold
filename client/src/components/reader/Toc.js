@@ -129,7 +129,8 @@ class Toc extends PureComponent {
       identifier: "toc-drawer",
       entrySide: "left",
       closeCallback: this.UIHideTocDrawer,
-      includeDrawerFrontMatter: false
+      includeDrawerFrontMatter: false,
+      returnFocusOnDeactivate: false
     };
 
     return (
