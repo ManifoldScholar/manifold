@@ -32,7 +32,8 @@ export default class DrawerWrapper extends PureComponent {
     entrySide: PropTypes.string,
     style: PropTypes.string,
     history: PropTypes.object,
-    includeDrawerFrontMatter: PropTypes.bool
+    includeDrawerFrontMatter: PropTypes.bool,
+    returnFocusOnDeactivate: PropTypes.bool
   };
 
   static childContextTypes = {
@@ -51,7 +52,8 @@ export default class DrawerWrapper extends PureComponent {
     open: false,
     style: "backend",
     entrySide: "right",
-    includeDrawerFrontMatter: true
+    includeDrawerFrontMatter: true,
+    returnFocusOnDeactivate: true
   };
 
   constructor(props) {
@@ -132,9 +134,7 @@ export default class DrawerWrapper extends PureComponent {
   };
 
   handleLeaveEvent = event => {
-    this.setState({
-      leaving: true
-    });
+    this.setState({ leaving: true });
 
     this.clearDrawerNotifications();
 
@@ -198,8 +198,9 @@ export default class DrawerWrapper extends PureComponent {
           ref={this.focusTrapNode}
           active={this.state.focusable}
           focusTrapOptions={{
-            onDeactivate: this.handleLeaveEvent,
-            clickOutsideDeactivates: true
+            clickOutsideDeactivates: true,
+            escapeDeactivates: false,
+            returnFocusOnDeactivate: this.props.returnFocusOnDeactivate
           }}
         >
           {this.renderDrawerFrontMatter(this.props)}
