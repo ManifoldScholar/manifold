@@ -15,7 +15,7 @@ exports[`Backend Project Social Wrapper Container renders correctly 1`] = `
                       <Connect(withRouter(Drawer.Wrapper)) open={false} closeUrl=\\"/backend/project/1/social\\">
                         <withRouter(Drawer.Wrapper) open={false} closeUrl=\\"/backend/project/1/social\\" connected={true} dispatch={[Function]}>
                           <Route>
-                            <Drawer.Wrapper open={false} closeUrl=\\"/backend/project/1/social\\" connected={true} dispatch={[Function]} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" style=\\"backend\\" entrySide=\\"right\\" includeDrawerFrontMatter={true}>
+                            <Drawer.Wrapper open={false} closeUrl=\\"/backend/project/1/social\\" connected={true} dispatch={[Function]} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" style=\\"backend\\" entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true}>
                               <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
                                 <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
                                   <span />
