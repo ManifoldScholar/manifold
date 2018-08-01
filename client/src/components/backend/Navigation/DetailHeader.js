@@ -12,7 +12,8 @@ export default class DetailHeader extends PureComponent {
     titleHtml: PropTypes.bool,
     subtitle: PropTypes.string,
     utility: PropTypes.object,
-    note: PropTypes.string
+    note: PropTypes.string,
+    secondaryLinks: PropTypes.array
   };
 
   static defaultProps = {
@@ -37,6 +38,17 @@ export default class DetailHeader extends PureComponent {
       return <span dangerouslySetInnerHTML={{ __html: this.props.title }} />;
     }
     return this.props.title;
+  }
+
+  renderSectionNav(props) {
+    if (!props.secondaryLinks) return null;
+
+    return (
+      <Navigation.Dropdown
+        classNames="section-nav"
+        links={props.secondaryLinks}
+      />
+    );
   }
 
   render() {
@@ -71,6 +83,7 @@ export default class DetailHeader extends PureComponent {
             </div>
           </header>
         </div>
+        {this.renderSectionNav(this.props)}
       </section>
     );
   }

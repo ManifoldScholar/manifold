@@ -61,7 +61,7 @@ export class ResourceNewContainer extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
-        <div>
+        <div className="backend-detail">
           <Navigation.DetailHeader
             type="resource"
             breadcrumb={[

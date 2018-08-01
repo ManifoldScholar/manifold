@@ -103,7 +103,7 @@ export class ProjectsWrapper extends PureComponent {
     if (!this.props.projectsMeta) return null;
     const { totalCount } = this.props.projectsMeta.pagination;
     return (
-      <div>
+      <div className="backend-detail">
         <header className="backend-header section-heading-secondary">
           <h1>
             <i className="manicon manicon-stack" aria-hidden="true" />

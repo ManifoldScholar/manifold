@@ -2,22 +2,18 @@
 .backend-header {
   @include panelRounded;
   max-width: $containerWidthFull - 100;
-  margin: 42px $containerPaddingResp 0;
 
   @include respond($containerWidthFull) {
     margin-right: auto;
     margin-left: auto;
   }
 
-  > * {
-    @include containerPrototype;
-  }
-
   .breadcrumb-primary {
-    border-radius: 8px 8px 0 0;
+    border-radius: 8px 8px;
   }
 
   .wrapper {
+    @include containerPrototype;
     padding-top: 25px;
   }
 
@@ -51,6 +47,23 @@
     .manicon.manicon-stack {
       margin-right: 9px;
       margin-left: 0;
+    }
+  }
+
+  .section-nav {
+    display: block;
+    border-radius: 0 0 8px 8px;
+
+    &.open {
+      border-radius: 0 0;
+    }
+
+    ul {
+      border-radius: 0 0 8px 8px;
+    }
+
+    @include respond($break65) {
+      display: none;
     }
   }
 }

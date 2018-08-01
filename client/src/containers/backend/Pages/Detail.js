@@ -177,6 +177,7 @@ class PageDetailContainer extends PureComponent {
         title={page.attributes.title}
         subtitle={`/page/${page.attributes.slug}`}
         utility={this.renderUtility()}
+        secondaryLinks={this.secondaryNavigationLinks(this.props)}
       />
     );
   }
@@ -229,21 +230,12 @@ class PageDetailContainer extends PureComponent {
         ) : null}
         {this.renderExistingHeader(page)}
         <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(this.props)}
-              />
-            </div>
-          </aside>
+          <Utility.SkipLink skipId={skipId} />
           <div className="container">
-            <aside className="aside">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(this.props)}
-              />
-            </aside>
+            <Navigation.Secondary
+              links={this.secondaryNavigationLinks(this.props)}
+              panel
+            />
             <div id={skipId} className="panel">
               <section>{this.renderRoutes()}</section>
             </div>

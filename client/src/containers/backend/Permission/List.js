@@ -41,8 +41,8 @@ export class PermissionContainer extends PureComponent {
   render() {
     const { match, entity, permissions } = this.props;
     const active = match.params.id;
-    const listUrl = lh.nameFromType("backendProject", "Permission", entity);
-    const newUrl = lh.nameFromType("backendProject", "PermissionsNew", entity);
+    const listUrl = lh.nameFromType("backend", "Permission", entity);
+    const newUrl = lh.nameFromType("backend", "PermissionsNew", entity);
 
     return (
       <section>

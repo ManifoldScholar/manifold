@@ -55,7 +55,7 @@ export class CollectionNewContainer extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
-        <div>
+        <div className="backend-detail">
           <Navigation.DetailHeader
             type="collection"
             breadcrumb={[

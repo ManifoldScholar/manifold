@@ -3,15 +3,10 @@ import PropTypes from "prop-types";
 import { Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
 import { Utility } from "components/global";
-import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 
-export class RecordsContainer extends PureComponent {
-  static mapStateToProps = (stateIgnored, ownPropsIgnored) => {
-    return {};
-  };
-
+export default class RecordsContainer extends PureComponent {
   static displayName = "RecordsContainer";
 
   static propTypes = {
@@ -52,7 +47,7 @@ export class RecordsContainer extends PureComponent {
   }
 
   render() {
-    const skipId = "skip-to-people-panel";
+    const skipId = "skip-to-records-nav";
 
     return (
       <HigherOrder.Authorize
@@ -68,18 +63,12 @@ export class RecordsContainer extends PureComponent {
         />
         <div>
           <Utility.SkipLink skipId={skipId} />
-          <Navigation.Secondary links={this.secondaryNavigationLinks()} inline scrollable />
-          <section className="container">
-            <div id={skipId} className="panel">
-              {childRoutes(this.props.route)}
-            </div>
+          <Navigation.Secondary links={this.secondaryNavigationLinks()} />
+          <section id={skipId} className="backend-detail">
+            {childRoutes(this.props.route)}
           </section>
         </div>
       </HigherOrder.Authorize>
     );
   }
 }
-
-export default connect(RecordsContainer.mapStateToProps)(
-  RecordsContainer
-);
