@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import chunk from "lodash/chunk";
 import lh from "helpers/linkHandler";
+import HigherOrder from "containers/global/HigherOrder";
 import { withRouter } from "react-router-dom";
 
 class LayoutFooter extends Component {
@@ -12,6 +13,7 @@ class LayoutFooter extends Component {
     commonActions: PropTypes.object,
     authentication: PropTypes.object,
     history: PropTypes.object,
+    location: PropTypes.object,
     pages: PropTypes.array,
     settings: PropTypes.shape({
       attributes: PropTypes.shape({
@@ -259,63 +261,67 @@ class LayoutFooter extends Component {
     const pressSite = this.props.settings.attributes.general.pressSite;
 
     return (
-      <footer className="footer-browse">
-        <section className="footer-primary">
-          <div className="container flush">
-            <div className="flex-row">
-              <div className="right">
-                {isPressLogo
-                  ? this.renderPressLogo(pressLogo, pressSite)
-                  : this.renderSearchForm()}
-              </div>
-              <div className="rel left">
-                <nav className="text-nav">
-                  <ul>
-                    {chunkedPages.map(
-                      (pageGroup, pageGroupIndex) => (
-                        /* eslint-disable react/no-array-index-key */
-                        <li key={pageGroupIndex}>
-                          {this.renderLinkColumn(pageGroup, "footer-nav")}
-                        </li>
-                      )
-                      /* eslint-enable react/no-array-index-key */
-                    )}
-                    <li>{this.renderLinkColumn(socialLinks, "social-nav")}</li>
-                  </ul>
-                </nav>
-                {isPressLogo ? this.renderSearchForm() : null}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="footer-secondary">
-          <div className="container flush">
-            <div className="colophon">{this.renderCopyright()}</div>
-          </div>
-        </section>
-        <a
-          href="http://manifoldapp.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="footer-tertiary"
-        >
-          <section aria-hidden="true">
+      <HigherOrder.BlurOnLocationChange location={this.props.location}>
+        <footer className="footer-browse">
+          <section className="footer-primary">
             <div className="container flush">
-              <span className={isPressLogo ? "logo dull" : "logo"}>
-                <i className="manicon manicon-manifold-logo" />
-                <span className="text">
-                  <span className="neutral-text">Powered by</span>
-                  <span className="white-text"> Manifold</span>
-                </span>
-              </span>
+              <div className="flex-row">
+                <div className="right">
+                  {isPressLogo
+                    ? this.renderPressLogo(pressLogo, pressSite)
+                    : this.renderSearchForm()}
+                </div>
+                <div className="rel left">
+                  <nav className="text-nav">
+                    <ul>
+                      {chunkedPages.map(
+                        (pageGroup, pageGroupIndex) => (
+                          /* eslint-disable react/no-array-index-key */
+                          <li key={pageGroupIndex}>
+                            {this.renderLinkColumn(pageGroup, "footer-nav")}
+                          </li>
+                        )
+                        /* eslint-enable react/no-array-index-key */
+                      )}
+                      <li>
+                        {this.renderLinkColumn(socialLinks, "social-nav")}
+                      </li>
+                    </ul>
+                  </nav>
+                  {isPressLogo ? this.renderSearchForm() : null}
+                </div>
+              </div>
             </div>
           </section>
-          <span className="screen-reader-text">
-            Learn more about the Manifold App
-          </span>
-        </a>
-      </footer>
+
+          <section className="footer-secondary">
+            <div className="container flush">
+              <div className="colophon">{this.renderCopyright()}</div>
+            </div>
+          </section>
+          <a
+            href="http://manifoldapp.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-tertiary"
+          >
+            <section aria-hidden="true">
+              <div className="container flush">
+                <span className={isPressLogo ? "logo dull" : "logo"}>
+                  <i className="manicon manicon-manifold-logo" />
+                  <span className="text">
+                    <span className="neutral-text">Powered by</span>
+                    <span className="white-text"> Manifold</span>
+                  </span>
+                </span>
+              </div>
+            </section>
+            <span className="screen-reader-text">
+              Learn more about the Manifold App
+            </span>
+          </a>
+        </footer>
+      </HigherOrder.BlurOnLocationChange>
     );
   }
 }

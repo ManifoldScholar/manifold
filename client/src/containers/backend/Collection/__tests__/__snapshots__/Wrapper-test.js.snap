@@ -117,34 +117,36 @@ Array [
         >
           Skip to main content
         </a>
-        <nav
-          className="panel-nav"
-        >
-          <ul>
-            <li>
-              <a
-                aria-current={null}
-                className={undefined}
-                href="/backend/collection/1/general"
-                onClick={[Function]}
-                style={undefined}
-              >
-                General
-              </a>
-            </li>
-            <li>
-              <a
-                aria-current={null}
-                className={undefined}
-                href="/backend/collection/1/resources"
-                onClick={[Function]}
-                style={undefined}
-              >
-                Resources
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <div>
+          <nav
+            className="panel-nav"
+          >
+            <ul>
+              <li>
+                <a
+                  aria-current={null}
+                  className={undefined}
+                  href="/backend/collection/1/general"
+                  onClick={[Function]}
+                  style={undefined}
+                >
+                  General
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-current={null}
+                  className={undefined}
+                  href="/backend/collection/1/resources"
+                  onClick={[Function]}
+                  style={undefined}
+                >
+                  Resources
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </aside>
     <div
@@ -160,34 +162,36 @@ Array [
         >
           Skip to main content
         </a>
-        <nav
-          className="panel-nav"
-        >
-          <ul>
-            <li>
-              <a
-                aria-current={null}
-                className={undefined}
-                href="/backend/collection/1/general"
-                onClick={[Function]}
-                style={undefined}
-              >
-                General
-              </a>
-            </li>
-            <li>
-              <a
-                aria-current={null}
-                className={undefined}
-                href="/backend/collection/1/resources"
-                onClick={[Function]}
-                style={undefined}
-              >
-                Resources
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <div>
+          <nav
+            className="panel-nav"
+          >
+            <ul>
+              <li>
+                <a
+                  aria-current={null}
+                  className={undefined}
+                  href="/backend/collection/1/general"
+                  onClick={[Function]}
+                  style={undefined}
+                >
+                  General
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-current={null}
+                  className={undefined}
+                  href="/backend/collection/1/resources"
+                  onClick={[Function]}
+                  style={undefined}
+                >
+                  Resources
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </aside>
       <div
         className="panel"

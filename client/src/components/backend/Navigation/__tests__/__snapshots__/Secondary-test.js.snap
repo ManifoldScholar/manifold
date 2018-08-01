@@ -1,32 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend.Navigation.Secondary component renders correctly 1`] = `
-<nav
-  className="panel-nav"
->
-  <ul>
-    <li>
-      <a
-        aria-current={null}
-        className={undefined}
-        href="/link-1"
-        onClick={[Function]}
-        style={undefined}
-      >
-        Link One
-      </a>
-    </li>
-    <li>
-      <a
-        aria-current={null}
-        className={undefined}
-        href="/link-2"
-        onClick={[Function]}
-        style={undefined}
-      >
-        Link Two
-      </a>
-    </li>
-  </ul>
-</nav>
+<div>
+  <nav
+    className="panel-nav"
+  >
+    <ul>
+      <li>
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/link-1"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Link One
+        </a>
+      </li>
+      <li>
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/link-2"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Link Two
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
 `;

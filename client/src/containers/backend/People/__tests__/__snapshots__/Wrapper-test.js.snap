@@ -17,23 +17,25 @@ exports[`Backend People Wrapper Container renders correctly 1`] = `
       >
         Skip to main content
       </a>
-      <nav
-        className="panel-nav"
-      >
-        <ul>
-          <li>
-            <a
-              aria-current={null}
-              className={undefined}
-              href="/backend/people/users"
-              onClick={[Function]}
-              style={undefined}
-            >
-              Users
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div>
+        <nav
+          className="panel-nav"
+        >
+          <ul>
+            <li>
+              <a
+                aria-current={null}
+                className={undefined}
+                href="/backend/people/users"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Users
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </aside>
   <div
@@ -49,23 +51,25 @@ exports[`Backend People Wrapper Container renders correctly 1`] = `
       >
         Skip to main content
       </a>
-      <nav
-        className="panel-nav"
-      >
-        <ul>
-          <li>
-            <a
-              aria-current={null}
-              className={undefined}
-              href="/backend/people/users"
-              onClick={[Function]}
-              style={undefined}
-            >
-              Users
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div>
+        <nav
+          className="panel-nav"
+        >
+          <ul>
+            <li>
+              <a
+                aria-current={null}
+                className={undefined}
+                href="/backend/people/users"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Users
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </aside>
     <div
       className="panel"

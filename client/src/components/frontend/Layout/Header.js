@@ -76,96 +76,102 @@ export default class LayoutHeader extends PureComponent {
     const followingActive = startsWith(path, "/following");
 
     return (
-      <header className={"header-app"}>
-        <div className="header-container">
-          <Link to={lh.link("frontend")} className="logo">
-            <span className="screen-reader-text">Return to home</span>
-            <PressLogo
-              url={get(
-                this.props.settings,
-                "attributes.pressLogoStyles.original"
-              )}
-              styles={get(this.props.settings, "attributes.theme.logoStyles")}
-              aria-hidden="true"
-            />
-          </Link>
-          {/* Use show-50 utility class to hide text-nav on mobile */}
-          <nav className="text-nav show-50">
-            <ul>
-              <li className={projectsActive ? "active" : ""}>
-                <Link to={lh.link("frontend")}>{"Projects"}</Link>
-              </li>
-              <HigherOrder.Authorize kind="any">
-                <li className={followingActive ? "active" : ""}>
-                  <Link to={lh.link("frontendFollowing")}>{"Following"}</Link>
+      <HigherOrder.BlurOnLocationChange location={this.props.location}>
+        <header className={"header-app"}>
+          <div className="header-container">
+            <Link to={lh.link("frontend")} className="logo">
+              <span className="screen-reader-text">Return to home</span>
+              <PressLogo
+                url={get(
+                  this.props.settings,
+                  "attributes.pressLogoStyles.original"
+                )}
+                styles={get(this.props.settings, "attributes.theme.logoStyles")}
+                aria-hidden="true"
+              />
+            </Link>
+            {/* Use show-50 utility class to hide text-nav on mobile */}
+            <nav className="text-nav show-50">
+              <ul>
+                <li className={projectsActive ? "active" : ""}>
+                  <Link to={lh.link("frontend")}>{"Projects"}</Link>
                 </li>
-              </HigherOrder.Authorize>
-              {this.visiblePages(this.props).map(page => {
-                const url = lh.link("frontendPage", page.attributes.slug);
-                return (
-                  <li key={page.id} className={path === url ? "active" : ""}>
-                    <Link to={url}>
-                      {page.attributes.navTitle || page.attributes.title}
-                    </Link>
+                <HigherOrder.Authorize kind="any">
+                  <li className={followingActive ? "active" : ""}>
+                    <Link to={lh.link("frontendFollowing")}>{"Following"}</Link>
                   </li>
-                );
-              })}
-            </ul>
-          </nav>
+                </HigherOrder.Authorize>
+                {this.visiblePages(this.props).map(page => {
+                  const url = lh.link("frontendPage", page.attributes.slug);
+                  return (
+                    <li key={page.id} className={path === url ? "active" : ""}>
+                      <Link to={url}>
+                        {page.attributes.navTitle || page.attributes.title}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
 
-          <nav className="menu-dropdowns">
-            <ul>
-              <HigherOrder.Authorize kind="any">
-                {this.renderBackendButton(this.props)}
-              </HigherOrder.Authorize>
-              <li>
-                <Search.Menu.Button
-                  toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
-                  active={this.props.visibility.uiPanels.search}
-                />
-                <UIPanel
-                  id="search"
-                  toggleVisibility={this.props.commonActions.toggleSearchPanel}
-                  visibility={this.props.visibility.uiPanels}
-                  bodyComponent={Search.Menu.Body}
-                  searchType="frontend"
-                  initialState={{
-                    keyword: "",
-                    facets: ["Project", "Resource", "Text"]
-                  }}
-                  description="Search accross all content and projects"
-                  hidePanel={this.props.commonActions.hideSearchPanel}
-                />
-              </li>
-              <li>
-                <UserMenuButton
-                  authentication={this.props.authentication}
-                  active={this.props.visibility.uiPanels.user}
-                  showLoginOverlay={
-                    this.props.commonActions.toggleSignInUpOverlay
-                  }
-                  toggleUserMenu={this.props.commonActions.toggleUserPanel}
-                />
-                <UIPanel
-                  id="user"
-                  visibility={this.props.visibility.uiPanels}
-                  bodyComponent={UserMenuBody}
-                  showLoginOverlay={
-                    this.props.commonActions.toggleSignInUpOverlay
-                  }
-                  startLogout={this.props.commonActions.logout}
-                  hideUserMenu={this.props.commonActions.toggleUserPanel}
-                  hidePanel={this.props.commonActions.toggleUserPanel}
-                />
-              </li>
-            </ul>
-          </nav>
-        </div>
+            <nav className="menu-dropdowns">
+              <ul>
+                <HigherOrder.Authorize kind="any">
+                  {this.renderBackendButton(this.props)}
+                </HigherOrder.Authorize>
+                <li>
+                  <Search.Menu.Button
+                    toggleSearchMenu={
+                      this.props.commonActions.toggleSearchPanel
+                    }
+                    active={this.props.visibility.uiPanels.search}
+                  />
+                  <UIPanel
+                    id="search"
+                    toggleVisibility={
+                      this.props.commonActions.toggleSearchPanel
+                    }
+                    visibility={this.props.visibility.uiPanels}
+                    bodyComponent={Search.Menu.Body}
+                    searchType="frontend"
+                    initialState={{
+                      keyword: "",
+                      facets: ["Project", "Resource", "Text"]
+                    }}
+                    description="Search accross all content and projects"
+                    hidePanel={this.props.commonActions.hideSearchPanel}
+                  />
+                </li>
+                <li>
+                  <UserMenuButton
+                    authentication={this.props.authentication}
+                    active={this.props.visibility.uiPanels.user}
+                    showLoginOverlay={
+                      this.props.commonActions.toggleSignInUpOverlay
+                    }
+                    toggleUserMenu={this.props.commonActions.toggleUserPanel}
+                  />
+                  <UIPanel
+                    id="user"
+                    visibility={this.props.visibility.uiPanels}
+                    bodyComponent={UserMenuBody}
+                    showLoginOverlay={
+                      this.props.commonActions.toggleSignInUpOverlay
+                    }
+                    startLogout={this.props.commonActions.logout}
+                    hideUserMenu={this.props.commonActions.toggleUserPanel}
+                    hidePanel={this.props.commonActions.toggleUserPanel}
+                  />
+                </li>
+              </ul>
+            </nav>
+          </div>
 
-        <div className="header-border" />
+          <div className="header-border" />
 
-        <HeaderNotifications scope="global" />
-      </header>
+          <HeaderNotifications scope="global" />
+        </header>
+      </HigherOrder.BlurOnLocationChange>
     );
   }
 }

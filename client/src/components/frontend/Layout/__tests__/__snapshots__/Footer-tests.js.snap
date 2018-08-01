@@ -1,146 +1,148 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.Layout.Footer component renders correctly 1`] = `
-<footer
-  className="footer-browse"
->
-  <section
-    className="footer-primary"
-  >
-    <div
-      className="container flush"
-    >
-      <div
-        className="flex-row"
-      >
-        <div
-          className="right"
-        >
-          <form
-            className="search-form"
-            onSubmit={[Function]}
-          >
-            <div
-              className="search-button-inline"
-            >
-              <label
-                className="screen-reader-text"
-                htmlFor="footer-search"
-              >
-                Site Search
-              </label>
-              <input
-                id="footer-search"
-                onChange={[Function]}
-                placeholder="Search"
-                type="text"
-                value=""
-              />
-              <button
-                className="manicon manicon-magnify"
-              >
-                <span
-                  className="screen-reader-text"
-                >
-                  Search
-                </span>
-              </button>
-            </div>
-          </form>
-        </div>
-        <div
-          className="rel left"
-        >
-          <nav
-            className="text-nav"
-          >
-            <ul>
-              <li>
-                <ul
-                  className="footer-nav"
-                >
-                  <li>
-                    <span
-                      className="fake-link"
-                      onClick={[Function]}
-                      role="button"
-                    >
-                      Log In
-                    </span>
-                  </li>
-                  <li>
-                    <a
-                      href="/"
-                      onClick={[Function]}
-                    >
-                      Projects
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li />
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section
-    className="footer-secondary"
-  >
-    <div
-      className="container flush"
-    >
-      <div
-        className="colophon"
-      >
-        <div>
-          © 2015-2016 6 University of Minnesota Press.
-          <br />
-        </div>
-      </div>
-    </div>
-  </section>
-  <a
-    className="footer-tertiary"
-    href="http://manifoldapp.org"
-    rel="noopener noreferrer"
-    target="_blank"
+<div>
+  <footer
+    className="footer-browse"
   >
     <section
-      aria-hidden="true"
+      className="footer-primary"
     >
       <div
         className="container flush"
       >
-        <span
-          className="logo"
+        <div
+          className="flex-row"
         >
-          <i
-            className="manicon manicon-manifold-logo"
-          />
-          <span
-            className="text"
+          <div
+            className="right"
           >
-            <span
-              className="neutral-text"
+            <form
+              className="search-form"
+              onSubmit={[Function]}
             >
-              Powered by
-            </span>
-            <span
-              className="white-text"
+              <div
+                className="search-button-inline"
+              >
+                <label
+                  className="screen-reader-text"
+                  htmlFor="footer-search"
+                >
+                  Site Search
+                </label>
+                <input
+                  id="footer-search"
+                  onChange={[Function]}
+                  placeholder="Search"
+                  type="text"
+                  value=""
+                />
+                <button
+                  className="manicon manicon-magnify"
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Search
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div
+            className="rel left"
+          >
+            <nav
+              className="text-nav"
             >
-               Manifold
-            </span>
-          </span>
-        </span>
+              <ul>
+                <li>
+                  <ul
+                    className="footer-nav"
+                  >
+                    <li>
+                      <span
+                        className="fake-link"
+                        onClick={[Function]}
+                        role="button"
+                      >
+                        Log In
+                      </span>
+                    </li>
+                    <li>
+                      <a
+                        href="/"
+                        onClick={[Function]}
+                      >
+                        Projects
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li />
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
     </section>
-    <span
-      className="screen-reader-text"
+    <section
+      className="footer-secondary"
     >
-      Learn more about the Manifold App
-    </span>
-  </a>
-</footer>
+      <div
+        className="container flush"
+      >
+        <div
+          className="colophon"
+        >
+          <div>
+            © 2015-2016 6 University of Minnesota Press.
+            <br />
+          </div>
+        </div>
+      </div>
+    </section>
+    <a
+      className="footer-tertiary"
+      href="http://manifoldapp.org"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <section
+        aria-hidden="true"
+      >
+        <div
+          className="container flush"
+        >
+          <span
+            className="logo"
+          >
+            <i
+              className="manicon manicon-manifold-logo"
+            />
+            <span
+              className="text"
+            >
+              <span
+                className="neutral-text"
+              >
+                Powered by
+              </span>
+              <span
+                className="white-text"
+              >
+                 Manifold
+              </span>
+            </span>
+          </span>
+        </div>
+      </section>
+      <span
+        className="screen-reader-text"
+      >
+        Learn more about the Manifold App
+      </span>
+    </a>
+  </footer>
+</div>
 `;
