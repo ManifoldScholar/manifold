@@ -46,7 +46,10 @@ export class PagesWrapperContainer extends PureComponent {
         failureFatalError={{ detail: "You are not allowed to edit content." }}
         ability="create"
       >
-        <RedirectToFirstMatch candidates={this.secondaryNavigationLinks()} />
+        <RedirectToFirstMatch
+          from={lh.link("backendContent")}
+          candidates={this.secondaryNavigationLinks()}
+        />
 
         <section className="backend-panel">
           <aside className="scrollable">

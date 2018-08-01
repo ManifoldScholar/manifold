@@ -173,6 +173,7 @@ export class CollectionWrapperContainer extends PureComponent {
         ability="update"
       >
         <RedirectToFirstMatch
+          from={lh.link("backendCollection", collection.id)}
           candidates={this.secondaryNavigationLinks(collection)}
         />
 
