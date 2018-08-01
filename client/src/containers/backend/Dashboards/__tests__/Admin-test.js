@@ -22,6 +22,7 @@ describe("Backend Dashboards Admin Container", () => {
           recentProjects={recentProjects}
           dispatch={store.dispatch}
           projectsListSnapshot={{ page: 1 }}
+          snapshotCreator={jest.fn}
           authentication={{
             authenticated: true,
             currentUser: build.entity.user("5", {
