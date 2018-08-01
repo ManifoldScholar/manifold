@@ -189,6 +189,7 @@ export class TextWrapperContainer extends PureComponent {
         ability={["update"]}
       >
         <RedirectToFirstMatch
+          from={lh.link("backendText", text.id)}
           candidates={this.secondaryNavigationLinks(text)}
         />
 

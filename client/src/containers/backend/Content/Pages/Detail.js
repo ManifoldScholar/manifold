@@ -221,9 +221,9 @@ class PageDetailContainer extends PureComponent {
     return (
       <div>
         <RedirectToFirstMatch
+          from={lh.link("backendContentPage", this.id(this.props))}
           candidates={this.secondaryNavigationLinks(this.props)}
         />
-
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}

@@ -189,6 +189,7 @@ export class ResourceWrapperContainer extends PureComponent {
         ability="update"
       >
         <RedirectToFirstMatch
+          from={lh.link("backendResource", resource.id)}
           candidates={this.secondaryNavigationLinks(
             resource,
             resource.attributes.kind

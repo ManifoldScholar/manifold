@@ -48,7 +48,10 @@ export class UsersWrapperContainer extends PureComponent {
           detail: "You are not allowed to manage users and makers."
         }}
       >
-        <RedirectToFirstMatch candidates={this.secondaryNavigationLinks()} />
+        <RedirectToFirstMatch
+          from={lh.link("backendPeople")}
+          candidates={this.secondaryNavigationLinks()}
+        />
 
         <section className="backend-panel">
           <aside className="scrollable">

@@ -63,7 +63,10 @@ export class SettingsWrapperContainer extends PureComponent {
         }}
         ability="update"
       >
-        <RedirectToFirstMatch candidates={this.secondaryNavigationLinks()} />
+        <RedirectToFirstMatch
+          from={lh.link("backendSettings")}
+          candidates={this.secondaryNavigationLinks()}
+        />
 
         <section className="backend-panel">
           <aside className="scrollable">

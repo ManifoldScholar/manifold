@@ -220,6 +220,7 @@ export class ProjectWrapperContainer extends PureComponent {
         ) : null}
 
         <RedirectToFirstMatch
+          from={lh.link("backendProject", project.id)}
           candidates={this.secondaryNavigationLinks(project)}
         />
 

@@ -12,6 +12,8 @@ class RedirectToFirstMatch extends React.PureComponent {
   };
 
   static propTypes = {
+    from: PropTypes.string.isRequired,
+    location: PropTypes.object,
     candidates: PropTypes.array.isRequired,
     authentication: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
@@ -23,12 +25,22 @@ class RedirectToFirstMatch extends React.PureComponent {
   }
 
   componentDidMount() {
+    this.maybeRedirect();
+  }
+
+  componentDidUpdate() {
+    this.maybeRedirect();
+  }
+
+  maybeRedirect() {
+    if (!this.props.location) return;
+    if (this.props.from !== this.props.location.pathname) return;
     this.props.candidates.find(candidate => {
       const props = Object.assign({}, candidate, {
         authentication: this.props.authentication
       });
       if (!props.ability || this.authorization.authorize(props)) {
-        this.props.history.push(candidate.path);
+        this.props.history.replace(candidate.path);
         return true;
       }
       return false;
