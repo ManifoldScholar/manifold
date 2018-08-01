@@ -9,35 +9,40 @@
     &:not(.flush) {
       padding-top: 42px;
     }
+
+    .backend-header + & {
+      @include respond($break60, max) {
+        padding-top: 20px;
+      }
+    }
   }
 
   .aside {
     @include panelRounded;
     display: none;
     float: left;
-    width: 130px;
+    width: 192px;
     margin-right: 20px;
+    padding: 25px 31px 45px;
 
-    @include respond($break40) {
+    @include respond($break65) {
       display: block;
     }
 
-    @include respond($break75) {
-      width: 192px;
+    @include respond($break110) {
       margin-right: 46px;
-      padding: 25px 31px 45px;
     }
   }
 
   .panel {
     width: 100%;
 
-    @include respond($break40) {
+    @include respond($break65) {
       float: left;
-      width: calc(100% - 130px);
+      width: calc(100% - 212px);
     }
 
-    @include respond($break75) {
+    @include respond($break110) {
       width: calc(100% - 238px);
     }
   }
@@ -99,7 +104,7 @@
     overflow: scroll;
     background-color: $neutral80;
 
-    @include respond($break40) {
+    @include respond($break65) {
       display: none;
     }
 

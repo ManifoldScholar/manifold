@@ -1,8 +1,13 @@
 // Global backend header design
 .backend-header {
   @include panelRounded;
-  max-width: 1135px;
-  margin: 42px auto 0;
+  max-width: $containerWidthFull - 100;
+  margin: 42px $containerPaddingResp 0;
+
+  @include respond($containerWidthFull) {
+    margin-right: auto;
+    margin-left: auto;
+  }
 
   > * {
     @include containerPrototype;
@@ -25,9 +30,13 @@
       padding-left: 25px;
       color: $neutral70;
       text-transform: none;
-      font-size: 30px;
+      font-size: 20px;
       font-weight: $medium;
       letter-spacing: 0;
+
+      @include respond($break60) {
+        font-size: 30px;
+      }
 
       .manicon.manicon-stack {
         margin-right: 18px;
