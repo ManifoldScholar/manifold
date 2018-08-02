@@ -22,16 +22,117 @@
 }
 
 .notes-drawer {
+  @keyframes drawerOverlayFade {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
   .drawer-overlay {
     z-index: 150;
+    opacity: 0;
+    animation: drawerOverlayFade $duration $timing forwards;
+
+    .panel-visible & {
+      opacity: 1;
+    }
+
+    .panel-leave & {
+      opaicty: 1;
+      animation: drawerOverlayFade $duration $timing backwards;
+    }
+
+    .panel-leave.panel-leave-active & {
+      opacity: 0;
+    }
+  }
+
+  @keyframes notesSlideMobile {
+    from {
+      right: -100%;
+    }
+
+    to {
+      right: 0;
+    }
+  }
+
+  @keyframes notesSlideTablet {
+    from {
+      right: -70vw;
+    }
+
+    to {
+      right: 0;
+    }
+  }
+
+  @keyframes notesSlideDesktop {
+    from {
+      right: -850px;
+    }
+
+    to {
+      right: 0;
+    }
   }
 
   .drawer-reader {
+    right: -100%;
     padding-top: 47px;
     background-color: $neutral10;
+    transition: right $duration $timing;
+
+    @include respond($break75) {
+      right: -70vw;
+    }
 
     @include respond($break120) {
+      right: -850px;
       width: 50%;
+    }
+
+    .panel-visible & {
+      animation: notesSlideMobile $duration $timing forwards;
+
+      @include respond($break75) {
+        animation: notesSlideTablet $duration $timing forwards;
+      }
+
+      @include respond($break120) {
+        animation: notesSlideDesktop $duration $timing forwards;
+      }
+    }
+
+    .panel-leave & {
+      right: 0;
+
+      animation: slideUpMobile $duration $timing backwards;
+
+      @include respond($break75) {
+        animation: notesSlideTablet $duration $timing backwards;
+      }
+
+      @include respond($break120) {
+        animation: notesSlideDesktop $duration $timing backwards;
+      }
+    }
+
+    .panel-leave.panel-leave-active & {
+      right: -100%;
+
+      @include respond($break75) {
+        right: -70vw;
+      }
+
+      @include respond($break120) {
+        right: -850px;
+        width: 50%;
+      }
     }
 
     .drawer-title {

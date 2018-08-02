@@ -240,23 +240,61 @@
     left: 0;
     width: 100%;
 
+    @keyframes readerReturnSlide {
+      from {
+        left: -390px;
+      }
+
+      to {
+        left: 0;
+      }
+    }
+
     .reader-return-menu {
       position: absolute;
       left: -390px;
       transition: left $duration $timing;
     }
 
-    .panel-visible {
-      .reader-return-menu {
-        left: 0;
-      }
+    .panel-visible .reader-return-menu {
+      animation: readerReturnSlide $duration $timing forwards;
+    }
+
+    .panel-leave .reader-return-menu {
+      left: 0;
+      animation: readerReturnSlide $duration $timing backwards;
+    }
+
+    .panel-leave.panel-leave-active .reader-return-menu {
+      left: -390px;
     }
   }
+
 
   .menu-panels-right {
     position: absolute;
     right: 0;
     width: 100%;
+
+    @keyframes searchSlideMobile {
+      from {
+        right: -100vw;
+      }
+
+      to {
+        right: 0;
+      }
+    }
+
+    @keyframes searchSlideDesktop {
+      from {
+        right: -687px;
+      }
+
+      to {
+        right: 0;
+      }
+    }
 
     // Reader specific menu layout/transition
     .search-menu {
@@ -270,7 +308,38 @@
     }
 
     .panel-visible .search-menu {
+      animation: searchSlideMobile $duration $timing forwards;
+
+      @include respond($break70) {
+        animation: searchSlideDesktop $duration $timing forwards;
+      }
+    }
+
+    .panel-leave .search-menu {
       right: 0;
+      animation: searchSlideMobile $duration $timing backwards;
+
+      @include respond($break70) {
+        animation: searchSlideDesktop $duration $timing backwards;
+      }
+    }
+
+    .panel-leave.panel-leave-active .search-menu {
+      right: -100vw;
+
+      @include respond($break70) {
+        right: -687px;
+      }
+    }
+
+    @keyframes userSlide {
+      from {
+        right: -300px;
+      }
+
+      to {
+        right: 0;
+      }
     }
 
     .user-menu {
@@ -288,7 +357,16 @@
     }
 
     .panel-visible .user-menu {
+      animation: userSlide $duration $timing forwards;
+    }
+
+    .panel-leave .user-menu {
       right: 0;
+      animation: userSlide $duration $timing backwards;
+    }
+
+    .panel-leave.panel-leave-active .user-menu {
+      right: -300px;
     }
   }
 }

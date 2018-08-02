@@ -30,6 +30,7 @@ const commonActions = dispatch => {
     toggleSearchPanel: b(() => panelToggle("search"), dispatch),
     hideSearchPanel: b(() => panelHide("search"), dispatch),
     toggleUserPanel: b(() => panelToggle("user"), dispatch),
+    hideUserPanel: b(() => panelHide("user"), dispatch),
     hideAppearancePanel: b(() => panelHide("appearance"), dispatch),
     hideVisibilityPanel: b(() => panelHide("visibility"), dispatch),
     hideNotesPanel: b(() => panelHide("notes"), dispatch),
