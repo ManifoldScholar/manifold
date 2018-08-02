@@ -257,19 +257,43 @@
       }
     }
 
+    @keyframes menuSlideFade {
+      from {
+        margin-top: -20px;
+        opacity: 0;
+      }
+
+      to {
+        margin-top: 0;
+        opacity: 1;
+      }
+    }
+
     .search-menu, .user-menu {
-      // Default state
       margin-top: -20px;
-      visibility: hidden;
       opacity: 0;
       transition: opacity $duration $timing, margin-top $duration $timing;
     }
 
-    // Panel active states
+    .search-menu, .user-menu {
+      margin-top: -20px;
+      opacity: 0;
+      transition: opacity $duration $timing, margin-top $duration $timing;
+    }
+
     .panel-visible .search-menu, .panel-visible .user-menu {
+      animation: menuSlideFade $duration $timing forwards;
+    }
+
+    .panel-leave .search-menu, .panel-leave .user-menu {
       margin-top: 0;
-      visibility: visible;
       opacity: 1;
+      animation: menuSlideFade $duration $timing backwards;
+    }
+
+    .panel-leave.panel-leave-active .search-menu, .panel-leave.panel-leave-active .user-menu {
+      margin-top: -20px;
+      opacity: 0;
     }
   }
 }

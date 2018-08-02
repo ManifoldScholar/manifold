@@ -1,6 +1,25 @@
+@keyframes slideUpMobile {
+  from {
+    bottom: -420px;
+  }
+
+  to {
+    bottom: 0;
+  }
+}
+
+@keyframes slideOverDesktop {
+  from {
+    right: -350px;
+  }
+
+  to {
+    right: 0;
+  }
+}
+
 @mixin uiPanelMenu {
   position: fixed;
-  // Off screen by default
   right: 0;
   bottom: -420px;
   width: 100%;
@@ -28,12 +47,30 @@
   }
 
   .panel-visible & {
-    // NB: This will be '52' when there is
-    // a full set of functional icons
+    animation: slideOverMobile $duration $timing forwards;
+
+    @include respond($break50) {
+      animation: slideOverDesktop $duration $timing forwards;
+    }
+  }
+
+  .panel-leave & {
     bottom: 44px;
+    animation: slideUpMobile $duration $timing backwards;
 
     @include respond($break50) {
       right: 0;
+      bottom: auto;
+      animation: slideOverDesktop $duration $timing backwards;
+    }
+  }
+
+  .panel-leave.panel-leave-active & {
+    right: 0;
+    bottom: -420px;
+
+    @include respond($break50) {
+      right: -350px;
       bottom: auto;
     }
   }
