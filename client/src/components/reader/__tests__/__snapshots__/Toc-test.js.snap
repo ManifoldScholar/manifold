@@ -21,6 +21,13 @@ exports[`Reader.Toc Component renders correctly 1`] = `
             }
           }
         >
+          <button
+            className="screen-reader-text"
+            onClick={[Function]}
+            tabIndex="0"
+          >
+            Close
+          </button>
           <nav
             className="table-of-contents"
           >
@@ -88,6 +95,13 @@ exports[`Reader.Toc Component renders correctly with empty toc 1`] = `
             }
           }
         >
+          <button
+            className="screen-reader-text"
+            onClick={[Function]}
+            tabIndex="0"
+          >
+            Close
+          </button>
           <nav
             className="table-of-contents"
           >
