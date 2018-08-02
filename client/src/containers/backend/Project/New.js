@@ -36,7 +36,6 @@ export class ProjectNewContainer extends PureComponent {
         <div>
           <Navigation.DetailHeader
             type="project"
-            breadcrumb={[{ path: lh.link("backendProjects"), label: "ALL PROJECTS" }]}
             title={"New Project"}
             showUtility={false}
             note={

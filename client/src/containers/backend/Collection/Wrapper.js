@@ -177,14 +177,12 @@ export class CollectionWrapperContainer extends PureComponent {
             from={lh.link("backendCollection", collection.id)}
             candidates={this.secondaryNavigationLinks(collection)}
           />
-
           {this.state.confirmation ? (
             <Dialog.Confirm {...this.state.confirmation} />
           ) : null}
           <Navigation.DetailHeader
             type="collection"
             breadcrumb={[
-              { path: lh.link("backendProjects"), label: "ALL PROJECTS" },
               {
                 path: lh.link(
                   "backendProjectCollections",
