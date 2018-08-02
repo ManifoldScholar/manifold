@@ -33,20 +33,6 @@
       max-width: 20%;
     }
 
-    &.active {
-      background-color: $neutral100;
-      border-color: $neutral100;
-      box-shadow: -21px 0 0 $neutral100, 21px 0 0 $neutral100;
-
-      a, .fake-link {
-        color: $accentPrimary;
-      }
-
-      + li {
-        border-color: transparent;
-      }
-    }
-
     a {
       display: flex;
       flex-direction: column;
@@ -145,6 +131,7 @@
       }
 
       svg {
+        max-height: 50px;
         transition: fill $duration $timing;
 
         @include respond($break75) {
@@ -159,6 +146,10 @@
       flex-grow: 1;
       padding-right: 20px;
       vertical-align: top;
+
+      @include respond($break75) {
+        padding-right: 0;
+      }
     }
 
     .name {

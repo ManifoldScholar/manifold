@@ -44,7 +44,7 @@
     }
 
     > .form-input {
-      flex: 0 1 47.64%;
+      flex: 0 1 auto;
       margin-top: 0;
       margin-bottom: 20px;
 
@@ -53,18 +53,15 @@
       }
 
       @include respond($break90) {
+        flex-basis: 47.64%;
         margin-top: 18px;
       }
 
       &.wide {
-        flex-basis: 100%;
+        @include respond($break90) {
+          flex-basis: 100%;
+        }
       }
-
-      // &:nth-child(2n+1) {
-      //   @include respond($break60) {
-      //     // margin-right: 40px;
-      //   }
-      // }
     }
   }
 
