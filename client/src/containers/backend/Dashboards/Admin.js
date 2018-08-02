@@ -127,6 +127,20 @@ export class DashboardsAdminContainer extends PureComponent {
     };
   };
 
+  renderProjectCount = () => {
+    if (!this.props.projectsMeta) return null;
+
+    const { totalCount } = this.props.projectsMeta.pagination;
+    const label =
+      totalCount > 1 || totalCount === 0
+        ? "projects"
+        : "project";
+
+    return (
+      <span className="list-total">{`${totalCount} ${label}`}</span>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -138,20 +152,15 @@ export class DashboardsAdminContainer extends PureComponent {
                   <h3>
                     {"Projects"}{" "}
                     <i className="manicon manicon-stack" aria-hidden="true" />
+                    {this.renderProjectCount()}
                   </h3>
                 </header>
                 {this.props.projects && this.props.projectsMeta ? (
                   <List.Searchable
-                    newButton={{
-                      path: lh.link("backendProjectsNew"),
-                      text: "Add a New Project",
-                      authorizedFor: "project"
-                    }}
+                    showEntityCount={false}
                     initialFilter={this.state.filter}
                     defaultFilter={{ order: "sort_title ASC" }}
                     entities={this.props.projects}
-                    singularUnit="project"
-                    pluralUnit="projects"
                     pagination={this.props.projectsMeta.pagination}
                     paginationClickHandler={this.updateHandlerCreator}
                     paginationClass="secondary"
@@ -160,7 +169,6 @@ export class DashboardsAdminContainer extends PureComponent {
                   />
                 ) : null}
               </div>
-
               <div className="right">
                 <nav className="vertical-list-primary flush">
                   {this.props.recentProjects ? (

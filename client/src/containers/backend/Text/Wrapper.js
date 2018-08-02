@@ -200,7 +200,6 @@ export class TextWrapperContainer extends PureComponent {
           <Navigation.DetailHeader
             type="text"
             breadcrumb={[
-              { path: lh.link("backendProjects"), label: "ALL PROJECTS" },
               {
                 path: lh.link(
                   "backendProjectTexts",

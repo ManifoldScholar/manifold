@@ -33,6 +33,7 @@ export default class FormUpload extends Component {
     errors: PropTypes.array,
     inputId: PropTypes.string,
     idForError: PropTypes.string,
+    wide: PropTypes.bool,
     progress: PropTypes.string,
     uploadError: PropTypes.string
   };
@@ -40,6 +41,7 @@ export default class FormUpload extends Component {
   static defaultProps = {
     layout: "square",
     accepts: null,
+    wide: false,
     inputId: uniqueId("upload-"),
     idForError: uniqueId("upload-error-")
   };
@@ -93,12 +95,16 @@ export default class FormUpload extends Component {
     const labelClass = classnames({
       "has-instructions": isString(this.props.instructions)
     });
+    const inputClasses = classnames({
+      "form-input": true,
+      wide: this.props.wide
+    });
     const inputProps = {
       id: this.props.inputId,
       "aria-describedby": this.props.idForError
     };
     return (
-      <div className="form-input">
+      <div className={inputClasses}>
         <GlobalForm.Errorable
           className="form-input"
           name={this.props.name}

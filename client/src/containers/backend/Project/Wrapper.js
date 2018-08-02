@@ -225,7 +225,6 @@ export class ProjectWrapperContainer extends PureComponent {
             from={lh.link("backendProject", project.id)}
             candidates={this.secondaryNavigationLinks(project)}
           />
-
           <Navigation.DetailHeader
             type="project"
             title={project.attributes.title}

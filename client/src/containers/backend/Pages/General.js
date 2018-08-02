@@ -106,7 +106,6 @@ class PagesGeneralContainer extends PureComponent {
           {this.renderPath()}
           {this.renderBody()}
           <Form.FieldGroup
-            horizontal
             label="Page States"
             instructions="Manage visibility and whether or not the page appears in navigation"
           >

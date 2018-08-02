@@ -22,6 +22,7 @@ export class ListSearchable extends PureComponent {
     entities: PropTypes.array,
     listClassName: PropTypes.string,
     columnarNav: PropTypes.bool,
+    showEntityCount: PropTypes.bool,
     singularUnit: PropTypes.string,
     pluralUnit: PropTypes.string,
     pagination: PropTypes.object,
@@ -61,6 +62,7 @@ export class ListSearchable extends PureComponent {
   static defaultProps = {
     entityComponentProps: {},
     columnarNav: false,
+    showEntityCount: true,
     newButton: null,
     secondaryButton: null,
     paginationPadding: 3,
@@ -330,7 +332,7 @@ export class ListSearchable extends PureComponent {
 
     return (
       <div>
-        {!this.props.columnarNav && (
+        {this.props.showEntityCount && (
           <Utility.EntityCount
             pagination={this.props.pagination}
             singularUnit={this.props.singularUnit}

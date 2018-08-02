@@ -121,6 +121,7 @@ export class ProjectsListContainer extends PureComponent {
                   authorizedFor: "project"
                 }}
                 columnarNav={true}
+                showEntityCount={false}
                 initialFilter={this.state.filter}
                 defaultFilter={{ order: "sort_title ASC" }}
                 listClassName="grid-list"
@@ -130,7 +131,7 @@ export class ProjectsListContainer extends PureComponent {
                 pluralUnit="projects"
                 pagination={this.props.projectsMeta.pagination}
                 paginationClickHandler={this.updateHandlerCreator}
-                paginationClass="wide"
+                paginationClass="secondary"
                 filterChangeHandler={this.filterChangeHandler}
               />
             ) : null}

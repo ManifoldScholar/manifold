@@ -66,8 +66,9 @@ class IngestionFormUpload extends PureComponent {
     /* eslint-disable max-len */
     return (
       <div>
-        <Form.FieldGroup {...this.props}>
+        <Form.FieldGroup label="Reingest Text" {...this.props}>
           <Form.TusUpload
+            wide
             inlineStyle={{ width: "100%" }}
             layout="landscape"
             instructions={fileInstructions}
@@ -79,8 +80,9 @@ class IngestionFormUpload extends PureComponent {
             set={this.onSourceChange}
             accepts="any"
           />
-          <div className="form-divider">or</div>
+          <div className="form-divider wide">or</div>
           <Form.TextInput
+            wide
             label="URL"
             focusOnMount
             instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."

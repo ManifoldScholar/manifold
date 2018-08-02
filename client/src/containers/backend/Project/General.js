@@ -33,6 +33,7 @@ export default class ProjectGeneralContainer extends PureComponent {
           >
             <Form.FieldGroup label="Title">
               <Form.TextInput
+                wide
                 validation={["required"]}
                 focusOnMount
                 label="Title"
@@ -40,11 +41,13 @@ export default class ProjectGeneralContainer extends PureComponent {
                 placeholder="Enter Project Title"
               />
               <Form.TextInput
+                wide
                 label="Subtitle"
                 name="attributes[subtitle]"
                 placeholder="Enter Project Subtitle"
               />
               <Form.TextInput
+                wide
                 label="Slug"
                 name="attributes[slug]"
                 placeholder="Enter Project Slug"
