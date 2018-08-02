@@ -159,11 +159,13 @@
       flex-grow: 1;
     }
 
-    figure {
+    .figure-wrapper {
       + .meta {
         padding-left: 15px;
       }
+    }
 
+    figure {
       &.cover {
         min-width: 50px;
         max-width: 50px;

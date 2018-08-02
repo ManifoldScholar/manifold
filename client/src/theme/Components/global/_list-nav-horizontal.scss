@@ -5,12 +5,13 @@ Currently found on Projects route on backend
 .list-nav-horizontal {
   display: flex;
   flex-direction: column;
-  margin-bottom: 56px;
+  margin-bottom: 16px;
 
   @include respond($break60) {
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: flex-start;
+    margin-bottom: 56px;
   }
 
   > * {
