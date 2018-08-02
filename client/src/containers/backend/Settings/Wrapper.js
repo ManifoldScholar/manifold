@@ -69,17 +69,9 @@ export class SettingsWrapperContainer extends PureComponent {
         />
 
         <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary links={this.secondaryNavigationLinks()} />
-            </div>
-          </aside>
+          <Utility.SkipLink skipId={skipId} />
+          <Navigation.Secondary links={this.secondaryNavigationLinks()} inline />
           <div className="container">
-            <aside className="aside">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary links={this.secondaryNavigationLinks()} />
-            </aside>
             <div id={skipId} className="panel">
               {childRoutes(this.props.route)}
             </div>

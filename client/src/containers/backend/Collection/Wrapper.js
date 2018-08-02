@@ -165,59 +165,53 @@ export class CollectionWrapperContainer extends PureComponent {
     const skipId = "skip-to-collection-panel";
 
     return (
-      <HigherOrder.Authorize
-        entity={collection}
-        failureFatalError={{
-          detail: "You are not allowed to edit this collection."
-        }}
-        ability="update"
-      >
-        <RedirectToFirstMatch
-          from={lh.link("backendCollection", collection.id)}
-          candidates={this.secondaryNavigationLinks(collection)}
-        />
+      <div>
+        <HigherOrder.Authorize
+          entity={collection}
+          failureFatalError={{
+            detail: "You are not allowed to edit this collection."
+          }}
+          ability="update"
+        >
+          <RedirectToFirstMatch
+            from={lh.link("backendCollection", collection.id)}
+            candidates={this.secondaryNavigationLinks(collection)}
+          />
 
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
-        <Navigation.DetailHeader
-          type="collection"
-          breadcrumb={[
-            { path: lh.link("backendProjects"), label: "ALL PROJECTS" },
-            {
-              path: lh.link(
-                "backendProjectCollections",
-                collection.relationships.project.id
-              ),
-              label: collection.relationships.project.attributes.title
-            }
-          ]}
-          utility={this.renderUtility()}
-          title={collection.attributes.title}
-          titleHtml
-        />
-        <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
-              <Utility.SkipLink skipId={skipId} />
+          {this.state.confirmation ? (
+            <Dialog.Confirm {...this.state.confirmation} />
+          ) : null}
+          <Navigation.DetailHeader
+            type="collection"
+            breadcrumb={[
+              { path: lh.link("backendProjects"), label: "ALL PROJECTS" },
+              {
+                path: lh.link(
+                  "backendProjectCollections",
+                  collection.relationships.project.id
+                ),
+                label: collection.relationships.project.attributes.title
+              }
+            ]}
+            utility={this.renderUtility()}
+            title={collection.attributes.title}
+            secondaryLinks={this.secondaryNavigationLinks(collection)}
+            titleHtml
+          />
+          <section className="backend-panel">
+            <Utility.SkipLink skipId={skipId} />
+            <div className="container">
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(collection)}
+                panel
               />
+              <div id={skipId} className="panel">
+                {this.renderRoutes()}
+              </div>
             </div>
-          </aside>
-          <div className="container">
-            <aside className="aside">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(collection)}
-              />
-            </aside>
-            <div id={skipId} className="panel">
-              {this.renderRoutes()}
-            </div>
-          </div>
-        </section>
-      </HigherOrder.Authorize>
+          </section>
+        </HigherOrder.Authorize>
+      </div>
     );
   }
 }

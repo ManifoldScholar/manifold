@@ -209,50 +209,44 @@ export class ProjectWrapperContainer extends PureComponent {
     const skipId = "skip-to-project-panel";
 
     return (
-      <HigherOrder.Authorize
-        entity={project}
-        failureFatalError={{
-          detail: "You are not allowed to edit this project."
-        }}
-        ability={["update", "manageResources"]}
-      >
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
+      <div>
+        <HigherOrder.Authorize
+          entity={project}
+          failureFatalError={{
+            detail: "You are not allowed to edit this project."
+          }}
+          ability={["update", "manageResources"]}
+        >
+          {this.state.confirmation ? (
+            <Dialog.Confirm {...this.state.confirmation} />
+          ) : null}
 
-        <RedirectToFirstMatch
-          from={lh.link("backendProject", project.id)}
-          candidates={this.secondaryNavigationLinks(project)}
-        />
+          <RedirectToFirstMatch
+            from={lh.link("backendProject", project.id)}
+            candidates={this.secondaryNavigationLinks(project)}
+          />
 
-        <Navigation.DetailHeader
-          type="project"
-          title={project.attributes.title}
-          subtitle={project.attributes.subtitle}
-          utility={this.renderUtility(project)}
-        />
-        <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
-              <Utility.SkipLink skipId={skipId} />
+          <Navigation.DetailHeader
+            type="project"
+            title={project.attributes.title}
+            subtitle={project.attributes.subtitle}
+            utility={this.renderUtility(project)}
+            secondaryLinks={this.secondaryNavigationLinks(project)}
+          />
+          <section className="backend-panel">
+            <Utility.SkipLink skipId={skipId} />
+            <div className="container">
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(project)}
+                panel
               />
+              <div id={skipId} className="panel">
+                {this.renderRoutes()}
+              </div>
             </div>
-          </aside>
-          <div className="container">
-            <aside className="aside">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(project)}
-              />
-            </aside>
-            <div id={skipId} className="panel">
-              {this.renderRoutes()}
-            </div>
-          </div>
-        </section>
-      </HigherOrder.Authorize>
+          </section>
+        </HigherOrder.Authorize>
+      </div>
     );
   }
 }
