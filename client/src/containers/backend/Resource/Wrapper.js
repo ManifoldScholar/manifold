@@ -9,6 +9,7 @@ import { select } from "utils/entityUtils";
 import { resourcesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import navigation from "helpers/router/navigation";
 
 const { request, flush } = entityStoreActions;
 
@@ -112,43 +113,6 @@ export class ResourceWrapperContainer extends PureComponent {
     );
   };
 
-  secondaryNavigationLinks(resource, kind) {
-    const externalVideo = resource.attributes.externalVideo;
-    const project = resource.relationships.project;
-    const out = [
-      {
-        path: lh.link("backendResourceGeneral", resource.id),
-        label: "General",
-        key: "general",
-        entity: project,
-        ability: "update"
-      },
-      {
-        path: lh.link("backendResourceMetadata", resource.id),
-        label: "Metadata",
-        key: "metadata",
-        entity: project,
-        ability: "manageResources"
-      }
-    ];
-    if (
-      kind === "image" ||
-      kind === "audio" ||
-      kind === "pdf" ||
-      kind === "interactive" ||
-      (kind === "video" && !externalVideo)
-    ) {
-      out.splice(1, 0, {
-        path: lh.link("backendResourceVariants", resource.id),
-        label: "Variants",
-        key: "variants",
-        entity: project,
-        ability: "update"
-      });
-    }
-    return out;
-  }
-
   renderUtility(resource) {
     return (
       <div>
@@ -175,10 +139,11 @@ export class ResourceWrapperContainer extends PureComponent {
 
   render() {
     /* eslint-disable no-unused-vars */
-    const { resource, match } = this.props;
+    const { resource } = this.props;
     /* eslint-enable no-unused-vars */
     if (!resource) return null;
     const skipId = "skip-to-resource-panel";
+    const secondaryLinks = navigation.resource(resource);
 
     return (
       <div>
@@ -191,10 +156,7 @@ export class ResourceWrapperContainer extends PureComponent {
         >
           <RedirectToFirstMatch
             from={lh.link("backendResource", resource.id)}
-            candidates={this.secondaryNavigationLinks(
-              resource,
-              resource.attributes.kind
-            )}
+            candidates={secondaryLinks}
           />
 
           {this.state.confirmation ? (
@@ -215,21 +177,12 @@ export class ResourceWrapperContainer extends PureComponent {
             title={resource.attributes.titleFormatted}
             titleHtml
             subtitle={resource.attributes.subtitle}
-            secondaryLinks={this.secondaryNavigationLinks(
-              resource,
-              resource.attributes.kind
-            )}
+            secondaryLinks={secondaryLinks}
           />
           <section className="backend-panel">
             <Utility.SkipLink skipId={skipId} />
             <div className="container">
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(
-                  resource,
-                  resource.attributes.kind
-                )}
-                panel
-              />
+              <Navigation.Secondary links={secondaryLinks} panel />
               <div id={skipId} className="panel">
                 {this.renderRoutes()}
               </div>

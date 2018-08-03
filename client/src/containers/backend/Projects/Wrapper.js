@@ -4,7 +4,7 @@ import { Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
 import { Utility } from "components/global";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
-import lh from "helpers/linkHandler";
+import navigation from "helpers/router/navigation";
 
 export default class ProjectsWrapper extends PureComponent {
 
@@ -12,20 +12,9 @@ export default class ProjectsWrapper extends PureComponent {
     route: PropTypes.object
   };
 
-  secondaryNavigationLinks() {
-    return [
-      {
-        path: lh.link("backendProjects"),
-        label: "All Projects",
-        key: "projects",
-        entity: "project",
-        ability: "update"
-      }
-    ];
-  }
-
   render() {
     const skipId = "skip-to-projects-nav";
+    const secondaryLinks = navigation.projects();
 
     return (
       <HigherOrder.Authorize
@@ -37,7 +26,7 @@ export default class ProjectsWrapper extends PureComponent {
       >
         <div>
           <Utility.SkipLink skipId={skipId} />
-          <Navigation.Secondary links={this.secondaryNavigationLinks()} />
+          <Navigation.Secondary links={secondaryLinks} />
           <section id={skipId} className="backend-detail">
             {childRoutes(this.props.route)}
           </section>

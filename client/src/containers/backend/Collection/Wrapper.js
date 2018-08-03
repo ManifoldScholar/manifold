@@ -9,6 +9,7 @@ import { select } from "utils/entityUtils";
 import { collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import navigation from "helpers/router/navigation";
 
 const { request, flush } = entityStoreActions;
 
@@ -116,25 +117,6 @@ export class CollectionWrapperContainer extends PureComponent {
     );
   };
 
-  secondaryNavigationLinks(collection) {
-    return [
-      {
-        path: lh.link("backendCollectionGeneral", collection.id),
-        label: "General",
-        key: "general",
-        entity: collection,
-        ability: "update"
-      },
-      {
-        path: lh.link("backendCollectionResources", collection.id),
-        label: "Resources",
-        key: "resources",
-        entity: collection,
-        ability: "update"
-      }
-    ];
-  }
-
   renderUtility() {
     return (
       <div>
@@ -163,6 +145,7 @@ export class CollectionWrapperContainer extends PureComponent {
     /* eslint-enable no-unused-vars */
     if (!collection) return null;
     const skipId = "skip-to-collection-panel";
+    const secondaryLinks = navigation.collection(collection);
 
     return (
       <div>
@@ -175,7 +158,7 @@ export class CollectionWrapperContainer extends PureComponent {
         >
           <RedirectToFirstMatch
             from={lh.link("backendCollection", collection.id)}
-            candidates={this.secondaryNavigationLinks(collection)}
+            candidates={secondaryLinks}
           />
           {this.state.confirmation ? (
             <Dialog.Confirm {...this.state.confirmation} />
@@ -193,16 +176,13 @@ export class CollectionWrapperContainer extends PureComponent {
             ]}
             utility={this.renderUtility()}
             title={collection.attributes.title}
-            secondaryLinks={this.secondaryNavigationLinks(collection)}
+            secondaryLinks={secondaryLinks}
             titleHtml
           />
           <section className="backend-panel">
             <Utility.SkipLink skipId={skipId} />
             <div className="container">
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(collection)}
-                panel
-              />
+              <Navigation.Secondary links={secondaryLinks} panel />
               <div id={skipId} className="panel">
                 {this.renderRoutes()}
               </div>

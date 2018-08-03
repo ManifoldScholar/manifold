@@ -83,6 +83,7 @@ export class FrontendContainer extends Component {
             <Layout.Header
               pages={this.props.pages}
               visibility={this.props.visibility}
+              match={this.props.match}
               location={this.props.location}
               authentication={this.props.authentication}
               notifications={this.props.notifications}
@@ -90,9 +91,6 @@ export class FrontendContainer extends Component {
               settings={this.props.settings}
             />
           </HigherOrder.ScrollAware>
-          <HigherOrderContainer.Authorize kind="any">
-            <Layout.MobileNav location={this.props.location} />
-          </HigherOrderContainer.Authorize>
           <main
             ref={mainContainer => {
               this.mainContainer = mainContainer;

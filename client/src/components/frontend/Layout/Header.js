@@ -1,18 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
-  UIPanel,
-  UserMenuBody,
-  UserMenuButton,
   PressLogo,
   HeaderNotifications,
-  Search
+  Navigation
 } from "components/global";
 import { Link } from "react-router-dom";
-import startsWith from "lodash/startsWith";
 import get from "lodash/get";
 import HigherOrder from "containers/global/HigherOrder";
 import lh from "helpers/linkHandler";
+import navigation from "helpers/router/navigation";
 
 export default class LayoutHeader extends PureComponent {
   static displayName = "Layout.Header";
@@ -31,49 +28,28 @@ export default class LayoutHeader extends PureComponent {
     pages: []
   };
 
-  visiblePages(props) {
-    if (!props.pages) return [];
-    return props.pages.filter(p => {
-      return p.attributes.showInHeader && !p.attributes.hidden;
-    });
-  }
+  frontendLinks(props) {
+    const out = navigation.frontend(this.props.match, this.props.location, this.props.authentication);
+    const pages = props.pages || [];
+    const pageLinks = pages.reduce((list, page) => {
+      if (page.attributes.showInHeader) {
+        const item = {
+          label: page.attributes.title,
+          path: lh.link("frontendPage", page.id),
+          key: page.attributes.slug
+        };
 
-  backendButtonLabel(kind) {
-    switch (kind) {
-      case "admin":
-      case "editor":
-      case "project_creator":
-      case "marketeer":
-        return "Admin Mode";
-      case "project_editor":
-      case "project_resource_editor":
-        return "Editor Mode";
-      case "project_author": // For now authors will not have access to the backend
-      default:
-        return null;
-    }
-  }
+        list.push(item);
+      }
 
-  renderBackendButton(props) {
-    if (!props.authentication.currentUser) return null;
-    const label = this.backendButtonLabel(
-      props.authentication.currentUser.attributes.kind
-    );
-    if (!label) return null;
+      return list;
+    }, []);
 
-    return (
-      <li>
-        <Link className="button-mode" to={lh.link("backend")}>
-          {label}
-        </Link>
-      </li>
-    );
+    return out.concat(pageLinks);
   }
 
   render() {
-    const path = this.props.location.pathname;
-    const projectsActive = path === "/" || startsWith(path, "/project");
-    const followingActive = startsWith(path, "/following");
+    const links = this.frontendLinks(this.props);
 
     return (
       <HigherOrder.BlurOnLocationChange location={this.props.location}>
@@ -90,85 +66,17 @@ export default class LayoutHeader extends PureComponent {
                 aria-hidden="true"
               />
             </Link>
-            {/* Use show-50 utility class to hide text-nav on mobile */}
-            <nav className="text-nav show-50">
-              <ul>
-                <li className={projectsActive ? "active" : ""}>
-                  <Link to={lh.link("frontend")}>{"Projects"}</Link>
-                </li>
-                <HigherOrder.Authorize kind="any">
-                  <li className={followingActive ? "active" : ""}>
-                    <Link to={lh.link("frontendFollowing")}>{"Following"}</Link>
-                  </li>
-                </HigherOrder.Authorize>
-                {this.visiblePages(this.props).map(page => {
-                  const url = lh.link("frontendPage", page.attributes.slug);
-                  return (
-                    <li key={page.id} className={path === url ? "active" : ""}>
-                      <Link to={url}>
-                        {page.attributes.navTitle || page.attributes.title}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
 
-            <nav className="menu-dropdowns">
-              <ul>
-                <HigherOrder.Authorize kind="any">
-                  {this.renderBackendButton(this.props)}
-                </HigherOrder.Authorize>
-                <li>
-                  <Search.Menu.Button
-                    toggleSearchMenu={
-                      this.props.commonActions.toggleSearchPanel
-                    }
-                    active={this.props.visibility.uiPanels.search}
-                  />
-                  <UIPanel
-                    id="search"
-                    toggleVisibility={
-                      this.props.commonActions.toggleSearchPanel
-                    }
-                    visibility={this.props.visibility.uiPanels}
-                    bodyComponent={Search.Menu.Body}
-                    searchType="frontend"
-                    initialState={{
-                      keyword: "",
-                      facets: ["Project", "Resource", "Text"]
-                    }}
-                    description="Search accross all content and projects"
-                    hidePanel={this.props.commonActions.hideSearchPanel}
-                  />
-                </li>
-                <li>
-                  <UserMenuButton
-                    authentication={this.props.authentication}
-                    active={this.props.visibility.uiPanels.user}
-                    showLoginOverlay={
-                      this.props.commonActions.toggleSignInUpOverlay
-                    }
-                    toggleUserMenu={this.props.commonActions.toggleUserPanel}
-                  />
-                  <UIPanel
-                    id="user"
-                    visibility={this.props.visibility.uiPanels}
-                    bodyComponent={UserMenuBody}
-                    showLoginOverlay={
-                      this.props.commonActions.toggleSignInUpOverlay
-                    }
-                    startLogout={this.props.commonActions.logout}
-                    hideUserMenu={this.props.commonActions.toggleUserPanel}
-                    hidePanel={this.props.commonActions.toggleUserPanel}
-                  />
-                </li>
-              </ul>
-            </nav>
+            <Navigation.Primary
+              links={links}
+              commonActions={this.props.commonActions}
+              authentication={this.props.authentication}
+              visibility={this.props.visibility}
+              mode="frontend"
+            />
           </div>
 
           <div className="header-border" />
-
           <HeaderNotifications scope="global" />
         </header>
       </HigherOrder.BlurOnLocationChange>

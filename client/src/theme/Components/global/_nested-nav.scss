@@ -1,0 +1,208 @@
+$iconMargin: -45px;
+
+.nested-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 30px;
+
+  @include respond($break40) {
+    min-height: 40px;
+  }
+
+  .selected {
+    @include templateHead;
+    color: $neutral50;
+    font-size: 20px;
+  }
+
+  nav.search-menu {
+    margin-left: $iconMargin;
+    padding: 0;
+    border: 2px solid $neutral50;
+    width: 100%;
+
+    .search-query .input-magnify {
+      min-width: 0;
+    }
+
+    .footer {
+      display: none;
+    }
+  }
+
+  .user-links {
+    position: relative;
+    right: 0;
+    display: none;
+
+    > ul {
+      height: auto;
+
+      > li {
+        display: block;
+
+        + li {
+          margin-left: 0;
+          margin-top: 25px;
+        }
+      }
+    }
+
+    button {
+      @include buttonUnstyled;
+    }
+
+    .manicon {
+      &.manicon-person-pencil-simple {
+        font-size: 28px;
+        top: 0;
+      }
+
+      &.manicon-circle-arrow-out-right-long {
+        font-size: 18px;
+        top: 5px;
+      }
+    }
+
+    .button-mode {
+      margin-left: $iconMargin;
+      padding: 10px 25px;
+      display: inline-block;
+    }
+  }
+
+  .user-links, .primary-links {
+    padding: 40px 0 40px 100px;
+    text-align: left;
+  }
+
+  &.open {
+    overflow-y: scroll;
+    position: fixed;
+    background-color: $neutralWhite;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: block;
+    z-index: 500;
+
+    .dark & {
+      background-color: $neutral110;
+
+      .user-links {
+        background-color: $neutral100;
+      }
+    }
+
+    .selected {
+      display: none;
+    }
+
+    .user-links {
+      display: block;
+      background-color: $neutral05;
+    }
+
+    ul {
+      display: block;
+    }
+  }
+
+  .manicon {
+    color: $neutral50;
+    transition: color $duration $timing;
+
+    &.manicon-x {
+      position: absolute;
+      top: 22px;
+      right: 4.5%;
+      font-size: 22px;
+
+      @include respond($break40) {
+        top: 26px;
+        font-size: 26px;
+      }
+    }
+
+    &.manicon-bars-parallel-horizontal {
+      position: absolute;
+      top: calc(50% - 8px);
+      right: 4.5%;
+      font-size: 18px;
+
+      @include respond($break40) {
+        top: calc(50% - 11px);
+        font-size: 22px;
+      }
+    }
+
+    &:hover {
+      color: $accentPrimary;
+      cursor: pointer;
+    }
+  }
+
+  ul {
+    @include listUnstyled;
+    display: none;
+  }
+
+  li, a {
+    @include templateHead;
+    position: relative;
+    font-size: 20px;
+    color: $neutral50;
+    text-decoration: none;
+    transition: color $duration $timing;
+
+    &:hover, &:focus {
+      color: $accentPrimary;
+      outline: 0;
+      cursor: pointer;
+
+      .manicon {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  li {
+    position: relative;
+
+    + li {
+      margin-top: 20px;
+    }
+
+    .manicon {
+      font-size: 10px;
+      position: absolute;
+      left: $iconMargin;
+      top: 8px;
+
+      @include respond($break75) {
+        display: none;
+      }
+    }
+
+    &.nested {
+      &.open {
+        ul {
+          display: block;
+        }
+      }
+
+      ul {
+        display: none;
+        margin-top: 20px;
+        margin-left: 20px;
+      }
+    }
+  }
+
+  &.hide-75 {
+    @include hide($break75);
+  }
+}

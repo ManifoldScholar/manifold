@@ -8,6 +8,7 @@ import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { textsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
+import navigation from "helpers/router/navigation";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 
 const { request } = entityStoreActions;
@@ -54,44 +55,6 @@ export class TextWrapperContainer extends PureComponent {
 
   closeDialog() {
     this.setState({ confirmation: null });
-  }
-
-  secondaryNavigationLinks(text) {
-    return [
-      {
-        path: lh.link("backendTextGeneral", text.id),
-        label: "General",
-        key: "general",
-        entity: text,
-        ability: "update"
-      },
-      {
-        path: lh.link("backendTextCollaborators", text.id),
-        label: "People",
-        key: "collaborators",
-        entity: text.relationships.project,
-        ability: "updateMakers"
-      },
-      {
-        path: lh.link("backendTextMetadata", text.id),
-        label: "Metadata",
-        key: "metadata",
-        entity: text,
-        ability: "update"
-      },
-      {
-        path: lh.link("backendTextStyles", text.id),
-        label: "Styles",
-        key: "styles"
-      },
-      {
-        path: lh.link("backendTextIngestionsNew", text.id),
-        label: "Reingest",
-        key: "reingest",
-        entity: text,
-        ability: "update"
-      }
-    ];
   }
 
   doDestroy = () => {
@@ -179,6 +142,7 @@ export class TextWrapperContainer extends PureComponent {
     const { text } = this.props;
     if (!text) return null;
     const skipId = "skip-to-text-panel";
+    const secondaryLinks = navigation.text(text);
 
     return (
       <div>
@@ -191,7 +155,7 @@ export class TextWrapperContainer extends PureComponent {
         >
           <RedirectToFirstMatch
             from={lh.link("backendText", text.id)}
-            candidates={this.secondaryNavigationLinks(text)}
+            candidates={secondaryLinks}
           />
 
           {this.state.confirmation ? (
@@ -211,15 +175,12 @@ export class TextWrapperContainer extends PureComponent {
             title={text.attributes.title}
             subtitle={text.attributes.subtitle}
             utility={this.renderUtility()}
-            secondaryLinks={this.secondaryNavigationLinks(text)}
+            secondaryLinks={secondaryLinks}
           />
           <section className="backend-panel">
             <Utility.SkipLink skipId={skipId} />
             <div className="container">
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(text)}
-                panel
-              />
+              <Navigation.Secondary links={secondaryLinks} panel />
               <div id={skipId} className="panel">
                 {this.renderRoutes()}
               </div>

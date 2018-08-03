@@ -5,6 +5,7 @@ import { HigherOrder } from "containers/global";
 import { Utility } from "components/global";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import navigation from "helpers/router/navigation";
 
 export default class RecordsContainer extends PureComponent {
   static displayName = "RecordsContainer";
@@ -13,41 +14,9 @@ export default class RecordsContainer extends PureComponent {
     route: PropTypes.object
   };
 
-  secondaryNavigationLinks() {
-    return [
-      {
-        path: lh.link("backendRecordsMakers"),
-        label: "Makers",
-        key: "makers",
-        entity: "maker",
-        ability: "update"
-      },
-      {
-        path: lh.link("backendRecordsUsers"),
-        label: "Users",
-        key: "users",
-        entity: "user",
-        ability: "update"
-      },
-      {
-        path: lh.link("backendRecordsPages"),
-        label: "Pages",
-        key: "pages",
-        entity: "page",
-        ability: "update"
-      },
-      {
-        path: lh.link("backendRecordsFeatures"),
-        label: "Features",
-        key: "features",
-        entity: "user",
-        ability: "update"
-      }
-    ];
-  }
-
   render() {
     const skipId = "skip-to-records-nav";
+    const secondaryLinks = navigation.records();
 
     return (
       <HigherOrder.Authorize
@@ -59,11 +28,11 @@ export default class RecordsContainer extends PureComponent {
       >
         <RedirectToFirstMatch
           from={lh.link("backendRecords")}
-          candidates={this.secondaryNavigationLinks()}
+          candidates={secondaryLinks}
         />
         <div>
           <Utility.SkipLink skipId={skipId} />
-          <Navigation.Secondary links={this.secondaryNavigationLinks()} />
+          <Navigation.Secondary links={secondaryLinks} />
           <section id={skipId} className="backend-detail">
             {childRoutes(this.props.route)}
           </section>

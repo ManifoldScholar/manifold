@@ -9,6 +9,7 @@ import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import { HigherOrder } from "containers/global";
 import { Utility } from "components/global";
 import { Dialog, Navigation } from "components/backend";
+import navigation from "helpers/router/navigation";
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -117,18 +118,6 @@ class PageDetailContainer extends PureComponent {
     });
   };
 
-  secondaryNavigationLinks(props) {
-    return [
-      {
-        path: lh.link("backendRecordsPageGeneral", this.id(props)),
-        label: "General",
-        key: "general",
-        entity: this.page(props),
-        ability: "update"
-      }
-    ];
-  }
-
   doPreview = event => {
     event.preventDefault();
     const win = window.open(
@@ -177,7 +166,7 @@ class PageDetailContainer extends PureComponent {
         title={page.attributes.title}
         subtitle={`/page/${page.attributes.slug}`}
         utility={this.renderUtility()}
-        secondaryLinks={this.secondaryNavigationLinks(this.props)}
+        secondaryLinks={navigation.page(page)}
       />
     );
   }
@@ -218,12 +207,13 @@ class PageDetailContainer extends PureComponent {
   renderExisting(page) {
     if (!page) return null;
     const skipId = "skip-to-pages-body-panel";
+    const secondaryLinks = navigation.page(page);
 
     return (
       <div>
         <RedirectToFirstMatch
           from={lh.link("backendRecordsPage", this.id(this.props))}
-          candidates={this.secondaryNavigationLinks(this.props)}
+          candidates={secondaryLinks}
         />
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
@@ -232,10 +222,7 @@ class PageDetailContainer extends PureComponent {
         <section className="backend-panel">
           <Utility.SkipLink skipId={skipId} />
           <div className="container">
-            <Navigation.Secondary
-              links={this.secondaryNavigationLinks(this.props)}
-              panel
-            />
+            <Navigation.Secondary links={secondaryLinks} panel />
             <div id={skipId} className="panel">
               <section>{this.renderRoutes()}</section>
             </div>

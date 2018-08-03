@@ -4,7 +4,7 @@
   text-transform: none;
   text-align: center;
   color: $neutralWhite;
-  background-color: $neutral110;
+  background-color: $neutral100;
   position: relative;
 
   &.open {
@@ -29,7 +29,7 @@
     display: none;
     position: absolute;
     width: 100%;
-    background-color: $neutral110;
+    background-color: $neutral100;
     text-align: left;
     border-top: 2px solid $neutral95;
     padding: 32px 43px;
