@@ -15,29 +15,8 @@
     padding-top: 20px;
     padding-bottom: 0;
 
-    .list-total {
-      padding-bottom: 8px;
-    }
-
     a, .fake-link {
       padding: 10px 0 17px;
-    }
-  }
-
-  .list-total {
-    @include utilityPrimary;
-    padding-bottom: 15px;
-    font-size: 15px;
-    color: $neutral70;
-    border-bottom: 1px solid $neutral80;
-
-    span {
-      color: $neutral30;
-    }
-
-    &.empty {
-      padding-top: 20px;
-      border-bottom: 0;
     }
   }
 
@@ -159,7 +138,8 @@
       flex-grow: 1;
     }
 
-    .figure-wrapper {
+    .figure-wrapper,
+    figure {
       + .meta {
         padding-left: 15px;
       }

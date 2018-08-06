@@ -100,7 +100,7 @@
       }
 
       &.has-instructions {
-        margin-bottom: 0.5em;
+        margin-bottom: 1em;
       }
 
       &.secondary {
@@ -178,9 +178,6 @@
     }
 
     &.submit {
-      margin-left: 24px;
-      margin-right: 24px;
-
       .button-secondary, .button-secondary-dull {
         line-height: normal;
 

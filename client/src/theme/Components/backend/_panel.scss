@@ -37,13 +37,25 @@
   .panel {
     width: 100%;
 
-    @include respond($break65) {
-      float: left;
-      width: calc(100% - 212px);
+    &:only-child {
+      padding-right: 5px;
+      padding-left: 5px;
+    //
+    //   @include respond($break75) {
+    //     padding-right: 24px;
+    //     padding-left: 24px;
+    //   }
     }
 
-    @include respond($break110) {
-      width: calc(100% - 238px);
+    &:not(:only-child) {
+      @include respond($break65) {
+        float: left;
+        width: calc(100% - 212px);
+      }
+
+      @include respond($break110) {
+        width: calc(100% - 238px);
+      }
     }
   }
 }

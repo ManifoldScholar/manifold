@@ -62,6 +62,24 @@
           flex-basis: 100%;
         }
       }
+
+      &.form-input-fourth {
+        @include respond($break90) {
+          flex-basis: 23.82%;
+        }
+      }
+
+      &.form-input-third {
+        @include respond($break90) {
+          flex-basis: 31.76%;
+        }
+      }
+    }
+
+    > .form-divider.wide {
+      @include respond($break90) {
+        flex-basis: 100%;
+      }
     }
   }
 

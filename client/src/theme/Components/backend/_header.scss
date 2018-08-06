@@ -3,11 +3,6 @@
   @include panelRounded;
   max-width: $containerWidthFull - 100;
 
-  @include respond($containerWidthFull) {
-    margin-right: auto;
-    margin-left: auto;
-  }
-
   .breadcrumb-primary {
     border-radius: 8px 8px;
   }
