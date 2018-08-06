@@ -19,7 +19,8 @@ class FormSwitch extends Component {
       true: PropTypes.string,
       false: PropTypes.string
     }),
-    focusOnMount: PropTypes.bool
+    focusOnMount: PropTypes.bool,
+    wide: PropTypes.bool
   };
 
   static defaultProps = {
@@ -105,7 +106,10 @@ class FormSwitch extends Component {
       this.props.labelPos,
       this.props.labelClass
     );
-    const wrapperClasses = classnames("form-input", this.props.className);
+    const wrapperClasses = classnames({
+      "form-input": true,
+      wide: this.props.wide
+    }, this.props.className);
     const indicatorClasses = classnames("toggle-indicator", {
       "has-focus": this.state.focused
     });

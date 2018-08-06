@@ -90,7 +90,8 @@ export class FormUpload extends Component {
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array,
     inputId: PropTypes.string,
-    idForError: PropTypes.string
+    idForError: PropTypes.string,
+    wide: PropTypes.bool
   };
 
   static defaultProps = {
@@ -281,6 +282,10 @@ export class FormUpload extends Component {
     const labelClass = classnames({
       "has-instructions": isString(this.props.instructions)
     });
+    const inputClasses = classnames({
+      "form-input": true,
+      wide: this.props.wide
+    });
     const inputProps = {
       id: this.props.inputId,
       "aria-describedby": this.props.idForError
@@ -289,7 +294,7 @@ export class FormUpload extends Component {
     const { accepts } = this.accepts(this.props);
     if (accepts) dropzoneProps.accept = accepts;
     return (
-      <div className="form-input">
+      <div className={inputClasses}>
         <GlobalForm.Errorable
           className="form-input"
           name={this.props.name}
