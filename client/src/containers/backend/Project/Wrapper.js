@@ -225,25 +225,27 @@ export class ProjectWrapperContainer extends PureComponent {
             from={lh.link("backendProject", project.id)}
             candidates={this.secondaryNavigationLinks(project)}
           />
-          <Navigation.DetailHeader
-            type="project"
-            title={project.attributes.title}
-            subtitle={project.attributes.subtitle}
-            utility={this.renderUtility(project)}
-            secondaryLinks={this.secondaryNavigationLinks(project)}
-          />
-          <section className="backend-panel">
-            <Utility.SkipLink skipId={skipId} />
-            <div className="container">
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(project)}
-                panel
-              />
-              <div id={skipId} className="panel">
-                {this.renderRoutes()}
+          <div className="backend-detail">
+            <Navigation.DetailHeader
+              type="project"
+              title={project.attributes.title}
+              subtitle={project.attributes.subtitle}
+              utility={this.renderUtility(project)}
+              secondaryLinks={this.secondaryNavigationLinks(project)}
+            />
+            <section className="backend-panel">
+              <Utility.SkipLink skipId={skipId} />
+              <div className="container">
+                <Navigation.Secondary
+                  links={this.secondaryNavigationLinks(project)}
+                  panel
+                />
+                <div id={skipId} className="panel">
+                  {this.renderRoutes()}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </HigherOrder.Authorize>
       </div>
     );

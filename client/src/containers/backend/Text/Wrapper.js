@@ -197,34 +197,36 @@ export class TextWrapperContainer extends PureComponent {
           {this.state.confirmation ? (
             <Dialog.Confirm {...this.state.confirmation} />
           ) : null}
-          <Navigation.DetailHeader
-            type="text"
-            breadcrumb={[
-              {
-                path: lh.link(
-                  "backendProjectTexts",
-                  text.relationships.project.id
-                ),
-                label: text.relationships.project.attributes.title
-              }
-            ]}
-            title={text.attributes.title}
-            subtitle={text.attributes.subtitle}
-            utility={this.renderUtility()}
-            secondaryLinks={this.secondaryNavigationLinks(text)}
-          />
-          <section className="backend-panel">
-            <Utility.SkipLink skipId={skipId} />
-            <div className="container">
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(text)}
-                panel
-              />
-              <div id={skipId} className="panel">
-                {this.renderRoutes()}
+          <div className="backend-detail">
+            <Navigation.DetailHeader
+              type="text"
+              breadcrumb={[
+                {
+                  path: lh.link(
+                    "backendProjectTexts",
+                    text.relationships.project.id
+                  ),
+                  label: text.relationships.project.attributes.title
+                }
+              ]}
+              title={text.attributes.title}
+              subtitle={text.attributes.subtitle}
+              utility={this.renderUtility()}
+              secondaryLinks={this.secondaryNavigationLinks(text)}
+            />
+            <section className="backend-panel">
+              <Utility.SkipLink skipId={skipId} />
+              <div className="container">
+                <Navigation.Secondary
+                  links={this.secondaryNavigationLinks(text)}
+                  panel
+                />
+                <div id={skipId} className="panel">
+                  {this.renderRoutes()}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </HigherOrder.Authorize>
       </div>
     );
