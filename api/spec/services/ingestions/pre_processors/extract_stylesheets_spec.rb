@@ -32,7 +32,8 @@ RSpec.describe Ingestions::PreProcessors::ExtractStylesheets do
 
     it "assigns the correct stylesheet attributes" do
       expected = [{"name"=>"stylesheet-1", "position"=>1, "hashed_content"=>"1826716b1ed8d8c12ba4e77ea2f1315b", "build"=>"build/stylesheet-1.css", "source_identifier"=>"a-stylesheet.css"},
-                  {"name"=>"head-2", "position"=>2, "hashed_content"=>"10a71ed9947de85431b5a0b899305319", "build"=>"build/head-2.css", "source_identifier"=>nil}]
+                  {"name"=>"head-2", "position"=>2, "hashed_content"=>"10a71ed9947de85431b5a0b899305319", "build"=>"build/head-2.css", "source_identifier"=>nil},
+                  {"name"=>"head-3", "position"=>3, "hashed_content"=>"68b329da9893e34099c7d8ad5cb9c940", "build"=>"build/head-3.css", "source_identifier"=>nil}]
       outcome = described_class.run(context: context, manifest: manifest)
       expect(outcome.result[:relationships][:stylesheets]).to eq expected
     end
@@ -51,7 +52,8 @@ RSpec.describe Ingestions::PreProcessors::ExtractStylesheets do
     it "assigns the correct stylesheet attributes" do
       expected = [{"name"=>"stylesheet-1", "position"=>1, "hashed_content"=>"1826716b1ed8d8c12ba4e77ea2f1315b", "build"=>"build/stylesheet-1.css", "source_identifier"=>"stylesheet.css"},
                   {"name"=>"head-2", "position"=>2, "hashed_content"=>"10a71ed9947de85431b5a0b899305319", "build"=>"build/head-2.css", "source_identifier"=>nil},
-                  {"name"=>"stylesheet-3", "position"=>3, "hashed_content"=>"8f5a5eb6c412b3a978712a7a1c459844", "build"=>"build/stylesheet-3.css", "source_identifier"=>"markdown_styles.css"}]
+                  {"name"=>"head-3", "position"=>3, "hashed_content"=>"68b329da9893e34099c7d8ad5cb9c940", "build"=>"build/head-3.css", "source_identifier"=>nil},
+                  {"name"=>"stylesheet-4", "position"=>4, "hashed_content"=>"8f5a5eb6c412b3a978712a7a1c459844", "build"=>"build/stylesheet-4.css", "source_identifier"=>"markdown_styles.css"}]
       outcome = described_class.run(context: context, manifest: manifest)
       expect(outcome.result[:relationships][:stylesheets]).to eq expected
     end
