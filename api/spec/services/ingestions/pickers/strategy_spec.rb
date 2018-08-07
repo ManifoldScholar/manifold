@@ -36,12 +36,6 @@ RSpec.describe Ingestions::Pickers::Strategy do
     the_subject_behaves_like "assigned strategy", path, :epub
   end
 
-  context "when manifest" do
-    path = Rails.root.join("spec", "data", "ingestion", "google-doc", "manifest.yml")
-
-    the_subject_behaves_like "assigned strategy", path, :manifest
-  end
-
   context "when a single HTML file" do
     path = Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html")
 
@@ -50,12 +44,6 @@ RSpec.describe Ingestions::Pickers::Strategy do
 
   context "when a directory containing a single HTML file" do
     path = Rails.root.join("spec", "data", "ingestion", "html", "minimal-single")
-
-    the_subject_behaves_like "assigned strategy", path, :document
-  end
-
-  context "when a directory containing an HTML file with sibling assets" do
-    path = Rails.root.join("spec", "data", "ingestion", "html", "minimal-assets")
 
     the_subject_behaves_like "assigned strategy", path, :document
   end
@@ -70,24 +58,6 @@ RSpec.describe Ingestions::Pickers::Strategy do
     path = Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single", "minimal-single.md")
 
     the_subject_behaves_like "assigned strategy", path, :document
-  end
-
-  context "when a directory containing a single markdown file" do
-    path = Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single")
-
-    the_subject_behaves_like "assigned strategy", path, :document
-  end
-
-  context "when a directory containing multiple html files, one of which is index.html" do
-    path = Rails.root.join("spec", "data", "ingestion", "html", "minimal-multi-index")
-
-    the_subject_behaves_like "assigned strategy", path, :document
-  end
-
-  context "when a directory containing multiple html files, none of which is index.html" do
-    path = Rails.root.join("spec", "data", "ingestion", "html", "minimal-multi")
-
-    the_subject_behaves_like "strategy picker fails", path, :document
   end
 
   context "when a latex file" do
