@@ -86,7 +86,7 @@ module Ingestions
         end
 
         def manifest_path
-          context.rel_path_for_file "manifest", %w(yml yaml)
+          context.rel_path_for_file "*", %w(yml yaml)
         end
 
         def source_dir_path
