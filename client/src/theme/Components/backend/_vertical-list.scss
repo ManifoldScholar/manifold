@@ -61,6 +61,14 @@
     @include respond($break60) {
       margin-left: -40px;
     }
+
+    @include respond($break65) {
+      margin-left: -24px;
+    }
+
+    @include respond($break110) {
+      margin-left: -40px;
+    }
   }
 
   ul {
@@ -336,7 +344,7 @@
         min-height: 150px;
         padding-left: 40px;
         margin-bottom: 28px;
-        border-top: 0;
+        border-bottom: 0;
       }
 
       @include respond($break95) {

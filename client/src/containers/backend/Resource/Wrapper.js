@@ -200,41 +200,43 @@ export class ResourceWrapperContainer extends PureComponent {
           {this.state.confirmation ? (
             <Dialog.Confirm {...this.state.confirmation} />
           ) : null}
-          <Navigation.DetailHeader
-            type="resource"
-            breadcrumb={[
-              {
-                path: lh.link(
-                  "backendProjectResources",
-                  resource.relationships.project.id
-                ),
-                label: resource.relationships.project.attributes.title
-              }
-            ]}
-            utility={this.renderUtility(resource)}
-            title={resource.attributes.titleFormatted}
-            titleHtml
-            subtitle={resource.attributes.subtitle}
-            secondaryLinks={this.secondaryNavigationLinks(
-              resource,
-              resource.attributes.kind
-            )}
-          />
-          <section className="backend-panel">
-            <Utility.SkipLink skipId={skipId} />
-            <div className="container">
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(
-                  resource,
-                  resource.attributes.kind
-                )}
-                panel
-              />
-              <div id={skipId} className="panel">
-                {this.renderRoutes()}
+          <div className="backend-detail">
+            <Navigation.DetailHeader
+              type="resource"
+              breadcrumb={[
+                {
+                  path: lh.link(
+                    "backendProjectResources",
+                    resource.relationships.project.id
+                  ),
+                  label: resource.relationships.project.attributes.title
+                }
+              ]}
+              utility={this.renderUtility(resource)}
+              title={resource.attributes.titleFormatted}
+              titleHtml
+              subtitle={resource.attributes.subtitle}
+              secondaryLinks={this.secondaryNavigationLinks(
+                resource,
+                resource.attributes.kind
+              )}
+            />
+            <section className="backend-panel">
+              <Utility.SkipLink skipId={skipId} />
+              <div className="container">
+                <Navigation.Secondary
+                  links={this.secondaryNavigationLinks(
+                    resource,
+                    resource.attributes.kind
+                  )}
+                  panel
+                />
+                <div id={skipId} className="panel">
+                  {this.renderRoutes()}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </HigherOrder.Authorize>
       </div>
     );
