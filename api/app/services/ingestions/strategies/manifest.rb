@@ -11,7 +11,7 @@ module Ingestions
       end
 
       def determine_ingestibility
-        context.source_path_for_file("manifest", %w(yml yaml)).present?
+        context.source_path_for_file("*", %w(yml yaml)).present?
       end
 
       private
