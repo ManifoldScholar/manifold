@@ -51,7 +51,7 @@ RSpec.describe Ingestions::Compiler do
                       .and change(TextTitle, :count).by(1)
                              .and change(IngestionSource, :count).by(6)
                                     .and change(Maker, :count).by(2)
-                                           .and change(Stylesheet, :count).by(3)
+                                           .and change(Stylesheet, :count).by(4)
     end
   end
 
@@ -78,7 +78,7 @@ RSpec.describe Ingestions::Compiler do
                       .and change(TextTitle, :count).by(1)
                              .and change(IngestionSource, :count).by(1)
                                     .and change(Maker, :count).by(2)
-                                           .and change(Stylesheet, :count).by(1)
+                                           .and change(Stylesheet, :count).by(2)
     end
   end
 
