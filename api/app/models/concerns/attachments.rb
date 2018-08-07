@@ -72,7 +72,7 @@ module Attachments
     # can_process_avatar?
     # It also adds a before processing callback for Paperclip to process the variants if,
     # and only if the attachment is processable.
-    def manifold_has_attached_file(field, type, styles: {}, no_styles: false)
+    def manifold_has_attached_file(field, type, styles: {}, no_styles: false, validate_content_type: true)
       # Create the style
 
       has_attached_file(
@@ -82,10 +82,10 @@ module Attachments
 
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
   
-        validates_attachment_content_type(
-          :#{field}, 
-          content_type: Rails.configuration.manifold.attachments.validations.#{type}.allowed_mime
-        )
+      validates_attachment_content_type(
+        :#{field}, 
+        content_type: Rails.configuration.manifold.attachments.validations.#{type}.allowed_mime
+      ) if :#{validate_content_type}
   
         validates_attachment_file_name(
           :#{field}, 

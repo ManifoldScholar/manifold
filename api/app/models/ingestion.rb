@@ -21,7 +21,7 @@ class Ingestion < ApplicationRecord
   belongs_to :project
 
   # Attachments
-  manifold_has_attached_file :source, :ingestion
+  manifold_has_attached_file :source, :ingestion, validate_content_type: false
 
   # Validations
   validates :source, presence: true, if: :file_based_ingestion?
