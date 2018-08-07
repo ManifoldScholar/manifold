@@ -131,7 +131,7 @@ export class ProjectsWrapper extends PureComponent {
                 pluralUnit="projects"
                 pagination={this.props.projectsMeta.pagination}
                 paginationClickHandler={this.updateHandlerCreator}
-                paginationClass="wide"
+                paginationClass="secondary"
                 filterChangeHandler={this.filterChangeHandler}
               />
             ) : null}
