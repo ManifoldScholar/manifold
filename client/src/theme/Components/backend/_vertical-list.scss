@@ -66,14 +66,18 @@
   ul {
     @include listUnstyled;
 
-    li:first-of-type {
-      border-top: 0;
+    li:first-child {
+      // border-top: 0;
+
+      a {
+        padding-top: 10px;
+      }
     }
 
     li {
       display: flex;
       align-items: center;
-      border-top: 1px solid $neutral80;
+      border-bottom: 1px solid $neutral80;
       transition: background-color $duration ease-out,
         box-shadow $duration ease-out;
 

@@ -121,6 +121,7 @@ export class ProjectsWrapper extends PureComponent {
                   authorizedFor: "project"
                 }}
                 columnarNav={true}
+                showEntityCount={false}
                 initialFilter={this.state.filter}
                 defaultFilter={{ order: "sort_title ASC" }}
                 listClassName="grid-list"
