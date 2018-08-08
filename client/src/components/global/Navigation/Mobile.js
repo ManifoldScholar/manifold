@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Navigation, Search } from "components/global";
+import { Navigation, Search, Avatar } from "components/global";
 import { HigherOrder } from "containers/global";
 import { HigherOrder as HigherOrderComponent } from "components/global";
 import { NavLink, withRouter } from "react-router-dom";
 import classnames from "classnames";
+import get from "lodash/get";
+import hasIn from "lodash/hasIn";
 
 export class NavigationMobile extends PureComponent {
   static displayName = "Navigation.Mobile";
@@ -66,6 +68,16 @@ export class NavigationMobile extends PureComponent {
     return props.links.find(link => link.path === pathname);
   }
 
+  displayNickname = () => {
+    if (this.state.nickname) return this.state.nickname;
+    if (hasIn(this.props.authentication, "currentUser.attributes.nickname")) {
+      return this.props.authentication.currentUser.attributes.nickname;
+    }
+    if (hasIn(this.props.authentication, "currentUser.attributes.firstName")) {
+      return this.props.authentication.currentUser.attributes.firstName;
+    }
+  };
+
   renderItem(link) {
     const children = link.children || [];
 
@@ -115,6 +127,15 @@ export class NavigationMobile extends PureComponent {
     return (
       <div className="user-links">
         <ul>
+          <li>
+            <Avatar
+              url={get(
+                this.props.authentication,
+                "currentUser.attributes.avatarStyles.smallSquare"
+              )}
+            />
+            {this.displayNickname()}
+          </li>
           <li>
             <button onClick={this.handleProfileClick}>
               <i

@@ -233,9 +233,13 @@ $readerContainerWidths: (790px, 680px, 500px);
 
   // Icon Handling
   .manicon-manifold-logo {
-    font-size: 32px;
+    font-size: 24px;
 
     @include respond($break40) {
+      font-size: 32px;
+    }
+
+    @include respond($break75) {
       font-size: 40px;
     }
   }

@@ -3,15 +3,6 @@
   padding: 13px 0;
   background-color: $neutral95;
 
-  &:not(.panel-nav) {
-    white-space: nowrap;
-    overflow-x: scroll;
-
-    li {
-      display: inline-block;
-    }
-  }
-
   ul {
     @include listUnstyled;
     @include containerPrototype;
@@ -61,6 +52,20 @@
 
     a {
       font-size: 17px;
+    }
+  }
+
+  &:not(.panel-nav) {
+    white-space: nowrap;
+    overflow-x: scroll;
+    display: none;
+
+    li {
+      display: inline-block;
+    }
+
+    @include respond($break75) {
+      display: block;
     }
   }
 
