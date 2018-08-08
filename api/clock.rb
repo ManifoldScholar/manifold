@@ -13,6 +13,14 @@ module Clockwork
     end
   end
 
+  every(1.day, "expire_shrine_cache", at: "22:00", tz: "America/Los_Angeles") do
+    ExpireShrineCacheJob.perform_later
+  end
+
+  every(1.day, "expire_tus_uploads", at: "23:00", tz: "America/Los_Angeles") do
+    ExpireTusUploadsJob.perform_later
+  end
+
   every(1.hour, "queue_fetch_project_tweets")
   every(4.hours, "update_statistics")
 end
