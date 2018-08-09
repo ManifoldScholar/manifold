@@ -255,6 +255,10 @@ ActiveRecord::Schema.define(version: 20180731223301) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.boolean  "reingestion",         default: false, null: false
+    t.datetime "source_updated_at"
+    t.integer  "source_file_size"
+    t.string   "source_content_type"
+    t.string   "source_file_name"
     t.jsonb    "source_data",         default: {},    null: false
   end
 

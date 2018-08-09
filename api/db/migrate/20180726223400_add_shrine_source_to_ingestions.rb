@@ -2,9 +2,12 @@ class AddShrineSourceToIngestions < ActiveRecord::Migration[5.0]
   def change
     add_column :ingestions, :source_data, :jsonb, null: false, default: {}
 
-    remove_column :ingestions, :source_file_name, :string
-    remove_column :ingestions, :source_content_type, :string
-    remove_column :ingestions, :source_file_size, :integer
-    remove_column :ingestions, :source_updated_at, :timestamp
+    reversible do |dir|
+      dir.up do
+        say_with_time "Migrating :source from paperclip to shrine" do
+          PaperclipMigrator.migrate_all! Ingestion, :source
+        end
+      end
+    end
   end
 end
