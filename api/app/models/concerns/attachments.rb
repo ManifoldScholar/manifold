@@ -85,7 +85,7 @@ module Attachments
       validates_attachment_content_type(
         :#{field}, 
         content_type: Rails.configuration.manifold.attachments.validations.#{type}.allowed_mime
-      ) if :#{validate_content_type}
+      ) if #{validate_content_type}
   
         validates_attachment_file_name(
           :#{field}, 
