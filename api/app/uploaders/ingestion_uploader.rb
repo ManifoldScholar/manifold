@@ -12,7 +12,7 @@ class IngestionUploader < TusUploader
   Attacher.validate do
     validations = Rails.configuration.manifold.attachments.validations
 
-    validate_mime_type_inclusion validations.ingestion.allowed_mime
+    validate_extension_inclusion validations.ingestion.allowed_ext
   end
 
   # rubocop:disable Layout/IndentHeredoc

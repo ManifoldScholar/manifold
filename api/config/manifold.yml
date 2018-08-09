@@ -174,15 +174,16 @@ common: &1
           - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           - "application/vnd.openxmlformats-officedocument.wordprocessingml.template"
         :allowed_ext:
-          - !ruby/regexp '/\*/i'
-          - !ruby/regexp '/md\Z/i'
-          - !ruby/regexp '/zip\Z/i'
-          - !ruby/regexp '/epub\Z/i'
-          - !ruby/regexp '/html?\Z/i'
-          - !ruby/regexp '/ya?ml\Z/i'
-          - !ruby/regexp '/docx\Z/i'
-          - !ruby/regexp '/tex\Z/i'
-          - !ruby/regexp '/latex\Z/i'
+          - md
+          - zip
+          - epub
+          - htm
+          - html
+          - docx
+          - yaml
+          - yml
+          - tex
+          - latex
       :image:
         :allowed_mime:
           - !ruby/regexp '/image\/.*/'
