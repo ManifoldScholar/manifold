@@ -116,6 +116,7 @@ class Ingestion < ApplicationRecord
     outcome = Ingestions::Ingestor.run ingestion: self
     if outcome.valid?
       self.text = outcome.result
+      info("\nIngestion Complete.")
       processing_success
     else
       handle_ingestion_exception(outcome.errors)

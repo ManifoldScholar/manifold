@@ -17,13 +17,11 @@ export default class IngestionFormWrapper extends PureComponent {
     ingestion: PropTypes.object.isRequired,
     onSuccess: PropTypes.func,
     triggerClose: PropTypes.func,
-    cancelUrl: PropTypes.string,
-    reingestion: PropTypes.bool
+    cancelUrl: PropTypes.string
   };
 
   static defaultProps = {
-    ingestion: {},
-    reingestion: false
+    ingestion: {}
   };
 
   updateIngestion = (id, attributes) => {
@@ -32,9 +30,8 @@ export default class IngestionFormWrapper extends PureComponent {
 
   createIngestion = _data => {
     const data = cloneDeep(_data);
-    if (this.props.text) {
-      data.attributes.reingestion = true;
 
+    if (this.props.text) {
       if (!data.relationships) data.relationships = {};
       data.relationships.text = {
         data: {
@@ -43,6 +40,7 @@ export default class IngestionFormWrapper extends PureComponent {
         }
       };
     }
+
     return ingestionsAPI.create(this.props.project.id, data);
   };
 

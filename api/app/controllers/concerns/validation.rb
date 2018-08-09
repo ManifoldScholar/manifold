@@ -129,7 +129,6 @@ module Validation
     attributes = [
       :external_source_url,
       :ingestion_type,
-      :reingestion,
       {
         source: [
           :id,

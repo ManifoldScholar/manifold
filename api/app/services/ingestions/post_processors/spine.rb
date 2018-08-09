@@ -1,6 +1,7 @@
 module Ingestions
   module PostProcessors
     class Spine < AbstractInteraction
+      hash :manifest, strip: false
       object :text
 
       def execute
@@ -25,7 +26,14 @@ module Ingestions
       end
 
       def build_spine
-        text.text_sections.order(position: :asc).pluck(:id)
+        identifiers = manifest[:relationships][:text_sections].map do |ts|
+          ts[:source_identifier]
+        end
+
+        text.text_sections
+            .where(source_identifier: identifiers)
+            .order(position: :asc)
+            .pluck(:id)
       end
     end
   end

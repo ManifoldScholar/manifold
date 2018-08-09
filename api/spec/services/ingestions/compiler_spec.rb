@@ -133,4 +133,27 @@ RSpec.describe Ingestions::Compiler do
                                            .and change(Stylesheet, :count).by(2)
     end
   end
+
+  context "when reingesting" do
+    let(:text) { FactoryBot.create(:text) }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
+    let(:ingestion) do
+      ingestion = FactoryBot.create(:ingestion, text: text)
+      allow(ingestion).to receive(:ingestion_source).and_return(path)
+      allow(ingestion).to receive(:source_file_name).and_return("index.html")
+      ingestion
+    end
+    let(:context) { create_context(ingestion) }
+    let(:manifest) do
+      manifest = Ingestions::Strategies::Document.run(context: context).result
+      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest
+    end
+
+    it "updates the existing text" do
+      expect do
+        described_class.run(context: context, manifest: manifest)
+      end.to change(text, :updated_at)
+    end
+  end
 end

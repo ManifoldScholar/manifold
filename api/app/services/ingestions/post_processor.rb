@@ -4,12 +4,12 @@ module Ingestions
     object :text
 
     def execute
+      generate_spine
+      remove_stale_sections
       transform_text_sections
       validate_stylesheets
       set_start_section
       transform_toc
-      generate_spine
-      remove_stale_sections
 
       text
     end
@@ -62,6 +62,8 @@ module Ingestions
         info "services.ingestions.post_processor.log.remove_text_section",
              id: section.id
       end
+
+      text.reload
     end
   end
 end

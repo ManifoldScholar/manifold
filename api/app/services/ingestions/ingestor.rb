@@ -19,6 +19,7 @@ module Ingestions
 
       compose Ingestions::PostProcessor
 
+      set_ingestion_text
       text
     end
 
