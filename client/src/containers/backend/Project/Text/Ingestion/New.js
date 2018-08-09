@@ -46,6 +46,7 @@ export class IngestionNewContainer extends PureComponent {
     return (
       <div>
         <Ingestion.Form.Wrapper
+          cancelUrl={lh.link("backendProjectTexts", this.projectId)}
           location={this.props.location}
           history={this.props.history}
           name={requests.beIngestionCreate}

@@ -17,6 +17,7 @@ export default class IngestionFormWrapper extends PureComponent {
     ingestion: PropTypes.object.isRequired,
     onSuccess: PropTypes.func,
     triggerClose: PropTypes.func,
+    cancelUrl: PropTypes.string,
     reingestion: PropTypes.bool
   };
 
@@ -62,6 +63,7 @@ export default class IngestionFormWrapper extends PureComponent {
         onSuccess={this.props.onSuccess}
       >
         <Upload
+          cancelUrl={this.props.cancelUrl}
           history={this.props.history}
           location={this.props.location}
           triggerClose={this.props.triggerClose}
