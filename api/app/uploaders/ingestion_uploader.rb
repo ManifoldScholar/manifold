@@ -1,11 +1,8 @@
 class IngestionUploader < TusUploader
-  plugin :activerecord
   plugin :add_metadata
   plugin :determine_mime_type, analyzer: :marcel
   plugin :module_include
   plugin :moving
-  plugin :parsed_json
-  plugin :signature
   plugin :validation_helpers
 
   add_metadata :sha256 do |io, context|

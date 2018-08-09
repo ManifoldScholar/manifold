@@ -1,6 +1,7 @@
 require "shrine/storage/file_system"
 require "shrine/storage/memory"
 require "shrine/storage/tus"
+require Rails.root.join "lib", "paperclip_migrator"
 
 Shrine.storages = {
   cache: Shrine::Storage::FileSystem.new("public", prefix: "system/cache"),
@@ -13,3 +14,8 @@ Shrine.storages[:tus] =
   else
     Shrine::Storage::Tus.new(tus_storage: Tus::Server.opts[:storage])
   end
+
+Shrine.plugin :activerecord
+Shrine.plugin :parsed_json
+Shrine.plugin :refresh_metadata
+Shrine.plugin :signature
