@@ -10,6 +10,7 @@ class IngestionFormUpload extends PureComponent {
     getModelValue: PropTypes.func,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
+    cancelUrl: PropTypes.string,
     setOther: PropTypes.func
   };
 
@@ -40,7 +41,9 @@ class IngestionFormUpload extends PureComponent {
 
   handleCancelClick = event => {
     event.preventDefault();
-    this.props.history.goBack();
+    this.props.cancelUrl
+      ? this.props.history.push(this.props.cancelUrl)
+      : this.props.history.goBack();
   };
 
   render() {
@@ -79,19 +82,22 @@ class IngestionFormUpload extends PureComponent {
           <div className="form-divider">or</div>
           <Form.TextInput
             label="URL"
+            focusOnMount
             instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
             value={this.props.getModelValue("attributes[externalSourceUrl]")}
             onChange={event => this.onUrlChange(event)}
           />
         </Form.FieldGroup>
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
-          <button
-            onClick={this.handleCancelClick}
-            className="button-icon-secondary dull"
-          >
-            <i className="manicon manicon-x small" aria-hidden="true" />
-            Cancel
-          </button>
+          {this.props.cancelUrl ? (
+            <button
+              onClick={this.handleCancelClick}
+              className="button-icon-secondary dull"
+            >
+              <i className="manicon manicon-x small" aria-hidden="true" />
+              Cancel
+            </button>
+          ) : null}
           <button
             type="submit"
             className="button-icon-secondary"

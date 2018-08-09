@@ -52,14 +52,16 @@ export class IngestionEditContainer extends PureComponent {
   render() {
     return (
       <div>
-        <Ingestion.Form.Wrapper
-          ingestion={this.props.ingestion}
-          location={this.props.location}
-          history={this.props.history}
-          name={requests.beIngestionCreate}
-          project={this.props.text.relationships.project}
-          onSuccess={this.handleSuccess}
-        />
+        {this.props.ingestion ? (
+          <Ingestion.Form.Wrapper
+            ingestion={this.props.ingestion}
+            location={this.props.location}
+            history={this.props.history}
+            name={requests.beIngestionCreate}
+            project={this.props.text.relationships.project}
+            onSuccess={this.handleSuccess}
+          />
+        ) : null}
       </div>
     );
   }
