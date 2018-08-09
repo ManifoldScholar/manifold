@@ -19,7 +19,7 @@ export class ProjectsListContainer extends PureComponent {
     return {
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore),
-      projectsListSnapshot: state.ui.transitory.stateSnapshots.dashboardProjectsList,
+      projectsListSnapshot: state.ui.transitory.stateSnapshots.projectsList,
       authentication: state.authentication
     };
   };
@@ -102,6 +102,7 @@ export class ProjectsListContainer extends PureComponent {
   render() {
     if (!this.props.projectsMeta) return null;
     const { totalCount } = this.props.projectsMeta.pagination;
+
     return (
       <div>
         <header className="backend-header section-heading-secondary">
@@ -133,6 +134,16 @@ export class ProjectsListContainer extends PureComponent {
                 paginationClickHandler={this.updateHandlerCreator}
                 paginationClass="secondary"
                 filterChangeHandler={this.filterChangeHandler}
+                filterOptions={{
+                  draft: {
+                    options: [true, false],
+                    labels: {
+                      true: "Show Draft Projects",
+                      false: "Show All"
+                    }
+                  }
+                }}
+                sortOptions={[{ label: "title", value: "sort_title" }]}
               />
             ) : null}
           </div>

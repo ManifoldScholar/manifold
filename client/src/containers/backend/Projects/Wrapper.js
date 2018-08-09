@@ -5,12 +5,27 @@ import { HigherOrder } from "containers/global";
 import { Utility } from "components/global";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
+import { bindActionCreators } from "redux";
+import { uiStateSnapshotActions } from "actions";
+
+const { setProjectsListSnapshot } = uiStateSnapshotActions;
 
 export default class ProjectsWrapper extends PureComponent {
-
   static propTypes = {
-    route: PropTypes.object
+    route: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
   };
+
+  childProps() {
+    const snapshotCreator = bindActionCreators(
+      setProjectsListSnapshot,
+      this.props.dispatch
+    );
+
+    return {
+      snapshotCreator: snapshotCreator
+    };
+  }
 
   render() {
     const skipId = "skip-to-projects-nav";
@@ -28,7 +43,7 @@ export default class ProjectsWrapper extends PureComponent {
           <Utility.SkipLink skipId={skipId} />
           <Navigation.Secondary links={secondaryLinks} />
           <section id={skipId} className="backend-detail">
-            {childRoutes(this.props.route)}
+            {childRoutes(this.props.route, { childProps: this.childProps() })}
           </section>
         </div>
       </HigherOrder.Authorize>

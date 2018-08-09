@@ -361,7 +361,7 @@ module Validation
 
   def project_filter_params
     params.permit(
-      filter: [:featured, :subject, :keyword, :order, :typeahead, :with_update_ability]
+      filter: [:draft, :featured, :subject, :keyword, :order, :typeahead, :with_update_ability]
     )[:filter]
   end
 

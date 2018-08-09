@@ -12,7 +12,10 @@ import { childRoutes } from "helpers/router";
 import startsWith from "lodash/startsWith";
 
 const { request } = entityStoreActions;
-const { resetDashboardProjectsListSnapshot } = uiStateSnapshotActions;
+const {
+  resetDashboardProjectsListSnapshot,
+  resetProjectsListSnapshot
+} = uiStateSnapshotActions;
 
 export class BackendContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -60,6 +63,7 @@ export class BackendContainer extends PureComponent {
 
   componentWillUnmount() {
     this.props.dispatch(resetDashboardProjectsListSnapshot());
+    this.props.dispatch(resetProjectsListSnapshot());
   }
 
   setMinHeight() {
