@@ -36,7 +36,6 @@ export class ProjectNewContainer extends PureComponent {
         <div>
           <Navigation.DetailHeader
             type="project"
-            breadcrumb={[{ path: lh.link("backend"), label: "ALL PROJECTS" }]}
             title={"New Project"}
             showUtility={false}
             note={
@@ -74,7 +73,7 @@ export class ProjectNewContainer extends PureComponent {
                     />
                     <Form.Save
                       text="Save and Continue"
-                      cancelRoute={lh.link("backend")}
+                      cancelRoute={lh.link("backendProjects")}
                     />
                   </FormContainer.Form>
                 </section>

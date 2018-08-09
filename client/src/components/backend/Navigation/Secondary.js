@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import { HigherOrder } from "containers/global";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import classnames from "classnames";
 
 export class NavigationSecondary extends Component {
   static displayName = "Navigation.Secondary";
 
   static propTypes = {
     links: PropTypes.array,
-    location: PropTypes.object
+    location: PropTypes.object,
+    panel: PropTypes.bool
   };
 
   renderItem(link) {
@@ -22,26 +24,50 @@ export class NavigationSecondary extends Component {
     );
   }
 
+  renderContents(props) {
+    const navClasses = classnames({
+      "secondary-nav": true,
+      "panel-nav": props.panel
+    });
+
+    return (
+      <nav className={navClasses}>
+        <ul>
+          {this.props.links.map(link => {
+            if (link.ability)
+              return (
+                <HigherOrder.Authorize
+                  key={`${link.key}-wrapped`}
+                  entity={link.entity}
+                  ability={link.ability}
+                >
+                  {this.renderItem(link)}
+                </HigherOrder.Authorize>
+              );
+            return this.renderItem(link);
+          })}
+        </ul>
+      </nav>
+    );
+  }
+
+  renderPanel(props) {
+    return (
+      <aside className="aside">
+        {this.renderContents(props)}
+      </aside>
+    );
+  }
+  renderNav(props) {
+    if (props.panel) return this.renderPanel(props);
+    return this.renderContents(props);
+  }
+
   render() {
+
     return (
       <HigherOrder.BlurOnLocationChange location={this.props.location}>
-        <nav className="panel-nav">
-          <ul>
-            {this.props.links.map(link => {
-              if (link.ability)
-                return (
-                  <HigherOrder.Authorize
-                    key={`${link.key}-wrapped`}
-                    entity={link.entity}
-                    ability={link.ability}
-                  >
-                    {this.renderItem(link)}
-                  </HigherOrder.Authorize>
-                );
-              return this.renderItem(link);
-            })}
-          </ul>
-        </nav>
+        {this.renderNav(this.props)}
       </HigherOrder.BlurOnLocationChange>
     );
   }

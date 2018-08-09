@@ -12,7 +12,8 @@ class AvatarBuilder extends Component {
   static propTypes = {
     project: PropTypes.object,
     getModelValue: PropTypes.func,
-    setOther: PropTypes.func
+    setOther: PropTypes.func,
+    wide: PropTypes.bool
   };
 
   static defaultProps = {};
@@ -103,6 +104,10 @@ class AvatarBuilder extends Component {
     const image =
       this.props.getModelValue("attributes[avatar][data]") ||
       this.props.getModelValue("attributes[avatarStyles][smallSquare]");
+    const inputClasses = classNames({
+      "form-input avatar-builder": true,
+      wide: this.props.wide
+    });
     const uploadClasses = classNames({
       section: true,
       upload: true,
@@ -115,7 +120,7 @@ class AvatarBuilder extends Component {
     });
 
     return (
-      <div className="form-input avatar-builder">
+      <div className={inputClasses}>
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}

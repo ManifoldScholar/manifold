@@ -9,7 +9,6 @@ import {
 } from "components/global";
 import HigherOrder from "containers/global/HigherOrder";
 import { Link, NavLink } from "react-router-dom";
-import startsWith from "lodash/startsWith";
 import lh from "helpers/linkHandler";
 
 export default class LayoutHeader extends Component {
@@ -21,16 +20,8 @@ export default class LayoutHeader extends Component {
     authentication: PropTypes.object,
     commonActions: PropTypes.object,
     settings: PropTypes.object,
-    isProjects: PropTypes.func
+    isBackendRoot: PropTypes.func
   };
-
-  isSubjects(match, location) {
-    if (!match) {
-      return false;
-    }
-    const { pathname } = location;
-    if (startsWith(pathname, "/backend/subjects")) return true;
-  }
 
   exitLabel(kind) {
     if (kind === "project_editor" || kind === "project_resource_editor")
@@ -54,36 +45,31 @@ export default class LayoutHeader extends Component {
               <ul>
                 <li>
                   <NavLink
-                    isActive={this.props.isProjects}
+                    isActive={this.props.isBackendRoot}
                     activeClassName="active"
                     to={lh.link("backend")}
+                  >
+                    {"Dashboard"}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    activeClassName="active"
+                    to={lh.link("backendProjects")}
                   >
                     {"Projects"}
                   </NavLink>
                 </li>
                 <HigherOrder.Authorize
-                  entity={["user", "maker"]}
+                  entity={["user", "maker", "page", "feature"]}
                   ability="update"
                 >
                   <li>
                     <NavLink
                       activeClassName="active"
-                      to={lh.link("backendPeople")}
+                      to={lh.link("backendRecords")}
                     >
-                      {"People"}
-                    </NavLink>
-                  </li>
-                </HigherOrder.Authorize>
-                <HigherOrder.Authorize
-                  entity={["page", "feature"]}
-                  ability="update"
-                >
-                  <li>
-                    <NavLink
-                      activeClassName="active"
-                      to={lh.link("backendContent")}
-                    >
-                      {"Content"}
+                      {"Records"}
                     </NavLink>
                   </li>
                 </HigherOrder.Authorize>

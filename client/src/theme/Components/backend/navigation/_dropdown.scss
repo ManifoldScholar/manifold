@@ -1,0 +1,77 @@
+.dropdown-nav {
+  @include templateHead;
+  font-weight: $semibold;
+  text-transform: none;
+  text-align: center;
+  color: $neutralWhite;
+  background-color: $neutral110;
+  position: relative;
+
+  &.open {
+    .selected {
+      color: $accentPrimary;
+    }
+
+    ul {
+      display: block;
+    }
+  }
+
+  &.static {
+    &:hover .selected {
+      cursor: default;
+      color: $neutralWhite;
+    }
+  }
+
+  ul {
+    @include listUnstyled;
+    display: none;
+    position: absolute;
+    width: 100%;
+    background-color: $neutral110;
+    text-align: left;
+    border-top: 2px solid $neutral95;
+    padding: 32px 43px;
+
+    li {
+
+      a {
+        display: inline-block;
+        color: $neutral45;
+        text-decoration: none;
+        transition: color $duration $timing;
+
+        &:hover {
+          color: $accentPrimary;
+        }
+
+        &.active {
+          color: $accentPrimary;
+        }
+      }
+
+      + li {
+        margin-top: 14px;
+      }
+    }
+  }
+
+  .selected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+
+    .manicon {
+      font-size: 8px;
+      margin-left: 10px;
+      margin-top: 3px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $accentPrimary;
+    }
+  }
+}

@@ -12,14 +12,6 @@
       justify-content: space-between;
     }
 
-    .list-total + .meta-value {
-      padding-top: 5px;
-
-      @include respond($break60) {
-        padding-top: 0;
-      }
-    }
-
     .meta-value {
       @include utilityPrimary;
       font-size: 12px;

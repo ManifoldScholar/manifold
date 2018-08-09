@@ -181,15 +181,16 @@ export class ProjectWrapperContainer extends PureComponent {
     return (
       <div>
         <button onClick={this.doPreview} className="button-bare-primary">
-          Preview{" "}
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
+          Preview{" "}
         </button>
         <HigherOrder.Authorize entity={project} ability={"delete"}>
           <button
             onClick={this.handleProjectDestroy}
             className="button-bare-primary"
           >
-            Delete <i className="manicon manicon-trashcan" aria-hidden="true" />
+            <i className="manicon manicon-trashcan" aria-hidden="true" />
+            Delete
           </button>
         </HigherOrder.Authorize>
       </div>
@@ -208,51 +209,45 @@ export class ProjectWrapperContainer extends PureComponent {
     const skipId = "skip-to-project-panel";
 
     return (
-      <HigherOrder.Authorize
-        entity={project}
-        failureFatalError={{
-          detail: "You are not allowed to edit this project."
-        }}
-        ability={["update", "manageResources"]}
-      >
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
+      <div>
+        <HigherOrder.Authorize
+          entity={project}
+          failureFatalError={{
+            detail: "You are not allowed to edit this project."
+          }}
+          ability={["update", "manageResources"]}
+        >
+          {this.state.confirmation ? (
+            <Dialog.Confirm {...this.state.confirmation} />
+          ) : null}
 
-        <RedirectToFirstMatch
-          from={lh.link("backendProject", project.id)}
-          candidates={this.secondaryNavigationLinks(project)}
-        />
-
-        <Navigation.DetailHeader
-          type="project"
-          breadcrumb={[{ path: lh.link("backend"), label: "ALL PROJECTS" }]}
-          title={project.attributes.title}
-          subtitle={project.attributes.subtitle}
-          utility={this.renderUtility(project)}
-        />
-        <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
+          <RedirectToFirstMatch
+            from={lh.link("backendProject", project.id)}
+            candidates={this.secondaryNavigationLinks(project)}
+          />
+          <div className="backend-detail">
+            <Navigation.DetailHeader
+              type="project"
+              title={project.attributes.title}
+              subtitle={project.attributes.subtitle}
+              utility={this.renderUtility(project)}
+              secondaryLinks={this.secondaryNavigationLinks(project)}
+            />
+            <section className="backend-panel">
               <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(project)}
-              />
-            </div>
-          </aside>
-          <div className="container">
-            <aside className="aside">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(project)}
-              />
-            </aside>
-            <div id={skipId} className="panel">
-              {this.renderRoutes()}
-            </div>
+              <div className="container">
+                <Navigation.Secondary
+                  links={this.secondaryNavigationLinks(project)}
+                  panel
+                />
+                <div id={skipId} className="panel">
+                  {this.renderRoutes()}
+                </div>
+              </div>
+            </section>
           </div>
-        </section>
-      </HigherOrder.Authorize>
+        </HigherOrder.Authorize>
+      </div>
     );
   }
 }

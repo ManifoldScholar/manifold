@@ -15,29 +15,8 @@
     padding-top: 20px;
     padding-bottom: 0;
 
-    .list-total {
-      padding-bottom: 8px;
-    }
-
     a, .fake-link {
       padding: 10px 0 17px;
-    }
-  }
-
-  .list-total {
-    @include utilityPrimary;
-    padding-bottom: 15px;
-    font-size: 15px;
-    color: $neutral70;
-    border-bottom: 1px solid $neutral80;
-
-    span {
-      color: $neutral30;
-    }
-
-    &.empty {
-      padding-top: 20px;
-      border-bottom: 0;
     }
   }
 
@@ -82,19 +61,31 @@
     @include respond($break60) {
       margin-left: -40px;
     }
+
+    @include respond($break65) {
+      margin-left: -24px;
+    }
+
+    @include respond($break110) {
+      margin-left: -40px;
+    }
   }
 
   ul {
     @include listUnstyled;
 
-    li:first-of-type {
-      border-top: 0;
+    li:first-child {
+      // border-top: 0;
+
+      a {
+        padding-top: 10px;
+      }
     }
 
     li {
       display: flex;
       align-items: center;
-      border-top: 1px solid $neutral80;
+      border-bottom: 1px solid $neutral80;
       transition: background-color $duration ease-out,
         box-shadow $duration ease-out;
 
@@ -159,11 +150,14 @@
       flex-grow: 1;
     }
 
+    .figure-wrapper,
     figure {
       + .meta {
         padding-left: 15px;
       }
+    }
 
+    figure {
       &.cover {
         min-width: 50px;
         max-width: 50px;
@@ -350,7 +344,7 @@
         min-height: 150px;
         padding-left: 40px;
         margin-bottom: 28px;
-        border-top: 0;
+        border-bottom: 0;
       }
 
       @include respond($break95) {

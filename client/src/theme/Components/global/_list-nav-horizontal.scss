@@ -1,0 +1,51 @@
+/*
+Horizontal nav for lists that can take both buttons and search forms
+Currently found on Projects route on backend
+*/
+.list-nav-horizontal {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+
+  @include respond($break60) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    margin-bottom: 44px;
+  }
+
+  > * {
+    flex: 1;
+
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+
+    @include respond($break60) {
+      margin-right: 11px;
+      margin-left: 11px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:not(:first-child) {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .form-search-filter {
+
+  }
+
+  .button-icon-secondary {
+    padding: 0.438em 1.125em 0.563em;
+    font-size: 16px;
+    line-height: normal;
+  }
+}

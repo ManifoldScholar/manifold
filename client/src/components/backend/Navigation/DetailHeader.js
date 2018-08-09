@@ -12,7 +12,8 @@ export default class DetailHeader extends PureComponent {
     titleHtml: PropTypes.bool,
     subtitle: PropTypes.string,
     utility: PropTypes.object,
-    note: PropTypes.string
+    note: PropTypes.string,
+    secondaryLinks: PropTypes.array
   };
 
   static defaultProps = {
@@ -39,14 +40,25 @@ export default class DetailHeader extends PureComponent {
     return this.props.title;
   }
 
+  renderSectionNav(props) {
+    if (!props.secondaryLinks) return null;
+
+    return (
+      <Navigation.Dropdown
+        classNames="section-nav"
+        links={props.secondaryLinks}
+      />
+    );
+  }
+
   render() {
     const breadcrumb = this.props.breadcrumb;
     return (
-      <section className="bg-neutral95">
+      <section className="backend-header">
         {breadcrumb && breadcrumb.length > 0 ? (
           <Navigation.Breadcrumb links={this.props.breadcrumb} />
         ) : null}
-        <div className="container flush">
+        <div className="wrapper">
           <header className="entity-header-primary">
             {this.props.type === "user" ? null : (
               <figure>
@@ -71,6 +83,7 @@ export default class DetailHeader extends PureComponent {
             </div>
           </header>
         </div>
+        {this.renderSectionNav(this.props)}
       </section>
     );
   }

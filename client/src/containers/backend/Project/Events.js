@@ -139,7 +139,7 @@ export class ProjectEventsContainer extends PureComponent {
             entities={this.props.events}
             singularUnit="event"
             pluralUnit="events"
-            listClassName="tile-list"
+            listClassName="vertical-list-primary tile-list"
             pagination={this.props.eventsMeta.pagination}
             paginationClickHandler={this.pageChangeHandlerCreator}
             paginationClass="secondary"

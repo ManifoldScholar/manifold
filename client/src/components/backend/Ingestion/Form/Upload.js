@@ -65,6 +65,7 @@ class IngestionFormUpload extends PureComponent {
       <div>
         <Form.FieldGroup {...this.props}>
           <Form.Upload
+            wide
             inlineStyle={{ width: "100%" }}
             layout="landscape"
             instructions={fileInstructions}
@@ -76,8 +77,9 @@ class IngestionFormUpload extends PureComponent {
             set={this.onSourceChange}
             accepts="any"
           />
-          <div className="form-divider">or</div>
+        <div className="form-divider wide">or</div>
           <Form.TextInput
+            wide
             label="URL"
             instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
             value={this.props.getModelValue("attributes[externalSourceUrl]")}

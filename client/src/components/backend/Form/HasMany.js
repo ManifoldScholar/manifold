@@ -23,7 +23,8 @@ export default class FormHasMany extends PureComponent {
     entityAvatarAttribute: PropTypes.string,
     placeholder: PropTypes.string,
     errors: PropTypes.array,
-    idForError: PropTypes.string
+    idForError: PropTypes.string,
+    wide: PropTypes.bool
   };
 
   static defaultProps = {
@@ -142,10 +143,14 @@ export default class FormHasMany extends PureComponent {
 
   render() {
     const entities = this.props.entities;
+    const inputClasses = classNames({
+      "form-input": true,
+      wide: this.props.wide
+    });
 
     return (
       <GlobalForm.Errorable
-        className="form-input"
+        className={inputClasses}
         name="*"
         errors={this.props.errors}
         label={this.props.label}
