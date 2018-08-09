@@ -194,12 +194,12 @@ RSpec.describe Ingestions::Strategies::Document do
     end
 
     it "has the correct text section attributes" do
-      expected = [{"source_identifier"=>"aa71f2445216ee119319375ebca37fc8", "name"=>"Google Doc Prime", "kind"=>"section", "position"=>1, "build"=>"build/GoogleDocPrime.html"}]
+      expected = [{"source_identifier"=>"32a9fb2a64ceb5e110bb6b670c71efa5", "name"=>"Google Doc Prime", "kind"=>"section", "position"=>1, "build"=>"build/Google Doc Prime.html"}]
       expect(@manifest[:relationships][:text_sections]).to eq expected
     end
 
     it "has the correct number of ingestion sources" do
-      expect(@manifest[:relationships][:ingestion_sources].length).to eq 2
+      expect(@manifest[:relationships][:ingestion_sources].length).to eq 1
     end
 
   end

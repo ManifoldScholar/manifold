@@ -16,7 +16,7 @@ module Ingestions
 
       def temp_file
         @temp_file ||=
-          tmp_pointer("source", "zip")
+          tmp_pointer("source", "html")
       end
 
       def session
@@ -37,7 +37,7 @@ module Ingestions
         drive_session_error unless session.present?
         session.drive.export_file(
           drive_file_pointer.id,
-          "application/zip",
+          "text/html",
           download_dest: temp_file.path
         )
       end

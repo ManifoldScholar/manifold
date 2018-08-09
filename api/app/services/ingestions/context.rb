@@ -29,9 +29,13 @@ module Ingestions
     def source=(fetched)
       raise "Already provided source" if source_provided?
 
-      source = fetched.present? ? fetched[:file].path : source_path
+      source, title = if fetched.present?
+                        [fetched[:file].path, fetched[:title]]
+                      else
+                        [source_path, nil]
+                      end
 
-      update_working_dirs source
+      update_working_dirs source, title
 
       @source_provided = true
     end
