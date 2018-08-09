@@ -49,7 +49,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="upload-19"
+            htmlFor="upload-21"
           >
             Hero Image
           </label>
@@ -63,12 +63,17 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             </p>
           </div>
           <react-dropzone
-            accept="image/*"
+            accepts={
+              Object {
+                "accepts": "image/*",
+                "extensions": "gif, jpeg, jpg, png, svg",
+              }
+            }
             className="form-dropzone style-landscape"
             inputProps={
               Object {
-                "aria-describedby": "upload-error-20",
-                "id": "upload-19",
+                "aria-describedby": "upload-error-22",
+                "id": "upload-21",
               }
             }
             multiple={false}
@@ -119,7 +124,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor="upload-19"
+            htmlFor="upload-21"
           >
             Cover
           </label>
@@ -129,12 +134,17 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             If a cover is set for the project, it will appear over the hero, to the right of the description on the landing page.
           </span>
           <react-dropzone
-            accept="image/*"
+            accepts={
+              Object {
+                "accepts": "image/*",
+                "extensions": "gif, jpeg, jpg, png, svg",
+              }
+            }
             className="form-dropzone style-portrait"
             inputProps={
               Object {
-                "aria-describedby": "upload-error-20",
-                "id": "upload-19",
+                "aria-describedby": "upload-error-22",
+                "id": "upload-21",
               }
             }
             multiple={false}

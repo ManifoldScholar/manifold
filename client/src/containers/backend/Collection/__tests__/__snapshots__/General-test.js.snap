@@ -63,17 +63,22 @@ exports[`Backend Collection General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="upload-19"
+            htmlFor="upload-21"
           >
             Cover Image
           </label>
           <react-dropzone
-            accept="image/*"
+            accepts={
+              Object {
+                "accepts": "image/*",
+                "extensions": "gif, jpeg, jpg, png, svg",
+              }
+            }
             className="form-dropzone style-landscape"
             inputProps={
               Object {
-                "aria-describedby": "upload-error-20",
-                "id": "upload-19",
+                "aria-describedby": "upload-error-22",
+                "id": "upload-21",
               }
             }
             multiple={false}

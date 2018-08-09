@@ -51,36 +51,6 @@ describe("Backend.Form.Upload component", () => {
       wrapper.find('[data-id="remove"]').simulate("click", fakeDomEvent);
       expect(setMock).toHaveBeenCalled();
     });
-
-    // While useful, we can't run these tests without warnings in React 16. If we don't
-    // mock Dropzone, we end up with warnings in React 16.
-    // https://facebook.github.io/jest/docs/en/tutorial-react.html#snapshot-testing-with-mocks-enzyme-and-react-16
-
-    it("should change state.removed to true when remove is clicked", () => {
-      setMock.mockClear();
-      wrapper.find('[data-id="remove"]').simulate("click", fakeDomEvent);
-      expect(wrapper.state().removed).toBe(true);
-    });
-
-    // it("should change state.removed to false when a file is dropped", () => {
-    //   setMock.mockClear();
-    //   wrapper.find('[data-id="remove"]').simulate("click", fakeDomEvent);
-    //   expect(wrapper.state().removed).toBe(true);
-    //   wrapper.find("Dropzone").simulate("drop", fakeDomEvent);
-    //   expect(wrapper.state().removed).toBe(false);
-    // });
-
-    it("should trigger setOther callback when remove is clicked", () => {
-      setOtherMock.mockClear();
-      wrapper.find('[data-id="remove"]').simulate("click", fakeDomEvent);
-      expect(setOtherMock).toHaveBeenCalled();
-    });
-
-    // it("should trigger set when a file is dropped onto it", () => {
-    //   setMock.mockClear();
-    //   wrapper.find("Dropzone").simulate("drop", fakeDomEvent);
-    //   expect(setMock).toHaveBeenCalled();
-    // });
   });
 
   describe("when the upload input doesn't have a remove prop", () => {
