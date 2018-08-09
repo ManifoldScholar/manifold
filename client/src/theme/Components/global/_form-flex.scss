@@ -14,13 +14,15 @@ Currently found on Projects route on backend
   }
 
   > * {
-    flex: 1;
+    flex: 0 1 auto;
 
     &:not(:first-child) {
       margin-top: 20px;
     }
 
     @include respond($break60) {
+      flex: 1;
+
       &:first-child {
         margin-right: 11px;
         margin-left: 0;
@@ -53,21 +55,25 @@ Currently found on Projects route on backend
   }
 
   .button-row {
-    flex-basis: 100%;
-      margin-top: 15px;
+    margin-top: 15px;
+
+    @include respond($break60) {
+      flex-basis: 100%;
+    }
   }
 
   .form-list-filter {
-    flex-basis: 100%;
     display: flex;
     flex-direction: column;
     padding-top: 0;
 
     @include respond($break60) {
       flex-direction: row;
+      flex-basis: 100%;
     }
 
     .select-group {
+      flex: 0 1 auto;
       margin-bottom: 20px;
 
       + .select-group {
@@ -75,6 +81,7 @@ Currently found on Projects route on backend
       }
 
       @include respond($break60) {
+        flex: 1;
         margin-right: 11px;
         margin-bottom: 0;
         margin-left: 11px;

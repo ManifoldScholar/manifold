@@ -40,9 +40,9 @@ class FormTextArea extends Component {
     });
 
     return (
-      <div className="form-input">
+      <div className={inputClasses}>
         <GlobalForm.Errorable
-          className={inputClasses}
+          className="form-input"
           name={this.props.name}
           errors={this.props.errors}
           label={this.props.label}

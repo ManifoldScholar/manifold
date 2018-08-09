@@ -38,6 +38,7 @@ class PagesGeneralContainer extends PureComponent {
       );
     return (
       <Form.TextInput
+        wide
         validation={["required"]}
         label="Slug"
         name="attributes[slug]"
@@ -54,6 +55,7 @@ class PagesGeneralContainer extends PureComponent {
     if (isExternal) return null;
     return (
       <Form.TextArea
+        wide
         label="Body"
         height={300}
         name="attributes[body]"
@@ -77,34 +79,40 @@ class PagesGeneralContainer extends PureComponent {
           create={pagesAPI.create}
           className="form-secondary"
         >
-          <Form.TextInput
-            validation={["required"]}
-            focusOnMount
-            label="Page Title"
-            name="attributes[title]"
-            placeholder="Enter Page Title"
-          />
-          <Form.TextInput
-            label="Navigation Title"
-            name="attributes[navTitle]"
-            placeholder="Alternate Navigation Title"
-            instructions="If set, this title will be used in header and footer navigation"
-          />
-          <Form.Select
-            label="Purpose"
-            name="attributes[purpose]"
-            options={[
-              { label: "Supplemental Content", value: "supplemental_content" },
-              { label: "Privacy Policy", value: "privacy_policy" },
-              { label: "Terms and Conditions", value: "terms_and_conditions" }
-            ]}
-          />
-          <Form.Switch
-            label="External Page?"
-            name="attributes[isExternalLink]"
-          />
-          {this.renderPath()}
-          {this.renderBody()}
+          <Form.FieldGroup label="General">
+            <Form.TextInput
+              wide
+              validation={["required"]}
+              focusOnMount
+              label="Page Title"
+              name="attributes[title]"
+              placeholder="Enter Page Title"
+            />
+            <Form.TextInput
+              wide
+              label="Navigation Title"
+              name="attributes[navTitle]"
+              placeholder="Alternate Navigation Title"
+              instructions="If set, this title will be used in header and footer navigation"
+            />
+            <Form.Select
+              wide
+              label="Purpose"
+              name="attributes[purpose]"
+              options={[
+                { label: "Supplemental Content", value: "supplemental_content" },
+                { label: "Privacy Policy", value: "privacy_policy" },
+                { label: "Terms and Conditions", value: "terms_and_conditions" }
+              ]}
+            />
+            <Form.Switch
+              wide
+              label="External Page?"
+              name="attributes[isExternalLink]"
+            />
+            {this.renderPath()}
+            {this.renderBody()}
+          </Form.FieldGroup>
           <Form.FieldGroup
             label="Page States"
             instructions="Manage visibility and whether or not the page appears in navigation"

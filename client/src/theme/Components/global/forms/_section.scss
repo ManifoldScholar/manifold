@@ -11,8 +11,8 @@
     @include panelRounded;
     display: table;
     width: 100%;
-    padding: 0.563em 1.5em 1em;
     margin-bottom: 20px;
+    padding: 0.563em 1.5em 1em;
     font-size: 16px;
 
     span {
@@ -24,23 +24,34 @@
       font-weight: $semibold;
       letter-spacing: 0.1em;
     }
+
+    // if using a rounded label, pad any of its siblings
+    ~ * {
+      padding-right: 5px;
+      padding-left: 5px;
+
+      @include respond($break75) {
+        padding-right: 24px;
+        padding-left: 24px;
+      }
+    }
   }
 
   .form-input-group {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    padding-right: 5px;
-    padding-left: 5px;
-
-    @include respond($break75) {
-      padding-right: 24px;
-      padding-left: 24px;
-    }
 
     @include respond($break90) {
       flex-direction: row;
       justify-content: space-between;
+    }
+
+    > .vertical-list-primary,
+    > .buttons-icon-horizontal {
+      @include respond($break90) {
+        flex-basis: 100%;
+      }
     }
 
     > .form-input {
@@ -73,6 +84,10 @@
         @include respond($break90) {
           flex-basis: 31.76%;
         }
+      }
+
+      .form-select {
+        width: 100%;
       }
     }
 

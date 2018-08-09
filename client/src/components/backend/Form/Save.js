@@ -16,7 +16,7 @@ export default class FormSave extends Component {
 
   render() {
     return (
-      <div className="form-input submit">
+      <div className="form-input submit wide">
         {this.props.cancelRoute ? (
           <Link
             to={this.props.cancelRoute}

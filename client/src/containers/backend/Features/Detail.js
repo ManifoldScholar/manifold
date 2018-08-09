@@ -153,7 +153,7 @@ class FeatureDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="feature"
         breadcrumb={[
-          { path: lh.link("backendRecordsFeatures"), label: "ALL FEATURES" }
+          { path: lh.link("backendRecordsFeatures"), label: "All Features" }
         ]}
         title="New Feature"
         showUtility={false}
@@ -170,7 +170,7 @@ class FeatureDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="feature"
         breadcrumb={[
-          { path: lh.link("backendRecordsFeatures"), label: "ALL FEATURES" }
+          { path: lh.link("backendRecordsFeatures"), label: "All Features" }
         ]}
         title={
           feature.attributes.header ||
@@ -185,7 +185,8 @@ class FeatureDetailContainer extends PureComponent {
     return (
       <div>
         <button onClick={this.handleDestroy} className="button-bare-primary">
-          Delete <i className="manicon manicon-trashcan" aria-hidden="true" />
+          <i className="manicon manicon-trashcan" aria-hidden="true" />
+          Delete
         </button>
       </div>
     );
@@ -226,17 +227,19 @@ class FeatureDetailContainer extends PureComponent {
                 <div className="panel">
                   <section>
                     {previewFeature ? (
-                      <div className="form-secondary">
-                        <div className="form-input">
-                          <h4 className="form-input-heading">
-                            Feature Preview
-                          </h4>
-                          <span className="instructions">
-                            This is an approximate preview of your feature.
-                            Foreground, background, and markdown will not be
-                            displayed until the feature is saved.
-                          </span>
-                          <Layout.Splash feature={previewFeature} preview />
+                      <div className="form-secondary form-section">
+                        <header class="form-section-label">
+                          <span>Feature Preview</span>
+                        </header>
+                        <div className="form-input-group">
+                          <div className="form-input wide">
+                            <Layout.Splash feature={previewFeature} preview />
+                            <span className="instructions">
+                              This is an approximate preview of your feature.
+                              Foreground, background, and markdown will not be
+                              displayed until the feature is saved.
+                            </span>
+                          </div>
                         </div>
                       </div>
                     ) : null}

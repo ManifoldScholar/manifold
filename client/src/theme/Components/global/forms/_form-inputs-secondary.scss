@@ -255,10 +255,6 @@
       text-transform: none; // OD
       font-size: 16px;
 
-      @include respond($break60) {
-        font-size: 18px;
-      }
-
       &:focus {
         border-color: $accentPrimaryLight;
       }

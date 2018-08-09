@@ -117,15 +117,16 @@ export class ResourceWrapperContainer extends PureComponent {
     return (
       <div>
         <button onClick={this.doPreview} className="button-bare-primary">
-          Preview{" "}
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
+          Preview{" "}
         </button>
         <HigherOrder.Authorize entity={resource} ability={"delete"}>
           <button
             onClick={this.handleResourceDestroy}
             className="button-bare-primary"
           >
-            Delete <i className="manicon manicon-trashcan" aria-hidden="true" />
+            <i className="manicon manicon-trashcan" aria-hidden="true" />
+            Delete
           </button>
         </HigherOrder.Authorize>
       </div>

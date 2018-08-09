@@ -73,6 +73,7 @@
 
   ul {
     @include listUnstyled;
+    margin-top: 1em;
 
     li:first-child {
       // border-top: 0;
@@ -230,6 +231,10 @@
       white-space: nowrap;
       vertical-align: top;
       transition: color $duration $timing;
+
+      &:empty {
+        display: none;
+      }
 
       @include respond($break70) {
         padding-top: 0;

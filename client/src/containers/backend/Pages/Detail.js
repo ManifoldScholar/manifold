@@ -144,7 +144,7 @@ class PageDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="page"
         breadcrumb={[
-          { path: lh.link("backendRecordsPages"), label: "ALL PAGES" }
+          { path: lh.link("backendRecordsPages"), label: "All Pages" }
         ]}
         title="New Page"
         showUtility={false}
@@ -161,12 +161,11 @@ class PageDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="page"
         breadcrumb={[
-          { path: lh.link("backendRecordsPages"), label: "ALL PAGES" }
+          { path: lh.link("backendRecordsPages"), label: "All Pages" }
         ]}
         title={page.attributes.title}
         subtitle={`/page/${page.attributes.slug}`}
         utility={this.renderUtility()}
-        secondaryLinks={navigation.page(page)}
       />
     );
   }
@@ -175,11 +174,12 @@ class PageDetailContainer extends PureComponent {
     return (
       <div>
         <button onClick={this.doPreview} className="button-bare-primary">
-          Preview{" "}
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
+          Preview{" "}
         </button>
         <button onClick={this.handleDestroy} className="button-bare-primary">
-          Delete <i className="manicon manicon-trashcan" aria-hidden="true" />
+          <i className="manicon manicon-trashcan" aria-hidden="true" />
+          Delete
         </button>
       </div>
     );
@@ -222,7 +222,6 @@ class PageDetailContainer extends PureComponent {
         <section className="backend-panel">
           <Utility.SkipLink skipId={skipId} />
           <div className="container">
-            <Navigation.Secondary links={secondaryLinks} panel />
             <div id={skipId} className="panel">
               <section>{this.renderRoutes()}</section>
             </div>

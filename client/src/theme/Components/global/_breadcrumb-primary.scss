@@ -1,7 +1,7 @@
 .breadcrumb-primary {
   @include utilityPrimary;
   display: block;
-  padding: 14px 0 16px;
+  padding: 10px 0 12px;
   text-transform: none;
   font-size: 16px;
   line-height: 1.4;
@@ -38,7 +38,7 @@
       &::after {
         display: inline-block;
         padding: 0 11px;
-        color: $neutral50;
+        color: $neutral70;
         content: '/';
       }
 
@@ -48,7 +48,7 @@
     }
 
     a {
-      color: $neutral50;
+      color: $neutral70;
       text-decoration: none;
       transition: color $duration $timing;
 

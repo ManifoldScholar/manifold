@@ -11,7 +11,7 @@ import Authorization from "helpers/authorization";
 
 const { request } = entityStoreActions;
 
-const perPage = 10;
+const perPage = 20;
 
 export class ProjectsListContainer extends PureComponent {
 
