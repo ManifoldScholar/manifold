@@ -16,16 +16,19 @@ module Ingestions
 
       private
 
+      # rubocop:disable Metrics/AbcSize
       def fetch_external
         inspector.external_sources.each do |source|
           fetched = compose Ingestions::Fetcher, url: source["source_path"]
           next unless fetched.present?
-          title, file = fetched.values_at :title, :file
+          filename = Digest::MD5.hexdigest(source["source_path"])
           inspector.update_sources_and_toc source["source_path"],
-                                           "#{title.delete(' ')}.html"
-          context.update_working_dirs file.path
+                                           "#{filename}.html"
+          context.update_working_dirs fetched[:file].path,
+                                      filename
         end
       end
+      # rubocop:enable Metrics/AbcSize
 
       # NB: The output path is important here.  We need to preserve the
       # entire relative path to the file for cases where nested items have

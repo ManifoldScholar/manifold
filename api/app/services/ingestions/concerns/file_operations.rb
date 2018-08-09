@@ -13,11 +13,11 @@ module Ingestions
 
       WORKING_DIR_BASE = Rails.root.join("tmp", "ingestion")
 
-      def update_working_dirs(path)
+      def update_working_dirs(path, filename = nil)
         if extractable? path
           extract path, source_root
         else
-          copy path, source_root
+          copy path, source_root, rename_to: filename
         end
       end
 
@@ -208,9 +208,21 @@ module Ingestions
         end
       end
 
-      def copy(path = source_path, dest_path = root_path)
-        copy_path = File.file?(path) ? path : File.join(path, "*")
-        FileUtils.cp_r(Dir[copy_path], dest_path)
+      def copy(path = source_path, dest_path = root_path, rename_to: nil)
+        path = Pathname.new(path)
+        dest_path = Pathname.new(dest_path)
+
+        if path.file?
+          target_path =
+            if rename_to.present?
+              dest_path.join("#{rename_to}#{path.extname}")
+            else
+              dest_path.join(path.basename)
+            end
+          FileUtils.cp path, target_path
+        else
+          FileUtils.cp_r Pathname.glob(File.join(path, "*")), dest_path
+        end
       end
     end
   end
