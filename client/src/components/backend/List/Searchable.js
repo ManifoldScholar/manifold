@@ -252,12 +252,9 @@ export class ListSearchable extends PureComponent {
     return button;
   }
 
-  renderButtonRow(props) {
+  renderButtons(props) {
     let newButtonAuthorized = null;
     let secondaryButtonAuthorized = null;
-
-    const groupClass =
-      props.columnarNav ? "list-nav-horizontal" : "buttons-icon-horizontal";
 
     if (props.newButton && props.newButton.authorizedFor) {
       newButtonAuthorized = this.authorization.authorizeAbility({
@@ -277,8 +274,7 @@ export class ListSearchable extends PureComponent {
 
     if (!newButtonAuthorized && !secondaryButtonAuthorized) return null;
     return (
-      <div className={groupClass}>
-        {props.columnarNav && this.renderForm()}
+      <div className="buttons-icon-horizontal">
         {this.renderButton(props.newButton)}
         {this.renderButton(props.secondaryButton)}
       </div>
@@ -286,8 +282,11 @@ export class ListSearchable extends PureComponent {
   }
 
   renderForm = () => {
+    const formClasses = classnames("form-search-filter", {
+      "form-flex": this.props.columnarNav
+    });
     return (
-      <form className="form-search-filter" onSubmit={this.handleSubmit}>
+      <form className={formClasses} onSubmit={this.handleSubmit}>
         <div className="search">
           <button>
             <i className="manicon manicon-magnify" aria-hidden="true" />
@@ -304,7 +303,7 @@ export class ListSearchable extends PureComponent {
             onChange={e => this.setFilter(e, "keyword")}
           />
         </div>
-        {this.renderSearchOptions()}
+        {this.props.columnarNav && this.renderButtons(this.props)}
         <div className="button-row">
           {this.showOptionsButton(this.props) ? (
             <button
@@ -322,6 +321,7 @@ export class ListSearchable extends PureComponent {
             {"Reset Search"}
           </button>
         </div>
+        {this.renderSearchOptions()}
       </form>
     );
   }
@@ -339,7 +339,7 @@ export class ListSearchable extends PureComponent {
             pluralUnit={this.props.pluralUnit}
           />
         )}
-        {!this.props.columnarNav && this.renderButtonRow(this.props)}
+        {!this.props.columnarNav && this.renderButtons(this.props)}
         {entities.length > 0 ? (
           <List.SimpleList
             entities={entities}
@@ -359,11 +359,7 @@ export class ListSearchable extends PureComponent {
 
     return (
       <div>
-        {
-          this.props.columnarNav
-            ? this.renderButtonRow(this.props)
-            : this.renderForm()
-        }
+        {this.renderForm()}
         <nav className={listClassName}>{this.renderEntityList()}</nav>
         <Utility.Pagination
           pagination={this.props.pagination}

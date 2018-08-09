@@ -99,19 +99,30 @@ export class ProjectsListContainer extends PureComponent {
     };
   };
 
+  renderHeader = () => {
+    const { totalCount } = this.props.projectsMeta.pagination;
+    const label =
+      totalCount > 1 || totalCount === 0
+        ? " Projects"
+        : " Project";
+
+    return (
+      <header className="backend-header section-heading-secondary">
+        <h1>
+          <i className="manicon manicon-stack" aria-hidden="true" />
+          <span className="list-total">{totalCount}</span>
+          {label}
+        </h1>
+      </header>
+    );
+  }
+
   render() {
     if (!this.props.projectsMeta) return null;
-    const { totalCount } = this.props.projectsMeta.pagination;
 
     return (
       <div>
-        <header className="backend-header section-heading-secondary">
-          <h1>
-            <i className="manicon manicon-stack" aria-hidden="true" />
-            <span className="list-total">{totalCount}</span>
-            {" Projects"}
-          </h1>
-        </header>
+        {this.renderHeader()}
         <section className="backend-panel">
           <div className="container">
             {this.props.projects && this.props.projectsMeta ? (
@@ -139,7 +150,7 @@ export class ProjectsListContainer extends PureComponent {
                     options: [true, false],
                     labels: {
                       true: "Show Draft Projects",
-                      false: "Show All"
+                      false: "Hide Draft Projects"
                     }
                   }
                 }}
