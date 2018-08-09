@@ -57,7 +57,7 @@
 
   &:not(.panel-nav) {
     white-space: nowrap;
-    overflow-x: scroll;
+    overflow-x: auto;
     display: none;
 
     li {
