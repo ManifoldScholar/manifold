@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180731223301) do
+ActiveRecord::Schema.define(version: 20180809232509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -245,21 +245,20 @@ ActiveRecord::Schema.define(version: 20180731223301) do
 
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "state"
-    t.string   "log",                                              array: true
+    t.string   "log",                                           array: true
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
     t.string   "strategy"
     t.string   "external_source_url"
     t.string   "ingestion_type"
     t.uuid     "creator_id"
     t.uuid     "text_id"
     t.uuid     "project_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.boolean  "reingestion",         default: false, null: false
-    t.datetime "source_updated_at"
-    t.integer  "source_file_size"
-    t.string   "source_content_type"
-    t.string   "source_file_name"
-    t.jsonb    "source_data",         default: {},    null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.jsonb    "source_data",         default: {}, null: false
   end
 
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

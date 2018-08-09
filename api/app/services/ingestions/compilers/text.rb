@@ -4,7 +4,7 @@ module Ingestions
       hash :manifest, strip: false
 
       def execute
-        text = find_or_create_text
+        text = update_or_create_text
         report text
 
         text
@@ -12,29 +12,22 @@ module Ingestions
 
       private
 
-      def find_or_create_text
-        context.ingestion.reingestion? ? find_text : create_text
-      end
-
-      def find_text
-        ingestion.project
-                 .texts
-                 .joins(:titles)
-                 .where(text_titles: { value: main_title&.dig(:value) }).first
+      def update_or_create_text
+        ingestion.text ? update_text : create_text
       end
 
       def create_text
         ::Text.create(text_attributes)
       end
 
-      def text_attributes
-        manifest[:attributes].merge(project: ingestion.project, creator: context.creator)
+      def update_text
+        ingestion.text.update(text_attributes)
+
+        ingestion.text
       end
 
-      def main_title
-        manifest[:relationships][:text_titles].detect do |title|
-          title[:kind] == ::TextTitle::KIND_MAIN
-        end
+      def text_attributes
+        manifest[:attributes].merge(project: ingestion.project, creator: context.creator)
       end
 
       # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
