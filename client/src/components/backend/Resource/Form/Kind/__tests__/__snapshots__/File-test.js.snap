@@ -10,16 +10,22 @@ exports[`Backend.Resource.Form.File component renders correctly 1`] = `
   >
     <label
       className=""
-      htmlFor="upload-19"
+      htmlFor="upload-21"
     >
       File
     </label>
     <react-dropzone
+      accepts={
+        Object {
+          "accepts": null,
+          "extensions": null,
+        }
+      }
       className="form-dropzone style-square"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-20",
-          "id": "upload-19",
+          "aria-describedby": "upload-error-22",
+          "id": "upload-21",
         }
       }
       multiple={false}

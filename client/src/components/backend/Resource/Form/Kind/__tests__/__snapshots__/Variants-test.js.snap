@@ -13,16 +13,22 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
     >
       <label
         className=""
-        htmlFor="upload-19"
+        htmlFor="upload-21"
       >
         Variant
       </label>
       <react-dropzone
+        accepts={
+          Object {
+            "accepts": null,
+            "extensions": null,
+          }
+        }
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-20",
-            "id": "upload-19",
+            "aria-describedby": "upload-error-22",
+            "id": "upload-21",
           }
         }
         multiple={false}
@@ -68,16 +74,22 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
     >
       <label
         className=""
-        htmlFor="upload-19"
+        htmlFor="upload-21"
       >
         Variant
       </label>
       <react-dropzone
+        accepts={
+          Object {
+            "accepts": null,
+            "extensions": null,
+          }
+        }
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-20",
-            "id": "upload-19",
+            "aria-describedby": "upload-error-22",
+            "id": "upload-21",
           }
         }
         multiple={false}
@@ -130,17 +142,22 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
     >
       <label
         className=""
-        htmlFor="upload-19"
+        htmlFor="upload-21"
       >
         High Resolution Image
       </label>
       <react-dropzone
-        accept="image/*"
+        accepts={
+          Object {
+            "accepts": "image/*",
+            "extensions": "gif, jpeg, jpg, png, svg",
+          }
+        }
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-20",
-            "id": "upload-19",
+            "aria-describedby": "upload-error-22",
+            "id": "upload-21",
           }
         }
         multiple={false}
@@ -191,17 +208,22 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
     >
       <label
         className=""
-        htmlFor="upload-19"
+        htmlFor="upload-21"
       >
         Thumbnail Image
       </label>
       <react-dropzone
-        accept="image/*"
+        accepts={
+          Object {
+            "accepts": "image/*",
+            "extensions": "gif, jpeg, jpg, png, svg",
+          }
+        }
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-20",
-            "id": "upload-19",
+            "aria-describedby": "upload-error-22",
+            "id": "upload-21",
           }
         }
         multiple={false}
@@ -259,17 +281,22 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
     >
       <label
         className=""
-        htmlFor="upload-19"
+        htmlFor="upload-21"
       >
         Thumbnail Image
       </label>
       <react-dropzone
-        accept="image/*"
+        accepts={
+          Object {
+            "accepts": "image/*",
+            "extensions": "gif, jpeg, jpg, png, svg",
+          }
+        }
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-20",
-            "id": "upload-19",
+            "aria-describedby": "upload-error-22",
+            "id": "upload-21",
           }
         }
         multiple={false}

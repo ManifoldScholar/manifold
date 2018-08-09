@@ -58,12 +58,12 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
           </button>
           <label
             className="screen-reader-text"
-            htmlFor="list-search-21"
+            htmlFor="list-search-23"
           >
             Enter Search Criteria
           </label>
           <input
-            id="list-search-21"
+            id="list-search-23"
             onChange={[Function]}
             placeholder="Search..."
             type="text"

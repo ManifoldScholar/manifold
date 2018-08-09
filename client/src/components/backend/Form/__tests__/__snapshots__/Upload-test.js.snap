@@ -10,17 +10,22 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
   >
     <label
       className=""
-      htmlFor="upload-23"
+      htmlFor="upload-25"
     >
       Cover
     </label>
     <react-dropzone
-      accept="image/*"
+      accepts={
+        Object {
+          "accepts": "image/*",
+          "extensions": "gif, jpeg, jpg, png, svg",
+        }
+      }
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-24",
-          "id": "upload-23",
+          "aria-describedby": "upload-error-26",
+          "id": "upload-25",
         }
       }
       multiple={false}
@@ -74,17 +79,22 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
   >
     <label
       className=""
-      htmlFor="upload-23"
+      htmlFor="upload-25"
     >
       Cover
     </label>
     <react-dropzone
-      accept="image/*"
+      accepts={
+        Object {
+          "accepts": "image/*",
+          "extensions": "gif, jpeg, jpg, png, svg",
+        }
+      }
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-24",
-          "id": "upload-23",
+          "aria-describedby": "upload-error-26",
+          "id": "upload-25",
         }
       }
       multiple={false}
@@ -152,17 +162,22 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
   >
     <label
       className=""
-      htmlFor="upload-23"
+      htmlFor="upload-25"
     >
       Cover
     </label>
     <react-dropzone
-      accept="image/*"
+      accepts={
+        Object {
+          "accepts": "image/*",
+          "extensions": "gif, jpeg, jpg, png, svg",
+        }
+      }
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-24",
-          "id": "upload-23",
+          "aria-describedby": "upload-error-26",
+          "id": "upload-25",
         }
       }
       multiple={false}
@@ -230,17 +245,22 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
   >
     <label
       className=""
-      htmlFor="upload-23"
+      htmlFor="upload-25"
     >
       Cover
     </label>
     <react-dropzone
-      accept="image/*"
+      accepts={
+        Object {
+          "accepts": "image/*",
+          "extensions": "gif, jpeg, jpg, png, svg",
+        }
+      }
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-24",
-          "id": "upload-23",
+          "aria-describedby": "upload-error-26",
+          "id": "upload-25",
         }
       }
       multiple={false}

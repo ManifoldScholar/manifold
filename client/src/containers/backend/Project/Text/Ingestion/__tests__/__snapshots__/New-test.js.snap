@@ -21,7 +21,7 @@ exports[`Project Text Ingestion New Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="upload-17"
+                htmlFor="upload-19"
               >
                 Upload a file
               </label>
@@ -43,11 +43,17 @@ exports[`Project Text Ingestion New Container renders correctly 1`] = `
                 for supported file types and directory structure.
               </span>
               <react-dropzone
+                accepts={
+                  Object {
+                    "accepts": null,
+                    "extensions": null,
+                  }
+                }
                 className="form-dropzone style-landscape"
                 inputProps={
                   Object {
-                    "aria-describedby": "upload-error-18",
-                    "id": "upload-17",
+                    "aria-describedby": "upload-error-20",
+                    "id": "upload-19",
                   }
                 }
                 multiple={false}

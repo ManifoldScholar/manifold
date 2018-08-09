@@ -17,7 +17,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor="upload-19"
+            htmlFor="upload-21"
           >
             Press Logo
           </label>
@@ -27,12 +27,17 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
             Logos are constrained at 40px wide with flexible height. For retina displays, upload logos that are 80px wide.
           </span>
           <react-dropzone
-            accept="image/*"
+            accepts={
+              Object {
+                "accepts": "image/*",
+                "extensions": "gif, jpeg, jpg, png, svg",
+              }
+            }
             className="form-dropzone style-square"
             inputProps={
               Object {
-                "aria-describedby": "upload-error-20",
-                "id": "upload-19",
+                "aria-describedby": "upload-error-22",
+                "id": "upload-21",
               }
             }
             multiple={false}

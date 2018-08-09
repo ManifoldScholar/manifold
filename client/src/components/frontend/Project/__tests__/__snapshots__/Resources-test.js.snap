@@ -49,12 +49,12 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
         </button>
         <label
           className="screen-reader-text"
-          htmlFor="filters-search-22"
+          htmlFor="filters-search-24"
         >
           Enter Search Criteria
         </label>
         <input
-          id="filters-search-22"
+          id="filters-search-24"
           onChange={[Function]}
           placeholder="Search"
           type="text"
