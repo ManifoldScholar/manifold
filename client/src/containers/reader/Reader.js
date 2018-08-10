@@ -15,7 +15,7 @@ import { HigherOrder as HigherOrderContainer } from "containers/global";
 import { ReaderNotes } from "containers/reader";
 import { select, grab, isEntityLoaded } from "utils/entityUtils";
 import { commonActions } from "actions/helpers";
-import { textsAPI, sectionsAPI, requests } from "api";
+import { textsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import locationHelper from "helpers/location";
 import { childRoutes } from "helpers/router";
