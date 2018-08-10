@@ -323,8 +323,13 @@ export class ProjectTextsContainer extends PureComponent {
     };
     const { refresh, project } = this.props;
     return childRoutes(this.props.route, {
-      childProps: { refresh, project },
-      factory
+      drawer: true,
+      drawerProps: {
+        lockScroll: "always",
+        wide: true,
+        lockScrollClickCloses: false
+      },
+      childProps: { refresh, project }
     });
   }
 

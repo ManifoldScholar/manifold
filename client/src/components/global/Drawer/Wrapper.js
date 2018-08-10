@@ -7,6 +7,7 @@ import isString from "lodash/isString";
 import FocusTrap from "focus-trap-react";
 import tabbable from "tabbable";
 import has from "lodash/has";
+import classnames from "classnames";
 import { notificationActions } from "actions";
 
 export default class DrawerWrapper extends PureComponent {
@@ -29,6 +30,7 @@ export default class DrawerWrapper extends PureComponent {
     closeUrl: PropTypes.string,
     closeCallback: PropTypes.func,
     lockScroll: PropTypes.string,
+    lockScrollClickCloses: PropTypes.bool,
     entrySide: PropTypes.string,
     style: PropTypes.string,
     history: PropTypes.object,
@@ -50,8 +52,10 @@ export default class DrawerWrapper extends PureComponent {
   static defaultProps = {
     connected: false,
     lockScroll: "hover",
+    lockScrollClickCloses: true,
     open: false,
     style: "backend",
+    wide: false,
     entrySide: "right",
     includeDrawerFrontMatter: true,
     returnFocusOnDeactivate: true,
@@ -200,14 +204,14 @@ export default class DrawerWrapper extends PureComponent {
   }
 
   renderDrawer() {
-    const entrySideClass =
-      this.props.entrySide === "left" ? this.props.entrySide : "";
+    const drawerClasses = classnames(
+      `drawer-${this.props.style}`,
+      { left: this.props.entrySide === "left" },
+      { wide: this.props.wide }
+    );
 
     return (
-      <div
-        key="drawer"
-        className={`drawer-${this.props.style} ${entrySideClass}`}
-      >
+      <div key="drawer" className={drawerClasses}>
         <FocusTrap
           ref={this.focusTrapNode}
           active={this.state.focusable && this.props.focusTrap}
@@ -251,9 +255,11 @@ export default class DrawerWrapper extends PureComponent {
             <div className={this.props.identifier}>
               <div
                 className="drawer-overlay"
-                onClick={this.handleLeaveEvent}
                 role="button"
                 tabIndex="0"
+                {...(this.props.lockScrollClickCloses
+                  ? { onClick: this.handleLeaveEvent }
+                  : {})}
               />
               {this.renderDrawer()}
             </div>

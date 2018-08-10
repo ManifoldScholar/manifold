@@ -2,6 +2,7 @@
 
 exports[`Backend Project Texts Container renders correctly 1`] = `
 <section>
+  <span />
   <div
     className="buttons-icon-horizontal maintain"
   >
