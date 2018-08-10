@@ -105,25 +105,22 @@ export default class ProjectThumbnail extends Component {
       );
     }
 
-    const figureClass = classNames("figure-wrapper", {
-      "figure-wrapper-placeholder": project.attributes.avatarStyles.small,
+    const figureClass = classNames("cover", {
+      "cover-placeholder": project.attributes.avatarStyles.small,
       dim: project.attributes.draft
     });
 
     return (
       <Link to={lh.link("frontendProject", project.attributes.slug)}>
-        {/* Figure wrapper, controls maximum width of figure */}
-        <div className={figureClass}>
-          <figure>
-            <FrontEndProject.Cover project={project} />
-            <FrontEndProject.Follow
-              project={project}
-              authenticated={this.props.authenticated}
-              favorites={this.props.favorites}
-              dispatch={this.props.dispatch}
-            />
-          </figure>
-        </div>
+        <figure className={figureClass}>
+          <FrontEndProject.Cover project={project} />
+          <FrontEndProject.Follow
+            project={project}
+            authenticated={this.props.authenticated}
+            favorites={this.props.favorites}
+            dispatch={this.props.dispatch}
+          />
+        </figure>
         {projectMeta}
       </Link>
     );

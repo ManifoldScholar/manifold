@@ -1,4 +1,4 @@
-// Grid-style view of list (used with Projects currently)
+// Grid-style view of list (used with backend All Projects currently)
 // Uses a version of .vertical-list-primary styles for mobile
 .grid-list {
   margin-bottom: 24px;
@@ -9,8 +9,7 @@
     flex-direction: column;
 
     @include respond($break75) {
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-flow: row wrap;
     }
   }
 
@@ -22,7 +21,6 @@
 
     @include respond($break75) {
       flex: 1 1 25%;
-      flex-direction: column;
       max-width: 25%;
       margin-bottom: 18px;
       border-bottom: none;
@@ -48,7 +46,7 @@
       @include respond($break75) {
         flex-direction: column;
         height: 100%;
-        padding: 24px;
+        padding: 20px 24px;
       }
 
       &:hover, &:focus {
@@ -83,20 +81,7 @@
       }
     }
 
-    .figure-wrapper {
-      max-width: 129px;
-
-      + .meta {
-        padding-left: 15px;
-
-        @include respond($break75) {
-          padding-left: 0;
-        }
-      }
-    }
-
     .cover {
-      @include projectGridFigure;
       left: 0;
       min-width: 50px;
       max-width: 50px;
@@ -105,20 +90,25 @@
       padding-top: 0;
 
       @include respond($break75) {
-        left: -4px;
-        width: auto;
-        max-width: 100%;
-        margin-bottom: 20px;
-        padding-top: 109%;
+        width: 100%;
+        min-width: 100%;
+        height: 120px;
+        margin-bottom: 16px;
+      }
+
+      + .meta {
+        padding-left: 15px;
+
+        @include respond($break75) {
+          padding-left: 0;
+        }
       }
 
       img, svg {
-        position: static;
         width: 50px;
         height: auto;
 
         @include respond($break75) {
-          position: absolute;
           width: auto;
           height: 100%;
         }
@@ -126,8 +116,7 @@
 
       img {
         border: 1px solid transparent;
-        transition: border $duration $timing,
-          background-color $duration $timing;
+        transition: border $duration $timing;
       }
 
       svg {
@@ -135,7 +124,8 @@
         transition: fill $duration $timing;
 
         @include respond($break75) {
-          max-height: 91%;
+          max-width: 100px;
+          max-height: 110px;
         }
       }
     }

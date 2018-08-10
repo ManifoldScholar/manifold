@@ -51,23 +51,23 @@ export default class ProjectListItem extends PureComponent {
   }
 
   renderProjectImage(project) {
-    if (project.attributes.coverStyles.smallPortrait) {
-      return (
-        <img
-          src={project.attributes.coverStyles.smallPortrait}
-          alt="Project Cover"
-        />
-      );
-    }
-    if (project.attributes.avatarStyles.smallSquare) {
-      return (
-        <img
-          src={project.attributes.avatarStyles.smallSquare}
-          alt="Project Cover"
-        />
-      );
-    }
-    return <GlobalProject.Placeholder />;
+    const meta = project.attributes.avatarMeta.original;
+    const hasAvatarStyles = project.attributes.avatarStyles.original;
+
+    if (!meta) {
+      return <GlobalProject.Placeholder />;
+    } else {
+      if (!hasAvatarStyles) {
+        return <GlobalProject.Placeholder />;
+      } else {
+        const imageStyle =
+          meta.width >= meta.height
+            ? project.attributes.avatarStyles.smallSquare
+            : project.attributes.avatarStyles.small;
+
+        return <img src={imageStyle} alt={`View ${project.attributes.title}`} />;
+      }
+    };
   }
 
   render() {
@@ -77,11 +77,9 @@ export default class ProjectListItem extends PureComponent {
       <li key={project.id}>
         <Link to={this.projectLink(project)}>
           <header>
-            <div className="figure-wrapper">
-              <figure className="cover">
-                {this.renderProjectImage(project)}
-              </figure>
-            </div>
+            <figure className="cover">
+              {this.renderProjectImage(project)}
+            </figure>
             <div className="meta">
               <h3 className="name">
                 <span className="title-text">{attr.title}</span>
