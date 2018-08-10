@@ -102,7 +102,11 @@ describe("store/reducers/entityEditor", () => {
             }
           },
           source: {
-            id: "1"
+            id: "1",
+            attributes: {
+              anAttribute: "test",
+              anObjectAttribute: anObject
+            }
           }
         }
       }
@@ -162,7 +166,19 @@ describe("store/reducers/entityEditor", () => {
       ).toBe(true);
     });
 
-    it("should not mutate an object attribute when necessary", () => {
+    it("should not unnecessarily mutate an object attribute when changing a property results in no actual change", () => {
+      const action = entityEditorActions.set(
+        "a",
+        "attributes.anAttribute.$set",
+        "test"
+      );
+      const state = entityEditorReducer(initialState, action);
+      expect(
+        Object.is(state.sessions.a.dirty.attributes.anObjectAttribute, anObject)
+      ).toBe(true);
+    });
+
+    it("should mutate an object attribute when necessary", () => {
       const state = entityEditorReducer(initialState, objectOverwriteAction);
       expect(
         Object.is(state.sessions.a.dirty.attributes.anObjectAttribute, anObject)
