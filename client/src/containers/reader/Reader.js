@@ -43,24 +43,13 @@ export class ReaderContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
     const promises = [];
     const state = getState();
-    const { sectionId, textId } = match.params;
-    const sectionLoaded = sectionId
-      ? isEntityLoaded("textSections", sectionId, state)
-      : false;
+    const { textId } = match.params;
     const textLoaded = textId ? isEntityLoaded("texts", textId, state) : false;
 
     if (textId && !textLoaded) {
       const textCall = textsAPI.show(textId);
       const { promise: one } = dispatch(request(textCall, requests.rText));
       promises.push(one);
-    }
-
-    if (sectionId && !sectionLoaded) {
-      const sectionCall = sectionsAPI.show(sectionId);
-      const { promise: two } = dispatch(
-        request(sectionCall, requests.rSection)
-      );
-      promises.push(two);
     }
     return Promise.all(promises);
   };
