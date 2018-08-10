@@ -54,7 +54,7 @@ export default class VisibilityMenuBody extends PureComponent {
 
   renderCheckbox(key, filterState, format, index) {
     let label = capitalize(key);
-    const checkboxId = key + "-checkbox-" + index;
+    const checkboxId = format + "-checkbox-" + index;
     if (key === "all") label = "Show All";
 
     return (

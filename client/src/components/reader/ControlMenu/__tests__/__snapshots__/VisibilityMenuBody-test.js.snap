@@ -18,11 +18,11 @@ exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] =
       >
         <label
           className="checkbox"
-          htmlFor="yours-checkbox-0"
+          htmlFor="highlights-checkbox-0"
         >
           <input
             checked={true}
-            id="yours-checkbox-0"
+            id="highlights-checkbox-0"
             onChange={[Function]}
             type="checkbox"
           />
@@ -38,11 +38,11 @@ exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] =
         </label>
         <label
           className="checkbox"
-          htmlFor="others-checkbox-1"
+          htmlFor="highlights-checkbox-1"
         >
           <input
             checked={true}
-            id="others-checkbox-1"
+            id="highlights-checkbox-1"
             onChange={[Function]}
             type="checkbox"
           />
@@ -71,11 +71,11 @@ exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] =
       >
         <label
           className="checkbox"
-          htmlFor="yours-checkbox-0"
+          htmlFor="annotations-checkbox-0"
         >
           <input
             checked={true}
-            id="yours-checkbox-0"
+            id="annotations-checkbox-0"
             onChange={[Function]}
             type="checkbox"
           />
@@ -91,11 +91,11 @@ exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] =
         </label>
         <label
           className="checkbox"
-          htmlFor="others-checkbox-1"
+          htmlFor="annotations-checkbox-1"
         >
           <input
             checked={true}
-            id="others-checkbox-1"
+            id="annotations-checkbox-1"
             onChange={[Function]}
             type="checkbox"
           />
@@ -124,11 +124,11 @@ exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] =
       >
         <label
           className="checkbox"
-          htmlFor="all-checkbox-0"
+          htmlFor="resources-checkbox-0"
         >
           <input
             checked={true}
-            id="all-checkbox-0"
+            id="resources-checkbox-0"
             onChange={[Function]}
             type="checkbox"
           />
