@@ -3,7 +3,7 @@
 exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
-    <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} connected={false} lockScroll=\\"hover\\" entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true} focusTrap={true}>
+    <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} connected={false} lockScroll=\\"hover\\" lockScrollClickCloses={true} wide={false} entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true} focusTrap={true}>
       <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
         <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
           <span>
@@ -11,7 +11,7 @@ exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
               <div className={[undefined]}>
                 <Utility.EdgeLockScroll>
                   <div className=\\"edge-lock-scroll\\">
-                    <div className=\\"drawer-backend \\">
+                    <div className=\\"drawer-backend\\">
                       <focus-trap-react active={false} focusTrapOptions={{...}}>
                         <div className=\\"drawer-bar\\">
                           <div className=\\"drawer-title\\">
