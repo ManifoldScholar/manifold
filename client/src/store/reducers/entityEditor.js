@@ -2,7 +2,7 @@ import { handleActions } from "redux-actions";
 import update from "immutability-helper";
 import lodashSet from "lodash/set";
 import lodashGet from "lodash/get";
-import lodashOmit from "lodash/omit";
+import lodashUnset from "lodash/unset";
 import flatMapDeep from "lodash/flatMapDeep";
 
 const initialState = {
@@ -62,7 +62,8 @@ const set = (state, action) => {
   const dirty = Object.assign({}, state.sessions[id].dirty);
   let newDirty;
   if (value === sourceValue) {
-    newDirty = lodashOmit(dirty, setPathToGetPath(path));
+    lodashUnset(dirty, setPathToGetPath(path));
+    newDirty = dirty;
   } else {
     lodashSet(dirty, setPathToGetPath(path), null);
     newDirty = update(dirty, setPath);
