@@ -22,11 +22,11 @@ class IngestionUploader < TusUploader
 
       module_eval <<~RUBY, __FILE__, __LINE__ + 1
       def #{@name}_file_name
-        #{@name}.original_filename
+        #{@name}&.original_filename
       end
 
       def #{@name}_path
-        #{@name}.to_io.path
+        #{@name}&.to_io.path
       end
       RUBY
     end
