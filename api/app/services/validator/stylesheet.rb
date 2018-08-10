@@ -39,11 +39,20 @@ module Validator
       cleaned
     end
 
+    # 12pt = 16px
+    def calc_rel_font_size_ratio(value)
+      if (value =~ /\d+pt/).present?
+        (value.to_f / 12).round(3)
+      elsif (value =~ /\d+px/).present?
+        (value.to_f / 16).round(3)
+      elsif (value =~ /\d+em/).present?
+        value
+      end
+    end
+
     def maybe_transform_font_sizes(value)
-      match = !(value =~ /\d+pt|\d+px/).nil?
-      return "#{value.to_f / 16}rem" if match
-      match = !(value =~ /\d+em/).nil?
-      return "#{value.to_f}rem" if match
+      calculated = calc_rel_font_size_ratio value
+      return "#{calculated.to_f}rem" if calculated.present?
       value
     end
 

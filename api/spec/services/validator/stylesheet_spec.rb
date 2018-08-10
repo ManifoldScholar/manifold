@@ -224,7 +224,7 @@ RSpec.describe Validator::Stylesheet do
   describe "font-sizes" do
     it "are mapped to rem units when absolute" do
       invalid = ".test { font-size: 22pt; }"
-      valid = "#{scope_selector}  .test { font-size: 1.375rem; }"
+      valid = "#{scope_selector}  .test { font-size: 1.833rem; }"
       results = validator.validate(invalid)
       expect(results).to eq_ignoring_whitespace valid
     end
