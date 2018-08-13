@@ -4,6 +4,7 @@ import { HigherOrder } from "containers/global";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
+import lh from "helpers/linkHandler";
 
 export class NavigationSecondary extends Component {
   static displayName = "Navigation.Secondary";
@@ -14,10 +15,15 @@ export class NavigationSecondary extends Component {
     panel: PropTypes.bool
   };
 
+  pathForLink(link) {
+    const args = link.args || [];
+    return lh.link(link.route, ...args);
+  }
+
   renderItem(link) {
     return (
-      <li key={link.key}>
-        <NavLink to={link.path} activeClassName="active">
+      <li key={link.route}>
+        <NavLink to={this.pathForLink(link)} activeClassName="active">
           {link.label}
         </NavLink>
       </li>
@@ -37,7 +43,7 @@ export class NavigationSecondary extends Component {
             if (link.ability)
               return (
                 <HigherOrder.Authorize
-                  key={`${link.key}-wrapped`}
+                  key={`${link.route}-wrapped`}
                   entity={link.entity}
                   ability={link.ability}
                 >
@@ -52,11 +58,7 @@ export class NavigationSecondary extends Component {
   }
 
   renderPanel(props) {
-    return (
-      <aside className="aside">
-        {this.renderContents(props)}
-      </aside>
-    );
+    return <aside className="aside">{this.renderContents(props)}</aside>;
   }
   renderNav(props) {
     if (props.panel) return this.renderPanel(props);
@@ -64,7 +66,6 @@ export class NavigationSecondary extends Component {
   }
 
   render() {
-
     return (
       <HigherOrder.BlurOnLocationChange location={this.props.location}>
         {this.renderNav(this.props)}

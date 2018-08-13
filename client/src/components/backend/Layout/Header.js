@@ -18,7 +18,7 @@ export default class LayoutHeader extends Component {
   };
 
   render() {
-    const links = navigation.backend(this.props.match, this.props.location);
+    const links = navigation.backend();
 
     return (
       <HigherOrder.BlurOnLocationChange location={this.props.location}>

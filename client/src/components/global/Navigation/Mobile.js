@@ -1,21 +1,22 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Navigation, Search, Avatar } from "components/global";
 import { HigherOrder } from "containers/global";
 import { HigherOrder as HigherOrderComponent } from "components/global";
 import { NavLink, withRouter } from "react-router-dom";
+import { matchPath } from "react-router";
 import classnames from "classnames";
-import get from "lodash/get";
-import hasIn from "lodash/hasIn";
+import lh from "helpers/linkHandler";
+import memoize from "lodash/memoize";
+import UserLinks from "./Mobile/UserLinks";
+import MobileSearch from "./Mobile/Search";
 
-export class NavigationMobile extends PureComponent {
+export class NavigationMobile extends Component {
   static displayName = "Navigation.Mobile";
 
   static propTypes = {
     links: PropTypes.array,
     location: PropTypes.object,
     authentication: PropTypes.object,
-    visibility: PropTypes.object,
     commonActions: PropTypes.object.isRequired,
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired
@@ -23,190 +24,149 @@ export class NavigationMobile extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = this.initialState(props);
+    this.state = this.initialState;
   }
 
-  initialState(props) {
-    const ids = props.links.map(link => link.key);
-    const state = { open: false };
-    ids.forEach(id => state[id] = false);
-
-    return state;
+  /*
+  There is some recursion involved in figuring out the active route, so let's be a little
+  conservative around when we update.
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.links !== this.props.links) return true;
+    if (nextProps.authentication !== this.props.authentication) return true;
+    if (nextProps.location !== this.props.location) return true;
+    if (nextProps.mode !== this.props.mode) return true;
+    return nextState !== this.state;
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.open) return null;
-    if (prevProps.location.pathname === this.props.location.pathname) return null;
-    this.setState(this.initialState(this.props));
+    if (prevProps.location.pathname === this.props.location.pathname)
+      return null;
+    this.setState(this.initialState);
   }
 
-  toggleNavItem = event => {
-    const label = event.target.getAttribute("id");
-    if (!label) return null;
+  get initialState() {
+    return {
+      expanded: [],
+      open: false
+    };
+  }
 
-    this.setState({ [label]: !this.state[label] });
-  };
+  get currentLabel() {
+    const selected = this.visitLinks(this.props.links);
+    if (!selected) return "";
+    return selected.headerLabel || selected.label;
+  }
+
+  pathForLink(link) {
+    const args = link.args || [];
+    return lh.link(link.route, ...args);
+  }
+
+  createExpandToggleHandler = memoize(key => {
+    return event => {
+      event.preventDefault();
+      this.toggleExpanded(key);
+    };
+  });
 
   toggleOpen = () => {
-    this.setState({ open: !this.state.open });
+    if (this.state.open) {
+      this.closeNavigation();
+    } else {
+      this.openNavigation();
+    }
   };
 
-  handleProfileClick = event => {
-    event.preventDefault();
-    this.props.commonActions.toggleSignInUpOverlay();
-    this.toggleOpen();
+  toggleExpanded = key => {
+    if (this.state.expanded.includes(key)) {
+      this.collapse(key);
+    } else {
+      this.expand(key);
+    }
   };
 
-  handleLogOutClick = event => {
-    event.preventDefault();
-    this.props.commonActions.logout();
-    this.toggleOpen();
-  };
-
-  getSelected(props) {
-    const { pathname } = props.location;
-    return props.links.find(link => link.path === pathname);
+  expand(key) {
+    if (this.state.expanded.includes(key)) return;
+    const expanded = this.state.expanded.slice(0);
+    expanded.push(key);
+    this.setState({ expanded });
   }
 
-  displayNickname = () => {
-    if (this.state.nickname) return this.state.nickname;
-    if (hasIn(this.props.authentication, "currentUser.attributes.nickname")) {
-      return this.props.authentication.currentUser.attributes.nickname;
-    }
-    if (hasIn(this.props.authentication, "currentUser.attributes.firstName")) {
-      return this.props.authentication.currentUser.attributes.firstName;
-    }
+  collapse(key) {
+    if (!this.state.expanded.includes(key)) return;
+    const expanded = this.state.expanded.slice(0);
+    expanded.splice(expanded.indexOf(key), 1);
+    this.setState({ expanded });
+  }
+
+  closeNavigation = () => {
+    this.setState({ open: false, expanded: [] });
   };
+
+  openNavigation = () => {
+    this.setState({ open: true, expanded: this.activeRoutes() });
+  };
+
+  activeRoutes() {
+    const active = [];
+    this.props.links.forEach(link => {
+      const route = lh.routeFromName(link.route);
+      const match = matchPath(this.props.location.pathname, route) !== null;
+      if (match) active.push(link.route);
+    });
+    return active;
+  }
+
+  visitLinks(links) {
+    const activeLink = links.find(link => {
+      const route = lh.routeFromName(link.route);
+      return matchPath(this.props.location.pathname, route) !== null;
+    });
+    if (activeLink && activeLink.children) {
+      return this.visitLinks(activeLink.children);
+    }
+    return activeLink;
+  }
 
   renderItem(link) {
     const children = link.children || [];
-
-    if (children.length === 0) return (
-      <li key={link.key}>
-        <NavLink to={link.path} activeClassName="active" isActive={link.isActive}>
-          {link.label}
-        </NavLink>
-      </li>
-    );
-
-    const open = this.state[link.key] || false;
-
-    const classes = classnames({
-      nested: children.length > 0,
-      open: open,
-      active: this.getSelected(this.props) === link
+    const hasChildren = children && children.length > 0;
+    const expanded = this.state.expanded.includes(link.route);
+    const direction = expanded ? "up" : "down";
+    const path = this.pathForLink(link);
+    const exact = path === "/";
+    const wrapperClasses = classnames({
+      nested: hasChildren,
+      open: expanded
     });
 
-    const arrowDir = open ? "up" : "down";
-
     return (
-      <li key={link.key} onClick={this.toggleNavItem} className={classes} id={link.key}>
-        <i className={`manicon manicon-caret-${arrowDir}`} />
-        {link.label}
-
-        <ul>
-          {children.map(child => this.renderItem(child))}
-        </ul>
+      <li key={link.route} className={wrapperClasses}>
+        {hasChildren ? (
+          <i
+            role="button"
+            onClick={this.createExpandToggleHandler(link.route)}
+            className={`manicon manicon-caret-${direction}`}
+          />
+        ) : null}
+        <NavLink
+          to={path}
+          exact={exact}
+          onClick={this.closeNavigation}
+          activeClassName="active"
+        >
+          {link.label}
+        </NavLink>
+        {hasChildren ? (
+          <ul>{children.map(child => this.renderItem(child))}</ul>
+        ) : null}
       </li>
-    );
-  }
-
-  renderUserLinks(props) {
-    if (!props.authentication.authenticated) return (
-      <div className="user-links">
-        <ul>
-          <li>
-            <Avatar />
-            <button onClick={this.handleProfileClick}>
-              {"Login"}
-            </button>
-          </li>
-        </ul>
-      </div>
-    );
-
-    return (
-      <div className="user-links">
-        <ul>
-          <li>
-            <Avatar
-              url={get(
-                this.props.authentication,
-                "currentUser.attributes.avatarStyles.smallSquare"
-              )}
-            />
-            {this.displayNickname()}
-          </li>
-          <li>
-            <button onClick={this.handleProfileClick}>
-              <i
-                className="manicon manicon-person-pencil-simple"
-                aria-hidden="true"
-              />
-              {"Edit Profile"}
-            </button>
-          </li>
-          <li>
-            <button onClick={this.handleLogOutClick}>
-              <i
-                className="manicon manicon-circle-arrow-out-right-long"
-                aria-hidden="true"
-              />
-              {"Logout"}
-            </button>
-          </li>
-          <li>
-            {this.props.backendButton}
-          </li>
-        </ul>
-      </div>
-    );
-  }
-
-  renderSearch(props) {
-    if (props.mode !== "frontend") return null;
-
-    return (
-      <Search.Menu.Body
-        searchType={"frontend"}
-        visibility={{ search: true }}
-      />
-    );
-  }
-
-  renderPrimaryLinks(props) {
-    if (!this.state.open) return null;
-
-    return (
-      <HigherOrderComponent.BodyClass className={"no-scroll"}>
-        <React.Fragment>
-          <ul className="primary-links">
-            {props.links.map(link => {
-              if (link.ability)
-                return (
-                  <HigherOrder.Authorize
-                    key={`${link.key}-wrapped`}
-                    entity={link.entity}
-                    ability={link.ability}
-                  >
-                    {this.renderItem(link)}
-                  </HigherOrder.Authorize>
-                );
-              return this.renderItem(link);
-            })}
-            <li>
-              {this.renderSearch(props)}
-            </li>
-          </ul>
-          {this.renderUserLinks(props)}
-        </React.Fragment>
-      </HigherOrderComponent.BodyClass>
     );
   }
 
   render() {
-    const selected = this.getSelected(this.props);
-    const label = selected ? selected.label : null;
     const navClasses = classnames({
       "nested-nav": true,
       "hide-75": true,
@@ -216,13 +176,44 @@ export class NavigationMobile extends PureComponent {
 
     return (
       <nav className={navClasses}>
-        <div className="selected">
-          {label}
-        </div>
-        {this.renderPrimaryLinks(this.props)}
-        <i className={`manicon manicon-${triggerClass}`} onClick={this.toggleOpen} />
+        <div className="selected">{this.currentLabel}</div>
+        {this.state.open ? (
+          <HigherOrderComponent.BodyClass className={"no-scroll"}>
+            <React.Fragment>
+              <ul className="primary-links">
+                {this.props.links.map(link => {
+                  if (link.ability)
+                    return (
+                      <HigherOrder.Authorize
+                        key={`${link.route}-wrapped`}
+                        entity={link.entity}
+                        ability={link.ability}
+                      >
+                        {this.renderItem(link)}
+                      </HigherOrder.Authorize>
+                    );
+                  return this.renderItem(link);
+                })}
+                {this.props.mode === "frontend" ? (
+                  <li>
+                    <MobileSearch />
+                  </li>
+                ) : null}
+              </ul>
+              <UserLinks
+                {...this.props}
+                closeNavigation={this.closeNavigation}
+              />
+            </React.Fragment>
+          </HigherOrderComponent.BodyClass>
+        ) : null}
+        <i
+          role="button"
+          className={`manicon manicon-${triggerClass}`}
+          onClick={this.toggleOpen}
+        />
       </nav>
-    )
+    );
   }
 }
 

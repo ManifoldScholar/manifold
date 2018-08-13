@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { HigherOrder, FatalError, Utility } from "components/global";
-import HigherOrderContainer from "containers/global/HigherOrder";
 import { Layout } from "components/frontend";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, subjectsAPI, requests } from "api";
@@ -52,7 +51,8 @@ export class FrontendContainer extends Component {
     notifications: PropTypes.object,
     pages: PropTypes.array,
     settings: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
+    match: PropTypes.object
   };
 
   constructor(props) {

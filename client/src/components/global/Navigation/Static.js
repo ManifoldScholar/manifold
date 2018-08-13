@@ -8,6 +8,7 @@ import {
 } from "components/global";
 import { HigherOrder } from "containers/global";
 import { NavLink, withRouter } from "react-router-dom";
+import lh from "helpers/linkHandler";
 
 export class NavigationStatic extends PureComponent {
   static displayName = "Navigation.Static";
@@ -20,13 +21,31 @@ export class NavigationStatic extends PureComponent {
     visibility: PropTypes.object,
     commonActions: PropTypes.object.isRequired,
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-    mode: PropTypes.oneOf(["backend", "frontend"]).isRequired
+    mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
+    exact: PropTypes.bool
   };
 
+  static defaultProps = {
+    exact: false
+  };
+
+  pathForLink(link) {
+    const args = link.args || [];
+    return lh.link(link.route, ...args);
+  }
+
   renderStaticItem(link) {
+    /*
+    Top level links are always exact, or else the / home page link will be active for
+    /following and /page1
+    */
     return (
-      <li key={link.key}>
-        <NavLink to={link.path} activeClassName="active" isActive={link.isActive}>
+      <li key={link.route}>
+        <NavLink
+          to={this.pathForLink(link)}
+          exact={this.props.exact}
+          activeClassName="active"
+        >
           {link.label}
         </NavLink>
       </li>
@@ -39,16 +58,12 @@ export class NavigationStatic extends PureComponent {
     return (
       <li>
         <Search.Menu.Button
-          toggleSearchMenu={
-            this.props.commonActions.toggleSearchPanel
-          }
+          toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
           active={this.props.visibility.uiPanels.search}
         />
         <UIPanel
           id="search"
-          toggleVisibility={
-            this.props.commonActions.toggleSearchPanel
-          }
+          toggleVisibility={this.props.commonActions.toggleSearchPanel}
           visibility={this.props.visibility.uiPanels}
           bodyComponent={Search.Menu.Body}
           searchType="frontend"
@@ -67,28 +82,20 @@ export class NavigationStatic extends PureComponent {
     return (
       <nav className="user-links">
         <ul>
-          {this.props.backendButton && (
-            <li>
-              {this.props.backendButton}
-            </li>
-          )}
+          {this.props.backendButton && <li>{this.props.backendButton}</li>}
           {this.renderSearch(props)}
           <li>
             <UserMenuButton
               authentication={props.authentication}
               active={props.visibility.uiPanels.user}
-              showLoginOverlay={
-                props.commonActions.toggleSignInUpOverlay
-              }
+              showLoginOverlay={props.commonActions.toggleSignInUpOverlay}
               toggleUserMenu={props.commonActions.toggleUserPanel}
             />
             <UIPanel
               id="user"
               visibility={props.visibility.uiPanels}
               bodyComponent={UserMenuBody}
-              showLoginOverlay={
-                props.commonActions.toggleSignInUpOverlay
-              }
+              showLoginOverlay={props.commonActions.toggleSignInUpOverlay}
               startLogout={props.commonActions.logout}
               hideUserMenu={props.commonActions.toggleUserPanel}
               hidePanel={props.commonActions.toggleUserPanel}
@@ -107,7 +114,7 @@ export class NavigationStatic extends PureComponent {
             if (link.ability)
               return (
                 <HigherOrder.Authorize
-                  key={`${link.key}-wrapped`}
+                  key={`${link.route}-wrapped`}
                   entity={link.entity}
                   ability={link.ability}
                 >
@@ -119,7 +126,7 @@ export class NavigationStatic extends PureComponent {
         </ul>
         {this.renderUserMenu(this.props)}
       </nav>
-    )
+    );
   }
 }
 

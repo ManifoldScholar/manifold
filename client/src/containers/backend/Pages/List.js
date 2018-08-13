@@ -94,10 +94,7 @@ class PagesDashboardContainer extends PureComponent {
 
         <section className="text-category-list-secondary">
           <div className="text-category">
-            <header>
-              <h4 className="category-title highlight">Pages</h4>
-            </header>
-            <div className="instructional-copy margin-top">
+            <div className="instructional-copy">
               <p>
                 {`Pages can be used to offer content related to your Manifold installation.
               For example, you might create an "about" page in the header. Or, you could

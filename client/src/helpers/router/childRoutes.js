@@ -75,7 +75,6 @@ const renderChildRoutes = (route, renderOptions) => {
     Wrapper = DrawerSwitch;
     wrapperProps = Object.assign({}, wrapperProps, options.drawerProps);
   }
-
   return <Wrapper {...wrapperProps}>{mapped}</Wrapper>;
 };
 

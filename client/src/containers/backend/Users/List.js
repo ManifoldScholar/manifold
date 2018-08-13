@@ -99,11 +99,6 @@ export class UsersListContainer extends PureComponent {
 
     return (
       <div>
-        <header className="section-heading-secondary">
-          <h3>
-            {"Users"} <i className="manicon manicon-users" aria-hidden="true" />
-          </h3>
-        </header>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {users ? (
           <List.Searchable

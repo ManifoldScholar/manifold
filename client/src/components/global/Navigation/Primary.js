@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Navigation } from "components/global";
-import { HigherOrder } from "containers/global";
 import { Link, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
@@ -14,21 +13,12 @@ export class NavigationPrimary extends PureComponent {
     authentication: PropTypes.object,
     visibility: PropTypes.object,
     commonActions: PropTypes.object.isRequired,
-    mode: PropTypes.oneOf(["backend", "frontend"]).isRequired
+    mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
+    exact: PropTypes.bool
   };
 
-  backendButton = props => {
-    const currentUser = props.authentication.currentUser;
-
-    if (!currentUser || currentUser.attributes.kind === "project_author") return null;
-
-    const linkTo = props.mode === "backend" ? "frontend" : "backend";
-
-    return (
-      <Link className="button-mode" to={lh.link(linkTo)}>
-        {this.backendButtonLabel(currentUser, props.mode)}
-      </Link>
-    );
+  static defaultProps = {
+    exact: false
   };
 
   backendButtonLabel(currentUser, mode) {
@@ -62,12 +52,25 @@ export class NavigationPrimary extends PureComponent {
   }
 
   render() {
+    const currentUser = this.props.authentication.currentUser;
+    const linkTo = this.props.mode === "backend" ? "frontend" : "backend";
+    const backendButtonLabel = this.backendButtonLabel(
+      currentUser,
+      this.props.mode
+    );
+    const backendButton =
+      backendButtonLabel && currentUser ? (
+        <Link className="button-mode" to={lh.link(linkTo)}>
+          {this.backendButtonLabel(currentUser, this.props.mode)}
+        </Link>
+      ) : null;
+
     return (
       <React.Fragment>
-        <Navigation.Static backendButton={this.backendButton(this.props)} {...this.props} />
-        <Navigation.Mobile backendButton={this.backendButton(this.props)} {...this.props} />
+        <Navigation.Static backendButton={backendButton} {...this.props} />
+        <Navigation.Mobile backendButton={backendButton} {...this.props} />
       </React.Fragment>
-    )
+    );
   }
 }
 

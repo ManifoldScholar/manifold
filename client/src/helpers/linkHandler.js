@@ -20,10 +20,12 @@ class LinkHandler {
         this.extract(aRoute);
       });
     }
+    this.routes[name] = route;
   }
 
   setup() {
     this.handlers = {};
+    this.routes = {};
     getRoutes().forEach(route => {
       this.extract(route);
     });
@@ -31,6 +33,7 @@ class LinkHandler {
 
   constructor() {
     this.handlers = null;
+    this.routes = null;
   }
 
   link(name, ...args) {
@@ -44,6 +47,10 @@ class LinkHandler {
         throw e;
       }
     }
+  }
+
+  routeFromName(name) {
+    return this.routes[name];
   }
 
   nameFromType(prefix, suffix, entity) {

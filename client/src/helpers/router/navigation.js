@@ -1,98 +1,66 @@
-import lh from "helpers/linkHandler";
-import startsWith from "lodash/startsWith";
+import memoize from "lodash/memoize";
 
 class Navigation {
-  static frontend(match, location, authentication) {
-    const { pathname } = location;
-
-    const projectsActive = () => {
-      if (!match) return false;
-      return pathname === "/" || startsWith(pathname, "/project");
-    };
-    const followingActive = () => {
-      if (!match) return false;
-      return startsWith(pathname, "/following");
-    };
-
+  static frontend = memoize(authentication => {
     const out = [
       {
-        label: "Projects",
-        path: lh.link("frontend"),
-        key: "projects",
-        isActive: projectsActive
+        label: "Home",
+        route: "frontend"
       }
     ];
 
     if (authentication.currentUser) {
       out.push({
-          label: "Following",
-          path: lh.link("frontendFollowing"),
-          key: "projects-following",
-          isActive: followingActive });
+        label: "Following",
+        route: "frontendFollowing"
+      });
     }
-
     return out;
-  }
+  });
 
-  static backend(match, location) {
-    const isActive = () => {
-      if (!match) return false;
-
-      const { pathname } = location;
-      return pathname === "/backend";
-    };
-
+  static backend = memoize(() => {
     return [
       {
         label: "Dashboard",
-        path: lh.link("backend"),
-        key: "backend",
-        isActive: isActive
+        route: "backendDashboard"
       },
       {
         label: "Projects",
-        path: lh.link("backendProjects"),
-        key: "projects",
+        route: "backendProjects",
         children: [
           {
             label: "All Projects",
-            path: lh.link("backendProjects"),
-            key: "projects-all-projects"
+            route: "backendProjects"
           }
         ]
       },
       {
         label: "Records",
-        path: lh.link("backendRecords"),
-        key: "records",
+        route: "backendRecords",
         entity: ["user", "maker", "page", "feature"],
         ability: "update",
         children: [
           {
             label: "Makers",
-            path: lh.link("backendRecordsMakers"),
-            key: "records-makers",
+            route: "backendRecordsMakers",
             entity: "maker",
             ability: "update"
           },
           {
             label: "Users",
-            path: lh.link("backendRecordsUsers"),
-            key: "records-users",
+            route: "backendRecordsUsers",
             entity: "user",
             ability: "update"
           },
           {
             label: "Pages",
-            path: lh.link("backendRecordsPages"),
-            key: "records-pages",
+            route: "backendRecordsPages",
             entity: "page",
             ability: "update"
           },
           {
             label: "Features",
-            path: lh.link("backendRecordsFeatures"),
-            key: "records-features",
+            route: "backendRecordsFeatures",
             entity: "feature",
             ability: "update"
           }
@@ -100,217 +68,215 @@ class Navigation {
       },
       {
         label: "Settings",
-        path: lh.link("backendSettings"),
-        key: "settings",
+        route: "backendSettings",
         entity: "settings",
         ability: "update",
         children: [
           {
             label: "General",
-            path: lh.link("backendSettingsGeneral"),
-            key: "settings-general"
+            headerLabel: "Settings / General",
+            route: "backendSettingsGeneral"
           },
           {
             label: "Theme",
-            path: lh.link("backendSettingsTheme"),
-            key: "settings-theme"
+            headerLabel: "Settings / Theme",
+            route: "backendSettingsTheme"
           },
           {
             label: "Integrations",
-            path: lh.link("backendSettingsIntegrations"),
-            key: "settings-integrations"
+            headerLabel: "Settings / Integration",
+            route: "backendSettingsIntegrations"
           },
           {
             label: "Subjects",
-            path: lh.link("backendSettingsSubjects"),
-            key: "settings-subjects"
+            headerLabel: "Settings / Subjects",
+            route: "backendSettingsSubjects"
           },
           {
             label: "Email",
-            path: lh.link("backendSettingsEmail"),
-            key: "settings-email"
+            headerLabel: "Settings / Email",
+            route: "backendSettingsEmail"
           }
         ]
       }
-    ]
-  }
+    ];
+  });
 
   static collection(collection) {
+    const args = [collection.id];
     return [
       {
-        path: lh.link("backendCollectionGeneral", collection.id),
         label: "General",
-        key: "general",
+        route: "backendCollectionGeneral",
         entity: collection,
-        ability: "update"
+        ability: "update",
+        args
       },
       {
-        path: lh.link("backendCollectionResources", collection.id),
         label: "Resources",
-        key: "resources",
+        route: "backendCollectionResources",
         entity: collection,
-        ability: "update"
+        ability: "update",
+        args
       }
     ];
   }
 
-  static page(page) {
+  static page = memoize(page => {
+    const args = [page.id];
     return [
       {
-        path: lh.link("backendRecordsPageGeneral", page.id),
         label: "General",
-        key: "general",
+        route: "backendRecordsPageGeneral",
         entity: page,
-        ability: "update"
+        ability: "update",
+        args
       }
     ];
-  }
+  });
 
-  static project(project) {
+  static project = memoize(project => {
+    const args = [project.id];
     return [
       {
-        path: lh.link("backendProjectGeneral", project.id),
         label: "General",
-        key: "general",
+        route: "backendProjectGeneral",
         entity: project,
-        ability: "update"
+        ability: "update",
+        args
       },
       {
-        path: lh.link("backendProjectProjectPage", project.id),
         label: "Appearance",
-        key: "projectPage",
+        route: "backendProjectProjectPage",
         entity: project,
-        ability: "update"
+        ability: "update",
+        args
       },
       {
-        path: lh.link("backendProjectPermissions", project.id),
         label: "Permissions",
-        key: "permissions",
+        route: "backendProjectPermissions",
         entity: project,
-        ability: "managePermissions"
+        ability: "managePermissions",
+        args
       },
       {
-        path: lh.link("backendProjectCollaborators", project.id),
         label: "People",
-        key: "collaborators",
+        route: "backendProjectCollaborators",
         entity: project,
-        ability: "updateMakers"
+        ability: "updateMakers",
+        args
       },
       {
-        path: lh.link("backendProjectTexts", project.id),
         label: "Texts",
-        key: "texts",
+        route: "backendProjectTexts",
         entity: project,
-        ability: "manageTexts"
+        ability: "manageTexts",
+        args
       },
       {
-        path: lh.link("backendProjectResources", project.id),
         label: "Resources",
-        key: "resources",
+        route: "backendProjectResources",
         entity: project,
-        ability: "manageResources"
+        ability: "manageResources",
+        args
       },
       {
-        path: lh.link("backendProjectCollections", project.id),
         label: "Collections",
-        key: "collections",
+        route: "backendProjectCollections",
         entity: project,
-        ability: "manageCollections"
+        ability: "manageCollections",
+        args
       },
       {
-        path: lh.link("backendProjectEvents", project.id),
         label: "Activity",
-        key: "events",
+        route: "backendProjectEvents",
         entity: project,
-        ability: "manageEvents"
+        ability: "manageEvents",
+        args
       },
       {
-        path: lh.link("backendProjectMetadata", project.id),
         label: "Metadata",
-        key: "metadata",
+        route: "backendProjectMetadata",
         entity: project,
-        ability: "update"
+        ability: "update",
+        args
       },
       {
-        path: lh.link("backendProjectSocial", project.id),
         label: "Social Integrations",
-        key: "social",
+        route: "backendProjectSocial",
         entity: project,
-        ability: "manageSocials"
+        ability: "manageSocials",
+        args
       },
       {
-        path: lh.link("backendProjectLog", project.id),
         label: "Log",
-        key: "log",
+        route: "backendProjectLog",
         entity: project,
-        ability: "readLog"
+        ability: "readLog",
+        args
       }
     ];
-  }
+  });
 
-  static projects() {
+  static projects = memoize(() => {
     return [
       {
-        path: lh.link("backendProjects"),
         label: "All Projects",
-        key: "projects",
+        route: "backendProjects",
         entity: "project",
         ability: "update"
       }
     ];
-  }
+  });
 
-  static records() {
+  static records = memoize(() => {
     return [
       {
-        path: lh.link("backendRecordsMakers"),
         label: "Makers",
-        key: "makers",
+        route: "backendRecordsMakers",
         entity: "maker",
         ability: "update"
       },
       {
-        path: lh.link("backendRecordsUsers"),
         label: "Users",
-        key: "users",
+        route: "backendRecordsUsers",
         entity: "user",
         ability: "update"
       },
       {
-        path: lh.link("backendRecordsPages"),
         label: "Pages",
-        key: "pages",
+        route: "backendRecordsPages",
         entity: "page",
         ability: "update"
       },
       {
-        path: lh.link("backendRecordsFeatures"),
         label: "Features",
-        key: "features",
+        route: "backendRecordsFeatures",
         entity: "user",
         ability: "update"
       }
     ];
-  }
+  });
 
-  static resource(resource) {
+  static resource = memoize(resource => {
     const externalVideo = resource.attributes.externalVideo;
     const project = resource.relationships.project;
     const kind = resource.attributes.kind;
+    const args = [resource.id];
     const out = [
       {
-        path: lh.link("backendResourceGeneral", resource.id),
         label: "General",
-        key: "general",
+        route: "backendResourceGeneral",
         entity: project,
-        ability: "update"
+        ability: "update",
+        args
       },
       {
-        path: lh.link("backendResourceMetadata", resource.id),
         label: "Metadata",
-        key: "metadata",
+        route: "backendResourceMetadata",
         entity: project,
-        ability: "manageResources"
+        ability: "manageResources",
+        args
       }
     ];
     if (
@@ -321,93 +287,91 @@ class Navigation {
       (kind === "video" && !externalVideo)
     ) {
       out.splice(1, 0, {
-        path: lh.link("backendResourceVariants", resource.id),
         label: "Variants",
-        key: "variants",
+        route: "backendResourceVariants",
         entity: project,
-        ability: "update"
+        ability: "update",
+        args
       });
     }
     return out;
-  }
+  });
 
-  static settings() {
+  static settings = memoize(() => {
     return [
       {
-        path: lh.link("backendSettingsGeneral"),
         label: "General",
-        key: "general",
+        route: "backendSettingsGeneral",
         entity: "settings",
         ability: "update"
       },
       {
-        path: lh.link("backendSettingsTheme"),
         label: "Theme",
-        key: "theme",
+        route: "backendSettingsTheme",
         entity: "settings",
         ability: "update"
       },
       {
-        path: lh.link("backendSettingsIntegrations"),
         label: "Integrations",
-        key: "integrations",
+        route: "backendSettingsIntegrations",
         entity: "settings",
         ability: "update"
       },
       {
-        path: lh.link("backendSettingsSubjects"),
         label: "Subjects",
-        key: "subjects",
+        route: "backendSettingsSubjects",
         entity: "settings",
         ability: "update"
       },
       {
-        path: lh.link("backendSettingsEmail"),
         label: "Email",
-        key: "email",
+        route: "backendSettingsEmail",
         entity: "settings",
         ability: "update"
       }
     ];
-  }
+  });
 
-  static text(text) {
+  static text = memoize(text => {
+    const args = [text.id];
     return [
       {
-        path: lh.link("backendTextGeneral", text.id),
         label: "General",
-        key: "general",
+        route: "backendTextGeneral",
         entity: text,
-        ability: "update"
+        ability: "update",
+        args
       },
       {
-        path: lh.link("backendTextCollaborators", text.id),
         label: "People",
-        key: "collaborators",
+        route: "backendTextCollaborators",
         entity: text.relationships.project,
-        ability: "updateMakers"
+        ability: "updateMakers",
+        args
       },
       {
-        path: lh.link("backendTextMetadata", text.id),
         label: "Metadata",
-        key: "metadata",
+        route: "backendTextMetadata",
         entity: text,
-        ability: "update"
+        ability: "update",
+        args
       },
       {
-        path: lh.link("backendTextStyles", text.id),
         label: "Styles",
-        key: "styles"
+        route: "backendTextStyles",
+        entity: text,
+        ability: "update",
+        args
       },
       {
-        path: lh.link("backendTextIngestionsNew", text.id),
         label: "Reingest",
-        key: "reingest",
+        route: "backendTextIngestionsNew",
         entity: text,
-        ability: "update"
+        ability: "update",
+        args
       }
     ];
-  }
+  });
 }
 
 export default Navigation;

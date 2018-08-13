@@ -56,8 +56,10 @@ export default () => {
       routes: [
         {
           exact: true,
+          name: "backendDashboard",
           component: Backend.Dashboard,
-          path: "/backend"
+          path: "/backend/dashboard",
+          helper: () => "/backend/dashboard"
         },
         {
           name: "backendProjects",
@@ -97,7 +99,8 @@ export default () => {
                   exact: true,
                   component: Backend.ResourceImport.New,
                   path: "/backend/projects/:projectId/resource-import/:id",
-                  helper: (p, id) => `/backend/projects/${p}/resource-import/${id}`
+                  helper: (p, id) =>
+                    `/backend/projects/${p}/resource-import/${id}`
                 },
                 {
                   name: "backendResourceImportMap",
@@ -111,7 +114,8 @@ export default () => {
                   name: "backendResourceImportResults",
                   exact: true,
                   component: Backend.ResourceImport.Results,
-                  path: "/backend/projects/:projectId/resource-import/:id/results",
+                  path:
+                    "/backend/projects/:projectId/resource-import/:id/results",
                   helper: (p, id) =>
                     `/backend/projects/${p}/resource-import/${id}/results`
                 }
@@ -247,16 +251,20 @@ export default () => {
                   name: "backendTextIngestionEdit",
                   exact: false,
                   component: Backend.Text.Ingestion.Edit,
-                  path: "/backend/projects/text/:id/ingestion/:ingestionId/edit",
-                  helper: (t, i) => `/backend/projects/text/${t}/ingestion/${i}/edit`,
+                  path:
+                    "/backend/projects/text/:id/ingestion/:ingestionId/edit",
+                  helper: (t, i) =>
+                    `/backend/projects/text/${t}/ingestion/${i}/edit`,
                   modal: false
                 },
                 {
                   name: "backendTextIngestionIngest",
                   exact: false,
                   component: Backend.Ingestion.Ingest,
-                  path: "/backend/projects/text/:id/ingestion/:ingestionId/ingest",
-                  helper: (t, i) => `/backend/projects/text/${t}/ingestion/${i}/ingest`,
+                  path:
+                    "/backend/projects/text/:id/ingestion/:ingestionId/ingest",
+                  helper: (t, i) =>
+                    `/backend/projects/text/${t}/ingestion/${i}/ingest`,
                   modal: false
                 },
                 {
@@ -287,7 +295,8 @@ export default () => {
                       exact: false,
                       component: Backend.Project.Text.Ingestion.New,
                       path: "/backend/projects/:id/texts/ingestions/new",
-                      helper: p => `/backend/projects/${p}/texts/ingestions/new`,
+                      helper: p =>
+                        `/backend/projects/${p}/texts/ingestions/new`,
                       modal: true
                     },
                     {
@@ -320,13 +329,15 @@ export default () => {
                           exact: true,
                           component: Backend.Project.Category.New,
                           path: "/backend/projects/:id/texts/category/new",
-                          helper: p => `/backend/projects/${p}/texts/category/new`
+                          helper: p =>
+                            `/backend/projects/${p}/texts/category/new`
                         },
                         {
                           name: "backendProjectCategory",
                           exact: true,
                           component: Backend.Project.Category.Edit,
-                          path: "/backend/projects/:id/texts/category/:catId/edit",
+                          path:
+                            "/backend/projects/:id/texts/category/:catId/edit",
                           helper: (p, c) =>
                             `/backend/projects/${p}/texts/category/${c}/edit`
                         }
@@ -402,7 +413,8 @@ export default () => {
                   name: "backendProjectSocial",
                   exact: false,
                   component: Backend.Project.Social.Wrapper,
-                  path: "/backend/projects/:pId/social/:type(twitter-query)?/:qId?",
+                  path:
+                    "/backend/projects/:pId/social/:type(twitter-query)?/:qId?",
                   helper: p => `/backend/projects/${p}/social`,
                   routes: [
                     {
@@ -443,7 +455,7 @@ export default () => {
                   helper: p => `/backend/projects/${p}/general`
                 }
               ]
-            },
+            }
           ]
         },
         {
@@ -677,7 +689,8 @@ export default () => {
           path: "/projects/:id/events/:page?",
           helpers: {
             frontendProjectEvents: p => `/projects/${p}/events`,
-            frontendProjectEventsPage: (pr, pg) => `/projects/${pr}/events/${pg}`
+            frontendProjectEventsPage: (pr, pg) =>
+              `/projects/${pr}/events/${pg}`
           }
         },
         {

@@ -1,10 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import {
-  PressLogo,
-  HeaderNotifications,
-  Navigation
-} from "components/global";
+import { PressLogo, HeaderNotifications, Navigation } from "components/global";
 import { Link } from "react-router-dom";
 import get from "lodash/get";
 import HigherOrder from "containers/global/HigherOrder";
@@ -29,14 +25,14 @@ export default class LayoutHeader extends PureComponent {
   };
 
   frontendLinks(props) {
-    const out = navigation.frontend(this.props.match, this.props.location, this.props.authentication);
+    const out = navigation.frontend(this.props.authentication);
     const pages = props.pages || [];
     const pageLinks = pages.reduce((list, page) => {
       if (page.attributes.showInHeader) {
         const item = {
           label: page.attributes.title,
-          path: lh.link("frontendPage", page.id),
-          key: page.attributes.slug
+          route: "frontendPage",
+          args: [page.id]
         };
 
         list.push(item);
@@ -73,6 +69,7 @@ export default class LayoutHeader extends PureComponent {
               authentication={this.props.authentication}
               visibility={this.props.visibility}
               mode="frontend"
+              exact
             />
           </div>
 

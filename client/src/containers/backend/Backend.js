@@ -8,8 +8,8 @@ import { commonActions } from "actions/helpers";
 import { pagesAPI, requests } from "api";
 import { uiStateSnapshotActions, entityStoreActions } from "actions";
 import entityUtils from "utils/entityUtils";
-import { childRoutes } from "helpers/router";
-import startsWith from "lodash/startsWith";
+import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 const {
@@ -53,7 +53,7 @@ export class BackendContainer extends PureComponent {
   };
 
   constructor(props) {
-    super();
+    super(props);
     this.commonActions = commonActions(props.dispatch);
   }
 
@@ -116,6 +116,16 @@ export class BackendContainer extends PureComponent {
     return (
       <HigherOrder.BodyClass className={"backend bg-neutral90"}>
         <div>
+          <RedirectToFirstMatch
+            from={lh.link("backend")}
+            candidates={[
+              {
+                label: "Dashboard",
+                route: "backendDashboard"
+              }
+            ]}
+          />
+
           <Utility.SkipLink skipId={skipId} />
           <Utility.ScrollToTop />
           <HigherOrder.ScrollAware>

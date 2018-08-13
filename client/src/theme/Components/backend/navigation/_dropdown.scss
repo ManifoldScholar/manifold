@@ -1,11 +1,16 @@
 .dropdown-nav {
   @include templateHead;
-  font-weight: $semibold;
-  text-transform: none;
-  text-align: center;
-  color: $neutralWhite;
-  background-color: $neutral100;
   position: relative;
+  font-weight: $semibold;
+  color: $neutralWhite;
+  text-align: center;
+  text-transform: none;
+  background-color: $neutral100;
+
+  .trigger {
+    @include buttonUnstyled;
+    width: 100%;
+  }
 
   &.open {
     .selected {
@@ -17,32 +22,31 @@
     }
 
     ul {
-      opacity: 1;
       visibility: visible;
+      opacity: 1;
     }
   }
 
   &.static {
     &:hover .selected {
-      cursor: default;
       color: $neutralWhite;
+      cursor: default;
     }
   }
 
   ul {
     @include listUnstyled;
-    opacity: 0;
-    visibility: hidden;
     position: absolute;
     width: 100%;
-    background-color: $neutral100;
-    text-align: left;
-    border-top: 2px solid $neutral95;
     padding: 32px 43px;
+    text-align: left;
+    visibility: hidden;
+    background-color: $neutral100;
+    border-top: 2px solid $neutral95;
+    opacity: 0;
     transition: opacity $durationSlow $timing, visibility $durationSlow $timing;
 
     li {
-
       a {
         display: inline-block;
         color: $neutral45;
@@ -66,20 +70,20 @@
 
   .selected {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     padding: 10px 0;
 
     .manicon {
-      font-size: 8px;
-      margin-left: 10px;
       margin-top: 3px;
+      margin-left: 10px;
+      font-size: 8px;
       transition: transform $duration $timing;
     }
 
     &:hover {
-      cursor: pointer;
       color: $accentPrimary;
+      cursor: pointer;
     }
   }
 }

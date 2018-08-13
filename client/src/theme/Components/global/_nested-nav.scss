@@ -3,10 +3,10 @@
   $iconMargin40: -45px;
 
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   min-height: 22px;
+  text-align: center;
 
   @include respond($break40) {
     min-height:32px;
@@ -14,8 +14,8 @@
 
   .selected {
     @include templateHead;
-    color: $neutral50;
     font-size: 16px;
+    color: $neutral50;
 
     @include respond($break40) {
       font-size: 20px;
@@ -23,10 +23,10 @@
   }
 
   nav.search-menu {
-    margin-top: 40px;
-    padding: 0;
-    border: 1px solid $neutral50;
     width: 100%;
+    padding: 0;
+    margin-top: 40px;
+    border: 1px solid $neutral50;
 
     .search-query .input-magnify {
       min-width: 0;
@@ -48,22 +48,21 @@
     padding: 40px 40px 40px 70px;
     text-align: left;
 
+    button {
+      &:hover {
+        color: $neutral45;
+      }
+    }
+
     > ul {
       height: auto;
 
       > li {
         display: block;
 
-        &:first-child {
-          &:hover {
-            color: $neutral45;
-            pointer-events: none;
-          }
-        }
-
         + li {
-          margin-left: 0;
           margin-top: 25px;
+          margin-left: 0;
         }
       }
     }
@@ -89,8 +88,8 @@
       }
 
       &.manicon-person-pencil-simple {
-        font-size: 24px;
         top: 0;
+        font-size: 24px;
 
         @include respond($break40) {
           font-size: 28px;
@@ -98,21 +97,21 @@
       }
 
       &.manicon-circle-arrow-out-right-long {
-        font-size: 14px;
         top: 5px;
+        font-size: 14px;
 
         @include respond($break40) {
-          font-size: 18px;
           top: 5px;
+          font-size: 18px;
         }
       }
     }
 
     .button-mode {
+      display: inline-block;
+      padding: 10px 25px;
       margin-top: 5px;
       margin-left: $iconMarginBase;
-      padding: 10px 25px;
-      display: inline-block;
       letter-spacing: 0.125em;
 
       @include respond($break40) {
@@ -138,15 +137,15 @@
   }
 
   &.open {
-    overflow-y: scroll;
     position: fixed;
-    background-color: $neutralWhite;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 100%;
-    display: block;
     z-index: 500;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: $neutralWhite;
 
     .dark & {
       background-color: $neutral110;
@@ -211,6 +210,8 @@
     display: none;
   }
 
+
+
   li, a {
     @include templateHead;
     position: relative;
@@ -223,14 +224,22 @@
       font-size: 20px;
     }
 
+    &.active {
+      color: $neutral100;
+    }
+
+    .dark &.active {
+      color: $neutralWhite;
+    }
+
     .dark & {
       color: $neutral45;
     }
 
     &:hover, &:focus {
       color: $accentPrimary;
-      outline: 0;
       cursor: pointer;
+      outline: 0;
 
       .manicon {
         color: $accentPrimary;
@@ -246,10 +255,10 @@
     }
 
     .manicon {
-      font-size: 6px;
       position: absolute;
-      left: $iconMarginBase;
       top: 8px;
+      left: $iconMarginBase;
+      font-size: 6px;
 
       @include respond($break40) {
         left: $iconMargin40;
@@ -261,6 +270,12 @@
     }
 
     &.nested {
+      .manicon {
+        top: -7px;
+        left: $iconMarginBase - 15px;
+        padding: 15px 20px 15px 15px;
+      }
+
       &.open {
         ul {
           display: block;

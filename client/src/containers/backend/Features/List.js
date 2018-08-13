@@ -122,10 +122,7 @@ class ContentFeaturesList extends PureComponent {
 
         <section className="text-category-list-secondary">
           <div className="text-category">
-            <header>
-              <h4 className="category-title highlight">Features</h4>
-            </header>
-            <div className="instructional-copy margin-top">
+            <div className="instructional-copy">
               <p>
                 {`Features populate the featured content area at the top of the home
                   page. Use the button below to create a featured content element.`}

@@ -94,12 +94,6 @@ export class MakersListContainer extends PureComponent {
 
     return (
       <div>
-        <header className="section-heading-secondary">
-          <h3>
-            {"Makers"}{" "}
-            <i className="manicon manicon-users" aria-hidden="true" />
-          </h3>
-        </header>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {makers ? (
           <List.Searchable
