@@ -228,7 +228,7 @@ class FeatureDetailContainer extends PureComponent {
                   <section>
                     {previewFeature ? (
                       <div className="form-secondary form-section">
-                        <header class="form-section-label">
+                        <header className="form-section-label">
                           <span>Feature Preview</span>
                         </header>
                         <div className="form-input-group">

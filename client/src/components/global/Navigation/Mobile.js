@@ -116,6 +116,7 @@ export class NavigationMobile extends PureComponent {
       <div className="user-links">
         <ul>
           <li>
+            <Avatar />
             <button onClick={this.handleProfileClick}>
               {"Login"}
             </button>

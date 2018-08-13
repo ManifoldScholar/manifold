@@ -19,6 +19,9 @@ export class NavigationPrimary extends PureComponent {
 
   backendButton = props => {
     const currentUser = props.authentication.currentUser;
+
+    if (!currentUser || currentUser.attributes.kind === "project_author") return null;
+
     const linkTo = props.mode === "backend" ? "frontend" : "backend";
 
     return (

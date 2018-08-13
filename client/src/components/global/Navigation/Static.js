@@ -67,9 +67,11 @@ export class NavigationStatic extends PureComponent {
     return (
       <nav className="user-links">
         <ul>
-          <li>
-            {this.props.backendButton}
-          </li>
+          {this.props.backendButton && (
+            <li>
+              {this.props.backendButton}
+            </li>
+          )}
           {this.renderSearch(props)}
           <li>
             <UserMenuButton

@@ -57,14 +57,13 @@ export class NavigationDropdown extends Component {
       "dropdown-nav": true,
       open: this.state.open
     });
-    const arrowDir = this.state.open ? "up" : "down";
     const label = selected ? selected.label : "menu";
 
     return (
       <nav className={`${navClasses} ${this.props.classNames}`} onClick={this.toggleOpen}>
         <div className="selected">
           {label}
-          <i className={`manicon manicon-caret-${arrowDir}`} />
+          <i className="manicon manicon-caret-up" />
         </div>
         <ul>
           {props.links.map(link => {

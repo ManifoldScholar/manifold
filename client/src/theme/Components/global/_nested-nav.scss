@@ -191,6 +191,8 @@
       top: calc(50% - 6px);
       right: 4.5%;
       font-size: 12px;
+      -webkit-font-smoothing: auto;
+      -moz-osx-font-smoothing: auto;
 
       @include respond($break40) {
         top: calc(50% - 9px);

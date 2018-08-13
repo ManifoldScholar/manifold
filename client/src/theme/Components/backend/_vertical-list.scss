@@ -75,11 +75,19 @@
     @include listUnstyled;
     margin-top: 1em;
 
+    .backend-dashboard & {
+      margin-top: 0;
+    }
+
     li:first-child {
       // border-top: 0;
 
       a {
         padding-top: 10px;
+
+        .backend-dashboard & {
+          padding-top: 0;
+        }
       }
     }
 
