@@ -9,6 +9,7 @@ class Feature < ApplicationRecord
   include TrackedCreator
   include Concerns::HasFormattedAttributes
   include Attachments
+  include Filterable
 
   manifold_has_attached_file :background, :image
   manifold_has_attached_file :foreground, :image
@@ -18,7 +19,11 @@ class Feature < ApplicationRecord
 
   acts_as_list
 
-  default_scope { order(position: :asc) }
+  # Scopes
+  scope :by_home, lambda { |home|
+    next all if home.nil?
+    where(live: true).order("RANDOM()").limit(1)
+  }
 
   def to_s
     header

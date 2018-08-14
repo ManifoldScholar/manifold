@@ -4,7 +4,7 @@ module Api
     class FeaturesController < ApplicationController
 
       resourceful! Feature, authorize_options: { except: [:index, :show] } do
-        Feature.all
+        Feature.filter(feature_filter_params || {})
       end
 
       def index

@@ -23,7 +23,8 @@ export class ProjectSubjects extends PureComponent {
   static propTypes = {
     project: PropTypes.object,
     dispatch: PropTypes.func,
-    authentication: PropTypes.object
+    authentication: PropTypes.object,
+    wide: PropTypes.bool
   };
 
   constructor(props) {
@@ -91,6 +92,7 @@ export class ProjectSubjects extends PureComponent {
         entityBuilder={this.buildEntity}
         entityLabelAttribute="name"
         errors={get(this.props, "createSubjects.errors")}
+        wide
       />
     );
   }

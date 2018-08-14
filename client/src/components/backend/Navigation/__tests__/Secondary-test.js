@@ -6,14 +6,12 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 describe("Backend.Navigation.Secondary component", () => {
   const links = [
     {
-      path: "/link-1",
-      label: "Link One",
-      key: "one"
+      route: "backendProjects",
+      label: "projects",
     },
     {
-      path: "/link-2",
-      label: "Link Two",
-      key: "two"
+      route: "backendRecords",
+      label: "records",
     }
   ];
 

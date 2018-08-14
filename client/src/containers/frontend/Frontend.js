@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { HigherOrder, FatalError, Utility } from "components/global";
-import HigherOrderContainer from "containers/global/HigherOrder";
 import { Layout } from "components/frontend";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, subjectsAPI, requests } from "api";
@@ -52,7 +51,8 @@ export class FrontendContainer extends Component {
     notifications: PropTypes.object,
     pages: PropTypes.array,
     settings: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
+    match: PropTypes.object
   };
 
   constructor(props) {
@@ -83,6 +83,7 @@ export class FrontendContainer extends Component {
             <Layout.Header
               pages={this.props.pages}
               visibility={this.props.visibility}
+              match={this.props.match}
               location={this.props.location}
               authentication={this.props.authentication}
               notifications={this.props.notifications}
@@ -90,9 +91,6 @@ export class FrontendContainer extends Component {
               settings={this.props.settings}
             />
           </HigherOrder.ScrollAware>
-          <HigherOrderContainer.Authorize kind="any">
-            <Layout.MobileNav location={this.props.location} />
-          </HigherOrderContainer.Authorize>
           <main
             ref={mainContainer => {
               this.mainContainer = mainContainer;

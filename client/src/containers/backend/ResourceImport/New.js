@@ -85,6 +85,7 @@ export class ResourceImportNew extends PureComponent {
         ) : null}
         <Form.FieldGroup label="Step 1: Upload">
           <Form.Upload
+            wide
             label="Upload a CSV (File with Comma Separated Values)"
             accepts="csv"
             layout="horizontal"
@@ -94,8 +95,9 @@ export class ResourceImportNew extends PureComponent {
               resourceImport ? resourceImport.attributes.dataFilename : null
             }
           />
-          <div className="form-divider">or</div>
+          <div className="form-divider wide">or</div>
           <Form.TextInput
+            wide
             label="Google Sheets URL"
             afterChange={this.afterUrlChange}
             instructions="You can also import resources listed in a Google Sheet"

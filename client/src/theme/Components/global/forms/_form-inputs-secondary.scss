@@ -6,9 +6,9 @@
   width: 100%;
   // Explicit height so that elements can line up
   height: 32px;
-
   // Declared in em as it should change with font size
-  padding: 0;
+  padding: 0 0 0.75em;
+  font-size: 16px;
   color: $neutral40;
   vertical-align: top;
   background-color: transparent;
@@ -19,7 +19,8 @@
   transition: border-color $duration $timing;
 
   @include respond($break60) {
-    height: 41px;
+    height: 42px;
+    font-size: 18px;
   }
 
   .bg-neutral90 & {
@@ -46,7 +47,7 @@
   .form-input + .form-section,
   .form-section + .form-section,
   .form-section + .form-input {
-    margin-top: 32px;
+    margin-top: 20px;
 
     @include respond($break60) {
       margin-top: 40px;
@@ -66,7 +67,7 @@
   .instructions {
     @include templateCopy;
     display: block;
-    margin-bottom: 0.5em;
+    margin-top: 0.75em;
     font-size: 15px;
     font-style: italic;
     color: $neutral50;
@@ -90,8 +91,8 @@
       @include formLabelPrimary;
       display: block;
       margin-top: 0;
-      margin-bottom: 0.5em;
-      color: $neutral75;
+      margin-bottom: 1em;
+      color: $neutral70;
 
       &.below {
         margin-top: 0.6em;
@@ -99,13 +100,12 @@
       }
 
       &.has-instructions {
-        margin-bottom: 0.5em;
+        margin-bottom: 1em;
       }
 
       &.secondary {
         font-weight: normal;
       }
-
     }
 
     input[type='text'], input[type='password'] {
@@ -121,7 +121,7 @@
       @include templateCopy;
       width: 100%;
       padding: 1.2em;
-      font-size: 17px;
+      font-size: 16px;
       color: $neutral30;
       resize: vertical;
       background-color: transparent;
@@ -131,7 +131,7 @@
 
       @include respond($break70) {
         padding: 1.579em;
-        font-size: 19px;
+        font-size: 18px;
       }
     }
 
@@ -145,19 +145,88 @@
       }
     }
 
+    &.form-toggle-secondary {
+      // styled is fudged to look like other inputs
+      // though functionality is different
+      position: relative;
+
+      .form-input-heading {
+        @include formInputSecondary;
+        margin-bottom: 0.5em;
+        text-transform: inherit;
+        letter-spacing: inherit;
+
+        @include respond($break60) {
+          height: 38px;
+        }
+      }
+
+      .toggle-indicator {
+        position: absolute;
+        top: 2px;
+        right: 0;
+      }
+
+      .instructions {
+        margin-bottom: 0;
+      }
+    }
+
     .button-secondary {
       display: inline-block;
       width: auto;
     }
 
     &.submit {
-      .button-secondary {
+      .button-secondary, .button-secondary-dull {
         line-height: normal;
 
         + .button-secondary {
           margin-top: 0;
           margin-left: 15px;
         }
+      }
+    }
+  }
+
+  // CABS scoped to secondary for now, may become global
+  .form-date {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    @include respond($break90) {
+      flex-wrap: nowrap;
+    }
+
+    > * {
+      display: block;
+      flex: 0 1 47.64%;
+      margin-left: 0;
+
+      @include respond($break90) {
+        flex: auto;
+
+        &:not(:first-child) {
+          margin-left: 15px;
+        }
+      }
+    }
+
+    .form-select {
+      select {
+        width: auto;
+        min-width: 100%;
+      }
+    }
+
+    .form-input {
+      flex-basis: 100%;
+      margin-top: 1em;
+
+      @include respond($break90) {
+        flex-basis: auto;
+        margin-top: 0;
       }
     }
   }
@@ -182,16 +251,9 @@
 
     select {
       @include formInputSecondary;
-      height: auto;
-      padding: 0 42px 0 0; // OD
-      line-height: 1.8;
+      padding: 0 42px 0.75em 0; // OD
+      font-size: 16px;
       text-transform: none; // OD
-
-      @include respond($break60) {
-        height: auto; // OD
-        padding-bottom: 3px;
-        line-height: 1.7;
-      }
 
       &:focus {
         border-color: $accentPrimaryLight;

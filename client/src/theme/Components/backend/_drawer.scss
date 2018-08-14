@@ -1,6 +1,6 @@
 .drawer-backend {
   position: fixed;
-  top: 60px;
+  top: 50px;
   right: 0;
   bottom: 0;
   width: 100%;
@@ -21,7 +21,7 @@
   // overridden by media queries
   // scss-lint:disable DeclarationOrder
   @include respond($break40) {
-    top: 80px;
+    top: 72px;
   }
 
   @include respond($break65) {
@@ -35,6 +35,10 @@
       right: -400px;
       transition: right $duration $timing;
     }
+  }
+
+  @include respond($break75) {
+    top: 80px;
   }
 
   @include respond($break90) {

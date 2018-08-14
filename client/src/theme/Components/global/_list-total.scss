@@ -1,0 +1,46 @@
+.list-total {
+  @include utilityPrimary;
+  font-size: 14px;
+  color: $neutral50;
+
+  .vertical-list-primary & {
+    padding-bottom: 15px;
+    font-size: 15px;
+    color: $neutral70;
+    border-bottom: 1px solid $neutral80;
+
+    span {
+      color: $neutral30;
+    }
+
+    &.empty {
+      padding-top: 20px;
+      border-bottom: 0;
+    }
+
+    .drawer-primary & {
+      padding-bottom: 8px;
+    }
+  }
+
+  .section-heading-secondary & {
+    float: right;
+    color: $neutral75;
+  }
+
+  .backend-header.section-heading-secondary & {
+    float: none;
+    font-size: inherit;
+    color: $accentPrimary;
+  }
+
+  .resource-list .resource-count & {
+    + .meta-value {
+      padding-top: 5px;
+
+      @include respond($break60) {
+        padding-top: 0;
+      }
+    }
+  }
+}

@@ -11,6 +11,10 @@
     color: $neutral70;
   }
 
+  + .list-pagination-primary {
+    margin-top: 36px;
+  }
+
   ul {
     @include listUnstyled;
 
@@ -89,25 +93,25 @@
       @include formInputPrimary;
       width: 100%;
       margin: 0;
-      font-size: 18px;
-      line-height: 29px;
+      font-size: 16px;
+      line-height: 1.6em;
 
       @include respond($break60) {
-        font-size: 20px;
+        font-size: 18px;
       }
 
       @include respond($break70) {
-        font-size: 22px;
+        font-size: 20px;
       }
 
       .subtitle {
         @include headingSecondary;
         margin: 5px 0;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.4;
 
         @include respond($break60) {
-          font-size: 18px;
+          font-size: 16px;
         }
       }
 

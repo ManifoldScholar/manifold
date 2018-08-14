@@ -1,16 +1,23 @@
 .text-category-list-secondary {
+  + .buttons-icon-horizontal {
+    padding-right: 5px;
+    padding-left: 5px;
+
+    @include respond($break75) {
+      padding-right: 24px;
+      padding-left: 24px;
+    }
+  }
+
   .text-category {
     header {
-      display: table;
-      width: 100%;
-      padding: 1.063em 19px 0.938em;
-      font-size: 16px;
-      background-color: $neutral95;
+      @include roundedHeader;
 
       .category-title {
         @include utilityPrimary;
         display: table-cell;
         width: 100%;
+        font-size: 14px;
         font-weight: $medium;
         color: $neutral30;
 
@@ -212,7 +219,6 @@
       padding-right: 19px;
       text-align: right;
       white-space: nowrap;
-      vertical-align: middle;
     }
   }
 }

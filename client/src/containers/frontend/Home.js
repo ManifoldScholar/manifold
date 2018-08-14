@@ -5,7 +5,7 @@ import { ProjectList, Layout } from "components/frontend";
 import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
 import { entityStoreActions } from "actions";
-import { select, meta } from "utils/entityUtils";
+import { select, meta, isLoaded } from "utils/entityUtils";
 import { projectsAPI, featuresAPI, requests } from "api";
 import get from "lodash/get";
 import isArray from "lodash/isArray";
@@ -38,15 +38,25 @@ export class HomeContainer extends Component {
   };
 
   static fetchData = (getState, dispatch, location) => {
+    const promises = [];
     const featuredRequest = request(
       projectsAPI.featured(),
       requests.feProjectsFeatured
     );
-    const featuresRequest = request(featuresAPI.index(), requests.feFeatures);
     const { promise: one } = HomeContainer.fetchProjects(dispatch, location);
     const { promise: two } = dispatch(featuredRequest);
-    const { promise: three } = dispatch(featuresRequest);
-    return Promise.all([one, two, three]);
+    promises.push(one);
+    promises.push(two);
+
+    if (!isLoaded(requests.feFeatures, getState())) {
+      const featuresRequest = request(
+        featuresAPI.index({ home: true }),
+        requests.feFeatures
+      );
+      const { promise: three } = dispatch(featuresRequest);
+      promises.push(three);
+    }
+    return Promise.all(promises);
   };
 
   static mapStateToProps = state => {

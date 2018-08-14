@@ -1,0 +1,59 @@
+// Global backend header design
+.backend-header {
+  @include panelRounded;
+  max-width: $containerWidthFull - 100;
+
+  .breadcrumb-primary {
+    border-radius: 8px;
+  }
+
+  .wrapper {
+    @include containerPrototype;
+    padding-top: 25px;
+  }
+
+  &.section-heading-secondary {
+    padding-top: 1em;
+    padding-bottom: 1.125em;
+
+    h1 {
+      // CABS abstract to all .section-heading-secondary?
+      padding-left: 25px;
+      font-size: 20px;
+      font-weight: $medium;
+      color: $neutral70;
+      text-transform: none;
+      letter-spacing: 0;
+
+      @include respond($break60) {
+        font-size: 30px;
+      }
+
+      .manicon {
+        margin-right: 18px;
+      }
+    }
+
+    .manicon {
+      margin-right: 9px;
+      margin-left: 0;
+    }
+  }
+
+  .section-nav {
+    display: block;
+    border-radius: 0 0 8px 8px;
+
+    &.open {
+      border-radius: 0;
+    }
+
+    ul {
+      border-radius: 0 0 8px 8px;
+    }
+
+    @include respond($break65) {
+      display: none;
+    }
+  }
+}

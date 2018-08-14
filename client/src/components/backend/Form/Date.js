@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classnames from "classnames";
 import setter from "./setter";
 import parse from "date-fns/parse";
 import range from "lodash/range";
@@ -18,7 +19,8 @@ class FormDate extends Component {
     value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
     label: PropTypes.string,
     set: PropTypes.func.isRequired,
-    submitKey: PropTypes.string
+    submitKey: PropTypes.string,
+    wide: PropTypes.bool
   };
 
   constructor(props) {
@@ -168,8 +170,13 @@ class FormDate extends Component {
   }
 
   render() {
+    const inputClasses = classnames({
+      "form-input": true,
+      wide: this.props.wide
+    });
+
     return (
-      <div className="form-input">
+      <div className={inputClasses}>
         <h4 className="form-input-heading">{this.props.label}</h4>
         <div className="form-date">
           <div className="form-select input-month">

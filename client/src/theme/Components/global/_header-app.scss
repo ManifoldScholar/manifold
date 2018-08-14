@@ -24,7 +24,7 @@
       }
     }
 
-    .text-nav .active {
+    .text-nav .links a.active {
       color: $neutralWhite;
 
       &:focus {
@@ -34,7 +34,7 @@
       }
 
       &::before {
-        background-color: $neutralWhite;
+        display: none;
       }
     }
   }
@@ -68,61 +68,63 @@
     display: inline-block;
     vertical-align: middle;
 
-    &.show-50 {
-      @include show($break50, inline-block);
+    &.show-75 {
+      @include show($break75, inline-block);
     }
 
-    ul {
+    .links {
       @include listHorizontal;
-    }
 
-    li {
-      margin-right: 18px;
-
-      @include respond($break40) {
-        margin-right: 25px;
-      }
-
-      a {
-        @include templateHead;
-        position: relative;
-        font-size: 14px;
-        color: $neutral50;
-        text-decoration: none;
+      li {
+        margin-right: 18px;
 
         @include respond($break40) {
-          font-size: 16px;
+          margin-right: 25px;
         }
 
-        &:hover, &:focus {
-          color: $accentPrimary;
-          outline: 0;
-        }
-      }
+        a {
+          @include templateHead;
+          position: relative;
+          font-size: 14px;
+          color: $neutral50;
+          text-decoration: none;
 
-      &.active a {
-        color: $neutral90;
+          @include respond($break40) {
+            font-size: 16px;
+          }
 
-        &::before {
-          position: absolute;
-          bottom: -4px;
-          left: 0;
-          display: block;
-          width: 100%;
-          height: 2px;
-          content: '';
-          background-color: $neutral90;
-        }
+          &:hover, &:focus {
+            color: $accentPrimary;
+            outline: 0;
+          }
 
-        &:focus {
-          @include focusOutline;
-          outline-offset: 2px;
+          &.active {
+            color: $neutral90;
+
+            /* stylelint-disable max-nesting-depth */
+            &::before {
+              position: absolute;
+              bottom: -4px;
+              left: 0;
+              display: block;
+              width: 100%;
+              height: 2px;
+              content: '';
+              background-color: $neutral90;
+            }
+
+            &:focus {
+              @include focusOutline;
+              outline-offset: 2px;
+            }
+            /* stylelint-enable max-nesting-depth */
+          }
         }
       }
     }
   }
 
-  .menu-dropdowns {
+  .user-links {
     position: absolute;
     top: 0;
     right: $containerPaddingResp;
@@ -315,9 +317,13 @@
 
 // Header bump
 .browse main, .backend main {
-  padding-top: 60px;
+  padding-top: 50px;
 
   @include respond($break40) {
-    padding-top: 79px;
+    padding-top: 73px;
+  }
+
+  @include respond($break75) {
+    padding-top: 80px;
   }
 }

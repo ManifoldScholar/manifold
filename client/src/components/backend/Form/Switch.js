@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import setter from "./setter";
+import Instructions from "./Instructions";
 
 class FormSwitch extends Component {
   static displayName = "Form.Switch";
@@ -11,13 +12,15 @@ class FormSwitch extends Component {
     labelPos: PropTypes.string,
     className: PropTypes.string,
     labelClass: PropTypes.string,
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     set: PropTypes.func,
     value: PropTypes.any,
     customValues: PropTypes.shape({
       true: PropTypes.string,
       false: PropTypes.string
     }),
-    focusOnMount: PropTypes.bool
+    focusOnMount: PropTypes.bool,
+    wide: PropTypes.bool
   };
 
   static defaultProps = {
@@ -103,7 +106,13 @@ class FormSwitch extends Component {
       this.props.labelPos,
       this.props.labelClass
     );
-    const wrapperClasses = classnames("form-input", this.props.className);
+    const wrapperClasses = classnames(
+      {
+        "form-input": true,
+        wide: this.props.wide
+      },
+      this.props.className
+    );
     const indicatorClasses = classnames("toggle-indicator", {
       "has-focus": this.state.focused
     });
@@ -131,6 +140,7 @@ class FormSwitch extends Component {
           </div>
         </div>
         {this.props.labelPos === "below" ? label : null}
+        <Instructions instructions={this.props.instructions} />
       </div>
     );
   }

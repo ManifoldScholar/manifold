@@ -33,6 +33,7 @@ export default class FormUpload extends Component {
     errors: PropTypes.array,
     inputId: PropTypes.string,
     idForError: PropTypes.string,
+    wide: PropTypes.bool,
     progress: PropTypes.string,
     uploadError: PropTypes.string
   };
@@ -40,6 +41,7 @@ export default class FormUpload extends Component {
   static defaultProps = {
     layout: "square",
     accepts: null,
+    wide: false,
     inputId: uniqueId("upload-"),
     idForError: uniqueId("upload-error-")
   };
@@ -48,17 +50,8 @@ export default class FormUpload extends Component {
     super(props);
     this.state = {
       removed: false,
-      preview: null,
       attachment: null
     };
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    if (state.removed) return { preview: null }; // if removed, don't  show a preview
-    if (props.value) return { preview: props.value }; // if value, preview it
-    if (props.initialValue && !state.preview)
-      return { preview: props.initialValue };
-    return null;
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -76,7 +69,10 @@ export default class FormUpload extends Component {
   }
 
   get currentPreview() {
-    return this.state.preview;
+    if (this.state.removed) return null;
+    if (this.props.value) return this.props.value;
+    if (this.props.initialValue) return this.props.initialValue;
+    return null;
   }
 
   handleFileDrop = file => {
@@ -93,12 +89,16 @@ export default class FormUpload extends Component {
     const labelClass = classnames({
       "has-instructions": isString(this.props.instructions)
     });
+    const inputClasses = classnames({
+      "form-input": true,
+      wide: this.props.wide
+    });
     const inputProps = {
       id: this.props.inputId,
       "aria-describedby": this.props.idForError
     };
     return (
-      <div className="form-input">
+      <div className={inputClasses}>
         <GlobalForm.Errorable
           className="form-input"
           name={this.props.name}

@@ -8,11 +8,14 @@ import { commonActions } from "actions/helpers";
 import { pagesAPI, requests } from "api";
 import { uiStateSnapshotActions, entityStoreActions } from "actions";
 import entityUtils from "utils/entityUtils";
-import { childRoutes } from "helpers/router";
-import startsWith from "lodash/startsWith";
+import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
-const { resetDashboardProjectsListSnapshot } = uiStateSnapshotActions;
+const {
+  resetDashboardProjectsListSnapshot,
+  resetProjectsListSnapshot
+} = uiStateSnapshotActions;
 
 export class BackendContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -50,7 +53,7 @@ export class BackendContainer extends PureComponent {
   };
 
   constructor(props) {
-    super();
+    super(props);
     this.commonActions = commonActions(props.dispatch);
   }
 
@@ -60,6 +63,7 @@ export class BackendContainer extends PureComponent {
 
   componentWillUnmount() {
     this.props.dispatch(resetDashboardProjectsListSnapshot());
+    this.props.dispatch(resetProjectsListSnapshot());
   }
 
   setMinHeight() {
@@ -69,17 +73,6 @@ export class BackendContainer extends PureComponent {
       this.mainContainer.parentNode.offsetHeight - mainHeight;
     this.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
   }
-
-  isProjects = (match, location) => {
-    if (!match) {
-      return false;
-    }
-    const { pathname } = location;
-    if (pathname === "/backend") return true;
-    if (startsWith(pathname, "/backend/project")) return true;
-    if (startsWith(pathname, "/backend/resource")) return true;
-    return startsWith(pathname, "/backend/text");
-  };
 
   hasFatalError() {
     return !!this.props.notifications.fatalError;
@@ -123,16 +116,25 @@ export class BackendContainer extends PureComponent {
     return (
       <HigherOrder.BodyClass className={"backend bg-neutral90"}>
         <div>
+          <RedirectToFirstMatch
+            from={lh.link("backend")}
+            candidates={[
+              {
+                label: "Dashboard",
+                route: "backendDashboard"
+              }
+            ]}
+          />
+
           <Utility.SkipLink skipId={skipId} />
           <Utility.ScrollToTop />
           <HigherOrder.ScrollAware>
             <LayoutBackend.Header
               visibility={this.props.visibility}
+              match={this.props.match}
               location={this.props.location}
               authentication={this.props.authentication}
               commonActions={this.commonActions}
-              settings={this.props.settings}
-              isProjects={this.isProjects}
             />
           </HigherOrder.ScrollAware>
           <main

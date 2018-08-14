@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Navigation, Dialog } from "components/backend";
+import { Navigation, Dialog, Layout } from "components/backend";
 import { HigherOrder } from "containers/global";
 import { Utility } from "components/global";
 import { entityStoreActions, notificationActions } from "actions";
@@ -9,6 +9,7 @@ import { select } from "utils/entityUtils";
 import { collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import navigation from "helpers/router/navigation";
 
 const { request, flush } = entityStoreActions;
 
@@ -116,37 +117,19 @@ export class CollectionWrapperContainer extends PureComponent {
     );
   };
 
-  secondaryNavigationLinks(collection) {
-    return [
-      {
-        path: lh.link("backendCollectionGeneral", collection.id),
-        label: "General",
-        key: "general",
-        entity: collection,
-        ability: "update"
-      },
-      {
-        path: lh.link("backendCollectionResources", collection.id),
-        label: "Resources",
-        key: "resources",
-        entity: collection,
-        ability: "update"
-      }
-    ];
-  }
-
   renderUtility() {
     return (
       <div>
         <button onClick={this.doPreview} className="button-bare-primary">
-          Preview{" "}
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
+          Preview{" "}
         </button>
         <button
           onClick={this.handleCollectionDestroy}
           className="button-bare-primary"
         >
-          Delete <i className="manicon manicon-trashcan" aria-hidden="true" />
+          <i className="manicon manicon-trashcan" aria-hidden="true" />
+          Delete
         </button>
       </div>
     );
@@ -163,61 +146,45 @@ export class CollectionWrapperContainer extends PureComponent {
     /* eslint-enable no-unused-vars */
     if (!collection) return null;
     const skipId = "skip-to-collection-panel";
+    const secondaryLinks = navigation.collection(collection);
 
     return (
-      <HigherOrder.Authorize
-        entity={collection}
-        failureFatalError={{
-          detail: "You are not allowed to edit this collection."
-        }}
-        ability="update"
-      >
-        <RedirectToFirstMatch
-          from={lh.link("backendCollection", collection.id)}
-          candidates={this.secondaryNavigationLinks(collection)}
-        />
-
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
-        <Navigation.DetailHeader
-          type="collection"
-          breadcrumb={[
-            { path: lh.link("backend"), label: "ALL PROJECTS" },
-            {
-              path: lh.link(
-                "backendProjectCollections",
-                collection.relationships.project.id
-              ),
-              label: collection.relationships.project.attributes.title
-            }
-          ]}
-          utility={this.renderUtility()}
-          title={collection.attributes.title}
-          titleHtml
-        />
-        <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(collection)}
-              />
-            </div>
-          </aside>
-          <div className="container">
-            <aside className="aside">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(collection)}
-              />
-            </aside>
+      <div>
+        <HigherOrder.Authorize
+          entity={collection}
+          failureFatalError={{
+            detail: "You are not allowed to edit this collection."
+          }}
+          ability="update"
+        >
+          <RedirectToFirstMatch
+            from={lh.link("backendCollection", collection.id)}
+            candidates={secondaryLinks}
+          />
+          {this.state.confirmation ? (
+            <Dialog.Confirm {...this.state.confirmation} />
+          ) : null}
+          <Navigation.DetailHeader
+            type="collection"
+            backUrl={lh.link(
+              "backendProjectCollections",
+              collection.relationships.project.id
+            )}
+            backLabel={collection.relationships.project.attributes.title}
+            utility={this.renderUtility()}
+            title={collection.attributes.title}
+            secondaryLinks={secondaryLinks}
+            titleHtml
+          />
+          <Layout.BackendPanel>
+            <Utility.SkipLink skipId={skipId} />
+            <Navigation.Secondary links={secondaryLinks} panel />
             <div id={skipId} className="panel">
               {this.renderRoutes()}
             </div>
-          </div>
-        </section>
-      </HigherOrder.Authorize>
+          </Layout.BackendPanel>
+        </HigherOrder.Authorize>
+      </div>
     );
   }
 }

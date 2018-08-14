@@ -46,7 +46,7 @@ module Validation
                   :hidden, :background_color, :foreground_color, :header_color, :layout,
                   :foreground_top, :foreground_left, attachment(:background),
                   :remove_background, attachment(:foreground), :remove_foreground,
-                  :foreground_position, :position]
+                  :foreground_position, :position, :live]
     relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -361,7 +361,14 @@ module Validation
 
   def project_filter_params
     params.permit(
-      filter: [:featured, :subject, :keyword, :order, :typeahead, :with_update_ability]
+      filter: [:draft, :featured, :subject, :keyword, :order, :typeahead,
+               :with_update_ability]
+    )[:filter]
+  end
+
+  def feature_filter_params
+    params.permit(
+      filter: [:home]
     )[:filter]
   end
 

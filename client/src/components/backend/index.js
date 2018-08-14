@@ -17,3 +17,5 @@ export Subject from "./Subject";
 export TwitterQuery from "./TwitterQuery";
 export Permission from "./Permission";
 export Log from "./Log";
+export Page from "./Page";
+export Feature from "./Feature";

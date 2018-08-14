@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Users New Container renders correctly 1`] = `
+<section>
+  <header
+    className="drawer-header"
+  >
+    <h2
+      className="heading-quaternary"
+    >
+      New User
+    </h2>
+  </header>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+          htmlFor="attributes[email]-text-input-15"
+        >
+          Email
+        </label>
+        <input
+          aria-describedby="attributes[email]-text-input-15"
+          id="attributes[email]-text-input-15"
+          onChange={[Function]}
+          placeholder="Email"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            htmlFor={undefined}
+          >
+            Role
+          </label>
+          <div
+            className="form-select"
+          >
+            <i
+              aria-hidden="true"
+              className="manicon manicon-caret-down"
+            />
+            <select
+              aria-describedby="select-error-12"
+              id={undefined}
+              onChange={[Function]}
+              value="reader"
+            >
+              <option
+                value="admin"
+              >
+                Admin
+              </option>
+              <option
+                value="editor"
+              >
+                Editor
+              </option>
+              <option
+                value="project_creator"
+              >
+                Project Creator
+              </option>
+              <option
+                value="marketeer"
+              >
+                Marketeer
+              </option>
+              <option
+                value="reader"
+              >
+                Reader
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+          htmlFor="attributes[firstName]-text-input-15"
+        >
+          First Name
+        </label>
+        <input
+          aria-describedby="attributes[firstName]-text-input-15"
+          id="attributes[firstName]-text-input-15"
+          onChange={[Function]}
+          placeholder="First Name"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+          htmlFor="attributes[lastName]-text-input-15"
+        >
+          Last Name
+        </label>
+        <input
+          aria-describedby="attributes[lastName]-text-input-15"
+          id="attributes[lastName]-text-input-15"
+          onChange={[Function]}
+          placeholder="Last Name"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input password-input"
+        style={Object {}}
+      >
+        <label
+          htmlFor="generated-password-7"
+        >
+          Password
+        </label>
+        <span
+          className="password-visibility-toggle"
+          onClick={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          <i
+            aria-hidden="true"
+            className="manicon manicon-eye-outline"
+          />
+          <span
+            className="screen-reader-text"
+          >
+            show password
+          </span>
+        </span>
+        <input
+          aria-describedby="generated-password-error-8"
+          id="generated-password-7"
+          onChange={[Function]}
+          placeholder="Enter a password"
+          type="password"
+          value="testtest123"
+        />
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save User"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;

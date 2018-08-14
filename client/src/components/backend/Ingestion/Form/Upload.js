@@ -66,28 +66,24 @@ class IngestionFormUpload extends PureComponent {
     /* eslint-disable max-len */
     return (
       <div>
-        <Form.FieldGroup {...this.props}>
-          <Form.TusUpload
-            inlineStyle={{ width: "100%" }}
-            layout="landscape"
-            instructions={fileInstructions}
-            label="Upload a file"
-            value={this.props.getModelValue("attributes[source]")}
-            initialValue={this.props.getModelValue(
-              "attributes[sourceFileName]"
-            )}
-            set={this.onSourceChange}
-            accepts="any"
-          />
-          <div className="form-divider">or</div>
-          <Form.TextInput
-            label="URL"
-            focusOnMount
-            instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
-            value={this.props.getModelValue("attributes[externalSourceUrl]")}
-            onChange={event => this.onUrlChange(event)}
-          />
-        </Form.FieldGroup>
+        <Form.TusUpload
+          inlineStyle={{ width: "100%" }}
+          layout="landscape"
+          instructions={fileInstructions}
+          label="Upload a file"
+          value={this.props.getModelValue("attributes[source]")}
+          initialValue={this.props.getModelValue("attributes[sourceFileName]")}
+          set={this.onSourceChange}
+          accepts="any"
+        />
+        <div className="form-divider">or</div>
+        <Form.TextInput
+          label="URL"
+          focusOnMount
+          instructions="Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
+          value={this.props.getModelValue("attributes[externalSourceUrl]")}
+          onChange={event => this.onUrlChange(event)}
+        />
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
           {this.props.cancelUrl ? (
             <button
