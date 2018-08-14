@@ -24,7 +24,9 @@ export default class UserListItem extends PureComponent {
   render() {
     const user = this.props.entity;
     const attr = user.attributes;
-    const rowClasses = classnames({ active: this.props.active === user.id });
+    const rowClasses = classnames("user-list-item", {
+      active: this.props.active === user.id
+    });
     return (
       <li key={user.id} className={rowClasses}>
         {/* Add .checked to .checkbox-primary to display checked state.
@@ -34,7 +36,7 @@ export default class UserListItem extends PureComponent {
             <i className="manicon manicon-check" />
           </div>
         </div> */}
-        <Link to={lh.link("backendPeopleUser", user.id)}>
+        <Link to={lh.link("backendRecordsUser", user.id)}>
           <header>
             <figure className="avatar">
               <figcaption className="screen-reader-text">

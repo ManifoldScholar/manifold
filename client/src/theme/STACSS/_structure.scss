@@ -215,21 +215,31 @@ $readerContainerWidths: (790px, 680px, 500px);
 }
 
 @mixin headerLogoPrimary {
+  position: absolute;
   display: inline-block;
   margin-right: 22px;
   color: $accentPrimary;
   text-decoration: none;
   vertical-align: middle;
 
+
   @include respond($break40) {
     margin-right: 33px;
   }
 
+  @include respond($break75) {
+    position: relative;
+  }
+
   // Icon Handling
   .manicon-manifold-logo {
-    font-size: 32px;
+    font-size: 24px;
 
     @include respond($break40) {
+      font-size: 32px;
+    }
+
+    @include respond($break75) {
       font-size: 40px;
     }
   }

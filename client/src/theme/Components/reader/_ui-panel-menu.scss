@@ -1,11 +1,21 @@
 @keyframes slideUpMobile {
-  from { bottom: -420px; }
-  to { bottom: 45px; }
+  from {
+    bottom: -420px;
+  }
+
+  to {
+    bottom: 45px;
+  }
 }
 
 @keyframes slideOverDesktop {
-  from { right: -350px; }
-  to { right: 0; }
+  from {
+    right: -350px;
+  }
+
+  to {
+    right: 0;
+  }
 }
 
 @mixin uiPanelMenu {
@@ -15,7 +25,7 @@
   width: 100%;
   background-color: $neutral10;
   transition: right $duration $timing,
-              bottom $duration $timing;
+    bottom $duration $timing;
 
   @include respond($break50) {
     position: absolute;

@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend People Makers List Container renders correctly 1`] = `
+<div>
+  <header
+    className="section-heading-secondary"
+  >
+    <h3>
+      Makers
+       
+      <i
+        aria-hidden="true"
+        className="manicon manicon-users"
+      />
+    </h3>
+  </header>
+  <span />
+  <div>
+    <form
+      className="form-search-filter"
+      onSubmit={[Function]}
+    >
+      <div
+        className="search"
+      >
+        <button>
+          <i
+            aria-hidden="true"
+            className="manicon manicon-magnify"
+          />
+          <span
+            className="screen-reader-text"
+          >
+            Search
+          </span>
+        </button>
+        <label
+          className="screen-reader-text"
+          htmlFor="list-search-23"
+        >
+          Enter Search Criteria
+        </label>
+        <input
+          id="list-search-23"
+          onChange={[Function]}
+          placeholder="Search..."
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="button-row"
+      >
+        <button
+          className="button-bare-primary"
+          data-id="filter-toggle"
+          onClick={[Function]}
+        >
+          Show Search Options
+        </button>
+        <button
+          className="button-bare-primary reset"
+          onClick={[Function]}
+        >
+          Reset Search
+        </button>
+      </div>
+    </form>
+    <nav
+      className="vertical-list-primary"
+    >
+      <div>
+        <p
+          className="list-total"
+        >
+          Showing 
+          <span>
+            1-1
+          </span>
+           of 
+          <span>
+            2
+          </span>
+           makers: 
+        </p>
+        <section>
+          <ul>
+            <li
+              className=""
+            >
+              <a
+                href="/backend/people/makers/1"
+                onClick={[Function]}
+              >
+                <header>
+                  <figure
+                    className="avatar"
+                  >
+                    <figcaption
+                      className="screen-reader-text"
+                    >
+                      Maker Avatar
+                    </figcaption>
+                    <div
+                      className="no-image"
+                    >
+                      <i
+                        aria-label="hidden"
+                        className="manicon manicon-person"
+                      />
+                    </div>
+                  </figure>
+                  <div
+                    className="meta"
+                  >
+                    <h3
+                      className="name large"
+                    >
+                      Rowan Ida
+                    </h3>
+                  </div>
+                </header>
+                <span
+                  className="label"
+                />
+              </a>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </nav>
+    <nav
+      className="list-pagination-secondary"
+    >
+      <ul>
+        <li
+          className="pagination-previous disabled"
+        >
+          <a
+            data-id="page-prev"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <i
+              aria-hidden="true"
+              className="manicon manicon-arrow-long-left"
+            />
+            <span
+              aria-hidden="true"
+            >
+              Prev
+            </span>
+            <span
+              className="screen-reader-text"
+            >
+              Previous Page
+            </span>
+          </a>
+        </li>
+        <li
+          className="active ordinal"
+        >
+          <a
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <span
+              aria-hidden="true"
+            >
+              1
+            </span>
+            <span
+              className="screen-reader-text"
+            >
+              Go to page: 
+              1
+            </span>
+          </a>
+        </li>
+        <li
+          className="ordinal"
+        >
+          <a
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <span
+              aria-hidden="true"
+            >
+              2
+            </span>
+            <span
+              className="screen-reader-text"
+            >
+              Go to page: 
+              2
+            </span>
+          </a>
+        </li>
+        <li
+          className="pagination-next "
+        >
+          <a
+            data-id="page-next"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Next Page
+            </span>
+            <span
+              aria-hidden="true"
+            >
+              Next
+            </span>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-arrow-long-right"
+            />
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+`;

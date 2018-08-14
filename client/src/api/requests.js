@@ -1,5 +1,6 @@
 export default {
   beProjects: "backend-projects",
+  beProject: "backend-project",
   beRecentProjects: "backend-recent-projects",
   beStats: "backend-stats",
   beCreateTestMail: "backend-create-test-email",

@@ -1,59 +1,36 @@
 .breadcrumb-primary {
   @include utilityPrimary;
   display: block;
-  padding: 20px 0 18px;
-  font-size: 13px;
+  padding: 10px 0 12px;
+  font-size: 16px;
   line-height: 1.4;
   color: $neutral70;
   text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0;
+  background-color: $neutral100;
 
-  @include respond($break40) {
-    font-size: 14px;
+  @include respond($break50) {
+    font-size: 20px;
   }
 
   .container {
     position: relative;
-    padding-left: calc(#{$containerPaddingResp} + 26px);
+    padding-left: calc(#{$containerPaddingResp} + 25px);
 
-    @include respond($break120) {
-      padding-left: calc(#{$containerPaddingFull} + 26px);
+    @include respond($break50) {
+      padding-left: 60px;
     }
   }
 
-  .initial {
+  a {
     color: $neutral70;
     text-decoration: none;
-  }
+    transition: color $duration $timing;
 
-
-  // Breadcrumb list
-  ul {
-    @include listHorizontal;
-    display: inline;
-    padding-left: 8px;
-
-    li {
-      &::after {
-        display: inline-block;
-        padding: 0 11px;
-        color: $neutral50;
-        content: '/';
-      }
-
-      &:last-child::after {
-        display: none;
-      }
-    }
-
-    a {
-      color: $neutral50;
-      text-decoration: none;
-      transition: color $duration $timing;
-
-      &:hover, &:focus {
-        color: $accentPrimary;
-        outline: 0;
-      }
+    &:hover, &:focus {
+      color: $accentPrimary;
+      outline: 0;
     }
   }
 
@@ -63,8 +40,9 @@
     left: $containerPaddingResp;
     font-size: 13px;
 
-    @include respond($break120) {
-      left: $containerPaddingFull;
+    @include respond($break50) {
+      top: 10px;
+      left: 25px;
     }
   }
 }

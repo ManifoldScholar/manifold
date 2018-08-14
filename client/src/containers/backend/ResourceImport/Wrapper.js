@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Navigation } from "components/backend";
+import { Navigation, Layout } from "components/backend";
 import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
@@ -119,22 +119,16 @@ export class ResourceImportWrapper extends PureComponent {
       >
         <Navigation.DetailHeader
           type="resources"
-          breadcrumb={[
-            {
-              path: lh.link("backendProjectResources", match.params.projectId),
-              label: "Resources"
-            }
-          ]}
+          backUrl={lh.link("backendProjectResources", match.params.projectId)}
+          backLabel={project.attributes.title}
           title={"Bulk Add Resources"}
           showUtility={false}
           note={`Import resources from CSV or Google Sheet, with file assets stored in a
           google drive folder.`}
         />
-        <section className="backend-panel">
-          <div className="container">
-            <div className="">{this.renderRoutes()}</div>
-          </div>
-        </section>
+        <Layout.BackendPanel>
+          <div>{this.renderRoutes()}</div>
+        </Layout.BackendPanel>
       </HigherOrder.Authorize>
     );
   }

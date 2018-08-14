@@ -153,6 +153,7 @@ const defaults = {
       heroStyles: {},
       coverStyles: {},
       avatarStyles: {},
+      avatarMeta: {},
       hashtag: "#cute_dog",
       hideActivity: false,
       abilities,

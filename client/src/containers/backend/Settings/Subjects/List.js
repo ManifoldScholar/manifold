@@ -6,7 +6,7 @@ import { select, meta } from "utils/entityUtils";
 import { subjectsAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import get from "lodash/get";
-import { Subject, List } from "components/backend";
+import { Subject, List, Layout } from "components/backend";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 
@@ -95,30 +95,28 @@ export class SettingsSubjectsListContainer extends PureComponent {
 
     return (
       <div>
-        <header className="section-heading-secondary">
-          <h3>
-            {"Subjects"} <i className="manicon" aria-hidden="true" />
-          </h3>
-        </header>
-        {childRoutes(this.props.route, { drawer: true, drawerProps })}
-        {subjects ? (
-          <List.Searchable
-            newButton={{
-              path: lh.link("backendSettingsSubjectsNew"),
-              text: "Add a New Subject",
-              authorizedFor: "subject"
-            }}
-            entities={subjects}
-            singularUnit="subject"
-            pluralUnit="subjects"
-            pagination={subjectsMeta.pagination}
-            paginationClickHandler={this.subjectsPageChangeHandlerCreator}
-            paginationClass="secondary"
-            entityComponent={Subject.ListItem}
-            entityComponentProps={{ active }}
-            filterChangeHandler={this.filterChangeHandler}
-          />
-        ) : null}
+        <Layout.ViewHeader>Project Subjects</Layout.ViewHeader>
+        <Layout.BackendPanel>
+          {childRoutes(this.props.route, { drawer: true, drawerProps })}
+          {subjects ? (
+            <List.Searchable
+              newButton={{
+                path: lh.link("backendSettingsSubjectsNew"),
+                text: "Add a New Subject",
+                authorizedFor: "subject"
+              }}
+              entities={subjects}
+              singularUnit="subject"
+              pluralUnit="subjects"
+              pagination={subjectsMeta.pagination}
+              paginationClickHandler={this.subjectsPageChangeHandlerCreator}
+              paginationClass="secondary"
+              entityComponent={Subject.ListItem}
+              entityComponentProps={{ active }}
+              filterChangeHandler={this.filterChangeHandler}
+            />
+          ) : null}
+        </Layout.BackendPanel>
       </div>
     );
   }

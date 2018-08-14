@@ -25,8 +25,8 @@ class Maker < ApplicationRecord
   with_parsed_name :first_name, :middle_name, :last_name, :suffix
 
   # Scopes
-  scope :with_order, lambda { |by|
-    return order(:first_name, :last_name) unless by.present?
+  scope :with_order, lambda { |by = nil|
+    return order(:last_name, :first_name) unless by.present?
     order(by)
   }
 

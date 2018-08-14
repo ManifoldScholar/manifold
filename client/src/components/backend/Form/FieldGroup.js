@@ -8,6 +8,7 @@ export default class FieldGroup extends PureComponent {
   static propTypes = {
     disabled: PropTypes.bool,
     horizontal: PropTypes.bool,
+    wide: PropTypes.bool,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     label: PropTypes.string
   };
@@ -15,6 +16,7 @@ export default class FieldGroup extends PureComponent {
   static defaultProps = {
     disabled: false,
     horizontal: false,
+    wide: false,
     instructions: null
   };
 
@@ -24,7 +26,13 @@ export default class FieldGroup extends PureComponent {
       if (isString(child.type)) {
         return child;
       }
-      const { horizontal, label, instructions, ...childProps } = this.props;
+      const {
+        horizontal,
+        wide,
+        label,
+        instructions,
+        ...childProps
+      } = this.props;
       return React.cloneElement(child, childProps);
     });
   }
@@ -43,8 +51,10 @@ export default class FieldGroup extends PureComponent {
             <span>{this.props.label}</span>
           </header>
         ) : null}
+        <div className="form-input-group">
+          {this.renderChildren(this.props)}
+        </div>
         <Instructions instructions={this.props.instructions} />
-        {this.renderChildren(this.props)}
       </div>
     );
   }

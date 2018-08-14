@@ -1,0 +1,15 @@
+.backend-detail {
+  @include containerPrototype;
+  padding-top: 4.5%;
+  padding-bottom: 45px;
+
+  @include respond($break60) {
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
+
+  .backend-panel > .container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

@@ -85,11 +85,7 @@
 }
 
 .boolean-primary {
-  @include booleanPrimary(26px);
-
-  @include respond($break60) {
-    @include booleanPrimary(30px);
-  }
+  @include booleanPrimary(20px);
 }
 
 .repeater-primary {

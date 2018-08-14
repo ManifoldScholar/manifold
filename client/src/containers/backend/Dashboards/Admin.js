@@ -11,7 +11,6 @@ import { HigherOrder } from "containers/global";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, statisticsAPI, requests } from "api";
 import debounce from "lodash/debounce";
-import lh from "helpers/linkHandler";
 import Authorization from "helpers/authorization";
 
 const { request } = entityStoreActions;
@@ -127,6 +126,15 @@ export class DashboardsAdminContainer extends PureComponent {
     };
   };
 
+  renderProjectCount = () => {
+    if (!this.props.projectsMeta) return null;
+
+    const { totalCount } = this.props.projectsMeta.pagination;
+    const label = totalCount > 1 || totalCount === 0 ? "projects" : "project";
+
+    return <span className="list-total">{`${totalCount} ${label}`}</span>;
+  };
+
   render() {
     return (
       <div>
@@ -136,22 +144,16 @@ export class DashboardsAdminContainer extends PureComponent {
               <div className="left">
                 <header className="section-heading-secondary">
                   <h3>
-                    {"Projects"}{" "}
                     <i className="manicon manicon-stack" aria-hidden="true" />
+                    {"Projects"} {this.renderProjectCount()}
                   </h3>
                 </header>
                 {this.props.projects && this.props.projectsMeta ? (
                   <List.Searchable
-                    newButton={{
-                      path: lh.link("backendProjectsNew"),
-                      text: "Add a New Project",
-                      authorizedFor: "project"
-                    }}
+                    showEntityCount={false}
                     initialFilter={this.state.filter}
                     defaultFilter={{ order: "sort_title ASC" }}
                     entities={this.props.projects}
-                    singularUnit="project"
-                    pluralUnit="projects"
                     pagination={this.props.projectsMeta.pagination}
                     paginationClickHandler={this.updateHandlerCreator}
                     paginationClass="secondary"
@@ -160,7 +162,6 @@ export class DashboardsAdminContainer extends PureComponent {
                   />
                 ) : null}
               </div>
-
               <div className="right">
                 <nav className="vertical-list-primary flush">
                   {this.props.recentProjects ? (
@@ -168,7 +169,7 @@ export class DashboardsAdminContainer extends PureComponent {
                       entities={this.props.recentProjects}
                       entityComponent={Project.ListItem}
                       title={"Recently Updated"}
-                      icon={"manicon-stack"}
+                      icon={"manicon-bugle-small"}
                       listClasses={"flush"}
                     />
                   ) : null}
@@ -177,11 +178,11 @@ export class DashboardsAdminContainer extends PureComponent {
                   <section>
                     <header className="section-heading-secondary">
                       <h3>
-                        {"Activity"}{" "}
                         <i
                           className="manicon manicon-pulse-small"
                           aria-hidden="true"
                         />
+                        {"Activity"}{" "}
                       </h3>
                     </header>
                     <DashboardComponents.Activity

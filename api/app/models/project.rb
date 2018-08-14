@@ -145,6 +145,10 @@ class Project < ApplicationRecord
     joins(:project_subjects).where(project_subjects: { subject: subject })
   }
 
+  scope :by_draft, lambda { |draft|
+    where(draft: to_boolean(draft)) unless draft.nil?
+  }
+
   scope :with_order, lambda { |by = nil|
     next order(:sort_title, :title) unless by.present?
     order(by)

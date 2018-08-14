@@ -1,18 +1,22 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Navigation } from "components/backend";
+import { Link } from "react-router-dom";
+import truncate from "lodash/truncate";
 
 export default class DetailHeader extends PureComponent {
   static displayName = "Navigation.DetailHeader";
 
   static propTypes = {
-    breadcrumb: PropTypes.array,
     type: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     titleHtml: PropTypes.bool,
     subtitle: PropTypes.string,
     utility: PropTypes.object,
-    note: PropTypes.string
+    note: PropTypes.string,
+    secondaryLinks: PropTypes.array,
+    backUrl: PropTypes.string,
+    backLabel: PropTypes.string
   };
 
   static defaultProps = {
@@ -32,21 +36,46 @@ export default class DetailHeader extends PureComponent {
     return `manicon-${segment}`;
   }
 
+  renderBreadcrumbs() {
+    if (!this.props.backUrl) return null;
+
+    const label = this.props.backLabel;
+
+    return (
+      <nav className="breadcrumb-primary">
+        <div className="container flush">
+          <Link to={this.props.backUrl}>
+            <i className="manicon manicon-arrow-left" aria-hidden="true" />
+            {label || "Back"}
+          </Link>
+        </div>
+      </nav>
+    );
+  }
+
   renderTitle() {
     if (this.props.titleHtml) {
       return <span dangerouslySetInnerHTML={{ __html: this.props.title }} />;
     }
-    return this.props.title;
+    return truncate(this.props.title, { length: 80 });
+  }
+
+  renderSectionNav(props) {
+    if (!props.secondaryLinks) return null;
+
+    return (
+      <Navigation.Dropdown
+        classNames="section-nav"
+        links={props.secondaryLinks}
+      />
+    );
   }
 
   render() {
-    const breadcrumb = this.props.breadcrumb;
     return (
-      <section className="bg-neutral95">
-        {breadcrumb && breadcrumb.length > 0 ? (
-          <Navigation.Breadcrumb links={this.props.breadcrumb} />
-        ) : null}
-        <div className="container flush">
+      <section className="backend-header">
+        {this.renderBreadcrumbs()}
+        <div className="wrapper">
           <header className="entity-header-primary">
             {this.props.type === "user" ? null : (
               <figure>
@@ -71,6 +100,7 @@ export default class DetailHeader extends PureComponent {
             </div>
           </header>
         </div>
+        {this.renderSectionNav(this.props)}
       </section>
     );
   }

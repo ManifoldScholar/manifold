@@ -151,7 +151,7 @@ export default class SearchQuery extends PureComponent {
             autoFocus
             onChange={this.setKeyword}
             value={this.state.keyword}
-            placeholder={"Search for..."}
+            placeholder={"Search…"}
           />
           <button type="submit" className="manicon manicon-magnify">
             <span className="screen-reader-text">Search</span>

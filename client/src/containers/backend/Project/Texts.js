@@ -311,16 +311,6 @@ export class ProjectTextsContainer extends PureComponent {
   }
 
   childRoutes() {
-    const factory = component => {
-      return (
-        <Dialog.Wrapper
-          closeOnOverlayClick={false}
-          closeUrl={lh.link("backendProjectTexts", this.props.project.id)}
-        >
-          {component}
-        </Dialog.Wrapper>
-      );
-    };
     const { refresh, project } = this.props;
     return childRoutes(this.props.route, {
       drawer: true,

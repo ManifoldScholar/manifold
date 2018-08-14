@@ -22,7 +22,8 @@ class FormMaskedTextInput extends Component {
     onChange: PropTypes.func,
     value: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    id: PropTypes.string
+    id: PropTypes.string,
+    wide: PropTypes.bool
   };
 
   static defaultProps = {
@@ -89,9 +90,13 @@ class FormMaskedTextInput extends Component {
     const labelClass = classnames({
       "has-instructions": isString(this.props.instructions)
     });
+    const inputClasses = classnames({
+      "form-input": true,
+      wide: this.props.wide
+    });
 
     return (
-      <div className="form-input">
+      <div className={inputClasses}>
         <label htmlFor={this.props.id} className={labelClass}>
           {this.props.label}
         </label>

@@ -1,0 +1,336 @@
+.nested-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 22px;
+  text-align: center;
+
+  @include respond($break40) {
+    min-height: 32px;
+  }
+
+  .manicon {
+    cursor: pointer;
+  }
+
+  .selected {
+    @include templateHead;
+    font-size: 16px;
+    color: $neutral75;
+
+    @include respond($break40) {
+      font-size: 20px;
+    }
+
+    a {
+      display: inherit;
+    }
+
+    a.active {
+      .dark & {
+        color: $neutral75;
+      }
+    }
+
+    a.active:last-child {
+      color: $neutral50;
+    }
+
+    .manicon-caret-right {
+      .dark & {
+        color: $neutral75;
+      }
+      position: relative;
+      top: 5px;
+      margin: 0 10px;
+      font-size: 12px;
+    }
+  }
+
+  nav.search-menu {
+    width: 100%;
+    padding: 0;
+    margin-top: 28px;
+    border: 1px solid $neutral50;
+
+    .search-query .input-magnify {
+      min-width: 0;
+    }
+
+    .manicon-magnify {
+      color: $accentPrimary;
+    }
+
+    .footer {
+      display: none;
+    }
+  }
+
+  .nested-nav-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  .user-links {
+    position: static;
+    display: none;
+    flex-grow: 1;
+    height: auto;
+    padding: 30px 40px 30px 30px;
+    text-align: left;
+
+    > ul {
+      height: auto;
+
+      > li {
+        display: block;
+
+        + li {
+          margin-left: 0;
+        }
+      }
+    }
+
+    button {
+      @include buttonUnstyled;
+      display: flex;
+      width: 100%;
+      padding-top: 0.588em;
+      padding-bottom: 0.588em;
+    }
+
+    .avatar {
+      @include buttonAvatar(26);
+      margin-right: 17px;
+
+      @include respond($break40) {
+        @include buttonAvatar(28);
+      }
+    }
+
+    .manicon {
+      width: 26px;
+      height: 26px;
+      margin-right: 17px;
+
+      &.manicon-person {
+        position: static;
+        margin-right: 0;
+      }
+
+      &.manicon-person-pencil-simple {
+        padding-left: 5px;
+        font-size: 24px;
+
+        @include respond($break40) {
+          font-size: 28px;
+        }
+      }
+
+      &.manicon-circle-arrow-out-right-long {
+        padding-left: 5px;
+        font-size: 14px;
+        line-height: 1.7;
+
+        @include respond($break40) {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .button-mode {
+      display: inline-block;
+      padding: 10px 25px;
+      margin-top: 1em;
+      letter-spacing: 0.125em;
+    }
+  }
+
+  .primary-links {
+    padding: 30px 40px 40px;
+    text-align: left;
+  }
+
+  .primary-links {
+    .dark & {
+      padding-left: 70px;
+
+      @include respond($break40) {
+        // padding-left: 70px;
+      }
+    }
+  }
+
+  &.open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: $neutralWhite;
+
+    .dark & {
+      background-color: $neutral110;
+
+      .user-links {
+        background-color: $neutral95;
+      }
+    }
+
+    .selected {
+      display: none;
+    }
+
+    .user-links {
+      display: block;
+      background-color: $neutral05;
+    }
+
+    ul {
+      display: block;
+    }
+  }
+
+  .manicon {
+    color: $neutral50;
+    transition: color $duration $timing;
+
+    &.manicon-x {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 16px 4.5%;
+      font-size: 16px;
+
+      @include respond($break40) {
+        padding-top: 22px;
+        font-size: 22px;
+      }
+
+      &:hover, &:focus {
+        color: $accentPrimary;
+      }
+    }
+
+    &.manicon-bars-parallel-horizontal {
+      position: absolute;
+      top: calc(50% - 6px);
+      right: 4.5%;
+      font-size: 12px;
+      -webkit-font-smoothing: auto;
+      -moz-osx-font-smoothing: auto;
+
+      @include respond($break40) {
+        top: calc(50% - 9px);
+        font-size: 18px;
+      }
+    }
+  }
+
+  ul {
+    @include listUnstyled;
+    display: none;
+  }
+
+
+
+  li, a {
+    @include templateHead;
+    position: relative;
+    font-size: 17px;
+    color: $neutral50;
+    text-decoration: none;
+    transition: color $duration $timing;
+
+    @include respond($break40) {
+      font-size: 20px;
+    }
+
+    &.active {
+      color: $neutral100;
+    }
+
+    .dark &.active {
+      color: $neutralWhite;
+    }
+
+    .dark & {
+      color: $neutral45;
+    }
+  }
+
+  li {
+    position: relative;
+
+    .manicon {
+      font-size: 6px;
+
+      @include respond($break75) {
+        display: none;
+      }
+    }
+
+    &.nested {
+      > .manicon {
+        position: absolute;
+        top: 4px;
+        left: -45px;
+        padding: 15px;
+        transform: rotate(0deg);
+        transition: transform $duration $timing;
+
+        &:hover {
+          color: $accentPrimary;
+        }
+
+        @include respond($break40) {
+          top: 8px;
+        }
+      }
+
+      &.open {
+        > .manicon {
+          transform: rotate(180deg);
+        }
+
+        ul {
+          display: block;
+        }
+      }
+
+      ul {
+        display: none;
+        margin-left: 20px;
+      }
+    }
+  }
+
+  a {
+    display: block;
+    padding-top: 0.588em;
+    padding-bottom: 0.588em;
+  }
+
+  a, button {
+    &:hover, &:focus {
+      color: $accentPrimary;
+      // cursor: pointer;
+      outline: 0;
+
+      .manicon {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  &.hide-75 {
+    @include hide($break75);
+  }
+}

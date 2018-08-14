@@ -2,6 +2,10 @@
   padding-bottom: 1.375em;
   font-size: 16px;
 
+  .backend-dashboard & {
+    padding-bottom: 2.625em;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @include templateHead;
     margin: 0;
@@ -9,7 +13,7 @@
     font-size: 1em;
     color: $neutral30;
     text-transform: uppercase;
-    letter-spacing: 0.075em;
+    letter-spacing: 0.125em;
   }
 
   a {
@@ -28,14 +32,20 @@
     color: $accentPrimary;
     vertical-align: middle;
 
+    .backend-dashboard &,
+    .results-list & {
+      margin-right: 15px;
+      margin-left: 0;
+    }
+
     &.manicon-stack {
       margin-top: -2px;
-      font-size: 23px;
+      font-size: 22px;
     }
 
     &.manicon-bugle-small {
+      margin-top: -5px;
       font-size: 14px;
-      vertical-align: top;
     }
 
     &.manicon-bugle {

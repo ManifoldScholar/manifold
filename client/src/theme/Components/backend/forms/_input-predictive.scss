@@ -41,6 +41,7 @@
     padding: 0.667em 15px;
     font-size: 12px;
     color: $accentPrimary;
+    letter-spacing: 0.125em;
     white-space: nowrap;
 
     @include respond($break50) {

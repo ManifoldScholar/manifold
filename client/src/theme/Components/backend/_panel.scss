@@ -3,117 +3,58 @@
 
   .container {
     @include clearfix;
+
+    // CABS abstract rather than override the mixin
+    // if used elsewhere
+    &:not(.flush) {
+      padding-top: 42px;
+    }
+
+    .backend-header + & {
+      @include respond($break60, max) {
+        padding-top: 20px;
+      }
+    }
   }
 
   .aside {
+    @include panelRounded;
     display: none;
     float: left;
-    width: 130px;
-    padding-right: 20px;
+    width: 192px;
+    padding: 25px 31px 45px;
+    margin-right: 20px;
 
-    @include respond($break40) {
+    @include respond($break65) {
       display: block;
     }
 
-    @include respond($break75) {
-      width: 200px;
-      padding-right: 24px;
+    @include respond($break110) {
+      margin-right: 46px;
     }
   }
 
   .panel {
     width: 100%;
 
-    @include respond($break40) {
-      float: left;
-      width: calc(100% - 130px);
+    &:only-child {
+      padding-right: 5px;
+      padding-left: 5px;
+      //
+      //   @include respond($break75) {
+      //     padding-right: 24px;
+      //     padding-left: 24px;
+      //   }
     }
 
-    @include respond($break75) {
-      width: calc(100% - 200px);
-    }
-  }
-
-  // This navigation isn't used elsewhere, but it
-  // can be abstracted if necessary
-  .panel-nav {
-    ul {
-      @include listUnstyled;
-    }
-
-    li {
-      + li {
-        margin-top: 2.375em;
-        font-size: 16px;
-      }
-    }
-
-    a {
-      @include utilityPrimary;
-      color: $neutral50;
-      text-decoration: none;
-      transition: color $duration $timing;
-
-      &:hover{
-        color: $neutral20;
+    &:not(:only-child) {
+      @include respond($break65) {
+        float: left;
+        width: calc(100% - 212px);
       }
 
-      &:focus {
-        color: $accentPrimary;
-        border-color: $accentPrimary;
-        outline: 0;
-      }
-
-      &.active {
-        color: $neutral20;
-        border-bottom: 2px solid $neutral20;
-
-        &:focus {
-          @include focusOutline;
-          color: $neutral20;
-          border-bottom: 2px solid $neutral20;
-          outline-offset: 2px;
-        }
-      }
-    }
-  }
-
-  // Scrollable top version of aside nav
-  // Scopes and modifies panel nav
-  .scrollable {
-    overflow: scroll;
-    background-color: $neutral80;
-
-    @include respond($break40) {
-      display: none;
-    }
-
-    .wrapper {
-      white-space: nowrap;
-    }
-
-    .panel-nav {
-      li {
-        display: inline-block;
-
-        + li {
-          margin-top: 0; // OD
-          margin-left: 20px;
-        }
-
-        &:first-child {
-          padding-left: $containerPaddingResp;
-        }
-
-        &:last-child {
-          padding-right: $containerPaddingResp;
-        }
-      }
-
-      a {
-        display: block;
-        padding: 13px 0;
-        font-size: 14px;
+      @include respond($break110) {
+        width: calc(100% - 238px);
       }
     }
   }

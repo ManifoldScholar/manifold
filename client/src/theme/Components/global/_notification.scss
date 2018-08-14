@@ -154,9 +154,13 @@
 
 .notifications-list.notifications-list-header {
   position: absolute;
-  top: 60px;
+  top: 50px;
 
   @include respond($break40) {
+    top: 72px;
+  }
+
+  @include respond($break75) {
     top: 80px;
   }
 
@@ -185,4 +189,3 @@
   }
 
 }
-
