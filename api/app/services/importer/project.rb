@@ -76,10 +76,12 @@ module Importer
       drive_sheet = @project_json[:resource_drive_sheet]
       drive_dir = @project_json[:resource_drive_dir]
       return unless !drive_sheet.blank? && !drive_dir.blank?
-      @logger.info "  Importing resource"
       importer = Importer::DriveResources.new(project.id, drive_sheet, drive_dir,
                                               @creator, @logger)
       importer.import
+    rescue StandardError => error
+      @logger.error "Unable to import resources for #{project.title}"
+      @logger.error(error)
     end
 
     def assign_project_attachments(project)
@@ -127,9 +129,10 @@ module Importer
     end
 
     def import_text(project, path)
-      ingestion = Ingestion.create(project: project,
-                                   source: File.open(path),
-                                   creator: @creator)
+      ingestion = Ingestions::CreateManually.run(project: project,
+                                                 source: File.open(path),
+                                                 creator: @creator).result
+
       @logger.info "  Importing project text at #{path}"
       outcome = Ingestions::Ingestor.run ingestion: ingestion,
                                          logger: @logger
@@ -144,7 +147,7 @@ module Importer
         if text.present?
           @logger.info "Created text #{text.title}"
         else
-          @logger.error "Unable to import project published text at #{text_path}"
+          @logger.error "Unable to import project text at #{text_path}"
         end
       end
     end
