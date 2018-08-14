@@ -10,11 +10,10 @@ namespace :manifold do
     desc "Ingest a project text"
     task :ingest, [:project_id, :path] => :environment do |_t, args|
       Manifold::Rake.logger.info "Ingesting #{args[:path]}"
-      cli_user = User.cli_user
       project = Project.find(args[:project_id])
-      ingestion = Ingestion.create(source: File.open(args[:path]),
-                                   creator: cli_user,
-                                   project: project)
+      ingestion = Ingestions::CreateManually.run(project: project,
+                                                 source: File.open(path),
+                                                 creator: User.cli_user).result
       outcome = Ingestions::Ingestor.run ingestion: ingestion,
                                          logger: Logger.new(STDOUT)
       if outcome.valid?
