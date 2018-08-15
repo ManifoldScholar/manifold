@@ -1,5 +1,7 @@
 .has-many-list {
-  margin-top: 1em;
+  @include respond($break90) {
+    margin-top: 20px;
+  }
 
   > ul {
     @include listUnstyled;

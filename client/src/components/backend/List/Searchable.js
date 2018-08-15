@@ -21,6 +21,8 @@ export class ListSearchable extends PureComponent {
   static propTypes = {
     entities: PropTypes.array,
     listClassName: PropTypes.string,
+    columnarNav: PropTypes.bool,
+    showEntityCount: PropTypes.bool,
     singularUnit: PropTypes.string,
     pluralUnit: PropTypes.string,
     pagination: PropTypes.object,
@@ -59,6 +61,8 @@ export class ListSearchable extends PureComponent {
 
   static defaultProps = {
     entityComponentProps: {},
+    columnarNav: false,
+    showEntityCount: true,
     newButton: null,
     secondaryButton: null,
     paginationPadding: 3,
@@ -66,7 +70,8 @@ export class ListSearchable extends PureComponent {
     initialFilter: null,
     searchId: uniqueId("list-search-"),
     filterId: uniqueId("list-filter-"),
-    sortId: uniqueId("list-sort-")
+    sortId: uniqueId("list-sort-"),
+    listClassName: "vertical-list-primary"
   };
 
   constructor(props) {
@@ -247,7 +252,7 @@ export class ListSearchable extends PureComponent {
     return button;
   }
 
-  renderButtonRow(props) {
+  renderButtons(props) {
     let newButtonAuthorized = null;
     let secondaryButtonAuthorized = null;
 
@@ -276,18 +281,65 @@ export class ListSearchable extends PureComponent {
     );
   }
 
+  renderForm = () => {
+    const formClasses = classnames("form-search-filter", {
+      "form-flex": this.props.columnarNav
+    });
+    return (
+      <form className={formClasses} onSubmit={this.handleSubmit}>
+        <div className="search">
+          <button>
+            <i className="manicon manicon-magnify" aria-hidden="true" />
+            <span className="screen-reader-text">Search</span>
+          </button>
+          <label htmlFor={this.props.searchId} className="screen-reader-text">
+            Enter Search Criteria
+          </label>
+          <input
+            id={this.props.searchId}
+            value={this.state.filter.keyword || ""}
+            type="text"
+            placeholder="Search..."
+            onChange={e => this.setFilter(e, "keyword")}
+          />
+        </div>
+        {this.props.columnarNav && this.renderButtons(this.props)}
+        <div className="button-row">
+          {this.showOptionsButton(this.props) ? (
+            <button
+              onClick={this.toggleOptions}
+              className="button-bare-primary"
+              data-id={"filter-toggle"}
+            >
+              {this.renderOptionsText()}
+            </button>
+          ) : null}
+          <button
+            onClick={this.resetSearch}
+            className="button-bare-primary reset"
+          >
+            {"Reset Search"}
+          </button>
+        </div>
+        {this.renderSearchOptions()}
+      </form>
+    );
+  }
+
   renderEntityList = () => {
     const entities = this.props.entities;
     if (!entities) return;
 
     return (
       <div>
-        <Utility.EntityCount
-          pagination={this.props.pagination}
-          singularUnit={this.props.singularUnit}
-          pluralUnit={this.props.pluralUnit}
-        />
-        {this.renderButtonRow(this.props)}
+        {this.props.showEntityCount && (
+          <Utility.EntityCount
+            pagination={this.props.pagination}
+            singularUnit={this.props.singularUnit}
+            pluralUnit={this.props.pluralUnit}
+          />
+        )}
+        {!this.props.columnarNav && this.renderButtons(this.props)}
         {entities.length > 0 ? (
           <List.SimpleList
             entities={entities}
@@ -303,49 +355,11 @@ export class ListSearchable extends PureComponent {
   };
 
   render() {
-    const listClassName = classnames(
-      "vertical-list-primary",
-      this.props.listClassName
-    );
+    const listClassName = this.props.listClassName;
 
     return (
       <div>
-        <form className="form-search-filter" onSubmit={this.handleSubmit}>
-          <div className="search">
-            <button>
-              <i className="manicon manicon-magnify" aria-hidden="true" />
-              <span className="screen-reader-text">Search</span>
-            </button>
-            <label htmlFor={this.props.searchId} className="screen-reader-text">
-              Enter Search Criteria
-            </label>
-            <input
-              id={this.props.searchId}
-              value={this.state.filter.keyword || ""}
-              type="text"
-              placeholder="Search..."
-              onChange={e => this.setFilter(e, "keyword")}
-            />
-          </div>
-          {this.renderSearchOptions()}
-          <div className="button-row">
-            {this.showOptionsButton(this.props) ? (
-              <button
-                onClick={this.toggleOptions}
-                className="button-bare-primary"
-                data-id={"filter-toggle"}
-              >
-                {this.renderOptionsText()}
-              </button>
-            ) : null}
-            <button
-              onClick={this.resetSearch}
-              className="button-bare-primary reset"
-            >
-              {"Reset Search"}
-            </button>
-          </div>
-        </form>
+        {this.renderForm()}
         <nav className={listClassName}>{this.renderEntityList()}</nav>
         <Utility.Pagination
           pagination={this.props.pagination}

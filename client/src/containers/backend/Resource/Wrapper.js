@@ -9,6 +9,7 @@ import { select } from "utils/entityUtils";
 import { resourcesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import navigation from "helpers/router/navigation";
 
 const { request, flush } = entityStoreActions;
 
@@ -112,56 +113,20 @@ export class ResourceWrapperContainer extends PureComponent {
     );
   };
 
-  secondaryNavigationLinks(resource, kind) {
-    const externalVideo = resource.attributes.externalVideo;
-    const project = resource.relationships.project;
-    const out = [
-      {
-        path: lh.link("backendResourceGeneral", resource.id),
-        label: "General",
-        key: "general",
-        entity: project,
-        ability: "update"
-      },
-      {
-        path: lh.link("backendResourceMetadata", resource.id),
-        label: "Metadata",
-        key: "metadata",
-        entity: project,
-        ability: "manageResources"
-      }
-    ];
-    if (
-      kind === "image" ||
-      kind === "audio" ||
-      kind === "pdf" ||
-      kind === "interactive" ||
-      (kind === "video" && !externalVideo)
-    ) {
-      out.splice(1, 0, {
-        path: lh.link("backendResourceVariants", resource.id),
-        label: "Variants",
-        key: "variants",
-        entity: project,
-        ability: "update"
-      });
-    }
-    return out;
-  }
-
   renderUtility(resource) {
     return (
       <div>
         <button onClick={this.doPreview} className="button-bare-primary">
-          Preview{" "}
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
+          Preview{" "}
         </button>
         <HigherOrder.Authorize entity={resource} ability={"delete"}>
           <button
             onClick={this.handleResourceDestroy}
             className="button-bare-primary"
           >
-            Delete <i className="manicon manicon-trashcan" aria-hidden="true" />
+            <i className="manicon manicon-trashcan" aria-hidden="true" />
+            Delete
           </button>
         </HigherOrder.Authorize>
       </div>
@@ -175,75 +140,57 @@ export class ResourceWrapperContainer extends PureComponent {
 
   render() {
     /* eslint-disable no-unused-vars */
-    const { resource, match } = this.props;
+    const { resource } = this.props;
     /* eslint-enable no-unused-vars */
     if (!resource) return null;
     const skipId = "skip-to-resource-panel";
+    const secondaryLinks = navigation.resource(resource);
 
     return (
-      <HigherOrder.Authorize
-        entity={resource}
-        failureFatalError={{
-          detail: "You are not allowed to edit this resource."
-        }}
-        ability="update"
-      >
-        <RedirectToFirstMatch
-          from={lh.link("backendResource", resource.id)}
-          candidates={this.secondaryNavigationLinks(
-            resource,
-            resource.attributes.kind
-          )}
-        />
+      <div>
+        <HigherOrder.Authorize
+          entity={resource}
+          failureFatalError={{
+            detail: "You are not allowed to edit this resource."
+          }}
+          ability="update"
+        >
+          <RedirectToFirstMatch
+            from={lh.link("backendResource", resource.id)}
+            candidates={secondaryLinks}
+          />
 
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
-        <Navigation.DetailHeader
-          type="resource"
-          breadcrumb={[
-            { path: lh.link("backend"), label: "ALL PROJECTS" },
-            {
-              path: lh.link(
-                "backendProjectResources",
-                resource.relationships.project.id
-              ),
-              label: resource.relationships.project.attributes.title
-            }
-          ]}
-          utility={this.renderUtility(resource)}
-          title={resource.attributes.titleFormatted}
-          titleHtml
-          subtitle={resource.attributes.subtitle}
-        />
-        <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(
-                  resource,
-                  resource.attributes.kind
-                )}
-              />
+          {this.state.confirmation ? (
+            <Dialog.Confirm {...this.state.confirmation} />
+          ) : null}
+          <Navigation.DetailHeader
+            type="resource"
+            breadcrumb={[
+              {
+                path: lh.link(
+                  "backendProjectResources",
+                  resource.relationships.project.id
+                ),
+                label: resource.relationships.project.attributes.title
+              }
+            ]}
+            utility={this.renderUtility(resource)}
+            title={resource.attributes.titleFormatted}
+            titleHtml
+            subtitle={resource.attributes.subtitle}
+            secondaryLinks={secondaryLinks}
+          />
+          <section className="backend-panel">
+            <Utility.SkipLink skipId={skipId} />
+            <div className="container">
+              <Navigation.Secondary links={secondaryLinks} panel />
+              <div id={skipId} className="panel">
+                {this.renderRoutes()}
+              </div>
             </div>
-          </aside>
-          <div className="container">
-            <aside className="aside">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(
-                  resource,
-                  resource.attributes.kind
-                )}
-              />
-            </aside>
-            <div id={skipId} className="panel">
-              {this.renderRoutes()}
-            </div>
-          </div>
-        </section>
-      </HigherOrder.Authorize>
+          </section>
+        </HigherOrder.Authorize>
+      </div>
     );
   }
 }

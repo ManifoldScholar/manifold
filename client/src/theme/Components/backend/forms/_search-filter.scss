@@ -10,7 +10,7 @@
       margin-top: -7px;
 
       .manicon-magnify {
-        font-size: 12px;
+        font-size: 15px;
         color: $accentPrimary;
       }
 
@@ -31,6 +31,10 @@
   .button-bare-primary {
     margin-right: 20px;
 
+    &.reset {
+      color: $neutral75;
+    }
+
     &:focus {
       color: $accentPrimary;
       outline: 0;
@@ -45,16 +49,28 @@
     }
 
     .select-group {
+      flex: 1;
       padding-left: 0;
       margin: 0 0 25px;
+
+      + .select-group {
+        @include respond($break90) {
+          margin-left: 10px;
+        }
+      }
 
       label {
         left: 0;
       }
 
       .select {
+        width: 100%;
         margin-right: 10px;
         margin-left: 0;
+
+        &:last-child {
+          margin-right: 0;
+        }
 
         select {
           font-size: 13px;
@@ -83,6 +99,6 @@
   }
 
   .button-row {
-    margin-top: 10px;
+    margin-top: 15px;
   }
 }

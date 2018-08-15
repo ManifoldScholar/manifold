@@ -25,8 +25,11 @@
     }
 
     .flex-row {
+      display: flex;
+      flex-direction: column-reverse;
+
       @include respond($break65) {
-        display: flex;
+        flex-direction: row;
         align-items: flex-start;
         justify-content: space-between;
       }
@@ -38,20 +41,22 @@
 
         .search-form {
           display: inline-block;
-          margin-bottom: 18px;
 
-          @include respond($break65) {
-            margin-bottom: 0;
+          input {
+            border-width: 2px;
           }
         }
       }
 
       .left {
+        margin-bottom: 10px;
+
         @include respond($break65) {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           justify-content: space-between;
+          margin-bottom: 0;
         }
 
         .search-form {
@@ -146,11 +151,11 @@
 
   .colophon {
     @include templateCopy;
-    font-size: 16px;
-    color: $neutral40;
+    font-size: 14px;
+    color: $neutral50;
 
     @include respond($break40) {
-      font-size: 18px;
+      font-size: 16px;
     }
 
     a {

@@ -1,0 +1,92 @@
+.secondary-nav {
+  display: block;
+  padding: 13px 0;
+  background-color: $neutral95;
+
+  ul {
+    @include listUnstyled;
+    @include containerPrototype;
+  }
+
+  li + li {
+    margin-top: 0;
+    margin-left: 20px;
+  }
+
+  a {
+    // CABS create a new mixin for this if repeated
+    @include utilityPrimary;
+    color: $neutral75;
+    text-transform: none;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0;
+    transition: color $duration $timing;
+
+    &:hover{
+      color: $neutral20;
+    }
+
+    &:focus {
+      color: $accentPrimary;
+      outline: 0;
+    }
+
+    &.active {
+      color: $neutral20;
+
+      &:focus {
+        @include focusOutline;
+        color: $neutral20;
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  @include respond($break40) {
+    padding: 22px 0;
+
+    li + li {
+      margin-left: 30px;
+    }
+
+    a {
+      font-size: 17px;
+    }
+  }
+
+  &:not(.panel-nav) {
+    white-space: nowrap;
+    overflow-x: auto;
+    display: none;
+
+    li {
+      display: inline-block;
+    }
+
+    @include respond($break75) {
+      display: block;
+    }
+  }
+
+  &.panel-nav {
+    padding: 0;
+
+    ul {
+      padding: 0;
+    }
+
+    li + li {
+      margin-top: 0.89em;
+      margin-left: 0;
+    }
+
+    a {
+      font-size: 17px;
+
+      &.active {
+        border-bottom: none;
+      }
+    }
+  }
+}

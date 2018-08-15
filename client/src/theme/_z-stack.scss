@@ -79,6 +79,10 @@
   z-index: 100;
 }
 
+.dropdown-nav {
+  z-index: 50;
+}
+
 /* stylelint-disable selector-max-id */
 #global-notification-container .notifications-list {
   z-index: 200;

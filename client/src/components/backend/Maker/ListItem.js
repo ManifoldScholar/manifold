@@ -25,7 +25,7 @@ export default class MakerListItem extends PureComponent {
          <i className="manicon manicon-check" />
          </div>
          </div> */}
-        <Link to={lh.link("backendPeopleMaker", maker.id)}>
+        <Link to={lh.link("backendRecordsMaker", maker.id)}>
           <header>
             <figure className="avatar">
               <figcaption className="screen-reader-text">

@@ -56,515 +56,521 @@ export default () => {
       routes: [
         {
           exact: true,
+          name: "backendDashboard",
           component: Backend.Dashboard,
-          path: "/backend"
+          path: "/backend/dashboard",
+          helper: () => "/backend/dashboard"
         },
         {
-          name: "backendProjectResourcesNew",
-          exact: true,
-          component: Backend.Resource.New,
-          path: "/backend/project/:projectId/resources/new",
-          helper: p => `/backend/project/${p}/resources/new`
-        },
-        {
-          name: "backendResourceImport",
+          name: "backendProjects",
           exact: false,
-          component: Backend.ResourceImport.Wrapper,
-          path: "/backend/project/:projectId/resource-import/:id?",
-          helper: p => `/backend/project/${p}/resource-import`,
+          component: Backend.Projects.Wrapper,
+          path: "/backend/projects",
+          helper: () => "/backend/projects",
           routes: [
             {
-              name: "backendResourceImportNew",
               exact: true,
-              component: Backend.ResourceImport.New,
-              path: "/backend/project/:projectId/resource-import",
-              helper: p => `/backend/project/${p}/resource-import`
+              component: Backend.Projects.ProjectsList,
+              path: "/backend/projects"
             },
             {
-              name: "backendResourceImportEdit",
+              name: "backendProjectResourcesNew",
               exact: true,
-              component: Backend.ResourceImport.New,
-              path: "/backend/project/:projectId/resource-import/:id",
-              helper: (p, id) => `/backend/project/${p}/resource-import/${id}`
+              component: Backend.Resource.New,
+              path: "/backend/projects/:projectId/resources/new",
+              helper: p => `/backend/projects/${p}/resources/new`
             },
             {
-              name: "backendResourceImportMap",
-              exact: true,
-              component: Backend.ResourceImport.Map,
-              path: "/backend/project/:projectId/resource-import/:id/map",
-              helper: (p, id) =>
-                `/backend/project/${p}/resource-import/${id}/map`
-            },
-            {
-              name: "backendResourceImportResults",
-              exact: true,
-              component: Backend.ResourceImport.Results,
-              path: "/backend/project/:projectId/resource-import/:id/results",
-              helper: (p, id) =>
-                `/backend/project/${p}/resource-import/${id}/results`
-            }
-          ]
-        },
-        {
-          name: "backendProjectCollectionsNew",
-          exact: true,
-          component: Backend.Collection.New,
-          path: "/backend/project/:projectId/collections/new",
-          helper: p => `/backend/project/${p}/collections/new`
-        },
-        {
-          name: "backendProjectsNew",
-          exact: true,
-          component: Backend.Project.New,
-          path: "/backend/project/new",
-          helper: () => "/backend/project/new"
-        },
-        {
-          name: "backendProject",
-          exact: false,
-          component: Backend.Project.Wrapper,
-          path: "/backend/project/:id",
-          helper: p => `/backend/project/${p}`,
-          routes: [
-            {
-              name: "backendProjectTexts",
+              name: "backendResourceImport",
               exact: false,
-              component: Backend.Project.Texts,
-              path: "/backend/project/:id/texts",
-              helper: p => `/backend/project/${p}/texts`,
+              component: Backend.ResourceImport.Wrapper,
+              path: "/backend/projects/:projectId/resource-import/:id?",
+              helper: p => `/backend/projects/${p}/resource-import`,
               routes: [
                 {
-                  name: "backendProjectTextsIngestionsNew",
-                  exact: false,
-                  component: Backend.Project.Text.Ingestion.New,
-                  path: "/backend/project/:id/texts/ingestions/new",
-                  helper: p => `/backend/project/${p}/texts/ingestions/new`,
-                  modal: true
+                  name: "backendResourceImportNew",
+                  exact: true,
+                  component: Backend.ResourceImport.New,
+                  path: "/backend/projects/:projectId/resource-import",
+                  helper: p => `/backend/projects/${p}/resource-import`
                 },
                 {
-                  name: "backendProjectTextsIngestionEdit",
-                  exact: false,
-                  component: Backend.Project.Text.Ingestion.Edit,
+                  name: "backendResourceImportEdit",
+                  exact: true,
+                  component: Backend.ResourceImport.New,
+                  path: "/backend/projects/:projectId/resource-import/:id",
+                  helper: (p, id) =>
+                    `/backend/projects/${p}/resource-import/${id}`
+                },
+                {
+                  name: "backendResourceImportMap",
+                  exact: true,
+                  component: Backend.ResourceImport.Map,
+                  path: "/backend/projects/:projectId/resource-import/:id/map",
+                  helper: (p, id) =>
+                    `/backend/projects/${p}/resource-import/${id}/map`
+                },
+                {
+                  name: "backendResourceImportResults",
+                  exact: true,
+                  component: Backend.ResourceImport.Results,
                   path:
-                    "/backend/project/:id/texts/ingestion/:ingestionId/edit",
-                  helper: (p, i) =>
-                    `/backend/project/${p}/texts/ingestion/${i}/edit`,
-                  modal: true
+                    "/backend/projects/:projectId/resource-import/:id/results",
+                  helper: (p, id) =>
+                    `/backend/projects/${p}/resource-import/${id}/results`
+                }
+              ]
+            },
+            {
+              name: "backendProjectCollectionsNew",
+              exact: true,
+              component: Backend.Collection.New,
+              path: "/backend/projects/:projectId/collections/new",
+              helper: p => `/backend/projects/${p}/collections/new`
+            },
+            {
+              name: "backendProjectsNew",
+              exact: true,
+              component: Backend.Project.New,
+              path: "/backend/projects/new",
+              helper: () => "/backend/projects/new"
+            },
+            {
+              exact: false,
+              name: "backendResource",
+              component: Backend.Resource.Wrapper,
+              helper: r => `/backend/projects/resource/${r}`,
+              path: "/backend/projects/resource/:id",
+              routes: [
+                {
+                  name: "backendResourceVariants",
+                  exact: true,
+                  component: Backend.Resource.Variants,
+                  path: "/backend/projects/resource/:id/variants",
+                  helper: r => `/backend/projects/resource/${r}/variants`
                 },
                 {
-                  name: "backendProjectTextsIngestionIngest",
+                  name: "backendResourceMetadata",
+                  exact: true,
+                  component: Backend.Resource.Metadata,
+                  path: "/backend/projects/resource/:id/metadata",
+                  helper: r => `/backend/projects/resource/${r}/metadata`
+                },
+                {
+                  name: "backendResourceGeneral",
+                  exact: true,
+                  component: Backend.Resource.General,
+                  path: "/backend/projects/resource/:id/general",
+                  helper: r => `/backend/projects/resource/${r}/general`
+                }
+              ]
+            },
+            {
+              name: "backendCollection",
+              exact: false,
+              component: Backend.Collection.Wrapper,
+              path: "/backend/projects/collection/:id",
+              helper: r => `/backend/projects/collection/${r}`,
+              routes: [
+                {
+                  name: "backendCollectionGeneral",
+                  exact: true,
+                  component: Backend.Collection.General,
+                  path: "/backend/projects/collection/:id/general",
+                  helper: r => `/backend/projects/collection/${r}/general`
+                },
+                {
+                  name: "backendCollectionResources",
+                  exact: true,
+                  component: Backend.Collection.Resources,
+                  path: "/backend/projects/collection/:id/resources",
+                  helper: r => `/backend/projects/collection/${r}/resources`
+                }
+              ]
+            },
+            {
+              name: "backendText",
+              exact: false,
+              component: Backend.Text.Wrapper,
+              path: "/backend/projects/text/:id",
+              helper: t => `/backend/projects/text/${t}`,
+              routes: [
+                {
+                  name: "backendTextStyles",
+                  component: Backend.Text.Styles,
+                  exact: true,
+                  path: "/backend/projects/text/:id/styles",
+                  helper: t => `/backend/projects/text/${t}/styles`
+                },
+                {
+                  name: "BackendTextStylesheetNew",
+                  component: Backend.Stylesheet.Edit,
+                  exact: true,
+                  path: "/backend/projects/text/:id/styles/new",
+                  helper: t => `/backend/projects/text/${t}/styles/new`
+                },
+                {
+                  name: "BackendTextStylesheetEdit",
+                  component: Backend.Stylesheet.Edit,
+                  exact: true,
+                  path: "/backend/projects/text/:id/styles/:stylesheet",
+                  helper: (t, ss) => `/backend/projects/text/${t}/styles/${ss}`
+                },
+                {
+                  name: "backendTextMetadata",
+                  exact: true,
+                  component: Backend.Text.Metadata,
+                  path: "/backend/projects/text/:id/metadata",
+                  helper: t => `/backend/projects/text/${t}/metadata`
+                },
+                {
+                  name: "backendTextCollaborators",
+                  exact: false,
+                  component: Backend.Text.Collaborators,
+                  path: "/backend/projects/text/:id/collaborators",
+                  helper: t => `/backend/projects/text/${t}/collaborators`,
+                  routes: [
+                    {
+                      name: "backendTextCollaborator",
+                      component: Backend.Makers.Edit,
+                      path: "/backend/projects/text/:tId/collaborators/:id",
+                      helper: (tId, id) =>
+                        `/backend/projects/text/${tId}/collaborators/${id}`
+                    }
+                  ]
+                },
+                {
+                  name: "backendTextIngestionsNew",
+                  exact: true,
+                  component: Backend.Text.Ingestion.New,
+                  path: "/backend/projects/text/:id/ingestions/new",
+                  helper: t => `/backend/projects/text/${t}/ingestions/new`,
+                  modal: false
+                },
+                {
+                  name: "backendTextIngestionEdit",
+                  exact: false,
+                  component: Backend.Text.Ingestion.Edit,
+                  path:
+                    "/backend/projects/text/:id/ingestion/:ingestionId/edit",
+                  helper: (t, i) =>
+                    `/backend/projects/text/${t}/ingestion/${i}/edit`,
+                  modal: false
+                },
+                {
+                  name: "backendTextIngestionIngest",
                   exact: false,
                   component: Backend.Ingestion.Ingest,
                   path:
-                    "/backend/project/:id/texts/ingestion/:ingestionId/ingest",
-                  helper: (p, i) =>
-                    `/backend/project/${p}/texts/ingestion/${i}/ingest`,
-                  modal: true
+                    "/backend/projects/text/:id/ingestion/:ingestionId/ingest",
+                  helper: (t, i) =>
+                    `/backend/projects/text/${t}/ingestion/${i}/ingest`,
+                  modal: false
                 },
                 {
+                  name: "backendTextGeneral",
+                  exact: true,
+                  component: Backend.Text.General,
+                  path: "/backend/projects/text/:id/general",
+                  helper: t => `/backend/projects/text/${t}/general`
+                }
+              ]
+            },
+            {
+              name: "backendProject",
+              exact: false,
+              component: Backend.Project.Wrapper,
+              path: "/backend/projects/:id",
+              helper: p => `/backend/projects/${p}`,
+              routes: [
+                {
+                  name: "backendProjectTexts",
                   exact: false,
-                  component: Backend.Project.Category.Wrapper,
-                  path: "/backend/project/:id/texts/category",
+                  component: Backend.Project.Texts,
+                  path: "/backend/projects/:id/texts",
+                  helper: p => `/backend/projects/${p}/texts`,
                   routes: [
                     {
-                      name: "backendProjectCategoriesNew",
-                      exact: true,
-                      component: Backend.Project.Category.New,
-                      path: "/backend/project/:id/texts/category/new",
-                      helper: p => `/backend/project/${p}/texts/category/new`
+                      name: "backendProjectTextsIngestionsNew",
+                      exact: false,
+                      component: Backend.Project.Text.Ingestion.New,
+                      path: "/backend/projects/:id/texts/ingestions/new",
+                      helper: p =>
+                        `/backend/projects/${p}/texts/ingestions/new`,
+                      modal: true
                     },
                     {
-                      name: "backendProjectCategory",
-                      exact: true,
-                      component: Backend.Project.Category.Edit,
-                      path: "/backend/project/:id/texts/category/:catId/edit",
-                      helper: (p, c) =>
-                        `/backend/project/${p}/texts/category/${c}/edit`
+                      name: "backendProjectTextsIngestionEdit",
+                      exact: false,
+                      component: Backend.Project.Text.Ingestion.Edit,
+                      path:
+                        "/backend/projects/:id/texts/ingestion/:ingestionId/edit",
+                      helper: (p, i) =>
+                        `/backend/projects/${p}/texts/ingestion/${i}/edit`,
+                      modal: true
+                    },
+                    {
+                      name: "backendProjectTextsIngestionIngest",
+                      exact: false,
+                      component: Backend.Ingestion.Ingest,
+                      path:
+                        "/backend/projects/:id/texts/ingestion/:ingestionId/ingest",
+                      helper: (p, i) =>
+                        `/backend/projects/${p}/texts/ingestion/${i}/ingest`,
+                      modal: true
+                    },
+                    {
+                      exact: false,
+                      component: Backend.Project.Category.Wrapper,
+                      path: "/backend/projects/:id/texts/category",
+                      routes: [
+                        {
+                          name: "backendProjectCategoriesNew",
+                          exact: true,
+                          component: Backend.Project.Category.New,
+                          path: "/backend/projects/:id/texts/category/new",
+                          helper: p =>
+                            `/backend/projects/${p}/texts/category/new`
+                        },
+                        {
+                          name: "backendProjectCategory",
+                          exact: true,
+                          component: Backend.Project.Category.Edit,
+                          path:
+                            "/backend/projects/:id/texts/category/:catId/edit",
+                          helper: (p, c) =>
+                            `/backend/projects/${p}/texts/category/${c}/edit`
+                        }
+                      ]
                     }
                   ]
-                }
-              ]
-            },
-            {
-              name: "backendProjectResources",
-              exact: true,
-              component: Backend.Project.Resources,
-              path: "/backend/project/:id/resources",
-              helper: p => `/backend/project/${p}/resources`
-            },
-            {
-              name: "backendProjectCollections",
-              exact: true,
-              component: Backend.Project.Collections,
-              path: "/backend/project/:id/collections",
-              helper: p => `/backend/project/${p}/collections`
-            },
-            {
-              name: "backendProjectPermissions",
-              component: Backend.Project.Permissions,
-              path: "/backend/project/:projectId/permissions/:id?",
-              helper: p => `/backend/project/${p}/permissions`,
-              routes: [
-                {
-                  name: "backendProjectPermissionsNew",
-                  component: Backend.Permission.New,
-                  path: "/backend/project/:pId/permissions/new",
-                  helper: pId => `/backend/project/${pId}/permissions/new`
                 },
                 {
-                  name: "backendProjectPermission",
-                  component: Backend.Permission.Edit,
-                  path: "/backend/project/:pId/permissions/:id",
-                  helper: (pId, id) =>
-                    `/backend/project/${pId}/permissions/${id}`
-                }
-              ]
-            },
-            {
-              name: "backendProjectCollaborators",
-              component: Backend.Project.Collaborators,
-              path: "/backend/project/:id/collaborators",
-              helper: p => `/backend/project/${p}/collaborators`,
-              routes: [
-                {
-                  name: "backendProjectCollaborator",
-                  component: Backend.People.Makers.Edit,
-                  path: "/backend/project/:pId/collaborators/:id",
-                  helper: (pId, id) =>
-                    `/backend/project/${pId}/collaborators/${id}`
-                }
-              ]
-            },
-            {
-              name: "backendProjectEvents",
-              exact: true,
-              component: Backend.Project.Events,
-              path: "/backend/project/:id/events",
-              helper: p => `/backend/project/${p}/events`
-            },
-            {
-              name: "backendProjectMetadata",
-              exact: true,
-              component: Backend.Project.Metadata,
-              path: "/backend/project/:id/metadata",
-              helper: p => `/backend/project/${p}/metadata`
-            },
-            {
-              name: "backendProjectSocial",
-              exact: false,
-              component: Backend.Project.Social.Wrapper,
-              path: "/backend/project/:pId/social/:type(twitter-query)?/:qId?",
-              helper: p => `/backend/project/${p}/social`,
-              routes: [
-                {
-                  name: "backendProjectSocialTwitterQueryNew",
-                  component: Backend.TwitterQuery.New,
-                  path: "/backend/project/:pId/social/twitter-query/new",
-                  helper: pId =>
-                    `/backend/project/${pId}/social/twitter-query/new`
-                },
-                {
-                  name: "backendProjectSocialTwitterQuery",
-                  component: Backend.TwitterQuery.Edit,
-                  path: "/backend/project/:pId/social/twitter-query/:id",
-                  helper: (pId, id) =>
-                    `/backend/project/${pId}/social/twitter-query/${id}`
-                }
-              ]
-            },
-            {
-              name: "backendProjectProjectPage",
-              exact: true,
-              component: Backend.Project.ProjectPage,
-              path: "/backend/project/:id/project-page",
-              helper: p => `/backend/project/${p}/project-page`
-            },
-            {
-              name: "backendProjectLog",
-              exact: true,
-              component: Backend.Project.Log,
-              path: "/backend/project/:id/log",
-              helper: p => `/backend/project/${p}/log`
-            },
-            {
-              name: "backendProjectGeneral",
-              exact: true,
-              component: Backend.Project.General,
-              path: "/backend/project/:id/general",
-              helper: p => `/backend/project/${p}/general`
-            }
-          ]
-        },
-        {
-          name: "backendContentPage",
-          component: Backend.Content.Pages.Detail,
-          path: "/backend/content/pages/:id",
-          exact: false,
-          helper: p => `/backend/content/pages/${p}`,
-          routes: [
-            {
-              name: "backendContentPageNew",
-              component: Backend.Content.Pages.New,
-              path: "/backend/content/pages/new",
-              helper: () => `/backend/content/pages/new`
-            },
-            {
-              name: "backendContentPageBody",
-              component: Backend.Content.Pages.Body,
-              path: "/backend/content/pages/:id/body",
-              helper: p => `/backend/content/pages/${p}/body`
-            },
-            {
-              name: "backendContentPageGeneral",
-              component: Backend.Content.Pages.General,
-              path: "/backend/content/pages/:id/general",
-              helper: p => `/backend/content/pages/${p}/general`
-            }
-          ]
-        },
-        {
-          name: "backendContentFeature",
-          component: Backend.Content.Features.Detail,
-          path: "/backend/content/features/:id",
-          exact: false,
-          helper: f => `/backend/content/features/${f}`,
-          routes: [
-            {
-              name: "backendContentFeatureNew",
-              component: Backend.Content.Features.New,
-              path: "/backend/content/features/new",
-              helper: () => `/backend/content/features/new`
-            },
-            {
-              name: "backendContentFeatureGeneral",
-              component: Backend.Content.Features.General,
-              path: "/backend/content/features/:id",
-              helper: p => `/backend/content/features/${p}`
-            }
-          ]
-        },
-        {
-          name: "backendContent",
-          exact: false,
-          component: Backend.Content.Wrapper,
-          path: "/backend/content",
-          helper: () => "/backend/content",
-          routes: [
-            {
-              name: "backendContentPages",
-              component: Backend.Content.Pages.List,
-              path: "/backend/content/pages",
-              exact: true,
-              helper: () => `/backend/content/pages`
-            },
-            {
-              name: "backendContentFeatures",
-              component: Backend.Content.Features.List,
-              exact: true,
-              path: "/backend/content/features",
-              helper: () => `/backend/content/features`
-            }
-          ]
-        },
-        {
-          name: "backendContentFeaturesNew",
-          component: Backend.Content.Features.New,
-          path: "/backend/features/new",
-          helper: () => `/backend/features/new`
-        },
-        {
-          name: "backendContentFeaturesEdit",
-          component: Backend.Content.Features.Edit,
-          path: "/backend/features/:id",
-          helper: f => `/backend/features/${f}`
-        },
-        {
-          name: "backendPeople",
-          exact: false,
-          component: Backend.People.Wrapper,
-          path: "/backend/people",
-          helper: () => "/backend/people",
-          routes: [
-            {
-              name: "backendPeopleUsers",
-              exact: true,
-              component: Backend.People.Users.List,
-              path: "/backend/people/users/:id?",
-              helper: () => "/backend/people/users",
-              routes: [
-                {
-                  name: "backendPeopleUsersNew",
+                  name: "backendProjectResources",
                   exact: true,
-                  component: Backend.People.Users.New,
-                  path: "/backend/people/users/new",
-                  helper: () => "/backend/people/users/new"
+                  component: Backend.Project.Resources,
+                  path: "/backend/projects/:id/resources",
+                  helper: p => `/backend/projects/${p}/resources`
                 },
                 {
-                  name: "backendPeopleUser",
-                  component: Backend.People.Users.Edit,
-                  path: "/backend/people/users/:id",
-                  helper: u => `/backend/people/users/${u}`
-                }
-              ]
-            },
-            {
-              name: "backendPeopleMakers",
-              component: Backend.People.Makers.List,
-              path: "/backend/people/makers/:id?",
-              helper: () => `/backend/people/makers`,
-              routes: [
-                {
-                  name: "backendPeopleMakersNew",
+                  name: "backendProjectCollections",
                   exact: true,
-                  component: Backend.People.Makers.New,
-                  path: "/backend/people/makers/new",
-                  helper: () => "/backend/people/makers/new"
+                  component: Backend.Project.Collections,
+                  path: "/backend/projects/:id/collections",
+                  helper: p => `/backend/projects/${p}/collections`
                 },
                 {
-                  name: "backendPeopleMaker",
-                  component: Backend.People.Makers.Edit,
+                  name: "backendProjectPermissions",
+                  component: Backend.Project.Permissions,
+                  path: "/backend/projects/:projectId/permissions/:id?",
+                  helper: p => `/backend/projects/${p}/permissions`,
+                  routes: [
+                    {
+                      name: "backendProjectPermissionsNew",
+                      component: Backend.Permission.New,
+                      path: "/backend/projects/:pId/permissions/new",
+                      helper: pId => `/backend/projects/${pId}/permissions/new`
+                    },
+                    {
+                      name: "backendProjectPermission",
+                      component: Backend.Permission.Edit,
+                      path: "/backend/projects/:pId/permissions/:id",
+                      helper: (pId, id) =>
+                        `/backend/projects/${pId}/permissions/${id}`
+                    }
+                  ]
+                },
+                {
+                  name: "backendProjectCollaborators",
+                  component: Backend.Project.Collaborators,
+                  path: "/backend/projects/:id/collaborators",
+                  helper: p => `/backend/projects/${p}/collaborators`,
+                  routes: [
+                    {
+                      name: "backendProjectCollaborator",
+                      component: Backend.Makers.Edit,
+                      path: "/backend/projects/:pId/collaborators/:id",
+                      helper: (pId, id) =>
+                        `/backend/projects/${pId}/collaborators/${id}`
+                    }
+                  ]
+                },
+                {
+                  name: "backendProjectEvents",
                   exact: true,
-                  path: "/backend/people/makers/:id",
-                  helper: m => `/backend/people/makers/${m}`
+                  component: Backend.Project.Events,
+                  path: "/backend/projects/:id/events",
+                  helper: p => `/backend/projects/${p}/events`
+                },
+                {
+                  name: "backendProjectMetadata",
+                  exact: true,
+                  component: Backend.Project.Metadata,
+                  path: "/backend/projects/:id/metadata",
+                  helper: p => `/backend/projects/${p}/metadata`
+                },
+                {
+                  name: "backendProjectSocial",
+                  exact: false,
+                  component: Backend.Project.Social.Wrapper,
+                  path:
+                    "/backend/projects/:pId/social/:type(twitter-query)?/:qId?",
+                  helper: p => `/backend/projects/${p}/social`,
+                  routes: [
+                    {
+                      name: "backendProjectSocialTwitterQueryNew",
+                      component: Backend.TwitterQuery.New,
+                      path: "/backend/projects/:pId/social/twitter-query/new",
+                      helper: pId =>
+                        `/backend/projects/${pId}/social/twitter-query/new`
+                    },
+                    {
+                      name: "backendProjectSocialTwitterQuery",
+                      component: Backend.TwitterQuery.Edit,
+                      path: "/backend/projects/:pId/social/twitter-query/:id",
+                      helper: (pId, id) =>
+                        `/backend/projects/${pId}/social/twitter-query/${id}`
+                    }
+                  ]
+                },
+                {
+                  name: "backendProjectProjectPage",
+                  exact: true,
+                  component: Backend.Project.ProjectPage,
+                  path: "/backend/projects/:id/project-page",
+                  helper: p => `/backend/projects/${p}/project-page`
+                },
+                {
+                  name: "backendProjectLog",
+                  exact: true,
+                  component: Backend.Project.Log,
+                  path: "/backend/projects/:id/log",
+                  helper: p => `/backend/projects/${p}/log`
+                },
+                {
+                  name: "backendProjectGeneral",
+                  exact: true,
+                  component: Backend.Project.General,
+                  path: "/backend/projects/:id/general",
+                  helper: p => `/backend/projects/${p}/general`
                 }
               ]
             }
           ]
         },
         {
-          name: "backendText",
+          name: "backendRecords",
           exact: false,
-          component: Backend.Text.Wrapper,
-          path: "/backend/text/:id",
-          helper: t => `/backend/text/${t}`,
+          component: Backend.Records,
+          path: "/backend/records/:type?/:id?",
+          helper: () => "/backend/records",
           routes: [
             {
-              name: "backendTextStyles",
-              component: Backend.Text.Styles,
+              name: "backendRecordsUsers",
               exact: true,
-              path: "/backend/text/:id/styles",
-              helper: t => `/backend/text/${t}/styles`
-            },
-            {
-              name: "BackendTextStylesheetNew",
-              component: Backend.Stylesheet.Edit,
-              exact: true,
-              path: "/backend/text/:id/styles/new",
-              helper: t => `/backend/text/${t}/styles/new`
-            },
-            {
-              name: "BackendTextStylesheetEdit",
-              component: Backend.Stylesheet.Edit,
-              exact: true,
-              path: "/backend/text/:id/styles/:stylesheet",
-              helper: (t, ss) => `/backend/text/${t}/styles/${ss}`
-            },
-            {
-              name: "backendTextMetadata",
-              exact: true,
-              component: Backend.Text.Metadata,
-              path: "/backend/text/:id/metadata",
-              helper: t => `/backend/text/${t}/metadata`
-            },
-            {
-              name: "backendTextCollaborators",
-              exact: false,
-              component: Backend.Text.Collaborators,
-              path: "/backend/text/:id/collaborators",
-              helper: t => `/backend/text/${t}/collaborators`,
+              component: Backend.Users.List,
+              path: "/backend/records/users/:id?",
+              helper: () => "/backend/records/users",
               routes: [
                 {
-                  name: "backendTextCollaborator",
-                  component: Backend.People.Makers.Edit,
-                  path: "/backend/text/:tId/collaborators/:id",
-                  helper: (tId, id) =>
-                    `/backend/text/${tId}/collaborators/${id}`
+                  name: "backendRecordsUsersNew",
+                  exact: true,
+                  component: Backend.Users.New,
+                  path: "/backend/records/users/new",
+                  helper: () => "/backend/records/users/new"
+                },
+                {
+                  name: "backendRecordsUser",
+                  component: Backend.Users.Edit,
+                  path: "/backend/records/users/:id",
+                  helper: u => `/backend/records/users/${u}`
                 }
               ]
             },
             {
-              name: "backendTextIngestionsNew",
+              name: "backendRecordsMakers",
+              component: Backend.Makers.List,
               exact: true,
-              component: Backend.Text.Ingestion.New,
-              path: "/backend/text/:id/ingestions/new",
-              helper: t => `/backend/text/${t}/ingestions/new`,
-              modal: false
+              path: "/backend/records/makers/:id?",
+              helper: () => `/backend/records/makers`,
+              routes: [
+                {
+                  name: "backendRecordsMakersNew",
+                  exact: true,
+                  component: Backend.Makers.New,
+                  path: "/backend/records/makers/new",
+                  helper: () => "/backend/records/makers/new"
+                },
+                {
+                  name: "backendRecordsMaker",
+                  component: Backend.Makers.Edit,
+                  exact: true,
+                  path: "/backend/records/makers/:id",
+                  helper: m => `/backend/records/makers/${m}`
+                }
+              ]
             },
             {
-              name: "backendTextIngestionEdit",
+              name: "backendRecordsPage",
+              component: Backend.Pages.Detail,
+              path: "/backend/records/pages/:id",
               exact: false,
-              component: Backend.Text.Ingestion.Edit,
-              path: "/backend/text/:id/ingestion/:ingestionId/edit",
-              helper: (t, i) => `/backend/text/${t}/ingestion/${i}/edit`,
-              modal: false
+              helper: p => `/backend/records/pages/${p}`,
+              routes: [
+                {
+                  name: "backendRecordsPageNew",
+                  component: Backend.Pages.New,
+                  path: "/backend/records/pages/new",
+                  helper: () => `/backend/records/pages/new`
+                },
+                {
+                  name: "backendRecordsPageBody",
+                  component: Backend.Pages.Body,
+                  path: "/backend/records/pages/:id/body",
+                  helper: p => `/backend/records/pages/${p}/body`
+                },
+                {
+                  name: "backendRecordsPageGeneral",
+                  component: Backend.Pages.General,
+                  path: "/backend/records/pages/:id/general",
+                  helper: p => `/backend/records/pages/${p}/general`
+                }
+              ]
             },
             {
-              name: "backendTextIngestionIngest",
+              name: "backendRecordsFeature",
+              component: Backend.Features.Detail,
+              path: "/backend/records/features/:id",
               exact: false,
-              component: Backend.Ingestion.Ingest,
-              path: "/backend/text/:id/ingestion/:ingestionId/ingest",
-              helper: (t, i) => `/backend/text/${t}/ingestion/${i}/ingest`,
-              modal: false
+              helper: f => `/backend/records/features/${f}`,
+              routes: [
+                {
+                  name: "backendRecordsFeatureNew",
+                  component: Backend.Features.New,
+                  path: "/backend/records/features/new",
+                  helper: () => `/backend/records/features/new`
+                },
+                {
+                  name: "backendRecordsFeatureGeneral",
+                  component: Backend.Features.General,
+                  path: "/backend/records/features/:id",
+                  helper: p => `/backend/records/features/${p}`
+                }
+              ]
             },
             {
-              name: "backendTextGeneral",
+              name: "backendRecordsPages",
+              component: Backend.Pages.List,
+              path: "/backend/records/pages",
               exact: true,
-              component: Backend.Text.General,
-              path: "/backend/text/:id/general",
-              helper: t => `/backend/text/${t}/general`
-            }
-          ]
-        },
-        {
-          exact: false,
-          name: "backendResource",
-          component: Backend.Resource.Wrapper,
-          helper: r => `/backend/resource/${r}`,
-          path: "/backend/resource/:id",
-          routes: [
-            {
-              name: "backendResourceVariants",
-              exact: true,
-              component: Backend.Resource.Variants,
-              path: "/backend/resource/:id/variants",
-              helper: r => `/backend/resource/${r}/variants`
+              helper: () => `/backend/records/pages`
             },
             {
-              name: "backendResourceMetadata",
+              name: "backendRecordsFeatures",
+              component: Backend.Features.List,
               exact: true,
-              component: Backend.Resource.Metadata,
-              path: "/backend/resource/:id/metadata",
-              helper: r => `/backend/resource/${r}/metadata`
-            },
-            {
-              name: "backendResourceGeneral",
-              exact: true,
-              component: Backend.Resource.General,
-              path: "/backend/resource/:id/general",
-              helper: r => `/backend/resource/${r}/general`
-            }
-          ]
-        },
-        {
-          name: "backendCollection",
-          exact: false,
-          component: Backend.Collection.Wrapper,
-          path: "/backend/collection/:id",
-          helper: r => `/backend/collection/${r}`,
-          routes: [
-            {
-              name: "backendCollectionGeneral",
-              exact: true,
-              component: Backend.Collection.General,
-              path: "/backend/collection/:id/general",
-              helper: r => `/backend/collection/${r}/general`
-            },
-            {
-              name: "backendCollectionResources",
-              exact: true,
-              component: Backend.Collection.Resources,
-              path: "/backend/collection/:id/resources",
-              helper: r => `/backend/collection/${r}/resources`
+              path: "/backend/records/features",
+              helper: () => `/backend/records/features`
             }
           ]
         },
@@ -640,8 +646,8 @@ export default () => {
           name: "frontendProject",
           exact: true,
           component: Frontend.ProjectDetail,
-          path: "/project/:id",
-          helper: p => `/project/${p}`
+          path: "/projects/:id",
+          helper: p => `/projects/${p}`
         },
         {
           name: "frontendFollowing",
@@ -680,10 +686,11 @@ export default () => {
           name: "frontendProjectEvents",
           exact: true,
           component: Frontend.EventList,
-          path: "/project/:id/events/:page?",
+          path: "/projects/:id/events/:page?",
           helpers: {
-            frontendProjectEvents: p => `/project/${p}/events`,
-            frontendProjectEventsPage: (pr, pg) => `/project/${pr}/events/${pg}`
+            frontendProjectEvents: p => `/projects/${p}/events`,
+            frontendProjectEventsPage: (pr, pg) =>
+              `/projects/${pr}/events/${pg}`
           }
         },
         {
@@ -697,12 +704,12 @@ export default () => {
           name: "frontendProjectCollection",
           exact: true,
           component: Frontend.CollectionDetail,
-          path: "/project/:id/collection/:collectionId",
+          path: "/projects/:id/collection/:collectionId",
           helpers: {
             frontendProjectCollection: (p, c, params = {}) => {
               const query = queryString.stringify(params);
-              if (!query) return `/project/${p}/collection/${c}`;
-              return `/project/${p}/collection/${c}?${query}`;
+              if (!query) return `/projects/${p}/collection/${c}`;
+              return `/projects/${p}/collection/${c}?${query}`;
             },
             frontendProjectCollectionRelative: c => `collection/${c}`
           }
@@ -711,27 +718,27 @@ export default () => {
           name: "frontendProjectResources",
           exact: true,
           component: Frontend.ProjectResources,
-          path: "/project/:id/resources",
+          path: "/projects/:id/resources",
           helper: (p, params = {}) => {
             const query = queryString.stringify(params);
-            if (!query) return `/project/${p}/resources`;
-            return `/project/${p}/resources/?${query}`;
+            if (!query) return `/projects/${p}/resources`;
+            return `/projects/${p}/resources/?${query}`;
           }
         },
         {
           name: "frontendProjectCollectionResource",
           exact: true,
           component: Frontend.ResourceDetail,
-          path: "/project/:id/collection/:collectionId/resource/:resourceId",
-          helper: (p, c, r) => `/project/${p}/collection/${c}/resource/${r}`
+          path: "/projects/:id/collection/:collectionId/resource/:resourceId",
+          helper: (p, c, r) => `/projects/${p}/collection/${c}/resource/${r}`
         },
         {
           name: "frontendProjectResource",
           exact: true,
           component: Frontend.ResourceDetail,
-          path: "/project/:id/resource/:resourceId",
+          path: "/projects/:id/resource/:resourceId",
           helpers: {
-            frontendProjectResource: (p, r) => `/project/${p}/resource/${r}`,
+            frontendProjectResource: (p, r) => `/projects/${p}/resource/${r}`,
             frontendProjectResourceRelative: r => `resource/${r}`
           }
         },

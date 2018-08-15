@@ -28,7 +28,7 @@ export default class LogListItem extends PureComponent {
 
   renderUserLink(version) {
     return (
-      <Link to={lh.link("backendPeopleUser", version.attributes.actorId)}>
+      <Link to={lh.link("backendRecordsUser", version.attributes.actorId)}>
         {`${version.attributes.actorName}`}
       </Link>
     );

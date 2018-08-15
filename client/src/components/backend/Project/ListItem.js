@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Project as GlobalProject } from "components/global";
-import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
 
 export default class ProjectListItem extends PureComponent {
@@ -51,23 +50,23 @@ export default class ProjectListItem extends PureComponent {
   }
 
   renderProjectImage(project) {
-    if (project.attributes.coverStyles.smallPortrait) {
-      return (
-        <img
-          src={project.attributes.coverStyles.smallPortrait}
-          alt="Project Cover"
-        />
-      );
-    }
-    if (project.attributes.avatarStyles.smallSquare) {
-      return (
-        <img
-          src={project.attributes.avatarStyles.smallSquare}
-          alt="Project Cover"
-        />
-      );
-    }
-    return <GlobalProject.Placeholder />;
+    const meta = project.attributes.avatarMeta.original;
+    const hasAvatarStyles = project.attributes.avatarStyles.original;
+
+    if (!meta) {
+      return <GlobalProject.Placeholder />;
+    } else {
+      if (!hasAvatarStyles) {
+        return <GlobalProject.Placeholder />;
+      } else {
+        const imageStyle =
+          meta.width >= meta.height
+            ? project.attributes.avatarStyles.smallSquare
+            : project.attributes.avatarStyles.small;
+
+        return <img src={imageStyle} alt={`View ${project.attributes.title}`} />;
+      }
+    };
   }
 
   render() {
@@ -89,20 +88,6 @@ export default class ProjectListItem extends PureComponent {
               {this.renderProjectMakers(project.relationships.creators)}
             </div>
           </header>
-          <HigherOrder.Authorize
-            successBehavior="show"
-            entity={project}
-            ability={["update", "manageResources"]}
-          >
-            <span className="label">Edit</span>
-          </HigherOrder.Authorize>
-          <HigherOrder.Authorize
-            successBehavior="hide"
-            entity={project}
-            ability={["update", "manageResources"]}
-          >
-            <span className="label">View</span>
-          </HigherOrder.Authorize>
         </Link>
       </li>
     );

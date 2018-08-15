@@ -8,19 +8,93 @@
   }
 
   .form-section-label {
+    @include panelRounded;
     display: table;
     width: 100%;
-    padding: 1.063em 19px 0.938em;
-    margin-bottom: 19px;
+    margin-bottom: 20px;
+    padding: 0.75em 1.5em 0.875em;
     font-size: 16px;
-    background-color: $neutral95;
 
     span {
       @include utilityPrimary;
       display: table-cell;
       width: 100%;
-      font-weight: $medium;
       color: $accentPrimary;
+      font-size: 14px;
+      font-weight: $semibold;
+      letter-spacing: 0.1em;
+    }
+
+    // if using a rounded label, pad any of its siblings
+    ~ * {
+      padding-right: 5px;
+      padding-left: 5px;
+
+      @include respond($break75) {
+        padding-right: 24px;
+        padding-left: 24px;
+      }
+    }
+  }
+
+  .form-input-group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    @include respond($break90) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    > .vertical-list-primary,
+    > .buttons-icon-horizontal {
+      @include respond($break90) {
+        flex-basis: 100%;
+      }
+    }
+
+    > .form-input {
+      flex: 0 1 auto;
+      margin-top: 0;
+      margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 12px;
+      }
+
+      @include respond($break90) {
+        flex-basis: 47.64%;
+        margin-top: 18px;
+      }
+
+      &.wide {
+        @include respond($break90) {
+          flex-basis: 100%;
+        }
+      }
+
+      &.form-input-fourth {
+        @include respond($break90) {
+          flex-basis: 23.82%;
+        }
+      }
+
+      &.form-input-third {
+        @include respond($break90) {
+          flex-basis: 31.76%;
+        }
+      }
+
+      .form-select {
+        width: 100%;
+      }
+    }
+
+    > .form-divider.wide {
+      @include respond($break90) {
+        flex-basis: 100%;
+      }
     }
   }
 

@@ -6,54 +6,16 @@ import { HigherOrder } from "containers/global";
 import { Utility } from "components/global";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import navigation from "helpers/router/navigation";
 
 export class SettingsWrapperContainer extends PureComponent {
   static propTypes = {
     route: PropTypes.object
   };
 
-  secondaryNavigationLinks() {
-    return [
-      {
-        path: lh.link("backendSettingsGeneral"),
-        label: "General",
-        key: "general",
-        entity: "settings",
-        ability: "update"
-      },
-      {
-        path: lh.link("backendSettingsTheme"),
-        label: "Theme",
-        key: "theme",
-        entity: "settings",
-        ability: "update"
-      },
-      {
-        path: lh.link("backendSettingsIntegrations"),
-        label: "Integrations",
-        key: "integrations",
-        entity: "settings",
-        ability: "update"
-      },
-      {
-        path: lh.link("backendSettingsSubjects"),
-        label: "Subjects",
-        key: "subjects",
-        entity: "settings",
-        ability: "update"
-      },
-      {
-        path: lh.link("backendSettingsEmail"),
-        label: "Email",
-        key: "email",
-        entity: "settings",
-        ability: "update"
-      }
-    ];
-  }
-
   render() {
     const skipId = "skip-to-settings-panel";
+    const secondaryLinks = navigation.settings();
 
     return (
       <HigherOrder.Authorize
@@ -65,21 +27,13 @@ export class SettingsWrapperContainer extends PureComponent {
       >
         <RedirectToFirstMatch
           from={lh.link("backendSettings")}
-          candidates={this.secondaryNavigationLinks()}
+          candidates={secondaryLinks}
         />
 
         <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary links={this.secondaryNavigationLinks()} />
-            </div>
-          </aside>
+          <Utility.SkipLink skipId={skipId} />
+          <Navigation.Secondary links={secondaryLinks} />
           <div className="container">
-            <aside className="aside">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary links={this.secondaryNavigationLinks()} />
-            </aside>
             <div id={skipId} className="panel">
               {childRoutes(this.props.route)}
             </div>

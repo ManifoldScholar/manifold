@@ -20,7 +20,8 @@ class FormTextArea extends Component {
     name: PropTypes.string,
     id: PropTypes.string,
     idForError: PropTypes.string,
-    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    wide: PropTypes.bool
   };
 
   static defaultProps = {
@@ -33,9 +34,13 @@ class FormTextArea extends Component {
     const labelClass = classnames({
       "has-instructions": isString(this.props.instructions)
     });
+    const inputClasses = classnames({
+      "form-input": true,
+      wide: this.props.wide
+    });
 
     return (
-      <div className="form-input">
+      <div className={inputClasses}>
         <GlobalForm.Errorable
           className="form-input"
           name={this.props.name}

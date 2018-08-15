@@ -9,6 +9,7 @@ import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
+import navigation from "helpers/router/navigation";
 
 const { request, flush } = entityStoreActions;
 
@@ -55,88 +56,6 @@ export class ProjectWrapperContainer extends PureComponent {
     this.setState({ confirmation: null });
   }
 
-  secondaryNavigationLinks(project) {
-    return [
-      {
-        path: lh.link("backendProjectGeneral", project.id),
-        label: "General",
-        key: "general",
-        entity: project,
-        ability: "update"
-      },
-      {
-        path: lh.link("backendProjectProjectPage", project.id),
-        label: "Appearance",
-        key: "projectPage",
-        entity: project,
-        ability: "update"
-      },
-      {
-        path: lh.link("backendProjectPermissions", project.id),
-        label: "Permissions",
-        key: "permissions",
-        entity: project,
-        ability: "managePermissions"
-      },
-      {
-        path: lh.link("backendProjectCollaborators", project.id),
-        label: "People",
-        key: "collaborators",
-        entity: project,
-        ability: "updateMakers"
-      },
-      {
-        path: lh.link("backendProjectTexts", project.id),
-        label: "Texts",
-        key: "texts",
-        entity: project,
-        ability: "manageTexts"
-      },
-      {
-        path: lh.link("backendProjectResources", project.id),
-        label: "Resources",
-        key: "resources",
-        entity: project,
-        ability: "manageResources"
-      },
-      {
-        path: lh.link("backendProjectCollections", project.id),
-        label: "Collections",
-        key: "collections",
-        entity: project,
-        ability: "manageCollections"
-      },
-      {
-        path: lh.link("backendProjectEvents", project.id),
-        label: "Activity",
-        key: "events",
-        entity: project,
-        ability: "manageEvents"
-      },
-      {
-        path: lh.link("backendProjectMetadata", project.id),
-        label: "Metadata",
-        key: "metadata",
-        entity: project,
-        ability: "update"
-      },
-      {
-        path: lh.link("backendProjectSocial", project.id),
-        label: "Social Integrations",
-        key: "social",
-        entity: project,
-        ability: "manageSocials"
-      },
-      {
-        path: lh.link("backendProjectLog", project.id),
-        label: "Log",
-        key: "log",
-        entity: project,
-        ability: "readLog"
-      }
-    ];
-  }
-
   doPreview = event => {
     event.preventDefault();
     const win = window.open(
@@ -181,15 +100,16 @@ export class ProjectWrapperContainer extends PureComponent {
     return (
       <div>
         <button onClick={this.doPreview} className="button-bare-primary">
-          Preview{" "}
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
+          Preview{" "}
         </button>
         <HigherOrder.Authorize entity={project} ability={"delete"}>
           <button
             onClick={this.handleProjectDestroy}
             className="button-bare-primary"
           >
-            Delete <i className="manicon manicon-trashcan" aria-hidden="true" />
+            <i className="manicon manicon-trashcan" aria-hidden="true" />
+            Delete
           </button>
         </HigherOrder.Authorize>
       </div>
@@ -206,53 +126,43 @@ export class ProjectWrapperContainer extends PureComponent {
     if (!this.props.project) return null;
     const { project } = this.props;
     const skipId = "skip-to-project-panel";
+    const secondaryLinks = navigation.project(project);
 
     return (
-      <HigherOrder.Authorize
-        entity={project}
-        failureFatalError={{
-          detail: "You are not allowed to edit this project."
-        }}
-        ability={["update", "manageResources"]}
-      >
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
+      <div>
+        <HigherOrder.Authorize
+          entity={project}
+          failureFatalError={{
+            detail: "You are not allowed to edit this project."
+          }}
+          ability={["update", "manageResources"]}
+        >
+          {this.state.confirmation ? (
+            <Dialog.Confirm {...this.state.confirmation} />
+          ) : null}
 
-        <RedirectToFirstMatch
-          from={lh.link("backendProject", project.id)}
-          candidates={this.secondaryNavigationLinks(project)}
-        />
-
-        <Navigation.DetailHeader
-          type="project"
-          breadcrumb={[{ path: lh.link("backend"), label: "ALL PROJECTS" }]}
-          title={project.attributes.title}
-          subtitle={project.attributes.subtitle}
-          utility={this.renderUtility(project)}
-        />
-        <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(project)}
-              />
+          <RedirectToFirstMatch
+            from={lh.link("backendProject", project.id)}
+            candidates={secondaryLinks}
+          />
+          <Navigation.DetailHeader
+            type="project"
+            title={project.attributes.title}
+            subtitle={project.attributes.subtitle}
+            utility={this.renderUtility(project)}
+            secondaryLinks={secondaryLinks}
+          />
+          <section className="backend-panel">
+            <Utility.SkipLink skipId={skipId} />
+            <div className="container">
+              <Navigation.Secondary links={secondaryLinks} panel />
+              <div id={skipId} className="panel">
+                {this.renderRoutes()}
+              </div>
             </div>
-          </aside>
-          <div className="container">
-            <aside className="aside">
-              <Utility.SkipLink skipId={skipId} />
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(project)}
-              />
-            </aside>
-            <div id={skipId} className="panel">
-              {this.renderRoutes()}
-            </div>
-          </div>
-        </section>
-      </HigherOrder.Authorize>
+          </section>
+        </HigherOrder.Authorize>
+      </div>
     );
   }
 }

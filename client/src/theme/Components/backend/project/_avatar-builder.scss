@@ -3,13 +3,10 @@
   @mixin sectionLabel {
     @include templateHead;
     font-size: 14px;
-    color: $neutral30;
+    color: $neutral20;
+    font-weight: $semibold;
     text-transform: uppercase;
-    letter-spacing: 0.075em;
-
-    @include respond($break50) {
-      font-size: 16px;
-    }
+    letter-spacing: 0.107em;
   }
 
   @mixin utilityMessage {
@@ -19,7 +16,7 @@
     line-height: 1.533em;
     color: $neutral70;
     text-transform: uppercase;
-    letter-spacing: 0.075em;
+    letter-spacing: 0.125em;
 
     @include respond($break50) {
       font-size: 12px;
@@ -30,11 +27,12 @@
 
   .grid {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 20px;
     text-align: center;
 
     @include respond($break95) {
-      display: flex;
+      flex-direction: row;
       flex-wrap: nowrap;
       justify-content: center;
     }
@@ -43,23 +41,21 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding: 25px 10px;
+      padding: 30px 10px;
+      border: 1px solid $neutral75;
 
       @include respond($break95) {
+        flex: 1;
         width: 33.33%;
         margin: 0;
+        padding-top: 25px;
+        padding-bottom: 10px;
         border: 1px solid $neutral75;
         border-right: 0;
       }
 
       + .section {
-        width: 50%;
         border: 1px solid $neutral75;
-
-        @include respond($break95) {
-          width: 33.33%;
-          margin: 0;
-        }
 
         &.active {
           border-color: $accentPrimary;
@@ -74,12 +70,10 @@
     }
 
     .current {
-      min-width: 100%;
-      margin-bottom: 28px;
+      padding-bottom: 45px;
 
       @include respond($break95) {
-        min-width: inherit;
-        margin-bottom: 0;
+        padding-bottom: 10px;
       }
 
       .preview {
@@ -98,6 +92,12 @@
       }
     }
 
+    .colors {
+      .wrapper {
+        width: 138px;
+      }
+    }
+
     .color {
       position: relative;
 
@@ -107,41 +107,40 @@
         flex-grow: 2;
         align-items: center;
         justify-content: space-between;
+        padding: 15px;
 
         &::after {
           @include sectionLabel;
           position: absolute;
-          top: calc(50% - 50px);
-          right: -13px;
+          top: calc(100% - 13px);
           z-index: 1;
-          width: 26px;
-          height: 100px;
+          width: 50px;
+          height: 26px;
           font-size: 14px;
-          line-height: 100px;
+          line-height: 26px;
           content: 'Or';
           background-color: $neutral90;
-        }
 
-        .colors {
-          padding-bottom: 8px;
-
-          @include respond($break60) {
-            padding-top: 16px;
-            padding-bottom: 0;
+          @include respond($break95) {
+            top: calc(50% - 50px);
+            right: -13px;
+            width: 26px;
+            height: 100px;
+            line-height: 100px;
           }
         }
 
         .default-description {
           @include utilityMessage;
+            max-width: 150px;
+            margin-top: 6px;
 
           @include respond($break60) {
-            max-width: 150px;
-            margin-top: 34px;
+            // margin-top: 34px;
           }
         }
       }
     }
-
 
     .upload {
       > .form-input {
@@ -165,6 +164,7 @@
         }
 
         .preview {
+          position: static;
           // Slightly smaller preview, since it shares
           // space with color picker
           width: 100px;
@@ -211,7 +211,8 @@
       }
 
       .contents-image-preview .message {
-        margin-bottom: 0;
+        position: static;
+        margin-bottom: 15px;
       }
 
       .primary {

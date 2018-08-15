@@ -1,0 +1,89 @@
+.dropdown-nav {
+  @include templateHead;
+  position: relative;
+  font-weight: $semibold;
+  color: $neutralWhite;
+  text-align: center;
+  text-transform: none;
+  background-color: $neutral100;
+
+  .trigger {
+    @include buttonUnstyled;
+    width: 100%;
+  }
+
+  &.open {
+    .selected {
+      color: $accentPrimary;
+
+      .manicon {
+        transform: rotate(-180deg);
+      }
+    }
+
+    ul {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &.static {
+    &:hover .selected {
+      color: $neutralWhite;
+      cursor: default;
+    }
+  }
+
+  ul {
+    @include listUnstyled;
+    position: absolute;
+    width: 100%;
+    padding: 32px 43px;
+    text-align: left;
+    visibility: hidden;
+    background-color: $neutral100;
+    border-top: 2px solid $neutral95;
+    opacity: 0;
+    transition: opacity $durationSlow $timing, visibility $durationSlow $timing;
+
+    li {
+      a {
+        display: inline-block;
+        color: $neutral45;
+        text-decoration: none;
+        transition: color $duration $timing;
+
+        &:hover {
+          color: $accentPrimary;
+        }
+
+        &.active {
+          color: $accentPrimary;
+        }
+      }
+
+      + li {
+        margin-top: 14px;
+      }
+    }
+  }
+
+  .selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+
+    .manicon {
+      margin-top: 3px;
+      margin-left: 10px;
+      font-size: 8px;
+      transition: transform $duration $timing;
+    }
+
+    &:hover {
+      color: $accentPrimary;
+      cursor: pointer;
+    }
+  }
+}
