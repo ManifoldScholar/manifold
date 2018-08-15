@@ -49,17 +49,16 @@ module Ingestions
           # rubocop: disable Metrics/MethodLength
           def nodes_to_structure(nodes)
             items = []
-            if nodes.count
+            if nodes.count.positive?
               nodes.each do |node|
                 item = {}
                 if node.at(".//xmlns:content")
                   label = node.at(".//xmlns:navLabel/xmlns:text/text()")&.text
                   href = node.at("content")&.attribute("src")&.value
                   item = make_structure_item(label, href)
-                  if node.at(".//xmlns:navPoint")
-                    children = node.search(".//xmlns:navPoint")
-                    item[:children] = toc_nodes_to_structure(children)
-                  end
+
+                  children = node > "xmlns|navPoint"
+                  item[:children] = toc_nodes_to_structure(children) if children.present?
                 end
                 items.push item unless item.empty?
               end
