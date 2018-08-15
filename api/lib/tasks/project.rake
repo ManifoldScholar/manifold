@@ -12,7 +12,7 @@ namespace :manifold do
       Manifold::Rake.logger.info "Ingesting #{args[:path]}"
       project = Project.find(args[:project_id])
       ingestion = Ingestions::CreateManually.run(project: project,
-                                                 source: File.open(path),
+                                                 source: File.open(args[:path]),
                                                  creator: User.cli_user).result
       outcome = Ingestions::Ingestor.run ingestion: ingestion,
                                          logger: Logger.new(STDOUT)
