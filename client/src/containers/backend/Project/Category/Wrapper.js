@@ -7,6 +7,8 @@ class ProjectCategoryWrapperContainer extends Component {
   static displayName = "Project.Category.Wrapper";
 
   static propTypes = {
+    project: PropTypes.object,
+    history: PropTypes.object,
     route: PropTypes.object
   };
 

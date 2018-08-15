@@ -149,14 +149,6 @@ export default {
       expiration: defaultExpiration
     };
   },
-  "editor-backend-category-update": payload => {
-    return {
-      level: 0,
-      heading: "Success!",
-      body: `${payload.data.attributes.title} has been saved.`,
-      expiration: defaultExpiration
-    };
-  },
   "editor-backend-resource-create": payloadIgnored => {
     return {
       level: 0,
@@ -281,6 +273,22 @@ export default {
       level: 0,
       heading: "Success!",
       body: `Your message has been sent.`,
+      expiration: defaultExpiration
+    };
+  },
+  [r.beTextCategoryCreate]: payload => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `${payload.data.attributes.title} has been created.`,
+      expiration: defaultExpiration
+    };
+  },
+  [r.beTextCategoryUpdate]: payload => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `${payload.data.attributes.title} has been updated.`,
       expiration: defaultExpiration
     };
   }

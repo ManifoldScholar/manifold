@@ -31,7 +31,6 @@ export class ProjectCategoryEditContainer extends Component {
 
   onSuccess = () => {
     this.props.refresh();
-    if (this.props.triggerClose) this.props.triggerClose();
   };
 
   fetchCategory() {
