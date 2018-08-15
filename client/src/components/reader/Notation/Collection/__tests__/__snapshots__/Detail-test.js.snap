@@ -128,7 +128,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
               </a>
               <a
                 className="detail-link"
-                href="/project/delegated-project-slug/collection/slug-2/resource/slug-3"
+                href="/projects/delegated-project-slug/collection/slug-2/resource/slug-3"
                 onClick={[Function]}
               >
                 View Resource

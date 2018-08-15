@@ -57,7 +57,7 @@ exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
       </a>
       <a
         className="detail-link"
-        href="/project/delegated-project-slug/resource/slug-1"
+        href="/projects/delegated-project-slug/resource/slug-1"
         onClick={[Function]}
       >
         View Resource

@@ -7,7 +7,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
   >
     <a
       className="back-link-primary full"
-      href="/project/slug-1"
+      href="/projects/slug-1"
       onClick={[Function]}
     >
       <div
@@ -282,7 +282,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
                   </span>
                   <div
                     className="arrow-link"
-                    to="/project/slug-1/resource/slug-2"
+                    to="/projects/slug-1/resource/slug-2"
                   >
                     <i
                       aria-hidden="true"
@@ -305,7 +305,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
                     <li>
                       <a
                         className={null}
-                        href="/project/slug-1/resources/?tag=dog"
+                        href="/projects/slug-1/resources/?tag=dog"
                         onClick={[Function]}
                       >
                         dog
@@ -314,7 +314,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
                     <li>
                       <a
                         className={null}
-                        href="/project/slug-1/resources/?tag=puppy"
+                        href="/projects/slug-1/resources/?tag=puppy"
                         onClick={[Function]}
                       >
                         puppy
@@ -323,7 +323,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
                     <li>
                       <a
                         className={null}
-                        href="/project/slug-1/resources/?tag=goat"
+                        href="/projects/slug-1/resources/?tag=goat"
                         onClick={[Function]}
                       >
                         GOAT
@@ -440,7 +440,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
     >
       <a
         className="back-link-secondary"
-        href="/project/slug-1"
+        href="/projects/slug-1"
         onClick={[Function]}
       >
         <i

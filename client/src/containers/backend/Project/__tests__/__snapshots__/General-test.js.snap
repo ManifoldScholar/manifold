@@ -19,65 +19,69 @@ exports[`Backend Project General Container renders correctly 1`] = `
           </span>
         </header>
         <div
-          className="form-input"
-          style={Object {}}
+          className="form-input-group"
         >
-          <label
-            className=""
-            htmlFor="attributes[title]-text-input-15"
+          <div
+            className="form-input wide"
+            style={Object {}}
           >
-            Title
-          </label>
-          <input
-            aria-describedby="attributes[title]-text-input-15"
-            id="attributes[title]-text-input-15"
-            onChange={[Function]}
-            placeholder="Enter Project Title"
-            type="text"
-            value="Rowan Test"
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[subtitle]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[title]-text-input-15"
+            >
+              Title
+            </label>
+            <input
+              aria-describedby="attributes[title]-text-input-15"
+              id="attributes[title]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Project Title"
+              type="text"
+              value="Rowan Test"
+            />
+          </div>
+          <div
+            className="form-input wide"
+            style={Object {}}
           >
-            Subtitle
-          </label>
-          <input
-            aria-describedby="attributes[subtitle]-text-input-15"
-            id="attributes[subtitle]-text-input-15"
-            onChange={[Function]}
-            placeholder="Enter Project Subtitle"
-            type="text"
-            value="World's Greatest Dog"
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[slug]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[subtitle]-text-input-15"
+            >
+              Subtitle
+            </label>
+            <input
+              aria-describedby="attributes[subtitle]-text-input-15"
+              id="attributes[subtitle]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Project Subtitle"
+              type="text"
+              value="World's Greatest Dog"
+            />
+          </div>
+          <div
+            className="form-input wide"
+            style={Object {}}
           >
-            Slug
-          </label>
-          <input
-            aria-describedby="attributes[slug]-text-input-15"
-            id="attributes[slug]-text-input-15"
-            onChange={[Function]}
-            placeholder="Enter Project Slug"
-            type="text"
-            value="slug-1"
-          />
+            <label
+              className=""
+              htmlFor="attributes[slug]-text-input-15"
+            >
+              Slug
+            </label>
+            <input
+              aria-describedby="attributes[slug]-text-input-15"
+              id="attributes[slug]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Project Slug"
+              type="text"
+              value="slug-1"
+            />
+          </div>
         </div>
       </div>
       <div
-        className="form-section horizontal"
+        className="form-section"
       >
         <header
           className="form-section-label"
@@ -86,66 +90,75 @@ exports[`Backend Project General Container renders correctly 1`] = `
             Visibility
           </span>
         </header>
-        <span
-          className="instructions"
-        >
-          Draft projects are only visible to admins. Featured projects are highlighted on the home page.
-        </span>
         <div
-          className="form-input"
+          className="form-input-group"
         >
           <div
-            className="toggle-indicator"
+            className="form-input form-toggle-secondary"
           >
-            <div
-              aria-pressed={false}
-              className="boolean-primary"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onFocus={[Function]}
-              role="button"
-              tabIndex="0"
+            <h4
+              className="form-input-heading above"
             >
-              <span
-                className="screen-reader-text"
+              Draft Mode
+            </h4>
+            <div
+              className="toggle-indicator"
+            >
+              <div
+                aria-pressed={false}
+                className="boolean-primary"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                role="button"
+                tabIndex="0"
               >
-                Draft Mode
-              </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Draft Mode
+                </span>
+              </div>
             </div>
+            <span
+              className="instructions"
+            >
+              Draft projects are only visible to admins.
+            </span>
           </div>
-          <h4
-            className="form-input-heading below secondary"
-          >
-            Draft Mode
-          </h4>
-        </div>
-        <div
-          className="form-input"
-        >
           <div
-            className="toggle-indicator"
+            className="form-input form-toggle-secondary"
           >
-            <div
-              aria-pressed={false}
-              className="boolean-primary"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onFocus={[Function]}
-              role="button"
-              tabIndex="0"
+            <h4
+              className="form-input-heading above"
             >
-              <span
-                className="screen-reader-text"
+              Featured
+            </h4>
+            <div
+              className="toggle-indicator"
+            >
+              <div
+                aria-pressed={false}
+                className="boolean-primary"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                role="button"
+                tabIndex="0"
               >
-                Featured
-              </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Featured
+                </span>
+              </div>
             </div>
+            <span
+              className="instructions"
+            >
+              Featured projects are highlighted on the home page.
+            </span>
           </div>
-          <h4
-            className="form-input-heading below secondary"
-          >
-            Featured
-          </h4>
         </div>
       </div>
       <div
@@ -159,72 +172,76 @@ exports[`Backend Project General Container renders correctly 1`] = `
           </span>
         </header>
         <div
-          className="form-input"
+          className="form-input-group"
         >
-          <label
-            className=""
-            htmlFor="masked-text-10"
+          <div
+            className="form-input"
           >
-            Hashtag
-          </label>
-          ReactTextMask
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[facebookId]-text-input-15"
+            <label
+              className=""
+              htmlFor="masked-text-10"
+            >
+              Hashtag
+            </label>
+            ReactTextMask
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            Facebook ID
-          </label>
-          <input
-            aria-describedby="attributes[facebookId]-text-input-15"
-            id="attributes[facebookId]-text-input-15"
-            onChange={[Function]}
-            placeholder="Enter Project Facebook ID"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[twitterId]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[facebookId]-text-input-15"
+            >
+              Facebook ID
+            </label>
+            <input
+              aria-describedby="attributes[facebookId]-text-input-15"
+              id="attributes[facebookId]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Project Facebook ID"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            Twitter ID
-          </label>
-          <input
-            aria-describedby="attributes[twitterId]-text-input-15"
-            id="attributes[twitterId]-text-input-15"
-            onChange={[Function]}
-            placeholder="Enter Project Twitter ID"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[instagramId]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[twitterId]-text-input-15"
+            >
+              Twitter ID
+            </label>
+            <input
+              aria-describedby="attributes[twitterId]-text-input-15"
+              id="attributes[twitterId]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Project Twitter ID"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            Instagram ID
-          </label>
-          <input
-            aria-describedby="attributes[instagramId]-text-input-15"
-            id="attributes[instagramId]-text-input-15"
-            onChange={[Function]}
-            placeholder="Enter Project Instagram ID"
-            type="text"
-            value=""
-          />
+            <label
+              className=""
+              htmlFor="attributes[instagramId]-text-input-15"
+            >
+              Instagram ID
+            </label>
+            <input
+              aria-describedby="attributes[instagramId]-text-input-15"
+              id="attributes[instagramId]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Project Instagram ID"
+              type="text"
+              value=""
+            />
+          </div>
         </div>
       </div>
       <div
@@ -238,544 +255,548 @@ exports[`Backend Project General Container renders correctly 1`] = `
           </span>
         </header>
         <div
-          className="form-input"
+          className="form-input-group"
         >
-          <h4
-            className="form-input-heading"
-          >
-            Publication Date
-          </h4>
           <div
-            className="form-date"
+            className="form-input"
           >
-            <div
-              className="form-select input-month"
+            <h4
+              className="form-input-heading"
             >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-caret-down"
-              />
-              <select
-                onChange={[Function]}
-                value="NaN"
-              >
-                <option />
-                <option
-                  value={0}
-                >
-                  January
-                </option>
-                <option
-                  value={1}
-                >
-                  February
-                </option>
-                <option
-                  value={2}
-                >
-                  March
-                </option>
-                <option
-                  value={3}
-                >
-                  April
-                </option>
-                <option
-                  value={4}
-                >
-                  May
-                </option>
-                <option
-                  value={5}
-                >
-                  June
-                </option>
-                <option
-                  value={6}
-                >
-                  July
-                </option>
-                <option
-                  value={7}
-                >
-                  August
-                </option>
-                <option
-                  value={8}
-                >
-                  September
-                </option>
-                <option
-                  value={9}
-                >
-                  October
-                </option>
-                <option
-                  value={10}
-                >
-                  November
-                </option>
-                <option
-                  value={11}
-                >
-                  December
-                </option>
-              </select>
-            </div>
+              Publication Date
+            </h4>
             <div
-              className="form-select input-day"
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-caret-down"
-              />
-              <select
-                onChange={[Function]}
-                value="NaN"
-              >
-                <option />
-                <option>
-                  1
-                </option>
-                <option>
-                  2
-                </option>
-                <option>
-                  3
-                </option>
-                <option>
-                  4
-                </option>
-                <option>
-                  5
-                </option>
-                <option>
-                  6
-                </option>
-                <option>
-                  7
-                </option>
-                <option>
-                  8
-                </option>
-                <option>
-                  9
-                </option>
-                <option>
-                  10
-                </option>
-                <option>
-                  11
-                </option>
-                <option>
-                  12
-                </option>
-                <option>
-                  13
-                </option>
-                <option>
-                  14
-                </option>
-                <option>
-                  15
-                </option>
-                <option>
-                  16
-                </option>
-                <option>
-                  17
-                </option>
-                <option>
-                  18
-                </option>
-                <option>
-                  19
-                </option>
-                <option>
-                  20
-                </option>
-                <option>
-                  21
-                </option>
-                <option>
-                  22
-                </option>
-                <option>
-                  23
-                </option>
-                <option>
-                  24
-                </option>
-                <option>
-                  25
-                </option>
-                <option>
-                  26
-                </option>
-                <option>
-                  27
-                </option>
-                <option>
-                  28
-                </option>
-                <option>
-                  29
-                </option>
-                <option>
-                  30
-                </option>
-                <option>
-                  31
-                </option>
-              </select>
-            </div>
-            <div
-              className="form-input"
-            >
-              ReactTextMask
-            </div>
-          </div>
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <h4
-            className="form-input-heading"
-          >
-            Subjects
-          </h4>
-          <nav
-            className="has-many-list"
-          >
-            <ul>
-              <li>
-                <div
-                  className="association"
-                >
-                  <h4
-                    className="association-name"
-                  >
-                    Hip Hop
-                  </h4>
-                </div>
-                <div
-                  className="utility"
-                >
-                  <button
-                    className="manicon manicon-x"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="screen-reader-text"
-                    >
-                      Remove 
-                      Hip Hop
-                       from the
-                       
-                      Subjects
-                       list.
-                    </span>
-                  </button>
-                </div>
-              </li>
-            </ul>
-            <div
-              className="input-predictive"
+              className="form-date"
             >
               <div
-                className="input"
+                className="form-select input-month"
               >
                 <i
                   aria-hidden="true"
-                  className="manicon manicon-plus"
+                  className="manicon manicon-caret-down"
                 />
-                <input
-                  aria-describedby={null}
-                  aria-label="Add a Subject"
-                  className="text-input"
-                  onBlur={[Function]}
+                <select
                   onChange={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onKeyPress={[Function]}
-                  placeholder="Add a Subject"
-                  type="text"
-                  value=""
-                />
-                <button
-                  className="submit"
-                  onClick={[Function]}
-                  type="button"
+                  value="NaN"
                 >
-                  Create New
-                </button>
-              </div>
-              <nav
-                className="predictive-list"
-              >
-                <ul />
-              </nav>
-            </div>
-          </nav>
-        </div>
-        <div
-          className="form-input avatar-builder"
-        >
-          <h4
-            className="form-input-heading"
-          >
-            Project Thumbnail
-          </h4>
-          <div
-            className="grid"
-          >
-            <div
-              className="section current"
-            >
-              <span
-                aria-hidden="true"
-                className="label"
-              >
-                Current
-              </span>
-              <span
-                className="label screen-reader-text"
-              >
-                Current Project Thumbnail
-              </span>
-            </div>
-            <div
-              className="section color active"
-            >
-              <span
-                aria-hidden="true"
-                className="label"
-              >
-                Default
-              </span>
-              <span
-                className="screen-reader-text"
-              >
-                Select a background color for the default thumbnail
-              </span>
-              <div
-                className="color-picker"
-              >
-                <div
-                  className="colors"
-                >
-                  <div
-                    className="wrapper"
+                  <option />
+                  <option
+                    value={0}
                   >
-                    <label
-                      className="form-toggle radio primary"
-                      htmlFor="primary"
-                    >
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Primary Background Color
-                      </span>
-                      <input
-                        checked={false}
-                        id="primary"
-                        onChange={[Function]}
-                        type="radio"
-                        value="primary"
-                      />
-                      <span
-                        aria-hidden="true"
-                        className="toggle-indicator"
-                      />
-                    </label>
-                    <label
-                      className="form-toggle radio secondary"
-                      htmlFor="secondary"
-                    >
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Secondary Background Color
-                      </span>
-                      <input
-                        checked={false}
-                        id="secondary"
-                        onChange={[Function]}
-                        type="radio"
-                        value="secondary"
-                      />
-                      <span
-                        aria-hidden="true"
-                        className="toggle-indicator"
-                      />
-                    </label>
-                    <label
-                      className="form-toggle radio tertiary"
-                      htmlFor="tertiary"
-                    >
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Tertiary Background Color
-                      </span>
-                      <input
-                        checked={false}
-                        id="tertiary"
-                        onChange={[Function]}
-                        type="radio"
-                        value="tertiary"
-                      />
-                      <span
-                        aria-hidden="true"
-                        className="toggle-indicator"
-                      />
-                    </label>
-                    <label
-                      className="form-toggle radio quaternary"
-                      htmlFor="quaternary"
-                    >
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Quaternary Background Color
-                      </span>
-                      <input
-                        checked={false}
-                        id="quaternary"
-                        onChange={[Function]}
-                        type="radio"
-                        value="quaternary"
-                      />
-                      <span
-                        aria-hidden="true"
-                        className="toggle-indicator"
-                      />
-                    </label>
-                    <label
-                      className="form-toggle radio quinary"
-                      htmlFor="quinary"
-                    >
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Quinary Background Color
-                      </span>
-                      <input
-                        checked={false}
-                        id="quinary"
-                        onChange={[Function]}
-                        type="radio"
-                        value="quinary"
-                      />
-                      <span
-                        aria-hidden="true"
-                        className="toggle-indicator"
-                      />
-                    </label>
-                    <label
-                      className="form-toggle radio sentary"
-                      htmlFor="sentary"
-                    >
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Sentary Background Color
-                      </span>
-                      <input
-                        checked={false}
-                        id="sentary"
-                        onChange={[Function]}
-                        type="radio"
-                        value="sentary"
-                      />
-                      <span
-                        aria-hidden="true"
-                        className="toggle-indicator"
-                      />
-                    </label>
-                  </div>
-                </div>
-                <div
-                  aria-hidden="true"
-                  className="default-description"
-                >
-                  Select A Different Background Color
-                </div>
+                    January
+                  </option>
+                  <option
+                    value={1}
+                  >
+                    February
+                  </option>
+                  <option
+                    value={2}
+                  >
+                    March
+                  </option>
+                  <option
+                    value={3}
+                  >
+                    April
+                  </option>
+                  <option
+                    value={4}
+                  >
+                    May
+                  </option>
+                  <option
+                    value={5}
+                  >
+                    June
+                  </option>
+                  <option
+                    value={6}
+                  >
+                    July
+                  </option>
+                  <option
+                    value={7}
+                  >
+                    August
+                  </option>
+                  <option
+                    value={8}
+                  >
+                    September
+                  </option>
+                  <option
+                    value={9}
+                  >
+                    October
+                  </option>
+                  <option
+                    value={10}
+                  >
+                    November
+                  </option>
+                  <option
+                    value={11}
+                  >
+                    December
+                  </option>
+                </select>
               </div>
-            </div>
-            <div
-              className="section upload"
-            >
-              <span
-                aria-hidden="true"
-                className="label"
+              <div
+                className="form-select input-day"
               >
-                Custom
-              </span>
-              <span
-                className="screen-reader-text"
-              >
-                Add a Custom Thumbnail Image
-              </span>
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-caret-down"
+                />
+                <select
+                  onChange={[Function]}
+                  value="NaN"
+                >
+                  <option />
+                  <option>
+                    1
+                  </option>
+                  <option>
+                    2
+                  </option>
+                  <option>
+                    3
+                  </option>
+                  <option>
+                    4
+                  </option>
+                  <option>
+                    5
+                  </option>
+                  <option>
+                    6
+                  </option>
+                  <option>
+                    7
+                  </option>
+                  <option>
+                    8
+                  </option>
+                  <option>
+                    9
+                  </option>
+                  <option>
+                    10
+                  </option>
+                  <option>
+                    11
+                  </option>
+                  <option>
+                    12
+                  </option>
+                  <option>
+                    13
+                  </option>
+                  <option>
+                    14
+                  </option>
+                  <option>
+                    15
+                  </option>
+                  <option>
+                    16
+                  </option>
+                  <option>
+                    17
+                  </option>
+                  <option>
+                    18
+                  </option>
+                  <option>
+                    19
+                  </option>
+                  <option>
+                    20
+                  </option>
+                  <option>
+                    21
+                  </option>
+                  <option>
+                    22
+                  </option>
+                  <option>
+                    23
+                  </option>
+                  <option>
+                    24
+                  </option>
+                  <option>
+                    25
+                  </option>
+                  <option>
+                    26
+                  </option>
+                  <option>
+                    27
+                  </option>
+                  <option>
+                    28
+                  </option>
+                  <option>
+                    29
+                  </option>
+                  <option>
+                    30
+                  </option>
+                  <option>
+                    31
+                  </option>
+                </select>
+              </div>
               <div
                 className="form-input"
               >
+                ReactTextMask
+              </div>
+            </div>
+          </div>
+          <div
+            className="form-input wide"
+            style={Object {}}
+          >
+            <h4
+              className="form-input-heading"
+            >
+              Subjects
+            </h4>
+            <nav
+              className="has-many-list"
+            >
+              <ul>
+                <li>
+                  <div
+                    className="association"
+                  >
+                    <h4
+                      className="association-name"
+                    >
+                      Hip Hop
+                    </h4>
+                  </div>
+                  <div
+                    className="utility"
+                  >
+                    <button
+                      className="manicon manicon-x"
+                      onClick={[Function]}
+                    >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Remove 
+                        Hip Hop
+                         from the
+                         
+                        Subjects
+                         list.
+                      </span>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+              <div
+                className="input-predictive"
+              >
                 <div
-                  className="form-input"
-                  style={Object {}}
+                  className="input"
                 >
-                  <react-dropzone
-                    accepts={
-                      Object {
-                        "accepts": "image/*",
-                        "extensions": "gif, jpeg, jpg, png, svg",
-                      }
-                    }
-                    className="form-dropzone style-embed"
-                    inputProps={
-                      Object {
-                        "aria-describedby": "upload-error-22",
-                        "id": "upload-21",
-                      }
-                    }
-                    multiple={false}
-                    onDrop={[Function]}
-                    style={undefined}
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-plus"
+                  />
+                  <input
+                    aria-describedby={null}
+                    aria-label="Add a Subject"
+                    className="text-input"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyPress={[Function]}
+                    placeholder="Add a Subject"
+                    type="text"
+                    value=""
+                  />
+                  <button
+                    className="submit"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    Create New
+                  </button>
+                </div>
+                <nav
+                  className="predictive-list"
+                >
+                  <ul />
+                </nav>
+              </div>
+            </nav>
+          </div>
+          <div
+            className="form-input avatar-builder wide"
+          >
+            <h4
+              className="form-input-heading"
+            >
+              Project Thumbnail
+            </h4>
+            <div
+              className="grid"
+            >
+              <div
+                className="section current"
+              >
+                <span
+                  aria-hidden="true"
+                  className="label"
+                >
+                  Current
+                </span>
+                <span
+                  className="label screen-reader-text"
+                >
+                  Current Project Thumbnail
+                </span>
+              </div>
+              <div
+                className="section color active"
+              >
+                <span
+                  aria-hidden="true"
+                  className="label"
+                >
+                  Default
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Select a background color for the default thumbnail
+                </span>
+                <div
+                  className="color-picker"
+                >
+                  <div
+                    className="colors"
                   >
                     <div
-                      className="contents-empty"
+                      className="wrapper"
                     >
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-cloud-up"
-                      />
-                      <div
-                        className="message"
+                      <label
+                        className="form-toggle radio primary"
+                        htmlFor="primary"
                       >
-                        <p
-                          className="primary"
+                        <span
+                          className="screen-reader-text"
                         >
-                          <span
-                            className="fake-link"
-                            role="button"
-                            tabIndex="0"
-                          >
-                            Upload a file
-                          </span>
-                           or 
-                          <br />
-                          drag and drop here
-                          <br />
-                        </p>
-                        <p
-                          className="secondary"
+                          Primary Background Color
+                        </span>
+                        <input
+                          checked={false}
+                          id="primary"
+                          onChange={[Function]}
+                          type="radio"
+                          value="primary"
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="toggle-indicator"
+                        />
+                      </label>
+                      <label
+                        className="form-toggle radio secondary"
+                        htmlFor="secondary"
+                      >
+                        <span
+                          className="screen-reader-text"
                         >
-                          gif, jpeg, jpg, png, svg
-                        </p>
-                      </div>
+                          Secondary Background Color
+                        </span>
+                        <input
+                          checked={false}
+                          id="secondary"
+                          onChange={[Function]}
+                          type="radio"
+                          value="secondary"
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="toggle-indicator"
+                        />
+                      </label>
+                      <label
+                        className="form-toggle radio tertiary"
+                        htmlFor="tertiary"
+                      >
+                        <span
+                          className="screen-reader-text"
+                        >
+                          Tertiary Background Color
+                        </span>
+                        <input
+                          checked={false}
+                          id="tertiary"
+                          onChange={[Function]}
+                          type="radio"
+                          value="tertiary"
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="toggle-indicator"
+                        />
+                      </label>
+                      <label
+                        className="form-toggle radio quaternary"
+                        htmlFor="quaternary"
+                      >
+                        <span
+                          className="screen-reader-text"
+                        >
+                          Quaternary Background Color
+                        </span>
+                        <input
+                          checked={false}
+                          id="quaternary"
+                          onChange={[Function]}
+                          type="radio"
+                          value="quaternary"
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="toggle-indicator"
+                        />
+                      </label>
+                      <label
+                        className="form-toggle radio quinary"
+                        htmlFor="quinary"
+                      >
+                        <span
+                          className="screen-reader-text"
+                        >
+                          Quinary Background Color
+                        </span>
+                        <input
+                          checked={false}
+                          id="quinary"
+                          onChange={[Function]}
+                          type="radio"
+                          value="quinary"
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="toggle-indicator"
+                        />
+                      </label>
+                      <label
+                        className="form-toggle radio sentary"
+                        htmlFor="sentary"
+                      >
+                        <span
+                          className="screen-reader-text"
+                        >
+                          Sentary Background Color
+                        </span>
+                        <input
+                          checked={false}
+                          id="sentary"
+                          onChange={[Function]}
+                          type="radio"
+                          value="sentary"
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="toggle-indicator"
+                        />
+                      </label>
                     </div>
-                  </react-dropzone>
+                  </div>
+                  <div
+                    aria-hidden="true"
+                    className="default-description"
+                  >
+                    Select A Different Background Color
+                  </div>
+                </div>
+              </div>
+              <div
+                className="section upload"
+              >
+                <span
+                  aria-hidden="true"
+                  className="label"
+                >
+                  Custom
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Add a Custom Thumbnail Image
+                </span>
+                <div
+                  className="form-input"
+                >
+                  <div
+                    className="form-input"
+                    style={Object {}}
+                  >
+                    <react-dropzone
+                      accepts={
+                        Object {
+                          "accepts": "image/*",
+                          "extensions": "gif, jpeg, jpg, png, svg",
+                        }
+                      }
+                      className="form-dropzone style-embed"
+                      inputProps={
+                        Object {
+                          "aria-describedby": "upload-error-22",
+                          "id": "upload-21",
+                        }
+                      }
+                      multiple={false}
+                      onDrop={[Function]}
+                      style={undefined}
+                    >
+                      <div
+                        className="contents-empty"
+                      >
+                        <i
+                          aria-hidden="true"
+                          className="manicon manicon-cloud-up"
+                        />
+                        <div
+                          className="message"
+                        >
+                          <p
+                            className="primary"
+                          >
+                            <span
+                              className="fake-link"
+                              role="button"
+                              tabIndex="0"
+                            >
+                              Upload a file
+                            </span>
+                             or 
+                            <br />
+                            drag and drop here
+                            <br />
+                          </p>
+                          <p
+                            className="secondary"
+                          >
+                            gif, jpeg, jpg, png, svg
+                          </p>
+                        </div>
+                      </div>
+                    </react-dropzone>
+                  </div>
                 </div>
               </div>
             </div>
@@ -783,7 +804,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="form-input submit"
+        className="form-input submit wide"
       >
         <input
           className="button-secondary outlined"

@@ -5,7 +5,7 @@ exports[`Backend.Permission.ListItem component renders correctly 1`] = `
   className=""
 >
   <a
-    href="/backend/project/1/permissions"
+    href="/backend/projects/1/permissions"
     onClick={[Function]}
   >
     <header>

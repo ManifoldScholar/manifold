@@ -61,14 +61,12 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
       <ul>
         <li>
           <a
-            href="/project/slug-1"
+            href="/projects/slug-1"
             onClick={[Function]}
           >
-            <div
-              className="figure-wrapper"
-            >
-              <figure />
-            </div>
+            <figure
+              className="cover"
+            />
             <div
               className="meta"
             >
@@ -82,14 +80,12 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
         </li>
         <li>
           <a
-            href="/project/slug-2"
+            href="/projects/slug-2"
             onClick={[Function]}
           >
-            <div
-              className="figure-wrapper"
-            >
-              <figure />
-            </div>
+            <figure
+              className="cover"
+            />
             <div
               className="meta"
             >

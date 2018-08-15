@@ -5,7 +5,7 @@ exports[`Backend.TwitterQuery.ListItem Component renders correctly 1`] = `
   className=""
 >
   <a
-    href="/backend/project/2/social/twitter-query/2"
+    href="/backend/projects/2/social/twitter-query/2"
     onClick={[Function]}
   >
     <header>

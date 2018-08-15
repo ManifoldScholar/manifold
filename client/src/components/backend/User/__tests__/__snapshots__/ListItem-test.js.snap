@@ -2,10 +2,10 @@
 
 exports[`Backend.User.ListItem component renders correctly 1`] = `
 <li
-  className=""
+  className="user-list-item"
 >
   <a
-    href="/backend/people/users/1"
+    href="/backend/records/users/1"
     onClick={[Function]}
   >
     <header>

@@ -10,119 +10,115 @@ exports[`Backend Text Ingestion New Container renders correctly 1`] = `
     >
       <div>
         <div
-          className="form-section"
+          className="form-input"
         >
-          <div
-            className="form-input"
-          >
-            <div
-              className="form-input"
-              style={Object {}}
-            >
-              <label
-                className=""
-                htmlFor="upload-19"
-              >
-                Upload a file
-              </label>
-              <span
-                className="instructions"
-              >
-                Manifold can ingest texts from single files or a .zip collection.
-                <br />
-                See the
-                 
-                <a
-                  href="https://manifoldapp.org/docs/projects/preparing"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  documentation
-                </a>
-                 
-                for supported file types and directory structure.
-              </span>
-              <react-dropzone
-                accepts={
-                  Object {
-                    "accepts": null,
-                    "extensions": null,
-                  }
-                }
-                className="form-dropzone style-landscape"
-                inputProps={
-                  Object {
-                    "aria-describedby": "upload-error-20",
-                    "id": "upload-19",
-                  }
-                }
-                multiple={false}
-                onDrop={[Function]}
-                style={
-                  Object {
-                    "width": "100%",
-                  }
-                }
-              >
-                <div
-                  className="contents-empty"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-cloud-up"
-                  />
-                  <div
-                    className="message"
-                  >
-                    <p
-                      className="primary"
-                    >
-                      <span
-                        className="fake-link"
-                        role="button"
-                        tabIndex="0"
-                      >
-                        Upload a file
-                      </span>
-                       or 
-                      <br />
-                      drag and drop here
-                      <br />
-                    </p>
-                  </div>
-                </div>
-              </react-dropzone>
-            </div>
-          </div>
-          <div
-            className="form-divider"
-          >
-            or
-          </div>
           <div
             className="form-input"
             style={Object {}}
           >
             <label
-              className="has-instructions"
-              htmlFor="text-input-15"
+              className=""
+              htmlFor="upload-19"
             >
-              URL
+              Upload a file
             </label>
             <span
               className="instructions"
             >
-              Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file.
+              Manifold can ingest texts from single files or a .zip collection.
+              <br />
+              See the
+               
+              <a
+                href="https://manifoldapp.org/docs/projects/preparing"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                documentation
+              </a>
+               
+              for supported file types and directory structure.
             </span>
-            <input
-              aria-describedby="text-input-15"
-              id="text-input-15"
-              onChange={[Function]}
-              placeholder={undefined}
-              type="text"
-              value=""
-            />
+            <react-dropzone
+              accepts={
+                Object {
+                  "accepts": null,
+                  "extensions": null,
+                }
+              }
+              className="form-dropzone style-landscape"
+              inputProps={
+                Object {
+                  "aria-describedby": "upload-error-20",
+                  "id": "upload-19",
+                }
+              }
+              multiple={false}
+              onDrop={[Function]}
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
+            >
+              <div
+                className="contents-empty"
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-cloud-up"
+                />
+                <div
+                  className="message"
+                >
+                  <p
+                    className="primary"
+                  >
+                    <span
+                      className="fake-link"
+                      role="button"
+                      tabIndex="0"
+                    >
+                      Upload a file
+                    </span>
+                     or 
+                    <br />
+                    drag and drop here
+                    <br />
+                  </p>
+                </div>
+              </div>
+            </react-dropzone>
           </div>
+        </div>
+        <div
+          className="form-divider"
+        >
+          or
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+            htmlFor="text-input-15"
+          >
+            URL
+          </label>
+          <input
+            aria-describedby="text-input-15"
+            id="text-input-15"
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+          <span
+            className="instructions"
+          >
+            Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file.
+          </span>
         </div>
         <div
           className="buttons-icon-horizontal"

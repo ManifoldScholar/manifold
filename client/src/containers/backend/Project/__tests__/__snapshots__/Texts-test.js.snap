@@ -8,7 +8,7 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
   >
     <a
       className="button-icon-secondary"
-      href="/backend/project/1/texts/ingestions/new"
+      href="/backend/projects/1/texts/ingestions/new"
       onClick={[Function]}
     >
       <span
@@ -35,7 +35,7 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
     </a>
     <a
       className="button-icon-secondary"
-      href="/backend/project/1/texts/category/new"
+      href="/backend/projects/1/texts/category/new"
       onClick={[Function]}
     >
       <span
@@ -81,7 +81,7 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
           <div>
             <a
               className="asset-thumb"
-              href="/backend/text/3"
+              href="/backend/projects/text/3"
               onClick={[Function]}
             >
               <figure
@@ -151,7 +151,7 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
             >
               <a
                 className="button"
-                href="/backend/text/3"
+                href="/backend/projects/text/3"
                 onClick={[Function]}
               >
                 Edit
@@ -221,7 +221,7 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
         >
           <a
             className="button"
-            href="/backend/project/1/texts/category/2/edit"
+            href="/backend/projects/1/texts/category/2/edit"
             onClick={[Function]}
           >
             edit

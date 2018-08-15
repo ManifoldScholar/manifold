@@ -5,7 +5,7 @@ exports[`Backend.Maker.ListItem component renders correctly 1`] = `
   className=""
 >
   <a
-    href="/backend/people/makers/1"
+    href="/backend/records/makers/1"
     onClick={[Function]}
   >
     <header>

@@ -109,7 +109,7 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
           >
             <a
               className="button-primary"
-              href="/project/slug-1/events"
+              href="/projects/slug-1/events"
               onClick={[Function]}
             >
               See all Activity
@@ -124,7 +124,7 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
           >
             <a
               className="button-primary"
-              href="/project/slug-1/events"
+              href="/projects/slug-1/events"
               onClick={[Function]}
             >
               See all Activity

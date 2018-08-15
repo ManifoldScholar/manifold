@@ -72,93 +72,97 @@ exports[`Backend Permission New Container renders correctly 1`] = `
               </span>
             </header>
             <div
-              className="form-input"
+              className="form-input-group"
             >
-              <h4
-                className="form-input-heading above"
-              >
-                Can modify project?
-              </h4>
               <div
-                className="toggle-indicator"
+                className="form-input"
               >
-                <div
-                  aria-pressed={false}
-                  className="boolean-primary"
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  role="button"
-                  tabIndex="0"
+                <h4
+                  className="form-input-heading above"
                 >
-                  <span
-                    className="screen-reader-text"
+                  Can modify project?
+                </h4>
+                <div
+                  className="toggle-indicator"
+                >
+                  <div
+                    aria-pressed={false}
+                    className="boolean-primary"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    role="button"
+                    tabIndex="0"
                   >
-                    Can modify project?
-                  </span>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Can modify project?
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              className="form-input"
-            >
-              <h4
-                className="form-input-heading above"
-              >
-                Can modify resource metadata?
-              </h4>
               <div
-                className="toggle-indicator"
+                className="form-input"
               >
-                <div
-                  aria-pressed={false}
-                  className="boolean-primary"
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  role="button"
-                  tabIndex="0"
+                <h4
+                  className="form-input-heading above"
                 >
-                  <span
-                    className="screen-reader-text"
+                  Can modify resource metadata?
+                </h4>
+                <div
+                  className="toggle-indicator"
+                >
+                  <div
+                    aria-pressed={false}
+                    className="boolean-primary"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    role="button"
+                    tabIndex="0"
                   >
-                    Can modify resource metadata?
-                  </span>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Can modify resource metadata?
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              className="form-input"
-            >
-              <h4
-                className="form-input-heading above"
-              >
-                Is a project author?
-              </h4>
               <div
-                className="toggle-indicator"
+                className="form-input"
               >
-                <div
-                  aria-pressed={false}
-                  className="boolean-primary"
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  role="button"
-                  tabIndex="0"
+                <h4
+                  className="form-input-heading above"
                 >
-                  <span
-                    className="screen-reader-text"
+                  Is a project author?
+                </h4>
+                <div
+                  className="toggle-indicator"
+                >
+                  <div
+                    aria-pressed={false}
+                    className="boolean-primary"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    role="button"
+                    tabIndex="0"
                   >
-                    Is a project author?
-                  </span>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Is a project author?
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          className="form-input submit"
+          className="form-input submit wide"
         >
           <input
             className="button-secondary outlined"

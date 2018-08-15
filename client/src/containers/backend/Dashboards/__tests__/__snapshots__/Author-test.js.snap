@@ -84,7 +84,7 @@ exports[`Backend Dashboards Author Container renders correctly 1`] = `
                 <ul>
                   <li>
                     <a
-                      href="/backend/project/1"
+                      href="/backend/projects/1"
                       onClick={[Function]}
                     >
                       <header>
@@ -180,16 +180,11 @@ exports[`Backend Dashboards Author Container renders correctly 1`] = `
                           </h3>
                         </div>
                       </header>
-                      <span
-                        className="label"
-                      >
-                        Edit
-                      </span>
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/backend/project/2"
+                      href="/backend/projects/2"
                       onClick={[Function]}
                     >
                       <header>
@@ -285,11 +280,6 @@ exports[`Backend Dashboards Author Container renders correctly 1`] = `
                           </h3>
                         </div>
                       </header>
-                      <span
-                        className="label"
-                      >
-                        Edit
-                      </span>
                     </a>
                   </li>
                 </ul>

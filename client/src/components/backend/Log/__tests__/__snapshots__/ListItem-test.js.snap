@@ -14,7 +14,7 @@ exports[`Backend Project Log Container renders correctly when project change 1`]
         className="subtitle"
       >
         <a
-          href="/backend/people/users/1"
+          href="/backend/records/users/1"
           onClick={[Function]}
         >
           Nas
@@ -53,7 +53,7 @@ exports[`Backend Project Log Container renders correctly when project child chan
         className="subtitle"
       >
         <a
-          href="/backend/people/users/1"
+          href="/backend/records/users/1"
           onClick={[Function]}
         >
           Nas
@@ -65,7 +65,7 @@ exports[`Backend Project Log Container renders correctly when project child chan
               "__html": "The World Is Yours",
             }
           }
-          href="/backend/resource/1"
+          href="/backend/projects/resource/1"
           onClick={[Function]}
         />
         ”, 

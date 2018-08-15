@@ -14,8 +14,8 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                     <div className=\\"text-category\\">
                       <header>
                         <h4 className=\\"category-title highlight\\">
-                          <Link to=\\"/backend/text/undefined/styles\\" replace={false}>
-                            <a onClick={[Function]} href=\\"/backend/text/undefined/styles\\">
+                          <Link to=\\"/backend/projects/text/undefined/styles\\" replace={false}>
+                            <a onClick={[Function]} href=\\"/backend/projects/text/undefined/styles\\">
                               Stylesheets / 
                             </a>
                           </Link>
@@ -41,8 +41,8 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                                               <label htmlFor=\\"attributes[name]-text-input-15\\" className=\\"\\">
                                                 Name
                                               </label>
-                                              <Instructions instructions={{...}} />
                                               <input id=\\"attributes[name]-text-input-15\\" type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[name]-text-input-15\\" />
+                                              <Instructions instructions={{...}} />
                                             </div>
                                           </Errorable>
                                         </Form.TextInput>
@@ -61,10 +61,10 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                                           </div>
                                         </FormCodeArea>
                                       </Form.Setter('FormCodeArea)>
-                                      <Form.Save cancelRoute=\\"/backend/text/undefined/styles\\" text=\\"Save Stylesheet\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}}>
-                                        <div className=\\"form-input submit\\">
-                                          <Link to=\\"/backend/text/undefined/styles\\" className=\\"button-secondary outlined dull\\" replace={false}>
-                                            <a className=\\"button-secondary outlined dull\\" onClick={[Function]} href=\\"/backend/text/undefined/styles\\">
+                                      <Form.Save cancelRoute=\\"/backend/projects/text/undefined/styles\\" text=\\"Save Stylesheet\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}}>
+                                        <div className=\\"form-input submit wide\\">
+                                          <Link to=\\"/backend/projects/text/undefined/styles\\" className=\\"button-secondary outlined dull\\" replace={false}>
+                                            <a className=\\"button-secondary outlined dull\\" onClick={[Function]} href=\\"/backend/projects/text/undefined/styles\\">
                                               Cancel
                                             </a>
                                           </Link>

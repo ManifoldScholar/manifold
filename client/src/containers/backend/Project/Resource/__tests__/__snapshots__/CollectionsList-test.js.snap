@@ -89,7 +89,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
         >
           <a
             className="button-icon-secondary "
-            href="/backend/project/1/collections/new"
+            href="/backend/projects/1/collections/new"
             onClick={[Function]}
           >
             <i
@@ -103,7 +103,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
           <ul>
             <li>
               <a
-                href="/backend/collection/2"
+                href="/backend/projects/collection/2"
                 onClick={[Function]}
               >
                 <header>
@@ -170,7 +170,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
             </li>
             <li>
               <a
-                href="/backend/collection/3"
+                href="/backend/projects/collection/3"
                 onClick={[Function]}
               >
                 <header>

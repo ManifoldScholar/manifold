@@ -27,6 +27,14 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
         >
           Query
         </label>
+        <input
+          aria-describedby="attributes[query]-text-input-15"
+          id="attributes[query]-text-input-15"
+          onChange={[Function]}
+          placeholder="Enter query"
+          type="text"
+          value=""
+        />
         <p
           className="instructions"
         >
@@ -41,14 +49,6 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
           </a>
           .
         </p>
-        <input
-          aria-describedby="attributes[query]-text-input-15"
-          id="attributes[query]-text-input-15"
-          onChange={[Function]}
-          placeholder="Enter query"
-          type="text"
-          value=""
-        />
       </div>
       <div
         className="form-input"
@@ -118,7 +118,7 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="form-input submit"
+        className="form-input submit wide"
       >
         <input
           className="button-secondary outlined"

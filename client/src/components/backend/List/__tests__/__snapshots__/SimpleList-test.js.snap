@@ -6,18 +6,18 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
     className="section-heading-secondary"
   >
     <h3>
-      3030
-       
       <i
         aria-hidden="true"
         className="manicon person"
       />
+      3030
+       
     </h3>
   </header>
   <ul>
     <li>
       <a
-        href="/backend/project/1"
+        href="/backend/projects/1"
         onClick={[Function]}
       >
         <header>
@@ -113,16 +113,11 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
             </h3>
           </div>
         </header>
-        <span
-          className="label"
-        >
-          Edit
-        </span>
       </a>
     </li>
     <li>
       <a
-        href="/backend/project/2"
+        href="/backend/projects/2"
         onClick={[Function]}
       >
         <header>
@@ -218,11 +213,6 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
             </h3>
           </div>
         </header>
-        <span
-          className="label"
-        >
-          Edit
-        </span>
       </a>
     </li>
   </ul>

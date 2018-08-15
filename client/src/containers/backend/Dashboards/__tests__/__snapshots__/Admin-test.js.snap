@@ -16,12 +16,17 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
             className="section-heading-secondary"
           >
             <h3>
-              Projects
-               
               <i
                 aria-hidden="true"
                 className="manicon manicon-stack"
               />
+              Projects
+               
+              <span
+                className="list-total"
+              >
+                2 projects
+              </span>
             </h3>
           </header>
           <div>
@@ -72,24 +77,11 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
               className="vertical-list-primary"
             >
               <div>
-                <p
-                  className="list-total"
-                >
-                  Showing 
-                  <span>
-                    1-1
-                  </span>
-                   of 
-                  <span>
-                    2
-                  </span>
-                   projects: 
-                </p>
                 <section>
                   <ul>
                     <li>
                       <a
-                        href="/backend/project/1"
+                        href="/backend/projects/1"
                         onClick={[Function]}
                       >
                         <header>
@@ -185,16 +177,11 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                             </h3>
                           </div>
                         </header>
-                        <span
-                          className="label"
-                        >
-                          Edit
-                        </span>
                       </a>
                     </li>
                     <li>
                       <a
-                        href="/backend/project/2"
+                        href="/backend/projects/2"
                         onClick={[Function]}
                       >
                         <header>
@@ -290,11 +277,6 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                             </h3>
                           </div>
                         </header>
-                        <span
-                          className="label"
-                        >
-                          Edit
-                        </span>
                       </a>
                     </li>
                   </ul>
@@ -408,18 +390,18 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                 className="section-heading-secondary"
               >
                 <h3>
-                  Recently Updated
-                   
                   <i
                     aria-hidden="true"
-                    className="manicon manicon-stack"
+                    className="manicon manicon-bugle-small"
                   />
+                  Recently Updated
+                   
                 </h3>
               </header>
               <ul>
                 <li>
                   <a
-                    href="/backend/project/3"
+                    href="/backend/projects/3"
                     onClick={[Function]}
                   >
                     <header>
@@ -515,16 +497,11 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                         </h3>
                       </div>
                     </header>
-                    <span
-                      className="label"
-                    >
-                      Edit
-                    </span>
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/backend/project/4"
+                    href="/backend/projects/4"
                     onClick={[Function]}
                   >
                     <header>
@@ -620,11 +597,6 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                         </h3>
                       </div>
                     </header>
-                    <span
-                      className="label"
-                    >
-                      Edit
-                    </span>
                   </a>
                 </li>
               </ul>

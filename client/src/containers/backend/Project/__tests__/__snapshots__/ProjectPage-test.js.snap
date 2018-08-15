@@ -196,11 +196,6 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           Purchase URL
         </label>
-        <span
-          className="instructions"
-        >
-          A URL where users can purchase the published edition
-        </span>
         <input
           aria-describedby="attributes[purchaseUrl]-text-input-15"
           id="attributes[purchaseUrl]-text-input-15"
@@ -209,6 +204,11 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           type="text"
           value=""
         />
+        <span
+          className="instructions"
+        >
+          A URL where users can purchase the published edition
+        </span>
       </div>
       <div
         className="form-input"
@@ -220,11 +220,6 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           Purchase Call To Action
         </label>
-        <span
-          className="instructions"
-        >
-          If set, this text will appear in the buy button on the project page
-        </span>
         <input
           aria-describedby="attributes[purchaseCallToAction]-text-input-15"
           id="attributes[purchaseCallToAction]-text-input-15"
@@ -233,6 +228,11 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           type="text"
           value=""
         />
+        <span
+          className="instructions"
+        >
+          If set, this text will appear in the buy button on the project page
+        </span>
       </div>
       <div
         className="form-input"
@@ -268,11 +268,6 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           Currency
         </label>
-        <span
-          className="instructions"
-        >
-          For example, USD for US Dollars
-        </span>
         <input
           aria-describedby="attributes[purchasePriceCurrency]-text-input-15"
           id="attributes[purchasePriceCurrency]-text-input-15"
@@ -281,6 +276,11 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           type="text"
           value=""
         />
+        <span
+          className="instructions"
+        >
+          For example, USD for US Dollars
+        </span>
       </div>
       <div
         className="form-input"
@@ -309,9 +309,14 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             </span>
           </div>
         </div>
+        <span
+          className="instructions"
+        >
+          If set, project activity will not be shown on the project page.
+        </span>
       </div>
       <div
-        className="form-input submit"
+        className="form-input submit wide"
       >
         <input
           className="button-secondary outlined"

@@ -179,7 +179,7 @@ exports[`Frontend.ProjectList.Placeholder component renders correctly 1`] = `
       >
         <a
           className="button-icon-primary"
-          href="/backend"
+          href="/backend/projects"
           onClick={[Function]}
         >
           <span>

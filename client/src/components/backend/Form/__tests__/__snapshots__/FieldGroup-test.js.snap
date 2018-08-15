@@ -4,8 +4,12 @@ exports[`Backend.Form.FieldGroup component renders correctly 1`] = `
 <div
   className="form-section"
 >
-  <div>
-    How is babby formed?
+  <div
+    className="form-input-group"
+  >
+    <div>
+      How is babby formed?
+    </div>
   </div>
 </div>
 `;

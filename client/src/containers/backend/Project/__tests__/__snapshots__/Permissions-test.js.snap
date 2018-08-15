@@ -29,6 +29,7 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
           "update": true,
           "updateMakers": true,
         },
+        "avatarMeta": Object {},
         "avatarStyles": Object {},
         "coverStyles": Object {},
         "hashtag": "#cute_dog",
@@ -88,7 +89,7 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
     }
   }
   failureNotification={true}
-  failureRedirect="/backend/project/1"
+  failureRedirect="/backend/projects/1"
 >
   <section>
     <withRouter(Connect(HigherOrder.FetchData('PermissionContainer)))
@@ -118,6 +119,7 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
               "update": true,
               "updateMakers": true,
             },
+            "avatarMeta": Object {},
             "avatarStyles": Object {},
             "coverStyles": Object {},
             "hashtag": "#cute_dog",
@@ -178,7 +180,7 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
       }
     />
     <withRouter(Router.Switch('DrawerSwitch))
-      closeUrl="/backend/project/1/permissions"
+      closeUrl="/backend/projects/1/permissions"
     />
   </section>
 </Connect(AuthorizeComponent)>

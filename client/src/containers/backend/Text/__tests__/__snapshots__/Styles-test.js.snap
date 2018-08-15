@@ -27,8 +27,8 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
               <ul className=\\"texts-group\\">
                 <li>
                   <div>
-                    <Link className=\\"asset-thumb\\" to=\\"/backend/text/1/styles/2\\" replace={false}>
-                      <a className=\\"asset-thumb\\" onClick={[Function]} href=\\"/backend/text/1/styles/2\\">
+                    <Link className=\\"asset-thumb\\" to=\\"/backend/projects/text/1/styles/2\\" replace={false}>
+                      <a className=\\"asset-thumb\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/2\\">
                         <figure className=\\"asset-image\\">
                           <div className=\\"asset-image-placeholder\\">
                             <Resource.Icon.Document>
@@ -58,8 +58,8 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                       </a>
                     </Link>
                     <div className=\\"text-category-list-utility\\">
-                      <Link className=\\"button\\" to=\\"/backend/text/1/styles/2\\" replace={false}>
-                        <a className=\\"button\\" onClick={[Function]} href=\\"/backend/text/1/styles/2\\">
+                      <Link className=\\"button\\" to=\\"/backend/projects/text/1/styles/2\\" replace={false}>
+                        <a className=\\"button\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/2\\">
                           Edit
                         </a>
                       </Link>
@@ -86,8 +86,8 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                 </li>
                 <li>
                   <div>
-                    <Link className=\\"asset-thumb\\" to=\\"/backend/text/1/styles/3\\" replace={false}>
-                      <a className=\\"asset-thumb\\" onClick={[Function]} href=\\"/backend/text/1/styles/3\\">
+                    <Link className=\\"asset-thumb\\" to=\\"/backend/projects/text/1/styles/3\\" replace={false}>
+                      <a className=\\"asset-thumb\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/3\\">
                         <figure className=\\"asset-image\\">
                           <div className=\\"asset-image-placeholder\\">
                             <Resource.Icon.Document>
@@ -117,8 +117,8 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                       </a>
                     </Link>
                     <div className=\\"text-category-list-utility\\">
-                      <Link className=\\"button\\" to=\\"/backend/text/1/styles/3\\" replace={false}>
-                        <a className=\\"button\\" onClick={[Function]} href=\\"/backend/text/1/styles/3\\">
+                      <Link className=\\"button\\" to=\\"/backend/projects/text/1/styles/3\\" replace={false}>
+                        <a className=\\"button\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/3\\">
                           Edit
                         </a>
                       </Link>
@@ -147,8 +147,8 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
             </div>
           </section>
           <div className=\\"buttons-icon-horizontal\\">
-            <Link className=\\"button-icon-secondary\\" to=\\"/backend/text/1/styles/new\\" replace={false}>
-              <a className=\\"button-icon-secondary\\" onClick={[Function]} href=\\"/backend/text/1/styles/new\\">
+            <Link className=\\"button-icon-secondary\\" to=\\"/backend/projects/text/1/styles/new\\" replace={false}>
+              <a className=\\"button-icon-secondary\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/new\\">
                 <i className=\\"manicon manicon-plus\\" aria-hidden=\\"true\\" />
                 Add a New Stylesheet
               </a>

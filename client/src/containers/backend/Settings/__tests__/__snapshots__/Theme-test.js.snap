@@ -1,161 +1,176 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend Settings Theme Container renders correctly 1`] = `
-<section>
-  <div>
-    <form
-      className="form-secondary"
-      data-id="submit"
-      onSubmit={[Function]}
+<div>
+  <header
+    className="backend-header section-heading-secondary"
+  >
+    <h1>
+      Theme Settings
+    </h1>
+  </header>
+  <div
+    className="backend-panel"
+  >
+    <div
+      className="container"
     >
-      <div
-        className="form-input"
-      >
-        <div
-          className="form-input"
-          style={Object {}}
+      <div>
+        <form
+          className="form-secondary"
+          data-id="submit"
+          onSubmit={[Function]}
         >
-          <label
-            className="has-instructions"
-            htmlFor="upload-21"
-          >
-            Press Logo
-          </label>
-          <span
-            className="instructions"
-          >
-            Logos are constrained at 40px wide with flexible height. For retina displays, upload logos that are 80px wide.
-          </span>
-          <react-dropzone
-            accepts={
-              Object {
-                "accepts": "image/*",
-                "extensions": "gif, jpeg, jpg, png, svg",
-              }
-            }
-            className="form-dropzone style-square"
-            inputProps={
-              Object {
-                "aria-describedby": "upload-error-22",
-                "id": "upload-21",
-              }
-            }
-            multiple={false}
-            onDrop={[Function]}
-            style={undefined}
+          <div
+            className="form-input"
           >
             <div
-              className="contents-empty"
+              className="form-input"
+              style={Object {}}
             >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-cloud-up"
-              />
-              <div
-                className="message"
+              <label
+                className="has-instructions"
+                htmlFor="upload-21"
               >
-                <p
-                  className="primary"
+                Press Logo
+              </label>
+              <span
+                className="instructions"
+              >
+                Logos are constrained at 40px wide with flexible height. For retina displays, upload logos that are 80px wide.
+              </span>
+              <react-dropzone
+                accepts={
+                  Object {
+                    "accepts": "image/*",
+                    "extensions": "gif, jpeg, jpg, png, svg",
+                  }
+                }
+                className="form-dropzone style-square"
+                inputProps={
+                  Object {
+                    "aria-describedby": "upload-error-22",
+                    "id": "upload-21",
+                  }
+                }
+                multiple={false}
+                onDrop={[Function]}
+                style={undefined}
+              >
+                <div
+                  className="contents-empty"
                 >
-                  <span
-                    className="fake-link"
-                    role="button"
-                    tabIndex="0"
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-cloud-up"
+                  />
+                  <div
+                    className="message"
                   >
-                    Upload a file
-                  </span>
-                   or 
-                  <br />
-                  drag and drop here
-                  <br />
-                </p>
-                <p
-                  className="secondary"
-                >
-                  gif, jpeg, jpg, png, svg
-                </p>
-              </div>
+                    <p
+                      className="primary"
+                    >
+                      <span
+                        className="fake-link"
+                        role="button"
+                        tabIndex="0"
+                      >
+                        Upload a file
+                      </span>
+                       or 
+                      <br />
+                      drag and drop here
+                      <br />
+                    </p>
+                    <p
+                      className="secondary"
+                    >
+                      gif, jpeg, jpg, png, svg
+                    </p>
+                  </div>
+                </div>
+              </react-dropzone>
             </div>
-          </react-dropzone>
-        </div>
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className="has-instructions"
+              htmlFor="attributes[general][pressSite]-text-input-15"
+            >
+              Press Website URL
+            </label>
+            <input
+              aria-describedby="attributes[general][pressSite]-text-input-15"
+              id="attributes[general][pressSite]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter URL"
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              If present, the press logo image will link to this URL.
+            </span>
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className="has-instructions"
+              htmlFor="attributes[theme][logoStyles]-text-input-15"
+            >
+              Logo Styles
+            </label>
+            <input
+              aria-describedby="attributes[theme][logoStyles]-text-input-15"
+              id="attributes[theme][logoStyles]-text-input-15"
+              onChange={[Function]}
+              placeholder="Additional Logo CSS"
+              type="text"
+              value="{\\"left\\": -1}"
+            />
+            <span
+              className="instructions"
+            >
+              Enter a JSON style object, which will be applied to the logo image. For example: {"left": -1}
+            </span>
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className=""
+              htmlFor="attributes[theme][typekitId]-text-input-15"
+            >
+              Typekit ID
+            </label>
+            <input
+              aria-describedby="attributes[theme][typekitId]-text-input-15"
+              id="attributes[theme][typekitId]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Typekit ID"
+              type="text"
+              value="typekitId"
+            />
+          </div>
+          <div
+            className="form-input submit wide"
+          >
+            <input
+              className="button-secondary outlined"
+              type="submit"
+              value="Save Settings"
+            />
+          </div>
+        </form>
       </div>
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor="attributes[general][pressSite]-text-input-15"
-        >
-          Press Website URL
-        </label>
-        <span
-          className="instructions"
-        >
-          If present, the press logo image will link to this URL.
-        </span>
-        <input
-          aria-describedby="attributes[general][pressSite]-text-input-15"
-          id="attributes[general][pressSite]-text-input-15"
-          onChange={[Function]}
-          placeholder="Enter URL"
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor="attributes[theme][logoStyles]-text-input-15"
-        >
-          Logo Styles
-        </label>
-        <span
-          className="instructions"
-        >
-          Enter a JSON style object, which will be applied to the logo image. For example: {"left": -1}
-        </span>
-        <input
-          aria-describedby="attributes[theme][logoStyles]-text-input-15"
-          id="attributes[theme][logoStyles]-text-input-15"
-          onChange={[Function]}
-          placeholder="Additional Logo CSS"
-          type="text"
-          value="{\\"left\\": -1}"
-        />
-      </div>
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className=""
-          htmlFor="attributes[theme][typekitId]-text-input-15"
-        >
-          Typekit ID
-        </label>
-        <input
-          aria-describedby="attributes[theme][typekitId]-text-input-15"
-          id="attributes[theme][typekitId]-text-input-15"
-          onChange={[Function]}
-          placeholder="Enter Typekit ID"
-          type="text"
-          value="typekitId"
-        />
-      </div>
-      <div
-        className="form-input submit"
-      >
-        <input
-          className="button-secondary outlined"
-          type="submit"
-          value="Save Settings"
-        />
-      </div>
-    </form>
+    </div>
   </div>
-</section>
+</div>
 `;

@@ -176,7 +176,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
               </a>
               <a
                 className="detail-link"
-                href="/project/delegated-project-slug/collection/slug-2/resource/slug-3"
+                href="/projects/delegated-project-slug/collection/slug-2/resource/slug-3"
                 onClick={[Function]}
               >
                 View Resource
@@ -260,7 +260,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
       data-id="total-container"
     >
       <a
-        href="/project/slug-1/resources"
+        href="/projects/slug-1/resources"
         onClick={[Function]}
       >
         View All Project Resources
@@ -519,7 +519,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                 </span>
                 <div
                   className="arrow-link"
-                  to="/project/slug-1/collection/slug-2/resource/slug-3"
+                  to="/projects/slug-1/collection/slug-2/resource/slug-3"
                 >
                   <i
                     aria-hidden="true"
@@ -542,7 +542,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=dog"
+                      href="/projects/slug-1/resources/?tag=dog"
                       onClick={[Function]}
                     >
                       dog
@@ -551,7 +551,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=puppy"
+                      href="/projects/slug-1/resources/?tag=puppy"
                       onClick={[Function]}
                     >
                       puppy
@@ -560,7 +560,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=goat"
+                      href="/projects/slug-1/resources/?tag=goat"
                       onClick={[Function]}
                     >
                       GOAT

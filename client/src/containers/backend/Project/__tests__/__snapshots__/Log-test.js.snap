@@ -10,12 +10,12 @@ Array [
         className="section-heading-secondary"
       >
         <h3>
-          Project Changes
-           
           <i
             aria-hidden="true"
             className="manicon manicon-pulse-small"
           />
+          Project Changes
+           
         </h3>
       </header>
       <ul>
@@ -32,7 +32,7 @@ Array [
                 className="subtitle"
               >
                 <a
-                  href="/backend/people/users/1"
+                  href="/backend/records/users/1"
                   onClick={[Function]}
                 >
                   Nas
@@ -44,7 +44,7 @@ Array [
                       "__html": "The World Is Yours",
                     }
                   }
-                  href="/backend/resource/1"
+                  href="/backend/projects/resource/1"
                   onClick={[Function]}
                 />
                 ”, 
@@ -78,7 +78,7 @@ Array [
                 className="subtitle"
               >
                 <a
-                  href="/backend/people/users/1"
+                  href="/backend/records/users/1"
                   onClick={[Function]}
                 >
                   Nas

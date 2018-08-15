@@ -7,7 +7,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
   >
     <a
       className="back-link-primary full"
-      href="/project/slug-1"
+      href="/projects/slug-1"
       onClick={[Function]}
     >
       <div
@@ -154,7 +154,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
               className="pagination-previous disabled"
             >
               <a
-                href="/project/slug-1/events/0"
+                href="/projects/slug-1/events/0"
                 onClick={[Function]}
               >
                 <i
@@ -177,7 +177,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
               className="active ordinal"
             >
               <a
-                href="/project/slug-1/events/1"
+                href="/projects/slug-1/events/1"
                 onClick={[Function]}
               >
                 <span
@@ -197,7 +197,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
               className="ordinal"
             >
               <a
-                href="/project/slug-1/events/2"
+                href="/projects/slug-1/events/2"
                 onClick={[Function]}
               >
                 <span
@@ -217,7 +217,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
               className="pagination-next "
             >
               <a
-                href="/project/slug-1/events/2"
+                href="/projects/slug-1/events/2"
                 onClick={[Function]}
               >
                 <span
