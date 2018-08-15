@@ -312,12 +312,15 @@ export class ProjectTextsContainer extends PureComponent {
 
   childRoutes() {
     const { refresh, project } = this.props;
+    const closeUrl = lh.link("backendProjectTexts", project.id);
+
     return childRoutes(this.props.route, {
       drawer: true,
       drawerProps: {
         lockScroll: "always",
         wide: true,
-        lockScrollClickCloses: false
+        lockScrollClickCloses: false,
+        closeUrl
       },
       childProps: { refresh, project }
     });

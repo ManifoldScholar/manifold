@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Category } from "components/backend";
+import lh from "helpers/linkHandler";
 
 export default class ProjectCategoryNewContainer extends Component {
   static displayName = "Project.Category.New";
@@ -8,12 +9,17 @@ export default class ProjectCategoryNewContainer extends Component {
   static propTypes = {
     project: PropTypes.object.isRequired,
     refresh: PropTypes.func,
-    triggerClose: PropTypes.func
+    history: PropTypes.object
   };
 
-  onSuccess = () => {
+  onSuccess = category => {
     this.props.refresh();
-    if (this.props.triggerClose) this.props.triggerClose();
+    const url = lh.link(
+      "backendProjectCategory",
+      this.props.project.id,
+      category.id
+    );
+    this.props.history.push(url, { keepNotifications: true });
   };
 
   render() {
