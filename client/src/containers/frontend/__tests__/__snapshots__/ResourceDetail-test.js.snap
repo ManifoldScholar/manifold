@@ -4,7 +4,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
 <div>
   <a
     className="back-link-primary full"
-    href="/project/slug-1/resources"
+    href="/projects/slug-1/resources"
     onClick={[Function]}
   >
     <div
@@ -212,7 +212,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=dog"
+                      href="/projects/slug-1/resources/?tag=dog"
                       onClick={[Function]}
                     >
                       dog
@@ -221,7 +221,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=puppy"
+                      href="/projects/slug-1/resources/?tag=puppy"
                       onClick={[Function]}
                     >
                       puppy
@@ -230,7 +230,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=goat"
+                      href="/projects/slug-1/resources/?tag=goat"
                       onClick={[Function]}
                     >
                       GOAT
@@ -320,7 +320,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=dog"
+                      href="/projects/slug-1/resources/?tag=dog"
                       onClick={[Function]}
                     >
                       dog
@@ -329,7 +329,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=puppy"
+                      href="/projects/slug-1/resources/?tag=puppy"
                       onClick={[Function]}
                     >
                       puppy
@@ -338,7 +338,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=goat"
+                      href="/projects/slug-1/resources/?tag=goat"
                       onClick={[Function]}
                     >
                       GOAT
@@ -412,7 +412,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
     >
       <a
         className="back-link-secondary"
-        href="/project/slug-1/resources"
+        href="/projects/slug-1/resources"
         onClick={[Function]}
       >
         <i

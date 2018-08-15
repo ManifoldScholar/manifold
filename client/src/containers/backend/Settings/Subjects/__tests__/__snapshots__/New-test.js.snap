@@ -37,7 +37,7 @@ exports[`Backend Settings Subjects New Container renders correctly 1`] = `
         />
       </div>
       <div
-        className="form-input submit"
+        className="form-input submit wide"
       >
         <a
           className="button-secondary outlined dull"

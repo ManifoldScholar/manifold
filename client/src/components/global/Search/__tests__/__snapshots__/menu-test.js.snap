@@ -30,7 +30,7 @@ exports[`Reader.Search.Menu component renders correctly when search is visible 1
           autoFocus={true}
           id="query-search-3"
           onChange={[Function]}
-          placeholder="Search for..."
+          placeholder="Search…"
           type="text"
           value=""
         />

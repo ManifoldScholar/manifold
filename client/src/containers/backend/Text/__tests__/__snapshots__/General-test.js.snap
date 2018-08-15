@@ -276,11 +276,6 @@ exports[`Backend Text General Container renders correctly 1`] = `
         >
           Section Label
         </label>
-        <span
-          className="instructions"
-        >
-          For example, “chapter” for books or “article” for journals
-        </span>
         <input
           aria-describedby="attributes[sectionKind]-text-input-15"
           id="attributes[sectionKind]-text-input-15"
@@ -289,9 +284,14 @@ exports[`Backend Text General Container renders correctly 1`] = `
           type="text"
           value=""
         />
+        <span
+          className="instructions"
+        >
+          For example, “chapter” for books or “article” for journals
+        </span>
       </div>
       <div
-        className="form-input submit"
+        className="form-input submit wide"
       >
         <input
           className="button-secondary outlined"

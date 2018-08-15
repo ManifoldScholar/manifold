@@ -8,6 +8,13 @@ exports[`Backend Backend Container renders correctly 1`] = `
         <SideEffect(BodyClass) className=\\"backend bg-neutral90\\">
           <BodyClass className=\\"backend bg-neutral90\\">
             <div>
+              <withRouter(Connect(RedirectToFirstMatch)) from=\\"/backend\\" candidates={{...}}>
+                <Route>
+                  <Connect(RedirectToFirstMatch) from=\\"/backend\\" candidates={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
+                    <RedirectToFirstMatch from=\\"/backend\\" candidates={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} authentication={{...}} dispatch={[Function]} />
+                  </Connect(RedirectToFirstMatch)>
+                </Route>
+              </withRouter(Connect(RedirectToFirstMatch))>
               <SkipLink skipId=\\"skip-to-main\\" skipLinkText=\\"Skip to main content\\" skipMessage=\\"Skipped to Main Content\\">
                 <a className=\\"screen-reader-text\\" href=\\"#skip-to-main\\" onClick={[Function]}>
                   Skip to main content
@@ -20,7 +27,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
               </withRouter(ScrollToTop)>
               <ScrollAware threshold={200} topClass=\\"top\\" notTopClass=\\"not-top\\" startPinned={true} pinnedClass=\\"pinned\\" notPinnedClass=\\"not-pinned\\" pinThreshold={50}>
                 <div className=\\"scroll-aware top pinned\\">
-                  <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} isProjects={[Function]} scrollAware={{...}}>
+                  <Layout.Header visibility={{...}} match={[undefined]} location={[undefined]} authentication={{...}} commonActions={{...}} scrollAware={{...}}>
                     <BlurOnLocationChange location={[undefined]}>
                       <div>
                         <header className=\\"header-app dark\\">
@@ -42,65 +49,97 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                 </PressLogo>
                               </a>
                             </Link>
-                            <nav className=\\"text-nav\\">
-                              <ul>
-                                <li>
-                                  <NavLink isActive={[Function]} activeClassName=\\"active\\" to=\\"/backend\\" aria-current=\\"page\\">
-                                    <Route path=\\"\\\\\\\\/backend\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
-                                      <Link to=\\"/backend\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
-                                        <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend\\">
-                                          Projects
-                                        </a>
-                                      </Link>
+                            <withRouter(Navigation.Primary) links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\">
+                              <Route>
+                                <Navigation.Primary links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
+                                  <withRouter(Navigation.Static) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
+                                    <Route>
+                                      <Navigation.Static backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
+                                        <nav className=\\"text-nav show-75\\">
+                                          <ul className=\\"links\\">
+                                            <li>
+                                              <NavLink to=\\"/backend/dashboard\\" exact={false} activeClassName=\\"active\\" aria-current=\\"page\\">
+                                                <Route path=\\"\\\\\\\\/backend\\\\\\\\/dashboard\\" exact={false} strict={[undefined]} location={[undefined]}>
+                                                  <Link to=\\"/backend/dashboard\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
+                                                    <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend/dashboard\\">
+                                                      Dashboard
+                                                    </a>
+                                                  </Link>
+                                                </Route>
+                                              </NavLink>
+                                            </li>
+                                            <li>
+                                              <NavLink to=\\"/backend/projects\\" exact={false} activeClassName=\\"active\\" aria-current=\\"page\\">
+                                                <Route path=\\"\\\\\\\\/backend\\\\\\\\/projects\\" exact={false} strict={[undefined]} location={[undefined]}>
+                                                  <Link to=\\"/backend/projects\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
+                                                    <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend/projects\\">
+                                                      Projects
+                                                    </a>
+                                                  </Link>
+                                                </Route>
+                                              </NavLink>
+                                            </li>
+                                            <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
+                                              <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                            </Connect(AuthorizeComponent)>
+                                            <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
+                                              <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                            </Connect(AuthorizeComponent)>
+                                          </ul>
+                                          <nav className=\\"user-links\\">
+                                            <ul>
+                                              <li>
+                                                <Link className=\\"button-mode\\" to=\\"/\\" replace={false}>
+                                                  <a className=\\"button-mode\\" onClick={[Function]} href=\\"/\\">
+                                                    Exit Admin Mode
+                                                  </a>
+                                                </Link>
+                                              </li>
+                                              <li>
+                                                <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
+                                                  <button onClick={[Function]} className=\\"button-avatar\\">
+                                                    <span className=\\"screen-reader-text\\">
+                                                      Login or open user settings
+                                                    </span>
+                                                    <Avatar url={[undefined]}>
+                                                      <figure style={[undefined]} className=\\"avatar\\">
+                                                        <span className=\\"screen-reader-text\\">
+                                                          Avatar
+                                                        </span>
+                                                        <i className=\\"manicon manicon-person\\" aria-hidden=\\"true\\" />
+                                                      </figure>
+                                                    </Avatar>
+                                                  </button>
+                                                </UserMenuButton>
+                                                <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: UserMenuBody]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
+                                                  <CSSTransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true}>
+                                                    <TransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                                                      <span />
+                                                    </TransitionGroup>
+                                                  </CSSTransitionGroup>
+                                                </UIPanel>
+                                              </li>
+                                            </ul>
+                                          </nav>
+                                        </nav>
+                                      </Navigation.Static>
                                     </Route>
-                                  </NavLink>
-                                </li>
-                                <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
-                                  <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                                </Connect(AuthorizeComponent)>
-                                <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
-                                  <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                                </Connect(AuthorizeComponent)>
-                                <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
-                                  <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                                </Connect(AuthorizeComponent)>
-                              </ul>
-                            </nav>
-                            <nav className=\\"menu-dropdowns\\">
-                              <ul>
-                                <li className=\\"show-60\\">
-                                  <Link className=\\"button-mode\\" to=\\"/\\" replace={false}>
-                                    <a className=\\"button-mode\\" onClick={[Function]} href=\\"/\\">
-                                      Exit Admin Mode
-                                    </a>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
-                                    <button onClick={[Function]} className=\\"button-avatar\\">
-                                      <span className=\\"screen-reader-text\\">
-                                        Login or open user settings
-                                      </span>
-                                      <Avatar url={[undefined]}>
-                                        <figure style={[undefined]} className=\\"avatar\\">
-                                          <span className=\\"screen-reader-text\\">
-                                            Avatar
-                                          </span>
-                                          <i className=\\"manicon manicon-person\\" aria-hidden=\\"true\\" />
-                                        </figure>
-                                      </Avatar>
-                                    </button>
-                                  </UserMenuButton>
-                                  <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: UserMenuBody]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
-                                    <CSSTransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true}>
-                                      <TransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                                        <span />
-                                      </TransitionGroup>
-                                    </CSSTransitionGroup>
-                                  </UIPanel>
-                                </li>
-                              </ul>
-                            </nav>
+                                  </withRouter(Navigation.Static)>
+                                  <withRouter(Navigation.Mobile) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
+                                    <Route>
+                                      <Navigation.Mobile backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
+                                        <nav className=\\"nested-nav hide-75\\">
+                                          <MobileBreadcrumb links={{...}} location={{...}}>
+                                            <div className=\\"selected\\" />
+                                          </MobileBreadcrumb>
+                                          <i role=\\"button\\" className=\\"manicon manicon-bars-parallel-horizontal\\" onClick={[Function]} />
+                                        </nav>
+                                      </Navigation.Mobile>
+                                    </Route>
+                                  </withRouter(Navigation.Mobile)>
+                                </Navigation.Primary>
+                              </Route>
+                            </withRouter(Navigation.Primary)>
                           </div>
                           <div className=\\"header-border\\" />
                           <HeaderNotification scope=\\"global\\">

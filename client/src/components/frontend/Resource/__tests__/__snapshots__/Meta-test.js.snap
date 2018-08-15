@@ -78,7 +78,7 @@ exports[`Frontend.Resource.Meta component renders correctly 1`] = `
       <li>
         <a
           className={null}
-          href="/project/slug-1/resources/?tag=dog"
+          href="/projects/slug-1/resources/?tag=dog"
           onClick={[Function]}
         >
           dog
@@ -87,7 +87,7 @@ exports[`Frontend.Resource.Meta component renders correctly 1`] = `
       <li>
         <a
           className={null}
-          href="/project/slug-1/resources/?tag=puppy"
+          href="/projects/slug-1/resources/?tag=puppy"
           onClick={[Function]}
         >
           puppy
@@ -96,7 +96,7 @@ exports[`Frontend.Resource.Meta component renders correctly 1`] = `
       <li>
         <a
           className={null}
-          href="/project/slug-1/resources/?tag=goat"
+          href="/projects/slug-1/resources/?tag=goat"
           onClick={[Function]}
         >
           GOAT

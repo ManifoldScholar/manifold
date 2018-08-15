@@ -2,40 +2,10 @@
 
 exports[`Backend.Navigation.DetailHeader component renders correctly 1`] = `
 <section
-  className="bg-neutral95"
+  className="backend-header"
 >
-  <nav
-    className="breadcrumb-primary"
-  >
-    <div
-      className="container flush"
-    >
-      <a
-        className="initial"
-        href="/backend"
-        onClick={[Function]}
-      >
-        <i
-          aria-hidden="true"
-          className="manicon manicon-arrow-left"
-        />
-        Back to:
-      </a>
-      <ul>
-        <li>
-          <a
-            className="back-link-primary-segment"
-            href="/backend"
-            onClick={[Function]}
-          >
-            All Projects
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
   <div
-    className="container flush"
+    className="wrapper"
   >
     <header
       className="entity-header-primary"

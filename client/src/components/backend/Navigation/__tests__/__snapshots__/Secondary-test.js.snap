@@ -3,29 +3,29 @@
 exports[`Backend.Navigation.Secondary component renders correctly 1`] = `
 <div>
   <nav
-    className="panel-nav"
+    className="secondary-nav"
   >
     <ul>
       <li>
         <a
           aria-current={null}
           className={undefined}
-          href="/link-1"
+          href="/backend/projects"
           onClick={[Function]}
           style={undefined}
         >
-          Link One
+          projects
         </a>
       </li>
       <li>
         <a
           aria-current={null}
           className={undefined}
-          href="/link-2"
+          href="/backend/records"
           onClick={[Function]}
           style={undefined}
         >
-          Link Two
+          records
         </a>
       </li>
     </ul>

@@ -19,42 +19,46 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
           </span>
         </header>
         <div
-          className="form-input"
-          style={Object {}}
+          className="form-input-group"
         >
-          <label
-            className=""
-            htmlFor="attributes[metadata][isbn]-text-input-15"
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            isbn
-          </label>
-          <input
-            aria-describedby="attributes[metadata][isbn]-text-input-15"
-            id="attributes[metadata][isbn]-text-input-15"
-            onChange={[Function]}
-            placeholder="International Standard Book Number"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][issn]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][isbn]-text-input-15"
+            >
+              isbn
+            </label>
+            <input
+              aria-describedby="attributes[metadata][isbn]-text-input-15"
+              id="attributes[metadata][isbn]-text-input-15"
+              onChange={[Function]}
+              placeholder="International Standard Book Number"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            issn
-          </label>
-          <input
-            aria-describedby="attributes[metadata][issn]-text-input-15"
-            id="attributes[metadata][issn]-text-input-15"
-            onChange={[Function]}
-            placeholder="International Standard Serial Number"
-            type="text"
-            value=""
-          />
+            <label
+              className=""
+              htmlFor="attributes[metadata][issn]-text-input-15"
+            >
+              issn
+            </label>
+            <input
+              aria-describedby="attributes[metadata][issn]-text-input-15"
+              id="attributes[metadata][issn]-text-input-15"
+              onChange={[Function]}
+              placeholder="International Standard Serial Number"
+              type="text"
+              value=""
+            />
+          </div>
         </div>
       </div>
       <div
@@ -68,85 +72,89 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
           </span>
         </header>
         <div
-          className="form-input"
-          style={Object {}}
+          className="form-input-group"
         >
-          <label
-            className=""
-            htmlFor="attributes[metadata][publisher]-text-input-15"
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            publisher
-          </label>
-          <input
-            aria-describedby="attributes[metadata][publisher]-text-input-15"
-            id="attributes[metadata][publisher]-text-input-15"
-            onChange={[Function]}
-            placeholder="The Publisher"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className="has-instructions"
-            htmlFor="attributes[metadata][publisherPlace]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][publisher]-text-input-15"
+            >
+              publisher
+            </label>
+            <input
+              aria-describedby="attributes[metadata][publisher]-text-input-15"
+              id="attributes[metadata][publisher]-text-input-15"
+              onChange={[Function]}
+              placeholder="The Publisher"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            publisher place
-          </label>
-          <span
-            className="instructions"
+            <label
+              className="has-instructions"
+              htmlFor="attributes[metadata][publisherPlace]-text-input-15"
+            >
+              publisher place
+            </label>
+            <input
+              aria-describedby="attributes[metadata][publisherPlace]-text-input-15"
+              id="attributes[metadata][publisherPlace]-text-input-15"
+              onChange={[Function]}
+              placeholder="Geographic location of the publisher"
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              e.g "Minneapolis, MN"
+            </span>
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            e.g "Minneapolis, MN"
-          </span>
-          <input
-            aria-describedby="attributes[metadata][publisherPlace]-text-input-15"
-            id="attributes[metadata][publisherPlace]-text-input-15"
-            onChange={[Function]}
-            placeholder="Geographic location of the publisher"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][originalPublisher]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][originalPublisher]-text-input-15"
+            >
+              original publisher
+            </label>
+            <input
+              aria-describedby="attributes[metadata][originalPublisher]-text-input-15"
+              id="attributes[metadata][originalPublisher]-text-input-15"
+              onChange={[Function]}
+              placeholder="Original publisher, for items that have been republished by a different publisher"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            original publisher
-          </label>
-          <input
-            aria-describedby="attributes[metadata][originalPublisher]-text-input-15"
-            id="attributes[metadata][originalPublisher]-text-input-15"
-            onChange={[Function]}
-            placeholder="Original publisher, for items that have been republished by a different publisher"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][originalPublisherPlace]-text-input-15"
-          >
-            original publisher place
-          </label>
-          <input
-            aria-describedby="attributes[metadata][originalPublisherPlace]-text-input-15"
-            id="attributes[metadata][originalPublisherPlace]-text-input-15"
-            onChange={[Function]}
-            placeholder="Geographic location of the original publisher"
-            type="text"
-            value=""
-          />
+            <label
+              className=""
+              htmlFor="attributes[metadata][originalPublisherPlace]-text-input-15"
+            >
+              original publisher place
+            </label>
+            <input
+              aria-describedby="attributes[metadata][originalPublisherPlace]-text-input-15"
+              id="attributes[metadata][originalPublisherPlace]-text-input-15"
+              onChange={[Function]}
+              placeholder="Geographic location of the original publisher"
+              type="text"
+              value=""
+            />
+          </div>
         </div>
       </div>
       <div
@@ -160,138 +168,142 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
           </span>
         </header>
         <div
-          className="form-input"
-          style={Object {}}
+          className="form-input-group"
         >
-          <label
-            className="has-instructions"
-            htmlFor="attributes[metadata][containerTitle]-text-input-15"
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            container title
-          </label>
-          <span
-            className="instructions"
+            <label
+              className="has-instructions"
+              htmlFor="attributes[metadata][containerTitle]-text-input-15"
+            >
+              container title
+            </label>
+            <input
+              aria-describedby="attributes[metadata][containerTitle]-text-input-15"
+              id="attributes[metadata][containerTitle]-text-input-15"
+              onChange={[Function]}
+              placeholder="Title of the container holding the item"
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              e.g. the book title for a book chapter, the journal title for a journal article
+            </span>
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            e.g. the book title for a book chapter, the journal title for a journal article
-          </span>
-          <input
-            aria-describedby="attributes[metadata][containerTitle]-text-input-15"
-            id="attributes[metadata][containerTitle]-text-input-15"
-            onChange={[Function]}
-            placeholder="Title of the container holding the item"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][version]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][version]-text-input-15"
+            >
+              version
+            </label>
+            <input
+              aria-describedby="attributes[metadata][version]-text-input-15"
+              id="attributes[metadata][version]-text-input-15"
+              onChange={[Function]}
+              placeholder="Version of the item"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            version
-          </label>
-          <input
-            aria-describedby="attributes[metadata][version]-text-input-15"
-            id="attributes[metadata][version]-text-input-15"
-            onChange={[Function]}
-            placeholder="Version of the item"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className="has-instructions"
-            htmlFor="attributes[metadata][edition]-text-input-15"
+            <label
+              className="has-instructions"
+              htmlFor="attributes[metadata][edition]-text-input-15"
+            >
+              edition
+            </label>
+            <input
+              aria-describedby="attributes[metadata][edition]-text-input-15"
+              id="attributes[metadata][edition]-text-input-15"
+              onChange={[Function]}
+              placeholder="(Container) edition holding the item"
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              e.g. "3" when citing a chapter in the third edition of a book
+            </span>
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            edition
-          </label>
-          <span
-            className="instructions"
+            <label
+              className="has-instructions"
+              htmlFor="attributes[metadata][issue]-text-input-15"
+            >
+              issue
+            </label>
+            <input
+              aria-describedby="attributes[metadata][issue]-text-input-15"
+              id="attributes[metadata][issue]-text-input-15"
+              onChange={[Function]}
+              placeholder="(Container) issue holding the item"
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              e.g. "5" when citing a journal article from journal volume 2, issue 5
+            </span>
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            e.g. "3" when citing a chapter in the third edition of a book
-          </span>
-          <input
-            aria-describedby="attributes[metadata][edition]-text-input-15"
-            id="attributes[metadata][edition]-text-input-15"
-            onChange={[Function]}
-            placeholder="(Container) edition holding the item"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className="has-instructions"
-            htmlFor="attributes[metadata][issue]-text-input-15"
+            <label
+              className="has-instructions"
+              htmlFor="attributes[metadata][volume]-text-input-15"
+            >
+              volume
+            </label>
+            <input
+              aria-describedby="attributes[metadata][volume]-text-input-15"
+              id="attributes[metadata][volume]-text-input-15"
+              onChange={[Function]}
+              placeholder="(Container) volume holding the item "
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              e.g. “2” when citing a chapter from book volume 2
+            </span>
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            issue
-          </label>
-          <span
-            className="instructions"
-          >
-            e.g. "5" when citing a journal article from journal volume 2, issue 5
-          </span>
-          <input
-            aria-describedby="attributes[metadata][issue]-text-input-15"
-            id="attributes[metadata][issue]-text-input-15"
-            onChange={[Function]}
-            placeholder="(Container) issue holding the item"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className="has-instructions"
-            htmlFor="attributes[metadata][volume]-text-input-15"
-          >
-            volume
-          </label>
-          <span
-            className="instructions"
-          >
-            e.g. “2” when citing a chapter from book volume 2
-          </span>
-          <input
-            aria-describedby="attributes[metadata][volume]-text-input-15"
-            id="attributes[metadata][volume]-text-input-15"
-            onChange={[Function]}
-            placeholder="(Container) volume holding the item "
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][originalTitle]-text-input-15"
-          >
-            original title
-          </label>
-          <input
-            aria-describedby="attributes[metadata][originalTitle]-text-input-15"
-            id="attributes[metadata][originalTitle]-text-input-15"
-            onChange={[Function]}
-            placeholder="Title of the original version"
-            type="text"
-            value=""
-          />
+            <label
+              className=""
+              htmlFor="attributes[metadata][originalTitle]-text-input-15"
+            >
+              original title
+            </label>
+            <input
+              aria-describedby="attributes[metadata][originalTitle]-text-input-15"
+              id="attributes[metadata][originalTitle]-text-input-15"
+              onChange={[Function]}
+              placeholder="Title of the original version"
+              type="text"
+              value=""
+            />
+          </div>
         </div>
       </div>
       <div
@@ -305,426 +317,430 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
           </span>
         </header>
         <div
-          className="form-input"
-          style={Object {}}
+          className="form-input-group"
         >
-          <label
-            className=""
-            htmlFor="attributes[metadata][abstract]-text-input-15"
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            abstract
-          </label>
-          <input
-            aria-describedby="attributes[metadata][abstract]-text-input-15"
-            id="attributes[metadata][abstract]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][archive]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][abstract]-text-input-15"
+            >
+              abstract
+            </label>
+            <input
+              aria-describedby="attributes[metadata][abstract]-text-input-15"
+              id="attributes[metadata][abstract]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            archive
-          </label>
-          <input
-            aria-describedby="attributes[metadata][archive]-text-input-15"
-            id="attributes[metadata][archive]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][archiveLocation]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][archive]-text-input-15"
+            >
+              archive
+            </label>
+            <input
+              aria-describedby="attributes[metadata][archive]-text-input-15"
+              id="attributes[metadata][archive]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            archive location
-          </label>
-          <input
-            aria-describedby="attributes[metadata][archiveLocation]-text-input-15"
-            id="attributes[metadata][archiveLocation]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][archivePlace]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][archiveLocation]-text-input-15"
+            >
+              archive location
+            </label>
+            <input
+              aria-describedby="attributes[metadata][archiveLocation]-text-input-15"
+              id="attributes[metadata][archiveLocation]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            archive place
-          </label>
-          <input
-            aria-describedby="attributes[metadata][archivePlace]-text-input-15"
-            id="attributes[metadata][archivePlace]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][authority]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][archivePlace]-text-input-15"
+            >
+              archive place
+            </label>
+            <input
+              aria-describedby="attributes[metadata][archivePlace]-text-input-15"
+              id="attributes[metadata][archivePlace]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            authority
-          </label>
-          <input
-            aria-describedby="attributes[metadata][authority]-text-input-15"
-            id="attributes[metadata][authority]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][callNumber]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][authority]-text-input-15"
+            >
+              authority
+            </label>
+            <input
+              aria-describedby="attributes[metadata][authority]-text-input-15"
+              id="attributes[metadata][authority]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            call number
-          </label>
-          <input
-            aria-describedby="attributes[metadata][callNumber]-text-input-15"
-            id="attributes[metadata][callNumber]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][chapterNumber]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][callNumber]-text-input-15"
+            >
+              call number
+            </label>
+            <input
+              aria-describedby="attributes[metadata][callNumber]-text-input-15"
+              id="attributes[metadata][callNumber]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            chapter number
-          </label>
-          <input
-            aria-describedby="attributes[metadata][chapterNumber]-text-input-15"
-            id="attributes[metadata][chapterNumber]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][collectionNumber]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][chapterNumber]-text-input-15"
+            >
+              chapter number
+            </label>
+            <input
+              aria-describedby="attributes[metadata][chapterNumber]-text-input-15"
+              id="attributes[metadata][chapterNumber]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            collection number
-          </label>
-          <input
-            aria-describedby="attributes[metadata][collectionNumber]-text-input-15"
-            id="attributes[metadata][collectionNumber]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][collectionTitle]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][collectionNumber]-text-input-15"
+            >
+              collection number
+            </label>
+            <input
+              aria-describedby="attributes[metadata][collectionNumber]-text-input-15"
+              id="attributes[metadata][collectionNumber]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            collection title
-          </label>
-          <input
-            aria-describedby="attributes[metadata][collectionTitle]-text-input-15"
-            id="attributes[metadata][collectionTitle]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][dimensions]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][collectionTitle]-text-input-15"
+            >
+              collection title
+            </label>
+            <input
+              aria-describedby="attributes[metadata][collectionTitle]-text-input-15"
+              id="attributes[metadata][collectionTitle]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            dimensions
-          </label>
-          <input
-            aria-describedby="attributes[metadata][dimensions]-text-input-15"
-            id="attributes[metadata][dimensions]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][event]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][dimensions]-text-input-15"
+            >
+              dimensions
+            </label>
+            <input
+              aria-describedby="attributes[metadata][dimensions]-text-input-15"
+              id="attributes[metadata][dimensions]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            event
-          </label>
-          <input
-            aria-describedby="attributes[metadata][event]-text-input-15"
-            id="attributes[metadata][event]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][eventPlace]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][event]-text-input-15"
+            >
+              event
+            </label>
+            <input
+              aria-describedby="attributes[metadata][event]-text-input-15"
+              id="attributes[metadata][event]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            event place
-          </label>
-          <input
-            aria-describedby="attributes[metadata][eventPlace]-text-input-15"
-            id="attributes[metadata][eventPlace]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][jurisdiction]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][eventPlace]-text-input-15"
+            >
+              event place
+            </label>
+            <input
+              aria-describedby="attributes[metadata][eventPlace]-text-input-15"
+              id="attributes[metadata][eventPlace]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            jurisdiction
-          </label>
-          <input
-            aria-describedby="attributes[metadata][jurisdiction]-text-input-15"
-            id="attributes[metadata][jurisdiction]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][medium]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][jurisdiction]-text-input-15"
+            >
+              jurisdiction
+            </label>
+            <input
+              aria-describedby="attributes[metadata][jurisdiction]-text-input-15"
+              id="attributes[metadata][jurisdiction]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            medium
-          </label>
-          <input
-            aria-describedby="attributes[metadata][medium]-text-input-15"
-            id="attributes[metadata][medium]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][number]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][medium]-text-input-15"
+            >
+              medium
+            </label>
+            <input
+              aria-describedby="attributes[metadata][medium]-text-input-15"
+              id="attributes[metadata][medium]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            number
-          </label>
-          <input
-            aria-describedby="attributes[metadata][number]-text-input-15"
-            id="attributes[metadata][number]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][numberOfPages]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][number]-text-input-15"
+            >
+              number
+            </label>
+            <input
+              aria-describedby="attributes[metadata][number]-text-input-15"
+              id="attributes[metadata][number]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            number of pages
-          </label>
-          <input
-            aria-describedby="attributes[metadata][numberOfPages]-text-input-15"
-            id="attributes[metadata][numberOfPages]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][numberOfVolumes]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][numberOfPages]-text-input-15"
+            >
+              number of pages
+            </label>
+            <input
+              aria-describedby="attributes[metadata][numberOfPages]-text-input-15"
+              id="attributes[metadata][numberOfPages]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            number of volumes
-          </label>
-          <input
-            aria-describedby="attributes[metadata][numberOfVolumes]-text-input-15"
-            id="attributes[metadata][numberOfVolumes]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][pmcid]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][numberOfVolumes]-text-input-15"
+            >
+              number of volumes
+            </label>
+            <input
+              aria-describedby="attributes[metadata][numberOfVolumes]-text-input-15"
+              id="attributes[metadata][numberOfVolumes]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            pmcid
-          </label>
-          <input
-            aria-describedby="attributes[metadata][pmcid]-text-input-15"
-            id="attributes[metadata][pmcid]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][pmid]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][pmcid]-text-input-15"
+            >
+              pmcid
+            </label>
+            <input
+              aria-describedby="attributes[metadata][pmcid]-text-input-15"
+              id="attributes[metadata][pmcid]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            pmid
-          </label>
-          <input
-            aria-describedby="attributes[metadata][pmid]-text-input-15"
-            id="attributes[metadata][pmid]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][reviewedTitle]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][pmid]-text-input-15"
+            >
+              pmid
+            </label>
+            <input
+              aria-describedby="attributes[metadata][pmid]-text-input-15"
+              id="attributes[metadata][pmid]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            reviewed title
-          </label>
-          <input
-            aria-describedby="attributes[metadata][reviewedTitle]-text-input-15"
-            id="attributes[metadata][reviewedTitle]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][section]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][reviewedTitle]-text-input-15"
+            >
+              reviewed title
+            </label>
+            <input
+              aria-describedby="attributes[metadata][reviewedTitle]-text-input-15"
+              id="attributes[metadata][reviewedTitle]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            section
-          </label>
-          <input
-            aria-describedby="attributes[metadata][section]-text-input-15"
-            id="attributes[metadata][section]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="attributes[metadata][yearSuffix]-text-input-15"
+            <label
+              className=""
+              htmlFor="attributes[metadata][section]-text-input-15"
+            >
+              section
+            </label>
+            <input
+              aria-describedby="attributes[metadata][section]-text-input-15"
+              id="attributes[metadata][section]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
           >
-            year suffix
-          </label>
-          <input
-            aria-describedby="attributes[metadata][yearSuffix]-text-input-15"
-            id="attributes[metadata][yearSuffix]-text-input-15"
-            onChange={[Function]}
-            placeholder={null}
-            type="text"
-            value=""
-          />
+            <label
+              className=""
+              htmlFor="attributes[metadata][yearSuffix]-text-input-15"
+            >
+              year suffix
+            </label>
+            <input
+              aria-describedby="attributes[metadata][yearSuffix]-text-input-15"
+              id="attributes[metadata][yearSuffix]-text-input-15"
+              onChange={[Function]}
+              placeholder={null}
+              type="text"
+              value=""
+            />
+          </div>
         </div>
       </div>
       <div
-        className="form-input submit"
+        className="form-input submit wide"
       >
         <input
           className="button-secondary outlined"

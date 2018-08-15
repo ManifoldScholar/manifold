@@ -163,7 +163,7 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
           </div>
         </div>
         <div
-          className="form-input submit"
+          className="form-input submit wide"
         >
           <input
             className="button-secondary outlined"

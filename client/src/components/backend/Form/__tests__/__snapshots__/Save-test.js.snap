@@ -2,7 +2,7 @@
 
 exports[`Backend.Form.Save component renders correctly 1`] = `
 <div
-  className="form-input submit"
+  className="form-input submit wide"
 >
   <a
     className="button-secondary outlined dull"

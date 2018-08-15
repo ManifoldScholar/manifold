@@ -166,11 +166,6 @@ exports[`Backend Resource General Container renders correctly 1`] = `
         >
           Tags
         </label>
-        <span
-          className="instructions"
-        >
-          Separate tags with "," or ";"
-        </span>
         <input
           aria-describedby="attributes[tagList]-text-input-15"
           id="attributes[tagList]-text-input-15"
@@ -179,6 +174,11 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           type="text"
           value="dog, puppy, GOAT"
         />
+        <span
+          className="instructions"
+        >
+          Separate tags with "," or ";"
+        </span>
       </div>
       <div
         className="form-input"
@@ -301,7 +301,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="form-input submit"
+        className="form-input submit wide"
       >
         <input
           className="button-secondary outlined"

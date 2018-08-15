@@ -8,7 +8,7 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
     <li>
       <a
         className="resource-link"
-        href="/project/slug-3/resource/slug-1"
+        href="/projects/slug-3/resource/slug-1"
         onClick={[Function]}
       >
         <div
@@ -61,7 +61,7 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
     <li>
       <a
         className="resource-link"
-        href="/project/slug-3/resource/slug-2"
+        href="/projects/slug-3/resource/slug-2"
         onClick={[Function]}
       >
         <div

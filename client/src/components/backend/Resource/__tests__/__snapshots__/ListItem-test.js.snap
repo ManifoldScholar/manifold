@@ -3,7 +3,7 @@
 exports[`Backend.Resource.ListItem component renders correctly 1`] = `
 <li>
   <a
-    href="/backend/resource/1"
+    href="/backend/projects/resource/1"
     onClick={[Function]}
   >
     <header>

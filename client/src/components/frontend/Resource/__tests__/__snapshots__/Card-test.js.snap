@@ -102,7 +102,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
       </span>
       <div
         className="arrow-link"
-        to="/project/slug-2/resource/slug-1"
+        to="/projects/slug-2/resource/slug-1"
       >
         <i
           aria-hidden="true"
@@ -125,7 +125,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
         <li>
           <a
             className={null}
-            href="/project/slug-2/resources/?tag=dog"
+            href="/projects/slug-2/resources/?tag=dog"
             onClick={[Function]}
           >
             dog
@@ -134,7 +134,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
         <li>
           <a
             className={null}
-            href="/project/slug-2/resources/?tag=puppy"
+            href="/projects/slug-2/resources/?tag=puppy"
             onClick={[Function]}
           >
             puppy
@@ -143,7 +143,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
         <li>
           <a
             className={null}
-            href="/project/slug-2/resources/?tag=goat"
+            href="/projects/slug-2/resources/?tag=goat"
             onClick={[Function]}
           >
             GOAT

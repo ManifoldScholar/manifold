@@ -16,58 +16,62 @@ exports[`Backend.Form.SwitchArray component renders correctly 1`] = `
       </span>
     </header>
     <div
-      className="form-input"
+      className="form-input-group"
     >
-      <h4
-        className="form-input-heading above"
-      >
-        Option one
-      </h4>
       <div
-        className="toggle-indicator"
+        className="form-input"
       >
-        <div
-          aria-pressed={false}
-          className="boolean-primary"
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          role="button"
-          tabIndex="0"
+        <h4
+          className="form-input-heading above"
         >
-          <span
-            className="screen-reader-text"
+          Option one
+        </h4>
+        <div
+          className="toggle-indicator"
+        >
+          <div
+            aria-pressed={false}
+            className="boolean-primary"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            role="button"
+            tabIndex="0"
           >
-            Option one
-          </span>
+            <span
+              className="screen-reader-text"
+            >
+              Option one
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-    <div
-      className="form-input"
-    >
-      <h4
-        className="form-input-heading above"
-      >
-        Option two
-      </h4>
       <div
-        className="toggle-indicator"
+        className="form-input"
       >
-        <div
-          aria-pressed={false}
-          className="boolean-primary"
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          role="button"
-          tabIndex="0"
+        <h4
+          className="form-input-heading above"
         >
-          <span
-            className="screen-reader-text"
+          Option two
+        </h4>
+        <div
+          className="toggle-indicator"
+        >
+          <div
+            aria-pressed={false}
+            className="boolean-primary"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            role="button"
+            tabIndex="0"
           >
-            Option two
-          </span>
+            <span
+              className="screen-reader-text"
+            >
+              Option two
+            </span>
+          </div>
         </div>
       </div>
     </div>

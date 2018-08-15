@@ -3,7 +3,7 @@
 exports[`Backend.Project.ListItem component renders correctly 1`] = `
 <li>
   <a
-    href="/backend/project/1"
+    href="/backend/projects/1"
     onClick={[Function]}
   >
     <header>
@@ -99,11 +99,6 @@ exports[`Backend.Project.ListItem component renders correctly 1`] = `
         </h3>
       </div>
     </header>
-    <span
-      className="label"
-    >
-      Edit
-    </span>
   </a>
 </li>
 `;

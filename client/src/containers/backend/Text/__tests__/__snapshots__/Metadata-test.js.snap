@@ -15,510 +15,518 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                       <div>
                         <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
                         <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
-                          <FieldGroup label=\\"Identity\\" disabled={false} horizontal={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <FieldGroup label=\\"Identity\\" disabled={false} horizontal={false} wide={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                             <div className=\\"form-section\\">
                               <header className=\\"form-section-label\\">
                                 <span>
                                   Identity
                                 </span>
                               </header>
+                              <div className=\\"form-input-group\\">
+                                <Form.Setter('Form.TextInput) focusOnMount={true} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={true} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][isbn]\\" errors={{...}} label=\\"isbn\\" idForError=\\"attributes[metadata][isbn]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][isbn]-text-input-15\\" className=\\"\\">
+                                          isbn
+                                        </label>
+                                        <input id=\\"attributes[metadata][isbn]-text-input-15\\" type=\\"text\\" placeholder=\\"International Standard Book Number\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][isbn]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"International Standard Serial Number\\" instructions={[undefined]} label=\\"issn\\" name=\\"attributes[metadata][issn]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"International Standard Serial Number\\" instructions={[undefined]} label=\\"issn\\" name=\\"attributes[metadata][issn]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][issn]\\" errors={{...}} label=\\"issn\\" idForError=\\"attributes[metadata][issn]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][issn]-text-input-15\\" className=\\"\\">
+                                          issn
+                                        </label>
+                                        <input id=\\"attributes[metadata][issn]-text-input-15\\" type=\\"text\\" placeholder=\\"International Standard Serial Number\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][issn]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                              </div>
                               <Instructions instructions={{...}} />
-                              <Form.Setter('Form.TextInput) focusOnMount={true} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={true} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][isbn]\\" errors={{...}} label=\\"isbn\\" idForError=\\"attributes[metadata][isbn]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][isbn]-text-input-15\\" className=\\"\\">
-                                        isbn
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][isbn]-text-input-15\\" type=\\"text\\" placeholder=\\"International Standard Book Number\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][isbn]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"International Standard Serial Number\\" instructions={[undefined]} label=\\"issn\\" name=\\"attributes[metadata][issn]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"International Standard Serial Number\\" instructions={[undefined]} label=\\"issn\\" name=\\"attributes[metadata][issn]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][issn]\\" errors={{...}} label=\\"issn\\" idForError=\\"attributes[metadata][issn]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][issn]-text-input-15\\" className=\\"\\">
-                                        issn
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][issn]-text-input-15\\" type=\\"text\\" placeholder=\\"International Standard Serial Number\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][issn]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
                             </div>
                           </FieldGroup>
-                          <FieldGroup label=\\"Publisher\\" disabled={false} horizontal={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <FieldGroup label=\\"Publisher\\" disabled={false} horizontal={false} wide={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                             <div className=\\"form-section\\">
                               <header className=\\"form-section-label\\">
                                 <span>
                                   Publisher
                                 </span>
                               </header>
+                              <div className=\\"form-input-group\\">
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][publisher]\\" errors={{...}} label=\\"publisher\\" idForError=\\"attributes[metadata][publisher]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][publisher]-text-input-15\\" className=\\"\\">
+                                          publisher
+                                        </label>
+                                        <input id=\\"attributes[metadata][publisher]-text-input-15\\" type=\\"text\\" placeholder=\\"The Publisher\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][publisher]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions=\\"e.g \\"Minneapolis, MN\\"\\" label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions=\\"e.g \\"Minneapolis, MN\\"\\" label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][publisherPlace]\\" errors={{...}} label=\\"publisher place\\" idForError=\\"attributes[metadata][publisherPlace]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][publisherPlace]-text-input-15\\" className=\\"has-instructions\\">
+                                          publisher place
+                                        </label>
+                                        <input id=\\"attributes[metadata][publisherPlace]-text-input-15\\" type=\\"text\\" placeholder=\\"Geographic location of the publisher\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][publisherPlace]-text-input-15\\" />
+                                        <Instructions instructions=\\"e.g \\"Minneapolis, MN\\"\\">
+                                          <span className=\\"instructions\\">
+                                            e.g &quot;Minneapolis, MN&quot;
+                                          </span>
+                                        </Instructions>
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" instructions={[undefined]} label=\\"original publisher\\" name=\\"attributes[metadata][originalPublisher]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" instructions={[undefined]} label=\\"original publisher\\" name=\\"attributes[metadata][originalPublisher]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][originalPublisher]\\" errors={{...}} label=\\"original publisher\\" idForError=\\"attributes[metadata][originalPublisher]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][originalPublisher]-text-input-15\\" className=\\"\\">
+                                          original publisher
+                                        </label>
+                                        <input id=\\"attributes[metadata][originalPublisher]-text-input-15\\" type=\\"text\\" placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][originalPublisher]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the original publisher\\" instructions={[undefined]} label=\\"original publisher place\\" name=\\"attributes[metadata][originalPublisherPlace]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the original publisher\\" instructions={[undefined]} label=\\"original publisher place\\" name=\\"attributes[metadata][originalPublisherPlace]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][originalPublisherPlace]\\" errors={{...}} label=\\"original publisher place\\" idForError=\\"attributes[metadata][originalPublisherPlace]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][originalPublisherPlace]-text-input-15\\" className=\\"\\">
+                                          original publisher place
+                                        </label>
+                                        <input id=\\"attributes[metadata][originalPublisherPlace]-text-input-15\\" type=\\"text\\" placeholder=\\"Geographic location of the original publisher\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][originalPublisherPlace]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                              </div>
                               <Instructions instructions={{...}} />
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][publisher]\\" errors={{...}} label=\\"publisher\\" idForError=\\"attributes[metadata][publisher]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][publisher]-text-input-15\\" className=\\"\\">
-                                        publisher
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][publisher]-text-input-15\\" type=\\"text\\" placeholder=\\"The Publisher\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][publisher]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions=\\"e.g \\"Minneapolis, MN\\"\\" label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions=\\"e.g \\"Minneapolis, MN\\"\\" label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][publisherPlace]\\" errors={{...}} label=\\"publisher place\\" idForError=\\"attributes[metadata][publisherPlace]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][publisherPlace]-text-input-15\\" className=\\"has-instructions\\">
-                                        publisher place
-                                      </label>
-                                      <Instructions instructions=\\"e.g \\"Minneapolis, MN\\"\\">
-                                        <span className=\\"instructions\\">
-                                          e.g &quot;Minneapolis, MN&quot;
-                                        </span>
-                                      </Instructions>
-                                      <input id=\\"attributes[metadata][publisherPlace]-text-input-15\\" type=\\"text\\" placeholder=\\"Geographic location of the publisher\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][publisherPlace]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" instructions={[undefined]} label=\\"original publisher\\" name=\\"attributes[metadata][originalPublisher]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" instructions={[undefined]} label=\\"original publisher\\" name=\\"attributes[metadata][originalPublisher]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][originalPublisher]\\" errors={{...}} label=\\"original publisher\\" idForError=\\"attributes[metadata][originalPublisher]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][originalPublisher]-text-input-15\\" className=\\"\\">
-                                        original publisher
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][originalPublisher]-text-input-15\\" type=\\"text\\" placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][originalPublisher]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the original publisher\\" instructions={[undefined]} label=\\"original publisher place\\" name=\\"attributes[metadata][originalPublisherPlace]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the original publisher\\" instructions={[undefined]} label=\\"original publisher place\\" name=\\"attributes[metadata][originalPublisherPlace]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][originalPublisherPlace]\\" errors={{...}} label=\\"original publisher place\\" idForError=\\"attributes[metadata][originalPublisherPlace]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][originalPublisherPlace]-text-input-15\\" className=\\"\\">
-                                        original publisher place
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][originalPublisherPlace]-text-input-15\\" type=\\"text\\" placeholder=\\"Geographic location of the original publisher\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][originalPublisherPlace]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
                             </div>
                           </FieldGroup>
-                          <FieldGroup label=\\"Bibliographic\\" disabled={false} horizontal={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <FieldGroup label=\\"Bibliographic\\" disabled={false} horizontal={false} wide={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                             <div className=\\"form-section\\">
                               <header className=\\"form-section-label\\">
                                 <span>
                                   Bibliographic
                                 </span>
                               </header>
+                              <div className=\\"form-input-group\\">
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][containerTitle]\\" errors={{...}} label=\\"container title\\" idForError=\\"attributes[metadata][containerTitle]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][containerTitle]-text-input-15\\" className=\\"has-instructions\\">
+                                          container title
+                                        </label>
+                                        <input id=\\"attributes[metadata][containerTitle]-text-input-15\\" type=\\"text\\" placeholder=\\"Title of the container holding the item\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][containerTitle]-text-input-15\\" />
+                                        <Instructions instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\">
+                                          <span className=\\"instructions\\">
+                                            e.g. the book title for a book chapter, the journal title for a journal article
+                                          </span>
+                                        </Instructions>
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Version of the item\\" instructions={[undefined]} label=\\"version\\" name=\\"attributes[metadata][version]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"Version of the item\\" instructions={[undefined]} label=\\"version\\" name=\\"attributes[metadata][version]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][version]\\" errors={{...}} label=\\"version\\" idForError=\\"attributes[metadata][version]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][version]-text-input-15\\" className=\\"\\">
+                                          version
+                                        </label>
+                                        <input id=\\"attributes[metadata][version]-text-input-15\\" type=\\"text\\" placeholder=\\"Version of the item\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][version]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) edition holding the item\\" instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\" label=\\"edition\\" name=\\"attributes[metadata][edition]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"(Container) edition holding the item\\" instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\" label=\\"edition\\" name=\\"attributes[metadata][edition]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][edition]\\" errors={{...}} label=\\"edition\\" idForError=\\"attributes[metadata][edition]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][edition]-text-input-15\\" className=\\"has-instructions\\">
+                                          edition
+                                        </label>
+                                        <input id=\\"attributes[metadata][edition]-text-input-15\\" type=\\"text\\" placeholder=\\"(Container) edition holding the item\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][edition]-text-input-15\\" />
+                                        <Instructions instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\">
+                                          <span className=\\"instructions\\">
+                                            e.g. &quot;3&quot; when citing a chapter in the third edition of a book
+                                          </span>
+                                        </Instructions>
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) issue holding the item\\" instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\" label=\\"issue\\" name=\\"attributes[metadata][issue]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"(Container) issue holding the item\\" instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\" label=\\"issue\\" name=\\"attributes[metadata][issue]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][issue]\\" errors={{...}} label=\\"issue\\" idForError=\\"attributes[metadata][issue]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][issue]-text-input-15\\" className=\\"has-instructions\\">
+                                          issue
+                                        </label>
+                                        <input id=\\"attributes[metadata][issue]-text-input-15\\" type=\\"text\\" placeholder=\\"(Container) issue holding the item\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][issue]-text-input-15\\" />
+                                        <Instructions instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\">
+                                          <span className=\\"instructions\\">
+                                            e.g. &quot;5&quot; when citing a journal article from journal volume 2, issue 5
+                                          </span>
+                                        </Instructions>
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) volume holding the item \\" instructions=\\"e.g. “2” when citing a chapter from book volume 2\\" label=\\"volume\\" name=\\"attributes[metadata][volume]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"(Container) volume holding the item \\" instructions=\\"e.g. “2” when citing a chapter from book volume 2\\" label=\\"volume\\" name=\\"attributes[metadata][volume]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][volume]\\" errors={{...}} label=\\"volume\\" idForError=\\"attributes[metadata][volume]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][volume]-text-input-15\\" className=\\"has-instructions\\">
+                                          volume
+                                        </label>
+                                        <input id=\\"attributes[metadata][volume]-text-input-15\\" type=\\"text\\" placeholder=\\"(Container) volume holding the item \\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][volume]-text-input-15\\" />
+                                        <Instructions instructions=\\"e.g. “2” when citing a chapter from book volume 2\\">
+                                          <span className=\\"instructions\\">
+                                            e.g. “2” when citing a chapter from book volume 2
+                                          </span>
+                                        </Instructions>
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the original version\\" instructions={[undefined]} label=\\"original title\\" name=\\"attributes[metadata][originalTitle]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder=\\"Title of the original version\\" instructions={[undefined]} label=\\"original title\\" name=\\"attributes[metadata][originalTitle]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][originalTitle]\\" errors={{...}} label=\\"original title\\" idForError=\\"attributes[metadata][originalTitle]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][originalTitle]-text-input-15\\" className=\\"\\">
+                                          original title
+                                        </label>
+                                        <input id=\\"attributes[metadata][originalTitle]-text-input-15\\" type=\\"text\\" placeholder=\\"Title of the original version\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][originalTitle]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                              </div>
                               <Instructions instructions={{...}} />
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][containerTitle]\\" errors={{...}} label=\\"container title\\" idForError=\\"attributes[metadata][containerTitle]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][containerTitle]-text-input-15\\" className=\\"has-instructions\\">
-                                        container title
-                                      </label>
-                                      <Instructions instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\">
-                                        <span className=\\"instructions\\">
-                                          e.g. the book title for a book chapter, the journal title for a journal article
-                                        </span>
-                                      </Instructions>
-                                      <input id=\\"attributes[metadata][containerTitle]-text-input-15\\" type=\\"text\\" placeholder=\\"Title of the container holding the item\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][containerTitle]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Version of the item\\" instructions={[undefined]} label=\\"version\\" name=\\"attributes[metadata][version]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"Version of the item\\" instructions={[undefined]} label=\\"version\\" name=\\"attributes[metadata][version]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][version]\\" errors={{...}} label=\\"version\\" idForError=\\"attributes[metadata][version]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][version]-text-input-15\\" className=\\"\\">
-                                        version
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][version]-text-input-15\\" type=\\"text\\" placeholder=\\"Version of the item\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][version]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) edition holding the item\\" instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\" label=\\"edition\\" name=\\"attributes[metadata][edition]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"(Container) edition holding the item\\" instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\" label=\\"edition\\" name=\\"attributes[metadata][edition]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][edition]\\" errors={{...}} label=\\"edition\\" idForError=\\"attributes[metadata][edition]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][edition]-text-input-15\\" className=\\"has-instructions\\">
-                                        edition
-                                      </label>
-                                      <Instructions instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\">
-                                        <span className=\\"instructions\\">
-                                          e.g. &quot;3&quot; when citing a chapter in the third edition of a book
-                                        </span>
-                                      </Instructions>
-                                      <input id=\\"attributes[metadata][edition]-text-input-15\\" type=\\"text\\" placeholder=\\"(Container) edition holding the item\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][edition]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) issue holding the item\\" instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\" label=\\"issue\\" name=\\"attributes[metadata][issue]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"(Container) issue holding the item\\" instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\" label=\\"issue\\" name=\\"attributes[metadata][issue]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][issue]\\" errors={{...}} label=\\"issue\\" idForError=\\"attributes[metadata][issue]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][issue]-text-input-15\\" className=\\"has-instructions\\">
-                                        issue
-                                      </label>
-                                      <Instructions instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\">
-                                        <span className=\\"instructions\\">
-                                          e.g. &quot;5&quot; when citing a journal article from journal volume 2, issue 5
-                                        </span>
-                                      </Instructions>
-                                      <input id=\\"attributes[metadata][issue]-text-input-15\\" type=\\"text\\" placeholder=\\"(Container) issue holding the item\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][issue]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) volume holding the item \\" instructions=\\"e.g. “2” when citing a chapter from book volume 2\\" label=\\"volume\\" name=\\"attributes[metadata][volume]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"(Container) volume holding the item \\" instructions=\\"e.g. “2” when citing a chapter from book volume 2\\" label=\\"volume\\" name=\\"attributes[metadata][volume]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][volume]\\" errors={{...}} label=\\"volume\\" idForError=\\"attributes[metadata][volume]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][volume]-text-input-15\\" className=\\"has-instructions\\">
-                                        volume
-                                      </label>
-                                      <Instructions instructions=\\"e.g. “2” when citing a chapter from book volume 2\\">
-                                        <span className=\\"instructions\\">
-                                          e.g. “2” when citing a chapter from book volume 2
-                                        </span>
-                                      </Instructions>
-                                      <input id=\\"attributes[metadata][volume]-text-input-15\\" type=\\"text\\" placeholder=\\"(Container) volume holding the item \\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][volume]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the original version\\" instructions={[undefined]} label=\\"original title\\" name=\\"attributes[metadata][originalTitle]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"Title of the original version\\" instructions={[undefined]} label=\\"original title\\" name=\\"attributes[metadata][originalTitle]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][originalTitle]\\" errors={{...}} label=\\"original title\\" idForError=\\"attributes[metadata][originalTitle]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][originalTitle]-text-input-15\\" className=\\"\\">
-                                        original title
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][originalTitle]-text-input-15\\" type=\\"text\\" placeholder=\\"Title of the original version\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][originalTitle]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
                             </div>
                           </FieldGroup>
-                          <FieldGroup label=\\"Other\\" disabled={false} horizontal={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <FieldGroup label=\\"Other\\" disabled={false} horizontal={false} wide={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                             <div className=\\"form-section\\">
                               <header className=\\"form-section-label\\">
                                 <span>
                                   Other
                                 </span>
                               </header>
+                              <div className=\\"form-input-group\\">
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][abstract]\\" errors={{...}} label=\\"abstract\\" idForError=\\"attributes[metadata][abstract]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][abstract]-text-input-15\\" className=\\"\\">
+                                          abstract
+                                        </label>
+                                        <input id=\\"attributes[metadata][abstract]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][abstract]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive\\" name=\\"attributes[metadata][archive]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive\\" name=\\"attributes[metadata][archive]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][archive]\\" errors={{...}} label=\\"archive\\" idForError=\\"attributes[metadata][archive]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][archive]-text-input-15\\" className=\\"\\">
+                                          archive
+                                        </label>
+                                        <input id=\\"attributes[metadata][archive]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][archive]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive location\\" name=\\"attributes[metadata][archiveLocation]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive location\\" name=\\"attributes[metadata][archiveLocation]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][archiveLocation]\\" errors={{...}} label=\\"archive location\\" idForError=\\"attributes[metadata][archiveLocation]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][archiveLocation]-text-input-15\\" className=\\"\\">
+                                          archive location
+                                        </label>
+                                        <input id=\\"attributes[metadata][archiveLocation]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][archiveLocation]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive place\\" name=\\"attributes[metadata][archivePlace]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive place\\" name=\\"attributes[metadata][archivePlace]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][archivePlace]\\" errors={{...}} label=\\"archive place\\" idForError=\\"attributes[metadata][archivePlace]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][archivePlace]-text-input-15\\" className=\\"\\">
+                                          archive place
+                                        </label>
+                                        <input id=\\"attributes[metadata][archivePlace]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][archivePlace]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"authority\\" name=\\"attributes[metadata][authority]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"authority\\" name=\\"attributes[metadata][authority]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][authority]\\" errors={{...}} label=\\"authority\\" idForError=\\"attributes[metadata][authority]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][authority]-text-input-15\\" className=\\"\\">
+                                          authority
+                                        </label>
+                                        <input id=\\"attributes[metadata][authority]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][authority]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"call number\\" name=\\"attributes[metadata][callNumber]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"call number\\" name=\\"attributes[metadata][callNumber]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][callNumber]\\" errors={{...}} label=\\"call number\\" idForError=\\"attributes[metadata][callNumber]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][callNumber]-text-input-15\\" className=\\"\\">
+                                          call number
+                                        </label>
+                                        <input id=\\"attributes[metadata][callNumber]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][callNumber]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"chapter number\\" name=\\"attributes[metadata][chapterNumber]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"chapter number\\" name=\\"attributes[metadata][chapterNumber]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][chapterNumber]\\" errors={{...}} label=\\"chapter number\\" idForError=\\"attributes[metadata][chapterNumber]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][chapterNumber]-text-input-15\\" className=\\"\\">
+                                          chapter number
+                                        </label>
+                                        <input id=\\"attributes[metadata][chapterNumber]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][chapterNumber]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"collection number\\" name=\\"attributes[metadata][collectionNumber]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"collection number\\" name=\\"attributes[metadata][collectionNumber]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][collectionNumber]\\" errors={{...}} label=\\"collection number\\" idForError=\\"attributes[metadata][collectionNumber]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][collectionNumber]-text-input-15\\" className=\\"\\">
+                                          collection number
+                                        </label>
+                                        <input id=\\"attributes[metadata][collectionNumber]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][collectionNumber]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"collection title\\" name=\\"attributes[metadata][collectionTitle]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"collection title\\" name=\\"attributes[metadata][collectionTitle]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][collectionTitle]\\" errors={{...}} label=\\"collection title\\" idForError=\\"attributes[metadata][collectionTitle]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][collectionTitle]-text-input-15\\" className=\\"\\">
+                                          collection title
+                                        </label>
+                                        <input id=\\"attributes[metadata][collectionTitle]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][collectionTitle]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"dimensions\\" name=\\"attributes[metadata][dimensions]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"dimensions\\" name=\\"attributes[metadata][dimensions]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][dimensions]\\" errors={{...}} label=\\"dimensions\\" idForError=\\"attributes[metadata][dimensions]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][dimensions]-text-input-15\\" className=\\"\\">
+                                          dimensions
+                                        </label>
+                                        <input id=\\"attributes[metadata][dimensions]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][dimensions]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"event\\" name=\\"attributes[metadata][event]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"event\\" name=\\"attributes[metadata][event]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][event]\\" errors={{...}} label=\\"event\\" idForError=\\"attributes[metadata][event]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][event]-text-input-15\\" className=\\"\\">
+                                          event
+                                        </label>
+                                        <input id=\\"attributes[metadata][event]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][event]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"event place\\" name=\\"attributes[metadata][eventPlace]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"event place\\" name=\\"attributes[metadata][eventPlace]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][eventPlace]\\" errors={{...}} label=\\"event place\\" idForError=\\"attributes[metadata][eventPlace]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][eventPlace]-text-input-15\\" className=\\"\\">
+                                          event place
+                                        </label>
+                                        <input id=\\"attributes[metadata][eventPlace]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][eventPlace]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"jurisdiction\\" name=\\"attributes[metadata][jurisdiction]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"jurisdiction\\" name=\\"attributes[metadata][jurisdiction]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][jurisdiction]\\" errors={{...}} label=\\"jurisdiction\\" idForError=\\"attributes[metadata][jurisdiction]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][jurisdiction]-text-input-15\\" className=\\"\\">
+                                          jurisdiction
+                                        </label>
+                                        <input id=\\"attributes[metadata][jurisdiction]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][jurisdiction]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"medium\\" name=\\"attributes[metadata][medium]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"medium\\" name=\\"attributes[metadata][medium]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][medium]\\" errors={{...}} label=\\"medium\\" idForError=\\"attributes[metadata][medium]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][medium]-text-input-15\\" className=\\"\\">
+                                          medium
+                                        </label>
+                                        <input id=\\"attributes[metadata][medium]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][medium]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number\\" name=\\"attributes[metadata][number]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number\\" name=\\"attributes[metadata][number]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][number]\\" errors={{...}} label=\\"number\\" idForError=\\"attributes[metadata][number]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][number]-text-input-15\\" className=\\"\\">
+                                          number
+                                        </label>
+                                        <input id=\\"attributes[metadata][number]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][number]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of pages\\" name=\\"attributes[metadata][numberOfPages]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of pages\\" name=\\"attributes[metadata][numberOfPages]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][numberOfPages]\\" errors={{...}} label=\\"number of pages\\" idForError=\\"attributes[metadata][numberOfPages]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][numberOfPages]-text-input-15\\" className=\\"\\">
+                                          number of pages
+                                        </label>
+                                        <input id=\\"attributes[metadata][numberOfPages]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][numberOfPages]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of volumes\\" name=\\"attributes[metadata][numberOfVolumes]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of volumes\\" name=\\"attributes[metadata][numberOfVolumes]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][numberOfVolumes]\\" errors={{...}} label=\\"number of volumes\\" idForError=\\"attributes[metadata][numberOfVolumes]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][numberOfVolumes]-text-input-15\\" className=\\"\\">
+                                          number of volumes
+                                        </label>
+                                        <input id=\\"attributes[metadata][numberOfVolumes]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][numberOfVolumes]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"pmcid\\" name=\\"attributes[metadata][pmcid]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"pmcid\\" name=\\"attributes[metadata][pmcid]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][pmcid]\\" errors={{...}} label=\\"pmcid\\" idForError=\\"attributes[metadata][pmcid]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][pmcid]-text-input-15\\" className=\\"\\">
+                                          pmcid
+                                        </label>
+                                        <input id=\\"attributes[metadata][pmcid]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][pmcid]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"pmid\\" name=\\"attributes[metadata][pmid]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"pmid\\" name=\\"attributes[metadata][pmid]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][pmid]\\" errors={{...}} label=\\"pmid\\" idForError=\\"attributes[metadata][pmid]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][pmid]-text-input-15\\" className=\\"\\">
+                                          pmid
+                                        </label>
+                                        <input id=\\"attributes[metadata][pmid]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][pmid]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"reviewed title\\" name=\\"attributes[metadata][reviewedTitle]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"reviewed title\\" name=\\"attributes[metadata][reviewedTitle]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][reviewedTitle]\\" errors={{...}} label=\\"reviewed title\\" idForError=\\"attributes[metadata][reviewedTitle]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][reviewedTitle]-text-input-15\\" className=\\"\\">
+                                          reviewed title
+                                        </label>
+                                        <input id=\\"attributes[metadata][reviewedTitle]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][reviewedTitle]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"section\\" name=\\"attributes[metadata][section]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"section\\" name=\\"attributes[metadata][section]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][section]\\" errors={{...}} label=\\"section\\" idForError=\\"attributes[metadata][section]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][section]-text-input-15\\" className=\\"\\">
+                                          section
+                                        </label>
+                                        <input id=\\"attributes[metadata][section]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][section]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                                <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"year suffix\\" name=\\"attributes[metadata][yearSuffix]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                  <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"year suffix\\" name=\\"attributes[metadata][yearSuffix]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
+                                    <Errorable className=\\"form-input\\" name=\\"attributes[metadata][yearSuffix]\\" errors={{...}} label=\\"year suffix\\" idForError=\\"attributes[metadata][yearSuffix]-text-input-15\\" containerStyle={{...}}>
+                                      <div style={{...}} className=\\"form-input\\">
+                                        <label htmlFor=\\"attributes[metadata][yearSuffix]-text-input-15\\" className=\\"\\">
+                                          year suffix
+                                        </label>
+                                        <input id=\\"attributes[metadata][yearSuffix]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][yearSuffix]-text-input-15\\" />
+                                        <Instructions instructions={{...}} />
+                                      </div>
+                                    </Errorable>
+                                  </Form.TextInput>
+                                </Form.Setter('Form.TextInput)>
+                              </div>
                               <Instructions instructions={{...}} />
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][abstract]\\" errors={{...}} label=\\"abstract\\" idForError=\\"attributes[metadata][abstract]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][abstract]-text-input-15\\" className=\\"\\">
-                                        abstract
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][abstract]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][abstract]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive\\" name=\\"attributes[metadata][archive]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive\\" name=\\"attributes[metadata][archive]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][archive]\\" errors={{...}} label=\\"archive\\" idForError=\\"attributes[metadata][archive]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][archive]-text-input-15\\" className=\\"\\">
-                                        archive
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][archive]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][archive]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive location\\" name=\\"attributes[metadata][archiveLocation]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive location\\" name=\\"attributes[metadata][archiveLocation]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][archiveLocation]\\" errors={{...}} label=\\"archive location\\" idForError=\\"attributes[metadata][archiveLocation]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][archiveLocation]-text-input-15\\" className=\\"\\">
-                                        archive location
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][archiveLocation]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][archiveLocation]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive place\\" name=\\"attributes[metadata][archivePlace]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"archive place\\" name=\\"attributes[metadata][archivePlace]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][archivePlace]\\" errors={{...}} label=\\"archive place\\" idForError=\\"attributes[metadata][archivePlace]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][archivePlace]-text-input-15\\" className=\\"\\">
-                                        archive place
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][archivePlace]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][archivePlace]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"authority\\" name=\\"attributes[metadata][authority]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"authority\\" name=\\"attributes[metadata][authority]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][authority]\\" errors={{...}} label=\\"authority\\" idForError=\\"attributes[metadata][authority]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][authority]-text-input-15\\" className=\\"\\">
-                                        authority
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][authority]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][authority]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"call number\\" name=\\"attributes[metadata][callNumber]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"call number\\" name=\\"attributes[metadata][callNumber]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][callNumber]\\" errors={{...}} label=\\"call number\\" idForError=\\"attributes[metadata][callNumber]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][callNumber]-text-input-15\\" className=\\"\\">
-                                        call number
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][callNumber]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][callNumber]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"chapter number\\" name=\\"attributes[metadata][chapterNumber]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"chapter number\\" name=\\"attributes[metadata][chapterNumber]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][chapterNumber]\\" errors={{...}} label=\\"chapter number\\" idForError=\\"attributes[metadata][chapterNumber]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][chapterNumber]-text-input-15\\" className=\\"\\">
-                                        chapter number
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][chapterNumber]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][chapterNumber]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"collection number\\" name=\\"attributes[metadata][collectionNumber]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"collection number\\" name=\\"attributes[metadata][collectionNumber]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][collectionNumber]\\" errors={{...}} label=\\"collection number\\" idForError=\\"attributes[metadata][collectionNumber]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][collectionNumber]-text-input-15\\" className=\\"\\">
-                                        collection number
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][collectionNumber]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][collectionNumber]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"collection title\\" name=\\"attributes[metadata][collectionTitle]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"collection title\\" name=\\"attributes[metadata][collectionTitle]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][collectionTitle]\\" errors={{...}} label=\\"collection title\\" idForError=\\"attributes[metadata][collectionTitle]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][collectionTitle]-text-input-15\\" className=\\"\\">
-                                        collection title
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][collectionTitle]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][collectionTitle]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"dimensions\\" name=\\"attributes[metadata][dimensions]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"dimensions\\" name=\\"attributes[metadata][dimensions]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][dimensions]\\" errors={{...}} label=\\"dimensions\\" idForError=\\"attributes[metadata][dimensions]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][dimensions]-text-input-15\\" className=\\"\\">
-                                        dimensions
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][dimensions]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][dimensions]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"event\\" name=\\"attributes[metadata][event]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"event\\" name=\\"attributes[metadata][event]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][event]\\" errors={{...}} label=\\"event\\" idForError=\\"attributes[metadata][event]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][event]-text-input-15\\" className=\\"\\">
-                                        event
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][event]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][event]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"event place\\" name=\\"attributes[metadata][eventPlace]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"event place\\" name=\\"attributes[metadata][eventPlace]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][eventPlace]\\" errors={{...}} label=\\"event place\\" idForError=\\"attributes[metadata][eventPlace]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][eventPlace]-text-input-15\\" className=\\"\\">
-                                        event place
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][eventPlace]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][eventPlace]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"jurisdiction\\" name=\\"attributes[metadata][jurisdiction]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"jurisdiction\\" name=\\"attributes[metadata][jurisdiction]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][jurisdiction]\\" errors={{...}} label=\\"jurisdiction\\" idForError=\\"attributes[metadata][jurisdiction]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][jurisdiction]-text-input-15\\" className=\\"\\">
-                                        jurisdiction
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][jurisdiction]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][jurisdiction]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"medium\\" name=\\"attributes[metadata][medium]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"medium\\" name=\\"attributes[metadata][medium]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][medium]\\" errors={{...}} label=\\"medium\\" idForError=\\"attributes[metadata][medium]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][medium]-text-input-15\\" className=\\"\\">
-                                        medium
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][medium]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][medium]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number\\" name=\\"attributes[metadata][number]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number\\" name=\\"attributes[metadata][number]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][number]\\" errors={{...}} label=\\"number\\" idForError=\\"attributes[metadata][number]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][number]-text-input-15\\" className=\\"\\">
-                                        number
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][number]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][number]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of pages\\" name=\\"attributes[metadata][numberOfPages]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of pages\\" name=\\"attributes[metadata][numberOfPages]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][numberOfPages]\\" errors={{...}} label=\\"number of pages\\" idForError=\\"attributes[metadata][numberOfPages]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][numberOfPages]-text-input-15\\" className=\\"\\">
-                                        number of pages
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][numberOfPages]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][numberOfPages]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of volumes\\" name=\\"attributes[metadata][numberOfVolumes]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of volumes\\" name=\\"attributes[metadata][numberOfVolumes]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][numberOfVolumes]\\" errors={{...}} label=\\"number of volumes\\" idForError=\\"attributes[metadata][numberOfVolumes]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][numberOfVolumes]-text-input-15\\" className=\\"\\">
-                                        number of volumes
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][numberOfVolumes]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][numberOfVolumes]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"pmcid\\" name=\\"attributes[metadata][pmcid]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"pmcid\\" name=\\"attributes[metadata][pmcid]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][pmcid]\\" errors={{...}} label=\\"pmcid\\" idForError=\\"attributes[metadata][pmcid]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][pmcid]-text-input-15\\" className=\\"\\">
-                                        pmcid
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][pmcid]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][pmcid]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"pmid\\" name=\\"attributes[metadata][pmid]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"pmid\\" name=\\"attributes[metadata][pmid]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][pmid]\\" errors={{...}} label=\\"pmid\\" idForError=\\"attributes[metadata][pmid]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][pmid]-text-input-15\\" className=\\"\\">
-                                        pmid
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][pmid]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][pmid]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"reviewed title\\" name=\\"attributes[metadata][reviewedTitle]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"reviewed title\\" name=\\"attributes[metadata][reviewedTitle]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][reviewedTitle]\\" errors={{...}} label=\\"reviewed title\\" idForError=\\"attributes[metadata][reviewedTitle]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][reviewedTitle]-text-input-15\\" className=\\"\\">
-                                        reviewed title
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][reviewedTitle]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][reviewedTitle]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"section\\" name=\\"attributes[metadata][section]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"section\\" name=\\"attributes[metadata][section]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][section]\\" errors={{...}} label=\\"section\\" idForError=\\"attributes[metadata][section]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][section]-text-input-15\\" className=\\"\\">
-                                        section
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][section]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][section]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"year suffix\\" name=\\"attributes[metadata][yearSuffix]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"year suffix\\" name=\\"attributes[metadata][yearSuffix]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
-                                  <Errorable className=\\"form-input\\" name=\\"attributes[metadata][yearSuffix]\\" errors={{...}} label=\\"year suffix\\" idForError=\\"attributes[metadata][yearSuffix]-text-input-15\\" containerStyle={{...}}>
-                                    <div style={{...}} className=\\"form-input\\">
-                                      <label htmlFor=\\"attributes[metadata][yearSuffix]-text-input-15\\" className=\\"\\">
-                                        year suffix
-                                      </label>
-                                      <Instructions instructions={{...}} />
-                                      <input id=\\"attributes[metadata][yearSuffix]-text-input-15\\" type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[metadata][yearSuffix]-text-input-15\\" />
-                                    </div>
-                                  </Errorable>
-                                </Form.TextInput>
-                              </Form.Setter('Form.TextInput)>
                             </div>
                           </FieldGroup>
                           <Form.Save text=\\"Save Metadata\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                            <div className=\\"form-input submit\\">
+                            <div className=\\"form-input submit wide\\">
                               <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Metadata\\" />
                             </div>
                           </Form.Save>

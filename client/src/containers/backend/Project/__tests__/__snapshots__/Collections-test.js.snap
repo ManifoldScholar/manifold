@@ -90,7 +90,7 @@ exports[`Backend Project Collections Container renders correctly 1`] = `
           >
             <a
               className="button-icon-secondary "
-              href="/backend/project/1/resources/new"
+              href="/backend/projects/1/resources/new"
               onClick={[Function]}
             >
               <i
@@ -101,7 +101,7 @@ exports[`Backend Project Collections Container renders correctly 1`] = `
             </a>
             <a
               className="button-icon-secondary narrow"
-              href="/backend/project/1/resource-import"
+              href="/backend/projects/1/resource-import"
               onClick={[Function]}
             >
               <i

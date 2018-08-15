@@ -73,7 +73,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
         <ul>
           <li>
             <a
-              href="/backend/resource/1"
+              href="/backend/projects/resource/1"
               onClick={[Function]}
             >
               <header>
@@ -142,7 +142,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
           </li>
           <li>
             <a
-              href="/backend/resource/2"
+              href="/backend/projects/resource/2"
               onClick={[Function]}
             >
               <header>

@@ -11,7 +11,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
           className="active"
         >
           <a
-            href="/backend/project/1/permissions/2"
+            href="/backend/projects/1/permissions/2"
             onClick={[Function]}
           >
             <header>
@@ -60,7 +60,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
     >
       <a
         className="button-icon-secondary"
-        href="/backend/project/1/permissions/new"
+        href="/backend/projects/1/permissions/new"
         onClick={[Function]}
       >
         <i

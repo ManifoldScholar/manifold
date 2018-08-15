@@ -90,7 +90,7 @@ exports[`Backend Collection Resources Container renders correctly 1`] = `
             <ul>
               <li>
                 <a
-                  href="/backend/resource/3"
+                  href="/backend/projects/resource/3"
                   onClick={[Function]}
                 >
                   <header>
@@ -179,7 +179,7 @@ exports[`Backend Collection Resources Container renders correctly 1`] = `
               </li>
               <li>
                 <a
-                  href="/backend/resource/4"
+                  href="/backend/projects/resource/4"
                   onClick={[Function]}
                 >
                   <header>

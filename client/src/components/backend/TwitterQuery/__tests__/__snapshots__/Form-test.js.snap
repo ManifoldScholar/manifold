@@ -17,6 +17,14 @@ exports[`Backend.TwitterQuery.Form Component renders correctly 1`] = `
       >
         Query
       </label>
+      <input
+        aria-describedby="attributes[query]-text-input-15"
+        id="attributes[query]-text-input-15"
+        onChange={[Function]}
+        placeholder="Enter query"
+        type="text"
+        value="from:manifoldscholar"
+      />
       <p
         className="instructions"
       >
@@ -31,14 +39,6 @@ exports[`Backend.TwitterQuery.Form Component renders correctly 1`] = `
         </a>
         .
       </p>
-      <input
-        aria-describedby="attributes[query]-text-input-15"
-        id="attributes[query]-text-input-15"
-        onChange={[Function]}
-        placeholder="Enter query"
-        type="text"
-        value="from:manifoldscholar"
-      />
     </div>
     <div
       className="form-input"
@@ -108,7 +108,7 @@ exports[`Backend.TwitterQuery.Form Component renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="form-input submit"
+      className="form-input submit wide"
     >
       <input
         className="button-secondary outlined"

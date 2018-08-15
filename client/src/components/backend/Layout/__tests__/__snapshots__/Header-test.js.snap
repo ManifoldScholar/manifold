@@ -35,14 +35,27 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
         </figure>
       </a>
       <nav
-        className="text-nav"
+        className="text-nav show-75"
       >
-        <ul>
+        <ul
+          className="links"
+        >
           <li>
             <a
               aria-current={null}
               className={undefined}
-              href="/backend"
+              href="/backend/dashboard"
+              onClick={[Function]}
+              style={undefined}
+            >
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current={null}
+              className={undefined}
+              href="/backend/projects"
               onClick={[Function]}
               style={undefined}
             >
@@ -53,11 +66,11 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
             <a
               aria-current={null}
               className={undefined}
-              href="/backend/people"
+              href="/backend/records"
               onClick={[Function]}
               style={undefined}
             >
-              People
+              Records
             </a>
           </li>
           <li>
@@ -72,50 +85,60 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
             </a>
           </li>
         </ul>
-      </nav>
-      <nav
-        className="menu-dropdowns"
-      >
-        <ul>
-          <li
-            className="show-60"
-          >
-            <a
-              className="button-mode"
-              href="/"
-              onClick={[Function]}
-            >
-              Exit Admin Mode
-            </a>
-          </li>
-          <li>
-            <button
-              className="button-avatar"
-              onClick={[Function]}
-            >
-              <span
-                className="screen-reader-text"
+        <nav
+          className="user-links"
+        >
+          <ul>
+            <li>
+              <a
+                className="button-mode"
+                href="/"
+                onClick={[Function]}
               >
-                Login or open user settings
-              </span>
-              <figure
-                className="avatar"
-                style={undefined}
+                Exit Admin Mode
+              </a>
+            </li>
+            <li>
+              <button
+                className="button-avatar"
+                onClick={[Function]}
               >
                 <span
                   className="screen-reader-text"
                 >
-                  Avatar
+                  Login or open user settings
                 </span>
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-person"
-                />
-              </figure>
-            </button>
-            <span />
-          </li>
-        </ul>
+                <figure
+                  className="avatar"
+                  style={undefined}
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Avatar
+                  </span>
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-person"
+                  />
+                </figure>
+              </button>
+              <span />
+            </li>
+          </ul>
+        </nav>
+      </nav>
+      <nav
+        className="nested-nav hide-75"
+      >
+        <div
+          className="selected"
+        />
+        <i
+          className="manicon manicon-bars-parallel-horizontal"
+          onClick={[Function]}
+          role="button"
+        />
       </nav>
     </div>
     <div

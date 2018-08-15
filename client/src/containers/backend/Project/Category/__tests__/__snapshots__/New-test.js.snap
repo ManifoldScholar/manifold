@@ -5,7 +5,9 @@ exports[`Backend Project Category New Container renders correctly 1`] = `
   <header
     className="dialog-header-large"
   >
-    <h2>
+    <h2
+      className="heading-quaternary"
+    >
       Create Category
     </h2>
   </header>
@@ -35,7 +37,7 @@ exports[`Backend Project Category New Container renders correctly 1`] = `
         />
       </div>
       <div
-        className="form-input submit"
+        className="form-input submit wide"
       >
         <input
           className="button-secondary outlined"

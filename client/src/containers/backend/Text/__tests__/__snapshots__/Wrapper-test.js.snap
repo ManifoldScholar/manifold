@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend Text Wrapper Container renders correctly 1`] = `
-Array [
+<div>
   <section
-    className="bg-neutral95"
+    className="backend-header"
   >
     <nav
       className="breadcrumb-primary"
@@ -12,40 +12,19 @@ Array [
         className="container flush"
       >
         <a
-          className="initial"
-          href="/backend"
+          href="/backend/projects/4/texts"
           onClick={[Function]}
         >
           <i
             aria-hidden="true"
             className="manicon manicon-arrow-left"
           />
-          Back to:
+          Rowan Test
         </a>
-        <ul>
-          <li>
-            <a
-              className="back-link-primary-segment"
-              href="/backend"
-              onClick={[Function]}
-            >
-              ALL PROJECTS
-            </a>
-          </li>
-          <li>
-            <a
-              className="back-link-primary-segment"
-              href="/backend/project/4/texts"
-              onClick={[Function]}
-            >
-              Rowan Test
-            </a>
-          </li>
-        </ul>
       </div>
     </nav>
     <div
-      className="container flush"
+      className="wrapper"
     >
       <header
         className="entity-header-primary"
@@ -72,133 +51,131 @@ Array [
                 className="button-bare-primary"
                 onClick={[Function]}
               >
-                Preview
-                 
                 <i
                   aria-hidden="true"
                   className="manicon manicon-eye-outline"
                 />
+                Preview
+                 
               </button>
               <button
                 className="button-bare-primary"
                 onClick={[Function]}
               >
-                Delete 
                 <i
                   aria-hidden="true"
                   className="manicon manicon-trashcan"
                 />
+                Delete
               </button>
             </div>
           </div>
         </div>
       </header>
     </div>
-  </section>,
+    <div>
+      <nav
+        className="dropdown-nav section-nav"
+      >
+        <button
+          className="trigger"
+          onClick={[Function]}
+        >
+          <div
+            className="selected"
+          >
+            
+            <i
+              className="manicon manicon-caret-up"
+            />
+          </div>
+        </button>
+        <ul>
+          <li>
+            <a
+              aria-current={null}
+              className={undefined}
+              href="/backend/projects/text/1/general"
+              onClick={[Function]}
+              style={undefined}
+            >
+              General
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current={null}
+              className={undefined}
+              href="/backend/projects/text/1/collaborators"
+              onClick={[Function]}
+              style={undefined}
+            >
+              People
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current={null}
+              className={undefined}
+              href="/backend/projects/text/1/metadata"
+              onClick={[Function]}
+              style={undefined}
+            >
+              Metadata
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current={null}
+              className={undefined}
+              href="/backend/projects/text/1/styles"
+              onClick={[Function]}
+              style={undefined}
+            >
+              Styles
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current={null}
+              className={undefined}
+              href="/backend/projects/text/1/ingestions/new"
+              onClick={[Function]}
+              style={undefined}
+            >
+              Reingest
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </section>
   <section
     className="backend-panel"
   >
-    <aside
-      className="scrollable"
+    <a
+      className="screen-reader-text"
+      href="#skip-to-text-panel"
+      onClick={[Function]}
     >
-      <div
-        className="wrapper"
-      >
-        <a
-          className="screen-reader-text"
-          href="#skip-to-text-panel"
-          onClick={[Function]}
-        >
-          Skip to main content
-        </a>
-        <div>
-          <nav
-            className="panel-nav"
-          >
-            <ul>
-              <li>
-                <a
-                  aria-current={null}
-                  className={undefined}
-                  href="/backend/text/1/general"
-                  onClick={[Function]}
-                  style={undefined}
-                >
-                  General
-                </a>
-              </li>
-              <li>
-                <a
-                  aria-current={null}
-                  className={undefined}
-                  href="/backend/text/1/collaborators"
-                  onClick={[Function]}
-                  style={undefined}
-                >
-                  People
-                </a>
-              </li>
-              <li>
-                <a
-                  aria-current={null}
-                  className={undefined}
-                  href="/backend/text/1/metadata"
-                  onClick={[Function]}
-                  style={undefined}
-                >
-                  Metadata
-                </a>
-              </li>
-              <li>
-                <a
-                  aria-current={null}
-                  className={undefined}
-                  href="/backend/text/1/styles"
-                  onClick={[Function]}
-                  style={undefined}
-                >
-                  Styles
-                </a>
-              </li>
-              <li>
-                <a
-                  aria-current={null}
-                  className={undefined}
-                  href="/backend/text/1/ingestions/new"
-                  onClick={[Function]}
-                  style={undefined}
-                >
-                  Reingest
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </aside>
+      Skip to main content
+    </a>
     <div
       className="container"
     >
-      <aside
-        className="aside"
-      >
-        <a
-          className="screen-reader-text"
-          href="#skip-to-text-panel"
-          onClick={[Function]}
+      <div>
+        <aside
+          className="aside"
         >
-          Skip to main content
-        </a>
-        <div>
           <nav
-            className="panel-nav"
+            className="secondary-nav panel-nav"
           >
             <ul>
               <li>
                 <a
                   aria-current={null}
                   className={undefined}
-                  href="/backend/text/1/general"
+                  href="/backend/projects/text/1/general"
                   onClick={[Function]}
                   style={undefined}
                 >
@@ -209,7 +186,7 @@ Array [
                 <a
                   aria-current={null}
                   className={undefined}
-                  href="/backend/text/1/collaborators"
+                  href="/backend/projects/text/1/collaborators"
                   onClick={[Function]}
                   style={undefined}
                 >
@@ -220,7 +197,7 @@ Array [
                 <a
                   aria-current={null}
                   className={undefined}
-                  href="/backend/text/1/metadata"
+                  href="/backend/projects/text/1/metadata"
                   onClick={[Function]}
                   style={undefined}
                 >
@@ -231,7 +208,7 @@ Array [
                 <a
                   aria-current={null}
                   className={undefined}
-                  href="/backend/text/1/styles"
+                  href="/backend/projects/text/1/styles"
                   onClick={[Function]}
                   style={undefined}
                 >
@@ -242,7 +219,7 @@ Array [
                 <a
                   aria-current={null}
                   className={undefined}
-                  href="/backend/text/1/ingestions/new"
+                  href="/backend/projects/text/1/ingestions/new"
                   onClick={[Function]}
                   style={undefined}
                 >
@@ -251,13 +228,13 @@ Array [
               </li>
             </ul>
           </nav>
-        </div>
-      </aside>
+        </aside>
+      </div>
       <div
         className="panel"
         id="skip-to-text-panel"
       />
     </div>
-  </section>,
-]
+  </section>
+</div>
 `;

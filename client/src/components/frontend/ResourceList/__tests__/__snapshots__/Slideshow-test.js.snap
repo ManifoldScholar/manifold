@@ -112,7 +112,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
             </a>
             <a
               className="detail-link"
-              href="/project/delegated-project-slug/collection/slug-3/resource/slug-1"
+              href="/projects/delegated-project-slug/collection/slug-3/resource/slug-1"
               onClick={[Function]}
             >
               View Resource

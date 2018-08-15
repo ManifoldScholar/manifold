@@ -216,7 +216,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
               <br />
               <a
                 className="button-secondary outlined"
-                href="/project/delegated-project-slug/resource/slug-1"
+                href="/projects/delegated-project-slug/resource/slug-1"
                 onClick={[Function]}
               >
                 Visit Resource Page

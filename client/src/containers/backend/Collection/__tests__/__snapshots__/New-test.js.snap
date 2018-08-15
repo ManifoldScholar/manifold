@@ -3,7 +3,7 @@
 exports[`Backend Collection New Container renders correctly 1`] = `
 <div>
   <section
-    className="bg-neutral95"
+    className="backend-header"
   >
     <nav
       className="breadcrumb-primary"
@@ -12,31 +12,19 @@ exports[`Backend Collection New Container renders correctly 1`] = `
         className="container flush"
       >
         <a
-          className="initial"
-          href="/backend/project/1/collections"
+          href="/backend/projects/1/collections"
           onClick={[Function]}
         >
           <i
             aria-hidden="true"
             className="manicon manicon-arrow-left"
           />
-          Back to:
+          Rowan Test
         </a>
-        <ul>
-          <li>
-            <a
-              className="back-link-primary-segment"
-              href="/backend/project/1/collections"
-              onClick={[Function]}
-            >
-              Collections
-            </a>
-          </li>
-        </ul>
       </div>
     </nav>
     <div
-      className="container flush"
+      className="wrapper"
     >
       <header
         className="entity-header-primary"
@@ -68,20 +56,39 @@ exports[`Backend Collection New Container renders correctly 1`] = `
       </header>
     </div>
   </section>
-  <section
+  <div
     className="backend-panel"
   >
     <div
       className="container"
     >
-      <div
-        className="panel"
-      >
-        <div>
-          <form
-            className="form-secondary"
-            data-id="submit"
-            onSubmit={[Function]}
+      <div>
+        <form
+          className="form-secondary"
+          data-id="submit"
+          onSubmit={[Function]}
+        >
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className=""
+              htmlFor="attributes[title]-text-input-15"
+            >
+              Title
+            </label>
+            <input
+              aria-describedby="attributes[title]-text-input-15"
+              id="attributes[title]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter a title"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input"
           >
             <div
               className="form-input"
@@ -89,132 +96,109 @@ exports[`Backend Collection New Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="attributes[title]-text-input-15"
+                htmlFor="textarea-13"
               >
-                Title
+                Description
               </label>
-              <input
-                aria-describedby="attributes[title]-text-input-15"
-                id="attributes[title]-text-input-15"
+              <textarea
+                aria-describedby="textarea-error-14"
+                id="textarea-13"
                 onChange={[Function]}
-                placeholder="Enter a title"
-                type="text"
+                placeholder="Enter a description"
+                style={
+                  Object {
+                    "height": 100,
+                  }
+                }
                 value=""
               />
             </div>
+          </div>
+          <div
+            className="form-input"
+          >
             <div
               className="form-input"
+              style={Object {}}
             >
-              <div
-                className="form-input"
-                style={Object {}}
+              <label
+                className=""
+                htmlFor="upload-21"
               >
-                <label
-                  className=""
-                  htmlFor="textarea-13"
-                >
-                  Description
-                </label>
-                <textarea
-                  aria-describedby="textarea-error-14"
-                  id="textarea-13"
-                  onChange={[Function]}
-                  placeholder="Enter a description"
-                  style={
-                    Object {
-                      "height": 100,
-                    }
+                Cover Image
+              </label>
+              <react-dropzone
+                accepts={
+                  Object {
+                    "accepts": "image/*",
+                    "extensions": "gif, jpeg, jpg, png, svg",
                   }
-                  value=""
-                />
-              </div>
-            </div>
-            <div
-              className="form-input"
-            >
-              <div
-                className="form-input"
-                style={Object {}}
+                }
+                className="form-dropzone style-landscape"
+                inputProps={
+                  Object {
+                    "aria-describedby": "upload-error-22",
+                    "id": "upload-21",
+                  }
+                }
+                multiple={false}
+                onDrop={[Function]}
+                style={undefined}
               >
-                <label
-                  className=""
-                  htmlFor="upload-21"
+                <div
+                  className="contents-empty"
                 >
-                  Cover Image
-                </label>
-                <react-dropzone
-                  accepts={
-                    Object {
-                      "accepts": "image/*",
-                      "extensions": "gif, jpeg, jpg, png, svg",
-                    }
-                  }
-                  className="form-dropzone style-landscape"
-                  inputProps={
-                    Object {
-                      "aria-describedby": "upload-error-22",
-                      "id": "upload-21",
-                    }
-                  }
-                  multiple={false}
-                  onDrop={[Function]}
-                  style={undefined}
-                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-cloud-up"
+                  />
                   <div
-                    className="contents-empty"
+                    className="message"
                   >
-                    <i
-                      aria-hidden="true"
-                      className="manicon manicon-cloud-up"
-                    />
-                    <div
-                      className="message"
+                    <p
+                      className="primary"
                     >
-                      <p
-                        className="primary"
+                      <span
+                        className="fake-link"
+                        role="button"
+                        tabIndex="0"
                       >
-                        <span
-                          className="fake-link"
-                          role="button"
-                          tabIndex="0"
-                        >
-                          Upload a file
-                        </span>
-                         or 
-                        <br />
-                        drag and drop here
-                        <br />
-                      </p>
-                      <p
-                        className="secondary"
-                      >
-                        gif, jpeg, jpg, png, svg
-                      </p>
-                    </div>
+                        Upload a file
+                      </span>
+                       or 
+                      <br />
+                      drag and drop here
+                      <br />
+                    </p>
+                    <p
+                      className="secondary"
+                    >
+                      gif, jpeg, jpg, png, svg
+                    </p>
                   </div>
-                </react-dropzone>
-              </div>
+                </div>
+              </react-dropzone>
             </div>
-            <div
-              className="form-input submit"
+          </div>
+          <div
+            className="form-input submit wide"
+          >
+            <a
+              className="button-secondary outlined dull"
+              href="/backend/projects/1/resources"
+              onClick={[Function]}
             >
-              <a
-                className="button-secondary outlined dull"
-                href="/backend/project/1/resources"
-                onClick={[Function]}
-              >
-                Cancel
-              </a>
-              <input
-                className="button-secondary outlined"
-                type="submit"
-                value="Save and continue"
-              />
-            </div>
-          </form>
-        </div>
+              Cancel
+            </a>
+            <input
+              className="button-secondary outlined"
+              type="submit"
+              value="Save and continue"
+            />
+          </div>
+        </form>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 `;

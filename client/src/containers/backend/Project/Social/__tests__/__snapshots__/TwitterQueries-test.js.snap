@@ -11,162 +11,166 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
       Twitter Queries
     </span>
   </header>
+  <div
+    className="form-input-group"
+  >
+    <nav
+      className="vertical-list-primary flush"
+    >
+      <div
+        className="buttons-icon-horizontal"
+      >
+        <a
+          className="button-icon-secondary"
+          href="/backend/projects/1/social/twitter-query/new"
+          onClick={[Function]}
+        >
+          <i
+            aria-hidden="true"
+            className="manicon manicon-plus"
+          />
+          Add a New Twitter Query
+        </a>
+      </div>
+      <section>
+        <ul>
+          <li
+            className="active"
+          >
+            <a
+              href="/backend/projects/1/social/twitter-query/2"
+              onClick={[Function]}
+            >
+              <header>
+                <figure
+                  aria-label="hidden"
+                >
+                  <i
+                    className="manicon manicon-twitter"
+                  />
+                </figure>
+                <h3
+                  className="name large"
+                >
+                  from:manifoldscholar
+                </h3>
+              </header>
+              <span
+                className="label"
+              >
+                <span
+                  className="specifier dull"
+                >
+                  0
+                   EVENTS
+                   
+                </span>
+                Active
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </nav>
+    <nav
+      className="list-pagination-primary"
+    >
+      <ul>
+        <li
+          className="pagination-previous disabled"
+        >
+          <a
+            data-id="page-prev"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <i
+              aria-hidden="true"
+              className="manicon manicon-arrow-long-left"
+            />
+            <span
+              aria-hidden="true"
+            >
+              Prev
+            </span>
+            <span
+              className="screen-reader-text"
+            >
+              Previous Page
+            </span>
+          </a>
+        </li>
+        <li
+          className="active ordinal"
+        >
+          <a
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <span
+              aria-hidden="true"
+            >
+              1
+            </span>
+            <span
+              className="screen-reader-text"
+            >
+              Go to page: 
+              1
+            </span>
+          </a>
+        </li>
+        <li
+          className="ordinal"
+        >
+          <a
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <span
+              aria-hidden="true"
+            >
+              2
+            </span>
+            <span
+              className="screen-reader-text"
+            >
+              Go to page: 
+              2
+            </span>
+          </a>
+        </li>
+        <li
+          className="pagination-next "
+        >
+          <a
+            data-id="page-next"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Next Page
+            </span>
+            <span
+              aria-hidden="true"
+            >
+              Next
+            </span>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-arrow-long-right"
+            />
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
   <p
     className="instructional-copy"
   >
     Manifold will periodically fetch tweets according to the queries specified below.
   </p>
-  <nav
-    className="vertical-list-primary flush"
-  >
-    <div
-      className="buttons-icon-horizontal"
-    >
-      <a
-        className="button-icon-secondary"
-        href="/backend/project/1/social/twitter-query/new"
-        onClick={[Function]}
-      >
-        <i
-          aria-hidden="true"
-          className="manicon manicon-plus"
-        />
-        Add a New Twitter Query
-      </a>
-    </div>
-    <section>
-      <ul>
-        <li
-          className="active"
-        >
-          <a
-            href="/backend/project/1/social/twitter-query/2"
-            onClick={[Function]}
-          >
-            <header>
-              <figure
-                aria-label="hidden"
-              >
-                <i
-                  className="manicon manicon-twitter"
-                />
-              </figure>
-              <h3
-                className="name large"
-              >
-                from:manifoldscholar
-              </h3>
-            </header>
-            <span
-              className="label"
-            >
-              <span
-                className="specifier dull"
-              >
-                0
-                 EVENTS
-                 
-              </span>
-              Active
-            </span>
-          </a>
-        </li>
-      </ul>
-    </section>
-  </nav>
-  <nav
-    className="list-pagination-primary"
-  >
-    <ul>
-      <li
-        className="pagination-previous disabled"
-      >
-        <a
-          data-id="page-prev"
-          href="#pagination-target"
-          onClick={[Function]}
-        >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-arrow-long-left"
-          />
-          <span
-            aria-hidden="true"
-          >
-            Prev
-          </span>
-          <span
-            className="screen-reader-text"
-          >
-            Previous Page
-          </span>
-        </a>
-      </li>
-      <li
-        className="active ordinal"
-      >
-        <a
-          href="#pagination-target"
-          onClick={[Function]}
-        >
-          <span
-            aria-hidden="true"
-          >
-            1
-          </span>
-          <span
-            className="screen-reader-text"
-          >
-            Go to page: 
-            1
-          </span>
-        </a>
-      </li>
-      <li
-        className="ordinal"
-      >
-        <a
-          href="#pagination-target"
-          onClick={[Function]}
-        >
-          <span
-            aria-hidden="true"
-          >
-            2
-          </span>
-          <span
-            className="screen-reader-text"
-          >
-            Go to page: 
-            2
-          </span>
-        </a>
-      </li>
-      <li
-        className="pagination-next "
-      >
-        <a
-          data-id="page-next"
-          href="#pagination-target"
-          onClick={[Function]}
-        >
-          <span
-            className="screen-reader-text"
-          >
-            Next Page
-          </span>
-          <span
-            aria-hidden="true"
-          >
-            Next
-          </span>
-          <i
-            aria-hidden="true"
-            className="manicon manicon-arrow-long-right"
-          />
-        </a>
-      </li>
-    </ul>
-  </nav>
 </div>
 `;

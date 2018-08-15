@@ -259,7 +259,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                 </span>
                 <div
                   className="arrow-link"
-                  to="/project/slug-1/resource/slug-2"
+                  to="/projects/slug-1/resource/slug-2"
                 >
                   <i
                     aria-hidden="true"
@@ -282,7 +282,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=dog"
+                      href="/projects/slug-1/resources/?tag=dog"
                       onClick={[Function]}
                     >
                       dog
@@ -291,7 +291,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=puppy"
+                      href="/projects/slug-1/resources/?tag=puppy"
                       onClick={[Function]}
                     >
                       puppy
@@ -300,7 +300,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=goat"
+                      href="/projects/slug-1/resources/?tag=goat"
                       onClick={[Function]}
                     >
                       GOAT
@@ -411,7 +411,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                 </span>
                 <div
                   className="arrow-link"
-                  to="/project/slug-1/resource/slug-3"
+                  to="/projects/slug-1/resource/slug-3"
                 >
                   <i
                     aria-hidden="true"
@@ -434,7 +434,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=dog"
+                      href="/projects/slug-1/resources/?tag=dog"
                       onClick={[Function]}
                     >
                       dog
@@ -443,7 +443,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=puppy"
+                      href="/projects/slug-1/resources/?tag=puppy"
                       onClick={[Function]}
                     >
                       puppy
@@ -452,7 +452,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/slug-1/resources/?tag=goat"
+                      href="/projects/slug-1/resources/?tag=goat"
                       onClick={[Function]}
                     >
                       GOAT

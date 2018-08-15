@@ -39,57 +39,55 @@ exports[`Frontend Home Container renders correctly 1`] = `
         <ul>
           <li>
             <a
-              href="/project/slug-1"
+              href="/projects/slug-1"
               onClick={[Function]}
             >
-              <div
-                className="figure-wrapper"
+              <figure
+                className="cover"
               >
-                <figure>
-                  <div>
-                    <button
-                      className="screen-reader-text"
-                      onClick={[Function]}
-                    >
-                      Unfollow Rowan Test
-                    </button>
+                <div>
+                  <button
+                    className="screen-reader-text"
+                    onClick={[Function]}
+                  >
+                    Unfollow Rowan Test
+                  </button>
+                  <div
+                    aria-hidden="true"
+                    className="follow-button-wrapper follow"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    role="presentation"
+                  >
                     <div
                       aria-hidden="true"
-                      className="follow-button-wrapper follow"
-                      onClick={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      role="presentation"
+                      className="following-button"
                     >
                       <div
-                        aria-hidden="true"
-                        className="following-button"
+                        className="icons"
                       >
-                        <div
-                          className="icons"
-                        >
-                          <i
-                            className="manicon manicon-minus-bold"
-                          />
-                          <i
-                            className="manicon manicon-check-bold"
-                          />
-                          <i
-                            className="manicon manicon-plus-bold"
-                          />
-                        </div>
-                        <span>
-                          <span
-                            className="follow-text"
-                          >
-                            Follow
-                          </span>
-                        </span>
+                        <i
+                          className="manicon manicon-minus-bold"
+                        />
+                        <i
+                          className="manicon manicon-check-bold"
+                        />
+                        <i
+                          className="manicon manicon-plus-bold"
+                        />
                       </div>
+                      <span>
+                        <span
+                          className="follow-text"
+                        >
+                          Follow
+                        </span>
+                      </span>
                     </div>
                   </div>
-                </figure>
-              </div>
+                </div>
+              </figure>
               <div
                 className="meta"
               >
@@ -103,57 +101,55 @@ exports[`Frontend Home Container renders correctly 1`] = `
           </li>
           <li>
             <a
-              href="/project/slug-2"
+              href="/projects/slug-2"
               onClick={[Function]}
             >
-              <div
-                className="figure-wrapper"
+              <figure
+                className="cover"
               >
-                <figure>
-                  <div>
-                    <button
-                      className="screen-reader-text"
-                      onClick={[Function]}
-                    >
-                      Unfollow Rowan Test
-                    </button>
+                <div>
+                  <button
+                    className="screen-reader-text"
+                    onClick={[Function]}
+                  >
+                    Unfollow Rowan Test
+                  </button>
+                  <div
+                    aria-hidden="true"
+                    className="follow-button-wrapper follow"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    role="presentation"
+                  >
                     <div
                       aria-hidden="true"
-                      className="follow-button-wrapper follow"
-                      onClick={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      role="presentation"
+                      className="following-button"
                     >
                       <div
-                        aria-hidden="true"
-                        className="following-button"
+                        className="icons"
                       >
-                        <div
-                          className="icons"
-                        >
-                          <i
-                            className="manicon manicon-minus-bold"
-                          />
-                          <i
-                            className="manicon manicon-check-bold"
-                          />
-                          <i
-                            className="manicon manicon-plus-bold"
-                          />
-                        </div>
-                        <span>
-                          <span
-                            className="follow-text"
-                          >
-                            Follow
-                          </span>
-                        </span>
+                        <i
+                          className="manicon manicon-minus-bold"
+                        />
+                        <i
+                          className="manicon manicon-check-bold"
+                        />
+                        <i
+                          className="manicon manicon-plus-bold"
+                        />
                       </div>
+                      <span>
+                        <span
+                          className="follow-text"
+                        >
+                          Follow
+                        </span>
+                      </span>
                     </div>
                   </div>
-                </figure>
-              </div>
+                </div>
+              </figure>
               <div
                 className="meta"
               >

@@ -9,7 +9,7 @@ exports[`Backend Resource Metadata Container renders correctly 1`] = `
       onSubmit={[Function]}
     >
       <div
-        className="form-input submit"
+        className="form-input submit wide"
       >
         <input
           className="button-secondary outlined"
