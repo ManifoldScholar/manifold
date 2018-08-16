@@ -4,7 +4,7 @@ class UpdateAnalyticsCache < ApplicationJob
   # rubocop:disable Metrics/AbcSize
   def perform
     @client   = Factory::AnalyticsSession.new.create_analytics_session
-    @settings = Settings.instance.general
+    @settings = Settings.instance.integrations
 
     this_week = count_readers_for(Date.current)
     last_week = count_readers_for(Date.current - 7)
