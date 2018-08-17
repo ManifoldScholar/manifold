@@ -26,9 +26,6 @@
 
 ## Overview
 
-#### Manifold is Beta Software
-Manifold is currently beta, but is nearing the end of the first phase of development. The current version is v0.4.0. v0.5.0 will come out in late February 2018. We expect to release the stable version, v1.0.0, in late March 2018. 
-
 #### Manifold is a collaboration, funded by the Andrew W. Mellon Mellon Foundation.
 
 The [University of Minnesota Press](https://www.upress.umn.edu) in partnership with the [GC Digital Scholarship Lab](https://gcdsl.commons.gc.cuny.edu/) at the [Graduate Center](http://www.gc.cuny.edu/Home) of the [City University of New York](http://cuny.edu) has been awarded [a $732,000 grant](https://mellon.org/grants/grants-database/grants/university-of-minnesota-at-twin-cities/11500644/) from the [Andrew W. Mellon Foundation](https://mellon.org) to launch [Manifold Scholarship](http://manifold.umn.edu). The development of Manifold is performed by [Cast Iron Coding](http://castironcoding.com), a digital development agency in Portland, Oregon.
