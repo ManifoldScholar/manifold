@@ -25,6 +25,17 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
       >
         <i
           aria-hidden="true"
+          className="manicon manicon-envelope-circle-right"
+        />
+        Notifications
+      </button>
+    </li>
+    <li>
+      <button
+        onClick={[Function]}
+      >
+        <i
+          aria-hidden="true"
           className="manicon manicon-circle-arrow-out-right"
         />
         Logout

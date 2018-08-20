@@ -15,11 +15,11 @@ describe("Event.Thumbnail component", () => {
   };
 
   const types = [
-    "ANNOTATION_ADD",
-    "PROJECT_CREATED",
-    "RESOURCE_ADDED",
-    "TEXT_ADDED",
-    "TWEET"
+    "annotation_added",
+    "project_created",
+    "resource_added",
+    "text_added",
+    "tweet"
   ];
   types.forEach(type => {
     it(`renders thumbnail for ${type} correctly`, () => {

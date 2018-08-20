@@ -111,7 +111,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                                     </Avatar>
                                                   </button>
                                                 </UserMenuButton>
-                                                <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: UserMenuBody]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
+                                                <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: C]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
                                                   <CSSTransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true}>
                                                     <TransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
                                                       <span />
