@@ -22,6 +22,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                   Identity
                                 </span>
                               </header>
+                              <Instructions instructions={{...}} />
                               <div className=\\"form-input-group\\">
                                 <Form.Setter('Form.TextInput) focusOnMount={true} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                                   <Form.TextInput focusOnMount={true} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
@@ -50,7 +51,6 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                   </Form.TextInput>
                                 </Form.Setter('Form.TextInput)>
                               </div>
-                              <Instructions instructions={{...}} />
                             </div>
                           </FieldGroup>
                           <FieldGroup label=\\"Publisher\\" disabled={false} horizontal={false} wide={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
@@ -60,6 +60,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                   Publisher
                                 </span>
                               </header>
+                              <Instructions instructions={{...}} />
                               <div className=\\"form-input-group\\">
                                 <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                                   <Form.TextInput focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
@@ -118,7 +119,6 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                   </Form.TextInput>
                                 </Form.Setter('Form.TextInput)>
                               </div>
-                              <Instructions instructions={{...}} />
                             </div>
                           </FieldGroup>
                           <FieldGroup label=\\"Bibliographic\\" disabled={false} horizontal={false} wide={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
@@ -128,6 +128,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                   Bibliographic
                                 </span>
                               </header>
+                              <Instructions instructions={{...}} />
                               <div className=\\"form-input-group\\">
                                 <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                                   <Form.TextInput focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
@@ -224,7 +225,6 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                   </Form.TextInput>
                                 </Form.Setter('Form.TextInput)>
                               </div>
-                              <Instructions instructions={{...}} />
                             </div>
                           </FieldGroup>
                           <FieldGroup label=\\"Other\\" disabled={false} horizontal={false} wide={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
@@ -234,6 +234,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                   Other
                                 </span>
                               </header>
+                              <Instructions instructions={{...}} />
                               <div className=\\"form-input-group\\">
                                 <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                                   <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]} id=\\"text-input-15\\" idForError=\\"text-input-error-16\\">
@@ -522,7 +523,6 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                   </Form.TextInput>
                                 </Form.Setter('Form.TextInput)>
                               </div>
-                              <Instructions instructions={{...}} />
                             </div>
                           </FieldGroup>
                           <Form.Save text=\\"Save Metadata\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
