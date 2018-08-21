@@ -80,11 +80,7 @@
     }
 
     li:first-child {
-      // border-top: 0;
-
       a {
-        padding-top: 10px;
-
         .backend-dashboard & {
           padding-top: 0;
         }
@@ -101,14 +97,10 @@
       &.active {
         background-color: $neutral100;
         border-color: $neutral100;
-        box-shadow: -21px 0 0 $neutral100, 21px 0 0 $neutral100;
+        box-shadow: -21px 0 0 1px $neutral100, 21px 0 0 1px $neutral100;
 
         a, .fake-link {
           color: $accentPrimary;
-        }
-
-        + li {
-          border-color: transparent;
         }
       }
 
@@ -127,7 +119,7 @@
       flex-direction: column;
       justify-content: space-between;
       width: 100%;
-      padding: 20px 0 17px;
+      padding: 20px 0;
       color: $neutral30;
       text-decoration: none;
       transition: color $duration ease-out;
@@ -257,8 +249,12 @@
       }
 
       @include respond($break70) {
-        padding-top: 0;
+        padding-top: 3px;
         padding-left: 19px;
+      }
+
+      @include respond($break80) {
+        padding-top: 7px;
       }
 
       span + span {
@@ -281,7 +277,6 @@
       max-width: 100%;
       margin: 0;
       font-size: 16px;
-      line-height: 21px;
       letter-spacing: 0.015em;
       transition: color $duration $timing;
 
@@ -315,8 +310,9 @@
       .block-label {
         @include blockLabelRound;
         position: relative;
-        display: inline;
+        display: inline-block;
         padding: 0.333em 5px;
+        margin-top: -3px;
         font-size: 9px;
         color: $neutral85;
         vertical-align: middle;
@@ -330,6 +326,10 @@
       padding-top: 0.389em;
       color: $neutral50;
       transition: color $duration $timing;
+
+      &:empty {
+        display: none;
+      }
     }
 
 
