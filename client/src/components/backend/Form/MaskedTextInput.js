@@ -100,7 +100,6 @@ class FormMaskedTextInput extends Component {
         <label htmlFor={this.props.id} className={labelClass}>
           {this.props.label}
         </label>
-        <Instructions instructions={this.props.instructions} />
         <MaskedInput
           onChange={this.props.onChange}
           value={this.props.value}
@@ -110,6 +109,7 @@ class FormMaskedTextInput extends Component {
           placeholder={this.props.placeholder}
           placeholderChar={this.placeholderChar}
         />
+        <Instructions instructions={this.props.instructions} />
       </div>
     );
   }
