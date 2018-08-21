@@ -51,10 +51,10 @@ export default class FieldGroup extends PureComponent {
             <span>{this.props.label}</span>
           </header>
         ) : null}
+        <Instructions instructions={this.props.instructions} />
         <div className="form-input-group">
           {this.renderChildren(this.props)}
         </div>
-        <Instructions instructions={this.props.instructions} />
       </div>
     );
   }

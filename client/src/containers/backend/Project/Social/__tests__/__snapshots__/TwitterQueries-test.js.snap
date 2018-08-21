@@ -11,6 +11,11 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
       Twitter Queries
     </span>
   </header>
+  <p
+    className="instructional-copy"
+  >
+    Manifold will periodically fetch tweets according to the queries specified below.
+  </p>
   <div
     className="form-input-group"
   >
@@ -167,10 +172,5 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
       </ul>
     </nav>
   </div>
-  <p
-    className="instructional-copy"
-  >
-    Manifold will periodically fetch tweets according to the queries specified below.
-  </p>
 </div>
 `;
