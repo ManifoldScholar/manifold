@@ -167,9 +167,9 @@
 
     .notes {
       @include templateCopy;
-      color: $neutral50;
       font-size: 14px;
       line-height: initial;
+      color: $neutral50;
 
       @include respond($break65) {
         font-size: 17px;

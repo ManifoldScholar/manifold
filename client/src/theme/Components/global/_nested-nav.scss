@@ -283,8 +283,8 @@
         top: 4px;
         left: -45px;
         padding: 15px;
-        transform: rotate(0deg);
         transition: transform $duration $timing;
+        transform: rotate(0deg);
 
         &:hover {
           color: $accentPrimary;
