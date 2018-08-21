@@ -156,6 +156,8 @@ const defaults = {
       avatarMeta: {},
       hashtag: "#cute_dog",
       hideActivity: false,
+      publishedProjectDownloadUrl: "http://www.dailyrowan.com",
+      downloadCallToAction: "Download the greatest dog",
       abilities,
       metadata: metadataValues,
       metadataFormatted: metadataValues

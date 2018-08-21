@@ -21,7 +21,7 @@ export default class ProjectHero extends Component {
   }
 
   listCreators(creators) {
-    if (!creators.length > 0) return null;
+    if (!creators || !creators.length > 0) return null;
 
     if (creators.length <= 2 && this.hasAvatars(creators, "smallSquare")) {
       return (
@@ -45,7 +45,7 @@ export default class ProjectHero extends Component {
   }
 
   listContributors(contributors) {
-    if (!contributors.length > 0) return null;
+    if (!contributors || !contributors.length > 0) return null;
 
     return (
       <div className="project-contributor-list">
