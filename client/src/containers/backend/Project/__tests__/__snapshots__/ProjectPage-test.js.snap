@@ -8,319 +8,466 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       data-id="submit"
       onSubmit={[Function]}
     >
-      <header
-        className="form-header"
-      >
-        <h2>
-          Appearance
-        </h2>
-      </header>
       <div
-        className="form-input"
+        className="form-section"
       >
-        <div
-          className="form-input"
-          style={Object {}}
+        <header
+          className="form-section-label"
         >
-          <label
-            className="has-instructions"
-            htmlFor="textarea-13"
-          >
-            Description
-          </label>
-          <span
-            className="instructions"
-          >
-            Enter a brief description of your project. This field accepts basic Markdown.
+          <span>
+            Appearance
           </span>
-          <textarea
-            aria-describedby="textarea-error-14"
-            id="textarea-13"
-            onChange={[Function]}
-            placeholder={undefined}
-            style={
-              Object {
-                "height": 100,
-              }
-            }
-            value=""
-          />
-        </div>
-      </div>
-      <div
-        className="form-input"
-      >
+        </header>
         <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className=""
-            htmlFor="upload-21"
-          >
-            Hero Image
-          </label>
-          <div>
-            <p
-              className="instructions"
-            >
-              The Hero Image is displayed at the top of the project landing page.
-              <br />
-              Images will be resized to 1280x800 and cropped along the bottom edge.
-            </p>
-          </div>
-          <react-dropzone
-            accepts={
-              Object {
-                "accepts": "image/*",
-                "extensions": "gif, jpeg, jpg, png, svg",
-              }
-            }
-            className="form-dropzone style-landscape"
-            inputProps={
-              Object {
-                "aria-describedby": "upload-error-22",
-                "id": "upload-21",
-              }
-            }
-            multiple={false}
-            onDrop={[Function]}
-            style={undefined}
-          >
-            <div
-              className="contents-empty"
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-cloud-up"
-              />
-              <div
-                className="message"
-              >
-                <p
-                  className="primary"
-                >
-                  <span
-                    className="fake-link"
-                    role="button"
-                    tabIndex="0"
-                  >
-                    Upload a file
-                  </span>
-                   or 
-                  <br />
-                  drag and drop here
-                  <br />
-                </p>
-                <p
-                  className="secondary"
-                >
-                  gif, jpeg, jpg, png, svg
-                </p>
-              </div>
-            </div>
-          </react-dropzone>
-        </div>
-      </div>
-      <div
-        className="form-input"
-      >
-        <div
-          className="form-input"
-          style={Object {}}
-        >
-          <label
-            className="has-instructions"
-            htmlFor="upload-21"
-          >
-            Cover
-          </label>
-          <span
-            className="instructions"
-          >
-            If a cover is set for the project, it will appear over the hero, to the right of the description on the landing page.
-          </span>
-          <react-dropzone
-            accepts={
-              Object {
-                "accepts": "image/*",
-                "extensions": "gif, jpeg, jpg, png, svg",
-              }
-            }
-            className="form-dropzone style-portrait"
-            inputProps={
-              Object {
-                "aria-describedby": "upload-error-22",
-                "id": "upload-21",
-              }
-            }
-            multiple={false}
-            onDrop={[Function]}
-            style={undefined}
-          >
-            <div
-              className="contents-empty"
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-cloud-up"
-              />
-              <div
-                className="message"
-              >
-                <p
-                  className="primary"
-                >
-                  <span
-                    className="fake-link"
-                    role="button"
-                    tabIndex="0"
-                  >
-                    Upload a file
-                  </span>
-                   or 
-                  <br />
-                  drag and drop here
-                  <br />
-                </p>
-                <p
-                  className="secondary"
-                >
-                  gif, jpeg, jpg, png, svg
-                </p>
-              </div>
-            </div>
-          </react-dropzone>
-        </div>
-      </div>
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor="attributes[purchaseUrl]-text-input-15"
-        >
-          Purchase URL
-        </label>
-        <input
-          aria-describedby="attributes[purchaseUrl]-text-input-15"
-          id="attributes[purchaseUrl]-text-input-15"
-          onChange={[Function]}
-          placeholder="Enter Purchase URL"
-          type="text"
-          value=""
-        />
-        <span
-          className="instructions"
-        >
-          A URL where users can purchase the published edition
-        </span>
-      </div>
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor="attributes[purchaseCallToAction]-text-input-15"
-        >
-          Purchase Call To Action
-        </label>
-        <input
-          aria-describedby="attributes[purchaseCallToAction]-text-input-15"
-          id="attributes[purchaseCallToAction]-text-input-15"
-          onChange={[Function]}
-          placeholder="Buy Print Version"
-          type="text"
-          value=""
-        />
-        <span
-          className="instructions"
-        >
-          If set, this text will appear in the buy button on the project page
-        </span>
-      </div>
-      <div
-        className="form-input"
-      >
-        <label
-          className="has-instructions"
-          htmlFor="masked-text-10"
-        >
-          Purchase Price
-        </label>
-        <span
-          className="instructions"
-        >
-          The cost of the published edition
-        </span>
-        <react-text-mask
-          id="masked-text-10"
-          mask={[Function]}
-          onChange={[Function]}
-          placeholder={undefined}
-          placeholderChar="_"
-          type="text"
-          value={undefined}
-        />
-      </div>
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className="has-instructions"
-          htmlFor="attributes[purchasePriceCurrency]-text-input-15"
-        >
-          Currency
-        </label>
-        <input
-          aria-describedby="attributes[purchasePriceCurrency]-text-input-15"
-          id="attributes[purchasePriceCurrency]-text-input-15"
-          onChange={[Function]}
-          placeholder="Enter Purchase Price Currency Code"
-          type="text"
-          value=""
-        />
-        <span
-          className="instructions"
-        >
-          For example, USD for US Dollars
-        </span>
-      </div>
-      <div
-        className="form-input"
-      >
-        <h4
-          className="form-input-heading above"
-        >
-          Hide Project Activity
-        </h4>
-        <div
-          className="toggle-indicator"
+          className="form-input-group"
         >
           <div
-            aria-pressed={false}
-            className="boolean-primary"
-            onBlur={[Function]}
-            onClick={[Function]}
-            onFocus={[Function]}
-            role="button"
-            tabIndex="0"
+            className="form-input wide"
           >
-            <span
-              className="screen-reader-text"
+            <h4
+              className="form-input-heading above"
             >
               Hide Project Activity
+            </h4>
+            <div
+              className="toggle-indicator"
+            >
+              <div
+                aria-pressed={false}
+                className="boolean-primary"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Hide Project Activity
+                </span>
+              </div>
+            </div>
+            <span
+              className="instructions"
+            >
+              If set, project activity will not be shown on the project page.
+            </span>
+          </div>
+          <div
+            className="form-input wide"
+          >
+            <div
+              className="form-input"
+              style={Object {}}
+            >
+              <label
+                className="has-instructions"
+                htmlFor="textarea-13"
+              >
+                Description
+              </label>
+              <span
+                className="instructions"
+              >
+                Enter a brief description of your project. This field accepts basic Markdown.
+              </span>
+              <textarea
+                aria-describedby="textarea-error-14"
+                id="textarea-13"
+                onChange={[Function]}
+                placeholder={undefined}
+                style={
+                  Object {
+                    "height": 100,
+                  }
+                }
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="form-input"
+          >
+            <div
+              className="form-input"
+              style={Object {}}
+            >
+              <label
+                className=""
+                htmlFor="upload-21"
+              >
+                Hero Image
+              </label>
+              <div>
+                <p
+                  className="instructions"
+                >
+                  The Hero Image is displayed at the top of the project landing page.
+                  <br />
+                  Images will be resized to 1280x800 and cropped along the bottom edge.
+                </p>
+              </div>
+              <react-dropzone
+                accepts={
+                  Object {
+                    "accepts": "image/*",
+                    "extensions": "gif, jpeg, jpg, png, svg",
+                  }
+                }
+                className="form-dropzone style-landscape"
+                inputProps={
+                  Object {
+                    "aria-describedby": "upload-error-22",
+                    "id": "upload-21",
+                  }
+                }
+                multiple={false}
+                onDrop={[Function]}
+                style={undefined}
+              >
+                <div
+                  className="contents-empty"
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-cloud-up"
+                  />
+                  <div
+                    className="message"
+                  >
+                    <p
+                      className="primary"
+                    >
+                      <span
+                        className="fake-link"
+                        role="button"
+                        tabIndex="0"
+                      >
+                        Upload a file
+                      </span>
+                       or 
+                      <br />
+                      drag and drop here
+                      <br />
+                    </p>
+                    <p
+                      className="secondary"
+                    >
+                      gif, jpeg, jpg, png, svg
+                    </p>
+                  </div>
+                </div>
+              </react-dropzone>
+            </div>
+          </div>
+          <div
+            className="form-input"
+          >
+            <div
+              className="form-input"
+              style={Object {}}
+            >
+              <label
+                className="has-instructions"
+                htmlFor="upload-21"
+              >
+                Cover
+              </label>
+              <span
+                className="instructions"
+              >
+                If a cover is set for the project, it will appear over the hero, to the right of the description on the landing page.
+              </span>
+              <react-dropzone
+                accepts={
+                  Object {
+                    "accepts": "image/*",
+                    "extensions": "gif, jpeg, jpg, png, svg",
+                  }
+                }
+                className="form-dropzone style-portrait"
+                inputProps={
+                  Object {
+                    "aria-describedby": "upload-error-22",
+                    "id": "upload-21",
+                  }
+                }
+                multiple={false}
+                onDrop={[Function]}
+                style={undefined}
+              >
+                <div
+                  className="contents-empty"
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-cloud-up"
+                  />
+                  <div
+                    className="message"
+                  >
+                    <p
+                      className="primary"
+                    >
+                      <span
+                        className="fake-link"
+                        role="button"
+                        tabIndex="0"
+                      >
+                        Upload a file
+                      </span>
+                       or 
+                      <br />
+                      drag and drop here
+                      <br />
+                    </p>
+                    <p
+                      className="secondary"
+                    >
+                      gif, jpeg, jpg, png, svg
+                    </p>
+                  </div>
+                </div>
+              </react-dropzone>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="form-section"
+      >
+        <header
+          className="form-section-label"
+        >
+          <span>
+            Purchase Options
+          </span>
+        </header>
+        <div
+          className="form-input-group"
+        >
+          <div
+            className="form-input wide"
+            style={Object {}}
+          >
+            <label
+              className="has-instructions"
+              htmlFor="attributes[purchaseUrl]-text-input-15"
+            >
+              Purchase URL
+            </label>
+            <input
+              aria-describedby="attributes[purchaseUrl]-text-input-15"
+              id="attributes[purchaseUrl]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Purchase URL"
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              A URL where users can purchase the published edition
+            </span>
+          </div>
+          <div
+            className="form-input wide"
+            style={Object {}}
+          >
+            <label
+              className="has-instructions"
+              htmlFor="attributes[purchaseCallToAction]-text-input-15"
+            >
+              Purchase Call To Action
+            </label>
+            <input
+              aria-describedby="attributes[purchaseCallToAction]-text-input-15"
+              id="attributes[purchaseCallToAction]-text-input-15"
+              onChange={[Function]}
+              placeholder="Buy Print Version"
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              If set, this text will appear in the buy button on the project page
+            </span>
+          </div>
+          <div
+            className="form-input"
+          >
+            <label
+              className="has-instructions"
+              htmlFor="masked-text-10"
+            >
+              Purchase Price
+            </label>
+            <react-text-mask
+              id="masked-text-10"
+              mask={[Function]}
+              onChange={[Function]}
+              placeholder={undefined}
+              placeholderChar="_"
+              type="text"
+              value={undefined}
+            />
+            <span
+              className="instructions"
+            >
+              The cost of the published edition
+            </span>
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className="has-instructions"
+              htmlFor="attributes[purchasePriceCurrency]-text-input-15"
+            >
+              Currency
+            </label>
+            <input
+              aria-describedby="attributes[purchasePriceCurrency]-text-input-15"
+              id="attributes[purchasePriceCurrency]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Purchase Price Currency Code"
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              For example, USD for US Dollars
             </span>
           </div>
         </div>
+      </div>
+      <div
+        className="form-section"
+      >
+        <header
+          className="form-section-label"
+        >
+          <span>
+            Download Options
+          </span>
+        </header>
         <span
           className="instructions"
         >
-          If set, project activity will not be shown on the project page.
+          If a URL or file is provided, a button to download the file will appear on the project page.  A file takes precedence over a URL.
         </span>
+        <div
+          className="form-input-group"
+        >
+          <div
+            className="form-input wide"
+            style={Object {}}
+          >
+            <label
+              className=""
+              htmlFor="attributes[downloadUrl]-text-input-15"
+            >
+              Download URL
+            </label>
+            <input
+              aria-describedby="attributes[downloadUrl]-text-input-15"
+              id="attributes[downloadUrl]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Download URL"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-input wide"
+            style={Object {}}
+          >
+            <label
+              className="has-instructions"
+              htmlFor="attributes[downloadCallToAction]-text-input-15"
+            >
+              Download Call To Action
+            </label>
+            <input
+              aria-describedby="attributes[downloadCallToAction]-text-input-15"
+              id="attributes[downloadCallToAction]-text-input-15"
+              onChange={[Function]}
+              placeholder="Download Digital Version"
+              type="text"
+              value="Download the greatest dog"
+            />
+            <span
+              className="instructions"
+            >
+              If set, this text will appear in the download link on the project page
+            </span>
+          </div>
+          <div
+            className="form-input"
+          >
+            <div
+              className="form-input"
+              style={Object {}}
+            >
+              <label
+                className=""
+                htmlFor="upload-21"
+              >
+                Download File
+              </label>
+              <react-dropzone
+                accepts={
+                  Object {
+                    "accepts": null,
+                    "extensions": null,
+                  }
+                }
+                className="form-dropzone style-portrait"
+                inputProps={
+                  Object {
+                    "aria-describedby": "upload-error-22",
+                    "id": "upload-21",
+                  }
+                }
+                multiple={false}
+                onDrop={[Function]}
+                style={undefined}
+              >
+                <div
+                  className="contents-empty"
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-cloud-up"
+                  />
+                  <div
+                    className="message"
+                  >
+                    <p
+                      className="primary"
+                    >
+                      <span
+                        className="fake-link"
+                        role="button"
+                        tabIndex="0"
+                      >
+                        Upload a file
+                      </span>
+                       or 
+                      <br />
+                      drag and drop here
+                      <br />
+                    </p>
+                  </div>
+                </div>
+              </react-dropzone>
+            </div>
+          </div>
+        </div>
       </div>
       <div
         className="form-input submit wide"
