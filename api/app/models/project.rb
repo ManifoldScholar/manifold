@@ -133,6 +133,9 @@ class Project < ApplicationRecord
   manifold_has_attached_file :cover, :image
   manifold_has_attached_file :hero, :image
   manifold_has_attached_file :avatar, :image
+  manifold_has_attached_file :published_text_attachment,
+                             :project_text,
+                             validate_content_type: false
 
   # Scopes
   scope :by_featured, lambda { |featured|
@@ -244,6 +247,12 @@ class Project < ApplicationRecord
     texts.reindex(:search_hidden, mode: :async)
     TextSection.in_texts(texts).reindex(:search_hidden, mode: :async)
     SearchableNode.in_texts(texts).reindex(:search_hidden, mode: :async)
+  end
+
+  def published_text_download_url
+    return published_text_attachment.url if published_text_attachment.present?
+    return download_url if download_url.present?
+    nil
   end
 
   private

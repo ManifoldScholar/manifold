@@ -9,7 +9,8 @@ class ProjectPartialSerializer < ApplicationSerializer
              :twitter_id, :instagram_id, :facebook_id, :hero_styles, :cover_styles,
              :avatar_styles, :recently_updated, :updated, :description_formatted, :slug,
              :resource_kinds, :resource_tags, :avatar_color, :avatar_meta, :draft,
-             :abilities
+             :abilities, :download_url, :download_call_to_action,
+             :published_text_attachment_file_name, :published_text_download_url
 
   has_many :creators, serializer: MakerSerializer
   has_many :contributors, serializer: MakerSerializer

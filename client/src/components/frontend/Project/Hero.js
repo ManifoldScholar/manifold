@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import has from "lodash/has";
 import some from "lodash/some";
 import isEmpty from "lodash/isEmpty";
-import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import classNames from "classnames";
 
@@ -21,13 +20,8 @@ export default class ProjectHero extends Component {
     return !some(creators, c => isEmpty(c.attributes.avatarStyles[variant]));
   }
 
-  hasMakers(type) {
-    return !isEmpty(get(this.props.project, `relationships.${type}`));
-  }
-
-  listCreators() {
-    if (!this.hasMakers("creators")) return null;
-    const creators = get(this.props.project, "relationships.creators");
+  listCreators(creators) {
+    if (!creators.length > 0) return null;
 
     if (creators.length <= 2 && this.hasAvatars(creators, "smallSquare")) {
       return (
@@ -50,9 +44,8 @@ export default class ProjectHero extends Component {
     );
   }
 
-  listContributors() {
-    if (!this.hasMakers("contributors")) return null;
-    const contributors = get(this.props.project, "relationships.contributors");
+  listContributors(contributors) {
+    if (!contributors.length > 0) return null;
 
     return (
       <div className="project-contributor-list">
@@ -66,11 +59,11 @@ export default class ProjectHero extends Component {
     );
   }
 
-  listMakers() {
+  listMakers(relationships) {
     return (
       <section className="project-maker">
-        {this.listCreators()}
-        {this.listContributors()}
+        {this.listCreators(relationships.creators)}
+        {this.listContributors(relationships.contributors)}
       </section>
     );
   }
@@ -94,21 +87,18 @@ export default class ProjectHero extends Component {
     return out;
   }
 
-  renderProjectStatusMarker() {
-    const project = this.props.project;
-
+  renderProjectStatusMarker(attr) {
     // Currently, this can only return a 'draft' marker
     let marker = null;
 
-    if (project.attributes.draft) {
+    if (attr.draft) {
       marker = <div className="block-label">{"Draft"}</div>;
     }
 
     return marker;
   }
 
-  renderDescription() {
-    const attr = this.props.project.attributes;
+  renderDescription(attr) {
     if (attr.description) {
       if (attr.descriptionFormatted) {
         return (
@@ -126,12 +116,11 @@ export default class ProjectHero extends Component {
     }
   }
 
-  renderProjectImage(wrapperClass) {
+  renderProjectImage(coverStyles, wrapperClass = null) {
     let output = "";
-    const attr = this.props.project.attributes;
 
-    if (attr.coverStyles.medium) {
-      output = <img src={attr.coverStyles.medium} alt="Project Cover" />;
+    if (coverStyles.medium) {
+      output = <img src={coverStyles.medium} alt="Project Cover" />;
 
       if (wrapperClass) {
         output = <div className={wrapperClass}>{output}</div>;
@@ -141,8 +130,7 @@ export default class ProjectHero extends Component {
     return output;
   }
 
-  renderSocial() {
-    const attr = this.props.project.attributes;
+  renderSocial(attr) {
     const services = ["twitter", "facebook", "instagram"];
     const hashtag = attr.hashtag ? `#${attr.hashtag}` : null;
 
@@ -177,10 +165,11 @@ export default class ProjectHero extends Component {
     );
   }
 
-  renderPublishedText(position) {
-    const publishedText = this.props.project.relationships.publishedText;
-    const publishedTextTocId = this.props.project.attributes.publishedTextTocId;
+  renderPublishedText(project, position) {
+    const publishedText = project.relationships.publishedText;
+    const publishedTextTocId = project.attributes.publishedTextTocId;
     if (!publishedText) return null;
+
     return (
       <section className={"project-entry " + position}>
         <Link
@@ -207,9 +196,9 @@ export default class ProjectHero extends Component {
     );
   }
 
-  renderPurchaseLink() {
-    const attr = this.props.project.attributes;
+  renderPurchaseLink(attr) {
     if (!attr.purchaseUrl) return null;
+
     return (
       <a
         rel="noopener noreferrer"
@@ -224,8 +213,54 @@ export default class ProjectHero extends Component {
       </a>
     );
   }
+
+  renderDownloadLink(attr) {
+    if (!attr.publishedTextDownloadUrl) return null;
+
+    const purchaseLinkPresent = this.renderPurchaseLink(attr);
+
+    const buttonClasses = purchaseLinkPresent
+      ? "utility-primary"
+      : "button-tagged outline";
+
+    return (
+      <a
+        rel="noopener noreferrer"
+        target="_blank"
+        href={attr.publishedTextDownloadUrl}
+        className={buttonClasses}
+      >
+        {purchaseLinkPresent ? (
+          <i className="manicon manicon-arrow-down" />
+        ) : null}
+        <span className="text">
+          {attr.downloadCallToAction || "Download eBook"}
+        </span>
+        {purchaseLinkPresent ? null : (
+          <span className="tag">
+            <i className="manicon manicon-arrow-down" />
+          </span>
+        )}
+      </a>
+    );
+  }
+
+  renderPublishedTextLinks(attr) {
+    if (!attr.purchaseUrl && !attr.publishedTextDownloadUrl) return null;
+
+    return (
+      <React.Fragment>
+        {this.renderPurchaseLink(attr)}
+        {this.renderDownloadLink(attr)}
+      </React.Fragment>
+    );
+  }
+
   render() {
-    const attr = this.props.project.attributes;
+    const project = this.props.project;
+    if (!project) return null;
+
+    const attr = project.attributes;
 
     const heroClass = classNames("project-detail-hero", {
       "hero-image": attr.heroStyles.largeLandscape
@@ -244,28 +279,28 @@ export default class ProjectHero extends Component {
             <div className="project-figure-caption">
               <h1 className="project-title">
                 <span className="title-text">{attr.title}</span>
-                {this.renderProjectStatusMarker()}
+                {this.renderProjectStatusMarker(attr)}
                 <span className="subtitle">{attr.subtitle}</span>
               </h1>
-              {this.listMakers()}
+              {this.listMakers(project.relationships)}
             </div>
           </div>
           <div className="project-info">
-            {this.renderPublishedText("top")}
+            {this.renderPublishedText(project, "top")}
             <h1 className="project-title">
               <span className="title-text">{attr.title}</span>
-              {this.renderProjectStatusMarker()}
+              {this.renderProjectStatusMarker(attr)}
               <span className="subtitle">{attr.subtitle}</span>
             </h1>
-            {this.listMakers()}
-            {this.renderDescription()}
-            {this.renderPublishedText("bottom")}
-            {this.renderSocial()}
-            {this.renderPurchaseLink()}
+            {this.listMakers(project.relationships)}
+            {this.renderDescription(attr)}
+            {this.renderPublishedText(project, "bottom")}
+            {this.renderSocial(attr)}
+            {this.renderPublishedTextLinks(attr)}
           </div>
           <div className="project-aside">
-            {this.renderProjectImage()}
-            {this.renderPurchaseLink()}
+            {this.renderProjectImage(attr.coverStyles)}
+            {this.renderPublishedTextLinks(attr)}
           </div>
         </div>
       </div>

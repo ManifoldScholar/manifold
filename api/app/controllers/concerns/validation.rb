@@ -32,9 +32,11 @@ module Validation
     attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,
                   :purchase_price_money, :purchase_price_currency, :facebook_id,
                   :purchase_call_to_action, :twitter_id, :hide_activity, :instagram_id,
-                  :remove_avatar, attachment(:avatar), attachment(:hero),
+                  :remove_avatar, attachment(:avatar), attachment(:hero), :download_url,
                   attachment(:cover), :remove_hero, :draft, :remove_cover,
-                  :publication_date, metadata(Project), :avatar_color, :slug]
+                  :download_call_to_action, :publication_date, metadata(Project),
+                  :avatar_color, :slug, attachment(:published_text_attachment),
+                  :remove_published_text_attachment]
     relationships = [:collaborators, :creators, :contributors, :published_text, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

@@ -14,6 +14,17 @@
     }
   }
 
+  .button-tagged {
+    .tag .manicon {
+      padding: 0 5px;
+      margin: 0;
+
+      @include respond($break50) {
+        padding: 0 15px;
+      }
+    }
+  }
+
   // When a hero image is present, set background properties and an overlay
   &.hero-image {
     background-repeat: no-repeat;
@@ -415,6 +426,14 @@
         display: none;
       }
     }
+
+    .utility-primary {
+      margin-top: 21px;
+
+      @include respond($break75) {
+        display: none;
+      }
+    }
   }
 
   // Project Social
@@ -486,6 +505,23 @@
 
     .button-tagged {
       margin-top: 14px;
+    }
+  }
+
+  a.utility-primary {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 13px;
+    color: $neutralWhite;
+    text-decoration: none;
+
+    .manicon {
+      margin-right: 8px;
+      font-size: 15px;
+    }
+
+    &:hover, &:visited {
+      color: $neutralWhite;
     }
   }
 }
