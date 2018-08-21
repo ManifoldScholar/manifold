@@ -1,16 +1,194 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend Following Container renders correctly 1`] = `
-<div
-  style={
-    Object {
-      "overflowX": "hidden",
-    }
-  }
->
+<div>
   <section
     className="bg-neutral05"
   >
+    <div
+      className="container"
+    >
+      <header
+        className="section-heading"
+      >
+        <div
+          className="main"
+        >
+          <i
+            aria-hidden="true"
+            className="manicon manicon-books-with-glasses"
+          />
+          <div
+            className="body"
+          >
+            <h4
+              className="title"
+            >
+              Projects You're Following
+            </h4>
+          </div>
+        </div>
+        <div
+          className="utility right"
+        >
+          <div
+            className="select-browse"
+          >
+            <select
+              defaultValue=""
+              onChange={[Function]}
+            >
+              <option
+                value=""
+              >
+                Show All
+              </option>
+              <option
+                value="featured"
+              >
+                Featured Projects
+              </option>
+            </select>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-caret-down"
+            />
+          </div>
+        </div>
+      </header>
+      <nav
+        className="grid-project"
+      >
+        <ul>
+          <li>
+            <a
+              href="/projects/slug-3"
+              onClick={[Function]}
+            >
+              <figure
+                className="cover"
+              >
+                <div>
+                  <button
+                    className="screen-reader-text"
+                    onClick={[Function]}
+                  >
+                    Unfollow Rowan Test
+                  </button>
+                  <div
+                    aria-hidden="true"
+                    className="follow-button-wrapper follow"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    role="presentation"
+                  >
+                    <div
+                      aria-hidden="true"
+                      className="following-button"
+                    >
+                      <div
+                        className="icons"
+                      >
+                        <i
+                          className="manicon manicon-minus-bold"
+                        />
+                        <i
+                          className="manicon manicon-check-bold"
+                        />
+                        <i
+                          className="manicon manicon-plus-bold"
+                        />
+                      </div>
+                      <span>
+                        <span
+                          className="follow-text"
+                        >
+                          Follow
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              <div
+                className="meta"
+              >
+                <h3
+                  className="title"
+                >
+                  Rowan Test
+                </h3>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/projects/slug-4"
+              onClick={[Function]}
+            >
+              <figure
+                className="cover"
+              >
+                <div>
+                  <button
+                    className="screen-reader-text"
+                    onClick={[Function]}
+                  >
+                    Unfollow Rowan Test
+                  </button>
+                  <div
+                    aria-hidden="true"
+                    className="follow-button-wrapper follow"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    role="presentation"
+                  >
+                    <div
+                      aria-hidden="true"
+                      className="following-button"
+                    >
+                      <div
+                        className="icons"
+                      >
+                        <i
+                          className="manicon manicon-minus-bold"
+                        />
+                        <i
+                          className="manicon manicon-check-bold"
+                        />
+                        <i
+                          className="manicon manicon-plus-bold"
+                        />
+                      </div>
+                      <span>
+                        <span
+                          className="follow-text"
+                        >
+                          Follow
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              <div
+                className="meta"
+              >
+                <h3
+                  className="title"
+                >
+                  Rowan Test
+                </h3>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+  <section>
     <div
       className="container"
     >
@@ -34,9 +212,6 @@ exports[`Frontend Following Container renders correctly 1`] = `
             </h4>
           </div>
         </div>
-        <div
-          className="utility right"
-        />
       </header>
       <nav
         className="grid-project"
@@ -171,7 +346,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
     </div>
   </section>
   <section
-    className=""
+    className="show-50 bg-neutral05"
   >
     <div
       className="container"
@@ -190,19 +365,6 @@ exports[`Frontend Following Container renders correctly 1`] = `
               className="manicon manicon-books-on-shelf"
             />
             See more projects
-          </span>
-        </a>
-        <a
-          className="button-icon-primary"
-          href="/following"
-          onClick={[Function]}
-        >
-          <span>
-            <i
-              aria-hidden="true"
-              className="manicon manicon-books-with-glasses"
-            />
-            Projects You're Following 
           </span>
         </a>
       </nav>
