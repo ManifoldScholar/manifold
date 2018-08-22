@@ -34,14 +34,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Move 
-              John
-               
-              down
-               in the
-               
-              makers
-               list
+              Move John down in the makers list
             </span>
           </button>
           <button
@@ -53,8 +46,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
             >
               Remove 
               John
-               from the
-               
+               from the 
               makers
                list.
             </span>
@@ -81,14 +73,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Move 
-              Jane
-               
-              up
-               in the
-               
-              makers
-               list
+              Move Jane up in the makers list
             </span>
           </button>
           <button
@@ -100,8 +85,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
             >
               Remove 
               Jane
-               from the
-               
+               from the 
               makers
                list.
             </span>
