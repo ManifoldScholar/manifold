@@ -65,8 +65,7 @@ exports[`Backend Project Collaborators Container renders correctly 1`] = `
                   >
                     Remove 
                     Rowan Ida
-                     from the
-                     
+                     from the 
                     Authors
                      list.
                   </span>
@@ -172,8 +171,7 @@ exports[`Backend Project Collaborators Container renders correctly 1`] = `
                   >
                     Remove 
                     Rowan Ida
-                     from the
-                     
+                     from the 
                     Contributors
                      list.
                   </span>
