@@ -1,0 +1,63 @@
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import indexOf from "lodash/indexOf";
+import ListItem from "./ListItem";
+
+export default class FormHasManyList extends PureComponent {
+  static displayName = "Form.HasMany.List";
+
+  static propTypes = {
+    label: PropTypes.string.isRequired,
+    orderable: PropTypes.bool,
+    onChange: PropTypes.func.isRequired,
+    editClickHandler: PropTypes.func,
+    entityName: PropTypes.func,
+    entities: PropTypes.array.isRequired,
+    entityAvatarAttribute: PropTypes.string
+  };
+
+  onMove = (event, entity, direction) => {
+    event.preventDefault();
+    const newEntities = this.props.entities.slice(0);
+    const index = indexOf(newEntities, entity);
+    let target = direction === "up" ? index - 1 : index + 1;
+    if (target < 0) target = 0;
+    if (target > newEntities.length) target = newEntities.length;
+    const tmp = newEntities[target];
+    newEntities[target] = entity;
+    newEntities[index] = tmp;
+    this.props.onChange(newEntities, "move");
+  };
+
+  onRemove = (event, entity) => {
+    event.preventDefault();
+    const newEntities = this.props.entities.filter(compare => {
+      return compare !== entity;
+    });
+    this.props.onChange(newEntities, "remove");
+  };
+
+  render() {
+    const entities = this.props.entities;
+
+    return (
+      <ul>
+        {entities.map((entity, index) => (
+          <ListItem
+            key={entity.id}
+            entity={entity}
+            entities={entities}
+            ordinal={index}
+            entityName={this.props.entityName}
+            entityAvatarAttribute={this.props.entityAvatarAttribute}
+            label={this.props.label}
+            orderable={this.props.orderable}
+            removeHandler={this.onRemove}
+            editHandler={this.props.editClickHandler}
+            moveHandler={this.onMove}
+          />
+        ))}
+      </ul>
+    );
+  }
+}
