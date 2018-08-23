@@ -83,11 +83,11 @@ module FormattedAttributes
           private
 
           def #{method_name(:formatted_cache_key)}
-            "\#{model_name.cache_key}/\#{id}/formatted/#{attribute}"
+            "#{Rails.env.downcase}/\#{model_name.cache_key}/\#{id}/formatted/#{attribute}"
           end
 
           def #{method_name(:plaintext_cache_key)}
-            "\#{model_name.cache_key}/\#{id}/plaintext/#{attribute}"
+            "#{Rails.env.downcase}/\#{model_name.cache_key}/\#{id}/plaintext/#{attribute}"
           end
       RUBY
     end
