@@ -8,6 +8,13 @@ exports[`Backend Text General Container renders correctly 1`] = `
       data-id="submit"
       onSubmit={[Function]}
     >
+      <header
+        className="form-header"
+      >
+        <h2>
+          General
+        </h2>
+      </header>
       <div
         className="form-input"
         style={Object {}}

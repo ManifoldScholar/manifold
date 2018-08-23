@@ -2,6 +2,13 @@
 
 exports[`Backend.Ingestion.Form.Upload component renders correctly 1`] = `
 <div>
+  <header
+    className="form-header"
+  >
+    <h2>
+      Upload
+    </h2>
+  </header>
   <div
     className="form-input"
   >

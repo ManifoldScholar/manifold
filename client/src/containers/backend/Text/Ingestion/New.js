@@ -52,6 +52,7 @@ export class IngestionNewContainer extends PureComponent {
           name={requests.beIngestionCreate}
           project={this.props.text.relationships.project}
           text={this.props.text}
+          header={"Reingest"}
         />
       </div>
     );

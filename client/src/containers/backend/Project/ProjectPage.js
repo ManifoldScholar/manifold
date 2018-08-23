@@ -39,6 +39,7 @@ export default class ProjectProjectPageContainer extends PureComponent {
             create={projectsAPI.create}
             className="form-secondary"
           >
+            <Form.Header label="Appearance" />
             <Form.TextArea
               label="Description"
               name="attributes[description]"

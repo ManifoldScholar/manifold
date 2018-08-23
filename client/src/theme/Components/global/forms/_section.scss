@@ -8,17 +8,7 @@
   }
 
   .form-section-label {
-    @include roundedHeader;
-
-    span {
-      @include utilityPrimary;
-      display: table-cell;
-      width: 100%;
-      font-size: 14px;
-      font-weight: $semibold;
-      color: $accentPrimary;
-      letter-spacing: 0.1em;
-    }
+    @include roundedFormHeader;
   }
 
   .form-input-group {

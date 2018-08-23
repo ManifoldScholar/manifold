@@ -8,6 +8,13 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
     onSubmit={[Function]}
   >
     <div>
+      <header
+        className="form-header"
+      >
+        <h2>
+          Upload
+        </h2>
+      </header>
       <div
         className="form-input"
       >
