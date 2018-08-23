@@ -7,11 +7,11 @@ describe("Backend.Navigation.Secondary component", () => {
   const links = [
     {
       route: "backendProjects",
-      label: "projects",
+      label: "projects"
     },
     {
       route: "backendRecords",
-      label: "records",
+      label: "records"
     }
   ];
 
