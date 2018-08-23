@@ -9,6 +9,13 @@ exports[`Backend Text Ingestion New Container renders correctly 1`] = `
       onSubmit={[Function]}
     >
       <div>
+        <header
+          className="form-header"
+        >
+          <h2>
+            Reingest
+          </h2>
+        </header>
         <div
           className="form-input"
         >

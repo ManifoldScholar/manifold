@@ -11,7 +11,8 @@ class IngestionFormUpload extends PureComponent {
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     cancelUrl: PropTypes.string,
-    setOther: PropTypes.func
+    setOther: PropTypes.func,
+    header: PropTypes.string
   };
 
   onSourceChange = source => {
@@ -47,6 +48,8 @@ class IngestionFormUpload extends PureComponent {
   };
 
   render() {
+    const formHeader = this.props.header || "Upload";
+
     const fileInstructions = (
       <span className="instructions">
         Manifold can ingest texts from single files or a .zip collection.
@@ -66,6 +69,7 @@ class IngestionFormUpload extends PureComponent {
     /* eslint-disable max-len */
     return (
       <div>
+        <Form.Header label={formHeader} />
         <Form.TusUpload
           inlineStyle={{ width: "100%" }}
           layout="landscape"

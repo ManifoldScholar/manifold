@@ -52,6 +52,7 @@ export class IngestionNewContainer extends PureComponent {
           name={requests.beIngestionCreate}
           project={this.props.project}
           triggerClose={this.props.triggerClose}
+          header={"Add a new text"}
         />
       </div>
     );

@@ -4,6 +4,7 @@ import AttributeMap from "./AttributeMap";
 import Date from "./Date";
 import FieldGroup from "./FieldGroup";
 import GeneratedPasswordInput from "./GeneratedPasswordInput";
+import Header from "./Header";
 import HasMany from "./HasMany";
 import Hidden from "./Hidden";
 import HigherOrder from "./HigherOrder";
@@ -29,6 +30,7 @@ export default {
   FieldGroup,
   GeneratedPasswordInput,
   HasMany,
+  Header,
   Hidden,
   HigherOrder,
   Instructions,

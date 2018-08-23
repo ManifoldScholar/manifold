@@ -21,6 +21,7 @@ export default class TextGeneralContainer extends PureComponent {
           create={textsAPI.create}
           className="form-secondary"
         >
+          <Form.Header label="General" />
           <Form.TextInput
             label="Title"
             name="attributes[title]"
