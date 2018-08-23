@@ -30,7 +30,7 @@ export default class PageListItem extends PureComponent {
               </span>
             </div>
           </header>
-          <span className="label">{attr.purpose.replace("_", " ")}</span>
+          <span className="label">{attr.purpose.replace(/_/g, " ")}</span>
         </Link>
       </li>
     );
