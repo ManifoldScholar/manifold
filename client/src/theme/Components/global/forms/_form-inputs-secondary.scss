@@ -259,6 +259,7 @@
       text-transform: none; // OD
 
       &:focus {
+        color: $neutral40;
         border-color: $accentPrimaryLight;
       }
     }
