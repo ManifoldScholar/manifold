@@ -25,7 +25,9 @@ export default class PageListItem extends PureComponent {
             </figure>
             <div className="meta">
               <h3 className="name large">{attr.title}</h3>
-              <span className="subtitle">page/{attr.slug}</span>
+              <span className="subtitle">
+                {attr.isExternalLink ? attr.externalLink : `/page/${attr.slug}`}
+              </span>
             </div>
           </header>
           <span className="label">{attr.purpose.replace("_", " ")}</span>
