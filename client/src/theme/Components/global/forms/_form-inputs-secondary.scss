@@ -255,6 +255,7 @@
       @include formInputSecondary;
       padding: 0 42px 0.75em 0; // OD
       font-size: 16px;
+      line-height: normal;
       text-transform: none; // OD
 
       &:focus {
