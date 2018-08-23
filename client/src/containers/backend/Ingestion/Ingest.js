@@ -288,8 +288,8 @@ export class IngestionIngest extends Component {
               onClick={this.reset}
               disabled={this.state.loading || !this.canReset}
             >
-              Restart Ingestion
               <i className="manicon manicon-x-bold" aria-hidden="true" />
+              Restart Ingestion
             </button>
           </div>
         </div>

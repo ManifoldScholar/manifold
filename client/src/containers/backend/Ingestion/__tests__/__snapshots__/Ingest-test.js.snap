@@ -91,11 +91,11 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
         disabled={true}
         onClick={[Function]}
       >
-        Restart Ingestion
         <i
           aria-hidden="true"
           className="manicon manicon-x-bold"
         />
+        Restart Ingestion
       </button>
     </div>
   </div>
@@ -212,11 +212,11 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
         disabled={true}
         onClick={[Function]}
       >
-        Restart Ingestion
         <i
           aria-hidden="true"
           className="manicon manicon-x-bold"
         />
+        Restart Ingestion
       </button>
     </div>
   </div>
