@@ -26,18 +26,19 @@ describe("Frontend Following Container", () => {
     currentUser: user
   };
 
-  const component = () => renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <FollowingContainer
-          authentication={authentication}
-          featuredProjects={featuredProjects}
-          followedProjects={followedProjects}
-          dispatch={store.dispatch}
-        />
-      </Provider>
-    )
-  );
+  const component = () =>
+    renderer.create(
+      wrapWithRouter(
+        <Provider store={store}>
+          <FollowingContainer
+            authentication={authentication}
+            featuredProjects={featuredProjects}
+            followedProjects={followedProjects}
+            dispatch={store.dispatch}
+          />
+        </Provider>
+      )
+    );
 
   it("renders correctly", () => {
     global.scrollTo = jest.fn();
