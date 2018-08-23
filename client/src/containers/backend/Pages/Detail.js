@@ -120,10 +120,11 @@ class PageDetailContainer extends PureComponent {
 
   doPreview = event => {
     event.preventDefault();
-    const win = window.open(
-      lh.link("frontendPage", this.props.page.attributes.slug),
-      "_blank"
-    );
+    const attr = this.props.page.attributes;
+    const previewUrl = attr.isExternalLink
+      ? attr.externalLink
+      : lh.link("frontendPage", attr.slug);
+    const win = window.open(previewUrl, "_blank");
     win.focus();
   };
 
