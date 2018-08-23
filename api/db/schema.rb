@@ -247,19 +247,23 @@ ActiveRecord::Schema.define(version: 20180821160457) do
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "state"
     t.string   "log",                                           array: true
-    t.string   "source_file_name"
-    t.string   "source_content_type"
-    t.integer  "source_file_size"
-    t.datetime "source_updated_at"
     t.string   "strategy"
     t.string   "external_source_url"
     t.string   "ingestion_type"
-    t.uuid     "creator_id"
+    t.uuid     "creator_id",                       null: false
     t.uuid     "text_id"
-    t.uuid     "project_id"
+    t.uuid     "project_id",                       null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.datetime "source_updated_at"
+    t.integer  "source_file_size"
+    t.string   "source_content_type"
+    t.string   "source_file_name"
     t.jsonb    "source_data",         default: {}, null: false
+    t.index ["creator_id"], name: "index_ingestions_on_creator_id", using: :btree
+    t.index ["project_id"], name: "index_ingestions_on_project_id", using: :btree
+    t.index ["state"], name: "index_ingestions_on_state", using: :btree
+    t.index ["text_id"], name: "index_ingestions_on_text_id", using: :btree
   end
 
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -703,6 +707,9 @@ ActiveRecord::Schema.define(version: 20180821160457) do
   add_foreign_key "import_selection_matches", "searchable_nodes", on_delete: :cascade
   add_foreign_key "import_selection_matches", "text_sections", on_delete: :cascade
   add_foreign_key "import_selections", "texts", on_delete: :cascade
+  add_foreign_key "ingestions", "projects", on_delete: :restrict
+  add_foreign_key "ingestions", "texts", on_delete: :nullify
+  add_foreign_key "ingestions", "users", column: "creator_id", on_delete: :restrict
   add_foreign_key "resource_import_row_transitions", "resource_import_rows"
   add_foreign_key "resource_import_rows", "resource_imports", on_delete: :cascade
   add_foreign_key "resource_import_transitions", "resource_imports"
