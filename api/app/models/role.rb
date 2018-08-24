@@ -25,6 +25,12 @@ class Role < ApplicationRecord
     ROLE_PROJECT_AUTHOR
   ].freeze
 
+  EDITOR_ROLES = [
+    ROLE_EDITOR,
+    ROLE_PROJECT_EDITOR,
+    ROLE_PROJECT_AUTHOR
+  ].freeze
+
   ALLOWED_ROLES = [
     GLOBAL_ROLES,
     SCOPED_ROLES

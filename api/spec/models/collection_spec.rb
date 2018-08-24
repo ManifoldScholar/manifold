@@ -22,4 +22,10 @@ RSpec.describe Collection, type: :model do
     expect { collection.destroy }.to change { Annotation.count }.from(1).to(0)
   end
 
+  it "enqueues a COLLECTION_ADDED event on creation" do
+    project = FactoryBot.create(:project)
+    expect(CreateEventJob).to receive(:perform_later).with(EventType[:collection_added], any_args)
+    FactoryBot.create(:collection, project: project)
+  end
+
 end

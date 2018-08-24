@@ -17,6 +17,10 @@ module WithPermittedUsers
     after_create :grant_project_editor_role!
   end
 
+  def permitted_users_for_role(role)
+    permitted_users.joins(:roles).where(roles: { name: role })
+  end
+
   def grant_project_editor_role!
     return unless creator&.project_creator?
     creator.add_role Role::ROLE_PROJECT_EDITOR, self

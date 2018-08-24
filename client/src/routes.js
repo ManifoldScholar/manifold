@@ -751,6 +751,20 @@ export default () => {
           }
         },
         {
+          name: "subscriptions",
+          exact: true,
+          component: Frontend.Subscriptions,
+          path: "/subscriptions",
+          helper: () => "/subscriptions"
+        },
+        {
+          name: "unsubscribe",
+          exact: true,
+          component: Frontend.Unsubscribe,
+          path: "/unsubscribe/:token",
+          helper: token => `/unsubscribe/${token}`
+        },
+        {
           name: "frontend",
           exact: true,
           component: Frontend.Home,

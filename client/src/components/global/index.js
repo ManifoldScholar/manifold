@@ -27,3 +27,4 @@ export Search from "./Search";
 export Meta from "./Meta";
 export SVG from "./SVG";
 export Navigation from "./Navigation";
+export Preferences from "./Preferences";

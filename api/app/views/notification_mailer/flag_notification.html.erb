@@ -1,0 +1,9 @@
+<div>
+  The following <%= @kind %> in <a href="<%= @resource.subject_url %>"><%= @resource.project.title.titleize %></a> has been flagged <%= @resource.flags_count %> <%= "time".pluralize(@resource.flags_count) %>.
+
+  <div>
+    <p style="margin-top: 15px; margin-bottom: 0;">
+      <em><%= @resource.body %></em>
+    </p>
+  </div>
+</div>

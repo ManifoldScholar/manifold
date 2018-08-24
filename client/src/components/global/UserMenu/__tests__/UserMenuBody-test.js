@@ -1,34 +1,33 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import UserMenuBody from "../UserMenuBody";
-import Adapter from "enzyme-adapter-react-16";
-import Enzyme from "enzyme";
-
-Enzyme.configure({ adapter: new Adapter() });
+import { wrapWithRouter } from "test/helpers/routing";
+import { shallow } from "enzyme";
 
 describe("Global.UserMenu.UserMenuBody Component", () => {
   const props = {
     hideUserMenu: jest.fn(),
     startLogout: jest.fn(),
     showLoginOverlay: jest.fn(),
+    history: {},
     visible: false
   };
 
   it("renders correctly", () => {
-    const component = renderer.create(<UserMenuBody {...props} />);
+    const component = renderer.create(wrapWithRouter(<UserMenuBody {...props} />));
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("has the user-menu class", () => {
-    expect(Enzyme.shallow(<UserMenuBody {...props} />).is(".user-menu")).toBe(
+    expect(shallow(wrapWithRouter(<UserMenuBody {...props} />)).exists(".user-menu")).toBe(
       true
     );
   });
 
   it("has the menu-visible class when props.visible is true", () => {
     expect(
-      Enzyme.shallow(<UserMenuBody {...props} visible={true} />).is(
+      shallow(wrapWithRouter(<UserMenuBody {...props} visible={true} />)).exists(
         ".menu-visible"
       )
     ).toBe(true);
@@ -36,7 +35,7 @@ describe("Global.UserMenu.UserMenuBody Component", () => {
 
   it("has the menu-hidden class when props.visible is false", () => {
     expect(
-      Enzyme.shallow(<UserMenuBody {...props} visible={false} />).is(
+      shallow(wrapWithRouter(<UserMenuBody {...props} visible={false} />)).exists(
         ".menu-hidden"
       )
     ).toBe(true);

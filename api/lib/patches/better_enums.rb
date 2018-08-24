@@ -28,6 +28,7 @@ module Patches
       to_s
     end
 
+    # rubocop:disable Metrics/BlockLength, Metrics/LineLength
     class_methods do
       # @!attribute [r] base_config
       # @return [ActiveSupport::Configurable::Configuration]
@@ -71,6 +72,7 @@ module Patches
       end
     end
   end
+  # rubocop:enable Metrics/BlockLength, Metrics/LineLength
 
   module ProperlyQuoteEnums
     def _type_cast(value)

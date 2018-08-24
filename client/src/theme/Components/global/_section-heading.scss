@@ -171,4 +171,18 @@
   @include headingPrimary;
   margin-bottom: 25px;
   color: $neutral50;
+
+  .instructions {
+    @include templateCopy;
+    display: block;
+    margin-bottom: 1em;
+    font-size: 17px;
+    font-style: italic;
+    color: $neutral50;
+    text-transform: none;
+
+    a:visited {
+      color: inherit;
+    }
+  }
 }
