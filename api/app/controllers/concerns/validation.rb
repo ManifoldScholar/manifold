@@ -17,9 +17,20 @@ module Validation
         }
       }
     }
+    notification_preferences_by_kind = {
+      notification_preferences_by_kind: [
+        :digest,
+        :replies_to_me,
+        :project_comments_and_annotations,
+        :flagged_resources,
+        :digest_comments_and_annotations,
+        :projects,
+        :followed_projects
+      ]
+    }
     attributes = [:first_name, :last_name, :nickname, :name, :email, :password,
                   :password_confirmation, :remove_avatar, attachment(:avatar),
-                  persistent_ui]
+                  persistent_ui, notification_preferences_by_kind]
     attributes << :role if current_user&.admin?
     relationships = [:makers]
     param_config = structure_params(attributes: attributes, relationships: relationships)

@@ -3,7 +3,7 @@ class CurrentUserSerializer < UserSerializer
 
   meta(partial: false)
 
-  attributes :persistent_ui, :class_abilities
+  attributes :persistent_ui, :class_abilities, :notification_preferences
 
   has_many :favorites, serializer: FavoriteSerializer
 
@@ -11,6 +11,10 @@ class CurrentUserSerializer < UserSerializer
     models_with_authorization.each_with_object({}) do |klass, abilities|
       abilities[klass.name.underscore] = klass.serialized_abilities_for(the_user)
     end
+  end
+
+  def notification_preferences
+    object.notification_preferences_by_kind
   end
 
   private

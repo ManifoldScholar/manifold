@@ -264,7 +264,7 @@ const defaults = {
   event: {
     type: "events",
     attributes: {
-      eventType: "TEXT_ADDED",
+      eventType: "text_added",
       eventTitle: "Text Added",
       eventSubtitle: "It was added",
       subjectType: "Text",
@@ -278,7 +278,7 @@ const defaults = {
   tweetEvent: {
     type: "events",
     attributes: {
-      eventType: "TWEET",
+      eventType: "tweet",
       eventTitle: "Tweet Created",
       subjectType: "Tweet",
       subjectTitle: "New Tweet",

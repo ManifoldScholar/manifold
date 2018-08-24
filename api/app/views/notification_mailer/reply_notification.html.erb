@@ -1,0 +1,7 @@
+<div>
+  <%= @comment.creator.full_name %> replied to your comment on <a href="<%= @comment.subject_url %>"><%= @comment.title %></a>.
+
+  <p style="margin-top: 15px; margin-bottom: 0;">
+    <em><%= @comment.body %></em>
+  </p>
+</div>

@@ -82,6 +82,7 @@ export default {
   feCollection: "frontend-collection",
   feCollectionResources: "frontend-collection-resources",
   feCollectionResource: "frontend-collection-resource",
+  feUnsubscribe: "frontend-unsubscribe",
   rText: "reader-text",
   rSection: "reader-section",
   rAnnotations: "reader-annotations",
@@ -105,6 +106,8 @@ export default {
   feResourceAnnotationDestroy: "reader-resource-annotation-destroy",
   feCollectionAnnotationDestroy: "reader-collection-annotation-destroy",
   gAuthenticatedUserUpdate: "global-authenticated-user-update",
+  gAuthenticatedUserNotificationsUpdate:
+    "global-authenticated-user-notifications-update",
   gPages: "global-pages",
   gPage: "global-page",
   gPasswordRequest: "global-password-request",

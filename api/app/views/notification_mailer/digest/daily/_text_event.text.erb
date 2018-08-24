@@ -1,0 +1,3 @@
+<% text = event.subject.decorate %>
+* <%= text.title %><%= " was added to the #{text.category_title}" if text.category.present? %>
+> <%= text.reader_url %>

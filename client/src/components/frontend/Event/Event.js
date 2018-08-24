@@ -129,6 +129,23 @@ export default class Event extends PureComponent {
     };
   }
 
+  propsForCollectionAdded(attr) {
+    return {
+      type: attr.eventType,
+      date: attr.createdAt,
+      datePrefix: "Collection Added",
+      dateFormat: "MMMM Do, YYYY",
+      title: attr.subjectTitle,
+      iconClass: "manicon manicon-file-box",
+      linkPrompt: "View Collection",
+      linkHref: lh.link(
+        "frontendProjectCollection",
+        attr.projectSlug,
+        attr.subjectSlug
+      )
+    };
+  }
+
   render() {
     const tileProps = this.eventProps();
     return (

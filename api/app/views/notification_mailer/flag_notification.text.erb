@@ -1,0 +1,8 @@
+The following <%= @kind %> in "<%= @resource.project.title.titleize %>" has been flagged <%= @resource.flags_count %> <%= "time".pluralize(@resource.flags_count) %>.
+
+-----------------------------------------------------------
+<%= @resource.body %>
+-----------------------------------------------------------
+
+To view the <%= @kind %>, copy and paste the following URL into your browser:
+<%= @resource.subject_url %>

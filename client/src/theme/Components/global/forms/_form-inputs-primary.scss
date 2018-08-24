@@ -311,6 +311,24 @@
         transition: opacity $duration $timing;
       }
     }
+
+    &.checked .toggle-indicator {
+      background-color: $accentPrimaryLight;
+    }
+
+    &.inline {
+      display: block;
+      font-size: 16px;
+
+      @include respond($break50) {
+        display: inline-block;
+
+        + .radio {
+          margin-top: 0;
+          margin-left: 35px;
+        }
+      }
+    }
   }
 
   .toggle-note {

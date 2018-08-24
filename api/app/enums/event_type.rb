@@ -1,6 +1,7 @@
 class EventType < ClassyEnum::Base
 end
 
+# rubocop:disable Style/ClassAndModuleChildren
 class EventType::ProjectCreated < EventType
 end
 
@@ -15,3 +16,10 @@ end
 
 class EventType::Tweet < EventType
 end
+
+class EventType::CommentCreated < EventType
+end
+
+class EventType::CollectionAdded < EventType
+end
+# rubocop:enable Style/ClassAndModuleChildren

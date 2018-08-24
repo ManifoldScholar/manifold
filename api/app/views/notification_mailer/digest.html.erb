@@ -1,0 +1,5 @@
+<% if @frequency == "daily" %>
+  <%= render "notification_mailer/digest/daily" %>
+<% else %>
+  <%= render "notification_mailer/digest/weekly" %>
+<% end %>

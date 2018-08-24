@@ -1,170 +1,195 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Global.SignInUp.CreateUpdate component renders correctly 1`] = `
-<form
-  autoComplete="off"
+<section
   className="sign-in-up-update"
-  method="post"
-  onSubmit={[Function]}
 >
-  <div>
-    <h4
-      className="form-heading"
-    >
-      Congratulations!
-    </h4>
-    <p
-      className="overlay-copy"
-    >
-      Your account has been successfully created and you are now
-                logged in to Manifold. From now on, I'm going to call you
-    </p>
-    <h4
-      className="nickname"
-    >
-      Rowan
-    </h4>
-    <p
-      className="overlay-copy"
-    >
-      Would you like me to call you something else?
-    </p>
-  </div>
-  <div
-    className="row-1-p"
+  <form
+    autoComplete="off"
+    method="post"
+    onSubmit={[Function]}
   >
-    <div
-      className="form-input"
-      style={Object {}}
-    >
-      <input
-        aria-describedby="update-nickname-error"
-        aria-labelledby="update-nickname-label"
-        id="update-nickname"
-        name="nickname"
-        onChange={[Function]}
-        placeholder="Nickname"
-        type="text"
-        value=""
-      />
+    <div>
+      <h4
+        className="form-heading"
+      >
+        Congratulations!
+      </h4>
+      <p
+        className="overlay-copy"
+      >
+        Your account has been successfully created and you are now
+                  logged in to Manifold. From now on, I'm going to call you
+      </p>
+      <h4
+        className="nickname"
+      >
+        Rowan
+      </h4>
     </div>
-  </div>
+    <div
+      className="row-1-p"
+    >
+      <div>
+        <p
+          className="overlay-copy"
+        >
+          Would you like me to call you something else?
+        </p>
+      </div>
+      <div
+        className="row-1-p"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <input
+            aria-describedby="update-nickname-error"
+            aria-labelledby="update-nickname-label"
+            id="update-nickname"
+            name="nickname"
+            onChange={[Function]}
+            placeholder="Nickname"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="row-1-p"
+      >
+        <p
+          className="overlay-copy"
+        >
+          Do you want to edit your account information?
+        </p>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            htmlFor="update-firstName"
+          >
+            First Name
+          </label>
+          <input
+            aria-describedby="update-firstName-error"
+            id="update-firstName"
+            name="firstName"
+            onChange={[Function]}
+            placeholder="First name"
+            type="text"
+            value="Rowan"
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            htmlFor="update-lastName"
+          >
+            Last Name
+          </label>
+          <input
+            aria-describedby="update-lastName-error"
+            id="update-lastName"
+            name="lastName"
+            onChange={[Function]}
+            placeholder="Last name"
+            type="text"
+            value="Ida"
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            htmlFor="update-email"
+          >
+            Email
+          </label>
+          <input
+            aria-describedby="update-email-error"
+            id="update-email"
+            name="email"
+            onChange={[Function]}
+            placeholder="Email"
+            type="text"
+            value="test@cic-fake.gotcha"
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            htmlFor="update-password"
+          >
+            Password
+          </label>
+          <input
+            aria-describedby="update-password-error"
+            id="update-password"
+            name="password"
+            onChange={[Function]}
+            placeholder="New password"
+            type="password"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            htmlFor="update-passwordConfirmation"
+          >
+            Confirm Password
+          </label>
+          <input
+            aria-describedby="update-passwordConfirmation-error"
+            id="update-passwordConfirmation"
+            name="passwordConfirmation"
+            onChange={[Function]}
+            placeholder="Confirm new password"
+            type="password"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="row-1-p"
+    >
+      <div
+        className="form-input form-error"
+      >
+        <input
+          className="button-secondary button-with-room"
+          type="submit"
+          value="Save Changes"
+        />
+      </div>
+    </div>
+  </form>
   <div
-    className="row-1-p"
+    className="subscriptions"
   >
-    <p
-      className="overlay-copy"
+    <span>
+      Adjust your settings for email notifications:
+    </span>
+    <button
+      className="button-secondary outlined"
+      onClick={[Function]}
     >
-      Do you want to edit your account information?
-    </p>
-    <div
-      className="form-input"
-      style={Object {}}
-    >
-      <label
-        htmlFor="update-firstName"
-      >
-        First Name
-      </label>
-      <input
-        aria-describedby="update-firstName-error"
-        id="update-firstName"
-        name="firstName"
-        onChange={[Function]}
-        placeholder="First name"
-        type="text"
-        value="Rowan"
+      Notification Settings
+      <i
+        className="manicon manicon-arrow-long-right"
       />
-    </div>
-    <div
-      className="form-input"
-      style={Object {}}
-    >
-      <label
-        htmlFor="update-lastName"
-      >
-        Last Name
-      </label>
-      <input
-        aria-describedby="update-lastName-error"
-        id="update-lastName"
-        name="lastName"
-        onChange={[Function]}
-        placeholder="Last name"
-        type="text"
-        value="Ida"
-      />
-    </div>
-    <div
-      className="form-input"
-      style={Object {}}
-    >
-      <label
-        htmlFor="update-email"
-      >
-        Email
-      </label>
-      <input
-        aria-describedby="update-email-error"
-        id="update-email"
-        name="email"
-        onChange={[Function]}
-        placeholder="Email"
-        type="text"
-        value="test@cic-fake.gotcha"
-      />
-    </div>
-    <div
-      className="form-input"
-      style={Object {}}
-    >
-      <label
-        htmlFor="update-password"
-      >
-        Password
-      </label>
-      <input
-        aria-describedby="update-password-error"
-        id="update-password"
-        name="password"
-        onChange={[Function]}
-        placeholder="New password"
-        type="password"
-        value=""
-      />
-    </div>
-    <div
-      className="form-input"
-      style={Object {}}
-    >
-      <label
-        htmlFor="update-passwordConfirmation"
-      >
-        Confirm Password
-      </label>
-      <input
-        aria-describedby="update-passwordConfirmation-error"
-        id="update-passwordConfirmation"
-        name="passwordConfirmation"
-        onChange={[Function]}
-        placeholder="Confirm new password"
-        type="password"
-        value=""
-      />
-    </div>
+    </button>
   </div>
-  <div
-    className="row-1-p"
-  >
-    <div
-      className="form-input form-error"
-    >
-      <input
-        className="button-secondary button-with-room"
-        type="submit"
-        value="Save Changes"
-      />
-    </div>
-  </div>
-</form>
+</section>
 `;

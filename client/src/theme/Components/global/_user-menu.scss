@@ -80,6 +80,15 @@
     }
   }
 
+  .manicon-envelope-circle-right {
+    font-size: 24px;
+    vertical-align: top;
+
+    @include respond($break40) {
+      font-size: 27px;
+    }
+  }
+
 
   .manicon-person-pencil-simple {
     font-size: 38px;

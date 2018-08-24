@@ -5,5 +5,9 @@ FactoryBot.define do
     sequence(:email) { |n| "john#{SecureRandom.uuid}-@rambo.com" }
     password "bananarambo"
     password_confirmation "bananarambo"
+    notification_preferences_by_kind Hash.new({
+      digest: NotificationFrequency[:daily],
+      followed_projects: NotificationFrequency[:always]
+    })
   end
 end

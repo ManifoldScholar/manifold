@@ -77,6 +77,7 @@ class Text < ApplicationRecord
   # Delegations
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
   delegate :publication_date, to: :project, prefix: true, allow_nil: true
+  delegate :title, to: :category, prefix: true
 
   # Validation
   validates :spine,

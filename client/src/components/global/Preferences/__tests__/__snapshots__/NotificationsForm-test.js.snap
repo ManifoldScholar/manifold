@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = `
+<div
+  className="subscriptions"
+>
+  <h3
+    className="section-heading-secondary"
+  >
+    Project Activity
+  </h3>
+  <div
+    className="form-group"
+  >
+    <div
+      className="form-input"
+    >
+      <span
+        className="instructions"
+      >
+        Manifold can send you a daily or weekly email with information about texts,
+            resources, and resource collections that have been added to projects.
+      </span>
+    </div>
+    <div
+      className="form-input"
+    >
+      <label
+        htmlFor="digest"
+      >
+        How often would you like to be notified?
+      </label>
+      <span
+        className="instructions"
+      />
+      <label
+        className="form-toggle radio inline"
+      >
+        <input
+          checked={false}
+          name="digest"
+          onChange={[MockFunction]}
+          type="radio"
+          value="never"
+        />
+        <span
+          className="toggle-indicator"
+        />
+        <span
+          className="toggle-label"
+        >
+          Never
+        </span>
+      </label>
+      <label
+        className="form-toggle radio inline checked"
+      >
+        <input
+          checked={true}
+          name="digest"
+          onChange={[MockFunction]}
+          type="radio"
+          value="daily"
+        />
+        <span
+          className="toggle-indicator"
+        >
+          <i
+            className="manicon"
+          />
+        </span>
+        <span
+          className="toggle-label"
+        >
+          Daily
+        </span>
+      </label>
+      <label
+        className="form-toggle radio inline"
+      >
+        <input
+          checked={false}
+          name="digest"
+          onChange={[MockFunction]}
+          type="radio"
+          value="weekly"
+        />
+        <span
+          className="toggle-indicator"
+        />
+        <span
+          className="toggle-label"
+        >
+          Weekly
+        </span>
+      </label>
+    </div>
+  </div>
+  <h3
+    className="section-heading-secondary"
+  >
+    Other Activity
+  </h3>
+  <div
+    className="form-group"
+  >
+    <div
+      className="form-input"
+    >
+      <label
+        htmlFor="repliesToMe"
+      >
+        Notify you when someone replies to you?
+      </label>
+      <span
+        className="instructions"
+      >
+        Manifold will send you an email when a reply is posted to your annotations or comments.
+      </span>
+      <label
+        className="form-toggle radio inline checked"
+      >
+        <input
+          checked={true}
+          name="repliesToMe"
+          onChange={[MockFunction]}
+          type="radio"
+          value="never"
+        />
+        <span
+          className="toggle-indicator"
+        >
+          <i
+            className="manicon"
+          />
+        </span>
+        <span
+          className="toggle-label"
+        >
+          No
+        </span>
+      </label>
+      <label
+        className="form-toggle radio inline"
+      >
+        <input
+          checked={false}
+          name="repliesToMe"
+          onChange={[MockFunction]}
+          type="radio"
+          value="always"
+        />
+        <span
+          className="toggle-indicator"
+        />
+        <span
+          className="toggle-label"
+        >
+          Yes
+        </span>
+      </label>
+    </div>
+  </div>
+  <button
+    className="button-bare-primary"
+    onClick={[MockFunction]}
+  >
+    Unsubscribe From All
+  </button>
+</div>
+`;

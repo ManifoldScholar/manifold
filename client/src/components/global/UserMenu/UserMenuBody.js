@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { withRouter } from "react-router-dom";
+import lh from "helpers/linkHandler";
 
-export default class UserMenuBody extends Component {
+export class UserMenuBodyComponent extends Component {
   static propTypes = {
     hideUserMenu: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
     startLogout: PropTypes.func.isRequired,
     showLoginOverlay: PropTypes.func.isRequired,
     visible: PropTypes.bool
@@ -19,6 +22,12 @@ export default class UserMenuBody extends Component {
     event.preventDefault();
     this.props.hideUserMenu();
     this.props.showLoginOverlay();
+  };
+
+  handleNotificationsClick = event => {
+    event.preventDefault();
+    this.props.hideUserMenu();
+    this.props.history.push(lh.link("subscriptions"));
   };
 
   render() {
@@ -42,6 +51,15 @@ export default class UserMenuBody extends Component {
             </button>
           </li>
           <li>
+            <button onClick={this.handleNotificationsClick}>
+              <i
+                className="manicon manicon-envelope-circle-right"
+                aria-hidden="true"
+              />
+              {"Notifications"}
+            </button>
+          </li>
+          <li>
             <button onClick={this.logout}>
               <i
                 className="manicon manicon-circle-arrow-out-right"
@@ -55,3 +73,5 @@ export default class UserMenuBody extends Component {
     );
   }
 }
+
+export default withRouter(UserMenuBodyComponent);

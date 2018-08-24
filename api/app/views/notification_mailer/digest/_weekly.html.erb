@@ -1,0 +1,21 @@
+Here's your weekly <strong>Manifold</strong> activity update:
+
+<div>
+  <ul class="event-list">
+    <% @projects&.each do |project, events| %>
+      <% project = project.decorate %>
+      <li>
+        <% counted = events.group_by(&:subject_type).map { |type, list| pluralize(list.length, type) } %>
+        <%= counted.to_sentence %> added to <a href="<%= project.url %>"><%= project.title %></a>
+      </li>
+    <% end %>
+
+    <% @annotations_and_comments&.each do |project, events| %>
+      <% project = project.decorate %>
+      <li>
+        <% counted = events.group_by(&:subject_type).map { |type, list| pluralize(list.length, type) } %>
+        <%= counted.to_sentence %> added to <a href="<%= project.url %>"><%= project.title %></a>
+      </li>
+    <% end %>
+  </ul>
+</div>

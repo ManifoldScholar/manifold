@@ -56,7 +56,7 @@ RSpec.describe Resource, type: :model do
 
   it "destroys associated creation event" do
     resource = FactoryBot.create(:resource)
-    FactoryBot.create(:event, subject: resource, event_type: EventType[:resource_added])
+    FactoryBot.create(:event, subject: resource, event_type: "resource_added")
     expect { resource.destroy }.to change { Event.count }.from(1).to(0)
   end
 

@@ -27,9 +27,18 @@ class Event < ApplicationRecord
   delegate :slug, to: :project, prefix: true
 
   # Scopes
+  scope :created, ->(value) { where(created_at: value) }
   scope :by_type, lambda { |type|
-    return all unless type.present?
+    next all unless type.present?
     where(event_type: type)
+  }
+  scope :excluding_type, lambda { |type|
+    next all unless type.present?
+    where.not(event_type: type)
+  }
+  scope :by_subject_type, lambda { |type|
+    next all unless type.present?
+    where(subject_type: type)
   }
 
   # Validation
@@ -81,7 +90,7 @@ class Event < ApplicationRecord
   end
 
   def subject_slug
-    sluggables = %w(Project Resource Text ResourceCollection)
+    sluggables = %w(Project Resource Text ResourceCollection Collection)
     return nil unless sluggables.include? subject_type
     return subject.slug if subject&.respond_to?(:slug)
     nil
