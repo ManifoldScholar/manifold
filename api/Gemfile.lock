@@ -45,6 +45,10 @@ GEM
       suo
     activemodel (5.0.6)
       activesupport (= 5.0.6)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (5.0.6)
       activemodel (= 5.0.6)
       activesupport (= 5.0.6)
@@ -116,6 +120,12 @@ GEM
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
     down (4.5.0)
+    draper (3.0.1)
+      actionpack (~> 5.0)
+      activemodel (~> 5.0)
+      activemodel-serializers-xml (~> 1.0)
+      activesupport (~> 5.0)
+      request_store (~> 1.0)
     dux (0.8.0)
       yard_types
     elasticsearch (5.0.4)
@@ -507,6 +517,7 @@ DEPENDENCIES
   data_uri (~> 0.1.0)
   database_cleaner (~> 1.0)
   dotenv-rails (~> 2.0)
+  draper (~> 3.0)
   dux (~> 0.8.0)
   elasticsearch (~> 5.0)
   equalizer

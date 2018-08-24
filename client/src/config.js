@@ -81,6 +81,7 @@ const applicationConfiguration = {
         text_added: "Text Added",
         text_annotated: "Text Annotated",
         resource_added: "Resource Added",
+        comment_created: "Comment Created",
         tweet: "Tweet"
       },
       roles: {
@@ -99,6 +100,34 @@ const applicationConfiguration = {
               "It will not remove it from the project."
           }
         }
+      },
+      notificationPreferences: {
+        digest: [
+          {
+            key: "digestCommentsAndAnnotations",
+            label: "New Comments and Annotations",
+            instructions: "Include new annotations and comments"
+          }
+        ],
+        notifications: [
+          {
+            key: "repliesToMe",
+            label: "My Replies",
+            instructions:
+              "Notify me when someone replies to my annotations or comments"
+          },
+          {
+            key: "projectCommentsAndAnnotations",
+            label: "Project Comments and Annotations",
+            instructions:
+              "Notify me immediately when someone annotates or comments on a project I have access to"
+          },
+          {
+            key: "flaggedResources",
+            label: "Flagged Comments",
+            instructions: "Notify me when someone flags a comment or annotation"
+          }
+        ]
       },
       metadata: {
         seriesTitle: {

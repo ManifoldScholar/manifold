@@ -61,7 +61,7 @@ module Factory
     end
 
     def subject_attribution_name(_type, subject)
-      subject&.creator_name
+      subject&.creator_name if subject.respond_to? :creator_name
     end
 
     def subject_project(subject)
@@ -92,7 +92,7 @@ module Factory
       case type
       when ::EventType[:text_added]
         "/read/#{subject.id}"
-      when ::EventType[:resource_added]
+      when ::EventType[:collection_added], ::EventType[:resource_added]
         "/project/#{subject.project.id}/#{subject.class.name}/#{subject.id}"
       end
     end

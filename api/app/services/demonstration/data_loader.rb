@@ -97,8 +97,8 @@ module Demonstration
       u.last_name = "User"
       u.password = "manifold"
       u.password_confirmation = "manifold"
+      u.role = :admin
       u.save
-      u.add_role :admin
       @logger.info("Creating admin user: #{u.email}".green)
     end
   end

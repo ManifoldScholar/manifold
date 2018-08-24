@@ -291,5 +291,29 @@ export default {
       body: `${payload.data.attributes.title} has been updated.`,
       expiration: defaultExpiration
     };
+  },
+  [r.gAuthenticatedUserNotificationsUpdate]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: "Your notification settings have been updated.",
+      expiration: defaultExpiration
+    };
+  },
+  [r.feUnsubscribe]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: "You have been successfully unsubscribed from all email notifications.",
+      expiration: defaultExpiration
+    };
+  },
+  [`${r.feUnsubscribe}-error`]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Invalid Token",
+      body: "Could not unsubscribe from email notification.",
+      expiration: defaultExpiration
+    };
   }
 };

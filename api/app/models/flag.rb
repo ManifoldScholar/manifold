@@ -10,11 +10,11 @@ class Flag < ApplicationRecord
 
   # Scopes
   scope :by_creator, lambda { |creator|
-    return all unless creator.present?
+    next all unless creator.present?
     where(creator: creator)
   }
   scope :by_flaggable, lambda { |flaggable|
-    return all unless flaggable.present?
+    next all unless flaggable.present?
     where(flaggable: flaggable)
   }
 
@@ -23,5 +23,14 @@ class Flag < ApplicationRecord
 
   # # Validations
   # validates :flaggable, presence: true
+
+  # Callbacks
+  after_create :notify_admin!
+
+  private
+
+  def notify_admin!
+    Notifications::NotifyFlaggedResourceJob.perform_later flaggable
+  end
 
 end

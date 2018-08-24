@@ -6,6 +6,24 @@ RSpec.describe Comment, type: :model do
     expect(FactoryBot.build(:comment)).to be_valid
   end
 
+  it "enqueues a COMMENT_CREATED event on creation" do
+    subject = FactoryBot.create(:annotation)
+    expect(CreateEventJob).to receive(:perform_later).with(EventType[:comment_created], any_args)
+    FactoryBot.create(:comment, subject: subject)
+  end
+
+  it "enqueues a NotifyCommentParentAuthorsJob on creation" do
+    expect do
+      FactoryBot.create(:comment)
+    end.to have_enqueued_job(Notifications::NotifyCommentParentAuthorsJob)
+  end
+
+  it "enqueues a NotifyCommentProjectEditorsJob on creation" do
+    expect do
+      FactoryBot.create(:comment)
+    end.to have_enqueued_job(Notifications::NotifyCommentProjectEditorsJob)
+  end
+
   describe "is invalid when" do
     let(:comment) { FactoryBot.build(:comment) }
 

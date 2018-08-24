@@ -123,6 +123,12 @@ Rails.application.routes.draw do
         end
       end
 
+      namespace :notification_preferences do
+        namespace :relationships do
+          resource :unsubscribe, controller: "unsubscribe", only: [:create]
+        end
+      end
+
       resources :passwords, only: [:create, :update]
       post "passwords/admin_reset_password" => "passwords#admin_reset_password"
 
