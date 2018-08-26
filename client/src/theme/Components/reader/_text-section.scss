@@ -30,7 +30,6 @@
 }
 
 .text-section {
-  // Reader text temporary defaults
   font-family: 'freight-text-pro', serif;
   font-weight: $regular;
   line-height: 1.761;
@@ -53,7 +52,6 @@
     color: $accentPrimaryDark;
   }
 
-  // Temporary, until Lael and Naomi work out default header styles --ZD
   .cn {
     font-size: 1.2em;
   }
