@@ -1,5 +1,10 @@
 class EnforceIngestionReferentialIntegrity < ActiveRecord::Migration[5.0]
   def change
+
+    nullify_text! "ingestions with a nonexistent text" do
+      Ingestion.where.not(text_id: Text.unscoped.distinct.select(:id)).where.not(text_id: nil)
+    end
+
     destroy_and_delete! "ingestions without a project" do
       Ingestion.where(project_id: nil).or(Ingestion.where.not(project_id: Project.distinct.select(:id)))
     end
@@ -32,6 +37,28 @@ class EnforceIngestionReferentialIntegrity < ActiveRecord::Migration[5.0]
   end
 
   private
+
+  def nullify_text!(description)
+    scope = yield
+
+    Ingestion.reset_column_information
+
+    reversible do |dir|
+      dir.up do
+        say_with_time "Nullifying text for any #{description}" do
+          count = 0
+
+          scope.find_each do |ingestion|
+            ingestion.update_columns(text_id: nil)
+            count += 1
+          end
+
+          count
+        end
+
+      end
+    end
+  end
 
   def destroy_and_delete!(description)
     scope = yield

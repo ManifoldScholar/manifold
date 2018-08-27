@@ -60,6 +60,7 @@ class Text < ApplicationRecord
           dependent: :nullify, inverse_of: :published_text
   belongs_to :start_text_section, optional: true, class_name: "TextSection",
              inverse_of: :text_started_by
+  has_many :ingestions, dependent: :nullify, inverse_of: :text
   has_many :titles, class_name: "TextTitle", dependent: :destroy, inverse_of: :text
   has_many :text_subjects, dependent: :destroy
   has_many :subjects, through: :text_subjects
