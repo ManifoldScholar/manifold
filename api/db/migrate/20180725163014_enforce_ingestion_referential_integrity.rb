@@ -8,16 +8,8 @@ class EnforceIngestionReferentialIntegrity < ActiveRecord::Migration[5.0]
       Ingestion.where.not state: "finished"
     end
 
-    reversible do |dir|
-      dir.up do
-        say_with_time "Setting creator for unowned ingestions" do
-          User.reset_column_information
-
-          command_line_user_id = User.cli_user.id
-
-          Ingestion.where(creator_id: nil).update_all creator_id: command_line_user_id
-        end
-      end
+    destroy_and_delete! "unowned ingestions" do
+      Ingestion.where(creator_id: nil)
     end
 
     change_column_null :ingestions, :creator_id, false
