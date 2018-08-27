@@ -51,7 +51,7 @@ script:
   - /usr/bin/yarn test -- --maxWorkers=4
   - cd ../api
   - bundle install
-  - RAILS_ENV=test bundle exec rails db:migrate --trace
+  - RAILS_ENV=test bundle exec rails db:schema:load --trace
   - bundle exec rake db:test:prepare
   - bundle exec rspec spec -fd --tag ~@integration
 
