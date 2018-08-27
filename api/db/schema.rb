@@ -247,6 +247,10 @@ ActiveRecord::Schema.define(version: 20180821160457) do
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "state"
     t.string   "log",                                           array: true
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
     t.string   "strategy"
     t.string   "external_source_url"
     t.string   "ingestion_type"
@@ -255,10 +259,6 @@ ActiveRecord::Schema.define(version: 20180821160457) do
     t.uuid     "project_id",                       null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.datetime "source_updated_at"
-    t.integer  "source_file_size"
-    t.string   "source_content_type"
-    t.string   "source_file_name"
     t.jsonb    "source_data",         default: {}, null: false
     t.index ["creator_id"], name: "index_ingestions_on_creator_id", using: :btree
     t.index ["project_id"], name: "index_ingestions_on_project_id", using: :btree
