@@ -24,7 +24,8 @@ class Seed
       foreground_position: "absolute",
       foreground: File.open(Rails.root.join("app", "assets", "images", "seed-feature-foreground.png")),
       creator: creator,
-      foreground_top: "1.9em"
+      foreground_top: "1.9em",
+      live: true
     )
     # rubocop:enable Metrics/LineLength
   end
