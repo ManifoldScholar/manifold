@@ -70,6 +70,7 @@ export class SubscriptionsContainer extends Component {
 
   updateUser = event => {
     event.preventDefault();
+    window.scrollTo(0, 0);
     this.props.dispatch(
       request(
         meAPI.update(this.state),
