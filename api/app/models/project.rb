@@ -282,6 +282,6 @@ class Project < ApplicationRecord
   end
 
   def trigger_creation_event
-    Event.trigger(Event::PROJECT_CREATED, self)
+    Event.trigger(EventType[:project_created], self)
   end
 end

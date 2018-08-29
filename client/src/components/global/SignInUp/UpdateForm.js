@@ -7,6 +7,7 @@ import { Avatar, Form } from "components/global";
 import get from "lodash/get";
 import hasIn from "lodash/hasIn";
 import Dropzone from "react-dropzone";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
@@ -22,6 +23,7 @@ class UpdateFormContainer extends Component {
     response: PropTypes.object,
     authentication: PropTypes.object,
     hideSignInUpOverlay: PropTypes.func,
+    history: PropTypes.object,
     mode: PropTypes.string
   };
 
@@ -146,33 +148,23 @@ class UpdateFormContainer extends Component {
     return "";
   };
 
-  render() {
-    const errors = get(this.props.response, "errors") || [];
-    if (!this.props.authentication.currentUser) return null;
+  redirectToSubscriptions = event => {
+    event.preventDefault();
+    this.props.hideSignInUpOverlay();
+    this.props.history.push(lh.link("subscriptions"));
+  };
+
+  renderProfileForm(errors) {
     return (
-      <form
-        autoComplete="off"
-        className="sign-in-up-update"
-        method="post"
-        onSubmit={this.updateUser}
-      >
+      <div className="row-1-p">
         {this.props.mode === "new" ? (
           <div>
-            <h4 className="form-heading">Congratulations!</h4>
-            <p className="overlay-copy">
-              {`Your account has been successfully created and you are now
-                logged in to Manifold. From now on, I'm going to call you`}
-            </p>
-            <h4 className="nickname">{this.displayNickname()}</h4>
             <p className="overlay-copy">
               Would you like me to call you something else?
             </p>
           </div>
         ) : (
           <div>
-            <h4 className="form-heading">
-              Hello, <span className="nickname">{this.displayNickname()}</span>.
-            </h4>
             <p className="overlay-copy" id="update-nickname-label">
               Would you like to update your Nickname?
             </p>
@@ -354,16 +346,57 @@ class UpdateFormContainer extends Component {
             />
           </Form.Errorable>
         </div>
-        <div className="row-1-p">
-          <div className="form-input form-error">
-            <input
-              className="button-secondary button-with-room"
-              type="submit"
-              value="Save Changes"
-            />
+      </div>
+    );
+  }
+
+  render() {
+    const errors = get(this.props.response, "errors") || [];
+    const currentUser = this.props.authentication.currentUser;
+    if (!currentUser) return null;
+    return (
+      <section className="sign-in-up-update">
+        <form autoComplete="off" method="post" onSubmit={this.updateUser}>
+          {this.props.mode === "new" ? (
+            <div>
+              <h4 className="form-heading">Congratulations!</h4>
+              <p className="overlay-copy">
+                {`Your account has been successfully created and you are now
+                  logged in to Manifold. From now on, I'm going to call you`}
+              </p>
+              <h4 className="nickname">{this.displayNickname()}</h4>
+            </div>
+          ) : (
+            <div>
+              <h4 className="form-heading">
+                Hello,{" "}
+                <span className="nickname">{this.displayNickname()}</span>.
+              </h4>
+            </div>
+          )}
+          {this.renderProfileForm(errors)}
+          <div className="row-1-p">
+            <div className="form-input form-error">
+              <input
+                className="button-secondary button-with-room"
+                type="submit"
+                value="Save Changes"
+              />
+            </div>
           </div>
+        </form>
+
+        <div className="subscriptions">
+          <span>Adjust your settings for email notifications:</span>
+          <button
+            className="button-secondary outlined"
+            onClick={this.redirectToSubscriptions}
+          >
+            {`Notification Settings`}
+            <i className="manicon manicon-arrow-long-right" />
+          </button>
         </div>
-      </form>
+      </section>
     );
   }
 }

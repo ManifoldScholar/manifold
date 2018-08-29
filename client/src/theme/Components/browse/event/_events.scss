@@ -178,6 +178,14 @@
         }
       }
 
+      &.manicon-file-box {
+        padding-top: 0.22em;
+
+        &::before {
+          font-size: 0.5em;
+        }
+      }
+
       &.manicon-egg {
         padding-top: 0.23em;
 

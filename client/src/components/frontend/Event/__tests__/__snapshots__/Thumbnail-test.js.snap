@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Event.Thumbnail component renders thumbnail for ANNOTATION_ADD correctly 1`] = `
+exports[`Event.Thumbnail component renders thumbnail for annotation_added correctly 1`] = `
 <div
   className="event-thumbnail-primary"
 >
@@ -19,7 +19,7 @@ exports[`Event.Thumbnail component renders thumbnail for ANNOTATION_ADD correctl
 </div>
 `;
 
-exports[`Event.Thumbnail component renders thumbnail for PROJECT_CREATED correctly 1`] = `
+exports[`Event.Thumbnail component renders thumbnail for project_created correctly 1`] = `
 <div
   className="event-thumbnail-primary"
 >
@@ -38,7 +38,7 @@ exports[`Event.Thumbnail component renders thumbnail for PROJECT_CREATED correct
 </div>
 `;
 
-exports[`Event.Thumbnail component renders thumbnail for RESOURCE_ADDED correctly 1`] = `
+exports[`Event.Thumbnail component renders thumbnail for resource_added correctly 1`] = `
 <div
   className="event-thumbnail-primary"
 >
@@ -57,7 +57,7 @@ exports[`Event.Thumbnail component renders thumbnail for RESOURCE_ADDED correctl
 </div>
 `;
 
-exports[`Event.Thumbnail component renders thumbnail for TEXT_ADDED correctly 1`] = `
+exports[`Event.Thumbnail component renders thumbnail for text_added correctly 1`] = `
 <div
   className="event-thumbnail-primary"
 >
@@ -76,7 +76,7 @@ exports[`Event.Thumbnail component renders thumbnail for TEXT_ADDED correctly 1`
 </div>
 `;
 
-exports[`Event.Thumbnail component renders thumbnail for TWEET correctly 1`] = `
+exports[`Event.Thumbnail component renders thumbnail for tweet correctly 1`] = `
 <div
   className="event-thumbnail-primary"
 >

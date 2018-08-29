@@ -75,7 +75,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
               className="form-input"
             >
               <label
-                htmlFor="kind-26"
+                htmlFor="kind-25"
               >
                 Kind
               </label>
@@ -90,7 +90,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     className="manicon manicon-caret-down"
                   />
                   <select
-                    id="kind-26"
+                    id="kind-25"
                     onChange={[Function]}
                     value="image"
                   >
@@ -547,13 +547,13 @@ exports[`Backend Resource New Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[title]-text-input-15"
+              htmlFor="attributes[title]-text-input-14"
             >
               Title
             </label>
             <input
-              aria-describedby="attributes[title]-text-input-15"
-              id="attributes[title]-text-input-15"
+              aria-describedby="attributes[title]-text-input-14"
+              id="attributes[title]-text-input-14"
               onChange={[Function]}
               placeholder="Enter a resource title"
               type="text"
@@ -569,13 +569,13 @@ exports[`Backend Resource New Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="textarea-13"
+                htmlFor="textarea-12"
               >
                 Description
               </label>
               <textarea
-                aria-describedby="textarea-error-14"
-                id="textarea-13"
+                aria-describedby="textarea-error-13"
+                id="textarea-12"
                 onChange={[Function]}
                 placeholder="Enter a description"
                 style={
@@ -596,7 +596,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="upload-21"
+                htmlFor="upload-20"
               >
                 Image File
               </label>
@@ -610,8 +610,8 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                 className="form-dropzone style-square"
                 inputProps={
                   Object {
-                    "aria-describedby": "upload-error-22",
-                    "id": "upload-21",
+                    "aria-describedby": "upload-error-21",
+                    "id": "upload-20",
                   }
                 }
                 multiple={false}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180821160457) do
+ActiveRecord::Schema.define(version: 20180824222313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20180821160457) do
     t.datetime "updated_at",                             null: false
     t.string   "slug"
     t.integer  "collection_resources_count", default: 0
+    t.integer  "events_count",               default: 0
     t.index ["slug"], name: "index_collections_on_slug", unique: true, using: :btree
   end
 
@@ -100,8 +101,9 @@ ActiveRecord::Schema.define(version: 20180821160457) do
     t.datetime "updated_at",                     null: false
     t.boolean  "deleted",        default: false
     t.integer  "children_count", default: 0
-    t.integer  "flags_count"
+    t.integer  "flags_count",    default: 0
     t.integer  "sort_order"
+    t.integer  "events_count",   default: 0
     t.index ["created_at"], name: "index_comments_on_created_at", using: :brin
   end
 
@@ -279,6 +281,18 @@ ActiveRecord::Schema.define(version: 20180821160457) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "suffix"
+  end
+
+  create_table "notification_preferences", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "user_id",                      null: false
+    t.string   "kind",                         null: false
+    t.string   "frequency",  default: "never", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["frequency"], name: "index_notification_preferences_on_frequency", using: :btree
+    t.index ["kind"], name: "index_notification_preferences_on_kind", using: :btree
+    t.index ["user_id", "kind"], name: "index_notification_preferences_on_user_id_and_kind", unique: true, using: :btree
+    t.index ["user_id"], name: "index_notification_preferences_on_user_id", using: :btree
   end
 
   create_table "pages", force: :cascade do |t|
@@ -710,6 +724,7 @@ ActiveRecord::Schema.define(version: 20180821160457) do
   add_foreign_key "ingestions", "projects", on_delete: :restrict
   add_foreign_key "ingestions", "texts", on_delete: :nullify
   add_foreign_key "ingestions", "users", column: "creator_id", on_delete: :restrict
+  add_foreign_key "notification_preferences", "users", on_delete: :cascade
   add_foreign_key "resource_import_row_transitions", "resource_import_rows"
   add_foreign_key "resource_import_rows", "resource_imports", on_delete: :cascade
   add_foreign_key "resource_import_transitions", "resource_imports"

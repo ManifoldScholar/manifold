@@ -2,20 +2,11 @@
 # activity feed.
 class Event < ApplicationRecord
 
-  # Constants
-  PROJECT_CREATED = "PROJECT_CREATED".freeze
-  RESOURCE_ADDED = "RESOURCE_ADDED".freeze
-  TEXT_ADDED = "TEXT_ADDED".freeze
-  TEXT_ANNOTATED = "TEXT_ANNOTATED".freeze
-  TWEET = "TWEET".freeze
-  EVENT_TYPES = [
-    PROJECT_CREATED,
-    RESOURCE_ADDED,
-    TEXT_ADDED,
-    TEXT_ANNOTATED,
-    TWEET
-  ].freeze
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
+
+  # ClassyEnum
+  include ClassyEnum::ActiveRecord
+  classy_enum_attr :event_type
 
   # Authority
   include Authority::Abilities
@@ -36,13 +27,22 @@ class Event < ApplicationRecord
   delegate :slug, to: :project, prefix: true
 
   # Scopes
+  scope :created, ->(value) { where(created_at: value) }
   scope :by_type, lambda { |type|
-    return all unless type.present?
+    next all unless type.present?
     where(event_type: type)
+  }
+  scope :excluding_type, lambda { |type|
+    next all unless type.present?
+    where.not(event_type: type)
+  }
+  scope :by_subject_type, lambda { |type|
+    next all unless type.present?
+    where(subject_type: type)
   }
 
   # Validation
-  validates :event_type, presence: true, inclusion: { in: self::EVENT_TYPES }
+  validates :event_type, presence: true
 
   # Search
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
@@ -67,7 +67,7 @@ class Event < ApplicationRecord
 
   def self.trigger(type, subject)
     CreateEventJob.perform_later(
-      type,
+      type.to_s,
       subject_id: subject.id,
       subject_type: subject.class.name
     )
@@ -75,7 +75,7 @@ class Event < ApplicationRecord
 
   def self.trigger_now(type, subject)
     CreateEventJob.perform(
-      type,
+      type.to_s,
       subject_id: subject.id,
       subject_type: subject.class.name
     )
@@ -90,7 +90,7 @@ class Event < ApplicationRecord
   end
 
   def subject_slug
-    sluggables = %w(Project Resource Text ResourceCollection)
+    sluggables = %w(Project Resource Text ResourceCollection Collection)
     return nil unless sluggables.include? subject_type
     return subject.slug if subject&.respond_to?(:slug)
     nil

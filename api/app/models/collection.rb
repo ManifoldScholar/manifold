@@ -25,6 +25,12 @@ class Collection < ApplicationRecord
            dependent: :destroy
   has_many :resources, through: :collection_resources
   has_many :annotations, dependent: :destroy
+  has_one :collection_created_event,
+          -> { where event_type: EventType[:collection_added] },
+          class_name: Event,
+          as: :subject,
+          dependent: :destroy,
+          inverse_of: :subject
 
   has_formatted_attributes :title,
                            include_wrap: false
@@ -49,6 +55,9 @@ class Collection < ApplicationRecord
              highlight: [:title, :body])
 
   scope :search_import, -> { includes(:project) }
+
+  # Callbacks
+  after_commit :trigger_creation_event, on: [:create]
 
   def search_data
     {
@@ -78,6 +87,12 @@ class Collection < ApplicationRecord
 
   def to_s
     title
+  end
+
+  private
+
+  def trigger_creation_event
+    Event.trigger(EventType[:collection_added], self)
   end
 
 end

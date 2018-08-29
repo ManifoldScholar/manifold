@@ -30,11 +30,10 @@ RSpec.describe Resource, type: :model do
     expect(resource.tag_list.count).to eq(3)
   end
 
-  it "creates a RESOURCE_ADDED event on creation" do
-    resource = FactoryBot.create(:resource)
-    event = resource.project.events.first
-    expect(event).to_not be_nil
-    expect(event.event_type).to eq(Event::RESOURCE_ADDED)
+  it "enqueues a RESOURCE_ADDED event on creation" do
+    project = FactoryBot.create(:project)
+    expect(CreateEventJob).to receive(:perform_later).with(EventType[:resource_added], any_args)
+    FactoryBot.create(:resource, project: project)
   end
 
   context "when creating" do
@@ -57,6 +56,7 @@ RSpec.describe Resource, type: :model do
 
   it "destroys associated creation event" do
     resource = FactoryBot.create(:resource)
+    FactoryBot.create(:event, subject: resource, event_type: "resource_added")
     expect { resource.destroy }.to change { Event.count }.from(1).to(0)
   end
 

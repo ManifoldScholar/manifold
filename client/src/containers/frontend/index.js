@@ -13,6 +13,8 @@ import Page from "./Page";
 import ResourceDetail from "./ResourceDetail";
 import EventList from "./EventList";
 import Search from "./Search";
+import Subscriptions from "./Subscriptions";
+import Unsubscribe from "./Unsubscribe";
 
 export {
   CollectionDetail,
@@ -29,5 +31,7 @@ export {
   Page,
   ResourceDetail,
   EventList,
-  Search
+  Search,
+  Subscriptions,
+  Unsubscribe
 };

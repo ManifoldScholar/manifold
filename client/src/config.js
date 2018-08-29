@@ -77,11 +77,12 @@ const applicationConfiguration = {
         }
       },
       event_types: {
-        PROJECT_CREATED: "Project Created",
-        TEXT_ADDED: "Text Added",
-        TEXT_ANNOTATED: "Text Annotated",
-        RESOURCE_ADDED: "Resource Added",
-        TWEET: "Tweet"
+        project_created: "Project Created",
+        text_added: "Text Added",
+        text_annotated: "Text Annotated",
+        resource_added: "Resource Added",
+        comment_created: "Comment Created",
+        tweet: "Tweet"
       },
       roles: {
         admin: "Admin",
@@ -99,6 +100,34 @@ const applicationConfiguration = {
               "It will not remove it from the project."
           }
         }
+      },
+      notificationPreferences: {
+        digest: [
+          {
+            key: "digestCommentsAndAnnotations",
+            label: "Include New Comments and Annotations?"
+          }
+        ],
+        notifications: [
+          {
+            key: "repliesToMe",
+            label: "Notify you when someone replies to you?",
+            instructions:
+              "Manifold will send you an email when a reply is posted to your annotations or comments."
+          },
+          {
+            key: "projectCommentsAndAnnotations",
+            label: "Notify you of all Comments and Annotations?",
+            instructions:
+              "Manifold will send you an email anytime a comment or annotation is created"
+          },
+          {
+            key: "flaggedResources",
+            label: "Notify me when comments are flagged.",
+            instructions:
+              "Anytime a user flags a comment, you will receive email notification."
+          }
+        ]
       },
       metadata: {
         seriesTitle: {

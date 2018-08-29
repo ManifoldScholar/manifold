@@ -1,0 +1,51 @@
+Here's your daily <strong>Manifold</strong> activity update:
+
+<% if @projects.present? %>
+  <div>
+    <% @projects.each do |project, events| %>
+      <hr style="margin: 45px 0 20px;" />
+      <%= render "notification_mailer/digest/daily/project_header", project: project.decorate %>
+      <% events.group_by(&:subject_type).each do |event_type, event_list| %>
+        <div class="event-group">
+          <h3><%= event_type.pluralize %> Added Today:</h3>
+          <ul class="events">
+            <% event_list.each do |event| %>
+              <%= render "notification_mailer/digest/daily/#{event_type.downcase}_event", event: event %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <% if @annotations_and_comments.present? %>
+        <% @annotations_and_comments.select { |subject_project| subject_project == project }.each do |_subject_project, interaction_events| %>
+          <% interaction_events.group_by(&:subject_type).each do |event_type, event_list| %>
+            <div class="event-group">
+              <h3><%= event_type %>s Added Today:</h3>
+              <ul>
+                <% event_list.each do |event| %>
+                  <%= render "notification_mailer/digest/daily/#{event_type.downcase}_event", event: event %>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <% if @annotations_and_comments.present? %>
+    <% @annotations_and_comments.each do |project, events| %>
+      <hr style="margin: 45px 0 20px;" />
+      <%= render "notification_mailer/digest/daily/project_header", project: project.decorate %>
+      <% events.group_by(&:subject_type).each do |event_type, event_list| %>
+        <div class="event-group">
+          <h3><%= event_type %>s Added Today:</h3>
+          <ul class="events">
+            <% event_list.each do |event| %>
+              <%= render "notification_mailer/digest/daily/#{event_type.downcase}_event", event: event %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

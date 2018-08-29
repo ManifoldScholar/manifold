@@ -10,4 +10,8 @@ class ApplicationMailer < ActionMailer::Base
     @client_url = Rails.configuration.manifold.url
     @installation_name = @settings.general[:installation_name]
   end
+
+  def hide_valediction
+    @closing = nil
+  end
 end

@@ -58,6 +58,13 @@ class Annotation < ApplicationRecord
   belongs_to :collection, optional: true
   has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject,
                       counter_cache: :comments_count
+  has_one :text, through: :text_section
+  has_one :project, through: :text
+  has_one :annotation_created_event, -> { where event_type: EventType[:text_annotated] },
+          class_name: Event,
+          as: :subject,
+          dependent: :destroy,
+          inverse_of: :subject
 
   # Validations
   validates :text_section, presence: true
@@ -76,6 +83,7 @@ class Annotation < ApplicationRecord
 
   # Delegations
   delegate :text, to: :text_section, allow_nil: true
+  delegate :title, to: :text, prefix: true
   delegate :project, to: :text, allow_nil: true
   delegate :text_node_for, to: :text_section, prefix: true
   delegate :text_nodes, to: :text_section, prefix: true
@@ -86,6 +94,9 @@ class Annotation < ApplicationRecord
              highlight: [:title, :body])
 
   scope :search_import, -> { includes(:creator, text_section: { text: :project }) }
+
+  # Callbacks
+  after_commit :trigger_event_creation, on: [:create]
 
   def search_data
     {
@@ -144,6 +155,13 @@ class Annotation < ApplicationRecord
 
   def public?
     !private
+  end
+
+  private
+
+  def trigger_event_creation
+    return if [TYPE_HIGHLIGHT, TYPE_RESOURCE].include? format
+    Event.trigger(EventType[:text_annotated], self)
   end
 
 end

@@ -4,12 +4,11 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>Title</title>
+  <title>A Manifold Email</title>
   <link href="mail_styles.css" rel="stylesheet" />
 </head>
 
 <body>
-<!-- <style> -->
 <table class="body" width="100%" align="center">
   <tr>
     <td>
@@ -32,6 +31,13 @@
             </p>
           </td>
         </tr>
+        <% if @unsubscribe_token %>
+        <tr>
+          <td>
+            <a width="50%" href="<%= ClientURL.call(:subscriptions) %>">Manage Notification Settings</a> | <a width="50%" href="<%= ClientURL.call(:unsubscribe, token: @unsubscribe_token) %>">Unsubscribe All</a>
+          </td>
+        </tr>
+        <% end %>
         <tr>
           <td class="hr"></td>
         </tr>

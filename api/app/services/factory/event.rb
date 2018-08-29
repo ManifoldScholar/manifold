@@ -30,7 +30,7 @@ module Factory
       raise_no_subject unless subject
       project = subject_project(subject)
       event = ::Event.find_or_create_by(
-        event_type: ::Event::TWEET,
+        event_type: ::EventType[:tweet],
         project: project,
         subject: query,
         external_subject_id: tweet.id,
@@ -61,7 +61,7 @@ module Factory
     end
 
     def subject_attribution_name(_type, subject)
-      subject&.creator_name
+      subject&.creator_name if subject.respond_to? :creator_name
     end
 
     def subject_project(subject)
@@ -90,10 +90,10 @@ module Factory
 
     def new_text_event_url(type, subject)
       case type
-      when ::Event::TEXT_ADDED
+      when ::EventType[:text_added]
         "/read/#{subject.id}"
-      when ::Event::RESOURCE_ADDED
-        "/project/#{subject.project.id}/resource/#{subject.id}"
+      when ::EventType[:collection_added], ::EventType[:resource_added]
+        "/project/#{subject.project.id}/#{subject.class.name}/#{subject.id}"
       end
     end
 
@@ -123,7 +123,7 @@ module Factory
     end
 
     def t(path, type)
-      key = "services.factory.event.#{path}.#{type.downcase}"
+      key = "services.factory.event.#{path}.#{type.to_s.downcase}"
       return nil unless i18n_set?(key)
       I18n.t(key, global_installation_name: @settings.general[:installation_name])
     end

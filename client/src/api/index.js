@@ -30,3 +30,4 @@ export ApiClient from "./client";
 export notifications from "./notifications";
 export resourceImportsAPI from "./resources/resourceImports";
 export contactsAPI from "./resources/contacts";
+export notificationPreferencesAPI from "./resources/notificationPreferences";

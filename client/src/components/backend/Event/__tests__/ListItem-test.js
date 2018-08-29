@@ -8,7 +8,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("Event.ListItem component", () => {
   const entity = {
     attributes: {
-      eventType: "TWEET",
+      eventType: "tweet",
       eventTitle: "Hammer To Fall",
       excerpt:
         "He who grew up tall and proud in the shadow of the mushroom cloud"

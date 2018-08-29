@@ -1,11 +1,16 @@
 <% if @user %>
-  Hi <%= @user.nickname %>,
+Hi <%= @user.nickname %>,
 <% end %>
 
-<%= yield %>
+<%= yield -%>
 
+<% if @closing %>
 <%= @closing %>
 
+<% end %>
 --
 Powered by Manifold Scholarship
 http://manifoldapp.org
+
+Manage notification preferences: http://<%= ENV["DOMAIN"] %>/subscriptions
+Unsubscribe: http://<%= ENV["DOMAIN"] %>/unsubscribe/

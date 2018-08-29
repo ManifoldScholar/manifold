@@ -8,13 +8,15 @@ class User < ApplicationRecord
   include Authority::UserAbilities
   include Concerns::SerializedAbilitiesOn
   include Concerns::SerializedAbilitiesFor
+  include Concerns::NotificationPreferences
   include Filterable
   include Recoverable
   include Attachments
   include WithParsedName
 
   # Rolify
-  rolify
+  rolify after_add: :sync_notification_preferences!,
+         after_remove: :sync_notification_preferences!
   attr_reader :pending_role
 
   # Associations

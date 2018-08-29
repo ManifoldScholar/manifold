@@ -23,8 +23,12 @@ class ProjectSerializer < ProjectPartialSerializer
   has_many :twitter_queries
   has_many :permitted_users
 
+  def filtered_events
+    object.events.excluding_type(%w(comment_created text_annotated))
+  end
+
   def event_count
-    object.events.count
+    filtered_events.count
   end
 
   def uncollected_resources_count
@@ -36,11 +40,11 @@ class ProjectSerializer < ProjectPartialSerializer
   end
 
   def events
-    object.events.limit(6)
+    filtered_events.limit(6)
   end
 
   def event_types
-    object.events.pluck(:event_type).uniq
+    filtered_events.pluck(:event_type).uniq
   end
 
   def published_text_toc_id

@@ -30,17 +30,28 @@ export default class Event extends PureComponent {
   };
 
   eventProps() {
-    const type = this.props.event.attributes.eventType;
-    if (type === "ANNOTATION_CREATED") return this.propsForAnnotationCreated();
-    if (type === "TWEET") return this.propsForTweet();
-    if (type === "RESOURCE_ADDED") return this.propsForResourceAdded();
-    if (type === "TEXT_ADDED") return this.propsForTextAdded();
-    if (type === "PROJECT_CREATED") return this.propsForProjectCreated();
-    return { visible: false };
+    const attributes = this.props.event.attributes;
+    const type = attributes.eventType;
+
+    switch (type) {
+      case "annotation_created":
+        return this.propsForAnnotationCreated(attributes);
+      case "tweet":
+        return this.propsForTweet(attributes);
+      case "resource_added":
+        return this.propsForResourceAdded(attributes);
+      case "text_added":
+        return this.propsForTextAdded(attributes);
+      case "project_created":
+        return this.propsForProjectCreated(attributes);
+      case "collection_added":
+        return this.propsForCollectionAdded(attributes);
+      default:
+        return { visible: false };
+    }
   }
 
-  propsForAnnotationCreated() {
-    const attr = this.props.event.attributes;
+  propsForAnnotationCreated(attr) {
     return {
       type: attr.eventType,
       postAttribution: attr.attribution,
@@ -48,8 +59,7 @@ export default class Event extends PureComponent {
     };
   }
 
-  propsForTweet() {
-    const attr = this.props.event.attributes;
+  propsForTweet(attr) {
     const contentProps = {
       excerpt: attr.excerpt,
       options: { hashtag: "twitter", mention: "twitter" }
@@ -77,8 +87,7 @@ export default class Event extends PureComponent {
     };
   }
 
-  propsForProjectCreated() {
-    const attr = this.props.event.attributes;
+  propsForProjectCreated(attr) {
     return {
       type: attr.eventType,
       iconClass: "manicon manicon-egg",
@@ -90,8 +99,7 @@ export default class Event extends PureComponent {
     };
   }
 
-  propsForTextAdded() {
-    const attr = this.props.event.attributes;
+  propsForTextAdded(attr) {
     return {
       type: attr.eventType,
       date: attr.createdAt,
@@ -104,8 +112,7 @@ export default class Event extends PureComponent {
     };
   }
 
-  propsForResourceAdded() {
-    const attr = this.props.event.attributes;
+  propsForResourceAdded(attr) {
     return {
       type: attr.eventType,
       date: attr.createdAt,
@@ -116,6 +123,23 @@ export default class Event extends PureComponent {
       linkPrompt: "View Resource",
       linkHref: lh.link(
         "frontendProjectResource",
+        attr.projectSlug,
+        attr.subjectSlug
+      )
+    };
+  }
+
+  propsForCollectionAdded(attr) {
+    return {
+      type: attr.eventType,
+      date: attr.createdAt,
+      datePrefix: "Collection Added",
+      dateFormat: "MMMM Do, YYYY",
+      title: attr.subjectTitle,
+      iconClass: "manicon manicon-file-box",
+      linkPrompt: "View Collection",
+      linkHref: lh.link(
+        "frontendProjectCollection",
         attr.projectSlug,
         attr.subjectSlug
       )
