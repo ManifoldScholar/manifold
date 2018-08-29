@@ -1,9 +1,10 @@
 class NotificationMailerPreview < ActionMailer::Preview
-  # Accessible from http://manifold.lvh/rails/mailers/notification_mailer/digest.html
+  # Accessible from http://manifold.lvh/rails/mailers/notification_mailer/digest_daily.html
   def digest_daily
     NotificationMailer.digest(user, "daily", events)
   end
 
+  # Accessible from http://manifold.lvh/rails/mailers/notification_mailer/digest_weekly.html
   def digest_weekly
     NotificationMailer.digest(user, "weekly", events)
   end

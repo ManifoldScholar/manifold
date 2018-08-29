@@ -40,7 +40,7 @@ class Comment < ApplicationRecord
   validates :body, :subject, presence: true
 
   # Callbacks
-  after_create :notify_parent_authors!, :notify_project_editors!
+  after_commit :enqueue_comment_notifications, on: [:create]
   after_commit :trigger_event_creation, on: [:create]
 
   def on_resource?
@@ -59,18 +59,18 @@ class Comment < ApplicationRecord
     subject.text_title if subject.respond_to? :text_title
   end
 
+  def reply_to_self?
+    parent && parent.creator_id == creator_id
+  end
+
   private
 
   def trigger_event_creation
     Event.trigger(EventType[:comment_created], self)
   end
 
-  def notify_parent_authors!
-    Notifications::NotifyCommentParentAuthorsJob.perform_later self
-  end
-
-  def notify_project_editors!
-    Notifications::NotifyCommentProjectEditorsJob.perform_later self
+  def enqueue_comment_notifications
+    Notifications::EnqueueCommentNotificationsJob.perform_later id
   end
 
 end

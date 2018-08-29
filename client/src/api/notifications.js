@@ -304,7 +304,8 @@ export default {
     return {
       level: 0,
       heading: "Success!",
-      body: "You have been successfully unsubscribed from all email notifications.",
+      body:
+        "You have been successfully unsubscribed from all email notifications.",
       expiration: defaultExpiration
     };
   },

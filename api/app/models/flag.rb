@@ -25,12 +25,12 @@ class Flag < ApplicationRecord
   # validates :flaggable, presence: true
 
   # Callbacks
-  after_create :notify_admin!
+  after_commit :enqueue_flag_notifications, on: [:create]
 
   private
 
-  def notify_admin!
-    Notifications::NotifyFlaggedResourceJob.perform_later flaggable
+  def enqueue_flag_notifications
+    Notifications::EnqueueFlagNotificationsJob.perform_later id
   end
 
 end

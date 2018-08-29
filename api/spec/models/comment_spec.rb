@@ -12,16 +12,10 @@ RSpec.describe Comment, type: :model do
     FactoryBot.create(:comment, subject: subject)
   end
 
-  it "enqueues a NotifyCommentParentAuthorsJob on creation" do
+  it "enqueues a EnqueueCommentNotificationsJob on creation" do
     expect do
       FactoryBot.create(:comment)
-    end.to have_enqueued_job(Notifications::NotifyCommentParentAuthorsJob)
-  end
-
-  it "enqueues a NotifyCommentProjectEditorsJob on creation" do
-    expect do
-      FactoryBot.create(:comment)
-    end.to have_enqueued_job(Notifications::NotifyCommentProjectEditorsJob)
+    end.to have_enqueued_job(Notifications::EnqueueCommentNotificationsJob)
   end
 
   describe "is invalid when" do

@@ -105,27 +105,27 @@ const applicationConfiguration = {
         digest: [
           {
             key: "digestCommentsAndAnnotations",
-            label: "New Comments and Annotations",
-            instructions: "Include new annotations and comments"
+            label: "Include New Comments and Annotations?"
           }
         ],
         notifications: [
           {
             key: "repliesToMe",
-            label: "My Replies",
+            label: "Notify you when someone replies to you?",
             instructions:
-              "Notify me when someone replies to my annotations or comments"
+              "Manifold will send you an email when a reply is posted to your annotations or comments."
           },
           {
             key: "projectCommentsAndAnnotations",
-            label: "Project Comments and Annotations",
+            label: "Notify you of all Comments and Annotations?",
             instructions:
-              "Notify me immediately when someone annotates or comments on a project I have access to"
+              "Manifold will send you an email anytime a comment or annotation is created"
           },
           {
             key: "flaggedResources",
-            label: "Flagged Comments",
-            instructions: "Notify me when someone flags a comment or annotation"
+            label: "Notify me when comments are flagged.",
+            instructions:
+              "Anytime a user flags a comment, you will receive email notification."
           }
         ]
       },

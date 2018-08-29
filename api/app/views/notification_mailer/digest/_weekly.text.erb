@@ -1,0 +1,12 @@
+
+Here's your weekly Manifold activity update:
+<% @projects&.each do |project, events| %><% project = project.decorate %>
+<% counted = events.group_by(&:subject_type).map {|type, list| pluralize(list.length, type)} %>
+* <%= counted.to_sentence %> added to "<%= project.title %>"
+> <%= project.url %>
+<% end %>
+<% @annotations_and_comments&.each do |project, events| %><% project = project.decorate %>
+<% counted = events.group_by(&:subject_type).map {|type, list| pluralize(list.length, type)} %>
+* <%= counted.to_sentence %> added to "<%= project.title %>"
+> <%= project.url %>
+<% end %>

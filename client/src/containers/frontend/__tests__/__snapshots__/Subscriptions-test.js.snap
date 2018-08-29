@@ -37,10 +37,20 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
           <div
             className="form-input"
           >
+            <span
+              className="instructions"
+            >
+              Manifold can send you a daily or weekly email with information about texts,
+            resources, and resource collections that have been added to projects.
+            </span>
+          </div>
+          <div
+            className="form-input"
+          >
             <label
               htmlFor="digest"
             >
-              Frequency
+              How often would you like to be notified?
             </label>
             <span
               className="instructions"
@@ -122,12 +132,12 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
             <label
               htmlFor="repliesToMe"
             >
-              My Replies
+              Notify you when someone replies to you?
             </label>
             <span
               className="instructions"
             >
-              Notify me when someone replies to my annotations or comments
+              Manifold will send you an email when a reply is posted to your annotations or comments.
             </span>
             <label
               className="form-toggle radio inline"

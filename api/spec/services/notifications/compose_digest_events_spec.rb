@@ -44,8 +44,8 @@ RSpec.describe Notifications::ComposeDigestEvents do
       end
 
       it "contains the correct events" do
-        events = described_class.run(user: user,
-                                     frequency: NotificationFrequency["weekly"]).result
+        events = described_class.run(user: user, frequency: "weekly").result
+
         expect(events["projects"].values).to match_array [[@a_text_event], [@b_resource_event], [@c_collection_event]]
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe Notifications::ComposeDigestEvents do
       end
 
       it "contains the correct events" do
-        events = described_class.run(user: user, frequency: NotificationFrequency[:weekly]).result
+        events = described_class.run(user: user, frequency: "weekly").result
         expect(events["projects"].values).to match_array [[@a_text_event], [@c_collection_event]]
       end
     end
@@ -66,7 +66,7 @@ RSpec.describe Notifications::ComposeDigestEvents do
         it "to the user's favorite projects" do
           set_user_preferences(user, { digest: NotificationFrequency[:weekly],
                                        digest_comments_and_annotations: NotificationFrequency[:always] })
-          events = described_class.run(user: user, frequency: NotificationFrequency[:weekly]).result
+          events = described_class.run(user: user, frequency: "weekly").result
           expect(events["annotations_and_comments"].values).to match_array [[@a_annotation_event], [@c_comment_event]]
         end
 
@@ -74,7 +74,7 @@ RSpec.describe Notifications::ComposeDigestEvents do
           set_user_preferences(user, { digest: NotificationFrequency[:weekly],
                                        projects: NotificationFrequency[:always],
                                        digest_comments_and_annotations: NotificationFrequency[:always] })
-          events = described_class.run(user: user, frequency: NotificationFrequency[:weekly]).result
+          events = described_class.run(user: user, frequency: "weekly").result
           expect(events["annotations_and_comments"].values).to match_array [[@a_annotation_event], [@b_annotation_event], [@c_comment_event]]
         end
       end

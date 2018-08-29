@@ -1,7 +1,8 @@
 module Notifications
   class ComposeDigestEvents < ActiveInteraction::Base
     object :user
-    object :frequency, class: "NotificationFrequency"
+    string :frequency
+    validates_inclusion_of :frequency, in: NotificationFrequency
 
     def execute
       compile_events
@@ -69,7 +70,7 @@ module Notifications
     end
 
     def date_range
-      time = if frequency == NotificationFrequency[:daily]
+      time = if NotificationFrequency.fetch(frequency) == NotificationFrequency[:daily]
                Time.current.yesterday
              else
                Time.current.last_week
@@ -77,5 +78,6 @@ module Notifications
 
       time.at_beginning_of_day..Time.current.at_beginning_of_day
     end
+
   end
 end

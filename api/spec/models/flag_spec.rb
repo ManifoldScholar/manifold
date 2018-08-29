@@ -6,9 +6,9 @@ RSpec.describe Flag, type: :model do
     expect(FactoryBot.build(:flag)).to be_valid
   end
 
-  it "enqueues an NotifyFlaggedResourceJob job on create" do
+  it "enqueues an EnqueueFlagNotificationsJob job on create" do
     comment = FactoryBot.create(:comment)
-    expect(Notifications::NotifyFlaggedResourceJob).to receive(:perform_later).with(comment)
+    expect(Notifications::EnqueueFlagNotificationsJob).to receive(:perform_later)
     FactoryBot.create(:flag, flaggable: comment)
   end
 

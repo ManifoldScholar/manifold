@@ -13,9 +13,9 @@ module Clockwork
     ExpireTusUploadsJob.perform_later
   end
   every(1.day, "enqueue_user_daily_digests", at: "06:00") do
-    Notifications::EnqueueUserDigestsJob.perform_later NotificationFrequency[:daily]
+    Notifications::EnqueueDigestsJob.perform_later "daily"
   end
   every(1.week, "enqueue_user_weekly_digests", at: "Sunday 06:00") do
-    Notifications::EnqueueUserDigestsJob.perform_later NotificationFrequency[:weekly]
+    Notifications::EnqueueDigestsJob.perform_later "weekly"
   end
 end

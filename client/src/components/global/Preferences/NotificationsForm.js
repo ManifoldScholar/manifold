@@ -19,6 +19,12 @@ export default class NotificationsForm extends Component {
       <div className="subscriptions">
         <h3 className="section-heading-secondary">Project Activity</h3>
         <div className="form-group">
+          <div className="form-input">
+            <span className="instructions">
+              {`Manifold can send you a daily or weekly email with information about texts,
+            resources, and resource collections that have been added to projects.`}
+            </span>
+          </div>
           {this.renderDigestFrequency(preferences)}
           <Collapse isOpened={digestOpen}>
             {this.renderDigestContent(preferences)}
@@ -42,7 +48,7 @@ export default class NotificationsForm extends Component {
     const items = config.app.locale.notificationPreferences.digest;
 
     const options = [
-      { key: "followedProjects", label: "Projects I'm Following" }
+      { key: "followedProjects", label: "Only Projects I'm Following" }
     ];
     if (preferences.projects)
       options.unshift({ key: "projects", label: "All Projects" });
@@ -50,10 +56,9 @@ export default class NotificationsForm extends Component {
     return (
       <React.Fragment>
         <div className="form-input" key="digest-projects">
-          <label htmlFor="digest-projects">Projects Included</label>
-          <span className="instructions">
-            {`Include updates from all projects I have read access to or projects I'm following only.`}
-          </span>
+          <label htmlFor="digest-projects">
+            Which projects should be included?
+          </label>
           {options.map(option => {
             const checked = preferences[option.key] === "always";
             const inputClassNames = classNames(
@@ -94,7 +99,10 @@ export default class NotificationsForm extends Component {
   }
 
   renderDigestFrequency(preferences) {
-    const preference = { key: "digest", label: "Frequency" };
+    const preference = {
+      key: "digest",
+      label: "How often would you like to be notified?"
+    };
     const options = { never: "Never", daily: "Daily", weekly: "Weekly" };
 
     return this.renderContentOption(preference, preferences.digest, options);
