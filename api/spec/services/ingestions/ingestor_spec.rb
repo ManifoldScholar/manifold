@@ -32,7 +32,7 @@ RSpec.describe Ingestions::Ingestor do
   end
 
   describe "manifest ingestion" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest") }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local") }
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)
       allow(ingestion).to receive(:ingestion_source).and_return(path)

@@ -22,11 +22,10 @@ module Ingestions
           fetched = compose Ingestions::Fetcher, url: source["source_path"]
           next unless fetched.present?
           filename = Digest::MD5.hexdigest(source["source_path"])
-          inspector.update_sources_and_toc source["source_path"],
-                                           "#{filename}.html"
-          context.update_working_dirs fetched[:file].path,
-                                      filename
+          inspector.update_source_map(source["source_path"], "#{filename}.html")
+          context.update_working_dirs(fetched[:file].path, filename)
         end
+        inspector.update_toc
       end
       # rubocop:enable Metrics/AbcSize
 
