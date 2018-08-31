@@ -101,31 +101,34 @@ module Ingestions
           source_map.select { |source| context.url? source["source_path"] }
         end
 
-        def update_sources_and_toc(original_path, new_path)
-          update_source_map original_path, new_path
-          transform_toc_item original_path, new_path
-        end
-
         def update_source_map(original_path, new_path)
           item = source_map.detect do |source|
             source["source_path"] == original_path
           end
           return false unless item.present?
-
+          item["remote_source_path"] = item["source_path"]
           item["source_path"] = new_path
         end
 
-        def transform_toc_item(original_path, new_path, toc_items = toc)
-          item = toc_items.detect do |source|
-            break source if source["source_path"] == original_path
+        # Called after remote files have been fetched. Updates TOC to point at the
+        # fetched HTML file instead of the remote url.
+        def update_toc
+          @toc = update_toc_entries(toc)
+        end
 
-            if source["children"].present?
-              transform_toc_item original_path, new_path, source["children"]
-            end
+        def update_toc_entries(entries)
+          entries.map do |entry|
+            update_toc_entry(entry)
           end
-          return false unless item.present?
+        end
 
-          item["source_path"] = new_path
+        def update_toc_entry(entry)
+          sm_entry = source_map.detect do |compare|
+            compare[:remote_source_path] == entry["source_path"]
+          end
+          entry["source_path"] = sm_entry[:source_path] if sm_entry
+          entry["children"] = update_toc_entries(entry["children"]) if entry["children"]
+          entry
         end
 
         protected

@@ -18,6 +18,7 @@ module Ingestions
 
       # @api private
       # @return [void]
+      # rubocop:disable Metrics/AbcSize
       def watch_for_uncaught_exceptions!
         yield if block_given?
       rescue StandardError => e
@@ -30,6 +31,7 @@ module Ingestions
         end
         errors.add :base, error
       end
+      # rubocop:enable Metrics/AbcSize
     end
   end
 end

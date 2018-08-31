@@ -75,7 +75,7 @@ RSpec.describe Ingestions::Strategies::Manifest do
   end
 
   context "when collection of different file kinds" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest") }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local") }
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
@@ -86,4 +86,26 @@ RSpec.describe Ingestions::Strategies::Manifest do
 
     include_examples "outcome assertions"
   end
+
+  context "when the manifest is composed of nested, remote sources", slow: true do
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_remote") }
+    let(:ingestion) do
+      ingestion = FactoryBot.create(:ingestion, text: nil)
+      allow(ingestion).to receive(:ingestion_source).and_return(path)
+      ingestion
+    end
+    let(:context) { create_context(ingestion) }
+    let!(:manifest) { described_class.run(context: context).result }
+    it "has the correct TOC" do
+      expected = [
+        { "label" => "Section1", "source_path" => "2b4f3aa2fe044dbd607d21f2e949eb06.html", "start_section" => true },
+        { "label" => "Section2", "source_path" => "e9e7fd64ac05018a6c9289f686581212.html", "children" => [
+          { "label" => "Section2-a", "source_path" => "a6b4fe5e132fe438611f444deec4f90a.html" }
+        ]}
+      ]
+      expect(manifest[:attributes][:toc]).to eq expected
+    end
+
+  end
+
 end
