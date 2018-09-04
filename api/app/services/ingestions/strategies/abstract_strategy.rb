@@ -21,7 +21,7 @@ module Ingestions
           @manifest = perform
         end
 
-        manifest
+        @manifest
       end
 
       def ingestible?
