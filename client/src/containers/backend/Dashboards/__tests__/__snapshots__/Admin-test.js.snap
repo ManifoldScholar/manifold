@@ -16,17 +16,26 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
             className="section-heading-secondary"
           >
             <h3>
-              <i
-                aria-hidden="true"
-                className="manicon manicon-stack"
-              />
-              Projects
-               
-              <span
-                className="list-total"
+              <a
+                href="/backend/projects"
+                onClick={[Function]}
               >
-                2 projects
-              </span>
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-stack"
+                />
+                Projects
+              </a>
+              <a
+                href="/backend/projects"
+                onClick={[Function]}
+              >
+                <span
+                  className="list-total"
+                >
+                  2 projects
+                </span>
+              </a>
             </h3>
           </header>
           <div>

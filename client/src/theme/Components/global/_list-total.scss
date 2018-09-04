@@ -28,6 +28,10 @@
     color: $neutral75;
   }
 
+  .section-heading-secondary a:hover & {
+    color: $accentPrimary;
+  }
+
   .backend-header.section-heading-secondary & {
     float: none;
     font-size: inherit;
