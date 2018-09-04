@@ -17,7 +17,7 @@ module Api
           { resources: [:tags] }
         ]
 
-        Project.filter(
+        Project.filter_if_not_featured(
           with_pagination!(project_filter_params),
           scope: scope_visibility.includes(includes),
           user: current_user

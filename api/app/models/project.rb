@@ -140,7 +140,7 @@ class Project < ApplicationRecord
   # Scopes
   scope :by_featured, lambda { |featured|
     next all if featured.nil?
-    where(featured: to_boolean(featured))
+    where(featured: to_boolean(featured)).order("RANDOM()").limit(4)
   }
 
   scope :by_subject, lambda { |subject|
@@ -211,6 +211,11 @@ class Project < ApplicationRecord
   # -ZD
   def self.call
     all
+  end
+
+  def self.filter_if_not_featured(params, scope: all, user: nil)
+    return scope.by_featured(true) if params["featured"]
+    Project.filter(params, scope: scope, user: user)
   end
 
   def resource_kinds
