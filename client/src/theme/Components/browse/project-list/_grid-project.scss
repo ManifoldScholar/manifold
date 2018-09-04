@@ -108,7 +108,7 @@
       }
     }
 
-    &:hover, &:focus {
+    &:hover {
       @include panelRounded;
       background-color: $neutral05;
       outline: 0;
@@ -116,6 +116,15 @@
 
       .bg-neutral05 & {
         background-color: $neutral10;
+      }
+    }
+
+    &:focus {
+      outline-color: $neutral20;
+      outline-radius: 8px;
+
+      .bg-neutral05 & {
+        outline-color: $neutral30;
       }
     }
 
