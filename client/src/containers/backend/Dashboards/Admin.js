@@ -12,6 +12,8 @@ import { select, meta } from "utils/entityUtils";
 import { projectsAPI, statisticsAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import Authorization from "helpers/authorization";
+import { Link } from "react-router-dom";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
@@ -144,8 +146,13 @@ export class DashboardsAdminContainer extends PureComponent {
               <div className="left">
                 <header className="section-heading-secondary">
                   <h3>
-                    <i className="manicon manicon-stack" aria-hidden="true" />
-                    {"Projects"} {this.renderProjectCount()}
+                    <Link to={lh.link("backendProjects")}>
+                      <i className="manicon manicon-stack" aria-hidden="true" />
+                      {"Projects"}
+                    </Link>
+                    <Link to={lh.link("backendProjects")}>
+                      {this.renderProjectCount()}
+                    </Link>
                   </h3>
                 </header>
                 {this.props.projects && this.props.projectsMeta ? (
