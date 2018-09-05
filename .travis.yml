@@ -53,7 +53,7 @@ script:
   - bundle install
   - RAILS_ENV=test bundle exec rails db:schema:load --trace
   - bundle exec rake db:test:prepare
-  - bundle exec rspec spec -fd --tag ~@integration
+  - 'bundle exec rspec spec -fd --tag="~integration" --tag="~slow" --tag="~elasticsearch"'
 
 notifications:
   slack: manifold-scholarship:zDJbq4uqW2B9puU6l8fhwuMa
