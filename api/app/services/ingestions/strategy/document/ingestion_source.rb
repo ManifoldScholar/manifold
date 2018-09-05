@@ -3,9 +3,9 @@ module Ingestions
     module Document
       class IngestionSource
 
-        def initialize(strategy, source)
-          @context = strategy.context
-          @inspector = strategy.inspector
+        def initialize(context, inspector, source)
+          @context = context
+          @inspector = inspector
           @ingestion_source = source
         end
 

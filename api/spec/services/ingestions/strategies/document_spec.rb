@@ -58,6 +58,71 @@ RSpec.describe Ingestions::Strategies::Document do
     end
   end
 
+  context "when structured HTML file" do
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "structured", "index.html") }
+    let(:ingestion) do
+      ingestion = FactoryBot.create(:ingestion, text: nil)
+      allow(ingestion).to receive(:ingestion_source).and_return(path)
+      allow(ingestion).to receive(:source_file_name).and_return("index.html")
+      ingestion
+    end
+    let(:context) { create_context(ingestion) }
+    let(:toc) {
+      [{"label"=>"Header 1",
+        "anchor"=>"header-1",
+        "source_path"=>"index.html",
+        "children"=>
+          [{"label"=>"Header 1.1",
+            "anchor"=>"header-1-1",
+            "source_path"=>"index.html",
+            "children"=>[]},
+           {"label"=>"Header 1.2",
+            "anchor"=>"header-1-2",
+            "source_path"=>"index.html",
+            "children"=>
+              [{"label"=>"Header 1.2.1",
+                "anchor"=>"header-1-2-1",
+                "source_path"=>"index.html",
+                "children"=>
+                  [{"label"=>"Header 1.2.1.1",
+                    "anchor"=>"header-1-2-1-1",
+                    "source_path"=>"index.html",
+                    "children"=>[]},
+                   {"label"=>"Header 1.2.1.2",
+                    "anchor"=>"header-1-2-1-2",
+                    "source_path"=>"index.html",
+                    "children"=>
+                      [{"label"=>"Header 1.2.1.2.1",
+                        "anchor"=>"header-1-2-1-2-1",
+                        "source_path"=>"index.html",
+                        "children"=>[]}]},
+                   {"label"=>"Header 1.2.1.3",
+                    "anchor"=>"header-1-2-1-3",
+                    "source_path"=>"index.html",
+                    "children"=>[]}]}]},
+           {"label"=>"Header 1.3",
+            "anchor"=>"header-1-3",
+            "source_path"=>"index.html",
+            "children"=>[]}]},
+       {"label"=>"Header 2",
+        "anchor"=>"header-2",
+        "source_path"=>"index.html",
+        "children"=>[]}
+      ]
+    }
+
+    it "does not have an empty TOC" do
+      manifest = described_class.run(context: context).result
+      expect(manifest[:attributes][:toc]).to_not eq []
+    end
+
+    it "correctly generates the TOC" do
+      manifest = described_class.run(context: context).result
+      expect(manifest[:attributes][:toc]).to eq toc
+    end
+
+  end
+
   context "when HTML file" do
     context "when single HTML page" do
       let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
