@@ -18,6 +18,7 @@ module Ingestions
 
     def preprocess_build_files!
       compose PreProcessors::ExtractTextSectionBodies
+      compose PreProcessors::AddIdsToHeaders
     end
   end
 end

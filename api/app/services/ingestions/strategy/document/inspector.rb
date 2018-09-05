@@ -66,7 +66,15 @@ module Ingestions
           File.join("build", basename)
         end
 
+        def index_source_path
+          basename
+        end
+
         def index_parsed
+          @index_parsed || index_parsed_uncached
+        end
+
+        def index_parsed_uncached
           file_parsed index_path
         end
 

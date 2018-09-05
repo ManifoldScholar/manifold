@@ -39,7 +39,7 @@ module Ingestions
           hash[:publication_date] = inspector.date
           hash[:description] = inspector.description
           hash[:metadata] = metadata
-          hash[:toc] = []
+          hash[:toc] = Strategy::Document::TOC.new(inspector).toc
           hash[:landmarks] = []
           hash[:page_list] = []
         end
@@ -73,7 +73,7 @@ module Ingestions
 
       def ingestion_sources
         context.sources.map do |source|
-          Strategy::Document::IngestionSource.new(self, source).attributes
+          Strategy::Document::IngestionSource.new(context, inspector, source).attributes
         end
       end
 
