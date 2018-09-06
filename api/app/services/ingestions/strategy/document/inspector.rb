@@ -104,7 +104,7 @@ module Ingestions
         end
 
         def basename
-          context.basename(source)
+          "index.html"
         end
 
         def style_nodes
