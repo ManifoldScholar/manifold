@@ -22,8 +22,7 @@ module Ingestions
       end
 
       def parse(section)
-        build_file = section[:build]
-        Nokogiri::HTML(context.open(build_file), nil)
+        Nokogiri::HTML(context.read(section[:build]), nil)
       end
 
       def header_nodes(doc)
