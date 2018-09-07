@@ -49,7 +49,7 @@ module Annotations
       start_node, end_node = candidates.values
       node_range = annotation.text_section.text_node_range start_node, end_node
       content = node_range.map { |n| n[:content] }.join
-      content.include? annotation.subject
+      content.squish.include? annotation.subject.squish
     end
 
     def current_parents
@@ -79,17 +79,19 @@ module Annotations
       # we can't abort out of this early.
       # If we have multiple matches for any node, we cannot assume that either is the
       # correct one and therefore abort and orphan the annotation.
+      compare_subject = annotation.subject.squish
       annotation.text_section_text_nodes.each do |node|
-        content = node[:content]
+        content = node[:content].squish
+
         content.split(//).each_with_index do |_letter, index|
           from_start = content[index..content.length - 1]
           from_end = content[0..index]
-
-          if annotation.subject.start_with? from_start
+          if start_match?(compare_subject, from_start)
+            compare_subject.start_with?(from_start)
             return {} if candidates[:start_node].present?
             candidates[:start_node] = node[:node_uuid]
             candidates[:start_char] = index + 1
-          elsif annotation.subject.end_with? from_end
+          elsif end_match?(compare_subject, from_end)
             return {} if candidates[:end_node].present?
             candidates[:end_node] = node[:node_uuid]
             candidates[:end_char] = index
@@ -100,5 +102,14 @@ module Annotations
       candidates
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+
+    def start_match?(compare_subject, from_start)
+      from_start.start_with?(compare_subject) || compare_subject.start_with?(from_start)
+    end
+
+    def end_match?(compare_subject, from_end)
+      from_end.end_with?(compare_subject) || compare_subject.end_with?(from_end)
+    end
+
   end
 end
