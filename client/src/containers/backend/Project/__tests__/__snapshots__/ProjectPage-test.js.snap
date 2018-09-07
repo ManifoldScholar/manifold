@@ -396,7 +396,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               aria-describedby="attributes[downloadCallToAction]-text-input-15"
               id="attributes[downloadCallToAction]-text-input-15"
               onChange={[Function]}
-              placeholder="Download Digital Version"
+              placeholder="Download eBook"
               type="text"
               value="Download the greatest dog"
             />

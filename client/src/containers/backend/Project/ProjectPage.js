@@ -113,7 +113,7 @@ export default class ProjectProjectPageContainer extends PureComponent {
                 wide
                 label="Download Call To Action"
                 name="attributes[downloadCallToAction]"
-                placeholder="Download Digital Version"
+                placeholder="Download eBook"
                 instructions="If set, this text will appear in the download link on the project page"
               />
               <Form.Upload
