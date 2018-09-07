@@ -53,9 +53,10 @@ class NotificationMailerPreview < ActionMailer::Preview
   end
 
   def events
-    {
-      projects: Event.by_subject_type(%w(Text Resource Collection)).group_by(&:project),
-      annotations_and_comments: Event.by_subject_type(%w(Annotation Comment)).group_by { |e| e.is_a?(Annotation) ? e.project : e.subject.project }
+    out = {
+      projects: Event.where(project: Project.pluck(:id)).by_subject_type(%w(Text Resource Collection)).group_by(&:project),
+      annotations_and_comments: Event.where(project: Project.pluck(:id)).by_subject_type(%w(Annotation Comment)).group_by(&:project)
     }
+    out
   end
 end
