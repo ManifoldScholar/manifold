@@ -104,5 +104,26 @@ RSpec.describe Ingestions::Ingestor do
         expect(text.result.valid?).to eq true
       end
     end
+
+    context "when Word Doc", slow: true do
+      let(:path) { Rails.root.join("spec", "data", "ingestion", "ms_word", "example.docx") }
+      let(:ingestion) do
+        ingestion = FactoryBot.create(:ingestion, text: nil)
+        allow(ingestion).to receive(:ingestion_source).and_return(path)
+        ingestion
+      end
+      let!(:text) { Ingestions::Ingestor.run(ingestion: ingestion).result }
+
+      it "returns a valid text" do
+        expect(text.valid?).to eq true
+      end
+
+      it "correctly references text sections in the toc" do
+        expect(text.toc[0][:id]).to eq text.text_sections.first.id
+      end
+
+    end
+
+
   end
 end
