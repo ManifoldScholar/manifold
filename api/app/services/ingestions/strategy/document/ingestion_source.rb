@@ -24,7 +24,10 @@ module Ingestions
 
         def source_path
           ingestion_source = @context.basename(@inspector.source)
-          source_path = @context.rel(@context.abs(@ingestion_source), @context.source_root)
+          source_path = @context.rel(
+            @context.abs(@ingestion_source),
+            @context.source_root
+          )
           return @inspector.basename if ingestion_source == source_path
           source_path
         end
