@@ -138,7 +138,7 @@ RSpec.describe Ingestions::Strategies::Document do
       include_examples "outcome assertions"
 
       it "has the correct text section attributes" do
-        expected = [{ "source_identifier" => "index.html", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
+        expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
         expect(manifest[:relationships][:text_sections]).to eq expected
       end
 
@@ -162,7 +162,7 @@ RSpec.describe Ingestions::Strategies::Document do
         include_examples "outcome assertions"
 
         it "has the correct text section attributes" do
-          expected = [{ "source_identifier" => "index.html", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
+          expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 
@@ -185,7 +185,7 @@ RSpec.describe Ingestions::Strategies::Document do
         include_examples "outcome assertions"
 
         it "has the correct text section attributes" do
-          expected = [{ "source_identifier" => "index.html", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
+          expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 
@@ -210,7 +210,7 @@ RSpec.describe Ingestions::Strategies::Document do
     include_examples "outcome assertions"
 
     it "has the correct text section attributes" do
-      expected = [{ "source_identifier" => "index.html", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
+      expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
       expect(manifest[:relationships][:text_sections]).to eq expected
     end
 
@@ -232,7 +232,7 @@ RSpec.describe Ingestions::Strategies::Document do
     let!(:manifest) { described_class.run(context: context).result }
 
     it "has the correct text section attributes" do
-      expected = [{ "source_identifier" => "index.html", "name" => "Pandoc User’s Guide", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
+      expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "Pandoc User’s Guide", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
       expect(manifest[:relationships][:text_sections]).to eq expected
     end
 
@@ -259,7 +259,7 @@ RSpec.describe Ingestions::Strategies::Document do
     end
 
     it "has the correct text section attributes" do
-      expected = [{"source_identifier"=>"index.html", "name"=>"Google Doc Prime", "kind"=>"section", "position"=>1, "build"=>"build/index.html"}]
+      expected = [{"source_identifier"=>"eacf331f0ffc35d4b482f1d15a887d3b", "name"=>"Google Doc Prime", "kind"=>"section", "position"=>1, "build"=>"build/index.html"}]
       expect(@manifest[:relationships][:text_sections]).to eq expected
     end
 
