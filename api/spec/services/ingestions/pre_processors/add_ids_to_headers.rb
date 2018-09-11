@@ -15,7 +15,7 @@ RSpec.describe Ingestions::PreProcessors::AddIdsToHeaders do
     let(:manifest) { Ingestions::Strategies::Document.run(context: context).result }
     let(:header_nodes) {
       described_class.run(context: context, manifest: manifest)
-      doc = Nokogiri::HTML(context.open("build/index.html"), nil)
+      doc = Nokogiri::HTML(context.read("build/index.html"), nil)
       doc.xpath("//h1 | //h2 | //h3 | //h4 | //h5 | //h6")
     }
 
