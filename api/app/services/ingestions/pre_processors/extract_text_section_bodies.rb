@@ -24,7 +24,7 @@ module Ingestions
 
       def parsed_body(section)
         build_file = section[:build]
-        doc = Nokogiri::HTML(context.open(build_file), nil)
+        doc = Nokogiri::HTML(context.read(build_file), nil)
         doc.at("body").children.to_s.strip
       end
     end
