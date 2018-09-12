@@ -67,6 +67,8 @@ class Project < ApplicationRecord
   has_paper_trail on: [:update]
 
   # Associations
+  has_many :collection_projects, dependent: :destroy, inverse_of: :project
+  has_many :project_collections, through: :collection_projects, dependent: :destroy
   # rubocop:disable Rails/InverseOf
   belongs_to :published_text, class_name: "Text", optional: true
   # rubocop:enable Rails/InverseOf
@@ -168,6 +170,14 @@ class Project < ApplicationRecord
   scope :with_update_ability, lambda { |user = nil|
     next none unless user && Project.updatable_by?(user)
     Project.authorizer.scope_updatable_projects(user)
+  }
+
+  # TODO: can this be better? accept slug or id
+  scope :with_collection_order, lambda { |collection|
+    pc = ProjectCollection.friendly.find(collection)
+    joins(:collection_projects)
+      .where(collection_projects: { project_collection: pc })
+      .order("collection_projects.position ASC")
   }
 
   # Search
