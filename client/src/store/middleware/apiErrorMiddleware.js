@@ -8,7 +8,7 @@ function isApiError(error) {
 }
 
 function isFatal(error) {
-  return [503, 404].includes(error.status);
+  return [500, 501, 502, 503, 504, 511, 404].includes(error.status);
 }
 
 function isApiResponse(action) {
