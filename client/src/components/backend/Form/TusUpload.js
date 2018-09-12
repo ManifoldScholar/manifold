@@ -88,6 +88,7 @@ export class FormTusUpload extends Component {
           filename,
           mimeType
         },
+        resume: false,
         onError: this.handleUploadError,
         onProgress: this.handleUploadProgress,
         onSuccess: () => this.handleUploadSuccess(upload, attachment)
