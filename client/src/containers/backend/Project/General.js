@@ -91,6 +91,12 @@ export default class ProjectGeneralContainer extends PureComponent {
               />
             </Form.FieldGroup>
             <Form.FieldGroup label="Other">
+              <Form.TextInput
+                label="Tags"
+                name="attributes[tagList]"
+                placeholder="Enter Tags"
+                instructions={`Separate tags with "," or ";"`}
+              />
               <Form.Date
                 label="Publication Date"
                 name="attributes[publicationDate]"

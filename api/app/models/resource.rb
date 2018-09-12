@@ -14,9 +14,6 @@ class Resource < ApplicationRecord
                     parent_item_type: "Project"
                   }
 
-  # Tags
-  acts_as_ordered_taggable
-
   # Concerns
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
@@ -30,6 +27,7 @@ class Resource < ApplicationRecord
   include Concerns::HasSortTitle
   include Concerns::Fingerprinted
   include Concerns::ValidatesSlugPresence
+  include Concerns::Taggable
   include Metadata
   extend FriendlyId
 
@@ -100,10 +98,6 @@ class Resource < ApplicationRecord
     return all unless collection.present?
     joins(:collection_resources)
       .where("collection_resources.collection_id = ?", collection)
-  }
-  scope :by_tag, lambda { |tag|
-    return all unless tag.present?
-    tagged_with(tag)
   }
   scope :by_kind, lambda { |kind|
     return all unless kind.present?
