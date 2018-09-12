@@ -57,7 +57,7 @@ export class CollectionNewContainer extends PureComponent {
         <div>
           <Navigation.DetailHeader
             type="collection"
-            backUrl={lh.link("backendProjectCollections", project.id)}
+            backUrl={lh.link("backendProjectResourceCollections", project.id)}
             backLabel={project.attributes.title}
             title={"New Collection"}
             showUtility={false}

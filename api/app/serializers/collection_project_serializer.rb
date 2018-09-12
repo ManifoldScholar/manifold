@@ -3,5 +3,5 @@ class CollectionProjectSerializer < ApplicationSerializer
 
   attributes :id, :position
 
-  has_one :project, serializer: ProjectPartialSerializer
+  has_one :project, serializer: ProjectSerializer
 end

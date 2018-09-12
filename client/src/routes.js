@@ -125,7 +125,7 @@ export default () => {
               ]
             },
             {
-              name: "backendProjectCollectionsNew",
+              name: "backendProjectResourceCollectionsNew",
               exact: true,
               component: Backend.Collection.New,
               path: "/backend/projects/:projectId/collections/new",
@@ -356,7 +356,7 @@ export default () => {
                   helper: p => `/backend/projects/${p}/resources`
                 },
                 {
-                  name: "backendProjectCollections",
+                  name: "backendProjectResourceCollections",
                   exact: true,
                   component: Backend.Project.Collections,
                   path: "/backend/projects/:id/collections",
@@ -712,12 +712,12 @@ export default () => {
           helper: p => `/page/${p}`
         },
         {
-          name: "frontendProjectCollection",
+          name: "frontendResourceCollection",
           exact: true,
           component: Frontend.CollectionDetail,
           path: "/projects/:id/collection/:collectionId",
           helpers: {
-            frontendProjectCollection: (p, c, params = {}) => {
+            frontendResourceCollection: (p, c, params = {}) => {
               const query = queryString.stringify(params);
               if (!query) return `/projects/${p}/collection/${c}`;
               return `/projects/${p}/collection/${c}?${query}`;

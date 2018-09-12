@@ -183,7 +183,7 @@ class Navigation {
       },
       {
         label: "Collections",
-        route: "backendProjectCollections",
+        route: "backendProjectResourceCollections",
         entity: project,
         ability: "manageCollections",
         args

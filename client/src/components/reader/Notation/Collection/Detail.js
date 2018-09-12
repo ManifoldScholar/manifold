@@ -32,7 +32,7 @@ export default class CollectionDetail extends PureComponent {
   buildRedirectUrl(collection) {
     if (!collection) return null;
     return lh.link(
-      "frontendProjectCollection",
+      "frontendResourceCollection",
       collection.relationships.project.attributes.slug,
       collection.attributes.slug
     );
