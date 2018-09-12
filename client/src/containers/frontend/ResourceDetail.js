@@ -74,7 +74,7 @@ export class ResourceDetailContainer extends PureComponent {
 
   collectionUrl() {
     return lh.link(
-      "frontendProjectCollection",
+      "frontendResourceCollection",
       this.props.project.attributes.slug,
       this.props.collection.attributes.slug
     );

@@ -234,13 +234,11 @@ class Project < ApplicationRecord
     resources
       .select("resources.kind")
       .distinct
-      .to_a.pluck(:kind)
+      .pluck(:kind)
   end
 
   def resource_tags
-    resources
-      .tag_counts
-      .pluck(:name)
+    resources.joins(:tags).select("tags.name")
   end
 
   def following_twitter_accounts?

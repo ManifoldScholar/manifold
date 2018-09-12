@@ -58,7 +58,7 @@ export class CollectionWrapperContainer extends PureComponent {
   doPreview = event => {
     event.preventDefault();
     const previewUrl = lh.link(
-      "frontendProjectCollection",
+      "frontendResourceCollection",
       this.props.collection.relationships.project.attributes.slug,
       this.props.collection.attributes.slug
     );
@@ -82,7 +82,7 @@ export class CollectionWrapperContainer extends PureComponent {
 
   redirectToProjectCollections() {
     const projectId = this.props.collection.relationships.project.id;
-    const redirectUrl = lh.link("backendProjectCollections", projectId);
+    const redirectUrl = lh.link("backendProjectResourceCollections", projectId);
     this.props.history.push(redirectUrl);
   }
 
@@ -167,7 +167,7 @@ export class CollectionWrapperContainer extends PureComponent {
           <Navigation.DetailHeader
             type="collection"
             backUrl={lh.link(
-              "backendProjectCollections",
+              "backendProjectResourceCollections",
               collection.relationships.project.id
             )}
             backLabel={collection.relationships.project.attributes.title}

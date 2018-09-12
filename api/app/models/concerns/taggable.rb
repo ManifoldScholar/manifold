@@ -14,7 +14,7 @@ module Concerns
 
     # https://github.com/mbleigh/acts-as-taggable-on/issues/91#issuecomment-168273770
     def tag_list
-      tags.collect(&:name)
+      tags.select(:name)
     end
   end
 end

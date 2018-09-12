@@ -12,7 +12,7 @@ export default class ResourceCollectionGrid extends Component {
 
   urlCreator = collection => {
     return lh.link(
-      "frontendProjectCollection",
+      "frontendResourceCollection",
       this.props.project.attributes.slug,
       collection.attributes.slug
     );
