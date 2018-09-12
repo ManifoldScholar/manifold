@@ -59,7 +59,7 @@ class FormMaskedTextInput extends Component {
   doiMask() {
     return raw => {
       const base = "https://doi.org/10.".split("");
-      const wordChar = /^[A-Za-z0-9_.;()/]$/;
+      const wordChar = /^[A-Za-z0-9_.;()\-/]$/;
       const adjusted = raw.replace(/\s/g, "");
       const length = adjusted.length;
       let mask =
