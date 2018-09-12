@@ -12,8 +12,10 @@ class Subject < ApplicationRecord
   # Associations
   has_many :text_subjects, dependent: :destroy
   has_many :project_subjects, dependent: :destroy
+  has_many :project_collection_subjects, dependent: :destroy
   has_many :texts, through: :text_subjects
   has_many :projects, through: :project_subjects
+  has_many :project_collections, through: :project_collection_subjects
 
   scope :by_featured, lambda { |featured|
     return all unless featured.present?

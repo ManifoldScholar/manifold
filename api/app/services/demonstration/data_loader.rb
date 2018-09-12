@@ -19,11 +19,15 @@ module Demonstration
       # create_fake_users
       create_pages
       import_projects
+      create_featured_projects_collection
       reindex_records
     end
 
+    def cli_user
+      @cli_user ||= User.cli_user
+    end
+
     def import_projects
-      cli_user = User.cli_user
       children = Pathname.new("../import").children.select(&:directory?)
       children.each do |child|
         next if File.file?(File.join(child, ".skip"))
@@ -38,8 +42,9 @@ module Demonstration
     def clear_db
       clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource
                  Subject TextSubject TextTitle User Category Page Annotation
-                 CollectionResource Collection Comment Event Favorite Flag ProjectSubject
-                 Stylesheet Subject SearchableNode TwitterQuery UpgradeResult)
+                 ProjectCollection CollectionResource Collection Comment Event
+                 Favorite Flag ProjectSubject Stylesheet Subject SearchableNode
+                 TwitterQuery UpgradeResult)
       clear.each do |model_name|
         @logger.info("Truncate #{model_name} table".red)
         model_name.constantize.destroy_all
@@ -70,6 +75,18 @@ module Demonstration
         )
         @logger.info("Creating page: #{page.title}".green)
       end
+    end
+
+    def create_featured_projects_collection
+      project_collection = ProjectCollection.create(title: "Featured Projects",
+                                                    featured_only: true,
+                                                    visible: true,
+                                                    number_of_projects: nil,
+                                                    smart: true,
+                                                    homepage: true,
+                                                    icon: "lamp",
+                                                    creator: cli_user)
+      @logger.info("Creating project collection: #{project_collection.title}".green)
     end
 
     # rubocop:disable Metrics/AbcSize
