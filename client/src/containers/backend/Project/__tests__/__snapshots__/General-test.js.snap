@@ -259,6 +259,30 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <div
             className="form-input"
+            style={Object {}}
+          >
+            <label
+              className="has-instructions"
+              htmlFor="attributes[tagList]-text-input-15"
+            >
+              Tags
+            </label>
+            <input
+              aria-describedby="attributes[tagList]-text-input-15"
+              id="attributes[tagList]-text-input-15"
+              onChange={[Function]}
+              placeholder="Enter Tags"
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              Separate tags with "," or ";"
+            </span>
+          </div>
+          <div
+            className="form-input"
           >
             <h4
               className="form-input-heading"
