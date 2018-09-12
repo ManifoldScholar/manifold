@@ -7,9 +7,9 @@ import { bindActionCreators } from "redux";
 import { Form as GlobalForm } from "components/global";
 import get from "lodash/get";
 import has from "lodash/has";
-import isString from "lodash/isString";
 import brackets2dots from "brackets2dots";
 import { Prompt } from "react-router-dom";
+import { FormContext } from "helpers/contexts";
 
 const { request, flush } = entityStoreActions;
 const { close, open, set } = entityEditorActions;
@@ -170,7 +170,7 @@ export class FormContainer extends PureComponent {
     return null;
   }
 
-  childProps(props) {
+  contextProps = props => {
     const out = {
       actions: {
         set: bindActionCreators(set, props.dispatch)
@@ -183,7 +183,7 @@ export class FormContainer extends PureComponent {
     };
     if (!this.props.groupErrors) out.errors = props.errors || [];
     return out;
-  }
+  };
 
   isBlocking() {
     if (this.props.doNotWarn === true) return false;
@@ -199,17 +199,6 @@ export class FormContainer extends PureComponent {
       errors: this.props.errors
     };
     return <Developer.Debugger object={debug} />;
-  }
-
-  renderChildren(props) {
-    const childProps = this.childProps(props);
-    return React.Children.map(props.children, child => {
-      if (!child) return null;
-      if (isString(child.type)) {
-        return child;
-      }
-      return React.cloneElement(child, childProps);
-    });
   }
 
   render() {
@@ -236,7 +225,9 @@ export class FormContainer extends PureComponent {
           className={this.props.className}
           data-id="submit"
         >
-          {this.renderChildren(this.props)}
+          <FormContext.Provider value={this.contextProps(this.props)}>
+            {this.props.children}
+          </FormContext.Provider>
         </form>
       </div>
     );

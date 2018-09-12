@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import KindAttributes from "../KindAttributes";
+import FormContext from "helpers/contexts/FormContext";
 
 describe("Backend.Resource.Form.KindAttributes component", () => {
   function getModelValue(kind) {
@@ -10,7 +11,13 @@ describe("Backend.Resource.Form.KindAttributes component", () => {
   describe("when kind is audio", () => {
     it("renders correctly", () => {
       const component = renderer.create(
-        <KindAttributes getModelValue={() => getModelValue("image")} />
+        <FormContext.Provider
+          value={{
+            getModelValue: () => getModelValue("image")
+          }}
+        >
+          <KindAttributes />
+        </FormContext.Provider>
       );
       let tree = component.toJSON();
       expect(tree).toMatchSnapshot();
