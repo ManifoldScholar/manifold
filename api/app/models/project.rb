@@ -111,7 +111,7 @@ class Project < ApplicationRecord
   before_save :prepare_to_reindex_children, on: [:update], if: :draft_changed?
   before_create :assign_publisher_defaults!
   after_commit :trigger_creation_event, on: [:create]
-  after_commit :queue_reindex_children_job
+  after_commit :queue_reindex_children_job, :update_smart_collection_caches
 
   # Delegations
   delegate :count, to: :collections, prefix: true
@@ -148,7 +148,8 @@ class Project < ApplicationRecord
 
   scope :by_subject, lambda { |subject|
     next all unless subject.present?
-    joins(:project_subjects).where(project_subjects: { subject: subject })
+    where(id: unscoped.joins(:project_subjects)
+                      .merge(ProjectSubject.by_subject(subject)).select(:project_id))
   }
 
   scope :by_draft, lambda { |draft|
@@ -172,7 +173,6 @@ class Project < ApplicationRecord
     Project.authorizer.scope_updatable_projects(user)
   }
 
-  # TODO: can this be better? accept slug or id
   scope :with_collection_order, lambda { |collection|
     pc = ProjectCollection.friendly.find(collection)
     joins(:collection_projects)
@@ -296,6 +296,10 @@ class Project < ApplicationRecord
     return unless @reindex_children
     ProjectJobs::ReindexChildren.perform_later(id)
     @reindex_children = false
+  end
+
+  def update_smart_collection_caches
+    ProjectCollectionJobs::QueueCacheCollectionProjectsJob.perform_later
   end
 
   def trigger_creation_event
