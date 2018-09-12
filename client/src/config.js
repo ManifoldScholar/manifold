@@ -17,6 +17,11 @@ const apiUrl = () => {
   if (process.env.API_URL) return process.env.API_URL;
   if (__SERVER__)
     return `${process.env.USE_SSL ? "https" : "http"}://${process.env.DOMAIN}`;
+  if (__CLIENT__) {
+    const protocol = window.location.protocol === "https:" ? "https" : "http";
+    const host = window.location.host;
+    return `${protocol}://${host}`;
+  }
   return "";
 };
 

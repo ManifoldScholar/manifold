@@ -4,6 +4,7 @@ import uniqueId from "lodash/uniqueId";
 import setter from "./setter";
 import Base from "./Upload/Base";
 import tus from "tus-js-client";
+import config from "../../../config";
 
 export class FormTusUpload extends Component {
   static displayName = "Form.TusUpload";
@@ -49,7 +50,9 @@ export class FormTusUpload extends Component {
     this.setState({ progress: null, error: null });
   }
 
-  handleUploadError = errorIgnored => {
+  handleUploadError = error => {
+    // eslint-disable-next-line no-console
+    console.log(error, "TUS Upload Error");
     this.setState({ error: "Upload failed. Please try again" });
   };
 
@@ -79,7 +82,7 @@ export class FormTusUpload extends Component {
       const { type: mimeType, name: filename } = attachment;
       const upload = new tus.Upload(attachment, {
         chunkSize: 5 * 1024 * 1024,
-        endpoint: "/api/files",
+        endpoint: config.apiUrl + "/api/files",
         retryDelays: [0, 1000, 3000, 5000],
         metadata: {
           filename,
