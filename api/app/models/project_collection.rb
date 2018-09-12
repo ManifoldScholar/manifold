@@ -53,6 +53,7 @@ class ProjectCollection < ApplicationRecord
 
   # Callbacks
   before_save :reset_sort_order!
+  after_save :cache_collection_projects!
 
   # Validation
   validates :title, presence: true, uniqueness: true
@@ -72,5 +73,10 @@ class ProjectCollection < ApplicationRecord
   def reset_sort_order!
     return unless smart? && manually_sorted?
     self.sort_order = "created_at_asc"
+  end
+
+  def cache_collection_projects!
+    return unless smart?
+    ProjectCollections::CacheCollectionProjects.run project_collection: self
   end
 end
