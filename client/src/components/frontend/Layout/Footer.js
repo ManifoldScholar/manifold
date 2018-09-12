@@ -256,9 +256,16 @@ class LayoutFooter extends Component {
   render() {
     const chunkedPages = chunk(this.buildPagesArray(), 3);
     const socialLinks = this.buildSocialsArray();
-    const pressLogo = this.props.settings.attributes.pressLogoStyles;
-    const isPressLogo = this.checkPressLogo(pressLogo);
-    const pressSite = this.props.settings.attributes.general.pressSite;
+    const { settings } = this.props;
+
+    let pressLogo;
+    let pressSite;
+    let isPressLogo = false;
+    if (settings) {
+      pressLogo = this.props.settings.attributes.pressLogoStyles;
+      isPressLogo = this.checkPressLogo(pressLogo);
+      pressSite = this.props.settings.attributes.general.pressSite;
+    }
 
     return (
       <HigherOrder.BlurOnLocationChange location={this.props.location}>
