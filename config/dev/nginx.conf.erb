@@ -44,24 +44,28 @@ server {
   location /sidekiq {
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
     proxy_pass http://manifold-api.<%= tld.strip %>;
   }
 
   location /rails {
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
     proxy_pass http://manifold-api.<%= tld.strip %>;
   }
 
   location /api {
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
     proxy_pass http://manifold-api.<%= tld.strip %>;
   }
 
   location /auth {
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
     proxy_pass http://manifold-api.<%= tld.strip %>;
   }
 
@@ -71,6 +75,7 @@ server {
     proxy_set_header Connection "Upgrade";
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
     proxy_pass http://manifold-cable.<%= tld.strip %>;
   }
 
