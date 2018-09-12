@@ -1,11 +1,27 @@
 class ProjectCollectionSerializer < ApplicationSerializer
-  meta(partial: false)
+  include HasManyPaginated
+
+  meta(partial: true)
 
   attributes :id, :title, :slug, :sort_order, :visible, :homepage, :position, :icon,
              :number_of_projects, :featured_only, :smart, :description,
-             :description_formatted, :tags, :sort_column, :sort_direction,
-             :project_count, :abilities
+             :description_formatted, :sort_order, :manually_sorted,
+             :projects_count, :abilities, :tag_list, :description
 
-  has_many :projects, serializer: ProjectPartialSerializer
+  has_many_paginated :collection_projects,
+                     serializer: CollectionProjectSerializer do |serializer|
+    serializer.object
+              .collection_projects
+              .with_collection_order
+              .projects_with_read_ability serializer.current_user
+  end
+
+  def manually_sorted
+    object.manually_sorted?
+  end
+
+  def projects_count
+    object.collection_projects_count
+  end
 
 end

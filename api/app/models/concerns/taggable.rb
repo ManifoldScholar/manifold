@@ -11,5 +11,10 @@ module Concerns
         where(id: subquery.select(:id))
       }
     end
+
+    # https://github.com/mbleigh/acts-as-taggable-on/issues/91#issuecomment-168273770
+    def tag_list
+      tags.collect(&:name)
+    end
   end
 end
