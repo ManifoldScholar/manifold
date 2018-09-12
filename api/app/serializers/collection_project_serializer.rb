@@ -1,8 +1,7 @@
 class CollectionProjectSerializer < ApplicationSerializer
   meta(partial: false)
 
-  attributes :id, :position, :project_collection_id
+  attributes :id, :position
 
-  has_one :project
-
+  has_one :project, serializer: ProjectPartialSerializer
 end

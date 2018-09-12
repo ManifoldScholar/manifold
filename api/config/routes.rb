@@ -66,6 +66,15 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :project_collections do
+        scope module: :project_collections do
+          namespace :relationships do
+            resources :collection_projects, only: [:index, :show, :update]
+            resources :projects, only: [:index]
+          end
+        end
+      end
+
       resources :text_sections, only: [:show] do
         scope module: :text_sections do
           namespace :relationships do
