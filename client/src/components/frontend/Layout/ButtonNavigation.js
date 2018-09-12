@@ -8,24 +8,25 @@ import lh from "helpers/linkHandler";
 export default class LayoutButtonNavigation extends Component {
   static displayName = "Layout.ButtonNavigation";
 
+
   static propTypes = {
     grayBg: PropTypes.bool,
-    showBrowse: PropTypes.bool,
+    showProjects: PropTypes.bool,
     showFollowing: PropTypes.bool,
     hideAtNarrow: PropTypes.bool,
     authenticated: PropTypes.bool
   };
-
+  
   static defaultProps = {
     grayBg: true,
-    showBrowse: true,
+    showProjects: true,
     showFollowing: true,
     authenticated: false
   };
 
   constructor() {
     super();
-    this._browseButtonEl = null;
+    this._projectsButtonEl = null;
     this._followingButtonEl = null;
   }
 
@@ -45,24 +46,24 @@ export default class LayoutButtonNavigation extends Component {
   }
 
   matchButtonWidths = () => {
-    if (!this._browseButtonEl || !this._followingButtonEl) return;
+    if (!this._projectsButtonEl || !this._followingButtonEl) return;
     // This currently gets the wrong measurement most of the time
     // console.log(this._followingButtonEl.offsetWidth, 'offset width');
     const target = this._followingButtonEl.offsetWidth;
-    this._browseButtonEl.style.width = `${target}px`;
+    this._projectsButtonEl.style.width = `${target}px`;
   };
 
-  renderBrowseButton = () => {
-    if (this.props.showBrowse !== true) return null;
+  renderProjectsButton = () => {
+    if (!this.props.showProjects) return null;
     return (
-      <Link to={lh.link("frontend")} className="button-icon-primary">
+      <Link to={lh.link("frontendProjects")} className="button-icon-primary">
         <span
           ref={node => {
-            this._browseButtonEl = node;
+            this._projectsButtonEl = node;
           }}
         >
           <i className="manicon manicon-books-on-shelf" aria-hidden="true" />
-          See more projects
+          See All Projects
         </span>
       </Link>
     );
@@ -82,7 +83,7 @@ export default class LayoutButtonNavigation extends Component {
             className="manicon manicon-books-with-glasses"
             aria-hidden="true"
           />
-          {"Projects You're Following "}
+          Projects You're Following
         </span>
       </Link>
     );
@@ -94,13 +95,13 @@ export default class LayoutButtonNavigation extends Component {
       "bg-neutral05": this.props.grayBg === true
     });
 
-    if (!this.renderBrowseButton() && !this.renderFollowingButton())
+    if (!this.renderProjectsButton() && !this.renderFollowingButton())
       return null;
     return (
       <section className={sectionClass}>
         <div className="container">
           <nav className="button-nav">
-            {this.renderBrowseButton()}
+            {this.renderProjectsButton()}
             {this.renderFollowingButton()}
           </nav>
         </div>

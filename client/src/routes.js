@@ -646,12 +646,15 @@ export default () => {
       path: "/",
       routes: [
         {
-          // This route is a placeholder for the upcoming frontend projects view.
           name: "frontendProjects",
-          component: NotFound,
           exact: true,
+          component: Frontend.Projects,
           path: "/projects",
-          helper: () => `/projects`
+          helper: (params = {}) => {
+            const query = queryString.stringify(params);
+            if (!query) return "/projects";
+            return `/projects?${query}`;
+          }
         },
         {
           name: "frontendProject",
