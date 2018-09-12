@@ -268,7 +268,6 @@ export class HomeContainer extends Component {
         <Layout.ButtonNavigation
           hideAtNarrow
           grayBg={false}
-          showBrowse={false}
           showFollowing={!this.showPlaceholder()}
           authenticated={this.props.authentication.authenticated}
         />

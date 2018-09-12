@@ -9,9 +9,7 @@ class Navigation {
       },
       {
         label: "Projects",
-        route: "frontendProjects",
-        hideInNav: true,
-        linksTo: "frontend"
+        route: "frontendProjects"
       }
     ];
 
