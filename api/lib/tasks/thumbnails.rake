@@ -8,7 +8,7 @@ end
 
 namespace :manifold do
   namespace :thumbnails do
-    desc "Regnerate all Manifold thumbnails."
+    desc "Regenerate all Manifold thumbnails."
     task regenerate: :environment do
       Manifold::ThumbnailsTask.types.each do |class_name|
         Rake::Task["manifold:thumbnails:regenerate:#{class_name.downcase}"].invoke
@@ -17,7 +17,7 @@ namespace :manifold do
 
     namespace :regenerate do
       Manifold::ThumbnailsTask.types.each do |class_name|
-        desc "Regnerate Manifold #{class_name.downcase} thumbnails."
+        desc "Regenerate Manifold #{class_name.downcase} thumbnails."
         task class_name.downcase.to_sym => :environment do
           ENV["CLASS"] = class_name
           Manifold::Rake.logger.info "Regenerating #{ENV['CLASS'].downcase} thumbnails."
