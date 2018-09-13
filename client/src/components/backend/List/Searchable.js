@@ -273,8 +273,13 @@ export class ListSearchable extends PureComponent {
     }
 
     if (!newButtonAuthorized && !secondaryButtonAuthorized) return null;
+    const buttonClasses = classnames({
+      "buttons-icon-horizontal": true,
+      "flush-top": !props.showEntityCount
+    });
+
     return (
-      <div className="buttons-icon-horizontal">
+      <div className={buttonClasses}>
         {this.renderButton(props.newButton)}
         {this.renderButton(props.secondaryButton)}
       </div>
