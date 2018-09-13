@@ -56,7 +56,8 @@ export class ListSearchable extends PureComponent {
     defaultFilter: PropTypes.object, // Default filter is what filter is set to when resetSearch() is called
     searchId: PropTypes.string,
     filterId: PropTypes.string,
-    sortId: PropTypes.string
+    sortId: PropTypes.string,
+    emptyMessage: PropTypes.func
   };
 
   static defaultProps = {
@@ -71,7 +72,8 @@ export class ListSearchable extends PureComponent {
     searchId: uniqueId("list-search-"),
     filterId: uniqueId("list-filter-"),
     sortId: uniqueId("list-sort-"),
-    listClassName: "vertical-list-primary"
+    listClassName: "vertical-list-primary",
+    emptyMessage: filterStateIgnored => "Sorry, no results were found."
   };
 
   constructor(props) {
@@ -354,7 +356,9 @@ export class ListSearchable extends PureComponent {
             destroyHandler={this.props.destroyHandler}
           />
         ) : (
-          <p className="list-total empty">Sorry, no results were found.</p>
+          <p className="list-total empty">
+            {this.props.emptyMessage(this.state.filter)}
+          </p>
         )}
       </div>
     );
