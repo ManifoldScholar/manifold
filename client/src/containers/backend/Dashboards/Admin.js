@@ -157,6 +157,12 @@ export class DashboardsAdminContainer extends PureComponent {
                 </header>
                 {this.props.projects && this.props.projectsMeta ? (
                   <List.Searchable
+                    newButton={{
+                      text: "Add a New Project",
+                      path: lh.link("backendProjectsNew"),
+                      authorizedFor: "project",
+                      authorizedTo: "create"
+                    }}
                     showEntityCount={false}
                     initialFilter={this.state.filter}
                     defaultFilter={{ order: "sort_title ASC" }}
