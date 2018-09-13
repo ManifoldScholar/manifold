@@ -2,15 +2,15 @@ cd ~/src/manifold
 github_changelog_generator \
 --user="ManifoldScholar" \
 --project="manifold" \
---future-release="v1.0.0" \
---since-tag="v0.4.0" \
---enhancement-labels="feature,enhancements" \
+--future-release="v2.0.0" \
+--since-tag="v1.0.1" \
+--enhancement-labels="feature,enhancements,feature request" \
 --exclude-labels="wontfix,ignore" \
 --enhancement-label="**Enhancements**" \
 --bugs-label="**Bugs**" \
 --date-format="%m/%d/%Y" \
 --pr-label="**Accepted Pull Requests**" \
 --issues-label="**Other Revisions**" \
---exclude-tags-regex="v(\d.\d.[^0]$)|(.*-rc.\d$)" \
+--exclude-tags-regex="(.*-rc.\d$)" \
 --max-issues 500
 #--unreleased-only
