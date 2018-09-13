@@ -184,14 +184,6 @@ common: &1
           - yml
           - tex
           - latex
-      :project_text:
-        :allowed_ext:
-        - !ruby/regexp '/md\Z/i'
-        - !ruby/regexp '/epub\Z/i'
-        - !ruby/regexp '/html?\Z/i'
-        - !ruby/regexp '/docx?\Z/i'
-        - !ruby/regexp '/tex\Z/i'
-        - !ruby/regexp '/latex\Z/i'
       :image:
         :allowed_mime:
           - !ruby/regexp '/image\/.*/'
@@ -404,6 +396,8 @@ common: &1
           # PDF
           - !ruby/regexp '/pdf\Z/'
           # Misc
+          - !ruby/regexp '/tex\Z/i'
+          - !ruby/regexp '/latex\Z/i'
           - !ruby/regexp '/js\Z/i'
           - !ruby/regexp '/x?html?\Z/i'
           - !ruby/regexp '/ttf\Z/i'
