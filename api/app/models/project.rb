@@ -134,7 +134,7 @@ class Project < ApplicationRecord
   manifold_has_attached_file :hero, :image
   manifold_has_attached_file :avatar, :image
   manifold_has_attached_file :published_text_attachment,
-                             :project_text,
+                             :resource,
                              validate_content_type: false
 
   # Scopes
