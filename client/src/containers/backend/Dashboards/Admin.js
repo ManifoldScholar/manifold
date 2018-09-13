@@ -14,6 +14,7 @@ import debounce from "lodash/debounce";
 import Authorization from "helpers/authorization";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import isEmpty from "lodash/isEmpty";
 
 const { request } = entityStoreActions;
 
@@ -137,6 +138,23 @@ export class DashboardsAdminContainer extends PureComponent {
     return <span className="list-total">{`${totalCount} ${label}`}</span>;
   };
 
+  renderNoProjects = filterState => {
+    const filters = Object.assign({}, filterState);
+    delete filters.order;
+    const createProjects = this.authorization.authorizeAbility({
+      authentication: this.props.authentication,
+      entity: "project",
+      ability: "create"
+    });
+
+    if (!isEmpty(filters)) return "Sorry, no results were found.";
+
+    if (createProjects)
+      return "This Manifold Library is empty. Click the button above to create your first project.";
+
+    return "This Manifold Library is empty. Check back soon.";
+  };
+
   render() {
     return (
       <div>
@@ -172,6 +190,7 @@ export class DashboardsAdminContainer extends PureComponent {
                     paginationClass="secondary"
                     entityComponent={Project.ListItem}
                     filterChangeHandler={this.filterChangeHandler}
+                    emptyMessage={this.renderNoProjects}
                   />
                 ) : null}
               </div>
