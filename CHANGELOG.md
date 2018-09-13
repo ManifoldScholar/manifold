@@ -1,6 +1,6 @@
 # Change Log
 
-## [v2.0.0](https://github.com/ManifoldScholar/manifold/tree/v2.0.0) (09/12/2018)
+## [v2.0.0](https://github.com/ManifoldScholar/manifold/tree/v2.0.0) (09/13/2018)
 
 [Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v1.0.1...v2.0.0)
 
@@ -63,6 +63,8 @@
 
 **Bugs**
 
+- Emails sent from Manifold omnibus instances do not have the correct image URLs [\#1381](https://github.com/ManifoldScholar/manifold/issues/1381)
+- Search does not look at all relevant model attributes [\#1377](https://github.com/ManifoldScholar/manifold/issues/1377)
 - Selected project avatar color has unnecessary green circle [\#1374](https://github.com/ManifoldScholar/manifold/issues/1374)
 - Curly quotes are breaking during ingestion [\#1371](https://github.com/ManifoldScholar/manifold/issues/1371)
 - DOI input fails when number included hyphen [\#1369](https://github.com/ManifoldScholar/manifold/issues/1369)
@@ -246,6 +248,9 @@
 
 **Accepted Pull Requests**
 
+- \[B\] API sets client URL from CLIENT\_URL or DOMAIN [\#1382](https://github.com/ManifoldScholar/manifold/pull/1382) ([zdavis](https://github.com/zdavis))
+- \[B\] Specify model attributes in search query [\#1380](https://github.com/ManifoldScholar/manifold/pull/1380) ([zdavis](https://github.com/zdavis))
+- \[B\] Add new project button to backend project list [\#1379](https://github.com/ManifoldScholar/manifold/pull/1379) ([SMaxOwok](https://github.com/SMaxOwok))
 - \[B\] Fix project avatar color picker styles [\#1375](https://github.com/ManifoldScholar/manifold/pull/1375) ([SMaxOwok](https://github.com/SMaxOwok))
 - \[B\] Fix special characters breaking during ingestion [\#1372](https://github.com/ManifoldScholar/manifold/pull/1372) ([SMaxOwok](https://github.com/SMaxOwok))
 - \[B\] Minor v2.0.0-rc.2 fixes [\#1367](https://github.com/ManifoldScholar/manifold/pull/1367) ([zdavis](https://github.com/zdavis))
