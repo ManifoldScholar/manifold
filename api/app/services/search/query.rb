@@ -30,7 +30,8 @@ module Search
         page: page_number,
         per_page: per_page,
         where: where,
-        fields: ["_all", :title, :body],
+        fields: [:maker_names, :metadata, :caption, :title_values, :text_titles, :title,
+                 :body],
         highlight: highlight_options,
         request_params: { search_type: search_type }
       }
@@ -59,24 +60,6 @@ module Search
       where[:project_id] = project.id if project
       where
     end
-
-    # def text_section_ids_for_project
-    #   return [] unless project
-    #   TextSection.joins(text: :project).where("projects.id = ?", project.id).pluck(:id)
-    # end
-    #
-    # def text_section_ids_for_text
-    #   return [] unless text
-    #   text.text_sections.pluck(:id)
-    # end
-    #
-    # def included_text_section_ids
-    #   text_section_ids = []
-    #   text_section_ids.push(*text_section_ids_for_project)
-    #   text_section_ids.push(*text_section_ids_for_text)
-    #   text_section_ids << text_section.id if text_section
-    #   text_section_ids
-    # end
 
     def search_type
       facets.include?(Annotation) ? "dfs_query_then_fetch" : "query_then_fetch"
