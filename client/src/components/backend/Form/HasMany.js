@@ -55,6 +55,22 @@ export default class FormHasMany extends PureComponent {
     return entity.attributes[this.props.entityLabelAttribute];
   };
 
+  renderList(renderConditions, props) {
+    if (!renderConditions) return null;
+
+    return (
+      <List
+        label={props.label}
+        orderable={props.orderable}
+        onChange={props.onChange}
+        entities={props.entities}
+        entityName={this.entityName}
+        editClickHandler={props.editClickHandler}
+        entityAvatarAttribute={props.entityAvatarAttribute}
+      />
+    );
+  }
+
   render() {
     const inputClasses = classNames({
       "form-input": true,
@@ -75,15 +91,10 @@ export default class FormHasMany extends PureComponent {
           instructions={this.props.instructions}
         />
         <nav className="has-many-list">
-          <List
-            label={this.props.label}
-            orderable={this.props.orderable}
-            onChange={this.props.onChange}
-            entities={this.props.entities}
-            entityName={this.entityName}
-            editClickHandler={this.props.editClickHandler}
-            entityAvatarAttribute={this.props.entityAvatarAttribute}
-          />
+          {this.renderList(
+            this.props.orderable || this.props.editClickHandler,
+            this.props
+          )}
           {/* Add .autofill-open to .input-autofill in order to show autofill list  */}
           <FormContainer.PredictiveInput
             className="input-predictive"
@@ -94,6 +105,10 @@ export default class FormHasMany extends PureComponent {
             fetch={this.props.optionsFetch}
             idForError={this.props.idForError}
           />
+          {this.renderList(
+            !this.props.orderable && !this.props.editClickHandler,
+            this.props
+          )}
         </nav>
       </GlobalForm.Errorable>
     );
