@@ -36,7 +36,11 @@ module Ingestions
             entry = entry_for_header(header)
             entry_depth = (current_depth + 1) if entry_depth > current_depth
             parent_depth = entry_depth - 1
-            collection = parent_depth == -1 ? entries : memo[parent_depth][:children]
+            collection = if parent_depth != -1 && memo[parent_depth]
+                           memo[parent_depth][:children]
+                         else
+                           entries
+                         end
             collection << entry
             memo[entry_depth] = entry
             current_depth = entry_depth
