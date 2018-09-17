@@ -3,8 +3,65 @@
     margin-top: 20px;
   }
 
+  .input-predictive + ul {
+    margin-top: 25px;
+  }
+
   > ul {
     @include listUnstyled;
+
+    &.bucket {
+      padding: 10px 20px 20px;
+      background-color: $neutral95;
+      border-radius: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+
+      &.empty {
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .placeholder {
+        @include utilityPrimary;
+        color: $neutral70;
+        font-size: 14px;
+      }
+
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 15px;
+        width: auto;
+        border: 1px solid $neutral70;
+        margin: 10px 10px 0 0;
+        border-radius: 5px;
+        line-height: 1;
+
+        &:last-child {
+          padding-bottom: 5px;
+        }
+
+        figure {
+          display: none;
+        }
+
+        .utility {
+          margin-left: 10px;
+
+          button {
+            font-size: 13px;
+          }
+        }
+
+        .association-name {
+          font-size: 16px;
+        }
+      }
+    }
 
     li {
       display: table;
