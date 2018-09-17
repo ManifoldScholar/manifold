@@ -5,7 +5,7 @@ RSpec.describe Ingestions::PreProcessors::AddIdsToHeaders do
   include TestHelpers::IngestionHelper
 
   describe "a document ingestion" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "without_headers") }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "without_header_ids") }
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
