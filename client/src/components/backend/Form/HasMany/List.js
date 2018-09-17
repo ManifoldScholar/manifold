@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import indexOf from "lodash/indexOf";
 import ListItem from "./ListItem";
+import classnames from "classnames";
 
 export default class FormHasManyList extends PureComponent {
   static displayName = "Form.HasMany.List";
@@ -37,26 +38,41 @@ export default class FormHasManyList extends PureComponent {
     this.props.onChange(newEntities, "remove");
   };
 
+  maybeRenderPlaceholder(renderConditions, label) {
+    if (!renderConditions) return null;
+
+    return <div className="placeholder">No {label} added</div>;
+  }
+
   render() {
-    const entities = this.props.entities;
+    const { orderable, editClickHandler, entities } = this.props;
+    const hasEntities = entities.length > 0;
+    const bucketStyle = !orderable && !editClickHandler;
+
+    const listClasses = classnames({
+      bucket: bucketStyle,
+      empty: bucketStyle && !hasEntities
+    });
 
     return (
-      <ul>
-        {entities.map((entity, index) => (
-          <ListItem
-            key={entity.id}
-            entity={entity}
-            entities={entities}
-            ordinal={index}
-            entityName={this.props.entityName}
-            entityAvatarAttribute={this.props.entityAvatarAttribute}
-            label={this.props.label}
-            orderable={this.props.orderable}
-            removeHandler={this.onRemove}
-            editHandler={this.props.editClickHandler}
-            moveHandler={this.onMove}
-          />
-        ))}
+      <ul className={listClasses}>
+        {hasEntities
+          ? entities.map((entity, index) => (
+              <ListItem
+                key={entity.id}
+                entity={entity}
+                entities={entities}
+                ordinal={index}
+                entityName={this.props.entityName}
+                entityAvatarAttribute={this.props.entityAvatarAttribute}
+                label={this.props.label}
+                orderable={this.props.orderable}
+                removeHandler={this.onRemove}
+                editHandler={this.props.editClickHandler}
+                moveHandler={this.onMove}
+              />
+            ))
+          : this.maybeRenderPlaceholder(bucketStyle, this.props.label)}
       </ul>
     );
   }

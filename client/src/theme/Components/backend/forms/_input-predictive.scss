@@ -52,6 +52,10 @@
       @include focusOutline;
     }
   }
+
+  + .has-many-list {
+    margin-top: 20px;
+  }
 }
 
 .predictive-list {
