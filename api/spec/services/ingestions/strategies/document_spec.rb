@@ -68,7 +68,12 @@ RSpec.describe Ingestions::Strategies::Document do
     end
     let(:context) { create_context(ingestion) }
     let(:toc) {
-      [{"label"=>"Header 1",
+      [{"label"=>"Header 0",
+        "anchor"=>"header-0",
+        "source_path"=>"index.html",
+        "children"=>[]
+       },
+        {"label"=>"Header 1",
         "anchor"=>"header-1",
         "source_path"=>"index.html",
         "children"=>
