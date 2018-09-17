@@ -41,5 +41,24 @@ RSpec.describe Ingestions::Converters::Html do
 
   end
 
+  describe "when ingesting html with headers that do not have IDs" do
+
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "without_header_ids", "index.html") }
+    let(:headers) { parsed.xpath("//h1 | //h2 | //h3 | //h4 | //h5 | //h6") }
+
+    it "adds an ID to every header tag" do
+      headers.each do |header, index|
+        expect(header["id"].blank?).to be false
+      end
+    end
+
+    it "generates unique header tags, even when contents are the same" do
+      ids = headers.map { |header| header["id"] }
+      expect(ids.length > 0).to be true
+      expect(ids.uniq.length).to eq ids.length
+    end
+
+  end
+
 
 end
