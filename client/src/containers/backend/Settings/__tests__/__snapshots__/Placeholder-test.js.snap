@@ -10,13 +10,13 @@ exports[`Backend Settings Placeholder Container renders correctly 1`] = `
   >
     <label
       className=""
-      htmlFor="attributes[aSetting]-text-input-15"
+      htmlFor="attributes[aSetting]-text-input-1"
     >
       A All temporary stuff setting
     </label>
     <input
-      aria-describedby="attributes[aSetting]-text-input-15"
-      id="attributes[aSetting]-text-input-15"
+      aria-describedby="attributes[aSetting]-text-input-1"
+      id="attributes[aSetting]-text-input-1"
       onChange={[Function]}
       placeholder="Some setting could go here"
       type="text"
@@ -29,13 +29,13 @@ exports[`Backend Settings Placeholder Container renders correctly 1`] = `
   >
     <label
       className=""
-      htmlFor="attributes[anotherSetting]-text-input-15"
+      htmlFor="attributes[anotherSetting]-text-input-1"
     >
       Another All temporary stuff setting
     </label>
     <input
-      aria-describedby="attributes[anotherSetting]-text-input-15"
-      id="attributes[anotherSetting]-text-input-15"
+      aria-describedby="attributes[anotherSetting]-text-input-1"
+      id="attributes[anotherSetting]-text-input-1"
       onChange={[Function]}
       placeholder="Some other setting could go here"
       type="text"

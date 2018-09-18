@@ -40,13 +40,13 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][fromAddress]-text-input-15"
+                  htmlFor="attributes[email][fromAddress]-text-input-1"
                 >
                   Email from address
                 </label>
                 <input
-                  aria-describedby="attributes[email][fromAddress]-text-input-15"
-                  id="attributes[email][fromAddress]-text-input-15"
+                  aria-describedby="attributes[email][fromAddress]-text-input-1"
+                  id="attributes[email][fromAddress]-text-input-1"
                   onChange={[Function]}
                   placeholder="do-not-reply@manifoldapp.org"
                   type="text"
@@ -64,13 +64,13 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][fromName]-text-input-15"
+                  htmlFor="attributes[email][fromName]-text-input-1"
                 >
                   Email from name
                 </label>
                 <input
-                  aria-describedby="attributes[email][fromName]-text-input-15"
-                  id="attributes[email][fromName]-text-input-15"
+                  aria-describedby="attributes[email][fromName]-text-input-1"
+                  id="attributes[email][fromName]-text-input-1"
                   onChange={[Function]}
                   placeholder="Manifold Scholarship"
                   type="text"
@@ -88,13 +88,13 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][replyToAddress]-text-input-15"
+                  htmlFor="attributes[email][replyToAddress]-text-input-1"
                 >
                   Email reply-to address
                 </label>
                 <input
-                  aria-describedby="attributes[email][replyToAddress]-text-input-15"
-                  id="attributes[email][replyToAddress]-text-input-15"
+                  aria-describedby="attributes[email][replyToAddress]-text-input-1"
+                  id="attributes[email][replyToAddress]-text-input-1"
                   onChange={[Function]}
                   placeholder="do-not-reply@manifoldapp.org"
                   type="text"
@@ -112,13 +112,13 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][replyToName]-text-input-15"
+                  htmlFor="attributes[email][replyToName]-text-input-1"
                 >
                   Email reply-to name
                 </label>
                 <input
-                  aria-describedby="attributes[email][replyToName]-text-input-15"
-                  id="attributes[email][replyToName]-text-input-15"
+                  aria-describedby="attributes[email][replyToName]-text-input-1"
+                  id="attributes[email][replyToName]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -139,7 +139,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="textarea-13"
+                    htmlFor="textarea-1"
                   >
                     Email closing
                   </label>
@@ -149,8 +149,8 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
                     How do you want to close emails sent by Manifold?
                   </span>
                   <textarea
-                    aria-describedby="textarea-error-14"
-                    id="textarea-13"
+                    aria-describedby="textarea-error-1"
+                    id="textarea-1"
                     onChange={[Function]}
                     placeholder="Sincerely,
 The Manifold Team"
@@ -198,7 +198,7 @@ The Manifold Team"
                       className="manicon manicon-caret-down"
                     />
                     <select
-                      aria-describedby="select-error-12"
+                      aria-describedby="select-error-1"
                       id={undefined}
                       onChange={[Function]}
                       value={undefined}
@@ -243,13 +243,13 @@ The Manifold Team"
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][sendmailSettingsLocation]-text-input-15"
+                  htmlFor="attributes[email][sendmailSettingsLocation]-text-input-1"
                 >
                   Sendmail Location
                 </label>
                 <input
-                  aria-describedby="attributes[email][sendmailSettingsLocation]-text-input-15"
-                  id="attributes[email][sendmailSettingsLocation]-text-input-15"
+                  aria-describedby="attributes[email][sendmailSettingsLocation]-text-input-1"
+                  id="attributes[email][sendmailSettingsLocation]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -267,13 +267,13 @@ The Manifold Team"
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][sendmailSettingsArguments]-text-input-15"
+                  htmlFor="attributes[email][sendmailSettingsArguments]-text-input-1"
                 >
                   Sendmail Arguments
                 </label>
                 <input
-                  aria-describedby="attributes[email][sendmailSettingsArguments]-text-input-15"
-                  id="attributes[email][sendmailSettingsArguments]-text-input-15"
+                  aria-describedby="attributes[email][sendmailSettingsArguments]-text-input-1"
+                  id="attributes[email][sendmailSettingsArguments]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -353,13 +353,13 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][fromAddress]-text-input-15"
+                  htmlFor="attributes[email][fromAddress]-text-input-1"
                 >
                   Email from address
                 </label>
                 <input
-                  aria-describedby="attributes[email][fromAddress]-text-input-15"
-                  id="attributes[email][fromAddress]-text-input-15"
+                  aria-describedby="attributes[email][fromAddress]-text-input-1"
+                  id="attributes[email][fromAddress]-text-input-1"
                   onChange={[Function]}
                   placeholder="do-not-reply@manifoldapp.org"
                   type="text"
@@ -377,13 +377,13 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][fromName]-text-input-15"
+                  htmlFor="attributes[email][fromName]-text-input-1"
                 >
                   Email from name
                 </label>
                 <input
-                  aria-describedby="attributes[email][fromName]-text-input-15"
-                  id="attributes[email][fromName]-text-input-15"
+                  aria-describedby="attributes[email][fromName]-text-input-1"
+                  id="attributes[email][fromName]-text-input-1"
                   onChange={[Function]}
                   placeholder="Manifold Scholarship"
                   type="text"
@@ -401,13 +401,13 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][replyToAddress]-text-input-15"
+                  htmlFor="attributes[email][replyToAddress]-text-input-1"
                 >
                   Email reply-to address
                 </label>
                 <input
-                  aria-describedby="attributes[email][replyToAddress]-text-input-15"
-                  id="attributes[email][replyToAddress]-text-input-15"
+                  aria-describedby="attributes[email][replyToAddress]-text-input-1"
+                  id="attributes[email][replyToAddress]-text-input-1"
                   onChange={[Function]}
                   placeholder="do-not-reply@manifoldapp.org"
                   type="text"
@@ -425,13 +425,13 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][replyToName]-text-input-15"
+                  htmlFor="attributes[email][replyToName]-text-input-1"
                 >
                   Email reply-to name
                 </label>
                 <input
-                  aria-describedby="attributes[email][replyToName]-text-input-15"
-                  id="attributes[email][replyToName]-text-input-15"
+                  aria-describedby="attributes[email][replyToName]-text-input-1"
+                  id="attributes[email][replyToName]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -452,7 +452,7 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="textarea-13"
+                    htmlFor="textarea-1"
                   >
                     Email closing
                   </label>
@@ -462,8 +462,8 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
                     How do you want to close emails sent by Manifold?
                   </span>
                   <textarea
-                    aria-describedby="textarea-error-14"
-                    id="textarea-13"
+                    aria-describedby="textarea-error-1"
+                    id="textarea-1"
                     onChange={[Function]}
                     placeholder="Sincerely,
 The Manifold Team"
@@ -511,7 +511,7 @@ The Manifold Team"
                       className="manicon manicon-caret-down"
                     />
                     <select
-                      aria-describedby="select-error-12"
+                      aria-describedby="select-error-1"
                       id={undefined}
                       onChange={[Function]}
                       value={undefined}
@@ -556,13 +556,13 @@ The Manifold Team"
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][smtpSettingsAddress]-text-input-15"
+                  htmlFor="attributes[email][smtpSettingsAddress]-text-input-1"
                 >
                   SMTP Address
                 </label>
                 <input
-                  aria-describedby="attributes[email][smtpSettingsAddress]-text-input-15"
-                  id="attributes[email][smtpSettingsAddress]-text-input-15"
+                  aria-describedby="attributes[email][smtpSettingsAddress]-text-input-1"
+                  id="attributes[email][smtpSettingsAddress]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -580,13 +580,13 @@ The Manifold Team"
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][smtpSettingsPort]-text-input-15"
+                  htmlFor="attributes[email][smtpSettingsPort]-text-input-1"
                 >
                   SMTP Port
                 </label>
                 <input
-                  aria-describedby="attributes[email][smtpSettingsPort]-text-input-15"
-                  id="attributes[email][smtpSettingsPort]-text-input-15"
+                  aria-describedby="attributes[email][smtpSettingsPort]-text-input-1"
+                  id="attributes[email][smtpSettingsPort]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -604,13 +604,13 @@ The Manifold Team"
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[email][smtpSettingsUserName]-text-input-15"
+                  htmlFor="attributes[email][smtpSettingsUserName]-text-input-1"
                 >
                   SMTP Username
                 </label>
                 <input
-                  aria-describedby="attributes[email][smtpSettingsUserName]-text-input-15"
-                  id="attributes[email][smtpSettingsUserName]-text-input-15"
+                  aria-describedby="attributes[email][smtpSettingsUserName]-text-input-1"
+                  id="attributes[email][smtpSettingsUserName]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -628,13 +628,13 @@ The Manifold Team"
               >
                 <label
                   className="has-instructions"
-                  htmlFor="attributes[secrets][smtpSettingsPassword]-text-input-15"
+                  htmlFor="attributes[secrets][smtpSettingsPassword]-text-input-1"
                 >
                   SMTP Password
                 </label>
                 <input
-                  aria-describedby="attributes[secrets][smtpSettingsPassword]-text-input-15"
-                  id="attributes[secrets][smtpSettingsPassword]-text-input-15"
+                  aria-describedby="attributes[secrets][smtpSettingsPassword]-text-input-1"
+                  id="attributes[secrets][smtpSettingsPassword]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="password"

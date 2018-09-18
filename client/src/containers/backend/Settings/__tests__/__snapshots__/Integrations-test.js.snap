@@ -40,13 +40,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[integrations][facebookAppId]-text-input-15"
+                  htmlFor="attributes[integrations][facebookAppId]-text-input-1"
                 >
                   Facebook App ID
                 </label>
                 <input
-                  aria-describedby="attributes[integrations][facebookAppId]-text-input-15"
-                  id="attributes[integrations][facebookAppId]-text-input-15"
+                  aria-describedby="attributes[integrations][facebookAppId]-text-input-1"
+                  id="attributes[integrations][facebookAppId]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -59,13 +59,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[secrets][facebookAppSecret]-text-input-15"
+                  htmlFor="attributes[secrets][facebookAppSecret]-text-input-1"
                 >
                   Facebook App Secret
                 </label>
                 <input
-                  aria-describedby="attributes[secrets][facebookAppSecret]-text-input-15"
-                  id="attributes[secrets][facebookAppSecret]-text-input-15"
+                  aria-describedby="attributes[secrets][facebookAppSecret]-text-input-1"
+                  id="attributes[secrets][facebookAppSecret]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="password"
@@ -93,13 +93,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[integrations][twitterAppId]-text-input-15"
+                  htmlFor="attributes[integrations][twitterAppId]-text-input-1"
                 >
                   Twitter Consumer Key
                 </label>
                 <input
-                  aria-describedby="attributes[integrations][twitterAppId]-text-input-15"
-                  id="attributes[integrations][twitterAppId]-text-input-15"
+                  aria-describedby="attributes[integrations][twitterAppId]-text-input-1"
+                  id="attributes[integrations][twitterAppId]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -112,13 +112,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[secrets][twitterAppSecret]-text-input-15"
+                  htmlFor="attributes[secrets][twitterAppSecret]-text-input-1"
                 >
                   Twitter Consumer Secret
                 </label>
                 <input
-                  aria-describedby="attributes[secrets][twitterAppSecret]-text-input-15"
-                  id="attributes[secrets][twitterAppSecret]-text-input-15"
+                  aria-describedby="attributes[secrets][twitterAppSecret]-text-input-1"
+                  id="attributes[secrets][twitterAppSecret]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="password"
@@ -131,13 +131,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[integrations][twitterAccessToken]-text-input-15"
+                  htmlFor="attributes[integrations][twitterAccessToken]-text-input-1"
                 >
                   Twitter Access Token
                 </label>
                 <input
-                  aria-describedby="attributes[integrations][twitterAccessToken]-text-input-15"
-                  id="attributes[integrations][twitterAccessToken]-text-input-15"
+                  aria-describedby="attributes[integrations][twitterAccessToken]-text-input-1"
+                  id="attributes[integrations][twitterAccessToken]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -150,13 +150,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[secrets][twitterAccessTokenSecret]-text-input-15"
+                  htmlFor="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
                 >
                   Twitter Access Token Secret
                 </label>
                 <input
-                  aria-describedby="attributes[secrets][twitterAccessTokenSecret]-text-input-15"
-                  id="attributes[secrets][twitterAccessTokenSecret]-text-input-15"
+                  aria-describedby="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
+                  id="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="password"
@@ -187,7 +187,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                 >
                   <label
                     className=""
-                    htmlFor="upload-21"
+                    htmlFor="upload-1"
                   >
                     Google Service Config File
                   </label>
@@ -201,8 +201,8 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     className="form-dropzone style-square"
                     inputProps={
                       Object {
-                        "aria-describedby": "upload-error-22",
-                        "id": "upload-21",
+                        "aria-describedby": "upload-error-1",
+                        "id": "upload-1",
                       }
                     }
                     multiple={false}
@@ -253,13 +253,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                 >
                   <label
                     className=""
-                    htmlFor="textarea-13"
+                    htmlFor="textarea-1"
                   >
                     Google Private Key
                   </label>
                   <textarea
-                    aria-describedby="textarea-error-14"
-                    id="textarea-13"
+                    aria-describedby="textarea-error-1"
+                    id="textarea-1"
                     onChange={[Function]}
                     placeholder={undefined}
                     style={
@@ -277,13 +277,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[integrations][googleProjectId]-text-input-15"
+                  htmlFor="attributes[integrations][googleProjectId]-text-input-1"
                 >
                   Google Project Id
                 </label>
                 <input
-                  aria-describedby="attributes[integrations][googleProjectId]-text-input-15"
-                  id="attributes[integrations][googleProjectId]-text-input-15"
+                  aria-describedby="attributes[integrations][googleProjectId]-text-input-1"
+                  id="attributes[integrations][googleProjectId]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -296,13 +296,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[integrations][googlePrivateKeyId]-text-input-15"
+                  htmlFor="attributes[integrations][googlePrivateKeyId]-text-input-1"
                 >
                   Google Private Key ID
                 </label>
                 <input
-                  aria-describedby="attributes[integrations][googlePrivateKeyId]-text-input-15"
-                  id="attributes[integrations][googlePrivateKeyId]-text-input-15"
+                  aria-describedby="attributes[integrations][googlePrivateKeyId]-text-input-1"
+                  id="attributes[integrations][googlePrivateKeyId]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -315,13 +315,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[integrations][googleClientEmail]-text-input-15"
+                  htmlFor="attributes[integrations][googleClientEmail]-text-input-1"
                 >
                   Google Client Email
                 </label>
                 <input
-                  aria-describedby="attributes[integrations][googleClientEmail]-text-input-15"
-                  id="attributes[integrations][googleClientEmail]-text-input-15"
+                  aria-describedby="attributes[integrations][googleClientEmail]-text-input-1"
+                  id="attributes[integrations][googleClientEmail]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -334,13 +334,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[integrations][googleClientId]-text-input-15"
+                  htmlFor="attributes[integrations][googleClientId]-text-input-1"
                 >
                   Google Client ID
                 </label>
                 <input
-                  aria-describedby="attributes[integrations][googleClientId]-text-input-15"
-                  id="attributes[integrations][googleClientId]-text-input-15"
+                  aria-describedby="attributes[integrations][googleClientId]-text-input-1"
+                  id="attributes[integrations][googleClientId]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -368,13 +368,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[integrations][googleOauthClientId]-text-input-15"
+                  htmlFor="attributes[integrations][googleOauthClientId]-text-input-1"
                 >
                   Google OAuth Client ID
                 </label>
                 <input
-                  aria-describedby="attributes[integrations][googleOauthClientId]-text-input-15"
-                  id="attributes[integrations][googleOauthClientId]-text-input-15"
+                  aria-describedby="attributes[integrations][googleOauthClientId]-text-input-1"
+                  id="attributes[integrations][googleOauthClientId]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="text"
@@ -387,13 +387,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[secrets][googleOauthClientSecret]-text-input-15"
+                  htmlFor="attributes[secrets][googleOauthClientSecret]-text-input-1"
                 >
                   Google Client Secret
                 </label>
                 <input
-                  aria-describedby="attributes[secrets][googleOauthClientSecret]-text-input-15"
-                  id="attributes[secrets][googleOauthClientSecret]-text-input-15"
+                  aria-describedby="attributes[secrets][googleOauthClientSecret]-text-input-1"
+                  id="attributes[secrets][googleOauthClientSecret]-text-input-1"
                   onChange={[Function]}
                   placeholder={undefined}
                   type="password"
@@ -420,12 +420,12 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="masked-text-10"
+                  htmlFor="masked-text-1"
                 >
                   Google Analytics Profile ID
                 </label>
                 <react-text-mask
-                  id="masked-text-10"
+                  id="masked-text-1"
                   mask={
                     Array [
                       "g",
@@ -455,13 +455,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[integrations][gaTrackingId]-text-input-15"
+                  htmlFor="attributes[integrations][gaTrackingId]-text-input-1"
                 >
                   Google Analytics Tracking ID
                 </label>
                 <input
-                  aria-describedby="attributes[integrations][gaTrackingId]-text-input-15"
-                  id="attributes[integrations][gaTrackingId]-text-input-15"
+                  aria-describedby="attributes[integrations][gaTrackingId]-text-input-1"
+                  id="attributes[integrations][gaTrackingId]-text-input-1"
                   onChange={[Function]}
                   placeholder="UA-000000-00"
                   type="text"

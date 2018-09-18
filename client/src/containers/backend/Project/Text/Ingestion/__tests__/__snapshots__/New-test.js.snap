@@ -25,7 +25,7 @@ exports[`Project Text Ingestion New Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="upload-19"
+              htmlFor="upload-1"
             >
               Upload a file
             </label>
@@ -56,8 +56,8 @@ exports[`Project Text Ingestion New Container renders correctly 1`] = `
               className="form-dropzone style-landscape"
               inputProps={
                 Object {
-                  "aria-describedby": "upload-error-20",
-                  "id": "upload-19",
+                  "aria-describedby": "upload-error-1",
+                  "id": "upload-1",
                 }
               }
               multiple={false}
@@ -109,13 +109,13 @@ exports[`Project Text Ingestion New Container renders correctly 1`] = `
         >
           <label
             className="has-instructions"
-            htmlFor="text-input-15"
+            htmlFor="text-input-1"
           >
             URL
           </label>
           <input
-            aria-describedby="text-input-15"
-            id="text-input-15"
+            aria-describedby="text-input-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder={undefined}
             type="text"
