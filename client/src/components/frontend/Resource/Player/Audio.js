@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import debounce from "lodash/debounce";
 import throttle from "lodash/throttle";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 
 export default class ResourcePlayerAudio extends Component {
   static propTypes = {
@@ -13,8 +13,8 @@ export default class ResourcePlayerAudio extends Component {
   };
 
   static defaultProps = {
-    progressBarId: uniqueId("progress-bar-"),
-    volumeBarId: uniqueId("volume-bar-")
+    progressBarId: labelId("progress-bar-"),
+    volumeBarId: labelId("volume-bar-")
   };
 
   constructor() {

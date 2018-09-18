@@ -8,7 +8,7 @@ import { singularEntityName } from "utils/entityUtils";
 import { bindActionCreators } from "redux";
 import { commentsAPI } from "api";
 import { HigherOrder } from "containers/global";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 
 const { request } = entityStoreActions;
 import { Form as GlobalForm } from "components/global";
@@ -38,8 +38,8 @@ export class CommentEditor extends PureComponent {
 
   static defaultProps = {
     focus: true,
-    id: uniqueId("comment-textarea-"),
-    idForError: uniqueId("comment-textarea-error-")
+    id: labelId("comment-textarea-"),
+    idForError: labelId("comment-textarea-error-")
   };
 
   constructor(props) {

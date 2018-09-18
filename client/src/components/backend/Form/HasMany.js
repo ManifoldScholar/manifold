@@ -5,7 +5,7 @@ import { Form as FormContainer } from "containers/backend";
 import { Form as GlobalForm } from "components/global";
 import indexOf from "lodash/indexOf";
 import get from "lodash/get";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 
 export default class FormHasMany extends PureComponent {
   static displayName = "Form.HasMany";
@@ -28,7 +28,7 @@ export default class FormHasMany extends PureComponent {
   };
 
   static defaultProps = {
-    idForError: uniqueId("predictive-text-belongs-to-error-")
+    idForError: labelId("predictive-text-belongs-to-error-")
   };
 
   onMove = (event, entity, direction) => {

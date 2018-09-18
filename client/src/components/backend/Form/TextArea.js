@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 import setter from "./setter";
 import { Form as GlobalForm } from "components/global";
 import isString from "lodash/isString";
@@ -26,8 +26,8 @@ class FormTextArea extends Component {
 
   static defaultProps = {
     height: 100,
-    id: uniqueId("textarea-"),
-    idForError: uniqueId("textarea-error-")
+    id: labelId("textarea-"),
+    idForError: labelId("textarea-error-")
   };
 
   render() {

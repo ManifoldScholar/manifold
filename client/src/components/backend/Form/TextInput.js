@@ -5,7 +5,7 @@ import { Form as GlobalForm } from "components/global";
 import classnames from "classnames";
 import isString from "lodash/isString";
 import isArray from "lodash/isArray";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 import Instructions from "./Instructions";
 
 class FormTextInput extends Component {
@@ -32,8 +32,8 @@ class FormTextInput extends Component {
     focusOnMount: false,
     password: false,
     join: array => array.join(", "),
-    id: uniqueId("text-input-"),
-    idForError: uniqueId("text-input-error-")
+    id: labelId("text-input-"),
+    idForError: labelId("text-input-error-")
   };
 
   componentDidMount() {

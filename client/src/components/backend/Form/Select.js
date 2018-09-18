@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 import { Form as GlobalForm } from "components/global";
 import setter from "./setter";
 import isNull from "lodash/isNull";
@@ -27,8 +27,8 @@ class FormSelect extends Component {
   };
 
   static defaultProps = {
-    id: uniqueId("select-"),
-    idForError: uniqueId("select-error-")
+    id: labelId("select-"),
+    idForError: labelId("select-error-")
   };
 
   render() {
