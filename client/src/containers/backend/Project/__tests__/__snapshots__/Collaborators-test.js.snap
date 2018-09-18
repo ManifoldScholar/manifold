@@ -18,7 +18,9 @@ exports[`Backend Project Collaborators Container renders correctly 1`] = `
         <nav
           className="has-many-list"
         >
-          <ul>
+          <ul
+            className=""
+          >
             <li>
               <div
                 className="association"
@@ -124,7 +126,9 @@ exports[`Backend Project Collaborators Container renders correctly 1`] = `
         <nav
           className="has-many-list"
         >
-          <ul>
+          <ul
+            className=""
+          >
             <li>
               <div
                 className="association"

@@ -259,30 +259,6 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <div
             className="form-input"
-            style={Object {}}
-          >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[tagList]-text-input-1"
-            >
-              Tags
-            </label>
-            <input
-              aria-describedby="attributes[tagList]-text-input-1"
-              id="attributes[tagList]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter Tags"
-              type="text"
-              value=""
-            />
-            <span
-              className="instructions"
-            >
-              Separate tags with "," or ";"
-            </span>
-          </div>
-          <div
-            className="form-input"
           >
             <h4
               className="form-input-heading"
@@ -492,37 +468,6 @@ exports[`Backend Project General Container renders correctly 1`] = `
             <nav
               className="has-many-list"
             >
-              <ul>
-                <li>
-                  <div
-                    className="association"
-                  >
-                    <h4
-                      className="association-name"
-                    >
-                      Hip Hop
-                    </h4>
-                  </div>
-                  <div
-                    className="utility"
-                  >
-                    <button
-                      className="manicon manicon-x"
-                      onClick={[Function]}
-                    >
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Remove 
-                        Hip Hop
-                         from the 
-                        Subjects
-                         list.
-                      </span>
-                    </button>
-                  </div>
-                </li>
-              </ul>
               <div
                 className="input-predictive"
               >
@@ -560,7 +505,88 @@ exports[`Backend Project General Container renders correctly 1`] = `
                   <ul />
                 </nav>
               </div>
+              <ul
+                className="bucket"
+              >
+                <li>
+                  <div
+                    className="association"
+                  >
+                    <h4
+                      className="association-name"
+                    >
+                      Hip Hop
+                    </h4>
+                  </div>
+                  <div
+                    className="utility"
+                  >
+                    <button
+                      className="manicon manicon-x"
+                      onClick={[Function]}
+                    >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Remove 
+                        Hip Hop
+                         from the 
+                        Subjects
+                         list.
+                      </span>
+                    </button>
+                  </div>
+                </li>
+              </ul>
             </nav>
+          </div>
+          <div
+            className="form-input wide"
+            style={Object {}}
+          >
+            <label
+              className=""
+              htmlFor="attributes[tagList]-tag-list-1"
+            >
+              Tags
+            </label>
+            <div
+              className="input-predictive"
+            >
+              <div
+                className="input"
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-plus"
+                  onClick={[Function]}
+                />
+                <input
+                  aria-describedby="attributes[tagList]-tag-list-1"
+                  id="attributes[tagList]-tag-list-1"
+                  onChange={[Function]}
+                  onKeyPress={[Function]}
+                  placeholder="Enter a Tag"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              className="has-many-list"
+            >
+              <ul
+                className="bucket empty"
+              >
+                <div
+                  className="placeholder"
+                >
+                  No 
+                  Tags
+                   added
+                </div>
+              </ul>
+            </div>
           </div>
           <div
             className="form-input avatar-builder wide"

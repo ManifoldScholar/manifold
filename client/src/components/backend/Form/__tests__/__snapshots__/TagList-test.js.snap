@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.TagList component renders correctly 1`] = `
+<div
+  className="form-input"
+  style={Object {}}
+>
+  <label
+    className=""
+    htmlFor="attributes[tags]-tag-list-1"
+  >
+    Tags
+  </label>
+  <div
+    className="input-predictive"
+  >
+    <div
+      className="input"
+    >
+      <i
+        aria-hidden="true"
+        className="manicon manicon-plus"
+        onClick={[Function]}
+      />
+      <input
+        aria-describedby="attributes[tags]-tag-list-1"
+        id="attributes[tags]-tag-list-1"
+        onChange={[Function]}
+        onKeyPress={[Function]}
+        placeholder={undefined}
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    className="has-many-list"
+  >
+    <ul
+      className="bucket empty"
+    >
+      <div
+        className="placeholder"
+      >
+        No 
+        Tags
+         added
+      </div>
+    </ul>
+  </div>
+</div>
+`;
