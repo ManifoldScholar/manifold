@@ -17,4 +17,9 @@ RSpec.describe Stylesheet, type: :model do
     expect{ stylesheet.save }.to change(stylesheet, :styles)
   end
 
+  it "does not destroy text section records on destroy" do
+    stylesheet.text_sections << FactoryBot.create(:text_section)
+    expect { stylesheet.destroy }.to_not change { TextSection.count }
+  end
+
 end
