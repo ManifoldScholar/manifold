@@ -67,6 +67,9 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                                           </FormCodeArea>
                                         </Form.Setter('FormCodeArea)>
                                       </HigherOrder.FetchData('FormCodeArea)>
+                                      <Connect(Stylesheet.Form.TextSections) stylesheet={{...}} wide={true} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} dispatch={[Function]} fetchData={[Function]}>
+                                        <Stylesheet.Form.TextSections stylesheet={{...}} wide={true} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} dispatch={[Function]} fetchData={[Function]} updateStylesheets={[undefined]} authentication={{...}} />
+                                      </Connect(Stylesheet.Form.TextSections)>
                                       <Form.Save cancelRoute=\\"/backend/projects/text/undefined/styles\\" text=\\"Save Stylesheet\\">
                                         <div className=\\"form-input submit wide\\">
                                           <Link to=\\"/backend/projects/text/undefined/styles\\" className=\\"button-secondary outlined dull\\" replace={false}>

@@ -17,7 +17,9 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
       <nav
         className="has-many-list"
       >
-        <ul>
+        <ul
+          className=""
+        >
           <li>
             <div
               className="association"
@@ -123,7 +125,9 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
       <nav
         className="has-many-list"
       >
-        <ul>
+        <ul
+          className=""
+        >
           <li>
             <div
               className="association"

@@ -13,37 +13,6 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
   <nav
     className="has-many-list"
   >
-    <ul>
-      <li>
-        <div
-          className="association"
-        >
-          <h4
-            className="association-name"
-          >
-            Hip Hop
-          </h4>
-        </div>
-        <div
-          className="utility"
-        >
-          <button
-            className="manicon manicon-x"
-            onClick={[Function]}
-          >
-            <span
-              className="screen-reader-text"
-            >
-              Remove 
-              Hip Hop
-               from the 
-              Subjects
-               list.
-            </span>
-          </button>
-        </div>
-      </li>
-    </ul>
     <div
       className="input-predictive"
     >
@@ -81,6 +50,39 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
         <ul />
       </nav>
     </div>
+    <ul
+      className="bucket"
+    >
+      <li>
+        <div
+          className="association"
+        >
+          <h4
+            className="association-name"
+          >
+            Hip Hop
+          </h4>
+        </div>
+        <div
+          className="utility"
+        >
+          <button
+            className="manicon manicon-x"
+            onClick={[Function]}
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Remove 
+              Hip Hop
+               from the 
+              Subjects
+               list.
+            </span>
+          </button>
+        </div>
+      </li>
+    </ul>
   </nav>
 </div>
 `;
