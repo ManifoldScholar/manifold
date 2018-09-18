@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 import setter from "./setter";
 import Base from "./Upload/Base";
 import get from "lodash/get";
@@ -91,8 +91,8 @@ export class FormUpload extends Component {
   static defaultProps = {
     layout: "square",
     accepts: "any",
-    inputId: uniqueId("upload-"),
-    idForError: uniqueId("upload-error-")
+    inputId: labelId("upload-"),
+    idForError: labelId("upload-error-")
   };
 
   updateValue = state => {

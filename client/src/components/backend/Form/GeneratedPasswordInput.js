@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 import setter from "./setter";
 import classnames from "classnames";
 import { Form as GlobalForm } from "components/global";
@@ -22,8 +22,8 @@ class FormGeneratedPasswordInput extends Component {
 
   static defaultProps = {
     focusOnMount: false,
-    id: uniqueId("generated-password-"),
-    idForError: uniqueId("generated-password-error-")
+    id: labelId("generated-password-"),
+    idForError: labelId("generated-password-error-")
   };
 
   constructor(props) {

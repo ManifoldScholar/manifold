@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
 import omitBy from "lodash/omitBy";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 
 export default class ResourceListFilters extends Component {
   static displayName = "ResourceList.Filters";
@@ -16,7 +16,7 @@ export default class ResourceListFilters extends Component {
   };
 
   static defaultProps = {
-    searchId: uniqueId("filters-search-")
+    searchId: labelId("filters-search-")
   };
 
   constructor(props) {

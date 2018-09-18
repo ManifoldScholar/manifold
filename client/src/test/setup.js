@@ -13,3 +13,7 @@ jest.mock("components/global/HigherOrder/fetchData");
 
 // To mock returned data or collection responses, adjust src/api/__mocks__/client.js
 jest.mock("api/client");
+
+jest.mock("helpers/labelId", () => {
+  return jest.fn((prefix) => `${prefix}1`);
+});

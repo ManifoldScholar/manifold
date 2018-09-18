@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 import Dropzone from "react-dropzone";
 import { Form as GlobalForm } from "components/global";
 import classnames from "classnames";
@@ -42,8 +42,8 @@ export default class FormUpload extends Component {
     layout: "square",
     accepts: null,
     wide: false,
-    inputId: uniqueId("upload-"),
-    idForError: uniqueId("upload-error-")
+    inputId: labelId("upload-"),
+    idForError: labelId("upload-error-")
   };
 
   constructor(props) {

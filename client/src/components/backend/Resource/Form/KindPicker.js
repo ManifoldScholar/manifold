@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 import classNames from "classnames";
 import { Resource } from "components/frontend";
 import setter from "components/backend/Form/setter";
@@ -16,7 +16,7 @@ class KindPicker extends PureComponent {
   };
 
   static defaultProps = {
-    id: uniqueId("kind-")
+    id: labelId("kind-")
   };
 
   renderKindPickerButtons(kindList) {

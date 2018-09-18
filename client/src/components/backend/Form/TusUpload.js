@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 import setter from "./setter";
 import Base from "./Upload/Base";
 import tus from "tus-js-client";
@@ -33,8 +33,8 @@ export class FormTusUpload extends Component {
 
   static defaultProps = {
     layout: "square",
-    inputId: uniqueId("upload-"),
-    idForError: uniqueId("upload-error-")
+    inputId: labelId("upload-"),
+    idForError: labelId("upload-error-")
   };
 
   constructor(props) {
