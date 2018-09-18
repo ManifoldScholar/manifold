@@ -30,7 +30,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
             >
               <label
                 className="has-instructions"
-                htmlFor="upload-21"
+                htmlFor="upload-1"
               >
                 Press Logo
               </label>
@@ -49,8 +49,8 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                 className="form-dropzone style-square"
                 inputProps={
                   Object {
-                    "aria-describedby": "upload-error-22",
-                    "id": "upload-21",
+                    "aria-describedby": "upload-error-1",
+                    "id": "upload-1",
                   }
                 }
                 multiple={false}
@@ -98,13 +98,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[general][pressSite]-text-input-15"
+              htmlFor="attributes[general][pressSite]-text-input-1"
             >
               Press Website URL
             </label>
             <input
-              aria-describedby="attributes[general][pressSite]-text-input-15"
-              id="attributes[general][pressSite]-text-input-15"
+              aria-describedby="attributes[general][pressSite]-text-input-1"
+              id="attributes[general][pressSite]-text-input-1"
               onChange={[Function]}
               placeholder="Enter URL"
               type="text"
@@ -122,13 +122,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[theme][logoStyles]-text-input-15"
+              htmlFor="attributes[theme][logoStyles]-text-input-1"
             >
               Logo Styles
             </label>
             <input
-              aria-describedby="attributes[theme][logoStyles]-text-input-15"
-              id="attributes[theme][logoStyles]-text-input-15"
+              aria-describedby="attributes[theme][logoStyles]-text-input-1"
+              id="attributes[theme][logoStyles]-text-input-1"
               onChange={[Function]}
               placeholder="Additional Logo CSS"
               type="text"
@@ -146,13 +146,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[theme][typekitId]-text-input-15"
+              htmlFor="attributes[theme][typekitId]-text-input-1"
             >
               Typekit ID
             </label>
             <input
-              aria-describedby="attributes[theme][typekitId]-text-input-15"
-              id="attributes[theme][typekitId]-text-input-15"
+              aria-describedby="attributes[theme][typekitId]-text-input-1"
+              id="attributes[theme][typekitId]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Typekit ID"
               type="text"

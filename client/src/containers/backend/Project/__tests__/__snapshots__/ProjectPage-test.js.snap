@@ -63,7 +63,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             >
               <label
                 className="has-instructions"
-                htmlFor="textarea-13"
+                htmlFor="textarea-1"
               >
                 Description
               </label>
@@ -73,8 +73,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 Enter a brief description of your project. This field accepts basic Markdown.
               </span>
               <textarea
-                aria-describedby="textarea-error-14"
-                id="textarea-13"
+                aria-describedby="textarea-error-1"
+                id="textarea-1"
                 onChange={[Function]}
                 placeholder={undefined}
                 style={
@@ -95,7 +95,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="upload-21"
+                htmlFor="upload-1"
               >
                 Hero Image
               </label>
@@ -118,8 +118,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 className="form-dropzone style-landscape"
                 inputProps={
                   Object {
-                    "aria-describedby": "upload-error-22",
-                    "id": "upload-21",
+                    "aria-describedby": "upload-error-1",
+                    "id": "upload-1",
                   }
                 }
                 multiple={false}
@@ -170,7 +170,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             >
               <label
                 className="has-instructions"
-                htmlFor="upload-21"
+                htmlFor="upload-1"
               >
                 Cover
               </label>
@@ -189,8 +189,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 className="form-dropzone style-portrait"
                 inputProps={
                   Object {
-                    "aria-describedby": "upload-error-22",
-                    "id": "upload-21",
+                    "aria-describedby": "upload-error-1",
+                    "id": "upload-1",
                   }
                 }
                 multiple={false}
@@ -253,13 +253,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[purchaseUrl]-text-input-15"
+              htmlFor="attributes[purchaseUrl]-text-input-1"
             >
               Purchase URL
             </label>
             <input
-              aria-describedby="attributes[purchaseUrl]-text-input-15"
-              id="attributes[purchaseUrl]-text-input-15"
+              aria-describedby="attributes[purchaseUrl]-text-input-1"
+              id="attributes[purchaseUrl]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Purchase URL"
               type="text"
@@ -277,13 +277,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[purchaseCallToAction]-text-input-15"
+              htmlFor="attributes[purchaseCallToAction]-text-input-1"
             >
               Purchase Call To Action
             </label>
             <input
-              aria-describedby="attributes[purchaseCallToAction]-text-input-15"
-              id="attributes[purchaseCallToAction]-text-input-15"
+              aria-describedby="attributes[purchaseCallToAction]-text-input-1"
+              id="attributes[purchaseCallToAction]-text-input-1"
               onChange={[Function]}
               placeholder="Buy Print Version"
               type="text"
@@ -300,12 +300,12 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="masked-text-10"
+              htmlFor="masked-text-1"
             >
               Purchase Price
             </label>
             <react-text-mask
-              id="masked-text-10"
+              id="masked-text-1"
               mask={[Function]}
               onChange={[Function]}
               placeholder={undefined}
@@ -325,13 +325,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[purchasePriceCurrency]-text-input-15"
+              htmlFor="attributes[purchasePriceCurrency]-text-input-1"
             >
               Currency
             </label>
             <input
-              aria-describedby="attributes[purchasePriceCurrency]-text-input-15"
-              id="attributes[purchasePriceCurrency]-text-input-15"
+              aria-describedby="attributes[purchasePriceCurrency]-text-input-1"
+              id="attributes[purchasePriceCurrency]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Purchase Price Currency Code"
               type="text"
@@ -369,13 +369,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[downloadUrl]-text-input-15"
+              htmlFor="attributes[downloadUrl]-text-input-1"
             >
               Download URL
             </label>
             <input
-              aria-describedby="attributes[downloadUrl]-text-input-15"
-              id="attributes[downloadUrl]-text-input-15"
+              aria-describedby="attributes[downloadUrl]-text-input-1"
+              id="attributes[downloadUrl]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Download URL"
               type="text"
@@ -388,13 +388,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[downloadCallToAction]-text-input-15"
+              htmlFor="attributes[downloadCallToAction]-text-input-1"
             >
               Download Call To Action
             </label>
             <input
-              aria-describedby="attributes[downloadCallToAction]-text-input-15"
-              id="attributes[downloadCallToAction]-text-input-15"
+              aria-describedby="attributes[downloadCallToAction]-text-input-1"
+              id="attributes[downloadCallToAction]-text-input-1"
               onChange={[Function]}
               placeholder="Download eBook"
               type="text"
@@ -415,7 +415,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="upload-21"
+                htmlFor="upload-1"
               >
                 Download File
               </label>
@@ -429,8 +429,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 className="form-dropzone style-portrait"
                 inputProps={
                   Object {
-                    "aria-describedby": "upload-error-22",
-                    "id": "upload-21",
+                    "aria-describedby": "upload-error-1",
+                    "id": "upload-1",
                   }
                 }
                 multiple={false}

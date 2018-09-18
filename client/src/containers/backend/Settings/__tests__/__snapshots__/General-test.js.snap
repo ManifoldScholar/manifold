@@ -27,13 +27,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[general][installationName]-text-input-15"
+              htmlFor="attributes[general][installationName]-text-input-1"
             >
               How do you refer to your Manifold installation?
             </label>
             <input
-              aria-describedby="attributes[general][installationName]-text-input-15"
-              id="attributes[general][installationName]-text-input-15"
+              aria-describedby="attributes[general][installationName]-text-input-1"
+              id="attributes[general][installationName]-text-input-1"
               onChange={[Function]}
               placeholder="Manifold"
               type="text"
@@ -51,13 +51,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[general][headTitle]-text-input-15"
+              htmlFor="attributes[general][headTitle]-text-input-1"
             >
               Default Page Title
             </label>
             <input
-              aria-describedby="attributes[general][headTitle]-text-input-15"
-              id="attributes[general][headTitle]-text-input-15"
+              aria-describedby="attributes[general][headTitle]-text-input-1"
+              id="attributes[general][headTitle]-text-input-1"
               onChange={[Function]}
               placeholder="Enter page title"
               type="text"
@@ -75,13 +75,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[general][defaultPublisher]-text-input-15"
+              htmlFor="attributes[general][defaultPublisher]-text-input-1"
             >
               Default Publisher
             </label>
             <input
-              aria-describedby="attributes[general][defaultPublisher]-text-input-15"
-              id="attributes[general][defaultPublisher]-text-input-15"
+              aria-describedby="attributes[general][defaultPublisher]-text-input-1"
+              id="attributes[general][defaultPublisher]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Default Publisher"
               type="text"
@@ -94,13 +94,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[general][defaultPublisherPlace]-text-input-15"
+              htmlFor="attributes[general][defaultPublisherPlace]-text-input-1"
             >
               Default Place of Publication
             </label>
             <input
-              aria-describedby="attributes[general][defaultPublisherPlace]-text-input-15"
-              id="attributes[general][defaultPublisherPlace]-text-input-15"
+              aria-describedby="attributes[general][defaultPublisherPlace]-text-input-1"
+              id="attributes[general][defaultPublisherPlace]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Default Place of Publication"
               type="text"
@@ -113,13 +113,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[general][copyright]-text-input-15"
+              htmlFor="attributes[general][copyright]-text-input-1"
             >
               Copyright
             </label>
             <input
-              aria-describedby="attributes[general][copyright]-text-input-15"
-              id="attributes[general][copyright]-text-input-15"
+              aria-describedby="attributes[general][copyright]-text-input-1"
+              id="attributes[general][copyright]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Copyright Information"
               type="text"
@@ -137,13 +137,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[general][socialShareMessage]-text-input-15"
+              htmlFor="attributes[general][socialShareMessage]-text-input-1"
             >
               Social Sharing Message
             </label>
             <input
-              aria-describedby="attributes[general][socialShareMessage]-text-input-15"
-              id="attributes[general][socialShareMessage]-text-input-15"
+              aria-describedby="attributes[general][socialShareMessage]-text-input-1"
+              id="attributes[general][socialShareMessage]-text-input-1"
               onChange={[Function]}
               placeholder={undefined}
               type="text"
@@ -161,13 +161,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[general][twitter]-text-input-15"
+              htmlFor="attributes[general][twitter]-text-input-1"
             >
               Twitter Account
             </label>
             <input
-              aria-describedby="attributes[general][twitter]-text-input-15"
-              id="attributes[general][twitter]-text-input-15"
+              aria-describedby="attributes[general][twitter]-text-input-1"
+              id="attributes[general][twitter]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Twitter account"
               type="text"
@@ -185,13 +185,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[general][facebook]-text-input-15"
+              htmlFor="attributes[general][facebook]-text-input-1"
             >
               Facebook Page ID
             </label>
             <input
-              aria-describedby="attributes[general][facebook]-text-input-15"
-              id="attributes[general][facebook]-text-input-15"
+              aria-describedby="attributes[general][facebook]-text-input-1"
+              id="attributes[general][facebook]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Facebook ID"
               type="text"
@@ -209,13 +209,13 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[general][contactEmail]-text-input-15"
+              htmlFor="attributes[general][contactEmail]-text-input-1"
             >
               Contact Email
             </label>
             <input
-              aria-describedby="attributes[general][contactEmail]-text-input-15"
-              id="attributes[general][contactEmail]-text-input-15"
+              aria-describedby="attributes[general][contactEmail]-text-input-1"
+              id="attributes[general][contactEmail]-text-input-1"
               onChange={[Function]}
               placeholder="Enter an email address"
               type="text"

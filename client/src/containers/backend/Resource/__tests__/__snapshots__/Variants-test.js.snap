@@ -20,7 +20,7 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="upload-21"
+              htmlFor="upload-1"
             >
               High Resolution Image
             </label>
@@ -34,8 +34,8 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
               className="form-dropzone style-square"
               inputProps={
                 Object {
-                  "aria-describedby": "upload-error-22",
-                  "id": "upload-21",
+                  "aria-describedby": "upload-error-1",
+                  "id": "upload-1",
                 }
               }
               multiple={false}
@@ -86,7 +86,7 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="upload-21"
+              htmlFor="upload-1"
             >
               Thumbnail Image
             </label>
@@ -100,8 +100,8 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
               className="form-dropzone style-square"
               inputProps={
                 Object {
-                  "aria-describedby": "upload-error-22",
-                  "id": "upload-21",
+                  "aria-describedby": "upload-error-1",
+                  "id": "upload-1",
                 }
               }
               multiple={false}

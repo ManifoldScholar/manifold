@@ -59,12 +59,12 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                 </button>
                 <label
                   className="screen-reader-text"
-                  htmlFor="list-search-23"
+                  htmlFor="list-search-1"
                 >
                   Enter Search Criteria
                 </label>
                 <input
-                  id="list-search-23"
+                  id="list-search-1"
                   onChange={[Function]}
                   placeholder="Search..."
                   type="text"

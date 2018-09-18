@@ -24,7 +24,7 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="upload-18"
+            htmlFor="upload-1"
           >
             Upload a file
           </label>
@@ -55,8 +55,8 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
             className="form-dropzone style-landscape"
             inputProps={
               Object {
-                "aria-describedby": "upload-error-19",
-                "id": "upload-18",
+                "aria-describedby": "upload-error-1",
+                "id": "upload-1",
               }
             }
             multiple={false}
@@ -108,13 +108,13 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor="text-input-14"
+          htmlFor="text-input-1"
         >
           URL
         </label>
         <input
-          aria-describedby="text-input-14"
-          id="text-input-14"
+          aria-describedby="text-input-1"
+          id="text-input-1"
           onChange={[Function]}
           placeholder={undefined}
           type="text"
