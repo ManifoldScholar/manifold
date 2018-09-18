@@ -25,6 +25,12 @@ RSpec.describe TextSection, type: :model do
     expect(text_section.ingestion_source).to be ingestion_source
   end
 
+  it "does not destroy stylesheet records on destroy" do
+    text_section = FactoryBot.create(:text_section)
+    text_section.stylesheets << FactoryBot.create(:stylesheet)
+    expect { text_section.destroy }.to_not change { Stylesheet.count }
+  end
+
   describe "enqueues a job to reindex searchable nodes" do
     it "when creating" do
       expect { FactoryBot.create(:text_section) }.to have_enqueued_job(TextSectionJobs::ReindexSearchableNodes)

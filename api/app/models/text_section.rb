@@ -38,7 +38,7 @@ class TextSection < ApplicationRecord
   has_many :stylesheets,
            -> { order(position: :asc) },
            through: :text_section_stylesheets,
-           dependent: :nullify,
+           dependent: :destroy,
            inverse_of: :text_sections
 
   # Delegation
