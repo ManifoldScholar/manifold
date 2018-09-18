@@ -161,24 +161,48 @@ exports[`Backend Resource General Container renders correctly 1`] = `
         style={Object {}}
       >
         <label
-          className="has-instructions"
-          htmlFor="attributes[tagList]-text-input-1"
+          className=""
+          htmlFor="attributes[tagList]-tag-list-1"
         >
           Tags
         </label>
-        <input
-          aria-describedby="attributes[tagList]-text-input-1"
-          id="attributes[tagList]-text-input-1"
-          onChange={[Function]}
-          placeholder="Enter tags"
-          type="text"
-          value=""
-        />
-        <span
-          className="instructions"
+        <div
+          className="input-predictive"
         >
-          Separate tags with "," or ";"
-        </span>
+          <div
+            className="input"
+          >
+            <i
+              aria-hidden="true"
+              className="manicon manicon-plus"
+              onClick={[Function]}
+            />
+            <input
+              aria-describedby="attributes[tagList]-tag-list-1"
+              id="attributes[tagList]-tag-list-1"
+              onChange={[Function]}
+              onKeyPress={[Function]}
+              placeholder="Enter a Tag"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className="has-many-list"
+        >
+          <ul
+            className="bucket empty"
+          >
+            <div
+              className="placeholder"
+            >
+              No 
+              Tags
+               added
+            </div>
+          </ul>
+        </div>
       </div>
       <div
         className="form-input"

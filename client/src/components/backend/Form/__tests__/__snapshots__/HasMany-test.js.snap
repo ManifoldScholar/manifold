@@ -13,7 +13,9 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
   <nav
     className="has-many-list"
   >
-    <ul>
+    <ul
+      className=""
+    >
       <li>
         <div
           className="association"
