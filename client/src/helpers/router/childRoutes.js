@@ -6,6 +6,7 @@ import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-
 
 const renderChildRoutes = (route, renderOptions) => {
   const defaultOptions = {
+    slot: null,
     switch: true,
     childProps: {},
     drawer: false,
@@ -56,7 +57,11 @@ const renderChildRoutes = (route, renderOptions) => {
   // We can use the array index as the key here, because the order of the routes will
   // never change after the initial mount.
   if (childRoutes) {
-    mapped = childRoutes.map((childRoute, i) => {
+    const filteredChildRoutes = childRoutes.filter(childRoute => {
+      if (!options.slot && !childRoute.slot) return true;
+      return options.slot === childRoute.slot;
+    });
+    mapped = filteredChildRoutes.map((childRoute, i) => {
       const { component, ...props } = childRoute;
       return <Route key={i} {...props} render={render(childRoute)} />;
     });
