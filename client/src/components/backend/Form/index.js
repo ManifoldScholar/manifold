@@ -11,6 +11,7 @@ import Hidden from "./Hidden";
 import HigherOrder from "./HigherOrder";
 import Instructions from "./Instructions";
 import MaskedTextInput from "./MaskedTextInput";
+import NumberInput from "./NumberInput";
 import PredictiveBelongsTo from "./PredictiveBelongsTo";
 import Radios from "./Radios";
 import Save from "./Save";
@@ -37,6 +38,7 @@ export default {
   HigherOrder,
   Instructions,
   MaskedTextInput,
+  NumberInput,
   PredictiveBelongsTo,
   Radios,
   Save,

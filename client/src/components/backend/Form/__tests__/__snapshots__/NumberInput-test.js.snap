@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.NumberInput component renders correctly 1`] = `
+<div
+  className="form-number-input form-input"
+  style={Object {}}
+>
+  <label
+    className=""
+    htmlFor="attributes[property]-text-input-1"
+  >
+    A form label
+  </label>
+  <input
+    aria-describedby="attributes[property]-text-input-1"
+    id="attributes[property]-text-input-1"
+    onChange={[Function]}
+    placeholder={undefined}
+    type="number"
+    value={undefined}
+  />
+</div>
+`;
