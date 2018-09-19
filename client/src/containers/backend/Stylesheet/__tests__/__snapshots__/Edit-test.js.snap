@@ -34,19 +34,21 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                                       <div className=\\"form-input\\">
                                         <p className=\\"instructions\\" />
                                       </div>
-                                      <Form.Setter('Form.TextInput) label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}}>
-                                        <Form.TextInput label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false} join={[Function: join]} id=\\"text-input-1\\" idForError=\\"text-input-error-1\\">
-                                          <Errorable className=\\"form-input\\" name=\\"attributes[name]\\" errors={{...}} label=\\"Name\\" idForError=\\"attributes[name]-text-input-1\\" containerStyle={{...}}>
-                                            <div style={{...}} className=\\"form-input\\">
-                                              <label htmlFor=\\"attributes[name]-text-input-1\\" className=\\"\\">
-                                                Name
-                                              </label>
-                                              <input id=\\"attributes[name]-text-input-1\\" type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[name]-text-input-1\\" />
-                                              <Instructions instructions={{...}} />
-                                            </div>
-                                          </Errorable>
-                                        </Form.TextInput>
-                                      </Form.Setter('Form.TextInput)>
+                                      <Form.TextInput label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" focusOnMount={false} password={false} join={[Function: join]} id=\\"text-input-1\\" idForError=\\"text-input-error-1\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}}>
+                                        <Form.Setter('Form.BaseInput) label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" focusOnMount={false} password={false} join={[Function: join]} id=\\"attributes[name]-text-input-1\\" idForError=\\"attributes[name]-text-input-1\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}} inputType=\\"text\\" renderValue={[Function]}>
+                                          <Form.BaseInput label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" focusOnMount={false} password={false} join={[Function: join]} id=\\"attributes[name]-text-input-1\\" idForError=\\"attributes[name]-text-input-1\\" getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}} inputType=\\"text\\" renderValue={[Function]} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                                            <Errorable className=\\"form-input\\" name=\\"attributes[name]\\" errors={{...}} label=\\"Name\\" idForError=\\"attributes[name]-text-input-1\\" containerStyle={{...}}>
+                                              <div style={{...}} className=\\"form-input\\">
+                                                <label htmlFor=\\"attributes[name]-text-input-1\\" className=\\"\\">
+                                                  Name
+                                                </label>
+                                                <input id=\\"attributes[name]-text-input-1\\" type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" aria-describedby=\\"attributes[name]-text-input-1\\" />
+                                                <Instructions instructions={{...}} />
+                                              </div>
+                                            </Errorable>
+                                          </Form.BaseInput>
+                                        </Form.Setter('Form.BaseInput)>
+                                      </Form.TextInput>
                                       <Form.Setter('FormCodeArea) label=\\"Source Styles\\" height=\\"300px\\" mode=\\"css\\" name=\\"attributes[rawStyles]\\" instructions=\\"These are the raw source styles, which can be edited.\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}}>
                                         <FormCodeArea label=\\"Source Styles\\" height=\\"300px\\" mode=\\"css\\" name=\\"attributes[rawStyles]\\" instructions=\\"These are the raw source styles, which can be edited.\\" getModelValue={[Function: getModelValue]} sessionKey=\\"backend-stylesheet-create\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
                                           <div>

@@ -1,3 +1,4 @@
+import BaseInput from "./BaseInput";
 import Checkboxes from "./Checkboxes";
 import CodeArea from "./CodeArea";
 import AttributeMap from "./AttributeMap";
@@ -23,6 +24,7 @@ import TusUpload from "./TusUpload";
 import Upload from "./Upload";
 
 export default {
+  BaseInput,
   Checkboxes,
   CodeArea,
   AttributeMap,
