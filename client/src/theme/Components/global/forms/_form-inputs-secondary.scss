@@ -101,16 +101,12 @@
         margin-bottom: 0;
       }
 
-      &.has-instructions {
-        margin-bottom: 1em;
-      }
-
       &.secondary {
         font-weight: normal;
       }
     }
 
-    input[type='text'], input[type='password'] {
+    input[type='text'], input[type='password'], input[type='number'] {
       @include formInputSecondary;
       transition: border-color $duration $timing;
 
@@ -134,6 +130,14 @@
       @include respond($break70) {
         padding: 1.579em;
         font-size: 18px;
+      }
+    }
+
+    &.form-number-input {
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
       }
     }
 
