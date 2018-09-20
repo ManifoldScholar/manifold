@@ -164,20 +164,7 @@
     }
   }
 
-  .list-pagination-primary {
+  + .list-pagination-primary {
     margin-top: 30px;
-
-    ul li {
-      width: auto;
-
-      a {
-        display: inline-block;
-        padding: 0;
-
-        &:hover {
-          background-color: transparent;
-        }
-      }
-    }
   }
 }
