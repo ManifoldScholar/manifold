@@ -2,11 +2,12 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityEditorActions, entityStoreActions } from "actions";
-import { Developer } from "components/global";
+import { Developer, Form as GlobalForm } from "components/global";
 import { bindActionCreators } from "redux";
-import { Form as GlobalForm } from "components/global";
 import get from "lodash/get";
 import has from "lodash/has";
+import forEach from "lodash/forEach";
+import pick from "lodash/pick";
 import brackets2dots from "brackets2dots";
 import { Prompt } from "react-router-dom";
 import { FormContext } from "helpers/contexts";
@@ -49,7 +50,8 @@ export class FormContainer extends PureComponent {
     doNotWarn: false,
     notificationScope: "global",
     model: {
-      attributes: {}
+      attributes: {},
+      relationships: {}
     },
     debug: false,
     groupErrors: false,
@@ -117,10 +119,25 @@ export class FormContainer extends PureComponent {
       .substr(2, keyLength);
   }
 
+  adjustedRelationships(relationships) {
+    if (!relationships) return {};
+    const adjusted = Object.assign({}, relationships);
+    forEach(adjusted, (value, key) => {
+      adjusted[key] = {
+        data: value.map(relation => pick(relation, ["id", "type"]))
+      };
+    });
+
+    return adjusted;
+  }
+
   update() {
     const dirty = this.props.session.dirty;
     const source = this.props.session.source;
-    const call = this.props.update(source.id, { attributes: dirty.attributes });
+    const call = this.props.update(source.id, {
+      attributes: dirty.attributes,
+      relationships: this.adjustedRelationships(dirty.relationships)
+    });
     const action = request(call, this.props.name, this.requestOptions());
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty("promise") && this.props.onSuccess) {

@@ -89,7 +89,7 @@ export class FormCollaborators extends Component {
             onNew={value => {
               return this.newMaker(value, "creator");
             }}
-            onChange={(makers, changeType) => {
+            changeHandler={(makers, changeType) => {
               this.updateMakers(makers, changeType, "creators");
             }}
             optionsFetch={makersAPI.index}
@@ -107,7 +107,7 @@ export class FormCollaborators extends Component {
             onNew={value => {
               return this.newMaker(value, "contributor");
             }}
-            onChange={(makers, changeType) => {
+            changeHandler={(makers, changeType) => {
               this.updateMakers(makers, changeType, "contributors");
             }}
             optionsFetch={makersAPI.index}
