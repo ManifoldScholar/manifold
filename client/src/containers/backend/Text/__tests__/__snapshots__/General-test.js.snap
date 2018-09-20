@@ -21,17 +21,17 @@ exports[`Backend Text General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="attributes[title]-text-input-15"
+          htmlFor="attributes[title]-text-input-1"
         >
           Title
         </label>
         <input
-          aria-describedby="attributes[title]-text-input-15"
-          id="attributes[title]-text-input-15"
+          aria-describedby="attributes[title]-text-input-1"
+          id="attributes[title]-text-input-1"
           onChange={[Function]}
           placeholder="Enter Text Title"
           type="text"
-          value="Ain't No Thang"
+          value=""
         />
       </div>
       <div
@@ -54,7 +54,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
             />
             <select
               onChange={[Function]}
-              value="11"
+              value="NaN"
             >
               <option />
               <option
@@ -128,7 +128,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
             />
             <select
               onChange={[Function]}
-              value="4"
+              value="NaN"
             >
               <option />
               <option>
@@ -241,7 +241,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
               }
               onChange={[Function]}
               type="text"
-              value="2001"
+              value="NaN"
             />
           </div>
         </div>
@@ -255,13 +255,13 @@ exports[`Backend Text General Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="textarea-13"
+            htmlFor="textarea-1"
           >
             Description
           </label>
           <textarea
-            aria-describedby="textarea-error-14"
-            id="textarea-13"
+            aria-describedby="textarea-error-1"
+            id="textarea-1"
             onChange={[Function]}
             placeholder="Enter a Brief Description"
             style={
@@ -279,13 +279,13 @@ exports[`Backend Text General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor="attributes[sectionKind]-text-input-15"
+          htmlFor="attributes[sectionKind]-text-input-1"
         >
           Section Label
         </label>
         <input
-          aria-describedby="attributes[sectionKind]-text-input-15"
-          id="attributes[sectionKind]-text-input-15"
+          aria-describedby="attributes[sectionKind]-text-input-1"
+          id="attributes[sectionKind]-text-input-1"
           onChange={[Function]}
           placeholder="Enter a label for sections in this text"
           type="text"

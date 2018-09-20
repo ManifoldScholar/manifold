@@ -10,7 +10,7 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
   >
     <label
       className=""
-      htmlFor="upload-25"
+      htmlFor="upload-1"
     >
       Cover
     </label>
@@ -24,8 +24,8 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-26",
-          "id": "upload-25",
+          "aria-describedby": "upload-error-1",
+          "id": "upload-1",
         }
       }
       multiple={false}
@@ -79,7 +79,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
   >
     <label
       className=""
-      htmlFor="upload-25"
+      htmlFor="upload-1"
     >
       Cover
     </label>
@@ -93,8 +93,8 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-26",
-          "id": "upload-25",
+          "aria-describedby": "upload-error-1",
+          "id": "upload-1",
         }
       }
       multiple={false}
@@ -162,7 +162,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
   >
     <label
       className=""
-      htmlFor="upload-25"
+      htmlFor="upload-1"
     >
       Cover
     </label>
@@ -176,8 +176,8 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-26",
-          "id": "upload-25",
+          "aria-describedby": "upload-error-1",
+          "id": "upload-1",
         }
       }
       multiple={false}
@@ -245,7 +245,7 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
   >
     <label
       className=""
-      htmlFor="upload-25"
+      htmlFor="upload-1"
     >
       Cover
     </label>
@@ -259,8 +259,8 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-26",
-          "id": "upload-25",
+          "aria-describedby": "upload-error-1",
+          "id": "upload-1",
         }
       }
       multiple={false}

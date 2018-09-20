@@ -1,3 +1,4 @@
+import BaseInput from "./BaseInput";
 import Checkboxes from "./Checkboxes";
 import CodeArea from "./CodeArea";
 import AttributeMap from "./AttributeMap";
@@ -10,6 +11,7 @@ import Hidden from "./Hidden";
 import HigherOrder from "./HigherOrder";
 import Instructions from "./Instructions";
 import MaskedTextInput from "./MaskedTextInput";
+import NumberInput from "./NumberInput";
 import PredictiveBelongsTo from "./PredictiveBelongsTo";
 import Radios from "./Radios";
 import Save from "./Save";
@@ -23,6 +25,7 @@ import TusUpload from "./TusUpload";
 import Upload from "./Upload";
 
 export default {
+  BaseInput,
   Checkboxes,
   CodeArea,
   AttributeMap,
@@ -35,6 +38,7 @@ export default {
   HigherOrder,
   Instructions,
   MaskedTextInput,
+  NumberInput,
   PredictiveBelongsTo,
   Radios,
   Save,

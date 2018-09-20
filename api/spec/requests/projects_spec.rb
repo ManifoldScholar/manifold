@@ -133,6 +133,7 @@ RSpec.describe "Projects API", type: :request do
           it("contains the updated hashtag") { expect_updated_param("hashtag", "the_hashtag" ) }
           it("contains the updated description") { expect_updated_param("description", "the description") }
           it("contains the updated purchase price") { expect_updated_param("purchasePriceMoney", "$7.95", 7.95, "purchasePrice") }
+          it("contains the updated tag list") { expect_updated_param("tagList", "rowan, dog, puppy", %w(rowan dog puppy)) }
           context "contains the updated purchase price" do
             it("when the currency sign is not present") { expect_updated_param("purchasePriceMoney", "2.50", "$2.50") }
             it("when the currency sign is present") { expect_updated_param("purchasePriceMoney", "$2.50", "$2.50") }

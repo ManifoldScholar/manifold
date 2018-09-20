@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 
 export default class SearchQuery extends PureComponent {
   static displayName = "Search.Query";
@@ -25,7 +25,7 @@ export default class SearchQuery extends PureComponent {
       console.warn("Current SearchQuery State");
       console.warn(state);
     },
-    searchId: uniqueId("query-search-")
+    searchId: labelId("query-search-")
   };
   /* eslint-enable no-console */
 

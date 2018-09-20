@@ -75,7 +75,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
               className="form-input"
             >
               <label
-                htmlFor="kind-25"
+                htmlFor="kind-1"
               >
                 Kind
               </label>
@@ -90,9 +90,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     className="manicon manicon-caret-down"
                   />
                   <select
-                    id="kind-25"
+                    id="kind-1"
                     onChange={[Function]}
-                    value="image"
+                    value=""
                   >
                     <option
                       id="image"
@@ -162,8 +162,8 @@ exports[`Backend Resource New Container renders correctly 1`] = `
               >
                 <li>
                   <div
-                    aria-checked={true}
-                    className="button active"
+                    aria-checked={false}
+                    className="button"
                     onClick={[Function]}
                     role="radio"
                     tabIndex="0"
@@ -172,11 +172,6 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       <figcaption>
                         <span>
                           Image
-                          <span
-                            className="screen-reader-text"
-                          >
-                            Selected Kind
-                          </span>
                         </span>
                       </figcaption>
                       <div
@@ -547,13 +542,13 @@ exports[`Backend Resource New Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[title]-text-input-14"
+              htmlFor="attributes[title]-text-input-1"
             >
               Title
             </label>
             <input
-              aria-describedby="attributes[title]-text-input-14"
-              id="attributes[title]-text-input-14"
+              aria-describedby="attributes[title]-text-input-1"
+              id="attributes[title]-text-input-1"
               onChange={[Function]}
               placeholder="Enter a resource title"
               type="text"
@@ -569,13 +564,13 @@ exports[`Backend Resource New Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="textarea-12"
+                htmlFor="textarea-1"
               >
                 Description
               </label>
               <textarea
-                aria-describedby="textarea-error-13"
-                id="textarea-12"
+                aria-describedby="textarea-error-1"
+                id="textarea-1"
                 onChange={[Function]}
                 placeholder="Enter a description"
                 style={
@@ -596,7 +591,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="upload-20"
+                htmlFor="upload-1"
               >
                 Image File
               </label>
@@ -610,8 +605,8 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                 className="form-dropzone style-square"
                 inputProps={
                   Object {
-                    "aria-describedby": "upload-error-21",
-                    "id": "upload-20",
+                    "aria-describedby": "upload-error-1",
+                    "id": "upload-1",
                   }
                 }
                 multiple={false}

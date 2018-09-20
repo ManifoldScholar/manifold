@@ -21,6 +21,7 @@ class Project < ApplicationRecord
   # Concerns
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
+  include Concerns::Taggable
   include TrackedCreator
   include Collaborative
   include Citable
@@ -196,7 +197,8 @@ class Project < ApplicationRecord
       subject_titles: subjects.map(&:title),
       hashtag: hashtag,
       publication_date: publication_date,
-      metadata: metadata
+      metadata: metadata,
+      tags: tag_list
     }.merge(search_hidden)
   end
 

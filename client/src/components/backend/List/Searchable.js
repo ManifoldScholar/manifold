@@ -7,7 +7,7 @@ import { List } from "components/backend";
 import { Link } from "react-router-dom";
 import Authorization from "helpers/authorization";
 import get from "lodash/get";
-import uniqueId from "lodash/uniqueId";
+import labelId from "helpers/labelId";
 import omitBy from "lodash/omitBy";
 import classnames from "classnames";
 
@@ -69,9 +69,9 @@ export class ListSearchable extends PureComponent {
     paginationPadding: 3,
     requireAbility: null,
     initialFilter: null,
-    searchId: uniqueId("list-search-"),
-    filterId: uniqueId("list-filter-"),
-    sortId: uniqueId("list-sort-"),
+    searchId: labelId("list-search-"),
+    filterId: labelId("list-filter-"),
+    sortId: labelId("list-sort-"),
     listClassName: "vertical-list-primary",
     emptyMessage: filterStateIgnored => "Sorry, no results were found."
   };

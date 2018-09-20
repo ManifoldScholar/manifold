@@ -27,17 +27,17 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[title]-text-input-15"
+              htmlFor="attributes[title]-text-input-1"
             >
               Title
             </label>
             <input
-              aria-describedby="attributes[title]-text-input-15"
-              id="attributes[title]-text-input-15"
+              aria-describedby="attributes[title]-text-input-1"
+              id="attributes[title]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Title"
               type="text"
-              value="Rowan Test"
+              value=""
             />
           </div>
           <div
@@ -46,17 +46,17 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[subtitle]-text-input-15"
+              htmlFor="attributes[subtitle]-text-input-1"
             >
               Subtitle
             </label>
             <input
-              aria-describedby="attributes[subtitle]-text-input-15"
-              id="attributes[subtitle]-text-input-15"
+              aria-describedby="attributes[subtitle]-text-input-1"
+              id="attributes[subtitle]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Subtitle"
               type="text"
-              value="World's Greatest Dog"
+              value=""
             />
           </div>
           <div
@@ -65,17 +65,17 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[slug]-text-input-15"
+              htmlFor="attributes[slug]-text-input-1"
             >
               Slug
             </label>
             <input
-              aria-describedby="attributes[slug]-text-input-15"
-              id="attributes[slug]-text-input-15"
+              aria-describedby="attributes[slug]-text-input-1"
+              id="attributes[slug]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Slug"
               type="text"
-              value="slug-1"
+              value=""
             />
           </div>
         </div>
@@ -179,7 +179,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="masked-text-10"
+              htmlFor="masked-text-1"
             >
               Hashtag
             </label>
@@ -191,13 +191,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[facebookId]-text-input-15"
+              htmlFor="attributes[facebookId]-text-input-1"
             >
               Facebook ID
             </label>
             <input
-              aria-describedby="attributes[facebookId]-text-input-15"
-              id="attributes[facebookId]-text-input-15"
+              aria-describedby="attributes[facebookId]-text-input-1"
+              id="attributes[facebookId]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Facebook ID"
               type="text"
@@ -210,13 +210,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[twitterId]-text-input-15"
+              htmlFor="attributes[twitterId]-text-input-1"
             >
               Twitter ID
             </label>
             <input
-              aria-describedby="attributes[twitterId]-text-input-15"
-              id="attributes[twitterId]-text-input-15"
+              aria-describedby="attributes[twitterId]-text-input-1"
+              id="attributes[twitterId]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Twitter ID"
               type="text"
@@ -229,13 +229,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[instagramId]-text-input-15"
+              htmlFor="attributes[instagramId]-text-input-1"
             >
               Instagram ID
             </label>
             <input
-              aria-describedby="attributes[instagramId]-text-input-15"
-              id="attributes[instagramId]-text-input-15"
+              aria-describedby="attributes[instagramId]-text-input-1"
+              id="attributes[instagramId]-text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Instagram ID"
               type="text"
@@ -257,6 +257,30 @@ exports[`Backend Project General Container renders correctly 1`] = `
         <div
           className="form-input-group"
         >
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className="has-instructions"
+              htmlFor="attributes[tagList]-text-input-1"
+            >
+              Tags
+            </label>
+            <input
+              aria-describedby="attributes[tagList]-text-input-1"
+              id="attributes[tagList]-text-input-1"
+              onChange={[Function]}
+              placeholder="Enter Tags"
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+            >
+              Separate tags with "," or ";"
+            </span>
+          </div>
           <div
             className="form-input"
           >
@@ -755,8 +779,8 @@ exports[`Backend Project General Container renders correctly 1`] = `
                       className="form-dropzone style-embed"
                       inputProps={
                         Object {
-                          "aria-describedby": "upload-error-22",
-                          "id": "upload-21",
+                          "aria-describedby": "upload-error-1",
+                          "id": "upload-1",
                         }
                       }
                       multiple={false}

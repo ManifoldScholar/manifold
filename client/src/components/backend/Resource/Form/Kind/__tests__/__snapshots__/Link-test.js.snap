@@ -10,13 +10,13 @@ exports[`Backend.Resource.Form.Link component renders correctly 1`] = `
   >
     <label
       className=""
-      htmlFor="attributes[externalUrl]-text-input-15"
+      htmlFor="attributes[externalUrl]-text-input-1"
     >
       Link URL
     </label>
     <input
-      aria-describedby="attributes[externalUrl]-text-input-15"
-      id="attributes[externalUrl]-text-input-15"
+      aria-describedby="attributes[externalUrl]-text-input-1"
+      id="attributes[externalUrl]-text-input-1"
       onChange={[Function]}
       placeholder="Enter link URL"
       type="text"
