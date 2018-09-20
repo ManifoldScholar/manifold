@@ -60,36 +60,38 @@ export default class ProjectListGrid extends Component {
     const hideDesc = true;
 
     return (
-      <nav className="grid-project">
-        <ReactCSSTransitionGroup
-          transitionName="grid-project"
-          transitionEnter={this.enableAnimation}
-          transitionLeave={this.enableAnimation}
-          transitionEnterTimeout={250}
-          transitionLeaveTimeout={250}
-          component="ul"
-        >
-          {projects.map(project => {
-            return (
-              <li key={project.id}>
-                <Project.Thumbnail
-                  authenticated={this.props.authenticated}
-                  favorites={this.props.favorites}
-                  dispatch={this.props.dispatch}
-                  project={project}
-                  hideDesc={hideDesc}
-                />
-              </li>
-            );
-          })}
-        </ReactCSSTransitionGroup>
+      <React.Fragment>
+        <nav className="grid-project">
+          <ReactCSSTransitionGroup
+            transitionName="grid-project"
+            transitionEnter={this.enableAnimation}
+            transitionLeave={this.enableAnimation}
+            transitionEnterTimeout={250}
+            transitionLeaveTimeout={250}
+            component="ul"
+          >
+            {projects.map(project => {
+              return (
+                <li key={project.id}>
+                  <Project.Thumbnail
+                    authenticated={this.props.authenticated}
+                    favorites={this.props.favorites}
+                    dispatch={this.props.dispatch}
+                    project={project}
+                    hideDesc={hideDesc}
+                  />
+                </li>
+              );
+            })}
+          </ReactCSSTransitionGroup>
+        </nav>
         {this.props.pagination ? (
           <Utility.Pagination
             paginationClickHandler={this.props.paginationClickHandler}
             pagination={this.props.pagination}
           />
         ) : null}
-      </nav>
+      </React.Fragment>
     );
   }
 }
