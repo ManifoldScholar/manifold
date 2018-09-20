@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import UserMenuBody from "../UserMenuBody";
 import { wrapWithRouter } from "test/helpers/routing";
-import { shallow } from "enzyme";
+import Enzyme from "enzyme/build/index";
 
 describe("Global.UserMenu.UserMenuBody Component", () => {
   const props = {
@@ -13,31 +13,36 @@ describe("Global.UserMenu.UserMenuBody Component", () => {
     visible: false
   };
 
+  const build = (addProps = {}) => {
+    const mergeProps = Object.assign({}, props, addProps);
+    return wrapWithRouter(<UserMenuBody {...mergeProps} />);
+  };
+
+  const buildInstance = (addProps = {}) => {
+    const root = Enzyme.mount(build(addProps));
+    return root
+      .findWhere(node => {
+        return node.name() === "UserMenuBodyComponent";
+      })
+      .first()
+      .childAt(0);
+  };
+
   it("renders correctly", () => {
-    const component = renderer.create(wrapWithRouter(<UserMenuBody {...props} />));
+    const component = renderer.create(build());
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("has the user-menu class", () => {
-    expect(shallow(wrapWithRouter(<UserMenuBody {...props} />)).exists(".user-menu")).toBe(
-      true
-    );
+    expect(buildInstance().hasClass("user-menu")).toBe(true);
   });
 
   it("has the menu-visible class when props.visible is true", () => {
-    expect(
-      shallow(wrapWithRouter(<UserMenuBody {...props} visible={true} />)).exists(
-        ".menu-visible"
-      )
-    ).toBe(true);
+    expect(buildInstance({ visible: true }).exists(".menu-visible")).toBe(true);
   });
 
   it("has the menu-hidden class when props.visible is false", () => {
-    expect(
-      shallow(wrapWithRouter(<UserMenuBody {...props} visible={false} />)).exists(
-        ".menu-hidden"
-      )
-    ).toBe(true);
+    expect(buildInstance({ visible: false }).exists(".menu-hidden")).toBe(true);
   });
 });

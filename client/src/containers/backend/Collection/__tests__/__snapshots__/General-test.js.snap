@@ -24,7 +24,7 @@ exports[`Backend Collection General Container renders correctly 1`] = `
           onChange={[Function]}
           placeholder="Enter a title"
           type="text"
-          value="Rowan"
+          value=""
         />
       </div>
       <div

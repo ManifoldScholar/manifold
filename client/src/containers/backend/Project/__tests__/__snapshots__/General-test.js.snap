@@ -37,7 +37,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               onChange={[Function]}
               placeholder="Enter Project Title"
               type="text"
-              value="Rowan Test"
+              value=""
             />
           </div>
           <div
@@ -56,7 +56,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               onChange={[Function]}
               placeholder="Enter Project Subtitle"
               type="text"
-              value="World's Greatest Dog"
+              value=""
             />
           </div>
           <div
@@ -75,7 +75,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               onChange={[Function]}
               placeholder="Enter Project Slug"
               type="text"
-              value="slug-1"
+              value=""
             />
           </div>
         </div>

@@ -9,6 +9,8 @@ Enzyme.configure({ adapter: new Adapter() });
 import setter from "../setter";
 
 class WithPropTypes extends Component {
+  static displayName: "WithPropTypes";
+
   static propTypes = {
     foo: PropTypes.string
   };
@@ -43,11 +45,12 @@ describe("setter higher order component", () => {
   describe("applied to a component with a name prop", () => {
     const component = renderer.create(settable);
     const tree = component.toJSON();
-    const wrapper = Enzyme.shallow(settable)
-      .first()
-      .shallow();
-    const instance = wrapper.instance();
-    const props = instance.props;
+
+    const root = Enzyme.mount(settable);
+    const instance = root
+      .findWhere(node => node.name() == "WithPropTypes")
+      .first();
+    const props = instance.props();
 
     it("renders correctly", () => {
       expect(tree).toMatchSnapshot();
