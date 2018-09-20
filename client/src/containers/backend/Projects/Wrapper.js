@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
 import { Utility } from "components/global";
-import { childRoutes } from "helpers/router";
+import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import { bindActionCreators } from "redux";
 import { uiStateSnapshotActions } from "actions";
@@ -40,6 +41,10 @@ export default class ProjectsWrapper extends PureComponent {
         }}
       >
         <div>
+          <RedirectToFirstMatch
+            from={lh.link("backendProjects")}
+            candidates={secondaryLinks}
+          />
           <Utility.SkipLink skipId={skipId} />
           <Navigation.Secondary links={secondaryLinks} />
           <section id={skipId} className="backend-detail">

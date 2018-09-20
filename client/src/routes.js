@@ -69,9 +69,11 @@ export default () => {
           helper: () => "/backend/projects",
           routes: [
             {
+              name: "backendProjectsAll",
               exact: true,
               component: Backend.Projects.ProjectsList,
-              path: "/backend/projects"
+              path: "/backend/projects/all",
+              helper: () => "/backend/projects/all"
             },
             {
               name: "backendProjectResourcesNew",
