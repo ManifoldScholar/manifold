@@ -6,8 +6,9 @@ import { Form as GlobalForm } from "components/global";
 import List from "./HasMany/List";
 import Header from "./HasMany/Header";
 import labelId from "helpers/labelId";
+import setter from "./setter";
 
-export default class FormHasMany extends PureComponent {
+export class FormHasMany extends PureComponent {
   static displayName = "Form.HasMany";
 
   static propTypes = {
@@ -15,16 +16,17 @@ export default class FormHasMany extends PureComponent {
     labelHeader: PropTypes.bool,
     onNew: PropTypes.func,
     orderable: PropTypes.bool,
-    onChange: PropTypes.func.isRequired,
+    changeHandler: PropTypes.func,
     editClickHandler: PropTypes.func,
     optionsFetch: PropTypes.func.isRequired,
-    entities: PropTypes.array.isRequired,
+    entities: PropTypes.array,
     entityLabelAttribute: PropTypes.string.isRequired,
     entityAvatarAttribute: PropTypes.string,
     placeholder: PropTypes.string,
     errors: PropTypes.array,
     idForError: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    set: PropTypes.func,
     wide: PropTypes.bool
   };
 
@@ -33,7 +35,7 @@ export default class FormHasMany extends PureComponent {
   };
 
   onNew = value => {
-    if (!this.props.onNew) return null;
+    if (!this.props.onNew || !this.props.changeHandler) return null;
     this.props.onNew(value).then(newEntity => {
       const newEntities = this.props.entities.slice(0);
       const newRelationship = {
@@ -41,15 +43,28 @@ export default class FormHasMany extends PureComponent {
         id: newEntity.data.id
       };
       newEntities.push(newRelationship);
-      this.props.onChange(newEntities, "select");
+      this.props.changeHandler(newEntities, "select");
     });
   };
 
   onSelect = entity => {
-    const newEntities = this.props.entities.slice(0);
-    newEntities.push(entity);
-    this.props.onChange(newEntities, "select");
+    const newEntities = this.entities(this.props).slice(0);
+    if (!newEntities.find(e => e.id === entity.id))
+      newEntities.push(entity);
+
+    this.onChange(newEntities, "select");
   };
+
+  onChange = (entities, kind) => {
+    if (this.props.name)
+      return this.props.set(entities);
+    return this.props.changeHandler(entities, kind);
+  };
+
+  entities(props) {
+    if (props.name) return props.value;
+    return props.entities;
+  }
 
   entityName = entity => {
     return entity.attributes[this.props.entityLabelAttribute];
@@ -62,8 +77,8 @@ export default class FormHasMany extends PureComponent {
       <List
         label={props.label}
         orderable={props.orderable}
-        onChange={props.onChange}
-        entities={props.entities}
+        onChange={this.onChange}
+        entities={this.entities(props)}
         entityName={this.entityName}
         editClickHandler={props.editClickHandler}
         entityAvatarAttribute={props.entityAvatarAttribute}
@@ -114,3 +129,5 @@ export default class FormHasMany extends PureComponent {
     );
   }
 }
+
+export default setter(FormHasMany);
