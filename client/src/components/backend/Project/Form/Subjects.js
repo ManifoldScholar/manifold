@@ -84,7 +84,7 @@ export class ProjectSubjects extends PureComponent {
         label="Subjects"
         placeholder="Add a Subject"
         onNew={this.maybeHandleNew()}
-        onChange={subjects => {
+        changeHandler={subjects => {
           this.updateSubjects(subjects);
         }}
         optionsFetch={subjectsAPI.index}
