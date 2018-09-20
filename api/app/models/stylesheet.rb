@@ -17,7 +17,7 @@ class Stylesheet < ApplicationRecord
   has_many :text_sections,
            -> { order(position: :asc) },
            through: :text_section_stylesheets,
-           dependent: :nullify,
+           dependent: :destroy,
            inverse_of: :stylesheets
 
   # Validations

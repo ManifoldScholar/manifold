@@ -150,10 +150,23 @@ RSpec.describe Ingestions::Compiler do
       manifest
     end
 
-    it "updates the existing text" do
-      expect do
-        described_class.run(context: context, manifest: manifest)
-      end.to change(text, :updated_at)
+    describe "a successful compilation" do
+      it "updates the existing text" do
+        expect do
+          described_class.run(context: context, manifest: manifest)
+        end.to change(text, :updated_at)
+      end
+    end
+
+    describe "a compilation with failures" do
+      it "does not persist updates" do
+        allow_any_instance_of(Ingestions::Compilers::TextSection).to receive(:text_section).and_raise(ActiveRecord::RecordNotFound)
+        manifest[:relationships][:text_titles] = [{ kind: ::TextTitle::KIND_MAIN, value: "Changed" }]
+
+        expect do
+          described_class.run(context: context, manifest: manifest)
+        end.to_not change(text, :title)
+      end
     end
   end
 end
