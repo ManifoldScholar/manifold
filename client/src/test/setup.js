@@ -7,13 +7,17 @@ jest.mock("helpers/passwordGenerator", () => {
 });
 jest.mock("focus-trap-react", () => "focus-trap-react");
 
-// Mocked fetch-data is a noop component that renders it's child.
+// Mocked fetchData is a noop component that renders its child.
 // see src/components/global/HigherOrder/__mocks__/fetchData.js
 jest.mock("components/global/HigherOrder/fetchData");
+
+// Mocked withFormContext is a noop component that renders its child.
+// see src/containers/global/HigherOrder/__mocks__/withFormContext.js
+jest.mock("containers/global/HigherOrder/withFormContext");
 
 // To mock returned data or collection responses, adjust src/api/__mocks__/client.js
 jest.mock("api/client");
 
 jest.mock("helpers/labelId", () => {
-  return jest.fn((prefix) => `${prefix}1`);
+  return jest.fn(prefix => `${prefix}1`);
 });

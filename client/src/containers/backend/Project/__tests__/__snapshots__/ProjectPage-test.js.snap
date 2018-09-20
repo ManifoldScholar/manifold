@@ -398,7 +398,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               onChange={[Function]}
               placeholder="Download eBook"
               type="text"
-              value="Download the greatest dog"
+              value=""
             />
             <span
               className="instructions"

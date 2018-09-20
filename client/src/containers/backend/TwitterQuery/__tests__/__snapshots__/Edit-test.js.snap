@@ -65,7 +65,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
             onChange={[Function]}
             placeholder="Enter query"
             type="text"
-            value="from:manifoldscholar"
+            value=""
           />
           <p
             className="instructions"
@@ -133,8 +133,8 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
             className="toggle-indicator"
           >
             <div
-              aria-pressed={true}
-              className="boolean-primary checked"
+              aria-pressed={false}
+              className="boolean-primary"
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}

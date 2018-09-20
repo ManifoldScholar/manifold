@@ -50,7 +50,7 @@ exports[`Backend Settings Subjects Edit Container renders correctly 1`] = `
             onChange={[Function]}
             placeholder="Name"
             type="text"
-            value="Hip Hop"
+            value=""
           />
         </div>
         <div

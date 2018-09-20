@@ -59,7 +59,7 @@ exports[`Backend Users New Container renders correctly 1`] = `
               aria-describedby="select-error-1"
               id={undefined}
               onChange={[Function]}
-              value="reader"
+              value={undefined}
             >
               <option
                 value="admin"
