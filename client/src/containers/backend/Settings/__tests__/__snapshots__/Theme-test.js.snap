@@ -287,7 +287,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                   onChange={[Function]}
                   placeholder="Additional Logo CSS"
                   type="text"
-                  value="{\\"left\\": -1}"
+                  value=""
                 />
                 <span
                   className="instructions"
@@ -350,7 +350,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                   onChange={[Function]}
                   placeholder="Enter Typekit ID"
                   type="text"
-                  value="typekitId"
+                  value=""
                 />
               </div>
             </div>

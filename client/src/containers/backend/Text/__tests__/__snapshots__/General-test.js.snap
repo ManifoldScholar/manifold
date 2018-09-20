@@ -31,7 +31,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
           onChange={[Function]}
           placeholder="Enter Text Title"
           type="text"
-          value="Ain't No Thang"
+          value=""
         />
       </div>
       <div
@@ -54,7 +54,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
             />
             <select
               onChange={[Function]}
-              value="11"
+              value="NaN"
             >
               <option />
               <option
@@ -128,7 +128,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
             />
             <select
               onChange={[Function]}
-              value="4"
+              value="NaN"
             >
               <option />
               <option>
@@ -241,7 +241,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
               }
               onChange={[Function]}
               type="text"
-              value="2001"
+              value="NaN"
             />
           </div>
         </div>
