@@ -12,10 +12,14 @@ class AnnotationAuthorizer < ApplicationAuthorizer
 
   def deletable_by?(user, _options = {})
     return user.created? resource if resource.highlight?
+    return resource&.text&.notatable_by?(user) if
+      Annotation::NOTATION_TYPES.include?(resource.format)
     creator_or_has_editor_permissions?(user, resource)
   end
 
   def updatable_by?(user, _options = {})
+    return resource&.text&.notatable_by?(user) if
+      Annotation::NOTATION_TYPES.include?(resource.format)
     creator_or_has_editor_permissions?(user, resource)
   end
 
