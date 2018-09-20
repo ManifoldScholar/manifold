@@ -19,6 +19,7 @@ import Select from "./Select";
 import setter from "./setter";
 import Switch from "./Switch";
 import SwitchArray from "./SwitchArray";
+import TagList from "./TagList";
 import TextArea from "./TextArea";
 import TextInput from "./TextInput";
 import TusUpload from "./TusUpload";
@@ -46,6 +47,7 @@ export default {
   setter,
   Switch,
   SwitchArray,
+  TagList,
   TextArea,
   TextInput,
   TusUpload,

@@ -62,11 +62,10 @@ export class ResourceGeneralContainer extends PureComponent {
             name="attributes[slug]"
             placeholder="Enter slug"
           />
-          <Form.TextInput
+          <Form.TagList
             label="Tags"
             name="attributes[tagList]"
-            placeholder="Enter tags"
-            instructions={`Separate tags with "," or ";"`}
+            placeholder="Enter a Tag"
           />
           <Form.TextArea
             label="Description"

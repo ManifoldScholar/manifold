@@ -6,7 +6,8 @@ export default class FormHasManyList extends PureComponent {
   static displayName = "Form.HasMany.List";
 
   static propTypes = {
-    entity: PropTypes.object.isRequired,
+    entity: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+      .isRequired,
     entities: PropTypes.array,
     entityAvatarAttribute: PropTypes.string,
     ordinal: PropTypes.number,
@@ -14,7 +15,7 @@ export default class FormHasManyList extends PureComponent {
     label: PropTypes.string,
     orderable: PropTypes.bool,
     removeHandler: PropTypes.func.isRequired,
-    moveHandler: PropTypes.func.isRequired,
+    moveHandler: PropTypes.func,
     editHandler: PropTypes.func
   };
 

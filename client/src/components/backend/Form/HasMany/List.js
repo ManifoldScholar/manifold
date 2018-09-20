@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import indexOf from "lodash/indexOf";
 import ListItem from "./ListItem";
+import isString from "lodash/isString";
 import classnames from "classnames";
 
 export default class FormHasManyList extends PureComponent {
@@ -15,6 +16,10 @@ export default class FormHasManyList extends PureComponent {
     entityName: PropTypes.func,
     entities: PropTypes.array.isRequired,
     entityAvatarAttribute: PropTypes.string
+  };
+
+  static defaultProps = {
+    entityName: name => name
   };
 
   onMove = (event, entity, direction) => {
@@ -57,21 +62,25 @@ export default class FormHasManyList extends PureComponent {
     return (
       <ul className={listClasses}>
         {hasEntities
-          ? entities.map((entity, index) => (
-              <ListItem
-                key={entity.id}
-                entity={entity}
-                entities={entities}
-                ordinal={index}
-                entityName={this.props.entityName}
-                entityAvatarAttribute={this.props.entityAvatarAttribute}
-                label={this.props.label}
-                orderable={this.props.orderable}
-                removeHandler={this.onRemove}
-                editHandler={this.props.editClickHandler}
-                moveHandler={this.onMove}
-              />
-            ))
+          ? entities.map((entity, index) => {
+              const key = isString(entity) ? entity : entity.id;
+
+              return (
+                <ListItem
+                  key={key}
+                  entity={entity}
+                  entities={entities}
+                  ordinal={index}
+                  entityName={this.props.entityName}
+                  entityAvatarAttribute={this.props.entityAvatarAttribute}
+                  label={this.props.label}
+                  orderable={this.props.orderable}
+                  removeHandler={this.onRemove}
+                  editHandler={this.props.editClickHandler}
+                  moveHandler={this.onMove}
+                />
+              );
+            })
           : this.maybeRenderPlaceholder(bucketStyle, this.props.label)}
       </ul>
     );
