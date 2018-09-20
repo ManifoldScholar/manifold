@@ -61,7 +61,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
             onChange={[Function]}
             placeholder="Email"
             type="text"
-            value="test@cic-fake.gotcha"
+            value=""
           />
         </div>
         <div
@@ -80,7 +80,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
             onChange={[Function]}
             placeholder="First Name"
             type="text"
-            value="Rowan"
+            value=""
           />
         </div>
         <div
@@ -99,7 +99,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
             onChange={[Function]}
             placeholder="Last Name"
             type="text"
-            value="Ida"
+            value=""
           />
         </div>
         <div
@@ -125,7 +125,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
                 aria-describedby="select-error-12"
                 id={undefined}
                 onChange={[Function]}
-                value="admin"
+                value={undefined}
               >
                 <option
                   value="admin"

@@ -32,7 +32,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
               <select
                 id="kind-26"
                 onChange={[Function]}
-                value="image"
+                value=""
               >
                 <option
                   id="image"
@@ -115,7 +115,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           onChange={[Function]}
           placeholder="Enter a title"
           type="text"
-          value="Image"
+          value=""
         />
       </div>
       <div
@@ -153,7 +153,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           onChange={[Function]}
           placeholder="Enter slug"
           type="text"
-          value="slug-1"
+          value=""
         />
       </div>
       <div
@@ -172,7 +172,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           onChange={[Function]}
           placeholder="Enter tags"
           type="text"
-          value="dog, puppy, GOAT"
+          value=""
         />
         <span
           className="instructions"

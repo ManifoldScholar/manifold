@@ -33,7 +33,7 @@ exports[`Backend Project Category Edit Container renders correctly 1`] = `
           onChange={[Function]}
           placeholder="What would you like to call this category?"
           type="text"
-          value="Hip Hop Classics"
+          value=""
         />
       </div>
       <div
