@@ -3,27 +3,28 @@ module Tweet
   class Fetcher
     def fetch(project)
       return unless project.following_twitter_accounts?
-      project.twitter_queries.active.find_each do |query|
-        fetch_one(query)
+      project.twitter_queries.active.find_each do |twitter_query|
+        fetch_one(twitter_query)
       end
     end
 
-    # Following is a string query
-    def fetch_one(query)
+    def fetch_one(twitter_query)
       limit = 60
       options = {
         count: limit,
-        result_type: query.result_type
+        result_type: twitter_query.result_type
       }
-      options[:since_id] = query.most_recent_tweet_id.to_i if query.most_recent_tweet_id
+      if twitter_query.most_recent_tweet_id.present?
+        options[:since_id] = twitter_query.most_recent_tweet_id.to_i
+      end
 
-      results = client.search(query, options).take(limit)
+      results = client.search(twitter_query.query, options).take(limit)
       results.each do |tweet|
-        tweet_to_event(tweet, query)
+        tweet_to_event(tweet, twitter_query)
       end
 
       max = results.max_by(&:id)&.id
-      update_query_most_recent(query, max)
+      update_query_most_recent(twitter_query, max)
     end
 
     private
