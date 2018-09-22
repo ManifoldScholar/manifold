@@ -22,7 +22,8 @@ export class NavigationStatic extends PureComponent {
     commonActions: PropTypes.object.isRequired,
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
-    exact: PropTypes.bool
+    exact: PropTypes.bool,
+    style: PropTypes.object
   };
 
   static defaultProps = {
@@ -82,7 +83,7 @@ export class NavigationStatic extends PureComponent {
   renderUserMenu(props) {
     return (
       <nav className="user-links">
-        <ul>
+        <ul style={this.props.style}>
           {this.props.backendButton && <li>{this.props.backendButton}</li>}
           {this.renderSearch(props)}
           <li>
@@ -110,21 +111,23 @@ export class NavigationStatic extends PureComponent {
   render() {
     return (
       <nav className="text-nav show-75">
-        <ul className="links">
-          {this.props.links.map(link => {
-            if (link.ability)
-              return (
-                <HigherOrder.Authorize
-                  key={`${link.route}-wrapped`}
-                  entity={link.entity}
-                  ability={link.ability}
-                >
-                  {this.renderStaticItem(link)}
-                </HigherOrder.Authorize>
-              );
-            return this.renderStaticItem(link);
-          })}
-        </ul>
+        <div className="links-wrapper">
+          <ul style={this.props.style} className="links">
+            {this.props.links.map(link => {
+              if (link.ability)
+                return (
+                  <HigherOrder.Authorize
+                    key={`${link.route}-wrapped`}
+                    entity={link.entity}
+                    ability={link.ability}
+                  >
+                    {this.renderStaticItem(link)}
+                  </HigherOrder.Authorize>
+                );
+              return this.renderStaticItem(link);
+            })}
+          </ul>
+        </div>
         {this.renderUserMenu(this.props)}
       </nav>
     );
