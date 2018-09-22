@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180824222313) do
+ActiveRecord::Schema.define(version: 20180921160539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -514,18 +514,26 @@ ActiveRecord::Schema.define(version: 20180824222313) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.jsonb    "general",                 default: {}
-    t.jsonb    "theme",                   default: {}
+    t.jsonb    "general",                        default: {}
+    t.jsonb    "theme",                          default: {}
     t.integer  "singleton_guard"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "press_logo_file_name"
     t.string   "press_logo_content_type"
     t.integer  "press_logo_file_size"
     t.datetime "press_logo_updated_at"
-    t.jsonb    "integrations",            default: {}
-    t.jsonb    "secrets",                 default: {}
-    t.jsonb    "email",                   default: {}
+    t.jsonb    "integrations",                   default: {}
+    t.jsonb    "secrets",                        default: {}
+    t.jsonb    "email",                          default: {}
+    t.string   "press_logo_footer_file_name"
+    t.string   "press_logo_footer_content_type"
+    t.integer  "press_logo_footer_file_size"
+    t.datetime "press_logo_footer_updated_at"
+    t.string   "press_logo_mobile_file_name"
+    t.string   "press_logo_mobile_content_type"
+    t.integer  "press_logo_mobile_file_size"
+    t.datetime "press_logo_mobile_updated_at"
     t.index ["singleton_guard"], name: "index_settings_on_singleton_guard", unique: true, using: :btree
   end
 
