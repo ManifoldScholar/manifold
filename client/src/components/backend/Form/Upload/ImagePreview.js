@@ -18,7 +18,7 @@ export default class FormUploadImagePreview extends PureComponent {
 
   render() {
     return (
-      <div className="contents-image-preview">
+      <div className="contents-image-preview" data-id="preview">
         <div className="message">
           <p className="secondary">
             <span
