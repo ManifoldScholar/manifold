@@ -18,7 +18,7 @@ exports[`Backend.Resource.Form.KindAttributes component when kind is audio rende
       accepts={
         Object {
           "accepts": "image/*",
-          "extensions": "gif, jpeg, jpg, png, svg",
+          "extensions": "gif, jpeg, jpg, png",
         }
       }
       className="form-dropzone style-square"
@@ -60,7 +60,7 @@ exports[`Backend.Resource.Form.KindAttributes component when kind is audio rende
           <p
             className="secondary"
           >
-            gif, jpeg, jpg, png, svg
+            gif, jpeg, jpg, png
           </p>
         </div>
       </div>

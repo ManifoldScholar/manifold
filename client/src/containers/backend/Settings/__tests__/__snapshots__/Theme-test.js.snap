@@ -75,7 +75,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     accepts={
                       Object {
                         "accepts": "image/*",
-                        "extensions": "gif, jpeg, jpg, png, svg",
+                        "extensions": "gif, jpeg, jpg, png",
                       }
                     }
                     className="form-dropzone style-square"
@@ -117,7 +117,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                         <p
                           className="secondary"
                         >
-                          gif, jpeg, jpg, png, svg
+                          gif, jpeg, jpg, png
                         </p>
                       </div>
                     </div>
@@ -146,7 +146,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     accepts={
                       Object {
                         "accepts": "image/*",
-                        "extensions": "gif, jpeg, jpg, png, svg",
+                        "extensions": "gif, jpeg, jpg, png",
                       }
                     }
                     className="form-dropzone style-square"
@@ -188,7 +188,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                         <p
                           className="secondary"
                         >
-                          gif, jpeg, jpg, png, svg
+                          gif, jpeg, jpg, png
                         </p>
                       </div>
                     </div>
@@ -217,7 +217,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     accepts={
                       Object {
                         "accepts": "image/*",
-                        "extensions": "gif, jpeg, jpg, png, svg",
+                        "extensions": "gif, jpeg, jpg, png",
                       }
                     }
                     className="form-dropzone style-square"
@@ -259,7 +259,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                         <p
                           className="secondary"
                         >
-                          gif, jpeg, jpg, png, svg
+                          gif, jpeg, jpg, png
                         </p>
                       </div>
                     </div>
