@@ -59,7 +59,7 @@ export default class MakersFormContainer extends PureComponent {
             layout="square"
             accepts="images"
             label="Avatar Image"
-            readFrom="attributes[avatarStyles][smallSquare]"
+            readFrom="attributes[avatarStyles][small]"
             name="attributes[avatar]"
             remove="attributes[removeAvatar]"
           />

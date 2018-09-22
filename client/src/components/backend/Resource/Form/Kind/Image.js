@@ -13,7 +13,7 @@ export default class ResourceFormKindImage extends PureComponent {
         layout="square"
         label="Image File"
         accepts="images"
-        readFrom="attributes[attachmentStyles][smallSquare]"
+        readFrom="attributes[attachmentStyles][small]"
         name="attributes[attachment]"
         remove="attributes[removeAttachment]"
         {...this.props}
