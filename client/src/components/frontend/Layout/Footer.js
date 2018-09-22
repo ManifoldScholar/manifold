@@ -20,7 +20,8 @@ class LayoutFooter extends Component {
         general: PropTypes.object,
         theme: PropTypes.object,
         oauth: PropTypes.object,
-        pressLogoStyles: PropTypes.object
+        pressLogoStyles: PropTypes.object,
+        pressLogoFooterStyles: PropTypes.object
       })
     })
   };
@@ -193,7 +194,7 @@ class LayoutFooter extends Component {
   };
 
   checkPressLogo(pressLogo) {
-    return pressLogo.original !== null;
+    return pressLogo && pressLogo.original !== null;
   }
 
   renderCopyright() {
@@ -262,7 +263,7 @@ class LayoutFooter extends Component {
     let pressSite;
     let isPressLogo = false;
     if (settings) {
-      pressLogo = this.props.settings.attributes.pressLogoStyles;
+      pressLogo = this.props.settings.attributes.pressLogoFooterStyles;
       isPressLogo = this.checkPressLogo(pressLogo);
       pressSite = this.props.settings.attributes.general.pressSite;
     }

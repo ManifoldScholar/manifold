@@ -63,9 +63,9 @@
   .press-logo {
     display: inline-block;
     padding: 0;
-    margin-bottom: 28px;
+    margin-bottom: 14px;
 
-    @include respond($break65) {
+    @include respond($break75) {
       float: right;
       margin-bottom: 0;
     }
@@ -78,6 +78,12 @@
 
   // <nav> wrapper around nested <ul>
   .text-nav {
+    margin-bottom: 20px;
+
+    @include respond($break75) {
+      margin-bottom: 0;
+    }
+
     // Global styles
     ul {
       @include listUnstyled;
@@ -103,7 +109,9 @@
 
       > li {
         float: left;
-        margin-right: 60px;
+
+        width: 50%;
+        //margin-right: 60px;
         margin-bottom: 1em;
         font-size: 16px;
 
@@ -111,7 +119,8 @@
           margin-bottom: 0;
         }
 
-        @include respond($break40) {
+        @include respond($break30) {
+          width: auto;
           margin-right: 102px;
         }
 
@@ -126,7 +135,20 @@
   }
 
   .search-form {
-    max-width: 250px;
+
+    margin-bottom: 20px;
+
+    @include respond($break40) {
+      max-width: 250px;
+    }
+
+    .search-button-inline input {
+      border-width: 2px;
+      @include respond($break30) {
+        border-width: 3px;
+      }
+    }
+
 
     button {
       &:focus {
@@ -137,8 +159,12 @@
 
   .footer-secondary {
     position: relative;
-    padding-top: 28px;
-    padding-bottom: 28px;
+    padding-bottom: 15px;
+
+    @include respond($break30) {
+      padding-top: 28px;
+      padding-bottom: 28px;
+    }
   }
 
   .colophon {
