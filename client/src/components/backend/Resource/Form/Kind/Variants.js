@@ -16,7 +16,7 @@ export default class ResourceFormKindVariants extends PureComponent {
           layout="landscape"
           label="Poster Image"
           accepts="images"
-          readFrom="attributes[variantPosterStyles][mediumLandscape]"
+          readFrom="attributes[variantPosterStyles][small]"
           name="attributes[variantPoster]"
           remove="attributes[removeVariantPoster]"
           {...this.props}
@@ -25,7 +25,7 @@ export default class ResourceFormKindVariants extends PureComponent {
           layout="square"
           label="Thumbnail Image"
           accepts="images"
-          readFrom="attributes[variantThumbnailStyles][smallSquare]"
+          readFrom="attributes[variantThumbnailStyles][small]"
           name="attributes[variantThumbnail]"
           remove="attributes[removeVariantThumbnail]"
           {...this.props}
@@ -50,7 +50,7 @@ export default class ResourceFormKindVariants extends PureComponent {
           layout="square"
           label="Thumbnail Image"
           accepts="images"
-          readFrom="attributes[variantThumbnailStyles][smallSquare]"
+          readFrom="attributes[variantThumbnailStyles][small]"
           name="attributes[variantThumbnail]"
           remove="attributes[removeVariantThumbnail]"
           {...this.props}
@@ -66,7 +66,7 @@ export default class ResourceFormKindVariants extends PureComponent {
           layout="square"
           label="Thumbnail Image"
           accepts="images"
-          readFrom="attributes[variantThumbnailStyles][smallSquare]"
+          readFrom="attributes[variantThumbnailStyles][small]"
           name="attributes[variantThumbnail]"
           remove="attributes[removeVariantThumbnail]"
           {...this.props}
@@ -77,10 +77,10 @@ export default class ResourceFormKindVariants extends PureComponent {
 
   renderVariantFields() {
     return (
-      <div className="form-section">
+      <Form.FieldGroup>
         <Form.Upload
           layout="square"
-          label="Variant"
+          label="Variant #1"
           accepts={this.props.kind}
           readFrom="attributes[variantFormatOneFileName]"
           name="attributes[variantFormatOne]"
@@ -89,7 +89,7 @@ export default class ResourceFormKindVariants extends PureComponent {
         />
         <Form.Upload
           layout="square"
-          label="Variant"
+          label="Variant #2"
           accepts={this.props.kind}
           readFrom="attributes[variantFormatTwoFileName]"
           name="attributes[variantFormatTwo]"
@@ -101,13 +101,13 @@ export default class ResourceFormKindVariants extends PureComponent {
             layout="square"
             label="Thumbnail Image"
             accepts="images"
-            readFrom="attributes[variantThumbnailStyles][smallSquare]"
+            readFrom="attributes[variantThumbnailStyles][small]"
             name="attributes[variantThumbnail]"
             remove="attributes[removeVariantThumbnail]"
             {...this.props}
           />
         ) : null}
-      </div>
+      </Form.FieldGroup>
     );
   }
 

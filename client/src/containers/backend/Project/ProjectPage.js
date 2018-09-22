@@ -15,14 +15,6 @@ export default class ProjectProjectPageContainer extends PureComponent {
 
   render() {
     const project = this.props.project;
-    const heroInstructions = (
-      <div>
-        <p className="instructions">
-          The Hero Image is displayed at the top of the project landing page.<br />
-          Images will be resized to 1280x800 and cropped along the bottom edge.
-        </p>
-      </div>
-    );
 
     return (
       <HigherOrder.Authorize
@@ -56,16 +48,18 @@ export default class ProjectProjectPageContainer extends PureComponent {
                 layout="landscape"
                 accepts="images"
                 label="Hero Image"
-                readFrom="attributes[heroStyles][mediumLandscape]"
+                readFrom="attributes[heroStyles][small]"
                 name="attributes[hero]"
                 remove="attributes[removeHero]"
-                instructions={heroInstructions}
+                instructions={
+                  "The Hero Image is displayed at the top of the project landing page. Images will be resized to 1280x800 and cropped along the bottom edge."
+                }
               />
               <Form.Upload
                 layout="portrait"
                 label="Cover"
                 accepts="images"
-                readFrom="attributes[coverStyles][smallPortrait]"
+                readFrom="attributes[coverStyles][small]"
                 name="attributes[cover]"
                 remove="attributes[removeCover]"
                 instructions="If a cover is set for the project, it will appear over the hero, to the right of the description on the landing page."
