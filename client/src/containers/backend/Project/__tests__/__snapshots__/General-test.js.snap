@@ -752,7 +752,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           "extensions": "gif, jpeg, jpg, png, svg",
                         }
                       }
-                      className="form-dropzone style-embed"
+                      className="form-dropzone style-square"
                       inputProps={
                         Object {
                           "aria-describedby": "upload-error-22",

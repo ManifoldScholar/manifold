@@ -34,100 +34,111 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
           </div>
         </figure>
       </a>
-      <nav
-        className="text-nav show-75"
+      <div
+        className="header-nav-wrapper"
       >
-        <ul
-          className="links"
-        >
-          <li>
-            <a
-              aria-current={null}
-              className={undefined}
-              href="/backend/dashboard"
-              onClick={[Function]}
-              style={undefined}
-            >
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a
-              aria-current={null}
-              className={undefined}
-              href="/backend/projects"
-              onClick={[Function]}
-              style={undefined}
-            >
-              Projects
-            </a>
-          </li>
-          <li>
-            <a
-              aria-current={null}
-              className={undefined}
-              href="/backend/records"
-              onClick={[Function]}
-              style={undefined}
-            >
-              Records
-            </a>
-          </li>
-          <li>
-            <a
-              aria-current={null}
-              className={undefined}
-              href="/backend/settings"
-              onClick={[Function]}
-              style={undefined}
-            >
-              Settings
-            </a>
-          </li>
-        </ul>
         <nav
-          className="user-links"
+          className="text-nav show-75"
         >
-          <ul>
-            <li>
-              <a
-                className="button-mode"
-                href="/"
-                onClick={[Function]}
-              >
-                Exit Admin Mode
-              </a>
-            </li>
-            <li>
-              <button
-                className="button-avatar"
-                onClick={[Function]}
-              >
-                <span
-                  className="screen-reader-text"
-                >
-                  Login or open user settings
-                </span>
-                <figure
-                  className="avatar"
+          <div
+            className="links-wrapper"
+          >
+            <ul
+              className="links"
+              style={undefined}
+            >
+              <li>
+                <a
+                  aria-current={null}
+                  className={undefined}
+                  href="/backend/dashboard"
+                  onClick={[Function]}
                   style={undefined}
+                >
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-current={null}
+                  className={undefined}
+                  href="/backend/projects"
+                  onClick={[Function]}
+                  style={undefined}
+                >
+                  Projects
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-current={null}
+                  className={undefined}
+                  href="/backend/records"
+                  onClick={[Function]}
+                  style={undefined}
+                >
+                  Records
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-current={null}
+                  className={undefined}
+                  href="/backend/settings"
+                  onClick={[Function]}
+                  style={undefined}
+                >
+                  Settings
+                </a>
+              </li>
+            </ul>
+          </div>
+          <nav
+            className="user-links"
+          >
+            <ul
+              style={undefined}
+            >
+              <li>
+                <a
+                  className="button-mode"
+                  href="/"
+                  onClick={[Function]}
+                >
+                  Exit Admin Mode
+                </a>
+              </li>
+              <li>
+                <button
+                  className="button-avatar"
+                  onClick={[Function]}
                 >
                   <span
                     className="screen-reader-text"
                   >
-                    Avatar
+                    Login or open user settings
                   </span>
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-person"
-                  />
-                </figure>
-              </button>
-              <span />
-            </li>
-          </ul>
+                  <figure
+                    className="avatar"
+                    style={undefined}
+                  >
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Avatar
+                    </span>
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-person"
+                    />
+                  </figure>
+                </button>
+                <span />
+              </li>
+            </ul>
+          </nav>
         </nav>
-      </nav>
+      </div>
       <nav
         className="nested-nav hide-75"
       >
