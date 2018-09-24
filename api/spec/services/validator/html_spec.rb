@@ -65,9 +65,15 @@ RSpec.describe Validator::Html do
     expect(validator.validate(fragment).delete("\n")).to eq(fragment)
   end
 
-  it "should close void tags" do
+  it "should close void tags with attributes" do
     fragment = '<video><source src="sample.webm" type="video/webm"></video>'
     valid = '<video><source src="sample.webm" type="video/webm" /></video>'
+    expect(validator.validate(fragment).delete("\n")).to eq(valid)
+  end
+
+  it "should close void tags without attributes" do
+    fragment = '<p><br><a href="/somewhere-else" id="test">anchor content</a>paragraph content.</p>'
+    valid = '<p><br /><a href="/somewhere-else" id="test">anchor content</a>paragraph content.</p>'
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
