@@ -6,11 +6,11 @@ exports[`Frontend.Project.Follow component renders correctly 1`] = `
     className="screen-reader-text"
     onClick={[Function]}
   >
-    Unfollow Rowan Test
+    add Rowan Test
   </button>
   <div
     aria-hidden="true"
-    className="follow-button-wrapper follow"
+    className="add project-cover-button-wrapper"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
@@ -18,7 +18,7 @@ exports[`Frontend.Project.Follow component renders correctly 1`] = `
   >
     <div
       aria-hidden="true"
-      className="following-button"
+      className="project-cover-button"
     >
       <div
         className="icons"
@@ -35,7 +35,7 @@ exports[`Frontend.Project.Follow component renders correctly 1`] = `
       </div>
       <span>
         <span
-          className="follow-text"
+          className="action-text"
         >
           Follow
         </span>
