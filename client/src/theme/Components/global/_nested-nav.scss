@@ -41,9 +41,13 @@
         color: $neutral75;
       }
       position: relative;
-      top: 5px;
+      top: -2px;
       margin: 0 10px;
-      font-size: 12px;
+      font-size: 13px;
+
+      &::before {
+        vertical-align: middle;
+      }
     }
   }
 
