@@ -87,7 +87,7 @@ export class ProjectSubjects extends PureComponent {
         changeHandler={subjects => {
           this.updateSubjects(subjects);
         }}
-        optionsFetch={subjectsAPI.index}
+        fetch={subjectsAPI.index}
         entities={project.relationships.subjects}
         entityBuilder={this.buildEntity}
         entityLabelAttribute="name"

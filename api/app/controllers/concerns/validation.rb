@@ -164,7 +164,7 @@ module Validation
   def stylesheet_params
     params.require(:data)
     attributes = [:raw_styles, :name, :position]
-    relationships = []
+    relationships = [:text_sections]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
