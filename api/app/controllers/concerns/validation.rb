@@ -279,10 +279,13 @@ module Validation
       {
         theme: [
           :logo_styles,
-          :typekit_id
+          :typekit_id,
+          :header_offset
         ]
       },
       :remove_press_logo, attachment(:press_logo),
+      :remove_press_logo_footer, attachment(:press_logo_footer),
+      :remove_press_logo_mobile, attachment(:press_logo_mobile),
       google_service: [:data]
     ]
     param_config = structure_params(attributes: attributes)

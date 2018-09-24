@@ -5,125 +5,129 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
   className="form-section"
 >
   <div
-    className="form-input"
+    className="form-input-group"
   >
     <div
       className="form-input"
-      style={Object {}}
     >
-      <label
-        className=""
-        htmlFor="upload-1"
+      <div
+        className="form-input"
+        style={Object {}}
       >
-        Variant
-      </label>
-      <react-dropzone
-        accepts={
-          Object {
-            "accepts": null,
-            "extensions": null,
-          }
-        }
-        className="form-dropzone style-square"
-        inputProps={
-          Object {
-            "aria-describedby": "upload-error-1",
-            "id": "upload-1",
-          }
-        }
-        multiple={false}
-        onDrop={[Function]}
-        style={undefined}
-      >
-        <div
-          className="contents-empty"
+        <label
+          className=""
+          htmlFor="upload-1"
         >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-cloud-up"
-          />
+          Variant #1
+        </label>
+        <react-dropzone
+          accepts={
+            Object {
+              "accepts": null,
+              "extensions": null,
+            }
+          }
+          className="form-dropzone style-square"
+          inputProps={
+            Object {
+              "aria-describedby": "upload-error-1",
+              "id": "upload-1",
+            }
+          }
+          multiple={false}
+          onDrop={[Function]}
+          style={undefined}
+        >
           <div
-            className="message"
+            className="contents-empty"
           >
-            <p
-              className="primary"
+            <i
+              aria-hidden="true"
+              className="manicon manicon-cloud-up"
+            />
+            <div
+              className="message"
             >
-              <span
-                className="fake-link"
-                role="button"
-                tabIndex="0"
+              <p
+                className="primary"
               >
-                Upload a file
-              </span>
-               or 
-              <br />
-              drag and drop here
-              <br />
-            </p>
+                <span
+                  className="fake-link"
+                  role="button"
+                  tabIndex="0"
+                >
+                  Upload a file
+                </span>
+                 or 
+                <br />
+                drag and drop here
+                <br />
+              </p>
+            </div>
           </div>
-        </div>
-      </react-dropzone>
+        </react-dropzone>
+      </div>
     </div>
-  </div>
-  <div
-    className="form-input"
-  >
     <div
       className="form-input"
-      style={Object {}}
     >
-      <label
-        className=""
-        htmlFor="upload-1"
+      <div
+        className="form-input"
+        style={Object {}}
       >
-        Variant
-      </label>
-      <react-dropzone
-        accepts={
-          Object {
-            "accepts": null,
-            "extensions": null,
-          }
-        }
-        className="form-dropzone style-square"
-        inputProps={
-          Object {
-            "aria-describedby": "upload-error-1",
-            "id": "upload-1",
-          }
-        }
-        multiple={false}
-        onDrop={[Function]}
-        style={undefined}
-      >
-        <div
-          className="contents-empty"
+        <label
+          className=""
+          htmlFor="upload-1"
         >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-cloud-up"
-          />
+          Variant #2
+        </label>
+        <react-dropzone
+          accepts={
+            Object {
+              "accepts": null,
+              "extensions": null,
+            }
+          }
+          className="form-dropzone style-square"
+          inputProps={
+            Object {
+              "aria-describedby": "upload-error-1",
+              "id": "upload-1",
+            }
+          }
+          multiple={false}
+          onDrop={[Function]}
+          style={undefined}
+        >
           <div
-            className="message"
+            className="contents-empty"
           >
-            <p
-              className="primary"
+            <i
+              aria-hidden="true"
+              className="manicon manicon-cloud-up"
+            />
+            <div
+              className="message"
             >
-              <span
-                className="fake-link"
-                role="button"
-                tabIndex="0"
+              <p
+                className="primary"
               >
-                Upload a file
-              </span>
-               or 
-              <br />
-              drag and drop here
-              <br />
-            </p>
+                <span
+                  className="fake-link"
+                  role="button"
+                  tabIndex="0"
+                >
+                  Upload a file
+                </span>
+                 or 
+                <br />
+                drag and drop here
+                <br />
+              </p>
+            </div>
           </div>
-        </div>
-      </react-dropzone>
+        </react-dropzone>
+      </div>
     </div>
   </div>
 </div>
@@ -150,7 +154,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
         accepts={
           Object {
             "accepts": "image/*",
-            "extensions": "gif, jpeg, jpg, png, svg",
+            "extensions": "gif, jpeg, jpg, png",
           }
         }
         className="form-dropzone style-square"
@@ -192,7 +196,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             <p
               className="secondary"
             >
-              gif, jpeg, jpg, png, svg
+              gif, jpeg, jpg, png
             </p>
           </div>
         </div>
@@ -216,7 +220,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
         accepts={
           Object {
             "accepts": "image/*",
-            "extensions": "gif, jpeg, jpg, png, svg",
+            "extensions": "gif, jpeg, jpg, png",
           }
         }
         className="form-dropzone style-square"
@@ -258,7 +262,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             <p
               className="secondary"
             >
-              gif, jpeg, jpg, png, svg
+              gif, jpeg, jpg, png
             </p>
           </div>
         </div>
@@ -289,7 +293,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
         accepts={
           Object {
             "accepts": "image/*",
-            "extensions": "gif, jpeg, jpg, png, svg",
+            "extensions": "gif, jpeg, jpg, png",
           }
         }
         className="form-dropzone style-square"
@@ -331,7 +335,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
             <p
               className="secondary"
             >
-              gif, jpeg, jpg, png, svg
+              gif, jpeg, jpg, png
             </p>
           </div>
         </div>

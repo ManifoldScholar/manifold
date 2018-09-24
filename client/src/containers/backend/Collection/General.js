@@ -44,7 +44,7 @@ export class CollectionGeneralContainer extends PureComponent {
             layout="landscape"
             accepts="images"
             label="Cover Image"
-            readFrom="attributes[thumbnailStyles][mediumLandscape]"
+            readFrom="attributes[thumbnailStyles][small]"
             name="attributes[thumbnail]"
             remove="attributes[removeThumbnail]"
           />

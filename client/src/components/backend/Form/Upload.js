@@ -9,7 +9,7 @@ export class FormUpload extends Component {
   static types = {
     images: {
       accepts: "image/*",
-      extensions: "gif, jpeg, jpg, png, svg"
+      extensions: "gif, jpeg, jpg, png"
     },
     audio: {
       accepts: "audio/*",

@@ -4,7 +4,7 @@ module Updaters
     include ::Updaters
 
     def attachment_fields
-      [:press_logo]
+      [:press_logo, :press_logo_footer, :press_logo_mobile]
     end
 
     def adjusted_attributes

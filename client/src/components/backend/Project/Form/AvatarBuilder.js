@@ -163,7 +163,6 @@ class AvatarBuilder extends Component {
                 "attributes[avatarStyles][smallSquare]"
               )}
               value={this.props.getModelValue("attributes[avatar]")}
-              layout="embed"
               placeholder="cover"
               accepts="images"
             />

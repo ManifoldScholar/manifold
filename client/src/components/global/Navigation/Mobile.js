@@ -21,7 +21,8 @@ export class NavigationMobile extends Component {
     authentication: PropTypes.object,
     commonActions: PropTypes.object.isRequired,
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-    mode: PropTypes.oneOf(["backend", "frontend"]).isRequired
+    mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
+    style: PropTypes.object
   };
 
   constructor(props) {

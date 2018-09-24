@@ -5,6 +5,7 @@ import classNames from "classnames";
 export default class PressLogo extends Component {
   static propTypes = {
     url: PropTypes.string,
+    mobileUrl: PropTypes.string,
     styles: PropTypes.string
   };
 
@@ -39,6 +40,16 @@ export default class PressLogo extends Component {
     );
   }
 
+  getMobilePressImage() {
+    return (
+      <img
+        src={this.props.mobileUrl}
+        alt="Publisher Logo: Click to return to the browse page"
+        className="image-mobile"
+      />
+    );
+  }
+
   render() {
     const figureClass = classNames({
       "logo-square": this.props.url
@@ -47,6 +58,7 @@ export default class PressLogo extends Component {
     return (
       <figure className={figureClass}>
         {this.props.url ? this.getPressImage() : this.getDefaultIcon()}
+        {this.props.mobileUrl ? this.getMobilePressImage() : null}
       </figure>
     );
   }

@@ -22,142 +22,338 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           onSubmit={[Function]}
         >
           <div
-            className="form-input"
+            className="form-section"
           >
-            <div
-              className="form-input"
-              style={Object {}}
+            <header
+              className="form-section-label"
             >
-              <label
-                className="has-instructions"
-                htmlFor="upload-1"
-              >
-                Press Logo
-              </label>
-              <span
-                className="instructions"
-              >
-                Logos are constrained at 40px wide with flexible height. For retina displays, upload logos that are 80px wide.
+              <span>
+                Branding
               </span>
-              <react-dropzone
-                accepts={
-                  Object {
-                    "accepts": "image/*",
-                    "extensions": "gif, jpeg, jpg, png, svg",
-                  }
-                }
-                className="form-dropzone style-square"
-                inputProps={
-                  Object {
-                    "aria-describedby": "upload-error-1",
-                    "id": "upload-1",
-                  }
-                }
-                multiple={false}
-                onDrop={[Function]}
-                style={undefined}
+            </header>
+            <div
+              className="form-input-group"
+            >
+              <div
+                className="form-input wide"
+                style={Object {}}
+              >
+                <label
+                  className="has-instructions"
+                  htmlFor="attributes[general][pressSite]-text-input-1"
+                >
+                  Press Website URL
+                </label>
+                <input
+                  aria-describedby="attributes[general][pressSite]-text-input-1"
+                  id="attributes[general][pressSite]-text-input-1"
+                  onChange={[Function]}
+                  placeholder="Enter URL"
+                  type="text"
+                  value=""
+                />
+                <span
+                  className="instructions"
+                >
+                  If present, the footer press logo image will link to this URL.
+                </span>
+              </div>
+              <div
+                className="form-input"
               >
                 <div
-                  className="contents-empty"
+                  className="form-input"
+                  style={Object {}}
                 >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-cloud-up"
-                  />
-                  <div
-                    className="message"
+                  <label
+                    className="has-instructions"
+                    htmlFor="upload-1"
                   >
-                    <p
-                      className="primary"
+                    Header Logo
+                  </label>
+                  <react-dropzone
+                    accepts={
+                      Object {
+                        "accepts": "image/*",
+                        "extensions": "gif, jpeg, jpg, png",
+                      }
+                    }
+                    className="form-dropzone style-square"
+                    inputProps={
+                      Object {
+                        "aria-describedby": "upload-error-1",
+                        "id": "upload-1",
+                      }
+                    }
+                    multiple={false}
+                    onDrop={[Function]}
+                    style={undefined}
+                  >
+                    <div
+                      className="contents-empty"
                     >
-                      <span
-                        className="fake-link"
-                        role="button"
-                        tabIndex="0"
+                      <i
+                        aria-hidden="true"
+                        className="manicon manicon-cloud-up"
+                      />
+                      <div
+                        className="message"
                       >
-                        Upload a file
-                      </span>
-                       or 
-                      <br />
-                      drag and drop here
-                      <br />
-                    </p>
-                    <p
-                      className="secondary"
-                    >
-                      gif, jpeg, jpg, png, svg
-                    </p>
-                  </div>
+                        <p
+                          className="primary"
+                        >
+                          <span
+                            className="fake-link"
+                            role="button"
+                            tabIndex="0"
+                          >
+                            Upload a file
+                          </span>
+                           or 
+                          <br />
+                          drag and drop here
+                          <br />
+                        </p>
+                        <p
+                          className="secondary"
+                        >
+                          gif, jpeg, jpg, png
+                        </p>
+                      </div>
+                    </div>
+                  </react-dropzone>
+                  <span
+                    className="instructions"
+                  >
+                    The header logo appears in the top left of the frontend header. The logo will be resized to a max height of 60px.
+                  </span>
                 </div>
-              </react-dropzone>
+              </div>
+              <div
+                className="form-input"
+              >
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="upload-1"
+                  >
+                    Mobile Header Logo
+                  </label>
+                  <react-dropzone
+                    accepts={
+                      Object {
+                        "accepts": "image/*",
+                        "extensions": "gif, jpeg, jpg, png",
+                      }
+                    }
+                    className="form-dropzone style-square"
+                    inputProps={
+                      Object {
+                        "aria-describedby": "upload-error-1",
+                        "id": "upload-1",
+                      }
+                    }
+                    multiple={false}
+                    onDrop={[Function]}
+                    style={undefined}
+                  >
+                    <div
+                      className="contents-empty"
+                    >
+                      <i
+                        aria-hidden="true"
+                        className="manicon manicon-cloud-up"
+                      />
+                      <div
+                        className="message"
+                      >
+                        <p
+                          className="primary"
+                        >
+                          <span
+                            className="fake-link"
+                            role="button"
+                            tabIndex="0"
+                          >
+                            Upload a file
+                          </span>
+                           or 
+                          <br />
+                          drag and drop here
+                          <br />
+                        </p>
+                        <p
+                          className="secondary"
+                        >
+                          gif, jpeg, jpg, png
+                        </p>
+                      </div>
+                    </div>
+                  </react-dropzone>
+                  <span
+                    className="instructions"
+                  >
+                    This header logo will be used on mobile devices. We strongly recommend using a square logo here.
+                  </span>
+                </div>
+              </div>
+              <div
+                className="form-input wide"
+              >
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="upload-1"
+                  >
+                    Press Footer Logo
+                  </label>
+                  <react-dropzone
+                    accepts={
+                      Object {
+                        "accepts": "image/*",
+                        "extensions": "gif, jpeg, jpg, png",
+                      }
+                    }
+                    className="form-dropzone style-square"
+                    inputProps={
+                      Object {
+                        "aria-describedby": "upload-error-1",
+                        "id": "upload-1",
+                      }
+                    }
+                    multiple={false}
+                    onDrop={[Function]}
+                    style={undefined}
+                  >
+                    <div
+                      className="contents-empty"
+                    >
+                      <i
+                        aria-hidden="true"
+                        className="manicon manicon-cloud-up"
+                      />
+                      <div
+                        className="message"
+                      >
+                        <p
+                          className="primary"
+                        >
+                          <span
+                            className="fake-link"
+                            role="button"
+                            tabIndex="0"
+                          >
+                            Upload a file
+                          </span>
+                           or 
+                          <br />
+                          drag and drop here
+                          <br />
+                        </p>
+                        <p
+                          className="secondary"
+                        >
+                          gif, jpeg, jpg, png
+                        </p>
+                      </div>
+                    </div>
+                  </react-dropzone>
+                  <span
+                    className="instructions"
+                  >
+                    The footer logo appears in the footer. The logo dimensions will be capped at 325px width and 200px height.
+                  </span>
+                </div>
+              </div>
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className="has-instructions"
+                  htmlFor="attributes[theme][logoStyles]-text-input-1"
+                >
+                  Logo Styles
+                </label>
+                <input
+                  aria-describedby="attributes[theme][logoStyles]-text-input-1"
+                  id="attributes[theme][logoStyles]-text-input-1"
+                  onChange={[Function]}
+                  placeholder="Additional Logo CSS"
+                  type="text"
+                  value=""
+                />
+                <span
+                  className="instructions"
+                >
+                  Enter a JSON style object, which will be applied to the logo image. For example: {"left": -1}
+                </span>
+              </div>
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className="has-instructions"
+                  htmlFor="attributes[theme][headerOffset]-text-input-1"
+                >
+                  Header Navigation Offset
+                </label>
+                <input
+                  aria-describedby="attributes[theme][headerOffset]-text-input-1"
+                  id="attributes[theme][headerOffset]-text-input-1"
+                  onChange={[Function]}
+                  placeholder="0"
+                  type="text"
+                  value=""
+                />
+                <span
+                  className="instructions"
+                >
+                  Use this field to adjust the vertical position of header navigation. For example, enter "5" to move the header down 5 pixels. Enter "-5" to move it up 5 pixels.
+                </span>
+              </div>
             </div>
           </div>
           <div
-            className="form-input"
-            style={Object {}}
+            className="form-section"
           >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[general][pressSite]-text-input-1"
+            <header
+              className="form-section-label"
             >
-              Press Website URL
-            </label>
-            <input
-              aria-describedby="attributes[general][pressSite]-text-input-1"
-              id="attributes[general][pressSite]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter URL"
-              type="text"
-              value=""
-            />
-            <span
-              className="instructions"
+              <span>
+                Typography
+              </span>
+            </header>
+            <div
+              className="form-input-group"
             >
-              If present, the press logo image will link to this URL.
-            </span>
-          </div>
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[theme][logoStyles]-text-input-1"
-            >
-              Logo Styles
-            </label>
-            <input
-              aria-describedby="attributes[theme][logoStyles]-text-input-1"
-              id="attributes[theme][logoStyles]-text-input-1"
-              onChange={[Function]}
-              placeholder="Additional Logo CSS"
-              type="text"
-              value=""
-            />
-            <span
-              className="instructions"
-            >
-              Enter a JSON style object, which will be applied to the logo image. For example: {"left": -1}
-            </span>
-          </div>
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className=""
-              htmlFor="attributes[theme][typekitId]-text-input-1"
-            >
-              Typekit ID
-            </label>
-            <input
-              aria-describedby="attributes[theme][typekitId]-text-input-1"
-              id="attributes[theme][typekitId]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter Typekit ID"
-              type="text"
-              value=""
-            />
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className=""
+                  htmlFor="attributes[theme][typekitId]-text-input-1"
+                >
+                  Typekit ID
+                </label>
+                <input
+                  aria-describedby="attributes[theme][typekitId]-text-input-1"
+                  id="attributes[theme][typekitId]-text-input-1"
+                  onChange={[Function]}
+                  placeholder="Enter Typekit ID"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
           </div>
           <div
             className="form-input submit wide"

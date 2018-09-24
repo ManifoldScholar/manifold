@@ -151,6 +151,7 @@
         .form-input, .form-dropzone {
           display: flex;
           width: 100%;
+          max-width: none;
         }
 
         .contents-image-preview {
@@ -163,7 +164,7 @@
         }
 
         .preview {
-          position: static;
+          position: absolute;
           // Slightly smaller preview, since it shares
           // space with color picker
           width: 100px;
@@ -225,7 +226,6 @@
 
       .secondary {
         @include utilityMessage;
-        padding-top: 18px;
         margin: 0;
       }
     }
@@ -235,7 +235,12 @@
 
       .manicon {
         height: 120px;
-        padding: 38px 0 0;
+        padding: 20px 0 0;
+
+        @include respond($break50) {
+          height: 60px;
+          padding: 15px 0;
+        }
       }
     }
   }

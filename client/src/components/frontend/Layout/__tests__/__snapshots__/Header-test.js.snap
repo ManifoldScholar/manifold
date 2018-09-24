@@ -34,76 +34,87 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
           </div>
         </figure>
       </a>
-      <nav
-        className="text-nav show-75"
+      <div
+        className="header-nav-wrapper"
       >
-        <ul
-          className="links"
+        <nav
+          className="text-nav show-75"
         >
-          <li>
-            <a
-              aria-current="page"
-              className="active"
-              href="/"
-              onClick={[Function]}
+          <div
+            className="links-wrapper"
+          >
+            <ul
+              className="links"
               style={Object {}}
             >
-              Home
-            </a>
-          </li>
-        </ul>
-        <nav
-          className="user-links"
-        >
-          <ul>
-            <li>
-              <button
-                className="button-search"
-                data-id="toggle-menu"
-                onClick={[Function]}
-              >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-magnify"
-                />
-                <span
-                  className="screen-reader-text"
+              <li>
+                <a
+                  aria-current="page"
+                  className="active"
+                  href="/"
+                  onClick={[Function]}
+                  style={Object {}}
                 >
-                  Open search
-                </span>
-              </button>
-              <span />
-            </li>
-            <li>
-              <button
-                className="button-avatar"
-                onClick={[Function]}
-              >
-                <span
-                  className="screen-reader-text"
+                  Home
+                </a>
+              </li>
+            </ul>
+          </div>
+          <nav
+            className="user-links"
+          >
+            <ul
+              style={Object {}}
+            >
+              <li>
+                <button
+                  className="button-search"
+                  data-id="toggle-menu"
+                  onClick={[Function]}
                 >
-                  Login or open user settings
-                </span>
-                <figure
-                  className="avatar"
-                  style={undefined}
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-magnify"
+                  />
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Open search
+                  </span>
+                </button>
+                <span />
+              </li>
+              <li>
+                <button
+                  className="button-avatar"
+                  onClick={[Function]}
                 >
                   <span
                     className="screen-reader-text"
                   >
-                    Avatar
+                    Login or open user settings
                   </span>
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-person"
-                  />
-                </figure>
-              </button>
-              <span />
-            </li>
-          </ul>
+                  <figure
+                    className="avatar"
+                    style={undefined}
+                  >
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Avatar
+                    </span>
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-person"
+                    />
+                  </figure>
+                </button>
+                <span />
+              </li>
+            </ul>
+          </nav>
         </nav>
-      </nav>
+      </div>
       <nav
         className="nested-nav hide-75"
       >

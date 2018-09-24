@@ -191,7 +191,6 @@ common: &1
           - !ruby/regexp '/gif\Z/i'
           - !ruby/regexp '/jpe?g\Z/i'
           - !ruby/regexp '/png\Z/i'
-          - !ruby/regexp '/svg\Z/i'
       :video:
         :allowed_mime:
           - !ruby/regexp '/video\/.*/'
