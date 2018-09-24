@@ -92,7 +92,7 @@ export class FormCollaborators extends Component {
             changeHandler={(makers, changeType) => {
               this.updateMakers(makers, changeType, "creators");
             }}
-            optionsFetch={makersAPI.index}
+            fetch={makersAPI.index}
             entities={entity.relationships.creators}
             entityBuilder={this.buildEntity}
             entityLabelAttribute="fullName"
@@ -110,7 +110,7 @@ export class FormCollaborators extends Component {
             changeHandler={(makers, changeType) => {
               this.updateMakers(makers, changeType, "contributors");
             }}
-            optionsFetch={makersAPI.index}
+            fetch={makersAPI.index}
             entities={entity.relationships.contributors}
             entityBuilder={this.buildEntity}
             entityLabelAttribute="fullName"

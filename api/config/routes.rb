@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       resources :texts do
         scope module: :texts do
           namespace :relationships do
+            resources :text_sections, only: [:index]
             resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
           end
         end

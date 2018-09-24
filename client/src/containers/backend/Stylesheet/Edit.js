@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { stylesheetsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
-import { Form } from "components/backend";
+import { Form, Stylesheet } from "components/backend";
 import lh from "helpers/linkHandler";
 import { Link, Redirect } from "react-router-dom";
 import { Form as FormContainer } from "containers/backend";
@@ -122,6 +122,11 @@ export class StylesheetEditContainer extends PureComponent {
               "styles that are included in the reader for this text."
             }
             readOnly
+          />
+          <Stylesheet.Form.TextSections
+            stylesheet={stylesheet}
+            wide
+            {...this.props}
           />
           <Form.Save
             cancelRoute={lh.link("backendTextStyles", params.id)}
