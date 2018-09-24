@@ -94,25 +94,16 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               style={Object {}}
             >
               <label
-                className=""
+                className="has-instructions"
                 htmlFor="upload-1"
               >
                 Hero Image
               </label>
-              <div>
-                <p
-                  className="instructions"
-                >
-                  The Hero Image is displayed at the top of the project landing page.
-                  <br />
-                  Images will be resized to 1280x800 and cropped along the bottom edge.
-                </p>
-              </div>
               <react-dropzone
                 accepts={
                   Object {
                     "accepts": "image/*",
-                    "extensions": "gif, jpeg, jpg, png, svg",
+                    "extensions": "gif, jpeg, jpg, png",
                   }
                 }
                 className="form-dropzone style-landscape"
@@ -154,11 +145,16 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                     <p
                       className="secondary"
                     >
-                      gif, jpeg, jpg, png, svg
+                      gif, jpeg, jpg, png
                     </p>
                   </div>
                 </div>
               </react-dropzone>
+              <span
+                className="instructions"
+              >
+                The Hero Image is displayed at the top of the project landing page. Images will be resized to 1280x800 and cropped along the bottom edge.
+              </span>
             </div>
           </div>
           <div
@@ -174,16 +170,11 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               >
                 Cover
               </label>
-              <span
-                className="instructions"
-              >
-                If a cover is set for the project, it will appear over the hero, to the right of the description on the landing page.
-              </span>
               <react-dropzone
                 accepts={
                   Object {
                     "accepts": "image/*",
-                    "extensions": "gif, jpeg, jpg, png, svg",
+                    "extensions": "gif, jpeg, jpg, png",
                   }
                 }
                 className="form-dropzone style-portrait"
@@ -225,11 +216,16 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                     <p
                       className="secondary"
                     >
-                      gif, jpeg, jpg, png, svg
+                      gif, jpeg, jpg, png
                     </p>
                   </div>
                 </div>
               </react-dropzone>
+              <span
+                className="instructions"
+              >
+                If a cover is set for the project, it will appear over the hero, to the right of the description on the landing page.
+              </span>
             </div>
           </div>
         </div>

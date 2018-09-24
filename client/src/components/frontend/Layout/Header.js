@@ -46,6 +46,17 @@ export default class LayoutHeader extends PureComponent {
 
   render() {
     const links = this.frontendLinks(this.props);
+    const offset = get(this.props, "settings.attributes.theme.headerOffset");
+    const navStyle = offset
+      ? { position: "relative", top: parseInt(offset, 10) }
+      : {};
+    const logoUrl = get(
+      this.props.settings,
+      "attributes.pressLogoStyles.small"
+    );
+    const mobileLogoUrl =
+      get(this.props.settings, "attributes.pressLogoMobileStyles.small") ||
+      logoUrl;
 
     return (
       <HigherOrder.BlurOnLocationChange location={this.props.location}>
@@ -54,16 +65,14 @@ export default class LayoutHeader extends PureComponent {
             <Link to={lh.link("frontend")} className="logo">
               <span className="screen-reader-text">Return to home</span>
               <PressLogo
-                url={get(
-                  this.props.settings,
-                  "attributes.pressLogoStyles.original"
-                )}
+                url={logoUrl}
+                mobileUrl={mobileLogoUrl}
                 styles={get(this.props.settings, "attributes.theme.logoStyles")}
                 aria-hidden="true"
               />
             </Link>
-
             <Navigation.Primary
+              desktopStyle={navStyle}
               links={links}
               commonActions={this.props.commonActions}
               authentication={this.props.authentication}

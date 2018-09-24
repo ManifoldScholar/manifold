@@ -15,8 +15,6 @@ export default class FormUploadPreview extends PureComponent {
   static propTypes = {
     preview: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     handleRemove: PropTypes.func
-    // accepts: PropTypes.object,
-    // placeholder: PropTypes.string
   };
 
   get isImage() {

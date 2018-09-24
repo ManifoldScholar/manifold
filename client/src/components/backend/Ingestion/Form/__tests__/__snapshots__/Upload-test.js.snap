@@ -22,23 +22,6 @@ exports[`Backend.Ingestion.Form.Upload component renders correctly 1`] = `
       >
         Upload a file
       </label>
-      <span
-        className="instructions"
-      >
-        Manifold can ingest texts from single files or a .zip collection.
-        <br />
-        See the
-         
-        <a
-          href="https://manifoldapp.org/docs/projects/preparing"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          documentation
-        </a>
-         
-        for supported file types and directory structure.
-      </span>
       <react-dropzone
         accepts={
           Object {
@@ -89,6 +72,23 @@ exports[`Backend.Ingestion.Form.Upload component renders correctly 1`] = `
           </div>
         </div>
       </react-dropzone>
+      <span
+        className="instructions"
+      >
+        Manifold can ingest texts from single files or a .zip collection.
+        <br />
+        See the
+         
+        <a
+          href="https://manifoldapp.org/docs/projects/preparing"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          documentation
+        </a>
+         
+        for supported file types and directory structure.
+      </span>
     </div>
   </div>
   <div

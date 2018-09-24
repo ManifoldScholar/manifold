@@ -18,7 +18,7 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
       accepts={
         Object {
           "accepts": "image/*",
-          "extensions": "gif, jpeg, jpg, png, svg",
+          "extensions": "gif, jpeg, jpg, png",
         }
       }
       className="form-dropzone style-portrait"
@@ -60,7 +60,7 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
           <p
             className="secondary"
           >
-            gif, jpeg, jpg, png, svg
+            gif, jpeg, jpg, png
           </p>
         </div>
       </div>
@@ -87,7 +87,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
       accepts={
         Object {
           "accepts": "image/*",
-          "extensions": "gif, jpeg, jpg, png, svg",
+          "extensions": "gif, jpeg, jpg, png",
         }
       }
       className="form-dropzone style-portrait"
@@ -103,22 +103,8 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
     >
       <div
         className="contents-image-preview"
+        data-id="preview"
       >
-        <div
-          className="preview"
-          data-id="preview"
-          style={
-            Object {
-              "backgroundImage": "url(/some/image.jpg)",
-            }
-          }
-        >
-          <span
-            className="screen-reader-text"
-          >
-            Upload Preview
-          </span>
-        </div>
         <div
           className="message"
         >
@@ -146,6 +132,16 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
             </span>
           </p>
         </div>
+        <img
+          alt="Upload preview"
+          className="preview"
+          src="/some/image.jpg"
+        />
+        <span
+          className="screen-reader-text"
+        >
+          Upload Preview
+        </span>
       </div>
     </react-dropzone>
   </div>
@@ -170,7 +166,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
       accepts={
         Object {
           "accepts": "image/*",
-          "extensions": "gif, jpeg, jpg, png, svg",
+          "extensions": "gif, jpeg, jpg, png",
         }
       }
       className="form-dropzone style-portrait"
@@ -186,22 +182,8 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
     >
       <div
         className="contents-image-preview"
+        data-id="preview"
       >
-        <div
-          className="preview"
-          data-id="preview"
-          style={
-            Object {
-              "backgroundImage": "url(/some/image.jpg)",
-            }
-          }
-        >
-          <span
-            className="screen-reader-text"
-          >
-            Upload Preview
-          </span>
-        </div>
         <div
           className="message"
         >
@@ -229,6 +211,16 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
             </span>
           </p>
         </div>
+        <img
+          alt="Upload preview"
+          className="preview"
+          src="/some/image.jpg"
+        />
+        <span
+          className="screen-reader-text"
+        >
+          Upload Preview
+        </span>
       </div>
     </react-dropzone>
   </div>
@@ -253,7 +245,7 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
       accepts={
         Object {
           "accepts": "image/*",
-          "extensions": "gif, jpeg, jpg, png, svg",
+          "extensions": "gif, jpeg, jpg, png",
         }
       }
       className="form-dropzone style-portrait"
@@ -269,22 +261,8 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
     >
       <div
         className="contents-image-preview"
+        data-id="preview"
       >
-        <div
-          className="preview"
-          data-id="preview"
-          style={
-            Object {
-              "backgroundImage": "url(/some/image.jpg)",
-            }
-          }
-        >
-          <span
-            className="screen-reader-text"
-          >
-            Upload Preview
-          </span>
-        </div>
         <div
           className="message"
         >
@@ -312,6 +290,16 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
             </span>
           </p>
         </div>
+        <img
+          alt="Upload preview"
+          className="preview"
+          src="/some/image.jpg"
+        />
+        <span
+          className="screen-reader-text"
+        >
+          Upload Preview
+        </span>
       </div>
     </react-dropzone>
   </div>

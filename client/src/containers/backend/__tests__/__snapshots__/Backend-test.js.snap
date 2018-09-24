@@ -52,82 +52,86 @@ exports[`Backend Backend Container renders correctly 1`] = `
                             <withRouter(Navigation.Primary) links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\">
                               <Route>
                                 <Navigation.Primary links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
-                                  <withRouter(Navigation.Static) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
-                                    <Route>
-                                      <Navigation.Static backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
-                                        <nav className=\\"text-nav show-75\\">
-                                          <ul className=\\"links\\">
-                                            <li>
-                                              <NavLink to=\\"/backend/dashboard\\" exact={false} activeClassName=\\"active\\" aria-current=\\"page\\">
-                                                <Route path=\\"\\\\\\\\/backend\\\\\\\\/dashboard\\" exact={false} strict={[undefined]} location={[undefined]}>
-                                                  <Link to=\\"/backend/dashboard\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
-                                                    <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend/dashboard\\">
-                                                      Dashboard
+                                  <div className=\\"header-nav-wrapper\\">
+                                    <withRouter(Navigation.Static) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
+                                      <Route>
+                                        <Navigation.Static backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
+                                          <nav className=\\"text-nav show-75\\">
+                                            <div className=\\"links-wrapper\\">
+                                              <ul style={[undefined]} className=\\"links\\">
+                                                <li>
+                                                  <NavLink to=\\"/backend/dashboard\\" exact={false} activeClassName=\\"active\\" aria-current=\\"page\\">
+                                                    <Route path=\\"\\\\\\\\/backend\\\\\\\\/dashboard\\" exact={false} strict={[undefined]} location={[undefined]}>
+                                                      <Link to=\\"/backend/dashboard\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
+                                                        <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend/dashboard\\">
+                                                          Dashboard
+                                                        </a>
+                                                      </Link>
+                                                    </Route>
+                                                  </NavLink>
+                                                </li>
+                                                <li>
+                                                  <NavLink to=\\"/backend/projects\\" exact={false} activeClassName=\\"active\\" aria-current=\\"page\\">
+                                                    <Route path=\\"\\\\\\\\/backend\\\\\\\\/projects\\" exact={false} strict={[undefined]} location={[undefined]}>
+                                                      <Link to=\\"/backend/projects\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
+                                                        <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend/projects\\">
+                                                          Projects
+                                                        </a>
+                                                      </Link>
+                                                    </Route>
+                                                  </NavLink>
+                                                </li>
+                                                <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
+                                                  <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                                </Connect(AuthorizeComponent)>
+                                                <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
+                                                  <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                                </Connect(AuthorizeComponent)>
+                                              </ul>
+                                            </div>
+                                            <nav className=\\"user-links\\">
+                                              <ul style={[undefined]}>
+                                                <li>
+                                                  <Link className=\\"button-mode\\" to=\\"/\\" replace={false}>
+                                                    <a className=\\"button-mode\\" onClick={[Function]} href=\\"/\\">
+                                                      Exit Admin Mode
                                                     </a>
                                                   </Link>
-                                                </Route>
-                                              </NavLink>
-                                            </li>
-                                            <li>
-                                              <NavLink to=\\"/backend/projects\\" exact={false} activeClassName=\\"active\\" aria-current=\\"page\\">
-                                                <Route path=\\"\\\\\\\\/backend\\\\\\\\/projects\\" exact={false} strict={[undefined]} location={[undefined]}>
-                                                  <Link to=\\"/backend/projects\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
-                                                    <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend/projects\\">
-                                                      Projects
-                                                    </a>
-                                                  </Link>
-                                                </Route>
-                                              </NavLink>
-                                            </li>
-                                            <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
-                                              <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                                            </Connect(AuthorizeComponent)>
-                                            <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
-                                              <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                                            </Connect(AuthorizeComponent)>
-                                          </ul>
-                                          <nav className=\\"user-links\\">
-                                            <ul>
-                                              <li>
-                                                <Link className=\\"button-mode\\" to=\\"/\\" replace={false}>
-                                                  <a className=\\"button-mode\\" onClick={[Function]} href=\\"/\\">
-                                                    Exit Admin Mode
-                                                  </a>
-                                                </Link>
-                                              </li>
-                                              <li>
-                                                <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
-                                                  <button onClick={[Function]} className=\\"button-avatar\\">
-                                                    <span className=\\"screen-reader-text\\">
-                                                      Login or open user settings
-                                                    </span>
-                                                    <Avatar url={[undefined]}>
-                                                      <figure style={[undefined]} className=\\"avatar\\">
-                                                        <span className=\\"screen-reader-text\\">
-                                                          Avatar
-                                                        </span>
-                                                        <i className=\\"manicon manicon-person\\" aria-hidden=\\"true\\" />
-                                                      </figure>
-                                                    </Avatar>
-                                                  </button>
-                                                </UserMenuButton>
-                                                <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: C]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
-                                                  <CSSTransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true}>
-                                                    <TransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                                                      <span />
-                                                    </TransitionGroup>
-                                                  </CSSTransitionGroup>
-                                                </UIPanel>
-                                              </li>
-                                            </ul>
+                                                </li>
+                                                <li>
+                                                  <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
+                                                    <button onClick={[Function]} className=\\"button-avatar\\">
+                                                      <span className=\\"screen-reader-text\\">
+                                                        Login or open user settings
+                                                      </span>
+                                                      <Avatar url={[undefined]}>
+                                                        <figure style={[undefined]} className=\\"avatar\\">
+                                                          <span className=\\"screen-reader-text\\">
+                                                            Avatar
+                                                          </span>
+                                                          <i className=\\"manicon manicon-person\\" aria-hidden=\\"true\\" />
+                                                        </figure>
+                                                      </Avatar>
+                                                    </button>
+                                                  </UserMenuButton>
+                                                  <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: C]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
+                                                    <CSSTransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true}>
+                                                      <TransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                                                        <span />
+                                                      </TransitionGroup>
+                                                    </CSSTransitionGroup>
+                                                  </UIPanel>
+                                                </li>
+                                              </ul>
+                                            </nav>
                                           </nav>
-                                        </nav>
-                                      </Navigation.Static>
-                                    </Route>
-                                  </withRouter(Navigation.Static)>
-                                  <withRouter(Navigation.Mobile) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
+                                        </Navigation.Static>
+                                      </Route>
+                                    </withRouter(Navigation.Static)>
+                                  </div>
+                                  <withRouter(Navigation.Mobile) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
                                     <Route>
-                                      <Navigation.Mobile backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
+                                      <Navigation.Mobile backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
                                         <nav className=\\"nested-nav hide-75\\">
                                           <MobileBreadcrumb links={{...}} location={{...}}>
                                             <div className=\\"selected\\" />

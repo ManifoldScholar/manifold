@@ -63,13 +63,23 @@
     @include headerLogoPrimary;
   }
 
+  .header-nav-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    @include show($break75, inline-block);
+  }
+
   // <nav> wrapper around <ul>
   .text-nav {
-    display: inline-block;
+
     vertical-align: middle;
 
     &.show-75 {
       @include show($break75, inline-block);
+    }
+
+    .links-wrapper {
+      position: relative;
     }
 
     .links {

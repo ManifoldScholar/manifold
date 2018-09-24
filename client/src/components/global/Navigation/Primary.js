@@ -14,7 +14,9 @@ export class NavigationPrimary extends PureComponent {
     visibility: PropTypes.object,
     commonActions: PropTypes.object.isRequired,
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
-    exact: PropTypes.bool
+    exact: PropTypes.bool,
+    desktopStyle: PropTypes.object,
+    mobileStyle: PropTypes.object
   };
 
   static defaultProps = {
@@ -67,8 +69,18 @@ export class NavigationPrimary extends PureComponent {
 
     return (
       <React.Fragment>
-        <Navigation.Static backendButton={backendButton} {...this.props} />
-        <Navigation.Mobile backendButton={backendButton} {...this.props} />
+        <div className="header-nav-wrapper">
+          <Navigation.Static
+            backendButton={backendButton}
+            {...this.props}
+            style={this.props.desktopStyle}
+          />
+        </div>
+        <Navigation.Mobile
+          backendButton={backendButton}
+          {...this.props}
+          style={this.props.mobileStyle}
+        />
       </React.Fragment>
     );
   }

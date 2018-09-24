@@ -18,16 +18,7 @@ export default class FormUploadImagePreview extends PureComponent {
 
   render() {
     return (
-      <div className="contents-image-preview">
-        <div
-          data-id="preview"
-          className="preview"
-          style={{
-            backgroundImage: `url(${this.imageUrl})`
-          }}
-        >
-          <span className="screen-reader-text">Upload Preview</span>
-        </div>
+      <div className="contents-image-preview" data-id="preview">
         <div className="message">
           <p className="secondary">
             <span
@@ -46,6 +37,8 @@ export default class FormUploadImagePreview extends PureComponent {
             </span>
           </p>
         </div>
+        <img alt="Upload preview" className="preview" src={this.imageUrl} />
+        <span className="screen-reader-text">Upload Preview</span>
       </div>
     );
   }

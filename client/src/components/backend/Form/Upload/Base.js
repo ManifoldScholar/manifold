@@ -111,7 +111,6 @@ export default class FormUpload extends Component {
               {this.props.label}
             </label>
           ) : null}
-          <Instructions instructions={this.props.instructions} />
           <Dropzone
             inputProps={inputProps}
             style={this.props.inlineStyle}
@@ -137,6 +136,7 @@ export default class FormUpload extends Component {
               />
             )}
           </Dropzone>
+          <Instructions instructions={this.props.instructions} />
         </GlobalForm.Errorable>
       </div>
     );
