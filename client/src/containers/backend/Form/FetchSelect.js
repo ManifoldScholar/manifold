@@ -87,8 +87,11 @@ class FetchSelect extends PureComponent {
 
   updateOptions = fetch => {
     const { endpoint, method, options } = fetch({ ...this.props.fetchOptions });
+
     options.authToken = this.props.authToken;
+    options.params = options.params || {};
     options.params.noPagination = true;
+
     const client = new ApiClient();
     client.call(endpoint, method, options).then(results => {
       const items = results.data;

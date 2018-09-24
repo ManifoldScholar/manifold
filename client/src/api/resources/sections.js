@@ -5,5 +5,13 @@ export default {
       method: "GET",
       options: {}
     };
+  },
+
+  forText(textId) {
+    return {
+      endpoint: `/api/v1/texts/${textId}/relationships/text_sections`,
+      method: "GET",
+      options: {}
+    };
   }
 };

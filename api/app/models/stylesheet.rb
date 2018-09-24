@@ -15,7 +15,6 @@ class Stylesheet < ApplicationRecord
   belongs_to :ingestion_source, optional: true
   has_many :text_section_stylesheets, dependent: :destroy
   has_many :text_sections,
-           -> { order(position: :asc) },
            through: :text_section_stylesheets,
            dependent: :destroy,
            inverse_of: :stylesheets

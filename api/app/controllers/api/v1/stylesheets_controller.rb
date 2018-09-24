@@ -14,6 +14,7 @@ module Api
         render_single_resource(
           @stylesheet,
           serializer: StylesheetFullSerializer,
+          include: %w(text text_sections),
           location: location(@stylesheet)
         )
       end
@@ -37,6 +38,7 @@ module Api
         ::Updaters::Default.new(stylesheet_params).update(@stylesheet)
         render_single_resource(
           @stylesheet,
+          include: %w(text text_sections),
           serializer: set_serializer,
           location: location(@stylesheet)
         )
