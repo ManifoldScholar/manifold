@@ -762,7 +762,7 @@
   }
 }
 
-.follow-button-wrapper {
+.project-cover-button-wrapper {
   position: absolute;
   top: 10.526%;
   left: -15px;
@@ -774,7 +774,7 @@
   }
 }
 
-.following-button {
+.project-cover-button {
   @include templateHead;
   position: absolute;
   left: 0;
@@ -792,32 +792,32 @@
   transition: max-width $duration $timing,
     background-color $duration $timing;
 
-  .unfollow & {
+  .remove & {
     background-color: $sp20Primary;
   }
 
-  .follow-text {
+  .action-text {
     padding-left: 32px;
   }
 
-  .following-enter, .following-leave.follow-text-hide-immediately {
+  .button-enter, .button-leave.action-text-hide-immediately {
     display: none;
   }
 
-  .following-enter.follow-text-show-immediately {
+  .button-enter.action-text-show-immediately {
     display: inline;
   }
 
-  .follow-active &, .unfollow-active &, .unfollow-confirm-active & {
+  .add-active &, .remove-active &, .remove-confirm-active & {
     max-width: 200px;
     transition: max-width $durationSlow ease-out;
   }
 
-  .follow-active & {
+  .add-active & {
     background-color: $sp20Primary;
   }
 
-  .unfollow-active &, .unfollow-confirm-active & {
+  .remove-active &, .remove-confirm-active & {
     background-color: $neutral75;
   }
 
@@ -825,21 +825,21 @@
     position: relative;
     width: 25px;
 
-    .follow & {
+    .add & {
       top: -25px;
       transition: top $duration $timing;
     }
 
-    .follow-active & {
+    .add-active & {
       top: -25px;
     }
 
-    .unfollow & {
+    .remove & {
       top: 0;
       transition: top $duration $timing;
     }
 
-    .unfollow-active & {
+    .remove-active & {
       top: 25px;
       transition: top $duration $timing;
     }
