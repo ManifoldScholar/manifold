@@ -256,6 +256,19 @@ export default class ProjectHero extends Component {
     );
   }
 
+  renderProjectSubtitle(attr) {
+    if (!attr.subtitle) return null;
+    if (attr.subtitleFormatted)
+      return (
+        <span
+          className="subtitle"
+          dangerouslySetInnerHTML={{ __html: attr.subtitleFormatted }}
+        />
+      );
+
+    return <span className="subtitle">{attr.subtitle}</span>;
+  }
+
   render() {
     const project = this.props.project;
     if (!project) return null;
@@ -280,7 +293,7 @@ export default class ProjectHero extends Component {
               <h1 className="project-title">
                 <span className="title-text">{attr.title}</span>
                 {this.renderProjectStatusMarker(attr)}
-                <span className="subtitle">{attr.subtitle}</span>
+                {this.renderProjectSubtitle(attr)}
               </h1>
               {this.listMakers(project.relationships)}
             </div>
@@ -290,7 +303,7 @@ export default class ProjectHero extends Component {
             <h1 className="project-title">
               <span className="title-text">{attr.title}</span>
               {this.renderProjectStatusMarker(attr)}
-              <span className="subtitle">{attr.subtitle}</span>
+              {this.renderProjectSubtitle(attr)}
             </h1>
             {this.listMakers(project.relationships)}
             {this.renderDescription(attr)}

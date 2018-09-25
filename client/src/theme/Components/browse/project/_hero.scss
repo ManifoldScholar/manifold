@@ -252,6 +252,10 @@
         margin-top: 0.682em;
         font-size: 17px;
 
+        em {
+          font-style: normal;
+        }
+
         @include respond($break60) {
           font-size: 19px;
         }
@@ -342,6 +346,10 @@
         // Size relative to font
         margin-top: 0.5em;
         font-size: 22px;
+
+        em {
+          font-style: normal;
+        }
       }
     }
 
