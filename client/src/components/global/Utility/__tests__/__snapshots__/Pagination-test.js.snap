@@ -4,7 +4,9 @@ exports[`Global.Utility.Pagination component renders correctly 1`] = `
 <nav
   className="list-pagination-primary"
 >
-  <ul>
+  <ul
+    className={null}
+  >
     <li
       className="pagination-previous disabled"
     >
@@ -68,6 +70,75 @@ exports[`Global.Utility.Pagination component renders correctly 1`] = `
           2
         </span>
       </a>
+    </li>
+    <li
+      className="pagination-next "
+    >
+      <a
+        data-id="page-next"
+        href="#pagination-target"
+        onClick={[MockFunction]}
+      >
+        <span
+          className="screen-reader-text"
+        >
+          Next Page
+        </span>
+        <span
+          aria-hidden="true"
+        >
+          Next
+        </span>
+        <i
+          aria-hidden="true"
+          className="manicon manicon-arrow-long-right"
+        />
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
+
+exports[`Global.Utility.Pagination component renders correctly when compact style 1`] = `
+<nav
+  className="list-pagination-primary"
+>
+  <ul
+    className="compact"
+  >
+    <li
+      className="pagination-previous disabled"
+    >
+      <a
+        data-id="page-prev"
+        href="#pagination-target"
+        onClick={[MockFunction]}
+      >
+        <i
+          aria-hidden="true"
+          className="manicon manicon-arrow-long-left"
+        />
+        <span
+          aria-hidden="true"
+        >
+          Prev
+        </span>
+        <span
+          className="screen-reader-text"
+        >
+          Previous Page
+        </span>
+      </a>
+    </li>
+    <li>
+      <span>
+        Page 
+        1
+         
+        /
+         
+        2
+      </span>
     </li>
     <li
       className="pagination-next "

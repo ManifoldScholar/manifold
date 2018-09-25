@@ -257,7 +257,9 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
     <nav
       className="list-pagination-secondary"
     >
-      <ul>
+      <ul
+        className={null}
+      >
         <li
           className="pagination-previous disabled"
         >

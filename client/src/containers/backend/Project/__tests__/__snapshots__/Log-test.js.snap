@@ -107,7 +107,9 @@ Array [
   <nav
     className="list-pagination-primary"
   >
-    <ul>
+    <ul
+      className={null}
+    >
       <li
         className="pagination-previous disabled"
       >
