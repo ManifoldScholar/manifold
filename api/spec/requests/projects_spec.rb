@@ -5,7 +5,7 @@ RSpec.describe "Projects API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:project) { FactoryBot.create(:project, draft: false) }
+  let(:project) { FactoryBot.create(:project, draft: false, purchase_price: "10.00") }
 
   describe "responds with a list of projects" do
     before(:each) { get api_v1_projects_path, headers: reader_headers }
@@ -136,6 +136,10 @@ RSpec.describe "Projects API", type: :request do
           context "contains the updated purchase price" do
             it("when the currency sign is not present") { expect_updated_param("purchasePriceMoney", "2.50", "$2.50") }
             it("when the currency sign is present") { expect_updated_param("purchasePriceMoney", "$2.50", "$2.50") }
+            it("when the purchase price is empty") { expect_updated_param("purchasePriceMoney", "", 0.0, "purchasePrice") }
+          end
+          context "does not update the purchase price" do
+            it("when the price is not included in params") { expect_updated_param("purchasePriceMoney", nil, 10.0, "purchasePrice") }
           end
         end
 
