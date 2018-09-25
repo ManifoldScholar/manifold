@@ -38,7 +38,7 @@ class Project < ApplicationRecord
   extend FriendlyId
 
   # Magic
-  has_formatted_attribute :description
+  has_formatted_attributes :description, :subtitle
   with_metadata %w(
     series_title container_title isbn issn doi original_publisher
     original_publisher_place original_title publisher publisher_place version

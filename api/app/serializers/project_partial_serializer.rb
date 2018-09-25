@@ -10,7 +10,8 @@ class ProjectPartialSerializer < ApplicationSerializer
              :avatar_styles, :recently_updated, :updated, :description_formatted, :slug,
              :resource_kinds, :resource_tags, :avatar_color, :avatar_meta, :draft,
              :abilities, :download_url, :download_call_to_action, :tag_list,
-             :published_text_attachment_file_name, :published_text_download_url
+             :published_text_attachment_file_name, :published_text_download_url,
+             :subtitle_formatted
 
   has_many :creators, serializer: MakerSerializer
   has_many :contributors, serializer: MakerSerializer
