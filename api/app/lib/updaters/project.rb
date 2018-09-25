@@ -27,9 +27,9 @@ module Updaters
     end
 
     def purchase_price!(attributes)
-      raw = attributes[:purchase_price_money]
-      attributes.delete(:purchase_price_money)
-      price_in_cents = raw.blank? ? 0 : (raw.gsub(/[^0-9\.]/, "").to_d * 100).to_i
+      raw = attributes.delete(:purchase_price_money)
+      return if raw.nil?
+      price_in_cents = raw.blank? ? 0 : (raw.gsub(/[^0-9.]/, "").to_d * 100).to_i
       attributes[:purchase_price_in_cents] = price_in_cents
     end
   end
