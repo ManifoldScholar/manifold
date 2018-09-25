@@ -40,6 +40,25 @@ describe("Global.Utility.Pagination component", () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it("renders correctly when compact style", () => {
+    const component = renderer.create(
+      <Pagination
+        pagination={{
+          currentPage: 1,
+          perPage: 5,
+          totalCount: 10,
+          nextPage: 2,
+          prevPage: 0,
+          totalPages: 2
+        }}
+        paginationClickHandler={() => pageChangeMock}
+        compact
+      />
+    );
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it("should trigger paginationClickHandler callback when pagination target is clicked", () => {
     const wrapper = Enzyme.mount(root);
     pageChangeMock.mockClear();

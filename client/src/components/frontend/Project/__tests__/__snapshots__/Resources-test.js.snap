@@ -466,7 +466,9 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
         <nav
           className="list-pagination-primary"
         >
-          <ul>
+          <ul
+            className={null}
+          >
             <li
               className="pagination-previous disabled"
             >

@@ -216,7 +216,9 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
   <nav
     className="list-pagination-primary"
   >
-    <ul>
+    <ul
+      className={null}
+    >
       <li
         className="pagination-previous disabled"
       >
@@ -444,7 +446,9 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
   <nav
     className="list-pagination-primary"
   >
-    <ul>
+    <ul
+      className={null}
+    >
       <li
         className="pagination-previous disabled"
       >

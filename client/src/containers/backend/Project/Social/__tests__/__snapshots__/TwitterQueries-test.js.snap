@@ -80,7 +80,9 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
     <nav
       className="list-pagination-primary"
     >
-      <ul>
+      <ul
+        className={null}
+      >
         <li
           className="pagination-previous disabled"
         >

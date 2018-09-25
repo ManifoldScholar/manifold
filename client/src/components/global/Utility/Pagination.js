@@ -12,7 +12,8 @@ export default class UtilityPagination extends PureComponent {
     paginationTarget: PropTypes.string,
     padding: PropTypes.number,
     paginationClickHandler: PropTypes.func,
-    level: PropTypes.string
+    level: PropTypes.string,
+    compact: PropTypes.bool
   };
 
   static defaultProps = {
@@ -142,6 +143,20 @@ export default class UtilityPagination extends PureComponent {
     );
   }
 
+  renderRange(pages) {
+    return pages.map(page => {
+      const url = this.props.paginationClickHandler(page.number);
+      if (page.current) {
+        return this.current(page, url);
+      }
+      return this.number(page, url);
+    });
+  }
+
+  renderCompact(pagination) {
+    return <li><span>Page {pagination.currentPage}{` `}/{` `}{pagination.totalPages}</span></li>;
+  }
+
   render() {
     if (!this.props.pagination) return null;
 
@@ -151,15 +166,9 @@ export default class UtilityPagination extends PureComponent {
 
     return (
       <nav className={`list-pagination-${this.props.level}`}>
-        <ul>
+        <ul className={this.props.compact ? "compact" : null}>
           {this.previous(pagination)}
-          {pages.map(page => {
-            const url = this.props.paginationClickHandler(page.number);
-            if (page.current) {
-              return this.current(page, url);
-            }
-            return this.number(page, url);
-          })}
+          {this.props.compact ? this.renderCompact(pagination) : this.renderRange(pages)}
           {this.next(pagination)}
         </ul>
       </nav>

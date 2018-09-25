@@ -57,7 +57,8 @@ export class ListSearchable extends PureComponent {
     searchId: PropTypes.string,
     filterId: PropTypes.string,
     sortId: PropTypes.string,
-    emptyMessage: PropTypes.func
+    emptyMessage: PropTypes.func,
+    compactPagination: PropTypes.bool
   };
 
   static defaultProps = {
@@ -380,6 +381,7 @@ export class ListSearchable extends PureComponent {
             padding={this.props.paginationPadding}
             paginationClickHandler={this.props.paginationClickHandler}
             level={this.props.paginationClass}
+            compact={this.props.compactPagination}
           />
         ) : null}
       </div>
