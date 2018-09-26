@@ -16,6 +16,7 @@ function buildResponseAction(requestAction, payload, meta, error) {
   if (payload) {
     payload.notificationScope =
       get(requestAction, "payload.notificationScope") || "global";
+    payload.noTouch = get(requestAction, "payload.noTouch") || false;
   }
   /* eslint-enable no-param-reassign */
   return { type, error, payload, meta };

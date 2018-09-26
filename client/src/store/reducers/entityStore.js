@@ -151,11 +151,12 @@ function successResponse(state, action) {
   const payload = normalizePayload(action.payload);
   const meta = action.meta;
   const isNull = !payload;
+  const shouldTouchResponses = !isNull && !action.payload.noTouch;
   const isCollection = !isNull && Array.isArray(payload.results);
   const isEntity = !isNull && !isCollection;
-  const baseResponses = isNull
-    ? state.responses
-    : touchResponses(state.responses, payload.entities);
+  const baseResponses = shouldTouchResponses
+    ? touchResponses(state.responses, payload.entities)
+    : state.responses;
   const responses = Object.assign({}, baseResponses, {
     [meta]: {
       entity: isEntity ? payload.results : null,
