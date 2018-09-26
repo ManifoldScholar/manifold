@@ -101,14 +101,14 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
             <div
               className="resource-content"
             >
-              <p
+              <div
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "World's Greatest Dog",
                   }
                 }
               />
-              <p
+              <div
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "Black and white freckles",

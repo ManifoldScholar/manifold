@@ -51,10 +51,12 @@ export default class ResourceDetail extends PureComponent {
           <Resource.Title resource={resource} />
           <div className="resource-content">
             {!isEmpty(attr.captionFormatted) ? (
-              <p dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />
+              <div
+                dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
+              />
             ) : null}
             {!isEmpty(attr.descriptionFormatted) ? (
-              <p
+              <div
                 dangerouslySetInnerHTML={{
                   __html: attr.descriptionFormatted
                 }}
