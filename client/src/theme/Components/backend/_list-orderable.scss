@@ -1,0 +1,21 @@
+.list-orderable {
+  @include listUnstyled;
+}
+
+.orderable-list-item {
+  list-style: none;
+  
+  &:hover:not(.with-handle &) {
+    cursor: grab;
+  }
+
+  .with-handle & {
+    .drag-handle:hover {
+      cursor: grab;
+    }
+  }
+
+  &.dragging {
+    box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
+  }
+}
