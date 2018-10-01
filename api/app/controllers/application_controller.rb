@@ -21,7 +21,8 @@ class ApplicationController < ActionController::API
 
   def serial_scope
     @serial_scope ||=
-      Api::V1::SerializationContext.new controller: self, current_user: current_user
+      Api::V1::SerializationContext.new controller: self,
+                                        current_user: current_user
   end
 
   def page_size
