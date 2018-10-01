@@ -113,6 +113,19 @@ function deriveType(entityOrCollection) {
   }
 }
 
+function buildMeta(object, baseMeta = {}) {
+  const meta = Object.assign({}, get(object, "meta"), baseMeta, {
+    relationships: {}
+  });
+  const relationships = get(object, "data.relationships") || {};
+  Object.keys(relationships).forEach(relationship => {
+    if (!relationships[relationship].meta) return null;
+    meta.relationships[relationship] = relationships[relationship].meta;
+  });
+
+  return meta;
+}
+
 function errorResponse(state, action) {
   const meta = action.meta;
   const responses = Object.assign({}, state.responses, {
@@ -163,7 +176,7 @@ function successResponse(state, action) {
       collection: isCollection
         ? mergeCollections(baseResponses[meta], payload.results)
         : null,
-      meta: Object.assign({}, get(action.payload, "meta"), { modified: false }),
+      meta: buildMeta(action.payload, { modified: false }),
       links: get(action.payload, "links"),
       type: !isNull ? deriveType(payload.results) : null,
       request: get(action, "payload.request"),
@@ -239,7 +252,7 @@ function handleRemove(state, action) {
     if (index === -1) return true;
     const newCollection = response.collection.slice();
     newCollection.splice(index, 1);
-    const newMeta = Object.assign({}, response.meta, { modified: true });
+    const newMeta = buildMeta(response, { modified: true });
     const newResponse = Object.assign({}, response, {
       collection: newCollection,
       meta: newMeta

@@ -1,4 +1,6 @@
 class ApplicationSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
+  default_url_options[:host] = ENV["DOMAIN"]
   meta(partial: false)
 
   def abilities
