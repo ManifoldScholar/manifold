@@ -68,7 +68,7 @@ module Validation
   def page_params
     params.require(:data)
     attributes = [:title, :slug, :nav_title, :body, :show_in_footer, :show_in_header,
-                  :hidden, :external_link, :is_external_link, :purpose]
+                  :hidden, :external_link, :is_external_link, :purpose, :open_in_new_tab]
     relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
