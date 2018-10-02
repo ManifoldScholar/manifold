@@ -65,6 +65,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                       href="/"
                       onClick={[Function]}
                       style={Object {}}
+                      target={null}
                     >
                       Home
                     </a>
@@ -76,6 +77,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                       href="/following"
                       onClick={[Function]}
                       style={undefined}
+                      target={null}
                     >
                       Following
                     </a>
