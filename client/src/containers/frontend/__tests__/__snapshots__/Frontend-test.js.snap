@@ -190,6 +190,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
     </div>
   </div>
   <main
+    className=""
     id="skip-to-main"
   >
     <div />
