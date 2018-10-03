@@ -43,6 +43,7 @@ export class FormContainer extends PureComponent {
     response: PropTypes.object,
     className: PropTypes.string,
     options: PropTypes.object,
+    flushOnUnmount: PropTypes.bool,
     notificationScope: PropTypes.string
   };
 
@@ -55,6 +56,7 @@ export class FormContainer extends PureComponent {
     },
     debug: false,
     groupErrors: false,
+    flushOnUnmount: true,
     options: {}
   };
 
@@ -85,7 +87,7 @@ export class FormContainer extends PureComponent {
   }
 
   flushSave(props) {
-    props.dispatch(flush(props.name));
+    if (props.flushOnUnmount) props.dispatch(flush(props.name));
   }
 
   maybeOpenSession(props, prevProps = {}) {
