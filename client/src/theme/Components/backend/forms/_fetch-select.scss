@@ -1,0 +1,65 @@
+.fetch-select {
+  position: relative;
+
+  &.fetch-select-open {
+    ul {
+      display: block;
+    }
+
+    .fetch-select-trigger .manicon {
+      transform: rotate(-180deg);
+    }
+  }
+
+  .fetch-select-trigger {
+    @include formInputPrimary;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    color: $accentPrimary;
+    border: 1px solid $accentPrimary;
+    transition: color $duration $timing,
+      background-color $duration $timing;
+
+    &:hover {
+      color: $neutral90;
+      cursor: pointer;
+      background-color: $accentPrimary;
+    }
+
+    .manicon {
+      font-size: 10px;
+      transition: transform $duration $timing;
+    }
+  }
+
+  ul {
+    @include listUnstyled;
+    position: absolute;
+    display: none;
+    width: 100%;
+    max-height: 210px;
+    padding: 12px 0;
+    overflow: scroll;
+    background-color: $neutral90;
+    border: 1px solid $neutral80;
+    border-top: 0;
+
+    li {
+      @include templateHead;
+      padding: 0.425em 1.3em;
+      font-size: 20px;
+      color: $neutral70;
+      cursor: pointer;
+
+      + li {
+        border: 0; // OD
+      }
+
+      &:hover, &.highlighted {
+        color: $neutral40;
+      }
+    }
+  }
+}

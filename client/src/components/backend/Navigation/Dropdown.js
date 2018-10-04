@@ -87,7 +87,7 @@ export class NavigationDropdown extends Component {
         <button className="trigger" onClick={this.toggleOpen}>
           <div className="selected">
             {this.currentLabel}
-            <i className="manicon manicon-caret-up" />
+            <i className="manicon manicon-caret-down" />
           </div>
         </button>
         <ul>
