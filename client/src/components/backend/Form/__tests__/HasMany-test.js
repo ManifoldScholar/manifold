@@ -19,6 +19,7 @@ describe("Backend.Form.HasMany component", () => {
           onChange={() => {}}
           optionsFetch={() => {}}
           onNew={() => {}}
+          fetch={() => {}}
           entityLabelAttribute="name"
           orderable
         />

@@ -15,36 +15,21 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
           className="form-input"
           style={Object {}}
         >
-          <div
-            className="input-predictive"
+          <nav
+            className="fetch-select"
           >
             <div
-              className="input"
+              className="fetch-select-trigger"
+              onClick={[Function]}
+              role="button"
             >
+              Select User
               <i
-                aria-hidden="true"
-                className="manicon manicon-plus"
-              />
-              <input
-                aria-describedby={null}
-                aria-label="Select User"
-                className="text-input"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                placeholder="Select User"
-                type="text"
-                value=""
+                className="manicon manicon-caret-down"
               />
             </div>
-            <nav
-              className="predictive-list"
-            >
-              <ul />
-            </nav>
-          </div>
+            <ul />
+          </nav>
         </div>
       </div>
       <div

@@ -92,7 +92,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
           >
             
             <i
-              className="manicon manicon-caret-up"
+              className="manicon manicon-caret-down"
             />
           </div>
         </button>
