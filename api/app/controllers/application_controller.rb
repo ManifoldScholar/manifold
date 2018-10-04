@@ -35,6 +35,8 @@ class ApplicationController < ActionController::API
 
   def with_pagination!(filter_params)
     filter_params ||= {}
+    return filter_params if params.dig(:no_pagination)
+
     filter_params[:page] = page_number
     filter_params[:per_page] = page_size
     filter_params

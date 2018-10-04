@@ -1,4 +1,5 @@
 import BaseInput from "./BaseInput";
+import BelongsTo from "./BelongsTo";
 import Checkboxes from "./Checkboxes";
 import CodeArea from "./CodeArea";
 import AttributeMap from "./AttributeMap";
@@ -12,7 +13,7 @@ import HigherOrder from "./HigherOrder";
 import Instructions from "./Instructions";
 import MaskedTextInput from "./MaskedTextInput";
 import NumberInput from "./NumberInput";
-import PredictiveBelongsTo from "./PredictiveBelongsTo";
+import OptionsList from "./OptionsList";
 import Radios from "./Radios";
 import Save from "./Save";
 import Select from "./Select";
@@ -27,6 +28,7 @@ import Upload from "./Upload";
 
 export default {
   BaseInput,
+  BelongsTo,
   Checkboxes,
   CodeArea,
   AttributeMap,
@@ -40,7 +42,7 @@ export default {
   Instructions,
   MaskedTextInput,
   NumberInput,
-  PredictiveBelongsTo,
+  OptionsList,
   Radios,
   Save,
   Select,

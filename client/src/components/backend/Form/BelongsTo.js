@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
-import { Form as FormContainer } from "containers/backend";
+import { Form as BackendForm } from "components/backend";
 import { Form as GlobalForm } from "components/global";
 
-class FormPredictiveBelongsTo extends PureComponent {
-  static displayName = "Form.PredictiveBelongsTo";
+class FormBelongsTo extends PureComponent {
+  static displayName = "Form.BelongsTo";
 
   static propTypes = {
     setOther: PropTypes.func,
@@ -19,18 +19,10 @@ class FormPredictiveBelongsTo extends PureComponent {
     relationName: PropTypes.string,
     errors: PropTypes.array,
     idForError: PropTypes.string,
-    focusOnMount: PropTypes.bool
+    focusOnMount: PropTypes.bool,
+    placeholder: PropTypes.string,
+    searchable: PropTypes.bool
   };
-
-  static defaultProps = {
-    focusOnMount: false
-  };
-
-  componentDidMount() {
-    if (this.props.focusOnMount === true && this.inputElement) {
-      this.inputElement.focus();
-    }
-  }
 
   handleSelect = entity => {
     this.props.setOther(entity, `relationships[${this.props.relationName}]`);
@@ -51,15 +43,9 @@ class FormPredictiveBelongsTo extends PureComponent {
             errors={this.props.errors}
             idForError={this.props.idForError}
           >
-            <FormContainer.PredictiveInput
-              className="input-predictive"
-              fetch={this.props.fetch}
-              fetchOptions={this.props.fetchOptions}
-              placeholder="Select User"
-              label={this.props.label}
-              onSelect={entity => this.handleSelect(entity)}
-              idForError={this.props.idForError}
-              focusOnMount={this.props.focusOnMount}
+            <BackendForm.OptionsList
+              onSelect={this.handleSelect}
+              {...this.props}
             />
           </GlobalForm.Errorable>
         ) : null}
@@ -68,4 +54,4 @@ class FormPredictiveBelongsTo extends PureComponent {
   }
 }
 
-export default setter(FormPredictiveBelongsTo);
+export default setter(FormBelongsTo);

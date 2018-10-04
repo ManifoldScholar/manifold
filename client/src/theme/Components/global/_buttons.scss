@@ -18,7 +18,10 @@
 
   &:focus {
     color: $neutral95;
-    outline: 0;
+
+    .drawer-backend &, .bg-neutral90 & {
+      color: $neutral80;
+    }
   }
 }
 
@@ -789,6 +792,7 @@
   white-space: nowrap;
   background-color: $accentPrimary;
   border-radius: 22.5px;
+  cursor: pointer;
   transition: max-width $duration $timing,
     background-color $duration $timing;
 
