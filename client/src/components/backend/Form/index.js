@@ -1,3 +1,4 @@
+import BelongsTo from "./BelongsTo";
 import Checkboxes from "./Checkboxes";
 import CodeArea from "./CodeArea";
 import AttributeMap from "./AttributeMap";
@@ -10,7 +11,7 @@ import Hidden from "./Hidden";
 import HigherOrder from "./HigherOrder";
 import Instructions from "./Instructions";
 import MaskedTextInput from "./MaskedTextInput";
-import PredictiveBelongsTo from "./PredictiveBelongsTo";
+import OptionsList from "./OptionsList";
 import Radios from "./Radios";
 import Save from "./Save";
 import Select from "./Select";
@@ -23,6 +24,7 @@ import TusUpload from "./TusUpload";
 import Upload from "./Upload";
 
 export default {
+  BelongsTo,
   Checkboxes,
   CodeArea,
   AttributeMap,
@@ -35,7 +37,7 @@ export default {
   HigherOrder,
   Instructions,
   MaskedTextInput,
-  PredictiveBelongsTo,
+  OptionsList,
   Radios,
   Save,
   Select,
