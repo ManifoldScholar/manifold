@@ -1,6 +1,9 @@
 # Serializes a Text Section model
-class TextSectionSerializer < TextSectionPartialSerializer
-  meta(partial: false)
+class TextSectionSerializer < ApplicationSerializer
+  meta(partial: true)
 
-  attributes :body_json, :citations
+  attributes :id, :text_slug, :text_title, :name, :source_identifier, :kind
+  belongs_to :text
+  has_many :stylesheets
+
 end
