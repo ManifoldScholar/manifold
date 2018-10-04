@@ -11,15 +11,14 @@ module Api
 
       def index
         @resources = load_zresources
-        render_multiple_resources(
-          @resources,
-          each_serializer: ResourceSerializer
-        )
+        render_multiple_resources @resources
       end
 
       def show
         @resource = load_zresource
-        render_single_resource(@resource, include: INCLUDES)
+        render_single_resource @resource,
+                               serializer: ResourceFullSerializer,
+                               includes: INCLUDES
       end
 
       def create
@@ -34,7 +33,9 @@ module Api
                     project.resources_manageable_by?(current_user)
         authorized_params = only_meta ? resource_metadata_params : resource_params
         ::Updaters::Resource.new(authorized_params).update(@resource)
-        render_single_resource(@resource, include: INCLUDES)
+        render_single_resource @resource,
+                               serializer: ResourceFullSerializer,
+                               include: INCLUDES
       end
 
       def destroy

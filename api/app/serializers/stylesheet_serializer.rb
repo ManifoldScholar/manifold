@@ -1,7 +1,7 @@
-# Serializes a stylesheet model
-class StylesheetSerializer < StylesheetPartialSerializer
-  meta(partial: false)
+# Provides a partial serialization of a stylesheet model.
+class StylesheetSerializer < ApplicationSerializer
+  meta(partial: true)
 
-  attributes :raw_styles
-
+  attributes :id, :name, :source_identifier, :styles, :ingested, :position,
+             :created_at
 end

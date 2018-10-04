@@ -6,7 +6,7 @@ class CollectionSerializer < ApplicationSerializer
              :description_formatted, :project_id, :resource_kinds, :resource_tags,
              :thumbnail_styles, :collection_resources_count, :slug, :abilities
 
-  has_many :resources, serializer: ResourcePartialSerializer
+  has_many :resources
   belongs_to :project
 
   def resource_tags
