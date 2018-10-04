@@ -693,6 +693,28 @@ export default () => {
           }
         },
         {
+          name: "frontendProjectCollections",
+          exact: true,
+          component: Frontend.ProjectCollections,
+          path: "/project-collections",
+          helper: (params = {}) => {
+            const query = queryString.stringify(params);
+            if (!query) return "/project-collections";
+            return `/project-collections?${query}`;
+          }
+        },
+        {
+          name: "frontendProjectCollection",
+          exact: true,
+          component: Frontend.ProjectCollectionDetail,
+          path: "/project-collection/:id",
+          helper: (pc, params = {}) => {
+            const query = queryString.stringify(params);
+            if (!query) return `/project-collection/${pc}`;
+            return `/project-collection/${pc}?${query}`;
+          }
+        },
+        {
           name: "frontendProject",
           exact: true,
           component: Frontend.ProjectDetail,
