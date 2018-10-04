@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Form as FormContainer } from "containers/backend";
 import { Form as GlobalForm } from "components/global";
 import uniqueId from "lodash/uniqueId";
 import List from "./HasMany/List";
 import Header from "./HasMany/Header";
 import setter from "./setter";
+import OptionsList from "./OptionsList";
+import isArray from "lodash/isArray";
 
 export class FormHasMany extends PureComponent {
   static displayName = "Form.HasMany";
@@ -27,11 +28,14 @@ export class FormHasMany extends PureComponent {
     idForError: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     set: PropTypes.func,
+    name: PropTypes.string,
+    searchable: PropTypes.bool,
     wide: PropTypes.bool
   };
 
   static defaultProps = {
-    idForError: uniqueId("predictive-text-belongs-to-error-")
+    idForError: uniqueId("predictive-text-belongs-to-error-"),
+    searchable: true
   };
 
   onNew = value => {
@@ -47,19 +51,26 @@ export class FormHasMany extends PureComponent {
     });
   };
 
-  onSelect = entity => {
-    const newEntities = this.entities(this.props).slice(0);
-    if (!newEntities.find(e => e.id === entity.id))
-      newEntities.push(entity);
-
-    this.onChange(newEntities, "select");
-  };
-
   onChange = (entities, kind) => {
-    if (this.props.name)
-      return this.props.set(entities);
+    if (this.props.name) return this.props.set(entities);
     return this.props.changeHandler(entities, kind);
   };
+
+  onSelect = entityOrEntities => {
+    if (isArray(entityOrEntities)) return this.selectMany(entityOrEntities);
+    return this.selectOne(entityOrEntities);
+  };
+
+  selectOne(entity) {
+    const newEntities = this.entities(this.props).slice(0);
+    if (!newEntities.find(e => e.id === entity.id)) newEntities.push(entity);
+
+    this.onChange(newEntities, "select");
+  }
+
+  selectMany(entities) {
+    this.onChange(entities, "select");
+  }
 
   entities(props) {
     if (props.name) return props.value;
@@ -110,14 +121,13 @@ export class FormHasMany extends PureComponent {
             this.props.orderable || this.props.editClickHandler,
             this.props
           )}
-          {/* Add .autofill-open to .input-autofill in order to show autofill list  */}
-          <FormContainer.PredictiveInput
-            className="input-predictive"
+          <OptionsList
             placeholder={this.props.placeholder}
             label={this.entityName}
             onNew={this.props.onNew ? this.onNew : null}
             onSelect={this.onSelect}
             fetch={this.props.optionsFetch}
+            searchable={this.props.searchable}
             idForError={this.props.idForError}
           />
           {this.renderList(

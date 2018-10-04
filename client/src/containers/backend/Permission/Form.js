@@ -96,7 +96,7 @@ export class PermissionForm extends PureComponent {
           className="form-secondary permissions-form"
           notificationScope="drawer"
         >
-          <Form.PredictiveBelongsTo
+          <Form.BelongsTo
             readOnly={this.props.showUserInput}
             renderSelected={this.renderSelectedUser}
             fetch={usersAPI.index}
@@ -104,6 +104,7 @@ export class PermissionForm extends PureComponent {
             label={this.labelUser}
             relationName="user"
             focusOnMount={!this.props.showUserInput}
+            searchable={false}
           />
           <Form.SwitchArray
             name="attributes[roleNames]"
