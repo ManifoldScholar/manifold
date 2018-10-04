@@ -4,6 +4,8 @@ import { Project } from "components/frontend";
 import { Utility } from "components/global";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import difference from "lodash/difference";
+import { Link } from "react-router-dom";
+import lh from "helpers/linkHandler";
 
 export default class ProjectListGrid extends Component {
   static displayName = "ProjectList.Grid";
@@ -15,7 +17,13 @@ export default class ProjectListGrid extends Component {
     favorites: PropTypes.object,
     dispatch: PropTypes.func,
     pagination: PropTypes.object,
-    paginationClickHandler: PropTypes.func
+    paginationClickHandler: PropTypes.func,
+    viewAllUrl: PropTypes.string,
+    viewAllLabel: PropTypes.string
+  };
+
+  static defaultProps = {
+    viewAllLabel: "See All Projects"
   };
 
   constructor() {
@@ -54,6 +62,32 @@ export default class ProjectListGrid extends Component {
     return out;
   }
 
+  renderPagination(props) {
+    return (
+      <Utility.Pagination
+        paginationClickHandler={props.paginationClickHandler}
+        pagination={props.pagination}
+      />
+    );
+  }
+
+  renderViewAll(props) {
+    if (!props.projects || props.projects.length === 0) return null;
+    if (props.projects.length <= props.limit) return null;
+    if (!props.viewAllUrl) return null;
+
+    return (
+      <div className="utility">
+        <Link
+          to={this.props.viewAllUrl}
+        >
+          {this.props.viewAllLabel}
+          <i className="manicon manicon-arrow-long-right" />
+        </Link>
+      </div>
+    )
+  }
+
   render() {
     const projects = this.projectsList();
     if (!projects) return null;
@@ -85,12 +119,7 @@ export default class ProjectListGrid extends Component {
             })}
           </ReactCSSTransitionGroup>
         </nav>
-        {this.props.pagination ? (
-          <Utility.Pagination
-            paginationClickHandler={this.props.paginationClickHandler}
-            pagination={this.props.pagination}
-          />
-        ) : null}
+        {this.props.pagination ? this.renderPagination(this.props) : this.renderViewAll(this.props)}
       </React.Fragment>
     );
   }

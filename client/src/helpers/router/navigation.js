@@ -9,7 +9,17 @@ class Navigation {
       },
       {
         label: "Projects",
-        route: "frontendProjects"
+        route: "frontendProjects",
+        children: [
+          {
+            label: "All Projects",
+            route: "frontendProjects"
+          },
+          {
+            label: "Project Collections",
+            route: "frontendProjectCollections"
+          }
+        ]
       }
     ];
 
@@ -227,6 +237,12 @@ class Navigation {
         label: "All Projects",
         route: "backendProjectsAll",
         entity: "project",
+        ability: "update"
+      },
+      {
+        label: "Project Collections",
+        route: "backendProjectCollections",
+        entity: "projectCollection",
         ability: "update"
       }
     ];

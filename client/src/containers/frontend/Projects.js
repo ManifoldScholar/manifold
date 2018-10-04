@@ -10,6 +10,7 @@ import { projectsAPI, requests } from "api";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import queryString from "query-string";
+import { Icon } from "components/global/SVG";
 
 const { request } = entityStoreActions;
 const perPage = 20;
@@ -114,31 +115,32 @@ export class ProjectsContainer extends Component {
 
     return (
       <section className="bg-neutral05">
-        <div className="container">
+        <div className="container project-list-container">
           <header className="section-heading">
             <div className="main">
-              <i
-                className="manicon manicon-books-on-shelf"
-                aria-hidden="true"
-              />
+              <i className="manicon" aria-hidden="true">
+                <Icon.BooksOnShelf size={54} />
+              </i>
               <div className="body">
                 <h4 className="title">{"All Projects"}</h4>
               </div>
             </div>
-            <div className="utility">
-              <ProjectList.Filters
-                params={this.currentQuery()}
-                updateAction={this.handleFilterChange}
-                subjects={this.props.subjects}
-              />
-            </div>
           </header>
-          <Utility.EntityCount
-            pagination={get(this.props.meta, "pagination")}
-            singularUnit="project"
-            pluralUnit="projects"
-            countOnly
-          />
+          <div className="utility">
+            <ProjectList.Filters
+              params={this.currentQuery()}
+              updateAction={this.handleFilterChange}
+              subjects={this.props.subjects}
+            />
+          </div>
+          <div className="details">
+            <Utility.EntityCount
+              pagination={get(this.props.meta, "pagination")}
+              singularUnit="project"
+              pluralUnit="projects"
+              countOnly
+            />
+          </div>
           <ProjectList.Grid
             authenticated={this.props.authentication.authenticated}
             favorites={get(this.props.authentication, "currentUser.favorites")}
@@ -166,7 +168,6 @@ export class ProjectsContainer extends Component {
           showFollowing={false}
           showProjects={false}
           grayBg={false}
-          hideAtNarrow
         />
       </div>
     );

@@ -28,6 +28,7 @@ module Api
         @project_collection = load_project_collection
         render_single_resource @project_collection,
                                serializer: ProjectCollectionFullSerializer,
+                               pagination: params[:page],
                                include: INCLUDES
       end
 
@@ -44,6 +45,7 @@ module Api
         ::Updaters::Default.new(project_collection_params).update(@project_collection)
         render_single_resource @project_collection,
                                serializer: ProjectCollectionFullSerializer,
+                               pagination: params[:page],
                                include: INCLUDES
       end
 

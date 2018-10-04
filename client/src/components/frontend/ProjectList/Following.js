@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { ProjectList, Layout } from "components/frontend";
 import size from "lodash/size";
 import union from "lodash/union";
+import { Icon } from "components/global/SVG";
 
 export default class ProjectListFollowing extends Component {
   static displayName = "ProjectList.Following";
@@ -36,24 +37,21 @@ export default class ProjectListFollowing extends Component {
       return <Layout.NoFollow />;
     return (
       <section className="bg-neutral05">
-        <div className="container">
+        <div className="container project-list-container">
           <header className="section-heading">
             <div className="main">
-              <i
-                className="manicon manicon-books-with-glasses"
-                aria-hidden="true"
-              />
+              <i className="manicon" aria-hidden="true">
+                <Icon.BooksWithGlasses size={54} />
+              </i>
               <div className="body">
-                <h4 className="title">{"Projects You're Following"}</h4>
+                <h4 className="title">{"Projects You’re Following"}</h4>
               </div>
             </div>
-            <div className="utility right">
-              <ProjectList.Filters
-                updateAction={this.props.handleUpdate}
-                subjects={this.mapFavoritesToSubjects()}
-              />
-            </div>
           </header>
+          <ProjectList.Filters
+            updateAction={this.props.handleUpdate}
+            subjects={this.mapFavoritesToSubjects()}
+          />
           {this.props.followedProjects ? (
             <ProjectList.Grid
               authenticated={this.props.authentication.authenticated}

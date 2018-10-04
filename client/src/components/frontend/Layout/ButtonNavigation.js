@@ -8,19 +8,20 @@ import lh from "helpers/linkHandler";
 export default class LayoutButtonNavigation extends Component {
   static displayName = "Layout.ButtonNavigation";
 
-
   static propTypes = {
     grayBg: PropTypes.bool,
     showProjects: PropTypes.bool,
     showFollowing: PropTypes.bool,
+    showProjectCollections: PropTypes.bool,
     hideAtNarrow: PropTypes.bool,
     authenticated: PropTypes.bool
   };
-  
+
   static defaultProps = {
     grayBg: true,
     showProjects: true,
     showFollowing: true,
+    showProjectCollections: false,
     authenticated: false
   };
 
@@ -54,16 +55,28 @@ export default class LayoutButtonNavigation extends Component {
   };
 
   renderProjectsButton = () => {
-    if (!this.props.showProjects) return null;
+    if (!this.props.showProjects && !this.props.showProjectCollections)
+      return null;
+    let url,
+      label = null;
+
+    if (this.props.showProjects) {
+      url = lh.link("frontendProjects");
+      label = "See All Projects";
+    } else if (this.props.showProjectCollections) {
+      url = lh.link("frontendProjectCollections");
+      label = "See Projects Collections";
+    }
+
     return (
-      <Link to={lh.link("frontendProjects")} className="button-icon-primary">
+      <Link to={url} className="button-icon-primary">
         <span
           ref={node => {
             this._projectsButtonEl = node;
           }}
         >
           <i className="manicon manicon-books-on-shelf" aria-hidden="true" />
-          See All Projects
+          {label}
         </span>
       </Link>
     );

@@ -12,6 +12,7 @@ import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import size from "lodash/size";
 import { HeadContent } from "components/global";
+import { Icon } from "components/global/SVG";
 
 const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
@@ -120,10 +121,12 @@ export class FollowingContainer extends Component {
       return null;
     return (
       <section>
-        <div className="container">
+        <div className="container project-list-container">
           <header className="section-heading">
             <div className="main">
-              <i className="manicon manicon-lamp" aria-hidden="true" />
+              <i className="manicon" aria-hidden="true">
+                <Icon.Lamp size={54} />
+              </i>
               <div className="body">
                 <h4 className="title">{"Featured Projects"}</h4>
               </div>
