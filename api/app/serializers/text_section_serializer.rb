@@ -1,4 +1,4 @@
-# Serializes a Text Section model
+# Provides a minimum serialization of a project model.
 class TextSectionSerializer < ApplicationSerializer
   meta(partial: true)
 

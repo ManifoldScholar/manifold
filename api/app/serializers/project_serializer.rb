@@ -1,4 +1,4 @@
-# Provides a partial serialization of a project model.
+# Provides a minimum serialization of a project model.
 class ProjectSerializer < ApplicationSerializer
 
   meta(partial: true)
@@ -9,8 +9,8 @@ class ProjectSerializer < ApplicationSerializer
              :twitter_id, :instagram_id, :facebook_id, :hero_styles, :cover_styles,
              :avatar_styles, :recently_updated, :updated, :description_formatted, :slug,
              :resource_kinds, :resource_tags, :avatar_color, :avatar_meta, :draft,
-             :abilities, :download_url, :download_call_to_action, :published_text_download_url,
-             :published_text_attachment_file_name
+             :abilities, :download_url, :download_call_to_action,
+             :published_text_download_url, :published_text_attachment_file_name
 
   has_many :creators, serializer: MakerSerializer
   has_many :contributors, serializer: MakerSerializer

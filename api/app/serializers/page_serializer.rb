@@ -1,4 +1,4 @@
-# Provides a serialization of a page model.
+# Provides a minimum serialization of a page model.
 class PageSerializer < ApplicationSerializer
   meta(partial: true)
 

@@ -1,4 +1,4 @@
-# Provides a partial serialization of a text model.
+# Provides a minimum serialization of a text model.
 class TextSerializer < ApplicationSerializer
   meta(partial: true)
 
