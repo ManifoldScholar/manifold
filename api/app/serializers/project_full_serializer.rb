@@ -1,4 +1,4 @@
-# Provides a partial serialization of a project model.
+# Provides a full serialization of a project model.
 class ProjectFullSerializer < ProjectSerializer
   include SerializedMetadata
 
@@ -6,8 +6,7 @@ class ProjectFullSerializer < ProjectSerializer
 
   attributes :event_count, :metadata, :collections_count, :resources_count,
              :uncollected_resources_count, :published_text_toc_id, :event_types,
-             :metadata_properties, :citations, :hide_activity, :metadata_formatted,
-             :slug
+             :metadata_properties, :citations, :hide_activity, :metadata_formatted
 
   has_many :texts
   has_one :published_text

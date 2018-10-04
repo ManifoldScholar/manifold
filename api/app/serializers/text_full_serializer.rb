@@ -1,4 +1,4 @@
-# Serializes a Text model
+# Provides a full serialization of a text model.
 class TextFullSerializer < TextSerializer
   include SerializedMetadata
 

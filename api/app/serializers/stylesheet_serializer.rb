@@ -1,4 +1,4 @@
-# Provides a partial serialization of a stylesheet model.
+# Provides a minimum serialization of a stylesheet model.
 class StylesheetSerializer < ApplicationSerializer
   meta(partial: true)
 

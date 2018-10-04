@@ -1,4 +1,4 @@
-# Provides a serialization of a resource model.
+# Provides a minimum serialization of a resource model.
 class ResourceSerializer < ApplicationSerializer
   meta(partial: true)
 
