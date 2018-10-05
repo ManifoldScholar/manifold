@@ -280,6 +280,42 @@ export default () => {
               ]
             },
             {
+              name: "backendProjectCollections",
+              exact: false,
+              component: Backend.ProjectCollection.Wrapper,
+              path: "/backend/projects/project-collections/:id?",
+              helper: () => "/backend/projects/project-collections",
+              routes: [
+                {
+                  name: "backendProjectCollection",
+                  exact: false,
+                  component: Backend.ProjectCollection.Detail,
+                  path: "/backend/projects/project-collections/:id",
+                  helper: pc => `/backend/projects/project-collections/${pc}`,
+                  routes: [
+                    {
+                      name: "backendProjectCollectionManageProjects",
+                      exact: true,
+                      component: Backend.ProjectCollection.ManageProjects,
+                      path:
+                        "/backend/projects/project-collections/:id/manage-projects",
+                      helper: pc =>
+                        `/backend/projects/project-collections/${pc}/manage-projects`
+                    },
+                    {
+                      name: "backendProjectCollectionSettings",
+                      exact: true,
+                      component: Backend.ProjectCollection.Settings,
+                      path:
+                        "/backend/projects/project-collections/:id/settings",
+                      helper: pc =>
+                        `/backend/projects/project-collections/${pc}/settings`
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               name: "backendProject",
               exact: false,
               component: Backend.Project.Wrapper,

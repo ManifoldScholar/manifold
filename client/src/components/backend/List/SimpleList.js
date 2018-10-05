@@ -11,7 +11,8 @@ export default class ListSimpleList extends PureComponent {
     emptyListComponent: PropTypes.func,
     destroyHandler: PropTypes.func,
     title: PropTypes.string,
-    icon: PropTypes.string
+    icon: PropTypes.string,
+    classNames: PropTypes.string
   };
 
   // Can take either a builder function that returns JSX or
@@ -31,10 +32,10 @@ export default class ListSimpleList extends PureComponent {
     return React.createElement(this.props.emptyListComponent);
   }
 
-  renderList(entities) {
+  renderList(props) {
     return (
-      <ul>
-        {entities.map(entity => {
+      <ul className={props.classNames}>
+        {props.entities.map(entity => {
           return this.renderEntity(entity);
         })}
       </ul>
@@ -55,7 +56,7 @@ export default class ListSimpleList extends PureComponent {
             </h3>
           </header>
         ) : null}
-        {entities.length > 0 ? this.renderList(entities) : this.renderEmpty()}
+        {entities.length > 0 ? this.renderList(this.props) : this.renderEmpty()}
       </section>
     );
   }

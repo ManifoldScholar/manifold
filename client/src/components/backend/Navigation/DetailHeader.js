@@ -9,6 +9,7 @@ export default class DetailHeader extends PureComponent {
 
   static propTypes = {
     type: PropTypes.string.isRequired,
+    iconName: PropTypes.string,
     title: PropTypes.string.isRequired,
     titleHtml: PropTypes.bool,
     subtitle: PropTypes.string,
@@ -20,10 +21,13 @@ export default class DetailHeader extends PureComponent {
   };
 
   static defaultProps = {
-    titleHtml: false
+    titleHtml: false,
+    type: "project"
   };
 
-  typeToManiconClass(type) {
+  typeToManiconClass(type, iconName) {
+    if (iconName) return `manicon-${iconName}`;
+
     let segment = `${type}-placeholder`;
     if (type === "user") segment = "person";
     if (type === "project") segment = "project-placeholder";
@@ -81,7 +85,8 @@ export default class DetailHeader extends PureComponent {
               <figure>
                 <i
                   className={`manicon ${this.typeToManiconClass(
-                    this.props.type
+                    this.props.type,
+                    this.props.iconName
                   )}`}
                 />
               </figure>

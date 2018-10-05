@@ -9,7 +9,7 @@ import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
 import Authorization from "helpers/authorization";
 
-const { request } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 const perPage = 20;
 
@@ -52,6 +52,10 @@ export class ProjectsListContainer extends PureComponent {
     const promises = [one];
 
     return Promise.all(promises);
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(flush(requests.beProjects));
   }
 
   initialState(props) {

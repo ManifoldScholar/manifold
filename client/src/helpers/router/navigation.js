@@ -34,7 +34,11 @@ class Navigation {
         children: [
           {
             label: "All Projects",
-            route: "backendProjects"
+            route: "backendProjectsAll"
+          },
+          {
+            label: "Project Collections",
+            route: "backendProjectCollections"
           }
         ]
       },

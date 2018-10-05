@@ -20,3 +20,4 @@ export Log from "./Log";
 export Page from "./Page";
 export Feature from "./Feature";
 export Stylesheet from "./Stylesheet";
+export ProjectCollection from "./ProjectCollection";

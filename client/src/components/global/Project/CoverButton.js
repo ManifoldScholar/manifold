@@ -40,7 +40,7 @@ export default class CoverButton extends Component {
   }
 
   handleAdd = () => {
-    this.props.addHandler();
+    this.props.addHandler(this.props.project);
   };
 
   handleRemove = () => {
