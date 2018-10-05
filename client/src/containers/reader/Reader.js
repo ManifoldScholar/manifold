@@ -150,7 +150,7 @@ export class ReaderContainer extends Component {
   };
 
   hideTocDrawer = () => {
-    this.commonActions.visibilityHide("tocDrawer");
+    this.commonActions.panelHide("tocDrawer");
   };
 
   toggleMeta = () => {
@@ -242,7 +242,7 @@ export class ReaderContainer extends Component {
           <Toc
             text={this.props.text}
             section={this.props.section}
-            tocDrawerVisible={this.props.visibility.tocDrawer}
+            tocDrawerVisible={this.props.visibility.uiPanels.tocDrawer}
             hideTocDrawer={this.hideTocDrawer}
             showMeta={this.toggleMeta}
           />

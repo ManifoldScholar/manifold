@@ -157,13 +157,17 @@ class PageDetailContainer extends PureComponent {
 
   renderExistingHeader(page) {
     if (!page) return null;
+    const subtitle = page.attributes.isExternalLink
+      ? page.attributes.externalLink
+      : `/page/${page.attributes.slug}`;
+
     return (
       <Navigation.DetailHeader
         type="page"
         backUrl={lh.link("backendRecordsPages")}
         backLabel={"All Pages"}
         title={page.attributes.title}
-        subtitle={`/page/${page.attributes.slug}`}
+        subtitle={subtitle}
         utility={this.renderUtility()}
       />
     );

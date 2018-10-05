@@ -1,17 +1,43 @@
-# Serializes a Text model
-class TextSerializer < TextPartialSerializer
-  include SerializedMetadata
+# Provides a minimum serialization of a text model.
+class TextSerializer < ApplicationSerializer
+  meta(partial: true)
 
-  meta(partial: false)
-
-  attributes :toc, :metadata, :metadata_properties, :metadata_formatted,
-             :citations, :description, :spine, :sections_map, :abilities
+  attributes :title, :creator_names, :created_at, :start_text_section_id,
+             :published, :annotations_count, :highlights_count, :bookmarks_count,
+             :age, :position, :publication_date, :cover_styles,
+             :slug, :section_kind
 
   belongs_to :project
-  has_many :stylesheets, serializer: StylesheetPartialSerializer
-  has_many :creators
-  has_many :contributors
-  has_many :text_sections, serializer: TextSectionPartialSerializer
-  has_one :toc_section, serializer: TextSectionSerializer
+  belongs_to :category
+
+  def start_text_section_id
+    object.start_text_section_id || object.spine[0] || object.text_sections.first.try(:id)
+  end
+
+  def sections_map
+    sections_ids = object.spine & object.text_sections.pluck(:id)
+    sections_ids.map { |id| Hash[id: id.to_s, name: object.text_sections.find(id).name] }
+  end
+
+  def annotations_count
+    object.annotations.only_annotations.count
+  end
+
+  def highlights_count
+    object.annotations.only_highlights.count
+  end
+
+  # TODO: Implement bookmarks
+  def bookmarks_count
+    0
+  end
+
+  def published
+    object.published?
+  end
+
+  def age
+    (Time.zone.today - object.created_at.to_date).to_i
+  end
 
 end

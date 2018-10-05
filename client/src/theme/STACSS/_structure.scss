@@ -257,20 +257,23 @@ $readerContainerWidths: (790px, 680px, 500px);
 
       @include respond($break40) {
         position: static;
+      }
+
+      @include respond($break75) {
         max-height: 60px;
       }
     }
 
     .image {
       display: none;
-      @include respond($break40) {
+      @include respond($break75) {
         display: inline-block;
       }
     }
 
     .image-mobile {
       display: inline-block;
-      @include respond($break40) {
+      @include respond($break75) {
         display: none;
       }
     }

@@ -12,18 +12,16 @@ module Api
       # GET /texts
       def index
         @texts = load_texts
-        render_multiple_resources(
-          @texts,
-          include: INCLUDES,
-          each_serializer: TextPartialSerializer
-        )
+        render_multiple_resources @texts, include: INCLUDES
       end
 
       # GET /texts/1
       def show
         @text = load_text
         includes = INCLUDES + %w(category creators contributors stylesheets)
-        render_single_resource(@text, include: includes)
+        render_single_resource @text,
+                               serializer: TextFullSerializer,
+                               include: includes
       end
 
       def create
@@ -35,7 +33,9 @@ module Api
         @text = load_and_authorize_text
         includes = INCLUDES + %w(creators contributors)
         ::Updaters::Text.new(text_params).update(@text)
-        render_single_resource(@text, include: includes)
+        render_single_resource @text,
+                               serializer: TextFullSerializer,
+                               include: includes
       end
 
       def destroy

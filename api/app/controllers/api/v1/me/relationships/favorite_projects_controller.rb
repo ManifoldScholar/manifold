@@ -15,10 +15,7 @@ module Api
           # GET /projects
           def index
             @projects = load_projects
-            render_multiple_resources(
-              @projects, include: %w(creators collaborators),
-                         each_serializer: ProjectPartialSerializer
-            )
+            render_multiple_resources @projects, include: %w(creators collaborators)
           end
 
         end

@@ -123,20 +123,47 @@ export class NavigationMobile extends Component {
     return active;
   }
 
-  renderItem(link) {
+  renderExternalLink(link) {
+    return (
+      <a
+        href={link.externalUrl}
+        target={link.newTab ? "_blank" : null}
+        rel="noopener noreferrer"
+      >
+        {link.label}
+      </a>
+    );
+  }
+
+  renderManifoldLink(link) {
+    const path = this.pathForLink(link);
+    const exact = path === "/";
+
+    return (
+      <NavLink
+        to={path}
+        exact={exact}
+        onClick={this.closeNavigation}
+        target={link.newTab ? "_blank" : null}
+        activeClassName="active"
+      >
+        {link.label}
+      </NavLink>
+    );
+  }
+
+  renderItem(link, index) {
     if (link.hideInNav) return null;
     const children = link.children || [];
     const hasChildren = children && children.length > 0;
     const expanded = this.state.expanded.includes(link.route);
-    const path = this.pathForLink(link);
-    const exact = path === "/";
     const wrapperClasses = classnames({
       nested: hasChildren,
       open: expanded
     });
 
     return (
-      <li key={link.route} className={wrapperClasses}>
+      <li key={`${link.label}-${index}`} className={wrapperClasses}>
         {hasChildren ? (
           <i
             role="button"
@@ -144,14 +171,9 @@ export class NavigationMobile extends Component {
             className={`manicon manicon-caret-up`}
           />
         ) : null}
-        <NavLink
-          to={path}
-          exact={exact}
-          onClick={this.closeNavigation}
-          activeClassName="active"
-        >
-          {link.label}
-        </NavLink>
+        {link.route
+          ? this.renderManifoldLink(link)
+          : this.renderExternalLink(link)}
         {hasChildren ? (
           <ul>{children.map(child => this.renderItem(child))}</ul>
         ) : null}
@@ -182,7 +204,7 @@ export class NavigationMobile extends Component {
             >
               <div className="nested-nav-content">
                 <ul className="primary-links">
-                  {this.props.links.map(link => {
+                  {this.props.links.map((link, index) => {
                     if (link.ability)
                       return (
                         <HigherOrder.Authorize
@@ -190,10 +212,10 @@ export class NavigationMobile extends Component {
                           entity={link.entity}
                           ability={link.ability}
                         >
-                          {this.renderItem(link)}
+                          {this.renderItem(link, index)}
                         </HigherOrder.Authorize>
                       );
-                    return this.renderItem(link);
+                    return this.renderItem(link, index);
                   })}
                   {this.props.mode === "frontend" ? (
                     <li>

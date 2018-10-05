@@ -13,6 +13,7 @@ module Api
         @stylesheet = load_stylesheet
         render_single_resource(
           @stylesheet,
+          serializer: StylesheetFullSerializer,
           location: location(@stylesheet)
         )
       end
@@ -59,7 +60,7 @@ module Api
 
       def set_serializer
         return error_serializer unless @stylesheet.valid?
-        StylesheetSerializer
+        StylesheetFullSerializer
       end
 
     end
