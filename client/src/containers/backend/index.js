@@ -19,6 +19,7 @@ import Permission from "./Permission";
 import Records from "./Records";
 import Pages from "./Pages";
 import Features from "./Features";
+import ProjectCollection from "./ProjectCollection";
 
 export {
   Backend,
@@ -41,5 +42,6 @@ export {
   Permission,
   Records,
   Pages,
-  Features
+  Features,
+  ProjectCollection
 };

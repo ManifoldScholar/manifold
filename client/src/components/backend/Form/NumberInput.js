@@ -27,6 +27,11 @@ export default class FormNumberInput extends Component {
     idForError: labelId("text-input-error-")
   };
 
+  renderValue = value => {
+    if (!value) return "";
+    return value;
+  };
+
   render() {
     const id = this.props.name
       ? this.props.name + "-" + this.props.id
@@ -42,6 +47,7 @@ export default class FormNumberInput extends Component {
         id={id}
         idForError={errorId}
         inputType="number"
+        renderValue={this.renderValue}
       />
     );
   }

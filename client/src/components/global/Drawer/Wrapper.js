@@ -37,7 +37,8 @@ export default class DrawerWrapper extends PureComponent {
     includeDrawerFrontMatter: PropTypes.bool,
     returnFocusOnDeactivate: PropTypes.bool,
     focusTrap: PropTypes.bool,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    extraClasses: PropTypes.string
   };
 
   static childContextTypes = {
