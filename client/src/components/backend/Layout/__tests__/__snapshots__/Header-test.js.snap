@@ -54,6 +54,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
                   href="/backend/dashboard"
                   onClick={[Function]}
                   style={undefined}
+                  target={null}
                 >
                   Dashboard
                 </a>
@@ -65,6 +66,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
                   href="/backend/projects"
                   onClick={[Function]}
                   style={undefined}
+                  target={null}
                 >
                   Projects
                 </a>
@@ -76,6 +78,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
                   href="/backend/records"
                   onClick={[Function]}
                   style={undefined}
+                  target={null}
                 >
                   Records
                 </a>
@@ -87,6 +90,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
                   href="/backend/settings"
                   onClick={[Function]}
                   style={undefined}
+                  target={null}
                 >
                   Settings
                 </a>

@@ -35,21 +35,42 @@ export class NavigationStatic extends PureComponent {
     return lh.link(link.route, ...args);
   }
 
-  renderStaticItem(link) {
+  renderExternalLink(link) {
+    return (
+      <a
+        href={link.externalUrl}
+        target={link.newTab ? "_blank" : null}
+        rel="noopener noreferrer"
+      >
+        {link.label}
+      </a>
+    );
+  }
+
+  renderManifoldLink(link) {
+    return (
+      <NavLink
+        to={this.pathForLink(link)}
+        exact={this.props.exact}
+        target={link.newTab ? "_blank" : null}
+        activeClassName="active"
+      >
+        {link.label}
+      </NavLink>
+    );
+  }
+
+  renderStaticItem(link, index) {
     /*
     Top level links are always exact, or else the / home page link will be active for
     /following and /page1
     */
     if (link.hideInNav) return null;
     return (
-      <li key={link.route}>
-        <NavLink
-          to={this.pathForLink(link)}
-          exact={this.props.exact}
-          activeClassName="active"
-        >
-          {link.label}
-        </NavLink>
+      <li key={`${link.label}-${index}`}>
+        {link.route
+          ? this.renderManifoldLink(link)
+          : this.renderExternalLink(link)}
       </li>
     );
   }
@@ -113,7 +134,7 @@ export class NavigationStatic extends PureComponent {
       <nav className="text-nav show-75">
         <div className="links-wrapper">
           <ul style={this.props.style} className="links">
-            {this.props.links.map(link => {
+            {this.props.links.map((link, index) => {
               if (link.ability)
                 return (
                   <HigherOrder.Authorize
@@ -121,10 +142,10 @@ export class NavigationStatic extends PureComponent {
                     entity={link.entity}
                     ability={link.ability}
                   >
-                    {this.renderStaticItem(link)}
+                    {this.renderStaticItem(link, index)}
                   </HigherOrder.Authorize>
                 );
-              return this.renderStaticItem(link);
+              return this.renderStaticItem(link, index);
             })}
           </ul>
         </div>

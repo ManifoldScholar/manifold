@@ -69,14 +69,14 @@ exports[`Reader.Notation.Resource.Detail component renders correctly 1`] = `
     <div
       className="resource-content"
     >
-      <p
+      <div
         dangerouslySetInnerHTML={
           Object {
             "__html": "World's Greatest Dog",
           }
         }
       />
-      <p
+      <div
         dangerouslySetInnerHTML={
           Object {
             "__html": "Black and white freckles",

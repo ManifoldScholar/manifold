@@ -4,13 +4,13 @@ import mapValues from "lodash/mapValues";
 export const initialState = {
   loginOverlay: false,
   userMenu: false,
-  tocDrawer: false,
   visibilityFilters: {
     highlight: { yours: true, others: true },
     annotation: { yours: true, others: true },
     resource: { all: true }
   },
   uiPanels: {
+    tocDrawer: false,
     readerReturn: false,
     user: false,
     appearance: false,
@@ -22,6 +22,7 @@ export const initialState = {
 };
 
 const panelSolo = {
+  tocDrawer: true,
   readerReturn: true,
   user: true,
   appearance: true,

@@ -23,7 +23,7 @@ module Validator
     def close_void_tags(html)
       output = html
       VOID_ELEMENTS.each do |element|
-        output.gsub!(%r(<#{element}(.+?)?\/?>), "<#{element}\\1 />")
+        output.gsub!(%r(<#{element}(.*?)?\/?>), "<#{element}\\1 />")
         output.gsub!(%r(<\/#{element}>), "")
       end
 

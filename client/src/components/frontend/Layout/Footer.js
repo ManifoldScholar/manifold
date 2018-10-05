@@ -78,7 +78,10 @@ class LayoutFooter extends Component {
 
   buildInternalPageLink(page) {
     return (
-      <Link to={lh.link("frontendPage", page.attributes.slug)}>
+      <Link
+        to={lh.link("frontendPage", page.attributes.slug)}
+        target={page.attributes.openInNewTab ? "_blank" : null}
+      >
         {page.attributes.navTitle || page.attributes.title}
       </Link>
     );
@@ -88,7 +91,7 @@ class LayoutFooter extends Component {
     return (
       <a
         href={page.attributes.externalLink}
-        target="_blank"
+        target={page.attributes.openInNewTab ? "_blank" : null}
         rel="noopener noreferrer"
       >
         {page.attributes.navTitle || page.attributes.title}

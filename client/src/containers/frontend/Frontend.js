@@ -8,6 +8,7 @@ import { entityStoreActions } from "actions";
 import { select, isLoaded } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
 import { renderRoutes } from "react-router-config";
+import get from "lodash/get";
 
 const { request } = entityStoreActions;
 
@@ -73,6 +74,7 @@ export class FrontendContainer extends Component {
   render() {
     const fatalError = this.props.notifications.fatalError;
     const skipId = "skip-to-main";
+    const mainClasses = get(this.props.settings, "attributes.pressLogoStyles.small") ? "extra-top" : "";
 
     return (
       <HigherOrder.BodyClass className={"browse"}>
@@ -96,6 +98,7 @@ export class FrontendContainer extends Component {
               this.mainContainer = mainContainer;
             }}
             id={skipId}
+            className={mainClasses}
           >
             {fatalError ? (
               <div className="global-container">

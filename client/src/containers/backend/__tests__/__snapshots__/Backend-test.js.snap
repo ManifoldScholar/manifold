@@ -60,10 +60,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                             <div className=\\"links-wrapper\\">
                                               <ul style={[undefined]} className=\\"links\\">
                                                 <li>
-                                                  <NavLink to=\\"/backend/dashboard\\" exact={false} activeClassName=\\"active\\" aria-current=\\"page\\">
+                                                  <NavLink to=\\"/backend/dashboard\\" exact={false} target={{...}} activeClassName=\\"active\\" aria-current=\\"page\\">
                                                     <Route path=\\"\\\\\\\\/backend\\\\\\\\/dashboard\\" exact={false} strict={[undefined]} location={[undefined]}>
-                                                      <Link to=\\"/backend/dashboard\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
-                                                        <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend/dashboard\\">
+                                                      <Link to=\\"/backend/dashboard\\" className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} replace={false}>
+                                                        <a className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} onClick={[Function]} href=\\"/backend/dashboard\\">
                                                           Dashboard
                                                         </a>
                                                       </Link>
@@ -71,10 +71,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                                   </NavLink>
                                                 </li>
                                                 <li>
-                                                  <NavLink to=\\"/backend/projects\\" exact={false} activeClassName=\\"active\\" aria-current=\\"page\\">
+                                                  <NavLink to=\\"/backend/projects\\" exact={false} target={{...}} activeClassName=\\"active\\" aria-current=\\"page\\">
                                                     <Route path=\\"\\\\\\\\/backend\\\\\\\\/projects\\" exact={false} strict={[undefined]} location={[undefined]}>
-                                                      <Link to=\\"/backend/projects\\" className={[undefined]} style={[undefined]} aria-current={{...}} replace={false}>
-                                                        <a className={[undefined]} style={[undefined]} aria-current={{...}} onClick={[Function]} href=\\"/backend/projects\\">
+                                                      <Link to=\\"/backend/projects\\" className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} replace={false}>
+                                                        <a className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} onClick={[Function]} href=\\"/backend/projects\\">
                                                           Projects
                                                         </a>
                                                       </Link>

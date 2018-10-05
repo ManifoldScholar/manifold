@@ -65,6 +65,19 @@ class PagesGeneralContainer extends PureComponent {
     );
   }
 
+  renderNewTab() {
+    const purpose = this.props.form.getModelValue("attributes[purpose]");
+    if (purpose === "terms_and_conditions") return null;
+
+    return (
+      <Form.Switch
+        wide
+        label="Open page in new tab?"
+        name="attributes[openInNewTab]"
+      />
+    );
+  }
+
   render() {
     if (!this.props.page) return null;
     const { page } = this.props;
@@ -96,7 +109,6 @@ class PagesGeneralContainer extends PureComponent {
               instructions="If set, this title will be used in header and footer navigation"
             />
             <Form.Select
-              wide
               label="Purpose"
               name="attributes[purpose]"
               options={[
@@ -113,6 +125,7 @@ class PagesGeneralContainer extends PureComponent {
               label="External Page?"
               name="attributes[isExternalLink]"
             />
+            {this.renderNewTab()}
             {this.renderPath()}
             {this.renderBody()}
           </Form.FieldGroup>

@@ -35,20 +35,9 @@ export default class Header extends Component {
     match: PropTypes.object
   };
 
-  componentWillUnmount() {
-    this.resetHeaderState();
-  }
-
-  resetHeaderState() {
-    this.triggerHideToc();
-  }
-
-  handleContentsButtonClick = () => {
-    this.props.commonActions.visibilityToggle("tocDrawer");
-  };
-
-  triggerHideToc = () => {
-    this.props.commonActions.visibilityHide("tocDrawer");
+  handleContentsButtonClick = event => {
+    event.stopPropagation();
+    this.props.commonActions.panelToggle("tocDrawer");
   };
 
   triggerShowSignInUpOverlay = () => {
@@ -61,7 +50,6 @@ export default class Header extends Component {
 
   panelToggleHandler = memoize(panel => {
     return () => {
-      this.triggerHideToc();
       this.props.commonActions.panelToggle(panel);
     };
   });
