@@ -1,4 +1,4 @@
-require "charlock_holmes/string"
+require "charlock_holmes"
 
 module ResourceImports
   class ParseCSV < ActiveInteraction::Base
@@ -7,8 +7,10 @@ module ResourceImports
     VALID_ENCODING = "UTF-8".freeze
 
     def execute
-      csv = ensure_encoding(resource_import.data.path)
-      rows = CSV.parse csv
+      path = Pathname.new resource_import.data.path
+      csv = ensure_encoding path
+
+      rows = csv.is_a?(String) ? CSV.parse(csv) : CSV.read(csv, encoding: "bom|utf-8")
       @line_number = 0
       rows.each do |row|
         @line_number += 1
@@ -30,8 +32,8 @@ module ResourceImports
     def ensure_encoding(file_path)
       content = File.read(file_path)
       detection = CharlockHolmes::EncodingDetector.detect(content)
-      return content if detection[:encoding] == VALID_ENCODING
-      CharlockHolmes::Converter.convert content, detection[:encoding], "UTF-8"
+      return file_path if detection[:encoding] == VALID_ENCODING
+      CharlockHolmes::Converter.convert content, detection[:encoding], VALID_ENCODING
     end
   end
 end

@@ -54,6 +54,7 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
                   href="/"
                   onClick={[Function]}
                   style={Object {}}
+                  target={null}
                 >
                   Home
                 </a>

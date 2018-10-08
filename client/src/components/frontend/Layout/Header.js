@@ -24,19 +24,29 @@ export default class LayoutHeader extends PureComponent {
     pages: []
   };
 
+  pageItem(page) {
+    if (!page.attributes.showInHeader) return null;
+    const attrs = {
+      label: page.attributes.navTitle || page.attributes.title,
+      newTab: page.attributes.openInNewTab
+    };
+
+    if (page.attributes.isExternalLink) {
+      attrs.externalUrl = page.attributes.externalLink;
+    } else {
+      attrs.route = "frontendPage";
+      attrs.args = [page.attributes.slug];
+    }
+
+    return attrs;
+  }
+
   frontendLinks(props) {
     const out = navigation.frontend(this.props.authentication);
     const pages = props.pages || [];
     const pageLinks = pages.reduce((list, page) => {
-      if (page.attributes.showInHeader) {
-        const item = {
-          label: page.attributes.title,
-          route: "frontendPage",
-          args: [page.id]
-        };
-
-        list.push(item);
-      }
+      const item = this.pageItem(page);
+      if (item) list.push(item);
 
       return list;
     }, []);

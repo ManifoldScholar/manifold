@@ -26,11 +26,7 @@ module Api
 
       def index
         @projects = load_projects
-        render_multiple_resources(
-          @projects,
-          include: %w(creators collaborators),
-          each_serializer: ProjectPartialSerializer
-        )
+        render_multiple_resources @projects, include: %w(creators collaborators)
       end
 
       def show
@@ -41,7 +37,9 @@ module Api
           resources: :tags
         )
         @project = load_project
-        render_single_resource(@project, include: INCLUDES)
+        render_single_resource @project,
+                               serializer: ProjectFullSerializer,
+                               include: INCLUDES
       end
 
       def create
@@ -52,7 +50,9 @@ module Api
       def update
         @project = load_and_authorize_project
         ::Updaters::Project.new(project_params).update(@project)
-        render_single_resource(@project, include: INCLUDES)
+        render_single_resource @project,
+                               serializer: ProjectFullSerializer,
+                               include: INCLUDES
       end
 
       def destroy
