@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.ProjectCollection.Header component renders correctly 1`] = `
+<section
+  className="backend-header"
+>
+  <nav
+    className="breadcrumb-primary"
+  >
+    <div
+      className="container flush"
+    >
+      <a
+        href="/backend/projects/project-collections"
+        onClick={[Function]}
+      >
+        <i
+          aria-hidden="true"
+          className="manicon manicon-arrow-left"
+        />
+        Back
+      </a>
+    </div>
+  </nav>
+  <div
+    className="wrapper"
+  >
+    <header
+      className="entity-header-primary"
+    >
+      <figure>
+        <i
+          className="manicon manicon-collection-manual"
+        />
+      </figure>
+      <div
+        className="title"
+      >
+        <h1>
+          A Project Collection
+          <span
+            className="subtitle"
+          />
+        </h1>
+        <div
+          className="utility"
+        >
+          <div>
+            <a
+              className="button-bare-primary"
+              href="/backend/projects/project-collections/1/settings"
+              onClick={[Function]}
+            >
+              <i
+                aria-hidden="true"
+                className="manicon manicon-settings"
+              />
+              Settings
+            </a>
+            <a
+              className="button-bare-primary"
+              href="/backend/projects/project-collections/1/manage-projects"
+              onClick={[Function]}
+            >
+              <i
+                aria-hidden="true"
+                className="manicon manicon-stack"
+              />
+              Manage Projects
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</section>
+`;

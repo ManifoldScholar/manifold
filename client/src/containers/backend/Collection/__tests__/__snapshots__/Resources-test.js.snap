@@ -87,7 +87,9 @@ exports[`Backend Collection Resources Container renders correctly 1`] = `
              resources: 
           </p>
           <section>
-            <ul>
+            <ul
+              className={undefined}
+            >
               <li>
                 <a
                   href="/backend/projects/resource/3"

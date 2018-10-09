@@ -37,7 +37,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               onChange={[Function]}
               placeholder="Enter Project Title"
               type="text"
-              value=""
+              value="Rowan Test"
             />
           </div>
           <div
@@ -56,7 +56,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               onChange={[Function]}
               placeholder="Enter Project Subtitle"
               type="text"
-              value=""
+              value="World's Greatest Dog"
             />
           </div>
           <div
@@ -75,7 +75,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               onChange={[Function]}
               placeholder="Enter Project Slug"
               type="text"
-              value=""
+              value="slug-1"
             />
           </div>
         </div>
@@ -546,7 +546,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[tagList]-tag-list-1"
+              htmlFor="attributes[tagList]-tag-list-3"
             >
               Tags
             </label>
@@ -562,8 +562,8 @@ exports[`Backend Project General Container renders correctly 1`] = `
                   onClick={[Function]}
                 />
                 <input
-                  aria-describedby="attributes[tagList]-tag-list-1"
-                  id="attributes[tagList]-tag-list-1"
+                  aria-describedby="attributes[tagList]-tag-list-3"
+                  id="attributes[tagList]-tag-list-3"
                   onChange={[Function]}
                   onKeyPress={[Function]}
                   placeholder="Enter a Tag"

@@ -1,6 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.Layout.ButtonNavigation component doesn't render anything when not logged in on home 1`] = `null`;
+exports[`Frontend.Layout.ButtonNavigation component doesn't render anything when not logged in on home 1`] = `
+<section
+  className="bg-neutral05"
+>
+  <div
+    className="container"
+  >
+    <nav
+      className="button-nav"
+    >
+      <a
+        className="button-icon-primary"
+        href="/projects"
+        onClick={[Function]}
+      >
+        <span>
+          <i
+            aria-hidden="true"
+            className="manicon manicon-books-on-shelf"
+          />
+          See All Projects
+        </span>
+      </a>
+    </nav>
+  </div>
+</section>
+`;
 
 exports[`Frontend.Layout.ButtonNavigation component renders correctly 1`] = `
 <section
@@ -14,7 +40,7 @@ exports[`Frontend.Layout.ButtonNavigation component renders correctly 1`] = `
     >
       <a
         className="button-icon-primary"
-        href="/"
+        href="/projects"
         onClick={[Function]}
       >
         <span>
@@ -22,7 +48,7 @@ exports[`Frontend.Layout.ButtonNavigation component renders correctly 1`] = `
             aria-hidden="true"
             className="manicon manicon-books-on-shelf"
           />
-          See more projects
+          See All Projects
         </span>
       </a>
       <a
@@ -35,7 +61,7 @@ exports[`Frontend.Layout.ButtonNavigation component renders correctly 1`] = `
             aria-hidden="true"
             className="manicon manicon-books-with-glasses"
           />
-          Projects You're Following 
+          Projects You’re Following
         </span>
       </a>
     </nav>
@@ -55,7 +81,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the grayBg prop 1`]
     >
       <a
         className="button-icon-primary"
-        href="/"
+        href="/projects"
         onClick={[Function]}
       >
         <span>
@@ -63,7 +89,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the grayBg prop 1`]
             aria-hidden="true"
             className="manicon manicon-books-on-shelf"
           />
-          See more projects
+          See All Projects
         </span>
       </a>
       <a
@@ -76,7 +102,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the grayBg prop 1`]
             aria-hidden="true"
             className="manicon manicon-books-with-glasses"
           />
-          Projects You're Following 
+          Projects You’re Following
         </span>
       </a>
     </nav>
@@ -96,6 +122,19 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showBrowse prop
     >
       <a
         className="button-icon-primary"
+        href="/projects"
+        onClick={[Function]}
+      >
+        <span>
+          <i
+            aria-hidden="true"
+            className="manicon manicon-books-on-shelf"
+          />
+          See All Projects
+        </span>
+      </a>
+      <a
+        className="button-icon-primary"
         href="/following"
         onClick={[Function]}
       >
@@ -104,7 +143,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showBrowse prop
             aria-hidden="true"
             className="manicon manicon-books-with-glasses"
           />
-          Projects You're Following 
+          Projects You’re Following
         </span>
       </a>
     </nav>
@@ -124,7 +163,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showFollowing p
     >
       <a
         className="button-icon-primary"
-        href="/"
+        href="/projects"
         onClick={[Function]}
       >
         <span>
@@ -132,7 +171,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showFollowing p
             aria-hidden="true"
             className="manicon manicon-books-on-shelf"
           />
-          See more projects
+          See All Projects
         </span>
       </a>
     </nav>

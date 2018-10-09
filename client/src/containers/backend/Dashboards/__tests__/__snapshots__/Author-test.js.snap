@@ -81,7 +81,9 @@ exports[`Backend Dashboards Author Container renders correctly 1`] = `
                  projects: 
               </p>
               <section>
-                <ul>
+                <ul
+                  className={undefined}
+                >
                   <li>
                     <a
                       href="/backend/projects/1"

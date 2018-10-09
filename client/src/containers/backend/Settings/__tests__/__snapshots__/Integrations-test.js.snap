@@ -449,7 +449,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     placeholder="ga:123456789"
                     placeholderChar="_"
                     type="text"
-                    value={undefined}
+                    value={null}
                   />
                 </div>
                 <div

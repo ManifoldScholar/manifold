@@ -7,7 +7,7 @@ exports[`Backend.Form.TagList component renders correctly 1`] = `
 >
   <label
     className=""
-    htmlFor="attributes[tags]-tag-list-1"
+    htmlFor="attributes[tags]-tag-list-3"
   >
     Tags
   </label>
@@ -23,8 +23,8 @@ exports[`Backend.Form.TagList component renders correctly 1`] = `
         onClick={[Function]}
       />
       <input
-        aria-describedby="attributes[tags]-tag-list-1"
-        id="attributes[tags]-tag-list-1"
+        aria-describedby="attributes[tags]-tag-list-3"
+        id="attributes[tags]-tag-list-3"
         onChange={[Function]}
         onKeyPress={[Function]}
         placeholder={undefined}

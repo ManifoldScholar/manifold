@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.ProjectCollection.Detail.Manual component renders correctly 1`] = `
+<section
+  className="project-list grid"
+>
+  <section>
+    <ul
+      className={undefined}
+    >
+      <li>
+        <div
+          className="item-wrapper"
+        >
+          <figure
+            className="cover"
+          />
+          <div
+            className="meta"
+          >
+            <h3
+              className="name"
+            >
+              <span
+                className="title-text"
+              >
+                Rowan Test
+              </span>
+            </h3>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+</section>
+`;

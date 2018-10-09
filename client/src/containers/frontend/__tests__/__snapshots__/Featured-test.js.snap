@@ -36,7 +36,82 @@ exports[`Frontend Featured Container renders correctly 1`] = `
         </div>
         <div
           className="utility right"
-        />
+        >
+          <form
+            className="form-list-filter"
+            onSubmit={[Function]}
+          >
+            <div
+              className="search-input"
+            >
+              <button
+                className="search-button"
+                type="submit"
+              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Search…
+                </span>
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-magnify"
+                />
+              </button>
+              <label
+                className="screen-reader-text"
+                htmlFor="filters-search-4"
+              >
+                Enter Search Criteria
+              </label>
+              <input
+                id="filters-search-4"
+                onChange={[Function]}
+                placeholder="Search…"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="select-group inline"
+            >
+              <div
+                className="select"
+              >
+                <select
+                  onChange={[Function]}
+                  value=""
+                >
+                  <option
+                    value=""
+                  >
+                    Sort
+                  </option>
+                  <option
+                    value="sort_title ASC"
+                  >
+                    A-Z
+                  </option>
+                  <option
+                    value="sort_title DESC"
+                  >
+                    Z-A
+                  </option>
+                </select>
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-caret-down"
+                />
+              </div>
+            </div>
+            <button
+              className="reset-button"
+              onClick={[Function]}
+            >
+              Reset Search + Filters
+            </button>
+          </form>
+        </div>
       </header>
       <nav
         className="project-list grid"
@@ -189,7 +264,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
       >
         <a
           className="button-icon-primary"
-          href="/"
+          href="/projects"
           onClick={[Function]}
         >
           <span>
@@ -197,7 +272,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
               aria-hidden="true"
               className="manicon manicon-books-on-shelf"
             />
-            See more projects
+            See All Projects
           </span>
         </a>
         <a
@@ -210,7 +285,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
               aria-hidden="true"
               className="manicon manicon-books-with-glasses"
             />
-            Projects You're Following 
+            Projects You’re Following
           </span>
         </a>
       </nav>

@@ -95,7 +95,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     <select
                       id="kind-1"
                       onChange={[Function]}
-                      value=""
+                      value="image"
                     >
                       <option
                         id="image"
@@ -165,8 +165,8 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                 >
                   <li>
                     <div
-                      aria-checked={false}
-                      className="button"
+                      aria-checked={true}
+                      className="button active"
                       onClick={[Function]}
                       role="radio"
                       tabIndex="0"
@@ -175,6 +175,11 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                         <figcaption>
                           <span>
                             Image
+                            <span
+                              className="screen-reader-text"
+                            >
+                              Selected Kind
+                            </span>
                           </span>
                         </figcaption>
                         <div

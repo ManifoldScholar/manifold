@@ -74,6 +74,14 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
                         href="/"
                         onClick={[Function]}
                       >
+                        Home
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/projects"
+                        onClick={[Function]}
+                      >
                         Projects
                       </a>
                     </li>

@@ -18,7 +18,9 @@ Array [
            
         </h3>
       </header>
-      <ul>
+      <ul
+        className={undefined}
+      >
         <li
           className="no-icon"
         >

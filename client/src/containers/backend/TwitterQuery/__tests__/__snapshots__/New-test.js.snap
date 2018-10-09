@@ -101,8 +101,8 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
           className="toggle-indicator"
         >
           <div
-            aria-pressed={false}
-            className="boolean-primary"
+            aria-pressed={true}
+            className="boolean-primary checked"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

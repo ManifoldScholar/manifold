@@ -99,7 +99,9 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
              resources: 
           </p>
           <section>
-            <ul>
+            <ul
+              className={undefined}
+            >
               <li>
                 <span
                   className="fake-link"

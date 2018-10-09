@@ -1,5 +1,6 @@
 import React from "react";
 import hoistStatics from "hoist-non-react-statics";
+import FormContext from "helpers/contexts/FormContext";
 
 function getDisplayName(WrappedComponent) {
   let Wrapped = WrappedComponent;
@@ -19,7 +20,7 @@ export default function withFormContext(WrappedComponent) {
     static displayName = displayName;
 
     render() {
-      const formProps = {
+      const mockProps = {
         actions: {
           set: () => {}
         },
@@ -30,8 +31,15 @@ export default function withFormContext(WrappedComponent) {
         submitKey: null
       };
 
-      const props = Object.assign({}, formProps, this.props);
-      return React.createElement(WrappedComponent, props);
+      return (
+        <FormContext.Consumer>
+          {formProps => {
+            const props = Object.assign({}, mockProps, formProps, this.props);
+            return React.createElement(WrappedComponent, props);
+            }
+          }
+        </FormContext.Consumer>
+      );
     }
   }
 

@@ -103,7 +103,9 @@ exports[`Backend People Users List Container renders correctly 1`] = `
                 </a>
               </div>
               <section>
-                <ul>
+                <ul
+                  className={undefined}
+                >
                   <li
                     className="user-list-item"
                   >
