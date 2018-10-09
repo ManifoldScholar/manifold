@@ -17,7 +17,7 @@ exports[`Backend.Form.NumberInput component renders correctly 1`] = `
     onChange={[Function]}
     placeholder={undefined}
     type="number"
-    value={undefined}
+    value=""
   />
 </div>
 `;

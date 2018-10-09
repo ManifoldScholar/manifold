@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ProjectCollection.Filters component renders correctly 1`] = `
+<form
+  className="form-list-filter"
+  onSubmit={[Function]}
+>
+  <div
+    className="search-input"
+  >
+    <button
+      className="search-button"
+      type="submit"
+    >
+      <span
+        className="screen-reader-text"
+      >
+        Search…
+      </span>
+      <i
+        aria-hidden="true"
+        className="manicon manicon-magnify"
+      />
+    </button>
+    <label
+      className="screen-reader-text"
+      htmlFor="filters-search-1"
+    >
+      Enter Search Criteria
+    </label>
+    <input
+      id="filters-search-1"
+      onChange={[Function]}
+      placeholder="Search…"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="select-group inline"
+  >
+    <div
+      className="select"
+    >
+      <select
+        onChange={[Function]}
+        value=""
+      >
+        <option
+          value=""
+        >
+          Sort
+        </option>
+        <option
+          value="sort_title ASC"
+        >
+          A-Z
+        </option>
+        <option
+          value="sort_title DESC"
+        >
+          Z-A
+        </option>
+      </select>
+      <i
+        aria-hidden="true"
+        className="manicon manicon-caret-down"
+      />
+    </div>
+  </div>
+  <button
+    className="reset-button"
+    onClick={[Function]}
+  >
+    Reset Search + Filters
+  </button>
+</form>
+`;

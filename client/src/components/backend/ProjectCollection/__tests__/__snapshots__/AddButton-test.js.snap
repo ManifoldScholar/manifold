@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.ProjectCollection.AddButton component renders correctly 1`] = `
+<div>
+  <button
+    className="screen-reader-text"
+    onClick={[Function]}
+  >
+    add Rowan Test
+  </button>
+  <div
+    aria-hidden="true"
+    className="add project-cover-button-wrapper"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    role="presentation"
+  >
+    <div
+      aria-hidden="true"
+      className="project-cover-button"
+    >
+      <div
+        className="icons"
+      >
+        <i
+          className="manicon manicon-minus-bold"
+        />
+        <i
+          className="manicon manicon-check-bold"
+        />
+        <i
+          className="manicon manicon-plus-bold"
+        />
+      </div>
+      <span>
+        <span
+          className="action-text"
+        >
+          Include
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+`;

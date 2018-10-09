@@ -59,6 +59,18 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
                   Home
                 </a>
               </li>
+              <li>
+                <a
+                  aria-current={null}
+                  className={undefined}
+                  href="/projects"
+                  onClick={[Function]}
+                  style={undefined}
+                  target={null}
+                >
+                  Projects
+                </a>
+              </li>
             </ul>
           </div>
           <nav

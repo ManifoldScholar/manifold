@@ -32,7 +32,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
               <select
                 id="kind-1"
                 onChange={[Function]}
-                value=""
+                value="image"
               >
                 <option
                   id="image"
@@ -115,7 +115,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           onChange={[Function]}
           placeholder="Enter a title"
           type="text"
-          value=""
+          value="Image"
         />
       </div>
       <div
@@ -153,7 +153,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           onChange={[Function]}
           placeholder="Enter slug"
           type="text"
-          value=""
+          value="slug-1"
         />
       </div>
       <div
@@ -162,7 +162,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="attributes[tagList]-tag-list-1"
+          htmlFor="attributes[tagList]-tag-list-3"
         >
           Tags
         </label>
@@ -178,8 +178,8 @@ exports[`Backend Resource General Container renders correctly 1`] = `
               onClick={[Function]}
             />
             <input
-              aria-describedby="attributes[tagList]-tag-list-1"
-              id="attributes[tagList]-tag-list-1"
+              aria-describedby="attributes[tagList]-tag-list-3"
+              id="attributes[tagList]-tag-list-3"
               onChange={[Function]}
               onKeyPress={[Function]}
               placeholder="Enter a Tag"
@@ -192,15 +192,95 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           className="has-many-list"
         >
           <ul
-            className="bucket empty"
+            className="bucket"
           >
-            <div
-              className="placeholder"
-            >
-              No 
-              Tags
-               added
-            </div>
+            <li>
+              <div
+                className="association"
+              >
+                <h4
+                  className="association-name"
+                >
+                  dog
+                </h4>
+              </div>
+              <div
+                className="utility"
+              >
+                <button
+                  className="manicon manicon-x"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Remove 
+                    dog
+                     from the 
+                    Tags
+                     list.
+                  </span>
+                </button>
+              </div>
+            </li>
+            <li>
+              <div
+                className="association"
+              >
+                <h4
+                  className="association-name"
+                >
+                  puppy
+                </h4>
+              </div>
+              <div
+                className="utility"
+              >
+                <button
+                  className="manicon manicon-x"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Remove 
+                    puppy
+                     from the 
+                    Tags
+                     list.
+                  </span>
+                </button>
+              </div>
+            </li>
+            <li>
+              <div
+                className="association"
+              >
+                <h4
+                  className="association-name"
+                >
+                  GOAT
+                </h4>
+              </div>
+              <div
+                className="utility"
+              >
+                <button
+                  className="manicon manicon-x"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Remove 
+                    GOAT
+                     from the 
+                    Tags
+                     list.
+                  </span>
+                </button>
+              </div>
+            </li>
           </ul>
         </div>
       </div>

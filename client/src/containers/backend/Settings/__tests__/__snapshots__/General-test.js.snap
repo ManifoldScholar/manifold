@@ -40,7 +40,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 onChange={[Function]}
                 placeholder="Manifold"
                 type="text"
-                value=""
+                value="Manifold"
               />
               <span
                 className="instructions"
@@ -126,7 +126,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 onChange={[Function]}
                 placeholder="Enter Copyright Information"
                 type="text"
-                value=""
+                value="2015-2016 6 University of Minnesota Press"
               />
               <span
                 className="instructions"

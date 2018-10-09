@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.ProjectCollection.Detail container renders correctly 1`] = `
+<div>
+  <div
+    className="project-collection-sort form-flex"
+  >
+    <form
+      className="form-search-filter"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-list-filter"
+      >
+        <div
+          className="instructional-copy"
+        >
+          Click and drag projects to rearrange them.
+        </div>
+      </div>
+    </form>
+    <form
+      className="form-secondary"
+    >
+      <div
+        className="form-input"
+      >
+        <h4
+          className="form-input-heading"
+        >
+          Order Manually
+        </h4>
+        <div
+          className="toggle-indicator"
+        >
+          <div
+            aria-pressed={true}
+            className="boolean-primary checked"
+            onClick={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Order collection manually
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <section
+    className="project-list grid"
+  >
+    <ul
+      className="list-orderable"
+    />
+  </section>
+  <span />
+</div>
+`;

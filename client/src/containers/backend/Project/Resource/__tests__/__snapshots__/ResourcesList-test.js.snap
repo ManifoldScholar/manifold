@@ -111,7 +111,9 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
           </a>
         </div>
         <section>
-          <ul>
+          <ul
+            className={undefined}
+          >
             <li>
               <a
                 href="/backend/projects/resource/2"

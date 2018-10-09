@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.ProjectCollection.Form.SmartAttributes component renders correctly 1`] = `
+Array [
+  <div
+    className="form-number-input form-input"
+    style={Object {}}
+  >
+    <label
+      className="has-instructions"
+      htmlFor="attributes[numberOfProjects]-text-input-1"
+    >
+      Projects Visible:
+    </label>
+    <input
+      aria-describedby="attributes[numberOfProjects]-text-input-1"
+      id="attributes[numberOfProjects]-text-input-1"
+      onChange={[Function]}
+      placeholder={undefined}
+      type="number"
+      value=""
+    />
+    <span
+      className="instructions"
+    >
+      Number of projects shown in this Collection.
+    </span>
+  </div>,
+  <div
+    className="form-input form-toggle-secondary"
+  >
+    <h4
+      className="form-input-heading above"
+    >
+      Featured Projects:
+    </h4>
+    <div
+      className="toggle-indicator"
+    >
+      <div
+        aria-pressed={false}
+        className="boolean-primary"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        role="button"
+        tabIndex="0"
+      >
+        <span
+          className="screen-reader-text"
+        >
+          Featured Projects:
+        </span>
+      </div>
+    </div>
+    <span
+      className="instructions"
+    >
+      Include only featured projects in this Collection.
+    </span>
+  </div>,
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <h4
+      className="form-input-heading"
+    >
+      Subjects
+    </h4>
+    <span
+      className="instructions"
+    >
+      Include all Projects with these subjects.
+    </span>
+    <nav
+      className="has-many-list"
+    >
+      <div
+        className="input-predictive"
+      >
+        <div
+          className="input"
+        >
+          <i
+            aria-hidden="true"
+            className="manicon manicon-plus"
+          />
+          <input
+            aria-describedby={null}
+            aria-label="Add a Subject"
+            className="text-input"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            placeholder="Add a Subject"
+            type="text"
+            value=""
+          />
+        </div>
+        <nav
+          className="predictive-list"
+        >
+          <ul />
+        </nav>
+      </div>
+      <ul
+        className="bucket empty"
+      >
+        <div
+          className="placeholder"
+        >
+          No 
+          Subjects
+           added
+        </div>
+      </ul>
+    </nav>
+  </div>,
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+      htmlFor="attributes[tagList]-tag-list-3"
+    >
+      Tags
+    </label>
+    <div
+      className="input-predictive"
+    >
+      <div
+        className="input"
+      >
+        <i
+          aria-hidden="true"
+          className="manicon manicon-plus"
+          onClick={[Function]}
+        />
+        <input
+          aria-describedby="attributes[tagList]-tag-list-3"
+          id="attributes[tagList]-tag-list-3"
+          onChange={[Function]}
+          onKeyPress={[Function]}
+          placeholder="Add a Tag"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="has-many-list"
+    >
+      <ul
+        className="bucket empty"
+      >
+        <div
+          className="placeholder"
+        >
+          No 
+          Tags
+           added
+        </div>
+      </ul>
+    </div>
+  </div>,
+]
+`;

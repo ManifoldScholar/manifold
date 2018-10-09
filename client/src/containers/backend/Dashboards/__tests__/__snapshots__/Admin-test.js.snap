@@ -82,7 +82,9 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
             >
               <div>
                 <section>
-                  <ul>
+                  <ul
+                    className={undefined}
+                  >
                     <li>
                       <a
                         href="/backend/projects/1"
@@ -400,7 +402,9 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                    
                 </h3>
               </header>
-              <ul>
+              <ul
+                className={undefined}
+              >
                 <li>
                   <a
                     href="/backend/projects/3"

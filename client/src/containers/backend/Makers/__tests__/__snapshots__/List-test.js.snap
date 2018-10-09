@@ -88,7 +88,9 @@ exports[`Backend People Makers List Container renders correctly 1`] = `
                  makers: 
               </p>
               <section>
-                <ul>
+                <ul
+                  className={undefined}
+                >
                   <li
                     className=""
                   >

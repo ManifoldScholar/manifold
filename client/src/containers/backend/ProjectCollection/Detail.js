@@ -34,8 +34,7 @@ export class ProjectCollectionDetail extends PureComponent {
     dispatch: PropTypes.func,
     match: PropTypes.object,
     history: PropTypes.object,
-    route: PropTypes.object,
-    location: PropTypes.object
+    route: PropTypes.object
   };
 
   componentDidMount() {

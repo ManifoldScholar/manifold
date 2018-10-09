@@ -6,7 +6,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
     className="bg-neutral05"
   >
     <div
-      className="container"
+      className="container project-list-container"
     >
       <header
         className="section-heading"
@@ -16,27 +16,106 @@ exports[`Frontend Following Container renders correctly 1`] = `
         >
           <i
             aria-hidden="true"
-            className="manicon manicon-books-with-glasses"
-          />
+            className="manicon"
+          >
+            <svg
+              aria-hidden="true"
+              className="manicon-svg"
+              fill="currentColor"
+              height={54}
+              stroke={undefined}
+              viewBox="0 0 64 64"
+              width={54}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M35.7947,28.129 C32.1692268,28.129 29.2302,25.1899733 29.2302,21.5645 C29.2302,17.9390268 32.1692268,15 35.7947,15 C39.4201733,15 42.3592001,17.9390268 42.3592001,21.5645 C42.3592001,25.1899733 39.4201733,28.129 35.7947,28.129 Z M35.7947,26.129 C38.3156038,26.129 40.3592001,24.0854038 40.3592001,21.5645 C40.3592001,19.0435963 38.3156038,17 35.7947,17 C33.2737963,17 31.2302,19.0435963 31.2302,21.5645 C31.2302,24.0854038 33.2737963,26.129 35.7947,26.129 Z M19.2012,28.129 C15.5757268,28.129 12.6367,25.1899733 12.6367,21.5645 C12.6367,17.9390268 15.5757268,15 19.2012,15 C22.8266733,15 25.7657,17.9390268 25.7657,21.5645 C25.7657,25.1899733 22.8266733,28.129 19.2012,28.129 Z M19.2012,26.129 C21.7221038,26.129 23.7657,24.0854038 23.7657,21.5645 C23.7657,19.0435963 21.7221038,17 19.2012,17 C16.6802963,17 14.6367,19.0435963 14.6367,21.5645 C14.6367,24.0854038 16.6802963,26.129 19.2012,26.129 Z M25.1541898,23.027353 L24.3772102,21.184447 L25.595463,20.6708248 C26.8119552,20.1580268 28.1839449,20.1580268 29.4004256,20.6708199 L30.6186256,21.1843199 L29.8417745,23.0272801 L28.623563,22.5137753 C27.9038212,22.2103766 27.0920788,22.2103766 26.3723898,22.513753 L25.1541898,23.027353 Z M5,53.4950001 L5,51.4950001 L59.9434001,51.4950001 L59.9434001,53.4950001 L5,53.4950001 Z M9.82170001,44.9753 L9.82170001,52.4953001 L7.82170001,52.4953001 L7.82170001,42.9753 L51.1737001,42.9753 L51.1737001,52.4953001 L49.1737001,52.4953001 L49.1737001,44.9753 L9.82170001,44.9753 Z M12.5303,43.9757 L14.5303,43.9757 L14.5303,52.4950001 L12.5303,52.4950001 L12.5303,43.9757 Z M44.4657001,43.9757 L46.4657001,43.9757 L46.4657001,52.4950001 L44.4657001,52.4950001 L44.4657001,43.9757 Z M15.1915,35.3213 L58.5438001,35.3213 L58.5438001,44.9757 L15.1915,44.9757 L15.1915,35.3213 Z M56.5438001,42.9757 L56.5438001,37.3213 L17.1915,37.3213 L17.1915,42.9757 L56.5438001,42.9757 Z M9.28520001,26.8021 L52.6375001,26.8021 L52.6375001,37.3214 L9.28520001,37.3214 L9.28520001,26.8021 Z M11.2852,35.3214 L50.6375001,35.3214 L50.6375001,28.8021 L11.2852,28.8021 L11.2852,35.3214 Z M14.6228,27.802 L16.6228,27.802 L16.6228,36.3214 L14.6228,36.3214 L14.6228,27.802 Z M18.9649,27.802 L20.9649,27.802 L20.9649,36.3214 L18.9649,36.3214 L18.9649,27.802 Z M40.9578001,27.802 L42.9578001,27.802 L42.9578001,36.3214 L40.9578001,36.3214 L40.9578001,27.802 Z M45.2999001,27.802 L47.2999001,27.802 L47.2999001,36.3214 L45.2999001,36.3214 L45.2999001,27.802 Z"
+              />
+            </svg>
+          </i>
           <div
             className="body"
           >
             <h4
               className="title"
             >
-              Projects You're Following
+              Projects You’re Following
             </h4>
           </div>
         </div>
+      </header>
+      <form
+        className="form-list-filter"
+        onSubmit={[Function]}
+      >
         <div
-          className="utility right"
+          className="search-input"
+        >
+          <button
+            className="search-button"
+            type="submit"
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Search…
+            </span>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-magnify"
+            />
+          </button>
+          <label
+            className="screen-reader-text"
+            htmlFor="filters-search-4"
+          >
+            Enter Search Criteria
+          </label>
+          <input
+            id="filters-search-4"
+            onChange={[Function]}
+            placeholder="Search…"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="select-group inline"
         >
           <div
-            className="select-browse"
+            className="select"
           >
             <select
-              defaultValue=""
               onChange={[Function]}
+              value=""
+            >
+              <option
+                value=""
+              >
+                Sort
+              </option>
+              <option
+                value="sort_title ASC"
+              >
+                A-Z
+              </option>
+              <option
+                value="sort_title DESC"
+              >
+                Z-A
+              </option>
+            </select>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-caret-down"
+            />
+          </div>
+          <div
+            className="select"
+          >
+            <select
+              onChange={[Function]}
+              value=""
             >
               <option
                 value=""
@@ -55,7 +134,13 @@ exports[`Frontend Following Container renders correctly 1`] = `
             />
           </div>
         </div>
-      </header>
+        <button
+          className="reset-button"
+          onClick={[Function]}
+        >
+          Reset Search + Filters
+        </button>
+      </form>
       <nav
         className="project-list grid"
       >
@@ -198,7 +283,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
   </section>
   <section>
     <div
-      className="container"
+      className="container project-list-container"
     >
       <header
         className="section-heading"
@@ -208,8 +293,23 @@ exports[`Frontend Following Container renders correctly 1`] = `
         >
           <i
             aria-hidden="true"
-            className="manicon manicon-lamp"
-          />
+            className="manicon"
+          >
+            <svg
+              aria-hidden="true"
+              className="manicon-svg"
+              fill="currentColor"
+              height={54}
+              stroke={undefined}
+              viewBox="0 0 64 64"
+              width={54}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M44.314549,33.1909886 L45.9318511,32.0144114 L49.1634511,36.4565114 L47.546149,37.6330886 L44.314549,33.1909886 Z M47.7134278,29.8115965 L48.5257723,27.9840035 L53.5454723,30.2152035 L52.7331278,32.0427965 L47.7134278,29.8115965 Z M48.9673311,25.1854584 L48.7570689,23.1965416 L54.2197689,22.6190416 L54.4300311,24.6079584 L48.9673311,25.1854584 Z M34.6515965,38.9963723 L32.8240035,38.1840278 L35.0552035,33.1643278 L36.8827965,33.9766722 L34.6515965,38.9963723 Z M42.2477586,39.6706708 L40.2588414,39.8809292 L39.6813414,34.4181292 L41.6702586,34.2078708 L42.2477586,39.6706708 Z M21.8055661,55.2600612 L20.0844339,56.2787388 L13.8494454,45.7442583 C10.1665975,39.5221317 11.8255838,31.5192434 17.6783357,27.2738322 L26.7793357,20.6722322 L27.9536643,22.2911678 L18.8526639,28.892768 C13.8357087,32.5319174 12.4136324,39.3919604 15.5705661,44.7255612 L21.8055661,55.2600612 Z M34.6171323,10.3538753 L26.4778605,16.2936667 L32.7831452,28.1653016 L43.999866,19.9791535 L34.6171323,10.3538753 Z M32.0988548,31.1406984 L23.8981395,15.7003333 L34.8388677,7.71612467 L47.042134,20.2348465 L32.0988548,31.1406984 Z M10.3684,56.7693 L10.3684,54.7693 L30.2014,54.7693 L30.2014,56.7693 L10.3684,56.7693 Z M30.9602576,11.6871433 L29.4425424,12.9896566 L26.6075424,9.6862566 L28.1252576,8.38374333 L30.9602576,11.6871433 Z"
+              />
+            </svg>
+          </i>
           <div
             className="body"
           >
@@ -372,7 +472,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
       >
         <a
           className="button-icon-primary"
-          href="/"
+          href="/projects"
           onClick={[Function]}
         >
           <span>
@@ -380,7 +480,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
               aria-hidden="true"
               className="manicon manicon-books-on-shelf"
             />
-            See more projects
+            See All Projects
           </span>
         </a>
       </nav>

@@ -70,7 +70,9 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
          resources: 
       </p>
       <section>
-        <ul>
+        <ul
+          className={undefined}
+        >
           <li>
             <a
               href="/backend/projects/resource/1"
@@ -422,7 +424,9 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
          resources: 
       </p>
       <section>
-        <ul>
+        <ul
+          className={undefined}
+        >
           <div>
             Can we build 
             Image

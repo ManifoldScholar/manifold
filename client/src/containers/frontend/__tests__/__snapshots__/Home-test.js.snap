@@ -8,176 +8,11 @@ exports[`Frontend Home Container renders correctly 1`] = `
     }
   }
 >
-  <section>
-    <div
-      className="container"
-    >
-      <header
-        className="section-heading"
-      >
-        <div
-          className="main"
-        >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-lamp"
-          />
-          <div
-            className="body"
-          >
-            <h4
-              className="title"
-            >
-              Featured Projects
-            </h4>
-          </div>
-        </div>
-      </header>
-      <nav
-        className="project-list grid"
-      >
-        <ul>
-          <li>
-            <a
-              href="/projects/slug-1"
-              onClick={[Function]}
-            >
-              <figure
-                className="cover"
-              >
-                <div>
-                  <button
-                    className="screen-reader-text"
-                    onClick={[Function]}
-                  >
-                    add Rowan Test
-                  </button>
-                  <div
-                    aria-hidden="true"
-                    className="add project-cover-button-wrapper"
-                    onClick={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                    role="presentation"
-                  >
-                    <div
-                      aria-hidden="true"
-                      className="project-cover-button"
-                    >
-                      <div
-                        className="icons"
-                      >
-                        <i
-                          className="manicon manicon-minus-bold"
-                        />
-                        <i
-                          className="manicon manicon-check-bold"
-                        />
-                        <i
-                          className="manicon manicon-plus-bold"
-                        />
-                      </div>
-                      <span>
-                        <span
-                          className="action-text"
-                        >
-                          Follow
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </figure>
-              <div
-                className="meta"
-              >
-                <h3
-                  className="name"
-                >
-                  <span
-                    className="title-text"
-                  >
-                    Rowan Test
-                  </span>
-                </h3>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/projects/slug-2"
-              onClick={[Function]}
-            >
-              <figure
-                className="cover"
-              >
-                <div>
-                  <button
-                    className="screen-reader-text"
-                    onClick={[Function]}
-                  >
-                    add Rowan Test
-                  </button>
-                  <div
-                    aria-hidden="true"
-                    className="add project-cover-button-wrapper"
-                    onClick={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                    role="presentation"
-                  >
-                    <div
-                      aria-hidden="true"
-                      className="project-cover-button"
-                    >
-                      <div
-                        className="icons"
-                      >
-                        <i
-                          className="manicon manicon-minus-bold"
-                        />
-                        <i
-                          className="manicon manicon-check-bold"
-                        />
-                        <i
-                          className="manicon manicon-plus-bold"
-                        />
-                      </div>
-                      <span>
-                        <span
-                          className="action-text"
-                        >
-                          Follow
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </figure>
-              <div
-                className="meta"
-              >
-                <h3
-                  className="name"
-                >
-                  <span
-                    className="title-text"
-                  >
-                    Rowan Test
-                  </span>
-                </h3>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </section>
   <section
     className="bg-neutral05"
   >
     <div
-      className="container"
+      className="container project-list-container extra-top"
     >
       <header
         className="section-heading"
@@ -199,38 +34,11 @@ exports[`Frontend Home Container renders correctly 1`] = `
             </h4>
           </div>
         </div>
-        <div
-          className="utility right"
-        >
-          <div
-            className="select-browse"
-          >
-            <select
-              defaultValue="featured"
-              onChange={[Function]}
-            >
-              <option
-                value=""
-              >
-                Show All
-              </option>
-              <option
-                value="featured"
-              >
-                Featured Projects
-              </option>
-            </select>
-            <i
-              aria-hidden="true"
-              className="manicon manicon-caret-down"
-            />
-          </div>
-        </div>
       </header>
     </div>
   </section>
   <section
-    className="show-50"
+    className=""
   >
     <div
       className="container"
@@ -238,6 +46,19 @@ exports[`Frontend Home Container renders correctly 1`] = `
       <nav
         className="button-nav"
       >
+        <a
+          className="button-icon-primary"
+          href="/projects"
+          onClick={[Function]}
+        >
+          <span>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-books-on-shelf"
+            />
+            See All Projects
+          </span>
+        </a>
         <a
           className="button-icon-primary"
           href="/following"
@@ -248,7 +69,7 @@ exports[`Frontend Home Container renders correctly 1`] = `
               aria-hidden="true"
               className="manicon manicon-books-with-glasses"
             />
-            Projects You're Following 
+            Projects You’re Following
           </span>
         </a>
       </nav>

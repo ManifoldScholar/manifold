@@ -21,7 +21,6 @@ export class ProjectCollectionDetailContainer extends Component {
     const state = getState();
     const promises = [];
     const projectCollectionId = match.params.id;
-    console.log(match)
 
     if (!isEntityLoaded("projectCollections", projectCollectionId, state)) {
       const projectCollectionRequest = request(

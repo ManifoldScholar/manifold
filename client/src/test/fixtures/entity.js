@@ -70,6 +70,7 @@ const classAbilities = {
   annotation: { create: true, read: true },
   comment: { create: true, read: true },
   project: { create: true, read: true },
+  projectCollection: { create: true, read: true, update: true },
   permission: { create: true, read: true },
   resource: { create: true, read: true },
   settings: { create: true, read: true, update: true },
@@ -441,6 +442,26 @@ const defaults = {
     }
   },
 
+  projectCollection: {
+    type: "projectCollections",
+    attributes: {
+      title: "A Project Collection",
+      sortOrder: "manual",
+      manuallySorted: true,
+      smart: false,
+      featuredOnly: false,
+      numberOfProjects: null,
+      tagList: [],
+      icon: "lamp",
+      abilities
+    },
+    relationships: {
+      collectionProjects: [],
+      subjects: [],
+      projects: []
+    }
+  },
+
   version: {
     type: "versions",
     attributes: {
@@ -553,6 +574,10 @@ const page = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("page", id, attributes, relationships);
 };
 
+const projectCollection = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("projectCollection", id, attributes, relationships);
+};
+
 export default {
   defaults,
   project,
@@ -574,6 +599,7 @@ export default {
   subject,
   twitterQuery,
   permission,
+  projectCollection,
   version,
   page
 };

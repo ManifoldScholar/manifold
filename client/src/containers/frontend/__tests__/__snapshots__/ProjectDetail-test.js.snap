@@ -141,7 +141,7 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
         >
           <a
             className="button-icon-primary"
-            href="/"
+            href="/projects"
             onClick={[Function]}
           >
             <span>
@@ -149,7 +149,7 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
                 aria-hidden="true"
                 className="manicon manicon-books-on-shelf"
               />
-              See more projects
+              See All Projects
             </span>
           </a>
         </nav>

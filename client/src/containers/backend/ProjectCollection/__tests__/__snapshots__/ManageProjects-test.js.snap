@@ -1,0 +1,303 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.ProjectCollection.ManageProjects container renders correctly 1`] = `
+Array [
+  <header
+    className="drawer-header"
+  >
+    <h2
+      className="heading-quaternary less-space-bottom"
+    >
+      <i
+        aria-hidden="true"
+        className="manicon manicon-collection-manual"
+      />
+      A Project Collection
+    </h2>
+    <p
+      className="instructions"
+    >
+      Select which projects should be included in this collection. Click the plus sign to add a project to the collection. Click the checkmark to remove a project.
+    </p>
+  </header>,
+  <div
+    className="list-total extra-bottom"
+  >
+    You have added 
+    <span>
+      0
+    </span>
+     of 
+    <span>
+      2
+    </span>
+     available projects
+  </div>,
+  <div>
+    <form
+      className="form-search-filter"
+      onSubmit={[Function]}
+    >
+      <div
+        className="search"
+      >
+        <button>
+          <i
+            aria-hidden="true"
+            className="manicon manicon-magnify"
+          />
+          <span
+            className="screen-reader-text"
+          >
+            Search
+          </span>
+        </button>
+        <label
+          className="screen-reader-text"
+          htmlFor="list-search-1"
+        >
+          Enter Search Criteria
+        </label>
+        <input
+          id="list-search-1"
+          onChange={[Function]}
+          placeholder="Search..."
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="button-row"
+      >
+        <button
+          className="button-bare-primary reset"
+          onClick={[Function]}
+        >
+          Reset Search
+        </button>
+      </div>
+    </form>
+    <nav
+      className="project-list grid"
+    >
+      <div>
+        <section>
+          <ul
+            className={undefined}
+          >
+            <li>
+              <div
+                className="item-wrapper"
+              >
+                <figure
+                  className="cover"
+                >
+                  <div>
+                    <button
+                      className="screen-reader-text"
+                      onClick={[Function]}
+                    >
+                      Follow Rowan Test
+                    </button>
+                    <div
+                      aria-hidden="true"
+                      className="remove project-cover-button-wrapper"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="presentation"
+                    >
+                      <div
+                        aria-hidden="true"
+                        className="project-cover-button"
+                      >
+                        <div
+                          className="icons"
+                        >
+                          <i
+                            className="manicon manicon-minus-bold"
+                          />
+                          <i
+                            className="manicon manicon-check-bold"
+                          />
+                          <i
+                            className="manicon manicon-plus-bold"
+                          />
+                        </div>
+                        <span>
+                          <span
+                            className="action-text action-text-hide-immediately"
+                          >
+                            Exclude
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </figure>
+                <div
+                  className="meta"
+                >
+                  <h3
+                    className="name"
+                  >
+                    <span
+                      className="title-text"
+                    >
+                      Rowan Test
+                    </span>
+                  </h3>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div
+                className="item-wrapper"
+              >
+                <figure
+                  className="cover"
+                >
+                  <div>
+                    <button
+                      className="screen-reader-text"
+                      onClick={[Function]}
+                    >
+                      Follow Rowan Test
+                    </button>
+                    <div
+                      aria-hidden="true"
+                      className="remove project-cover-button-wrapper"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="presentation"
+                    >
+                      <div
+                        aria-hidden="true"
+                        className="project-cover-button"
+                      >
+                        <div
+                          className="icons"
+                        >
+                          <i
+                            className="manicon manicon-minus-bold"
+                          />
+                          <i
+                            className="manicon manicon-check-bold"
+                          />
+                          <i
+                            className="manicon manicon-plus-bold"
+                          />
+                        </div>
+                        <span>
+                          <span
+                            className="action-text action-text-hide-immediately"
+                          >
+                            Exclude
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </figure>
+                <div
+                  className="meta"
+                >
+                  <h3
+                    className="name"
+                  >
+                    <span
+                      className="title-text"
+                    >
+                      Rowan Test
+                    </span>
+                  </h3>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </nav>
+    <nav
+      className="list-pagination-primary"
+    >
+      <ul
+        className="compact"
+      >
+        <li
+          className="pagination-previous disabled"
+        >
+          <a
+            data-id="page-prev"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <i
+              aria-hidden="true"
+              className="manicon manicon-arrow-long-left"
+            />
+            <span
+              aria-hidden="true"
+            >
+              Prev
+            </span>
+            <span
+              className="screen-reader-text"
+            >
+              Previous Page
+            </span>
+          </a>
+        </li>
+        <li>
+          <span>
+            Page 
+            1
+             
+            /
+             
+            2
+          </span>
+        </li>
+        <li
+          className="pagination-next "
+        >
+          <a
+            data-id="page-next"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Next Page
+            </span>
+            <span
+              aria-hidden="true"
+            >
+              Next
+            </span>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-arrow-long-right"
+            />
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>,
+  <div
+    className="actions"
+  >
+    <button
+      className="button-icon-secondary"
+      onClick={[Function]}
+    >
+      Close
+      <i
+        className="manicon manicon-x"
+      />
+    </button>
+  </div>,
+]
+`;

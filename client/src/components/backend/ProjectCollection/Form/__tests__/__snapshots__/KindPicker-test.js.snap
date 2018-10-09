@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.ProjectCollection.Form.KindPicker component renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <div>
+    <span
+      className="screen-reader-text"
+    >
+      Select a collection kind between smart or manual.
+    </span>
+    <div
+      className="button-switch-primary"
+    >
+      <div
+        className="wrapper"
+        onClick={[Function]}
+        role="button"
+        tabIndex="0"
+      >
+        <div
+          className="button selected"
+        >
+          <i
+            aria-hidden="true"
+            className="manicon manicon-collection-manual"
+          />
+          Manual Collection
+        </div>
+        <div
+          className="button"
+        >
+          <i
+            aria-hidden="true"
+            className="manicon manicon-collection-smart"
+          />
+          Smart Collection
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
