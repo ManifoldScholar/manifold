@@ -30,13 +30,7 @@ module Api
       end
 
       def show
-        @scope_for_projects = Project.friendly.includes(
-          { texts: [:titles, :text_subjects] },
-          { collections: { resources: :tags } },
-          :events,
-          resources: :tags
-        )
-        @project = load_project
+        @project = scope_for_projects.find(params[:id])
         render_single_resource @project,
                                serializer: ProjectFullSerializer,
                                include: INCLUDES
@@ -63,7 +57,15 @@ module Api
       protected
 
       def scope_for_projects
-        Project.friendly
+        Project.friendly.includes(
+          { texts: [:titles, :text_subjects] },
+          { collections: { resources: :tags } },
+          :events,
+          :twitter_queries,
+          :text_categories,
+          :subjects,
+          resources: :tags
+        )
       end
 
       def scope_visibility
