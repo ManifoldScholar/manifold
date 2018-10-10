@@ -13,8 +13,7 @@ module Api
       end
 
       def show
-        @scope_for_pages = Page.friendly
-        @page = load_page
+        @page = Page.friendly.find(params[:id])
         render_single_resource @page,
                                serializer: PageFullSerializer
       end

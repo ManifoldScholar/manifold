@@ -17,7 +17,8 @@ module Api
 
       # GET /texts/1
       def show
-        @text = load_text
+        @text = scope_for_texts.includes(:project, :text_sections, :stylesheets)
+                               .find(params[:id])
         includes = INCLUDES + %w(category creators contributors stylesheets)
         render_single_resource @text,
                                serializer: TextFullSerializer,
