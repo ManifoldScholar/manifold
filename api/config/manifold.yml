@@ -128,7 +128,7 @@ common: &1
           :condition:
             :match: !ruby/regexp '/^(h1|h2|h3|h4|h5|h6)$/i'
             :type: "selector_tag"
-          :exclude: ['font-weight', 'size', 'font-size', 'line-height', 'margin', 'margin-top', 'margin-bottom', 'margin-left', 'margin-right', 'padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right', 'color']
+          :exclude: ['font-weight', 'size', 'font-size', 'line-height', 'margin', 'margin-top', 'margin-bottom', 'margin-left', 'margin-right', 'padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right']
         -
           :condition:
             :match: !ruby/regexp '/^(p)$/i'
