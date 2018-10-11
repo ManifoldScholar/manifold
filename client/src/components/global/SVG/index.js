@@ -1,8 +1,8 @@
-import BooksOnShelf from "./BooksOnShelf";
+import BooksOnShelfColor from "./BooksOnShelfColor";
 import Icon from "./Icon";
 
 export default {
-  BooksOnShelf,
+  BooksOnShelfColor,
   Icon
 };
 
