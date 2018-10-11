@@ -253,7 +253,7 @@ class Navigation {
       {
         label: "Features",
         route: "backendRecordsFeatures",
-        entity: "user",
+        entity: "feature",
         ability: "update"
       }
     ];
