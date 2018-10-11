@@ -194,6 +194,8 @@ module Validator
       hex_value = hex_color_value(value)
       rgb_value = ::Paleta::Color.new(:hex, hex_value).to_array(:rgb)
       rgb_value.all? { |c| c.between?(rgb_value[0].to_i - 5, rgb_value[0].to_i + 5) }
+    rescue Chroma::Errors::UnrecognizedColor
+      false
     end
 
     # Scopes a selector
