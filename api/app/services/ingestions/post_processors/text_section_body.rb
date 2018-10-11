@@ -1,6 +1,7 @@
 require "naught"
 require "pathname"
 require "uri"
+require "cgi"
 
 module Ingestions
   module PostProcessors
@@ -99,8 +100,8 @@ module Ingestions
                   source_path_map, section_source_map)
         new_uri = URI(input_uri)
         if !new_uri.path.blank? && !new_uri.scheme
-          new_path = epub_uri_to_app_uri(new_uri, cd_source_path,
-                                         source_path_map, section_source_map)
+          new_path = uri_to_app_uri(new_uri, cd_source_path,
+                                    source_path_map, section_source_map)
           new_uri.path = new_path if new_path
           # TODO: -  warn if you can't map.
         end
@@ -109,9 +110,9 @@ module Ingestions
         input_uri
       end
 
-      def epub_uri_to_app_uri(epub_uri, source_path,
-                              source_path_map, section_source_map)
-        abs_package_path = abs_package_path(epub_uri, source_path)
+      def uri_to_app_uri(uri, source_path,
+                         source_path_map, section_source_map)
+        abs_package_path = abs_package_path(uri, source_path)
         if section_source_map.key? abs_package_path
           section_id = section_source_map[abs_package_path].id
           "/read/#{text.id}/section/#{section_id}"
@@ -120,16 +121,23 @@ module Ingestions
         end
       end
 
-      def abs_package_path(epub_uri, source_path)
-        to_absolute_package_path(epub_uri, source_path)
+      def abs_package_path(uri, source_path)
+        to_absolute_package_path(uri, source_path)
       end
 
       # Path is the URI we're making absolute
       # Source_doc is the path of the document that the relative link appears in
       def to_absolute_package_path(path, source_doc_path)
         uri = URI(path)
-        return uri.path[1..-1] if uri.absolute? || uri.path.start_with?("/")
-        File.expand_path("/" + File.dirname(source_doc_path) + "/" + uri.path)[1..-1]
+        package_path = if uri.absolute? || uri.path.start_with?("/")
+                         uri.path[1..-1]
+                       else
+                         File.expand_path("/" +
+                                            File.dirname(source_doc_path) +
+                                            "/" +
+                                            uri.path)[1..-1]
+                       end
+        CGI.unescape package_path
       end
 
     end
