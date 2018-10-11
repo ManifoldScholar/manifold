@@ -69,7 +69,7 @@ export default class ProjectListPlaceholder extends Component {
             >
               {this.defaultMessage()}
             </HigherOrder.Authorize>
-            <SVG.BooksOnShelf />
+            <SVG.BooksOnShelfColor />
             <div className="button">
               <Link
                 to={lh.link("backendProjects")}
