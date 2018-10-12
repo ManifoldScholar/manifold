@@ -21,7 +21,7 @@ export class FormHasMany extends PureComponent {
     editClickHandler: PropTypes.func,
     fetch: PropTypes.func.isRequired,
     fetchOptions: PropTypes.object,
-    entities: PropTypes.array.isRequired,
+    entities: PropTypes.array,
     entityLabelAttribute: PropTypes.string.isRequired,
     entityAvatarAttribute: PropTypes.string,
     placeholder: PropTypes.string,
