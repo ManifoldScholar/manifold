@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import get from "lodash/get";
-import { Resource } from "components/frontend";
+import { Utility } from "components/global";
 
 export default class ResourceishThumbnail extends Component {
   static displayName = "Resourceish.Thumbnail";
@@ -81,7 +81,10 @@ export default class ResourceishThumbnail extends Component {
         out = (
           <i className={`icon-thumbnail-icon ${resourceish.attributes.kind}`}>
             {resourceish.attributes.kind ? (
-              <Resource.Icon.Composer kind={resourceish.attributes.kind} />
+              <Utility.IconComposer
+                icon={`resource-${resourceish.attributes.kind}`}
+                size={56}
+              />
             ) : null}
           </i>
         );
@@ -89,7 +92,7 @@ export default class ResourceishThumbnail extends Component {
       case "collections":
         out = (
           <i className={`icon-thumbnail-icon collection`}>
-            <Resource.Icon.Composer kind="collection" />
+            <Utility.IconComposer icon="resource-collection" size={56} />
           </i>
         );
         break;

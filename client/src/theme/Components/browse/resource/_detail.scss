@@ -34,7 +34,6 @@
     }
 
     .resource-icon {
-      max-width: 52px;
       padding-right: 14px;
 
       @include respond($break60) {
@@ -42,8 +41,6 @@
       }
 
       svg {
-        width: 100%;
-        height: auto;
         fill: $neutral50;
       }
     }
@@ -59,20 +56,13 @@
 
     .resource-icon {
       display: none;
-      max-width: 73px;
       padding-right: 18px;
 
       @include respond($break60) {
         display: inline-block;
       }
 
-      &.document, &.interactive, &.link, &.pdf {
-        max-width: 58px;
-      }
-
       svg {
-        width: 100%;
-        height: auto;
         fill: $neutral50;
       }
     }

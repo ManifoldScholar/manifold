@@ -142,16 +142,19 @@
 
     .manicon {
       display: block;
-      margin-bottom: 18px;
-      font-size: 80px;
+      margin-bottom: 4px;
       color: $neutral40;
 
-      @include respond($break50) {
-        font-size: 12.75vw;
-      }
+      svg {
+        @include respond($break50) {
+          width: 21.34vw;
+          height: 21.34vw;
+        }
 
-      @include respond($break120) {
-        font-size: 145px;
+        @include respond($break120) {
+          width: 220px;
+          height: 220px;
+        }
       }
     }
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Icon } from "components/global/SVG";
 
 export default class ResourceListSlideFigureLoading extends Component {
   static displayName = "ResourceList.Slide.Loading";
@@ -25,7 +26,9 @@ export default class ResourceListSlideFigureLoading extends Component {
           style={{ backgroundImage: "url(/static/images/resource-splash.png)" }}
         >
           <div className="resource-info">
-            <i className={`manicon manicon-resource-file`} aria-hidden="true" />
+            <i className="manicon" aria-hidden="true">
+              <Icon.ResourceFile size={120} />
+            </i>
             <span className="resource-type">{"loading"}</span>
             <span className="resource-date">{"loading"}</span>
           </div>

@@ -55,6 +55,7 @@
       display: flex;
       flex-direction: column;
       width: 100%;
+      text-align: center;
 
       figcaption {
         @include templateHead;
@@ -62,33 +63,11 @@
         font-size: 14px;
         font-weight: $medium;
         line-height: 1.2;
-        text-align: center;
         text-transform: uppercase;
       }
 
       .resource-icon {
-        display: flex;
-        flex-grow: 2;
-        width: 45%;
         margin: 0 auto;
-
-        @include respond($break90) {
-          width: 36%;
-        }
-
-        &.document, &.interactive, &.link, &.pdf {
-          max-width: 34%;
-
-          @include respond($break90) {
-            max-width: 25%;
-          }
-        }
-      }
-
-      svg {
-        width: 100%;
-        height: auto;
-        fill: $neutral50;
       }
     }
   }
