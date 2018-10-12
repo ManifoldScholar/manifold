@@ -123,14 +123,9 @@
       .icon-thumbnail-icon {
         display: flex;
 
-        &.document, &.interactive, &.link, &.pdf {
-          svg {
-            max-width: 20px;
-          }
-        }
-
         svg {
-          max-width: 30px;
+          width: 30px;
+          height: 30px;
           margin: auto;
           transition: fill $duration $timing;
         }

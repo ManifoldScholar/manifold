@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Resource } from "components/frontend";
-import Icon from "components/frontend/Resource/Icon";
+import { Utility } from "components/global";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 
@@ -45,7 +45,7 @@ export default class ResourceDetail extends PureComponent {
         <div className="container">
           <div className="resource-kind">
             <figure className={`resource-icon ${attr.kind}`}>
-              <Icon.Composer kind={attr.kind} />
+              <Utility.IconComposer icon={`resource-${attr.kind}`} size={50} />
             </figure>
           </div>
           <Resource.Title resource={resource} />

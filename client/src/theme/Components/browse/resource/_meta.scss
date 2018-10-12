@@ -1,7 +1,6 @@
 .resource-meta, .resource-meta-mobile {
   .resource-type {
     margin-bottom: 14px;
-    font-size: 40px;
     color: $neutral75;
 
     @include respond($break65) {

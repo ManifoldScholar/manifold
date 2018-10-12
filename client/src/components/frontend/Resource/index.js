@@ -1,7 +1,6 @@
 import Card from "./Card";
 import Detail from "./Detail";
 import Hero from "./Hero";
-import Icon from "./Icon";
 import Link from "./Link";
 import Meta from "./Meta";
 import Preview from "./Preview/Preview";
@@ -14,7 +13,6 @@ export default {
   Card,
   Detail,
   Hero,
-  Icon,
   Link,
   Meta,
   Preview,

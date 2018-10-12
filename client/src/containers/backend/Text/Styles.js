@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Dialog } from "components/backend";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { Resource } from "components/frontend";
+import { Icon } from "components/global/SVG";
 import FormattedDate from "components/global/FormattedDate";
 import { stylesheetsAPI, requests } from "api";
 import { notificationActions, entityStoreActions } from "actions";
@@ -136,7 +136,7 @@ export default class TextStylesContainer extends PureComponent {
                       >
                         <figure className="asset-image">
                           <div className="asset-image-placeholder">
-                            <Resource.Icon.Document />
+                            <Icon.ResourceDocument size={50} />
                           </div>
                         </figure>
                         <div className="asset-description">

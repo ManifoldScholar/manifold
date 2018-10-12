@@ -59,22 +59,15 @@
     }
 
     .icon-thumbnail-icon {
-      width: 27%;
-      padding: 14px 0 17px;
+      padding: 14px 0;
 
       svg {
-        max-height: 62.219px;
-
-        @include respond($break60) {
-          max-height: 49.672px;
-        }
-
-        @include respond($break75) {
-          max-height: 46.516px;
-        }
+        width: 64px;
+        height: 64px;
 
         @include respond($break90) {
-          max-height: 48.406px;
+          width: 48px;
+          height: 48px;
         }
       }
     }
@@ -105,10 +98,6 @@
     .icon-thumbnail-icon {
       width: 100%;
       padding: 0;
-
-      &.document, &.interactive, &.link, &.pdf {
-        max-width: 100%;
-      }
     }
   }
 
@@ -127,7 +116,8 @@
         height: 37px;
 
         svg {
-          max-width: 24px;
+          width: 24px;
+          height: 24px;
         }
       }
     }
@@ -175,18 +165,10 @@
       background-color: $neutral10;
 
       svg {
-        max-width: 30px;
+        width: 30px;
+        height: 30px;
         margin: auto;
       }
-
-      // &.document, &.interactive, &.link, &.pdf {
-      //   // OD
-      //   max-width: none;
-      //
-      //   svg {
-      //     max-width: 20px;
-      //   }
-      // }
     }
 
     .wrapper {
@@ -247,14 +229,10 @@
 
   .icon-thumbnail-icon {
     display: block;
-    width: 36%;
     padding: 18px 0 0;
     margin: 0 auto;
 
     svg {
-      width: 100%;
-      height: auto;
-      max-height: 55.797px;
       fill: $neutral70;
       transition: fill $duration $timing;
     }

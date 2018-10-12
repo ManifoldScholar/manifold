@@ -4,7 +4,7 @@ import { Resource } from "components/frontend";
 import filesize from "filesize";
 import pickBy from "lodash/pickBy";
 import isNull from "lodash/isNull";
-import { Meta } from "components/global";
+import { Meta, Utility } from "components/global";
 
 export default class ResourceMeta extends Component {
   static displayName = "Resource.Meta";
@@ -62,7 +62,7 @@ export default class ResourceMeta extends Component {
       <section className="resource-meta">
         {this.props.showIcon ? (
           <figure className="resource-type" aria-hidden="true">
-            <i className={`manicon manicon-resource-${attr.kind}`} />
+            <Utility.IconComposer icon={`resource-${attr.kind}`} size={48} />
           </figure>
         ) : null}
 

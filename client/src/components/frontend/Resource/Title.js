@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "components/global/FormattedDate";
-import Icon from "./Icon";
+import { Utility } from "components/global";
 
 export default class ResourceTitle extends Component {
   static displayName = "Resource.Title";
@@ -24,7 +24,7 @@ export default class ResourceTitle extends Component {
       <div className="resource-title">
         {this.props.showIcon ? (
           <figure className={`resource-icon ${attr.kind}`}>
-            <Icon.Composer kind={attr.kind} />
+            <Utility.IconComposer icon={`resource-${attr.kind}`} size={60} />
           </figure>
         ) : null}
         <div>

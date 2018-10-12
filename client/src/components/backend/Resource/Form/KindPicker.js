@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
 import classNames from "classnames";
-import { Resource } from "components/frontend";
+import { Utility } from "components/global";
 import setter from "components/backend/Form/setter";
 
 class KindPicker extends PureComponent {
@@ -55,7 +55,7 @@ class KindPicker extends PureComponent {
                     </span>
                   </figcaption>
                   <div className={`resource-icon ${safeKind}`}>
-                    <Resource.Icon.Composer kind={safeKind} />
+                    <Utility.IconComposer icon={`resource-${safeKind}`} />
                   </div>
                 </figure>
               </div>
