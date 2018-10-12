@@ -8,6 +8,7 @@ import { wrapWithRouter } from "test/helpers/routing";
 describe("Reader Reader Container", () => {
   const store = build.store();
   const text = build.entity.text("1");
+  const currentUser = build.entity.user("1");
   text.relationships.project = build.entity.project("3");
   const props = {
     text,
@@ -39,6 +40,13 @@ describe("Reader Reader Container", () => {
     },
     authentication: {}
   };
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: currentUser
+    }
+  });
 
   const component = renderer.create(
     wrapWithRouter(

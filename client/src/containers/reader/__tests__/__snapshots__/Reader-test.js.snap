@@ -64,6 +64,23 @@ exports[`Reader Reader Container renders correctly 1`] = `
             <ul>
               <li>
                 <button
+                  className="button-notes"
+                  data-id="toggle-notes"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-notepad"
+                  />
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Open the notes menu
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button
                   className="button-visibility"
                   data-id="toggle-visibility"
                   onClick={[Function]}
