@@ -1,3 +1,5 @@
+require "cgi"
+
 module Ingestions
   module PreProcessors
     class ExtractStylesheets < AbstractInteraction
@@ -122,11 +124,10 @@ module Ingestions
         path = if Pathname.new(file).absolute?
                  file
                else
-                 dirname = File.dirname(source_path)
-                 dirname == "." ? file : File.join(dirname, file)
+                 context.derelativize_ingestion_path source_path, file
                end
 
-        File.join(context.rel(context.source_root), path)
+        CGI.unescape File.join(context.rel(context.source_root), path)
       end
 
       def ingestion_source_path(node)
