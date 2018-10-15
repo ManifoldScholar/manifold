@@ -19,7 +19,12 @@ class LinkNode extends Component {
     if (!this.hasUri()) {
       return false;
     }
-    return URI.parse(this.props.attributes.href).protocol;
+
+    try {
+      return URI.parse(this.props.attributes.href).protocol;
+    } catch (e) {
+      return true;
+    }
   }
 
   adjustedAttributes() {
