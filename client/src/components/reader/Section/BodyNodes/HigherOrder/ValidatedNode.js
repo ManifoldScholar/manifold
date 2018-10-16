@@ -64,6 +64,7 @@ export default RenderComponent => {
         colspan: "colSpan",
         rowspan: "rowSpan",
         viewbox: "viewBox",
+        itemprop: "itemProp",
         preserveaspectratio: "preserveAspectRatio"
       };
       const mapped = mapKeys(attr, (attributeValue, attributeName) => {
