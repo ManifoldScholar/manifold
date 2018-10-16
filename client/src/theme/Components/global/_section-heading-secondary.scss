@@ -21,7 +21,8 @@
   }
 
   a {
-    color: $neutral50;
+    display: block;
+    color: $neutral30;
     text-decoration: none;
     transition: color $duration $timing;
 

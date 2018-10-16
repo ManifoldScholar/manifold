@@ -2,6 +2,7 @@
   @include utilityPrimary;
   font-size: 14px;
   color: $neutral50;
+  transition: color $duration $timing;
 
   .vertical-list-primary & {
     padding-bottom: 15px;

@@ -25,11 +25,6 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                   className="manicon manicon-stack"
                 />
                 Projects
-              </a>
-              <a
-                href="/backend/projects"
-                onClick={[Function]}
-              >
                 <span
                   className="list-total"
                 >

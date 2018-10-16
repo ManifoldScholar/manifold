@@ -167,8 +167,6 @@ export class DashboardsAdminContainer extends PureComponent {
                     <Link to={lh.link("backendProjects")}>
                       <i className="manicon manicon-stack" aria-hidden="true" />
                       {"Projects"}
-                    </Link>
-                    <Link to={lh.link("backendProjects")}>
                       {this.renderProjectCount()}
                     </Link>
                   </h3>
