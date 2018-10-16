@@ -31,10 +31,16 @@ module Ingestions
           memo = []
           entries = []
           current_depth = 0
+          last_entry_depth = nil
+          last_unadjusted_entry_depth = nil
           headers.each do |header|
             entry_depth = header_tag_depth(header.name)
+            unadjusted_entry_depth = entry_depth
             entry = entry_for_header(header)
             entry_depth = (current_depth + 1) if entry_depth > current_depth
+            entry_depth = current_depth if
+              unadjusted_entry_depth == last_unadjusted_entry_depth
+            entry_depth = 0 if last_entry_depth.nil?
             parent_depth = entry_depth - 1
             collection = if parent_depth != -1 && memo[parent_depth]
                            memo[parent_depth][:children]
@@ -44,6 +50,8 @@ module Ingestions
             collection << entry
             memo[entry_depth] = entry
             current_depth = entry_depth
+            last_entry_depth = entry_depth
+            last_unadjusted_entry_depth = unadjusted_entry_depth
           end
           entries
         end
