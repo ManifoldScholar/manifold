@@ -42,8 +42,8 @@ module Ingestions
                            entries
                          end
             collection << entry
-            memo[entry_depth] = entry
-            current_depth = entry_depth
+            current_depth = header_tag_depth(header.name)
+            memo[current_depth] = entry
           end
           entries
         end
