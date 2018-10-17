@@ -3,6 +3,8 @@
 module Attachments
   extend ActiveSupport::Concern
 
+  CONFIG = Rails.configuration.manifold.attachments.validations
+
   RATIO = 1.6
   SMALL = 320
   SMALL_REL = (SMALL / RATIO).to_i
@@ -14,46 +16,64 @@ module Attachments
   BASE_STYLES = {
     small: {
       geometry: "#{SMALL}x#{SMALL}",
-      format: :jpg
+      convert: "jpg",
+      background: "none",
+      gravity: "north"
     },
     small_square: {
-      geometry: "",
-      format: :jpg,
-      convert_options: "-background none -gravity north -thumbnail #{SMALL}x#{SMALL}^ -extent #{SMALL}x#{SMALL}"
+      convert: "jpg",
+      background: "none",
+      gravity: "north",
+      thumbnail: "#{SMALL}x#{SMALL}^",
+      extent: "#{SMALL}x#{SMALL}"
     },
     small_landscape: {
-      geometry: "",
-      format: :jpg,
-      convert_options: "-background none -gravity north -thumbnail #{SMALL}x#{SMALL_REL}^ -extent #{SMALL}x#{SMALL_REL}"
+      convert: "jpg",
+      background: "none",
+      gravity: "north",
+      thumbnail: "#{SMALL}x#{SMALL_REL}^",
+      extent: "#{SMALL}x#{SMALL_REL}"
     },
     small_portrait: {
-      geometry: "",
-      format: :jpg,
-      convert_options: "-background none -gravity north -thumbnail #{SMALL_REL}x#{SMALL}^ -extent #{SMALL_REL}x#{SMALL}"
+      convert: "jpg",
+      background: "none",
+      gravity: "north",
+      thumbnail: "#{SMALL_REL}x#{SMALL}^",
+      extent: "#{SMALL_REL}x#{SMALL}"
     },
     medium: {
       geometry: "#{MED}x#{MED}",
-      format: :jpg
+      convert: "jpg",
+      background: "none",
+      gravity: "north"
     },
     medium_square: {
-      geometry: "",
-      format: :jpg,
-      convert_options: "-background none -gravity north -thumbnail #{MED}x#{MED}^ -extent #{MED}x#{MED}"
+      convert: "jpg",
+      background: "none",
+      gravity: "north",
+      thumbnail: "#{MED}x#{MED}^",
+      extent: "#{MED}x#{MED}"
     },
     medium_landscape: {
-      geometry: "",
-      format: :jpg,
-      convert_options: "-background none -gravity north -thumbnail #{MED}x#{MED_REL}^ -extent #{MED}x#{MED_REL}"
+      convert: "jpg",
+      background: "none",
+      gravity: "north",
+      thumbnail: "#{MED}x#{MED_REL}^",
+      extent: "#{MED}x#{MED_REL}"
     },
     medium_portrait: {
-      geometry: "",
-      format: :jpg,
-      convert_options: "-background none -gravity north -thumbnail #{MED / 1.6}x#{MED}^ -extent #{MED_REL}"
+      convert: "jpg",
+      background: "none",
+      gravity: "north",
+      thumbnail: "#{MED / 1.6}x#{MED}^",
+      extent: MED_REL.to_s
     },
     large_landscape: {
-      geometry: "",
-      format: :jpg,
-      convert_options: "-background none -gravity north -thumbnail #{LRG}x#{LRG / 1.6}^ -extent #{LRG}x#{LRG / 1.6}"
+      convert: "jpg",
+      background: "none",
+      gravity: "north",
+      thumbnail: "#{LRG}x#{LRG / 1.6}^",
+      extent: "#{LRG}x#{LRG / 1.6}^"
     }
   }.freeze
 
@@ -72,135 +92,148 @@ module Attachments
     # can_process_avatar?
     # It also adds a before processing callback for Paperclip to process the variants if,
     # and only if the attachment is processable.
-    def manifold_has_attached_file(field, type, styles: {}, no_styles: false, validate_content_type: true)
+
+    def attachment_options
+      @attachment_options ||= {}
+    end
+
+    def manifold_has_attached_file(field, type, no_styles: false, validate_content_type: true)
       # Create the style
 
-      has_attached_file(
-        field,
-        styles: ->(a) { a.instance.send("#{field}_style_configuration", styles, no_styles) }
-      )
+      include AttachmentUploader::Attachment.new(field)
+
+      attachment_options[field] = { type: type,
+                                    no_styles: no_styles,
+                                    validate_content_type: validate_content_type }
 
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
-  
-        validates_attachment_content_type(
-          :#{field}, 
-          content_type: Rails.configuration.manifold.attachments.validations.#{type}.allowed_mime
-        ) if #{validate_content_type}
-  
-        validates_attachment_file_name(
-          :#{field}, 
-          matches: Rails.configuration.manifold.attachments.validations.#{type}.allowed_ext
-        )
-  
-        before_#{field}_post_process :can_process_#{field}_styles?
-        after_#{field}_post_process :update_#{field}_meta
-    
+      
         def manifold_attachment_image_styles
           return BASE_STYLES
         end
 
         def manifold_attachment_alpha_styles
           BASE_STYLES.transform_values do |base_style|
-            base_style.merge(format: :png)
+            base_style.merge(convert: "png")
           end
         end
 
-        def #{field}_style_configuration(additional_styles = {}, no_styles = false)
-          return {} if no_styles
-          return manifold_attachment_alpha_styles if #{field}_is_pdf? ||
-                                                       #{field}_extension == "png" ||
-                                                       #{field}_extension == "gif"
-          manifold_attachment_image_styles
-          # Debugger.add_breakpoint(__FILE__, __LINE__ + 1)
-        end
-
-        def #{field}_url
-          return nil unless #{field}.present?
-          (Rails.configuration.manifold.api_url || "") + #{field}.url
+        def #{field}_versions?
+          #{field}.is_a? Hash
         end
   
         def #{field}_extension
-          File.extname(#{field}_file_name).delete(".").downcase if #{field}.present?
+          #{field}_original(&:extension)
         end
 
-        def update_#{field}_meta
-          return unless has_attribute?("#{field}_meta")
-          meta = {}
-          tempfile = #{field}.queued_for_write[:original]
-          if tempfile
-            geometry = Paperclip::Geometry.from_file(tempfile)
-            dimensions = {height: geometry.height.to_i, width: geometry.width.to_i}
-            meta[:original] = dimensions
+        def #{field}_file_name
+          #{field}_original(&:original_filename)
+        end
+
+        def #{field}?
+          #{field}.present?
+        end
+
+        def #{field}_url
+          #{field}_original(&:url)
+        end
+
+        def #{field}_content_type
+          #{field}_original(&:mime_type)
+        end
+
+        def #{field}_file_size
+          #{field}_original(&:size)
+        end
+
+        def #{field}_original
+          return nil unless #{field}?
+        
+          original =
+            if #{field}_attacher.cached?
+              #{field}
+            elsif #{field}_attacher.stored?
+              #{field}[:original]
+            end
+        
+          block_given? ? yield(original) : original
+        end
+
+        def #{field}_meta
+          return {} unless #{field}?
+          versions = BASE_STYLES.keys.map do |version|
+            if #{field}_data&.key? version.to_s
+              value = { width: #{field}[version].width, height: #{field}[version].height }
+            else 
+              value = nil
+            end
+            [version, value]
           end
-          self.#{field}_meta = meta
+          original = #{field}_original
+          versions.push([:original, { width: original.width, height: original.height }])
+          Hash[versions]
         end
   
         def #{field}_styles
-          styles = #{field}.styles.keys.map do |style|
-            if #{field}.url(style).present? && can_process_#{field}_styles?
-              value = (Rails.configuration.manifold.api_url || "") + #{field}.url(style)
+          styles = BASE_STYLES.keys.map do |style|
+            if #{field}_data&.key? style.to_s
+              value = #{field}[style].url
             else 
               value = nil
             end
             [style, value]
           end
-          styles.push([:original, #{field}_url])
+          styles.push([:original, #{field}_original&.url])
           Hash[styles]
         end
   
         def #{field}_is_image?
-          return false unless #{field}.present?
-          config = Rails.configuration.manifold.attachments.validations
-          !#{field}_content_type.match(Regexp.union(config[:image][:allowed_mime])).nil?
-          !#{field}_extension.match(Regexp.union(config[:image][:allowed_ext])).nil?
+          return false unless #{field}?
+          attachment = #{field}_original
+          !attachment.mime_type.match(Regexp.union(CONFIG[:image][:allowed_mime])).nil?
+          !attachment.extension.match(Regexp.union(CONFIG[:image][:allowed_ext])).nil?
         end
 
         def #{field}_is_video?
-          return false unless #{field}.present?
-          config = Rails.configuration.manifold.attachments.validations
-          !#{field}_content_type.match(Regexp.union(config[:video][:allowed_mime])).nil?  
-          !#{field}_extension.match(Regexp.union(config[:video][:allowed_ext])).nil?
+          return false unless #{field}?
+          attachment = #{field}_original
+          !attachment.mime_type.match(Regexp.union(CONFIG[:video][:allowed_mime])).nil?  
+          !attachment.extension.match(Regexp.union(CONFIG[:video][:allowed_ext])).nil?
         end
       
         def #{field}_is_audio?
-          return false unless #{field}.present?
-          config = Rails.configuration.manifold.attachments.validations
-          !#{field}_content_type.match(Regexp.union(config[:audio][:allowed_mime])).nil?  
-          !#{field}_extension.match(Regexp.union(config[:audio][:allowed_ext])).nil?
+          return false unless #{field}?
+          attachment = #{field}_original
+          !attachment.mime_type.match(Regexp.union(CONFIG[:audio][:allowed_mime])).nil?  
+          !attachment.extension.match(Regexp.union(CONFIG[:audio][:allowed_ext])).nil?
         end
       
         def #{field}_is_spreadsheet?
-          return false unless #{field}.present?
-          config = Rails.configuration.manifold.attachments.validations
-          !#{field}_content_type.match(Regexp.union(config[:spreadsheet][:allowed_mime])).nil?  
-          !#{field}_extension.match(Regexp.union(config[:spreadsheet][:allowed_ext])).nil?
+          return false unless #{field}?
+          attachment = #{field}_original
+          !attachment.mime_type.match(Regexp.union(CONFIG[:spreadsheet][:allowed_mime])).nil?  
+          !attachment.extension.match(Regexp.union(CONFIG[:spreadsheet][:allowed_ext])).nil?
         end
       
         def #{field}_is_text_document?
-          return false unless #{field}.present?
-          config = Rails.configuration.manifold.attachments.validations
-          !#{field}_content_type.match(Regexp.union(config[:text_document][:allowed_mime])).nil?  
-          !#{field}_extension.match(Regexp.union(config[:text_document][:allowed_ext])).nil?
+          return false unless #{field}?
+          attachment = #{field}_original
+          !attachment.mime_type.match(Regexp.union(CONFIG[:text_document][:allowed_mime])).nil?  
+          !attachment.extension.match(Regexp.union(CONFIG[:text_document][:allowed_ext])).nil?
         end
       
         def #{field}_is_presentation?
-          return false unless #{field}.present?
-          config = Rails.configuration.manifold.attachments.validations
-          !#{field}_content_type.match(Regexp.union(config[:presentation][:allowed_mime])).nil?  
-          !#{field}_extension.match(Regexp.union(config[:presentation][:allowed_ext])).nil?
+          return false unless #{field}?
+          attachment = #{field}_original
+          !attachment.mime_type.match(Regexp.union(CONFIG[:presentation][:allowed_mime])).nil?  
+          !attachment.extension.match(Regexp.union(CONFIG[:presentation][:allowed_ext])).nil?
         end
       
         def #{field}_is_pdf?
           return false unless #{field}.present?
-          config = Rails.configuration.manifold.attachments.validations
-          !#{field}_content_type.match(Regexp.union(config[:pdf][:allowed_mime])).nil?  
-          !#{field}_extension.match(Regexp.union(config[:pdf][:allowed_ext])).nil?
-        end
-  
-        def can_process_#{field}_styles?
-          return false if Rails.env.test?
-          return false if #{field}.size > 200000000
-          (#{field}_is_image? || #{field}_is_pdf?)
+          attachment = #{field}_original
+          !attachment.mime_type.match(Regexp.union(CONFIG[:pdf][:allowed_mime])).nil?  
+          !attachment.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
         end
 
       RUBY

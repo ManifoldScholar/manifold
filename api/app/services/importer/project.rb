@@ -57,7 +57,7 @@ module Importer
       project.save if project.new_record?
       project.update(@project_json[:attributes])
       assign_project_attachments(project)
-      excludes = %w(cover_ avatar_ hero_)
+      excludes = %w(cover_ avatar_ hero_ published_text_attachment_)
       excludes << "published_text_id" unless include_texts
       unset_untouched(project, @project_json[:attributes], excludes)
       raise "Invalid project: #{project.errors.full_messages}" unless project.valid?
@@ -187,7 +187,7 @@ module Importer
 
     def set_attachment(model, key, value)
       if value.blank?
-        model.send(key.to_s).clear
+        model.send("#{key}=", nil)
       else
         model.send("#{key}=", open_file(value))
       end

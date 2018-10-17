@@ -337,6 +337,7 @@ common: &1
           - application/x-tex
           - text/x-tex
           - text/csv
+          - text/html
           - text/plain
           - audio
           - video/x-flv
@@ -348,6 +349,7 @@ common: &1
           - image/jpg
           - image/gif
           - image/png
+          - image/svg+xml
         :allowed_ext:
           # Image
           - gif

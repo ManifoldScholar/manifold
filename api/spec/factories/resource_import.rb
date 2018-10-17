@@ -24,6 +24,5 @@ FactoryBot.define do
       data nil
       url "https://docs.google.com/spreadsheets/d/1cTWJ_lZdxQKs9LJOn_PrUADfTpWD8TBpSkxfl4i-20o/edit?usp=sharing"
     end
-
   end
 end

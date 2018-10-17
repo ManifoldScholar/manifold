@@ -38,6 +38,7 @@ gem "google_drive", "~> 2.0"
 gem "has_scope", "~> 0.7.0"
 gem "hashie", "~> 3.0"
 gem "httparty", "~> 0.15.0"
+gem "image_processing", "~> 1.0"
 gem "kaminari", "~> 1.0"
 gem "marcel", "~> 0.3.2"
 gem "memoist", "~> 0.16.0"
@@ -114,4 +115,5 @@ end
 
 group :test do
   gem "database_cleaner", "~> 1.0"
+  gem "with_model", "~> 2.1"
 end

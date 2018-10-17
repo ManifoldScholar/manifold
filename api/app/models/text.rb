@@ -174,7 +174,7 @@ class Text < ApplicationRecord
   def source_path_map
     map = {}
     ingestion_sources.each do |s|
-      map[s.source_path] = s.attachment.url
+      map[s.source_path] = s.attachment_url
     end
     map
   end

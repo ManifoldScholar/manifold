@@ -88,9 +88,9 @@ module Updaters
     params = attributes.extract!(key)[key]
     return nil if params.nil?
     data, filename = params.values_at(:data, :filename)
-    attachment = Paperclip.io_adapters.for(data)
-    attachment.original_filename = filename
-    attachment
+    Shrine.data_uri(data).tap do |data_file|
+      data_file.original_filename = filename
+    end
   end
 
   # rubocop:disable Metrics/CyclomaticComplexity

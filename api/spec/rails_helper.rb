@@ -5,11 +5,11 @@ require "spec_helper"
 require File.expand_path("../../config/environment", __FILE__)
 
 require "rspec/rails"
-require "paperclip/matchers"
 require "webmock/rspec"
 require "database_cleaner"
 require 'closure_tree/test/matcher'
 require "scanf"
+require "with_model"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -32,8 +32,8 @@ Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  config.include Paperclip::Shoulda::Matchers
   config.include TestHelpers
+  config.extend WithModel
 
   config.alias_it_should_behave_like_to :the_subject_behaves_like, 'the subject\'s'
 

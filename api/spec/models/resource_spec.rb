@@ -107,8 +107,6 @@ RSpec.describe Resource, type: :model do
     end
   end
 
-  it { is_expected.to have_attached_file(:attachment) }
-
   context "can be filtered" do
 
     before(:each) do

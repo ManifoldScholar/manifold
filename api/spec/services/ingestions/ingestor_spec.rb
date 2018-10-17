@@ -1,5 +1,6 @@
 require "rails_helper"
 
+# TODO: Adjust ingestor to validate text and check ingestor outcome here.
 RSpec.describe Ingestions::Ingestor do
   describe "EPUB ingestion" do
     context "when V3" do

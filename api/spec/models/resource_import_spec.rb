@@ -1,4 +1,5 @@
 require "rails_helper"
+include ActiveJob::TestHelper
 
 RSpec.shared_examples "after importing" do
 
@@ -97,7 +98,10 @@ RSpec.describe ResourceImport, type: :model, slow: true do
   include_context "resource import"
 
   let(:resource_import) {
-    FactoryBot.create(:resource_import)
+    perform_enqueued_jobs do
+      ri = FactoryBot.create(:resource_import)
+      ri.reload
+    end
   }
 
   let(:google_resource_import) {
@@ -105,7 +109,10 @@ RSpec.describe ResourceImport, type: :model, slow: true do
   }
 
   let(:csv_resource_import) {
-    FactoryBot.create(:resource_import_csv)
+    perform_enqueued_jobs do
+      ri = FactoryBot.create(:resource_import_csv)
+      ri.reload
+    end
   }
 
   let(:parsing_google_resource_import) {

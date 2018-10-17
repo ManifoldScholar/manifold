@@ -44,20 +44,6 @@ RSpec.describe Project, type: :model do
     expect(project.contributors.length).to be 2
   end
 
-  it "has a cover attachment" do
-    is_expected.to have_attached_file(:cover)
-  end
-
-  it "does not require a cover" do
-    is_expected.to_not validate_attachment_presence(:cover)
-  end
-
-  it "validates the cover attachment type" do
-    is_expected.to validate_attachment_content_type(:cover)
-      .allowing("image/png", "image/gif", "image/jpg", "image/jpeg", "image/svg+xml")
-      .rejecting("text/plain", "text/xml")
-  end
-
   it "is valid with a creator" do
     creator = FactoryBot.create(:user)
     project = FactoryBot.create(:project, creator: creator)
