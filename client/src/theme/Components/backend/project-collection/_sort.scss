@@ -1,0 +1,65 @@
+.project-collection-sort.form-flex {
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  @include respond($break60) {
+    margin-bottom: 0;
+  }
+
+  @include respond($break75) {
+    margin-bottom: 20px;
+  }
+
+  // scope .form-list-fiter styles
+  .form-list-filter {
+    padding-bottom: 0;
+
+    .instructional-copy {
+      @include formInstructions;
+      color: $neutral50;
+    }
+
+    .select-group {
+      margin-bottom: 20px;
+
+      @include respond($break60) {
+        flex: 0 1 auto;
+      }
+
+      label {
+        font-size: 14px;
+      }
+
+      .select {
+        min-width: 260px;
+      }
+    }
+  }
+
+  // scope .form-secondary styles
+  .form-secondary {
+    margin-top: 0;
+
+    .form-input {
+      display: flex;
+      justify-content: space-between;
+
+      @include respond($break60) {
+        justify-content: flex-end;
+        margin-bottom: 20px;
+      }
+
+      .form-input-heading {
+        margin-right: 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        color: $neutral50;
+        letter-spacing: 0.075em;
+      }
+
+      .toggle-indicator {
+        display: inline-block;
+      }
+    }
+  }
+}

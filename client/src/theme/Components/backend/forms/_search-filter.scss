@@ -2,6 +2,10 @@
   .search {
     position: relative;
 
+    + .form-list-filter {
+      padding: 25px 0 0;
+    }
+
     button {
       @include buttonUnstyled;
       position: absolute;
@@ -42,8 +46,6 @@
   }
 
   .form-list-filter {
-    padding: 25px 0 0;
-
     @include respond($break90) {
       justify-content: flex-start;
     }

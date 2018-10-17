@@ -1,0 +1,114 @@
+.project-collection-list {
+  &.aside-wide {
+    display: block;
+
+    @include respond(#{$break75 - 1}, max) {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+
+  .orderable-list-item + .orderable-list-item {
+    margin-top: 10px;
+  }
+
+  .actions {
+    margin-top: 18px;
+    margin-bottom: 18px;
+    margin-left: 0;
+
+    @include respond($break75) {
+      margin-top: 37px;
+      margin-bottom: 25px;
+    }
+
+    @include respond($break95) {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .button-icon-secondary {
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  .instructional-copy {
+    @include formInstructions;
+    color: $neutral50;
+  }
+}
+
+.project-collection-list-item {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 10px 11px 20px;
+  color: $neutral50;
+  cursor: pointer;
+  background-color: $neutral95;
+  border-radius: 5px;
+  transition:
+    color $duration $timing,
+    background-color $duration $timing;
+
+  &.selected {
+    color: $neutral95;
+    background-color: $accentPrimary;
+
+    .icon-group > i:hover {
+      color: $neutral75;
+    }
+  }
+
+  .item-text {
+    @include templateHead;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  > .item-text {
+    padding: 3px 0;
+    margin-right: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .icon-group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+
+    > .item-text {
+      padding-bottom: 2px;
+      margin-right: 5px;
+    }
+
+    > i {
+      margin-left: 6px;
+      transition: color $duration $timing;
+
+      &.visible {
+        > svg.eye-closed {
+          display: none;
+        }
+      }
+
+      &.hidden {
+        > svg.eye-open {
+          display: none;
+        }
+      }
+
+      &:hover {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  .drag-handle {
+    cursor: grab;
+  }
+}

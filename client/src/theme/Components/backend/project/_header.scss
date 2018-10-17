@@ -20,7 +20,7 @@
     }
   }
 
-  button {
+  button, a {
     font-size: 0;
 
     @include respond($break40) {
@@ -31,7 +31,7 @@
       font-size: 16px;
     }
 
-    + button {
+    + button, + a {
       margin-left: 15px;
 
       @include respond($break60) {
@@ -87,7 +87,6 @@
       }
     }
 
-
     .manicon-trashcan {
       font-size: 16px;
       color: $sp40Tertiary;
@@ -98,22 +97,47 @@
       }
     }
 
+    .manicon-settings {
+      font-size: 16px;
+
+      @include respond($break40) {
+        margin-top: -0.25em;
+        font-size: 1.333em;
+      }
+    }
+
+    .manicon-stack {
+      font-size: 16px;
+
+      @include respond($break40) {
+        margin-top: -0.25em;
+        font-size: 1.333em;
+      }
+    }
   }
 }
 
 .entity-header-primary {
-  display: table;
+  display: flex;
   padding-bottom: 20px;
+  margin-top: -5px;
 
   @include respond($break65) {
+    padding-bottom: 25px;
+    margin-top: 0;
+  }
+
+  &.instructional {
+    @include templateHead;
+    justify-content: center;
+    padding: 22px 5% 50px;
+    font-weight: $semibold;
+    color: $neutral30;
   }
 
   figure {
-    display: table-cell;
-    width: auto;
+    padding-top: 2px;
     padding-right: 16px;
-    margin-bottom: 15px;
-    vertical-align: top;
 
     @include respond($break65) {
       padding-right: 36px;
@@ -127,12 +151,31 @@
         font-size: 64px;
       }
     }
+
+    [class*='manicon-collection-'] {
+      @include panelRounded;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      margin-left: -4.5%;
+      font-size: 32px;
+      color: $accentPrimary;
+      background-color: $neutral90;
+
+      @include respond($break65) {
+        width: 64px;
+        height: 64px;
+        margin-right: -6px;
+        font-size: 34px;
+      }
+    }
   }
 
   .title {
-    display: table-cell;
+    flex-grow: 1;
     width: 100%;
-    vertical-align: top;
 
     h1, h2, h3, h4, h5, h6 {
       @include templateHead;

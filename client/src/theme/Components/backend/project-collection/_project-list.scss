@@ -1,0 +1,97 @@
+// .project-list styles scoped for backend Project Collections
+.project-list.grid {
+  .project-collections & {
+    margin-right: 0;
+
+    li {
+      @include respond($break75) {
+        flex: 1 1 33.333%;
+        max-width: 33.333%;
+      }
+
+      @include respond($break90) {
+        flex-basis: 25%;
+        max-width: 25%;
+      }
+    }
+  }
+
+  .project-collections .drawer-backend.flexible & {
+    @include respond($break95 * (4 / 3)) {
+      width: 807px;
+    }
+  }
+}
+
+// single projects while being reordered
+// requires styles to be re-created, since not nested in list while dragging
+.project-collection-grid-item.orderable-list-item.dragging {
+  .item-wrapper {
+    @include projectGridItem;
+    @include panelRounded;
+    background-color: $neutral95;
+
+    .name {
+      .title-text {
+        color: $neutral20;
+      }
+    }
+
+    .relations-list {
+      padding-top: 0.389em;
+      font-size: 14px;
+      color: $neutral40;
+    }
+
+    .label {
+      @include utilityPrimary;
+      padding-top: 15px;
+      font-size: 14px;
+      color: $neutral75;
+      white-space: nowrap;
+      vertical-align: top;
+      transition: color $duration $timing;
+    }
+
+    @include respond($break75, max) {
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: -15px;
+      margin-left: -15px;
+
+      figure img {
+        border-color: $accentPrimary;
+      }
+
+      figure svg {
+        fill: $accentPrimary;
+      }
+
+      .title-text, .label {
+        color: $accentPrimary;
+      }
+    }
+
+    @include respond($break75) {
+      padding: 20px 24px;
+      box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
+
+      .cover {
+        height: 120px;
+
+        svg {
+          max-width: 100px;
+          max-height: 110px;
+        }
+      }
+
+      .relations-list {
+        padding-top: 0.571em;
+      }
+
+      .label {
+        padding-top: 15px;
+      }
+    }
+  }
+}

@@ -163,14 +163,10 @@
       position: absolute;
       top: 50%;
       right: 13px;
-      margin-top: 1px;
+      margin-top: -3px;
       font-size: 8px;
       color: $accentPrimary;
       pointer-events: none;
-
-      @include respond($break75) {
-        margin-top: -3px;
-      }
 
       // Use native dropdown arrow in IE9
       .ie9 & {

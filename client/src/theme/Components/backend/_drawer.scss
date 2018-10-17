@@ -27,6 +27,11 @@
   @include respond($break65) {
     width: 400px;
 
+    &.flexible {
+      width: 100%;
+      padding: 33px 48px;
+    }
+
     .drawer-enter & {
       right: -400px;
     }
@@ -39,6 +44,11 @@
 
   @include respond($break75) {
     top: 80px;
+
+    &.flexible {
+      width: auto;
+      max-width: 75%;
+    }
   }
 
   @include respond($break90) {
@@ -49,6 +59,10 @@
       width: 750px;
     }
 
+    &.flexible {
+      padding: 33px 156px 66px 98px;
+    }
+
     .drawer-enter & {
       right: -555px;
     }
@@ -56,6 +70,12 @@
     .drawer-leave.drawer-leave-active & {
       right: -555px;
       transition: right $duration $timing;
+    }
+  }
+
+  @include respond($break95 * (4 / 3)) {
+    &.flexible {
+      max-width: 1024px;
     }
   }
 
@@ -120,6 +140,17 @@
       padding: 5px 0;
       color: $neutralWhite;
     }
+
+    .instructions {
+      @include templateCopy;
+      display: block;
+      padding-top: 12px;
+      margin-bottom: 0;
+      font-size: 17px;
+      font-style: italic;
+      color: $neutral50;
+      text-transform: none;
+    }
   }
 
   .heading-quaternary {
@@ -182,8 +213,8 @@
       padding-top: 1.125em;
       padding-bottom: 1.375em;
       margin: 0;
-      text-align: center;
       font-size: 12px;
+      text-align: center;
 
       .manicon-x {
         margin-left: 13px;

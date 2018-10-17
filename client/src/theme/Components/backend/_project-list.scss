@@ -6,7 +6,31 @@
       border-color: $neutral80;
     }
 
-    a {
+    a, .item-wrapper {
+      .name {
+        .title-text {
+          color: $neutral20;
+        }
+      }
+
+      .relations-list {
+        padding-top: 0.389em;
+        font-size: 14px;
+        color: $neutral40;
+      }
+
+      .label {
+        @include utilityPrimary;
+        padding-top: 15px;
+        font-size: 14px;
+        color: $neutral75;
+        white-space: nowrap;
+        vertical-align: top;
+        transition: color $duration $timing;
+      }
+    }
+
+    a, .orderable-list-item .item-wrapper {
       &:hover, &:focus {
         .title-text, .label {
           color: $accentPrimary;
@@ -14,38 +38,38 @@
       }
     }
 
-    .name {
-      .title-text {
-        color: $neutral20;
-      }
-    }
-
-    .relations-list {
-      padding-top: 0.389em;
-      font-size: 14px;
-      color: $neutral40;
-    }
-
-    .label {
-      @include utilityPrimary;
-      padding-top: 15px;
-      font-size: 14px;
-      color: $neutral75;
-      white-space: nowrap;
-      vertical-align: top;
-      transition: color $duration $timing;
-    }
-
     // Backend grid-style list
     &.grid {
+      + .list-pagination-primary,
       + .list-pagination-secondary {
         margin-top: 24px;
       }
 
       @include respond($break75) {
-        a {
+        a, .item-wrapper {
           padding: 20px 24px;
 
+          .cover {
+            height: 120px;
+
+            // stylelint-disable max-nesting-depth
+            svg {
+              max-width: 100px;
+              max-height: 110px;
+            }
+            // stylelint-enable  max-nesting-depth
+          }
+
+          .relations-list {
+            padding-top: 0.571em;
+          }
+
+          .label {
+            padding-top: 15px;
+          }
+        }
+
+        a, .orderable-list-item .item-wrapper {
           &:hover, &:focus {
             box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
 
@@ -55,23 +79,6 @@
             }
             // stylelint-enable max-nesting-depth
           }
-        }
-
-        .cover {
-          height: 120px;
-
-          svg {
-            max-width: 100px;
-            max-height: 110px;
-          }
-        }
-
-        .relations-list {
-          padding-top: 0.571em;
-        }
-
-        .label {
-          padding-top: 15px;
         }
       }
 

@@ -3,6 +3,11 @@
 
   .wrapper {
     display: flex;
+
+    &:focus {
+      border: none;
+      outline: 1px dotted rgb(154, 154, 154);
+    }
   }
 
   .button {
