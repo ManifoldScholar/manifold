@@ -152,10 +152,9 @@ export class ProjectWrapperContainer extends PureComponent {
             utility={this.renderUtility(project)}
             secondaryLinks={secondaryLinks}
           />
-          <Layout.BackendPanel>
-            <Utility.SkipLink skipId={skipId} />
-            <Navigation.Secondary links={secondaryLinks} panel />
-            <div id={skipId} className="panel">
+          <Layout.BackendPanel sidebar={<Navigation.Secondary links={secondaryLinks} panel />}>
+            <Utility.SkipLink skipId={skipId}  />
+            <div id={skipId}>
               {this.renderRoutes()}
             </div>
           </Layout.BackendPanel>

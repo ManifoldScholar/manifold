@@ -1,24 +1,16 @@
 .backend-dashboard {
   @include clearfix;
+  display: flex;
+  flex-direction: column;
   padding-top: 0;
 
   @include respond($break75) {
-    margin-left: -7.6vw;
-  }
-
-  @include respond($containerWidthFull) {
-    margin-left: -95px;
+    flex-direction: row;
   }
 
   .left, .right {
     @include respond($break75) {
-      float: left;
-      width: 50%;
-      padding-left: 7.6vw;
-    }
-
-    @include respond($containerWidthFull) {
-      padding-left: 95px;
+      flex: 1;
     }
 
     // Pad dashboard sections
@@ -35,7 +27,12 @@
     }
 
     @include respond($break75) {
+      padding-left: 7.6vw;
       margin-top: 0;
+    }
+
+    @include respond($containerWidthFull) {
+      padding-left: 95px;
     }
   }
 }
