@@ -62,33 +62,14 @@ exports[`Backend Collection New Container renders correctly 1`] = `
     <div
       className="container"
     >
-      <div>
-        <form
-          className="form-secondary"
-          data-id="submit"
-          onSubmit={[Function]}
-        >
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className=""
-              htmlFor="attributes[title]-text-input-1"
-            >
-              Title
-            </label>
-            <input
-              aria-describedby="attributes[title]-text-input-1"
-              id="attributes[title]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter a title"
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="form-input"
+      <div
+        className="panel"
+      >
+        <div>
+          <form
+            className="form-secondary"
+            data-id="submit"
+            onSubmit={[Function]}
           >
             <div
               className="form-input"
@@ -96,107 +77,130 @@ exports[`Backend Collection New Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="textarea-1"
+                htmlFor="attributes[title]-text-input-1"
               >
-                Description
+                Title
               </label>
-              <textarea
-                aria-describedby="textarea-error-1"
-                id="textarea-1"
+              <input
+                aria-describedby="attributes[title]-text-input-1"
+                id="attributes[title]-text-input-1"
                 onChange={[Function]}
-                placeholder="Enter a description"
-                style={
-                  Object {
-                    "height": 100,
-                  }
-                }
+                placeholder="Enter a title"
+                type="text"
                 value=""
               />
             </div>
-          </div>
-          <div
-            className="form-input"
-          >
             <div
               className="form-input"
-              style={Object {}}
             >
-              <label
-                className=""
-                htmlFor="upload-1"
+              <div
+                className="form-input"
+                style={Object {}}
               >
-                Cover Image
-              </label>
-              <react-dropzone
-                accepts={
-                  Object {
-                    "accepts": "image/*",
-                    "extensions": "gif, jpeg, jpg, png",
-                  }
-                }
-                className="form-dropzone style-landscape"
-                inputProps={
-                  Object {
-                    "aria-describedby": "upload-error-1",
-                    "id": "upload-1",
-                  }
-                }
-                multiple={false}
-                onDrop={[Function]}
-                style={undefined}
-              >
-                <div
-                  className="contents-empty"
+                <label
+                  className=""
+                  htmlFor="textarea-1"
                 >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-cloud-up"
-                  />
-                  <div
-                    className="message"
-                  >
-                    <p
-                      className="primary"
-                    >
-                      <span
-                        className="fake-link"
-                        role="button"
-                        tabIndex="0"
-                      >
-                        Upload a file
-                      </span>
-                       or 
-                      <br />
-                      drag and drop here
-                      <br />
-                    </p>
-                    <p
-                      className="secondary"
-                    >
-                      gif, jpeg, jpg, png
-                    </p>
-                  </div>
-                </div>
-              </react-dropzone>
+                  Description
+                </label>
+                <textarea
+                  aria-describedby="textarea-error-1"
+                  id="textarea-1"
+                  onChange={[Function]}
+                  placeholder="Enter a description"
+                  style={
+                    Object {
+                      "height": 100,
+                    }
+                  }
+                  value=""
+                />
+              </div>
             </div>
-          </div>
-          <div
-            className="form-input submit wide"
-          >
-            <a
-              className="button-secondary outlined dull"
-              href="/backend/projects/1/resources"
-              onClick={[Function]}
+            <div
+              className="form-input"
             >
-              Cancel
-            </a>
-            <input
-              className="button-secondary outlined"
-              type="submit"
-              value="Save and continue"
-            />
-          </div>
-        </form>
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className=""
+                  htmlFor="upload-1"
+                >
+                  Cover Image
+                </label>
+                <react-dropzone
+                  accepts={
+                    Object {
+                      "accepts": "image/*",
+                      "extensions": "gif, jpeg, jpg, png",
+                    }
+                  }
+                  className="form-dropzone style-landscape"
+                  inputProps={
+                    Object {
+                      "aria-describedby": "upload-error-1",
+                      "id": "upload-1",
+                    }
+                  }
+                  multiple={false}
+                  onDrop={[Function]}
+                  style={undefined}
+                >
+                  <div
+                    className="contents-empty"
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="manicon manicon-cloud-up"
+                    />
+                    <div
+                      className="message"
+                    >
+                      <p
+                        className="primary"
+                      >
+                        <span
+                          className="fake-link"
+                          role="button"
+                          tabIndex="0"
+                        >
+                          Upload a file
+                        </span>
+                         or 
+                        <br />
+                        drag and drop here
+                        <br />
+                      </p>
+                      <p
+                        className="secondary"
+                      >
+                        gif, jpeg, jpg, png
+                      </p>
+                    </div>
+                  </div>
+                </react-dropzone>
+              </div>
+            </div>
+            <div
+              className="form-input submit wide"
+            >
+              <a
+                className="button-secondary outlined dull"
+                href="/backend/projects/1/resources"
+                onClick={[Function]}
+              >
+                Cancel
+              </a>
+              <input
+                className="button-secondary outlined"
+                type="submit"
+                value="Save and continue"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

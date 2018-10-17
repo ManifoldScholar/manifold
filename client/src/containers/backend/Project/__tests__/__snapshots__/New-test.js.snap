@@ -47,12 +47,52 @@ exports[`Backend Project New Container renders correctly 1`] = `
       <div
         className="panel"
       >
-        <section>
-          <div>
-            <form
-              className="form-secondary"
-              data-id="submit"
-              onSubmit={[Function]}
+        <div>
+          <form
+            className="form-secondary"
+            data-id="submit"
+            onSubmit={[Function]}
+          >
+            <div
+              className="form-input"
+              style={Object {}}
+            >
+              <label
+                className=""
+                htmlFor="attributes[title]-text-input-1"
+              >
+                Title
+              </label>
+              <input
+                aria-describedby="attributes[title]-text-input-1"
+                id="attributes[title]-text-input-1"
+                onChange={[Function]}
+                placeholder="Enter Project Title"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="form-input"
+              style={Object {}}
+            >
+              <label
+                className=""
+                htmlFor="attributes[subtitle]-text-input-1"
+              >
+                Subtitle
+              </label>
+              <input
+                aria-describedby="attributes[subtitle]-text-input-1"
+                id="attributes[subtitle]-text-input-1"
+                onChange={[Function]}
+                placeholder="Enter Project Subtitle"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="form-input"
             >
               <div
                 className="form-input"
@@ -60,84 +100,42 @@ exports[`Backend Project New Container renders correctly 1`] = `
               >
                 <label
                   className=""
-                  htmlFor="attributes[title]-text-input-1"
+                  htmlFor="textarea-1"
                 >
-                  Title
+                  Description
                 </label>
-                <input
-                  aria-describedby="attributes[title]-text-input-1"
-                  id="attributes[title]-text-input-1"
+                <textarea
+                  aria-describedby="textarea-error-1"
+                  id="textarea-1"
                   onChange={[Function]}
-                  placeholder="Enter Project Title"
-                  type="text"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                  htmlFor="attributes[subtitle]-text-input-1"
-                >
-                  Subtitle
-                </label>
-                <input
-                  aria-describedby="attributes[subtitle]-text-input-1"
-                  id="attributes[subtitle]-text-input-1"
-                  onChange={[Function]}
-                  placeholder="Enter Project Subtitle"
-                  type="text"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-input"
-              >
-                <div
-                  className="form-input"
-                  style={Object {}}
-                >
-                  <label
-                    className=""
-                    htmlFor="textarea-1"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    aria-describedby="textarea-error-1"
-                    id="textarea-1"
-                    onChange={[Function]}
-                    placeholder={undefined}
-                    style={
-                      Object {
-                        "height": 100,
-                      }
+                  placeholder={undefined}
+                  style={
+                    Object {
+                      "height": 100,
                     }
-                    value=""
-                  />
-                </div>
-              </div>
-              <div
-                className="form-input submit wide"
-              >
-                <a
-                  className="button-secondary outlined dull"
-                  href="/backend/projects"
-                  onClick={[Function]}
-                >
-                  Cancel
-                </a>
-                <input
-                  className="button-secondary outlined"
-                  type="submit"
-                  value="Save and Continue"
+                  }
+                  value=""
                 />
               </div>
-            </form>
-          </div>
-        </section>
+            </div>
+            <div
+              className="form-input submit wide"
+            >
+              <a
+                className="button-secondary outlined dull"
+                href="/backend/projects"
+                onClick={[Function]}
+              >
+                Cancel
+              </a>
+              <input
+                className="button-secondary outlined"
+                type="submit"
+                value="Save and Continue"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

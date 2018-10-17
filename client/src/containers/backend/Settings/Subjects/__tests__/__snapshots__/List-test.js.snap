@@ -15,190 +15,194 @@ exports[`Backend Settings Subjects List Container renders correctly 1`] = `
     <div
       className="container"
     >
-      <span />
-      <div>
-        <form
-          className="form-search-filter"
-          onSubmit={[Function]}
-        >
-          <div
-            className="search"
+      <div
+        className="panel"
+      >
+        <span />
+        <div>
+          <form
+            className="form-search-filter"
+            onSubmit={[Function]}
           >
-            <button>
-              <i
-                aria-hidden="true"
-                className="manicon manicon-magnify"
-              />
-              <span
+            <div
+              className="search"
+            >
+              <button>
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-magnify"
+                />
+                <span
+                  className="screen-reader-text"
+                >
+                  Search
+                </span>
+              </button>
+              <label
                 className="screen-reader-text"
+                htmlFor="list-search-1"
               >
-                Search
-              </span>
-            </button>
-            <label
-              className="screen-reader-text"
-              htmlFor="list-search-1"
+                Enter Search Criteria
+              </label>
+              <input
+                id="list-search-1"
+                onChange={[Function]}
+                placeholder="Search..."
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="button-row"
             >
-              Enter Search Criteria
-            </label>
-            <input
-              id="list-search-1"
-              onChange={[Function]}
-              placeholder="Search..."
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="button-row"
+              <button
+                className="button-bare-primary reset"
+                onClick={[Function]}
+              >
+                Reset Search
+              </button>
+            </div>
+          </form>
+          <nav
+            className="vertical-list-primary"
           >
-            <button
-              className="button-bare-primary reset"
-              onClick={[Function]}
-            >
-              Reset Search
-            </button>
-          </div>
-        </form>
-        <nav
-          className="vertical-list-primary"
-        >
-          <div>
-            <p
-              className="list-total"
-            >
-              Showing 
-              <span>
-                1-1
-              </span>
-               of 
-              <span>
-                2
-              </span>
-               subjects: 
-            </p>
-            <section>
-              <ul>
-                <li
-                  className=""
-                >
-                  <a
-                    href="/backend/settings/subjects/1"
-                    onClick={[Function]}
+            <div>
+              <p
+                className="list-total"
+              >
+                Showing 
+                <span>
+                  1-1
+                </span>
+                 of 
+                <span>
+                  2
+                </span>
+                 subjects: 
+              </p>
+              <section>
+                <ul>
+                  <li
+                    className=""
                   >
-                    <header>
-                      <div
-                        className="meta"
-                      >
-                        <h3
-                          className="name large"
+                    <a
+                      href="/backend/settings/subjects/1"
+                      onClick={[Function]}
+                    >
+                      <header>
+                        <div
+                          className="meta"
                         >
-                          Hip Hop
-                        </h3>
-                      </div>
-                    </header>
-                  </a>
-                </li>
-              </ul>
-            </section>
-          </div>
-        </nav>
-        <nav
-          className="list-pagination-secondary"
-        >
-          <ul
-            className={null}
+                          <h3
+                            className="name large"
+                          >
+                            Hip Hop
+                          </h3>
+                        </div>
+                      </header>
+                    </a>
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </nav>
+          <nav
+            className="list-pagination-secondary"
           >
-            <li
-              className="pagination-previous disabled"
+            <ul
+              className={null}
             >
-              <a
-                data-id="page-prev"
-                href="#pagination-target"
-                onClick={[Function]}
+              <li
+                className="pagination-previous disabled"
               >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-arrow-long-left"
-                />
-                <span
-                  aria-hidden="true"
+                <a
+                  data-id="page-prev"
+                  href="#pagination-target"
+                  onClick={[Function]}
                 >
-                  Prev
-                </span>
-                <span
-                  className="screen-reader-text"
-                >
-                  Previous Page
-                </span>
-              </a>
-            </li>
-            <li
-              className="active ordinal"
-            >
-              <a
-                href="#pagination-target"
-                onClick={[Function]}
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-arrow-long-left"
+                  />
+                  <span
+                    aria-hidden="true"
+                  >
+                    Prev
+                  </span>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Previous Page
+                  </span>
+                </a>
+              </li>
+              <li
+                className="active ordinal"
               >
-                <span
-                  aria-hidden="true"
+                <a
+                  href="#pagination-target"
+                  onClick={[Function]}
                 >
-                  1
-                </span>
-                <span
-                  className="screen-reader-text"
-                >
-                  Go to page: 
-                  1
-                </span>
-              </a>
-            </li>
-            <li
-              className="ordinal"
-            >
-              <a
-                href="#pagination-target"
-                onClick={[Function]}
+                  <span
+                    aria-hidden="true"
+                  >
+                    1
+                  </span>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Go to page: 
+                    1
+                  </span>
+                </a>
+              </li>
+              <li
+                className="ordinal"
               >
-                <span
-                  aria-hidden="true"
+                <a
+                  href="#pagination-target"
+                  onClick={[Function]}
                 >
-                  2
-                </span>
-                <span
-                  className="screen-reader-text"
-                >
-                  Go to page: 
-                  2
-                </span>
-              </a>
-            </li>
-            <li
-              className="pagination-next "
-            >
-              <a
-                data-id="page-next"
-                href="#pagination-target"
-                onClick={[Function]}
+                  <span
+                    aria-hidden="true"
+                  >
+                    2
+                  </span>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Go to page: 
+                    2
+                  </span>
+                </a>
+              </li>
+              <li
+                className="pagination-next "
               >
-                <span
-                  className="screen-reader-text"
+                <a
+                  data-id="page-next"
+                  href="#pagination-target"
+                  onClick={[Function]}
                 >
-                  Next Page
-                </span>
-                <span
-                  aria-hidden="true"
-                >
-                  Next
-                </span>
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-arrow-long-right"
-                />
-              </a>
-            </li>
-          </ul>
-        </nav>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Next Page
+                  </span>
+                  <span
+                    aria-hidden="true"
+                  >
+                    Next
+                  </span>
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-arrow-long-right"
+                  />
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>

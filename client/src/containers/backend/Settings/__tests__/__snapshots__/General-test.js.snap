@@ -15,228 +15,232 @@ exports[`Backend Settings General Container renders correctly 1`] = `
     <div
       className="container"
     >
-      <div>
-        <form
-          className="form-secondary"
-          data-id="submit"
-          onSubmit={[Function]}
-        >
-          <div
-            className="form-input"
-            style={Object {}}
+      <div
+        className="panel"
+      >
+        <div>
+          <form
+            className="form-secondary"
+            data-id="submit"
+            onSubmit={[Function]}
           >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[general][installationName]-text-input-1"
+            <div
+              className="form-input"
+              style={Object {}}
             >
-              How do you refer to your Manifold installation?
-            </label>
-            <input
-              aria-describedby="attributes[general][installationName]-text-input-1"
-              id="attributes[general][installationName]-text-input-1"
-              onChange={[Function]}
-              placeholder="Manifold"
-              type="text"
-              value=""
-            />
-            <span
-              className="instructions"
+              <label
+                className="has-instructions"
+                htmlFor="attributes[general][installationName]-text-input-1"
+              >
+                How do you refer to your Manifold installation?
+              </label>
+              <input
+                aria-describedby="attributes[general][installationName]-text-input-1"
+                id="attributes[general][installationName]-text-input-1"
+                onChange={[Function]}
+                placeholder="Manifold"
+                type="text"
+                value=""
+              />
+              <span
+                className="instructions"
+              >
+                There are various places throughout the application where               Manifold refers to itself. If you set a value here, Manifold will use it where               appropriate. For example, you could call it "Manifold at the University of               Minnesota Press" or just "University of Minnesota Digital Books." Or, if you              prefer, you can leave this blank, and Manifold will just refer to itself as               "Manifold."
+              </span>
+            </div>
+            <div
+              className="form-input"
+              style={Object {}}
             >
-              There are various places throughout the application where               Manifold refers to itself. If you set a value here, Manifold will use it where               appropriate. For example, you could call it "Manifold at the University of               Minnesota Press" or just "University of Minnesota Digital Books." Or, if you              prefer, you can leave this blank, and Manifold will just refer to itself as               "Manifold."
-            </span>
-          </div>
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[general][headTitle]-text-input-1"
+              <label
+                className="has-instructions"
+                htmlFor="attributes[general][headTitle]-text-input-1"
+              >
+                Default Page Title
+              </label>
+              <input
+                aria-describedby="attributes[general][headTitle]-text-input-1"
+                id="attributes[general][headTitle]-text-input-1"
+                onChange={[Function]}
+                placeholder="Enter page title"
+                type="text"
+                value=""
+              />
+              <span
+                className="instructions"
+              >
+                This field will be used as the page title on the home page, and will be appended to the page title on core Manifold pages. Defaults to 'Manifold Scholarship'.
+              </span>
+            </div>
+            <div
+              className="form-input"
+              style={Object {}}
             >
-              Default Page Title
-            </label>
-            <input
-              aria-describedby="attributes[general][headTitle]-text-input-1"
-              id="attributes[general][headTitle]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter page title"
-              type="text"
-              value=""
-            />
-            <span
-              className="instructions"
+              <label
+                className=""
+                htmlFor="attributes[general][defaultPublisher]-text-input-1"
+              >
+                Default Publisher
+              </label>
+              <input
+                aria-describedby="attributes[general][defaultPublisher]-text-input-1"
+                id="attributes[general][defaultPublisher]-text-input-1"
+                onChange={[Function]}
+                placeholder="Enter Default Publisher"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="form-input"
+              style={Object {}}
             >
-              This field will be used as the page title on the home page, and will be appended to the page title on core Manifold pages. Defaults to 'Manifold Scholarship'.
-            </span>
-          </div>
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className=""
-              htmlFor="attributes[general][defaultPublisher]-text-input-1"
+              <label
+                className=""
+                htmlFor="attributes[general][defaultPublisherPlace]-text-input-1"
+              >
+                Default Place of Publication
+              </label>
+              <input
+                aria-describedby="attributes[general][defaultPublisherPlace]-text-input-1"
+                id="attributes[general][defaultPublisherPlace]-text-input-1"
+                onChange={[Function]}
+                placeholder="Enter Default Place of Publication"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="form-input"
+              style={Object {}}
             >
-              Default Publisher
-            </label>
-            <input
-              aria-describedby="attributes[general][defaultPublisher]-text-input-1"
-              id="attributes[general][defaultPublisher]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter Default Publisher"
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className=""
-              htmlFor="attributes[general][defaultPublisherPlace]-text-input-1"
+              <label
+                className="has-instructions"
+                htmlFor="attributes[general][copyright]-text-input-1"
+              >
+                Copyright
+              </label>
+              <input
+                aria-describedby="attributes[general][copyright]-text-input-1"
+                id="attributes[general][copyright]-text-input-1"
+                onChange={[Function]}
+                placeholder="Enter Copyright Information"
+                type="text"
+                value=""
+              />
+              <span
+                className="instructions"
+              >
+                Enter the installation copyright information to be displayed in the footer.
+              </span>
+            </div>
+            <div
+              className="form-input"
+              style={Object {}}
             >
-              Default Place of Publication
-            </label>
-            <input
-              aria-describedby="attributes[general][defaultPublisherPlace]-text-input-1"
-              id="attributes[general][defaultPublisherPlace]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter Default Place of Publication"
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[general][copyright]-text-input-1"
+              <label
+                className="has-instructions"
+                htmlFor="attributes[general][socialShareMessage]-text-input-1"
+              >
+                Social Sharing Message
+              </label>
+              <input
+                aria-describedby="attributes[general][socialShareMessage]-text-input-1"
+                id="attributes[general][socialShareMessage]-text-input-1"
+                onChange={[Function]}
+                placeholder={undefined}
+                type="text"
+                value=""
+              />
+              <span
+                className="instructions"
+              >
+                Enter the text you would like to appear when a page is shared.
+              </span>
+            </div>
+            <div
+              className="form-input"
+              style={Object {}}
             >
-              Copyright
-            </label>
-            <input
-              aria-describedby="attributes[general][copyright]-text-input-1"
-              id="attributes[general][copyright]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter Copyright Information"
-              type="text"
-              value=""
-            />
-            <span
-              className="instructions"
+              <label
+                className="has-instructions"
+                htmlFor="attributes[general][twitter]-text-input-1"
+              >
+                Twitter Account
+              </label>
+              <input
+                aria-describedby="attributes[general][twitter]-text-input-1"
+                id="attributes[general][twitter]-text-input-1"
+                onChange={[Function]}
+                placeholder="Enter Twitter account"
+                type="text"
+                value=""
+              />
+              <span
+                className="instructions"
+              >
+                Enter the twitter account associated with this installation.
+              </span>
+            </div>
+            <div
+              className="form-input"
+              style={Object {}}
             >
-              Enter the installation copyright information to be displayed in the footer.
-            </span>
-          </div>
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[general][socialShareMessage]-text-input-1"
+              <label
+                className="has-instructions"
+                htmlFor="attributes[general][facebook]-text-input-1"
+              >
+                Facebook Page ID
+              </label>
+              <input
+                aria-describedby="attributes[general][facebook]-text-input-1"
+                id="attributes[general][facebook]-text-input-1"
+                onChange={[Function]}
+                placeholder="Enter Facebook ID"
+                type="text"
+                value=""
+              />
+              <span
+                className="instructions"
+              >
+                Enter an ID for this installation/organization's Facebook page.
+              </span>
+            </div>
+            <div
+              className="form-input"
+              style={Object {}}
             >
-              Social Sharing Message
-            </label>
-            <input
-              aria-describedby="attributes[general][socialShareMessage]-text-input-1"
-              id="attributes[general][socialShareMessage]-text-input-1"
-              onChange={[Function]}
-              placeholder={undefined}
-              type="text"
-              value=""
-            />
-            <span
-              className="instructions"
+              <label
+                className="has-instructions"
+                htmlFor="attributes[general][contactEmail]-text-input-1"
+              >
+                Contact Email
+              </label>
+              <input
+                aria-describedby="attributes[general][contactEmail]-text-input-1"
+                id="attributes[general][contactEmail]-text-input-1"
+                onChange={[Function]}
+                placeholder="Enter an email address"
+                type="text"
+                value=""
+              />
+              <span
+                className="instructions"
+              >
+                If present, the footer will contain a link to a contact form that will be delivered to this address.
+              </span>
+            </div>
+            <div
+              className="form-input submit wide"
             >
-              Enter the text you would like to appear when a page is shared.
-            </span>
-          </div>
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[general][twitter]-text-input-1"
-            >
-              Twitter Account
-            </label>
-            <input
-              aria-describedby="attributes[general][twitter]-text-input-1"
-              id="attributes[general][twitter]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter Twitter account"
-              type="text"
-              value=""
-            />
-            <span
-              className="instructions"
-            >
-              Enter the twitter account associated with this installation.
-            </span>
-          </div>
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[general][facebook]-text-input-1"
-            >
-              Facebook Page ID
-            </label>
-            <input
-              aria-describedby="attributes[general][facebook]-text-input-1"
-              id="attributes[general][facebook]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter Facebook ID"
-              type="text"
-              value=""
-            />
-            <span
-              className="instructions"
-            >
-              Enter an ID for this installation/organization's Facebook page.
-            </span>
-          </div>
-          <div
-            className="form-input"
-            style={Object {}}
-          >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[general][contactEmail]-text-input-1"
-            >
-              Contact Email
-            </label>
-            <input
-              aria-describedby="attributes[general][contactEmail]-text-input-1"
-              id="attributes[general][contactEmail]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter an email address"
-              type="text"
-              value=""
-            />
-            <span
-              className="instructions"
-            >
-              If present, the footer will contain a link to a contact form that will be delivered to this address.
-            </span>
-          </div>
-          <div
-            className="form-input submit wide"
-          >
-            <input
-              className="button-secondary outlined"
-              type="submit"
-              value="Save Settings"
-            />
-          </div>
-        </form>
+              <input
+                className="button-secondary outlined"
+                type="submit"
+                value="Save Settings"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

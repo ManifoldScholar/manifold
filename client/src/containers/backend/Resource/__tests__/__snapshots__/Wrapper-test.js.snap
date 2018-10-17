@@ -140,13 +140,6 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
     <div
       className="container"
     >
-      <a
-        className="screen-reader-text"
-        href="#skip-to-resource-panel"
-        onClick={[Function]}
-      >
-        Skip to main content
-      </a>
       <div>
         <aside
           className="aside"
@@ -194,8 +187,18 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
       </div>
       <div
         className="panel"
-        id="skip-to-resource-panel"
-      />
+      >
+        <a
+          className="screen-reader-text"
+          href="#skip-to-resource-panel"
+          onClick={[Function]}
+        >
+          Skip to main content
+        </a>
+        <div
+          id="skip-to-resource-panel"
+        />
+      </div>
     </div>
   </div>
 </div>
