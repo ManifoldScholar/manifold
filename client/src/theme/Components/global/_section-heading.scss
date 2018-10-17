@@ -19,7 +19,11 @@
     padding-right: 25px;
 
     .manicon {
-      margin-right: 14px;
+      margin-right: 6px;
+
+      @include respond($break60) {
+        margin-right: 14px;
+      }
     }
 
     .body {

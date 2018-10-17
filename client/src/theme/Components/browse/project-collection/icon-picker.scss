@@ -1,0 +1,81 @@
+.icon-picker {
+  &.form-input .form-input-heading {
+    @include formInputSecondary;
+    text-transform: none;
+
+    @include respond($break60) {
+      height: 38px;
+    }
+  }
+
+  .icon-row {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      font-size: 26px;
+      color: $neutral70;
+      border: 1px solid $neutral70;
+      transition: color $duration $timing, background-color $duration $timing, border-color $duration $timing;
+
+      + li {
+        border-left: 0;
+      }
+
+      &:hover {
+        color: $neutral110;
+        cursor: pointer;
+        background-color: $accentPrimary;
+        border-color: $accentPrimary;
+      }
+
+      &.selected {
+        color: $neutral110;
+        background-color: $accentPrimary;
+        border-color: $accentPrimary;
+      }
+
+      &.manicon-books-with-glasses {
+        font-size: 16px;
+      }
+
+      &.manicon-lamp {
+        font-size: 26px;
+      }
+
+      &.manicon-new-round {
+        font-size: 28px;
+      }
+
+      @include respond($break50) {
+        width: 75px;
+        height: 75px;
+        font-size: 34px;
+
+        &.manicon-books-with-glasses {
+          font-size: 26px;
+        }
+
+        &.manicon-lamp {
+          font-size: 40px;
+        }
+
+        &.manicon-new-round {
+          font-size: 42px;
+        }
+      }
+
+      > [role='radio']:focus {
+        outline: 1px solid rgb(155, 155, 155);
+        outline-offset: 5px;
+      }
+    }
+  }
+}

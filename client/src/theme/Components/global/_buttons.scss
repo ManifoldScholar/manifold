@@ -18,6 +18,7 @@
 
   &:focus {
     color: $neutral95;
+    outline: 0;
 
     .drawer-backend &, .bg-neutral90 & {
       color: $neutral80;
@@ -111,10 +112,11 @@
   @include buttonUnstyled;
   @include utilityPrimary;
   display: block;
-  padding: 14px 20px 16px;
-  font-size: 15px;
+  height: 48px;
+  padding: 14px 20px 0;
+  font-size: 12px;
   font-weight: $bold;
-  color: $neutral95;
+  color: $neutral75;
   text-align: center;
   text-decoration: none;
   border: 2px solid $accentPrimary;
@@ -124,6 +126,7 @@
     display: inline-block;
     height: 71px;
     padding: 22px 30px 0;
+    font-size: 15px;
   }
 
   &:hover {
@@ -156,49 +159,32 @@
   }
 
   span {
-    display: inline;
-
-    @include respond($break60) {
-      display: inline-block;
-    }
+    display: inline-block;
   }
 
   .manicon {
-    display: block;
+    display: inline-block;
     padding-bottom: 10px;
+    margin-right: 14px;
     color: $neutral70;
+    vertical-align: top;
     transition: color $duration $timing;
-
-    @include respond($break60) {
-      display: inline-block;
-      margin-right: 14px;
-      vertical-align: top;
-    }
   }
 
   // Font sizes in EM to be relative to text
   .manicon-books-on-shelf {
+    margin-top: -7px;
     font-size: 2.4em;
-
-    @include respond($break60) {
-      margin-top: -9px;
-    }
   }
 
   .manicon-lamp {
+    margin-top: -6px;
     font-size: 2.3em;
-
-    @include respond($break60) {
-      margin-top: -7px;
-    }
   }
 
   .manicon-books-with-glasses {
+    margin-top: -3px;
     font-size: 1.933em;
-
-    @include respond($break60) {
-      margin-top: -3px;
-    }
   }
 }
 
@@ -884,16 +870,17 @@
 .back-link-primary {
   @include utilityPrimary;
   display: inline-block;
-  padding: 20px 0 18px;
+  padding: 16px 0 15px;
   font-size: 13px;
   line-height: 1.4;
   color: $neutral70 !important;
   text-decoration: none !important;
-  background-color: $neutral05;
+  background-color: $neutral10;
   transition: color $duration $timing,
     background-color $duration $timing;
 
   @include respond($break40) {
+    padding: 26px 0 25px;
     font-size: 14px;
   }
 

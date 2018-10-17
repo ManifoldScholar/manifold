@@ -8,9 +8,6 @@
   padding-bottom: 26px;
   font-size: 0;
 
-  @include respond($break75) {
-  }
-
   @include respond($break90) {
     display: flex;
     flex-wrap: wrap;
@@ -33,6 +30,11 @@
     letter-spacing: 0.01em;
     background-color: $neutral05;
     border: 0;
+
+    .bg-neutral05 & {
+      background-color: transparent;
+      border: 2px solid $neutral30;
+    }
   }
 
   .search-input {

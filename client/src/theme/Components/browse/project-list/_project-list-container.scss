@@ -1,0 +1,187 @@
+// Arranges section-heading, details, and search/filters using flexbox
+// Currently used on Project & Project Collections detail pages
+.project-list-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+
+  @include respond($break75) {
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .section-heading {
+    flex-grow: 1;
+    order: -1;
+    margin-bottom: 20px;
+
+    + .project-list.grid { // if no filters or .details
+      @include respond($break75) {
+        margin-top: 34px;
+      }
+    }
+
+    @include respond($break75) {
+      order: 0;
+      margin-bottom: 0;
+    }
+
+    @include respond($break95) {
+      flex-basis: 1%;
+      order: 0;
+    }
+
+    .main {
+      align-items: baseline;
+
+      .title {
+        @include respond($break75, max) {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .manicon-svg {
+      @include respond($break60) {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+
+  .form-list-filter {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    padding-bottom: 0;
+    margin-bottom: 36px;
+
+    + .project-list.grid { // if no .details
+      margin-top: 18px;
+
+      @include respond($break75) {
+        margin-top: 28px;
+      }
+    }
+
+    @include respond($break75) {
+      flex-direction: row;
+      margin-top: 10px;
+    }
+
+    @include respond($break95) {
+      align-self: flex-start;
+      justify-content: flex-end;
+      width: auto;
+      margin-top: 9px;
+      margin-bottom: 0;
+    }
+
+    .search-input {
+      width: auto;
+
+      @include respond($break75) {
+        flex-grow: 1;
+      }
+
+      @include respond($break95) {
+        width: 200px;
+      }
+    }
+
+    .select-group.inline {
+      @include respond($break75) {
+        width: auto;
+        padding-top: 0;
+        margin-left: 0;
+      }
+
+      @include respond($break90) {
+      }
+    }
+  }
+
+  .reset-button {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    @include respond($break95) {
+      right: 0;
+      left: unset;
+      text-align: right;
+    }
+  }
+
+  .details {
+    order: -1;
+    width: 100%;
+    margin-bottom: 20px;
+    line-height: 1.4;
+
+    @include respond($break75) {
+      order: 0;
+      margin-top: 28px;
+      margin-bottom: 20px;
+    }
+
+    @include respond($break95) {
+      margin-right: 50%;
+    }
+
+    .description {
+      @include templateHead;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: $neutral80;
+
+      &:only-child {
+        margin-bottom: 0;
+      }
+
+      @include respond($break75) {
+        font-size: 16px;
+      }
+    }
+
+    .list-total {
+      margin-bottom: 0;
+    }
+  }
+
+  .utility {
+    @include utilityPrimary;
+    margin-top: 30px;
+    font-size: 14px;
+    line-height: 1.57;
+
+    @include respond($break75) {
+      margin-top: 20px;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      color: $neutral80;
+      text-decoration: none;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $accentPrimary;
+      }
+
+      i {
+        margin-left: 15px;
+      }
+    }
+  }
+
+  .list-pagination-primary {
+    width: 100%;
+    margin-top: 30px;
+  }
+}
