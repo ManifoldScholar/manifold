@@ -15,171 +15,27 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
     <div
       className="container"
     >
-      <div>
-        <form
-          className="form-secondary"
-          data-id="submit"
-          onSubmit={[Function]}
-        >
-          <div
-            className="form-section"
+      <div
+        className="panel"
+      >
+        <div>
+          <form
+            className="form-secondary"
+            data-id="submit"
+            onSubmit={[Function]}
           >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                Facebook
-              </span>
-            </header>
             <div
-              className="form-input-group"
+              className="form-section"
             >
-              <div
-                className="form-input"
-                style={Object {}}
+              <header
+                className="form-section-label"
               >
-                <label
-                  className=""
-                  htmlFor="attributes[integrations][facebookAppId]-text-input-1"
-                >
-                  Facebook App ID
-                </label>
-                <input
-                  aria-describedby="attributes[integrations][facebookAppId]-text-input-1"
-                  id="attributes[integrations][facebookAppId]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-              </div>
+                <span>
+                  Facebook
+                </span>
+              </header>
               <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                  htmlFor="attributes[secrets][facebookAppSecret]-text-input-1"
-                >
-                  Facebook App Secret
-                </label>
-                <input
-                  aria-describedby="attributes[secrets][facebookAppSecret]-text-input-1"
-                  id="attributes[secrets][facebookAppSecret]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="password"
-                  value=""
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            className="form-section"
-          >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                Twitter
-              </span>
-            </header>
-            <div
-              className="form-input-group"
-            >
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                  htmlFor="attributes[integrations][twitterAppId]-text-input-1"
-                >
-                  Twitter Consumer Key
-                </label>
-                <input
-                  aria-describedby="attributes[integrations][twitterAppId]-text-input-1"
-                  id="attributes[integrations][twitterAppId]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                  htmlFor="attributes[secrets][twitterAppSecret]-text-input-1"
-                >
-                  Twitter Consumer Secret
-                </label>
-                <input
-                  aria-describedby="attributes[secrets][twitterAppSecret]-text-input-1"
-                  id="attributes[secrets][twitterAppSecret]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="password"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                  htmlFor="attributes[integrations][twitterAccessToken]-text-input-1"
-                >
-                  Twitter Access Token
-                </label>
-                <input
-                  aria-describedby="attributes[integrations][twitterAccessToken]-text-input-1"
-                  id="attributes[integrations][twitterAccessToken]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                  htmlFor="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
-                >
-                  Twitter Access Token Secret
-                </label>
-                <input
-                  aria-describedby="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
-                  id="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="password"
-                  value=""
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            className="form-section"
-          >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                Google Services Integration
-              </span>
-            </header>
-            <div
-              className="form-input-group"
-            >
-              <div
-                className="form-input wide"
+                className="form-input-group"
               >
                 <div
                   className="form-input"
@@ -187,299 +43,447 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                 >
                   <label
                     className=""
-                    htmlFor="upload-1"
+                    htmlFor="attributes[integrations][facebookAppId]-text-input-1"
                   >
-                    Google Service Config File
+                    Facebook App ID
                   </label>
-                  <react-dropzone
-                    accepts={
-                      Object {
-                        "accepts": "application/json",
-                        "extensions": "json",
-                      }
-                    }
-                    className="form-dropzone style-square"
-                    inputProps={
-                      Object {
-                        "aria-describedby": "upload-error-1",
-                        "id": "upload-1",
-                      }
-                    }
-                    multiple={false}
-                    onDrop={[Function]}
-                    style={undefined}
-                  >
-                    <div
-                      className="contents-empty"
-                    >
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-cloud-up"
-                      />
-                      <div
-                        className="message"
-                      >
-                        <p
-                          className="primary"
-                        >
-                          <span
-                            className="fake-link"
-                            role="button"
-                            tabIndex="0"
-                          >
-                            Upload a file
-                          </span>
-                           or 
-                          <br />
-                          drag and drop here
-                          <br />
-                        </p>
-                        <p
-                          className="secondary"
-                        >
-                          json
-                        </p>
-                      </div>
-                    </div>
-                  </react-dropzone>
-                </div>
-              </div>
-              <div
-                className="form-input wide"
-              >
-                <div
-                  className="form-input"
-                  style={Object {}}
-                >
-                  <label
-                    className=""
-                    htmlFor="textarea-1"
-                  >
-                    Google Private Key
-                  </label>
-                  <textarea
-                    aria-describedby="textarea-error-1"
-                    id="textarea-1"
+                  <input
+                    aria-describedby="attributes[integrations][facebookAppId]-text-input-1"
+                    id="attributes[integrations][facebookAppId]-text-input-1"
                     onChange={[Function]}
                     placeholder={undefined}
-                    style={
-                      Object {
-                        "height": 100,
-                      }
-                    }
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[secrets][facebookAppSecret]-text-input-1"
+                  >
+                    Facebook App Secret
+                  </label>
+                  <input
+                    aria-describedby="attributes[secrets][facebookAppSecret]-text-input-1"
+                    id="attributes[secrets][facebookAppSecret]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="password"
                     value=""
                   />
                 </div>
               </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                  htmlFor="attributes[integrations][googleProjectId]-text-input-1"
-                >
-                  Google Project Id
-                </label>
-                <input
-                  aria-describedby="attributes[integrations][googleProjectId]-text-input-1"
-                  id="attributes[integrations][googleProjectId]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                  htmlFor="attributes[integrations][googlePrivateKeyId]-text-input-1"
-                >
-                  Google Private Key ID
-                </label>
-                <input
-                  aria-describedby="attributes[integrations][googlePrivateKeyId]-text-input-1"
-                  id="attributes[integrations][googlePrivateKeyId]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                  htmlFor="attributes[integrations][googleClientEmail]-text-input-1"
-                >
-                  Google Client Email
-                </label>
-                <input
-                  aria-describedby="attributes[integrations][googleClientEmail]-text-input-1"
-                  id="attributes[integrations][googleClientEmail]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                  htmlFor="attributes[integrations][googleClientId]-text-input-1"
-                >
-                  Google Client ID
-                </label>
-                <input
-                  aria-describedby="attributes[integrations][googleClientId]-text-input-1"
-                  id="attributes[integrations][googleClientId]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-              </div>
             </div>
-          </div>
-          <div
-            className="form-section"
-          >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                Google OAuth
-              </span>
-            </header>
             <div
-              className="form-input-group"
+              className="form-section"
             >
-              <div
-                className="form-input"
-                style={Object {}}
+              <header
+                className="form-section-label"
               >
-                <label
-                  className=""
-                  htmlFor="attributes[integrations][googleOauthClientId]-text-input-1"
-                >
-                  Google OAuth Client ID
-                </label>
-                <input
-                  aria-describedby="attributes[integrations][googleOauthClientId]-text-input-1"
-                  id="attributes[integrations][googleOauthClientId]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-              </div>
+                <span>
+                  Twitter
+                </span>
+              </header>
               <div
-                className="form-input"
-                style={Object {}}
+                className="form-input-group"
               >
-                <label
-                  className=""
-                  htmlFor="attributes[secrets][googleOauthClientSecret]-text-input-1"
+                <div
+                  className="form-input"
+                  style={Object {}}
                 >
-                  Google Client Secret
-                </label>
-                <input
-                  aria-describedby="attributes[secrets][googleOauthClientSecret]-text-input-1"
-                  id="attributes[secrets][googleOauthClientSecret]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="password"
-                  value=""
-                />
+                  <label
+                    className=""
+                    htmlFor="attributes[integrations][twitterAppId]-text-input-1"
+                  >
+                    Twitter Consumer Key
+                  </label>
+                  <input
+                    aria-describedby="attributes[integrations][twitterAppId]-text-input-1"
+                    id="attributes[integrations][twitterAppId]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[secrets][twitterAppSecret]-text-input-1"
+                  >
+                    Twitter Consumer Secret
+                  </label>
+                  <input
+                    aria-describedby="attributes[secrets][twitterAppSecret]-text-input-1"
+                    id="attributes[secrets][twitterAppSecret]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[integrations][twitterAccessToken]-text-input-1"
+                  >
+                    Twitter Access Token
+                  </label>
+                  <input
+                    aria-describedby="attributes[integrations][twitterAccessToken]-text-input-1"
+                    id="attributes[integrations][twitterAccessToken]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
+                  >
+                    Twitter Access Token Secret
+                  </label>
+                  <input
+                    aria-describedby="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
+                    id="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="password"
+                    value=""
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            className="form-section"
-          >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                Google Analytics
-              </span>
-            </header>
             <div
-              className="form-input-group"
+              className="form-section"
             >
-              <div
-                className="form-input"
+              <header
+                className="form-section-label"
               >
-                <label
-                  className=""
-                  htmlFor="masked-text-1"
-                >
-                  Google Analytics Profile ID
-                </label>
-                <react-text-mask
-                  id="masked-text-1"
-                  mask={
-                    Array [
-                      "g",
-                      "a",
-                      ":",
-                      /\\\\d/,
-                      /\\\\d/,
-                      /\\\\d/,
-                      /\\\\d/,
-                      /\\\\d/,
-                      /\\\\d/,
-                      /\\\\d/,
-                      /\\\\d/,
-                      /\\\\d/,
-                    ]
-                  }
-                  onChange={[Function]}
-                  placeholder="ga:123456789"
-                  placeholderChar="_"
-                  type="text"
-                  value={undefined}
-                />
-              </div>
+                <span>
+                  Google Services Integration
+                </span>
+              </header>
               <div
-                className="form-input"
-                style={Object {}}
+                className="form-input-group"
               >
-                <label
-                  className=""
-                  htmlFor="attributes[integrations][gaTrackingId]-text-input-1"
+                <div
+                  className="form-input wide"
                 >
-                  Google Analytics Tracking ID
-                </label>
-                <input
-                  aria-describedby="attributes[integrations][gaTrackingId]-text-input-1"
-                  id="attributes[integrations][gaTrackingId]-text-input-1"
-                  onChange={[Function]}
-                  placeholder="UA-000000-00"
-                  type="text"
-                  value=""
-                />
+                  <div
+                    className="form-input"
+                    style={Object {}}
+                  >
+                    <label
+                      className=""
+                      htmlFor="upload-1"
+                    >
+                      Google Service Config File
+                    </label>
+                    <react-dropzone
+                      accepts={
+                        Object {
+                          "accepts": "application/json",
+                          "extensions": "json",
+                        }
+                      }
+                      className="form-dropzone style-square"
+                      inputProps={
+                        Object {
+                          "aria-describedby": "upload-error-1",
+                          "id": "upload-1",
+                        }
+                      }
+                      multiple={false}
+                      onDrop={[Function]}
+                      style={undefined}
+                    >
+                      <div
+                        className="contents-empty"
+                      >
+                        <i
+                          aria-hidden="true"
+                          className="manicon manicon-cloud-up"
+                        />
+                        <div
+                          className="message"
+                        >
+                          <p
+                            className="primary"
+                          >
+                            <span
+                              className="fake-link"
+                              role="button"
+                              tabIndex="0"
+                            >
+                              Upload a file
+                            </span>
+                             or 
+                            <br />
+                            drag and drop here
+                            <br />
+                          </p>
+                          <p
+                            className="secondary"
+                          >
+                            json
+                          </p>
+                        </div>
+                      </div>
+                    </react-dropzone>
+                  </div>
+                </div>
+                <div
+                  className="form-input wide"
+                >
+                  <div
+                    className="form-input"
+                    style={Object {}}
+                  >
+                    <label
+                      className=""
+                      htmlFor="textarea-1"
+                    >
+                      Google Private Key
+                    </label>
+                    <textarea
+                      aria-describedby="textarea-error-1"
+                      id="textarea-1"
+                      onChange={[Function]}
+                      placeholder={undefined}
+                      style={
+                        Object {
+                          "height": 100,
+                        }
+                      }
+                      value=""
+                    />
+                  </div>
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[integrations][googleProjectId]-text-input-1"
+                  >
+                    Google Project Id
+                  </label>
+                  <input
+                    aria-describedby="attributes[integrations][googleProjectId]-text-input-1"
+                    id="attributes[integrations][googleProjectId]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[integrations][googlePrivateKeyId]-text-input-1"
+                  >
+                    Google Private Key ID
+                  </label>
+                  <input
+                    aria-describedby="attributes[integrations][googlePrivateKeyId]-text-input-1"
+                    id="attributes[integrations][googlePrivateKeyId]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[integrations][googleClientEmail]-text-input-1"
+                  >
+                    Google Client Email
+                  </label>
+                  <input
+                    aria-describedby="attributes[integrations][googleClientEmail]-text-input-1"
+                    id="attributes[integrations][googleClientEmail]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[integrations][googleClientId]-text-input-1"
+                  >
+                    Google Client ID
+                  </label>
+                  <input
+                    aria-describedby="attributes[integrations][googleClientId]-text-input-1"
+                    id="attributes[integrations][googleClientId]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            className="form-input submit wide"
-          >
-            <input
-              className="button-secondary outlined"
-              type="submit"
-              value="Save Settings"
-            />
-          </div>
-        </form>
+            <div
+              className="form-section"
+            >
+              <header
+                className="form-section-label"
+              >
+                <span>
+                  Google OAuth
+                </span>
+              </header>
+              <div
+                className="form-input-group"
+              >
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[integrations][googleOauthClientId]-text-input-1"
+                  >
+                    Google OAuth Client ID
+                  </label>
+                  <input
+                    aria-describedby="attributes[integrations][googleOauthClientId]-text-input-1"
+                    id="attributes[integrations][googleOauthClientId]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[secrets][googleOauthClientSecret]-text-input-1"
+                  >
+                    Google Client Secret
+                  </label>
+                  <input
+                    aria-describedby="attributes[secrets][googleOauthClientSecret]-text-input-1"
+                    id="attributes[secrets][googleOauthClientSecret]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="password"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              className="form-section"
+            >
+              <header
+                className="form-section-label"
+              >
+                <span>
+                  Google Analytics
+                </span>
+              </header>
+              <div
+                className="form-input-group"
+              >
+                <div
+                  className="form-input"
+                >
+                  <label
+                    className=""
+                    htmlFor="masked-text-1"
+                  >
+                    Google Analytics Profile ID
+                  </label>
+                  <react-text-mask
+                    id="masked-text-1"
+                    mask={
+                      Array [
+                        "g",
+                        "a",
+                        ":",
+                        /\\\\d/,
+                        /\\\\d/,
+                        /\\\\d/,
+                        /\\\\d/,
+                        /\\\\d/,
+                        /\\\\d/,
+                        /\\\\d/,
+                        /\\\\d/,
+                        /\\\\d/,
+                      ]
+                    }
+                    onChange={[Function]}
+                    placeholder="ga:123456789"
+                    placeholderChar="_"
+                    type="text"
+                    value={undefined}
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[integrations][gaTrackingId]-text-input-1"
+                  >
+                    Google Analytics Tracking ID
+                  </label>
+                  <input
+                    aria-describedby="attributes[integrations][gaTrackingId]-text-input-1"
+                    id="attributes[integrations][gaTrackingId]-text-input-1"
+                    onChange={[Function]}
+                    placeholder="UA-000000-00"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              className="form-input submit wide"
+            >
+              <input
+                className="button-secondary outlined"
+                type="submit"
+                value="Save Settings"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

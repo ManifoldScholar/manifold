@@ -15,123 +15,27 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
     <div
       className="container"
     >
-      <div>
-        <form
-          className="form-secondary"
-          data-id="submit"
-          onSubmit={[Function]}
-        >
-          <div
-            className="form-section"
+      <div
+        className="panel"
+      >
+        <div>
+          <form
+            className="form-secondary"
+            data-id="submit"
+            onSubmit={[Function]}
           >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                Message Settings
-              </span>
-            </header>
             <div
-              className="form-input-group"
+              className="form-section"
             >
-              <div
-                className="form-input"
-                style={Object {}}
+              <header
+                className="form-section-label"
               >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][fromAddress]-text-input-1"
-                >
-                  Email from address
-                </label>
-                <input
-                  aria-describedby="attributes[email][fromAddress]-text-input-1"
-                  id="attributes[email][fromAddress]-text-input-1"
-                  onChange={[Function]}
-                  placeholder="do-not-reply@manifoldapp.org"
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  All emails sent by manifold will be from this address.
+                <span>
+                  Message Settings
                 </span>
-              </div>
+              </header>
               <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][fromName]-text-input-1"
-                >
-                  Email from name
-                </label>
-                <input
-                  aria-describedby="attributes[email][fromName]-text-input-1"
-                  id="attributes[email][fromName]-text-input-1"
-                  onChange={[Function]}
-                  placeholder="Manifold Scholarship"
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  All emails sent by manifold will appear to be sent by this name.
-                </span>
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][replyToAddress]-text-input-1"
-                >
-                  Email reply-to address
-                </label>
-                <input
-                  aria-describedby="attributes[email][replyToAddress]-text-input-1"
-                  id="attributes[email][replyToAddress]-text-input-1"
-                  onChange={[Function]}
-                  placeholder="do-not-reply@manifoldapp.org"
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  Replies to emails sent by Manifold will go to this address.
-                </span>
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][replyToName]-text-input-1"
-                >
-                  Email reply-to name
-                </label>
-                <input
-                  aria-describedby="attributes[email][replyToName]-text-input-1"
-                  id="attributes[email][replyToName]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  Replies to emails sent by Manifold will appear to be sent by this name.
-                </span>
-              </div>
-              <div
-                className="form-input"
+                className="form-input-group"
               >
                 <div
                   className="form-input"
@@ -139,174 +43,274 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="textarea-1"
+                    htmlFor="attributes[email][fromAddress]-text-input-1"
                   >
-                    Email closing
+                    Email from address
                   </label>
+                  <input
+                    aria-describedby="attributes[email][fromAddress]-text-input-1"
+                    id="attributes[email][fromAddress]-text-input-1"
+                    onChange={[Function]}
+                    placeholder="do-not-reply@manifoldapp.org"
+                    type="text"
+                    value=""
+                  />
                   <span
                     className="instructions"
                   >
-                    How do you want to close emails sent by Manifold?
+                    All emails sent by manifold will be from this address.
                   </span>
-                  <textarea
-                    aria-describedby="textarea-error-1"
-                    id="textarea-1"
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="attributes[email][fromName]-text-input-1"
+                  >
+                    Email from name
+                  </label>
+                  <input
+                    aria-describedby="attributes[email][fromName]-text-input-1"
+                    id="attributes[email][fromName]-text-input-1"
                     onChange={[Function]}
-                    placeholder="Sincerely,
-The Manifold Team"
-                    style={
-                      Object {
-                        "height": 100,
-                      }
-                    }
+                    placeholder="Manifold Scholarship"
+                    type="text"
                     value=""
                   />
+                  <span
+                    className="instructions"
+                  >
+                    All emails sent by manifold will appear to be sent by this name.
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="attributes[email][replyToAddress]-text-input-1"
+                  >
+                    Email reply-to address
+                  </label>
+                  <input
+                    aria-describedby="attributes[email][replyToAddress]-text-input-1"
+                    id="attributes[email][replyToAddress]-text-input-1"
+                    onChange={[Function]}
+                    placeholder="do-not-reply@manifoldapp.org"
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
+                  >
+                    Replies to emails sent by Manifold will go to this address.
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="attributes[email][replyToName]-text-input-1"
+                  >
+                    Email reply-to name
+                  </label>
+                  <input
+                    aria-describedby="attributes[email][replyToName]-text-input-1"
+                    id="attributes[email][replyToName]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
+                  >
+                    Replies to emails sent by Manifold will appear to be sent by this name.
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                >
+                  <div
+                    className="form-input"
+                    style={Object {}}
+                  >
+                    <label
+                      className="has-instructions"
+                      htmlFor="textarea-1"
+                    >
+                      Email closing
+                    </label>
+                    <span
+                      className="instructions"
+                    >
+                      How do you want to close emails sent by Manifold?
+                    </span>
+                    <textarea
+                      aria-describedby="textarea-error-1"
+                      id="textarea-1"
+                      onChange={[Function]}
+                      placeholder="Sincerely,
+The Manifold Team"
+                      style={
+                        Object {
+                          "height": 100,
+                        }
+                      }
+                      value=""
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            className="form-section"
-          >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                Email Delivery Method
-              </span>
-            </header>
             <div
-              className="form-input-group"
+              className="form-section"
             >
+              <header
+                className="form-section-label"
+              >
+                <span>
+                  Email Delivery Method
+                </span>
+              </header>
               <div
-                className="form-input"
+                className="form-input-group"
+              >
+                <div
+                  className="form-input"
+                >
+                  <div
+                    className="form-input"
+                    style={Object {}}
+                  >
+                    <label
+                      htmlFor={undefined}
+                    >
+                      Email Delivery Method
+                    </label>
+                    <div
+                      className="form-select"
+                    >
+                      <i
+                        aria-hidden="true"
+                        className="manicon manicon-caret-down"
+                      />
+                      <select
+                        aria-describedby="select-error-1"
+                        id={undefined}
+                        onChange={[Function]}
+                        value={undefined}
+                      >
+                        <option
+                          value=""
+                        >
+                          
+                        </option>
+                        <option
+                          value="smtp"
+                        >
+                          SMTP
+                        </option>
+                        <option
+                          value="sendmail"
+                        >
+                          Sendmail
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="form-section"
+            >
+              <header
+                className="form-section-label"
+              >
+                <span>
+                  Sendmail Configuration
+                </span>
+              </header>
+              <div
+                className="form-input-group"
               >
                 <div
                   className="form-input"
                   style={Object {}}
                 >
                   <label
-                    htmlFor={undefined}
+                    className="has-instructions"
+                    htmlFor="attributes[email][sendmailSettingsLocation]-text-input-1"
                   >
-                    Email Delivery Method
+                    Sendmail Location
                   </label>
-                  <div
-                    className="form-select"
+                  <input
+                    aria-describedby="attributes[email][sendmailSettingsLocation]-text-input-1"
+                    id="attributes[email][sendmailSettingsLocation]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
                   >
-                    <i
-                      aria-hidden="true"
-                      className="manicon manicon-caret-down"
-                    />
-                    <select
-                      aria-describedby="select-error-1"
-                      id={undefined}
-                      onChange={[Function]}
-                      value={undefined}
-                    >
-                      <option
-                        value=""
-                      >
-                        
-                      </option>
-                      <option
-                        value="smtp"
-                      >
-                        SMTP
-                      </option>
-                      <option
-                        value="sendmail"
-                      >
-                        Sendmail
-                      </option>
-                    </select>
-                  </div>
+                    The location of the sendmail executable. Defaults to /usr/sbin/sendmail.
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="attributes[email][sendmailSettingsArguments]-text-input-1"
+                  >
+                    Sendmail Arguments
+                  </label>
+                  <input
+                    aria-describedby="attributes[email][sendmailSettingsArguments]-text-input-1"
+                    id="attributes[email][sendmailSettingsArguments]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
+                  >
+                    The command line arguments. Defaults to -i with -f sender@address added automatically before the message is sent.
+                  </span>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            className="form-section"
-          >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                Sendmail Configuration
-              </span>
-            </header>
             <div
-              className="form-input-group"
+              className="form-input submit wide"
             >
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][sendmailSettingsLocation]-text-input-1"
-                >
-                  Sendmail Location
-                </label>
-                <input
-                  aria-describedby="attributes[email][sendmailSettingsLocation]-text-input-1"
-                  id="attributes[email][sendmailSettingsLocation]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  The location of the sendmail executable. Defaults to /usr/sbin/sendmail.
-                </span>
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][sendmailSettingsArguments]-text-input-1"
-                >
-                  Sendmail Arguments
-                </label>
-                <input
-                  aria-describedby="attributes[email][sendmailSettingsArguments]-text-input-1"
-                  id="attributes[email][sendmailSettingsArguments]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  The command line arguments. Defaults to -i with -f sender@address added automatically before the message is sent.
-                </span>
-              </div>
+              <input
+                className="button-secondary outlined"
+                type="submit"
+                value="Save Settings"
+              />
             </div>
-          </div>
-          <div
-            className="form-input submit wide"
-          >
-            <input
-              className="button-secondary outlined"
-              type="submit"
-              value="Save Settings"
-            />
-          </div>
-          <p
-            className="instructional-copy margin-top"
-          >
-            <button
-              className="button-secondary-dark"
-              onClick={[Function]}
+            <p
+              className="instructional-copy margin-top"
             >
-              Send test email
-            </button>
-          </p>
-        </form>
+              <button
+                className="button-secondary-dark"
+                onClick={[Function]}
+              >
+                Send test email
+              </button>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -328,123 +332,27 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
     <div
       className="container"
     >
-      <div>
-        <form
-          className="form-secondary"
-          data-id="submit"
-          onSubmit={[Function]}
-        >
-          <div
-            className="form-section"
+      <div
+        className="panel"
+      >
+        <div>
+          <form
+            className="form-secondary"
+            data-id="submit"
+            onSubmit={[Function]}
           >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                Message Settings
-              </span>
-            </header>
             <div
-              className="form-input-group"
+              className="form-section"
             >
-              <div
-                className="form-input"
-                style={Object {}}
+              <header
+                className="form-section-label"
               >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][fromAddress]-text-input-1"
-                >
-                  Email from address
-                </label>
-                <input
-                  aria-describedby="attributes[email][fromAddress]-text-input-1"
-                  id="attributes[email][fromAddress]-text-input-1"
-                  onChange={[Function]}
-                  placeholder="do-not-reply@manifoldapp.org"
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  All emails sent by manifold will be from this address.
+                <span>
+                  Message Settings
                 </span>
-              </div>
+              </header>
               <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][fromName]-text-input-1"
-                >
-                  Email from name
-                </label>
-                <input
-                  aria-describedby="attributes[email][fromName]-text-input-1"
-                  id="attributes[email][fromName]-text-input-1"
-                  onChange={[Function]}
-                  placeholder="Manifold Scholarship"
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  All emails sent by manifold will appear to be sent by this name.
-                </span>
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][replyToAddress]-text-input-1"
-                >
-                  Email reply-to address
-                </label>
-                <input
-                  aria-describedby="attributes[email][replyToAddress]-text-input-1"
-                  id="attributes[email][replyToAddress]-text-input-1"
-                  onChange={[Function]}
-                  placeholder="do-not-reply@manifoldapp.org"
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  Replies to emails sent by Manifold will go to this address.
-                </span>
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][replyToName]-text-input-1"
-                >
-                  Email reply-to name
-                </label>
-                <input
-                  aria-describedby="attributes[email][replyToName]-text-input-1"
-                  id="attributes[email][replyToName]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  Replies to emails sent by Manifold will appear to be sent by this name.
-                </span>
-              </div>
-              <div
-                className="form-input"
+                className="form-input-group"
               >
                 <div
                   className="form-input"
@@ -452,222 +360,322 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="textarea-1"
+                    htmlFor="attributes[email][fromAddress]-text-input-1"
                   >
-                    Email closing
+                    Email from address
                   </label>
+                  <input
+                    aria-describedby="attributes[email][fromAddress]-text-input-1"
+                    id="attributes[email][fromAddress]-text-input-1"
+                    onChange={[Function]}
+                    placeholder="do-not-reply@manifoldapp.org"
+                    type="text"
+                    value=""
+                  />
                   <span
                     className="instructions"
                   >
-                    How do you want to close emails sent by Manifold?
+                    All emails sent by manifold will be from this address.
                   </span>
-                  <textarea
-                    aria-describedby="textarea-error-1"
-                    id="textarea-1"
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="attributes[email][fromName]-text-input-1"
+                  >
+                    Email from name
+                  </label>
+                  <input
+                    aria-describedby="attributes[email][fromName]-text-input-1"
+                    id="attributes[email][fromName]-text-input-1"
                     onChange={[Function]}
-                    placeholder="Sincerely,
-The Manifold Team"
-                    style={
-                      Object {
-                        "height": 100,
-                      }
-                    }
+                    placeholder="Manifold Scholarship"
+                    type="text"
                     value=""
                   />
+                  <span
+                    className="instructions"
+                  >
+                    All emails sent by manifold will appear to be sent by this name.
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="attributes[email][replyToAddress]-text-input-1"
+                  >
+                    Email reply-to address
+                  </label>
+                  <input
+                    aria-describedby="attributes[email][replyToAddress]-text-input-1"
+                    id="attributes[email][replyToAddress]-text-input-1"
+                    onChange={[Function]}
+                    placeholder="do-not-reply@manifoldapp.org"
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
+                  >
+                    Replies to emails sent by Manifold will go to this address.
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="attributes[email][replyToName]-text-input-1"
+                  >
+                    Email reply-to name
+                  </label>
+                  <input
+                    aria-describedby="attributes[email][replyToName]-text-input-1"
+                    id="attributes[email][replyToName]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
+                  >
+                    Replies to emails sent by Manifold will appear to be sent by this name.
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                >
+                  <div
+                    className="form-input"
+                    style={Object {}}
+                  >
+                    <label
+                      className="has-instructions"
+                      htmlFor="textarea-1"
+                    >
+                      Email closing
+                    </label>
+                    <span
+                      className="instructions"
+                    >
+                      How do you want to close emails sent by Manifold?
+                    </span>
+                    <textarea
+                      aria-describedby="textarea-error-1"
+                      id="textarea-1"
+                      onChange={[Function]}
+                      placeholder="Sincerely,
+The Manifold Team"
+                      style={
+                        Object {
+                          "height": 100,
+                        }
+                      }
+                      value=""
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            className="form-section"
-          >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                Email Delivery Method
-              </span>
-            </header>
             <div
-              className="form-input-group"
+              className="form-section"
             >
+              <header
+                className="form-section-label"
+              >
+                <span>
+                  Email Delivery Method
+                </span>
+              </header>
               <div
-                className="form-input"
+                className="form-input-group"
+              >
+                <div
+                  className="form-input"
+                >
+                  <div
+                    className="form-input"
+                    style={Object {}}
+                  >
+                    <label
+                      htmlFor={undefined}
+                    >
+                      Email Delivery Method
+                    </label>
+                    <div
+                      className="form-select"
+                    >
+                      <i
+                        aria-hidden="true"
+                        className="manicon manicon-caret-down"
+                      />
+                      <select
+                        aria-describedby="select-error-1"
+                        id={undefined}
+                        onChange={[Function]}
+                        value={undefined}
+                      >
+                        <option
+                          value=""
+                        >
+                          
+                        </option>
+                        <option
+                          value="smtp"
+                        >
+                          SMTP
+                        </option>
+                        <option
+                          value="sendmail"
+                        >
+                          Sendmail
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="form-section"
+            >
+              <header
+                className="form-section-label"
+              >
+                <span>
+                  SMTP Configuration
+                </span>
+              </header>
+              <div
+                className="form-input-group"
               >
                 <div
                   className="form-input"
                   style={Object {}}
                 >
                   <label
-                    htmlFor={undefined}
+                    className="has-instructions"
+                    htmlFor="attributes[email][smtpSettingsAddress]-text-input-1"
                   >
-                    Email Delivery Method
+                    SMTP Address
                   </label>
-                  <div
-                    className="form-select"
+                  <input
+                    aria-describedby="attributes[email][smtpSettingsAddress]-text-input-1"
+                    id="attributes[email][smtpSettingsAddress]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
                   >
-                    <i
-                      aria-hidden="true"
-                      className="manicon manicon-caret-down"
-                    />
-                    <select
-                      aria-describedby="select-error-1"
-                      id={undefined}
-                      onChange={[Function]}
-                      value={undefined}
-                    >
-                      <option
-                        value=""
-                      >
-                        
-                      </option>
-                      <option
-                        value="smtp"
-                      >
-                        SMTP
-                      </option>
-                      <option
-                        value="sendmail"
-                      >
-                        Sendmail
-                      </option>
-                    </select>
-                  </div>
+                    Allows you to use a remote mail server.
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="attributes[email][smtpSettingsPort]-text-input-1"
+                  >
+                    SMTP Port
+                  </label>
+                  <input
+                    aria-describedby="attributes[email][smtpSettingsPort]-text-input-1"
+                    id="attributes[email][smtpSettingsPort]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
+                  >
+                    On the off chance that your mail server doesn't run on port 25, you can change it.
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="attributes[email][smtpSettingsUserName]-text-input-1"
+                  >
+                    SMTP Username
+                  </label>
+                  <input
+                    aria-describedby="attributes[email][smtpSettingsUserName]-text-input-1"
+                    id="attributes[email][smtpSettingsUserName]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
+                  >
+                    If your mail server requires authentication, set the username in this setting.
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="attributes[secrets][smtpSettingsPassword]-text-input-1"
+                  >
+                    SMTP Password
+                  </label>
+                  <input
+                    aria-describedby="attributes[secrets][smtpSettingsPassword]-text-input-1"
+                    id="attributes[secrets][smtpSettingsPassword]-text-input-1"
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    type="password"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
+                  >
+                    If your mail server requires authentication, set the password in this setting.
+                  </span>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            className="form-section"
-          >
-            <header
-              className="form-section-label"
-            >
-              <span>
-                SMTP Configuration
-              </span>
-            </header>
             <div
-              className="form-input-group"
+              className="form-input submit wide"
             >
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][smtpSettingsAddress]-text-input-1"
-                >
-                  SMTP Address
-                </label>
-                <input
-                  aria-describedby="attributes[email][smtpSettingsAddress]-text-input-1"
-                  id="attributes[email][smtpSettingsAddress]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  Allows you to use a remote mail server.
-                </span>
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][smtpSettingsPort]-text-input-1"
-                >
-                  SMTP Port
-                </label>
-                <input
-                  aria-describedby="attributes[email][smtpSettingsPort]-text-input-1"
-                  id="attributes[email][smtpSettingsPort]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  On the off chance that your mail server doesn't run on port 25, you can change it.
-                </span>
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[email][smtpSettingsUserName]-text-input-1"
-                >
-                  SMTP Username
-                </label>
-                <input
-                  aria-describedby="attributes[email][smtpSettingsUserName]-text-input-1"
-                  id="attributes[email][smtpSettingsUserName]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  If your mail server requires authentication, set the username in this setting.
-                </span>
-              </div>
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className="has-instructions"
-                  htmlFor="attributes[secrets][smtpSettingsPassword]-text-input-1"
-                >
-                  SMTP Password
-                </label>
-                <input
-                  aria-describedby="attributes[secrets][smtpSettingsPassword]-text-input-1"
-                  id="attributes[secrets][smtpSettingsPassword]-text-input-1"
-                  onChange={[Function]}
-                  placeholder={undefined}
-                  type="password"
-                  value=""
-                />
-                <span
-                  className="instructions"
-                >
-                  If your mail server requires authentication, set the password in this setting.
-                </span>
-              </div>
+              <input
+                className="button-secondary outlined"
+                type="submit"
+                value="Save Settings"
+              />
             </div>
-          </div>
-          <div
-            className="form-input submit wide"
-          >
-            <input
-              className="button-secondary outlined"
-              type="submit"
-              value="Save Settings"
-            />
-          </div>
-          <p
-            className="instructional-copy margin-top"
-          >
-            <button
-              className="button-secondary-dark"
-              onClick={[Function]}
+            <p
+              className="instructional-copy margin-top"
             >
-              Send test email
-            </button>
-          </p>
-        </form>
+              <button
+                className="button-secondary-dark"
+                onClick={[Function]}
+              >
+                Send test email
+              </button>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   </div>

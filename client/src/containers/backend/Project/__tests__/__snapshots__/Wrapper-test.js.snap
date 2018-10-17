@@ -206,13 +206,6 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
     <div
       className="container"
     >
-      <a
-        className="screen-reader-text"
-        href="#skip-to-project-panel"
-        onClick={[Function]}
-      >
-        Skip to main content
-      </a>
       <div>
         <aside
           className="aside"
@@ -348,8 +341,18 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
       </div>
       <div
         className="panel"
-        id="skip-to-project-panel"
-      />
+      >
+        <a
+          className="screen-reader-text"
+          href="#skip-to-project-panel"
+          onClick={[Function]}
+        >
+          Skip to main content
+        </a>
+        <div
+          id="skip-to-project-panel"
+        />
+      </div>
     </div>
   </div>
 </div>
