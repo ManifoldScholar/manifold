@@ -75,6 +75,6 @@ module ResourceAttributeResets
 
   def reset_attributes(attributes, attachments)
     attributes.each { |attribute| send("#{attribute}=", nil) }
-    attachments.each { |attachment| send(attachment.to_s).clear }
+    attachments.each { |attachment| send("#{attachment}=", nil) }
   end
 end

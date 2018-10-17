@@ -7,7 +7,7 @@ class ResourceImportSerializer < ApplicationSerializer
              :storage_identifier, :import_results, :url, :parse_error
 
   def data_filename
-    object.data.original_filename
+    object.data_file_name
   end
 
   delegate :import_results, to: :object

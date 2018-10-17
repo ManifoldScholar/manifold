@@ -64,6 +64,8 @@ class Resource < ApplicationRecord
   manifold_has_attached_file :variant_poster, :image
   manifold_has_attached_file :variant_format_one, :resource, no_styles: true
   manifold_has_attached_file :variant_format_two, :resource, no_styles: true
+  manifold_has_attached_file :translation, :resource, no_styles: true
+  manifold_has_attached_file :transcript, :resource, no_styles: true
 
   has_formatted_attributes :title, :caption,
                            include_wrap: false
@@ -223,7 +225,7 @@ class Resource < ApplicationRecord
   # rubocop:enable Style/RedundantSelf
 
   def downloadable_kind?
-    attachment.exists? && !external_video?
+    attachment? && !external_video?
   end
 
   def downloadable?

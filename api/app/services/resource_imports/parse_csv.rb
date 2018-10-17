@@ -7,7 +7,7 @@ module ResourceImports
     VALID_ENCODING = "UTF-8".freeze
 
     def execute
-      path = Pathname.new resource_import.data.path
+      path = resource_import.data_original(&:open)
       csv = ensure_encoding path
 
       rows = csv.is_a?(String) ? CSV.parse(csv) : CSV.read(csv, encoding: "bom|utf-8")
@@ -17,6 +17,8 @@ module ResourceImports
         make_row! row
       end
       resource_import
+    ensure
+      path.close unless path.closed?
     end
 
     private
