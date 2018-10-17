@@ -1,10 +1,18 @@
 // <nav> wrapping some buttons
 .button-nav {
-  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-top: -10px;
+  margin-bottom: -10px;
 
   .button-icon-primary {
-    margin: 0 20px 20px;
+    flex-grow: 1;
+    margin: 10px;
     vertical-align: top;
+
+    @include respond($break60) {
+      flex-grow: 0;
+    }
   }
 }
-

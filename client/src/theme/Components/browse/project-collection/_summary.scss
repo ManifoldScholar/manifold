@@ -1,0 +1,32 @@
+.project-collection-summary {
+  .section-heading {
+    width: 100%;
+    text-decoration: none;
+
+    .manicon, .title {
+      transition: color $duration $timing;
+    }
+
+    &:hover {
+      .manicon, .title {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  &:not(.bg-neutral05) + .list-pagination-primary {
+    padding: 0 0 45px;
+
+    @include respond($break80) {
+      padding: 0 0 70px;
+    }
+  }
+
+  + .list-pagination-primary {
+    padding: 45px 0;
+
+    @include respond($break80) {
+      padding: 70px 0;
+    }
+  }
+}

@@ -4,6 +4,16 @@
   color: $neutral50;
   transition: color $duration $timing;
 
+  &.extra-bottom {
+    margin-bottom: 20px;
+  }
+
+  .drawer-backend & {
+    span {
+      color: $neutral30;
+    }
+  }
+
   .vertical-list-primary & {
     padding-bottom: 15px;
     font-size: 15px;
