@@ -1,0 +1,71 @@
+.project-collection-form {
+  .drawer-header {
+    @include respond($break50) {
+      padding-bottom: 33px;
+    }
+
+    .form-input {
+      input[type='text'] {
+        height: auto;
+        padding: 0 0 0.4em;
+        font-size: 24px;
+
+        @include respond($break90) {
+          padding: 0 0 0.25em;
+          font-size: 30px;
+        }
+      }
+    }
+
+    .buttons-bare-vertical {
+      @extend %header-utility-button;
+      margin-top: 10px;
+
+      @include respond($break60) {
+        margin-top: 20px;
+      }
+
+      button:first-child {
+        .manicon {
+          margin-left: 6px;
+        }
+      }
+    }
+  }
+
+  .button-switch-primary .button {
+    font-size: 17px;
+    font-weight: $regular;
+    text-transform: none;
+    letter-spacing: 0;
+
+    .manicon {
+      margin-right: 0.58em;
+    }
+  }
+
+  .icon-picker {
+    .icon-row {
+      flex-wrap: wrap;
+
+      li {
+        width: 60px;
+        height: 60px;
+        margin-top: -1px;
+        margin-left: -1px;
+
+        + li {
+          border-left: 1px solid;
+        }
+      }
+    }
+  }
+
+  .has-many-list {
+    > ul.bucket {
+      @include respond($break60) {
+        max-width: 446.44px; // set explicity to prevent drawer from expanding
+      }
+    }
+  }
+}

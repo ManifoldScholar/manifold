@@ -40,6 +40,29 @@
     }
   }
 
+  .aside-wide {
+    display: none;
+    width: 300px;
+    margin-right: 20px;
+
+    @include respond($break75) {
+      display: block;
+      width: 34.88%;
+      min-width: 260px;
+      max-width: 312px;
+      margin-right: 46px;
+    }
+
+    @include respond($break85) {
+      min-width: auto;
+    }
+
+    @include respond($break110) {
+      min-width: 312px;
+      margin-right: 70px;
+    }
+  }
+
   .panel {
     flex-grow: 1;
 

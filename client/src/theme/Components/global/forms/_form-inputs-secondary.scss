@@ -134,10 +134,14 @@
     }
 
     &.form-number-input {
-      input[type=number]::-webkit-inner-spin-button,
-      input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
+      input[type='number']::-webkit-inner-spin-button,
+      input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none; // stylelint-disable-line
         margin: 0;
+      }
+
+      input[type='number'] {
+        text-align: right;
       }
     }
 

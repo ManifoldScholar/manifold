@@ -45,7 +45,7 @@ export default class ProjectCollectionPlaceholder extends Component {
             </button>
           </div>
           <div className="documentation-link">
-            <Link to={helpLink}>Visit our documentation</Link>
+            <a href={helpLink} target="_blank">Visit our documentation</a>
           </div>
         </div>
       </section>

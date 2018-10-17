@@ -4,7 +4,8 @@
 
 .orderable-list-item {
   list-style: none;
-  
+  user-select: none;
+
   &:hover:not(.with-handle &) {
     cursor: grab;
   }

@@ -1,0 +1,51 @@
+.project-collection-placeholder {
+  text-align: center;
+
+  .section-heading {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+
+
+
+    .main {
+      margin-top: 30px;
+    }
+
+    svg {
+      width: 80px;
+      height: 80px;
+      padding: 11px;
+      color: $accentPrimary;
+      background-color: $neutral95;
+      border-radius: 50%;
+
+      @include respond($break110) {
+        width: 120px;
+        height: 120px;
+        padding: 17px;
+      }
+    }
+  }
+
+  .centered-message {
+    .container & {
+      @include templateHead;
+      font-size: 16px;
+      line-height: 1.5;
+      color: $neutral50;
+    }
+  }
+
+  .documentation-link {
+    @include templateHead;
+    margin-top: 40px;
+    font-size: 16px;
+
+    a {
+      color: $neutral50;
+      text-transform: none;
+    }
+  }
+}
