@@ -199,9 +199,7 @@ class PageDetailContainer extends PureComponent {
 
         {this.renderNewHeader()}
         <Layout.BackendPanel>
-          <div className="panel">
-            <section>{this.renderRoutes()}</section>
-          </div>
+          <section>{this.renderRoutes()}</section>
         </Layout.BackendPanel>
       </div>
     );

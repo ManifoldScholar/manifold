@@ -221,31 +221,29 @@ class FeatureDetailContainer extends PureComponent {
           {isNew ? this.newHeader() : this.featureHeader(feature)}
           <Layout.BackendPanel>
             {feature || isNew ? (
-              <div className="panel">
-                <section>
-                  {previewFeature ? (
-                    <div className="form-secondary form-section">
-                      <header className="form-section-label">
-                        <span>Feature Preview</span>
-                      </header>
-                      <div className="form-input-group">
-                        <div className="form-input wide">
-                          <FrontendLayout.Splash
-                            feature={previewFeature}
-                            preview
-                          />
-                          <span className="instructions">
-                            This is an approximate preview of your feature.
-                            Foreground, background, and markdown will not be
-                            displayed until the feature is saved.
-                          </span>
-                        </div>
+              <section>
+                {previewFeature ? (
+                  <div className="form-secondary form-section">
+                    <header className="form-section-label">
+                      <span>Feature Preview</span>
+                    </header>
+                    <div className="form-input-group">
+                      <div className="form-input wide">
+                        <FrontendLayout.Splash
+                          feature={previewFeature}
+                          preview
+                        />
+                        <span className="instructions">
+                          This is an approximate preview of your feature.
+                          Foreground, background, and markdown will not be
+                          displayed until the feature is saved.
+                        </span>
                       </div>
                     </div>
-                  ) : null}
-                  {this.renderRoutes()}
-                </section>
-              </div>
+                  </div>
+                ) : null}
+                {this.renderRoutes()}
+              </section>
             ) : null}
           </Layout.BackendPanel>
         </div>

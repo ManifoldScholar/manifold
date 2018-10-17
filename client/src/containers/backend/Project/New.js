@@ -43,40 +43,36 @@ export class ProjectNewContainer extends PureComponent {
             }
           />
           <Layout.BackendPanel>
-            <div className="panel">
-              <section>
-                <FormContainer.Form
-                  model={this.props.project}
-                  name="backend-create-project"
-                  update={projectsAPI.update}
-                  create={projectsAPI.create}
-                  onSuccess={this.handleSuccess}
-                  className="form-secondary"
-                >
-                  <Form.TextInput
-                    validation={["required"]}
-                    focusOnMount
-                    label="Title"
-                    name="attributes[title]"
-                    placeholder="Enter Project Title"
-                  />
-                  <Form.TextInput
-                    label="Subtitle"
-                    name="attributes[subtitle]"
-                    placeholder="Enter Project Subtitle"
-                  />
-                  <Form.TextArea
-                    label="Description"
-                    name="attributes[description]"
-                    height={100}
-                  />
-                  <Form.Save
-                    text="Save and Continue"
-                    cancelRoute={lh.link("backendProjects")}
-                  />
-                </FormContainer.Form>
-              </section>
-            </div>
+            <FormContainer.Form
+              model={this.props.project}
+              name="backend-create-project"
+              update={projectsAPI.update}
+              create={projectsAPI.create}
+              onSuccess={this.handleSuccess}
+              className="form-secondary"
+            >
+              <Form.TextInput
+                validation={["required"]}
+                focusOnMount
+                label="Title"
+                name="attributes[title]"
+                placeholder="Enter Project Title"
+              />
+              <Form.TextInput
+                label="Subtitle"
+                name="attributes[subtitle]"
+                placeholder="Enter Project Subtitle"
+              />
+              <Form.TextArea
+                label="Description"
+                name="attributes[description]"
+                height={100}
+              />
+              <Form.Save
+                text="Save and Continue"
+                cancelRoute={lh.link("backendProjects")}
+              />
+            </FormContainer.Form>
           </Layout.BackendPanel>
         </div>
       </HigherOrder.Authorize>

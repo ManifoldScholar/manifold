@@ -176,10 +176,9 @@ export class CollectionWrapperContainer extends PureComponent {
             secondaryLinks={secondaryLinks}
             titleHtml
           />
-          <Layout.BackendPanel>
+          <Layout.BackendPanel sidebar={<Navigation.Secondary links={secondaryLinks} panel />}>
             <Utility.SkipLink skipId={skipId} />
-            <Navigation.Secondary links={secondaryLinks} panel />
-            <div id={skipId} className="panel">
+            <div id={skipId}>
               {this.renderRoutes()}
             </div>
           </Layout.BackendPanel>
