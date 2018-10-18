@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181019151113) do
+ActiveRecord::Schema.define(version: 20181025175439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,11 +86,12 @@ ActiveRecord::Schema.define(version: 20181019151113) do
     t.datetime "thumbnail_updated_at"
     t.string   "thumbnail_checksum"
     t.string   "fingerprint"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "slug"
     t.integer  "collection_resources_count", default: 0
     t.integer  "events_count",               default: 0
+    t.jsonb    "thumbnail_data",             default: {}
     t.index ["slug"], name: "index_collections_on_slug", unique: true, using: :btree
   end
 
@@ -176,6 +177,8 @@ ActiveRecord::Schema.define(version: 20181019151113) do
     t.string   "foreground_left"
     t.string   "foreground_position"
     t.boolean  "live",                    default: false
+    t.jsonb    "background_data",         default: {}
+    t.jsonb    "foreground_data",         default: {}
   end
 
   create_table "flags", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -247,14 +250,15 @@ ActiveRecord::Schema.define(version: 20181019151113) do
   create_table "ingestion_sources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "text_id"
     t.string   "source_identifier"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "kind"
     t.text     "source_path"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.jsonb    "attachment_data",         default: {}
   end
 
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -281,8 +285,8 @@ ActiveRecord::Schema.define(version: 20181019151113) do
 
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "sort_name"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
@@ -292,6 +296,7 @@ ActiveRecord::Schema.define(version: 20181019151113) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "suffix"
+    t.jsonb    "avatar_data",         default: {}
   end
 
   create_table "notification_preferences", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -404,6 +409,10 @@ ActiveRecord::Schema.define(version: 20181019151113) do
     t.string   "published_text_attachment_content_type"
     t.integer  "published_text_attachment_file_size"
     t.datetime "published_text_attachment_updated_at"
+    t.jsonb    "cover_data",                             default: {}
+    t.jsonb    "hero_data",                              default: {}
+    t.jsonb    "avatar_data",                            default: {}
+    t.jsonb    "published_text_attachment_data",         default: {}
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
 
@@ -463,6 +472,7 @@ ActiveRecord::Schema.define(version: 20181019151113) do
     t.boolean  "parse_error",        default: false, null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.jsonb    "data_data",          default: {}
     t.index ["creator_id"], name: "index_resource_imports_on_creator_id", using: :btree
     t.index ["project_id"], name: "index_resource_imports_on_project_id", using: :btree
   end
@@ -530,6 +540,14 @@ ActiveRecord::Schema.define(version: 20181019151113) do
     t.integer  "minimum_height"
     t.boolean  "iframe_allow_fullscreen",         default: true
     t.string   "sort_title"
+    t.jsonb    "attachment_data",                 default: {}
+    t.jsonb    "high_res_data",                   default: {}
+    t.jsonb    "transcript_data",                 default: {}
+    t.jsonb    "translation_data",                default: {}
+    t.jsonb    "variant_format_one_data",         default: {}
+    t.jsonb    "variant_format_two_data",         default: {}
+    t.jsonb    "variant_thumbnail_data",          default: {}
+    t.jsonb    "variant_poster_data",             default: {}
     t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
 
@@ -575,6 +593,9 @@ ActiveRecord::Schema.define(version: 20181019151113) do
     t.string   "press_logo_mobile_content_type"
     t.integer  "press_logo_mobile_file_size"
     t.datetime "press_logo_mobile_updated_at"
+    t.jsonb    "press_logo_data",                default: {}
+    t.jsonb    "press_logo_footer_data",         default: {}
+    t.jsonb    "press_logo_mobile_data",         default: {}
     t.index ["singleton_guard"], name: "index_settings_on_singleton_guard", unique: true, using: :btree
   end
 
@@ -736,6 +757,7 @@ ActiveRecord::Schema.define(version: 20181019151113) do
     t.string   "classification",         default: "default", null: false
     t.datetime "imported_at"
     t.string   "import_source_id"
+    t.jsonb    "avatar_data",            default: {}
     t.index ["classification"], name: "udx_users_anonymous", unique: true, where: "((classification)::text = 'anonymous'::text)", using: :btree
     t.index ["classification"], name: "udx_users_cli", unique: true, where: "((classification)::text = 'command_line'::text)", using: :btree
     t.index ["import_source_id"], name: "index_users_on_import_source_id", unique: true, where: "(import_source_id IS NOT NULL)", using: :btree
