@@ -1,5 +1,9 @@
 import BooksOnShelf from "./BooksOnShelf";
+import Icon from "./Icon";
 
 export default {
-  BooksOnShelf
+  BooksOnShelf,
+  Icon
 };
+
+export { Icon };
