@@ -164,7 +164,7 @@ export class HomeContainer extends Component {
 
     return (
       <section className="bg-neutral05">
-        <div className="container extra-top">
+        <div className="container project-list-container extra-top">
           <header className="section-heading">
             <div className="main">
               <i

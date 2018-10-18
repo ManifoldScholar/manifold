@@ -16,9 +16,7 @@ export default class BackendPanel extends PureComponent {
       <div className="backend-panel">
         <div className="container">
           {this.props.sidebar}
-          <div className="panel">
-            {this.props.children}
-          </div>
+          <div className="panel">{this.props.children}</div>
         </div>
       </div>
     );

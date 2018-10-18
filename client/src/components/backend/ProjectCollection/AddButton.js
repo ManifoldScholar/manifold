@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { currentUserActions } from "actions";
 import { Project } from "components/global";
-import { projectCollectionsAPI, requests } from "api";
 import find from "lodash/find";
 
 export default class ProjectCollectionAddButton extends Component {

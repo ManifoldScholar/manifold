@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Form, Dialog } from "components/backend";
 import { Utility } from "components/frontend";
-import { Project } from "components/global";
 import setter from "components/backend/Form/setter";
 
 class KindPicker extends Component {

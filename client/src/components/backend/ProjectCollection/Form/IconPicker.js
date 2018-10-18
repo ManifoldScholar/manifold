@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Form, Dialog } from "components/backend";
-import { Project, Form as GlobalForm } from "components/global";
+import { Form as GlobalForm } from "components/global";
 import setter from "components/backend/Form/setter";
 import classNames from "classnames";
 import { Utility } from "components/global";
@@ -42,15 +41,9 @@ class IconPicker extends Component {
     ];
   }
 
-  renderIconList() {
-    return (
-      <ul className="icon-row">
-        {this.icons().map(icon => {
-          return this.renderIcon(icon);
-        })}
-      </ul>
-    );
-  }
+  handleIconChange = icon => {
+    this.props.setOther(icon, "attributes[icon]");
+  };
 
   renderIcon(icon) {
     const selected = this.selected();
@@ -59,19 +52,28 @@ class IconPicker extends Component {
       selected: selected === icon
     });
     return (
-      <li
-        key={icon}
-        className={iconClasses}
-        onClick={() => this.handleIconChange(icon)}
-      >
-        <Utility.IconComposer icon={icon} size={48} />
+      <li key={icon} className={iconClasses}>
+        <div
+          onClick={() => this.handleIconChange(icon)}
+          role="radio"
+          tabIndex="0"
+          aria-checked={selected === icon}
+        >
+          <Utility.IconComposer icon={icon} size={48} />
+        </div>
       </li>
     );
   }
 
-  handleIconChange = icon => {
-    this.props.setOther(icon, "attributes[icon]");
-  };
+  renderIconList() {
+    return (
+      <ul role="radiogroup" className="icon-row">
+        {this.icons().map(icon => {
+          return this.renderIcon(icon);
+        })}
+      </ul>
+    );
+  }
 
   render() {
     const inputClasses = classNames({

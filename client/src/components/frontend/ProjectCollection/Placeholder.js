@@ -23,7 +23,9 @@ export default class ProjectListPlaceholder extends Component {
         {
           ". For more help, you can learn about creating and publishing Manifold Project Collections "
         }
-        <a href={helpLink} target="_blank">here</a>.
+        <a href={helpLink} target="_blank" rel="noopener noreferrer">
+          here
+        </a>.
       </div>
     );
   }
@@ -40,7 +42,9 @@ export default class ProjectListPlaceholder extends Component {
         {
           " to get started. For more help, you can learn about creating and publishing Manifold Project Collections "
         }
-        <a href={helpLink} target="_blank">here</a>.
+        <a href={helpLink} target="_blank" rel="noopener noreferrer">
+          here
+        </a>.
       </div>
     );
   }

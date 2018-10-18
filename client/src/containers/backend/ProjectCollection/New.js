@@ -1,10 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form, ProjectCollection, Dialog } from "components/backend";
+import { Form, ProjectCollection } from "components/backend";
 import { Form as FormContainer } from "containers/backend";
 import { HigherOrder } from "containers/global";
-import { projectCollectionsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
+import { projectCollectionsAPI } from "api";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
 

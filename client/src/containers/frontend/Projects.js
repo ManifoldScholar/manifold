@@ -1,30 +1,31 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ProjectList, Layout, ProjectCollection } from "components/frontend";
+import { ProjectList, Layout } from "components/frontend";
 import { Utility } from "components/global";
 import connectAndFetch from "utils/connectAndFetch";
-import { commonActions } from "actions/helpers";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import get from "lodash/get";
-import lh from "helpers/linkHandler";
 import queryString from "query-string";
 import { Icon } from "components/global/SVG";
+import omitBy from "lodash/omitBy";
+import debounce from "lodash/debounce";
 
 const { request } = entityStoreActions;
+const page = 1;
 const perPage = 20;
 
 export class ProjectsContainer extends Component {
   static fetchData = (dispatch, location) => {
     const query = queryString.parse(location.search);
     const filters = {
-      order: "sort_title, title",
+      order: query.order,
       featured: query.featured,
       subject: query.subject
     };
     const pagination = {
-      number: query.page || 1,
+      number: query.page || page,
       size: perPage
     };
     const projectsRequest = request(
@@ -38,7 +39,7 @@ export class ProjectsContainer extends Component {
     return {
       projects: select(requests.feProjectsFiltered, state.entityStore),
       subjects: select(requests.feSubjects, state.entityStore),
-      meta: meta(requests.feProjectsFiltered, state.entityStore),
+      projectsMeta: meta(requests.feProjectsFiltered, state.entityStore),
       authentication: state.authentication
     };
   };
@@ -51,7 +52,7 @@ export class ProjectsContainer extends Component {
     dispatch: PropTypes.func,
     fetchData: PropTypes.func.isRequired,
     subjects: PropTypes.array,
-    meta: PropTypes.object
+    projectsMeta: PropTypes.object
   };
 
   static defaultProps = {
@@ -60,7 +61,8 @@ export class ProjectsContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.commonActions = commonActions(props.dispatch);
+    this.state = this.initialState(queryString.parse(props.location.search));
+    this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
   componentDidMount() {
@@ -79,28 +81,57 @@ export class ProjectsContainer extends Component {
     }
   }
 
-  currentQuery() {
-    return queryString.parse(this.props.location.search);
+  initialState(init) {
+    const filter = omitBy(init, (vIgnored, k) => k === "page");
+
+    return {
+      filter: Object.assign({}, filter),
+      pagination: {
+        number: init.page || page,
+        size: perPage
+      }
+    };
   }
 
-  handleFilterChange = filter => {
-    return this.doQuery(filter);
-  };
+  updateUrl() {
+    const pathname = this.props.location.pathname;
+    const filters = this.state.filter;
+    const pageParam = this.state.pagination.number;
+    const params = Object.assign({}, filters);
+    if (pageParam !== 1) params.page = pageParam;
 
-  handlePageChange = (event, page) => {
-    event.preventDefault();
-    const query = Object.assign({}, this.currentQuery(), { page });
-    this.doQuery(query);
-  };
-
-  doQuery(query) {
-    const url = lh.link("frontendProjects", query);
-    this.props.history.push(url);
+    const search = queryString.stringify(params);
+    this.props.history.push({ pathname, search });
   }
 
-  pageChangeHandlerCreator = page => {
+  updateResults(filter = this.state.filter) {
+    const action = request(
+      projectsAPI.index(filter, this.state.pagination),
+      requests.feProjectsFiltered
+    );
+    this.props.dispatch(action);
+  }
+
+  doUpdate() {
+    this.updateResults();
+    this.updateUrl();
+  }
+
+  filterChangeHandler = filter => {
+    this.setState({ filter }, this.doUpdate);
+  };
+
+  handlePageChange = pageParam => {
+    const pagination = Object.assign({}, this.state.pagination, {
+      number: pageParam
+    });
+    this.setState({ pagination }, this.doUpdate);
+  };
+
+  pageChangeHandlerCreator = pageParam => {
     return event => {
-      this.handlePageChange(event, page);
+      event.preventDefault();
+      this.handlePageChange(pageParam);
     };
   };
 
@@ -126,16 +157,14 @@ export class ProjectsContainer extends Component {
               </div>
             </div>
           </header>
-          <div className="utility">
-            <ProjectList.Filters
-              params={this.currentQuery()}
-              updateAction={this.handleFilterChange}
-              subjects={this.props.subjects}
-            />
-          </div>
+          <ProjectList.Filters
+            filterChangeHandler={this.filterChangeHandler}
+            initialFilterState={this.state.filter}
+            subjects={this.props.subjects}
+          />
           <div className="details">
             <Utility.EntityCount
-              pagination={get(this.props.meta, "pagination")}
+              pagination={get(this.props.projectsMeta, "pagination")}
               singularUnit="project"
               pluralUnit="projects"
               countOnly
@@ -146,7 +175,7 @@ export class ProjectsContainer extends Component {
             favorites={get(this.props.authentication, "currentUser.favorites")}
             dispatch={this.props.dispatch}
             projects={this.props.projects}
-            pagination={get(this.props.meta, "pagination")}
+            pagination={get(this.props.projectsMeta, "pagination")}
             paginationClickHandler={this.pageChangeHandlerCreator}
             limit={perPage}
           />
@@ -156,6 +185,8 @@ export class ProjectsContainer extends Component {
   }
 
   render() {
+    if (!this.props.projectsMeta) return null;
+
     return (
       <div
         style={{

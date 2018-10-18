@@ -57,8 +57,8 @@ export default class LayoutButtonNavigation extends Component {
   renderProjectsButton = () => {
     if (!this.props.showProjects && !this.props.showProjectCollections)
       return null;
-    let url,
-      label = null;
+    let url = null;
+    let label = null;
 
     if (this.props.showProjects) {
       url = lh.link("frontendProjects");
@@ -96,7 +96,7 @@ export default class LayoutButtonNavigation extends Component {
             className="manicon manicon-books-with-glasses"
             aria-hidden="true"
           />
-          Projects You're Following
+          {"Projects You’re Following"}
         </span>
       </Link>
     );

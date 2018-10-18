@@ -21,7 +21,10 @@ export class ProjectsCollectionsContainer extends Component {
       size: perPage
     };
     const collectionsRequest = request(
-      projectCollectionsAPI.index({ withProjects: true, visible: true }, pagination),
+      projectCollectionsAPI.index(
+        { withProjects: true, visible: true },
+        pagination
+      ),
       requests.feProjectCollections
     );
     return dispatch(collectionsRequest);
@@ -33,7 +36,10 @@ export class ProjectsCollectionsContainer extends Component {
         requests.feProjectCollections,
         state.entityStore
       ),
-      projectCollectionsMeta: meta(requests.feProjectCollections, state.entityStore),
+      projectCollectionsMeta: meta(
+        requests.feProjectCollections,
+        state.entityStore
+      ),
       authentication: state.authentication
     };
   };
