@@ -12,7 +12,7 @@ export default class ProjectListFollowing extends Component {
     followedProjects: PropTypes.array,
     authentication: PropTypes.object,
     subjects: PropTypes.array,
-    handleUpdate: PropTypes.func,
+    filterChangeHandler: PropTypes.func,
     dispatch: PropTypes.func
   };
 
@@ -49,7 +49,7 @@ export default class ProjectListFollowing extends Component {
             </div>
           </header>
           <ProjectList.Filters
-            updateAction={this.props.handleUpdate}
+            filterChangeHandler={this.props.filterChangeHandler}
             subjects={this.mapFavoritesToSubjects()}
           />
           {this.props.followedProjects ? (

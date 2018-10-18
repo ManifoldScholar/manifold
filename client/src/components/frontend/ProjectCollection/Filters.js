@@ -16,17 +16,17 @@ export default class ProjectCollectionFilters extends Component {
     searchId: uniqueId("filters-search-")
   };
 
+  constructor(props) {
+    super(props);
+    this.state = this.initialState(props.initialFilterState);
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.initialFilterState !== prevState.filters) {
       return Object.assign({}, nextProps.initialFilterState);
     }
 
     return null;
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = this.initialState(props.initialFilterState);
   }
 
   setFilters = (event, label) => {
@@ -79,7 +79,7 @@ export default class ProjectCollectionFilters extends Component {
               onChange={event => this.setFilters(event, "order")}
               value={this.state.filters.order || ""}
             >
-              <option value="default">Sort</option>
+              <option value="">Sort</option>
               <option value="sort_title ASC">A-Z</option>
               <option value="sort_title DESC">Z-A</option>
             </select>

@@ -10,6 +10,7 @@ export default class ProjectCollectionDetail extends Component {
   static propTypes = {
     projectCollection: PropTypes.object,
     authentication: PropTypes.object,
+    dispatch: PropTypes.func,
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func,
     projects: PropTypes.array,
@@ -44,12 +45,10 @@ export default class ProjectCollectionDetail extends Component {
               </div>
             </div>
           </div>
-          <div className="utility">
-            <ProjectCollection.Filters
-              filterChangeHandler={this.props.filterChangeHandler}
-              initialState={this.props.initialState}
-            />
-          </div>
+          <ProjectCollection.Filters
+            filterChangeHandler={this.props.filterChangeHandler}
+            initialState={this.props.initialState}
+          />
           <div className="details">
             {description && (
               <p

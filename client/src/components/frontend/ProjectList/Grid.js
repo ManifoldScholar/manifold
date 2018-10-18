@@ -5,7 +5,6 @@ import { Utility } from "components/global";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import difference from "lodash/difference";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
 
 export default class ProjectListGrid extends Component {
   static displayName = "ProjectList.Grid";
@@ -78,14 +77,12 @@ export default class ProjectListGrid extends Component {
 
     return (
       <div className="utility">
-        <Link
-          to={this.props.viewAllUrl}
-        >
+        <Link to={this.props.viewAllUrl}>
           {this.props.viewAllLabel}
           <i className="manicon manicon-arrow-long-right" />
         </Link>
       </div>
-    )
+    );
   }
 
   render() {
@@ -119,7 +116,9 @@ export default class ProjectListGrid extends Component {
             })}
           </ReactCSSTransitionGroup>
         </nav>
-        {this.props.pagination ? this.renderPagination(this.props) : this.renderViewAll(this.props)}
+        {this.props.pagination
+          ? this.renderPagination(this.props)
+          : this.renderViewAll(this.props)}
       </React.Fragment>
     );
   }

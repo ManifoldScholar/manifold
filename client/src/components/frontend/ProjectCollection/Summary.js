@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { ProjectList } from "components/frontend";
 import get from "lodash/get";
 import classnames from "classnames";
@@ -79,7 +78,10 @@ export default class ProjectCollectionSummary extends Component {
             projects={projects}
             dispatch={this.props.dispatch}
             limit={this.props.limit}
-            viewAllUrl={lh.link("frontendProjectCollection", this.props.projectCollection.attributes.slug)}
+            viewAllUrl={lh.link(
+              "frontendProjectCollection",
+              this.props.projectCollection.attributes.slug
+            )}
             viewAllLabel={"See the full collection"}
           />
         </div>

@@ -1,33 +1,31 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { List, ProjectCollection, Project } from "components/backend";
-import { ProjectList } from "components/frontend";
-import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
+import { List, ProjectCollection } from "components/backend";
+import { select, meta } from "utils/entityUtils";
 import { projectsAPI, projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
-const page = 1;
 const perPage = 12;
 
 export class ProjectCollectionManageProjects extends PureComponent {
-  static displayName = "ProjectCollection.ManageProjects";
-
-  static mapStateToProps = (state, ownProps) => {
+  static mapStateToProps = state => {
     return {
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore)
     };
   };
 
+  static displayName = "ProjectCollection.ManageProjects";
+
   static propTypes = {
     projectCollection: PropTypes.object.isRequired,
     projects: PropTypes.array,
     projectsMeta: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired
+    history: PropTypes.object
   };
 
   constructor(props) {
@@ -45,7 +43,7 @@ export class ProjectCollectionManageProjects extends PureComponent {
     );
   }
 
-  updateResults(eventIgnored = null, page = page) {
+  updateResults(eventIgnored = null, page = 1) {
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.index(this.state.filter, pagination),
@@ -120,9 +118,17 @@ export class ProjectCollectionManageProjects extends PureComponent {
     );
   };
 
-  renderProjectCount(projectCollection, meta) {
+  handleClose = () => {
+    const url = lh.link(
+      "backendProjectCollection",
+      this.props.projectCollection.id
+    );
+    return this.props.history.push(url);
+  };
+
+  renderProjectCount(projectCollection, projectsMeta) {
     const added = projectCollection.attributes.projectsCount || 0;
-    const total = meta.pagination.totalCount || 0;
+    const total = projectsMeta.pagination.totalCount || 0;
 
     return (
       <div className="list-total extra-bottom">
@@ -131,11 +137,6 @@ export class ProjectCollectionManageProjects extends PureComponent {
       </div>
     );
   }
-
-  handleClose = () => {
-    const url = lh.link("backendProjectCollection", this.props.projectCollection.id);
-    return this.props.history.push(url);
-  };
 
   render() {
     if (!this.props.projectsMeta) return null;
@@ -178,10 +179,7 @@ export class ProjectCollectionManageProjects extends PureComponent {
           compactPagination
         />
         <div className="actions">
-          <button
-            className="button-icon-secondary"
-            onClick={this.handleClose}
-          >
+          <button className="button-icon-secondary" onClick={this.handleClose}>
             Close
             <i className="manicon manicon-x" />
           </button>

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Icon } from "components/global/SVG";
-import { Link } from "react-router-dom";
-import { HigherOrder } from "containers/global";
 
 const helpLink = "https://manifoldapp.org/docs/";
 
@@ -45,7 +43,9 @@ export default class ProjectCollectionPlaceholder extends Component {
             </button>
           </div>
           <div className="documentation-link">
-            <a href={helpLink} target="_blank">Visit our documentation</a>
+            <a href={helpLink} target="_blank" rel="noopener noreferrer">
+              Visit our documentation
+            </a>
           </div>
         </div>
       </section>

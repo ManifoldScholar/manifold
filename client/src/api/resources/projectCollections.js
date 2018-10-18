@@ -24,7 +24,10 @@ export default {
       endpoint: `/api/v1/project_collections`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "project_collections", data: projectCollection })
+        body: JSON.stringify({
+          type: "project_collections",
+          data: projectCollection
+        })
       }
     };
   },
@@ -34,7 +37,10 @@ export default {
       endpoint: `/api/v1/project_collections/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "project_collections", data: projectCollection }),
+        body: JSON.stringify({
+          type: "project_collections",
+          data: projectCollection
+        }),
         params: { page }
       }
     };
@@ -65,7 +71,10 @@ export default {
       endpoint: `/api/v1/project_collections/${pId}/relationships/collection_projects/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({type: "project_collections", data: collectionProject })
+        body: JSON.stringify({
+          type: "project_collections",
+          data: collectionProject
+        })
       }
     };
   }

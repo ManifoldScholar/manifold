@@ -169,7 +169,7 @@ export class FollowingContainer extends Component {
             authentication={this.props.authentication}
             subjects={this.props.subjects}
             favorites={get(this.props.authentication, "currentUser.favorites")}
-            handleUpdate={boundSetFilters}
+            filterChangeHandler={boundSetFilters}
             dispatch={this.props.dispatch}
           />
           {this.renderFeaturedProjects()}

@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { List, ProjectCollection } from "components/backend";
-import { requests } from "api";
 
 export default class ProjectCollectionDetailSmart extends PureComponent {
   static displayName = "ProjectCollectionDetail.Smart";

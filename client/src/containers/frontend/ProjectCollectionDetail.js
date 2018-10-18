@@ -78,16 +78,16 @@ export class ProjectCollectionDetailContainer extends Component {
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
-  componentWillUnmount() {
-    this.props.dispatch(flush(requests.feProjectCollection));
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.location.search === this.props.location.search) return null;
     this.setState(
       this.initialState(queryString.parse(this.props.location.search)),
       this.updateResults
     );
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(flush(requests.feProjectCollection));
   }
 
   initialState(init) {
@@ -103,10 +103,12 @@ export class ProjectCollectionDetailContainer extends Component {
   }
 
   updateResults(filter = this.state.filter) {
-    filter.collectionOrder = this.props.projectCollection.id;
+    const updatedFilter = Object.assign({}, filter, {
+      collectionOrder: this.props.projectCollection.id
+    });
 
     const action = request(
-      projectsAPI.index(filter, this.state.pagination),
+      projectsAPI.index(updatedFilter, this.state.pagination),
       requests.feCollectionProjects
     );
     this.props.dispatch(action);

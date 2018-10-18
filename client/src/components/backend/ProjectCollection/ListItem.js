@@ -39,13 +39,14 @@ export default class ProjectCollectionListItem extends PureComponent {
     const visibleClass = entity.attributes.visible ? "visible" : "hidden";
 
     return (
-      <div className={itemClass} onClick={this.handleClick}>
+      <div className={itemClass} onClick={this.handleClick} role="button">
         <span className="item-text">{this.props.entity.attributes.title}</span>
         <div className="icon-group">
           <span className="item-text">{entity.attributes.projectsCount}</span>
           <i
             className={`manicon ${visibleClass}`}
             onClick={this.toggleVisibility}
+            role="button"
           >
             <Icon.EyeOpen
               iconClass={"eye-open"}

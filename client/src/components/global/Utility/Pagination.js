@@ -154,7 +154,15 @@ export default class UtilityPagination extends PureComponent {
   }
 
   renderCompact(pagination) {
-    return <li><span>Page {pagination.currentPage}{` `}/{` `}{pagination.totalPages}</span></li>;
+    return (
+      <li>
+        <span>
+          Page {pagination.currentPage}
+          {` `}/{` `}
+          {pagination.totalPages}
+        </span>
+      </li>
+    );
   }
 
   render() {
@@ -168,7 +176,9 @@ export default class UtilityPagination extends PureComponent {
       <nav className={`list-pagination-${this.props.level}`}>
         <ul className={this.props.compact ? "compact" : null}>
           {this.previous(pagination)}
-          {this.props.compact ? this.renderCompact(pagination) : this.renderRange(pages)}
+          {this.props.compact
+            ? this.renderCompact(pagination)
+            : this.renderRange(pages)}
           {this.next(pagination)}
         </ul>
       </nav>
