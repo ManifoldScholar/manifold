@@ -62,7 +62,7 @@ export default class ProjectThumbnail extends Component {
     const creators = project.relationships.creators;
     if (!creators || creators.length === 0) return null;
     return (
-      <div className="makers">
+      <div className="relations-list">
         <span>
           {creators.map(maker => maker.attributes.fullName).join(", ")}
         </span>
@@ -94,9 +94,11 @@ export default class ProjectThumbnail extends Component {
     if (!this.props.hideMeta) {
       projectMeta = (
         <div className="meta">
-          <h3 className="title">{project.attributes.title}</h3>
+          <h3 className="name">
+            <span className="title-text">{project.attributes.title}</span>
+            {this.renderProjectStatusMarker(project)}
+          </h3>
           {this.renderProjectMakers(project)}
-          {this.renderProjectStatusMarker(project)}
           {project.attributes.updated
             ? this.renderUpdatedDate(project)
             : this.renderPublishedDate(project)}

@@ -121,7 +121,7 @@ export class ProjectsListContainer extends PureComponent {
               showEntityCount={false}
               initialFilter={this.state.filter}
               defaultFilter={{ order: "sort_title ASC" }}
-              listClassName="grid-list project-grid"
+              listClassName="project-list grid"
               entities={this.props.projects}
               entityComponent={Project.ListItem}
               singularUnit="project"

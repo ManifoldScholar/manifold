@@ -73,19 +73,17 @@ export default class ProjectListItem extends PureComponent {
     return (
       <li key={project.id}>
         <Link to={this.projectLink(project)}>
-          <header>
-            <figure className="cover">
-              {this.renderProjectImage(project)}
-            </figure>
-            <div className="meta">
-              <h3 className="name">
-                <span className="title-text">{attr.title}</span>
-                {this.renderProjectStatusMarker(attr)}
-                <span className="subtitle">{attr.subtitle}</span>
-              </h3>
-              {this.renderProjectMakers(project.relationships.creators)}
-            </div>
-          </header>
+          <figure className="cover">
+            {this.renderProjectImage(project)}
+          </figure>
+          <div className="meta">
+            <h3 className="name">
+              <span className="title-text">{attr.title}</span>
+              {this.renderProjectStatusMarker(attr)}
+              <span className="subtitle">{attr.subtitle}</span>
+            </h3>
+            {this.renderProjectMakers(project.relationships.creators)}
+          </div>
         </Link>
       </li>
     );

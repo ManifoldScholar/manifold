@@ -2,7 +2,7 @@
 
 exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
 <nav
-  className="grid-project"
+  className="project-list grid"
 >
   <ul>
     <li>
@@ -60,9 +60,13 @@ exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
           className="meta"
         >
           <h3
-            className="title"
+            className="name"
           >
-            Rowan Test
+            <span
+              className="title-text"
+            >
+              Rowan Test
+            </span>
           </h3>
         </div>
       </a>

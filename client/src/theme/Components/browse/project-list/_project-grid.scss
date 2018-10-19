@@ -1,0 +1,92 @@
+// Global .project-list.grid styles scoped for frontend
+.project-list {
+  .browse & {
+    li {
+      border-color: $neutral40;
+      opacity: 1;
+      transition: opacity $duration $timing;
+    }
+
+    .grid-project-leave {
+      opacity: 0;
+    }
+
+    .grid-project-enter {
+      opacity: 0;
+    }
+
+    .name {
+      color: $neutralOffBlack;
+    }
+
+    .relations-list {
+      padding-top: 0.4em;
+      font-size: 15px;
+      color: $neutral80;
+    }
+
+    .date {
+      padding-top: 0.625em;
+    }
+
+    .alert::before {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 5px;
+      margin-bottom: 2px;
+      color: $neutralWhite;
+      content: '';
+      background-color: $sp40Tertiary;
+      border-radius: 50%;
+    }
+
+    .block-label {
+
+    }
+
+    + .list-pagination-primary {
+      margin-top: 30px;
+    }
+
+    // Frontend grid-style list
+    &.grid {
+      @include respond($break75) {
+        a:hover, a:focus {
+          background-color: $neutral05;
+          box-shadow: 0 31px 44px 2px rgba($neutralBlack, 0.13);
+
+          .title-text {
+            color: $neutral90;
+          }
+        }
+
+        .cover {
+          height: 160px;
+
+          svg {
+            max-width: 130px;
+            max-height: 130px;
+          }
+        }
+
+        .name {
+          font-size: 17px;
+        }
+
+        .relations-list {
+          padding-top: 0.625em;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .browse .bg-neutral05 &.grid {
+    a:hover, a:focus {
+      @include respond($break75) {
+        background-color: $neutral10;
+      }
+    }
+  }
+}

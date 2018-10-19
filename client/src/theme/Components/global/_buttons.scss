@@ -782,17 +782,18 @@
   position: absolute;
   left: 0;
   display: block;
-  max-width: 33px;
-  height: 33px;
+  max-width: 30px;
+  height: 30px;
   padding: 5px 13px 0 8px;
   overflow: hidden;
   font-size: 18px;
   color: $neutralWhite;
   text-align: left;
   white-space: nowrap;
+  cursor: pointer;
   background-color: $accentPrimary;
   border-radius: 22.5px;
-  cursor: pointer;
+  box-shadow: 2px 4px 10px 0 rgba($neutral90, 0.36);
   transition: max-width $duration $timing,
     background-color $duration $timing;
 
@@ -851,15 +852,15 @@
     .manicon {
       position: absolute;
       top: 0;
-      left: -2px;
+      left: -1px;
       margin-right: 13px;
-      font-size: 17px;
+      font-size: 14px;
       text-align: center;
     }
 
     .manicon-minus-bold {
       top: -22px;
-      left: 1px;
+      left: 0;
     }
 
     .manicon-check-bold {
