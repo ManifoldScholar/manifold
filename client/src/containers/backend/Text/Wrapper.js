@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Dialog, Navigation } from "components/backend";
+import { Dialog, Navigation, Layout } from "components/backend";
 import { HigherOrder } from "containers/global";
 import { Utility } from "components/global";
 import { entityStoreActions, notificationActions } from "actions";
@@ -174,15 +174,12 @@ export class TextWrapperContainer extends PureComponent {
             utility={this.renderUtility()}
             secondaryLinks={secondaryLinks}
           />
-          <section className="backend-panel">
+          <Layout.BackendPanel
+            sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
+          >
             <Utility.SkipLink skipId={skipId} />
-            <div className="container">
-              <Navigation.Secondary links={secondaryLinks} panel />
-              <div id={skipId} className="panel">
-                {this.renderRoutes()}
-              </div>
-            </div>
-          </section>
+            <div id={skipId}>{this.renderRoutes()}</div>
+          </Layout.BackendPanel>
         </HigherOrder.Authorize>
       </div>
     );
