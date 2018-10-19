@@ -35,4 +35,45 @@
       padding-left: 95px;
     }
   }
+
+  .list-pagination-secondary .ordinal {
+    @include respond($break85, max) {
+      display: none;
+    }
+  }
+
+  .project-list {
+    padding-bottom: 24px;
+
+    .buttons-icon-horizontal {
+      margin-top: 25px;
+      margin-bottom: 25px;
+
+      .button-icon-secondary {
+        width: 100%;
+      }
+    }
+
+    li:first-child {
+      margin-top: -15px;
+    }
+
+    @include respond($break75) {
+      padding-bottom: 36px;
+
+      .name {
+        .title-text, .subtitle {
+          font-size: 18px;
+        }
+
+        .subtitle {
+          padding-top: 0.278em;
+        }
+      }
+
+      .relations-list {
+        font-size: 17px;
+      }
+    }
+  }
 }

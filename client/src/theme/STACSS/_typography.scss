@@ -120,40 +120,6 @@
   letter-spacing: 0.031em;
 }
 
-@mixin gridProjectTitle {
-  @include templateHead;
-  // This is the base size, there may be variation from
-  // component to component
-  font-size: 16px;
-  font-weight: $semibold;
-  color: $neutralOffBlack;
-
-  @include respond($break70) {
-    font-size: 18px;
-  }
-
-  .subtitle {
-    @include subtitlePrimary;
-    display: block;
-    // Size relative to font
-    margin-top: 0.682em;
-    font-size: 22px;
-    color: $accentPrimaryDark;
-  }
-}
-
-@mixin gridProjectDate {
-  @include templateCopy;
-  font-size: 14px;
-  font-style: italic;
-  color: $neutral75;
-
-
-  @include respond($break70) {
-    font-size: 16px;
-  }
-}
-
 @mixin formLabelPrimary {
   @include templateHead;
   font-size: 12px;

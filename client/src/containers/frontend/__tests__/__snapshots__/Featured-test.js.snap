@@ -39,7 +39,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
         />
       </header>
       <nav
-        className="grid-project"
+        className="project-list grid"
       >
         <ul>
           <li>
@@ -97,9 +97,13 @@ exports[`Frontend Featured Container renders correctly 1`] = `
                 className="meta"
               >
                 <h3
-                  className="title"
+                  className="name"
                 >
-                  Rowan Test
+                  <span
+                    className="title-text"
+                  >
+                    Rowan Test
+                  </span>
                 </h3>
               </div>
             </a>
@@ -159,9 +163,13 @@ exports[`Frontend Featured Container renders correctly 1`] = `
                 className="meta"
               >
                 <h3
-                  className="title"
+                  className="name"
                 >
-                  Rowan Test
+                  <span
+                    className="title-text"
+                  >
+                    Rowan Test
+                  </span>
                 </h3>
               </div>
             </a>

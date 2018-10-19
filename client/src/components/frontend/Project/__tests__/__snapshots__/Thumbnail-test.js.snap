@@ -55,9 +55,13 @@ exports[`Frontend.Project.Thumbnail component renders correctly 1`] = `
     className="meta"
   >
     <h3
-      className="title"
+      className="name"
     >
-      Rowan Test
+      <span
+        className="title-text"
+      >
+        Rowan Test
+      </span>
     </h3>
     <p
       className="description"

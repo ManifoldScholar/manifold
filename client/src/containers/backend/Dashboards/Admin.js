@@ -182,6 +182,7 @@ export class DashboardsAdminContainer extends PureComponent {
                     showEntityCount={false}
                     initialFilter={this.state.filter}
                     defaultFilter={{ order: "sort_title ASC" }}
+                    listClassName="project-list"
                     entities={this.props.projects}
                     pagination={this.props.projectsMeta.pagination}
                     paginationClickHandler={this.updateHandlerCreator}
@@ -193,7 +194,7 @@ export class DashboardsAdminContainer extends PureComponent {
                 ) : null}
               </div>
               <div className="right">
-                <nav className="vertical-list-primary flush">
+                <nav className="project-list">
                   {this.props.recentProjects ? (
                     <List.SimpleList
                       entities={this.props.recentProjects}

@@ -61,9 +61,9 @@ export default class ProjectListGrid extends Component {
 
     return (
       <React.Fragment>
-        <nav className="grid-project">
+        <nav className="project-list grid">
           <ReactCSSTransitionGroup
-            transitionName="grid-project"
+            transitionName="project-list grid"
             transitionEnter={this.enableAnimation}
             transitionLeave={this.enableAnimation}
             transitionEnterTimeout={250}
