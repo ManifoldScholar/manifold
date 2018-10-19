@@ -150,16 +150,9 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
       </nav>
     </div>
   </section>
-  <section
+  <div
     className="backend-panel"
   >
-    <a
-      className="screen-reader-text"
-      href="#skip-to-text-panel"
-      onClick={[Function]}
-    >
-      Skip to main content
-    </a>
     <div
       className="container"
     >
@@ -232,9 +225,19 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
       </div>
       <div
         className="panel"
-        id="skip-to-text-panel"
-      />
+      >
+        <a
+          className="screen-reader-text"
+          href="#skip-to-text-panel"
+          onClick={[Function]}
+        >
+          Skip to main content
+        </a>
+        <div
+          id="skip-to-text-panel"
+        />
+      </div>
     </div>
-  </section>
+  </div>
 </div>
 `;

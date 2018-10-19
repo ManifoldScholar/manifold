@@ -101,38 +101,36 @@ export class UsersListContainer extends PureComponent {
       <div>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         <Layout.ViewHeader>{"Manage Users"}</Layout.ViewHeader>
-        <div className="backend-panel">
-          <div className="container">
-            {users ? (
-              <List.Searchable
-                newButton={{
-                  path: lh.link("backendRecordsUsersNew"),
-                  text: "Add a New User",
-                  authorizedFor: "user"
-                }}
-                entities={users}
-                singularUnit="user"
-                pluralUnit="users"
-                pagination={usersMeta.pagination}
-                paginationClickHandler={this.usersPageChangeHandlerCreator}
-                paginationClass="secondary"
-                entityComponent={User.ListItem}
-                entityComponentProps={{ currentUserId, active }}
-                filterChangeHandler={this.filterChangeHandler}
-                filterOptions={{
-                  role: {
-                    options: Object.keys(config.app.locale.roles),
-                    labels: config.app.locale.roles
-                  }
-                }}
-                sortOptions={[
-                  { label: "first name", value: "first_name" },
-                  { label: "last name", value: "last_name" }
-                ]}
-              />
-            ) : null}
-          </div>
-        </div>
+        <Layout.BackendPanel>
+          {users ? (
+            <List.Searchable
+              newButton={{
+                path: lh.link("backendRecordsUsersNew"),
+                text: "Add a New User",
+                authorizedFor: "user"
+              }}
+              entities={users}
+              singularUnit="user"
+              pluralUnit="users"
+              pagination={usersMeta.pagination}
+              paginationClickHandler={this.usersPageChangeHandlerCreator}
+              paginationClass="secondary"
+              entityComponent={User.ListItem}
+              entityComponentProps={{ currentUserId, active }}
+              filterChangeHandler={this.filterChangeHandler}
+              filterOptions={{
+                role: {
+                  options: Object.keys(config.app.locale.roles),
+                  labels: config.app.locale.roles
+                }
+              }}
+              sortOptions={[
+                { label: "first name", value: "first_name" },
+                { label: "last name", value: "last_name" }
+              ]}
+            />
+          ) : null}
+        </Layout.BackendPanel>
       </div>
     );
   }

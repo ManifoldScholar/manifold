@@ -220,14 +220,12 @@ class PageDetailContainer extends PureComponent {
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}
         {this.renderExistingHeader(page)}
-        <section className="backend-panel">
+        <Layout.BackendPanel
+          sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
+        >
           <Utility.SkipLink skipId={skipId} />
-          <div className="container">
-            <div id={skipId} className="panel">
-              <section>{this.renderRoutes()}</section>
-            </div>
-          </div>
-        </section>
+          <div id={skipId}>{this.renderRoutes()}</div>
+        </Layout.BackendPanel>
       </div>
     );
   }
