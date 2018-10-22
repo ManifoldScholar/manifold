@@ -273,6 +273,8 @@
   .form-dropzone {
     position: relative;
     display: flex;
+    align-items: center;
+    justify-content: center;
     max-width: 350px;
     min-height: 200px;
     border: 1px solid $neutral80;
@@ -368,19 +370,25 @@
 
       .message {
         position: absolute;
+        top: 50%;
+        left: 50%;
         z-index: 1;
+        width: 75%;
         padding: 5px 20px 15px;
-        margin: auto;
         margin-bottom: 20px;
         text-align: center;
         background: $neutral95;
         opacity: 0.9;
+        transform: translate(-50%, -50%);
       }
     }
 
     .contents-empty {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 200px;
       padding: 15px;
-      margin: auto;
     }
 
     .remove {
