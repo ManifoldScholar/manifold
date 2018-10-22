@@ -64,10 +64,22 @@
 
     @include respond($break60) {
       margin-left: -40px;
+
+      li {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
     }
 
     @include respond($break65) {
       margin-left: -24px;
+    }
+
+    @include respond($break95) {
+      li {
+        flex-basis: 50%;
+        max-width: 50%;
+      }
     }
 
     @include respond($break110) {
