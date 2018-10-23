@@ -107,7 +107,7 @@ export class FormHasMany extends PureComponent {
     return (
       <GlobalForm.Errorable
         className={inputClasses}
-        name="*"
+        name={this.props.name || "*"}
         errors={this.props.errors}
         label={this.props.label}
         idForError={this.props.idForError}
