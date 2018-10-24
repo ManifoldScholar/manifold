@@ -5,6 +5,7 @@ import get from "lodash/get";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import { Utility } from "components/global";
+import { Link } from "react-router-dom";
 
 export default class ProjectCollectionSummary extends Component {
   static displayName = "ProjectCollectionSummary";
@@ -42,9 +43,9 @@ export default class ProjectCollectionSummary extends Component {
     return (
       <section key={projectCollection.id} className={backgroundClasses}>
         <div className="container project-list-container">
-          <a
+          <Link
             className="section-heading"
-            href={lh.link(
+            to={lh.link(
               "frontendProjectCollection",
               projectCollection.attributes.slug
             )}
@@ -61,7 +62,7 @@ export default class ProjectCollectionSummary extends Component {
                 <h4 className="title">{projectCollection.attributes.title}</h4>
               </div>
             </div>
-          </a>
+          </Link>
           {description && (
             <div className="details">
               <p
