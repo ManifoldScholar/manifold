@@ -61,11 +61,11 @@ export default class LayoutButtonNavigation extends Component {
     let label = null;
 
     if (this.props.showProjects) {
-      url = lh.link("frontendProjects");
+      url = lh.link("frontendProjectsAll");
       label = "See All Projects";
     } else if (this.props.showProjectCollections) {
       url = lh.link("frontendProjectCollections");
-      label = "See Projects Collections";
+      label = "See Project Collections";
     }
 
     return (
