@@ -17,7 +17,7 @@ const page = 1;
 const perPage = 20;
 
 export class ProjectsContainer extends Component {
-  static fetchData = (dispatch, location) => {
+  static fetchData = (getState, dispatch, location) => {
     const query = queryString.parse(location.search);
     const filters = {
       order: query.order,
@@ -28,11 +28,12 @@ export class ProjectsContainer extends Component {
       number: query.page || page,
       size: perPage
     };
-    const projectsRequest = request(
-      projectsAPI.index(filters, pagination),
-      requests.feProjectsFiltered
-    );
-    return dispatch(projectsRequest);
+
+    const projectsFetch = projectsAPI.index(filters, pagination);
+    const projectsAction = request(projectsFetch, requests.feProjectsFiltered);
+    const { promise: one } = dispatch(projectsAction);
+    const promises = [one];
+    return Promise.all(promises);
   };
 
   static mapStateToProps = state => {
@@ -65,10 +66,6 @@ export class ProjectsContainer extends Component {
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
-  componentDidMount() {
-    ProjectsContainer.fetchData(this.props.dispatch, this.props.location);
-  }
-
   componentDidUpdate(prevProps) {
     if (
       this.props.authentication.currentUser !==
@@ -77,7 +74,7 @@ export class ProjectsContainer extends Component {
       this.props.fetchData(this.props);
     }
     if (prevProps.location !== this.props.location) {
-      ProjectsContainer.fetchData(this.props.dispatch, this.props.location);
+      this.props.fetchData(this.props);
     }
   }
 
