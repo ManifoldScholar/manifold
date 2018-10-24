@@ -182,7 +182,7 @@ export class HomeContainer extends Component {
             dispatch={this.props.dispatch}
             projects={this.props.filteredProjects}
             limit={16}
-            viewAllUrl={lh.link("frontendProjects")}
+            viewAllUrl={lh.link("frontendProjectsAll")}
           />
         </div>
       </section>

@@ -17,6 +17,7 @@ import Unsubscribe from "./Unsubscribe";
 import Projects from "./Projects";
 import ProjectCollections from "./ProjectCollections";
 import ProjectCollectionDetail from "./ProjectCollectionDetail";
+import ProjectsWrapper from "./ProjectsWrapper";
 
 export {
   CollectionDetail,
@@ -37,5 +38,6 @@ export {
   Unsubscribe,
   Projects,
   ProjectCollections,
-  ProjectCollectionDetail
+  ProjectCollectionDetail,
+  ProjectsWrapper
 };

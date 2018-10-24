@@ -48,10 +48,11 @@ export class NavigationStatic extends PureComponent {
   }
 
   renderManifoldLink(link) {
+    const exact = this.pathForLink(link) === "/" ? true : this.props.exact;
     return (
       <NavLink
         to={this.pathForLink(link)}
-        exact={this.props.exact}
+        exact={exact}
         target={link.newTab ? "_blank" : null}
         activeClassName="active"
       >
@@ -61,10 +62,6 @@ export class NavigationStatic extends PureComponent {
   }
 
   renderStaticItem(link, index) {
-    /*
-    Top level links are always exact, or else the / home page link will be active for
-    /following and /page1
-    */
     if (link.hideInNav) return null;
     return (
       <li key={`${link.label}-${index}`}>
