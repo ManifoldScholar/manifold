@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Resource } from "components/frontend";
-import { FormattedDate } from "components/global";
+import { FormattedDate, Utility } from "components/global";
 import lh from "helpers/linkHandler";
 import truncate from "lodash/truncate";
 
@@ -22,7 +21,7 @@ export default class FeatureListItem extends PureComponent {
           <header>
             <figure className="asset-image">
               <div className="asset-image-placeholder">
-                <Resource.Icon.Document />
+                <Utility.IconComposer icon="resource-document" />
               </div>
             </figure>
             <div className="meta">

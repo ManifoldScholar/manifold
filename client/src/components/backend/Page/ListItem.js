@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Resource } from "components/frontend";
+import { Utility } from "components/global";
 import lh from "helpers/linkHandler";
 
 export default class PageListItem extends PureComponent {
@@ -20,7 +21,7 @@ export default class PageListItem extends PureComponent {
           <header>
             <figure className="asset-image">
               <div className="asset-image-placeholder">
-                <Resource.Icon.Document />
+                <Utility.IconComposer icon="resource-document" />
               </div>
             </figure>
             <div className="meta">
