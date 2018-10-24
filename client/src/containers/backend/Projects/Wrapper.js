@@ -37,7 +37,7 @@ export default class ProjectsWrapper extends PureComponent {
         ability="update"
         entity={["project"]}
         failureFatalError={{
-          detail: "You are not allowed to manage projects."
+          body: "You are not allowed to manage projects."
         }}
       >
         <div>

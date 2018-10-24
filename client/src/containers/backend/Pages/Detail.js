@@ -247,7 +247,7 @@ class PageDetailContainer extends PureComponent {
     return (
       <HigherOrder.Authorize
         failureFatalError={{
-          detail: `You are not allowed to ${authProps.ability} pages.`
+          body: `You are not allowed to ${authProps.ability} pages.`
         }}
         {...authProps}
       >

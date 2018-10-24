@@ -1,7 +1,8 @@
 import * as Frontend from "containers/frontend";
 import * as Reader from "containers/reader";
-import queryString from "query-string";
 import * as Backend from "containers/backend";
+import NotFound from "containers/global/NotFound";
+import queryString from "query-string";
 
 /* eslint-disable max-len */
 export default () => {
@@ -636,7 +637,7 @@ export default () => {
           ]
         },
         {
-          component: Frontend.NotFound
+          component: NotFound
         }
       ]
     },
@@ -647,7 +648,7 @@ export default () => {
         {
           // This route is a placeholder for the upcoming frontend projects view.
           name: "frontendProjects",
-          component: Frontend.NotFound,
+          component: NotFound,
           exact: true,
           path: "/projects",
           helper: () => `/projects`
@@ -778,12 +779,12 @@ export default () => {
           }
         },
         {
-          component: Frontend.NotFound
+          component: NotFound
         }
       ]
     },
     {
-      component: Frontend.NotFound
+      component: NotFound
     }
   ];
 };

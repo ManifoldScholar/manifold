@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import Helmet from "react-helmet";
-import { SignInUp, LoadingBar } from "components/global";
+import { SignInUp, FatalError, LoadingBar } from "components/global";
 import config from "../config";
 import has from "lodash/has";
 import get from "lodash/get";
@@ -23,6 +23,7 @@ import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
 import getRoutes from "/routes";
 import ch from "../helpers/consoleHelpers";
+import FatalErrorBoundary from "../components/global/FatalError/Boundary";
 
 const routes = getRoutes();
 const { request } = entityStoreActions;
@@ -78,7 +79,7 @@ class ManifoldContainer extends PureComponent {
       authentication: state.authentication,
       visibility: state.ui.transitory.visibility,
       loading: state.ui.transitory.loading.active,
-      notifications: state.notifications,
+      fatalError: state.fatalError,
       routing: state.routing,
       settings: select(requests.settings, state.entityStore)
     };
@@ -89,6 +90,7 @@ class ManifoldContainer extends PureComponent {
     loading: PropTypes.bool,
     visibility: PropTypes.object,
     authentication: PropTypes.object,
+    fatalError: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
     settings: PropTypes.object,
     location: PropTypes.object,
@@ -179,6 +181,7 @@ class ManifoldContainer extends PureComponent {
   }
 
   render() {
+    const fatalError = this.props.fatalError;
     const hideSignInUpOverlay = bindActionCreators(
       () => visibilityHide("signInUpOverlay"),
       this.props.dispatch
@@ -212,7 +215,13 @@ class ManifoldContainer extends PureComponent {
             />
           ) : null}
         </ReactCSSTransitionGroup>
-        {renderRoutes(routes)}
+        {fatalError.error ? (
+          <div className="global-container">
+            <FatalError fatalError={fatalError} />
+          </div>
+        ) : (
+          <FatalErrorBoundary>{renderRoutes(routes)}</FatalErrorBoundary>
+        )}
       </div>
     );
   }

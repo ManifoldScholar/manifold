@@ -1,6 +1,6 @@
 export * as currentUserActions from "./currentUser";
 export * as entityStoreActions from "./entityStore";
-export * as errorActions from "./error";
+export * as fatalErrorActions from "./fatalError";
 export * as notificationActions from "./notifications";
 export * as uiColorActions from "./ui/color";
 export * as uiFilterActions from "./ui/filter";

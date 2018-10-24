@@ -1,7 +1,7 @@
 import get from "lodash/get";
 import has from "lodash/has";
 import startsWith from "lodash/startsWith";
-import { notificationActions } from "actions";
+import { fatalErrorActions, notificationActions } from "actions";
 
 function isApiError(error) {
   return error.id === "API_ERROR";
@@ -53,7 +53,9 @@ function notifyApiErrors(dispatch, action) {
 function checkForFatalErrors(dispatch, action) {
   const fatalError = firstFatalError(action);
   if (!fatalError) return false;
-  dispatch(notificationActions.fatalError(fatalError));
+  dispatch(
+    fatalErrorActions.setFatalError(fatalError, fatalErrorActions.types.api)
+  );
 }
 
 export default function entityStoreMiddleware({ dispatch, getStateIgnored }) {

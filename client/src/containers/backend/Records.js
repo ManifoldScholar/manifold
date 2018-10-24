@@ -23,7 +23,7 @@ export default class RecordsContainer extends PureComponent {
         ability="update"
         entity={["user", "maker", "page", "feature"]}
         failureFatalError={{
-          detail: "You are not allowed to manage records."
+          body: "You are not allowed to manage records."
         }}
       >
         <RedirectToFirstMatch

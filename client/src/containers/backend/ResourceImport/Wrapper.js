@@ -113,7 +113,7 @@ export class ResourceImportWrapper extends PureComponent {
       <HigherOrder.Authorize
         entity={project}
         failureFatalError={{
-          detail: "You are not allowed to import resources for this project."
+          body: "You are not allowed to import resources for this project."
         }}
         ability={["update"]}
       >

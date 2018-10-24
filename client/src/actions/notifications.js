@@ -18,8 +18,3 @@ export const removeNotifications = createAction(
   scope => scope
 );
 export const removeAllNotifications = createAction("REMOVE_ALL_NOTIFICATIONS");
-export const fatalError = createAction(
-  "FATAL_ERROR_NOTIFICATION",
-  error => error
-);
-export const removeFatalError = createAction("REMOVE_FATAL_ERROR_NOTIFICATION");

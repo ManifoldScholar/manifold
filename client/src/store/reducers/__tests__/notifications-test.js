@@ -5,7 +5,6 @@ describe("store/reducers/notifications", () => {
     const state = notificationsReducer(undefined, {});
     // Must mirror initial state declared in '../notifications'
     expect(state).toEqual({
-      fatalError: null,
       notifications: []
     });
   });

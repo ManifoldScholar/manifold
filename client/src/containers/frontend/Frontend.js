@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { HigherOrder, FatalError, Utility } from "components/global";
+import { HigherOrder, Utility } from "components/global";
 import { Layout } from "components/frontend";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, subjectsAPI, requests } from "api";
@@ -72,9 +72,13 @@ export class FrontendContainer extends Component {
   }
 
   render() {
-    const fatalError = this.props.notifications.fatalError;
     const skipId = "skip-to-main";
-    const mainClasses = get(this.props.settings, "attributes.pressLogoStyles.small") ? "extra-top" : "";
+    const mainClasses = get(
+      this.props.settings,
+      "attributes.pressLogoStyles.small"
+    )
+      ? "extra-top"
+      : "";
 
     return (
       <HigherOrder.BodyClass className={"browse"}>
@@ -100,13 +104,7 @@ export class FrontendContainer extends Component {
             id={skipId}
             className={mainClasses}
           >
-            {fatalError ? (
-              <div className="global-container">
-                <FatalError error={fatalError} />
-              </div>
-            ) : (
-              <div>{renderRoutes(this.props.route.routes)}</div>
-            )}
+            <div>{renderRoutes(this.props.route.routes)}</div>
           </main>
           <Layout.Footer
             pages={this.props.pages}

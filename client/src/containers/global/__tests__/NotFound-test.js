@@ -1,18 +1,24 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import NotFound from "../NotFound";
-import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Frontend Not Found Container", () => {
-  const component = renderer.create(<NotFound />);
+  const store = build.store();
+  const component = renderer.create(
+    <Provider store={store}>
+      <NotFound />
+    </Provider>
+  );
 
   it("renders correctly", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it("doesn't render to null", () => {
+  it("renders to null", () => {
     let tree = component.toJSON();
-    expect(tree).not.toBe(null);
+    expect(tree).toBe(null);
   });
 });

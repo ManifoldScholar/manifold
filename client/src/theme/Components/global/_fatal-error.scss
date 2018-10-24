@@ -1,12 +1,23 @@
-.error-page {
-  display: table;
-  width: 100%;
-  min-height: inherit;
+/* stylelint-disable */
+body.fatal-error-page {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  #content {
+    flex-grow: 1;
+    min-height: 100%;
+  }
+}
+/* stylelint-enable */
+
+.fatal-error {
+
+  height: 100%;
   border: 20px solid $sp40Tertiary;
 
   .error-wrapper {
-    display: table-cell;
-    padding: 10vh 0;
+    padding: 10vh 4vh 4vh;
     vertical-align: middle;
   }
 
@@ -75,15 +86,71 @@
 
     p {
       @include subtitlePrimary;
-      font-size: 14px;
+      font-size: 18px;
       line-height: 1.421;
       color: $neutral75;
 
       .backend & {
         color: $neutral20;
       }
+
+      .dismiss {
+        @include buttonUnstyled;
+        margin-top: 10px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
     }
   }
+
+  .stacks {
+    margin-top: 5vh;
+    font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+
+    .stack + .stack {
+      margin-top: 50px;
+    }
+
+    h3 {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .footnote {
+      display: block;
+      font-size: 12px;
+      font-style: italic;
+      color: $neutral40;
+      text-align: center;
+    }
+
+    ol {
+      background-color: $neutral05;
+      padding-inline-start: 50px;
+
+      li {
+        padding: 5px;
+      }
+
+      li:nth-child(even) {
+        background-color: darken($neutral05, 2.5);
+      }
+
+      span.highlight {
+        color: $sp40Tertiary;
+      }
+
+      span.location {
+        display: block;
+        padding-top: 4px;
+        font-size: 13px;
+      }
+
+    }
+
+  }
+
 
 }
 

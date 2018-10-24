@@ -6,10 +6,13 @@ describe("Global.FatalError component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
       <FatalError
-        error={{
-          detail: "Kriss Kross'll make you",
-          status: 404,
-          title: "Jump, jump"
+        fatalError={{
+          error: {
+            status: 404,
+            heading: "Kriss Kross'll make you",
+            body: "Jump, jump"
+          },
+          type: "TEST"
         }}
       />
     );

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { HigherOrder, FatalError, Utility } from "components/global";
+import { HigherOrder, Utility } from "components/global";
 import { Layout as LayoutFrontend } from "components/frontend";
 import { Layout as LayoutBackend } from "components/backend";
 import { commonActions } from "actions/helpers";
@@ -74,43 +74,13 @@ export class BackendContainer extends PureComponent {
     this.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
   }
 
-  hasFatalError() {
-    return !!this.props.notifications.fatalError;
-  }
-
-  hasAuthenticationError() {
-    return !this.props.authentication.authenticated;
-  }
-
   childProps() {
     return {
       dispatch: this.props.dispatch
     };
   }
 
-  renderError(error) {
-    return (
-      <div className="global-container">
-        <FatalError error={error} />
-      </div>
-    );
-  }
-
-  renderFatalError() {
-    return this.renderError(this.props.notifications.fatalError);
-  }
-
-  renderAuthenticationError() {
-    return this.renderError({
-      status: null,
-      detail: "Please login to access the backend.",
-      title: "Login Required"
-    });
-  }
-
   render() {
-    if (this.hasFatalError()) return this.renderFatalError();
-    if (this.hasAuthenticationError()) return this.renderAuthenticationError();
     const skipId = "skip-to-main";
 
     return (

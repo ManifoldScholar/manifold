@@ -153,7 +153,7 @@ export class CollectionWrapperContainer extends PureComponent {
         <HigherOrder.Authorize
           entity={collection}
           failureFatalError={{
-            detail: "You are not allowed to edit this collection."
+            body: "You are not allowed to edit this collection."
           }}
           ability="update"
         >
@@ -176,11 +176,11 @@ export class CollectionWrapperContainer extends PureComponent {
             secondaryLinks={secondaryLinks}
             titleHtml
           />
-          <Layout.BackendPanel sidebar={<Navigation.Secondary links={secondaryLinks} panel />}>
+          <Layout.BackendPanel
+            sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
+          >
             <Utility.SkipLink skipId={skipId} />
-            <div id={skipId}>
-              {this.renderRoutes()}
-            </div>
+            <div id={skipId}>{this.renderRoutes()}</div>
           </Layout.BackendPanel>
         </HigherOrder.Authorize>
       </div>
