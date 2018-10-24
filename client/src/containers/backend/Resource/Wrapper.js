@@ -151,7 +151,7 @@ export class ResourceWrapperContainer extends PureComponent {
         <HigherOrder.Authorize
           entity={resource}
           failureFatalError={{
-            detail: "You are not allowed to edit this resource."
+            body: "You are not allowed to edit this resource."
           }}
           ability="update"
         >
@@ -176,11 +176,11 @@ export class ResourceWrapperContainer extends PureComponent {
             subtitle={resource.attributes.subtitle}
             secondaryLinks={secondaryLinks}
           />
-          <Layout.BackendPanel sidebar={<Navigation.Secondary links={secondaryLinks} panel />}>
+          <Layout.BackendPanel
+            sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
+          >
             <Utility.SkipLink skipId={skipId} />
-            <div id={skipId}>
-              {this.renderRoutes()}
-            </div>
+            <div id={skipId}>{this.renderRoutes()}</div>
           </Layout.BackendPanel>
         </HigherOrder.Authorize>
       </div>

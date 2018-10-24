@@ -21,7 +21,7 @@ export class SettingsWrapperContainer extends PureComponent {
       <HigherOrder.Authorize
         entity="settings"
         failureFatalError={{
-          detail: "You are not allowed to update settings."
+          body: "You are not allowed to update settings."
         }}
         ability="update"
       >

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Resource, Utility } from "components/frontend";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, fatalErrorActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, resourcesAPI, collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
@@ -48,21 +48,18 @@ export class ResourceDetailContainer extends PureComponent {
     visibility: PropTypes.object
   };
 
-  // Commented out while we're not using this check for anything
-  // componentDidUpdate() {
-  //   if (this.props.resource && this.props.collection) {
-  //     if (
-  //       !this.collectionIncludesResource(
-  //         this.props.resource,
-  //         this.props.collection
-  //       )
-  //     ) {
-  //          TODO: Render the NotFound component.
-  //          Let's upgrade to React 16 for error boundaries first.
-  //          throw new Error("Page not found");
-  //     }
-  //   }
-  // }
+  componentWillMount() {
+    if (this.props.resource && this.props.collection) {
+      if (
+        !this.collectionIncludesResource(
+          this.props.collection,
+          this.props.resource
+        )
+      ) {
+        this.props.dispatch(fatalErrorActions.trigger404());
+      }
+    }
+  }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.feProject));

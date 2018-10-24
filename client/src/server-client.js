@@ -20,6 +20,7 @@ import has from "lodash/has";
 import { matchRoutes } from "react-router-config";
 import { createLocation } from "history";
 import getRoutes from "/routes";
+import FatalError from "components/global/FatalError";
 
 // Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
 // default TLS value appears to fix this. I believe this issue has
@@ -49,6 +50,17 @@ const respondWithRedirect = (res, redirectLocation) => {
   res.end();
 };
 
+const fatalErrorOutput = (errorComponent, store) => {
+  return ReactDOM.renderToString(
+    <Html
+      component={errorComponent}
+      disableClientSideRender
+      stats={stats}
+      store={store}
+    />
+  );
+};
+
 const render = (req, res, store) => {
   store.dispatch({ type: "SERVER_LOADED", payload: req.originalUrl });
 
@@ -68,21 +80,21 @@ const render = (req, res, store) => {
   } catch (renderError) {
     isError = true;
     ch.error("Server-side render failed in server-react.js");
-    renderString = exceptionRenderer(
-      renderError,
-      "ERROR: Server-side render failed in server-react.js"
-    );
+    const errorComponent = exceptionRenderer(renderError);
+    renderString = fatalErrorOutput(errorComponent, store);
   } finally {
     // Redirect if the routing context has a url prop.
     if (routingContext.url) {
       respondWithRedirect(res, routingContext.url);
     } else {
       const state = store.getState();
-      if (has(state, "notifications.fatalError.status")) {
-        res.statusCode = state.notifications.fatalError.status;
+      if (has(state, "fatalError.error.status")) {
+        res.statusCode = state.fatalError.error.status;
+        const errorComponent = <FatalError fatalError={state.fatalError} />;
+        renderString = fatalErrorOutput(errorComponent, store);
       }
       if (isError) {
-        res.statusCode = 302;
+        res.statusCode = 500;
         res.setHeader("Content-Type", "text/html");
         res.end(renderString);
       } else {

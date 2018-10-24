@@ -1,6 +1,5 @@
 import CollectionDetail from "./CollectionDetail";
 import Contact from "./Contact";
-import NotFound from "./NotFound";
 import Featured from "./Featured";
 import Following from "./Following";
 import Frontend from "./Frontend";
@@ -19,7 +18,6 @@ import Unsubscribe from "./Unsubscribe";
 export {
   CollectionDetail,
   Contact,
-  NotFound,
   Featured,
   Following,
   Frontend,

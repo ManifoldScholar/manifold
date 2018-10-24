@@ -2,7 +2,7 @@
 
 exports[`Global.FatalError component renders correctly 1`] = `
 <section
-  className="error-page"
+  className="fatal-error"
 >
   <div
     className="error-wrapper"
@@ -24,8 +24,10 @@ exports[`Global.FatalError component renders correctly 1`] = `
         </div>
         <h3>
           We're at a bit of a loose end.
-          <br />
-          Frightfully sorry.
+          <span>
+            <br />
+            Frightfully sorry.
+          </span>
         </h3>
       </header>
       <div
@@ -35,13 +37,10 @@ exports[`Global.FatalError component renders correctly 1`] = `
         role="alert"
       >
         <h1>
-          404 error.
-           
-          Jump, jump
-        </h1>
-        <p>
+          404
+           Error: 
           Kriss Kross'll make you
-        </p>
+        </h1>
       </div>
     </div>
   </div>

@@ -1,6 +1,5 @@
 const initialState = {
-  notifications: [],
-  fatalError: null
+  notifications: []
 };
 
 const addNotification = (state, action) => {
@@ -13,14 +12,6 @@ const addNotification = (state, action) => {
   }
   notifications.unshift(notification);
   return Object.assign({}, state, { notifications });
-};
-
-const setFatalError = (state, action) => {
-  return Object.assign({}, state, { fatalError: action.payload });
-};
-
-const clearFatalError = (state, actionIgnored) => {
-  return Object.assign({}, state, { fatalError: null });
 };
 
 const removeNotification = (state, action) => {
@@ -59,10 +50,6 @@ const removeAllNotifications = state => {
 };
 
 const notificationReducer = (state = initialState, action) => {
-  if (action.type === "ROUTE_UPDATE" && state.fatalError) {
-    return clearFatalError(state, action);
-  }
-
   switch (action.type) {
     case "ADD_NOTIFICATION":
       return addNotification(state, action);
@@ -72,8 +59,6 @@ const notificationReducer = (state = initialState, action) => {
       return removeNotificationsByScope(state, action);
     case "REMOVE_ALL_NOTIFICATIONS":
       return removeAllNotifications(state, action);
-    case "FATAL_ERROR_NOTIFICATION":
-      return setFatalError(state, action);
     case "ROUTE_UPDATE":
       return clearDrawerNotifications(state, action);
     default:

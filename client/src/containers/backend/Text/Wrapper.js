@@ -150,7 +150,7 @@ export class TextWrapperContainer extends PureComponent {
         <HigherOrder.Authorize
           entity={text}
           failureFatalError={{
-            detail: "You are not allowed to update this text."
+            body: "You are not allowed to update this text."
           }}
           ability={["update"]}
         >

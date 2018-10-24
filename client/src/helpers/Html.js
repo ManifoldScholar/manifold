@@ -8,6 +8,7 @@ import reduce from "lodash/reduce";
 import isString from "lodash/isString";
 import isArray from "lodash/isArray";
 import endsWith from "lodash/endsWith";
+import startsWith from "lodash/startsWith";
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -22,7 +23,8 @@ export default class Html extends Component {
   static propTypes = {
     stats: PropTypes.object,
     component: PropTypes.node,
-    store: PropTypes.object
+    store: PropTypes.object,
+    disableClientSideRender: PropTypes.bool
   };
 
   reduceAssets(ext) {
@@ -70,13 +72,20 @@ export default class Html extends Component {
       if (a === "build/theme.js") return -1;
       return 1;
     });
-    return scripts.map(script => (
-      <script src={`/${script}`} key={script} charSet="UTF-8" />
-    ));
+
+    return scripts.map(script => {
+      if (
+        this.props.disableClientSideRender &&
+        startsWith(script, "build/client")
+      ) {
+        return "";
+      }
+      return <script src={`/${script}`} key={script} charSet="UTF-8" />;
+    });
   };
 
   render() {
-    const { component, store } = this.props;
+    const { component, store, disableClientSideRender } = this.props;
     const content = component ? ReactDOM.renderToString(component) : null;
     const helmet = Helmet.renderStatic();
     const bodyClass = HigherOrder.BodyClass.rewind();
@@ -101,11 +110,10 @@ export default class Html extends Component {
           <link rel="shortcut icon" href="/favicon.ico?client=true" />
 
           {this.stylesheets()}
-          {/* styles (will be present only in production with webpack extract text plugin) */}
         </head>
         <body className={bodyClass}>
           <div id="content" {...contentProps} />
-          {store ? (
+          {store && !disableClientSideRender ? (
             <script
               dangerouslySetInnerHTML={{
                 __html: `window.__INITIAL_STATE__=${serialize(

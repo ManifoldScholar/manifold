@@ -125,7 +125,6 @@
     "react-text-mask": "5.x",
     "react-transition-group": "1.x",
     "react-typekit": "^1.0.8",
-    "redbox-react": "1.x",
     "redux": "^4.0",
     "redux-actions": "^2.0",
     "redux-promise": "^0.6",

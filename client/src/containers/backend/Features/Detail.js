@@ -210,7 +210,7 @@ class FeatureDetailContainer extends PureComponent {
     return (
       <HigherOrder.Authorize
         failureFatalError={{
-          detail: `You are not allowed to ${authProps.ability} features.`
+          body: `You are not allowed to ${authProps.ability} features.`
         }}
         {...authProps}
       >

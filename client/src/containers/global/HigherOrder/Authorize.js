@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import isString from "lodash/isString";
 import isPlainObject from "lodash/isPlainObject";
 import { Redirect } from "react-router-dom";
-import { notificationActions } from "actions";
+import { fatalErrorActions, notificationActions } from "actions";
 import Authorization from "helpers/authorization";
 
 export class AuthorizeComponent extends PureComponent {
@@ -26,9 +26,19 @@ export class AuthorizeComponent extends PureComponent {
     failureRedirect: PropTypes.string,
     failureNotification: PropTypes.oneOfType([
       PropTypes.bool,
-      PropTypes.object
+      PropTypes.shape({
+        heading: PropTypes.string,
+        body: PropTypes.string,
+        level: PropTypes.number
+      })
     ]),
-    failureFatalError: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    failureFatalError: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.shape({
+        heading: PropTypes.string,
+        body: PropTypes.string
+      })
+    ]),
     children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     authentication: PropTypes.object
   };
@@ -69,13 +79,18 @@ export class AuthorizeComponent extends PureComponent {
   maybeError(props) {
     if (!!props.failureFatalError && !this.authorization.authorize(props)) {
       let error = {
-        title: "Access Denied.",
-        detail: "You do not have sufficient permissions to perform this action."
+        heading: "Access Denied.",
+        body: "You do not have sufficient permissions to perform this action."
       };
       if (isPlainObject(props.failureFatalError)) {
         error = Object.assign(error, props.failureFatalError);
       }
-      props.dispatch(notificationActions.fatalError(error));
+      props.dispatch(
+        fatalErrorActions.setFatalError(
+          error,
+          fatalErrorActions.types.authorization
+        )
+      );
     }
   }
 
