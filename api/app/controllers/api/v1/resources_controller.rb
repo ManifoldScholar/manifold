@@ -18,7 +18,7 @@ module Api
         @resource = load_zresource
         render_single_resource @resource,
                                serializer: ResourceFullSerializer,
-                               includes: INCLUDES
+                               include: INCLUDES
       end
 
       def create
