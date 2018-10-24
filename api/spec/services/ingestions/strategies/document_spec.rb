@@ -287,7 +287,7 @@ RSpec.describe Ingestions::Strategies::Document do
     let!(:manifest) { described_class.run(context: context).result }
 
     it "has the correct number of ingestion sources" do
-      expect(manifest[:relationships][:ingestion_sources].length).to eq 1
+      expect(manifest[:relationships][:ingestion_sources].length).to eq 2
     end
 
   end

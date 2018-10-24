@@ -14,6 +14,7 @@ module Ingestions
       end
 
       def convert_to_html
+        relativize_extracted_media_paths!
         doc = parsed_html
         doc.at("head").add_child styles
         doc
@@ -22,14 +23,28 @@ module Ingestions
       private
 
       def parsed_html
-        Nokogiri::HTML raw_html
+        @parsed_html ||= Nokogiri::HTML raw_html
       end
 
       def raw_html
         @raw_html ||= PandocRuby.convert([context.abs(source_path)],
                                          :s,
                                          from: :docx,
-                                         to: :html)
+                                         to: :html,
+                                         extract_media: context.source_root)
+      end
+
+      # Pandoc changes sources to absolute paths when it extracts the
+      # media items from a document.  When mapping sources in the body
+      # transformer, our source path is made up of paths relative to
+      # the /source dir.  This method sets the extracted paths to
+      # a path relative to the /sources dir.
+      def relativize_extracted_media_paths!
+        media_types = %w(img image video audio)
+        xpath = media_types.map { |m| "//#{m}" }.join(" | ")
+        parsed_html.search(xpath).each do |tag|
+          tag["src"] = context.rel(tag["src"], context.source_root)
+        end
       end
 
       def styles
