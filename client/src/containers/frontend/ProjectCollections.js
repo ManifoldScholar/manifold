@@ -14,20 +14,24 @@ const { request } = entityStoreActions;
 const perPage = 8;
 
 export class ProjectsCollectionsContainer extends Component {
-  static fetchData = (dispatch, location) => {
+  static fetchData = (getState, dispatch, location) => {
     const query = queryString.parse(location.search);
     const pagination = {
       number: query.page || 1,
       size: perPage
     };
-    const collectionsRequest = request(
-      projectCollectionsAPI.index(
-        { withProjects: true, visible: true },
-        pagination
-      ),
+
+    const collectionsFetch = projectCollectionsAPI.index(
+      { withProjects: true, visible: true },
+      pagination
+    );
+    const collectionsAction = request(
+      collectionsFetch,
       requests.feProjectCollections
     );
-    return dispatch(collectionsRequest);
+    const { promise: one } = dispatch(collectionsAction);
+    const promises = [one];
+    return Promise.all(promises);
   };
 
   static mapStateToProps = state => {
@@ -63,19 +67,9 @@ export class ProjectsCollectionsContainer extends Component {
     this.commonActions = commonActions(props.dispatch);
   }
 
-  componentDidMount() {
-    ProjectsCollectionsContainer.fetchData(
-      this.props.dispatch,
-      this.props.location
-    );
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.location === this.props.location) return null;
-    ProjectsCollectionsContainer.fetchData(
-      this.props.dispatch,
-      this.props.location
-    );
+    this.props.fetchData(this.props);
   }
 
   currentQuery() {
@@ -126,7 +120,7 @@ export class ProjectsCollectionsContainer extends Component {
     return (
       <div style={{ overflowX: "hidden" }}>
         <Utility.BackLinkPrimary
-          link={lh.link("frontendProjects")}
+          link={lh.link("frontendProjectsAll")}
           backText={"Back to projects"}
         />
         {this.renderProjectCollections()}
