@@ -13,7 +13,7 @@ class Navigation {
         children: [
           {
             label: "All Projects",
-            route: "frontendProjects"
+            route: "frontendProjectsAll"
           },
           {
             label: "Project Collections",

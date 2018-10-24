@@ -88,7 +88,6 @@ export default class LayoutHeader extends PureComponent {
               authentication={this.props.authentication}
               visibility={this.props.visibility}
               mode="frontend"
-              exact
             />
           </div>
 
