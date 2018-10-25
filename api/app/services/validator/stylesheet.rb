@@ -1,10 +1,8 @@
 require "memoist"
 
 module Validator
-  # This class takes an HTML string input and validates it. In doing so, it will parse the
-  # HTML and transform it into a valid HTML structure that can be consumed by the Manifold
-  # frontend. This mainly involves insuring proper nesting, and making sure that the
-  # structure will work with ReactDom.
+  # This class takes an CSS string input and validates to ensure it follows our CSS
+  # rules.
   class Stylesheet
 
     extend Memoist
@@ -18,11 +16,32 @@ module Validator
     def validate(css)
       reset
       return output unless css?(css)
-      css = extract_at_rules(css)
+      css = encode_css_for_parser(extract_at_rules(css))
       @parser.load_string!(css.dup)
       parser.each_selector(&method(:visit_selector))
       output
     end
+
+    # The CSS parser we're currently using converts all incoming strings from binary
+    # to UTF8, even though we're passing it a UTF8 string. Should we replace the CSS
+    # parser with a different library, we can likely remove this. In the meantime, this
+    # method takes a (assumed utf-8, because we know what we are doing) string, splits it
+    # by characters, then tries to encode each character in ascii-8bit. if it fails, it
+    # creates a string that looks like `"\\25cf  "` by converting the character to its
+    # ordinal value, casting that to a hexadecimal string (`to_s(16)`), and then
+    # rjustifying that string so it is zerofilled 4-width, which is what CSS expects.
+    # rubocop:disable Style/CharacterLiteral, Style/RescueStandardError
+    def encode_css_for_parser(string)
+      parts = string.chars.map do |c|
+        begin
+          c.encode("binary", "utf-8")
+        rescue
+          "\\#{c.ord.to_s(16).rjust(4, ?0)}"
+        end
+      end
+      parts.join
+    end
+    # rubocop:enable Style/CharacterLiteral, Style/RescueStandardError
 
     # Removes disallowed declarations from declarations
     # @param declarations [String]
