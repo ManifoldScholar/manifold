@@ -279,4 +279,11 @@ RSpec.describe Validator::Stylesheet do
     expect(results).to eq_ignoring_whitespace "#{valid}"
   end
 
+  it "maps UTF8 characters to hexadecimal equivalent" do
+    selector = ".foo > li:before{content:\"●  \"}"
+    valid = ".manifold-text-section .foo > li:before {content: \"\\25cf  \";}"
+    results = validator.validate(selector)
+    expect(results).to eq_ignoring_whitespace "#{valid}"
+  end
+
 end
