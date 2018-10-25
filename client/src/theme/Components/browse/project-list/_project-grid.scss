@@ -41,12 +41,30 @@
       border-radius: 50%;
     }
 
-    .block-label {
-
-    }
-
     + .list-pagination-primary {
       margin-top: 30px;
+    }
+
+    &.empty {
+      @include panelRounded;
+      width: 100%;
+      padding: 20px 22px;
+      background-color: $neutral10;
+
+      @include respond($break75) {
+        padding: 24px 30px;
+      }
+
+      .message {
+        @include templateHead;
+        font-size: 16px;
+        line-height: 1.313;
+        color: $neutral90;
+
+        @include respond($break75) {
+          font-size: 18px;
+        }
+      }
     }
 
     // Frontend grid-style list
