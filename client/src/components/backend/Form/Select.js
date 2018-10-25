@@ -52,7 +52,6 @@ class FormSelect extends Component {
           idForError={this.props.idForError}
         >
           <label htmlFor={this.id}>{this.props.label}</label>
-          <Instructions instructions={this.props.instructions} />
           <div className="form-select">
             <i className="manicon manicon-caret-down" aria-hidden="true" />
             <select
@@ -64,6 +63,7 @@ class FormSelect extends Component {
               {options}
             </select>
           </div>
+          <Instructions instructions={this.props.instructions} />
         </GlobalForm.Errorable>
       </div>
     );
