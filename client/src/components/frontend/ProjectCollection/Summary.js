@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ProjectList } from "components/frontend";
 import get from "lodash/get";
-import size from "lodash/size";
+import memoize from "lodash/memoize";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import { Utility } from "components/global";
@@ -23,67 +23,86 @@ export default class ProjectCollectionSummary extends Component {
     limit: 8
   };
 
+  get collection() {
+    return this.props.projectCollection;
+  }
+
+  get description() {
+    return this.collection.attributes.description;
+  }
+
+  get projects() {
+    return this.mappedProjects(this.collection);
+  }
+
+  get hasProjects() {
+    return this.projects.length > 0;
+  }
+
+  mappedProjects = memoize(collection => {
+    return this.collection.relationships.collectionProjects.map(
+      cp => cp.relationships.project
+    );
+  });
+
   render() {
-    const projectCollection = this.props.projectCollection;
-    if (!projectCollection) return null;
+    if (!this.collection) return null;
 
     const backgroundClasses = classnames({
       "project-collection-summary": true,
       "bg-neutral05": this.props.ordinal % 2 === 0
     });
     const iconFill =
-      projectCollection.attributes.icon === "new-round"
+      this.collection.attributes.icon === "new-round"
         ? "#52e3ac"
         : "currentColor";
-    const description = projectCollection.attributes.description;
-    const projects = projectCollection.relationships.collectionProjects.map(
-      cp => cp.relationships.project
-    );
-    const hasProjects = size(projects) > 0;
 
     return (
-      <section key={projectCollection.id} className={backgroundClasses}>
+      <section key={this.collection.id} className={backgroundClasses}>
         <div className="container project-list-container">
           <Link
             className="section-heading"
             to={lh.link(
               "frontendProjectCollection",
-              projectCollection.attributes.slug
+              this.collection.attributes.slug
             )}
           >
             <div className="main">
               <i className={"manicon"} aria-hidden="true">
                 <Utility.IconComposer
-                  icon={projectCollection.attributes.icon}
+                  icon={this.collection.attributes.icon}
                   size={56}
                   fill={iconFill}
                 />
               </i>
               <div className="body">
-                <h4 className="title">{projectCollection.attributes.title}</h4>
+                <h4 className="title">{this.collection.attributes.title}</h4>
               </div>
             </div>
           </Link>
-          {description && (
+          {this.description && (
             <div className="details">
               <p
                 className="description"
                 dangerouslySetInnerHTML={{
-                  __html: projectCollection.attributes.description
+                  __html: this.description
                 }}
               />
             </div>
           )}
-          {hasProjects ? (
+          {this.hasProjects ? (
             <ProjectList.Grid
               authenticated={this.props.authentication.authenticated}
-              favorites={get(this.props.authentication, "currentUser.favorites")}
-              projects={projects}
+              favorites={get(
+                this.props.authentication,
+                "currentUser.favorites"
+              )}
+              projects={this.projects}
               dispatch={this.props.dispatch}
               limit={this.props.limit}
               viewAllUrl={lh.link(
                 "frontendProjectCollection",
-                this.props.projectCollection.attributes.slug
+                this.collection.attributes.slug
               )}
               viewAllLabel={"See the full collection"}
             />
