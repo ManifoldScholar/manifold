@@ -45,7 +45,6 @@ export class HomeContainer extends Component {
       projectCollectionsAPI.index({
         visible: true,
         showOnHomepage: true,
-        projects: true,
         order: "position ASC"
       }),
       requests.feProjectCollections

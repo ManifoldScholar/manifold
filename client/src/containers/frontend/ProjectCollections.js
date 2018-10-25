@@ -22,7 +22,7 @@ export class ProjectsCollectionsContainer extends Component {
     };
 
     const collectionsFetch = projectCollectionsAPI.index(
-      { withProjects: true, visible: true },
+      { visible: true, order: "position ASC" },
       pagination
     );
     const collectionsAction = request(
