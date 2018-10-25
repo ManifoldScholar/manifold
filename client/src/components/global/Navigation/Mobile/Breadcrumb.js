@@ -27,14 +27,16 @@ export default class MobileBreadcrumb extends PureComponent {
     if (!links) return null;
     return links.find(link => {
       const route = lh.routeFromName(link.route);
-      const adjustedRoute = Object.assign({}, route, {
-        exact: route.path === "/"
-      });
-      return matchPath(this.props.location.pathname, adjustedRoute) !== null;
+
+      if (link.matchType === "link" || link.externalUrl) {
+        return this.props.location.pathname === this.pathForLink(link);
+      }
+      return matchPath(this.props.location.pathname, route) !== null;
     });
   }
 
   pathForLink(link) {
+    if (link.externalUrl) return link.externalUrl;
     const args = link.args || [];
     const route = link.linksTo || link.route;
     return lh.link(route, ...args);
