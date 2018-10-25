@@ -3,12 +3,15 @@ import BooksOnShelf from "./BooksOnShelf";
 import BooksOnShelfStroke from "./BooksOnShelfStroke";
 import BookStackVertical from "./BookStackVertical";
 import BooksWithGlasses from "./BooksWithGlasses";
+import Check from "./Check";
 import EyeClosed from "./EyeClosed";
 import EyeOpen from "./EyeOpen";
 import Globe from "./Globe";
 import Lamp from "./Lamp";
+import Minus from "./Minus";
 import Mug from "./Mug";
 import NewRound from "./NewRound";
+import Plus from "./Plus";
 import ResourceAudio from "./ResourceAudio";
 import ResourceCollection from "./ResourceCollection";
 import ResourceDocument from "./ResourceDocument";
@@ -28,12 +31,15 @@ export default {
   BooksOnShelfStroke,
   BookStackVertical,
   BooksWithGlasses,
+  Check,
   EyeClosed,
   EyeOpen,
   Globe,
   Lamp,
+  Minus,
   Mug,
   NewRound,
+  Plus,
   ResourceAudio,
   ResourceCollection,
   ResourceDocument,

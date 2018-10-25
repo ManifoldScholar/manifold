@@ -21,7 +21,7 @@
       &:hover, &:focus {
         outline: 0;
 
-        figure img {
+        figure > img {
           border-color: $accentPrimary;
         }
 
@@ -58,6 +58,7 @@
       li {
         flex: 1 1 25%;
         max-width: 25%;
+        padding-left: 0;
         margin-bottom: 18px;
         border-bottom: none;
       }
@@ -66,7 +67,7 @@
         &:hover, &:focus {
           @include panelRounded;
 
-          figure img {
+          figure > img {
             border-color: transparent;
           }
 

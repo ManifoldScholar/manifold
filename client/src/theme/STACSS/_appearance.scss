@@ -413,17 +413,17 @@
       padding-left: 15px;
     }
 
-    img, svg {
+    > img, > svg {
       width: 50px;
       height: auto;
     }
 
-    img {
+    > img {
       border: 1px solid transparent;
       transition: border $duration $timing;
     }
 
-    svg {
+    > svg {
       max-height: 50px;
       transition: fill $duration $timing;
     }
@@ -510,7 +510,7 @@
         padding-left: 0;
       }
 
-      img, svg {
+      > img, > svg {
         width: auto;
         height: 100%;
       }
