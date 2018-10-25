@@ -8,92 +8,17 @@ import Annotation from "containers/reader/Annotation";
 import locationHelper from "helpers/location";
 
 export default class Text extends Component {
-  static propTypes = {
-    text: PropTypes.object,
-    authentication: PropTypes.object,
-    section: PropTypes.object,
-    resources: PropTypes.array,
-    collections: PropTypes.array,
-    annotations: PropTypes.array,
-    appearance: PropTypes.object,
-    location: PropTypes.object,
-    match: PropTypes.object,
-    children: PropTypes.object,
-    visibility: PropTypes.object,
-    history: PropTypes.object.isRequired
-  };
-
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      lockedSelection: null,
-      filteredAnnotations: this.filterAnnotations(
-        props.visibility.annotation,
-        props.annotations,
-        props.authentication.currentUser
-      )
-    };
-  }
-
-  componentDidUpdate(prevProps) {
-    this.checkRequestAnnotationHash();
-    if (
-      prevProps.visibility.visibilityFilters !==
-        this.props.visibility.visibilityFilters ||
-      prevProps.annotations !== this.props.annotations
-    ) {
-      const filteredAnnotations = this.filterAnnotations(
-        this.props.visibility.visibilityFilters,
-        this.props.annotations
-      );
-      this.setState({ filteredAnnotations });
-    }
-  }
-
-  // If the URL points to annotation that's not currently visible (not in
-  // filteredAnnotations), but is in the unfiltered collection, then we can remove
-  // it from the URL because the user has filtered it off the screen for now.
-  checkRequestAnnotationHash() {
-    if (!this.state.filteredAnnotations) return;
-    if (!locationHelper.hashed(location)) return;
-    if (!locationHelper.hashTypeMatch(location, "annotation")) return;
-    const hashId = locationHelper.hashId(location, "annotation");
-    const finder = a => a.id === hashId;
-    const filteredMatch = this.state.filteredAnnotations.find(finder);
-    if (filteredMatch) return;
-    const collectionMatch = this.props.annotations.find(finder);
-    if (!collectionMatch) return;
-    this.props.history.push({ hash: "", state: { noScroll: true } });
-  }
-
-  // Store the current locked selection in the section, which wraps the annotator and
-  // the body. This locked selection is then passed down to the body, which needs to
-  // render it in the text.
-  lockSelection = raw => {
-    if (!raw) return this.setState({ lockedSelection: null });
-    const lockedSelection = {
-      id: "selection",
-      attributes: raw,
-      type: "annotations"
-    };
-    this.setState({ lockedSelection });
-  };
-
-  filterAnnotations(visibilityFilters, annotations) {
+  static filterAnnotations(visibilityFilters, annotations) {
     if (!visibilityFilters) return annotations;
 
     const filterEntity = (list, format) => {
-      return this.filterBy(list, visibilityFilters, format);
+      return Text.filterBy(list, visibilityFilters, format);
     };
 
     return Object.keys(visibilityFilters).reduce(filterEntity, annotations);
   }
 
-  filterBy(list, visibilityFilters, format) {
+  static filterBy(list, visibilityFilters, format) {
     const filter = visibilityFilters[format];
     let filtered = list;
 
@@ -120,6 +45,90 @@ export default class Text extends Component {
 
     return filtered;
   }
+
+  static propTypes = {
+    text: PropTypes.object,
+    authentication: PropTypes.object,
+    section: PropTypes.object,
+    resources: PropTypes.array,
+    collections: PropTypes.array,
+    annotations: PropTypes.array,
+    appearance: PropTypes.object,
+    location: PropTypes.object,
+    match: PropTypes.object,
+    children: PropTypes.object,
+    visibility: PropTypes.object,
+    history: PropTypes.object.isRequired
+  };
+
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      lockedSelection: null,
+      visibilityFiltersMemo: props.visibility.visibilityFilters,
+      annotationsMemo: props.annotations,
+      filteredAnnotations: Text.filterAnnotations(
+        props.visibility.annotation,
+        props.annotations,
+        props.authentication.currentUser
+      )
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (
+      props.visibility.visibilityFilters !== state.visibilityFiltersMemo ||
+      props.annotations !== state.annotationsMemo
+    ) {
+      return {
+        filteredAnnotations: Text.filterAnnotations(
+          props.visibility.visibilityFilters,
+          props.annotations
+        ),
+        annotationMemo: props.annotations,
+        visibilityFiltersMemo: props.visibility.visibilityFilters
+      };
+    }
+    return null;
+  }
+
+  componentDidUpdate() {
+    this.checkRequestAnnotationHash();
+  }
+
+  // If the URL points to annotation that's not currently visible (not in
+  // filteredAnnotations), but is in the unfiltered collection, then we can remove
+  // it from the URL because the user has filtered it off the screen for now.
+  checkRequestAnnotationHash() {
+    if (!Array.isArray(this.state.filteredAnnotations)) return;
+    if (this.state.filteredAnnotations.length === 0) return;
+    if (!locationHelper.hashed(location)) return;
+    if (!locationHelper.hashTypeMatch(location, "annotation")) return;
+    const hashId = locationHelper.hashId(location, "annotation");
+    const finder = a => a.id === hashId;
+    const filteredMatch = this.state.filteredAnnotations.find(finder);
+    if (filteredMatch) return;
+    const collectionMatch = this.props.annotations.find(finder);
+    if (!collectionMatch) return;
+    this.props.history.push({ hash: "", state: { noScroll: true } });
+  }
+
+  // Store the current locked selection in the section, which wraps the annotator and
+  // the body. This locked selection is then passed down to the body, which needs to
+  // render it in the text.
+  lockSelection = raw => {
+    if (!raw) return this.setState({ lockedSelection: null });
+    const lockedSelection = {
+      id: "selection",
+      attributes: raw,
+      type: "annotations"
+    };
+    this.setState({ lockedSelection });
+  };
 
   render() {
     const typography = this.props.appearance.typography;
