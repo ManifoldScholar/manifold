@@ -66,7 +66,6 @@ export class FormContainer extends PureComponent {
       preventDirtyWarning: false,
       submitKey: null
     };
-    this.preventDirtyWarning = false;
   }
 
   componentDidMount() {
