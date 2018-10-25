@@ -254,7 +254,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
       >
         <a
           className="button-icon-primary"
-          href="/projects"
+          href="/projects/all"
           onClick={[Function]}
         >
           <span>

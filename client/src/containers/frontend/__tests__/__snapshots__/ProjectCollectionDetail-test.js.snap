@@ -4,7 +4,7 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
 <div>
   <a
     className="back-link-primary full"
-    href="/project-collections"
+    href="/projects/project-collections"
     onClick={[Function]}
   >
     <div
@@ -307,7 +307,7 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
       >
         <a
           className="button-icon-primary"
-          href="/project-collections"
+          href="/projects/project-collections"
           onClick={[Function]}
         >
           <span>
@@ -315,7 +315,7 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
               aria-hidden="true"
               className="manicon manicon-books-on-shelf"
             />
-            See Projects Collections
+            See Project Collections
           </span>
         </a>
       </nav>
