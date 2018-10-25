@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ProjectList } from "components/frontend";
 import get from "lodash/get";
+import size from "lodash/size";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import { Utility } from "components/global";
@@ -35,10 +36,10 @@ export default class ProjectCollectionSummary extends Component {
         ? "#52e3ac"
         : "currentColor";
     const description = projectCollection.attributes.description;
-
     const projects = projectCollection.relationships.collectionProjects.map(
       cp => cp.relationships.project
     );
+    const hasProjects = size(projects) > 0;
 
     return (
       <section key={projectCollection.id} className={backgroundClasses}>
@@ -73,18 +74,26 @@ export default class ProjectCollectionSummary extends Component {
               />
             </div>
           )}
-          <ProjectList.Grid
-            authenticated={this.props.authentication.authenticated}
-            favorites={get(this.props.authentication, "currentUser.favorites")}
-            projects={projects}
-            dispatch={this.props.dispatch}
-            limit={this.props.limit}
-            viewAllUrl={lh.link(
-              "frontendProjectCollection",
-              this.props.projectCollection.attributes.slug
-            )}
-            viewAllLabel={"See the full collection"}
-          />
+          {hasProjects ? (
+            <ProjectList.Grid
+              authenticated={this.props.authentication.authenticated}
+              favorites={get(this.props.authentication, "currentUser.favorites")}
+              projects={projects}
+              dispatch={this.props.dispatch}
+              limit={this.props.limit}
+              viewAllUrl={lh.link(
+                "frontendProjectCollection",
+                this.props.projectCollection.attributes.slug
+              )}
+              viewAllLabel={"See the full collection"}
+            />
+          ) : (
+            <div className="project-list empty">
+              <p className="message">
+                {"This Project Collection is currently empty."}
+              </p>
+            </div>
+          )}
         </div>
       </section>
     );

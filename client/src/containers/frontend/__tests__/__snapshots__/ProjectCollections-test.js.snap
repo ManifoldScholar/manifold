@@ -68,6 +68,15 @@ exports[`Frontend ProjectCollections Container renders correctly 1`] = `
           </div>
         </div>
       </a>
+      <div
+        className="project-list empty"
+      >
+        <p
+          className="message"
+        >
+          This Project Collection is currently empty.
+        </p>
+      </div>
     </div>
   </section>
   <section
@@ -114,6 +123,15 @@ exports[`Frontend ProjectCollections Container renders correctly 1`] = `
           </div>
         </div>
       </a>
+      <div
+        className="project-list empty"
+      >
+        <p
+          className="message"
+        >
+          This Project Collection is currently empty.
+        </p>
+      </div>
     </div>
   </section>
 </div>

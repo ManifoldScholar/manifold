@@ -16,7 +16,7 @@
     order: -1;
     margin-bottom: 20px;
 
-    + .project-list.grid { // if no filters or .details
+    + .project-list { // if no filters or .details
       @include respond($break75) {
         margin-top: 34px;
       }
@@ -59,7 +59,7 @@
     padding-bottom: 0;
     margin-bottom: 36px;
 
-    + .project-list.grid { // if no .details
+    + .project-list { // if no .details
       margin-top: 18px;
 
       @include respond($break75) {
@@ -130,6 +130,14 @@
 
     @include respond($break95) {
       margin-right: 50%;
+    }
+
+    + .project-list.empty {
+      margin-top: 6px;
+
+      @include respond($break75) {
+        margin-top: 12px;
+      }
     }
 
     .description {
