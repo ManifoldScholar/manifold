@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import startsWith from "lodash/startsWith";
 import classNames from "classnames";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { Icon } from "components/global/SVG";
 
 export default class CoverButton extends Component {
   static displayName = "Project.CoverButton";
@@ -166,11 +167,10 @@ export default class CoverButton extends Component {
         >
           <div className="project-cover-button" aria-hidden="true">
             <div className="icons">
-              <i key="minus" className="manicon manicon-minus-bold" />
-              <i key="check" className="manicon manicon-check-bold" />
-              <i key="plus" className="manicon manicon-plus-bold" />
+              <Icon.Minus size={28} iconClass="minus" />
+              <Icon.Check size={28} iconClass="check" />
+              <Icon.Plus size={28} iconClass="plus" />
             </div>
-
             <ReactCSSTransitionGroup
               transitionName="button"
               transitionEnterTimeout={300}

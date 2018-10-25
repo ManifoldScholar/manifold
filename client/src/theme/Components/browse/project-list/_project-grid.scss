@@ -51,7 +51,15 @@
 
     // Frontend grid-style list
     &.grid {
+      li {
+        padding-left: 14px;
+      }
+
       @include respond($break75) {
+        li {
+          padding-left: 0;
+        }
+
         a:hover, a:focus {
           background-color: $neutral05;
           box-shadow: 0 31px 44px 2px rgba($neutralBlack, 0.13);
@@ -64,7 +72,7 @@
         .cover {
           height: 160px;
 
-          svg {
+          > svg {
             max-width: 130px;
             max-height: 130px;
           }

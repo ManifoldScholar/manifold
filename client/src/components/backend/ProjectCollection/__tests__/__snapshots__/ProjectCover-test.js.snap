@@ -29,15 +29,60 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
           <div
             className="icons"
           >
-            <i
-              className="manicon manicon-minus-bold"
-            />
-            <i
-              className="manicon manicon-check-bold"
-            />
-            <i
-              className="manicon manicon-plus-bold"
-            />
+            <svg
+              aria-hidden="true"
+              className="manicon-svg minus"
+              fill="currentColor"
+              height={28}
+              stroke={undefined}
+              viewBox="0 0 32 32"
+              width={28}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                height="2"
+                width="14"
+                x="9"
+                y="15"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              className="manicon-svg check"
+              fill="currentColor"
+              height={28}
+              stroke={undefined}
+              viewBox="0 0 32 32"
+              width={28}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              className="manicon-svg plus"
+              fill="currentColor"
+              height={28}
+              stroke={undefined}
+              viewBox="0 0 32 32"
+              width={28}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                height="2"
+                width="14"
+                x="9"
+                y="15"
+              />
+              <rect
+                height="14"
+                width="2"
+                x="15"
+                y="9"
+              />
+            </svg>
           </div>
           <span>
             <span

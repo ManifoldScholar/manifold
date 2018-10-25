@@ -755,8 +755,13 @@
   position: absolute;
   top: 10.526%;
   left: -15px;
-  width: 40px;
-  height: 35px;
+  width: 28px;
+  height: 28px;
+
+  @include respond($break75) {
+    width: 30px;
+    height: 30px;
+  }
 
   &.active {
     width: 100%;
@@ -768,11 +773,10 @@
   position: absolute;
   left: 0;
   display: block;
-  max-width: 30px;
-  height: 30px;
-  padding: 5px 13px 0 8px;
+  max-width: 100%;
+  height: 100%;
   overflow: hidden;
-  font-size: 18px;
+  font-size: 16px;
   color: $neutralWhite;
   text-align: left;
   white-space: nowrap;
@@ -783,12 +787,24 @@
   transition: max-width $duration $timing,
     background-color $duration $timing;
 
+  @include respond($break75) {
+    font-size: 18px;
+  }
+
   .remove & {
     background-color: $sp20Primary;
   }
 
   .action-text {
-    padding-left: 32px;
+    display: block;
+    padding-right: 14px;
+    padding-left: 30px;
+    line-height: 1.65;
+
+    @include respond($break75) {
+      padding-left: 32px;
+      line-height: 1.5;
+    }
   }
 
   .button-enter, .button-leave.action-text-hide-immediately {
@@ -813,55 +829,45 @@
   }
 
   .icons {
-    position: relative;
-    width: 25px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform $duration $timing;
 
     .add & {
-      top: -25px;
-      transition: top $duration $timing;
+      transform: translateY(-100%);
     }
 
     .add-active & {
-      top: -25px;
-    }
-
-    .remove & {
-      top: 0;
-      transition: top $duration $timing;
+      transform: translateY(-100%);
     }
 
     .remove-active & {
-      top: 25px;
-      transition: top $duration $timing;
+      transform: translateY(100%);
     }
 
-    .manicon {
+    .manicon-svg {
       position: absolute;
       top: 0;
-      left: -1px;
-      margin-right: 13px;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .manicon-minus-bold {
-      top: -22px;
       left: 0;
-    }
-
-    .manicon-check-bold {
-      top: 3px;
-    }
-
-    .manicon-plus-bold {
-      top: 28px;
-      left: 1px;
       transition: transform $duration $timing;
 
-      .follow-active & {
-        transform: rotate(-90deg);
+      @include respond($break75) {
+        width: 30px;
+        height: 30px;
       }
 
+      &.minus {
+        top: -100%;
+      }
+
+      &.plus {
+        top: 100%;
+
+        .follow-active & {
+          transform: rotate(-90deg);
+        }
+      }
     }
   }
 }

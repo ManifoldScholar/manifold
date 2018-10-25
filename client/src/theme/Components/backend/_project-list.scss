@@ -53,7 +53,7 @@
             height: 120px;
 
             // stylelint-disable max-nesting-depth
-            svg {
+            > svg {
               max-width: 100px;
               max-height: 110px;
             }
