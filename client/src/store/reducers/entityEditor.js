@@ -54,6 +54,31 @@ const close = (state, action) => {
   return update(state, { sessions: { $set: newSessions } });
 };
 
+const removeChangedFlag = (state, action) => {
+  const { entity } = action.payload;
+  if (!entity) return state;
+  const id = entity.id;
+  const clear = {};
+  Object.keys(state.sessions).forEach(sessionKey => {
+    const source = state.sessions[sessionKey].source;
+    if (source && source.id && source.id === id) {
+      clear[sessionKey] = true;
+    }
+  });
+  if (clear.length === 0) return state;
+  let newState = Object.assign({}, state);
+  Object.keys(clear).forEach(sessionKey => {
+    newState = update(newState, {
+      sessions: {
+        [sessionKey]: {
+          changed: { $set: false }
+        }
+      }
+    });
+  });
+  return newState;
+};
+
 const set = (state, action) => {
   const { path, id, value } = action.payload;
   if (value === undefined) return state; // undefined values are noops.
@@ -104,7 +129,8 @@ export default handleActions(
     ENTITY_EDITOR_CLOSE: close,
     ENTITY_EDITOR_SET: set,
     ENTITY_EDITOR_PENDING_ACTION: startAction,
-    ENTITY_EDITOR_COMPLETE_ACTION: completeAction
+    ENTITY_EDITOR_COMPLETE_ACTION: completeAction,
+    ENTITY_STORE_REMOVE: removeChangedFlag
   },
   initialState
 );
