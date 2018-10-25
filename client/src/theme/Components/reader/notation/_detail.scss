@@ -58,12 +58,11 @@
   }
 
   .button-nav {
-    text-align: left;
+    flex-direction: column;
 
     .button-secondary {
       width: 250px;
       max-width: 100%;
-      margin-bottom: 13px;
 
       @include respond($break60) {
         width: 320px;
