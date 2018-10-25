@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181025175439) do
+ActiveRecord::Schema.define(version: 20181025181234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,18 +80,18 @@ ActiveRecord::Schema.define(version: 20181025175439) do
     t.string   "title"
     t.text     "description"
     t.uuid     "project_id"
-    t.string   "thumbnail_file_name"
-    t.string   "thumbnail_content_type"
-    t.integer  "thumbnail_file_size"
-    t.datetime "thumbnail_updated_at"
+    t.string   "thumbnail_file_name_deprecated"
+    t.string   "thumbnail_content_type_deprecated"
+    t.integer  "thumbnail_file_size_deprecated"
+    t.datetime "thumbnail_updated_at_deprecated"
     t.string   "thumbnail_checksum"
     t.string   "fingerprint"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "slug"
-    t.integer  "collection_resources_count", default: 0
-    t.integer  "events_count",               default: 0
-    t.jsonb    "thumbnail_data",             default: {}
+    t.integer  "collection_resources_count",        default: 0
+    t.integer  "events_count",                      default: 0
+    t.jsonb    "thumbnail_data",                    default: {}
     t.index ["slug"], name: "index_collections_on_slug", unique: true, using: :btree
   end
 
@@ -155,20 +155,20 @@ ActiveRecord::Schema.define(version: 20181025175439) do
     t.string   "link_text"
     t.string   "link_url"
     t.string   "link_target"
-    t.string   "background_file_name"
-    t.string   "background_content_type"
-    t.integer  "background_file_size"
-    t.datetime "background_updated_at"
-    t.string   "foreground_file_name"
-    t.string   "foreground_content_type"
-    t.integer  "foreground_file_size"
-    t.datetime "foreground_updated_at"
+    t.string   "background_file_name_deprecated"
+    t.string   "background_content_type_deprecated"
+    t.integer  "background_file_size_deprecated"
+    t.datetime "background_updated_at_deprecated"
+    t.string   "foreground_file_name_deprecated"
+    t.string   "foreground_content_type_deprecated"
+    t.integer  "foreground_file_size_deprecated"
+    t.datetime "foreground_updated_at_deprecated"
     t.integer  "position"
-    t.text     "style",                   default: "dark"
-    t.boolean  "hidden",                  default: false
+    t.text     "style",                              default: "dark"
+    t.boolean  "hidden",                             default: false
     t.uuid     "creator_id"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "background_color"
     t.string   "foreground_color"
     t.string   "header_color"
@@ -176,9 +176,9 @@ ActiveRecord::Schema.define(version: 20181025175439) do
     t.string   "foreground_top"
     t.string   "foreground_left"
     t.string   "foreground_position"
-    t.boolean  "live",                    default: false
-    t.jsonb    "background_data",         default: {}
-    t.jsonb    "foreground_data",         default: {}
+    t.boolean  "live",                               default: false
+    t.jsonb    "background_data",                    default: {}
+    t.jsonb    "foreground_data",                    default: {}
   end
 
   create_table "flags", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -250,15 +250,15 @@ ActiveRecord::Schema.define(version: 20181025175439) do
   create_table "ingestion_sources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "text_id"
     t.string   "source_identifier"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.string   "kind"
     t.text     "source_path"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
-    t.jsonb    "attachment_data",         default: {}
+    t.string   "attachment_file_name_deprecated"
+    t.string   "attachment_content_type_deprecated"
+    t.integer  "attachment_file_size_deprecated"
+    t.datetime "attachment_updated_at_deprecated"
+    t.jsonb    "attachment_data",                    default: {}
   end
 
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -285,18 +285,18 @@ ActiveRecord::Schema.define(version: 20181025175439) do
 
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "sort_name"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
     t.string   "display_name"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
+    t.string   "avatar_file_name_deprecated"
+    t.string   "avatar_content_type_deprecated"
+    t.integer  "avatar_file_size_deprecated"
+    t.datetime "avatar_updated_at_deprecated"
     t.string   "suffix"
-    t.jsonb    "avatar_data",         default: {}
+    t.jsonb    "avatar_data",                    default: {}
   end
 
   create_table "notification_preferences", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -368,13 +368,13 @@ ActiveRecord::Schema.define(version: 20181025175439) do
     t.string   "title"
     t.string   "subtitle"
     t.text     "description"
-    t.string   "cover_file_name"
-    t.string   "cover_content_type"
-    t.integer  "cover_file_size"
-    t.datetime "cover_updated_at"
+    t.string   "cover_file_name_deprecated"
+    t.string   "cover_content_type_deprecated"
+    t.integer  "cover_file_size_deprecated"
+    t.datetime "cover_updated_at_deprecated"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "featured",                               default: false
+    t.boolean  "featured",                                          default: false
     t.uuid     "published_text_id"
     t.string   "hashtag"
     t.string   "purchase_url"
@@ -384,35 +384,34 @@ ActiveRecord::Schema.define(version: 20181025175439) do
     t.string   "instagram_id"
     t.string   "twitter_id"
     t.string   "facebook_id"
-    t.string   "hero_file_name"
-    t.string   "hero_content_type"
-    t.integer  "hero_file_size"
-    t.datetime "hero_updated_at"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.jsonb    "metadata",                               default: {}
+    t.string   "hero_file_name_deprecated"
+    t.string   "hero_content_type_deprecated"
+    t.integer  "hero_file_size_deprecated"
+    t.datetime "hero_updated_at_deprecated"
+    t.string   "avatar_file_name_deprecated"
+    t.string   "avatar_content_type_deprecated"
+    t.integer  "avatar_file_size_deprecated"
+    t.datetime "avatar_updated_at_deprecated"
+    t.jsonb    "metadata",                                          default: {}
     t.uuid     "creator_id"
     t.date     "publication_date"
     t.string   "slug"
-    t.string   "avatar_color",                           default: "primary"
-    t.jsonb    "citations",                              default: {}
-    t.jsonb    "avatar_meta",                            default: {},        null: false
-    t.boolean  "draft",                                  default: true,      null: false
-    t.boolean  "hide_activity",                          default: false
+    t.string   "avatar_color",                                      default: "primary"
+    t.jsonb    "citations",                                         default: {}
+    t.boolean  "draft",                                             default: true,      null: false
+    t.boolean  "hide_activity",                                     default: false
     t.string   "sort_title"
-    t.integer  "events_count",                           default: 0
+    t.integer  "events_count",                                      default: 0
     t.string   "download_url"
     t.string   "download_call_to_action"
-    t.string   "published_text_attachment_file_name"
-    t.string   "published_text_attachment_content_type"
-    t.integer  "published_text_attachment_file_size"
-    t.datetime "published_text_attachment_updated_at"
-    t.jsonb    "cover_data",                             default: {}
-    t.jsonb    "hero_data",                              default: {}
-    t.jsonb    "avatar_data",                            default: {}
-    t.jsonb    "published_text_attachment_data",         default: {}
+    t.string   "published_text_attachment_file_name_deprecated"
+    t.string   "published_text_attachment_content_type_deprecated"
+    t.integer  "published_text_attachment_file_size_deprecated"
+    t.datetime "published_text_attachment_updated_at_deprecated"
+    t.jsonb    "cover_data",                                        default: {}
+    t.jsonb    "hero_data",                                         default: {}
+    t.jsonb    "avatar_data",                                       default: {}
+    t.jsonb    "published_text_attachment_data",                    default: {}
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
 
@@ -460,19 +459,19 @@ ActiveRecord::Schema.define(version: 20181025175439) do
     t.uuid     "project_id"
     t.string   "storage_type"
     t.string   "storage_identifier"
-    t.string   "source",                             null: false
-    t.string   "data_file_name"
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.datetime "data_updated_at"
+    t.string   "source",                                       null: false
+    t.string   "data_file_name_deprecated"
+    t.string   "data_content_type_deprecated"
+    t.integer  "data_file_size_deprecated"
+    t.datetime "data_updated_at_deprecated"
     t.string   "url"
-    t.integer  "header_row",         default: 1
-    t.jsonb    "column_map",         default: {},    null: false
-    t.jsonb    "column_automap",     default: {},    null: false
-    t.boolean  "parse_error",        default: false, null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.jsonb    "data_data",          default: {}
+    t.integer  "header_row",                   default: 1
+    t.jsonb    "column_map",                   default: {},    null: false
+    t.jsonb    "column_automap",               default: {},    null: false
+    t.boolean  "parse_error",                  default: false, null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.jsonb    "data_data",                    default: {}
     t.index ["creator_id"], name: "index_resource_imports_on_creator_id", using: :btree
     t.index ["project_id"], name: "index_resource_imports_on_project_id", using: :btree
   end
@@ -480,12 +479,12 @@ ActiveRecord::Schema.define(version: 20181025175439) do
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "title"
     t.string   "kind"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.string   "attachment_file_name_deprecated"
+    t.string   "attachment_content_type_deprecated"
+    t.integer  "attachment_file_size_deprecated"
+    t.datetime "attachment_updated_at_deprecated"
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
     t.uuid     "creator_id"
     t.uuid     "project_id"
     t.text     "caption"
@@ -494,60 +493,60 @@ ActiveRecord::Schema.define(version: 20181025175439) do
     t.string   "external_url"
     t.string   "external_id"
     t.string   "external_type"
-    t.boolean  "allow_high_res",                  default: true
-    t.boolean  "allow_download",                  default: true
-    t.boolean  "doi_requested",                   default: false
+    t.boolean  "allow_high_res",                             default: true
+    t.boolean  "allow_download",                             default: true
+    t.boolean  "doi_requested",                              default: false
     t.datetime "doi_added"
     t.string   "high_res_checksum"
     t.string   "transcript_checksum"
     t.string   "translation_checksum"
     t.string   "attachment_checksum"
-    t.string   "high_res_file_name"
-    t.string   "high_res_content_type"
-    t.integer  "high_res_file_size"
-    t.datetime "high_res_updated_at"
-    t.string   "transcript_file_name"
-    t.string   "transcript_content_type"
-    t.integer  "transcript_file_size"
-    t.datetime "transcript_updated_at"
-    t.string   "translation_file_name"
-    t.string   "translation_content_type"
-    t.integer  "translation_file_size"
-    t.datetime "translation_updated_at"
-    t.string   "variant_format_one_file_name"
-    t.string   "variant_format_one_content_type"
-    t.integer  "variant_format_one_file_size"
-    t.datetime "variant_format_one_updated_at"
-    t.string   "variant_format_two_file_name"
-    t.string   "variant_format_two_content_type"
-    t.integer  "variant_format_two_file_size"
-    t.datetime "variant_format_two_updated_at"
-    t.string   "variant_thumbnail_file_name"
-    t.string   "variant_thumbnail_content_type"
-    t.integer  "variant_thumbnail_file_size"
-    t.datetime "variant_thumbnail_updated_at"
-    t.string   "variant_poster_file_name"
-    t.string   "variant_poster_content_type"
-    t.integer  "variant_poster_file_size"
-    t.datetime "variant_poster_updated_at"
+    t.string   "high_res_file_name_deprecated"
+    t.string   "high_res_content_type_deprecated"
+    t.integer  "high_res_file_size_deprecated"
+    t.datetime "high_res_updated_at_deprecated"
+    t.string   "transcript_file_name_deprecated"
+    t.string   "transcript_content_type_deprecated"
+    t.integer  "transcript_file_size_deprecated"
+    t.datetime "transcript_updated_at_deprecated"
+    t.string   "translation_file_name_deprecated"
+    t.string   "translation_content_type_deprecated"
+    t.integer  "translation_file_size_deprecated"
+    t.datetime "translation_updated_at_deprecated"
+    t.string   "variant_format_one_file_name_deprecated"
+    t.string   "variant_format_one_content_type_deprecated"
+    t.integer  "variant_format_one_file_size_deprecated"
+    t.datetime "variant_format_one_updated_at_deprecated"
+    t.string   "variant_format_two_file_name_deprecated"
+    t.string   "variant_format_two_content_type_deprecated"
+    t.integer  "variant_format_two_file_size_deprecated"
+    t.datetime "variant_format_two_updated_at_deprecated"
+    t.string   "variant_thumbnail_file_name_deprecated"
+    t.string   "variant_thumbnail_content_type_deprecated"
+    t.integer  "variant_thumbnail_file_size_deprecated"
+    t.datetime "variant_thumbnail_updated_at_deprecated"
+    t.string   "variant_poster_file_name_deprecated"
+    t.string   "variant_poster_content_type_deprecated"
+    t.integer  "variant_poster_file_size_deprecated"
+    t.datetime "variant_poster_updated_at_deprecated"
     t.text     "embed_code"
     t.string   "sub_kind"
     t.string   "slug"
-    t.integer  "comments_count",                  default: 0
-    t.jsonb    "metadata",                        default: {}
-    t.integer  "events_count",                    default: 0
+    t.integer  "comments_count",                             default: 0
+    t.jsonb    "metadata",                                   default: {}
+    t.integer  "events_count",                               default: 0
     t.integer  "minimum_width"
     t.integer  "minimum_height"
-    t.boolean  "iframe_allow_fullscreen",         default: true
+    t.boolean  "iframe_allow_fullscreen",                    default: true
     t.string   "sort_title"
-    t.jsonb    "attachment_data",                 default: {}
-    t.jsonb    "high_res_data",                   default: {}
-    t.jsonb    "transcript_data",                 default: {}
-    t.jsonb    "translation_data",                default: {}
-    t.jsonb    "variant_format_one_data",         default: {}
-    t.jsonb    "variant_format_two_data",         default: {}
-    t.jsonb    "variant_thumbnail_data",          default: {}
-    t.jsonb    "variant_poster_data",             default: {}
+    t.jsonb    "attachment_data",                            default: {}
+    t.jsonb    "high_res_data",                              default: {}
+    t.jsonb    "transcript_data",                            default: {}
+    t.jsonb    "translation_data",                           default: {}
+    t.jsonb    "variant_format_one_data",                    default: {}
+    t.jsonb    "variant_format_two_data",                    default: {}
+    t.jsonb    "variant_thumbnail_data",                     default: {}
+    t.jsonb    "variant_poster_data",                        default: {}
     t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
 
@@ -573,29 +572,29 @@ ActiveRecord::Schema.define(version: 20181025175439) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.jsonb    "general",                        default: {}
-    t.jsonb    "theme",                          default: {}
+    t.jsonb    "general",                                   default: {}
+    t.jsonb    "theme",                                     default: {}
     t.integer  "singleton_guard"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.string   "press_logo_file_name"
-    t.string   "press_logo_content_type"
-    t.integer  "press_logo_file_size"
-    t.datetime "press_logo_updated_at"
-    t.jsonb    "integrations",                   default: {}
-    t.jsonb    "secrets",                        default: {}
-    t.jsonb    "email",                          default: {}
-    t.string   "press_logo_footer_file_name"
-    t.string   "press_logo_footer_content_type"
-    t.integer  "press_logo_footer_file_size"
-    t.datetime "press_logo_footer_updated_at"
-    t.string   "press_logo_mobile_file_name"
-    t.string   "press_logo_mobile_content_type"
-    t.integer  "press_logo_mobile_file_size"
-    t.datetime "press_logo_mobile_updated_at"
-    t.jsonb    "press_logo_data",                default: {}
-    t.jsonb    "press_logo_footer_data",         default: {}
-    t.jsonb    "press_logo_mobile_data",         default: {}
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+    t.string   "press_logo_file_name_deprecated"
+    t.string   "press_logo_content_type_deprecated"
+    t.integer  "press_logo_file_size_deprecated"
+    t.datetime "press_logo_updated_at_deprecated"
+    t.jsonb    "integrations",                              default: {}
+    t.jsonb    "secrets",                                   default: {}
+    t.jsonb    "email",                                     default: {}
+    t.string   "press_logo_footer_file_name_deprecated"
+    t.string   "press_logo_footer_content_type_deprecated"
+    t.integer  "press_logo_footer_file_size_deprecated"
+    t.datetime "press_logo_footer_updated_at_deprecated"
+    t.string   "press_logo_mobile_file_name_deprecated"
+    t.string   "press_logo_mobile_content_type_deprecated"
+    t.integer  "press_logo_mobile_file_size_deprecated"
+    t.datetime "press_logo_mobile_updated_at_deprecated"
+    t.jsonb    "press_logo_data",                           default: {}
+    t.jsonb    "press_logo_footer_data",                    default: {}
+    t.jsonb    "press_logo_mobile_data",                    default: {}
     t.index ["singleton_guard"], name: "index_settings_on_singleton_guard", unique: true, using: :btree
   end
 
@@ -747,17 +746,17 @@ ActiveRecord::Schema.define(version: 20181025175439) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "nickname"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
+    t.string   "avatar_file_name_deprecated"
+    t.string   "avatar_content_type_deprecated"
+    t.integer  "avatar_file_size_deprecated"
+    t.datetime "avatar_updated_at_deprecated"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.jsonb    "raw_persistent_ui",      default: {},        null: false
-    t.string   "classification",         default: "default", null: false
+    t.jsonb    "raw_persistent_ui",              default: {},        null: false
+    t.string   "classification",                 default: "default", null: false
     t.datetime "imported_at"
     t.string   "import_source_id"
-    t.jsonb    "avatar_data",            default: {}
+    t.jsonb    "avatar_data",                    default: {}
     t.index ["classification"], name: "udx_users_anonymous", unique: true, where: "((classification)::text = 'anonymous'::text)", using: :btree
     t.index ["classification"], name: "udx_users_cli", unique: true, where: "((classification)::text = 'command_line'::text)", using: :btree
     t.index ["import_source_id"], name: "index_users_on_import_source_id", unique: true, where: "(import_source_id IS NOT NULL)", using: :btree

@@ -114,7 +114,7 @@ module PaperclipMigrator
 
       if attachment.present?
         begin
-          attachment.read 1024
+          instance.__send__("#{attachment_name}_original").read 1024
         rescue StandardError => e
           errors.add :base, "There was a problem testing reading the file: #{e.message}"
         end
@@ -138,7 +138,8 @@ module PaperclipMigrator
     end
 
     def write_data!(data)
-      instance.update! attachment_data => data.to_json
+      instance.__send__("#{attachment_data}=", JSON.parse(data.to_json))
+      instance.save! validate: false, touch: false
     end
 
     def uploader
@@ -173,7 +174,7 @@ module PaperclipMigrator
 
       @interpolated_values = @attachment_fields.merge(
         attachment: @attachment_name.to_s.pluralize,
-        class: instance.model_name.route_key,
+        class: @instance.is_a?(Settings) ? "settings" : instance.model_name.route_key,
         extension: fetch_extension,
         id: instance.id,
         rails_root: Rails.root,
@@ -217,7 +218,7 @@ module PaperclipMigrator
     end
 
     def build_uuid_partition
-      instance.id[0..2].scan(/\w/).join("/".freeze)
+      instance.id.to_s[0..2].scan(/\w/).join("/".freeze)
     end
 
     # Fetch the original attachment fields from paperclip columns
