@@ -50,7 +50,7 @@ class NotationMarker extends Component {
         );
       }
       const url = `${base}/${rel}`;
-      this.props.history.push(url);
+      this.props.history.push(url, { noScroll: true });
     } else {
       this.setActiveAnnotation(annotation.id);
     }

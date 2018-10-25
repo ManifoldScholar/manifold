@@ -46,7 +46,9 @@ export class NotationResourceDetailContainer extends PureComponent {
   handleClose = event => {
     if (event) event.preventDefault();
     const { textId, sectionId } = this.props.match.params;
-    this.props.history.push(lh.link("readerSection", textId, sectionId));
+    this.props.history.push(lh.link("readerSection", textId, sectionId), {
+      noScroll: true
+    });
   };
 
   render() {
