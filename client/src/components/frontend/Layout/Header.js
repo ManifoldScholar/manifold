@@ -35,6 +35,7 @@ export default class LayoutHeader extends PureComponent {
       attrs.externalUrl = page.attributes.externalLink;
     } else {
       attrs.route = "frontendPage";
+      attrs.matchType = "link";
       attrs.args = [page.attributes.slug];
     }
 

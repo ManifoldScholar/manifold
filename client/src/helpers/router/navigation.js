@@ -5,7 +5,8 @@ class Navigation {
     const out = [
       {
         label: "Home",
-        route: "frontend"
+        route: "frontend",
+        matchType: "link"
       },
       {
         label: "Projects",
