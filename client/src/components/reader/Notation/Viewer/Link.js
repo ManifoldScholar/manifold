@@ -32,7 +32,10 @@ class NotationViewerLink extends PureComponent {
 
     if (url) {
       return (
-        <Link className={className} to={url}>
+        <Link
+          className={className}
+          to={{ pathname: url, state: { noScroll: true } }}
+        >
           {children}
         </Link>
       );
