@@ -71,11 +71,6 @@
     }
   }
 
-  &:focus { // override default 1px border to prevent &::before shifting
-    border: none !important; // stylelint-disable-line declaration-no-important
-    outline: 1px dotted rgb(154, 154, 154) !important; // stylelint-disable-line declaration-no-important
-  }
-
   &::before {
     position: absolute;
     top: 0;
