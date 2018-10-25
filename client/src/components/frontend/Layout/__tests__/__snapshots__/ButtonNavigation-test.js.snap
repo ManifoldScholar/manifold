@@ -12,7 +12,7 @@ exports[`Frontend.Layout.ButtonNavigation component doesn't render anything when
     >
       <a
         className="button-icon-primary"
-        href="/projects"
+        href="/projects/all"
         onClick={[Function]}
       >
         <span>
@@ -40,7 +40,7 @@ exports[`Frontend.Layout.ButtonNavigation component renders correctly 1`] = `
     >
       <a
         className="button-icon-primary"
-        href="/projects"
+        href="/projects/all"
         onClick={[Function]}
       >
         <span>
@@ -81,7 +81,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the grayBg prop 1`]
     >
       <a
         className="button-icon-primary"
-        href="/projects"
+        href="/projects/all"
         onClick={[Function]}
       >
         <span>
@@ -122,7 +122,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showBrowse prop
     >
       <a
         className="button-icon-primary"
-        href="/projects"
+        href="/projects/all"
         onClick={[Function]}
       >
         <span>
@@ -163,7 +163,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showFollowing p
     >
       <a
         className="button-icon-primary"
-        href="/projects"
+        href="/projects/all"
         onClick={[Function]}
       >
         <span>

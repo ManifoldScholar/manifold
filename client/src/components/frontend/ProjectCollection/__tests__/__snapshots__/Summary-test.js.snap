@@ -9,7 +9,8 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
   >
     <a
       className="section-heading"
-      href="/project-collection/undefined"
+      href="/projects/project-collection/undefined"
+      onClick={[Function]}
     >
       <div
         className="main"
@@ -77,7 +78,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
       className="utility"
     >
       <a
-        href="/project-collection/undefined"
+        href="/projects/project-collection/undefined"
         onClick={[Function]}
       >
         See the full collection

@@ -212,8 +212,8 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                             </Link>
                                           </li>
                                           <li>
-                                            <Link to=\\"/projects\\" replace={false}>
-                                              <a onClick={[Function]} href=\\"/projects\\">
+                                            <Link to=\\"/projects/all\\" replace={false}>
+                                              <a onClick={[Function]} href=\\"/projects/all\\">
                                                 Projects
                                               </a>
                                             </Link>

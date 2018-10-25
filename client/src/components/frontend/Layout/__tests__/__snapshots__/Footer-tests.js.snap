@@ -79,7 +79,7 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
                     </li>
                     <li>
                       <a
-                        href="/projects"
+                        href="/projects/all"
                         onClick={[Function]}
                       >
                         Projects

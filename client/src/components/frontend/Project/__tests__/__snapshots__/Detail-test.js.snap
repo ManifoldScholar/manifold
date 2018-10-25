@@ -298,7 +298,7 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
       >
         <a
           className="button-icon-primary"
-          href="/projects"
+          href="/projects/all"
           onClick={[Function]}
         >
           <span>
@@ -455,7 +455,7 @@ exports[`Frontend.Project.Detail component renders correctly when hideActivity i
       >
         <a
           className="button-icon-primary"
-          href="/projects"
+          href="/projects/all"
           onClick={[Function]}
         >
           <span>

@@ -237,7 +237,7 @@ exports[`Frontend.ProjectList.Following component renders correctly with no proj
       >
         <a
           className="button-icon-primary"
-          href="/projects"
+          href="/projects/all"
           onClick={[Function]}
         >
           <span>

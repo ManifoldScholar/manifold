@@ -10,7 +10,7 @@ exports[`Frontend ProjectCollections Container renders correctly 1`] = `
 >
   <a
     className="back-link-primary full"
-    href="/projects"
+    href="/projects/all"
     onClick={[Function]}
   >
     <div
@@ -32,7 +32,8 @@ exports[`Frontend ProjectCollections Container renders correctly 1`] = `
     >
       <a
         className="section-heading"
-        href="/project-collection/undefined"
+        href="/projects/project-collection/undefined"
+        onClick={[Function]}
       >
         <div
           className="main"
@@ -77,7 +78,8 @@ exports[`Frontend ProjectCollections Container renders correctly 1`] = `
     >
       <a
         className="section-heading"
-        href="/project-collection/undefined"
+        href="/projects/project-collection/undefined"
+        onClick={[Function]}
       >
         <div
           className="main"
