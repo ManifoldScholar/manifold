@@ -178,7 +178,7 @@ export class ResourceImportResults extends PureComponent {
             className="button-icon-secondary"
           >
             <i className="manicon manicon-check small" aria-hidden="true" />
-            Refresh Results
+            <span>Refresh Results</span>
           </button>
         </div>
       </React.Fragment>
@@ -205,14 +205,14 @@ export class ResourceImportResults extends PureComponent {
         >
           <button onClick={this.startImport} className="button-icon-secondary">
             <i className="manicon manicon-check small" aria-hidden="true" />
-            Start Import
+            <span>Start Import</span>
           </button>
           <Link to={this.backLinkUrl()} className="button-icon-secondary dull">
             <i
               className="manicon manicon-arrow-left small"
               aria-hidden="true"
             />
-            Back
+            <span>Back</span>
           </Link>
         </div>
       </React.Fragment>
@@ -244,14 +244,14 @@ export class ResourceImportResults extends PureComponent {
               className="manicon manicon-arrow-left small"
               aria-hidden="true"
             />
-            Back to Resources
+            <span>Back to Resources</span>
           </Link>
           <button
             onClick={this.resetImport}
             className="button-icon-secondary dull"
           >
             <i className="manicon manicon-check small" aria-hidden="true" />
-            Reset Import
+            <span>Reset Import</span>
           </button>
         </div>
       </React.Fragment>

@@ -177,7 +177,7 @@ export default class ProjectHero extends Component {
           className="button-secondary"
         >
           <i className="manicon manicon-glasses" aria-hidden="true" />
-          {"Start Reading"}
+          <span>{"Start Reading"}</span>
         </Link>
         {publishedTextTocId ? (
           <Link
@@ -189,7 +189,7 @@ export default class ProjectHero extends Component {
             className="button-secondary dull"
           >
             <i className="manicon manicon-bullet-list" aria-hidden="true" />
-            {"View Contents"}
+            <span>{"View Contents"}</span>
           </Link>
         ) : null}
       </section>

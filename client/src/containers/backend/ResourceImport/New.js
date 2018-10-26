@@ -127,7 +127,7 @@ export class ResourceImportNew extends PureComponent {
         >
           <button type="submit" className="button-icon-secondary">
             <i className="manicon manicon-check small" aria-hidden="true" />
-            Continue
+            <span>Continue</span>
           </button>
         </div>
       </FormContainer.Form>

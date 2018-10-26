@@ -95,7 +95,7 @@ class IngestionFormUpload extends PureComponent {
               className="button-icon-secondary dull"
             >
               <i className="manicon manicon-x small" aria-hidden="true" />
-              Cancel
+              <span>Cancel</span>
             </button>
           ) : null}
           <button
@@ -104,7 +104,7 @@ class IngestionFormUpload extends PureComponent {
             disabled={!this.valid}
           >
             <i className="manicon manicon-check small" aria-hidden="true" />
-            Continue
+            <span>Continue</span>
           </button>
         </div>
       </div>

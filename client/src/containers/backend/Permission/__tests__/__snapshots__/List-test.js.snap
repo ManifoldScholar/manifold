@@ -69,7 +69,9 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
           aria-hidden="true"
           className="manicon manicon-plus"
         />
-        Add New Permissions
+        <span>
+          Add New Permissions
+        </span>
       </a>
     </div>
   </nav>

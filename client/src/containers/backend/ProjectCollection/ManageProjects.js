@@ -180,7 +180,7 @@ export class ProjectCollectionManageProjects extends PureComponent {
         />
         <div className="actions">
           <button className="button-icon-secondary" onClick={this.handleClose}>
-            Close
+            <span>Close</span>
             <i className="manicon manicon-x" />
           </button>
         </div>

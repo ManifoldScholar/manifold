@@ -96,7 +96,9 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
               aria-hidden="true"
               className="manicon manicon-plus"
             />
-            Add a New Collection
+            <span>
+              Add a New Collection
+            </span>
           </a>
         </div>
         <section>

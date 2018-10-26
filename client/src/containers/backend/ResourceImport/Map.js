@@ -99,11 +99,11 @@ export class ResourceImportMap extends PureComponent {
                 className="button-icon-secondary dull"
               >
                 <i className="manicon manicon-x small" aria-hidden="true" />
-                Back
+                <span>Back</span>
               </Link>
               <button type="submit" className="button-icon-secondary">
                 <i className="manicon manicon-check small" aria-hidden="true" />
-                Continue
+                <span>Continue</span>
               </button>
             </div>
           </Form.FieldGroup>

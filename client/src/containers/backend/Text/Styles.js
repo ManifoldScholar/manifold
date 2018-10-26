@@ -254,7 +254,7 @@ export default class TextStylesContainer extends PureComponent {
             to={lh.link("BackendTextStylesheetNew", text.id)}
           >
             <i className="manicon manicon-plus" aria-hidden="true" />
-            Add a New Stylesheet
+            <span>Add a New Stylesheet</span>
           </Link>
         </div>
       </div>

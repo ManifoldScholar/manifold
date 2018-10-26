@@ -140,7 +140,9 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
             <Link className=\\"button-icon-secondary\\" to=\\"/backend/projects/text/1/styles/new\\" replace={false}>
               <a className=\\"button-icon-secondary\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/new\\">
                 <i className=\\"manicon manicon-plus\\" aria-hidden=\\"true\\" />
-                Add a New Stylesheet
+                <span>
+                  Add a New Stylesheet
+                </span>
               </a>
             </Link>
           </div>
