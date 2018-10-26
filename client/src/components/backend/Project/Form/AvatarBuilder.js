@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Form, Dialog } from "components/backend";
+import { Form as GlobalForm } from "components/global";
 import ColorPicker from "./ColorPicker";
 import { Project } from "components/global";
 import setter from "components/backend/Form/setter";
@@ -11,6 +12,7 @@ class AvatarBuilder extends Component {
 
   static propTypes = {
     project: PropTypes.object,
+    errors: PropTypes.array,
     getModelValue: PropTypes.func,
     setOther: PropTypes.func,
     wide: PropTypes.bool
@@ -120,55 +122,62 @@ class AvatarBuilder extends Component {
     });
 
     return (
-      <div className={inputClasses}>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
-        <h4 className="form-input-heading">Project Thumbnail</h4>
-        <div className="grid">
-          <div className="section current">
-            <span className="label" aria-hidden="true">
-              Current
-            </span>
-            <span className="label screen-reader-text">
-              Current Project Thumbnail
-            </span>
-            {image
-              ? this.renderCoverImage(image)
-              : this.renderPlaceholderImage()}
-          </div>
-          <div className={pickerClasses}>
-            <span className="label" aria-hidden="true">
-              Default
-            </span>
-            <span className="screen-reader-text">
-              Select a background color for the default thumbnail
-            </span>
-            <ColorPicker
-              onChange={this.onColorChange}
-              value={this.props.getModelValue("attributes[avatarColor]")}
-              {...this.props}
-            />
-          </div>
-          <div className={uploadClasses}>
-            <span className="label" aria-hidden="true">
-              Custom
-            </span>
-            <span className="screen-reader-text">
-              Add a Custom Thumbnail Image
-            </span>
-            <Form.Upload
-              set={this.onUploadChange}
-              initialValue={this.props.getModelValue(
-                "attributes[avatarStyles][smallSquare]"
-              )}
-              value={this.props.getModelValue("attributes[avatar]")}
-              placeholder="cover"
-              accepts="images"
-            />
+      <GlobalForm.Errorable
+        className={inputClasses}
+        name="attributes[avatar]"
+        errors={this.props.errors}
+        label="Avatar"
+      >
+        <div className={inputClasses}>
+          {this.state.confirmation ? (
+            <Dialog.Confirm {...this.state.confirmation} />
+          ) : null}
+          <h4 className="form-input-heading">Project Thumbnail</h4>
+          <div className="grid">
+            <div className="section current">
+              <span className="label" aria-hidden="true">
+                Current
+              </span>
+              <span className="label screen-reader-text">
+                Current Project Thumbnail
+              </span>
+              {image
+                ? this.renderCoverImage(image)
+                : this.renderPlaceholderImage()}
+            </div>
+            <div className={pickerClasses}>
+              <span className="label" aria-hidden="true">
+                Default
+              </span>
+              <span className="screen-reader-text">
+                Select a background color for the default thumbnail
+              </span>
+              <ColorPicker
+                onChange={this.onColorChange}
+                value={this.props.getModelValue("attributes[avatarColor]")}
+                {...this.props}
+              />
+            </div>
+            <div className={uploadClasses}>
+              <span className="label" aria-hidden="true">
+                Custom
+              </span>
+              <span className="screen-reader-text">
+                Add a Custom Thumbnail Image
+              </span>
+              <Form.Upload
+                set={this.onUploadChange}
+                initialValue={this.props.getModelValue(
+                  "attributes[avatarStyles][smallSquare]"
+                )}
+                value={this.props.getModelValue("attributes[avatar]")}
+                placeholder="cover"
+                accepts="images"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </GlobalForm.Errorable>
     );
   }
 }
