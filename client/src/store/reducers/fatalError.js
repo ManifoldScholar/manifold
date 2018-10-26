@@ -11,7 +11,10 @@ const clearError = state => {
 };
 
 const mapAPIError = ({ status, error, exception, traces }) => {
-  let body = exception.match(/(?:^#<|^)(.*)(?:>$|$)/)[1];
+  let body = null;
+  if (status === 502)
+    body = "The Manifold client application can't communicate with the API.";
+  if (exception) body = exception.match(/(?:^#<|^)(.*)(?:>$|$)/)[1];
   if (endsWith(body, ">")) body = body.substring(0, body.length - 1);
 
   return {
