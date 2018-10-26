@@ -23,13 +23,16 @@ class FetchSelect extends PureComponent {
     placeholder: PropTypes.string,
     authToken: PropTypes.string,
     idForError: PropTypes.string,
+    mode: PropTypes.oneOf(["single", "multi"]),
+    selectedValue: PropTypes.string,
     focusOnMount: PropTypes.bool
   };
 
   static defaultProps = {
     fetchOptions: null,
     focusOnMount: false,
-    className: "fetch-select"
+    className: "fetch-select",
+    mode: "multi"
   };
 
   constructor(props) {
@@ -49,6 +52,10 @@ class FetchSelect extends PureComponent {
     }
 
     this.debouncedUpdateOptions(this.props.fetch);
+  }
+
+  get multiSelect() {
+    return this.props.mode === "multi";
   }
 
   getHighlightedOption(list, id) {
@@ -122,6 +129,7 @@ class FetchSelect extends PureComponent {
   };
 
   renderAddRemoveAll() {
+    if (!this.multiSelect) return null;
     if (!this.hasOptions(this.state.options)) return null;
 
     return (
@@ -146,6 +154,11 @@ class FetchSelect extends PureComponent {
     );
   }
 
+  renderValue(props) {
+    if (props.selectedValue) return props.selectedValue;
+    return props.placeholder;
+  }
+
   render() {
     const listClasses = classNames(this.props.className, {
       "fetch-select-open":
@@ -160,7 +173,7 @@ class FetchSelect extends PureComponent {
           onClick={this.toggle}
           ref={e => (this.selectElement = e)}
         >
-          {this.props.placeholder}
+          {this.renderValue(this.props)}
           <i className="manicon manicon-caret-down" />
         </div>
         <ul ref={e => (this._list = e)}>

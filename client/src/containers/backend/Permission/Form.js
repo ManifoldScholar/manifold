@@ -55,25 +55,46 @@ export class PermissionForm extends PureComponent {
     if (!user) return null;
     const attr = user.attributes;
     return (
-      <div className="user">
-        <figure className="avatar">
-          {attr.avatarStyles.smallSquare ? (
-            <div
-              className="image"
-              style={{
-                backgroundImage: `url(${attr.avatarStyles.smallSquare})`
-              }}
-            />
-          ) : (
-            <div className="no-image">
-              <i className="manicon manicon-person" aria-hidden="true" />
-            </div>
-          )}
-        </figure>
-        <div className="meta">
-          <h3 className="name large">{attr.fullName}</h3>
+      <div className="form-input">
+        <div className="user">
+          <figure className="avatar">
+            {attr.avatarStyles.smallSquare ? (
+              <div
+                className="image"
+                style={{
+                  backgroundImage: `url(${attr.avatarStyles.smallSquare})`
+                }}
+              />
+            ) : (
+              <div className="no-image">
+                <i className="manicon manicon-person" aria-hidden="true" />
+              </div>
+            )}
+          </figure>
+          <div className="meta">
+            <h3 className="name large">{attr.fullName}</h3>
+          </div>
         </div>
       </div>
+    );
+  }
+
+  renderUser(props) {
+    if (props.permission) {
+      return this.renderSelectedUser(props.permission.relationships.user);
+    }
+
+    return (
+      <Form.BelongsTo
+        readOnly={this.props.showUserInput}
+        renderAttribute="fullName"
+        fetch={usersAPI.index}
+        placeholder="Select User"
+        label={this.labelUser}
+        relationName="user"
+        focusOnMount={!this.props.showUserInput}
+        searchable={false}
+      />
     );
   }
 
@@ -96,16 +117,7 @@ export class PermissionForm extends PureComponent {
           className="form-secondary permissions-form"
           notificationScope="drawer"
         >
-          <Form.BelongsTo
-            readOnly={this.props.showUserInput}
-            renderSelected={this.renderSelectedUser}
-            fetch={usersAPI.index}
-            placeholder="Select User"
-            label={this.labelUser}
-            relationName="user"
-            focusOnMount={!this.props.showUserInput}
-            searchable={false}
-          />
+          {this.renderUser(this.props)}
           <Form.SwitchArray
             name="attributes[roleNames]"
             label="Permissions"

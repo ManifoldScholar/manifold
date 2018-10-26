@@ -10,27 +10,23 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
     >
       <div
         className="form-input"
+        style={Object {}}
       >
-        <div
-          className="form-input"
-          style={Object {}}
+        <nav
+          className="fetch-select"
         >
-          <nav
-            className="fetch-select"
+          <div
+            className="fetch-select-trigger"
+            onClick={[Function]}
+            role="button"
           >
-            <div
-              className="fetch-select-trigger"
-              onClick={[Function]}
-              role="button"
-            >
-              Select User
-              <i
-                className="manicon manicon-caret-down"
-              />
-            </div>
-            <ul />
-          </nav>
-        </div>
+            Select User
+            <i
+              className="manicon manicon-caret-down"
+            />
+          </div>
+          <ul />
+        </nav>
       </div>
       <div
         className="form-input"
