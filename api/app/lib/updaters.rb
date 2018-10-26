@@ -91,6 +91,8 @@ module Updaters
     Shrine.data_uri(data).tap do |data_file|
       data_file.original_filename = filename
     end
+  rescue ::Shrine::Plugins::DataUri::ParseError
+    nil
   end
 
   # rubocop:disable Metrics/CyclomaticComplexity
