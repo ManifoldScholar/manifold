@@ -144,7 +144,11 @@
       }
 
       &:focus {
-        border: none;
+        outline: none;
+
+        > .manicon {
+          outline: thin dotted;
+        }
       }
 
       &:hover {
