@@ -266,7 +266,7 @@ class Project < ApplicationRecord
   end
 
   def published_text_download_url
-    return published_text_attachment.url if published_text_attachment.present?
+    return published_text_attachment_url if published_text_attachment.present?
     return download_url if download_url.present?
     nil
   end
