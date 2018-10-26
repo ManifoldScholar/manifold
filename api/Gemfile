@@ -51,7 +51,6 @@ gem "paleta", "~> 0.3.0"
 gem "pandoc-ruby", "~> 2.0"
 gem "paper_trail", "~> 8.0"
 gem "paper_trail-globalid", "~> 0.2"
-gem "paperclip", "~> 5.0"
 # Rails does not yet support PG 1.0; it's in master for rails, but not released as of
 # Jan 25, 2018. See https://github.com/rails/rails/issues/31669
 gem "pg", "~> 0.21.0"
