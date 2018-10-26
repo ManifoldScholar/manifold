@@ -9,23 +9,18 @@ import { projectsAPI, featuresAPI, projectCollectionsAPI, requests } from "api";
 import get from "lodash/get";
 import isArray from "lodash/isArray";
 import lh from "helpers/linkHandler";
-import queryString from "query-string";
 import size from "lodash/size";
 
-// const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
 const perPage = 20;
 
 export class HomeContainer extends Component {
   static fetchProjects = (dispatch, location) => {
-    const query = queryString.parse(location.search);
     const filters = {
-      order: "sort_title, title",
-      featured: query.featured,
-      subject: query.subject
+      order: "sort_title, title"
     };
     const pagination = {
-      number: query.page || 1,
+      number: 1,
       size: perPage
     };
     const filteredRequest = request(
@@ -37,10 +32,6 @@ export class HomeContainer extends Component {
 
   static fetchData = (getState, dispatch, location) => {
     const promises = [];
-    const featuredRequest = request(
-      projectsAPI.featured(),
-      requests.feProjectsFeatured
-    );
     const collectionRequest = request(
       projectCollectionsAPI.index({
         visible: true,
@@ -50,19 +41,17 @@ export class HomeContainer extends Component {
       requests.feProjectCollections
     );
     const { promise: one } = HomeContainer.fetchProjects(dispatch, location);
-    const { promise: two } = dispatch(featuredRequest);
-    const { promise: three } = dispatch(collectionRequest);
+    const { promise: two } = dispatch(collectionRequest);
     promises.push(one);
     promises.push(two);
-    promises.push(three);
 
     if (!isLoaded(requests.feFeatures, getState())) {
       const featuresRequest = request(
         featuresAPI.index({ home: true }),
         requests.feFeatures
       );
-      const { promise: four } = dispatch(featuresRequest);
-      promises.push(four);
+      const { promise: three } = dispatch(featuresRequest);
+      promises.push(three);
     }
     return Promise.all(promises);
   };
@@ -70,7 +59,7 @@ export class HomeContainer extends Component {
   static mapStateToProps = state => {
     return {
       features: select(requests.feFeatures, state.entityStore),
-      filteredProjects: select(requests.feProjectsFiltered, state.entityStore),
+      projects: select(requests.feProjectsFiltered, state.entityStore),
       projectCollections: select(
         requests.feProjectCollections,
         state.entityStore
@@ -84,7 +73,7 @@ export class HomeContainer extends Component {
   static propTypes = {
     authentication: PropTypes.object,
     projectCollections: PropTypes.array,
-    filteredProjects: PropTypes.array,
+    projects: PropTypes.array,
     features: PropTypes.array,
     location: PropTypes.object,
     history: PropTypes.object,
@@ -110,36 +99,12 @@ export class HomeContainer extends Component {
     ) {
       this.props.fetchData(this.props);
     }
-    if (prevProps.location !== this.props.location) {
-      HomeContainer.fetchProjects(this.props.dispatch, this.props.location);
-    }
   }
-
-  currentQuery() {
-    return queryString.parse(this.props.location.search);
-  }
-
-  handlePageChange = (event, page) => {
-    event.preventDefault();
-    const query = Object.assign({}, this.currentQuery(), { page });
-    this.doQuery(query);
-  };
-
-  doQuery(query) {
-    const url = lh.link("frontend", query);
-    this.props.history.push(url);
-  }
-
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handlePageChange(event, page);
-    };
-  };
 
   showPlaceholder() {
-    const { location, filteredProjects } = this.props;
+    const { location, projects } = this.props;
     if (location.search) return false; // There are search filters applied, skip the check
-    if (!filteredProjects || filteredProjects.length === 0) return true;
+    if (!projects || projects.length === 0) return true;
   }
 
   renderProjectCollections() {
@@ -179,7 +144,7 @@ export class HomeContainer extends Component {
             authenticated={this.props.authentication.authenticated}
             favorites={get(this.props.authentication, "currentUser.favorites")}
             dispatch={this.props.dispatch}
-            projects={this.props.filteredProjects}
+            projects={this.props.projects}
             limit={16}
             viewAllUrl={lh.link("frontendProjectsAll")}
           />
