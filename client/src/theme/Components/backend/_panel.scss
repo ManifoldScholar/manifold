@@ -1,7 +1,7 @@
 .backend-panel {
   @include clearfix;
 
-  .container {
+  > .container {
     @include clearfix;
     display: flex;
     flex-direction: column;
