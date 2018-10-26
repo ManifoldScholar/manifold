@@ -49,11 +49,13 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
     className="body"
   >
     <div>
-      <p>
-        <span>
-          Plaid clash with polka dots, I hope you ain't mad.
-        </span>
-      </p>
+      <p
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "Plaid clash with polka dots, I hope you ain&#x27;t mad.",
+          }
+        }
+      />
     </div>
   </section>
   <nav

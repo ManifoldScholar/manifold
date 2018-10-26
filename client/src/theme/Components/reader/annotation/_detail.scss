@@ -16,6 +16,16 @@
     @include drawerIndent(padding-left);
     font-weight: $regular;
     line-height: 1.375;
+
+    a {
+      color: $accentPrimaryMedium;
+
+      &:hover {
+        color: $accentPrimaryDark;
+      }
+    }
+
+
   }
 
   // Direct scoping because nested comments also have utility
