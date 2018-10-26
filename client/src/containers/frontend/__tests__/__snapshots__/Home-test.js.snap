@@ -35,6 +35,393 @@ exports[`Frontend Home Container renders correctly 1`] = `
           </div>
         </div>
       </header>
+      <nav
+        className="project-list grid"
+      >
+        <ul>
+          <li>
+            <a
+              href="/projects/slug-1"
+              onClick={[Function]}
+            >
+              <figure
+                className="cover"
+              >
+                <div>
+                  <button
+                    className="screen-reader-text"
+                    onClick={[Function]}
+                  >
+                    add Rowan Test
+                  </button>
+                  <div
+                    aria-hidden="true"
+                    className="add project-cover-button-wrapper"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    role="presentation"
+                  >
+                    <div
+                      aria-hidden="true"
+                      className="project-cover-button"
+                    >
+                      <div
+                        className="icons"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="manicon-svg minus"
+                          fill="currentColor"
+                          height={28}
+                          stroke={undefined}
+                          viewBox="0 0 32 32"
+                          width={28}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            height="2"
+                            width="14"
+                            x="9"
+                            y="15"
+                          />
+                        </svg>
+                        <svg
+                          aria-hidden="true"
+                          className="manicon-svg check"
+                          fill="currentColor"
+                          height={28}
+                          stroke={undefined}
+                          viewBox="0 0 32 32"
+                          width={28}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <polygon
+                            points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
+                          />
+                        </svg>
+                        <svg
+                          aria-hidden="true"
+                          className="manicon-svg plus"
+                          fill="currentColor"
+                          height={28}
+                          stroke={undefined}
+                          viewBox="0 0 32 32"
+                          width={28}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            height="2"
+                            width="14"
+                            x="9"
+                            y="15"
+                          />
+                          <rect
+                            height="14"
+                            width="2"
+                            x="15"
+                            y="9"
+                          />
+                        </svg>
+                      </div>
+                      <span>
+                        <span
+                          className="action-text"
+                        >
+                          Follow
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              <div
+                className="meta"
+              >
+                <h3
+                  className="name"
+                >
+                  <span
+                    className="title-text"
+                  >
+                    Rowan Test
+                  </span>
+                </h3>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/projects/slug-2"
+              onClick={[Function]}
+            >
+              <figure
+                className="cover"
+              >
+                <div>
+                  <button
+                    className="screen-reader-text"
+                    onClick={[Function]}
+                  >
+                    add Rowan Test
+                  </button>
+                  <div
+                    aria-hidden="true"
+                    className="add project-cover-button-wrapper"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    role="presentation"
+                  >
+                    <div
+                      aria-hidden="true"
+                      className="project-cover-button"
+                    >
+                      <div
+                        className="icons"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="manicon-svg minus"
+                          fill="currentColor"
+                          height={28}
+                          stroke={undefined}
+                          viewBox="0 0 32 32"
+                          width={28}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            height="2"
+                            width="14"
+                            x="9"
+                            y="15"
+                          />
+                        </svg>
+                        <svg
+                          aria-hidden="true"
+                          className="manicon-svg check"
+                          fill="currentColor"
+                          height={28}
+                          stroke={undefined}
+                          viewBox="0 0 32 32"
+                          width={28}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <polygon
+                            points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
+                          />
+                        </svg>
+                        <svg
+                          aria-hidden="true"
+                          className="manicon-svg plus"
+                          fill="currentColor"
+                          height={28}
+                          stroke={undefined}
+                          viewBox="0 0 32 32"
+                          width={28}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            height="2"
+                            width="14"
+                            x="9"
+                            y="15"
+                          />
+                          <rect
+                            height="14"
+                            width="2"
+                            x="15"
+                            y="9"
+                          />
+                        </svg>
+                      </div>
+                      <span>
+                        <span
+                          className="action-text"
+                        >
+                          Follow
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              <div
+                className="meta"
+              >
+                <h3
+                  className="name"
+                >
+                  <span
+                    className="title-text"
+                  >
+                    Rowan Test
+                  </span>
+                </h3>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+  <section
+    className=""
+  >
+    <div
+      className="container"
+    >
+      <nav
+        className="button-nav"
+      >
+        <a
+          className="button-icon-primary"
+          href="/projects/all"
+          onClick={[Function]}
+        >
+          <span>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-books-on-shelf"
+            />
+            See All Projects
+          </span>
+        </a>
+        <a
+          className="button-icon-primary"
+          href="/following"
+          onClick={[Function]}
+        >
+          <span>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-books-with-glasses"
+            />
+            Projects You’re Following
+          </span>
+        </a>
+      </nav>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`Frontend Home Container renders correctly with project collections present 1`] = `
+<div
+  style={
+    Object {
+      "overflowX": "hidden",
+    }
+  }
+>
+  <section
+    className="project-collection-summary bg-neutral05"
+  >
+    <div
+      className="container project-list-container"
+    >
+      <a
+        className="section-heading"
+        href="/projects/project-collection/undefined"
+        onClick={[Function]}
+      >
+        <div
+          className="main"
+        >
+          <i
+            aria-hidden="true"
+            className="manicon"
+          >
+            <svg
+              aria-hidden="true"
+              className="manicon-svg"
+              fill="currentColor"
+              height={56}
+              stroke={undefined}
+              viewBox="0 0 64 64"
+              width={56}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M44.314549,33.1909886 L45.9318511,32.0144114 L49.1634511,36.4565114 L47.546149,37.6330886 L44.314549,33.1909886 Z M47.7134278,29.8115965 L48.5257723,27.9840035 L53.5454723,30.2152035 L52.7331278,32.0427965 L47.7134278,29.8115965 Z M48.9673311,25.1854584 L48.7570689,23.1965416 L54.2197689,22.6190416 L54.4300311,24.6079584 L48.9673311,25.1854584 Z M34.6515965,38.9963723 L32.8240035,38.1840278 L35.0552035,33.1643278 L36.8827965,33.9766722 L34.6515965,38.9963723 Z M42.2477586,39.6706708 L40.2588414,39.8809292 L39.6813414,34.4181292 L41.6702586,34.2078708 L42.2477586,39.6706708 Z M21.8055661,55.2600612 L20.0844339,56.2787388 L13.8494454,45.7442583 C10.1665975,39.5221317 11.8255838,31.5192434 17.6783357,27.2738322 L26.7793357,20.6722322 L27.9536643,22.2911678 L18.8526639,28.892768 C13.8357087,32.5319174 12.4136324,39.3919604 15.5705661,44.7255612 L21.8055661,55.2600612 Z M34.6171323,10.3538753 L26.4778605,16.2936667 L32.7831452,28.1653016 L43.999866,19.9791535 L34.6171323,10.3538753 Z M32.0988548,31.1406984 L23.8981395,15.7003333 L34.8388677,7.71612467 L47.042134,20.2348465 L32.0988548,31.1406984 Z M10.3684,56.7693 L10.3684,54.7693 L30.2014,54.7693 L30.2014,56.7693 L10.3684,56.7693 Z M30.9602576,11.6871433 L29.4425424,12.9896566 L26.6075424,9.6862566 L28.1252576,8.38374333 L30.9602576,11.6871433 Z"
+              />
+            </svg>
+          </i>
+          <div
+            className="body"
+          >
+            <h4
+              className="title"
+            >
+              A Project Collection
+            </h4>
+          </div>
+        </div>
+      </a>
+      <div
+        className="project-list empty"
+      >
+        <p
+          className="message"
+        >
+          This Project Collection is currently empty.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section
+    className="project-collection-summary"
+  >
+    <div
+      className="container project-list-container"
+    >
+      <a
+        className="section-heading"
+        href="/projects/project-collection/undefined"
+        onClick={[Function]}
+      >
+        <div
+          className="main"
+        >
+          <i
+            aria-hidden="true"
+            className="manicon"
+          >
+            <svg
+              aria-hidden="true"
+              className="manicon-svg"
+              fill="currentColor"
+              height={56}
+              stroke={undefined}
+              viewBox="0 0 64 64"
+              width={56}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M44.314549,33.1909886 L45.9318511,32.0144114 L49.1634511,36.4565114 L47.546149,37.6330886 L44.314549,33.1909886 Z M47.7134278,29.8115965 L48.5257723,27.9840035 L53.5454723,30.2152035 L52.7331278,32.0427965 L47.7134278,29.8115965 Z M48.9673311,25.1854584 L48.7570689,23.1965416 L54.2197689,22.6190416 L54.4300311,24.6079584 L48.9673311,25.1854584 Z M34.6515965,38.9963723 L32.8240035,38.1840278 L35.0552035,33.1643278 L36.8827965,33.9766722 L34.6515965,38.9963723 Z M42.2477586,39.6706708 L40.2588414,39.8809292 L39.6813414,34.4181292 L41.6702586,34.2078708 L42.2477586,39.6706708 Z M21.8055661,55.2600612 L20.0844339,56.2787388 L13.8494454,45.7442583 C10.1665975,39.5221317 11.8255838,31.5192434 17.6783357,27.2738322 L26.7793357,20.6722322 L27.9536643,22.2911678 L18.8526639,28.892768 C13.8357087,32.5319174 12.4136324,39.3919604 15.5705661,44.7255612 L21.8055661,55.2600612 Z M34.6171323,10.3538753 L26.4778605,16.2936667 L32.7831452,28.1653016 L43.999866,19.9791535 L34.6171323,10.3538753 Z M32.0988548,31.1406984 L23.8981395,15.7003333 L34.8388677,7.71612467 L47.042134,20.2348465 L32.0988548,31.1406984 Z M10.3684,56.7693 L10.3684,54.7693 L30.2014,54.7693 L30.2014,56.7693 L10.3684,56.7693 Z M30.9602576,11.6871433 L29.4425424,12.9896566 L26.6075424,9.6862566 L28.1252576,8.38374333 L30.9602576,11.6871433 Z"
+              />
+            </svg>
+          </i>
+          <div
+            className="body"
+          >
+            <h4
+              className="title"
+            >
+              A Project Collection
+            </h4>
+          </div>
+        </div>
+      </a>
+      <div
+        className="project-list empty"
+      >
+        <p
+          className="message"
+        >
+          This Project Collection is currently empty.
+        </p>
+      </div>
     </div>
   </section>
   <section

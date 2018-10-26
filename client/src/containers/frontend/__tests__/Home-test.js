@@ -7,7 +7,7 @@ import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend Home Container", () => {
   const store = build.store();
-  const featuredProjects = [
+  const projects = [
     build.entity.project("1"),
     build.entity.project("2")
   ];
@@ -15,6 +15,10 @@ describe("Frontend Home Container", () => {
     build.entity.project("3"),
     build.entity.project("4")
   ];
+  const projectCollections = [
+    build.entity.projectCollection("1"),
+    build.entity.projectCollection("2")
+  ]
   const user = build.entity.user("5");
   user.favorites = {
     0: build.entity.project("6")
@@ -23,20 +27,29 @@ describe("Frontend Home Container", () => {
     authenticated: true,
     currentUser: user
   };
-  const location = {
-    search: "?featured=true"
-  };
 
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
         <HomeContainer
           authentication={authentication}
-          featuredProjects={featuredProjects}
           followedProjects={followedProjects}
-          filteredProjects={[]}
+          projects={projects}
           fetchData={jest.fn()}
-          location={location}
+        />
+      </Provider>
+    )
+  );
+
+  const withCollections = renderer.create(
+    wrapWithRouter(
+      <Provider store={store}>
+        <HomeContainer
+          authentication={authentication}
+          followedProjects={followedProjects}
+          projects={projects}
+          projectCollections={projectCollections}
+          fetchData={jest.fn()}
         />
       </Provider>
     )
@@ -50,5 +63,10 @@ describe("Frontend Home Container", () => {
   it("doesn't render to null", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
+  });
+
+  it("renders correctly with project collections present", () => {
+    let tree = withCollections.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
