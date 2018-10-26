@@ -34,9 +34,6 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
       >
         <div
           className="form-input"
-        />
-        <div
-          className="form-input"
           style={Object {}}
         >
           <div
