@@ -112,6 +112,7 @@
           @include sectionLabel;
           position: absolute;
           top: calc(100% - 13px);
+          left: calc(50% - 25px);
           z-index: 1;
           width: 50px;
           height: 26px;
@@ -123,6 +124,7 @@
           @include respond($break95) {
             top: calc(50% - 50px);
             right: -13px;
+            left: auto;
             width: 26px;
             height: 100px;
             line-height: 100px;
@@ -149,31 +151,35 @@
 
         // TODO: Investigate nested form inputs
         .form-input, .form-dropzone {
-          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
           width: 100%;
           max-width: none;
         }
 
         .contents-image-preview {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+          flex-grow: 1;
           justify-content: space-between;
-          width: 100%;
-          padding: 0;
+          // overrides just for .avatar-builder
+          padding: 0 0 15px;
+
+          .message {
+            position: static;
+            // overrides just for .avatar-builder
+            order: 1;
+            padding: 0;
+            margin-top: 16px;
+            margin-bottom: 0;
+            background-color: transparent;
+            transform: none;
+          }
         }
 
         .preview {
-          position: absolute;
           // Slightly smaller preview, since it shares
           // space with color picker
-          width: 100px;
-          height: 100px;
-
-          @include respond($break50) {
-            width: 120px;
-            height: 120px;
-          }
+          width: 120px;
+          height: 120px;
 
           svg {
             width: 100%;
@@ -208,11 +214,6 @@
         justify-content: space-between;
         width: 100%;
         margin: 0;
-      }
-
-      .contents-image-preview .message {
-        position: static;
-        margin-bottom: 15px;
       }
 
       .primary {
