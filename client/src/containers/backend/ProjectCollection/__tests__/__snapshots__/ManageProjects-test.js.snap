@@ -383,7 +383,9 @@ Array [
       className="button-icon-secondary"
       onClick={[Function]}
     >
-      Close
+      <span>
+        Close
+      </span>
       <i
         className="manicon manicon-x"
       />

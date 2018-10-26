@@ -34,7 +34,9 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
             aria-hidden="true"
             className="manicon manicon-plus"
           />
-          Add a New Twitter Query
+          <span>
+            Add a New Twitter Query
+          </span>
         </a>
       </div>
       <section>

@@ -64,7 +64,7 @@ export class PermissionContainer extends PureComponent {
                 className="button-icon-secondary"
               >
                 <i className="manicon manicon-plus" aria-hidden="true" />
-                Add New Permissions
+                <span>Add New Permissions</span>
               </Link>
             </div>
           </HigherOrder.Authorize>

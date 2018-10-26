@@ -144,7 +144,9 @@ exports[`Backend Text Ingestion New Container renders correctly 1`] = `
               aria-hidden="true"
               className="manicon manicon-check small"
             />
-            Continue
+            <span>
+              Continue
+            </span>
           </button>
         </div>
       </div>

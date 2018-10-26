@@ -97,7 +97,9 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
                 aria-hidden="true"
                 className="manicon manicon-plus"
               />
-              Add a New Resource
+              <span>
+                Add a New Resource
+              </span>
             </a>
             <a
               className="button-icon-secondary narrow"
@@ -108,7 +110,9 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
                 aria-hidden="true"
                 className="manicon manicon-cube-multiple"
               />
-              Bulk Add Resources
+              <span>
+                Bulk Add Resources
+              </span>
             </a>
           </div>
           <p

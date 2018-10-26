@@ -74,7 +74,7 @@ export default class DialogConfirm extends PureComponent {
             data-id="accept"
           >
             <i className="manicon manicon-check small" aria-hidden="true" />
-            Yes
+            <span>Yes</span>
           </button>
           <button
             className="button-icon-secondary dull"
@@ -82,7 +82,7 @@ export default class DialogConfirm extends PureComponent {
             data-id="reject"
           >
             <i className="manicon manicon-x small" aria-hidden="true" />
-            No
+            <span>No</span>
           </button>
         </div>
       </Dialog.Wrapper>

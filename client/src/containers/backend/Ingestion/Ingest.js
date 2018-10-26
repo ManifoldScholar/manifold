@@ -224,7 +224,7 @@ export class IngestionIngest extends Component {
       return (
         <button onClick={this.complete} className="button-icon-secondary">
           <i className="manicon manicon-check small" aria-hidden="true" />
-          {"Complete"}
+          <span>{"Complete"}</span>
         </button>
       );
     }
@@ -310,7 +310,7 @@ export class IngestionIngest extends Component {
                 className="manicon manicon-arrow-right small"
                 aria-hidden="true"
               />
-              {"Ingest"}
+              <span>{"Ingest"}</span>
             </button>
           ) : null}
           {this.props.ingestion.attributes.state === "finished"

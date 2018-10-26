@@ -40,7 +40,7 @@ export default class ProjectCollectionList extends PureComponent {
             onClick={this.props.onShowNew}
           >
             <i className="manicon manicon-plus" />
-            Create New Collection
+            <span>Create New Collection</span>
           </button>
         </div>
         <p className="instructional-copy">

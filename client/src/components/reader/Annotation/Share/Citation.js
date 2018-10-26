@@ -96,14 +96,14 @@ export default class AnnotationShareEditor extends PureComponent {
                 onClick={this.handleCancel}
                 className="button-primary dull"
               >
-                Cancel
+                <span>Cancel</span>
               </button>
               <button
                 className="button-secondary button-icon-secondary"
                 onClick={this.handleCopyClick}
               >
                 <i className="manicon manicon-copy" aria-hidden="true" />
-                Copy
+                <span>Copy</span>
               </button>
             </div>
           </div>

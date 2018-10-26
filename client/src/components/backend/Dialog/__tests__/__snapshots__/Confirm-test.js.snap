@@ -25,11 +25,15 @@ exports[`Backend.Dialog.Confirm Component renders correctly 1`] = `
                         <div className=\\"buttons-icon-horizontal\\">
                           <button onClick={[Function]} className=\\"button-icon-secondary\\" data-id=\\"accept\\">
                             <i className=\\"manicon manicon-check small\\" aria-hidden=\\"true\\" />
-                            Yes
+                            <span>
+                              Yes
+                            </span>
                           </button>
                           <button className=\\"button-icon-secondary dull\\" onClick={[Function]} data-id=\\"reject\\">
                             <i className=\\"manicon manicon-x small\\" aria-hidden=\\"true\\" />
-                            No
+                            <span>
+                              No
+                            </span>
                           </button>
                         </div>
                       </div>

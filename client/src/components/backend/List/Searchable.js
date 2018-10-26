@@ -239,7 +239,7 @@ export class ListSearchable extends PureComponent {
         className={`button-icon-secondary ${buttonProps.type || ""}`}
       >
         <i className={`manicon ${buttonIcon}`} aria-hidden="true" />
-        {buttonProps.text}
+        <span>{buttonProps.text}</span>
       </Link>
     );
 

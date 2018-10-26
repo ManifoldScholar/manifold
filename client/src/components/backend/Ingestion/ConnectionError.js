@@ -37,7 +37,7 @@ export default class IngestionConnectionError extends PureComponent {
           className="button-icon-secondary dull"
         >
           <i className="manicon manicon-x small" aria-hidden="true" />
-          Close
+          <span>Close</span>
         </button>
       </div>
     );
