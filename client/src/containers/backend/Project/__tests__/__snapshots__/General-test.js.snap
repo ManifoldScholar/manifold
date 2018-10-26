@@ -590,261 +590,266 @@ exports[`Backend Project General Container renders correctly 1`] = `
           </div>
           <div
             className="form-input avatar-builder wide"
+            style={Object {}}
           >
-            <h4
-              className="form-input-heading"
-            >
-              Project Thumbnail
-            </h4>
             <div
-              className="grid"
+              className="form-input avatar-builder wide"
             >
-              <div
-                className="section current"
+              <h4
+                className="form-input-heading"
               >
-                <span
-                  aria-hidden="true"
-                  className="label"
-                >
-                  Current
-                </span>
-                <span
-                  className="label screen-reader-text"
-                >
-                  Current Project Thumbnail
-                </span>
-              </div>
+                Project Thumbnail
+              </h4>
               <div
-                className="section color active"
+                className="grid"
               >
-                <span
-                  aria-hidden="true"
-                  className="label"
-                >
-                  Default
-                </span>
-                <span
-                  className="screen-reader-text"
-                >
-                  Select a background color for the default thumbnail
-                </span>
                 <div
-                  className="color-picker"
+                  className="section current"
                 >
+                  <span
+                    aria-hidden="true"
+                    className="label"
+                  >
+                    Current
+                  </span>
+                  <span
+                    className="label screen-reader-text"
+                  >
+                    Current Project Thumbnail
+                  </span>
+                </div>
+                <div
+                  className="section color active"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="label"
+                  >
+                    Default
+                  </span>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Select a background color for the default thumbnail
+                  </span>
                   <div
-                    className="colors"
+                    className="color-picker"
                   >
                     <div
-                      className="wrapper"
-                    >
-                      <label
-                        className="form-toggle radio primary"
-                        htmlFor="primary"
-                      >
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Primary Background Color
-                        </span>
-                        <input
-                          checked={false}
-                          id="primary"
-                          onChange={[Function]}
-                          type="radio"
-                          value="primary"
-                        />
-                        <span
-                          aria-hidden="true"
-                          className="toggle-indicator"
-                        />
-                      </label>
-                      <label
-                        className="form-toggle radio secondary"
-                        htmlFor="secondary"
-                      >
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Secondary Background Color
-                        </span>
-                        <input
-                          checked={false}
-                          id="secondary"
-                          onChange={[Function]}
-                          type="radio"
-                          value="secondary"
-                        />
-                        <span
-                          aria-hidden="true"
-                          className="toggle-indicator"
-                        />
-                      </label>
-                      <label
-                        className="form-toggle radio tertiary"
-                        htmlFor="tertiary"
-                      >
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Tertiary Background Color
-                        </span>
-                        <input
-                          checked={false}
-                          id="tertiary"
-                          onChange={[Function]}
-                          type="radio"
-                          value="tertiary"
-                        />
-                        <span
-                          aria-hidden="true"
-                          className="toggle-indicator"
-                        />
-                      </label>
-                      <label
-                        className="form-toggle radio quaternary"
-                        htmlFor="quaternary"
-                      >
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Quaternary Background Color
-                        </span>
-                        <input
-                          checked={false}
-                          id="quaternary"
-                          onChange={[Function]}
-                          type="radio"
-                          value="quaternary"
-                        />
-                        <span
-                          aria-hidden="true"
-                          className="toggle-indicator"
-                        />
-                      </label>
-                      <label
-                        className="form-toggle radio quinary"
-                        htmlFor="quinary"
-                      >
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Quinary Background Color
-                        </span>
-                        <input
-                          checked={false}
-                          id="quinary"
-                          onChange={[Function]}
-                          type="radio"
-                          value="quinary"
-                        />
-                        <span
-                          aria-hidden="true"
-                          className="toggle-indicator"
-                        />
-                      </label>
-                      <label
-                        className="form-toggle radio sentary"
-                        htmlFor="sentary"
-                      >
-                        <span
-                          className="screen-reader-text"
-                        >
-                          Sentary Background Color
-                        </span>
-                        <input
-                          checked={false}
-                          id="sentary"
-                          onChange={[Function]}
-                          type="radio"
-                          value="sentary"
-                        />
-                        <span
-                          aria-hidden="true"
-                          className="toggle-indicator"
-                        />
-                      </label>
-                    </div>
-                  </div>
-                  <div
-                    aria-hidden="true"
-                    className="default-description"
-                  >
-                    Select A Different Background Color
-                  </div>
-                </div>
-              </div>
-              <div
-                className="section upload"
-              >
-                <span
-                  aria-hidden="true"
-                  className="label"
-                >
-                  Custom
-                </span>
-                <span
-                  className="screen-reader-text"
-                >
-                  Add a Custom Thumbnail Image
-                </span>
-                <div
-                  className="form-input"
-                >
-                  <div
-                    className="form-input"
-                    style={Object {}}
-                  >
-                    <react-dropzone
-                      accepts={
-                        Object {
-                          "accepts": "image/*",
-                          "extensions": "gif, jpeg, jpg, png",
-                        }
-                      }
-                      className="form-dropzone style-square"
-                      inputProps={
-                        Object {
-                          "aria-describedby": "upload-error-1",
-                          "id": "upload-1",
-                        }
-                      }
-                      multiple={false}
-                      onDrop={[Function]}
-                      style={undefined}
+                      className="colors"
                     >
                       <div
-                        className="contents-empty"
+                        className="wrapper"
                       >
-                        <i
-                          aria-hidden="true"
-                          className="manicon manicon-cloud-up"
-                        />
-                        <div
-                          className="message"
+                        <label
+                          className="form-toggle radio primary"
+                          htmlFor="primary"
                         >
-                          <p
-                            className="primary"
+                          <span
+                            className="screen-reader-text"
                           >
-                            <span
-                              className="fake-link"
-                              role="button"
-                              tabIndex="0"
-                            >
-                              Upload a file
-                            </span>
-                             or 
-                            <br />
-                            drag and drop here
-                            <br />
-                          </p>
-                          <p
-                            className="secondary"
+                            Primary Background Color
+                          </span>
+                          <input
+                            checked={false}
+                            id="primary"
+                            onChange={[Function]}
+                            type="radio"
+                            value="primary"
+                          />
+                          <span
+                            aria-hidden="true"
+                            className="toggle-indicator"
+                          />
+                        </label>
+                        <label
+                          className="form-toggle radio secondary"
+                          htmlFor="secondary"
+                        >
+                          <span
+                            className="screen-reader-text"
                           >
-                            gif, jpeg, jpg, png
-                          </p>
-                        </div>
+                            Secondary Background Color
+                          </span>
+                          <input
+                            checked={false}
+                            id="secondary"
+                            onChange={[Function]}
+                            type="radio"
+                            value="secondary"
+                          />
+                          <span
+                            aria-hidden="true"
+                            className="toggle-indicator"
+                          />
+                        </label>
+                        <label
+                          className="form-toggle radio tertiary"
+                          htmlFor="tertiary"
+                        >
+                          <span
+                            className="screen-reader-text"
+                          >
+                            Tertiary Background Color
+                          </span>
+                          <input
+                            checked={false}
+                            id="tertiary"
+                            onChange={[Function]}
+                            type="radio"
+                            value="tertiary"
+                          />
+                          <span
+                            aria-hidden="true"
+                            className="toggle-indicator"
+                          />
+                        </label>
+                        <label
+                          className="form-toggle radio quaternary"
+                          htmlFor="quaternary"
+                        >
+                          <span
+                            className="screen-reader-text"
+                          >
+                            Quaternary Background Color
+                          </span>
+                          <input
+                            checked={false}
+                            id="quaternary"
+                            onChange={[Function]}
+                            type="radio"
+                            value="quaternary"
+                          />
+                          <span
+                            aria-hidden="true"
+                            className="toggle-indicator"
+                          />
+                        </label>
+                        <label
+                          className="form-toggle radio quinary"
+                          htmlFor="quinary"
+                        >
+                          <span
+                            className="screen-reader-text"
+                          >
+                            Quinary Background Color
+                          </span>
+                          <input
+                            checked={false}
+                            id="quinary"
+                            onChange={[Function]}
+                            type="radio"
+                            value="quinary"
+                          />
+                          <span
+                            aria-hidden="true"
+                            className="toggle-indicator"
+                          />
+                        </label>
+                        <label
+                          className="form-toggle radio sentary"
+                          htmlFor="sentary"
+                        >
+                          <span
+                            className="screen-reader-text"
+                          >
+                            Sentary Background Color
+                          </span>
+                          <input
+                            checked={false}
+                            id="sentary"
+                            onChange={[Function]}
+                            type="radio"
+                            value="sentary"
+                          />
+                          <span
+                            aria-hidden="true"
+                            className="toggle-indicator"
+                          />
+                        </label>
                       </div>
-                    </react-dropzone>
+                    </div>
+                    <div
+                      aria-hidden="true"
+                      className="default-description"
+                    >
+                      Select A Different Background Color
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="section upload"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="label"
+                  >
+                    Custom
+                  </span>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Add a Custom Thumbnail Image
+                  </span>
+                  <div
+                    className="form-input"
+                  >
+                    <div
+                      className="form-input"
+                      style={Object {}}
+                    >
+                      <react-dropzone
+                        accepts={
+                          Object {
+                            "accepts": "image/*",
+                            "extensions": "gif, jpeg, jpg, png",
+                          }
+                        }
+                        className="form-dropzone style-square"
+                        inputProps={
+                          Object {
+                            "aria-describedby": "upload-error-1",
+                            "id": "upload-1",
+                          }
+                        }
+                        multiple={false}
+                        onDrop={[Function]}
+                        style={undefined}
+                      >
+                        <div
+                          className="contents-empty"
+                        >
+                          <i
+                            aria-hidden="true"
+                            className="manicon manicon-cloud-up"
+                          />
+                          <div
+                            className="message"
+                          >
+                            <p
+                              className="primary"
+                            >
+                              <span
+                                className="fake-link"
+                                role="button"
+                                tabIndex="0"
+                              >
+                                Upload a file
+                              </span>
+                               or 
+                              <br />
+                              drag and drop here
+                              <br />
+                            </p>
+                            <p
+                              className="secondary"
+                            >
+                              gif, jpeg, jpg, png
+                            </p>
+                          </div>
+                        </div>
+                      </react-dropzone>
+                    </div>
                   </div>
                 </div>
               </div>
