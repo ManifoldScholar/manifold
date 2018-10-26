@@ -74,11 +74,13 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                 className="body"
               >
                 <div>
-                  <p>
-                    <span>
-                      Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.
-                    </span>
-                  </p>
+                  <p
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Hands on your boxes, turn &#x27;em up like seven notches. Your Magnavoxes amplify my super conscious.",
+                      }
+                    }
+                  />
                 </div>
               </section>
               <nav
@@ -133,11 +135,13 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                 className="body"
               >
                 <div>
-                  <p>
-                    <span>
-                      Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.
-                    </span>
-                  </p>
+                  <p
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Hands on your boxes, turn &#x27;em up like seven notches. Your Magnavoxes amplify my super conscious.",
+                      }
+                    }
+                  />
                 </div>
               </section>
               <nav

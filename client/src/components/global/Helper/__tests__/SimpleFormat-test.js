@@ -18,15 +18,4 @@ describe("Global.Helper.SimpleFormat component", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("removes line breaks", () => {
-    const component = Enzyme.shallow(
-      <SimpleFormat
-        text="Basketball is my favorite sport.
-        I like the way they dribble up and down the court."
-      />
-    );
-    expect(component.text()).toEqual(
-      "Basketball is my favorite sport. I like the way they dribble up and down the court."
-    );
-  });
 });
