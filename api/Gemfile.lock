@@ -85,15 +85,12 @@ GEM
     classy_enum (4.0.0)
       activerecord (>= 3.2)
     cleanroom (1.0.0)
-    climate_control (0.2.0)
     clockwork (2.0.0)
       activesupport
       tzinfo
     closure_tree (6.6.0)
       activerecord (>= 4.1.0)
       with_advisory_lock (>= 3.0.0)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
     colorize (0.8.1)
     concurrent-ruby (1.0.5)
@@ -287,12 +284,6 @@ GEM
     paper_trail-globalid (0.2.0)
       globalid
       paper_trail (>= 3.0.0)
-    paperclip (5.2.1)
-      activemodel (>= 4.2.0)
-      activesupport (>= 4.2.0)
-      cocaine (~> 0.5.5)
-      mime-types
-      mimemagic (~> 0.3.0)
     parallel (1.12.1)
     parser (2.5.0.5)
       ast (~> 2.4.0)
@@ -560,7 +551,6 @@ DEPENDENCIES
   pandoc-ruby (~> 2.0)
   paper_trail (~> 8.0)
   paper_trail-globalid (~> 0.2)
-  paperclip (~> 5.0)
   pg (~> 0.21.0)
   premailer-rails (~> 1.0)
   pry-rails (~> 0.3.0)
