@@ -336,6 +336,8 @@
   color: $neutral40;
   background: transparent;
   border: 1px solid $neutral80;
+  border-radius: 0;
+  appearance: none;
   outline: none;
   transition: border-color $duration $timing;
 

@@ -23,6 +23,8 @@
     padding-left: 40px;
     color: $neutral50;
     border-color: $neutral50;
+    border-radius: 0;
+    appearance: none;
     transition: color $duration $timing, border-color $duration $timing;
 
     &::placeholder {
