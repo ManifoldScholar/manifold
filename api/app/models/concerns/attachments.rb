@@ -175,15 +175,16 @@ module Attachments
         end
   
         def #{field}_styles
+          original = #{field}_original&.url
           styles = BASE_STYLES.keys.map do |style|
             if #{field}_data&.key? style.to_s
               value = #{field}[style].url
             else 
-              value = nil
+              value = original
             end
             [style, value]
           end
-          styles.push([:original, #{field}_original&.url])
+          styles.push([:original, original])
           Hash[styles]
         end
   
