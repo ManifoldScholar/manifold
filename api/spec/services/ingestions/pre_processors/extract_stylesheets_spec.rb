@@ -4,7 +4,7 @@ RSpec.describe Ingestions::PreProcessors::ExtractStylesheets do
   include TestHelpers::IngestionHelper
 
   describe "an EPUB ingestion" do
-    let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.zip") }
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2") }
     let(:ingestion) do
       ingestion = FactoryBot.create(:ingestion, text: nil)
       allow(ingestion).to receive(:ingestion_source).and_return(path)
@@ -14,7 +14,7 @@ RSpec.describe Ingestions::PreProcessors::ExtractStylesheets do
     let(:manifest) { Ingestions::Strategies::Epub.run(context: context).result }
 
     it "assigns the correct stylesheet attributes" do
-      expected = [{"name"=>"stylesheet-1", "position"=>1, "hashed_content"=>"c47a911e406d63e16e29c5d7874f7397", "build"=>"build/stylesheet-1.css", "source_identifier"=>"/OEBPS/stylesheet.css"}]
+      expected = [{"name"=>"stylesheet-1", "position"=>1, "hashed_content"=>"c47a911e406d63e16e29c5d7874f7397", "build"=>"build/stylesheet-1.css", "source_identifier"=>"/OEBPS/styles/some%20stylesheet.css"}]
       outcome = described_class.run(context: context, manifest: manifest)
       expect(outcome.result[:relationships][:stylesheets]).to eq expected
     end
