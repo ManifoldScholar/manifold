@@ -16,7 +16,7 @@
     <item id="section0002.xhtml" href="xhtml/section0002.xhtml" media-type="application/xhtml+xml" />
     <item id="section0002a.xhtml" href="xhtml/section0002a.xhtml" media-type="application/xhtml+xml" />
     <item id="section0003.xhtml" href="xhtml/section0003.xhtml" media-type="application/xhtml+xml" />
-    <item id="css" href="stylesheet.css" media-type="text/css" />
+    <item id="css" href="styles/some%20stylesheet.css" media-type="text/css" />
   </manifest>
   <spine toc="ncx">
     <itemref idref="section0001.xhtml" />

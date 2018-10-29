@@ -10,8 +10,9 @@ module Ingestions
 
         update_text_sections
 
-        mapped_style_nodes.each_with_index do |node, index|
-          manifest[:relationships][:stylesheets] << build_stylesheet(node, index)
+        mapped_style_nodes.each do |node|
+          stylesheet = build_stylesheet(node)
+          manifest[:relationships][:stylesheets] << stylesheet if stylesheet.present?
         end
 
         manifest
@@ -19,12 +20,17 @@ module Ingestions
 
       private
 
-      def build_stylesheet(node, index)
+      def build_stylesheet(node)
+        content = hashed_content(node)
+        return if stylesheet_exists?(content)
+
+        position = stylesheets.count + 1
+        stylesheet_name = name(node, position)
+
         {}.with_indifferent_access.tap do |hash|
-          stylesheet_name = name(node, index)
           hash[:name] = stylesheet_name
-          hash[:position] = index + 1
-          hash[:hashed_content] = hashed_content(node)
+          hash[:position] = position
+          hash[:hashed_content] = content
           hash[:build] = write_file(stylesheet_name, node)
           hash[:source_identifier] = source_identifier(node)
         end
@@ -60,6 +66,10 @@ module Ingestions
         @source_map ||= build_source_map
       end
 
+      def stylesheets
+        @stylesheets ||= manifest[:relationships][:stylesheets]
+      end
+
       def section_parsed(path)
         Nokogiri::HTML(context.read(path), nil)
       end
@@ -73,7 +83,7 @@ module Ingestions
       end
 
       def name(node, position)
-        external?(node) ? "stylesheet-#{position + 1}" : "head-#{position + 1}"
+        external?(node) ? "stylesheet-#{position}" : "head-#{position}"
       end
 
       def mapped_style_nodes
@@ -109,6 +119,12 @@ module Ingestions
         return true if node.name == "link"
         return false if node.name == "style"
         raise "Invalid style chunk"
+      end
+
+      def stylesheet_exists?(hashed_content)
+        stylesheets.detect do |stylesheet|
+          stylesheet[:hashed_content] == hashed_content
+        end
       end
 
       def write_file(name, node)
