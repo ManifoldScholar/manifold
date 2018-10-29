@@ -49,6 +49,10 @@
       text-transform: none;
       white-space: pre-line;
       border: 1px solid $neutral80;
+
+      @include respond($break90) {
+        height: 600px;
+      }
     }
   }
 
