@@ -21,6 +21,7 @@ export default function smoothScroll(
   callback,
   context
 ) {
+  if (!el) return null;
   const adjustedDuration = duration || 500;
   const adjustedContext = context || window;
   const start = window.pageYOffset;
