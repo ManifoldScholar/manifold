@@ -160,7 +160,7 @@ RSpec.describe Ingestions::Compiler do
 
     describe "a compilation with failures" do
       it "does not persist updates" do
-        allow_any_instance_of(Ingestions::Compilers::TextSection).to receive(:text_section).and_raise(ActiveRecord::RecordNotFound)
+        allow_any_instance_of(Ingestions::Compilers::TextSection).to receive(:text_section).and_raise(::Ingestions::IngestionError)
         manifest[:relationships][:text_titles] = [{ kind: ::TextTitle::KIND_MAIN, value: "Changed" }]
 
         expect do

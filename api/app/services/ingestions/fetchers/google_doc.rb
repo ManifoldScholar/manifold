@@ -40,11 +40,21 @@ module Ingestions
           "text/html",
           download_dest: temp_file.path
         )
+      rescue OpenSSL::PKey::RSAError
+        drive_session_error
+      rescue Signet::AuthorizationError
+        authorization_error
       end
 
       def drive_session_error
         raise Fetchers::FetchFailed, "Unable to start google drive session.  Double check
-            that google integration has been configured and the drive API enabled.
+            that google integration has been configured correctly and the drive API
+            enabled. See more at https://manifoldapp.org/docs/customizing/settings/external_services/google/index.html."
+      end
+
+      def authorization_error
+        raise Fetchers::FetchFailed, "Unable to start google drive session. Double check
+            this installation's google integration credentials.
             See more at https://manifoldapp.org/docs/customizing/settings/external_services/google/index.html."
       end
 

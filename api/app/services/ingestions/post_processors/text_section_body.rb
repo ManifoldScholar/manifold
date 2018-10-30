@@ -72,7 +72,7 @@ module Ingestions
           if json.blank?
             error_string(body)
 
-            raise "Body contains no nodes"
+            raise IngestionError, "Body contains no nodes"
           end
         end
       end

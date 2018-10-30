@@ -142,13 +142,15 @@ module Ingestions
         validate_path(path)
         args.unshift(path)
         File.send(msg, *args)
+      rescue Errno::ENOENT
+        file_not_found
       end
 
       # rubocop:disable Metrics/LineLength
       def validate_path(abs_path)
         path = Pathname.new(abs_path)
-        raise "Ingestion path must be absolute: #{path}" unless path.absolute?
-        raise "Ingestion path not inside of root: #{path}" unless path.to_s.start_with? root_path
+        raise IngestionError, "Ingestion path must be absolute: #{path}" unless path.absolute?
+        raise IngestionError, "Ingestion path not inside of root: #{path}" unless path.to_s.start_with? root_path
       end
       # rubocop:enable Metrics/LineLength
 
@@ -223,6 +225,12 @@ module Ingestions
         else
           FileUtils.cp_r Pathname.glob(File.join(path, "*")), dest_path
         end
+      end
+
+      def file_not_found
+        raise IngestionError, "Manifold could not locate one of the source files
+            specified.  Make sure all assets referred to are included with the
+            source file."
       end
     end
   end
