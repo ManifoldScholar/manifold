@@ -21,3 +21,4 @@ export Page from "./Page";
 export Feature from "./Feature";
 export Stylesheet from "./Stylesheet";
 export ProjectCollection from "./ProjectCollection";
+export ResourceImport from "./ResourceImport";
