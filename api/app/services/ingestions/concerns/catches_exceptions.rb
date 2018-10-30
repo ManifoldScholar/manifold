@@ -21,9 +21,10 @@ module Ingestions
       # rubocop:disable Metrics/AbcSize
       def watch_for_uncaught_exceptions!
         yield if block_given?
-      rescue StandardError => e
+      rescue ::Ingestions::IngestionError => e
         @uncaught_exception = e
         error = e.message
+        error += "\n\n#{e.cause.message}" if e.cause.present?
         if Rails.env.development?
           Rails.backtrace_cleaner.clean(e.backtrace).each do |line|
             error += "\n#{line}"

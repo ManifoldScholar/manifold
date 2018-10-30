@@ -27,7 +27,7 @@ module Ingestions
     end
 
     def source=(fetched)
-      raise "Already provided source" if source_provided?
+      raise IngestionError, "Already provided source" if source_provided?
 
       source, title = if fetched.present?
                         [fetched[:file].path, fetched[:title]]

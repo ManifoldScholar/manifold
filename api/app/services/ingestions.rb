@@ -1,4 +1,6 @@
 module Ingestions
+  class IngestionError < StandardError; end
+
   mattr_accessor :configuration do
     Ingestions::Configuration::GlobalConfigurator.new
   end

@@ -118,7 +118,7 @@ module Ingestions
       def external?(node)
         return true if node.name == "link"
         return false if node.name == "style"
-        raise "Invalid style chunk"
+        raise IngestionError, "Invalid style chunk"
       end
 
       def stylesheet_exists?(hashed_content)

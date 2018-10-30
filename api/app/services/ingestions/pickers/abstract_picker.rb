@@ -14,7 +14,8 @@ module Ingestions
       private
 
       def none_found_error
-        raise "No #{self.class.klass_name} found for #{interaction_source_path}"
+        raise IngestionError,
+              "No #{self.class.klass_name} found for #{interaction_source_path}"
       end
 
       def interaction_source_path

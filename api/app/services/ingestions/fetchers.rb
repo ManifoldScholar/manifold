@@ -1,6 +1,6 @@
 module Ingestions
   module Fetchers
-    class NotFetchable < StandardError; end
-    class FetchFailed < StandardError; end
+    class NotFetchable < IngestionError; end
+    class FetchFailed < IngestionError; end
   end
 end
