@@ -40,7 +40,7 @@ export default class TextNode extends Component {
   doScroll(withTimeout = false) {
     const { scrollAnnotation } = this.props;
     const target = scrollAnnotation
-      ? document.querySelector(`[data-annotation-ids="${scrollAnnotation}"]`)
+      ? document.querySelector(`[data-annotation-ids*="${scrollAnnotation}"]`)
       : this.el;
     const annotation = scrollAnnotation
       ? this.getAnnotation(scrollAnnotation)
