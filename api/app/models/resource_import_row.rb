@@ -80,6 +80,7 @@ class ResourceImportRow < ApplicationRecord
       state: state_machine.current_state,
       errors: import_errors,
       is_update: update?,
+      is_skip: skip?,
       id: id
     }
   end
