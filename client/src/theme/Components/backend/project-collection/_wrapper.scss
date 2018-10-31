@@ -15,6 +15,15 @@
     }
   }
 
+  &.empty .backend-panel > .container {
+    @include respond(#{$break75 - 1}, max) {
+      .panel {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+
   .backend-panel {
     > .container {
       padding-top: 0;
