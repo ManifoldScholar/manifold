@@ -2,7 +2,7 @@
 
 exports[`Backend.ProjectCollection.Wrapper container renders correctly when no project collections 1`] = `
 <section
-  className="project-collections"
+  className="project-collections empty"
 >
   <div
     className="backend-panel"
