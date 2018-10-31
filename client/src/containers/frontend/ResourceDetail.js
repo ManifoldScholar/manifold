@@ -123,7 +123,7 @@ export class ResourceDetailContainer extends PureComponent {
           <Utility.BackLinkPrimary
             backText="Back to Project Resources"
             link={this.projectUrl()}
-            title={project.attributes.title}
+            title={project.attributes.titlePlaintext}
           />
         )}
         {resource ? (

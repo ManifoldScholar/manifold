@@ -63,7 +63,7 @@ export class ResourceNewContainer extends PureComponent {
           <Navigation.DetailHeader
             type="resource"
             backUrl={lh.link("backendProjectResources", project.id)}
-            backLabel={project.attributes.title}
+            backLabel={project.attributes.titlePlaintext}
             title={"New Resource"}
             showUtility={false}
             note={

@@ -153,7 +153,7 @@ export default class Header extends Component {
               )}
               projectId={this.props.text.relationships.project.id}
               projectTitle={
-                this.props.text.relationships.project.attributes.title
+                this.props.text.relationships.project.attributes.titlePlaintext
               }
               toggleSignInUpOverlay={
                 this.props.commonActions.toggleSignInUpOverlay

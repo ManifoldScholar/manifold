@@ -188,7 +188,7 @@ export class SectionContainer extends Component {
     const projectImage = project ? project.attributes.heroStyles.medium : null;
     const textTitle = text.attributes.title;
     const sectionTitle = section.attributes.name;
-    const projectTitle = project.attributes.title;
+    const projectTitle = project.attributes.titlePlainText;
 
     const parts = remove(
       uniq([sectionTitle, textTitle, projectTitle]),

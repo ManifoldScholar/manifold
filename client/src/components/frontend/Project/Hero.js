@@ -291,7 +291,10 @@ export default class ProjectHero extends Component {
             {this.renderProjectImage("image")}
             <div className="project-figure-caption">
               <h1 className="project-title">
-                <span className="title-text">{attr.title}</span>
+                <span
+                  className="title-text"
+                  dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
+                />
                 {this.renderProjectStatusMarker(attr)}
                 {this.renderProjectSubtitle(attr)}
               </h1>
@@ -301,7 +304,10 @@ export default class ProjectHero extends Component {
           <div className="project-info">
             {this.renderPublishedText(project, "top")}
             <h1 className="project-title">
-              <span className="title-text">{attr.title}</span>
+              <span
+                className="title-text"
+                dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
+              />
               {this.renderProjectStatusMarker(attr)}
               {this.renderProjectSubtitle(attr)}
             </h1>

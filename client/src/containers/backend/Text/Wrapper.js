@@ -168,7 +168,7 @@ export class TextWrapperContainer extends PureComponent {
               "backendProjectTexts",
               text.relationships.project.id
             )}
-            backLabel={text.relationships.project.attributes.title}
+            backLabel={text.relationships.project.attributes.titlePlaintext}
             title={text.attributes.title}
             subtitle={text.attributes.subtitle}
             utility={this.renderUtility()}
