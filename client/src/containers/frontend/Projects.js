@@ -73,9 +73,6 @@ export class ProjectsContainer extends Component {
     ) {
       this.props.fetchData(this.props);
     }
-    if (prevProps.location !== this.props.location) {
-      this.props.fetchData(this.props);
-    }
   }
 
   initialState(init) {
