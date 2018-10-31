@@ -81,7 +81,13 @@ exports[`Frontend.TextList.Published component renders correctly 1`] = `
                 <h3
                   className="asset-title"
                 >
-                  Ain't No Thang
+                  <span
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Ain't No Thang",
+                      }
+                    }
+                  />
                   <span
                     className="subtitle"
                   />

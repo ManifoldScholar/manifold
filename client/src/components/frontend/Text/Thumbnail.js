@@ -42,7 +42,11 @@ export default class TextThumbnail extends Component {
           <div className="asset-description">
             <Link to={lh.link("reader", this.props.text.attributes.slug)}>
               <h3 className="asset-title">
-                {text.attributes.title}
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: text.attributes.titleFormatted
+                  }}
+                />
                 {this.renderSubtitle(text)}
               </h3>
             </Link>

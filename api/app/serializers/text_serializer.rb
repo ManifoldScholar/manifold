@@ -5,7 +5,7 @@ class TextSerializer < ApplicationSerializer
   attributes :title, :creator_names, :created_at, :start_text_section_id,
              :published, :annotations_count, :highlights_count, :bookmarks_count,
              :age, :position, :publication_date, :cover_styles,
-             :slug, :section_kind
+             :slug, :section_kind, :title_formatted, :title_plaintext
 
   belongs_to :project
   belongs_to :category

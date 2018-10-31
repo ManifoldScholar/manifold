@@ -169,7 +169,7 @@ export class ReaderContainer extends Component {
     return (
       <Overlay closeCallback={this.toggleMeta} appearance="overlay-full">
         <TextMeta
-          title={text.attributes.title}
+          title={text.attributes.titlePlaintext}
           subtitle={text.attributes.subtitle}
           meta={text.attributes.metadataFormatted}
         />

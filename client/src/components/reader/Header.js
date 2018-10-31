@@ -98,7 +98,7 @@ export default class Header extends Component {
             {this.renderContentsButton(this.props.text.attributes)}
             {this.props.section ? (
               <TextTitles
-                textTitle={this.props.text.attributes.title}
+                textTitle={this.props.text.attributes.titleFormatted}
                 sectionTitle={this.props.section.attributes.name}
                 showSection={!this.props.scrollAware.top}
               />

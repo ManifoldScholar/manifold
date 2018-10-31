@@ -22,7 +22,7 @@ export default class TextCover extends PureComponent {
       thumbnail = (
         <img
           src={text.attributes.coverStyles.small}
-          alt={"Thumbnail image for " + text.attributes.title}
+          alt={"Thumbnail image for " + text.attributes.titlePlaintext}
         />
       );
     } else {

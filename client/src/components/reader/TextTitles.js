@@ -48,9 +48,11 @@ export default class TextTitles extends Component {
         <h3 className="screen-reader-text">
           {`${this.props.textTitle} ${this.props.sectionTitle}`}
         </h3>
-        <h3 className="text-title" aria-hidden="true">
-          {this.props.textTitle}
-        </h3>
+        <h3
+          className="text-title"
+          aria-hidden="true"
+          dangerouslySetInnerHTML={{ __html: this.props.textTitle }}
+        />
         <h2 className="section-title" aria-hidden="true">
           {this.props.sectionTitle}
         </h2>

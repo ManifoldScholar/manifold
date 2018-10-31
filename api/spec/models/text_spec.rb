@@ -75,4 +75,20 @@ RSpec.describe Text, type: :model do
     include_examples "a citable class with_citable_children"
   end
 
+  describe "#title_formatted" do
+    let(:text) { FactoryBot.create(:text, title: "**Formatted** _Title_") }
+
+    it "correctly returns the formatted value of main TextTitle association" do
+      expect(text.title_formatted).to eq text.main_title.title_formatted
+    end
+  end
+
+  describe "#title_plaintext" do
+    let(:text) { FactoryBot.create(:text, title: "**Formatted** _Title_") }
+
+    it "correctly returns the plaintext value of main TextTitle association" do
+      expect(text.title_plaintext).to eq text.main_title.title_plaintext
+    end
+  end
+
 end
