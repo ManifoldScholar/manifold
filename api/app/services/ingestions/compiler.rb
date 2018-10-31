@@ -13,7 +13,7 @@ module Ingestions
         create_records :text_sections
       end
 
-      text
+      text.reload
     end
 
     private
