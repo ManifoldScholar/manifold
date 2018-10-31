@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Navigation } from "components/backend";
 import { Link } from "react-router-dom";
-import truncate from "lodash/truncate";
 
 export default class DetailHeader extends PureComponent {
   static displayName = "Navigation.DetailHeader";
@@ -11,7 +10,6 @@ export default class DetailHeader extends PureComponent {
     type: PropTypes.string.isRequired,
     iconName: PropTypes.string,
     title: PropTypes.string.isRequired,
-    titleHtml: PropTypes.bool,
     subtitle: PropTypes.string,
     utility: PropTypes.object,
     note: PropTypes.string,
@@ -21,7 +19,6 @@ export default class DetailHeader extends PureComponent {
   };
 
   static defaultProps = {
-    titleHtml: false,
     type: "project"
   };
 
@@ -58,10 +55,7 @@ export default class DetailHeader extends PureComponent {
   }
 
   renderTitle() {
-    if (this.props.titleHtml) {
-      return <span dangerouslySetInnerHTML={{ __html: this.props.title }} />;
-    }
-    return truncate(this.props.title, { length: 80 });
+    return <span dangerouslySetInnerHTML={{ __html: this.props.title }} />;
   }
 
   renderSectionNav(props) {

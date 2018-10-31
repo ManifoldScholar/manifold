@@ -20,7 +20,13 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           className="title"
         >
           <h1>
-            Rowan Test
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Rowan Test",
+                }
+              }
+            />
             <span
               className="subtitle"
             >

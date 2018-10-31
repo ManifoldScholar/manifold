@@ -20,7 +20,13 @@ exports[`Backend Project New Container renders correctly 1`] = `
           className="title"
         >
           <h1>
-            New Project
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "New Project",
+                }
+              }
+            />
             <span
               className="subtitle"
             />

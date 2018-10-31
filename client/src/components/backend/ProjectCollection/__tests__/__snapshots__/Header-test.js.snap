@@ -37,7 +37,13 @@ exports[`Backend.ProjectCollection.Header component renders correctly 1`] = `
         className="title"
       >
         <h1>
-          A Project Collection
+          <span
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "A Project Collection",
+              }
+            }
+          />
           <span
             className="subtitle"
           />

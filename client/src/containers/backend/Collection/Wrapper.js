@@ -174,7 +174,6 @@ export class CollectionWrapperContainer extends PureComponent {
             utility={this.renderUtility()}
             title={collection.attributes.title}
             secondaryLinks={secondaryLinks}
-            titleHtml
           />
           <Layout.BackendPanel
             sidebar={<Navigation.Secondary links={secondaryLinks} panel />}

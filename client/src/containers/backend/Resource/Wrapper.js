@@ -172,7 +172,6 @@ export class ResourceWrapperContainer extends PureComponent {
             backLabel={resource.relationships.project.attributes.title}
             utility={this.renderUtility(resource)}
             title={resource.attributes.titleFormatted}
-            titleHtml
             subtitle={resource.attributes.subtitle}
             secondaryLinks={secondaryLinks}
           />

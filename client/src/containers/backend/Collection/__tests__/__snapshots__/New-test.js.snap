@@ -38,7 +38,13 @@ exports[`Backend Collection New Container renders correctly 1`] = `
           className="title"
         >
           <h1>
-            New Collection
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "New Collection",
+                }
+              }
+            />
             <span
               className="subtitle"
             />
