@@ -21,9 +21,12 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
           >
             <span
               className="title-text"
-            >
-              Rowan Test
-            </span>
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Rowan Test",
+                }
+              }
+            />
             <span
               className="subtitle"
             >
@@ -43,9 +46,12 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
         >
           <span
             className="title-text"
-          >
-            Rowan Test
-          </span>
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Rowan Test",
+              }
+            }
+          />
           <span
             className="subtitle"
           >
@@ -336,9 +342,12 @@ exports[`Frontend.Project.Detail component renders correctly when hideActivity i
           >
             <span
               className="title-text"
-            >
-              Rowan Test
-            </span>
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Rowan Test",
+                }
+              }
+            />
             <span
               className="subtitle"
             >
@@ -358,9 +367,12 @@ exports[`Frontend.Project.Detail component renders correctly when hideActivity i
         >
           <span
             className="title-text"
-          >
-            Rowan Test
-          </span>
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Rowan Test",
+              }
+            }
+          />
           <span
             className="subtitle"
           >

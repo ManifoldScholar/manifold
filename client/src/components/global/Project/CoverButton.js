@@ -85,10 +85,10 @@ export default class CoverButton extends Component {
     switch (this.state.view) {
       case "add":
       case "add-active":
-        return "add " + this.props.project.attributes.title;
+        return "add " + this.props.project.attributes.titlePlaintext;
       case "remove":
       case "remove-active":
-        return "Follow " + this.props.project.attributes.title;
+        return "Follow " + this.props.project.attributes.titlePlaintext;
       default:
         return null;
     }

@@ -39,6 +39,7 @@ class Project < ApplicationRecord
 
   # Magic
   has_formatted_attributes :description, :subtitle
+  has_formatted_attributes :title, include_wrap: false
   with_metadata %w(
     series_title container_title isbn issn doi original_publisher
     original_publisher_place original_title publisher publisher_place version

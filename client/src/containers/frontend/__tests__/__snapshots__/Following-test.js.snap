@@ -249,9 +249,12 @@ exports[`Frontend Following Container renders correctly 1`] = `
                 >
                   <span
                     className="title-text"
-                  >
-                    Rowan Test
-                  </span>
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Rowan Test",
+                      }
+                    }
+                  />
                 </h3>
               </div>
             </a>
@@ -360,9 +363,12 @@ exports[`Frontend Following Container renders correctly 1`] = `
                 >
                   <span
                     className="title-text"
-                  >
-                    Rowan Test
-                  </span>
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Rowan Test",
+                      }
+                    }
+                  />
                 </h3>
               </div>
             </a>
@@ -519,9 +525,12 @@ exports[`Frontend Following Container renders correctly 1`] = `
                 >
                   <span
                     className="title-text"
-                  >
-                    Rowan Test
-                  </span>
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Rowan Test",
+                      }
+                    }
+                  />
                 </h3>
               </div>
             </a>
@@ -630,9 +639,12 @@ exports[`Frontend Following Container renders correctly 1`] = `
                 >
                   <span
                     className="title-text"
-                  >
-                    Rowan Test
-                  </span>
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Rowan Test",
+                      }
+                    }
+                  />
                 </h3>
               </div>
             </a>

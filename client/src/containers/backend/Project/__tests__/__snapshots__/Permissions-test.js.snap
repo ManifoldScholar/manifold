@@ -82,6 +82,8 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
         "slug": "slug-1",
         "subtitle": "World's Greatest Dog",
         "title": "Rowan Test",
+        "titleFormatted": "Rowan Test",
+        "titlePlaintext": "Rowan Test",
       },
       "id": "1",
       "relationships": Object {
@@ -174,6 +176,8 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
             "slug": "slug-1",
             "subtitle": "World's Greatest Dog",
             "title": "Rowan Test",
+            "titleFormatted": "Rowan Test",
+            "titlePlaintext": "Rowan Test",
           },
           "id": "1",
           "relationships": Object {

@@ -193,7 +193,7 @@ export class CollectionDetailContainer extends PureComponent {
         />
         <Utility.BackLinkPrimary
           link={lh.link("frontendProject", project.attributes.slug)}
-          title={project.attributes.title}
+          title={project.attributes.titlePlaintext}
         />
         {this.props.slideshowResources && this.props.resources ? (
           <ResourceCollection.Detail
@@ -213,7 +213,7 @@ export class CollectionDetailContainer extends PureComponent {
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
             link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.title}
+            title={project.attributes.titlePlaintext}
           />
         </section>
       </div>

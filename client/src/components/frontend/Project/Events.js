@@ -20,7 +20,7 @@ export default class ProjectEvents extends Component {
     return (
       <div>
         <HeadContent
-          title={`${this.props.project.attributes.title} | Events`}
+          title={`${this.props.project.attributes.titlePlaintext} | Events`}
           description={this.props.project.attributes.description}
           image={this.props.project.attributes.avatarStyles.mediumSquare}
           appendTitle
@@ -28,7 +28,7 @@ export default class ProjectEvents extends Component {
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
             link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.title}
+            title={project.attributes.titlePlaintext}
           />
         </section>
         <section>

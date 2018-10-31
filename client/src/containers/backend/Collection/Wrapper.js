@@ -170,7 +170,9 @@ export class CollectionWrapperContainer extends PureComponent {
               "backendProjectResourceCollections",
               collection.relationships.project.id
             )}
-            backLabel={collection.relationships.project.attributes.title}
+            backLabel={
+              collection.relationships.project.attributes.titlePlaintext
+            }
             utility={this.renderUtility()}
             title={collection.attributes.title}
             secondaryLinks={secondaryLinks}

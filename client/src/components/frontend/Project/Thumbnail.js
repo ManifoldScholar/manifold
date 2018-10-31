@@ -95,7 +95,12 @@ export default class ProjectThumbnail extends Component {
       projectMeta = (
         <div className="meta">
           <h3 className="name">
-            <span className="title-text">{project.attributes.title}</span>
+            <span
+              className="title-text"
+              dangerouslySetInnerHTML={{
+                __html: project.attributes.titleFormatted
+              }}
+            />
             {this.renderProjectStatusMarker(project)}
           </h3>
           {this.renderProjectMakers(project)}

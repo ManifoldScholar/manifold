@@ -120,7 +120,7 @@ export class ResourceImportWrapper extends PureComponent {
         <Navigation.DetailHeader
           type="resources"
           backUrl={lh.link("backendProjectResources", match.params.projectId)}
-          backLabel={project.attributes.title}
+          backLabel={project.attributes.titlePlaintext}
           title={"Bulk Add Resources"}
           showUtility={false}
           note={`Import resources from CSV or Google Sheet, with file assets stored in a

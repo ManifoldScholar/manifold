@@ -61,7 +61,12 @@ export default class ProjectCollectionProjectCover extends PureComponent {
         </figure>
         <div className="meta">
           <h3 className="name">
-            <span className="title-text">{project.attributes.title}</span>
+            <span
+              className="title-text"
+              dangerouslySetInnerHTML={{
+                __html: project.attributes.titleFormatted
+              }}
+            />
           </h3>
           {this.renderProjectMakers(project.relationships.creators)}
         </div>

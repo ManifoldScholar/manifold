@@ -64,7 +64,9 @@ export default class ProjectListItem extends PureComponent {
         ? project.attributes.avatarStyles.smallSquare
         : project.attributes.avatarStyles.small;
 
-    return <img src={imageStyle} alt={`View ${project.attributes.title}`} />;
+    return (
+      <img src={imageStyle} alt={`View ${project.attributes.titlePlaintext}`} />
+    );
   }
 
   render() {
@@ -76,7 +78,10 @@ export default class ProjectListItem extends PureComponent {
           <figure className="cover">{this.renderProjectImage(project)}</figure>
           <div className="meta">
             <h3 className="name">
-              <span className="title-text">{attr.title}</span>
+              <span
+                className="title-text"
+                dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
+              />
               {this.renderProjectStatusMarker(attr)}
               <span className="subtitle">{attr.subtitle}</span>
             </h3>

@@ -188,9 +188,12 @@ Array [
                   >
                     <span
                       className="title-text"
-                    >
-                      Rowan Test
-                    </span>
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "Rowan Test",
+                        }
+                      }
+                    />
                   </h3>
                 </div>
               </div>
@@ -298,9 +301,12 @@ Array [
                   >
                     <span
                       className="title-text"
-                    >
-                      Rowan Test
-                    </span>
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "Rowan Test",
+                        }
+                      }
+                    />
                   </h3>
                 </div>
               </div>

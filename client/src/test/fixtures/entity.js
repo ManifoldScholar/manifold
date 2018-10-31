@@ -150,6 +150,8 @@ const defaults = {
       metadataProperties,
       slug: "",
       title: "Rowan Test",
+      titleFormatted: "Rowan Test",
+      titlePlaintext: "Rowan Test",
       subtitle: "World's Greatest Dog",
       heroStyles: {},
       coverStyles: {},

@@ -147,7 +147,7 @@ export class ProjectWrapperContainer extends PureComponent {
           />
           <Navigation.DetailHeader
             type="project"
-            title={project.attributes.title}
+            title={project.attributes.titleFormatted}
             subtitle={project.attributes.subtitle}
             utility={this.renderUtility(project)}
             secondaryLinks={secondaryLinks}

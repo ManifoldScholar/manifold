@@ -148,16 +148,16 @@ class ProjectResourcesContainer extends Component {
     return (
       <div>
         <HeadContent
-          title={`View \u201c${project.attributes.title}\u201d Resources on ${
-            settings.attributes.general.installationName
-          }`}
+          title={`View \u201c${
+            project.attributes.titlePlaintext
+          }\u201d Resources on ${settings.attributes.general.installationName}`}
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
             link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.title}
+            title={project.attributes.titlePlaintext}
           />
         </section>
         {this.props.resources ? (
@@ -173,7 +173,7 @@ class ProjectResourcesContainer extends Component {
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
             link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.title}
+            title={project.attributes.titlePlaintext}
           />
         </section>
       </div>

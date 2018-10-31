@@ -20,9 +20,12 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
         >
           <span
             className="title-text"
-          >
-            Rowan Test
-          </span>
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Rowan Test",
+              }
+            }
+          />
           <span
             className="subtitle"
           >
@@ -42,9 +45,12 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
       >
         <span
           className="title-text"
-        >
-          Rowan Test
-        </span>
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "Rowan Test",
+            }
+          }
+        />
         <span
           className="subtitle"
         >

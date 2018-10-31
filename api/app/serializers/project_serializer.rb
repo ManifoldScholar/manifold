@@ -11,7 +11,7 @@ class ProjectSerializer < ApplicationSerializer
              :resource_kinds, :resource_tags, :avatar_color, :avatar_meta, :draft,
              :abilities, :download_url, :download_call_to_action, :tag_list,
              :published_text_attachment_file_name, :published_text_download_url,
-             :subtitle_formatted
+             :subtitle_formatted, :title_formatted, :title_plaintext
 
   has_many :creators, serializer: MakerSerializer
   has_many :contributors, serializer: MakerSerializer

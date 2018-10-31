@@ -169,7 +169,7 @@ export class ResourceWrapperContainer extends PureComponent {
               "backendProjectResources",
               resource.relationships.project.id
             )}
-            backLabel={resource.relationships.project.attributes.title}
+            backLabel={resource.relationships.project.attributes.titlePlaintext}
             utility={this.renderUtility(resource)}
             title={resource.attributes.titleFormatted}
             titleHtml
