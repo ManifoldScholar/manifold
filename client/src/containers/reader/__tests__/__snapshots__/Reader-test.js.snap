@@ -48,9 +48,12 @@ exports[`Reader Reader Container renders correctly 1`] = `
             <h3
               aria-hidden="true"
               className="text-title"
-            >
-              Ain't No Thang
-            </h3>
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Ain't No Thang",
+                }
+              }
+            />
             <h2
               aria-hidden="true"
               className="section-title"

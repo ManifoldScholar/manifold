@@ -66,7 +66,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
     if (!this.props.selection) return null;
     const text = trim(this.props.selection.text);
     if (text.length === 0) {
-      return `Read "${this.props.text.attributes.title}" on Manifold:`;
+      return `Read "${this.props.text.attributes.titlePlaintext}" on Manifold:`;
     }
     return `"${this.props.selection.text}" from Manifold:`;
   }

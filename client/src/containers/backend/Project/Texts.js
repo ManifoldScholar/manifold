@@ -351,7 +351,11 @@ export class ProjectTextsContainer extends PureComponent {
 
                 <div className="asset-description">
                   <h3 className="asset-title">
-                    {text.attributes.title}
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: text.attributes.titleFormatted
+                      }}
+                    />
                     <span className="subtitle">{text.attributes.subtitle}</span>
                   </h3>
                   <span className="asset-date">

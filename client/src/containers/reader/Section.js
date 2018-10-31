@@ -186,7 +186,7 @@ export class SectionContainer extends Component {
     const { text, section, settings, appearance } = this.props;
     const { project } = text.relationships;
     const projectImage = project ? project.attributes.heroStyles.medium : null;
-    const textTitle = text.attributes.title;
+    const textTitle = text.attributes.titlePlaintext;
     const sectionTitle = section.attributes.name;
     const projectTitle = project.attributes.titlePlainText;
 

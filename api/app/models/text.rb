@@ -78,6 +78,8 @@ class Text < ApplicationRecord
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
   delegate :publication_date, to: :project, prefix: true, allow_nil: true
   delegate :title, to: :category, prefix: true
+  delegate :title_formatted, to: :main_title, allow_nil: true
+  delegate :title_plaintext, to: :main_title, allow_nil: true
 
   # Validation
   validates :spine,
@@ -122,12 +124,15 @@ class Text < ApplicationRecord
     project.present? ? project.search_hidden : { hidden: true }
   end
 
+  def main_title
+    if association(:titles).loaded?
+      titles.detect { |t| t.kind == TextTitle::KIND_MAIN }
+    else
+      titles.find_by(kind: TextTitle::KIND_MAIN)
+    end
+  end
+
   def title
-    main_title = if association(:titles).loaded?
-                   titles.detect { |t| t.kind == TextTitle::KIND_MAIN }
-                 else
-                   titles.find_by(kind: TextTitle::KIND_MAIN)
-                 end
     return "untitled" unless main_title
     main_title.value
   end

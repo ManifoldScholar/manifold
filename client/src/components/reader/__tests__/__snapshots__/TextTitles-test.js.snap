@@ -13,9 +13,12 @@ exports[`Reader.TextTitles Component renders correctly 1`] = `
   <h3
     aria-hidden="true"
     className="text-title"
-  >
-    Rowan: Greatest Dog
-  </h3>
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "Rowan: Greatest Dog",
+      }
+    }
+  />
   <h2
     aria-hidden="true"
     className="section-title"

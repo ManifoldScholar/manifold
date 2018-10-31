@@ -73,7 +73,7 @@ export class TextWrapperContainer extends PureComponent {
       id: `TEXT_DESTROYED_${this.props.text.id}`,
       heading: "The text has been destroyed.",
       body: `${
-        this.props.text.attributes.title
+        this.props.text.attributes.titlePlaintext
       } has passed into the endless night.`,
       expiration: 5000
     };
@@ -169,7 +169,7 @@ export class TextWrapperContainer extends PureComponent {
               text.relationships.project.id
             )}
             backLabel={text.relationships.project.attributes.titlePlaintext}
-            title={text.attributes.title}
+            title={text.attributes.titlePlaintext}
             subtitle={text.attributes.subtitle}
             utility={this.renderUtility()}
             secondaryLinks={secondaryLinks}
