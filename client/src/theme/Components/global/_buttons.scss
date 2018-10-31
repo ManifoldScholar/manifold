@@ -193,7 +193,7 @@
 .button-icon-secondary {
   @include templateHead;
   @include buttonUnstyled;
-  display: flex;
+  display: inline-flex;
   align-items: baseline;
   padding: 0.667em 17px 0.778em;
   font-size: 16px;
