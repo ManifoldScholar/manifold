@@ -38,7 +38,13 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
           className="title"
         >
           <h1>
-            Ain't No Thang
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Ain't No Thang",
+                }
+              }
+            />
             <span
               className="subtitle"
             />

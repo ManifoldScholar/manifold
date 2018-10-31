@@ -339,7 +339,13 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                 className="title"
               >
                 <h1>
-                  A Project Collection
+                  <span
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "A Project Collection",
+                      }
+                    }
+                  />
                   <span
                     className="subtitle"
                   />

@@ -19,7 +19,13 @@ exports[`Backend.Navigation.DetailHeader component renders correctly 1`] = `
         className="title"
       >
         <h1>
-          Rowan
+          <span
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Rowan",
+              }
+            }
+          />
           <span
             className="subtitle"
           >

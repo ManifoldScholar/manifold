@@ -38,7 +38,13 @@ exports[`Backend Resource New Container renders correctly 1`] = `
           className="title"
         >
           <h1>
-            New Resource
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "New Resource",
+                }
+              }
+            />
             <span
               className="subtitle"
             />
