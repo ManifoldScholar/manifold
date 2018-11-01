@@ -1,5 +1,6 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
+import ChildSwitch from "./ChildSwitch";
 import DrawerSwitch from "./DrawerSwitch";
 import Passthrough from "./Passthrough";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
@@ -7,6 +8,7 @@ import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-
 const renderChildRoutes = (route, renderOptions) => {
   const defaultOptions = {
     slot: null,
+    requireChild: true,
     switch: true,
     childProps: {},
     drawer: false,
@@ -69,8 +71,10 @@ const renderChildRoutes = (route, renderOptions) => {
   /* eslint-enable react/no-array-index-key */
 
   // By default, wrap child routes in a switch
-  let Wrapper = Switch;
-  let wrapperProps = {};
+  let Wrapper = ChildSwitch;
+  let wrapperProps = {
+    parentRoute: route
+  };
 
   // If switch is disabled, we render all matching child routes.
   if (!options.switch) Wrapper = Passthrough;

@@ -16,12 +16,14 @@ export default () => {
         {
           name: "readerSearchResults",
           component: Reader.Search,
+          exact: true,
           path: "/read/:textId/search",
           helper: t => `/read/${t}/search`
         },
         {
           name: "readerSectionSearchResults",
           component: Reader.Search,
+          exact: true,
           transition: "overlay-full",
           path: "/read/:textId/section/:sectionId/search",
           helper: (t, ts) => `/read/${t}/section/${ts}/search`
