@@ -1,0 +1,15 @@
+.project-detail {
+  section + section {
+    padding-top: 0;
+  }
+
+  .section-heading {
+    .main {
+      align-items: center;
+
+      .manicon {
+        margin-right: 8px;
+      }
+    }
+  }
+}

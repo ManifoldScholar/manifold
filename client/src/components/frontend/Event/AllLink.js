@@ -16,7 +16,7 @@ export default class EventAllLink extends Component {
     const { project } = this.props;
     if (this.props.count <= this.props.threshold) return null;
     return (
-      <div className="utility right">
+      <div className="utility list-tools">
         <Link
           to={lh.link("frontendProjectEvents", project.attributes.slug)}
           className="button-primary"

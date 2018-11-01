@@ -15,3 +15,4 @@ export Utility from "./Utility";
 export Static from "./Static";
 export Resourceish from "./Resourceish";
 export ProjectCollection from "./ProjectCollection";
+export ProjectDetail from "./ProjectDetail";
