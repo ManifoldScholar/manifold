@@ -185,6 +185,12 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
     />
     <withRouter(Router.Switch('DrawerSwitch))
       closeUrl="/backend/projects/1/permissions"
+      parentRoute={
+        Object {
+          "options": Object {},
+          "routes": Array [],
+        }
+      }
     />
   </section>
 </Connect(AuthorizeComponent)>
