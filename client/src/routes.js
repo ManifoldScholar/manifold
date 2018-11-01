@@ -727,6 +727,54 @@ export default () => {
               component: Frontend.ProjectDetail,
               path: "/projects/:id",
               helper: p => `/projects/${p}`
+            },
+            {
+              name: "frontendProjectResources",
+              exact: true,
+              component: Frontend.ProjectResources,
+              path: "/projects/:id/resources",
+              helper: (p, params = {}) => {
+                const query = queryString.stringify(params);
+                if (!query) return `/projects/${p}/resources`;
+                return `/projects/${p}/resources/?${query}`;
+              }
+            },
+            {
+              name: "frontendProjectCollectionResource",
+              exact: true,
+              component: Frontend.ResourceDetail,
+              path:
+                "/projects/:id/collection/:collectionId/resource/:resourceId",
+              helper: (p, c, r) =>
+                `/projects/${p}/collection/${c}/resource/${r}`
+            },
+            {
+              name: "frontendProjectResource",
+              exact: true,
+              component: Frontend.ResourceDetail,
+              path: "/projects/:id/resource/:resourceId",
+              helpers: {
+                frontendProjectResource: (p, r) =>
+                  `/projects/${p}/resource/${r}`,
+                frontendProjectResourceRelative: r => `resource/${r}`
+              }
+            },
+            {
+              name: "frontendResourceCollection",
+              exact: true,
+              component: Frontend.CollectionDetail,
+              path: "/projects/:id/collection/:collectionId",
+              helpers: {
+                frontendResourceCollection: (p, c, params = {}) => {
+                  const query = queryString.stringify(params);
+                  if (!query) return `/projects/${p}/collection/${c}`;
+                  return `/projects/${p}/collection/${c}?${query}`;
+                },
+                frontendProjectCollectionRelative: c => `collection/${c}`
+              }
+            },
+            {
+              component: NotFound
             }
           ]
         },
@@ -780,48 +828,6 @@ export default () => {
           component: Frontend.Page,
           path: "/page/:slug",
           helper: p => `/page/${p}`
-        },
-        {
-          name: "frontendResourceCollection",
-          exact: true,
-          component: Frontend.CollectionDetail,
-          path: "/projects/:id/collection/:collectionId",
-          helpers: {
-            frontendResourceCollection: (p, c, params = {}) => {
-              const query = queryString.stringify(params);
-              if (!query) return `/projects/${p}/collection/${c}`;
-              return `/projects/${p}/collection/${c}?${query}`;
-            },
-            frontendProjectCollectionRelative: c => `collection/${c}`
-          }
-        },
-        {
-          name: "frontendProjectResources",
-          exact: true,
-          component: Frontend.ProjectResources,
-          path: "/projects/:id/resources",
-          helper: (p, params = {}) => {
-            const query = queryString.stringify(params);
-            if (!query) return `/projects/${p}/resources`;
-            return `/projects/${p}/resources/?${query}`;
-          }
-        },
-        {
-          name: "frontendProjectCollectionResource",
-          exact: true,
-          component: Frontend.ResourceDetail,
-          path: "/projects/:id/collection/:collectionId/resource/:resourceId",
-          helper: (p, c, r) => `/projects/${p}/collection/${c}/resource/${r}`
-        },
-        {
-          name: "frontendProjectResource",
-          exact: true,
-          component: Frontend.ResourceDetail,
-          path: "/projects/:id/resource/:resourceId",
-          helpers: {
-            frontendProjectResource: (p, r) => `/projects/${p}/resource/${r}`,
-            frontendProjectResourceRelative: r => `resource/${r}`
-          }
         },
         {
           name: "subscriptions",
