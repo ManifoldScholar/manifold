@@ -107,14 +107,15 @@ const render = (req, res, store) => {
 
 const fetchRouteData = (req, store) => {
   const routes = getRoutes();
-  const branch = matchRoutes(routes, req.pathname);
+  const location = createLocation(req.url, {}, "SSR", null);
+  const branch = matchRoutes(routes, location.pathname);
   const promises = branch.reduce((allPromises, matchedRoute) => {
     const component = matchedRoute.route.component;
     if (isFunction(component.fetchData)) {
       const result = component.fetchData(
         store.getState,
         store.dispatch,
-        createLocation(req.url, {}, "SSR", null),
+        location,
         matchedRoute.match
       );
       if (isPromise(result)) {
