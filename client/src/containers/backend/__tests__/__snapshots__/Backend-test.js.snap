@@ -168,7 +168,15 @@ exports[`Backend Backend Container renders correctly 1`] = `
                 </div>
               </ScrollAware>
               <main id=\\"skip-to-main\\">
-                <Switch />
+                <withRouter(ChildSwitch) parentRoute={{...}}>
+                  <Route>
+                    <ChildSwitch parentRoute={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
+                      <Connect(NotFound)>
+                        <NotFound dispatch={[Function]} />
+                      </Connect(NotFound)>
+                    </ChildSwitch>
+                  </Route>
+                </withRouter(ChildSwitch)>
               </main>
               <withRouter(Layout.Footer) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}}>
                 <Route>
