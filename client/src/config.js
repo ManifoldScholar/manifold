@@ -45,29 +45,13 @@ const applicationConfiguration = {
   domain: process.env.DOMAIN,
   app: {
     head: {
-      defaultTitle: "Manifold Scholarship",
-      meta: [
-        { charset: "utf-8" },
-        {
-          name: "description",
-          content:
-            "Transforming scholarly publications into living digital works"
-        },
-        { property: "og:site_name", content: "Manifold Scholarship" },
-        {
-          property: "og:image",
-          content: `${clientUrl()}/static/logo.jpg`
-        },
-        { property: "og:locale", content: "en_US" },
-        { property: "og:title", content: "Manifold Scholarship" },
-        {
-          property: "og:description",
-          content:
-            "Transforming scholarly publications into living digital works"
-        },
-        { property: "twitter:card", content: "summary_large_image" },
-        { property: "twitter:site", content: "@manifoldscholar" }
-      ]
+      meta: {
+        charset: "utf-8",
+        siteName: "Manifold Scholarship",
+        locale: "en_US",
+        twitterCard: "summary_large_image",
+        twitterSite: "manifoldscholar"
+      }
     },
     locale: {
       errors: {

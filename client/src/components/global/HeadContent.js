@@ -2,52 +2,94 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import config from "../../config";
+import HigherOrder from "containers/global/HigherOrder";
+import get from "lodash/get";
 
-export default class HeadContent extends Component {
+export class HeadContent extends Component {
   static propTypes = {
     title: PropTypes.string,
     image: PropTypes.string,
+    siteName: PropTypes.string,
+    imageWidth: PropTypes.string,
+    imageHeight: PropTypes.string,
+    locale: PropTypes.string,
+    twitterCard: PropTypes.string,
+    twitterSite: PropTypes.string,
     description: PropTypes.string,
-    appendTitle: PropTypes.bool
+    appendTitle: PropTypes.bool,
+    settings: PropTypes.object
   };
 
+  static defaultProps = { ...config.app.head.meta };
+
+  get defaultTitle() {
+    return get(this.props.settings, "attributes.general.headTitle");
+  }
+
+  get title() {
+    let title = this.props.title;
+    if (!title) return null;
+    if (this.props.appendTitle) title = `${this.defaultTitle} | ${title}`;
+
+    return title;
+  }
+
+  get twitterSite() {
+    const twitter =
+      get(this.props.settings, "attributes.general.twitter") ||
+      this.props.twitterSite;
+    return `@${twitter}`;
+  }
+
+  get description() {
+    if (this.props.description) return this.props.description;
+    return get(this.props.settings, "attributes.general.headDescription");
+  }
+
+  get image() {
+    const image =
+      this.props.image ||
+      get(this.props.settings, "attributes.pressLogoStyles.medium") ||
+      `/static/logo.jpg`;
+    return `${config.clientUrl}${image}`;
+  }
+
   readPropValue(key) {
-    if (key === "image" && this.props.image)
-      return `${config.clientUrl}${this.props.image}`;
     return this.props[key];
   }
 
-  addMeta(meta, key) {
-    const value = this.readPropValue(key);
+  addMeta(meta, key, overrideKey = null, overrideValue = null) {
+    const value = overrideValue || this.readPropValue(key);
     if (!value) return meta;
-    meta.push({ name: key, content: value });
+    const adjustedKey = overrideKey || key;
+    meta.push({ name: adjustedKey, content: value });
     return meta;
   }
 
-  addOpenGraph(meta, key, override = null) {
-    const value = this.readPropValue(key);
-    if (!value) return meta;
-    const adjustedKey = override || key;
-    meta.push({ property: `og:${adjustedKey}`, content: value });
-    return meta;
-  }
-
-  addTwitterCard(meta, key) {
-    const value = this.readPropValue(key);
-    if (!value) return meta;
-    meta.push({ property: `twitter:${key}`, content: value });
-    return meta;
+  addOpenGraph(meta, key, overrideKey = null, overrideValue = null) {
+    const adjustedKey = overrideKey || key;
+    return this.addMeta(meta, key, `og:${adjustedKey}`, overrideValue);
   }
 
   buildMetaContent() {
     const meta = [];
-    this.addOpenGraph(meta, "image");
-    this.addOpenGraph(meta, "title");
-    this.addOpenGraph(meta, "description");
+    this.addMeta(meta, "description", null, this.description);
+    this.addOpenGraph(meta, "siteName", "site_name", this.defaultTitle);
+    this.addOpenGraph(meta, "locale");
+    this.addOpenGraph(meta, "image", null, this.image);
+    this.addOpenGraph(meta, "title", null, this.title);
+    this.addOpenGraph(meta, "description", null, this.description);
     this.addOpenGraph(meta, "imageWidth", "image:width");
     this.addOpenGraph(meta, "imageHeight", "image:height");
-    this.addMeta(meta, "description");
+    this.addMeta(meta, "twitterCard", "twitter:card");
+    this.addMeta(meta, "twitterSite", "twitter:site", this.twitterSite);
     return meta;
+  }
+
+  titleTemplate(props) {
+    if (!props.appendTitle) return null;
+
+    return `${this.defaultTitle} | %s`;
   }
 
   render() {
@@ -56,8 +98,11 @@ export default class HeadContent extends Component {
       meta,
       title: this.props.title
     };
-    if (!this.props.appendTitle) props.titleTemplate = null;
+    props.titleTemplate = this.titleTemplate(this.props);
+    props.defaultTitle = this.defaultTitle;
 
     return <Helmet {...props} />;
   }
 }
+
+export default HigherOrder.withSettings(HeadContent);

@@ -109,6 +109,9 @@ export class CreateContainer extends Component {
 
   render() {
     const errors = get(this.props.response, "errors") || [];
+    const installationName = this.props.settings.attributes.general
+      .installationName;
+
     return (
       <div>
         <form method="post" onSubmit={this.createUser}>
@@ -202,8 +205,7 @@ export class CreateContainer extends Component {
           </div>
         </form>
         <p className="login-links">
-          {"You can also create a Manifold account using your Facebook, Twitter, or " +
-            "Google credentials."}
+          {`You can also create a ${installationName} account using your Facebook, Twitter, or Google credentials.`}
         </p>
         <section className="login-external">
           <SignInUp.Oauth.Monitor dispatch={this.props.dispatch} />

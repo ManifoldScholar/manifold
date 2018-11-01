@@ -2,9 +2,11 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Events from "../Events";
 import build from "test/fixtures/build";
+import { Provider } from "react-redux";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Project.Events component", () => {
+  const store = build.store();
   const project = build.entity.project("1");
   const events = [build.entity.event("1"), build.entity.event("2")];
   const pagination = {
@@ -19,7 +21,9 @@ describe("Frontend.Project.Events component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
-        <Events project={project} events={events} pagination={pagination} />
+        <Provider store={store}>
+          <Events project={project} events={events} pagination={pagination} />
+        </Provider>
       )
     );
     let tree = component.toJSON();
