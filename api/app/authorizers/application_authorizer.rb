@@ -7,6 +7,7 @@ class ApplicationAuthorizer < Authority::Authorizer
            :project_creator_permissions?, :marketeer_permissions?,
            :creator_or_has_editor_permissions?, :reader_permissions?,
            :creator_or_has_admin_permissions?,
+           :creator_or_has_marketeer_permissions?,
            :editor_of_any_project?, to: :class
 
   # Any class method from Authority::Authorizer that isn't overridden
@@ -45,6 +46,10 @@ class ApplicationAuthorizer < Authority::Authorizer
     project_creator_permissions?(user) ||
       marketeer_permissions?(user) ||
       user.reader?
+  end
+
+  def self.creator_or_has_marketeer_permissions?(user, resource)
+    user.created?(resource) || marketeer_permissions?(user)
   end
 
   def self.creator_or_has_editor_permissions?(user, resource)
