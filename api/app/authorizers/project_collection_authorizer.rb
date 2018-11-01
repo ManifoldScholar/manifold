@@ -1,7 +1,7 @@
 class ProjectCollectionAuthorizer < ApplicationAuthorizer
 
   def self.default(_able, user, _options = {})
-    editor_permissions?(user)
+    marketeer_permissions?(user)
   end
 
   def self.readable(_able, _user, _options = {})
@@ -9,12 +9,12 @@ class ProjectCollectionAuthorizer < ApplicationAuthorizer
   end
 
   def default(_able, user, _options = {})
-    creator_or_has_editor_permissions?(user, resource)
+    creator_or_has_marketeer_permissions?(user, resource)
   end
 
-  def readable(_able, user, _options = {})
-    return true unless resource.draft?
-    creator_or_has_editor_permissions?(user, resource)
+  def readable_by?(user, _options = {})
+    return true if resource.visible?
+    creator_or_has_marketeer_permissions?(user, resource)
   end
 
 end
