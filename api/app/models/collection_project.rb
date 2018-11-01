@@ -22,9 +22,9 @@ class CollectionProject < ApplicationRecord
 
   scope :projects_with_update_ability, lambda { |user = nil|
     next none unless user.present?
-    updatable_projects = Project.authorizer.scope_updatable_projects(user).pluck(:id)
-    joins(:project).where(projects: { draft: false })
-                   .or(joins(:project).where(project_id: updatable_projects))
+    joins(:project).where("projects.draft = FALSE OR project_id IN (?)",
+                          Project.authorizer.scope_updatable_projects(user).pluck(:id)
+                          )
   }
 
   # Validation
