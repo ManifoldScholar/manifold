@@ -19,7 +19,7 @@ class ProjectCollection < ApplicationRecord
   acts_as_list
 
   # Formatted Attributes
-  has_formatted_attribute :description
+  has_formatted_attribute :description, include_wrap: false
 
   # Relationships
   has_many :collection_projects, dependent: :destroy, inverse_of: :project_collection do
