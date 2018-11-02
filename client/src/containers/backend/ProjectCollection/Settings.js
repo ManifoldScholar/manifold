@@ -114,6 +114,7 @@ export class ProjectCollectionSettings extends PureComponent {
             <div className="drawer-header">
               <Form.TextInput
                 wide
+                focusOnMount
                 label="Collection Title:"
                 name="attributes[title]"
                 placeholder="Enter collection name"
