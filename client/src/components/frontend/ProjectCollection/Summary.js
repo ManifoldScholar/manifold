@@ -39,7 +39,7 @@ export default class ProjectCollectionSummary extends Component {
     return this.projects.length > 0;
   }
 
-  mappedProjects = memoize(collection => {
+  mappedProjects = memoize(() => {
     return this.collection.relationships.collectionProjects.map(
       cp => cp.relationships.project
     );

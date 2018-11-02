@@ -141,7 +141,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     const hasProjectCollections = projectCollections.length > 0;
     const wrapperClasses = classnames("project-collections", {
       "active-collection": projectCollection || this.state.showNew,
-      "empty": !hasProjectCollections
+      empty: !hasProjectCollections
     });
 
     return (

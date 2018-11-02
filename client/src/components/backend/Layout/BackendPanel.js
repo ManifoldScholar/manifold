@@ -8,7 +8,8 @@ export default class BackendPanel extends PureComponent {
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
-    ])
+    ]),
+    sidebar: PropTypes.object
   };
 
   render() {

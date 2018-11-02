@@ -15,7 +15,7 @@ const { request } = entityStoreActions;
 const perPage = 20;
 
 export class HomeContainer extends Component {
-  static fetchProjects = (dispatch, location) => {
+  static fetchProjects = dispatch => {
     const filters = {
       order: "sort_title, title"
     };
@@ -30,7 +30,7 @@ export class HomeContainer extends Component {
     return dispatch(filteredRequest);
   };
 
-  static fetchData = (getState, dispatch, location) => {
+  static fetchData = (getState, dispatch) => {
     const promises = [];
     const collectionRequest = request(
       projectCollectionsAPI.index({
@@ -40,7 +40,7 @@ export class HomeContainer extends Component {
       }),
       requests.feProjectCollections
     );
-    const { promise: one } = HomeContainer.fetchProjects(dispatch, location);
+    const { promise: one } = HomeContainer.fetchProjects(dispatch);
     const { promise: two } = dispatch(collectionRequest);
     promises.push(one);
     promises.push(two);
