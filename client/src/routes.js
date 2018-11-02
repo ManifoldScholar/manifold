@@ -10,39 +10,42 @@ export default () => {
     {
       name: "reader",
       component: Reader.Reader,
+      exact: false,
       path: "/read/:textId/:ignore(section|search)?/:sectionId?",
       helper: t => `/read/${t}`,
       routes: [
         {
           name: "readerSearchResults",
-          component: Reader.Search,
           exact: true,
+          component: Reader.Search,
           path: "/read/:textId/search",
           helper: t => `/read/${t}/search`
         },
         {
           name: "readerSectionSearchResults",
-          component: Reader.Search,
           exact: true,
+          component: Reader.Search,
           transition: "overlay-full",
           path: "/read/:textId/section/:sectionId/search",
           helper: (t, ts) => `/read/${t}/section/${ts}/search`
         },
         {
           name: "readerSection",
-          component: Reader.Section,
           exact: false,
+          component: Reader.Section,
           path: "/read/:textId/section/:sectionId",
           helper: (t, s, anchor = "") => `/read/${t}/section/${s}${anchor}`,
           routes: [
             {
               name: "readerSectionResource",
+              exact: true,
               component: Reader.Notation.Resource.Detail,
               path: "/read/:textId/section/:sectionId/resource/:resourceId",
               helper: (t, s, r) => `/read/${t}/section/${s}/resource/${r}`
             },
             {
               name: "readerSectionCollection",
+              exact: true,
               component: Reader.Notation.Collection.Detail,
               path: "/read/:textId/section/:sectionId/collection/:collectionId",
               helper: (t, s, c) => `/read/${t}/section/${s}/collection/${c}`
@@ -53,6 +56,7 @@ export default () => {
     },
     {
       name: "backend",
+      exact: false,
       component: Backend.Backend,
       path: "/backend",
       helper: () => "/backend",
@@ -209,15 +213,15 @@ export default () => {
                 },
                 {
                   name: "BackendTextStylesheetNew",
-                  component: Backend.Stylesheet.Edit,
                   exact: true,
+                  component: Backend.Stylesheet.Edit,
                   path: "/backend/projects/text/:id/styles/new",
                   helper: t => `/backend/projects/text/${t}/styles/new`
                 },
                 {
                   name: "BackendTextStylesheetEdit",
-                  component: Backend.Stylesheet.Edit,
                   exact: true,
+                  component: Backend.Stylesheet.Edit,
                   path: "/backend/projects/text/:id/styles/:stylesheet",
                   helper: (t, ss) => `/backend/projects/text/${t}/styles/${ss}`
                 },
@@ -237,6 +241,7 @@ export default () => {
                   routes: [
                     {
                       name: "backendTextCollaborator",
+                      exact: true,
                       component: Backend.Makers.Edit,
                       path: "/backend/projects/text/:tId/collaborators/:id",
                       helper: (tId, id) =>
@@ -254,7 +259,7 @@ export default () => {
                 },
                 {
                   name: "backendTextIngestionEdit",
-                  exact: false,
+                  exact: true,
                   component: Backend.Text.Ingestion.Edit,
                   path:
                     "/backend/projects/text/:id/ingestion/:ingestionId/edit",
@@ -264,7 +269,7 @@ export default () => {
                 },
                 {
                   name: "backendTextIngestionIngest",
-                  exact: false,
+                  exact: true,
                   component: Backend.Ingestion.Ingest,
                   path:
                     "/backend/projects/text/:id/ingestion/:ingestionId/ingest",
@@ -333,7 +338,7 @@ export default () => {
                   routes: [
                     {
                       name: "backendProjectTextsIngestionsNew",
-                      exact: false,
+                      exact: true,
                       component: Backend.Project.Text.Ingestion.New,
                       path: "/backend/projects/:id/texts/ingestions/new",
                       helper: p =>
@@ -342,7 +347,7 @@ export default () => {
                     },
                     {
                       name: "backendProjectTextsIngestionEdit",
-                      exact: false,
+                      exact: true,
                       component: Backend.Project.Text.Ingestion.Edit,
                       path:
                         "/backend/projects/:id/texts/ingestion/:ingestionId/edit",
@@ -352,7 +357,7 @@ export default () => {
                     },
                     {
                       name: "backendProjectTextsIngestionIngest",
-                      exact: false,
+                      exact: true,
                       component: Backend.Ingestion.Ingest,
                       path:
                         "/backend/projects/:id/texts/ingestion/:ingestionId/ingest",
@@ -402,18 +407,21 @@ export default () => {
                 },
                 {
                   name: "backendProjectPermissions",
+                  exact: false,
                   component: Backend.Project.Permissions,
                   path: "/backend/projects/:projectId/permissions/:id?",
                   helper: p => `/backend/projects/${p}/permissions`,
                   routes: [
                     {
                       name: "backendProjectPermissionsNew",
+                      exact: true,
                       component: Backend.Permission.New,
                       path: "/backend/projects/:pId/permissions/new",
                       helper: pId => `/backend/projects/${pId}/permissions/new`
                     },
                     {
                       name: "backendProjectPermission",
+                      exact: true,
                       component: Backend.Permission.Edit,
                       path: "/backend/projects/:pId/permissions/:id",
                       helper: (pId, id) =>
@@ -423,12 +431,14 @@ export default () => {
                 },
                 {
                   name: "backendProjectCollaborators",
+                  exact: false,
                   component: Backend.Project.Collaborators,
                   path: "/backend/projects/:id/collaborators",
                   helper: p => `/backend/projects/${p}/collaborators`,
                   routes: [
                     {
                       name: "backendProjectCollaborator",
+                      exact: true,
                       component: Backend.Makers.Edit,
                       path: "/backend/projects/:pId/collaborators/:id",
                       helper: (pId, id) =>
@@ -460,6 +470,7 @@ export default () => {
                   routes: [
                     {
                       name: "backendProjectSocialTwitterQueryNew",
+                      exact: true,
                       component: Backend.TwitterQuery.New,
                       path: "/backend/projects/:pId/social/twitter-query/new",
                       helper: pId =>
@@ -467,6 +478,7 @@ export default () => {
                     },
                     {
                       name: "backendProjectSocialTwitterQuery",
+                      exact: true,
                       component: Backend.TwitterQuery.Edit,
                       path: "/backend/projects/:pId/social/twitter-query/:id",
                       helper: (pId, id) =>
@@ -522,6 +534,7 @@ export default () => {
                 },
                 {
                   name: "backendRecordsUser",
+                  exact: true,
                   component: Backend.Users.Edit,
                   path: "/backend/records/users/:id",
                   helper: u => `/backend/records/users/${u}`
@@ -560,18 +573,21 @@ export default () => {
               routes: [
                 {
                   name: "backendRecordsPageNew",
+                  exact: true,
                   component: Backend.Pages.New,
                   path: "/backend/records/pages/new",
                   helper: () => `/backend/records/pages/new`
                 },
                 {
                   name: "backendRecordsPageBody",
+                  exact: true,
                   component: Backend.Pages.Body,
                   path: "/backend/records/pages/:id/body",
                   helper: p => `/backend/records/pages/${p}/body`
                 },
                 {
                   name: "backendRecordsPageGeneral",
+                  exact: true,
                   component: Backend.Pages.General,
                   path: "/backend/records/pages/:id/general",
                   helper: p => `/backend/records/pages/${p}/general`
@@ -587,12 +603,14 @@ export default () => {
               routes: [
                 {
                   name: "backendRecordsFeatureNew",
+                  exact: true,
                   component: Backend.Features.New,
                   path: "/backend/records/features/new",
                   helper: () => `/backend/records/features/new`
                 },
                 {
                   name: "backendRecordsFeatureGeneral",
+                  exact: true,
                   component: Backend.Features.General,
                   path: "/backend/records/features/:id",
                   helper: p => `/backend/records/features/${p}`
@@ -601,6 +619,7 @@ export default () => {
             },
             {
               name: "backendRecordsPages",
+              exact: true,
               component: Backend.Pages.List,
               path: "/backend/records/pages",
               exact: true,
@@ -608,6 +627,7 @@ export default () => {
             },
             {
               name: "backendRecordsFeatures",
+              exact: true,
               component: Backend.Features.List,
               exact: true,
               path: "/backend/records/features",
@@ -652,6 +672,7 @@ export default () => {
                 },
                 {
                   name: "backendSettingsSubject",
+                  exact: true,
                   component: Backend.Settings.Subjects.Edit,
                   path: "/backend/settings/subjects/:id",
                   helper: s => `/backend/settings/subjects/${s}`
