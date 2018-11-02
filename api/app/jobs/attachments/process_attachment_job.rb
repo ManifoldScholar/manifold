@@ -9,7 +9,7 @@ module Attachments
     end
 
     def exclusive_lock_name
-      klass, id = *arguments.dig(0, 'record')
+      klass, id = *arguments.dig(0, "record")
 
       return super unless klass.present? && id.present?
 
