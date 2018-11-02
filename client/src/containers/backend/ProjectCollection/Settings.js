@@ -130,6 +130,12 @@ export class ProjectCollectionSettings extends PureComponent {
               </div>
             </div>
             <ProjectCollection.Form.KindPicker {...this.props} />
+            <Form.TextInput
+              wide
+              label="Slug:"
+              name="attributes[slug]"
+              placeholder="Enter slug"
+            />
             <Form.TextArea
               wide
               label="Description:"
