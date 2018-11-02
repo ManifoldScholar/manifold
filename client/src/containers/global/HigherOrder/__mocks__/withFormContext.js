@@ -26,7 +26,7 @@ export default function withFormContext(WrappedComponent) {
         },
         dirtyModel: {},
         sourceModel: {},
-        getModelValue: name => "",
+        getModelValue: () => "",
         sessionKey: "1234",
         submitKey: null
       };
@@ -36,8 +36,7 @@ export default function withFormContext(WrappedComponent) {
           {formProps => {
             const props = Object.assign({}, mockProps, formProps, this.props);
             return React.createElement(WrappedComponent, props);
-            }
-          }
+          }}
         </FormContext.Consumer>
       );
     }

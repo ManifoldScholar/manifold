@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Resource } from "components/frontend";
 import { Utility } from "components/global";
 import lh from "helpers/linkHandler";
 
