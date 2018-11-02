@@ -65,7 +65,9 @@ class Project < ApplicationRecord
   resourcify
 
   # PaperTrail
-  has_paper_trail on: [:update], skip: %i[cover_data hero_data avatar_data published_text_attachment_data]
+  has_paper_trail on: [:update],
+                  skip:
+                    %i[cover_data hero_data avatar_data published_text_attachment_data]
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project

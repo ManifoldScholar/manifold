@@ -10,7 +10,11 @@ module Concerns
     def lock_and_transact!
       logger.debug "LOCKING"
 
-      result = ApplicationRecord.with_advisory_lock_result(exclusive_lock_name, timeout_seconds: 30, transaction: true) do
+      result = ApplicationRecord.with_advisory_lock_result(
+        exclusive_lock_name,
+        timeout_seconds: 30,
+        transaction: true
+      ) do
         logger.debug "LOCK ACQUIRED"
 
         yield if block_given?
