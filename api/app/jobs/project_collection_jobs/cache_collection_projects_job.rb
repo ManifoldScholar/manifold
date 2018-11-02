@@ -2,9 +2,7 @@ module ProjectCollectionJobs
   class CacheCollectionProjectsJob < ApplicationJob
 
     # rubocop:disable Metrics/LineLength
-    def perform(id)
-      project_collection = ProjectCollection.find(id)
-      return unless project_collection.present?
+    def perform(project_collection)
       ProjectCollections::CacheCollectionProjects.run project_collection: project_collection
     end
     # rubocop:enable Metrics/LineLength

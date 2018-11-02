@@ -13,14 +13,16 @@ module Demonstration
     end
 
     def load
-      clear_db
-      seed_db
-      create_admin_user
-      # create_fake_users
-      create_pages
-      import_projects
-      create_featured_projects_collection
-      reindex_records
+      ApplicationRecord.transaction do
+        clear_db
+        seed_db
+        create_admin_user
+        # create_fake_users
+        create_pages
+        import_projects
+        create_featured_projects_collection
+        reindex_records
+      end
     end
 
     def cli_user

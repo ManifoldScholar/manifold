@@ -50,7 +50,7 @@ module Citable
 
     def with_citable_children(*children)
       attr_reader :citable_children
-      after_save :update_citable_children if respond_to? :after_save
+      after_commit :update_citable_children if respond_to? :after_commit
 
       @citable_children = children
 
