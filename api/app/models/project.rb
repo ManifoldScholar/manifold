@@ -293,7 +293,7 @@ class Project < ApplicationRecord
 
   def queue_reindex_children_job
     return unless @reindex_children
-    ProjectJobs::ReindexChildren.perform_later(id)
+    ProjectJobs::ReindexChildren.perform_later(self)
     @reindex_children = false
   end
 
