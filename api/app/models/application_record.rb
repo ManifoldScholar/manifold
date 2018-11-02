@@ -3,6 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
   include Concerns::ArelHelpers
+  include WithAdvisoryLock::Concern
 
   class << self
     def in_the_week_of(date)
