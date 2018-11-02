@@ -92,6 +92,7 @@ gem "twitter", "~> 6.0"
 gem "uber", "~> 0.1.0", require: %w(uber/inheritable_attr)
 gem "validate_url", "~> 1.0"
 gem "validates_email_format_of", "~> 1.0"
+gem "with_advisory_lock", "~> 4.0"
 
 group :development, :test do
   gem "factory_bot_rails", "~> 4.0"
