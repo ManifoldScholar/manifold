@@ -1,5 +1,7 @@
 # Simple job to create a new event in the background.
 class CreateEventJob < ApplicationJob
+  include Concerns::ExclusiveJob
+
   queue_as :default
 
   rescue_from(::Factory::Errors::NoEventProject) do
