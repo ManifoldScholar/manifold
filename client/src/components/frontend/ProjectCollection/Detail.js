@@ -18,6 +18,10 @@ export default class ProjectCollectionDetail extends Component {
     initialState: PropTypes.object
   };
 
+  get description() {
+    return this.props.projectCollection.attributes.descriptionFormatted;
+  }
+
   render() {
     const projectCollection = this.props.projectCollection;
     if (!projectCollection) return null;
@@ -26,7 +30,6 @@ export default class ProjectCollectionDetail extends Component {
       projectCollection.attributes.icon === "new-round"
         ? "#52e3ac"
         : "currentColor";
-    const description = projectCollection.attributes.description;
 
     return (
       <section key={projectCollection.id} className="bg-neutral05">
@@ -50,11 +53,11 @@ export default class ProjectCollectionDetail extends Component {
             initialState={this.props.initialState}
           />
           <div className="details">
-            {description && (
+            {this.description && (
               <p
                 className="description"
                 dangerouslySetInnerHTML={{
-                  __html: projectCollection.attributes.description
+                  __html: this.description
                 }}
               />
             )}

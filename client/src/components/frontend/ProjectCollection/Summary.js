@@ -28,7 +28,7 @@ export default class ProjectCollectionSummary extends Component {
   }
 
   get description() {
-    return this.collection.attributes.description;
+    return this.collection.attributes.descriptionFormatted;
   }
 
   get projects() {

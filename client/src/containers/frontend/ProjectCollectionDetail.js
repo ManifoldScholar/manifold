@@ -164,7 +164,9 @@ export class ProjectCollectionDetailContainer extends Component {
           title={`\u201c${
             this.props.projectCollection.attributes.title
           }\u201d on ${settings.attributes.general.installationName}`}
-          description={this.props.projectCollection.attributes.description}
+          description={
+            this.props.projectCollection.attributes.descriptionPlaintext
+          }
         />
         {this.renderProjects(this.props)}
         <Layout.ButtonNavigation
