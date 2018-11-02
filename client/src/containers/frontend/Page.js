@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { pagesAPI, requests } from "api";
 import { entityStoreActions } from "actions";
+import { HeadContent } from "components/global";
 import { select } from "utils/entityUtils";
 
 const { request, flush } = entityStoreActions;
@@ -17,12 +18,14 @@ export class PageContainer extends Component {
   static mapStateToProps = state => {
     return {
       loading: state.ui.transitory.loading.active,
+      settings: select(requests.settings, state.entityStore),
       page: select(requests.gPage, state.entityStore)
     };
   };
 
   static propTypes = {
     dispatch: PropTypes.func,
+    settings: PropTypes.object,
     page: PropTypes.object
   };
 
@@ -34,6 +37,7 @@ export class PageContainer extends Component {
     if (!this.props.page) return null;
     return (
       <section>
+        <HeadContent title={this.props.page.attributes.title} />
         <div
           className="container page-content"
           dangerouslySetInnerHTML={{
