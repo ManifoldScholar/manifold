@@ -6,21 +6,24 @@ module Factory
     end
 
     def create(event_type, subject_id: nil, subject_type: nil, subject: nil)
-      subject = resolve_subject(subject_id, subject_type, subject)
-      raise_no_subject unless subject
-      event = ::Event.find_or_create_by(
-        subject: subject,
-        event_type: event_type,
-        project: subject_project(subject)
-      )
-      event.update(event_title: event_title(event_type),
-                   event_subtitle: event_subtitle(event_type),
-                   subject_title: subject_title(event_type, subject),
-                   subject_subtitle: subject_subtitle(event_type, subject),
-                   attribution_name: subject_attribution_name(event_type, subject),
-                   event_url: new_text_event_url(event_type, subject))
-      log_event_errors(event)
-      event
+      ApplicationRecord.transaction do
+        subject = resolve_subject(subject_id, subject_type, subject)
+        raise_no_subject unless subject
+        event = ::Event.find_or_create_by(
+          subject: subject,
+          event_type: event_type,
+          project: subject_project(subject)
+        )
+
+        event.update(event_title: event_title(event_type),
+                     event_subtitle: event_subtitle(event_type),
+                     subject_title: subject_title(event_type, subject),
+                     subject_subtitle: subject_subtitle(event_type, subject),
+                     attribution_name: subject_attribution_name(event_type, subject),
+                     event_url: new_text_event_url(event_type, subject))
+        log_event_errors(event)
+        event
+      end
     end
 
     # rubocop:disable Metrics/AbcSize
