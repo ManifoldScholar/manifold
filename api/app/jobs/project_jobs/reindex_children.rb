@@ -3,8 +3,7 @@ module ProjectJobs
   class ReindexChildren < ApplicationJob
     queue_as :default
 
-    def perform(project_id)
-      project = Project.find(project_id)
+    def perform(project)
       project.reindex_children
     end
   end
