@@ -69,10 +69,10 @@ export default class TextListGrouped extends Component {
           return (
             <nav key={categoryKey} className="text-category">
               {header}
-              <ul className="texts-group">
+              <ul>
                 {group.texts.map(text => {
                   return (
-                    <li key={text.id}>
+                    <li key={text.id} className="text">
                       <Text.Thumbnail text={text} />
                     </li>
                   );

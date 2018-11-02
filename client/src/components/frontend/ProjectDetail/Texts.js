@@ -14,11 +14,11 @@ export default class ProjectDetailTexts extends PureComponent {
     const { publishedText, texts, textCategories } = project.relationships;
     const excludes = [];
     if (publishedText) {
-      excludes.push(publishedText.id);
+      // excludes.push(publishedText.id);
     }
 
     return (
-      <div className="entities project-list">
+      <div className="entities text-list">
         {publishedText ? <TextList.Published text={publishedText} /> : null}
         <TextList.Grouped
           excludeIds={excludes}

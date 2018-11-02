@@ -1,0 +1,128 @@
+// list of project texts, based on .project-list class with overrides
+.text-list {
+  @extend .project-list;
+
+  .text-category {
+    .sub-section-heading {
+      @include panelRounded;
+      margin-bottom: 0;
+      color: $neutral75;
+      background-color: $neutral10;
+    }
+  }
+
+  li.text {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+
+    &:only-child {
+      border-color: transparent;
+    }
+
+    @include respond($break80) {
+      flex-direction: row;
+    }
+
+    > a {
+      flex-grow: 1;
+      padding: 0;
+      margin-left: -4px;
+
+      &:hover {
+        .cover {
+          color: $accentPrimary;
+        }
+      }
+    }
+
+    .item-wrapper {
+      width: 100%;
+      padding: 0;
+
+      .cover {
+        min-width: 64px;
+        max-width: 64px;
+        height: 64px;
+        color: $neutral40;
+
+        > svg {
+          width: 64px;
+          height: 64px;
+          max-height: 64px;
+        }
+      }
+
+      .name {
+        font-size: 21px;
+
+        .title-text {
+          margin-right: 12px;
+        }
+
+        .subtitle {
+          display: inline-block;
+          font-size: 0.86em;
+          color: inherit;
+        }
+      }
+
+      .relations-list {
+        padding-top: 0.7em;
+        font-size: 18px;
+      }
+    }
+
+    .text-meta {
+      margin-top: 20px;
+
+      @include respond($break80) {
+        margin-top: 5px;
+      }
+
+      .date-added {
+        @include utilityPrimary;
+        font-size: 14px;
+        color: $neutral50;
+      }
+
+      .status {
+        @include blockLabelRound;
+        padding: 4px 8px 6px;
+        margin: 0 0 0 12px;
+        font-size: 13px;
+        line-height: 1;
+        vertical-align: middle;
+        background-color: $accentPrimary;
+      }
+
+      .text-interactions {
+        @include listUnstyled;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-top: 15px;
+
+        @include respond($break80) {
+          justify-content: flex-end;
+        }
+
+        li {
+          @include utilityPrimary;
+          font-size: 14px;
+          color: $neutral75;
+          border-bottom: none;
+
+          + li {
+            margin-left: 15px;
+          }
+
+          .manicon {
+            margin-right: 5px;
+            color: $accentPrimary;
+          }
+        }
+      }
+    }
+  }
+}

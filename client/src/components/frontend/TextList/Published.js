@@ -14,8 +14,8 @@ export default class TestListPublished extends Component {
       <nav className="text-category">
         <section>
           <h4 className="sub-section-heading">{"Published Version"}</h4>
-          <ul className="texts-group">
-            <li>
+          <ul>
+            <li className="text">
               <Text.Thumbnail text={this.props.text} />
             </li>
           </ul>

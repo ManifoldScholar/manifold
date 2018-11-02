@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import Cover from "./Cover";
+import { Icon } from "components/global/SVG";
 import FormattedDate from "components/global/FormattedDate";
 
 export default class TextThumbnail extends Component {
@@ -12,90 +13,87 @@ export default class TextThumbnail extends Component {
     text: PropTypes.object
   };
 
-  renderSubtitle = text => {
-    // if (!text.attributes.subtitle) return null;
-    return <span className="subtitle">{text.attributes.subtitle}</span>;
-  };
+  renderTextInteractions(text) {
+    const {
+      annotationsCount,
+      highlightsCount,
+      bookmarksCount
+    } = text.attributes;
+
+    return (
+      <ul className="text-interactions">
+        <li>
+          <i className="manicon">
+            <Icon.SpeechBubble size={32} />
+          </i>
+          {highlightsCount}
+          <span className="screen-reader-text">
+            This text has {highlightsCount} highlights
+          </span>
+        </li>
+        <li>
+          <i className="manicon">
+            <Icon.PencilSimple size={32} />
+          </i>
+          {annotationsCount}
+          <span className="screen-reader-text">
+            This text has {annotationsCount} annotations
+          </span>
+        </li>
+        <li>
+          <i className="manicon">
+            <Icon.Bookmark size={32} />
+          </i>
+          {bookmarksCount}
+          <span className="screen-reader-text">
+            This text has {bookmarksCount} bookmarks
+          </span>
+        </li>
+      </ul>
+    );
+  }
 
   render() {
     const text = this.props.text;
-
-    // Temporary while icons are not getting link styling
-    const styles = {
-      color: "#52e3ac"
-    };
+    const {
+      slug,
+      titleFormatted,
+      subtitle,
+      creatorNames,
+      createdAt } = text.attributes;
 
     return (
-      <div className="asset-thumb">
-        <div className="asset-link">
-          <span aria-hidden="true">
-            <Link to={lh.link("reader", this.props.text.attributes.slug)}>
-              <figure className="asset-image">
-                {text.attributes.age <= 30 ? (
-                  <i className="manicon manicon-new" />
-                ) : null}
-                <Cover text={this.props.text} />
-              </figure>
-            </Link>
-          </span>
-
-          <div className="asset-description">
-            <Link to={lh.link("reader", this.props.text.attributes.slug)}>
-              <h3 className="asset-title">
+      <React.Fragment>
+        <Link to={lh.link("reader", slug)}>
+          <div className="item-wrapper">
+            <figure className="cover">
+              <Icon.LoosePages />
+            </figure>
+            <div className="meta">
+              <h3 className="name">
                 <span
+                  className="title-text"
                   dangerouslySetInnerHTML={{
-                    __html: text.attributes.titleFormatted
+                    __html: titleFormatted
                   }}
                 />
-                {this.renderSubtitle(text)}
+              {subtitle && <span className="subtitle">{subtitle}</span>}
               </h3>
-            </Link>
-            <span className="asset-date">
-              <FormattedDate
-                prefix="Added"
-                format="MMMM, YYYY"
-                date={text.attributes.createdAt}
-              />
-            </span>
-
-            <div className="asset-status">
-              <ul className="asset-interactions">
-                <li>
-                  <div aria-hidden="true">
-                    <i
-                      className="manicon manicon-pencil-simple"
-                      style={styles}
-                      aria-hidden="true"
-                    />
-                    {text.attributes.annotationsCount}
-                  </div>
-                  <span className="screen-reader-text">
-                    This text has {text.attributes.annotationsCount} annotations
-                  </span>
-                </li>
-                <li>
-                  <div aria-hidden="true">
-                    <i className="manicon manicon-highlight" style={styles} />
-                    {text.attributes.highlightsCount}
-                  </div>
-                  <span className="screen-reader-text">
-                    This text has {text.attributes.highlightsCount} highlights
-                  </span>
-                </li>
-                {/* <li>
-                  <div aria-hidden="true">
-                    <i className="manicon manicon-bookmark-outline" style={styles}></i>
-                    {text.attributes.bookmarksCount}
-                  </div>
-                  <span className="screen-reader-text">
-                    This text has {text.attributes.bookmarksCount} bookmarks
-                  </span>
-                </li> */}
-              </ul>
+              <div className="relations-list">
+                <span style={{ fontStyle: "italic" }}>by </span>
+                {creatorNames}
+              </div>
             </div>
           </div>
+        </Link>
+        <div className="text-meta">
+          <span className="date-added">
+            <FormattedDate prefix="Added" format="MMMM YYYY" date={createdAt} />
+          </span>
+          <span className="status">Published</span>
+          {this.renderTextInteractions(text)}
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

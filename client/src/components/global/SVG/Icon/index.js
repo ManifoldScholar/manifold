@@ -1,4 +1,5 @@
 import BarsDoubleHorizontal from "./BarsDoubleHorizontal";
+import Bookmark from "./Bookmark";
 import BooksOnShelf from "./BooksOnShelf";
 import BooksOnShelfStroke from "./BooksOnShelfStroke";
 import BookStack from "./BookStack";
@@ -11,9 +12,11 @@ import EyeOpen from "./EyeOpen";
 import Globe from "./Globe";
 import Lamp from "./Lamp";
 import ManifoldLogo from "./ManifoldLogo";
+import LoosePages from "./LoosePages";
 import Minus from "./Minus";
 import Mug from "./Mug";
 import NewRound from "./NewRound";
+import PencilSimple from "./PencilSimple";
 import Plus from "./Plus";
 import Pulse from "./Pulse";
 import ResourceAudio from "./ResourceAudio";
@@ -27,11 +30,13 @@ import ResourcePdf from "./ResourcePdf";
 import ResourcePresentation from "./ResourcePresentation";
 import ResourceSpreadsheet from "./ResourceSpreadsheet";
 import ResourceVideo from "./ResourceVideo";
+import SpeechBubble from "./SpeechBubble";
 import Tag from "./Tag";
 import Touch from "./Touch";
 
 export default {
   BarsDoubleHorizontal,
+  Bookmark,
   BooksOnShelf,
   BooksOnShelfStroke,
   BookStack,
@@ -44,9 +49,11 @@ export default {
   Globe,
   Lamp,
   ManifoldLogo,
+  LoosePages,
   Minus,
   Mug,
   NewRound,
+  PencilSimple,
   Plus,
   Pulse,
   ResourceAudio,
@@ -60,6 +67,7 @@ export default {
   ResourcePresentation,
   ResourceSpreadsheet,
   ResourceVideo,
+  SpeechBubble,
   Tag,
   Touch
 };
