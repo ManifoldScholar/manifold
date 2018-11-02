@@ -87,6 +87,7 @@ module Api
       # @param [Symbol] error
       # @return [Symbol]
       def build_status_for(model, ok, error)
+        return ok unless action_name == "update" || action_name == "create"
         model.valid? ? ok : error
       end
 
