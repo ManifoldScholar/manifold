@@ -5,8 +5,8 @@ class ProjectCollectionSerializer < ApplicationSerializer
 
   attributes :id, :title, :slug, :sort_order, :visible, :homepage, :position, :icon,
              :number_of_projects, :featured_only, :smart, :description,
-             :description_formatted, :sort_order, :manually_sorted,
-             :projects_count, :abilities, :tag_list, :description
+             :description_formatted, :description_plaintext, :sort_order,
+             :manually_sorted, :projects_count, :abilities, :tag_list, :description
 
   has_many_paginated :collection_projects,
                      serializer: CollectionProjectSerializer do |serializer|
