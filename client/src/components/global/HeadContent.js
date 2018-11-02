@@ -73,6 +73,7 @@ export class HeadContent extends Component {
 
   buildMetaContent() {
     const meta = [];
+    meta.push({ charset: this.props.charset });
     this.addMeta(meta, "description", null, this.description);
     this.addOpenGraph(meta, "siteName", "site_name", this.defaultTitle);
     this.addOpenGraph(meta, "locale");
