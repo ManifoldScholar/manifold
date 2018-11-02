@@ -58,6 +58,9 @@ class ProjectCollection < ApplicationRecord
   # Validation
   validates :title, presence: true, uniqueness: true
   validates :sort_order, :icon, presence: true
+  validates :number_of_projects, numericality: { only_integer: true,
+                                                 greater_than_or_equal_to: 0 },
+                                allow_nil: true
 
   def project_sorting
     column, _delimiter, direction = sort_order.rpartition "_"
