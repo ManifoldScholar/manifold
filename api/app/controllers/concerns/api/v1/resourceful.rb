@@ -54,17 +54,19 @@ module Api
       # @param [Symbol] error_status
       # @param [Hash] options
       # @return [void]
-      # rubocop:disable Metrics/LineLength
+      # rubocop:disable Metrics/LineLength, Metrics/AbcSize
       def render_single_resource(model, ok_status: default_ok_status, error_status: :unprocessable_entity, **options)
-        options[:serializer]  ||= model.valid? ? model_serializer : error_serializer
+        options[:serializer] ||= model_serializer
+        if (action_name == "update" || action_name == "create") && !model.valid?
+          options[:serializer] = error_serializer
+        end
         options[:location]    ||= build_location_for model
         options[:meta]        ||= build_meta_for(model)
         options[:status]      ||= build_status_for model, ok_status, error_status
         options[:json] = model
-
         render options
       end
-      # rubocop:enable Metrics/LineLength
+      # rubocop:enable Metrics/LineLength, Metrics/AbcSize
 
       # We want to make sure all our endpoints are authorized while we are in development.
       #

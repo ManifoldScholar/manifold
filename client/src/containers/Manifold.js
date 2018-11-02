@@ -3,9 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import Helmet from "react-helmet";
-import { SignInUp, FatalError, LoadingBar } from "components/global";
-import config from "../config";
+import {
+  SignInUp,
+  FatalError,
+  LoadingBar,
+  HeadContent
+} from "components/global";
 import has from "lodash/has";
 import get from "lodash/get";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
@@ -161,18 +164,6 @@ class ManifoldContainer extends PureComponent {
     return null;
   };
 
-  headTitleProps(props) {
-    let title = config.app.head.defaultTitle;
-    if (get(props.settings, "attributes.general.headTitle")) {
-      title = get(props.settings, "attributes.general.headTitle");
-    }
-
-    return {
-      titleTemplate: `${title} | %s`,
-      defaultTitle: title
-    };
-  }
-
   renderTypekit() {
     const tkId = get(this.props.settings, "attributes.theme.typekitId");
     const tkEnabled = !!tkId;
@@ -197,7 +188,7 @@ class ManifoldContainer extends PureComponent {
         <div id="global-overlay-container" />
         {this.renderTypekit()}
         {this.props.confirm}
-        <Helmet {...config.app.head} {...this.headTitleProps(this.props)} />
+        <HeadContent />
         <LoadingBar loading={this.props.loading} />
         <ReactCSSTransitionGroup
           transitionName={"overlay-login"}

@@ -246,6 +246,7 @@ module Validation
           :installation_name,
           :default_publisher,
           :default_publisher_place,
+          :head_description,
           :social_share_message,
           :contact_email,
           :copyright,

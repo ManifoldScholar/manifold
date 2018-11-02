@@ -74,6 +74,38 @@ exports[`Backend Settings General Container renders correctly 1`] = `
             </div>
             <div
               className="form-input"
+            >
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className="has-instructions"
+                  htmlFor="textarea-1"
+                >
+                  Default Page Description
+                </label>
+                <span
+                  className="instructions"
+                >
+                  This field will be used as the page description on the home page. Defaults to 'Transforming scholarly publications into living digital works'.
+                </span>
+                <textarea
+                  aria-describedby="textarea-error-1"
+                  id="textarea-1"
+                  onChange={[Function]}
+                  placeholder="Enter page description"
+                  style={
+                    Object {
+                      "height": 100,
+                    }
+                  }
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              className="form-input"
               style={Object {}}
             >
               <label
