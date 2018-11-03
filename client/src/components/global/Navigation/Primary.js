@@ -69,13 +69,11 @@ export class NavigationPrimary extends PureComponent {
 
     return (
       <React.Fragment>
-        <div className="header-nav-wrapper">
-          <Navigation.Static
-            backendButton={backendButton}
-            {...this.props}
-            style={this.props.desktopStyle}
-          />
-        </div>
+        <Navigation.Static
+          backendButton={backendButton}
+          {...this.props}
+          style={this.props.desktopStyle}
+        />
         <Navigation.Mobile
           backendButton={backendButton}
           {...this.props}

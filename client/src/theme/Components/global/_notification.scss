@@ -164,6 +164,18 @@
     top: 80px;
   }
 
+  .header-tall & {
+    top: 60px;
+
+    @include respond($break40) {
+      top: 72px;
+    }
+
+    @include respond($break75) {
+      top: 105px;
+    }
+  }
+
   // React Animation classes
   &.updating {
     transition: transform $duration ease-out;

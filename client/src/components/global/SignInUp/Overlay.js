@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
 import { HigherOrder } from "components/global";
+import { Icon } from "components/global/SVG";
 import PasswordForgot from "./PasswordForgot";
 import Login from "./Login";
 import CreateUpdate from "./CreateUpdate";
@@ -89,8 +90,10 @@ export default class Overlay extends Component {
             <header className="overlay-header">
               <div className="container">
                 <div className="rel">
-                  <figure className="logo" aria-hidden="true">
-                    <i className="manicon manicon-manifold-logo" />
+                  <figure className="header-logo" aria-hidden="true">
+                    <i className="manicon" aria-hidden="true">
+                      <Icon.ManifoldLogo size={26} />
+                    </i>
                   </figure>
                   <button
                     onClick={this.props.hideSignInUpOverlay}

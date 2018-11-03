@@ -32,19 +32,23 @@ exports[`Backend Backend Container renders correctly 1`] = `
                       <div>
                         <header className=\\"header-app dark\\">
                           <div className=\\"header-container\\">
-                            <Link to=\\"/\\" className=\\"logo\\" replace={false}>
-                              <a className=\\"logo\\" onClick={[Function]} href=\\"/\\">
+                            <Link to=\\"/\\" className=\\"header-logo\\" replace={false}>
+                              <a className=\\"header-logo\\" onClick={[Function]} href=\\"/\\">
                                 <span className=\\"screen-reader-text\\">
                                   Return to home
                                 </span>
                                 <PressLogo aria-hidden=\\"true\\">
                                   <figure className=\\"\\">
-                                    <div>
-                                      <i className=\\"manicon manicon-manifold-logo\\" aria-hidden=\\"true\\" />
-                                      <span className=\\"screen-reader-text\\">
-                                        Manifold Logo
-                                      </span>
-                                    </div>
+                                    <i className=\\"manicon\\" aria-hidden=\\"true\\">
+                                      <Icon.ManifoldLogo size={26} fill=\\"#52e3ac\\">
+                                        <svg className=\\"manicon-svg\\" xmlns=\\"http://www.w3.org/2000/svg\\" width={26} height={26} fill=\\"#52e3ac\\" stroke={[undefined]} viewBox=\\"0 0 32 32\\" aria-hidden=\\"true\\">
+                                          <polygon points=\\"29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22\\" />
+                                        </svg>
+                                      </Icon.ManifoldLogo>
+                                    </i>
+                                    <span className=\\"screen-reader-text\\">
+                                      Manifold Logo
+                                    </span>
                                   </figure>
                                 </PressLogo>
                               </a>
@@ -52,83 +56,79 @@ exports[`Backend Backend Container renders correctly 1`] = `
                             <withRouter(Navigation.Primary) links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\">
                               <Route>
                                 <Navigation.Primary links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
-                                  <div className=\\"header-nav-wrapper\\">
-                                    <withRouter(Navigation.Static) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
-                                      <Route>
-                                        <Navigation.Static backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
-                                          <nav className=\\"text-nav show-75\\">
-                                            <div className=\\"links-wrapper\\">
-                                              <ul style={[undefined]} className=\\"links\\">
-                                                <li>
-                                                  <NavLink to=\\"/backend/dashboard\\" exact={false} target={{...}} activeClassName=\\"active\\" aria-current=\\"page\\">
-                                                    <Route path=\\"\\\\\\\\/backend\\\\\\\\/dashboard\\" exact={false} strict={[undefined]} location={[undefined]}>
-                                                      <Link to=\\"/backend/dashboard\\" className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} replace={false}>
-                                                        <a className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} onClick={[Function]} href=\\"/backend/dashboard\\">
-                                                          Dashboard
-                                                        </a>
-                                                      </Link>
-                                                    </Route>
-                                                  </NavLink>
-                                                </li>
-                                                <li>
-                                                  <NavLink to=\\"/backend/projects\\" exact={false} target={{...}} activeClassName=\\"active\\" aria-current=\\"page\\">
-                                                    <Route path=\\"\\\\\\\\/backend\\\\\\\\/projects\\" exact={false} strict={[undefined]} location={[undefined]}>
-                                                      <Link to=\\"/backend/projects\\" className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} replace={false}>
-                                                        <a className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} onClick={[Function]} href=\\"/backend/projects\\">
-                                                          Projects
-                                                        </a>
-                                                      </Link>
-                                                    </Route>
-                                                  </NavLink>
-                                                </li>
-                                                <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
-                                                  <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                                                </Connect(AuthorizeComponent)>
-                                                <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
-                                                  <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                                                </Connect(AuthorizeComponent)>
-                                              </ul>
-                                            </div>
-                                            <nav className=\\"user-links\\">
-                                              <ul style={[undefined]}>
-                                                <li>
-                                                  <Link className=\\"button-mode\\" to=\\"/\\" replace={false}>
-                                                    <a className=\\"button-mode\\" onClick={[Function]} href=\\"/\\">
-                                                      Exit Admin Mode
+                                  <withRouter(Navigation.Static) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
+                                    <Route>
+                                      <Navigation.Static backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
+                                        <nav className=\\"page-nav show-75\\">
+                                          <ul style={[undefined]} className=\\"links\\">
+                                            <li>
+                                              <NavLink to=\\"/backend/dashboard\\" exact={false} target={{...}} activeClassName=\\"active\\" aria-current=\\"page\\">
+                                                <Route path=\\"\\\\\\\\/backend\\\\\\\\/dashboard\\" exact={false} strict={[undefined]} location={[undefined]}>
+                                                  <Link to=\\"/backend/dashboard\\" className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} replace={false}>
+                                                    <a className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} onClick={[Function]} href=\\"/backend/dashboard\\">
+                                                      Dashboard
                                                     </a>
                                                   </Link>
-                                                </li>
-                                                <li>
-                                                  <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
-                                                    <button onClick={[Function]} className=\\"button-avatar\\">
+                                                </Route>
+                                              </NavLink>
+                                            </li>
+                                            <li>
+                                              <NavLink to=\\"/backend/projects\\" exact={false} target={{...}} activeClassName=\\"active\\" aria-current=\\"page\\">
+                                                <Route path=\\"\\\\\\\\/backend\\\\\\\\/projects\\" exact={false} strict={[undefined]} location={[undefined]}>
+                                                  <Link to=\\"/backend/projects\\" className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} replace={false}>
+                                                    <a className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} onClick={[Function]} href=\\"/backend/projects\\">
+                                                      Projects
+                                                    </a>
+                                                  </Link>
+                                                </Route>
+                                              </NavLink>
+                                            </li>
+                                            <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
+                                              <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                            </Connect(AuthorizeComponent)>
+                                            <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
+                                              <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                            </Connect(AuthorizeComponent)>
+                                          </ul>
+                                        </nav>
+                                        <nav className=\\"user-links show-75\\">
+                                          <ul style={[undefined]}>
+                                            <li>
+                                              <Link className=\\"button-mode\\" to=\\"/\\" replace={false}>
+                                                <a className=\\"button-mode\\" onClick={[Function]} href=\\"/\\">
+                                                  Exit Admin Mode
+                                                </a>
+                                              </Link>
+                                            </li>
+                                            <li>
+                                              <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
+                                                <button onClick={[Function]} className=\\"button-avatar\\">
+                                                  <span className=\\"screen-reader-text\\">
+                                                    Login or open user settings
+                                                  </span>
+                                                  <Avatar url={[undefined]}>
+                                                    <figure style={[undefined]} className=\\"avatar\\">
                                                       <span className=\\"screen-reader-text\\">
-                                                        Login or open user settings
+                                                        Avatar
                                                       </span>
-                                                      <Avatar url={[undefined]}>
-                                                        <figure style={[undefined]} className=\\"avatar\\">
-                                                          <span className=\\"screen-reader-text\\">
-                                                            Avatar
-                                                          </span>
-                                                          <i className=\\"manicon manicon-person\\" aria-hidden=\\"true\\" />
-                                                        </figure>
-                                                      </Avatar>
-                                                    </button>
-                                                  </UserMenuButton>
-                                                  <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: C]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
-                                                    <CSSTransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true}>
-                                                      <TransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                                                        <span />
-                                                      </TransitionGroup>
-                                                    </CSSTransitionGroup>
-                                                  </UIPanel>
-                                                </li>
-                                              </ul>
-                                            </nav>
-                                          </nav>
-                                        </Navigation.Static>
-                                      </Route>
-                                    </withRouter(Navigation.Static)>
-                                  </div>
+                                                      <i className=\\"manicon manicon-person\\" aria-hidden=\\"true\\" />
+                                                    </figure>
+                                                  </Avatar>
+                                                </button>
+                                              </UserMenuButton>
+                                              <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: C]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
+                                                <CSSTransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true}>
+                                                  <TransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                                                    <span />
+                                                  </TransitionGroup>
+                                                </CSSTransitionGroup>
+                                              </UIPanel>
+                                            </li>
+                                          </ul>
+                                        </nav>
+                                      </Navigation.Static>
+                                    </Route>
+                                  </withRouter(Navigation.Static)>
                                   <withRouter(Navigation.Mobile) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
                                     <Route>
                                       <Navigation.Mobile backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>

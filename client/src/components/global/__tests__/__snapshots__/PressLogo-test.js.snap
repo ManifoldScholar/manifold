@@ -2,7 +2,7 @@
 
 exports[`Global.PressLogo component renders correctly 1`] = `
 <figure
-  className="logo-square"
+  className="custom-logo"
 >
   <img
     alt="Publisher Logo: Click to return to the browse page"

@@ -24,7 +24,7 @@ export default class LayoutHeader extends Component {
       <HigherOrder.BlurOnLocationChange location={this.props.location}>
         <header className={"header-app dark"}>
           <div className="header-container">
-            <Link to={lh.link("frontend")} className="logo">
+            <Link to={lh.link("frontend")} className="header-logo">
               <span className="screen-reader-text">Return to home</span>
               <PressLogo aria-hidden="true" />
             </Link>

@@ -100,7 +100,7 @@ export class NavigationStatic extends PureComponent {
 
   renderUserMenu(props) {
     return (
-      <nav className="user-links">
+      <nav className="user-links show-75">
         <ul style={this.props.style}>
           {this.props.backendButton && <li>{this.props.backendButton}</li>}
           {this.renderSearch(props)}
@@ -128,8 +128,8 @@ export class NavigationStatic extends PureComponent {
 
   render() {
     return (
-      <nav className="text-nav show-75">
-        <div className="links-wrapper">
+      <React.Fragment>
+        <nav className="page-nav show-75">
           <ul style={this.props.style} className="links">
             {this.props.links.map((link, index) => {
               if (link.ability)
@@ -145,9 +145,9 @@ export class NavigationStatic extends PureComponent {
               return this.renderStaticItem(link, index);
             })}
           </ul>
-        </div>
+        </nav>
         {this.renderUserMenu(this.props)}
-      </nav>
+      </React.Fragment>
     );
   }
 }

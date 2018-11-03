@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { Icon } from "components/global/SVG";
 
 export default class PressLogo extends Component {
   static propTypes = {
@@ -11,14 +12,19 @@ export default class PressLogo extends Component {
 
   getDefaultIcon() {
     return (
-      <div>
-        <i className="manicon manicon-manifold-logo" aria-hidden="true" />
+      <React.Fragment>
+        <i className="manicon" aria-hidden="true">
+          <Icon.ManifoldLogo size={26} />
+        </i>
         <span className="screen-reader-text">{"Manifold Logo"}</span>
-      </div>
+      </React.Fragment>
     );
   }
 
   getPressImage() {
+    const className = classNames("image", {
+      "image-desktop": this.props.mobileUrl
+    });
     let style = {};
     if (this.props.styles) {
       try {
@@ -34,31 +40,37 @@ export default class PressLogo extends Component {
       <img
         src={this.props.url}
         alt="Publisher Logo: Click to return to the browse page"
-        className="image"
+        className={className}
         style={style}
       />
     );
   }
 
   getMobilePressImage() {
+    const className = classNames("image", {
+      "image-mobile": this.props.url
+    });
     return (
       <img
         src={this.props.mobileUrl}
         alt="Publisher Logo: Click to return to the browse page"
-        className="image-mobile"
+        className={className}
       />
     );
   }
 
   render() {
     const figureClass = classNames({
-      "logo-square": this.props.url
+      "custom-logo": this.props.url
     });
 
     return (
       <figure className={figureClass}>
-        {this.props.url ? this.getPressImage() : this.getDefaultIcon()}
+        {this.props.url ? this.getPressImage() : null}
         {this.props.mobileUrl ? this.getMobilePressImage() : null}
+        {!this.props.url && !this.props.mobileUrl
+          ? this.getDefaultIcon()
+          : null}
       </figure>
     );
   }
