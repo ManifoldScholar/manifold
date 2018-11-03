@@ -8,6 +8,7 @@ import EyeClosed from "./EyeClosed";
 import EyeOpen from "./EyeOpen";
 import Globe from "./Globe";
 import Lamp from "./Lamp";
+import ManifoldLogo from "./ManifoldLogo";
 import Minus from "./Minus";
 import Mug from "./Mug";
 import NewRound from "./NewRound";
@@ -36,6 +37,7 @@ export default {
   EyeOpen,
   Globe,
   Lamp,
+  ManifoldLogo,
   Minus,
   Mug,
   NewRound,

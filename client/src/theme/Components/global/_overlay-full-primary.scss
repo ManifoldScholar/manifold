@@ -53,13 +53,14 @@
     }
 
     .logo {
-      @include headerLogoPrimary;
+      @extend .header-logo;
     }
 
     // Button
     .overlay-close {
       @include buttonClose;
       position: absolute;
+      top: 0;
       right: 0;
       color: $neutral50;
     }
