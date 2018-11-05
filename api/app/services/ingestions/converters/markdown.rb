@@ -1,6 +1,7 @@
 module Ingestions
   module Converters
     class Markdown < Ingestions::Converters::AbstractConverter
+      include Concerns::ConversionHelpers
 
       def perform
         convert_to_html
@@ -12,11 +13,16 @@ module Ingestions
 
       protected
 
-      def markdown_contents
-        @markdown_contents ||= parse_document
+      def convert_to_html
+        ensure_header_ids!
+        document_parsed.to_s
       end
 
-      def convert_to_html
+      def document_parsed
+        @document_parsed ||= Nokogiri::HTML(html)
+      end
+
+      def html
         <<~HEREDOC
           <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
           <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,6 +34,10 @@ module Ingestions
             </body>
           </html>
         HEREDOC
+      end
+
+      def markdown_contents
+        @markdown_contents ||= parse_document
       end
 
       def parse_document
