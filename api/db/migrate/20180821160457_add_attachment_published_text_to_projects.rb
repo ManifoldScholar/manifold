@@ -1,5 +1,7 @@
 class AddAttachmentPublishedTextToProjects < ActiveRecord::Migration[5.0]
+  include PaperclipMigrator
+
   def change
-    add_attachment :projects, :published_text_attachment
+    paperclip_attachment :projects, :published_text_attachment
   end
 end

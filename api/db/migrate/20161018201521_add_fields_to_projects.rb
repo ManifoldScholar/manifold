@@ -1,4 +1,6 @@
 class AddFieldsToProjects < ActiveRecord::Migration[5.0]
+  include PaperclipMigrator
+
   def change
     add_column :projects, :purchase_url, :string
     add_column :projects, :purchase_price_in_cents, :integer
@@ -7,7 +9,7 @@ class AddFieldsToProjects < ActiveRecord::Migration[5.0]
     add_column :projects, :instagram_id, :string
     add_column :projects, :twitter_id, :string
     add_column :projects, :facebook_id, :string
-    add_attachment :projects, :hero
-    add_attachment :projects, :avatar
+    paperclip_attachment :projects, :hero
+    paperclip_attachment :projects, :avatar
   end
 end

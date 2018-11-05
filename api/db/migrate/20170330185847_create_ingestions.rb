@@ -1,9 +1,10 @@
 class CreateIngestions < ActiveRecord::Migration[5.0]
+  include PaperclipMigrator
+
   def change
     create_table :ingestions, id: :uuid do |t|
       t.string :state
       t.string :log, array: true
-      t.attachment :source
       t.string :strategy
       t.string :external_source_url
       t.string :ingestion_type
@@ -12,5 +13,7 @@ class CreateIngestions < ActiveRecord::Migration[5.0]
       t.uuid :project_id, foreign_key: true
       t.timestamps
     end
+
+    paperclip_attachment :ingestions, :source
   end
 end

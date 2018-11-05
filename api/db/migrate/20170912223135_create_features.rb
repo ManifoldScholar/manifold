@@ -1,4 +1,6 @@
 class CreateFeatures < ActiveRecord::Migration[5.0]
+  include PaperclipMigrator
+
   def change
     create_table :features, id: :uuid do |t|
       t.string :header
@@ -7,8 +9,6 @@ class CreateFeatures < ActiveRecord::Migration[5.0]
       t.string :link_text
       t.string :link_url
       t.string :link_target
-      t.attachment :background
-      t.attachment :foreground
       t.integer :foreground_position
       t.integer :foreground_top_padding
       t.integer :position
@@ -17,5 +17,8 @@ class CreateFeatures < ActiveRecord::Migration[5.0]
       t.uuid :creator_id, foreign_key: true
       t.timestamps
     end
+
+    paperclip_attachment :features, :background
+    paperclip_attachment :features, :foreground
   end
 end

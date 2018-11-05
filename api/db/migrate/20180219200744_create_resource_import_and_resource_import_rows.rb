@@ -1,4 +1,6 @@
 class CreateResourceImportAndResourceImportRows < ActiveRecord::Migration[5.0]
+  include PaperclipMigrator
+
   def change
 
     enable_extension "pg_trgm"
@@ -9,7 +11,6 @@ class CreateResourceImportAndResourceImportRows < ActiveRecord::Migration[5.0]
       t.string :storage_type
       t.string :storage_identifier
       t.string :source, null: false
-      t.attachment :data
       t.string :url
       t.integer :header_row, default: 1
       t.jsonb :column_map, default: {}, null: false
@@ -17,6 +18,8 @@ class CreateResourceImportAndResourceImportRows < ActiveRecord::Migration[5.0]
       t.boolean :parse_error, null: false, default: false
       t.timestamps
     end
+
+    paperclip_attachment :resource_imports, :data
 
     create_table :resource_import_rows, id: :uuid do |t|
       t.references :resource_import, type: :uuid, index: true, foreign_key: { on_delete: :cascade }
