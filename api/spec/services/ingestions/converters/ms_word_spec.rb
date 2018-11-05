@@ -8,7 +8,7 @@ RSpec.describe Ingestions::Converters::MsWord do
   end
   let(:context) { Ingestions::Context.new(ingestion) }
   let(:output) { Ingestions::Converters::MsWord.run context: context, source_path: context.rel(context.source_path) }
-  let!(:parsed) { output.result }
+  let!(:parsed) { Nokogiri::HTML output.result }
 
   describe "when ingesting doc with media assets" do
 

@@ -3,6 +3,7 @@ require "pandoc-ruby"
 module Ingestions
   module Converters
     class MsWord < Ingestions::Converters::AbstractConverter
+      include Concerns::ConversionHelpers
 
       def perform
         convert_to_html
@@ -15,15 +16,19 @@ module Ingestions
 
       def convert_to_html
         relativize_extracted_media_paths!
-        doc = parsed_html
-        doc.at("head").add_child styles
-        doc
+        insert_head_styles!
+        ensure_header_ids!
+        document_parsed.to_s
       end
 
       private
 
-      def parsed_html
-        @parsed_html ||= Nokogiri::HTML raw_html
+      def document_parsed
+        @document_parsed ||= Nokogiri::HTML raw_html
+      end
+
+      def insert_head_styles!
+        document_parsed.at("head").add_child styles
       end
 
       def raw_html
@@ -42,7 +47,7 @@ module Ingestions
       def relativize_extracted_media_paths!
         media_types = %w(img image video audio)
         xpath = media_types.map { |m| "//#{m}" }.join(" | ")
-        parsed_html.search(xpath).each do |tag|
+        document_parsed.search(xpath).each do |tag|
           tag["src"] = context.rel(tag["src"], context.source_root)
         end
       end
