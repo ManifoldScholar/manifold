@@ -87,14 +87,14 @@
   li .note {
     @include templateHead;
     display: block;
-    padding: 0 1.688em 1.75em 88px;
+    padding: .5em 1.688em 1.75em 26px;
     font-size: 16px;
     line-height: 1.5;
     color: $neutral50;
     text-decoration: underline;
 
     @include respond($break60) {
-      padding-left: 92px;
+      padding-left: 35px;
     }
 
 
