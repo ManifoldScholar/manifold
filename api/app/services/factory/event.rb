@@ -5,6 +5,7 @@ module Factory
       @settings = Settings.instance
     end
 
+    # rubocop:disable Metrics/MethodLength
     def create(event_type, subject_id: nil, subject_type: nil, subject: nil)
       ApplicationRecord.transaction do
         subject = resolve_subject(subject_id, subject_type, subject)
@@ -25,6 +26,7 @@ module Factory
         event
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
