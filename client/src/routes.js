@@ -622,14 +622,12 @@ export default () => {
               exact: true,
               component: Backend.Pages.List,
               path: "/backend/records/pages",
-              exact: true,
               helper: () => `/backend/records/pages`
             },
             {
               name: "backendRecordsFeatures",
               exact: true,
               component: Backend.Features.List,
-              exact: true,
               path: "/backend/records/features",
               helper: () => `/backend/records/features`
             }

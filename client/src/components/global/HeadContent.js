@@ -5,7 +5,7 @@ import config from "../../config";
 import HigherOrder from "containers/global/HigherOrder";
 import get from "lodash/get";
 
-export class HeadContent extends Component {
+export class HeadContentComponent extends Component {
   static propTypes = {
     title: PropTypes.string,
     image: PropTypes.string,
@@ -13,6 +13,7 @@ export class HeadContent extends Component {
     imageWidth: PropTypes.string,
     imageHeight: PropTypes.string,
     locale: PropTypes.string,
+    charset: PropTypes.string,
     twitterCard: PropTypes.string,
     twitterSite: PropTypes.string,
     description: PropTypes.string,
@@ -106,4 +107,4 @@ export class HeadContent extends Component {
   }
 }
 
-export default HigherOrder.withSettings(HeadContent);
+export default HigherOrder.withSettings(HeadContentComponent);
