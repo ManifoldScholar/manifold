@@ -68,8 +68,7 @@ export default class ReturnMenuBody extends PureComponent {
                   className="note"
                   rel="noopener noreferrer"
                 >
-                  Learn More About <br />
-                  <span>Manifold</span>
+                  Learn More About <span>Manifold</span>
                 </a>
               ) : null}
             </li>
