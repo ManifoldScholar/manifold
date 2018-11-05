@@ -13,19 +13,15 @@ import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
 
 const { request } = entityStoreActions;
-const page = 1;
+const defaultPage = 1;
 const perPage = 20;
 
 export class ProjectsContainer extends Component {
   static fetchData = (getState, dispatch, location) => {
-    const query = queryString.parse(location.search);
-    const filters = {
-      order: query.order,
-      featured: query.featured,
-      subject: query.subject
-    };
+    const search = queryString.parse(location.search);
+    const { page, ...filters } = search;
     const pagination = {
-      number: query.page || page,
+      number: page || defaultPage,
       size: perPage
     };
 
@@ -63,6 +59,7 @@ export class ProjectsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState(queryString.parse(props.location.search));
+    console.log(this.state, "state");
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
@@ -81,7 +78,7 @@ export class ProjectsContainer extends Component {
     return {
       filter: Object.assign({}, filter),
       pagination: {
-        number: init.page || page,
+        number: init.page || defaultPage,
         size: perPage
       }
     };
