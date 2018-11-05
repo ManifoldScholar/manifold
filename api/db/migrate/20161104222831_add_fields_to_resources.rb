@@ -1,4 +1,6 @@
 class AddFieldsToResources < ActiveRecord::Migration[5.0]
+  include PaperclipMigrator
+
   def change
     rename_column :resources, :name, :title
     rename_column :resources, :type, :kind
@@ -24,8 +26,8 @@ class AddFieldsToResources < ActiveRecord::Migration[5.0]
     add_column :resources, :transcript_checksum, :string
     add_column :resources, :translation_checksum, :string
     add_column :resources, :attachment_checksum, :string
-    add_attachment :resources, :high_res
-    add_attachment :resources, :transcript
-    add_attachment :resources, :translation
+    paperclip_attachment :resources, :high_res
+    paperclip_attachment :resources, :transcript
+    paperclip_attachment :resources, :translation
   end
 end

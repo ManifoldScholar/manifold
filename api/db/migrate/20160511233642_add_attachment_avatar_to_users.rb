@@ -1,11 +1,7 @@
 class AddAttachmentAvatarToUsers < ActiveRecord::Migration
-  def self.up
-    change_table :users do |t|
-      t.attachment :avatar
-    end
-  end
+  include PaperclipMigrator
 
-  def self.down
-    remove_attachment :users, :avatar
+  def change
+    paperclip_attachment :users, :avatar
   end
 end

@@ -80,14 +80,14 @@ ActiveRecord::Schema.define(version: 20181025181234) do
     t.string   "title"
     t.text     "description"
     t.uuid     "project_id"
-    t.string   "thumbnail_file_name_deprecated"
-    t.string   "thumbnail_content_type_deprecated"
-    t.integer  "thumbnail_file_size_deprecated"
-    t.datetime "thumbnail_updated_at_deprecated"
     t.string   "thumbnail_checksum"
     t.string   "fingerprint"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.string   "thumbnail_file_name_deprecated"
+    t.string   "thumbnail_content_type_deprecated"
+    t.integer  "thumbnail_file_size_deprecated"
+    t.datetime "thumbnail_updated_at_deprecated"
     t.string   "slug"
     t.integer  "collection_resources_count",        default: 0
     t.integer  "events_count",                      default: 0
@@ -155,6 +155,12 @@ ActiveRecord::Schema.define(version: 20181025181234) do
     t.string   "link_text"
     t.string   "link_url"
     t.string   "link_target"
+    t.integer  "position"
+    t.text     "style",                              default: "dark"
+    t.boolean  "hidden",                             default: false
+    t.uuid     "creator_id"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "background_file_name_deprecated"
     t.string   "background_content_type_deprecated"
     t.integer  "background_file_size_deprecated"
@@ -163,12 +169,6 @@ ActiveRecord::Schema.define(version: 20181025181234) do
     t.string   "foreground_content_type_deprecated"
     t.integer  "foreground_file_size_deprecated"
     t.datetime "foreground_updated_at_deprecated"
-    t.integer  "position"
-    t.text     "style",                              default: "dark"
-    t.boolean  "hidden",                             default: false
-    t.uuid     "creator_id"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
     t.string   "background_color"
     t.string   "foreground_color"
     t.string   "header_color"
@@ -264,10 +264,6 @@ ActiveRecord::Schema.define(version: 20181025181234) do
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "state"
     t.string   "log",                                           array: true
-    t.string   "source_file_name"
-    t.string   "source_content_type"
-    t.integer  "source_file_size"
-    t.datetime "source_updated_at"
     t.string   "strategy"
     t.string   "external_source_url"
     t.string   "ingestion_type"
@@ -276,6 +272,10 @@ ActiveRecord::Schema.define(version: 20181025181234) do
     t.uuid     "project_id",                       null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
     t.jsonb    "source_data",         default: {}, null: false
     t.index ["creator_id"], name: "index_ingestions_on_creator_id", using: :btree
     t.index ["project_id"], name: "index_ingestions_on_project_id", using: :btree
@@ -460,10 +460,6 @@ ActiveRecord::Schema.define(version: 20181025181234) do
     t.string   "storage_type"
     t.string   "storage_identifier"
     t.string   "source",                                       null: false
-    t.string   "data_file_name_deprecated"
-    t.string   "data_content_type_deprecated"
-    t.integer  "data_file_size_deprecated"
-    t.datetime "data_updated_at_deprecated"
     t.string   "url"
     t.integer  "header_row",                   default: 1
     t.jsonb    "column_map",                   default: {},    null: false
@@ -471,6 +467,10 @@ ActiveRecord::Schema.define(version: 20181025181234) do
     t.boolean  "parse_error",                  default: false, null: false
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+    t.string   "data_file_name_deprecated"
+    t.string   "data_content_type_deprecated"
+    t.integer  "data_file_size_deprecated"
+    t.datetime "data_updated_at_deprecated"
     t.jsonb    "data_data",                    default: {}
     t.index ["creator_id"], name: "index_resource_imports_on_creator_id", using: :btree
     t.index ["project_id"], name: "index_resource_imports_on_project_id", using: :btree
