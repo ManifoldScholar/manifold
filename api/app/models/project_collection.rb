@@ -41,8 +41,8 @@ class ProjectCollection < ApplicationRecord
   has_many :subjects, through: :project_collection_subjects
 
   # Scopes
-  scope :by_visible, ->(visible) { where(visible: visible) if visible.present? }
-  scope :by_show_on_homepage, ->(show) { where(homepage: show) if show.present? }
+  scope :by_visible, ->(visible = true) { where(visible: visible) if visible.present? }
+  scope :by_show_on_homepage, ->(show = true) { where(homepage: show) if show.present? }
   scope :with_projects, lambda { |presence|
     where(id: CollectionProject.select(:project_collection_id)) if presence.present?
   }

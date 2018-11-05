@@ -71,6 +71,13 @@ class Settings < ApplicationRecord
     Settings::UpdateOauthProviders.run!
   end
 
+  def calculated
+    {
+      home_page_show_projects:
+        ProjectCollection.by_show_on_homepage.by_visible.count.zero?
+    }
+  end
+
   def ensure_defaults
     DEFAULTS.each do |section_key, section_defaults|
       section = send(section_key)
