@@ -292,7 +292,7 @@ $readerContainerWidths: (790px, 680px, 500px);
     @include inputLabelPrimary;
   }
 
-  input[type='text'], input[type='password'] {
+  input[type='text'], input[type='password'], input[type='email'] {
     @include inputPrimary;
   }
 

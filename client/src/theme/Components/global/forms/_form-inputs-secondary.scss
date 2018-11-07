@@ -106,7 +106,7 @@
       }
     }
 
-    input[type='text'], input[type='password'], input[type='number'] {
+    input[type='text'], input[type='email'], input[type='password'], input[type='number'] {
       @include formInputSecondary;
       transition: border-color $duration $timing;
 
