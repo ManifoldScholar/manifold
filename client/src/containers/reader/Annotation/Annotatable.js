@@ -246,7 +246,6 @@ class Annotatable extends Component {
 
   updateSelection = event => {
     event.persist();
-    // ch.notice("Annotation: updating selection", "pencil2");
     this.updateStateSelection(
       this.validateSelection(window.getSelection()),
       event
