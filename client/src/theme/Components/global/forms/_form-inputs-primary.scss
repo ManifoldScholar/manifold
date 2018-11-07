@@ -42,7 +42,7 @@
 
   }
 
-  input[type='text'], input[type='password'] {
+  input[type='text'], input[type='email'], input[type='password'] {
     @include formInputPrimary;
     width: 100%;
     // Explicit height so that elements can line up

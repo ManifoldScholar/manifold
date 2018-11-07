@@ -79,7 +79,7 @@ export default class Login extends Component {
             <div className="form-input form-error">
               <label htmlFor="login-email">Email</label>
               <input
-                type="text"
+                type="email"
                 name="email"
                 value={this.state.email}
                 onChange={this.updateInput}
