@@ -171,9 +171,13 @@ module Ingestions
         FileUtils.mkdir_p(build_root_path) unless File.exist?(build_root_path)
       end
 
+      # rubocop:disable Metrics/AbcSize
       def extract(path = source_path, extract_path = root_path)
+        reject = %w(. .. _ __ ~)
         Zip::File.open(path) do |zip_file|
           zip_file.each do |f|
+            next if File.dirname(f.name).start_with?(*reject)
+            next if File.basename(f.name).start_with?(*reject)
             fpath = File.join(extract_path, f.name)
             FileUtils.mkdir_p(File.dirname(fpath))
             zip_file.extract(f, fpath) unless File.exist?(fpath)
@@ -181,6 +185,7 @@ module Ingestions
         end
         logger.debug("Unzipped archive to temporary directory: #{extract_path}")
       end
+      # rubocop:enable Metrics/AbcSize
 
       def source_root_dir?(path = source_root_path)
         entities = top_level_entities(path)

@@ -7,13 +7,13 @@ RSpec.describe Ingestions::Concerns::FileOperations do
   let(:ingestion) { FactoryBot.create(:ingestion) }
 
   subject do
-    path = Rails.root.join("spec","data","ingestion", "epubs","minimal-v3")
+    path = Rails.root.join("spec","data","ingestion", "epubs", "minimal-v3")
     allow(ingestion).to receive(:ingestion_source).and_return path
     create_context(ingestion)
   end
 
   after(:each) do
-    subject.teardown
+    subject.teardown if subject.respond_to? :teardown
   end
 
   it("should open a relative path in a source package") do
@@ -70,5 +70,27 @@ RSpec.describe Ingestions::Concerns::FileOperations do
 
   it("returns all the files in the ingestion") do
     expect(subject.sources).to be_a Array
+  end
+
+  context "when poorly named sources" do
+    let!(:subject) do
+      path = Rails.root.join("spec","data","ingestion", "manifest", "badly_named_sources.zip")
+      allow(ingestion).to receive(:ingestion_source).and_return path
+    end
+    let(:context) { create_context(ingestion) }
+
+    it "handles file names with spaces and quotes" do
+      expect(context.sources).to match_array ["source/badly_named_sources/2 doc with spaces.docx",
+                                              "source/badly_named_sources/3 markdown with spaces.md",
+                                              "source/badly_named_sources/4 latex with spaces.tex",
+                                              "source/badly_named_sources/5 “curly”_quotes.docx",
+                                              "source/badly_named_sources/manifest.yml",
+                                              "source/badly_named_sources/1_good_file.docx"]
+    end
+
+    it "does not copy/extract tmp, hidden, or extraneous files" do
+      file_names = context.sources.map { |f| File.basename f }
+      expect(file_names).to_not include(/^\..*/, /^\.\..*/, /^_.*/, /^__.*/, /^~.*/)
+    end
   end
 end
