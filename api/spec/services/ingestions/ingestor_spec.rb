@@ -109,6 +109,20 @@ RSpec.describe Ingestions::Ingestor do
 
     end
 
+    context "when source has extraneous files and complex paths" do
+      let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "badly_named_sources.zip") }
+      let(:ingestion) do
+        ingestion = FactoryBot.create(:ingestion, text: nil)
+        allow(ingestion).to receive(:ingestion_source).and_return(path)
+        ingestion
+      end
+      let!(:text) { Ingestions::Ingestor.run ingestion: ingestion }
+
+      it "returns a valid text" do
+        expect(text.result.valid?).to eq true
+      end
+    end
+
 
   end
 end

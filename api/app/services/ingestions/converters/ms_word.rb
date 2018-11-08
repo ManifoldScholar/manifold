@@ -1,4 +1,5 @@
 require "pandoc-ruby"
+require "shellwords"
 
 module Ingestions
   module Converters
@@ -31,8 +32,12 @@ module Ingestions
         document_parsed.at("head").add_child styles
       end
 
+      def escaped_path
+        Shellwords.escape context.abs(source_path)
+      end
+
       def raw_html
-        @raw_html ||= PandocRuby.convert([context.abs(source_path)],
+        @raw_html ||= PandocRuby.convert([escaped_path],
                                          :s,
                                          from: :docx,
                                          to: :html,
