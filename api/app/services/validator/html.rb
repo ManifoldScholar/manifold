@@ -31,7 +31,7 @@ module Validator
     end
 
     def validate_tags(fragment)
-      tag_validator = Tag.new
+      tag_validator = Validator::Tag.new
       fragment.traverse do |node|
         tag_validator.validate_node!(node)
       end

@@ -372,6 +372,10 @@ module Validation
     params.permit(filter: [:keyword, :typeahead, :type])[:filter]
   end
 
+  def tag_filter_params
+    params.permit(filter: [:keyword, :typeahead, :tag_scope])[:filter]
+  end
+
   def search_params
     params[:facets] = params[:facets].values if params.dig(:facets).respond_to? :values
     params.permit(
