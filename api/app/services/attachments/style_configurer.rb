@@ -16,8 +16,13 @@ module Attachments
 
     def style_configuration
       return {} if attachment_options[:no_styles]
+      return model.manifold_favicon_styles if favicon?
       return model.manifold_attachment_alpha_styles if alpha_channel?
       model.manifold_attachment_image_styles
+    end
+
+    def favicon?
+      attachment_options[:type] == :favicon
     end
 
     def alpha_channel?

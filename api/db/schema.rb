@@ -595,6 +595,7 @@ ActiveRecord::Schema.define(version: 20181113223412) do
     t.jsonb    "press_logo_data",                           default: {}
     t.jsonb    "press_logo_footer_data",                    default: {}
     t.jsonb    "press_logo_mobile_data",                    default: {}
+    t.jsonb    "favicon_data",                              default: {}
     t.index ["singleton_guard"], name: "index_settings_on_singleton_guard", unique: true, using: :btree
   end
 

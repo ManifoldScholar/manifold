@@ -9,6 +9,7 @@ import isString from "lodash/isString";
 import isArray from "lodash/isArray";
 import endsWith from "lodash/endsWith";
 import startsWith from "lodash/startsWith";
+import get from "lodash/get";
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -26,6 +27,12 @@ export default class Html extends Component {
     store: PropTypes.object,
     disableClientSideRender: PropTypes.bool
   };
+
+  get settings() {
+    const state = this.props.store.getState();
+    if (!state) return null;
+    return get(state, "entityStore.entities.settings.0");
+  }
 
   reduceAssets(ext) {
     const test = asset => {
@@ -84,6 +91,40 @@ export default class Html extends Component {
     });
   };
 
+  favicons = () => {
+    const defaultFavicon = (
+      <link rel="shortcut icon" href="/favicon.ico?client=true" />
+    );
+    const settings = this.settings;
+    if (!settings) return defaultFavicon;
+
+    const favicons = settings.attributes.faviconStyles;
+    if (!favicons) return defaultFavicon;
+
+    return (
+      <React.Fragment>
+        <link
+          rel="shortcut icon"
+          type="image/png"
+          sizes="16x16"
+          href={favicons.small}
+        />
+        <link
+          rel="shortcut icon"
+          type="image/png"
+          sizes="32x32"
+          href={favicons.medium}
+        />
+        <link
+          rel="shortcut icon"
+          type="image/png"
+          sizes="96x96"
+          href={favicons.large}
+        />
+      </React.Fragment>
+    );
+  };
+
   render() {
     const { component, store, disableClientSideRender } = this.props;
     const content = component ? ReactDOM.renderToString(component) : null;
@@ -107,8 +148,8 @@ export default class Html extends Component {
           {helmet.meta.toComponent()}
 
           <script src="/browser.config.js" charSet="UTF-8" />
-          <link rel="shortcut icon" href="/favicon.ico?client=true" />
 
+          {this.favicons()}
           {this.stylesheets()}
         </head>
         <body className={bodyClass}>

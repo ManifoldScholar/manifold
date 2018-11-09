@@ -44,6 +44,7 @@ class Settings < ApplicationRecord
   manifold_has_attached_file :press_logo, :image
   manifold_has_attached_file :press_logo_footer, :image
   manifold_has_attached_file :press_logo_mobile, :image
+  manifold_has_attached_file :favicon, :favicon
 
   # Callbacks
   after_update :update_oauth_providers!
