@@ -80,10 +80,6 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
           <div
             className="input"
           >
-            <i
-              aria-hidden="true"
-              className="manicon manicon-plus"
-            />
             <input
               aria-describedby={null}
               aria-label="Add an Author"
@@ -98,12 +94,11 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
               value=""
             />
             <button
-              className="submit"
+              aria-hidden="true"
+              className="manicon manicon-plus"
               onClick={[Function]}
               type="button"
-            >
-              Create New
-            </button>
+            />
           </div>
           <nav
             className="predictive-list"
@@ -188,10 +183,6 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
           <div
             className="input"
           >
-            <i
-              aria-hidden="true"
-              className="manicon manicon-plus"
-            />
             <input
               aria-describedby={null}
               aria-label="Add a Contributor"
@@ -206,12 +197,11 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
               value=""
             />
             <button
-              className="submit"
+              aria-hidden="true"
+              className="manicon manicon-plus"
               onClick={[Function]}
               type="button"
-            >
-              Create New
-            </button>
+            />
           </div>
           <nav
             className="predictive-list"
