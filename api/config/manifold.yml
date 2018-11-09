@@ -198,6 +198,19 @@ common: &1
           - jpeg
           - png
           - svg
+      :favicon:
+        :allowed_mime:
+        - image/jpeg
+        - image/jpg
+        - image/gif
+        - image/png
+        - image/svg+xml
+        :allowed_ext:
+        - gif
+        - jpg
+        - jpeg
+        - png
+        - svg
       :video:
         :allowed_mime:
           - video/x-flv

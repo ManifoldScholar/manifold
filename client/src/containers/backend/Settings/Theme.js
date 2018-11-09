@@ -57,13 +57,20 @@ export class SettingsThemeContainer extends PureComponent {
                 instructions="This header logo will be used on mobile devices. We strongly recommend using a square logo here."
               />
               <Form.Upload
-                wide
                 accepts="images"
                 label="Press Footer Logo"
                 readFrom="attributes[pressLogoFooterStyles][small]"
                 name="attributes[pressLogoFooter]"
                 remove="attributes[removePressLogoFooter]"
                 instructions="The footer logo appears in the footer. The logo dimensions will be capped at 325px width and 200px height."
+              />
+              <Form.Upload
+                accepts="images"
+                label="Favicon"
+                readFrom="attributes[faviconStyles][original]"
+                name="attributes[favicon]"
+                remove="attributes[removeFavicon]"
+                instructions="The favicon will appear in the browser tab next to the page title.  The favicon will be cropped to a square, thus we strongly recommend using a square image here."
               />
               <Form.TextInput
                 label="Logo Styles"

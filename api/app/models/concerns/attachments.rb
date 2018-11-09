@@ -77,6 +77,30 @@ module Attachments
     }
   }.freeze
 
+  FAVICON_STYLES = {
+    small: {
+      convert: "png",
+      background: "none",
+      gravity: "north",
+      thumbnail: "16x16^",
+      extent: "16x16"
+    },
+    medium: {
+      convert: "png",
+      background: "none",
+      gravity: "north",
+      thumbnail: "32x32^",
+      extent: "32x32"
+    },
+    large: {
+      convert: "png",
+      background: "none",
+      gravity: "north",
+      thumbnail: "96x96^",
+      extent: "96x96"
+    }
+  }.freeze
+
   # rubocop:disable Metrics/BlockLength
   class_methods do
     # Sets up paperclip attachment configuration for `field`. The `type` argument
@@ -116,6 +140,15 @@ module Attachments
           BASE_STYLES.transform_values do |base_style|
             base_style.merge(convert: "png")
           end
+        end
+
+        def manifold_favicon_styles
+          return FAVICON_STYLES
+        end
+
+        def style_keys
+          return FAVICON_STYLES.keys if :#{type} == :favicon
+          BASE_STYLES.keys
         end
 
         def #{field}_versions?
@@ -161,7 +194,7 @@ module Attachments
 
         def #{field}_meta
           return {} unless #{field}?
-          versions = BASE_STYLES.keys.map do |version|
+          versions = style_keys.map do |version|
             if #{field}_data&.key? version.to_s
               value = { width: #{field}[version].width, height: #{field}[version].height }
             else 
@@ -176,7 +209,7 @@ module Attachments
   
         def #{field}_styles
           original = #{field}_original&.url
-          styles = BASE_STYLES.keys.map do |style|
+          styles = style_keys.map do |style|
             if #{field}_data&.key? style.to_s
               value = #{field}[style].url
             else 

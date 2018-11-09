@@ -3,7 +3,8 @@ class SettingsSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :general, :theme, :integrations, :secrets, :email, :calculated,
-             :press_logo_styles, :press_logo_footer_styles, :press_logo_mobile_styles
+             :press_logo_styles, :press_logo_footer_styles, :press_logo_mobile_styles,
+             :favicon_styles
 
   attribute :oauth
 
