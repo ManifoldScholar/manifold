@@ -32,3 +32,4 @@ export resourceImportsAPI from "./resources/resourceImports";
 export contactsAPI from "./resources/contacts";
 export notificationPreferencesAPI from "./resources/notificationPreferences";
 export projectCollectionsAPI from "./resources/projectCollections";
+export tagsAPI from "./resources/tags";

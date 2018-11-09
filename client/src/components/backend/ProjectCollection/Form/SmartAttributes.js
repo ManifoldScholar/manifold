@@ -42,6 +42,7 @@ export default class SmartAttributes extends Component {
                 name="attributes[tagList]"
                 placeholder="Add a Tag"
                 label="Tags"
+                tagScope="Project"
               />
             </React.Fragment>
           );

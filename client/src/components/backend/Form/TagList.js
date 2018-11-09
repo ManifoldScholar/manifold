@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
 import { Form as GlobalForm } from "components/global";
+import { Form } from "containers/backend";
 import List from "./HasMany/List";
 import classnames from "classnames";
 import isString from "lodash/isString";
 import uniqueId from "lodash/uniqueId";
 import Instructions from "./Instructions";
+import { tagsAPI } from "api";
 
 class FormTagList extends Component {
   static displayName = "Form.TagList";
@@ -22,6 +24,7 @@ class FormTagList extends Component {
     id: PropTypes.string,
     errors: PropTypes.array,
     name: PropTypes.string,
+    tagScope: PropTypes.string,
     idForError: PropTypes.string
   };
 
@@ -41,34 +44,35 @@ class FormTagList extends Component {
     }
   }
 
+  get fetchOptions() {
+    const options = {};
+    if (this.props.tagScope) options.kind = this.props.tagScope;
+
+    return options;
+  }
+
   arrayEntities(value) {
     if (!value) return [];
     return isString(value) ? value.split(",").map(tag => tag.trim()) : value;
   }
 
-  handleKeyPress = event => {
-    if (event.charCode !== 13) return null;
-    event.preventDefault();
-
-    this.handleAdd();
-  };
-
-  handleAdd = () => {
-    if (!this.state.value) return null;
+  handleAdd = value => {
+    if (!value) return null;
     const entities = this.arrayEntities(this.props.value);
-    entities.push(this.state.value);
+    const name = isString(value) ? value : value.attributes.name;
+
+    if (entities.find(entity => entity === name)) return null;
+    entities.push(name);
 
     this.props.set(entities.join(","));
-    this.setState({ value: "" });
-  };
-
-  handleInputChange = event => {
-    event.preventDefault();
-    this.setState({ value: event.target.value });
   };
 
   handleChange = tags => {
     this.props.set(tags.join(","));
+  };
+
+  tagLabel = tag => {
+    return tag.attributes.name;
   };
 
   renderList(value) {
@@ -109,27 +113,15 @@ class FormTagList extends Component {
         <label htmlFor={id} className={labelClass}>
           {this.props.label}
         </label>
-        <div className="input-predictive">
-          <div className="input">
-            <i
-              className="manicon manicon-plus"
-              aria-hidden="true"
-              onClick={this.handleAdd}
-            />
-            <input
-              ref={input => {
-                this.inputElement = input;
-              }}
-              id={id}
-              type="text"
-              placeholder={this.props.placeholder}
-              onChange={this.handleInputChange}
-              onKeyPress={this.handleKeyPress}
-              value={this.state.value}
-              aria-describedby={errorId}
-            />
-          </div>
-        </div>
+        <Form.PredictiveInput
+          className="input-predictive"
+          placeholder="Enter a Tag"
+          fetch={tagsAPI.index}
+          fetchOptions={this.fetchOptions}
+          onSelect={this.handleAdd}
+          onNew={this.handleAdd}
+          label={this.tagLabel}
+        />
         <Instructions instructions={this.props.instructions} />
         <div className="has-many-list">{this.renderList(this.props.value)}</div>
       </GlobalForm.Errorable>
