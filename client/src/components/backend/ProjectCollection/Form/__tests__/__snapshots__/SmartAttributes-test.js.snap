@@ -138,18 +138,33 @@ Array [
         <i
           aria-hidden="true"
           className="manicon manicon-plus"
-          onClick={[Function]}
         />
         <input
-          aria-describedby="attributes[tagList]-tag-list-3"
-          id="attributes[tagList]-tag-list-3"
+          aria-describedby={null}
+          aria-label="Enter a Tag"
+          className="text-input"
+          onBlur={[Function]}
           onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
           onKeyPress={[Function]}
-          placeholder="Add a Tag"
+          placeholder="Enter a Tag"
           type="text"
           value=""
         />
+        <button
+          className="submit"
+          onClick={[Function]}
+          type="button"
+        >
+          Create New
+        </button>
       </div>
+      <nav
+        className="predictive-list"
+      >
+        <ul />
+      </nav>
     </div>
     <div
       className="has-many-list"

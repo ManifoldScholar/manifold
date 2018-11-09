@@ -20,18 +20,33 @@ exports[`Backend.Form.TagList component renders correctly 1`] = `
       <i
         aria-hidden="true"
         className="manicon manicon-plus"
-        onClick={[Function]}
       />
       <input
-        aria-describedby="attributes[tags]-tag-list-3"
-        id="attributes[tags]-tag-list-3"
+        aria-describedby={null}
+        aria-label="Enter a Tag"
+        className="text-input"
+        onBlur={[Function]}
         onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
         onKeyPress={[Function]}
-        placeholder={undefined}
+        placeholder="Enter a Tag"
         type="text"
         value=""
       />
+      <button
+        className="submit"
+        onClick={[Function]}
+        type="button"
+      >
+        Create New
+      </button>
     </div>
+    <nav
+      className="predictive-list"
+    >
+      <ul />
+    </nav>
   </div>
   <div
     className="has-many-list"
