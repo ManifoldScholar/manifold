@@ -19,10 +19,6 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
       <div
         className="input"
       >
-        <i
-          aria-hidden="true"
-          className="manicon manicon-plus"
-        />
         <input
           aria-describedby={null}
           aria-label="Add a Subject"
@@ -37,12 +33,11 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
           value=""
         />
         <button
-          className="submit"
+          aria-hidden="true"
+          className="manicon manicon-plus"
           onClick={[Function]}
           type="button"
-        >
-          Create New
-        </button>
+        />
       </div>
       <nav
         className="predictive-list"

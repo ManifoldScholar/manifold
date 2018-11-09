@@ -172,10 +172,6 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           <div
             className="input"
           >
-            <i
-              aria-hidden="true"
-              className="manicon manicon-plus"
-            />
             <input
               aria-describedby={null}
               aria-label="Enter a Tag"
@@ -190,12 +186,11 @@ exports[`Backend Resource General Container renders correctly 1`] = `
               value=""
             />
             <button
-              className="submit"
+              aria-hidden="true"
+              className="manicon manicon-plus"
               onClick={[Function]}
               type="button"
-            >
-              Create New
-            </button>
+            />
           </div>
           <nav
             className="predictive-list"

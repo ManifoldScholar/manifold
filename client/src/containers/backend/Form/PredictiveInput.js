@@ -236,7 +236,6 @@ class PredictiveInput extends PureComponent {
     return (
       <div className={classes}>
         <div className="input">
-          <i className="manicon manicon-plus" aria-hidden="true" />
           <input
             ref={input => {
               this.inputElement = input;
@@ -254,9 +253,12 @@ class PredictiveInput extends PureComponent {
             aria-describedby={this.idForError ? this.idForError : null}
           />
           {this.props.onNew ? (
-            <button type="button" className="submit" onClick={this.handleNew}>
-              {"Create New"}
-            </button>
+            <button
+              type="button"
+              className="manicon manicon-plus"
+              aria-hidden="true"
+              onClick={this.handleNew}
+            />
           ) : null}
         </div>
         <nav className="predictive-list">
