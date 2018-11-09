@@ -113,7 +113,12 @@ class Ingestion < ApplicationRecord
     )
     IngestionChannel.broadcast_to self, type: "entity", payload: serialization
 
-    outcome = Ingestions::Ingestor.run ingestion: self
+    begin
+      outcome = Ingestions::Ingestor.run ingestion: self
+    rescue StandardError => e
+      return handle_ingestion_exception(e)
+    end
+
     if outcome.valid?
       self.text = outcome.result
       info("\nIngestion Complete.")
@@ -129,12 +134,31 @@ class Ingestion < ApplicationRecord
 
   def handle_ingestion_exception(errors)
     error("Processing failed.\n")
+
     if Rails.env.development?
-      errors.full_messages.each do |e|
-        error(e)
+      if errors.respond_to?(:full_messages)
+        output_errors(errors)
+      else
+        compose_and_output_backtrace(errors)
       end
     end
+
     processing_failure
+  end
+
+  def compose_and_output_backtrace(errors)
+    output = errors.message
+    Rails.backtrace_cleaner.clean(errors.backtrace).each do |line|
+      output += "\n#{line}"
+    end
+
+    error(output)
+  end
+
+  def output_errors(errors)
+    errors.full_messages.each do |e|
+      error(e)
+    end
   end
 
 end
