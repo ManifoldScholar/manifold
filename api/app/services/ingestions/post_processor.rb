@@ -10,6 +10,7 @@ module Ingestions
       validate_stylesheets
       set_start_section
       transform_toc
+      set_text_cover
 
       text
     end
@@ -23,6 +24,10 @@ module Ingestions
     def transform_toc
       info "services.ingestions.post_processor.log.transform_toc_structure"
       compose PostProcessors::TOC
+    end
+
+    def set_text_cover
+      compose PostProcessors::SetTextCover
     end
 
     def transform_text_sections
