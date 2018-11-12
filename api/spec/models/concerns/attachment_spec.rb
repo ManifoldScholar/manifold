@@ -43,9 +43,9 @@ RSpec.describe Attachments do
   end
 
   it "builds a hash of configuration options on model" do
-    expect(AttachableClass.attachment_options).to eq({ :attached => { :type=>:image,
-                                                                      :no_styles=>false,
-                                                                      :validate_content_type=>true } })
+    expect(instance.attached_options).to eq({ :type=>:image,
+                                              :no_styles=>false,
+                                              :validate_content_type=>true })
   end
 
   it "enqueues a processing job" do
