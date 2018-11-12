@@ -1,8 +1,8 @@
 # Connects texts to resources that were sources for text sections during ingestion
 class IngestionSource < ApplicationRecord
 
-  # Concerns
-  include Attachments
+  # Attachments
+  include ResourceUploader::Attachment.new(:attachment)
 
   # Authorization
   include Authority::Abilities
@@ -30,9 +30,6 @@ class IngestionSource < ApplicationRecord
   # Validations
   validates :source_identifier, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }
-
-  # Attachments
-  manifold_has_attached_file :attachment, :resource, no_styles: true
 
   def to_s
     "ingestion source #{id}"
