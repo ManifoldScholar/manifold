@@ -20,6 +20,7 @@ class Text < ApplicationRecord
   include TrackedCreator
   include Metadata
   extend FriendlyId
+  include Attachments
 
   # Magic
   with_metadata %w(
@@ -84,6 +85,9 @@ class Text < ApplicationRecord
   # Validation
   validates :spine,
             presence: true, unless: proc { |x| x.spine.is_a?(Array) && x.spine.empty? }
+
+  # Attachments
+  manifold_has_attached_file :cover, :image, no_styles: true
 
   # Callbacks
   after_commit :trigger_text_added_event, on: [:create, :update]
@@ -179,16 +183,6 @@ class Text < ApplicationRecord
     map
   end
   memoize :source_path_map
-
-  def cover
-    ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
-  end
-
-  def cover_styles
-    cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
-    return nil unless cover_source
-    cover_source&.attachment_styles
-  end
 
   def toc_section
     text_sections.find_by(kind: TextSection::KIND_NAVIGATION)
