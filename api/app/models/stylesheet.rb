@@ -1,3 +1,5 @@
+require "cssbeautify"
+
 # A stylesheet
 class Stylesheet < ApplicationRecord
 
@@ -22,8 +24,11 @@ class Stylesheet < ApplicationRecord
   # Validations
   validates :name, presence: true
 
+  # Skip changing the raw_styles attribute to preserve hashed_content
+  attr_accessor :skip_formatting
+
   # AR Callbacks
-  before_save :revalidate, :set_hashed_content, if: :raw_styles_changed?
+  before_save :beautify_raw, :revalidate, :set_hashed_content, if: :raw_styles_changed?
 
   # Concerns
   acts_as_list scope: :text_id
@@ -34,6 +39,11 @@ class Stylesheet < ApplicationRecord
 
   def revalidate
     self.styles = ::Validator::Stylesheet.new.validate(raw_styles)
+  end
+
+  def beautify_raw
+    return if skip_formatting
+    self.raw_styles = CssBeautify.beautify raw_styles, autosemicolon: true
   end
 
   def set_hashed_content

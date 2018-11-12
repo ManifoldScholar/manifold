@@ -104,6 +104,7 @@ GEM
       csl (~> 1.0)
     css_parser (1.6.0)
       addressable
+    cssbeautify (0.2.0)
     dalli (2.7.6)
     data_uri (0.1.0)
     database_cleaner (1.5.3)
@@ -513,6 +514,7 @@ DEPENDENCIES
   colorize (~> 0.8.0)
   csl-styles (~> 1.0)
   css_parser (~> 1.0)
+  cssbeautify
   data_uri (~> 0.1.0)
   database_cleaner (~> 1.0)
   dotenv-rails (~> 2.0)

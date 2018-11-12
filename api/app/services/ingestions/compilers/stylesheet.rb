@@ -39,6 +39,7 @@ module Ingestions
           hash[:raw_styles] = raw_styles
           hash[:ingestion_source] = ingestion_source
           hash[:creator] = context.creator
+          hash[:skip_formatting] = true
         end.except(:build)
       end
 
