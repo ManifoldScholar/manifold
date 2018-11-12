@@ -5,6 +5,8 @@ class AttachmentUploader < Shrine
   plugin :validation_helpers
   plugin :processing
   plugin :versions
+  plugin :pretty_location
+  plugin :delete_promoted
   plugin :determine_mime_type, analyzer: :marcel
   plugin :store_dimensions, analyzer: lambda { |io, analyzers|
     mime_type = determine_mime_type(io)
