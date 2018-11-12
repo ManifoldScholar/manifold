@@ -24,7 +24,7 @@ class AttachmentUploader < Shrine
   Attacher.promote { |data| Attachments::ProcessAttachmentJob.perform_later data }
 
   Attacher.validate do
-    attachment_options = context[:record].class.attachment_options[context[:name]]
+    attachment_options = record.__send__("#{name}_options")
     attachment_validation = MANIFOLD_CONFIG.attachments
                                            .validations[attachment_options[:type]]
 
@@ -36,7 +36,7 @@ class AttachmentUploader < Shrine
   end
 
   process(:store) do |io, context|
-    attachment_options = context[:record].class.attachment_options[context[:name]]
+    attachment_options = context[:record].__send__("#{context[:name]}_options")
     Attachments::Processor.run!(upload: io,
                                 model: context[:record],
                                 attachment_options: attachment_options)

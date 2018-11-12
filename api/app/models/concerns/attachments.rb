@@ -93,20 +93,20 @@ module Attachments
     # It also adds a before processing callback for Paperclip to process the variants if,
     # and only if the attachment is processable.
 
-    def attachment_options
-      @attachment_options ||= {}
-    end
-
     def manifold_has_attached_file(field, type, no_styles: false, validate_content_type: true)
       # Create the style
 
       include AttachmentUploader::Attachment.new(field)
 
-      attachment_options[field] = { type: type,
-                                    no_styles: no_styles,
-                                    validate_content_type: validate_content_type }
-
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
+      
+        def #{field}_options
+          { 
+            type: :#{type},
+            no_styles: #{no_styles},
+            validate_content_type: #{validate_content_type}
+          }
+        end
       
         def manifold_attachment_image_styles
           return BASE_STYLES
