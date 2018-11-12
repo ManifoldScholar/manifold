@@ -8,6 +8,8 @@ module Ingestions
 
       boolean :test_only, default: false
 
+      before_perform :report!
+
       def execute
         run_callbacks :convertibility_check do
           @convertible = determine_convertibility
@@ -48,6 +50,11 @@ module Ingestions
 
       def determine_convertibility
         self.class.convertible_extensions.include? File.extname(source_path).delete(".")
+      end
+
+      def report!
+        info "services.ingestions.conversion.log.perform",
+             source: File.basename(source_path)
       end
 
     end

@@ -8,6 +8,9 @@ en:
       fetcher:
         log:
           download_external: 'Downloading external resource: %{url}'
+      conversion:
+        log:
+          perform: 'Converting source file "%{source}"'
       compiler:
         text:
           log:
