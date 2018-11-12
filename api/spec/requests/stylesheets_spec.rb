@@ -8,7 +8,7 @@ RSpec.describe "Stylesheets API", type: :request do
   let(:attributes) {
     {
       name: "Rambo Stylez",
-      rawStyles: ".some-class { font-weight: bold; }",
+      rawStyles: ".some-class {\n    font-weight: bold;\n}",
       position: 1
     }
   }

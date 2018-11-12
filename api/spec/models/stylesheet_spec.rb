@@ -22,4 +22,14 @@ RSpec.describe Stylesheet, type: :model do
     expect { stylesheet.destroy }.to_not change { TextSection.count }
   end
 
+  context "when raw_styles have changed" do
+    let(:stylesheet) { FactoryBot.create(:stylesheet) }
+
+    it "pretty formats the styles" do
+      stylesheet.raw_styles  = ".selector{attribute:value}"
+      stylesheet.save
+      expect(stylesheet.raw_styles).to eq ".selector {\n    attribute: value;\n}"
+    end
+  end
+
 end
