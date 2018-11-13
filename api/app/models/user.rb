@@ -47,6 +47,7 @@ class User < ApplicationRecord
   validates :email, presence: true, case_sensitive: false
   validates :email, uniqueness: true, email_format: { message: "is not valid" }
   validates :pending_role, inclusion: { in: Role::ALLOWED_ROLES }, allow_nil: true
+  validates :first_name, :last_name, presence: true
 
   # Callbacks
   before_create :assign_default_role!
