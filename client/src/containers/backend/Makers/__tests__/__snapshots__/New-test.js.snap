@@ -26,6 +26,25 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
         >
           <label
             className=""
+            htmlFor="attributes[prefix]-text-input-1"
+          >
+            Title
+          </label>
+          <input
+            aria-describedby="attributes[prefix]-text-input-1"
+            id="attributes[prefix]-text-input-1"
+            onChange={[Function]}
+            placeholder="Title"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
             htmlFor="attributes[firstName]-text-input-1"
           >
             First Name

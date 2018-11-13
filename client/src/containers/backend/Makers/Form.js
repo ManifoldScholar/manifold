@@ -35,10 +35,15 @@ export default class MakersFormContainer extends PureComponent {
           notificationScope="drawer"
         >
           <Form.TextInput
+            label="Title"
+            name="attributes[prefix]"
+            placeholder="Title"
+            focusOnMount
+          />
+          <Form.TextInput
             label="First Name"
             name="attributes[firstName]"
             placeholder="First Name"
-            focusOnMount
           />
           <Form.TextInput
             label="Middle Name"

@@ -2,6 +2,7 @@ module WithParsedName
   extend ActiveSupport::Concern
 
   KEY_MAP = {
+    title: :prefix,
     given: :first_name,
     particle: :middle_name,
     family: :last_name,
@@ -31,7 +32,7 @@ module WithParsedName
   end
 
   def name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".strip
   end
 
   def full_name
@@ -58,7 +59,7 @@ module WithParsedName
 
     def parse_name(name)
       parts = Namae::Name.parse(name).to_h.compact
-      parts.each_with_object({}) { |(k, v), out| out[KEY_MAP[k]] = v }
+      parts.each_with_object({}) { |(k, v), out| out[KEY_MAP[k]] = v if k.present? }
     end
   end
 end
