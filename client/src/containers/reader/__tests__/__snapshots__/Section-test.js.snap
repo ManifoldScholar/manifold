@@ -8,49 +8,53 @@ exports[`Reader Section Container renders correctly 1`] = `
     >
       <div
         className="no-focus-outline"
+        onClick={undefined}
         onKeyDown={[Function]}
-        onMouseDown={[Function]}
         onMouseUp={[Function]}
-        tabIndex="0"
+        onTouchEnd={[Function]}
+        role="presentation"
       >
         <div
-          className="annotatable"
           onClick={[Function]}
+          onMouseUp={[Function]}
+          role="presentation"
         >
           <div
-            className="container-focus container-width-100"
+            className="annotatable"
+            id="annotatableRef"
           >
             <div
-              className="manifold-text-section text-section font-size-undefined"
-              data-id="body"
+              className="container-focus container-width-100"
             >
-              <section
-                className="chapter"
-                id="RO"
-                type="titlepage"
-              />
+              <div
+                className="manifold-text-section text-section font-size-undefined"
+                data-id="body"
+              >
+                <section
+                  className="chapter"
+                  id="RO"
+                  type="titlepage"
+                />
+              </div>
             </div>
           </div>
         </div>
-        <span />
-        <div
-          className="annotation-popup"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          role="presentation"
-          style={
-            Object {
-              "bottom": "auto",
-              "left": 0,
-              "top": 0,
-            }
-          }
-        >
-          <div
-            className="popup-page-secondary-group"
-          />
-        </div>
       </div>
+      <div
+        className="annotation-popup"
+        onClick={undefined}
+        onMouseDown={undefined}
+        role="presentation"
+      />
+      <span />
+      <nav
+        className="notation-viewer container-width-100"
+      >
+        <ul
+          className="viewer-list"
+        />
+        <span />
+      </nav>
     </section>
     <span />
   </div>

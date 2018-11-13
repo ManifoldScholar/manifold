@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { annotationsAPI, meAPI, requests } from "api";
+import { meAPI, requests } from "api";
 import { select, grab, meta, loaded } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
@@ -123,21 +123,6 @@ export class ReaderNotesContainer extends Component {
     return history.push(url);
   };
 
-  handleUpdateAnnotation = annotation => {
-    const call = annotationsAPI.update(annotation.id, annotation);
-    const res = this.props.dispatch(request(call, requests.rAnnotationUpdate));
-    return res.promise;
-  };
-
-  handleDeleteAnnotation = annotation => {
-    const call = annotationsAPI.destroy(annotation.id);
-    const options = { removes: { type: "annotations", id: annotation.id } };
-    const res = this.props.dispatch(
-      request(call, requests.rAnnotationDestroy, options)
-    );
-    return res.promise;
-  };
-
   handleFilterChange = (key, filters) => {
     const filter = Object.assign({}, this.state.filter);
     filter[key] = filters;
@@ -170,8 +155,6 @@ export class ReaderNotesContainer extends Component {
       sortedAnnotations,
       annotations: props.annotations,
       section: props.section,
-      handleUpdateAnnotation: this.handleUpdateAnnotation,
-      handleDeleteAnnotation: this.handleDeleteAnnotation,
       handleVisitAnnotation: this.handleVisitAnnotation,
       handleFilterChange: this.handleFilterChange,
       handleSeeAllClick: this.handleSeeAllClick,

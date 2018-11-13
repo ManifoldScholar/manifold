@@ -32,6 +32,13 @@ exports[`Reader.Notes.Full.Group Component renders correctly 1`] = `
                 View In Text
               </button>
             </li>
+            <li>
+              <button
+                onClick={[Function]}
+              >
+                Delete
+              </button>
+            </li>
           </ul>
         </nav>
       </div>
@@ -54,6 +61,13 @@ exports[`Reader.Notes.Full.Group Component renders correctly 1`] = `
                 onClick={[Function]}
               >
                 View In Text
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={[Function]}
+              >
+                Delete
               </button>
             </li>
           </ul>

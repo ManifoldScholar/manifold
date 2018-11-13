@@ -3,14 +3,12 @@ import PropTypes from "prop-types";
 import { Notes } from "components/reader";
 
 export default class Group extends PureComponent {
-  static displayName = "Notes.Group";
+  static displayName = "Notes.Full.Group";
 
   static propTypes = {
     annotations: PropTypes.array,
     header: PropTypes.string,
-    handleVisitAnnotation: PropTypes.func,
-    handleUpdateAnnotation: PropTypes.func,
-    handleDeleteAnnotation: PropTypes.func
+    handleVisitAnnotation: PropTypes.func.isRequired
   };
 
   render() {
@@ -27,8 +25,6 @@ export default class Group extends PureComponent {
                 key={annotation.id}
                 annotation={annotation}
                 handleVisitAnnotation={this.props.handleVisitAnnotation}
-                handleUpdateAnnotation={this.props.handleUpdateAnnotation}
-                handleDeleteAnnotation={this.props.handleDeleteAnnotation}
               />
             );
           })}

@@ -11,14 +11,20 @@ class AnnotationPopupSecondaryShare extends PureComponent {
   static displayName = "Annotation.Popup.Secondary.Share";
 
   static propTypes = {
+    primary: PropTypes.bool.isRequired,
+    visible: PropTypes.bool.isRequired,
     selection: PropTypes.object,
-    back: PropTypes.func.isRequired,
-    secondary: PropTypes.string,
-    direction: PropTypes.string,
-    cite: PropTypes.func.isRequired,
+    onBackClick: PropTypes.func.isRequired,
+    onCiteClick: PropTypes.func.isRequired,
+    direction: PropTypes.string.isRequired,
     text: PropTypes.object,
     section: PropTypes.object,
     settings: PropTypes.object
+  };
+
+  static defaultProps = {
+    primary: false,
+    visible: false
   };
 
   constructor(props) {
@@ -81,14 +87,13 @@ class AnnotationPopupSecondaryShare extends PureComponent {
   render() {
     return (
       <Panel
-        primary={false}
-        name="share"
-        secondary={this.props.secondary}
+        primary={this.props.primary}
+        visible={this.props.visible}
         direction={this.props.direction}
       >
         {this.canCite() ? (
           <Button
-            onClick={this.props.cite}
+            onClick={this.props.onCiteClick}
             kind="any"
             label="Cite"
             iconClass="manicon-quotes-left"
@@ -114,7 +119,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
           </FacebookButton>
         ) : null}
         <Button
-          onClick={this.props.back}
+          onClick={this.props.onBackClick}
           kind="any"
           label="Back"
           className="dark"

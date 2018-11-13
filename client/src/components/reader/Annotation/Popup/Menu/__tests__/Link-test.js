@@ -11,9 +11,8 @@ describe("Reader.Annotation.Popup.Menu.Link Component", () => {
     const component = renderer.create(
       <Provider store={store}>
         <Link
-          direction="up"
           selectedLink={<a href="www.dailyrowan.com" />}
-          textAnnotations={[]}
+          annotations={[]}
           showAnnotationsInDrawer={() => {}}
         />
       </Provider>

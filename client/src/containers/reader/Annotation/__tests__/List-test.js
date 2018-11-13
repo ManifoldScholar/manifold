@@ -17,6 +17,7 @@ describe("Reader Annotation List Container", () => {
     annotations,
     annotationIds,
     createHandler: jest.fn(),
+    loginHandler: jest.fn(),
     dispatch: store.dispatch
   };
 

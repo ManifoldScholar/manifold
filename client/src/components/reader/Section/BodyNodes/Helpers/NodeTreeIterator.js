@@ -10,10 +10,20 @@ export default class NodeTreeIterator {
     this.setScrollTargetNode(bodyProps);
   }
 
+  makePendingAnnotation(pendingAnnotation) {
+    const annotation = {
+      id: "selection",
+      attributes: pendingAnnotation,
+      type: "annotations"
+    };
+    return annotation;
+  }
+
   setupAnnotations(bodyProps) {
-    const { annotations, lockedSelection } = bodyProps;
+    const { annotations, pendingAnnotation } = bodyProps;
     this.annotations = annotations ? annotations.slice(0) : [];
-    if (lockedSelection) this.annotations.push(lockedSelection);
+    if (pendingAnnotation)
+      this.annotations.push(this.makePendingAnnotation(pendingAnnotation));
     this.annotationsMap = {};
     this.annotationStartMap = {};
     this.annotationEndMap = {};

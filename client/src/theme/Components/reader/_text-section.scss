@@ -27,6 +27,11 @@
     color: $neutralWhite;
     background-color: $neutralOffBlack;
   }
+
+  .reader-debug {
+    position: relative;
+    top: -60px;
+  }
 }
 
 .text-section {

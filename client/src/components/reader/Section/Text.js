@@ -68,7 +68,6 @@ export default class Text extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lockedSelection: null,
       visibilityFiltersMemo: props.visibility.visibilityFilters,
       annotationsMemo: props.annotations,
       filteredAnnotations: Text.filterAnnotations(
@@ -116,19 +115,6 @@ export default class Text extends Component {
     if (!collectionMatch) return;
     this.props.history.push({ hash: "", state: { noScroll: true } });
   }
-
-  // Store the current locked selection in the section, which wraps the annotator and
-  // the body. This locked selection is then passed down to the body, which needs to
-  // render it in the text.
-  lockSelection = raw => {
-    if (!raw) return this.setState({ lockedSelection: null });
-    const lockedSelection = {
-      id: "selection",
-      attributes: raw,
-      type: "annotations"
-    };
-    this.setState({ lockedSelection });
-  };
 
   render() {
     const typography = this.props.appearance.typography;
@@ -181,7 +167,6 @@ export default class Text extends Component {
               projectId={this.props.text.relationships.project.id}
               textId={this.props.text.id}
               sectionId={this.props.match.params.sectionId}
-              lockSelection={this.lockSelection}
               notations={notations}
               annotations={this.state.filteredAnnotations}
               containerSize={typography.margins.current}
@@ -190,18 +175,19 @@ export default class Text extends Component {
               location={this.props.location}
               history={this.props.history}
               section={this.props.section}
-            >
-              <div className={containerClass}>
-                <div data-id="body" className={textSectionClass}>
-                  <Section.Body
-                    location={this.props.location}
-                    lockedSelection={this.state.lockedSelection}
-                    annotations={this.state.filteredAnnotations}
-                    section={this.props.section}
-                  />
+              render={pendingAnnotation => (
+                <div className={containerClass}>
+                  <div data-id="body" className={textSectionClass}>
+                    <Section.Body
+                      location={this.props.location}
+                      pendingAnnotation={pendingAnnotation}
+                      annotations={this.state.filteredAnnotations}
+                      section={this.props.section}
+                    />
+                  </div>
                 </div>
-              </div>
-            </Annotation.Annotatable>
+              )}
+            />
           </section>
           <ReactCSSTransitionGroup
             transitionName="text-child"

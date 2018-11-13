@@ -6,7 +6,7 @@ import debounce from "lodash/debounce";
 import { Collapse } from "react-collapse";
 
 export default class Group extends Component {
-  static displayName = "Notes.List.Group";
+  static displayName = "Notes.Partial.Group";
 
   static propTypes = {
     readerSection: PropTypes.object,

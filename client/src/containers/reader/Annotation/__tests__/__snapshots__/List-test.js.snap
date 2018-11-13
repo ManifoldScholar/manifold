@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Reader Annotation List Container renders correctly 1`] = `
-<div>
+<div
+  className="annotation-selection"
+>
   <ul
     className="selection-list"
   >
@@ -9,27 +11,29 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
       className="annotation-detail"
     >
       <div
-        className="annotation-selection"
+        className="selection-text"
       >
         <div
-          className="selection-text"
+          className="container"
         >
+          <i
+            aria-hidden="true"
+            className="manicon manicon-quote"
+          />
           <div
-            className="container"
-          >
-            <i
-              aria-hidden="true"
-              className="manicon manicon-quote"
-            />
-            Gods, Earths, and 85ers
-          </div>
-          <button
-            className="annotate-button"
-            onClick={[Function]}
-          >
-            Login to annotate
-          </button>
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Gods, Earths, and 85ers",
+              }
+            }
+          />
         </div>
+        <button
+          className="annotate-button"
+          onClick={[MockFunction]}
+        >
+          Login to annotate
+        </button>
       </div>
       <div
         className="container"
@@ -89,7 +93,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                 <ul>
                   <li>
                     <button
-                      onClick={[Function]}
+                      onClick={[MockFunction]}
                     >
                       Login to reply
                     </button>
@@ -150,7 +154,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                 <ul>
                   <li>
                     <button
-                      onClick={[Function]}
+                      onClick={[MockFunction]}
                     >
                       Login to reply
                     </button>

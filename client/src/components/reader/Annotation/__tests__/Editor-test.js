@@ -21,7 +21,7 @@ describe("Reader.Annotation.Editor component", () => {
         startNode={annotation.attributes.startNode}
         endNode={annotation.attributes.endNode}
         cancel={cancelMock}
-        saveHandler={saveMock}
+        saveAnnotation={saveMock}
       />
     </Provider>
   );

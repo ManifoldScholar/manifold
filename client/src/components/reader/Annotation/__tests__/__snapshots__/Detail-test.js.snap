@@ -53,7 +53,7 @@ exports[`Reader.Annotation.Annotation component renders correctly 1`] = `
       <ul>
         <li>
           <button
-            onClick={undefined}
+            onClick={[MockFunction]}
           >
             Login to reply
           </button>

@@ -2,12 +2,7 @@
 
 exports[`Reader.Annotation.Popup.Menu.Link Component renders correctly 1`] = `
 <section
-  className="popup-page bottom"
-  style={
-    Object {
-      "marginLeft": null,
-    }
-  }
+  className="popup-page top"
 >
   <button
     className={undefined}
@@ -30,7 +25,7 @@ exports[`Reader.Annotation.Popup.Menu.Link Component renders correctly 1`] = `
     View Annotation
   </button>
   <div
-    className="tail tail-down"
+    className="tail tail-up"
   />
 </section>
 `;

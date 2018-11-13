@@ -3,12 +3,10 @@ import PropTypes from "prop-types";
 import Annotation from "components/reader/Annotation";
 import { connect } from "react-redux";
 import { annotationsAPI, requests } from "api";
-import { entityStoreActions, uiVisibilityActions } from "actions";
-import { bindActionCreators } from "redux";
+import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 
 const { request } = entityStoreActions;
-import { hash } from "utils/string";
 
 export class AnnotationList extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
@@ -21,17 +19,25 @@ export class AnnotationList extends PureComponent {
   static displayName = "Annotation.List";
 
   static propTypes = {
-    annotations: PropTypes.array,
+    dispatch: PropTypes.func.isRequired,
+    loginHandler: PropTypes.func.isRequired,
     annotationIds: PropTypes.array.isRequired,
     createHandler: PropTypes.func.isRequired,
+    annotations: PropTypes.array,
     closeDrawer: PropTypes.func,
-    sectionId: PropTypes.string,
-    dispatch: PropTypes.func.isRequired
+    sectionId: PropTypes.string
   };
 
   static defaultProps = {
     annotations: []
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      editorVisible: false
+    };
+  }
 
   componentDidMount() {
     this.fetchAnnotations(this.props);
@@ -46,30 +52,6 @@ export class AnnotationList extends PureComponent {
     }
   }
 
-  /* eslint-disable no-param-reassign */
-  annotationsGroupedBySubject() {
-    const grouped = this.props.annotations.reduce((memo, annotation) => {
-      const key = hash(annotation.attributes.subject.trim());
-      if (!memo.hasOwnProperty(key)) {
-        memo[key] = {
-          annotations: [],
-          selection: {
-            hash: key,
-            subject: annotation.attributes.subject,
-            startNode: annotation.attributes.startNode,
-            startChar: annotation.attributes.startChar,
-            endNode: annotation.attributes.endNode,
-            endChar: annotation.attributes.endChar
-          }
-        };
-      }
-      memo[key].annotations.push(annotation);
-      return memo;
-    }, {});
-    return Object.values(grouped);
-  }
-  /* eslint-enable no-param-reassign */
-
   fetchAnnotations(props) {
     const sId = this.props.sectionId;
     const annotationsCall = annotationsAPI.forSection(sId, {
@@ -78,53 +60,52 @@ export class AnnotationList extends PureComponent {
     props.dispatch(request(annotationsCall, requests.rDrawerAnnotations));
   }
 
-  updateAnnotation = annotation => {
-    const call = annotationsAPI.update(annotation.id, annotation);
-    const res = this.props.dispatch(request(call, requests.rAnnotationUpdate));
-    return res.promise;
+  saveAnnotation = (model, group) => {
+    const attributes = Object.assign({}, group.selection, model.attributes);
+    const newModel = Object.assign({}, model, { attributes });
+    return this.props.createHandler(newModel);
   };
 
-  deleteAnnotation = annotation => {
-    const call = annotationsAPI.destroy(annotation.id);
-    const options = { removes: { type: "annotations", id: annotation.id } };
-    const res = this.props.dispatch(
-      request(call, requests.rAnnotationDestroy, options)
-    );
-    return res.promise;
+  showEditor = () => {
+    this.setState({ editorVisible: true });
+  };
+
+  hideEditor = () => {
+    this.setState({ editorVisible: false });
   };
 
   render() {
-    const grouped = this.annotationsGroupedBySubject();
-    const showLogin = bindActionCreators(
-      () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
-      this.props.dispatch
-    );
+    const { annotations } = this.props;
 
     return (
-      <div>
+      <div className="annotation-selection">
         <ul className="selection-list">
-          {grouped.map(group => {
-            return (
+          <Annotation.GroupedBySubject
+            annotations={annotations}
+            render={group => (
               <li key={group.selection.hash} className="annotation-detail">
                 <Annotation.Selection.Wrapper
-                  {...group.selection}
+                  subject={group.selection.subject}
+                  onAnnotate={this.showEditor}
+                  onLogin={this.props.loginHandler}
                   truncate={250}
-                  addsTo={requests.rDrawerAnnotations}
-                  saveHandler={this.props.createHandler}
-                  closeOnSave={false}
-                  showLogin={showLogin}
                 />
+                {this.state.editorVisible && (
+                  <Annotation.Editor
+                    annotation={{ attributes: {} }}
+                    cancel={this.hideEditor}
+                    saveAnnotation={attr => this.saveAnnotation(attr, group)}
+                  />
+                )}
                 <div className="container">
                   <ul className="annotation-list">
                     {group.annotations.map(annotation => {
-                      const creator = annotation.relationships.creator;
                       return (
-                        <Annotation.Annotation
-                          saveHandler={this.updateAnnotation}
-                          deleteHandler={this.deleteAnnotation}
+                        <Annotation.Detail
+                          dispatch={this.props.dispatch}
                           key={annotation.id}
-                          creator={creator}
-                          showLogin={showLogin}
+                          creator={annotation.relationships.creator}
+                          showLogin={this.props.loginHandler}
                           annotation={annotation}
                         />
                       );
@@ -132,8 +113,8 @@ export class AnnotationList extends PureComponent {
                   </ul>
                 </div>
               </li>
-            );
-          })}
+            )}
+          />
         </ul>
       </div>
     );

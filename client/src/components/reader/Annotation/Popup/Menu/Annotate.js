@@ -8,28 +8,27 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   static displayName = "Annotation.Popup.Annotate";
 
   static propTypes = {
-    selectedAnnotation: PropTypes.object,
-    showAnnotationsInDrawer: PropTypes.func,
-    attachNotation: PropTypes.func.isRequired,
-    destroySelected: PropTypes.func.isRequired,
-    highlight: PropTypes.func.isRequired,
-    annotate: PropTypes.func.isRequired,
-    showSecondary: PropTypes.func.isRequired,
-    secondary: PropTypes.string,
-    direction: PropTypes.string,
-    showLogin: PropTypes.func.isRequired,
-    text: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    showShare: PropTypes.func.isRequired,
+    text: PropTypes.object.isRequired,
+    activeAnnotation: PropTypes.object,
+    direction: PropTypes.string.isRequired,
+    primary: PropTypes.bool.isRequired,
+    visible: PropTypes.bool.isRequired
   };
 
-  // https://github.com/facebook/react/issues/6653
-  // showLogin is undefined at element creation (when prop validation is done).
   static defaultProps = {
-    showSecondary: () => {},
-    showLogin: () => {}
+    primary: true,
+    visible: true,
+    direction: "down"
   };
 
-  highlightSelected() {
-    const selected = this.props.selectedAnnotation;
+  get actions() {
+    return this.props.actions;
+  }
+
+  get hasActiveAnnotation() {
+    const selected = this.props.activeAnnotation;
     if (!selected) return false;
     return (
       selected.attributes.abilities.delete &&
@@ -38,8 +37,8 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   }
 
   rowHighlighted() {
-    if (!this.highlightSelected()) return null;
-    const isCreator = this.props.selectedAnnotation.attributes
+    if (!this.hasActiveAnnotation) return null;
+    const isCreator = this.props.activeAnnotation.attributes
       .currentUserIsCreator;
     const label = isCreator ? "You Highlighted" : "A Reader Highlighted";
     return (
@@ -50,11 +49,11 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   }
 
   rowHighlight() {
-    const highlighted = this.highlightSelected();
+    const highlighted = this.hasActiveAnnotation;
     const className = classNames({ selected: highlighted });
     const onClick = highlighted
-      ? this.props.destroySelected
-      : this.props.highlight;
+      ? () => this.actions.destroyAnnotation(this.props.activeAnnotation)
+      : this.actions.createHighlight;
     return (
       <Button
         key={"highlight"}
@@ -71,7 +70,8 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     return (
       <Button
         key={"annotate"}
-        onClick={this.props.annotate}
+        onClick={this.actions.openNewAnnotationDrawer}
+        onTouchStart={this.actions.openNewAnnotationDrawer}
         kind="any"
         label="Annotate"
         iconClass="manicon-word-bubble"
@@ -83,9 +83,9 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     return (
       <Button
         key={"notate"}
-        onClick={this.props.attachNotation}
-        entity={this.props.text}
+        onClick={this.actions.openNewNotationDrawer}
         ability="notate"
+        entity={this.props.text}
         label="Resource"
         iconClass="manicon-cube-outline"
       />
@@ -96,7 +96,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     return (
       <Button
         key={"share"}
-        onClick={() => this.props.showSecondary("share")}
+        onClick={this.props.showShare}
         kind="any"
         label="Share"
         iconClass="manicon-nodes"
@@ -108,22 +108,10 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     return (
       <Button
         key={"login"}
-        onClick={this.props.showLogin}
+        onClick={this.actions.showLogin}
         kind="unauthenticated"
         label="Login to Annotate"
         iconClass="manicon-person-pencil"
-      />
-    );
-  }
-
-  rowAnnotations() {
-    if (!this.props.showAnnotationsInDrawer) return null;
-    return (
-      <Button
-        key={"annotations"}
-        onClick={this.props.showAnnotationsInDrawer}
-        label="View Annotations"
-        iconClass="manicon-word-bubble"
       />
     );
   }
@@ -132,7 +120,6 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     const rows = [];
     rows.push(this.rowHighlighted());
     rows.push(this.rowHighlight());
-    // rows.push(this.rowAnnotations());
     rows.push(this.rowAnnotate());
     rows.push(this.rowNotate());
     rows.push(this.rowShare());
@@ -144,8 +131,8 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   render() {
     return (
       <Panel
-        primary
-        secondary={this.props.secondary}
+        primary={this.props.primary}
+        visible={this.props.visible}
         direction={this.props.direction}
       >
         {this.rows(this.props.direction)}

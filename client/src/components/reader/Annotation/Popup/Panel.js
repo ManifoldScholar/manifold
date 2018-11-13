@@ -1,12 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import isNil from "lodash/isNil";
 
 export default class Panel extends PureComponent {
   static propTypes = {
     primary: PropTypes.bool,
-    secondary: PropTypes.string,
+    visible: PropTypes.bool,
     direction: PropTypes.string,
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     name: PropTypes.string
@@ -18,6 +17,30 @@ export default class Panel extends PureComponent {
       tailHighlight: false
     };
   }
+
+  componentDidUpdate() {
+    if (this.isPrimary && this.isHidden) {
+      this.wrapperRef.style.marginLeft = -this.wrapperRef.offsetWidth + "px";
+    } else {
+      this.wrapperRef.style.marginLeft = "0px";
+    }
+  }
+
+  get isPrimary() {
+    return this.props.primary === true;
+  }
+
+  get isSecondary() {
+    return !this.isPrimary;
+  }
+
+  get isHidden() {
+    return !this.props.visible;
+  }
+
+  setWrapperRef = el => {
+    this.wrapperRef = el;
+  };
 
   handleTailHighlight = condition => {
     if (condition) {
@@ -34,20 +57,6 @@ export default class Panel extends PureComponent {
       });
     }
   };
-
-  isPrimary() {
-    return this.props.primary === true;
-  }
-
-  isSecondary() {
-    return !this.isPrimary();
-  }
-
-  isHidden() {
-    const { secondary, name } = this.props;
-    if (isNil(secondary) && this.isPrimary()) return false;
-    return !(!isNil(secondary) && this.isSecondary() && name === secondary);
-  }
 
   renderChild(child, position) {
     const additionalProps = {
@@ -76,9 +85,9 @@ export default class Panel extends PureComponent {
 
   render() {
     const pageClass = classNames({
-      "popup-page": !this.isSecondary(),
-      "popup-page-secondary": this.isSecondary(),
-      hidden: this.isHidden(),
+      "popup-page": !this.isSecondary,
+      "popup-page-secondary": this.isSecondary,
+      hidden: this.isHidden,
       bottom: this.props.direction === "up",
       top: this.props.direction === "down"
     });
@@ -90,18 +99,8 @@ export default class Panel extends PureComponent {
       highlight: this.state.tailHighlight
     });
 
-    const style = {
-      marginLeft: this.props.secondary ? -this.p.offsetWidth + "px" : null
-    };
-
     return (
-      <section
-        className={pageClass}
-        ref={p => {
-          this.p = p;
-        }}
-        style={style}
-      >
+      <section className={pageClass} ref={this.setWrapperRef}>
         {this.renderChildren()}
         <div className={tailClass} />
       </section>

@@ -12,13 +12,14 @@ describe("Reader.Annotation.Popup.Menu.Annotate Component", () => {
     const component = renderer.create(
       <Provider store={store}>
         <Annotate
-          destroySelected={() => {}}
-          attachNotation={() => {}}
-          highlight={() => {}}
-          annotate={() => {}}
-          bookmark={() => {}}
+          actions={{
+            openNewAnnotationDrawer: jest.fn(),
+            openNewNotationDrawer: jest.fn(),
+            destroyAnnotation: jest.fn(),
+            showLogin: jest.fn(),
+            createHighlight: jest.fn()
+          }}
           showShare={() => {}}
-          showLogin={() => {}}
           text={text}
         />
       </Provider>
