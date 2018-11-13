@@ -16,6 +16,7 @@ module Api
             render_multiple_resources(
               @annotations,
               each_serializer: AnnotationSerializer,
+              include: [:creator],
               location: location,
               meta: meta(@annotations)
             )
