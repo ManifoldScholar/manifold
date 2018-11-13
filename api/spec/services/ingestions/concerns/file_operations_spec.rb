@@ -85,12 +85,13 @@ RSpec.describe Ingestions::Concerns::FileOperations do
                                               "source/badly_named_sources/4 latex with spaces.tex",
                                               "source/badly_named_sources/5 “curly”_quotes.docx",
                                               "source/badly_named_sources/manifest.yml",
-                                              "source/badly_named_sources/1_good_file.docx"]
+                                              "source/badly_named_sources/1_good_file.docx",
+                                              "source/badly_named_sources/@public@vhost@g@gutenberg@html@files@3443@3443-8-3.txt.html"]
     end
 
     it "does not copy/extract tmp, hidden, or extraneous files" do
       file_names = context.sources.map { |f| File.basename f }
-      expect(file_names).to_not include(/^\..*/, /^\.\..*/, /^_.*/, /^__.*/, /^~.*/)
+      expect(file_names).to_not include /^[._~].*/
     end
   end
 end
