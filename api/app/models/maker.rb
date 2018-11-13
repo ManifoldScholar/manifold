@@ -25,10 +25,7 @@ class Maker < ApplicationRecord
   with_parsed_name :prefix, :first_name, :middle_name, :last_name, :suffix
 
   # Scopes
-  scope :with_order, lambda { |by = nil|
-    return order(:last_name, :first_name) unless by.present?
-    order(by)
-  }
+  scope :with_order, ->(by = nil) { by.present? ? order(by) : order(arel_sort_name.asc) }
 
   validate :name_is_present!
 
@@ -50,6 +47,21 @@ class Maker < ApplicationRecord
 
   def to_s
     full_name
+  end
+
+  class << self
+    def arel_coalesce(*args)
+      args.map! { |arg| Arel::Nodes.build_quoted(arg) }
+
+      Arel::Nodes::NamedFunction.new("COALESCE", args)
+    end
+
+    def arel_sort_name
+      last_name = arel_coalesce(arel_table[:last_name], "")
+      first_name = arel_coalesce(arel_table[:first_name], "")
+
+      Arel::Nodes::Concat.new(last_name, first_name)
+    end
   end
 
   private

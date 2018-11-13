@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181114164356) do
+ActiveRecord::Schema.define(version: 20181114164450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -298,6 +298,7 @@ ActiveRecord::Schema.define(version: 20181114164356) do
     t.string   "suffix"
     t.jsonb    "avatar_data",                    default: {}
     t.string   "prefix"
+    t.index "(((COALESCE(last_name, ''::character varying))::text || (COALESCE(first_name, ''::character varying))::text))", name: "index_makers_sort_by_name", using: :btree
   end
 
   create_table "notification_preferences", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
