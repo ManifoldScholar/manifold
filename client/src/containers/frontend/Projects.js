@@ -59,7 +59,6 @@ export class ProjectsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState(queryString.parse(props.location.search));
-    console.log(this.state, "state");
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
