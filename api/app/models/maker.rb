@@ -22,7 +22,7 @@ class Maker < ApplicationRecord
   manifold_has_attached_file :avatar, :image
 
   # Misc
-  with_parsed_name :first_name, :middle_name, :last_name, :suffix
+  with_parsed_name :prefix, :first_name, :middle_name, :last_name, :suffix
 
   # Scopes
   scope :with_order, lambda { |by = nil|
