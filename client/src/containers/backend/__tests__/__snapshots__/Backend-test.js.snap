@@ -239,7 +239,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                             <div className=\\"container flush\\">
                               <div className=\\"colophon\\">
                                 <div>
-                                  © 2015-2016 6 University of Minnesota Press.
+                                  2015-2016 6 University of Minnesota Press
                                   <br />
                                 </div>
                               </div>
