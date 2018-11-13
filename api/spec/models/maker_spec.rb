@@ -39,4 +39,20 @@ RSpec.describe Maker, type: :model do
     end
   end
 
+  describe "its with_order scope" do
+    before(:each) do
+      Maker.create(name: "Rowan Ono")
+      Maker.create(name: "Ida")
+      Maker.create(name: "Sir Stubblin Champflin III")
+    end
+
+    it "returns the correct order" do
+      expect(Maker.with_order.pluck(:last_name, :first_name)).to eq [
+                                                                      %w(Champflin Stubblin),
+                                                                      [nil, "Ida"],
+                                                                      %w(Ono Rowan)
+                                                                    ]
+    end
+  end
+
 end
