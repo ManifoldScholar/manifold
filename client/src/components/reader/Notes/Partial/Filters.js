@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class Filters extends Component {
-  static displayName = "Notes.List.Filters";
+  static displayName = "Notes.Partial.Filters";
 
   static propTypes = {
     filterChangeHandler: PropTypes.func,

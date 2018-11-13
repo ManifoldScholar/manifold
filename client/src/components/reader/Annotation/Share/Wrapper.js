@@ -7,15 +7,7 @@ export default class AnnotationShareWrapper extends PureComponent {
   static displayName = "Annotation.Share.Wrapper";
 
   static propTypes = {
-    subject: PropTypes.string,
-    startNode: PropTypes.string,
-    startChar: PropTypes.number,
-    endNode: PropTypes.string,
-    endChar: PropTypes.number,
-    closeOnSave: PropTypes.bool,
-    addsTo: PropTypes.string,
-    text: PropTypes.object,
-    annotating: PropTypes.bool,
+    annotation: PropTypes.object.isRequired,
     closeDrawer: PropTypes.func,
     truncate: PropTypes.number,
     shareType: PropTypes.string
@@ -29,7 +21,7 @@ export default class AnnotationShareWrapper extends PureComponent {
     super(props);
 
     this.state = {
-      editorOpen: this.props.annotating
+      editorOpen: true
     };
   }
 
@@ -40,39 +32,24 @@ export default class AnnotationShareWrapper extends PureComponent {
   };
 
   maybeTruncateSelection() {
-    if (
-      this.props.truncate &&
-      this.props.subject.length > this.props.truncate
-    ) {
+    const {
+      annotation: { subject }
+    } = this.props;
+    if (this.props.truncate && subject.length > this.props.truncate) {
       return (
         <Selection.Truncated
-          selection={this.props.subject}
+          selection={subject}
           truncate={this.props.truncate}
         />
       );
     }
 
-    return this.props.subject;
+    return subject;
   }
 
-  renderShareEditor(type) {
-    if (!type) return null;
-    const cancelFunction = this.props.closeDrawer
-      ? this.props.closeDrawer
-      : this.handleCloseEditor;
-
-    /* eslint-disable no-unreachable */
-    switch (type) {
-      case "citation":
-        return <Share.Citation {...this.props} cancel={cancelFunction} />;
-        break;
-      // Email will go here, when the time is right...
-      default:
-        return null;
-        break;
-    }
+  renderShareEditor() {
+    return <Share.Citation {...this.props} cancel={this.props.closeDrawer} />;
   }
-  /* eslint-enable no-unreachable */
 
   render() {
     return (
@@ -83,9 +60,7 @@ export default class AnnotationShareWrapper extends PureComponent {
             {this.maybeTruncateSelection()}
           </div>
         </div>
-        {this.state.editorOpen
-          ? this.renderShareEditor(this.props.shareType)
-          : null}
+        {this.renderShareEditor(this.props.shareType)}
       </div>
     );
   }

@@ -6,7 +6,7 @@ exports[`Reader.Annotation.Selection.Truncated Component renders correctly 1`] =
     <div className=\\"selection-truncated\\">
       <div className=\\"wrapper blur\\">
         <div>
-          You will remember we from now til foreve...
+          <div dangerouslySetInnerHTML={{...}} />
         </div>
       </div>
       <button className=\\"button-trim-primary trim-top\\" onClick={[Function]}>

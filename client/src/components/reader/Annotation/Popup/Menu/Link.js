@@ -7,10 +7,18 @@ export default class AnnotationPopupLink extends PureComponent {
   static displayName = "Annotation.Popup.Link";
 
   static propTypes = {
-    direction: PropTypes.string,
-    selectedLink: PropTypes.object,
-    textAnnotations: PropTypes.array,
-    showAnnotationsInDrawer: PropTypes.func
+    visible: PropTypes.bool.isRequired,
+    primary: PropTypes.bool.isRequired,
+    direction: PropTypes.string.isRequired,
+    selectedLink: PropTypes.object.isRequired,
+    annotations: PropTypes.array.isRequired,
+    showAnnotationsInDrawer: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    direction: "down",
+    visible: true,
+    primary: true
   };
 
   handleViewLinkClick = event => {
@@ -21,14 +29,18 @@ export default class AnnotationPopupLink extends PureComponent {
 
   handleShowAnnotationClick = event => {
     event.preventDefault();
-    if (!this.props.showAnnotationsInDrawer || !this.props.textAnnotations)
+    if (!this.props.showAnnotationsInDrawer || !this.props.annotations)
       return null;
-    return this.props.showAnnotationsInDrawer(this.props.textAnnotations);
+    return this.props.showAnnotationsInDrawer(this.props.annotations);
   };
 
   render() {
     return (
-      <Panel primary direction={this.props.direction}>
+      <Panel
+        direction={this.props.direction}
+        visible={this.props.visible}
+        primary={this.props.primary}
+      >
         <Button
           key={"link"}
           onClick={this.handleViewLinkClick}
@@ -41,7 +53,7 @@ export default class AnnotationPopupLink extends PureComponent {
           onClick={this.handleShowAnnotationClick}
           kind="none"
           label={
-            this.props.textAnnotations.length > 1
+            this.props.annotations.length > 1
               ? "View Annotations"
               : "View Annotation"
           }

@@ -164,6 +164,7 @@ class NotationViewerList extends PureComponent {
 
   bodyNodeHeight(props) {
     const body = this.bodyNode(props);
+    if (!body) return;
     return body.offsetHeight;
   }
 

@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import nl2br from "nl2br";
 
 export default class AnnotationSelectionTruncated extends PureComponent {
   static displayName = "Annotation.Selection.Truncated";
@@ -23,11 +24,11 @@ export default class AnnotationSelectionTruncated extends PureComponent {
   }
 
   getPassage() {
+    let text = this.props.selection;
     if (this.state.truncated) {
-      return this.truncateSelection();
+      text = this.truncateSelection();
     }
-
-    return this.props.selection;
+    return <div dangerouslySetInnerHTML={{ __html: nl2br(text) }} />;
   }
 
   truncateSelection() {

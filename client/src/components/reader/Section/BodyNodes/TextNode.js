@@ -161,7 +161,7 @@ export default class TextNode extends Component {
       const underlined = map[index].find(a => a.type === "annotation");
       const isCreator = map[index].find(a => a.isCreator);
       const authorCreated = map[index].find(a => a.authorCreated);
-      const lockedSelection = map[index].find(a => a.type === "selection");
+      const lockedSelection = map[index].find(a => a.id === "selection");
       const notations = map[index].filter(
         a => a.type === "resource" || a.type === "collection"
       );

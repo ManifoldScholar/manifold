@@ -6,7 +6,7 @@ export default class Body extends Component {
   static propTypes = {
     section: PropTypes.object,
     annotations: PropTypes.array,
-    lockedSelection: PropTypes.object,
+    pendingAnnotation: PropTypes.object,
     location: PropTypes.object
   };
 
@@ -15,7 +15,7 @@ export default class Body extends Component {
       this.props.section.attributes.bodyJson ===
         nextProps.section.attributes.bodyJson &&
       this.props.annotations === nextProps.annotations &&
-      this.props.lockedSelection === nextProps.lockedSelection &&
+      this.props.pendingAnnotation === nextProps.pendingAnnotation &&
       this.props.location.key === nextProps.location.key;
     return !same;
   }

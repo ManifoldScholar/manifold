@@ -1,42 +1,35 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { isPromise } from "utils/promise";
 import { Form as GlobalForm } from "components/global";
 
-export default class AnnotationSelectionEditor extends PureComponent {
-  static displayName = "Annotation.Selection.Editor";
+export default class AnnotationEditor extends PureComponent {
+  static displayName = "Annotation.Editor";
 
   static propTypes = {
-    id: PropTypes.string,
-    body: PropTypes.string,
-    private: PropTypes.bool,
-    subject: PropTypes.string.isRequired,
-    startNode: PropTypes.string.isRequired,
-    startChar: PropTypes.number.isRequired,
-    endNode: PropTypes.string.isRequired,
-    endChar: PropTypes.number.isRequired,
-    cancel: PropTypes.func.isRequired,
-    saveHandler: PropTypes.func.isRequired,
-    closeOnSave: PropTypes.bool,
-    addsTo: PropTypes.string
+    saveAnnotation: PropTypes.func.isRequired,
+    annotation: PropTypes.object,
+    cancel: PropTypes.func,
+    closeOnSave: PropTypes.bool
+  };
+
+  static defaultProps = {
+    closeOnSave: true,
+    annotation: { attributes: {} }
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      body: props.body || "",
-      isPrivate: props.private || false,
+      format: "annotation",
+      body: props.annotation.attributes.body || "",
+      private: props.annotation.attributes.private || false,
       errors: []
     };
   }
 
   componentDidMount() {
-    this.focusTimeout = setTimeout(() => {
-      if (this.ci) {
-        this.ci.focus();
-      }
-    }, 0);
+    if (this.ci) this.ci.focus();
   }
 
   componentWillUnmount() {
@@ -45,49 +38,37 @@ export default class AnnotationSelectionEditor extends PureComponent {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { subject, startNode, startChar, endNode, endChar } = this.props;
-    const { body, isPrivate } = this.state;
-    const annotation = {
-      subject,
-      startNode,
-      startChar,
-      endNode,
-      endChar,
-      body,
-      // eslint-disable-next-line quote-props
-      private: isPrivate,
-      format: "annotation"
-    };
-    if (this.props.id) annotation.id = this.props.id;
-    const options = { closeOnSave: this.props.closeOnSave };
-    if (this.props.addsTo) options.addsTo = this.props.addsTo;
-    const promise = this.props.saveHandler(annotation, options);
-    if (isPromise(promise)) {
+    const { closeOnSave, saveAnnotation, annotation } = this.props;
+    const { errorsIgnored, ...attributes } = this.state;
+    const updatedAnnotation = Object.assign({}, annotation, { attributes });
+    const promise = saveAnnotation(updatedAnnotation);
+    if (closeOnSave && promise) {
       promise.then(
         () => {
-          this.props.cancel();
+          this.handleCancel();
         },
-        response => {
-          this.handleErrors(response.body.errors);
-        }
+        () => {}
       );
     }
+    promise.catch(response => {
+      this.handleErrors(response.body.errors);
+    });
   };
 
   handleBodyChange = event => {
     this.setState({ body: event.target.value });
   };
 
-  handleCancel = event => {
-    event.preventDefault();
+  handleCancel = (event = null) => {
+    if (event) event.preventDefault();
     if (this.props.cancel) {
       this.props.cancel(event);
     }
   };
 
   handlePrivacyChange = eventIgnored => {
-    const value = !this.state.isPrivate;
-    this.setState({ isPrivate: value });
+    const value = !this.state.private;
+    this.setState({ private: value });
   };
 
   handleErrors(errors) {
@@ -96,7 +77,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
 
   render() {
     const checkClass = classNames("form-toggle", "checkbox", {
-      checked: this.state.isPrivate
+      checked: this.state.private
     });
 
     return (
@@ -128,9 +109,9 @@ export default class AnnotationSelectionEditor extends PureComponent {
                 <input
                   type="checkbox"
                   id="private-annotation"
-                  name="isPrivate"
+                  name="private"
                   value="1"
-                  checked={this.state.isPrivate}
+                  checked={this.state.private}
                   onChange={this.handlePrivacyChange}
                 />
                 <span className="toggle-indicator" aria-hidden="true">

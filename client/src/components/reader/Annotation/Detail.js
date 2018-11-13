@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Helper } from "components/global";
 import { Utility } from "components/frontend";
 import Editor from "./Editor";
@@ -7,15 +8,17 @@ import Meta from "./Meta";
 import { Comment as CommentContainer } from "containers/global";
 import classNames from "classnames";
 import HigherOrder from "containers/global/HigherOrder";
+import { annotationsAPI, requests } from "api";
+import { entityStoreActions } from "actions";
 
-export default class AnnotationDetail extends PureComponent {
+const { request } = entityStoreActions;
+
+class AnnotationDetail extends PureComponent {
   static displayName = "Annotation.Detail";
 
   static propTypes = {
-    creator: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
     annotation: PropTypes.object.isRequired,
-    saveHandler: PropTypes.func,
-    deleteHandler: PropTypes.func,
     showLogin: PropTypes.func,
     includeComments: PropTypes.bool.isRequired
   };
@@ -50,12 +53,26 @@ export default class AnnotationDetail extends PureComponent {
     });
   };
 
-  handleDelete = event => {
-    if (event) event.preventDefault();
-    this.props.deleteHandler(this.props.annotation);
+  saveAnnotation = annotation => {
+    const call = annotationsAPI.update(annotation.id, annotation.attributes);
+    const res = this.props.dispatch(request(call, requests.rAnnotationUpdate));
+    return res.promise;
+  };
+
+  deleteAnnotation = () => {
+    const { annotation } = this.props;
+    const call = annotationsAPI.destroy(annotation.id);
+    const options = { removes: { type: "annotations", id: annotation.id } };
+    const res = this.props.dispatch(
+      request(call, requests.rAnnotationDestroy, options)
+    );
+    return res.promise;
   };
 
   render() {
+    const { annotation } = this.props;
+    if (!annotation) return null;
+
     const replyButtonClass = classNames({
       active: this.state.action === "replying"
     });
@@ -63,23 +80,15 @@ export default class AnnotationDetail extends PureComponent {
       active: this.state.action === "editing"
     });
 
-    const creator = this.props.creator;
-    const annotation = this.props.annotation;
+    const creator = this.props.annotation.relationships.creator;
 
     return (
       <li className="annotation-annotation">
         <Meta annotation={annotation} creator={creator} />
         {this.state.action === "editing" ? (
           <Editor
-            id={annotation.id}
-            body={annotation.attributes.body}
-            private={annotation.attributes.private}
-            subject={annotation.attributes.subject}
-            startNode={annotation.attributes.startNode}
-            startChar={annotation.attributes.startChar}
-            endNode={annotation.attributes.endNode}
-            endChar={annotation.attributes.endChar}
-            saveHandler={this.props.saveHandler}
+            annotation={annotation}
+            saveAnnotation={this.saveAnnotation}
             cancel={this.stopAction}
           />
         ) : (
@@ -101,26 +110,22 @@ export default class AnnotationDetail extends PureComponent {
                     </li>
                   ) : null}
                   <HigherOrder.Authorize entity={annotation} ability={"update"}>
-                    {this.props.saveHandler ? (
-                      <li>
-                        <button
-                          className={editButtonClass}
-                          onClick={this.startEdit}
-                        >
-                          {"Edit"}
-                        </button>
-                      </li>
-                    ) : null}
+                    <li>
+                      <button
+                        className={editButtonClass}
+                        onClick={this.startEdit}
+                      >
+                        {"Edit"}
+                      </button>
+                    </li>
                   </HigherOrder.Authorize>
                   <HigherOrder.Authorize entity={annotation} ability={"delete"}>
-                    {this.props.deleteHandler ? (
-                      <li>
-                        <Utility.ConfirmableButton
-                          label="Delete"
-                          confirmHandler={this.handleDelete}
-                        />
-                      </li>
-                    ) : null}
+                    <li>
+                      <Utility.ConfirmableButton
+                        label="Delete"
+                        confirmHandler={this.deleteAnnotation}
+                      />
+                    </li>
                   </HigherOrder.Authorize>
                 </ul>
                 {this.state.action === "replying" ? (
@@ -131,17 +136,19 @@ export default class AnnotationDetail extends PureComponent {
                 ) : null}
               </nav>
             </HigherOrder.Authorize>
-            <HigherOrder.Authorize kind="unauthenticated">
-              <nav className="utility">
-                <ul>
-                  <li>
-                    <button onClick={this.props.showLogin}>
-                      {"Login to reply"}
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </HigherOrder.Authorize>
+            {this.props.showLogin && (
+              <HigherOrder.Authorize kind="unauthenticated">
+                <nav className="utility">
+                  <ul>
+                    <li>
+                      <button onClick={this.props.showLogin}>
+                        {"Login to reply"}
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </HigherOrder.Authorize>
+            )}
           </div>
         )}
         {this.props.includeComments ? (
@@ -152,4 +159,4 @@ export default class AnnotationDetail extends PureComponent {
   }
 }
 
-//
+export default connect()(AnnotationDetail);

@@ -1,19 +1,30 @@
 import React, { PureComponent } from "react";
 import { Utility } from "components/frontend";
 import PropTypes from "prop-types";
+import HigherOrder from "containers/global/HigherOrder";
+import { connect } from "react-redux";
+import { annotationsAPI, requests } from "api";
+import { entityStoreActions } from "actions";
 
-export default class HighlightDetail extends PureComponent {
+const { request } = entityStoreActions;
+
+class HighlightDetail extends PureComponent {
   static displayName = "Annotation.Highlight";
 
   static propTypes = {
     annotation: PropTypes.object.isRequired,
-    deleteHandler: PropTypes.func,
+    dispatch: PropTypes.func.isRequired,
     visitHandler: PropTypes.func
   };
 
-  handleDelete = event => {
-    if (event) event.preventDefault();
-    this.props.deleteHandler(this.props.annotation);
+  deleteAnnotation = () => {
+    const { annotation } = this.props;
+    const call = annotationsAPI.destroy(annotation.id);
+    const options = { removes: { type: "annotations", id: annotation.id } };
+    const res = this.props.dispatch(
+      request(call, requests.rAnnotationDestroy, options)
+    );
+    return res.promise;
   };
 
   handleVisitHighlight = event => {
@@ -38,15 +49,14 @@ export default class HighlightDetail extends PureComponent {
                 </button>
               </li>
             ) : null}
-            {this.props.deleteHandler &&
-            annotation.attributes.canUpdateObject ? (
+            <HigherOrder.Authorize entity={annotation} ability={"delete"}>
               <li>
                 <Utility.ConfirmableButton
                   label="Delete"
-                  confirmHandler={this.handleDelete}
+                  confirmHandler={this.deleteAnnotation}
                 />
               </li>
-            ) : null}
+            </HigherOrder.Authorize>
           </ul>
         </nav>
       </div>
@@ -54,4 +64,4 @@ export default class HighlightDetail extends PureComponent {
   }
 }
 
-//
+export default connect()(HighlightDetail);

@@ -43,7 +43,7 @@ exports[`Reader.Annotation.Editor component renders correctly 1`] = `
           <input
             checked={false}
             id="private-annotation"
-            name="isPrivate"
+            name="private"
             onChange={[Function]}
             type="checkbox"
             value="1"

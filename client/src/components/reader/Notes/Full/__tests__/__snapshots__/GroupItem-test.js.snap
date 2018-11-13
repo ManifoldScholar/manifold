@@ -21,6 +21,13 @@ exports[`Reader.Notes.Full.GroupItem Component renders correctly 1`] = `
             View In Text
           </button>
         </li>
+        <li>
+          <button
+            onClick={[Function]}
+          >
+            Delete
+          </button>
+        </li>
       </ul>
     </nav>
   </div>

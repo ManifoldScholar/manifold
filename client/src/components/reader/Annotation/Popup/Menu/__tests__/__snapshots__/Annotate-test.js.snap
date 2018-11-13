@@ -2,16 +2,11 @@
 
 exports[`Reader.Annotation.Popup.Menu.Annotate Component renders correctly when not logged in 1`] = `
 <section
-  className="popup-page"
-  style={
-    Object {
-      "marginLeft": null,
-    }
-  }
+  className="popup-page top"
 >
   <button
     className={undefined}
-    onClick={[Function]}
+    onClick={[MockFunction]}
   >
     <i
       aria-hidden="true"
@@ -20,7 +15,7 @@ exports[`Reader.Annotation.Popup.Menu.Annotate Component renders correctly when 
     Login to Annotate
   </button>
   <div
-    className="tail"
+    className="tail tail-up"
   />
 </section>
 `;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class GroupItem extends Component {
-  static displayName = "Notes.List.GroupItem";
+  static displayName = "Notes.Partial.GroupItem";
 
   static propTypes = {
     annotation: PropTypes.object,

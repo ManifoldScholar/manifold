@@ -2,11 +2,15 @@ import React from "react";
 import renderer from "react-test-renderer";
 import DetailedList from "../DetailedList";
 import EmptyMessage from "../EmptyMessage";
+import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 Enzyme.configure({ adapter: new Adapter() });
+
+const store = build.store();
 
 describe("Reader.Notes.DetailedList Component", () => {
   const sortedAnnotations = [
@@ -18,14 +22,20 @@ describe("Reader.Notes.DetailedList Component", () => {
   ];
 
   const clickMock = jest.fn();
+  const deleteMock = jest.fn();
 
-  const component = renderer.create(
-    <DetailedList
-      sortedAnnotations={sortedAnnotations}
-      handleVisitAnnotation={clickMock}
-      loaded
-    />
+  const root = wrapWithRouter(
+    <Provider store={store}>
+      <DetailedList
+        sortedAnnotations={sortedAnnotations}
+        handleVisitAnnotation={clickMock}
+        handleDeleteAnnotation={deleteMock}
+        loaded
+      />
+    </Provider>
   );
+
+  const component = renderer.create(root);
 
   it("renders correctly", () => {
     let tree = component.toJSON();
@@ -42,6 +52,7 @@ describe("Reader.Notes.DetailedList Component", () => {
       <DetailedList
         sortedAnnotations={[]}
         handleVisitAnnotation={clickMock}
+        handleDeleteAnnotation={deleteMock}
         loaded
       />
     );
