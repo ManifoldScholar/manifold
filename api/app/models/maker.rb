@@ -30,6 +30,8 @@ class Maker < ApplicationRecord
     order(by)
   }
 
+  validate :name_is_present!
+
   # Search
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
@@ -48,6 +50,13 @@ class Maker < ApplicationRecord
 
   def to_s
     full_name
+  end
+
+  private
+
+  def name_is_present!
+    return true if first_name.present? || last_name.present?
+    errors.add(:base, "requires at least a first or last name")
   end
 
 end

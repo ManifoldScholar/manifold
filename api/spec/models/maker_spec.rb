@@ -29,6 +29,14 @@ RSpec.describe Maker, type: :model do
     it "has a correctly formatted #name" do
       expect(maker.name).to eq "Stubblin Champflin"
     end
+
+    it "is valid with a single first or last name" do
+      expect(FactoryBot.build(:maker, first_name: "Rowan", last_name: nil, name: nil)).to be_valid
+    end
+
+    it "is invalid without a single first or last name" do
+      expect(FactoryBot.build(:maker, name: nil, first_name: nil, last_name: nil)).to_not be_valid
+    end
   end
 
 end

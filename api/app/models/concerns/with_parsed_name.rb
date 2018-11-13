@@ -10,7 +10,6 @@ module WithParsedName
   }.freeze
 
   included do
-    validates :first_name, :last_name, presence: true
     validate :nickname_not_blank!
 
     before_validation :ensure_nickname
