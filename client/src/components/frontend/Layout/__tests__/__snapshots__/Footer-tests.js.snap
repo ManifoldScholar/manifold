@@ -104,7 +104,7 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
           className="colophon"
         >
           <div>
-            © 2015-2016 6 University of Minnesota Press.
+            2015-2016 6 University of Minnesota Press
             <br />
           </div>
         </div>

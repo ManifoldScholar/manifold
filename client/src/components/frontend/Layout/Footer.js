@@ -206,7 +206,7 @@ class LayoutFooter extends Component {
     if (!this.props.settings.attributes.general.copyright) return null;
     return (
       <div>
-        {`© ${this.props.settings.attributes.general.copyright}.`}
+        {this.props.settings.attributes.general.copyright}
         <br />
       </div>
     );
