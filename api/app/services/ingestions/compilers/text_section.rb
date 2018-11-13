@@ -6,7 +6,7 @@ module Ingestions
       hash :attributes do
         string :build
         string :source_identifier
-        string :name
+        string :name, default: "untitled"
         string :kind
         array :stylesheet_contents
         integer :position
