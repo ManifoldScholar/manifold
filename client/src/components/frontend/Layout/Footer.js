@@ -21,7 +21,8 @@ class LayoutFooter extends Component {
         theme: PropTypes.object,
         oauth: PropTypes.object,
         pressLogoStyles: PropTypes.object,
-        pressLogoFooterStyles: PropTypes.object
+        pressLogoFooterStyles: PropTypes.object,
+        copyrightFormatted: PropTypes.string
       })
     })
   };
@@ -203,12 +204,13 @@ class LayoutFooter extends Component {
 
   renderCopyright() {
     if (!this.props.settings) return null;
-    if (!this.props.settings.attributes.general.copyright) return null;
+    if (!this.props.settings.attributes.copyrightFormatted) return null;
     return (
-      <div>
-        {this.props.settings.attributes.general.copyright}
-        <br />
-      </div>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: this.props.settings.attributes.copyrightFormatted
+        }}
+      />
     );
   }
 

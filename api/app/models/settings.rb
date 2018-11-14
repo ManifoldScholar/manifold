@@ -1,9 +1,10 @@
 class Settings < ApplicationRecord
 
   # Concerns
-  include Authority::Abilities
-  include Concerns::SerializedAbilitiesFor
   include Attachments
+  include Authority::Abilities
+  include Concerns::HasFormattedAttributes
+  include Concerns::SerializedAbilitiesFor
 
   SECTIONS = [:general, :integrations, :secrets, :email, :theme].freeze
 
@@ -45,6 +46,8 @@ class Settings < ApplicationRecord
   manifold_has_attached_file :press_logo_footer, :image
   manifold_has_attached_file :press_logo_mobile, :image
   manifold_has_attached_file :favicon, :favicon
+
+  has_formatted_attributes :copyright, include_wrap: false, container: :general
 
   # Callbacks
   after_update :update_oauth_providers!

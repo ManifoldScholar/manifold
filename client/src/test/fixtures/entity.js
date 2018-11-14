@@ -140,7 +140,8 @@ const defaults = {
         mediumPortrait: null,
         largeLandscape: null,
         original: null
-      }
+      },
+      copyrightFormatted: "2015-2016 6 University of Minnesota Press"
     }
   },
 
