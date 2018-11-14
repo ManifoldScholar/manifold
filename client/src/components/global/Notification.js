@@ -6,7 +6,7 @@ export default class Notification extends Component {
   static propTypes = {
     id: PropTypes.string,
     heading: PropTypes.string,
-    body: PropTypes.string,
+    body: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     level: PropTypes.number,
     removeNotification: PropTypes.func
   };
