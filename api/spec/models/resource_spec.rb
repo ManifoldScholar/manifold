@@ -64,7 +64,7 @@ RSpec.describe Resource, type: :model do
     it "queues the job when created" do
       resource = FactoryBot.build(
         :resource,
-        kind: "vidoe",
+        kind: "video",
         sub_kind: "external_video",
         external_id: "lVrAwK7FaOw",
         external_type: "youtube"
@@ -75,7 +75,7 @@ RSpec.describe Resource, type: :model do
     it "queues the job when video id is changed" do
       resource = FactoryBot.create(
         :resource,
-        kind: "vidoe",
+        kind: "video",
         sub_kind: "external_video",
         external_id: "lVrAwK7FaOw",
         external_type: "youtube"

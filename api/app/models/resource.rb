@@ -71,9 +71,6 @@ class Resource < ApplicationRecord
                            include_wrap: false
   has_formatted_attribute :description
 
-  # Paperclip direct image from URL
-  attr_reader :variant_thumbnail_remote_url
-
   # Validation
   validates :title, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
@@ -242,11 +239,6 @@ class Resource < ApplicationRecord
 
   def vimeo?
     external_video? && external_type == "vimeo"
-  end
-
-  def variant_thumbnail_remote_url=(url_value)
-    self.variant_thumbnail = URI.parse(url_value)
-    @variant_thumbnail_remote_url = url_value
   end
 
   private
