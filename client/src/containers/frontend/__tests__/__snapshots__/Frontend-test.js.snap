@@ -315,10 +315,13 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
           <div
             className="colophon"
           >
-            <div>
-              2015-2016 6 University of Minnesota Press
-              <br />
-            </div>
+            <div
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "2015-2016 6 University of Minnesota Press",
+                }
+              }
+            />
           </div>
         </div>
       </section>

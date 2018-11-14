@@ -238,10 +238,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                           <section className=\\"footer-secondary\\">
                             <div className=\\"container flush\\">
                               <div className=\\"colophon\\">
-                                <div>
-                                  2015-2016 6 University of Minnesota Press
-                                  <br />
-                                </div>
+                                <div dangerouslySetInnerHTML={{...}} />
                               </div>
                             </div>
                           </section>
