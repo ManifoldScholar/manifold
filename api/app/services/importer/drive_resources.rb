@@ -217,8 +217,10 @@ module Importer
     end
 
     def checksum_for_pending_attachment(model, key)
-      tmp_path = model.send(key.to_s).queued_for_write[:original].path
+      tmp_path = model.send(key.to_s).open
       Digest::MD5.hexdigest(File.read(tmp_path))
+    ensure
+      tmp_path.close unless tmp_path.closed?
     end
 
     def io_from_drive_file(file)
