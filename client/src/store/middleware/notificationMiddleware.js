@@ -21,6 +21,8 @@ function handleAddNotificationAction(dispatch, action) {
     notification.scope !== "drawer"
   ) {
     let expire = parseInt(notification.expiration, 10);
+    if (expire === 0) return;
+
     if (isNaN(expire)) expire = 5000;
     setTimeout(() => {
       dispatch(notificationActions.removeNotification(notification.id));

@@ -261,7 +261,7 @@ export class IngestionIngest extends Component {
       heading: "Fatal Ingestion Error",
       body,
       scope: this.isReingestion ? "global" : "drawer",
-      expiration: 5000,
+      expiration: 0,
       removeNotification: this.complete
     };
     this.props.dispatch(notificationActions.addNotification(notification));
