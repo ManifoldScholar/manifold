@@ -14,9 +14,12 @@ const mapAPIError = ({ status, error, exception, traces }) => {
   let body = null;
   if (status === 502)
     body = "The Manifold client application can't communicate with the API.";
-  if (exception) body = exception.match(/(?:^#<|^)(.*)(?:>$|$)/)[1];
-  if (endsWith(body, ">")) body = body.substring(0, body.length - 1);
-
+  try {
+    if (exception) body = exception.match(/(?:^#<|^)(.*)(?:>$|$)/)[1];
+    if (endsWith(body, ">")) body = body.substring(0, body.length - 1);
+  } catch (e) {
+    body = exception;
+  }
   return {
     status,
     heading: `API ${error}`,
