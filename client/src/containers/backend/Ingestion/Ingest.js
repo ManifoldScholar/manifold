@@ -115,6 +115,10 @@ export class IngestionIngest extends Component {
     return this.props.route.modal;
   }
 
+  get isReingestion() {
+    return this.props.ingestion.attributes.textId;
+  }
+
   reset = () => {
     if (this.state.loading) return;
     this.setState({ textLog: "" });
@@ -256,7 +260,7 @@ export class IngestionIngest extends Component {
       id: `WEBSOCKET_ERROR`,
       heading: "Fatal Ingestion Error",
       body,
-      scope: "drawer",
+      scope: this.isReingestion ? "global" : "drawer",
       expiration: 5000,
       removeNotification: this.complete
     };
@@ -309,7 +313,7 @@ export class IngestionIngest extends Component {
             <div className="item">
               <p className="label">Text ID</p>
               <p className="value">
-                {attr.textId
+                {this.isReingestion
                   ? attr.textId
                   : "This ingestion will create a new text"}
               </p>
