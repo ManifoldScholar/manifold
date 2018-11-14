@@ -120,6 +120,8 @@ module PaperclipMigrator
       # First we convert the data as it exists in paperclip
       shrine_data = shrine_data_for instance, attachment_name, *style_names, options.symbolize_keys
 
+      shrine_data = shrine_data[:original] unless uploader_supports_versions?
+
       write_data! shrine_data
 
       # Now we refresh the metadata to ensure it is populated
@@ -131,8 +133,10 @@ module PaperclipMigrator
       write_data! shrine_data_with_metadata
 
       if attachment.present?
+        attachment_upload = uploader_supports_versions? ? "#{attachment_name}_original" : attachment_name
+
         begin
-          instance.__send__("#{attachment_name}_original").read 1024
+          instance.__send__(attachment_upload).read 1024
         rescue StandardError => e
           errors.add :base, "There was a problem testing reading the file: #{e.message}"
         end
@@ -162,6 +166,10 @@ module PaperclipMigrator
 
     def uploader
       @uploader ||= attacher.shrine_class
+    end
+
+    def uploader_supports_versions?
+      uploader.respond_to? :version_names
     end
   end
 
