@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181114170950) do
+ActiveRecord::Schema.define(version: 20181114185600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 20181114170950) do
     t.boolean  "live",                               default: false
     t.jsonb    "background_data",                    default: {}
     t.jsonb    "foreground_data",                    default: {}
+    t.boolean  "include_sign_up",                    default: false,  null: false
   end
 
   create_table "flags", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
