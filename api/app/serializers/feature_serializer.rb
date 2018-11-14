@@ -6,5 +6,6 @@ class FeatureSerializer < ApplicationSerializer
              :body, :body_formatted, :link_text, :link_url, :link_target, :style, :hidden,
              :background_color, :foreground_color, :header_color, :layout, :created_at,
              :updated_at, :foreground_top, :foreground_left, :foreground_styles,
-             :background_styles, :foreground_position, :position, :abilities, :live
+             :background_styles, :foreground_position, :position, :abilities, :live,
+             :include_sign_up
 end

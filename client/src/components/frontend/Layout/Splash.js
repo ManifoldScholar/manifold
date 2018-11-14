@@ -102,14 +102,15 @@ export default class Splash extends Component {
   }
 
   hasAttribute(attribute) {
-    return !isEmpty(get(this.props.feature, `attributes.${attribute}`));
+    return !isEmpty(this.attribute(attribute));
   }
 
   hasLink() {
-    return (
-      !isEmpty(this.attribute("linkText")) &&
-      !isEmpty(this.attribute("linkUrl"))
-    );
+    return this.hasAttribute("linkText") && this.hasAttribute("linkUrl");
+  }
+
+  showSignUpButton() {
+    return this.attribute("includeSignUp") && !this.props.authenticated;
   }
 
   hasForeground() {
@@ -185,8 +186,8 @@ export default class Splash extends Component {
               dangerouslySetInnerHTML={{ __html: this.body() }}
             />
             <div className="splash-content" />
-            {this.hasLink() ? (
-              <nav className="buttons">
+            <nav className="buttons">
+              {this.hasLink() ? (
                 <a
                   href={this.attribute("linkUrl")}
                   target="blank"
@@ -194,19 +195,19 @@ export default class Splash extends Component {
                 >
                   {this.attribute("linkText")}
                 </a>
-                {!this.props.authenticated ? (
-                  <span
-                    onClick={this.handleSignUp}
-                    target="blank"
-                    className="button-bare-primary"
-                    role="button"
-                    tabIndex="0"
-                  >
-                    {"Sign Up"}
-                  </span>
-                ) : null}
-              </nav>
-            ) : null}
+              ) : null}
+              {this.showSignUpButton() ? (
+                <span
+                  onClick={this.handleSignUp}
+                  target="blank"
+                  className="button-bare-primary"
+                  role="button"
+                  tabIndex="0"
+                >
+                  {"Sign Up"}
+                </span>
+              ) : null}
+            </nav>
           </div>
         </div>
       </section>

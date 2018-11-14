@@ -63,6 +63,12 @@ class FeaturesGeneralContainer extends PureComponent {
               name="attributes[linkUrl]"
               placeholder="Enter Link URL"
             />
+            <Form.Switch
+              wide
+              label="Include Sign Up Button"
+              name="attributes[includeSignUp]"
+              instructions="If enabled, a sign up button will be displayed over the feature for unauthenticated users."
+            />
             <Form.Select
               label="Style"
               name="attributes[style]"
