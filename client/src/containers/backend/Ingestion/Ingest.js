@@ -7,10 +7,11 @@ import { select, isLoaded } from "utils/entityUtils";
 import get from "lodash/get";
 import truncate from "lodash/truncate";
 import capitalize from "lodash/capitalize";
-import { websocketActions } from "actions";
+import { websocketActions, notificationActions } from "actions";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import { Ingestion } from "components/backend";
+import config from "../../../config";
 
 const { request, flush } = entityStoreActions;
 
@@ -81,6 +82,10 @@ export class IngestionIngest extends Component {
     if (prevState.textLog !== this.state.textLog) this.scrollToLogBottom();
     this.maybeProcessMessage(this.props.channel, prevProps.channel, prevProps);
     this.setDialogClassName();
+
+    if (prevProps.webSocketConnecting && this.props.webSocketFailure) {
+      this.displayError();
+    }
   }
 
   componentWillUnmount() {
@@ -219,6 +224,45 @@ export class IngestionIngest extends Component {
     return truncate(title, { length: 40 });
   }
 
+  displayError() {
+    const body = (
+      <React.Fragment>
+        {config.cableUrl ? (
+          <span>
+            {"The client application is unable to connect to the server's websocket. " +
+              'Please ensure that Manifold\'s "cable" service is available at the ' +
+              "following location:"}
+            <br />
+            <br />
+            <em>{config.cableUrl}</em>
+          </span>
+        ) : (
+          <span>
+            {"The CABLE_URL environment variable has not been set correctly. Please " +
+              "contact the administrator of this Manifold instance to correct this."}
+          </span>
+        )}
+        <br />
+        <br />
+        <span>
+          {"After the problem has been corrected, this ingestion can be resumed at the " +
+            "current URL."}
+        </span>
+      </React.Fragment>
+    );
+
+    const notification = {
+      level: 2,
+      id: `WEBSOCKET_ERROR`,
+      heading: "Fatal Ingestion Error",
+      body,
+      scope: "drawer",
+      expiration: 5000,
+      removeNotification: this.complete
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+  }
+
   renderFinished() {
     if (this.isModal) {
       return (
@@ -239,7 +283,7 @@ export class IngestionIngest extends Component {
     });
 
     if (this.props.webSocketFailure === true) {
-      return <Ingestion.ConnectionError close={this.complete} />;
+      return null;
     }
 
     return (

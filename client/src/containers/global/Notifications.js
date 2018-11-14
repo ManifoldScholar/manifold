@@ -134,6 +134,18 @@ export class NotificationsComponent extends Component {
     });
   }
 
+  removeNotification = id => {
+    const notification = this.props.notifications.notifications.find(
+      listNotification => listNotification.id === id
+    );
+
+    if (notification && notification.removeNotification) {
+      notification.removeNotification();
+    }
+
+    this.commonActions.clearNotifications();
+  };
+
   renderNotifications() {
     let notificationList = null;
     if (this.props.notifications.notifications.length > 0) {
@@ -146,7 +158,7 @@ export class NotificationsComponent extends Component {
               level={notification.level}
               heading={notification.heading}
               body={notification.body}
-              removeNotification={this.commonActions.clearNotifications}
+              removeNotification={this.removeNotification}
             />
           </div>
         );
