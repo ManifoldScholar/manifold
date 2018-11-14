@@ -46,10 +46,6 @@ module Ingestions
              date: text.publication_date
         info "services.ingestions.compiler.text.log.desc",
              desc: text.description
-
-        return unless text.cover.present?
-        info "services.ingestions.compiler.text.log.cover",
-             cover: text.cover.source_identifier
       end
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
     end

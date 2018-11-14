@@ -60,7 +60,7 @@ en:
           transforming_ss: 'Transforming stylesheets'
           remove_text_section: 'Destroyed stale text section "%{id}"'
           start_section: 'Starting section is "%{source_identifier}"'
-          text_cover_present: 'Set text cover to "%{filename}'
+          text_cover_present: 'Set text cover to "%{filename}"'
           text_cover_empty: 'No text cover found'
     factory:
       event:
