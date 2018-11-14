@@ -40,7 +40,7 @@ RSpec.describe Ingestions::Strategies::Epub do
 
       it "has the correct creator attributes" do
         expected = [
-          { "name" => "Andrew Culp", "sort_name" => "" }
+          { "name" => "Andrew Culp" }
         ]
         expect(manifest[:relationships][:creators]).to eq expected
       end
@@ -189,19 +189,19 @@ RSpec.describe Ingestions::Strategies::Epub do
 
       it "has the correct creator attributes" do
         expected = [
-          { "name" => "E. T. A. Hoffmann", "sort_name" => "Hoffmann, E. T. A." }
+          { "name" => "E. T. A. Hoffmann" }
         ]
         expect(@manifest[:relationships][:creators]).to eq expected
       end
 
       it "has the correct contributor attributes" do
         expected = [
-          { "name" => "The League of Moveable Type", "sort_name" => "League of Moveable Type, The" },
-          { "name" => "George Soane", "sort_name" => "Soane, George" },
-          { "name" => "Jan Verkolje", "sort_name" => "Verkolje, Jan" },
-          { "name" => "Charles Bowen", "sort_name" => "Bowen, Charles" },
-          { "name" => "Jared Updike", "sort_name" => "Updike, Jared" },
-          { "name" => "Alex Cabal", "sort_name" => "Cabal, Alex" }
+          { "name" => "The League of Moveable Type" },
+          { "name" => "George Soane" },
+          { "name" => "Jan Verkolje" },
+          { "name" => "Charles Bowen" },
+          { "name" => "Jared Updike" },
+          { "name" => "Alex Cabal" }
         ]
         expect(@manifest[:relationships][:contributors]).to eq expected
       end

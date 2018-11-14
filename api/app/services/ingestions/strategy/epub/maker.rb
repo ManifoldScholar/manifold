@@ -11,26 +11,12 @@ module Ingestions
 
         def attributes
           {
-            name: name,
-            sort_name: sort_name
+            name: name
           }
         end
 
         def name
           @maker_node.text
-        end
-
-        def sort_name
-          path = "//xmlns:meta[@refines='##{id}' and @property='file-as']"
-          node = @epub_inspector.metadata_node.xpath(path)
-          return nil unless node
-          node.text
-        end
-
-        protected
-
-        def id
-          @maker_node.attribute("id")&.value
         end
 
       end

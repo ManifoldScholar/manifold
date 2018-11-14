@@ -346,7 +346,6 @@ const backendEditors = [
       first_name: "Matt",
       middle_name: "",
       last_name: "Garrish",
-      sort_name: "Garrish, Matt",
       display_name: "",
       role: "creator"
     },
@@ -359,7 +358,6 @@ const backendEditors = [
       first_name: "Markus",
       middle_name: "",
       last_name: "Gylling",
-      sort_name: "Gylling, Markus",
       display_name: "",
       role: "creator"
     },
@@ -371,7 +369,6 @@ const backendEditors = [
       first_name: "Liza",
       middle_name: "",
       last_name: "Weinstein",
-      sort_name: "Weinstein, Liza",
       display_name: "",
       role: "creator"
     },
