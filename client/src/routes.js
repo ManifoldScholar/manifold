@@ -795,6 +795,17 @@ export default () => {
               }
             },
             {
+              name: "frontendProjectEvents",
+              exact: true,
+              component: Frontend.EventList,
+              path: "/projects/:id/events/:page?",
+              helpers: {
+                frontendProjectEvents: p => `/projects/${p}/events`,
+                frontendProjectEventsPage: (pr, pg) =>
+                  `/projects/${pr}/events/${pg}`
+              }
+            },
+            {
               component: NotFound
             }
           ]
@@ -831,17 +842,6 @@ export default () => {
           exact: true,
           component: Frontend.PasswordReset,
           path: "/reset-password/:resetToken"
-        },
-        {
-          name: "frontendProjectEvents",
-          exact: true,
-          component: Frontend.EventList,
-          path: "/projects/:id/events/:page?",
-          helpers: {
-            frontendProjectEvents: p => `/projects/${p}/events`,
-            frontendProjectEventsPage: (pr, pg) =>
-              `/projects/${pr}/events/${pg}`
-          }
         },
         {
           name: "frontendPage",
