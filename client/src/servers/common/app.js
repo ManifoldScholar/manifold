@@ -17,6 +17,7 @@ export default function webApp(name, optionsIgnored = {}) {
   const app = connect();
   const clientAssetPort = config.assetPort;
   const assetTarget = `http://localhost:${clientAssetPort}`;
+  const apiAssetTarget = config.apiUrl;
   const wwwPath = path.join(__dirname, "www");
 
   ch.info(capitalize(`${name} server has been initialized.`));
@@ -35,6 +36,11 @@ export default function webApp(name, optionsIgnored = {}) {
   }
 
   if (process.env.WEBPACK_DEV_SERVER) {
+
+    ch.info(capitalize(`${name} server will proxy /system requests to ${apiAssetTarget}.`));
+    const apiAssetProxy = proxy({ target: apiAssetTarget, logLevel: "silent" });
+    app.use('/system', apiAssetProxy);
+
     const toProxy = [
       "/browser.config.js",
       "/build",
