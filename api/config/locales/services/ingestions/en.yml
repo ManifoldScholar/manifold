@@ -58,6 +58,7 @@ en:
           transforming_ts: 'Transforming text sections'
           transform_ss: 'Transforming stylesheet "%{name}"'
           transforming_ss: 'Transforming stylesheets'
+          remove_stylesheet: 'Destroyed stale stylesheet "%{id}"'
           remove_text_section: 'Destroyed stale text section "%{id}"'
           start_section: 'Starting section is "%{source_identifier}"'
           text_cover_present: 'Set text cover to "%{filename}"'

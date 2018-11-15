@@ -73,14 +73,14 @@ RSpec.describe Ingestions::Strategies::Epub do
         { "label" => "Section 2", "anchor" => nil, "source_path" => "EPUB/xhtml/section0002.xhtml", "type" => nil, "children"=> [
             { "label" => "Section 2.a", "anchor" => nil, "source_path" => "EPUB/xhtml/section0002a.xhtml", "type" => nil }
         ] },
-        { "label" => "Section 3", "anchor" => nil, "source_path" => "EPUB/xhtml/section0003.xhtml", "type"=> nil }
+        { "label" => "Section 3", "anchor" => nil, "source_path" => "EPUB/xhtml/an item with spaces.xhtml", "type"=> nil }
       ]
       expect(manifest[:attributes][:toc]).to eq expected
     end
 
     it "has the correct text section attributes" do
       expected = [
-        { "source_identifier"=>"section0001.xhtml", "name" => "Section 1", "kind" => "section", "position" => 0, "build" => "build/section0001.xhtml" },
+        { "source_identifier"=>"section0001.xhtml", "name" => "Section 1", "kind" => "navigation", "position" => 0, "build" => "build/section0001.xhtml" },
         { "source_identifier"=>"section0002.xhtml",  "name" => "Section 2", "kind" => "section", "position" => 1, "build" => "build/section0002.xhtml" },
         { "source_identifier"=>"section0002a.xhtml",  "name" => "Section 2.a", "kind" => "section", "position" => 2, "build" => "build/section0002a.xhtml" },
         { "source_identifier"=>"section0003.xhtml",  "name" => "Section 3", "kind" => "section", "position" => 3, "build" => "build/section0003.xhtml" }]
@@ -88,7 +88,8 @@ RSpec.describe Ingestions::Strategies::Epub do
     end
 
     it "has the correct landmarks" do
-      expect(manifest[:attributes][:landmarks]).to eq []
+      expect(manifest[:attributes][:landmarks]).to eq [{"label"=>"Table of Contents", "anchor"=>nil, "source_path"=>"EPUB/xhtml/section0001.xhtml", "type"=>"toc"},
+                                                       {"label"=>"Title page", "anchor"=>nil, "source_path"=>"EPUB/xhtml/section0002.xhtml", "type"=>"bodymatter"}]
     end
   end
 
