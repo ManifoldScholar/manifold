@@ -39,8 +39,11 @@ doc
 
 ### Environments ###
 /.env
+/.env*
+!.env.sample
 
 ## Development services ###
 /services/*
 
 .DS_Store
+
