@@ -5,7 +5,7 @@ module Ingestions
 
     def execute
       generate_spine
-      remove_stale_sections
+      remove_stale_records
       transform_text_sections
       validate_stylesheets
       set_start_section
@@ -58,6 +58,12 @@ module Ingestions
            source_identifier: section.source_identifier
     end
 
+    def remove_stale_records
+      remove_stale_sections
+      remove_stale_stylesheets
+      text.reload
+    end
+
     def remove_stale_sections
       text.text_sections.each do |section|
         next if text.spine.include? section.id
@@ -67,8 +73,17 @@ module Ingestions
         info "services.ingestions.post_processor.log.remove_text_section",
              id: section.id
       end
+    end
 
-      text.reload
+    def remove_stale_stylesheets
+      text.stylesheets.each do |stylesheet|
+        next unless stylesheet.ingested?
+        next if stylesheet.text_sections.any?
+
+        stylesheet.destroy
+        info "services.ingestions.post_processor.log.remove_stylesheet",
+             id: stylesheet.id
+      end
     end
   end
 end

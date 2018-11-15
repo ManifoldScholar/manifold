@@ -38,7 +38,7 @@ module Ingestions
           hash[:text] = text
           hash[:ingestion_source] = ingestion_source
           hash[:source_body] = source_body
-          hash[:stylesheets] = stylesheets
+          hash[:stylesheets] = user_stylesheets + stylesheets
         end.except(:build, :stylesheet_contents)
       end
 
@@ -48,6 +48,10 @@ module Ingestions
 
       def ingestion_source
         text.ingestion_sources.find_by(source_identifier: attributes[:source_identifier])
+      end
+
+      def user_stylesheets
+        text_section.stylesheets.where(ingested: false)
       end
 
       def stylesheets
