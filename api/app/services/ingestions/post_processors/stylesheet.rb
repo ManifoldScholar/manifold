@@ -27,8 +27,12 @@ module Ingestions
                           skip_formatting: true
       end
 
+      # If beautifying fails for any reason, the ingestion as a whole shouldn't.
+      # Instead just skip any transformation on the raw_styles.
       def beautify_raw_styles!
         @raw_styles = CssBeautify.beautify raw_styles, autosemicolon: true
+      rescue StandardError
+        nil
       end
 
       def validate_stylesheet
