@@ -15,11 +15,14 @@ module Ingestions
       compose_into :manifest, strategy.interaction
       compose_into :manifest, Ingestions::PreProcessor
 
-      compose_into :text, Ingestions::Compiler
+      ActiveRecord::Base.transaction do
+        compose_into :text, Ingestions::Compiler
 
-      compose Ingestions::PostProcessor
+        compose Ingestions::PostProcessor
 
-      set_ingestion_text
+        set_ingestion_text
+      end
+
       text
     end
 

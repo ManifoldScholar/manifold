@@ -3,15 +3,13 @@ module Ingestions
     hash :manifest, strip: false
 
     def execute
-      ActiveRecord::Base.transaction do
-        create_text
-        create_records :text_titles
-        create_records :creators
-        create_records :contributors
-        create_records :ingestion_sources
-        create_records :stylesheets
-        create_records :text_sections
-      end
+      create_text
+      create_records :text_titles
+      create_records :creators
+      create_records :contributors
+      create_records :ingestion_sources
+      create_records :stylesheets
+      create_records :text_sections
 
       text.reload
     end
