@@ -44,6 +44,8 @@ class Stylesheet < ApplicationRecord
   def beautify_raw
     return if skip_formatting
     self.raw_styles = CssBeautify.beautify raw_styles, autosemicolon: true
+  rescue StandardError
+    nil
   end
 
   def set_hashed_content
