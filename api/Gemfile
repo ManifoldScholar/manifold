@@ -66,6 +66,7 @@ gem "omniauth", "~> 1.6.1"
 gem "omniauth-facebook", "~> 4.0.0"
 gem "omniauth-google-oauth2", "~> 0.4.1"
 gem "omniauth-twitter", "~> 1.4.0"
+gem "rack", ">= 2.0.6"
 gem "rack-cors", "~> 1.0"
 gem "rails", "~> 5.0.0"
 # This can go to 3.0 when we're ready to upgrade Rubocop to 0.52

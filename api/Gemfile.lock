@@ -307,7 +307,7 @@ GEM
       slop (~> 3.0)
     public_suffix (3.0.2)
     puma (3.11.2)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-cors (1.0.2)
     rack-protection (2.0.0)
       rack
@@ -555,6 +555,7 @@ DEPENDENCIES
   pry-rails (~> 0.3.0)
   pry-remote
   puma (~> 3.0)
+  rack (>= 2.0.6)
   rack-cors (~> 1.0)
   rails (~> 5.0.0)
   rainbow (~> 2.0)
