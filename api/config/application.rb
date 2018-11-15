@@ -49,8 +49,10 @@ module ManifoldApi
     config.action_cable.allowed_request_origins = [
       "http://#{ENV['DOMAIN']}",
       "https://#{ENV['DOMAIN']}",
-      "http://127.0.0.1:3030",
-      "http://localhost:3030"
+      "http://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_FALLBACK_PORT']}",
+      "https://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_FALLBACK_PORT']}",
+      "http://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_PORT']}",
+      "https://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_PORT']}"
     ]
 
     # Settings in config/environments/* take precedence over those specified

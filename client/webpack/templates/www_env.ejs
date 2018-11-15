@@ -2,3 +2,6 @@ if (!window.process) window.process = {};
 if (!window.process.env) window.process.env = {};
 process.env.DOMAIN = "<%= env.DOMAIN %>";
 process.env.NODE_ENV = "<%= env.NODE_ENV %>";
+process.env.API_URL = "<%= env.API_URL %>";
+process.env.CABLE_URL = "<%= env.CABLE_URL %>";
+process.env.USE_SSL = "<%= env.USE_SSL %>";
