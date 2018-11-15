@@ -123,6 +123,33 @@ RSpec.describe Ingestions::Ingestor do
       end
     end
 
+    context "when reingesting" do
+      let(:text) { FactoryBot.create(:text, title: "original") }
+      let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
+      let(:ingestion) do
+        ingestion = FactoryBot.create(:ingestion, text: text)
+        allow(ingestion).to receive(:ingestion_source).and_return(path)
+        allow(ingestion).to receive(:source_file_name).and_return("index.html")
+        ingestion
+      end
 
+      describe "a successful reingestion" do
+        it "updates the existing text" do
+          expect do
+            described_class.run ingestion: ingestion
+          end.to change(text, :updated_at)
+        end
+      end
+
+      describe "a reingestion with failures" do
+        it "does not persist updates" do
+          allow_any_instance_of(Ingestions::Compilers::TextSection).to receive(:text_section).and_raise(::Ingestions::IngestionError)
+
+          expect do
+            described_class.run ingestion: ingestion
+          end.to_not change(text, :title)
+        end
+      end
+    end
   end
 end
