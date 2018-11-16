@@ -5,11 +5,13 @@ module Api
         # Favorites Controller
         class FavoritesController < ApplicationController
 
+          before_action :authenticate_request!
+
           INCLUDES = %w(favorites).freeze
           LOCATION = [:api, :v1, :me].freeze
 
           resourceful! Favorite do
-            @current_user.favorites
+            current_user.favorites
           end
 
           def index
@@ -23,10 +25,10 @@ module Api
 
           def create
             updater = ::Updaters::Default.new(favorite_params)
-            @favorite = updater.update(@current_user.favorites.build)
+            @favorite = updater.update(current_user.favorites.build)
             if @favorite.valid?
               render_single_resource(
-                @current_user,
+                current_user,
                 include: INCLUDES,
                 location: LOCATION,
                 serializer: CurrentUserSerializer

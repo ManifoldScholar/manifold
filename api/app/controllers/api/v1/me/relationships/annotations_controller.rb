@@ -5,6 +5,8 @@ module Api
         # Annotations controller
         class AnnotationsController < ApplicationController
 
+          before_action :authenticate_request!
+
           resourceful! Annotation do
             scope = Annotation.created_by(current_user)
             Annotation.filter(annotation_filter_params, scope: scope)
