@@ -11,6 +11,7 @@ import pick from "lodash/pick";
 import brackets2dots from "brackets2dots";
 import { Prompt } from "react-router-dom";
 import { FormContext } from "helpers/contexts";
+import isArray from "lodash/isArray";
 
 const { request, flush } = entityStoreActions;
 const { close, open, set } = entityEditorActions;
@@ -124,8 +125,12 @@ export class FormContainer extends PureComponent {
     if (!relationships) return {};
     const adjusted = Object.assign({}, relationships);
     forEach(adjusted, (value, key) => {
+      const adjustedValue = isArray(value)
+        ? value.map(relation => pick(relation, ["id", "type"]))
+        : pick(value, ["id", "type"]);
+
       adjusted[key] = {
-        data: value.map(relation => pick(relation, ["id", "type"]))
+        data: adjustedValue
       };
     });
 

@@ -5,7 +5,6 @@ import { Form as FormContainer } from "containers/backend";
 import { usersAPI, permissionsAPI, requests } from "api";
 import connectAndFetch from "utils/connectAndFetch";
 import lh from "helpers/linkHandler";
-import pick from "lodash/pick";
 
 export class PermissionForm extends PureComponent {
   static displayName = "Permission.Form";
@@ -28,7 +27,7 @@ export class PermissionForm extends PureComponent {
   composeCreateCall = permission => {
     const entity = this.props.entity;
     if (!permission || !entity) return null;
-    return permissionsAPI.create(entity, this.adjustPermission(permission));
+    return permissionsAPI.create(entity, permission);
   };
 
   composeUpdateCall = (id, permission) => {
@@ -36,18 +35,6 @@ export class PermissionForm extends PureComponent {
     if (!permission || !entity) return null;
     return permissionsAPI.update(entity, id, permission);
   };
-
-  adjustPermission(permission) {
-    const attributes = permission.attributes;
-    const relationships = {};
-    Object.keys(permission.relationships).forEach(
-      r =>
-        (relationships[r] = {
-          data: pick(permission.relationships[r], ["id", "type"])
-        })
-    );
-    return Object.assign({}, { attributes }, { relationships });
-  }
 
   labelUser = user => user.attributes.fullName;
 
