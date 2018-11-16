@@ -66,6 +66,10 @@ class ApplicationAuthorizer < Authority::Authorizer
 
   protected
 
+  def known_user?(user)
+    user.role.present?
+  end
+
   def resource_belongs_to_updatable_project?(user, resource)
     resource.projects.any? do |project|
       user.can_update? project

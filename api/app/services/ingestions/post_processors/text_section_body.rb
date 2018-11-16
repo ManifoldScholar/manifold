@@ -1,4 +1,3 @@
-require "naught"
 require "pathname"
 require "uri"
 require "cgi"
