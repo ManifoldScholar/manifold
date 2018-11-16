@@ -217,7 +217,7 @@ export class ReaderContainer extends Component {
   render() {
     if (!this.props.text) return null;
     if (this.shouldRedirect(this.props)) return this.renderRedirect(this.props);
-    if (!this.props.text) return null;
+
     const skipId = "skip-to-main";
 
     return (

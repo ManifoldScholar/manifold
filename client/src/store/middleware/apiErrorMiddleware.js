@@ -7,6 +7,10 @@ function isApiError(error) {
   return error.id === "API_ERROR";
 }
 
+function isAuthorizationError(error) {
+  return error.status === 403;
+}
+
 function isFatal(error) {
   return [500, 501, 502, 503, 504, 511, 404].includes(error.status);
 }
@@ -35,10 +39,21 @@ function firstFatalError(action) {
   });
 }
 
+function fatalAuthorizationError(error) {
+  return fatalErrorActions.setFatalError(
+    { heading: error.title, body: error.detail },
+    fatalErrorActions.types.authorization
+  );
+}
+
 function notifyApiErrors(dispatch, action) {
   const errors = apiErrors(action);
   if (errors.length === 0) return;
   errors.forEach(error => {
+    if (isAuthorizationError(error)) {
+      return dispatch(fatalAuthorizationError(error));
+    }
+
     dispatch(
       notificationActions.addNotification({
         id: error.id,
