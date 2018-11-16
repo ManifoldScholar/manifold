@@ -86,6 +86,15 @@ RSpec.describe "Text Section Annotations API", type: :request do
       end
     end
 
+    context "when the user is not authenticated" do
+      before(:each) { post path, params: json_payload(annotation_params) }
+      describe "the response" do
+        it "has a 403 status code" do
+          expect(response).to have_http_status(403)
+        end
+      end
+    end
+
     context "when the user is an admin" do
       before(:each) { post path, headers: admin_headers, params: json_payload(annotation_params) }
       describe "the response" do

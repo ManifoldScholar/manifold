@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Resource Abilities", :authorizer do
+  include_examples "unauthenticated user", Resource
+
   context 'when the subject is an admin' do
     let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
     let(:object) { FactoryBot.create(:resource) }

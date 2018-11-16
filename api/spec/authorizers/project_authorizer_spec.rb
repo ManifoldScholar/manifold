@@ -50,6 +50,28 @@ shared_examples_for "unauthorized to manage project permissions" do
 end
 
 RSpec.describe "Project Abilities", :authorizer do
+  include TestHelpers::AuthorizationHelpers
+
+  context 'when unauthenticated' do
+    context 'when draft' do
+      let(:subject) { anonymous_user }
+      let(:object) { FactoryBot.create(:project, draft: true) }
+
+      the_subject_behaves_like "instance abilities", Project, none: true
+      the_subject_behaves_like "unauthorized to manage project children"
+      the_subject_behaves_like "unauthorized to manage project permissions"
+    end
+
+    context 'when not draft' do
+      let(:subject) { anonymous_user }
+      let(:object) { FactoryBot.create(:project) }
+
+      the_subject_behaves_like "instance abilities", Project, read_only: true
+      the_subject_behaves_like "unauthorized to manage project children"
+      the_subject_behaves_like "unauthorized to manage project permissions"
+    end
+  end
+
   context 'when the subject is an admin and the project is a draft' do
     let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
     let(:object) { FactoryBot.create(:project, draft: true) }

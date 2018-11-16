@@ -31,6 +31,7 @@ module Api
 
       def show
         @project = scope_for_projects.find(params[:id])
+        authorize_action_for @project
         render_single_resource @project,
                                serializer: ProjectFullSerializer,
                                include: INCLUDES

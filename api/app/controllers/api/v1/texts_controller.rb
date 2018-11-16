@@ -20,6 +20,7 @@ module Api
         @text = scope_for_texts.includes(:project, :text_sections, :stylesheets)
                                .find(params[:id])
         includes = INCLUDES + %w(category creators contributors stylesheets)
+        authorize_action_for @text
         render_single_resource @text,
                                serializer: TextFullSerializer,
                                include: includes

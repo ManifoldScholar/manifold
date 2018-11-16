@@ -1,5 +1,4 @@
 require "memoist"
-require "naught"
 
 module Ingestions
   module Strategy

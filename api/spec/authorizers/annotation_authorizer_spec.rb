@@ -7,6 +7,12 @@ RSpec.describe "Annotation Abilities", :authorizer do
   let(:text) { FactoryBot.create(:text, project: project) }
   let(:object) { FactoryBot.create(:annotation, creator: creator, private: false, text: text) }
 
+  context 'when the subject is an anonymous user' do
+    let(:subject) { anonymous_user }
+    abilities = { create: false, read: true, update: false, delete: false}
+    the_subject_behaves_like "instance abilities", Annotation, abilities
+  end
+
   context 'when the subject is an admin' do
     let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
 

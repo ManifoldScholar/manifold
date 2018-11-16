@@ -1,3 +1,4 @@
+require "naught"
 
 # The base application controller
 class ApplicationController < ActionController::API
@@ -14,6 +15,31 @@ class ApplicationController < ActionController::API
   rescue_from ApiExceptions::StandardError, with: :render_error_response
 
   protected
+
+  def authority_user
+    @authority_user ||= current_user || anonymous_user
+  end
+
+  # rubocop:disable Metrics/MethodLength, Lint/NestedMethodDefinition
+  def anonymous_user
+    @anonymous_user ||= Naught.build do |config|
+      config.impersonate User
+      config.predicates_return false
+
+      def role
+        nil
+      end
+
+      def kind
+        nil
+      end
+
+      def can_read?(resource)
+        resource.readable_by? self
+      end
+    end.new
+  end
+  # rubocop:enable Metrics/MethodLength, Lint/NestedMethodDefinition
 
   def user_for_paper_trail
     current_user&.to_global_id.to_s if current_user

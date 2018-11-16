@@ -1,3 +1,5 @@
+require "naught"
+
 module TestHelpers
   module AuthorizationHelpers
 
@@ -29,4 +31,24 @@ module TestHelpers
       "an "
     end
   end
+
+  def anonymous_user
+    Naught.build do |config|
+      config.impersonate User
+      config.predicates_return false
+
+      def role
+        nil
+      end
+
+      def kind
+        nil
+      end
+
+      def can_read?(resource)
+        resource.readable_by? self
+      end
+    end.new
+  end
+
 end
