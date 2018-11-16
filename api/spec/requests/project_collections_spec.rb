@@ -53,6 +53,31 @@ RSpec.describe "Project Collections API", type: :request do
     end
   end
 
+  describe "creates a collection" do
+    let (:path) { api_v1_project_collections_path }
+    let(:subject) { FactoryBot.create(:subject) }
+    let(:attributes) {
+      {
+        title: "Project Collection",
+        icon: "some-icon",
+        smart: true
+      }
+    }
+    let(:relationships) do
+      {
+        subjects: { data: [{ type: "subjects", id: subject.id }] }
+      }
+    end
+    let(:valid_params) {
+      json_payload(attributes: attributes, relationships: relationships)
+    }
+
+    it "has a 201 CREATED status code" do
+      post path, headers: admin_headers, params: valid_params
+      expect(response).to have_http_status(201)
+    end
+  end
+
   describe "updates a collection" do
 
     let(:path) { api_v1_project_collection_path(project_collection) }
