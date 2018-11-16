@@ -33,7 +33,7 @@ export default class ProjectCollectionDetail extends Component {
 
     return (
       <section key={projectCollection.id} className="bg-neutral05">
-        <div className="container project-list-container">
+        <div className="container entity-section-wrapper">
           <div className="section-heading">
             <div className="main">
               <i className={"manicon"} aria-hidden="true">

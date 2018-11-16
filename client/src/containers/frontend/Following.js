@@ -121,7 +121,7 @@ export class FollowingContainer extends Component {
       return null;
     return (
       <section>
-        <div className="container project-list-container">
+        <div className="container entity-section-wrapper">
           <header className="section-heading">
             <div className="main">
               <i className="manicon" aria-hidden="true">

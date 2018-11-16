@@ -5,7 +5,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
   className="project-collection-summary"
 >
   <div
-    className="container project-list-container"
+    className="container entity-section-wrapper"
   >
     <a
       className="section-heading"
@@ -46,7 +46,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
       </div>
     </a>
     <nav
-      className="project-list grid"
+      className="entities project-list grid"
     >
       <ul>
         <li>
@@ -78,7 +78,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
       </ul>
     </nav>
     <div
-      className="utility"
+      className="utility utility-footer"
     >
       <a
         href="/projects/project-collection/undefined"

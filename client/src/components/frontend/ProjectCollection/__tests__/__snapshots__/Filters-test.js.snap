@@ -2,7 +2,7 @@
 
 exports[`Frontend.ProjectCollection.Filters component renders correctly 1`] = `
 <form
-  className="form-list-filter"
+  className="list-tools form-list-filter"
   onSubmit={[Function]}
 >
   <div

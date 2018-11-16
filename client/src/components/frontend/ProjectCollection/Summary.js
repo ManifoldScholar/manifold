@@ -59,7 +59,7 @@ export default class ProjectCollectionSummary extends Component {
 
     return (
       <section key={this.collection.id} className={backgroundClasses}>
-        <div className="container project-list-container">
+        <div className="container entity-section-wrapper">
           <Link
             className="section-heading"
             to={lh.link(

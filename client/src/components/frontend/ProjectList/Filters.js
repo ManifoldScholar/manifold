@@ -144,7 +144,10 @@ export default class ProjectListFilters extends Component {
 
   render() {
     return (
-      <form className="form-list-filter" onSubmit={this.updateResults}>
+      <form
+        className="list-tools form-list-filter"
+        onSubmit={this.updateResults}
+      >
         {this.renderSearch()}
         <div className="select-group inline">
           {this.renderSort()}

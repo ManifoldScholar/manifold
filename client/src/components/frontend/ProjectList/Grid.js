@@ -76,7 +76,7 @@ export default class ProjectListGrid extends Component {
     if (!props.viewAllUrl) return null;
 
     return (
-      <div className="utility">
+      <div className="utility utility-footer">
         <Link to={this.props.viewAllUrl}>
           {this.props.viewAllLabel}
           <i className="manicon manicon-arrow-long-right" />
@@ -92,7 +92,7 @@ export default class ProjectListGrid extends Component {
 
     return (
       <React.Fragment>
-        <nav className="project-list grid">
+        <nav className="entities project-list grid">
           <ReactCSSTransitionGroup
             transitionName="project-list grid"
             transitionEnter={this.enableAnimation}

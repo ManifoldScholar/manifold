@@ -22,7 +22,7 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
     className="bg-neutral05"
   >
     <div
-      className="container project-list-container"
+      className="container entity-section-wrapper"
     >
       <div
         className="section-heading"
@@ -61,7 +61,7 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
         </div>
       </div>
       <form
-        className="form-list-filter"
+        className="list-tools form-list-filter"
         onSubmit={[Function]}
       >
         <div
@@ -147,7 +147,7 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
         </p>
       </div>
       <nav
-        className="project-list grid"
+        className="entities project-list grid"
       >
         <ul>
           <li>

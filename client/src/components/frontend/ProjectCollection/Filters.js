@@ -56,7 +56,10 @@ export default class ProjectCollectionFilters extends Component {
 
   render() {
     return (
-      <form className="form-list-filter" onSubmit={this.updateResults}>
+      <form
+        className="list-tools form-list-filter"
+        onSubmit={this.updateResults}
+      >
         <div className="search-input">
           <button className="search-button" type="submit">
             <span className="screen-reader-text">Search…</span>

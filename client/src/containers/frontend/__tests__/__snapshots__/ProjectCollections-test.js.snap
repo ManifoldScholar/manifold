@@ -28,7 +28,7 @@ exports[`Frontend ProjectCollections Container renders correctly 1`] = `
     className="project-collection-summary bg-neutral05"
   >
     <div
-      className="container project-list-container"
+      className="container entity-section-wrapper"
     >
       <a
         className="section-heading"
@@ -83,7 +83,7 @@ exports[`Frontend ProjectCollections Container renders correctly 1`] = `
     className="project-collection-summary"
   >
     <div
-      className="container project-list-container"
+      className="container entity-section-wrapper"
     >
       <a
         className="section-heading"

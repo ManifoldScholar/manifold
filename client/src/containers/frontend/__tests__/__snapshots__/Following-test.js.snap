@@ -6,7 +6,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
     className="bg-neutral05"
   >
     <div
-      className="container project-list-container"
+      className="container entity-section-wrapper"
     >
       <header
         className="section-heading"
@@ -45,7 +45,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
         </div>
       </header>
       <form
-        className="form-list-filter"
+        className="list-tools form-list-filter"
         onSubmit={[Function]}
       >
         <div
@@ -142,7 +142,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
         </button>
       </form>
       <nav
-        className="project-list grid"
+        className="entities project-list grid"
       >
         <ul>
           <li>
@@ -379,7 +379,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
   </section>
   <section>
     <div
-      className="container project-list-container"
+      className="container entity-section-wrapper"
     >
       <header
         className="section-heading"
@@ -418,7 +418,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
         </div>
       </header>
       <nav
-        className="project-list grid"
+        className="entities project-list grid"
       >
         <ul>
           <li>

@@ -37,7 +37,7 @@ export default class ProjectListFollowing extends Component {
       return <Layout.NoFollow />;
     return (
       <section className="bg-neutral05">
-        <div className="container project-list-container">
+        <div className="container entity-section-wrapper">
           <header className="section-heading">
             <div className="main">
               <i className="manicon" aria-hidden="true">

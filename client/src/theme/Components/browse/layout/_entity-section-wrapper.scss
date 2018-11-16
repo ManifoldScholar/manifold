@@ -1,6 +1,6 @@
 // Arranges section-heading, details, and search/filters using flexbox
 // Currently used on Project & Project Collections detail pages
-.project-list-container {
+.entity-section-wrapper {
   display: flex;
   flex-direction: column;
   padding-top: 30px;
@@ -16,7 +16,7 @@
     order: -1;
     margin-bottom: 20px;
 
-    + .project-list { // if no filters or .details
+    + .entities { // if no .list-tools or .details
       @include respond($break75) {
         margin-top: 34px;
       }
@@ -50,7 +50,7 @@
     }
   }
 
-  .form-list-filter {
+  .list-tools {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -59,7 +59,7 @@
     padding-bottom: 0;
     margin-bottom: 36px;
 
-    + .project-list { // if no .details
+    + .entities { // if no .details
       margin-top: 18px;
 
       @include respond($break75) {
@@ -80,39 +80,38 @@
       margin-bottom: 0;
     }
 
-    .search-input {
-      width: auto;
-
-      @include respond($break75) {
-        flex-grow: 1;
-      }
-
-      @include respond($break95) {
-        width: 200px;
-      }
-    }
-
-    .select-group.inline {
-      @include respond($break75) {
+    &.form-list-filter {
+      .search-input {
         width: auto;
-        padding-top: 0;
-        margin-left: 0;
+
+        @include respond($break75) {
+          flex-grow: 1;
+        }
+
+        @include respond($break95) {
+          width: 200px;
+        }
       }
 
-      @include respond($break90) {
+      .select-group.inline {
+        @include respond($break75) {
+          width: auto;
+          padding-top: 0;
+          margin-left: 0;
+        }
       }
-    }
-  }
 
-  .reset-button {
-    position: absolute;
-    top: 100%;
-    left: 0;
+      .reset-button {
+        position: absolute;
+        top: 100%;
+        left: 0;
 
-    @include respond($break95) {
-      right: 0;
-      left: unset;
-      text-align: right;
+        @include respond($break95) {
+          right: 0;
+          left: unset;
+          text-align: right;
+        }
+      }
     }
   }
 
@@ -161,14 +160,21 @@
     }
   }
 
+  .entities:not(.project-list) {
+    width: 100%;
+  }
+
   .utility {
     @include utilityPrimary;
-    margin-top: 30px;
     font-size: 14px;
     line-height: 1.57;
 
-    @include respond($break75) {
-      margin-top: 20px;
+    &-footer {
+      margin-top: 30px;
+
+      @include respond($break75) {
+        margin-top: 20px;
+      }
     }
 
     a {

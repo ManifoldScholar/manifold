@@ -2,7 +2,7 @@
 
 exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
 <nav
-  className="project-list grid"
+  className="entities project-list grid"
 >
   <ul>
     <li>
