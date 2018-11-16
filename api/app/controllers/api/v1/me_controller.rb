@@ -8,8 +8,8 @@ module Api
       INCLUDES = %w(favorites makers).freeze
 
       def show
-        if @current_user
-          render json: @current_user,
+        if current_user
+          render json: current_user,
                  include: INCLUDES,
                  serializer: CurrentUserSerializer
         else
@@ -18,13 +18,13 @@ module Api
       end
 
       def update
-        ::Updaters::User.new(user_params).update(@current_user)
-        if @current_user.valid?
-          render json: @current_user,
+        ::Updaters::User.new(user_params).update(current_user)
+        if current_user.valid?
+          render json: current_user,
                  include: INCLUDES,
                  serializer: CurrentUserSerializer
         else
-          render json: @current_user,
+          render json: current_user,
                  serializer: ActiveModel::Serializer::ErrorSerializer,
                  status: :unprocessable_entity
         end

@@ -5,10 +5,12 @@ module Api
         # Favorite Projects controller
         class FavoriteProjectsController < ApplicationController
 
+          before_action :authenticate_request!
+
           resourceful! Project do
             Project.filter(
               with_pagination!(project_filter_params),
-              scope: @current_user.favorite_projects.includes(:creators, :collaborators)
+              scope: current_user.favorite_projects.includes(:creators, :collaborators)
             )
           end
 
