@@ -52,6 +52,8 @@ class Event < ApplicationRecord
 
   scope :search_import, -> { includes(:project) }
 
+  after_commit :touch_project!
+
   def search_data
     {
       title: subject_title_formatted,
@@ -99,5 +101,13 @@ class Event < ApplicationRecord
   def to_s
     "event #{id}"
   end
+
+  private
+
+  # rubocop:disable Rails/SkipsModelValidations
+  def touch_project!
+    project.touch
+  end
+  # rubocop:enable Rails/SkipsModelValidations
 
 end
