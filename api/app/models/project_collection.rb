@@ -1,5 +1,9 @@
 class ProjectCollection < ApplicationRecord
 
+  # Constants
+  ALLOWED_SORT_KEYS = %w(created_at updated_at publication_date title).freeze
+  ALLOWED_SORT_DIRECTIONS = %w(asc desc).freeze
+
   # Concerns
   include Concerns::HasFormattedAttributes
   include Concerns::ValidatesSlugPresence
@@ -64,7 +68,10 @@ class ProjectCollection < ApplicationRecord
 
   def project_sorting
     column, _delimiter, direction = sort_order.rpartition "_"
-    "projects.#{column} #{direction}"
+    column = "created_at" unless ALLOWED_SORT_KEYS.include? column
+    direction = "desc" unless ALLOWED_SORT_DIRECTIONS.include? direction
+
+    "projects.#{column} #{direction}, projects.title asc NULLS LAST"
   end
 
   def manually_sorted?
@@ -75,7 +82,7 @@ class ProjectCollection < ApplicationRecord
 
   def reset_sort_order!
     return unless smart? && manually_sorted?
-    self.sort_order = "created_at_asc"
+    self.sort_order = "created_at_desc"
   end
 
   def cache_collection_projects!

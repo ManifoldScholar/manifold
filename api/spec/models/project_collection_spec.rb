@@ -38,12 +38,12 @@ RSpec.describe ProjectCollection, type: :model do
     let(:project_collection) { FactoryBot.create(:project_collection, sort_order: "updated_at_desc") }
 
     it "returns a string order argument joined to project" do
-      expect(project_collection.project_sorting).to eq "projects.updated_at desc"
+      expect(project_collection.project_sorting).to eq "projects.updated_at desc, projects.title asc NULLS LAST"
     end
 
-    it "works with input of varying lengths" do
-      project_collection.update sort_order: "some_really_long_column_name_direction"
-      expect(project_collection.project_sorting).to eq "projects.some_really_long_column_name direction"
+    it "defaults to created_at desc if invalid attribute" do
+      project_collection.update sort_order: "bad_attribute"
+      expect(project_collection.project_sorting).to eq "projects.created_at desc, projects.title asc NULLS LAST"
     end
   end
 
@@ -52,7 +52,7 @@ RSpec.describe ProjectCollection, type: :model do
       it "restores the default sort_order" do
         pc = FactoryBot.create(:project_collection, sort_order: "manual")
         pc.smart = true
-        expect { pc.save }.to change(pc, :sort_order).to "created_at_asc"
+        expect { pc.save }.to change(pc, :sort_order).to "created_at_desc"
       end
     end
 

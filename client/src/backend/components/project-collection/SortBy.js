@@ -57,17 +57,29 @@ export default class ProjectCollectionSortBy extends PureComponent {
             value={selected}
             data-id={"filter"}
           >
+            <option key="created_at_desc" value="created_at_desc">
+              Date Created (Newest First)
+            </option>
             <option key="created_at_asc" value="created_at_asc">
-              Newest
+              Date Created (Oldest First)
             </option>
             <option key="updated_at_desc" value="updated_at_desc">
-              Recently Updated
+              Last Updated (Newest First)
+            </option>
+            <option key="updated_at_asc" value="updated_at_asc">
+              Last Updated (Oldest First)
             </option>
             <option key="title_asc" value="title_asc">
-              title A to Z
+              Title A to Z
             </option>
             <option key="title_desc" value="title_desc">
-              title Z to A
+              Title Z to A
+            </option>
+            <option key="publication_date_desc" value="publication_date_desc">
+              Publication Date (Newest First)
+            </option>
+            <option key="publication_date_asc" value="publication_date_asc">
+              Publication Date (Oldest First)
             </option>
           </select>
           <i className="manicon manicon-caret-down" aria-hidden="true" />
