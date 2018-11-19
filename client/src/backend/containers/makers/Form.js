@@ -26,6 +26,7 @@ export default class MakersFormContainer extends PureComponent {
       <section className="form-section">
         <FormContainer.Form
           model={maker}
+          modelName="Maker"
           name={requestName}
           update={makersAPI.update}
           create={makersAPI.create}
