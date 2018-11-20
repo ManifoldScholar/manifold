@@ -33,7 +33,17 @@ module Ingestions
       end
 
       def escaped_path
-        Shellwords.escape context.abs(source_path)
+        @escaped_path ||= Shellwords.escape context.abs(source_path)
+      end
+
+      # When Pandoc extracts docx media, it numbers the output files
+      # sequentially, relative to the document.  In order to avoid
+      # media files from being overwritten by subsequent docx files
+      # we need to extract and isolate the files in a directory with
+      # the source file's name.
+      def media_dir
+        Pathname.new(File.join(context.source_root,
+                               File.basename(escaped_path, ".*")))
       end
 
       def raw_html
@@ -41,7 +51,7 @@ module Ingestions
                                          :s,
                                          from: :docx,
                                          to: :html,
-                                         extract_media: context.source_root)
+                                         extract_media: media_dir)
       end
 
       # Pandoc changes sources to absolute paths when it extracts the
