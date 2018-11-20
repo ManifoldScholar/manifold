@@ -12,6 +12,15 @@ module Ingestions
       extend ActiveSupport::Concern
 
       WORKING_DIR_BASE = Rails.root.join("tmp", "ingestion")
+      EXTRACTION_REJECTION_PATTERNS = {
+        directory: {
+          hidden: ".*?"
+        },
+        file: {
+          hidden: ".*",
+          tmp: "~*"
+        }
+      }.with_indifferent_access.freeze
 
       def update_working_dirs(path, filename = nil)
         if extractable? path
@@ -171,16 +180,37 @@ module Ingestions
         FileUtils.mkdir_p(build_root_path) unless File.exist?(build_root_path)
       end
 
+      def reject_extracted?(zip_path)
+        dirname = zip_path.dirname
+        basename = zip_path.basename
+
+        reject_extracted_part?(dirname, type: :directory) ||
+          reject_extracted_part?(basename, type: :file)
+      end
+
+      def reject_extracted_part?(path_part, type:)
+        patterns = EXTRACTION_REJECTION_PATTERNS.fetch(type)
+
+        patterns.any? do |(_reason, pattern)|
+          path_part.fnmatch pattern
+        end
+      end
+
       # rubocop:disable Metrics/AbcSize
       def extract(path = source_path, extract_path = root_path)
-        reject = %w(. .. _ __ ~)
+        extract_path = Pathname.new(extract_path)
+
         Zip::File.open(path) do |zip_file|
           zip_file.each do |f|
-            next if File.dirname(f.name).start_with?(*reject)
-            next if File.basename(f.name).start_with?(*reject)
-            fpath = File.join(extract_path, f.name)
-            FileUtils.mkdir_p(File.dirname(fpath))
-            zip_file.extract(f, fpath) unless File.exist?(fpath)
+            zip_path = Pathname.new(f.name).cleanpath
+            next if reject_extracted?(zip_path)
+
+            target_file = extract_path.join zip_path
+            target_path = target_file.dirname
+            next if target_file.exist?
+
+            target_path.mkpath
+            zip_file.extract(f, target_file.to_s)
           end
         end
         logger.debug("Unzipped archive to temporary directory: #{extract_path}")
