@@ -173,11 +173,11 @@ module Ingestions
 
       # rubocop:disable Metrics/AbcSize
       def extract(path = source_path, extract_path = root_path)
-        reject = %w(. .. _ __ ~)
+        reject = /^[._~]+[^._~].*/
         Zip::File.open(path) do |zip_file|
           zip_file.each do |f|
-            next if File.dirname(f.name).start_with?(*reject)
-            next if File.basename(f.name).start_with?(*reject)
+            next if File.dirname(f.name) =~ reject
+            next if File.basename(f.name) =~ reject
             fpath = File.join(extract_path, f.name)
             FileUtils.mkdir_p(File.dirname(fpath))
             zip_file.extract(f, fpath) unless File.exist?(fpath)
