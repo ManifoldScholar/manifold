@@ -30,11 +30,19 @@ module Search
         page: page_number,
         per_page: per_page,
         where: where,
-        fields: [:maker_names, :metadata, :caption, :title_values, :text_titles, :title,
-                 :body],
+        fields: metadata_fields +
+          [:maker_names, :caption, :title_values, :text_titles, :title, :body],
         highlight: highlight_options,
         request_params: { search_type: search_type }
       }
+    end
+
+    def metadata_fields
+      (
+        Project.metadata_properties +
+        Text.metadata_properties +
+        Resource.metadata_properties
+      ).uniq.map { |p| "metadata.#{p}" }
     end
 
     def highlight_options
