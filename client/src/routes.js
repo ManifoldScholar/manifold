@@ -1,15 +1,22 @@
-import * as Frontend from "containers/frontend";
-import * as Reader from "containers/reader";
-import * as Backend from "containers/backend";
+// import * as Frontend from "containers/frontend";
+// import * as Reader from "containers/reader";
+// import * as Backend from "containers/backend";
 import NotFound from "containers/global/NotFound";
 import queryString from "query-string";
+
+import { Component } from "react";
+class Placeholder extends Component {
+  render() {
+    return "Placeholder"
+  }
+}
 
 /* eslint-disable max-len */
 export default () => {
   return [
     {
       name: "reader",
-      component: Reader.Reader,
+      component: Placeholder,  /* Reader.Reader */
       exact: false,
       path: "/read/:textId/:ignore(section|search)?/:sectionId?",
       helper: t => `/read/${t}`,
@@ -17,14 +24,14 @@ export default () => {
         {
           name: "readerSearchResults",
           exact: true,
-          component: Reader.Search,
+          component: Placeholder,  /* Reader.Search */
           path: "/read/:textId/search",
           helper: t => `/read/${t}/search`
         },
         {
           name: "readerSectionSearchResults",
           exact: true,
-          component: Reader.Search,
+          component: Placeholder,  /* Reader.Search */
           transition: "overlay-full",
           path: "/read/:textId/section/:sectionId/search",
           helper: (t, ts) => `/read/${t}/section/${ts}/search`
@@ -32,21 +39,21 @@ export default () => {
         {
           name: "readerSection",
           exact: false,
-          component: Reader.Section,
+          component: Placeholder,  /* Reader.Section */
           path: "/read/:textId/section/:sectionId",
           helper: (t, s, anchor = "") => `/read/${t}/section/${s}${anchor}`,
           routes: [
             {
               name: "readerSectionResource",
               exact: true,
-              component: Reader.Notation.Resource.Detail,
+              component: Placeholder,  /* Reader.Notation.Resource.Detail */
               path: "/read/:textId/section/:sectionId/resource/:resourceId",
               helper: (t, s, r) => `/read/${t}/section/${s}/resource/${r}`
             },
             {
               name: "readerSectionCollection",
               exact: true,
-              component: Reader.Notation.Collection.Detail,
+              component: Placeholder,  /* Reader.Notation.Collection.Detail */
               path: "/read/:textId/section/:sectionId/collection/:collectionId",
               helper: (t, s, c) => `/read/${t}/section/${s}/collection/${c}`
             }
@@ -57,56 +64,56 @@ export default () => {
     {
       name: "backend",
       exact: false,
-      component: Backend.Backend,
+      component: Placeholder,  /* Backend.Backend */
       path: "/backend",
       helper: () => "/backend",
       routes: [
         {
           exact: true,
           name: "backendDashboard",
-          component: Backend.Dashboard,
+          component: Placeholder,  /* Backend.Dashboard */
           path: "/backend/dashboard",
           helper: () => "/backend/dashboard"
         },
         {
           name: "backendProjects",
           exact: false,
-          component: Backend.Projects.Wrapper,
+          component: Placeholder,  /* Backend.Projects.Wrapper */
           path: "/backend/projects",
           helper: () => "/backend/projects",
           routes: [
             {
               name: "backendProjectsAll",
               exact: true,
-              component: Backend.Projects.ProjectsList,
+              component: Placeholder,  /* Backend.Projects.ProjectsList */
               path: "/backend/projects/all",
               helper: () => "/backend/projects/all"
             },
             {
               name: "backendProjectResourcesNew",
               exact: true,
-              component: Backend.Resource.New,
+              component: Placeholder,  /* Backend.Resource.New */
               path: "/backend/projects/:projectId/resources/new",
               helper: p => `/backend/projects/${p}/resources/new`
             },
             {
               name: "backendResourceImport",
               exact: false,
-              component: Backend.ResourceImport.Wrapper,
+              component: Placeholder,  /* Backend.ResourceImport.Wrapper */
               path: "/backend/projects/:projectId/resource-import/:id?",
               helper: p => `/backend/projects/${p}/resource-import`,
               routes: [
                 {
                   name: "backendResourceImportNew",
                   exact: true,
-                  component: Backend.ResourceImport.New,
+                  component: Placeholder,  /* Backend.ResourceImport.New */
                   path: "/backend/projects/:projectId/resource-import",
                   helper: p => `/backend/projects/${p}/resource-import`
                 },
                 {
                   name: "backendResourceImportEdit",
                   exact: true,
-                  component: Backend.ResourceImport.New,
+                  component: Placeholder,  /* Backend.ResourceImport.New */
                   path: "/backend/projects/:projectId/resource-import/:id",
                   helper: (p, id) =>
                     `/backend/projects/${p}/resource-import/${id}`
@@ -114,7 +121,7 @@ export default () => {
                 {
                   name: "backendResourceImportMap",
                   exact: true,
-                  component: Backend.ResourceImport.Map,
+                  component: Placeholder,  /* Backend.ResourceImport.Map */
                   path: "/backend/projects/:projectId/resource-import/:id/map",
                   helper: (p, id) =>
                     `/backend/projects/${p}/resource-import/${id}/map`
@@ -122,7 +129,7 @@ export default () => {
                 {
                   name: "backendResourceImportResults",
                   exact: true,
-                  component: Backend.ResourceImport.Results,
+                  component: Placeholder,  /* Backend.ResourceImport.Results */
                   path:
                     "/backend/projects/:projectId/resource-import/:id/results",
                   helper: (p, id) =>
@@ -133,42 +140,42 @@ export default () => {
             {
               name: "backendProjectResourceCollectionsNew",
               exact: true,
-              component: Backend.Collection.New,
+              component: Placeholder,  /* Backend.Collection.New */
               path: "/backend/projects/:projectId/collections/new",
               helper: p => `/backend/projects/${p}/collections/new`
             },
             {
               name: "backendProjectsNew",
               exact: true,
-              component: Backend.Project.New,
+              component: Placeholder,  /* Backend.Project.New */
               path: "/backend/projects/new",
               helper: () => "/backend/projects/new"
             },
             {
               exact: false,
               name: "backendResource",
-              component: Backend.Resource.Wrapper,
+              component: Placeholder,  /* Backend.Resource.Wrapper */
               helper: r => `/backend/projects/resource/${r}`,
               path: "/backend/projects/resource/:id",
               routes: [
                 {
                   name: "backendResourceVariants",
                   exact: true,
-                  component: Backend.Resource.Variants,
+                  component: Placeholder,  /* Backend.Resource.Variants */
                   path: "/backend/projects/resource/:id/variants",
                   helper: r => `/backend/projects/resource/${r}/variants`
                 },
                 {
                   name: "backendResourceMetadata",
                   exact: true,
-                  component: Backend.Resource.Metadata,
+                  component: Placeholder,  /* Backend.Resource.Metadata */
                   path: "/backend/projects/resource/:id/metadata",
                   helper: r => `/backend/projects/resource/${r}/metadata`
                 },
                 {
                   name: "backendResourceGeneral",
                   exact: true,
-                  component: Backend.Resource.General,
+                  component: Placeholder,  /* Backend.Resource.General */
                   path: "/backend/projects/resource/:id/general",
                   helper: r => `/backend/projects/resource/${r}/general`
                 }
@@ -177,21 +184,21 @@ export default () => {
             {
               name: "backendCollection",
               exact: false,
-              component: Backend.Collection.Wrapper,
+              component: Placeholder,  /* Backend.Collection.Wrapper */
               path: "/backend/projects/collection/:id",
               helper: r => `/backend/projects/collection/${r}`,
               routes: [
                 {
                   name: "backendCollectionGeneral",
                   exact: true,
-                  component: Backend.Collection.General,
+                  component: Placeholder,  /* Backend.Collection.General */
                   path: "/backend/projects/collection/:id/general",
                   helper: r => `/backend/projects/collection/${r}/general`
                 },
                 {
                   name: "backendCollectionResources",
                   exact: true,
-                  component: Backend.Collection.Resources,
+                  component: Placeholder,  /* Backend.Collection.Resources */
                   path: "/backend/projects/collection/:id/resources",
                   helper: r => `/backend/projects/collection/${r}/resources`
                 }
@@ -200,13 +207,13 @@ export default () => {
             {
               name: "backendText",
               exact: false,
-              component: Backend.Text.Wrapper,
+              component: Placeholder,  /* Backend.Text.Wrapper */
               path: "/backend/projects/text/:id",
               helper: t => `/backend/projects/text/${t}`,
               routes: [
                 {
                   name: "backendTextStyles",
-                  component: Backend.Text.Styles,
+                  component: Placeholder,  /* Backend.Text.Styles */
                   exact: true,
                   path: "/backend/projects/text/:id/styles",
                   helper: t => `/backend/projects/text/${t}/styles`
@@ -214,35 +221,35 @@ export default () => {
                 {
                   name: "BackendTextStylesheetNew",
                   exact: true,
-                  component: Backend.Stylesheet.Edit,
+                  component: Placeholder,  /* Backend.Stylesheet.Edit */
                   path: "/backend/projects/text/:id/styles/new",
                   helper: t => `/backend/projects/text/${t}/styles/new`
                 },
                 {
                   name: "BackendTextStylesheetEdit",
                   exact: true,
-                  component: Backend.Stylesheet.Edit,
+                  component: Placeholder,  /* Backend.Stylesheet.Edit */
                   path: "/backend/projects/text/:id/styles/:stylesheet",
                   helper: (t, ss) => `/backend/projects/text/${t}/styles/${ss}`
                 },
                 {
                   name: "backendTextMetadata",
                   exact: true,
-                  component: Backend.Text.Metadata,
+                  component: Placeholder,  /* Backend.Text.Metadata */
                   path: "/backend/projects/text/:id/metadata",
                   helper: t => `/backend/projects/text/${t}/metadata`
                 },
                 {
                   name: "backendTextCollaborators",
                   exact: false,
-                  component: Backend.Text.Collaborators,
+                  component: Placeholder,  /* Backend.Text.Collaborators */
                   path: "/backend/projects/text/:id/collaborators",
                   helper: t => `/backend/projects/text/${t}/collaborators`,
                   routes: [
                     {
                       name: "backendTextCollaborator",
                       exact: true,
-                      component: Backend.Makers.Edit,
+                      component: Placeholder,  /* Backend.Makers.Edit */
                       path: "/backend/projects/text/:tId/collaborators/:id",
                       helper: (tId, id) =>
                         `/backend/projects/text/${tId}/collaborators/${id}`
@@ -252,7 +259,7 @@ export default () => {
                 {
                   name: "backendTextIngestionsNew",
                   exact: true,
-                  component: Backend.Text.Ingestion.New,
+                  component: Placeholder,  /* Backend.Text.Ingestion.New */
                   path: "/backend/projects/text/:id/ingestions/new",
                   helper: t => `/backend/projects/text/${t}/ingestions/new`,
                   modal: false
@@ -260,7 +267,7 @@ export default () => {
                 {
                   name: "backendTextIngestionEdit",
                   exact: true,
-                  component: Backend.Text.Ingestion.Edit,
+                  component: Placeholder,  /* Backend.Text.Ingestion.Edit */
                   path:
                     "/backend/projects/text/:id/ingestion/:ingestionId/edit",
                   helper: (t, i) =>
@@ -270,7 +277,7 @@ export default () => {
                 {
                   name: "backendTextIngestionIngest",
                   exact: true,
-                  component: Backend.Ingestion.Ingest,
+                  component: Placeholder,  /* Backend.Ingestion.Ingest */
                   path:
                     "/backend/projects/text/:id/ingestion/:ingestionId/ingest",
                   helper: (t, i) =>
@@ -280,7 +287,7 @@ export default () => {
                 {
                   name: "backendTextGeneral",
                   exact: true,
-                  component: Backend.Text.General,
+                  component: Placeholder,  /* Backend.Text.General */
                   path: "/backend/projects/text/:id/general",
                   helper: t => `/backend/projects/text/${t}/general`
                 }
@@ -289,21 +296,21 @@ export default () => {
             {
               name: "backendProjectCollections",
               exact: false,
-              component: Backend.ProjectCollection.Wrapper,
+              component: Placeholder,  /* Backend.ProjectCollection.Wrapper */
               path: "/backend/projects/project-collections/:id?",
               helper: () => "/backend/projects/project-collections",
               routes: [
                 {
                   name: "backendProjectCollection",
                   exact: false,
-                  component: Backend.ProjectCollection.Detail,
+                  component: Placeholder,  /* Backend.ProjectCollection.Detail */
                   path: "/backend/projects/project-collections/:id",
                   helper: pc => `/backend/projects/project-collections/${pc}`,
                   routes: [
                     {
                       name: "backendProjectCollectionManageProjects",
                       exact: true,
-                      component: Backend.ProjectCollection.ManageProjects,
+                      component: Placeholder,  /* Backend.ProjectCollection.ManageProjects */
                       path:
                         "/backend/projects/project-collections/:id/manage-projects",
                       helper: pc =>
@@ -312,7 +319,7 @@ export default () => {
                     {
                       name: "backendProjectCollectionSettings",
                       exact: true,
-                      component: Backend.ProjectCollection.Settings,
+                      component: Placeholder,  /* Backend.ProjectCollection.Settings */
                       path:
                         "/backend/projects/project-collections/:id/settings",
                       helper: pc =>
@@ -325,21 +332,21 @@ export default () => {
             {
               name: "backendProject",
               exact: false,
-              component: Backend.Project.Wrapper,
+              component: Placeholder,  /* Backend.Project.Wrapper */
               path: "/backend/projects/:id",
               helper: p => `/backend/projects/${p}`,
               routes: [
                 {
                   name: "backendProjectTexts",
                   exact: false,
-                  component: Backend.Project.Texts,
+                  component: Placeholder,  /* Backend.Project.Texts */
                   path: "/backend/projects/:id/texts",
                   helper: p => `/backend/projects/${p}/texts`,
                   routes: [
                     {
                       name: "backendProjectTextsIngestionsNew",
                       exact: true,
-                      component: Backend.Project.Text.Ingestion.New,
+                      component: Placeholder,  /* Backend.Project.Text.Ingestion.New */
                       path: "/backend/projects/:id/texts/ingestions/new",
                       helper: p =>
                         `/backend/projects/${p}/texts/ingestions/new`,
@@ -348,7 +355,7 @@ export default () => {
                     {
                       name: "backendProjectTextsIngestionEdit",
                       exact: true,
-                      component: Backend.Project.Text.Ingestion.Edit,
+                      component: Placeholder,  /* Backend.Project.Text.Ingestion.Edit */
                       path:
                         "/backend/projects/:id/texts/ingestion/:ingestionId/edit",
                       helper: (p, i) =>
@@ -358,7 +365,7 @@ export default () => {
                     {
                       name: "backendProjectTextsIngestionIngest",
                       exact: true,
-                      component: Backend.Ingestion.Ingest,
+                      component: Placeholder,  /* Backend.Ingestion.Ingest */
                       path:
                         "/backend/projects/:id/texts/ingestion/:ingestionId/ingest",
                       helper: (p, i) =>
@@ -367,13 +374,13 @@ export default () => {
                     },
                     {
                       exact: false,
-                      component: Backend.Project.Category.Wrapper,
+                      component: Placeholder,  /* Backend.Project.Category.Wrapper */
                       path: "/backend/projects/:id/texts/category",
                       routes: [
                         {
                           name: "backendProjectCategoriesNew",
                           exact: true,
-                          component: Backend.Project.Category.New,
+                          component: Placeholder,  /* Backend.Project.Category.New */
                           path: "/backend/projects/:id/texts/category/new",
                           helper: p =>
                             `/backend/projects/${p}/texts/category/new`
@@ -381,7 +388,7 @@ export default () => {
                         {
                           name: "backendProjectCategory",
                           exact: true,
-                          component: Backend.Project.Category.Edit,
+                          component: Placeholder,  /* Backend.Project.Category.Edit */
                           path:
                             "/backend/projects/:id/texts/category/:catId/edit",
                           helper: (p, c) =>
@@ -394,35 +401,35 @@ export default () => {
                 {
                   name: "backendProjectResources",
                   exact: true,
-                  component: Backend.Project.Resources,
+                  component: Placeholder,  /* Backend.Project.Resources */
                   path: "/backend/projects/:id/resources",
                   helper: p => `/backend/projects/${p}/resources`
                 },
                 {
                   name: "backendProjectResourceCollections",
                   exact: true,
-                  component: Backend.Project.Collections,
+                  component: Placeholder,  /* Backend.Project.Collections */
                   path: "/backend/projects/:id/collections",
                   helper: p => `/backend/projects/${p}/collections`
                 },
                 {
                   name: "backendProjectPermissions",
                   exact: false,
-                  component: Backend.Project.Permissions,
+                  component: Placeholder,  /* Backend.Project.Permissions */
                   path: "/backend/projects/:projectId/permissions/:id?",
                   helper: p => `/backend/projects/${p}/permissions`,
                   routes: [
                     {
                       name: "backendProjectPermissionsNew",
                       exact: true,
-                      component: Backend.Permission.New,
+                      component: Placeholder,  /* Backend.Permission.New */
                       path: "/backend/projects/:pId/permissions/new",
                       helper: pId => `/backend/projects/${pId}/permissions/new`
                     },
                     {
                       name: "backendProjectPermission",
                       exact: true,
-                      component: Backend.Permission.Edit,
+                      component: Placeholder,  /* Backend.Permission.Edit */
                       path: "/backend/projects/:pId/permissions/:id",
                       helper: (pId, id) =>
                         `/backend/projects/${pId}/permissions/${id}`
@@ -432,14 +439,14 @@ export default () => {
                 {
                   name: "backendProjectCollaborators",
                   exact: false,
-                  component: Backend.Project.Collaborators,
+                  component: Placeholder,  /* Backend.Project.Collaborators */
                   path: "/backend/projects/:id/collaborators",
                   helper: p => `/backend/projects/${p}/collaborators`,
                   routes: [
                     {
                       name: "backendProjectCollaborator",
                       exact: true,
-                      component: Backend.Makers.Edit,
+                      component: Placeholder,  /* Backend.Makers.Edit */
                       path: "/backend/projects/:pId/collaborators/:id",
                       helper: (pId, id) =>
                         `/backend/projects/${pId}/collaborators/${id}`
@@ -449,21 +456,21 @@ export default () => {
                 {
                   name: "backendProjectEvents",
                   exact: true,
-                  component: Backend.Project.Events,
+                  component: Placeholder,  /* Backend.Project.Events */
                   path: "/backend/projects/:id/events",
                   helper: p => `/backend/projects/${p}/events`
                 },
                 {
                   name: "backendProjectMetadata",
                   exact: true,
-                  component: Backend.Project.Metadata,
+                  component: Placeholder,  /* Backend.Project.Metadata */
                   path: "/backend/projects/:id/metadata",
                   helper: p => `/backend/projects/${p}/metadata`
                 },
                 {
                   name: "backendProjectSocial",
                   exact: false,
-                  component: Backend.Project.Social.Wrapper,
+                  component: Placeholder,  /* Backend.Project.Social.Wrapper */
                   path:
                     "/backend/projects/:pId/social/:type(twitter-query)?/:qId?",
                   helper: p => `/backend/projects/${p}/social`,
@@ -471,7 +478,7 @@ export default () => {
                     {
                       name: "backendProjectSocialTwitterQueryNew",
                       exact: true,
-                      component: Backend.TwitterQuery.New,
+                      component: Placeholder,  /* Backend.TwitterQuery.New */
                       path: "/backend/projects/:pId/social/twitter-query/new",
                       helper: pId =>
                         `/backend/projects/${pId}/social/twitter-query/new`
@@ -479,7 +486,7 @@ export default () => {
                     {
                       name: "backendProjectSocialTwitterQuery",
                       exact: true,
-                      component: Backend.TwitterQuery.Edit,
+                      component: Placeholder,  /* Backend.TwitterQuery.Edit */
                       path: "/backend/projects/:pId/social/twitter-query/:id",
                       helper: (pId, id) =>
                         `/backend/projects/${pId}/social/twitter-query/${id}`
@@ -489,21 +496,21 @@ export default () => {
                 {
                   name: "backendProjectProjectPage",
                   exact: true,
-                  component: Backend.Project.ProjectPage,
+                  component: Placeholder,  /* Backend.Project.ProjectPage */
                   path: "/backend/projects/:id/project-page",
                   helper: p => `/backend/projects/${p}/project-page`
                 },
                 {
                   name: "backendProjectLog",
                   exact: true,
-                  component: Backend.Project.Log,
+                  component: Placeholder,  /* Backend.Project.Log */
                   path: "/backend/projects/:id/log",
                   helper: p => `/backend/projects/${p}/log`
                 },
                 {
                   name: "backendProjectGeneral",
                   exact: true,
-                  component: Backend.Project.General,
+                  component: Placeholder,  /* Backend.Project.General */
                   path: "/backend/projects/:id/general",
                   helper: p => `/backend/projects/${p}/general`
                 }
@@ -514,28 +521,28 @@ export default () => {
         {
           name: "backendRecords",
           exact: false,
-          component: Backend.Records,
+          component: Placeholder,  /* Backend.Records */
           path: "/backend/records/:type?/:id?",
           helper: () => "/backend/records",
           routes: [
             {
               name: "backendRecordsUsers",
               exact: true,
-              component: Backend.Users.List,
+              component: Placeholder,  /* Backend.Users.List */
               path: "/backend/records/users/:id?",
               helper: () => "/backend/records/users",
               routes: [
                 {
                   name: "backendRecordsUsersNew",
                   exact: true,
-                  component: Backend.Users.New,
+                  component: Placeholder,  /* Backend.Users.New */
                   path: "/backend/records/users/new",
                   helper: () => "/backend/records/users/new"
                 },
                 {
                   name: "backendRecordsUser",
                   exact: true,
-                  component: Backend.Users.Edit,
+                  component: Placeholder,  /* Backend.Users.Edit */
                   path: "/backend/records/users/:id",
                   helper: u => `/backend/records/users/${u}`
                 }
@@ -543,7 +550,7 @@ export default () => {
             },
             {
               name: "backendRecordsMakers",
-              component: Backend.Makers.List,
+              component: Placeholder,  /* Backend.Makers.List */
               exact: true,
               path: "/backend/records/makers/:id?",
               helper: () => `/backend/records/makers`,
@@ -551,13 +558,13 @@ export default () => {
                 {
                   name: "backendRecordsMakersNew",
                   exact: true,
-                  component: Backend.Makers.New,
+                  component: Placeholder,  /* Backend.Makers.New */
                   path: "/backend/records/makers/new",
                   helper: () => "/backend/records/makers/new"
                 },
                 {
                   name: "backendRecordsMaker",
-                  component: Backend.Makers.Edit,
+                  component: Placeholder,  /* Backend.Makers.Edit */
                   exact: true,
                   path: "/backend/records/makers/:id",
                   helper: m => `/backend/records/makers/${m}`
@@ -566,7 +573,7 @@ export default () => {
             },
             {
               name: "backendRecordsPage",
-              component: Backend.Pages.Detail,
+              component: Placeholder,  /* Backend.Pages.Detail */
               path: "/backend/records/pages/:id",
               exact: false,
               helper: p => `/backend/records/pages/${p}`,
@@ -574,21 +581,21 @@ export default () => {
                 {
                   name: "backendRecordsPageNew",
                   exact: true,
-                  component: Backend.Pages.New,
+                  component: Placeholder,  /* Backend.Pages.New */
                   path: "/backend/records/pages/new",
                   helper: () => `/backend/records/pages/new`
                 },
                 {
                   name: "backendRecordsPageBody",
                   exact: true,
-                  component: Backend.Pages.Body,
+                  component: Placeholder,  /* Backend.Pages.Body */
                   path: "/backend/records/pages/:id/body",
                   helper: p => `/backend/records/pages/${p}/body`
                 },
                 {
                   name: "backendRecordsPageGeneral",
                   exact: true,
-                  component: Backend.Pages.General,
+                  component: Placeholder,  /* Backend.Pages.General */
                   path: "/backend/records/pages/:id/general",
                   helper: p => `/backend/records/pages/${p}/general`
                 }
@@ -596,7 +603,7 @@ export default () => {
             },
             {
               name: "backendRecordsFeature",
-              component: Backend.Features.Detail,
+              component: Placeholder,  /* Backend.Features.Detail */
               path: "/backend/records/features/:id",
               exact: false,
               helper: f => `/backend/records/features/${f}`,
@@ -604,14 +611,14 @@ export default () => {
                 {
                   name: "backendRecordsFeatureNew",
                   exact: true,
-                  component: Backend.Features.New,
+                  component: Placeholder,  /* Backend.Features.New */
                   path: "/backend/records/features/new",
                   helper: () => `/backend/records/features/new`
                 },
                 {
                   name: "backendRecordsFeatureGeneral",
                   exact: true,
-                  component: Backend.Features.General,
+                  component: Placeholder,  /* Backend.Features.General */
                   path: "/backend/records/features/:id",
                   helper: p => `/backend/records/features/${p}`
                 }
@@ -620,14 +627,14 @@ export default () => {
             {
               name: "backendRecordsPages",
               exact: true,
-              component: Backend.Pages.List,
+              component: Placeholder,  /* Backend.Pages.List */
               path: "/backend/records/pages",
               helper: () => `/backend/records/pages`
             },
             {
               name: "backendRecordsFeatures",
               exact: true,
-              component: Backend.Features.List,
+              component: Placeholder,  /* Backend.Features.List */
               path: "/backend/records/features",
               helper: () => `/backend/records/features`
             }
@@ -636,42 +643,42 @@ export default () => {
         {
           name: "backendSettings",
           exact: false,
-          component: Backend.Settings.Wrapper,
+          component: Placeholder,  /* Backend.Settings.Wrapper */
           path: "/backend/settings",
           helper: () => "/backend/settings",
           routes: [
             {
               name: "backendSettingsTheme",
               exact: true,
-              component: Backend.Settings.Theme,
+              component: Placeholder,  /* Backend.Settings.Theme */
               path: "/backend/settings/theme",
               helper: () => "/backend/settings/theme"
             },
             {
               name: "backendSettingsIntegrations",
               exact: true,
-              component: Backend.Settings.Integrations,
+              component: Placeholder,  /* Backend.Settings.Integrations */
               path: "/backend/settings/integrations",
               helper: () => "/backend/settings/integrations"
             },
             {
               name: "backendSettingsSubjects",
               exact: true,
-              component: Backend.Settings.Subjects.List,
+              component: Placeholder,  /* Backend.Settings.Subjects.List */
               path: "/backend/settings/subjects/:id?",
               helper: () => "/backend/settings/subjects",
               routes: [
                 {
                   name: "backendSettingsSubjectsNew",
                   exact: true,
-                  component: Backend.Settings.Subjects.New,
+                  component: Placeholder,  /* Backend.Settings.Subjects.New */
                   path: "/backend/settings/subjects/new",
                   helper: () => "/backend/settings/subjects/new"
                 },
                 {
                   name: "backendSettingsSubject",
                   exact: true,
-                  component: Backend.Settings.Subjects.Edit,
+                  component: Placeholder,  /* Backend.Settings.Subjects.Edit */
                   path: "/backend/settings/subjects/:id",
                   helper: s => `/backend/settings/subjects/${s}`
                 }
@@ -680,14 +687,14 @@ export default () => {
             {
               name: "backendSettingsEmail",
               exact: true,
-              component: Backend.Settings.Email,
+              component: Placeholder,  /* Backend.Settings.Email */
               path: "/backend/settings/email",
               helper: () => "/backend/settings/email"
             },
             {
               name: "backendSettingsGeneral",
               exact: true,
-              component: Backend.Settings.General,
+              component: Placeholder,  /* Backend.Settings.General */
               path: "/backend/settings/general",
               helper: () => "/backend/settings/general"
             }
@@ -699,20 +706,20 @@ export default () => {
       ]
     },
     {
-      component: Frontend.Frontend,
+      component: Placeholder,  /* Frontend.Frontend */
       path: "/",
       routes: [
         {
           name: "frontendProjects",
           exact: false,
-          component: Frontend.ProjectsWrapper,
+          component: Placeholder,  /* Frontend.ProjectsWrapper */
           path: "/projects",
           helper: () => "/projects",
           routes: [
             {
               name: "frontendProjectsAll",
               exact: true,
-              component: Frontend.Projects,
+              component: Placeholder,  /* Frontend.Projects */
               path: "/projects/all",
               helper: (params = {}) => {
                 const query = queryString.stringify(params);
@@ -723,7 +730,7 @@ export default () => {
             {
               name: "frontendProjectCollections",
               exact: true,
-              component: Frontend.ProjectCollections,
+              component: Placeholder,  /* Frontend.ProjectCollections */
               path: "/projects/project-collections",
               helper: (params = {}) => {
                 const query = queryString.stringify(params);
@@ -734,7 +741,7 @@ export default () => {
             {
               name: "frontendProjectCollection",
               exact: true,
-              component: Frontend.ProjectCollectionDetail,
+              component: Placeholder,  /* Frontend.ProjectCollectionDetail */
               path: "/projects/project-collection/:id",
               helper: (pc, params = {}) => {
                 const query = queryString.stringify(params);
@@ -745,14 +752,14 @@ export default () => {
             {
               name: "frontendProject",
               exact: true,
-              component: Frontend.ProjectDetail,
+              component: Placeholder,  /* Frontend.ProjectDetail */
               path: "/projects/:id",
               helper: p => `/projects/${p}`
             },
             {
               name: "frontendProjectResources",
               exact: true,
-              component: Frontend.ProjectResources,
+              component: Placeholder,  /* Frontend.ProjectResources */
               path: "/projects/:id/resources",
               helper: (p, params = {}) => {
                 const query = queryString.stringify(params);
@@ -763,7 +770,7 @@ export default () => {
             {
               name: "frontendProjectCollectionResource",
               exact: true,
-              component: Frontend.ResourceDetail,
+              component: Placeholder,  /* Frontend.ResourceDetail */
               path:
                 "/projects/:id/collection/:collectionId/resource/:resourceId",
               helper: (p, c, r) =>
@@ -772,7 +779,7 @@ export default () => {
             {
               name: "frontendProjectResource",
               exact: true,
-              component: Frontend.ResourceDetail,
+              component: Placeholder,  /* Frontend.ResourceDetail */
               path: "/projects/:id/resource/:resourceId",
               helpers: {
                 frontendProjectResource: (p, r) =>
@@ -783,7 +790,7 @@ export default () => {
             {
               name: "frontendResourceCollection",
               exact: true,
-              component: Frontend.CollectionDetail,
+              component: Placeholder,  /* Frontend.CollectionDetail */
               path: "/projects/:id/collection/:collectionId",
               helpers: {
                 frontendResourceCollection: (p, c, params = {}) => {
@@ -797,7 +804,7 @@ export default () => {
             {
               name: "frontendProjectEvents",
               exact: true,
-              component: Frontend.EventList,
+              component: Placeholder,  /* Frontend.EventList */
               path: "/projects/:id/events/:page?",
               helpers: {
                 frontendProjectEvents: p => `/projects/${p}/events`,
@@ -813,61 +820,61 @@ export default () => {
         {
           name: "frontendFollowing",
           exact: true,
-          component: Frontend.Following,
+          component: Placeholder,  /* Frontend.Following */
           path: "/following",
           helper: () => "/following"
         },
         {
           name: "frontendFeatured",
           exact: true,
-          component: Frontend.Featured,
+          component: Placeholder,  /* Frontend.Featured */
           path: "/featured",
           helper: () => "/featured"
         },
         {
           name: "frontendSearch",
           exact: true,
-          component: Frontend.Search,
+          component: Placeholder,  /* Frontend.Search */
           path: "/search",
           helper: () => `/search`
         },
         {
           name: "frontendContact",
           exact: true,
-          component: Frontend.Contact,
+          component: Placeholder,  /* Frontend.Contact */
           path: "/contact",
           helper: () => "/contact"
         },
         {
           exact: true,
-          component: Frontend.PasswordReset,
+          component: Placeholder,  /* Frontend.PasswordReset */
           path: "/reset-password/:resetToken"
         },
         {
           name: "frontendPage",
           exact: true,
-          component: Frontend.Page,
+          component: Placeholder,  /* Frontend.Page */
           path: "/page/:slug",
           helper: p => `/page/${p}`
         },
         {
           name: "subscriptions",
           exact: true,
-          component: Frontend.Subscriptions,
+          component: Placeholder,  /* Frontend.Subscriptions */
           path: "/subscriptions",
           helper: () => "/subscriptions"
         },
         {
           name: "unsubscribe",
           exact: true,
-          component: Frontend.Unsubscribe,
+          component: Placeholder,  /* Frontend.Unsubscribe */
           path: "/unsubscribe/:token",
           helper: token => `/unsubscribe/${token}`
         },
         {
           name: "frontend",
           exact: true,
-          component: Frontend.Home,
+          component: Placeholder,  /* Frontend.Home */
           path: "/",
           helper: (params = {}) => {
             const query = queryString.stringify(params);

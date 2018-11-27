@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Dialog } from "components/backend";
+import Wrapper from "./Wrapper";
 import isString from "lodash/isString";
 
 export default class DialogConfirm extends PureComponent {
@@ -51,7 +51,7 @@ export default class DialogConfirm extends PureComponent {
 
   render() {
     return (
-      <Dialog.Wrapper
+      <Wrapper
         className="dialog-confirm"
         maxWidth={400}
         showCloseButton={false}
@@ -85,7 +85,7 @@ export default class DialogConfirm extends PureComponent {
             <span>No</span>
           </button>
         </div>
-      </Dialog.Wrapper>
+      </Wrapper>
     );
   }
 }

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Utility } from "components/global";
 import { HigherOrder } from "containers/global";
-import withCurrentUser from "containers/global/HigherOrder/withCurrentUser";
+import withCurrentUser from "hoc/with-current-user";
 import { List } from "components/backend";
 import { Link } from "react-router-dom";
 import Authorization from "helpers/authorization";

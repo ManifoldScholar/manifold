@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Dialog } from "components/backend";
+import Wrapper from "./Wrapper";
+import Confirm from "./Confirm";
 import { Form } from "components/global";
 import { entityStoreActions } from "actions";
 import { usersAPI, requests, passwordsAPI } from "api";
@@ -195,7 +196,7 @@ class ResetPasswordWrapper extends PureComponent {
 
   renderConfirmation() {
     return (
-      <Dialog.Confirm
+      <Confirm
         heading="Are you sure you want to reset this password?"
         message="This action cannot be undone."
         resolve={event => this.handleResetEmailClick(event, this.props.user)}
@@ -206,14 +207,14 @@ class ResetPasswordWrapper extends PureComponent {
 
   render() {
     return (
-      <Dialog.Wrapper
+      <Wrapper
         className="dialog-reset"
         maxWidth={400}
         showCloseButton={false}
         closeOnOverlayClick={false}
       >
         {this.state.confirm ? this.renderConfirmation() : this.renderInitial()}
-      </Dialog.Wrapper>
+      </Wrapper>
     );
   }
 }

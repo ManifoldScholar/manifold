@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom/server";
 import serialize from "serialize-javascript";
 import Helmet from "react-helmet";
-import { HigherOrder } from "components/global";
 import reduce from "lodash/reduce";
 import isString from "lodash/isString";
 import isArray from "lodash/isArray";
 import endsWith from "lodash/endsWith";
 import startsWith from "lodash/startsWith";
 import get from "lodash/get";
+import BodyClass from "hoc/body-class";
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -129,7 +129,7 @@ export default class Html extends Component {
     const { component, store, disableClientSideRender } = this.props;
     const content = component ? ReactDOM.renderToString(component) : null;
     const helmet = Helmet.renderStatic();
-    const bodyClass = HigherOrder.BodyClass.rewind();
+    const bodyClass = BodyClass.rewind();
     const contentProps = {};
     if (content) {
       contentProps.dangerouslySetInnerHTML = { __html: content };

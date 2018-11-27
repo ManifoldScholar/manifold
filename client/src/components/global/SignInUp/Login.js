@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import { currentUserActions } from "actions";
 import { get, values } from "lodash";
 import classNames from "classnames";
-import { SignInUp } from "components/global";
-
-// const { startLogin } = authActions;
+import Oauth from "./Oauth";
 
 export default class Login extends Component {
   static propTypes = {
@@ -63,13 +61,13 @@ export default class Login extends Component {
     ).filter(provider => provider.custom);
 
     const customOAuthButtons = customOAuthProviders.map(provider => (
-      <SignInUp.Oauth.Button
+      <Oauth.Button
         dispatch={this.props.dispatch}
         provider={provider.name}
         hasIcon={false}
       >
         Log in with {provider.descriptiveName}
-      </SignInUp.Oauth.Button>
+      </Oauth.Button>
     ));
 
     return (
@@ -136,26 +134,26 @@ export default class Login extends Component {
         </p>
 
         <section className="login-external">
-          <SignInUp.Oauth.Monitor dispatch={this.props.dispatch} />
-          <SignInUp.Oauth.Button
+          <Oauth.Monitor dispatch={this.props.dispatch} />
+          <Oauth.Button
             dispatch={this.props.dispatch}
             provider="facebook"
           >
             <span>Log in with Facebook</span>
-          </SignInUp.Oauth.Button>
-          <SignInUp.Oauth.Button
+          </Oauth.Button>
+          <Oauth.Button
             dispatch={this.props.dispatch}
             provider="google"
             iconName="manicon-envelope"
           >
             <span>Log in with Google</span>
-          </SignInUp.Oauth.Button>
-          <SignInUp.Oauth.Button
+          </Oauth.Button>
+          <Oauth.Button
             dispatch={this.props.dispatch}
             provider="twitter"
           >
             <span>Log in with Twitter</span>
-          </SignInUp.Oauth.Button>
+          </Oauth.Button>
           {customOAuthButtons}
         </section>
       </div>

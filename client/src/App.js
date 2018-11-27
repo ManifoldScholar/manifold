@@ -104,7 +104,8 @@ class App extends Component {
   }
 
   clientLoaded() {
-    this.state.store.dispatch({ type: "CLIENT_LOADED", payload: {} });
+    // TODO: Fix this
+    // this.state.store.dispatch({ type: "CLIENT_LOADED", payload: {} });
   }
 
   resolveRouterConfirm = answer => {
