@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import BodyClass from "components/global/HigherOrder/BodyClass";
+import BodyClass from "hoc/body-class";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 import ComponentTrace from "./ComponentTrace";

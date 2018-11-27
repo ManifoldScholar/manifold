@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { ReaderNotesContainer } from "../ReaderNotes";
-import { Notes } from "../../../components/reader";
+import { Notes } from "components/reader";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";

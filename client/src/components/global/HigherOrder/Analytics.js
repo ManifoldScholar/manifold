@@ -1,7 +1,7 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
 import ReactGA from "react-ga";
-import withSettings from "containers/global/HigherOrder/withSettings";
+import withSettings from "hoc/with-settings";
 import { withRouter } from "react-router-dom";
 import get from "lodash/get";
 

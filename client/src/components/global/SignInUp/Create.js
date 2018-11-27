@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { usersAPI, requests } from "api";
 import { entityStoreActions, currentUserActions } from "actions";
+import Oauth from "./Oauth";
 import { select } from "utils/entityUtils";
-import { Form, SignInUp } from "components/global";
+import { Form } from "components/global";
 import { possessivize } from "utils/string";
 import connectAndFetch from "utils/connectAndFetch";
 import get from "lodash/get";
@@ -208,26 +209,26 @@ export class CreateContainer extends Component {
           {`You can also create a ${installationName} account using your Facebook, Twitter, or Google credentials.`}
         </p>
         <section className="login-external">
-          <SignInUp.Oauth.Monitor dispatch={this.props.dispatch} />
-          <SignInUp.Oauth.Button
+          <Oauth.Monitor dispatch={this.props.dispatch} />
+          <Oauth.Button
             dispatch={this.props.dispatch}
             provider="facebook"
           >
             <span>Log in with Facebook</span>
-          </SignInUp.Oauth.Button>
-          <SignInUp.Oauth.Button
+          </Oauth.Button>
+          <Oauth.Button
             dispatch={this.props.dispatch}
             provider="google"
             iconName="manicon-envelope"
           >
             <span>Log in with Google</span>
-          </SignInUp.Oauth.Button>
-          <SignInUp.Oauth.Button
+          </Oauth.Button>
+          <Oauth.Button
             dispatch={this.props.dispatch}
             provider="twitter"
           >
             <span>Log in with Twitter</span>
-          </SignInUp.Oauth.Button>
+          </Oauth.Button>
         </section>
         {this.renderTermsAndConditions(this.props)}
         <p className="login-links">

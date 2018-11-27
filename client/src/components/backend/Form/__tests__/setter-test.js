@@ -9,7 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 import setter from "../setter";
 
 class WithPropTypes extends Component {
-  static displayName: "WithPropTypes";
+  static displayName = "WithPropTypes";
 
   static propTypes = {
     foo: PropTypes.string

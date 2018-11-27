@@ -13,14 +13,14 @@ import readStats from "./servers/common/readStats";
 import cookie from "cookie";
 import { currentUserActions } from "actions";
 import exceptionRenderer from "./helpers/exceptionRenderer";
-import Manifold from "containers/Manifold";
+import Manifold from "Manifold";
 import { isPromise } from "utils/promise";
 import isFunction from "lodash/isFunction";
 import has from "lodash/has";
 import { matchRoutes } from "react-router-config";
 import { createLocation } from "history";
 import getRoutes from "/routes";
-import FatalError from "components/global/FatalError";
+import FatalError from "global/components/fatal-error";
 
 // Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
 // default TLS value appears to fix this. I believe this issue has

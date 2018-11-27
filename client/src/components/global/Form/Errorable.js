@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form } from "components/global";
+import InputError from "./InputError";
 import classNames from "classnames";
 import brackets2dots from "brackets2dots";
 import has from "lodash/has";
@@ -69,7 +69,7 @@ export default class Errorable extends PureComponent {
       <div style={this.props.containerStyle} className={wrapperClass}>
         {children}
         {hasErrors ? (
-          <Form.InputError
+          <InputError
             errors={fieldErrors}
             idForError={this.props.idForError ? this.props.idForError : null}
             name={nameForError}

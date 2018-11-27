@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import fetchData from "components/global/HigherOrder/fetchData";
+import fetchData from "hoc/fetch-data";
 import { withRouter } from "react-router-dom";
 
 export default function connectAndFetch(WrappedComponent) {
