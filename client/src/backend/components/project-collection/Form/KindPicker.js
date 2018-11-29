@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Utility from "frontend/components/utility";
-import { setter } from "backend/components/form";
+import Form from "backend/components/form";
 
 class KindPicker extends Component {
   static displayName = "ProjectCollection.Form.KindPicker";
@@ -46,4 +46,4 @@ class KindPicker extends Component {
   }
 }
 
-export default setter(KindPicker);
+export default Form.setter(KindPicker);

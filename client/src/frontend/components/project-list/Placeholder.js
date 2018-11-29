@@ -63,11 +63,7 @@ export default class ProjectListPlaceholder extends Component {
             <Authorize entity="project" ability="create">
               {this.adminMessage()}
             </Authorize>
-            <Authorize
-              entity="project"
-              ability="create"
-              successBehavior="hide"
-            >
+            <Authorize entity="project" ability="create" successBehavior="hide">
               {this.defaultMessage()}
             </Authorize>
             <SVG.BooksOnShelfColor />

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Search from "global/components/search";
+import SearchMenu from "global/components/search/menu";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Reader.Search.Menu component", () => {
@@ -13,7 +13,7 @@ describe("Reader.Search.Menu component", () => {
   it("renders correctly when search is visible", () => {
     const component = renderer.create(
       wrapWithRouter(
-        <Search.Menu.Body
+        <SearchMenu.Body
           visibility={{ search: true }}
           searchType="reader"
           history={historyMock}
@@ -29,7 +29,7 @@ describe("Reader.Search.Menu component", () => {
   it("renders correctly when search is not visible", () => {
     const component = renderer.create(
       wrapWithRouter(
-        <Search.Menu.Body
+        <SearchMenu.Body
           visibility={{ search: false }}
           searchType="reader"
           history={historyMock}

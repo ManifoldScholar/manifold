@@ -135,10 +135,7 @@ export default class Login extends Component {
 
         <section className="login-external">
           <Oauth.Monitor dispatch={this.props.dispatch} />
-          <Oauth.Button
-            dispatch={this.props.dispatch}
-            provider="facebook"
-          >
+          <Oauth.Button dispatch={this.props.dispatch} provider="facebook">
             <span>Log in with Facebook</span>
           </Oauth.Button>
           <Oauth.Button
@@ -148,10 +145,7 @@ export default class Login extends Component {
           >
             <span>Log in with Google</span>
           </Oauth.Button>
-          <Oauth.Button
-            dispatch={this.props.dispatch}
-            provider="twitter"
-          >
+          <Oauth.Button dispatch={this.props.dispatch} provider="twitter">
             <span>Log in with Twitter</span>
           </Oauth.Button>
           {customOAuthButtons}

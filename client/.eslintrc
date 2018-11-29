@@ -41,7 +41,7 @@
     "react/jsx-indent": 0,
 
     // Unused vars are bad.
-    "no-unused-vars": [1, {"args": "after-used", "ignoreRestSiblings": true, "varsIgnorePattern": "PropTypes", "argsIgnorePattern": "[iI]gnored"}],
+    "no-unused-vars": [1, {"args": "after-used", "ignoreRestSiblings": true, "varsIgnorePattern": "PropTypes|React", "argsIgnorePattern": "[iI]gnored"}],
 
     // Unused expressions are OK if ternary
     "no-unused-expressions": [1, {"allowTernary": true }],

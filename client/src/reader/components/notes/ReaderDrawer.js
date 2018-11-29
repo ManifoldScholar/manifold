@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Notes from "reader/components/notes";
+import FilteredList from "./FilteredList";
 import ReaderNotes from "reader/containers/reader-notes";
 import BackendDrawer from "global/containers/drawer";
 
@@ -15,7 +15,7 @@ export default class ReaderDrawer extends PureComponent {
     if (!props.visible) return null;
     return (
       <ReaderNotes filterable>
-        <Notes.FilteredList />
+        <FilteredList />
       </ReaderNotes>
     );
   }

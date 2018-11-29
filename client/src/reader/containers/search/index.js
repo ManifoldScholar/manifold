@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
-import Search from "global/components/search";
+import SearchQuery from "global/components/search/query";
+import SearchResults from "global/components/search/results";
 import Overlay from "global/components/overlay";
 import connectAndFetch from "utils/connectAndFetch";
 import { searchResultsAPI, requests } from "api";
@@ -169,7 +170,7 @@ class SearchContainer extends PureComponent {
         contentWidth={850}
       >
         <div>
-          <Search.Query.Form
+          <SearchQuery.Form
             initialState={this.searchQueryState()}
             doSearch={this.doSearch}
             setQueryState={this.setQueryState}
@@ -177,7 +178,7 @@ class SearchContainer extends PureComponent {
             scopes={this.scopes()}
           />
           {this.props.results ? (
-            <Search.Results.List
+            <SearchResults.List
               pagination={this.props.resultsMeta.pagination}
               paginationClickHandler={this.setPage}
               results={this.props.results}

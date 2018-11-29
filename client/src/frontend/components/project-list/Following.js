@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Layout from "frontend/components/layout";
-import ProjectList from "frontend/components/project-list";
+import Filters from "./Filters";
+import Grid from "./Grid";
 import size from "lodash/size";
 import union from "lodash/union";
 import { Icon } from "global/components/svg";
@@ -49,12 +50,12 @@ export default class ProjectListFollowing extends Component {
               </div>
             </div>
           </header>
-          <ProjectList.Filters
+          <Filters
             filterChangeHandler={this.props.filterChangeHandler}
             subjects={this.mapFavoritesToSubjects()}
           />
           {this.props.followedProjects ? (
-            <ProjectList.Grid
+            <Grid
               authenticated={this.props.authentication.authenticated}
               favorites={this.props.authentication.currentUser.favorites}
               dispatch={this.props.dispatch}

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Permission from "backend/containers/permission";
+import Form from "./Form";
 import Dialog from "backend/components/dialog";
 import { permissionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -115,7 +115,7 @@ export class PermissionEdit extends PureComponent {
             </button>
           </div>
         </header>
-        <Permission.Form
+        <Form
           entity={this.props.entity}
           permission={permission}
           history={this.props.history}

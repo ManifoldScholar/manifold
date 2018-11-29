@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Meta from "global/components/meta";
+import DOI from "global/components/meta/DOI";
+import Item from "global/components/meta/Item";
 import endsWith from "lodash/endsWith";
-import FormattedDate from "../FormattedDate";
+import FormattedDate from "global/components/formatted-date";
 
 export default class List extends Component {
   static displayName = "Meta.List";
@@ -48,15 +49,15 @@ export default class List extends Component {
     if (dateValues.includes(key))
       return (
         <li key={key}>
-          <Meta.Item label={key}>
+          <Item label={key}>
             <FormattedDate format="MMMM DD, YYYY" date={value} />
-          </Meta.Item>
+          </Item>
         </li>
       );
 
     return (
       <li key={key}>
-        <Meta.Item label={key} value={value} />
+        <Item label={key} value={value} />
       </li>
     );
   }
@@ -67,7 +68,7 @@ export default class List extends Component {
 
     return (
       <li key={doi}>
-        <Meta.DOI label={"doi"} doi={doi} />
+        <DOI label={"doi"} doi={doi} />
       </li>
     );
   }

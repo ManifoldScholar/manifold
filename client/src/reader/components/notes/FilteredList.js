@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Notes from "reader/components/notes";
+import Partial from "./Partial";
+import EmptyMessage from "./EmptyMessage";
 
 export default class FilteredList extends PureComponent {
   static displayName = "Notes.FilteredList";
@@ -52,13 +53,13 @@ export default class FilteredList extends PureComponent {
 
   renderList() {
     if (this.props.sortedAnnotations.length === 0) {
-      return <Notes.EmptyMessage annotated={this.props.annotated} />;
+      return <EmptyMessage annotated={this.props.annotated} />;
     }
     return (
       <ul>
         {this.props.sortedAnnotations.map(group => {
           return (
-            <Notes.Partial.Group
+            <Partial.Group
               key={group.sectionId}
               annotations={group.annotations}
               sectionName={group.name}
@@ -75,7 +76,7 @@ export default class FilteredList extends PureComponent {
     return (
       <div>
         {this.renderHeading()}
-        <Notes.Partial.Filters
+        <Partial.Filters
           filterChangeHandler={this.props.handleFilterChange}
           filter={this.props.filter}
         />

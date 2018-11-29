@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import ResourceCollection from "frontend/components/resource-collection";
+import Title from "./Title";
 import ResourceList from "frontend/components/resource-list";
 import Utility from "frontend/components/utility";
 
@@ -41,7 +41,7 @@ export default class ResourceCollectionDetail extends PureComponent {
     return (
       <section className="collection-detail">
         <div className="container flush-bottom">
-          <ResourceCollection.Title collection={collection} showCreatedAt />
+          <Title collection={collection} showCreatedAt />
           {this.renderDescription(attr.descriptionFormatted)}
           <div className="utility">
             <Utility.ShareBar url={this.props.collectionUrl} />

@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Notes from "reader/components/notes";
+import Full from "./Full";
+import EmptyMessage from "./EmptyMessage";
 
 export default class DetailedList extends PureComponent {
   static displayName = "Notes.DetailedList";
@@ -21,12 +22,12 @@ export default class DetailedList extends PureComponent {
   render() {
     if (!this.props.loaded) return null;
     if (this.props.sortedAnnotations.length === 0)
-      return <Notes.EmptyMessage annotated={this.props.annotated} />;
+      return <EmptyMessage annotated={this.props.annotated} />;
     return (
       <ul className="notes-list">
         {this.props.sortedAnnotations.map(group => {
           return (
-            <Notes.Full.Group
+            <Full.Group
               key={group.sectionId}
               annotations={group.annotations}
               header={group.name}

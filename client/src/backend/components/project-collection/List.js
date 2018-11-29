@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import ProjectCollection from "backend/components/project-collection";
+import ListItem from "./ListItem";
 import List from "backend/components/list";
 
 export default class ProjectCollectionList extends PureComponent {
@@ -24,7 +24,7 @@ export default class ProjectCollectionList extends PureComponent {
       <aside className="aside-wide project-collection-list">
         <List.Orderable
           entities={this.props.projectCollections}
-          entityComponent={ProjectCollection.ListItem}
+          entityComponent={ListItem}
           entityComponentProps={{
             active,
             clickHandler: this.props.onCollectionSelect,

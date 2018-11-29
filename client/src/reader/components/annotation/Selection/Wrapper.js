@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
-import Selection from "../Selection";
+import Truncated from "./Truncated";
 import nl2br from "nl2br";
 
 import Authorize from "hoc/authorize";
@@ -38,7 +38,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
   maybeTruncateSelection() {
     const { subject, truncate } = this.props;
     if (truncate && subject && subject.length > truncate) {
-      return <Selection.Truncated selection={subject} truncate={truncate} />;
+      return <Truncated selection={subject} truncate={truncate} />;
     }
     return <div dangerouslySetInnerHTML={{ __html: nl2br(subject) }} />;
   }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GlobalForm from "global/components/form";
-import { setter } from "backend/components/form";
+import Form from "backend/components/form";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import labelId from "helpers/labelId";
@@ -103,4 +103,4 @@ class IconPicker extends Component {
   }
 }
 
-export default setter(IconPicker);
+export default Form.setter(IconPicker);

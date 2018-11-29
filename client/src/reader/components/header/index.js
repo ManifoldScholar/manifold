@@ -5,7 +5,7 @@ import ControlMenu from "reader/components/control-menu";
 import Notes from "reader/components/notes";
 import TextTitles from "reader/components/text-titles";
 import ReturnMenu from "reader/components/return-menu";
-import Search from "global/components/search";
+import SearchMenu from "global/components/search/menu";
 import HeaderNotifications from "global/components/header-notifications";
 import UserMenuBody from "global/components/user-menu-body";
 import UserMenuButton from "global/components/user-menu-button";
@@ -129,7 +129,7 @@ export default class Header extends Component {
                   />
                 </li>
                 <li>
-                  <Search.Menu.Button
+                  <SearchMenu.Button
                     toggleSearchMenu={this.panelToggleHandler("search")}
                     active={this.props.visibility.uiPanels.search}
                   />
@@ -198,7 +198,7 @@ export default class Header extends Component {
                 facets: ["SearchableNode", "Annotation"]
               }}
               searchType="reader"
-              bodyComponent={Search.Menu.Body}
+              bodyComponent={SearchMenu.Body}
               hidePanel={this.props.commonActions.hideSearchPanel}
             />
             <UIPanel

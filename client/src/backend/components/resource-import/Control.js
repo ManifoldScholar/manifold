@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import ResourceImport from "backend/components/resource-import";
+import Controls from "./Controls";
 import lh from "helpers/linkHandler";
 
 export default class ResourceImportState extends PureComponent {
@@ -48,14 +48,14 @@ export default class ResourceImportState extends PureComponent {
     switch (resourceImport.attributes.state) {
       case "importing":
         return (
-          <ResourceImport.Controls.Importing
+          <Controls.Importing
             resourceImport={resourceImport}
             refreshResults={this.refreshResults}
           />
         );
       case "imported":
         return (
-          <ResourceImport.Controls.Imported
+          <Controls.Imported
             resourceImport={resourceImport}
             finishUrl={this.finishUrl}
             resetImport={this.resetImport}
@@ -64,7 +64,7 @@ export default class ResourceImportState extends PureComponent {
       case "parsed":
       case "mapped":
         return (
-          <ResourceImport.Controls.Parsed
+          <Controls.Parsed
             resourceImport={resourceImport}
             backLinkUrl={this.backLinkUrl}
             startImport={this.startImport}

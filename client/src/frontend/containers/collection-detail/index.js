@@ -223,6 +223,4 @@ export class CollectionDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(
-  withSettings(CollectionDetailContainer)
-);
+export default connectAndFetch(withSettings(CollectionDetailContainer));

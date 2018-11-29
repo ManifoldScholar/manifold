@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Meta from "global/components/meta";
+import Item from "global/components/meta/Item";
 
 export default class DOI extends Component {
   static displayName = "Meta.DOI";
@@ -15,11 +15,11 @@ export default class DOI extends Component {
     if (!doi) return null;
 
     return (
-      <Meta.Item label={label}>
+      <Item label={label}>
         <a href={doi} target="_blank" rel="noopener noreferrer">
           {doi}
         </a>
-      </Meta.Item>
+      </Item>
     );
   }
 }

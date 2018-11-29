@@ -1,6 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
-import Section from "reader/components/section";
+import BodyNodes from "./BodyNodes";
 
 export default class Body extends Component {
   static propTypes = {
@@ -21,7 +21,7 @@ export default class Body extends Component {
   }
 
   render() {
-    const iterator = new Section.BodyNodes.Helpers.NodeTreeIterator(this.props);
+    const iterator = new BodyNodes.Helpers.NodeTreeIterator(this.props);
     const node = this.props.section.attributes.bodyJson;
     const elements = iterator.visit(node);
     return elements;

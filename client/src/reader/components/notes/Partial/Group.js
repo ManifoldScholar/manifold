@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Notes from "reader/components/notes";
+import GroupItem from "./GroupItem";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import debounce from "lodash/debounce";
@@ -50,7 +50,7 @@ export default class Group extends Component {
         <ul className={classes}>
           {annotations.map(annotation => {
             return (
-              <Notes.Partial.GroupItem
+              <GroupItem
                 key={annotation.id}
                 annotation={annotation}
                 visitHandler={this.props.visitHandler}

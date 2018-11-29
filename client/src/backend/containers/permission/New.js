@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Permission from "backend/containers/permission";
+import Form from "./Form";
 
 export default class PermissionNew extends PureComponent {
   static displayName = "Permission.New";
@@ -18,10 +18,7 @@ export default class PermissionNew extends PureComponent {
             Grant Permissions
           </h2>
         </header>
-        <Permission.Form
-          entity={this.props.entity}
-          history={this.props.history}
-        />
+        <Form entity={this.props.entity} history={this.props.history} />
       </section>
     );
   }

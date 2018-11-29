@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Notes from "reader/components/notes";
+import GroupItem from "./GroupItem";
 
 export default class Group extends PureComponent {
   static displayName = "Notes.Full.Group";
@@ -21,7 +21,7 @@ export default class Group extends PureComponent {
         <ul>
           {this.props.annotations.map(annotation => {
             return (
-              <Notes.Full.GroupItem
+              <GroupItem
                 key={annotation.id}
                 annotation={annotation}
                 handleVisitAnnotation={this.props.handleVisitAnnotation}

@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Navigation from "global/components/navigation";
+import Static from "global/components/navigation/Static";
+import Mobile from "global/components/navigation/Mobile";
 import { Link, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
@@ -69,12 +70,12 @@ export class NavigationPrimary extends PureComponent {
 
     return (
       <React.Fragment>
-        <Navigation.Static
+        <Static
           backendButton={backendButton}
           {...this.props}
           style={this.props.desktopStyle}
         />
-        <Navigation.Mobile
+        <Mobile
           backendButton={backendButton}
           {...this.props}
           style={this.props.mobileStyle}

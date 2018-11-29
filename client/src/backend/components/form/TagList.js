@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
 import GlobalForm from "global/components/form";
-import Form from "backend/containers/form";
+import ConnectedFormInputs from "backend/containers/form-inputs/connected-inputs";
 import List from "./HasMany/List";
 import classnames from "classnames";
 import isString from "lodash/isString";
@@ -113,7 +113,7 @@ class FormTagList extends Component {
         <label htmlFor={id} className={labelClass}>
           {this.props.label}
         </label>
-        <Form.PredictiveInput
+        <ConnectedFormInputs.PredictiveInput
           className="input-predictive"
           placeholder="Enter a Tag"
           fetch={tagsAPI.index}

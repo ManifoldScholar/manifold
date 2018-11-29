@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
-import Search from "global/components/search";
+import SearchMenu from "global/components/search/menu";
 
 export default class MobileSearch extends PureComponent {
   render() {
     return (
-      <Search.Menu.Body searchType={"frontend"} visibility={{ search: true }} />
+      <SearchMenu.Body searchType={"frontend"} visibility={{ search: true }} />
     );
   }
 }

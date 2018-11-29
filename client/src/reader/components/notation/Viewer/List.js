@@ -1,6 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Notation from "reader/components/notation";
+import Fader from "./Fader";
+import Group from "./Group";
+import Single from "./Single";
+import Preview from "./Preview";
+
 import { connect } from "react-redux";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import { uiReaderActions, entityStoreActions } from "actions";
@@ -283,15 +287,15 @@ class NotationViewerList extends PureComponent {
 
     return (
       <div style={wrapperStyle} className="notation-wrapper">
-        <Notation.Viewer.Fader scrollY={this.state.scrollY}>
-          <Notation.Viewer.Group
+        <Fader scrollY={this.state.scrollY}>
+          <Group
             group={group}
             params={{ textId, sectionId }}
             actions={this.actions}
             activeAnnotation={activeAnnotation}
             singleHeight={this.notationHeight}
           />
-        </Notation.Viewer.Fader>
+        </Fader>
       </div>
     );
   }
@@ -302,14 +306,14 @@ class NotationViewerList extends PureComponent {
 
     return (
       <div style={wrapperStyle} className="notation-wrapper">
-        <Notation.Viewer.Fader scrollY={this.state.scrollY}>
-          <Notation.Viewer.Single
+        <Fader scrollY={this.state.scrollY}>
+          <Single
             entry={entry}
             params={{ textId, sectionId }}
             actions={this.actions}
             active={activeAnnotation === entry.annotation.id}
           />
-        </Notation.Viewer.Fader>
+        </Fader>
       </div>
     );
   }
@@ -343,7 +347,7 @@ class NotationViewerList extends PureComponent {
           transitionLeaveTimeout={300}
         >
           {this.state.previewEntry ? (
-            <Notation.Viewer.Preview
+            <Preview
               entry={this.state.previewEntry}
               actions={this.actions}
               params={{ textId, sectionId }}

@@ -27,7 +27,7 @@ module.exports = (options = {}) => {
 
   const circularDependency = new CircularDependencyPlugin({
     // exclude detection of files based on a RegExp
-    exclude: /a\.js|node_modules/,
+    exclude: /a\.js|node_modules|src\/global\/containers\/comment\/|src\/global\/components\/comment\//,
     // add errors to webpack instead of warnings
     failOnError: true,
     // set the current working directory for displaying module paths

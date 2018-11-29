@@ -150,7 +150,7 @@ export default class AnnotatableCaptureSelection extends Component {
     startRange.setStart(startNode, 0);
     try {
       startRange.setEnd(range.startContainer, range.startOffset + 1);
-    } catch(error) {
+    } catch (error) {
       startRange.setEnd(range.startContainer, range.startOffset);
     }
 

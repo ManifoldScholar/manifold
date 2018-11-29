@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Annotation from "reader/containers/annotation";
+import List from "../../List";
 
 export default class ViewAnnotations extends PureComponent {
   static drawerProps = () => {
@@ -19,7 +19,7 @@ export default class ViewAnnotations extends PureComponent {
   render() {
     const { actions } = this.props;
     return (
-      <Annotation.List
+      <List
         closeDrawer={actions.closeDrawer}
         sectionId={this.props.sectionId}
         annotationIds={this.props.annotationIds}

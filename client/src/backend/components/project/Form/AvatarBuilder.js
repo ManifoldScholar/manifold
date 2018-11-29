@@ -5,7 +5,6 @@ import Form from "backend/components/form";
 import GlobalForm from "global/components/form";
 import ColorPicker from "./ColorPicker";
 import Project from "global/components/project";
-import { setter } from "backend/components/form";
 import classNames from "classnames";
 
 class AvatarBuilder extends Component {
@@ -183,4 +182,4 @@ class AvatarBuilder extends Component {
   }
 }
 
-export default setter(AvatarBuilder);
+export default Form.setter(AvatarBuilder);
