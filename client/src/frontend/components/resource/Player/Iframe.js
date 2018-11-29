@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import throttle from "lodash/throttle";
-import { ResourceList } from "components/frontend";
+import ResourceList from "frontend/components/resource-list";
 import { closest } from "utils/domUtils";
 
 export default class ResourcePlayerIframe extends Component {

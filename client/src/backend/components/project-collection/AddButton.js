@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Project } from "components/global";
+import Project from "global/components/project";
 import find from "lodash/find";
 
 export default class ProjectCollectionAddButton extends Component {

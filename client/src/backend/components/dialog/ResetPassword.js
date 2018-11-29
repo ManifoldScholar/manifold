@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Wrapper from "./Wrapper";
 import Confirm from "./Confirm";
-import { Form } from "components/global";
+import Form from "global/components/form";
 import { entityStoreActions } from "actions";
 import { usersAPI, requests, passwordsAPI } from "api";
 import { get } from "lodash";

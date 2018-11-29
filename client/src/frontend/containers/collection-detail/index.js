@@ -1,17 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Utility, ResourceCollection } from "components/frontend";
+import ResourceCollection from "frontend/components/resource-collection";
+import Utility from "frontend/components/utility";
 import { entityStoreActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
 import { projectsAPI, collectionsAPI, requests } from "api";
-import { HeadContent } from "components/global";
-import HigherOrder from "containers/global/HigherOrder";
+import HeadContent from "global/components/head-content";
 import queryString from "query-string";
 import debounce from "lodash/debounce";
 import omitBy from "lodash/omitBy";
 import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
+
+import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
 const page = 1;
@@ -222,5 +224,5 @@ export class CollectionDetailContainer extends PureComponent {
 }
 
 export default connectAndFetch(
-  HigherOrder.withSettings(CollectionDetailContainer)
+  withSettings(CollectionDetailContainer)
 );

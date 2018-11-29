@@ -1,7 +1,7 @@
 // import * as Frontend from "containers/frontend";
 // import * as Reader from "containers/reader";
 // import * as Backend from "containers/backend";
-import NotFound from "containers/global/NotFound";
+import NotFound from "global/containers/not-found";
 import queryString from "query-string";
 
 import { Component } from "react";

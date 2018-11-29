@@ -2,18 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
-import { LoadingBlock } from "components/global";
-
-import {
-  Event,
-  Project,
-  TextList,
-  ResourceList,
-  ResourceCollectionList,
-  Layout
-} from "components/frontend";
-
-import { Meta } from "components/global";
+import LoadingBlock from "global/components/loading-block";
+import Layout from "frontend/components/layout";
+import ResourceCollectionList from "frontend/components/resource-collection-list";
+import ResourceList from "frontend/components/resource-list";
+import TextList from "frontend/components/text-list";
+import Project from "frontend/components/project";
+import Event from "frontend/components/event";
+import Meta from "global/components/meta";
 
 class Detail extends Component {
   static displayName = "Project.Detail";

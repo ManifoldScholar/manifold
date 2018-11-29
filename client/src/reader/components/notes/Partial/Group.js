@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Notes } from "components/reader";
+import Notes from "reader/components/notes";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import debounce from "lodash/debounce";

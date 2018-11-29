@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { FormattedDate } from "components/global";
-import { Resourceish } from "components/frontend";
+import FormattedDate from "global/components/formatted-date";
+import Resourceish from "frontend/components/resourceish";
 
 export default class SearchResultsTypeResource extends PureComponent {
   static displayName = "Search.Results.Type.Resource";

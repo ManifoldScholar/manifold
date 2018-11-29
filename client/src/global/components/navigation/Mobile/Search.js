@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Search } from "components/global";
+import Search from "global/components/search";
 
 export default class MobileSearch extends PureComponent {
   render() {

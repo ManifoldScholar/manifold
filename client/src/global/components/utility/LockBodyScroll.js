@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { HigherOrder } from "components/global";
+
+import BodyClass from "hoc/body-class";
 
 export default class LockBodyScroll extends PureComponent {
   static displayName = "Utility.LockBodyScroll";
@@ -34,9 +35,9 @@ export default class LockBodyScroll extends PureComponent {
   render() {
     return (
       <div className="lock-body-scroll">
-        <HigherOrder.BodyClass className={this.props.lockClass}>
+        <BodyClass className={this.props.lockClass}>
           {this.props.children}
-        </HigherOrder.BodyClass>
+        </BodyClass>
       </div>
     );
   }

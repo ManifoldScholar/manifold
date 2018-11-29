@@ -1,12 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Form, Layout } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
-import HigherOrder from "containers/global/HigherOrder";
+import Layout from "backend/components/layout";
+import Form from "backend/components/form";
+import FormContainer from "backend/containers/form";
 import { settingsAPI, testMailsAPI, requests } from "api";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
+
+import withFormSession from "hoc/with-form-session";
 
 const { request } = entityStoreActions;
 
@@ -158,7 +160,7 @@ export class SettingsEmailContainer extends PureComponent {
   }
 }
 
-export default HigherOrder.withFormSession(
+export default withFormSession(
   connect(SettingsEmailContainer.mapStateToProps)(SettingsEmailContainer),
   "backend-settings"
 );

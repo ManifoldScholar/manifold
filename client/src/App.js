@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import createStore from "store/createStore";
 import { BrowserRouter, StaticRouter } from "react-router-dom";
-import { Dialog } from "components/backend";
-import { HigherOrder } from "components/global";
+import Dialog from "backend/components/dialog";
 import { Provider } from "react-redux";
-import Manifold from "containers/Manifold";
+import Manifold from "Manifold";
 import cookie from "cookie";
 import get from "lodash/get";
 import ch from "./helpers/consoleHelpers";
 import { hot } from "react-hot-loader";
+
+import Analytics from "hoc/analytics";
 
 class App extends Component {
   static propTypes = {
@@ -135,9 +136,9 @@ class App extends Component {
     return (
       <Provider store={this.state.store} key="provider">
         <Router {...routerProps}>
-          <HigherOrder.Analytics settings={this.settings()}>
+          <Analytics settings={this.settings()}>
             <Manifold confirm={this.renderConfirm()} />
-          </HigherOrder.Analytics>
+          </Analytics>
         </Router>
       </Provider>
     );

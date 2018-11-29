@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import Empty from "./Empty";
 import PropTypes from "prop-types";
-import { Utility } from "components/global";
+import Utility from "global/components/utility";
 import Types from "./Types";
 
 export default class SearchResultsList extends PureComponent {

@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Layout, Page, List } from "components/backend";
+import List from "backend/components/list";
+import Page from "backend/components/page";
+import Layout from "backend/components/layout";
 import lh from "helpers/linkHandler";
 import { pagesAPI, requests } from "api";
 import { entityStoreActions } from "actions";

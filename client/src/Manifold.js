@@ -3,12 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import {
-  SignInUp,
-  FatalError,
-  LoadingBar,
-  HeadContent
-} from "components/global";
+import HeadContent from "global/components/head-content";
+import LoadingBar from "global/components/loading-bar";
+import FatalError from "global/components/fatal-error";
+import SignInUp from "global/components/sign-in-up";
 import has from "lodash/has";
 import get from "lodash/get";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";

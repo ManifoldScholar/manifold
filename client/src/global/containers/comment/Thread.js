@@ -5,7 +5,7 @@ import { requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
 import { bindActionCreators } from "redux";
 import { select, meta } from "utils/entityUtils";
-import { Comment } from "components/global";
+import Comment from "global/components/comment";
 import { commentsAPI } from "api";
 
 const { request } = entityStoreActions;

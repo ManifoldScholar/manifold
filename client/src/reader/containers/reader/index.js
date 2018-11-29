@@ -2,17 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { bindActionCreators } from "redux";
-import { HigherOrder, Overlay, Utility } from "components/global";
-import {
-  Header,
-  Footer,
-  FooterMenu,
-  Toc,
-  Notes,
-  TextMeta
-} from "components/reader";
-import { HigherOrder as HigherOrderContainer } from "containers/global";
-import { ReaderNotes } from "containers/reader";
+import Utility from "global/components/utility";
+import Overlay from "global/components/overlay";
+import TextMeta from "reader/components/text-meta";
+import Notes from "reader/components/notes";
+import Toc from "reader/components/toc";
+import FooterMenu from "reader/components/footer-menu";
+import Footer from "reader/components/footer";
+import Header from "reader/components/header";
+import ReaderNotes from "reader/containers/reader-notes";
 import { select, grab, isEntityLoaded } from "utils/entityUtils";
 import { commonActions } from "actions/helpers";
 import { textsAPI, requests } from "api";
@@ -28,6 +26,10 @@ import {
 } from "actions";
 import { setPersistentUI } from "../../actions/ui/persistentUi";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+
+import ScrollAware from "hoc/scroll-aware";
+import BodyClass from "hoc/body-class";
+import Authorize from "hoc/authorize";
 
 const {
   selectFont,
@@ -179,7 +181,7 @@ export class ReaderContainer extends Component {
 
   renderNotesOverlay() {
     return (
-      <HigherOrderContainer.Authorize kind="any">
+      <Authorize kind="any">
         <Overlay
           closeCallback={this.props.history.goBack}
           title={"Your Notes"}
@@ -190,7 +192,7 @@ export class ReaderContainer extends Component {
             <Notes.DetailedList />
           </ReaderNotes>
         </Overlay>
-      </HigherOrderContainer.Authorize>
+      </Authorize>
     );
   }
 
@@ -219,10 +221,10 @@ export class ReaderContainer extends Component {
     const skipId = "skip-to-main";
 
     return (
-      <HigherOrder.BodyClass className="reader">
+      <BodyClass className="reader">
         <div>
           <Utility.SkipLink skipId={skipId} />
-          <HigherOrder.ScrollAware>
+          <ScrollAware>
             {/* Header inside scroll-aware HOC */}
             <Header
               // Props required by body component
@@ -238,7 +240,7 @@ export class ReaderContainer extends Component {
               match={this.props.match}
               {...this.readerActions}
             />
-          </HigherOrder.ScrollAware>
+          </ScrollAware>
           <Toc
             text={this.props.text}
             section={this.props.section}
@@ -263,7 +265,7 @@ export class ReaderContainer extends Component {
             {...this.readerActions}
           />
         </div>
-      </HigherOrder.BodyClass>
+      </BodyClass>
     );
   }
 }

@@ -2,7 +2,7 @@ jest.mock("react-collapse");
 
 import React from "react";
 import renderer from "react-test-renderer";
-import { ResourceCollection } from "components/frontend";
+import ResourceCollection from "frontend/components/resource-collection";
 import { Provider } from "react-redux";
 import { wrapWithRouter } from "test/helpers/routing";
 import build from "test/fixtures/build";

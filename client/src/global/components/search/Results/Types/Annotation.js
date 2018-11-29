@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
-import { Annotation } from "components/reader";
+import Annotation from "reader/components/annotation";
 
 export default class SearchResultsTypeAnnotation extends PureComponent {
   static displayName = "Search.Results.Type.Annotation";

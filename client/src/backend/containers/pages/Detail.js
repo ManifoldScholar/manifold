@@ -6,10 +6,13 @@ import entityUtils from "utils/entityUtils";
 import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
-import { HigherOrder } from "containers/global";
-import { Utility } from "components/global";
-import { Dialog, Navigation, Layout } from "components/backend";
+import Utility from "global/components/utility";
+import Layout from "backend/components/layout";
+import Navigation from "backend/components/navigation";
+import Dialog from "backend/components/dialog";
 import navigation from "helpers/router/navigation";
+
+import Authorize from "hoc/authorize";
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -180,12 +183,12 @@ class PageDetailContainer extends PureComponent {
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
           Preview{" "}
         </button>
-        <HigherOrder.Authorize entity={this.props.page} ability="update">
+        <Authorize entity={this.props.page} ability="update">
           <button onClick={this.handleDestroy} className="button-bare-primary">
             <i className="manicon manicon-trashcan" aria-hidden="true" />
             Delete
           </button>
-        </HigherOrder.Authorize>
+        </Authorize>
       </div>
     );
   }
@@ -245,14 +248,14 @@ class PageDetailContainer extends PureComponent {
     if (!authProps.entity) return null;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         failureFatalError={{
           body: `You are not allowed to ${authProps.ability} pages.`
         }}
         {...authProps}
       >
         {isNew ? this.renderNew() : this.renderExisting(page)}
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

@@ -4,7 +4,7 @@ import get from "lodash/get";
 import PropTypes from "prop-types";
 import { contactsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import { Form } from "components/global";
+import Form from "global/components/form";
 
 const { request, flush } = entityStoreActions;
 

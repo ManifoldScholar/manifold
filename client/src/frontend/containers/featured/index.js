@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { ProjectList, Layout } from "components/frontend";
+import Layout from "frontend/components/layout";
+import ProjectList from "frontend/components/project-list";
 import { bindActionCreators } from "redux";
 import { uiFilterActions, entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, subjectsAPI, requests } from "api";
 import get from "lodash/get";
-import { HeadContent } from "components/global";
+import HeadContent from "global/components/head-content";
 
 const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;

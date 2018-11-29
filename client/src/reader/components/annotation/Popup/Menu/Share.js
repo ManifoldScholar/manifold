@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import HigherOrder from "containers/global/HigherOrder";
 import { TwitterButton, FacebookButton } from "react-sociable";
 import Button from "../Button";
 import Panel from "../Panel";
 import lh from "helpers/linkHandler";
 import trim from "lodash/trim";
+
+import withSettings from "hoc/with-settings";
 
 class AnnotationPopupSecondaryShare extends PureComponent {
   static displayName = "Annotation.Popup.Secondary.Share";
@@ -130,4 +131,4 @@ class AnnotationPopupSecondaryShare extends PureComponent {
   }
 }
 
-export default HigherOrder.withSettings(AnnotationPopupSecondaryShare);
+export default withSettings(AnnotationPopupSecondaryShare);

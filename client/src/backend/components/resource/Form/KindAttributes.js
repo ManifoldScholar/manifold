@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Resource } from "components/backend";
+import Resource from "backend/components/resource";
 import { FormContext } from "helpers/contexts";
 
 export default class KindAttributes extends PureComponent {

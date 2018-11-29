@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isObject from "lodash/isObject";
 import isFunction from "lodash/isFunction";
-import { Developer } from "components/global";
+import Developer from "global/components/developer";
 
 export default class AnnotatableDebug extends PureComponent {
   static propTypes = {

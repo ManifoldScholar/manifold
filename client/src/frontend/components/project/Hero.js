@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Maker } from "components/frontend";
-import { Helper } from "components/global";
+import Maker from "frontend/components/maker";
+import Helper from "global/components/helper";
 import { Link } from "react-router-dom";
 import has from "lodash/has";
 import some from "lodash/some";

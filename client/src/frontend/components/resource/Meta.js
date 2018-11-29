@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Resource } from "components/frontend";
+import Resource from "frontend/components/resource";
 import filesize from "filesize";
 import pickBy from "lodash/pickBy";
 import isNull from "lodash/isNull";
-import { Meta, Utility } from "components/global";
+import Utility from "global/components/utility";
+import Meta from "global/components/meta";
 
 export default class ResourceMeta extends Component {
   static displayName = "Resource.Meta";

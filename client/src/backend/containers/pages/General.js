@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
+import Form from "backend/components/form";
+import FormContainer from "backend/containers/form";
 import { pagesAPI } from "api";
 import { select } from "utils/entityUtils";
-import HigherOrder from "containers/global/HigherOrder";
 import connectAndFetch from "utils/connectAndFetch";
+
+import withFormSession from "hoc/with-form-session";
 
 class PagesGeneralContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -162,7 +163,7 @@ class PagesGeneralContainer extends PureComponent {
   }
 }
 
-export default HigherOrder.withFormSession(
+export default withFormSession(
   connectAndFetch(PagesGeneralContainer),
   "backend-page-update"
 );

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { TwitterQuery } from "components/backend";
+import TwitterQuery from "backend/components/twitter-query";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
 

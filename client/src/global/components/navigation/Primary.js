@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Navigation } from "components/global";
+import Navigation from "global/components/navigation";
 import { Link, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 

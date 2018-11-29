@@ -1,14 +1,17 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Resource, Utility } from "components/frontend";
+import Utility from "frontend/components/utility";
+import Resource from "frontend/components/resource";
 import { entityStoreActions, fatalErrorActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, resourcesAPI, collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { HeadContent, LoadingBlock } from "components/global";
+import LoadingBlock from "global/components/loading-block";
+import HeadContent from "global/components/head-content";
 import some from "lodash/some";
-import HigherOrder from "containers/global/HigherOrder";
+
+import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
 
@@ -151,5 +154,5 @@ export class ResourceDetailContainer extends PureComponent {
 }
 
 export default connectAndFetch(
-  HigherOrder.withSettings(ResourceDetailContainer)
+  withSettings(ResourceDetailContainer)
 );

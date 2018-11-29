@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import HigherOrder from "containers/global/HigherOrder";
+
+import Authorize from "hoc/authorize";
 
 export default class DefaultButton extends PureComponent {
   static propTypes = {
@@ -39,7 +40,7 @@ export default class DefaultButton extends PureComponent {
     } = this.props;
     const iconClassName = classNames("manicon", iconClass);
     return (
-      <HigherOrder.Authorize kind={kind} entity={entity} ability={ability}>
+      <Authorize kind={kind} entity={entity} ability={ability}>
         {this.props.children ? (
           this.renderChild()
         ) : (
@@ -50,7 +51,7 @@ export default class DefaultButton extends PureComponent {
             {label}
           </button>
         )}
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

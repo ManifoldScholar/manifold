@@ -1,16 +1,17 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Dialog } from "components/backend";
-import { Text } from "components/global";
-import { HigherOrder } from "containers/global";
+import Dialog from "backend/components/dialog";
+import Text from "global/components/text";
 import { Link } from "react-router-dom";
 import get from "lodash/get";
 import { entityStoreActions } from "actions";
 import { projectsAPI, textsAPI, textCategoriesAPI, requests } from "api";
-import FormattedDate from "components/global/FormattedDate";
+import FormattedDate from "global/components/formatted-date";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
@@ -439,7 +440,7 @@ export class ProjectTextsContainer extends PureComponent {
     if (!project) return null;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability="manageTexts"
         failureNotification
@@ -452,7 +453,7 @@ export class ProjectTextsContainer extends PureComponent {
 
           {this.childRoutes()}
 
-          <HigherOrder.Authorize entity={project} ability="createTexts">
+          <Authorize entity={project} ability="createTexts">
             <div className="buttons-icon-horizontal maintain">
               <Link
                 to={lh.link("backendProjectTextsIngestionsNew", project.id)}
@@ -482,7 +483,7 @@ export class ProjectTextsContainer extends PureComponent {
                 </span>
               </Link>
             </div>
-          </HigherOrder.Authorize>
+          </Authorize>
 
           <section className="text-category-list-secondary">
             <div className="text-category">
@@ -584,7 +585,7 @@ export class ProjectTextsContainer extends PureComponent {
             </div>
           </section>
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

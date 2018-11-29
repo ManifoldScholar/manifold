@@ -4,7 +4,7 @@ import { usersAPI, requests } from "api";
 import { entityStoreActions, currentUserActions } from "actions";
 import Oauth from "./Oauth";
 import { select } from "utils/entityUtils";
-import { Form } from "components/global";
+import Form from "global/components/form";
 import { possessivize } from "utils/string";
 import connectAndFetch from "utils/connectAndFetch";
 import get from "lodash/get";

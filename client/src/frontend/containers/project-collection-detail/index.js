@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { ProjectCollection, Utility, Layout } from "components/frontend";
+import Layout from "frontend/components/layout";
+import Utility from "frontend/components/utility";
+import ProjectCollection from "frontend/components/project-collection";
 import { entityStoreActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
 import { projectCollectionsAPI, projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { HeadContent } from "components/global";
-import HigherOrder from "containers/global/HigherOrder";
+import HeadContent from "global/components/head-content";
 import omitBy from "lodash/omitBy";
 import queryString from "query-string";
 import debounce from "lodash/debounce";
+
+import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
 const page = 1;
@@ -182,5 +185,5 @@ export class ProjectCollectionDetailContainer extends Component {
 }
 
 export default connectAndFetch(
-  HigherOrder.withSettings(ProjectCollectionDetailContainer)
+  withSettings(ProjectCollectionDetailContainer)
 );

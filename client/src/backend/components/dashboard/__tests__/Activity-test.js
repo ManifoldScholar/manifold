@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { Dashboard } from "components/backend";
+import Dashboard from "backend/components/dashboard";
 import { createRenderer } from "react-test-renderer/shallow";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";

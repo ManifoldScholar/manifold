@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { Layout } from "components/frontend";
+import Layout from "frontend/components/layout";
 import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Layout.ButtonNavigation component", () => {

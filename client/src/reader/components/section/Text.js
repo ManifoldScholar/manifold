@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { HigherOrder } from "components/global";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import classNames from "classnames";
-import { Section } from "components/reader";
-import Annotation from "containers/reader/Annotation";
+import Section from "reader/components/section";
+import Annotation from "reader/containers/annotation";
 import locationHelper from "helpers/location";
+
+import HtmlClass from "hoc/html-class";
 
 export default class Text extends Component {
   static filterAnnotations(visibilityFilters, annotations) {
@@ -155,7 +156,7 @@ export default class Text extends Component {
     }
 
     return (
-      <HigherOrder.HtmlClass className={fontSizeClass}>
+      <HtmlClass className={fontSizeClass}>
         <div
           ref={el => {
             this.el = el;
@@ -199,7 +200,7 @@ export default class Text extends Component {
               : null}
           </ReactCSSTransitionGroup>
         </div>
-      </HigherOrder.HtmlClass>
+      </HtmlClass>
     );
   }
 }

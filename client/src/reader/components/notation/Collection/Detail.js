@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { ResourceList, ResourceCollection } from "components/frontend";
+import ResourceCollection from "frontend/components/resource-collection";
+import ResourceList from "frontend/components/resource-list";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 

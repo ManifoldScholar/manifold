@@ -1,13 +1,16 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { PressLogo, HeaderNotifications, Navigation } from "components/global";
+import Navigation from "global/components/navigation";
+import HeaderNotifications from "global/components/header-notifications";
+import PressLogo from "global/components/press-logo";
 import { Link } from "react-router-dom";
 import get from "lodash/get";
-import HigherOrderComponent from "components/global/HigherOrder";
-import HigherOrder from "containers/global/HigherOrder";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
+
+import BodyClass from "hoc/body-class";
+import BlurOnLocationChange from "hoc/blur-on-location-change";
 
 export default class LayoutHeader extends PureComponent {
   static displayName = "Layout.Header";
@@ -78,8 +81,8 @@ export default class LayoutHeader extends PureComponent {
       logoUrl;
 
     return (
-      <HigherOrder.BlurOnLocationChange location={this.props.location}>
-        <HigherOrderComponent.BodyClass className={bodyClasses}>
+      <BlurOnLocationChange location={this.props.location}>
+        <BodyClass className={bodyClasses}>
           <header className="header-app">
             <div className="header-container">
               <Link to={lh.link("frontend")} className="header-logo">
@@ -107,8 +110,8 @@ export default class LayoutHeader extends PureComponent {
             <div className="header-border" />
             <HeaderNotifications scope="global" />
           </header>
-        </HigherOrderComponent.BodyClass>
-      </HigherOrder.BlurOnLocationChange>
+        </BodyClass>
+      </BlurOnLocationChange>
     );
   }
 }

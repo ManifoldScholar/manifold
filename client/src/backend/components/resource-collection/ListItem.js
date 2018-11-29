@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import FormattedDate from "components/global/FormattedDate";
-import { Resourceish } from "components/frontend";
+import FormattedDate from "global/components/formatted-date";
+import Resourceish from "frontend/components/resourceish";
 import lh from "helpers/linkHandler";
 
 export default class ResourceCollectionListItem extends PureComponent {

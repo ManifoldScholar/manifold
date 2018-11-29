@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { Notifications } from "containers/global";
+import Notifications from "global/containers/notifications";
 
 export default class HeaderNotification extends Component {
   render() {

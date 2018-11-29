@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Permission } from "containers/backend";
+import Permission from "backend/containers/permission";
 
 export default class PermissionNew extends PureComponent {
   static displayName = "Permission.New";

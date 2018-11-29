@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ProjectCollection, Utility } from "components/frontend";
+import Utility from "frontend/components/utility";
+import ProjectCollection from "frontend/components/project-collection";
 import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
 import { entityStoreActions } from "actions";
-import { Utility as GlobalUtility } from "components/global";
+import GlobalUtility from "global/components/utility";
 import { select, meta } from "utils/entityUtils";
 import { projectCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";

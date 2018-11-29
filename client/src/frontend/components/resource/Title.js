@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import FormattedDate from "components/global/FormattedDate";
-import { Utility } from "components/global";
+import FormattedDate from "global/components/formatted-date";
+import Utility from "global/components/utility";
 
 export default class ResourceTitle extends Component {
   static displayName = "Resource.Title";

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ProjectList, ProjectCollection } from "components/frontend";
-import { Utility } from "components/global";
+import ProjectCollection from "frontend/components/project-collection";
+import ProjectList from "frontend/components/project-list";
+import Utility from "global/components/utility";
 import get from "lodash/get";
 
 export default class ProjectCollectionDetail extends Component {

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import FormattedDate from "components/global/FormattedDate";
-import { Resource } from "components/frontend";
+import FormattedDate from "global/components/formatted-date";
+import Resource from "frontend/components/resource";
 import get from "lodash/get";
 import classnames from "classnames";
-import { Utility } from "components/global";
+import Utility from "global/components/utility";
 
 export default class ResourceListSlideFigure extends Component {
   static propTypes = {

@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
 import classNames from "classnames";
-import { Utility } from "components/global";
-import setter from "components/backend/Form/setter";
+import Utility from "global/components/utility";
+import { setter } from "backend/components/form";
 
 class KindPicker extends PureComponent {
   static displayName = "Resource.KindPicker";

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import startsWith from "lodash/startsWith";
 import classNames from "classnames";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
-import { Icon } from "components/global/SVG";
+import { Icon } from "global/components/svg";
 
 export default class CoverButton extends Component {
   static displayName = "Project.CoverButton";

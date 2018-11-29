@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
-import { Avatar } from "components/global";
+import Avatar from "global/components/avatar";
 
 export default class UserLinks extends PureComponent {
   static propTypes = {

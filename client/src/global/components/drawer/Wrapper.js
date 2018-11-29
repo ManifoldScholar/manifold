@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
-import Utility from "components/global/Utility";
-import { Notifications } from "containers/global";
+import Utility from "global/components/utility";
+import Notifications from "global/containers/notifications";
 import isString from "lodash/isString";
 import FocusTrap from "focus-trap-react";
 import tabbable from "tabbable";

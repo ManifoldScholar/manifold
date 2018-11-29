@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form } from "components/backend";
-import setter from "components/backend/Form/setter";
+import Form from "backend/components/form";
+import { setter } from "backend/components/form";
 
 class IngestionFormUpload extends PureComponent {
   static displayName = "ProjectDetail.Text.Ingestion.Form.Upload";

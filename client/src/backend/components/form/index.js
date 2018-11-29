@@ -9,7 +9,6 @@ import GeneratedPasswordInput from "./GeneratedPasswordInput";
 import Header from "./Header";
 import HasMany from "./HasMany";
 import Hidden from "./Hidden";
-import HigherOrder from "./HigherOrder";
 import Instructions from "./Instructions";
 import MaskedTextInput from "./MaskedTextInput";
 import NumberInput from "./NumberInput";

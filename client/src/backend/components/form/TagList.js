@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
-import { Form as GlobalForm } from "components/global";
-import { Form } from "containers/backend";
+import GlobalForm from "global/components/form";
+import Form from "backend/containers/form";
 import List from "./HasMany/List";
 import classnames from "classnames";
 import isString from "lodash/isString";

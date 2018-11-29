@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Comment as CommentContainer } from "containers/global";
+import CommentContainer from "global/containers/comment";
 import PropTypes from "prop-types";
 
 export default class CommentDeleted extends PureComponent {

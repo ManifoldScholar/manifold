@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Resource } from "components/frontend";
-import { Utility, Meta } from "components/global";
+import Resource from "frontend/components/resource";
+import Meta from "global/components/meta";
+import Utility from "global/components/utility";
 
 export default class ResourceListCards extends PureComponent {
   static displayName = "ResourceList.Cards";

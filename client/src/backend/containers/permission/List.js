@@ -1,13 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { List, Permission } from "components/backend";
-import { HigherOrder } from "containers/global";
+import Permission from "backend/components/permission";
+import List from "backend/components/list";
 import connectAndFetch from "utils/connectAndFetch";
 import { permissionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import entityUtils from "utils/entityUtils";
+
+import Authorize from "hoc/authorize";
 
 const { select } = entityUtils;
 const { request } = entityStoreActions;
@@ -57,7 +59,7 @@ export class PermissionContainer extends PureComponent {
               }}
             />
           ) : null}
-          <HigherOrder.Authorize entity={entity} ability="createPermissions">
+          <Authorize entity={entity} ability="createPermissions">
             <div className="buttons-icon-horizontal">
               <Link
                 to={lh.link(newUrl, entity.id)}
@@ -67,7 +69,7 @@ export class PermissionContainer extends PureComponent {
                 <span>Add New Permissions</span>
               </Link>
             </div>
-          </HigherOrder.Authorize>
+          </Authorize>
         </nav>
       </section>
     );

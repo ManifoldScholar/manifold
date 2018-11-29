@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Metadata } from "components/backend";
+import Metadata from "backend/components/metadata";
 import { textsAPI } from "api";
 
 export default class TextMetadataContainer extends PureComponent {

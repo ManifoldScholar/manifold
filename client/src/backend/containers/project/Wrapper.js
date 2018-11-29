@@ -1,15 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Dialog, Navigation, Layout } from "components/backend";
-import { HigherOrder } from "containers/global";
-import { Utility } from "components/global";
+import Layout from "backend/components/layout";
+import Navigation from "backend/components/navigation";
+import Dialog from "backend/components/dialog";
+import Utility from "global/components/utility";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
+
+import Authorize from "hoc/authorize";
 
 const { request, flush } = entityStoreActions;
 
@@ -103,7 +106,7 @@ export class ProjectWrapperContainer extends PureComponent {
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
           Preview{" "}
         </button>
-        <HigherOrder.Authorize entity={project} ability={"delete"}>
+        <Authorize entity={project} ability={"delete"}>
           <button
             onClick={this.handleProjectDestroy}
             className="button-bare-primary"
@@ -111,7 +114,7 @@ export class ProjectWrapperContainer extends PureComponent {
             <i className="manicon manicon-trashcan" aria-hidden="true" />
             Delete
           </button>
-        </HigherOrder.Authorize>
+        </Authorize>
       </div>
     );
   }
@@ -130,7 +133,7 @@ export class ProjectWrapperContainer extends PureComponent {
 
     return (
       <div>
-        <HigherOrder.Authorize
+        <Authorize
           entity={project}
           failureFatalError={{
             detail: "You are not allowed to edit this project."
@@ -158,7 +161,7 @@ export class ProjectWrapperContainer extends PureComponent {
             <Utility.SkipLink skipId={skipId} />
             <div id={skipId}>{this.renderRoutes()}</div>
           </Layout.BackendPanel>
-        </HigherOrder.Authorize>
+        </Authorize>
       </div>
     );
   }

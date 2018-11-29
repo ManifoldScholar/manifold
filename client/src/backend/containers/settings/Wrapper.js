@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Navigation } from "components/backend";
-import { HigherOrder } from "containers/global";
-import { Utility } from "components/global";
+import Navigation from "backend/components/navigation";
+import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
+
+import Authorize from "hoc/authorize";
 
 export class SettingsWrapperContainer extends PureComponent {
   static propTypes = {
@@ -18,7 +19,7 @@ export class SettingsWrapperContainer extends PureComponent {
     const secondaryLinks = navigation.settings();
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity="settings"
         failureFatalError={{
           body: "You are not allowed to update settings."
@@ -39,7 +40,7 @@ export class SettingsWrapperContainer extends PureComponent {
             </div>
           </div>
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

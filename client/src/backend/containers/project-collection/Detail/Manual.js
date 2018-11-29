@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { List, ProjectCollection } from "components/backend";
+import ProjectCollection from "backend/components/project-collection";
+import List from "backend/components/list";
 
 export default class ProjectCollectionDetailManual extends PureComponent {
   static displayName = "ProjectCollectionDetail.Manual";

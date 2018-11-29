@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import HigherOrder from "containers/global/HigherOrder";
 import Link from "./Link";
 import Notation from "./Notation";
+
+import Authorize from "hoc/authorize";
 
 // This class represents a single notation in the margin. It's used to show the active
 // notation when notations are grouped, and it's used to show a single notation in the
@@ -40,7 +41,7 @@ export default class NotationViewerSingle extends PureComponent {
 
     return (
       <div className="notation-preview-single">
-        <HigherOrder.Authorize entity={annotation} ability="delete">
+        <Authorize entity={annotation} ability="delete">
           <button
             onClick={() => actions.startDestroy(entry)}
             className="notation-delete"
@@ -48,7 +49,7 @@ export default class NotationViewerSingle extends PureComponent {
             <span className="screen-reader-text">Delete Notation</span>
             <i className="manicon manicon-x" aria-hidden="true" />
           </button>
-        </HigherOrder.Authorize>
+        </Authorize>
         <Link notation={notation} params={params} className={linkClass}>
           <div
             style={{ maxHeight: height }}

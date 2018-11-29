@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Resource } from "components/frontend";
+import Resource from "frontend/components/resource";
 
 export default class ResourceListSlideFigureAudio extends Component {
   static propTypes = {

@@ -1,5 +1,5 @@
 import renderer from "react-test-renderer";
-import { Event } from "components/frontend";
+import Event from "frontend/components/event";
 import React from "react";
 
 describe("Event.Thumbnail component", () => {

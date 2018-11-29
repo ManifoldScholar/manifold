@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import Handle from "components/backend/List/Orderable/Handle";
-import { Icon } from "components/global/SVG";
+import Handle from "backend/components/list/Orderable/Handle";
+import { Icon } from "global/components/svg";
 
 export default class ProjectCollectionListItem extends PureComponent {
   static propTypes = {

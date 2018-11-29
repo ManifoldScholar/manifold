@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Section } from "components/reader";
+import Section from "reader/components/section";
 import {
   sectionsAPI,
   annotationsAPI,
@@ -19,9 +19,10 @@ import remove from "lodash/remove";
 import some from "lodash/some";
 import isEqual from "lodash/isEqual";
 import { childRoutes } from "helpers/router";
-import { HeadContent } from "components/global";
-import HigherOrder from "containers/global/HigherOrder";
+import HeadContent from "global/components/head-content";
 import values from "lodash/values";
+
+import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
 
@@ -239,4 +240,4 @@ export class SectionContainer extends Component {
   }
 }
 
-export default connectAndFetch(HigherOrder.withSettings(SectionContainer));
+export default connectAndFetch(withSettings(SectionContainer));

@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import SimpleList from "../SimpleList";
-import { Project } from "components/backend";
+import Project from "backend/components/project";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
 import { wrapWithRouter } from "test/helpers/routing";

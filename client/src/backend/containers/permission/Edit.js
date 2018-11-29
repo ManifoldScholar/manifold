@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Permission } from "containers/backend";
-import { Dialog } from "components/backend";
+import Permission from "backend/containers/permission";
+import Dialog from "backend/components/dialog";
 import { permissionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";

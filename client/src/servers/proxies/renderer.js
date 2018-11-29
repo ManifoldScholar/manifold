@@ -1,11 +1,11 @@
-import config from "../../config";
+import config from "config";
 import proxy from "http-proxy-middleware";
 import ch from "../../helpers/consoleHelpers";
 import createStore from "../../store/createStore";
 import cookie from "cookie";
 import has from "lodash/has";
 import exceptionRenderer from "../../helpers/exceptionRenderer";
-import Manifold from "containers/Manifold";
+import Manifold from "Manifold";
 import { authenticateWithToken } from "store/middleware/currentUserMiddleware";
 
 const clientFallbackPort = `http://localhost:${config.clientFallbackPort}`;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Project } from "components/global";
+import Project from "global/components/project";
 
 export default class ProjectCover extends Component {
   static displayName = "Project.Cover";

@@ -4,7 +4,7 @@ import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import values from "lodash/values";
 import union from "lodash/union";
-import { Notation } from "components/reader";
+import Notation from "reader/components/notation";
 import smoothScroll from "../../../../utils/smoothScroll";
 
 export default class TextNode extends Component {

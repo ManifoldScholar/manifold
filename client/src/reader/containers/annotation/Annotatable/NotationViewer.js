@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Notation as NotationComponents } from "components/reader";
+import NotationComponents from "reader/components/notation";
 import PropTypes from "prop-types";
 
 export default class AnnotatableNotationViewer extends PureComponent {

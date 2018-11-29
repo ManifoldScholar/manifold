@@ -4,7 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { passwordsAPI, requests } from "api";
 import { entityStoreActions, notificationActions } from "actions";
 import get from "lodash/get";
-import { Form as GlobalForm } from "components/global";
+import GlobalForm from "global/components/form";
 
 const { request, flush } = entityStoreActions;
 

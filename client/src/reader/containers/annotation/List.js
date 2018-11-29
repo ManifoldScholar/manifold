@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Annotation from "components/reader/Annotation";
+import Annotation from "reader/components/annotation";
 import { connect } from "react-redux";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";

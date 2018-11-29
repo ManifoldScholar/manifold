@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { Search } from "components/global";
+import Search from "global/components/search";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Reader.Search.Menu component", () => {

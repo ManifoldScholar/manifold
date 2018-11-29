@@ -1,15 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Navigation, Dialog, Layout } from "components/backend";
-import { HigherOrder } from "containers/global";
-import { Utility } from "components/global";
+import Layout from "backend/components/layout";
+import Dialog from "backend/components/dialog";
+import Navigation from "backend/components/navigation";
+import Utility from "global/components/utility";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { resourcesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
+
+import Authorize from "hoc/authorize";
 
 const { request, flush } = entityStoreActions;
 
@@ -120,7 +123,7 @@ export class ResourceWrapperContainer extends PureComponent {
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
           Preview{" "}
         </button>
-        <HigherOrder.Authorize entity={resource} ability={"delete"}>
+        <Authorize entity={resource} ability={"delete"}>
           <button
             onClick={this.handleResourceDestroy}
             className="button-bare-primary"
@@ -128,7 +131,7 @@ export class ResourceWrapperContainer extends PureComponent {
             <i className="manicon manicon-trashcan" aria-hidden="true" />
             Delete
           </button>
-        </HigherOrder.Authorize>
+        </Authorize>
       </div>
     );
   }
@@ -148,7 +151,7 @@ export class ResourceWrapperContainer extends PureComponent {
 
     return (
       <div>
-        <HigherOrder.Authorize
+        <Authorize
           entity={resource}
           failureFatalError={{
             body: "You are not allowed to edit this resource."
@@ -181,7 +184,7 @@ export class ResourceWrapperContainer extends PureComponent {
             <Utility.SkipLink skipId={skipId} />
             <div id={skipId}>{this.renderRoutes()}</div>
           </Layout.BackendPanel>
-        </HigherOrder.Authorize>
+        </Authorize>
       </div>
     );
   }

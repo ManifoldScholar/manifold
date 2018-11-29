@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Dialog } from "components/backend";
+import Dialog from "backend/components/dialog";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { usersAPI, requests } from "api";
-import { Form } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
+import Form from "backend/components/form";
+import FormContainer from "backend/containers/form";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 

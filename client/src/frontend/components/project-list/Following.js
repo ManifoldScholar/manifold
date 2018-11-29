@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ProjectList, Layout } from "components/frontend";
+import Layout from "frontend/components/layout";
+import ProjectList from "frontend/components/project-list";
 import size from "lodash/size";
 import union from "lodash/union";
-import { Icon } from "components/global/SVG";
+import { Icon } from "global/components/svg";
 
 export default class ProjectListFollowing extends Component {
   static displayName = "ProjectList.Following";

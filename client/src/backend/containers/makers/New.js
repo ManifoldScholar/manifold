@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Makers } from "containers/backend";
+import Makers from "backend/containers/makers";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
 

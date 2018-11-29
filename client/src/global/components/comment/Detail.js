@@ -1,9 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Comment as CommentContainer } from "containers/global";
-import { Helper, Comment } from "components/global";
+import CommentContainer from "global/containers/comment";
+import Comment from "global/components/comment";
+import Helper from "global/components/helper";
 import classNames from "classnames";
-import HigherOrder from "containers/global/HigherOrder";
+
+import Authorize from "hoc/authorize";
 
 export default class CommentDetail extends PureComponent {
   static displayName = "Comment.Detail";
@@ -120,7 +122,7 @@ export default class CommentDetail extends PureComponent {
         <section className="body">
           <Helper.SimpleFormat text={comment.attributes.body} />
         </section>
-        <HigherOrder.Authorize kind={"any"}>
+        <Authorize kind={"any"}>
           <nav className="utility">
             <ul>
               <li>
@@ -128,18 +130,18 @@ export default class CommentDetail extends PureComponent {
                   {"Reply"}
                 </button>
               </li>
-              <HigherOrder.Authorize entity={comment} ability={"update"}>
+              <Authorize entity={comment} ability={"update"}>
                 <li>
                   <button onClick={this.startEdit}>{"Edit"}</button>
                 </li>
-              </HigherOrder.Authorize>
-              <HigherOrder.Authorize entity={comment} ability={"delete"}>
+              </Authorize>
+              <Authorize entity={comment} ability={"delete"}>
                 {!comment.attributes.deleted ? (
                   <li>
                     <button onClick={this.handleDelete}>{"Delete"}</button>
                   </li>
                 ) : null}
-              </HigherOrder.Authorize>
+              </Authorize>
               {comment.attributes.deleted ? (
                 <li>
                   <button onClick={this.handleRestore}>{"Restore"}</button>
@@ -164,8 +166,8 @@ export default class CommentDetail extends PureComponent {
             </ul>
             {this.renderEditor()}
           </nav>
-        </HigherOrder.Authorize>
-        <HigherOrder.Authorize kind="unauthenticated">
+        </Authorize>
+        <Authorize kind="unauthenticated">
           <nav className="utility">
             <ul>
               <li>
@@ -175,7 +177,7 @@ export default class CommentDetail extends PureComponent {
               </li>
             </ul>
           </nav>
-        </HigherOrder.Authorize>
+        </Authorize>
         <CommentContainer.Thread
           subject={this.props.subject}
           parent={this.props.comment}

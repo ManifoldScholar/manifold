@@ -4,14 +4,15 @@ import connectAndFetch from "utils/connectAndFetch";
 import { projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
-import { ProjectCollection } from "components/backend";
-import { ProjectCollection as ProjectCollectionContainer } from "containers/backend";
-import { Drawer } from "components/global";
-import { HigherOrder } from "containers/global";
+import ProjectCollection from "backend/components/project-collection";
+import ProjectCollectionContainer from "backend/containers/project-collection";
+import Drawer from "global/components/drawer";
 import { childRoutes } from "helpers/router";
 import size from "lodash/size";
 import lh from "helpers/linkHandler";
 import classnames from "classnames";
+
+import Authorize from "hoc/authorize";
 
 const { request, flush } = entityStoreActions;
 
@@ -145,7 +146,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     });
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         ability="update"
         entity={["projectCollection"]}
         failureFatalError={{
@@ -186,7 +187,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
             </div>
           </div>
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

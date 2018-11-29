@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { SVG } from "components/global";
+import SVG from "global/components/svg";
 import { Link } from "react-router-dom";
-import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 const helpLink = "https://manifoldapp.org/docs/";
 
@@ -65,16 +66,16 @@ export default class ProjectListPlaceholder extends Component {
                 </div>
               </div>
             </header>
-            <HigherOrder.Authorize entity="projectCollection" ability="create">
+            <Authorize entity="projectCollection" ability="create">
               {this.adminMessage()}
-            </HigherOrder.Authorize>
-            <HigherOrder.Authorize
+            </Authorize>
+            <Authorize
               entity="project"
               ability="create"
               successBehavior="hide"
             >
               {this.defaultMessage()}
-            </HigherOrder.Authorize>
+            </Authorize>
             <SVG.BooksOnShelfColor />
             <div className="button">
               <Link to={lh.link("backend")} className="button-icon-primary">

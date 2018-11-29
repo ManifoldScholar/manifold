@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
-import { Layout } from "components/frontend";
+import Layout from "frontend/components/layout";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
 

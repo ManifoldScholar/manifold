@@ -1,15 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Dialog, Navigation, Layout } from "components/backend";
-import { HigherOrder } from "containers/global";
-import { Utility } from "components/global";
+import Layout from "backend/components/layout";
+import Navigation from "backend/components/navigation";
+import Dialog from "backend/components/dialog";
+import Utility from "global/components/utility";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { textsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
@@ -147,7 +150,7 @@ export class TextWrapperContainer extends PureComponent {
 
     return (
       <div>
-        <HigherOrder.Authorize
+        <Authorize
           entity={text}
           failureFatalError={{
             body: "You are not allowed to update this text."
@@ -180,7 +183,7 @@ export class TextWrapperContainer extends PureComponent {
             <Utility.SkipLink skipId={skipId} />
             <div id={skipId}>{this.renderRoutes()}</div>
           </Layout.BackendPanel>
-        </HigherOrder.Authorize>
+        </Authorize>
       </div>
     );
   }

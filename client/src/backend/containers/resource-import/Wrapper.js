@@ -1,13 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Navigation, Layout } from "components/backend";
-import { HigherOrder } from "containers/global";
+import Layout from "backend/components/layout";
+import Navigation from "backend/components/navigation";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { resourceImportsAPI, projectsAPI, requests } from "api";
 import { grab, isEntityLoaded, select } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
@@ -110,7 +112,7 @@ export class ResourceImportWrapper extends PureComponent {
     if (!project) return null;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         failureFatalError={{
           body: "You are not allowed to import resources for this project."
@@ -129,7 +131,7 @@ export class ResourceImportWrapper extends PureComponent {
         <Layout.BackendPanel>
           <div>{this.renderRoutes()}</div>
         </Layout.BackendPanel>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

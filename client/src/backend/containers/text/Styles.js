@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Dialog } from "components/backend";
+import Dialog from "backend/components/dialog";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { Icon } from "components/global/SVG";
-import FormattedDate from "components/global/FormattedDate";
+import { Icon } from "global/components/svg";
+import FormattedDate from "global/components/formatted-date";
 import { stylesheetsAPI, requests } from "api";
 import { notificationActions, entityStoreActions } from "actions";
 

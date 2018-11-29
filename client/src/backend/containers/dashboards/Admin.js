@@ -2,12 +2,9 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
-import {
-  List,
-  Project,
-  Dashboard as DashboardComponents
-} from "components/backend";
-import { HigherOrder } from "containers/global";
+import DashboardComponents from "backend/components/dashboard";
+import Project from "backend/components/project";
+import List from "backend/components/list";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, statisticsAPI, requests } from "api";
 import debounce from "lodash/debounce";
@@ -15,6 +12,8 @@ import Authorization from "helpers/authorization";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
@@ -205,7 +204,7 @@ export class DashboardsAdminContainer extends PureComponent {
                     />
                   ) : null}
                 </nav>
-                <HigherOrder.Authorize entity="statistics" ability={"read"}>
+                <Authorize entity="statistics" ability={"read"}>
                   <section>
                     <header className="section-heading-secondary">
                       <h3>
@@ -220,7 +219,7 @@ export class DashboardsAdminContainer extends PureComponent {
                       statistics={this.props.statistics}
                     />
                   </section>
-                </HigherOrder.Authorize>
+                </Authorize>
               </div>
             </section>
           </div>

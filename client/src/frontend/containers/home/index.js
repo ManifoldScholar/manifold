@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Layout } from "components/frontend";
-import HigherOrder from "containers/global/HigherOrder";
+import Layout from "frontend/components/layout";
 import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
 import get from "lodash/get";
@@ -11,6 +10,8 @@ import { requests } from "api";
 import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
+
+import withSettings from "hoc/with-settings";
 
 export class HomeContainer extends Component {
   static showProjects(getState) {
@@ -102,4 +103,4 @@ export class HomeContainer extends Component {
   }
 }
 
-export default connectAndFetch(HigherOrder.withSettings(HomeContainer));
+export default connectAndFetch(withSettings(HomeContainer));

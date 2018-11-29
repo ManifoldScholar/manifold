@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { projectsAPI } from "api";
-import { Form as FormContainer } from "containers/backend";
+import FormContainer from "backend/containers/form";
 import { connect } from "react-redux";
 import { childRoutes } from "helpers/router";
-import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 export class ProjectCollaboratorsContainer extends Component {
   static displayName = "Project.Collaborators";
@@ -31,7 +32,7 @@ export class ProjectCollaboratorsContainer extends Component {
     const closeUrl = this.closeUrl(this.props);
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability="updateMakers"
         failureNotification
@@ -50,7 +51,7 @@ export class ProjectCollaboratorsContainer extends Component {
             childProps: { afterDestroy: this.close }
           })}
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

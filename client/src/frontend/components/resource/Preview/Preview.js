@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Preview from ".";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
-import { Overlay as GlobalOverlay } from "components/global";
+import GlobalOverlay from "global/components/overlay";
 import has from "lodash/has";
 import capitalize from "lodash/capitalize";
 

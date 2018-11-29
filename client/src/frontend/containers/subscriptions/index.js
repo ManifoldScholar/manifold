@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { requests, meAPI } from "api";
-import { HigherOrder } from "containers/global";
-import { Preferences } from "components/global";
+import Preferences from "global/components/preferences";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import PropTypes from "prop-types";
 import mapValues from "lodash/mapValues";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
@@ -81,7 +82,7 @@ export class SubscriptionsContainer extends Component {
 
   render() {
     return (
-      <HigherOrder.Authorize
+      <Authorize
         kind="any"
         // TODO: This should redirect to login page, when implemented, probably without an error message
         failureRedirect={lh.link("frontend")}
@@ -125,7 +126,7 @@ export class SubscriptionsContainer extends Component {
             </form>
           </div>
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

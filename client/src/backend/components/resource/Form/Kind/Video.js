@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form } from "components/backend";
+import Form from "backend/components/form";
 
 export default class ResourceFormKindVideo extends PureComponent {
   static displayName = "Resource.Form.Kind.Video";

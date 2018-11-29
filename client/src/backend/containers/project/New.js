@@ -1,12 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Navigation, Layout } from "components/backend";
-import { Form } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
-import { HigherOrder } from "containers/global";
+import Layout from "backend/components/layout";
+import Navigation from "backend/components/navigation";
+import Form from "backend/components/form";
+import FormContainer from "backend/containers/form";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 export class ProjectNewContainer extends PureComponent {
   static displayName = "Project.New";
@@ -27,7 +29,7 @@ export class ProjectNewContainer extends PureComponent {
 
   render() {
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={"project"}
         ability="create"
         failureNotification
@@ -75,7 +77,7 @@ export class ProjectNewContainer extends PureComponent {
             </FormContainer.Form>
           </Layout.BackendPanel>
         </div>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import FormattedDate from "components/global/FormattedDate";
+import FormattedDate from "global/components/formatted-date";
 import { Link } from "react-router-dom";
 
 export default class Tile extends Component {

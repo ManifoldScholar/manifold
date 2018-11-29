@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ResourceCollection } from "components/frontend";
+import ResourceCollection from "frontend/components/resource-collection";
 import lh from "helpers/linkHandler";
 
 export default class ResourceCollectionGrid extends Component {

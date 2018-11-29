@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
-import Menu from "components/reader/Annotation/Popup/Menu";
+import Menu from "reader/components/annotation/Popup/Menu";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 
 export default class AnnotatablePopup extends PureComponent {

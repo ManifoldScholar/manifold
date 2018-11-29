@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import chunk from "lodash/chunk";
 import lh from "helpers/linkHandler";
-import HigherOrder from "containers/global/HigherOrder";
 import { withRouter } from "react-router-dom";
+
+import BlurOnLocationChange from "hoc/blur-on-location-change";
 
 class LayoutFooter extends Component {
   static displayName = "Layout.Footer";
@@ -275,7 +276,7 @@ class LayoutFooter extends Component {
     }
 
     return (
-      <HigherOrder.BlurOnLocationChange location={this.props.location}>
+      <BlurOnLocationChange location={this.props.location}>
         <footer className="footer-browse">
           <section className="footer-primary">
             <div className="container flush">
@@ -335,7 +336,7 @@ class LayoutFooter extends Component {
             </span>
           </a>
         </footer>
-      </HigherOrder.BlurOnLocationChange>
+      </BlurOnLocationChange>
     );
   }
 }

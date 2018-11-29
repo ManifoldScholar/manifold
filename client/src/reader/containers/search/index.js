@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
-import { Overlay, Search } from "components/global";
+import Search from "global/components/search";
+import Overlay from "global/components/overlay";
 import connectAndFetch from "utils/connectAndFetch";
 import { searchResultsAPI, requests } from "api";
 import { entityStoreActions } from "actions";

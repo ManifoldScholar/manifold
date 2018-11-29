@@ -4,8 +4,8 @@ import get from "lodash/get";
 import { Link } from "react-router-dom";
 
 import lh from "helpers/linkHandler";
-import { FormattedDate } from "components/global";
-import { Text } from "components/frontend";
+import FormattedDate from "global/components/formatted-date";
+import Text from "frontend/components/text";
 
 export default class SearchResultsTypeText extends PureComponent {
   static displayName = "Search.Results.Type.Text";

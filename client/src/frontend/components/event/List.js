@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Event from "./Event";
 import classNames from "classnames";
-import { Utility } from "components/global";
+import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 
 export default class EventList extends Component {

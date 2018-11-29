@@ -1,11 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form, ProjectCollection } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
-import { HigherOrder } from "containers/global";
+import ProjectCollection from "backend/components/project-collection";
+import Form from "backend/components/form";
+import FormContainer from "backend/containers/form";
 import { projectCollectionsAPI } from "api";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 export class ProjectCollectionNew extends PureComponent {
   static displayName = "ProjectCollection.New";
@@ -34,7 +36,7 @@ export class ProjectCollectionNew extends PureComponent {
 
   render() {
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity="projectCollection"
         ability="create"
         failureNotification
@@ -80,7 +82,7 @@ export class ProjectCollectionNew extends PureComponent {
             <Form.Save text="Save Project Collection" />
           </FormContainer.Form>
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

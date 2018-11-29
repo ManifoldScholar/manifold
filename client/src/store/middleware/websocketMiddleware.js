@@ -2,7 +2,7 @@
 import ActionCable from "actioncable";
 import get from "lodash/get";
 import { websocketActions } from "actions";
-import config from "../../config";
+import config from "config";
 
 let actionCableMiddleware = ({ dispatchIgnored, getStateIgnored }) => {
   return next => action => {

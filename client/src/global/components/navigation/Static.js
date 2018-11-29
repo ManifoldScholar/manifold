@@ -1,14 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import {
-  UIPanel,
-  UserMenuBody,
-  UserMenuButton,
-  Search
-} from "components/global";
-import { HigherOrder } from "containers/global";
+import Search from "global/components/search";
+import UserMenuButton from "global/components/user-menu-button";
+import UserMenuBody from "global/components/user-menu-body";
+import UIPanel from "global/components/ui-panel";
 import { NavLink, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 export class NavigationStatic extends PureComponent {
   static displayName = "Navigation.Static";
@@ -134,13 +133,13 @@ export class NavigationStatic extends PureComponent {
             {this.props.links.map((link, index) => {
               if (link.ability)
                 return (
-                  <HigherOrder.Authorize
+                  <Authorize
                     key={`${link.route}-wrapped`}
                     entity={link.entity}
                     ability={link.ability}
                   >
                     {this.renderStaticItem(link, index)}
-                  </HigherOrder.Authorize>
+                  </Authorize>
                 );
               return this.renderStaticItem(link, index);
             })}

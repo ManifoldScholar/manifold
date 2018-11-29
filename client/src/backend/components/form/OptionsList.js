@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
-import { Form as FormContainer } from "containers/backend";
+import FormContainer from "backend/containers/form";
 
 class FormOptionsList extends PureComponent {
   static displayName = "Form.OptionsList";

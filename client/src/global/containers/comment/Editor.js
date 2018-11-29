@@ -7,11 +7,12 @@ import { entityStoreActions, uiVisibilityActions } from "actions";
 import { singularEntityName } from "utils/entityUtils";
 import { bindActionCreators } from "redux";
 import { commentsAPI } from "api";
-import { HigherOrder } from "containers/global";
 import labelId from "helpers/labelId";
 
 const { request } = entityStoreActions;
-import { Form as GlobalForm } from "components/global";
+import GlobalForm from "global/components/form";
+
+import Authorize from "hoc/authorize";
 
 export class CommentEditor extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
@@ -173,12 +174,12 @@ export class CommentEditor extends PureComponent {
             {this.props.label}
           </h3>
         ) : null}
-        <HigherOrder.Authorize kind="unauthenticated">
+        <Authorize kind="unauthenticated">
           <div className="placeholder">
             <button onClick={showLogin}>Login to post a comment</button>
           </div>
-        </HigherOrder.Authorize>
-        <HigherOrder.Authorize kind="any">
+        </Authorize>
+        <Authorize kind="any">
           <form onSubmit={this.handleSubmit}>
             <GlobalForm.Errorable
               name="attributes[body]"
@@ -223,7 +224,7 @@ export class CommentEditor extends PureComponent {
               </div>
             </GlobalForm.Errorable>
           </form>
-        </HigherOrder.Authorize>
+        </Authorize>
       </div>
     );
   }

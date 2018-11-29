@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import HigherOrder from "containers/global/HigherOrder";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 export default class ReturnMenuBody extends PureComponent {
   static displayName = "ReturnMenuBody";
@@ -37,7 +38,7 @@ export default class ReturnMenuBody extends PureComponent {
               {"Projects"}
             </Link>
           </li>
-          <HigherOrder.Authorize kind="any">
+          <Authorize kind="any">
             <li>
               <Link to={lh.link("frontendFollowing")}>
                 <i
@@ -47,8 +48,8 @@ export default class ReturnMenuBody extends PureComponent {
                 {"Following"}
               </Link>
             </li>
-          </HigherOrder.Authorize>
-          <HigherOrder.Authorize kind="unauthenticated">
+          </Authorize>
+          <Authorize kind="unauthenticated">
             <li>
               <button
                 onClick={this.props.toggleSignInUpOverlay}
@@ -72,7 +73,7 @@ export default class ReturnMenuBody extends PureComponent {
                 </a>
               ) : null}
             </li>
-          </HigherOrder.Authorize>
+          </Authorize>
         </ul>
       </nav>
     );
