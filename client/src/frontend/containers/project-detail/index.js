@@ -67,6 +67,4 @@ export class ProjectDetailContainer extends Component {
   }
 }
 
-export default connectAndFetch(
-  withSettings(ProjectDetailContainer)
-);
+export default connectAndFetch(withSettings(ProjectDetailContainer));

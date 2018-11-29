@@ -22,7 +22,7 @@ import { closest } from "utils/domUtils";
 import ReactGA from "react-ga";
 import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
-import getRoutes from "/routes";
+import getRoutes from "routes";
 import ch from "helpers/consoleHelpers";
 import FatalErrorBoundary from "global/components/fatal-error/Boundary";
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ProjectCollection from "frontend/components/project-collection";
+import Filters from "./Filters";
 import ProjectList from "frontend/components/project-list";
 import Utility from "global/components/utility";
 import get from "lodash/get";
@@ -49,7 +49,7 @@ export default class ProjectCollectionDetail extends Component {
               </div>
             </div>
           </div>
-          <ProjectCollection.Filters
+          <Filters
             filterChangeHandler={this.props.filterChangeHandler}
             initialState={this.props.initialState}
           />

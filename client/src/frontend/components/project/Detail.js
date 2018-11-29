@@ -7,7 +7,7 @@ import Layout from "frontend/components/layout";
 import ResourceCollectionList from "frontend/components/resource-collection-list";
 import ResourceList from "frontend/components/resource-list";
 import TextList from "frontend/components/text-list";
-import Project from "frontend/components/project";
+import Hero from "./Hero";
 import Event from "frontend/components/event";
 import Meta from "global/components/meta";
 
@@ -218,7 +218,7 @@ class Detail extends Component {
     if (!this.props.project) return <LoadingBlock />;
     return (
       <div>
-        <Project.Hero project={this.props.project} />
+        <Hero project={this.props.project} />
         {this.renderActivity()}
         {this.renderTexts()}
 

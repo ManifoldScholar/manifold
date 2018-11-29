@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import FrontEndProject from "frontend/components/project";
+import Cover from "./Cover";
+import Follow from "./Follow";
 import FormattedDate from "global/components/formatted-date";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
@@ -120,8 +121,8 @@ export default class ProjectThumbnail extends Component {
     return (
       <Link to={lh.link("frontendProject", project.attributes.slug)}>
         <figure className={figureClass}>
-          <FrontEndProject.Cover project={project} />
-          <FrontEndProject.Follow
+          <Cover project={project} />
+          <Follow
             project={project}
             authenticated={this.props.authenticated}
             favorites={this.props.favorites}

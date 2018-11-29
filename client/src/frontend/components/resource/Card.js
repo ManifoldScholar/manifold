@@ -4,11 +4,13 @@ import { withRouter } from "react-router-dom";
 import classNames from "classnames";
 import FormattedDate from "global/components/formatted-date";
 import Resourceish from "frontend/components/resourceish";
-import Resource from "frontend/components/resource";
+import Preview from "frontend/components/resource-preview";
+import TagList from "./TagList";
+
 import lh from "helpers/linkHandler";
 
 class ResourceCard extends Component {
-  static displayName = "Resource.Card";
+  static displayName = "Card";
 
   static propTypes = {
     history: PropTypes.object.isRequired,
@@ -66,7 +68,7 @@ class ResourceCard extends Component {
   }
 
   previewable(resource) {
-    return Resource.Preview.canPreview(resource);
+    return Preview.canPreview(resource);
   }
 
   linkable(resource) {
@@ -162,7 +164,7 @@ class ResourceCard extends Component {
     });
     return (
       <li className="resource-card">
-        <Resource.Preview resource={resource}>
+        <Preview resource={resource}>
           <div
             className="resource-link"
             onClick={this.handlePreviewClick}
@@ -172,7 +174,7 @@ class ResourceCard extends Component {
             <Resourceish.Thumbnail resourceish={resource} />
             <div className="preview-text">{this.getPreviewText(attr)}</div>
           </div>
-        </Resource.Preview>
+        </Preview>
         {/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */}
         <section
           className={infoClass}
@@ -195,7 +197,7 @@ class ResourceCard extends Component {
               <i className="manicon manicon-arrow-right" aria-hidden="true" />
             </div>
           </div>
-          <Resource.TagList resource={resource} />
+          <TagList resource={resource} />
         </section>
       </li>
     );

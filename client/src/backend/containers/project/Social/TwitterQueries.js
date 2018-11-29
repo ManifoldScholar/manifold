@@ -75,10 +75,7 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
       <Authorize entity={project} ability="manageTwitterQueries">
         <Form.FieldGroup label="Twitter Queries" instructions={instructions}>
           <nav className="vertical-list-primary flush">
-            <Authorize
-              entity={project}
-              ability="createTwitterQueries"
-            >
+            <Authorize entity={project} ability="createTwitterQueries">
               <div className="buttons-icon-horizontal">
                 <Link
                   to={lh.link(

@@ -5,7 +5,7 @@ import { requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
 import { bindActionCreators } from "redux";
 import { select, meta } from "utils/entityUtils";
-import Comment from "global/components/comment";
+import Detail from "global/components/comment/detail";
 import { commentsAPI } from "api";
 
 const { request } = entityStoreActions;
@@ -133,7 +133,7 @@ export class CommentThread extends PureComponent {
         <ul className="comment-list">
           {children.map(comment => {
             return (
-              <Comment.Detail
+              <Detail
                 subject={this.props.subject}
                 key={comment.id}
                 comment={comment}

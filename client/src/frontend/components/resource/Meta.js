@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Resource from "frontend/components/resource";
+import TagList from "./TagList";
 import filesize from "filesize";
 import pickBy from "lodash/pickBy";
 import isNull from "lodash/isNull";
@@ -75,7 +75,7 @@ export default class ResourceMeta extends Component {
         />
 
         {this.props.showTags ? (
-          <Resource.TagList resource={this.props.resource} />
+          <TagList resource={this.props.resource} />
         ) : null}
       </section>
     );

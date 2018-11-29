@@ -5,7 +5,7 @@ import { projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import ProjectCollection from "backend/components/project-collection";
-import ProjectCollectionContainer from "backend/containers/project-collection";
+import New from "./New";
 import Drawer from "global/components/drawer";
 import { childRoutes } from "helpers/router";
 import size from "lodash/size";
@@ -178,9 +178,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
                   style="backend flexible"
                   lockScroll="always"
                 >
-                  <ProjectCollectionContainer.New
-                    successHandler={this.handleNewSuccess}
-                  />
+                  <New successHandler={this.handleNewSuccess} />
                 </Drawer.Wrapper>
                 {this.renderChildRoutes(projectCollection, projectCollections)}
               </div>

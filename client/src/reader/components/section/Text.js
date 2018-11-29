@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import classNames from "classnames";
-import Section from "reader/components/section";
+import Body from "./Body";
 import Annotation from "reader/containers/annotation";
 import locationHelper from "helpers/location";
 
@@ -179,7 +179,7 @@ export default class Text extends Component {
               render={pendingAnnotation => (
                 <div className={containerClass}>
                   <div data-id="body" className={textSectionClass}>
-                    <Section.Body
+                    <Body
                       location={this.props.location}
                       pendingAnnotation={pendingAnnotation}
                       annotations={this.state.filteredAnnotations}

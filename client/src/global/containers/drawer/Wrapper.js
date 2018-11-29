@@ -1,7 +1,7 @@
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Wrapper as DrawerWrapper } from "global/components/drawer";
+import Drawer from "global/components/drawer";
 
-export default connect(DrawerWrapper.mapStateToProps)(
-  withRouter(DrawerWrapper)
+export default connect(Drawer.Wrapper.mapStateToProps)(
+  withRouter(Drawer.Wrapper)
 );

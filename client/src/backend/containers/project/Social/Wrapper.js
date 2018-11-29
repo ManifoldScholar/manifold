@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Project from "backend/containers/project";
+import TwitterQueries from "./TwitterQueries";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 
@@ -32,10 +32,7 @@ export default class ProjectSocialWrapperContainer extends Component {
             drawer: true,
             drawerProps: { closeUrl }
           })}
-          <Project.Social.TwitterQueries
-            project={project}
-            match={this.props.match}
-          />
+          <TwitterQueries project={project} match={this.props.match} />
         </section>
       </Authorize>
     );

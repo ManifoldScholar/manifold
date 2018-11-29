@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import CommentContainer from "global/containers/comment";
-import Resource from "frontend/components/resource";
 import Utility from "frontend/components/utility";
+import Hero from "./Hero";
+import Link from "./Link";
+import Meta from "./Meta";
+import Title from "./Title";
+import VariantList from "./VariantList";
 
 export default class ResourceDetail extends Component {
   static displayName = "Resource.Detail";
@@ -38,28 +42,28 @@ export default class ResourceDetail extends Component {
         <section>
           <section className="resource-detail">
             <div className="container flush-top flush-bottom">
-              <Resource.Title resource={resource} showIcon={false} />
+              <Title resource={resource} showIcon={false} />
             </div>
 
-            <Resource.Hero resource={resource} />
+            <Hero resource={resource} />
 
             <div className="container flush-top">
               <aside>
-                <Resource.Link attributes={attr} />
+                <Link attributes={attr} />
                 {/*
                 <Link to="#" className="button-primary">
                   View in Text <i className="manicon manicon-arrow-right" aria-hidden="true" ></i>
                 </Link>
                 */}
                 <Utility.ShareBar url={resourceUrl} />
-                <Resource.Meta resource={resource} layout={"secondary"} />
-                <Resource.VariantList resource={resource} />
+                <Meta resource={resource} layout={"secondary"} />
+                <VariantList resource={resource} />
               </aside>
               <div className="resource-meta-mobile">
-                <Resource.Meta resource={resource} layout={"secondary"} />
+                <Meta resource={resource} layout={"secondary"} />
               </div>
               <div className="resource-variants-mobile">
-                <Resource.VariantList resource={resource} />
+                <VariantList resource={resource} />
               </div>
               <div className="resource-content left">
                 <div

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Makers from "backend/containers/makers";
+import Form from "./Form";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
 
@@ -27,7 +27,7 @@ export class MakersNewContainer extends PureComponent {
         <header className="drawer-header">
           <h2 className="heading-quaternary">New Maker</h2>
         </header>
-        <Makers.Form
+        <Form
           successHandler={this.handleSuccess}
           options={{ adds: requests.beMakers }}
         />

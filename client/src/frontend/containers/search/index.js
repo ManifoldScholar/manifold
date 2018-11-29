@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
-import Search from "global/components/search";
+import SearchQuery from "global/components/search/query";
+import SearchResults from "global/components/search/results";
 import connectAndFetch from "utils/connectAndFetch";
 import { searchResultsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -151,7 +152,7 @@ class SearchContainer extends PureComponent {
         <div className="search-form-frontend">
           <div className="container">
             {this.renderHeader(results, resultsMeta)}
-            <Search.Query.Form
+            <SearchQuery.Form
               initialState={queryState}
               doSearch={this.doSearch}
               setQueryState={this.setQueryState}
@@ -163,7 +164,7 @@ class SearchContainer extends PureComponent {
         <div className="search-results-frontend">
           <div className="container">
             {this.props.results ? (
-              <Search.Results.List
+              <SearchResults.List
                 pagination={this.props.resultsMeta.pagination}
                 paginationClickHandler={this.setPage}
                 results={results}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isArray from "lodash/isArray";
-import Form from "backend/components/form";
+import BaseInput from "./BaseInput";
 import labelId from "helpers/labelId";
 
 export default class FormTextInput extends Component {
@@ -48,7 +48,7 @@ export default class FormTextInput extends Component {
       : this.props.id;
 
     return (
-      <Form.BaseInput
+      <BaseInput
         {...this.props}
         id={id}
         idForError={errorId}

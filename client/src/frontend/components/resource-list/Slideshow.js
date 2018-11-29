@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import Swipeable from "react-swipeable";
 import includes from "lodash/includes";
-import ResourceList from "frontend/components/resource-list";
+import ResourceSlide from "frontend/components/resource-slide";
 import { collectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;
 
-export default class ResourceListSlideshow extends PureComponent {
-  static displayName = "ResourceList.Slideshow";
+export default class ResourceSlideshow extends PureComponent {
+  static displayName = "ResourceSlideshow";
 
   static propTypes = {
     collectionResources: PropTypes.array,
@@ -78,15 +78,12 @@ export default class ResourceListSlideshow extends PureComponent {
   }
 
   getFigureByType(resource) {
-    let Slide = ResourceList.Slide.Slide;
-    if (resource.attributes.kind === "image")
-      Slide = ResourceList.Slide.SlideImage;
-    if (resource.attributes.kind === "video")
-      Slide = ResourceList.Slide.SlideVideo;
+    let Slide = ResourceSlide.Slide;
+    if (resource.attributes.kind === "image") Slide = ResourceSlide.SlideImage;
+    if (resource.attributes.kind === "video") Slide = ResourceSlide.SlideVideo;
     if (resource.attributes.kind === "interactive")
-      Slide = ResourceList.Slide.SlideInteractive;
-    if (resource.attributes.kind === "audio")
-      Slide = ResourceList.Slide.SlideAudio;
+      Slide = ResourceSlide.SlideInteractive;
+    if (resource.attributes.kind === "audio") Slide = ResourceSlide.SlideAudio;
     return <Slide resource={resource} {...this.props.slideOptions} />;
   }
 
@@ -181,14 +178,14 @@ export default class ResourceListSlideshow extends PureComponent {
         {this.isLoaded(position) ? (
           this.getFigureByType(collectionResource)
         ) : (
-          <ResourceList.Slide.SlideLoading />
+          <ResourceSlide.SlideLoading />
         )}
       </div>
     );
   }
 
   renderPlaceholder() {
-    return <ResourceList.Slide.SlidePlaceholder />;
+    return <ResourceSlide.SlidePlaceholder />;
   }
 
   render() {
@@ -222,14 +219,14 @@ export default class ResourceListSlideshow extends PureComponent {
           </Swipeable>
           <div className="slide-footer">
             {this.isLoaded(position) ? (
-              <ResourceList.Slide.Caption
+              <ResourceSlide.Caption
                 resource={collectionResource}
                 collection={this.props.collection}
                 hideDetailUrl={this.props.hideDetailUrl}
                 hideDownload={this.props.hideDownload}
               />
             ) : (
-              <ResourceList.Slide.LoadingCaption />
+              <ResourceSlide.LoadingCaption />
             )}
             {this.props.collectionResources.length > 0 ? (
               <div className="slide-pagination">

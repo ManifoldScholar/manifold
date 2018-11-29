@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Share from "./";
+import Citation from "./Citation";
 import Selection from "../Selection";
 
 export default class AnnotationShareWrapper extends PureComponent {
@@ -48,7 +48,7 @@ export default class AnnotationShareWrapper extends PureComponent {
   }
 
   renderShareEditor() {
-    return <Share.Citation {...this.props} cancel={this.props.closeDrawer} />;
+    return <Citation {...this.props} cancel={this.props.closeDrawer} />;
   }
 
   render() {

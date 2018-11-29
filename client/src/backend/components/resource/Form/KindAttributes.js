@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
-import Resource from "backend/components/resource";
 import { FormContext } from "helpers/contexts";
+import Kind from "./Kind";
 
 export default class KindAttributes extends PureComponent {
   static displayName = "Resource.KindAttributes";
@@ -13,25 +13,25 @@ export default class KindAttributes extends PureComponent {
 
           switch (formProps.getModelValue("attributes[kind]")) {
             case "image":
-              return <Resource.Form.Kind.Image {...props} />;
+              return <Kind.Image {...props} />;
             case "video":
-              return <Resource.Form.Kind.Video {...props} />;
+              return <Kind.Video {...props} />;
             case "audio":
-              return <Resource.Form.Kind.Audio {...props} />;
+              return <Kind.Audio {...props} />;
             case "interactive":
-              return <Resource.Form.Kind.Interactive {...props} />;
+              return <Kind.Interactive {...props} />;
             case "link":
-              return <Resource.Form.Kind.Link {...props} />;
+              return <Kind.Link {...props} />;
             case "spreadsheet":
-              return <Resource.Form.Kind.Spreadsheet {...props} />;
+              return <Kind.Spreadsheet {...props} />;
             case "document":
-              return <Resource.Form.Kind.Document {...props} />;
+              return <Kind.Document {...props} />;
             case "presentation":
-              return <Resource.Form.Kind.Presentation {...props} />;
+              return <Kind.Presentation {...props} />;
             case "pdf":
-              return <Resource.Form.Kind.Pdf {...props} />;
+              return <Kind.Pdf {...props} />;
             case "file":
-              return <Resource.Form.Kind.File {...props} />;
+              return <Kind.File {...props} />;
             default:
               return null;
           }

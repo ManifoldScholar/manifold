@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ResourceList from "frontend/components/resource-list";
+import ResourceSlide from "frontend/components/resource-slide";
 
 export default class ResourceHero extends Component {
   static displayName = "Resource.Hero";
@@ -20,7 +20,7 @@ export default class ResourceHero extends Component {
       case "image":
         output = (
           <div className="resource-slide-figure">
-            <ResourceList.Slide.SlideImage
+            <ResourceSlide.SlideImage
               resource={resource}
               {...this.props.slideOptions}
             />
@@ -30,7 +30,7 @@ export default class ResourceHero extends Component {
       case "video":
         output = (
           <div className="resource-slide-figure">
-            <ResourceList.Slide.SlideVideo
+            <ResourceSlide.SlideVideo
               resource={resource}
               {...this.props.slideOptions}
             />
@@ -40,7 +40,7 @@ export default class ResourceHero extends Component {
       case "interactive":
         output = (
           <div className="resource-slide-figure resource-slide-interactive">
-            <ResourceList.Slide.SlideInteractive
+            <ResourceSlide.SlideInteractive
               resource={resource}
               noPlaceholder
               {...this.props.slideOptions}
@@ -51,7 +51,7 @@ export default class ResourceHero extends Component {
       case "audio":
         output = (
           <div className="resource-slide-figure resource-slide-audio">
-            <ResourceList.Slide.SlideAudio
+            <ResourceSlide.SlideAudio
               resource={resource}
               {...this.props.slideOptions}
             />

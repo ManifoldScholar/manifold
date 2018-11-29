@@ -24,7 +24,7 @@ import {
   uiTypographyActions,
   entityStoreActions
 } from "actions";
-import { setPersistentUI } from "../../actions/ui/persistentUi";
+import { setPersistentUI } from "actions/ui/persistentUi";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 
 import ScrollAware from "hoc/scroll-aware";

@@ -183,6 +183,4 @@ class ProjectResourcesContainer extends Component {
   }
 }
 
-export default connectAndFetch(
-  withSettings(ProjectResourcesContainer)
-);
+export default connectAndFetch(withSettings(ProjectResourcesContainer));

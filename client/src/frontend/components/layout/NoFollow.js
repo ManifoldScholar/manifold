@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Layout from "frontend/components/layout";
+import ButtonNavigation from "./ButtonNavigation";
 
 export default class NoFollow extends Component {
   static displayName = "Layout.NoFollow";
@@ -33,7 +33,7 @@ export default class NoFollow extends Component {
             </section>
           </div>
         </section>
-        <Layout.ButtonNavigation grayBg showFollowing={false} />
+        <ButtonNavigation grayBg showFollowing={false} />
       </div>
     );
   }

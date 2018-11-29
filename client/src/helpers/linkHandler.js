@@ -2,7 +2,7 @@ import isFunction from "lodash/isFunction";
 import isObject from "lodash/isObject";
 import isArray from "lodash/isArray";
 import forEach from "lodash/forEach";
-import getRoutes from "/routes";
+import getRoutes from "/routes/plain";
 
 class LinkHandler {
   extract(route) {

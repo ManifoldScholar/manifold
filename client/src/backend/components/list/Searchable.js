@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import withCurrentUser from "hoc/with-current-user";
-import List from "backend/components/list";
+import SimpleList from "./SimpleList";
 import { Link } from "react-router-dom";
 import Authorization from "helpers/authorization";
 import get from "lodash/get";
@@ -351,7 +351,7 @@ export class ListSearchable extends PureComponent {
           )}
         {!this.props.columnarNav && this.renderButtons(this.props)}
         {entities.length > 0 ? (
-          <List.SimpleList
+          <SimpleList
             entities={entities}
             entityComponent={this.props.entityComponent}
             entityComponentProps={this.props.entityComponentProps}

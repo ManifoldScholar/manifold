@@ -2,3 +2,4 @@ webpack/*
 **/__tests__
 dist
 src/config.js
+plugins

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Form from "backend/components/form";
+import BaseInput from "./BaseInput";
 import labelId from "helpers/labelId";
 
 export default class FormNumberInput extends Component {
@@ -41,7 +41,7 @@ export default class FormNumberInput extends Component {
       : this.props.id;
 
     return (
-      <Form.BaseInput
+      <BaseInput
         {...this.props}
         inputClasses="form-number-input"
         id={id}

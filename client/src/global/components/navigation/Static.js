@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Search from "global/components/search";
+import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/user-menu-button";
 import UserMenuBody from "global/components/user-menu-body";
 import UIPanel from "global/components/ui-panel";
@@ -76,7 +76,7 @@ export class NavigationStatic extends PureComponent {
 
     return (
       <li>
-        <Search.Menu.Button
+        <SearchMenu.Button
           toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
           active={this.props.visibility.uiPanels.search}
         />
@@ -84,7 +84,7 @@ export class NavigationStatic extends PureComponent {
           id="search"
           toggleVisibility={this.props.commonActions.toggleSearchPanel}
           visibility={this.props.visibility.uiPanels}
-          bodyComponent={Search.Menu.Body}
+          bodyComponent={SearchMenu.Body}
           searchType="frontend"
           initialState={{
             keyword: "",

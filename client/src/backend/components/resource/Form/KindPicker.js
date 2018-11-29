@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
 import classNames from "classnames";
 import Utility from "global/components/utility";
-import { setter } from "backend/components/form";
+import Form from "backend/components/form";
 
 class KindPicker extends PureComponent {
   static displayName = "Resource.KindPicker";
@@ -122,4 +122,4 @@ class KindPicker extends PureComponent {
   }
 }
 
-export default setter(KindPicker);
+export default Form.setter(KindPicker);

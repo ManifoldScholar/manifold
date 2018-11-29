@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Form from "backend/components/form";
+import Switch from "./Switch";
 import GlobalForm from "global/components/form";
+import FieldGroup from "./FieldGroup";
 import setter from "./setter";
 
 class FormSwitchArray extends Component {
@@ -36,7 +37,7 @@ class FormSwitchArray extends Component {
     const focusOnMount = this.props.focusOnMount && index === 0;
 
     return (
-      <Form.Switch
+      <Switch
         key={option.value}
         label={option.label}
         set={() => this.handleChange(option.value)}
@@ -54,11 +55,11 @@ class FormSwitchArray extends Component {
         nameForError={this.props.label}
         errors={this.props.errors}
       >
-        <Form.FieldGroup label={this.props.label} horizontal>
+        <FieldGroup label={this.props.label} horizontal>
           {this.props.options.map((option, index) => {
             return this.renderSwitch(option, index);
           })}
-        </Form.FieldGroup>
+        </FieldGroup>
       </GlobalForm.Errorable>
     );
   }

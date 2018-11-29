@@ -153,6 +153,4 @@ export class ResourceDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(
-  withSettings(ResourceDetailContainer)
-);
+export default connectAndFetch(withSettings(ResourceDetailContainer));

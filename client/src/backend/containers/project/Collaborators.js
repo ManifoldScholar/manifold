@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { projectsAPI } from "api";
-import FormContainer from "backend/containers/form";
+import CompositeInputs from "backend/containers/form-inputs/composite-inputs";
 import { connect } from "react-redux";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
@@ -39,7 +39,7 @@ export class ProjectCollaboratorsContainer extends Component {
         failureRedirect={lh.link("backendProject", project.id)}
       >
         <section>
-          <FormContainer.Collaborators
+          <CompositeInputs.Collaborators
             entity={project}
             api={projectsAPI}
             history={this.props.history}

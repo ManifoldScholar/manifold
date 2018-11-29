@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Navigation from "backend/components/navigation";
+import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
 
 export default class DetailHeader extends PureComponent {
@@ -61,12 +61,7 @@ export default class DetailHeader extends PureComponent {
   renderSectionNav(props) {
     if (!props.secondaryLinks) return null;
 
-    return (
-      <Navigation.Dropdown
-        classNames="section-nav"
-        links={props.secondaryLinks}
-      />
-    );
+    return <Dropdown classNames="section-nav" links={props.secondaryLinks} />;
   }
 
   render() {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import ResourceImport from "backend/components/resource-import";
+import Results from "./Results";
 
 export default class ResourceImportResult extends PureComponent {
   static displayName = "ResourceImport.Result";
@@ -31,41 +31,17 @@ export default class ResourceImportResult extends PureComponent {
   renderHeader(resourceImportRow) {
     switch (resourceImportRow.state) {
       case "importing":
-        return (
-          <ResourceImport.Results.Importing
-            resourceImportRow={resourceImportRow}
-          />
-        );
+        return <Results.Importing resourceImportRow={resourceImportRow} />;
       case "failed":
-        return (
-          <ResourceImport.Results.Failed
-            resourceImportRow={resourceImportRow}
-          />
-        );
+        return <Results.Failed resourceImportRow={resourceImportRow} />;
       case "queued":
-        return (
-          <ResourceImport.Results.Queued
-            resourceImportRow={resourceImportRow}
-          />
-        );
+        return <Results.Queued resourceImportRow={resourceImportRow} />;
       case "pending":
-        return (
-          <ResourceImport.Results.Pending
-            resourceImportRow={resourceImportRow}
-          />
-        );
+        return <Results.Pending resourceImportRow={resourceImportRow} />;
       case "imported":
-        return (
-          <ResourceImport.Results.Imported
-            resourceImportRow={resourceImportRow}
-          />
-        );
+        return <Results.Imported resourceImportRow={resourceImportRow} />;
       case "skipped":
-        return (
-          <ResourceImport.Results.Skipped
-            resourceImportRow={resourceImportRow}
-          />
-        );
+        return <Results.Skipped resourceImportRow={resourceImportRow} />;
       default:
         return `Row #${resourceImportRow.lineNumber}: ${
           resourceImportRow.state

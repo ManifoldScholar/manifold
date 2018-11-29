@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
-import FormContainer from "backend/containers/form";
+import ConnectedInputs from "backend/containers/form-inputs/connected-inputs";
 
 class FormOptionsList extends PureComponent {
   static displayName = "Form.OptionsList";
@@ -41,7 +41,7 @@ class FormOptionsList extends PureComponent {
 
   renderStatic(props) {
     return (
-      <FormContainer.FetchSelect
+      <ConnectedInputs.FetchSelect
         fetch={props.fetch}
         fetchOptions={props.fetchOptions}
         placeholder={props.placeholder}
@@ -55,7 +55,7 @@ class FormOptionsList extends PureComponent {
 
   renderSearchable(props) {
     return (
-      <FormContainer.PredictiveInput
+      <ConnectedInputs.PredictiveInput
         className="input-predictive"
         fetch={props.fetch}
         fetchOptions={props.fetchOptions}

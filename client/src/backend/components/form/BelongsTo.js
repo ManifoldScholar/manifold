@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
-import BackendForm from "backend/components/form";
+import OptionsList from "./OptionsList";
 import GlobalForm from "global/components/form";
 import get from "lodash/get";
 
@@ -44,7 +44,7 @@ class FormBelongsTo extends PureComponent {
         errors={this.props.errors}
         idForError={this.props.idForError}
       >
-        <BackendForm.OptionsList
+        <OptionsList
           onSelect={this.handleSelect}
           selectedValue={this.renderValue()}
           mode="single"

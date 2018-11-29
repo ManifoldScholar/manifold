@@ -2,11 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Dialog from "backend/components/dialog";
-import Makers from "backend/containers/makers";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { makersAPI, requests } from "api";
 import get from "lodash/get";
+import Form from "./Form";
 import lh from "helpers/linkHandler";
 
 import Authorize from "hoc/authorize";
@@ -119,7 +119,7 @@ export class MakersEditContainer extends PureComponent {
             </div>
           </Authorize>
         </header>
-        <Makers.Form maker={maker} />
+        <Form maker={maker} />
       </div>
     );
   }

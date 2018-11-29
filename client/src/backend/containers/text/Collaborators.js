@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { textsAPI } from "api";
-import FormContainer from "backend/containers/form";
+import CompositeInputs from "backend/containers/form-inputs/composite-inputs";
 import { connect } from "react-redux";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
@@ -31,7 +31,7 @@ export class TextCollaboratorsContainer extends Component {
 
     return (
       <section>
-        <FormContainer.Collaborators
+        <CompositeInputs.Collaborators
           entity={text}
           api={textsAPI}
           history={this.props.history}
