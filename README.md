@@ -1,5 +1,6 @@
 <div align="right">
     <a href="https://travis-ci.org/ManifoldScholar/manifold"><img src="https://travis-ci.org/ManifoldScholar/manifold.svg?branch=master" /></a> 
+    <a href="https://houndci.com"><img src="https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg" alt="Reviewed by Hound" /></a>
 </div>
 <div align="center">
     <img src="https://storage.googleapis.com/manifold-assets/readme-art.gif" width="400" /><br />
