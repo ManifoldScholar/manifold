@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
-import config from "../../config";
-import HigherOrder from "containers/global/HigherOrder";
+import config from "config";
 import get from "lodash/get";
+
+import withSettings from "hoc/with-settings";
 
 export class HeadContentComponent extends Component {
   static propTypes = {
@@ -107,4 +108,4 @@ export class HeadContentComponent extends Component {
   }
 }
 
-export default HigherOrder.withSettings(HeadContentComponent);
+export default withSettings(HeadContentComponent);

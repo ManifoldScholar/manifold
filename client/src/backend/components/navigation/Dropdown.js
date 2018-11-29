@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { HigherOrder } from "containers/global";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import { matchPath } from "react-router";
+
+import BlurOnLocationChange from "hoc/blur-on-location-change";
+import Authorize from "hoc/authorize";
 
 export class NavigationDropdown extends Component {
   static displayName = "Navigation.Dropdown";
@@ -94,13 +96,13 @@ export class NavigationDropdown extends Component {
           {props.links.map(link => {
             if (link.ability)
               return (
-                <HigherOrder.Authorize
+                <Authorize
                   key={`${link.route}-wrapped`}
                   entity={link.entity}
                   ability={link.ability}
                 >
                   {this.renderItem(link)}
-                </HigherOrder.Authorize>
+                </Authorize>
               );
             return this.renderItem(link);
           })}
@@ -111,11 +113,11 @@ export class NavigationDropdown extends Component {
 
   render() {
     return (
-      <HigherOrder.BlurOnLocationChange location={this.props.location}>
+      <BlurOnLocationChange location={this.props.location}>
         {this.props.links.length > 1
           ? this.renderMenu(this.props)
           : this.renderStatic(this.props)}
-      </HigherOrder.BlurOnLocationChange>
+      </BlurOnLocationChange>
     );
   }
 }

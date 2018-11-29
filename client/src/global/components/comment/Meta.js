@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isObject from "lodash/isObject";
-import { FormattedDate } from "components/global";
-import HigherOrder from "containers/global/HigherOrder";
+import FormattedDate from "global/components/formatted-date";
 import classNames from "classnames";
+
+import Authorize from "hoc/authorize";
 
 export default class CommentMeta extends PureComponent {
   static propTypes = {
@@ -69,14 +70,14 @@ export default class CommentMeta extends PureComponent {
           {comment.attributes.deleted ? (
             <div className="marker secondary">Deleted</div>
           ) : null}
-          <HigherOrder.Authorize kind="admin">
+          <Authorize kind="admin">
             {comment.attributes.flagsCount > 0 ? (
               <div className="marker secondary">
                 {comment.attributes.flagsCount}
                 {comment.attributes.flagsCount === 1 ? " flag" : " flags"}
               </div>
             ) : null}
-          </HigherOrder.Authorize>
+          </Authorize>
         </div>
       </section>
     );

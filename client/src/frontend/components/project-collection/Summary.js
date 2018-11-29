@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ProjectList } from "components/frontend";
+import ProjectList from "frontend/components/project-list";
 import get from "lodash/get";
 import memoize from "lodash/memoize";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
-import { Utility } from "components/global";
+import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
 
 export default class ProjectCollectionSummary extends Component {

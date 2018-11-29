@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ProjectList, Layout } from "components/frontend";
-import { Utility } from "components/global";
+import Layout from "frontend/components/layout";
+import ProjectList from "frontend/components/project-list";
+import Utility from "global/components/utility";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import get from "lodash/get";
 import queryString from "query-string";
-import { Icon } from "components/global/SVG";
+import { Icon } from "global/components/svg";
 import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
 

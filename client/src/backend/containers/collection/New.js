@@ -1,13 +1,16 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Form as FormContainer } from "containers/backend";
-import { Navigation, Form, Layout } from "components/backend";
-import { HigherOrder } from "containers/global";
+import FormContainer from "backend/containers/form";
+import Layout from "backend/components/layout";
+import Form from "backend/components/form";
+import Navigation from "backend/components/navigation";
 import { requests, collectionsAPI, projectsAPI } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import { select } from "utils/entityUtils";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
@@ -48,7 +51,7 @@ export class CollectionNewContainer extends PureComponent {
     if (!project) return null;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability={"createCollections"}
         failureNotification
@@ -102,7 +105,7 @@ export class CollectionNewContainer extends PureComponent {
             </FormContainer.Form>
           </Layout.BackendPanel>
         </div>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

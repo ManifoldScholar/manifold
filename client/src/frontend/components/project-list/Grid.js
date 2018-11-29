@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Project } from "components/frontend";
-import { Utility } from "components/global";
+import Project from "frontend/components/project";
+import Utility from "global/components/utility";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import difference from "lodash/difference";
 import { Link } from "react-router-dom";

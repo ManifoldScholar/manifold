@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Navigation } from "components/backend";
-import { HigherOrder } from "containers/global";
-import { Utility } from "components/global";
+import Navigation from "backend/components/navigation";
+import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
+
+import Authorize from "hoc/authorize";
 
 export default class RecordsContainer extends PureComponent {
   static displayName = "RecordsContainer";
@@ -19,7 +20,7 @@ export default class RecordsContainer extends PureComponent {
     const secondaryLinks = navigation.records();
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         ability="update"
         entity={["user", "maker", "page", "feature"]}
         failureFatalError={{
@@ -37,7 +38,7 @@ export default class RecordsContainer extends PureComponent {
             {childRoutes(this.props.route)}
           </section>
         </div>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

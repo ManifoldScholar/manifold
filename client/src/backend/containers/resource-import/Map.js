@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form as FormContainer } from "containers/backend";
-import { Form } from "components/backend";
+import FormContainer from "backend/containers/form";
+import Form from "backend/components/form";
 import connectAndFetch from "utils/connectAndFetch";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";

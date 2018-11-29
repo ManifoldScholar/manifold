@@ -4,8 +4,8 @@ import connectAndFetch from "utils/connectAndFetch";
 import { collectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta, loaded } from "utils/entityUtils";
-import { Overlay } from "components/global";
-import { Notation } from "components/reader";
+import Overlay from "global/components/overlay";
+import Notation from "reader/components/notation";
 import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;

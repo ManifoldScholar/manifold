@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import get from "lodash/get";
-import Avatar from "components/global/Avatar";
+import Avatar from "global/components/avatar";
 
 export default class UserMenuButton extends Component {
   static propTypes = {

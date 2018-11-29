@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Category } from "components/backend";
+import Category from "backend/components/category";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { textCategoriesAPI, requests } from "api";

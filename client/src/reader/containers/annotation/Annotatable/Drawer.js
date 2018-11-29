@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Drawer } from "containers/global";
+import Drawer from "global/containers/drawer";
 import Drawers from "./Drawers";
 import upperFirst from "lodash/upperFirst";
 import isFunction from "lodash/isFunction";

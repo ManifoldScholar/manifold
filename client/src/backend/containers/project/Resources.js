@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Resource from "./Resource";
-import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 export default class ProjectResourcesContainer extends PureComponent {
   static displayName = "Project.ResourcesContainer";
@@ -16,7 +17,7 @@ export default class ProjectResourcesContainer extends PureComponent {
     if (!project) return null;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability={"manageResources"}
         failureNotification
@@ -25,7 +26,7 @@ export default class ProjectResourcesContainer extends PureComponent {
         <section>
           <Resource.ResourcesList project={project} />
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

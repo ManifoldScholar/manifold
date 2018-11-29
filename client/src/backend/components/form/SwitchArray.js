@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Form } from "components/backend";
-import { Form as GlobalForm } from "components/global";
+import Form from "backend/components/form";
+import GlobalForm from "global/components/form";
 import setter from "./setter";
 
 class FormSwitchArray extends Component {

@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { FormattedDate, Utility } from "components/global";
+import Utility from "global/components/utility";
+import FormattedDate from "global/components/formatted-date";
 import lh from "helpers/linkHandler";
 import truncate from "lodash/truncate";
 

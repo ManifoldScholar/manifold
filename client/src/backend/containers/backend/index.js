@@ -1,15 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { HigherOrder, Utility } from "components/global";
-import { Layout as LayoutFrontend } from "components/frontend";
-import { Layout as LayoutBackend } from "components/backend";
+import Utility from "global/components/utility";
+import LayoutFrontend from "frontend/components/layout";
+import LayoutBackend from "backend/components/layout";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, requests } from "api";
 import { uiStateSnapshotActions, entityStoreActions } from "actions";
 import entityUtils from "utils/entityUtils";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
+
+import ScrollAware from "hoc/scroll-aware";
+import BodyClass from "hoc/body-class";
 
 const { request } = entityStoreActions;
 const {
@@ -84,7 +87,7 @@ export class BackendContainer extends PureComponent {
     const skipId = "skip-to-main";
 
     return (
-      <HigherOrder.BodyClass className={"backend bg-neutral90"}>
+      <BodyClass className={"backend bg-neutral90"}>
         <div>
           <RedirectToFirstMatch
             from={lh.link("backend")}
@@ -98,7 +101,7 @@ export class BackendContainer extends PureComponent {
 
           <Utility.SkipLink skipId={skipId} />
           <Utility.ScrollToTop />
-          <HigherOrder.ScrollAware>
+          <ScrollAware>
             <LayoutBackend.Header
               visibility={this.props.visibility}
               match={this.props.match}
@@ -106,7 +109,7 @@ export class BackendContainer extends PureComponent {
               authentication={this.props.authentication}
               commonActions={this.commonActions}
             />
-          </HigherOrder.ScrollAware>
+          </ScrollAware>
           <main
             ref={mainContainer => {
               this.mainContainer = mainContainer;
@@ -122,7 +125,7 @@ export class BackendContainer extends PureComponent {
             settings={this.props.settings}
           />
         </div>
-      </HigherOrder.BodyClass>
+      </BodyClass>
     );
   }
 }

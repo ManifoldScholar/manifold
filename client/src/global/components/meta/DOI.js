@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Meta } from "components/global";
+import Meta from "global/components/meta";
 
 export default class DOI extends Component {
   static displayName = "Meta.DOI";

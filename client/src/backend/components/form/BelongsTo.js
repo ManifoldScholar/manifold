@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
-import { Form as BackendForm } from "components/backend";
-import { Form as GlobalForm } from "components/global";
+import BackendForm from "backend/components/form";
+import GlobalForm from "global/components/form";
 import get from "lodash/get";
 
 class FormBelongsTo extends PureComponent {

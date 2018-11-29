@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { SortableHandle } from "react-sortable-hoc";
-import { Icon } from "components/global/SVG";
+import { Icon } from "global/components/svg";
 
 export default class ListOrderableHandle extends PureComponent {
   render() {

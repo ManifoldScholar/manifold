@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Category } from "components/backend";
+import Category from "backend/components/category";
 import lh from "helpers/linkHandler";
 
 export default class ProjectCategoryNewContainer extends Component {

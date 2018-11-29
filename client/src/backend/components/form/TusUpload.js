@@ -4,7 +4,7 @@ import labelId from "helpers/labelId";
 import setter from "./setter";
 import Base from "./Upload/Base";
 import tus from "tus-js-client";
-import config from "../../../config";
+import config from "config";
 
 export class FormTusUpload extends Component {
   static displayName = "Form.TusUpload";

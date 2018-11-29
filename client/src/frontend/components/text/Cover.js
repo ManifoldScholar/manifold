@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Text } from "components/global";
+import Text from "global/components/text";
 import get from "lodash/get";
 
 export default class TextCover extends PureComponent {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { textsAPI } from "api";
-import { Form as FormContainer } from "containers/backend";
+import FormContainer from "backend/containers/form";
 import { connect } from "react-redux";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";

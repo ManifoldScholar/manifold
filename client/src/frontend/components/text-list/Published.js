@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Text } from "components/frontend";
+import Text from "frontend/components/text";
 
 export default class TestListPublished extends Component {
   static displayName = "TextList.Published";

@@ -3,7 +3,7 @@ import serveStatic from "serve-static";
 import morgan from "morgan";
 import favicon from "serve-favicon";
 import path from "path";
-import config from "../../config";
+import config from "config";
 import ch from "../../helpers/consoleHelpers";
 import proxy from "http-proxy-middleware";
 import capitalize from "lodash/capitalize";

@@ -1,15 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Navigation, Dialog, Layout } from "components/backend";
-import { HigherOrder } from "containers/global";
-import { Utility } from "components/global";
+import Layout from "backend/components/layout";
+import Dialog from "backend/components/dialog";
+import Navigation from "backend/components/navigation";
+import Utility from "global/components/utility";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
+
+import Authorize from "hoc/authorize";
 
 const { request, flush } = entityStoreActions;
 
@@ -150,7 +153,7 @@ export class CollectionWrapperContainer extends PureComponent {
 
     return (
       <div>
-        <HigherOrder.Authorize
+        <Authorize
           entity={collection}
           failureFatalError={{
             body: "You are not allowed to edit this collection."
@@ -183,7 +186,7 @@ export class CollectionWrapperContainer extends PureComponent {
             <Utility.SkipLink skipId={skipId} />
             <div id={skipId}>{this.renderRoutes()}</div>
           </Layout.BackendPanel>
-        </HigherOrder.Authorize>
+        </Authorize>
       </div>
     );
   }

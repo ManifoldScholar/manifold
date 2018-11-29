@@ -1,4 +1,4 @@
-import config from "./config";
+import config from "config";
 import ch from "./helpers/consoleHelpers";
 import React from "react";
 import ReactDOM from "react-dom/server";

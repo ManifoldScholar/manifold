@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Project } from "components/frontend";
+import Project from "frontend/components/project";
 import { entityStoreActions } from "actions";
 import { grab } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import { Redirect } from "react-router-dom";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
-import { HeadContent } from "components/global";
-import HigherOrder from "containers/global/HigherOrder";
+import HeadContent from "global/components/head-content";
+
+import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
 
@@ -67,5 +68,5 @@ export class ProjectDetailContainer extends Component {
 }
 
 export default connectAndFetch(
-  HigherOrder.withSettings(ProjectDetailContainer)
+  withSettings(ProjectDetailContainer)
 );

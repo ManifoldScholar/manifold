@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { HigherOrder } from "containers/global";
-import { HigherOrder as HigherOrderComponent } from "components/global";
 import { NavLink, withRouter } from "react-router-dom";
 import { matchPath } from "react-router";
 import classnames from "classnames";
@@ -11,6 +9,9 @@ import UserLinks from "./Mobile/UserLinks";
 import MobileSearch from "./Mobile/Search";
 import MobileBreadcrumb from "./Mobile/Breadcrumb";
 import FocusTrap from "focus-trap-react";
+
+import Authorize from "hoc/authorize";
+import BodyClass from "hoc/body-class";
 
 export class NavigationMobile extends Component {
   static displayName = "Navigation.Mobile";
@@ -196,7 +197,7 @@ export class NavigationMobile extends Component {
           location={this.props.location}
         />
         {this.state.open ? (
-          <HigherOrderComponent.BodyClass className={"no-scroll"}>
+          <BodyClass className={"no-scroll"}>
             <FocusTrap
               focusTrapOptions={{
                 clickOutsideDeactivates: true
@@ -207,13 +208,13 @@ export class NavigationMobile extends Component {
                   {this.props.links.map((link, index) => {
                     if (link.ability)
                       return (
-                        <HigherOrder.Authorize
+                        <Authorize
                           key={`${link.route}-wrapped`}
                           entity={link.entity}
                           ability={link.ability}
                         >
                           {this.renderItem(link, index)}
-                        </HigherOrder.Authorize>
+                        </Authorize>
                       );
                     return this.renderItem(link, index);
                   })}
@@ -229,7 +230,7 @@ export class NavigationMobile extends Component {
                 />
               </div>
             </FocusTrap>
-          </HigherOrderComponent.BodyClass>
+          </BodyClass>
         ) : null}
         <i
           role="button"

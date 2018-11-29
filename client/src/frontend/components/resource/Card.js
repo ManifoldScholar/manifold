@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
-import FormattedDate from "components/global/FormattedDate";
-import { Resource, Resourceish } from "components/frontend";
+import FormattedDate from "global/components/formatted-date";
+import Resourceish from "frontend/components/resourceish";
+import Resource from "frontend/components/resource";
 import lh from "helpers/linkHandler";
 
 class ResourceCard extends Component {

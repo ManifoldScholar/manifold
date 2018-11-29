@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { TwitterButton, FacebookButton } from "react-sociable";
-import HigherOrder from "containers/global/HigherOrder";
+
+import withSettings from "hoc/with-settings";
 
 class ShareBar extends Component {
   static displayName = "Utility.ShareBar";
@@ -105,4 +106,4 @@ class ShareBar extends Component {
   }
 }
 
-export default HigherOrder.withSettings(ShareBar);
+export default withSettings(ShareBar);

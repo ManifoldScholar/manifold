@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Form, Dialog } from "components/backend";
-import { Form as GlobalForm } from "components/global";
+import Dialog from "backend/components/dialog";
+import Form from "backend/components/form";
+import GlobalForm from "global/components/form";
 import ColorPicker from "./ColorPicker";
-import { Project } from "components/global";
-import setter from "components/backend/Form/setter";
+import Project from "global/components/project";
+import { setter } from "backend/components/form";
 import classNames from "classnames";
 
 class AvatarBuilder extends Component {

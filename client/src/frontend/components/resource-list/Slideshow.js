@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import Swipeable from "react-swipeable";
 import includes from "lodash/includes";
-import { ResourceList } from "components/frontend";
+import ResourceList from "frontend/components/resource-list";
 import { collectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 

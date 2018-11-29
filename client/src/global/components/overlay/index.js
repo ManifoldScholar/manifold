@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { HigherOrder } from "components/global";
 import FocusTrap from "focus-trap-react";
 import isString from "lodash/isString";
+
+import BodyClass from "hoc/body-class";
 
 export default class Overlay extends Component {
   static propTypes = {
@@ -98,7 +99,7 @@ export default class Overlay extends Component {
 
   render() {
     return (
-      <HigherOrder.BodyClass className={"no-scroll overlay"}>
+      <BodyClass className={"no-scroll overlay"}>
         <div
           className={this.overlayClass()}
           key={"globalOverlay"}
@@ -130,7 +131,7 @@ export default class Overlay extends Component {
             </div>
           </FocusTrap>
         </div>
-      </HigherOrder.BodyClass>
+      </BodyClass>
     );
   }
 }

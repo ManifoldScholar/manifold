@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { List } from "components/backend";
-import { Notation } from "components/reader";
-import { Utility } from "components/frontend";
+import List from "backend/components/list";
+import Notation from "reader/components/notation";
+import Utility from "frontend/components/utility";
 import { projectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";

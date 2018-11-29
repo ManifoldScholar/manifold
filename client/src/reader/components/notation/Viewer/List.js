@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Notation } from "components/reader";
+import Notation from "reader/components/notation";
 import { connect } from "react-redux";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import { uiReaderActions, entityStoreActions } from "actions";
 import { annotationsAPI, requests } from "api";
 import { bindActionCreators } from "redux";
-import { Dialog } from "components/backend";
-import config from "../../../../config";
+import Dialog from "backend/components/dialog";
+import config from "config";
 import throttle from "lodash/throttle";
 import { scrollOptions } from "utils/domUtils";
 

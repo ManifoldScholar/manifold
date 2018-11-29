@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { FormattedDate } from "components/global";
+import FormattedDate from "global/components/formatted-date";
 import classNames from "classnames";
 
 export default class AnnotationDetail extends PureComponent {

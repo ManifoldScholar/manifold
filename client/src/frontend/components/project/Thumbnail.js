@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Project as FrontEndProject } from "components/frontend";
-import FormattedDate from "components/global/FormattedDate";
+import FrontEndProject from "frontend/components/project";
+import FormattedDate from "global/components/formatted-date";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
 // import { Project as GlobalProject } from 'components/global';

@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
-import { HigherOrder } from "containers/global";
+import Form from "backend/components/form";
+import FormContainer from "backend/containers/form";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 export default class ProjectProjectPageContainer extends PureComponent {
   static displayName = "Project.ProjectPage";
@@ -17,7 +18,7 @@ export default class ProjectProjectPageContainer extends PureComponent {
     const project = this.props.project;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability="update"
         failureNotification
@@ -122,7 +123,7 @@ export default class ProjectProjectPageContainer extends PureComponent {
             <Form.Save text="Save Project" />
           </FormContainer.Form>
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

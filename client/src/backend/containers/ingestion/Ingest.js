@@ -10,8 +10,8 @@ import capitalize from "lodash/capitalize";
 import { websocketActions, notificationActions } from "actions";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
-import { Ingestion } from "components/backend";
-import config from "../../../config";
+import Ingestion from "backend/components/ingestion";
+import config from "config";
 
 const { request, flush } = entityStoreActions;
 

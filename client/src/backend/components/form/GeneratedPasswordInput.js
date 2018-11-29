@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
 import setter from "./setter";
 import classnames from "classnames";
-import { Form as GlobalForm } from "components/global";
+import GlobalForm from "global/components/form";
 import generatePassword from "helpers/passwordGenerator";
 
 class FormGeneratedPasswordInput extends Component {

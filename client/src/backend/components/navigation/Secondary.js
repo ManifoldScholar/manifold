@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { HigherOrder } from "containers/global";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
+
+import BlurOnLocationChange from "hoc/blur-on-location-change";
+import Authorize from "hoc/authorize";
 
 export class NavigationSecondary extends Component {
   static displayName = "Navigation.Secondary";
@@ -42,13 +44,13 @@ export class NavigationSecondary extends Component {
           {this.props.links.map(link => {
             if (link.ability)
               return (
-                <HigherOrder.Authorize
+                <Authorize
                   key={`${link.route}-wrapped`}
                   entity={link.entity}
                   ability={link.ability}
                 >
                   {this.renderItem(link)}
-                </HigherOrder.Authorize>
+                </Authorize>
               );
             return this.renderItem(link);
           })}
@@ -67,9 +69,9 @@ export class NavigationSecondary extends Component {
 
   render() {
     return (
-      <HigherOrder.BlurOnLocationChange location={this.props.location}>
+      <BlurOnLocationChange location={this.props.location}>
         {this.renderNav(this.props)}
-      </HigherOrder.BlurOnLocationChange>
+      </BlurOnLocationChange>
     );
   }
 }

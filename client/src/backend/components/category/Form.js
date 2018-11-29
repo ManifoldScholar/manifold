@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
+import Form from "backend/components/form";
+import FormContainer from "backend/containers/form";
 import { textCategoriesAPI, requests } from "api";
 
 export default class CategoryForm extends PureComponent {

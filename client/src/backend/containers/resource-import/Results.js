@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { ResourceImport } from "components/backend";
+import ResourceImport from "backend/components/resource-import";
 
 export class ResourceImportResults extends PureComponent {
   static displayName = "ResourceImport.Results";

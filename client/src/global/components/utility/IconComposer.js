@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Icon } from "components/global/SVG";
+import { Icon } from "global/components/svg";
 import humps from "humps";
 
 export default class IconComposer extends PureComponent {

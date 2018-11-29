@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { twitterQueriesAPI, requests } from "api";
-import { Form as FormContainer } from "containers/backend";
-import { Form } from "components/backend";
+import FormContainer from "backend/containers/form";
+import Form from "backend/components/form";
 
 export default class TwitterQueryForm extends PureComponent {
   static displayName = "TwitterQuery.Form";

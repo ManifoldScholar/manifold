@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { oauthActions } from "actions";
 import { get } from "lodash";
 import { providerSetting } from "utils/oauth";
-import HigherOrder from "containers/global/HigherOrder";
+
+import withSettings from "hoc/with-settings";
 
 class Button extends Component {
   static propTypes = {
@@ -69,4 +70,4 @@ class Button extends Component {
   }
 }
 
-export default HigherOrder.withSettings(Button);
+export default withSettings(Button);

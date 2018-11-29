@@ -1,6 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
-import { Section } from "components/reader";
+import Section from "reader/components/section";
 
 export default class Body extends Component {
   static propTypes = {

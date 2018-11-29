@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { Form } from "components/backend";
+import Form from "backend/components/form";
 import { Provider } from "react-redux";
 import createStore from "store/createStore";
 

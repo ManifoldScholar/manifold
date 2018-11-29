@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { pagesAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import { HeadContent } from "components/global";
+import HeadContent from "global/components/head-content";
 import { select } from "utils/entityUtils";
 
 const { request, flush } = entityStoreActions;

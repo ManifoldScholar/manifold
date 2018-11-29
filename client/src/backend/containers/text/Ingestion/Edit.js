@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Ingestion } from "components/backend";
+import Ingestion from "backend/components/ingestion";
 import { entityStoreActions } from "actions";
 import { ingestionsAPI, requests } from "api";
 import { select, isLoaded } from "utils/entityUtils";

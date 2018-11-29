@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { HigherOrder, Utility } from "components/global";
-import { Layout } from "components/frontend";
+import Utility from "global/components/utility";
+import Layout from "frontend/components/layout";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, subjectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -9,6 +9,9 @@ import { select, isLoaded } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
 import { renderRoutes } from "react-router-config";
 import get from "lodash/get";
+
+import ScrollAware from "hoc/scroll-aware";
+import BodyClass from "hoc/body-class";
 
 const { request } = entityStoreActions;
 
@@ -81,11 +84,11 @@ export class FrontendContainer extends Component {
       : "";
 
     return (
-      <HigherOrder.BodyClass className={"browse"}>
+      <BodyClass className={"browse"}>
         <div>
           <Utility.SkipLink skipId={skipId} />
           <Utility.ScrollToTop />
-          <HigherOrder.ScrollAware>
+          <ScrollAware>
             <Layout.Header
               pages={this.props.pages}
               visibility={this.props.visibility}
@@ -96,7 +99,7 @@ export class FrontendContainer extends Component {
               commonActions={this.commonActions}
               settings={this.props.settings}
             />
-          </HigherOrder.ScrollAware>
+          </ScrollAware>
           <main
             ref={mainContainer => {
               this.mainContainer = mainContainer;
@@ -113,7 +116,7 @@ export class FrontendContainer extends Component {
             settings={this.props.settings}
           />
         </div>
-      </HigherOrder.BodyClass>
+      </BodyClass>
     );
   }
 }

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Comment as CommentContainer } from "containers/global";
-import { Utility, Resource } from "components/frontend";
+import CommentContainer from "global/containers/comment";
+import Resource from "frontend/components/resource";
+import Utility from "frontend/components/utility";
 
 export default class ResourceDetail extends Component {
   static displayName = "Resource.Detail";

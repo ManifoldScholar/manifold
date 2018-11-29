@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Form as GlobalForm } from "components/global";
-import setter from "components/backend/Form/setter";
+import GlobalForm from "global/components/form";
+import { setter } from "backend/components/form";
 import classNames from "classnames";
-import { Utility } from "components/global";
+import Utility from "global/components/utility";
 import labelId from "helpers/labelId";
 
 class IconPicker extends Component {

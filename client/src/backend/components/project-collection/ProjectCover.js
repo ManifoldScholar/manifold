@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Project as FrontendProject } from "components/frontend";
+import FrontendProject from "frontend/components/project";
 import AddButton from "./AddButton";
 import classNames from "classnames";
 

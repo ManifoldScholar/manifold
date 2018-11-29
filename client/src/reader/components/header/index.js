@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { ReturnMenu, TextTitles, Notes, ControlMenu } from "components/reader";
-import {
-  UIPanel,
-  UserMenuButton,
-  UserMenuBody,
-  HeaderNotifications,
-  Search
-} from "components/global";
-import { HigherOrder } from "containers/global";
+import ControlMenu from "reader/components/control-menu";
+import Notes from "reader/components/notes";
+import TextTitles from "reader/components/text-titles";
+import ReturnMenu from "reader/components/return-menu";
+import Search from "global/components/search";
+import HeaderNotifications from "global/components/header-notifications";
+import UserMenuBody from "global/components/user-menu-body";
+import UserMenuButton from "global/components/user-menu-button";
+import UIPanel from "global/components/ui-panel";
 import memoize from "lodash/memoize";
 import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
+
+import Authorize from "hoc/authorize";
+import BlurOnLocationChange from "hoc/blur-on-location-change";
 
 export default class Header extends Component {
   static propTypes = {
@@ -89,7 +92,7 @@ export default class Header extends Component {
     });
 
     return (
-      <HigherOrder.BlurOnLocationChange location={this.props.location}>
+      <BlurOnLocationChange location={this.props.location}>
         <header className={headerClass}>
           <nav className={containerClass}>
             <ReturnMenu.Button
@@ -105,14 +108,14 @@ export default class Header extends Component {
             ) : null}
             <nav className="menu-buttons">
               <ul>
-                <HigherOrder.Authorize kind={"any"}>
+                <Authorize kind={"any"}>
                   <li>
                     <ControlMenu.NotesButton
                       toggle={this.panelToggleHandler("notes")}
                       active={this.props.visibility.uiPanels.notes}
                     />
                   </li>
-                </HigherOrder.Authorize>
+                </Authorize>
                 <li>
                   <ControlMenu.VisibilityMenuButton
                     toggle={this.panelToggleHandler("visibility")}
@@ -225,7 +228,7 @@ export default class Header extends Component {
           </nav>
           <HeaderNotifications />
         </header>
-      </HigherOrder.BlurOnLocationChange>
+      </BlurOnLocationChange>
     );
   }
 }

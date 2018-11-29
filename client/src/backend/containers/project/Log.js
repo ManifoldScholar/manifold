@@ -1,13 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { entityStoreActions } from "actions";
-import { Log, List } from "components/backend";
-import { Utility } from "components/global";
-import { HigherOrder } from "containers/global";
+import List from "backend/components/list";
+import Log from "backend/components/log";
+import Utility from "global/components/utility";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 const perPage = 5;
 const { request } = entityStoreActions;
@@ -71,7 +73,7 @@ export class LogContainer extends PureComponent {
     const project = this.props.project;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability="readLog"
         failureNotification
@@ -96,7 +98,7 @@ export class LogContainer extends PureComponent {
             />
           </React.Fragment>
         )}
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

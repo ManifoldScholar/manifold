@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { Footer } from "components/reader";
+import Footer from "reader/components/footer";
 
 describe("Reader.Footer component", () => {
   const text = {

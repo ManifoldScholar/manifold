@@ -6,10 +6,12 @@ import { select, meta } from "utils/entityUtils";
 import { usersAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import get from "lodash/get";
-import { User, List, Layout } from "components/backend";
+import Layout from "backend/components/layout";
+import List from "backend/components/list";
+import User from "backend/components/user";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import config from "../../../config";
+import config from "config";
 
 const { request } = entityStoreActions;
 const perPage = 10;

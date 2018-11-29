@@ -1,9 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { ProjectCollection } from "components/backend";
-import { Utility } from "components/global";
-import { HigherOrder } from "containers/global";
+import ProjectCollection from "backend/components/project-collection";
+import Utility from "global/components/utility";
 import { entityStoreActions } from "actions";
 import { meta } from "utils/entityUtils";
 import { projectCollectionsAPI, requests } from "api";
@@ -12,6 +11,8 @@ import Manual from "./Detail/Manual";
 import Smart from "./Detail/Smart";
 import lh from "helpers/linkHandler";
 import get from "lodash/get";
+
+import Authorize from "hoc/authorize";
 
 const { request, flush } = entityStoreActions;
 const perPage = 12;
@@ -152,7 +153,7 @@ export class ProjectCollectionDetail extends PureComponent {
     );
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={projectCollection}
         failureFatalError={{
           detail: "You are not allowed to edit this project collection."
@@ -180,7 +181,7 @@ export class ProjectCollectionDetail extends PureComponent {
             drawerProps: this.drawerProps(this.props)
           })}
         </div>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

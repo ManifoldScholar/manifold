@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { ResourceImport } from "components/backend";
+import ResourceImport from "backend/components/resource-import";
 
 export default class ResourceImportResult extends PureComponent {
   static displayName = "ResourceImport.Result";

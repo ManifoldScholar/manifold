@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ControlMenu } from "components/reader";
-import { HigherOrder } from "containers/global";
+import ControlMenu from "reader/components/control-menu";
+
+import Authorize from "hoc/authorize";
 
 export default class Footer extends Component {
   static propTypes = {
@@ -29,14 +30,14 @@ export default class Footer extends Component {
                   </button>
                 </li>
                */}
-              <HigherOrder.Authorize kind={"any"}>
+              <Authorize kind={"any"}>
                 <li>
                   <ControlMenu.NotesButton
                     toggle={() => this.handlePanelToggle("notes")}
                     active={this.props.visibility.uiPanels.notes}
                   />
                 </li>
-              </HigherOrder.Authorize>
+              </Authorize>
               <li>
                 <ControlMenu.VisibilityMenuButton
                   toggle={() => this.handlePanelToggle("visibility")}

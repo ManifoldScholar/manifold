@@ -1,12 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form, ProjectCollection, Dialog } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
-import { HigherOrder } from "containers/global";
+import Dialog from "backend/components/dialog";
+import ProjectCollection from "backend/components/project-collection";
+import Form from "backend/components/form";
+import FormContainer from "backend/containers/form";
 import { projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 const perPage = 12;
@@ -90,7 +93,7 @@ export class ProjectCollectionSettings extends PureComponent {
     if (!projectCollection) return null;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={projectCollection}
         ability="update"
         failureNotification
@@ -158,7 +161,7 @@ export class ProjectCollectionSettings extends PureComponent {
             <Form.Save text="Save Project Collection" />
           </FormContainer.Form>
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

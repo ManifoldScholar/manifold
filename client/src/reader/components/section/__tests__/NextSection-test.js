@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { wrapWithRouter } from "test/helpers/routing";
-import { Section } from "components/reader";
+import Section from "reader/components/section";
 import build from "test/fixtures/build";
 
 describe("NextSection component", () => {

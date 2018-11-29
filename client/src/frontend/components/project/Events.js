@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Utility, Event, Layout } from "components/frontend";
+import Layout from "frontend/components/layout";
+import Event from "frontend/components/event";
+import Utility from "frontend/components/utility";
 import lh from "helpers/linkHandler";
-import { HeadContent } from "components/global";
+import HeadContent from "global/components/head-content";
 
 export default class ProjectEvents extends Component {
   static displayName = "Project.Events";

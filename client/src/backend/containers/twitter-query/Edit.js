@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Dialog, TwitterQuery } from "components/backend";
+import TwitterQuery from "backend/components/twitter-query";
+import Dialog from "backend/components/dialog";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { twitterQueriesAPI, requests } from "api";

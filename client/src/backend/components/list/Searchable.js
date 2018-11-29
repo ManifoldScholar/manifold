@@ -1,15 +1,16 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Utility } from "components/global";
-import { HigherOrder } from "containers/global";
+import Utility from "global/components/utility";
 import withCurrentUser from "hoc/with-current-user";
-import { List } from "components/backend";
+import List from "backend/components/list";
 import { Link } from "react-router-dom";
 import Authorization from "helpers/authorization";
 import get from "lodash/get";
 import labelId from "helpers/labelId";
 import omitBy from "lodash/omitBy";
 import classnames from "classnames";
+
+import Authorize from "hoc/authorize";
 
 export class ListSearchable extends PureComponent {
   static mapStateToProps = state => ({
@@ -245,12 +246,12 @@ export class ListSearchable extends PureComponent {
 
     if (buttonProps.authorizedFor)
       return (
-        <HigherOrder.Authorize
+        <Authorize
           entity={buttonProps.authorizedFor}
           ability={buttonProps.authorizedTo || "create"}
         >
           {button}
-        </HigherOrder.Authorize>
+        </Authorize>
       );
     return button;
   }

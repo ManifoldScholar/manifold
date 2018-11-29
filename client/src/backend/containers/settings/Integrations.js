@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Form, Layout } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
+import Layout from "backend/components/layout";
+import Form from "backend/components/form";
+import FormContainer from "backend/containers/form";
 import { settingsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
 

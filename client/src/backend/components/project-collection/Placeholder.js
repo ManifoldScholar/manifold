@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Icon } from "components/global/SVG";
+import { Icon } from "global/components/svg";
 
 const helpLink = "https://manifoldapp.org/docs/";
 

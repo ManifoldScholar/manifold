@@ -6,10 +6,13 @@ import entityUtils from "utils/entityUtils";
 import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import { Dialog, Navigation, Layout } from "components/backend";
-import { Layout as FrontendLayout } from "components/frontend";
-import { HigherOrder } from "containers/global";
+import Layout from "backend/components/layout";
+import Navigation from "backend/components/navigation";
+import Dialog from "backend/components/dialog";
+import FrontendLayout from "frontend/components/layout";
 import get from "lodash/get";
+
+import Authorize from "hoc/authorize";
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -208,7 +211,7 @@ class FeatureDetailContainer extends PureComponent {
     if (!authProps.entity) return null;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         failureFatalError={{
           body: `You are not allowed to ${authProps.ability} features.`
         }}
@@ -247,7 +250,7 @@ class FeatureDetailContainer extends PureComponent {
             ) : null}
           </Layout.BackendPanel>
         </div>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ResourceList } from "components/frontend";
+import ResourceList from "frontend/components/resource-list";
 
 export default class ResourceHero extends Component {
   static displayName = "Resource.Hero";

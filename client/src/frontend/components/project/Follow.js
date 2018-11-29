@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
 import { currentUserActions } from "actions";
-import { Project } from "components/global";
+import Project from "global/components/project";
 
 export default class ProjectFollow extends Component {
   static displayName = "Project.Follow";

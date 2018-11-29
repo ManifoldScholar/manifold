@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import get from "lodash/get";
-import { Utility } from "components/global";
+import Utility from "global/components/utility";
 
 export default class ResourceishThumbnail extends Component {
   static displayName = "Resourceish.Thumbnail";

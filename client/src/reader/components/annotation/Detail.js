@@ -1,15 +1,16 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Helper } from "components/global";
-import { Utility } from "components/frontend";
+import Helper from "global/components/helper";
+import Utility from "frontend/components/utility";
 import Editor from "./Editor";
 import Meta from "./Meta";
-import { Comment as CommentContainer } from "containers/global";
+import CommentContainer from "global/containers/comment";
 import classNames from "classnames";
-import HigherOrder from "containers/global/HigherOrder";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
@@ -96,7 +97,7 @@ class AnnotationDetail extends PureComponent {
             <section className="body">
               <Helper.SimpleFormat text={annotation.attributes.body} />
             </section>
-            <HigherOrder.Authorize kind={"any"}>
+            <Authorize kind={"any"}>
               <nav className="utility">
                 <ul>
                   {this.props.includeComments ? (
@@ -109,7 +110,7 @@ class AnnotationDetail extends PureComponent {
                       </button>
                     </li>
                   ) : null}
-                  <HigherOrder.Authorize entity={annotation} ability={"update"}>
+                  <Authorize entity={annotation} ability={"update"}>
                     <li>
                       <button
                         className={editButtonClass}
@@ -118,15 +119,15 @@ class AnnotationDetail extends PureComponent {
                         {"Edit"}
                       </button>
                     </li>
-                  </HigherOrder.Authorize>
-                  <HigherOrder.Authorize entity={annotation} ability={"delete"}>
+                  </Authorize>
+                  <Authorize entity={annotation} ability={"delete"}>
                     <li>
                       <Utility.ConfirmableButton
                         label="Delete"
                         confirmHandler={this.deleteAnnotation}
                       />
                     </li>
-                  </HigherOrder.Authorize>
+                  </Authorize>
                 </ul>
                 {this.state.action === "replying" ? (
                   <CommentContainer.Editor
@@ -135,9 +136,9 @@ class AnnotationDetail extends PureComponent {
                   />
                 ) : null}
               </nav>
-            </HigherOrder.Authorize>
+            </Authorize>
             {this.props.showLogin && (
-              <HigherOrder.Authorize kind="unauthenticated">
+              <Authorize kind="unauthenticated">
                 <nav className="utility">
                   <ul>
                     <li>
@@ -147,7 +148,7 @@ class AnnotationDetail extends PureComponent {
                     </li>
                   </ul>
                 </nav>
-              </HigherOrder.Authorize>
+              </Authorize>
             )}
           </div>
         )}

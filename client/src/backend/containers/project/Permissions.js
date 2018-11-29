@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Permission as PermissionsContainer } from "containers/backend";
+import PermissionsContainer from "backend/containers/permission";
 import { childRoutes } from "helpers/router";
-import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 export default class ProjectPermissionsContainer extends PureComponent {
   static displayName = "Project.PermissionsContainer";
@@ -20,7 +21,7 @@ export default class ProjectPermissionsContainer extends PureComponent {
     const closeUrl = lh.link("backendProjectPermissions", project.id);
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability="managePermissions"
         failureNotification
@@ -38,7 +39,7 @@ export default class ProjectPermissionsContainer extends PureComponent {
             }
           })}
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

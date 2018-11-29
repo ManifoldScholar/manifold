@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { passwordsAPI, requests } from "api";
-import { Form } from "components/global";
+import Form from "global/components/form";
 import { entityStoreActions, currentUserActions } from "actions";
 import { get } from "lodash";
 

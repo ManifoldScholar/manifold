@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "../setter";
 import withDispatch from "hoc/with-dispatch";
-  import { Form as GlobalForm } from "components/global";
+  import GlobalForm from "global/components/form";
 import isString from "lodash/isString";
 import Loadable from "react-loadable";
 

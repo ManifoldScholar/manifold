@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Utility } from "components/global";
+import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 
 export default class PageListItem extends PureComponent {

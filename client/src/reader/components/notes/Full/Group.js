@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Notes } from "components/reader";
+import Notes from "reader/components/notes";
 
 export default class Group extends PureComponent {
   static displayName = "Notes.Full.Group";

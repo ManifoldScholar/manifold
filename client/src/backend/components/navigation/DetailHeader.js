@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Navigation } from "components/backend";
+import Navigation from "backend/components/navigation";
 import { Link } from "react-router-dom";
 
 export default class DetailHeader extends PureComponent {

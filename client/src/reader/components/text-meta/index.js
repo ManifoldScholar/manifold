@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Meta } from "components/global";
+import Meta from "global/components/meta";
 
 export default class TextMeta extends PureComponent {
   static displayName = "Reader.TextMeta";

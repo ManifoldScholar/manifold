@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
-import { HigherOrder } from "components/global";
-import { Icon } from "components/global/SVG";
+import { Icon } from "global/components/svg";
 import PasswordForgot from "./PasswordForgot";
 import Login from "./Login";
 import CreateUpdate from "./CreateUpdate";
 import Update from "./Update";
 import Create from "./Create";
+
+import BodyClass from "hoc/body-class";
 
 export default class Overlay extends Component {
   static propTypes = {
@@ -80,7 +81,7 @@ export default class Overlay extends Component {
 
   render() {
     return (
-      <HigherOrder.BodyClass className={"no-scroll"}>
+      <BodyClass className={"no-scroll"}>
         <div className="overlay-full-primary">
           <FocusTrap
             focusTrapOptions={{
@@ -113,7 +114,7 @@ export default class Overlay extends Component {
             </div>
           </FocusTrap>
         </div>
-      </HigherOrder.BodyClass>
+      </BodyClass>
     );
   }
 }

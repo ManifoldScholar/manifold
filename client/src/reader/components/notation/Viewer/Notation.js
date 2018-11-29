@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Resourceish } from "components/frontend";
+import Resourceish from "frontend/components/resourceish";
 import get from "lodash/get";
 
 // The Notation class is used to generate a notation thumbnail, which is currently either

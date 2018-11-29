@@ -1,7 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { Feature, Layout, List } from "components/backend";
+import List from "backend/components/list";
+import Layout from "backend/components/layout";
+import Feature from "backend/components/feature";
 import { featuresAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";

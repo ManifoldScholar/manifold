@@ -1,14 +1,17 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Event, List, Dialog } from "components/backend";
-import { HigherOrder } from "containers/global";
+import Dialog from "backend/components/dialog";
+import List from "backend/components/list";
+import Event from "backend/components/event";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, eventsAPI, requests } from "api";
 import { connect } from "react-redux";
 import get from "lodash/get";
-import config from "/config";
+import config from "config";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 const perPage = 6;
@@ -119,7 +122,7 @@ export class ProjectEventsContainer extends PureComponent {
     if (!project) return null;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability="manageEvents"
         failureNotification
@@ -154,7 +157,7 @@ export class ProjectEventsContainer extends PureComponent {
             }}
           />
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

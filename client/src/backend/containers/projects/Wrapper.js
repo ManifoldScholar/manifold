@@ -1,13 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Navigation } from "components/backend";
-import { HigherOrder } from "containers/global";
-import { Utility } from "components/global";
+import Navigation from "backend/components/navigation";
+import Utility from "global/components/utility";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import { bindActionCreators } from "redux";
 import { uiStateSnapshotActions } from "actions";
+
+import Authorize from "hoc/authorize";
 
 const { setProjectsListSnapshot } = uiStateSnapshotActions;
 
@@ -33,7 +34,7 @@ export default class ProjectsWrapper extends PureComponent {
     const secondaryLinks = navigation.projects();
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         ability="update"
         entity={["project"]}
         failureFatalError={{
@@ -51,7 +52,7 @@ export default class ProjectsWrapper extends PureComponent {
             {childRoutes(this.props.route, { childProps: this.childProps() })}
           </section>
         </div>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

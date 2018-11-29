@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Meta } from "components/global";
+import Meta from "global/components/meta";
 import endsWith from "lodash/endsWith";
 import FormattedDate from "../FormattedDate";
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ProjectCollection } from "components/frontend";
+import ProjectCollection from "frontend/components/project-collection";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";

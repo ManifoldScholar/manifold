@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Metadata } from "components/backend";
-import { HigherOrder } from "containers/global";
+import Metadata from "backend/components/metadata";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 export default class ProjectMetadataContainer extends PureComponent {
   static displayName = "Project.Metadata";
@@ -16,7 +17,7 @@ export default class ProjectMetadataContainer extends PureComponent {
     const project = this.props.project;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability="update"
         failureNotification
@@ -29,7 +30,7 @@ export default class ProjectMetadataContainer extends PureComponent {
           create={projectsAPI.create}
           className="form-secondary"
         />
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

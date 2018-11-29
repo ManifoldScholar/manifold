@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import FormattedDate from "components/global/FormattedDate";
-import { Icon } from "components/global/SVG";
+import FormattedDate from "global/components/formatted-date";
+import { Icon } from "global/components/svg";
 
 export default class ResourceCollectionTitle extends Component {
   static displayName = "ResourceCollection.Title";

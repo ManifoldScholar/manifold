@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { List, ProjectCollection } from "components/backend";
+import ProjectCollection from "backend/components/project-collection";
+import List from "backend/components/list";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";

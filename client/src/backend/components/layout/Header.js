@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import HigherOrder from "containers/global/HigherOrder";
 import { Link } from "react-router-dom";
-import { HeaderNotifications, PressLogo, Navigation } from "components/global";
+import Navigation from "global/components/navigation";
+import PressLogo from "global/components/press-logo";
+import HeaderNotifications from "global/components/header-notifications";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
+
+import BlurOnLocationChange from "hoc/blur-on-location-change";
 
 export default class LayoutHeader extends Component {
   static displayName = "Layout.Header";
@@ -21,7 +24,7 @@ export default class LayoutHeader extends Component {
     const links = navigation.backend();
 
     return (
-      <HigherOrder.BlurOnLocationChange location={this.props.location}>
+      <BlurOnLocationChange location={this.props.location}>
         <header className={"header-app dark"}>
           <div className="header-container">
             <Link to={lh.link("frontend")} className="header-logo">
@@ -41,7 +44,7 @@ export default class LayoutHeader extends Component {
           <div className="header-border" />
           <HeaderNotifications scope="global" />
         </header>
-      </HigherOrder.BlurOnLocationChange>
+      </BlurOnLocationChange>
     );
   }
 }

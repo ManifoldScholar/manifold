@@ -1,8 +1,9 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
 import Selection from "../Selection";
-import HigherOrder from "containers/global/HigherOrder";
 import nl2br from "nl2br";
+
+import Authorize from "hoc/authorize";
 
 export default class AnnotationSelectionWrapper extends PureComponent {
   static displayName = "Annotation.Selection.Wrapper";
@@ -56,23 +57,23 @@ export default class AnnotationSelectionWrapper extends PureComponent {
         )}
         {this.annotatable && (
           <Fragment>
-            <HigherOrder.Authorize kind="any">
+            <Authorize kind="any">
               <button
                 className="annotate-button"
                 onClick={this.props.onAnnotate}
               >
                 {"Annotate"}
               </button>
-            </HigherOrder.Authorize>
+            </Authorize>
             {this.canLogin && (
-              <HigherOrder.Authorize kind="unauthenticated">
+              <Authorize kind="unauthenticated">
                 <button
                   className="annotate-button"
                   onClick={this.props.onLogin}
                 >
                   {"Login to annotate"}
                 </button>
-              </HigherOrder.Authorize>
+              </Authorize>
             )}
           </Fragment>
         )}

@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
-import { Utility } from "components/frontend";
+import Utility from "frontend/components/utility";
 import PropTypes from "prop-types";
-import HigherOrder from "containers/global/HigherOrder";
 import { connect } from "react-redux";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
@@ -49,14 +50,14 @@ class HighlightDetail extends PureComponent {
                 </button>
               </li>
             ) : null}
-            <HigherOrder.Authorize entity={annotation} ability={"delete"}>
+            <Authorize entity={annotation} ability={"delete"}>
               <li>
                 <Utility.ConfirmableButton
                   label="Delete"
                   confirmHandler={this.deleteAnnotation}
                 />
               </li>
-            </HigherOrder.Authorize>
+            </Authorize>
           </ul>
         </nav>
       </div>

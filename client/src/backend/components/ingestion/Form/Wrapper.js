@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form as FormContainer } from "containers/backend";
+import FormContainer from "backend/containers/form";
 import Upload from "./Upload";
 import cloneDeep from "lodash/cloneDeep";
 import { ingestionsAPI } from "api";

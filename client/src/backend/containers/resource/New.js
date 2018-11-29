@@ -1,14 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Form as FormContainer } from "containers/backend";
-import { Resource, Navigation, Form, Layout } from "components/backend";
-import { HigherOrder } from "containers/global";
-import { Form as GlobalForm } from "components/global";
+import FormContainer from "backend/containers/form";
+import Layout from "backend/components/layout";
+import Form from "backend/components/form";
+import Navigation from "backend/components/navigation";
+import Resource from "backend/components/resource";
+import GlobalForm from "global/components/form";
 import { requests, projectsAPI, resourcesAPI } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
@@ -53,7 +57,7 @@ export class ResourceNewContainer extends PureComponent {
     if (!project) return null;
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability={"createResources"}
         failureNotification
@@ -106,7 +110,7 @@ export class ResourceNewContainer extends PureComponent {
             </FormContainer.Form>
           </Layout.BackendPanel>
         </div>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

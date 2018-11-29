@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Icon } from "components/global/SVG";
+import { Icon } from "global/components/svg";
 
 export default class ResourceCollectionCover extends Component {
   static displayName = "ResourceCollection.Cover";

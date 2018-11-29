@@ -2,17 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Link } from "react-router-dom";
-import { ProjectList, Layout } from "components/frontend";
+import Layout from "frontend/components/layout";
+import ProjectList from "frontend/components/project-list";
 import { bindActionCreators } from "redux";
 import { uiFilterActions, entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, favoriteProjectsAPI, requests } from "api";
-import HigherOrder from "containers/global/HigherOrder";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import size from "lodash/size";
-import { HeadContent } from "components/global";
-import { Icon } from "components/global/SVG";
+import HeadContent from "global/components/head-content";
+import { Icon } from "global/components/svg";
+
+import Authorize from "hoc/authorize";
 
 const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
@@ -157,7 +159,7 @@ export class FollowingContainer extends Component {
     );
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         kind="any"
         failureRedirect={lh.link("frontend")}
         {...this.props}
@@ -182,7 +184,7 @@ export class FollowingContainer extends Component {
             />
           ) : null}
         </div>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

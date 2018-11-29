@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { pagesAPI } from "api";
-import { Form } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
+import Form from "backend/components/form";
+import FormContainer from "backend/containers/form";
 import connectAndFetch from "utils/connectAndFetch";
-import HigherOrder from "containers/global/HigherOrder";
 import lh from "helpers/linkHandler";
+
+import withFormSession from "hoc/with-form-session";
 
 class PagesNewContainer extends PureComponent {
   static displayName = "Pages.New";
@@ -88,7 +89,7 @@ class PagesNewContainer extends PureComponent {
   }
 }
 
-export default HigherOrder.withFormSession(
+export default withFormSession(
   connectAndFetch(PagesNewContainer),
   "backend-page-create"
 );

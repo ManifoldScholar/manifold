@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { Dashboard } from "components/backend";
+import Dashboard from "backend/components/dashboard";
 
 describe("Backend.Dashboard.Notification component", () => {
   it("renders correctly", () => {

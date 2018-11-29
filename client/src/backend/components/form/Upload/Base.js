@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
 import Dropzone from "react-dropzone";
-import { Form as GlobalForm } from "components/global";
+import GlobalForm from "global/components/form";
 import classnames from "classnames";
 import isString from "lodash/isString";
 import Instructions from "../Instructions";

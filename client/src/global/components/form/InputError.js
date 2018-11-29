@@ -4,7 +4,7 @@ import get from "lodash/get";
 import has from "lodash/has";
 import capitalize from "lodash/capitalize";
 import humps from "humps";
-import config from "../../../config";
+import config from "config";
 
 export default class InputError extends Component {
   static propTypes = {

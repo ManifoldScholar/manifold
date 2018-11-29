@@ -1,14 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Dialog } from "components/backend";
-import { Makers } from "containers/backend";
+import Dialog from "backend/components/dialog";
+import Makers from "backend/containers/makers";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { makersAPI, requests } from "api";
-import { HigherOrder } from "containers/global";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 const { request, flush } = entityStoreActions;
 
@@ -106,7 +107,7 @@ export class MakersEditContainer extends PureComponent {
         ) : null}
         <header className="drawer-header">
           <h2 className="heading-quaternary">{attr.fullName}</h2>
-          <HigherOrder.Authorize entity={maker} ability="delete">
+          <Authorize entity={maker} ability="delete">
             <div className="buttons-bare-vertical">
               <button
                 className="button-bare-primary"
@@ -116,7 +117,7 @@ export class MakersEditContainer extends PureComponent {
                 <i className="manicon manicon-trashcan" aria-hidden="true" />
               </button>
             </div>
-          </HigherOrder.Authorize>
+          </Authorize>
         </header>
         <Makers.Form maker={maker} />
       </div>

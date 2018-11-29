@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Layout } from "components/frontend";
+import Layout from "frontend/components/layout";
 
 export default class NoFollow extends Component {
   static displayName = "Layout.NoFollow";

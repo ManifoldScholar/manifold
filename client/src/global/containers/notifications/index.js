@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Notification } from "components/global";
+import Notification from "global/components/notification";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
 import classNames from "classnames";

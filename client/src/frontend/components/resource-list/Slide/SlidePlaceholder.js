@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Icon } from "components/global/SVG";
+import { Icon } from "global/components/svg";
 
 export default class ResourceListSlidePlaceholder extends Component {
   static displayName = "ResourceList.Slide.Placeholder";

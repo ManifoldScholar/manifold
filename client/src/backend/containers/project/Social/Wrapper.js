@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Project } from "containers/backend";
-import { HigherOrder } from "containers/global";
+import Project from "backend/containers/project";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
+
+import Authorize from "hoc/authorize";
 
 export default class ProjectSocialWrapperContainer extends Component {
   static displayName = "Project.Social.Wrapper";
@@ -20,7 +21,7 @@ export default class ProjectSocialWrapperContainer extends Component {
     const closeUrl = lh.link("backendProjectSocial", project.id);
 
     return (
-      <HigherOrder.Authorize
+      <Authorize
         entity={project}
         ability="manageSocials"
         failureNotification
@@ -36,7 +37,7 @@ export default class ProjectSocialWrapperContainer extends Component {
             match={this.props.match}
           />
         </section>
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }

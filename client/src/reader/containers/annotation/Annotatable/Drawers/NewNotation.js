@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Notation } from "containers/reader";
+import Notation from "reader/containers/notation";
 import PropTypes from "prop-types";
 
 export default class NewNotation extends PureComponent {

@@ -6,7 +6,9 @@ import { select, meta } from "utils/entityUtils";
 import { subjectsAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import get from "lodash/get";
-import { Subject, List, Layout } from "components/backend";
+import Layout from "backend/components/layout";
+import List from "backend/components/list";
+import Subject from "backend/components/subject";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import FormattedDate from "components/global/FormattedDate";
-import { Resourceish } from "components/frontend";
+import FormattedDate from "global/components/formatted-date";
+import Resourceish from "frontend/components/resourceish";
 
 export default class CollectionPickerListItem extends PureComponent {
   static displayName = "Notation.Collection.PickerListItem";

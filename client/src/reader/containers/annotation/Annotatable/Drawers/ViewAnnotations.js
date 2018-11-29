@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Annotation from "containers/reader/Annotation";
+import Annotation from "reader/containers/annotation";
 
 export default class ViewAnnotations extends PureComponent {
   static drawerProps = () => {

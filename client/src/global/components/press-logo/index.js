@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Icon } from "components/global/SVG";
+import { Icon } from "global/components/svg";
 
 export default class PressLogo extends Component {
   static propTypes = {

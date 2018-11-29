@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import qs from "qs";
 import isPlainObject from "lodash/isPlainObject";
-import config from "../config";
+import config from "config";
 import humps from "humps";
 
 require("isomorphic-fetch");

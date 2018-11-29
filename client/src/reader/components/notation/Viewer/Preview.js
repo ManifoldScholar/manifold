@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Resourceish } from "components/frontend";
+import Resourceish from "frontend/components/resourceish";
 import Link from "./Link";
 
 export default class NotationViewerPreview extends PureComponent {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Event } from "components/frontend";
+import Event from "frontend/components/event";
 
 export default class EventListItem extends PureComponent {
   static displayName = "Event.ListItem";

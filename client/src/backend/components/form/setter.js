@@ -4,7 +4,8 @@ import hoistStatics from "hoist-non-react-statics";
 import get from "lodash/get";
 import has from "lodash/has";
 import brackets2dots from "brackets2dots";
-import HigherOrder from "containers/global/HigherOrder";
+
+import withFormContext from "hoc/with-form-context";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -163,7 +164,7 @@ export default function setter(WrappedComponent) {
     }
   }
 
-  const WrappedWithFormContext = HigherOrder.withFormContext(Setter);
+  const WrappedWithFormContext = withFormContext(Setter);
 
   return hoistStatics(WrappedWithFormContext, WrappedComponent, {
     getDerivedStateFromProps: true

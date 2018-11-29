@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Project as GlobalProject } from "components/global";
+import GlobalProject from "global/components/project";
 import lh from "helpers/linkHandler";
 
 export default class ProjectListItem extends PureComponent {

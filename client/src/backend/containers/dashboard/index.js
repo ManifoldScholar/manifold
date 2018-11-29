@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { HigherOrder } from "containers/global";
-import { Dashboards } from "containers/backend";
+import Dashboards from "backend/containers/dashboards";
 import lh from "helpers/linkHandler";
 import { bindActionCreators } from "redux";
 import { uiStateSnapshotActions } from "actions";
+
+import Authorize from "hoc/authorize";
 
 const { setDashboardProjectsListSnapshot } = uiStateSnapshotActions;
 
@@ -21,7 +22,7 @@ export default class DashboardContainer extends PureComponent {
 
     // This will be the entry point to the author dashboard too, when built out more
     return (
-      <HigherOrder.Authorize
+      <Authorize
         kind={[
           "admin",
           "editor",
@@ -34,7 +35,7 @@ export default class DashboardContainer extends PureComponent {
         failureNotification
       >
         <Dashboards.Admin snapshotCreator={snapshotCreator} />
-      </HigherOrder.Authorize>
+      </Authorize>
     );
   }
 }
