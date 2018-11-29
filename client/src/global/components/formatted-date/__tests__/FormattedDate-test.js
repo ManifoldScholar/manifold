@@ -1,5 +1,5 @@
 import React from "react";
-import FormattedDate from "../FormattedDate";
+import FormattedDate from "../";
 import renderer from "react-test-renderer";
 import { createRenderer } from "react-test-renderer/shallow";
 

@@ -2,11 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import GlobalForm from "global/components/form";
-import List from "./HasMany/List";
-import Header from "./HasMany/Header";
+import List from "./List";
+import Header from "./Header";
 import labelId from "helpers/labelId";
-import setter from "./setter";
-import OptionsList from "./OptionsList";
+import setter from "../setter";
+import OptionsList from "../OptionsList";
 import isArray from "lodash/isArray";
 
 export class FormHasMany extends PureComponent {

@@ -58,6 +58,10 @@
       "node_modules",
       "src"
     ],
+    "modulePaths": [
+      "node_modules",
+      "src"
+    ],
     "setupFiles": [
       "./src/test/setup.js"
     ],

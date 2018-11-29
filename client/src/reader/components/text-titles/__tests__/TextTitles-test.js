@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import TextTitles from "../TextTitles";
+import TextTitles from "../";
 
 describe("Reader.TextTitles Component", () => {
   it("renders correctly", () => {

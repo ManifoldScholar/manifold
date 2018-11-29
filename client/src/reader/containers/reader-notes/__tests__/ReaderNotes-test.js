@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { ReaderNotesContainer } from "../ReaderNotes";
+import { ReaderNotesContainer } from "../";
 import Notes from "reader/components/notes";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import PressLogo from "../PressLogo";
+import PressLogo from "../";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";
 

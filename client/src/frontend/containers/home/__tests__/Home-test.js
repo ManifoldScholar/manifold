@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { HomeContainer } from "../Home";
+import { HomeContainer } from "../";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { LoginContainer } from "../Login";
+import { LoginContainer } from "../";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import FatalError from "../FatalError";
+import FatalError from "../";
 
 describe("Global.FatalError component", () => {
   it("renders correctly", () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import NotFound from "../NotFound";
+import NotFound from "../";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 

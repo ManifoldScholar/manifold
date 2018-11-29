@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Meta from "../Meta";
+import Meta from "../";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
 

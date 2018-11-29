@@ -5,7 +5,7 @@ function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
 }
 
-export default function withFormContext(WrappedComponent) {
+function withFormContext(WrappedComponent) {
   const displayName = `HigherOrder.WithFormContext('${getDisplayName(
     WrappedComponent
   )})`;
@@ -30,3 +30,5 @@ export default function withFormContext(WrappedComponent) {
 
   return WithFormContext;
 }
+
+export default withFormContext;

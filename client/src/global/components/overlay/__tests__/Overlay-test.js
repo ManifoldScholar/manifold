@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Overlay from "../Overlay";
+import Overlay from "../";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";
 

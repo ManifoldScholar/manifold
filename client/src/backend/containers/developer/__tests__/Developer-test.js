@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { DeveloperContainer } from "../Developer";
+import { DeveloperContainer } from "../";
 import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Backend Developer Container", () => {

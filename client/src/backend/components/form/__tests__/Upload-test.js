@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import renderer from "react-test-renderer";
-import { Upload as FormUpload } from "backend/components/form";
+import FormUpload from "../Upload";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";
 Enzyme.configure({ adapter: new Adapter() });
