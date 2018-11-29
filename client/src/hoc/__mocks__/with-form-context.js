@@ -9,7 +9,6 @@ function getDisplayName(WrappedComponent) {
   }
   return Wrapped.displayName || Wrapped.name || "Component";
 }
-
 export default function withFormContext(WrappedComponent) {
   const displayName = `HigherOrder.FetchData('${getDisplayName(
     WrappedComponent

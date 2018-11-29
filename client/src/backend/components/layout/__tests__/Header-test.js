@@ -1,4 +1,4 @@
-jest.mock("containers/global/Notifications", () => "notifications");
+jest.mock("global/containers/notifications", () => "notifications");
 import React from "react";
 import renderer from "react-test-renderer";
 import Header from "../Header";

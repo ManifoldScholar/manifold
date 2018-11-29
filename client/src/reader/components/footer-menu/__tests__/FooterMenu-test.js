@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import FooterMenu from "../FooterMenu";
+import FooterMenu from "../index";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
 

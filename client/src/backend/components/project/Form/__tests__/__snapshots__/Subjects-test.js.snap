@@ -32,12 +32,6 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
           type="text"
           value=""
         />
-        <button
-          aria-hidden="true"
-          className="manicon manicon-plus"
-          onClick={[Function]}
-          type="button"
-        />
       </div>
       <nav
         className="predictive-list"

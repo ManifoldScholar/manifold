@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { PasswordResetContainer } from "../PasswordReset";
+import { PasswordResetContainer } from "../";
 
 describe("Frontend PasswordReset Container", () => {
   const component = renderer.create(

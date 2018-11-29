@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import LoadingBar from "../LoadingBar";
+import LoadingBar from "../";
 
 describe("Global.LoadingBar component", () => {
   it("renders correctly", () => {

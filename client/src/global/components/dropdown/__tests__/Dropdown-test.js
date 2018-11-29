@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Dropdown from "../Dropdown";
+import Dropdown from "../";
 
 describe("Global.Dropdown component", () => {
   function triggerComponentMock() {

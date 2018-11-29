@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Avatar from "../Avatar";
+import Avatar from "../";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";
 

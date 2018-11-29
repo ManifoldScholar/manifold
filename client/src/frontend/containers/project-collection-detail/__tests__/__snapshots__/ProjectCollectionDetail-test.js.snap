@@ -83,12 +83,12 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
           </button>
           <label
             className="screen-reader-text"
-            htmlFor="filters-search-5"
+            htmlFor="filters-search-2"
           >
             Enter Search Criteria
           </label>
           <input
-            id="filters-search-5"
+            id="filters-search-2"
             onChange={[Function]}
             placeholder="Search…"
             type="text"

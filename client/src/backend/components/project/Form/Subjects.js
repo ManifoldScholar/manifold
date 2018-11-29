@@ -78,7 +78,6 @@ export class ProjectSubjects extends PureComponent {
 
   render() {
     const project = this.props.project;
-
     return (
       <Form.HasMany
         label="Subjects"

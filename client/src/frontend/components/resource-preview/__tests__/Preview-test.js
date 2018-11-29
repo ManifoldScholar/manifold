@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Preview from "../Preview";
+import Preview from "../";
 import build from "test/fixtures/build";
 
 describe("Frontend.Resource.Preview component", () => {

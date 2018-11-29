@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { ProjectSubjects } from "../Subjects";
+import ProjectSubjects from "../Subjects";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";

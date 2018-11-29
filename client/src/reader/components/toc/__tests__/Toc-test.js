@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Toc from "../Toc";
+import Toc from "../";
 import { mount } from "enzyme";
 import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";

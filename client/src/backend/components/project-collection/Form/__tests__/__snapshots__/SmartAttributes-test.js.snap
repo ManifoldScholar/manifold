@@ -121,7 +121,7 @@ Array [
   >
     <label
       className=""
-      htmlFor="attributes[tagList]-tag-list-3"
+      htmlFor="attributes[tagList]-tag-list-1"
     >
       Tags
     </label>

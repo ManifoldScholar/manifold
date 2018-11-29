@@ -4,7 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";
 import renderer from "react-test-renderer";
 import { Provider } from "react-redux";
-import { ListItem } from "backend/components/resource";
+import Resource from "backend/components/resource";
 import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
@@ -35,7 +35,7 @@ describe("Backend.List.Searchable component", () => {
         pluralUnit="resources"
         pagination={pagination}
         paginationClickHandler={() => pageChangeMock}
-        entityComponent={ListItem}
+        entityComponent={Resource.ListItem}
         filterChangeHandler={filterChangeMock}
         filterOptions={{
           type: ["TWEET", "PROJECT_CREATED"]
@@ -84,7 +84,7 @@ describe("Backend.List.Searchable component", () => {
 
   it("should render the correct number of ListItems", () => {
     const wrapper = Enzyme.mount(root);
-    expect(wrapper.find(ListItem)).toHaveLength(2);
+    expect(wrapper.find(Resource.ListItem)).toHaveLength(2);
   });
 
   it("should show filter options when toggle is clicked", () => {

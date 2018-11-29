@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import UserMenuBody from "../UserMenuBody";
+import UserMenuBody from "../";
 import { wrapWithRouter } from "test/helpers/routing";
 import Enzyme from "enzyme/build/index";
 

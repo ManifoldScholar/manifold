@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { NotificationsComponent } from "../Notifications";
+import { NotificationsComponent } from "../";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
 import { wrapWithRouter } from "test/helpers/routing";

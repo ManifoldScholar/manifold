@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { mount } from "enzyme";
-import { BackendContainer } from "../Backend";
+import { BackendContainer } from "../";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
 

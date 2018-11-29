@@ -1,4 +1,4 @@
-jest.mock("components/backend/Form/CodeArea");
+jest.mock("backend/components/form/CodeArea");
 import React from "react";
 import { mount } from "enzyme";
 import StylesheetEditContainer from "../Edit";

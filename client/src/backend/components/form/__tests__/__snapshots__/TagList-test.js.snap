@@ -7,7 +7,7 @@ exports[`Backend.Form.TagList component renders correctly 1`] = `
 >
   <label
     className=""
-    htmlFor="attributes[tags]-tag-list-3"
+    htmlFor="attributes[tags]-tag-list-1"
   >
     Tags
   </label>

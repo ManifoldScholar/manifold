@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import UserMenuButton from "../UserMenuButton";
+import UserMenuButton from "../";
 
 describe("Global.UserMenu.UserMenuButton Component", () => {
   const props = {

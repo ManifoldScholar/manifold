@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { ResourceDetailContainer } from "../ResourceDetail";
+import { ResourceDetailContainer } from "../";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
