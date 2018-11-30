@@ -76,7 +76,6 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 aria-describedby="textarea-error-1"
                 id="textarea-1"
                 onChange={[Function]}
-                placeholder={undefined}
                 style={
                   Object {
                     "height": 100,
@@ -115,7 +114,6 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 }
                 multiple={false}
                 onDrop={[Function]}
-                style={undefined}
               >
                 <div
                   className="contents-empty"
@@ -186,7 +184,6 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 }
                 multiple={false}
                 onDrop={[Function]}
-                style={undefined}
               >
                 <div
                   className="contents-empty"
@@ -304,10 +301,8 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               id="masked-text-1"
               mask={[Function]}
               onChange={[Function]}
-              placeholder={undefined}
               placeholderChar="_"
               type="text"
-              value={undefined}
             />
             <span
               className="instructions"
@@ -431,7 +426,6 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 }
                 multiple={false}
                 onDrop={[Function]}
-                style={undefined}
               >
                 <div
                   className="contents-empty"

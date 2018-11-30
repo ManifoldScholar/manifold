@@ -84,10 +84,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/general"
               onClick={[Function]}
-              style={undefined}
             >
               General
             </a>
@@ -95,10 +93,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/project-page"
               onClick={[Function]}
-              style={undefined}
             >
               Appearance
             </a>
@@ -106,10 +102,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/permissions"
               onClick={[Function]}
-              style={undefined}
             >
               Permissions
             </a>
@@ -117,10 +111,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/collaborators"
               onClick={[Function]}
-              style={undefined}
             >
               People
             </a>
@@ -128,10 +120,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/texts"
               onClick={[Function]}
-              style={undefined}
             >
               Texts
             </a>
@@ -139,10 +129,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/resources"
               onClick={[Function]}
-              style={undefined}
             >
               Resources
             </a>
@@ -150,10 +138,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/collections"
               onClick={[Function]}
-              style={undefined}
             >
               Collections
             </a>
@@ -161,10 +147,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/events"
               onClick={[Function]}
-              style={undefined}
             >
               Activity
             </a>
@@ -172,10 +156,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/metadata"
               onClick={[Function]}
-              style={undefined}
             >
               Metadata
             </a>
@@ -183,10 +165,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/social"
               onClick={[Function]}
-              style={undefined}
             >
               Social Integrations
             </a>
@@ -194,10 +174,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/1/log"
               onClick={[Function]}
-              style={undefined}
             >
               Log
             </a>
@@ -223,10 +201,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/general"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   General
                 </a>
@@ -234,10 +210,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/project-page"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Appearance
                 </a>
@@ -245,10 +219,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/permissions"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Permissions
                 </a>
@@ -256,10 +228,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/collaborators"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   People
                 </a>
@@ -267,10 +237,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/texts"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Texts
                 </a>
@@ -278,10 +246,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/resources"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Resources
                 </a>
@@ -289,10 +255,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/collections"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Collections
                 </a>
@@ -300,10 +264,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/events"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Activity
                 </a>
@@ -311,10 +273,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/metadata"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Metadata
                 </a>
@@ -322,10 +282,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/social"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Social Integrations
                 </a>
@@ -333,10 +291,8 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/1/log"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Log
                 </a>

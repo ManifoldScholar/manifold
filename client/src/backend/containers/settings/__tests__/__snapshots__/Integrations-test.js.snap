@@ -51,7 +51,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[integrations][facebookAppId]-text-input-1"
                     id="attributes[integrations][facebookAppId]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -70,7 +69,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[secrets][facebookAppSecret]-text-input-1"
                     id="attributes[secrets][facebookAppSecret]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="password"
                     value=""
                   />
@@ -104,7 +102,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[integrations][twitterAppId]-text-input-1"
                     id="attributes[integrations][twitterAppId]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -123,7 +120,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[secrets][twitterAppSecret]-text-input-1"
                     id="attributes[secrets][twitterAppSecret]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="password"
                     value=""
                   />
@@ -142,7 +138,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[integrations][twitterAccessToken]-text-input-1"
                     id="attributes[integrations][twitterAccessToken]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -161,7 +156,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
                     id="attributes[secrets][twitterAccessTokenSecret]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="password"
                     value=""
                   />
@@ -210,7 +204,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                       }
                       multiple={false}
                       onDrop={[Function]}
-                      style={undefined}
                     >
                       <div
                         className="contents-empty"
@@ -264,7 +257,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                       aria-describedby="textarea-error-1"
                       id="textarea-1"
                       onChange={[Function]}
-                      placeholder={undefined}
                       style={
                         Object {
                           "height": 100,
@@ -288,7 +280,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[integrations][googleProjectId]-text-input-1"
                     id="attributes[integrations][googleProjectId]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -307,7 +298,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[integrations][googlePrivateKeyId]-text-input-1"
                     id="attributes[integrations][googlePrivateKeyId]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -326,7 +316,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[integrations][googleClientEmail]-text-input-1"
                     id="attributes[integrations][googleClientEmail]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -345,7 +334,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[integrations][googleClientId]-text-input-1"
                     id="attributes[integrations][googleClientId]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -379,7 +367,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[integrations][googleOauthClientId]-text-input-1"
                     id="attributes[integrations][googleOauthClientId]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -398,7 +385,6 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     aria-describedby="attributes[secrets][googleOauthClientSecret]-text-input-1"
                     id="attributes[secrets][googleOauthClientSecret]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="password"
                     value=""
                   />

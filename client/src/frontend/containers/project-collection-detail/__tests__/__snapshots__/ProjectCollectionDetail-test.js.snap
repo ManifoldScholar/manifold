@@ -39,7 +39,6 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
               className="manicon-svg"
               fill="currentColor"
               height={56}
-              stroke={undefined}
               viewBox="0 0 64 64"
               width={56}
               xmlns="http://www.w3.org/2000/svg"

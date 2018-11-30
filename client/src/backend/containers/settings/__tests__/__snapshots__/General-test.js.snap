@@ -180,7 +180,6 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 aria-describedby="attributes[general][socialShareMessage]-text-input-1"
                 id="attributes[general][socialShareMessage]-text-input-1"
                 onChange={[Function]}
-                placeholder={undefined}
                 type="text"
                 value=""
               />

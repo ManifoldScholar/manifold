@@ -30,7 +30,6 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
       }
       multiple={false}
       onDrop={[Function]}
-      style={undefined}
     >
       <div
         className="contents-empty"
@@ -99,7 +98,6 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
       }
       multiple={false}
       onDrop={[Function]}
-      style={undefined}
     >
       <div
         className="contents-image-preview"
@@ -178,7 +176,6 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
       }
       multiple={false}
       onDrop={[Function]}
-      style={undefined}
     >
       <div
         className="contents-image-preview"
@@ -257,7 +254,6 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
       }
       multiple={false}
       onDrop={[Function]}
-      style={undefined}
     >
       <div
         className="contents-image-preview"

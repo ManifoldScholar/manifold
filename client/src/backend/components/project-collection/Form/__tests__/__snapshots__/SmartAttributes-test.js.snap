@@ -16,7 +16,6 @@ Array [
       aria-describedby="attributes[numberOfProjects]-text-input-1"
       id="attributes[numberOfProjects]-text-input-1"
       onChange={[Function]}
-      placeholder={undefined}
       type="number"
       value=""
     />

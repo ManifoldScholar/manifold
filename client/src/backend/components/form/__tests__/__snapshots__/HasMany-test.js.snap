@@ -103,14 +103,12 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
       >
         <input
           aria-describedby={null}
-          aria-label={undefined}
           className="text-input"
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
-          placeholder={undefined}
           type="text"
           value=""
         />

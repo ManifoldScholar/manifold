@@ -3,7 +3,6 @@
 exports[`Global.Avatar component renders correctly 1`] = `
 <figure
   className="avatar"
-  style={undefined}
 >
   <span
     className="screen-reader-text"

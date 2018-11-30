@@ -6,9 +6,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
     className="vertical-list-primary flush"
   >
     <section>
-      <ul
-        className={undefined}
-      >
+      <ul>
         <li
           className="active"
         >

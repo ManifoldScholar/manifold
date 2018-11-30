@@ -14,9 +14,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
        
     </h3>
   </header>
-  <ul
-    className={undefined}
-  >
+  <ul>
     <li>
       <a
         href="/backend/projects/1"

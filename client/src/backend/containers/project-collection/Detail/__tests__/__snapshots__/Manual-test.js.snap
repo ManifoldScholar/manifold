@@ -5,9 +5,7 @@ exports[`Backend.ProjectCollection.Detail.Manual component renders correctly 1`]
   className="project-list grid"
 >
   <section>
-    <ul
-      className={undefined}
-    >
+    <ul>
       <li>
         <div
           className="item-wrapper"

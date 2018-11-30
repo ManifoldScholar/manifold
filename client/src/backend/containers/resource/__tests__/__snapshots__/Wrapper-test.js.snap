@@ -100,10 +100,8 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/resource/1/general"
               onClick={[Function]}
-              style={undefined}
             >
               General
             </a>
@@ -111,10 +109,8 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/resource/1/variants"
               onClick={[Function]}
-              style={undefined}
             >
               Variants
             </a>
@@ -122,10 +118,8 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/resource/1/metadata"
               onClick={[Function]}
-              style={undefined}
             >
               Metadata
             </a>
@@ -151,10 +145,8 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/resource/1/general"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   General
                 </a>
@@ -162,10 +154,8 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/resource/1/variants"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Variants
                 </a>
@@ -173,10 +163,8 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/resource/1/metadata"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Metadata
                 </a>

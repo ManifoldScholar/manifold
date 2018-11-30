@@ -5,7 +5,6 @@ exports[`Reader.Annotation.Popup.Menu.Link Component renders correctly 1`] = `
   className="popup-page top"
 >
   <button
-    className={undefined}
     onClick={[Function]}
   >
     <i
@@ -15,7 +14,6 @@ exports[`Reader.Annotation.Popup.Menu.Link Component renders correctly 1`] = `
     Follow Link
   </button>
   <button
-    className={undefined}
     onClick={[Function]}
   >
     <i

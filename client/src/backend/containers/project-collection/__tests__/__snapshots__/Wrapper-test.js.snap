@@ -24,11 +24,8 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
               <svg
                 aria-hidden="true"
                 className="manicon-svg"
-                fill={undefined}
-                height={undefined}
                 stroke="#52e3ac"
                 viewBox="0 0 60 60"
-                width={undefined}
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
@@ -135,7 +132,6 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     className="manicon-svg eye-open"
                     fill="currentColor"
                     height={30}
-                    stroke={undefined}
                     viewBox="0 0 32 32"
                     width={30}
                     xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +146,6 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     className="manicon-svg eye-closed"
                     fill="currentColor"
                     height={30}
-                    stroke={undefined}
                     viewBox="0 0 32 32"
                     width={30}
                     xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +169,6 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     className="manicon-svg"
                     fill="currentColor"
                     height={30}
-                    stroke={undefined}
                     viewBox="0 0 32 32"
                     width={30}
                     xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +215,6 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     className="manicon-svg eye-open"
                     fill="currentColor"
                     height={30}
-                    stroke={undefined}
                     viewBox="0 0 32 32"
                     width={30}
                     xmlns="http://www.w3.org/2000/svg"
@@ -236,7 +229,6 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     className="manicon-svg eye-closed"
                     fill="currentColor"
                     height={30}
-                    stroke={undefined}
                     viewBox="0 0 32 32"
                     width={30}
                     xmlns="http://www.w3.org/2000/svg"
@@ -260,7 +252,6 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     className="manicon-svg"
                     fill="currentColor"
                     height={30}
-                    stroke={undefined}
                     viewBox="0 0 32 32"
                     width={30}
                     xmlns="http://www.w3.org/2000/svg"

@@ -109,9 +109,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
             className="form-input"
             style={Object {}}
           >
-            <label
-              htmlFor={undefined}
-            >
+            <label>
               Role
             </label>
             <div
@@ -123,7 +121,6 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
               />
               <select
                 aria-describedby="select-error-1"
-                id={undefined}
                 onChange={[Function]}
                 value="admin"
               >

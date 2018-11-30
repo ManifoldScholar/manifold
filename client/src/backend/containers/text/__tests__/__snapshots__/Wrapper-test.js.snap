@@ -100,10 +100,8 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/text/1/general"
               onClick={[Function]}
-              style={undefined}
             >
               General
             </a>
@@ -111,10 +109,8 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/text/1/collaborators"
               onClick={[Function]}
-              style={undefined}
             >
               People
             </a>
@@ -122,10 +118,8 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/text/1/metadata"
               onClick={[Function]}
-              style={undefined}
             >
               Metadata
             </a>
@@ -133,10 +127,8 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/text/1/styles"
               onClick={[Function]}
-              style={undefined}
             >
               Styles
             </a>
@@ -144,10 +136,8 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects/text/1/ingestions/new"
               onClick={[Function]}
-              style={undefined}
             >
               Reingest
             </a>
@@ -173,10 +163,8 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/text/1/general"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   General
                 </a>
@@ -184,10 +172,8 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/text/1/collaborators"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   People
                 </a>
@@ -195,10 +181,8 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/text/1/metadata"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Metadata
                 </a>
@@ -206,10 +190,8 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/text/1/styles"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Styles
                 </a>
@@ -217,10 +199,8 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/backend/projects/text/1/ingestions/new"
                   onClick={[Function]}
-                  style={undefined}
                 >
                   Reingest
                 </a>

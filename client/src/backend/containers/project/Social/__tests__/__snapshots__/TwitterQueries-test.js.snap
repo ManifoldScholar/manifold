@@ -40,9 +40,7 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
         </a>
       </div>
       <section>
-        <ul
-          className={undefined}
-        >
+        <ul>
           <li
             className="active"
           >

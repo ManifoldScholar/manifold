@@ -5,7 +5,6 @@ exports[`Reader.Annotation.Popup.Menu.Annotate Component renders correctly when 
   className="popup-page top"
 >
   <button
-    className={undefined}
     onClick={[MockFunction]}
   >
     <i

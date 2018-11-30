@@ -4,7 +4,6 @@ exports[`Reader Annotation Annotatable Container renders correctly 1`] = `
 Array [
   <div
     className="no-focus-outline"
-    onClick={undefined}
     onKeyDown={[Function]}
     onMouseUp={[Function]}
     onTouchEnd={[Function]}
@@ -27,8 +26,6 @@ Array [
   </div>,
   <div
     className="annotation-popup"
-    onClick={undefined}
-    onMouseDown={undefined}
     role="presentation"
   />,
   <span />,

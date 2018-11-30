@@ -81,9 +81,7 @@ exports[`Backend Settings Subjects List Container renders correctly 1`] = `
                  subjects: 
               </p>
               <section>
-                <ul
-                  className={undefined}
-                >
+                <ul>
                   <li
                     className=""
                   >

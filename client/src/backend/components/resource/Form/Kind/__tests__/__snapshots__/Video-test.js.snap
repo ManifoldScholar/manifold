@@ -61,7 +61,6 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
         }
         multiple={false}
         onDrop={[Function]}
-        style={undefined}
       >
         <div
           className="contents-empty"
@@ -162,9 +161,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
         className="form-input"
         style={Object {}}
       >
-        <label
-          htmlFor={undefined}
-        >
+        <label>
           External Video Type
         </label>
         <div
@@ -176,9 +173,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
           />
           <select
             aria-describedby="select-error-1"
-            id={undefined}
             onChange={[Function]}
-            value={undefined}
           >
             <option
               value=""

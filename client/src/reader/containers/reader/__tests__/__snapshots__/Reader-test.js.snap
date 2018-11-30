@@ -145,7 +145,6 @@ exports[`Reader Reader Container renders correctly 1`] = `
                   </span>
                   <figure
                     className="avatar"
-                    style={undefined}
                   >
                     <span
                       className="screen-reader-text"

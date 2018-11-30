@@ -115,9 +115,7 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
           </a>
         </div>
         <section>
-          <ul
-            className={undefined}
-          >
+          <ul>
             <li>
               <a
                 href="/backend/projects/resource/2"
@@ -148,7 +146,6 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
                               className="manicon-svg"
                               fill="currentColor"
                               height={56}
-                              stroke={undefined}
                               viewBox="0 0 64 64"
                               width={56}
                               xmlns="http://www.w3.org/2000/svg"
@@ -217,7 +214,6 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
                               className="manicon-svg"
                               fill="currentColor"
                               height={56}
-                              stroke={undefined}
                               viewBox="0 0 64 64"
                               width={56}
                               xmlns="http://www.w3.org/2000/svg"

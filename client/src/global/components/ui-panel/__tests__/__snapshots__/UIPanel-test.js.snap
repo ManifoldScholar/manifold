@@ -15,7 +15,6 @@ exports[`Global.UIPanel component renders correctly 1`] = `
     >
       <button
         className="screen-reader-text"
-        onClick={undefined}
       >
         Close Panel
       </button>

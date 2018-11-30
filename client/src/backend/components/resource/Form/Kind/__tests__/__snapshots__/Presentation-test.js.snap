@@ -30,7 +30,6 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
       }
       multiple={false}
       onDrop={[Function]}
-      style={undefined}
     >
       <div
         className="contents-empty"
