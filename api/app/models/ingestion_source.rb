@@ -31,6 +31,18 @@ class IngestionSource < ApplicationRecord
   validates :source_identifier, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 
+  class << self
+    def proxy_path(ingestion_source)
+      Rails.application.routes.url_helpers.api_proxy_ingestion_source_path(
+        ingestion_source
+      )
+    end
+  end
+
+  def proxy_path
+    self.class.proxy_path self
+  end
+
   def to_s
     "ingestion source #{id}"
   end
