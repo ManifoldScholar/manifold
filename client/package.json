@@ -65,6 +65,7 @@
     "setupFiles": [
       "./src/test/setup.js"
     ],
+    "modulePathIgnorePatterns": ["<rootDir>/.*/__mocks__"],
     "globals": {
       "__CLIENT__": false,
       "__SERVER__": true
