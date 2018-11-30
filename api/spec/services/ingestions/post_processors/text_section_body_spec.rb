@@ -24,6 +24,8 @@ RSpec.describe Ingestions::PostProcessors::TextSectionBody do
     end.to change { text_section.body }
 
     image = Nokogiri::HTML.fragment(text_section.body).at("img")
-    expect(image.attributes["src"].value).to start_with "/system"
+    source = text.ingestion_sources.find_by(source_path: "images/an image.png")
+    expect(image.attributes["src"].value).to eq source.proxy_path
   end
+
 end

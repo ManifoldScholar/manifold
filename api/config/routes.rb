@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   namespace :api do
     mount Tus::Server => "/files"
 
+    namespace :proxy do
+      resources :ingestion_sources, only: [:show]
+    end
+
     namespace :v1 do
       resources :contacts, only: [:create]
       resources :test_mails, only: [:create]
