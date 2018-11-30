@@ -54,7 +54,6 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
                       className="manicon-svg"
                       fill="currentColor"
                       height={54}
-                      stroke={undefined}
                       viewBox="0 0 64 64"
                       width={54}
                       xmlns="http://www.w3.org/2000/svg"

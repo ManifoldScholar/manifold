@@ -15,7 +15,6 @@ exports[`Backend.Form.TextInput component renders correctly 1`] = `
     aria-describedby="attributes[property]-text-input-1"
     id="attributes[property]-text-input-1"
     onChange={[Function]}
-    placeholder={undefined}
     type="text"
     value=""
   />

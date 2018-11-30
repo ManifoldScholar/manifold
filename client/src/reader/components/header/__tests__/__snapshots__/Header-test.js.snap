@@ -92,7 +92,6 @@ exports[`Reader.Header Component renders correctly 1`] = `
               </span>
               <figure
                 className="avatar"
-                style={undefined}
               >
                 <span
                   className="screen-reader-text"
@@ -219,7 +218,6 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               </span>
               <figure
                 className="avatar"
-                style={undefined}
               >
                 <span
                   className="screen-reader-text"

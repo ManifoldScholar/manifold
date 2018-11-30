@@ -41,7 +41,6 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                   className="manicon-svg"
                   fill="#52e3ac"
                   height={26}
-                  stroke={undefined}
                   viewBox="0 0 32 32"
                   width={26}
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,10 +79,8 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/projects"
                   onClick={[Function]}
-                  style={undefined}
                   target={null}
                 >
                   Projects
@@ -92,10 +89,8 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  className={undefined}
                   href="/following"
                   onClick={[Function]}
-                  style={undefined}
                   target={null}
                 >
                   Following
@@ -148,7 +143,6 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                   </span>
                   <figure
                     className="avatar"
-                    style={undefined}
                   >
                     <span
                       className="screen-reader-text"

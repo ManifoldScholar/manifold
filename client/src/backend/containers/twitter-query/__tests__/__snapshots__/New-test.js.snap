@@ -57,9 +57,7 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
           className="form-input"
           style={Object {}}
         >
-          <label
-            htmlFor={undefined}
-          >
+          <label>
             Fetch tweets by:
           </label>
           <div
@@ -71,9 +69,7 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
             />
             <select
               aria-describedby="select-error-1"
-              id={undefined}
               onChange={[Function]}
-              value={undefined}
             >
               <option
                 value="most_recent"

@@ -3,7 +3,6 @@
 exports[`Backend Form Form Container renders correctly 1`] = `
 <div>
   <form
-    className={undefined}
     data-id="submit"
     onSubmit={[Function]}
   />

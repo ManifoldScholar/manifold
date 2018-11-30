@@ -36,7 +36,6 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
           }
           multiple={false}
           onDrop={[Function]}
-          style={undefined}
         >
           <div
             className="contents-empty"
@@ -97,7 +96,6 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
           }
           multiple={false}
           onDrop={[Function]}
-          style={undefined}
         >
           <div
             className="contents-empty"
@@ -166,7 +164,6 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
         }
         multiple={false}
         onDrop={[Function]}
-        style={undefined}
       >
         <div
           className="contents-empty"
@@ -232,7 +229,6 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
         }
         multiple={false}
         onDrop={[Function]}
-        style={undefined}
       >
         <div
           className="contents-empty"
@@ -305,7 +301,6 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
         }
         multiple={false}
         onDrop={[Function]}
-        style={undefined}
       >
         <div
           className="contents-empty"

@@ -9,10 +9,8 @@ exports[`Backend.Navigation.Secondary component renders correctly 1`] = `
       <li>
         <a
           aria-current={null}
-          className={undefined}
           href="/backend/projects"
           onClick={[Function]}
-          style={undefined}
         >
           projects
         </a>
@@ -20,10 +18,8 @@ exports[`Backend.Navigation.Secondary component renders correctly 1`] = `
       <li>
         <a
           aria-current={null}
-          className={undefined}
           href="/backend/records"
           onClick={[Function]}
-          style={undefined}
         >
           records
         </a>

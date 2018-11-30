@@ -114,7 +114,6 @@ exports[`Backend Project New Container renders correctly 1`] = `
                   aria-describedby="textarea-error-1"
                   id="textarea-1"
                   onChange={[Function]}
-                  placeholder={undefined}
                   style={
                     Object {
                       "height": 100,

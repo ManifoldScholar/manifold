@@ -33,7 +33,6 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
                 className="manicon-svg"
                 fill="#52e3ac"
                 height={26}
-                stroke={undefined}
                 viewBox="0 0 32 32"
                 width={26}
                 xmlns="http://www.w3.org/2000/svg"

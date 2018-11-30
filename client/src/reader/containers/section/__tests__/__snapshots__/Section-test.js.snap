@@ -8,7 +8,6 @@ exports[`Reader Section Container renders correctly 1`] = `
     >
       <div
         className="no-focus-outline"
-        onClick={undefined}
         onKeyDown={[Function]}
         onMouseUp={[Function]}
         onTouchEnd={[Function]}
@@ -42,8 +41,6 @@ exports[`Reader Section Container renders correctly 1`] = `
       </div>
       <div
         className="annotation-popup"
-        onClick={undefined}
-        onMouseDown={undefined}
         role="presentation"
       />
       <span />

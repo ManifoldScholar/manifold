@@ -819,7 +819,6 @@ exports[`Backend Project General Container renders correctly 1`] = `
                         }
                         multiple={false}
                         onDrop={[Function]}
-                        style={undefined}
                       >
                         <div
                           className="contents-empty"

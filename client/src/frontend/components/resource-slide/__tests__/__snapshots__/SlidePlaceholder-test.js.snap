@@ -21,7 +21,6 @@ exports[`Frontend.ResourceList.Slide.SlidePlaceholder component renders correctl
           className="manicon-svg"
           fill="currentColor"
           height={120}
-          stroke={undefined}
           viewBox="0 0 64 64"
           width={120}
           xmlns="http://www.w3.org/2000/svg"

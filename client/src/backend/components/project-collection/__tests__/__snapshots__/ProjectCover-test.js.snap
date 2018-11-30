@@ -34,7 +34,6 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
               className="manicon-svg minus"
               fill="currentColor"
               height={28}
-              stroke={undefined}
               viewBox="0 0 32 32"
               width={28}
               xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +50,6 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
               className="manicon-svg check"
               fill="currentColor"
               height={28}
-              stroke={undefined}
               viewBox="0 0 32 32"
               width={28}
               xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +63,6 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
               className="manicon-svg plus"
               fill="currentColor"
               height={28}
-              stroke={undefined}
               viewBox="0 0 32 32"
               width={28}
               xmlns="http://www.w3.org/2000/svg"

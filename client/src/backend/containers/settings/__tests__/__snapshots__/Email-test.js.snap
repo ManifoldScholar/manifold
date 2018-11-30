@@ -123,7 +123,6 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
                     aria-describedby="attributes[email][replyToName]-text-input-1"
                     id="attributes[email][replyToName]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -188,9 +187,7 @@ The Manifold Team"
                     className="form-input"
                     style={Object {}}
                   >
-                    <label
-                      htmlFor={undefined}
-                    >
+                    <label>
                       Email Delivery Method
                     </label>
                     <div
@@ -202,9 +199,7 @@ The Manifold Team"
                       />
                       <select
                         aria-describedby="select-error-1"
-                        id={undefined}
                         onChange={[Function]}
-                        value={undefined}
                       >
                         <option
                           value=""
@@ -254,7 +249,6 @@ The Manifold Team"
                     aria-describedby="attributes[email][sendmailSettingsLocation]-text-input-1"
                     id="attributes[email][sendmailSettingsLocation]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -278,7 +272,6 @@ The Manifold Team"
                     aria-describedby="attributes[email][sendmailSettingsArguments]-text-input-1"
                     id="attributes[email][sendmailSettingsArguments]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -440,7 +433,6 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
                     aria-describedby="attributes[email][replyToName]-text-input-1"
                     id="attributes[email][replyToName]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -505,9 +497,7 @@ The Manifold Team"
                     className="form-input"
                     style={Object {}}
                   >
-                    <label
-                      htmlFor={undefined}
-                    >
+                    <label>
                       Email Delivery Method
                     </label>
                     <div
@@ -519,9 +509,7 @@ The Manifold Team"
                       />
                       <select
                         aria-describedby="select-error-1"
-                        id={undefined}
                         onChange={[Function]}
-                        value={undefined}
                       >
                         <option
                           value=""
@@ -571,7 +559,6 @@ The Manifold Team"
                     aria-describedby="attributes[email][smtpSettingsAddress]-text-input-1"
                     id="attributes[email][smtpSettingsAddress]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -595,7 +582,6 @@ The Manifold Team"
                     aria-describedby="attributes[email][smtpSettingsPort]-text-input-1"
                     id="attributes[email][smtpSettingsPort]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -619,7 +605,6 @@ The Manifold Team"
                     aria-describedby="attributes[email][smtpSettingsUserName]-text-input-1"
                     id="attributes[email][smtpSettingsUserName]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="text"
                     value=""
                   />
@@ -643,7 +628,6 @@ The Manifold Team"
                     aria-describedby="attributes[secrets][smtpSettingsPassword]-text-input-1"
                     id="attributes[secrets][smtpSettingsPassword]-text-input-1"
                     onChange={[Function]}
-                    placeholder={undefined}
                     type="password"
                     value=""
                   />

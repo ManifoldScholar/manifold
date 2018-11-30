@@ -70,9 +70,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
          resources: 
       </p>
       <section>
-        <ul
-          className={undefined}
-        >
+        <ul>
           <li>
             <a
               href="/backend/projects/resource/1"
@@ -103,7 +101,6 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
                             className="manicon-svg"
                             fill="currentColor"
                             height={56}
-                            stroke={undefined}
                             viewBox="0 0 64 64"
                             width={56}
                             xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +169,6 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
                             className="manicon-svg"
                             fill="currentColor"
                             height={56}
-                            stroke={undefined}
                             viewBox="0 0 64 64"
                             width={56}
                             xmlns="http://www.w3.org/2000/svg"
@@ -424,9 +420,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
          resources: 
       </p>
       <section>
-        <ul
-          className={undefined}
-        >
+        <ul>
           <div>
             Can we build 
             Image

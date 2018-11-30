@@ -83,9 +83,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
            events: 
         </p>
         <section>
-          <ul
-            className={undefined}
-          >
+          <ul>
             <li
               className="list-item"
             >

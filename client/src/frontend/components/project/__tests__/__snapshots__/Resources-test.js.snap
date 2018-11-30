@@ -201,7 +201,6 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                             className="manicon-svg"
                             fill="currentColor"
                             height={56}
-                            stroke={undefined}
                             viewBox="0 0 64 64"
                             width={56}
                             xmlns="http://www.w3.org/2000/svg"
@@ -353,7 +352,6 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                             className="manicon-svg"
                             fill="currentColor"
                             height={56}
-                            stroke={undefined}
                             viewBox="0 0 64 64"
                             width={56}
                             xmlns="http://www.w3.org/2000/svg"
@@ -475,7 +473,6 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
               <a
                 data-id="page-prev"
                 href="#pagination-target"
-                onClick={undefined}
               >
                 <i
                   aria-hidden="true"
@@ -498,7 +495,6 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
             >
               <a
                 href="#pagination-target"
-                onClick={undefined}
               >
                 <span
                   aria-hidden="true"
@@ -518,7 +514,6 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
             >
               <a
                 href="#pagination-target"
-                onClick={undefined}
               >
                 <span
                   aria-hidden="true"
@@ -539,7 +534,6 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
               <a
                 data-id="page-next"
                 href="#pagination-target"
-                onClick={undefined}
               >
                 <span
                   className="screen-reader-text"

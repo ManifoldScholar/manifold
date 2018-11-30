@@ -17,10 +17,8 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
         <li>
           <a
             aria-current={null}
-            className={undefined}
             href="/backend/settings/general"
             onClick={[Function]}
-            style={undefined}
           >
             General
           </a>
@@ -28,10 +26,8 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
         <li>
           <a
             aria-current={null}
-            className={undefined}
             href="/backend/settings/theme"
             onClick={[Function]}
-            style={undefined}
           >
             Theme
           </a>
@@ -39,10 +35,8 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
         <li>
           <a
             aria-current={null}
-            className={undefined}
             href="/backend/settings/integrations"
             onClick={[Function]}
-            style={undefined}
           >
             Integrations
           </a>
@@ -50,10 +44,8 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
         <li>
           <a
             aria-current={null}
-            className={undefined}
             href="/backend/settings/subjects"
             onClick={[Function]}
-            style={undefined}
           >
             Subjects
           </a>
@@ -61,10 +53,8 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
         <li>
           <a
             aria-current={null}
-            className={undefined}
             href="/backend/settings/email"
             onClick={[Function]}
-            style={undefined}
           >
             Email
           </a>

@@ -30,7 +30,6 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
               className="manicon-svg"
               fill="#52e3ac"
               height={26}
-              stroke={undefined}
               viewBox="0 0 32 32"
               width={26}
               xmlns="http://www.w3.org/2000/svg"
@@ -52,15 +51,12 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
       >
         <ul
           className="links"
-          style={undefined}
         >
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/dashboard"
               onClick={[Function]}
-              style={undefined}
               target={null}
             >
               Dashboard
@@ -69,10 +65,8 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/projects"
               onClick={[Function]}
-              style={undefined}
               target={null}
             >
               Projects
@@ -81,10 +75,8 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/records"
               onClick={[Function]}
-              style={undefined}
               target={null}
             >
               Records
@@ -93,10 +85,8 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              className={undefined}
               href="/backend/settings"
               onClick={[Function]}
-              style={undefined}
               target={null}
             >
               Settings
@@ -107,9 +97,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
       <nav
         className="user-links show-75"
       >
-        <ul
-          style={undefined}
-        >
+        <ul>
           <li>
             <a
               className="button-mode"
@@ -131,7 +119,6 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
               </span>
               <figure
                 className="avatar"
-                style={undefined}
               >
                 <span
                   className="screen-reader-text"
