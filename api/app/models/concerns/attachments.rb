@@ -151,6 +151,20 @@ module Attachments
           BASE_STYLES.keys
         end
 
+        def #{field}_processed?
+          #{field}_attacher.stored?
+        end 
+
+        def show_#{field}_placeholder?
+          return false unless #{field}_is_image?
+          return false if #{field}_processed?
+          true
+        end
+
+        def #{field}_placeholder(style)
+          "/static/images/attachment_placeholders/\#{style}.png"
+        end
+
         def #{field}_versions?
           #{field}.is_a? Hash
         end
@@ -210,11 +224,13 @@ module Attachments
         def #{field}_styles
           original = #{field}_original&.url
           styles = style_keys.map do |style|
-            if #{field}_data&.key? style.to_s
-              value = #{field}[style].url
-            else 
-              value = original
-            end
+            value = if #{field}_data&.key? style.to_s
+                      #{field}[style].url
+                    elsif show_#{field}_placeholder?
+                      #{field}_placeholder(style)
+                    else
+                      nil
+                    end
             [style, value]
           end
           styles.push([:original, original])

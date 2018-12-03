@@ -11,17 +11,20 @@ RSpec.describe Attachments do
       t.datetime :attached_updated_at
 
       t.jsonb :attached_data
+      t.jsonb :resource_data
     end
 
     model do
       include Attachments
 
       manifold_has_attached_file :attached, :image
+      manifold_has_attached_file :resource, :resource
     end
   end
   let(:instance) do
     instance = AttachableClass.new
     instance.attached = fixture_file_upload(Rails.root.join('spec', 'data','assets','images','test_avatar.jpg'))
+    instance.resource = fixture_file_upload(Rails.root.join('spec', 'data','ingestion','ms_word','example.docx'))
     instance.save
 
     instance.reload
@@ -49,7 +52,48 @@ RSpec.describe Attachments do
   end
 
   it "enqueues a processing job" do
-    expect{ instance.save }.to have_enqueued_job(Attachments::ProcessAttachmentJob)
+    expect{ instance.save }.to have_enqueued_job(Attachments::ProcessAttachmentJob).exactly(:twice)
+  end
+
+  context "when unprocessable source attachment" do
+    describe "its styles hash" do
+      it "has nil values for all keys except :original" do
+        expect(instance.resource_styles.except(:original).values).to all(be_nil)
+        expect(instance.resource_styles[:original]).to_not be_nil
+      end
+    end
+  end
+
+  describe "determining whether to show placeholder" do
+    let(:attachable) do
+      attachable = AttachableClass.new
+      attachable.attached = fixture_file_upload(Rails.root.join('spec', 'data','assets','images','test_avatar.jpg'))
+      attachable.resource = fixture_file_upload(Rails.root.join('spec', 'data','ingestion','ms_word','example.docx'))
+      attachable.save
+
+      attachable.reload
+    end
+
+    context "when attachment is image" do
+      context "before processing" do
+        it "returns true" do
+          expect(attachable.show_attached_placeholder?).to eq true
+        end
+      end
+
+      context "after processing" do
+        before { perform_enqueued_jobs { attachable.save } }
+        it "returns false" do
+          expect(attachable.show_attached_placeholder?).to eq false
+        end
+      end
+    end
+
+    context "when attachment is not image" do
+      it "returns false" do
+        expect(attachable.show_resource_placeholder?).to eq false
+      end
+    end
   end
 
   describe "methods added for an image attachment called 'attached'" do
@@ -57,6 +101,8 @@ RSpec.describe Attachments do
     include_examples "an Attachment defined method", :attached_url #TODO: These values include the generated paths
 
     include_examples "an Attachment defined method", :attached_extension, "jpg"
+    include_examples "an Attachment defined method", :attached_processed?, true
+    include_examples "an Attachment defined method", :show_attached_placeholder?, false
     include_examples "an Attachment defined method", :attached_file_name, "test_avatar.jpg"
     include_examples "an Attachment defined method", :attached_file_size, 64254
     include_examples "an Attachment defined method", :attached_content_type, "image/jpeg"
