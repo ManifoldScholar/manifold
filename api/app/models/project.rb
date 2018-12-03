@@ -241,7 +241,7 @@ class Project < ApplicationRecord
   end
 
   def resource_tags
-    resources.joins(:tags).select("tags.name")
+    resources.joins(:tags).distinct.pluck("tags.name")
   end
 
   def following_twitter_accounts?
