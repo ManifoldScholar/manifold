@@ -229,6 +229,7 @@ common: &1
           - audio/ogg
           - audio/wav
           - audio/mp3
+          - audio/mpeg
           - video/x-flv
           - video/mp4
           - video/webm
@@ -352,7 +353,10 @@ common: &1
           - text/csv
           - text/html
           - text/plain
-          - audio
+          - audio/ogg
+          - audio/wav
+          - audio/mp3
+          - audio/mpeg
           - video/x-flv
           - video/mp4
           - video/webm
