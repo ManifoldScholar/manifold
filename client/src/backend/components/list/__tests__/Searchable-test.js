@@ -47,8 +47,7 @@ describe("Backend.List.Searchable component", () => {
   function buildComponent(props) {
     return (
       <div>
-        Can we build {props.entity.attributes.title}?
-        <p>Yes, we can.</p>
+        Can we build {props.entity.attributes.title}?<p>Yes, we can.</p>
       </div>
     );
   }

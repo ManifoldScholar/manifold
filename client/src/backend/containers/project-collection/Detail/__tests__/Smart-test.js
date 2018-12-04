@@ -6,7 +6,9 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 
 describe("Backend.ProjectCollection.Detail.Smart component", () => {
-  const projectCollection = build.entity.projectCollection("1", { manuallySorted: false });
+  const projectCollection = build.entity.projectCollection("1", {
+    manuallySorted: false
+  });
   const project = build.entity.project("2");
   const store = build.store();
 
@@ -14,10 +16,7 @@ describe("Backend.ProjectCollection.Detail.Smart component", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <Smart
-            projectCollection={projectCollection}
-            projects={[project]}
-          />
+          <Smart projectCollection={projectCollection} projects={[project]} />
         </Provider>
       )
     );

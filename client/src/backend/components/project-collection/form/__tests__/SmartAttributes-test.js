@@ -13,10 +13,13 @@ describe("Backend.ProjectCollection.Form.SmartAttributes component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
       <Provider store={store}>
-        <FormContext.Provider value={{ getModelValue: value => value, sourceModel: projectCollection }} >
-          <SmartAttributes
-            projectCollection={projectCollection}
-          />
+        <FormContext.Provider
+          value={{
+            getModelValue: value => value,
+            sourceModel: projectCollection
+          }}
+        >
+          <SmartAttributes projectCollection={projectCollection} />
         </FormContext.Provider>
       </Provider>
     );

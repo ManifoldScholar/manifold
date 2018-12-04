@@ -17,5 +17,4 @@ describe("Global.Helper.SimpleFormat component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

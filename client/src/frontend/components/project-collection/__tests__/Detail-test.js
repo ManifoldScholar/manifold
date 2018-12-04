@@ -6,7 +6,11 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.ProjectCollection.Detail component", () => {
   const projects = [build.entity.project("1"), build.entity.project("2")];
-  const projectCollection = build.entity.projectCollection("1", {}, { projects });
+  const projectCollection = build.entity.projectCollection(
+    "1",
+    {},
+    { projects }
+  );
 
   it("renders correctly", () => {
     const component = renderer.create(

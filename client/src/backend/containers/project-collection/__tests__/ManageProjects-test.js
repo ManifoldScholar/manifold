@@ -7,7 +7,11 @@ import { Provider } from "react-redux";
 
 describe("Backend.ProjectCollection.ManageProjects container", () => {
   const projects = [build.entity.project("1"), build.entity.project("2")];
-  const projectCollection = build.entity.projectCollection("1", {}, { projects });
+  const projectCollection = build.entity.projectCollection(
+    "1",
+    {},
+    { projects }
+  );
   const store = build.store();
 
   const component = renderer.create(

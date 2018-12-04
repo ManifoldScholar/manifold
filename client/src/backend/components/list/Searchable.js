@@ -341,14 +341,13 @@ export class ListSearchable extends PureComponent {
 
     return (
       <div>
-        {this.props.showEntityCount &&
-          this.props.pagination && (
-            <Utility.EntityCount
-              pagination={this.props.pagination}
-              singularUnit={this.props.singularUnit}
-              pluralUnit={this.props.pluralUnit}
-            />
-          )}
+        {this.props.showEntityCount && this.props.pagination && (
+          <Utility.EntityCount
+            pagination={this.props.pagination}
+            singularUnit={this.props.singularUnit}
+            pluralUnit={this.props.pluralUnit}
+          />
+        )}
         {!this.props.columnarNav && this.renderButtons(this.props)}
         {entities.length > 0 ? (
           <SimpleList

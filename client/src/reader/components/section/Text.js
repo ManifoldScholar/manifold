@@ -171,7 +171,7 @@ export default class Text extends Component {
               notations={notations}
               annotations={this.state.filteredAnnotations}
               containerSize={typography.margins.current}
-              bodySelector="[data-id=&quot;body&quot;]"
+              bodySelector='[data-id="body"]'
               text={this.props.text}
               location={this.props.location}
               history={this.props.history}
