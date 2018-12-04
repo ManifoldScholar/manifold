@@ -41,11 +41,6 @@ export default class FatalError extends PureComponent {
     return this.error.clientTraceTruncate;
   }
 
-  get componentTrace() {
-    if (!this.error || !this.error.componentTrace) return null;
-    return this.error.componentTrace;
-  }
-
   render() {
     if (!this.props.fatalError) return null;
     const { error } = this.props.fatalError;
@@ -110,9 +105,6 @@ export default class FatalError extends PureComponent {
                     trace={this.clientTrace}
                     truncate={this.clientTraceTruncate}
                   />
-                ) : null}
-                {this.componentTrace ? (
-                  <ComponentTrace trace={this.componentTrace} />
                 ) : null}
               </div>
             ) : null}
