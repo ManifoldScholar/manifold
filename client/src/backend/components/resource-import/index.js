@@ -1,7 +1,7 @@
 import Control from "./Control";
-import Controls from "./Controls";
+import Controls from "./controls";
 import Result from "./Result";
-import Results from "./Results";
+import Results from "./results";
 
 export default {
   Control,

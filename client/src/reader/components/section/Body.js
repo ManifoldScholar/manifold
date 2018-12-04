@@ -1,6 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
-import BodyNodes from "./BodyNodes";
+import BodyNodes from "./body-nodes";
 
 export default class Body extends Component {
   static propTypes = {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Full from "./Full";
+import Full from "./full";
 import EmptyMessage from "./EmptyMessage";
 
 export default class DetailedList extends PureComponent {

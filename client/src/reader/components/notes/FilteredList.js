@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Partial from "./Partial";
+import Partial from "./partial";
 import EmptyMessage from "./EmptyMessage";
 
 export default class FilteredList extends PureComponent {

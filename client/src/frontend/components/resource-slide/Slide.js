@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 import ResourcePreview from "frontend/components/resource-preview";
 import get from "lodash/get";
 import classnames from "classnames";

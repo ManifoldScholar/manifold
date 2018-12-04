@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import Cover from "./Cover";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 
 export default class TextThumbnail extends Component {
   static displayName = "Text.Thumbnail";

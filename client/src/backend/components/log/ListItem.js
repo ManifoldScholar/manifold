@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";

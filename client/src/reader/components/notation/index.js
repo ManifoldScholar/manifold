@@ -1,7 +1,7 @@
-import Collection from "./Collection";
+import Collection from "./collection";
 import Marker from "./Marker";
-import Resource from "./Resource";
-import Viewer from "./Viewer";
+import Resource from "./resource";
+import Viewer from "./viewer";
 
 export default {
   Collection,

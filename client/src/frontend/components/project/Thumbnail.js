@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Cover from "./Cover";
 import Follow from "./Follow";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
 // import { Project as GlobalProject } from 'components/global';
