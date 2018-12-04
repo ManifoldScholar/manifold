@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { usersAPI, requests } from "api";
 import { entityStoreActions, currentUserActions } from "actions";
-import Oauth from "./Oauth";
+import Oauth from "./oauth";
 import { select } from "utils/entityUtils";
 import Form from "global/components/form";
 import { possessivize } from "utils/string";

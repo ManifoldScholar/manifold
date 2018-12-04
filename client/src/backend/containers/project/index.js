@@ -1,4 +1,4 @@
-import Category from "./Category";
+import Category from "./category";
 import Collaborators from "./Collaborators";
 import Collections from "./Collections";
 import Events from "./Events";
@@ -8,10 +8,10 @@ import Metadata from "./Metadata";
 import New from "./New";
 import Permissions from "./Permissions";
 import ProjectPage from "./ProjectPage";
-import Resource from "./Resource";
+import Resource from "./resource";
 import Resources from "./Resources";
-import Social from "./Social";
-import Text from "./Text";
+import Social from "./social";
+import Text from "./text";
 import Texts from "./Texts";
 import Wrapper from "./Wrapper";
 

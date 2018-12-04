@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { SortableContainer } from "react-sortable-hoc";
-import ListItem from "./Orderable/ListItem";
+import ListItem from "./orderable-components/ListItem";
 import classnames from "classnames";
 import labelId from "helpers/labelId";
 

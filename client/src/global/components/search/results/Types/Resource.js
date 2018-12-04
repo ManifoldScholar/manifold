@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 import Resourceish from "frontend/components/resourceish";
 
 export default class SearchResultsTypeResource extends PureComponent {

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { matchPath, withRouter } from "react-router-dom";
-import NotFound from "global/containers/not-found";
+import NotFound from "global/containers/NotFound";
 
 /**
  * The public API for rendering the first <Route> that matches.

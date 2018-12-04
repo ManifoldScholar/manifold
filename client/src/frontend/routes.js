@@ -1,5 +1,5 @@
 import queryString from "query-string";
-import NotFound from "global/containers/not-found";
+import NotFound from "global/containers/NotFound";
 
 const routes = {
   component: "Frontend",

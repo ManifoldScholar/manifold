@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import SearchMenu from "global/components/search/menu";
-import UserMenuButton from "global/components/user-menu-button";
-import UserMenuBody from "global/components/user-menu-body";
-import UIPanel from "global/components/ui-panel";
+import UserMenuButton from "global/components/UserMenuButton";
+import UserMenuBody from "global/components/UserMenuBody";
+import UIPanel from "global/components/UIPanel";
 import { NavLink, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 

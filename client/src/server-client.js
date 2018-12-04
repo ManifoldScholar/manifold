@@ -20,7 +20,7 @@ import has from "lodash/has";
 import { matchRoutes } from "react-router-config";
 import { createLocation } from "history";
 import getRoutes from "/routes";
-import FatalError from "global/components/fatal-error";
+import FatalError from "global/components/FatalError";
 
 // Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
 // default TLS value appears to fix this. I believe this issue has

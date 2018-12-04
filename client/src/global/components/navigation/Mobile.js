@@ -5,9 +5,9 @@ import { matchPath } from "react-router";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import memoize from "lodash/memoize";
-import UserLinks from "./Mobile/UserLinks";
-import MobileSearch from "./Mobile/Search";
-import MobileBreadcrumb from "./Mobile/Breadcrumb";
+import UserLinks from "./mobile-components/UserLinks";
+import MobileSearch from "./mobile-components/Search";
+import MobileBreadcrumb from "./mobile-components/Breadcrumb";
 import FocusTrap from "focus-trap-react";
 
 import Authorize from "hoc/authorize";

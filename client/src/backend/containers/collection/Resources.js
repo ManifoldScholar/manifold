@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import List from "backend/components/list";
 import Resourceish from "frontend/components/resourceish";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 import { collectionsAPI, projectsAPI, requests } from "api";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";

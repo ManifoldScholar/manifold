@@ -1,5 +1,5 @@
 import ListItem from "./ListItem";
-import Form from "./Form";
+import Form from "./form";
 
 export default {
   ListItem,

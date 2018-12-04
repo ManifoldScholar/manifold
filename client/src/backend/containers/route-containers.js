@@ -1,5 +1,5 @@
-import Backend from "backend/containers/backend";
-import Dashboard from "backend/containers/dashboard";
+import Backend from "backend/containers/Backend";
+import Dashboard from "backend/containers/Dashboard";
 import Projects from "backend/containers/projects";
 import Resource from "backend/containers/resource";
 import ResourceImport from "backend/containers/resource-import";
@@ -12,7 +12,7 @@ import Ingestion from "backend/containers/ingestion";
 import ProjectCollection from "backend/containers/project-collection";
 import Permission from "backend/containers/permission";
 import TwitterQuery from "backend/containers/twitter-query";
-import Records from "backend/containers/records";
+import Records from "backend/containers/Records";
 import Users from "backend/containers/users";
 import Pages from "backend/containers/pages";
 import Features from "backend/containers/features";

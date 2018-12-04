@@ -4,7 +4,7 @@ import Layout from "frontend/components/layout";
 import Event from "frontend/components/event";
 import Utility from "frontend/components/utility";
 import lh from "helpers/linkHandler";
-import HeadContent from "global/components/head-content";
+import HeadContent from "global/components/HeadContent";
 
 export default class ProjectEvents extends Component {
   static displayName = "Project.Events";

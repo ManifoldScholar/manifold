@@ -4,7 +4,7 @@ import Dialog from "backend/components/dialog";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { Icon } from "global/components/svg";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 import { stylesheetsAPI, requests } from "api";
 import { notificationActions, entityStoreActions } from "actions";
 

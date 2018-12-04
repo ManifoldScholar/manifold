@@ -1,4 +1,4 @@
-import NotFound from "../global/containers/not-found";
+import NotFound from "../global/containers/NotFound";
 
 const routes = {
   name: "backend",

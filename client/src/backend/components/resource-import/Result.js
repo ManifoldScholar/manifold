@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Results from "./Results";
+import Results from "./results";
 
 export default class ResourceImportResult extends PureComponent {
   static displayName = "ResourceImport.Result";

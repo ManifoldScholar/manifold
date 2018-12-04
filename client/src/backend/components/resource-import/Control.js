@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Controls from "./Controls";
+import Controls from "./controls";
 import lh from "helpers/linkHandler";
 
 export default class ResourceImportState extends PureComponent {

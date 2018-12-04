@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import DOI from "global/components/meta/DOI";
 import Item from "global/components/meta/Item";
 import endsWith from "lodash/endsWith";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 
 export default class List extends Component {
   static displayName = "Meta.List";

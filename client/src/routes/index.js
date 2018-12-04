@@ -4,7 +4,7 @@ import readerRoutes from "reader/routes";
 import frontendRouteContainers from "frontend/containers/route-containers";
 import backendRouteContainers from "backend/containers/route-containers";
 import readerRouteContainers from "reader/containers/route-containers";
-import NotFound from "global/containers/not-found";
+import NotFound from "global/containers/NotFound";
 import hydrate from "./hydrate";
 
 export default () => {
