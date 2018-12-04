@@ -1,1 +1,1 @@
-export default prefix => `${prefix}1`
+export default prefix => `${prefix}1`;

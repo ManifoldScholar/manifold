@@ -7,7 +7,10 @@ import build from "test/fixtures/build";
 
 describe("Frontend ProjectCollections Container", () => {
   const store = build.store();
-  const projectCollections = [build.entity.projectCollection("1"), build.entity.projectCollection("2")];
+  const projectCollections = [
+    build.entity.projectCollection("1"),
+    build.entity.projectCollection("2")
+  ];
 
   const tree = renderer
     .create(

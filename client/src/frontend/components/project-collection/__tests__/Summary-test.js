@@ -8,10 +8,14 @@ import { Provider } from "react-redux";
 describe("Frontend.ProjectCollection.Placeholder component", () => {
   const store = build.store();
   const collectionProjects = [
-    { id: "1", relationships: { project: build.entity.project("1") }},
-    { id: "2", relationships: { project: build.entity.project("2") }}
+    { id: "1", relationships: { project: build.entity.project("1") } },
+    { id: "2", relationships: { project: build.entity.project("2") } }
   ];
-  const projectCollection = build.entity.projectCollection("1", { projectsCount: 2 }, { collectionProjects });
+  const projectCollection = build.entity.projectCollection(
+    "1",
+    { projectsCount: 2 },
+    { collectionProjects }
+  );
 
   it("renders correctly", () => {
     const component = renderer.create(

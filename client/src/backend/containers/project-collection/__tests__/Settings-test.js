@@ -15,7 +15,9 @@ describe("Backend.ProjectCollection.Settings container", () => {
         <ProjectCollectionSettings
           dispatch={store.dispatch}
           projectCollection={projectCollection}
-          projectCollectionMeta={{ relationships: { collectionProjects: build.pagination() } }}
+          projectCollectionMeta={{
+            relationships: { collectionProjects: build.pagination() }
+          }}
         />
       </Provider>
     )

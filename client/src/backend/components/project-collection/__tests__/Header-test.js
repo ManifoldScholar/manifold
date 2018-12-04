@@ -9,9 +9,7 @@ describe("Backend.ProjectCollection.Header component", () => {
 
   it("renders correctly", () => {
     const component = renderer.create(
-      wrapWithRouter(
-        <Header projectCollection={projectCollection} />
-      )
+      wrapWithRouter(<Header projectCollection={projectCollection} />)
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

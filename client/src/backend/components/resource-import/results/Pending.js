@@ -17,7 +17,8 @@ export default class ResourceImportResultsPending extends PureComponent {
           {`Row #${resourceImportRow.lineNumber} will update `}
           <Link to={lh.link("backendResource", resourceImportRow.resourceId)}>
             {resourceImportRow.resourceTitle}
-          </Link>.
+          </Link>
+          .
         </span>
       );
     } else if (resourceImportRow.isSkip) {

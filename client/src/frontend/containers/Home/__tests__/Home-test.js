@@ -7,10 +7,7 @@ import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend Home Container", () => {
   const store = build.store();
-  const projects = [
-    build.entity.project("1"),
-    build.entity.project("2")
-  ];
+  const projects = [build.entity.project("1"), build.entity.project("2")];
   const followedProjects = [
     build.entity.project("3"),
     build.entity.project("4")
@@ -18,7 +15,7 @@ describe("Frontend Home Container", () => {
   const projectCollections = [
     build.entity.projectCollection("1"),
     build.entity.projectCollection("2")
-  ]
+  ];
   const user = build.entity.user("5");
   user.favorites = {
     0: build.entity.project("6")

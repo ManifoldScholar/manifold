@@ -33,7 +33,8 @@ export default class TwitterQueryForm extends PureComponent {
         Learn more about Twitter{" "}
         <a target="_blank" rel="noopener noreferrer" href={twitterHelpUrl}>
           search operators
-        </a>.
+        </a>
+        .
       </p>
     );
 
