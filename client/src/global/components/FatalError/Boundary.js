@@ -24,10 +24,9 @@ class FatalErrorBoundary extends Component {
     }
   }
 
-  componentDidCatch(error, info) {
-    // This will soon be deprecated.
-    this.setState({ hasError: true, error, info });
-  }
+  // noop, this lifecycle method just needs to be present
+  // to log the component stack to the console in development
+  componentDidCatch(error, info) {}
 
   static getDerivedStateFromError(error) {
     return { hasError: true, error };
@@ -35,7 +34,6 @@ class FatalErrorBoundary extends Component {
 
   get fatalError() {
     const error = this.state.error;
-    const info = this.state.info;
     return {
       type: "JS_EXCEPTION",
       error: {
@@ -43,8 +41,7 @@ class FatalErrorBoundary extends Component {
         heading: "Client Javascript Exception",
         body: this.body(error),
         clientTrace: error.stack,
-        clientTraceTruncate: 5,
-        componentTrace: info.componentStack
+        clientTraceTruncate: 5
       }
     };
   }

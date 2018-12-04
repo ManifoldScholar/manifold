@@ -27,6 +27,10 @@ export default class FatalErrorClientTrace extends PureComponent {
     this.state = { stackLines: [], count: 0, hidden: 0 };
   }
 
+  componentDidMount() {
+    console.error(this.props.trace);
+  }
+
   static getDerivedStateFromProps(props) {
     let stackLines = props.trace.split("\n");
     stackLines.shift();
@@ -42,6 +46,7 @@ export default class FatalErrorClientTrace extends PureComponent {
 
   render() {
     if (!this.state.stackLines) return null;
+
     return (
       <div className={"stacks"}>
         <div className={"stack"}>
