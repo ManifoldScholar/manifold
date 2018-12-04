@@ -65,7 +65,9 @@
     "setupFiles": [
       "./src/test/setup.js"
     ],
-    "modulePathIgnorePatterns": ["<rootDir>/.*/__mocks__"],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/.*/__mocks__"
+    ],
     "globals": {
       "__CLIENT__": false,
       "__SERVER__": true
@@ -174,6 +176,7 @@
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "file-loader": "^1.1",
     "jest": "^23.x",
+    "jscodeshift": "^0.6.0",
     "lint-staged": "^7.0",
     "minimist": "^1.2.0",
     "node-sass": "^4.5.3",
@@ -187,6 +190,8 @@
     "stylelint": "^8.1.1",
     "stylelint-config-recess-order": "^1.2.2",
     "stylelint-scss": "^2.1.0",
+    "transform-imports": "^2.0.0",
+    "true-case-path": "^1.0.3",
     "uglifyjs-webpack-plugin": "^1.x",
     "url-loader": "^0.x",
     "wait-on": "^2.0.2",

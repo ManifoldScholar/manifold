@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Navigation from "global/components/navigation";
-import PressLogo from "global/components/press-logo";
-import HeaderNotifications from "global/components/header-notifications";
+import PressLogo from "global/components/PressLogo";
+import HeaderNotifications from "global/components/HeaderNotifications";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 

@@ -24,7 +24,6 @@ import TextArea from "./TextArea";
 import TextInput from "./TextInput";
 import TusUpload from "./TusUpload";
 import Upload from "./Upload";
-import HigherOrder from "./HigherOrder";
 
 export default {
   BaseInput,
@@ -38,7 +37,6 @@ export default {
   HasMany,
   Header,
   Hidden,
-  HigherOrder,
   Instructions,
   MaskedTextInput,
   NumberInput,

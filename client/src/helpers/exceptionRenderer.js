@@ -1,5 +1,5 @@
 import React from "react";
-import FatalError from "global/components/fatal-error";
+import FatalError from "global/components/FatalError";
 
 function body(error) {
   if (error.name === "Error") return `"${error.message}"`;

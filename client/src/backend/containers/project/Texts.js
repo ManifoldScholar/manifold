@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import get from "lodash/get";
 import { entityStoreActions } from "actions";
 import { projectsAPI, textsAPI, textCategoriesAPI, requests } from "api";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 

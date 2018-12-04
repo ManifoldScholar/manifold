@@ -4,7 +4,7 @@ import get from "lodash/get";
 import { Link } from "react-router-dom";
 
 import lh from "helpers/linkHandler";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 import Project from "frontend/components/project";
 
 export default class SearchResultsTypeProject extends PureComponent {

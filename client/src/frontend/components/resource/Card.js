@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 import Resourceish from "frontend/components/resourceish";
 import Preview from "frontend/components/resource-preview";
 import TagList from "./TagList";

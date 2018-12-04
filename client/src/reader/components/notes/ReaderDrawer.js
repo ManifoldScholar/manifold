@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FilteredList from "./FilteredList";
-import ReaderNotes from "reader/containers/reader-notes";
+import ReaderNotes from "reader/containers/ReaderNotes";
 import BackendDrawer from "global/containers/drawer";
 
 export default class ReaderDrawer extends PureComponent {

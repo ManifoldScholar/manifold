@@ -1,5 +1,5 @@
 import AddButton from "./AddButton";
-import Form from "./Form";
+import Form from "./form";
 import Header from "./Header";
 import List from "./List";
 import ListItem from "./ListItem";

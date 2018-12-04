@@ -1,4 +1,4 @@
-import BodyNodes from "./BodyNodes";
+import BodyNodes from "./body-nodes";
 import Body from "./Body";
 import Label from "./Label";
 import NextSection from "./NextSection";

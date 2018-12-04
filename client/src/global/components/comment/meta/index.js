@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isObject from "lodash/isObject";
-import FormattedDate from "global/components/formatted-date";
+import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 
 import Authorize from "hoc/authorize";

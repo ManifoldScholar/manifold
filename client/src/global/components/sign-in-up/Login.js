@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { currentUserActions } from "actions";
 import { get, values } from "lodash";
 import classNames from "classnames";
-import Oauth from "./Oauth";
+import Oauth from "./oauth";
 
 export default class Login extends Component {
   static propTypes = {
