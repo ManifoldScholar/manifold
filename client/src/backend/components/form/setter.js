@@ -11,7 +11,6 @@ function getDisplayName(WrappedComponent) {
 }
 
 export default function setter(WrappedComponent) {
-
   const displayName = `Form.Setter('${getDisplayName(WrappedComponent)})`;
 
   class Setter extends React.PureComponent {

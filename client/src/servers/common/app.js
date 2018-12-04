@@ -36,12 +36,22 @@ export default function webApp(name, optionsIgnored = {}) {
   }
 
   if (process.env.WEBPACK_DEV_SERVER) {
+    ch.info(
+      capitalize(
+        `${name} server will proxy /system requests to ${apiAssetTarget}.`
+      )
+    );
+    app.use("/system", proxy({ target: apiAssetTarget, logLevel: "silent" }));
 
-    ch.info(capitalize(`${name} server will proxy /system requests to ${apiAssetTarget}.`));
-    app.use('/system', proxy({ target: apiAssetTarget, logLevel: "silent" }));
-
-    ch.info(capitalize(`${name} server will proxy /api/proxy requests to ${apiAssetTarget}.`));
-    app.use('/api/proxy', proxy({ target: apiAssetTarget, logLevel: "silent" }));
+    ch.info(
+      capitalize(
+        `${name} server will proxy /api/proxy requests to ${apiAssetTarget}.`
+      )
+    );
+    app.use(
+      "/api/proxy",
+      proxy({ target: apiAssetTarget, logLevel: "silent" })
+    );
 
     const toProxy = [
       "/browser.config.js",

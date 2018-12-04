@@ -26,7 +26,8 @@ export default class ProjectListPlaceholder extends Component {
         }
         <a href={helpLink} target="_blank" rel="noopener noreferrer">
           here
-        </a>.
+        </a>
+        .
       </div>
     );
   }
@@ -45,7 +46,8 @@ export default class ProjectListPlaceholder extends Component {
         }
         <a href={helpLink} target="_blank" rel="noopener noreferrer">
           here
-        </a>.
+        </a>
+        .
       </div>
     );
   }

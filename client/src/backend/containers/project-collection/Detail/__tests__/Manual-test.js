@@ -6,7 +6,9 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 
 describe("Backend.ProjectCollection.Detail.Manual component", () => {
-  const projectCollection = build.entity.projectCollection("1", { manuallySorted: false });
+  const projectCollection = build.entity.projectCollection("1", {
+    manuallySorted: false
+  });
   const project = build.entity.project("2");
   const store = build.store();
 

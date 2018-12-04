@@ -23,7 +23,8 @@ export default class ResourceImportResultsImported extends PureComponent {
           {`Row #${resourceImportRow.lineNumber} ${verb} `}
           <Link to={lh.link("backendResource", resourceImportRow.resourceId)}>
             {resourceImportRow.resourceTitle}
-          </Link>.
+          </Link>
+          .
         </span>
       </React.Fragment>
     );

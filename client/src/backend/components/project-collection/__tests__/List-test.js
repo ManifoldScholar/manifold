@@ -11,7 +11,10 @@ describe("Backend.ProjectCollection.List component", () => {
     const component = renderer.create(
       <List
         projectCollection={projectCollection}
-        projectCollections={[projectCollection, build.entity.projectCollection("2")]}
+        projectCollections={[
+          projectCollection,
+          build.entity.projectCollection("2")
+        ]}
         onCollectionOrderChange={jest.fn}
         onCollectionSelect={jest.fn}
         onShowNew={jest.fn}

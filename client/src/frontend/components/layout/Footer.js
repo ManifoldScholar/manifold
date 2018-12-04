@@ -220,7 +220,9 @@ class LayoutFooter extends Component {
     if (links.length === 0) return null;
     return (
       <ul className={wrapperClass}>
-        {links.map((link, index) => <li key={index}>{link}</li>)}
+        {links.map((link, index) => (
+          <li key={index}>{link}</li>
+        ))}
       </ul>
     );
   }

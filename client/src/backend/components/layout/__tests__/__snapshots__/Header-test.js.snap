@@ -151,9 +151,16 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
     <div
       className="header-border"
     />
-    <notifications
-      scope="global"
-    />
+    <section
+      className="notifications-container"
+      role="alert"
+    >
+      <div
+        className="notifications-list-header notifications-list"
+      >
+        <span />
+      </div>
+    </section>
   </header>
 </div>
 `;

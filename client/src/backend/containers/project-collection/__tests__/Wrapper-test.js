@@ -40,7 +40,10 @@ describe("Backend.ProjectCollection.Wrapper container", () => {
       wrapWithRouter(
         <Provider store={store}>
           <ProjectCollectionWrapperContainer
-            projectCollections={[build.entity.projectCollection("1"), build.entity.projectCollection("2")]}
+            projectCollections={[
+              build.entity.projectCollection("1"),
+              build.entity.projectCollection("2")
+            ]}
             collectionProjects={[]}
             refresh={jest.fn}
             dispatch={store.dispatch}

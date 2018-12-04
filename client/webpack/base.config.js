@@ -4,7 +4,7 @@ const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
-const CircularDependencyPlugin = require('circular-dependency-plugin');
+const CircularDependencyPlugin = require("circular-dependency-plugin");
 
 const isDev = process.env.NODE_ENV === "development";
 const mode = isDev ? "development" : "production";
@@ -31,7 +31,7 @@ module.exports = (options = {}) => {
     // add errors to webpack instead of warnings
     failOnError: true,
     // set the current working directory for displaying module paths
-    cwd: process.cwd(),
+    cwd: process.cwd()
   });
   plugins.push(circularDependency);
 
