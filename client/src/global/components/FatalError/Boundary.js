@@ -29,9 +29,8 @@ class FatalErrorBoundary extends Component {
     this.setState({ hasError: true, error, info });
   }
 
-  // Why isn't this being called?
-  static getDerivedStateFromError(error, info) {
-    this.setState({ hasError: true, error, info });
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
   }
 
   get fatalError() {
