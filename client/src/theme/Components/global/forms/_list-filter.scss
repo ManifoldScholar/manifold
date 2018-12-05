@@ -157,6 +157,10 @@
         &:focus {
           border-color: $focusPrimary;
         }
+
+        option {
+          color: $neutralBlack;
+        }
       }
     }
 
