@@ -200,6 +200,10 @@
     &::-ms-expand {
       display: none;
     }
+
+    option {
+      color: $neutralBlack;
+    }
   }
 }
 
