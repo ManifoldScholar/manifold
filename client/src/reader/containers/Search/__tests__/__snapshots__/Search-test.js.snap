@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader SearchContainer renders correctly 1`] = `
+<div
+  className="overlay-full"
+>
+  <focus-trap-react
+    focusTrapOptions={
+      Object {
+        "escapeDeactivates": false,
+      }
+    }
+  >
+    <header
+      className="overlay-full-header"
+    >
+      <div
+        className="container"
+      >
+        <h3
+          className="overlay-title"
+        >
+          <i
+            aria-hidden="true"
+            className="manicon manicon-magnify"
+          />
+          Search Results
+        </h3>
+      </div>
+      <button
+        className="overlay-close"
+        data-id="overlay-close"
+        onClick={[Function]}
+      >
+        Close
+        <i
+          aria-hidden="true"
+          className="manicon manicon-x"
+        />
+      </button>
+    </header>
+    <div
+      className="container"
+      style={
+        Object {
+          "maxWidth": 850,
+        }
+      }
+    >
+      <div>
+        <form
+          className="search-query"
+          onSubmit={[Function]}
+        >
+          <div
+            className="input-magnify"
+          >
+            <label
+              className="screen-reader-text"
+              htmlFor="query-search-1"
+            >
+              Enter Search Criteria
+            </label>
+            <input
+              autoFocus={true}
+              id="query-search-1"
+              onChange={[Function]}
+              placeholder="Search…"
+              type="text"
+              value=""
+            />
+            <button
+              className="manicon manicon-magnify"
+              type="submit"
+            >
+              <span
+                className="screen-reader-text"
+              >
+                Search
+              </span>
+            </button>
+          </div>
+          <div
+            className="filters"
+          >
+            <h4
+              className="group-label"
+            >
+              Show Results For:
+            </h4>
+            <div
+              className="checkbox-group"
+            >
+              <label
+                className="checkbox"
+                htmlFor="all-filters"
+              >
+                <input
+                  checked={true}
+                  id="all-filters"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <div
+                  aria-hidden="true"
+                  className="control-indicator"
+                >
+                  <i
+                    className="manicon manicon-check"
+                  />
+                </div>
+                Everything
+              </label>
+              <label
+                className="checkbox"
+                htmlFor="SearchableNode-0"
+              >
+                <input
+                  checked={false}
+                  id="SearchableNode-0"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <div
+                  aria-hidden="true"
+                  className="control-indicator"
+                >
+                  <i
+                    className="manicon manicon-check"
+                  />
+                </div>
+                Full Text
+              </label>
+              <label
+                className="checkbox"
+                htmlFor="Annotation-1"
+              >
+                <input
+                  checked={false}
+                  id="Annotation-1"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <div
+                  aria-hidden="true"
+                  className="control-indicator"
+                >
+                  <i
+                    className="manicon manicon-check"
+                  />
+                </div>
+                Annotations
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </focus-trap-react>
+</div>
+`;

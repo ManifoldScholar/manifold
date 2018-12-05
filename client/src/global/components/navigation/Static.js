@@ -88,7 +88,7 @@ export class NavigationStatic extends PureComponent {
           searchType="frontend"
           initialState={{
             keyword: "",
-            facets: ["Project", "Resource", "Text"]
+            allFacets: true
           }}
           description="Search across all content and projects"
           hidePanel={this.props.commonActions.hideSearchPanel}
