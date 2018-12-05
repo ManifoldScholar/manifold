@@ -1,23 +1,10 @@
 import React, { PureComponent } from "react";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import connectAndFetch from "utils/connectAndFetch";
-import { searchResultsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
-import { select, meta } from "utils/entityUtils";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
-
-const { request, flush } = entityStoreActions;
+import withSearch from "hoc/with-search";
 
 class SearchContainer extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      results: select(requests.rSearchResults, state.entityStore),
-      resultsMeta: meta(requests.rSearchResults, state.entityStore)
-    };
-  };
-
   static displayName = "Frontend.SearchContainer";
 
   static propTypes = {
@@ -27,94 +14,25 @@ class SearchContainer extends PureComponent {
     history: PropTypes.object.isRequired,
     results: PropTypes.array,
     resultsMeta: PropTypes.object,
+    searchQueryState: PropTypes.object.isRequired,
+    setQueryState: PropTypes.func.isRequired,
+    setPage: PropTypes.func.isRequired,
     text: PropTypes.object,
     section: PropTypes.object
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      searchNum: 0
-    };
+    this.state = props.searchQueryState;
   }
 
-  componentDidMount() {
-    if (this.searchQueryState()) {
-      this.setState(this.props.location.state.searchQueryState, () => {
-        this.doSearch();
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // If we have results and a keyword
-    if (this.props.results && this.state.keyword) {
-      // and scope or facet was changed, then we run the search.
-      if (
-        prevState.facets !== this.state.facets ||
-        prevState.scope !== this.state.scope
-      ) {
-        this.doSearch();
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.dispatch(flush(requests.rSearchResults));
-  }
-
-  setPage = page => {
-    return event => {
-      event.preventDefault();
-      this.doSearch(page);
-    };
-  };
-
-  setQueryState = queryParams => {
-    this.setState(queryParams);
-  };
-
-  doSearch = (page = 1) => {
-    const pagination = { number: page };
-    const params = Object.assign({}, this.state, { page: pagination });
-    if (!params.facets || params.facets.includes("All")) {
-      params.facets = this.availableFacetValues();
-    }
-    const call = searchResultsAPI.index(params);
-    const { promise: one } = this.props.dispatch(
-      request(call, requests.rSearchResults)
-    );
-    one.then(
-      () => {
-        this.setState({ searchNum: this.state.searchNum + 1 });
-      },
-      () => {
-        // do nothing
-      }
-    );
-  };
-
-  searchQueryState() {
-    if (this.props.location.state)
-      return this.props.location.state.searchQueryState;
-    return null;
-  }
-
-  availableFacetValues() {
-    return this.facets().map(facet => facet.value);
-  }
-
-  facets() {
+  get facets() {
     return [
       { label: "Projects", value: "Project" },
       { label: "Resources", value: "Resource" },
       { label: "Texts", value: "Text" },
       { label: "Full Text", value: "SearchableNode" }
     ];
-  }
-
-  scopes() {
-    return [];
   }
 
   renderHeader(results, resultsMeta) {
@@ -125,7 +43,8 @@ class SearchContainer extends PureComponent {
     );
 
     if (results) {
-      const resultString = results.length === 1 ? "result" : "results";
+      const resultsTotal = resultsMeta.pagination.totalCount;
+      const resultString = resultsTotal === 1 ? "result" : "results";
 
       if (!resultsMeta.keyword.trim()) return output;
 
@@ -133,7 +52,7 @@ class SearchContainer extends PureComponent {
         <header>
           <h1 className="title">{"Search Results"}</h1>
           <p className="subtitle">
-            {`${results.length} ${resultString} for "${resultsMeta.keyword}"`}
+            {`${resultsTotal} ${resultString} for "${resultsMeta.keyword}"`}
           </p>
         </header>
       );
@@ -143,7 +62,6 @@ class SearchContainer extends PureComponent {
   }
 
   render() {
-    const queryState = this.searchQueryState();
     const results = this.props.results;
     const resultsMeta = this.props.resultsMeta;
 
@@ -153,11 +71,13 @@ class SearchContainer extends PureComponent {
           <div className="container">
             {this.renderHeader(results, resultsMeta)}
             <SearchQuery.Form
-              initialState={queryState}
-              doSearch={this.doSearch}
-              setQueryState={this.setQueryState}
-              facets={this.facets()}
-              scopes={this.scopes()}
+              initialState={{
+                keyword: "",
+                allFacets: true
+              }}
+              searchQueryState={this.props.searchQueryState}
+              setQueryState={this.props.setQueryState}
+              facets={this.facets}
             />
           </div>
         </div>
@@ -166,7 +86,7 @@ class SearchContainer extends PureComponent {
             {this.props.results ? (
               <SearchResults.List
                 pagination={this.props.resultsMeta.pagination}
-                paginationClickHandler={this.setPage}
+                paginationClickHandler={this.props.setPage}
                 results={results}
                 context="frontend"
               />
@@ -178,4 +98,4 @@ class SearchContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(withRouter(SearchContainer));
+export default withSearch(SearchContainer);

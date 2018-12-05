@@ -38,6 +38,21 @@ export default class Header extends Component {
     match: PropTypes.object
   };
 
+  get projectId() {
+    if (!this.props.text) return null;
+    return this.props.text.relationships.project.id;
+  }
+
+  get textId() {
+    if (!this.props.text) return null;
+    return this.props.text.id;
+  }
+
+  get sectionId() {
+    if (!this.props.section) return null;
+    return this.props.section.id;
+  }
+
   handleContentsButtonClick = event => {
     event.stopPropagation();
     this.props.commonActions.panelToggle("tocDrawer");
@@ -187,16 +202,14 @@ export default class Header extends Component {
               id="search"
               visibility={this.props.visibility.uiPanels}
               toggleVisibility={this.panelToggleHandler("search")}
-              scopes={[
-                { label: "Chapter", value: "section" },
-                { label: "Text", value: "text" },
-                { label: "Project", value: "project" }
-              ]}
               initialState={{
                 keyword: "",
                 scope: "text",
-                facets: ["SearchableNode", "Annotation"]
+                allFacets: true
               }}
+              projectId={this.projectId}
+              textId={this.textId}
+              sectionId={this.sectionId}
               searchType="reader"
               bodyComponent={SearchMenu.Body}
               hidePanel={this.props.commonActions.hideSearchPanel}
