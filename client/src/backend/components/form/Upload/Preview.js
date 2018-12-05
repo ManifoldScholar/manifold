@@ -14,7 +14,8 @@ const path = require("path");
 export default class FormUploadPreview extends PureComponent {
   static propTypes = {
     preview: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    handleRemove: PropTypes.func
+    handleRemove: PropTypes.func,
+    fileName: PropTypes.string
   };
 
   get isImage() {
@@ -39,7 +40,19 @@ export default class FormUploadPreview extends PureComponent {
     return this.props.preview;
   }
 
+  get currentPreviewIsUrl() {
+    return RegExp("^https?://", "i").test(this.currentPreview);
+  }
+
+  get currentPreviewIsAbsolutePath() {
+    return startsWith(this.currentPreview, "/");
+  }
+
   get currentPreviewIsPath() {
+    return this.currentPreviewIsUrl || this.currentPreviewIsAbsolutePath;
+  }
+
+  get currentPreviewIsString() {
     return isString(this.currentPreview);
   }
 
@@ -54,8 +67,9 @@ export default class FormUploadPreview extends PureComponent {
 
   get previewFileName() {
     if (!this.previewable) return null;
-    if (this.isPath(this.currentPreview))
+    if (this.currentPreviewIsPath)
       return this.fileNameForPath(this.currentPreview);
+    if (this.currentPreviewIsString) return this.currentPreview;
     return this.fileNameForObject(this.currentPreview);
   }
 
@@ -65,7 +79,7 @@ export default class FormUploadPreview extends PureComponent {
   }
 
   get previewable() {
-    return this.currentPreviewIsPath || this.currentPreviewIsFileObject;
+    return this.currentPreviewIsString || this.currentPreviewIsFileObject;
   }
 
   fileNameForObject(fileObject) {
@@ -85,12 +99,8 @@ export default class FormUploadPreview extends PureComponent {
   }
 
   fileNameForPath(pathString) {
+    if (this.props.fileName) return this.props.fileName;
     return head(split(path.basename(pathString), "?"));
-  }
-
-  isPath(fileOrPath) {
-    if (isString(fileOrPath)) return true;
-    return false;
   }
 
   render() {
