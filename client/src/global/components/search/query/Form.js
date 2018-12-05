@@ -6,9 +6,8 @@ export default class SearchQuery extends PureComponent {
   static displayName = "Search.Query";
 
   static propTypes = {
-    doSearch: PropTypes.func.isRequired,
     initialState: PropTypes.object,
-    setQueryState: PropTypes.func,
+    setQueryState: PropTypes.func.isRequired,
     facets: PropTypes.array,
     scopes: PropTypes.array,
     description: PropTypes.string,
@@ -20,8 +19,10 @@ export default class SearchQuery extends PureComponent {
   static defaultProps = {
     facets: [],
     scopes: [],
-    doSearch: state => {
-      console.warn("The SearchQuery component expects an doSearch callback.");
+    setQueryState: state => {
+      console.warn(
+        "The SearchQuery component expects a setQueryState callback."
+      );
       console.warn("Current SearchQuery State");
       console.warn(state);
     },
@@ -33,26 +34,17 @@ export default class SearchQuery extends PureComponent {
     super(props);
 
     this.handlers = {};
+    this.state = Object.assign({}, props.initialState);
+  }
 
-    const defaultState = {
-      keyword: "",
-      scopes: [],
-      facets: ["All"]
-    };
-
-    if (props.initialState) {
-      this.state = Object.assign({}, defaultState, props.initialState);
-    } else {
-      this.state = Object.assign({}, defaultState);
+  componentDidUpdate(prevProps, prevStateIgnored) {
+    if (prevProps.initialState !== this.props.initialState) {
+      return this.setState(this.props.initialState);
     }
   }
 
-  componentDidUpdate() {
-    this.announceState();
-  }
-
   setScope(value) {
-    this.setState({ scope: value });
+    this.setState({ scope: value }, this.doSearch);
   }
 
   setKeyword = event => {
@@ -61,8 +53,8 @@ export default class SearchQuery extends PureComponent {
     this.setState({ keyword: value });
   };
 
-  announceState() {
-    this.props.setQueryState(this.state);
+  setFacet(type, value) {
+    return this.setState({ [type]: value }, this.doSearch);
   }
 
   existsInState(type, key) {
@@ -71,14 +63,14 @@ export default class SearchQuery extends PureComponent {
   }
 
   add(type, key) {
-    if (key === "All") return this.setState({ [type]: ["All"] });
+    if (key === "All") return this.setFacet(type, ["All"]);
     const was = this.state[type];
     const is = this.existsInState(type, key) ? was : [...was, key];
     if (key !== "All") {
       const index = is.indexOf("All");
       if (index > -1) is.splice(index, 1);
     }
-    this.setState({ [type]: is });
+    return this.setFacet(type, is);
   }
 
   remove(type, key) {
@@ -87,7 +79,7 @@ export default class SearchQuery extends PureComponent {
     if (index === -1) return;
     const is = was.slice(0, index).concat(was.slice(index + 1));
     if (is.length === 0) is.push("All");
-    this.setState({ [type]: is });
+    return this.setFacet(type, is);
   }
 
   makeScopeHandler(value) {
@@ -116,8 +108,8 @@ export default class SearchQuery extends PureComponent {
 
   doSearch = (event = null) => {
     if (event) event.preventDefault();
-    this.props.setQueryState(this.state); // This is important for resetting location.state.searchQueryState
-    this.props.doSearch();
+    if (!this.state.keyword) return null; // If there's no keyword, don't do anything yet.
+    this.props.setQueryState(this.state);
   };
 
   renderFooter() {

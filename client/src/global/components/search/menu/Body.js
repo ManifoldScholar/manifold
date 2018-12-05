@@ -23,7 +23,7 @@ export class SearchMenuBody extends PureComponent {
   };
 
   setQueryState = queryParams => {
-    this.setState(queryParams);
+    this.setState(queryParams, this.doSearch);
   };
 
   doSearch = () => {
@@ -70,7 +70,6 @@ export class SearchMenuBody extends PureComponent {
               searchType={this.props.searchType}
               description={this.props.description}
               setQueryState={this.setQueryState}
-              doSearch={this.doSearch}
             />
           ) : null}
         </ReactCSSTransitionGroup>
