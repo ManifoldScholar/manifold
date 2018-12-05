@@ -67,6 +67,7 @@ export class FormUpload extends Component {
   static propTypes = {
     set: PropTypes.func.isRequired, // set is called when the value changes
     setOther: PropTypes.func, // used to set another prop, eg removed, in session
+    getModelValue: PropTypes.func,
     label: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     inlineStyle: PropTypes.object,
@@ -85,6 +86,7 @@ export class FormUpload extends Component {
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array,
     inputId: PropTypes.string,
+    fileNameFrom: PropTypes.string,
     idForError: PropTypes.string
   };
 

@@ -35,6 +35,7 @@ export default class FormUpload extends Component {
     idForError: PropTypes.string,
     wide: PropTypes.bool,
     progress: PropTypes.string,
+    fileNameFrom: PropTypes.string,
     uploadError: PropTypes.string
   };
 
@@ -73,6 +74,11 @@ export default class FormUpload extends Component {
     if (this.props.value) return this.props.value;
     if (this.props.initialValue) return this.props.initialValue;
     return null;
+  }
+
+  get fileName() {
+    if (!this.props.fileNameFrom) return null;
+    return this.props.getModelValue(this.props.fileNameFrom);
   }
 
   handleFileDrop = file => {
@@ -126,6 +132,7 @@ export default class FormUpload extends Component {
               <Preview
                 preview={this.currentPreview}
                 handleRemove={this.handleRemove}
+                fileName={this.fileName}
               />
             ) : (
               <Empty
