@@ -13,14 +13,6 @@ const routes = {
       helper: t => `/read/${t}/search`
     },
     {
-      name: "readerSectionSearchResults",
-      exact: true,
-      component: "Search",
-      transition: "overlay-full",
-      path: "/read/:textId/section/:sectionId/search",
-      helper: (t, ts) => `/read/${t}/section/${ts}/search`
-    },
-    {
       name: "readerSection",
       exact: false,
       component: "Section",
@@ -40,7 +32,15 @@ const routes = {
           component: "NotationCollectionDetail",
           path: "/read/:textId/section/:sectionId/collection/:collectionId",
           helper: (t, s, c) => `/read/${t}/section/${s}/collection/${c}`
-        }
+        },
+        {
+          name: "readerSectionSearchResults",
+          exact: true,
+          component: "Search",
+          transition: "overlay-full",
+          path: "/read/:textId/section/:sectionId/search",
+          helper: (t, ts) => `/read/${t}/section/${ts}/search`
+        },
       ]
     }
   ]
