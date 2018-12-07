@@ -72,6 +72,9 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                   ago
                 </span>
               </div>
+              <div
+                className="markers"
+              />
             </section>
             <div>
               <section
@@ -133,6 +136,9 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                   ago
                 </span>
               </div>
+              <div
+                className="markers"
+              />
             </section>
             <div>
               <section

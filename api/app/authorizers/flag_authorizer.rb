@@ -12,6 +12,10 @@ class FlagAuthorizer < ApplicationAuthorizer
     true
   end
 
+  def creatable_by?(user, _options = {})
+    known_user?(user)
+  end
+
   def deletable_by?(user, _options = {})
     creator_or_has_editor_permissions?(user, resource)
   end

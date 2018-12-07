@@ -54,6 +54,18 @@ class AnnotationDetail extends PureComponent {
     });
   };
 
+  handleFlag = () => {
+    const { annotation } = this.props;
+    const call = annotationsAPI.flag(annotation);
+    this.props.dispatch(request(call, requests.rAnnotationFlag));
+  };
+
+  handleUnflag = () => {
+    const { annotation } = this.props;
+    const call = annotationsAPI.unflag(annotation);
+    this.props.dispatch(request(call, requests.rAnnotationUnflag));
+  };
+
   saveAnnotation = annotation => {
     const call = annotationsAPI.update(annotation.id, annotation.attributes);
     const res = this.props.dispatch(request(call, requests.rAnnotationUpdate));
@@ -128,6 +140,17 @@ class AnnotationDetail extends PureComponent {
                       />
                     </li>
                   </Authorize>
+                  {annotation.attributes.flagged ? (
+                    <li>
+                      <button className="secondary" onClick={this.handleUnflag}>
+                        {"Unflag"}
+                      </button>
+                    </li>
+                  ) : (
+                    <li>
+                      <button onClick={this.handleFlag}>{"Flag"}</button>
+                    </li>
+                  )}
                 </ul>
                 {this.state.action === "replying" ? (
                   <CommentContainer.Editor
