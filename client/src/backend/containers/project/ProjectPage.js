@@ -115,7 +115,8 @@ export default class ProjectProjectPageContainer extends PureComponent {
                 layout="portrait"
                 label="Download File"
                 accepts="files"
-                readFrom="attributes[publishedTextAttachmentFileName]"
+                readFrom="attributes[publishedTextDownloadUrl]"
+                fileNameFrom="attributes[publishedTextAttachmentFileName]"
                 name="attributes[publishedTextAttachment]"
                 remove="attributes[removePublishedTextAttachment]"
               />
