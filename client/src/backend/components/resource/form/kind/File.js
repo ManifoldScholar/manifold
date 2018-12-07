@@ -13,7 +13,8 @@ export default class ResourceFormKindFile extends PureComponent {
         layout="square"
         label="File"
         accepts="all"
-        readFrom="attributes[attachmentFileName]"
+        readFrom="attributes[attachmentStyles][original]"
+        fileNameFrom="attributes[attachmentFileName]"
         name="attributes[attachment]"
         remove="attributes[removeAttachment]"
         {...this.props}
