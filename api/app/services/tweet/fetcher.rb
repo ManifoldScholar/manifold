@@ -18,7 +18,7 @@ module Tweet
         options[:since_id] = twitter_query.most_recent_tweet_id.to_i
       end
 
-      results = client.search(twitter_query.query, options).take(limit)
+      results = client.search("#{twitter_query.query} -rt", options).take(limit)
       results.each do |tweet|
         tweet_to_event(tweet, twitter_query)
       end
