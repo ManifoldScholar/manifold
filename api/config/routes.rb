@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
       resources :annotations, only: [:show, :update, :destroy], controller: "text_sections/relationships/annotations" do
         namespace :relationships do
+          resource :flags, controller: "/api/v1/flags", only: [:create, :destroy]
           resources :comments, controller: "/api/v1/comments"
         end
       end

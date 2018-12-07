@@ -1,3 +1,5 @@
+import isString from "lodash/isString";
+
 export default {
   forSection(sectionId, filter = {}, page = {}) {
     const filterParams = Object.assign({}, filter);
@@ -43,6 +45,24 @@ export default {
   destroy(annotationId) {
     return {
       endpoint: `/api/v1/annotations/${annotationId}`,
+      method: "DELETE",
+      options: {}
+    };
+  },
+
+  flag(annotation) {
+    const id = isString(annotation) ? annotation : annotation.id;
+    return {
+      endpoint: `/api/v1/annotations/${id}/relationships/flags`,
+      method: "POST",
+      options: {}
+    };
+  },
+
+  unflag(annotation) {
+    const id = isString(annotation) ? annotation : annotation.id;
+    return {
+      endpoint: `/api/v1/annotations/${id}/relationships/flags`,
       method: "DELETE",
       options: {}
     };

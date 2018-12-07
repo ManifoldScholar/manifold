@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
+import Authorize from "hoc/authorize";
 
 export default class AnnotationDetail extends PureComponent {
   static displayName = "Annotation.Meta";
@@ -17,12 +18,12 @@ export default class AnnotationDetail extends PureComponent {
     showAnnotationLabel: false
   };
 
-  subtitle() {
-    if (!this.props.subject) return this.dateSubtitle();
-    return this.subjectSubtitle();
+  get subtitle() {
+    if (!this.props.subject) return this.dateSubtitle;
+    return this.subjectSubtitle;
   }
 
-  name() {
+  get name() {
     const { creator, annotation } = this.props;
     const isCreator = annotation.attributes.currentUserIsCreator;
     let name = creator.attributes.fullName;
@@ -30,16 +31,16 @@ export default class AnnotationDetail extends PureComponent {
     return <h4 className="author-name">{name}</h4>;
   }
 
-  subjectSubtitle() {
+  get subjectSubtitle() {
     const { subject } = this.props;
     return (
       <div className="subtitle">
-        {subject} {this.dateSubtitle()}
+        {subject} {this.dateSubtitle}
       </div>
     );
   }
 
-  dateSubtitle() {
+  get dateSubtitle() {
     const { annotation } = this.props;
     return (
       <span className="datetime">
@@ -49,6 +50,27 @@ export default class AnnotationDetail extends PureComponent {
         />{" "}
         ago
       </span>
+    );
+  }
+
+  renderMarkers(annotation) {
+    return (
+      <div className="markers">
+        {annotation.attributes.private ? (
+          <div className="marker secondary">{"Private"}</div>
+        ) : null}
+        <Authorize kind="admin">
+          {annotation.attributes.flagsCount > 0 ? (
+            <div className="marker secondary">
+              {annotation.attributes.flagsCount}
+              {annotation.attributes.flagsCount === 1 ? " flag" : " flags"}
+            </div>
+          ) : null}
+        </Authorize>
+        {this.props.showAnnotationLabel ? (
+          <div className="marker tertiary">{"Annotation"}</div>
+        ) : null}
+      </div>
     );
   }
 
@@ -83,15 +105,10 @@ export default class AnnotationDetail extends PureComponent {
               </div>
             )}
           </figure>
-          {this.name()}
-          {this.subtitle()}
+          {this.name}
+          {this.subtitle}
         </div>
-        {annotation.attributes.private ? (
-          <div className="marker secondary">{"Private"}</div>
-        ) : null}
-        {this.props.showAnnotationLabel ? (
-          <div className="marker tertiary">{"Annotation"}</div>
-        ) : null}
+        {this.renderMarkers(annotation)}
       </section>
     );
   }

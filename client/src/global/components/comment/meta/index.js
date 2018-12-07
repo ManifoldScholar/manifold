@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import isObject from "lodash/isObject";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
-
 import Authorize from "hoc/authorize";
 
 export default class CommentMeta extends PureComponent {

@@ -10,6 +10,7 @@ class Annotation < ApplicationRecord
   # Concerns
   include TrackedCreator
   include Filterable
+  include Concerns::FlaggableResource
 
   # Scopes
   scope :only_annotations, -> { where(format: "annotation") }
