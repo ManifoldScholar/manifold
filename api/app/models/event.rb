@@ -106,7 +106,7 @@ class Event < ApplicationRecord
 
   # rubocop:disable Rails/SkipsModelValidations
   def touch_project!
-    project.touch
+    project&.touch unless project&.new_record?
   end
   # rubocop:enable Rails/SkipsModelValidations
 
