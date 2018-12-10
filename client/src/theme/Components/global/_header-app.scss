@@ -236,7 +236,7 @@
       &::after {
         @include tailUp;
         position: absolute;
-        bottom: 0;
+        bottom: 14px;
         left: 50%;
         display: block;
         margin-left: -15px;
@@ -244,6 +244,10 @@
         opacity: 0;
         transition: transform $duration $timing, opacity $duration $timing;
         transform: translateY(0);
+
+        body.header-tall & {
+          bottom: 3px;
+        }
       }
 
       &.button-active::after {
@@ -315,10 +319,14 @@
     }
 
     .search-menu, .user-menu {
-      top: calc(100% + 34px);
+      top: calc(100% + 23px);
       opacity: 0;
       transition: opacity $duration $timing, transform $duration $timing;
       transform: translateY(-34px);
+
+      .header-tall & {
+        top: calc(100% + 34px);
+      }
     }
 
     .search-menu, .user-menu {
