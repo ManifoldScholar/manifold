@@ -53,9 +53,27 @@ export default class AnnotationDetail extends PureComponent {
     );
   }
 
+  get label() {
+    const { annotation, showAnnotationLabel } = this.props;
+    let label = null;
+    if (showAnnotationLabel) {
+      label = "Annotation";
+    } else if (annotation.attributes.authorCreated) {
+      label = "Author";
+    }
+
+    if (!label) return null;
+  }
+
   renderMarkers(annotation) {
+    if (this.props.showAnnotationLabel) {
+      return <div className="marker tertiary">Annotation</div>;
+    }
     return (
       <div className="markers">
+        {annotation.attributes.authorCreated ? (
+          <div className="marker tertiary">Author</div>
+        ) : null}
         {annotation.attributes.private ? (
           <div className="marker secondary">{"Private"}</div>
         ) : null}

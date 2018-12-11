@@ -4,7 +4,7 @@ class CommentSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :id, :body, :parent_id, :created_at, :flags_count, :flagged,
-             :abilities, :deleted, :children_count, :sort_order
+             :abilities, :deleted, :children_count, :sort_order, :author_created
 
   belongs_to :creator
 

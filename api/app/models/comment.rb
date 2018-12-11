@@ -63,6 +63,10 @@ class Comment < ApplicationRecord
     parent && parent.creator_id == creator_id
   end
 
+  def author_created
+    creator.project_author_of? project
+  end
+
   private
 
   def trigger_event_creation
