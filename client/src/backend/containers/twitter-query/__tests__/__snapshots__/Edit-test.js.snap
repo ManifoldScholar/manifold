@@ -21,17 +21,6 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
         className="button-bare-primary"
         onClick={[Function]}
       >
-        Fetch Tweets
-        <i
-          aria-hidden="true"
-          className="manicon manicon-check"
-        />
-      </button>
-      <br />
-      <button
-        className="button-bare-primary"
-        onClick={[Function]}
-      >
         Delete Query
         <i
           aria-hidden="true"
