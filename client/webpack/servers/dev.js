@@ -23,7 +23,7 @@ compiler.plugin("compile", params => {
 const isHot = !process.env.DISABLE_HMR;
 const serverOptions = {
   quiet: false,
-  allowedHosts: ["manifold.dev", "manifold.lvh", "localhost", "127.0.0.1"],
+  allowedHosts: [process.env.DOMAIN, "manifold.lvh", "localhost", "127.0.0.1"],
   noInfo: false,
   hot: isHot,
   inline: true,
