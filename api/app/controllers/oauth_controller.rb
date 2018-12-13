@@ -1,5 +1,4 @@
 class OauthController < ApplicationController
-  include ActionView::Rendering
 
   skip_after_action :set_content_type
 
@@ -11,10 +10,31 @@ class OauthController < ApplicationController
 
     @oauth_payload = ExternalAuth::Payload.new outcome
 
-    render layout: false
+    # rubocop:disable Rails/OutputSafety
+    render html: body.html_safe, layout: false
+    # rubocop:enable Rails/OutputSafety
   end
 
   private
+
+  def body
+    <<~HEREDOC
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Authentication successful!</title>
+          <style></style>
+        </head>
+        <body>
+          <h1>Authorization success!</h1>
+          <script type="text/javascript">
+            window.opener.postMessage(#{@oauth_payload.to_json}, "*");
+            window.close();
+          </script>
+        </body>
+      </html>
+    HEREDOC
+  end
 
   def omniauth_hash
     request.env["omniauth.auth"]
