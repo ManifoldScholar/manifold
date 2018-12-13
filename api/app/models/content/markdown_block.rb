@@ -2,9 +2,12 @@ module Content
   class MarkdownBlock < ::ContentBlock
     include Concerns::HasFormattedAttributes
 
-    jsonb_accessor :configuration,
-                   style: :string,
-                   body: :string
+    # jsonb_accessor :configuration,
+    #                style: :string,
+    #                body: :string
+
+    has_configured_attributes style: :string,
+                              body: :string
 
     has_formatted_attribute :body
 

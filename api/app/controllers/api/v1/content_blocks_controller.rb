@@ -14,7 +14,7 @@ module Api
 
       def update
         @content_block = load_and_authorize_content_block
-        ::Updaters::ContentBlock.new(params.to_unsafe_h).update(@content_block)
+        ::Updaters::ContentBlock.new(permitted_params).update(@content_block)
         render_single_resource @content_block,
                                serializer: serializer,
                                location: location
@@ -26,6 +26,10 @@ module Api
       end
 
       private
+
+      def permitted_params
+        content_block_params @content_block
+      end
 
       def location
         api_v1_content_block_path @content_block

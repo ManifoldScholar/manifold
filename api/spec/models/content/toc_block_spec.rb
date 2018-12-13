@@ -26,4 +26,8 @@ RSpec.describe Content::TOCBlock do
   it "is invalid if show_text_title is not a boolean" do
     expect(FactoryBot.build(:toc_block, show_text_title: nil)).to_not be_valid
   end
+
+  it "has the correct permitted attributes" do
+    expect(toc_block.permitted_attributes).to match_array [:depth, :show_authors, :show_text_title]
+  end
 end

@@ -18,4 +18,8 @@ RSpec.describe Content::ResourcesBlock do
   it "is invalid if :resources_count is not an integer" do
     expect(FactoryBot.build(:resources_block, resources_count: "string")).to_not be_valid
   end
+
+  it "has the correct permitted attributes" do
+    expect(resources_block.permitted_attributes).to match_array [:resources_count]
+  end
 end

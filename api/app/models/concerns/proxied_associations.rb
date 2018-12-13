@@ -3,6 +3,7 @@ module Concerns
     extend ActiveSupport::Concern
 
     delegate :reference_configurations, to: :class
+    delegate :permitted_relationships, to: :class
 
     included do
       after_commit :reset_reference_associations!
@@ -17,7 +18,7 @@ module Concerns
     end
 
     def reference_configuration(kind)
-      reference_configurations.find { |config| config.name == kind }
+      reference_configurations.detect { |config| config.name == kind }
     end
 
     # rubocop:disable Metrics/LineLength, Metrics/AbcSize
@@ -39,8 +40,12 @@ module Concerns
     end
     # rubocop:enable Metrics/LineLength, Metrics/AbcSize
 
-    # rubocop:disable Naming/PredicateName
+    # rubocop:disable Naming/PredicateName, Metrics/BlockLength
     class_methods do
+      def permitted_relationships
+        reference_configurations.map(&:name)
+      end
+
       def reference_configurations
         @reference_configurations ||= []
       end
@@ -72,6 +77,6 @@ module Concerns
         RUBY
       end
     end
-    # rubocop:enable Naming/PredicateName
+    # rubocop:enable Naming/PredicateName, Metrics/BlockLength
   end
 end

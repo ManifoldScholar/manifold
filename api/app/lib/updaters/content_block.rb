@@ -10,7 +10,6 @@ module Updaters
     delegate :reference_configuration, to: :@model
     delegate :reference_associations, to: :@model
 
-
     private
 
     def update_relationships!(_model)
@@ -20,10 +19,11 @@ module Updaters
         association = clone.delete kind
         next if association.nil?
         configuration = reference_configuration(kind)
+        next unless configuration.present?
 
-        [association.dig("data")].map do |attr|
-          create_content_block_reference kind, attr["id"], configuration.source
-        end
+        build_association_references association,
+                                     kind,
+                                     configuration.source
       end.flatten
 
       assign_association! relationships
@@ -34,7 +34,13 @@ module Updaters
       @model.content_block_references = relationships
     end
 
-    def create_content_block_reference(kind, id, type)
+    def build_association_references(association, kind, source)
+      [association.dig("data")].map do |attr|
+        build_content_block_reference kind, attr["id"], source
+      end
+    end
+
+    def build_content_block_reference(kind, id, type)
       content_block_references.find_or_initialize_by kind: kind,
                                                  referencable_id: id,
                                                  referencable_type: type

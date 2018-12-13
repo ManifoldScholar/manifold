@@ -7,6 +7,7 @@ class ContentBlock < ApplicationRecord
   acts_as_list scope: :project
 
   delegate :serializer, to: :class
+  delegate :permitted_attributes, to: :class
 
   belongs_to :project
   has_many :content_block_references, dependent: :destroy
@@ -27,6 +28,20 @@ class ContentBlock < ApplicationRecord
   class << self
     def serializer
       "#{name}Serializer".constantize
+    end
+
+    # rubocop:disable Naming/PredicateName
+    def has_configured_attributes(attributes)
+      @configured_attributes = attributes
+
+      class_eval <<~RUBY, __FILE__, __LINE__ + 1
+        jsonb_accessor :configuration, @configured_attributes
+      RUBY
+    end
+    # rubocop:enable Naming/PredicateName
+
+    def permitted_attributes
+      @configured_attributes.keys
     end
   end
 end

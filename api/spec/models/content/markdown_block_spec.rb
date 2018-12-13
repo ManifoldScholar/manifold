@@ -18,4 +18,8 @@ RSpec.describe Content::MarkdownBlock do
   it "is invalid if style is not \"shaded\" or \"normal\"" do
     expect(FactoryBot.build(:markdown_block, style: "camo")).to_not be_valid
   end
+
+  it "has the correct permitted attributes" do
+    expect(markdown_block.permitted_attributes).to match_array [:style, :body]
+  end
 end
