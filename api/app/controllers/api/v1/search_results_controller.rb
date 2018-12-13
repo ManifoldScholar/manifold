@@ -31,14 +31,14 @@ module Api
       end
 
       def search_options
-        valid_params = search_params
+        p = search_params
         {
-          keyword: valid_params[:keyword],
-          page_number: valid_params.dig(:page, :number),
-          facets: valid_params[:facets],
-          project: valid_params[:project],
-          text: valid_params[:text],
-          text_section: valid_params[:text_section]
+          keyword: p[:keyword],
+          page_number: p.dig(:page, :number),
+          facets: p[:facets],
+          project: p[:project].presence || p[:project],
+          text: p[:text].presence || p[:text],
+          text_section: p[:text_section].presence || p[:text_section]
         }
       end
 
