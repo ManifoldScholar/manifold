@@ -35,23 +35,6 @@ class SearchContainer extends PureComponent {
     ];
   }
 
-  get availableFacetValues() {
-    return this.facets.map(facet => facet.value);
-  }
-
-  get scopes() {
-    return [];
-  }
-
-  searchParams() {
-    const params = Object.assign({}, this.props.searchQueryState);
-    if (!params.facets || params.facets.includes("All")) {
-      params.facets = this.availableFacetValues;
-    }
-
-    return params;
-  }
-
   renderHeader(results, resultsMeta) {
     let output = (
       <header>
@@ -88,10 +71,13 @@ class SearchContainer extends PureComponent {
           <div className="container">
             {this.renderHeader(results, resultsMeta)}
             <SearchQuery.Form
-              initialState={this.props.searchQueryState}
+              initialState={{
+                keyword: "",
+                allFacets: true
+              }}
+              searchQueryState={this.props.searchQueryState}
               setQueryState={this.props.setQueryState}
               facets={this.facets}
-              scopes={this.scopes}
             />
           </div>
         </div>

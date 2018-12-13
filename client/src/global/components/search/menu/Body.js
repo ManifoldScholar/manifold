@@ -15,7 +15,10 @@ export class SearchMenuBody extends PureComponent {
     facets: PropTypes.array,
     scopes: PropTypes.array,
     initialState: PropTypes.object,
-    description: PropTypes.string
+    description: PropTypes.string,
+    projectId: PropTypes.string,
+    textId: PropTypes.string,
+    sectionId: PropTypes.string
   };
 
   static defaultProps = {
@@ -64,11 +67,15 @@ export class SearchMenuBody extends PureComponent {
         >
           {this.props.visibility.search ? (
             <Query.Form
+              projectId={this.props.projectId}
+              sectionId={this.props.sectionId}
+              textId={this.props.textId}
               facets={this.props.facets}
               initialState={this.props.initialState}
               scopes={this.props.scopes}
               searchType={this.props.searchType}
               description={this.props.description}
+              searchOnScopeChange={false}
               setQueryState={this.setQueryState}
             />
           ) : null}

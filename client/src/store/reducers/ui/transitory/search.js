@@ -2,8 +2,8 @@ import { handleActions } from "redux-actions";
 
 const initialState = {
   keyword: "",
-  scopes: [],
-  facets: ["All"],
+  scope: null,
+  facets: [],
   searchNum: 0
 };
 

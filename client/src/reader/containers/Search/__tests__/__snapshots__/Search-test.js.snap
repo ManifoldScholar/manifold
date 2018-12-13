@@ -86,59 +86,6 @@ exports[`Reader SearchContainer renders correctly 1`] = `
             <h4
               className="group-label"
             >
-              Search within:
-            </h4>
-            <div
-              className="checkbox-group"
-            >
-              <label
-                className="checkbox"
-                htmlFor="text-0"
-              >
-                <input
-                  checked={false}
-                  id="text-0"
-                  onChange={[Function]}
-                  type="checkbox"
-                />
-                <div
-                  aria-hidden="true"
-                  className="control-indicator"
-                >
-                  <i
-                    className="manicon manicon-check"
-                  />
-                </div>
-                Text
-              </label>
-              <label
-                className="checkbox"
-                htmlFor="project-1"
-              >
-                <input
-                  checked={false}
-                  id="project-1"
-                  onChange={[Function]}
-                  type="checkbox"
-                />
-                <div
-                  aria-hidden="true"
-                  className="control-indicator"
-                >
-                  <i
-                    className="manicon manicon-check"
-                  />
-                </div>
-                Project
-              </label>
-            </div>
-          </div>
-          <div
-            className="filters"
-          >
-            <h4
-              className="group-label"
-            >
               Show Results For:
             </h4>
             <div

@@ -182,6 +182,12 @@ export class SectionContainer extends Component {
     });
   };
 
+  renderRoutes() {
+    const { text, section } = this.props;
+    const childProps = { text, section };
+    return childRoutes(this.props.route, { childProps });
+  }
+
   render() {
     if (!this.props.section || !this.props.text) return null;
     const { text, section, settings, appearance } = this.props;
@@ -214,7 +220,7 @@ export class SectionContainer extends Component {
           image={projectImage}
           description={sectionDescription}
         />
-        {childRoutes(this.props.route)}
+        {this.renderRoutes()}
         <Section.Text {...this.props} />
         <div>
           <Section.NextSection

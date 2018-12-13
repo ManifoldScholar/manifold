@@ -6,7 +6,6 @@ import { select, meta } from "utils/entityUtils";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import get from "lodash/get";
-import isFunction from "lodash/isFunction";
 
 const { request, flush } = entityStoreActions;
 
@@ -96,17 +95,6 @@ function withSearch(WrappedComponent) {
       };
     }
 
-    /* eslint-disable no-console */
-    get searchParams() {
-      if (!isFunction(this.searchComponent.current.searchParams)) {
-        return console.error(
-          `${getDisplayName(WrappedComponent)} must implement searchParams()`
-        );
-      }
-      return this.searchComponent.current.searchParams();
-    }
-    /* eslint-enable no-console */
-
     setQueryState = queryParams => {
       return this.props.dispatch(uiSearchActions.setSearchQuery(queryParams));
     };
@@ -120,10 +108,10 @@ function withSearch(WrappedComponent) {
 
     doSearch(page = 1) {
       const pagination = { number: page };
-      const params = this.searchParams;
-      params.pagination = pagination;
+      const query = Object.assign({}, this.props.searchQueryState);
+      query.pagination = pagination;
 
-      const call = searchResultsAPI.index(params);
+      const call = searchResultsAPI.index(query);
       const { promise: one } = this.props.dispatch(
         request(call, requests.rSearchResults)
       );

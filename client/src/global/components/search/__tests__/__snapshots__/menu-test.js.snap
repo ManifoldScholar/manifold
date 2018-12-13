@@ -32,6 +32,7 @@ exports[`Reader.Search.Menu component renders correctly when search is visible 1
           onChange={[Function]}
           placeholder="Search…"
           type="text"
+          value={null}
         />
         <button
           className="manicon manicon-magnify"

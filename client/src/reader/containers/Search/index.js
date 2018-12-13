@@ -28,30 +28,11 @@ class SearchContainer extends PureComponent {
     this.state = props.searchQueryState;
   }
 
-  get availableFacetValues() {
-    return this.facets.map(facet => facet.value);
-  }
-
   get facets() {
     return [
       { label: "Full Text", value: "SearchableNode" },
       { label: "Annotations", value: "Annotation" }
     ];
-  }
-
-  get scopes() {
-    const scopes = [
-      { label: "Text", value: "text" },
-      { label: "Project", value: "project" }
-    ];
-    if (this.isSectionSet) {
-      scopes.unshift({ label: "Chapter", value: "section" });
-    }
-    return scopes;
-  }
-
-  get isSectionSet() {
-    return !!this.props.match.params.sectionId;
   }
 
   get projectId() {
@@ -67,20 +48,6 @@ class SearchContainer extends PureComponent {
   get sectionId() {
     if (!this.props.section) return null;
     return this.props.section.id;
-  }
-
-  searchParams() {
-    const params = Object.assign({}, this.props.searchQueryState);
-    if (this.state.scope === "project" && this.projectId)
-      params.project = this.projectId();
-    if (this.state.scope === "text" && this.textId) params.text = this.textId();
-    if (this.state.scope === "section" && this.sectionId)
-      params.textSection = this.sectionId();
-    if (params.facets.includes("All")) {
-      params.facets = this.availableFacetValues;
-    }
-
-    return params;
   }
 
   close = () => {
@@ -105,10 +72,17 @@ class SearchContainer extends PureComponent {
       >
         <div>
           <SearchQuery.Form
-            initialState={this.props.searchQueryState}
+            initialState={{
+              keyword: "",
+              scope: "text",
+              allFacets: true
+            }}
+            searchQueryState={this.props.searchQueryState}
             setQueryState={this.props.setQueryState}
             facets={this.facets}
-            scopes={this.scopes}
+            projectId={this.projectId}
+            textId={this.textId}
+            sectionId={this.sectionId}
           />
           {this.props.results ? (
             <SearchResults.List
