@@ -1,8 +1,12 @@
 class ContentBlock < ApplicationRecord
+  include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
   include Concerns::ProxiedAssociations
 
   # Ordering
   acts_as_list scope: :project
+
+  delegate :serializer, to: :class
 
   belongs_to :project
   has_many :content_block_references, dependent: :destroy
@@ -17,6 +21,12 @@ class ContentBlock < ApplicationRecord
 
       return true if __send__(config.name).present?
       errors.add(config.name, "can't be blank")
+    end
+  end
+
+  class << self
+    def serializer
+      "#{name}Serializer".constantize
     end
   end
 end

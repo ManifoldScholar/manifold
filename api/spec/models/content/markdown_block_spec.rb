@@ -11,6 +11,10 @@ RSpec.describe Content::MarkdownBlock do
     expect(FactoryBot.build(:markdown_block, style: "")).to_not be_valid
   end
 
+  it "is invalid if body is not present" do
+    expect(FactoryBot.build(:markdown_block, body: nil)).to_not be_valid
+  end
+
   it "is invalid if style is not \"shaded\" or \"normal\"" do
     expect(FactoryBot.build(:markdown_block, style: "camo")).to_not be_valid
   end

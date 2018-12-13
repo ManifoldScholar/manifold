@@ -237,6 +237,14 @@ module Validation
     params.permit(param_config)
   end
 
+  def content_block_params
+    params.require(:data)
+    attributes = []
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   # rubocop:disable MethodLength
   def settings_params
     params.require(:data)

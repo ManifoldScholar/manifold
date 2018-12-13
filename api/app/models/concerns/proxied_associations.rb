@@ -4,12 +4,26 @@ module Concerns
 
     delegate :reference_configurations, to: :class
 
+    included do
+      after_commit :reset_reference_associations!
+    end
+
+    def reset_reference_associations!
+      @reference_associations = nil
+    end
+
     def reference_associations
       @reference_associations ||= build_reference_associations
     end
 
+    def reference_configuration(kind)
+      reference_configurations.find { |config| config.name == kind }
+    end
+
     # rubocop:disable Metrics/LineLength, Metrics/AbcSize
     def build_reference_associations
+      content_block_references.reload if persisted?
+
       reference_configurations.each_with_object({}) do |config, h|
         h[config.name] ||= [] if config.multiple
         method = config.multiple ? :select : :detect
