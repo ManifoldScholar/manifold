@@ -1,7 +1,10 @@
 class ContentBlock < ApplicationRecord
+  include Concerns::ProxiedAssociations
+
+  # Authorization
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
-  include Concerns::ProxiedAssociations
+  self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   # Ordering
   acts_as_list scope: :project

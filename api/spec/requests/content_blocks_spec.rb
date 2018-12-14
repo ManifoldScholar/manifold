@@ -9,10 +9,25 @@ RSpec.describe "ContentBlocks API", type: :request do
   let(:api_response) { JSON.parse(response.body) }
 
   describe "sends a content block" do
-    describe "the response" do
-      it "has a 200 status code" do
-        get path
-        expect(response).to have_http_status(200)
+    context "when the user is an admin" do
+      let(:headers) { admin_headers }
+
+      describe "the response" do
+        it "has a 200 status code" do
+          get path, headers: headers
+          expect(response).to have_http_status(200)
+        end
+      end
+    end
+
+    context "when the user is a reader" do
+      let(:headers) { reader_headers }
+
+      describe "the response" do
+        it "has a 403 FORBIDDEN status code" do
+          get path, headers: headers
+          expect(response).to have_http_status(403)
+        end
       end
     end
   end

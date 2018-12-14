@@ -6,7 +6,7 @@ module Api
       resourceful! ContentBlock
 
       def show
-        @content_block = load_content_block
+        @content_block = load_and_authorize_content_block
         render_single_resource @content_block,
                                serializer: serializer,
                                location: location

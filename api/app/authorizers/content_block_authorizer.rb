@@ -1,1 +1,0 @@
-class ContentBlockAuthorizer < ProjectChildAuthorizer; end
