@@ -6,6 +6,7 @@ module Concerns
     delegate :permitted_relationships, to: :class
 
     included do
+      before_validation :reset_reference_associations!, unless: :persisted?
       after_commit :reset_reference_associations!
     end
 

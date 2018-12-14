@@ -26,15 +26,15 @@ module Updaters
                                      configuration.source
       end.flatten
 
-      assign_association! relationships
+      assign_association! relationships.reject(&:nil?)
     end
 
     def assign_association!(relationships)
-      return unless relationships.present?
       @model.content_block_references = relationships
     end
 
     def build_association_references(association, kind, source)
+      return if association.blank?
       [association.dig("data")].map do |attr|
         build_content_block_reference kind, attr["id"], source
       end
@@ -42,8 +42,8 @@ module Updaters
 
     def build_content_block_reference(kind, id, type)
       content_block_references.find_or_initialize_by kind: kind,
-                                                 referencable_id: id,
-                                                 referencable_type: type
+                                                     referencable_id: id,
+                                                     referencable_type: type
     end
   end
 end
