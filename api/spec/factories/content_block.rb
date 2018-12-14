@@ -10,7 +10,7 @@ FactoryBot.define do
     depth { 3 }
     show_authors { false }
     show_text_title { false }
-    content_block_references { [FactoryBot.build(:content_block_reference, kind: "text", referencable: FactoryBot.create(:text))] }
+    content_block_references { [FactoryBot.build(:content_block_reference, kind: "text", referencable: FactoryBot.create(:text, project: project))] }
   end
   factory :markdown_block, parent: :content_block, class: "Content::MarkdownBlock" do
     type { "Content::MarkdownBlock" }

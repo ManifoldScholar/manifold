@@ -15,6 +15,15 @@ RSpec.describe Content::TOCBlock do
     expect(FactoryBot.build(:toc_block, content_block_references: [])).to_not be_valid
   end
 
+  it "is invalid if :text belongs to a different project" do
+    text = FactoryBot.create(:text)
+    toc_block.content_block_references = [FactoryBot.create(:content_block_reference,
+                                                            kind: "texts",
+                                                            content_block: toc_block,
+                                                            referencable: text)]
+    expect(toc_block).to_not be_valid
+  end
+
   it "is invalid if depth is not an integer" do
     expect(FactoryBot.build(:toc_block, depth: "string")).to_not be_valid
   end

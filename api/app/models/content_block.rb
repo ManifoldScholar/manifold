@@ -12,11 +12,29 @@ class ContentBlock < ApplicationRecord
   belongs_to :project
   has_many :content_block_references, dependent: :destroy
 
-  validate :associations_are_valid!
+  validate :references_are_valid!
+  validate :references_belong_to_project!
 
   private
 
-  def associations_are_valid!
+  # rubocop:disable Metrics/AbcSize
+  def references_belong_to_project!
+    reference_configurations.each do |config|
+      association = __send__(config.name)
+      return true unless association.present?
+      matcher = if association.is_a? ActiveRecord::Relation
+                  association.all? { |assoc| assoc.project == project }
+                else
+                  association.project == project
+                end
+
+      return true if matcher
+      errors.add(config.name, "must belong to #{project.title}")
+    end
+  end
+  # rubocop:enable Metrics/AbcSize
+
+  def references_are_valid!
     reference_configurations.each do |config|
       next unless config.required
 
