@@ -68,7 +68,7 @@ export default {
   ProjectSocialWrapper: Project.Social.Wrapper,
   TwitterQueryNew: TwitterQuery.New,
   TwitterQueryEdit: TwitterQuery.Edit,
-  ProjectProjectPage: Project.ProjectPage,
+  ProjectContentBlocks: Project.ContentBlocks,
   ProjectLog: Project.Log,
   ProjectGeneral: Project.General,
   Records,

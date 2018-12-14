@@ -426,7 +426,7 @@ const routes = {
             {
               name: "backendProjectProjectPage",
               exact: true,
-              component: "ProjectProjectPage",
+              component: "ProjectContentBlocks",
               path: "/backend/projects/:id/project-page",
               helper: p => `/backend/projects/${p}/project-page`
             },
