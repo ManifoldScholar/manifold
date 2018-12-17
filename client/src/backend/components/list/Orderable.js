@@ -15,7 +15,6 @@ export default class ListOrderable extends PureComponent {
     entities: PropTypes.array,
     entityComponent: PropTypes.func.isRequired,
     entityComponentProps: PropTypes.object,
-    grid: PropTypes.bool,
     orderChangeHandler: PropTypes.func.isRequired,
     dragHandle: PropTypes.bool,
     listClassNames: PropTypes.string,
