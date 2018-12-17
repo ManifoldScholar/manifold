@@ -1,0 +1,67 @@
+// TODO: Componentize styles
+
+.backend-project-content {
+  .list {
+    flex: 0 0 150px;
+    padding: 0.5rem 0;
+    font-family: sans-serif;
+    border-radius: 3px;
+
+    .item {
+      display: flex;
+      align-content: flex-start;
+      align-items: flex-start;
+
+      padding: 0.5rem;
+      margin: 0 0 0.5rem;
+      line-height: 1.5;
+      color: #FFF;
+      user-select: none;
+      background: #262626;
+      border-radius: 3px;
+
+      &.disabled {
+        color: #444;
+        background: #111;
+      }
+    }
+  }
+
+  .list.available {
+    .item {
+      display: inline-block;
+      width: 250px;
+
+      &.clone {
+        background: #4d4d4d;
+      }
+
+      + .item {
+        margin-left: 10px;
+      }
+
+    }
+  }
+
+  .list.current {
+    min-height: 100px;
+    margin: 0.5rem 0;
+
+    .item {
+      .identity {
+        width: 50%;
+      }
+
+      .actions {
+        width: 100%;
+        text-align: right;
+
+        .action {
+          background: #262626;
+          border: none;
+        }
+      }
+    }
+  }
+
+}
