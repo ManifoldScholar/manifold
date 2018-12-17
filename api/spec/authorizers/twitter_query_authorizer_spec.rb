@@ -26,7 +26,6 @@ RSpec.describe "Twitter Query Abilities", :authorizer do
     let(:subject) { FactoryBot.create(:user, role: Role::ROLE_MARKETEER) }
     let(:object) { FactoryBot.create(:twitter_query) }
 
-    abilities = { create: true, read: true, update: true, delete: false }
     the_subject_behaves_like "instance abilities", TwitterQuery, all: true
   end
 
