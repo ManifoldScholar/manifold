@@ -4,3 +4,40 @@
 @import 'STACSS/index';
 @import 'Components/index';
 @import 'z-stack';
+
+// TODO: Componentize styles
+.item {
+  display: flex;
+  user-select: none;
+  padding: 0.5rem;
+  margin: 0 0 0.5rem 0;
+  align-items: flex-start;
+  align-content: flex-start;
+  line-height: 1.5;
+  border-radius: 3px;
+  background: #262626;
+
+  &.pool {
+    display: inline-block;
+    width: 175px;
+
+    + .pool {
+      margin-left: 10px;
+    }
+  }
+
+  &.clone {
+    background: #4d4d4d;
+  }
+}
+
+.list {
+  padding: 0.5rem 0;
+  border-radius: 3px;
+  flex: 0 0 150px;
+  font-family: sans-serif;
+}
+
+.drag-container {
+  margin: 0.5rem 0;
+}

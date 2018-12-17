@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { Draggable } from "react-beautiful-dnd";
 
 export default class ListSimpleMulti extends PureComponent {
   static displayName = "List.SimpleMulti";
@@ -11,10 +10,10 @@ export default class ListSimpleMulti extends PureComponent {
     selectedEntities: PropTypes.array,
     poolHeader: PropTypes.func,
     selectedHeader: PropTypes.func,
-    entityComponent: PropTypes.func.isRequired,
-    entityComponentProps: PropTypes.object,
-    selectHandler: PropTypes.func.isRequired,
-    orderChangeHandler: PropTypes.func.isRequired
+    poolComponent: PropTypes.func.isRequired,
+    listComponent: PropTypes.func.isRequired,
+    afterSelectHandler: PropTypes.func.isRequired,
+    afterReorderHandler: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -22,9 +21,9 @@ export default class ListSimpleMulti extends PureComponent {
 
     this.state = {
       entityPool: [
-        { id: "1", value: "one" },
-        { id: "2", value: "two" },
-        { id: "3", value: "three" }
+        { id: "1", attributes: { type: "ContentBlock::TOCBlock", name: "Texts" } },
+        { id: "2", attributes: { type: "ContentBlock::ResourcesBlock", name: "Resources" } },
+        { id: "3", attributes: { type: "ContentBlock::MarkdownBlock", name: "Markdown" } }
       ],
       selectedEntities: []
     }
@@ -42,53 +41,49 @@ export default class ListSimpleMulti extends PureComponent {
     const { source, destination } = result;
     if (!destination) return null;
 
-    if (source.droppableId === destination.droppableId) {
-      return this.reorderEntity(source, destination);
-    } else {
-      return this.selectEntity(source, destination);
+    switch (source.droppableId) {
+      case destination.droppableId:
+        return this.reorder(source, destination);
+      case "entityPool":
+        return this.copy(source, destination);
+      default:
+        return null;
     }
   };
 
-  reorderEntity(source, destination) {
-    const items = this.props.orderChangeHandler(
-      this.entityPool,
-      source.index,
-      destination.index
-    );
+  reorder(source, destination) {
+    if (source.droppableId !== "selectedEntities") return null;
 
-    let state = { items };
+    const items = Array.from(this.selectedEntities);
+    const [removed] = items.splice(source.index, 1);
+    items.splice(destination.index, 0, removed);
 
-    if (source.droppableId === "selectedEntities") {
-      state = { selectedEntities: items };
-    }
-
-    return this.setState(state);
-  }
-
-  selectEntity(source, destination) {
-    const result = this.props.selectHandler(
-      this.entityPool,
-      this.selectedEntities,
-      source,
-      destination
-    );
-
-    this.setState({
-      entityPool: result.entityPool,
-      selectedEntities: result.selectedEntities
+    return this.setState({ selectedEntities: items }, () => {
+      return this.props.afterReorderHandler(removed);
     });
   }
+
+  // https://codesandbox.io/s/40p81qy7v0
+  copy(source, destination) {
+    const sourceClone = Array.from(this.entityPool);
+    const destClone = Array.from(this.selectedEntities);
+    const item = sourceClone[source.index];
+
+    destClone.splice(destination.index, 0, { ...item, id: Math.random() }); // TODO: Something other than Math.random(), just needs to be unique
+
+    return this.setState({ selectedEntities: destClone }, () => {
+      return this.props.afterSelectHandler(item);
+    });
+  };
 
   renderEntityPool(props) {
     return (
       <React.Fragment>
         {props.poolHeader()}
         <Droppable droppableId="entityPool" isDropDisabled>
-          {(provided, snapshotIgnored) => (
-            <div ref={provided.innerRef} style={{ padding: 75, backgroundColor: "gray" }}>
-              {this.entityPool.map((entity, index) => {
-                return props.entityComponent(entity, index, { padding: 20, backgroundColor: "pink", margin: 10, color: "black", display: "inline-block" });
-              })}
+          {provided => (
+            <div ref={provided.innerRef} className="list">
+              {this.entityPool.map((entity, index) => props.poolComponent(entity, index))}
               {provided.placeholder}
             </div>
           )}
@@ -102,11 +97,11 @@ export default class ListSimpleMulti extends PureComponent {
       <React.Fragment>
         {props.selectedHeader()}
         <Droppable droppableId="selectedEntities">
-          {(provided, snapshotIgnored) => (
-            <div ref={provided.innerRef} style={{ padding: 75, backgroundColor: "blue" }}>
-              {this.selectedEntities.map((entity, index) => {
-                return props.entityComponent(entity, index, { padding: 20, backgroundColor: "pink", margin: 10, color: "black"});
-              })}
+          {provided => (
+            <div ref={provided.innerRef} className="list drag-container">
+              {this.selectedEntities.length
+                ? this.selectedEntities.map((entity, index) => props.listComponent(entity, index))
+                : null}
               {provided.placeholder}
             </div>
           )}

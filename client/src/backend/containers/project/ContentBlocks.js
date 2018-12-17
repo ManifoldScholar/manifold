@@ -1,15 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Form from "backend/components/form";
-import FormContainer from "backend/containers/form";
 import List from "backend/components/list";
+import ContentBlock from "backend/components/content-block"
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { Draggable } from "react-beautiful-dnd";
 
 import Authorize from "hoc/authorize";
-import Attribute from "../../components/form/AttributeMap/Attribute";
 
 export default class ProjectContentBlocksContainer extends PureComponent {
   static displayName = "Project.ContentBlocks";
@@ -24,53 +21,21 @@ export default class ProjectContentBlocksContainer extends PureComponent {
     this.state = {}
   }
 
-  reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-
-    return result;
+  updateContentBlockPositions = entity => {
+    // Update the item
   };
 
-  /**
-   * Moves an item from one list to another list.
-   */
-  move = (source, destination, droppableSource, droppableDestination) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
-    const [removed] = sourceClone.splice(droppableSource.index, 1);
-
-    destClone.splice(droppableDestination.index, 0, removed);
-
-    const result = {};
-    result[droppableSource.droppableId] = source;
-    result[droppableDestination.droppableId] = destClone;
-
-    return result;
+  configureContentBlock = entity => {
+    // Open drawer and configure
   };
 
-  entityComponent = (entity, index, styles) => {
-    return (
-      <Draggable draggableId={entity.id} key={entity.id} index={index}>
-        {(provided, snapshot) => {
-          const style = {
-            ...styles,
-            ...provided.draggableProps.style
-          };
+  // TODO: These could maybe be one component, depending on how we do the styling.  The only difference right now is the dragging placeholder.
+  poolComponent = (entity, index) => {
+    return <ContentBlock.PoolItem key={entity.id} entity={entity} index={index} />;
+  };
 
-          return (
-            <div
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}
-              style={style}
-            >
-              {entity.value}
-            </div>
-          )
-        }}
-      </Draggable>
-    );
+  listComponent = (entity, index) => {
+    return <ContentBlock.ListItem key={entity.id} entity={entity} index={index} />;
   };
 
   contentBlocksHeader = () => {
@@ -103,9 +68,10 @@ export default class ProjectContentBlocksContainer extends PureComponent {
       >
         <section>
           <List.SimpleMulti
-            entityComponent={this.entityComponent}
-            orderChangeHandler={this.reorder}
-            selectHandler={this.move}
+            poolComponent={this.poolComponent}
+            listComponent={this.listComponent}
+            afterReorderHandler={this.updateContentBlockPositions}
+            afterSelectHandler={this.configureContentBlock}
             selectedHeader={this.contentLayoutHeader}
             poolHeader={this.contentBlocksHeader}
           />
