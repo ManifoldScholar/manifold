@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
     namespace :v1 do
       resources :contacts, only: [:create]
+      resources :content_blocks, only: [:show, :update, :destroy]
       resources :test_mails, only: [:create]
       resources :pages
       resources :features
@@ -99,6 +100,7 @@ Rails.application.routes.draw do
       resources :projects do
         scope module: :projects do
           namespace :relationships do
+            resources :content_blocks, only: [:index, :create]
             resources :uncollected_resources, only: [:index]
             resources :resources, only: [:index, :create]
             resources :collections, only: [:index, :create]
