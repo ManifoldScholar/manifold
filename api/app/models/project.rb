@@ -103,6 +103,7 @@ class Project < ApplicationRecord
            class_name: "Version",
            dependent: :nullify,
            inverse_of: :parent_item
+  has_many :content_blocks, dependent: :destroy
 
   # rubocop:disable Style/Lambda, Rails/InverseOf
   has_many :uncollected_resources, ->(object) {
