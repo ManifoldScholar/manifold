@@ -1,6 +1,7 @@
 import Category from "./category";
 import Collaborators from "./Collaborators";
 import Collections from "./Collections";
+import Content from "./Content";
 import Events from "./Events";
 import General from "./General";
 import Log from "./Log";
@@ -19,6 +20,7 @@ export default {
   Category,
   Collaborators,
   Collections,
+  Content,
   Events,
   General,
   Log,
