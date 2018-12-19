@@ -74,6 +74,8 @@ export default {
   beProjectCollectionUpdate: "backend-project-collection-update",
   beCollectionProjectReorder: "backend-collection-project-reorder",
   beCollectionProjects: "backend-collection-projects",
+  beContentBlockCreate: "backend-content-block-create",
+  beContentBlockUpdate: "backend-content-block-update",
   feProject: "frontend-project",
   tmpProject: "project-detail",
   feProjectsFiltered: "frontend-projects-filtered",

@@ -434,7 +434,7 @@ const routes = {
                   name: "backendProjectContentBlockNew",
                   exact: true,
                   component: "ContentBlockNew",
-                  path: "/backend/projects/:id/content-blocks/new",
+                  path: "/backend/projects/:pId/content-blocks/new",
                   helper: p => `/backend/projects/${p}/content-blocks/new`,
                 }
               ]

@@ -20,17 +20,6 @@ export class ProjectContentContainer extends PureComponent {
     route: PropTypes.object
   };
 
-  get childProps() {
-    const { location, match, history, dispatch } = this.props;
-
-    return {
-      location,
-      match,
-      history,
-      dispatch
-    }
-  }
-
   get drawerProps() {
     const { project } = this.props;
 
@@ -50,7 +39,7 @@ export class ProjectContentContainer extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
-        <Content { ...this.childProps }>
+        <Content dispatch={this.props.dispatch} history={this.props.history}>
           {(closeCallback, pendingBlock) =>
             childRoutes(this.props.route, { childProps: { pendingBlock }, drawer: true, drawerProps: { closeCallback, ...this.drawerProps } })
           }

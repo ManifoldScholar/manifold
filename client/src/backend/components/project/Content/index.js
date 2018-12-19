@@ -16,9 +16,7 @@ export default class ProjectContent extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object,
-    dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
-    match: PropTypes.object
+    dispatch: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -85,12 +83,16 @@ export default class ProjectContent extends PureComponent {
     };
   }
 
+  get drawerCloseCallback() {
+    if (!this.pendingBlock) return null;
+    return this.resetState;
+  }
+
   get pendingBlock() {
     return this.state.blocks.find(block => block.id === "pending");
   }
 
   resetState = () => {
-    if (!this.pendingBlock) return null;
     this.setState({ blocks: this.constructor.cloneBlocks(this.props)});
   };
 
@@ -186,7 +188,7 @@ export default class ProjectContent extends PureComponent {
             currentBlocks={this.currentBlocks}
           />
         </DragDropContext>
-        {this.props.children(this.resetState, this.pendingBlock)}
+        {this.props.children(this.drawerCloseCallback, this.pendingBlock)}
       </section>
     );
   }

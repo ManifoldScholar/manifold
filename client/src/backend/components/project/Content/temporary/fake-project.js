@@ -1,5 +1,5 @@
 const fakeProject = {
-  id: 1,
+  id: "76a42bd8-3441-4922-ab13-241012a9b83c", // TODO: In case I accidentally commit, this is a real project ID in my db
   attributes: {
     updatedAt: 123
   },
