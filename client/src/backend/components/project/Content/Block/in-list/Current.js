@@ -26,7 +26,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
             <div className="identity">
               <Identity
                 icon={block.icon}
-                title={`block.title [ID: ${this.entity.id}]`}
+                title={`${block.title} [ID: ${this.entity.id}]`}
               />
             </div>
             <div className="actions">

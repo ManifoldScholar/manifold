@@ -17,6 +17,7 @@ import Users from "backend/containers/users";
 import Pages from "backend/containers/pages";
 import Features from "backend/containers/features";
 import Settings from "backend/containers/settings";
+import Content from "backend/containers/content-block";
 
 export default {
   Backend,
@@ -69,6 +70,7 @@ export default {
   TwitterQueryNew: TwitterQuery.New,
   TwitterQueryEdit: TwitterQuery.Edit,
   ProjectContent: Project.Content,
+  ContentBlockNew: Content.New,
   ProjectLog: Project.Log,
   ProjectGeneral: Project.General,
   Records,

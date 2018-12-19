@@ -5,6 +5,7 @@ import CurrentSection from "./sections/Current";
 import { projectsAPI } from "api";
 import { DragDropContext } from "react-beautiful-dnd";
 import Developer from "global/components/developer";
+import lh from "helpers/linkHandler";
 import cloneDeep from "lodash/cloneDeep";
 
 // TODO: Remove this.
@@ -14,7 +15,10 @@ export default class ProjectContent extends PureComponent {
   static displayName = "Project.Content";
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    dispatch: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object
   };
 
   static defaultProps = {
@@ -22,10 +26,15 @@ export default class ProjectContent extends PureComponent {
     project: fakeProject
   };
 
+  static cloneBlocks(props) {
+    const blocks = props.project.relationships.contentBlocks;
+    return cloneDeep(blocks);
+  }
+
   static getDerivedStateFromProps(props, state) {
     const updatedAt = props.project.attributes.updatedAt;
     if (updatedAt === state.updatedAt) return null;
-    const blocks = cloneDeep(props.project.relationships.contentBlocks);
+    const blocks = ProjectContent.cloneBlocks(props);
     return { blocks, updatedAt };
   }
 
@@ -54,6 +63,10 @@ export default class ProjectContent extends PureComponent {
       return this.insert(type, destinationIndex);
   };
 
+  get projectId() {
+    return this.props.project.id;
+  }
+
   get currentBlocks() {
     return this.state.blocks;
   }
@@ -72,29 +85,38 @@ export default class ProjectContent extends PureComponent {
     };
   }
 
+  get pendingBlock() {
+    return this.state.blocks.find(block => block.id === "pending");
+  }
+
+  resetState = () => {
+    if (!this.pendingBlock) return null;
+    this.setState({ blocks: this.constructor.cloneBlocks(this.props)});
+  };
+
   move(from, to) {
     const adjustedTo = to < 0 ? 0 : to; // TODO: Why is to sometimes -1?
     const blocks = this.clonedCurrentBlocks;
     const [block] = blocks.splice(from, 1);
     const updatedBlock = this.updateBlockPosition(block, adjustedTo);
     blocks.splice(adjustedTo, 0, updatedBlock);
-    this.setState({ blocks }, this.updateBlock(updatedBlock));
+    this.setState({ blocks }, () => this.updateBlock(updatedBlock));
   }
 
   insert(type, position, id = "pending") {
     const block = { id, type, attributes: { position } };
     const blocks = this.clonedCurrentBlocks;
     blocks.splice(position, 0, block);
-    this.setState({ blocks }, this.editBlock(block));
+    this.setState({ blocks }, () => this.editBlock(block));
   }
 
-  // TODO: Implement this
   editBlock = block => {
-    console.log("Open a drawer and pass it this:");
-    console.table(block);
-    console.log(
-      `This POC will error if you try to create two content blocks in a row because they will both have a "pending" ID. Once this is wired to the API, the new collection will come in with the updated ID, which should avoid this problem.`
-    );
+    // TODO: This path should be new/edit based on whether ID is "pending" or not.
+    const location = {
+      pathname: lh.link("backendProjectContentBlockNew", this.projectId)
+    };
+
+    this.props.history.push(location);
   };
 
   // TODO: Implement this
@@ -164,6 +186,7 @@ export default class ProjectContent extends PureComponent {
             currentBlocks={this.currentBlocks}
           />
         </DragDropContext>
+        {this.props.children(this.resetState, this.pendingBlock)}
       </section>
     );
   }
