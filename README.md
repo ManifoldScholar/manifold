@@ -47,7 +47,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 #### Documentation
 
-Visit [our website](https://manifoldapp.org/docs/README) for current documentation. Be sure to check out the [getting started guide](https://manifoldapp.org/docs/contents/getting_started/README) for installation instructions.
+Visit [our website](https://manifoldapp.org/docs/) for current documentation. Be sure to check out the [installation instructions](https://manifoldapp.org/docs/installing/index).
 
 #### News
 
