@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181211205550) do
+ActiveRecord::Schema.define(version: 20181227231934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,10 +130,11 @@ ActiveRecord::Schema.define(version: 20181211205550) do
   end
 
   create_table "content_blocks", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string  "type",                       null: false
-    t.jsonb   "configuration", default: {}, null: false
+    t.string  "type",                         null: false
+    t.jsonb   "configuration", default: {},   null: false
     t.integer "position"
     t.uuid    "project_id"
+    t.boolean "visible",       default: true, null: false
     t.index ["project_id"], name: "index_content_blocks_on_project_id", using: :btree
   end
 

@@ -5,7 +5,7 @@ import classNames from "classnames";
 import Current from "./in-list/Current";
 import Available from "./in-list/Available";
 import AvailablePlaceholder from "./in-list/AvailablePlaceholder";
-import typeResolver from "./helpers/resolver";
+import typeResolver from "../helpers/resolver";
 import isFunction from "lodash/isFunction";
 
 export default class ProjectContentBlock extends PureComponent {
@@ -63,7 +63,7 @@ export default class ProjectContentBlock extends PureComponent {
   }
 
   get typeComponent() {
-    return typeResolver.typeToComponent(this.type);
+    return typeResolver.typeToBlockComponent(this.type);
   }
 
   render() {

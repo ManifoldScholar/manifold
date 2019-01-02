@@ -3,10 +3,10 @@ module Concerns
     extend ActiveSupport::Concern
 
     delegate :reference_configurations, to: :class
-    delegate :permitted_relationships, to: :class
+    delegate :available_relationships, to: :class
 
     included do
-      before_validation :reset_reference_associations!, unless: :persisted?
+      before_validation :reset_reference_associations!
       after_commit :reset_reference_associations!
     end
 
@@ -24,8 +24,6 @@ module Concerns
 
     # rubocop:disable Metrics/LineLength, Metrics/AbcSize
     def build_reference_associations
-      content_block_references.reload if persisted?
-
       reference_configurations.each_with_object({}) do |config, h|
         h[config.name] ||= [] if config.multiple
         method = config.multiple ? :select : :detect
@@ -43,7 +41,7 @@ module Concerns
 
     # rubocop:disable Naming/PredicateName, Metrics/BlockLength
     class_methods do
-      def permitted_relationships
+      def available_relationships
         reference_configurations.map(&:name)
       end
 
