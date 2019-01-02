@@ -28,11 +28,11 @@ module Api
       private
 
       def permitted_params
-        content_block_params @content_block
+        content_block_params @content_block.type
       end
 
       def location
-        api_v1_content_block_path @content_block
+        api_v1_content_block_path @content_block.type
       end
 
       def serializer
