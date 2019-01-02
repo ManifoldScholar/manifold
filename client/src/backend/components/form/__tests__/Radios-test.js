@@ -3,7 +3,6 @@ import renderer from "react-test-renderer";
 import Radios from "../Radios";
 
 describe("Backend.Form.Radios component", () => {
-  const changeMock = jest.fn();
   const options = [
     {
       label: "option-1",
@@ -17,12 +16,7 @@ describe("Backend.Form.Radios component", () => {
 
   it("renders correctly", () => {
     const component = renderer.create(
-      <Radios
-        options={options}
-        label="Label this"
-        name="attributes[fake]"
-        onChange={changeMock}
-      />
+      <Radios options={options} label="Label this" name="attributes[fake]" />
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

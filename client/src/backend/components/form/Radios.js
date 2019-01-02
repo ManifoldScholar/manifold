@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
-import classNames from "classnames";
+import GlobalForm from "global/components/form";
+import Option from "./Radio/Option";
+import classnames from "classnames";
+import labelId from "helpers/labelId";
+import isString from "lodash/isString";
+import Instructions from "./Instructions";
+import withFormOptions from "hoc/with-form-options";
 
 class FormRadios extends Component {
   static displayName = "Form.Radios";
@@ -10,68 +15,75 @@ class FormRadios extends Component {
     options: PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.any.isRequired,
-        label: PropTypes.string.isRequired,
-        className: PropTypes.string
+        label: PropTypes.string.isRequired
       })
     ).isRequired,
     label: PropTypes.string,
+    inline: PropTypes.bool,
+    name: PropTypes.string,
     value: PropTypes.any,
     set: PropTypes.func,
-    toggleIcon: PropTypes.string
+    id: PropTypes.string,
+    idForError: PropTypes.string,
+    inputClasses: PropTypes.string,
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    focusOnMount: PropTypes.bool
   };
+
+  static defaultProps = {
+    focusOnMount: false,
+    id: labelId("radios-"),
+    idForError: labelId("radios-error-")
+  };
+
+  get options() {
+    return this.props.options;
+  }
+
+  get optionProps() {
+    return {
+      inline: this.props.inline,
+      onChange: this.props.onChange,
+      value: this.props.value
+    };
+  }
+
+  get labelClass() {
+    return classnames({
+      "has-instructions": isString(this.props.instructions)
+    });
+  }
+
+  get inputClasses() {
+    return classnames(this.props.inputClasses, {
+      "form-input": true,
+      wide: this.props.wide
+    });
+  }
 
   render() {
     return (
-      <div className="form-input">
-        {this.props.label ? (
-          <div>
-            <span className="screen-reader-text">
-              Select a {this.props.label}
-            </span>
-            <h4
-              className="form-input-heading"
-              style={{ marginBottom: "1.5em" }}
-              aria-hidden="true"
-            >
-              {this.props.label}
-            </h4>
-          </div>
-        ) : null}
-        {this.props.options.map(option => {
-          const checked = this.props.value === option.value;
-          const optionalClass = option.className ? option.className : "";
-          const inputClassNames = classNames(
-            "form-toggle",
-            "radio",
-            optionalClass,
-            { checked }
-          );
-          const iconClassNames = classNames("manicon", this.props.toggleIcon);
-          return (
-            <label
-              htmlFor={option.value.toString()}
-              className={inputClassNames}
-              key={option.value}
-            >
-              <input
-                type="radio"
-                value={option.value}
-                id={option.value.toString()}
-                checked={checked}
-                onChange={() => {
-                  this.props.set(option.value);
-                }}
-              />
-              <span className="toggle-indicator" aria-hidden="true">
-                {checked ? <i className={iconClassNames} /> : null}
-              </span>
-              <span className="toggle-label">{option.label}</span>
-            </label>
-          );
-        })}
-      </div>
+      <GlobalForm.Errorable
+        className={this.inputClasses}
+        name={this.props.name}
+        errors={this.props.errors}
+        label={this.props.label}
+        idForError={this.props.idForError}
+      >
+        <label htmlFor={this.props.id} className={this.labelClass}>
+          {this.props.label}
+        </label>
+        <Instructions instructions={this.props.instructions} />
+        {this.options.map(option => (
+          <Option
+            key={`${this.props.id}-${option.internalValue}`}
+            option={option}
+            {...this.optionProps}
+          />
+        ))}
+      </GlobalForm.Errorable>
     );
   }
 }
 
-export default setter(FormRadios);
+export default withFormOptions(FormRadios);
