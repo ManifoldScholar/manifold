@@ -425,10 +425,27 @@ const routes = {
             },
             {
               name: "backendProjectProjectPage",
-              exact: true,
+              exact: false,
               component: "ProjectContent",
-              path: "/backend/projects/:id/project-page",
-              helper: p => `/backend/projects/${p}/project-page`
+              path: "/backend/projects/:id/content-blocks/:id?",
+              helper: p => `/backend/projects/${p}/content-blocks/`,
+              routes: [
+                {
+                  name: "backendProjectContentBlockNew",
+                  exact: true,
+                  component: "ContentBlockNew",
+                  path: "/backend/projects/:pId/content-blocks/new",
+                  helper: p => `/backend/projects/${p}/content-blocks/new`
+                },
+                {
+                  name: "backendProjectContentBlock",
+                  exact: true,
+                  component: "ContentBlockEdit",
+                  path: "/backend/projects/:pId/content-blocks/:id",
+                  helper: (p, id) =>
+                    `/backend/projects/${p}/content-blocks/${id}`
+                }
+              ]
             },
             {
               name: "backendProjectLog",

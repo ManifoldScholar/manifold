@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import Identity from "../parts/Identity";
+import VisibilityToggle from "../parts/VisibilityToggle";
 
 export default class ProjectContentBlockInListCurrent extends PureComponent {
   static displayName = "Project.Content.Block.InList.Current";
@@ -16,6 +17,10 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
     return this.props.entity;
   }
 
+  get configurable() {
+    return this.entity.attributes.configurable;
+  }
+
   render() {
     const TypeComponent = this.props.typeComponent;
 
@@ -26,7 +31,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
             <div className="identity">
               <Identity
                 icon={block.icon}
-                title={`block.title [ID: ${this.entity.id}]`}
+                title={`${block.title} [ID: ${this.entity.id}]`}
               />
             </div>
             <div className="actions">
@@ -36,18 +41,18 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
               >
                 <Utility.IconComposer icon="mug" size={30} />
               </button>
-              <button
-                className="action"
-                onClick={this.props.entityCallbacks.hideBlock}
-              >
-                <Utility.IconComposer icon="eyeOpen" size={30} />
-              </button>
-              <button
-                className="action"
-                onClick={this.props.entityCallbacks.editBlock}
-              >
-                <Utility.IconComposer icon="touch" size={30} />
-              </button>
+              <VisibilityToggle
+                entity={this.entity}
+                entityCallbacks={this.props.entityCallbacks}
+              />
+              {this.configurable
+                ? <button
+                    className="action"
+                    onClick={this.props.entityCallbacks.editBlock}
+                  >
+                    <Utility.IconComposer icon="touch" size={30} />
+                  </button>
+                : null}
               <button className="action" {...this.props.dragHandleProps}>
                 <Utility.IconComposer icon="barsDoubleHorizontal" size={30} />
               </button>
