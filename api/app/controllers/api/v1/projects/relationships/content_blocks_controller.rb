@@ -6,11 +6,15 @@ module Api
 
           before_action :set_project, only: [:index, :create]
 
-          resourceful! ContentBlock, authorize_options: { except: [:index] }
+          resourceful! ContentBlock, authorize_options: { except: [:index] } do
+            @project.content_blocks
+          end
 
+          # TODO: Is this OK or should we refactor resourceful! to determine
+          # each_serializer based on each model instead of config?
           def index
-            @content_blocks = load_content_blocks
-            render_multiple_resources @content_blocks, location: location
+            @content_blocks = @project.content_blocks
+            render json: @content_blocks, location: location
           end
 
           def create
@@ -39,7 +43,7 @@ module Api
           end
 
           def permitted_params
-            content_block_params @content_block
+            content_block_params
           end
         end
       end

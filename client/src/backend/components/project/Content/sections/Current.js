@@ -43,7 +43,7 @@ export default class ProjectContentSectionsCurrent extends PureComponent {
                   key={block.id}
                   context="current"
                   entity={block}
-                  type={block.type}
+                  type={block.attributes.type}
                   index={index}
                 />
               ))}

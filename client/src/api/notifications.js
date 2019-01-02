@@ -316,5 +316,13 @@ export default {
       body: "Could not unsubscribe from email notification.",
       expiration: defaultExpiration
     };
+  },
+  [r.beContentBlockUpdate]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `Content Block has been updated.`,
+      expiration: defaultExpiration
+    };
   }
 };

@@ -2,31 +2,38 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import AvailableSection from "./sections/Available";
 import CurrentSection from "./sections/Current";
-import { projectsAPI } from "api";
+import { contentBlocksAPI, requests } from "api";
 import { DragDropContext } from "react-beautiful-dnd";
 import Developer from "global/components/developer";
+import lh from "helpers/linkHandler";
+import { entityStoreActions } from "actions";
 import cloneDeep from "lodash/cloneDeep";
 
-// TODO: Remove this.
-import fakeProject from "./temporary/fake-project";
+const { request } = entityStoreActions;
 
 export default class ProjectContent extends PureComponent {
   static displayName = "Project.Content";
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    contentBlocks: PropTypes.array,
+    contentBlocksResponse: PropTypes.object,
+    refresh: PropTypes.func.isRequired,
+    history: PropTypes.object,
+    children: PropTypes.func,
+    dispatch: PropTypes.func.isRequired
   };
 
-  static defaultProps = {
-    // TODO: Remove this
-    project: fakeProject
-  };
+  static cloneBlocks(props) {
+    const blocks = props.contentBlocks || [];
+    return cloneDeep(blocks);
+  }
 
   static getDerivedStateFromProps(props, state) {
-    const updatedAt = props.project.attributes.updatedAt;
-    if (updatedAt === state.updatedAt) return null;
-    const blocks = cloneDeep(props.project.relationships.contentBlocks);
-    return { blocks, updatedAt };
+    if (props.contentBlocksResponse === state.response) return null;
+
+    const blocks = ProjectContent.cloneBlocks(props);
+    return { blocks, response: props.contentBlocksResponse };
   }
 
   constructor(props) {
@@ -34,7 +41,7 @@ export default class ProjectContent extends PureComponent {
 
     this.state = {
       blocks: [],
-      updatedAt: null
+      response: props.contentBlocksResponse
     };
   }
 
@@ -54,6 +61,10 @@ export default class ProjectContent extends PureComponent {
       return this.insert(type, destinationIndex);
   };
 
+  get projectId() {
+    return this.props.project.id;
+  }
+
   get currentBlocks() {
     return this.state.blocks;
   }
@@ -72,62 +83,85 @@ export default class ProjectContent extends PureComponent {
     };
   }
 
+  get drawerCloseCallback() {
+    if (!this.pendingBlock) return null;
+    return this.resetState;
+  }
+
+  get pendingBlock() {
+    return this.state.blocks.find(block => block.id === "pending");
+  }
+
+  resetState = () => {
+    this.setState({ blocks: this.constructor.cloneBlocks(this.props) });
+  };
+
   move(from, to) {
     const adjustedTo = to < 0 ? 0 : to; // TODO: Why is to sometimes -1?
     const blocks = this.clonedCurrentBlocks;
     const [block] = blocks.splice(from, 1);
     const updatedBlock = this.updateBlockPosition(block, adjustedTo);
     blocks.splice(adjustedTo, 0, updatedBlock);
-    this.setState({ blocks }, this.updateBlock(updatedBlock));
+    this.setState({ blocks }, () => this.updateBlock(updatedBlock));
   }
 
   insert(type, position, id = "pending") {
-    const block = { id, type, attributes: { position } };
+    const block = { id, attributes: { type, position } };
     const blocks = this.clonedCurrentBlocks;
     blocks.splice(position, 0, block);
-    this.setState({ blocks }, this.editBlock(block));
+    this.setState({ blocks }, this.newBlock);
   }
 
-  // TODO: Implement this
+  newBlock = () => {
+    this.props.history.push(
+      lh.link("backendProjectContentBlockNew", this.projectId)
+    );
+  };
+
   editBlock = block => {
-    console.log("Open a drawer and pass it this:");
-    console.table(block);
-    console.log(
-      `This POC will error if you try to create two content blocks in a row because they will both have a "pending" ID. Once this is wired to the API, the new collection will come in with the updated ID, which should avoid this problem.`
+    this.props.history.push(
+      lh.link("backendProjectContentBlock", this.projectId, block.id)
     );
   };
 
-  // TODO: Implement this
-  updateBlock = updatedBlock => {
-    console.log(
-      `Flesh out this method to send an update request to the API for this block.`
-    );
-    console.table({
-      "block ID": updatedBlock.id,
-      "original index": this.blockPositionInProps(updatedBlock.id),
-      "new index": updatedBlock.attributes.position
+  updateBlock = block => {
+    const call = contentBlocksAPI.update(block.id, {
+      attributes: block.attributes
     });
-    console.log(
-      `This POC will only work the first time you move something. Since we're not yet updating props with an API call, subsequent moves won't report the original index correctly.`
-    );
+    const options = { noTouch: true };
+    const updateRequest = request(call, requests.beContentBlockUpdate, options);
+    this.props.dispatch(updateRequest).promise.then(() => {
+      this.props.refresh();
+    });
   };
 
-  // TODO: Implement this
+  // TODO: Do we want confirmation first?
   deleteBlock = block => {
-    console.log(`Delete this block.`);
-    console.table(block);
+    const call = contentBlocksAPI.destroy(block.id);
+    const options = { removes: { type: "contentBlocks", id: block.id } };
+    const destroyRequest = request(
+      call,
+      requests.beContentBlockDestroy,
+      options
+    );
+    this.props.dispatch(destroyRequest).promise.then(() => {
+      this.props.refresh();
+    });
   };
 
-  // TODO: Implement this
+  toggleBlockVisibility(block, visible) {
+    const adjusted = Object.assign({}, block);
+    adjusted.attributes.visible = visible;
+
+    this.updateBlock(adjusted);
+  }
+
   showBlock = block => {
-    console.log(`Make this block visible.`);
-    console.table(block);
+    this.toggleBlockVisibility(block, true);
   };
 
-  // TODO: Implement this
   hideBlock = block => {
-    console.log(`Hide this block.`);
-    console.table(block);
+    this.toggleBlockVisibility(block, false);
   };
 
   mapRawDragResult(result) {
@@ -141,16 +175,18 @@ export default class ProjectContent extends PureComponent {
   }
 
   updateBlockPosition(block, position) {
-    const attributes = Object.assign({}, block.attributes, { position });
+    const attributes = Object.assign({}, block.attributes, {
+      position: this.adjustedPosition(position)
+    });
     return Object.assign({}, block, { attributes });
   }
 
-  blockPositionInProps(id) {
-    const block = this.props.project.relationships.contentBlocks.find(
-      b => b.id === id
-    );
-    if (block) return block.attributes.position;
-    return null;
+  adjustedPosition(position) {
+    const max = this.state.blocks.length;
+
+    if (position <= 0) return "top";
+    if (position >= max) return "bottom";
+    return position;
   }
 
   render() {
@@ -164,6 +200,7 @@ export default class ProjectContent extends PureComponent {
             currentBlocks={this.currentBlocks}
           />
         </DragDropContext>
+        {this.props.children(this.drawerCloseCallback, this.pendingBlock)}
       </section>
     );
   }
