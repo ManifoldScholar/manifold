@@ -3,33 +3,20 @@
 exports[`Backend.Form.Radios component renders correctly 1`] = `
 <div
   className="form-input"
+  style={Object {}}
 >
-  <div>
-    <span
-      className="screen-reader-text"
-    >
-      Select a 
-      Label this
-    </span>
-    <h4
-      aria-hidden="true"
-      className="form-input-heading"
-      style={
-        Object {
-          "marginBottom": "1.5em",
-        }
-      }
-    >
-      Label this
-    </h4>
-  </div>
+  <label
+    className=""
+    htmlFor="radios-1"
+  >
+    Label this
+  </label>
   <label
     className="form-toggle radio"
-    htmlFor="1"
   >
     <input
       checked={false}
-      id="1"
+      name="option-1"
       onChange={[Function]}
       type="radio"
       value="1"
@@ -46,11 +33,10 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
   </label>
   <label
     className="form-toggle radio"
-    htmlFor="2"
   >
     <input
       checked={false}
-      id="2"
+      name="option-2"
       onChange={[Function]}
       type="radio"
       value="2"
