@@ -7,10 +7,11 @@ class ContentBlock < ApplicationRecord
   self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   # Ordering
-  acts_as_list scope: :project
+  acts_as_list scope: :project, top_of_list: 0
 
   delegate :serializer, to: :class
-  delegate :permitted_attributes, to: :class
+  delegate :available_attributes, to: :class
+  delegate :configurable?, to: :class
 
   belongs_to :project
   has_many :content_block_references, dependent: :destroy
@@ -25,7 +26,7 @@ class ContentBlock < ApplicationRecord
     reference_configurations.each do |config|
       association = __send__(config.name)
       return true unless association.present?
-      matcher = if association.is_a? ActiveRecord::Relation
+      matcher = if association.is_a? Array
                   association.all? { |assoc| assoc.project == project }
                 else
                   association.project == project
@@ -61,8 +62,20 @@ class ContentBlock < ApplicationRecord
     end
     # rubocop:enable Naming/PredicateName
 
-    def permitted_attributes
-      @configured_attributes.keys
+    def available_attributes
+      @configured_attributes&.keys
+    end
+
+    def permitted_attributes_for(type)
+      Object.const_get(type).send :available_attributes
+    end
+
+    def permitted_relationships_for(type)
+      Object.const_get(type).send :available_relationships
+    end
+
+    def configurable?
+      available_attributes.present? || available_relationships.present?
     end
   end
 end

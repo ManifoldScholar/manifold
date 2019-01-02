@@ -238,10 +238,11 @@ module Validation
     params.permit(param_config)
   end
 
-  def content_block_params(content_block)
+  def content_block_params(type = nil)
+    type ||= params.dig(:data, :attributes, :type)
     params.require(:data)
-    attributes = content_block.permitted_attributes
-    relationships = content_block.permitted_relationships
+    attributes = [:position, :visible] << ContentBlock.permitted_attributes_for(type)
+    relationships = ContentBlock.permitted_relationships_for(type)
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end

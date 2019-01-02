@@ -125,4 +125,22 @@ describe("store/reducers/entityStore", () => {
     });
     expect(stateB.entities.texts["1"].attributes.foo).toEqual("bar");
   });
+
+  it("should not mutate meta object", () => {
+    let state = entityStoreReducer(state, {
+      meta: "test-response",
+      payload: apiCollectionResponse,
+      type: "API_RESPONSE"
+    });
+    const firstMeta = state.responses["test-response"].meta;
+
+    state = entityStoreReducer(state, {
+      meta: "test-response",
+      payload: apiCollectionResponse,
+      type: "API_RESPONSE"
+    });
+    const secondMeta = state.responses["test-response"].meta;
+
+    expect(firstMeta).not.toBe(secondMeta);
+  });
 });

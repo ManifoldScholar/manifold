@@ -93,7 +93,7 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              href="/backend/projects/1/project-page"
+              href="/backend/projects/1/content-blocks/"
               onClick={[Function]}
             >
               Appearance
@@ -210,7 +210,7 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  href="/backend/projects/1/project-page"
+                  href="/backend/projects/1/content-blocks/"
                   onClick={[Function]}
                 >
                   Appearance
