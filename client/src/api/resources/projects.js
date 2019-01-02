@@ -105,6 +105,13 @@ export default {
     };
   },
 
+  contentBlocks(id) {
+    return {
+      endpoint: `/api/v1/projects/${id}/relationships/content_blocks`,
+      method: "GET"
+    };
+  },
+
   featured(limit = 6, filterParams = {}) {
     const filter = filterParams;
     filter.featured = true;

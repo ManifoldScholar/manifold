@@ -7,6 +7,10 @@ RSpec.describe Content::TOCBlock do
     expect(FactoryBot.build(:toc_block)).to be_valid
   end
 
+  it "is configurable" do
+    expect(toc_block.configurable?).to eq true
+  end
+
   it "responds to :text" do
     expect(toc_block.respond_to? :text).to eq true
   end
@@ -36,7 +40,7 @@ RSpec.describe Content::TOCBlock do
     expect(FactoryBot.build(:toc_block, show_text_title: nil)).to_not be_valid
   end
 
-  it "has the correct permitted attributes" do
-    expect(toc_block.permitted_attributes).to match_array [:depth, :show_authors, :show_text_title]
+  it "has the correct available attributes" do
+    expect(toc_block.available_attributes).to match_array [:depth, :show_authors, :show_text_title]
   end
 end
