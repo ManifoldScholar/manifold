@@ -15,6 +15,7 @@ class ProjectSerializer < ApplicationSerializer
 
   has_many :creators, serializer: MakerSerializer
   has_many :contributors, serializer: MakerSerializer
+  has_many :content_blocks
 
   def recently_updated
     object.recently_updated?
