@@ -9,5 +9,14 @@ module Content
     validates :resources_count,
               numericality: { only_integer: true },
               allow_nil: true
+
+    before_save :cache_resource_count!
+
+    private
+
+    # TODO: I think we will have a resources association
+    def cache_resource_count!
+      self.resources_count = featured_resources.count
+    end
   end
 end

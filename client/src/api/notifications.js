@@ -322,6 +322,13 @@ export default {
       level: 0,
       heading: "Success!",
       body: "Stylesheet successfully deleted.",
+    };
+  },
+  [r.beContentBlockUpdate]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `Content Block has been updated.`,
       expiration: defaultExpiration
     };
   }
