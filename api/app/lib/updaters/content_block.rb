@@ -12,12 +12,13 @@ module Updaters
 
     private
 
+    # rubocop:disable Metrics/AbcSize
     def update_relationships!(_model)
       clone = relationships.clone.with_indifferent_access
 
       relationships = reference_associations.map do |kind, _records|
         association = clone.delete kind
-        next if association.nil?
+        next current_references(kind) if association.nil?
         configuration = reference_configuration(kind)
         next unless configuration.present?
 
@@ -28,6 +29,7 @@ module Updaters
 
       assign_association! relationships.reject(&:nil?)
     end
+    # rubocop:enable Metrics/AbcSize
 
     def assign_association!(relationships)
       @model.content_block_references = relationships
@@ -35,8 +37,14 @@ module Updaters
 
     def build_association_references(association, kind, source)
       return if association.blank?
-      [association.dig("data")].map do |attr|
-        build_content_block_reference kind, attr["id"], source
+      data = association.dig("data")
+
+      if data.is_a? Array
+        data.map do |attr|
+          build_content_block_reference kind, attr["id"], source
+        end
+      else
+        build_content_block_reference kind, data["id"], source
       end
     end
 
@@ -44,6 +52,10 @@ module Updaters
       content_block_references.find_or_initialize_by kind: kind,
                                                      referencable_id: id,
                                                      referencable_type: type
+    end
+
+    def current_references(kind)
+      @model.content_block_references.where(kind: kind)
     end
   end
 end
