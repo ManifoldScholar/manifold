@@ -7,6 +7,10 @@ RSpec.describe Content::MarkdownBlock do
     expect(FactoryBot.build(:markdown_block)).to be_valid
   end
 
+  it "is configurable" do
+    expect(markdown_block.configurable?).to eq true
+  end
+
   it "is invalid if style is blank" do
     expect(FactoryBot.build(:markdown_block, style: "")).to_not be_valid
   end
@@ -19,7 +23,7 @@ RSpec.describe Content::MarkdownBlock do
     expect(FactoryBot.build(:markdown_block, style: "camo")).to_not be_valid
   end
 
-  it "has the correct permitted attributes" do
-    expect(markdown_block.permitted_attributes).to match_array [:style, :body]
+  it "has the correct available attributes" do
+    expect(markdown_block.available_attributes).to match_array [:style, :body]
   end
 end
