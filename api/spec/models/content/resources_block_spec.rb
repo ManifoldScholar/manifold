@@ -7,6 +7,10 @@ RSpec.describe Content::ResourcesBlock do
     expect(FactoryBot.build(:resources_block)).to be_valid
   end
 
+  it "is configurable" do
+    expect(resources_block.configurable?).to eq true
+  end
+
   it "responds to :featured_collections" do
     expect(resources_block.respond_to? :featured_collections).to eq true
   end
@@ -19,7 +23,7 @@ RSpec.describe Content::ResourcesBlock do
     expect(FactoryBot.build(:resources_block, resources_count: "string")).to_not be_valid
   end
 
-  it "has the correct permitted attributes" do
-    expect(resources_block.permitted_attributes).to match_array [:resources_count]
+  it "has the correct available attributes" do
+    expect(resources_block.available_attributes).to match_array [:resources_count]
   end
 end
