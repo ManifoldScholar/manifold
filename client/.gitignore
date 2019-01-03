@@ -6,3 +6,5 @@ webpack-assets.json
 webpack-stats.json
 npm-debug.log
 yarn-error.log
+tmp/*
+!tmp/.gitkeep
