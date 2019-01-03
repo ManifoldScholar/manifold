@@ -2,10 +2,8 @@ var loaderUtils = require("loader-utils");
 var fontgen = require("webfonts-generator");
 var path = require("path");
 var glob = require("glob");
-var util = require("util");
 var _ = require("lodash/string");
 var startsWith = _.startsWith;
-var isString = _.isString;
 
 var mimeTypes = {
   eot: "application/vnd.ms-fontobject",
@@ -154,7 +152,7 @@ module.exports = function(content) {
     this.addDependency(fontconf.cssTemplate);
   }
 
-  fontgen(fontconf, function(err, res) {
+  fontgen(fontconf, (err, res) => {
     if (err) {
       return cb(err);
     }
@@ -163,10 +161,11 @@ module.exports = function(content) {
       var format = formats[i];
       if (!embed) {
         var filename =
-          config.fileName || params.fileName || "[hash]-[fontname][ext]";
+          config.fileName || params.fileName || "[name]-[hash][ext]";
         filename = filename
-          .replace("[fontname]", fontconf.fontName)
+          .replace("[name]", fontconf.fontName)
           .replace("[ext]", "." + format);
+
         var url = loaderUtils.interpolateName(process, filename, {
           context: this.rootContext || process.context,
           content: res[format]
