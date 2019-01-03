@@ -1,6 +1,4 @@
 #!/bin/bash
 
 cd client
-if [ "$RAILS_ENV" == "development" ]; then
-    exec yarn start
-fi
+exec yarn start
