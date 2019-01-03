@@ -1,6 +1,4 @@
 #!/bin/bash
 
 cd client
-if [ "$RAILS_ENV" == "development" ]; then
-    exec yarn dev
-fi
+exec yarn watch
