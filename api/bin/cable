@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PIDFILE="tmp/pids/puma_cable.pid"
+PIDFILE="tmp/pids/manifold-cable.pid"
 echo "Checking for cable pidfile at $PIDFILE"
 
 if [ -f $PIDFILE ]

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+PIDFILE="tmp/pids/manifold-api.pid"
+echo "Checking for API pidfile at $PIDFILE"
+
+if [ -f $PIDFILE ]
+then
+    if ps -p $(cat $PIDFILE) > /dev/null 2>&1
+    then
+        echo "API is already running. Restarting."
+        kill -INT $(cat $PIDFILE)
+    fi
+fi
+
+bundle exec puma  -C config/puma.rb
