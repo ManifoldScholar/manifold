@@ -13,15 +13,17 @@ function baseString(emojiKey) {
 function log(string, color, bold) {
   if (endsWith(process.title, "node")) {
     let colorCode = "";
+    if (color === "yellow") colorCode = "\x1b[33m";
     if (color === "blue") colorCode = "\x1b[34m";
     if (color === "green") colorCode = "\x1b[32m";
-    if (color === "gray") colorCode = "\x1b[2m";
+    if (color === "gray") colorCode = "\x1b[90m";
     if (color === "red") colorCode = "\x1b[31m";
     const resetCode = "\x1b[0m";
     const boldCode = bold ? "\x1b[1m" : "";
     console.log(colorCode + boldCode + string + resetCode);
   } else {
     let colorCode = color;
+    if (color === "yellow") colorCode = "#01B6E1";
     if (color === "blue") colorCode = "#01B6E1";
     if (color === "green") colorCode = "#34a178";
     if (color === "gray") colorCode = "#555555";
@@ -38,7 +40,7 @@ function header(string, emojiKey = "fist") {
 
 function info(string, emojiKey = "bell") {
   const out = baseString(emojiKey) + string;
-  log(out, "blue", true);
+  log(out, "yellow", false);
 }
 
 function error(string, emojiKey = "fire") {
@@ -51,8 +53,16 @@ function notice(string, emojiKey = "floppy_disk") {
   log(out, "gray", true);
 }
 
+function plain(string) {
+  if (__SERVER__) {
+    console.log(`[SSR] ${string}`);
+  } else {
+    console.log(string);
+  }
+}
+
 function background(string) {
-  log(string, "gray", true);
+  log(string, "gray", false);
 }
 
 module.exports = {
@@ -60,5 +70,6 @@ module.exports = {
   info,
   notice,
   error,
+  plain,
   background
 };
