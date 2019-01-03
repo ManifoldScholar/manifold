@@ -3,8 +3,8 @@ require "dotenv"
 Dotenv.load
 
 daemonize false
-pidfile "tmp/pids/puma.pid"
-state_path "tmp/pids/puma.state"
+pidfile "tmp/pids/manifold-api.pid"
+state_path "tmp/pids/manifold-api.state"
 threads 0, 16
 tag "manifold-api"
 environment ENV["RAILS_ENV"] || "development"

@@ -1,4 +1,4 @@
-api: ./bin/puma
+api: ./bin/api
 worker: ./bin/sidekiq_dev
 clockwork: ./bin/clockwork clock.rb
 client: ./bin/client_dev
