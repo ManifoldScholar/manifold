@@ -40,6 +40,11 @@ export class FormHasMany extends PureComponent {
     searchable: true
   };
 
+  get entities() {
+    const entities = this.props.name ? this.props.value : this.props.entities;
+    return entities || [];
+  }
+
   onNew = value => {
     if (!this.props.onNew || !this.props.changeHandler) return null;
     this.props.onNew(value).then(newEntity => {
@@ -64,7 +69,7 @@ export class FormHasMany extends PureComponent {
   };
 
   selectOne(entity) {
-    const newEntities = this.entities(this.props).slice(0);
+    const newEntities = this.entities.slice(0);
     if (!newEntities.find(e => e.id === entity.id)) newEntities.push(entity);
 
     this.onChange(newEntities, "select");
@@ -72,11 +77,6 @@ export class FormHasMany extends PureComponent {
 
   selectMany(entities) {
     this.onChange(entities, "select");
-  }
-
-  entities(props) {
-    if (props.name) return props.value;
-    return props.entities;
   }
 
   entityName = entity => {
@@ -91,7 +91,7 @@ export class FormHasMany extends PureComponent {
         label={props.label}
         orderable={props.orderable}
         onChange={this.onChange}
-        entities={this.entities(props)}
+        entities={this.entities}
         entityName={this.entityName}
         editClickHandler={props.editClickHandler}
         entityAvatarAttribute={props.entityAvatarAttribute}
