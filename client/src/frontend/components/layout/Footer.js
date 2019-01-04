@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import chunk from "lodash/chunk";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
-
+import withPluginReplacement from "hoc/with-plugin-replacement";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
 
 class LayoutFooter extends Component {
@@ -343,4 +343,6 @@ class LayoutFooter extends Component {
   }
 }
 
-export default withRouter(LayoutFooter);
+export default withRouter(
+  withPluginReplacement(LayoutFooter, "Frontend.Components.Layout.Footer")
+);

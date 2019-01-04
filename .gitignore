@@ -47,4 +47,4 @@ doc
 
 .DS_Store
 
-client/plugins
+client/plugins*

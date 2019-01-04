@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
+import PreHeader from "./PreHeader";
 
 import BodyClass from "hoc/body-class";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
@@ -84,6 +85,7 @@ export default class LayoutHeader extends PureComponent {
       <BlurOnLocationChange location={this.props.location}>
         <BodyClass className={bodyClasses}>
           <header className="header-app">
+            <PreHeader />
             <div className="header-container">
               <Link to={lh.link("frontend")} className="header-logo">
                 <span className="screen-reader-text">Return to home</span>

@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import Utility from "global/components/utility";
 import Overlay from "global/components/Overlay";
 import TextMeta from "reader/components/TextMeta";
+import Layout from "reader/components/layout";
 import Notes from "reader/components/notes";
 import Toc from "reader/components/Toc";
 import FooterMenu from "reader/components/FooterMenu";
@@ -264,6 +265,7 @@ export class ReaderContainer extends Component {
             commonActions={this.commonActions}
             {...this.readerActions}
           />
+          <Layout.PostFooter />
         </div>
       </BodyClass>
     );

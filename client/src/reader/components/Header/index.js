@@ -10,6 +10,7 @@ import HeaderNotifications from "global/components/HeaderNotifications";
 import UserMenuBody from "global/components/UserMenuBody";
 import UserMenuButton from "global/components/UserMenuButton";
 import UIPanel from "global/components/UIPanel";
+import Layout from "reader/components/layout";
 import memoize from "lodash/memoize";
 import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
@@ -109,6 +110,7 @@ export default class Header extends Component {
     return (
       <BlurOnLocationChange location={this.props.location}>
         <header className={headerClass}>
+          <Layout.PreHeader />
           <nav className={containerClass}>
             <ReturnMenu.Button
               toggleReaderMenu={this.panelToggleHandler("readerReturn")}

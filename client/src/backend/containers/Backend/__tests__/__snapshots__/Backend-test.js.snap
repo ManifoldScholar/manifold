@@ -178,96 +178,100 @@ exports[`Backend Backend Container renders correctly 1`] = `
                   </Route>
                 </withRouter(ChildSwitch)>
               </main>
-              <withRouter(Layout.Footer) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}}>
+              <withRouter(Connect(withPluginReplacement('Layout.Footer))) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}}>
                 <Route>
-                  <Layout.Footer pages={{...}} authentication={{...}} commonActions={{...}} settings={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
-                    <BlurOnLocationChange location={{...}}>
-                      <div>
-                        <footer className=\\"footer-browse\\">
-                          <section className=\\"footer-primary\\">
-                            <div className=\\"container flush\\">
-                              <div className=\\"flex-row\\">
-                                <div className=\\"right\\">
-                                  <form className=\\"search-form\\" onSubmit={[Function]}>
-                                    <div className=\\"search-button-inline\\">
-                                      <label htmlFor=\\"footer-search\\" className=\\"screen-reader-text\\">
-                                        Site Search
-                                      </label>
-                                      <input type=\\"text\\" id=\\"footer-search\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
-                                      <button className=\\"manicon manicon-magnify\\">
-                                        <span className=\\"screen-reader-text\\">
-                                          Search
-                                        </span>
-                                      </button>
-                                    </div>
-                                  </form>
-                                </div>
-                                <div className=\\"rel left\\">
-                                  <nav className=\\"text-nav\\">
-                                    <ul>
-                                      <li>
-                                        <ul className=\\"footer-nav\\">
-                                          <li>
-                                            <span className=\\"fake-link\\" role=\\"button\\" tabIndex=\\"0\\" onClick={[Function]}>
-                                              Log Out
+                  <Connect(withPluginReplacement('Layout.Footer)) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
+                    <withPluginReplacement('Layout.Footer) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} dispatch={[Function]}>
+                      <Layout.Footer pages={{...}} authentication={{...}} commonActions={{...}} settings={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} dispatch={[Function]}>
+                        <BlurOnLocationChange location={{...}}>
+                          <div>
+                            <footer className=\\"footer-browse\\">
+                              <section className=\\"footer-primary\\">
+                                <div className=\\"container flush\\">
+                                  <div className=\\"flex-row\\">
+                                    <div className=\\"right\\">
+                                      <form className=\\"search-form\\" onSubmit={[Function]}>
+                                        <div className=\\"search-button-inline\\">
+                                          <label htmlFor=\\"footer-search\\" className=\\"screen-reader-text\\">
+                                            Site Search
+                                          </label>
+                                          <input type=\\"text\\" id=\\"footer-search\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
+                                          <button className=\\"manicon manicon-magnify\\">
+                                            <span className=\\"screen-reader-text\\">
+                                              Search
                                             </span>
-                                          </li>
+                                          </button>
+                                        </div>
+                                      </form>
+                                    </div>
+                                    <div className=\\"rel left\\">
+                                      <nav className=\\"text-nav\\">
+                                        <ul>
                                           <li>
-                                            <Link to=\\"/\\" replace={false}>
-                                              <a onClick={[Function]} href=\\"/\\">
-                                                Home
-                                              </a>
-                                            </Link>
+                                            <ul className=\\"footer-nav\\">
+                                              <li>
+                                                <span className=\\"fake-link\\" role=\\"button\\" tabIndex=\\"0\\" onClick={[Function]}>
+                                                  Log Out
+                                                </span>
+                                              </li>
+                                              <li>
+                                                <Link to=\\"/\\" replace={false}>
+                                                  <a onClick={[Function]} href=\\"/\\">
+                                                    Home
+                                                  </a>
+                                                </Link>
+                                              </li>
+                                              <li>
+                                                <Link to=\\"/projects/all\\" replace={false}>
+                                                  <a onClick={[Function]} href=\\"/projects/all\\">
+                                                    Projects
+                                                  </a>
+                                                </Link>
+                                              </li>
+                                            </ul>
                                           </li>
-                                          <li>
-                                            <Link to=\\"/projects/all\\" replace={false}>
-                                              <a onClick={[Function]} href=\\"/projects/all\\">
-                                                Projects
-                                              </a>
-                                            </Link>
-                                          </li>
+                                          <li />
                                         </ul>
-                                      </li>
-                                      <li />
-                                    </ul>
-                                  </nav>
+                                      </nav>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-                          </section>
-                          <section className=\\"footer-secondary\\">
-                            <div className=\\"container flush\\">
-                              <div className=\\"colophon\\">
-                                <div dangerouslySetInnerHTML={{...}} />
-                              </div>
-                            </div>
-                          </section>
-                          <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"footer-tertiary\\">
-                            <section aria-hidden=\\"true\\">
-                              <div className=\\"container flush\\">
-                                <span className=\\"logo\\">
-                                  <i className=\\"manicon manicon-manifold-logo\\" />
-                                  <span className=\\"text\\">
-                                    <span className=\\"neutral-text\\">
-                                      Powered by
+                              </section>
+                              <section className=\\"footer-secondary\\">
+                                <div className=\\"container flush\\">
+                                  <div className=\\"colophon\\">
+                                    <div dangerouslySetInnerHTML={{...}} />
+                                  </div>
+                                </div>
+                              </section>
+                              <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"footer-tertiary\\">
+                                <section aria-hidden=\\"true\\">
+                                  <div className=\\"container flush\\">
+                                    <span className=\\"logo\\">
+                                      <i className=\\"manicon manicon-manifold-logo\\" />
+                                      <span className=\\"text\\">
+                                        <span className=\\"neutral-text\\">
+                                          Powered by
+                                        </span>
+                                        <span className=\\"white-text\\">
+                                           Manifold
+                                        </span>
+                                      </span>
                                     </span>
-                                    <span className=\\"white-text\\">
-                                       Manifold
-                                    </span>
-                                  </span>
+                                  </div>
+                                </section>
+                                <span className=\\"screen-reader-text\\">
+                                  Learn more about the Manifold App
                                 </span>
-                              </div>
-                            </section>
-                            <span className=\\"screen-reader-text\\">
-                              Learn more about the Manifold App
-                            </span>
-                          </a>
-                        </footer>
-                      </div>
-                    </BlurOnLocationChange>
-                  </Layout.Footer>
+                              </a>
+                            </footer>
+                          </div>
+                        </BlurOnLocationChange>
+                      </Layout.Footer>
+                    </withPluginReplacement('Layout.Footer)>
+                  </Connect(withPluginReplacement('Layout.Footer))>
                 </Route>
-              </withRouter(Layout.Footer)>
+              </withRouter(Connect(withPluginReplacement('Layout.Footer)))>
             </div>
           </BodyClass>
         </SideEffect(BodyClass)>

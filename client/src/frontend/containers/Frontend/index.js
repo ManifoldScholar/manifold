@@ -115,6 +115,7 @@ export class FrontendContainer extends Component {
             commonActions={this.commonActions}
             settings={this.props.settings}
           />
+          <Layout.PostFooter />
         </div>
       </BodyClass>
     );
