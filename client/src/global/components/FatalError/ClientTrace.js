@@ -28,7 +28,7 @@ export default class FatalErrorClientTrace extends PureComponent {
   }
 
   componentDidMount() {
-    console.error(this.props.trace);
+    console.error(this.props.trace); // eslint-disable-line no-console
   }
 
   static getDerivedStateFromProps(props) {

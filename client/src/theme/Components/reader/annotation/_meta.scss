@@ -14,13 +14,13 @@
     position: absolute;
     top: 0;
     left: 0;
-    border: 1px solid $neutral50;
     cursor: default;
+    border: 1px solid $neutral50;
 
     &.dull {
       @include buttonAvatar(32, $neutral50, $neutral20);
-      border: 1px solid $neutral50;
       cursor: default;
+      border: 1px solid $neutral50;
     }
 
     .image {
