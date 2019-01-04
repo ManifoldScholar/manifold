@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
 import GlobalForm from "global/components/form";
-import setter from "./setter";
-import isNull from "lodash/isNull";
 import Instructions from "./Instructions";
+import withFormOptions from "hoc/with-form-options";
 
 class FormSelect extends Component {
   static displayName = "Form.Select";
@@ -19,7 +18,8 @@ class FormSelect extends Component {
     options: PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.any.isRequired,
-        label: PropTypes.string.isRequired
+        label: PropTypes.string.isRequired,
+        internalValue: PropTypes.any.isRequired
       })
     ).isRequired,
     id: PropTypes.string,
@@ -32,11 +32,9 @@ class FormSelect extends Component {
   };
 
   render() {
-    const value = isNull(this.props.value) ? "" : this.props.value;
-
     const options = this.props.options.map(option => {
       return (
-        <option key={option.value} value={option.value}>
+        <option key={option.internalValue} value={option.internalValue}>
           {option.label}
         </option>
       );
@@ -58,7 +56,7 @@ class FormSelect extends Component {
               id={this.id}
               aria-describedby={this.props.idForError}
               onChange={this.props.onChange}
-              value={value}
+              value={this.props.value}
             >
               {options}
             </select>
@@ -70,4 +68,4 @@ class FormSelect extends Component {
   }
 }
 
-export default setter(FormSelect);
+export default withFormOptions(FormSelect);
