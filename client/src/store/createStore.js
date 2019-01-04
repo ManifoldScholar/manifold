@@ -6,10 +6,12 @@ import currentUserMiddleware from "./middleware/currentUserMiddleware";
 import notificationMiddleware from "./middleware/notificationMiddleware";
 import apiErrorMiddleware from "./middleware/apiErrorMiddleware";
 import websocketMiddleware from "./middleware/websocketMiddleware";
+import pluginMiddleware from "./middleware/pluginMiddleware";
 import onPersistentUIChange from "./subscriptions/onPersistentUIChange";
 import onUserIsCurrentUserUpdate from "./subscriptions/onUserIsCurrentUserUpdate";
 import promiseMiddleware from "redux-promise";
 import reducers from "./reducers";
+import pluginInitializer from "services/plugin/initializer";
 
 export default function createStore(data) {
   const middleware = [];
@@ -18,6 +20,7 @@ export default function createStore(data) {
   middleware.push(apiErrorMiddleware);
   middleware.push(entityStoreMiddleware);
   middleware.push(thunkMiddleware);
+  middleware.push(pluginMiddleware);
   middleware.push(promiseMiddleware);
   middleware.push(websocketMiddleware);
   middleware.push(notificationMiddleware);
@@ -45,6 +48,8 @@ export default function createStore(data) {
   const store = finalCreateStore(reducers, data);
   store.subscribe(onPersistentUIChange(store));
   store.subscribe(onUserIsCurrentUserUpdate(store));
+
+  pluginInitializer.initialize(store);
 
   return store;
 }

@@ -4,6 +4,9 @@ import { shallow } from "enzyme";
 import Layout from "frontend/components/layout";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+
+const store = build.store();
 
 describe("Frontend.Layout.Footer component", () => {
   const settings = build.entity.settings("0");
@@ -31,10 +34,12 @@ describe("Frontend.Layout.Footer component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
-        <Layout.Footer
-          authentication={{ authenticated: false }}
-          settings={settings}
-        />
+        <Provider store={store}>
+          <Layout.Footer
+            authentication={{ authenticated: false }}
+            settings={settings}
+          />
+        </Provider>
       )
     );
     let tree = component.toJSON();

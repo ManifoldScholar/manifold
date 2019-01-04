@@ -3,7 +3,8 @@ webpack/*
 dist
 src/config.js
 plugins
+plugins-off
+plugins.off
 tmp
 !tmp/.gitkeep
 codeshifts
-

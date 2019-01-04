@@ -7,10 +7,10 @@ class Plugins {
   constructor() {
     this.sassNoOp = path.resolve(paths.root, "src/utils/plugins/null.scss");
     this.pluginNoOp = path.resolve(paths.root, "src/utils/plugins/missingPluginsManifest.js");
-    this.pluginsEntry = path.resolve(paths.plugins, "plugins.js");
-    this.customEntry = path.resolve(paths.plugins, "custom.js");
-    this.hasPlugins = fs.existsSync(this.pluginsEntry);
-    this.hasCustom = fs.existsSync(this.customEntry);
+    this.componentsEntry = path.resolve(paths.plugins, "components.js");
+    this.stylesEntry = path.resolve(paths.plugins, "styles.js");
+    this.hasComponents = fs.existsSync(this.componentsEntry);
+    this.hasStyles = fs.existsSync(this.stylesEntry);
   }
 
   get webpackAliases() {
@@ -20,17 +20,21 @@ class Plugins {
       plugins$: this.pluginNoOp
     };
 
-    let aliases;
+    let aliases = baseAliases;
 
-    if (this.hasCustom) {
-      const customAlias = require(this.customEntry).alias;
-      aliases = Object.assign(baseAliases, customAlias);
+    if (this.hasStyles) {
+      const stylesAlias = require(this.stylesEntry).default;
+      if (stylesAlias.hasOwnProperty("variables")) aliases["userVariables$"] = stylesAlias.variables;
+      if (stylesAlias.hasOwnProperty("styles")) aliases["userStyles$"] = stylesAlias.styles;
     }
 
-    if (this.hasPlugins) {
+    if (this.hasComponents) {
+      aliases["plugins$"] = this.componentsEntry;
+    }
+
+    if (this.hasPlugins && this.plugins.hasOwnProperty("components")) {
       aliases = Object.assign(aliases, { plugins$: this.pluginsEntry });
     }
-
     return aliases;
   }
 

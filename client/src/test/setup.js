@@ -19,3 +19,4 @@ jest.mock("hoc/with-form-context");
 jest.mock("api/client");
 
 jest.mock("helpers/labelId");
+jest.mock("services/plugin/initializer");
