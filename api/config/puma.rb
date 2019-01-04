@@ -1,24 +1,31 @@
 #!/usr/bin/env puma
 require "dotenv"
+require "active_support/core_ext/object/blank"
+
 Dotenv.load
+
+listen_on_socket = ENV["API_SOCKET"].present?
+listen_on_port = ENV["API_PORT"].present? || !listen_on_socket
+rails_environment = ENV["RAILS_ENV"] || "development"
+port = ENV["API_PORT"] || 3020
+socket = ENV["API_SOCKET"]
+ip = ENV["API_BIND_IP"] || "0.0.0.0"
 
 daemonize false
 pidfile "tmp/pids/manifold-api.pid"
 state_path "tmp/pids/manifold-api.state"
-threads 0, 16
 tag "manifold-api"
-environment ENV["RAILS_ENV"] || "development"
-name = "manifold-api"
+environment rails_environment
 
-port = ENV["RAILS_SERVER_PORT"] || ENV["API_PORT"]
-
-if ENV["BOXEN_SOCKET_DIR"]
-  socket_dir = "unix://#{ENV['BOXEN_SOCKET_DIR']}"
-  socket_path = "#{socket_dir}/#{name}"
-elsif ENV["RAILS_SERVER_SOCKET_DIR"] && ENV["RAILS_SERVER_SOCKET_PATH"]
-  socket_dir = "unix://#{ENV['RAILS_SERVER_SOCKET_DIR']}"
-  socket_path = "unix://#{ENV['RAILS_SERVER_SOCKET_PATH']}"
+if rails_environment == "development"
+  workers 1
+  threads 0, 16
+else
+  workers 2
+  threads 0, 6
 end
 
-bind socket_path if socket_dir && socket_path
-bind "tcp://#{ENV['API_BIND_IP']}:#{port}" if port
+preload_app!
+
+bind "unix://#{socket}" if listen_on_socket
+bind "tcp://#{ip}:#{port}" if listen_on_port

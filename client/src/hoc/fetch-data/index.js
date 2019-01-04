@@ -4,6 +4,7 @@ import hoistStatics from "hoist-non-react-statics";
 import { isFunction } from "lodash";
 import { isPromise } from "utils/promise";
 import ch from "helpers/consoleHelpers";
+import config from "config";
 
 function getDisplayName(WrappedComponent) {
   let Wrapped = WrappedComponent;
@@ -58,7 +59,7 @@ export default function fetchData(WrappedComponent) {
     }
 
     log(props) {
-      if (process.env.NODE_ENV === "development" && __CLIENT__) {
+      if (config.environment.isDevelopment && config.environment.isBrowser) {
         ch.notice(
           `FetchData: ${getDisplayName(WrappedComponent)} [${
             props.location.key

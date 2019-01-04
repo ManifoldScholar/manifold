@@ -3,7 +3,7 @@ import path from "path";
 import ch from "../../helpers/consoleHelpers";
 
 export default function readStats(name) {
-  const statsPath = path.join(__dirname, "manifest.json");
+  const statsPath = path.join(__dirname, "..", "manifest.json");
 
   let stats;
   try {
@@ -18,6 +18,7 @@ export default function readStats(name) {
       "been built? Running 'yarn build' will regenerate servers and client,",
       "including a new client manifest."
     ].forEach(msg => ch.error(msg));
+    console.log(err, "err"); // eslint-disable-line no-console
     process.exit();
   }
 }

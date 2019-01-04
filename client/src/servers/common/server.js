@@ -2,76 +2,68 @@ import fs from "fs";
 import ch from "../../helpers/consoleHelpers";
 import PrettyError from "pretty-error";
 import http from "http";
-import capitalize from "lodash/capitalize";
 
-export default function webServer(app, name, options) {
+export default function webServer(
+  app,
+  name,
+  options = { socket: null, port: null }
+) {
   const pretty = new PrettyError();
   const socket = options.socket;
   const port = options.port;
-  const listen = socket || port;
-  const listenType = socket ? "socket" : "port";
+  const servers = [];
 
   // Helpers
   const unlinkSocket = () => {
     if (!socket) return;
     if (!fs.existsSync(socket)) return;
     fs.unlinkSync(socket);
-    ch.error(
-      capitalize(
-        `${name} server is unlinking the existing socket at ${socket}.`
-      )
-    );
+    ch.error(`${name} server is unlinking the existing socket at ${socket}.`);
   };
 
-  // Callbacks
-  const onServerListen = err => {
-    if (err) {
-      ch.error(capitalize(`${name} server encountered an error.`));
-      ch.error("SERVER ERROR:", pretty.render(err));
-    }
-    if (listenType === "socket") {
-      ch.header(
-        capitalize(`${name} server is listening on a socket at ${listen}.`)
-      );
-      return fs.chmod(socket, "0777");
-    }
-    ch.header(capitalize(`${name} server is listening on port ${listen}.`));
-  };
-
-  const onServerError = error => {
-    if (error.code === "EADDRINUSE" && socket) {
-      ch.error(
-        capitalize(capitalize(`${name} server can't bind to existing socket.`))
-      );
-      unlinkSocket();
-    } else {
-      ch.error(error);
-    }
-  };
-
-  const shutdown = (server, signal) => {
-    server.close(() => {
-      ch.error(`${capitalize(name)} server received ${signal} signal.`);
-      unlinkSocket();
-      ch.error(capitalize(`${capitalize(name)} server is shuting down.`));
-      process.kill(process.pid, signal);
+  const shutdown = signal => {
+    ch.error(`${name} server received ${signal} signal.`);
+    ch.error(`${name} server is shuting down.`);
+    servers.forEach(server => {
+      server.close(() => {
+        unlinkSocket();
+      });
     });
+    process.kill(process.pid, signal);
   };
 
-  const start = server => {
-    server.listen(listen, onServerListen);
+  const makeListenCallback = (listen, listenType) => {
+    return err => {
+      if (err) {
+        ch.error(`${name} server encountered an error.`);
+        ch.error("SERVER ERROR:", pretty.render(err));
+      }
+
+      if (listenType === "socket") {
+        ch.header(`${name} server is listening on a socket at ${listen}.`);
+        return fs.chmodSync(socket, "0777");
+      }
+      if (listenType === "port") {
+        ch.header(`${name} server is listening on port ${listen}.`);
+      }
+    };
   };
 
-  // Initialize the server and start it.
-  const server = new http.Server(app);
-  server.on("error", onServerError);
-  ch.info(capitalize(`${name} server is starting up.`));
-  start(server);
+  if (port) {
+    const server = new http.Server(app);
+    server.listen(port, makeListenCallback(port, "port"));
+    servers.push(server);
+  }
+
+  if (socket) {
+    const server = new http.Server(app);
+    server.listen(socket, makeListenCallback(socket, "socket"));
+    servers.push(server);
+  }
 
   // Handle process exiting.
-  process.once("SIGTERM", () => shutdown(server, "SIGTERM"));
-  process.once("SIGINT", () => shutdown(server, "SIGINT"));
-  process.once("SIGUSR1", () => shutdown(server, "SIGUSR1"));
-  process.once("SIGUSR2", () => shutdown(server, "SIGUSR2"));
-  return server;
+  process.once("SIGTERM", () => shutdown("SIGTERM"));
+  process.once("SIGINT", () => shutdown("SIGINT"));
+  process.once("SIGUSR1", () => shutdown("SIGUSR1"));
+  process.once("SIGUSR2", () => shutdown("SIGUSR2"));
 }

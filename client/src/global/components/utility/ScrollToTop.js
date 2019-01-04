@@ -26,7 +26,7 @@ class ScrollToTop extends PureComponent {
   }
 
   doScroll() {
-    if (!__CLIENT__) return;
+    if (!__BROWSER__) return;
     window.scrollTo(0, 0);
   }
 

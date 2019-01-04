@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import JSONTree from "react-json-tree";
+import config from "config";
 
 export default class Debugger extends PureComponent {
   static propTypes = {
@@ -84,7 +85,7 @@ export default class Debugger extends PureComponent {
   }
 
   render() {
-    if (!process.env.NODE_ENV === "development") return null;
+    if (!config.environment.isDevelopment) return null;
     if (!this.props.object) return null;
 
     return (

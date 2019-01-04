@@ -29,7 +29,7 @@ export function providerSetting(provider) {
  * @return {String}
  */
 export function getUrl(provider) {
-  return `${config.apiUrl}/auth/${providerSlug(provider)}`;
+  return `${config.services.api}/auth/${providerSlug(provider)}`;
 }
 
 /**
@@ -38,7 +38,13 @@ export function getUrl(provider) {
  */
 export function isOauthEvent(event) {
   if (get(event, "data.type") === "oauth") {
-    const allowed = [`http://${config.domain}`, `https://${config.domain}`];
+    const { domain, port } = config.services.client;
+    const allowed = [
+      `http://${domain}`,
+      `https://${domain}`,
+      `http://${domain}:${port}`,
+      `https://${domain}:${port}`
+    ];
     if (!allowed.includes(get(event, "origin"))) {
       console.error("Origin mismatch, %s is not API", event.origin);
       return false;

@@ -7,7 +7,6 @@ import reduce from "lodash/reduce";
 import isString from "lodash/isString";
 import isArray from "lodash/isArray";
 import endsWith from "lodash/endsWith";
-import startsWith from "lodash/startsWith";
 import get from "lodash/get";
 import BodyClass from "hoc/body-class";
 
@@ -25,10 +24,11 @@ export default class Html extends Component {
     stats: PropTypes.object,
     component: PropTypes.node,
     store: PropTypes.object,
-    disableClientSideRender: PropTypes.bool
+    disableBrowserRender: PropTypes.bool
   };
 
   get settings() {
+    if (!this.props.store) return null;
     const state = this.props.store.getState();
     if (!state) return null;
     return get(state, "entityStore.entities.settings.0");
@@ -43,7 +43,7 @@ export default class Html extends Component {
     return reduce(
       chunks,
       (entries, assets, chunkName) => {
-        if (!["build/theme", "build/client"].includes(chunkName))
+        if (!["build/manifold-client-browser"].includes(chunkName))
           return entries;
         if (isString(assets) && test(assets)) entries.push(assets);
         if (isArray(assets)) {
@@ -75,32 +75,18 @@ export default class Html extends Component {
   javascripts = () => {
     if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
     const scripts = this.reduceAssets(".js");
-    scripts.sort(a => {
-      if (a === "build/theme.js") return -1;
-      return 1;
-    });
-
     return scripts.map(script => {
-      if (
-        this.props.disableClientSideRender &&
-        startsWith(script, "build/client")
-      ) {
-        return "";
-      }
       return <script src={`/${script}`} key={script} charSet="UTF-8" />;
     });
   };
 
   favicons = () => {
-    const defaultFavicon = (
-      <link rel="shortcut icon" href="/favicon.ico?client=true" />
-    );
-    const settings = this.settings;
-    if (!settings) return defaultFavicon;
-
-    const favicons = settings.attributes.faviconStyles;
-    if (!favicons) return defaultFavicon;
-
+    const favicons = get(this.settings, "attributes.faviconStyles");
+    if (!favicons || !favicons.original) {
+      return (
+        <link rel="shortcut icon" href="/static/favicon.ico?client=true" />
+      );
+    }
     return (
       <React.Fragment>
         <link
@@ -126,7 +112,7 @@ export default class Html extends Component {
   };
 
   render() {
-    const { component, store, disableClientSideRender } = this.props;
+    const { component, store, disableBrowserRender } = this.props;
     const content = component ? ReactDOM.renderToString(component) : null;
     const helmet = Helmet.renderStatic();
     const bodyClass = BodyClass.rewind();
@@ -154,7 +140,15 @@ export default class Html extends Component {
         </head>
         <body className={bodyClass}>
           <div id="content" {...contentProps} />
-          {store && !disableClientSideRender ? (
+          {store && disableBrowserRender ? (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.DISABLE_BROWSER_RENDER=true`
+              }}
+              charSet="UTF-8"
+            />
+          ) : null}
+          {store && !disableBrowserRender ? (
             <script
               dangerouslySetInnerHTML={{
                 __html: `window.__INITIAL_STATE__=${serialize(

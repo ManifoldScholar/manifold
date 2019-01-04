@@ -1,14 +1,14 @@
-const paths = require("../paths");
-const fs = require("fs");
-const mkdirp = require("mkdirp");
-const path = require("path");
+import paths from "../helpers/paths";
+import fs from "fs";
+import mkdirp from "mkdirp";
 
-function statsPlugin(options) {
+function ManifestPlugin(options) {
   this.options = options;
 }
 
-statsPlugin.prototype.apply = function apply(compiler) {
-  compiler.plugin("after-emit", (compilation, done) => {
+ManifestPlugin.prototype.apply = function apply(compiler) {
+
+  compiler.hooks.afterEmit.tap("ManifoldWebpackManifestPlugin", (compilation, done) => {
     const stats = compilation.getStats().toJson({
       hash: true,
       version: true,
@@ -29,14 +29,10 @@ statsPlugin.prototype.apply = function apply(compiler) {
     });
     delete stats.assets;
     const out = { assetsByChunkName: stats.assetsByChunkName };
-    const targetDir = process.env.WEBPACK_BUILD_TARGET
-      ? process.env.WEBPACK_BUILD_TARGET
-      : "";
-    const base = path.resolve(paths.root, targetDir, paths.relativeOutput);
-    const writePath = `${base}/${this.options.fileName}`;
-    mkdirp.sync(base);
-    fs.writeFile(writePath, JSON.stringify(out, null, 2), done);
+    const writePath = `${paths.build}/${this.options.fileName}`;
+    mkdirp.sync(paths.build);
+    fs.writeFileSync(writePath, JSON.stringify(out, null, 2), done);
   });
 };
 
-module.exports = statsPlugin;
+module.exports = ManifestPlugin;

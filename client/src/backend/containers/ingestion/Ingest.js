@@ -230,14 +230,14 @@ export class IngestionIngest extends Component {
   displayError() {
     const body = (
       <React.Fragment>
-        {config.cableUrl ? (
+        {config.services.cable ? (
           <span>
             {"The client application is unable to connect to the server's websocket. " +
               'Please ensure that Manifold\'s "cable" service is available at the ' +
               "following location:"}
             <br />
             <br />
-            <em>{config.cableUrl}</em>
+            <em>{config.services.cable}</em>
           </span>
         ) : (
           <span>

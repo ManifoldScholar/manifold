@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import BodyClass from "hoc/body-class";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
-import ComponentTrace from "./ComponentTrace";
+import config from "config";
 
 export default class FatalError extends PureComponent {
   static propTypes = {
@@ -44,7 +44,7 @@ export default class FatalError extends PureComponent {
   render() {
     if (!this.props.fatalError) return null;
     const { error } = this.props.fatalError;
-    const showDetail = process.env.NODE_ENV === "development";
+    const showDetail = config.environment.isDevelopment;
 
     return (
       <BodyClass className="  fatal-error-page">

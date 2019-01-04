@@ -190,7 +190,7 @@ class UpdateFormContainer extends Component {
             />
           </Form.Errorable>
         </div>
-        {__CLIENT__ ? (
+        {__BROWSER__ ? (
           <div className="row-1-p">
             {this.displayAvatar() ? null : (
               <p className="overlay-copy">

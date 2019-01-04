@@ -23,7 +23,7 @@ export class LowLevelApiClient {
   }
 
   _adjustedEndpoint(endpoint) {
-    return config.apiUrl + endpoint;
+    return config.services.api + endpoint;
   }
 
   _endpointWithParams(endpoint, params) {
