@@ -91,6 +91,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
               <select
                 aria-describedby="select-error-1"
                 onChange={[Function]}
+                value=""
               >
                 <option
                   value="most_recent"

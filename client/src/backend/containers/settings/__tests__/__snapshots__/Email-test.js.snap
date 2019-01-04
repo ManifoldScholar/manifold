@@ -200,6 +200,7 @@ The Manifold Team"
                       <select
                         aria-describedby="select-error-1"
                         onChange={[Function]}
+                        value=""
                       >
                         <option
                           value=""
@@ -510,6 +511,7 @@ The Manifold Team"
                       <select
                         aria-describedby="select-error-1"
                         onChange={[Function]}
+                        value=""
                       >
                         <option
                           value=""

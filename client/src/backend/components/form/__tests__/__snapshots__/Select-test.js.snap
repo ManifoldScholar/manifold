@@ -21,6 +21,7 @@ exports[`Backend.Form.Select component renders correctly 1`] = `
       <select
         aria-describedby="select-error-1"
         onChange={[Function]}
+        value=""
       >
         <option
           value="1"
