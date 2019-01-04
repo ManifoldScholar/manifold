@@ -1,19 +1,18 @@
 /* eslint-disable no-console */
-import "babel-polyfill";
 import config from "config";
 import ch from "./helpers/consoleHelpers";
 import React from "react";
 import ReactDOM from "react-dom/server";
 import Html from "./helpers/Html";
-import App from "./App";
+import App from "global/containers/App";
 import createStore from "./store/createStore";
 import webServer from "./servers/common/server";
 import webApp from "./servers/common/app";
-import readStats from "./servers/common/readStats";
+import readStats from "./servers/common/read-stats";
 import cookie from "cookie";
 import { currentUserActions } from "actions";
 import exceptionRenderer from "./helpers/exceptionRenderer";
-import Manifold from "Manifold";
+import Manifold from "global/containers/Manifold";
 import { isPromise } from "utils/promise";
 import isFunction from "lodash/isFunction";
 import has from "lodash/has";
@@ -32,14 +31,12 @@ const tls = require("tls");
 
 tls.DEFAULT_ECDH_CURVE = "auto";
 
-let port;
-let socket;
-if (process.env.WEBPACK_DEV_SERVER) {
-  port = config.clientFallbackPort;
-} else {
-  socket = config.clientSocket;
-  port = config.clientPort;
-}
+const socket = config.services.client.rescueEnabled
+  ? null
+  : config.services.client.socket;
+const port = config.services.client.rescueEnabled
+  ? config.services.client.sparePort
+  : config.services.client.port;
 const stats = readStats("Client");
 
 const respondWithRedirect = (res, redirectLocation) => {
@@ -54,7 +51,7 @@ const fatalErrorOutput = (errorComponent, store) => {
   return ReactDOM.renderToString(
     <Html
       component={errorComponent}
-      disableClientSideRender
+      disableBrowserRender
       stats={stats}
       store={store}
     />
@@ -168,7 +165,7 @@ const requestHandler = (req, res) => {
   bootstrap(req, store)
     .then(
       () => {
-        ch.info("App bootstrapped", "sparkles");
+        ch.plain("App bootstrapped");
         return fetchRouteData(req, store);
       },
       () => {
@@ -178,7 +175,7 @@ const requestHandler = (req, res) => {
     )
     .then(
       () => {
-        ch.info("Route data fetched", "sparkles");
+        ch.plain("Route data fetched");
         render(req, res, store);
       },
       () => {
@@ -189,6 +186,12 @@ const requestHandler = (req, res) => {
 };
 
 // Create the app and the server
-const app = webApp("client");
+// If the server isn't running alongside the rescue server (in a development env), then we
+// will proxy some asset and API routes. Ideally, in production, these are delivered by a
+// webserver like nginx, and not through this node process.
+const doProxy =
+  !config.services.client.rescueEnabled &&
+  config.services.client.proxiesEnabled;
+const app = webApp("SSR", { proxyProdAssets: doProxy, proxyAPI: doProxy });
 app.use(requestHandler);
-webServer(app, "client", { socket, port });
+webServer(app, "SSR", { socket, port });

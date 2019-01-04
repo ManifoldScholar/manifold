@@ -11,10 +11,14 @@ upstream manifold-client.<%= tld.strip %> {
 }
 
 server {
-  access_log <%= log_dir %>/nginx.access.log combined;
+
   listen 80;
-  root <%= root %>/api/public;
+  listen 443 default_server ssl;
   server_name manifold.<%= tld.strip %>;
+  root <%= root %>/client/dist/manifold/www;
+
+  access_log <%= log_dir %>/nginx.access.log combined;
+  error_log <%= log_dir %>/nginx.error.log;
 
   client_max_body_size 100M;
   client_body_timeout 600s;
@@ -23,8 +27,6 @@ server {
 
   error_page 500 502 503 504 /50x.html;
 
-  listen 443;
-  ssl    on;
   ssl_certificate <%= root %>/config/dev/ssl/<%= name %>.<%= tld.strip %>.crt;
   ssl_certificate_key <%= root %>/config/dev/ssl/<%= name %>.<%= tld.strip %>.key;
   ssl_protocols  SSLv2 SSLv3 TLSv1;
@@ -38,21 +40,7 @@ server {
   }
 
   location = /50x.html {
-    root html;
-  }
-
-  location /sidekiq {
-    proxy_set_header Host            $host;
-    proxy_set_header X-Forwarded-For $remote_addr;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_pass http://manifold-api.<%= tld.strip %>;
-  }
-
-  location /rails {
-    proxy_set_header Host            $host;
-    proxy_set_header X-Forwarded-For $remote_addr;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_pass http://manifold-api.<%= tld.strip %>;
+    root <%= root %>/client/dist/manifold/www/static;
   }
 
   location /api {
@@ -60,6 +48,10 @@ server {
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_pass http://manifold-api.<%= tld.strip %>;
+  }
+
+  location /system {
+    root <%= root %>/api/public;
   }
 
   location /auth {
@@ -77,6 +69,20 @@ server {
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_pass http://manifold-cable.<%= tld.strip %>;
+  }
+
+  location /sidekiq {
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://manifold-api.<%= tld.strip %>;
+  }
+
+  location /rails {
+    proxy_set_header Host            $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://manifold-api.<%= tld.strip %>;
   }
 
   location / {

@@ -49,8 +49,6 @@ module ManifoldApi
     config.action_cable.allowed_request_origins = [
       "http://#{ENV['DOMAIN']}",
       "https://#{ENV['DOMAIN']}",
-      "http://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_FALLBACK_PORT']}",
-      "https://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_FALLBACK_PORT']}",
       "http://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_PORT']}",
       "https://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_PORT']}"
     ]

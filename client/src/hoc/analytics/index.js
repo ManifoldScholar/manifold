@@ -4,6 +4,7 @@ import ReactGA from "react-ga";
 import withSettings from "hoc/with-settings";
 import { withRouter } from "react-router-dom";
 import get from "lodash/get";
+import config from "config";
 
 class Analytics extends Component {
   static propTypes = {
@@ -43,13 +44,13 @@ class Analytics extends Component {
   }
 
   logInit(propsIgnored) {
-    if (process.env.NODE_ENV === "development" && __CLIENT__) {
+    if (config.environment.isDevelopment && config.environment.isBrowser) {
       console.log(`📈 Analytics: Initialized`); // eslint-disable-line no-console
     }
   }
 
   logTrack(props) {
-    if (process.env.NODE_ENV === "development" && __CLIENT__) {
+    if (config.environment.isDevelopment && config.environment.isBrowser) {
       console.log(`📉 Analytics: page view for ${props.location.pathname}`); // eslint-disable-line no-console
     }
   }

@@ -10,12 +10,8 @@ import SignInUp from "global/components/sign-in-up";
 import has from "lodash/has";
 import get from "lodash/get";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
-import {
-  uiVisibilityActions,
-  routingActions,
-  currentUserActions
-} from "actions";
-import { meAPI, settingsAPI, requests } from "api";
+import { uiVisibilityActions, routingActions } from "actions";
+import { meAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { closest } from "utils/domUtils";
@@ -23,8 +19,8 @@ import ReactGA from "react-ga";
 import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
 import getRoutes from "routes";
-import ch from "helpers/consoleHelpers";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
+import bootstrap from "./bootstrap";
 
 const routes = getRoutes();
 const { request } = entityStoreActions;
@@ -33,47 +29,7 @@ const { visibilityHide } = uiVisibilityActions;
 class ManifoldContainer extends PureComponent {
   // This method will bootstrap data into manifold. Nothing else is loaded into the
   // store at this point, including params and the authenticated user.
-  static bootstrap = (getState, dispatch, cookie) => {
-    const promises = [];
-    const state = getState();
-
-    // Load settings if they have not already been loaded.
-    const loaded = has(state, "entityStore.entities.settings.0");
-    if (!loaded) {
-      const settingsRequest = request(settingsAPI.show(), requests.settings, {
-        oneTime: true
-      });
-      const settingsPromise = dispatch(settingsRequest).promise;
-      settingsPromise.then(
-        () => {
-          ch.info("Settings loaded", "sparkles");
-        },
-        () => {
-          ch.error("Settings failed to load", "rain_cloud");
-        }
-      );
-      promises.push(settingsPromise);
-    }
-
-    // Authenticate from cookie.
-    if (cookie && !state.authentication.authenticated) {
-      const authToken = cookie.authToken;
-      if (authToken) {
-        const authPromise = dispatch(currentUserActions.login({ authToken }));
-        authPromise.then(
-          () => {
-            ch.info("User authenticated", "sparkles");
-          },
-          () => {
-            ch.info("Unable to authenticate user", "rain_cloud");
-          }
-        );
-        promises.push(authPromise);
-      }
-    }
-
-    return Promise.all(promises);
-  };
+  static bootstrap = bootstrap;
 
   static mapStateToProps = state => {
     return {

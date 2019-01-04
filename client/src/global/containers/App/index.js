@@ -4,12 +4,11 @@ import createStore from "store/createStore";
 import { BrowserRouter, StaticRouter } from "react-router-dom";
 import Dialog from "backend/components/dialog";
 import { Provider } from "react-redux";
-import Manifold from "Manifold";
+import Manifold from "global/containers/Manifold";
 import cookie from "cookie";
 import get from "lodash/get";
-import ch from "./helpers/consoleHelpers";
+import ch from "helpers/consoleHelpers";
 import { hot } from "react-hot-loader";
-
 import Analytics from "hoc/analytics";
 
 class App extends Component {

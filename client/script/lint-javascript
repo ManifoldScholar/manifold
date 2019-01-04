@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+file = "."
+
+options = {}
+OptionParser.new do |opt|
+  opt.on('--fix') { options[:fix] = true }
+  opt.on('--no-ignore') { options[:no_ignore] = true }
+end.parse!
+
+command_args = %w(--color --max-warnings=0)
+
+unless ARGV.empty?
+  file = ARGV[0].split(" ").select { |arg| arg.end_with?(".", ".js", ".jsx")}.join(" ")
+  if file.empty?
+    exit(0)
+  end
+else
+  command_args.push("--cache-location=tmp/.eslint-cache-full")
+  command_args.push("--cache")
+end
+
+command_args.push "--fix" if options[:fix]
+command_args.push "--no-ignore" if options[:no_ignore]
+
+args = command_args.join(" ")
+
+command = "./node_modules/.bin/eslint #{args} #{file}"
+
+msg = "Linting Javascript..."
+puts "\e[33m#{msg}\e[0m"
+puts "\e[1;30m#{command}\e[0m"
+
+out = `#{command}`
+puts out
+exit($?.exitstatus)
+

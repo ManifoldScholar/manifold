@@ -3,12 +3,12 @@ import startsWith from "lodash/startsWith";
 import { notifications } from "api";
 
 function isAddNotificationAction(action) {
-  if (!__CLIENT__) return false;
+  if (!__BROWSER__) return false;
   return action.type === "ADD_NOTIFICATION" && action.payload;
 }
 
 function isApiResponseAction(action) {
-  if (!__CLIENT__) return false;
+  if (!__BROWSER__) return false;
   return startsWith(action.type, "API_RESPONSE");
 }
 

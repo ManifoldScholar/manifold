@@ -23,7 +23,7 @@ export default function createStore(data) {
   middleware.push(notificationMiddleware);
 
   let finalCreateStore;
-  if (__CLIENT__) {
+  if (__BROWSER__) {
     const composeEnhancers =
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     finalCreateStore = composeEnhancers(applyMiddleware(...middleware))(
@@ -35,7 +35,7 @@ export default function createStore(data) {
 
   /* eslint-disable no-unused-vars */
   let devtoolsExtension = null;
-  if (__CLIENT__) {
+  if (__BROWSER__) {
     devtoolsExtension =
       window.__REDUX_DEVTOOLS_EXTENSION__ &&
       window.__REDUX_DEVTOOLS_EXTENSION__();

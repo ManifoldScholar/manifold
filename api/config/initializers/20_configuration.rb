@@ -2,14 +2,10 @@ m = Hashie::Mash.new(Rails.application.config_for(:manifold))
 
 # Load environment variables into configuration so we have a unified interface
 # for accessing configuration that can be spread across a few locations.
-
-m.url ||= if ENV["CLIENT_URL"]
-            (ENV["CLIENT_URL"]).to_s
-          else
-            "#{ENV['USE_SSL'].to_s == '1' ? 'https' : 'http'}://#{ENV['DOMAIN']}"
-          end
-
-m.api_url ||= ENV["API_URL"]
+ssl_enabled = %w(1 true).include?(ENV["SSL_ENABLED"].to_s.downcase)
+m.domain = ENV["DOMAIN"]
+m.url ||= "#{ssl_enabled ? 'https' : 'http'}://#{m.domain}"
+m.api_url ||= ENV["CLIENT_BROWSER_API_URL"] || m.url
 m.elastic_search!.url ||= ENV["ELASTICSEARCH_URL"]
 
 Rails.application.config.manifold = m

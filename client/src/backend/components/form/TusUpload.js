@@ -82,7 +82,7 @@ export class FormTusUpload extends Component {
       const { type: mimeType, name: filename } = attachment;
       const upload = new tus.Upload(attachment, {
         chunkSize: 5 * 1024 * 1024,
-        endpoint: config.apiUrl + "/api/files",
+        endpoint: config.services.api + "/api/files",
         retryDelays: [0, 1000, 3000, 5000],
         metadata: {
           filename,

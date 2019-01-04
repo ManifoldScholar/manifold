@@ -5,6 +5,7 @@ import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-
 import { connect } from "react-redux";
 import classNames from "classnames";
 import { commonActions } from "actions/helpers";
+import config from "config";
 
 export class NotificationsComponent extends Component {
   static mapStateToProps = state => {
@@ -41,7 +42,7 @@ export class NotificationsComponent extends Component {
 
   // Only necessary for debugging/testing notifications before they exist.
   componentDidMount() {
-    if (process.env.NODE_ENV === "development") {
+    if (config.environment.isDevelopment) {
       window.addEventListener("keyup", this.handleNotifications);
     }
   }

@@ -5,23 +5,23 @@ import createStore from "../../store/createStore";
 import cookie from "cookie";
 import has from "lodash/has";
 import exceptionRenderer from "../../helpers/exceptionRenderer";
-import Manifold from "Manifold";
+import ManifoldBootstrap from "global/containers/Manifold/bootstrap";
 import { authenticateWithToken } from "store/middleware/currentUserMiddleware";
 
-const clientFallbackPort = `http://localhost:${config.clientFallbackPort}`;
+const ssrRenderUrl = `http://${config.services.client.domain}:${
+  config.services.client.sparePort
+}`;
 
 export default function makeRendererProxy(stats, requestHandler) {
   const reactServerProxy = proxy({
-    target: clientFallbackPort,
+    target: ssrRenderUrl,
     changeOrigin: true,
     logLevel: "silent",
 
     onError: (err, req, res) => {
-      ch.error(`Error proxying to port ${clientFallbackPort}`);
-      ch.error(
-        `Perhaps the React rendering service is in the process of reloading?`
-      );
-      ch.error(`Falling back to client-side render only`);
+      ch.error(`Error proxying to port ${ssrRenderUrl}`);
+      ch.error(`Perhaps the SSR service is in the process of reloading?`);
+      ch.error(`Falling back to SSR rescue service only`);
 
       const store = createStore();
 
@@ -44,7 +44,7 @@ export default function makeRendererProxy(stats, requestHandler) {
             res.end(msg);
           } else {
             ch.error(
-              `Rendering fallback failed to render in server-development.js`
+              `Rendering fallback failed to render inn server-developmet.js`
             );
             res.setHeader("Content-Type", "text/html");
             res.end(exceptionRenderer(error));
@@ -55,7 +55,7 @@ export default function makeRendererProxy(stats, requestHandler) {
       const promises = [];
 
       if (!has(store.getState(), "entityStore.entities.settings.0")) {
-        promises.push(Manifold.bootstrap(store.getState, store.dispatch));
+        promises.push(ManifoldBootstrap(store.getState, store.dispatch));
       }
 
       promises.push(authenticateWithToken(authToken, store.dispatch));

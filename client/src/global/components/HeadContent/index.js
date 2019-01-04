@@ -53,7 +53,7 @@ export class HeadContentComponent extends Component {
       this.props.image ||
       get(this.props.settings, "attributes.pressLogoStyles.medium") ||
       `/static/logo.jpg`;
-    return `${config.clientUrl}${image}`;
+    return `${config.services.client.url}${image}`;
   }
 
   readPropValue(key) {

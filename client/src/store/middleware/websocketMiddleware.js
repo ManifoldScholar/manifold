@@ -10,7 +10,7 @@ let actionCableMiddleware = ({ dispatchIgnored, getStateIgnored }) => {
   };
 };
 
-if (__CLIENT__) {
+if (__BROWSER__) {
   let cable = null;
   const openSubscriptions = {};
 
@@ -86,7 +86,7 @@ if (__CLIENT__) {
       if (action.type === "WEBSOCKET_SUBSCRIBE") {
         if (cable === null || cable.connection.disconnected === true) {
           if (cable === null) {
-            cable = ActionCable.createConsumer(config.cableUrl);
+            cable = ActionCable.createConsumer(config.services.cable);
           } else {
             cable.connect();
           }
