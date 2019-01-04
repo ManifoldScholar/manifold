@@ -26,7 +26,7 @@ class FatalErrorBoundary extends Component {
 
   // noop, this lifecycle method just needs to be present
   // to log the component stack to the console in development
-  componentDidCatch(error, info) {}
+  componentDidCatch(errorIgnored, infoIgnored) {}
 
   static getDerivedStateFromError(error) {
     return { hasError: true, error };

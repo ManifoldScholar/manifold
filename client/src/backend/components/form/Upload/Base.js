@@ -36,7 +36,8 @@ export default class FormUpload extends Component {
     wide: PropTypes.bool,
     progress: PropTypes.string,
     fileNameFrom: PropTypes.string,
-    uploadError: PropTypes.string
+    uploadError: PropTypes.string,
+    getModelValue: PropTypes.func
   };
 
   static defaultProps = {

@@ -40,7 +40,7 @@ const routes = {
           transition: "overlay-full",
           path: "/read/:textId/section/:sectionId/search",
           helper: (t, ts) => `/read/${t}/section/${ts}/search`
-        },
+        }
       ]
     }
   ]
