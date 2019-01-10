@@ -8,7 +8,8 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
   static displayName = "Project.Content.Sections.Available";
 
   static propTypes = {
-    currentBlocks: PropTypes.array.isRequired
+    currentBlocks: PropTypes.array.isRequired,
+    onClickAdd: PropTypes.func
   };
 
   static defaultProps = {
@@ -29,14 +30,17 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="form-section">
         <Header title="Content Blocks">
-          Drag content blocks directly into your project page layout, or use the
-          plus symbol to add them.
+          Drag content blocks directly into your project page layout,
+          or use the plus symbol to add them.
         </Header>
         <Droppable droppableId="available" isDropDisabled>
           {provided => (
-            <div ref={provided.innerRef} className="list available">
+            <div
+              ref={provided.innerRef}
+              className="block-grid full-width"
+            >
               {this.types.map((type, index) => (
                 <Block
                   currentBlocks={this.props.currentBlocks}
@@ -44,13 +48,14 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
                   context="available"
                   type={type}
                   index={index}
+                  onClickAdd={this.props.onClickAdd}
                 />
               ))}
               {provided.placeholder}
             </div>
           )}
         </Droppable>
-      </React.Fragment>
+      </div>
     );
   }
 }
