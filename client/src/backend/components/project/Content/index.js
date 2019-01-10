@@ -200,18 +200,27 @@ export default class ProjectContent extends PureComponent {
     return position;
   }
 
+  handleAddEntity = type => {
+    return this.insert(type, 0);
+  }
+
   render() {
     return (
       <section className="backend-project-content">
         <Developer.Debugger object={{ props: this.props, state: this.state }} />
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <AvailableSection currentBlocks={this.currentBlocks} />
-          <CurrentSection
-            entityCallbacks={this.entityCallbacks}
-            currentBlocks={this.currentBlocks}
-          />
-        </DragDropContext>
-        {this.props.children(this.drawerCloseCallback, this.pendingBlock)}
+        <div className="form-secondary">
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <AvailableSection
+              onClickAdd={this.handleAddEntity}
+              currentBlocks={this.currentBlocks}
+            />
+            <CurrentSection
+              entityCallbacks={this.entityCallbacks}
+              currentBlocks={this.currentBlocks}
+            />
+          </DragDropContext>
+          {this.props.children(this.drawerCloseCallback, this.pendingBlock)}
+        </div>
       </section>
     );
   }
