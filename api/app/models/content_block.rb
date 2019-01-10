@@ -12,6 +12,8 @@ class ContentBlock < ApplicationRecord
   delegate :serializer, to: :class
   delegate :available_attributes, to: :class
   delegate :configurable?, to: :class
+  delegate :orderable?, to: :class
+  delegate :hideable?, to: :class
 
   belongs_to :project
   has_many :content_block_references, dependent: :destroy
@@ -76,6 +78,14 @@ class ContentBlock < ApplicationRecord
 
     def configurable?
       available_attributes.present? || available_relationships.present?
+    end
+
+    def orderable?
+      true
+    end
+
+    def hideable?
+      true
     end
   end
 end

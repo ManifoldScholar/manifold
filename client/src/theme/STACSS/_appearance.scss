@@ -367,7 +367,7 @@
   background-color: $neutral95;
 
   // if using a rounded label, pad any of its siblings
-  ~ * {
+  ~ :not(.full-width) {
     padding-right: 5px;
     padding-left: 5px;
 
