@@ -16,7 +16,8 @@ export default class ProjectContentBlock extends PureComponent {
     index: PropTypes.number,
     entity: PropTypes.object,
     context: PropTypes.oneOf(["available", "current"]),
-    disabled: PropTypes.func
+    disabled: PropTypes.func,
+    onClickAdd: PropTypes.func
   };
 
   static defaultProps = {
@@ -66,9 +67,14 @@ export default class ProjectContentBlock extends PureComponent {
     return typeResolver.typeToBlockComponent(this.type);
   }
 
+  handleClickAdd = () => {
+    this.props.onClickAdd(this.type);
+  };
+
   render() {
     const TypeComponent = this.typeComponent;
     const ListContextBlock = this.inAvailableList ? Available : Current;
+    const baseClass = "content-block";
 
     return (
       <Draggable
@@ -84,17 +90,30 @@ export default class ProjectContentBlock extends PureComponent {
                 {...provided.draggableProps}
                 ref={provided.innerRef}
                 style={provided.draggableProps.style}
-                className={classNames("item", { disabled: this.disabled })}
+                className={classNames(
+                  baseClass,
+                  `${baseClass}--${this.props.context}`, {
+                    [`${baseClass}--active`]: !this.disabled,
+                    [`${baseClass}--inactive`]: this.disabled,
+                    [`${baseClass}--is-dragging`]: snapshot.isDragging
+                  }
+                )}
               >
                 <ListContextBlock
                   entity={this.props.entity}
                   entityCallbacks={this.props.entityCallbacks}
                   dragHandleProps={provided.dragHandleProps}
                   typeComponent={TypeComponent}
+                  onClickAdd={this.handleClickAdd}
+                  disabled={this.disabled}
                 />
               </div>
               {this.inAvailableList && snapshot.isDragging && (
-                <div className="item clone">
+                <div className={classNames(
+                  baseClass,
+                  `${baseClass}--${this.props.context}`,
+                  `${baseClass}--inactive`
+                )}>
                   <AvailablePlaceholder typeComponent={TypeComponent} />
                 </div>
               )}

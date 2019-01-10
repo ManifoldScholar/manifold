@@ -1,0 +1,141 @@
+.content-block {
+  @include panelRounded;
+  $inactiveBlockColor: #424242;
+
+  &--inactive {
+    color: $inactiveBlockColor;
+  }
+
+  &--active {
+    color: $neutral30;
+  }
+
+  &--is-dragging {
+    box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px 15px 12px;
+
+    .content-block--current & {
+      padding-right: 12px;
+
+      @include respond($break90) {
+        padding: 10px 19px 10px 23px;
+      }
+    }
+
+    &:focus {
+      @include focusOutline;
+      outline-offset: 12px;
+    }
+  }
+
+  &__heading {
+    display: -ms-grid;
+    display: grid;
+    flex-grow: 1;
+    align-items: center;
+    grid-template-columns: max-content auto;
+    transition: color $duration $timing;
+    -ms-grid-columns: max-content auto; /* stylelint-disable-line property-no-vendor-prefix */
+
+    &:hover {
+      .content-block--available.content-block--active & {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  &__icon {
+    transition: color $duration $timing;
+    // if block is inactive, or icon needs to inherit color via hover of parent,
+    // inherit fill color from element.
+    // otherwise use a modifier to set a different color.
+    .content-block--inactive &,
+    .content-block--available .content-block__heading:hover & {
+      color: inherit;
+      transition: none;
+    }
+
+    &--light {
+      color: $neutral50;
+    }
+
+    &--dark {
+      color: $neutral75;
+    }
+
+    &--large {
+      width: 36px;
+      height: 36px;
+
+      @include respond($break90) {
+        width: 46px;
+        height: 46px;
+      }
+    }
+
+    &:hover {
+      .content-block__icon--add {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  &__title {
+    @include templateHead;
+    margin-left: 15px;
+    font-size: 17px;
+    font-weight: $regular;
+
+    &--large {
+      margin-right: 8%;
+      margin-bottom: 5px;
+      font-weight: $medium;
+
+      @include respond($break90) {
+        margin-left: 23px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  &__button-list {
+    $grid-gap: 14px;
+
+    display: -ms-grid;
+    display: grid;
+    grid-gap: $grid-gap;
+    -ms-grid-columns: auto auto; /* stylelint-disable-line property-no-vendor-prefix */
+    -ms-grid-rows: auto auto; /* stylelint-disable-line property-no-vendor-prefix */
+    grid-template: auto auto / auto auto;
+
+    @include respond($break90) {
+      display: flex;
+
+      > * + * {
+        margin-left: $grid-gap;
+      }
+    }
+  }
+
+  &__button {
+    @include buttonUnstyled;
+    --hover-color: #{$accentPrimary};
+
+    &--delete {
+      --hover-color: #{$sp40Tertiary};
+    }
+
+    &:not(:disabled):hover {
+      > .content-block__icon {
+        color: $accentPrimary; // fallback
+        color: var(--hover-color, $accentPrimary);
+      }
+    }
+  }
+}
