@@ -6,6 +6,7 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
   static displayName = "Project.Content.Block.Parts.VisibilityToggle";
 
   static propTypes = {
+    visible: PropTypes.bool.isRequired,
     entity: PropTypes.object.isRequired,
     entityCallbacks: PropTypes.object.isRequired
   };
@@ -19,19 +20,30 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
   }
 
   render() {
+    const baseClass = "content-block";
+    if (!this.props.visible) return null;
+
     if (this.isVisible)
       return (
         <button
-          className="action"
+          className={`${baseClass}__button`}
           onClick={this.props.entityCallbacks.hideBlock}
         >
-          <Utility.IconComposer icon="eyeOpen" size={30} />
+          <Utility.IconComposer
+            icon="eye-open"
+            size={26}
+            iconClass={`${baseClass}__icon ${baseClass}__icon--light`} />
         </button>
       );
 
     return (
-      <button className="action" onClick={this.props.entityCallbacks.showBlock}>
-        <Utility.IconComposer icon="eyeClosed" size={30} />
+      <button
+        className={`${baseClass}__button`}
+        onClick={this.props.entityCallbacks.showBlock}>
+        <Utility.IconComposer
+          icon="eye-closed"
+          size={26}
+          iconClass={`${baseClass}__icon ${baseClass}__icon--light`} />
       </button>
     );
   }
