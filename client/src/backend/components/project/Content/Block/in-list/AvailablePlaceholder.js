@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Identity from "../parts/Identity";
+import Utility from "global/components/utility";
 
 export default class ProjectContentBlockInListAvailablePlaceholder extends PureComponent {
   static displayName = "Project.Content.Block.InList.AvailablePlaceholder";
@@ -15,9 +16,10 @@ export default class ProjectContentBlockInListAvailablePlaceholder extends PureC
     return (
       <TypeComponent>
         {block => (
-          <React.Fragment>
+          <div className="content-block__inner">
             <Identity icon={block.icon} title={block.title} />
-          </React.Fragment>
+            <Utility.IconComposer icon="circle-plus" size={32} />
+          </div>
         )}
       </TypeComponent>
     );

@@ -1,0 +1,40 @@
+// a repeating three-column grid for laying out blocks
+// used for available Project Content Blocks
+.block-grid {
+  $grid-gap: 18px;
+  $margin-top: 7px;
+  $min-width: 245px;
+  // use flexbox for older browsers
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  margin-top: $margin-top;
+
+  > * {
+    flex-basis: 100%;
+    margin-top: $grid-gap;
+
+    @include respond(810px) {
+      flex-basis: calc(50% - #{$grid-gap} / 1.5);
+    }
+
+    @include respond(1090px) {
+      flex-basis: calc(33.333% - #{$grid-gap} / 1.5);
+    }
+  }
+
+  // enhance with auto-placing grid if browser supports
+  @supports (grid-auto-columns: min-content) {
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-template-columns:repeat(auto-fit, minmax($min-width, 1fr));
+    margin-top: $grid-gap + $margin-top;
+
+    > * {
+      margin-top: 0;
+    }
+  }
+}

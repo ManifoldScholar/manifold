@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Header from "./parts/Header";
 import Block from "../Block";
 import { Droppable } from "react-beautiful-dnd";
+import classNames from "classnames";
 
 export default class ProjectContentSectionsCurrent extends PureComponent {
   static displayName = "Project.Content.Sections.Current";
@@ -28,14 +29,19 @@ export default class ProjectContentSectionsCurrent extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="form-section">
         <Header title="Content Layout">
-          Use the icons on the left of each content block to reorder them, edit
+          Use the icons on the right of each content block to reorder them, edit
           their settings, change their visibility, or remove them.
         </Header>
         <Droppable droppableId="current">
-          {provided => (
-            <div ref={provided.innerRef} className="list current">
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              className={classNames("content-block-list full-width", {
+                "content-block-list--show-dropzone": snapshot.isDraggingOver
+              })}
+            >
               {this.props.currentBlocks.map((block, index) => (
                 <Block
                   entityCallbacks={this.bindEntityCallbacks(block)}
@@ -51,7 +57,7 @@ export default class ProjectContentSectionsCurrent extends PureComponent {
             </div>
           )}
         </Droppable>
-      </React.Fragment>
+      </div>
     );
   }
 }
