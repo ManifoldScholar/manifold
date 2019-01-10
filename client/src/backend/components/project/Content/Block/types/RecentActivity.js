@@ -10,7 +10,7 @@ export default class ProjectContentBlocksRecentActivity extends PureComponent {
 
   static defaultProps = {
     title: "Recent Activity",
-    icon: "booksOnShelf"
+    icon: "pulse"
   };
 
   static isAvailable(currentBlocks) {
