@@ -7,7 +7,9 @@ export default class ProjectContentBlockInListAvailable extends PureComponent {
   static displayName = "Project.Content.Block.InList.Available";
 
   static propTypes = {
-    typeComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    typeComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    onClickAdd: PropTypes.func,
+    disabled: PropTypes.bool
   };
 
   render() {
@@ -16,9 +18,18 @@ export default class ProjectContentBlockInListAvailable extends PureComponent {
     return (
       <TypeComponent>
         {block => (
-          <div {...this.props.dragHandleProps}>
+          <div {...this.props.dragHandleProps} className="content-block__inner">
             <Identity icon={block.icon} title={block.title} />
-            <Utility.IconComposer icon="plus" size={50} />
+              <button
+                className="content-block__button"
+                onClick={this.props.onClickAdd}
+                disabled={this.props.disabled}
+              >
+                <Utility.IconComposer
+                  icon="circle-plus"
+                  size={32}
+                  iconClass="content-block__icon content-block__icon--add" />
+              </button>
           </div>
         )}
       </TypeComponent>
