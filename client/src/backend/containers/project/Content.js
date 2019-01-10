@@ -48,7 +48,8 @@ export class ProjectContentContainer extends PureComponent {
     const { project } = this.props;
 
     return {
-      closeUrl: lh.link("backendProjectProjectPage", project.id)
+      closeUrl: lh.link("backendProjectProjectPage", project.id),
+      lockScroll: "always"
     };
   }
 
