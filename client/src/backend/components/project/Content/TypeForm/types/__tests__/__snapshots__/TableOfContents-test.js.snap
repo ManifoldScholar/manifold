@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Project.Content.TypeForm.TableOfContents component renders correctly 1`] = `
+Array [
+  <div
+    className="form-input"
+  >
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label>
+        Text
+      </label>
+      <div
+        className="form-select"
+      >
+        <i
+          aria-hidden="true"
+          className="manicon manicon-caret-down"
+        />
+        <select
+          aria-describedby="select-error-1"
+          onChange={[Function]}
+          value=""
+        >
+          <option
+            value=""
+          >
+            Select Text
+          </option>
+          <option
+            value="1"
+          >
+            Ain't No Thang
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="form-number-input form-input wide"
+    style={Object {}}
+  >
+    <label
+      className=""
+      htmlFor="attributes[depth]-text-input-1"
+    >
+      Depth
+    </label>
+    <input
+      aria-describedby="attributes[depth]-text-input-1"
+      id="attributes[depth]-text-input-1"
+      onChange={[Function]}
+      type="number"
+      value=""
+    />
+  </div>,
+  <div
+    className="form-input wide"
+  >
+    <h4
+      className="form-input-heading above"
+    >
+      Show Text Title?
+    </h4>
+    <div
+      className="toggle-indicator"
+    >
+      <div
+        aria-pressed={false}
+        className="boolean-primary"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        role="button"
+        tabIndex="0"
+      >
+        <span
+          className="screen-reader-text"
+        >
+          Show Text Title?
+        </span>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="form-input wide"
+  >
+    <h4
+      className="form-input-heading above"
+    >
+      Show Author Names?
+    </h4>
+    <div
+      className="toggle-indicator"
+    >
+      <div
+        aria-pressed={false}
+        className="boolean-primary"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        role="button"
+        tabIndex="0"
+      >
+        <span
+          className="screen-reader-text"
+        >
+          Show Author Names?
+        </span>
+      </div>
+    </div>
+  </div>,
+]
+`;

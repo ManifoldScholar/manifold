@@ -7,6 +7,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import Developer from "global/components/developer";
 import lh from "helpers/linkHandler";
 import { entityStoreActions } from "actions";
+import configHelper from "./helpers/configurations";
 import cloneDeep from "lodash/cloneDeep";
 
 const { request } = entityStoreActions;
@@ -106,16 +107,18 @@ export default class ProjectContent extends PureComponent {
   }
 
   insert(type, position, id = "pending") {
-    const block = { id, attributes: { type, position } };
+    const block = { id, attributes: { type, position }, relationships: {} };
     const blocks = this.clonedCurrentBlocks;
     blocks.splice(position, 0, block);
     this.setState({ blocks }, this.newBlock);
   }
 
   newBlock = () => {
-    this.props.history.push(
-      lh.link("backendProjectContentBlockNew", this.projectId)
-    );
+    configHelper.isConfigurable(this.pendingBlock.attributes.type)
+      ? this.props.history.push(
+          lh.link("backendProjectContentBlockNew", this.projectId)
+        )
+      : this.createBlock();
   };
 
   editBlock = block => {
@@ -148,6 +151,14 @@ export default class ProjectContent extends PureComponent {
       this.props.refresh();
     });
   };
+
+  createBlock() {
+    const call = contentBlocksAPI.create(this.projectId, this.pendingBlock);
+    const createRequest = request(call, requests.beContentBlockCreate);
+    this.props.dispatch(createRequest).promise.then(() => {
+      this.props.refresh();
+    });
+  }
 
   toggleBlockVisibility(block, visible) {
     const adjusted = Object.assign({}, block);
