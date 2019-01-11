@@ -13,10 +13,8 @@ export default class ProjectContentBlocksMarkdown extends PureComponent {
     icon: "lamp"
   };
 
-  static isAvailable(currentBlocks) {
-    // A demonstration of how each block type can decide whether or not its available
-    // based on the contents of the currentBlocks relationship.
-    return currentBlocks.length <= 3;
+  static isAvailable(currentBlocksIgnored) {
+    return true;
   }
 
   render() {
