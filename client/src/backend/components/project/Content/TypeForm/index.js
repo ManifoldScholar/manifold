@@ -1,12 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import typeResolver from "../helpers/resolver";
+import setter from "backend/components/form/setter";
 
-export default class ProjectContentTypeForm extends PureComponent {
+export class ProjectContentTypeForm extends PureComponent {
   static displayName = "Project.Content.TypeForm";
 
   static propTypes = {
-    contentBlock: PropTypes.object
+    contentBlock: PropTypes.object,
+    project: PropTypes.object
   };
 
   get contentBlock() {
@@ -27,3 +29,5 @@ export default class ProjectContentTypeForm extends PureComponent {
     return <TypeForm {...this.props} />;
   }
 }
+
+export default setter(ProjectContentTypeForm);
