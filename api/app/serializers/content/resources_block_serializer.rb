@@ -1,8 +1,7 @@
 module Content
   class ResourcesBlockSerializer < ::ContentBlockSerializer
-    attributes :resources_count
+    attributes :show_collections
 
-    has_many :featured_resources
     has_many :featured_collections
   end
 end
