@@ -14,16 +14,4 @@ RSpec.describe Content::ResourcesBlock do
   it "responds to :featured_collections" do
     expect(resources_block.respond_to? :featured_collections).to eq true
   end
-
-  it "responds to :featured_resources" do
-    expect(resources_block.respond_to? :featured_resources).to eq true
-  end
-
-  it "is invalid if :resources_count is not an integer" do
-    expect(FactoryBot.build(:resources_block, resources_count: "string")).to_not be_valid
-  end
-
-  it "has the correct available attributes" do
-    expect(resources_block.available_attributes).to match_array [:resources_count]
-  end
 end
