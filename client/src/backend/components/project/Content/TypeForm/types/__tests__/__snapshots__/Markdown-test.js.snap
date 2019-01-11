@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Project.Content.TypeForm.Markdown component renders correctly 1`] = `
+Array [
+  <div
+    className="form-input wide"
+    style={Object {}}
+  >
+    <label
+      className=""
+      htmlFor="radios-1"
+    >
+      Style
+    </label>
+    <label
+      className="form-toggle radio inline"
+    >
+      <input
+        checked={false}
+        name="Normal"
+        onChange={[Function]}
+        type="radio"
+        value="normal"
+      />
+      <span
+        aria-hidden="true"
+        className="toggle-indicator"
+      />
+      <span
+        className="toggle-label"
+      >
+        Normal
+      </span>
+    </label>
+    <label
+      className="form-toggle radio inline"
+    >
+      <input
+        checked={false}
+        name="Shaded"
+        onChange={[Function]}
+        type="radio"
+        value="shaded"
+      />
+      <span
+        aria-hidden="true"
+        className="toggle-indicator"
+      />
+      <span
+        className="toggle-label"
+      >
+        Shaded
+      </span>
+    </label>
+  </div>,
+  <div
+    className="form-input wide"
+  >
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label
+        className=""
+        htmlFor="textarea-1"
+      >
+        Body
+      </label>
+      <textarea
+        aria-describedby="textarea-error-1"
+        id="textarea-1"
+        onChange={[Function]}
+        style={
+          Object {
+            "height": 100,
+          }
+        }
+        value=""
+      />
+    </div>
+  </div>,
+]
+`;
