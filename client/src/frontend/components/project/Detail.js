@@ -10,6 +10,7 @@ import TextList from "frontend/components/text-list";
 import Hero from "./Hero";
 import Event from "frontend/components/event";
 import Meta from "global/components/meta";
+import Content from "./Content";
 
 class Detail extends Component {
   static displayName = "Project.Detail";
@@ -219,12 +220,8 @@ class Detail extends Component {
     return (
       <div>
         <Hero project={this.props.project} />
-        {this.renderActivity()}
-        {this.renderTexts()}
 
-        {this.renderCollectionsOrResources()}
-        {this.renderMeta()}
-        {this.renderNavButtons()}
+        <Content project={this.props.project} />
       </div>
     );
   }
