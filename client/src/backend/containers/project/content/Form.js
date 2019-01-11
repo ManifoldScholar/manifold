@@ -14,6 +14,7 @@ export class ProjectContentFormContainer extends Component {
 
   static propTypes = {
     contentBlock: PropTypes.object,
+    project: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
     match: PropTypes.object
   };
@@ -21,6 +22,11 @@ export class ProjectContentFormContainer extends Component {
   constructor(props) {
     super(props);
     this.contentBlock = this.initializeContentBlock;
+  }
+
+  componentDidUpdate() {
+    if (this.isPendingBlock) return null;
+    this.contentBlock = this.props.contentBlock;
   }
 
   get isPendingBlock() {
@@ -34,8 +40,8 @@ export class ProjectContentFormContainer extends Component {
     return this.props.contentBlock;
   }
 
-  get projectId() {
-    return this.props.match.params.pId;
+  get project() {
+    return this.props.project;
   }
 
   get requestName() {
@@ -45,7 +51,7 @@ export class ProjectContentFormContainer extends Component {
   }
 
   fetchContentBlocks = () => {
-    const call = projectsAPI.contentBlocks(this.projectId);
+    const call = projectsAPI.contentBlocks(this.project.id);
     const contentBlocksRequest = request(call, requests.beProjectContentBlocks);
     this.props.dispatch(contentBlocksRequest);
   };
@@ -58,7 +64,7 @@ export class ProjectContentFormContainer extends Component {
     adjusted.attributes.position = this.contentBlock.attributes.position;
     adjusted.attributes.type = this.contentBlock.attributes.type;
 
-    return contentBlocksAPI.create(this.projectId, adjusted);
+    return contentBlocksAPI.create(this.project.id, adjusted);
   };
 
   render() {
@@ -73,7 +79,10 @@ export class ProjectContentFormContainer extends Component {
         notificationScope="drawer"
         debug
       >
-        <TypeForm contentBlock={this.props.contentBlock} />
+        <TypeForm
+          contentBlock={this.props.contentBlock}
+          project={this.project}
+        />
         <Form.Save text="Save Content Block" />
       </FormContainer.Form>
     );
