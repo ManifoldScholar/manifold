@@ -79,7 +79,7 @@ export class ProjectContentContainer extends PureComponent {
         >
           {(closeCallback, pendingBlock) =>
             childRoutes(this.props.route, {
-              childProps: { pendingBlock },
+              childProps: { pendingBlock, project },
               drawer: true,
               drawerProps: { closeCallback, ...this.drawerProps }
             })

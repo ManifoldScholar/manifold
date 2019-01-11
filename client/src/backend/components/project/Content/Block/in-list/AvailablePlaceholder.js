@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
 import Identity from "../parts/Identity";
 
 export default class ProjectContentBlockInListAvailablePlaceholder extends PureComponent {
