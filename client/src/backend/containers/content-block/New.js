@@ -11,6 +11,7 @@ export class ContentBlockNewContainer extends Component {
   static propTypes = {
     match: PropTypes.object,
     history: PropTypes.object,
+    project: PropTypes.object,
     pendingBlock: PropTypes.object
   };
 
@@ -18,8 +19,8 @@ export class ContentBlockNewContainer extends Component {
     return this.props.pendingBlock;
   }
 
-  get projectId() {
-    return this.props.match.params.pId;
+  get project() {
+    return this.props.project;
   }
 
   render() {
@@ -27,7 +28,7 @@ export class ContentBlockNewContainer extends Component {
     // passed, we assumed nothing has changed in the layout and close the drawer.
     if (!this.pendingBlock)
       return (
-        <Redirect to={lh.link("backendProjectProjectPage", this.projectId)} />
+        <Redirect to={lh.link("backendProjectProjectPage", this.project.id)} />
       );
 
     return (
@@ -35,7 +36,7 @@ export class ContentBlockNewContainer extends Component {
         <header className="drawer-header">
           <h2 className="heading-quaternary">Configure Content Block</h2>
         </header>
-        <Form contentBlock={this.pendingBlock} />
+        <Form contentBlock={this.pendingBlock} project={this.project} />
       </section>
     );
   }

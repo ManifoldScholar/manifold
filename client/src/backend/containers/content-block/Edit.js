@@ -21,6 +21,7 @@ export class ContentBlockEditContainer extends Component {
     match: PropTypes.object,
     history: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
+    project: PropTypes.object,
     contentBlock: PropTypes.object
   };
 
@@ -42,8 +43,8 @@ export class ContentBlockEditContainer extends Component {
     return this.props.contentBlock;
   }
 
-  get projectId() {
-    return this.props.match.params.pId;
+  get project() {
+    return this.props.project;
   }
 
   fetchContentBlock(id) {
@@ -60,7 +61,7 @@ export class ContentBlockEditContainer extends Component {
         <header className="drawer-header">
           <h2 className="heading-quaternary">Edit Content Block</h2>
         </header>
-        <Form contentBlock={this.contentBlock} />
+        <Form contentBlock={this.contentBlock} project={this.project} />
       </section>
     );
   }
