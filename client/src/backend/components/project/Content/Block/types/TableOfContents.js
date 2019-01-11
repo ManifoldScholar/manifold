@@ -1,9 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
-// TODO: Let's rename this in the API to "TableOfContents" and also rename this file.
 export default class ProjectContentBlocksTableOfContents extends PureComponent {
-  static displayName = "Project.Content.Block.Types.TOC";
+  static displayName = "Project.Content.Block.Types.TableOfContents";
 
   static propTypes = {
     children: PropTypes.func.isRequired
@@ -14,7 +13,7 @@ export default class ProjectContentBlocksTableOfContents extends PureComponent {
     icon: "touch"
   };
 
-  static isAvailable(currentBlocks) {
+  static isAvailable(currentBlocksIgnored) {
     return true;
   }
 

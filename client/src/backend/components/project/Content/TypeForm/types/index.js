@@ -1,9 +1,9 @@
 import Markdown from "./Markdown";
 import Resources from "./Resources";
-import TOC from "./TOC";
+import TableOfContents from "./TableOfContents";
 
 export default {
   Markdown,
   Resources,
-  TOC
+  TableOfContents
 };

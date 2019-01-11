@@ -23,7 +23,7 @@ RSpec.describe "Project ContentBlocks API", type: :request do
     let(:path) { api_v1_project_relationships_content_blocks_path(project) }
     let(:text) { FactoryBot.create(:text, project: project) }
     let(:params) { {
-      attributes: { type: "Content::TOCBlock", depth: 2, show_authors: false, show_text_title: true },
+      attributes: { type: "Content::TableOfContentsBlock", depth: 2, show_authors: false, show_text_title: true },
       relationships: { text: { data: { id: text.id, type: "texts" } } }
     } }
 
