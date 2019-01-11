@@ -5,8 +5,8 @@ FactoryBot.define do
   end
 
   factory :resources_block, parent: :content_block, class: "Content::ResourcesBlock"
-  factory :toc_block, parent: :content_block, class: "Content::TOCBlock" do
-    type { "Content::TOCBlock" }
+  factory :toc_block, parent: :content_block, class: "Content::TableOfContentsBlock" do
+    type { "Content::TableOfContentsBlock" }
     depth { 3 }
     show_authors { false }
     show_text_title { false }
@@ -16,5 +16,11 @@ FactoryBot.define do
     type { "Content::MarkdownBlock" }
     body { Faker::Lorem.paragraph }
     style { "shaded" }
+  end
+  factory :metadata_block, parent: :content_block, class: "Content::MetadataBlock" do
+    type { "Content::MetadataBlock" }
+  end
+  factory :recent_activity_block, parent: :content_block, class: "Content::RecentActivityBlock" do
+    type { "Content::RecentActivityBlock" }
   end
 end
