@@ -12,5 +12,5 @@ Hi <%= @user.nickname %>,
 Powered by Manifold Scholarship
 http://manifoldapp.org
 
-Manage notification preferences: http://<%= ENV["DOMAIN"] %>/subscriptions
-Unsubscribe: http://<%= ENV["DOMAIN"] %>/unsubscribe/
+Manage notification preferences: <%= @client_url %>/subscriptions
+Unsubscribe: <%= @client_url %>/unsubscribe/
