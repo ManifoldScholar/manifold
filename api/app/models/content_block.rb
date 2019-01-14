@@ -4,7 +4,6 @@ class ContentBlock < ApplicationRecord
   # Authorization
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
-  self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   # Ordering
   acts_as_list scope: :project, top_of_list: 0
