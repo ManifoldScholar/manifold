@@ -45,11 +45,18 @@ export class LowLevelApiClient {
         Authorization: `Bearer ${options.authToken}`
       }
     };
-    return fetch(endpoint, fetchConfig).catch(error => {
-      console.log(
-        "There has been a problem with your fetch operation: " + error.message
-      );
+    const out = fetch(endpoint, fetchConfig).catch(error => {
+      return new Promise((resolve, reject) => {
+        reject({
+          response: {
+            status: 503,
+            statusText: error.name,
+            exception: error.message
+          }
+        });
+      });
     });
+    return out;
   }
 }
 
@@ -143,10 +150,12 @@ export default class ApiClient {
         status: response.status,
         statusText: response.statusText,
         body: {
+          exception: response.exception,
           status: response.status,
           error: response.statusText
         }
       };
+      if (!response.json) reject(payload);
       response.json().then(
         json => {
           reject(Object.assign(payload, { body: json }));
