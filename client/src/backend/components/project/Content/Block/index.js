@@ -48,6 +48,11 @@ export default class ProjectContentBlock extends PureComponent {
     return this.props.entity.id;
   }
 
+  get orderable() {
+    if (!this.props.entity) return null;
+    return !this.props.entity.attributes.orderable;
+  }
+
   get type() {
     return this.props.type;
   }
@@ -58,7 +63,7 @@ export default class ProjectContentBlock extends PureComponent {
   }
 
   get disabled() {
-    if (this.inCurrentList) return false;
+    if (this.inCurrentList) return this.orderable;
     if (!isFunction(this.typeComponent.isAvailable)) return false;
     return !this.typeComponent.isAvailable(this.props.currentBlocks);
   }
@@ -75,6 +80,23 @@ export default class ProjectContentBlock extends PureComponent {
     const TypeComponent = this.typeComponent;
     const ListContextBlock = this.inAvailableList ? Available : Current;
     const baseClass = "content-block";
+
+    if (this.disabled) return (
+      <div
+        className={classNames(
+          baseClass,
+          `${baseClass}--${this.props.context} ${baseClass}--inactive`
+        )}
+      >
+        <ListContextBlock
+          entity={this.props.entity}
+          entityCallbacks={this.props.entityCallbacks}
+          typeComponent={TypeComponent}
+          onClickAdd={this.handleClickAdd}
+          disabled={this.disabled}
+        />
+      </div>
+    );
 
     return (
       <Draggable
