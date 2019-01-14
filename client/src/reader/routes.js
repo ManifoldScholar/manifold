@@ -30,7 +30,7 @@ const routes = {
         {
           name: "readerSectionResource",
           exact: true,
-          component: "NotationResourceDetail ",
+          component: "NotationResourceDetail",
           path: "/read/:textId/section/:sectionId/resource/:resourceId",
           helper: (t, s, r) => `/read/${t}/section/${s}/resource/${r}`
         },
