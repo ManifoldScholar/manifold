@@ -1,7 +1,7 @@
 class Configurations {
   get configurationMap() {
     return {
-      "Content::TitleBlock": true,
+      "Content::HeroBlock": true,
       "Content::RecentActivityBlock": false,
       "Content::TextsBlock": true,
       "Content::ResourcesBlock": true,
