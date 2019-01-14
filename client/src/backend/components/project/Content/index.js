@@ -57,9 +57,9 @@ export default class ProjectContent extends PureComponent {
       destinationList
     } = result;
     if (sourceList === "current" && destinationList === "current")
-      return this.move(sourceIndex, destinationIndex);
+      return this.move(sourceIndex, destinationIndex + 1);
     if (sourceList === "available" && destinationList === "current")
-      return this.insert(type, destinationIndex);
+      return this.insert(type, destinationIndex + 1);
   };
 
   get projectId() {
@@ -195,14 +195,13 @@ export default class ProjectContent extends PureComponent {
   adjustedPosition(position) {
     const max = this.state.blocks.length;
 
-    if (position <= 0) return "top";
     if (position >= max) return "bottom";
     return position;
   }
 
   handleAddEntity = type => {
-    return this.insert(type, 0);
-  }
+    return this.insert(type, 1);
+  };
 
   render() {
     return (

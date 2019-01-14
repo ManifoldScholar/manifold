@@ -116,6 +116,7 @@ class Project < ApplicationRecord
 
   # Callbacks
   before_save :prepare_to_reindex_children, on: [:update], if: :draft_changed?
+  before_save :ensure_hero_block!
   before_create :assign_publisher_defaults!
   after_commit :trigger_creation_event, on: [:create]
   after_commit :queue_reindex_children_job, :update_smart_collection_caches
@@ -278,6 +279,10 @@ class Project < ApplicationRecord
   end
 
   private
+
+  def ensure_hero_block!
+    content_blocks.find_or_initialize_by(type: "Content::HeroBlock", position: 0)
+  end
 
   def assign_publisher_defaults!
     assign_default_meta :publisher
