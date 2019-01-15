@@ -19,7 +19,7 @@ export default class ProjectContent extends PureComponent {
 
   render() {
     return this.contentBlocks.map(block => {
-        return <Block block={block} project={this.project} />
+        return <Block block={block} key={block.id} project={this.project} />
       }
     )
   }

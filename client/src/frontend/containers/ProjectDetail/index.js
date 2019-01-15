@@ -50,7 +50,7 @@ export class ProjectDetailContainer extends Component {
     if (!project) return null;
 
     return (
-      <div>
+      <div className="project-detail">
         <HeadContent
           title={`\u201c${
             this.props.project.attributes.titlePlaintext
