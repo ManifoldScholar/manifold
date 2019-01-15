@@ -31,6 +31,7 @@ export default class ProjectContentTypeFormTableOfContents extends PureComponent
           label="Text"
           options={this.options}
           name="relationships[text]"
+          focusOnMount
           wide
         />
         <Form.NumberInput label="Depth" name="attributes[depth]" wide />
