@@ -61,7 +61,10 @@ export default class ResourcePlayerVideo extends Component {
 
     return (
       <div className="figure-video">
-        <Video controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}>
+        <Video
+          controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
+          poster={resource.attributes.variantPosterStyles.mediumLandscape}
+        >
           <source
             src={resource.attributes.attachmentStyles.original}
             type="video/mp4"
