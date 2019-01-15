@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Dialog from "backend/components/dialog";
+import withConfirmation from "hoc/with-confirmation";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { makersAPI, requests } from "api";
@@ -25,18 +25,12 @@ export class MakersEditContainer extends PureComponent {
 
   static propTypes = {
     maker: PropTypes.object,
+    confirm: PropTypes.func.isRequired,
     match: PropTypes.object,
     history: PropTypes.object,
     afterDestroy: PropTypes.func,
     dispatch: PropTypes.func
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
 
   componentDidMount() {
     this.fetchMaker(this.props.match.params.id);
@@ -61,22 +55,10 @@ export class MakersEditContainer extends PureComponent {
   handleMakerDestroy = () => {
     const heading = "Are you sure you want to delete this maker?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.destroyMaker();
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, this.destroyMaker);
   };
 
-  destroyMaker() {
+  destroyMaker = () => {
     const maker = this.props.maker;
     const call = makersAPI.destroy(maker.id);
     const options = { removes: maker };
@@ -84,15 +66,11 @@ export class MakersEditContainer extends PureComponent {
     this.props.dispatch(makerRequest).promise.then(() => {
       this.doAfterDestroy(this.props);
     });
-  }
+  };
 
   doAfterDestroy(props) {
     if (props.afterDestroy) return props.afterDestroy();
     return props.history.push(lh.link("backendRecordsMakers"));
-  }
-
-  closeDialog() {
-    this.setState({ confirmation: null });
   }
 
   render() {
@@ -102,9 +80,6 @@ export class MakersEditContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
         <header className="drawer-header">
           <h2 className="heading-quaternary">{attr.fullName}</h2>
           <Authorize entity={maker} ability="delete">
@@ -125,4 +100,4 @@ export class MakersEditContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(MakersEditContainer);
+export default withConfirmation(connectAndFetch(MakersEditContainer));

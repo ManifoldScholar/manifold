@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Dialog from "backend/components/dialog";
+import withConfirmation from "hoc/with-confirmation";
 import ProjectCollection from "backend/components/project-collection";
 import Form from "backend/components/form";
 import FormContainer from "backend/containers/form";
@@ -31,22 +31,10 @@ export class ProjectCollectionSettings extends PureComponent {
   handleDestroy = () => {
     const heading = "Are you sure you want to delete this project collection?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.destroyProjectCollection();
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, this.destroyProjectCollection);
   };
 
-  destroyProjectCollection() {
+  destroyProjectCollection = () => {
     const projectCollection = this.props.projectCollection;
     const call = projectCollectionsAPI.destroy(projectCollection.id);
     const options = { removes: projectCollection };
@@ -58,15 +46,11 @@ export class ProjectCollectionSettings extends PureComponent {
     this.props.dispatch(destroyRequest).promise.then(() => {
       this.doAfterDestroy(this.props);
     });
-  }
+  };
 
   doAfterDestroy(props) {
     if (props.afterDestroy) return props.afterDestroy();
     return props.history.push(lh.link("backendProjectCollections"));
-  }
-
-  closeDialog() {
-    this.setState({ confirmation: null });
   }
 
   shouldPaginate(model) {
@@ -102,9 +86,6 @@ export class ProjectCollectionSettings extends PureComponent {
           projectCollection.id
         )}
       >
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
         <section>
           <FormContainer.Form
             model={projectCollection}
@@ -166,6 +147,6 @@ export class ProjectCollectionSettings extends PureComponent {
   }
 }
 
-export default connect(ProjectCollectionSettings.mapStateToProps)(
-  ProjectCollectionSettings
+export default withConfirmation(
+  connect(ProjectCollectionSettings.mapStateToProps)(ProjectCollectionSettings)
 );

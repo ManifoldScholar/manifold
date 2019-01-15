@@ -8,8 +8,8 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
-import Dialog from "backend/components/dialog";
 import FrontendLayout from "frontend/components/layout";
+import withConfirmation from "hoc/with-confirmation";
 import get from "lodash/get";
 
 import Authorize from "hoc/authorize";
@@ -31,16 +31,10 @@ class FeatureDetailContainer extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
+    confirm: PropTypes.func.isRequired,
     feature: PropTypes.object,
     route: PropTypes.object
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
 
   componentDidMount() {
     const id = this.props.match.params.id;
@@ -79,23 +73,7 @@ class FeatureDetailContainer extends PureComponent {
     if (!feature) return;
     const heading = "Are you sure you want to delete this feature?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.doDestroy(feature);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
-  };
-
-  closeDialog = () => {
-    this.setState({ confirmation: null });
+    this.props.confirm(heading, message, () => this.doDestroy(feature));
   };
 
   doDestroy = feature => {
@@ -218,9 +196,6 @@ class FeatureDetailContainer extends PureComponent {
         {...authProps}
       >
         <div>
-          {this.state.confirmation ? (
-            <Dialog.Confirm {...this.state.confirmation} />
-          ) : null}
           {isNew ? this.newHeader() : this.featureHeader(feature)}
           <Layout.BackendPanel>
             {feature || isNew ? (
@@ -255,4 +230,4 @@ class FeatureDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(FeatureDetailContainer);
+export default withConfirmation(connectAndFetch(FeatureDetailContainer));

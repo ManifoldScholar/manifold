@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Dialog from "backend/components/dialog";
+import withConfirmation from "hoc/with-confirmation";
 import Form from "backend/components/form";
 import GlobalForm from "global/components/form";
 import ColorPicker from "./ColorPicker";
@@ -12,20 +12,12 @@ class AvatarBuilder extends Component {
 
   static propTypes = {
     project: PropTypes.object,
+    confirm: PropTypes.func.isRequired,
     errors: PropTypes.array,
     getModelValue: PropTypes.func,
     setOther: PropTypes.func,
     wide: PropTypes.bool
   };
-
-  static defaultProps = {};
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
 
   onColorChange = color => {
     if (
@@ -57,30 +49,16 @@ class AvatarBuilder extends Component {
     const heading =
       "Changing this will remove the project's current avatar image";
     const message = "Do you wish to proceed?";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.removeAvatar();
-        this.setAvatarColor(color);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, () => {
+      this.removeAvatar();
+      this.setAvatarColor(color);
+    });
   };
 
   removeAvatar() {
     this.props.setOther(true, "attributes[removeAvatar]");
     this.props.setOther(null, "attributes[avatarStyles][smallSquare]");
     this.props.setOther(null, "attributes[avatar]");
-  }
-
-  closeDialog() {
-    this.setState({ confirmation: null });
   }
 
   renderCoverImage(image) {
@@ -129,9 +107,6 @@ class AvatarBuilder extends Component {
         label="Avatar"
       >
         <div className={inputClasses}>
-          {this.state.confirmation ? (
-            <Dialog.Confirm {...this.state.confirmation} />
-          ) : null}
           <h4 className="form-input-heading">Project Thumbnail</h4>
           <div className="grid">
             <div className="section current">
@@ -182,4 +157,4 @@ class AvatarBuilder extends Component {
   }
 }
 
-export default Form.setter(AvatarBuilder);
+export default withConfirmation(Form.setter(AvatarBuilder));

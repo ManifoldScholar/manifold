@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Dialog from "backend/components/dialog";
 import List from "backend/components/list";
 import Event from "backend/components/event";
+import withConfirmation from "hoc/with-confirmation";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, eventsAPI, requests } from "api";
@@ -29,6 +29,7 @@ export class ProjectEventsContainer extends PureComponent {
   static propTypes = {
     project: PropTypes.object,
     events: PropTypes.array,
+    confirm: PropTypes.func.isRequired,
     eventsMeta: PropTypes.object,
     refresh: PropTypes.func,
     dispatch: PropTypes.func
@@ -37,7 +38,6 @@ export class ProjectEventsContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      confirmation: null,
       filter: {}
     };
     this.lastFetchedPage = null;
@@ -78,19 +78,7 @@ export class ProjectEventsContainer extends PureComponent {
   handleEventDestroy = event => {
     const heading = "Are you sure you want to delete this event?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.destroyEvent(event);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, () => this.destroyEvent(event));
   };
 
   destroyEvent(event) {
@@ -100,10 +88,6 @@ export class ProjectEventsContainer extends PureComponent {
     this.props.dispatch(eventRequest).promise.then(() => {
       this.props.refresh();
     });
-  }
-
-  closeDialog() {
-    this.setState({ confirmation: null });
   }
 
   handleUsersPageChange(event, page) {
@@ -129,9 +113,6 @@ export class ProjectEventsContainer extends PureComponent {
         failureRedirect={lh.link("backendProject", project.id)}
       >
         <section>
-          {this.state.confirmation ? (
-            <Dialog.Confirm {...this.state.confirmation} />
-          ) : null}
           <header className="section-heading-secondary">
             <h3>
               {"Events"}{" "}
@@ -162,6 +143,6 @@ export class ProjectEventsContainer extends PureComponent {
   }
 }
 
-export default connect(ProjectEventsContainer.mapStateToProps)(
-  ProjectEventsContainer
+export default withConfirmation(
+  connect(ProjectEventsContainer.mapStateToProps)(ProjectEventsContainer)
 );

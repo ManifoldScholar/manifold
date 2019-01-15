@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
-import Dialog from "backend/components/dialog";
+import withConfirmation from "hoc/with-confirmation";
 import Utility from "global/components/utility";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
@@ -30,16 +30,10 @@ export class ProjectWrapperContainer extends PureComponent {
     dispatch: PropTypes.func,
     match: PropTypes.object,
     history: PropTypes.object,
+    confirm: PropTypes.func.isRequired,
     route: PropTypes.object,
     location: PropTypes.object
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
 
   componentDidMount() {
     this.fetchProject();
@@ -54,10 +48,6 @@ export class ProjectWrapperContainer extends PureComponent {
     const projectRequest = request(call, requests.beProject);
     this.props.dispatch(projectRequest);
   };
-
-  closeDialog() {
-    this.setState({ confirmation: null });
-  }
 
   doPreview = event => {
     event.preventDefault();
@@ -81,22 +71,10 @@ export class ProjectWrapperContainer extends PureComponent {
     this.props.history.push(lh.link("backend"));
   }
 
-  handleProjectDestroy = event => {
+  handleProjectDestroy = () => {
     const heading = "Are you sure you want to delete this project?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.doDestroy(event);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, this.doDestroy);
   };
 
   renderUtility(project) {
@@ -140,10 +118,6 @@ export class ProjectWrapperContainer extends PureComponent {
           }}
           ability={["update", "manageResources"]}
         >
-          {this.state.confirmation ? (
-            <Dialog.Confirm {...this.state.confirmation} />
-          ) : null}
-
           <RedirectToFirstMatch
             from={lh.link("backendProject", project.id)}
             candidates={secondaryLinks}
@@ -167,4 +141,4 @@ export class ProjectWrapperContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ProjectWrapperContainer);
+export default withConfirmation(connectAndFetch(ProjectWrapperContainer));

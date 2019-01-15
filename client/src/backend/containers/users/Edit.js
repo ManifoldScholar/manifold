@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Dialog from "backend/components/dialog";
+import withConfirmation from "hoc/with-confirmation";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { usersAPI, requests } from "api";
@@ -27,6 +28,7 @@ export class UsersEditContainer extends PureComponent {
 
   static propTypes = {
     match: PropTypes.object,
+    confirm: PropTypes.func.isRequired,
     dispatch: PropTypes.func,
     user: PropTypes.object,
     history: PropTypes.object
@@ -35,7 +37,6 @@ export class UsersEditContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      confirmation: null,
       resetPassword: null
     };
   }
@@ -63,22 +64,10 @@ export class UsersEditContainer extends PureComponent {
   handleUserDestroy = () => {
     const heading = "Are you sure you want to delete this user?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.destroyUser();
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, this.destroyUser);
   };
 
-  destroyUser() {
+  destroyUser = () => {
     const user = this.props.user;
     const call = usersAPI.destroy(user.id);
     const options = { removes: user };
@@ -86,11 +75,7 @@ export class UsersEditContainer extends PureComponent {
     this.props.dispatch(userRequest).promise.then(() => {
       this.props.history.push(lh.link("backendRecordsUsers"));
     });
-  }
-
-  closeDialog() {
-    this.setState({ confirmation: null });
-  }
+  };
 
   closeResetDialog() {
     this.setState({ resetPassword: null });
@@ -121,9 +106,6 @@ export class UsersEditContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
         {this.state.resetPassword ? (
           <Dialog.ResetPassword
             uiProps={this.state.resetPassword}
@@ -197,4 +179,4 @@ export class UsersEditContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(UsersEditContainer);
+export default withConfirmation(connectAndFetch(UsersEditContainer));
