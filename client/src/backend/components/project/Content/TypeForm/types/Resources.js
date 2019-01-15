@@ -29,6 +29,7 @@ export default class ProjectContentTypeFormResources extends PureComponent {
         <Form.Switch
           label="Show Collections?"
           name="attributes[showCollections]"
+          focusOnMount
           wide
         />
         {this.includeCollections ? (
