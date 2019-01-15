@@ -48,6 +48,8 @@ export default class ProjectCollectionSummary extends Component {
   render() {
     if (!this.collection) return null;
 
+    const baseClass = "entity-section-wrapper";
+
     const backgroundClasses = classnames({
       "project-collection-summary": true,
       "bg-neutral05": this.props.ordinal % 2 === 0
@@ -59,9 +61,9 @@ export default class ProjectCollectionSummary extends Component {
 
     return (
       <section key={this.collection.id} className={backgroundClasses}>
-        <div className="container project-list-container">
+        <div className={`${baseClass} container`}>
           <Link
-            className="section-heading"
+            className={`${baseClass}__heading section-heading`}
             to={lh.link(
               "frontendProjectCollection",
               this.collection.attributes.slug
@@ -81,7 +83,7 @@ export default class ProjectCollectionSummary extends Component {
             </div>
           </Link>
           {this.description && (
-            <div className="details">
+            <div className={`${baseClass}__details`}>
               <p
                 className="description"
                 dangerouslySetInnerHTML={{
@@ -105,9 +107,10 @@ export default class ProjectCollectionSummary extends Component {
                 this.collection.attributes.slug
               )}
               viewAllLabel={"See the full collection"}
+              additionalClass={baseClass}
             />
           ) : (
-            <div className="project-list empty">
+            <div className={`${baseClass}__body project-list empty`}>
               <p className="message">
                 {"This Project Collection is currently empty."}
               </p>

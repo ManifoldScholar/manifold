@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import omitBy from "lodash/omitBy";
 import uniqueId from "lodash/uniqueId";
+import classNames from "classnames";
 
 export default class ProjectListFilters extends Component {
   static displayName = "ProjectList.Filters";
@@ -11,7 +12,8 @@ export default class ProjectListFilters extends Component {
     initialFilterState: PropTypes.object,
     subjects: PropTypes.array,
     hideFeatured: PropTypes.bool,
-    searchId: PropTypes.string
+    searchId: PropTypes.string,
+    additionalClasses: PropTypes.string
   };
 
   static defaultProps = {
@@ -144,7 +146,10 @@ export default class ProjectListFilters extends Component {
 
   render() {
     return (
-      <form className="form-list-filter" onSubmit={this.updateResults}>
+      <form
+        className={classNames("form-list-filter", this.props.additionalClasses)}
+        onSubmit={this.updateResults}
+      >
         {this.renderSearch()}
         <div className="select-group inline">
           {this.renderSort()}

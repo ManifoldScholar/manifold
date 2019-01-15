@@ -5,6 +5,7 @@ import Utility from "global/components/utility";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import difference from "lodash/difference";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 
 export default class ProjectListGrid extends Component {
   static displayName = "ProjectList.Grid";
@@ -18,7 +19,8 @@ export default class ProjectListGrid extends Component {
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func,
     viewAllUrl: PropTypes.string,
-    viewAllLabel: PropTypes.string
+    viewAllLabel: PropTypes.string,
+    additionalClass: PropTypes.string
   };
 
   static defaultProps = {
@@ -62,11 +64,19 @@ export default class ProjectListGrid extends Component {
   }
 
   renderPagination(props) {
+    const additionalClass = this.props.additionalClass;
+
     return (
-      <Utility.Pagination
-        paginationClickHandler={props.paginationClickHandler}
-        pagination={props.pagination}
-      />
+      <div
+        className={classNames({
+          [`${additionalClass}__pagination`]: additionalClass
+        })}
+      >
+        <Utility.Pagination
+          paginationClickHandler={props.paginationClickHandler}
+          pagination={props.pagination}
+        />
+      </div>
     );
   }
 
@@ -75,8 +85,15 @@ export default class ProjectListGrid extends Component {
     if (props.projects.length <= props.limit) return null;
     if (!props.viewAllUrl) return null;
 
+    const additionalClass = this.props.additionalClass;
+
     return (
-      <div className="utility">
+      <div
+        className={classNames({
+          [`${additionalClass}__utility`]: additionalClass,
+          [`${additionalClass}__utility--footer`]: additionalClass
+        })}
+      >
         <Link to={this.props.viewAllUrl}>
           {this.props.viewAllLabel}
           <i className="manicon manicon-arrow-long-right" />
@@ -89,10 +106,15 @@ export default class ProjectListGrid extends Component {
     const projects = this.projectsList();
     if (!projects) return null;
     const hideDesc = true;
+    const additionalClass = this.props.additionalClass;
 
     return (
       <React.Fragment>
-        <nav className="project-list grid">
+        <nav
+          className={classNames("project-list grid", {
+            [`${additionalClass}__body`]: additionalClass
+          })}
+        >
           <ReactCSSTransitionGroup
             transitionName="project-list grid"
             transitionEnter={this.enableAnimation}

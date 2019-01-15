@@ -5,10 +5,10 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
   className="bg-neutral05"
 >
   <div
-    className="container project-list-container"
+    className="entity-section-wrapper container"
   >
     <header
-      className="section-heading"
+      className="entity-section-wrapper__heading section-heading"
     >
       <div
         className="main"
@@ -43,7 +43,7 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
       </div>
     </header>
     <form
-      className="form-list-filter"
+      className="form-list-filter entity-section-wrapper__tools"
       onSubmit={[Function]}
     >
       <div
@@ -140,7 +140,7 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
       </button>
     </form>
     <nav
-      className="project-list grid"
+      className="project-list grid entity-section-wrapper__body"
     >
       <ul>
         <li>

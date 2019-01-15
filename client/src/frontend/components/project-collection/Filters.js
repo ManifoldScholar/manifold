@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import omitBy from "lodash/omitBy";
 import uniqueId from "lodash/uniqueId";
+import classNames from "classnames";
 
 export default class ProjectCollectionFilters extends Component {
   static displayName = "ProjectCollection.Filters";
@@ -9,7 +10,8 @@ export default class ProjectCollectionFilters extends Component {
   static propTypes = {
     filterChangeHandler: PropTypes.func.isRequired,
     initialFilterState: PropTypes.object,
-    searchId: PropTypes.string
+    searchId: PropTypes.string,
+    additionalClasses: PropTypes.string
   };
 
   static defaultProps = {
@@ -56,7 +58,10 @@ export default class ProjectCollectionFilters extends Component {
 
   render() {
     return (
-      <form className="form-list-filter" onSubmit={this.updateResults}>
+      <form
+        className={classNames("form-list-filter", this.props.additionalClasses)}
+        onSubmit={this.updateResults}
+      >
         <div className="search-input">
           <button className="search-button" type="submit">
             <span className="screen-reader-text">Search…</span>
