@@ -2,8 +2,9 @@
 // used for available Project Content Blocks
 .block-grid {
   $grid-gap: 18px;
-  $margin-top: 7px;
+  $item-padding: 9px; // needed because .content-block has this
   $min-width: 245px;
+
   // use flexbox for older browsers
   display: flex;
   flex-flow: row wrap;
@@ -11,11 +12,10 @@
   width: 100%;
   padding-right: 0;
   padding-left: 0;
-  margin-top: $margin-top;
 
   > * {
     flex-basis: 100%;
-    margin-top: $grid-gap;
+    margin-top: $grid-gap - $item-padding;
 
     @include respond(810px) {
       flex-basis: calc(50% - #{$grid-gap} / 1.5);
@@ -29,9 +29,10 @@
   // enhance with auto-placing grid if browser supports
   @supports (grid-auto-columns: min-content) {
     display: grid;
-    grid-gap: $grid-gap;
+    column-gap: $grid-gap;
+    row-gap: $grid-gap - $item-padding * 2;
     grid-template-columns:repeat(auto-fit, minmax($min-width, 1fr));
-    margin-top: $grid-gap + $margin-top;
+    margin-top: $grid-gap;
 
     > * {
       margin-top: 0;
