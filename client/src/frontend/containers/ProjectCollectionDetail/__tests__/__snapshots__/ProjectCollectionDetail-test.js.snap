@@ -22,10 +22,10 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
     className="bg-neutral05"
   >
     <div
-      className="container project-list-container"
+      className="entity-section-wrapper container"
     >
       <div
-        className="section-heading"
+        className="entity-section-wrapper__heading section-heading"
       >
         <div
           className="main"
@@ -60,7 +60,7 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
         </div>
       </div>
       <form
-        className="form-list-filter"
+        className="form-list-filter entity-section-wrapper__tools"
         onSubmit={[Function]}
       >
         <div
@@ -134,7 +134,7 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
         </button>
       </form>
       <div
-        className="details"
+        className="entity-section-wrapper__details"
       >
         <p
           className="list-total"
@@ -146,7 +146,7 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
         </p>
       </div>
       <nav
-        className="project-list grid"
+        className="project-list grid entity-section-wrapper__body"
       >
         <ul>
           <li>
@@ -203,102 +203,106 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
           </li>
         </ul>
       </nav>
-      <nav
-        className="list-pagination-primary"
+      <div
+        className="entity-section-wrapper__pagination"
       >
-        <ul
-          className={null}
+        <nav
+          className="list-pagination-primary"
         >
-          <li
-            className="pagination-previous disabled"
+          <ul
+            className={null}
           >
-            <a
-              data-id="page-prev"
-              href="#pagination-target"
-              onClick={[Function]}
+            <li
+              className="pagination-previous disabled"
             >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-arrow-long-left"
-              />
-              <span
-                aria-hidden="true"
+              <a
+                data-id="page-prev"
+                href="#pagination-target"
+                onClick={[Function]}
               >
-                Prev
-              </span>
-              <span
-                className="screen-reader-text"
-              >
-                Previous Page
-              </span>
-            </a>
-          </li>
-          <li
-            className="active ordinal"
-          >
-            <a
-              href="#pagination-target"
-              onClick={[Function]}
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-arrow-long-left"
+                />
+                <span
+                  aria-hidden="true"
+                >
+                  Prev
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Previous Page
+                </span>
+              </a>
+            </li>
+            <li
+              className="active ordinal"
             >
-              <span
-                aria-hidden="true"
+              <a
+                href="#pagination-target"
+                onClick={[Function]}
               >
-                1
-              </span>
-              <span
-                className="screen-reader-text"
-              >
-                Go to page: 
-                1
-              </span>
-            </a>
-          </li>
-          <li
-            className="ordinal"
-          >
-            <a
-              href="#pagination-target"
-              onClick={[Function]}
+                <span
+                  aria-hidden="true"
+                >
+                  1
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Go to page: 
+                  1
+                </span>
+              </a>
+            </li>
+            <li
+              className="ordinal"
             >
-              <span
-                aria-hidden="true"
+              <a
+                href="#pagination-target"
+                onClick={[Function]}
               >
-                2
-              </span>
-              <span
-                className="screen-reader-text"
-              >
-                Go to page: 
-                2
-              </span>
-            </a>
-          </li>
-          <li
-            className="pagination-next "
-          >
-            <a
-              data-id="page-next"
-              href="#pagination-target"
-              onClick={[Function]}
+                <span
+                  aria-hidden="true"
+                >
+                  2
+                </span>
+                <span
+                  className="screen-reader-text"
+                >
+                  Go to page: 
+                  2
+                </span>
+              </a>
+            </li>
+            <li
+              className="pagination-next "
             >
-              <span
-                className="screen-reader-text"
+              <a
+                data-id="page-next"
+                href="#pagination-target"
+                onClick={[Function]}
               >
-                Next Page
-              </span>
-              <span
-                aria-hidden="true"
-              >
-                Next
-              </span>
-              <i
-                aria-hidden="true"
-                className="manicon manicon-arrow-long-right"
-              />
-            </a>
-          </li>
-        </ul>
-      </nav>
+                <span
+                  className="screen-reader-text"
+                >
+                  Next Page
+                </span>
+                <span
+                  aria-hidden="true"
+                >
+                  Next
+                </span>
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-arrow-long-right"
+                />
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </section>
   <section

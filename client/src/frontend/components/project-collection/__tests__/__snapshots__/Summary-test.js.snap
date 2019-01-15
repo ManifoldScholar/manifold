@@ -5,10 +5,10 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
   className="project-collection-summary"
 >
   <div
-    className="container project-list-container"
+    className="entity-section-wrapper container"
   >
     <a
-      className="section-heading"
+      className="entity-section-wrapper__heading section-heading"
       href="/projects/project-collection/undefined"
       onClick={[Function]}
     >
@@ -45,7 +45,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
       </div>
     </a>
     <nav
-      className="project-list grid"
+      className="project-list grid entity-section-wrapper__body"
     >
       <ul>
         <li>
@@ -77,7 +77,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
       </ul>
     </nav>
     <div
-      className="utility"
+      className="entity-section-wrapper__utility entity-section-wrapper__utility--footer"
     >
       <a
         href="/projects/project-collection/undefined"

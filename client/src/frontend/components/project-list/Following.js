@@ -37,10 +37,13 @@ export default class ProjectListFollowing extends Component {
     if (!currentUser) return null;
     if (!currentUser.favorites || size(currentUser.favorites) <= 0)
       return <Layout.NoFollow />;
+
+    const baseClass = "entity-section-wrapper";
+
     return (
       <section className="bg-neutral05">
-        <div className="container project-list-container">
-          <header className="section-heading">
+        <div className={`${baseClass} container`}>
+          <header className={`${baseClass}__heading section-heading`}>
             <div className="main">
               <i className="manicon" aria-hidden="true">
                 <Icon.BooksWithGlasses size={54} />
@@ -53,6 +56,7 @@ export default class ProjectListFollowing extends Component {
           <Filters
             filterChangeHandler={this.props.filterChangeHandler}
             subjects={this.mapFavoritesToSubjects()}
+            additionalClasses={`${baseClass}__tools`}
           />
           {this.props.followedProjects ? (
             <Grid
@@ -60,6 +64,7 @@ export default class ProjectListFollowing extends Component {
               favorites={this.props.authentication.currentUser.favorites}
               dispatch={this.props.dispatch}
               projects={this.props.followedProjects}
+              additionalClass={baseClass}
             />
           ) : null}
         </div>

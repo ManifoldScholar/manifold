@@ -27,6 +27,8 @@ export default class ProjectCollectionDetail extends Component {
     const projectCollection = this.props.projectCollection;
     if (!projectCollection) return null;
 
+    const baseClass = "entity-section-wrapper";
+
     const iconFill =
       projectCollection.attributes.icon === "new-round"
         ? "#52e3ac"
@@ -34,8 +36,8 @@ export default class ProjectCollectionDetail extends Component {
 
     return (
       <section key={projectCollection.id} className="bg-neutral05">
-        <div className="container project-list-container">
-          <div className="section-heading">
+        <div className={`${baseClass} container`}>
+          <div className={`${baseClass}__heading section-heading`}>
             <div className="main">
               <i className={"manicon"} aria-hidden="true">
                 <Utility.IconComposer
@@ -52,8 +54,9 @@ export default class ProjectCollectionDetail extends Component {
           <Filters
             filterChangeHandler={this.props.filterChangeHandler}
             initialState={this.props.initialState}
+            additionalClasses={`${baseClass}__tools`}
           />
-          <div className="details">
+          <div className={`${baseClass}__details`}>
             {this.description && (
               <p
                 className="description"
@@ -76,6 +79,7 @@ export default class ProjectCollectionDetail extends Component {
             dispatch={this.props.dispatch}
             paginationClickHandler={this.props.paginationClickHandler}
             pagination={this.props.pagination}
+            additionalClass={baseClass}
           />
         </div>
       </section>
