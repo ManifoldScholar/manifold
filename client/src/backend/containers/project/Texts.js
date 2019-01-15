@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Dialog from "backend/components/dialog";
 import Text from "global/components/text";
+import withConfirmation from "hoc/with-confirmation";
 import { Link } from "react-router-dom";
 import get from "lodash/get";
 import { entityStoreActions } from "actions";
@@ -32,16 +32,10 @@ export class ProjectTextsContainer extends PureComponent {
     project: PropTypes.object,
     dispatch: PropTypes.func,
     refresh: PropTypes.func,
+    confirm: PropTypes.func.isRequired,
     route: PropTypes.object,
     match: PropTypes.object
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
 
   publishedTexts() {
     const published = this.props.project.relationships.publishedText;
@@ -268,48 +262,20 @@ export class ProjectTextsContainer extends PureComponent {
     this.updateCategoryPosition(category, "down");
   }
 
-  handleCategoryDestroy(event, category) {
+  handleCategoryDestroy = category => {
     const heading = "Are you sure you want to delete this category?";
     const message =
       "Any texts belonging to this category will become uncategorized.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.destroyCategory(category);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
-  }
+    this.props.confirm(heading, message, () => this.destroyCategory(category));
+  };
 
-  handleTextDestroy(event, text) {
+  handleTextDestroy = text => {
     const heading = "Are you sure you want to delete this text?";
     const message =
       "All annotations and highlights of this text will also be deleted. " +
       "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.destroyText(text);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
-  }
-
-  closeDialog() {
-    this.setState({ confirmation: null });
-  }
+    this.props.confirm(heading, message, () => this.destroyText(text));
+  };
 
   childRoutes() {
     const { refresh, project } = this.props;
@@ -416,8 +382,8 @@ export class ProjectTextsContainer extends PureComponent {
                   </button>
                 )}
                 <button
-                  onClick={event => {
-                    this.handleTextDestroy(event, text);
+                  onClick={() => {
+                    this.handleTextDestroy(text);
                   }}
                 >
                   <span className="screen-reader-text">Delete Text</span>
@@ -447,10 +413,6 @@ export class ProjectTextsContainer extends PureComponent {
         failureRedirect={lh.link("backendProject", project.id)}
       >
         <section>
-          {this.state.confirmation ? (
-            <Dialog.Confirm {...this.state.confirmation} />
-          ) : null}
-
           {this.childRoutes()}
 
           <Authorize entity={project} ability="createTexts">
@@ -562,8 +524,8 @@ export class ProjectTextsContainer extends PureComponent {
                         </button>
                       )}
                       <button
-                        onClick={event => {
-                          this.handleCategoryDestroy(event, category);
+                        onClick={() => {
+                          this.handleCategoryDestroy(category);
                         }}
                       >
                         <i className="manicon manicon-x" aria-hidden="true" />
@@ -590,4 +552,4 @@ export class ProjectTextsContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ProjectTextsContainer);
+export default withConfirmation(connectAndFetch(ProjectTextsContainer));
