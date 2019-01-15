@@ -4,6 +4,7 @@ import AvailableSection from "./sections/Available";
 import CurrentSection from "./sections/Current";
 import { contentBlocksAPI, requests } from "api";
 import { DragDropContext } from "react-beautiful-dnd";
+import withConfirmation from "hoc/with-confirmation";
 import Developer from "global/components/developer";
 import lh from "helpers/linkHandler";
 import { entityStoreActions } from "actions";
@@ -12,13 +13,14 @@ import cloneDeep from "lodash/cloneDeep";
 
 const { request } = entityStoreActions;
 
-export default class ProjectContent extends PureComponent {
+export class ProjectContent extends PureComponent {
   static displayName = "Project.Content";
 
   static propTypes = {
     project: PropTypes.object,
     contentBlocks: PropTypes.array,
     contentBlocksResponse: PropTypes.object,
+    confirm: PropTypes.func.isRequired,
     refresh: PropTypes.func.isRequired,
     history: PropTypes.object,
     children: PropTypes.func,
@@ -78,7 +80,7 @@ export default class ProjectContent extends PureComponent {
     return {
       showBlock: this.showBlock,
       hideBlock: this.hideBlock,
-      deleteBlock: this.deleteBlock,
+      deleteBlock: this.handleDeleteBlock,
       saveBlockPosition: this.updateBlock,
       editBlock: this.editBlock
     };
@@ -138,7 +140,6 @@ export default class ProjectContent extends PureComponent {
     });
   };
 
-  // TODO: Do we want confirmation first?
   deleteBlock = block => {
     const call = contentBlocksAPI.destroy(block.id);
     const options = { removes: { type: "contentBlocks", id: block.id } };
@@ -203,6 +204,12 @@ export default class ProjectContent extends PureComponent {
     return this.insert(type, 1);
   };
 
+  handleDeleteBlock = block => {
+    const heading = "Are you sure you want to delete this content block?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, () => this.deleteBlock(block));
+  };
+
   render() {
     return (
       <section className="backend-project-content">
@@ -224,3 +231,5 @@ export default class ProjectContent extends PureComponent {
     );
   }
 }
+
+export default withConfirmation(ProjectContent);
