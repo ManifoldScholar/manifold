@@ -1,17 +1,18 @@
 // a layout class for vertically stacking blocks. that's it!
 .content-block-list {
+  $list-margin: 9px;
+
   @include panelRounded;
   display: block;
   min-height: 68px;
-  margin-top: 25px;
+  padding: 0 $list-margin;
+  margin-top: 16px;
+  margin-right: -$list-margin;
+  margin-left: -$list-margin;
   background-color: transparent;
-  transition: border 0.2s ease;
+  transition: background-color 0.4s ease;
 
   &--show-dropzone {
-    border: 1px solid $accentPrimary;
-  }
-
-  > * + * {
-    margin-top: 18px;
+    background-color: lighten($neutral90, 5%);
   }
 }
