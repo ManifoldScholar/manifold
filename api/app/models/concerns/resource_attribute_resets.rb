@@ -69,7 +69,7 @@ module ResourceAttributeResets
 
   def reset_video_attributes
     attributes = %w(external_url external_id external_type sub_kind)
-    attachments = %w(high_res variant_thumbnail)
+    attachments = %w(high_res)
     reset_attributes(attributes, attachments)
   end
 
