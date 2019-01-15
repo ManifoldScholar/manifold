@@ -1,6 +1,7 @@
 .content-block {
-  @include panelRounded;
   $inactiveBlockColor: #424242;
+  padding-top: 9px;
+  padding-bottom: 9px;
 
   &--inactive {
     color: $inactiveBlockColor;
@@ -10,11 +11,8 @@
     color: $neutral30;
   }
 
-  &--is-dragging {
-    box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
-  }
-
   &__inner {
+    @include panelRounded;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,6 +26,10 @@
       }
     }
 
+    .content-block--is-dragging & {
+      box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
+    }
+
     &:focus {
       @include focusOutline;
       outline-offset: 12px;
@@ -35,13 +37,16 @@
   }
 
   &__heading {
-    display: -ms-grid;
-    display: grid;
+    display: flex; // use flexbox as fallback
     flex-grow: 1;
     align-items: center;
-    grid-template-columns: max-content auto;
     transition: color $duration $timing;
-    -ms-grid-columns: max-content auto; /* stylelint-disable-line property-no-vendor-prefix */
+
+    // enhance with grid if browser supports
+    @supports (grid-auto-columns: min-content) {
+      display: grid;
+      grid-template-columns: max-content auto;
+    }
 
     &:hover {
       .content-block--available.content-block--active & {
@@ -92,6 +97,10 @@
     font-size: 17px;
     font-weight: $regular;
 
+    &--small {
+      margin-bottom: 3px;
+    }
+
     &--large {
       margin-right: 8%;
       margin-bottom: 5px;
@@ -105,21 +114,10 @@
   }
 
   &__button-list {
-    $grid-gap: 14px;
+    display: flex;
 
-    display: -ms-grid;
-    display: grid;
-    grid-gap: $grid-gap;
-    -ms-grid-columns: auto auto; /* stylelint-disable-line property-no-vendor-prefix */
-    -ms-grid-rows: auto auto; /* stylelint-disable-line property-no-vendor-prefix */
-    grid-template: auto auto / auto auto;
-
-    @include respond($break90) {
-      display: flex;
-
-      > * + * {
-        margin-left: $grid-gap;
-      }
+    > * + * {
+      margin-left: 14px;
     }
   }
 
