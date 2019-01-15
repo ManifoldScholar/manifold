@@ -13,8 +13,15 @@ export default class FormRadioOption extends PureComponent {
       value: PropTypes.any.isRequired,
       internalValue: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired
-    })
+    }),
+    focusOnMount: PropTypes.bool
   };
+
+  componentDidMount() {
+    if (this.props.focusOnMount === true && this.inputElement) {
+      this.inputElement.focus();
+    }
+  }
 
   get option() {
     return this.props.option;
@@ -44,6 +51,9 @@ export default class FormRadioOption extends PureComponent {
           value={this.option.internalValue}
           checked={this.checked}
           onChange={this.props.onChange}
+          ref={input => {
+            this.inputElement = input;
+          }}
         />
         <span className="toggle-indicator" aria-hidden="true">
           {this.checked ? <i className="manicon" /> : null}
