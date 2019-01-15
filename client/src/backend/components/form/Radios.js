@@ -36,6 +36,10 @@ class FormRadios extends Component {
     idForError: labelId("radios-error-")
   };
 
+  get focusOnMount() {
+    return this.props.focusOnMount;
+  }
+
   get options() {
     return this.props.options;
   }
@@ -74,10 +78,11 @@ class FormRadios extends Component {
           {this.props.label}
         </label>
         <Instructions instructions={this.props.instructions} />
-        {this.options.map(option => (
+        {this.options.map((option, index) => (
           <Option
             key={`${this.props.id}-${option.internalValue}`}
             option={option}
+            focusOnMount={this.focusOnMount && index === 0}
             {...this.optionProps}
           />
         ))}

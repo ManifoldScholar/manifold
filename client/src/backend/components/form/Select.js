@@ -22,6 +22,7 @@ class FormSelect extends Component {
         internalValue: PropTypes.any.isRequired
       })
     ).isRequired,
+    focusOnMount: PropTypes.bool,
     id: PropTypes.string,
     idForError: PropTypes.string
   };
@@ -30,6 +31,12 @@ class FormSelect extends Component {
     id: labelId("select-"),
     idForError: labelId("select-error-")
   };
+
+  componentDidMount() {
+    if (this.props.focusOnMount === true && this.inputElement) {
+      this.inputElement.focus();
+    }
+  }
 
   render() {
     const options = this.props.options.map(option => {
@@ -57,6 +64,9 @@ class FormSelect extends Component {
               aria-describedby={this.props.idForError}
               onChange={this.props.onChange}
               value={this.props.value}
+              ref={input => {
+                this.inputElement = input;
+              }}
             >
               {options}
             </select>
