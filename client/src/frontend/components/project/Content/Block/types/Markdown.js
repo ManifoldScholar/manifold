@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import Wrapper from "../parts/Wrapper";
 
 export default class ProjectContentBlockMarkdownBlock extends PureComponent {
   static displayName = "Project.Content.Block.Markdown";
@@ -13,6 +14,10 @@ export default class ProjectContentBlockMarkdownBlock extends PureComponent {
   }
 
   render() {
-    return <div>Markdown Block [{this.block.id}]</div>;
+    return (
+      <Wrapper>
+        <div>Markdown Block [{this.block.id}]</div>
+      </Wrapper>
+    );
   }
 }
