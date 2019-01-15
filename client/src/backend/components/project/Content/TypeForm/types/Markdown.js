@@ -14,6 +14,7 @@ export default class ProjectContentTypeFormMarkdown extends PureComponent {
             { label: "Normal", value: "normal" },
             { label: "Shaded", value: "shaded" }
           ]}
+          focusOnMount
           inline
           wide
         />
