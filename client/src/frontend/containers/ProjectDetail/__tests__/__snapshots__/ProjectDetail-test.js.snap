@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend ProjectDetail Container renders correctly 1`] = `
-<div>
+<div
+  className="project-detail"
+>
   <div>
     <div
       className="project-detail-hero"
@@ -84,83 +86,6 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
         </div>
       </div>
     </div>
-    <section>
-      <div
-        className="container flush-top"
-      >
-        <header
-          className="section-heading"
-        >
-          <div
-            className="main"
-          >
-            <i
-              aria-hidden="true"
-              className="manicon manicon-tag"
-            />
-            <div
-              className="body"
-            >
-              <h4
-                className="title"
-              >
-                About
-              </h4>
-            </div>
-          </div>
-        </header>
-        <ul
-          className="meta-list-primary"
-        />
-        <ul
-          className="meta-list-primary columnar"
-        >
-          <li>
-            <span
-              className="meta-label"
-            >
-              doi
-            </span>
-            <div
-              className="meta-value"
-            >
-              <a
-                href="https://doi.org/10.12345.6789"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                https://doi.org/10.12345.6789
-              </a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section
-      className="bg-neutral05"
-    >
-      <div
-        className="container"
-      >
-        <nav
-          className="button-nav"
-        >
-          <a
-            className="button-icon-primary"
-            href="/projects/all"
-            onClick={[Function]}
-          >
-            <span>
-              <i
-                aria-hidden="true"
-                className="manicon manicon-books-on-shelf"
-              />
-              See All Projects
-            </span>
-          </a>
-        </nav>
-      </div>
-    </section>
   </div>
 </div>
 `;
