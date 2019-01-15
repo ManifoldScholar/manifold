@@ -44,13 +44,11 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
       <TypeComponent>
         {block => (
           <div className={`${baseClass}__inner`}>
-            <div className="identity">
-              <Identity
-                icon={block.icon}
-                title={block.title}
-                size={"large"}
-              />
-            </div>
+            <Identity
+              icon={block.icon}
+              title={block.title}
+              size={"large"}
+            />
             <div className={`${baseClass}__button-list`}>
               <Delete
                 visible={this.deletable}
