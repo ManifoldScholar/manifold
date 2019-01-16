@@ -10,7 +10,8 @@ class FormOptionsList extends PureComponent {
     setOther: PropTypes.func,
     onSelect: PropTypes.func.isRequired,
     label: PropTypes.func.isRequired,
-    fetch: PropTypes.func.isRequired,
+    options: PropTypes.array,
+    fetch: PropTypes.func,
     fetchOptions: PropTypes.object,
     focusOnMount: PropTypes.bool,
     placeholder: PropTypes.string,
@@ -33,17 +34,12 @@ class FormOptionsList extends PureComponent {
     this.props.onSelect(entity);
   };
 
-  renderOptions(props) {
-    return props.searchable
-      ? this.renderSearchable(props)
-      : this.renderStatic(props);
-  }
-
   renderStatic(props) {
     return (
       <ConnectedInputs.FetchSelect
         fetch={props.fetch}
         fetchOptions={props.fetchOptions}
+        options={props.options}
         placeholder={props.placeholder}
         label={props.label}
         onSelect={this.handleSelect}
@@ -70,7 +66,11 @@ class FormOptionsList extends PureComponent {
   }
 
   render() {
-    return this.renderOptions(this.props);
+    if (this.props.options) return this.renderStatic(this.props);
+
+    return this.props.searchable
+      ? this.renderSearchable(this.props)
+      : this.renderStatic(this.props);
   }
 }
 
