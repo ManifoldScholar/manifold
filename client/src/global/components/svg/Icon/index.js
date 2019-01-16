@@ -1,3 +1,8 @@
+import ActivityComment from "./ActivityComment";
+import ActivityEgg from "./ActivityEgg";
+import ActivityResource from "./ActivityResource";
+import ActivityText from "./ActivityText";
+import ActivityTweet from "./ActivityTweet";
 import BarsDoubleHorizontal from "./BarsDoubleHorizontal";
 import BooksOnShelf from "./BooksOnShelf";
 import BooksOnShelfStroke from "./BooksOnShelfStroke";
@@ -34,6 +39,11 @@ import Touch from "./Touch";
 import Trash from "./Trash";
 
 export default {
+  ActivityComment,
+  ActivityEgg,
+  ActivityResource,
+  ActivityText,
+  ActivityTweet,
   BarsDoubleHorizontal,
   BooksOnShelf,
   BooksOnShelfStroke,
