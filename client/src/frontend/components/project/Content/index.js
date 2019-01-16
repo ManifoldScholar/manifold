@@ -14,13 +14,12 @@ export default class ProjectContent extends PureComponent {
   }
 
   get contentBlocks() {
-    return this.project.relationships.contentBlocks;
+    return this.project.relationships.contentBlocks || [];
   }
 
   render() {
     return this.contentBlocks.map(block => {
-        return <Block block={block} key={block.id} project={this.project} />
-      }
-    )
+      return <Block block={block} key={block.id} project={this.project} />;
+    });
   }
 }

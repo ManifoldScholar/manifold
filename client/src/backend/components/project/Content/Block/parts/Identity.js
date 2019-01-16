@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import Utility from "global/components/utility";
 
 export default class ProjectContentBlockIdentity extends PureComponent {
@@ -14,14 +13,13 @@ export default class ProjectContentBlockIdentity extends PureComponent {
 
   static defaultProps = {
     size: "small"
-  }
+  };
 
   render() {
     const size = this.props.size;
     const iconSize = size === "large" ? 46 : 36;
     const baseClass = "content-block";
-    const titleClasses =
-      `${baseClass}__title ${baseClass}__title--${size}`;
+    const titleClasses = `${baseClass}__title ${baseClass}__title--${size}`;
     const iconClasses = `${baseClass}__icon ${baseClass}__icon--dark ${baseClass}__icon--${size}`;
 
     return (
@@ -29,11 +27,9 @@ export default class ProjectContentBlockIdentity extends PureComponent {
         <Utility.IconComposer
           icon={this.props.icon}
           iconClass={iconClasses}
-          size={iconSize} />
-        <span
-          className={titleClasses}>
-          {this.props.title}
-        </span>
+          size={iconSize}
+        />
+        <span className={titleClasses}>{this.props.title}</span>
       </header>
     );
   }

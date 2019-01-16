@@ -32,15 +32,12 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
     return (
       <div className="form-section">
         <Header title="Content Blocks">
-          Drag content blocks directly into your project page layout,
-          or use the plus symbol to add them.
+          Drag content blocks directly into your project page layout, or use the
+          plus symbol to add them.
         </Header>
         <Droppable droppableId="available" isDropDisabled>
           {provided => (
-            <div
-              ref={provided.innerRef}
-              className="block-grid full-width"
-            >
+            <div ref={provided.innerRef} className="block-grid full-width">
               {this.types.map((type, index) => (
                 <Block
                   currentBlocks={this.props.currentBlocks}
