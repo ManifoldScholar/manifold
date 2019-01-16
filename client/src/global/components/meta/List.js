@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import isEmpty from "lodash/isEmpty";
 import DOI from "global/components/meta/DOI";
 import Item from "global/components/meta/Item";
 import endsWith from "lodash/endsWith";
@@ -99,17 +100,21 @@ export default class List extends Component {
 
     return (
       <React.Fragment>
-        <ul className={`meta-list-${this.props.level}`}>
-          {longKeys.map(key => {
-            return this.renderValue(key, long[key]);
-          })}
-        </ul>
-        <ul className={`meta-list-${this.props.level} columnar`}>
-          {shortKeys.map(key => {
-            return this.renderValue(key, short[key]);
-          })}
-          {this.renderDoi()}
-        </ul>
+        {!isEmpty(longKeys) && (
+          <ul className={`meta-list-${this.props.level}`}>
+            {longKeys.map(key => {
+              return this.renderValue(key, long[key]);
+            })}
+          </ul>
+        )}
+        {!isEmpty(shortKeys) && (
+          <ul className={`meta-list-${this.props.level} columnar`}>
+            {shortKeys.map(key => {
+              return this.renderValue(key, short[key]);
+            })}
+            {this.renderDoi()}
+          </ul>
+        )}
       </React.Fragment>
     );
   }
