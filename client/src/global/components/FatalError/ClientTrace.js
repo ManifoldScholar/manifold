@@ -3,18 +3,21 @@ import PropTypes from "prop-types";
 
 export default class FatalErrorClientTrace extends PureComponent {
   static adjustedStackLines(stackLines) {
-    return stackLines.map((line, index) => {
-      let adjustedLine = line.replace("at ", "");
-      adjustedLine = adjustedLine.replace(" (", "%%%");
-      adjustedLine = adjustedLine.replace(")", "");
-      const parts = adjustedLine.split("%%%");
-      return {
-        id: index,
-        method: parts[0].trim(),
-        location: parts[1].replace("webpack-internal:///", ""),
-        orig: line
-      };
-    });
+    return stackLines
+      .map((line, index) => {
+        let adjustedLine = line.replace("at ", "");
+        adjustedLine = adjustedLine.replace(" (", "%%%");
+        adjustedLine = adjustedLine.replace(")", "");
+        const parts = adjustedLine.split("%%%");
+        if (parts.length === 1) return null;
+        return {
+          id: index,
+          method: parts[0].trim(),
+          location: parts[1].replace("webpack-internal:///", ""),
+          orig: line
+        };
+      })
+      .filter(i => !!i);
   }
 
   static propTypes = {
