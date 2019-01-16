@@ -18,6 +18,7 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
 
   static types = [
     "Content::RecentActivityBlock",
+    "Content::TextsBlock",
     "Content::ResourcesBlock",
     "Content::MetadataBlock",
     "Content::TableOfContentsBlock",
