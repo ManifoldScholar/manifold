@@ -32,18 +32,21 @@ export default class ProjectContentBlockVisibilityToggle extends PureComponent {
           <Utility.IconComposer
             icon="eye-open"
             size={26}
-            iconClass={`${baseClass}__icon ${baseClass}__icon--light`} />
+            iconClass={`${baseClass}__icon ${baseClass}__icon--light`}
+          />
         </button>
       );
 
     return (
       <button
         className={`${baseClass}__button`}
-        onClick={this.props.entityCallbacks.showBlock}>
+        onClick={this.props.entityCallbacks.showBlock}
+      >
         <Utility.IconComposer
           icon="eye-closed"
           size={26}
-          iconClass={`${baseClass}__icon ${baseClass}__icon--light`} />
+          iconClass={`${baseClass}__icon ${baseClass}__icon--light`}
+        />
       </button>
     );
   }

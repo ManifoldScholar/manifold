@@ -8,7 +8,7 @@ class Configurations {
       "Content::MetadataBlock": false,
       "Content::TableOfContentsBlock": true,
       "Content::MarkdownBlock": true
-    }
+    };
   }
 
   isConfigurable(type) {

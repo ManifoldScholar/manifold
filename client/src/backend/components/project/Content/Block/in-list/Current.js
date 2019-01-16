@@ -13,7 +13,8 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
   static propTypes = {
     entity: PropTypes.object.isRequired,
     entityCallbacks: PropTypes.object.isRequired,
-    typeComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    typeComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    dragHandleProps: PropTypes.object
   };
 
   get entity() {
@@ -44,11 +45,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
       <TypeComponent>
         {block => (
           <div className={`${baseClass}__inner`}>
-            <Identity
-              icon={block.icon}
-              title={block.title}
-              size={"large"}
-            />
+            <Identity icon={block.icon} title={block.title} size={"large"} />
             <div className={`${baseClass}__button-list`}>
               <Delete
                 visible={this.deletable}
