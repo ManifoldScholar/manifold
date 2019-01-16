@@ -7,7 +7,7 @@ upstream manifold-cable.<%= tld.strip %> {
 }
 
 upstream manifold-client.<%= tld.strip %> {
- server 127.0.0.1:3010;
+  server unix:<%= socket_dir %>/manifold-client;
 }
 
 server {
