@@ -13,17 +13,16 @@ export default class ProjectContentBlockInListPartsEdit extends PureComponent {
 
   render() {
     if (!this.props.visible) return null;
-    const iconClass = `${this.props.baseClass}__icon ${this.props.baseClass}__icon--light`;
+    const iconClass = `${this.props.baseClass}__icon ${
+      this.props.baseClass
+    }__icon--light`;
 
     return (
       <button
         className={`${this.props.baseClass}__button`}
         onClick={this.props.clickHandler}
       >
-        <Utility.IconComposer
-          icon="sliders"
-          size={26}
-          iconClass={iconClass} />
+        <Utility.IconComposer icon="sliders" size={26} iconClass={iconClass} />
       </button>
     );
   }
