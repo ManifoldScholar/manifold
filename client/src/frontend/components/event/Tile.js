@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import classNames from "classnames";
 import FormattedDate from "global/components/FormattedDate";
 import { Link } from "react-router-dom";
+import Utility from "global/components/utility";
 
 export default class Tile extends Component {
   static displayName = "Event.Tile";
@@ -13,7 +14,8 @@ export default class Tile extends Component {
     destroyCallback: PropTypes.func,
     visible: PropTypes.bool,
     tileClass: PropTypes.string,
-    iconClass: PropTypes.string,
+    header: PropTypes.string,
+    icon: PropTypes.string,
     title: PropTypes.string,
     subtitle: PropTypes.any,
     preAttribution: PropTypes.any,
@@ -21,10 +23,8 @@ export default class Tile extends Component {
     postAttribution: PropTypes.any,
     date: PropTypes.string,
     dateFormat: PropTypes.string,
-    datePrefix: PropTypes.string,
     linkHref: PropTypes.string,
-    linkTarget: PropTypes.string,
-    linkPrompt: PropTypes.string
+    linkTarget: PropTypes.string
   };
 
   static defaultProps = {
@@ -34,71 +34,92 @@ export default class Tile extends Component {
     itemClass: ""
   };
 
-  renderLink() {
-    const { linkHref, linkPrompt, linkTarget } = this.props;
+  renderInnerContent() {
+    const {
+      header,
+      icon,
+      title,
+      subtitle,
+      preAttribution,
+      content,
+      postAttribution,
+      date,
+      dateFormat
+    } = this.props;
+
+    const baseClass = "event-tile";
+
+    return (
+      <div className={`${baseClass}__inner`}>
+        {icon && (
+          <Utility.IconComposer
+            icon={icon}
+            size={48}
+            iconClass={`${baseClass}__icon`}
+          />
+        )}
+        {header && <div className={`${baseClass}__header`}>{header}</div>}
+        {title && (
+          <h5
+            className={`${baseClass}__title`}
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
+        )}
+        {subtitle && (
+          <span className={`${baseClass}__subtitle`}>{subtitle}</span>
+        )}
+        {preAttribution && (
+          <div className={`${baseClass}__user`}>{preAttribution}</div>
+        )}
+        {content && <div className={`${baseClass}__content`}>{content}</div>}
+        {postAttribution && (
+          <div className={`${baseClass}__user`}>{postAttribution}</div>
+        )}
+        {date && (
+          <span className={`${baseClass}__footer`}>
+            <FormattedDate format={dateFormat} date={date} />
+          </span>
+        )}
+      </div>
+    );
+  }
+
+  renderLinkWrapper(wrapperClass) {
+    const { linkHref, linkTarget } = this.props;
+
     if (!linkHref) return null;
     if (linkTarget && linkTarget !== "_self") {
       return (
-        <a href={linkHref} target={linkTarget}>
-          {linkPrompt}
-          <i className="manicon manicon-arrow-long-right" aria-hidden="true" />
+        <a
+          href={linkHref}
+          target={linkTarget}
+          rel="noopener noreferrer"
+          className={wrapperClass}
+        >
+          {this.renderInnerContent()}
         </a>
       );
     }
+
     return (
-      <Link to={linkHref}>
-        {linkPrompt}
-        <i className="manicon manicon-arrow-long-right" aria-hidden="true" />
+      <Link to={linkHref} className={wrapperClass}>
+        {this.renderInnerContent()}
       </Link>
     );
   }
 
   render() {
     if (!this.props.visible) return null;
-    const tileClass = classnames("event-tile", this.props.tileClass);
+    const tileClass = classNames("event-tile", this.props.tileClass);
 
     return (
       <li className={this.props.itemClass}>
-        <div className={tileClass}>
-          <div className="event-data">
-            <div>
-              {this.props.iconClass ? (
-                <i className={this.props.iconClass} />
-              ) : null}
-              {this.props.title ? (
-                <h5
-                  className="event-title"
-                  dangerouslySetInnerHTML={{ __html: this.props.title }}
-                />
-              ) : null}
-              {this.props.subtitle ? (
-                <span className="event-subtitle">{this.props.subtitle}</span>
-              ) : null}
-              {this.props.preAttribution ? (
-                <div className="event-user">{this.props.preAttribution}</div>
-              ) : null}
-              {this.props.content ? (
-                <div className="event-content">{this.props.content}</div>
-              ) : null}
-              {this.props.postAttribution ? (
-                <div className="event-user">{this.props.postAttribution}</div>
-              ) : null}
-              {this.props.date ? (
-                <span className="event-date">
-                  <FormattedDate
-                    prefix={this.props.datePrefix}
-                    format={this.props.dateFormat}
-                    date={this.props.date}
-                  />
-                </span>
-              ) : null}
-            </div>
-          </div>
-          {!this.props.hideLink ? (
-            <div className="event-prompt">{this.renderLink()}</div>
-          ) : null}
-        </div>
-        {this.props.destroyCallback ? (
+        {!this.props.hideLink ? (
+          this.renderLinkWrapper(tileClass)
+        ) : (
+          <div className={tileClass}>{this.renderInnerContent()}</div>
+        )}
+        {this.props.destroyCallback && (
           <div
             className="utility"
             data-id={"destroy"}
@@ -109,7 +130,7 @@ export default class Tile extends Component {
             <i className="manicon manicon-trashcan" aria-hidden="true" />
             <span className="screen-reader-text">Delete Event</span>
           </div>
-        ) : null}
+        )}
       </li>
     );
   }
