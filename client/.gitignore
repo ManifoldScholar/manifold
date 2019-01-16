@@ -8,3 +8,5 @@ npm-debug.log
 yarn-error.log
 tmp/*
 !tmp/.gitkeep
+!tmp/sockets/
+!tmp/sockets/.gitkeep
