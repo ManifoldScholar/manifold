@@ -357,6 +357,12 @@
   border-radius: 8px;
 }
 
+// Light panel with rounded corners
+@mixin panelRoundedLight {
+  background-color: $neutral05;
+  border-radius: 8px;
+}
+
 @mixin roundedHeader {
   @include panelRounded;
   display: table;
