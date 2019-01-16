@@ -20,16 +20,17 @@ export default class ProjectContentBlockInListAvailable extends PureComponent {
         {block => (
           <div {...this.props.dragHandleProps} className="content-block__inner">
             <Identity icon={block.icon} title={block.title} />
-              <button
-                className="content-block__button"
-                onClick={this.props.onClickAdd}
-                disabled={this.props.disabled}
-              >
-                <Utility.IconComposer
-                  icon="circle-plus"
-                  size={32}
-                  iconClass="content-block__icon content-block__icon--add" />
-              </button>
+            <button
+              className="content-block__button"
+              onClick={this.props.onClickAdd}
+              disabled={this.props.disabled}
+            >
+              <Utility.IconComposer
+                icon="circle-plus"
+                size={32}
+                iconClass="content-block__icon content-block__icon--add"
+              />
+            </button>
           </div>
         )}
       </TypeComponent>
