@@ -15,7 +15,7 @@ export default class ProjectContentBlockRecentActivityBlock extends PureComponen
   static defaultProps = {
     title: "Recent Activity",
     icon: "pulse"
-  }
+  };
 
   get block() {
     return this.props.block;

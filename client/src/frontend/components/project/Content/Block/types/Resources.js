@@ -15,7 +15,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
   static defaultProps = {
     title: "Resources",
     icon: "cubeShine"
-  }
+  };
 
   get block() {
     return this.props.block;
