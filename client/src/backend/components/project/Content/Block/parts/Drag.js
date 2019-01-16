@@ -13,10 +13,15 @@ export default class ProjectContentBlockInListPartsDrag extends PureComponent {
 
   render() {
     if (!this.props.visible) return null;
-    const iconClass = `${this.props.baseClass}__icon ${this.props.baseClass}__icon--light`;
+    const iconClass = `${this.props.baseClass}__icon ${
+      this.props.baseClass
+    }__icon--light`;
 
     return (
-      <div className={`${this.props.baseClass}__button`} {...this.props.dragHandleProps}>
+      <div
+        className={`${this.props.baseClass}__button`}
+        {...this.props.dragHandleProps}
+      >
         <Utility.IconComposer
           icon="barsDoubleHorizontal"
           size={26}

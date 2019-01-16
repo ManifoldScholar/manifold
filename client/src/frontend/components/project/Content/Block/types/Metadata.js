@@ -15,8 +15,7 @@ export default class ProjectContentBlockMetadataBlock extends PureComponent {
   static defaultProps = {
     title: "Metadata",
     icon: "tag"
-  }
-
+  };
 
   get block() {
     return this.props.block;

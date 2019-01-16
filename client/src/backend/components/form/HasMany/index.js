@@ -32,18 +32,14 @@ export class FormHasMany extends PureComponent {
     set: PropTypes.func,
     name: PropTypes.string,
     searchable: PropTypes.bool,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    value: PropTypes.any
   };
 
   static defaultProps = {
     idForError: labelId("predictive-text-belongs-to-error-"),
     searchable: true
   };
-
-  get entities() {
-    const entities = this.props.name ? this.props.value : this.props.entities;
-    return entities || [];
-  }
 
   onNew = value => {
     if (!this.props.onNew || !this.props.changeHandler) return null;
@@ -67,6 +63,11 @@ export class FormHasMany extends PureComponent {
     if (isArray(entityOrEntities)) return this.selectMany(entityOrEntities);
     return this.selectOne(entityOrEntities);
   };
+
+  get entities() {
+    const entities = this.props.name ? this.props.value : this.props.entities;
+    return entities || [];
+  }
 
   selectOne(entity) {
     const newEntities = this.entities.slice(0);

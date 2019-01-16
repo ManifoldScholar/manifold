@@ -11,7 +11,7 @@ export default class ProjectContentBlock extends PureComponent {
   };
 
   get block() {
-    return this.props.block
+    return this.props.block;
   }
 
   get type() {
@@ -25,6 +25,6 @@ export default class ProjectContentBlock extends PureComponent {
   render() {
     const TypeComponent = this.typeComponent;
 
-    return <TypeComponent {...this.props} />
+    return <TypeComponent {...this.props} />;
   }
 }

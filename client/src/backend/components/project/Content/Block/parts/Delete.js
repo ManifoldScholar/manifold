@@ -13,18 +13,18 @@ export default class ProjectContentBlockInListPartsDelete extends PureComponent 
 
   render() {
     if (!this.props.visible) return null;
-    const iconClass = `${this.props.baseClass}__icon ${this.props.baseClass}__icon--light`;
+    const iconClass = `${this.props.baseClass}__icon ${
+      this.props.baseClass
+    }__icon--light`;
 
     return (
       <button
-        className={`${this.props.baseClass}__button ${this.props.baseClass}__button--delete`}
+        className={`${this.props.baseClass}__button ${
+          this.props.baseClass
+        }__button--delete`}
         onClick={this.props.clickHandler}
       >
-        <Utility.IconComposer
-          icon="trash"
-          size={26}
-          iconClass={iconClass}
-        />
+        <Utility.IconComposer icon="trash" size={26} iconClass={iconClass} />
       </button>
     );
   }
