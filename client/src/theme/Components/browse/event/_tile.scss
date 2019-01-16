@@ -1,0 +1,147 @@
+// Can be a link or a div
+.event-tile {
+  @include panelRoundedLight;
+  position: relative;
+  width: 100%;
+  padding: 19px 17px 21px 0;
+  margin-left: 10px;
+  color: $neutral90;
+  text-decoration: none;
+  transition: color $duration ease-out,
+    box-shadow $duration ease-out;
+
+  &.tweet .event-tile__content {
+    font-style: italic;
+    letter-spacing: 0.065em;
+  }
+
+  &__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-left: 32px;
+
+    @include respond($break60) {
+      padding-left: 40px;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    color: $neutral30;
+    background-color: $neutralWhite;
+    border-radius: 100%;
+    transition: color $duration ease-out;
+    transform: translateX(-50%);
+
+    @include respond($break60) {
+      width: 44px;
+      height: 44px;
+    }
+
+    @include respond($break75) {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  &__title {
+    @include templateHead;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: $regular;
+
+    @include respond($break40) {
+      font-size: 17px;
+    }
+  }
+
+  &__subtitle, .event.content {
+    @include subtitlePrimary;
+    display: block;
+    font-size: 15px;
+  }
+
+  &__user, &__user a {
+    @include templateHead;
+    font-size: 15px;
+    color: $neutral70;
+    text-decoration: none;
+    transition: color $duration ease-out;
+
+    + .event-tile__footer {
+      margin-top: 3px;
+    }
+
+    + .event-tile__content {
+      padding-top: 10px;
+    }
+  }
+
+  &__content {
+    @include templateCopy;
+    font-size: 13px;
+    line-height: 1.313em;
+    letter-spacing: 0.03em;
+
+    a {
+      color: $accentPrimary;
+      text-decoration: none;
+    }
+  }
+
+  &__header,
+  &__footer {
+    @include utilityPrimary;
+    display: block;
+    font-size: 12px;
+    font-weight: $semibold;
+    color: $neutral70;
+    letter-spacing: 0.115em;
+    transition: color $duration ease-out;
+
+    @include respond($break40) {
+      font-size: 13px;
+    }
+  }
+
+  &__header {
+    margin-bottom: 10px;
+
+    @include respond($break40) {
+      margin-bottom: 14px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-end;
+    margin-top: 18px;
+  }
+}
+
+// Required to add hover states to links only
+// scss-lint:disable QualifyingElement
+a.event-tile:hover,
+a.event-tile:focus {
+  color: $accentPrimary;
+  outline: none;
+  box-shadow: 0 20px 30px 2px rgba($neutralBlack, 0.13);
+
+  .event-tile__icon,
+  .event-tile__title,
+  .event-tile__header,
+  .event-tile__footer,
+  .event-tile__user,
+  .event-tile__user a {
+    color: $accentPrimary;
+  }
+}
