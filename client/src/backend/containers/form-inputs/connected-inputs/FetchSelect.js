@@ -18,8 +18,9 @@ class FetchSelect extends PureComponent {
     className: PropTypes.string,
     onSelect: PropTypes.func.isRequired,
     label: PropTypes.func.isRequired,
-    fetch: PropTypes.func.isRequired,
+    fetch: PropTypes.func,
     fetchOptions: PropTypes.object,
+    options: PropTypes.array,
     placeholder: PropTypes.string,
     authToken: PropTypes.string,
     idForError: PropTypes.string,
@@ -41,7 +42,7 @@ class FetchSelect extends PureComponent {
 
     this.state = {
       open: false,
-      options: [],
+      options: props.options || [],
       highlighted: null
     };
   }
@@ -51,6 +52,7 @@ class FetchSelect extends PureComponent {
       this.selectElement.focus();
     }
 
+    if (this.props.options) return null;
     this.debouncedUpdateOptions(this.props.fetch);
   }
 
