@@ -12,7 +12,7 @@ describe("Backend.Project.Content.TypeForm.Markdown component", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <Markdown />
+          <Markdown setOther={jest.fn} />
         </Provider>
       )
     );
