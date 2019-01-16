@@ -81,22 +81,23 @@ export default class ProjectContentBlock extends PureComponent {
     const ListContextBlock = this.inAvailableList ? Available : Current;
     const baseClass = "content-block";
 
-    if (this.disabled) return (
-      <div
-        className={classNames(
-          baseClass,
-          `${baseClass}--${this.props.context} ${baseClass}--inactive`
-        )}
-      >
-        <ListContextBlock
-          entity={this.props.entity}
-          entityCallbacks={this.props.entityCallbacks}
-          typeComponent={TypeComponent}
-          onClickAdd={this.handleClickAdd}
-          disabled={this.disabled}
-        />
-      </div>
-    );
+    if (this.disabled)
+      return (
+        <div
+          className={classNames(
+            baseClass,
+            `${baseClass}--${this.props.context} ${baseClass}--inactive`
+          )}
+        >
+          <ListContextBlock
+            entity={this.props.entity}
+            entityCallbacks={this.props.entityCallbacks}
+            typeComponent={TypeComponent}
+            onClickAdd={this.handleClickAdd}
+            disabled={this.disabled}
+          />
+        </div>
+      );
 
     return (
       <Draggable
@@ -114,7 +115,8 @@ export default class ProjectContentBlock extends PureComponent {
                 style={provided.draggableProps.style}
                 className={classNames(
                   baseClass,
-                  `${baseClass}--${this.props.context}`, {
+                  `${baseClass}--${this.props.context}`,
+                  {
                     [`${baseClass}--active`]: !this.disabled,
                     [`${baseClass}--inactive`]: this.disabled,
                     [`${baseClass}--is-dragging`]: snapshot.isDragging
@@ -131,11 +133,13 @@ export default class ProjectContentBlock extends PureComponent {
                 />
               </div>
               {this.inAvailableList && snapshot.isDragging && (
-                <div className={classNames(
-                  baseClass,
-                  `${baseClass}--${this.props.context}`,
-                  `${baseClass}--inactive`
-                )}>
+                <div
+                  className={classNames(
+                    baseClass,
+                    `${baseClass}--${this.props.context}`,
+                    `${baseClass}--inactive`
+                  )}
+                >
                   <AvailablePlaceholder typeComponent={TypeComponent} />
                 </div>
               )}
