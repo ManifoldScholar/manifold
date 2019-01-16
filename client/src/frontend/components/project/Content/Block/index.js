@@ -23,6 +23,8 @@ export default class ProjectContentBlock extends PureComponent {
   }
 
   render() {
+    if (!this.block.attributes.visible) return null;
+
     const TypeComponent = this.typeComponent;
 
     return <TypeComponent {...this.props} />;
