@@ -55,7 +55,7 @@ export default class Event extends PureComponent {
     return {
       type: attr.eventType,
       postAttribution: attr.attribution,
-      iconClass: "manicon manicon-person-word-bubble"
+      icon: "activity-text"
     };
   }
 
@@ -67,7 +67,7 @@ export default class Event extends PureComponent {
 
     return {
       tileClass: "tweet",
-      iconClass: "manicon manicon-twitter",
+      icon: "activity-tweet",
       type: attr.eventType,
       preAttribution: (
         <a
@@ -81,7 +81,6 @@ export default class Event extends PureComponent {
       content: autolinkTweet(contentProps),
       date: attr.createdAt,
       dateFormat: "MMMM Do, YYYY",
-      linkPrompt: "View Tweet",
       linkHref: attr.eventUrl,
       linkTarget: "_blank"
     };
@@ -90,12 +89,11 @@ export default class Event extends PureComponent {
   propsForProjectCreated(attr) {
     return {
       type: attr.eventType,
-      iconClass: "manicon manicon-egg",
+      icon: "activity-egg",
       date: attr.createdAt,
-      datePrefix: "Started",
+      header: attr.eventTitle,
       dateFormat: "MMMM Do, YYYY",
-      title: attr.eventTitle,
-      subtitle: attr.eventSubtitle
+      title: attr.eventSubtitle
     };
   }
 
@@ -103,11 +101,10 @@ export default class Event extends PureComponent {
     return {
       type: attr.eventType,
       date: attr.createdAt,
-      datePrefix: "Text Added",
+      header: "Text Added",
       dateFormat: "MMMM Do, YYYY",
       title: attr.subjectTitle,
-      iconClass: "manicon manicon-book-opening",
-      linkPrompt: "Start Reading",
+      icon: "activity-text",
       linkHref: lh.link("reader", attr.subjectSlug)
     };
   }
@@ -116,11 +113,10 @@ export default class Event extends PureComponent {
     return {
       type: attr.eventType,
       date: attr.createdAt,
-      datePrefix: "Resource Added",
+      header: "Resource Added",
       dateFormat: "MMMM Do, YYYY",
       title: attr.subjectTitle,
-      iconClass: "manicon manicon-cube-shine",
-      linkPrompt: "View Resource",
+      icon: "activity-resource",
       linkHref: lh.link(
         "frontendProjectResource",
         attr.projectSlug,
@@ -133,11 +129,10 @@ export default class Event extends PureComponent {
     return {
       type: attr.eventType,
       date: attr.createdAt,
-      datePrefix: "Collection Added",
+      header: "Collection Added",
       dateFormat: "MMMM Do, YYYY",
       title: attr.subjectTitle,
-      iconClass: "manicon manicon-file-box",
-      linkPrompt: "View Collection",
+      icon: "activity-resource",
       linkHref: lh.link(
         "frontendProjectCollection",
         attr.projectSlug,

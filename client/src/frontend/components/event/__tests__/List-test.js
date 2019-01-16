@@ -29,6 +29,6 @@ describe("Frontend.Event.List Component", () => {
     const wrapper = mount(
       wrapWithRouter(<List project={project} events={events} />)
     );
-    expect(wrapper.find(".event-tile").length).toBe(events.length);
+    expect(wrapper.find(".event-tile").hostNodes().length).toBe(events.length);
   });
 });
