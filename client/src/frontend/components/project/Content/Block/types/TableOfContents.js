@@ -15,7 +15,7 @@ export default class ProjectContentBlockTableOfContentsBlock extends PureCompone
   static defaultProps = {
     title: "Table of Contents",
     icon: "bulletList"
-  }
+  };
 
   get block() {
     return this.props.block;
