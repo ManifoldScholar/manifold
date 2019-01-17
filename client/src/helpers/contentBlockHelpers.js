@@ -5,6 +5,10 @@ class ContentBlockHelpers {
     return matches[1];
   }
 
+  componentKeyToType(key) {
+    return `Content::${key}Block`;
+  }
+
   typeToComponent(type, types) {
     const key = this.typeToComponentKey(type);
     if (!key) return null;

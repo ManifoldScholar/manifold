@@ -58,12 +58,12 @@ export default class ProjectContentBlock extends PureComponent {
   }
 
   get draggableId() {
-    if (this.inAvailableList) return typeResolver.typeToAvailableId(this.type);
-    return typeResolver.typeToCurrentId(this.id);
+    if (this.inAvailableList) return this.type;
+    return this.id;
   }
 
   get disabled() {
-    if (this.inCurrentList) return this.orderable;
+    if (this.inCurrentList) return false;
     if (!isFunction(this.typeComponent.isAvailable)) return false;
     return !this.typeComponent.isAvailable(this.props.currentBlocks);
   }
@@ -101,9 +101,9 @@ export default class ProjectContentBlock extends PureComponent {
 
     return (
       <Draggable
+        type={TypeComponent.top ? "TOP" : "BOTTOM"}
         isDragDisabled={this.disabled}
         draggableId={this.draggableId}
-        foo="bar"
         index={this.index}
       >
         {(provided, snapshot) => {
