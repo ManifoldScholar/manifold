@@ -1,11 +1,13 @@
+import Hero from "./Hero";
 import Markdown from "./Markdown";
 import Resources from "./Resources";
 import TableOfContents from "./TableOfContents";
-import Hero from "./Hero";
+import Texts from "./Texts";
 
 export default {
+  Hero,
   Markdown,
   Resources,
   TableOfContents,
-  Hero
+  Texts
 };
