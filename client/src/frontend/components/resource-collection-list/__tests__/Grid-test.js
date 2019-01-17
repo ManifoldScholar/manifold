@@ -14,7 +14,7 @@ describe("Frontend.ResourceCollectionList.Grid component", () => {
 
   it("renders correctly", () => {
     const component = renderer.create(
-      wrapWithRouter(<Grid project={project} />)
+      wrapWithRouter(<Grid project={project} collections={collections} />)
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
