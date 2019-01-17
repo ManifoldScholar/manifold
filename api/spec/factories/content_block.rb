@@ -26,4 +26,13 @@ FactoryBot.define do
   factory :hero_block, parent: :content_block, class: "Content::HeroBlock" do
     type { "Content::HeroBlock" }
   end
+  factory :texts_block, parent: :content_block, class: "Content::TextsBlock" do
+    type { "Content::TextsBlock" }
+    show_authors { false }
+    show_descriptions { false }
+    show_subtitles { false }
+    show_covers { false }
+    show_dates { false }
+    show_category_labels { false }
+  end
 end
