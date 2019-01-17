@@ -102,7 +102,7 @@ module Validation
     params.require(:data)
     attributes = [:title, :sort_order, :visible, :homepage, :smart, :position, :icon,
                   :tag_list, :number_of_projects, :featured_only, :description, :slug,
-                  :homepage_start_date, :homepage_end_date]
+                  :homepage_start_date, :homepage_end_date, :homepage_count]
     relationships = [:projects, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

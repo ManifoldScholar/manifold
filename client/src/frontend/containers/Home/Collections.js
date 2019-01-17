@@ -51,6 +51,7 @@ export class HomeCollectionsContainer extends Component {
           projectCollection={projectCollection}
           dispatch={this.props.dispatch}
           ordinal={index}
+          limit={projectCollection.attributes.homepageCount}
         />
       );
     });

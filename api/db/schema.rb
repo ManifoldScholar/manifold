@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190117181637) do
+ActiveRecord::Schema.define(version: 20190117215354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -378,6 +378,7 @@ ActiveRecord::Schema.define(version: 20190117181637) do
     t.text     "descriptions"
     t.date     "homepage_start_date"
     t.date     "homepage_end_date"
+    t.integer  "homepage_count"
     t.index ["creator_id"], name: "index_project_collections_on_creator_id", using: :btree
     t.index ["slug"], name: "index_project_collections_on_slug", unique: true, using: :btree
   end

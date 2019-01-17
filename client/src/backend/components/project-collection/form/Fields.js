@@ -82,6 +82,11 @@ class Fields extends Component {
               label="Homepage Visibility End"
               name="attributes[homepageEndDate]"
             />
+            <Form.NumberInput
+              label="Projects Shown:"
+              name="attributes[homepageCount]"
+              instructions="Number of projects shown in homepage blade (0 - 40).  Will show all if none is set."
+            />
           </React.Fragment>
         )}
         <IconPicker {...this.props} />

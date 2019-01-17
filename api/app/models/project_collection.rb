@@ -81,6 +81,10 @@ class ProjectCollection < ApplicationRecord
   validates :number_of_projects, numericality: { only_integer: true,
                                                  greater_than_or_equal_to: 0 },
                                 allow_nil: true
+  validates :homepage_count, numericality: { only_integer: true,
+                                             greater_than_or_equal_to: 0,
+                                             less_than_or_equal_to: 40 },
+                              allow_nil: true
   validate :valid_homepage_start_date!, :valid_homepage_end_date!
 
   def project_sorting

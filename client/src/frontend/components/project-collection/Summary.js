@@ -19,9 +19,9 @@ export default class ProjectCollectionSummary extends Component {
     ordinal: PropTypes.number
   };
 
-  static defaultProps = {
-    limit: 8
-  };
+  get limit() {
+    return this.props.limit;
+  }
 
   get collection() {
     return this.props.projectCollection;
@@ -101,7 +101,7 @@ export default class ProjectCollectionSummary extends Component {
               )}
               projects={this.projects}
               dispatch={this.props.dispatch}
-              limit={this.props.limit}
+              limit={this.limit}
               viewAllUrl={lh.link(
                 "frontendProjectCollection",
                 this.collection.attributes.slug
