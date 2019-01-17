@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ResourceCollectionList.Totals Component renders correctly 1`] = `
+<div
+  className="resource-total"
+>
+  <a
+    className="resource-total__link"
+    href="/projects/slug-1/resources"
+    onClick={[Function]}
+  >
+    <span
+      className="resource-total__value"
+      data-id="count"
+    >
+      3
+    </span>
+     Total Collections
+    <svg
+      aria-hidden="true"
+      className="manicon-svg resource-total__icon"
+      fill="currentColor"
+      height={22.5}
+      viewBox="0 0 24 16"
+      width={30}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M19.921 8.501H2V7.498h17.918l-5.253-4.737L15.35 2 22 8l-6.636 6-.684-.76z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </a>
+</div>
+`;
