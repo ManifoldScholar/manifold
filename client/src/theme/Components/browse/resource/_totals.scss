@@ -1,34 +1,36 @@
-.resource-totals {
+.resource-total {
+  margin-top: 10px;
   text-align: center;
 
-  .total-count {
-    @include templateHead;
-    font-size: 20px;
-    color: $neutral50;
+  &:not(:last-child) {
+    margin-bottom: 25px;
 
-    @include respond($break65) {
-      font-size: 22px;
+    @include respond($break60) {
+      margin-bottom: 50px;
     }
-
-    span {
-      color: $neutral75;
-    }
-
   }
 
-  a {
-    @include utilityPrimary;
+  &__link {
+    @include templateHead;
     display: block;
-    margin-top: 15px;
-    font-size: 14px;
-    line-height: 12px;
-    color: $neutral40;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    color: $neutral70;
     text-decoration: none;
+    transition: color $duration $timing;
 
-    .manicon {
-      margin-left: 5px;
-      font-size: 12px;
-      vertical-align: middle;
+    &:hover {
+      color: $accentPrimaryDark;
     }
+  }
+
+  &__value {
+    color: $neutral90;
+  }
+
+  &__icon {
+    margin-bottom: 2px;
+    margin-left: 15px;
   }
 }
