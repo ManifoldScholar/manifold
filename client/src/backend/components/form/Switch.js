@@ -113,16 +113,13 @@ class FormSwitch extends Component {
       },
       this.props.className
     );
-    const indicatorClasses = classnames("toggle-indicator", {
-      "has-focus": this.state.focused
-    });
 
     const label = <h4 className={labelClasses}>{this.props.label}</h4>;
 
     return (
       <div className={wrapperClasses}>
         {this.props.labelPos === "above" ? label : null}
-        <div className={indicatorClasses}>
+        <div className="toggle-indicator">
           {/* Add .checked to .boolean-primary to change visual state */}
           <div
             ref={b => {

@@ -67,11 +67,3 @@ a:focus,
 input:focus {
   @include focusOutline;
 }
-
-.has-focus {
-  outline: thin dotted rgb(154, 154, 154);
-
-  :focus {
-    outline: none;
-  }
-}
