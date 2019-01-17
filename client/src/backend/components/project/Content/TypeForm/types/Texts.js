@@ -18,21 +18,31 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
       <React.Fragment>
         <Form.TextInput label="Title" name="attributes[title]" focusOnMount />
         <Form.TextArea label="Description" name="attributes[description]" />
-        <Form.Switch
-          label="Show Author Names?"
-          name="attributes[showAuthors]"
-        />
-        <Form.Switch
-          label="Show Descriptions?"
-          name="attributes[showDescriptions]"
-        />
-        <Form.Switch label="Show Subtitles?" name="attributes[showSubtitles]" />
-        <Form.Switch label="Show Cover Images?" name="attributes[showCovers]" />
-        <Form.Switch label="Show Dates?" name="attributes[showDates]" />
-        <Form.Switch
-          label="Show Category Labels?"
-          name="attributes[showCategoryLabels]"
-        />
+        <div className="form-section">
+          <div className="form-input-group">
+            <Form.Switch
+              label="Show Author Names?"
+              name="attributes[showAuthors]"
+            />
+            <Form.Switch
+              label="Show Descriptions?"
+              name="attributes[showDescriptions]"
+            />
+            <Form.Switch
+              label="Show Subtitles?"
+              name="attributes[showSubtitles]"
+            />
+            <Form.Switch
+              label="Show Cover Images?"
+              name="attributes[showCovers]"
+            />
+            <Form.Switch label="Show Dates?" name="attributes[showDates]" />
+            <Form.Switch
+              label="Show Category Labels?"
+              name="attributes[showCategoryLabels]"
+            />
+          </div>
+        </div>
         <Form.HasMany
           label="Categories"
           placeholder="Add a Category"
