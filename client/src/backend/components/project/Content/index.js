@@ -2,10 +2,10 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import AvailableSection from "./sections/Available";
 import CurrentSection from "./sections/Current";
+import DraggableEventHelper from "./helpers/draggableEvent";
 import { contentBlocksAPI, requests } from "api";
 import { DragDropContext } from "react-beautiful-dnd";
 import withConfirmation from "hoc/with-confirmation";
-import Developer from "global/components/developer";
 import lh from "helpers/linkHandler";
 import { entityStoreActions } from "actions";
 import configHelper from "./helpers/configurations";
@@ -44,24 +44,28 @@ export class ProjectContent extends PureComponent {
 
     this.state = {
       blocks: [],
+      activeDraggableType: null,
       response: props.contentBlocksResponse
     };
   }
 
-  onDragEnd = rawResult => {
-    const result = this.mapRawDragResult(rawResult);
-    if (!result) return;
-    const {
-      type,
-      sourceIndex,
-      sourceList,
-      destinationIndex,
-      destinationList
-    } = result;
-    if (sourceList === "current" && destinationList === "current")
-      return this.move(sourceIndex, destinationIndex + 1);
-    if (sourceList === "available" && destinationList === "current")
-      return this.insert(type, destinationIndex + 1);
+  onDragStart = draggable => {
+    this.setState({ activeDraggableType: draggable.type });
+  };
+
+  onDragEnd = draggable => {
+    this.setState({ activeDraggableType: null });
+    const draggableHelper = new DraggableEventHelper(
+      draggable,
+      this.currentBlocks
+    );
+    if (!draggableHelper.actionable) return;
+    const action = draggableHelper.action;
+    let callback;
+    if (action === "move")
+      callback = () => this.updateBlock(draggableHelper.block);
+    if (action === "insert") callback = this.newBlock;
+    this.setState({ blocks: draggableHelper.blocks }, callback);
   };
 
   get projectId() {
@@ -70,10 +74,6 @@ export class ProjectContent extends PureComponent {
 
   get currentBlocks() {
     return this.state.blocks;
-  }
-
-  get clonedCurrentBlocks() {
-    return Array.from(this.currentBlocks);
   }
 
   get entityCallbacks() {
@@ -99,21 +99,11 @@ export class ProjectContent extends PureComponent {
     this.setState({ blocks: this.constructor.cloneBlocks(this.props) });
   };
 
-  move(from, to) {
-    const adjustedTo = to < 0 ? 0 : to; // TODO: Why is to sometimes -1?
-    const blocks = this.clonedCurrentBlocks;
-    const [block] = blocks.splice(from, 1);
-    const updatedBlock = this.updateBlockPosition(block, adjustedTo);
-    blocks.splice(adjustedTo, 0, updatedBlock);
-    this.setState({ blocks }, () => this.updateBlock(updatedBlock));
-  }
-
-  insert(type, position, id = "pending") {
-    const block = { id, attributes: { type, position }, relationships: {} };
-    const blocks = this.clonedCurrentBlocks;
-    blocks.splice(position, 0, block);
-    this.setState({ blocks }, this.newBlock);
-  }
+  editBlock = block => {
+    this.props.history.push(
+      lh.link("backendProjectContentBlock", this.projectId, block.id)
+    );
+  };
 
   newBlock = () => {
     configHelper.isConfigurable(this.pendingBlock.attributes.type)
@@ -123,11 +113,13 @@ export class ProjectContent extends PureComponent {
       : this.createBlock();
   };
 
-  editBlock = block => {
-    this.props.history.push(
-      lh.link("backendProjectContentBlock", this.projectId, block.id)
-    );
-  };
+  createBlock() {
+    const call = contentBlocksAPI.create(this.projectId, this.pendingBlock);
+    const createRequest = request(call, requests.beContentBlockCreate);
+    this.props.dispatch(createRequest).promise.then(() => {
+      this.props.refresh();
+    });
+  }
 
   updateBlock = block => {
     const call = contentBlocksAPI.update(block.id, {
@@ -153,14 +145,6 @@ export class ProjectContent extends PureComponent {
     });
   };
 
-  createBlock() {
-    const call = contentBlocksAPI.create(this.projectId, this.pendingBlock);
-    const createRequest = request(call, requests.beContentBlockCreate);
-    this.props.dispatch(createRequest).promise.then(() => {
-      this.props.refresh();
-    });
-  }
-
   toggleBlockVisibility(block, visible) {
     const adjusted = Object.assign({}, block);
     adjusted.attributes.visible = visible;
@@ -176,32 +160,12 @@ export class ProjectContent extends PureComponent {
     this.toggleBlockVisibility(block, false);
   };
 
-  mapRawDragResult(result) {
-    if (!result.destination || !result.source) return;
-    const {
-      draggableId: type,
-      source: { index: sourceIndex, droppableId: sourceList },
-      destination: { index: destinationIndex, droppableId: destinationList }
-    } = result;
-    return { type, sourceIndex, sourceList, destinationIndex, destinationList };
-  }
-
-  updateBlockPosition(block, position) {
-    const attributes = Object.assign({}, block.attributes, {
-      position: this.adjustedPosition(position)
-    });
-    return Object.assign({}, block, { attributes });
-  }
-
-  adjustedPosition(position) {
-    const max = this.state.blocks.length;
-
-    if (position >= max) return "bottom";
-    return position;
-  }
-
   handleAddEntity = type => {
-    return this.insert(type, 1);
+    const draggableHelper = new DraggableEventHelper(
+      DraggableEventHelper.syntheticDraggable(type),
+      this.currentBlocks
+    );
+    this.setState({ blocks: draggableHelper.blocks }, this.newBlock);
   };
 
   handleDeleteBlock = block => {
@@ -213,14 +177,17 @@ export class ProjectContent extends PureComponent {
   render() {
     return (
       <section className="backend-project-content">
-        <Developer.Debugger object={{ props: this.props, state: this.state }} />
         <div className="form-secondary">
-          <DragDropContext onDragEnd={this.onDragEnd}>
+          <DragDropContext
+            onDragStart={this.onDragStart}
+            onDragEnd={this.onDragEnd}
+          >
             <AvailableSection
               onClickAdd={this.handleAddEntity}
               currentBlocks={this.currentBlocks}
             />
             <CurrentSection
+              activeDraggableType={this.state.activeDraggableType}
               entityCallbacks={this.entityCallbacks}
               currentBlocks={this.currentBlocks}
             />
