@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import Form from "backend/components/form";
-import { projectsAPI } from "api";
 import PropTypes from "prop-types";
 
 export default class ProjectContentTypeFormResources extends PureComponent {
@@ -15,13 +14,9 @@ export default class ProjectContentTypeFormResources extends PureComponent {
     return this.props.getModelValue("attributes[showCollections]");
   }
 
-  get project() {
-    return this.props.project;
+  get collections() {
+    return this.props.project.relationships.collections;
   }
-
-  fetchCollections = () => {
-    return projectsAPI.collections(this.project.id);
-  };
 
   render() {
     return (
@@ -37,9 +32,8 @@ export default class ProjectContentTypeFormResources extends PureComponent {
             label="Featured Collections"
             placeholder="Add a Collection"
             name="relationships[featuredCollections]"
-            fetch={this.fetchCollections}
+            options={this.fetchCollections}
             entityLabelAttribute={"title"}
-            searchable={false}
             wide
           />
         ) : null}
