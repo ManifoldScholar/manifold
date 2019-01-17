@@ -73,6 +73,25 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
       </div>
       <div
         className="form-input wide"
+        style={Object {}}
+      >
+        <label
+          className=""
+          htmlFor="attributes[slug]-text-input-1"
+        >
+          Slug:
+        </label>
+        <input
+          aria-describedby="attributes[slug]-text-input-1"
+          id="attributes[slug]-text-input-1"
+          onChange={[Function]}
+          placeholder="Enter slug"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input wide"
       >
         <div
           className="form-input"

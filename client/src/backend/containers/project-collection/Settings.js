@@ -23,11 +23,6 @@ export class ProjectCollectionSettings extends PureComponent {
     dispatch: PropTypes.func.isRequired
   };
 
-  constructor() {
-    super();
-    this.state = { confirmation: false };
-  }
-
   handleDestroy = () => {
     const heading = "Are you sure you want to delete this project collection?";
     const message = "This action cannot be undone.";
@@ -95,50 +90,10 @@ export class ProjectCollectionSettings extends PureComponent {
             className="form-secondary project-collection-form"
             flushOnUnmount={false}
           >
-            <div className="drawer-header">
-              <Form.TextInput
-                wide
-                focusOnMount
-                label="Collection Title:"
-                name="attributes[title]"
-                placeholder="Enter collection name"
-              />
-              <div className="buttons-bare-vertical">
-                <button
-                  className="button-bare-primary"
-                  onClick={this.handleDestroy}
-                  type="button"
-                >
-                  <i className="manicon manicon-trashcan" aria-hidden="true" />
-                  {"Delete"}
-                </button>
-              </div>
-            </div>
-            <ProjectCollection.Form.KindPicker {...this.props} />
-            <Form.TextInput
-              wide
-              label="Slug:"
-              name="attributes[slug]"
-              placeholder="Enter slug"
+            <ProjectCollection.Form.Fields
+              handleDestroy={this.handleDestroy}
+              {...this.props}
             />
-            <Form.TextArea
-              wide
-              label="Description:"
-              name="attributes[description]"
-              placeholder="Enter description"
-            />
-            <Form.Switch
-              className="form-toggle-secondary"
-              label="Visible:"
-              name="attributes[visible]"
-            />
-            <Form.Switch
-              className="form-toggle-secondary"
-              label="Show on homepage:"
-              name="attributes[homepage]"
-            />
-            <ProjectCollection.Form.IconPicker {...this.props} />
-            <ProjectCollection.Form.SmartAttributes {...this.props} />
             <Form.Save text="Save Project Collection" />
           </FormContainer.Form>
         </section>

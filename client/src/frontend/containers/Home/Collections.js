@@ -15,8 +15,7 @@ export class HomeCollectionsContainer extends Component {
   static fetchCollections(getState, dispatch) {
     const collectionRequest = request(
       projectCollectionsAPI.index({
-        visible: true,
-        showOnHomepage: true,
+        visibleOnHomepage: true,
         order: "position ASC"
       }),
       requests.feProjectCollections

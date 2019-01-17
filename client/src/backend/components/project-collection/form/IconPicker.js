@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GlobalForm from "global/components/form";
-import Form from "backend/components/form";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import labelId from "helpers/labelId";
 
-class IconPicker extends Component {
+export default class IconPicker extends Component {
   static displayName = "ProjectCollection.Form.IconPicker";
 
   static propTypes = {
@@ -25,11 +24,11 @@ class IconPicker extends Component {
     idForError: labelId("textarea-error-")
   };
 
-  selected() {
+  get selected() {
     return this.props.getModelValue("attributes[icon]");
   }
 
-  icons() {
+  get icons() {
     return [
       "book-stack-vertical",
       "lamp",
@@ -46,7 +45,7 @@ class IconPicker extends Component {
   };
 
   renderIcon(icon) {
-    const selected = this.selected();
+    const selected = this.selected;
     const iconClasses = classNames({
       manicon: true,
       selected: selected === icon
@@ -68,7 +67,7 @@ class IconPicker extends Component {
   renderIconList() {
     return (
       <ul role="radiogroup" className="icon-row">
-        {this.icons().map(icon => {
+        {this.icons.map(icon => {
           return this.renderIcon(icon);
         })}
       </ul>
@@ -102,5 +101,3 @@ class IconPicker extends Component {
     );
   }
 }
-
-export default Form.setter(IconPicker);

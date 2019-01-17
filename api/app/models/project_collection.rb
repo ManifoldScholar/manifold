@@ -54,6 +54,22 @@ class ProjectCollection < ApplicationRecord
     return order(position: :asc) unless by.present?
     order(by)
   }
+  scope :after_homepage_start_date, lambda { |date|
+    no_date = arel_table[:homepage_end_date].eq(nil)
+    after_date = arel_table[:homepage_start_date].lteq(date)
+    where(after_date.or(no_date)) if date.present?
+  }
+  scope :before_homepage_end_date, lambda { |date|
+    no_date = arel_table[:homepage_end_date].eq(nil)
+    before_date = arel_table[:homepage_end_date].gt(date)
+    where(before_date.or(no_date)) if date.present?
+  }
+  scope :by_homepage_date_range, lambda { |date|
+    after_homepage_start_date(date).before_homepage_end_date(date)
+  }
+  scope :by_visible_on_homepage, lambda { |_args = nil|
+    by_visible.by_show_on_homepage.by_homepage_date_range(Time.zone.today)
+  }
 
   # Callbacks
   before_save :reset_sort_order!
@@ -65,6 +81,7 @@ class ProjectCollection < ApplicationRecord
   validates :number_of_projects, numericality: { only_integer: true,
                                                  greater_than_or_equal_to: 0 },
                                 allow_nil: true
+  validate :valid_homepage_start_date!, :valid_homepage_end_date!
 
   def project_sorting
     column, _delimiter, direction = sort_order.rpartition "_"
@@ -79,6 +96,20 @@ class ProjectCollection < ApplicationRecord
   end
 
   private
+
+  def valid_homepage_start_date!
+    return true unless homepage_end_date.present?
+    return true if homepage_start_date.nil?
+    return true if homepage_start_date <= homepage_end_date
+    errors.add(:homepage_start_date, "must be before or on homepage end date")
+  end
+
+  def valid_homepage_end_date!
+    return true unless homepage_start_date.present?
+    return true if homepage_end_date.nil?
+    return true if homepage_end_date >= homepage_start_date
+    errors.add(:homepage_end_date, "must be after or on homepage start date")
+  end
 
   def reset_sort_order!
     return unless smart? && manually_sorted?

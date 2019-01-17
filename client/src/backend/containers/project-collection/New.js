@@ -20,10 +20,10 @@ export class ProjectCollectionNew extends PureComponent {
   constructor() {
     super();
     this.state = { confirmation: false };
-    this.model = this.defaultModel();
+    this.model = this.defaultModel;
   }
 
-  defaultModel() {
+  get defaultModel() {
     return {
       attributes: {
         numberOfProjects: 0
@@ -51,34 +51,7 @@ export class ProjectCollectionNew extends PureComponent {
             onSuccess={this.props.successHandler}
             className="form-secondary project-collection-form"
           >
-            <div className="drawer-header">
-              <Form.TextInput
-                wide
-                focusOnMount
-                label="Collection Title:"
-                name="attributes[title]"
-                placeholder="Enter collection name"
-              />
-            </div>
-            <ProjectCollection.Form.KindPicker {...this.props} />
-            <Form.TextArea
-              wide
-              label="Description:"
-              name="attributes[description]"
-              placeholder="Enter description"
-            />
-            <Form.Switch
-              className="form-toggle-secondary"
-              label="Visible:"
-              name="attributes[visible]"
-            />
-            <Form.Switch
-              className="form-toggle-secondary"
-              label="Show on homepage:"
-              name="attributes[homepage]"
-            />
-            <ProjectCollection.Form.IconPicker {...this.props} />
-            <ProjectCollection.Form.SmartAttributes {...this.props} />
+            <ProjectCollection.Form.Fields {...this.props} />
             <Form.Save text="Save Project Collection" />
           </FormContainer.Form>
         </section>

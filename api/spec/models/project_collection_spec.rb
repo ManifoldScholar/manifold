@@ -64,4 +64,59 @@ RSpec.describe ProjectCollection, type: :model do
       end
     end
   end
+
+  describe "its by_visible_on_homepage scope" do
+    let(:no_homepage) { FactoryBot.create(:project_collection, homepage: false) }
+    let(:not_visible) { FactoryBot.create(:project_collection, visible: false) }
+    let(:no_range) { FactoryBot.create(:project_collection, homepage: true) }
+    let(:pending) { FactoryBot.create(:project_collection, homepage: true, homepage_start_date: Date.today + 1.week, homepage_end_date: Date.today + 2.weeks) }
+    let(:current) { FactoryBot.create(:project_collection, homepage: true, homepage_start_date: Date.today - 1.week, homepage_end_date: Date.today + 1.week) }
+    let(:open_ended) { FactoryBot.create(:project_collection, homepage: true, homepage_start_date: Date.today - 1.week) }
+    let(:expired) { FactoryBot.create(:project_collection, homepage: true, homepage_start_date: Date.today - 2.weeks, homepage_end_date: Date.today - 1.week) }
+
+    context "when homepage == false" do
+      it "excludes the collection" do
+        expect(ProjectCollection.by_visible_on_homepage).to_not include no_homepage
+      end
+    end
+
+    context "when visible == false" do
+      it "excludes the collection" do
+        expect(ProjectCollection.by_visible_on_homepage).to_not include not_visible
+      end
+    end
+
+    context "when homepage == true && visible == true" do
+      context "when no date range" do
+        it "includes the collection" do
+          expect(ProjectCollection.by_visible_on_homepage).to include no_range
+        end
+      end
+
+      context "when current date in date range" do
+        it "includes the collection" do
+          expect(ProjectCollection.by_visible_on_homepage).to include current
+        end
+      end
+
+      context "when current date after start and no end date specified" do
+        it "includes the collection" do
+          expect(ProjectCollection.by_visible_on_homepage).to include open_ended
+        end
+      end
+
+      context "when current date before date range" do
+        it "excludes the collection" do
+          expect(ProjectCollection.by_visible_on_homepage).to_not include pending
+        end
+      end
+
+      context "when current date after date range" do
+        it "excludes the collection" do
+          expect(ProjectCollection.by_visible_on_homepage).to_not include expired
+        end
+      end
+    end
+  end
+
 end

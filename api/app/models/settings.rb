@@ -78,7 +78,7 @@ class Settings < ApplicationRecord
   def calculated
     {
       home_page_show_projects:
-        ProjectCollection.by_show_on_homepage.by_visible.count.zero?
+        ProjectCollection.by_visible_on_homepage.count.zero?
     }
   end
 
