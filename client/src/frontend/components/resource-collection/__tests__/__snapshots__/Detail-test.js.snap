@@ -268,22 +268,6 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
   <div
     className="container flush-top"
   >
-    <div
-      className="resource-totals"
-      data-id="total-container"
-    >
-      <a
-        href="/projects/slug-1/resources"
-        onClick={[Function]}
-      >
-        View All Project Resources
-         
-        <i
-          aria-hidden="true"
-          className="manicon manicon-arrow-right"
-        />
-      </a>
-    </div>
     <form
       className="form-list-filter"
       onSubmit={[Function]}

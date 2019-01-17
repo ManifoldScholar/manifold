@@ -9,18 +9,13 @@ export default class ResourceListTotals extends Component {
 
   static propTypes = {
     count: PropTypes.number,
-    project: PropTypes.object.isRequired,
-    belongsTo: PropTypes.string
-  };
-
-  static defaultProps = {
-    belongsTo: "project"
+    project: PropTypes.object.isRequired
   };
 
   render() {
     if (!this.props.count) return null;
 
-    const units = this.props.count > 1 ? "Resources" : "Resource";
+    const units = this.props.count > 1 ? "Collections" : "Collection";
     const baseClass = "resource-total";
 
     return (
@@ -29,10 +24,10 @@ export default class ResourceListTotals extends Component {
           className={`${baseClass}__link`}
           to={lh.link(
             "frontendProjectResources",
-            this.props.project.attributes.slug
+            this.props.project.attributes.slug // TODO: send to collections page
           )}
         >
-          <span data-id="count" className={`${baseClass}__value`}>
+          <span className={`${baseClass}__value`}>
             {this.props.count.toLocaleString()}
           </span>
           {` Total ${units}`}

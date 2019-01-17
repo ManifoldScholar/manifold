@@ -354,7 +354,7 @@
 // used widely on the backend
 @mixin panelRounded {
   background-color: $neutral95;
-  border-radius: 8px;
+  border-radius: $panelRoundedRadius;
 }
 
 // Light panel with rounded corners

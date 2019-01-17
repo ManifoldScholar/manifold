@@ -28,7 +28,7 @@ export default class ResourceCollectionCover extends Component {
             <h4 className="collection-title">{attr.title}</h4>
             <div className="icon">
               <i className="manicon" aria-hidden="true">
-                <Icon.ResourceCollection size={36} />
+                <Icon.ResourceCollection size={48} />
               </i>
               <span>{"Collection"}</span>
             </div>
