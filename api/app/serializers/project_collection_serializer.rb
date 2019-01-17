@@ -7,7 +7,7 @@ class ProjectCollectionSerializer < ApplicationSerializer
              :number_of_projects, :featured_only, :smart, :description,
              :description_formatted, :description_plaintext, :sort_order,
              :manually_sorted, :projects_count, :abilities, :tag_list, :description,
-             :homepage_start_date, :homepage_end_date
+             :homepage_start_date, :homepage_end_date, :homepage_count
 
   has_many_paginated :collection_projects,
                      serializer: CollectionProjectSerializer do |serializer|

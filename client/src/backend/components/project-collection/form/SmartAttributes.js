@@ -20,9 +20,9 @@ export default class SmartAttributes extends Component {
           return (
             <React.Fragment>
               <Form.NumberInput
-                label="Projects Visible:"
+                label="Number of Projects:"
                 name="attributes[numberOfProjects]"
-                instructions="Number of projects shown in this Collection."
+                instructions="Number of projects included in this Collection."
               />
               <Form.Switch
                 className="form-toggle-secondary"

@@ -24,6 +24,7 @@ export default class ProjectListGrid extends Component {
   };
 
   static defaultProps = {
+    limit: null,
     viewAllLabel: "See All Projects"
   };
 
@@ -54,13 +55,14 @@ export default class ProjectListGrid extends Component {
 
   projectsList() {
     if (!this.props.projects || this.props.projects.length === 0) return null;
-    let out = null;
-    if (this.props.limit) {
-      out = this.props.projects.slice(0, this.props.limit);
-    } else {
-      out = this.props.projects;
+    switch (this.props.limit) {
+      case null:
+        return this.props.projects;
+      case 0:
+        return [];
+      default:
+        return this.props.projects.slice(0, this.props.limit);
     }
-    return out;
   }
 
   renderPagination(props) {
@@ -82,6 +84,7 @@ export default class ProjectListGrid extends Component {
 
   renderViewAll(props) {
     if (!props.projects || props.projects.length === 0) return null;
+    if (props.limit === null) return null;
     if (props.projects.length <= props.limit) return null;
     if (!props.viewAllUrl) return null;
 

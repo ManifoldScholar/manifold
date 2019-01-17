@@ -10,7 +10,7 @@ Array [
       className="has-instructions"
       htmlFor="attributes[numberOfProjects]-text-input-1"
     >
-      Projects Visible:
+      Number of Projects:
     </label>
     <input
       aria-describedby="attributes[numberOfProjects]-text-input-1"
@@ -22,7 +22,7 @@ Array [
     <span
       className="instructions"
     >
-      Number of projects shown in this Collection.
+      Number of projects included in this Collection.
     </span>
   </div>,
   <div
