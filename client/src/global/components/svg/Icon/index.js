@@ -6,6 +6,7 @@ import ActivityTweet from "./ActivityTweet";
 import BarsDoubleHorizontal from "./BarsDoubleHorizontal";
 import BooksOnShelf from "./BooksOnShelf";
 import BooksOnShelfStroke from "./BooksOnShelfStroke";
+import BookStackIsometric from "./BookStackIsometric";
 import BookStackVertical from "./BookStackVertical";
 import BooksWithGlasses from "./BooksWithGlasses";
 import BulletList from "./BulletList";
@@ -47,6 +48,7 @@ export default {
   BarsDoubleHorizontal,
   BooksOnShelf,
   BooksOnShelfStroke,
+  BookStackIsometric,
   BookStackVertical,
   BooksWithGlasses,
   BulletList,
