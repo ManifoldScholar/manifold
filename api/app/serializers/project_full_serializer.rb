@@ -31,7 +31,7 @@ class ProjectFullSerializer < ProjectSerializer
   end
 
   def uncollected_resources
-    object.uncollected_resources.limit(15)
+    object.uncollected_resources.limit(10)
   end
 
   def events
