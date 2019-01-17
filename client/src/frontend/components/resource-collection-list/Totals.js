@@ -4,8 +4,8 @@ import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import { Icon } from "global/components/svg";
 
-export default class ResourceListTotals extends Component {
-  static displayName = "ResourceList.Totals";
+export default class ResourceCollectionTotals extends Component {
+  static displayName = "ResourceCollection.Totals";
 
   static propTypes = {
     count: PropTypes.number,
@@ -27,7 +27,7 @@ export default class ResourceListTotals extends Component {
             this.props.project.attributes.slug // TODO: send to collections page
           )}
         >
-          <span className={`${baseClass}__value`}>
+          <span data-id="count" className={`${baseClass}__value`}>
             {this.props.count.toLocaleString()}
           </span>
           {` Total ${units}`}
