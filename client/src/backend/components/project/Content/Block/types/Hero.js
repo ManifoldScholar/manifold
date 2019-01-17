@@ -13,8 +13,14 @@ export default class ProjectContentBlocksHero extends PureComponent {
     icon: "booksOnShelf"
   };
 
-  static isAvailable(currentBlocksIgnored) {
-    return false;
+  static top = true;
+
+  static isAvailable(currentBlocks) {
+    return (
+      currentBlocks.findIndex(block => {
+        return block.attributes.type === "Content::HeroBlock";
+      }) === -1
+    );
   }
 
   render() {
