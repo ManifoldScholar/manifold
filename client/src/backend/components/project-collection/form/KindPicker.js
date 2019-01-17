@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Utility from "frontend/components/utility";
-import Form from "backend/components/form";
 
-class KindPicker extends Component {
+export default class KindPicker extends Component {
   static displayName = "ProjectCollection.Form.KindPicker";
 
   static propTypes = {
@@ -11,16 +10,16 @@ class KindPicker extends Component {
     setOther: PropTypes.func
   };
 
-  isSmart() {
+  get isSmart() {
     return this.props.getModelValue("attributes[smart]");
   }
 
   handleSmartClick = () => {
-    this.props.setOther(!this.isSmart(), "attributes[smart]");
+    this.props.setOther(!this.isSmart, "attributes[smart]");
   };
 
   render() {
-    const selected = this.isSmart() ? "Smart Collection" : "Manual Collection";
+    const selected = this.isSmart ? "Smart Collection" : "Manual Collection";
 
     return (
       <div className="form-input">
@@ -45,5 +44,3 @@ class KindPicker extends Component {
     );
   }
 }
-
-export default Form.setter(KindPicker);

@@ -101,7 +101,8 @@ module Validation
   def project_collection_params
     params.require(:data)
     attributes = [:title, :sort_order, :visible, :homepage, :smart, :position, :icon,
-                  :tag_list, :number_of_projects, :featured_only, :description, :slug]
+                  :tag_list, :number_of_projects, :featured_only, :description, :slug,
+                  :homepage_start_date, :homepage_end_date]
     relationships = [:projects, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -362,7 +363,8 @@ module Validation
   end
 
   def project_collection_filter_params
-    params.permit(filter: [:visible, :show_on_homepage, :projects, :order])[:filter]
+    params.permit(filter: [:visible, :show_on_homepage, :projects, :order,
+                           :visible_on_homepage])[:filter]
   end
 
   def user_filter_params
