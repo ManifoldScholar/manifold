@@ -9,6 +9,8 @@ import getDate from "date-fns/get_date";
 import getYear from "date-fns/get_year";
 import isEqual from "date-fns/is_equal";
 import getDaysInMonth from "date-fns/get_days_in_month";
+import GlobalForm from "global/components/form";
+import labelId from "helpers/labelId";
 import MaskedInput from "react-text-mask";
 import isNull from "lodash/isNull";
 
@@ -20,7 +22,16 @@ class FormDate extends Component {
     label: PropTypes.string,
     set: PropTypes.func.isRequired,
     submitKey: PropTypes.string,
+    name: PropTypes.string,
+    errors: PropTypes.array,
+    id: PropTypes.string,
+    idForError: PropTypes.string,
     wide: PropTypes.bool
+  };
+
+  static defaultProps = {
+    id: labelId("date-input-"),
+    idForError: labelId("date-input-error-")
   };
 
   constructor(props) {
@@ -176,7 +187,13 @@ class FormDate extends Component {
     });
 
     return (
-      <div className={inputClasses}>
+      <GlobalForm.Errorable
+        className={inputClasses}
+        name={this.props.name}
+        errors={this.props.errors}
+        label={this.props.label}
+        idForError={this.props.idForError}
+      >
         <h4 className="form-input-heading">{this.props.label}</h4>
         <div className="form-date">
           <div className="form-select input-month">
@@ -214,7 +231,7 @@ class FormDate extends Component {
             />
           </div>
         </div>
-      </div>
+      </GlobalForm.Errorable>
     );
   }
 }

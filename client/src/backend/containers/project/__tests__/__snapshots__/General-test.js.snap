@@ -259,6 +259,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
         >
           <div
             className="form-input"
+            style={Object {}}
           >
             <h4
               className="form-input-heading"
