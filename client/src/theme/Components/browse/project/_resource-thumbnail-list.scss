@@ -12,22 +12,18 @@
     padding-left: 20px;
     margin-bottom: 20px;
 
-    &:nth-last-of-type(-n + 3) {
+    &:nth-last-of-type(-n + 2) {
       display: none;
     }
 
-    @include respond($break60) {
-      width: 33.333%;
-    }
-
-    @include respond($break75) {
+    @include respond($break65) {
       width: 25%;
     }
 
     @include respond($break90) {
       width: 20%;
 
-      &:nth-last-of-type(-n + 3) {
+      &:nth-last-of-type(-n + 2) {
         display: flex;
       }
     }
@@ -37,5 +33,29 @@
     display: flex;
     width: 100%;
     text-decoration: none;
+
+    .icon-thumbnail-primary {
+      background-color: $neutral05;
+      border-radius: $panelRoundedRadius;
+      transition: box-shadow $duration ease-out;
+
+      &.bg-image::before {
+        border-radius: $panelRoundedRadius;
+      }
+    }
+
+    &:hover, &:focus {
+      outline: none;
+
+      .icon-thumbnail-primary {
+        box-shadow: 0 20px 30px 2px rgba($neutralBlack, 0.13);
+      }
+
+      .icon-thumbnail-type,
+      .icon-thumbnail-icon,
+      .icon-thumbnail-title {
+        color: $accentPrimary;
+      }
+    }
   }
 }
