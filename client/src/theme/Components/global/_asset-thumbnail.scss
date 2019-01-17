@@ -3,15 +3,9 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  color: $neutral70;
+  color: $neutral75;
   text-align: center;
   background-color: $neutral10;
-
-  &:hover {
-    .icon-thumbnail-title {
-      color: $accentPrimary;
-    }
-  }
 
   &.bg-image {
     color: $neutralWhite;
@@ -26,31 +20,18 @@
       background-color: transparentize($neutralOffBlack, 0.3);
     }
 
+    .icon-thumbnail-type,
     .icon-thumbnail-icon {
-      svg {
-        fill: $neutralWhite;
-      }
+      color: $neutralWhite;
     }
   }
 
   &.title {
     .wrapper {
-      padding: 4.818vw 3.329vw;
-
-      @include respond($break60) {
-        padding: 3.141vw 2.169vw;
-      }
-
-      @include respond($break75) {
-        padding: 2.329vw 1.609vw;
-      }
-
-      @include respond($break90) {
-        padding: 1.858vw 1.283vw;
-      }
+      padding: 16px 16px 18px;
 
       @include respond($break120) {
-        padding: 22.938px 15.844px;
+        padding: 22px 20px 36px;
       }
     }
 
@@ -59,15 +40,19 @@
     }
 
     .icon-thumbnail-icon {
-      padding: 14px 0;
+      padding: 10px 0 6px;
 
       svg {
-        width: 64px;
-        height: 64px;
+        width: 48px;
+        height: 48px;
+      }
 
-        @include respond($break90) {
-          width: 48px;
-          height: 48px;
+      @include respond($break60) {
+        padding: 14px 0;
+
+        svg {
+          width: 64px;
+          height: 64px;
         }
       }
     }
@@ -144,7 +129,7 @@
         width: 100%;
         height: 100%;
         content: '';
-        transition: opacity $duration $timing;
+        transition: opacity $duration ease-out;
       }
 
       img {
@@ -213,7 +198,11 @@
 
   .icon-thumbnail-type {
     @include templateHead;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: $semibold;
+    color: #B3B3B3;
+    text-transform: uppercase;
+    letter-spacing: 0.096em;
 
     .notation-viewer & {
       font-size: 0;
@@ -223,18 +212,16 @@
   .icon-thumbnail-title {
     @include templateHead;
     margin: 0;
-    font-size: 14px;
-    transition: color $duration $timing;
+    font-size: 17px;
+    font-weight: $medium;
+    transition: color $duration ease-out;
   }
 
   .icon-thumbnail-icon {
     display: block;
     padding: 18px 0 0;
     margin: 0 auto;
-
-    svg {
-      fill: $neutral70;
-      transition: fill $duration $timing;
-    }
+    color: $neutral75;
+    transition: color $duration ease-out;
   }
 }

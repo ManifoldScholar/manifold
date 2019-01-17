@@ -39,6 +39,11 @@
     &:hover, &:focus {
       outline: 0;
 
+      .icon-thumbnail-type,
+      .icon-thumbnail-icon {
+        color: $accentPrimary;
+      }
+
       .preview-text {
         color: $neutralWhite;
         background-color: $accentPrimary;
@@ -59,7 +64,9 @@
       color: $neutral50;
       white-space: nowrap;
       background-color: $neutral20;
-      transition: background-color $duration $timing;
+      transition:
+        color $duration ease-out,
+        background-color $duration ease-out;
 
       @include respond($break50) {
         padding: 1em 10px;
@@ -128,7 +135,7 @@
       text-decoration: none;
       background-color: $neutral20;
       border-radius: 100%;
-      transition: background-color $duration $timing;
+      transition: background-color $duration ease-out;
 
       @include respond($break40) {
         right: -17.5px;

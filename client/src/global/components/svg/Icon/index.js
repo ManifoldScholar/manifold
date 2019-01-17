@@ -3,6 +3,7 @@ import ActivityEgg from "./ActivityEgg";
 import ActivityResource from "./ActivityResource";
 import ActivityText from "./ActivityText";
 import ActivityTweet from "./ActivityTweet";
+import ArrowLong from "./ArrowLong";
 import BarsDoubleHorizontal from "./BarsDoubleHorizontal";
 import BooksOnShelf from "./BooksOnShelf";
 import BooksOnShelfStroke from "./BooksOnShelfStroke";
@@ -44,6 +45,7 @@ export default {
   ActivityResource,
   ActivityText,
   ActivityTweet,
+  ArrowLong,
   BarsDoubleHorizontal,
   BooksOnShelf,
   BooksOnShelfStroke,

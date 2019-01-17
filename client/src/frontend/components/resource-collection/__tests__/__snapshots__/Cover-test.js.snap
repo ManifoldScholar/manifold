@@ -29,9 +29,9 @@ exports[`Frontend.ResourceCollection.Cover component renders correctly 1`] = `
           <svg
             className="manicon-svg"
             fill="currentColor"
-            height={36}
+            height={48}
             viewBox="0 0 64 64"
-            width={36}
+            width={48}
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
