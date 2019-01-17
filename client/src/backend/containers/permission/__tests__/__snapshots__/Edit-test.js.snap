@@ -58,7 +58,7 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                   Can modify project?
                 </h4>
                 <div
-                  className="toggle-indicator has-focus"
+                  className="toggle-indicator"
                 >
                   <div
                     aria-pressed={false}
