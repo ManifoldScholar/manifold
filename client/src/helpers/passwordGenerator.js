@@ -16,14 +16,16 @@ function getRandomByte() {
 }
 
 export default function generatePassword() {
-  const password = new Array(...{ length });
-  return password
-    .map(() => {
-      let char = null;
-      do {
-        char = String.fromCharCode(getRandomByte());
-      } while (!pattern.test(char));
-      return char;
-    }, this)
-    .join("");
+  const password = [];
+  while (password.length < length) {
+    let char = null;
+
+    do {
+      char = String.fromCharCode(getRandomByte());
+    } while (!pattern.test(char));
+
+    password.push(char);
+  }
+
+  return password.join("");
 }
