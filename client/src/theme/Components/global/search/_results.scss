@@ -124,6 +124,10 @@
           max-width: 75px;
         }
 
+        &.icon {
+          margin-left: -10px;
+        }
+
         img, svg {
           max-width: 100%;
           height: auto;

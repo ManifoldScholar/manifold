@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import Text from "frontend/components/text";
 
 export default class TextListGrouped extends Component {
   static displayName = "TextList.Grouped";
 
   static propTypes = {
-    categories: PropTypes.array,
-    texts: PropTypes.array,
-    excludeIds: PropTypes.array
+    categories: PropTypes.array.isRequired,
+    texts: PropTypes.array.isRequired,
+    visibility: PropTypes.object,
+    blockClass: PropTypes.string
+  };
+
+  static defaultProps = {
+    blockClass: "text-list"
   };
 
   textsForCategory = category => {
     const texts = this.props.texts.filter(text => {
-      if (
-        this.props.excludeIds &&
-        this.props.excludeIds.indexOf(text.id) !== -1
-      ) {
-        return false;
-      }
       if (category.id === -1) {
         return text.relationships.category === null;
       }
@@ -38,10 +38,10 @@ export default class TextListGrouped extends Component {
   buildGroupedCollection = () => {
     const collection = [];
     const uncategorized = { id: -1, attributes: { title: "Uncategorized" } };
-    this.addGroup(collection, uncategorized);
     this.props.categories.map(category => {
       return this.addGroup(collection, category);
     });
+    this.addGroup(collection, uncategorized);
     return collection;
   };
 
@@ -50,9 +50,11 @@ export default class TextListGrouped extends Component {
     if (textsByCategory.length === 0) return null;
     let categoryKey;
     let header;
+    const showCategoryLabels = this.props.visibility.showCategoryLabels;
+    const blockClass = this.props.blockClass;
 
     return (
-      <div>
+      <React.Fragment>
         {textsByCategory.map(group => {
           if (group.category === null) {
             categoryKey = 0;
@@ -60,20 +62,29 @@ export default class TextListGrouped extends Component {
           } else {
             categoryKey = group.category.id;
             header = (
-              <h4 className="sub-section-heading">
+              <h4 className={`${blockClass}__category-heading`}>
                 {group.category.attributes.title}
               </h4>
             );
           }
 
           return (
-            <nav key={categoryKey} className="text-category">
-              {header}
-              <ul className="texts-group">
+            <nav
+              key={categoryKey}
+              className={classNames(`${blockClass}__category`, {
+                [`${blockClass}__category--grouped`]: showCategoryLabels,
+                [`${blockClass}__category--ungrouped`]: !showCategoryLabels
+              })}
+            >
+              {showCategoryLabels && header}
+              <ul className={`${blockClass}__list`}>
                 {group.texts.map(text => {
                   return (
-                    <li key={text.id}>
-                      <Text.Thumbnail text={text} />
+                    <li key={text.id} className={`${blockClass}__item`}>
+                      <Text.Thumbnail
+                        text={text}
+                        visibility={this.props.visibility}
+                      />
                     </li>
                   );
                 })}
@@ -81,7 +92,7 @@ export default class TextListGrouped extends Component {
             </nav>
           );
         })}
-      </div>
+      </React.Fragment>
     );
   }
 }
