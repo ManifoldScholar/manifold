@@ -5,7 +5,7 @@ import Edit from "../parts/Edit";
 import Drag from "../parts/Drag";
 import Delete from "../parts/Delete";
 import VisibilityToggle from "../parts/VisibilityToggle";
-import get from "lodash/get";
+import Authorize from "hoc/authorize";
 
 export default class ProjectContentBlockInListCurrent extends PureComponent {
   static displayName = "Project.Content.Block.InList.Current";
@@ -33,10 +33,6 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
     return this.entity.attributes.hideable || false;
   }
 
-  get deletable() {
-    return get(this.entity, "attributes.abilities.delete", false);
-  }
-
   render() {
     const TypeComponent = this.props.typeComponent;
     const baseClass = "content-block";
@@ -47,26 +43,29 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
           <div className={`${baseClass}__inner`}>
             <Identity icon={block.icon} title={block.title} size={"large"} />
             <div className={`${baseClass}__button-list`}>
-              <Delete
-                visible={this.deletable}
-                baseClass={baseClass}
-                clickHandler={this.props.entityCallbacks.deleteBlock}
-              />
-              <VisibilityToggle
-                visible={this.hideable}
-                entity={this.entity}
-                entityCallbacks={this.props.entityCallbacks}
-              />
-              <Edit
-                visible={this.configurable}
-                baseClass={baseClass}
-                clickHandler={this.props.entityCallbacks.editBlock}
-              />
-              <Drag
-                visible={this.orderable}
-                baseClass={baseClass}
-                dragHandleProps={this.props.dragHandleProps}
-              />
+              <Authorize entity={this.entity} ability="delete">
+                <Delete
+                  baseClass={baseClass}
+                  clickHandler={this.props.entityCallbacks.deleteBlock}
+                />
+              </Authorize>
+              <Authorize entity={this.entity} ability="update">
+                <VisibilityToggle
+                  visible={this.hideable}
+                  entity={this.entity}
+                  entityCallbacks={this.props.entityCallbacks}
+                />
+                <Edit
+                  visible={this.configurable}
+                  baseClass={baseClass}
+                  clickHandler={this.props.entityCallbacks.editBlock}
+                />
+                <Drag
+                  visible={this.orderable}
+                  baseClass={baseClass}
+                  dragHandleProps={this.props.dragHandleProps}
+                />
+              </Authorize>
             </div>
           </div>
         )}
