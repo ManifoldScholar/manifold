@@ -50,7 +50,9 @@ export default class Errorable extends PureComponent {
 
   pointerFor(name) {
     const dotNotation = brackets2dots(name);
-    const jsonPointer = dotNotation.replace(/^attributes\.|^relationships\./, "").replace(".", "/");
+    const jsonPointer = dotNotation
+      .replace(/^attributes\.|^relationships\./, "")
+      .replace(".", "/");
     return `/data/attributes/${jsonPointer}`;
   }
 

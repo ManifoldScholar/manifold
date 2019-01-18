@@ -112,6 +112,7 @@
     "react-ace": "^5.9.0",
     "react-beautiful-dnd": "^4.0.1",
     "react-collapse": "^4.0.3",
+    "react-datepicker": "^2.0.0",
     "react-dom": "^16.4",
     "react-dropzone": "^4.x",
     "react-ga": "^2.x",

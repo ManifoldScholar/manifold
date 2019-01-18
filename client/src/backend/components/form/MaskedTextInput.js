@@ -23,6 +23,7 @@ class FormMaskedTextInput extends Component {
     value: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     id: PropTypes.string,
+    onClick: PropTypes.func,
     wide: PropTypes.bool
   };
 
@@ -108,6 +109,7 @@ class FormMaskedTextInput extends Component {
           mask={mask}
           placeholder={this.props.placeholder}
           placeholderChar={this.placeholderChar}
+          onClick={this.props.onClick}
         />
         <Instructions instructions={this.props.instructions} />
       </div>
