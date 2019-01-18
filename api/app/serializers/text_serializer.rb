@@ -6,7 +6,7 @@ class TextSerializer < ApplicationSerializer
              :published, :annotations_count, :highlights_count, :bookmarks_count,
              :age, :position, :publication_date, :cover_styles, :subtitle,
              :slug, :section_kind, :title_formatted, :title_plaintext,
-             :subtitle_formatted, :subtitle_plaintext
+             :subtitle_formatted, :subtitle_plaintext, :description
 
   belongs_to :project
   belongs_to :category
