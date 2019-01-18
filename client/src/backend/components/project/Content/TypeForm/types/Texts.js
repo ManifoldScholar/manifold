@@ -9,6 +9,13 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
     project: PropTypes.object
   };
 
+  static defaultAttributes = {
+    showDates: true,
+    showSubtitles: true,
+    showCategoryLabels: true,
+    showCovers: true
+  };
+
   get categories() {
     return this.props.project.relationships.textCategories;
   }

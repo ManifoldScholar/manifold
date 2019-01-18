@@ -9,9 +9,9 @@ export default class ProjectContentTypeFormMarkdown extends PureComponent {
     setOther: PropTypes.func.isRequired
   };
 
-  componentDidMount() {
-    this.props.setOther("normal", "attributes[style]");
-  }
+  static defaultAttributes = {
+    style: "normal"
+  };
 
   render() {
     return (
