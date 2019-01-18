@@ -79,8 +79,10 @@ class Text < ApplicationRecord
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
   delegate :publication_date, to: :project, prefix: true, allow_nil: true
   delegate :title, to: :category, prefix: true
-  delegate :title_formatted, to: :main_title, allow_nil: true
-  delegate :title_plaintext, to: :main_title, allow_nil: true
+  delegate :title_formatted, to: :title_main, allow_nil: true
+  delegate :title_plaintext, to: :title_main, allow_nil: true
+  delegate :subtitle_formatted, to: :title_subtitle, allow_nil: true
+  delegate :subtitle_plaintext, to: :title_subtitle, allow_nil: true
 
   # Validation
   validates :spine,
@@ -128,23 +130,47 @@ class Text < ApplicationRecord
     project.present? ? project.search_hidden : { hidden: true }
   end
 
-  def main_title
+  def title_main
+    title_by_kind TextTitle::KIND_MAIN
+  end
+
+  def title_subtitle
+    title_by_kind TextTitle::KIND_SUBTITLE
+  end
+
+  def title_by_kind(kind)
     if association(:titles).loaded?
-      titles.detect { |t| t.kind == TextTitle::KIND_MAIN }
+      titles.detect { |t| t.kind == kind }
     else
-      titles.find_by(kind: TextTitle::KIND_MAIN)
+      titles.find_by(kind: kind)
     end
   end
 
-  def title
-    return "untitled" unless main_title
-    main_title.value
+  def set_title_value(kind, value)
+    title = titles.find_or_initialize_by(kind: kind)
+    title.value = value
+    title.save
+  end
+
+  def get_title_value(title, default = nil)
+    return default unless title.present?
+    title.value
   end
 
   def title=(value)
-    title = titles.find_or_initialize_by(kind: TextTitle::KIND_MAIN)
-    title.value = value
-    title.save
+    set_title_value TextTitle::KIND_MAIN, value
+  end
+
+  def subtitle=(value)
+    set_title_value TextTitle::KIND_SUBTITLE, value
+  end
+
+  def title
+    get_title_value title_main, "untitled"
+  end
+
+  def subtitle
+    get_title_value title_subtitle
   end
 
   def section_before(position)

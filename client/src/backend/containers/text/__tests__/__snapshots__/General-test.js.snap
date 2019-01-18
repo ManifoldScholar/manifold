@@ -36,6 +36,25 @@ exports[`Backend Text General Container renders correctly 1`] = `
       </div>
       <div
         className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+          htmlFor="attributes[subtitle]-text-input-1"
+        >
+          Subtitle
+        </label>
+        <input
+          aria-describedby="attributes[subtitle]-text-input-1"
+          id="attributes[subtitle]-text-input-1"
+          onChange={[Function]}
+          placeholder="Enter Subtitle"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
       >
         <h4
           className="form-input-heading"
