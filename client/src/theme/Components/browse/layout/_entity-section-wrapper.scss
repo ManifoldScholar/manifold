@@ -164,8 +164,14 @@
     }
   }
 
-  &__body:not(.project-list) {
-    width: 100%;
+  &__body {
+    &:not(.project-list) {
+      width: 100%;
+    }
+
+    &--narrow {
+      max-width: 720px;
+    }
   }
 
   &__utility {
