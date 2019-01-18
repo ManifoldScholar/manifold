@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.DatePicker component renders correctly 1`] = `
+<div
+  className="form-input form-date-picker"
+  style={Object {}}
+>
+  <h4
+    className="form-input-heading"
+  >
+    Some date
+  </h4>
+  <div
+    className="react-datepicker-wrapper"
+  >
+    <div
+      className="react-datepicker__input-container"
+    >
+      <div
+        className="form-input"
+      >
+        <label
+          className=""
+          htmlFor="masked-text-1"
+        />
+        <react-text-mask
+          id="masked-text-1"
+          mask={
+            Array [
+              /\\\\d/,
+              /\\\\d/,
+              "/",
+              /\\\\d/,
+              /\\\\d/,
+              "/",
+              /\\\\d/,
+              /\\\\d/,
+              /\\\\d/,
+              /\\\\d/,
+            ]
+          }
+          onChange={[Function]}
+          onClick={[Function]}
+          placeholderChar="_"
+          type="text"
+          value="10/10/1989"
+        />
+      </div>
+    </div>
+  </div>
+  <button
+    className="form-date-picker__button"
+    onClick={[Function]}
+    type="button"
+  >
+    Clear
+  </button>
+</div>
+`;

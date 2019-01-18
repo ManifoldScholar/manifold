@@ -4,6 +4,7 @@ import Checkboxes from "./Checkboxes";
 import CodeArea from "./CodeArea";
 import AttributeMap from "./AttributeMap";
 import Date from "./Date";
+import DatePicker from "./DatePicker";
 import FieldGroup from "./FieldGroup";
 import GeneratedPasswordInput from "./GeneratedPasswordInput";
 import Header from "./Header";
@@ -32,6 +33,7 @@ export default {
   CodeArea,
   AttributeMap,
   Date,
+  DatePicker,
   FieldGroup,
   GeneratedPasswordInput,
   HasMany,
