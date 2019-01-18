@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
@@ -33,7 +34,11 @@ export default class SearchResultsTypeText extends PureComponent {
     return (
       <li className="result-text" key={result.id}>
         <Link className="result" to={lh.link("reader", attr.slug)}>
-          <figure className="image">
+          <figure
+            className={classNames("image", {
+              icon: !get(attr, "coverStyles.small")
+            })}
+          >
             <Text.Cover text={text} />
           </figure>
           <div className="body">
