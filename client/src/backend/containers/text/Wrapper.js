@@ -173,7 +173,7 @@ export class TextWrapperContainer extends PureComponent {
             )}
             backLabel={text.relationships.project.attributes.titlePlaintext}
             title={text.attributes.titlePlaintext}
-            subtitle={text.attributes.subtitle}
+            subtitle={text.attributes.subtitlePlaintext}
             utility={this.renderUtility()}
             secondaryLinks={secondaryLinks}
           />
