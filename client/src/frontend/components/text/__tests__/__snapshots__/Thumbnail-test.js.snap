@@ -2,141 +2,153 @@
 
 exports[`Frontend.Text.Thumbnail component renders correctly 1`] = `
 <div
-  className="asset-thumb"
+  className="text-block"
 >
-  <div
-    className="asset-link"
+  <a
+    className="text-block__link"
+    href="/read/slug-1"
+    onClick={[Function]}
   >
-    <span
-      aria-hidden="true"
-    >
-      <a
-        href="/read/slug-1"
-        onClick={[Function]}
-      >
-        <figure
-          className="asset-image"
-        >
-          <div
-            className="asset-image-placeholder"
-          >
-            <svg
-              className="project-thumb-placeholder quaternary"
-              height="179.104px"
-              version="1.1"
-              viewBox="0 0 137.647 179.104"
-              width="137.647px"
-            >
-              <g>
-                <path
-                  d="M124.88229,167.68613H12.76603c-0.7459,0-1.34948-0.60358-1.34948-1.34947c0-0.74591,0.60358-1.34949,1.34948-1.34949 h110.76678V12.76735c0-0.7459,0.60358-1.34948,1.34948-1.34948s1.34948,0.60358,1.34948,1.34948v153.56931 C126.23177,167.08255,125.6282,167.68613,124.88229,167.68613z"
-                />
-                <path
-                  d="M136.29753,179.104H24.18258c-0.7459,0-1.34948-0.60358-1.34948-1.34949c0-0.7459,0.60357-1.34947,1.34948-1.34947 h110.76546V24.1839c0-0.7459,0.60358-1.34948,1.34949-1.34948c0.7459,0,1.34947,0.60357,1.34947,1.34948v153.57062 C137.647,178.50043,137.04343,179.104,136.29753,179.104z"
-                />
-                <path
-                  d="M113.46442,0H37.10676c-1.65967,0-3.15988,0.63916-4.31679,1.65868c-0.05107,0.03822-0.11086,0.05815-0.15732,0.1046 l-0.14562,0.14562c-0.01137,0.01137-0.0229,0.02273-0.03426,0.0341L1.95965,32.4297 c-0.0061,0.0061-0.00774,0.01466-0.01384,0.02092C0.7459,33.64048,0,35.28746,0,37.10676v117.81465 c0,0.7459,0.60358,1.34947,1.34948,1.34947h112.11494c0.7459,0,1.34948-0.60358,1.34948-1.34947V1.34948 C114.8139,0.60358,114.21033,0,113.46442,0z M30.54386,7.66776v22.8761H7.66282L30.54386,7.66776z M112.11494,153.57193H2.69896 V37.10676c0-2.13097,1.73298-3.86395,3.86394-3.86395h25.33043c0.7459,0,1.34948-0.60358,1.34948-1.34948V6.5629 c0-1.05247,0.42517-2.00577,1.1098-2.70308l0.05123-0.05123c0.69747-0.68446,1.65044-1.10963,2.70292-1.10963h75.00818V153.57193z"
-                />
-                <path
-                  d="M89.7879,55.29312H26.54154c-0.7459,0-1.34948-0.60358-1.34948-1.34948s0.60357-1.34948,1.34948-1.34948H89.7879 c0.7459,0,1.34948,0.60358,1.34948,1.34948S90.5338,55.29312,89.7879,55.29312z"
-                />
-                <path
-                  d="M89.7879,84.46378H26.54154c-0.7459,0-1.34948-0.60358-1.34948-1.34948c0-0.74591,0.60357-1.34949,1.34948-1.34949H89.7879 c0.7459,0,1.34948,0.60358,1.34948,1.34949C91.13737,83.8602,90.5338,84.46378,89.7879,84.46378z"
-                />
-                <path
-                  d="M89.7879,113.63575H26.54154c-0.7459,0-1.34948-0.60358-1.34948-1.34949c0-0.7459,0.60357-1.34948,1.34948-1.34948H89.7879 c0.7459,0,1.34948,0.60358,1.34948,1.34948C91.13737,113.03217,90.5338,113.63575,89.7879,113.63575z"
-                />
-                <path
-                  d="M79.66943,69.37964H26.54154c-0.7459,0-1.34948-0.60358-1.34948-1.34948s0.60357-1.34948,1.34948-1.34948h53.12788 c0.7459,0,1.34948,0.60358,1.34948,1.34948S80.41533,69.37964,79.66943,69.37964z"
-                />
-                <path
-                  d="M79.66943,98.5806H26.54154c-0.7459,0-1.34948-0.60358-1.34948-1.34948s0.60357-1.34948,1.34948-1.34948h53.12788 c0.7459,0,1.34948,0.60358,1.34948,1.34948S80.41533,98.5806,79.66943,98.5806z"
-                />
-              </g>
-            </svg>
-          </div>
-        </figure>
-      </a>
-    </span>
     <div
-      className="asset-description"
+      className="text-block__inner"
     >
-      <a
-        href="/read/slug-1"
-        onClick={[Function]}
+      <figure
+        className="text-block__cover text-block__cover--svg"
+      >
+        <svg
+          aria-hidden="true"
+          className="manicon-svg text-block__cover-svg"
+          fill="currentColor"
+          height={78}
+          viewBox="0 0 64 64"
+          width={78}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11,5.02199996 L11,51.022 L45,51.022 L45,5.02199996 L11,5.02199996 Z M47,3.02199995 L47,53.022 L8.99999996,53.022 L8.99999996,3.02199995 L47,3.02199995 Z M11,5.02199996 L11,51.022 L45,51.022 L45,5.02199996 L11,5.02199996 Z M9.99999997,4.02199996 L9.99999997,3.02199995 L47,3.02199995 L47,53.022 L8.99999996,53.022 L8.99999996,4.02199996 L9.99999997,4.02199996 Z M49,6.02199996 L51,6.02199996 L51,57.022 L12,57.022 L12,55.022 L49,55.022 L49,6.02199996 Z M49,6.02199996 L51,6.02199996 L51,57.022 L12,57.022 L12,55.022 L49,55.022 L49,6.02199996 Z M53,59.022 L53,8.02199996 L55,8.02199996 L55,61.022 L14,61.022 L14,59.022 L53,59.022 Z M53,59.022 L53,8.02199996 L55,8.02199996 L55,61.022 L14,61.022 L14,59.022 L53,59.022 Z M16.0004583,19.0219999 L15.9995416,17.0220001 L39.9995417,17.0110001 L40.0004583,19.0109999 L16.0004583,19.0219999 Z M16.0004583,29.0219999 L15.9995416,27.0220001 L39.9995417,27.0110001 L40.0004583,29.0109999 L16.0004583,29.0219999 Z M16.0004583,39.0219999 L15.9995416,37.0220001 L39.9995417,37.0110001 L40.0004583,39.0109999 L16.0004583,39.0219999 Z M16,24.022 L16,22.022 L36,22.022 L36,24.022 L16,24.022 Z M16,34.022 L16,32.022 L36,32.022 L36,34.022 L16,34.022 Z"
+          />
+        </svg>
+      </figure>
+      <div
+        className="text-block__content"
       >
         <h3
-          className="asset-title"
+          className="text-block__name"
         >
           <span
+            className="text-block__title"
             dangerouslySetInnerHTML={
               Object {
                 "__html": "Ain't No Thang",
               }
             }
           />
-          <span
-            className="subtitle"
-          />
         </h3>
-      </a>
-      <span
-        className="asset-date"
-      >
-        <span>
-          Added April, 2017
-        </span>
-      </span>
-      <div
-        className="asset-status"
-      >
-        <ul
-          className="asset-interactions"
+        <div
+          className="text-block__creators"
         >
-          <li>
-            <div
-              aria-hidden="true"
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-pencil-simple"
-                style={
-                  Object {
-                    "color": "#52e3ac",
-                  }
-                }
-              />
-            </div>
-            <span
-              className="screen-reader-text"
-            >
-              This text has 
-               annotations
-            </span>
-          </li>
-          <li>
-            <div
-              aria-hidden="true"
-            >
-              <i
-                className="manicon manicon-highlight"
-                style={
-                  Object {
-                    "color": "#52e3ac",
-                  }
-                }
-              />
-            </div>
-            <span
-              className="screen-reader-text"
-            >
-              This text has 
-               highlights
-            </span>
-          </li>
-        </ul>
+          <span
+            style={
+              Object {
+                "fontStyle": "italic",
+              }
+            }
+          >
+            by 
+          </span>
+          Andre3000, Big Boi
+        </div>
       </div>
     </div>
+  </a>
+  <div
+    className="text-block__meta"
+  >
+    <span
+      className="text-block__date text-block__date--inline"
+    >
+      <span>
+        Added April 2017
+      </span>
+    </span>
+    <span
+      className="text-block__status"
+    >
+      Published
+    </span>
+    <ul
+      className="text-block__interaction-list"
+    >
+      <li
+        className="text-block__interaction"
+      >
+        <svg
+          aria-hidden="true"
+          className="manicon-svg text-block__interaction-icon"
+          fill="currentColor"
+          height={32}
+          viewBox="0 0 24 24"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.99999998,16 L3.99999997,16 L3.99999997,4.99999997 L20,4.99999997 L20,16 L14.1773533,16 L7.99999998,21.0495005 L7.99999998,16 Z M19,5.99999998 L4.99999997,5.99999998 L4.99999997,15 L8.99999999,15 L8.99999999,18.9404996 L13.8206467,15 L19,15 L19,5.99999998 Z"
+          />
+        </svg>
+        <span
+          className="screen-reader-text"
+        >
+          This text has 
+           highlights
+        </span>
+      </li>
+      <li
+        className="text-block__interaction"
+      >
+        <svg
+          aria-hidden="true"
+          className="manicon-svg text-block__interaction-icon"
+          fill="currentColor"
+          height={32}
+          viewBox="0 0 24 24"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.40612602,17.7199728 L19.0839055,8.06418391 L15.9511664,4.92410056 L6.27386418,14.5784572 L4.97459192,19.0173654 L9.40612602,17.7199728 Z M3.50140802,20.4906347 L5.38613577,14.0515428 L15.9528336,3.50989938 L20.4980945,8.06581606 L9.93187396,18.6080272 L3.50140802,20.4906347 Z M10.0233532,17.8105469 L9.31544675,18.5168531 L5.47564673,14.6683531 L6.18355322,13.9620469 L10.0233532,17.8105469 Z"
+          />
+        </svg>
+        <span
+          className="screen-reader-text"
+        >
+          This text has 
+           annotations
+        </span>
+      </li>
+      <li
+        className="text-block__interaction"
+      >
+        <svg
+          aria-hidden="true"
+          className="manicon-svg text-block__interaction-icon"
+          fill="currentColor"
+          height={32}
+          viewBox="0 0 24 24"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M17,19.1970251 L17,4.96799997 L6.99999998,4.96799997 L6.99999998,19.1970251 L12,15.9688432 L17,19.1970251 Z M5.99999997,21.032975 L5.99999997,3.96799997 L18,3.96799997 L18,21.032975 L12,17.1591568 L5.99999997,21.032975 Z"
+          />
+        </svg>
+        <span
+          className="screen-reader-text"
+        >
+          This text has 
+           bookmarks
+        </span>
+      </li>
+    </ul>
   </div>
 </div>
 `;

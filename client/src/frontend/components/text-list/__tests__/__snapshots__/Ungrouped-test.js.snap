@@ -1,14 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.TextList.Grouped component renders correctly 1`] = `
+exports[`Frontend.TextList.Ungrouped component renders correctly 1`] = `
 <nav
-  className="text-list__category text-list__category--grouped"
+  className="text-list__category text-list__category--ungrouped"
 >
-  <h4
-    className="text-list__category-heading"
-  >
-    Hip Hop Classics
-  </h4>
   <ul
     className="text-list__list"
   >
@@ -58,17 +53,38 @@ exports[`Frontend.TextList.Grouped component renders correctly 1`] = `
                   }
                 />
               </h3>
-              <span
-                className="text-block__status"
+              <div
+                className="text-block__creators"
               >
-                Published
-              </span>
+                <span
+                  style={
+                    Object {
+                      "fontStyle": "italic",
+                    }
+                  }
+                >
+                  by 
+                </span>
+                Andre3000, Big Boi
+              </div>
             </div>
           </div>
         </a>
         <div
           className="text-block__meta"
         >
+          <span
+            className="text-block__date text-block__date--inline"
+          >
+            <span>
+              Added April 2017
+            </span>
+          </span>
+          <span
+            className="text-block__status"
+          >
+            Published
+          </span>
           <ul
             className="text-block__interaction-list"
           >
@@ -191,17 +207,38 @@ exports[`Frontend.TextList.Grouped component renders correctly 1`] = `
                   }
                 />
               </h3>
-              <span
-                className="text-block__status"
+              <div
+                className="text-block__creators"
               >
-                Published
-              </span>
+                <span
+                  style={
+                    Object {
+                      "fontStyle": "italic",
+                    }
+                  }
+                >
+                  by 
+                </span>
+                Andre3000, Big Boi
+              </div>
             </div>
           </div>
         </a>
         <div
           className="text-block__meta"
         >
+          <span
+            className="text-block__date text-block__date--inline"
+          >
+            <span>
+              Added April 2017
+            </span>
+          </span>
+          <span
+            className="text-block__status"
+          >
+            Published
+          </span>
           <ul
             className="text-block__interaction-list"
           >
