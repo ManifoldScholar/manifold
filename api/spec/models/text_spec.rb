@@ -75,19 +75,41 @@ RSpec.describe Text, type: :model do
     include_examples "a citable class with_citable_children"
   end
 
-  describe "#title_formatted" do
-    let(:text) { FactoryBot.create(:text, title: "**Formatted** _Title_") }
+  describe "its titles" do
+    describe "its main title" do
+      let(:text) { FactoryBot.create(:text, title: "**Formatted** _Title_") }
 
-    it "correctly returns the formatted value of main TextTitle association" do
-      expect(text.title_formatted).to eq text.main_title.title_formatted
+      it "can be set" do
+        text.title = "New Title"
+        text.save
+        expect(text.title).to eq "New Title"
+      end
+
+      it "correctly returns the formatted value of main TextTitle association" do
+        expect(text.title_formatted).to eq text.title_main.title_formatted
+      end
+
+      it "correctly returns the plaintext value of main TextTitle association" do
+        expect(text.title_plaintext).to eq text.title_main.title_plaintext
+      end
     end
-  end
 
-  describe "#title_plaintext" do
-    let(:text) { FactoryBot.create(:text, title: "**Formatted** _Title_") }
+    describe "its subtitle" do
+      let(:text) { FactoryBot.create(:text, subtitle: "**Formatted** _Subtitle_") }
 
-    it "correctly returns the plaintext value of main TextTitle association" do
-      expect(text.title_plaintext).to eq text.main_title.title_plaintext
+      it "can be set" do
+        text.subtitle = "New Subtitle"
+        text.save
+        expect(text.subtitle).to eq "New Subtitle"
+      end
+
+      it "correctly returns the formatted value of subtitle TextTitle association" do
+        expect(text.subtitle_formatted).to eq text.title_subtitle.subtitle_formatted
+      end
+
+      it "correctly returns the plaintext value of subtitle TextTitle association" do
+        expect(text.subtitle_plaintext).to eq text.title_subtitle.subtitle_plaintext
+      end
     end
   end
 
