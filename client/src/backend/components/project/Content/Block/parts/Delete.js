@@ -6,13 +6,11 @@ export default class ProjectContentBlockInListPartsDelete extends PureComponent 
   static displayName = "Project.Content.Block.InList.Parts.Delete";
 
   static propTypes = {
-    visible: PropTypes.bool.isRequired,
     baseClass: PropTypes.string.isRequired,
     clickHandler: PropTypes.func.isRequired
   };
 
   render() {
-    if (!this.props.visible) return null;
     const iconClass = `${this.props.baseClass}__icon ${
       this.props.baseClass
     }__icon--light`;
