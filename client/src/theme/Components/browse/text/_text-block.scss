@@ -1,0 +1,203 @@
+.text-block {
+  display: flex;
+  flex-direction: column;
+
+  @include respond($break80) {
+    flex-direction: row;
+  }
+
+  &__link {
+    display: flex;
+    flex-grow: 1;
+    padding: 0;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover, &:focus {
+      outline: 0;
+
+      .text-block__cover--svg,
+      .text-block__name {
+        color: $accentPrimary;
+      }
+
+      .text-block__cover-image {
+        border-color: $accentPrimary;
+      }
+    }
+  }
+
+  &__inner {
+    display: flex;
+    width: 100%;
+    padding: 0;
+  }
+
+  &__cover {
+    position: relative;
+    padding-top: 0;
+    margin-bottom: 0;
+    line-height: 1;
+
+    &--image {
+      min-width: 56px;
+      max-width: 56px;
+      height: auto;
+      margin-right: 17px;
+    }
+
+    &--svg {
+      margin-right: 5px;
+      margin-left: -10px;
+      color: $neutral40;
+      transition: color $duration $timing;
+    }
+  }
+
+  &__cover-svg {}
+
+  &__cover-image {
+    width: 56px;
+    height: auto;
+    border: 1px solid transparent;
+    transition: border $duration $timing;
+  }
+
+  &__content {
+    display: flex;
+    flex-flow: column;
+    flex-grow: 1;
+    width: 100%;
+    padding-right: 20px;
+    padding-left: 15px;
+    vertical-align: top;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 21px;
+    font-weight: $semibold;
+    line-height: 1.188;
+    color: $neutral90;
+    white-space: normal;
+    transition: color $duration $timing;
+  }
+
+  &__title {
+    @include templateHead;
+    display: inline-block;
+    margin-right: 12px;
+  }
+
+  &__subtitle {
+    @include subtitlePrimary;
+    display: inline-block;
+    padding-top: 0.143em;
+    font-size: 0.86em;
+    transition: color $duration $timing;
+  }
+
+  &__creators {
+    @include templateCopy;
+    padding-top: 0.6em;
+    font-size: 18px;
+    line-height: 1.25;
+    color: $neutral90;
+  }
+
+  &__description {
+    @include templateCopy;
+    max-width: 635px;
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 1.438;
+    letter-spacing: 0.013em;
+  }
+
+  &__meta {
+    min-width: 288px;
+    margin-top: 20px;
+
+    @include respond($break80) {
+      margin-top: 4px;
+      text-align: right;
+    }
+  }
+
+  &__date {
+    @include utilityPrimary;
+    display: block;
+    font-size: 14px;
+    color: $neutral75;
+    letter-spacing: 0.107em;
+
+    + .text-block__status {
+      margin-top: 12px;
+    }
+
+    &--block {
+      margin-top: 10px;
+    }
+
+    &--inline {
+      @include respond($break40) {
+        display: inline-block;
+      }
+
+      + .text-block__status {
+        @include respond($break40) {
+          margin-top: 0;
+          margin-left: 12px;
+        }
+      }
+    }
+  }
+
+  &__status {
+    @include templateHead;
+    display: inline-block;
+    width: 100.58px;
+    padding: 4px 8px 6px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: $semibold;
+    line-height: 1;
+    color: $neutralWhite;
+    text-transform: uppercase;
+    letter-spacing: 0.134em;
+    vertical-align: middle;
+    background-color: $accentPrimary;
+  }
+
+  &__interaction-list {
+    @include listUnstyled;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &:not(:first-child) {
+      padding-top: 15px;
+    }
+
+    @include respond($break80) {
+      justify-content: flex-end;
+    }
+  }
+
+  &__interaction {
+    @include utilityPrimary;
+    font-size: 14px;
+    color: $neutral75;
+    letter-spacing: 0.107em;
+    border-bottom: none;
+
+    & + & {
+      margin-left: 13px;
+    }
+  }
+
+  &__interaction-icon {
+    margin-right: 5px;
+    color: $accentPrimary;
+  }
+}

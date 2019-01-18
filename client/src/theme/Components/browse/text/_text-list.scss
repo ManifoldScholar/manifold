@@ -1,0 +1,38 @@
+.text-list {
+  &__category {
+    &--ungrouped:first-child {
+      border-top: 1px solid $neutral40;
+    }
+
+    &--grouped {
+      &:not(:last-child) .text-list__item:last-child {
+        border-color: transparent;
+      }
+    }
+  }
+
+  &__category-heading {
+    @include panelRoundedLight;
+    @include templateHead;
+    padding: 0.857em 1.643em 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: $semibold;
+    color: $neutral75;
+    text-transform: uppercase;
+    letter-spacing: 0.107em;
+    background-color: $neutral10;
+  }
+
+  &__list {
+    @include listUnstyled;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    padding: 30px 0;
+    border-bottom: 1px solid $neutral40;
+  }
+}

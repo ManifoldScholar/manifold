@@ -1,13 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Text from "global/components/text";
 import get from "lodash/get";
+import classNames from "classnames";
+import { Icon } from "global/components/svg";
 
 export default class TextCover extends PureComponent {
-  static displayName = "Text.Thumbnail";
+  static displayName = "Text.Cover";
 
   static propTypes = {
-    text: PropTypes.object.isRequired
+    text: PropTypes.object.isRequired,
+    blockClass: PropTypes.string
   };
 
   static defaultProps = {
@@ -23,10 +25,16 @@ export default class TextCover extends PureComponent {
         <img
           src={text.attributes.coverStyles.small}
           alt={"Thumbnail image for " + text.attributes.titlePlaintext}
+          classNames={classNames(this.props.blockClass)}
         />
       );
     } else {
-      thumbnail = <Text.Placeholder />;
+      thumbnail = (
+        <Icon.LoosePages
+          size={78}
+          iconClass={classNames(this.props.blockClass)}
+        />
+      );
     }
     return thumbnail;
   }
