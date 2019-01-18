@@ -1,5 +1,5 @@
 module Content
   class MarkdownBlockSerializer < ::ContentBlockSerializer
-    attributes :body, :style
+    attributes :body, :body_formatted, :style
   end
 end
