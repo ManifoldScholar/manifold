@@ -1,7 +1,7 @@
 import Grouped from "./Grouped";
-import Published from "./Published";
+import Ungrouped from "./Ungrouped";
 
 export default {
   Grouped,
-  Published
+  Ungrouped
 };
