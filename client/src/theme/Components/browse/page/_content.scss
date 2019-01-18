@@ -1,46 +1,68 @@
 .page-content {
-
   @include templateCopy;
-  font-size: 17px;
+  font-size: 16px;
+  line-height: 1.438;
   color: $neutral90;
+
+  > * {
+    margin-bottom: 0;
+  }
+
+  > * + * {
+    margin-top: 30px;
+
+    @include respond($break60) {
+      margin-bottom: 32px;
+    }
+  }
 
   @mixin pageContentHeading {
     @include templateHead;
-    margin-top: 0;
-    margin-bottom: 1em;
-    font-weight: $medium;
-    line-height: 1.32;
     color: $neutral80;
+
+    @include respond($break60) {
+      margin-bottom: 38px;
+    }
   }
 
   h1 {
     @include pageContentHeading;
-    font-size: 24px;
+    font-size: 32px;
+    font-weight: $semibold;
+    line-height: 1.188;
   }
 
   h2 {
     @include pageContentHeading;
-    font-size: 22px;
+    font-size: 30px;
+    font-weight: $medium;
+    line-height: 1.233;
   }
 
   h3 {
     @include pageContentHeading;
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: $medium;
+    line-height: 1.208;
   }
 
   h4 {
     @include pageContentHeading;
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: $semibold;
+    line-height: 1.273;
   }
 
   h5 {
     @include pageContentHeading;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: $semibold;
+    line-height: 1.278;
   }
 
   h6 {
     @include pageContentHeading;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   a {
@@ -57,10 +79,40 @@
     }
   }
 
-  p + h1, p + h2, p + h3, p + h4, p + h5, p + h6, blockquote + h1, pblockquote + h2,
-  blockquote + h3, blockquote + h4, blockquote + h5, blockquote + h6, p + p {
-    margin-top: 1.2em;
+  ol, ul {
+    padding-left: 16px;
+    list-style: none;
+
+    li {
+      padding-left: 22px;
+
+      &::before {
+        width: 16px;
+        margin-left: -16px;
+      }
+    }
   }
 
+  ol {
+    counter-reset: styled-counter;
 
+    li {
+      counter-increment: styled-counter;
+
+      &::before {
+        @include templateHead;
+        margin-right: 11px;
+        font-weight: $medium;
+        content: counter(styled-counter);
+      }
+    }
+  }
+
+  ul {
+    li::before {
+      margin-right: 11px;
+      color: $accentPrimary;
+      content: '\2022';
+    }
+  }
 }

@@ -13,10 +13,24 @@ export default class ProjectContentBlockMarkdownBlock extends PureComponent {
     return this.props.block;
   }
 
+  get blockBgClass() {
+    const blockStyle = this.block.attributes.style;
+
+    return blockStyle === "shaded" ? "bg-neutral05" : "";
+  }
+
+  get formattedContent() {
+    return this.block.attributes.bodyFormatted;
+  }
+
   render() {
+    const blockClass = "entity-section-wrapper";
     return (
-      <Wrapper>
-        <div>Markdown Block [{this.block.id}]</div>
+      <Wrapper additionalClasses={this.blockBgClass}>
+        <div
+          className={`${blockClass}__body ${blockClass}__body--narrow page-content`}
+          dangerouslySetInnerHTML={{ __html: this.formattedContent }}
+        />
       </Wrapper>
     );
   }
