@@ -4,8 +4,10 @@ import ActivityResource from "./ActivityResource";
 import ActivityText from "./ActivityText";
 import ActivityTweet from "./ActivityTweet";
 import BarsDoubleHorizontal from "./BarsDoubleHorizontal";
+import Bookmark from "./Bookmark";
 import BooksOnShelf from "./BooksOnShelf";
 import BooksOnShelfStroke from "./BooksOnShelfStroke";
+import BookStackIsometric from "./BookStackIsometric";
 import BookStackVertical from "./BookStackVertical";
 import BooksWithGlasses from "./BooksWithGlasses";
 import BulletList from "./BulletList";
@@ -17,9 +19,11 @@ import EyeOpen from "./EyeOpen";
 import Globe from "./Globe";
 import Lamp from "./Lamp";
 import ManifoldLogo from "./ManifoldLogo";
+import LoosePages from "./LoosePages";
 import Minus from "./Minus";
 import Mug from "./Mug";
 import NewRound from "./NewRound";
+import PencilSimple from "./PencilSimple";
 import Plus from "./Plus";
 import Pulse from "./Pulse";
 import ResourceAudio from "./ResourceAudio";
@@ -34,6 +38,7 @@ import ResourcePresentation from "./ResourcePresentation";
 import ResourceSpreadsheet from "./ResourceSpreadsheet";
 import ResourceVideo from "./ResourceVideo";
 import Sliders from "./Sliders";
+import SpeechBubble from "./SpeechBubble";
 import Tag from "./Tag";
 import Touch from "./Touch";
 import Trash from "./Trash";
@@ -45,8 +50,10 @@ export default {
   ActivityText,
   ActivityTweet,
   BarsDoubleHorizontal,
+  Bookmark,
   BooksOnShelf,
   BooksOnShelfStroke,
+  BookStackIsometric,
   BookStackVertical,
   BooksWithGlasses,
   BulletList,
@@ -58,9 +65,11 @@ export default {
   Globe,
   Lamp,
   ManifoldLogo,
+  LoosePages,
   Minus,
   Mug,
   NewRound,
+  PencilSimple,
   Plus,
   Pulse,
   ResourceAudio,
@@ -75,6 +84,7 @@ export default {
   ResourceSpreadsheet,
   ResourceVideo,
   Sliders,
+  SpeechBubble,
   Tag,
   Touch,
   Trash
