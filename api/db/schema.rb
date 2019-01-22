@@ -427,14 +427,9 @@ ActiveRecord::Schema.define(version: 20190122232712) do
     t.integer  "events_count",                                      default: 0
     t.string   "download_url"
     t.string   "download_call_to_action"
-    t.string   "published_text_attachment_file_name_deprecated"
-    t.string   "published_text_attachment_content_type_deprecated"
-    t.integer  "published_text_attachment_file_size_deprecated"
-    t.datetime "published_text_attachment_updated_at_deprecated"
     t.jsonb    "cover_data",                                        default: {}
     t.jsonb    "hero_data",                                         default: {}
     t.jsonb    "avatar_data",                                       default: {}
-    t.jsonb    "published_text_attachment_data",                    default: {}
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
 
