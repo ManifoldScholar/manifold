@@ -28,6 +28,10 @@ export default class TextThumbnail extends Component {
     blockClass: "text-block"
   };
 
+  get isPublished() {
+    return this.props.text.attributes.published;
+  }
+
   renderTextInteractions(text) {
     const {
       annotationsCount,
@@ -146,7 +150,9 @@ export default class TextThumbnail extends Component {
             <FormattedDate prefix="Added" format="MMMM YYYY" date={createdAt} />
           </span>
         )}
-        <span className={`${blockClass}__status`}>Published</span>
+        {this.isPublished && (
+          <span className={`${blockClass}__status`}>Published</span>
+        )}
       </React.Fragment>
     );
   }
