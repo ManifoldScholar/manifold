@@ -48,7 +48,7 @@ module Validation
                   :download_call_to_action, :publication_date, metadata(Project),
                   :avatar_color, :slug, attachment(:published_text_attachment),
                   :remove_published_text_attachment, :tag_list]
-    relationships = [:collaborators, :creators, :contributors, :published_text, :subjects]
+    relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
@@ -224,7 +224,7 @@ module Validation
   def text_params
     params.require(:data)
     attributes = [:title, :language, :position, :description, :publication_date,
-                  metadata(Text), :rights, :section_kind, :subtitle]
+                  metadata(Text), :rights, :section_kind, :subtitle, :published]
     relationships = [:category, :contributors, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
