@@ -6,7 +6,7 @@ class ContentBlock < ApplicationRecord
   include Concerns::SerializedAbilitiesFor
 
   # Ordering
-  acts_as_list scope: :project, top_of_list: 0
+  acts_as_list scope: :project
 
   delegate :serializer, to: :class
   delegate :available_attributes, to: :class
