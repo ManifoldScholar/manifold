@@ -22,6 +22,10 @@
 
     &:hover {
       color: $accentPrimaryDark;
+
+      .resource-total__value {
+        color: inherit;
+      }
     }
   }
 
