@@ -120,24 +120,6 @@ ActiveRecord::Schema.define(version: 20190117215354) do
     t.index ["created_at"], name: "index_comments_on_created_at", using: :brin
   end
 
-  create_table "content_block_references", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid   "content_block_id"
-    t.string "referencable_type"
-    t.uuid   "referencable_id"
-    t.string "kind",              null: false
-    t.index ["content_block_id"], name: "index_content_block_references_on_content_block_id", using: :btree
-    t.index ["referencable_type", "referencable_id"], name: "index_content_block_references_on_referencable", using: :btree
-  end
-
-  create_table "content_blocks", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string  "type",                         null: false
-    t.jsonb   "configuration", default: {},   null: false
-    t.integer "position"
-    t.uuid    "project_id"
-    t.boolean "visible",       default: true, null: false
-    t.index ["project_id"], name: "index_content_blocks_on_project_id", using: :btree
-  end
-
   create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "event_type"
     t.string   "event_url"
