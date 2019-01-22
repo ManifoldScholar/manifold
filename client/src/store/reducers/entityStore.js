@@ -83,10 +83,15 @@ function mergeSlugMap(stateSlugMap, payloadSlugMap) {
   return Object.assign({}, stateSlugMap, mergedSlugMap);
 }
 
-function mergeEntities(stateEntities, payloadEntities) {
+function mergeEntities(
+  stateEntities,
+  payloadEntities,
+  overwritePartials = false
+) {
   const mergedEntities = {};
   Object.keys(payloadEntities).forEach(type => {
     const adjusted = pickBy(payloadEntities[type], (e, uuid) => {
+      if (overwritePartials) return true;
       const stateEntity = get(stateEntities, `${type}.${uuid}`);
       if (!stateEntity) return true; // pick it if there's no existing entity
       if (get(e, "meta.partial") === false) return true; // pick it if new entity is not partial
@@ -165,6 +170,7 @@ function successResponse(state, action) {
   const meta = action.meta;
   const isNull = !payload;
   const shouldTouchResponses = !isNull && !action.payload.noTouch;
+  const overwritePartials = !isNull && action.payload.force;
   const isCollection = !isNull && Array.isArray(payload.results);
   const isEntity = !isNull && !isCollection;
   const baseResponses = shouldTouchResponses
@@ -190,9 +196,9 @@ function successResponse(state, action) {
   const entities = responses[meta].appends
     ? Object.assign(
         state.entities,
-        mergeEntities(state.entities, payload.entities)
+        mergeEntities(state.entities, payload.entities, overwritePartials)
       )
-    : mergeEntities(state.entities, payload.entities);
+    : mergeEntities(state.entities, payload.entities, overwritePartials);
   const slugMap = mergeSlugMap(state.slugMap, payload.slugMap);
   return Object.assign({}, state, { responses, entities, slugMap });
 }
