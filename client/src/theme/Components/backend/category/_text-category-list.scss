@@ -1,0 +1,86 @@
+.text-categories {
+  &__category {
+    @include panelRounded;
+    margin-bottom: 16px;
+    color: $neutral20;
+    background: $neutral95;
+  }
+
+  &__header {
+    @include utilityPrimary;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 24px;
+    font-size: 14px;
+    font-weight: $medium;
+    line-height: 1;
+    color: $neutral30;
+    background: $neutral100;
+    border-radius: 8px 8px 0 0;
+  }
+
+  &__label {
+    margin: 4px 0;
+    font-size: 14px;
+    line-height: 1.3em;
+
+    &--notice {
+      color: $sp40Tertiary;
+    }
+
+  }
+
+  &__label-type {
+    &--light {
+      color: $neutral50;
+    }
+  }
+
+  &__utility {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 14px;
+
+    > * + * {
+      margin-left: 14px;
+    }
+
+  }
+
+  &__button {
+    @include buttonUnstyled;
+    display: inline;
+    padding: 0;
+    color: $neutral50;
+    transition: color $duration $timing;
+
+    &:hover {
+      color: $accentPrimary;
+    }
+
+    &--notice {
+      &:hover {
+        color: $sp40Tertiary;
+      }
+    }
+  }
+
+  &__dropzone {
+    @include panelRounded;
+    padding: 16px 16px 4px;
+    margin-right: -16px;
+    margin-bottom: 16px;
+    margin-left: -16px;
+    background-color: transparent;
+    transition: background-color 0.4s ease;
+
+    &--active {
+      background-color: lighten($neutral90, 3%);
+    }
+
+  }
+
+}
+
+

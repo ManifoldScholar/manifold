@@ -1,55 +1,47 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Dialog from "backend/components/dialog";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { Icon } from "global/components/svg";
-import FormattedDate from "global/components/FormattedDate";
 import { stylesheetsAPI, requests } from "api";
-import { notificationActions, entityStoreActions } from "actions";
+import { entityStoreActions } from "actions";
+
+import Stylesheet from "backend/components/stylesheet";
+import withConfirmation from "hoc/with-confirmation";
 
 const { request } = entityStoreActions;
 
-export default class TextStylesContainer extends PureComponent {
+export class TextStylesContainer extends PureComponent {
   static displayName = "Text.Styles";
 
   static propTypes = {
     text: PropTypes.object,
     dispatch: PropTypes.func,
-    refresh: PropTypes.func
+    refresh: PropTypes.func,
+    confirm: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
+  get text() {
+    return this.props.text;
+  }
 
-    this.state = {
-      confirmation: null
+  get stylesheets() {
+    return this.text.relationships.stylesheets;
+  }
+
+  get callbacks() {
+    return {
+      updatePosition: this.updatePosition,
+      confirmDestroy: this.confirmDestroy
     };
   }
 
-  handleDestroy = stylesheet => {
+  confirmDestroy = stylesheet => {
     const heading = "Are you sure you want to delete this stylesheet?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.doDestroy(stylesheet);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, () => this.destroy(stylesheet));
   };
 
-  closeDialog = () => {
-    this.setState({ confirmation: null });
-  };
-
-  doDestroy = stylesheet => {
+  destroy = stylesheet => {
     const call = stylesheetsAPI.destroy(stylesheet.id);
     const options = { removes: stylesheet };
     const stylesheetRequest = request(
@@ -58,52 +50,29 @@ export default class TextStylesContainer extends PureComponent {
       options
     );
     this.props.dispatch(stylesheetRequest).promise.then(() => {
-      this.notifyDestroy(stylesheet);
       this.props.refresh();
     });
   };
 
-  notifyDestroy(stylesheet) {
-    const notification = {
-      level: 0,
-      id: `STYLESHEET_DESTROYED_${stylesheet.id}`,
-      heading: "The stylesheet has been deleted.",
-      body: `${stylesheet.attributes.name} has passed into the endless night.`,
-      expiration: 5000
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-  }
-
-  handleMoveDown = (event, stylesheet) => {
-    event.preventDefault();
-    this.updateStylesheetPosition(stylesheet, "down");
-  };
-
-  handleMoveUp = (event, stylesheet) => {
-    event.preventDefault();
-    this.updateStylesheetPosition(stylesheet, "up");
-  };
-
-  updateStylesheetPosition(stylesheet, newPos) {
+  updatePosition = (stylesheet, newPos) => {
     const changes = {
       attributes: { position: newPos }
     };
     const call = stylesheetsAPI.update(stylesheet.id, changes);
-    const stylesheetRequest = request(call, requests.beStylesheetUpdate);
+    const options = { notificationScope: "none" };
+    const stylesheetRequest = request(
+      call,
+      requests.beStylesheetUpdate,
+      options
+    );
     this.props.dispatch(stylesheetRequest).promise.then(() => {
       this.props.refresh();
     });
-  }
+  };
 
   render() {
-    const { text } = this.props;
-    const { stylesheets } = this.props.text.relationships;
     return (
       <div>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
-
         <section className="text-category-list-secondary">
           <div className="instructional-copy">
             <p>
@@ -117,147 +86,25 @@ export default class TextStylesContainer extends PureComponent {
             </p>
           </div>
 
-          <div className="text-category">
-            <header>
-              <h4 className="category-title highlight">Stylesheets</h4>
-            </header>
-            <ul className="texts-group">
-              {stylesheets.map((stylesheet, index, collection) => {
-                return (
-                  <li key={stylesheet.id}>
-                    <div>
-                      <Link
-                        className="asset-thumb"
-                        to={lh.link(
-                          "BackendTextStylesheetEdit",
-                          text.id,
-                          stylesheet.id
-                        )}
-                      >
-                        <figure className="asset-image">
-                          <div className="asset-image-placeholder">
-                            <Icon.ResourceDocument size={50} />
-                          </div>
-                        </figure>
-                        <div className="asset-description">
-                          <h3 className="asset-title">
-                            {stylesheet.attributes.name}
-                            <span className="subtitle" />
-                          </h3>
-                          <span className="asset-date">
-                            <FormattedDate
-                              prefix="Added"
-                              format="MMMM, YYYY"
-                              date={stylesheet.attributes.createdAt}
-                            />
-                          </span>
-                          <span className="asset-state">
-                            {stylesheet.attributes.ingested
-                              ? "Ingested"
-                              : "User"}
-                          </span>
-                        </div>
-                      </Link>
-                      <div className="text-category-list-utility">
-                        <Link
-                          className="button"
-                          to={lh.link(
-                            "BackendTextStylesheetEdit",
-                            text.id,
-                            stylesheet.id
-                          )}
-                        >
-                          Edit
-                        </Link>
-                        {index !== 0 ? (
-                          <button
-                            onClick={event => {
-                              this.handleMoveUp(event, stylesheet);
-                            }}
-                          >
-                            <span className="screen-reader-text">
-                              Move Stylesheet up
-                            </span>
-                            <i
-                              className="manicon manicon-arrow-up"
-                              aria-hidden="true"
-                            />
-                          </button>
-                        ) : (
-                          <button
-                            style={{ visibility: "hidden" }}
-                            onClick={event => {
-                              this.handleMoveUp(event, stylesheet);
-                            }}
-                          >
-                            <span className="screen-reader-text">
-                              Move Stylesheet up
-                            </span>
-                            <i
-                              className="manicon manicon-arrow-up"
-                              aria-hidden="true"
-                            />
-                          </button>
-                        )}
-                        {index + 1 < collection.length ? (
-                          <button
-                            onClick={event => {
-                              this.handleMoveDown(event, stylesheet);
-                            }}
-                          >
-                            <span className="screen-reader-text">
-                              Move Stylesheet down
-                            </span>
-                            <i
-                              className="manicon manicon-arrow-down"
-                              aria-hidden="true"
-                            />
-                          </button>
-                        ) : (
-                          <button
-                            onClick={event => {
-                              this.handleMoveDown(event, stylesheet);
-                            }}
-                            style={{ visibility: "hidden" }}
-                          >
-                            <span className="screen-reader-text">
-                              Move Stylesheet down
-                            </span>
-                            <i
-                              className="manicon manicon-arrow-down"
-                              aria-hidden="true"
-                            />
-                          </button>
-                        )}
-                        <button
-                          onClick={() => {
-                            this.handleDestroy(stylesheet);
-                          }}
-                        >
-                          <span className="screen-reader-text">
-                            Delete Stylesheet
-                          </span>
-                          <i className="manicon manicon-x" aria-hidden="true" />
-                        </button>
-                      </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+          <div className="buttons-icon-horizontal maintain">
+            <Link
+              className="button-icon-secondary"
+              to={lh.link("BackendTextStylesheetNew", this.text.id)}
+            >
+              <i className="manicon manicon-plus" aria-hidden="true" />
+              <span>Add a New Stylesheet</span>
+            </Link>
           </div>
-        </section>
 
-        <div className="buttons-icon-horizontal">
-          <Link
-            className="button-icon-secondary"
-            to={lh.link("BackendTextStylesheetNew", text.id)}
-          >
-            <i className="manicon manicon-plus" aria-hidden="true" />
-            <span>Add a New Stylesheet</span>
-          </Link>
-        </div>
+          <Stylesheet.List
+            stylesheets={this.stylesheets}
+            text={this.text}
+            callbacks={this.callbacks}
+          />
+        </section>
       </div>
     );
   }
 }
+
+export default withConfirmation(TextStylesContainer);

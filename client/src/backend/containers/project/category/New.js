@@ -12,14 +12,10 @@ export default class ProjectCategoryNewContainer extends Component {
     history: PropTypes.object
   };
 
-  onSuccess = category => {
+  onSuccess = categoryIgnored => {
     this.props.refresh();
-    const url = lh.link(
-      "backendProjectCategory",
-      this.props.project.id,
-      category.id
-    );
-    this.props.history.push(url, { keepNotifications: true });
+    const url = lh.link("backendProjectTexts", this.props.project.id);
+    this.props.history.push(url, { keepNotifications: false });
   };
 
   render() {

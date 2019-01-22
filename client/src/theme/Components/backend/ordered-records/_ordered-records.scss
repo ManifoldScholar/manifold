@@ -1,0 +1,41 @@
+.ordered-records {
+
+  @include listUnstyled;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.4s ease;
+
+  &--active {
+    background-color: lighten($neutral90, 3%);
+  }
+
+  &--empty {
+    //background: blue;
+    position: relative;
+    min-height: 87px;
+
+    p {
+      @include utilityPrimary;
+      width: 100%;
+      padding: 16px;
+      font-size: 14px;
+      color: $neutral80;
+      text-align: center;
+      border: 1px solid $neutral80;
+    }
+  }
+
+  &__dropzone {
+    padding: 16px 32px;
+    margin: -16px -32px;
+
+    border-radius: 8px;
+    transition: background-color 0.4s ease;
+
+    &--active {
+      background-color: lighten($neutral90, 3%);
+    }
+
+  }
+
+}

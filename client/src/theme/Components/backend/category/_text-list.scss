@@ -1,0 +1,129 @@
+.texts-list {
+
+  @include listUnstyled;
+  @include utilityPrimary;
+
+  display: flex;
+  flex-direction: column;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  transition: background-color 0.4s ease;
+
+  &--active {
+    background-color: lighten($neutral90, 3%);
+  }
+
+  &--empty {
+    //background: blue;
+    position: relative;
+    min-height: 87px;
+
+    p {
+      @include utilityPrimary;
+      width: 100%;
+      padding: 16px;
+      font-size: 14px;
+      color: $neutral80;
+      text-align: center;
+      border: 1px solid $neutral80;
+    }
+  }
+
+  &__text {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 8px 16px;
+    margin: 8px;
+    background: $neutral95;
+    border-radius: 8px;
+
+    + .texts-list__text {
+      border-top: 1px solid $neutral80;
+    }
+
+    &--is-dragging {
+    }
+
+    &--placeholder {
+      position: absolute;
+      width: 100%;
+      padding-right: 38px;
+      background: none;
+    }
+
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+  }
+
+  &__title-wrapper {
+    padding-left: 16px;
+  }
+
+  &__title {
+    margin: 0 0 0.4em;
+    font-size: 17px;
+    color: $neutral30;
+    transition: color $duration $timing;
+  }
+
+  &__subtitle {
+    margin-top: 7px;
+    color: $neutral50;
+    transition: color $duration $timing;
+  }
+
+  &__date {
+    @include utilityPrimary;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: $medium;
+    color: $neutral70;
+  }
+
+  &__icon {
+    svg {
+      width: 50px;
+      height: 50px;
+
+      path {
+        fill: $neutral20;
+      }
+    }
+  }
+
+  &__utility {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 14px;
+
+    > * + * {
+      margin-left: 14px;
+    }
+  }
+
+  &__button {
+    @include buttonUnstyled;
+    display: block;
+    padding: 0;
+    color: $neutral50;
+    transition: color $duration $timing;
+
+    &:hover {
+      color: $accentPrimary;
+    }
+
+    &--notice {
+      &:hover {
+        color: $sp40Tertiary;
+      }
+    }
+  }
+
+}

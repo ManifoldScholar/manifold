@@ -24,7 +24,7 @@ export default class CategoryForm extends PureComponent {
         update={textCategoriesAPI.update}
         create={model => textCategoriesAPI.create(this.props.projectId, model)}
         className="form-secondary"
-        notificationScope="drawer"
+        notificationScope="none"
       >
         <Form.TextInput
           label="Title"
