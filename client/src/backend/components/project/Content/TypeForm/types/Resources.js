@@ -32,7 +32,7 @@ export default class ProjectContentTypeFormResources extends PureComponent {
             label="Featured Collections"
             placeholder="Add a Collection"
             name="relationships[featuredCollections]"
-            options={this.fetchCollections}
+            options={this.collections}
             entityLabelAttribute={"title"}
             wide
           />
