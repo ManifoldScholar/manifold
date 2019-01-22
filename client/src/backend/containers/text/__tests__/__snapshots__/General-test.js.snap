@@ -58,6 +58,34 @@ exports[`Backend Text General Container renders correctly 1`] = `
         style={Object {}}
       >
         <h4
+          className="form-input-heading above"
+        >
+          Published?
+        </h4>
+        <div
+          className="toggle-indicator"
+        >
+          <div
+            aria-pressed={true}
+            className="boolean-primary checked"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Published?
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="form-input"
+      >
+        <h4
           className="form-input-heading"
         >
           Publication Date

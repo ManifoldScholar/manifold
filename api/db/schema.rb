@@ -399,7 +399,6 @@ ActiveRecord::Schema.define(version: 20190122232712) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "featured",                                          default: false
-    t.uuid     "published_text_id"
     t.string   "hashtag"
     t.string   "purchase_url"
     t.bigint   "purchase_price_in_cents"
@@ -731,6 +730,7 @@ ActiveRecord::Schema.define(version: 20190122232712) do
     t.string   "section_kind"
     t.integer  "events_count",          default: 0
     t.jsonb    "cover_data",            default: {}
+    t.boolean  "published",             default: false, null: false
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
     t.index ["slug"], name: "index_texts_on_slug", unique: true, using: :btree
   end

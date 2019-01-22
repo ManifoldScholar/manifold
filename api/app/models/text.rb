@@ -57,8 +57,6 @@ class Text < ApplicationRecord
   # Associations
   belongs_to :project, optional: true, touch: true
   belongs_to :category, optional: true
-  has_one :publishing_project, class_name: "Project", foreign_key: "published_text_id",
-          dependent: :nullify, inverse_of: :published_text
   belongs_to :start_text_section, optional: true, class_name: "TextSection",
              inverse_of: :text_started_by
   has_many :ingestions, dependent: :nullify, inverse_of: :text
@@ -87,6 +85,9 @@ class Text < ApplicationRecord
   # Validation
   validates :spine,
             presence: true, unless: proc { |x| x.spine.is_a?(Array) && x.spine.empty? }
+
+  # Scopes
+  scope :published, ->(published) { where(published: published) if published.present? }
 
   # Attachments
   manifold_has_attached_file :cover, :image, no_styles: true
@@ -212,10 +213,6 @@ class Text < ApplicationRecord
 
   def toc_section
     text_sections.find_by(kind: TextSection::KIND_NAVIGATION)
-  end
-
-  def published?
-    project && project.published_text == self
   end
 
   def to_s
