@@ -12,11 +12,15 @@ export class ProjectContentTypeForm extends PureComponent {
   };
 
   componentDidMount() {
-    this.setDefaults();
+    if (this.isNew) this.setDefaults();
   }
 
   get contentBlock() {
     return this.props.contentBlock;
+  }
+
+  get isNew() {
+    return this.contentBlock.id === "pending";
   }
 
   get type() {
