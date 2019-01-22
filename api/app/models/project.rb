@@ -67,7 +67,7 @@ class Project < ApplicationRecord
   # PaperTrail
   has_paper_trail on: [:update],
                   skip:
-                    %i[cover_data hero_data avatar_data published_text_attachment_data]
+                    %i[cover_data hero_data avatar_data]
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project
@@ -144,9 +144,6 @@ class Project < ApplicationRecord
   manifold_has_attached_file :cover, :image
   manifold_has_attached_file :hero, :image
   manifold_has_attached_file :avatar, :image
-  manifold_has_attached_file :published_text_attachment,
-                             :resource,
-                             validate_content_type: false
 
   # Scopes
   scope :by_featured, lambda { |featured|
@@ -270,12 +267,6 @@ class Project < ApplicationRecord
     texts.reindex(:search_hidden, mode: :async)
     TextSection.in_texts(texts).reindex(:search_hidden, mode: :async)
     SearchableNode.in_texts(texts).reindex(:search_hidden, mode: :async)
-  end
-
-  def published_text_download_url
-    return published_text_attachment_url if published_text_attachment.present?
-    return download_url if download_url.present?
-    nil
   end
 
   private
