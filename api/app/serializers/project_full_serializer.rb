@@ -5,11 +5,11 @@ class ProjectFullSerializer < ProjectSerializer
   meta(partial: false)
 
   attributes :event_count, :metadata, :collections_count, :resources_count,
-             :published_text_toc_id, :event_types, :metadata_properties, :citations,
-             :hide_activity, :metadata_formatted
+             :event_types, :metadata_properties, :citations, :hide_activity,
+             :metadata_formatted
 
   has_many :texts
-  has_one :published_text
+  has_many :published_texts
   has_many :text_categories, serializer: CategorySerializer
   has_many :events
   has_many :collections
@@ -36,10 +36,6 @@ class ProjectFullSerializer < ProjectSerializer
 
   def event_types
     filtered_events.pluck(:event_type).uniq
-  end
-
-  def published_text_toc_id
-    object.published_text.try(:toc_section).try(:id)
   end
 
 end

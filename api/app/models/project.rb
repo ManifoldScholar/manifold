@@ -72,10 +72,11 @@ class Project < ApplicationRecord
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project
   has_many :project_collections, through: :collection_projects, dependent: :destroy
-  # rubocop:disable Rails/InverseOf
-  belongs_to :published_text, class_name: "Text", optional: true
-  # rubocop:enable Rails/InverseOf
   has_many :texts, dependent: :destroy, inverse_of: :project
+  has_many :published_texts,
+           -> { published(true) },
+           class_name: "Text",
+           inverse_of: :project
   has_many :text_categories, -> { for_text }, class_name: "Category", dependent: :destroy,
                                               inverse_of: :project
   has_many :resource_categories,
