@@ -397,66 +397,6 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               If set, this text will appear in the download link on the project page
             </span>
           </div>
-          <div
-            className="form-input"
-          >
-            <div
-              className="form-input"
-              style={Object {}}
-            >
-              <label
-                className=""
-                htmlFor="upload-1"
-              >
-                Download File
-              </label>
-              <react-dropzone
-                accepts={
-                  Object {
-                    "accepts": null,
-                    "extensions": null,
-                  }
-                }
-                className="form-dropzone style-portrait"
-                inputProps={
-                  Object {
-                    "aria-describedby": "upload-error-1",
-                    "id": "upload-1",
-                  }
-                }
-                multiple={false}
-                onDrop={[Function]}
-              >
-                <div
-                  className="contents-empty"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-cloud-up"
-                  />
-                  <div
-                    className="message"
-                  >
-                    <p
-                      className="primary"
-                    >
-                      <span
-                        className="fake-link"
-                        role="button"
-                        tabIndex="0"
-                      >
-                        Upload a file
-                      </span>
-                       or 
-                      <br />
-                      drag and drop here
-                      <br />
-                    </p>
-                  </div>
-                </div>
-              </react-dropzone>
-            </div>
-          </div>
         </div>
       </div>
       <div

@@ -181,46 +181,10 @@ export default class ProjectHero extends Component {
     );
   }
 
-  renderDownloadLink(attr) {
-    if (!attr.publishedTextDownloadUrl) return null;
-
-    const purchaseLinkPresent = this.renderPurchaseLink(attr);
-
-    const buttonClasses = purchaseLinkPresent
-      ? "utility-primary"
-      : "button-tagged outline";
-
-    return (
-      <a
-        rel="noopener noreferrer"
-        target="_blank"
-        href={attr.publishedTextDownloadUrl}
-        className={buttonClasses}
-      >
-        {purchaseLinkPresent ? (
-          <i className="manicon manicon-arrow-down" />
-        ) : null}
-        <span className="text">
-          {attr.downloadCallToAction || "Download eBook"}
-        </span>
-        {purchaseLinkPresent ? null : (
-          <span className="tag">
-            <i className="manicon manicon-arrow-down" />
-          </span>
-        )}
-      </a>
-    );
-  }
-
   renderPublishedTextLinks(attr) {
-    if (!attr.purchaseUrl && !attr.publishedTextDownloadUrl) return null;
+    if (!attr.purchaseUrl) return null;
 
-    return (
-      <React.Fragment>
-        {this.renderPurchaseLink(attr)}
-        {this.renderDownloadLink(attr)}
-      </React.Fragment>
-    );
+    return <React.Fragment>{this.renderPurchaseLink(attr)}</React.Fragment>;
   }
 
   renderProjectSubtitle(attr) {

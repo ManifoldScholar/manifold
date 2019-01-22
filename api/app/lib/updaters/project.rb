@@ -6,7 +6,7 @@ module Updaters
     include ::Updaters::Concerns::HasSortableCollaborators
 
     def attachment_fields
-      [:avatar, :hero, :cover, :published_text_attachment]
+      [:avatar, :hero, :cover]
     end
 
     def adjusted_attributes
