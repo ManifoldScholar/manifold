@@ -163,30 +163,6 @@ export default class ProjectHero extends Component {
     );
   }
 
-  renderPurchaseLink(attr) {
-    if (!attr.purchaseUrl) return null;
-
-    return (
-      <a
-        rel="noopener noreferrer"
-        target="_blank"
-        href={attr.purchaseUrl}
-        className="button-tagged outline"
-      >
-        <span className="text">
-          {attr.purchaseCallToAction || "Buy Print Version"}
-        </span>
-        <span className="tag">{attr.purchasePriceMoney}</span>
-      </a>
-    );
-  }
-
-  renderPublishedTextLinks(attr) {
-    if (!attr.purchaseUrl) return null;
-
-    return <React.Fragment>{this.renderPurchaseLink(attr)}</React.Fragment>;
-  }
-
   renderProjectSubtitle(attr) {
     if (!attr.subtitle) return null;
     if (attr.subtitleFormatted)
@@ -244,11 +220,9 @@ export default class ProjectHero extends Component {
             {this.listMakers(project.relationships)}
             {this.renderDescription(attr)}
             {this.renderSocial(attr)}
-            {this.renderPublishedTextLinks(attr)}
           </div>
           <div className="project-aside">
             {this.renderProjectImage(attr.coverStyles)}
-            {this.renderPublishedTextLinks(attr)}
           </div>
         </div>
       </div>

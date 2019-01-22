@@ -400,10 +400,6 @@ ActiveRecord::Schema.define(version: 20190122232712) do
     t.datetime "updated_at"
     t.boolean  "featured",                                          default: false
     t.string   "hashtag"
-    t.string   "purchase_url"
-    t.bigint   "purchase_price_in_cents"
-    t.string   "purchase_price_currency"
-    t.string   "purchase_call_to_action"
     t.string   "instagram_id"
     t.string   "twitter_id"
     t.string   "facebook_id"

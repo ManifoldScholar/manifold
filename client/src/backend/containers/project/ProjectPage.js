@@ -66,34 +66,6 @@ export default class ProjectProjectPageContainer extends PureComponent {
                 instructions="If a cover is set for the project, it will appear over the hero, to the right of the description on the landing page."
               />
             </Form.FieldGroup>
-            <Form.FieldGroup label="Purchase Options">
-              <Form.TextInput
-                wide
-                label="Purchase URL"
-                name="attributes[purchaseUrl]"
-                placeholder="Enter Purchase URL"
-                instructions="A URL where users can purchase the published edition"
-              />
-              <Form.TextInput
-                wide
-                label="Purchase Call To Action"
-                name="attributes[purchaseCallToAction]"
-                placeholder="Buy Print Version"
-                instructions="If set, this text will appear in the buy button on the project page"
-              />
-              <Form.MaskedTextInput
-                label="Purchase Price"
-                name="attributes[purchasePriceMoney]"
-                mask="currency"
-                instructions="The cost of the published edition"
-              />
-              <Form.TextInput
-                label="Currency"
-                name="attributes[purchasePriceCurrency]"
-                placeholder="Enter Purchase Price Currency Code"
-                instructions="For example, USD for US Dollars"
-              />
-            </Form.FieldGroup>
             <Form.FieldGroup
               label="Download Options"
               instructions="If a URL or file is provided, a button to download the file will appear on the project page.  A file takes precedence over a URL."

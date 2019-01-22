@@ -125,15 +125,8 @@ class Project < ApplicationRecord
   delegate :count, to: :collections, prefix: true
   delegate :count, to: :resources, prefix: true
 
-  # Misc
-  money_attributes :purchase_price
-
   # Validation
-  validates :purchase_url, url: { allow_blank: true }
   validates :title, presence: true
-  validates :purchase_price_currency,
-            inclusion: { in: Money::Currency.all.map(&:iso_code) },
-            allow_nil: true
   validates :avatar_color,
             presence: true,
             inclusion: { in: AVATAR_COLORS },
