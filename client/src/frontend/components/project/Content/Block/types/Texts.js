@@ -27,7 +27,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   }
 
   get blockDescription() {
-    return this.props.block.attributes.description;
+    return this.props.block.attributes.descriptionFormatted;
   }
 
   get attributeVisibility() {
@@ -61,14 +61,12 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
         <Heading title={this.blockTitle} icon={this.props.icon} />
         {this.blockDescription && (
           <div className={`${blockClass}__details`}>
-            {this.blockDescription && (
-              <p
-                className="description pad-bottom"
-                dangerouslySetInnerHTML={{
-                  __html: this.blockDescription
-                }}
-              />
-            )}
+            <p
+              className="description pad-bottom"
+              dangerouslySetInnerHTML={{
+                __html: this.blockDescription
+              }}
+            />
           </div>
         )}
         <div className={`${blockClass}__body`}>
