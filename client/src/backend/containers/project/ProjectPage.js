@@ -111,15 +111,6 @@ export default class ProjectProjectPageContainer extends PureComponent {
                 placeholder="Download eBook"
                 instructions="If set, this text will appear in the download link on the project page"
               />
-              <Form.Upload
-                layout="portrait"
-                label="Download File"
-                accepts="files"
-                readFrom="attributes[publishedTextDownloadUrl]"
-                fileNameFrom="attributes[publishedTextAttachmentFileName]"
-                name="attributes[publishedTextAttachment]"
-                remove="attributes[removePublishedTextAttachment]"
-              />
             </Form.FieldGroup>
             <Form.Save text="Save Project" />
           </FormContainer.Form>
