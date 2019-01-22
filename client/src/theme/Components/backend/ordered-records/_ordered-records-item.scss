@@ -1,0 +1,105 @@
+.ordered-records-item {
+  & + & {
+    border-top: 1px solid $neutral80;
+  }
+
+  &__inner {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 16px;
+    margin: 0 -16px;
+    background: $neutral90;
+    border: 1px solid $neutral90;
+    border-radius: 8px;
+
+    &--is-dragging {
+      border: 1px solid lighten($neutral90, 3%);
+    }
+  }
+
+  &--placeholder {
+    position: absolute;
+    width: 100%;
+    padding-right: 38px;
+    background: none;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+  }
+
+  &__title-wrapper {
+    padding-left: 16px;
+  }
+
+  &__title {
+    @include utilityPrimary;
+    margin: 0 0 0.6em;
+    font-size: 17px;
+    color: $neutral30;
+    transition: color $duration $timing;
+  }
+
+  &__subtitle {
+    @include subtitlePrimary;
+    margin-top: 7px;
+    margin-left: 7px;
+    color: $neutral50;
+    text-transform: none;
+    transition: color $duration $timing;
+  }
+
+  &__date {
+    @include utilityPrimary;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: $medium;
+    color: $neutral70;
+  }
+
+  &__icon {
+    svg {
+      width: 50px;
+      height: 50px;
+
+      path {
+        fill: $neutral20;
+      }
+    }
+  }
+
+  &__utility {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    > * + * {
+      margin-left: 14px;
+    }
+  }
+
+  &__button {
+    @include buttonUnstyled;
+    display: block;
+    padding: 0;
+    color: $neutral50;
+    transition: color $duration $timing;
+
+    &:hover {
+      color: $accentPrimary;
+    }
+
+    &--notice {
+      &:hover {
+        color: $sp40Tertiary;
+      }
+    }
+  }
+
+}
+

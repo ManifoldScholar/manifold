@@ -316,5 +316,13 @@ export default {
       body: "Could not unsubscribe from email notification.",
       expiration: defaultExpiration
     };
+  },
+  [r.beStylesheetDestroy]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: "Stylesheet successfully deleted.",
+      expiration: defaultExpiration
+    };
   }
 };

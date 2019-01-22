@@ -6,11 +6,10 @@ import { select } from "utils/entityUtils";
 import Stylesheet from "backend/components/stylesheet";
 import Form from "backend/components/form";
 import lh from "helpers/linkHandler";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import FormContainer from "backend/containers/form";
 import { entityStoreActions } from "actions";
 import has from "lodash/has";
-import get from "lodash/get";
 
 const { request } = entityStoreActions;
 
@@ -54,22 +53,11 @@ export class StylesheetEditContainer extends PureComponent {
   };
 
   renderEdit(isNew) {
-    const { stylesheet, match } = this.props;
-    const { params } = match;
+    const { stylesheet } = this.props;
     return (
       <div>
-        <section className="text-category-list-secondary">
-          <div className="text-category">
-            <header>
-              <h4 className="category-title highlight">
-                <Link to={lh.link("backendTextStyles", params.id)}>
-                  {"Stylesheets / "}
-                </Link>
-                {isNew ? " New" : get(stylesheet, "attributes.name")}
-              </h4>
-            </header>
-            {isNew ? this.renderForm() : this.renderForm(this.props.stylesheet)}
-          </div>
+        <section>
+          {isNew ? this.renderForm() : this.renderForm(stylesheet)}
         </section>
       </div>
     );

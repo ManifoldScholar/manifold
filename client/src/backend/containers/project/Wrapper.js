@@ -11,14 +11,15 @@ import { projectsAPI, requests } from "api";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
-
 import Authorize from "hoc/authorize";
+import get from "lodash/get";
 
 const { request, flush } = entityStoreActions;
 
 export class ProjectWrapperContainer extends PureComponent {
   static mapStateToProps = state => {
     return {
+      projectResponse: get(state.entityStore.responses, requests.beProject),
       project: select(requests.beProject, state.entityStore)
     };
   };
@@ -26,6 +27,7 @@ export class ProjectWrapperContainer extends PureComponent {
   static displayName = "Project.Wrapper";
 
   static propTypes = {
+    projectResponse: PropTypes.object,
     project: PropTypes.object,
     dispatch: PropTypes.func,
     match: PropTypes.object,
@@ -45,7 +47,8 @@ export class ProjectWrapperContainer extends PureComponent {
 
   fetchProject = () => {
     const call = projectsAPI.show(this.props.match.params.id);
-    const projectRequest = request(call, requests.beProject);
+    const options = { force: true };
+    const projectRequest = request(call, requests.beProject, options);
     this.props.dispatch(projectRequest);
   };
 
@@ -98,9 +101,11 @@ export class ProjectWrapperContainer extends PureComponent {
   }
 
   renderRoutes() {
-    const { project } = this.props;
+    const { project, projectResponse } = this.props;
     const refresh = this.fetchProject;
-    return childRoutes(this.props.route, { childProps: { refresh, project } });
+    return childRoutes(this.props.route, {
+      childProps: { refresh, project, projectResponse }
+    });
   }
 
   render() {
