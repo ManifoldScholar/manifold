@@ -228,69 +228,6 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="form-section"
-      >
-        <header
-          className="form-section-label"
-        >
-          <span>
-            Download Options
-          </span>
-        </header>
-        <span
-          className="instructions"
-        >
-          If a URL or file is provided, a button to download the file will appear on the project page.  A file takes precedence over a URL.
-        </span>
-        <div
-          className="form-input-group"
-        >
-          <div
-            className="form-input wide"
-            style={Object {}}
-          >
-            <label
-              className=""
-              htmlFor="attributes[downloadUrl]-text-input-1"
-            >
-              Download URL
-            </label>
-            <input
-              aria-describedby="attributes[downloadUrl]-text-input-1"
-              id="attributes[downloadUrl]-text-input-1"
-              onChange={[Function]}
-              placeholder="Enter Download URL"
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="form-input wide"
-            style={Object {}}
-          >
-            <label
-              className="has-instructions"
-              htmlFor="attributes[downloadCallToAction]-text-input-1"
-            >
-              Download Call To Action
-            </label>
-            <input
-              aria-describedby="attributes[downloadCallToAction]-text-input-1"
-              id="attributes[downloadCallToAction]-text-input-1"
-              onChange={[Function]}
-              placeholder="Download eBook"
-              type="text"
-              value="Download the greatest dog"
-            />
-            <span
-              className="instructions"
-            >
-              If set, this text will appear in the download link on the project page
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
         className="form-input submit wide"
       >
         <input

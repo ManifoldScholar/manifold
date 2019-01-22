@@ -41,11 +41,10 @@ module Validation
   def project_params
     params.require(:data)
     attributes = [:title, :subtitle, :featured, :hashtag, :description, :facebook_id,
-                  :twitter_id, :hide_activity, :instagram_id,
-                  :remove_avatar, attachment(:avatar), attachment(:hero), :download_url,
-                  attachment(:cover), :remove_hero, :draft, :remove_cover,
-                  :download_call_to_action, :publication_date, metadata(Project),
-                  :avatar_color, :slug, :tag_list]
+                  :twitter_id, :hide_activity, :instagram_id, :remove_avatar,
+                  attachment(:avatar), attachment(:hero), attachment(:cover),
+                  :remove_hero, :draft, :remove_cover, :publication_date,
+                  metadata(Project), :avatar_color, :slug, :tag_list]
     relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

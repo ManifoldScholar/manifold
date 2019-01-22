@@ -421,8 +421,6 @@ ActiveRecord::Schema.define(version: 20190122232712) do
     t.boolean  "hide_activity",                                     default: false
     t.string   "sort_title"
     t.integer  "events_count",                                      default: 0
-    t.string   "download_url"
-    t.string   "download_call_to_action"
     t.jsonb    "cover_data",                                        default: {}
     t.jsonb    "hero_data",                                         default: {}
     t.jsonb    "avatar_data",                                       default: {}

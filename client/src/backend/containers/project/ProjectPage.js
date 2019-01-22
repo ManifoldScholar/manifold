@@ -66,24 +66,6 @@ export default class ProjectProjectPageContainer extends PureComponent {
                 instructions="If a cover is set for the project, it will appear over the hero, to the right of the description on the landing page."
               />
             </Form.FieldGroup>
-            <Form.FieldGroup
-              label="Download Options"
-              instructions="If a URL or file is provided, a button to download the file will appear on the project page.  A file takes precedence over a URL."
-            >
-              <Form.TextInput
-                wide
-                label="Download URL"
-                name="attributes[downloadUrl]"
-                placeholder="Enter Download URL"
-              />
-              <Form.TextInput
-                wide
-                label="Download Call To Action"
-                name="attributes[downloadCallToAction]"
-                placeholder="Download eBook"
-                instructions="If set, this text will appear in the download link on the project page"
-              />
-            </Form.FieldGroup>
             <Form.Save text="Save Project" />
           </FormContainer.Form>
         </section>

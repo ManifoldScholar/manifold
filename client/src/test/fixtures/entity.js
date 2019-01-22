@@ -160,7 +160,6 @@ const defaults = {
       avatarMeta: {},
       hashtag: "#cute_dog",
       hideActivity: false,
-      downloadCallToAction: "Download the greatest dog",
       abilities,
       metadata: metadataValues,
       metadataFormatted: metadataValues

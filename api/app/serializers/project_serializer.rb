@@ -4,11 +4,10 @@ class ProjectSerializer < ApplicationSerializer
   meta(partial: true)
 
   attributes :title, :subtitle, :hashtag, :publication_date, :description,
-             :created_at, :updated_at, :featured,
-             :twitter_id, :instagram_id, :facebook_id, :hero_styles, :cover_styles,
-             :avatar_styles, :recently_updated, :updated, :description_formatted, :slug,
-             :resource_kinds, :resource_tags, :avatar_color, :avatar_meta, :draft,
-             :abilities, :download_url, :download_call_to_action, :tag_list,
+             :created_at, :updated_at, :featured, :twitter_id, :instagram_id,
+             :facebook_id, :hero_styles, :cover_styles, :avatar_styles, :recently_updated,
+             :updated, :description_formatted, :slug, :resource_kinds, :resource_tags,
+             :avatar_color, :avatar_meta, :draft, :abilities, :tag_list,
              :subtitle_formatted, :title_formatted, :title_plaintext
 
   has_many :creators, serializer: MakerSerializer
