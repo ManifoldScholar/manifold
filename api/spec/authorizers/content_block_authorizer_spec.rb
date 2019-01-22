@@ -71,15 +71,4 @@ RSpec.describe "Content Block Abilities", :authorizer do
 
     the_subject_behaves_like "instance abilities", ContentBlock, none: true
   end
-
-  context "when the block is a hero block" do
-    let(:object) { FactoryBot.create(:hero_block) }
-
-    context "when the subject is an admin" do
-      let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN)}
-
-      abilities = { read: true, create: true, update: true, delete: true }
-      the_subject_behaves_like "instance abilities", ContentBlock, abilities
-    end
-  end
 end
