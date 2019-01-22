@@ -13,8 +13,7 @@ describe("Backend Project Texts Container", () => {
   const textB = build.entity.text("4");
   project.relationships.textCategories = [category];
   textB.relationships.category = textB;
-  project.relationships.publishedText = textA;
-  project.relationships.texts = [textB];
+  project.relationships.texts = [textA, textB];
 
   const component = renderer.create(
     wrapWithRouter(
