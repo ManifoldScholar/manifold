@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import BaseInput from "./BaseInput";
 import labelId from "helpers/labelId";
+import isNull from "lodash/isNull";
 
 export default class FormNumberInput extends Component {
   static displayName = "Form.NumberInput";
@@ -28,7 +29,7 @@ export default class FormNumberInput extends Component {
   };
 
   renderValue = value => {
-    if (!value) return "";
+    if (isNull(value)) return "";
     return value;
   };
 
