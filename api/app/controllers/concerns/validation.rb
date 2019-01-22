@@ -46,8 +46,7 @@ module Validation
                   :remove_avatar, attachment(:avatar), attachment(:hero), :download_url,
                   attachment(:cover), :remove_hero, :draft, :remove_cover,
                   :download_call_to_action, :publication_date, metadata(Project),
-                  :avatar_color, :slug, attachment(:published_text_attachment),
-                  :remove_published_text_attachment, :tag_list]
+                  :avatar_color, :slug, :tag_list]
     relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
