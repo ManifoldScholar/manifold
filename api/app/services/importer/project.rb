@@ -66,8 +66,8 @@ module Importer
       create_twitter_queries(project)
       import_collaborators(project)
       import_subject(project)
-      import_published_text(project, @project_json[:published_text]) if include_texts
-      import_other_texts(project, @project_json[:texts]) if include_texts
+      import_texts(project, @project_json[:published_texts], published: true) if include_texts
+      import_texts(project, @project_json[:texts]) if include_texts
       import_resources(project)
     end
     # rubocop:enable all
@@ -139,27 +139,18 @@ module Importer
       outcome.result if outcome.valid?
     end
 
-    def import_other_texts(project, texts)
+    def import_texts(project, texts, **attrs)
       return unless texts
+      texts = texts.is_a?(Array) ? texts : [texts]
       texts.each do |text_file_name|
         text_path = "#{@path}/texts/#{text_file_name}"
         text = import_text(project, text_path)
         if text.present?
-          @logger.info "Created text #{text.title}"
+          text.update attrs if attrs.present?
+          @logger.info "Created #{'published ' if text.published?}text #{text.title}"
         else
           @logger.error "Unable to import project text at #{text_path}"
         end
-      end
-    end
-
-    def import_published_text(project, text_file_name)
-      text_path = "#{@path}/texts/#{text_file_name}"
-      text = import_text(project, text_path)
-      if text.present?
-        project.update published_text: text
-        @logger.info "Created published text #{text.title}"
-      else
-        @logger.error "Unable to import project published text at #{text_path}"
       end
     end
 
