@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Maker from "frontend/components/maker";
 import Helper from "global/components/helper";
-import { Link } from "react-router-dom";
 import has from "lodash/has";
 import some from "lodash/some";
 import isEmpty from "lodash/isEmpty";
-import lh from "helpers/linkHandler";
 import classNames from "classnames";
 
 export default class ProjectHero extends Component {
@@ -165,37 +163,6 @@ export default class ProjectHero extends Component {
     );
   }
 
-  renderPublishedText(project, position) {
-    const publishedText = project.relationships.publishedText;
-    const publishedTextTocId = project.attributes.publishedTextTocId;
-    if (!publishedText) return null;
-
-    return (
-      <section className={"project-entry " + position}>
-        <Link
-          to={lh.link("reader", publishedText.attributes.slug)}
-          className="button-secondary"
-        >
-          <i className="manicon manicon-glasses" aria-hidden="true" />
-          <span>{"Start Reading"}</span>
-        </Link>
-        {publishedTextTocId ? (
-          <Link
-            to={lh.link(
-              "readerSection",
-              publishedText.attributes.slug,
-              publishedTextTocId
-            )}
-            className="button-secondary dull"
-          >
-            <i className="manicon manicon-bullet-list" aria-hidden="true" />
-            <span>{"View Contents"}</span>
-          </Link>
-        ) : null}
-      </section>
-    );
-  }
-
   renderPurchaseLink(attr) {
     if (!attr.purchaseUrl) return null;
 
@@ -302,7 +269,6 @@ export default class ProjectHero extends Component {
             </div>
           </div>
           <div className="project-info">
-            {this.renderPublishedText(project, "top")}
             <h1 className="project-title">
               <span
                 className="title-text"
@@ -313,7 +279,6 @@ export default class ProjectHero extends Component {
             </h1>
             {this.listMakers(project.relationships)}
             {this.renderDescription(attr)}
-            {this.renderPublishedText(project, "bottom")}
             {this.renderSocial(attr)}
             {this.renderPublishedTextLinks(attr)}
           </div>

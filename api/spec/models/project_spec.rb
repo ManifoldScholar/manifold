@@ -44,6 +44,15 @@ RSpec.describe Project, type: :model do
     expect(project.contributors.length).to be 2
   end
 
+  it "has many published texts" do
+    project = FactoryBot.create(:project)
+    text_a = FactoryBot.create(:text, project: project, published: true)
+    text_b = FactoryBot.create(:text, project: project, published: true)
+    FactoryBot.create(:text, project: project, published: false)
+
+    expect(project.published_texts).to match_array [text_a, text_b]
+  end
+
   it "is valid with a creator" do
     creator = FactoryBot.create(:user)
     project = FactoryBot.create(:project, creator: creator)
