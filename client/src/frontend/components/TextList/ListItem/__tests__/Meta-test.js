@@ -1,15 +1,17 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Thumbnail from "../Thumbnail";
+import Meta from "../Meta";
 import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
-describe("Frontend.Text.Thumbnail component", () => {
-  const text = build.entity.text("1");
+describe("Frontend.TextList.ListItem.Meta component", () => {
 
   it("renders correctly", () => {
     const component = renderer.create(
-      wrapWithRouter(<Thumbnail text={text} />)
+      <Meta
+        text={build.entity.text("1")}
+        datesVisible
+        publishedVisible
+      />
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

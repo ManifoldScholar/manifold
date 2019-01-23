@@ -13,7 +13,8 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
     showDates: true,
     showSubtitles: true,
     showCategoryLabels: true,
-    showCovers: true
+    showCovers: true,
+    showUncategorized: true
   };
 
   get categories() {
@@ -47,6 +48,10 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
             <Form.Switch
               label="Show Category Labels?"
               name="attributes[showCategoryLabels]"
+            />
+            <Form.Switch
+              label="Show Uncategorized Texts?"
+              name="attributes[showUncategorized]"
             />
           </div>
         </div>
