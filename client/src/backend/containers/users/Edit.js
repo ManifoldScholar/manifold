@@ -10,6 +10,7 @@ import Form from "backend/components/form";
 import FormContainer from "backend/containers/form";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
+import Navigation from "backend/components/navigation";
 
 const { request, flush } = entityStoreActions;
 
@@ -112,28 +113,19 @@ export class UsersEditContainer extends PureComponent {
             {...this.props}
           />
         ) : null}
-        <header className="drawer-header">
-          <h2 className="heading-quaternary">
-            {`${attr.firstName} ${attr.lastName}`}
-          </h2>
-          <div className="buttons-bare-vertical">
-            <button
-              className="button-bare-primary"
-              onClick={this.handleResetPasswordClick}
-            >
-              {"Reset Password"}
-              <i className="manicon manicon-key" aria-hidden="true" />
-            </button>
-            <br />
-            <button
-              className="button-bare-primary"
-              onClick={this.handleUserDestroy}
-            >
-              {"Delete User"}
-              <i className="manicon manicon-trashcan" aria-hidden="true" />
-            </button>
-          </div>
-        </header>
+
+        <Navigation.DrawerHeader
+          title={`${attr.firstName} ${attr.lastName}`}
+          buttons={[
+            {
+              onClick: this.handleResetPasswordClick,
+              icon: "manicon-key",
+              label: "Reset Password"
+            },
+            { onClick: this.handleUserDestroy, icon: "trash", label: "Delete" }
+          ]}
+        />
+
         <section className="form-section">
           <FormContainer.Form
             model={this.props.user}

@@ -8,7 +8,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
       data-id="submit"
       onSubmit={[Function]}
     >
-      <div
+      <header
         className="drawer-header"
       >
         <div
@@ -30,7 +30,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
             value=""
           />
         </div>
-      </div>
+      </header>
       <div
         className="form-input"
       >

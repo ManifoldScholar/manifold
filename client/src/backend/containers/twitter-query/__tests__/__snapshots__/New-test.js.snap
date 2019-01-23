@@ -8,6 +8,10 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
     <h2
       className="heading-quaternary"
     >
+      <i
+        aria-hidden="true"
+        className="manicon manicon-twitter"
+      />
       New Twitter Query
     </h2>
   </header>

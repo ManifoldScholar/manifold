@@ -4,6 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import Form from "./Form";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
+import Navigation from "backend/components/navigation";
 
 export class MakersNewContainer extends PureComponent {
   static displayName = "Makers.New";
@@ -24,9 +25,7 @@ export class MakersNewContainer extends PureComponent {
   render() {
     return (
       <section>
-        <header className="drawer-header">
-          <h2 className="heading-quaternary">New Maker</h2>
-        </header>
+        <Navigation.DrawerHeader title="New Maker" />
         <Form
           successHandler={this.handleSuccess}
           options={{ adds: requests.beMakers }}

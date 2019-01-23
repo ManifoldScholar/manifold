@@ -8,6 +8,7 @@ import FormContainer from "backend/containers/form";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
+import Navigation from "backend/components/navigation";
 
 const { request, flush } = entityStoreActions;
 
@@ -94,20 +95,16 @@ export class SettingsSubjectsEditContainer extends PureComponent {
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}
-        <header className="drawer-header">
-          <h2 className="heading-quaternary">{attr.name}</h2>
-          <div className="buttons-bare-vertical">
-            <button
-              className="button-bare-primary"
-              onClick={event => {
-                this.handleSubjectDestroy(event, subject);
-              }}
-            >
-              {"Delete Subject"}
-              <i className="manicon manicon-trashcan" aria-hidden="true" />
-            </button>
-          </div>
-        </header>
+        <Navigation.DrawerHeader
+          title={attr.name}
+          buttons={[
+            {
+              onClick: event => this.handleSubjectDestroy(event, subject),
+              icon: "trash",
+              label: "Delete"
+            }
+          ]}
+        />
         <section className="form-section">
           <FormContainer.Form
             model={subject}

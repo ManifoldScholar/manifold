@@ -6,6 +6,7 @@ import { permissionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";
 import { select } from "utils/entityUtils";
+import Navigation from "backend/components/navigation";
 
 const { request, flush } = entityStoreActions;
 
@@ -101,20 +102,18 @@ export class PermissionEdit extends PureComponent {
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}
-        <header className="drawer-header">
-          <h2 className="heading-quaternary">Edit Permissions</h2>
-          <div className="buttons-bare-vertical">
-            <button
-              className="button-bare-primary"
-              onClick={event => {
+        <Navigation.DrawerHeader
+          title="Edit Permission"
+          buttons={[
+            {
+              onClick: event => {
                 this.handleRemoveAll(event, permission);
-              }}
-            >
-              {"Remove All Permissions"}
-              <i className="manicon manicon-trashcan" aria-hidden="true" />
-            </button>
-          </div>
-        </header>
+              },
+              icon: "trash",
+              label: "Delete User Permissions"
+            }
+          ]}
+        />
         <Form
           entity={this.props.entity}
           permission={permission}

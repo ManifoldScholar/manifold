@@ -1,37 +1,4 @@
 .project-collection-form {
-  .drawer-header {
-    @include respond($break50) {
-      padding-bottom: 33px;
-    }
-
-    .form-input {
-      input[type='text'] {
-        height: auto;
-        padding: 0 0 0.4em;
-        font-size: 24px;
-
-        @include respond($break90) {
-          padding: 0 0 0.25em;
-          font-size: 30px;
-        }
-      }
-    }
-
-    .buttons-bare-vertical {
-      @extend %header-utility-button;
-      margin-top: 10px;
-
-      @include respond($break60) {
-        margin-top: 20px;
-      }
-
-      button:first-child {
-        .manicon {
-          margin-left: 6px;
-        }
-      }
-    }
-  }
 
   .button-switch-primary .button {
     font-size: 17px;
