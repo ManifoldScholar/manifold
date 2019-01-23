@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Form from "backend/containers/project/content/Form";
-import lh from "helpers/linkHandler";
+import Form from "./Form";
 import { Redirect } from "react-router-dom";
+import lh from "helpers/linkHandler";
 
 export class ContentBlockNewContainer extends Component {
   static displayName = "ContentBlock.New";

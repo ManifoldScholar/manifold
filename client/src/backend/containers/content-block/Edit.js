@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { contentBlocksAPI, requests } from "api";
 import { select } from "utils/entityUtils";
-import Form from "backend/containers/project/content/Form";
+import Form from "./Form";
 import { entityStoreActions } from "actions";
 
 const { request, flush } = entityStoreActions;
