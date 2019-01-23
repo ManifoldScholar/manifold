@@ -22,7 +22,11 @@ export default class ProjectContentBlockInListPartsEdit extends PureComponent {
         className={`${this.props.baseClass}__button`}
         onClick={this.props.clickHandler}
       >
-        <Utility.IconComposer icon="pencil-simple" size={26} iconClass={iconClass} />
+        <Utility.IconComposer
+          icon="pencil-simple"
+          size={26}
+          iconClass={iconClass}
+        />
       </button>
     );
   }
