@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import pick from "lodash/pick";
 import Wrapper from "../parts/Wrapper";
-import Heading from "../parts/Heading";
-import TextList from "frontend/components/text-list";
+import Header from "./TextsBlock/Header";
+import TextList from "frontend/components/TextList";
+import pick from "lodash/pick";
 
 export default class ProjectContentBlockTextsBlock extends PureComponent {
   static displayName = "Project.Content.Block.Texts";
@@ -20,67 +20,77 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
     icon: "bookStackIsometric"
   };
 
-  get blockTitle() {
-    const customTitle = this.props.block.attributes.title;
-
-    return customTitle || this.props.title;
-  }
-
-  get blockDescription() {
-    return this.props.block.attributes.descriptionFormatted;
-  }
-
-  get attributeVisibility() {
-    return pick(this.props.block.attributes, [
-      "showAuthors",
-      "showCategoryLabels",
-      "showCovers",
-      "showDates",
-      "showDescriptions",
-      "showSubtitles"
-    ]);
+  get title() {
+    return this.props.block.attributes.title || this.props.title;
   }
 
   get texts() {
     return this.props.project.relationships.texts;
   }
 
-  get textCategories() {
+  get includedCategories() {
     return this.props.block.relationships.includedCategories;
   }
 
-  get showCategories() {
-    return this.textCategories.length > 0;
+  get projectCategories() {
+    return this.props.project.relationships.textCategories;
+  }
+
+  get categories() {
+    if (this.includedCategories.length > 0) return this.includedCategories;
+    return this.projectCategories;
+  }
+
+  get uncategorizedTexts() {
+    return this.texts.filter(text => text.relationships.category === null);
+  }
+
+  get visibility() {
+    return pick(this.props.block.attributes, [
+      "showAuthors",
+      "showCategoryLabels",
+      "showCovers",
+      "showDates",
+      "showDescriptions",
+      "showSubtitles",
+      "showUncategorized"
+    ]);
+  }
+
+  textsForCategory(category) {
+    return this.texts.filter(text => text.relationships.category === category);
   }
 
   render() {
-    const blockClass = "entity-section-wrapper";
+    const baseClass = "entity-section-wrapper";
 
     return (
       <Wrapper>
-        <Heading title={this.blockTitle} icon={this.props.icon} />
-        {this.blockDescription && (
-          <div className={`${blockClass}__details`}>
-            <p
-              className="description pad-bottom"
-              dangerouslySetInnerHTML={{
-                __html: this.blockDescription
-              }}
-            />
-          </div>
-        )}
-        <div className={`${blockClass}__body`}>
+        <Header
+          title={this.title}
+          icon={this.props.icon}
+          block={this.props.block}
+          baseClass={baseClass}
+        />
+        <div className={`${baseClass}__body`}>
           <div className="text-list">
-            {this.showCategories ? (
-              <TextList.Grouped
-                categories={this.textCategories}
-                texts={this.texts}
-                visibility={this.attributeVisibility}
+            {this.categories.map(category => (
+              <TextList
+                label={
+                  this.visibility.showCategoryLabels
+                    ? category.attributes.title
+                    : null
+                }
+                texts={this.textsForCategory(category)}
+                key={category.id}
+                {...this.visibility}
               />
-            ) : (
-              <TextList.Ungrouped
-                texts={this.texts}
-                visibility={this.attributeVisibility}
+            ))}
+            {this.visibility.showUncategorized && (
+              <TextList
+                label="Uncategorized"
+                texts={this.uncategorizedTexts}
+                {...this.visibility}
               />
             )}
           </div>

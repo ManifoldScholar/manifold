@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.TextList.ListItem.Bibliographic component renders correctly 1`] = `
+Array [
+  <h3
+    className="text-thumbnail__name"
+  >
+    <span
+      className="text-thumbnail__title"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Ain't No Thang",
+        }
+      }
+    />
+  </h3>,
+  <div
+    className="text-thumbnail__creators"
+  >
+    <span
+      style={
+        Object {
+          "fontStyle": "italic",
+        }
+      }
+    >
+      by 
+    </span>
+    Andre3000, Big Boi
+  </div>,
+  <span
+    className="text-thumbnail__date text-thumbnail__date--block"
+  >
+    <span>
+      Added April 2017
+    </span>
+  </span>,
+]
+`;
