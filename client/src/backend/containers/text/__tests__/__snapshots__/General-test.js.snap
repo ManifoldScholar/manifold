@@ -55,7 +55,6 @@ exports[`Backend Text General Container renders correctly 1`] = `
       </div>
       <div
         className="form-input"
-        style={Object {}}
       >
         <h4
           className="form-input-heading above"
@@ -84,6 +83,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
       </div>
       <div
         className="form-input"
+        style={Object {}}
       >
         <h4
           className="form-input-heading"
