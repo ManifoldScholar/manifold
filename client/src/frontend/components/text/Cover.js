@@ -9,37 +9,41 @@ export default class TextCover extends PureComponent {
 
   static propTypes = {
     text: PropTypes.object.isRequired,
-    blockClass: PropTypes.string
+    baseClass: PropTypes.string
   };
 
   static defaultProps = {
-    new: false
+    new: false,
+    baseClass: "text-cover"
   };
 
-  // Since we only have demo icons at this point, thumbnail can either be an image or a
-  // placeholder icon
-  renderThumbnail(text) {
-    let thumbnail = null;
-    if (get(text.attributes, "coverStyles.small")) {
-      thumbnail = (
-        <img
-          src={text.attributes.coverStyles.small}
-          alt={"Thumbnail image for " + text.attributes.titlePlaintext}
-          classNames={classNames(this.props.blockClass)}
-        />
-      );
-    } else {
-      thumbnail = (
-        <Icon.LoosePages
-          size={78}
-          iconClass={classNames(this.props.blockClass)}
-        />
-      );
-    }
-    return thumbnail;
+  get text() {
+    return this.props.text;
+  }
+
+  get hasCover() {
+    return get(this.text.attributes, "coverStyles.small");
   }
 
   render() {
-    return this.renderThumbnail(this.props.text);
+    const elemClass = `${this.props.baseClass}__cover`;
+    const modifier = this.hasCover ? "image" : "svg";
+
+    return (
+      <figure className={`${elemClass} ${elemClass}--${modifier}`}>
+        {this.hasCover ? (
+          <img
+            src={this.text.attributes.coverStyles.small}
+            alt={"Thumbnail image for " + this.text.attributes.titlePlaintext}
+            className={classNames(this.props.baseClass)}
+          />
+        ) : (
+          <Icon.LoosePages
+            size={78}
+            iconClass={classNames(this.props.baseClass)}
+          />
+        )}
+      </figure>
+    );
   }
 }
