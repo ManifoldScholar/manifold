@@ -14,7 +14,7 @@ import cloneDeep from "lodash/cloneDeep";
 const { request } = entityStoreActions;
 
 export class ProjectContent extends PureComponent {
-  static displayName = "Project.Content";
+  static displayName = "ContentBlock.Builder";
 
   static propTypes = {
     project: PropTypes.object,
