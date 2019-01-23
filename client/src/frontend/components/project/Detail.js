@@ -10,7 +10,7 @@ import TextList from "frontend/components/text-list";
 import Hero from "./Hero";
 import Event from "frontend/components/event";
 import Meta from "global/components/meta";
-import Content from "./Content";
+import ContentBlock from "frontend/components/content-block";
 
 class Detail extends Component {
   static displayName = "Project.Detail";
@@ -221,7 +221,7 @@ class Detail extends Component {
       <div>
         <Hero project={this.props.project} />
 
-        <Content project={this.props.project} />
+        <ContentBlock project={this.props.project} />
       </div>
     );
   }
