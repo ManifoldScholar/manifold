@@ -12,6 +12,7 @@ module Content
                               show_covers: [:boolean, default: false],
                               show_dates: [:boolean, default: false],
                               show_category_labels: [:boolean, default: false],
+                              show_uncategorized: [:boolean, default: false],
                               title: :string,
                               description: :text
 

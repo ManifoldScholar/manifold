@@ -20,7 +20,7 @@ RSpec.describe Content::TextsBlock do
   end
 
   it "has the correct available attributes" do
-    expect(texts_block.available_attributes).to match_array [:show_authors, :show_descriptions, :show_subtitles, :show_covers, :show_dates, :show_category_labels, :title, :description]
+    expect(texts_block.available_attributes).to match_array [:show_authors, :show_descriptions, :show_subtitles, :show_covers, :show_dates, :show_category_labels, :title, :description, :show_uncategorized]
   end
 
   it "has a formatted description" do
