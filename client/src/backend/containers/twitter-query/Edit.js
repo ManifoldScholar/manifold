@@ -7,6 +7,7 @@ import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { twitterQueriesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
+import Navigation from "backend/components/navigation";
 
 const { request, flush } = entityStoreActions;
 
@@ -140,27 +141,26 @@ export class TwitterQueryEditContainer extends PureComponent {
     const { twitterQuery } = this.props;
     const projectId = this.props.match.params.pId;
 
+    const buttons = [
+      { onClick: this.handleQueryDestroy, icon: "trash", label: "Delete" }
+    ];
+    if (this.twitterEnabled)
+      buttons.push({
+        onClick: this.handleQueryFetch,
+        icon: "check",
+        label: "Fetch Tweets"
+      });
+
     return (
       <div>
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}
-        <header className="drawer-header">
-          <h2 className="heading-quaternary">
-            <i className="manicon manicon-twitter" aria-hidden="true" />
-            <span>{twitterQuery.attributes.displayName}</span>
-          </h2>
-          <div className="buttons-bare-vertical">
-            {this.renderFetchButton()}
-            <button
-              className="button-bare-primary"
-              onClick={this.handleQueryDestroy}
-            >
-              {"Delete Query"}
-              <i className="manicon manicon-trashcan" aria-hidden="true" />
-            </button>
-          </div>
-        </header>
+        <Navigation.DrawerHeader
+          title={twitterQuery.attributes.displayName}
+          manicon="twitter"
+          buttons={buttons}
+        />
         <section className="form-section">
           <TwitterQuery.Form
             name={requests.beTwitterQueryUpdate}

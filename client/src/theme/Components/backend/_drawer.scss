@@ -128,6 +128,10 @@
     padding-bottom: 21px;
 
     @include respond($break50) {
+      padding-bottom: 33px;
+    }
+
+    @include respond($break50) {
       padding-bottom: 48px;
     }
 
@@ -151,17 +155,54 @@
       color: $neutral50;
       text-transform: none;
     }
+
+    .form-input {
+      input[type='text'] {
+        height: auto;
+        padding: 0 0 0.4em;
+        font-size: 24px;
+
+        @include respond($break90) {
+          padding: 0 0 0.25em;
+          font-size: 30px;
+        }
+      }
+    }
+
+    .buttons-bare-vertical {
+      @extend %header-utility-button;
+      margin-top: 10px;
+
+      /* stylelint-disable max-nesting-depth */
+      button {
+        svg {
+          margin-top: -5px;
+          margin-right: 5px;
+          color: $accentPrimary;
+
+          &.notice {
+            color: $sp40Tertiary;
+
+            &:hover {
+              color: $neutral05;
+            }
+          }
+        }
+      }
+      /* stylelint-enable max-nesting-depth */
+    }
+
   }
 
   .heading-quaternary {
     display: flex;
     align-items: center;
     min-width: 0;
-    padding: 5px 0 1em;
+    padding: 5px 0 0;
     color: $neutralWhite;
 
     @include respond($break50) {
-      padding: 32px 0 1.1em;
+      padding: 32px 0 0;
     }
 
     @include respond($break90) {

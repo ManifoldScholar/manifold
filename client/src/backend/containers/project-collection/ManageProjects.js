@@ -7,6 +7,7 @@ import { select, meta } from "utils/entityUtils";
 import { projectsAPI, projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
+import Navigation from "backend/components/navigation";
 
 const { request } = entityStoreActions;
 const perPage = 12;
@@ -144,20 +145,17 @@ export class ProjectCollectionManageProjects extends PureComponent {
 
     return (
       <React.Fragment>
-        <header className="drawer-header">
-          <h2 className="heading-quaternary less-space-bottom">
-            <i
-              className={`manicon manicon-collection-manual`}
-              aria-hidden="true"
-            />
-            {this.props.projectCollection.attributes.title}
-          </h2>
+        <Navigation.DrawerHeader
+          manicon="collection-manual"
+          title={this.props.projectCollection.attributes.title}
+        >
           <p className="instructions">
             Select which projects should be included in this collection. Click
             the plus sign to add a project to the collection. Click the
             checkmark to remove a project.
           </p>
-        </header>
+        </Navigation.DrawerHeader>
+
         {this.renderProjectCount(
           this.props.projectCollection,
           this.props.projectsMeta

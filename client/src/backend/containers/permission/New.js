@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Form from "./Form";
+import Navigation from "backend/components/navigation";
 
 export default class PermissionNew extends PureComponent {
   static displayName = "Permission.New";
@@ -13,11 +14,7 @@ export default class PermissionNew extends PureComponent {
   render() {
     return (
       <section>
-        <header className="drawer-header">
-          <h2 className="heading-quaternary less-space-bottom">
-            Grant Permissions
-          </h2>
-        </header>
+        <Navigation.DrawerHeader title="Grant Permissions" />
         <Form entity={this.props.entity} history={this.props.history} />
       </section>
     );

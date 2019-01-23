@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import KindPicker from "./KindPicker";
 import IconPicker from "./IconPicker";
 import SmartAttributes from "./SmartAttributes";
+import Navigation from "backend/components/navigation";
 
 class Fields extends Component {
   static displayName = "ProjectCollection.Form.Fields";
@@ -22,9 +23,19 @@ class Fields extends Component {
   }
 
   render() {
+    const buttons = this.id
+      ? [
+          {
+            onClick: this.props.handleDestroy,
+            icon: "trash",
+            label: "delete"
+          }
+        ]
+      : [];
+
     return (
       <React.Fragment>
-        <div className="drawer-header">
+        <Navigation.DrawerHeader buttons={buttons}>
           <Form.TextInput
             wide
             focusOnMount
@@ -32,19 +43,8 @@ class Fields extends Component {
             name="attributes[title]"
             placeholder="Enter collection name"
           />
-          {this.id && (
-            <div className="buttons-bare-vertical">
-              <button
-                className="button-bare-primary"
-                onClick={this.props.handleDestroy}
-                type="button"
-              >
-                <i className="manicon manicon-trashcan" aria-hidden="true" />
-                {"Delete"}
-              </button>
-            </div>
-          )}
-        </div>
+        </Navigation.DrawerHeader>
+
         <KindPicker {...this.props} />
         <Form.TextInput
           wide

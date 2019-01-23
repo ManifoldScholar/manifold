@@ -8,8 +8,7 @@ import { makersAPI, requests } from "api";
 import get from "lodash/get";
 import Form from "./Form";
 import lh from "helpers/linkHandler";
-
-import Authorize from "hoc/authorize";
+import Navigation from "backend/components/navigation";
 
 const { request, flush } = entityStoreActions;
 
@@ -80,20 +79,18 @@ export class MakersEditContainer extends PureComponent {
 
     return (
       <div>
-        <header className="drawer-header">
-          <h2 className="heading-quaternary">{attr.fullName}</h2>
-          <Authorize entity={maker} ability="delete">
-            <div className="buttons-bare-vertical">
-              <button
-                className="button-bare-primary"
-                onClick={this.handleMakerDestroy}
-              >
-                {"Delete Maker"}
-                <i className="manicon manicon-trashcan" aria-hidden="true" />
-              </button>
-            </div>
-          </Authorize>
-        </header>
+        <Navigation.DrawerHeader
+          title={attr.fullName}
+          buttons={[
+            {
+              onClick: this.handleMakerDestroy,
+              icon: "trash",
+              label: "Delete",
+              entity: maker,
+              ability: "delete"
+            }
+          ]}
+        />
         <Form maker={maker} />
       </div>
     );

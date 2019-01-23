@@ -4,6 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import TwitterQuery from "backend/components/twitter-query";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
+import Navigation from "backend/components/navigation";
 
 export class TwitterQueryNewContainer extends Component {
   static displayName = "TwitterQuery.New";
@@ -30,9 +31,7 @@ export class TwitterQueryNewContainer extends Component {
 
     return (
       <section>
-        <header className="drawer-header">
-          <h2 className="heading-quaternary">New Twitter Query</h2>
-        </header>
+        <Navigation.DrawerHeader title="New Twitter Query" manicon="twitter" />
         <TwitterQuery.Form
           name={requests.beTwitterQueryCreate}
           projectId={pId}

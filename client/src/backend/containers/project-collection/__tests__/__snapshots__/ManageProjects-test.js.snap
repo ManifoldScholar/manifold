@@ -6,7 +6,7 @@ Array [
     className="drawer-header"
   >
     <h2
-      className="heading-quaternary less-space-bottom"
+      className="heading-quaternary"
     >
       <i
         aria-hidden="true"
