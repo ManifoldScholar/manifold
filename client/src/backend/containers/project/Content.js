@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Content from "backend/components/project/Content";
+import ContentBlock from "backend/components/content-block";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { projectsAPI, requests } from "api";
@@ -70,7 +70,7 @@ export class ProjectContentContainer extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
-        <Content
+        <ContentBlock.Builder
           dispatch={this.props.dispatch}
           history={this.props.history}
           project={project}
@@ -85,7 +85,7 @@ export class ProjectContentContainer extends PureComponent {
               drawerProps: { closeCallback, ...this.drawerProps }
             })
           }
-        </Content>
+        </ContentBlock.Builder>
       </Authorize>
     );
   }

@@ -4,7 +4,6 @@ import Wrapper from "../parts/Wrapper";
 import Heading from "../parts/Heading";
 import ResourceCollectionList from "frontend/components/resource-collection-list";
 import ResourceList from "frontend/components/resource-list";
-import lh from "helpers/linkHandler";
 
 export default class ProjectContentBlockResourcesBlock extends PureComponent {
   static displayName = "Project.Content.Block.Resources";
@@ -12,7 +11,8 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
   static propTypes = {
     title: PropTypes.string,
     icon: PropTypes.string,
-    project: PropTypes.object.isRequired
+    project: PropTypes.object.isRequired,
+    block: PropTypes.object.isRequired
   };
 
   static defaultProps = {

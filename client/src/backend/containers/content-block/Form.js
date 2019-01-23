@@ -4,7 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { projectsAPI, contentBlocksAPI, requests } from "api";
 import FormContainer from "backend/containers/form";
 import Form from "backend/components/form";
-import TypeForm from "backend/components/project/Content/TypeForm";
+import ContentBlock from "backend/components/content-block";
 import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;
@@ -77,13 +77,12 @@ export class ProjectContentFormContainer extends Component {
         onSuccess={this.fetchContentBlocks}
         className="form-secondary"
         notificationScope="drawer"
-        debug
       >
-        <TypeForm
+        <ContentBlock.TypeForm
           contentBlock={this.props.contentBlock}
           project={this.project}
         />
-        <Form.Save text="Save Content Block" />
+        <Form.Save text="Save" />
       </FormContainer.Form>
     );
   }
