@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Header from "./parts/Header";
-import resolver from "../helpers/resolver";
+import resolver from "../../helpers/resolver";
 import Block from "../Block";
 import { Droppable } from "react-beautiful-dnd";
 import classNames from "classnames";
