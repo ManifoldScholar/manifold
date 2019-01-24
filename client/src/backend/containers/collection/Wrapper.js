@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
-import Dialog from "backend/components/dialog";
 import Navigation from "backend/components/navigation";
 import Utility from "global/components/utility";
 import { entityStoreActions, notificationActions } from "actions";
@@ -11,6 +10,7 @@ import { collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
+import withConfirmation from "hoc/with-confirmation";
 
 import Authorize from "hoc/authorize";
 
@@ -30,15 +30,13 @@ export class CollectionWrapperContainer extends PureComponent {
     dispatch: PropTypes.func,
     match: PropTypes.object,
     route: PropTypes.object,
-    history: PropTypes.object
+    history: PropTypes.object,
+    confirm: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
 
   componentDidMount() {
     this.fetchCollection();
@@ -53,10 +51,6 @@ export class CollectionWrapperContainer extends PureComponent {
     const collectionRequest = request(call, requests.beCollection);
     this.props.dispatch(collectionRequest);
   };
-
-  closeDialog() {
-    this.setState({ confirmation: null });
-  }
 
   doPreview = event => {
     event.preventDefault();
@@ -102,22 +96,10 @@ export class CollectionWrapperContainer extends PureComponent {
     this.props.dispatch(notificationActions.addNotification(notification));
   }
 
-  handleCollectionDestroy = event => {
+  handleCollectionDestroy = () => {
     const heading = "Are you sure you want to delete this collection?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.doDestroy(event);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, this.doDestroy);
   };
 
   renderUtility() {
@@ -164,9 +146,6 @@ export class CollectionWrapperContainer extends PureComponent {
             from={lh.link("backendCollection", collection.id)}
             candidates={secondaryLinks}
           />
-          {this.state.confirmation ? (
-            <Dialog.Confirm {...this.state.confirmation} />
-          ) : null}
           <Navigation.DetailHeader
             type="collection"
             backUrl={lh.link(
@@ -192,4 +171,4 @@ export class CollectionWrapperContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(CollectionWrapperContainer);
+export default withConfirmation(connectAndFetch(CollectionWrapperContainer));

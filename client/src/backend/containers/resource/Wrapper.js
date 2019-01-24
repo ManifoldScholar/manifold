@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
-import Dialog from "backend/components/dialog";
 import Navigation from "backend/components/navigation";
 import Utility from "global/components/utility";
 import { entityStoreActions, notificationActions } from "actions";
@@ -11,6 +10,7 @@ import { resourcesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
+import withConfirmation from "hoc/with-confirmation";
 
 import Authorize from "hoc/authorize";
 
@@ -29,15 +29,13 @@ export class ResourceWrapperContainer extends PureComponent {
     match: PropTypes.object,
     dispatch: PropTypes.func,
     history: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
+    confirm: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
 
   componentDidMount() {
     this.fetchResource();
@@ -52,10 +50,6 @@ export class ResourceWrapperContainer extends PureComponent {
     const resourceRequest = request(call, requests.beResource);
     this.props.dispatch(resourceRequest);
   };
-
-  closeDialog() {
-    this.setState({ confirmation: null });
-  }
 
   doPreview = event => {
     event.preventDefault();
@@ -98,22 +92,10 @@ export class ResourceWrapperContainer extends PureComponent {
     this.props.dispatch(notificationActions.addNotification(notification));
   }
 
-  handleResourceDestroy = event => {
+  handleResourceDestroy = () => {
     const heading = "Are you sure you want to delete this resource?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.doDestroy(event);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, this.doDestroy);
   };
 
   renderUtility(resource) {
@@ -162,10 +144,6 @@ export class ResourceWrapperContainer extends PureComponent {
             from={lh.link("backendResource", resource.id)}
             candidates={secondaryLinks}
           />
-
-          {this.state.confirmation ? (
-            <Dialog.Confirm {...this.state.confirmation} />
-          ) : null}
           <Navigation.DetailHeader
             type="resource"
             backUrl={lh.link(
@@ -190,4 +168,4 @@ export class ResourceWrapperContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ResourceWrapperContainer);
+export default withConfirmation(connectAndFetch(ResourceWrapperContainer));

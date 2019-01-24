@@ -20,7 +20,12 @@ export class ProjectCollectionSettings extends PureComponent {
   static propTypes = {
     projectCollection: PropTypes.object,
     projectCollectionMeta: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    confirm: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
   };
 
   handleDestroy = () => {

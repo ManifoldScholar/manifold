@@ -26,6 +26,10 @@ export class ProjectTextsContainer extends Component {
     match: PropTypes.object
   };
 
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   static getDerivedStateFromProps(props, state = {}) {
     if (
       props.projectResponse === state.response &&

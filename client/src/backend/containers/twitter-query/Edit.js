@@ -2,12 +2,12 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import TwitterQuery from "backend/components/twitter-query";
-import Dialog from "backend/components/dialog";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { twitterQueriesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
+import withConfirmation from "hoc/with-confirmation";
 
 const { request, flush } = entityStoreActions;
 
@@ -25,15 +25,14 @@ export class TwitterQueryEditContainer extends PureComponent {
     twitterQuery: PropTypes.object,
     match: PropTypes.object,
     history: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    settings: PropTypes.object,
+    confirm: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
 
   componentDidMount() {
     this.fetchTwitterQuery(this.props.match.params.id);
@@ -81,22 +80,10 @@ export class TwitterQueryEditContainer extends PureComponent {
         </p>
       </div>
     );
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.destroyQuery();
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, this.destroyQuery);
   };
 
-  destroyQuery() {
+  destroyQuery = () => {
     const { twitterQuery } = this.props;
     const call = twitterQueriesAPI.destroy(twitterQuery.id);
     const options = { removes: twitterQuery };
@@ -104,7 +91,7 @@ export class TwitterQueryEditContainer extends PureComponent {
     this.props.dispatch(queryRequest).promise.then(() => {
       this.redirectToProjectSocial(this.props.match.params.pId);
     });
-  }
+  };
 
   handleQueryFetch = () => {
     const call = twitterQueriesAPI.fetch(this.props.twitterQuery.id);
@@ -116,24 +103,6 @@ export class TwitterQueryEditContainer extends PureComponent {
 
   redirectToProjectSocial(pId) {
     return this.props.history.push(lh.link("backendProjectSocial", pId));
-  }
-
-  closeDialog() {
-    this.setState({ confirmation: null });
-  }
-
-  renderFetchButton() {
-    if (!this.twitterEnabled) return null;
-
-    return (
-      <React.Fragment>
-        <button className="button-bare-primary" onClick={this.handleQueryFetch}>
-          {"Fetch Tweets"}
-          <i className="manicon manicon-check" aria-hidden="true" />
-        </button>
-        <br />
-      </React.Fragment>
-    );
   }
 
   render() {
@@ -153,9 +122,6 @@ export class TwitterQueryEditContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
         <Navigation.DrawerHeader
           title={twitterQuery.attributes.displayName}
           manicon="twitter"
@@ -174,4 +140,4 @@ export class TwitterQueryEditContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(TwitterQueryEditContainer);
+export default withConfirmation(connectAndFetch(TwitterQueryEditContainer));

@@ -9,8 +9,8 @@ import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import Utility from "global/components/utility";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
-import Dialog from "backend/components/dialog";
 import navigation from "helpers/router/navigation";
+import withConfirmation from "hoc/with-confirmation";
 
 import Authorize from "hoc/authorize";
 
@@ -31,15 +31,13 @@ class PageDetailContainer extends PureComponent {
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
-    page: PropTypes.object
+    page: PropTypes.object,
+    confirm: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
 
   componentDidMount() {
     const id = this.props.match.params.id;
@@ -91,23 +89,7 @@ class PageDetailContainer extends PureComponent {
   handleDestroy = () => {
     const heading = "Are you sure you want to delete this page?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.doDestroy();
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
-  };
-
-  closeDialog = () => {
-    this.setState({ confirmation: null });
+    this.props.confirm(heading, message, this.doDestroy);
   };
 
   doDestroy = () => {
@@ -196,10 +178,6 @@ class PageDetailContainer extends PureComponent {
   renderNew() {
     return (
       <div>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
-
         {this.renderNewHeader()}
         <Layout.BackendPanel>
           <section>{this.renderRoutes()}</section>
@@ -219,9 +197,6 @@ class PageDetailContainer extends PureComponent {
           from={lh.link("backendRecordsPage", this.id(this.props))}
           candidates={secondaryLinks}
         />
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
         {this.renderExistingHeader(page)}
         <Layout.BackendPanel
           sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
@@ -260,4 +235,4 @@ class PageDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(PageDetailContainer);
+export default withConfirmation(connectAndFetch(PageDetailContainer));

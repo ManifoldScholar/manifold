@@ -19,6 +19,10 @@ class AvatarBuilder extends Component {
     wide: PropTypes.bool
   };
 
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   onColorChange = color => {
     if (
       this.props.getModelValue("attributes[avatar][data]") ||

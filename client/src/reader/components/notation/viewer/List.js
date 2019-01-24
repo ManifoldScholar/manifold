@@ -10,10 +10,10 @@ import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-
 import { uiReaderActions, entityStoreActions } from "actions";
 import { annotationsAPI, requests } from "api";
 import { bindActionCreators } from "redux";
-import Dialog from "backend/components/dialog";
 import config from "config";
 import throttle from "lodash/throttle";
 import { scrollOptions } from "utils/domUtils";
+import withConfirmation from "hoc/with-confirmation";
 
 const { request } = entityStoreActions;
 
@@ -39,7 +39,8 @@ class NotationViewerList extends PureComponent {
     bodySelector: PropTypes.string,
     containerSize: PropTypes.number,
     sectionId: PropTypes.string,
-    textId: PropTypes.string
+    textId: PropTypes.string,
+    confirm: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -55,8 +56,7 @@ class NotationViewerList extends PureComponent {
     this.state = {
       markers: [],
       scrollY: 0,
-      previewEntry: null,
-      confirmation: null
+      previewEntry: null
     };
   }
 
@@ -209,10 +209,6 @@ class NotationViewerList extends PureComponent {
     this.updateEntries(this.props);
   }
 
-  closeDialog() {
-    this.setState({ confirmation: null });
-  }
-
   doDestroy(entry) {
     const { annotation } = entry;
     const { type, id } = annotation;
@@ -228,17 +224,7 @@ class NotationViewerList extends PureComponent {
 
   startDestroy = entry => {
     const { heading, message } = config.app.locale.dialogs.notation.destroy;
-    new Promise((resolve, reject) => {
-      this.setState({ confirmation: { resolve, reject, heading, message } });
-    }).then(
-      () => {
-        this.doDestroy(entry);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, () => this.doDestroy(entry));
   };
 
   entries(props) {
@@ -327,9 +313,6 @@ class NotationViewerList extends PureComponent {
     }`;
     return (
       <nav className={viewerClass}>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
         <ul className="viewer-list" ref={el => (this.listEl = el)}>
           {this.state.entries.map(entry => {
             return (
@@ -359,4 +342,6 @@ class NotationViewerList extends PureComponent {
   }
 }
 
-export default connect(NotationViewerList.mapStateToProps)(NotationViewerList);
+export default withConfirmation(
+  connect(NotationViewerList.mapStateToProps)(NotationViewerList)
+);
