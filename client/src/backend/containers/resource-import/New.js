@@ -55,7 +55,7 @@ export class ResourceImportNew extends PureComponent {
 
   headerRowOptions = () => {
     return [1, 2, 3, 4, 5, 6].map(i => {
-      return { label: i.toString(), value: i };
+      return { label: i.toString(), value: i.toString() };
     });
   };
 
