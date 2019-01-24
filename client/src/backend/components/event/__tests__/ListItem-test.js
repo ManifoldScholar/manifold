@@ -1,5 +1,6 @@
 import React from "react";
 import ListItem from "../ListItem";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";
 import renderer from "react-test-renderer";
@@ -22,7 +23,7 @@ describe("Event.ListItem component", () => {
   };
 
   it("renders correctly", () => {
-    const component = renderer.create(<ListItem entity={entity} />);
+    const component = renderer.create(wrapWithRouter(<ListItem entity={entity} />));
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -34,7 +35,7 @@ describe("Event.ListItem component", () => {
 
   it("triggers the destroyHandler callback when destroy is clicked", () => {
     const wrapper = Enzyme.mount(
-      <ListItem entity={entity} destroyHandler={handleDestroyMock} />
+      wrapWithRouter(<ListItem entity={entity} destroyHandler={handleDestroyMock} />)
     );
     handleDestroyMock.mockClear();
     wrapper.find('[data-id="destroy"]').simulate("click", fakeClick);

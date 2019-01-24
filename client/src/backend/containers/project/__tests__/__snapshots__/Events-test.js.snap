@@ -89,6 +89,8 @@ exports[`Backend Project Events Container renders correctly 1`] = `
             >
               <div
                 className="event-tile"
+                onClick={[Function]}
+                role="link"
               >
                 <div
                   className="event-tile__inner"
@@ -152,6 +154,8 @@ exports[`Backend Project Events Container renders correctly 1`] = `
             >
               <div
                 className="event-tile"
+                onClick={[Function]}
+                role="link"
               >
                 <div
                   className="event-tile__inner"
