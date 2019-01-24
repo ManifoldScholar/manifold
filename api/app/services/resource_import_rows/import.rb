@@ -5,6 +5,8 @@ module ResourceImportRows
 
     record :row, class: :resource_import_row
 
+    set_callback :execute, :around, :lock_resource_import!
+
     def execute
       begin
         update_resource
@@ -24,6 +26,17 @@ module ResourceImportRows
     end
 
     private
+
+    # This is added to prevent dead-locking when bulk inserting resources.  Due to how
+    # acts_as_taggable_on sets up its tables, it's possible for a resource to be inserting
+    # a row with an ID that is already being inserted.
+    def lock_resource_import!
+      ApplicationRecord.with_advisory_lock(self.class.name,
+                                           transaction: true,
+                                           timeout_seconds: 60) do
+        yield
+      end
+    end
 
     def resource
       @resource ||= set_resource
