@@ -11,7 +11,8 @@ export default class DrawerEntityHeader extends PureComponent {
     title: PropTypes.string,
     children: PropTypes.any,
     buttons: PropTypes.array,
-    manicon: PropTypes.string
+    manicon: PropTypes.string,
+    icon: PropTypes.string
   };
 
   static defaultProps = {
@@ -47,6 +48,9 @@ export default class DrawerEntityHeader extends PureComponent {
                 className={`manicon manicon-${this.props.manicon}`}
                 aria-hidden="true"
               />
+            )}
+            {this.props.icon && (
+              <Utility.IconComposer icon={this.props.icon} size={44} />
             )}
             {this.props.title}
           </h2>
