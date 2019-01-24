@@ -10,6 +10,10 @@
   transition: color $duration ease-out,
     box-shadow $duration ease-out;
 
+  &--linked {
+    cursor: pointer;
+  }
+
   &.tweet .event-tile__content {
     font-style: italic;
     letter-spacing: 0.065em;
