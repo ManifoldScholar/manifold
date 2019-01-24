@@ -2,13 +2,13 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { subjectsAPI, requests } from "api";
-import Dialog from "backend/components/dialog";
 import Form from "backend/components/form";
 import FormContainer from "backend/containers/form";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
+import withConfirmation from "hoc/with-confirmation";
 
 const { request, flush } = entityStoreActions;
 
@@ -25,15 +25,13 @@ export class SettingsSubjectsEditContainer extends PureComponent {
     match: PropTypes.object,
     dispatch: PropTypes.func,
     subject: PropTypes.object,
-    history: PropTypes.object
+    history: PropTypes.object,
+    confirm: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
 
   componentDidMount() {
     this.fetchSubject(this.props.match.params.id);
@@ -55,36 +53,21 @@ export class SettingsSubjectsEditContainer extends PureComponent {
     this.props.dispatch(subjectRequest);
   };
 
-  closeDialog() {
-    this.setState({ confirmation: null });
-  }
-
-  handleSubjectDestroy(event, subject) {
+  handleSubjectDestroy = () => {
     const heading = "Are you sure you want to delete this subject?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.destroySubject(subject);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
-  }
+    this.props.confirm(heading, message, this.destroySubject);
+  };
 
-  destroySubject(subject) {
+  destroySubject = () => {
+    const subject = this.props.subject;
     const call = subjectsAPI.destroy(subject.id);
     const options = { removes: subject };
     const subjectRequest = request(call, requests.beSubjectDestroy, options);
     this.props.dispatch(subjectRequest).promise.then(() => {
       this.props.history.push(lh.link("backendSettingsSubjects"));
     });
-  }
+  };
 
   render() {
     const subject = this.props.subject;
@@ -92,14 +75,11 @@ export class SettingsSubjectsEditContainer extends PureComponent {
     const attr = subject.attributes;
     return (
       <div>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
         <Navigation.DrawerHeader
           title={attr.name}
           buttons={[
             {
-              onClick: event => this.handleSubjectDestroy(event, subject),
+              onClick: this.handleSubjectDestroy,
               icon: "trash",
               label: "Delete"
             }
@@ -126,4 +106,4 @@ export class SettingsSubjectsEditContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(SettingsSubjectsEditContainer);
+export default withConfirmation(connectAndFetch(SettingsSubjectsEditContainer));

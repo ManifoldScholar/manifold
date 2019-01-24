@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Form from "./Form";
-import Dialog from "backend/components/dialog";
 import { permissionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";
 import { select } from "utils/entityUtils";
 import Navigation from "backend/components/navigation";
+import withConfirmation from "hoc/with-confirmation";
 
 const { request, flush } = entityStoreActions;
 
@@ -25,13 +25,13 @@ export class PermissionEdit extends PureComponent {
     match: PropTypes.object,
     dispatch: PropTypes.func,
     closeUrl: PropTypes.string.isRequired,
-    history: PropTypes.object
+    history: PropTypes.object,
+    confirm: PropTypes.func.isRequired
   };
 
-  constructor() {
-    super();
-    this.state = { confirmation: null };
-  }
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
 
   componentDidMount() {
     this.fetchPermission(this.props.match.params.id);
@@ -56,32 +56,17 @@ export class PermissionEdit extends PureComponent {
     this.props.dispatch(action);
   }
 
-  handleRemoveAll(event, permission) {
+  handleRemoveAll = () => {
     const heading =
       "Are you sure you want to remove all permissions from this user?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.removeAllPermissions(permission);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
-  }
+    this.props.confirm(heading, message, this.removeAllPermissions);
+  };
 
-  closeDialog() {
-    this.setState({ confirmation: null });
-  }
-
-  removeAllPermissions(permission) {
+  removeAllPermissions = () => {
     event.preventDefault();
     const entity = this.props.entity;
+    const permission = this.props.permission;
     const options = { removes: permission };
     const action = request(
       permissionsAPI.destroy(entity, permission.id),
@@ -91,7 +76,7 @@ export class PermissionEdit extends PureComponent {
     this.props.dispatch(action).promise.then(() => {
       this.props.history.push(this.props.closeUrl);
     });
-  }
+  };
 
   render() {
     const permission = this.props.permission;
@@ -99,16 +84,11 @@ export class PermissionEdit extends PureComponent {
 
     return (
       <section>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
         <Navigation.DrawerHeader
           title="Edit Permission"
           buttons={[
             {
-              onClick: event => {
-                this.handleRemoveAll(event, permission);
-              },
+              onClick: this.handleRemoveAll,
               icon: "trash",
               label: "Delete User Permissions"
             }
@@ -125,4 +105,4 @@ export class PermissionEdit extends PureComponent {
   }
 }
 
-export default connectAndFetch(PermissionEdit);
+export default withConfirmation(connectAndFetch(PermissionEdit));

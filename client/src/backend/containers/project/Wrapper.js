@@ -37,6 +37,10 @@ export class ProjectWrapperContainer extends PureComponent {
     location: PropTypes.object
   };
 
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   componentDidMount() {
     this.fetchProject();
   }

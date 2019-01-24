@@ -35,6 +35,10 @@ export class ProjectEventsContainer extends PureComponent {
     dispatch: PropTypes.func
   };
 
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   constructor(props) {
     super(props);
     this.state = {

@@ -20,6 +20,10 @@ export class TextStylesContainer extends PureComponent {
     confirm: PropTypes.func.isRequired
   };
 
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   get text() {
     return this.props.text;
   }

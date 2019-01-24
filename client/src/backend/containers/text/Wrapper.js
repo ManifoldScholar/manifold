@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
-import Dialog from "backend/components/dialog";
 import Utility from "global/components/utility";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
@@ -11,6 +10,7 @@ import { textsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import withConfirmation from "hoc/with-confirmation";
 
 import Authorize from "hoc/authorize";
 
@@ -32,15 +32,13 @@ export class TextWrapperContainer extends PureComponent {
     match: PropTypes.object,
     history: PropTypes.object,
     location: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
+    confirm: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      confirmation: null
-    };
-  }
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
 
   componentDidMount() {
     this.fetchText();
@@ -55,10 +53,6 @@ export class TextWrapperContainer extends PureComponent {
     const textRequest = request(call, requests.beText);
     this.props.dispatch(textRequest);
   };
-
-  closeDialog() {
-    this.setState({ confirmation: null });
-  }
 
   doDestroy = () => {
     const call = textsAPI.destroy(this.props.text.id);
@@ -89,22 +83,10 @@ export class TextWrapperContainer extends PureComponent {
     this.props.history.push(redirectUrl);
   }
 
-  handleTextDestroy = event => {
+  handleTextDestroy = () => {
     const heading = "Are you sure you want to delete this text?";
     const message = "This action cannot be undone.";
-    new Promise((resolve, reject) => {
-      this.setState({
-        confirmation: { resolve, reject, heading, message }
-      });
-    }).then(
-      () => {
-        this.doDestroy(event);
-        this.closeDialog();
-      },
-      () => {
-        this.closeDialog();
-      }
-    );
+    this.props.confirm(heading, message, this.doDestroy);
   };
 
   doPreview = event => {
@@ -161,10 +143,6 @@ export class TextWrapperContainer extends PureComponent {
             from={lh.link("backendText", text.id)}
             candidates={secondaryLinks}
           />
-
-          {this.state.confirmation ? (
-            <Dialog.Confirm {...this.state.confirmation} />
-          ) : null}
           <Navigation.DetailHeader
             type="text"
             backUrl={lh.link(
@@ -189,4 +167,4 @@ export class TextWrapperContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(TextWrapperContainer);
+export default withConfirmation(connectAndFetch(TextWrapperContainer));

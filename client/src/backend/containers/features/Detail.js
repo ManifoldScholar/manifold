@@ -36,6 +36,10 @@ class FeatureDetailContainer extends PureComponent {
     route: PropTypes.object
   };
 
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   componentDidMount() {
     const id = this.props.match.params.id;
     if (id !== "new") this.fetchFeature(this.props);

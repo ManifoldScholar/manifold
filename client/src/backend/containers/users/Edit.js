@@ -35,6 +35,10 @@ export class UsersEditContainer extends PureComponent {
     history: PropTypes.object
   };
 
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   constructor(props) {
     super(props);
     this.state = {

@@ -31,6 +31,10 @@ export class MakersEditContainer extends PureComponent {
     dispatch: PropTypes.func
   };
 
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   componentDidMount() {
     this.fetchMaker(this.props.match.params.id);
   }

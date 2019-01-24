@@ -19,7 +19,6 @@ export class ProjectCollectionNew extends PureComponent {
 
   constructor() {
     super();
-    this.state = { confirmation: false };
     this.model = this.defaultModel;
   }
 
