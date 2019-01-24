@@ -125,7 +125,7 @@ export class ProjectContent extends PureComponent {
     const call = contentBlocksAPI.update(block.id, {
       attributes: block.attributes
     });
-    const options = { noTouch: true };
+    const options = { noTouch: true, notificationScope: "none" };
     const updateRequest = request(call, requests.beContentBlockUpdate, options);
     this.props.dispatch(updateRequest).promise.then(() => {
       this.props.refresh();
