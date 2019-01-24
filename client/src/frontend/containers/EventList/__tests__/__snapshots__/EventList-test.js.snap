@@ -56,10 +56,10 @@ exports[`Frontend EventList Container renders correctly 1`] = `
           <li
             className=""
           >
-            <a
-              className="event-tile"
-              href="/read/subject-slug"
+            <div
+              className="event-tile event-tile--linked"
               onClick={[Function]}
+              role="link"
             >
               <div
                 className="event-tile__inner"
@@ -99,15 +99,15 @@ exports[`Frontend EventList Container renders correctly 1`] = `
                   </span>
                 </span>
               </div>
-            </a>
+            </div>
           </li>
           <li
             className=""
           >
-            <a
-              className="event-tile"
-              href="/read/subject-slug"
+            <div
+              className="event-tile event-tile--linked"
               onClick={[Function]}
+              role="link"
             >
               <div
                 className="event-tile__inner"
@@ -147,7 +147,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
                   </span>
                 </span>
               </div>
-            </a>
+            </div>
           </li>
         </ul>
         <nav
