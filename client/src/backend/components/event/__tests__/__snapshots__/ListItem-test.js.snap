@@ -6,6 +6,8 @@ exports[`Event.ListItem component renders correctly 1`] = `
 >
   <div
     className="event-tile tweet"
+    onClick={[Function]}
+    role="link"
   >
     <div
       className="event-tile__inner"
