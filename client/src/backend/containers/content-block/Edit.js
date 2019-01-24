@@ -5,6 +5,9 @@ import { contentBlocksAPI, requests } from "api";
 import { select } from "utils/entityUtils";
 import Form from "./Form";
 import { entityStoreActions } from "actions";
+import ContentBlock from "backend/components/content-block";
+import lh from "helpers/linkHandler";
+import withConfirmation from "hoc/with-confirmation";
 
 const { request, flush } = entityStoreActions;
 
@@ -22,7 +25,8 @@ export class ContentBlockEditContainer extends Component {
     history: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
     project: PropTypes.object,
-    contentBlock: PropTypes.object
+    contentBlock: PropTypes.object,
+    confirm: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -39,6 +43,21 @@ export class ContentBlockEditContainer extends Component {
     this.props.dispatch(flush(requests.beContentBlock));
   }
 
+  onDelete = () => {
+    const heading = "Are you sure you want to delete this content block?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, () => this.doDelete());
+  };
+
+  onVisibilityToggle = () => {
+    const call = contentBlocksAPI.update(this.contentBlock.id, {
+      attributes: { visible: !this.contentBlock.attributes.visible }
+    });
+    const options = { notificationScope: "none" };
+    const updateRequest = request(call, requests.beContentBlockUpdate, options);
+    this.props.dispatch(updateRequest);
+  };
+
   get contentBlock() {
     return this.props.contentBlock;
   }
@@ -46,6 +65,23 @@ export class ContentBlockEditContainer extends Component {
   get project() {
     return this.props.project;
   }
+
+  doDelete = () => {
+    const call = contentBlocksAPI.destroy(this.contentBlock.id);
+    const options = {
+      removes: { type: "contentBlocks", id: this.contentBlock.id }
+    };
+    const destroyRequest = request(
+      call,
+      requests.beContentBlockDestroy,
+      options
+    );
+    this.props.dispatch(destroyRequest).promise.then(() => {
+      return this.props.history.push(
+        lh.link("backendProjectProjectPage", this.project.id)
+      );
+    });
+  };
 
   fetchContentBlock(id) {
     const call = contentBlocksAPI.show(id);
@@ -58,13 +94,15 @@ export class ContentBlockEditContainer extends Component {
 
     return (
       <section>
-        <header className="drawer-header">
-          <h2 className="heading-quaternary">Edit Content Block</h2>
-        </header>
+        <ContentBlock.DrawerHeader
+          contentBlock={this.contentBlock}
+          onVisibilityToggle={this.onVisibilityToggle}
+          onDelete={this.onDelete}
+        />
         <Form contentBlock={this.contentBlock} project={this.project} />
       </section>
     );
   }
 }
 
-export default connectAndFetch(ContentBlockEditContainer);
+export default withConfirmation(connectAndFetch(ContentBlockEditContainer));

@@ -201,14 +201,6 @@
     padding: 5px 0 0;
     color: $neutralWhite;
 
-    @include respond($break50) {
-      padding: 32px 0 0;
-    }
-
-    @include respond($break90) {
-      padding-top: 37px;
-    }
-
     span {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -219,8 +211,10 @@
       padding-bottom: 0;
     }
 
-    .manicon {
-      padding-right: 10px;
+    .manicon, .manicon-svg {
+      margin-top: 4px;
+      margin-right: 10px;
+      color: $neutral75;
 
       &.manicon-twitter {
         font-size: 24px;
