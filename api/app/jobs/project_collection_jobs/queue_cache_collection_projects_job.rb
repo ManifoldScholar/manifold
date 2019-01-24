@@ -1,5 +1,6 @@
 module ProjectCollectionJobs
   class QueueCacheCollectionProjectsJob < ApplicationJob
+    throttle threshold: 1, period: 5.minutes, drop: false
 
     # rubocop:disable Metrics/LineLength
     def perform
