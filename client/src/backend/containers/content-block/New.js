@@ -4,6 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import Form from "./Form";
 import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import ContentBlock from "backend/components/content-block";
 
 export class ContentBlockNewContainer extends Component {
   static displayName = "ContentBlock.New";
@@ -33,9 +34,7 @@ export class ContentBlockNewContainer extends Component {
 
     return (
       <section>
-        <header className="drawer-header">
-          <h2 className="heading-quaternary">Configure Content Block</h2>
-        </header>
+        <ContentBlock.DrawerHeader contentBlock={this.pendingBlock} />
         <Form contentBlock={this.pendingBlock} project={this.project} />
       </section>
     );
