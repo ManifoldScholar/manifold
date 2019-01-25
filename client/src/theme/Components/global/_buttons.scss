@@ -59,10 +59,12 @@
   @include buttonUnstyled;
   @include utilityPrimary;
   display: inline-block;
-  padding: 9px 23px 10px;
+  padding: 14px 23px 16px;
+  font-size: 14px;
   color: $neutral95;
   text-align: center;
   text-decoration: none;
+  letter-spacing: 0.089em;
   border: 2px solid $accentPrimary;
   transition: background-color $duration $timing,
     color $duration $timing;
@@ -434,7 +436,7 @@
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.075em;
+  letter-spacing: 0.089em;
   background-color: $accentPrimary;
   transition: color $duration $timing,
     background-color $duration $timing;
