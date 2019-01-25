@@ -78,18 +78,22 @@ exports[`Frontend.TextList component renders correctly 1`] = `
         <div
           className="text-block__meta"
         >
-          <span
-            className="text-block__date text-block__date--inline"
+          <div
+            className="text-block__status text-block__status--inline"
           >
-            <span>
-              Added April 2017
+            <span
+              className="text-block__date text-block__date--inline"
+            >
+              <span>
+                Added April 2017
+              </span>
             </span>
-          </span>
-          <span
-            className="text-block__status"
-          >
-            Published
-          </span>
+            <span
+              className="text-block__published"
+            >
+              Published
+            </span>
+          </div>
           <ul
             className="text-block__interaction-list"
           >
@@ -209,18 +213,22 @@ exports[`Frontend.TextList component renders correctly 1`] = `
         <div
           className="text-block__meta"
         >
-          <span
-            className="text-block__date text-block__date--inline"
+          <div
+            className="text-block__status text-block__status--inline"
           >
-            <span>
-              Added April 2017
+            <span
+              className="text-block__date text-block__date--inline"
+            >
+              <span>
+                Added April 2017
+              </span>
             </span>
-          </span>
-          <span
-            className="text-block__status"
-          >
-            Published
-          </span>
+            <span
+              className="text-block__published"
+            >
+              Published
+            </span>
+          </div>
           <ul
             className="text-block__interaction-list"
           >
