@@ -1,10 +1,11 @@
 .texts-list {
 
   @include listUnstyled;
-  @include utilityPrimary;
-
+  @include templateHead;
   display: flex;
   flex-direction: column;
+  font-size: 16px;
+  font-weight: $semibold;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
   transition: background-color 0.4s ease;
@@ -14,7 +15,6 @@
   }
 
   &--empty {
-    //background: blue;
     position: relative;
     min-height: 87px;
 
