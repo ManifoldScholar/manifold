@@ -4,6 +4,32 @@ exports[`Backend.Project.Content.TypeForm.Markdown component renders correctly 1
 Array [
   <div
     className="form-input wide"
+  >
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label
+        className=""
+        htmlFor="textarea-1"
+      >
+        Body
+      </label>
+      <textarea
+        aria-describedby="textarea-error-1"
+        id="textarea-1"
+        onChange={[Function]}
+        style={
+          Object {
+            "height": 300,
+          }
+        }
+        value=""
+      />
+    </div>
+  </div>,
+  <div
+    className="form-input wide"
     style={Object {}}
   >
     <label
@@ -52,32 +78,6 @@ Array [
         Shaded
       </span>
     </label>
-  </div>,
-  <div
-    className="form-input wide"
-  >
-    <div
-      className="form-input"
-      style={Object {}}
-    >
-      <label
-        className=""
-        htmlFor="textarea-1"
-      >
-        Body
-      </label>
-      <textarea
-        aria-describedby="textarea-error-1"
-        id="textarea-1"
-        onChange={[Function]}
-        style={
-          Object {
-            "height": 100,
-          }
-        }
-        value=""
-      />
-    </div>
   </div>,
 ]
 `;
