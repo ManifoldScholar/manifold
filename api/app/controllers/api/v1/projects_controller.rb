@@ -5,7 +5,7 @@ module Api
 
       INCLUDES = [
         :creators, :contributors, :texts, :text_categories, :events,
-        :collections, :uncollected_resources, :subjects, :twitter_queries,
+        :collections, :resources, :subjects, :twitter_queries,
         :permitted_users, :content_blocks
       ].freeze
 

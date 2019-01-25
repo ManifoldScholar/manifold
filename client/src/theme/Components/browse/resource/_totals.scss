@@ -1,6 +1,12 @@
 .resource-total {
+  padding-top: 5px;
+  padding-bottom: 5px;
   margin-top: 10px;
   text-align: center;
+
+  &--left-aligned {
+    text-align: left;
+  }
 
   &:not(:last-child) {
     margin-bottom: 25px;
@@ -10,11 +16,14 @@
     }
   }
 
+  &--tight:not(:last-child) {
+    @include respond($break60) {
+      margin-bottom: 15px;
+    }
+  }
+
   &__link {
     @include templateHead;
-    display: block;
-    padding-top: 5px;
-    padding-bottom: 5px;
     font-size: 20px;
     color: $neutral70;
     text-decoration: none;
