@@ -32,6 +32,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
           <button
             className="manicon manicon-arrow-down"
             onClick={[Function]}
+            type="button"
           >
             <span
               className="screen-reader-text"
@@ -42,6 +43,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
           <button
             className="manicon manicon-x"
             onClick={[Function]}
+            type="button"
           >
             <span
               className="screen-reader-text"
@@ -71,6 +73,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
           <button
             className="manicon manicon-arrow-up"
             onClick={[Function]}
+            type="button"
           >
             <span
               className="screen-reader-text"
@@ -81,6 +84,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
           <button
             className="manicon manicon-x"
             onClick={[Function]}
+            type="button"
           >
             <span
               className="screen-reader-text"

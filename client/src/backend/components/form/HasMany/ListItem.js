@@ -62,7 +62,11 @@ export default class FormHasManyList extends PureComponent {
     if (!this.props.editHandler) return null;
 
     return (
-      <button className="manicon manicon-pencil-simple" onClick={this.onEdit}>
+      <button
+        type="button"
+        className="manicon manicon-pencil-simple"
+        onClick={this.onEdit}
+      >
         <span className="screen-reader-text">
           Edit {this.name()}
           in the {this.props.label} list.
@@ -73,7 +77,11 @@ export default class FormHasManyList extends PureComponent {
 
   renderRemoveButton() {
     return (
-      <button onClick={this.onRemove} className="manicon manicon-x">
+      <button
+        type="button"
+        onClick={this.onRemove}
+        className="manicon manicon-x"
+      >
         <span className="screen-reader-text">
           Remove {this.name()} from the {this.props.label} list.
         </span>
@@ -91,6 +99,7 @@ export default class FormHasManyList extends PureComponent {
 
     return (
       <button
+        type="button"
         onClick={moveHandler}
         className={`manicon manicon-arrow-${direction}`}
       >
