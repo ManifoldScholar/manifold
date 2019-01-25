@@ -10,6 +10,7 @@ export default class TextListListItemMeta extends Component {
     text: PropTypes.object.isRequired,
     baseClass: PropTypes.string,
     datesVisible: PropTypes.bool,
+    datePrefix: PropTypes.string,
     publishedVisible: PropTypes.bool
   };
 
@@ -23,6 +24,7 @@ export default class TextListListItemMeta extends Component {
           <Date
             baseClass={baseClass}
             date={this.props.text.attributes.createdAt}
+            datePrefix={this.props.datePrefix}
             inline
           />
         )}

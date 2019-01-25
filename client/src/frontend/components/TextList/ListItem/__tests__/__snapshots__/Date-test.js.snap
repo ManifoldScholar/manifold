@@ -2,7 +2,7 @@
 
 exports[`Frontend.TextList.ListItem.Date component renders correctly 1`] = `
 <span
-  className="text-date__date text-date__date--block"
+  className="text-block__date text-block__date--block"
 >
   <span>
     Added April 2017

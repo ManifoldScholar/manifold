@@ -11,6 +11,7 @@ describe("Frontend.TextList.ListItem.Meta component", () => {
         text={build.entity.text("1")}
         baseClass={"text-block"}
         datesVisible
+        datePrefix={"Added"}
         publishedVisible
       />
     );
