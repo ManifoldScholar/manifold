@@ -23,9 +23,6 @@ FactoryBot.define do
   factory :recent_activity_block, parent: :content_block, class: "Content::RecentActivityBlock" do
     type { "Content::RecentActivityBlock" }
   end
-  factory :hero_block, parent: :content_block, class: "Content::HeroBlock" do
-    type { "Content::HeroBlock" }
-  end
   factory :texts_block, parent: :content_block, class: "Content::TextsBlock" do
     type { "Content::TextsBlock" }
     show_authors { false }
