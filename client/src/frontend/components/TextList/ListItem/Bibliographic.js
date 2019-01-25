@@ -15,10 +15,6 @@ export default class TextListListItemBibliographic extends Component {
     publishedVisible: PropTypes.bool
   };
 
-  static defaultProps = {
-    baseClass: "text-thumbnail" // TODO: rename
-  };
-
   render() {
     return (
       <React.Fragment>
