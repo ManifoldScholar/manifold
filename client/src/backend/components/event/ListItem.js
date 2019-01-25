@@ -20,7 +20,7 @@ export default class EventListItem extends PureComponent {
     if (!event) return null;
     return (
       <Event.Event
-        itemClass="list-item"
+        itemClass="list-item list-item--tile"
         event={event}
         hideLink
         destroyCallback={this.triggerDestroy}

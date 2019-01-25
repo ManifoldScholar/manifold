@@ -410,34 +410,11 @@
           cursor: pointer;
         }
       }
-    }
 
-    // Events list items
-    .event-tile {
-      height: 100%;
-      color: $neutral30;
-      background-color: transparent;
-
-      @include respond($break60) {
-        background-color: $neutral85;
-      }
-
-      .manicon {
-        background-color: $neutral75;
-      }
-
-      .event-data {
-        padding-right: 26px;
-
-        a {
-          display: inline-block;
-          width: auto;
-          padding: 7px 0 5px;
-        }
-
-        .event-content {
-          padding-top: 0;
-          line-height: 1em;
+      &--tile {
+        .utility {
+          right: 18px;
+          bottom: 18px;
         }
       }
     }
