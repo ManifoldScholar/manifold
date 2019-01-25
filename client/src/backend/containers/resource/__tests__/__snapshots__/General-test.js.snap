@@ -220,6 +220,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
                 <button
                   className="manicon manicon-x"
                   onClick={[Function]}
+                  type="button"
                 >
                   <span
                     className="screen-reader-text"
@@ -249,6 +250,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
                 <button
                   className="manicon manicon-x"
                   onClick={[Function]}
+                  type="button"
                 >
                   <span
                     className="screen-reader-text"
@@ -278,6 +280,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
                 <button
                   className="manicon manicon-x"
                   onClick={[Function]}
+                  type="button"
                 >
                   <span
                     className="screen-reader-text"

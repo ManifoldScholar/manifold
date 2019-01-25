@@ -58,6 +58,7 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
           <button
             className="manicon manicon-x"
             onClick={[Function]}
+            type="button"
           >
             <span
               className="screen-reader-text"

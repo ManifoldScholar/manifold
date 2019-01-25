@@ -520,6 +520,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                     <button
                       className="manicon manicon-x"
                       onClick={[Function]}
+                      type="button"
                     >
                       <span
                         className="screen-reader-text"

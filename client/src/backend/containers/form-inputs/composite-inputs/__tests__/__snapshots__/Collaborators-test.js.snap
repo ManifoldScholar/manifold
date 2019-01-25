@@ -46,6 +46,7 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
               <button
                 className="manicon manicon-pencil-simple"
                 onClick={[Function]}
+                type="button"
               >
                 <span
                   className="screen-reader-text"
@@ -60,6 +61,7 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
               <button
                 className="manicon manicon-x"
                 onClick={[Function]}
+                type="button"
               >
                 <span
                   className="screen-reader-text"
@@ -149,6 +151,7 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
               <button
                 className="manicon manicon-pencil-simple"
                 onClick={[Function]}
+                type="button"
               >
                 <span
                   className="screen-reader-text"
@@ -163,6 +166,7 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
               <button
                 className="manicon manicon-x"
                 onClick={[Function]}
+                type="button"
               >
                 <span
                   className="screen-reader-text"
