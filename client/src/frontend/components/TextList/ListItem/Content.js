@@ -18,10 +18,6 @@ export default class TextListListItemContent extends Component {
     publishedVisible: PropTypes.bool
   };
 
-  static defaultProps = {
-    baseClass: "text-thumbnail"
-  };
-
   get title() {
     return this.props.text.attributes.titleFormatted;
   }

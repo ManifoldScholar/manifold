@@ -42,7 +42,11 @@ export default class TextList extends Component {
             {this.props.label}
           </h4>
         )}
-        <ul className={`${baseClass}__list`}>
+        <ul
+          className={classNames(`${baseClass}__list`, {
+            [`${baseClass}__list--no-label`]: !this.props.label
+          })}
+        >
           {this.texts.map(text => {
             return (
               <li key={text.id} className={`${baseClass}__item`}>

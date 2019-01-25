@@ -13,10 +13,6 @@ export default class TextListListItemMeta extends Component {
     publishedVisible: PropTypes.bool
   };
 
-  static defaultProps = {
-    baseClass: "text-meta"
-  };
-
   render() {
     const text = this.props.text;
     const baseClass = this.props.baseClass;
