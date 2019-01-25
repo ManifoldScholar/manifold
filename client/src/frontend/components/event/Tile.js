@@ -5,7 +5,7 @@ import FormattedDate from "global/components/FormattedDate";
 import Utility from "global/components/utility";
 import { withRouter } from "react-router-dom";
 
-export class Tile extends Component {
+export class EventTile extends Component {
   static displayName = "Event.Tile";
 
   static propTypes = {
@@ -123,4 +123,4 @@ export class Tile extends Component {
   }
 }
 
-export default withRouter(Tile);
+export default withRouter(EventTile);
