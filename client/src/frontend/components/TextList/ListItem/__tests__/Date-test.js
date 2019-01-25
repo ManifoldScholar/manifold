@@ -9,6 +9,8 @@ describe("Frontend.TextList.ListItem.Date component", () => {
     const component = renderer.create(
       <Date
         date={build.entity.text("1").attributes.createdAt}
+        datePrefix={"Added"}
+        baseClass={"text-block"}
       />
     );
     let tree = component.toJSON();

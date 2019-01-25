@@ -15,6 +15,7 @@ export default class TextListListItemContent extends Component {
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
     datesVisible: PropTypes.bool,
+    datePrefix: PropTypes.string,
     publishedVisible: PropTypes.bool
   };
 
@@ -39,7 +40,7 @@ export default class TextListListItemContent extends Component {
 
   get date() {
     if (!this.props.datesVisible) return null;
-    return this.props.text.attributes.createdAt;
+    return this.props.text.attributes.updatedAt;
   }
 
   render() {
@@ -57,6 +58,7 @@ export default class TextListListItemContent extends Component {
               title={this.title}
               subtitle={this.subtitle}
               date={this.date}
+              datePrefix={this.props.datePrefix}
               description={this.description}
               creatorNames={this.creatorNames}
               publishedVisible={this.props.publishedVisible}

@@ -33,6 +33,21 @@ export default class TextListListItem extends Component {
     return this.props.utilityPosition === "content";
   }
 
+  get createdDate() {
+    return new Date(this.props.text.attributes.createdAt);
+  }
+
+  get updatedDate() {
+    return new Date(this.props.text.attributes.updatedAt);
+  }
+
+  get datePrefix() {
+    // check if latest update occurred > 24hrs after text was created
+    const hasUpdate = Math.abs(this.updatedDate - this.createdDate) / 36e5 > 24;
+
+    return hasUpdate ? "Updated" : "Added";
+  }
+
   render() {
     const text = this.props.text;
     const baseClass = this.props.baseClass;
@@ -46,12 +61,14 @@ export default class TextListListItem extends Component {
           showSubtitles={this.props.showSubtitles}
           showDescriptions={this.props.showDescriptions}
           datesVisible={this.utilityInContent && this.props.showDates}
+          datePrefix={this.datePrefix}
           publishedVisible={this.utilityInContent && this.isPublished}
         />
         <Meta
           text={text}
           baseClass={baseClass}
           datesVisible={this.utilityInMeta && this.props.showDates}
+          datePrefix={this.datePrefix}
           publishedVisible={this.utilityInMeta && this.isPublished}
         />
       </div>
