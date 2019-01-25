@@ -10,8 +10,8 @@ export default class ProjectContentTypeFormResources extends PureComponent {
     getModelValue: PropTypes.func.isRequired
   };
 
-  get includeCollections() {
-    return this.props.getModelValue("attributes[showCollections]");
+  get showAllCollections() {
+    return this.props.getModelValue("attributes[showAllCollections]");
   }
 
   get collections() {
@@ -21,16 +21,22 @@ export default class ProjectContentTypeFormResources extends PureComponent {
   render() {
     return (
       <React.Fragment>
-        <Form.Switch
-          label="Show Collections?"
-          name="attributes[showCollections]"
+        <Form.TextInput
+          label="Title"
+          name="attributes[title]"
+          instructions={`If blank, the block title will default to "Resources"`}
           focusOnMount
+        />
+        <Form.Switch
+          label="Show All Collections?"
+          instructions="If set, all project collections will be included in the block. Otherwise, only featured selections will be shown."
+          name="attributes[showAllCollections]"
           wide
         />
-        {this.includeCollections ? (
+        {!this.showAllCollections ? (
           <Form.HasMany
-            label="Featured Collections"
-            placeholder="Add a Collection"
+            label="Show Selected Collections"
+            placeholder="Select Collection"
             name="relationships[featuredCollections]"
             options={this.collections}
             entityLabelAttribute={"title"}
