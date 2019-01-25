@@ -107,9 +107,7 @@ Array [
         <div
           className="placeholder"
         >
-          No 
-          Subjects
-           added
+          None Added
         </div>
       </ul>
     </nav>
@@ -165,9 +163,7 @@ Array [
         <div
           className="placeholder"
         >
-          No 
-          Tags
-           added
+          None added
         </div>
       </ul>
     </div>
