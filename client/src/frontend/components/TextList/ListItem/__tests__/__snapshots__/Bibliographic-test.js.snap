@@ -28,12 +28,16 @@ Array [
     </span>
     Andre3000, Big Boi
   </div>,
-  <span
-    className="text-block__date text-block__date--block"
+  <div
+    className="text-block__status text-block__status--block"
   >
-    <span>
-      Added April 2017
+    <span
+      className="text-block__date text-block__date--block"
+    >
+      <span>
+        Added April 2017
+      </span>
     </span>
-  </span>,
+  </div>,
 ]
 `;
