@@ -1,17 +1,49 @@
 // Can be a link or a div
 .event-tile {
-  @include panelRoundedLight;
   position: relative;
   width: 100%;
   padding: 19px 17px 21px 0;
   margin-left: 10px;
-  color: $neutral90;
   text-decoration: none;
   transition: color $duration ease-out,
     box-shadow $duration ease-out;
 
+  .backend & {
+    height: 100%;
+    color: $neutral30;
+
+    @include respond($break60) {
+      @include panelRounded;
+    }
+  }
+
+  .browse & {
+    @include panelRoundedLight;
+    color: $neutral90;
+  }
+
   &--linked {
     cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: $accentPrimary;
+      outline: none;
+      box-shadow: 0 10px 30px 2px rgba($neutralBlack, 0.13);
+
+      @include respond($break60) {
+        box-shadow: 0 20px 30px 2px rgba($neutralBlack, 0.13);
+      }
+
+      .event-tile__icon,
+      .event-tile__title,
+      .event-tile__header,
+      .event-tile__footer,
+      .event-tile__user,
+      .event-tile__user a {
+        color: $accentPrimary;
+      }
+    }
   }
 
   &.tweet .event-tile__content {
@@ -25,6 +57,14 @@
     flex-direction: column;
     height: 100%;
     padding-left: 32px;
+
+    .backend & {
+      padding-left: 0;
+
+      @include respond($break60) {
+        padding-left: 40px;
+      }
+    }
 
     @include respond($break60) {
       padding-left: 40px;
@@ -42,6 +82,16 @@
     border-radius: 100%;
     transition: color $duration ease-out;
     transform: translateX(-50%);
+
+    .backend & {
+      display: none;
+      color: $neutral50;
+      background-color: transparent;
+
+      @include respond($break60) {
+        display: block;
+      }
+    }
 
     @include respond($break60) {
       width: 44px;
@@ -129,23 +179,5 @@
     flex-grow: 1;
     justify-content: flex-end;
     margin-top: 18px;
-  }
-}
-
-// Required to add hover states to links only
-// scss-lint:disable QualifyingElement
-a.event-tile:hover,
-a.event-tile:focus {
-  color: $accentPrimary;
-  outline: none;
-  box-shadow: 0 20px 30px 2px rgba($neutralBlack, 0.13);
-
-  .event-tile__icon,
-  .event-tile__title,
-  .event-tile__header,
-  .event-tile__footer,
-  .event-tile__user,
-  .event-tile__user a {
-    color: $accentPrimary;
   }
 }
