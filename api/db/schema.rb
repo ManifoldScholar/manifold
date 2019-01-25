@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190125204011) do
+ActiveRecord::Schema.define(version: 20190125222928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,21 @@ ActiveRecord::Schema.define(version: 20190125204011) do
     t.integer  "flags_count",     default: 0
     t.index ["created_at"], name: "index_annotations_on_created_at", using: :brin
     t.index ["format"], name: "index_annotations_on_format", using: :btree
+  end
+
+  create_table "call_to_actions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "title"
+    t.integer  "kind",            default: 0,  null: false
+    t.integer  "location",        default: 0,  null: false
+    t.string   "url"
+    t.jsonb    "attachment_data", default: {}
+    t.integer  "position",        default: 1,  null: false
+    t.uuid     "project_id"
+    t.uuid     "text_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["project_id"], name: "index_call_to_actions_on_project_id", using: :btree
+    t.index ["text_id"], name: "index_call_to_actions_on_text_id", using: :btree
   end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

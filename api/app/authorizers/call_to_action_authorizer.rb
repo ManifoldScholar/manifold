@@ -1,0 +1,1 @@
+class CallToActionAuthorizer < ProjectRestrictedChildAuthorizer; end

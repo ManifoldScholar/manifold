@@ -115,6 +115,14 @@ module Validation
     params.permit(param_config)
   end
 
+  def call_to_action_params
+    params.require(:data)
+    attributes = [:title, :kind, :location, :position, attachment(:attachment), :url]
+    relationships = [:project, :text]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   # rubocop:disable Metrics/MethodLength
   def resource_params
     params.require(:data)
