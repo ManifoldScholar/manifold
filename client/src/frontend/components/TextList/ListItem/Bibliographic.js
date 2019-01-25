@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import Date from "./Date";
 
 export default class TextListListItemBibliographic extends Component {
@@ -16,42 +17,55 @@ export default class TextListListItemBibliographic extends Component {
     publishedVisible: PropTypes.bool
   };
 
+  get showStatus() {
+    return this.props.date || this.props.publishedVisible;
+  }
+
   render() {
+    const baseClass = this.props.baseClass;
+
     return (
       <React.Fragment>
-        <h3 className={`${this.props.baseClass}__name`}>
+        <h3 className={`${baseClass}__name`}>
           <span
-            className={`${this.props.baseClass}__title`}
+            className={`${baseClass}__title`}
             dangerouslySetInnerHTML={{
               __html: this.props.title
             }}
           />
           {this.props.subtitle && (
-            <span className={`${this.props.baseClass}__subtitle`}>
-              {this.subtitle}
-            </span>
+            <span className={`${baseClass}__subtitle`}>{this.subtitle}</span>
           )}
         </h3>
         {this.props.creatorNames && (
-          <div className={`${this.props.baseClass}__creators`}>
+          <div className={`${baseClass}__creators`}>
             <span style={{ fontStyle: "italic" }}>by </span>
             {this.props.creatorNames}
           </div>
         )}
         {this.props.description && (
-          <p className={`${this.props.baseClass}__description`}>
+          <p className={`${baseClass}__description`}>
             {this.props.description}
           </p>
         )}
-        {this.props.date && (
-          <Date
-            date={this.props.date}
-            datePrefix={this.props.datePrefix}
-            baseClass={this.props.baseClass}
-          />
-        )}
-        {this.props.publishedVisible && (
-          <span className={`${this.props.baseClass}__status`}>Published</span>
+        {this.showStatus && (
+          <div
+            className={classNames(
+              `${baseClass}__status`,
+              `${baseClass}__status--block`
+            )}
+          >
+            {this.props.date && (
+              <Date
+                date={this.props.date}
+                datePrefix={this.props.datePrefix}
+                baseClass={baseClass}
+              />
+            )}
+            {this.props.publishedVisible && (
+              <span className={`${baseClass}__published`}>Published</span>
+            )}
+          </div>
         )}
       </React.Fragment>
     );
