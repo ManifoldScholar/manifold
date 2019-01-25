@@ -588,9 +588,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                 <div
                   className="placeholder"
                 >
-                  No 
-                  Tags
-                   added
+                  None added
                 </div>
               </ul>
             </div>
