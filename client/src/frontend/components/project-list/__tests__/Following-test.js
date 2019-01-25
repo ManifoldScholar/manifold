@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import Following from "../Following";
 import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
 
 describe("Frontend.ProjectList.Following component", () => {
   const projectA = build.entity.project("1");
@@ -15,11 +16,13 @@ describe("Frontend.ProjectList.Following component", () => {
   const user = build.entity.user("3");
   const dispatchMock = jest.fn();
   const updateMock = jest.fn();
+  const store = build.store();
 
   it("renders correctly", () => {
     user.favorites = favorites;
     const component = renderer.create(
       wrapWithRouter(
+        <Provider store={store}>
         <Following
           dispatch={dispatchMock}
           followedProjects={projects}
@@ -29,6 +32,7 @@ describe("Frontend.ProjectList.Following component", () => {
           subjects={projects}
           handleUpdate={updateMock}
         />
+        </Provider>
       )
     );
     let tree = component.toJSON();
@@ -39,15 +43,17 @@ describe("Frontend.ProjectList.Following component", () => {
     user.favorites = {};
     const component = renderer.create(
       wrapWithRouter(
-        <Following
-          dispatch={dispatchMock}
-          followedProjects={[]}
-          authentication={{
-            currentUser: user
-          }}
-          subjects={[]}
-          handleUpdate={updateMock}
-        />
+        <Provider store={store}>
+          <Following
+            dispatch={dispatchMock}
+            followedProjects={[]}
+            authentication={{
+              currentUser: user
+            }}
+            subjects={[]}
+            handleUpdate={updateMock}
+          />
+        </Provider>
       )
     );
     let tree = component.toJSON();
