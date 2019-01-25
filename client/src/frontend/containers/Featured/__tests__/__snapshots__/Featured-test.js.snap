@@ -365,19 +365,6 @@ exports[`Frontend Featured Container renders correctly 1`] = `
             See All Projects
           </span>
         </a>
-        <a
-          className="button-icon-primary"
-          href="/following"
-          onClick={[Function]}
-        >
-          <span>
-            <i
-              aria-hidden="true"
-              className="manicon manicon-books-with-glasses"
-            />
-            Projects You’re Following
-          </span>
-        </a>
       </nav>
     </div>
   </section>
