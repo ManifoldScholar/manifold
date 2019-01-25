@@ -1,4 +1,6 @@
 .ordered-records-item {
+  @include templateHead;
+
   & + & {
     border-top: 1px solid $neutral80;
   }
@@ -37,9 +39,9 @@
   }
 
   &__title {
-    @include utilityPrimary;
     margin: 0 0 0.6em;
     font-size: 17px;
+    font-weight: $semibold;
     color: $neutral30;
     transition: color $duration $timing;
   }
@@ -102,4 +104,3 @@
   }
 
 }
-
