@@ -5,15 +5,15 @@ class ProjectFullSerializer < ProjectSerializer
   meta(partial: false)
 
   attributes :event_count, :metadata, :collections_count, :resources_count,
-             :uncollected_resources_count, :published_text_toc_id, :event_types,
-             :metadata_properties, :citations, :hide_activity, :metadata_formatted
+             :published_text_toc_id, :event_types, :metadata_properties, :citations,
+             :hide_activity, :metadata_formatted
 
   has_many :texts
   has_one :published_text
   has_many :text_categories, serializer: CategorySerializer
   has_many :events
   has_many :collections
-  has_many :uncollected_resources
+  has_many :resources
   has_many :subjects
   has_many :twitter_queries
   has_many :permitted_users
@@ -26,12 +26,8 @@ class ProjectFullSerializer < ProjectSerializer
     filtered_events.count
   end
 
-  def uncollected_resources_count
-    object.uncollected_resources.count
-  end
-
-  def uncollected_resources
-    object.uncollected_resources.limit(10)
+  def resources
+    object.resources.limit(10)
   end
 
   def events
