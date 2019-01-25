@@ -52,9 +52,7 @@ exports[`Backend.Form.TagList component renders correctly 1`] = `
       <div
         className="placeholder"
       >
-        No 
-        Tags
-         added
+        None added
       </div>
     </ul>
   </div>
