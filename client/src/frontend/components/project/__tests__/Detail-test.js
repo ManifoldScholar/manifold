@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import Detail from "../Detail";
 import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
 
 describe("Frontend.Project.Detail component", () => {
   const project = build.entity.project("1");
@@ -17,10 +18,15 @@ describe("Frontend.Project.Detail component", () => {
   ];
   activityProject.attributes.hideActivity = true;
   const dispatchMock = jest.fn();
+  const store = build.store();
 
   it("renders correctly", () => {
     const component = renderer.create(
-      wrapWithRouter(<Detail dispatch={dispatchMock} project={project} />)
+      wrapWithRouter(
+        <Provider store={store}>
+          <Detail dispatch={dispatchMock} project={project} />
+        </Provider>
+      )
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -29,7 +35,9 @@ describe("Frontend.Project.Detail component", () => {
   it("renders correctly when hideActivity is true", () => {
     const component = renderer.create(
       wrapWithRouter(
-        <Detail dispatch={dispatchMock} project={activityProject} />
+        <Provider store={store}>
+          <Detail dispatch={dispatchMock} project={activityProject} />
+        </Provider>
       )
     );
     let tree = component.toJSON();
