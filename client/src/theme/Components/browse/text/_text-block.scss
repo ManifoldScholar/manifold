@@ -35,9 +35,14 @@
 
   &__cover {
     position: relative;
+    display: none;
     padding-top: 0;
     margin-bottom: 0;
     line-height: 1;
+
+    @include respond($break80) {
+      display: block;
+    }
 
     &--image {
       min-width: 56px;
@@ -75,12 +80,16 @@
 
   &__name {
     margin: 0;
-    font-size: 21px;
+    font-size: 16px;
     font-weight: $semibold;
     line-height: 1.188;
     color: $neutral90;
     white-space: normal;
     transition: color $duration $timing;
+
+    @include respond($break80) {
+      font-size: 21px;
+    }
   }
 
   &__title {
@@ -89,20 +98,37 @@
     margin-right: 12px;
   }
 
+  &__subtitle,
+  &__creators {
+    @include templateCopy;
+    display: block;
+    padding-top: 6px;
+    font-size: 15px;
+
+    @include respond($break80) {
+      font-size: 18px;
+    }
+  }
+
   &__subtitle {
-    @include subtitlePrimary;
-    display: inline-block;
-    padding-top: 0.143em;
-    font-size: 0.86em;
+    font-style: italic;
+    font-weight: $regular;
+    letter-spacing: 0.031em;
     transition: color $duration $timing;
+
+    @include respond($break80) {
+      display: inline-block;
+      padding-top: 0.143em;
+    }
   }
 
   &__creators {
-    @include templateCopy;
-    padding-top: 0.6em;
-    font-size: 18px;
     line-height: 1.25;
     color: $neutral90;
+
+    @include respond($break80) {
+      padding-top: 0.6em;
+    }
   }
 
   &__description {
@@ -115,51 +141,65 @@
   }
 
   &__meta {
+    flex-shrink: 0;
     min-width: 288px;
+    padding-right: 20px;
+    padding-left: 15px;
     margin-top: 20px;
 
     @include respond($break80) {
+      padding-right: 0;
+      padding-left: 0;
       margin-top: 4px;
       text-align: right;
+    }
+  }
+
+  &__status {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+
+    > :not(:first-child) {
+      margin-top: 12px;
+    }
+
+    &--block {
+      margin-top: 12px;
+    }
+
+    &--inline {
+      @include respond($break80) {
+        flex-direction: row;
+        justify-content: flex-end;
+
+        > :not(:first-child) {
+          @include respond($break80) {
+            margin-top: 0;
+            margin-left: 12px;
+          }
+        }
+      }
     }
   }
 
   &__date {
     @include utilityPrimary;
     display: block;
-    font-size: 14px;
+    font-size: 12px;
     color: $neutral75;
     letter-spacing: 0.107em;
 
-    + .text-block__status {
-      margin-top: 12px;
-    }
-
-    &--block {
-      margin-top: 10px;
-    }
-
-    &--inline {
-      @include respond($break40) {
-        display: inline-block;
-      }
-
-      + .text-block__status {
-        @include respond($break40) {
-          margin-top: 0;
-          margin-left: 12px;
-        }
-      }
+    @include respond($break80) {
+      font-size: 14px;
     }
   }
 
-  &__status {
+  &__published {
     @include templateHead;
     display: inline-block;
-    width: 100.58px;
-    padding: 4px 8px 6px;
-    margin: 0;
-    font-size: 13px;
+    padding: 4px 7px 6px;
+    font-size: 12px;
     font-weight: $semibold;
     line-height: 1;
     color: $neutralWhite;
@@ -168,6 +208,10 @@
     vertical-align: middle;
     background-color: $accentPrimary;
     border-radius: 3px;
+
+    @include respond($break80) {
+      font-size: 13px;
+    }
   }
 
   &__interaction-list {

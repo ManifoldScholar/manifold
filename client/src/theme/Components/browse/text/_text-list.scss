@@ -11,12 +11,16 @@
     padding: 0.857em 1.643em 1em;
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: $semibold;
     color: $neutral75;
     text-transform: uppercase;
     letter-spacing: 0.107em;
     background-color: $neutral10;
+
+    @include respond($break80) {
+      font-size: 14px;
+    }
   }
 
   &__list {
