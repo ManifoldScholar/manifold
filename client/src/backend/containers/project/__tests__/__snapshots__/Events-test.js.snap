@@ -85,7 +85,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
         <section>
           <ul>
             <li
-              className="list-item"
+              className="list-item list-item--tile"
             >
               <div
                 className="event-tile"
@@ -150,7 +150,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
               </div>
             </li>
             <li
-              className="list-item"
+              className="list-item list-item--tile"
             >
               <div
                 className="event-tile"

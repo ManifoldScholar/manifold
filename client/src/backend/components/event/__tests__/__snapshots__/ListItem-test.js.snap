@@ -2,7 +2,7 @@
 
 exports[`Event.ListItem component renders correctly 1`] = `
 <li
-  className="list-item"
+  className="list-item list-item--tile"
 >
   <div
     className="event-tile tweet"
