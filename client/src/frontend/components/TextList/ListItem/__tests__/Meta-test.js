@@ -9,6 +9,7 @@ describe("Frontend.TextList.ListItem.Meta component", () => {
     const component = renderer.create(
       <Meta
         text={build.entity.text("1")}
+        baseClass={"text-block"}
         datesVisible
         publishedVisible
       />

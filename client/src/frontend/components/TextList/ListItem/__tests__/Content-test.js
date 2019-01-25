@@ -13,6 +13,7 @@ describe("Frontend.TextList.ListItem.Content component", () => {
         <Provider store={build.store()}>
           <Content
             text={build.entity.text("1")}
+            baseClass={"text-block"}
             showDescriptions
             showSubtitles
             showAuthors

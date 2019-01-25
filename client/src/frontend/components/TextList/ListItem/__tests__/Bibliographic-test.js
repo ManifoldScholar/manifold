@@ -9,6 +9,7 @@ describe("Frontend.TextList.ListItem.Bibliographic component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
       <Bibliographic
+        baseClass={"text-block"}
         description={text.attributes.description}
         subtitle={text.attributes.subtitle}
         date={text.attributes.createdAt}
