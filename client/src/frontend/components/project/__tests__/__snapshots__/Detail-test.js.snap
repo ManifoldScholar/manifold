@@ -83,6 +83,31 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
       </div>
     </div>
   </div>
+  <section
+    className="bg-neutral05"
+  >
+    <div
+      className="container"
+    >
+      <nav
+        className="button-nav"
+      >
+        <a
+          className="button-icon-primary"
+          href="/projects/all"
+          onClick={[Function]}
+        >
+          <span>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-books-on-shelf"
+            />
+            See All Projects
+          </span>
+        </a>
+      </nav>
+    </div>
+  </section>
 </div>
 `;
 
@@ -169,5 +194,30 @@ exports[`Frontend.Project.Detail component renders correctly when hideActivity i
       </div>
     </div>
   </div>
+  <section
+    className="bg-neutral05"
+  >
+    <div
+      className="container"
+    >
+      <nav
+        className="button-nav"
+      >
+        <a
+          className="button-icon-primary"
+          href="/projects/all"
+          onClick={[Function]}
+        >
+          <span>
+            <i
+              aria-hidden="true"
+              className="manicon manicon-books-on-shelf"
+            />
+            See All Projects
+          </span>
+        </a>
+      </nav>
+    </div>
+  </section>
 </div>
 `;

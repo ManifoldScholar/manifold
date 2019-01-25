@@ -96,7 +96,6 @@ export class HomeContainer extends Component {
         <Layout.ButtonNavigation
           grayBg={false}
           showFollowing={this.showFollowing()}
-          authenticated={this.props.authentication.authenticated}
         />
       </div>
     );
