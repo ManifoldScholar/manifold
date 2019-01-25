@@ -101,10 +101,15 @@
 // --------------------------------------------------------
 @mixin containerPrototype {
   max-width: $containerWidthFull;
-  padding-right: $containerPaddingResp;
-  padding-left: $containerPaddingResp;
+  padding-right: $containerPaddingNarrow;
+  padding-left: $containerPaddingNarrow;
   margin-right: auto;
   margin-left: auto;
+
+  @include respond($break35) {
+    padding-right: $containerPaddingResp;
+    padding-left: $containerPaddingResp;
+  }
 
   @include respond($break120) {
     padding-right: $containerPaddingFull;
