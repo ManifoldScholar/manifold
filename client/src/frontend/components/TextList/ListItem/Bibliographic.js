@@ -12,6 +12,7 @@ export default class TextListListItemBibliographic extends Component {
     title: PropTypes.string,
     subtitle: PropTypes.string,
     date: PropTypes.string,
+    datePrefix: PropTypes.string,
     publishedVisible: PropTypes.bool
   };
 
@@ -43,7 +44,11 @@ export default class TextListListItemBibliographic extends Component {
           </p>
         )}
         {this.props.date && (
-          <Date date={this.props.date} baseClass={this.props.baseClass} />
+          <Date
+            date={this.props.date}
+            datePrefix={this.props.datePrefix}
+            baseClass={this.props.baseClass}
+          />
         )}
         {this.props.publishedVisible && (
           <span className={`${this.props.baseClass}__status`}>Published</span>

@@ -13,6 +13,7 @@ describe("Frontend.TextList.ListItem.Bibliographic component", () => {
         description={text.attributes.description}
         subtitle={text.attributes.subtitle}
         date={text.attributes.createdAt}
+        datePrefix={"Added"}
         title={text.attributes.title}
         creatorNames={text.attributes.creatorNames}
       />
