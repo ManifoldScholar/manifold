@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 import throttle from "lodash/throttle";
 import lh from "helpers/linkHandler";
+import withCurrentUser from "hoc/with-current-user";
 
-export default class LayoutButtonNavigation extends Component {
+export class LayoutButtonNavigation extends Component {
   static displayName = "Layout.ButtonNavigation";
 
   static propTypes = {
@@ -14,15 +15,14 @@ export default class LayoutButtonNavigation extends Component {
     showFollowing: PropTypes.bool,
     showProjectCollections: PropTypes.bool,
     hideAtNarrow: PropTypes.bool,
-    authenticated: PropTypes.bool
+    currentUser: PropTypes.object
   };
 
   static defaultProps = {
     grayBg: true,
     showProjects: true,
     showFollowing: true,
-    showProjectCollections: false,
-    authenticated: false
+    showProjectCollections: false
   };
 
   constructor() {
@@ -83,7 +83,7 @@ export default class LayoutButtonNavigation extends Component {
   };
 
   renderFollowingButton = () => {
-    if (this.props.authenticated !== true) return null;
+    if (!this.props.currentUser) return null;
     if (this.props.showFollowing !== true) return null;
     return (
       <Link to={lh.link("frontendFollowing")} className="button-icon-primary">
@@ -122,3 +122,5 @@ export default class LayoutButtonNavigation extends Component {
     );
   }
 }
+
+export default withCurrentUser(LayoutButtonNavigation);

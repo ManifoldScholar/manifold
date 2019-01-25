@@ -110,10 +110,7 @@ export class FeaturedContainer extends Component {
             ) : null}
           </div>
         </section>
-        <Layout.ButtonNavigation
-          grayBg={false}
-          authenticated={this.props.authentication.authenticated}
-        />
+        <Layout.ButtonNavigation grayBg={false} />
       </div>
     );
   }
