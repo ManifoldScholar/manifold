@@ -9,11 +9,8 @@ export default class TextListListItemDate extends Component {
   static propTypes = {
     baseClass: PropTypes.string,
     date: PropTypes.string.isRequired,
+    datePrefix: PropTypes.string,
     inline: PropTypes.bool
-  };
-
-  static defaultProps = {
-    baseClass: "text-date"
   };
 
   render() {
@@ -25,7 +22,7 @@ export default class TextListListItemDate extends Component {
         })}
       >
         <FormattedDate
-          prefix="Added"
+          prefix={this.props.datePrefix}
           format="MMMM YYYY"
           date={this.props.date}
         />

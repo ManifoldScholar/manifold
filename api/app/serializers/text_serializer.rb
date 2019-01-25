@@ -2,7 +2,7 @@
 class TextSerializer < ApplicationSerializer
   meta(partial: true)
 
-  attributes :title, :creator_names, :created_at, :start_text_section_id,
+  attributes :title, :creator_names, :created_at, :updated_at, :start_text_section_id,
              :published, :annotations_count, :highlights_count, :bookmarks_count,
              :age, :position, :publication_date, :cover_styles, :subtitle,
              :slug, :section_kind, :title_formatted, :title_plaintext,
