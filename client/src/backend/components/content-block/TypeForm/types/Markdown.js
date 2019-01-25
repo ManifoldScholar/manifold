@@ -16,6 +16,13 @@ export default class ProjectContentTypeFormMarkdown extends PureComponent {
   render() {
     return (
       <React.Fragment>
+        <Form.TextArea
+          focusOnMount
+          label="Body"
+          name="attributes[body]"
+          wide
+          height={300}
+        />
         <Form.Radios
           label="Style"
           name="attributes[style]"
@@ -23,11 +30,9 @@ export default class ProjectContentTypeFormMarkdown extends PureComponent {
             { label: "Normal", value: "normal" },
             { label: "Shaded", value: "shaded" }
           ]}
-          focusOnMount
           inline
           wide
         />
-        <Form.TextArea label="Body" name="attributes[body]" wide />
       </React.Fragment>
     );
   }
