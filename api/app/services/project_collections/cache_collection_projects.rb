@@ -16,6 +16,8 @@ module ProjectCollections
     def execute
       valid_projects = query.limit(number_of_projects).order(project_sorting)
 
+      return project_collection if valid_projects.pluck(:id) == projects.pluck(:id)
+
       collection_projects.where.not(project_id: valid_projects.pluck(:id)).destroy_all
 
       create_collection_projects valid_projects
