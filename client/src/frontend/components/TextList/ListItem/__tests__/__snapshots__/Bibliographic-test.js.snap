@@ -3,10 +3,10 @@
 exports[`Frontend.TextList.ListItem.Bibliographic component renders correctly 1`] = `
 Array [
   <h3
-    className="text-thumbnail__name"
+    className="text-block__name"
   >
     <span
-      className="text-thumbnail__title"
+      className="text-block__title"
       dangerouslySetInnerHTML={
         Object {
           "__html": "Ain't No Thang",
@@ -15,7 +15,7 @@ Array [
     />
   </h3>,
   <div
-    className="text-thumbnail__creators"
+    className="text-block__creators"
   >
     <span
       style={
@@ -29,7 +29,7 @@ Array [
     Andre3000, Big Boi
   </div>,
   <span
-    className="text-thumbnail__date text-thumbnail__date--block"
+    className="text-block__date text-block__date--block"
   >
     <span>
       Added April 2017

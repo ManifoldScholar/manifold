@@ -2,19 +2,19 @@
 
 exports[`Frontend.TextList.ListItem.Content component renders correctly 1`] = `
 <a
-  className="text-thumbnail__link"
+  className="text-block__link"
   href="/read/slug-1"
   onClick={[Function]}
 >
   <div
-    className="text-thumbnail__inner"
+    className="text-block__inner"
   >
     <figure
-      className="text-thumbnail__cover text-thumbnail__cover--svg"
+      className="text-block__cover text-block__cover--svg"
     >
       <svg
         aria-hidden="true"
-        className="manicon-svg text-thumbnail"
+        className="manicon-svg text-block"
         fill="currentColor"
         height={78}
         viewBox="0 0 64 64"
@@ -27,13 +27,13 @@ exports[`Frontend.TextList.ListItem.Content component renders correctly 1`] = `
       </svg>
     </figure>
     <div
-      className="text-thumbnail__content"
+      className="text-block__content"
     >
       <h3
-        className="text-thumbnail__name"
+        className="text-block__name"
       >
         <span
-          className="text-thumbnail__title"
+          className="text-block__title"
           dangerouslySetInnerHTML={
             Object {
               "__html": "Ain't No Thang",
@@ -42,7 +42,7 @@ exports[`Frontend.TextList.ListItem.Content component renders correctly 1`] = `
         />
       </h3>
       <div
-        className="text-thumbnail__creators"
+        className="text-block__creators"
       >
         <span
           style={
