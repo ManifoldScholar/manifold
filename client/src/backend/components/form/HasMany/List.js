@@ -15,11 +15,13 @@ export default class FormHasManyList extends PureComponent {
     editClickHandler: PropTypes.func,
     entityName: PropTypes.func,
     entities: PropTypes.array.isRequired,
-    entityAvatarAttribute: PropTypes.string
+    entityAvatarAttribute: PropTypes.string,
+    emptyMessage: PropTypes.string
   };
 
   static defaultProps = {
-    entityName: name => name
+    entityName: name => name,
+    emptyMessage: "None added"
   };
 
   onMove = (event, entity, direction) => {
@@ -43,10 +45,9 @@ export default class FormHasManyList extends PureComponent {
     this.props.onChange(newEntities, "remove");
   };
 
-  maybeRenderPlaceholder(renderConditions, label) {
+  maybeRenderPlaceholder(renderConditions) {
     if (!renderConditions) return null;
-
-    return <div className="placeholder">No {label} added</div>;
+    return <div className="placeholder">{this.props.emptyMessage}</div>;
   }
 
   render() {
@@ -81,7 +82,7 @@ export default class FormHasManyList extends PureComponent {
                 />
               );
             })
-          : this.maybeRenderPlaceholder(bucketStyle, this.props.label)}
+          : this.maybeRenderPlaceholder(bucketStyle)}
       </ul>
     );
   }
