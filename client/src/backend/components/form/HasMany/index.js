@@ -15,6 +15,7 @@ export class FormHasMany extends PureComponent {
   static propTypes = {
     label: PropTypes.string.isRequired,
     labelHeader: PropTypes.bool,
+    emptyMessage: PropTypes.string,
     onNew: PropTypes.func,
     orderable: PropTypes.bool,
     changeHandler: PropTypes.func,
@@ -38,7 +39,8 @@ export class FormHasMany extends PureComponent {
 
   static defaultProps = {
     idForError: labelId("predictive-text-belongs-to-error-"),
-    searchable: true
+    searchable: true,
+    emptyMessage: "None Added"
   };
 
   onNew = value => {
@@ -90,6 +92,7 @@ export class FormHasMany extends PureComponent {
     return (
       <List
         label={props.label}
+        emptyMessage={props.emptyMessage}
         orderable={props.orderable}
         onChange={this.onChange}
         entities={this.entities}
