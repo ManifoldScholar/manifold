@@ -8,7 +8,7 @@ import Manifold from "global/containers/Manifold";
 import cookie from "cookie";
 import get from "lodash/get";
 import ch from "helpers/consoleHelpers";
-import { hot } from "react-hot-loader";
+import { hot } from "react-hot-loader/root";
 import Analytics from "hoc/analytics";
 
 class App extends Component {
@@ -144,4 +144,4 @@ class App extends Component {
   }
 }
 
-export default hot(module)(App);
+export default hot(App);
