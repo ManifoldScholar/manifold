@@ -1,0 +1,113 @@
+// A nested list of TOC nodes with an optional heading for the text
+//
+// By default, nested node lists become progressively more indented.
+// However, to allow links to span the entire width of the list, we indent the
+// links themselves using `var(--linkIndent)` where CSS custom properties are
+// supported. Then, the value of `--linkIndent` is updated within the scope of
+// each depth level.
+
+.toc-block {
+  $firstLevelPadding: 1em;
+  $nestedLevelPadding: 1.611em;
+  $borderStyle: 1px solid $neutral40;
+
+  --linkIndent: #{$firstLevelPadding};
+
+  @include templateHead;
+  line-height: 1.278;
+  color: $neutral90;
+
+  &__heading {
+    padding-top: 20px;
+    padding-bottom: 22px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: 1px solid $neutral40;
+  }
+
+  &__text-title {
+    padding-right: 0.636em;
+    font-size: 19px;
+    font-weight: $medium;
+
+    @include respond($break60) {
+      font-size: 22px;
+    }
+  }
+
+  &__text-subtitle {
+    @include templateCopy;
+    display: inline-block;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: $regular;
+    letter-spacing: 0.017em;
+
+    @include respond($break60) {
+      font-size: 20px;
+    }
+  }
+
+  &__list {
+    @include listUnstyled;
+    padding-left: $firstLevelPadding;
+    font-size: 16px;
+
+    @include respond($break60) {
+      font-size: 18px;
+    }
+
+    @supports (padding: var(--linkIndent)) {
+      padding-left: 0;
+
+      // create values for `--linkIndent` scoped to depth-based class names
+      @for $i from 2 through 6 {
+        &--depth-#{$i} {
+          --linkIndent: #{$firstLevelPadding + $nestedLevelPadding * ($i - 1)};
+        }
+      }
+    }
+
+    &--depth-1 {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      border-top: $borderStyle;
+      border-bottom: $borderStyle;
+    }
+
+    &--empty {}
+  }
+
+  &__node {
+    > .toc-block__list {
+      padding-left: $firstLevelPadding * 1.5;
+
+      @supports (padding: var(--linkIndent)) {
+        padding-left: 0;
+      }
+    }
+  }
+
+  &__link {
+    display: block;
+    padding-top: 0.444em;
+    padding-bottom: 0.5em;
+    padding-left: var(--linkIndent, $nestedLevelPadding);
+    color: inherit;
+    text-decoration: none;
+    transition: color $duration $timing,
+      background-color $duration $timing;
+
+    &:hover,
+    &:focus {
+      color: $accentPrimaryDark;
+      background-color: $accentPrimaryOffWhite;
+    }
+  }
+
+  &__node-creator {
+    @include templateCopy;
+    padding-left: 0.889em;
+    letter-spacing: 0.015em;
+  }
+}
