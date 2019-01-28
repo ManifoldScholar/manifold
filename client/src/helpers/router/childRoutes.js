@@ -25,9 +25,17 @@ const renderChildRoutes = (route, renderOptions) => {
   const childRoutes = route.routes;
 
   const defaultRender = childRoute => props => {
+    const adjustedProps = Object.assign({}, props);
+
+    if (options.drawer) {
+      adjustedProps.location.state = Object.assign({}, props.location.state, {
+        noScroll: true
+      });
+    }
+
     let rendered = (
       <childRoute.component
-        {...props}
+        {...adjustedProps}
         {...options.childProps}
         route={childRoute}
       />

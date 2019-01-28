@@ -157,7 +157,7 @@ export default class DrawerWrapper extends PureComponent {
 
     if (this.props.closeUrl) {
       setTimeout(() => {
-        this.props.history.push(this.props.closeUrl);
+        this.props.history.push(this.props.closeUrl, { noScroll: true });
       }, 200);
     }
   };
