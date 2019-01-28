@@ -2,7 +2,7 @@
 class CollectionResourceSerializer < ApplicationSerializer
   meta(partial: false)
 
-  attributes :id, :position, :collection_id
+  attributes :id, :position, :resource_collection_id
 
   has_one :resource
 

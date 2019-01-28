@@ -1,5 +1,5 @@
 # A collection of resources
-class Collection < ApplicationRecord
+class ResourceCollection < ApplicationRecord
 
   include Concerns::HasFormattedAttributes
 
@@ -26,7 +26,7 @@ class Collection < ApplicationRecord
   has_many :resources, through: :collection_resources
   has_many :annotations, dependent: :destroy
   has_one :collection_created_event,
-          -> { where event_type: EventType[:collection_added] },
+          -> { where event_type: EventType[:resource_collection_added] },
           class_name: Event,
           as: :subject,
           dependent: :destroy,
@@ -92,7 +92,7 @@ class Collection < ApplicationRecord
   private
 
   def trigger_creation_event
-    Event.trigger(EventType[:collection_added], self)
+    Event.trigger(EventType[:resource_collection_added], self)
   end
 
 end

@@ -104,14 +104,14 @@ RSpec.describe Annotation, type: :model do
     end
 
     it "is invalid without a collection if format is collection" do
-      @annotation.format = "collection"
+      @annotation.format = "resource_collection"
       expect(@annotation).to_not be_valid
     end
 
     it "is valid with a collection if format is collection" do
-      collection = FactoryBot.create(:collection)
-      @annotation.format = "collection"
-      @annotation.collection = collection
+      collection = FactoryBot.create(:resource_collection)
+      @annotation.format = "resource_collection"
+      @annotation.resource_collection = collection
       expect(@annotation).to be_valid
     end
   end

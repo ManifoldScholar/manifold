@@ -112,15 +112,15 @@ RSpec.describe Resource, type: :model do
     before(:each) do
       @project_a = FactoryBot.create(:project, title: "project_a")
       @project_b = FactoryBot.create(:project, title: "project_b")
-      @collection_a = FactoryBot.create(:collection, title: "collection_a", project: @project_a)
-      @collection_b = FactoryBot.create(:collection, title: "collection_b", project: @project_a)
+      @collection_a = FactoryBot.create(:resource_collection, title: "collection_a", project: @project_a)
+      @collection_b = FactoryBot.create(:resource_collection, title: "collection_b", project: @project_a)
       @resource_a = FactoryBot.create(:resource, title: "resource_a", project: @project_a)
       @resource_b = FactoryBot.create(:resource, title: "resource_b", project: @project_a)
       @resource_c = FactoryBot.create(:resource, title: "resource_c", project: @project_b, tag_list: "test")
     end
 
     it "and ordered by collection order" do
-      collection = FactoryBot.create(:collection, project: @project_a)
+      collection = FactoryBot.create(:resource_collection, project: @project_a)
       collection.resources << @resource_a
       collection.resources << @resource_b
       collection.save
@@ -137,12 +137,12 @@ RSpec.describe Resource, type: :model do
 
     it "to only include those belonging to a collection" do
       @resource_d = FactoryBot.create(:resource, title: "resource_d", project: @project_a)
-      @collection_resource_a = FactoryBot.create(:collection_resource, collection: @collection_a, resource: @resource_a)
-      @collection_resource_b = FactoryBot.create(:collection_resource, collection: @collection_a, resource: @resource_b)
-      @collection_resource_c = FactoryBot.create(:collection_resource, collection: @collection_b, resource: @resource_d)
-      results = Resource.filter({collection: @collection_a.id})
+      @collection_resource_a = FactoryBot.create(:collection_resource, resource_collection: @collection_a, resource: @resource_a)
+      @collection_resource_b = FactoryBot.create(:collection_resource, resource_collection: @collection_a, resource: @resource_b)
+      @collection_resource_c = FactoryBot.create(:collection_resource, resource_collection: @collection_b, resource: @resource_d)
+      results = Resource.filter({resource_collection: @collection_a.id})
       expect(results.length).to be 2
-      results = Resource.filter({collection: @collection_b.id})
+      results = Resource.filter({resource_collection: @collection_b.id})
       expect(results.length).to be 1
     end
 

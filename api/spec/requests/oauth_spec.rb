@@ -10,7 +10,7 @@ RSpec.describe "Oauth", type: :request do
       end
 
       it "has a 200 status code" do
-        get api_v1_collections_path
+        get api_v1_projects_path
         expect(response).to have_http_status(200)
       end
 

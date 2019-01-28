@@ -99,14 +99,14 @@ RSpec.describe Project, type: :model do
 
   it "correctly returns the uncollected resource count" do
     project = FactoryBot.create(:project)
-    collection = FactoryBot.create(:collection, project: project)
+    collection = FactoryBot.create(:resource_collection, project: project)
     resource_1 = FactoryBot.create(:resource, project: project)
     resource_2 = FactoryBot.create(:resource, project: project)
     resource_3 = FactoryBot.create(:resource, project: project)
     collection_resource = FactoryBot.create(
       :collection_resource,
       resource: resource_1,
-      collection: collection
+      resource_collection: collection
     )
     expect(project.uncollected_resources.count).to be 2
   end

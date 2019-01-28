@@ -40,7 +40,7 @@ class Annotation < ApplicationRecord
   TYPE_ANNOTATION = "annotation".freeze
   TYPE_HIGHLIGHT = "highlight".freeze
   TYPE_RESOURCE = "resource".freeze
-  TYPE_COLLECTION = "collection".freeze
+  TYPE_COLLECTION = "resource_collection".freeze
   ANNOTATION_FORMATS = [
     TYPE_ANNOTATION,
     TYPE_HIGHLIGHT,
@@ -56,7 +56,7 @@ class Annotation < ApplicationRecord
   # Annotations can become orphaned when the text section is deleted.
   belongs_to :text_section, optional: true
   belongs_to :resource, optional: true
-  belongs_to :collection, optional: true
+  belongs_to :resource_collection, optional: true
   has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject,
                       counter_cache: :comments_count
   has_one :text, through: :text_section
@@ -70,7 +70,7 @@ class Annotation < ApplicationRecord
   # Validations
   validates :text_section, presence: true
   validates :resource, presence: true, if: :resource?
-  validates :collection, presence: true, if: :collection?
+  validates :resource_collection, presence: true, if: :collection?
   validates :start_node, :end_node, presence: true
   validates :start_char,
             :end_char,

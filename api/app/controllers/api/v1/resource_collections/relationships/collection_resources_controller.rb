@@ -1,11 +1,12 @@
 module Api
   module V1
-    module Collections
+    module ResourceCollections
       module Relationships
         # Responds with resources in a collection
         class CollectionResourcesController < ApplicationController
 
-          LOCATION = [:api, :v1, :collection_relationships, :collection_resources].freeze
+          LOCATION = [:api, :v1, :resource_collection_relationships,
+                      :collection_resources].freeze
 
           before_action :set_collection, only: [:index, :show]
 
@@ -38,7 +39,8 @@ module Api
           private
 
           def set_collection
-            @collection = Collection.friendly.find(params[:collection_id])
+            @collection = ResourceCollection.friendly
+                                            .find(params[:resource_collection_id])
           end
 
         end

@@ -23,7 +23,7 @@ module Notifications
       return {} unless include_digest?(NotificationKind[:projects]) ||
                        include_digest?(NotificationKind[:followed_projects])
       event_scope.created(date_range)
-                 .by_subject_type(%w(Text Resource Collection))
+                 .by_subject_type(%w(Text Resource ResourceCollection))
                  .group_by(&:project)
     end
 
@@ -53,7 +53,7 @@ module Notifications
     def event_scope(to_include = nil)
       includes = [:project,
                   :subject,
-                  project: [:creators, :texts, :collections, :resources]]
+                  project: [:creators, :texts, :resource_collections, :resources]]
       includes << to_include if to_include.present?
 
       Event.includes(includes).where(project: projects_scope)
