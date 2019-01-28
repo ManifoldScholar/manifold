@@ -46,7 +46,7 @@ export class ContentBlockEditContainer extends Component {
   onDelete = () => {
     const heading = "Are you sure you want to delete this content block?";
     const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, () => this.doDelete());
+    this.props.confirm(heading, message, this.doDelete);
   };
 
   onVisibilityToggle = () => {
