@@ -60,7 +60,7 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
       "attachment.variant_poster" => "",
       "attachment.variant_format_one" => "",
       "attachment.variant_format_two" => "",
-      "collections" => "",
+      "resource_collections" => "",
       "special_instructions" => ""
     }
   }
@@ -159,7 +159,7 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
   end
 
   let(:row_with_collections) do
-    values = link_values.merge("collections" => "collection 1; collection b")
+    values = link_values.merge("resource_collections" => "collection 1; collection b")
     make_row(values, column_map)
   end
 
@@ -263,14 +263,14 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
           row = row_with_collections
           expect do
             row.state_machine.transition_to(:importing)
-          end.to change { Collection.count }.from(0).to(2)
+          end.to change { ResourceCollection.count }.from(0).to(2)
         end
       end
 
       context "when the collection exists" do
         it "associates the resource with the collection" do
           row = row_with_collections
-          collection = FactoryBot.create(:collection, title: "collection 1", project: row.project)
+          collection = FactoryBot.create(:resource_collection, title: "collection 1", project: row.project)
           row.state_machine.transition_to(:importing)
           expect(collection.resources).to include(row.resource)
         end

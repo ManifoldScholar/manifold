@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190125222928) do
+ActiveRecord::Schema.define(version: 20190129201051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,17 +42,17 @@ ActiveRecord::Schema.define(version: 20190125222928) do
     t.text     "subject"
     t.uuid     "text_section_id"
     t.string   "format"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.uuid     "creator_id"
     t.uuid     "resource_id"
     t.text     "body"
-    t.boolean  "private",         default: false
-    t.integer  "comments_count",  default: 0
-    t.uuid     "collection_id"
-    t.integer  "events_count",    default: 0
-    t.boolean  "orphaned",        default: false, null: false
-    t.integer  "flags_count",     default: 0
+    t.boolean  "private",                default: false
+    t.integer  "comments_count",         default: 0
+    t.uuid     "resource_collection_id"
+    t.integer  "events_count",           default: 0
+    t.boolean  "orphaned",               default: false, null: false
+    t.integer  "flags_count",            default: 0
     t.index ["created_at"], name: "index_annotations_on_created_at", using: :brin
     t.index ["format"], name: "index_annotations_on_format", using: :btree
   end
@@ -87,29 +87,10 @@ ActiveRecord::Schema.define(version: 20190125222928) do
 
   create_table "collection_resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "resource_id"
-    t.uuid     "collection_id"
-    t.integer  "position",      default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  create_table "collections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.uuid     "project_id"
-    t.string   "thumbnail_file_name_deprecated"
-    t.string   "thumbnail_content_type_deprecated"
-    t.integer  "thumbnail_file_size_deprecated"
-    t.datetime "thumbnail_updated_at_deprecated"
-    t.string   "thumbnail_checksum"
-    t.string   "fingerprint"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.string   "slug"
-    t.integer  "collection_resources_count",        default: 0
-    t.integer  "events_count",                      default: 0
-    t.jsonb    "thumbnail_data",                    default: {}
-    t.index ["slug"], name: "index_collections_on_slug", unique: true, using: :btree
+    t.uuid     "resource_collection_id"
+    t.integer  "position",               default: 0
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "comment_hierarchies", id: false, force: :cascade do |t|
@@ -190,6 +171,12 @@ ActiveRecord::Schema.define(version: 20190125222928) do
     t.string   "link_text"
     t.string   "link_url"
     t.string   "link_target"
+    t.integer  "position"
+    t.text     "style",                              default: "dark"
+    t.boolean  "hidden",                             default: false
+    t.uuid     "creator_id"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "background_file_name_deprecated"
     t.string   "background_content_type_deprecated"
     t.integer  "background_file_size_deprecated"
@@ -198,12 +185,6 @@ ActiveRecord::Schema.define(version: 20190125222928) do
     t.string   "foreground_content_type_deprecated"
     t.integer  "foreground_file_size_deprecated"
     t.datetime "foreground_updated_at_deprecated"
-    t.integer  "position"
-    t.text     "style",                              default: "dark"
-    t.boolean  "hidden",                             default: false
-    t.uuid     "creator_id"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
     t.string   "background_color"
     t.string   "foreground_color"
     t.string   "header_color"
@@ -300,10 +281,6 @@ ActiveRecord::Schema.define(version: 20190125222928) do
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "state"
     t.string   "log",                                           array: true
-    t.string   "source_file_name"
-    t.string   "source_content_type"
-    t.integer  "source_file_size"
-    t.datetime "source_updated_at"
     t.string   "strategy"
     t.string   "external_source_url"
     t.string   "ingestion_type"
@@ -312,6 +289,10 @@ ActiveRecord::Schema.define(version: 20190125222928) do
     t.uuid     "project_id",                       null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
     t.jsonb    "source_data",         default: {}, null: false
     t.index ["creator_id"], name: "index_ingestions_on_creator_id", using: :btree
     t.index ["project_id"], name: "index_ingestions_on_project_id", using: :btree
@@ -449,6 +430,25 @@ ActiveRecord::Schema.define(version: 20190125222928) do
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
 
+  create_table "resource_collections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.uuid     "project_id"
+    t.string   "thumbnail_checksum"
+    t.string   "fingerprint"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "thumbnail_file_name_deprecated"
+    t.string   "thumbnail_content_type_deprecated"
+    t.integer  "thumbnail_file_size_deprecated"
+    t.datetime "thumbnail_updated_at_deprecated"
+    t.string   "slug"
+    t.integer  "collection_resources_count",        default: 0
+    t.integer  "events_count",                      default: 0
+    t.jsonb    "thumbnail_data",                    default: {}
+    t.index ["slug"], name: "index_resource_collections_on_slug", unique: true, using: :btree
+  end
+
   create_table "resource_import_row_transitions", force: :cascade do |t|
     t.string   "to_state",                            null: false
     t.jsonb    "metadata",               default: {}
@@ -464,14 +464,14 @@ ActiveRecord::Schema.define(version: 20190125222928) do
   create_table "resource_import_rows", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "resource_import_id"
     t.uuid     "resource_id"
-    t.uuid     "collection_id"
-    t.string   "row_type",           default: "data"
-    t.integer  "line_number",                         null: false
-    t.text     "values",             default: [],                  array: true
-    t.text     "import_errors",      default: [],                  array: true
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.index ["collection_id"], name: "index_resource_import_rows_on_collection_id", using: :btree
+    t.uuid     "resource_collection_id"
+    t.string   "row_type",               default: "data"
+    t.integer  "line_number",                             null: false
+    t.text     "values",                 default: [],                  array: true
+    t.text     "import_errors",          default: [],                  array: true
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["resource_collection_id"], name: "index_resource_import_rows_on_resource_collection_id", using: :btree
     t.index ["resource_id"], name: "index_resource_import_rows_on_resource_id", using: :btree
     t.index ["resource_import_id"], name: "index_resource_import_rows_on_resource_import_id", using: :btree
   end
@@ -494,10 +494,6 @@ ActiveRecord::Schema.define(version: 20190125222928) do
     t.string   "storage_type"
     t.string   "storage_identifier"
     t.string   "source",                                       null: false
-    t.string   "data_file_name_deprecated"
-    t.string   "data_content_type_deprecated"
-    t.integer  "data_file_size_deprecated"
-    t.datetime "data_updated_at_deprecated"
     t.string   "url"
     t.integer  "header_row",                   default: 1
     t.jsonb    "column_map",                   default: {},    null: false
@@ -505,6 +501,10 @@ ActiveRecord::Schema.define(version: 20190125222928) do
     t.boolean  "parse_error",                  default: false, null: false
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+    t.string   "data_file_name_deprecated"
+    t.string   "data_content_type_deprecated"
+    t.integer  "data_file_size_deprecated"
+    t.datetime "data_updated_at_deprecated"
     t.jsonb    "data_data",                    default: {}
     t.index ["creator_id"], name: "index_resource_imports_on_creator_id", using: :btree
     t.index ["project_id"], name: "index_resource_imports_on_project_id", using: :btree

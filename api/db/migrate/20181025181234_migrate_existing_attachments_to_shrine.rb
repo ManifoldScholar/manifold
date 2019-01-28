@@ -1,9 +1,11 @@
+using Refinements::HandleRenamedCollections
+
 class MigrateExistingAttachmentsToShrine < ActiveRecord::Migration[5.0]
   def change
     remove_column :projects, :avatar_meta, :jsonb, default: {}, null: false # This is handled by attachments concern now
 
     attachment_map = {
-      "Collection" => [:thumbnail],
+      "ResourceCollection" => [:thumbnail],
       "Feature" => [:background, :foreground],
       "IngestionSource" => [:attachment],
       "Maker" => [:avatar],
@@ -29,7 +31,7 @@ class MigrateExistingAttachmentsToShrine < ActiveRecord::Migration[5.0]
 
             %w(file_name content_type file_size updated_at).each do |suffix|
               column_name = "#{attachment}_#{suffix}"
-              rename_column klass.underscore.pluralize.to_sym, column_name.to_sym, "#{column_name}_deprecated".to_sym
+              rename_column klass.constantize.table_name, column_name.to_sym, "#{column_name}_deprecated".to_sym
             end
           end
         end

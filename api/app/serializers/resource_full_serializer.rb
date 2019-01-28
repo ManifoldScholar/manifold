@@ -22,7 +22,7 @@ class ResourceFullSerializer < ResourceSerializer
              :embed_code, :iframe_allow_fullscreen, :downloadable_kind, :metadata,
              :metadata_properties, :abilities, :tag_list
 
-  has_many :collections
+  has_many :resource_collections
   belongs_to :project
 
   def downloadable_kind

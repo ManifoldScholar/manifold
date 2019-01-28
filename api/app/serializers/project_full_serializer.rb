@@ -4,7 +4,7 @@ class ProjectFullSerializer < ProjectSerializer
 
   meta(partial: false)
 
-  attributes :event_count, :metadata, :collections_count, :resources_count,
+  attributes :event_count, :metadata, :resource_collections_count, :resources_count,
              :event_types, :metadata_properties, :citations, :hide_activity,
              :metadata_formatted
 
@@ -12,7 +12,7 @@ class ProjectFullSerializer < ProjectSerializer
   has_many :published_texts
   has_many :text_categories, serializer: CategorySerializer
   has_many :events
-  has_many :collections
+  has_many :resource_collections
   has_many :resources
   has_many :subjects
   has_many :twitter_queries

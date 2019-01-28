@@ -3,21 +3,21 @@ module Api
     module TextSections
       module Relationships
         # Collections controller
-        class CollectionsController < ApplicationController
+        class ResourceCollectionsController < ApplicationController
 
           before_action :set_text_section, only: [:index]
 
           INCLUDES = %w().freeze
 
-          resourceful! Collection, authorize_options: { except: [:index] } do
-            @text_section.collections
+          resourceful! ResourceCollection, authorize_options: { except: [:index] } do
+            @text_section.resource_collections
           end
 
           def index
-            @resources = load_resources
+            @collections = load_resource_collections
             render_multiple_resources(
-              @resources,
-              each_serializer: CollectionSerializer
+              @collections,
+              each_serializer: ResourceCollectionSerializer
             )
           end
 

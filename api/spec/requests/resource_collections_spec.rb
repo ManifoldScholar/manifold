@@ -1,16 +1,16 @@
 require "rails_helper"
 
-RSpec.describe "Collections API", type: :request do
+RSpec.describe "Resource Collections API", type: :request do
 
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:collection) { FactoryBot.create(:collection) }
+  let(:collection) { FactoryBot.create(:resource_collection) }
 
-  describe "sends a list of collections" do
+  describe "sends a list of resource collections" do
     describe "the response" do
       it "has a 200 status code" do
-        get api_v1_collections_path
+        get api_v1_resource_collections_path
         expect(response).to have_http_status(200)
       end
     end
@@ -18,7 +18,7 @@ RSpec.describe "Collections API", type: :request do
 
   describe "updates a collection" do
 
-    let(:path) { api_v1_collection_path(collection) }
+    let(:path) { api_v1_resource_collection_path(collection) }
 
     context "when the user is an admin" do
 
@@ -39,7 +39,7 @@ RSpec.describe "Collections API", type: :request do
 
     describe "destroys a collection" do
 
-      let(:path) { api_v1_collection_path(collection) }
+      let(:path) { api_v1_resource_collection_path(collection) }
 
       context "when the user is an admin" do
 

@@ -88,8 +88,8 @@ class Project < ApplicationRecord
   has_many :events, -> { order "events.created_at DESC" }, dependent: :destroy,
                                                            inverse_of: :project
   has_many :resources, dependent: :destroy, inverse_of: :project
-  has_many :collections, dependent: :destroy, inverse_of: :project
-  has_many :collection_resources, through: :collections, inverse_of: :project
+  has_many :resource_collections, dependent: :destroy, inverse_of: :project
+  has_many :collection_resources, through: :resource_collections, inverse_of: :project
   has_many :project_subjects, dependent: :destroy, inverse_of: :project
   has_many :subjects, through: :project_subjects
   has_many :ingestions, dependent: :destroy, inverse_of: :project
@@ -126,7 +126,7 @@ class Project < ApplicationRecord
   after_commit :queue_reindex_children_job, :update_smart_collection_caches
 
   # Delegations
-  delegate :count, to: :collections, prefix: true
+  delegate :count, to: :resource_collections, prefix: true
   delegate :count, to: :resources, prefix: true
 
   # Misc

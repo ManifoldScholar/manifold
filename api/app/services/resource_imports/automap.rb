@@ -10,7 +10,8 @@ module ResourceImports
       "external_id" => ["file id", "video id"].freeze,
       "credit" => ["credit line"].freeze,
       "allow_high_res" => ["allow_high-res download", "allow high-res viewing"].freeze,
-      "tag_list" => ["keywords"].freeze
+      "tag_list" => ["keywords"].freeze,
+      "resource_collections" => ["collections"].freeze
     }.freeze
 
     record :resource_import

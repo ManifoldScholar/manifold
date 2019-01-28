@@ -1,6 +1,6 @@
 class ResourceDecorator < ApplicationDecorator
   delegate_all
-  decorates_association :collection
+  decorates_association :resource_collection
   decorates_association :project
 
   def url

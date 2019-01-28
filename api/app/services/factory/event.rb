@@ -97,7 +97,7 @@ module Factory
       case type
       when ::EventType[:text_added]
         "/read/#{subject.id}"
-      when ::EventType[:collection_added], ::EventType[:resource_added]
+      when ::EventType[:resource_collection_added], ::EventType[:resource_added]
         "/project/#{subject.project.id}/#{subject.class.name}/#{subject.id}"
       end
     end
