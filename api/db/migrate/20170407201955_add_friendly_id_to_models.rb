@@ -1,3 +1,5 @@
+using Refinements::HandleRenamedCollections
+
 class AddFriendlyIdToModels < ActiveRecord::Migration[5.0]
   def change
 
@@ -28,10 +30,10 @@ class AddFriendlyIdToModels < ActiveRecord::Migration[5.0]
     reversible do |change|
 
       change.up do
-        Text.find_each(&:save)
-        Project.find_each(&:save)
-        Collection.find_each(&:save)
-        Resource.find_each(&:save)
+        %w(Text Project ResourceCollection Resource).each do |klass|
+          klass.constantize.reset_column_information
+          klass.constantize.find_each(&:save)
+        end
       end
 
     end

@@ -1,5 +1,5 @@
-# Provides a serialization of a collection model.
-class CollectionSerializer < ApplicationSerializer
+# Provides a serialization of a resource collection model.
+class ResourceCollectionSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :id, :title, :title_formatted, :created_at, :description,

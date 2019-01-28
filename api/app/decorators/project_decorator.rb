@@ -2,7 +2,7 @@ class ProjectDecorator < ApplicationDecorator
   delegate_all
   decorates_association :texts
   decorates_association :resources
-  decorates_association :collections
+  decorates_association :resource_collections
   decorates_association :comments
   decorates_association :annotations
 

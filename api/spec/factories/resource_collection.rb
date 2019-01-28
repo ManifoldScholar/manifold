@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :collection do
+  factory :resource_collection do
     title "Some Collection"
     project
   end

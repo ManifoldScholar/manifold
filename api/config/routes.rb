@@ -65,8 +65,8 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :collections do
-        scope module: :collections do
+      resources :resource_collections do
+        scope module: :resource_collections do
           namespace :relationships do
             resources :collection_resources, only: [:index, :show]
             resources :resources, only: [:index]
@@ -88,7 +88,7 @@ Rails.application.routes.draw do
           namespace :relationships do
             resources :annotations, only: [:index, :create, :update]
             resources :resources, only: [:index, :create, :update]
-            resources :collections, only: [:index, :create, :update]
+            resources :resource_collections, only: [:index, :create, :update]
           end
         end
       end
@@ -105,7 +105,7 @@ Rails.application.routes.draw do
             resources :content_blocks, only: [:index, :create]
             resources :uncollected_resources, only: [:index]
             resources :resources, only: [:index, :create]
-            resources :collections, only: [:index, :create]
+            resources :resource_collections, only: [:index, :create]
             resources :events, only: [:index]
             resources :twitter_queries, only: [:index, :create]
             resources :resource_imports, only: [:create, :update, :show]

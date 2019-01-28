@@ -20,6 +20,6 @@ end
 class EventType::CommentCreated < EventType
 end
 
-class EventType::CollectionAdded < EventType
+class EventType::ResourceCollectionAdded < EventType
 end
 # rubocop:enable Style/ClassAndModuleChildren

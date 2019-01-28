@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :collection_resource do
-    collection
+    resource_collection
     resource
   end
 end

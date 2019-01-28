@@ -42,7 +42,7 @@ module Demonstration
     def clear_db
       clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource
                  Subject TextSubject TextTitle User Category Page Annotation
-                 ProjectCollection CollectionResource Collection Comment Event
+                 ProjectCollection CollectionResource ResourceCollection Comment Event
                  Favorite Flag ProjectSubject Stylesheet Subject SearchableNode
                  TwitterQuery UpgradeResult)
       clear.each do |model_name|
@@ -99,8 +99,8 @@ module Demonstration
       @logger.info("Makers reindexed".green)
       Resource.reindex
       @logger.info("Resources reindexed".green)
-      Collection.reindex
-      @logger.info("Collections reindexed".green)
+      ResourceCollection.reindex
+      @logger.info("ResourceCollections reindexed".green)
       Event.reindex
       @logger.info("Events reindexed".green)
     end

@@ -141,10 +141,10 @@ module Importer
       collections = collection_list.split(";")
       collections.each do |collection_title|
         @logger.info "   Attempting to add resource to collection \"#{collection_title}\""
-        collection = @project.collections.find_by(title: collection_title)
+        collection = @project.resource_collections.find_by(title: collection_title)
         return @logger.log_missing_collection unless collection
         return @logger.log_already_in_collection if
-          resource.collections.include?(collection)
+          resource.resource_collections.include?(collection)
         remove_resource_from_all_collections(resource)
         @logger.info "        Resource does not belong to collection. Adding."
         create_collection_resource(collection, resource, count)
@@ -160,7 +160,7 @@ module Importer
 
     def create_collection_resource(collection, resource, position)
       cr = CollectionResource.create(
-        collection: collection,
+        resource_collection: collection,
         resource: resource,
         position: position
       )
@@ -294,9 +294,10 @@ module Importer
     end
 
     def find_or_initialize_collection(fingerprint)
-      collection = @project.collections.find_or_initialize_by fingerprint: fingerprint
+      collection = @project.resource_collections
+                           .find_or_initialize_by fingerprint: fingerprint
       # rubocop:disable LineLength
-      @logger.info "    Found existing collection with id #{collection.id}" unless collection.new_record?
+      @logger.info "    Found existing resource collection with id #{collection.id}" unless collection.new_record?
       @logger.info "    No collection exists for fingerprint. Creating new collection" if collection.new_record?
       # rubocop:enable LineLength
       collection
