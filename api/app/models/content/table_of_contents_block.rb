@@ -8,7 +8,7 @@ module Content
                               show_text_title: [:boolean, default: false]
 
     validates :depth,
-              numericality: { min: 1, only_integer: true },
+              numericality: { min: 1, less_than_or_equal_to: 6, only_integer: true },
               allow_nil: true
     validates :show_authors, inclusion: { in: [true, false] }
     validates :show_text_title, inclusion: { in: [true, false] }
