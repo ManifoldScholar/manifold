@@ -8,8 +8,8 @@ export default class ContentBlockDrawerHeader extends PureComponent {
 
   static propTypes = {
     contentBlock: PropTypes.object.isRequired,
-    onDelete: PropTypes.func.isRequired,
-    onVisibilityToggle: PropTypes.func.isRequired,
+    onDelete: PropTypes.func,
+    onVisibilityToggle: PropTypes.func,
     icon: PropTypes.string
   };
 
