@@ -17,6 +17,6 @@ FactoryBot.define do
   end
   factory :collection_annotation, parent: :annotation do
     format Annotation::TYPE_COLLECTION
-    association :collection, factory: :collection
+    association :resource_collection, factory: :resource_collection
   end
 end

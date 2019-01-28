@@ -92,7 +92,7 @@ class Event < ApplicationRecord
   end
 
   def subject_slug
-    sluggables = %w(Project Resource Text ResourceCollection Collection)
+    sluggables = %w(Project Resource Text ResourceCollection)
     return nil unless sluggables.include? subject_type
     return subject.slug if subject&.respond_to?(:slug)
     nil

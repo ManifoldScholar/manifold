@@ -1,6 +1,6 @@
 module Updaters
-  # Updates a Collection model from JSON-API style params
-  class Collection
+  # Updates a ResourceCollection model from JSON-API style params
+  class ResourceCollection
     include ::Updaters
 
     def attachment_fields

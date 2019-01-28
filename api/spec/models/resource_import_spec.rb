@@ -69,7 +69,7 @@ RSpec.shared_examples "after parsing" do
       "Allow High-Res Viewing" => "allow_high_res",
       "Alt-Text" => "metadata.alt_text",
       "Caption" => "caption",
-      "Collection" => "collections",
+      "Collection" => "resource_collections",
       "Copyright Holder" => "metadata.rights_holder",
       "Copyright Status" => "metadata.copyright_status",
       "Creator" => "metadata.creator",

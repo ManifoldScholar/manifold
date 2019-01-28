@@ -1,7 +1,7 @@
 module Manifold
   module ThumbnailsTask
     def self.types
-      %w(Maker Collection Resource Project User)
+      %w(Maker ResourceCollection Resource Project User)
     end
   end
 end

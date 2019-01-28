@@ -31,8 +31,8 @@ RSpec.describe Notifications::ComposeDigestEvents do
                                             subject: FactoryBot.create(:resource),
                                             project: project_b)
       @c_collection_event = FactoryBot.create(:event,
-                                            event_type: EventType[:collection_added],
-                                            subject: FactoryBot.create(:collection),
+                                            event_type: EventType[:resource_collection_added],
+                                            subject: FactoryBot.create(:resource_collection),
                                             project: project_c)
     end
   end

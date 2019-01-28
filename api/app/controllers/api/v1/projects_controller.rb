@@ -5,14 +5,14 @@ module Api
 
       INCLUDES = [
         :creators, :contributors, :texts, :text_categories, :events,
-        :collections, :uncollected_resources, :subjects, :twitter_queries,
+        :resource_collections, :uncollected_resources, :subjects, :twitter_queries,
         :permitted_users
       ].freeze
 
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         includes = [
           { texts: [:titles, :text_subjects] },
-          { collections: [] },
+          { resource_collections: [] },
           { events: [] },
           { resources: [:tags] }
         ]
@@ -60,7 +60,7 @@ module Api
       def scope_for_projects
         Project.friendly.includes(
           { texts: [:titles, :text_subjects] },
-          { collections: { resources: :tags } },
+          { resource_collections: { resources: :tags } },
           :events,
           :twitter_queries,
           :text_categories,

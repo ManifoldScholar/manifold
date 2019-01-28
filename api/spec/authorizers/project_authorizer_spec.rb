@@ -4,8 +4,8 @@ shared_examples_for "authorized to manage project children" do
   context "the subject's project child abilities" do
     it("the subject CAN manage project resources"){ expect(object.resources_manageable_by?(subject)).to be true }
     it("the subject CAN create project resources"){ expect(object.resources_creatable_by?(subject)).to be true }
-    it("the subject CAN manage project collections"){ expect(object.collections_manageable_by?(subject)).to be true }
-    it("the subject CAN create project collections"){ expect(object.collections_creatable_by?(subject)).to be true }
+    it("the subject CAN manage project resource collections"){ expect(object.resource_collections_manageable_by?(subject)).to be true }
+    it("the subject CAN create project resource collections"){ expect(object.resource_collections_creatable_by?(subject)).to be true }
     it("the subject CAN manage project texts"){ expect(object.texts_manageable_by?(subject)).to be true }
     it("the subject CAN create project texts"){ expect(object.texts_creatable_by?(subject)).to be true }
     it("the subject CAN manage project twitter queries"){ expect(object.twitter_queries_manageable_by?(subject)).to be true }
@@ -21,8 +21,8 @@ shared_examples_for "unauthorized to manage project children" do
   context "the subject's project child abilities" do
     it("the subject CAN'T manage project resources"){ expect(object.resources_manageable_by?(subject)).to be false }
     it("the subject CAN'T create project resources"){ expect(object.resources_creatable_by?(subject)).to be false }
-    it("the subject CAN'T manage project collections"){ expect(object.collections_manageable_by?(subject)).to be false }
-    it("the subject CAN'T create project collections"){ expect(object.collections_creatable_by?(subject)).to be false }
+    it("the subject CAN'T manage project resource collections"){ expect(object.resource_collections_manageable_by?(subject)).to be false }
+    it("the subject CAN'T create project resource collections"){ expect(object.resource_collections_creatable_by?(subject)).to be false }
     it("the subject CAN'T manage project texts"){ expect(object.texts_manageable_by?(subject)).to be false }
     it("the subject CAN'T create project texts"){ expect(object.texts_creatable_by?(subject)).to be false }
     it("the subject CAN'T manage project twitter queries"){ expect(object.twitter_queries_manageable_by?(subject)).to be false }
@@ -138,8 +138,8 @@ RSpec.describe "Project Abilities", :authorizer do
     context "the subject's project child abilities" do
       it("the subject CAN manage project resources"){ expect(object.resources_manageable_by?(subject)).to be true }
       it("the subject CAN'T create project resources"){ expect(object.resources_creatable_by?(subject)).to be false }
-      it("the subject CAN'T manage project collections"){ expect(object.collections_manageable_by?(subject)).to be false }
-      it("the subject CAN'T create project collections"){ expect(object.collections_creatable_by?(subject)).to be false }
+      it("the subject CAN'T manage project resource collections"){ expect(object.resource_collections_manageable_by?(subject)).to be false }
+      it("the subject CAN'T create project resource collections"){ expect(object.resource_collections_creatable_by?(subject)).to be false }
       it("the subject CAN'T manage project texts"){ expect(object.texts_manageable_by?(subject)).to be false }
       it("the subject CAN'T create project texts"){ expect(object.texts_creatable_by?(subject)).to be false }
       it("the subject CAN'T manage project twitter queries"){ expect(object.twitter_queries_manageable_by?(subject)).to be false }

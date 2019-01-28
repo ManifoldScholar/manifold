@@ -52,7 +52,7 @@ class Resource < ApplicationRecord
           inverse_of: :subject
   has_one :resource_import_row, inverse_of: :resource, dependent: :nullify
   has_many :collection_resources, dependent: :destroy, inverse_of: :resource
-  has_many :collections, through: :collection_resources
+  has_many :resource_collections, through: :collection_resources
   has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject
   has_many :annotations, dependent: :destroy, inverse_of: :resource
 
@@ -93,19 +93,19 @@ class Resource < ApplicationRecord
     return all unless project.present?
     where(project: project)
   }
-  scope :by_collection, lambda { |collection|
+  scope :by_resource_collection, lambda { |collection|
     return all unless collection.present?
     joins(:collection_resources)
-      .where("collection_resources.collection_id = ?", collection)
+      .where("collection_resources.resource_collection_id = ?", collection)
   }
   scope :by_kind, lambda { |kind|
     return all unless kind.present?
     where(kind: kind)
   }
   scope :with_collection_order, lambda { |collection_id|
-    id = Collection.friendly.find(collection_id)
+    id = ResourceCollection.friendly.find(collection_id)
     joins(:collection_resources)
-      .where("collection_resources.collection_id = ?", id)
+      .where("collection_resources.resource_collection_id = ?", id)
       .order("collection_resources.position ASC")
   }
   scope :with_order, lambda { |by|
@@ -126,14 +126,14 @@ class Resource < ApplicationRecord
              highlight: [:title, :body])
 
   scope :search_import, lambda {
-    includes(:collections, :project)
+    includes(:resource_collections, :project)
   }
 
   def search_data
     {
       title: title_plaintext,
       body: description_plaintext,
-      collection_titles: collections.map(&:title),
+      collection_titles: resource_collections.map(&:title),
       project_id: project&.id,
       project_titles: project.title,
       kind: kind,

@@ -1,6 +1,6 @@
 module Api
   module V1
-    module Collections
+    module ResourceCollections
       module Relationships
         # Responds with resources in a collection
         class ResourcesController < ApplicationController
@@ -22,7 +22,7 @@ module Api
               @resources,
               include: %w(collection_resources),
               meta: { pagination: pagination_dict(@resources) },
-              location: api_v1_collection_relationships_resources_url(@collection)
+              location: location
             )
           end
 
@@ -33,8 +33,13 @@ module Api
 
           private
 
+          def location
+            api_v1_resource_collection_relationships_resources_url(@collection)
+          end
+
           def set_collection
-            @collection = Collection.friendly.find(params[:collection_id])
+            @collection = ResourceCollection.friendly
+                                            .find(params[:resource_collection_id])
           end
 
         end

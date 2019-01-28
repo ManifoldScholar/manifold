@@ -90,7 +90,7 @@ module Validation
     params.permit(param_config)
   end
 
-  def collection_params
+  def resource_collection_params
     params.require(:data)
     attributes = [:title, :description, attachment(:thumbnail), :remove_thumbnail]
     relationships = [:project, :resources]
@@ -191,7 +191,7 @@ module Validation
     params.require(:data)
     attributes = [:start_node, :end_node, :start_char, :end_char, :section_id, :format,
                   :subject, :body, :private]
-    relationships = [:resource, :collection]
+    relationships = [:resource, :resource_collection]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
@@ -341,13 +341,13 @@ module Validation
     structure_params
   end
 
-  def collection_filter_params
+  def resource_collection_filter_params
     params.permit(filter: [:keyword, :order])[:filter]
   end
 
   def resource_filter_params
     params.permit(filter: [:keyword, :kind, :tag, :order, :collection_order,
-                           :project, :collection])[:filter]
+                           :project, :resource_collection])[:filter]
   end
 
   def comment_filter_params

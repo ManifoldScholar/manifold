@@ -7,7 +7,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
 
   let(:text_section) { FactoryBot.create(:text_section) }
   let(:resource) { FactoryBot.create(:resource, project: text_section.project) }
-  let(:collection) { FactoryBot.create(:collection, project: text_section.project) }
+  let(:collection) { FactoryBot.create(:resource_collection, project: text_section.project) }
   let(:annotation_params) { { attributes: FactoryBot.attributes_for(:annotation) } }
   let(:resource_params) do
     {
@@ -26,9 +26,9 @@ RSpec.describe "Text Section Annotations API", type: :request do
     {
       attributes: FactoryBot.build(:collection_annotation).attributes,
       relationships: {
-        collection: {
+        resource_collection: {
           data: {
-            type: "collections",
+            type: "resource_collections",
             id: collection.id
           }
         }
