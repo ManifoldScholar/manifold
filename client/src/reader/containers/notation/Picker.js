@@ -17,8 +17,14 @@ export class NotationPickerContainer extends PureComponent {
     const newState = {
       resources: select(requests.beResources, state.entityStore),
       resourcesMeta: meta(requests.beResources, state.entityStore),
-      collections: select(requests.beCollections, state.entityStore),
-      collectionsMeta: meta(requests.beCollections, state.entityStore)
+      resourceCollections: select(
+        requests.beResourceCollections,
+        state.entityStore
+      ),
+      resourceCollectionsMeta: meta(
+        requests.beResourceCollections,
+        state.entityStore
+      )
     };
     return Object.assign({}, newState, ownProps);
   };
@@ -29,8 +35,8 @@ export class NotationPickerContainer extends PureComponent {
     projectId: PropTypes.string,
     resources: PropTypes.array,
     resourcesMeta: PropTypes.object,
-    collections: PropTypes.array,
-    collectionsMeta: PropTypes.object,
+    resourceCollections: PropTypes.array,
+    resourceCollectionsMeta: PropTypes.object,
     dispatch: PropTypes.func,
     selectionHandler: PropTypes.func
   };
@@ -65,12 +71,12 @@ export class NotationPickerContainer extends PureComponent {
   fetchCollections(page) {
     const pagination = { number: page, size: perPage };
     const action = request(
-      projectsAPI.collections(
+      projectsAPI.resourceCollections(
         this.props.projectId,
         this.state.filter,
         pagination
       ),
-      requests.beCollections
+      requests.beResourceCollections
     );
     this.props.dispatch(action);
   }
@@ -119,11 +125,11 @@ export class NotationPickerContainer extends PureComponent {
 
     if (context === "collections") {
       out = {
-        entities: props.collections,
-        singularUnit: "collection",
-        pluralUnit: "collections",
-        entityComponent: Notation.Collection.PickerListItem,
-        pagination: props.collectionsMeta.pagination
+        entities: props.resourceCollections,
+        singularUnit: "resource collection",
+        pluralUnit: "resource collections",
+        entityComponent: Notation.ResourceCollection.PickerListItem,
+        pagination: props.resourceCollectionsMeta.pagination
       };
     }
 
@@ -131,7 +137,7 @@ export class NotationPickerContainer extends PureComponent {
   }
 
   render() {
-    if (!this.props.resources || !this.props.collections) return null;
+    if (!this.props.resources || !this.props.resourceCollections) return null;
     const {
       entities,
       singularUnit,

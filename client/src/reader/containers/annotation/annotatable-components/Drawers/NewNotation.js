@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import Notation from "reader/containers/notation";
 import PropTypes from "prop-types";
+import humps from "humps";
 
 export default class NewNotation extends PureComponent {
   static drawerProps = () => {
@@ -17,7 +18,7 @@ export default class NewNotation extends PureComponent {
 
   saveAnnotation = notation => {
     const { pendingAnnotation } = this.props;
-    const format = notation.type.slice(0, -1); // Type is a plural, so take the 's' off
+    const format = humps.decamelize(notation.type.slice(0, -1)); // Type is a plural, so take the 's' off
     const attributes = Object.assign({}, pendingAnnotation, { format });
     const toCreate = { attributes };
     return this.props.actions.createAnnotation(toCreate, { notation });

@@ -12,11 +12,13 @@ const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 
-export class NotationCollectionDetailContainer extends PureComponent {
+export class NotationResourceCollectionDetailContainer extends PureComponent {
   static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
     const promises = [];
-    const resourceCall = resourceCollectionsAPI.show(match.params.resourceCollectionId);
+    const resourceCall = resourceCollectionsAPI.show(
+      match.params.resourceCollectionId
+    );
     const { promise: one } = dispatch(
       request(resourceCall, requests.rResourceCollection)
     );
@@ -39,14 +41,17 @@ export class NotationCollectionDetailContainer extends PureComponent {
 
   static mapStateToProps = (state, ownProps) => {
     const newState = {
-      resourceCollection: select(requests.rResourceCollection, state.entityStore),
+      resourceCollection: select(
+        requests.rResourceCollection,
+        state.entityStore
+      ),
       slideshowResources: select(requests.feSlideshow, state.entityStore),
       slideshowResourcesMeta: meta(requests.feSlideshow, state.entityStore)
     };
     return Object.assign({}, newState, ownProps);
   };
 
-  static displayName = "ReaderContainer.Notation.Collection.Detail";
+  static displayName = "ReaderContainer.Notation.ResourceCollection.Detail";
 
   static propTypes = {
     route: PropTypes.object,
@@ -70,14 +75,15 @@ export class NotationCollectionDetailContainer extends PureComponent {
   };
 
   render() {
-    if (!this.props.resourceCollection || !this.props.slideshowResources) return null;
+    if (!this.props.resourceCollection || !this.props.slideshowResources)
+      return null;
     return (
       <Overlay
         closeCallback={this.handleClose}
         appearance="overlay-full bg-neutral90"
       >
         <div className="notation-detail">
-          <Notation.Collection.Detail
+          <Notation.ResourceCollection.Detail
             dispatch={this.props.dispatch}
             resourceCollection={this.props.resourceCollection}
             slideshowResources={this.props.slideshowResources}
@@ -90,4 +96,4 @@ export class NotationCollectionDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(NotationCollectionDetailContainer);
+export default connectAndFetch(NotationResourceCollectionDetailContainer);

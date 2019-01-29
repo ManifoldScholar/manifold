@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import Resourceish from "frontend/components/resourceish";
 
-export default class CollectionPickerListItem extends PureComponent {
-  static displayName = "Notation.Collection.PickerListItem";
+export default class ResourceCollectionPickerListItem extends PureComponent {
+  static displayName = "Notation.ResourceCollection.PickerListItem";
 
   static propTypes = {
     entity: PropTypes.object,

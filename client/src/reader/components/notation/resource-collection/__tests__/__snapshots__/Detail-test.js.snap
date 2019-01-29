@@ -141,7 +141,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
               </a>
               <a
                 className="detail-link"
-                href="/projects/delegated-project-slug/collection/slug-2/resource/slug-3"
+                href="/projects/delegated-project-slug/resource-collection/slug-2/resource/slug-3"
                 onClick={[Function]}
               >
                 View Resource
@@ -226,7 +226,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
       <br />
       <a
         className="button-secondary outlined"
-        href="/browse/project/1/collection/2"
+        href="/projects/slug-1/resource-collection/slug-2"
         onClick={[Function]}
       >
         Visit Collection Page

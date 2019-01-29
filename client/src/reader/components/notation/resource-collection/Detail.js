@@ -6,10 +6,10 @@ import ResourceList from "frontend/components/resource-list";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 
-export default class CollectionDetail extends PureComponent {
+export default class ResourceCollectionDetail extends PureComponent {
   static propTypes = {
-    collection: PropTypes.object,
-    collectionUrl: PropTypes.string,
+    resourceCollection: PropTypes.object,
+    resourceCollectionUrl: PropTypes.string,
     slideshowResources: PropTypes.array,
     slideshowPagination: PropTypes.object,
     dispatch: PropTypes.func,
@@ -33,23 +33,24 @@ export default class CollectionDetail extends PureComponent {
   buildRedirectUrl(collection) {
     if (!collection) return null;
     return lh.link(
-      "frontendResourceCollection",
+      "frontendProjectResourceCollection",
       collection.relationships.project.attributes.slug,
       collection.attributes.slug
     );
   }
 
   render() {
-    const collection = this.props.collection;
-    const attr = collection.attributes;
+    const resourceCollection = this.props.resourceCollection;
+    const attr = resourceCollection.attributes;
     const collectionUrl =
-      this.props.collectionUrl || this.buildRedirectUrl(collection);
+      this.props.resourceCollectionUrl ||
+      this.buildRedirectUrl(resourceCollection);
 
     return (
       <div>
         <div className="collection-detail">
           <div className="container">
-            <ResourceCollection.Title collection={collection} />
+            <ResourceCollection.Title resourceCollection={resourceCollection} />
             {!isEmpty(attr.descriptionFormatted) ? (
               <div className="collection-description">
                 <div
@@ -62,7 +63,7 @@ export default class CollectionDetail extends PureComponent {
           </div>
         </div>
         <ResourceList.Slideshow
-          collection={collection}
+          resourceCollection={resourceCollection}
           collectionResources={this.props.slideshowResources}
           dispatch={this.props.dispatch}
           pagination={this.props.slideshowPagination}

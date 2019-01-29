@@ -100,7 +100,7 @@ export default {
   rMyFilteredAnnotationsForText: "reader-my-filtered-annotations-for-text",
   rResources: "reader-resources",
   rSectionResources: "reader-section-resources",
-  rSectionCollections: "reader-section-collections",
+  rSectionResourceCollections: "reader-section-resource-collections",
   rResource: "reader-resource",
   rResourceCollection: "reader-resource-collection",
   rAnnotationCreate: "reader-annotation-create",

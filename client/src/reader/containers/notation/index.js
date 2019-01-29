@@ -1,9 +1,9 @@
-import Collection from "./collection";
+import ResourceCollection from "./resource-collection";
 import Picker from "./Picker";
 import Resource from "./resource";
 
 export default {
-  Collection,
   Picker,
-  Resource
+  Resource,
+  ResourceCollection
 };

@@ -62,7 +62,7 @@ export class SectionContainer extends Component {
     settings: PropTypes.object.isRequired,
     annotations: PropTypes.array,
     resources: PropTypes.array,
-    collections: PropTypes.array,
+    resourceCollections: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
     text: PropTypes.object.isRequired,
     appearance: PropTypes.object.isRequired,
@@ -104,13 +104,13 @@ export class SectionContainer extends Component {
       const missing = this.hasMissingResourcesOrCollections(
         this.props.annotations,
         this.props.resources,
-        this.props.collections
+        this.props.resourceCollections
       );
       if (missing) {
         if (some(missing, ["type", "resource"])) {
           this.fetchResources(this.props);
         }
-        if (some(missing, ["type", "collection"])) {
+        if (some(missing, ["type", "resource_collection"])) {
           this.fetchCollections(this.props);
         }
       }
@@ -120,7 +120,7 @@ export class SectionContainer extends Component {
   componentWillUnmount() {
     this.props.dispatch(flush(requests.rSection));
     this.props.dispatch(flush(requests.rSectionResources));
-    this.props.dispatch(flush(requests.rSectionCollections));
+    this.props.dispatch(flush(requests.rSectionResourceCollections));
   }
 
   fetchAnnotations(props) {
@@ -139,7 +139,9 @@ export class SectionContainer extends Component {
     const collectionsCall = resourceCollectionsAPI.forSection(
       props.match.params.sectionId
     );
-    props.dispatch(request(collectionsCall, requests.rSectionCollections));
+    props.dispatch(
+      request(collectionsCall, requests.rSectionResourceCollections)
+    );
   }
 
   hasMissingResourcesOrCollections(annotations, resourcesIn, collectionsIn) {
@@ -150,7 +152,7 @@ export class SectionContainer extends Component {
       annotations
         .map(a => {
           return {
-            id: a.attributes.resourceId || a.attributes.collectionId,
+            id: a.attributes.resourceId || a.attributes.resourceCollectionId,
             type: a.attributes.format
           };
         })
