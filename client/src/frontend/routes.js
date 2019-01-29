@@ -64,6 +64,15 @@ const routes = {
           }
         },
         {
+          name: "frontendProjectResourceCollections",
+          exact: true,
+          component: "ProjectResourceCollections",
+          path: "/projects/:id/resource-collections",
+          helper: p => {
+            return `/projects/${p}/resource-collections`;
+          }
+        },
+        {
           name: "frontendProjectCollectionResource",
           exact: true,
           component: "ResourceDetail",
@@ -93,7 +102,8 @@ const routes = {
               if (!query) return `/projects/${p}/resource-collection/${c}`;
               return `/projects/${p}/resource-collection/${c}?${query}`;
             },
-            frontendProjectResourceCollectionRelative: c => `resource-collection/${c}`
+            frontendProjectResourceCollectionRelative: c =>
+              `resource-collection/${c}`
           }
         },
         {

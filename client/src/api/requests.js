@@ -97,6 +97,7 @@ export default {
   feResource: "frontend-resource",
   feSlideshow: "frontend-slideshow",
   feResourceCollection: "frontend-resource-collection",
+  feResourceCollections: "frontend-resource-collections",
   feCollectionResources: "frontend-collection-resources",
   feCollectionResource: "frontend-collection-resource",
   feUnsubscribe: "frontend-unsubscribe",
