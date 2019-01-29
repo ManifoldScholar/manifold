@@ -2,29 +2,29 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Form from "backend/components/form";
 import FormContainer from "backend/containers/form";
-import { collectionsAPI } from "api";
+import { resourceCollectionsAPI } from "api";
 import { connect } from "react-redux";
 
-export class CollectionGeneralContainer extends PureComponent {
-  static displayName = "Collection.General";
+export class ResourceCollectionGeneralContainer extends PureComponent {
+  static displayName = "resourceCollection.General";
 
   static propTypes = {
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     params: PropTypes.object
   };
 
   render() {
-    const collection = this.props.collection;
-    if (!collection) return null;
+    const resourceCollection = this.props.resourceCollection;
+    if (!resourceCollection) return null;
 
     return (
       <section>
         <FormContainer.Form
-          model={collection}
+          model={resourceCollection}
           name="backend-collection-update"
-          update={collectionsAPI.update}
+          update={resourceCollectionsAPI.update}
           create={model =>
-            collectionsAPI.create(this.props.params.projectId, model)
+            resourceCollectionsAPI.create(this.props.params.projectId, model)
           }
           className="form-secondary"
         >
@@ -55,6 +55,6 @@ export class CollectionGeneralContainer extends PureComponent {
   }
 }
 
-export default connect(CollectionGeneralContainer.mapStateToProps)(
-  CollectionGeneralContainer
+export default connect(ResourceCollectionGeneralContainer.mapStateToProps)(
+  ResourceCollectionGeneralContainer
 );

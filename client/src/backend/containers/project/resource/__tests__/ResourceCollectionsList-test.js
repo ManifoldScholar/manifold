@@ -1,36 +1,26 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { CollectionWrapperContainer } from "../Wrapper";
+import { ProjectResourceCollectionsListContainer } from "../ResourceCollectionsList";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 
-describe("Backend Collection Wrapper Container", () => {
+describe("Backend Project Resource CollectionList Container", () => {
   const store = build.store();
-  const collection = build.entity.collection("1");
-  collection.relationships.resources = [
-    build.entity.resource("2"),
-    build.entity.resource("3")
-  ];
-  collection.relationships.project = build.entity.project("4");
-  store.dispatch({
-    type: "UPDATE_CURRENT_USER",
-    error: false,
-    payload: {
-      data: build.entity.user("1")
-    }
-  });
+  const project = build.entity.project("1");
+  const collectionA = build.entity.resourceCollection("2");
+  const collectionB = build.entity.resourceCollection("3");
+  collectionA.relationships.project = project;
+  collectionB.relationships.project = project;
 
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <CollectionWrapperContainer
-          collection={collection}
-          route={{
-            routes: []
-          }}
-          match={{
-            params: {}
+        <ProjectResourceCollectionsListContainer
+          project={project}
+          resourceCollections={[collectionA, collectionB]}
+          resourceCollectionsMeta={{
+            pagination: build.pagination()
           }}
           dispatch={store.dispatch}
         />

@@ -11,11 +11,17 @@ import lh from "helpers/linkHandler";
 const { request } = entityStoreActions;
 const perPage = 5;
 
-export class ProjectCollectionsListContainer extends PureComponent {
+export class ProjectResourceCollectionsListContainer extends PureComponent {
   static mapStateToProps = state => {
     return {
-      collections: select(requests.beCollections, state.entityStore),
-      collectionsMeta: meta(requests.beCollections, state.entityStore)
+      resourceCollections: select(
+        requests.beResourceCollections,
+        state.entityStore
+      ),
+      resourceCollectionsMeta: meta(
+        requests.beResourceCollections,
+        state.entityStore
+      )
     };
   };
 
@@ -23,8 +29,8 @@ export class ProjectCollectionsListContainer extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object,
-    collections: PropTypes.array,
-    collectionsMeta: PropTypes.object,
+    resourceCollections: PropTypes.array,
+    resourceCollectionsMeta: PropTypes.object,
     dispatch: PropTypes.func
   };
 
@@ -40,12 +46,12 @@ export class ProjectCollectionsListContainer extends PureComponent {
   fetchCollections(page) {
     const pagination = { number: page, size: perPage };
     const action = request(
-      projectsAPI.collections(
+      projectsAPI.resourceCollections(
         this.props.project.id,
         this.state.filter,
         pagination
       ),
-      requests.beCollections
+      requests.beResourceCollections
     );
     this.props.dispatch(action);
   }
@@ -67,28 +73,28 @@ export class ProjectCollectionsListContainer extends PureComponent {
   };
 
   render() {
-    if (!this.props.collections) return null;
+    if (!this.props.resourceCollections) return null;
     const project = this.props.project;
 
     return (
       <div className="project-resource-list">
         <header className="section-heading-secondary">
           <h3>
-            {"Collections"}{" "}
+            {"Resource Collections"}{" "}
             <i className="manicon manicon-file-box" aria-hidden="true" />
           </h3>
         </header>
         <List.Searchable
           newButton={{
             path: lh.link("backendProjectResourceCollectionsNew", project.id),
-            text: "Add a New Collection",
+            text: "Add a New Resource Collection",
             authorizedFor: project,
-            authorizedTo: "createCollections"
+            authorizedTo: "createResourceCollections"
           }}
-          entities={this.props.collections}
-          singularUnit="collection"
-          pluralUnit="collections"
-          pagination={this.props.collectionsMeta.pagination}
+          entities={this.props.resourceCollections}
+          singularUnit="resource collection"
+          pluralUnit="resource collections"
+          pagination={this.props.resourceCollectionsMeta.pagination}
           paginationClickHandler={this.pageChangeHandlerCreator}
           paginationClass="secondary"
           entityComponent={ResourceCollection.ListItem}
@@ -100,4 +106,4 @@ export class ProjectCollectionsListContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ProjectCollectionsListContainer);
+export default connectAndFetch(ProjectResourceCollectionsListContainer);

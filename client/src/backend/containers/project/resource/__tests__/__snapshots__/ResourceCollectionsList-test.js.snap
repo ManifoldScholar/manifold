@@ -8,7 +8,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
     className="section-heading-secondary"
   >
     <h3>
-      Collections
+      Resource Collections
        
       <i
         aria-hidden="true"
@@ -82,14 +82,14 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
           <span>
             2
           </span>
-           collections: 
+           resource collections: 
         </p>
         <div
           className="buttons-icon-horizontal"
         >
           <a
             className="button-icon-secondary "
-            href="/backend/projects/1/collections/new"
+            href="/backend/projects/1/resource-collections/new"
             onClick={[Function]}
           >
             <i
@@ -97,7 +97,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
               className="manicon manicon-plus"
             />
             <span>
-              Add a New Collection
+              Add a New Resource Collection
             </span>
           </a>
         </div>
@@ -105,7 +105,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
           <ul>
             <li>
               <a
-                href="/backend/projects/collection/2"
+                href="/backend/projects/resource-collection/2"
                 onClick={[Function]}
               >
                 <header>
@@ -127,7 +127,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                           className="icon-thumbnail-type"
                         >
                           <i
-                            className="icon-thumbnail-icon collection"
+                            className="icon-thumbnail-icon resource-collection"
                           >
                             <svg
                               className="manicon-svg"
@@ -171,7 +171,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
             </li>
             <li>
               <a
-                href="/backend/projects/collection/3"
+                href="/backend/projects/resource-collection/3"
                 onClick={[Function]}
               >
                 <header>
@@ -193,7 +193,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                           className="icon-thumbnail-type"
                         >
                           <i
-                            className="icon-thumbnail-icon collection"
+                            className="icon-thumbnail-icon resource-collection"
                           >
                             <svg
                               className="manicon-svg"

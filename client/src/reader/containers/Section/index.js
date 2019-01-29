@@ -6,7 +6,7 @@ import {
   sectionsAPI,
   annotationsAPI,
   resourcesAPI,
-  collectionsAPI,
+  resourceCollectionsAPI,
   requests
 } from "api";
 import { grab, isEntityLoaded } from "utils/entityUtils";
@@ -136,7 +136,7 @@ export class SectionContainer extends Component {
   }
 
   fetchCollections(props) {
-    const collectionsCall = collectionsAPI.forSection(
+    const collectionsCall = resourceCollectionsAPI.forSection(
       props.match.params.sectionId
     );
     props.dispatch(request(collectionsCall, requests.rSectionCollections));

@@ -173,15 +173,15 @@ export default {
       expiration: defaultExpiration
     };
   },
-  [r.beCollectionCreate]: payloadIgnored => {
+  [r.beResourceCollectionCreate]: payloadIgnored => {
     return {
       level: 0,
-      heading: "Your collection has been created.",
+      heading: "Your resource collection has been created.",
       body: "A new manifold collection is born.",
       expiration: defaultExpiration
     };
   },
-  [r.beCollectionUpdate]: payload => {
+  [r.beResourceCollectionUpdate]: payload => {
     return {
       level: 0,
       heading: "Success!",

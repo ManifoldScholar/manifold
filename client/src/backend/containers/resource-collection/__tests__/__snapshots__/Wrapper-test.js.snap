@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend Collection Wrapper Container renders correctly 1`] = `
+exports[`Backend ResourceCollection Wrapper Container renders correctly 1`] = `
 <div>
   <section
     className="backend-header"
@@ -12,7 +12,7 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
         className="container flush"
       >
         <a
-          href="/backend/projects/4/collections"
+          href="/backend/projects/4/resource-collections"
           onClick={[Function]}
         >
           <i
@@ -100,7 +100,7 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              href="/backend/projects/collection/1/general"
+              href="/backend/projects/resource-collection/1/general"
               onClick={[Function]}
             >
               General
@@ -109,7 +109,7 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
           <li>
             <a
               aria-current={null}
-              href="/backend/projects/collection/1/resources"
+              href="/backend/projects/resource-collection/1/resources"
               onClick={[Function]}
             >
               Resources
@@ -136,7 +136,7 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  href="/backend/projects/collection/1/general"
+                  href="/backend/projects/resource-collection/1/general"
                   onClick={[Function]}
                 >
                   General
@@ -145,7 +145,7 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
               <li>
                 <a
                   aria-current={null}
-                  href="/backend/projects/collection/1/resources"
+                  href="/backend/projects/resource-collection/1/resources"
                   onClick={[Function]}
                 >
                   Resources
@@ -160,13 +160,13 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
       >
         <a
           className="screen-reader-text"
-          href="#skip-to-collection-panel"
+          href="#skip-to-resourceCollection-panel"
           onClick={[Function]}
         >
           Skip to main content
         </a>
         <div
-          id="skip-to-collection-panel"
+          id="skip-to-resourceCollection-panel"
         />
       </div>
     </div>

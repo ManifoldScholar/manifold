@@ -51,8 +51,8 @@ const abilities = {
   readDrafts: true,
   manageResources: true,
   createResources: true,
-  manageCollections: true,
-  createCollections: true,
+  manageResourceCollections: true,
+  createResourceCollections: true,
   managePermissions: true,
   createPermissions: true,
   manageTexts: true,
@@ -170,8 +170,8 @@ const defaults = {
     }
   },
 
-  collection: {
-    type: "collections",
+  resourceCollection: {
+    type: "resourceCollections",
     attributes: {
       title: "Rowan",
       slug: "",
@@ -190,11 +190,11 @@ const defaults = {
     type: "collectionResources",
     attributes: {
       position: 1,
-      collectionId: 2
+      resourceCollectionId: 2
     },
     relationships: {
       resource: null,
-      collection: null
+      resourceCollection: null
     }
   },
 
@@ -506,8 +506,8 @@ const ingestion = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("ingestion", id, attributes, relationships);
 };
 
-const collection = (id = null, attributes = {}, relationships = {}) => {
-  return buildEntity("collection", id, attributes, relationships);
+const resourceCollection = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("resourceCollection", id, attributes, relationships);
 };
 
 const collectionResource = (id = null, attributes = {}, relationships = {}) => {
@@ -587,7 +587,7 @@ export default {
   project,
   resource,
   ingestion,
-  collection,
+  resourceCollection,
   collectionResource,
   comment,
   user,
