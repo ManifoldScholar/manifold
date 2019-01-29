@@ -7,7 +7,8 @@ export default class ResourceCollectionGrid extends Component {
   static displayName = "ResourceCollection.Grid";
 
   static propTypes = {
-    project: PropTypes.object.isRequired
+    project: PropTypes.object.isRequired,
+    resourceCollections: PropTypes.array.isRequired
   };
 
   urlCreator = collection => {
@@ -19,7 +20,7 @@ export default class ResourceCollectionGrid extends Component {
   };
 
   render() {
-    const { resourceCollections } = this.props.project.relationships;
+    const resourceCollections = this.props.resourceCollections;
     if (!resourceCollections) return null;
 
     return (

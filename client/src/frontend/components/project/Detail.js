@@ -168,7 +168,10 @@ class Detail extends Component {
               </div>
             </div>
           </header>
-          <ResourceCollectionList.Grid project={project} />
+          <ResourceCollectionList.Grid
+            project={project}
+            resourceCollections={project.relationships.resourceCollections}
+          />
           <ResourceList.Totals
             count={project.attributes.resourcesCount}
             project={project}
