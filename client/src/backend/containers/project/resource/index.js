@@ -1,7 +1,7 @@
-import CollectionsList from "./CollectionsList";
+import ResourceCollectionsList from "./ResourceCollectionsList";
 import ResourcesList from "./ResourcesList";
 
 export default {
-  CollectionsList,
+  ResourceCollectionsList,
   ResourcesList
 };

@@ -20,7 +20,7 @@ export default class ResourceCollectionListItem extends PureComponent {
 
     return (
       <li>
-        <Link to={lh.link("backendCollection", collection.id)}>
+        <Link to={lh.link("backendResourceCollection", collection.id)}>
           <header>
             <figure className="cover">
               <Resourceish.Thumbnail

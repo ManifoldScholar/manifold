@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend Collection New Container renders correctly 1`] = `
+exports[`Backend ResourceCollection New Container renders correctly 1`] = `
 <div>
   <section
     className="backend-header"
@@ -12,7 +12,7 @@ exports[`Backend Collection New Container renders correctly 1`] = `
         className="container flush"
       >
         <a
-          href="/backend/projects/1/collections"
+          href="/backend/projects/1/resource-collections"
           onClick={[Function]}
         >
           <i

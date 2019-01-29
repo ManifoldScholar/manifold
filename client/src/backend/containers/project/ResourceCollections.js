@@ -5,8 +5,8 @@ import lh from "helpers/linkHandler";
 
 import Authorize from "hoc/authorize";
 
-export default class ProjectCollectionsContainer extends PureComponent {
-  static displayName = "Project.CollectionsContainer";
+export default class ProjectResourcesCollectionsContainer extends PureComponent {
+  static displayName = "Project.ResourceCollectionsContainer";
 
   static propTypes = {
     project: PropTypes.object
@@ -19,12 +19,12 @@ export default class ProjectCollectionsContainer extends PureComponent {
     return (
       <Authorize
         entity={project}
-        ability="manageCollections"
+        ability="manageResourceCollections"
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
         <section>
-          <Resource.CollectionsList project={project} />
+          <Resource.ResourceCollectionsList project={project} />
         </section>
       </Authorize>
     );

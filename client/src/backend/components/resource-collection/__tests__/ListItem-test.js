@@ -5,7 +5,7 @@ import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Backend.ResourceCollection.ListItem component", () => {
-  const collection = build.entity.collection("1");
+  const collection = build.entity.resourceCollection("1");
 
   it("renders correctly", () => {
     const component = renderer.create(

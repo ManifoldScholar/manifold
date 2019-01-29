@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import List from "backend/components/list";
 import Resourceish from "frontend/components/resourceish";
 import FormattedDate from "global/components/FormattedDate";
-import { collectionsAPI, projectsAPI, requests } from "api";
+import { resourceCollectionsAPI, projectsAPI, requests } from "api";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -15,7 +15,7 @@ import classnames from "classnames";
 const { request, flush } = entityStoreActions;
 const perPage = 5;
 
-export class CollectionResourcesContainer extends Component {
+export class ResourceCollectionResourcesContainer extends Component {
   static mapStateToProps = state => {
     return {
       resources: select(requests.beResources, state.entityStore),
@@ -23,11 +23,11 @@ export class CollectionResourcesContainer extends Component {
     };
   };
 
-  static displayName = "Collection.Resources";
+  static displayName = "ResourceCollection.Resources";
 
   static propTypes = {
     dispatch: PropTypes.func,
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     resources: PropTypes.array,
     resourcesMeta: PropTypes.object
   };
@@ -49,7 +49,7 @@ export class CollectionResourcesContainer extends Component {
 
   fetchResources(page) {
     const pagination = { number: page, size: perPage };
-    const projectId = this.props.collection.relationships.project.id;
+    const projectId = this.props.resourceCollection.relationships.project.id;
     const action = request(
       projectsAPI.resources(projectId, this.state.filter, pagination),
       requests.beResources
@@ -64,20 +64,26 @@ export class CollectionResourcesContainer extends Component {
         type: e.type
       };
     });
-    const collection = {
-      type: "collections",
-      id: this.props.collection.id,
+    const resourceCollection = {
+      type: "resourceCollections",
+      id: this.props.resourceCollection.id,
       relationships: { resources: { data: adjustedResources } }
     };
-    const call = collectionsAPI.update(collection.id, collection);
-    const collectionRequest = request(call, requests.beCollectionUpdate);
-    this.props.dispatch(collectionRequest);
+    const call = resourceCollectionsAPI.update(
+      resourceCollection.id,
+      resourceCollection
+    );
+    const resourceCollectionRequest = request(
+      call,
+      requests.beResourceCollectionUpdate
+    );
+    this.props.dispatch(resourceCollectionRequest);
   }
 
   handleFilterChange = filter => {
     const newFilter = filter;
-    if (this.state.filter.collection)
-      newFilter.collection = this.state.filter.collection;
+    if (this.state.filter.resourceCollection)
+      newFilter.resourceCollection = this.state.filter.resourceCollection;
     this.setState({ filter: newFilter }, () => {
       this.fetchResources(1);
     });
@@ -111,12 +117,12 @@ export class CollectionResourcesContainer extends Component {
     if (this.isInCollection(resource)) {
       this.removeFromCollection(
         resource,
-        this.props.collection.relationships.resources
+        this.props.resourceCollection.relationships.resources
       );
     } else if (!this.isInCollection(resource)) {
       this.addToCollection(
         resource,
-        this.props.collection.relationships.resources
+        this.props.resourceCollection.relationships.resources
       );
     } else {
       return null;
@@ -124,19 +130,22 @@ export class CollectionResourcesContainer extends Component {
   };
 
   isInCollection = resource => {
-    if (!this.props.collection.relationships.resources) return false;
-    return !!find(this.props.collection.relationships.resources, cResource => {
-      return cResource.id === resource.id;
-    });
+    if (!this.props.resourceCollection.relationships.resources) return false;
+    return !!find(
+      this.props.resourceCollection.relationships.resources,
+      cResource => {
+        return cResource.id === resource.id;
+      }
+    );
   };
 
   toggleCollectionOnly = event => {
     event.preventDefault();
     const filter = this.state.filter;
-    if (this.state.filter.collection) {
-      delete filter.collection;
+    if (this.state.filter.resourceCollection) {
+      delete filter.resourceCollection;
     } else {
-      filter.collection = this.props.collection.id;
+      filter.resourceCollection = this.props.resourceCollection.id;
     }
     this.handleFilterChange(filter);
   };
@@ -207,15 +216,15 @@ export class CollectionResourcesContainer extends Component {
 
   render() {
     if (!this.props.resources) return null;
-    const toggleLabel = this.state.filter.collection
+    const toggleLabel = this.state.filter.resourceCollection
       ? "Show all"
       : "Show collection only";
-    const project = this.props.collection.relationships.project;
+    const project = this.props.resourceCollection.relationships.project;
     const collectionFilter = {
-      options: [this.props.collection.id],
+      options: [this.props.resourceCollection.id],
       labels: {}
     };
-    collectionFilter.labels[this.props.collection.id] = "In Collection";
+    collectionFilter.labels[this.props.resourceCollection.id] = "In Collection";
 
     return (
       <section className="collection-resources-list">
@@ -249,6 +258,6 @@ export class CollectionResourcesContainer extends Component {
   }
 }
 
-export default connect(CollectionResourcesContainer.mapStateToProps)(
-  CollectionResourcesContainer
+export default connect(ResourceCollectionResourcesContainer.mapStateToProps)(
+  ResourceCollectionResourcesContainer
 );
