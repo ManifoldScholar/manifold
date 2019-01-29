@@ -3,7 +3,7 @@ import Dashboard from "backend/containers/Dashboard";
 import Projects from "backend/containers/projects";
 import Resource from "backend/containers/resource";
 import ResourceImport from "backend/containers/resource-import";
-import Collection from "backend/containers/collection";
+import ResourceCollection from "backend/containers/resource-collection";
 import Project from "backend/containers/project";
 import Text from "backend/containers/text";
 import Stylesheet from "backend/containers/stylesheet";
@@ -30,15 +30,15 @@ export default {
   ResourceImportNew: ResourceImport.New,
   ResourceImportMap: ResourceImport.Map,
   ResourceImportResults: ResourceImport.Results,
-  CollectionNew: Collection.New,
+  ResourceCollectionNew: ResourceCollection.New,
   ProjectNew: Project.New,
   ResourceWrapper: Resource.Wrapper,
   ResourceVariants: Resource.Variants,
   ResourceMetadata: Resource.Metadata,
   ResourceGeneral: Resource.General,
-  CollectionWrapper: Collection.Wrapper,
-  CollectionGeneral: Collection.General,
-  CollectionResources: Collection.Resources,
+  ResourceCollectionWrapper: ResourceCollection.Wrapper,
+  ResourceCollectionGeneral: ResourceCollection.General,
+  ResourceCollectionResources: ResourceCollection.Resources,
   TextWrapper: Text.Wrapper,
   TextStyles: Text.Styles,
   StylesheetEdit: Stylesheet.Edit,
@@ -60,7 +60,7 @@ export default {
   ProjectCategoryNew: Project.Category.New,
   ProjectCategoryEdit: Project.Category.Edit,
   ProjectResources: Project.Resources,
-  ProjectCollections: Project.Collections,
+  ProjectResourceCollections: Project.ResourceCollections,
   ProjectPermissions: Project.Permissions,
   PermissionNew: Permission.New,
   PermissionEdit: Permission.Edit,

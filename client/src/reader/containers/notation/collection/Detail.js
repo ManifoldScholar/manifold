@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { collectionsAPI, requests } from "api";
+import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta, loaded } from "utils/entityUtils";
 import Overlay from "global/components/Overlay";
@@ -16,7 +16,7 @@ export class NotationCollectionDetailContainer extends PureComponent {
   static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
     const promises = [];
-    const resourceCall = collectionsAPI.show(match.params.collectionId);
+    const resourceCall = resourceCollectionsAPI.show(match.params.collectionId);
     const { promise: one } = dispatch(
       request(resourceCall, requests.rCollection)
     );
@@ -25,7 +25,7 @@ export class NotationCollectionDetailContainer extends PureComponent {
     // Load the collection resources, unless they have already been loaded
     if (!loaded(requests.feCollectionResources, state.entityStore)) {
       const pp = match.params.page ? match.params.page : page;
-      const cr = collectionsAPI.collectionResources(
+      const cr = resourceCollectionsAPI.collectionResources(
         match.params.collectionId,
         {},
         { number: pp, size: perPage }

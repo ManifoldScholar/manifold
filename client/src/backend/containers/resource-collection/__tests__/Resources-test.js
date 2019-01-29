@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { CollectionResourcesContainer } from "../Resources";
+import { ResourceCollectionResourcesContainer } from "../Resources";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 
-describe("Backend Collection Resources Container", () => {
+describe("Backend ResourceCollection Resources Container", () => {
   const store = build.store();
-  const collection = build.entity.collection("1");
+  const collection = build.entity.resourceCollection("1");
   const resources = [build.entity.resource("3"), build.entity.resource("4")];
   collection.relationships.resources = [resources[0]];
   collection.relationships.project = build.entity.project("5");
@@ -15,8 +15,8 @@ describe("Backend Collection Resources Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <CollectionResourcesContainer
-          collection={collection}
+        <ResourceCollectionResourcesContainer
+          resourceCollection={collection}
           resources={resources}
           resourcesMeta={{
             pagination: build.pagination()

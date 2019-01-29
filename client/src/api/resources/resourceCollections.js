@@ -1,7 +1,7 @@
 export default {
   show(id) {
     return {
-      endpoint: `/api/v1/collections/${id}`,
+      endpoint: `/api/v1/resource_collections/${id}`,
       method: "GET",
       options: {}
     };
@@ -9,27 +9,27 @@ export default {
 
   create(pId, collection) {
     return {
-      endpoint: `/api/v1/projects/${pId}/relationships/collections`,
+      endpoint: `/api/v1/projects/${pId}/relationships/resource_collections`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "collections", data: collection })
+        body: JSON.stringify({ type: "resource_collections", data: collection })
       }
     };
   },
 
   update(id, collection) {
     return {
-      endpoint: `/api/v1/collections/${id}`,
+      endpoint: `/api/v1/resource_collections/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "collections", data: collection })
+        body: JSON.stringify({ type: "resource_collections", data: collection })
       }
     };
   },
 
   destroy(id) {
     return {
-      endpoint: `/api/v1/collections/${id}`,
+      endpoint: `/api/v1/resource_collections/${id}`,
       method: "DELETE",
       options: {}
     };
@@ -37,7 +37,7 @@ export default {
 
   collectionResource(cid, crid) {
     return {
-      endpoint: `/api/v1/collections/${cid}/relationships/collection_resources/${crid}`,
+      endpoint: `/api/v1/resource_collections/${cid}/relationships/collection_resources/${crid}`,
       method: "GET",
       options: {}
     };
@@ -47,7 +47,7 @@ export default {
     const filter = filterParams;
     filter.collection_order = id;
     return {
-      endpoint: `/api/v1/collections/${id}/relationships/resources`,
+      endpoint: `/api/v1/resource_collections/${id}/relationships/resources`,
       method: "GET",
       options: {
         params: { filter, page }
@@ -57,7 +57,7 @@ export default {
 
   forSection(sectionId, filterIgnored = {}) {
     return {
-      endpoint: `/api/v1/text_sections/${sectionId}/relationships/collections`,
+      endpoint: `/api/v1/text_sections/${sectionId}/relationships/resource_collections`,
       method: "GET",
       options: {}
     };

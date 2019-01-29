@@ -28,7 +28,7 @@ export default class DetailHeader extends PureComponent {
     let segment = `${type}-placeholder`;
     if (type === "user") segment = "person";
     if (type === "project") segment = "project-placeholder";
-    if (type === "collection") segment = "file-box-border";
+    if (type === "resourceCollection") segment = "file-box-border";
     if (type === "resource") segment = "cube-shine";
     if (type === "resources") segment = "cube-multiple";
     if (type === "page") segment = "document";

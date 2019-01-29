@@ -5,7 +5,7 @@ import FormContainer from "backend/containers/form";
 import Layout from "backend/components/layout";
 import Form from "backend/components/form";
 import Navigation from "backend/components/navigation";
-import { requests, collectionsAPI, projectsAPI } from "api";
+import { requests, resourceCollectionsAPI, projectsAPI } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import { select } from "utils/entityUtils";
@@ -14,7 +14,7 @@ import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
-export class CollectionNewContainer extends PureComponent {
+export class ResourceCollectionNewContainer extends PureComponent {
   static mapStateToProps = state => {
     return {
       project: select(requests.beProject, state.entityStore)
@@ -29,21 +29,21 @@ export class CollectionNewContainer extends PureComponent {
     return Promise.all(promises);
   };
 
-  static displayName = "Collection.New";
+  static displayName = "ResourceCollection.New";
   static propTypes = {
     project: PropTypes.object,
     history: PropTypes.object,
     match: PropTypes.object,
-    collection: PropTypes.object
+    resourceCollection: PropTypes.object
   };
 
-  redirectToCollection(collection) {
-    const path = lh.link("backendCollection", collection.id);
+  redirectToCollection(resourceCollection) {
+    const path = lh.link("backendResourceCollection", resourceCollection.id);
     this.props.history.push(path);
   }
 
-  handleSuccess = collection => {
-    this.redirectToCollection(collection);
+  handleSuccess = resourceCollection => {
+    this.redirectToCollection(resourceCollection);
   };
 
   render() {
@@ -53,13 +53,13 @@ export class CollectionNewContainer extends PureComponent {
     return (
       <Authorize
         entity={project}
-        ability={"createCollections"}
+        ability={"createResourceCollections"}
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
         <div>
           <Navigation.DetailHeader
-            type="collection"
+            type="resourceCollection"
             backUrl={lh.link("backendProjectResourceCollections", project.id)}
             backLabel={project.attributes.titlePlaintext}
             title={"New Collection"}
@@ -70,10 +70,10 @@ export class CollectionNewContainer extends PureComponent {
           />
           <Layout.BackendPanel>
             <FormContainer.Form
-              model={this.props.collection}
-              name="backend-collection-create"
-              update={collectionsAPI.update}
-              create={model => collectionsAPI.create(project.id, model)}
+              model={this.props.resourceCollection}
+              name={requests.beResourceCollectionCreate}
+              update={resourceCollectionsAPI.update}
+              create={model => resourceCollectionsAPI.create(project.id, model)}
               onSuccess={this.handleSuccess}
               className="form-secondary"
             >
@@ -110,4 +110,4 @@ export class CollectionNewContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(CollectionNewContainer);
+export default connectAndFetch(ResourceCollectionNewContainer);
