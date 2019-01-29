@@ -116,19 +116,19 @@ class Navigation {
     ];
   });
 
-  static collection(collection) {
+  static resourceCollection(collection) {
     const args = [collection.id];
     return [
       {
         label: "General",
-        route: "backendCollectionGeneral",
+        route: "backendResourceCollectionGeneral",
         entity: collection,
         ability: "update",
         args
       },
       {
         label: "Resources",
-        route: "backendCollectionResources",
+        route: "backendResourceCollectionResources",
         entity: collection,
         ability: "update",
         args
@@ -195,10 +195,10 @@ class Navigation {
         args
       },
       {
-        label: "Collections",
+        label: "Resource Collections",
         route: "backendProjectResourceCollections",
         entity: project,
-        ability: "manageCollections",
+        ability: "manageResourceCollections",
         args
       },
       {

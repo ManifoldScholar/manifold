@@ -1,18 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { CollectionGeneralContainer } from "../General";
+import { ResourceCollectionGeneralContainer } from "../General";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 
-describe("Backend Collection General Container", () => {
+describe("Backend ResourceCollection General Container", () => {
   const store = build.store();
-  const collection = build.entity.collection("1");
+  const collection = build.entity.resourceCollection("1");
 
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <CollectionGeneralContainer collection={collection} />
+        <ResourceCollectionGeneralContainer resourceCollection={collection} />
       </Provider>
     )
   );

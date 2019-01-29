@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend Collection Resources Container renders correctly 1`] = `
+exports[`Backend ResourceCollection Resources Container renders correctly 1`] = `
 <section
   className="collection-resources-list"
 >

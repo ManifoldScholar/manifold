@@ -65,9 +65,9 @@ export default {
     };
   },
 
-  collections(id, filter = {}, page = {}) {
+  resourceCollections(id, filter = {}, page = {}) {
     return {
-      endpoint: `/api/v1/projects/${id}/relationships/collections`,
+      endpoint: `/api/v1/projects/${id}/relationships/resource_collections`,
       method: "GET",
       options: {
         params: { filter, page }

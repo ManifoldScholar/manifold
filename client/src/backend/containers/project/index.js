@@ -1,6 +1,5 @@
 import Category from "./category";
 import Collaborators from "./Collaborators";
-import Collections from "./Collections";
 import Events from "./Events";
 import General from "./General";
 import Log from "./Log";
@@ -9,6 +8,7 @@ import New from "./New";
 import Permissions from "./Permissions";
 import ProjectPage from "./ProjectPage";
 import Resource from "./resource";
+import ResourceCollections from "./ResourceCollections";
 import Resources from "./Resources";
 import Social from "./social";
 import Text from "./text";
@@ -18,7 +18,6 @@ import Wrapper from "./Wrapper";
 export default {
   Category,
   Collaborators,
-  Collections,
   Events,
   General,
   Log,
@@ -27,6 +26,7 @@ export default {
   Permissions,
   ProjectPage,
   Resource,
+  ResourceCollections,
   Resources,
   Social,
   Text,

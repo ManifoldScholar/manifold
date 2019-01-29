@@ -6,7 +6,7 @@ import Navigation from "backend/components/navigation";
 import Utility from "global/components/utility";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
-import { collectionsAPI, requests } from "api";
+import { resourceCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
@@ -16,17 +16,20 @@ import Authorize from "hoc/authorize";
 
 const { request, flush } = entityStoreActions;
 
-export class CollectionWrapperContainer extends PureComponent {
+export class ResourceCollectionWrapperContainer extends PureComponent {
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
-      collection: select(requests.beCollection, state.entityStore)
+      resourceCollection: select(
+        requests.beResourceCollection,
+        state.entityStore
+      )
     };
   };
 
-  static displayName = "Collection.Wrapper";
+  static displayName = "ResourceCollection.Wrapper";
 
   static propTypes = {
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     dispatch: PropTypes.func,
     match: PropTypes.object,
     route: PropTypes.object,
@@ -43,42 +46,47 @@ export class CollectionWrapperContainer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(requests.beCollection));
+    this.props.dispatch(flush(requests.beResourceCollection));
   }
 
   fetchCollection = () => {
-    const call = collectionsAPI.show(this.props.match.params.id);
-    const collectionRequest = request(call, requests.beCollection);
-    this.props.dispatch(collectionRequest);
+    const call = resourceCollectionsAPI.show(this.props.match.params.id);
+    const resourceCollectionRequest = request(
+      call,
+      requests.beResourceCollection
+    );
+    this.props.dispatch(resourceCollectionRequest);
   };
 
   doPreview = event => {
     event.preventDefault();
     const previewUrl = lh.link(
-      "frontendResourceCollection",
-      this.props.collection.relationships.project.attributes.slug,
-      this.props.collection.attributes.slug
+      "frontendProjectResourceCollection",
+      this.props.resourceCollection.relationships.project.attributes.slug,
+      this.props.resourceCollection.attributes.slug
     );
     const win = window.open(previewUrl, "_blank");
     win.focus();
   };
 
   doDestroy = () => {
-    const call = collectionsAPI.destroy(this.props.collection.id);
-    const options = { removes: this.props.collection };
-    const collectionRequest = request(
+    const call = resourceCollectionsAPI.destroy(
+      this.props.resourceCollection.id
+    );
+    const options = { removes: this.props.resourceCollection };
+    const resourceCollectionRequest = request(
       call,
-      requests.beCollectionDestroy,
+      requests.beResourceCollectionDestroy,
       options
     );
-    this.props.dispatch(collectionRequest).promise.then(() => {
+    this.props.dispatch(resourceCollectionRequest).promise.then(() => {
       this.notifyDestroy();
       this.redirectToProjectCollections();
     });
   };
 
   redirectToProjectCollections() {
-    const projectId = this.props.collection.relationships.project.id;
+    const projectId = this.props.resourceCollection.relationships.project.id;
     const redirectUrl = lh.link("backendProjectResourceCollections", projectId);
     this.props.history.push(redirectUrl);
   }
@@ -86,10 +94,10 @@ export class CollectionWrapperContainer extends PureComponent {
   notifyDestroy() {
     const notification = {
       level: 0,
-      id: `COLLECTION_DESTROYED_${this.props.collection.id}`,
-      heading: "The collection has been destroyed.",
+      id: `RESOURCE_COLLECTION_DESTROYED_${this.props.resourceCollection.id}`,
+      heading: "The resource collection has been destroyed.",
       body: `${
-        this.props.collection.attributes.title
+        this.props.resourceCollection.attributes.title
       } has passed into the endless night.`,
       expiration: 5000
     };
@@ -97,7 +105,7 @@ export class CollectionWrapperContainer extends PureComponent {
   }
 
   handleCollectionDestroy = () => {
-    const heading = "Are you sure you want to delete this collection?";
+    const heading = "Are you sure you want to delete this resource collection?";
     const message = "This action cannot be undone.";
     this.props.confirm(heading, message, this.doDestroy);
   };
@@ -121,42 +129,44 @@ export class CollectionWrapperContainer extends PureComponent {
   }
 
   renderRoutes() {
-    const { collection } = this.props;
-    return childRoutes(this.props.route, { childProps: { collection } });
+    const { resourceCollection } = this.props;
+    return childRoutes(this.props.route, {
+      childProps: { resourceCollection }
+    });
   }
 
   render() {
     /* eslint-disable no-unused-vars */
-    const { collection, match } = this.props;
+    const { resourceCollection, match } = this.props;
     /* eslint-enable no-unused-vars */
-    if (!collection) return null;
-    const skipId = "skip-to-collection-panel";
-    const secondaryLinks = navigation.collection(collection);
+    if (!resourceCollection) return null;
+    const skipId = "skip-to-resourceCollection-panel";
+    const secondaryLinks = navigation.resourceCollection(resourceCollection);
 
     return (
       <div>
         <Authorize
-          entity={collection}
+          entity={resourceCollection}
           failureFatalError={{
-            body: "You are not allowed to edit this collection."
+            body: "You are not allowed to edit this resource collection."
           }}
           ability="update"
         >
           <RedirectToFirstMatch
-            from={lh.link("backendCollection", collection.id)}
+            from={lh.link("backendResourceCollection", resourceCollection.id)}
             candidates={secondaryLinks}
           />
           <Navigation.DetailHeader
-            type="collection"
+            type="resourceCollection"
             backUrl={lh.link(
               "backendProjectResourceCollections",
-              collection.relationships.project.id
+              resourceCollection.relationships.project.id
             )}
             backLabel={
-              collection.relationships.project.attributes.titlePlaintext
+              resourceCollection.relationships.project.attributes.titlePlaintext
             }
             utility={this.renderUtility()}
-            title={collection.attributes.title}
+            title={resourceCollection.attributes.title}
             secondaryLinks={secondaryLinks}
           />
           <Layout.BackendPanel
@@ -171,4 +181,6 @@ export class CollectionWrapperContainer extends PureComponent {
   }
 }
 
-export default withConfirmation(connectAndFetch(CollectionWrapperContainer));
+export default withConfirmation(
+  connectAndFetch(ResourceCollectionWrapperContainer)
+);

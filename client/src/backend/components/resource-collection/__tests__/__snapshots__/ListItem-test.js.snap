@@ -3,7 +3,7 @@
 exports[`Backend.ResourceCollection.ListItem component renders correctly 1`] = `
 <li>
   <a
-    href="/backend/projects/collection/1"
+    href="/backend/projects/resource-collection/1"
     onClick={[Function]}
   >
     <header>
@@ -25,7 +25,7 @@ exports[`Backend.ResourceCollection.ListItem component renders correctly 1`] = `
               className="icon-thumbnail-type"
             >
               <i
-                className="icon-thumbnail-icon collection"
+                className="icon-thumbnail-icon resource-collection"
               >
                 <svg
                   className="manicon-svg"

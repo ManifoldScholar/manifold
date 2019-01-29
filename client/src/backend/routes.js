@@ -77,9 +77,9 @@ const routes = {
         {
           name: "backendProjectResourceCollectionsNew",
           exact: true,
-          component: "CollectionNew",
-          path: "/backend/projects/:projectId/collections/new",
-          helper: p => `/backend/projects/${p}/collections/new`
+          component: "ResourceCollectionNew",
+          path: "/backend/projects/:projectId/resource-collections/new",
+          helper: p => `/backend/projects/${p}/resource-collections/new`
         },
         {
           name: "backendProjectsNew",
@@ -119,25 +119,26 @@ const routes = {
           ]
         },
         {
-          name: "backendCollection",
+          name: "backendResourceCollection",
           exact: false,
-          component: "CollectionWrapper",
-          path: "/backend/projects/collection/:id",
-          helper: r => `/backend/projects/collection/${r}`,
+          component: "ResourceCollectionWrapper",
+          path: "/backend/projects/resource-collection/:id",
+          helper: r => `/backend/projects/resource-collection/${r}`,
           routes: [
             {
-              name: "backendCollectionGeneral",
+              name: "backendResourceCollectionGeneral",
               exact: true,
-              component: "CollectionGeneral",
-              path: "/backend/projects/collection/:id/general",
-              helper: r => `/backend/projects/collection/${r}/general`
+              component: "ResourceCollectionGeneral",
+              path: "/backend/projects/resource-collection/:id/general",
+              helper: r => `/backend/projects/resource-collection/${r}/general`
             },
             {
-              name: "backendCollectionResources",
+              name: "backendResourceCollectionResources",
               exact: true,
-              component: "CollectionResources",
-              path: "/backend/projects/collection/:id/resources",
-              helper: r => `/backend/projects/collection/${r}/resources`
+              component: "ResourceCollectionResources",
+              path: "/backend/projects/resource-collection/:id/resources",
+              helper: r =>
+                `/backend/projects/resource-collection/${r}/resources`
             }
           ]
         },
@@ -339,9 +340,9 @@ const routes = {
             {
               name: "backendProjectResourceCollections",
               exact: true,
-              component: "ProjectCollections",
-              path: "/backend/projects/:id/collections",
-              helper: p => `/backend/projects/${p}/collections`
+              component: "ProjectResourceCollections",
+              path: "/backend/projects/:id/resource-collections",
+              helper: p => `/backend/projects/${p}/resource-collections`
             },
             {
               name: "backendProjectPermissions",

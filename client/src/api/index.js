@@ -1,5 +1,5 @@
 export annotationsAPI from "./resources/annotations";
-export collectionsAPI from "./resources/collections";
+export resourceCollectionsAPI from "./resources/resourceCollections";
 export favoriteProjectsAPI from "./resources/favoriteProjects";
 export favoritesAPI from "./resources/favorites";
 export eventsAPI from "./resources/events";
