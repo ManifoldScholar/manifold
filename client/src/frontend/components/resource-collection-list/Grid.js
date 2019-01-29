@@ -12,25 +12,25 @@ export default class ResourceCollectionGrid extends Component {
 
   urlCreator = collection => {
     return lh.link(
-      "frontendResourceCollection",
+      "frontendProjectResourceCollection",
       this.props.project.attributes.slug,
       collection.attributes.slug
     );
   };
 
   render() {
-    const { collections } = this.props.project.relationships;
-    if (!collections) return null;
+    const { resourceCollections } = this.props.project.relationships;
+    if (!resourceCollections) return null;
 
     return (
       <nav className="resource-collections-list">
         <ul>
-          {collections.map(collection => {
+          {resourceCollections.map(collection => {
             return (
               <ResourceCollection.Cover
                 key={collection.id}
                 urlCreator={this.urlCreator}
-                collection={collection}
+                resourceCollection={collection}
               />
             );
           })}

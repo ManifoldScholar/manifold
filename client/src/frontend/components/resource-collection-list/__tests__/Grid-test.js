@@ -7,10 +7,10 @@ import { wrapWithRouter } from "test/helpers/routing";
 describe("Frontend.ResourceCollectionList.Grid component", () => {
   const project = build.entity.project("1");
   const collections = [
-    build.entity.collection("1"),
-    build.entity.collection("2")
+    build.entity.resourceCollection("1"),
+    build.entity.resourceCollection("2")
   ];
-  project.relationships.collections = collections;
+  project.relationships.resourceCollections = collections;
 
   it("renders correctly", () => {
     const component = renderer.create(

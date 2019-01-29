@@ -149,13 +149,13 @@ class Detail extends Component {
   renderCollectionsOrResources() {
     if (!this.shouldShowResources()) return null;
     const project = this.props.project;
-    if (project.attributes.collectionsCount > 0)
-      return this.renderCollections();
+    if (project.attributes.resourceCollectionsCount > 0)
+      return this.renderResourceCollections();
     if (project.attributes.resourcesCount > 0) return this.renderResources();
     return null;
   }
 
-  renderCollections = () => {
+  renderResourceCollections = () => {
     const project = this.props.project;
     return (
       <section className="bg-neutral05">

@@ -7,21 +7,21 @@ export default class ResourceCollectionCover extends Component {
   static displayName = "ResourceCollection.Cover";
 
   static propTypes = {
-    collection: PropTypes.object.isRequired,
+    resourceCollection: PropTypes.object.isRequired,
     urlCreator: PropTypes.func.isRequired
   };
 
   render() {
     const collectionsBackground = "/static/images/resource-collection.jpg";
-    const collection = this.props.collection;
-    const attr = collection.attributes;
+    const resourceCollection = this.props.resourceCollection;
+    const attr = resourceCollection.attributes;
     const bgImage = attr.thumbnailStyles.medium
       ? attr.thumbnailStyles.medium
       : collectionsBackground;
     return (
       <li>
         <Link
-          to={this.props.urlCreator(collection)}
+          to={this.props.urlCreator(resourceCollection)}
           style={{ backgroundImage: "url(" + bgImage + ")" }}
         >
           <div className="title-overlay">
@@ -30,7 +30,7 @@ export default class ResourceCollectionCover extends Component {
               <i className="manicon" aria-hidden="true">
                 <Icon.ResourceCollection size={36} />
               </i>
-              <span>{"Collection"}</span>
+              <span>{"Resource Collection"}</span>
             </div>
           </div>
         </Link>

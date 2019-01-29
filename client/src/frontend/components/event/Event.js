@@ -44,7 +44,7 @@ export default class Event extends PureComponent {
         return this.propsForTextAdded(attributes);
       case "project_created":
         return this.propsForProjectCreated(attributes);
-      case "collection_added":
+      case "resource_collection_added":
         return this.propsForCollectionAdded(attributes);
       default:
         return { visible: false };
@@ -133,13 +133,13 @@ export default class Event extends PureComponent {
     return {
       type: attr.eventType,
       date: attr.createdAt,
-      datePrefix: "Collection Added",
+      datePrefix: "Resource Collection Added",
       dateFormat: "MMMM Do, YYYY",
       title: attr.subjectTitle,
       iconClass: "manicon manicon-file-box",
       linkPrompt: "View Collection",
       linkHref: lh.link(
-        "frontendProjectCollection",
+        "frontendProjectResourceCollection",
         attr.projectSlug,
         attr.subjectSlug
       )

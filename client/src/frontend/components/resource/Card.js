@@ -16,7 +16,7 @@ class ResourceCard extends Component {
     history: PropTypes.object.isRequired,
     resource: PropTypes.object,
     project: PropTypes.object.isRequired,
-    collection: PropTypes.object
+    resourceCollection: PropTypes.object
   };
 
   constructor() {
@@ -52,11 +52,11 @@ class ResourceCard extends Component {
   }
 
   detailUrl() {
-    if (this.props.collection) {
+    if (this.props.resourceCollection) {
       return lh.link(
         "frontendProjectCollectionResource",
         this.props.project.attributes.slug,
-        this.props.collection.attributes.slug,
+        this.props.resourceCollection.attributes.slug,
         this.props.resource.attributes.slug
       );
     }

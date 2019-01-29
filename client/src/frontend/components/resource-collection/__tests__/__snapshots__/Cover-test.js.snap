@@ -40,7 +40,7 @@ exports[`Frontend.ResourceCollection.Cover component renders correctly 1`] = `
           </svg>
         </i>
         <span>
-          Collection
+          Resource Collection
         </span>
       </div>
     </div>
