@@ -34,8 +34,8 @@ export default class ResourceishThumbnail extends Component {
             .charAt(0)
             .toUpperCase() + kind.slice(1);
         break;
-      case "collections":
-        out = "Collection";
+      case "resourceCollections":
+        out = "Resource Collection";
         break;
       default:
         break;
@@ -49,7 +49,7 @@ export default class ResourceishThumbnail extends Component {
       case "resources":
         attributeName = "attachmentStyles";
         break;
-      case "collections":
+      case "resourceCollections":
         attributeName = "thumbnailStyles";
         break;
       default:
@@ -89,9 +89,9 @@ export default class ResourceishThumbnail extends Component {
           </i>
         );
         break;
-      case "collections":
+      case "resourceCollections":
         out = (
-          <i className={`icon-thumbnail-icon collection`}>
+          <i className={`icon-thumbnail-icon resource-collection`}>
             <Utility.IconComposer icon="resource-collection" size={56} />
           </i>
         );

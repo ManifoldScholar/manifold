@@ -5,7 +5,7 @@ import ResourceCollection from "frontend/components/resource-collection";
 import Utility from "frontend/components/utility";
 import { entityStoreActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
-import { projectsAPI, collectionsAPI, requests } from "api";
+import { projectsAPI, resourceCollectionsAPI, requests } from "api";
 import HeadContent from "global/components/HeadContent";
 import queryString from "query-string";
 import debounce from "lodash/debounce";
@@ -19,7 +19,7 @@ const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 
-export class CollectionDetailContainer extends PureComponent {
+export class ResourceCollectionDetailContainer extends PureComponent {
   static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
     const promises = [];
@@ -32,9 +32,15 @@ export class CollectionDetailContainer extends PureComponent {
     }
 
     // Load the collection, unless it is already loaded
-    if (!isEntityLoaded("collections", match.params.collectionId, state)) {
-      const c = collectionsAPI.show(match.params.collectionId);
-      const { promise } = dispatch(request(c, requests.feCollection));
+    if (
+      !isEntityLoaded(
+        "resourceCollections",
+        match.params.resourceCollectionId,
+        state
+      )
+    ) {
+      const c = resourceCollectionsAPI.show(match.params.resourceCollectionId);
+      const { promise } = dispatch(request(c, requests.feResourceCollection));
       promises.push(promise);
     }
 
@@ -44,8 +50,8 @@ export class CollectionDetailContainer extends PureComponent {
       size: perPage
     };
     const filter = omitBy(params, (v, k) => k === "page");
-    const cr = collectionsAPI.collectionResources(
-      match.params.collectionId,
+    const cr = resourceCollectionsAPI.collectionResources(
+      match.params.resourceCollectionId,
       filter,
       pagination
     );
@@ -59,9 +65,9 @@ export class CollectionDetailContainer extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const props = {
       project: grab("projects", ownProps.match.params.id, state.entityStore),
-      collection: grab(
-        "collections",
-        ownProps.match.params.collectionId,
+      resourceCollection: grab(
+        "resourceCollections",
+        ownProps.match.params.resourceCollectionId,
         state.entityStore
       ),
       resources: select(requests.feCollectionResources, state.entityStore),
@@ -78,7 +84,7 @@ export class CollectionDetailContainer extends PureComponent {
     slideshowResources: PropTypes.array,
     slideshowResourcesMeta: PropTypes.object,
     project: PropTypes.object,
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     settings: PropTypes.object.isRequired,
     resources: PropTypes.array,
     resourcesMeta: PropTypes.object,
@@ -118,7 +124,7 @@ export class CollectionDetailContainer extends PureComponent {
   flushStoreRequests = () => {
     this.props.dispatch(flush(requests.tmpProject));
     this.props.dispatch(flush(requests.feSlideshow));
-    this.props.dispatch(flush(requests.feCollection));
+    this.props.dispatch(flush(requests.feResourceCollection));
     this.props.dispatch(flush(requests.feCollectionResources));
   };
 
@@ -128,9 +134,9 @@ export class CollectionDetailContainer extends PureComponent {
   }
 
   updateResults() {
-    const cId = this.props.collection.id;
+    const cId = this.props.resourceCollection.id;
     const action = request(
-      collectionsAPI.collectionResources(
+      resourceCollectionsAPI.collectionResources(
         cId,
         this.state.filter,
         this.state.pagination
@@ -174,24 +180,24 @@ export class CollectionDetailContainer extends PureComponent {
   };
 
   render() {
-    const { project, collection, settings } = this.props;
+    const { project, resourceCollection, settings } = this.props;
     const filter = this.state.filter;
     const initialFilter = filter || null;
-    if (!project || !collection) return null;
+    if (!project || !resourceCollection) return null;
 
-    const collectionUrl = lh.link(
-      "frontendProjectCollection",
+    const resourceCollectionUrl = lh.link(
+      "frontendProjectResourceCollection",
       project.attributes.slug,
-      collection.attributes.slug
+      resourceCollection.attributes.slug
     );
     return (
       <div>
         <HeadContent
-          title={`\u201c${collection.attributes.title}\u201d on ${
+          title={`\u201c${resourceCollection.attributes.title}\u201d on ${
             settings.attributes.general.installationName
           }`}
-          description={collection.attributes.description}
-          image={collection.attributes.thumbnailStyles.medium}
+          description={resourceCollection.attributes.description}
+          image={resourceCollection.attributes.thumbnailStyles.medium}
         />
         <Utility.BackLinkPrimary
           link={lh.link("frontendProject", project.attributes.slug)}
@@ -204,10 +210,10 @@ export class CollectionDetailContainer extends PureComponent {
             slideshowResources={this.props.slideshowResources}
             slideshowPagination={this.props.slideshowResourcesMeta.pagination}
             collectionResources={this.props.resources}
-            collectionPagination={this.props.resourcesMeta.pagination}
-            collectionPaginationHandler={this.pageChangeHandlerCreator}
-            collection={this.props.collection}
-            collectionUrl={collectionUrl}
+            resourceCollectionPagination={this.props.resourcesMeta.pagination}
+            resourceCollectionPaginationHandler={this.pageChangeHandlerCreator}
+            resourceCollection={this.props.resourceCollection}
+            resourceCollectionUrl={resourceCollectionUrl}
             filterChange={this.filterChange}
             initialFilterState={initialFilter}
           />
@@ -223,4 +229,4 @@ export class CollectionDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(withSettings(CollectionDetailContainer));
+export default connectAndFetch(withSettings(ResourceCollectionDetailContainer));

@@ -7,7 +7,7 @@ export default class ResourceCollectionTitle extends Component {
   static displayName = "ResourceCollection.Title";
 
   static propTypes = {
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     showCreatedAt: PropTypes.bool
   };
 
@@ -29,7 +29,7 @@ export default class ResourceCollectionTitle extends Component {
   }
 
   render() {
-    const attr = this.props.collection.attributes;
+    const attr = this.props.resourceCollection.attributes;
 
     return (
       <header className="section-heading">

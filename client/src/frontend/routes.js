@@ -67,8 +67,10 @@ const routes = {
           name: "frontendProjectCollectionResource",
           exact: true,
           component: "ResourceDetail",
-          path: "/projects/:id/collection/:collectionId/resource/:resourceId",
-          helper: (p, c, r) => `/projects/${p}/collection/${c}/resource/${r}`
+          path:
+            "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId",
+          helper: (p, c, r) =>
+            `/projects/${p}/resource-collection/${c}/resource/${r}`
         },
         {
           name: "frontendProjectResource",
@@ -81,17 +83,17 @@ const routes = {
           }
         },
         {
-          name: "frontendResourceCollection",
+          name: "frontendProjectResourceCollection",
           exact: true,
-          component: "CollectionDetail",
-          path: "/projects/:id/collection/:collectionId",
+          component: "ResourceCollectionDetail",
+          path: "/projects/:id/resource-collection/:resourceCollectionId",
           helpers: {
-            frontendResourceCollection: (p, c, params = {}) => {
+            frontendProjectResourceCollection: (p, c, params = {}) => {
               const query = queryString.stringify(params);
-              if (!query) return `/projects/${p}/collection/${c}`;
-              return `/projects/${p}/collection/${c}?${query}`;
+              if (!query) return `/projects/${p}/resource-collection/${c}`;
+              return `/projects/${p}/resource-collection/${c}?${query}`;
             },
-            frontendProjectCollectionRelative: c => `collection/${c}`
+            frontendProjectResourceCollectionRelative: c => `resource-collection/${c}`
           }
         },
         {

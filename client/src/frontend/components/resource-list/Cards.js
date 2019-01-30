@@ -8,7 +8,7 @@ export default class ResourceListCards extends PureComponent {
   static displayName = "ResourceList.Cards";
 
   static propTypes = {
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     resources: PropTypes.array.isRequired,
     project: PropTypes.object.isRequired,
     pagination: PropTypes.object,
@@ -38,7 +38,7 @@ export default class ResourceListCards extends PureComponent {
             {this.props.resources.map(resource => {
               return (
                 <Resource.Card
-                  collection={this.props.collection}
+                  resourceCollection={this.props.resourceCollection}
                   key={resource.id}
                   resource={resource}
                   project={this.props.project}

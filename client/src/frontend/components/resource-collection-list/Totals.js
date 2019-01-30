@@ -36,8 +36,8 @@ export default class ResourceCollectionTotals extends Component {
         <Link
           className={`${baseClass}__link`}
           to={lh.link(
-            "frontendProjectResources",
-            this.props.project.attributes.slug // TODO: send to collections page
+            "frontendProjectResourceCollections",
+            this.props.project.attributes.slug
           )}
         >
           <span data-id="count" className={`${baseClass}__value`}>

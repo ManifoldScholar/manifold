@@ -189,7 +189,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
               </a>
               <a
                 className="detail-link"
-                href="/projects/delegated-project-slug/collection/slug-2/resource/slug-3"
+                href="/projects/delegated-project-slug/resource-collection/slug-2/resource/slug-3"
                 onClick={[Function]}
               >
                 View Resource
@@ -546,7 +546,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                 </span>
                 <div
                   className="arrow-link"
-                  to="/projects/slug-1/collection/slug-2/resource/slug-3"
+                  to="/projects/slug-1/resource-collection/slug-2/resource/slug-3"
                 >
                   <i
                     aria-hidden="true"
