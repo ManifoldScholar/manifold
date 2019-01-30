@@ -12,11 +12,16 @@ export default class ProjectContentBlockWrapper extends PureComponent {
 
   render() {
     return (
-      <section className={classNames(this.props.additionalClasses)}>
+      <div
+        className={classNames(
+          "project-content-block",
+          this.props.additionalClasses
+        )}
+      >
         <div className="container entity-section-wrapper">
           {this.props.children}
         </div>
-      </section>
+      </div>
     );
   }
 }
