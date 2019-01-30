@@ -3,7 +3,7 @@
 exports[`Backend Project Category New Container renders correctly 1`] = `
 <div>
   <header
-    className="dialog-header-large"
+    className="drawer-header"
   >
     <h2
       className="heading-quaternary"
