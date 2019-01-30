@@ -41,6 +41,6 @@ RSpec.describe Content::TableOfContentsBlock do
   end
 
   it "has the correct available attributes" do
-    expect(toc_block.available_attributes).to match_array [:depth, :show_authors, :show_text_title]
+    expect(toc_block.available_attributes).to match_array [:depth, :title, :show_authors, :show_text_title]
   end
 end

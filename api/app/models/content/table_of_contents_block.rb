@@ -4,6 +4,7 @@ module Content
     has_one_proxied :text, source: "Text", required: true
 
     has_configured_attributes depth: :integer,
+                              title: :string,
                               show_authors: [:boolean, default: false],
                               show_text_title: [:boolean, default: false]
 

@@ -4,6 +4,24 @@ exports[`Backend.Project.Content.TypeForm.TableOfContents component renders corr
 Array [
   <div
     className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+      htmlFor="attributes[title]-text-input-1"
+    >
+      Title
+    </label>
+    <input
+      aria-describedby="attributes[title]-text-input-1"
+      id="attributes[title]-text-input-1"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>,
+  <div
+    className="form-input"
   >
     <div
       className="form-input"
