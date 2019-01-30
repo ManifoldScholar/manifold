@@ -6,7 +6,7 @@ exports[`Frontend.ResourceCollectionList.Totals Component renders correctly 1`] 
 >
   <a
     className="resource-total__link"
-    href="/projects/slug-1/resources"
+    href="/projects/slug-1/resource-collections"
     onClick={[Function]}
   >
     <span

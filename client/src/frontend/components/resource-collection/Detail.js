@@ -8,14 +8,14 @@ export default class ResourceCollectionDetail extends PureComponent {
   static displayName = "ResourceCollection.Detail";
 
   static propTypes = {
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     project: PropTypes.object,
-    collectionUrl: PropTypes.string.isRequired,
+    resourceCollectionUrl: PropTypes.string.isRequired,
     slideshowResources: PropTypes.array,
     slideshowPagination: PropTypes.object,
     collectionResources: PropTypes.array,
-    collectionPagination: PropTypes.object,
-    collectionPaginationHandler: PropTypes.func,
+    resourceCollectionPagination: PropTypes.object,
+    resourceCollectionPaginationHandler: PropTypes.func,
     dispatch: PropTypes.func,
     filterChange: PropTypes.func.isRequired,
     initialFilterState: PropTypes.object
@@ -33,22 +33,22 @@ export default class ResourceCollectionDetail extends PureComponent {
 
   render() {
     const project = this.props.project;
-    const collection = this.props.collection;
-    if (!project || !collection) return null;
+    const resourceCollection = this.props.resourceCollection;
+    if (!project || !resourceCollection) return null;
 
-    const attr = collection.attributes;
+    const attr = resourceCollection.attributes;
     const count = attr.collectionResourcesCount;
     return (
       <section className="collection-detail">
         <div className="container flush-bottom">
-          <Title collection={collection} showCreatedAt />
+          <Title resourceCollection={resourceCollection} showCreatedAt />
           {this.renderDescription(attr.descriptionFormatted)}
           <div className="utility">
-            <Utility.ShareBar url={this.props.collectionUrl} />
+            <Utility.ShareBar url={this.props.resourceCollectionUrl} />
           </div>
         </div>
         <ResourceList.Slideshow
-          collection={this.props.collection}
+          resourceCollection={this.props.resourceCollection}
           collectionResources={this.props.slideshowResources}
           count={project.attributes.resourcesCount}
           pagination={this.props.slideshowPagination}
@@ -61,17 +61,19 @@ export default class ResourceCollectionDetail extends PureComponent {
             project={project}
           />
           <ResourceList.Filters
-            kinds={collection.attributes.resourceKinds}
-            tags={collection.attributes.resourceTags}
+            kinds={resourceCollection.attributes.resourceKinds}
+            tags={resourceCollection.attributes.resourceTags}
             initialFilterState={this.props.initialFilterState}
             filterChangeHandler={this.props.filterChange}
           />
           <ResourceList.Cards
-            collection={this.props.collection}
+            resourceCollection={this.props.resourceCollection}
             project={this.props.project}
             resources={this.props.collectionResources}
-            pagination={this.props.collectionPagination}
-            paginationClickHandler={this.props.collectionPaginationHandler}
+            pagination={this.props.resourceCollectionPagination}
+            paginationClickHandler={
+              this.props.resourceCollectionPaginationHandler
+            }
           />
         </div>
       </section>

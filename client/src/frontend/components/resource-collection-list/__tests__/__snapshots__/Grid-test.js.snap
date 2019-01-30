@@ -7,7 +7,7 @@ exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = 
   <ul>
     <li>
       <a
-        href="/projects/slug-1/collection/slug-1"
+        href="/projects/slug-1/resource-collection/slug-1"
         onClick={[Function]}
         style={
           Object {
@@ -44,7 +44,7 @@ exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = 
               </svg>
             </i>
             <span>
-              Collection
+              Resource Collection
             </span>
           </div>
         </div>
@@ -52,7 +52,7 @@ exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = 
     </li>
     <li>
       <a
-        href="/projects/slug-1/collection/slug-2"
+        href="/projects/slug-1/resource-collection/slug-2"
         onClick={[Function]}
         style={
           Object {
@@ -89,7 +89,7 @@ exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = 
               </svg>
             </i>
             <span>
-              Collection
+              Resource Collection
             </span>
           </div>
         </div>
