@@ -44,7 +44,7 @@ export default class Block extends PureComponent {
 
   render() {
     return (
-      <div className="hero-builder-block">
+      <div className="hero-builder-block full-width">
         <div
           className="hero-builder-block__header"
           role="button"
