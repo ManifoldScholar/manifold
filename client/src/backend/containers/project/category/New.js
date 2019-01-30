@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Category from "backend/components/category";
 import lh from "helpers/linkHandler";
+import Navigation from "backend/components/navigation";
 
 export default class ProjectCategoryNewContainer extends Component {
   static displayName = "Project.Category.New";
@@ -21,9 +22,7 @@ export default class ProjectCategoryNewContainer extends Component {
   render() {
     return (
       <div>
-        <header className="dialog-header-large">
-          <h2 className="heading-quaternary">{"Create Category"}</h2>
-        </header>
+        <Navigation.DrawerHeader title="Create Category" />
         <Category.Form
           projectId={this.props.project.id}
           onSuccess={this.onSuccess}
