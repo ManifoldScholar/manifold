@@ -112,6 +112,13 @@ export default {
     };
   },
 
+  actionCallouts(id) {
+    return {
+      endpoint: `/api/v1/projects/${id}/relationships/action_callouts`,
+      method: "GET"
+    };
+  },
+
   featured(limit = 6, filterParams = {}) {
     const filter = filterParams;
     filter.featured = true;
