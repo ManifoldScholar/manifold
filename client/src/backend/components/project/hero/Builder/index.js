@@ -10,8 +10,8 @@ export default class Builder extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    actionCallouts: PropTypes.array.isRequired,
-    actionCalloutsResponse: PropTypes.object.isRequired,
+    actionCallouts: PropTypes.array,
+    actionCalloutsResponse: PropTypes.object,
     refresh: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
   };
