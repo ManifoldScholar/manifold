@@ -6,6 +6,7 @@ import FormContainer from "backend/containers/form";
 import Form from "backend/components/form";
 import ContentBlock from "backend/components/content-block";
 import { entityStoreActions } from "actions";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
@@ -15,6 +16,7 @@ export class ProjectContentFormContainer extends Component {
   static propTypes = {
     contentBlock: PropTypes.object,
     project: PropTypes.object,
+    history: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     match: PropTypes.object
   };
@@ -50,6 +52,14 @@ export class ProjectContentFormContainer extends Component {
       : requests.beContentBlockUpdate;
   }
 
+  closeDrawer = () => {
+    this.fetchContentBlocks();
+    return this.props.history.push(
+      lh.link("backendProjectLayout", this.project.id),
+      { noScroll: true }
+    );
+  };
+
   fetchContentBlocks = () => {
     const call = projectsAPI.contentBlocks(this.project.id);
     const contentBlocksRequest = request(call, requests.beProjectContentBlocks);
@@ -74,7 +84,7 @@ export class ProjectContentFormContainer extends Component {
         name={this.requestName}
         update={contentBlocksAPI.update}
         create={this.create}
-        onSuccess={this.fetchContentBlocks}
+        onSuccess={this.closeDrawer}
         className="form-secondary"
         notificationScope="drawer"
       >
