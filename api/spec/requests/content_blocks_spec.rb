@@ -24,9 +24,9 @@ RSpec.describe "ContentBlocks API", type: :request do
       let(:headers) { reader_headers }
 
       describe "the response" do
-        it "has a 403 FORBIDDEN status code" do
+        it "has a 200 status code" do
           get path, headers: headers
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(200)
         end
       end
     end
