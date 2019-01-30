@@ -20,8 +20,13 @@ class NotationViewerLink extends PureComponent {
     if (notation.type === "resources") {
       return lh.link("readerSectionResource", textId, sectionId, notation.id);
     }
-    if (notation.type === "collections") {
-      return lh.link("readerSectionCollection", textId, sectionId, notation.id);
+    if (notation.type === "resourceCollections") {
+      return lh.link(
+        "readerSectionResourceCollection",
+        textId,
+        sectionId,
+        notation.id
+      );
     }
     return null;
   }

@@ -52,7 +52,7 @@ export default class Text extends Component {
     authentication: PropTypes.object,
     section: PropTypes.object,
     resources: PropTypes.array,
-    collections: PropTypes.array,
+    resourceCollections: PropTypes.array,
     annotations: PropTypes.array,
     appearance: PropTypes.object,
     location: PropTypes.object,
@@ -151,8 +151,8 @@ export default class Text extends Component {
     const page = this.props.location.pathname.substr(1);
 
     let notations = this.props.resources;
-    if (notations && this.props.collections) {
-      notations = notations.concat(this.props.collections);
+    if (notations && this.props.resourceCollections) {
+      notations = notations.concat(this.props.resourceCollections);
     }
 
     return (

@@ -79,7 +79,7 @@ export default class TextNode extends Component {
       const startNode = a.attributes.startNode;
       const endNode = a.attributes.endNode;
       const resourceId = a.attributes.resourceId;
-      const collectionId = a.attributes.collectionId;
+      const resourceCollectionId = a.attributes.resourceCollectionId;
       const authorCreated = a.attributes.authorCreated;
       const abilities = a.attributes.abilities;
       return {
@@ -91,7 +91,7 @@ export default class TextNode extends Component {
         startNode,
         endNode,
         resourceId,
-        collectionId,
+        resourceCollectionId,
         authorCreated,
         abilities
       };
@@ -163,7 +163,7 @@ export default class TextNode extends Component {
       const authorCreated = map[index].find(a => a.authorCreated);
       const lockedSelection = map[index].find(a => a.id === "selection");
       const notations = map[index].filter(
-        a => a.type === "resource" || a.type === "collection"
+        a => a.type === "resource" || a.type === "resource_collection"
       );
       let endingResources = [];
       let startingResources = [];
