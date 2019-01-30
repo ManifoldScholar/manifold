@@ -8,6 +8,7 @@ import { bindActionCreators } from "redux";
 import get from "lodash/get";
 import has from "lodash/has";
 import forEach from "lodash/forEach";
+import isFunction from "lodash/isFunction";
 import pick from "lodash/pick";
 import brackets2dots from "brackets2dots";
 import { Prompt } from "react-router-dom";
@@ -31,7 +32,11 @@ export class FormContainer extends PureComponent {
   static propTypes = {
     doNotWarn: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
-    children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
+    children: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.array,
+      PropTypes.element
+    ]),
     model: PropTypes.object,
     update: PropTypes.func.isRequired,
     create: PropTypes.func.isRequired,
@@ -251,6 +256,9 @@ export class FormContainer extends PureComponent {
 
   render() {
     if (!this.props.session) return null;
+
+    const contextProps = this.contextProps(this.props);
+
     return (
       <div>
         {this.renderDebugger()}
@@ -266,8 +274,10 @@ export class FormContainer extends PureComponent {
           className={this.props.className}
           data-id="submit"
         >
-          <FormContext.Provider value={this.contextProps(this.props)}>
-            {this.props.children}
+          <FormContext.Provider value={contextProps}>
+            {isFunction(this.props.children)
+              ? this.props.children(contextProps.getModelValue)
+              : this.props.children}
           </FormContext.Provider>
         </form>
         {this.renderModelErrors(this.props)}
