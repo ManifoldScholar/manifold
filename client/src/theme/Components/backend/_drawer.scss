@@ -118,6 +118,11 @@
     .close-button-primary {
       display: inline-block;
 
+      &:focus {
+        color: $focusPrimary;
+        outline: none;
+      }
+
       .close-text {
         display: none;
       }
