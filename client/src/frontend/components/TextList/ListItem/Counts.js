@@ -30,9 +30,9 @@ export default class TextListListItemCounts extends Component {
             size={32}
             iconClass={`${this.props.baseClass}__interaction-icon`}
           />
-          {this.highlightsCount}
+          {this.annotationsCount}
           <span className="screen-reader-text">
-            This text has {this.highlightsCount} highlights
+            This text has {this.annotationsCount} annotations
           </span>
         </li>
         <li className={`${this.props.baseClass}__interaction`}>
@@ -40,9 +40,9 @@ export default class TextListListItemCounts extends Component {
             size={32}
             iconClass={`${this.props.baseClass}__interaction-icon`}
           />
-          {this.annotationsCount}
+          {this.highlightsCount}
           <span className="screen-reader-text">
-            This text has {this.annotationsCount} annotations
+            This text has {this.highlightsCount} highlights
           </span>
         </li>
       </ul>

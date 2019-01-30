@@ -24,7 +24,7 @@ exports[`Frontend.TextList.ListItem.Counts component renders correctly 1`] = `
       className="screen-reader-text"
     >
       This text has 
-       highlights
+       annotations
     </span>
   </li>
   <li
@@ -47,7 +47,7 @@ exports[`Frontend.TextList.ListItem.Counts component renders correctly 1`] = `
       className="screen-reader-text"
     >
       This text has 
-       annotations
+       highlights
     </span>
   </li>
 </ul>
