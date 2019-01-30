@@ -55,7 +55,7 @@ RSpec.describe "When re-ingesting a text using the Document strategy", integrati
     expect(pre).to_not eq post
   end
 
-  fit "fails to move the annotation when the subject is ambiguous" do
+  it "fails to move the annotation when the subject is ambiguous" do
     annotation = FactoryBot.create(
       :annotation,
       {
@@ -72,7 +72,7 @@ RSpec.describe "When re-ingesting a text using the Document strategy", integrati
     expect(annotation.reload.orphaned).to be true
   end
 
-  fit "successfully moves the annotation" do
+  it "successfully moves the annotation" do
     annotation
     after_text
     Annotations::AdoptOrOrphan.run annotation: annotation
