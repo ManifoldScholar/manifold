@@ -1,0 +1,45 @@
+.project-content-block {
+  @include respond($break60) {
+    margin-top: 0.648vw;
+  }
+
+  @include respond($break120) {
+    margin-top: 8px;
+  }
+
+  &.bg-neutral05 {
+    padding-bottom: 30px;
+
+    @include respond($break60) {
+      padding-top: 2.429vw;
+    }
+
+    @include respond($break120) {
+      padding-top: 30px;
+    }
+  }
+
+  &:not(.bg-neutral05) + & {
+    margin-top: 25px;
+
+    @include respond($break60) {
+      margin-top: 4.453vw;
+    }
+
+    @include respond($break120) {
+      margin-top: 55px;
+    }
+  }
+
+  &:last-of-type {
+    margin-bottom: 50px;
+
+    @include respond($break60) {
+      margin-top: 8.065vw;
+    }
+
+    @include respond($break80) {
+      margin-top: 65px;
+    }
+  }
+}
