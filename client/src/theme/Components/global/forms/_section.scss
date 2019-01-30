@@ -11,6 +11,20 @@
     @include roundedFormHeader;
   }
 
+  .form-subsection-label {
+    padding-left: 24px;
+    margin-top: 40px;
+
+    h2, span {
+      @include utilityPrimary;
+      width: 100%;
+      font-size: 14px;
+      font-weight: $semibold;
+      color: $neutral50;
+      letter-spacing: 0.1em;
+    }
+  }
+
   .form-input-group {
     display: flex;
     flex-flow: column wrap;

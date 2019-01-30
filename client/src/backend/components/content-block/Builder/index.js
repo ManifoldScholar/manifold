@@ -101,7 +101,8 @@ export class ProjectContent extends PureComponent {
 
   editBlock = block => {
     this.props.history.push(
-      lh.link("backendProjectContentBlock", this.projectId, block.id)
+      lh.link("backendProjectContentBlock", this.projectId, block.id),
+      { noScroll: true }
     );
   };
 

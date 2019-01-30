@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import ContentBlock from "backend/components/content-block";
+import Hero from "backend/components/project/hero";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { projectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import { connect } from "react-redux";
+import connectAndFetch from "utils/connectAndFetch";
 import Authorize from "hoc/authorize";
 import { select } from "utils/entityUtils";
 import get from "lodash/get";
@@ -21,6 +22,14 @@ export class ProjectContentContainer extends PureComponent {
       contentBlocksResponse: get(
         state.entityStore.responses,
         requests.beProjectContentBlocks
+      ),
+      actionCallouts: select(
+        requests.beProjectActionCallouts,
+        state.entityStore
+      ),
+      actionCalloutsResponse: get(
+        state.entityStore.responses,
+        requests.beProjectActionCallouts
       )
     };
   };
@@ -29,6 +38,8 @@ export class ProjectContentContainer extends PureComponent {
     project: PropTypes.object,
     contentBlocks: PropTypes.array,
     contentBlocksResponse: PropTypes.object,
+    actionCallouts: PropTypes.array,
+    actionCalloutsResponse: PropTypes.object,
     location: PropTypes.object,
     match: PropTypes.object,
     history: PropTypes.object,
@@ -36,8 +47,29 @@ export class ProjectContentContainer extends PureComponent {
     route: PropTypes.object
   };
 
-  componentDidMount() {
-    this.fetchContentBlocks();
+  static fetchData = (getState, dispatch, location, match) => {
+    if (!match || !match.params || !match.params.id) return;
+    return Promise.all([
+      ProjectContentContainer.fetchContentBlocks(match.params.id, dispatch),
+      ProjectContentContainer.fetchActionCallouts(match.params.id, dispatch)
+    ]);
+  };
+
+  static fetchContentBlocks(projectId, dispatch) {
+    const call = projectsAPI.contentBlocks(projectId);
+    const contentBlocksRequest = request(call, requests.beProjectContentBlocks);
+    const { promise } = dispatch(contentBlocksRequest);
+    return promise;
+  }
+
+  static fetchActionCallouts(projectId, dispatch) {
+    const call = projectsAPI.actionCallouts(projectId);
+    const actionCalloutsRequest = request(
+      call,
+      requests.beProjectActionCallouts
+    );
+    const { promise } = dispatch(actionCalloutsRequest);
+    return promise;
   }
 
   get projectId() {
@@ -48,15 +80,23 @@ export class ProjectContentContainer extends PureComponent {
     const { project } = this.props;
 
     return {
-      closeUrl: lh.link("backendProjectProjectPage", project.id),
+      closeUrl: lh.link("backendProjectLayout", project.id),
       lockScroll: "always"
     };
   }
 
   fetchContentBlocks = () => {
-    const call = projectsAPI.contentBlocks(this.projectId);
-    const contentBlocksRequest = request(call, requests.beProjectContentBlocks);
-    this.props.dispatch(contentBlocksRequest);
+    ProjectContentContainer.fetchContentBlocks(
+      this.projectId,
+      this.props.dispatch
+    );
+  };
+
+  fetchActionCallouts = () => {
+    ProjectContentContainer.fetchActionCallouts(
+      this.projectId,
+      this.props.dispatch
+    );
   };
 
   render() {
@@ -70,6 +110,14 @@ export class ProjectContentContainer extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
+        <Hero.Builder
+          dispatch={this.props.dispatch}
+          history={this.props.history}
+          actionCallouts={this.props.actionCallouts}
+          actionCalloutsResponse={this.props.actionCalloutsResponse}
+          refresh={this.fetchActionCallouts}
+          project={project}
+        />
         <ContentBlock.Builder
           dispatch={this.props.dispatch}
           history={this.props.history}
@@ -91,6 +139,4 @@ export class ProjectContentContainer extends PureComponent {
   }
 }
 
-export default connect(ProjectContentContainer.mapStateToProps)(
-  ProjectContentContainer
-);
+export default connectAndFetch(ProjectContentContainer);

@@ -1,0 +1,82 @@
+// Blocks used as part of the backend hero builder interface.
+.hero-builder-block {
+
+  @include panelRounded;
+  padding: 24px;
+  margin-top: 18px;
+  margin-bottom: 21px;
+  color: $neutral30;
+
+
+  &__header {
+    display: flex;
+    cursor: pointer;
+  }
+
+  &__header:hover {
+    color: $accentPrimary;
+  }
+
+  &__header-details {
+    flex-grow: 1;
+  }
+
+  &__title {
+    @include templateHead;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: $medium;
+  }
+
+  &__description {
+    @include templateCopy;
+    font-style: italic;
+    color: $neutral45;
+  }
+
+  &__button {
+    color: $neutral50;
+    background: $neutral95;
+    border: none;
+
+    &:focus {
+      outline: none;
+
+      svg {
+        color: $focusPrimary;
+      }
+
+      .hero-builder-block__button-label {
+        color: $focusPrimary;
+      }
+
+    }
+
+    svg {
+      transition: color $duration $timing;
+    }
+  }
+
+  &__header:hover &__button {
+    color: $accentPrimary;
+
+    .hero-builder-block__button-label {
+      visibility: visible;
+    }
+  }
+
+  &__button-label {
+    margin-right: 10px;
+    font-size: 12px;
+    white-space: nowrap;
+    visibility: hidden;
+    transition: color $duration $timing;
+    @include utilityPrimary;
+  }
+
+  &__body {
+  }
+
+}
+

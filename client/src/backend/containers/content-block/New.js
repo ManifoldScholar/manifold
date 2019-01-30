@@ -28,9 +28,7 @@ export class ContentBlockNewContainer extends Component {
     // This container is dependent on a pendingBlock being placed in the layout.  If no pendingBlock is
     // passed, we assumed nothing has changed in the layout and close the drawer.
     if (!this.pendingBlock)
-      return (
-        <Redirect to={lh.link("backendProjectProjectPage", this.project.id)} />
-      );
+      return <Redirect to={lh.link("backendProjectLayout", this.project.id)} />;
 
     return (
       <section>

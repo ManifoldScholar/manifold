@@ -24,9 +24,9 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
   render() {
     return (
       <div className="form-section">
-        <Header title="Content Blocks">
-          Drag content blocks directly into your project page layout, or use the
-          plus symbol to add them.
+        <Header title="Content Blocks" subtitle="Blocks:">
+          Customize the rest of the content on your project page. Add, delete,
+          and reorder content blocks, edit settings, and toggle visibility.
         </Header>
         <div className="block-grid full-width">
           {this.types.map((type, index) => (

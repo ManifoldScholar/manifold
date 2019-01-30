@@ -424,26 +424,44 @@ const routes = {
               ]
             },
             {
-              name: "backendProjectProjectPage",
+              name: "backendProjectLayout",
               exact: false,
               component: "ProjectContent",
-              path: "/backend/projects/:id/content-blocks/:id?",
-              helper: p => `/backend/projects/${p}/content-blocks/`,
+              path: "/backend/projects/:id/layout",
+              helper: p => `/backend/projects/${p}/layout`,
               routes: [
+                {
+                  name: "backendProjectActionCalloutNew",
+                  exact: true,
+                  component: "ActionCalloutNew",
+                  path: "/backend/projects/:pId/layout/action-callout/new",
+                  helper: p =>
+                    `/backend/projects/${p}/layout/action-callout/new`
+                },
+                {
+                  name: "backendProjectActionCalloutEdit",
+                  exact: true,
+                  component: "ActionCalloutEdit",
+                  path: "/backend/projects/:pId/layout/action-callout/:id",
+                  helper: (p, id) =>
+                    `/backend/projects/${p}/layout/action-callout/${id}`
+                },
+
                 {
                   name: "backendProjectContentBlockNew",
                   exact: true,
                   component: "ContentBlockNew",
-                  path: "/backend/projects/:pId/content-blocks/new",
-                  helper: p => `/backend/projects/${p}/content-blocks/new`
+                  path: "/backend/projects/:pId/layout/content-blocks/new",
+                  helper: p =>
+                    `/backend/projects/${p}/layout/content-blocks/new`
                 },
                 {
                   name: "backendProjectContentBlock",
                   exact: true,
                   component: "ContentBlockEdit",
-                  path: "/backend/projects/:pId/content-blocks/:id",
+                  path: "/backend/projects/:pId/layout/content-blocks/:id",
                   helper: (p, id) =>
-                    `/backend/projects/${p}/content-blocks/${id}`
+                    `/backend/projects/${p}/layout/content-blocks/${id}`
                 }
               ]
             },
