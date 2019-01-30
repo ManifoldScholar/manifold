@@ -1,20 +1,10 @@
 .action-callout-slot {
-
   $gutter: 24px;
   $padding: 14px;
 
   display: flex;
-  flex: auto;
-  width: 50%;
+  width: 100%;
   padding: $gutter / 2 0;
-
-  &:nth-child(odd) {
-    padding-right: $gutter / 2;
-  }
-
-  &:nth-child(even) {
-    padding-left: $gutter / 2;
-  }
 
   &--active {
     .action-callout-slot__content {
@@ -24,7 +14,10 @@
 
   &__content {
     @include panelRounded;
+    display: flex;
     flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
     padding: $padding;
 
     background: $neutral90;
@@ -41,12 +34,18 @@
     transition: color $duration $timing;
     --hover-color: #{$accentPrimary};
 
-    svg {
-      margin-right: 8px;
+    &--header {
+      margin-bottom: 4px;
+    }
+
+    &:not(:last-child) {
+      svg {
+        margin-right: 8px;
+      }
     }
 
     &:focus {
-      color: $focusPrimary;
+      color: $accentPrimary;
       outline: none;
     }
 
@@ -57,7 +56,9 @@
   }
 
   &__chips {
-    min-height: 59px;
+    flex-grow: 1;
+    width: 100%;
+    min-height: 70px;
     padding: 0;
   }
 
@@ -70,11 +71,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 9px 15px 11px;
     font-size: 12px;
     line-height: 1;
     color: $neutral50;
+    letter-spacing: 0.125em;
     background: $neutral95;
     border-radius: 5px;
 
@@ -97,4 +98,3 @@
 
 
 }
-

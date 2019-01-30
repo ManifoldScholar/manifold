@@ -1,6 +1,14 @@
 .action-callouts {
   $gutter: 24px;
   display: flex;
-  flex-wrap: wrap;
-  margin-top: $gutter / 2;
+  flex-direction: column;
+
+  @include respond($break85) {
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    > * {
+      flex-basis: calc(50% - #{$gutter / 2});
+    }
+  }
 }
