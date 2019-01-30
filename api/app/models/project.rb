@@ -108,6 +108,10 @@ class Project < ApplicationRecord
            -> { order(:position) },
            dependent: :destroy,
            inverse_of: :project
+  has_many :action_callouts,
+           -> { order(:position) },
+           dependent: :destroy,
+           inverse_of: :project
 
   # rubocop:disable Style/Lambda, Rails/InverseOf
   has_many :uncollected_resources, ->(object) {
