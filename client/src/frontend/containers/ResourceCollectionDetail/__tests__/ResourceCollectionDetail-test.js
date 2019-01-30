@@ -2,12 +2,12 @@ jest.mock("react-collapse");
 
 import React from "react";
 import renderer from "react-test-renderer";
-import { CollectionDetailContainer } from "../";
+import { ResourceCollectionDetailContainer } from "../";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
 
-describe("Frontend CollectionDetail Container", () => {
+describe("Frontend ResourceCollectionDetail Container", () => {
   const pagination = build.pagination();
   const store = build.store();
 
@@ -19,7 +19,7 @@ describe("Frontend CollectionDetail Container", () => {
     {},
     { project, collectionResources: [collectionResource] }
   );
-  const collection = build.entity.collection(
+  const resourceCollection = build.entity.resourceCollection(
     "2",
     {},
     { project, resources: [resource] }
@@ -33,16 +33,16 @@ describe("Frontend CollectionDetail Container", () => {
   const props = {
     settings,
     project,
-    collection,
+    resourceCollection,
     params: { id: "2" },
-    resources: resources,
+    resources,
     resourcesMeta: { pagination },
     slideshowResources: resources,
     slideshowResourcesMeta: { pagination },
     collectionResources: resources,
-    collectionPagination: pagination,
-    collectionPaginationHandler: pageChangeMock,
-    collectionUrl: `/browse/project/${project.id}/collection/${collection.id}`,
+    resourceCollectionPagination: pagination,
+    resourceCollectionPaginationHandler: pageChangeMock,
+    resourceCollectionUrl: `/browse/project/${project.id}/collection/${resourceCollection.id}`,
     filterChange: filterChangeMock,
     initialFilterState: null,
     location: { query: null }
@@ -51,7 +51,7 @@ describe("Frontend CollectionDetail Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <CollectionDetailContainer {...props} />
+        <ResourceCollectionDetailContainer {...props} />
       </Provider>
     )
   );

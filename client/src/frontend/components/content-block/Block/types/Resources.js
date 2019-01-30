@@ -42,7 +42,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
   }
 
   get projectCollections() {
-    return this.project.relationships.collections;
+    return this.project.relationships.resourceCollections;
   }
 
   get countProjectCollections() {
@@ -90,7 +90,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
             <React.Fragment>
               <ResourceCollectionList.Grid
                 project={this.project}
-                collections={this.visibleCollections}
+                resourceCollections={this.visibleCollections}
               />
               <ResourceCollectionList.Totals
                 alignLeft={this.isSparse}

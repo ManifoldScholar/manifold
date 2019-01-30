@@ -4,7 +4,7 @@ import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-
 import Swipeable from "react-swipeable";
 import includes from "lodash/includes";
 import ResourceSlide from "frontend/components/resource-slide";
-import { collectionsAPI, requests } from "api";
+import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;
@@ -16,7 +16,7 @@ export default class ResourceSlideshow extends PureComponent {
     collectionResources: PropTypes.array,
     pagination: PropTypes.object,
     dispatch: PropTypes.func,
-    collection: PropTypes.object.isRequired,
+    resourceCollection: PropTypes.object.isRequired,
     hideDetailUrl: PropTypes.bool,
     hideDownload: PropTypes.bool,
     slideOptions: PropTypes.object
@@ -98,8 +98,8 @@ export default class ResourceSlideshow extends PureComponent {
   handleUnloadedSlide = position => {
     const page = this.positionToPage(position, this.props.pagination.perPage);
     if (!this.isPageLoaded(page)) {
-      const fetch = collectionsAPI.collectionResources(
-        this.props.collection.id,
+      const fetch = resourceCollectionsAPI.collectionResources(
+        this.props.resourceCollection.id,
         {},
         { number: page, size: this.props.pagination.perPage }
       );
@@ -221,7 +221,7 @@ export default class ResourceSlideshow extends PureComponent {
             {this.isLoaded(position) ? (
               <ResourceSlide.Caption
                 resource={collectionResource}
-                collection={this.props.collection}
+                resourceCollection={this.props.resourceCollection}
                 hideDetailUrl={this.props.hideDetailUrl}
                 hideDownload={this.props.hideDownload}
               />

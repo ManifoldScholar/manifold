@@ -7,7 +7,7 @@ import ProjectCollectionDetail from "frontend/containers/ProjectCollectionDetail
 import ProjectDetail from "frontend/containers/ProjectDetail";
 import ProjectResources from "frontend/containers/ProjectResources";
 import ResourceDetail from "frontend/containers/ResourceDetail";
-import CollectionDetail from "frontend/containers/CollectionDetail";
+import ResourceCollectionDetail from "frontend/containers/ResourceCollectionDetail";
 import EventList from "frontend/containers/EventList";
 import Following from "frontend/containers/Following";
 import Featured from "frontend/containers/Featured";
@@ -29,7 +29,7 @@ export default {
   ProjectDetail,
   ProjectResources,
   ResourceDetail,
-  CollectionDetail,
+  ResourceCollectionDetail,
   EventList,
   Following,
   Featured,

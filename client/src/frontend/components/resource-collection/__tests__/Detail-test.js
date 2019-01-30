@@ -18,7 +18,7 @@ describe("Frontend.ResourceCollection.Detail Component", () => {
     {},
     { project, collectionResources: [collectionResource] }
   );
-  const collection = build.entity.collection(
+  const collection = build.entity.resourceCollection(
     "2",
     {},
     { project, resources: [resource] }
@@ -38,10 +38,10 @@ describe("Frontend.ResourceCollection.Detail Component", () => {
             slideshowResources={resources}
             slideshowPagination={pagination}
             collectionResources={resources}
-            collectionPagination={pagination}
-            collectionPaginationHandler={pageChangeMock}
-            collection={collection}
-            collectionUrl={`/browse/project/${project.id}/collection/${
+            resourceCollectionPagination={pagination}
+            resourceCollectionPaginationHandler={pageChangeMock}
+            resourceCollection={collection}
+            resourceCollectionUrl={`/browse/project/${project.id}/collection/${
               collection.id
             }`}
             filterChange={filterChangeMock}

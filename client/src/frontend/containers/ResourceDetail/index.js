@@ -5,7 +5,12 @@ import Utility from "frontend/components/utility";
 import Resource from "frontend/components/resource";
 import { entityStoreActions, fatalErrorActions } from "actions";
 import { select } from "utils/entityUtils";
-import { projectsAPI, resourcesAPI, collectionsAPI, requests } from "api";
+import {
+  projectsAPI,
+  resourcesAPI,
+  resourceCollectionsAPI,
+  requests
+} from "api";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
 import HeadContent from "global/components/HeadContent";
@@ -24,9 +29,14 @@ export class ResourceDetailContainer extends PureComponent {
     const { promise: one } = dispatch(projectAction);
     const { promise: two } = dispatch(resourceAction);
     const promises = [one, two];
-    if (match.params.collectionId) {
-      const collectionFetch = collectionsAPI.show(match.params.collectionId);
-      const collectionAction = request(collectionFetch, requests.feCollection);
+    if (match.params.resourceCollectionId) {
+      const collectionFetch = resourceCollectionsAPI.show(
+        match.params.resourceCollectionId
+      );
+      const collectionAction = request(
+        collectionFetch,
+        requests.feResourceCollection
+      );
       const { promise: three } = dispatch(collectionAction);
       promises.push(three);
     }
@@ -35,7 +45,10 @@ export class ResourceDetailContainer extends PureComponent {
 
   static mapStateToProps = state => {
     return {
-      collection: select(requests.feCollection, state.entityStore),
+      resourceCollection: select(
+        requests.feResourceCollection,
+        state.entityStore
+      ),
       project: select(requests.feProject, state.entityStore),
       resource: select(requests.feResource, state.entityStore),
       visibility: state.ui.transitory.visibility
@@ -44,7 +57,7 @@ export class ResourceDetailContainer extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object,
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     settings: PropTypes.object.isRequired,
     resource: PropTypes.object,
     dispatch: PropTypes.func,
@@ -52,10 +65,10 @@ export class ResourceDetailContainer extends PureComponent {
   };
 
   componentWillMount() {
-    if (this.props.resource && this.props.collection) {
+    if (this.props.resource && this.props.resourceCollection) {
       if (
         !this.collectionIncludesResource(
-          this.props.collection,
+          this.props.resourceCollection,
           this.props.resource
         )
       ) {
@@ -77,9 +90,9 @@ export class ResourceDetailContainer extends PureComponent {
 
   collectionUrl() {
     return lh.link(
-      "frontendResourceCollection",
+      "frontendProjectResourceCollection",
       this.props.project.attributes.slug,
-      this.props.collection.attributes.slug
+      this.props.resourceCollection.attributes.slug
     );
   }
 
@@ -99,7 +112,7 @@ export class ResourceDetailContainer extends PureComponent {
   }
 
   render() {
-    const { project, resource, settings, collection } = this.props;
+    const { project, resource, settings, resourceCollection } = this.props;
     if (!project || !resource) {
       return <LoadingBlock />;
     }
@@ -116,11 +129,11 @@ export class ResourceDetailContainer extends PureComponent {
             resource.attributes.variantThumbnailStyles.mediumSquare
           }
         />
-        {collection ? (
+        {resourceCollection ? (
           <Utility.BackLinkPrimary
             backText="Back to Collection"
             link={this.collectionUrl()}
-            title={collection.attributes.title}
+            title={resourceCollection.attributes.title}
           />
         ) : (
           <Utility.BackLinkPrimary

@@ -13,7 +13,7 @@ export default class ResourceListSlideCaption extends Component {
 
   static propTypes = {
     resource: PropTypes.object,
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     hideDetailUrl: PropTypes.bool,
     hideDownload: PropTypes.bool
   };
@@ -99,12 +99,12 @@ export default class ResourceListSlideCaption extends Component {
   };
 
   detailUrl() {
-    const { resource, collection } = this.props;
-    if (collection) {
+    const { resource, resourceCollection } = this.props;
+    if (resourceCollection) {
       return lh.link(
         "frontendProjectCollectionResource",
         resource.attributes.projectSlug,
-        collection.attributes.slug,
+        resourceCollection.attributes.slug,
         resource.attributes.slug
       );
     }

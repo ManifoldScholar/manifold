@@ -5,7 +5,7 @@ import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.ResourceCollection.Cover component", () => {
-  const collection = build.entity.collection("1");
+  const collection = build.entity.resourceCollection("1");
   collection.relationships.resources.push(build.entity.resource("2"));
   collection.relationships.resources.push(build.entity.resource("3"));
 
@@ -13,7 +13,7 @@ describe("Frontend.ResourceCollection.Cover component", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Cover
-          collection={collection}
+          resourceCollection={collection}
           urlCreator={collection =>
             `/project/slug-1/${collection.attributes.slug}`
           }
