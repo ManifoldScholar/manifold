@@ -40,11 +40,6 @@ export default class ProjectContentTypeFormTableOfContents extends PureComponent
           name="attributes[showTextTitle]"
           wide
         />
-        <Form.Switch
-          label="Show Author Names?"
-          name="attributes[showAuthors]"
-          wide
-        />
       </React.Fragment>
     );
   }
