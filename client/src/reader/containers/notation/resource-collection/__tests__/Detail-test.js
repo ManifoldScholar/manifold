@@ -2,24 +2,24 @@ jest.mock("react-collapse");
 
 import React from "react";
 import renderer from "react-test-renderer";
-import { NotationCollectionDetailContainer } from "../Detail";
+import { NotationResourceCollectionDetailContainer } from "../Detail";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
 
-describe("Reader Notation Collection Detail Container", () => {
+describe("Reader Notation ResourceCollection Detail Container", () => {
   const store = build.store();
-  const collection = build.entity.collection("1");
-  collection.relationships.project = build.entity.project("2");
+  const resourceCollection = build.entity.resourceCollection("1");
+  resourceCollection.relationships.project = build.entity.project("2");
   const resource = build.entity.resource("3", { projectId: "1" });
   const resourceMeta = {
     pagination: build.pagination()
   };
-  collection.relationships.resources.push(resource);
+  resourceCollection.relationships.resources.push(resource);
   const resources = [resource];
 
   const props = {
-    collection,
+    resourceCollection,
     slideshowResources: resources,
     slideshowResourcesMeta: resourceMeta,
     history: {},
@@ -35,7 +35,7 @@ describe("Reader Notation Collection Detail Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <NotationCollectionDetailContainer {...props} />
+        <NotationResourceCollectionDetailContainer {...props} />
       </Provider>
     )
   );

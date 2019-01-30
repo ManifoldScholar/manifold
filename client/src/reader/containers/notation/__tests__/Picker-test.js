@@ -14,8 +14,8 @@ describe("Reader Notation Resource Picker Container", () => {
   const props = {
     resources,
     resourcesMeta,
-    collections: [],
-    collectionsMeta: {},
+    resourceCollections: [],
+    resourceCollectionsMeta: {},
     history: {},
     match: {
       params: {

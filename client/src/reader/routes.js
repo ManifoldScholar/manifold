@@ -27,11 +27,13 @@ const routes = {
           helper: (t, s, r) => `/read/${t}/section/${s}/resource/${r}`
         },
         {
-          name: "readerSectionCollection",
+          name: "readerSectionResourceCollection",
           exact: true,
-          component: "NotationCollectionDetail",
-          path: "/read/:textId/section/:sectionId/collection/:collectionId",
-          helper: (t, s, c) => `/read/${t}/section/${s}/collection/${c}`
+          component: "NotationResourceCollectionDetail",
+          path:
+            "/read/:textId/section/:sectionId/resource-collection/:resourceCollectionId",
+          helper: (t, s, c) =>
+            `/read/${t}/section/${s}/resource-collection/${c}`
         },
         {
           name: "readerSectionSearchResults",

@@ -12,13 +12,15 @@ const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 
-export class NotationCollectionDetailContainer extends PureComponent {
+export class NotationResourceCollectionDetailContainer extends PureComponent {
   static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
     const promises = [];
-    const resourceCall = resourceCollectionsAPI.show(match.params.collectionId);
+    const resourceCall = resourceCollectionsAPI.show(
+      match.params.resourceCollectionId
+    );
     const { promise: one } = dispatch(
-      request(resourceCall, requests.rCollection)
+      request(resourceCall, requests.rResourceCollection)
     );
     promises.push(one);
 
@@ -26,7 +28,7 @@ export class NotationCollectionDetailContainer extends PureComponent {
     if (!loaded(requests.feCollectionResources, state.entityStore)) {
       const pp = match.params.page ? match.params.page : page;
       const cr = resourceCollectionsAPI.collectionResources(
-        match.params.collectionId,
+        match.params.resourceCollectionId,
         {},
         { number: pp, size: perPage }
       );
@@ -39,19 +41,22 @@ export class NotationCollectionDetailContainer extends PureComponent {
 
   static mapStateToProps = (state, ownProps) => {
     const newState = {
-      collection: select(requests.rCollection, state.entityStore),
+      resourceCollection: select(
+        requests.rResourceCollection,
+        state.entityStore
+      ),
       slideshowResources: select(requests.feSlideshow, state.entityStore),
       slideshowResourcesMeta: meta(requests.feSlideshow, state.entityStore)
     };
     return Object.assign({}, newState, ownProps);
   };
 
-  static displayName = "ReaderContainer.Notation.Collection.Detail";
+  static displayName = "ReaderContainer.Notation.ResourceCollection.Detail";
 
   static propTypes = {
     route: PropTypes.object,
     match: PropTypes.object,
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     slideshowResources: PropTypes.array,
     slideshowResourcesMeta: PropTypes.object,
     dispatch: PropTypes.func,
@@ -59,7 +64,7 @@ export class NotationCollectionDetailContainer extends PureComponent {
   };
 
   componentWillUnmount() {
-    this.props.dispatch(flush(requests.rCollection));
+    this.props.dispatch(flush(requests.rResourceCollection));
     this.props.dispatch(flush(requests.feCollectionResources));
   }
 
@@ -70,16 +75,17 @@ export class NotationCollectionDetailContainer extends PureComponent {
   };
 
   render() {
-    if (!this.props.collection || !this.props.slideshowResources) return null;
+    if (!this.props.resourceCollection || !this.props.slideshowResources)
+      return null;
     return (
       <Overlay
         closeCallback={this.handleClose}
         appearance="overlay-full bg-neutral90"
       >
         <div className="notation-detail">
-          <Notation.Collection.Detail
+          <Notation.ResourceCollection.Detail
             dispatch={this.props.dispatch}
-            collection={this.props.collection}
+            resourceCollection={this.props.resourceCollection}
             slideshowResources={this.props.slideshowResources}
             slideshowPagination={this.props.slideshowResourcesMeta.pagination}
             handleClose={this.handleClose}
@@ -90,4 +96,4 @@ export class NotationCollectionDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(NotationCollectionDetailContainer);
+export default connectAndFetch(NotationResourceCollectionDetailContainer);
