@@ -83,33 +83,5 @@ Array [
       </div>
     </div>
   </div>,
-  <div
-    className="form-input wide"
-  >
-    <h4
-      className="form-input-heading above"
-    >
-      Show Author Names?
-    </h4>
-    <div
-      className="toggle-indicator"
-    >
-      <div
-        aria-pressed={false}
-        className="boolean-primary"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        role="button"
-        tabIndex="0"
-      >
-        <span
-          className="screen-reader-text"
-        >
-          Show Author Names?
-        </span>
-      </div>
-    </div>
-  </div>,
 ]
 `;
