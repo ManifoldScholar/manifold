@@ -27,11 +27,11 @@ export default class ProjectContentTypeFormTableOfContents extends PureComponent
   render() {
     return (
       <React.Fragment>
+        <Form.TextInput label="Title" name="attributes[title]" focusOnMount />
         <Form.Select
           label="Text"
           options={this.options}
           name="relationships[text]"
-          focusOnMount
           wide
         />
         <Form.NumberInput label="Depth" name="attributes[depth]" wide />
