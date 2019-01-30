@@ -18,6 +18,7 @@ import Pages from "backend/containers/pages";
 import Features from "backend/containers/features";
 import Settings from "backend/containers/settings";
 import Content from "backend/containers/content-block";
+import ActionCallout from "backend/containers/action-callout";
 
 export default {
   Backend,
@@ -97,5 +98,7 @@ export default {
   SettingsSubjectsNew: Settings.Subjects.New,
   SettingsSubjectsEdit: Settings.Subjects.Edit,
   SettingsEmail: Settings.Email,
-  SettingsGeneral: Settings.General
+  SettingsGeneral: Settings.General,
+  ActionCalloutNew: ActionCallout.New,
+  ActionCalloutEdit: ActionCallout.Edit
 };

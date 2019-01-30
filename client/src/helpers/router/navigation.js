@@ -161,7 +161,7 @@ class Navigation {
       },
       {
         label: "Appearance",
-        route: "backendProjectProjectPage",
+        route: "backendProjectLayout",
         entity: project,
         ability: "update",
         args
