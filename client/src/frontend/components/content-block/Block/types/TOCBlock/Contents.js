@@ -19,6 +19,11 @@ export default class TocBlockToc extends PureComponent {
     blockClass: "toc-block"
   };
 
+  constructor(props) {
+    super(props);
+    this.keyCount = 0;
+  }
+
   get textTitle() {
     return this.props.text.attributes.titleFormatted;
   }
@@ -61,7 +66,7 @@ export default class TocBlockToc extends PureComponent {
     const anchor = node.anchor ? `#${node.anchor}` : "";
 
     return (
-      <li key={node.id} className={`${blockClass}__node`}>
+      <li key={this.keyCount++} className={`${blockClass}__node`}>
         <Link
           className={`${blockClass}__link`}
           to={lh.link(
