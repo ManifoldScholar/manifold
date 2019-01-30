@@ -92,6 +92,7 @@
     @include buttonUnstyled;
 
     &--draggable {
+      cursor: move; // fallback for older browsers
       cursor: grab;
     }
   }
