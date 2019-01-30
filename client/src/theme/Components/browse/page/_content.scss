@@ -18,6 +18,7 @@
 
   @mixin pageContentHeading {
     @include templateHead;
+    margin-top: 0;
     color: $neutral80;
 
     @include respond($break60) {
