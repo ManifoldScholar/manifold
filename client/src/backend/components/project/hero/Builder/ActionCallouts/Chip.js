@@ -67,7 +67,7 @@ export default class Chip extends PureComponent {
                   </button>
                   <button
                     type="button"
-                    className="action-callout-slot__button action-callout-slot__button-draggable"
+                    className="action-callout-slot__button action-callout-slot__button--draggable"
                     {...provided.dragHandleProps}
                   >
                     <Utility.IconComposer
