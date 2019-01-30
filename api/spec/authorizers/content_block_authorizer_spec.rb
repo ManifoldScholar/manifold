@@ -19,7 +19,7 @@ RSpec.describe "Content Block Abilities", :authorizer do
     let(:subject) { FactoryBot.create(:user, role: Role::ROLE_PROJECT_CREATOR) }
     let(:object) { FactoryBot.create(:content_block) }
 
-    the_subject_behaves_like "instance abilities", ContentBlock, none: true
+    the_subject_behaves_like "instance abilities", ContentBlock, read_only: true
   end
 
   context 'when the subject is a marketeer' do
@@ -50,7 +50,7 @@ RSpec.describe "Content Block Abilities", :authorizer do
     let(:subject) { @metadata_maintainer }
     let(:object) { @content_block }
 
-    the_subject_behaves_like "instance abilities", ContentBlock, none: true
+    the_subject_behaves_like "instance abilities", ContentBlock, read_only: true
   end
 
   context 'when the subject is a reader and project_author of a specific content_block' do
@@ -62,13 +62,13 @@ RSpec.describe "Content Block Abilities", :authorizer do
     let(:subject) { @author }
     let(:object) { @content_block }
 
-    the_subject_behaves_like "instance abilities", ContentBlock, none: true
+    the_subject_behaves_like "instance abilities", ContentBlock, read_only: true
   end
 
   context 'when the subject is a reader' do
     let(:subject) { FactoryBot.create(:user) }
     let(:object) { FactoryBot.create(:content_block) }
 
-    the_subject_behaves_like "instance abilities", ContentBlock, none: true
+    the_subject_behaves_like "instance abilities", ContentBlock, read_only: true
   end
 end
