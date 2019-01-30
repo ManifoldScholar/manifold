@@ -68,7 +68,10 @@ export class ReaderContainer extends Component {
       ),
       text: grab("texts", ownProps.match.params.textId, state.entityStore),
       resources: select(requests.rSectionResources, state.entityStore),
-      collections: select(requests.rSectionCollections, state.entityStore),
+      resourceCollections: select(
+        requests.rSectionResourceCollections,
+        state.entityStore
+      ),
       authentication: state.authentication,
       visibility: state.ui.transitory.visibility,
       loading: state.ui.transitory.loading.active,

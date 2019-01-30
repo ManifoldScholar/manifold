@@ -43,10 +43,10 @@ class NotationMarker extends Component {
         "frontendProjectResourceRelative",
         annotation.resourceId
       );
-      if (annotation.type === "collection") {
+      if (annotation.type === "resource_collection") {
         rel = lh.link(
-          "frontendProjectCollectionRelative",
-          annotation.collectionId
+          "frontendProjectResourceCollectionRelative",
+          annotation.resourceCollectionId
         );
       }
       const url = `${base}/${rel}`;

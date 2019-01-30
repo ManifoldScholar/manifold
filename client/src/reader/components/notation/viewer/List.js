@@ -198,7 +198,8 @@ class NotationViewerList extends PureComponent {
   notationForAnnotation(props, annotation) {
     if (!annotation || !props.notations) return null;
     const nId =
-      annotation.attributes.resourceId || annotation.attributes.collectionId;
+      annotation.attributes.resourceId ||
+      annotation.attributes.resourceCollectionId;
     return props.notations.find(n => n.id === nId);
   }
 

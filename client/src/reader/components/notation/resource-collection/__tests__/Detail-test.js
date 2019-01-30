@@ -16,7 +16,7 @@ describe("Reader.Notation.Collection.Detail component", () => {
     {},
     { project, collectionResources: [collectionResource] }
   );
-  const collection = build.entity.collection(
+  const collection = build.entity.resourceCollection(
     "2",
     {},
     { project, resources: [resource] }
@@ -35,12 +35,9 @@ describe("Reader.Notation.Collection.Detail component", () => {
         slideshowResources={resources}
         slideshowPagination={pagination}
         collectionResources={resources}
-        collectionPagination={pagination}
-        collectionPaginationHandler={pageChangeMock}
-        collection={collection}
-        collectionUrl={`/browse/project/${project.id}/collection/${
-          collection.id
-        }`}
+        resourceCollectionPagination={pagination}
+        resourceCollectionPaginationHandler={pageChangeMock}
+        resourceCollection={collection}
         filterChange={filterChangeMock}
         handleClose={closeMock}
         initialFilterState={null}
