@@ -1,0 +1,100 @@
+.action-callout-slot {
+
+  $gutter: 24px;
+  $padding: 14px;
+
+  display: flex;
+  flex: auto;
+  width: 50%;
+  padding: $gutter / 2 0;
+
+  &:nth-child(odd) {
+    padding-right: $gutter / 2;
+  }
+
+  &:nth-child(even) {
+    padding-left: $gutter / 2;
+  }
+
+  &--active {
+    .action-callout-slot__content {
+      background-color: lighten($neutral90, 5%);
+    }
+  }
+
+  &__content {
+    @include panelRounded;
+    flex: 1;
+    padding: $padding;
+
+    background: $neutral90;
+    transition: background-color $duration $timing;
+  }
+
+  &__button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    height: 3.3em;
+    font-size: 12px;
+    font-weight: $semibold;
+    color: $neutral45;
+    transition: color $duration $timing;
+    --hover-color: #{$accentPrimary};
+
+    svg {
+      margin-right: 8px;
+    }
+
+    &:focus {
+      color: $focusPrimary;
+      outline: none;
+    }
+
+    &:not(:disabled):hover {
+      color: $accentPrimary; // fallback
+      color: var(--hover-color, $accentPrimary);
+    }
+  }
+
+  &__chips {
+    min-height: 59px;
+    padding: 0;
+  }
+
+  &__chip {
+    padding: 5px 0;
+  }
+
+  &__chip-inner {
+    @include utilityPrimary;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 9px 15px 11px;
+    font-size: 12px;
+    line-height: 1;
+    color: $neutral50;
+    background: $neutral95;
+    border-radius: 5px;
+
+    & + & {
+      //margin-top: 10px;
+    }
+  }
+
+  &__chip-utility {
+    margin-left: 10px;
+  }
+
+  &__button {
+    @include buttonUnstyled;
+
+    &--draggable {
+      cursor: grab;
+    }
+  }
+
+
+}
+

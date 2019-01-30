@@ -49,10 +49,7 @@ export default class ProjectContentSectionsCurrent extends PureComponent {
 
     return (
       <div className="form-section">
-        <Header title="Content Layout">
-          Use the icons on the right of each content block to reorder them, edit
-          their settings, change their visibility, or remove them.
-        </Header>
+        <Header subtitle="Layout:" />
         {Object.keys(zones).map(zone => (
           <Droppable
             key={zone}

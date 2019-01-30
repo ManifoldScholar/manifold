@@ -78,7 +78,7 @@ export class ContentBlockEditContainer extends Component {
     );
     this.props.dispatch(destroyRequest).promise.then(() => {
       return this.props.history.push(
-        lh.link("backendProjectProjectPage", this.project.id)
+        lh.link("backendProjectLayout", this.project.id)
       );
     });
   };
