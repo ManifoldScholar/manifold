@@ -69,29 +69,6 @@ export default class ProjectGeneralContainer extends PureComponent {
                 instructions="Featured projects are highlighted on the home page."
               />
             </Form.FieldGroup>
-            <Form.FieldGroup label="Social">
-              <Form.MaskedTextInput
-                label="Hashtag"
-                name="attributes[hashtag]"
-                mask="hashtag"
-                placeholder="Enter Project Hashtag"
-              />
-              <Form.TextInput
-                label="Facebook ID"
-                name="attributes[facebookId]"
-                placeholder="Enter Project Facebook ID"
-              />
-              <Form.TextInput
-                label="Twitter ID"
-                name="attributes[twitterId]"
-                placeholder="Enter Project Twitter ID"
-              />
-              <Form.TextInput
-                label="Instagram ID"
-                name="attributes[instagramId]"
-                placeholder="Enter Project Instagram ID"
-              />
-            </Form.FieldGroup>
             <Form.FieldGroup label="Other">
               <Form.Date
                 label="Publication Date"
