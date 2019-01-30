@@ -35,12 +35,26 @@ export class ProjectDetailContainer extends Component {
     project: PropTypes.object,
     projectResponse: PropTypes.object,
     settings: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    fetchData: PropTypes.func
   };
+
+  componentDidMount() {
+    window.addEventListener("keyup", this.maybeReloadProject);
+  }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.feProject));
+    window.removeEventListener("keyup", this.maybeReloadProject);
   }
+
+  maybeReloadProject = event => {
+    // ctrl + r
+    if (event.ctrlKey && event.keyCode === 82) {
+      if (!this.props.fetchData) return;
+      this.props.fetchData(this.props);
+    }
+  };
 
   render() {
     if (!this.props.projectResponse) return null;
