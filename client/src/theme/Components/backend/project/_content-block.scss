@@ -31,8 +31,13 @@
     }
 
     &:focus {
-      @include focusOutline;
-      outline-offset: 12px;
+      outline: none;
+
+      .content-block--available.content-block--active & {
+        .content-block__heading {
+          color: $accentPrimary;
+        }
+      }
     }
   }
 
@@ -61,7 +66,9 @@
     // inherit fill color from element.
     // otherwise use a modifier to set a different color.
     .content-block--inactive &,
-    .content-block--available .content-block__heading:hover & {
+    .content-block--available .content-block__heading:hover &,
+    .content-block--available .content-block__inner:focus &
+     {
       color: inherit;
       transition: none;
     }
@@ -129,7 +136,10 @@
       --hover-color: #{$sp40Tertiary};
     }
 
-    &:not(:disabled):hover {
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
+      outline: none;
+
       > .content-block__icon {
         color: $accentPrimary; // fallback
         color: var(--hover-color, $accentPrimary);
