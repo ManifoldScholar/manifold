@@ -26,7 +26,7 @@ export default class TextsBlockHeader extends Component {
         <Heading title={this.props.title} icon={this.props.icon} />
         {this.blockDescription && (
           <div className={`${this.props.baseClass}__details`}>
-            <p
+            <div
               className="description pad-bottom"
               dangerouslySetInnerHTML={{
                 __html: this.blockDescription
