@@ -8,15 +8,16 @@ export default class ProjectContentBlockTableOfContentsBlock extends PureCompone
   static displayName = "Project.Content.Block.TableOfContents";
 
   static propTypes = {
-    title: PropTypes.string,
-    icon: PropTypes.string,
     block: PropTypes.object.isRequired
   };
 
-  static defaultProps = {
-    title: "Table of Contents",
-    icon: "bulletList"
-  };
+  get title() {
+    return this.blockAttributes.title || "Table of Contents";
+  }
+
+  get icon() {
+    return "bulletList";
+  }
 
   get blockAttributes() {
     return this.props.block.attributes;
@@ -43,7 +44,7 @@ export default class ProjectContentBlockTableOfContentsBlock extends PureCompone
 
     return (
       <Wrapper>
-        <Heading title={this.props.title} icon={this.props.icon} />
+        <Heading title={this.title} icon={this.icon} />
         <div className={`${blockClass}__body`}>
           <Contents
             showTextTitle={this.showTextTitle}

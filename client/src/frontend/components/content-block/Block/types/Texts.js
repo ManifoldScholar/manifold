@@ -9,19 +9,16 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   static displayName = "Project.Content.Block.Texts";
 
   static propTypes = {
-    title: PropTypes.string,
-    icon: PropTypes.string,
     block: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
 
-  static defaultProps = {
-    title: "Texts",
-    icon: "bookStackIsometric"
-  };
-
   get title() {
-    return this.props.block.attributes.title || this.props.title;
+    return this.props.block.attributes.title || "Texts";
+  }
+
+  get icon() {
+    return "bookStackIsometric";
   }
 
   get texts() {
@@ -68,7 +65,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
       <Wrapper>
         <Header
           title={this.title}
-          icon={this.props.icon}
+          icon={this.icon}
           block={this.props.block}
           baseClass={baseClass}
         />

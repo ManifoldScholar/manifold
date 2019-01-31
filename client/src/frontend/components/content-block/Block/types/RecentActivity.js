@@ -9,15 +9,16 @@ export default class ProjectContentBlockRecentActivityBlock extends PureComponen
   static displayName = "Project.Content.Block.RecentActivity";
 
   static propTypes = {
-    title: PropTypes.string,
-    icon: PropTypes.string,
     project: PropTypes.object.isRequired
   };
 
-  static defaultProps = {
-    title: "Recent Activity",
-    icon: "pulse"
-  };
+  get title() {
+    return "Recent Activity";
+  }
+
+  get icon() {
+    return "pulse";
+  }
 
   get project() {
     return this.props.project;
@@ -30,7 +31,7 @@ export default class ProjectContentBlockRecentActivityBlock extends PureComponen
 
     return (
       <Wrapper>
-        <Heading title={this.props.title} icon={this.props.icon} />
+        <Heading title={this.title} icon={this.icon} />
         <AllLink
           count={attributes.eventCount}
           threshold={6}
