@@ -7,23 +7,36 @@ export default class ProjectContentBlockHeading extends PureComponent {
 
   static propTypes = {
     icon: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string
   };
 
   render() {
-    const { title, icon } = this.props;
+    const { title, icon, description } = this.props;
 
     return (
-      <header className="entity-section-wrapper__heading section-heading">
-        <div className="main">
-          <i className="manicon" aria-hidden="true">
-            <Utility.IconComposer icon={icon} />
-          </i>
-          <div className="body">
-            <h4 className="title">{title}</h4>
+      <React.Fragment>
+        <header className="entity-section-wrapper__heading section-heading">
+          <div className="main">
+            <i className="manicon" aria-hidden="true">
+              <Utility.IconComposer icon={icon} />
+            </i>
+            <div className="body">
+              <h4 className="title">{title}</h4>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+        {description && (
+          <div className="entity-section-wrapper__details">
+            <div
+              className="description pad-bottom"
+              dangerouslySetInnerHTML={{
+                __html: description
+              }}
+            />
+          </div>
+        )}
+      </React.Fragment>
     );
   }
 }
