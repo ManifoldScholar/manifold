@@ -9,15 +9,16 @@ export default class ProjectContentBlockMetadataBlock extends PureComponent {
   static displayName = "Project.Content.Block.Metadata";
 
   static propTypes = {
-    title: PropTypes.string,
-    icon: PropTypes.string,
     project: PropTypes.object.isRequired
   };
 
-  static defaultProps = {
-    title: "Metadata",
-    icon: "tag"
-  };
+  get title() {
+    return "Metadata";
+  }
+
+  get icon() {
+    return "tag";
+  }
 
   get project() {
     return this.props.project;
@@ -32,7 +33,7 @@ export default class ProjectContentBlockMetadataBlock extends PureComponent {
 
     return (
       <Wrapper>
-        <Heading title={this.props.title} icon={this.props.icon} />
+        <Heading title={this.title} icon={this.icon} />
         <div className={`${baseClass}__body ${baseClass}__body--pad-top`}>
           <Meta.List metadata={metadataFormatted} />
         </div>

@@ -9,24 +9,20 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
   static displayName = "Project.Content.Block.Resources";
 
   static propTypes = {
-    title: PropTypes.string,
-    icon: PropTypes.string,
     project: PropTypes.object.isRequired,
     block: PropTypes.object.isRequired
   };
 
-  static defaultProps = {
-    title: "Resources",
-    icon: "cubeShine"
-  };
+  get title() {
+    return this.block.attributes.title || "Resources";
+  }
+
+  get icon() {
+    return "cubeShine";
+  }
 
   get block() {
     return this.props.block;
-  }
-
-  get blockTitle() {
-    if (!this.block) return null;
-    return this.block.attributes.title || this.props.title;
   }
 
   get project() {
@@ -84,7 +80,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
 
     return (
       <Wrapper>
-        <Heading title={this.blockTitle} icon={this.props.icon} />
+        <Heading title={this.title} icon={this.icon} />
         <div className={`${baseClass}__body`}>
           {this.hasVisibleCollections && (
             <React.Fragment>
