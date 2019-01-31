@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Wrapper from "../parts/Wrapper";
-import Header from "./TextsBlock/Header";
+import Heading from "../parts/Heading";
 import TextList from "frontend/components/TextList";
 import pick from "lodash/pick";
 
@@ -38,6 +38,10 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
     return this.projectCategories;
   }
 
+  get blockDescription() {
+    return this.props.block.attributes.descriptionFormatted;
+  }
+
   get uncategorizedTexts() {
     return this.texts.filter(text => text.relationships.category === null);
   }
@@ -63,11 +67,10 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
 
     return (
       <Wrapper>
-        <Header
+        <Heading
           title={this.title}
           icon={this.icon}
-          block={this.props.block}
-          baseClass={baseClass}
+          description={this.blockDescription}
         />
         <div className={`${baseClass}__body`}>
           <div className="text-list">
