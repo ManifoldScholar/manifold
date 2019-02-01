@@ -31,6 +31,13 @@ export default class ProjectContentSectionsCurrent extends PureComponent {
     );
   }
 
+  get zones() {
+    return {
+      top: { blocks: this.topBlocks, visible: false },
+      bottom: { blocks: this.bottomBlocks, visible: true }
+    };
+  }
+
   bindEntityCallbacks(block) {
     const callbacks = this.props.entityCallbacks;
     /* eslint-disable no-param-reassign */
@@ -41,16 +48,16 @@ export default class ProjectContentSectionsCurrent extends PureComponent {
     /* eslint-enable no-param-reassign */
   }
 
-  render() {
-    const zones = {
-      top: this.topBlocks,
-      bottom: this.bottomBlocks
-    };
+  showDropzone(zone) {
+    if (this.props.activeDraggableType === zone.toUpperCase()) return true;
+    return this.zones[zone].visible && this.zones[zone].blocks.length === 0;
+  }
 
+  render() {
     return (
       <div className="form-section">
         <Header subtitle="Layout:" />
-        {Object.keys(zones).map(zone => (
+        {Object.keys(this.zones).map(zone => (
           <Droppable
             key={zone}
             type={zone.toUpperCase()}
@@ -60,11 +67,10 @@ export default class ProjectContentSectionsCurrent extends PureComponent {
               <div
                 ref={provided.innerRef}
                 className={classNames("content-block-list full-width", {
-                  "content-block-list--show-dropzone":
-                    this.props.activeDraggableType === zone.toUpperCase()
+                  "content-block-list--show-dropzone": this.showDropzone(zone)
                 })}
               >
-                {zones[zone].map((block, index) => (
+                {this.zones[zone].blocks.map((block, index) => (
                   <Block
                     entityCallbacks={this.bindEntityCallbacks(block)}
                     currentBlocks={this.props.currentBlocks}
