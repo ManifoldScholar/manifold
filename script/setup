@@ -32,7 +32,8 @@ fi
 # Ensure DNS and setup nginx
 ./script/helpers/setup-ssl $PROJ_NAME "${PROJ_DIR}/config/dev/ssl"
 ./script/helpers/setup-nginx-conf $PROJ_NAME $PROJ_DIR config/dev/nginx.conf.erb \
-    --extra-val=socket_dir=$PROJ_DIR/api/tmp/sockets \
+    --extra-val=api_socket_dir=$PROJ_DIR/api/tmp/sockets \
+    --extra-val=client_socket_dir=$PROJ_DIR/client/tmp/sockets \
     --extra-val=log_dir=$PROJ_DIR/log
 exit
 
