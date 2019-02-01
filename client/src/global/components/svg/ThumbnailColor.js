@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export default class SVGThumbnailColor extends Component {
   static displayName = "SVG.ThumbnailColor";
 
-  static PropTypes = {
+  static propTypes = {
     iconClass: PropTypes.string
   };
 

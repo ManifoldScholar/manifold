@@ -1,37 +1,41 @@
-.project-detail-hero {
+.project-hero {
+  $grid-gap-small: 30px;
+  $grid-gap-large: 66px;
+
   position: relative;
-  color: $neutralWhite;
-  background-color: $neutral90;
+  padding-top: 20px;
+  padding-bottom: 35px;
 
-  .container {
-    @include clearfix;
-    padding-top: 35px;
-    padding-bottom: 35px;
-
-    @include respond($break50) {
-      padding-top: 61px;
-      padding-bottom: 42px;
-    }
+  @include respond($break60) {
+    padding-top: 70px;
+    padding-bottom: 80px;
   }
 
-  .button-tagged {
-    .tag .manicon {
-      padding: 0 5px;
-      margin: 0;
-
-      @include respond($break50) {
-        padding: 0 15px;
-      }
-    }
+  // Theme
+  &--light {
+    color: $neutral90;
   }
 
-  // When a hero image is present, set background properties and an overlay
-  &.hero-image {
+  &--dark {
+    color: $neutralWhite;
+    background-color: $neutral95;
+  }
+
+  // background-image
+  &__bg-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 25;
+    width: 100%;
+    height: 100%;
     background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background-position: center;
+    // background properties used if image is set as bg-image on wrapper
+    // when object-fit isn't supported
     background-size: cover;
 
-    &::before {
+    &::after {
       position: absolute;
       top: 0;
       left: 0;
@@ -39,498 +43,276 @@
       width: 100%;
       height: 100%;
       content: '';
-      background-color: transparentize($neutralBlack, 0.3);
+      background-color: rgba($neutralBlack, 0.8);
     }
   }
 
-  // Shared project hero styles
-  // --------------------------------------------------------
-  .project-title {
-    .block-label {
-      @include blockLabelRound;
-      position: relative;
-      top: -0.272em;
-      display: inline;
-      padding: 0.2em 7px 0.25em;
-      font-size: 11px;
-      line-height: inherit;
-      color: $neutral85;
-      vertical-align: middle;
-      background-color: $neutralWhite;
-    }
+  &__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
-  // Project Makers
-  // --------------------------------------------------------
-  // Note that there is only one here, but structural styles will need to be
-  // added if there are more, and potentially list markup
-  // <figure>
-  .maker-avatar {
-    .no-image, img {
-      display: inline-block;
-      margin-right: 12px;
-      vertical-align: middle;
-    }
+  // Layout
+  /* stylelint-disable property-no-vendor-prefix */
+  &__inner {
+    @include containerPrototype;
+    position: relative;
+    z-index: 50;
+    display: -ms-grid;
+    display: grid;
+    grid-row-gap: $grid-gap-small;
+    max-width: 1178px;
 
-    .no-image {
-      @include buttonAvatar(42, $neutral40, $neutral20);
-      border: 2px solid $neutralWhite;
-    }
-
-    // NB: This needs to be browser tested heavily before settling on this rounding method
-    img {
-      display: inline-block;
-      width: 42px;
-      height: auto;
-      border: 2px solid $neutralWhite;
-      border-radius: 100%;
-    }
-
-    figcaption {
-      @include templateCopy;
-      display: inline-block;
-      margin-top: 2px;
-      font-size: 18px;
-      vertical-align: middle;
-
-      @include respond($break60) {
-        font-size: 21px;
-      }
-    }
-  }
-
-  .project-creator-avatars {
-    // Account for bottom spacing of last avatar
-    margin-bottom: -8px;
-
-    + .project-contributor-list {
-      margin-top: 10px;
-    }
-  }
-
-  .project-creator-list {
     @include respond($break60) {
-      margin-top: -5px;
+      grid-gap: 4.839vw;
+      -ms-grid-columns: 1fr minmax(200px, 22.907%);
+      grid-template-columns: 1fr minmax(200px, 22.907%);
     }
 
-    ul {
-      @include listUnstyled;
-      @include templateCopy;
-      font-size: 19px;
-      line-height: 1.419;
-      letter-spacing: 0.01em;
-
-      @include respond($break60) {
-        font-size: 21px;
-      }
-    }
-
-    li {
-      display: inline;
-
-      &::after {
-        content: ', ';
-      }
-
-      &:last-child::after {
-        display: none;
-      }
-    }
-
-    + .project-contributor-list {
-      margin-top: 7px;
+    @include respond($break120) {
+      grid-gap: $grid-gap-large;
     }
   }
 
-  .project-contributor-list {
+  &__left-block,
+  &__right-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__left-block {
+    -ms-grid-row: 2;
+    grid-row: 2;
+
+    @include respond($break60) {
+      -ms-grid-row: 1;
+      grid-row: auto;
+      -ms-grid-column: 1;
+      grid-column: 1;
+    }
+  }
+
+  &__right-block {
+    -ms-grid-row: 1;
+    grid-row: 1;
+
+    @include respond($break60) {
+      grid-row: auto;
+      -ms-grid-column: 2;
+      grid-column: 2;
+    }
+  }
+  /* stylelint-enable property-no-vendor-prefix */
+
+  &__meta-block {
     @include templateCopy;
-    font-size: 16px;
-    line-height: 1.395;
 
-    @include respond($break60) {
-      font-size: 19px;
-    }
-
-    .label {
-      font-style: italic;
-    }
-
-    ul {
-      @include listUnstyled;
-      display: inline;
-    }
-
-    li {
-      display: inline;
-
-      &::after {
-        content: ', ';
-      }
-
-      &:last-child::after {
-        display: none;
-      }
-    }
-  }
-
-  // Project Figure (Image and Title) showed only on mobile
-  // --------------------------------------------------------
-  .project-figure {
-    @include clearfix;
-    position: relative;
-
-    @include respond($break75) {
-      display: none;
-    }
-
-    .project-creator-avatars {
-      margin-bottom: 22px;
-    }
-
-    .maker-avatar {
-      display: block;
-
-      + .maker-avatar {
-        margin-top: 14px;
-      }
-    }
-
-    .image {
-      float: left;
-      width: 80px;
-
-      @include respond($break40) {
-        width: 25%;
-      }
-
-      + .project-figure-caption {
-        padding-left: 18px;
-
-        @include respond($break40) {
-          padding-left: 25px;
-        }
-      }
-
-      img {
-        max-width: 100%;
-        height: auto;
-      }
-    }
-
-    .project-figure-caption {
-      float: left;
-      width: calc(100% - 80px);
-
-      @include respond($break40) {
-        width: 75%;
-      }
-    }
-
-    .project-title {
-      @include templateHead;
-      margin-top: 0;
-      font-size: 20px;
-      font-weight: $semibold;
-
-      @include respond($break60) {
-        font-size: 26px;
-      }
-
-      .title-text {
-        margin-right: 12px;
-      }
-
-      .block-label {
-        padding: 0.25em 6px;
-        font-size: 10px;
-      }
-
-      .subtitle {
-        @include subtitlePrimary;
-        display: block;
-        // Size relative to font
-        margin-top: 0.682em;
-        font-size: 17px;
-
-        em {
-          font-style: normal;
-        }
-
-        @include respond($break60) {
-          font-size: 19px;
-        }
-      }
-    }
-  }
-
-  // Project Info
-  // --------------------------------------------------------
-  .project-info {
-    position: relative;
-    padding-top: 20px;
-
-    @include respond($break60) {
-      padding-top: 26px;
-    }
-
-    @include respond($break75) {
-      float: left;
-      width: 70%;
-      padding-top: 0;
-      padding-right: 12%;
-    }
-
-    .project-creator-avatars {
-      display: none;
-
-      @include respond($break75) {
-        display: block;
-      }
-
-      + .project-title {
-        // Size relative to project title
-        margin-top: 1.143em;
-      }
-    }
-
-    .project-creator-list {
-      display: none;
-
-      @include respond($break75) {
-        display: block;
-      }
-    }
-
-    .project-contributor-list {
-      display: none;
-
-      @include respond($break75) {
-        display: block;
-      }
-    }
-
-    .maker-avatar {
-      display: inline-block;
-      margin-right: 20px;
-      margin-bottom: 14px;
-    }
-
-    .project-title {
-      @include templateHead;
-      display: none;
-      margin-top: -0.29em;
-      margin-bottom: 1.06em;
-      font-size: 20px;
-      font-weight: $semibold;
-      line-height: 1.273;
-
-      @include respond($break40) {
-        font-size: 26px;
-      }
-
-      @include respond($break60) {
-        font-size: 33px;
-      }
-
-      @include respond($break75) {
-        display: block;
-      }
-
-      .title-text {
-        margin-right: 14px;
-      }
-
-      .subtitle {
-        @include subtitlePrimary;
-        display: block;
-        // Size relative to font
-        margin-top: 0.5em;
-        font-size: 22px;
-
-        em {
-          font-style: normal;
-        }
-      }
-    }
-
-    // Summary content defaults
-    .project-summary {
-      @include templateCopy;
-      padding-top: 0.739em;
+    + .project-hero__callout-block {
       margin-top: 20px;
-      // Relative to font-size
-      font-size: 16px;
-      line-height: 1.395;
-      border-top: 1px solid $neutralWhite;
-
-      @include respond($break65) {
-        font-size: 19px;
-      }
-
-      @include respond($break75) {
-        margin-top: 72px;
-      }
-
-      p {
-        margin-bottom: 0.682em;
-      }
-
-      a {
-        color: $neutralWhite;
-
-        &:visited {
-          color: $neutralWhite;
-        }
-      }
-    }
-
-    .project-entry {
-      display: inline-block;
-      margin-top: 34px;
-
-      &.top {
-        margin-top: 0;
-        margin-bottom: 23px;
-
-        @include respond($break75) {
-          display: none;
-        }
-      }
-
-      &.bottom {
-        display: none;
-
-        @include respond($break75) {
-          display: flex;
-        }
-      }
-
-      .button-toc {
-        margin-bottom: 20px;
-      }
-    }
-
-    .button-secondary {
-      display: flex;
-      align-items: center;
-
-      @include respond($break75) {
-        text-align: left;
-      }
-
-      + .button-secondary {
-        margin-top: 14px;
-
-        @include respond($break75) {
-          margin-top: 0;
-          margin-left: 14px;
-        }
-      }
-    }
-
-    .button-tagged {
-      margin-top: 21px;
-
-      @include respond($break75) {
-        display: none;
-      }
-    }
-
-    .utility-primary {
-      margin-top: 21px;
-
-      @include respond($break75) {
-        display: none;
-      }
     }
   }
 
-  // Project Social
-  // --------------------------
-  .project-social {
-    margin-top: 33px;
+  &__cover-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    @include respond($break75) {
-      margin-top: 86px;
+    @include respond($break60) {
+      align-items: flex-start;
     }
+  }
 
-    .networks ul {
-      @include listHorizontal;
+  &__social-block {
+    grid-area: social;
 
-      li + li {
-        margin-left: 20px;
-
-        + li {
-          margin-left: 22px;
-        }
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-
-        .manicon-twitter {
-          font-size: 17px;
-        }
-
-        .manicon-facebook {
-          font-size: 18px;
-        }
-
-        .manicon-instagram {
-          font-size: 18px;
-        }
-      }
+    .project-hero--light & {
+      color: $neutral75;
     }
+  }
 
-    .networks + .hashtag {
-      margin-top: 23px;
-    }
-
-    .hashtag {
-      @include templateHead;
+  &__callout-block {
+    &--mobile {
       display: block;
+
+      @include respond($break60) {
+        display: none;
+      }
+    }
+
+    &--desktop {
+      display: none;
+
+      @include respond($break60) {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    & + & {
+      margin-top: 12px;
+    }
+
+    + .project-hero__social-block {
+      margin-top: 35px;
+    }
+  }
+
+  // Meta elements
+  &__heading {
+    margin-bottom: 24px;
+    line-height: 1.188;
+
+    @include respond($break60) {
+      margin-bottom: 28px;
+    }
+  }
+
+  &__title {
+    @include templateHead;
+    margin: 0;
+    font-size: 22px;
+    font-weight: $semibold;
+
+    @include respond($break60) {
+      font-size: 32px;
+    }
+  }
+
+  &__subtitle {
+    margin-top: 2px;
+    font-size: 18px;
+    font-style: italic;
+    letter-spacing: 0.028em;
+
+    @include respond($break60) {
+      margin-top: 11px;
+      font-size: 24px;
+    }
+  }
+
+  &__creators,
+  &__contributors,
+  &__description {
+    font-size: 16px;
+    line-height: 1.529em;
+    letter-spacing: 0.012em;
+  }
+
+  &__creators,
+  &__contributors {
+    line-height: 1.313em;
+  }
+
+  &__creators {
+    @include respond($break60) {
       font-size: 20px;
-      font-weight: $semibold;
+    }
+
+    + .project-hero__contributors {
+      margin-top: 12px;
     }
   }
 
-  // Project Image
-  // --------------------------------------------------------
-  .project-aside {
-    position: relative;
-    display: none;
-    float: left;
-    width: 30%;
-
-    @include respond($break75) {
-      display: block;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .button-tagged {
-      margin-top: 14px;
+  &__contributors,
+  &__description {
+    @include respond($break60) {
+      font-size: 17px;
     }
   }
 
-  a.utility-primary {
-    display: inline-block;
-    margin-top: 18px;
-    font-size: 13px;
-    color: $neutralWhite;
+  &__description {
+    margin-top: 22px;
+
+    @include respond($break60) {
+      margin-top: 45px;
+    }
+  }
+
+  // Link elements
+  &__link-inline {
+    color: inherit;
     text-decoration: none;
+    box-shadow: inset 0 -1px 0;
+    transition: color $duration $timing;
 
-    .manicon {
-      margin-right: 8px;
-      font-size: 15px;
+    &:hover,
+    &:focus {
+      color: $accentPrimary;
+    }
+  }
+
+  // Social elements
+  &__social-link,
+  &__hashtag {
+    text-decoration: none;
+    transition: color $duration $timing;
+
+    .project-hero--dark & {
+      color: inherit;
     }
 
-    &:hover, &:visited {
-      color: $neutralWhite;
+    &:hover,
+    &:focus {
+      color: $accentPrimary;
+    }
+  }
+
+  &__social-link {
+    display: inline-block;
+    padding: 5px;
+    color: $neutral50;
+
+    &:first-child {
+      margin-left: -5px; // offsets padding to align flush left
+    }
+
+    + .project-hero__hashtag {
+      margin-top: 15px;
+    }
+  }
+
+  &__hashtag {
+    @include templateHead;
+    display: block;
+    font-size: 16px;
+    font-weight: $semibold;
+    color: $neutral75;
+
+    @include respond($break60) {
+      font-size: 18px;
+    }
+  }
+
+  // Cover elements
+  &__figure {
+    width: 100%;
+    font-size: 0;
+  }
+
+  &__cover-image {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+
+    @include respond($break60) {
+      max-width: 260px;
+    }
+
+    .project-hero--dark & {
+      border: 1px solid $neutral75;
+    }
+  }
+
+  &__cover-icon {
+    width: 111px;
+    height: 111px;
+
+    @include respond($break60) {
+      width: 134px;
+      height: 134px;
+      margin-left: 23px;
     }
   }
 }
