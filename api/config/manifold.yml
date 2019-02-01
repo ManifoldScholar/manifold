@@ -78,7 +78,19 @@ common: &1
       - "tabindex"
       - "width"
       - "align"
-
+    :attribute_exclusion_exceptions:
+      :iframe:
+        :allow:
+          - "height"
+          - "width"
+      :embed:
+        :allow:
+        - "height"
+        - "width"
+      :object:
+        :allow:
+        - "height"
+        - "width"
   :css_validator:
     :scope: ".manifold-text-section"
     :dark_scope: ".scheme-dark"

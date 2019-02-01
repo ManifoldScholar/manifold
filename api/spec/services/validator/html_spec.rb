@@ -97,6 +97,11 @@ RSpec.describe Validator::Html do
     expect(validator.validate(fragment).include?("height=")).to eq(false)
   end
 
+  it "allows exceptions to attribute removals" do
+    fragment = "<iframe height=\"value\"></iframe>"
+    expect(validator.validate(fragment).include?("height=")).to eq(true)
+  end
+
   excluded_css_properties.each do |prop|
     it "should remove blacklisted #{prop} CSS property" do
       fragment = "<div style=\"#{prop}: value\"></div>"
