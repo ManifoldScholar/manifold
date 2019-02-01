@@ -17,7 +17,8 @@ module Api
 
       # GET /texts/1
       def show
-        @text = scope_for_texts.includes(:project, :text_sections, :stylesheets)
+        @text = scope_for_texts.includes(:project, :text_sections, :stylesheets,
+                                         :toc_section)
                                .find(params[:id])
         includes = INCLUDES + %w(category creators contributors stylesheets)
         authorize_action_for @text
