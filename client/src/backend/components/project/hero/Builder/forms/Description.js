@@ -45,6 +45,10 @@ export default class Description extends PureComponent {
             className="form-secondary"
             onSuccess={this.closeDrawer}
           >
+            <Form.Switch
+              label="Dark Mode"
+              name="attributes[darkMode]"
+            />
             <Form.TextArea
               wide
               focusOnMount
