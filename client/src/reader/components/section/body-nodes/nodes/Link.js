@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import URI from "urijs";
 import { Link } from "react-router-dom";
-import validatedNode from "./higher-order/ValidatedNode";
+import validatedNode from "../higher-order/ValidatedNode";
 
 class LinkNode extends Component {
   static propTypes = {

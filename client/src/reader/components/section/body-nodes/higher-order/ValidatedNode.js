@@ -65,7 +65,9 @@ export default RenderComponent => {
         rowspan: "rowSpan",
         viewbox: "viewBox",
         itemprop: "itemProp",
-        preserveaspectratio: "preserveAspectRatio"
+        preserveaspectratio: "preserveAspectRatio",
+        allowfullscreen: "allowFullScreen",
+        frameborder: "frameBorder"
       };
       const mapped = mapKeys(attr, (attributeValue, attributeName) => {
         if (map.hasOwnProperty(attributeName)) return map[attributeName];
