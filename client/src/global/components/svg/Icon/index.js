@@ -3,7 +3,11 @@ import ActivityEgg from "./ActivityEgg";
 import ActivityResource from "./ActivityResource";
 import ActivityText from "./ActivityText";
 import ActivityTweet from "./ActivityTweet";
+import Arrow from "./Arrow";
+import ArrowDown from "./ArrowDown";
 import ArrowLong from "./ArrowLong";
+import ArrowSmall from "./ArrowSmall";
+import ArrowSmallDown from "./ArrowSmallDown";
 import BarsDoubleHorizontal from "./BarsDoubleHorizontal";
 import Bookmark from "./Bookmark";
 import BooksOnShelf from "./BooksOnShelf";
@@ -17,6 +21,7 @@ import CirclePlus from "./CirclePlus";
 import CubeShine from "./CubeShine";
 import EyeClosed from "./EyeClosed";
 import EyeOpen from "./EyeOpen";
+import Glasses from "./Glasses";
 import Globe from "./Globe";
 import Lamp from "./Lamp";
 import ManifoldLogo from "./ManifoldLogo";
@@ -39,6 +44,9 @@ import ResourcePresentation from "./ResourcePresentation";
 import ResourceSpreadsheet from "./ResourceSpreadsheet";
 import ResourceVideo from "./ResourceVideo";
 import Sliders from "./Sliders";
+import SocialFacebook from "./SocialFacebook";
+import SocialInstagram from "./SocialInstagram";
+import SocialTwitter from "./SocialTwitter";
 import SpeechBubble from "./SpeechBubble";
 import Tag from "./Tag";
 import Touch from "./Touch";
@@ -50,7 +58,11 @@ export default {
   ActivityResource,
   ActivityText,
   ActivityTweet,
+  Arrow,
+  ArrowDown,
   ArrowLong,
+  ArrowSmall,
+  ArrowSmallDown,
   BarsDoubleHorizontal,
   Bookmark,
   BooksOnShelf,
@@ -64,6 +76,7 @@ export default {
   CubeShine,
   EyeClosed,
   EyeOpen,
+  Glasses,
   Globe,
   Lamp,
   ManifoldLogo,
@@ -86,6 +99,9 @@ export default {
   ResourceSpreadsheet,
   ResourceVideo,
   Sliders,
+  SocialFacebook,
+  SocialInstagram,
+  SocialTwitter,
   SpeechBubble,
   Tag,
   Touch,
