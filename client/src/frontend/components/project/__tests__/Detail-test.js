@@ -20,13 +20,18 @@ describe("Frontend.Project.Detail component", () => {
   const dispatchMock = jest.fn();
   const store = build.store();
 
+  const refMock = element => {
+    return { style: { objectFit: "" }};
+  }
+
   it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
           <Detail dispatch={dispatchMock} project={project} />
         </Provider>
-      )
+      ),
+      { createNodeMock: refMock }
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

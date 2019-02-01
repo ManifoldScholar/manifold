@@ -166,7 +166,8 @@ const defaults = {
       metadataFormatted: metadataValues
     },
     relationships: {
-      resources: []
+      resources: [],
+      actionCallouts: []
     }
   },
 
@@ -479,6 +480,21 @@ const defaults = {
         title: ["original", "changed"]
       }
     }
+  },
+
+  actionCallout: {
+    type: "actionCallouts",
+    attributes: {
+      title: "Start Reading",
+      kind: "link",
+      location: "left",
+      position: 1,
+      url: "https://github.com/ManifoldScholar/manifold",
+      button: true
+    },
+    relationships: {
+      project: null
+    }
   }
 };
 
@@ -582,6 +598,10 @@ const projectCollection = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("projectCollection", id, attributes, relationships);
 };
 
+const actionCallout = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("actionCallout", id, attributes, relationships);
+};
+
 export default {
   defaults,
   project,
@@ -605,5 +625,6 @@ export default {
   permission,
   projectCollection,
   version,
-  page
+  page,
+  actionCallout
 };

@@ -86,6 +86,7 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
       },
       "id": "1",
       "relationships": Object {
+        "actionCallouts": Array [],
         "resources": Array [],
       },
       "type": "projects",
@@ -179,6 +180,7 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
           },
           "id": "1",
           "relationships": Object {
+            "actionCallouts": Array [],
             "resources": Array [],
           },
           "type": "projects",
