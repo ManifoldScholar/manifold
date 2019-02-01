@@ -41,7 +41,7 @@ module Ingestions
       def log_structure(branch, preface, indent = 0)
         branch.each do |leaf|
           # rubocop:disable Metrics/LineLength
-          debug_string "#{preface}#{indent.positive? ? (' ' * indent + '|') + '-' : ''} #{leaf[:label] || 'NULL'} [#{leaf[:id]}]" if leaf[:id]
+          debug_string "#{preface}#{indent.positive? ? (' ' * indent + '|') + '-' : ''} #{leaf[:label] || 'NULL'} [#{leaf[:id]}#{leaf[:anchor]}]" if leaf[:id]
           # rubocop:enable Metrics/LineLength
           log_structure(leaf[:children], preface, indent + 2) if leaf[:children]
         end

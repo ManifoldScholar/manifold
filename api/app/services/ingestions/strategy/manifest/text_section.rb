@@ -24,15 +24,15 @@ module Ingestions
         end
 
         def source_identifier
-          Digest::MD5.hexdigest @source["source_path"]
+          Digest::MD5.hexdigest source_path
         end
 
         def source_path
-          File.join("source", @source["source_path"])
+          @source[:source_path].partition("#").first
         end
 
         def path_without_ext
-          @source["source_path"].split(".").first
+          source_path.split(".").first
         end
 
         def basename

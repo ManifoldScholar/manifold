@@ -17,3 +17,5 @@ toc:
         children:
           - label: Section 1.1a
             source_path: section_1_1a.md
+  - label: Section 1#1
+    source_path: section_1.html#1

@@ -36,13 +36,13 @@ RSpec.describe Ingestions::PostProcessor do
   describe "the text table of contents" do
     it "has the correct number of entries" do
       toc = text.toc
-      expect(toc.length).to be 3
+      expect(toc.length).to be 4
       expect(toc[1][:children].length).to be 1
     end
 
     it "has the correct labels" do
       toc = text.toc
-      expect(toc.map { |i| i[:label] }).to eq ["Section 1", "Section 2", "Section 3"]
+      expect(toc.map { |i| i[:label] }).to eq ["Section 1", "Section 2", "Section 2#1", "Section 3"]
       expect(toc[1][:children][0][:label]).to eq "Section 2.a"
     end
 

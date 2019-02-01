@@ -73,6 +73,7 @@ RSpec.describe Ingestions::Strategies::Epub do
         { "label" => "Section 2", "anchor" => nil, "source_path" => "EPUB/xhtml/section0002.xhtml", "type" => nil, "children"=> [
             { "label" => "Section 2.a", "anchor" => nil, "source_path" => "EPUB/xhtml/section0002a.xhtml", "type" => nil }
         ] },
+        {"label"=>"Section 2#1","anchor"=>"1", "source_path"=>"EPUB/xhtml/section0002.xhtml", "type"=>nil},
         { "label" => "Section 3", "anchor" => nil, "source_path" => "EPUB/xhtml/an item with spaces.xhtml", "type"=> nil }
       ]
       expect(manifest[:attributes][:toc]).to eq expected
