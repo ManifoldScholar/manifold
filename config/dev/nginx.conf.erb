@@ -1,13 +1,13 @@
 upstream manifold-api.<%= tld.strip %> {
- server unix:<%= socket_dir %>/manifold-api;
+ server unix:<%= api_socket_dir %>/manifold-api;
 }
 
 upstream manifold-cable.<%= tld.strip %> {
- server unix:<%= socket_dir %>/manifold-cable;
+ server unix:<%= api_socket_dir %>/manifold-cable;
 }
 
 upstream manifold-client.<%= tld.strip %> {
-  server unix:<%= socket_dir %>/manifold-client;
+  server unix:<%= client_socket_dir %>/manifold-client;
 }
 
 server {
