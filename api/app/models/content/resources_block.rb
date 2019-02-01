@@ -3,7 +3,7 @@ module Content
 
     has_configured_attributes show_all_collections: :boolean,
                               title: :string
-    has_many_proxied :featured_collections, source: "Collection"
+    has_many_proxied :featured_collections, source: "ResourceCollection"
 
   end
 end
