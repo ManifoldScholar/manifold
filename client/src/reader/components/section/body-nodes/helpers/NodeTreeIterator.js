@@ -1,8 +1,7 @@
 import React from "react";
-import TextNode from "../TextNode";
-import DefaultNode from "../DefaultNode";
-import LinkNode from "../LinkNode";
+import Nodes from "../nodes";
 import has from "lodash/has";
+import upperFirst from "lodash/upperFirst";
 
 export default class NodeTreeIterator {
   constructor(bodyProps) {
@@ -81,15 +80,10 @@ export default class NodeTreeIterator {
   }
 
   visitElementNode(node) {
-    let ComponentClass;
-    switch (node.tag) {
-      case "a":
-        ComponentClass = LinkNode;
-        break;
-      default:
-        ComponentClass = DefaultNode;
-        break;
-    }
+    let ComponentClass = Nodes.Default;
+    const lookup = upperFirst(node.tag);
+    if (Nodes.hasOwnProperty(lookup)) ComponentClass = Nodes[lookup];
+    if (lookup === "A") ComponentClass = Nodes.Link;
     return React.createElement(ComponentClass, node, this.visitChildren(node));
   }
 
@@ -120,7 +114,7 @@ export default class NodeTreeIterator {
       parent.nodeType !== "element" ||
       !noTextNodes.includes(parent.tag)
     ) {
-      return React.createElement(TextNode, node);
+      return React.createElement(Nodes.Text, node);
     }
   }
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import validatedNode from "./higher-order/ValidatedNode";
+import validatedNode from "../higher-order/ValidatedNode";
 
 class CodeNode extends Component {
   static propTypes = {
