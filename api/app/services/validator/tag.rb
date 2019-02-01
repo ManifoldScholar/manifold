@@ -58,11 +58,22 @@ module Validator
       write_styles!(node, valid_styles)
     end
 
+    # Calculates which attributes should be excluded from the given node
+    # @param node [Nokogiri::XML::Node]
+    # @return [Array]
+    def calculate_attribute_exclusions(node)
+      exclude = node.attributes.select { |k| @config.attribute_exclusions.include? k }
+      return exclude unless @config.attribute_exclusion_exceptions[node.name]
+      exclude.reject do |k|
+        @config.attribute_exclusion_exceptions[node.name].allow.include? k
+      end
+    end
+
     # Removes disallowed attributes from node
     # @param node [Nokogiri::XML::Node]
     # @return [void]
     def exclude_attributes!(node)
-      exclude = node.attributes.select { |k| @config.attribute_exclusions.include? k }
+      exclude = calculate_attribute_exclusions(node)
       exclude.each { |attr_name, _value| remove_attribute!(node, attr_name) }
       nil
     end
