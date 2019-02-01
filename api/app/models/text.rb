@@ -72,6 +72,10 @@ class Text < ApplicationRecord
   has_many :annotations, through: :text_sections
   has_one :text_created_event, -> { where event_type: EventType[:text_added] },
           class_name: Event, as: :subject, dependent: :destroy, inverse_of: :subject
+  has_one :toc_section,
+          -> { where(kind: TextSection::KIND_NAVIGATION) },
+          class_name: "TextSection",
+          inverse_of: :text
 
   # Delegations
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
@@ -210,10 +214,6 @@ class Text < ApplicationRecord
     map
   end
   memoize :source_path_map
-
-  def toc_section
-    text_sections.find_by(kind: TextSection::KIND_NAVIGATION)
-  end
 
   def to_s
     title
