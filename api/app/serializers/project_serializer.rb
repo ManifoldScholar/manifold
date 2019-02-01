@@ -10,7 +10,7 @@ class ProjectSerializer < ApplicationSerializer
              :avatar_styles, :recently_updated, :updated, :description_formatted, :slug,
              :resource_kinds, :resource_tags, :avatar_color, :avatar_meta, :draft,
              :abilities, :download_url, :download_call_to_action, :tag_list,
-             :subtitle_formatted, :title_formatted, :title_plaintext
+             :subtitle_formatted, :title_formatted, :title_plaintext, :dark_mode
 
   has_many :creators, serializer: MakerSerializer
   has_many :contributors, serializer: MakerSerializer

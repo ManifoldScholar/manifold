@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190129201051) do
+ActiveRecord::Schema.define(version: 20190201200513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -427,6 +427,7 @@ ActiveRecord::Schema.define(version: 20190129201051) do
     t.jsonb    "cover_data",                     default: {}
     t.jsonb    "hero_data",                      default: {}
     t.jsonb    "avatar_data",                    default: {}
+    t.boolean  "dark_mode",                      default: false,     null: false
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
 
