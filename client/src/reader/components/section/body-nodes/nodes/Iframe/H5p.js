@@ -5,7 +5,7 @@ export default class H5p extends Component {
   static propTypes = {
     title: PropTypes.string,
     src: PropTypes.string,
-    frameBorder: PropTypes.oneOf(PropTypes.string, PropTypes.number),
+    frameBorder: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     allowFullScreen: PropTypes.bool
   };
 
