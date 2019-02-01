@@ -27,18 +27,22 @@ module Ingestions
         branch_convert text.toc.clone
       end
 
+      # rubocop:disable Metrics/AbcSize
       def branch_convert(branch)
         branch.each do |leaf|
           if leaf[:source_path]
-            ts = text.find_text_section_by_source_path(leaf[:source_path])
-            if ts
-              leaf[:id] = ts.id
-              leaf.delete(:source_path)
-            end
+            source_path, _hash, anchor = leaf[:source_path].partition("#")
+            ts = text.find_text_section_by_source_path(source_path)
+            next unless ts.present?
+
+            leaf[:id] = ts.id
+            leaf[:anchor] = anchor if anchor.present?
+            leaf.delete(:source_path)
           end
           branch_convert(leaf[:children]) if leaf[:children]
         end
       end
+      # rubocop:enable Metrics/AbcSize
     end
   end
 end

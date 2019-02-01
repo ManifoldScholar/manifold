@@ -25,8 +25,9 @@ RSpec.describe Ingestions::Strategies::Manifest do
         it "has the correct TOC" do
           expected = [
             { "label" => "Title Set From TOC", "source_path" => "section_1.html", "start_section" => true, "children" => [
-              { "label" => "Section 1.1", "source_path" => "section_1_1.html", "children" => [ { "label" => "Section 1.1a", "source_path" => "section_1_1a.md" } ] }
-            ] }
+              { "label" => "Section 1.1", "source_path" => "section_1_1.html", "children" => [ { "label" => "Section 1.1a", "source_path" => "section_1_1a.md" } ] },
+            ] },
+            { "label" => "Section 1#1", "source_path" => "section_1.html#1" }
           ]
           expect(manifest[:attributes][:toc]).to eq expected
         end
@@ -63,7 +64,8 @@ RSpec.describe Ingestions::Strategies::Manifest do
         it "has the correct text section attributes" do
           expected = [{ "source_identifier" => "02e9b3b8b5268c3fe8bd4150fd546a55", "name" => "Title Set From TOC", "kind" => "section", "position"  => 0, "build" => "build/02e9b3b8b5268c3fe8bd4150fd546a55.html" },
                       { "source_identifier" => "9fef2b7e781641e6861d1aa79a597a57", "name" => "Section 1.1", "kind" => "section", "position" => 1, "build" => "build/9fef2b7e781641e6861d1aa79a597a57.html" },
-                      { "source_identifier" => "e2fe424ecf8e3c87da127ea617e57107", "name" => "Section 1.1a", "kind" => "section", "position" => 2, "build" => "build/e2fe424ecf8e3c87da127ea617e57107.html" }]
+                      { "source_identifier" => "e2fe424ecf8e3c87da127ea617e57107", "name" => "Section 1.1a", "kind" => "section", "position" => 2, "build" => "build/e2fe424ecf8e3c87da127ea617e57107.html" },
+                      { "source_identifier" => "02e9b3b8b5268c3fe8bd4150fd546a55", "name" => "Section 1#1", "kind" => "section", "position" => 3, "build" => "build/02e9b3b8b5268c3fe8bd4150fd546a55.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 
