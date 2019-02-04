@@ -91,9 +91,7 @@ export class ResourceImportNew extends PureComponent {
             layout="horizontal"
             afterChange={this.afterSourceChange}
             name="attributes[data]"
-            initialValue={
-              resourceImport ? resourceImport.attributes.dataFilename : null
-            }
+            readFrom="attributes[dataFilename]"
           />
           <div className="form-divider wide">or</div>
           <Form.TextInput
