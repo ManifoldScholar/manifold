@@ -89,7 +89,7 @@ export class ProjectCollectionSettings extends PureComponent {
         <section>
           <FormContainer.Form
             model={projectCollection}
-            name={requests.beProjectCollection}
+            name={requests.beProjectCollectionUpdate}
             update={this.handleUpdate}
             create={projectCollectionsAPI.create}
             className="form-secondary project-collection-form"
