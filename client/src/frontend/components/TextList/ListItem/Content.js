@@ -14,6 +14,7 @@ export default class TextListListItemContent extends Component {
     showAuthors: PropTypes.bool,
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
+    showCovers: PropTypes.bool,
     datesVisible: PropTypes.bool,
     datePrefix: PropTypes.string,
     publishedVisible: PropTypes.bool
@@ -51,7 +52,11 @@ export default class TextListListItemContent extends Component {
     return (
       <Link to={lh.link("reader", slug)} className={`${baseClass}__link`}>
         <div className={`${baseClass}__inner`}>
-          <Cover text={text} baseClass={baseClass} />
+          <Cover
+            text={text}
+            baseClass={baseClass}
+            iconOnly={!this.props.showCovers}
+          />
           <div className={`${this.props.baseClass}__content`}>
             <Bibliographic
               baseClass={baseClass}

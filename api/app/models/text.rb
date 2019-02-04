@@ -94,7 +94,7 @@ class Text < ApplicationRecord
   scope :published, ->(published) { where(published: published) if published.present? }
 
   # Attachments
-  manifold_has_attached_file :cover, :image, no_styles: true
+  manifold_has_attached_file :cover, :image
 
   # Callbacks
   after_commit :trigger_text_added_event, on: [:create, :update]

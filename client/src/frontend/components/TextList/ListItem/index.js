@@ -60,6 +60,7 @@ export default class TextListListItem extends Component {
           showAuthors={this.props.showAuthors}
           showSubtitles={this.props.showSubtitles}
           showDescriptions={this.props.showDescriptions}
+          showCovers={this.props.showCovers}
           datesVisible={this.utilityInContent && this.props.showDates}
           datePrefix={this.datePrefix}
           publishedVisible={this.utilityInContent && this.isPublished}
