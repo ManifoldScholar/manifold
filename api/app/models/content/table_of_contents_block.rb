@@ -3,7 +3,7 @@ module Content
 
     has_one_proxied :text, source: "Text", required: true
 
-    has_configured_attributes depth: :integer,
+    has_configured_attributes depth: [:integer, default: 6],
                               title: :string,
                               show_authors: [:boolean, default: false],
                               show_text_title: [:boolean, default: false]

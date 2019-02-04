@@ -10,6 +10,10 @@ export default class ProjectContentTypeFormTableOfContents extends PureComponent
     setOther: PropTypes.func.isRequired
   };
 
+  static defaultAttributes = {
+    depth: 6
+  };
+
   get project() {
     return this.props.project;
   }

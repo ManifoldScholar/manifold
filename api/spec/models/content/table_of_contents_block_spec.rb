@@ -32,6 +32,10 @@ RSpec.describe Content::TableOfContentsBlock do
     expect(FactoryBot.build(:toc_block, depth: "string")).to_not be_valid
   end
 
+  it "has a default depth of 6" do
+    expect(FactoryBot.create(:toc_block).depth).to eq 6
+  end
+
   it "defaults show_authors to false" do
     expect(FactoryBot.build(:toc_block, show_authors: nil)).to_not be_valid
   end

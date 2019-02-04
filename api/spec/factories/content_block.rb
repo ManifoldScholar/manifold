@@ -7,7 +7,6 @@ FactoryBot.define do
   factory :resources_block, parent: :content_block, class: "Content::ResourcesBlock"
   factory :toc_block, parent: :content_block, class: "Content::TableOfContentsBlock" do
     type { "Content::TableOfContentsBlock" }
-    depth { 3 }
     show_authors { false }
     show_text_title { false }
     content_block_references { [FactoryBot.build(:content_block_reference, kind: "text", referencable: FactoryBot.create(:text, project: project))] }
