@@ -1,5 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import some from "lodash/some";
+import isEmpty from "lodash/isEmpty";
+import Maker from "frontend/components/maker";
 
 export default class ProjectHeroMeta extends PureComponent {
   static displayName = "ProjectHero.Meta";
@@ -33,26 +36,55 @@ export default class ProjectHeroMeta extends PureComponent {
     return contributors;
   }
 
+  get hasAvatars() {
+    return !some(this.creators, c =>
+      isEmpty(c.attributes.avatarStyles.smallSquare)
+    );
+  }
+
+  get showAvatars() {
+    return this.creators && this.creators.length <= 2 && this.hasAvatars;
+  }
+
   get description() {
     return this.props.project.attributes.descriptionFormatted;
   }
 
-  renderMaker(maker) {
-    return <span>{maker.attributes.fullName}</span>;
-  }
-
-  renderMakerList(makers, label, elementClass) {
-    const blockClass = this.props.blockClass;
-    // const linkClass = `${blockClass}__link-inline`;
-    const linkClass = "";
+  renderCreator(creator, linkClass) {
+    if (this.showAvatars) {
+      return <Maker.Avatar key={creator.id} maker={creator} />;
+    }
 
     return (
-      <div className={`${blockClass}__${elementClass}`}>
-        <span style={{ fontStyle: "italic" }}>{label}</span>
-        {makers
-          .map(maker => (
-            <span key={maker.id} className={linkClass}>
-              {maker.attributes.fullName}
+      <span key={creator.id} className={linkClass}>
+        {creator.attributes.fullName}
+      </span>
+    );
+  }
+
+  renderCreatorList(blockClass) {
+    const linkClass = `${blockClass}__link-inline`;
+
+    return (
+      <div className={`${blockClass}__creators`}>
+        <span style={{ fontStyle: "italic" }}>by </span>
+        {this.creators
+          .map(creator => this.renderCreator(creator, linkClass))
+          .reduce((prev, curr) => [prev, ", ", curr])}
+      </div>
+    );
+  }
+
+  renderContributorList(blockClass) {
+    const linkClass = `${blockClass}__link-inline`;
+
+    return (
+      <div className={`${blockClass}__contributors`}>
+        <span style={{ fontStyle: "italic" }}>Contributors: </span>
+        {this.contributors
+          .map(contributor => (
+            <span key={contributor.id} className={linkClass}>
+              {contributor.attributes.fullName}
             </span>
           ))
           .reduce((prev, curr) => [prev, ", ", curr])}
@@ -78,14 +110,8 @@ export default class ProjectHeroMeta extends PureComponent {
             />
           )}
         </header>
-        {this.creators &&
-          this.renderMakerList(this.creators, "by ", "creators")}
-        {this.contributors &&
-          this.renderMakerList(
-            this.contributors,
-            "Contributors: ",
-            "contributors"
-          )}
+        {this.creators && this.renderCreatorList(blockClass)}
+        {this.contributors && this.renderContributorList(blockClass)}
         {this.description && (
           <div
             className={`${blockClass}__description`}

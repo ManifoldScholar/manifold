@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import orderBy from "lodash/orderBy";
 import Cover from "./Cover";
 import Meta from "./Meta";
@@ -121,13 +120,11 @@ export default class ProjectHero extends PureComponent {
 
   render() {
     const blockClass = "project-hero";
+    const themeModifier =
+      this.hasBackgroundImage || this.darkMode ? "dark" : "light";
 
     return (
-      <section
-        className={classNames(blockClass, {
-          [`${blockClass}--dark`]: this.hasBackgroundImage || this.darkMode
-        })}
-      >
+      <section className={`${blockClass} ${blockClass}--${themeModifier}`}>
         <div className={`${blockClass}__inner`}>
           <div className={`${blockClass}__left-block`}>
             <Meta blockClass={blockClass} project={this.props.project} />
@@ -146,11 +143,7 @@ export default class ProjectHero extends PureComponent {
             <Social blockClass={blockClass} project={this.props.project} />
           </div>
           <div className={`${blockClass}__right-block`}>
-            <Cover
-              blockClass={blockClass}
-              src={this.coverSrc}
-              alt={`Cover of ${this.title}`}
-            />
+            <Cover blockClass={blockClass} project={this.props.project} />
             <CalloutList
               blockClass={blockClass}
               callouts={this.rightCallouts}
