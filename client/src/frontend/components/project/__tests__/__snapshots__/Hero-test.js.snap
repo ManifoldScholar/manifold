@@ -8,7 +8,7 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
     className="project-hero__inner"
   >
     <div
-      className="project-hero__left-block"
+      className="project-hero__left-top-block"
     >
       <div
         className="project-hero__meta-block"
@@ -33,7 +33,7 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
           className="action-callout-list action-callout-list--inline"
         >
           <a
-            className="action-callout-list__button action-callout-list__button--secondary"
+            className="action-callout-list__button action-callout-list__button--secondary action-callout-list__button--centered"
             href="https://github.com/ManifoldScholar/manifold"
             rel="noopener noreferrer"
             target="_blank"
@@ -53,7 +53,7 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
           className="action-callout-list action-callout-list--stacked"
         >
           <a
-            className="action-callout-list__button action-callout-list__button--secondary"
+            className="action-callout-list__button action-callout-list__button--secondary action-callout-list__button--centered"
             href="https://github.com/ManifoldScholar/manifold"
             rel="noopener noreferrer"
             target="_blank"
@@ -66,6 +66,10 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
           </a>
         </div>
       </div>
+    </div>
+    <div
+      className="project-hero__left-bottom-block"
+    >
       <div
         className="project-hero__social-block"
       >
@@ -80,7 +84,7 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="project-hero__right-block"
+      className="project-hero__right-top-block"
     >
       <div
         className="project-hero__cover-block"
@@ -89,9 +93,22 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
           className="project-hero__figure"
         />
       </div>
+    </div>
+    <div
+      className="project-hero__right-bottom-block"
+    >
       <div
-        className="project-hero__callout-block project-hero__callout-block--desktop"
-      />
+        className="project-hero__credits-block"
+      >
+        <div
+          className="project-hero__credits-text"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "<p>Rowan, <em>The Dog</em></p>",
+            }
+          }
+        />
+      </div>
     </div>
   </div>
 </section>
@@ -105,7 +122,7 @@ exports[`Frontend.Project.Hero component renders correctly when object-fit is un
     className="project-hero__inner"
   >
     <div
-      className="project-hero__left-block"
+      className="project-hero__left-top-block"
     >
       <div
         className="project-hero__meta-block"
@@ -130,7 +147,7 @@ exports[`Frontend.Project.Hero component renders correctly when object-fit is un
           className="action-callout-list action-callout-list--inline"
         >
           <a
-            className="action-callout-list__button action-callout-list__button--secondary"
+            className="action-callout-list__button action-callout-list__button--secondary action-callout-list__button--centered"
             href="https://github.com/ManifoldScholar/manifold"
             rel="noopener noreferrer"
             target="_blank"
@@ -150,7 +167,7 @@ exports[`Frontend.Project.Hero component renders correctly when object-fit is un
           className="action-callout-list action-callout-list--stacked"
         >
           <a
-            className="action-callout-list__button action-callout-list__button--secondary"
+            className="action-callout-list__button action-callout-list__button--secondary action-callout-list__button--centered"
             href="https://github.com/ManifoldScholar/manifold"
             rel="noopener noreferrer"
             target="_blank"
@@ -163,6 +180,10 @@ exports[`Frontend.Project.Hero component renders correctly when object-fit is un
           </a>
         </div>
       </div>
+    </div>
+    <div
+      className="project-hero__left-bottom-block"
+    >
       <div
         className="project-hero__social-block"
       >
@@ -177,7 +198,7 @@ exports[`Frontend.Project.Hero component renders correctly when object-fit is un
       </div>
     </div>
     <div
-      className="project-hero__right-block"
+      className="project-hero__right-top-block"
     >
       <div
         className="project-hero__cover-block"
@@ -186,9 +207,22 @@ exports[`Frontend.Project.Hero component renders correctly when object-fit is un
           className="project-hero__figure"
         />
       </div>
+    </div>
+    <div
+      className="project-hero__right-bottom-block"
+    >
       <div
-        className="project-hero__callout-block project-hero__callout-block--desktop"
-      />
+        className="project-hero__credits-block"
+      >
+        <div
+          className="project-hero__credits-text"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "<p>Rowan, <em>The Dog</em></p>",
+            }
+          }
+        />
+      </div>
     </div>
   </div>
 </section>

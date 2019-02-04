@@ -12,7 +12,7 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
         className="project-hero__inner"
       >
         <div
-          className="project-hero__left-block"
+          className="project-hero__left-top-block"
         >
           <div
             className="project-hero__meta-block"
@@ -30,12 +30,10 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
               />
             </header>
           </div>
-          <div
-            className="project-hero__callout-block project-hero__callout-block--desktop"
-          />
-          <div
-            className="project-hero__callout-block project-hero__callout-block--mobile"
-          />
+        </div>
+        <div
+          className="project-hero__left-bottom-block"
+        >
           <div
             className="project-hero__social-block"
           >
@@ -50,7 +48,7 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
           </div>
         </div>
         <div
-          className="project-hero__right-block"
+          className="project-hero__right-top-block"
         >
           <div
             className="project-hero__cover-block"
@@ -59,9 +57,22 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
               className="project-hero__figure"
             />
           </div>
+        </div>
+        <div
+          className="project-hero__right-bottom-block"
+        >
           <div
-            className="project-hero__callout-block project-hero__callout-block--desktop"
-          />
+            className="project-hero__credits-block"
+          >
+            <div
+              className="project-hero__credits-text"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "<p>Rowan, <em>The Dog</em></p>",
+                }
+              }
+            />
+          </div>
         </div>
       </div>
     </section>

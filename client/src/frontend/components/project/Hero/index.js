@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import has from "lodash/has";
 import orderBy from "lodash/orderBy";
 import Cover from "./Cover";
 import Meta from "./Meta";
 import CalloutList from "./CalloutList";
 import Social from "./Social";
+import Credits from "./Credits";
 
 export default class ProjectHero extends PureComponent {
   static displayName = "Project.Hero";
@@ -90,6 +92,18 @@ export default class ProjectHero extends PureComponent {
     );
   }
 
+  get showSocialBlock() {
+    const services = ["twitter", "facebook", "instagram"];
+    return (
+      has(this.props.project.attributes, services) ||
+      this.props.project.attributes.hashtag
+    );
+  }
+
+  get credits() {
+    return this.props.project.attributes.imageCreditsFormatted;
+  }
+
   renderBgImage(blockClass) {
     const sizes = { retina: 2560, large: 1280, medium: 640 };
 
@@ -126,31 +140,46 @@ export default class ProjectHero extends PureComponent {
     return (
       <section className={`${blockClass} ${blockClass}--${themeModifier}`}>
         <div className={`${blockClass}__inner`}>
-          <div className={`${blockClass}__left-block`}>
+          <div className={`${blockClass}__left-top-block`}>
             <Meta blockClass={blockClass} project={this.props.project} />
-            <CalloutList
-              blockClass={blockClass}
-              callouts={this.leftCallouts}
-              layoutClass={"inline"}
-              visibilityClass={"desktop"}
-            />
-            <CalloutList
-              blockClass={blockClass}
-              callouts={this.allCallouts}
-              layoutClass={"stacked"}
-              visibilityClass={"mobile"}
-            />
-            <Social blockClass={blockClass} project={this.props.project} />
+            {this.leftCallouts && this.leftCallouts.length > 0 && (
+              <CalloutList
+                blockClass={blockClass}
+                callouts={this.leftCallouts}
+                layoutClass={"inline"}
+                visibilityClass={"desktop"}
+              />
+            )}
+            {this.allCallouts && this.allCallouts.length > 0 && (
+              <CalloutList
+                blockClass={blockClass}
+                callouts={this.allCallouts}
+                layoutClass={"stacked"}
+                visibilityClass={"mobile"}
+              />
+            )}
           </div>
-          <div className={`${blockClass}__right-block`}>
+          {this.showSocialBlock && (
+            <div className={`${blockClass}__left-bottom-block`}>
+              <Social blockClass={blockClass} project={this.props.project} />
+            </div>
+          )}
+          <div className={`${blockClass}__right-top-block`}>
             <Cover blockClass={blockClass} project={this.props.project} />
-            <CalloutList
-              blockClass={blockClass}
-              callouts={this.rightCallouts}
-              layoutClass={"stacked"}
-              visibilityClass={"desktop"}
-            />
+            {this.rightCallouts && this.rightCallouts.length > 0 && (
+              <CalloutList
+                blockClass={blockClass}
+                callouts={this.rightCallouts}
+                layoutClass={"stacked"}
+                visibilityClass={"desktop"}
+              />
+            )}
           </div>
+          {this.credits && (
+            <div className={`${blockClass}__right-bottom-block`}>
+              <Credits blockClass={blockClass} copy={this.credits} />
+            </div>
+          )}
         </div>
         {this.hasBackgroundImage && this.renderBgImage(blockClass)}
       </section>

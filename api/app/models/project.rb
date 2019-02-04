@@ -38,7 +38,7 @@ class Project < ApplicationRecord
   extend FriendlyId
 
   # Magic
-  has_formatted_attributes :description, :subtitle
+  has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :title, include_wrap: false
   with_metadata %w(
     series_title container_title isbn issn doi original_publisher
