@@ -163,7 +163,8 @@ const defaults = {
       downloadCallToAction: "Download the greatest dog",
       abilities,
       metadata: metadataValues,
-      metadataFormatted: metadataValues
+      metadataFormatted: metadataValues,
+      imageCreditsFormatted: "<p>Rowan, <em>The Dog</em></p>"
     },
     relationships: {
       resources: [],

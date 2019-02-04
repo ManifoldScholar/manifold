@@ -75,6 +75,14 @@ export default class Description extends PureComponent {
               remove="attributes[removeCover]"
               instructions="If a cover is set for the project, it will appear over the hero, to the right of the description."
             />
+            <Form.TextArea
+              label="Image Credits"
+              name="attributes[imageCredits]"
+              placeholder="Add image credits"
+              instructions="Enter image credits for hero and cover. This field accepts basic Markdown."
+              height={250}
+              wide
+            />
             <Form.Save text="Save" />
           </FormContainer.Form>
         </section>

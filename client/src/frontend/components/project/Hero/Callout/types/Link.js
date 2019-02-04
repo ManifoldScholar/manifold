@@ -50,7 +50,8 @@ export default class ProjectHeroCalloutDownload extends PureComponent {
 
     const blockClass = this.props.blockClass;
     const calloutClass = classNames({
-      [`${blockClass}__button ${blockClass}__button--secondary`]: this.isButton,
+      [`${blockClass}__button ${blockClass}__button--secondary ${blockClass}__button--centered`]: this
+        .isButton,
       [`${blockClass}__link`]: !this.isButton
     });
 
