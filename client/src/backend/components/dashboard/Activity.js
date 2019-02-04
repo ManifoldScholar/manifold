@@ -23,8 +23,8 @@ export default class Activity extends Component {
     const increase = stats.readerIncrease;
 
     if (increase === null) return "";
-    if (increase > 0) return "+ " + increase.toString() + "%";
-    if (increase < 0) return "- " + Math.abs(increase).toString() + "%";
+    if (increase > 0) return "+" + increase.toString() + "%";
+    if (increase < 0) return "-" + Math.abs(increase).toString() + "%";
     return "0%";
   }
 
