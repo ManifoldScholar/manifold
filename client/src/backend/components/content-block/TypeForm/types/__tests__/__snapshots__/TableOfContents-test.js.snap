@@ -71,6 +71,7 @@ Array [
       id="attributes[depth]-text-input-1"
       onChange={[Function]}
       type="number"
+      value=""
     />
   </div>,
   <div

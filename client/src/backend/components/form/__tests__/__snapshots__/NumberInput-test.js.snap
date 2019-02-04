@@ -16,6 +16,7 @@ exports[`Backend.Form.NumberInput component renders correctly 1`] = `
     id="attributes[property]-text-input-1"
     onChange={[Function]}
     type="number"
+    value=""
   />
 </div>
 `;

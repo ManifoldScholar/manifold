@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import BaseInput from "./BaseInput";
 import labelId from "helpers/labelId";
 import isNull from "lodash/isNull";
+import isUndefined from "lodash/isUndefined";
 
 export default class FormNumberInput extends Component {
   static displayName = "Form.NumberInput";
@@ -29,7 +30,7 @@ export default class FormNumberInput extends Component {
   };
 
   renderValue = value => {
-    if (isNull(value)) return "";
+    if (isNull(value) || isUndefined(value)) return "";
     return value;
   };
 
