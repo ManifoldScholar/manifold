@@ -221,7 +221,14 @@
     .maker-avatar {
       display: inline-flex;
       align-items: center;
-      margin-left: 10px;
+      margin-right: 10px;
+
+      &:not(:last-child) {
+        &::after {
+          display: inline;
+          content: ', ';
+        }
+      }
 
       img {
         display: inline-block;
@@ -234,6 +241,17 @@
 
       figcaption {
         display: inline-block;
+      }
+    }
+  }
+
+  &__maker-text {
+    margin-left: 0.5ch;
+
+    &:not(:last-child) {
+      &::after {
+        display: inline;
+        content: ', ';
       }
     }
   }
@@ -255,7 +273,6 @@
 
   // Link elements
   &__link-inline {
-    margin-left: 0.5ch;
     // color: inherit;
     // text-decoration: none;
     // box-shadow: inset 0 -1px 0;

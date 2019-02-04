@@ -50,44 +50,44 @@ export default class ProjectHeroMeta extends PureComponent {
     return this.props.project.attributes.descriptionFormatted;
   }
 
-  renderCreator(creator, linkClass) {
+  renderCreator(creator, itemClass) {
     if (this.showAvatars) {
       return <Maker.Avatar key={creator.id} maker={creator} />;
     }
 
     return (
-      <span key={creator.id} className={linkClass}>
+      <span key={creator.id} className={itemClass}>
         {creator.attributes.fullName}
       </span>
     );
   }
 
   renderCreatorList(blockClass) {
-    const linkClass = `${blockClass}__link-inline`;
+    const itemClass = `${blockClass}__maker-text ${blockClass}__link-inline`;
 
     return (
       <div className={`${blockClass}__creators`}>
-        <span style={{ fontStyle: "italic" }}>by </span>
+        {!this.showAvatars && <span style={{ fontStyle: "italic" }}>by </span>}
         {this.creators
-          .map(creator => this.renderCreator(creator, linkClass))
-          .reduce((prev, curr) => [prev, ", ", curr])}
+          .map(creator => this.renderCreator(creator, itemClass))
+          .reduce((prev, curr) => [prev, curr])}
       </div>
     );
   }
 
   renderContributorList(blockClass) {
-    const linkClass = `${blockClass}__link-inline`;
+    const itemClass = `${blockClass}__maker-text ${blockClass}__link-inline`;
 
     return (
       <div className={`${blockClass}__contributors`}>
         <span style={{ fontStyle: "italic" }}>Contributors: </span>
         {this.contributors
           .map(contributor => (
-            <span key={contributor.id} className={linkClass}>
+            <span key={contributor.id} className={itemClass}>
               {contributor.attributes.fullName}
             </span>
           ))
-          .reduce((prev, curr) => [prev, ", ", curr])}
+          .reduce((prev, curr) => [prev, curr])}
       </div>
     );
   }
