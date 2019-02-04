@@ -10,7 +10,7 @@ function getDisplayName(WrappedComponent) {
 }
 
 function withFormOptions(WrappedComponent) {
-  const displayName = `HigherOrder.WithFormContext('${getDisplayName(
+  const displayName = `HigherOrder.WithFormOptions('${getDisplayName(
     WrappedComponent
   )})`;
 
@@ -66,9 +66,10 @@ function withFormOptions(WrappedComponent) {
     }
 
     byInternalValue(value) {
-      const option = this.state.options.find(
-        opt => value === opt.internalValue
-      );
+      const option = this.state.options.find(opt => {
+        return opt.internalValue.toString() === value.toString();
+      });
+      if (!option) return null;
       return option.value;
     }
 
