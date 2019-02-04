@@ -14,7 +14,7 @@ exports[`Frontend.TextList.ListItem.Content component renders correctly 1`] = `
     >
       <svg
         aria-hidden="true"
-        className="manicon-svg text-block"
+        className="manicon-svg text-block__cover-svg"
         fill="currentColor"
         height={78}
         viewBox="0 0 64 64"

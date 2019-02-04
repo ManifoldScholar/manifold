@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
-import classNames from "classnames";
 import { Icon } from "global/components/svg";
 
 export default class TextCover extends PureComponent {
@@ -37,12 +36,12 @@ export default class TextCover extends PureComponent {
           <img
             src={this.text.attributes.coverStyles.smallPortrait}
             alt={"Thumbnail image for " + this.text.attributes.titlePlaintext}
-            className={classNames(this.props.baseClass)}
+            className={`${this.props.baseClass}__cover-image`}
           />
         ) : (
           <Icon.LoosePages
             size={78}
-            iconClass={classNames(this.props.baseClass)}
+            iconClass={`${this.props.baseClass}__cover-svg`}
           />
         )}
       </figure>
