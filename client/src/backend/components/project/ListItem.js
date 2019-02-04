@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import GlobalProject from "global/components/project";
+import ProjectPlaceholder from "global/components/svg/ProjectPlaceholder";
 import lh from "helpers/linkHandler";
 
 export default class ProjectListItem extends PureComponent {
@@ -52,12 +52,13 @@ export default class ProjectListItem extends PureComponent {
   renderProjectImage(project) {
     const meta = project.attributes.avatarMeta.original;
     const hasAvatarStyles = project.attributes.avatarStyles.original;
+    const avatarColor = project.attributes.avatarColor;
 
     if (!meta) {
-      return <GlobalProject.Placeholder />;
+      return <ProjectPlaceholder color={avatarColor} />;
     }
     if (!hasAvatarStyles) {
-      return <GlobalProject.Placeholder />;
+      return <ProjectPlaceholder color={avatarColor} />;
     }
     const imageStyle =
       meta.width >= meta.height

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Project from "global/components/project";
+import ProjectPlaceholder from "global/components/svg/ProjectPlaceholder";
 
 export default class ProjectCover extends Component {
   static displayName = "Project.Cover";
@@ -23,7 +23,7 @@ export default class ProjectCover extends Component {
 
   renderPlaceholderImage(project) {
     if (!project.attributes.avatarColor) return null;
-    return <Project.Placeholder color={project.attributes.avatarColor} />;
+    return <ProjectPlaceholder color={project.attributes.avatarColor} />;
   }
 
   render() {
