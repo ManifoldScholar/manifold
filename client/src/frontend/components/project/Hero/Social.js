@@ -23,7 +23,7 @@ export default class ProjectHeroSocial extends PureComponent {
     let out;
     switch (service) {
       case "twitter":
-        out = `https://twitter.com/hashtag/${id}`;
+        out = `https://twitter.com/${id}`;
         break;
       case "instagram":
         out = `https://instagram.com/${id}`;

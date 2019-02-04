@@ -36,7 +36,8 @@
   &__frame {
     stroke: $neutral75;
 
-    .backend & {
+    .backend &,
+    .project-hero--dark & {
       stroke: $neutral50;
     }
   }

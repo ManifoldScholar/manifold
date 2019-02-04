@@ -32,7 +32,7 @@ export default class ProjectHeroCalloutDownload extends PureComponent {
   }
 
   get iconSize() {
-    return this.isButton ? 46 : 17.333;
+    return this.isButton ? 22.662 : 17.333;
   }
 
   renderIcon() {
