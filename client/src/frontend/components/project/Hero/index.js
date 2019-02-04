@@ -29,7 +29,7 @@ export default class ProjectHero extends PureComponent {
     // false, don't test again
     if (!prevState.objectFit) return null;
 
-    if (!this.bgImage && !this.bgImage.current) return null;
+    if (!this.bgImage || !this.bgImage.current) return null;
     // if browser doesn't recognize `objectFit` property, update state
     // this is used to set a background image on the hero rather than <img>
     const supports = this.bgImage.current.style.objectFit !== undefined;
