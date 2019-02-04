@@ -1,51 +1,43 @@
 .project-thumb-placeholder {
-  &.primary {
-    .tile {
+  &--primary {
+    .project-thumb-placeholder__tile {
       fill: $sp50Primary;
     }
   }
 
-  &.secondary {
-    .tile {
+  &--secondary {
+    .project-thumb-placeholder__tile {
       fill: $sp50Secondary;
     }
   }
 
-  &.tertiary {
-    .tile {
+  &--tertiary {
+    .project-thumb-placeholder__tile {
       fill: $sp50Tertiary;
     }
   }
 
-  &.quaternary {
-    .tile {
+  &--quaternary {
+    .project-thumb-placeholder__tile {
       fill: $sp50Quaternary;
     }
   }
 
-  &.quinary {
-    .tile {
+  &--quinary {
+    .project-thumb-placeholder__tile {
       fill: $sp50Quinary;
     }
   }
 
-  .background {
+  &__tile {
     fill: $neutralWhite;
   }
 
-  .outline {
-    fill: $neutral90;
-  }
+  &__frame {
+    stroke: $neutral75;
 
-  .tile {
-    fill: $neutralWhite;
-  }
-
-  .icon {
-    fill: $neutral75;
-  }
-
-  .highlight {
-    fill: transparent;
+    .backend & {
+      stroke: $neutral50;
+    }
   }
 }

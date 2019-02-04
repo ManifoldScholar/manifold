@@ -1,30 +1,41 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-export default class SVGThumbnailColor extends Component {
-  static displayName = "SVG.ThumbnailColor";
+export default class SVGProjectPlaceholder extends Component {
+  static displayName = "SVG.ProjectPlaceholder";
 
   static propTypes = {
-    iconClass: PropTypes.string
+    color: PropTypes.string
   };
 
   render() {
+    const blockClass = "project-thumb-placeholder";
+    const colorModifier =
+      !this.props.color || this.props.color === "sentary"
+        ? "sentary"
+        : this.props.color;
+
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 134 134"
         width={134}
         height={134}
-        className={this.props.iconClass}
+        className={`${blockClass} ${blockClass}--${colorModifier}`}
+        aria-label="Default Project Thumbnail"
       >
         <g fill="none" fillRule="evenodd">
-          <g stroke="#696969" strokeWidth="1.5" transform="translate(2 2)">
+          <g
+            className={`${blockClass}__frame`}
+            strokeWidth="1.5"
+            transform="translate(2 2)"
+          >
             <polyline points="124 6 124 124 6 124" />
             <polyline points="130 12 130 130 12 130" />
             <polygon points="0 118 118 118 118 0 0 0" />
           </g>
           <polygon
-            fill="#CBF7E6"
+            className={`${blockClass}__tile`}
             points="0 102 102 102 102 0 0 0"
             transform="translate(10 10)"
           />

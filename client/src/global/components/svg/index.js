@@ -1,11 +1,11 @@
 import BooksOnShelfColor from "./BooksOnShelfColor";
 import Icon from "./Icon";
-import ThumbnailColor from "./ThumbnailColor";
+import ProjectPlaceholder from "./ProjectPlaceholder";
 
 export default {
   BooksOnShelfColor,
   Icon,
-  ThumbnailColor
+  ProjectPlaceholder
 };
 
 export { Icon };
