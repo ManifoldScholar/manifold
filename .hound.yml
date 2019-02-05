@@ -1,6 +1,10 @@
 ruby:
   config_file: api/.rubocop.yml
 
+rubocop:
+  config_file: api/.rubocop.yml
+  version: 0.63.0
+
 scss:
   enabled: false
 
