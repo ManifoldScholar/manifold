@@ -49,8 +49,10 @@
       }
 
       .hero-builder-block__button-label {
-        color: $accentPrimary;
-        visibility: visible;
+        @include respond($break40) {
+          color: $accentPrimary;
+          visibility: visible;
+        }
       }
 
     }
@@ -64,7 +66,9 @@
     color: $accentPrimary;
 
     .hero-builder-block__button-label {
-      visibility: visible;
+      @include respond($break40) {
+        visibility: visible;
+      }
     }
   }
 

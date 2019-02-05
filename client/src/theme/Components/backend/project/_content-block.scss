@@ -126,7 +126,11 @@
     display: flex;
 
     > * + * {
-      margin-left: 14px;
+      margin-left: 2vw;
+
+      @include respond($break60) {
+        margin-left: 14px;
+      }
     }
   }
 
@@ -141,6 +145,8 @@
     &--draggable {
       cursor: move; // fallback for older browsers
       cursor: grab;
+      user-select: none;
+      -webkit-touch-callout: none;
     }
 
     &:not(:disabled):hover,

@@ -5,7 +5,7 @@
   bottom: 0;
   width: 100%;
   padding: 20px $containerPaddingResp 33px;
-  overflow: scroll;
+  overflow: auto;
   background-color: $neutral100;
 
   .drawer-enter & {

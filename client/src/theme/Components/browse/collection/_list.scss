@@ -94,6 +94,10 @@
 
   .icon {
     @include templateHead;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 100px;
     padding-right: 16px;
     font-size: 12px;
     text-align: center;
@@ -105,14 +109,14 @@
 
     .manicon {
       display: block;
-      margin-bottom: 3px;
     }
 
     span {
       display: none;
 
-      @include respond($break75) {
+      @include respond($break90) {
         display: block;
+        word-break: break-word;
       }
     }
   }
