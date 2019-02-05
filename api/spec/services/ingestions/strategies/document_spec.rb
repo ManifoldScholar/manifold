@@ -26,29 +26,29 @@ RSpec.describe Ingestions::Strategies::Document do
           expect(manifest[:attributes][:toc]).to eq []
         end
 
-        it "has the correct landmarks" do
+        it "has no landmarks" do
           expect(manifest[:attributes][:landmarks]).to eq []
         end
 
-        it "has the correct page list" do
+        it "has an empty page list" do
           expect(manifest[:attributes][:page_list]).to eq []
         end
       end
 
       describe "its relationship attributes" do
-        it "has the correct title attributes" do
+        it "has one main title" do
           expected = [{ "value" => "title", "position" => 1, "kind" => TextTitle::KIND_MAIN }]
           expect(manifest[:relationships][:text_titles]).to eq expected
         end
 
-        it "has the correct creator attributes" do
+        it "has one creator for every unique creator name" do
           expected = [
             { "name" => "Rowan Ono" }
           ]
           expect(manifest[:relationships][:creators]).to eq expected
         end
 
-        it "has the correct contributor attributes" do
+        it "has one contributor for every unique contributor name" do
           expected = [
             { "name" => "Ida Davis" }
           ]
@@ -142,12 +142,12 @@ RSpec.describe Ingestions::Strategies::Document do
 
       include_examples "outcome assertions"
 
-      it "has the correct text section attributes" do
+      it "has one text section" do
         expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
         expect(manifest[:relationships][:text_sections]).to eq expected
       end
 
-      it "has the correct number of ingestion sources" do
+      it "has one ingestion source" do
         expect(manifest[:relationships][:ingestion_sources].length).to eq 1
       end
     end
@@ -166,12 +166,12 @@ RSpec.describe Ingestions::Strategies::Document do
 
         include_examples "outcome assertions"
 
-        it "has the correct text section attributes" do
+        it "has one text section" do
           expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 
-        it "has the correct number of ingestion sources" do
+        it "has one ingestion source for every unique source file" do
           expect(manifest[:relationships][:ingestion_sources].length).to eq 2
         end
       end
@@ -189,12 +189,12 @@ RSpec.describe Ingestions::Strategies::Document do
 
         include_examples "outcome assertions"
 
-        it "has the correct text section attributes" do
+        it "has one text section" do
           expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 
-        it "has the correct number of ingestion sources" do
+        it "has one ingestion source for every unique source file" do
           expect(manifest[:relationships][:ingestion_sources].length).to eq 2
         end
       end
@@ -214,12 +214,12 @@ RSpec.describe Ingestions::Strategies::Document do
 
     include_examples "outcome assertions"
 
-    it "has the correct text section attributes" do
+    it "has one text section" do
       expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
       expect(manifest[:relationships][:text_sections]).to eq expected
     end
 
-    it "has the correct number of ingestion sources" do
+    it "has one ingestion source for every unique source file" do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 1
     end
   end
@@ -236,12 +236,12 @@ RSpec.describe Ingestions::Strategies::Document do
     let(:context) { create_context(ingestion) }
     let!(:manifest) { described_class.run(context: context).result }
 
-    it "has the correct text section attributes" do
+    it "has one text section" do
       expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "Pandoc User’s Guide", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
       expect(manifest[:relationships][:text_sections]).to eq expected
     end
 
-    it "has the correct number of ingestion sources" do
+    it "has one ingestion source for every unique source file" do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 1
     end
 
@@ -258,17 +258,17 @@ RSpec.describe Ingestions::Strategies::Document do
       @manifest = described_class.run(context: context).result
     end
 
-    it "has the correct title attributes" do
+    it "has one main title" do
       expected = [{ "value" => "Google Doc Prime", "position" => 1, "kind" => TextTitle::KIND_MAIN }]
       expect(@manifest[:relationships][:text_titles]).to eq expected
     end
 
-    it "has the correct text section attributes" do
+    it "has one text section" do
       expected = [{"source_identifier"=>"eacf331f0ffc35d4b482f1d15a887d3b", "name"=>"Google Doc Prime", "kind"=>"section", "position"=>1, "build"=>"build/index.html"}]
       expect(@manifest[:relationships][:text_sections]).to eq expected
     end
 
-    it "has the correct number of ingestion sources" do
+    it "has one ingestion source" do
       expect(@manifest[:relationships][:ingestion_sources].length).to eq 1
     end
 
@@ -286,7 +286,7 @@ RSpec.describe Ingestions::Strategies::Document do
     let(:context) { create_context(ingestion) }
     let!(:manifest) { described_class.run(context: context).result }
 
-    it "has the correct number of ingestion sources" do
+    it "has an ingestion source for document and each media item" do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 2
     end
 

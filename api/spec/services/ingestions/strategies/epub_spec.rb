@@ -38,14 +38,14 @@ RSpec.describe Ingestions::Strategies::Epub do
         expect(manifest[:relationships][:text_titles]).to eq expected
       end
 
-      it "has the correct creator attributes" do
+      it "has one creator for every unique creator name" do
         expected = [
           { "name" => "Andrew Culp" }
         ]
         expect(manifest[:relationships][:creators]).to eq expected
       end
 
-      it "has the correct number of ingestion sources" do
+      it "has one ingestion source for every unique source file" do
         expect(manifest[:relationships][:ingestion_sources].length).to eq 7
       end
     end
@@ -79,7 +79,7 @@ RSpec.describe Ingestions::Strategies::Epub do
       expect(manifest[:attributes][:toc]).to eq expected
     end
 
-    it "has the correct text section attributes" do
+    it "has one text section for every unique ingestion source referenced in TOC" do
       expected = [
         { "source_identifier"=>"section0001.xhtml", "name" => "Section 1", "kind" => "navigation", "position" => 0, "build" => "build/section0001.xhtml" },
         { "source_identifier"=>"section0002.xhtml",  "name" => "Section 2", "kind" => "section", "position" => 1, "build" => "build/section0002.xhtml" },
@@ -120,7 +120,7 @@ RSpec.describe Ingestions::Strategies::Epub do
       expect(manifest[:attributes][:toc]).to eq expected
     end
 
-    it "has the correct text section attributes" do
+    it "has one text section for every unique ingestion source referenced in TOC" do
       expected = [
         { "source_identifier"=>"section0001.xhtml",  "name" => "Section 1", "kind" => "navigation", "position" => 0, "build" => "build/section0001.xhtml" },
         { "source_identifier"=>"section0002.xhtml",  "name" => "Section 2", "kind" => "section", "position" => 1, "build" => "build/section0002.xhtml" },
@@ -189,14 +189,14 @@ RSpec.describe Ingestions::Strategies::Epub do
         expect(@manifest[:relationships][:text_titles]).to eq expected
       end
 
-      it "has the correct creator attributes" do
+      it "has one creator for every unique creator name" do
         expected = [
           { "name" => "E. T. A. Hoffmann" }
         ]
         expect(@manifest[:relationships][:creators]).to eq expected
       end
 
-      it "has the correct contributor attributes" do
+      it "has one contributor for every unique contributor name" do
         expected = [
           { "name" => "The League of Moveable Type" },
           { "name" => "George Soane" },
@@ -208,7 +208,7 @@ RSpec.describe Ingestions::Strategies::Epub do
         expect(@manifest[:relationships][:contributors]).to eq expected
       end
 
-      it "has the correct text section attributes" do
+      it "has one text section for every unique ingestion source referenced in TOC" do
         expected = [
           { "source_identifier" => "titlepage.xhtml", "name" => "Titlepage", "kind" => "section", "position" => 0, "build" => "build/titlepage.xhtml"  },
           { "source_identifier" => "imprint.xhtml",  "name" => "Imprint", "kind" => "section", "position" => 1, "build" => "build/imprint.xhtml"  },
@@ -227,7 +227,7 @@ RSpec.describe Ingestions::Strategies::Epub do
           expect(@manifest[:relationships][:text_sections]).to eq expected
       end
 
-      it "has the correct number of ingestion sources" do
+      it "has one ingestion source for every unique source file" do
         expect(@manifest[:relationships][:ingestion_sources].length).to eq 18
       end
     end
