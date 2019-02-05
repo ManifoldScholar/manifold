@@ -20,44 +20,79 @@ const page = 1;
 const perPage = 10;
 
 export class ResourceCollectionDetailContainer extends PureComponent {
+  static fetchProject(id, dispatch) {
+    const p = projectsAPI.show(id);
+    const { promise } = dispatch(request(p, requests.tmpProject));
+    return promise;
+  }
+
+  static fetchCollection(id, dispatch) {
+    const c = resourceCollectionsAPI.show(id);
+    const { promise } = dispatch(request(c, requests.feResourceCollection));
+    return promise;
+  }
+
+  static fetchResources(
+    metas,
+    id,
+    dispatch,
+    filter = {},
+    pagination = { number: page, size: perPage }
+  ) {
+    const cr = resourceCollectionsAPI.collectionResources(
+      id,
+      filter,
+      pagination
+    );
+    const { promise } = dispatch(request(cr, metas));
+    return promise;
+  }
+
   static fetchData = (getState, dispatch, location, match) => {
+    const self = ResourceCollectionDetailContainer;
     const state = getState();
+    const { id, resourceCollectionId } = match.params;
     const promises = [];
-
-    // Load project, unless it is already loaded
-    if (!isEntityLoaded("projects", match.params.id, state)) {
-      const p = projectsAPI.show(match.params.id);
-      const { promise } = dispatch(request(p, requests.tmpProject));
-      promises.push(promise);
-    }
-
-    // Load the collection, unless it is already loaded
-    if (
-      !isEntityLoaded(
-        "resourceCollections",
-        match.params.resourceCollectionId,
-        state
-      )
-    ) {
-      const c = resourceCollectionsAPI.show(match.params.resourceCollectionId);
-      const { promise } = dispatch(request(c, requests.feResourceCollection));
-      promises.push(promise);
-    }
-
     const params = queryString.parse(location.search);
+    const filter = omitBy(params, (v, k) => k === "page");
     const pagination = {
       number: params.page ? params.page : page,
       size: perPage
     };
-    const filter = omitBy(params, (v, k) => k === "page");
-    const cr = resourceCollectionsAPI.collectionResources(
-      match.params.resourceCollectionId,
+    const isFirstPage = pagination.number === 1;
+
+    // Load project, unless it is already loaded
+    if (!isEntityLoaded("projects", id, state)) {
+      promises.push(self.fetchProject(id, dispatch));
+    }
+
+    // Load the collection, unless it is already loaded
+    if (!isEntityLoaded("resourceCollections", resourceCollectionId, state)) {
+      promises.push(self.fetchCollection(resourceCollectionId, dispatch));
+    }
+
+    // Load the collection's resources. If we're on page 1, then the slideshow has the
+    // same resources, so we apply the results to both metas.
+    const resourcesMetas = [requests.feCollectionResources];
+    if (isFirstPage) resourcesMetas.push(requests.feSlideshow);
+    const gridResourcesPromise = self.fetchResources(
+      resourcesMetas,
+      resourceCollectionId,
+      dispatch,
       filter,
       pagination
     );
-    const lookups = [requests.feSlideshow, requests.feCollectionResources];
-    const { promise } = dispatch(request(cr, lookups));
-    promises.push(promise);
+    promises.push(gridResourcesPromise);
+
+    // If we're not on the first page, load the first page of resources for the slideshow.
+    if (!isFirstPage) {
+      const slideshowResourcesPromise = self.fetchResources(
+        requests.feSlideshow,
+        resourceCollectionId,
+        dispatch
+      );
+      promises.push(slideshowResourcesPromise);
+    }
 
     return Promise.all(promises);
   };
