@@ -65,8 +65,7 @@ export default class Chip extends PureComponent {
                   >
                     <Utility.IconComposer icon="pencil-simple" size={24} />
                   </button>
-                  <button
-                    type="button"
+                  <div
                     className="action-callout-slot__button action-callout-slot__button--draggable"
                     {...provided.dragHandleProps}
                   >
@@ -74,7 +73,7 @@ export default class Chip extends PureComponent {
                       icon="barsDoubleHorizontal"
                       size={24}
                     />
-                  </button>
+                  </div>
                 </span>
               </div>
             </div>
