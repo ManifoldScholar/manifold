@@ -68,24 +68,16 @@
     display: -ms-grid;
     display: grid;
     grid-row-gap: $grid-gap-small;
-    // grid-template:
-    //   'right-top' auto
-    //   'left-top' auto
-    //   'left-bottom' auto
-    //   'right-bottom' auto / auto;
     max-width: 1178px;
     -ms-grid-rows: auto $grid-gap-small auto $grid-gap-small auto $grid-gap-small auto;
     -ms-grid-columns: 100%;
 
     @include respond($break60) {
-      // grid-template:
-      //   'left-top right-top' auto
-      //   'left-bottom right-bottom' auto / 1fr minmax(200px, $right-column-width);
-      grid-template-columns: 1fr minmax(200px, $right-column-width);
+      grid-template-columns: 1fr minmax(220px, $right-column-width);
       row-gap: $row-gap-medium;
       column-gap: $column-gap-medium;
       -ms-grid-rows: auto $row-gap-medium auto;
-      -ms-grid-columns: 1fr $column-gap-medium minmax(200px, $right-column-width);
+      -ms-grid-columns: 1fr $column-gap-medium minmax(220px, $right-column-width);
     }
 
     @include respond($break120) {

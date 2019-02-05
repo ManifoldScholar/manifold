@@ -38,6 +38,13 @@
       margin-bottom: 4px;
     }
 
+    &--draggable {
+      cursor: move; // fallback for older browsers
+      cursor: grab;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+
     &:not(:last-child) {
       svg {
         margin-right: 8px;
@@ -73,29 +80,19 @@
     justify-content: space-between;
     padding: 9px 15px 11px;
     font-size: 12px;
-    line-height: 1;
+    line-height: 1.2;
     color: $neutral50;
     letter-spacing: 0.125em;
     background: $neutral95;
     border-radius: 5px;
+  }
 
-    & + & {
-      //margin-top: 10px;
-    }
+  &__chip-title {
+    flex-grow: 1;
   }
 
   &__chip-utility {
+    display: flex;
     margin-left: 10px;
   }
-
-  &__button {
-    @include buttonUnstyled;
-
-    &--draggable {
-      cursor: move; // fallback for older browsers
-      cursor: grab;
-    }
-  }
-
-
 }
