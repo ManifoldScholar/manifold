@@ -27,7 +27,7 @@ class ResourceCollection < ApplicationRecord
   has_many :annotations, dependent: :destroy
   has_one :collection_created_event,
           -> { where event_type: EventType[:resource_collection_added] },
-          class_name: Event,
+          class_name: "Event",
           as: :subject,
           dependent: :destroy,
           inverse_of: :subject

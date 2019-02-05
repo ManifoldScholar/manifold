@@ -1,6 +1,6 @@
 common: &1
   :citation_styles:
-    :mla: "modern-language-association-8th-edition"
+    :mla: "modern-language-association"
     :chicago: "chicago-annotated-bibliography"
     :apa: "apa"
   :google:

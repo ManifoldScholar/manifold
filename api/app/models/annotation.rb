@@ -62,7 +62,7 @@ class Annotation < ApplicationRecord
   has_one :text, through: :text_section
   has_one :project, through: :text
   has_one :annotation_created_event, -> { where event_type: EventType[:text_annotated] },
-          class_name: Event,
+          class_name: "Event",
           as: :subject,
           dependent: :destroy,
           inverse_of: :subject

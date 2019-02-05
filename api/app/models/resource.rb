@@ -46,7 +46,7 @@ class Resource < ApplicationRecord
   belongs_to :project
   has_one :thumbnail_fetch_attempt, dependent: :destroy
   has_one :resource_created_event, -> { where event_type: EventType[:resource_added] },
-          class_name: Event,
+          class_name: "Event",
           as: :subject,
           dependent: :destroy,
           inverse_of: :subject

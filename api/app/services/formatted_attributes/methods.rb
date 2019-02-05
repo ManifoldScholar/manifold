@@ -17,7 +17,7 @@ module FormattedAttributes
         plaintext: :"#{attribute}_plaintext",
         refresh: :"refresh_formatted_#{attribute}",
         textify: :"textify_#{attribute}",
-        changed?: :"#{attribute}_changed?"
+        saved_changed_to?: :"saved_change_to_#{attribute}"
       }
 
       initialize_methods!
@@ -29,17 +29,13 @@ module FormattedAttributes
 
     private
 
-    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def initialize_methods!
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
           extend ActiveSupport::Concern
 
           included do
-            after_save :#{method_name(:refresh)}, if: :#{method_name(:changed?)}
-          end
-
-          def #{method_name(:changed?)}
-            #{container.present? ? "#{container}_was.dig('#{attribute}') != #{container}.dig('#{attribute}')" : :super}
+            after_save :#{method_name(:refresh)}, if: :#{method_name(:saved_changed_to?)}
           end
 
           def #{method_name(:formatted)}
@@ -90,7 +86,18 @@ module FormattedAttributes
             "#{Rails.env.downcase}/\#{model_name.cache_key}/\#{id}/plaintext/#{attribute}"
           end
       RUBY
+
+      return unless container.present?
+
+      class_eval <<-RUBY, __FILE__, __LINE__ + 1
+
+        def #{method_name(:saved_changed_to?)}
+          "#{container}_before_last_save.dig('#{attribute}') != #{container}.dig('#{attribute}')"
+        end
+
+      RUBY
     end
-    # rubocop:enable Metrics/AbcSize
+
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
   end
 end

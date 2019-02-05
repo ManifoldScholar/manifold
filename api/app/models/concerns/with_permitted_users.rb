@@ -2,6 +2,9 @@ module WithPermittedUsers
   extend ActiveSupport::Concern
 
   included do
+
+    resourcify
+
     has_many :permitted_users, lambda {
       joins(:roles)
         .where(roles: { name: Role::SCOPED_ROLES })

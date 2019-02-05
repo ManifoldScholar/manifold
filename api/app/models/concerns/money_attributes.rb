@@ -18,6 +18,8 @@ module MoneyAttributes
           send("#{cents_attribute}=", value.try(:to_f).try("*", 100))
         end
         define_method "#{attribute}_money" do
+          Money.locale_backend = :i18n
+          I18n.locale = :en
           Money.new(send("#{attribute}_in_cents").to_f ||
                       0, send("#{attribute}_currency")).format
         end
