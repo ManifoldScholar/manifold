@@ -25,6 +25,7 @@ module Ingestions
           path = "//xmlns:meta[@refines='##{id}' and @property='display-seq']"
           node = @epub_inspector.metadata_node.xpath(path)
           return nil unless node
+
           node&.text.to_i.nonzero?
         end
 
@@ -32,8 +33,10 @@ module Ingestions
           path = "//xmlns:meta[@refines='##{id}' and @property='title-type']"
           node = @epub_inspector.metadata_node.xpath(path)
           return nil unless node.nil?
+
           scheme = node.attribute("scheme")&.value
           return onix_code_to_type(node.text) if scheme && scheme == "onix:codelist15"
+
           node&.text
         end
 

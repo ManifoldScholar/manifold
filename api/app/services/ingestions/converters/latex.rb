@@ -11,6 +11,7 @@ module Ingestions
 
       def self.convertible_extensions
         return [] if `which pandoc`.blank?
+
         %w(tex)
       end
 

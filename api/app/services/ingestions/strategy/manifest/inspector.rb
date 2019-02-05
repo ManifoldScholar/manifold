@@ -47,6 +47,7 @@ module Ingestions
         def start_section_identifier
           section = toc.detect { |item| item["start_section"].present? }
           return nil unless section.present?
+
           Digest::MD5.hexdigest context.basename(section["source_path"])
         end
 
@@ -106,6 +107,7 @@ module Ingestions
             source["source_path"] == original_path
           end
           return false unless item.present?
+
           item["remote_source_path"] = item["source_path"]
           item["source_path"] = new_path
         end

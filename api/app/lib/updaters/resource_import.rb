@@ -9,6 +9,7 @@ module Updaters
       state = attributes[:state]
       return if state.blank?
       return if @model.new_record?
+
       @model.state_machine.transition_to(state.to_sym)
     end
 
@@ -18,6 +19,7 @@ module Updaters
 
     def adjusted_attributes
       return {} unless attributes
+
       clone = attributes.clone
       remove_state!(clone)
       clone

@@ -28,6 +28,7 @@ module Ingestions
 
         def attachment
           return nil if uri?(href)
+
           @epub_inspector.open_rendition_source_by_href(href)
         end
 

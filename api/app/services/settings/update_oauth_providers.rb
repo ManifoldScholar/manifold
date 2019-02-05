@@ -4,8 +4,8 @@ class Settings < ApplicationRecord
 
     PROVIDER_MAPPING = {
       facebook: %i(facebook_app_id facebook_app_secret),
-      google:   %i(google_oauth_client_id google_oauth_client_secret),
-      twitter:  %i(twitter_app_id twitter_app_secret)
+      google: %i(google_oauth_client_id google_oauth_client_secret),
+      twitter: %i(twitter_app_id twitter_app_secret)
     }.freeze
 
     def execute

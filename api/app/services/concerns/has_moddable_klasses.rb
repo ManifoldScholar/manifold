@@ -45,7 +45,7 @@ module Concerns
             const_set #{@const_name}, #{@ivar}
           end
         end
-      RUBY
+        RUBY
       end
       # rubocop:enable Layout/IndentHeredoc
 

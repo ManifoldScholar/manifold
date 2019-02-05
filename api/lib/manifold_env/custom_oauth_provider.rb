@@ -122,8 +122,8 @@ module ManifoldEnv
 
         info do
           {
-            email:    raw_info[provider.email_key],
-            name:     raw_info[provider.name_key],
+            email: raw_info[provider.email_key],
+            name: raw_info[provider.name_key],
             nickname: raw_info[provider.nickname_key]
           }
         end

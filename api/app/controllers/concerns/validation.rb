@@ -465,6 +465,7 @@ module Validation
   # as a hash. We're coercing the hash to an array here, before it hits strong params.
   def coerce_filter_to_hash(param, key)
     return unless params.dig(param, key).respond_to? :values
+
     params[param][key] = params[param][key].values
   end
 

@@ -41,6 +41,7 @@ class NotificationMailer < ApplicationMailer
   # Roughly...
   def indefinite_article_for(name)
     return "A " unless %w(a e i o u).include? name.first
+
     "An "
   end
 end

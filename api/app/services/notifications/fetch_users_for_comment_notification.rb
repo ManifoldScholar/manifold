@@ -14,6 +14,7 @@ module Notifications
 
       editors.select do |editor|
         next false if editor.in? excluded
+
         editor.wants_notifications_for?(
           NotificationKind[:project_comments_and_annotations]
         )

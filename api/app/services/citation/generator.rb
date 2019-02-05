@@ -7,6 +7,7 @@ module Citation
     def cite(subject, styles)
       item = CiteProc::Item.new(map(subject))
       return {} unless subject.respond_to? :citation_parts
+
       styles.each_with_object(Hash.new(0)) do |style, results|
         cp = CiteProc::Processor.new style: style[1], format: "html"
         cp.import item
@@ -19,6 +20,7 @@ module Citation
 
     def map(subject)
       return {} unless subject.respond_to? :citation_parts
+
       parts = []
       parts.push subject.metadata if subject.respond_to? :metadata
       parts.push(id: subject.id)

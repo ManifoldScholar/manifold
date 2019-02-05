@@ -10,11 +10,13 @@ class CommentSerializer < ApplicationSerializer
 
   def flagged
     return 0 unless authenticated?
+
     object.flags.where(creator: current_user).count.positive?
   end
 
   def deleted_body
     return object.body if current_user&.can_read_deleted? object
+
     nil
   end
 

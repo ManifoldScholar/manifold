@@ -11,6 +11,7 @@ module DynamicMailer
       return deliver_test!(mail) if Rails.env.test?
       return deliver_smtp!(mail) if @config.use_smtp?
       return deliver_sendmail!(mail) if @config.use_sendmail?
+
       handle_send_failure(mail)
     # rubocop:disable Metrics/LineLength
     rescue StandardError => e

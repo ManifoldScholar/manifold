@@ -108,12 +108,14 @@ module Importer
       update_boolean_attributes(collection, row, COLLECTION_BOOLEAN_ATTRIBUTES)
       update_attachment_attributes(collection, row, COLLECTION_ATTACHMENT_ATTRIBUTES)
       return collection.save if collection.valid?
+
       @logger.log_model_errors(collection)
     end
 
     # rubocop:disable Metrics/AbcSize
     def import_resource(row, count)
       return if TRUTHY_VALUES.include?(row["Skip"])
+
       @logger.info "Importing row: \"#{row['Title']}\""
       resource = find_or_initialize_resource(fingerprint(row))
       resource.creator = @creator
@@ -133,11 +135,13 @@ module Importer
 
     def create_tag_list(resource, row)
       return unless row["Keywords"]
+
       resource.tag_list.add(row["Keywords"], parse: true)
     end
 
     def add_resource_to_collection(resource, collection_list, count)
       return if collection_list.empty?
+
       collections = collection_list.split(";")
       collections.each do |collection_title|
         @logger.info "   Attempting to add resource to collection \"#{collection_title}\""
@@ -145,6 +149,7 @@ module Importer
         return @logger.log_missing_collection unless collection
         return @logger.log_already_in_collection if
           resource.resource_collections.include?(collection)
+
         remove_resource_from_all_collections(resource)
         @logger.info "        Resource does not belong to collection. Adding."
         create_collection_resource(collection, resource, count)
@@ -165,6 +170,7 @@ module Importer
         position: position
       )
       return @logger.log_model_errors(cr) unless cr.valid?
+
       cr
     end
 
@@ -198,10 +204,12 @@ module Importer
 
     def import_model_attachment(model, key, value)
       return if value.blank?
+
       @logger.info "    Importing #{key}: #{value}"
       file = drive_folder.file_by_title(value)
       return unless file_ok?(file)
       return if already_downloaded?(file, model, key)
+
       @logger.log_found_file(file)
       io = io_from_drive_file(file)
       set_file_attribute(file, model, key, io)
@@ -235,6 +243,7 @@ module Importer
 
     def file_ok?(file)
       return true unless file.nil?
+
       @logger.log_missing_file(file)
       false
     end
@@ -243,6 +252,7 @@ module Importer
       method = "#{key}_checksum"
       return false unless model.respond_to? method
       return false if file.md5_checksum != model.send(method)
+
       @logger.log_unchanged_file(file)
       true
     end

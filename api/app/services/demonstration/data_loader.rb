@@ -31,6 +31,7 @@ module Demonstration
       children = Pathname.new("../import").children.select(&:directory?)
       children.each do |child|
         next if File.file?(File.join(child, ".skip"))
+
         Importer::Project.new(child, cli_user, @logger).import(true)
       end
     end

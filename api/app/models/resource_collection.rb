@@ -45,6 +45,7 @@ class ResourceCollection < ApplicationRecord
   # Scopes
   scope :with_order, lambda { |by|
     return order(:title) unless by.present?
+
     order(by)
   }
 

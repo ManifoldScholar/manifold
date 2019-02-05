@@ -22,6 +22,7 @@ module Notifications
     def projects
       return {} unless include_digest?(NotificationKind[:projects]) ||
                        include_digest?(NotificationKind[:followed_projects])
+
       event_scope.created(date_range)
                  .by_subject_type(%w(Text Resource ResourceCollection))
                  .group_by(&:project)

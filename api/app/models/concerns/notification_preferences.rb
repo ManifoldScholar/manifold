@@ -9,6 +9,7 @@ module Concerns
       # rubocop:disable Metrics/LineLength
       scope :with_digest_for_frequency, lambda { |frequency|
         next none unless frequency.digest?
+
         where(id: unscoped.joins(:notification_preferences)
                           .where(notification_preferences: { kind: NotificationKind[:digest],
                                                              frequency: frequency }))
@@ -19,6 +20,7 @@ module Concerns
       # the given kind and frequency.
       scope :with_notification_for_frequency, lambda { |kind, frequency|
         next all unless kind.present? && frequency.present?
+
         where(id: unscoped.joins(:notification_preferences)
                           .where(notification_preferences: { kind: kind,
                                                              frequency: frequency }))

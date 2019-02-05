@@ -57,11 +57,13 @@ module Updaters
 
   def assign_creator!(model, creator)
     return unless creator && model.respond_to?("creator=")
+
     model.creator = creator
   end
 
   def assign_attributes!(model)
     return unless attributes
+
     run_callbacks "update_attributes" do
       attr = adjusted_attributes
       attachmentize_attributes!(attr)
@@ -72,6 +74,7 @@ module Updaters
   # rubocop:disable Metrics/AbcSize
   def attachmentize_attributes!(attr)
     return unless attachment_fields.count.positive?
+
     attachment_fields.each do |field|
       attachment = attachment_from_params!(attr, field)
       attr[field] = attachment unless attachment.nil?
@@ -87,6 +90,7 @@ module Updaters
   def attachment_from_params!(attributes, key)
     params = attributes.extract!(key)[key]
     return nil if params.nil?
+
     data, filename = params.values_at(:data, :filename)
     Shrine.data_uri(data).tap do |data_file|
       data_file.original_filename = filename
@@ -98,12 +102,11 @@ module Updaters
   # rubocop:disable Metrics/CyclomaticComplexity
   def update_relationships!(model)
     return unless relationships
+
     run_callbacks "update_relationships" do
       relationships.to_h.each do |name, relationship|
         models = relationship[:data]
-        if models.respond_to?(:has_key?) || models.nil?
-          update_belongs_to(model, name, models) && next
-        end
+        update_belongs_to(model, name, models) && next if models.respond_to?(:has_key?) || models.nil?
         update_has_many(model, name, models) && next if models.respond_to?(:each)
       end
     end
@@ -143,6 +146,7 @@ module Updaters
 
   def adjusted_attributes
     return {} unless attributes
+
     clone = attributes.clone
     remove_relative_position!(clone)
     clone
@@ -150,6 +154,7 @@ module Updaters
 
   def remove_relative_position!(attributes)
     return unless %w(up down top bottom).include?(attributes[:position])
+
     attributes.delete(:position)
   end
 

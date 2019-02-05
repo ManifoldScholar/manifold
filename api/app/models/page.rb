@@ -25,6 +25,7 @@ class Page < ApplicationRecord
   # Scopes
   scope :by_purpose, lambda { |purpose|
     next all unless purpose.present?
+
     where(purpose: purpose.to_s)
   }
 
@@ -49,6 +50,7 @@ class Page < ApplicationRecord
 
   def policy_purpose_is_unique!
     return true unless policy_page?
+
     errors.add(:purpose, :in_use) if Page
                                      .where.not(id: id)
                                      .by_purpose(purpose)

@@ -18,6 +18,7 @@ module Notifications
     def enqueue_reply_notifications(comment)
       outcome = Notifications::FetchUsersForReplyNotification.run(comment: comment)
       return unless outcome.valid?
+
       outcome.result.each do |user|
         Notifications::SendReplyNotificationJob.perform_later user.id, comment.id
       end
@@ -26,6 +27,7 @@ module Notifications
     def enqueue_comment_notifications(comment)
       outcome = Notifications::FetchUsersForCommentNotification.run(comment: comment)
       return unless outcome.valid?
+
       outcome.result.each do |user|
         Notifications::SendCommentNotificationJob.perform_later user.id, comment.id
       end

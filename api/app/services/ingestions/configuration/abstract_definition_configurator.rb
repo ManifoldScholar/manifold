@@ -17,7 +17,7 @@ module Ingestions
         end
 
         @options = {
-          name:        name.to_sym,
+          name: name.to_sym,
           interaction: interaction
         }
 
@@ -43,9 +43,7 @@ module Ingestions
       # @param [Fixnum] position
       # @return [void]
       def insert_at(position)
-        if !position.is_a?(Integer) || position < 1
-          raise TypeError, "Invalid position: #{position}"
-        end
+        raise TypeError, "Invalid position: #{position}" if !position.is_a?(Integer) || position < 1
 
         @options[:position] = position
       end

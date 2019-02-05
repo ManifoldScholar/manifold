@@ -1,7 +1,7 @@
 class Identity < ApplicationRecord
   attribute :provider, Concerns::Inquiry.new
 
-  belongs_to :user, required: true, inverse_of: :identities
+  belongs_to :user, optional: false, inverse_of: :identities
 
   validates :provider, inclusion: { in: ManifoldEnv.oauth.known_strategies }
   validates :uid, :provider, presence: true

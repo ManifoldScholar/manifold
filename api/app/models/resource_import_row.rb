@@ -46,6 +46,7 @@ class ResourceImportRow < ApplicationRecord
 
   def value(position)
     return nil unless position
+
     values[position.to_i - 1]
   end
 
@@ -55,8 +56,10 @@ class ResourceImportRow < ApplicationRecord
 
   def set_resource
     return unless row_type == ROW_TYPE_DATA
+
     match = project_resources.find_by fingerprint: fingerprint
     return unless match
+
     self.resource = match
     save!
   end
@@ -68,6 +71,7 @@ class ResourceImportRow < ApplicationRecord
   def skip?
     value = value_for("special_instructions")
     return false if value.blank?
+
     value.split(";").map(&:strip).include?("skip")
   end
 

@@ -58,6 +58,7 @@ module Ingestions
 
       def convert_body
         return unless source_body.present?
+
         source_path_map = text.source_path_map
         source_map = text.section_source_map
         transform_doc_uris(doc, source_path_map,
@@ -67,6 +68,7 @@ module Ingestions
 
       def convert_body_to_json
         return unless body.present?
+
         Serializer::Html.serialize_as_json(body) do |json|
           if json.blank?
             error_string(body)
@@ -81,6 +83,7 @@ module Ingestions
           tag_name, attr_name = set
           doc.css(tag_name).each do |node|
             next unless node.attributes[attr_name]
+
             transform_node_uri(node, attr_name, source_path_map,
                                source_map, source_path)
           end

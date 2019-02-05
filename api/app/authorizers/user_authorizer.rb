@@ -11,6 +11,7 @@ class UserAuthorizer < ApplicationAuthorizer
 
   def self.creatable_by?(user, _options = {})
     return true unless user
+
     admin_permissions?(user)
   end
 

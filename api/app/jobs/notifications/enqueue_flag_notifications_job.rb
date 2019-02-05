@@ -6,6 +6,7 @@ module Notifications
       ensure_resource(flag_id)
       outcome = Notifications::FetchUsersForFlagNotification.run
       raise "Unable to fetch users for flag notification" unless outcome.valid?
+
       outcome.result.pluck(:id).each do |user_id|
         Notifications::SendFlagNotificationJob.perform_later(user_id, flag_id)
       end

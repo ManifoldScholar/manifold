@@ -16,10 +16,12 @@ class Comment < ApplicationRecord
   # Scopes
   scope :by_subject, lambda { |subject|
     next all unless subject.present?
+
     where(subject_id: subject.id)
   }
   scope :by_ids, lambda { |ids|
     next all unless ids.present?
+
     where(id: ids)
   }
 

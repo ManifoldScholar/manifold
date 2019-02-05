@@ -24,9 +24,7 @@ module ManifoldEnv
     end
 
     def <=>(other)
-      unless other.kind_of?(self.class)
-        raise TypeError, "Cannot compare #{self.class} with #{other.class}"
-      end
+      raise TypeError, "Cannot compare #{self.class} with #{other.class}" unless other.kind_of?(self.class)
 
       name <=> other.name
     end

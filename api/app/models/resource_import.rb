@@ -103,7 +103,7 @@ class ResourceImport < ApplicationRecord
   end
 
   def title_mapped?
-    column_automap.values.include? "title"
+    column_automap.value?("title")
   end
 
   def import_errors?

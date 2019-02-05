@@ -40,6 +40,7 @@ module Api
 
       def filter_options
         return subject_filter_params if params&.dig(:unpaginated)
+
         with_pagination!(subject_filter_params)
       end
 

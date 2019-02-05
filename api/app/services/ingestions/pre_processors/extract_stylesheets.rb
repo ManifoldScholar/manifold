@@ -92,6 +92,7 @@ module Ingestions
 
       def raw_styles(node)
         return node.content unless external?(node)
+
         context.read(source_path_for_file(node))
       end
 
@@ -118,6 +119,7 @@ module Ingestions
       def external?(node)
         return true if node.name == "link"
         return false if node.name == "style"
+
         raise IngestionError, "Invalid style chunk"
       end
 

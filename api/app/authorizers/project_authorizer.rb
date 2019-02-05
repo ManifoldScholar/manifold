@@ -24,6 +24,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # below.
   def self.scope_updatable_projects(user)
     return Project.all if marketeer_permissions?(user)
+
     Project.with_roles(
       [Role::ROLE_PROJECT_RESOURCE_EDITOR, Role::ROLE_PROJECT_EDITOR], user
     )
@@ -58,6 +59,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # the project to see it.
   def readable_by?(user, options = {})
     return true unless resource.draft?
+
     drafts_readable_by?(user, options)
   end
 

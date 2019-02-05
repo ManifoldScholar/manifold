@@ -91,15 +91,18 @@ class Resource < ApplicationRecord
   # Scopes
   scope :by_project, lambda { |project|
     return all unless project.present?
+
     where(project: project)
   }
   scope :by_resource_collection, lambda { |collection|
     return all unless collection.present?
+
     joins(:collection_resources)
       .where("collection_resources.resource_collection_id = ?", collection)
   }
   scope :by_kind, lambda { |kind|
     return all unless kind.present?
+
     where(kind: kind)
   }
   scope :with_collection_order, lambda { |collection_id|
@@ -110,6 +113,7 @@ class Resource < ApplicationRecord
   }
   scope :with_order, lambda { |by|
     return order(:created_at, :sort_title) unless by.present?
+
     order(by)
   }
 
@@ -150,6 +154,7 @@ class Resource < ApplicationRecord
 
   def fetch_thumbnail?
     return unless Thumbnail::Fetcher.accepts?(self)
+
     !variant_thumbnail.present? || previous_changes.key?(:external_id)
   end
 
@@ -172,6 +177,7 @@ class Resource < ApplicationRecord
     sub_kind.presence
     return self.kind = determine_kind unless kind
     return self.kind = kind.downcase if ALLOWED_KINDS.include?(kind.downcase)
+
     self.kind = determine_kind # fallback
   end
 
@@ -192,6 +198,7 @@ class Resource < ApplicationRecord
     return :video if sub_kind == "external_video"
     return :audio if ["mp3"].include?(ext)
     return :link if !attachment.present? && !external_url.blank?
+
     # We return a default because we always want the resource kind to be valid. If it's
     # not valid, we have a problem because it will prevent Paperclip from processing
     # attachments.
@@ -249,6 +256,7 @@ class Resource < ApplicationRecord
 
   def set_fingerprint!
     return if fingerprint.present?
+
     self.fingerprint = generate_fingerprint fingerprint_candidates
   end
 

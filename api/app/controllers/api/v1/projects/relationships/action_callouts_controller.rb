@@ -32,6 +32,7 @@ module Api
 
           def location
             return "" unless @action_callout.persisted?
+
             api_v1_action_callout_url(@action_callout, project_id: @project.id)
           end
 

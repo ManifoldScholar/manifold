@@ -119,6 +119,7 @@ class ApplicationController < ActionController::API
   def authority_forbidden(error)
     Authority.logger.warn(error.message)
     return authority_forbidden_resource_class(error) if error.resource.is_a?(Class)
+
     authority_forbidden_resource_instance(error)
   end
 

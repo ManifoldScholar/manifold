@@ -14,6 +14,7 @@ class ProjectCollectionAuthorizer < ApplicationAuthorizer
 
   def readable_by?(user, _options = {})
     return true if resource.visible?
+
     creator_or_has_marketeer_permissions?(user, resource)
   end
 

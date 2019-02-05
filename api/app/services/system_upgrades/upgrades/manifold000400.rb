@@ -71,6 +71,7 @@ module SystemUpgrades
         Project.find_each do |project|
           next unless project.respond_to? :tweet_fetch_config
           next unless project.tweet_fetch_config.dig("following").is_a?(Array)
+
           project.tweet_fetch_config["following"].each do |following|
             q = project.twitter_queries.create(
               query: build_query(following),

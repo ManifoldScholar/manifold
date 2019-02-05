@@ -76,6 +76,7 @@ module Importer
       drive_sheet = @project_json[:resource_drive_sheet]
       drive_dir = @project_json[:resource_drive_dir]
       return unless !drive_sheet.blank? && !drive_dir.blank?
+
       importer = Importer::DriveResources.new(project.id, drive_sheet, drive_dir,
                                               @creator, @logger)
       importer.import
@@ -96,6 +97,7 @@ module Importer
     def import_subject(project)
       name = @project_json.dig(:relationships, :subject)
       return unless name
+
       @logger.info "  Importing project subject: #{name}"
       subject = Subject.find_or_create_by(name: name)
       project.subjects << subject unless project.subjects.include? subject
@@ -104,6 +106,7 @@ module Importer
     def import_collaborators(project)
       makers_json = @project_json.dig(:relationships, :makers)
       return unless makers_json
+
       touched_collaborator_ids = []
       makers_json.each do |maker_json|
         @logger.info "  Importing project maker: #{maker_json[:attributes][:name]}"
@@ -141,6 +144,7 @@ module Importer
 
     def import_texts(project, texts, **attrs)
       return unless texts
+
       texts = texts.is_a?(Array) ? texts : [texts]
       texts.each do |text_file_name|
         text_path = "#{@path}/texts/#{text_file_name}"
@@ -157,6 +161,7 @@ module Importer
     def create_twitter_queries(project)
       twitter_queries = @project_json[:twitter_queries]
       return unless twitter_queries.present?
+
       @logger.info "  Creating project twitter queries"
       twitter_queries.each do |query|
         TwitterQuery.create(project: project, query: query, creator: @creator)
@@ -200,5 +205,4 @@ module Importer
       JSON.parse(read_file(file)).deep_symbolize_keys
     end
   end
-  # rubocop:enable ClassLength
 end

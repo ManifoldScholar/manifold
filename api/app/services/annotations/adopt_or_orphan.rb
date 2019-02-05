@@ -89,10 +89,12 @@ module Annotations
           if start_match?(compare_subject, from_start)
             compare_subject.start_with?(from_start)
             return {} if candidates[:start_node].present?
+
             candidates[:start_node] = node[:node_uuid]
             candidates[:start_char] = index + 1
           elsif end_match?(compare_subject, from_end)
             return {} if candidates[:end_node].present?
+
             candidates[:end_node] = node[:node_uuid]
             candidates[:end_char] = index
           end

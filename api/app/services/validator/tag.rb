@@ -40,6 +40,7 @@ module Validator
     def apply_tag_validation!(node)
       name = name_from_node(node)
       return unless @tag_validators_map.key?(name)
+
       @tag_validators_map[name].validate_node!(node)
     end
 
@@ -50,6 +51,7 @@ module Validator
       styles = read_styles_string(node)
       name = name_from_node(node)
       return if styles.blank?
+
       valid_styles = @css_validator.validate_declarations(styles, name)
       if valid_styles.empty?
         remove_attribute!(node, "style")
@@ -64,6 +66,7 @@ module Validator
     def calculate_attribute_exclusions(node)
       exclude = node.attributes.select { |k| @config.attribute_exclusions.include? k }
       return exclude unless @config.attribute_exclusion_exceptions[node.name]
+
       exclude.reject do |k|
         @config.attribute_exclusion_exceptions[node.name].allow.include? k
       end
@@ -124,8 +127,10 @@ module Validator
       name = attribute_name(attribute)
       value = attribute_value(attribute)
       return unless pixels?(value)
+
       max = transform[:max]
       return unless strip_unit(value).to_i > max
+
       node[name] = "#{max}px"
     end
 
@@ -145,6 +150,7 @@ module Validator
     def transform_namespaced!(node, attribute, _transform)
       name = attribute_name(attribute)
       return unless name.include? ":"
+
       new_name = "data-#{name.tr(':', '-')}"
       node[new_name] = attribute_value(attribute)
       node.delete(name)
@@ -188,8 +194,10 @@ module Validator
     # @return [String]
     def strip_unit(value)
       return "" if value.blank?
+
       unit = unit(value)
       return value if unit.blank?
+
       value.gsub(unit, "")
     end
 

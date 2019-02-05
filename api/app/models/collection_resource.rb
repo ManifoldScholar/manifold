@@ -19,6 +19,7 @@ class CollectionResource < ApplicationRecord
 
   def collection_and_resource_must_belong_to_same_project
     return unless resource_collection.project != resource.project
+
     errors.add(:resource, "can't belong to a different project")
   end
 

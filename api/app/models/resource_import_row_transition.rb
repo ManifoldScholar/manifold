@@ -13,6 +13,7 @@ class ResourceImportRowTransition < ApplicationRecord
                       .order(:sort_key)
                       .last
     return unless last_transition.present?
+
     last_transition.update_column(:most_recent, true)
   end
   # rubocop:enable Rails/SkipsModelValidations

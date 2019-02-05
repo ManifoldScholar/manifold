@@ -20,6 +20,7 @@ module WithParsedName
     parts = Namae::Name.parse(name).to_h.compact
     parts.each do |key, value|
       next unless respond_to? KEY_MAP[key]
+
       write_attribute(KEY_MAP[key], value)
     end
   end
@@ -27,6 +28,7 @@ module WithParsedName
 
   def ensure_nickname
     return unless respond_to? :nickname
+
     self.nickname = first_name if nickname.blank?
   end
 
@@ -42,6 +44,7 @@ module WithParsedName
 
   def nickname_not_blank!
     return unless respond_to? :nickname
+
     errors.add(:nickname, "can't be blank") if nickname.blank?
   end
 

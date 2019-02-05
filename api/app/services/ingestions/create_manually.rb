@@ -34,8 +34,8 @@ module Ingestions
         storage: :store,
         id: source_id,
         metadata: {
-          filename:  source_id,
-          size:      source.size,
+          filename: source_id,
+          size: source.size,
           mime_type: Marcel::MimeType.for(source)
         }
       }.deep_stringify_keys

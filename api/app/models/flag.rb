@@ -11,10 +11,12 @@ class Flag < ApplicationRecord
   # Scopes
   scope :by_creator, lambda { |creator|
     next all unless creator.present?
+
     where(creator: creator)
   }
   scope :by_flaggable, lambda { |flaggable|
     next all unless flaggable.present?
+
     where(flaggable: flaggable)
   }
 

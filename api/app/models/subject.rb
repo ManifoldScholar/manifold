@@ -19,11 +19,13 @@ class Subject < ApplicationRecord
 
   scope :by_featured, lambda { |featured|
     return all unless featured.present?
+
     joins(:projects).where("projects.featured = true")
   }
 
   scope :by_used, lambda { |used|
     return all unless used.present?
+
     joins(:project_subjects).where("project_subjects.id IS NOT NULL")
   }
 

@@ -89,6 +89,7 @@ module Ingestions
       def rel_path_for_file(filename, exts)
         file = source_path_for_file filename, exts
         return nil unless file.present?
+
         rel file
       end
 
@@ -105,6 +106,7 @@ module Ingestions
       def derelativize_ingestion_path(source, path)
         return path if url?(path)
         return path if Pathname.new("path").absolute?
+
         rel(File.expand_path(File.join(root_path, File.dirname(source), path)))
       end
 
@@ -114,6 +116,7 @@ module Ingestions
 
       def extension(path = source_path)
         return nil unless source?(path)
+
         File.extname(basename(path)).split(".").last
       end
 
@@ -137,6 +140,7 @@ module Ingestions
 
       def source_url(path = source_path)
         return nil unless url?
+
         path
       end
 

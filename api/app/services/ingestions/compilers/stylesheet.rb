@@ -45,6 +45,7 @@ module Ingestions
 
       def ingestion_source
         return nil unless attributes[:source_identifier]
+
         text.ingestion_sources.find_by(source_identifier: attributes[:source_identifier])
       end
 

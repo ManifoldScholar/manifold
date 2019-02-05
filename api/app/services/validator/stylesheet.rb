@@ -16,6 +16,7 @@ module Validator
     def validate(css)
       reset
       return output unless css?(css)
+
       css = encode_css_for_parser(extract_at_rules(css))
       @parser.load_string!(css.dup)
       parser.each_selector(&method(:visit_selector))
@@ -53,6 +54,7 @@ module Validator
         new_value = map_value(property, value)
         new_value = maybe_transform_font_sizes(new_value) if property == "font-size"
         next unless allowed_property?(property, selector, new_value)
+
         cleaned.push compose_declaration(property, new_value, important)
       end
       cleaned
@@ -72,6 +74,7 @@ module Validator
     def maybe_transform_font_sizes(value)
       calculated = calc_rel_font_size_ratio value
       return "#{calculated.to_f}rem" if calculated.present?
+
       value
     end
 
@@ -82,6 +85,7 @@ module Validator
       cleaned = []
       parse_declarations(declarations).each_declaration do |property, value, important|
         next unless invertable_property?(property, value)
+
         inverted_value = inverted_value(value)
         cleaned.push compose_declaration(property, inverted_value, important)
       end
@@ -128,6 +132,7 @@ module Validator
     # @return [Boolean]
     def css?(css)
       return false if css.blank?
+
       true
     end
 
@@ -136,6 +141,7 @@ module Validator
     # @return [nil]
     def visit_selector(selector, declarations, *_args)
       return unless allowed_selector?(selector)
+
       write_rule_set(selector, declarations)
       maybe_write_inverted_rule_set(selector, declarations)
       nil
@@ -162,6 +168,7 @@ module Validator
       scoped_selector = "#{@config.dark_scope} #{adjusted_selector}"
       inverted_declarations = create_inverted_declarations(declarations)
       return nil unless inverted_declarations.any?
+
       @out << compose_rule_set(scoped_selector, inverted_declarations)
       nil
     end
@@ -171,6 +178,7 @@ module Validator
       pattern = /\[(.*\|[a-z\-_]+)(|=|~=|\|=|\$=|\*=).*\]/
       search = selector[pattern, 1]
       return selector unless search
+
       replace = "data-#{search.tr('|', '-')}"
       selector.gsub(search, replace)
     end
@@ -210,6 +218,7 @@ module Validator
     # @return [Boolean]
     def grayscale_value?(value)
       return false if value == "inherit"
+
       hex_value = hex_color_value(value)
       rgb_value = ::Paleta::Color.new(:hex, hex_value).to_array(:rgb)
       rgb_value.all? { |c| c.between?(rgb_value[0].to_i - 5, rgb_value[0].to_i + 5) }
@@ -222,6 +231,7 @@ module Validator
     # @return [String]
     def scope_selector(selector)
       return selector if scoped?(selector)
+
       "#{@config.scope} #{selector}"
     end
 
@@ -233,6 +243,7 @@ module Validator
       out = value
       @config.value_maps.each do |value_map|
         next if (property =~ value_map.match).nil?
+
         match = value_map[:entries].detect { |kvp| out == kvp[0] }
         out = match[1] unless match.nil?
       end
@@ -274,6 +285,7 @@ module Validator
     # @return [Boolean]
     def invertable_property?(property, value)
       return false unless @config.invertables.properties.include.include? property
+
       grayscale_value?(value)
     end
 
@@ -287,6 +299,7 @@ module Validator
       return false unless exclusion.key?(:exclude)
       return false unless exclusion.exclude.include? property
       return true unless exclusion.key?(:condition)
+
       exclusion_condition_matches?(exclusion, selector, property, value)
     end
 
@@ -300,6 +313,7 @@ module Validator
     def exclusion_condition_matches?(exclusion, selector, _property, value)
       return true unless exclusion.key?(:condition)
       raise InvalidCondition unless valid_selector_condition?(exclusion.condition)
+
       condition = exclusion.condition
       type = exclusion.condition.type
       case type
@@ -313,13 +327,16 @@ module Validator
 
     def condition_value_matches?(condition, value)
       return false if value.blank?
+
       !(value =~ condition.match).nil?
     end
 
     def condition_selector_tag_matches?(condition, selector)
       return false if selector.blank?
+
       compare = tag_from_selector(selector)
       return false if compare.blank?
+
       !(compare =~ condition.match).nil?
     end
 
@@ -340,6 +357,7 @@ module Validator
     def tag_from_selector(selector)
       clean = selector.gsub(/\[.*\]/, "")
       return clean if clean.blank?
+
       # Find last element in combinatory selectors, strip psuedo selectors.
       tag = clean.split(/(\s?[~>+]\s?|\s)/).last.split(/[:]/).first
       tag

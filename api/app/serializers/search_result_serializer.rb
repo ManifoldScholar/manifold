@@ -36,6 +36,7 @@ class SearchResultSerializer < ApplicationSerializer
   def parents
     message = "parents_for_#{object._type}"
     return send message if respond_to? message
+
     {}
   end
 

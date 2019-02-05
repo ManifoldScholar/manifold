@@ -6,6 +6,7 @@ module Concerns
     class_methods do
       def serialized_abilities_for(user)
         return {} if user.blank?
+
         authorizer.to_serializable_hash_for(user)
       end
     end
@@ -16,6 +17,7 @@ module Concerns
     # @return [{ Symbol => Boolean }]
     def serialized_abilities_for(user, **options)
       return {} if user.blank?
+
       authorizer.to_serializable_hash_for(user, **options)
     end
   end

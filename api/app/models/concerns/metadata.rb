@@ -6,6 +6,7 @@ module Metadata
 
   def filter_metadata(properties)
     return unless metadata_changed?
+
     write_attribute(:metadata, metadata.slice(*properties))
   end
 
@@ -18,12 +19,14 @@ module Metadata
   def metadata_formatted
     metadata.each_with_object({}) do |(k, _v), out|
       next unless respond_to? "#{k}_formatted".to_sym
+
       out[k] = send("#{k}_formatted")
     end
   end
 
   def preformat_keywords
     return unless metadata.key? "keywords"
+
     keywords = metadata["keywords"].split(/[,;]/)
     metadata["keywords"] = keywords&.reject(&:blank?)&.map(&:strip)&.join(", ")
   end

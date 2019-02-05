@@ -62,6 +62,7 @@ module Api
 
       def set_serializer
         return error_serializer unless @stylesheet.valid?
+
         StylesheetFullSerializer
       end
 

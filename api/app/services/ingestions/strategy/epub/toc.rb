@@ -23,6 +23,7 @@ module Ingestions
 
         def toc_label_for_cont_doc(contdoc_path)
           return unless @nav_xml && @nav_path
+
           rel_path = @context.relativize_ingestion_path(@nav_path, contdoc_path)
           link = @nav_xml.at_xpath(selector_toc_label % rel_path)
           link.text if link&.element_children&.empty?

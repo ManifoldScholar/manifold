@@ -25,6 +25,7 @@ module ResourceImports
 
     def make_row!(row)
       return unless row.any?(&:present?)
+
       compose ResourceImports::MakeRow,
               resource_import: resource_import,
               raw_row: row,
@@ -35,6 +36,7 @@ module ResourceImports
       content = File.read(file_path)
       detection = CharlockHolmes::EncodingDetector.detect(content)
       return file_path if detection[:encoding] == VALID_ENCODING
+
       CharlockHolmes::Converter.convert content, detection[:encoding], VALID_ENCODING
     end
   end

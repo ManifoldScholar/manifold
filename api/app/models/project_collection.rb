@@ -29,6 +29,7 @@ class ProjectCollection < ApplicationRecord
   has_many :collection_projects, dependent: :destroy, inverse_of: :project_collection do
     def with_collection_order
       return with_manual_order if proxy_association.owner.manually_sorted?
+
       with_dynamic_order
     end
 
@@ -52,6 +53,7 @@ class ProjectCollection < ApplicationRecord
   }
   scope :with_order, lambda { |by|
     return order(position: :asc) unless by.present?
+
     order(by)
   }
   scope :after_homepage_start_date, lambda { |date|
@@ -105,6 +107,7 @@ class ProjectCollection < ApplicationRecord
     return true unless homepage_end_date.present?
     return true if homepage_start_date.nil?
     return true if homepage_start_date <= homepage_end_date
+
     errors.add(:homepage_start_date, "must be before or on homepage end date")
   end
 
@@ -112,16 +115,19 @@ class ProjectCollection < ApplicationRecord
     return true unless homepage_start_date.present?
     return true if homepage_end_date.nil?
     return true if homepage_end_date >= homepage_start_date
+
     errors.add(:homepage_end_date, "must be after or on homepage start date")
   end
 
   def reset_sort_order!
     return unless smart? && manually_sorted?
+
     self.sort_order = "created_at_desc"
   end
 
   def cache_collection_projects!
     return unless smart?
+
     ProjectCollections::CacheCollectionProjects.run project_collection: self
   end
 end

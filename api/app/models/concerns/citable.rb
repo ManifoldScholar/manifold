@@ -31,14 +31,17 @@ module Citable
 
   def update_citations
     return clear_citations unless citable?
+
     generator = Citation::Generator.new
     generated_citations = generator.cite(self, citation_styles)
     return unless citations_changed?(generated_citations)
+
     self.citations = generated_citations
   end
 
   def update_citable_children
     return unless citations != citations_was
+
     UpdateCitatableChildren.perform_later(self)
   end
 

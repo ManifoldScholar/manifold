@@ -12,6 +12,7 @@ module Attachments
     def execute
       versions
       return versions unless can_process?
+
       process_versions!
 
       versions
@@ -39,6 +40,7 @@ module Attachments
 
     def can_process?
       return false if upload.size > 200_000_000
+
       image? || pdf?
     end
 

@@ -23,6 +23,7 @@ module Api
       def update
         user = User.by_reset_token(params[:reset_token])
         return invalid_token_error unless user&.valid_token?
+
         user.update_password(params[:password], params[:password_confirmation])
         if user.save
           render_single_resource(user)

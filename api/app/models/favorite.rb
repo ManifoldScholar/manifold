@@ -21,6 +21,7 @@ class Favorite < ApplicationRecord
   def project
     return favoritable if favoritable.instance_of?(Project)
     return favoritable.project if favoritable.respond_to?(:project)
+
     nil
   end
 

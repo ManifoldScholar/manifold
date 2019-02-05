@@ -21,6 +21,7 @@ class CurrentUserSerializer < UserSerializer
 
   def the_user
     return current_user unless instance_options.key?(:override_current_user)
+
     instance_options[:override_current_user]
   end
 

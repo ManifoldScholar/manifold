@@ -53,9 +53,7 @@ module Ingestions
       # @raise [Ingestions::InvalidDefinition]
       # @return [Ingestions::Configuration::AbstractDefinition]
       def add(position: nil, **options)
-        unless configuring?
-          raise Ingestions::Configuration::Error, "Not in a configure block; cannot add directly"
-        end
+        raise Ingestions::Configuration::Error, "Not in a configure block; cannot add directly" unless configuring?
 
         options[:position] = calculate_position(position)
 

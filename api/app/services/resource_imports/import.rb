@@ -5,6 +5,7 @@ module ResourceImports
 
     def execute
       return complete_import if resource_import.data_rows.count.zero?
+
       queue_rows
       resource_import.save!
     end

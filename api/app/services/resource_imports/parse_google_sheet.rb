@@ -15,6 +15,7 @@ module ResourceImports
 
     def make_row!(row)
       return unless row.any?(&:present?)
+
       compose ResourceImports::MakeRow,
               resource_import: resource_import,
               raw_row: row,

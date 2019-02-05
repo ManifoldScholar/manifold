@@ -112,6 +112,7 @@ module Importer
         col = (1..@worksheet.num_cols).find { |c| @worksheet[2, c] == key }
         # rubocop:disable Style/FormatStringToken
         raise(GoogleDrive::Error, "Column doesn't exist: %p" % key) unless col
+
         # rubocop:enable Style/FormatStringToken
         col
       end

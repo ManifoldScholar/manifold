@@ -6,6 +6,7 @@ class IngestionChannel < ApplicationCable::Channel
 
   def subscribed
     return unless current_user.can_read? ingestion
+
     stream_for ingestion
   end
 

@@ -20,6 +20,7 @@ class ApplicationSerializer < ActiveModel::Serializer
   def current_user_is_creator
     return false unless current_user
     return false unless object.respond_to? :creator
+
     object.creator == current_user
   end
 end

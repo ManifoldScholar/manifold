@@ -7,6 +7,7 @@ module Notifications
     def execute
       events = compose Notifications::ComposeDigestEvents, inputs
       return if events.values.reject(&:blank?).none? # No news is... not news
+
       NotificationMailer
         .digest(user, NotificationFrequency.fetch(frequency), events)
         .deliver

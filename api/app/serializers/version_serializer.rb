@@ -22,6 +22,7 @@ class VersionSerializer < ApplicationSerializer
   def item_display_name
     return object.item_title_formatted if object.item.respond_to? :title_formatted
     return object.item_title if object.item.respond_to? :title
+
     object.item.id
   end
 end

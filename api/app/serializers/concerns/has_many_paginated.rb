@@ -26,6 +26,7 @@ module HasManyPaginated
   def has_many_links(association_name, paginated)
     route = "api_v1_#{object.class.name.underscore}_relationships_#{association_name}_path"
     return {} unless Rails.application.routes.url_helpers.method_defined? route
+
     per_page = paginated.limit_value
 
     {}.tap do |hash|
