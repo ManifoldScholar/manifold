@@ -71,7 +71,7 @@ class Text < ApplicationRecord
   has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable
   has_many :annotations, through: :text_sections
   has_one :text_created_event, -> { where event_type: EventType[:text_added] },
-          class_name: Event, as: :subject, dependent: :destroy, inverse_of: :subject
+          class_name: "Event", as: :subject, dependent: :destroy, inverse_of: :subject
   has_one :toc_section,
           -> { where(kind: TextSection::KIND_NAVIGATION) },
           class_name: "TextSection",

@@ -30,7 +30,7 @@ class Comment < ApplicationRecord
   has_many :children, class_name: "Comment", foreign_key: :parent_id, dependent: :destroy,
                       inverse_of: :parent, counter_cache: :children_count
   has_one :comment_created_event, -> { where event_type: EventType[:comment_created] },
-          class_name: Event,
+          class_name: "Event",
           as: :subject,
           dependent: :destroy,
           inverse_of: :subject

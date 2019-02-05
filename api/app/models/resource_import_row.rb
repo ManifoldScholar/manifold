@@ -62,7 +62,7 @@ class ResourceImportRow < ApplicationRecord
   end
 
   def update?
-    resource is_a? Resource
+    resource.is_a? Resource
   end
 
   def skip?

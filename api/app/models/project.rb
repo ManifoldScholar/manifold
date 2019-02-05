@@ -61,9 +61,6 @@ class Project < ApplicationRecord
   # URLs
   friendly_id :title, use: :slugged
 
-  # Rolify
-  resourcify
-
   # PaperTrail
   has_paper_trail on: [:update],
                   skip:

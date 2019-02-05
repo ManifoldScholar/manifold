@@ -28,7 +28,7 @@ module Refinements
       end
     end
 
-    refine ResourceCollection::ActiveRecord_Relation do
+    refine ResourceCollection.const_get(:ActiveRecord_Relation) do
       delegate :table_name, to: :klass
 
       delegate :quoted_table_name, to: :klass

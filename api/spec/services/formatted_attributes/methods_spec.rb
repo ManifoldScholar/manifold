@@ -25,13 +25,12 @@ RSpec.describe FormattedAttributes::Methods do
 
   describe 'public instance methods' do
     subject { generated_module.instance_methods }
-
     specify { is_expected.to include method_name_for(:refresh) }
     specify { is_expected.to include method_name_for(:format) }
     specify { is_expected.to include method_name_for(:textify) }
     specify { is_expected.to include method_name_for(:formatted) }
     specify { is_expected.to include method_name_for(:plaintext) }
-    specify { is_expected.to include method_name_for(:changed?) }
+    specify { is_expected.to include method_name_for(:saved_changed_to?) }
   end
 
   describe 'private instance methods' do
