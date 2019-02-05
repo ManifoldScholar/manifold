@@ -27,7 +27,7 @@
   &__button {
     @include buttonUnstyled;
     @include utilityPrimary;
-    height: 3.3em;
+    padding: 8px 4px;
     font-size: 12px;
     font-weight: $semibold;
     color: $neutral45;
@@ -39,16 +39,11 @@
     }
 
     &--draggable {
+      display: inline-block;
       cursor: move; // fallback for older browsers
       cursor: grab;
       user-select: none;
       -webkit-touch-callout: none;
-    }
-
-    &:not(:last-child) {
-      svg {
-        margin-right: 8px;
-      }
     }
 
     &:focus {
