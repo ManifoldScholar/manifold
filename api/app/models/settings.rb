@@ -60,6 +60,7 @@ class Settings < ApplicationRecord
     current = self[section]
     # raise TypeError, "#{section} is not mergeable!" unless current.respond_to?(:merge)
     return unless current.respond_to?(:merge)
+
     self[section] = current.merge(new_values)
   end
 
@@ -97,6 +98,7 @@ class Settings < ApplicationRecord
     # @return [void]
     def potentially_update_from_environment!
       return unless update_from_environment?
+
       instance.update_from_environment!
     end
 

@@ -149,11 +149,13 @@ class Project < ApplicationRecord
   # Scopes
   scope :by_featured, lambda { |featured|
     next all if featured.nil?
+
     where(featured: to_boolean(featured)).order("RANDOM()").limit(4)
   }
 
   scope :by_subject, lambda { |subject|
     next all unless subject.present?
+
     where(id: unscoped.joins(:project_subjects)
                       .merge(ProjectSubject.by_subject(subject)).select(:project_id))
   }
@@ -164,18 +166,21 @@ class Project < ApplicationRecord
 
   scope :with_order, lambda { |by = nil|
     next order(:sort_title, :title) unless by.present?
+
     order(by)
   }
 
   scope :with_read_ability, lambda { |user = nil|
     next all if user && Project.drafts_readable_by?(user)
     next where(draft: false) unless user
+
     updatable_projects = Project.authorizer.scope_updatable_projects(user).pluck(:id)
     where(draft: false).or(where(id: updatable_projects))
   }
 
   scope :with_update_ability, lambda { |user = nil|
     next none unless user && Project.updatable_by?(user)
+
     Project.authorizer.scope_updatable_projects(user)
   }
 
@@ -233,6 +238,7 @@ class Project < ApplicationRecord
 
   def self.filter_if_not_featured(params, scope: all, user: nil)
     return scope.by_featured(true) if params["featured"]
+
     Project.filter(params, scope: scope, user: user)
   end
 
@@ -279,10 +285,12 @@ class Project < ApplicationRecord
 
   def assign_default_meta(attr)
     return if metadata[attr].present?
+
     settings = Settings.instance
     default = settings.general.dig("default_#{attr}")
 
     return unless default.present?
+
     metadata[attr] = default
   end
 
@@ -292,6 +300,7 @@ class Project < ApplicationRecord
 
   def queue_reindex_children_job
     return unless @reindex_children
+
     ProjectJobs::ReindexChildren.perform_later(self)
     @reindex_children = false
   end

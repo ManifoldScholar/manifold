@@ -76,6 +76,7 @@ module Search
     def search_indexes
       indexes = []
       return indexes unless facets.any?
+
       facets.each do |facet|
         indexes.push facet.safe_constantize if ALLOWED_FACETS.include? facet
       end

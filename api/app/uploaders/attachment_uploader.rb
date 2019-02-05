@@ -14,6 +14,7 @@ class AttachmentUploader < Shrine
     return nil unless mime_type && MANIFOLD_CONFIG.attachments
                                                   .validations[:image][:allowed_mime]
                                                   .include?(mime_type)
+
     analyzers[:mini_magick].call io
   }
 
@@ -29,9 +30,7 @@ class AttachmentUploader < Shrine
     attachment_validation = MANIFOLD_CONFIG.attachments
                                            .validations[attachment_options[:type]]
 
-    if attachment_options[:validate_content_type]
-      validate_mime_type_inclusion attachment_validation[:allowed_mime]
-    end
+    validate_mime_type_inclusion attachment_validation[:allowed_mime] if attachment_options[:validate_content_type]
 
     validate_extension_inclusion attachment_validation[:allowed_ext]
   end

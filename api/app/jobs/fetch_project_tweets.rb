@@ -13,6 +13,7 @@ class FetchProjectTweets < ApplicationJob
   def perform(project_id)
     project = Project.find(project_id)
     return unless project
+
     Tweet::Fetcher.new.fetch(project)
   end
 end

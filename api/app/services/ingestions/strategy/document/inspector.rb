@@ -80,11 +80,13 @@ module Ingestions
 
         def first_tag_content(tag)
           return unless index_path.present?
+
           index_parsed.at("//#{tag}")&.content
         end
 
         def dublin_core_metadata(name)
           return unless index_path.present?
+
           index_parsed.at("//meta[@name=\"#{name}\"]")&.attribute("content")&.value
         end
 
@@ -98,6 +100,7 @@ module Ingestions
 
         def source
           return convertible_sources.first if convertible_sources.length == 1
+
           convertible_sources.detect do |convertible_source|
             File.basename(convertible_source).downcase.start_with? "index."
           end

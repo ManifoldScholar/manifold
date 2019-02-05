@@ -7,6 +7,7 @@ module Notifications
       user = User.find(user_id)
       resource = Flag.find(flag_id)&.flaggable
       raise ActiveRecord::RecordNotFound unless resource.present?
+
       NotificationMailer.flag_notification(user, resource).deliver
     rescue ActiveRecord::RecordNotFound
       Rails.logger.error("ActiveRecord::RecordNotFound error in SendFlagNotificationJob")

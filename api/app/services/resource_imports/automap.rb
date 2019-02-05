@@ -28,6 +28,7 @@ module ResourceImports
 
     def similarity(column, header)
       return 0.0 if column.blank? || header.blank?
+
       column_chunks = trigramchunk(column.downcase)
       header_chunks = trigramchunk(header.downcase)
       all = (column_chunks | header_chunks).size
@@ -56,6 +57,7 @@ module ResourceImports
       headers = ri.headers
       attributes = ResourceImport.available_columns.map
       return map unless headers
+
       matches = []
       headers.each do |header_index, header|
         attributes.each do |attribute|
@@ -75,6 +77,7 @@ module ResourceImports
         key = match[:col_num].to_i
         attribute = match[:attribute]
         next if taken_attributes.include?(attribute) || taken_keys.include?(key)
+
         taken_attributes << attribute
         taken_keys << key
         map[key] = attribute

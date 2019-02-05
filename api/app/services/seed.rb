@@ -13,6 +13,7 @@ class Seed
 
   def self.make_feature(logger, creator)
     return if Feature.exists?
+
     logger.info("Creating placeholder feature".green)
     # rubocop:disable Metrics/LineLength
     Feature.create(

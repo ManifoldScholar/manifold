@@ -30,14 +30,17 @@ class Event < ApplicationRecord
   scope :created, ->(value) { where(created_at: value) }
   scope :by_type, lambda { |type|
     next all unless type.present?
+
     where(event_type: type)
   }
   scope :excluding_type, lambda { |type|
     next all unless type.present?
+
     where.not(event_type: type)
   }
   scope :by_subject_type, lambda { |type|
     next all unless type.present?
+
     where(subject_type: type)
   }
 
@@ -95,6 +98,7 @@ class Event < ApplicationRecord
     sluggables = %w(Project Resource Text ResourceCollection)
     return nil unless sluggables.include? subject_type
     return subject.slug if subject&.respond_to?(:slug)
+
     nil
   end
 

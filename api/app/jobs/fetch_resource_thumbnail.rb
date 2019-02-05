@@ -10,6 +10,7 @@ class FetchResourceThumbnail < ApplicationJob
   def perform(resource_id)
     resource = Resource.find(resource_id)
     return unless resource
+
     Thumbnail::Fetcher.new.fetch(resource)
   end
 end

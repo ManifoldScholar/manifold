@@ -18,7 +18,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 90
+  Max: 120
 
 Metrics/MethodLength:
   Max: 15
@@ -51,6 +51,9 @@ Style/PercentLiteralDelimiters:
   Enabled: false
 
 Style/SymbolArray:
+  Enabled: false
+
+Style/AccessModifierDeclarations:
   Enabled: false
 
 Rails/Blank:

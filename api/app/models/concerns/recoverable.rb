@@ -5,6 +5,7 @@ module Recoverable
   class_methods do
     def by_reset_token(token)
       return nil unless token.present?
+
       where(reset_password_token: token).first
     end
   end
@@ -33,6 +34,7 @@ module Recoverable
 
   def valid_token?
     return false unless reset_password_token && reset_password_sent_at
+
     reset_password_sent_at > Time.now.utc - 1.hour
   end
 end

@@ -4,6 +4,7 @@ module Tweet
     def fetch(project)
       return unless twitter_configured?
       return unless project.following_twitter_accounts?
+
       project.twitter_queries.active.find_each do |twitter_query|
         fetch_one(twitter_query)
       end
@@ -12,14 +13,13 @@ module Tweet
     # rubocop:disable Metrics/AbcSize
     def fetch_one(twitter_query)
       return unless twitter_configured?
+
       limit = 60
       options = {
         count: limit,
         result_type: twitter_query.result_type
       }
-      if twitter_query.most_recent_tweet_id.present?
-        options[:since_id] = twitter_query.most_recent_tweet_id.to_i
-      end
+      options[:since_id] = twitter_query.most_recent_tweet_id.to_i if twitter_query.most_recent_tweet_id.present?
       results = client.search("#{twitter_query.query} -rt", options).take(limit)
       results.each do |tweet|
         tweet_to_event(tweet, twitter_query)
@@ -36,6 +36,7 @@ module Tweet
       factory = Factory::Event.new
       event = factory.create_from_tweet(tweet, query)
       return if event.valid?
+
       Rails.logger.info(
         "#tweet_to_event created an invalid event: #{event.errors.full_messages}"
       )
@@ -43,6 +44,7 @@ module Tweet
 
     def update_query_most_recent(query, id)
       return unless id
+
       query.most_recent_tweet_id = id
       query.save
     end

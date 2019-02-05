@@ -15,6 +15,7 @@ module Updaters
 
     def adjust_google_config(attrs)
       return attrs unless attrs[:google_service]
+
       service_config = attrs.delete(:google_service)
       raw_data = service_config[:data]
       return unless raw_data.present?

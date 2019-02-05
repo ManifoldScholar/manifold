@@ -78,9 +78,8 @@ module Api
         # apply both the read and update scopes, but then we have to join roles on both
         # which I suspect is less efficient. Note that the with_update_ability is applied
         # automatically through the filterable concern. -ZD
-        unless project_filter_params&.dig(:with_update_ability)
-          return Project.with_read_ability current_user
-        end
+        return Project.with_read_ability current_user unless project_filter_params&.dig(:with_update_ability)
+
         Project.all
       end
 

@@ -61,6 +61,7 @@ module Validator
 
     def ensure_one_parent_node(fragment)
       return fragment if fragment.children.length == 1
+
       container_fragment = Nokogiri::HTML.fragment("<div></div>")
       container_fragment.first_element_child.children = fragment
       container_fragment
@@ -97,11 +98,11 @@ module Validator
     def tag_valid_with_parent?(tag, parent)
       case tag
       when "option"
-        return parent == "select" || parent == "optgroup"
+        return %w(select optgroup).include? parent
       when "optgroup"
         return parent == "select"
       when "tr"
-        return parent == "tbody" || parent == "thead" || parent == "tfoot"
+        return %w(tbody thead tfoot).include? parent
       when "th", "td"
         return parent == "tr"
       when "tbody", "thead", "tfoot"
@@ -109,8 +110,7 @@ module Validator
       when "col"
         return parent == "colgroup"
       when "h1", "h2", "h3", "h4", "h5", "h6"
-        return parent != "h1" && parent != "h2" && parent != "h3" &&
-               parent != "h4" && parent != "h5" && parent != "h6"
+        return %w(h1 h2 h3 h4 h5 h6).exclude? parent
       end
       true
     end

@@ -7,11 +7,13 @@ module TruthyChecks
       return false if [false, "", nil].include? value
       return true if [true, 1, "1"].include? value
       return true if value.casecmp("true").zero?
+
       false
     end
 
     def to_boolean(value)
       return true if truthy?(value)
+
       false
     end
 

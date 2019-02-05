@@ -18,6 +18,7 @@ class AnnotationSerializer < ApplicationSerializer
 
   def flagged
     return 0 unless authenticated?
+
     object.flags.where(creator: current_user).count.positive?
   end
 end

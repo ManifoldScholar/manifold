@@ -7,6 +7,7 @@ class UserSerializer < ApplicationSerializer
 
   def current_user?
     return false unless authenticated?
+
     object.id == current_user.id
   end
   alias is_current_user current_user?

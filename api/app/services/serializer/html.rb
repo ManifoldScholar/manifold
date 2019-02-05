@@ -14,6 +14,7 @@ module Serializer
     def serialize(html, logger = Rails.logger)
       reset
       return if html.blank?
+
       fragment = Nokogiri::HTML.fragment(Validator::Html.new.validate(html))
       node = fragment.children.first
       output = visit(node)
@@ -27,6 +28,7 @@ module Serializer
       node_uuids = recursive_values(:node_uuid, output)
       duplicates = node_uuids.select { |uuid| node_uuids.count(uuid) > 1 }
       return if duplicates.empty?
+
       duplicates.each do |d|
         logger.error("Found duplicate node uuid: #{d}")
       end
@@ -35,6 +37,7 @@ module Serializer
 
     def recursive_values(key, structure, digests = [])
       return digests unless structure.key?(:children)
+
       structure[:children].each do |child|
         digests << child[key] if child.key?(key)
         recursive_values(key, child, digests) if child[:children].is_a? Array
@@ -46,6 +49,7 @@ module Serializer
       representation = {}
       visited = begin_visit(node, representation)
       return nil unless visited
+
       children = traverse(node)
       representation[:children] = children unless children.nil?
       clean_empty_text_nodes!(representation)
@@ -63,10 +67,12 @@ module Serializer
       return unless representation[:node_type] == "element"
       return unless block_level_element?(representation)
       return if representation[:children].nil? || representation[:children]&.empty?
+
       # Node is a block level element with children
       representation[:children].each_with_index do |child, index|
         next if child[:node_type] != "text"
         next unless child[:content].blank?
+
         child[:delete] = true if index.zero?
         child[:delete] = true if (index + 1) == representation[:children].length
         # Between two block level elements
@@ -74,6 +80,7 @@ module Serializer
                     block_level_element?(representation[:children][index - 1]) &&
                     representation[:children][index + 1] &&
                     block_level_element?(representation[:children][index + 1])
+
         representation[:children][index][:delete] = true
       end
       representation[:children] = representation[:children].reject do |child|
@@ -97,11 +104,13 @@ module Serializer
       return begin_visit_element(node, representation) if node.element?
       return begin_visit_comment(node, representation) if node.comment?
       return begin_visit_text(node, representation) if node.text?
+
       false
     end
 
     def begin_visit_element(node, representation)
       return false if ELEMENT_BLACK_LIST.include?(node.name.downcase)
+
       representation[:node_type] = "element"
       representation[:tag] = node.name
       representation[:attributes] = node.attributes

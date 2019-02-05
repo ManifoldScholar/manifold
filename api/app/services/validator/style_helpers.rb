@@ -19,6 +19,7 @@ module Validator
     # rubocop:disable Style/EachWithObject
     def style_string_to_hash(styles)
       return {} if styles.blank?
+
       styles.split(";").map(&:strip).inject({}) do |out, declaration|
         property, value = declaration.split(":").map(&:strip)
         out[property] = value

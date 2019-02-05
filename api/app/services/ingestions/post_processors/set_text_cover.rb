@@ -6,6 +6,7 @@ module Ingestions
 
       def execute
         return unless cover_source.present?
+
         set_text_cover
         report
       end

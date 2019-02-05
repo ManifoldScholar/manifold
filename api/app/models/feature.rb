@@ -22,6 +22,7 @@ class Feature < ApplicationRecord
   # Scopes
   scope :by_home, lambda { |home|
     next all if home.nil?
+
     where(live: true).order("RANDOM()").limit(1)
   }
 

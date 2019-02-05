@@ -20,6 +20,7 @@ class UpdateAnalyticsCache < ApplicationJob
 
   def count_readers_for(base_date)
     return 0 unless @client
+
     start_date, end_date = week_bounds_for(base_date)
 
     query = @client.get_ga_data(

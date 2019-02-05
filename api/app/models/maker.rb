@@ -68,6 +68,7 @@ class Maker < ApplicationRecord
 
   def name_is_present!
     return true if first_name.present? || last_name.present?
+
     errors.add(:base, "requires at least a first or last name")
   end
 

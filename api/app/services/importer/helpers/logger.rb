@@ -28,6 +28,7 @@ module Importer
 
       def log_attachment_errors(model)
         return unless model.class.name == "Resource"
+
         # rubocop:disable LineLength
         @logger.error Rainbow("        Attachment content type: #{model.attachment.content_type}").red
         # rubocop:enable LineLength

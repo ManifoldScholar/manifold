@@ -13,6 +13,7 @@ class Version < PaperTrail::Version
   scope :with_actor, -> { where.not(whodunnit: nil) }
   scope :for_item, lambda { |item|
     return all unless item.present?
+
     where(item: item)
       .or(where(item_id: item.tracked_dependent_versions.select(:item_id)))
       .order(created_at: :desc)

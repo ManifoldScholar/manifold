@@ -27,6 +27,7 @@ class Annotation < ApplicationRecord
   }
   scope :with_read_ability, lambda { |creator|
     next where(private: false) unless creator.present?
+
     where(creator: creator).or(where(private: false))
   }
   scope :by_formats, lambda { |formats|
@@ -139,6 +140,7 @@ class Annotation < ApplicationRecord
   def valid_subject?
     return errors.add(:subject, "can't be nil value") if subject.nil?
     return errors.add(:subject, "can't be blank") if subject.empty?
+
     true
   end
 
@@ -162,6 +164,7 @@ class Annotation < ApplicationRecord
 
   def trigger_event_creation
     return if [TYPE_HIGHLIGHT, TYPE_RESOURCE].include? format
+
     Event.trigger(EventType[:text_annotated], self)
   end
 

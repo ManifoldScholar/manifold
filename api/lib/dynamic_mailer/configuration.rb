@@ -63,6 +63,7 @@ module DynamicMailer
     def email_config(key, default = nil)
       value = @settings.email[key]
       return default if value.blank?
+
       value
     end
 

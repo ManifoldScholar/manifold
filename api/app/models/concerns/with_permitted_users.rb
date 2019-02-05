@@ -2,7 +2,6 @@ module WithPermittedUsers
   extend ActiveSupport::Concern
 
   included do
-
     resourcify
 
     has_many :permitted_users, lambda {
@@ -26,6 +25,7 @@ module WithPermittedUsers
 
   def grant_project_editor_role!
     return unless creator&.project_creator?
+
     creator.add_role Role::ROLE_PROJECT_EDITOR, self
   end
 end

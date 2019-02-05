@@ -33,6 +33,7 @@ module ResourceImportRows
     # When the import job starts, it will transition the row to an importing state
     after_transition(to: :queued, after_commit: true) do |row, transition|
       next row.state_machine.transition_to!(:skipped) if row.skip?
+
       if transition.metadata["perform_now"] == true
         ResourceImportRows::ImportJob.perform_now(row.id)
       else
@@ -46,9 +47,7 @@ module ResourceImportRows
     after_transition(to: :importing, after_commit: true) do |row|
       outcome = ResourceImportRows::Import.run(row: row)
       # Retry network errors once.
-      if outcome.errors.include? :network
-        outcome = ResourceImportRows::Import.run(row: row)
-      end
+      outcome = ResourceImportRows::Import.run(row: row) if outcome.errors.include? :network
       if outcome.valid?
         row.resource = outcome.result[:resource]
         row.state_machine.transition_to!(:imported)

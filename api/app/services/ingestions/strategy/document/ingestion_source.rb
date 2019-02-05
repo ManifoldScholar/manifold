@@ -29,6 +29,7 @@ module Ingestions
             @context.source_root
           )
           return @inspector.basename if ingestion_source == source_path
+
           source_path
         end
 
@@ -37,6 +38,7 @@ module Ingestions
         # TODO: Should there be a stylesheet ingestion source kind?
         def kind
           return ::IngestionSource::KIND_SECTION if @ingestion_source == @inspector.source
+
           ::IngestionSource::KIND_PUBLICATION_RESOURCE
         end
 

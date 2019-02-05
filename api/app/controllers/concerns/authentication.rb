@@ -34,6 +34,7 @@ module Authentication
   # within the action method itself
   def authenticate_request!
     raise NotAuthenticatedError unless user_id_included_in_auth_token?
+
     @current_user = User.preload(CURRENT_USER_PRELOADS).find(decoded_auth_token[:user_id])
   rescue JWT::ExpiredSignature
     raise AuthenticationTimeoutError
@@ -58,9 +59,7 @@ module Authentication
   # JWT's are stored in the Authorization header using this format:
   # Bearer somerandomstring.encoded-payload.anotherrandomstring
   def http_auth_token
-    @http_auth_token ||= if request.headers["Authorization"].present?
-                           request.headers["Authorization"].split(" ").last
-                         end
+    @http_auth_token ||= request.headers["Authorization"].split(" ").last if request.headers["Authorization"].present?
   end
 
   # Returns user with auth token

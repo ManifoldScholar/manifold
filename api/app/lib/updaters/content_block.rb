@@ -19,6 +19,7 @@ module Updaters
       relationships = reference_associations.map do |kind, _records|
         association = clone.delete kind
         next current_references(kind) if association.nil?
+
         configuration = reference_configuration(kind)
         next unless configuration.present?
 
@@ -37,6 +38,7 @@ module Updaters
 
     def build_association_references(association, kind, source)
       return if association.blank?
+
       data = association.dig("data")
 
       if data.is_a? Array

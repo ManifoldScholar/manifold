@@ -27,6 +27,7 @@ class ContentBlock < ApplicationRecord
     reference_configurations.each do |config|
       association = __send__(config.name)
       return true unless association.present?
+
       matcher = if association.is_a? Array
                   association.all? { |assoc| assoc.project == project }
                 else
@@ -34,6 +35,7 @@ class ContentBlock < ApplicationRecord
                 end
 
       return true if matcher
+
       errors.add(config.name, "must belong to #{project.title}")
     end
   end
@@ -44,6 +46,7 @@ class ContentBlock < ApplicationRecord
       next unless config.required
 
       return true if __send__(config.name).present?
+
       errors.add(config.name, "can't be blank")
     end
   end

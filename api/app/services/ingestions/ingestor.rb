@@ -47,6 +47,7 @@ module Ingestions
 
     def set_ingestion_text
       return unless text.present?
+
       ingestion.update text: text
     end
 

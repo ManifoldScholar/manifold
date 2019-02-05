@@ -40,6 +40,7 @@ module Concerns
       return instance_eval(&sort_title_updater) if sort_title_updater.is_a? Proc
       return sort_title_updater.call self if sort_title_updater.respond_to? :call
       return __send__ sort_title_updater if respond_to? sort_title_updater
+
       raise "cannot update sort title with #{sort_title_updater.inspect}"
     end
     # rubocop:enable Metrics/AbcSize
@@ -47,9 +48,7 @@ module Concerns
     class_methods do
       # rubocop:disable Naming/PredicateName
       def has_sort_title(updater = nil, &updater_block)
-        if updater.blank? && updater_block.nil?
-          raise ArgumentError, "Must specify some sort of updater"
-        end
+        raise ArgumentError, "Must specify some sort of updater" if updater.blank? && updater_block.nil?
 
         @sort_title_updater = block_given? ? updater_block : updater
       end

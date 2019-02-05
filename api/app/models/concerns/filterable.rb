@@ -16,11 +16,13 @@ module Filterable
         key_s = key.to_s
         if key_s.start_with?("with_") && key_s.end_with?("_ability")
           next results unless results.respond_to? key
+
           results.send key, user
         else
           scopes = %I[by_#{key_s} with_#{key_s}]
           scopes.inject results do |query, scope|
             next query unless query.respond_to? scope
+
             query.send scope, value
           end
         end
@@ -29,9 +31,8 @@ module Filterable
 
     def filter_with_elasticsearch(params)
       ids = distinct.reorder(nil).pluck :id
-      if !params.key?(:keyword) || ids.blank?
-        return by_pagination(params[:page], params[:per_page])
-      end
+      return by_pagination(params[:page], params[:per_page]) if !params.key?(:keyword) || ids.blank?
+
       search_query = params.dig :keyword || "*"
       filter = Search::FilterScope.new do |f|
         f.where :id, ids
@@ -43,6 +44,7 @@ module Filterable
 
     def validate_paginated_results(params, results)
       return results unless exceeds_total_pages? results
+
       filter params.merge(page: results.total_pages), scope: results
     end
 
@@ -52,6 +54,7 @@ module Filterable
 
     def exceeds_total_pages?(results)
       return false unless paginated? results
+
       results.current_page > results.total_pages
     end
   end

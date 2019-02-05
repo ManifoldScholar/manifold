@@ -134,6 +134,7 @@ class TextSection < ApplicationRecord
     inline = Serializer::Html::INLINE_ELEMENTS
     *, nodes = text_nodes.reverse.inject([false, []]) do |(once_more, nodes), node|
       next [once_more, nodes] if node["content"].strip.blank?
+
       if (inline.include?(node["parent"]) && nodes[-1]) || once_more
         # Append inline content to previous node
         nodes[-1][:content] = nodes[-1][:content].insert(0, node["content"] + " ")
@@ -175,6 +176,7 @@ class TextSection < ApplicationRecord
     start_node = text_node_for(start_uuid)
     end_node = text_node_for(end_uuid)
     return [] unless start_node.present? && end_node.present?
+
     text_nodes[text_nodes.index(start_node)..text_nodes.index(end_node)]
   end
 
@@ -193,6 +195,7 @@ class TextSection < ApplicationRecord
 
   def adopt_or_orphan_annotations!
     return unless body_json_previously_changed?
+
     TextSectionJobs::EnqueueAdoptAnnotationsJob.perform_later annotations.pluck(:id)
   end
 end

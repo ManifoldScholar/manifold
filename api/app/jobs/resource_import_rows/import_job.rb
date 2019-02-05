@@ -37,6 +37,7 @@ module ResourceImportRows
     def perform(resource_import_row_id)
       rir = ResourceImportRow.find(resource_import_row_id)
       return unless rir&.state_machine.can_transition_to?(:importing)
+
       rir.state_machine.transition_to(:importing)
     end
     # rubocop:enable Lint/SafeNavigationChain

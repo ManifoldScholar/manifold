@@ -7,6 +7,7 @@ module Factory
 
     def create_analytics_session
       return nil unless settings_valid?
+
       client = Google::Apis::AnalyticsV3::AnalyticsService.new
       client.authorization = Signet::OAuth2::Client
                              .new(auth_options)
@@ -29,6 +30,7 @@ module Factory
       return false if c.analytics_oauth_scope.blank?
       return false if settings.integrations.dig(:google_client_email).blank?
       return false if settings.secrets.dig(:google_private_key).blank?
+
       true
     end
 
@@ -36,11 +38,11 @@ module Factory
     def auth_options
       settings = Settings.instance
       {
-        token_credential_uri:  Rails.configuration.manifold.google.token_uri,
-        audience:              Rails.configuration.manifold.google.token_uri,
-        scope:                 Rails.configuration.manifold.google.analytics_oauth_scope,
-        issuer:                settings.integrations.dig(:google_client_email),
-        signing_key:           OpenSSL::PKey::RSA.new(
+        token_credential_uri: Rails.configuration.manifold.google.token_uri,
+        audience: Rails.configuration.manifold.google.token_uri,
+        scope: Rails.configuration.manifold.google.analytics_oauth_scope,
+        issuer: settings.integrations.dig(:google_client_email),
+        signing_key: OpenSSL::PKey::RSA.new(
           settings.secrets.dig(:google_private_key)
         )
       }

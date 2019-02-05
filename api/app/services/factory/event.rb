@@ -62,6 +62,7 @@ module Factory
 
     def log_event_errors(event)
       return unless event.errors.any?
+
       Rails.logger.debug("Factory::Event invalid event: #{event.errors.full_messages}")
     end
 
@@ -72,6 +73,7 @@ module Factory
     def subject_project(subject)
       return subject if subject.is_a? Project
       return subject.project if subject.respond_to?(:project)
+
       raise_no_project
     end
 
@@ -82,6 +84,7 @@ module Factory
     def subject_title(_type, subject)
       return nil unless subject.respond_to?(:title)
       return subject.title unless subject.respond_to?(:title_formatted)
+
       subject.title_formatted
     end
 
@@ -118,9 +121,11 @@ module Factory
 
     def resolve_subject(id, type, model)
       return model if model
+
       if type && id
         klass = Module.const_get(type)
         return nil unless klass.is_a?(Class)
+
         subject = klass.find_by(id: id)
         return subject
       end
@@ -130,6 +135,7 @@ module Factory
     def t(path, type)
       key = "services.factory.event.#{path}.#{type.to_s.downcase}"
       return nil unless i18n_set?(key)
+
       I18n.t(key, global_installation_name: @settings.general[:installation_name])
     end
 

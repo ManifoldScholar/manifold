@@ -11,6 +11,7 @@ module ApplicationCable
 
     def load_current_user(encrypted_token)
       return if @current_user
+
       token = AuthToken.decode(encrypted_token)
       @current_user = User.find(token[:user_id])
     end

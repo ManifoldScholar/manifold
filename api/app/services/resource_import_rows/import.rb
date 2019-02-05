@@ -59,6 +59,7 @@ module ResourceImportRows
       transformed = transform(attribute, value)
       blocker = blocker_for(attribute)
       return if blocker && send(blocker, attribute, transformed)
+
       send(setter, attribute, transformed)
     end
 
@@ -96,11 +97,13 @@ module ResourceImportRows
 
     def transform_slug(value)
       return nil if value.blank?
+
       value
     end
 
     def transform_sub_kind(value)
       return nil if value.blank?
+
       value
     end
 
@@ -118,11 +121,13 @@ module ResourceImportRows
 
     def set_attachment(attribute, value)
       return if value.blank?
+
       set_from_google_drive_storage(attribute, value) if row.google_drive_storage?
     end
 
     def set_resource_collections(attribute, value)
       return set_default(attribute, []) if value.blank?
+
       titles = value.split(/[,;]/).map(&:strip).reject(&:empty?)
       collections = titles.map do |title|
         resource.project.resource_collections.find_or_initialize_by title: title
@@ -143,12 +148,14 @@ module ResourceImportRows
 
     def clear_or_set_attachment(attribute, file)
       return resource.send(attribute).clear unless file
+
       set_default(attribute, file)
     end
 
     def fetch_google_drive_file(title)
       file = drive_folder.file_by_title(title)
       return nil unless file_ok?(file)
+
       drive_file_to_io(file)
     end
 
@@ -170,12 +177,14 @@ module ResourceImportRows
 
     def attachment_attribute?(attribute)
       return false unless attribute.start_with? "attachment"
+
       true
     end
 
     def jsonb_attribute?(attribute_path)
       split = "."
       return false unless attribute_path.include? split
+
       attribute = attribute_path.split(split).first
       resource_attribute_type(attribute) == :jsonb
     end
@@ -206,6 +215,7 @@ module ResourceImportRows
 
     def file_ok?(file)
       return true unless file.nil?
+
       false
     end
 

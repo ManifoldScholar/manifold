@@ -73,6 +73,7 @@ class Ingestion < ApplicationRecord
 
   def strategy_label
     return nil if strategy.blank?
+
     klass = strategy.constantize
     klass.respond_to?(:label) ? klass.label : klass.name
   end
@@ -85,6 +86,7 @@ class Ingestion < ApplicationRecord
     line = [severity, message]
     log_buffer << line
     return if severity == "DEBUG"
+
     IngestionChannel.broadcast_to self, type: "log", payload: line
   end
 
@@ -99,6 +101,7 @@ class Ingestion < ApplicationRecord
 
   def ingestion_source
     return source_path if file_based_ingestion?
+
     external_source_url
   end
 

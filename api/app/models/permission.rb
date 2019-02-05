@@ -19,14 +19,14 @@ class Permission < ApplicationRecord
 
   def role_names_present!
     return true if role_names.present?
-    if persisted?
-      message =
-        <<~HEREDOC
-          must have at least one specified. If you want to remove all permissions, delete this permission
-        HEREDOC
-    else
-      message = "must have at least one specified"
-    end
+
+    message = if persisted?
+                <<~HEREDOC
+                  must have at least one specified. If you want to remove all permissions, delete this permission
+                HEREDOC
+              else
+                "must have at least one specified"
+              end
     errors.add :role_names, message
   end
 

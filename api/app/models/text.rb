@@ -159,6 +159,7 @@ class Text < ApplicationRecord
 
   def get_title_value(title, default = nil)
     return default unless title.present?
+
     title.value
   end
 
@@ -191,6 +192,7 @@ class Text < ApplicationRecord
   def find_text_section_by_source_path(path)
     source = ingestion_sources.find_by(source_path: path)
     return unless source
+
     source_id = source.source_identifier
     text_sections.find_by(source_identifier: source_id)
   end
@@ -199,6 +201,7 @@ class Text < ApplicationRecord
     map = {}
     text_sections.each do |ts|
       next if ts.ingestion_source.nil?
+
       path = ts.ingestion_source.source_path
       map[path] = ts
     end

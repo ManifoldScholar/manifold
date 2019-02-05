@@ -23,11 +23,13 @@ class NotificationPreference < ApplicationRecord
   def frequency_is_valid!
     valid = kind.digest? ? frequency.digest? : frequency.nondigest?
     return true if valid
+
     errors.add(:frequency, "is invalid for #{kind}")
   end
 
   def default_followed_projects_to_always!
     return unless kind.followed_projects?
+
     assign_attributes(frequency: NotificationFrequency[:always])
   end
 

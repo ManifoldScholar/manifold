@@ -3,12 +3,14 @@ module Thumbnail
   class Fetcher
     def fetch(resource)
       return unless self.class.accepts?(resource)
+
       attempt = resource.thumbnail_fetch_attempt ||
                 resource.create_thumbnail_fetch_attempt
       reference = remove_params(resource.external_id)
       thumb_url = create_youtube_url(reference) if resource.youtube?
       thumb_url = create_vimeo_url(reference) if resource.vimeo?
       return unless should_attempt?(attempt, reference)
+
       set_variant_thumbnail(resource, attempt, thumb_url, reference)
     end
 
@@ -24,6 +26,7 @@ module Thumbnail
 
     def should_attempt?(attempt, reference)
       return false if attempt.reference == reference && attempt.attempts > 2
+
       true
     end
 

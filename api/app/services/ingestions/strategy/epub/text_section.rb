@@ -40,6 +40,7 @@ module Ingestions
         def kind
           return ::TextSection::KIND_COVER_IMAGE if cover?
           return ::TextSection::KIND_NAVIGATION if toc?
+
           ::TextSection::KIND_SECTION
         end
 
@@ -89,6 +90,7 @@ module Ingestions
         def toc?
           toc_page = guess_toc_page_from_landmarks
           return text_section_resource_path == toc_page[:source_path] if toc_page
+
           false
         end
 

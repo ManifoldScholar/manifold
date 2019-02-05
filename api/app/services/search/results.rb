@@ -44,6 +44,7 @@ module Search
     def adjusted_results
       @adjusted_results ||= begin
         return @searchkick_results.results if @searchkick_results.options[:load]
+
         inject_associations(@searchkick_results)
       end
     end
@@ -73,6 +74,7 @@ module Search
 
     def class_for(type)
       return User if type == "creator"
+
       constantize classify pluralize type
     end
 
@@ -80,6 +82,7 @@ module Search
       query_plan.each_with_object({}) do |(type_of, ids), models|
         klass = class_for type_of
         next models unless klass
+
         scope = klass.where(id: ids).includes(MODEL_INCLUDES[type_of])
         models[type_of] = scope.each_with_object({}) do |ts, memo|
           memo[ts.id] = ts

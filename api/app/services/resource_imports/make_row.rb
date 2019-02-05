@@ -24,6 +24,7 @@ module ResourceImports
     def row_type
       return ResourceImportRow::ROW_TYPE_DATA if line_number > header_row_number
       return ResourceImportRow::ROW_TYPE_HEADER if line_number == header_row_number
+
       ResourceImportRow::ROW_TYPE_IGNORED
     end
 

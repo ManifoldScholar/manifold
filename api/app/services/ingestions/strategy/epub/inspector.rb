@@ -20,6 +20,7 @@ module Ingestions
 
         def unique_id
           return Digest::MD5.hexdigest(context.source_url) if context.source_url
+
           rendition_unique_id_node&.content
         end
         memoize :unique_id
@@ -97,6 +98,7 @@ module Ingestions
 
         def toc_inspector
           return TOC.new(self) if nav_parsed
+
           Naught.build
         end
         memoize :toc_inspector
@@ -156,6 +158,7 @@ module Ingestions
         def start_section_identifier
           return v2_start_section_identifier if v2?
           return v3_start_section_identifier if v3?
+
           nil
         end
         memoize :start_section_identifier
@@ -180,13 +183,16 @@ module Ingestions
         def v3_start_section_identifier
           landmarks = toc_inspector.landmarks_structure
           return unless landmarks
+
           start = landmarks.detect { |l| l[:type] == "bodymatter" }
           return unless start
+
           href = start[:source_path]
           node = manifest_item_nodes.detect do |n|
             rendition_href_to_path(n.attribute("href").value) == href
           end
           return unless node
+
           node.attribute("id").value
         end
 
@@ -194,11 +200,13 @@ module Ingestions
         def v2_start_section_identifier
           start = v2_guide_node_by_type("text") || v2_guide_node_by_type("start")
           return unless start
+
           href = rendition_href_to_path(start.attribute("href").value.split("#").first)
           node = manifest_item_nodes.detect do |n|
             rendition_href_to_path(n.attribute("href").value) == href
           end
           return unless node
+
           node.attribute("id").value
         end
         # rubocop:enable Metrics/AbcSize

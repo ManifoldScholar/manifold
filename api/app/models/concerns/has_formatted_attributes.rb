@@ -39,9 +39,7 @@ module Concerns
         }
         definition = FormattedAttributes::Definition.new attribute, options
 
-        unless formatted_attributes.add?(definition)
-          raise "Already defined formatted_attribute: #{attribute}"
-        end
+        raise "Already defined formatted_attribute: #{attribute}" unless formatted_attributes.add?(definition)
 
         include definition.methods_module
       end
