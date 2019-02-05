@@ -7,15 +7,15 @@ FactoryBot.define do
     uid { SecureRandom.uuid }
 
     trait :facebook do
-      provider 'facebook'
+      provider { 'facebook' }
     end
 
     trait :google do
-      provider 'google_oauth2'
+      provider { 'google_oauth2' }
     end
 
     trait :twitter do
-      provider 'twitter'
+      provider { 'twitter' }
     end
   end
 end

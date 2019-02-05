@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :resource do
-    title "Rowan"
+    title { "Rowan" }
     external_url { Faker::Internet.url }
-    tag_list "dog,puppy"
+    tag_list { "dog,puppy" }
     association :creator, factory: :user
     project
   end
