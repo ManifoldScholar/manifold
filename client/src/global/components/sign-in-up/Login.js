@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { currentUserActions } from "actions";
-import { get, values } from "lodash";
+import { get } from "lodash";
 import classNames from "classnames";
-import Oauth from "./oauth";
+import LoginExternal from "./LoginExternal";
 
 export default class Login extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     handleViewChange: PropTypes.func.isRequired,
+    settings: PropTypes.object,
     authentication: PropTypes.shape({
       currentUser: PropTypes.object
     }),
@@ -46,8 +47,7 @@ export default class Login extends Component {
   };
 
   authenticationError = () => {
-    const error = get(this.props.authentication, "error.body");
-    return error;
+    return get(this.props.authentication, "error.body");
   };
 
   render() {
@@ -55,20 +55,6 @@ export default class Login extends Component {
       "form-input": true,
       "form-error": this.authenticationError()
     });
-
-    const customOAuthProviders = values(
-      get(this.props, "settings.attributes.oauth")
-    ).filter(provider => provider.custom);
-
-    const customOAuthButtons = customOAuthProviders.map(provider => (
-      <Oauth.Button
-        dispatch={this.props.dispatch}
-        provider={provider.name}
-        hasIcon={false}
-      >
-        Log in with {provider.descriptiveName}
-      </Oauth.Button>
-    ));
 
     return (
       <div>
@@ -132,24 +118,10 @@ export default class Login extends Component {
             {"Need to sign up?"}
           </button>
         </p>
-
-        <section className="login-external">
-          <Oauth.Monitor dispatch={this.props.dispatch} />
-          <Oauth.Button dispatch={this.props.dispatch} provider="facebook">
-            <span>Log in with Facebook</span>
-          </Oauth.Button>
-          <Oauth.Button
-            dispatch={this.props.dispatch}
-            provider="google"
-            iconName="manicon-envelope"
-          >
-            <span>Log in with Google</span>
-          </Oauth.Button>
-          <Oauth.Button dispatch={this.props.dispatch} provider="twitter">
-            <span>Log in with Twitter</span>
-          </Oauth.Button>
-          {customOAuthButtons}
-        </section>
+        <LoginExternal
+          settings={this.props.settings}
+          dispatch={this.props.dispatch}
+        />
       </div>
     );
   }

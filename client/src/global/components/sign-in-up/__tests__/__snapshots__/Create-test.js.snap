@@ -120,7 +120,7 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
   <p
     className="login-links"
   >
-    You can also create a Manifold account using your Facebook, Twitter, or Google credentials.
+    You can also create a Manifold account using your Google or Twitter credentials.
   </p>
   <section
     className="login-external"

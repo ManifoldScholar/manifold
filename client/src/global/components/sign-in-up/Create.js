@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { usersAPI, requests } from "api";
 import { entityStoreActions, currentUserActions } from "actions";
-import Oauth from "./oauth";
 import { select } from "utils/entityUtils";
 import Form from "global/components/form";
 import { possessivize } from "utils/string";
 import connectAndFetch from "utils/connectAndFetch";
 import get from "lodash/get";
 import find from "lodash/find";
+import values from "lodash/values";
+import capitalize from "lodash/capitalize";
+import LoginExternal from "./LoginExternal";
 
 const { request, flush } = entityStoreActions;
 
@@ -52,6 +54,26 @@ export class CreateContainer extends Component {
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.gCreateUser));
+  }
+
+  get OAuthProviderNames() {
+    const providers = values(
+      get(this.props, "settings.attributes.oauth")
+    ).filter(provider => provider.enabled);
+    if (!providers) return null;
+    const names = providers.map(provider => capitalize(provider.name));
+    if (names.length === 0) return null;
+
+    switch (names.length) {
+      case 1:
+        return names;
+      case 2:
+        return names.join(" or ");
+      default: {
+        const last = names.splice(names.length - 1, 1)[0];
+        return `${names.join(", ")}, or ${last}`;
+      }
+    }
   }
 
   authenticateUser = () => {
@@ -205,25 +227,19 @@ export class CreateContainer extends Component {
             </div>
           </div>
         </form>
-        <p className="login-links">
-          {`You can also create a ${installationName} account using your Facebook, Twitter, or Google credentials.`}
-        </p>
-        <section className="login-external">
-          <Oauth.Monitor dispatch={this.props.dispatch} />
-          <Oauth.Button dispatch={this.props.dispatch} provider="facebook">
-            <span>Log in with Facebook</span>
-          </Oauth.Button>
-          <Oauth.Button
-            dispatch={this.props.dispatch}
-            provider="google"
-            iconName="manicon-envelope"
-          >
-            <span>Log in with Google</span>
-          </Oauth.Button>
-          <Oauth.Button dispatch={this.props.dispatch} provider="twitter">
-            <span>Log in with Twitter</span>
-          </Oauth.Button>
-        </section>
+        {this.OAuthProviderNames && (
+          <React.Fragment>
+            <p className="login-links">
+              {`You can also create a ${installationName} account using your ${
+                this.OAuthProviderNames
+              } credentials.`}
+            </p>
+            <LoginExternal
+              settings={this.props.settings}
+              dispatch={this.props.dispatch}
+            />
+          </React.Fragment>
+        )}
         {this.renderTermsAndConditions(this.props)}
         <p className="login-links">
           <button
