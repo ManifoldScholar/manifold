@@ -10,17 +10,9 @@ module Api
       ].freeze
 
       resourceful! Project, authorize_options: { except: [:index, :show] } do
-        includes = [
-          { texts: [:titles, :text_subjects] },
-          { resource_collections: [] },
-          { events: [] },
-          { resources: [:tags] },
-          :content_blocks
-        ]
-
         Project.filter(
           with_pagination!(project_filter_params),
-          scope: scope_visibility.includes(includes),
+          scope: scope_visibility,
           user: current_user
         )
       end
