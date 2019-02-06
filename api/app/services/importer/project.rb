@@ -58,7 +58,6 @@ module Importer
       project.update(@project_json[:attributes])
       assign_project_attachments(project)
       excludes = %w(cover_ avatar_ hero_)
-      excludes << "published_text_id" unless include_texts
       unset_untouched(project, @project_json[:attributes], excludes)
       raise "Invalid project: #{project.errors.full_messages}" unless project.valid?
       project.draft = false
@@ -169,7 +168,7 @@ module Importer
     end
 
     def unset_untouched(model, attributes, exclude = [])
-      default_excludes = %w(id created_at updated_at creator_id draft)
+      default_excludes = %w(id created_at updated_at creator_id draft dark_mode)
       exclude.concat(default_excludes)
       fields = model.class.column_names.map(&:to_sym)
       touched = attributes.keys
