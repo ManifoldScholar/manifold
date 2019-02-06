@@ -123,10 +123,12 @@ const defaults = {
           enabled: false
         },
         googleOauth2: {
-          enabled: true
+          enabled: true,
+          name: "google"
         },
         twitter: {
-          enabled: true
+          enabled: true,
+          name: "twitter"
         }
       },
       pressLogoStyles: {
