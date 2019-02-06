@@ -17,10 +17,6 @@
       margin-bottom: -$calloutGutter;
       margin-left: -$calloutGutter;
 
-      & + & {
-        margin-top: 0;
-      }
-
       > * {
         width: auto;
         margin-top: 0;
