@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190205175552) do
+ActiveRecord::Schema.define(version: 20190206180103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20190205175552) do
     t.integer "position", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["resource_collection_id"], name: "index_collection_resources_on_resource_collection_id"
     t.index ["resource_id"], name: "index_collection_resources_on_resource_id"
   end
 
@@ -400,6 +401,8 @@ ActiveRecord::Schema.define(version: 20190205175552) do
     t.date "homepage_end_date"
     t.integer "homepage_count"
     t.index ["creator_id"], name: "index_project_collections_on_creator_id"
+    t.index ["homepage_end_date"], name: "index_project_collections_on_homepage_end_date"
+    t.index ["homepage_start_date"], name: "index_project_collections_on_homepage_start_date"
     t.index ["slug"], name: "index_project_collections_on_slug", unique: true
   end
 
@@ -473,6 +476,7 @@ ActiveRecord::Schema.define(version: 20190205175552) do
     t.integer "collection_resources_count", default: 0
     t.integer "events_count", default: 0
     t.jsonb "thumbnail_data", default: {}
+    t.index ["project_id"], name: "index_resource_collections_on_project_id"
     t.index ["slug"], name: "index_resource_collections_on_slug", unique: true
   end
 
