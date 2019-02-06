@@ -21,6 +21,7 @@ module SystemUpgrades
 
         Text.find_each do |text|
           next unless text.cover_attacher.stored?
+
           logger.info("Generating cover styles for Text #{text.id}")
           text.update cover: text.cover[:original]
         end
