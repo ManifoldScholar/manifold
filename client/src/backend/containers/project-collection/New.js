@@ -25,7 +25,7 @@ export class ProjectCollectionNew extends PureComponent {
   get defaultModel() {
     return {
       attributes: {
-        numberOfProjects: 0
+        numberOfProjects: 8
       },
       relationships: {
         subjects: []
