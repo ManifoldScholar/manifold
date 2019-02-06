@@ -34,7 +34,9 @@ export default class TextListListItemBibliographic extends Component {
             }}
           />
           {this.props.subtitle && (
-            <span className={`${baseClass}__subtitle`}>{this.subtitle}</span>
+            <span className={`${baseClass}__subtitle`}>
+              {this.props.subtitle}
+            </span>
           )}
         </h3>
         {this.props.creatorNames && (
