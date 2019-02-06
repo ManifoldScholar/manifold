@@ -1,7 +1,8 @@
-class InitialSchema < ActiveRecord::Migration
+class InitialSchema < ActiveRecord::Migration[5.0]
   def change
 
     enable_extension "uuid-ossp"
+    enable_extension "pgcrypto"
 
     create_table "collaborators", id: :uuid, force: :cascade do |t|
       t.uuid "text_id"

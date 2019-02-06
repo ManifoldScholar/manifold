@@ -1,4 +1,4 @@
-class AddAttachmentAvatarToUsers < ActiveRecord::Migration
+class AddAttachmentAvatarToUsers < ActiveRecord::Migration[5.0]
   include PaperclipMigrator
 
   def change

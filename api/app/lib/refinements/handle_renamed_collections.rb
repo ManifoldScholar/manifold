@@ -1,6 +1,7 @@
 module Refinements
   module HandleRenamedCollections
     refine ::ResourceCollection.singleton_class do
+
       def table_name
         if table_name_exists?(super)
           super
