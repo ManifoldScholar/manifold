@@ -58,6 +58,13 @@
     height: 100%;
     padding-left: 32px;
 
+    // TODO: Should be removable after .vertical-list-primary refactor
+    a {
+      display: inline-block !important;
+      width: auto !important;
+      padding: 0 !important;
+    }
+
     .backend & {
       padding-left: 0;
 
@@ -145,7 +152,7 @@
     letter-spacing: 0.03em;
 
     a {
-      color: $accentPrimary;
+      color: $accentPrimary !important; // TODO: !important can be removed after .vertical-list-primary refactor
       text-decoration: none;
     }
   }
