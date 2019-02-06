@@ -7,14 +7,8 @@ module Api
                     collection_projects.project.contributors).freeze
 
       resourceful! ProjectCollection, authorize_options: { except: [:index, :show] } do
-        includes = [
-          :collection_projects,
-          :subjects,
-          collection_projects: [project: [:collaborators]]
-        ]
-
         ProjectCollection.filter(with_pagination!(project_collection_filter_params),
-                                 scope: ProjectCollection.all.includes(includes))
+                                 scope: ProjectCollection.all)
       end
 
       # GET /project-collections
