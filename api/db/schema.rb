@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181207201023) do
+ActiveRecord::Schema.define(version: 20181208111111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,10 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.boolean  "orphaned",        default: false, null: false
     t.integer  "flags_count",     default: 0
     t.index ["created_at"], name: "index_annotations_on_created_at", using: :brin
+    t.index ["creator_id"], name: "index_annotations_on_creator_id", using: :btree
     t.index ["format"], name: "index_annotations_on_format", using: :btree
+    t.index ["resource_id"], name: "index_annotations_on_resource_id", using: :btree
+    t.index ["text_section_id"], name: "index_annotations_on_text_section_id", using: :btree
   end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -46,6 +49,7 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.string  "title"
     t.string  "role"
     t.integer "position"
+    t.index ["project_id"], name: "index_categories_on_project_id", using: :btree
   end
 
   create_table "collaborators", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -56,6 +60,8 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.integer  "position"
     t.string   "collaboratable_type"
     t.uuid     "collaboratable_id"
+    t.index ["collaboratable_type", "collaboratable_id"], name: "index_collabs_on_collabable_type_and_collabable_id", using: :btree
+    t.index ["maker_id"], name: "index_collaborators_on_maker_id", using: :btree
   end
 
   create_table "collection_projects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -75,20 +81,21 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.integer  "position",      default: 0
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.index ["resource_id"], name: "index_collection_resources_on_resource_id", using: :btree
   end
 
   create_table "collections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.uuid     "project_id"
-    t.string   "thumbnail_file_name_deprecated"
-    t.string   "thumbnail_content_type_deprecated"
-    t.integer  "thumbnail_file_size_deprecated"
-    t.datetime "thumbnail_updated_at_deprecated"
     t.string   "thumbnail_checksum"
     t.string   "fingerprint"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.string   "thumbnail_file_name_deprecated"
+    t.string   "thumbnail_content_type_deprecated"
+    t.integer  "thumbnail_file_size_deprecated"
+    t.datetime "thumbnail_updated_at_deprecated"
     t.string   "slug"
     t.integer  "collection_resources_count",        default: 0
     t.integer  "events_count",                      default: 0
@@ -101,6 +108,7 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.uuid    "descendant_id", null: false
     t.integer "generations",   null: false
     t.index ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_idx", unique: true, using: :btree
+    t.index ["ancestor_id"], name: "index_comment_hierarchies_on_ancestor_id", using: :btree
     t.index ["descendant_id"], name: "comment_desc_idx", using: :btree
   end
 
@@ -118,6 +126,9 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.integer  "sort_order"
     t.integer  "events_count",   default: 0
     t.index ["created_at"], name: "index_comments_on_created_at", using: :brin
+    t.index ["creator_id"], name: "index_comments_on_creator_id", using: :btree
+    t.index ["parent_id"], name: "index_comments_on_parent_id", using: :btree
+    t.index ["subject_type", "subject_id"], name: "index_comments_on_subject_type_and_subject_id", using: :btree
   end
 
   create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -139,6 +150,11 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.string   "external_subject_id"
     t.string   "external_subject_type"
     t.uuid     "twitter_query_id"
+    t.index ["created_at"], name: "index_events_on_created_at", using: :btree
+    t.index ["external_subject_type", "external_subject_id"], name: "index_subj_on_subj_type_and_subj_id", using: :btree
+    t.index ["project_id"], name: "index_events_on_project_id", using: :btree
+    t.index ["subject_type", "subject_id"], name: "index_events_on_subject_type_and_subject_id", using: :btree
+    t.index ["twitter_query_id"], name: "index_events_on_twitter_query_id", using: :btree
   end
 
   create_table "favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -147,6 +163,8 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.uuid     "user_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id", using: :btree
+    t.index ["user_id"], name: "index_favorites_on_user_id", using: :btree
   end
 
   create_table "features", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -156,6 +174,12 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.string   "link_text"
     t.string   "link_url"
     t.string   "link_target"
+    t.integer  "position"
+    t.text     "style",                              default: "dark"
+    t.boolean  "hidden",                             default: false
+    t.uuid     "creator_id"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "background_file_name_deprecated"
     t.string   "background_content_type_deprecated"
     t.integer  "background_file_size_deprecated"
@@ -164,12 +188,6 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.string   "foreground_content_type_deprecated"
     t.integer  "foreground_file_size_deprecated"
     t.datetime "foreground_updated_at_deprecated"
-    t.integer  "position"
-    t.text     "style",                              default: "dark"
-    t.boolean  "hidden",                             default: false
-    t.uuid     "creator_id"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
     t.string   "background_color"
     t.string   "foreground_color"
     t.string   "header_color"
@@ -189,6 +207,7 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.string   "flaggable_type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["flaggable_type", "flaggable_id"], name: "index_flags_on_flaggable_type_and_flaggable_id", using: :btree
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -261,15 +280,14 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.integer  "attachment_file_size_deprecated"
     t.datetime "attachment_updated_at_deprecated"
     t.jsonb    "attachment_data",                    default: {}
+    t.index ["kind"], name: "index_ingestion_sources_on_kind", using: :btree
+    t.index ["source_identifier"], name: "index_ingestion_sources_on_source_identifier", using: :btree
+    t.index ["text_id"], name: "index_ingestion_sources_on_text_id", using: :btree
   end
 
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "state"
     t.string   "log",                                           array: true
-    t.string   "source_file_name"
-    t.string   "source_content_type"
-    t.integer  "source_file_size"
-    t.datetime "source_updated_at"
     t.string   "strategy"
     t.string   "external_source_url"
     t.string   "ingestion_type"
@@ -278,6 +296,10 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.uuid     "project_id",                       null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
     t.jsonb    "source_data",         default: {}, null: false
     t.index ["creator_id"], name: "index_ingestions_on_creator_id", using: :btree
     t.index ["project_id"], name: "index_ingestions_on_project_id", using: :btree
@@ -365,6 +387,8 @@ ActiveRecord::Schema.define(version: 20181207201023) do
   create_table "project_subjects", force: :cascade do |t|
     t.uuid "project_id"
     t.uuid "subject_id"
+    t.index ["project_id"], name: "index_project_subjects_on_project_id", using: :btree
+    t.index ["subject_id"], name: "index_project_subjects_on_subject_id", using: :btree
   end
 
   create_table "projects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -463,10 +487,6 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.string   "storage_type"
     t.string   "storage_identifier"
     t.string   "source",                                       null: false
-    t.string   "data_file_name_deprecated"
-    t.string   "data_content_type_deprecated"
-    t.integer  "data_file_size_deprecated"
-    t.datetime "data_updated_at_deprecated"
     t.string   "url"
     t.integer  "header_row",                   default: 1
     t.jsonb    "column_map",                   default: {},    null: false
@@ -474,6 +494,10 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.boolean  "parse_error",                  default: false, null: false
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+    t.string   "data_file_name_deprecated"
+    t.string   "data_content_type_deprecated"
+    t.integer  "data_file_size_deprecated"
+    t.datetime "data_updated_at_deprecated"
     t.jsonb    "data_data",                    default: {}
     t.index ["creator_id"], name: "index_resource_imports_on_creator_id", using: :btree
     t.index ["project_id"], name: "index_resource_imports_on_project_id", using: :btree
@@ -550,6 +574,7 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.jsonb    "variant_format_two_data",                    default: {}
     t.jsonb    "variant_thumbnail_data",                     default: {}
     t.jsonb    "variant_poster_data",                        default: {}
+    t.index ["project_id"], name: "index_resources_on_project_id", using: :btree
     t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
 
@@ -572,6 +597,7 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.text     "contains",        default: [],              array: true
+    t.index ["text_section_id"], name: "index_searchable_nodes_on_text_section_id", using: :btree
   end
 
   create_table "settings", force: :cascade do |t|
@@ -615,6 +641,8 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.integer  "position"
     t.uuid     "creator_id"
     t.string   "hashed_content"
+    t.index ["ingestion_source_id"], name: "index_stylesheets_on_ingestion_source_id", using: :btree
+    t.index ["text_id"], name: "index_stylesheets_on_text_id", using: :btree
   end
 
   create_table "subjects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -670,6 +698,8 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.uuid     "ingestion_source_id"
     t.jsonb    "body_json",           default: "{}", null: false
     t.jsonb    "citations",           default: {}
+    t.index ["ingestion_source_id"], name: "index_text_sections_on_ingestion_source_id", using: :btree
+    t.index ["source_identifier"], name: "index_text_sections_on_source_identifier", using: :btree
     t.index ["text_id"], name: "index_text_sections_on_text_id", using: :btree
   end
 
@@ -678,6 +708,8 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.uuid     "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_text_subjects_on_subject_id", using: :btree
+    t.index ["text_id"], name: "index_text_subjects_on_text_id", using: :btree
   end
 
   create_table "text_titles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -687,6 +719,7 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid     "text_id"
+    t.index ["text_id"], name: "index_text_titles_on_text_id", using: :btree
   end
 
   create_table "texts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -711,7 +744,9 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.string   "section_kind"
     t.integer  "events_count",          default: 0
     t.jsonb    "cover_data",            default: {}
+    t.index ["category_id"], name: "index_texts_on_category_id", using: :btree
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
+    t.index ["project_id"], name: "index_texts_on_project_id", using: :btree
     t.index ["slug"], name: "index_texts_on_slug", unique: true, using: :btree
   end
 
@@ -733,6 +768,7 @@ ActiveRecord::Schema.define(version: 20181207201023) do
     t.integer  "events_count",         default: 0
     t.string   "result_type",          default: "most_recent"
     t.string   "most_recent_tweet_id"
+    t.index ["project_id"], name: "index_twitter_queries_on_project_id", using: :btree
   end
 
   create_table "upgrade_results", primary_key: "version", id: :string, force: :cascade do |t|
