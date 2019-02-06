@@ -112,17 +112,18 @@ export default class ActionCallouts extends PureComponent {
   }
 
   moveToSlot(id, sourceSlotId, destinationSlotId, destinationIndex) {
-    const callout = this.removeFromSlot(id, sourceSlotId);
-    this.addToSlot(callout, destinationSlotId, destinationIndex);
+    this.removeFromSlot(id, sourceSlotId, callout => {
+      this.addToSlot(callout, destinationSlotId, destinationIndex);
+    });
   }
 
-  replaceSlotInState(slotId, slotCallouts) {
+  replaceSlotInState(slotId, slotCallouts, callback = null) {
     const state = {
       slotCallouts: Object.assign({}, this.state.slotCallouts, {
         [slotId]: slotCallouts
       })
     };
-    this.setState(state);
+    this.setState(state, callback);
   }
 
   addToSlot(actionCallout, slotId, index) {
@@ -131,12 +132,11 @@ export default class ActionCallouts extends PureComponent {
     this.replaceSlotInState(slotId, slotCallouts);
   }
 
-  removeFromSlot(id, slotId) {
+  removeFromSlot(id, slotId, callback = null) {
     const slotCallouts = this.state.slotCallouts[slotId].slice(0);
     const index = slotCallouts.findIndex(ac => ac.id === id);
     const callout = slotCallouts.splice(index, 1)[0];
-    this.replaceSlotInState(slotId, slotCallouts);
-    return callout;
+    this.replaceSlotInState(slotId, slotCallouts, () => callback(callout));
   }
 
   findSlot(slotId) {
