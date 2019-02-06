@@ -1,4 +1,5 @@
 import actions from "actions/currentUser";
+import cookie from "cookie";
 import { ApiClient, tokensAPI, meAPI, favoritesAPI } from "api";
 import { notificationActions } from "actions";
 
@@ -45,11 +46,6 @@ function authenticateWithPassword(email, password, dispatch) {
         dispatch(actions.loginComplete());
         return Promise.resolve();
       }
-      const expireDate = new Date();
-      expireDate.setDate(expireDate.getDate() + 90);
-      if (document) {
-        document.cookie = `authToken=${authToken};path=/;expires=${expireDate.toUTCString()}`;
-      }
       dispatch(actions.setCurrentUser(response));
       dispatch(actions.setAuthToken(authToken));
       dispatch(actions.loginComplete());
@@ -88,6 +84,16 @@ export function authenticateWithToken(token, dispatch) {
   );
 
   return promise;
+}
+
+function setCookie(authToken) {
+  if (!document) return null;
+  const cookieSet = !!document.cookie.match(/authToken=/);
+  if (cookieSet) return null;
+
+  const expireDate = new Date();
+  expireDate.setDate(expireDate.getDate() + 90);
+  document.cookie = `authToken=${authToken};path=/;expires=${expireDate.toUTCString()}`;
 }
 
 function destroyCookie() {
@@ -145,6 +151,10 @@ export default function currentUserMiddleware({ dispatch, getState }) {
 
     if (action.type === "UNFOLLOW") {
       unfollow(payload, getState().authentication.authToken, dispatch);
+    }
+
+    if (action.type === "LOGIN_SET_AUTH_TOKEN") {
+      setCookie(payload);
     }
 
     return next(action);
