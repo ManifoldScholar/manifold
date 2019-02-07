@@ -119,6 +119,7 @@ class Project < ApplicationRecord
   # Callbacks
   before_save :prepare_to_reindex_children, on: [:update], if: :draft_changed?
   before_create :assign_publisher_defaults!
+  after_create :scaffold_content_blocks!
   after_commit :trigger_creation_event, on: [:create]
   after_commit :queue_reindex_children_job, :update_smart_collection_caches
 
@@ -311,5 +312,9 @@ class Project < ApplicationRecord
 
   def trigger_creation_event
     Event.trigger(EventType[:project_created], self)
+  end
+
+  def scaffold_content_blocks!
+    Content::ScaffoldProjectContent.run project: self
   end
 end

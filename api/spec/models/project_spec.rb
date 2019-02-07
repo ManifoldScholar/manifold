@@ -291,4 +291,12 @@ RSpec.describe Project, type: :model do
     end
   end
 
+  it "is created with content blocks" do
+    project = FactoryBot.create(:project)
+
+    expect(project.content_blocks.where(type: "Content::RecentActivityBlock").count).to eq 1
+    expect(project.content_blocks.where(type: "Content::TextsBlock").count).to eq 1
+    expect(project.content_blocks.where(type: "Content::ResourcesBlock").count).to eq 1
+    expect(project.content_blocks.where(type: "Content::MetadataBlock").count).to eq 1
+  end
 end
