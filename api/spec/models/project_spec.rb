@@ -290,5 +290,4 @@ RSpec.describe Project, type: :model do
       expect(project.metadata["publisher_place"]).to eq "Portland, OR"
     end
   end
-
 end

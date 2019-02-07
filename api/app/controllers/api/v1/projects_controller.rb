@@ -32,6 +32,8 @@ module Api
 
       def create
         @project = authorize_and_create_project(project_params)
+        Content::ScaffoldProjectContent.run project: @project,
+                                            kind: params.dig(:data, :attributes, :kind)
         render_single_resource @project
       end
 

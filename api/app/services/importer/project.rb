@@ -68,6 +68,7 @@ module Importer
       import_texts(project, @project_json[:published_texts], published: true) if include_texts
       import_texts(project, @project_json[:texts]) if include_texts
       import_resources(project)
+      scaffold_content(project)
     end
     # rubocop:enable all
 
@@ -155,6 +156,11 @@ module Importer
           @logger.error "Unable to import project text at #{text_path}"
         end
       end
+    end
+
+    def scaffold_content(project)
+      @logger.info "  Creating project content blocks"
+      Content::ScaffoldProjectContent.run project: project
     end
 
     def create_twitter_queries(project)
