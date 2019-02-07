@@ -22,6 +22,7 @@
 
     .content-block--current & {
       padding-right: 12px;
+      cursor: default;
 
       @include respond($break90) {
         padding: 10px 19px 10px 23px;
