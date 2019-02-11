@@ -4,7 +4,7 @@ class ContentBlockSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :id, :type, :position, :visible, :configurable, :orderable,
-             :hideable, :abilities
+             :hideable, :abilities, :renderable, :incomplete_render_attributes
 
   belongs_to :project
 
@@ -18,5 +18,9 @@ class ContentBlockSerializer < ApplicationSerializer
 
   def hideable
     object.hideable?
+  end
+
+  def renderable
+    object.renderable?
   end
 end

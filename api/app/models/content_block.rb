@@ -1,5 +1,8 @@
 class ContentBlock < ApplicationRecord
   include Concerns::ProxiedAssociations
+  include ActiveSupport::Configurable
+
+  config.required_render_attributes = [].freeze
 
   # Authorization
   include Authority::Abilities
@@ -19,8 +22,33 @@ class ContentBlock < ApplicationRecord
 
   validate :references_are_valid!
   validate :references_belong_to_project!
+  validate :render_attributes_present!, on: :render
+
+  def renderable?
+    valid? :render
+  end
+
+  def render_errors
+    return {} if renderable?
+
+    errors.to_hash.slice(*config.required_render_attributes)
+  ensure
+    errors.clear
+  end
+
+  def incomplete_render_attributes
+    render_errors.keys
+  end
 
   private
+
+  def render_attributes_present!
+    config.required_render_attributes.each do |attr|
+      next if __send__(attr).present?
+
+      errors.add(attr.to_sym, "must be present to render content block")
+    end
+  end
 
   # rubocop:disable Metrics/AbcSize
   def references_belong_to_project!

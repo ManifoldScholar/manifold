@@ -53,4 +53,10 @@ RSpec.describe Content::TextsBlock do
       end
     end
   end
+
+  describe "#renderable?" do
+    it "is true" do
+      expect(FactoryBot.build(:metadata_block).renderable?).to eq true
+    end
+  end
 end
