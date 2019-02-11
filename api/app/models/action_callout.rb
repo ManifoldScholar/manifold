@@ -31,6 +31,7 @@ class ActionCallout < ApplicationRecord
 
   manifold_has_attached_file :attachment,
                              :resource,
+                             no_styles: true,
                              validate_content_type: false
 
   private
