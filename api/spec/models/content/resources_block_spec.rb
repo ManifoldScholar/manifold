@@ -14,4 +14,10 @@ RSpec.describe Content::ResourcesBlock do
   it "responds to :featured_collections" do
     expect(resources_block.respond_to? :featured_collections).to eq true
   end
+
+  describe "#renderable?" do
+    it "is true" do
+      expect(FactoryBot.build(:metadata_block).renderable?).to eq true
+    end
+  end
 end

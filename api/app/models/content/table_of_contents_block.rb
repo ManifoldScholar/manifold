@@ -1,7 +1,9 @@
 module Content
   class TableOfContentsBlock < ::ContentBlock
 
-    has_one_proxied :text, source: "Text", required: true
+    config.required_render_attributes = %i{text}.freeze
+
+    has_one_proxied :text, source: "Text"
 
     has_configured_attributes depth: [:integer, default: 6],
                               title: :string,

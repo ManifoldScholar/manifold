@@ -10,4 +10,10 @@ RSpec.describe Content::MetadataBlock do
   it "is not configurable" do
     expect(metadata_block.configurable?).to eq false
   end
+
+  describe "#renderable?" do
+    it "is true" do
+      expect(FactoryBot.build(:metadata_block).renderable?).to eq true
+    end
+  end
 end

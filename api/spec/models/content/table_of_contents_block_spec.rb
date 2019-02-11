@@ -15,14 +15,10 @@ RSpec.describe Content::TableOfContentsBlock do
     expect(toc_block.respond_to? :text).to eq true
   end
 
-  it "is invalid if :text is not present" do
-    expect(FactoryBot.build(:toc_block, content_block_references: [])).to_not be_valid
-  end
-
   it "is invalid if :text belongs to a different project" do
     text = FactoryBot.create(:text)
     toc_block.content_block_references = [FactoryBot.create(:content_block_reference,
-                                                            kind: "texts",
+                                                            kind: "text",
                                                             content_block: toc_block,
                                                             referencable: text)]
     expect(toc_block).to_not be_valid
@@ -46,5 +42,19 @@ RSpec.describe Content::TableOfContentsBlock do
 
   it "has the correct available attributes" do
     expect(toc_block.available_attributes).to match_array [:depth, :title, :show_authors, :show_text_title]
+  end
+
+  describe "#renderable?" do
+    context "when :text is present" do
+      it "is true" do
+        expect(FactoryBot.build(:toc_block).renderable?).to eq true
+      end
+    end
+
+    context "when :text is not present" do
+      it "is false" do
+        expect(FactoryBot.build(:toc_block, content_block_references: []).renderable?).to eq false
+      end
+    end
   end
 end

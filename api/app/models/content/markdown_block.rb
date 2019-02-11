@@ -1,8 +1,11 @@
 module Content
   class MarkdownBlock < ::ContentBlock
+
+    config.required_render_attributes = %i{style body}.freeze
+
     include Concerns::HasFormattedAttributes
 
-    has_configured_attributes style: :string,
+    has_configured_attributes style: [:string, default: "normal"],
                               body: :string
 
     has_formatted_attribute :body, renderer_options: {
@@ -13,7 +16,6 @@ module Content
       hard_wrap: false
     }
 
-    validates :body, presence: true
     validates :style, presence: true, inclusion: { in: %w(shaded normal) }
   end
 end
