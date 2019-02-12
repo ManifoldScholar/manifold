@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
-import Project from "frontend/components/project";
+import Project from "global/components/project";
 
 export default class SearchResultsTypeProject extends PureComponent {
   static displayName = "Search.Results.Type.Project";
@@ -32,7 +32,7 @@ export default class SearchResultsTypeProject extends PureComponent {
       <li className="result-project" key={result.id}>
         <Link className="result" to={lh.link("frontendProject", attr.slug)}>
           <figure className="image">
-            <Project.Cover project={project} />
+            <Project.Avatar project={project} />
           </figure>
           <div className="body">
             <h3

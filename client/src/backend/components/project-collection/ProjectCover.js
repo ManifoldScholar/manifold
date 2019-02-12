@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import FrontendProject from "frontend/components/project";
+import Project from "global/components/project";
 import AddButton from "./AddButton";
 import classNames from "classnames";
 
@@ -56,7 +56,7 @@ export default class ProjectCollectionProjectCover extends PureComponent {
     return (
       <div className="item-wrapper">
         <figure className={figureClass}>
-          <FrontendProject.Cover project={project} />
+          <Project.Avatar project={project} />
           {this.renderAddButton(this.props)}
         </figure>
         <div className="meta">

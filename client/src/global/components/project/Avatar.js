@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ProjectPlaceholder from "global/components/svg/ProjectPlaceholder";
 
-export default class ProjectCover extends Component {
-  static displayName = "Project.Cover";
+export default class ProjectAvatar extends Component {
+  static displayName = "Project.Avatar";
 
   static propTypes = {
     project: PropTypes.object
