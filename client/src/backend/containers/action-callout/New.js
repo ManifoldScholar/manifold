@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Form from "./Form";
-import memoize from "lodash/memoize";
 
 export class CallToActionNew extends PureComponent {
   static displayName = "CallToAction.New";
@@ -12,36 +11,32 @@ export class CallToActionNew extends PureComponent {
     project: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+
+    let attributes = {
+      kind: "link",
+      location: "left",
+      position: "top",
+      button: true
+    };
+
+    if (props.location.state && props.location.state.actionCallout) {
+      attributes = Object.assign(
+        attributes,
+        props.location.state.actionCallout.attributes
+      );
+    }
+
+    this.state = { attributes };
+  }
+
   get project() {
     return this.props.project;
   }
 
-  pendingActionCallout = memoize(
-    () => {
-      const attributes = {
-        kind: "link",
-        location: "left",
-        position: "top",
-        button: true
-      };
-      if (!this.props.location.state) return { attributes };
-      return {
-        attributes: Object.assign(
-          attributes,
-          this.props.location.state.actionCallout.attributes
-        )
-      };
-    },
-    () => this.props.location.state
-  );
-
   render() {
-    return (
-      <Form
-        actionCallout={this.pendingActionCallout()}
-        project={this.project}
-      />
-    );
+    return <Form actionCallout={this.state} project={this.project} />;
   }
 }
 
