@@ -9,6 +9,7 @@ class Text < ApplicationRecord
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
   include Concerns::ValidatesSlugPresence
+  include WithMarkdown
 
   # Default Scope
   default_scope { order(position: :asc).includes(:titles, :text_subjects, :category) }
@@ -23,6 +24,7 @@ class Text < ApplicationRecord
   include Attachments
 
   # Magic
+  has_formatted_attributes :description
   with_metadata %w(
     series_title container_title isbn issn doi unique_identifier language
     original_publisher original_publisher_place original_title publisher publisher_place

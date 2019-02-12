@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Bibliographic from "./Bibliographic";
 import Cover from "frontend/components/text/Cover";
-import lh from "helpers/linkHandler";
 
 export default class TextListListItemContent extends Component {
   static displayName = "TextList.ListItem.Content";
@@ -17,7 +16,8 @@ export default class TextListListItemContent extends Component {
     showCovers: PropTypes.bool,
     datesVisible: PropTypes.bool,
     datePrefix: PropTypes.string,
-    publishedVisible: PropTypes.bool
+    publishedVisible: PropTypes.bool,
+    readUrl: PropTypes.string.isRequired
   };
 
   get title() {
@@ -31,7 +31,10 @@ export default class TextListListItemContent extends Component {
 
   get description() {
     if (!this.props.showDescriptions) return null;
-    return this.props.text.attributes.description;
+    return (
+      this.props.text.attributes.descriptionFormatted ||
+      this.props.text.attributes.descriptionFormatted
+    );
   }
 
   get creatorNames() {
@@ -44,33 +47,37 @@ export default class TextListListItemContent extends Component {
     return this.props.text.attributes.updatedAt;
   }
 
+  get readUrl() {
+    return this.props.readUrl;
+  }
+
   render() {
     const text = this.props.text;
-    const { slug } = text.attributes;
     const baseClass = this.props.baseClass;
 
     return (
-      <Link to={lh.link("reader", slug)} className={`${baseClass}__link`}>
+      <div className={`${baseClass}__content`}>
         <div className={`${baseClass}__inner`}>
-          <Cover
-            text={text}
-            baseClass={baseClass}
-            iconOnly={!this.props.showCovers}
-          />
-          <div className={`${this.props.baseClass}__content`}>
-            <Bibliographic
+          <Link to={this.readUrl}>
+            <Cover
+              text={text}
               baseClass={baseClass}
-              title={this.title}
-              subtitle={this.subtitle}
-              date={this.date}
-              datePrefix={this.props.datePrefix}
-              description={this.description}
-              creatorNames={this.creatorNames}
-              publishedVisible={this.props.publishedVisible}
+              iconOnly={!this.props.showCovers}
             />
-          </div>
+          </Link>
+          <Bibliographic
+            baseClass={baseClass}
+            readUrl={this.readUrl}
+            title={this.title}
+            subtitle={this.subtitle}
+            date={this.date}
+            datePrefix={this.props.datePrefix}
+            description={this.description}
+            creatorNames={this.creatorNames}
+            publishedVisible={this.props.publishedVisible}
+          />
         </div>
-      </Link>
+      </div>
     );
   }
 }

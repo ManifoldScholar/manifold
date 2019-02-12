@@ -1,19 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.TextList.ListItem.Bibliographic component renders correctly 1`] = `
-Array [
-  <h3
-    className="text-block__name"
+<div
+  className="text-block__bibliographic"
+>
+  <a
+    href="/foo"
+    onClick={[Function]}
   >
-    <span
-      className="text-block__title"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Ain't No Thang",
+    <h3
+      className="text-block__name"
+    >
+      <span
+        className="text-block__title"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "Ain't No Thang",
+          }
         }
-      }
-    />
-  </h3>,
+      />
+    </h3>
+  </a>
   <div
     className="text-block__creators"
   >
@@ -27,7 +34,7 @@ Array [
       by 
     </span>
     Andre3000, Big Boi
-  </div>,
+  </div>
   <div
     className="text-block__status text-block__status--block"
   >
@@ -38,6 +45,6 @@ Array [
         Added April 2017
       </span>
     </span>
-  </div>,
-]
+  </div>
+</div>
 `;

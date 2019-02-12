@@ -6,25 +6,26 @@
     flex-direction: row;
   }
 
-  &__link {
+  &:hover, &:focus {
+    cursor: pointer;
+    outline: 0;
+
+    .text-block__cover--svg,
+    .text-block__name {
+      color: $accentPrimary;
+    }
+
+    .text-block__cover-image {
+      border-color: $accentPrimary;
+    }
+  }
+
+  &__content {
     display: flex;
     flex-grow: 1;
     padding: 0;
     color: inherit;
     text-decoration: none;
-
-    &:hover, &:focus {
-      outline: 0;
-
-      .text-block__cover--svg,
-      .text-block__name {
-        color: $accentPrimary;
-      }
-
-      .text-block__cover-image {
-        border-color: $accentPrimary;
-      }
-    }
   }
 
   &__inner {
@@ -68,7 +69,7 @@
     transition: border $duration $timing;
   }
 
-  &__content {
+  &__bibliographic {
     display: flex;
     flex-flow: column;
     flex-grow: 1;

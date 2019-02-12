@@ -12,6 +12,7 @@ describe("Frontend.TextList.ListItem.Content component", () => {
       wrapWithRouter(
         <Provider store={build.store()}>
           <Content
+            readUrl="/foo"
             text={build.entity.text("1")}
             baseClass={"text-block"}
             showDescriptions
