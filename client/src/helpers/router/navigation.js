@@ -160,7 +160,7 @@ class Navigation {
         args
       },
       {
-        label: "Appearance",
+        label: "Layout",
         route: "backendProjectLayout",
         entity: project,
         ability: "update",

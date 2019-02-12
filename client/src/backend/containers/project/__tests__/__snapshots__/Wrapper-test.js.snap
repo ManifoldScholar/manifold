@@ -96,7 +96,7 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               href="/backend/projects/1/layout"
               onClick={[Function]}
             >
-              Appearance
+              Layout
             </a>
           </li>
           <li>
@@ -213,7 +213,7 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
                   href="/backend/projects/1/layout"
                   onClick={[Function]}
                 >
-                  Appearance
+                  Layout
                 </a>
               </li>
               <li>
