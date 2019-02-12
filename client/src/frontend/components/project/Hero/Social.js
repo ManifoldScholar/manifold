@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import has from "lodash/has";
 import Utility from "global/components/utility";
 
 export default class ProjectHeroSocial extends PureComponent {
   static displayName = "ProjectHero.Social";
 
   static propTypes = {
+    wrapperClassName: PropTypes.string,
     blockClass: PropTypes.string,
     project: PropTypes.object.isRequired
   };
@@ -17,6 +17,25 @@ export default class ProjectHeroSocial extends PureComponent {
 
   get hashtag() {
     return this.props.project.attributes.hashtag;
+  }
+
+  get services() {
+    return ["twitter", "facebook", "instagram"];
+  }
+
+  get renderable() {
+    if (
+      this.services.some(service => {
+        return !!this.serviceId(service);
+      })
+    )
+      return true;
+    return !!this.hashtag;
+  }
+
+  serviceId(service) {
+    const key = `${service}Id`;
+    return this.attributes[key];
   }
 
   socialUrl(service, id) {
@@ -39,15 +58,15 @@ export default class ProjectHeroSocial extends PureComponent {
   }
 
   renderService(service, index) {
-    const key = `${service}Id`;
-    if (!has(this.attributes, key) || !this.attributes[key]) return null;
+    const id = this.serviceId(service);
+    if (!id) return null;
 
     return (
       <a
         key={index}
         target="_blank"
         rel="noopener noreferrer"
-        href={this.socialUrl(service, this.attributes[key])}
+        href={this.socialUrl(service, id)}
         className={`${this.props.blockClass}__social-link`}
       >
         <Utility.IconComposer icon={`social-${service}`} size={32} />
@@ -72,13 +91,15 @@ export default class ProjectHeroSocial extends PureComponent {
   }
 
   render() {
-    const services = ["twitter", "facebook", "instagram"];
-    if (!has(this.attributes, services) && !this.hashtag) return null;
-
+    if (!this.renderable) return null;
     return (
-      <div className={`${this.props.blockClass}__social-block`}>
-        {services.map((service, index) => this.renderService(service, index))}
-        {this.hashtag && this.renderHashtag()}
+      <div className={this.props.wrapperClassName}>
+        <div className={`${this.props.blockClass}__social-block`}>
+          {this.services.map((service, index) =>
+            this.renderService(service, index)
+          )}
+          {this.hashtag && this.renderHashtag()}
+        </div>
       </div>
     );
   }

@@ -13,12 +13,16 @@ export default class ProjectHeroCalloutList extends PureComponent {
     visibilityClass: PropTypes.string
   };
 
+  get callouts() {
+    return this.props.callouts;
+  }
+
   get buttons() {
-    return this.props.callouts.filter(callout => callout.attributes.button);
+    return this.callouts.filter(callout => callout.attributes.button);
   }
 
   get links() {
-    return this.props.callouts.filter(callout => !callout.attributes.button);
+    return this.callouts.filter(callout => !callout.attributes.button);
   }
 
   renderCallouts(callouts) {
@@ -45,6 +49,7 @@ export default class ProjectHeroCalloutList extends PureComponent {
   }
 
   render() {
+    if (this.callouts.length === 0) return null;
     const { blockClass, visibilityClass } = this.props;
 
     return (
