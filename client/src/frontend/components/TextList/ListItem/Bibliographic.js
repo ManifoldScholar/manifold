@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Date from "./Date";
+import { Link } from "react-router-dom";
 
 export default class TextListListItemBibliographic extends Component {
   static displayName = "TextList.ListItem.Bibliographic";
@@ -14,31 +15,38 @@ export default class TextListListItemBibliographic extends Component {
     subtitle: PropTypes.string,
     date: PropTypes.string,
     datePrefix: PropTypes.string,
-    publishedVisible: PropTypes.bool
+    publishedVisible: PropTypes.bool,
+    readUrl: PropTypes.string.isRequired
   };
 
   get showStatus() {
     return this.props.date || this.props.publishedVisible;
   }
 
+  get readUrl() {
+    return this.props.readUrl;
+  }
+
   render() {
     const baseClass = this.props.baseClass;
 
     return (
-      <React.Fragment>
-        <h3 className={`${baseClass}__name`}>
-          <span
-            className={`${baseClass}__title`}
-            dangerouslySetInnerHTML={{
-              __html: this.props.title
-            }}
-          />
-          {this.props.subtitle && (
-            <span className={`${baseClass}__subtitle`}>
-              {this.props.subtitle}
-            </span>
-          )}
-        </h3>
+      <div className={`${baseClass}__bibliographic`}>
+        <Link to={this.readUrl}>
+          <h3 className={`${baseClass}__name`}>
+            <span
+              className={`${baseClass}__title`}
+              dangerouslySetInnerHTML={{
+                __html: this.props.title
+              }}
+            />
+            {this.props.subtitle && (
+              <span className={`${baseClass}__subtitle`}>
+                {this.props.subtitle}
+              </span>
+            )}
+          </h3>
+        </Link>
         {this.props.creatorNames && (
           <div className={`${baseClass}__creators`}>
             <span style={{ fontStyle: "italic" }}>by </span>
@@ -46,9 +54,10 @@ export default class TextListListItemBibliographic extends Component {
           </div>
         )}
         {this.props.description && (
-          <p className={`${baseClass}__description`}>
-            {this.props.description}
-          </p>
+          <div
+            className={`${baseClass}__description markdown`}
+            dangerouslySetInnerHTML={{ __html: this.props.description }}
+          />
         )}
         {this.showStatus && (
           <div
@@ -69,7 +78,7 @@ export default class TextListListItemBibliographic extends Component {
             )}
           </div>
         )}
-      </React.Fragment>
+      </div>
     );
   }
 }
