@@ -74,12 +74,12 @@ export default class Builder extends PureComponent {
 
             <Block
               title="Description + Images"
-              description="Description Text, Cover Art, and Background Image."
+              description="Description Text, Cover Art, and Background Image"
               onEdit={this.openDescriptionDrawer}
             />
             <Block
               title="Calls-to-Action"
-              description="Calls to Action Buttons and Links explanation goes here."
+              description="Buttons and links to related resources"
               onEdit={this.toggleActionCallouts}
               open={this.isActionCalloutsOpen}
             >
@@ -95,7 +95,7 @@ export default class Builder extends PureComponent {
             </Block>
             <Block
               title="Social Links"
-              description="Links to social platforms and hashtag."
+              description="Links to social platforms and hashtag"
               onEdit={this.openSocialDrawer}
             />
           </div>
