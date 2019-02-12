@@ -51,7 +51,7 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
           className="project-hero__cover-block"
         >
           <figure
-            className="project-hero__figure"
+            className="project-hero__figure project-hero__figure--constrained"
           />
         </div>
       </div>
@@ -152,7 +152,7 @@ exports[`Frontend.Project.Detail component renders correctly when hideActivity i
           className="project-hero__cover-block"
         >
           <figure
-            className="project-hero__figure"
+            className="project-hero__figure project-hero__figure--constrained"
           />
         </div>
       </div>

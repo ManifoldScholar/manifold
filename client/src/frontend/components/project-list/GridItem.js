@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Cover from "./Cover";
-import Follow from "./Follow";
+import Project from "frontend/components/project";
+import GlobalProject from "global/components/project";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
-// import { Project as GlobalProject } from 'components/global';
 
-export default class ProjectThumbnail extends Component {
-  static displayName = "Project.Thumbnail";
+export default class ProjectGridItem extends Component {
+  static displayName = "Project.GridItem";
 
   static propTypes = {
     project: PropTypes.object,
@@ -90,7 +89,6 @@ export default class ProjectThumbnail extends Component {
 
   render() {
     const project = this.props.project;
-
     let projectMeta = null;
     if (!this.props.hideMeta) {
       projectMeta = (
@@ -121,8 +119,8 @@ export default class ProjectThumbnail extends Component {
     return (
       <Link to={lh.link("frontendProject", project.attributes.slug)}>
         <figure className={figureClass}>
-          <Cover project={project} />
-          <Follow
+          <GlobalProject.Avatar project={project} />
+          <Project.Follow
             project={project}
             authenticated={this.props.authenticated}
             favorites={this.props.favorites}

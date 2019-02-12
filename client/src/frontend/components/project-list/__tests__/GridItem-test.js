@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Thumbnail from "../Thumbnail";
+import GridItem from "../GridItem";
 import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Project.Thumbnail component", () => {
   const project = build.entity.project("1");
@@ -11,7 +11,7 @@ describe("Frontend.Project.Thumbnail component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
-        <Thumbnail
+        <GridItem
           dispatch={dispatchMock}
           project={project}
           favorites={{}}

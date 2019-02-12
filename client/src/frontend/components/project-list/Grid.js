@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Project from "frontend/components/project";
+import GridItem from "./GridItem";
 import Utility from "global/components/utility";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import difference from "lodash/difference";
@@ -129,7 +129,7 @@ export default class ProjectListGrid extends Component {
             {projects.map(project => {
               return (
                 <li key={project.id}>
-                  <Project.Thumbnail
+                  <GridItem
                     authenticated={this.props.authenticated}
                     favorites={this.props.favorites}
                     dispatch={this.props.dispatch}

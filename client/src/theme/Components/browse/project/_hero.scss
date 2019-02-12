@@ -389,6 +389,10 @@
       align-items: flex-start;
     }
 
+    &--constrained {
+      width: 160px;
+    }
+
     img {
       width: 100%;
       max-width: 120px;
@@ -410,7 +414,6 @@
       @include respond($break60) {
         width: 160px;
         height: 160px;
-        margin-left: 23px;
       }
     }
   }
