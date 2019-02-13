@@ -5,7 +5,7 @@ function tryToSignIn(dispatch, event) {
   const authToken = get(event, "data.authToken");
 
   if (authToken) {
-    dispatch(U.login({ authToken }));
+    dispatch(U.login({ authToken, setCookie: true }));
   } else if (get(event, "data.failed")) {
     dispatch(O.fail(get(event, "data.errors")));
   } else {

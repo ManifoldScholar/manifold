@@ -45,11 +45,7 @@ function authenticateWithPassword(email, password, dispatch) {
         dispatch(actions.loginComplete());
         return Promise.resolve();
       }
-      const expireDate = new Date();
-      expireDate.setDate(expireDate.getDate() + 90);
-      if (document) {
-        document.cookie = `authToken=${authToken};path=/;expires=${expireDate.toUTCString()}`;
-      }
+      setCookie(authToken);
       dispatch(actions.setCurrentUser(response));
       dispatch(actions.setAuthToken(authToken));
       dispatch(actions.loginComplete());
@@ -63,7 +59,7 @@ function authenticateWithPassword(email, password, dispatch) {
   return promise;
 }
 
-export function authenticateWithToken(token, dispatch) {
+export function authenticateWithToken(token, shouldSetCookie = false, dispatch) {
   const client = new ApiClient();
 
   // Query API for current user from token
@@ -78,6 +74,7 @@ export function authenticateWithToken(token, dispatch) {
 
   promise.then(
     response => {
+      if (shouldSetCookie) setCookie(token);
       dispatch(actions.setCurrentUser(response));
       dispatch(actions.setAuthToken(token));
       dispatch(actions.loginComplete());
@@ -88,6 +85,16 @@ export function authenticateWithToken(token, dispatch) {
   );
 
   return promise;
+}
+
+function setCookie(authToken) {
+  if (!document) return null;
+  const cookieSet = !!document.cookie.match(/authToken=/);
+  if (cookieSet) return null;
+
+  const expireDate = new Date();
+  expireDate.setDate(expireDate.getDate() + 90);
+  document.cookie = `authToken=${authToken};path=/;expires=${expireDate.toUTCString()}`;
 }
 
 function destroyCookie() {
@@ -129,7 +136,7 @@ export default function currentUserMiddleware({ dispatch, getState }) {
     if (action.type === "LOGIN") {
       dispatch(actions.loginStart());
       if (payload.authToken) {
-        return authenticateWithToken(payload.authToken, dispatch);
+        return authenticateWithToken(payload.authToken, payload.setCookie, dispatch);
       }
       authenticateWithPassword(payload.email, payload.password, dispatch);
     }
