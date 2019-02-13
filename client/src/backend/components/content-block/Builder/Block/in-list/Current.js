@@ -33,6 +33,10 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
     return this.entity.attributes.hideable || false;
   }
 
+  get renderable() {
+    return this.entity.attributes.renderable || false;
+  }
+
   render() {
     const TypeComponent = this.props.typeComponent;
     const baseClass = "content-block";
@@ -41,7 +45,12 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
       <TypeComponent>
         {block => (
           <div className={`${baseClass}__inner`}>
-            <Identity icon={block.icon} title={block.title} size={"large"} />
+            <Identity
+              icon={block.icon}
+              title={block.title}
+              requiresAttention={!this.renderable}
+              size={"large"}
+            />
             <div className={`${baseClass}__button-list`}>
               <Authorize entity={this.entity} ability="delete">
                 <Delete

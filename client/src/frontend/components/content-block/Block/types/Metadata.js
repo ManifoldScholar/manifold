@@ -1,8 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
-import Wrapper from "../parts/Wrapper";
-import Heading from "../parts/Heading";
 import Meta from "global/components/meta";
 
 export default class ProjectContentBlockMetadataBlock extends PureComponent {
@@ -12,11 +10,11 @@ export default class ProjectContentBlockMetadataBlock extends PureComponent {
     project: PropTypes.object.isRequired
   };
 
-  get title() {
+  static get title() {
     return "Metadata";
   }
 
-  get icon() {
+  static get icon() {
     return "tag";
   }
 
@@ -29,15 +27,10 @@ export default class ProjectContentBlockMetadataBlock extends PureComponent {
 
     if (!metadata || isEmpty(metadata)) return null;
 
-    const baseClass = "entity-section-wrapper";
-
     return (
-      <Wrapper>
-        <Heading title={this.title} icon={this.icon} />
-        <div className={`${baseClass}__body ${baseClass}__body--pad-top`}>
-          <Meta.List metadata={metadataFormatted} />
-        </div>
-      </Wrapper>
+      <div className="entity-section-wrapper__body entity-section-wrapper__body--pad-top">
+        <Meta.List metadata={metadataFormatted} />
+      </div>
     );
   }
 }

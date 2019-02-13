@@ -1,15 +1,16 @@
 import isArray from "lodash/isArray";
 import isPlainObject from "lodash/isPlainObject";
 import isString from "lodash/isString";
+import get from "lodash/get";
 
 class Authorization {
   isAuthenticated(options) {
-    return options.authentication.authenticated;
+    return get(options, "authentication.authenticated");
   }
 
   currentUser(options) {
     if (options.hasOwnProperty("currentUser")) return options.currentUser;
-    return options.authentication.currentUser;
+    return get(options, "authentication.currentUser");
   }
 
   authorize(options) {

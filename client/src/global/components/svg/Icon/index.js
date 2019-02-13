@@ -48,9 +48,11 @@ import SocialFacebook from "./SocialFacebook";
 import SocialInstagram from "./SocialInstagram";
 import SocialTwitter from "./SocialTwitter";
 import SpeechBubble from "./SpeechBubble";
+import StopSign from "./StopSign";
 import Tag from "./Tag";
 import Touch from "./Touch";
 import Trash from "./Trash";
+import Warning from "./Warning";
 
 export default {
   ActivityComment,
@@ -103,7 +105,9 @@ export default {
   SocialInstagram,
   SocialTwitter,
   SpeechBubble,
+  StopSign,
   Tag,
   Touch,
-  Trash
+  Trash,
+  Warning
 };
