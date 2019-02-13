@@ -173,6 +173,14 @@
       max-width: 720px;
     }
 
+    &--incomplete-header {
+      margin-bottom: 20px;
+
+      @include respond($break40) {
+        margin-bottom: 0;
+      }
+    }
+
     &--incomplete {
       @include templateHead;
       display: flex;
@@ -194,6 +202,9 @@
       }
 
       .entity-section-wrapper__link-container {
+        @include templateCopy;
+        font-weight: $regular;
+        color: $neutralOffBlack;
         text-align: center;
       }
 
@@ -206,8 +217,6 @@
       }
 
       a {
-        @include templateCopy;
-        font-weight: $regular;
         color: $neutralOffBlack;
 
         &:visited {

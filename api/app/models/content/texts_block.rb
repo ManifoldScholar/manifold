@@ -2,6 +2,8 @@ module Content
   class TextsBlock < ::ContentBlock
     include Concerns::HasFormattedAttributes
 
+    config.required_render_attributes = %i{texts}.freeze
+
     has_formatted_attribute :description
 
     has_many_proxied :included_categories, source: "Category"
