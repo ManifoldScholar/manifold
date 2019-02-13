@@ -61,6 +61,72 @@ exports[`Backend Project New Container renders correctly 1`] = `
           >
             <div
               className="form-input"
+            >
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label>
+                  Project Type
+                </label>
+                <div
+                  className="form-select"
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-caret-down"
+                  />
+                  <select
+                    aria-describedby="select-error-1"
+                    onChange={[Function]}
+                    value=""
+                  >
+                    <option
+                      value=""
+                    >
+                      Select a type...
+                    </option>
+                    <option
+                      value="simple"
+                    >
+                      Simple Book
+                    </option>
+                    <option
+                      value="enhanced"
+                    >
+                      Enhanced Book
+                    </option>
+                    <option
+                      value="journal_single"
+                    >
+                      Journal (Single Source)
+                    </option>
+                    <option
+                      value="journal_multi"
+                    >
+                      Journal (Multiple Sources)
+                    </option>
+                    <option
+                      value="teaching_resource"
+                    >
+                      OER or Teaching Resource
+                    </option>
+                    <option
+                      value="report"
+                    >
+                      Report or Handbook
+                    </option>
+                    <option
+                      value="resources"
+                    >
+                      Resources Only
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div
+              className="form-input"
               style={Object {}}
             >
               <label
