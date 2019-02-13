@@ -23,7 +23,14 @@ export default class ProjectAvatar extends Component {
 
   renderPlaceholderImage(project) {
     if (!project.attributes.avatarColor) return null;
-    return <ProjectPlaceholder color={project.attributes.avatarColor} />;
+    return (
+      <React.Fragment>
+        <ProjectPlaceholder
+          mode="responsive"
+          color={project.attributes.avatarColor}
+        />
+      </React.Fragment>
+    );
   }
 
   render() {

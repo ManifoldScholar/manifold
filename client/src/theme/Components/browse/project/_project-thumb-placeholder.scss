@@ -1,4 +1,17 @@
 .project-thumb-placeholder {
+  &--mobile {
+    @include respond($break75) {
+      display: none;
+    }
+  }
+
+  &--desktop {
+    display: none;
+    @include respond($break75) {
+      display: block;
+    }
+  }
+
   &--primary {
     .project-thumb-placeholder__tile {
       fill: $sp50Primary;
@@ -31,6 +44,15 @@
 
   &__tile {
     fill: $neutralWhite;
+  }
+
+  &__illustration {
+    stroke: $neutral75;
+
+    .backend &,
+    .project-hero--dark & {
+      stroke: $neutral90;
+    }
   }
 
   &__frame {

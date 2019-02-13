@@ -8,7 +8,12 @@ export default class ProjectListItem extends PureComponent {
   static displayName = "Project.ListItem";
 
   static propTypes = {
-    entity: PropTypes.object
+    entity: PropTypes.object,
+    placeholderMode: PropTypes.string
+  };
+
+  static defaultProps = {
+    placeholderMode: "responsive"
   };
 
   projectLink(project) {
@@ -54,12 +59,15 @@ export default class ProjectListItem extends PureComponent {
     const hasAvatarStyles = project.attributes.avatarStyles.original;
     const avatarColor = project.attributes.avatarColor;
 
-    if (!meta) {
-      return <ProjectPlaceholder color={avatarColor} />;
+    if (!meta || !hasAvatarStyles) {
+      return (
+        <ProjectPlaceholder
+          mode={this.props.placeholderMode}
+          color={avatarColor}
+        />
+      );
     }
-    if (!hasAvatarStyles) {
-      return <ProjectPlaceholder color={avatarColor} />;
-    }
+
     const imageStyle =
       meta.width >= meta.height
         ? project.attributes.avatarStyles.smallSquare
