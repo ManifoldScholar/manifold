@@ -53,6 +53,26 @@ export class ProjectNewContainer extends PureComponent {
               onSuccess={this.handleSuccess}
               className="form-secondary"
             >
+              <Form.Select
+                name="attributes[kind]"
+                label="Project Type"
+                options={[
+                  { label: "Select a type...", value: "" },
+                  { label: "Simple Book", value: "simple" },
+                  { label: "Enhanced Book", value: "enhanced" },
+                  { label: "Journal (Single Source)", value: "journal_single" },
+                  {
+                    label: "Journal (Multiple Sources)",
+                    value: "journal_multi"
+                  },
+                  {
+                    label: "OER or Teaching Resource",
+                    value: "teaching_resource"
+                  },
+                  { label: "Report or Handbook", value: "report" },
+                  { label: "Resources Only", value: "resources" }
+                ]}
+              />
               <Form.TextInput
                 validation={["required"]}
                 focusOnMount
