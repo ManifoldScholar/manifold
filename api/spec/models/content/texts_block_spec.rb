@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Content::TextsBlock do
-  let(:texts_block) { FactoryBot.create(:texts_block) }
+
+  let(:text) { FactoryBot.create(:text)}
+  let(:texts_block) { FactoryBot.create(:texts_block, project: text.project) }
 
   it "has a valid factory" do
     expect(FactoryBot.build(:texts_block)).to be_valid
@@ -56,7 +58,7 @@ RSpec.describe Content::TextsBlock do
 
   describe "#renderable?" do
     it "is true" do
-      expect(FactoryBot.build(:metadata_block).renderable?).to eq true
+      expect(texts_block.renderable?).to eq true
     end
   end
 end

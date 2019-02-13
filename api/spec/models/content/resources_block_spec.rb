@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Content::ResourcesBlock do
-  let(:resources_block) { FactoryBot.create(:resources_block) }
+  let(:resource) { FactoryBot.create(:resource)}
+  let(:resources_block) { FactoryBot.create(:resources_block, project: resource.project) }
 
   it "has a valid factory" do
     expect(FactoryBot.build(:resources_block)).to be_valid
@@ -17,7 +18,7 @@ RSpec.describe Content::ResourcesBlock do
 
   describe "#renderable?" do
     it "is true" do
-      expect(FactoryBot.build(:metadata_block).renderable?).to eq true
+      expect(resources_block.renderable?).to eq true
     end
   end
 end
