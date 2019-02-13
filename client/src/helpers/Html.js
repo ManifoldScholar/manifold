@@ -115,7 +115,8 @@ export default class Html extends Component {
     const { component, store, disableBrowserRender } = this.props;
     const content = component ? ReactDOM.renderToString(component) : null;
     const helmet = Helmet.renderStatic();
-    const bodyClass = BodyClass.rewind();
+    const bodyClasses = BodyClass.rewind() || [];
+    const bodyClass = bodyClasses.filter(Boolean).join(" ");
     const contentProps = {};
     if (content) {
       contentProps.dangerouslySetInnerHTML = { __html: content };
