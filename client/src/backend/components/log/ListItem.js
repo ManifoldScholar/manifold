@@ -13,6 +13,10 @@ export default class LogListItem extends PureComponent {
     entity: PropTypes.object
   };
 
+  get deleted() {
+    return this.props.entity.attributes.deleted;
+  }
+
   renderChangeList(version) {
     return (
       <div className="results-desc flush">
@@ -36,6 +40,16 @@ export default class LogListItem extends PureComponent {
 
   renderItemLink(version) {
     const urlName = `backend${version.attributes.itemType}`;
+
+    if (this.deleted)
+      return (
+        <span
+          dangerouslySetInnerHTML={{
+            __html: version.attributes.itemDisplayName
+          }}
+        />
+      );
+
     return (
       <Link
         to={lh.link(urlName, version.attributes.itemId)}
