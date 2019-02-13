@@ -94,6 +94,10 @@
       }
     }
 
+    &--incomplete {
+      color: $sp40Secondary;
+    }
+
     &:hover {
       .content-block__icon--add {
         color: $accentPrimary;

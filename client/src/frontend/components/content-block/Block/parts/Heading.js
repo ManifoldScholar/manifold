@@ -6,13 +6,14 @@ export default class ProjectContentBlockHeading extends PureComponent {
   static displayName = "Project.Content.Block.Parts.Heading";
 
   static propTypes = {
-    icon: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    icon: PropTypes.string,
+    title: PropTypes.string,
     description: PropTypes.string
   };
 
   render() {
     const { title, icon, description } = this.props;
+    if (!title || !icon) return null;
 
     return (
       <React.Fragment>

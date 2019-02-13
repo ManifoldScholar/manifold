@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Wrapper from "../parts/Wrapper";
 
 export default class ProjectContentBlockMarkdownBlock extends PureComponent {
   static displayName = "Project.Content.Block.Markdown";
@@ -9,14 +8,16 @@ export default class ProjectContentBlockMarkdownBlock extends PureComponent {
     block: PropTypes.object.isRequired
   };
 
-  get block() {
-    return this.props.block;
+  static get placeholderTitle() {
+    return "Markdown";
   }
 
-  get blockBgClass() {
-    const blockStyle = this.block.attributes.style;
+  static get icon() {
+    return "lamp";
+  }
 
-    return blockStyle === "shaded" ? "bg-neutral05" : "";
+  get block() {
+    return this.props.block;
   }
 
   get formattedContent() {
@@ -24,14 +25,11 @@ export default class ProjectContentBlockMarkdownBlock extends PureComponent {
   }
 
   render() {
-    const blockClass = "entity-section-wrapper";
     return (
-      <Wrapper additionalClasses={this.blockBgClass}>
-        <div
-          className={`${blockClass}__body ${blockClass}__body--narrow page-content`}
-          dangerouslySetInnerHTML={{ __html: this.formattedContent }}
-        />
-      </Wrapper>
+      <div
+        className="entity-section-wrapper__body entity-section-wrapper__body--narrow page-content"
+        dangerouslySetInnerHTML={{ __html: this.formattedContent }}
+      />
     );
   }
 }

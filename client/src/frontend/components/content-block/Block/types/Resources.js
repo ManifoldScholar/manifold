@@ -1,7 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Wrapper from "../parts/Wrapper";
-import Heading from "../parts/Heading";
 import ResourceCollectionList from "frontend/components/resource-collection-list";
 import ResourceList from "frontend/components/resource-list";
 
@@ -13,11 +11,11 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
     block: PropTypes.object.isRequired
   };
 
-  get title() {
-    return this.block.attributes.title || "Resources";
+  static get title() {
+    return "Resources";
   }
 
-  get icon() {
+  static get icon() {
     return "cubeShine";
   }
 
@@ -76,44 +74,39 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
   }
 
   render() {
-    const baseClass = "entity-section-wrapper";
-
     return (
-      <Wrapper>
-        <Heading title={this.title} icon={this.icon} />
-        <div className={`${baseClass}__body`}>
-          {this.hasVisibleCollections && (
-            <React.Fragment>
-              <ResourceCollectionList.Grid
-                project={this.project}
-                resourceCollections={this.visibleCollections}
-              />
-              <ResourceCollectionList.Totals
-                alignLeft={this.isSparse}
-                project={this.project}
-                count={this.countProjectCollections}
-              />
-            </React.Fragment>
-          )}
-          <ResourceList.Thumbnails
-            project={this.project}
-            resources={this.visibleResources}
-          />
-          {!this.hasVisibleCollections && (
+      <div className="entity-section-wrapper__body">
+        {this.hasVisibleCollections && (
+          <React.Fragment>
+            <ResourceCollectionList.Grid
+              project={this.project}
+              resourceCollections={this.visibleCollections}
+            />
             <ResourceCollectionList.Totals
               alignLeft={this.isSparse}
-              tight
               project={this.project}
               count={this.countProjectCollections}
             />
-          )}
-          <ResourceList.Totals
+          </React.Fragment>
+        )}
+        <ResourceList.Thumbnails
+          project={this.project}
+          resources={this.visibleResources}
+        />
+        {!this.hasVisibleCollections && (
+          <ResourceCollectionList.Totals
             alignLeft={this.isSparse}
+            tight
             project={this.project}
-            count={this.resourcesTotal}
+            count={this.countProjectCollections}
           />
-        </div>
-      </Wrapper>
+        )}
+        <ResourceList.Totals
+          alignLeft={this.isSparse}
+          project={this.project}
+          count={this.resourcesTotal}
+        />
+      </div>
     );
   }
 }

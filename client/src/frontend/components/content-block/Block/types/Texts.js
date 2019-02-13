@@ -1,7 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Wrapper from "../parts/Wrapper";
-import Heading from "../parts/Heading";
 import TextList from "frontend/components/TextList";
 import pick from "lodash/pick";
 
@@ -13,11 +11,11 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
     project: PropTypes.object.isRequired
   };
 
-  get title() {
-    return this.props.block.attributes.title || "Texts";
+  static get title() {
+    return "Texts";
   }
 
-  get icon() {
+  static get icon() {
     return "bookStackIsometric";
   }
 
@@ -36,10 +34,6 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   get categories() {
     if (this.includedCategories.length > 0) return this.includedCategories;
     return this.projectCategories;
-  }
-
-  get blockDescription() {
-    return this.props.block.attributes.descriptionFormatted;
   }
 
   get uncategorizedTexts() {
@@ -63,39 +57,30 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   }
 
   render() {
-    const baseClass = "entity-section-wrapper";
-
     return (
-      <Wrapper>
-        <Heading
-          title={this.title}
-          icon={this.icon}
-          description={this.blockDescription}
-        />
-        <div className={`${baseClass}__body`}>
-          <div className="text-list">
-            {this.categories.map(category => (
-              <TextList
-                label={
-                  this.visibility.showCategoryLabels
-                    ? category.attributes.title
-                    : null
-                }
-                texts={this.textsForCategory(category)}
-                key={category.id}
-                {...this.visibility}
-              />
-            ))}
-            {this.visibility.showUncategorized && (
-              <TextList
-                label="Uncategorized"
-                texts={this.uncategorizedTexts}
-                {...this.visibility}
-              />
-            )}
-          </div>
+      <div className="entity-section-wrapper__body">
+        <div className="text-list">
+          {this.categories.map(category => (
+            <TextList
+              label={
+                this.visibility.showCategoryLabels
+                  ? category.attributes.title
+                  : null
+              }
+              texts={this.textsForCategory(category)}
+              key={category.id}
+              {...this.visibility}
+            />
+          ))}
+          {this.visibility.showUncategorized && (
+            <TextList
+              label="Uncategorized"
+              texts={this.uncategorizedTexts}
+              {...this.visibility}
+            />
+          )}
         </div>
-      </Wrapper>
+      </div>
     );
   }
 }
