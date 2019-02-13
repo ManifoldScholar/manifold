@@ -1,6 +1,6 @@
 class VersionSerializer < ApplicationSerializer
   attributes :item_type, :item_id, :object_changes, :item_display_name,
-             :event, :actor_name, :actor_id, :created_at
+             :event, :actor_name, :actor_id, :created_at, :deleted
 
   belongs_to :parent_item
 
@@ -19,10 +19,16 @@ class VersionSerializer < ApplicationSerializer
     object.actor.id
   end
 
+  # rubocop:disable Metrics/AbcSize
   def item_display_name
     return object.item_title_formatted if object.item.respond_to? :title_formatted
     return object.item_title if object.item.respond_to? :title
 
-    object.item.id
+    object.object["title"] || object.item_id
+  end
+  # rubocop:enable Metrics/AbcSize
+
+  def deleted
+    object.item.nil?
   end
 end
