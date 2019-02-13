@@ -127,7 +127,7 @@ export class ActionCalloutForm extends Component {
     return (
       <React.Fragment>
         <Navigation.DrawerHeader
-          icon="Mug"
+          icon="Touch"
           title={this.drawerTitle}
           buttons={this.buttons}
         />
