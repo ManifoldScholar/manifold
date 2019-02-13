@@ -187,6 +187,7 @@ export class DashboardsAdminContainer extends PureComponent {
                     paginationClickHandler={this.updateHandlerCreator}
                     paginationClass="secondary"
                     entityComponent={Project.ListItem}
+                    entityComponentProps={{ placeholderMode: "small" }}
                     filterChangeHandler={this.filterChangeHandler}
                     emptyMessage={this.renderNoProjects}
                   />
@@ -198,6 +199,7 @@ export class DashboardsAdminContainer extends PureComponent {
                     <List.SimpleList
                       entities={this.props.recentProjects}
                       entityComponent={Project.ListItem}
+                      entityComponentProps={{ placeholderMode: "small" }}
                       title={"Recently Updated"}
                       icon={"manicon-bugle-small"}
                       listClasses={"flush"}
