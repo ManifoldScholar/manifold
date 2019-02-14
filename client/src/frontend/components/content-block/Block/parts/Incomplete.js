@@ -113,9 +113,9 @@ export default class ProjectContentBlockIncomplete extends PureComponent {
         has_metadata: (
           <React.Fragment>
             <Link to={this.projectEditLink("backendProjectMetadata")}>
-              Add metadata to the project
+              Add project metadata
             </Link>{" "}
-            fix this block.
+            to fix this block.
           </React.Fragment>
         )
       }
@@ -125,7 +125,7 @@ export default class ProjectContentBlockIncomplete extends PureComponent {
   projectEditLink(type) {
     return lh.link(type, this.projectId, this.block.id);
   }
-  
+
   lookupError(key) {
     if (!has(this.availableErrors, [this.blockType, key])) return null;
     return this.availableErrors[this.blockType][key];
