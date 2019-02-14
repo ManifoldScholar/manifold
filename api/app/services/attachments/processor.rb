@@ -26,7 +26,8 @@ module Attachments
 
     def process_versions!
       styles.map do |key, value|
-        versions[key] = process_version value
+        version = process_version value
+        versions[key] = version unless version.nil?
       end
     end
 
