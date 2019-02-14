@@ -35,6 +35,21 @@ function notifyLogout(dispatch) {
   }, 5000);
 }
 
+function setCookie(authToken) {
+  if (__SERVER__) return;
+  const cookieSet = !!document.cookie.match(/authToken=/);
+  if (cookieSet) return null;
+
+  const expireDate = new Date();
+  expireDate.setDate(expireDate.getDate() + 90);
+  document.cookie = `authToken=${authToken};path=/;expires=${expireDate.toUTCString()}`;
+}
+
+function destroyCookie() {
+  if (__SERVER__) return;
+  document.cookie = "authToken=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT";
+}
+
 function authenticateWithPassword(email, password, dispatch) {
   const promise = tokensAPI.createToken(email, password);
   promise.then(
@@ -59,7 +74,11 @@ function authenticateWithPassword(email, password, dispatch) {
   return promise;
 }
 
-export function authenticateWithToken(token, shouldSetCookie = false, dispatch) {
+export function authenticateWithToken(
+  token,
+  shouldSetCookie = false,
+  dispatch
+) {
   const client = new ApiClient();
 
   // Query API for current user from token
@@ -85,22 +104,6 @@ export function authenticateWithToken(token, shouldSetCookie = false, dispatch) 
   );
 
   return promise;
-}
-
-function setCookie(authToken) {
-  if (!document) return null;
-  const cookieSet = !!document.cookie.match(/authToken=/);
-  if (cookieSet) return null;
-
-  const expireDate = new Date();
-  expireDate.setDate(expireDate.getDate() + 90);
-  document.cookie = `authToken=${authToken};path=/;expires=${expireDate.toUTCString()}`;
-}
-
-function destroyCookie() {
-  if (document) {
-    document.cookie = "authToken=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT";
-  }
 }
 
 function follow(project, token, dispatch) {
@@ -136,7 +139,11 @@ export default function currentUserMiddleware({ dispatch, getState }) {
     if (action.type === "LOGIN") {
       dispatch(actions.loginStart());
       if (payload.authToken) {
-        return authenticateWithToken(payload.authToken, payload.setCookie, dispatch);
+        return authenticateWithToken(
+          payload.authToken,
+          payload.setCookie,
+          dispatch
+        );
       }
       authenticateWithPassword(payload.email, payload.password, dispatch);
     }

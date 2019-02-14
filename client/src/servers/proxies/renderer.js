@@ -58,7 +58,7 @@ export default function makeRendererProxy(stats, requestHandler) {
         promises.push(ManifoldBootstrap(store.getState, store.dispatch));
       }
 
-      promises.push(authenticateWithToken(authToken, store.dispatch));
+      promises.push(authenticateWithToken(authToken, false, store.dispatch));
       Promise.all(promises).then(render, render);
     }
   });
