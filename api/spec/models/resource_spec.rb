@@ -199,4 +199,41 @@ RSpec.describe Resource, type: :model do
       end
     end
   end
+
+  context "when the resource is a PDF", slow: true do
+
+    let(:resource) do
+      FactoryBot.build(
+        :resource,
+        kind: "pdf",
+        attachment: fixture_file_upload(Rails.root.join('spec/data/assets/pdfs/multi-page.pdf'), 'application/pdf')
+      )
+    end
+    before { perform_enqueued_jobs { resource.save } }
+
+    it "produces attachment styles" do
+      resource.reload # Reload to pick up backgrounded attachment versions.
+      expect(resource.attachment_styles.values.any? &:empty?).to be false
+    end
+
+  end
+
+  context "when the resource is an image", slow: true do
+
+    let(:resource) do
+      FactoryBot.build(
+        :resource,
+        kind: "image",
+        attachment: fixture_file_upload(Rails.root.join('spec/data/assets/images/test_avatar.jpg'), 'image/jpg')
+      )
+    end
+    before { perform_enqueued_jobs { resource.save } }
+
+    it "produces attachment styles" do
+      resource.reload # Reload to pick up backgrounded attachment versions.
+      expect(resource.attachment_styles.values.any? &:empty?).to be false
+    end
+
+  end
+
 end
