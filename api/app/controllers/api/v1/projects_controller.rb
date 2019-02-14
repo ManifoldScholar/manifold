@@ -55,12 +55,10 @@ module Api
       def scope_for_projects
         Project.friendly.includes(
           { texts: [:titles, :text_subjects] },
-          { resource_collections: { resources: :tags } },
           :events,
           :twitter_queries,
           :text_categories,
-          :subjects,
-          resources: :tags
+          :subjects
         )
       end
 
