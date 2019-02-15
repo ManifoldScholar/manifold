@@ -112,7 +112,16 @@ RSpec.describe Ingestions::Strategies::Document do
        {"label"=>"Header 2",
         "anchor"=>"header-2",
         "source_path"=>"index.html",
-        "children"=>[]}
+        "children"=>[]},
+       {"label"=>"Header 3",
+        "anchor"=>"header-3",
+        "source_path"=>"index.html",
+        "children"=>[
+          {"label"=>"Header 3-1",
+           "anchor"=>"header-3-1",
+           "source_path"=>"index.html",
+           "children"=>[]}
+        ]}
       ]
     }
 
@@ -121,7 +130,7 @@ RSpec.describe Ingestions::Strategies::Document do
       expect(manifest[:attributes][:toc]).to_not eq []
     end
 
-    it "correctly generates the TOC" do
+    it "correctly generates the TOC and excludes blank entries" do
       manifest = described_class.run(context: context).result
       expect(manifest[:attributes][:toc]).to eq toc
     end
