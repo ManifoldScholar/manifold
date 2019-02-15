@@ -24,7 +24,8 @@ module Ingestions
           header_tags.find_index(tag)
         end
 
-        # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+        # rubocop:disable Metrics/AbcSize, Metrics/MethodLength,
+        # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         def build_toc_from_headers
           xpath = header_tags.map { |h| "//#{h}" }.join(" | ")
           headers = body_parsed.search(xpath)
@@ -34,6 +35,8 @@ module Ingestions
           last_entry_depth = nil
           last_unadjusted_entry_depth = nil
           headers.each do |header|
+            next if header.text.strip.blank? # exclude blank headers.
+
             entry_depth = header_tag_depth(header.name)
             unadjusted_entry_depth = entry_depth
             entry = entry_for_header(header)
@@ -55,7 +58,8 @@ module Ingestions
           end
           entries
         end
-        # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+        # rubocop:enable Metrics/AbcSize, Metrics/MethodLength,
+        # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
         def header_tags
           %w(h1 h2 h3 h4 h5 h6)
