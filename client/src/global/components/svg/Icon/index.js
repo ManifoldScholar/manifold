@@ -19,10 +19,12 @@ import BulletList from "./BulletList";
 import Check from "./Check";
 import CirclePlus from "./CirclePlus";
 import CubeShine from "./CubeShine";
+import Envelope from "./Envelope";
 import EyeClosed from "./EyeClosed";
 import EyeOpen from "./EyeOpen";
 import Glasses from "./Glasses";
 import Globe from "./Globe";
+import Key from "./Key";
 import Lamp from "./Lamp";
 import ManifoldLogo from "./ManifoldLogo";
 import LoosePages from "./LoosePages";
@@ -76,10 +78,12 @@ export default {
   Check,
   CirclePlus,
   CubeShine,
+  Envelope,
   EyeClosed,
   EyeOpen,
   Glasses,
   Globe,
+  Key,
   Lamp,
   ManifoldLogo,
   LoosePages,

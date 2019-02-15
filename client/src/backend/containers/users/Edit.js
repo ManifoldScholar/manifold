@@ -60,6 +60,10 @@ export class UsersEditContainer extends PureComponent {
     this.props.dispatch(flush([requests.beUserUpdate, requests.beMakerCreate]));
   }
 
+  get user() {
+    return this.props.user;
+  }
+
   fetchUser(id) {
     const call = usersAPI.show(id);
     const userRequest = request(call, requests.beUser);
@@ -73,12 +77,27 @@ export class UsersEditContainer extends PureComponent {
   };
 
   destroyUser = () => {
-    const user = this.props.user;
+    const user = this.user;
     const call = usersAPI.destroy(user.id);
     const options = { removes: user };
     const userRequest = request(call, requests.beUserDestroy, options);
     this.props.dispatch(userRequest).promise.then(() => {
       this.props.history.push(lh.link("backendRecordsUsers"));
+    });
+  };
+
+  unsubscribeUser = () => {
+    const heading = "Are you sure?";
+    const message =
+      "This user will be unsubscribed from all Manifold email notifications.";
+    this.props.confirm(heading, message, () => {
+      const adjustedUser = Object.assign({}, this.user);
+      adjustedUser.attributes.unsubscribe = true;
+
+      const call = usersAPI.update(this.user.id, adjustedUser);
+      const options = { notificationScope: "drawer" };
+      const userRequest = request(call, requests.beUserUpdate, options);
+      return this.props.dispatch(userRequest);
     });
   };
 
@@ -105,9 +124,9 @@ export class UsersEditContainer extends PureComponent {
   };
 
   render() {
-    if (!this.props.user) return null;
-    const attr = this.props.user.attributes;
-    const user = this.props.user;
+    if (!this.user) return null;
+    const attr = this.user.attributes;
+    const user = this.user;
 
     return (
       <div>
@@ -123,8 +142,13 @@ export class UsersEditContainer extends PureComponent {
           buttons={[
             {
               onClick: this.handleResetPasswordClick,
-              icon: "manicon-key",
+              icon: "key",
               label: "Reset Password"
+            },
+            {
+              onClick: this.unsubscribeUser,
+              icon: "envelope",
+              label: "Unsubscribe"
             },
             { onClick: this.handleUserDestroy, icon: "trash", label: "Delete" }
           ]}
@@ -132,7 +156,7 @@ export class UsersEditContainer extends PureComponent {
 
         <section className="form-section">
           <FormContainer.Form
-            model={this.props.user}
+            model={this.user}
             name={requests.beUserUpdate}
             update={usersAPI.update}
             create={usersAPI.create}
