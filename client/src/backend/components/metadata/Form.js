@@ -73,7 +73,8 @@ export default class FormMakers extends PureComponent {
             "edition",
             "issue",
             "volume",
-            "originalTitle"
+            "originalTitle",
+            "originalPublicationDate"
           ],
           keys
         )
