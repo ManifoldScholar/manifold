@@ -182,6 +182,10 @@ export default {
     altText: {
       placeholder: "Enter alternative text as necessary",
       type: "TextInput"
+    },
+    originalPublicationDate: {
+      placeholder: "Enter original publication date",
+      type: "Date"
     }
   }
 };

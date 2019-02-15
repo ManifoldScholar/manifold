@@ -29,7 +29,7 @@ class Text < ApplicationRecord
     series_title container_title isbn issn doi unique_identifier language
     original_publisher original_publisher_place original_title publisher publisher_place
     version series_number edition issue volume rights rights_territory restrictions
-    rights_holder
+    rights_holder original_publication_date
   )
 
   with_citation do |text|
