@@ -23,6 +23,7 @@ describe("Global.SignInUp.Login component", () => {
         authentication={{
           currentUser: user
         }}
+        settings={build.entity.settings("1")}
       />
     </Provider>
   );
