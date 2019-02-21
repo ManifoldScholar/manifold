@@ -2,6 +2,7 @@ import fs from "fs";
 import ch from "../../helpers/consoleHelpers";
 import PrettyError from "pretty-error";
 import http from "http";
+import httpShutdown from "http-shutdown";
 
 export default function webServer(
   app,
@@ -50,13 +51,13 @@ export default function webServer(
   };
 
   if (port) {
-    const server = new http.Server(app);
+    const server = httpShutdown(new http.Server(app));
     server.listen(port, makeListenCallback(port, "port"));
     servers.push(server);
   }
 
   if (socket) {
-    const server = new http.Server(app);
+    const server = httpShutdown(new http.Server(app));
     server.listen(socket, makeListenCallback(socket, "socket"));
     servers.push(server);
   }

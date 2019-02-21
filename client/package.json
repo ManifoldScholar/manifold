@@ -93,6 +93,7 @@
     "he": "^1.2.0",
     "hoist-non-react-statics": "^2.0.0",
     "http-proxy-middleware": ">=0.17.2",
+    "http-shutdown": "^1.2.0",
     "humps": "^2.0.0",
     "immutability-helper": "^2.6.4",
     "isomorphic-fetch": "^2.2.0",
