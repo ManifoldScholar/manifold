@@ -23,6 +23,7 @@ export default class ProjectContentBlockInListPartsDrag extends PureComponent {
           this.props.baseClass
         }__button--draggable`}
         {...this.props.dragHandleProps}
+        role="button"
         tabIndex="0"
       >
         <Utility.IconComposer
