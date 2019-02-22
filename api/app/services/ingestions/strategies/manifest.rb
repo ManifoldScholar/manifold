@@ -1,6 +1,9 @@
+require "memoist"
+
 module Ingestions
   module Strategies
     class Manifest < Ingestions::Strategies::AbstractStrategy
+      extend Memoist
 
       def perform
         fetch_external
@@ -101,6 +104,7 @@ module Ingestions
           Strategy::Manifest::IngestionSource.new(self, source).attributes
         end
       end
+      memoize :ingestion_sources
 
       def text_sections
         inspector.source_map.map.with_index do |source, index|

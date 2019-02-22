@@ -1,6 +1,10 @@
+require "memoist"
+
 module Ingestions
   module Strategies
     class Epub < Ingestions::Strategies::AbstractStrategy
+
+      extend Memoist
 
       def perform
         manifest
@@ -66,6 +70,7 @@ module Ingestions
           Strategy::Epub::IngestionSource.new(node, inspector).attributes
         end
       end
+      memoize :ingestion_sources
 
       def titles
         inspector.title_nodes.map do |node|
