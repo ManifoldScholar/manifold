@@ -138,12 +138,10 @@ class Ingestion < ApplicationRecord
   def handle_ingestion_exception(errors)
     error("Processing failed.\n")
 
-    if Rails.env.development?
-      if errors.respond_to?(:full_messages)
-        output_errors(errors)
-      else
-        compose_and_output_backtrace(errors)
-      end
+    if errors.respond_to?(:full_messages)
+      output_errors(errors)
+    else
+      compose_and_output_backtrace(errors)
     end
 
     processing_failure
