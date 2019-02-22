@@ -7,6 +7,7 @@ import { select, isLoaded } from "utils/entityUtils";
 import get from "lodash/get";
 import truncate from "lodash/truncate";
 import capitalize from "lodash/capitalize";
+import throttle from "lodash/throttle";
 import { websocketActions, notificationActions } from "actions";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
@@ -58,6 +59,7 @@ export class IngestionIngest extends Component {
 
     this.state = {
       textLog: "Connecting to Manifold websocket...",
+      updates: 0,
       loading: false
     };
 
@@ -210,10 +212,10 @@ export class IngestionIngest extends Component {
     return lh.link("backendProjectTexts", id);
   }
 
-  scrollToLogBottom() {
+  scrollToLogBottom = throttle(() => {
     if (!this.logEl) return;
     this.logEl.scrollTop = this.logEl.scrollHeight;
-  }
+  }, 250);
 
   appendToLog(message) {
     if (message[0] === "DEBUG") return;
