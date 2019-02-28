@@ -1,13 +1,21 @@
 module Content
   class ScaffoldProjectContent < ActiveInteraction::Base
     string :kind, default: nil
+    hash :configuration, default: nil do
+      boolean :multiple_texts, default: false
+      boolean :resources, default: false
+      boolean :markdown, default: false
+      boolean :recent_activity, default: false
+    end
     object :project
 
     def execute
       return unless project.persisted?
       return if project_content_exists?
 
-      scaffold_content(configuration.content_blocks)
+      return unless blueprint.present?
+
+      scaffold_content(blueprint.content_blocks)
     end
 
     private
@@ -16,8 +24,13 @@ module Content
       project.content_blocks.any?
     end
 
-    def configuration
-      @configuration ||= Content::ScaffoldTemplate.new(kind)
+    def blueprint
+      @blueprint ||= begin
+        return Content::ScaffoldTemplate.new(kind) if kind.present?
+        return Content::ScaffoldConfigured.new(configuration) if configuration.present?
+
+        nil
+      end
     end
 
     def scaffold_content(types)

@@ -4,47 +4,90 @@ RSpec.describe Content::ScaffoldProjectContent do
   let(:project) { FactoryBot.create(:project) }
 
   shared_examples_for "scaffolded blocks" do |kind|
-    before(:each) { described_class.run project: project, kind: kind }
     template = Content::ScaffoldTemplate.new(kind)
 
-    it "creates a content block for each block in #{template.kind} template" do
-      expected = template.content_blocks.keys
-      expect(project.content_blocks.pluck(:type)).to eq expected
+    context "when kind is '#{kind}'" do
+      before(:each) { described_class.run project: project, kind: kind }
+
+      it "creates a content block for each block in #{template.kind} template" do
+        expected = template.content_blocks.keys
+        expect(project.content_blocks.pluck(:type)).to eq expected
+      end
     end
   end
 
-  context "when kind is not present" do
-    describe "the content blocks created" do
-      it_behaves_like "scaffolded blocks"
+  shared_examples_for "configured blocks" do |option|
+    block = "Content::" + option.to_s.camelize + "Block"
+
+    describe ":#{option}" do
+      context "when true" do
+        it "creates a #{block} block" do
+          configuration[option] = true
+
+          expect do
+            described_class.run project: project, configuration: configuration
+          end.to change { project.content_blocks.where(type: block).count }.from(0).to(1)
+        end
+      end
+
+      context "when false" do
+        it "does not create a #{block} block" do
+          configuration[option] = false
+
+          expect do
+            described_class.run project: project, configuration: configuration
+          end.to_not change { project.content_blocks.where(type: block).count }.from(0)
+        end
+      end
     end
   end
 
-  context "when kind is 'simple'" do
-    it_behaves_like "scaffolded blocks", "simple"
+  context "when kind is present" do
+    include_examples "scaffolded blocks", "simple"
+    include_examples "scaffolded blocks", "enhanced"
+    include_examples "scaffolded blocks", "journal_single"
+    include_examples "scaffolded blocks", "journal_multi"
+    include_examples "scaffolded blocks", "teaching_resource"
+    include_examples "scaffolded blocks", "report"
+    include_examples "scaffolded blocks", "resources"
   end
 
-  context "when kind is 'enhanced'" do
-    it_behaves_like "scaffolded blocks", "enhanced"
-  end
+  context "when configuration object is present" do
+    let(:configuration) do
+      { multiple_texts: false, resources: false, markdown: false, recent_activity: false }
+    end
 
-  context "when kind is 'journal_single'" do
-    it_behaves_like "scaffolded blocks", "journal_single"
-  end
+    describe "the options" do
+      describe ":multiple_texts" do
+        context "when true" do
+          it "creates a TextsBlock" do
+            configuration[:multiple_texts] = true
 
-  context "when kind is 'journal_multi'" do
-    it_behaves_like "scaffolded blocks", "journal_multi"
-  end
+            expect do
+              described_class.run project: project, configuration: configuration
+            end.to change { project.content_blocks.where(type: "Content::TextsBlock").count }.from(0).to(1)
+          end
+        end
 
-  context "when kind is 'teaching_resource'" do
-    it_behaves_like "scaffolded blocks", "teaching_resource"
-  end
+        context "when false" do
+          it "creates a TableOfContentsBlock" do
+            expect do
+              described_class.run project: project, configuration: configuration
+            end.to change { project.content_blocks.where(type: "Content::TableOfContentsBlock").count }.from(0).to(1)
+          end
+        end
+      end
 
-  context "when kind is 'report'" do
-    it_behaves_like "scaffolded blocks", "report"
-  end
+      include_examples "configured blocks", :resources
+      include_examples "configured blocks", :markdown
+      include_examples "configured blocks", :recent_activity
+    end
 
-  context "when kind is 'resources'" do
-    it_behaves_like "scaffolded blocks", "resources"
+    it "always creates a metadata block" do
+      expect do
+        described_class.run project: project, configuration: configuration
+      end.to change { project.content_blocks.where(type: "Content::MetadataBlock").count }.from(0).to(1)
+    end
   end
 
   context "when project has not been saved" do
