@@ -12,6 +12,7 @@ export default class FormRadioOption extends PureComponent {
     option: PropTypes.shape({
       value: PropTypes.any.isRequired,
       internalValue: PropTypes.string.isRequired,
+      instructions: PropTypes.string,
       label: PropTypes.string.isRequired
     }),
     focusOnMount: PropTypes.bool
@@ -25,6 +26,10 @@ export default class FormRadioOption extends PureComponent {
 
   get option() {
     return this.props.option;
+  }
+
+  get instructions() {
+    return this.option.instructions;
   }
 
   get checked() {
@@ -44,22 +49,27 @@ export default class FormRadioOption extends PureComponent {
 
   render() {
     return (
-      <label className={this.inputClassNames}>
-        <input
-          type="radio"
-          name={this.option.label}
-          value={this.option.internalValue}
-          checked={this.checked}
-          onChange={this.props.onChange}
-          ref={input => {
-            this.inputElement = input;
-          }}
-        />
-        <span className="toggle-indicator" aria-hidden="true">
-          {this.checked ? <i className="manicon" /> : null}
-        </span>
-        <span className="toggle-label">{this.option.label}</span>
-      </label>
+      <React.Fragment>
+        <label className={this.inputClassNames}>
+          <input
+            type="radio"
+            name={this.option.label}
+            value={this.option.internalValue}
+            checked={this.checked}
+            onChange={this.props.onChange}
+            ref={input => {
+              this.inputElement = input;
+            }}
+          />
+          <span className="toggle-indicator" aria-hidden="true">
+            {this.checked ? <i className="manicon" /> : null}
+          </span>
+          <span className="toggle-label">{this.option.label}</span>
+        </label>
+        {this.instructions && !this.inline && (
+          <span className="toggle-instructions">{this.instructions}</span>
+        )}
+      </React.Fragment>
     );
   }
 }

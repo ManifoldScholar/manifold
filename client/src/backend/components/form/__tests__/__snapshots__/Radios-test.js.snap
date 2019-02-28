@@ -2,15 +2,19 @@
 
 exports[`Backend.Form.Radios component renders correctly 1`] = `
 <div
-  className="form-input"
+  className="form-input form-input-radios extra-space-bottom"
   style={Object {}}
 >
   <label
-    className=""
     htmlFor="radios-1"
   >
     Label this
   </label>
+  <span
+    className="form-input-radios__prompt"
+  >
+    Pick the right choice
+  </span>
   <label
     className="form-toggle radio"
   >
@@ -31,6 +35,11 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
       option-1
     </span>
   </label>
+  <span
+    className="toggle-instructions"
+  >
+    What does this option really mean?
+  </span>
   <label
     className="form-toggle radio"
   >

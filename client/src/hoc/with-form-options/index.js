@@ -24,6 +24,7 @@ function withFormOptions(WrappedComponent) {
       options: PropTypes.arrayOf(
         PropTypes.shape({
           label: PropTypes.string.isRequired,
+          instructions: PropTypes.string,
           value: PropTypes.any.isRequired
         })
       ),
@@ -32,9 +33,8 @@ function withFormOptions(WrappedComponent) {
 
     static getDerivedStateFromProps(props, stateIgnored) {
       const options = props.options.map(option => {
-        const { value, label } = option;
-        const internalValue = WithFormOptions.toInternalValue(value);
-        return { label, value, internalValue };
+        const internalValue = WithFormOptions.toInternalValue(option.value);
+        return { ...option, internalValue };
       });
 
       return { options };

@@ -29,11 +29,10 @@ Array [
     </div>
   </div>,
   <div
-    className="form-input wide"
+    className="form-input form-input-radios extra-space-bottom wide"
     style={Object {}}
   >
     <label
-      className=""
       htmlFor="radios-1"
     >
       Style
