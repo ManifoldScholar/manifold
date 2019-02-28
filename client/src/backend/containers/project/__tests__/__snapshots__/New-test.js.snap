@@ -61,72 +61,6 @@ exports[`Backend Project New Container renders correctly 1`] = `
           >
             <div
               className="form-input"
-            >
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label>
-                  Project Type
-                </label>
-                <div
-                  className="form-select"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-caret-down"
-                  />
-                  <select
-                    aria-describedby="select-error-1"
-                    onChange={[Function]}
-                    value=""
-                  >
-                    <option
-                      value=""
-                    >
-                      Select a type...
-                    </option>
-                    <option
-                      value="simple"
-                    >
-                      Simple Book
-                    </option>
-                    <option
-                      value="enhanced"
-                    >
-                      Enhanced Book
-                    </option>
-                    <option
-                      value="journal_single"
-                    >
-                      Journal (Single Source)
-                    </option>
-                    <option
-                      value="journal_multi"
-                    >
-                      Journal (Multiple Sources)
-                    </option>
-                    <option
-                      value="teaching_resource"
-                    >
-                      OER or Teaching Resource
-                    </option>
-                    <option
-                      value="report"
-                    >
-                      Report or Handbook
-                    </option>
-                    <option
-                      value="resources"
-                    >
-                      Resources Only
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div
-              className="form-input"
               style={Object {}}
             >
               <label
@@ -187,6 +121,293 @@ exports[`Backend Project New Container renders correctly 1`] = `
                   }
                   value=""
                 />
+              </div>
+            </div>
+            <div
+              className="form-section"
+            >
+              <header
+                className="form-section-label"
+              >
+                <span>
+                  Layout
+                </span>
+              </header>
+              <span
+                className="instructions"
+              >
+                Your project's appearance is modular and highly customizable. The
+        following prompts are to help you get started. If you're unsure of your
+        answers, don't worry, everything can be changed later. Learn more about
+        these Layout options 
+                <a
+                  href="https://manifoldapp.org/docs/projects/customizing/appearance"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  here
+                </a>
+                .
+              </span>
+              <div
+                className="form-input-group"
+              >
+                <div
+                  className="form-input form-input-radios extra-space-bottom wide"
+                  style={Object {}}
+                >
+                  <label
+                    htmlFor="radios-1"
+                  >
+                    Texts
+                  </label>
+                  <span
+                    className="form-input-radios__prompt"
+                  >
+                    Will your project include more than one text?
+                  </span>
+                  <span
+                    className="instructions"
+                  >
+                    We find that if you only have one, a simpler layout works better.
+                  </span>
+                  <label
+                    className="form-toggle radio inline"
+                  >
+                    <input
+                      checked={false}
+                      name="Yes"
+                      onChange={[Function]}
+                      type="radio"
+                      value="true"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    />
+                    <span
+                      className="toggle-label"
+                    >
+                      Yes
+                    </span>
+                  </label>
+                  <label
+                    className="form-toggle radio checked inline"
+                  >
+                    <input
+                      checked={true}
+                      name="No"
+                      onChange={[Function]}
+                      type="radio"
+                      value="false"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    >
+                      <i
+                        className="manicon"
+                      />
+                    </span>
+                    <span
+                      className="toggle-label"
+                    >
+                      No
+                    </span>
+                  </label>
+                </div>
+                <div
+                  className="form-input form-input-radios extra-space-bottom wide"
+                  style={Object {}}
+                >
+                  <label
+                    htmlFor="radios-1"
+                  >
+                    Resources
+                  </label>
+                  <span
+                    className="form-input-radios__prompt"
+                  >
+                    Do you have resources you want to add in addition to any texts you are loading?
+                  </span>
+                  <span
+                    className="instructions"
+                  >
+                    Enhance your texts with ancillary media—or cultivate a project that isn’t centered around textual arguments.
+                  </span>
+                  <label
+                    className="form-toggle radio inline"
+                  >
+                    <input
+                      checked={false}
+                      name="Yes"
+                      onChange={[Function]}
+                      type="radio"
+                      value="true"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    />
+                    <span
+                      className="toggle-label"
+                    >
+                      Yes
+                    </span>
+                  </label>
+                  <label
+                    className="form-toggle radio checked inline"
+                  >
+                    <input
+                      checked={true}
+                      name="No"
+                      onChange={[Function]}
+                      type="radio"
+                      value="false"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    >
+                      <i
+                        className="manicon"
+                      />
+                    </span>
+                    <span
+                      className="toggle-label"
+                    >
+                      No
+                    </span>
+                  </label>
+                </div>
+                <div
+                  className="form-input form-input-radios extra-space-bottom wide"
+                  style={Object {}}
+                >
+                  <label
+                    htmlFor="radios-1"
+                  >
+                    Extended Description
+                  </label>
+                  <span
+                    className="form-input-radios__prompt"
+                  >
+                    Do you need additional space to describe your project?
+                  </span>
+                  <span
+                    className="instructions"
+                  >
+                    A freeform content block can be used to add text contextualizing your project.
+                  </span>
+                  <label
+                    className="form-toggle radio inline"
+                  >
+                    <input
+                      checked={false}
+                      name="Yes"
+                      onChange={[Function]}
+                      type="radio"
+                      value="true"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    />
+                    <span
+                      className="toggle-label"
+                    >
+                      Yes
+                    </span>
+                  </label>
+                  <label
+                    className="form-toggle radio checked inline"
+                  >
+                    <input
+                      checked={true}
+                      name="No"
+                      onChange={[Function]}
+                      type="radio"
+                      value="false"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    >
+                      <i
+                        className="manicon"
+                      />
+                    </span>
+                    <span
+                      className="toggle-label"
+                    >
+                      No
+                    </span>
+                  </label>
+                </div>
+                <div
+                  className="form-input form-input-radios extra-space-bottom wide"
+                  style={Object {}}
+                >
+                  <label
+                    htmlFor="radios-1"
+                  >
+                    Activity
+                  </label>
+                  <span
+                    className="form-input-radios__prompt"
+                  >
+                    Will your project change frequently?
+                  </span>
+                  <span
+                    className="instructions"
+                  >
+                    Manifold can showcase the evolution of your project on the platform and in the Twitterverse.
+                  </span>
+                  <label
+                    className="form-toggle radio inline"
+                  >
+                    <input
+                      checked={false}
+                      name="Yes"
+                      onChange={[Function]}
+                      type="radio"
+                      value="true"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    />
+                    <span
+                      className="toggle-label"
+                    >
+                      Yes
+                    </span>
+                  </label>
+                  <label
+                    className="form-toggle radio checked inline"
+                  >
+                    <input
+                      checked={true}
+                      name="No"
+                      onChange={[Function]}
+                      type="radio"
+                      value="false"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    >
+                      <i
+                        className="manicon"
+                      />
+                    </span>
+                    <span
+                      className="toggle-label"
+                    >
+                      No
+                    </span>
+                  </label>
+                </div>
               </div>
             </div>
             <div
