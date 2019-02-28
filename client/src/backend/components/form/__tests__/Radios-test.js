@@ -6,6 +6,7 @@ describe("Backend.Form.Radios component", () => {
   const options = [
     {
       label: "option-1",
+      instructions: "What does this option really mean?",
       value: "1"
     },
     {
@@ -16,7 +17,7 @@ describe("Backend.Form.Radios component", () => {
 
   it("renders correctly", () => {
     const component = renderer.create(
-      <Radios options={options} label="Label this" name="attributes[fake]" />
+      <Radios options={options} label="Label this" prompt="Pick the right choice" name="attributes[fake]" />
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

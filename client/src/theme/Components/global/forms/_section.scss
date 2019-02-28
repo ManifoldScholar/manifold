@@ -50,6 +50,10 @@
         margin-bottom: 12px;
       }
 
+      &.extra-space-bottom {
+        margin-bottom: 50px;
+      }
+
       @include respond($break90) {
         flex-basis: 47.64%;
         margin-top: 18px;

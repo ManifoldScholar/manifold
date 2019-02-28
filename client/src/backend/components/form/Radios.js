@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GlobalForm from "global/components/form";
 import Option from "./Radio/Option";
+import RadioLabel from "./Radio/Label";
 import classnames from "classnames";
 import labelId from "helpers/labelId";
 import isString from "lodash/isString";
@@ -19,6 +20,7 @@ class FormRadios extends Component {
       })
     ).isRequired,
     label: PropTypes.string,
+    prompt: PropTypes.string,
     inline: PropTypes.bool,
     name: PropTypes.string,
     value: PropTypes.any,
@@ -52,15 +54,11 @@ class FormRadios extends Component {
     };
   }
 
-  get labelClass() {
-    return classnames({
-      "has-instructions": isString(this.props.instructions)
-    });
-  }
-
   get inputClasses() {
     return classnames(this.props.inputClasses, {
       "form-input": true,
+      "form-input-radios": true,
+      "extra-space-bottom": true,
       wide: this.props.wide
     });
   }
@@ -74,9 +72,12 @@ class FormRadios extends Component {
         label={this.props.label}
         idForError={this.props.idForError}
       >
-        <label htmlFor={this.props.id} className={this.labelClass}>
-          {this.props.label}
-        </label>
+        <RadioLabel
+          id={this.props.id}
+          label={this.props.label}
+          prompt={this.props.prompt}
+          hasInstructions={isString(this.props.instructions)}
+        />
         <Instructions instructions={this.props.instructions} />
         {this.options.map((option, index) => (
           <Option
