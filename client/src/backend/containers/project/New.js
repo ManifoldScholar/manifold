@@ -18,6 +18,40 @@ export class ProjectNewContainer extends PureComponent {
     project: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+    this.defaultProject = {
+      attributes: {
+        configuration: {
+          multipleTexts: "false",
+          resources: "false",
+          markdown: "false",
+          recentActivity: "false"
+        }
+      }
+    };
+  }
+
+  // TODO: Update documentation link when content block docs are added
+  get layoutInstructions() {
+    return (
+      <span className="instructions">
+        {`Your project's appearance is modular and highly customizable. The
+        following prompts are to help you get started. If you're unsure of your
+        answers, don't worry, everything can be changed later. Learn more about
+        these Layout options `}
+        <a
+          href="https://manifoldapp.org/docs/projects/customizing/appearance"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          here
+        </a>
+        {`.`}
+      </span>
+    );
+  }
+
   redirectToProject(project) {
     const path = lh.link("backendProject", project.id);
     this.props.history.push(path);
@@ -46,33 +80,13 @@ export class ProjectNewContainer extends PureComponent {
           />
           <Layout.BackendPanel>
             <FormContainer.Form
-              model={this.props.project}
+              model={this.defaultProject}
               name="backend-create-project"
               update={projectsAPI.update}
               create={projectsAPI.create}
               onSuccess={this.handleSuccess}
               className="form-secondary"
             >
-              <Form.Select
-                name="attributes[kind]"
-                label="Project Type"
-                options={[
-                  { label: "Select a type...", value: "" },
-                  { label: "Simple Book", value: "simple" },
-                  { label: "Enhanced Book", value: "enhanced" },
-                  { label: "Journal (Single Source)", value: "journal_single" },
-                  {
-                    label: "Journal (Multiple Sources)",
-                    value: "journal_multi"
-                  },
-                  {
-                    label: "OER or Teaching Resource",
-                    value: "teaching_resource"
-                  },
-                  { label: "Report or Handbook", value: "report" },
-                  { label: "Resources Only", value: "resources" }
-                ]}
-              />
               <Form.TextInput
                 validation={["required"]}
                 focusOnMount
@@ -90,6 +104,67 @@ export class ProjectNewContainer extends PureComponent {
                 name="attributes[description]"
                 height={100}
               />
+              <Form.FieldGroup
+                label="Layout"
+                instructions={this.layoutInstructions}
+              >
+                <Form.Radios
+                  label="Texts"
+                  prompt="Will your project include more than one text?"
+                  name="attributes[configuration][multipleTexts]"
+                  instructions={
+                    "We find that if you only have one, a simpler layout works better."
+                  }
+                  options={[
+                    { label: "Yes", value: "true" },
+                    { label: "No", value: "false" }
+                  ]}
+                  inline
+                  wide
+                />
+                <Form.Radios
+                  label="Resources"
+                  prompt="Do you have resources you want to add in addition to any texts you are loading?"
+                  name="attributes[configuration][resources]"
+                  instructions={
+                    "Enhance your texts with ancillary media—or cultivate a project that isn’t centered around textual arguments."
+                  }
+                  options={[
+                    { label: "Yes", value: "true" },
+                    { label: "No", value: "false" }
+                  ]}
+                  inline
+                  wide
+                />
+                <Form.Radios
+                  label="Extended Description"
+                  prompt="Do you need additional space to describe your project?"
+                  name="attributes[configuration][markdown]"
+                  instructions={
+                    "A freeform content block can be used to add text contextualizing your project."
+                  }
+                  options={[
+                    { label: "Yes", value: "true" },
+                    { label: "No", value: "false" }
+                  ]}
+                  inline
+                  wide
+                />
+                <Form.Radios
+                  label="Activity"
+                  prompt="Will your project change frequently?"
+                  name="attributes[configuration][recentActivity]"
+                  instructions={
+                    "Manifold can showcase the evolution of your project on the platform and in the Twitterverse."
+                  }
+                  options={[
+                    { label: "Yes", value: "true" },
+                    { label: "No", value: "false" }
+                  ]}
+                  inline
+                  wide
+                />
+              </Form.FieldGroup>
               <Form.Save
                 text="Save and Continue"
                 cancelRoute={lh.link("backendProjects")}
