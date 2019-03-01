@@ -60,67 +60,82 @@ exports[`Backend Project New Container renders correctly 1`] = `
             onSubmit={[Function]}
           >
             <div
-              className="form-input"
-              style={Object {}}
+              className="form-section"
             >
-              <label
-                className=""
-                htmlFor="attributes[title]-text-input-1"
+              <header
+                className="form-section-label"
               >
-                Title
-              </label>
-              <input
-                aria-describedby="attributes[title]-text-input-1"
-                id="attributes[title]-text-input-1"
-                onChange={[Function]}
-                placeholder="Enter Project Title"
-                type="text"
-                value=""
-              />
-            </div>
-            <div
-              className="form-input"
-              style={Object {}}
-            >
-              <label
-                className=""
-                htmlFor="attributes[subtitle]-text-input-1"
-              >
-                Subtitle
-              </label>
-              <input
-                aria-describedby="attributes[subtitle]-text-input-1"
-                id="attributes[subtitle]-text-input-1"
-                onChange={[Function]}
-                placeholder="Enter Project Subtitle"
-                type="text"
-                value=""
-              />
-            </div>
-            <div
-              className="form-input"
-            >
+                <span>
+                  Title and Description
+                </span>
+              </header>
               <div
-                className="form-input"
-                style={Object {}}
+                className="form-input-group"
               >
-                <label
-                  className=""
-                  htmlFor="textarea-1"
+                <div
+                  className="form-input"
+                  style={Object {}}
                 >
-                  Description
-                </label>
-                <textarea
-                  aria-describedby="textarea-error-1"
-                  id="textarea-1"
-                  onChange={[Function]}
-                  style={
-                    Object {
-                      "height": 100,
-                    }
-                  }
-                  value=""
-                />
+                  <label
+                    className=""
+                    htmlFor="attributes[title]-text-input-1"
+                  >
+                    Title
+                  </label>
+                  <input
+                    aria-describedby="attributes[title]-text-input-1"
+                    id="attributes[title]-text-input-1"
+                    onChange={[Function]}
+                    placeholder="Enter Project Title"
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="attributes[subtitle]-text-input-1"
+                  >
+                    Subtitle
+                  </label>
+                  <input
+                    aria-describedby="attributes[subtitle]-text-input-1"
+                    id="attributes[subtitle]-text-input-1"
+                    onChange={[Function]}
+                    placeholder="Enter Project Subtitle"
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input wide"
+                >
+                  <div
+                    className="form-input"
+                    style={Object {}}
+                  >
+                    <label
+                      className=""
+                      htmlFor="textarea-1"
+                    >
+                      Brief Description
+                    </label>
+                    <textarea
+                      aria-describedby="textarea-error-1"
+                      id="textarea-1"
+                      onChange={[Function]}
+                      style={
+                        Object {
+                          "height": 100,
+                        }
+                      }
+                      value=""
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <div
@@ -169,7 +184,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                   <span
                     className="instructions"
                   >
-                    We find that if you only have one, a simpler layout works better.
+                    Manifold projects can include a single text or multiple texts.
                   </span>
                   <label
                     className="form-toggle radio inline"
@@ -233,7 +248,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                   <span
                     className="instructions"
                   >
-                    Enhance your texts with ancillary media—or cultivate a project that isn’t centered around textual arguments.
+                    Enhance your texts with media or create a project composed only of media resources.
                   </span>
                   <label
                     className="form-toggle radio inline"

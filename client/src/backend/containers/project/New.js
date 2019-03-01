@@ -87,23 +87,26 @@ export class ProjectNewContainer extends PureComponent {
               onSuccess={this.handleSuccess}
               className="form-secondary"
             >
-              <Form.TextInput
-                validation={["required"]}
-                focusOnMount
-                label="Title"
-                name="attributes[title]"
-                placeholder="Enter Project Title"
-              />
-              <Form.TextInput
-                label="Subtitle"
-                name="attributes[subtitle]"
-                placeholder="Enter Project Subtitle"
-              />
-              <Form.TextArea
-                label="Description"
-                name="attributes[description]"
-                height={100}
-              />
+              <Form.FieldGroup label="Title and Description">
+                <Form.TextInput
+                  validation={["required"]}
+                  focusOnMount
+                  label="Title"
+                  name="attributes[title]"
+                  placeholder="Enter Project Title"
+                />
+                <Form.TextInput
+                  label="Subtitle"
+                  name="attributes[subtitle]"
+                  placeholder="Enter Project Subtitle"
+                />
+                <Form.TextArea
+                  label="Brief Description"
+                  name="attributes[description]"
+                  height={100}
+                  wide
+                />
+              </Form.FieldGroup>
               <Form.FieldGroup
                 label="Layout"
                 instructions={this.layoutInstructions}
@@ -113,7 +116,7 @@ export class ProjectNewContainer extends PureComponent {
                   prompt="Will your project include more than one text?"
                   name="attributes[configuration][multipleTexts]"
                   instructions={
-                    "We find that if you only have one, a simpler layout works better."
+                    "Manifold projects can include a single text or multiple texts."
                   }
                   options={[
                     { label: "Yes", value: "true" },
@@ -127,7 +130,7 @@ export class ProjectNewContainer extends PureComponent {
                   prompt="Do you have resources you want to add in addition to any texts you are loading?"
                   name="attributes[configuration][resources]"
                   instructions={
-                    "Enhance your texts with ancillary media—or cultivate a project that isn’t centered around textual arguments."
+                    "Enhance your texts with media or create a project composed only of media resources."
                   }
                   options={[
                     { label: "Yes", value: "true" },
