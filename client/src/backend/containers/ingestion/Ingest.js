@@ -4,6 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { ingestionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, isLoaded } from "utils/entityUtils";
+import Utility from "global/components/utility";
 import get from "lodash/get";
 import truncate from "lodash/truncate";
 import capitalize from "lodash/capitalize";
@@ -337,7 +338,7 @@ export class IngestionIngest extends Component {
               onClick={this.reset}
               disabled={this.state.loading || !this.canReset}
             >
-              <i className="manicon manicon-x-bold" aria-hidden="true" />
+              <Utility.IconComposer icon="reload" size={18} />
               Restart Ingestion
             </button>
           </div>

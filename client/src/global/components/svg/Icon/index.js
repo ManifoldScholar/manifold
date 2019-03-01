@@ -32,6 +32,7 @@ import NewRound from "./NewRound";
 import PencilSimple from "./PencilSimple";
 import Plus from "./Plus";
 import Pulse from "./Pulse";
+import Reload from "./Reload";
 import ResourceAudio from "./ResourceAudio";
 import ResourceCollection from "./ResourceCollection";
 import ResourceDocument from "./ResourceDocument";
@@ -89,6 +90,7 @@ export default {
   PencilSimple,
   Plus,
   Pulse,
+  Reload,
   ResourceAudio,
   ResourceCollection,
   ResourceDocument,

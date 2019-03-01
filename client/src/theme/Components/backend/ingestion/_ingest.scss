@@ -141,13 +141,23 @@
     .loading, .loading:hover {
       color: $neutral85;
 
-      .manicon, .manicon:hover {
+      .manicon-svg {
         color: $neutral85;
       }
     }
 
     button {
       font-size: 14px;
+
+      .manicon-svg {
+        margin-top: -3px;
+      }
+
+      &:hover {
+        .manicon-svg {
+          color: $neutral30;
+        }
+      }
     }
   }
 }
