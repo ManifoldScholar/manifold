@@ -338,7 +338,7 @@ export class IngestionIngest extends Component {
               onClick={this.reset}
               disabled={this.state.loading || !this.canReset}
             >
-              <Utility.IconComposer icon="reload" size={18} />
+              <Utility.IconComposer icon="reload" size={24} />
               Restart Ingestion
             </button>
           </div>
