@@ -11,11 +11,11 @@ module Content
     private
 
     def configured_blocks(config)
-      {}.tap do |hash|
+      ActiveSupport::OrderedHash.new.tap do |hash|
+        hash["Content::RecentActivityBlock"] = {} if config[:recent_activity]
+        hash["Content::MarkdownBlock"] = {} if config[:markdown]
         config[:multiple_texts] ? hash["Content::TextsBlock"] = {} : hash["Content::TableOfContentsBlock"] = {}
         hash["Content::ResourcesBlock"] = {} if config[:resources]
-        hash["Content::MarkdownBlock"] = {} if config[:markdown]
-        hash["Content::RecentActivityBlock"] = {} if config[:recent_activity]
         hash["Content::MetadataBlock"] = {}
       end
     end

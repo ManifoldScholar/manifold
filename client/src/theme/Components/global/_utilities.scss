@@ -3,13 +3,15 @@
 }
 
 .instructional-copy {
-  @include formInstructions;
+  @include templateCopy;
+  display: block;
   padding-bottom: 12px;
+  margin-top: 0.75em;
   margin-bottom: 15px;
-  font-size: 18px;
-  font-style: normal;
-  line-height: 1.4em;
-  color: $neutral30;
+  font-size: 17px;
+  font-style: italic;
+  color: $neutral50;
+  text-transform: none;
 
   a {
     color: $neutral30;
