@@ -176,10 +176,10 @@
 
     .buttons-bare-vertical {
       @extend %header-utility-button;
-      margin-top: 11px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      margin-top: 11px;
 
       .button-bare-primary {
         margin-left: 0;
