@@ -23,6 +23,7 @@ describe("Global.SignInUp.Overlay component", () => {
       <Overlay
         dispatch={store.dispatch}
         visible
+        settings={{}}
         hideSignInUpOverlay={hideOverlayMock}
         authentication={{
           currentUser: user
