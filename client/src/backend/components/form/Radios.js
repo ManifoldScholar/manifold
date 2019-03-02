@@ -16,7 +16,9 @@ class FormRadios extends Component {
     options: PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.any.isRequired,
-        label: PropTypes.string.isRequired
+        label: PropTypes.string.isRequired,
+        instructions: PropTypes.string,
+        internalValue: PropTypes.any.isRequired
       })
     ).isRequired,
     label: PropTypes.string,
