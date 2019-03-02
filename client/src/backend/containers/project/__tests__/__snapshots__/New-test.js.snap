@@ -187,34 +187,14 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     Manifold projects can include a single text or multiple texts.
                   </span>
                   <label
-                    className="form-toggle radio inline"
-                  >
-                    <input
-                      checked={false}
-                      name="Yes"
-                      onChange={[Function]}
-                      type="radio"
-                      value="true"
-                    />
-                    <span
-                      aria-hidden="true"
-                      className="toggle-indicator"
-                    />
-                    <span
-                      className="toggle-label"
-                    >
-                      Yes
-                    </span>
-                  </label>
-                  <label
                     className="form-toggle radio checked inline"
                   >
                     <input
                       checked={true}
-                      name="No"
+                      name="Yes"
                       onChange={[Function]}
                       type="radio"
-                      value="false"
+                      value={true}
                     />
                     <span
                       aria-hidden="true"
@@ -224,6 +204,26 @@ exports[`Backend Project New Container renders correctly 1`] = `
                         className="manicon"
                       />
                     </span>
+                    <span
+                      className="toggle-label"
+                    >
+                      Yes
+                    </span>
+                  </label>
+                  <label
+                    className="form-toggle radio inline"
+                  >
+                    <input
+                      checked={false}
+                      name="No"
+                      onChange={[Function]}
+                      type="radio"
+                      value=""
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    />
                     <span
                       className="toggle-label"
                     >
@@ -251,34 +251,14 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     Enhance your texts with media or create a project composed only of media resources.
                   </span>
                   <label
-                    className="form-toggle radio inline"
-                  >
-                    <input
-                      checked={false}
-                      name="Yes"
-                      onChange={[Function]}
-                      type="radio"
-                      value="true"
-                    />
-                    <span
-                      aria-hidden="true"
-                      className="toggle-indicator"
-                    />
-                    <span
-                      className="toggle-label"
-                    >
-                      Yes
-                    </span>
-                  </label>
-                  <label
                     className="form-toggle radio checked inline"
                   >
                     <input
                       checked={true}
-                      name="No"
+                      name="Yes"
                       onChange={[Function]}
                       type="radio"
-                      value="false"
+                      value={true}
                     />
                     <span
                       aria-hidden="true"
@@ -288,6 +268,26 @@ exports[`Backend Project New Container renders correctly 1`] = `
                         className="manicon"
                       />
                     </span>
+                    <span
+                      className="toggle-label"
+                    >
+                      Yes
+                    </span>
+                  </label>
+                  <label
+                    className="form-toggle radio inline"
+                  >
+                    <input
+                      checked={false}
+                      name="No"
+                      onChange={[Function]}
+                      type="radio"
+                      value=""
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    />
                     <span
                       className="toggle-label"
                     >
@@ -315,34 +315,14 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     A freeform content block can be used to add text contextualizing your project.
                   </span>
                   <label
-                    className="form-toggle radio inline"
-                  >
-                    <input
-                      checked={false}
-                      name="Yes"
-                      onChange={[Function]}
-                      type="radio"
-                      value="true"
-                    />
-                    <span
-                      aria-hidden="true"
-                      className="toggle-indicator"
-                    />
-                    <span
-                      className="toggle-label"
-                    >
-                      Yes
-                    </span>
-                  </label>
-                  <label
                     className="form-toggle radio checked inline"
                   >
                     <input
                       checked={true}
-                      name="No"
+                      name="Yes"
                       onChange={[Function]}
                       type="radio"
-                      value="false"
+                      value={true}
                     />
                     <span
                       aria-hidden="true"
@@ -352,6 +332,26 @@ exports[`Backend Project New Container renders correctly 1`] = `
                         className="manicon"
                       />
                     </span>
+                    <span
+                      className="toggle-label"
+                    >
+                      Yes
+                    </span>
+                  </label>
+                  <label
+                    className="form-toggle radio inline"
+                  >
+                    <input
+                      checked={false}
+                      name="No"
+                      onChange={[Function]}
+                      type="radio"
+                      value=""
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    />
                     <span
                       className="toggle-label"
                     >
@@ -379,34 +379,14 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     Manifold can showcase the evolution of your project on the platform and in the Twitterverse.
                   </span>
                   <label
-                    className="form-toggle radio inline"
-                  >
-                    <input
-                      checked={false}
-                      name="Yes"
-                      onChange={[Function]}
-                      type="radio"
-                      value="true"
-                    />
-                    <span
-                      aria-hidden="true"
-                      className="toggle-indicator"
-                    />
-                    <span
-                      className="toggle-label"
-                    >
-                      Yes
-                    </span>
-                  </label>
-                  <label
                     className="form-toggle radio checked inline"
                   >
                     <input
                       checked={true}
-                      name="No"
+                      name="Yes"
                       onChange={[Function]}
                       type="radio"
-                      value="false"
+                      value={true}
                     />
                     <span
                       aria-hidden="true"
@@ -416,6 +396,26 @@ exports[`Backend Project New Container renders correctly 1`] = `
                         className="manicon"
                       />
                     </span>
+                    <span
+                      className="toggle-label"
+                    >
+                      Yes
+                    </span>
+                  </label>
+                  <label
+                    className="form-toggle radio inline"
+                  >
+                    <input
+                      checked={false}
+                      name="No"
+                      onChange={[Function]}
+                      type="radio"
+                      value=""
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="toggle-indicator"
+                    />
                     <span
                       className="toggle-label"
                     >
