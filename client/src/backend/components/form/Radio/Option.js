@@ -11,7 +11,7 @@ export default class FormRadioOption extends PureComponent {
     onChange: PropTypes.func.isRequired,
     option: PropTypes.shape({
       value: PropTypes.any.isRequired,
-      internalValue: PropTypes.string.isRequired,
+      internalValue: PropTypes.any.isRequired,
       instructions: PropTypes.string,
       label: PropTypes.string.isRequired
     }),
