@@ -23,10 +23,10 @@ export class ProjectNewContainer extends PureComponent {
     this.defaultProject = {
       attributes: {
         configuration: {
-          multipleTexts: "false",
-          resources: "false",
-          markdown: "false",
-          recentActivity: "false"
+          multipleTexts: true,
+          resources: true,
+          markdown: true,
+          recentActivity: true
         }
       }
     };
@@ -119,8 +119,8 @@ export class ProjectNewContainer extends PureComponent {
                     "Manifold projects can include a single text or multiple texts."
                   }
                   options={[
-                    { label: "Yes", value: "true" },
-                    { label: "No", value: "false" }
+                    { label: "Yes", value: true },
+                    { label: "No", value: false }
                   ]}
                   inline
                   wide
@@ -133,8 +133,8 @@ export class ProjectNewContainer extends PureComponent {
                     "Enhance your texts with media or create a project composed only of media resources."
                   }
                   options={[
-                    { label: "Yes", value: "true" },
-                    { label: "No", value: "false" }
+                    { label: "Yes", value: true },
+                    { label: "No", value: false }
                   ]}
                   inline
                   wide
@@ -147,8 +147,8 @@ export class ProjectNewContainer extends PureComponent {
                     "A freeform content block can be used to add text contextualizing your project."
                   }
                   options={[
-                    { label: "Yes", value: "true" },
-                    { label: "No", value: "false" }
+                    { label: "Yes", value: true },
+                    { label: "No", value: false }
                   ]}
                   inline
                   wide
@@ -161,8 +161,8 @@ export class ProjectNewContainer extends PureComponent {
                     "Manifold can showcase the evolution of your project on the platform and in the Twitterverse."
                   }
                   options={[
-                    { label: "Yes", value: "true" },
-                    { label: "No", value: "false" }
+                    { label: "Yes", value: true },
+                    { label: "No", value: false }
                   ]}
                   inline
                   wide
