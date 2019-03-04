@@ -43,9 +43,8 @@ module Search
 
     def adjusted_results
       @adjusted_results ||= begin
-        return @searchkick_results.results if @searchkick_results.options[:load]
-
-        inject_associations(@searchkick_results)
+        raw = @searchkick_results.options[:load] ? @searchkick_results.results : inject_associations(@searchkick_results)
+        raw.select { |result| result.model.present? }
       end
     end
 
