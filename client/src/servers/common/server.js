@@ -57,6 +57,7 @@ export default function webServer(
   }
 
   if (socket) {
+    unlinkSocket();
     const server = httpShutdown(new http.Server(app));
     server.listen(socket, makeListenCallback(socket, "socket"));
     servers.push(server);
