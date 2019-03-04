@@ -36,6 +36,13 @@ export default class SearchResultsList extends PureComponent {
 
   renderResult(result) {
     const { searchableType } = result.attributes;
+    const { model } = result.relationships;
+
+    // This is a fallback in cases where the associated model has been destroyed, but the
+    // ElasticSearch index hasn't been correctly updated.  This should be considered a temporary
+    // solution.  We need to fix the cause in the API as well.
+    if (!model) return null;
+
     const Component = this.componentForType(searchableType);
     const typeLabel = this.labelForType(searchableType);
     if (Component) {

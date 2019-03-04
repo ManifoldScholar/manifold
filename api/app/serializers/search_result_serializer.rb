@@ -34,6 +34,8 @@ class SearchResultSerializer < ApplicationSerializer
   end
 
   def parents
+    return unless object.model.present?
+
     message = "parents_for_#{object._type}"
     return send message if respond_to? message
 
