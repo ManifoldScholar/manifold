@@ -166,7 +166,8 @@ export default class DraggableEventHelper {
       id: "pending",
       attributes: {
         type: this.type,
-        position: this.position
+        position: this.position,
+        renderable: true
       },
       relationships: {}
     };
