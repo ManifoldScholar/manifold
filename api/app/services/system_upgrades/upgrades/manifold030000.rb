@@ -44,7 +44,7 @@ module SystemUpgrades
             recent_activity: true,
             markdown: false,
             multiple_texts: true,
-            resources: project.resources.count.positive?,
+            resources: true,
             metadata: true
           }
 
