@@ -11,6 +11,7 @@ module WithParsedName
 
   included do
     validate :nickname_not_blank!
+    validates :first_name, :last_name, length: { maximum: 50 }
 
     before_validation :ensure_nickname
   end
