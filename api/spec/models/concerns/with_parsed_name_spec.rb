@@ -23,6 +23,16 @@ RSpec.describe WithParsedName do
   it "returns the name" do
     expect(user.name).to eq "Rowan Puppy"
   end
+
+  describe "a model implementing with_parsed_name" do
+    it "is invalid with a first_name over 50 characters long" do
+      expect(FactoryBot.build(:user, first_name: Faker::Lorem.characters(55))).to_not be_valid
+    end
+
+    it "is invalid with a last_name over 50 characters long" do
+      expect(FactoryBot.build(:user, last_name: Faker::Lorem.characters(55))).to_not be_valid
+    end
+  end
 end
 
 
