@@ -8,13 +8,6 @@ module Content
     DEFAULT["Content::MetadataBlock"] = {}
     DEFAULT.freeze
 
-    DEFAULT = ActiveSupport::OrderedHash.new
-    DEFAULT["Content::RecentActivityBlock"] = {}
-    DEFAULT["Content::TextsBlock"] = {}
-    DEFAULT["Content::ResourcesBlock"] = {}
-    DEFAULT["Content::MetadataBlock"] = {}
-    DEFAULT.freeze
-
     SIMPLE = ActiveSupport::OrderedHash.new
     SIMPLE["Content::MetadataBlock"] = {}
     SIMPLE.freeze
