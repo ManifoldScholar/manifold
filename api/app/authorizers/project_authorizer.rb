@@ -52,8 +52,6 @@ class ProjectAuthorizer < ApplicationAuthorizer
     editor_permissions?(user) ||
       user.project_editor_of?(resource)
   end
-  alias permissions_manageable_by? deletable_by?
-  alias permissions_creatable_by? deletable_by?
 
   # Non-draft projects are readable. Otherwise, the user must have a role or relation to
   # the project to see it.
@@ -73,6 +71,11 @@ class ProjectAuthorizer < ApplicationAuthorizer
     updatable_by?(user) ||
       user.project_resource_editor_of?(resource)
   end
+
+  def permissions_manageable_by?(user, _options = {})
+    creator_or_has_editor_permissions?(user, resource)
+  end
+  alias permissions_creatable_by? permissions_manageable_by?
 
   # Can the user manage or create any of the entities
   # on the project social integrations tab?

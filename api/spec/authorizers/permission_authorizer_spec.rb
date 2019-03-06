@@ -22,7 +22,7 @@ RSpec.describe "Permission Abilities", :authorizer do
       user
     end
     let(:object) { Permission.new(resource: project, user: another_user, role_names: Role::ROLE_PROJECT_EDITOR) }
-    the_subject_behaves_like "instance abilities", Permission, all: true
+    the_subject_behaves_like "instance abilities", Permission, none: true
   end
 
   context 'when the subject is a global editor' do
@@ -30,6 +30,12 @@ RSpec.describe "Permission Abilities", :authorizer do
     let(:another_user) { FactoryBot.create(:user) }
     let(:project) { FactoryBot.create(:project) }
     let(:object) { Permission.new(resource: project, user: another_user, role_names: Role::ROLE_PROJECT_EDITOR) }
+    the_subject_behaves_like "instance abilities", Permission, all: true
+  end
+
+  context 'when the subject is the creator of the permission\'s project' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_PROJECT_CREATOR) }
+    let(:object) { FactoryBot.create(:project, creator: subject) }
     the_subject_behaves_like "instance abilities", Permission, all: true
   end
 

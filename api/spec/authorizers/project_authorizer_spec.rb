@@ -122,7 +122,7 @@ RSpec.describe "Project Abilities", :authorizer do
     abilities = { create: false, read: true, update: true, delete: true }
     the_subject_behaves_like "instance abilities", Project, abilities
     the_subject_behaves_like "authorized to manage project children"
-    the_subject_behaves_like "authorized to manage project permissions"
+    the_subject_behaves_like "unauthorized to manage project permissions"
   end
 
   context 'when the subject is a reader and project_resource_editor of the project' do
