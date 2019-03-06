@@ -15,7 +15,7 @@ export default class ProjectContentTypeFormResources extends PureComponent {
   }
 
   get collections() {
-    return this.props.project.relationships.collections;
+    return this.props.project.relationships.resourceCollections;
   }
 
   render() {
