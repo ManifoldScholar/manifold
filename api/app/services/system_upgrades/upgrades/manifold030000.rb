@@ -40,8 +40,6 @@ module SystemUpgrades
         logger.info("===================================================================")
 
         Project.find_each do |project|
-          logger.info("Creating content blocks for #{project.title} [#{project.id}]")
-
           configuration = {
             recent_activity: true,
             markdown: false,
@@ -51,7 +49,8 @@ module SystemUpgrades
           }
 
           Content::ScaffoldProjectContent.run project: project,
-                                              configuration: configuration
+                                              configuration: configuration,
+                                              logger: logger
         end
       end
 
