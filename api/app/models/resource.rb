@@ -119,6 +119,7 @@ class Resource < ApplicationRecord
 
   # Callbacks
   before_validation :update_kind, :set_fingerprint!
+  before_validation :parse_and_set_external_id!, if: :external_video?
   before_update :reset_stale_fields
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_commit :trigger_event_creation, on: [:create]
@@ -249,6 +250,17 @@ class Resource < ApplicationRecord
   end
 
   private
+
+  def parse_and_set_external_id!
+    outcome = Resources::ExtractExternalVideoId.run external_id: external_id,
+                                                    external_type: external_type
+
+    if outcome.valid?
+      self.external_id = outcome.result
+    else
+      merge_errors! outcome.errors
+    end
+  end
 
   def trigger_event_creation
     Event.trigger(EventType[:resource_added], self)
