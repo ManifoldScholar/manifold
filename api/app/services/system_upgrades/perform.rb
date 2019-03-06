@@ -20,8 +20,7 @@ module SystemUpgrades
     def upgrade_interactions
       @upgrade_interactions ||=
         begin
-          Rails.application.eager_load! if Rails.env.development?
-
+          Rails.application.eager_load! unless Rails.env.test?
           SystemUpgrades::AbstractVersion.descendants.sort_by(&:version)
         end
     end
