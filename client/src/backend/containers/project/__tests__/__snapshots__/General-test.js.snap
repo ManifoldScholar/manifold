@@ -123,7 +123,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
             <span
               className="instructions"
             >
-              Draft projects are only visible to admins.
+              A draft project is only visible to users who are able to modify it..
             </span>
           </div>
           <div
