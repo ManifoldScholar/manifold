@@ -17,6 +17,9 @@ export default class ResourceFormKindVideo extends PureComponent {
           label="Video ID"
           name="attributes[externalId]"
           placeholder="Video ID"
+          instructions={
+            'The video\'s ID is located after "?v=" in YouTube URLs, and after "vimeo.com/" in Vimeo URLs.'
+          }
           {...this.props}
         />
         <Form.Select

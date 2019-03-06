@@ -140,7 +140,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
       style={Object {}}
     >
       <label
-        className=""
+        className="has-instructions"
         htmlFor="attributes[externalId]-text-input-1"
       >
         Video ID
@@ -153,6 +153,11 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
         type="text"
         value=""
       />
+      <span
+        className="instructions"
+      >
+        The video's ID is located after "?v=" in YouTube URLs, and after "vimeo.com/" in Vimeo URLs.
+      </span>
     </div>
     <div
       className="form-input"
