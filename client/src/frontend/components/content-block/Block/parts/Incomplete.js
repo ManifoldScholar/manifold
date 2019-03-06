@@ -139,6 +139,9 @@ export default class ProjectContentBlockIncomplete extends PureComponent {
           </span>
           <span className="entity-section-wrapper__link-container">
             {this.presentBlockErrors.map(error => error)}
+            <span className="entity-section-wrapper__body--warning">
+              Note: This message is only visible to project editors.
+            </span>
           </span>
         </div>
       </div>

@@ -181,6 +181,10 @@
       }
     }
 
+    &--warning {
+      font-style: italic;
+    }
+
     &--incomplete {
       @include templateHead;
       display: flex;
