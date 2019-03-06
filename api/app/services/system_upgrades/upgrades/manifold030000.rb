@@ -1,7 +1,7 @@
 module SystemUpgrades
   module Upgrades
     class Manifold030000 < SystemUpgrades::AbstractVersion
-      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
 
       def perform!
         reprocess_text_covers!
@@ -40,8 +40,6 @@ module SystemUpgrades
         logger.info("===================================================================")
 
         Project.find_each do |project|
-          logger.info("Creating content blocks for #{project.title} [#{project.id}]")
-
           configuration = {
             recent_activity: true,
             markdown: false,
@@ -51,11 +49,12 @@ module SystemUpgrades
           }
 
           Content::ScaffoldProjectContent.run project: project,
-                                              configuration: configuration
+                                              configuration: configuration,
+                                              logger: logger
         end
       end
 
-      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
     end
   end
 end
