@@ -60,6 +60,36 @@ RSpec.describe Resource, type: :model do
     expect { resource.destroy }.to change { Event.count }.from(1).to(0)
   end
 
+  describe "#parse_and_set_external_id!" do
+    context "when valid :external_id" do
+      let(:resource) { FactoryBot.build(:resource,
+                                        kind: "video",
+                                        sub_kind: "external_video",
+                                        external_type: "youtube",
+                                        external_id: "https://www.youtube.com?v=lVrAwK7FaOw") }
+
+      before(:each) { resource.save }
+
+      it "sets the :external_id" do
+        expect(resource.external_id).to eq "lVrAwK7FaOw"
+      end
+    end
+
+    context "when invalid :external_id" do
+      let(:resource) { FactoryBot.build(:resource,
+                                        kind: "video",
+                                        sub_kind: "external_video",
+                                        external_type: "vimeo",
+                                        external_id: "https://www.youtube.com?v=lVrAwK7FaOw") }
+
+      before(:each) { resource.save }
+
+      it "sets an error on :external_id" do
+        expect(resource.errors[:external_id]).to include "is an invalid format for vimeo"
+      end
+    end
+  end
+
   context "thumbnail fetch" do
     it "queues the job when created" do
       resource = FactoryBot.build(
