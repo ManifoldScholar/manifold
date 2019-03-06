@@ -21,6 +21,10 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
     return this.props.project.relationships.textCategories;
   }
 
+  get hasCategories() {
+    return this.categories.length > 0;
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -55,14 +59,16 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
             />
           </div>
         </div>
-        <Form.HasMany
-          label="Categories"
-          placeholder="Add a Category"
-          name="relationships[includedCategories]"
-          options={this.categories}
-          entityLabelAttribute={"title"}
-          wide
-        />
+        {this.hasCategories && (
+          <Form.HasMany
+            label="Categories"
+            placeholder="Add a Category"
+            name="relationships[includedCategories]"
+            options={this.categories}
+            entityLabelAttribute={"title"}
+            wide
+          />
+        )}
       </React.Fragment>
     );
   }
