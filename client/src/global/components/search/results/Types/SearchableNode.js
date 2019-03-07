@@ -20,6 +20,8 @@ export default class SearchResultsTypeAnnotation extends PureComponent {
     const { result } = this.props;
     const searchableNode = result.relationships.model;
     const { project, text, textSection } = result.attributes.parents;
+    if (!project || !text || !textSection) return null;
+    
     const url = lh.link("readerSection", text.slug, textSection.id);
 
     return (

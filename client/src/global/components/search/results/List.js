@@ -36,6 +36,9 @@ export default class SearchResultsList extends PureComponent {
 
   renderResult(result) {
     const { searchableType } = result.attributes;
+    const { model } = result.relationships;
+    if (!model) return null;
+
     const Component = this.componentForType(searchableType);
     const typeLabel = this.labelForType(searchableType);
     if (Component) {
