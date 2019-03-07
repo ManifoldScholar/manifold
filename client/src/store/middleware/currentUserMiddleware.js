@@ -37,8 +37,6 @@ function notifyLogout(dispatch) {
 
 function setCookie(authToken) {
   if (__SERVER__) return;
-  const cookieSet = !!document.cookie.match(/authToken=/);
-  if (cookieSet) return null;
 
   const expireDate = new Date();
   expireDate.setDate(expireDate.getDate() + 90);
