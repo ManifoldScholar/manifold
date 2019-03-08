@@ -45,6 +45,10 @@
         margin-top: 24px;
       }
 
+      .simple-list {
+        margin-top: 0;
+      }
+
       @include respond($break75) {
         a, .item-wrapper {
           padding: 20px 24px;

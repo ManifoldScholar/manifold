@@ -20,14 +20,22 @@
     }
   }
 
+  .simple-list {
+    ul {
+      margin-top: 0;
+    }
+  }
+
   .buttons-icon-horizontal {
-    margin-top: 15px;
-    margin-bottom: 10px;
-    margin-left: 0;
+    margin: 0;
 
     @include respond($break95) {
       display: flex;
       flex-wrap: nowrap;
+    }
+
+    + .simple-list {
+      margin-top: 1em;
     }
 
     &.flush-top {

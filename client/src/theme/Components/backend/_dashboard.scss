@@ -42,15 +42,25 @@
     }
   }
 
+  .form-search-filter {
+    + .project-list {
+      margin-top: 25px;
+    }
+  }
+
+  .simple-list {
+    margin-top: 40px;
+  }
+
   .project-list {
     padding-bottom: 24px;
 
     .buttons-icon-horizontal {
-      margin-top: 25px;
-      margin-bottom: 25px;
+      margin: 0;
 
       .button-icon-secondary {
         width: 100%;
+        margin: 0;
       }
     }
 

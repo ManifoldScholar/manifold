@@ -47,7 +47,7 @@ export default class ListSimpleList extends PureComponent {
     if (!entities) return null;
 
     return (
-      <section>
+      <section className="simple-list">
         {this.props.title ? (
           <header className="section-heading-secondary">
             <h3>
