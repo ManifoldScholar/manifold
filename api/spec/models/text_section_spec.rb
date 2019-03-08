@@ -33,7 +33,7 @@ RSpec.describe TextSection, type: :model do
 
   describe "enqueues a job to reindex searchable nodes" do
     it "when creating" do
-      expect { FactoryBot.create(:text_section) }.to have_enqueued_job(TextSectionJobs::ReindexSearchableNodes)
+      expect { FactoryBot.create(:text_section) }.to have_enqueued_job(TextSectionJobs::GenerateSearchableNodesJob)
     end
 
     it "when body_json changes" do
@@ -41,7 +41,7 @@ RSpec.describe TextSection, type: :model do
       expect do
         text_section.body_json = {"node_uuid" => "A", "tag" => "section", "node_type" => "element" }
         text_section.save
-      end.to have_enqueued_job(TextSectionJobs::ReindexSearchableNodes)
+      end.to have_enqueued_job(TextSectionJobs::GenerateSearchableNodesJob)
     end
   end
 
@@ -49,7 +49,7 @@ RSpec.describe TextSection, type: :model do
     text_section = FactoryBot.create(:text_section)
     expect {
       text_section.destroy
-    }.to have_enqueued_job TextSectionJobs::DestroySearchableNodes
+    }.to have_enqueued_job TextSectionJobs::DestroySearchableNodesJob
   end
 
   context "collapses body_json into searchable text nodes" do

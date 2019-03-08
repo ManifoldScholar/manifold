@@ -5,7 +5,7 @@ class SearchableNode < ApplicationRecord
   has_one :text, through: :text_section
 
   # Search
-  searchkick(callbacks: :async,
+  searchkick(callbacks: :queue,
              batch_size: 500,
              highlight: [:title, :body])
 

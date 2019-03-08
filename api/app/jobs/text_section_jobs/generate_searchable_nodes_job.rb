@@ -1,10 +1,10 @@
 module TextSectionJobs
-  class ReindexSearchableNodes < ApplicationJob
+  class GenerateSearchableNodesJob < ApplicationJob
 
-    def perform(text_section)
+    def perform(text_section_id)
+      text_section = TextSection.find_by(id: text_section_id)
       return unless text_section.present?
 
-      SearchableNode.searchkick_index.bulk_delete(text_section.searchable_nodes)
       text_section.searchable_nodes.clear
       SearchableNode.import(text_section.properties_for_searchable_nodes)
       text_section.searchable_nodes.reload.reindex

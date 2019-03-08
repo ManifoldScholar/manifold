@@ -55,7 +55,7 @@ class TextSection < ApplicationRecord
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 
   # Callbacks
-  after_commit :update_text_index, if: :should_update_text_index?
+  after_commit :enqueue_searchable_nodes_generation!, if: :should_generate_searchable_nodes?
   after_commit :adopt_or_orphan_annotations!
   before_destroy :destroy_searchable_nodes!
 
@@ -69,17 +69,6 @@ class TextSection < ApplicationRecord
     callbacks: :async,
     batch_size: 500
   )
-
-  def self.update_text_indexes(logger = Rails.logger)
-    count = TextSection.count
-    iteration = 1
-    TextSection.all.find_each do |text_section|
-      msg = "Committing searchable text nodes for text section"
-      logger.info "#{msg} #{text_section.id}: #{iteration}/#{count}"
-      text_section.update_text_index
-      iteration += 1
-    end
-  end
 
   scope :search_import, lambda {
     includes(
@@ -125,8 +114,8 @@ class TextSection < ApplicationRecord
     name
   end
 
-  def update_text_index
-    TextSectionJobs::ReindexSearchableNodes.perform_later self
+  def enqueue_searchable_nodes_generation!
+    TextSectionJobs::GenerateSearchableNodesJob.perform_later id
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
@@ -180,17 +169,30 @@ class TextSection < ApplicationRecord
     text_nodes[text_nodes.index(start_node)..text_nodes.index(end_node)]
   end
 
+  class << self
+    def generate_searchable_nodes!(logger = Rails.logger)
+      count = TextSection.count
+      iteration = 1
+      TextSection.find_each do |text_section|
+        msg = "Committing searchable text nodes for text section"
+        logger.info "#{msg} #{text_section.id}: #{iteration}/#{count}"
+        text_section.enqueue_searchable_nodes_generation!
+        iteration += 1
+      end
+    end
+  end
+
   private
 
   # Checking if ID changed allows us to use this in an after_commit callback
   # while still returning true on initial create.
-  def should_update_text_index?
+  def should_generate_searchable_nodes?
     id_previously_changed? || body_json_previously_changed?
   end
 
   def destroy_searchable_nodes!
     ids = searchable_nodes.pluck :id
-    TextSectionJobs::DestroySearchableNodes.perform_later ids
+    TextSectionJobs::DestroySearchableNodesJob.perform_later ids
   end
 
   def adopt_or_orphan_annotations!

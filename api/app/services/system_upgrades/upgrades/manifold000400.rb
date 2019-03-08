@@ -4,7 +4,7 @@ module SystemUpgrades
 
       def perform!
         reindex_records
-        update_text_indexes
+        generate_searchable_nodes!
         create_twitter_queries
       end
 
@@ -35,7 +35,7 @@ module SystemUpgrades
         end
       end
 
-      def update_text_indexes
+      def generate_searchable_nodes!
         logger.info("===================================================================")
         logger.info("Update Text Indexes                                                ")
         logger.info("===================================================================")
@@ -46,7 +46,7 @@ module SystemUpgrades
         logger.info("text nodes. This may take a few minutes, so please be patient.     ")
         logger.info("===================================================================")
 
-        TextSection.update_text_indexes(logger)
+        TextSection.generate_searchable_nodes!(logger)
       end
 
       def elastic_connection_error

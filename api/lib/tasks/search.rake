@@ -9,9 +9,9 @@ end
 namespace :manifold do
   namespace :search do
     desc "Update searchable text nodes."
-    task update_text_indexes: :environment do
+    task generate_searchable_nodes!: :environment do
       logger = Manifold::Rake.logger
-      TextSection.update_text_indexes(logger)
+      TextSection.generate_searchable_nodes!(logger)
     end
 
     desc "Reindex searchable models."
