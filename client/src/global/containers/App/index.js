@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import createStore from "store/createStore";
 import { BrowserRouter, StaticRouter } from "react-router-dom";
 import Dialog from "backend/components/dialog";
 import { Provider } from "react-redux";
 import Manifold from "global/containers/Manifold";
-import cookie from "cookie";
 import get from "lodash/get";
-import ch from "helpers/consoleHelpers";
 import { hot } from "react-hot-loader/root";
 import Analytics from "hoc/analytics";
 
@@ -27,30 +24,6 @@ class App extends Component {
       routerConfirmCallback: null,
       routerConfirmMessage: null
     };
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    if (state.bootstrapped) return null;
-
-    if (__SERVER__) return { bootstrapped: true, store: props.store };
-    let initialState = {};
-    let bootstrapped = false;
-
-    if (window.__INITIAL_STATE__) {
-      initialState = window.__INITIAL_STATE__;
-      ch.info("Bootstrapped on the server.", "sparkles");
-      bootstrapped = true;
-    }
-    const store = createStore(initialState);
-
-    if (bootstrapped) return { bootstrapped, store };
-
-    return null;
-  }
-
-  componentDidMount() {
-    if (this.state.bootstrapped) return this.clientLoaded();
-    this.bootstrapClient();
   }
 
   getConfirmation = (message, callback) => {
@@ -81,31 +54,9 @@ class App extends Component {
 
   settings() {
     return get(
-      this.state.store.getState(),
+      this.props.store.getState(),
       "entityStore.entities.settings.0.attributes"
     );
-  }
-
-  bootstrapClient() {
-    const store = createStore({});
-
-    ch.error("Bootstrapping on the client.", "rain_cloud");
-    const manifoldCookie = cookie.parse(document.cookie);
-    Manifold.bootstrap(store.getState, store.dispatch, manifoldCookie).then(
-      () => {
-        ch.info("Bootstrapped on the server.", "sparkles");
-        return this.setState({ bootstrapped: true, store }, this.clientLoaded);
-      },
-      () => {
-        ch.error("Bootstrapping failed unexpectedly.", "fire");
-        return null;
-      }
-    );
-  }
-
-  clientLoaded() {
-    // TODO: Fix this
-    // this.state.store.dispatch({ type: "CLIENT_LOADED", payload: {} });
   }
 
   resolveRouterConfirm = answer => {
@@ -130,10 +81,9 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.bootstrapped) return null;
     const { routerProps, Router } = this.getRouter();
     return (
-      <Provider store={this.state.store} key="provider">
+      <Provider store={this.props.store} key="provider">
         <Router {...routerProps}>
           <Analytics settings={this.settings()}>
             <Manifold confirm={this.renderConfirm()} />

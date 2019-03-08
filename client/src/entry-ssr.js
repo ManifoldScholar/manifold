@@ -9,8 +9,7 @@ import createStore from "./store/createStore";
 import webServer from "./servers/common/server";
 import webApp from "./servers/common/app";
 import readStats from "./servers/common/read-stats";
-import cookie from "cookie";
-import { currentUserActions } from "actions";
+import CookieHelper from "helpers/cookie/Server";
 import exceptionRenderer from "./helpers/exceptionRenderer";
 import Manifold from "global/containers/Manifold";
 import { isPromise } from "utils/promise";
@@ -138,31 +137,25 @@ const fetchRouteData = (req, store) => {
   return Promise.all(promises);
 };
 
-const bootstrap = (req, store) => {
-  const manifoldCookie = cookie.parse(req.headers.cookie || "");
-  return Manifold.bootstrap(store.getState, store.dispatch, manifoldCookie);
+const bootstrap = (req, res, store) => {
+  const cookie = new CookieHelper(req, res);
+  return Manifold.bootstrap(store.getState, store.dispatch, cookie);
 };
 
 // Handle requests
 const requestHandler = (req, res) => {
   const store = createStore();
 
-  if (req.headers.cookie) {
-    const manifoldCookie = cookie.parse(req.headers.cookie || "");
-    const authToken = manifoldCookie.authToken;
-    if (authToken) store.dispatch(currentUserActions.login({ authToken }));
-  }
-
   // Prior to the router upgrade, we handled these cases... may no
   // longer be necessary.
   // if (error) return respondWithRouterError(res, error);
   // if (!props) return respondWithInternalServerError(res);
 
-  // 1. Authenticate user
+  // 1. Run manifold bootstrap
   // 2. Fetch any data, as the user
   // 3. Send the response to the user
   /* eslint-disable max-len */
-  bootstrap(req, store)
+  bootstrap(req, res, store)
     .then(
       () => {
         ch.plain("App bootstrapped");

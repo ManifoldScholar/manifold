@@ -10,22 +10,87 @@ import ReactDOM from "react-dom";
 import App from "global/containers/App";
 import ch from "./helpers/consoleHelpers";
 import config from "config";
+import Manifold from "global/containers/Manifold";
+import has from "lodash/has";
+import createStore from "store/createStore";
+import CookieHelper from "helpers/cookie/Browser";
 
-// The DOM element into which we're rendering the client-side SPA
-const rootElement = document.getElementById("content");
+class EntryBrowser {
+  constructor() {
+    this.initialState = window.__INITIAL_STATE__ || {};
+    this.bootstrapped = has(window, "__INITIAL_STATE__");
+    this.store = createStore(this.initialState);
+  }
 
-if (!window.DISABLE_BROWSER_RENDER) {
-  ReactDOM.hydrate(<App />, rootElement);
-}
+  get root() {
+    return document.getElementById("content");
+  }
 
-if (config.environment.isDevelopment) {
-  // If we're in development mode, we want to check for the server-side render being
-  // different from the first client-side render.
-  window.React = React; // enable debugger
-  window.manifoldConfig = config;
-  if (rootElement && rootElement.hasAttribute("data-ssr-render") === true) {
-    ch.info("Server-side rendering service is present.", "rainbow");
-  } else {
-    ch.error("Server-side rendering service is missing.", "rain_cloud");
+  get ssrIsPresent() {
+    return this.root && this.root.hasAttribute("data-ssr-render") === true;
+  }
+
+  startBootstrap(callback) {
+    return new Promise(callback);
+  }
+
+  performBootstrap() {
+    const store = this.store;
+    const cookie = new CookieHelper();
+    ch.error("Bootstrapping on the client.", "rain_cloud");
+    return Manifold.bootstrap(store.getState, store.dispatch, cookie).catch(
+      e => {
+        console.log(e, "ERRORRRR");
+      }
+    );
+  }
+
+  bootstrapUnnecessary(resolve) {
+    ch.info("Bootstrapped on server.", "sparkles");
+    resolve();
+  }
+
+  bootstrapSuccess(resolve) {
+    ch.info("Client bootstrapping successful.", "sparkles");
+    resolve();
+  }
+
+  bootstrapFailure(reject) {
+    ch.error("Client bootstrapping failed unexpectedly.", "fire");
+    reject();
+  }
+
+  enableDevelopment() {
+    // If we're in development mode, we want to check for the server-side render being
+    // different from the first client-side render.
+    window.React = React; // enable debugger
+    window.manifoldConfig = config;
+    if (this.ssrIsPresent) {
+      ch.info("Server-side rendering service is present.", "rainbow");
+    } else {
+      ch.error("Server-side rendering service is missing.", "rain_cloud");
+    }
+  }
+
+  render = () => {
+    const renderMethod = this.ssrIsPresent ? ReactDOM.hydrate : ReactDOM.render;
+    renderMethod(<App store={this.store} />, this.root);
+    if (config.environment.isDevelopment) this.enableDevelopment();
+  };
+
+  start() {
+    if (window.DISABLE_BROWSER_RENDER) return;
+    this.startBootstrap((resolve, reject) => {
+      if (this.bootstrapped) {
+        return this.bootstrapUnnecessary(resolve);
+      }
+      this.performBootstrap().then(
+        () => this.bootstrapSuccess(resolve),
+        () => this.bootstrapFailure(reject)
+      );
+    }).finally(this.render);
   }
 }
+
+const entryBrowser = new EntryBrowser();
+entryBrowser.start();

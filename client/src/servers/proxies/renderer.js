@@ -2,11 +2,9 @@ import config from "config";
 import proxy from "http-proxy-middleware";
 import ch from "../../helpers/consoleHelpers";
 import createStore from "../../store/createStore";
-import cookie from "cookie";
-import has from "lodash/has";
 import exceptionRenderer from "../../helpers/exceptionRenderer";
 import ManifoldBootstrap from "global/containers/Manifold/bootstrap";
-import { authenticateWithToken } from "store/middleware/currentUserMiddleware";
+import CookieHelper from "helpers/cookie/Server";
 
 const ssrRenderUrl = `http://${config.services.client.domain}:${
   config.services.client.sparePort
@@ -24,12 +22,6 @@ export default function makeRendererProxy(stats, requestHandler) {
       ch.error(`Falling back to SSR rescue service only`);
 
       const store = createStore();
-
-      let authToken = null;
-      if (req.headers.cookie) {
-        const manifoldCookie = cookie.parse(req.headers.cookie);
-        authToken = manifoldCookie.authToken;
-      }
 
       const render = () => {
         try {
@@ -53,12 +45,8 @@ export default function makeRendererProxy(stats, requestHandler) {
       };
 
       const promises = [];
-
-      if (!has(store.getState(), "entityStore.entities.settings.0")) {
-        promises.push(ManifoldBootstrap(store.getState, store.dispatch));
-      }
-
-      promises.push(authenticateWithToken(authToken, false, store.dispatch));
+      const cookie = new CookieHelper(req, res);
+      promises.push(ManifoldBootstrap(store.getState, store.dispatch, cookie));
       Promise.all(promises).then(render, render);
     }
   });

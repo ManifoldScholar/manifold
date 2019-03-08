@@ -1,6 +1,7 @@
 import actions from "actions/currentUser";
 import { ApiClient, tokensAPI, meAPI, favoritesAPI } from "api";
 import { notificationActions } from "actions";
+import BrowserCookieHelper from "helpers/cookie/Browser";
 
 function generateErrorPayload(status = 401) {
   const heading = "Login Failed";
@@ -35,75 +36,6 @@ function notifyLogout(dispatch) {
   }, 5000);
 }
 
-function setCookie(authToken) {
-  if (__SERVER__) return;
-
-  const expireDate = new Date();
-  expireDate.setDate(expireDate.getDate() + 90);
-  document.cookie = `authToken=${authToken};path=/;expires=${expireDate.toUTCString()}`;
-}
-
-function destroyCookie() {
-  if (__SERVER__) return;
-  document.cookie = "authToken=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT";
-}
-
-function authenticateWithPassword(email, password, dispatch) {
-  const promise = tokensAPI.createToken(email, password);
-  promise.then(
-    response => {
-      const authToken = response.meta.authToken;
-      if (!authToken) {
-        dispatch(actions.loginSetError(generateErrorPayload(500)));
-        dispatch(actions.loginComplete());
-        return Promise.resolve();
-      }
-      setCookie(authToken);
-      dispatch(actions.setCurrentUser(response));
-      dispatch(actions.setAuthToken(authToken));
-      dispatch(actions.loginComplete());
-    },
-    response => {
-      dispatch(actions.loginSetError(generateErrorPayload(response.status)));
-      dispatch(actions.loginComplete());
-    }
-  );
-
-  return promise;
-}
-
-export function authenticateWithToken(
-  token,
-  shouldSetCookie = false,
-  dispatch
-) {
-  const client = new ApiClient();
-
-  // Query API for current user from token
-  let promise;
-  if (token) {
-    const { endpoint, method, options } = meAPI.show();
-    options.authToken = token;
-    promise = client.call(endpoint, method, options);
-  } else {
-    promise = new Promise((resolve, reject) => reject());
-  }
-
-  promise.then(
-    response => {
-      if (shouldSetCookie) setCookie(token);
-      dispatch(actions.setCurrentUser(response));
-      dispatch(actions.setAuthToken(token));
-      dispatch(actions.loginComplete());
-    },
-    responseIgnored => {
-      dispatch(actions.logout);
-    }
-  );
-
-  return promise;
-}
-
 function follow(project, token, dispatch) {
   const client = new ApiClient();
   const { endpoint, method, options } = favoritesAPI.create(project);
@@ -130,19 +62,133 @@ function unfollow(target, token, dispatch) {
   dispatch(actions.deleteCurrentUserFavorite(promise));
 }
 
+function setCookie(authToken, cookieHelper = null) {
+  const cookie = cookieHelper || new BrowserCookieHelper();
+  cookie.write("authToken", authToken);
+}
+
+function destroyCookie(cookieHelper = null) {
+  const cookie = cookieHelper || new BrowserCookieHelper();
+  cookie.remove("authToken");
+}
+
+function getUserFromToken(token) {
+  const client = new ApiClient();
+  if (token) {
+    const { endpoint, method, options } = meAPI.show();
+    options.authToken = token;
+    return client.call(endpoint, method, options);
+  }
+  return Promise.reject();
+}
+
+function handleAuthenticationSuccess(
+  dispatch,
+  options = { authToken: null, user: null, cookieHelper: null, setCookie: true }
+) {
+  dispatch(actions.setCurrentUser(options.user));
+  dispatch(actions.setAuthToken(options.authToken));
+  dispatch(actions.loginComplete());
+  if (options.setCookie) setCookie(options.authToken, options.cookieHelper);
+}
+
+function handleAuthenticationFailure(
+  dispatch,
+  options = { status: 500, cookieHelper: null, destroyCookie: true }
+) {
+  dispatch(actions.loginSetError(generateErrorPayload(500)));
+  dispatch(actions.loginComplete());
+  if (options.destroyCookie) destroyCookie(options.cookieHelper);
+}
+
+function authenticateWithPassword(email, password, dispatch) {
+  const promise = tokensAPI.createToken(email, password);
+  promise.then(
+    user => {
+      const { authToken } = user.meta;
+      if (!authToken) {
+        handleAuthenticationFailure(dispatch, {
+          status: 500,
+          destroyCookie: true
+        });
+        return Promise.resolve();
+      }
+      handleAuthenticationSuccess(dispatch, {
+        authToken,
+        user,
+        setCookie: true
+      });
+    },
+    response => {
+      const { status } = response;
+      handleAuthenticationFailure(dispatch, { status, destroyCookie: true });
+    }
+  );
+  return promise;
+}
+
+function authenticateWithToken(authToken, dispatch) {
+  const promise = getUserFromToken(authToken);
+  promise.then(
+    user => {
+      handleAuthenticationSuccess(dispatch, {
+        authToken,
+        user,
+        setCookie: true
+      });
+    },
+    response => {
+      const { status } = response;
+      handleAuthenticationFailure(dispatch, { status, destroyCookie: true });
+    }
+  );
+  return promise;
+}
+
+// This function can be called on the server or the client. It's called outside of the
+// normal dispatch process during bootstrap, because it needs access to complex objects
+// that can't be dispatched, such as the browser and server cookie helpers. The server-
+// side cookie helper needs access to the current response to set the cookie, and that
+// would be difficult to pass through the store. That said, we keep this in the middleware
+// so as not to spread and duplicate this authenticate logic. Yeah, it's kind of a
+// one-off. We're sorry.
+export function authenticateWithCookie(dispatch, cookieHelper) {
+  const authToken = cookieHelper.read("authToken");
+  if (!authToken) return Promise.reject();
+  const promise = getUserFromToken(authToken);
+  promise.then(
+    user => {
+      handleAuthenticationSuccess(dispatch, {
+        authToken,
+        user,
+        cookieHelper,
+        setCookie: false
+      });
+    },
+    response => {
+      const { status } = response;
+      handleAuthenticationFailure(dispatch, {
+        status,
+        cookieHelper,
+        destroyCookie: true
+      });
+    }
+  );
+  return promise;
+}
+
 export default function currentUserMiddleware({ dispatch, getState }) {
   return next => action => {
     const payload = action.payload;
 
+    if (action.type === "RESTORE_SESSION") {
+      dispatch(actions.loginStart());
+      return authenticateWithCookie(payload, dispatch);
+    }
+
     if (action.type === "LOGIN") {
       dispatch(actions.loginStart());
-      if (payload.authToken) {
-        return authenticateWithToken(
-          payload.authToken,
-          payload.setCookie,
-          dispatch
-        );
-      }
+      if (payload.authToken) authenticateWithToken(payload.authToken, dispatch);
       authenticateWithPassword(payload.email, payload.password, dispatch);
     }
 

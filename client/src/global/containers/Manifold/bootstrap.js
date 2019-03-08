@@ -1,11 +1,15 @@
 import has from "lodash/has";
 import ch from "helpers/consoleHelpers";
-import { entityStoreActions, currentUserActions } from "actions";
+import { entityStoreActions } from "actions";
+import { authenticateWithCookie } from "store/middleware/currentUserMiddleware";
 
 const { request } = entityStoreActions;
 import { settingsAPI, requests } from "api";
 
-export default function bootstrap(getState, dispatch, cookie) {
+// Currently, the Manifold Bootstrap does two things:
+// 1. Load the settings.
+// 2. Authenticate the user from a cookie.
+export default function bootstrap(getState, dispatch, cookieHelper) {
   const promises = [];
   const state = getState();
 
@@ -18,31 +22,32 @@ export default function bootstrap(getState, dispatch, cookie) {
     const settingsPromise = dispatch(settingsRequest).promise;
     settingsPromise.then(
       () => {
-        ch.plain("Settings loaded");
+        ch.notice("Settings loaded", "control_knobs");
       },
       () => {
-        ch.plain("Settings failed to load");
+        ch.error("Settings failed to load");
       }
     );
     promises.push(settingsPromise);
   }
 
   // Authenticate from cookie.
-  if (cookie && !state.authentication.authenticated) {
-    const authToken = cookie.authToken;
-    if (authToken) {
-      const authPromise = dispatch(currentUserActions.login({ authToken }));
-      authPromise.then(
-        () => {
-          ch.plain("User authenticated");
-        },
-        () => {
-          ch.plain("Unable to authenticate user");
-        }
-      );
-      promises.push(authPromise);
-    }
-  }
+  const authPromiseWrapper = new Promise((resolve, rejectIgnored) => {
+    // Whether or not we can authenticate the user, we successfully resolve the promise,
+    // because an unauthenticated user is not the same as a failed request.
+    const authPromise = authenticateWithCookie(dispatch, cookieHelper);
+    authPromise.then(
+      () => {
+        ch.notice("User authenticated", "wink");
+        resolve();
+      },
+      () => {
+        ch.notice("Unable to authenticate user", "rage");
+        resolve();
+      }
+    );
+  });
+  promises.push(authPromiseWrapper);
 
   return Promise.all(promises);
 }
