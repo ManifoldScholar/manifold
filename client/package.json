@@ -22,6 +22,7 @@
     "fix": "npm-run-all \"fix:js {*}\" \"fix:scss {*}\" --",
     "lint": "npm-run-all \"lint:js {*}\" \"lint:scss {*}\" --",
     "fix:js": "./script/lint-javascript --fix",
+    "fix:js:force": "./script/lint-javascript --no-ignore --fix",
     "fix:scss": "./script/lint-sass --fix",
     "fix:staged": "yarn lint-staged",
     "lint:js": "./script/lint-javascript",
