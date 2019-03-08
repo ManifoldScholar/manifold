@@ -16,6 +16,12 @@
 .visibility-menu {
   @include uiPanelMenu;
 
+  .scheme-dark & {
+    i, span, label {
+      color: $neutral30;
+    }
+  }
+
   ul li {
     padding: 30px 35px;
   }

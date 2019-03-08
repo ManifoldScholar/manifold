@@ -31,6 +31,10 @@
           @include respond($break40) {
             padding: 30px 28px;
             border-top: 2px solid $neutral30;
+
+            .scheme-dark & {
+              border-color: $neutral70;
+            }
           }
         }
       }
@@ -101,6 +105,16 @@
       background-color: $neutral05;
       border-radius: 100%;
       transition: color $durationFast $timing, background-color $durationFast $timing;
+
+      .scheme-dark & {
+        color: $neutral20;
+        background-color: $neutral50;
+
+        &:disabled {
+          color: $neutral70;
+          background-color: $neutral80;
+        }
+      }
 
       @include respond($break50) {
         width: 35px;
@@ -203,6 +217,10 @@
       background-color: $neutralWhite;
       transition: color $duration $timing, background-color $duration $timing;
 
+      .scheme-dark & {
+        background-color: $neutral50;
+      }
+
       @include respond($break50) {
         width: 96px;
       }
@@ -238,10 +256,18 @@
       // Icon coloring
       .manicon-margins-narrow-text, .manicon-margins-wide-text {
         color: $neutral40;
+
+        .scheme-dark & {
+          color: $neutral85;
+        }
       }
 
       .manicon-margins-narrow-arrows, .manicon-margins-wide-arrows {
         color: $neutralOffBlack;
+
+        .scheme-dark & {
+          color: $neutralOffWhite;
+        }
       }
 
       &:hover, &:focus {

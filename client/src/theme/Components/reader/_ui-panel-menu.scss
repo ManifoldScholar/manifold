@@ -25,7 +25,32 @@
   width: 100%;
   background-color: $neutral10;
   transition: right $duration $timing,
-    bottom $duration $timing;
+    bottom $duration $timing,
+    background-color $duration $timing;
+
+  .scheme-dark & {
+    background-color: $neutral85;
+
+    button {
+      color: $neutral50;
+
+      &.button-active {
+        color: $neutral10;
+        border-color: $neutral10;
+      }
+    }
+
+    a {
+      color: $neutral30;
+      border-color: $neutral70;
+    }
+
+    li {
+      + li {
+        border-color: $neutral70;
+      }
+    }
+  }
 
   @include respond($break50) {
     position: absolute;

@@ -1,6 +1,19 @@
 .reader-return-menu {
   max-width: 330px;
   background-color: $neutral10;
+  transition: background-color $duration $timing;
+
+  .scheme-dark & {
+    background-color: $neutral85;
+
+    a {
+      color: $neutral30;
+    }
+
+    li {
+      border-color: $neutral70;
+    }
+  }
 
   @include respond($break60) {
     max-width: 390px;

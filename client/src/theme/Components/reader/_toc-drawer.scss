@@ -33,6 +33,17 @@
   $tocNestedPadding: 23;
 
   .table-of-contents {
+    transition: background-color $duration $timing;
+
+    .scheme-dark & {
+      background-color: $neutral85;
+
+      a {
+        color: $neutral30;
+        border-color: $neutral70;
+      }
+    }
+
     // Global Styles
     ul {
       @include listUnstyled;

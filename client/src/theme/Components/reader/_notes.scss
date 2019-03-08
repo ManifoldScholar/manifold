@@ -87,6 +87,34 @@
     background-color: $neutral10;
     transition: right $duration $timing;
 
+    .scheme-dark & {
+      background-color: $neutral85;
+
+      .drawer-title {
+        color: $neutral40;
+      }
+
+      .drawer-bar, .filters {
+        border-color: $neutral70;
+      }
+
+      .filters {
+        background-color: $neutral80;
+
+        .label {
+          color: $neutral40;
+        }
+      }
+
+      .notes-message {
+        color: $neutral40;
+      }
+
+      label {
+        color: $neutral20;
+      }
+    }
+
     @include respond($break75) {
       right: -70vw;
     }

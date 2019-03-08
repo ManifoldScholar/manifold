@@ -11,6 +11,18 @@
   width: 100vw;
   background-color: $neutral10;
 
+  .scheme-dark & {
+    background-color: $neutral85;
+
+    label {
+      color: $neutral40;
+    }
+
+    .group-label {
+      color: $neutral40;
+    }
+  }
+
   .header-app & {
     padding: 28px 22px 22px;
 
