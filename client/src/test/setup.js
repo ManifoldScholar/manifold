@@ -1,3 +1,5 @@
+import "@babel/polyfill";
+
 // We mock 3rd party libraries that depend on the refs because react-test-renderer doesn't
 // support DOM refs, which breaks our tests.
 jest.mock("react-dropzone", () => "react-dropzone");
