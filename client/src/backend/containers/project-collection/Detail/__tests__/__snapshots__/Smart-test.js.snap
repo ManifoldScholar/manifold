@@ -4,7 +4,9 @@ exports[`Backend.ProjectCollection.Detail.Smart component renders correctly 1`] 
 <section
   className="project-list grid"
 >
-  <section>
+  <section
+    className="simple-list"
+  >
     <ul>
       <li>
         <div

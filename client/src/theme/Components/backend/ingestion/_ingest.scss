@@ -51,7 +51,7 @@
       border: 1px solid $neutral80;
 
       @include respond($break90) {
-        height: 600px;
+        height: 50vh;
       }
     }
   }

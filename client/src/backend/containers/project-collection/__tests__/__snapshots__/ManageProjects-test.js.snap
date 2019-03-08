@@ -101,7 +101,9 @@ Array [
       className="project-list grid"
     >
       <div>
-        <section>
+        <section
+          className="simple-list"
+        >
           <ul>
             <li>
               <div

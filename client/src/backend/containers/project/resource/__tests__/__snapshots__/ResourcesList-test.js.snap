@@ -114,7 +114,9 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
             </span>
           </a>
         </div>
-        <section>
+        <section
+          className="simple-list"
+        >
           <ul>
             <li>
               <a

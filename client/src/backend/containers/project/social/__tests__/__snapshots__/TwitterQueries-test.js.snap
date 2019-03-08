@@ -39,7 +39,9 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
           </span>
         </a>
       </div>
-      <section>
+      <section
+        className="simple-list"
+      >
         <ul>
           <li
             className="active"

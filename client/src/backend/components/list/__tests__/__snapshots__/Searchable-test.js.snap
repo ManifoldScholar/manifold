@@ -69,7 +69,9 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
         </span>
          resources: 
       </p>
-      <section>
+      <section
+        className="simple-list"
+      >
         <ul>
           <li>
             <a
@@ -443,7 +445,9 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
         </span>
          resources: 
       </p>
-      <section>
+      <section
+        className="simple-list"
+      >
         <ul>
           <div>
             Can we build 

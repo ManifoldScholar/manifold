@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.Resource.Card component renders correctly 1`] = `
-<section>
+<section
+  className="simple-list"
+>
   <header
     className="section-heading-secondary"
   >
