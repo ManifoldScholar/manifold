@@ -5,6 +5,7 @@ import withSettings from "hoc/with-settings";
 import { withRouter } from "react-router-dom";
 import get from "lodash/get";
 import config from "config";
+import ch from "helpers/consoleHelpers";
 
 class Analytics extends Component {
   static propTypes = {
@@ -45,13 +46,16 @@ class Analytics extends Component {
 
   logInit(propsIgnored) {
     if (config.environment.isDevelopment && config.environment.isBrowser) {
-      console.log(`📈 Analytics: Initialized`); // eslint-disable-line no-console
+      ch.notice("Analytics initialized", "chart_with_upwards_trend");
     }
   }
 
   logTrack(props) {
     if (config.environment.isDevelopment && config.environment.isBrowser) {
-      console.log(`📉 Analytics: page view for ${props.location.pathname}`); // eslint-disable-line no-console
+      ch.notice(
+        `Analytics: page view for ${props.location.pathname}`,
+        "chart_with_upwards_trend"
+      );
     }
   }
 
