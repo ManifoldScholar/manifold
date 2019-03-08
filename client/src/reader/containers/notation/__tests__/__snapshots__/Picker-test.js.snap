@@ -98,7 +98,9 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
             </span>
              resources: 
           </p>
-          <section>
+          <section
+            className="simple-list"
+          >
             <ul>
               <li>
                 <span

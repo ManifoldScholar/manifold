@@ -5,7 +5,9 @@ Array [
   <nav
     className="flush results-list"
   >
-    <section>
+    <section
+      className="simple-list"
+    >
       <header
         className="section-heading-secondary"
       >

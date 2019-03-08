@@ -80,7 +80,9 @@ exports[`Backend Settings Subjects List Container renders correctly 1`] = `
                 </span>
                  subjects: 
               </p>
-              <section>
+              <section
+                className="simple-list"
+              >
                 <ul>
                   <li
                     className=""
