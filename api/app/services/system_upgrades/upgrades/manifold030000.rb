@@ -1,7 +1,7 @@
 module SystemUpgrades
   module Upgrades
     class Manifold030000 < SystemUpgrades::AbstractVersion
-      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
 
       def perform!
         reprocess_text_covers!
@@ -55,7 +55,7 @@ module SystemUpgrades
         end
       end
 
-      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
     end
   end
 end
