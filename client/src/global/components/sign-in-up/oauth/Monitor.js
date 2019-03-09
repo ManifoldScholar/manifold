@@ -17,7 +17,7 @@ class Monitor extends Component {
     /* eslint-disable react/no-unused-prop-types */
     oauth: PropTypes.shape({
       started: PropTypes.bool,
-      popup: PropTypes.object,
+      popup: PropTypes.any,
       errors: PropTypes.arrayOf(PropTypes.string)
     })
     /* eslint-enable react/no-unused-prop-types */
