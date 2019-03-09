@@ -188,8 +188,11 @@ export default function currentUserMiddleware({ dispatch, getState }) {
 
     if (action.type === "LOGIN") {
       dispatch(actions.loginStart());
-      if (payload.authToken) authenticateWithToken(payload.authToken, dispatch);
-      authenticateWithPassword(payload.email, payload.password, dispatch);
+      if (payload.authToken) {
+        authenticateWithToken(payload.authToken, dispatch);
+      } else {
+        authenticateWithPassword(payload.email, payload.password, dispatch);
+      }
     }
 
     if (action.type === "LOGOUT") {

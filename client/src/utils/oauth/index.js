@@ -38,13 +38,7 @@ export function getUrl(provider) {
  */
 export function isOauthEvent(event) {
   if (get(event, "data.type") === "oauth") {
-    const { domain, port } = config.services.client;
-    const allowed = [
-      `http://${domain}`,
-      `https://${domain}`,
-      `http://${domain}:${port}`,
-      `https://${domain}:${port}`
-    ];
+    const allowed = [config.services.api, config.services.client.url];
     if (!allowed.includes(get(event, "origin"))) {
       console.error("Origin mismatch, %s is not API", event.origin);
       return false;

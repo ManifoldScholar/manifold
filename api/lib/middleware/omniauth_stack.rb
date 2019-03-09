@@ -39,7 +39,7 @@ class OmniauthStack
 
       middleware.use OmniAuth::Builder do
         configure do |config|
-          config.full_host = Rails.configuration.manifold.url
+          config.full_host = Rails.configuration.manifold.api_url
         end
 
         ManifoldEnv.oauth.enabled.each do |enabled_provider|
