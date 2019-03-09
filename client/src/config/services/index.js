@@ -25,7 +25,8 @@ const serverApiUrl =
 const browserCableUrl =
   process.env.CLIENT_BROWSER_API_CABLE_URL ||
   `${secure ? "wss" : "ws"}://${domain}/cable`;
-const url = secure ? `https://${domain}` : `http://${domain}`;
+const url =
+  process.env.CLIENT_URL || secure ? `https://${domain}` : `http://${domain}`;
 
 const serviceConfig = {
   api: isBrowser ? browserApiUrl : serverApiUrl,
