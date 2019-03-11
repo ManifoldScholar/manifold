@@ -160,7 +160,8 @@ module Importer
 
     def scaffold_content(project)
       @logger.info "  Creating project content blocks"
-      Content::ScaffoldProjectContent.run project: project
+      Content::ScaffoldProjectContent.run project: project,
+                                          kind: "default"
     end
 
     def create_twitter_queries(project)
