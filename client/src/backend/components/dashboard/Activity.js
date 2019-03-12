@@ -33,34 +33,54 @@ export default class Activity extends Component {
     const stats = this.props.statistics.attributes;
 
     return (
-      <table className="table-single-value">
-        <tbody>
-          <tr>
-            <td>Texts added this week</td>
-            <td>{stats.newTextsCount}</td>
-          </tr>
+      <div className="backend-activity-stats">
+        <ul className="backend-activity-stats__list">
+          <li className="backend-activity-stats__list-item">
+            <span className="backend-activity-stats__list-text">
+              Texts added this week
+            </span>
+            <span className="backend-activity-stats__list-text--highlighted">
+              {stats.newTextsCount}
+            </span>
+          </li>
           {stats.readersThisWeek !== null ? (
-            <tr>
-              <td>Readers this week</td>
-              <td>{stats.readersThisWeek}</td>
-            </tr>
+            <li className="backend-activity-stats__list-item">
+              <span className="backend-activity-stats__list-text">
+                Readers this week
+              </span>
+              <span className="backend-activity-stats__list-text--highlighted">
+                {stats.readersThisWeek}
+              </span>
+            </li>
           ) : null}
           {stats.readerIncrease != null ? (
-            <tr>
-              <td>Change from last week</td>
-              <td>{this.formatReaderIncrease(stats)}</td>
-            </tr>
+            <li className="backend-activity-stats__list-item">
+              <span className="backend-activity-stats__list-text">
+                Change from last week
+              </span>
+              <span className="backend-activity-stats__list-text--highlighted">
+                {this.formatReaderIncrease(stats)}
+              </span>
+            </li>
           ) : null}
-          <tr>
-            <td>Highlights in the past week</td>
-            <td>{stats.newHighlightsCount}</td>
-          </tr>
-          <tr>
-            <td>Annotations in the past week</td>
-            <td>{stats.newAnnotationsCount}</td>
-          </tr>
-        </tbody>
-      </table>
+          <li className="backend-activity-stats__list-item">
+            <span className="backend-activity-stats__list-text">
+              Highlights in the past week
+            </span>
+            <span className="backend-activity-stats__list-text--highlighted">
+              {stats.newHighlightsCount}
+            </span>
+          </li>
+          <li className="backend-activity-stats__list-item">
+            <span className="backend-activity-stats__list-text">
+              Annotations in the past week
+            </span>
+            <span className="backend-activity-stats__list-text--highlighted">
+              {stats.newAnnotationsCount}
+            </span>
+          </li>
+        </ul>
+      </div>
     );
   }
 }

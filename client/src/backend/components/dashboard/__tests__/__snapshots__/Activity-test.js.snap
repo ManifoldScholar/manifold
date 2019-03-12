@@ -1,50 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend.Dashboard.Activity component renders correctly 1`] = `
-<table
-  className="table-single-value"
+<div
+  className="backend-activity-stats"
 >
-  <tbody>
-    <tr>
-      <td>
+  <ul
+    className="backend-activity-stats__list"
+  >
+    <li
+      className="backend-activity-stats__list-item"
+    >
+      <span
+        className="backend-activity-stats__list-text"
+      >
         Texts added this week
-      </td>
-      <td>
+      </span>
+      <span
+        className="backend-activity-stats__list-text--highlighted"
+      >
         5
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </span>
+    </li>
+    <li
+      className="backend-activity-stats__list-item"
+    >
+      <span
+        className="backend-activity-stats__list-text"
+      >
         Readers this week
-      </td>
-      <td>
+      </span>
+      <span
+        className="backend-activity-stats__list-text--highlighted"
+      >
         2
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </span>
+    </li>
+    <li
+      className="backend-activity-stats__list-item"
+    >
+      <span
+        className="backend-activity-stats__list-text"
+      >
         Change from last week
-      </td>
-      <td>
+      </span>
+      <span
+        className="backend-activity-stats__list-text--highlighted"
+      >
         +50%
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </span>
+    </li>
+    <li
+      className="backend-activity-stats__list-item"
+    >
+      <span
+        className="backend-activity-stats__list-text"
+      >
         Highlights in the past week
-      </td>
-      <td>
+      </span>
+      <span
+        className="backend-activity-stats__list-text--highlighted"
+      >
         4
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </span>
+    </li>
+    <li
+      className="backend-activity-stats__list-item"
+    >
+      <span
+        className="backend-activity-stats__list-text"
+      >
         Annotations in the past week
-      </td>
-      <td>
+      </span>
+      <span
+        className="backend-activity-stats__list-text--highlighted"
+      >
         3
-      </td>
-    </tr>
-  </tbody>
-</table>
+      </span>
+    </li>
+  </ul>
+</div>
 `;
