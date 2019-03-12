@@ -29,13 +29,13 @@ exports[`Backend.User.ListItem component renders correctly 1`] = `
       <div
         className="meta"
       >
-        <h3
+        <span
           className="name large"
         >
           Rowan
            
           Ida
-        </h3>
+        </span>
       </div>
     </header>
     <span

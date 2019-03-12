@@ -56,9 +56,9 @@ export default class UserListItem extends PureComponent {
               )}
             </figure>
             <div className="meta">
-              <h3 className="name large">
+              <span className="name large">
                 {attr.firstName} {attr.lastName}
-              </h3>
+              </span>
             </div>
           </header>
           <span className="label">

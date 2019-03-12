@@ -303,6 +303,7 @@
 
       &.large {
         font-size: 18px;
+        font-weight: $bold;
 
         @include respond($break80) {
           font-size: 22px;

@@ -45,7 +45,7 @@ export default class MakerListItem extends PureComponent {
               )}
             </figure>
             <div className="meta">
-              <h3 className="name large">{attr.fullName}</h3>
+              <span className="name large">{attr.fullName}</span>
             </div>
           </header>
           <span className="label" />

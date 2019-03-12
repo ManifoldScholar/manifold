@@ -93,11 +93,11 @@ exports[`Backend Settings Subjects List Container renders correctly 1`] = `
                         <div
                           className="meta"
                         >
-                          <h3
+                          <span
                             className="name large"
                           >
                             Hip Hop
-                          </h3>
+                          </span>
                         </div>
                       </header>
                     </a>
