@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Navigation from "backend/components/navigation";
-import Utility from "global/components/utility";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
@@ -30,7 +29,6 @@ export default class ProjectsWrapper extends PureComponent {
   }
 
   render() {
-    const skipId = "skip-to-projects-nav";
     const secondaryLinks = navigation.projects();
 
     return (
@@ -46,9 +44,8 @@ export default class ProjectsWrapper extends PureComponent {
             from={lh.link("backendProjects")}
             candidates={secondaryLinks}
           />
-          <Utility.SkipLink skipId={skipId} />
           <Navigation.Secondary links={secondaryLinks} />
-          <section id={skipId} className="backend-detail">
+          <section className="backend-detail">
             {childRoutes(this.props.route, { childProps: this.childProps() })}
           </section>
         </div>

@@ -16,7 +16,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                 </Route>
               </withRouter(Connect(RedirectToFirstMatch))>
               <SkipLink skipId=\\"skip-to-main\\" skipLinkText=\\"Skip to main content\\" skipMessage=\\"Skipped to Main Content\\">
-                <a className=\\"screen-reader-text\\" href=\\"#skip-to-main\\" onClick={[Function]}>
+                <a className=\\"skip-to-main screen-reader-text\\" href=\\"#skip-to-main\\" onClick={[Function]}>
                   Skip to main content
                 </a>
               </SkipLink>

@@ -222,12 +222,10 @@ export class ReaderContainer extends Component {
     if (!this.props.text) return null;
     if (this.shouldRedirect(this.props)) return this.renderRedirect(this.props);
 
-    const skipId = "skip-to-main";
-
     return (
       <BodyClass className="reader">
         <div>
-          <Utility.SkipLink skipId={skipId} />
+          <Utility.SkipLink />
           <ScrollAware>
             {/* Header inside scroll-aware HOC */}
             <Header
@@ -252,7 +250,7 @@ export class ReaderContainer extends Component {
             hideTocDrawer={this.hideTocDrawer}
             showMeta={this.toggleMeta}
           />
-          <main id={skipId}>
+          <main id="skip-to-main">
             <ReactCSSTransitionGroup
               transitionName="overlay-full"
               transitionEnterTimeout={200}

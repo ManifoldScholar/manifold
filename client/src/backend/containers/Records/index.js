@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Navigation from "backend/components/navigation";
-import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
@@ -16,7 +15,6 @@ export default class RecordsContainer extends PureComponent {
   };
 
   render() {
-    const skipId = "skip-to-records-nav";
     const secondaryLinks = navigation.records();
 
     return (
@@ -32,9 +30,8 @@ export default class RecordsContainer extends PureComponent {
           candidates={secondaryLinks}
         />
         <div>
-          <Utility.SkipLink skipId={skipId} />
           <Navigation.Secondary links={secondaryLinks} />
-          <section id={skipId} className="backend-detail">
+          <section className="backend-detail">
             {childRoutes(this.props.route)}
           </section>
         </div>

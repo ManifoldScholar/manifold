@@ -84,8 +84,6 @@ export class BackendContainer extends PureComponent {
   }
 
   render() {
-    const skipId = "skip-to-main";
-
     return (
       <BodyClass className={"backend bg-neutral90"}>
         <div>
@@ -99,7 +97,7 @@ export class BackendContainer extends PureComponent {
             ]}
           />
 
-          <Utility.SkipLink skipId={skipId} />
+          <Utility.SkipLink />
           <Utility.ScrollToTop />
           <ScrollAware>
             <LayoutBackend.Header
@@ -114,7 +112,7 @@ export class BackendContainer extends PureComponent {
             ref={mainContainer => {
               this.mainContainer = mainContainer;
             }}
-            id={skipId}
+            id="skip-to-main"
           >
             {childRoutes(this.props.route, { childProps: this.childProps() })}
           </main>

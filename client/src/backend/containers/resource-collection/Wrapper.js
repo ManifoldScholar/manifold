@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
-import Utility from "global/components/utility";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { resourceCollectionsAPI, requests } from "api";
@@ -140,7 +139,6 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     const { resourceCollection, match } = this.props;
     /* eslint-enable no-unused-vars */
     if (!resourceCollection) return null;
-    const skipId = "skip-to-resourceCollection-panel";
     const secondaryLinks = navigation.resourceCollection(resourceCollection);
 
     return (
@@ -172,8 +170,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
           <Layout.BackendPanel
             sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
           >
-            <Utility.SkipLink skipId={skipId} />
-            <div id={skipId}>{this.renderRoutes()}</div>
+            <div>{this.renderRoutes()}</div>
           </Layout.BackendPanel>
         </Authorize>
       </div>

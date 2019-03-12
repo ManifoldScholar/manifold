@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Navigation from "backend/components/navigation";
-import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
@@ -15,7 +14,6 @@ export class SettingsWrapperContainer extends PureComponent {
   };
 
   render() {
-    const skipId = "skip-to-settings-panel";
     const secondaryLinks = navigation.settings();
 
     return (
@@ -32,12 +30,9 @@ export class SettingsWrapperContainer extends PureComponent {
         />
 
         <section>
-          <Utility.SkipLink skipId={skipId} />
           <Navigation.Secondary links={secondaryLinks} />
           <div className="backend-detail">
-            <div id={skipId} className="panel">
-              {childRoutes(this.props.route)}
-            </div>
+            <div className="panel">{childRoutes(this.props.route)}</div>
           </div>
         </section>
       </Authorize>

@@ -2,13 +2,6 @@
 
 exports[`Backend Settings Wrapper Container renders correctly 1`] = `
 <section>
-  <a
-    className="screen-reader-text"
-    href="#skip-to-settings-panel"
-    onClick={[Function]}
-  >
-    Skip to main content
-  </a>
   <div>
     <nav
       className="secondary-nav"
@@ -67,7 +60,6 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
   >
     <div
       className="panel"
-      id="skip-to-settings-panel"
     />
   </div>
 </section>
