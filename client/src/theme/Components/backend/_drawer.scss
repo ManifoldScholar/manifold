@@ -116,15 +116,25 @@
     }
 
     .close-button-primary {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
 
       &:focus {
         color: $focusPrimary;
         outline: none;
       }
 
+      .manicon::before {
+        vertical-align: middle;
+      }
+
       .close-text {
-        display: none;
+        @include utilityPrimary;
+        margin-right: 12px;
+        font-size: 12px;
+        font-weight: $semibold;
+        letter-spacing: 0.125em;
       }
     }
   }
