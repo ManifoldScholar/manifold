@@ -1,0 +1,42 @@
+.backend-activity-stats {
+  &__list {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0 8px;
+    border-bottom: 1px solid $neutral80;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    @include respond($break40) {
+      padding: 11px 0 6px;
+    }
+  }
+
+  &__list-text {
+    @include templateHead;
+    font-size: 15px;
+    color: $neutral50;
+    letter-spacing: 0.015em;
+
+    @include respond($break40) {
+      font-size: 18px;
+    }
+
+    &--highlighted {
+      font-size: 24px;
+      color: $accentPrimary;
+
+      @include respond($break40) {
+        font-size: 27px;
+      }
+    }
+  }
+}
