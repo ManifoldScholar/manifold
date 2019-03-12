@@ -75,7 +75,6 @@ export class FrontendContainer extends Component {
   }
 
   render() {
-    const skipId = "skip-to-main";
     const mainClasses = get(
       this.props.settings,
       "attributes.pressLogoStyles.small"
@@ -86,7 +85,7 @@ export class FrontendContainer extends Component {
     return (
       <BodyClass className={"browse"}>
         <div>
-          <Utility.SkipLink skipId={skipId} />
+          <Utility.SkipLink />
           <Utility.ScrollToTop />
           <ScrollAware>
             <Layout.Header
@@ -104,7 +103,7 @@ export class FrontendContainer extends Component {
             ref={mainContainer => {
               this.mainContainer = mainContainer;
             }}
-            id={skipId}
+            id="skip-to-main"
             className={mainClasses}
           >
             <div>{renderRoutes(this.props.route.routes)}</div>

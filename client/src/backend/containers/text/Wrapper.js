@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
-import Utility from "global/components/utility";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { textsAPI, requests } from "api";
@@ -127,7 +126,6 @@ export class TextWrapperContainer extends PureComponent {
   render() {
     const { text } = this.props;
     if (!text) return null;
-    const skipId = "skip-to-text-panel";
     const secondaryLinks = navigation.text(text);
 
     return (
@@ -158,8 +156,7 @@ export class TextWrapperContainer extends PureComponent {
           <Layout.BackendPanel
             sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
           >
-            <Utility.SkipLink skipId={skipId} />
-            <div id={skipId}>{this.renderRoutes()}</div>
+            <div>{this.renderRoutes()}</div>
           </Layout.BackendPanel>
         </Authorize>
       </div>

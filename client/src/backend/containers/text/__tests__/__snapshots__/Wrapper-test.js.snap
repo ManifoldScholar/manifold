@@ -212,16 +212,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
       <div
         className="panel"
       >
-        <a
-          className="screen-reader-text"
-          href="#skip-to-text-panel"
-          onClick={[Function]}
-        >
-          Skip to main content
-        </a>
-        <div
-          id="skip-to-text-panel"
-        />
+        <div />
       </div>
     </div>
   </div>

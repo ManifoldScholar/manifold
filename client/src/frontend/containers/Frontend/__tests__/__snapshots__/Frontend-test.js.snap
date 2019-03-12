@@ -3,7 +3,7 @@
 exports[`Frontend Frontend Container renders correctly 1`] = `
 <div>
   <a
-    className="screen-reader-text"
+    className="skip-to-main screen-reader-text"
     href="#skip-to-main"
     onClick={[Function]}
   >

@@ -4,7 +4,6 @@ import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
 import withConfirmation from "hoc/with-confirmation";
-import Utility from "global/components/utility";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
@@ -115,7 +114,6 @@ export class ProjectWrapperContainer extends PureComponent {
   render() {
     if (!this.props.project) return null;
     const { project } = this.props;
-    const skipId = "skip-to-project-panel";
     const secondaryLinks = navigation.project(project);
 
     return (
@@ -141,8 +139,7 @@ export class ProjectWrapperContainer extends PureComponent {
           <Layout.BackendPanel
             sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
           >
-            <Utility.SkipLink skipId={skipId} />
-            <div id={skipId}>{this.renderRoutes()}</div>
+            <div>{this.renderRoutes()}</div>
           </Layout.BackendPanel>
         </Authorize>
       </div>

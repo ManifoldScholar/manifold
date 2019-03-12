@@ -6,7 +6,6 @@ import entityUtils from "utils/entityUtils";
 import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
-import Utility from "global/components/utility";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
 import navigation from "helpers/router/navigation";
@@ -188,7 +187,6 @@ class PageDetailContainer extends PureComponent {
 
   renderExisting(page) {
     if (!page) return null;
-    const skipId = "skip-to-pages-body-panel";
     const secondaryLinks = navigation.page(page);
 
     return (
@@ -201,8 +199,7 @@ class PageDetailContainer extends PureComponent {
         <Layout.BackendPanel
           sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
         >
-          <Utility.SkipLink skipId={skipId} />
-          <div id={skipId}>{this.renderRoutes()}</div>
+          <div>{this.renderRoutes()}</div>
         </Layout.BackendPanel>
       </div>
     );

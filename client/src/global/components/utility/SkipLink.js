@@ -14,8 +14,8 @@ export default class SkipLink extends PureComponent {
     skipMessage: "Skipped to Main Content"
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { skipped: false };
   }
 
@@ -27,7 +27,7 @@ export default class SkipLink extends PureComponent {
     return (
       <React.Fragment>
         <a
-          className="screen-reader-text"
+          className="skip-to-main screen-reader-text"
           href={`#${this.props.skipId}`}
           onClick={this.activateSkipMessage}
         >
