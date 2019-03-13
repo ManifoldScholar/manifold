@@ -86,25 +86,32 @@
       margin-right: 5px;
     }
 
-    > i {
+    button {
+      height: auto;
+      padding: 0;
       margin-left: 6px;
+      color: $neutral50;
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
       transition: color $duration $timing;
-
-      &.visible {
-        > svg.eye-closed {
-          display: none;
-        }
-      }
-
-      &.hidden {
-        > svg.eye-open {
-          display: none;
-        }
-      }
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
 
       &:hover {
         color: $accentPrimary;
       }
+
+      &:focus {
+        color: $accentPrimaryDull;
+        outline: thin dotted $neutral70;
+      }
+    }
+
+    i {
+      margin-left: 6px; // TODO: This icon will become a button as well once the draggable refactor happens
     }
   }
 

@@ -12,6 +12,31 @@ export default class ProjectCollectionListItem extends PureComponent {
     visibilityToggleHandler: PropTypes.func.isRequired
   };
 
+  get icon() {
+    if (this.props.entity.attributes.visible)
+      return (
+        <Utility.IconComposer
+          size={32}
+          iconClass={"eye-open"}
+          icon="eyeOpen32"
+        />
+      );
+
+    return (
+      <Utility.IconComposer
+        size={32}
+        iconClass={"eye-closed"}
+        icon="eyeClosed32"
+      />
+    );
+  }
+
+  get ariaLabel() {
+    const { entity } = this.props;
+    const target = entity.attributes.visible ? "hidden" : "visible";
+    return `Change visibility of ${entity.attributes.title} to ${target}.`;
+  }
+
   handleClick = event => {
     event.preventDefault();
     event.stopPropagation();
@@ -36,32 +61,22 @@ export default class ProjectCollectionListItem extends PureComponent {
       "project-collection-list-item": true,
       selected: active
     });
-    const visibleClass = entity.attributes.visible ? "visible" : "hidden";
 
     return (
       <div className={itemClass} onClick={this.handleClick} role="button">
         <span className="item-text">{this.props.entity.attributes.title}</span>
         <div className="icon-group">
           <span className="item-text">{entity.attributes.projectsCount}</span>
-          <i
-            className={`manicon ${visibleClass}`}
+          <button
+            className={`button-icon-primary`}
             onClick={this.toggleVisibility}
-            role="button"
+            aria-label={this.ariaLabel}
           >
-            <Utility.IconComposer
-              size={32}
-              iconClass={"eye-open"}
-              icon="eyeOpen32"
-            />
-            <Utility.IconComposer
-              size={32}
-              iconClass={"eye-closed"}
-              icon="eyeClosed32"
-            />
+            {this.icon}
             <span className="screen-reader-text">{`Collection is ${
               entity.attributes.visible ? "visible" : "not visible"
             }`}</span>
-          </i>
+          </button>
           <Handle />
         </div>
       </div>
