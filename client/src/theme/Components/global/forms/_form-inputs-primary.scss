@@ -8,7 +8,7 @@
   }
 
   // Avoid styling checkbox/radio labels
-  label:not(.checkbox):not(.radio) {
+  label:not(.checkbox):not(.radio):not(.toggle) {
     @include formLabelPrimary;
     display: block;
     margin-bottom: 1em;

@@ -7,17 +7,19 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
   <div
     className="form-input"
   >
-    <h4
-      className="form-input-heading above"
+    <label
+      className="form-input-heading toggle above"
+      htmlFor="switch-input-1"
     >
       Is this an externally linked video?
-    </h4>
+    </label>
     <div
       className="toggle-indicator"
     >
       <div
         aria-pressed={false}
         className="boolean-primary"
+        id="switch-input-1"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -107,17 +109,19 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
   <div
     className="form-input"
   >
-    <h4
-      className="form-input-heading above"
+    <label
+      className="form-input-heading toggle above"
+      htmlFor="switch-input-1"
     >
       Is this an externally linked video?
-    </h4>
+    </label>
     <div
       className="toggle-indicator"
     >
       <div
         aria-pressed={false}
         className="boolean-primary"
+        id="switch-input-1"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}

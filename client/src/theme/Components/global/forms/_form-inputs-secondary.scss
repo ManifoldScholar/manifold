@@ -89,7 +89,7 @@
   }
 
   .form-input {
-    .form-input-heading, .column-heading, label:not(.checkbox):not(.radio) {
+    .form-input-heading, .column-heading, label:not(.checkbox):not(.radio):not(.toggle) {
       @include formLabelPrimary;
       display: block;
       margin-top: 0;
@@ -168,6 +168,10 @@
 
         @include respond($break60) {
           height: 38px;
+        }
+
+        &.toggle {
+          color: $neutral40;
         }
       }
 
