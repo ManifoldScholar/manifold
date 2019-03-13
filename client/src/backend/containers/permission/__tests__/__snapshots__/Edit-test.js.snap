@@ -73,17 +73,19 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
               <div
                 className="form-input"
               >
-                <h4
-                  className="form-input-heading above"
+                <label
+                  className="form-input-heading toggle above"
+                  htmlFor="switch-input-1"
                 >
                   Can modify project?
-                </h4>
+                </label>
                 <div
                   className="toggle-indicator"
                 >
                   <div
                     aria-pressed={false}
                     className="boolean-primary"
+                    id="switch-input-1"
                     onBlur={[Function]}
                     onClick={[Function]}
                     onFocus={[Function]}
@@ -101,17 +103,19 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
               <div
                 className="form-input"
               >
-                <h4
-                  className="form-input-heading above"
+                <label
+                  className="form-input-heading toggle above"
+                  htmlFor="switch-input-1"
                 >
                   Can modify resource metadata?
-                </h4>
+                </label>
                 <div
                   className="toggle-indicator"
                 >
                   <div
                     aria-pressed={false}
                     className="boolean-primary"
+                    id="switch-input-1"
                     onBlur={[Function]}
                     onClick={[Function]}
                     onFocus={[Function]}
@@ -129,17 +133,19 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
               <div
                 className="form-input"
               >
-                <h4
-                  className="form-input-heading above"
+                <label
+                  className="form-input-heading toggle above"
+                  htmlFor="switch-input-1"
                 >
                   Is a project author?
-                </h4>
+                </label>
                 <div
                   className="toggle-indicator"
                 >
                   <div
                     aria-pressed={false}
                     className="boolean-primary"
+                    id="switch-input-1"
                     onBlur={[Function]}
                     onClick={[Function]}
                     onFocus={[Function]}

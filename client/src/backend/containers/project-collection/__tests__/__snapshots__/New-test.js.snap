@@ -120,17 +120,19 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
       <div
         className="form-input form-toggle-secondary"
       >
-        <h4
-          className="form-input-heading above"
+        <label
+          className="form-input-heading toggle above"
+          htmlFor="switch-input-1"
         >
           Visible:
-        </h4>
+        </label>
         <div
           className="toggle-indicator"
         >
           <div
             aria-pressed={false}
             className="boolean-primary"
+            id="switch-input-1"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -148,17 +150,19 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
       <div
         className="form-input form-toggle-secondary"
       >
-        <h4
-          className="form-input-heading above"
+        <label
+          className="form-input-heading toggle above"
+          htmlFor="switch-input-1"
         >
           Show on homepage:
-        </h4>
+        </label>
         <div
           className="toggle-indicator"
         >
           <div
             aria-pressed={false}
             className="boolean-primary"
+            id="switch-input-1"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

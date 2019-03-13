@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import setter from "./setter";
 import Instructions from "./Instructions";
+import labelId from "helpers/labelId";
 
 class FormSwitch extends Component {
   static displayName = "Form.Switch";
@@ -20,11 +21,13 @@ class FormSwitch extends Component {
       false: PropTypes.string
     }),
     focusOnMount: PropTypes.bool,
+    id: PropTypes.string,
     wide: PropTypes.bool
   };
 
   static defaultProps = {
     labelPos: "above",
+    id: labelId("switch-input-"),
     focusOnMount: false
   };
 
@@ -45,6 +48,36 @@ class FormSwitch extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("keydown", this.handleKeyPress);
+  }
+
+  get labelClasses() {
+    return classnames(
+      "form-input-heading",
+      "toggle",
+      this.props.labelPos,
+      this.props.labelClass
+    );
+  }
+
+  get switchClasses() {
+    return classnames({
+      "boolean-primary": true,
+      checked: this.checked
+    });
+  }
+
+  get wrapperClasses() {
+    return classnames(
+      {
+        "form-input": true,
+        wide: this.props.wide
+      },
+      this.props.className
+    );
+  }
+
+  get checked() {
+    return this.determineChecked(this.props.value);
   }
 
   truthy(value) {
@@ -95,29 +128,14 @@ class FormSwitch extends Component {
   };
 
   render() {
-    const checked = this.determineChecked(this.props.value);
-    const classes = classnames({
-      "boolean-primary": true,
-      checked
-    });
-
-    const labelClasses = classnames(
-      "form-input-heading",
-      this.props.labelPos,
-      this.props.labelClass
+    const label = (
+      <label className={this.labelClasses} htmlFor={this.props.id}>
+        {this.props.label}
+      </label>
     );
-    const wrapperClasses = classnames(
-      {
-        "form-input": true,
-        wide: this.props.wide
-      },
-      this.props.className
-    );
-
-    const label = <h4 className={labelClasses}>{this.props.label}</h4>;
 
     return (
-      <div className={wrapperClasses}>
+      <div className={this.wrapperClasses}>
         {this.props.labelPos === "above" ? label : null}
         <div className="toggle-indicator">
           {/* Add .checked to .boolean-primary to change visual state */}
@@ -128,10 +146,11 @@ class FormSwitch extends Component {
             onFocus={this.focus}
             onBlur={this.blur}
             onClick={this.handleClick}
-            className={classes}
+            className={this.switchClasses}
             role="button"
             tabIndex="0"
-            aria-pressed={checked}
+            aria-pressed={this.checked}
+            id={this.props.id}
           >
             <span className="screen-reader-text">{this.props.label}</span>
           </div>

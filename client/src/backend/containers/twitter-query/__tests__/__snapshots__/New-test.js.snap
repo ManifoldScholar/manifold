@@ -111,17 +111,19 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
       <div
         className="form-input"
       >
-        <h4
-          className="form-input-heading above"
+        <label
+          className="form-input-heading toggle above"
+          htmlFor="switch-input-1"
         >
           Active
-        </h4>
+        </label>
         <div
           className="toggle-indicator"
         >
           <div
             aria-pressed={true}
             className="boolean-primary checked"
+            id="switch-input-1"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
