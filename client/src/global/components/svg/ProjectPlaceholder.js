@@ -7,15 +7,21 @@ export default class SVGProjectPlaceholder extends Component {
 
   static propTypes = {
     color: PropTypes.string,
+    ariaLabel: PropTypes.bool,
     mode: PropTypes.oneOf(["responsive", "small", "large"])
   };
 
   static defaultProps = {
-    mode: "responsive"
+    mode: "responsive",
+    ariaLabel: true
   };
 
   get blockClass() {
     return "project-thumb-placeholder";
+  }
+
+  get ariaLabel() {
+    return this.props.ariaLabel ? "Default Project Thumbnail" : null;
   }
 
   small(className) {
@@ -26,7 +32,7 @@ export default class SVGProjectPlaceholder extends Component {
         width={48}
         height={48}
         className={this.classes(className)}
-        aria-label="Default Project Thumbnail"
+        aria-label={this.ariaLabel}
       >
         <g fill="none" fillRule="evenodd">
           <polygon
@@ -73,7 +79,7 @@ export default class SVGProjectPlaceholder extends Component {
         width={134}
         height={134}
         className={this.classes(className)}
-        aria-label="Default Project Thumbnail"
+        aria-label={this.ariaLabel}
       >
         <g fill="none" fillRule="evenodd">
           <g
