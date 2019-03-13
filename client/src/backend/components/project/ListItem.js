@@ -64,6 +64,7 @@ export default class ProjectListItem extends PureComponent {
         <ProjectPlaceholder
           mode={this.props.placeholderMode}
           color={avatarColor}
+          ariaLabel={false}
         />
       );
     }
@@ -73,9 +74,7 @@ export default class ProjectListItem extends PureComponent {
         ? project.attributes.avatarStyles.smallSquare
         : project.attributes.avatarStyles.small;
 
-    return (
-      <img src={imageStyle} alt={`View ${project.attributes.titlePlaintext}`} />
-    );
+    return <img src={imageStyle} alt="" />;
   }
 
   render() {
@@ -83,19 +82,26 @@ export default class ProjectListItem extends PureComponent {
     const attr = project.attributes;
     return (
       <li key={project.id}>
-        <Link to={this.projectLink(project)}>
+        <Link
+          to={this.projectLink(project)}
+          aria-describedby={`${project.id}-description`}
+        >
           <figure className="cover">{this.renderProjectImage(project)}</figure>
           <div className="meta">
-            <h3 className="name">
+            <div className="name">
               <span
                 className="title-text"
                 dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
               />
               {this.renderProjectStatusMarker(attr)}
               <span className="subtitle">{attr.subtitle}</span>
-            </h3>
+            </div>
             {this.renderProjectMakers(project.relationships.creators)}
           </div>
+          <span
+            id={`${project.id}-description`}
+            className="aria-describedby"
+          >{`View ${project.attributes.titlePlaintext}`}</span>
         </Link>
       </li>
     );

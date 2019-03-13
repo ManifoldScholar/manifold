@@ -9,6 +9,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
   >
     <li>
       <a
+        aria-describedby="1-description"
         href="/backend/projects/1"
         onClick={[Function]}
       >
@@ -16,7 +17,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
           className="cover"
         >
           <svg
-            aria-label="Default Project Thumbnail"
+            aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--sentary"
             height={134}
             viewBox="0 0 134 134"
@@ -100,7 +101,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
             </g>
           </svg>
           <svg
-            aria-label="Default Project Thumbnail"
+            aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--sentary"
             height={48}
             viewBox="0 0 48 48"
@@ -175,7 +176,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
         <div
           className="meta"
         >
-          <h3
+          <div
             className="name"
           >
             <span
@@ -191,8 +192,14 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
             >
               World's Greatest Dog
             </span>
-          </h3>
+          </div>
         </div>
+        <span
+          className="aria-describedby"
+          id="1-description"
+        >
+          View Rowan Test
+        </span>
       </a>
     </li>
   </li>
@@ -201,6 +208,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
   >
     <li>
       <a
+        aria-describedby="2-description"
         href="/backend/projects/2"
         onClick={[Function]}
       >
@@ -208,7 +216,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
           className="cover"
         >
           <svg
-            aria-label="Default Project Thumbnail"
+            aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--sentary"
             height={134}
             viewBox="0 0 134 134"
@@ -292,7 +300,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
             </g>
           </svg>
           <svg
-            aria-label="Default Project Thumbnail"
+            aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--sentary"
             height={48}
             viewBox="0 0 48 48"
@@ -367,7 +375,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
         <div
           className="meta"
         >
-          <h3
+          <div
             className="name"
           >
             <span
@@ -383,8 +391,14 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
             >
               World's Greatest Dog
             </span>
-          </h3>
+          </div>
         </div>
+        <span
+          className="aria-describedby"
+          id="2-description"
+        >
+          View Rowan Test
+        </span>
       </a>
     </li>
   </li>
@@ -393,6 +407,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
   >
     <li>
       <a
+        aria-describedby="3-description"
         href="/backend/projects/3"
         onClick={[Function]}
       >
@@ -400,7 +415,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
           className="cover"
         >
           <svg
-            aria-label="Default Project Thumbnail"
+            aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--sentary"
             height={134}
             viewBox="0 0 134 134"
@@ -484,7 +499,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
             </g>
           </svg>
           <svg
-            aria-label="Default Project Thumbnail"
+            aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--sentary"
             height={48}
             viewBox="0 0 48 48"
@@ -559,7 +574,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
         <div
           className="meta"
         >
-          <h3
+          <div
             className="name"
           >
             <span
@@ -575,8 +590,14 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
             >
               World's Greatest Dog
             </span>
-          </h3>
+          </div>
         </div>
+        <span
+          className="aria-describedby"
+          id="3-description"
+        >
+          View Rowan Test
+        </span>
       </a>
     </li>
   </li>
