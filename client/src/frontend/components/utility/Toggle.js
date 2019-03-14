@@ -25,7 +25,9 @@ export default class Toggle extends Component {
 
   renderOption(option) {
     const selected = this.props.selected === option.label;
-    const optionClasses = classNames("button", { selected });
+    const optionClasses = classNames("button-switch-primary__side", {
+      "button-switch-primary__side--selected": selected
+    });
 
     return (
       <div key={option.label} className={optionClasses}>
@@ -43,16 +45,16 @@ export default class Toggle extends Component {
 
     return (
       <div className="button-switch-primary">
-        <div
-          className="wrapper"
+        <button
+          className="button-switch-primary__button"
           onClick={this.handleClick}
-          role="button"
-          tabIndex="0"
         >
-          {options.map(option => {
-            return this.renderOption(option);
-          })}
-        </div>
+          <div className="button-switch-primary__wrapper">
+            {options.map(option => {
+              return this.renderOption(option);
+            })}
+          </div>
+        </button>
       </div>
     );
   }

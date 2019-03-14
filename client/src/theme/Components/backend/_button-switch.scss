@@ -1,15 +1,24 @@
 .button-switch-primary {
   border: 1px solid $accentPrimary;
 
-  .wrapper {
-    display: flex;
+  &__button {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    outline: 0;
 
     &:focus {
       outline-offset: 2px;
+      outline: thin dotted $neutral50;
     }
   }
 
-  .button {
+  &__wrapper {
+    display: flex;
+  }
+
+  &__side {
     @include buttonUnstyled;
     @include utilityPrimary;
     display: flex;
@@ -27,7 +36,7 @@
       font-size: 14px;
     }
 
-    &.selected {
+    &--selected {
       color: $neutral100;
       background-color: $accentPrimary;
     }
