@@ -42,31 +42,46 @@ export class UserMenuBodyComponent extends Component {
         <i className="tail" />
         <ul>
           <li>
-            <button onClick={this.handleProfileClick}>
+            <button
+              onClick={this.handleProfileClick}
+              aria-describedby="user-menu-edit-profile"
+            >
               <i
                 className="manicon manicon-person-pencil-simple"
                 aria-hidden="true"
               />
               {"Edit Profile"}
             </button>
+            <span id="user-menu-edit-profile" className="aria-describedby">
+              Edit your profile
+            </span>
           </li>
           <li>
-            <button onClick={this.handleNotificationsClick}>
+            <button
+              onClick={this.handleNotificationsClick}
+              aria-describedby="user-menu-notifications"
+            >
               <i
                 className="manicon manicon-envelope-circle-right"
                 aria-hidden="true"
               />
               {"Notifications"}
             </button>
+            <span id="user-menu-notifications" className="aria-describedby">
+              Edit your notification settings
+            </span>
           </li>
           <li>
-            <button onClick={this.logout}>
+            <button onClick={this.logout} aria-describedby="user-menu-logout">
               <i
                 className="manicon manicon-circle-arrow-out-right"
                 aria-hidden="true"
               />
               {"Logout"}
             </button>
+            <span id="user-menu-logout" className="aria-describedby">
+              Logout of Manifold
+            </span>
           </li>
         </ul>
       </nav>

@@ -10,6 +10,7 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
   <ul>
     <li>
       <button
+        aria-describedby="user-menu-edit-profile"
         onClick={[Function]}
       >
         <i
@@ -18,9 +19,16 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
         />
         Edit Profile
       </button>
+      <span
+        className="aria-describedby"
+        id="user-menu-edit-profile"
+      >
+        Edit your profile
+      </span>
     </li>
     <li>
       <button
+        aria-describedby="user-menu-notifications"
         onClick={[Function]}
       >
         <i
@@ -29,9 +37,16 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
         />
         Notifications
       </button>
+      <span
+        className="aria-describedby"
+        id="user-menu-notifications"
+      >
+        Edit your notification settings
+      </span>
     </li>
     <li>
       <button
+        aria-describedby="user-menu-logout"
         onClick={[Function]}
       >
         <i
@@ -40,6 +55,12 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
         />
         Logout
       </button>
+      <span
+        className="aria-describedby"
+        id="user-menu-logout"
+      >
+        Logout of Manifold
+      </span>
     </li>
   </ul>
 </nav>

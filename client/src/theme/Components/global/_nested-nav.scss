@@ -100,12 +100,18 @@
       }
     }
 
-    button {
+    button, &__item {
       @include buttonUnstyled;
       display: flex;
       width: 100%;
       padding-top: 0.588em;
       padding-bottom: 0.588em;
+    }
+
+    &__item {
+      &:hover, .avatar:hover, *:hover  {
+        cursor: default;
+      }
     }
 
     .avatar {
@@ -121,6 +127,16 @@
       width: 26px;
       height: 26px;
       margin-right: 17px;
+
+      &.manicon-envelope-circle-right {
+        padding-left: 3px;
+        font-size: 15px;
+        line-height: 1.4;
+
+        @include respond($break40) {
+          font-size: 19px;
+        }
+      }
 
       &.manicon-person {
         position: static;
