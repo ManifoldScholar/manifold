@@ -78,31 +78,33 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
           <div
             className="button-switch-primary"
           >
-            <div
-              className="wrapper"
+            <button
+              className="button-switch-primary__button"
               onClick={[Function]}
-              role="button"
-              tabIndex="0"
             >
               <div
-                className="button selected"
+                className="button-switch-primary__wrapper"
               >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-collection-manual"
-                />
-                Manual Collection
+                <div
+                  className="button-switch-primary__side button-switch-primary__side--selected"
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-collection-manual"
+                  />
+                  Manual Collection
+                </div>
+                <div
+                  className="button-switch-primary__side"
+                >
+                  <i
+                    aria-hidden="true"
+                    className="manicon manicon-collection-smart"
+                  />
+                  Smart Collection
+                </div>
               </div>
-              <div
-                className="button"
-              >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-collection-smart"
-                />
-                Smart Collection
-              </div>
-            </div>
+            </button>
           </div>
         </div>
       </div>

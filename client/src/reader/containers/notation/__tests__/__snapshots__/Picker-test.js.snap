@@ -11,31 +11,33 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
     <div
       className="button-switch-primary"
     >
-      <div
-        className="wrapper"
+      <button
+        className="button-switch-primary__button"
         onClick={[Function]}
-        role="button"
-        tabIndex="0"
       >
         <div
-          className="button selected"
+          className="button-switch-primary__wrapper"
         >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-cube-outline"
-          />
-          resources
+          <div
+            className="button-switch-primary__side button-switch-primary__side--selected"
+          >
+            <i
+              aria-hidden="true"
+              className="manicon manicon-cube-outline"
+            />
+            resources
+          </div>
+          <div
+            className="button-switch-primary__side"
+          >
+            <i
+              aria-hidden="true"
+              className="manicon manicon-file-box"
+            />
+            collections
+          </div>
         </div>
-        <div
-          className="button"
-        >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-file-box"
-          />
-          collections
-        </div>
-      </div>
+      </button>
     </div>
     <div>
       <form
