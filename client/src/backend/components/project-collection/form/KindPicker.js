@@ -30,6 +30,7 @@ export default class KindPicker extends Component {
           <Utility.Toggle
             handleToggle={this.handleSmartClick}
             selected={selected}
+            label="kind"
             optionOne={{
               label: "Manual Collection",
               iconClass: "manicon-collection-manual"

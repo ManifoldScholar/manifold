@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import labelId from "helpers/labelId";
 import classNames from "classnames";
 
 export default class Toggle extends Component {
@@ -7,6 +8,8 @@ export default class Toggle extends Component {
 
   static propTypes = {
     handleToggle: PropTypes.func.isRequired,
+    label: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     optionOne: PropTypes.shape({
       iconClass: PropTypes.string,
       label: PropTypes.string
@@ -17,6 +20,25 @@ export default class Toggle extends Component {
     }).isRequired,
     selected: PropTypes.string
   };
+
+  static defaultProps = {
+    id: labelId("button-switch-")
+  };
+
+  get selected() {
+    return this.props.selected;
+  }
+
+  get options() {
+    return [this.props.optionOne, this.props.optionTwo];
+  }
+
+  get unselected() {
+    const unselected = this.options.find(
+      option => this.selected !== option.label
+    );
+    return unselected ? unselected.label : null;
+  }
 
   handleClick = event => {
     event.preventDefault();
@@ -48,6 +70,7 @@ export default class Toggle extends Component {
         <button
           className="button-switch-primary__button"
           onClick={this.handleClick}
+          aria-describedby={this.props.id}
         >
           <div className="button-switch-primary__wrapper">
             {options.map(option => {
@@ -55,6 +78,9 @@ export default class Toggle extends Component {
             })}
           </div>
         </button>
+        <span id={this.props.id} className="aria-describedby">
+          {`Toggle ${this.props.label} to ${this.unselected}`}
+        </span>
       </div>
     );
   }

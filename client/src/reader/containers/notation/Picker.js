@@ -152,6 +152,7 @@ export class NotationPickerContainer extends PureComponent {
           <Utility.Toggle
             handleToggle={this.handleContextClick}
             selected={this.state.context}
+            label="options"
             optionOne={{
               label: "resources",
               iconClass: "manicon-cube-outline"
