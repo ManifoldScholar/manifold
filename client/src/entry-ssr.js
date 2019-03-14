@@ -11,7 +11,7 @@ import webApp from "./servers/common/app";
 import readStats from "./servers/common/read-stats";
 import CookieHelper from "helpers/cookie/Server";
 import exceptionRenderer from "./helpers/exceptionRenderer";
-import Manifold from "global/containers/Manifold";
+import manifoldBootstrap from "./bootstrap";
 import { isPromise } from "utils/promise";
 import isFunction from "lodash/isFunction";
 import has from "lodash/has";
@@ -137,9 +137,9 @@ const fetchRouteData = (req, store) => {
   return Promise.all(promises);
 };
 
-const bootstrap = (req, res, store) => {
+const performBootstrap = (req, res, store) => {
   const cookie = new CookieHelper(req, res);
-  return Manifold.bootstrap(store.getState, store.dispatch, cookie);
+  return manifoldBootstrap(store.getState, store.dispatch, cookie);
 };
 
 // Handle requests
@@ -155,7 +155,7 @@ const requestHandler = (req, res) => {
   // 2. Fetch any data, as the user
   // 3. Send the response to the user
   /* eslint-disable max-len */
-  bootstrap(req, res, store)
+  performBootstrap(req, res, store)
     .then(
       () => {
         ch.plain("App bootstrapped");

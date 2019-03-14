@@ -11,8 +11,7 @@ import has from "lodash/has";
 import get from "lodash/get";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import { uiVisibilityActions, routingActions } from "actions";
-import { meAPI, requests } from "api";
-import { entityStoreActions } from "actions";
+import { requests } from "api";
 import { select } from "utils/entityUtils";
 import { closest } from "utils/domUtils";
 import ReactGA from "react-ga";
@@ -20,17 +19,11 @@ import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
 import getRoutes from "routes";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
-import bootstrap from "./bootstrap";
 
 const routes = getRoutes();
-const { request } = entityStoreActions;
 const { visibilityHide } = uiVisibilityActions;
 
 class ManifoldContainer extends PureComponent {
-  // This method will bootstrap data into manifold. Nothing else is loaded into the
-  // store at this point, including params and the authenticated user.
-  static bootstrap = bootstrap;
-
   static mapStateToProps = state => {
     return {
       authentication: state.authentication,
@@ -102,12 +95,6 @@ class ManifoldContainer extends PureComponent {
 
   redirectToHome() {
     this.props.history.push("/");
-  }
-
-  updateCurrentUser() {
-    this.props.dispatch(
-      request(meAPI.show(), requests.gAuthenticatedUserUpdate)
-    );
   }
 
   handleGlobalClick = event => {

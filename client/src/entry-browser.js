@@ -10,7 +10,7 @@ import ReactDOM from "react-dom";
 import App from "global/containers/App";
 import ch from "./helpers/consoleHelpers";
 import config from "config";
-import Manifold from "global/containers/Manifold";
+import manifoldBootstrap from "./bootstrap";
 import has from "lodash/has";
 import createStore from "store/createStore";
 import CookieHelper from "helpers/cookie/Browser";
@@ -38,9 +38,9 @@ class EntryBrowser {
     const store = this.store;
     const cookie = new CookieHelper();
     ch.error("Bootstrapping on the client.", "rain_cloud");
-    return Manifold.bootstrap(store.getState, store.dispatch, cookie).catch(
+    return manifoldBootstrap(store.getState, store.dispatch, cookie).catch(
       e => {
-        console.log(e, "ERRORRRR");
+        console.log(e, "Bootstrap failed.");
       }
     );
   }
