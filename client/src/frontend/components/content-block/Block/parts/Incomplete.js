@@ -132,7 +132,7 @@ export default class ProjectContentBlockIncomplete extends PureComponent {
   render() {
     return (
       <div className="entity-section-wrapper__body entity-section-wrapper__body--incomplete">
-        <Utility.IconComposer icon="warning" size={50} />
+        <Utility.IconComposer icon="warningSign64" size={50} />
         <div>
           <span className="entity-section-wrapper__body--incomplete-header">
             This content block needs your attention before it can be displayed.

@@ -17,18 +17,26 @@ exports[`Frontend.ResourceList.Totals Component renders correctly 1`] = `
     </span>
      Total Resources
     <svg
-      aria-hidden="true"
+      aria-hidden={true}
       className="manicon-svg resource-total__icon"
-      fill="currentColor"
-      height={22.5}
+      height={30}
       viewBox="0 0 24 16"
       width={30}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M19.921 8.501H2V7.498h17.918l-5.253-4.737L15.35 2 22 8l-6.636 6-.684-.76z"
+      <g
+        fill="none"
         fillRule="evenodd"
-      />
+      >
+        <path
+          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+          fill="currentColor"
+        />
+        <path
+          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+          fill="currentColor"
+        />
+      </g>
     </svg>
   </a>
 </div>

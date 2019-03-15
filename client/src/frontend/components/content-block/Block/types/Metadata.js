@@ -15,7 +15,7 @@ export default class ProjectContentBlockMetadataBlock extends PureComponent {
   }
 
   static get icon() {
-    return "tag";
+    return "metadata64";
   }
 
   get project() {

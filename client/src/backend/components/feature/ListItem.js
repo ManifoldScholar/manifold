@@ -22,7 +22,7 @@ export default class FeatureListItem extends PureComponent {
           <header>
             <figure className="asset-image">
               <div className="asset-image-placeholder">
-                <Utility.IconComposer icon="resource-document" />
+                <Utility.IconComposer icon="resourceDocument64" />
               </div>
             </figure>
             <div className="meta">

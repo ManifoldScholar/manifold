@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Utility from "global/components/utility";
 
 export default class Avatar extends Component {
   static propTypes = {
@@ -27,8 +28,8 @@ export default class Avatar extends Component {
     }
     return (
       <figure style={this.props.style} className="avatar">
+        <Utility.IconComposer className="manicon-person" icon="Avatar64" />
         <span className="screen-reader-text">Avatar</span>
-        <i className="manicon manicon-person" aria-hidden="true" />
       </figure>
     );
   }

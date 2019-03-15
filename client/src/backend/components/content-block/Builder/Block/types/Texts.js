@@ -10,7 +10,7 @@ export default class ProjectContentBlocksTexts extends PureComponent {
 
   static defaultProps = {
     title: "Texts",
-    icon: "bookStackIsometric"
+    icon: "textsStacked64"
   };
 
   static isAvailable(currentBlocksIgnored) {

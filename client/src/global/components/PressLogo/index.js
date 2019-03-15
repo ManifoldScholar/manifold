@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 
 export default class PressLogo extends Component {
   static propTypes = {
@@ -14,7 +14,7 @@ export default class PressLogo extends Component {
     return (
       <React.Fragment>
         <i className="manicon" aria-hidden="true">
-          <Icon.ManifoldLogo size={26} />
+          <Utility.IconComposer size={26} icon="manifoldLogo32" />
         </i>
         <span className="screen-reader-text">{"Manifold Logo"}</span>
       </React.Fragment>

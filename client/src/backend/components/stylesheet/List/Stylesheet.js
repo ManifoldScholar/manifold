@@ -3,10 +3,8 @@ import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
 import classNames from "classnames";
 import Utility from "global/components/utility";
-
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { Icon } from "global/components/svg";
 import FormattedDate from "global/components/FormattedDate";
 
 export default class CategoryList extends PureComponent {
@@ -72,7 +70,7 @@ export default class CategoryList extends PureComponent {
             >
               <Link className={`${baseClass}__details`} to={this.editUrl}>
                 <div className={`${baseClass}__icon`}>
-                  <Icon.ResourceDocument size={50} />
+                  <Utility.IconComposer icon="resourceDocument64" size={50} />
                 </div>
                 <div className={`${baseClass}__title-wrapper`}>
                   <h3 className={`${baseClass}__title`}>
@@ -95,18 +93,18 @@ export default class CategoryList extends PureComponent {
                   className={`${baseClass}__button ${baseClass}__button--notice`}
                   onClick={this.confirmDestroy}
                 >
-                  <Utility.IconComposer icon="trash" size={26} />
+                  <Utility.IconComposer icon="delete32" size={26} />
                   <span className="screen-reader-text">Delete Stylesheet</span>
                 </button>
                 <Link className={`${baseClass}__button`} to={this.editUrl}>
-                  <Utility.IconComposer icon="pencilSimple" size={26} />
+                  <Utility.IconComposer icon="annotate32" size={26} />
                   <span className="screen-reader-text">Edit Stylesheet</span>
                 </Link>
                 <button
                   {...provided.dragHandleProps}
                   className={`${baseClass}__button`}
                 >
-                  <Utility.IconComposer icon="barsDoubleHorizontal" size={26} />
+                  <Utility.IconComposer icon="grabber32" size={26} />
                 </button>
               </div>
             </div>

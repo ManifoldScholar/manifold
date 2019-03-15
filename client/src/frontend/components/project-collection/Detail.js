@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Filters from "./Filters";
 import ProjectList from "frontend/components/project-list";
+import IconComputed from "global/components/icon-computed";
 import Utility from "global/components/utility";
 import get from "lodash/get";
 
@@ -40,7 +41,7 @@ export default class ProjectCollectionDetail extends Component {
           <div className={`${baseClass}__heading section-heading`}>
             <div className="main">
               <i className={"manicon"} aria-hidden="true">
-                <Utility.IconComposer
+                <IconComputed.ProjectCollection
                   icon={projectCollection.attributes.icon}
                   size={56}
                   fill={iconFill}

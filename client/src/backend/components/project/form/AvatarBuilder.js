@@ -4,7 +4,7 @@ import withConfirmation from "hoc/with-confirmation";
 import Form from "backend/components/form";
 import GlobalForm from "global/components/form";
 import ColorPicker from "./ColorPicker";
-import ProjectPlaceholder from "global/components/svg/ProjectPlaceholder";
+import UniqueIcons from "global/components/icon/unique";
 import classNames from "classnames";
 
 class AvatarBuilder extends Component {
@@ -76,7 +76,7 @@ class AvatarBuilder extends Component {
     if (!this.props.getModelValue("attributes[avatarColor]")) return null;
     return (
       <div className="preview">
-        <ProjectPlaceholder
+        <UniqueIcons.ProjectPlaceholderUnique
           color={this.props.getModelValue("attributes[avatarColor]")}
         />
         <span className="screen-reader-text">Default Project Thumbnail</span>

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ProjectPlaceholder from "global/components/svg/ProjectPlaceholder";
+import UniqueIcons from "global/components/icon/unique";
 import lh from "helpers/linkHandler";
 
 export default class ProjectListItem extends PureComponent {
@@ -61,7 +61,7 @@ export default class ProjectListItem extends PureComponent {
 
     if (!meta || !hasAvatarStyles) {
       return (
-        <ProjectPlaceholder
+        <UniqueIcons.ProjectPlaceholderUnique
           mode={this.props.placeholderMode}
           color={avatarColor}
           ariaLabel={false}

@@ -142,15 +142,19 @@ export class UsersEditContainer extends PureComponent {
           buttons={[
             {
               onClick: this.handleResetPasswordClick,
-              icon: "key",
+              icon: "key32",
               label: "Reset Password"
             },
             {
               onClick: this.unsubscribeUser,
-              icon: "envelope",
+              icon: "notifications24",
               label: "Unsubscribe"
             },
-            { onClick: this.handleUserDestroy, icon: "trash", label: "Delete" }
+            {
+              onClick: this.handleUserDestroy,
+              icon: "delete32",
+              label: "Delete"
+            }
           ]}
         />
 

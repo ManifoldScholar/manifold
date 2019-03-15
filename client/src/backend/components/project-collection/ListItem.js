@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import Handle from "backend/components/list/orderable-components/Handle";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 
 export default class ProjectCollectionListItem extends PureComponent {
   static propTypes = {
@@ -48,15 +48,15 @@ export default class ProjectCollectionListItem extends PureComponent {
             onClick={this.toggleVisibility}
             role="button"
           >
-            <Icon.EyeOpen
+            <Utility.IconComposer
+              size={32}
               iconClass={"eye-open"}
-              size={30}
-              fill={"currentColor"}
+              icon="eyeOpen32"
             />
-            <Icon.EyeClosed
+            <Utility.IconComposer
+              size={32}
               iconClass={"eye-closed"}
-              size={30}
-              fill={"currentColor"}
+              icon="eyeClosed32"
             />
             <span className="screen-reader-text">{`Collection is ${
               entity.attributes.visible ? "visible" : "not visible"

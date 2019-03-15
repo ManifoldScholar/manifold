@@ -27,7 +27,7 @@ export default class ProjectContentBlockInListPartsDrag extends PureComponent {
         tabIndex="0"
       >
         <Utility.IconComposer
-          icon="barsDoubleHorizontal"
+          icon="grabber32"
           size={26}
           iconClass={iconClass}
         />

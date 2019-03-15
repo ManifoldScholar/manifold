@@ -77,7 +77,7 @@ export default class CategoryListCategory extends PureComponent {
                     className="text-categories__button text-categories__button--notice"
                     onClick={this.onDelete}
                   >
-                    <Utility.IconComposer icon="trash" size={26} />
+                    <Utility.IconComposer icon="delete32" size={26} />
                     <span className="screen-reader-text">Delete Category</span>
                   </button>
 
@@ -89,7 +89,7 @@ export default class CategoryListCategory extends PureComponent {
                       category.id
                     )}
                   >
-                    <Utility.IconComposer icon="pencilSimple" size={26} />
+                    <Utility.IconComposer icon="annotate32" size={26} />
                     <span className="screen-reader-text">Edit Category</span>
                   </Link>
 
@@ -97,10 +97,7 @@ export default class CategoryListCategory extends PureComponent {
                     className="text-categories__button"
                     {...provided.dragHandleProps}
                   >
-                    <Utility.IconComposer
-                      icon="barsDoubleHorizontal"
-                      size={26}
-                    />
+                    <Utility.IconComposer icon="grabber32" size={26} />
                     <span className="screen-reader-text">Move Category</span>
                   </div>
                 </div>

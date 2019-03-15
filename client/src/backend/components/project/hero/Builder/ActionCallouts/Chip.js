@@ -63,16 +63,13 @@ export default class Chip extends PureComponent {
                     type="button"
                     className="action-callout-slot__button"
                   >
-                    <Utility.IconComposer icon="pencil-simple" size={24} />
+                    <Utility.IconComposer icon="annotate32" size={24} />
                   </button>
                   <div
                     className="action-callout-slot__button action-callout-slot__button--draggable"
                     {...provided.dragHandleProps}
                   >
-                    <Utility.IconComposer
-                      icon="barsDoubleHorizontal"
-                      size={24}
-                    />
+                    <Utility.IconComposer icon="grabber32" size={24} />
                   </div>
                 </span>
               </div>

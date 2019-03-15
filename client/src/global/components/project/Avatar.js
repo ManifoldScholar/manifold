@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ProjectPlaceholder from "global/components/svg/ProjectPlaceholder";
+import UniqueIcons from "global/components/icon/unique";
 
 export default class ProjectAvatar extends Component {
   static displayName = "Project.Avatar";
@@ -25,7 +25,7 @@ export default class ProjectAvatar extends Component {
     if (!project.attributes.avatarColor) return null;
     return (
       <React.Fragment>
-        <ProjectPlaceholder
+        <UniqueIcons.ProjectPlaceholderUnique
           mode="responsive"
           color={project.attributes.avatarColor}
         />

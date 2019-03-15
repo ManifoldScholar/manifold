@@ -13,7 +13,7 @@ export default class ProjectContentBlockMarkdownBlock extends PureComponent {
   }
 
   static get icon() {
-    return "lamp";
+    return "lamp64";
   }
 
   get block() {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 
 export default class ResourceCollectionCover extends Component {
   static displayName = "ResourceCollection.Cover";
@@ -28,7 +28,7 @@ export default class ResourceCollectionCover extends Component {
             <h4 className="collection-title">{attr.title}</h4>
             <div className="icon">
               <i className="manicon" aria-hidden="true">
-                <Icon.ResourceCollection size={48} />
+                <Utility.IconComposer size={48} icon="resourceCollection64" />
               </i>
               <span>{"Resource Collection"}</span>
             </div>

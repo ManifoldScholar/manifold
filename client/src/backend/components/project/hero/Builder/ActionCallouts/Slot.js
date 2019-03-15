@@ -63,7 +63,7 @@ class Slot extends PureComponent {
                 onClick={this.openNewDrawer}
                 className="action-callout-slot__button action-callout-slot__button--header"
               >
-                <Utility.IconComposer icon="circle-plus" size={32} />
+                <Utility.IconComposer icon="circlePlus32" size={32} />
                 {this.title}
               </button>
               <div

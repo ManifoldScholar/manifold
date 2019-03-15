@@ -4,7 +4,7 @@ import FormattedDate from "global/components/FormattedDate";
 import ResourcePreview from "frontend/components/resource-preview";
 import get from "lodash/get";
 import classnames from "classnames";
-import Utility from "global/components/utility";
+import IconComputed from "global/components/icon-computed";
 
 export default class ResourceListSlideFigure extends Component {
   static propTypes = {
@@ -52,7 +52,7 @@ export default class ResourceListSlideFigure extends Component {
         >
           <div className={infoClassNames}>
             <i className="manicon" aria-hidden="true">
-              <Utility.IconComposer icon={`resource-${attr.kind}`} size={120} />
+              <IconComputed.Resource icon={attr.kind} size={120} />
             </i>
             <span className="resource-type">{attr.kind}</span>
             <span className="resource-date">

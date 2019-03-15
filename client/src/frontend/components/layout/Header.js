@@ -9,7 +9,6 @@ import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import PreHeader from "./PreHeader";
-
 import BodyClass from "hoc/body-class";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
 

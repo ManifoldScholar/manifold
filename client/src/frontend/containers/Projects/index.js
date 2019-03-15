@@ -9,7 +9,6 @@ import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import get from "lodash/get";
 import queryString from "query-string";
-import { Icon } from "global/components/svg";
 import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
 
@@ -143,7 +142,7 @@ export class ProjectsContainer extends Component {
           <header className={`${baseClass}__heading section-heading`}>
             <div className="main">
               <i className="manicon" aria-hidden="true">
-                <Icon.BooksOnShelf size={54} />
+                <Utility.IconComposer size={54} icon="projects64" />
               </i>
               <div className="body">
                 <h4 className="title">{"All Projects"}</h4>

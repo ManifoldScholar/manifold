@@ -10,7 +10,7 @@ export default class ProjectContentBlocksTableOfContents extends PureComponent {
 
   static defaultProps = {
     title: "Table of Contents",
-    icon: "bullet-list"
+    icon: "toc64"
   };
 
   static isAvailable(currentBlocksIgnored) {

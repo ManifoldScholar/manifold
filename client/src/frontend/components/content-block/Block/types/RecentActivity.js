@@ -15,7 +15,7 @@ export default class ProjectContentBlockRecentActivityBlock extends PureComponen
   }
 
   static get icon() {
-    return "pulse";
+    return "recentActivity64";
   }
 
   get project() {

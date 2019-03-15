@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 import classNames from "classnames";
 
 export default class ResourceListTotals extends Component {
@@ -49,7 +49,11 @@ export default class ResourceListTotals extends Component {
             {this.count.toLocaleString()}
           </span>
           {` Total ${this.unit}`}
-          <Icon.ArrowLong size={30} iconClass={`${baseClass}__icon`} />
+          <Utility.IconComposer
+            size={30}
+            icon="arrowLong16"
+            iconClass={`${baseClass}__icon`}
+          />
         </Link>
       </div>
     );

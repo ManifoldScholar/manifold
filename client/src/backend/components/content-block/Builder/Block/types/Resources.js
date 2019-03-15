@@ -10,7 +10,7 @@ export default class ProjectContentBlocksResources extends PureComponent {
 
   static defaultProps = {
     title: "Resources",
-    icon: "cube-shine"
+    icon: "BEResourcesBox64"
   };
 
   static isAvailable(currentBlocks) {

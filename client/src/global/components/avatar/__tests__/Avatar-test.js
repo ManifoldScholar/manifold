@@ -13,8 +13,4 @@ describe("Global.Avatar component", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders a placeholder when no url specified", () => {
-    const component = Enzyme.shallow(<Avatar />);
-    expect(component.find("i")).toHaveLength(1);
-  });
 });

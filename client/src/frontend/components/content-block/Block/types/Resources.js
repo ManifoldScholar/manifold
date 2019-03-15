@@ -16,7 +16,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
   }
 
   static get icon() {
-    return "cubeShine";
+    return "resources64";
   }
 
   get block() {

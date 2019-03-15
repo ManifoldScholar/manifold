@@ -30,7 +30,7 @@ export default class ProjectHeroCalloutRead extends PureComponent {
   }
 
   get icon() {
-    return this.isButton ? "glasses" : "arrow";
+    return this.isButton ? "glasses64" : "arrow16";
   }
 
   get iconSize() {

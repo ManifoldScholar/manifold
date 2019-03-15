@@ -27,7 +27,7 @@ class Fields extends Component {
       ? [
           {
             onClick: this.props.handleDestroy,
-            icon: "trash",
+            icon: "delete32",
             label: "delete"
           }
         ]

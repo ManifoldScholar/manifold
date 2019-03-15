@@ -10,7 +10,7 @@ export default class ProjectContentBlocksMarkdown extends PureComponent {
 
   static defaultProps = {
     title: "Markdown",
-    icon: "lamp"
+    icon: "lamp64"
   };
 
   static isAvailable(currentBlocksIgnored) {

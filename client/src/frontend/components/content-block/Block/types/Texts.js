@@ -16,7 +16,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   }
 
   static get icon() {
-    return "bookStackIsometric";
+    return "textsStacked64";
   }
 
   get texts() {
