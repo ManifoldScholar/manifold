@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import SVG from "global/components/svg";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-
+import Utility from "global/components/utility";
 import Authorize from "hoc/authorize";
 
 const helpLink = "https://manifoldapp.org/docs/";
@@ -66,7 +65,7 @@ export default class ProjectListPlaceholder extends Component {
             <Authorize entity="project" ability="create" successBehavior="hide">
               {this.defaultMessage()}
             </Authorize>
-            <SVG.BooksOnShelfColor />
+            <Utility.IconComposer icon="BooksOnShelfColorUnique" />
             <div className="button">
               <Link
                 to={lh.link("backendProjects")}

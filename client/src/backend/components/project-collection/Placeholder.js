@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 
 const helpLink = "https://manifoldapp.org/docs/";
 
@@ -16,7 +16,10 @@ export default class ProjectCollectionPlaceholder extends Component {
       <section>
         <div className="project-collection-placeholder">
           <header className="section-heading">
-            <Icon.BooksOnShelfStroke stroke="#52e3ac" />
+            <Utility.IconComposer
+              icon="booksOnShelfStrokeUnique"
+              stroke="#52e3ac"
+            />
             <div className="main">
               <div className="body">
                 <h4 className="title">

@@ -31,7 +31,10 @@ export class TwitterQueryNewContainer extends Component {
 
     return (
       <section>
-        <Navigation.DrawerHeader title="New Twitter Query" manicon="twitter" />
+        <Navigation.DrawerHeader
+          title="New Twitter Query"
+          icon="activityTweet64"
+        />
         <TwitterQuery.Form
           name={requests.beTwitterQueryCreate}
           projectId={pId}

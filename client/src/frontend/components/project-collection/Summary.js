@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ProjectList from "frontend/components/project-list";
+import IconComputed from "global/components/icon-computed";
 import get from "lodash/get";
 import memoize from "lodash/memoize";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
-import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
 
 export default class ProjectCollectionSummary extends Component {
@@ -71,7 +71,7 @@ export default class ProjectCollectionSummary extends Component {
           >
             <div className="main">
               <i className={"manicon"} aria-hidden="true">
-                <Utility.IconComposer
+                <IconComputed.ProjectCollection
                   icon={this.collection.attributes.icon}
                   size={56}
                   fill={iconFill}

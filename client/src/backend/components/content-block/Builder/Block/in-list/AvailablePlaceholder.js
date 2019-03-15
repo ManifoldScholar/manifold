@@ -18,7 +18,7 @@ export default class ProjectContentBlockInListAvailablePlaceholder extends PureC
         {block => (
           <div className="content-block__inner">
             <Identity icon={block.icon} title={block.title} />
-            <Utility.IconComposer icon="circle-plus" size={32} />
+            <Utility.IconComposer icon="circlePlus32" size={32} />
           </div>
         )}
       </TypeComponent>

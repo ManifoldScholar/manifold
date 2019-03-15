@@ -22,7 +22,7 @@ export default class ProjectContentBlockInListPartsDelete extends PureComponent 
         }__button--delete`}
         onClick={this.props.clickHandler}
       >
-        <Utility.IconComposer icon="trash" size={26} iconClass={iconClass} />
+        <Utility.IconComposer icon="delete32" size={26} iconClass={iconClass} />
       </button>
     );
   }

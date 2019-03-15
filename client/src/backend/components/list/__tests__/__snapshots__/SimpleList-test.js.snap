@@ -8,7 +8,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
     <h3>
       <i
         aria-hidden="true"
-        className="manicon person"
+        className="manicon avatar64"
       />
       3030
        

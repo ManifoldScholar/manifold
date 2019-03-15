@@ -48,11 +48,16 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                               <Link className=\\"ordered-records-item__details\\" to=\\"/backend/projects/text/1/styles/2\\" replace={false}>
                                                 <a className=\\"ordered-records-item__details\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/2\\">
                                                   <div className=\\"ordered-records-item__icon\\">
-                                                    <Icon.ResourceDocument size={50} fill=\\"currentColor\\">
-                                                      <svg className=\\"manicon-svg\\" xmlns=\\"http://www.w3.org/2000/svg\\" width={50} height={50} fill=\\"currentColor\\" stroke={[undefined]} viewBox=\\"0 0 64 64\\">
-                                                        <path d=\\"M51,58 L51,17.8331 C51,17.6121481 50.9122272,17.4002459 50.7559907,17.2440093 C50.5997541,17.0877728 50.3878519,17 50.1669,17 L40,17 L40,6.83309996 C40,6.37299153 39.6270084,5.99999996 39.1669,5.99999996 L13,5.99999996 L13,58 L51,58 Z M42,15 L50.1669,15 C50.9182849,15 51.6388949,15.2984864 52.1702043,15.8297958 C52.7015136,16.3611051 53,17.0817151 53,17.8331 L53,60 L11,60 L11,3.99999996 L39.1669,3.99999996 C40.7315779,3.99999996 42,5.26842203 42,6.83309996 L42,15 Z M39.6862229,6.18893547 L41.0987771,4.77306445 L52.1547771,15.8031645 L50.7422229,17.2190355 L39.6862229,6.18893547 Z M20.0004958,24.9999999 L19.9995041,23.0000001 L43.9995042,22.9881001 L44.0004959,24.9880999 L20.0004958,24.9999999 Z M20.0004958,34.9999999 L19.9995041,33.0000001 L43.9995042,32.9881001 L44.0004959,34.9880999 L20.0004958,34.9999999 Z M20.0004958,44.9999999 L19.9995041,43.0000001 L43.9995042,42.9881001 L44.0004959,44.9880999 L20.0004958,44.9999999 Z M20,30 L20,28 L39,28 L39,30 L20,30 Z M20,40 L20,38 L39,38 L39,40 L20,40 Z\\" />
-                                                      </svg>
-                                                    </Icon.ResourceDocument>
+                                                    <IconComposer icon=\\"resourceDocument64\\" size={50} fill=\\"currentColor\\" svgProps={{...}}>
+                                                      <ResourceDocument svgProps={{...}} iconClass=\\"\\" icon=\\"resourceDocument64\\" size={50} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                        <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg\\" width={50} height={50} viewBox=\\"0 0 64 64\\" aria-hidden={true}>
+                                                          <g fill=\\"none\\" fillRule=\\"evenodd\\">
+                                                            <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M51,58 L51,17.8331 C51,17.6121481 50.9122272,17.4002459 50.7559907,17.2440093 C50.5997541,17.0877728 50.3878519,17 50.1669,17 L40,17 L40,6.83309996 C40,6.37299153 39.6270084,5.99999996 39.1669,5.99999996 L13,5.99999996 L13,58 L51,58 Z M42,15 L50.1669,15 C50.9182849,15 51.6388949,15.2984864 52.1702043,15.8297958 C52.7015136,16.3611051 53,17.0817151 53,17.8331 L53,60 L11,60 L11,3.99999996 L39.1669,3.99999996 C40.7315779,3.99999996 42,5.26842203 42,6.83309996 L42,15 Z M39.6862229,6.18893547 L41.0987771,4.77306445 L52.1547771,15.8031645 L50.7422229,17.2190355 L39.6862229,6.18893547 Z M20.0004958,24.9999999 L19.9995041,23.0000001 L43.9995042,22.9881001 L44.0004959,24.9880999 L20.0004958,24.9999999 Z M20.0004958,34.9999999 L19.9995041,33.0000001 L43.9995042,32.9881001 L44.0004959,34.9880999 L20.0004958,34.9999999 Z M20.0004958,44.9999999 L19.9995041,43.0000001 L43.9995042,42.9881001 L44.0004959,44.9880999 L20.0004958,44.9999999 Z M20,30 L20,28 L39,28 L39,30 L20,30 Z M20,40 L20,38 L39,38 L39,40 L20,40 Z\\" />
+                                                            <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M51,58 L51,17.8331 C51,17.6121481 50.9122272,17.4002459 50.7559907,17.2440093 C50.5997541,17.0877728 50.3878519,17 50.1669,17 L40,17 L40,6.83309996 C40,6.37299153 39.6270084,5.99999996 39.1669,5.99999996 L13,5.99999996 L13,58 L51,58 Z M42,15 L50.1669,15 C50.9182849,15 51.6388949,15.2984864 52.1702043,15.8297958 C52.7015136,16.3611051 53,17.0817151 53,17.8331 L53,60 L11,60 L11,3.99999996 L39.1669,3.99999996 C40.7315779,3.99999996 42,5.26842203 42,6.83309996 L42,15 Z M39.6862229,6.18893547 L41.0987771,4.77306445 L52.1547771,15.8031645 L50.7422229,17.2190355 L39.6862229,6.18893547 Z M20.0004958,24.9999999 L19.9995041,23.0000001 L43.9995042,22.9881001 L44.0004959,24.9880999 L20.0004958,24.9999999 Z M20.0004958,34.9999999 L19.9995041,33.0000001 L43.9995042,32.9881001 L44.0004959,34.9880999 L20.0004958,34.9999999 Z M20.0004958,44.9999999 L19.9995041,43.0000001 L43.9995042,42.9881001 L44.0004959,44.9880999 L20.0004958,44.9999999 Z M20,30 L20,28 L39,28 L39,30 L20,30 Z M20,40 L20,38 L39,38 L39,40 L20,40 Z\\" />
+                                                          </g>
+                                                        </svg>
+                                                      </ResourceDocument>
+                                                    </IconComposer>
                                                   </div>
                                                   <div className=\\"ordered-records-item__title-wrapper\\">
                                                     <h3 className=\\"ordered-records-item__title\\">
@@ -69,12 +74,15 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                               </Link>
                                               <div className=\\"ordered-records-item__utility\\">
                                                 <button className=\\"ordered-records-item__button ordered-records-item__button--notice\\" onClick={[Function]}>
-                                                  <IconComposer icon=\\"trash\\" size={26} fill=\\"currentColor\\">
-                                                    <Icon.Trash iconClass={[undefined]} size={26} fill=\\"currentColor\\" stroke={[undefined]}>
-                                                      <svg className=\\"manicon-svg\\" xmlns=\\"http://www.w3.org/2000/svg\\" width={26} height={26} fill=\\"currentColor\\" stroke={[undefined]} viewBox=\\"0 0 32 32\\" aria-hidden=\\"true\\">
-                                                        <path d=\\"M22.5 10.96l1 .051-.699 13.68a1.758 1.758 0 0 1-1.727 1.795h-10.16c-.968-.022-1.736-.825-1.715-1.758l-.698-13.717.998-.05.7 13.753a.754.754 0 0 0 .727.772h10.137c.417-.01.747-.355.739-.809L22.5 10.96zM6 11.427v-1h20v1H6zm6.75-.5h-1V6.82a1.276 1.276 0 0 1 1.251-1.306h6.011a1.27 1.27 0 0 1 1.238 1.293v4.12h-1V6.794a.27.27 0 0 0-.251-.28h-5.984a.276.276 0 0 0-.265.293v4.12zm.75 3.795h1v7.528h-1v-7.528zm4 0h1v7.528h-1v-7.528z\\" />
+                                                  <IconComposer icon=\\"delete32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
+                                                    <Delete svgProps={{...}} iconClass=\\"\\" icon=\\"delete32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                      <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg\\" width={26} height={26} viewBox=\\"0 0 32 32\\" aria-hidden={true}>
+                                                        <g fill=\\"none\\" fillRule=\\"evenodd\\">
+                                                          <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M22.5006476,10.9603607 L23.4993524,11.0112392 L22.8010808,24.6917831 C22.8222428,25.6607758 22.05432,26.4636781 21.074,26.4858 L10.9146542,26.4856713 C9.94567997,26.4636781 9.17775722,25.6607758 9.19944755,24.7281393 L8.50064755,11.0112392 L9.49935241,10.9603607 L10.1986808,24.713617 C10.1895701,25.1307915 10.5201792,25.4764602 10.926,25.4858 L21.0626542,25.4859288 C21.4798208,25.4764602 21.8104299,25.1307915 21.8018476,24.6772608 L22.5006476,10.9603607 Z M5.99999997,11.4266 L5.99999997,10.4266 L26,10.4266 L26,11.4266 L5.99999997,11.4266 Z M12.75,10.9266 L11.75,10.9266 L11.7501673,6.81953297 C11.732004,6.11756111 12.2857775,5.53349733 13.0014,5.51409997 L19.0122785,5.5142871 C19.7142225,5.53349733 20.267996,6.11756111 20.25,6.80659997 L20.25,10.9266 L19.25,10.9266 L19.2501673,6.79366698 C19.2540602,6.64321292 19.1353696,6.51803017 18.9986,6.51409997 L13.0150785,6.51391283 C12.8646304,6.51803017 12.7459398,6.64321292 12.75,6.80659997 L12.75,10.9266 Z M13.5,14.7217 L14.5,14.7217 L14.5,22.25 L13.5,22.25 L13.5,14.7217 Z M17.5,14.7217 L18.5,14.7217 L18.5,22.25 L17.5,22.25 L17.5,14.7217 Z\\" />
+                                                          <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M22.5006476,10.9603607 L23.4993524,11.0112392 L22.8010808,24.6917831 C22.8222428,25.6607758 22.05432,26.4636781 21.074,26.4858 L10.9146542,26.4856713 C9.94567997,26.4636781 9.17775722,25.6607758 9.19944755,24.7281393 L8.50064755,11.0112392 L9.49935241,10.9603607 L10.1986808,24.713617 C10.1895701,25.1307915 10.5201792,25.4764602 10.926,25.4858 L21.0626542,25.4859288 C21.4798208,25.4764602 21.8104299,25.1307915 21.8018476,24.6772608 L22.5006476,10.9603607 Z M5.99999997,11.4266 L5.99999997,10.4266 L26,10.4266 L26,11.4266 L5.99999997,11.4266 Z M12.75,10.9266 L11.75,10.9266 L11.7501673,6.81953297 C11.732004,6.11756111 12.2857775,5.53349733 13.0014,5.51409997 L19.0122785,5.5142871 C19.7142225,5.53349733 20.267996,6.11756111 20.25,6.80659997 L20.25,10.9266 L19.25,10.9266 L19.2501673,6.79366698 C19.2540602,6.64321292 19.1353696,6.51803017 18.9986,6.51409997 L13.0150785,6.51391283 C12.8646304,6.51803017 12.7459398,6.64321292 12.75,6.80659997 L12.75,10.9266 Z M13.5,14.7217 L14.5,14.7217 L14.5,22.25 L13.5,22.25 L13.5,14.7217 Z M17.5,14.7217 L18.5,14.7217 L18.5,22.25 L17.5,22.25 L17.5,14.7217 Z\\" />
+                                                        </g>
                                                       </svg>
-                                                    </Icon.Trash>
+                                                    </Delete>
                                                   </IconComposer>
                                                   <span className=\\"screen-reader-text\\">
                                                     Delete Stylesheet
@@ -82,12 +90,15 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                                 </button>
                                                 <Link className=\\"ordered-records-item__button\\" to=\\"/backend/projects/text/1/styles/2\\" replace={false}>
                                                   <a className=\\"ordered-records-item__button\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/2\\">
-                                                    <IconComposer icon=\\"pencilSimple\\" size={26} fill=\\"currentColor\\">
-                                                      <Icon.PencilSimple iconClass={[undefined]} size={26} fill=\\"currentColor\\" stroke={[undefined]}>
-                                                        <svg className=\\"manicon-svg\\" xmlns=\\"http://www.w3.org/2000/svg\\" width={26} height={26} fill=\\"currentColor\\" stroke={[undefined]} viewBox=\\"0 0 24 24\\" aria-hidden=\\"true\\">
-                                                          <path d=\\"M9.40612602,17.7199728 L19.0839055,8.06418391 L15.9511664,4.92410056 L6.27386418,14.5784572 L4.97459192,19.0173654 L9.40612602,17.7199728 Z M3.50140802,20.4906347 L5.38613577,14.0515428 L15.9528336,3.50989938 L20.4980945,8.06581606 L9.93187396,18.6080272 L3.50140802,20.4906347 Z M10.0233532,17.8105469 L9.31544675,18.5168531 L5.47564673,14.6683531 L6.18355322,13.9620469 L10.0233532,17.8105469 Z\\" />
+                                                    <IconComposer icon=\\"annotate32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
+                                                      <Annotate svgProps={{...}} iconClass=\\"\\" icon=\\"annotate32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                        <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg\\" width={26} height={26} viewBox=\\"0 0 32 32\\" aria-hidden={true}>
+                                                          <g fill=\\"none\\" fillRule=\\"evenodd\\">
+                                                            <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M25.082904,11.08319 L20.9631945,6.97713321 L8.68138527,19.1624329 L6.97462644,24.9625129 L12.8041307,23.2654775 L25.082904,11.08319 Z M5.4993735,26.4334872 L7.79461468,18.6335671 L20.9648055,5.56686673 L26.5010961,11.08481 L13.3278693,24.1545225 L5.4993735,26.4334872 Z M13.418666,23.3556603 L12.7127339,24.0639398 L7.88503392,19.2522398 L8.59096603,18.5439603 L13.418666,23.3556603 Z\\" />
+                                                            <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M25.082904,11.08319 L20.9631945,6.97713321 L8.68138527,19.1624329 L6.97462644,24.9625129 L12.8041307,23.2654775 L25.082904,11.08319 Z M5.4993735,26.4334872 L7.79461468,18.6335671 L20.9648055,5.56686673 L26.5010961,11.08481 L13.3278693,24.1545225 L5.4993735,26.4334872 Z M13.418666,23.3556603 L12.7127339,24.0639398 L7.88503392,19.2522398 L8.59096603,18.5439603 L13.418666,23.3556603 Z\\" />
+                                                          </g>
                                                         </svg>
-                                                      </Icon.PencilSimple>
+                                                      </Annotate>
                                                     </IconComposer>
                                                     <span className=\\"screen-reader-text\\">
                                                       Edit Stylesheet
@@ -95,12 +106,15 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                                   </a>
                                                 </Link>
                                                 <button onMouseDown={[Function]} onKeyDown={[Function]} onTouchStart={[Function]} onTouchMove={[Function]} onClick={[Function]} tabIndex={0} aria-grabbed={false} data-react-beautiful-dnd-drag-handle=\\"0\\" draggable={false} onDragStart={[Function: getFalse]} onDrop={[Function: getFalse]} className=\\"ordered-records-item__button\\">
-                                                  <IconComposer icon=\\"barsDoubleHorizontal\\" size={26} fill=\\"currentColor\\">
-                                                    <Icon.BarsDoubleHorizontal iconClass={[undefined]} size={26} fill=\\"currentColor\\" stroke={[undefined]}>
-                                                      <svg className=\\"manicon-svg\\" xmlns=\\"http://www.w3.org/2000/svg\\" width={26} height={26} fill=\\"currentColor\\" stroke={[undefined]} viewBox=\\"0 0 32 32\\" aria-hidden=\\"true\\">
-                                                        <path d=\\"M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z\\" />
+                                                  <IconComposer icon=\\"grabber32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
+                                                    <Grabber svgProps={{...}} iconClass=\\"\\" icon=\\"grabber32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                      <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg\\" width={26} height={26} viewBox=\\"0 0 32 32\\" aria-hidden={true}>
+                                                        <g fill=\\"none\\" fillRule=\\"evenodd\\">
+                                                          <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z\\" />
+                                                          <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z\\" />
+                                                        </g>
                                                       </svg>
-                                                    </Icon.BarsDoubleHorizontal>
+                                                    </Grabber>
                                                   </IconComposer>
                                                 </button>
                                               </div>
@@ -125,11 +139,16 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                               <Link className=\\"ordered-records-item__details\\" to=\\"/backend/projects/text/1/styles/3\\" replace={false}>
                                                 <a className=\\"ordered-records-item__details\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/3\\">
                                                   <div className=\\"ordered-records-item__icon\\">
-                                                    <Icon.ResourceDocument size={50} fill=\\"currentColor\\">
-                                                      <svg className=\\"manicon-svg\\" xmlns=\\"http://www.w3.org/2000/svg\\" width={50} height={50} fill=\\"currentColor\\" stroke={[undefined]} viewBox=\\"0 0 64 64\\">
-                                                        <path d=\\"M51,58 L51,17.8331 C51,17.6121481 50.9122272,17.4002459 50.7559907,17.2440093 C50.5997541,17.0877728 50.3878519,17 50.1669,17 L40,17 L40,6.83309996 C40,6.37299153 39.6270084,5.99999996 39.1669,5.99999996 L13,5.99999996 L13,58 L51,58 Z M42,15 L50.1669,15 C50.9182849,15 51.6388949,15.2984864 52.1702043,15.8297958 C52.7015136,16.3611051 53,17.0817151 53,17.8331 L53,60 L11,60 L11,3.99999996 L39.1669,3.99999996 C40.7315779,3.99999996 42,5.26842203 42,6.83309996 L42,15 Z M39.6862229,6.18893547 L41.0987771,4.77306445 L52.1547771,15.8031645 L50.7422229,17.2190355 L39.6862229,6.18893547 Z M20.0004958,24.9999999 L19.9995041,23.0000001 L43.9995042,22.9881001 L44.0004959,24.9880999 L20.0004958,24.9999999 Z M20.0004958,34.9999999 L19.9995041,33.0000001 L43.9995042,32.9881001 L44.0004959,34.9880999 L20.0004958,34.9999999 Z M20.0004958,44.9999999 L19.9995041,43.0000001 L43.9995042,42.9881001 L44.0004959,44.9880999 L20.0004958,44.9999999 Z M20,30 L20,28 L39,28 L39,30 L20,30 Z M20,40 L20,38 L39,38 L39,40 L20,40 Z\\" />
-                                                      </svg>
-                                                    </Icon.ResourceDocument>
+                                                    <IconComposer icon=\\"resourceDocument64\\" size={50} fill=\\"currentColor\\" svgProps={{...}}>
+                                                      <ResourceDocument svgProps={{...}} iconClass=\\"\\" icon=\\"resourceDocument64\\" size={50} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                        <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg\\" width={50} height={50} viewBox=\\"0 0 64 64\\" aria-hidden={true}>
+                                                          <g fill=\\"none\\" fillRule=\\"evenodd\\">
+                                                            <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M51,58 L51,17.8331 C51,17.6121481 50.9122272,17.4002459 50.7559907,17.2440093 C50.5997541,17.0877728 50.3878519,17 50.1669,17 L40,17 L40,6.83309996 C40,6.37299153 39.6270084,5.99999996 39.1669,5.99999996 L13,5.99999996 L13,58 L51,58 Z M42,15 L50.1669,15 C50.9182849,15 51.6388949,15.2984864 52.1702043,15.8297958 C52.7015136,16.3611051 53,17.0817151 53,17.8331 L53,60 L11,60 L11,3.99999996 L39.1669,3.99999996 C40.7315779,3.99999996 42,5.26842203 42,6.83309996 L42,15 Z M39.6862229,6.18893547 L41.0987771,4.77306445 L52.1547771,15.8031645 L50.7422229,17.2190355 L39.6862229,6.18893547 Z M20.0004958,24.9999999 L19.9995041,23.0000001 L43.9995042,22.9881001 L44.0004959,24.9880999 L20.0004958,24.9999999 Z M20.0004958,34.9999999 L19.9995041,33.0000001 L43.9995042,32.9881001 L44.0004959,34.9880999 L20.0004958,34.9999999 Z M20.0004958,44.9999999 L19.9995041,43.0000001 L43.9995042,42.9881001 L44.0004959,44.9880999 L20.0004958,44.9999999 Z M20,30 L20,28 L39,28 L39,30 L20,30 Z M20,40 L20,38 L39,38 L39,40 L20,40 Z\\" />
+                                                            <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M51,58 L51,17.8331 C51,17.6121481 50.9122272,17.4002459 50.7559907,17.2440093 C50.5997541,17.0877728 50.3878519,17 50.1669,17 L40,17 L40,6.83309996 C40,6.37299153 39.6270084,5.99999996 39.1669,5.99999996 L13,5.99999996 L13,58 L51,58 Z M42,15 L50.1669,15 C50.9182849,15 51.6388949,15.2984864 52.1702043,15.8297958 C52.7015136,16.3611051 53,17.0817151 53,17.8331 L53,60 L11,60 L11,3.99999996 L39.1669,3.99999996 C40.7315779,3.99999996 42,5.26842203 42,6.83309996 L42,15 Z M39.6862229,6.18893547 L41.0987771,4.77306445 L52.1547771,15.8031645 L50.7422229,17.2190355 L39.6862229,6.18893547 Z M20.0004958,24.9999999 L19.9995041,23.0000001 L43.9995042,22.9881001 L44.0004959,24.9880999 L20.0004958,24.9999999 Z M20.0004958,34.9999999 L19.9995041,33.0000001 L43.9995042,32.9881001 L44.0004959,34.9880999 L20.0004958,34.9999999 Z M20.0004958,44.9999999 L19.9995041,43.0000001 L43.9995042,42.9881001 L44.0004959,44.9880999 L20.0004958,44.9999999 Z M20,30 L20,28 L39,28 L39,30 L20,30 Z M20,40 L20,38 L39,38 L39,40 L20,40 Z\\" />
+                                                          </g>
+                                                        </svg>
+                                                      </ResourceDocument>
+                                                    </IconComposer>
                                                   </div>
                                                   <div className=\\"ordered-records-item__title-wrapper\\">
                                                     <h3 className=\\"ordered-records-item__title\\">
@@ -146,12 +165,15 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                               </Link>
                                               <div className=\\"ordered-records-item__utility\\">
                                                 <button className=\\"ordered-records-item__button ordered-records-item__button--notice\\" onClick={[Function]}>
-                                                  <IconComposer icon=\\"trash\\" size={26} fill=\\"currentColor\\">
-                                                    <Icon.Trash iconClass={[undefined]} size={26} fill=\\"currentColor\\" stroke={[undefined]}>
-                                                      <svg className=\\"manicon-svg\\" xmlns=\\"http://www.w3.org/2000/svg\\" width={26} height={26} fill=\\"currentColor\\" stroke={[undefined]} viewBox=\\"0 0 32 32\\" aria-hidden=\\"true\\">
-                                                        <path d=\\"M22.5 10.96l1 .051-.699 13.68a1.758 1.758 0 0 1-1.727 1.795h-10.16c-.968-.022-1.736-.825-1.715-1.758l-.698-13.717.998-.05.7 13.753a.754.754 0 0 0 .727.772h10.137c.417-.01.747-.355.739-.809L22.5 10.96zM6 11.427v-1h20v1H6zm6.75-.5h-1V6.82a1.276 1.276 0 0 1 1.251-1.306h6.011a1.27 1.27 0 0 1 1.238 1.293v4.12h-1V6.794a.27.27 0 0 0-.251-.28h-5.984a.276.276 0 0 0-.265.293v4.12zm.75 3.795h1v7.528h-1v-7.528zm4 0h1v7.528h-1v-7.528z\\" />
+                                                  <IconComposer icon=\\"delete32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
+                                                    <Delete svgProps={{...}} iconClass=\\"\\" icon=\\"delete32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                      <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg\\" width={26} height={26} viewBox=\\"0 0 32 32\\" aria-hidden={true}>
+                                                        <g fill=\\"none\\" fillRule=\\"evenodd\\">
+                                                          <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M22.5006476,10.9603607 L23.4993524,11.0112392 L22.8010808,24.6917831 C22.8222428,25.6607758 22.05432,26.4636781 21.074,26.4858 L10.9146542,26.4856713 C9.94567997,26.4636781 9.17775722,25.6607758 9.19944755,24.7281393 L8.50064755,11.0112392 L9.49935241,10.9603607 L10.1986808,24.713617 C10.1895701,25.1307915 10.5201792,25.4764602 10.926,25.4858 L21.0626542,25.4859288 C21.4798208,25.4764602 21.8104299,25.1307915 21.8018476,24.6772608 L22.5006476,10.9603607 Z M5.99999997,11.4266 L5.99999997,10.4266 L26,10.4266 L26,11.4266 L5.99999997,11.4266 Z M12.75,10.9266 L11.75,10.9266 L11.7501673,6.81953297 C11.732004,6.11756111 12.2857775,5.53349733 13.0014,5.51409997 L19.0122785,5.5142871 C19.7142225,5.53349733 20.267996,6.11756111 20.25,6.80659997 L20.25,10.9266 L19.25,10.9266 L19.2501673,6.79366698 C19.2540602,6.64321292 19.1353696,6.51803017 18.9986,6.51409997 L13.0150785,6.51391283 C12.8646304,6.51803017 12.7459398,6.64321292 12.75,6.80659997 L12.75,10.9266 Z M13.5,14.7217 L14.5,14.7217 L14.5,22.25 L13.5,22.25 L13.5,14.7217 Z M17.5,14.7217 L18.5,14.7217 L18.5,22.25 L17.5,22.25 L17.5,14.7217 Z\\" />
+                                                          <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M22.5006476,10.9603607 L23.4993524,11.0112392 L22.8010808,24.6917831 C22.8222428,25.6607758 22.05432,26.4636781 21.074,26.4858 L10.9146542,26.4856713 C9.94567997,26.4636781 9.17775722,25.6607758 9.19944755,24.7281393 L8.50064755,11.0112392 L9.49935241,10.9603607 L10.1986808,24.713617 C10.1895701,25.1307915 10.5201792,25.4764602 10.926,25.4858 L21.0626542,25.4859288 C21.4798208,25.4764602 21.8104299,25.1307915 21.8018476,24.6772608 L22.5006476,10.9603607 Z M5.99999997,11.4266 L5.99999997,10.4266 L26,10.4266 L26,11.4266 L5.99999997,11.4266 Z M12.75,10.9266 L11.75,10.9266 L11.7501673,6.81953297 C11.732004,6.11756111 12.2857775,5.53349733 13.0014,5.51409997 L19.0122785,5.5142871 C19.7142225,5.53349733 20.267996,6.11756111 20.25,6.80659997 L20.25,10.9266 L19.25,10.9266 L19.2501673,6.79366698 C19.2540602,6.64321292 19.1353696,6.51803017 18.9986,6.51409997 L13.0150785,6.51391283 C12.8646304,6.51803017 12.7459398,6.64321292 12.75,6.80659997 L12.75,10.9266 Z M13.5,14.7217 L14.5,14.7217 L14.5,22.25 L13.5,22.25 L13.5,14.7217 Z M17.5,14.7217 L18.5,14.7217 L18.5,22.25 L17.5,22.25 L17.5,14.7217 Z\\" />
+                                                        </g>
                                                       </svg>
-                                                    </Icon.Trash>
+                                                    </Delete>
                                                   </IconComposer>
                                                   <span className=\\"screen-reader-text\\">
                                                     Delete Stylesheet
@@ -159,12 +181,15 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                                 </button>
                                                 <Link className=\\"ordered-records-item__button\\" to=\\"/backend/projects/text/1/styles/3\\" replace={false}>
                                                   <a className=\\"ordered-records-item__button\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/3\\">
-                                                    <IconComposer icon=\\"pencilSimple\\" size={26} fill=\\"currentColor\\">
-                                                      <Icon.PencilSimple iconClass={[undefined]} size={26} fill=\\"currentColor\\" stroke={[undefined]}>
-                                                        <svg className=\\"manicon-svg\\" xmlns=\\"http://www.w3.org/2000/svg\\" width={26} height={26} fill=\\"currentColor\\" stroke={[undefined]} viewBox=\\"0 0 24 24\\" aria-hidden=\\"true\\">
-                                                          <path d=\\"M9.40612602,17.7199728 L19.0839055,8.06418391 L15.9511664,4.92410056 L6.27386418,14.5784572 L4.97459192,19.0173654 L9.40612602,17.7199728 Z M3.50140802,20.4906347 L5.38613577,14.0515428 L15.9528336,3.50989938 L20.4980945,8.06581606 L9.93187396,18.6080272 L3.50140802,20.4906347 Z M10.0233532,17.8105469 L9.31544675,18.5168531 L5.47564673,14.6683531 L6.18355322,13.9620469 L10.0233532,17.8105469 Z\\" />
+                                                    <IconComposer icon=\\"annotate32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
+                                                      <Annotate svgProps={{...}} iconClass=\\"\\" icon=\\"annotate32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                        <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg\\" width={26} height={26} viewBox=\\"0 0 32 32\\" aria-hidden={true}>
+                                                          <g fill=\\"none\\" fillRule=\\"evenodd\\">
+                                                            <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M25.082904,11.08319 L20.9631945,6.97713321 L8.68138527,19.1624329 L6.97462644,24.9625129 L12.8041307,23.2654775 L25.082904,11.08319 Z M5.4993735,26.4334872 L7.79461468,18.6335671 L20.9648055,5.56686673 L26.5010961,11.08481 L13.3278693,24.1545225 L5.4993735,26.4334872 Z M13.418666,23.3556603 L12.7127339,24.0639398 L7.88503392,19.2522398 L8.59096603,18.5439603 L13.418666,23.3556603 Z\\" />
+                                                            <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M25.082904,11.08319 L20.9631945,6.97713321 L8.68138527,19.1624329 L6.97462644,24.9625129 L12.8041307,23.2654775 L25.082904,11.08319 Z M5.4993735,26.4334872 L7.79461468,18.6335671 L20.9648055,5.56686673 L26.5010961,11.08481 L13.3278693,24.1545225 L5.4993735,26.4334872 Z M13.418666,23.3556603 L12.7127339,24.0639398 L7.88503392,19.2522398 L8.59096603,18.5439603 L13.418666,23.3556603 Z\\" />
+                                                          </g>
                                                         </svg>
-                                                      </Icon.PencilSimple>
+                                                      </Annotate>
                                                     </IconComposer>
                                                     <span className=\\"screen-reader-text\\">
                                                       Edit Stylesheet
@@ -172,12 +197,15 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                                   </a>
                                                 </Link>
                                                 <button onMouseDown={[Function]} onKeyDown={[Function]} onTouchStart={[Function]} onTouchMove={[Function]} onClick={[Function]} tabIndex={0} aria-grabbed={false} data-react-beautiful-dnd-drag-handle=\\"0\\" draggable={false} onDragStart={[Function: getFalse]} onDrop={[Function: getFalse]} className=\\"ordered-records-item__button\\">
-                                                  <IconComposer icon=\\"barsDoubleHorizontal\\" size={26} fill=\\"currentColor\\">
-                                                    <Icon.BarsDoubleHorizontal iconClass={[undefined]} size={26} fill=\\"currentColor\\" stroke={[undefined]}>
-                                                      <svg className=\\"manicon-svg\\" xmlns=\\"http://www.w3.org/2000/svg\\" width={26} height={26} fill=\\"currentColor\\" stroke={[undefined]} viewBox=\\"0 0 32 32\\" aria-hidden=\\"true\\">
-                                                        <path d=\\"M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z\\" />
+                                                  <IconComposer icon=\\"grabber32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
+                                                    <Grabber svgProps={{...}} iconClass=\\"\\" icon=\\"grabber32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                      <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg\\" width={26} height={26} viewBox=\\"0 0 32 32\\" aria-hidden={true}>
+                                                        <g fill=\\"none\\" fillRule=\\"evenodd\\">
+                                                          <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z\\" />
+                                                          <path fill=\\"currentColor\\" fillRule=\\"nonzero\\" d=\\"M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z\\" />
+                                                        </g>
                                                       </svg>
-                                                    </Icon.BarsDoubleHorizontal>
+                                                    </Grabber>
                                                   </IconComposer>
                                                 </button>
                                               </div>

@@ -98,14 +98,14 @@ export default class CategoryListTexts extends PureComponent {
                     this.onDelete(event, text);
                   }}
                 >
-                  <Utility.IconComposer icon="trash" size={26} />
+                  <Utility.IconComposer icon="delete32" size={26} />
                   <span className="screen-reader-text">Delete Text</span>
                 </button>
                 <Link
                   to={lh.link("backendText", text.id)}
                   className="texts-list__button"
                 >
-                  <Utility.IconComposer icon="pencilSimple" size={26} />
+                  <Utility.IconComposer icon="annotate32" size={26} />
                   <span className="screen-reader-text">Edit Text</span>
                 </Link>
 
@@ -113,7 +113,7 @@ export default class CategoryListTexts extends PureComponent {
                   className="texts-list__button"
                   {...provided.dragHandleProps}
                 >
-                  <Utility.IconComposer icon="barsDoubleHorizontal" size={26} />
+                  <Utility.IconComposer icon="grabber32" size={26} />
                   <span className="screen-reader-text">Move Category</span>
                 </div>
               </div>

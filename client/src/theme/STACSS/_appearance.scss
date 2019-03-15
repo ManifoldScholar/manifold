@@ -120,8 +120,8 @@
   width: #{$size}px;
   height: #{$size}px;
   overflow: hidden;
+  color: $neutral70;
   text-align: center;
-  background-color: $backColor;
   border-radius: 100%;
 
   .avatar-image {

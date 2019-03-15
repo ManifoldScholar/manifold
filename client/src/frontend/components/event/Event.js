@@ -55,7 +55,7 @@ export default class Event extends PureComponent {
     return {
       type: attr.eventType,
       postAttribution: attr.attribution,
-      icon: "activity-text"
+      icon: "activityComments64"
     };
   }
 
@@ -67,7 +67,7 @@ export default class Event extends PureComponent {
 
     return {
       tileClass: "tweet",
-      icon: "activity-tweet",
+      icon: "activityTweet64",
       type: attr.eventType,
       preAttribution: (
         <a
@@ -89,7 +89,7 @@ export default class Event extends PureComponent {
   propsForProjectCreated(attr) {
     return {
       type: attr.eventType,
-      icon: "activity-egg",
+      icon: "activityEgg64",
       date: attr.createdAt,
       header: attr.eventTitle,
       dateFormat: "MMMM Do, YYYY",
@@ -104,7 +104,7 @@ export default class Event extends PureComponent {
       header: "Text Added",
       dateFormat: "MMMM Do, YYYY",
       title: attr.subjectTitle,
-      icon: "activity-text",
+      icon: "activityText64",
       linkHref: lh.link("reader", attr.subjectSlug)
     };
   }
@@ -116,7 +116,7 @@ export default class Event extends PureComponent {
       header: "Resource Added",
       dateFormat: "MMMM Do, YYYY",
       title: attr.subjectTitle,
-      icon: "activity-resource",
+      icon: "activityResource64",
       linkHref: lh.link(
         "frontendProjectResource",
         attr.projectSlug,
@@ -132,7 +132,7 @@ export default class Event extends PureComponent {
       header: "Resource Collection Added",
       dateFormat: "MMMM Do, YYYY",
       title: attr.subjectTitle,
-      icon: "activity-resource",
+      icon: "activityResource64",
       linkHref: lh.link(
         "frontendProjectResourceCollection",
         attr.projectSlug,

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 import PasswordForgot from "./PasswordForgot";
 import Login from "./Login";
 import CreateUpdate from "./CreateUpdate";
@@ -93,7 +93,7 @@ export default class Overlay extends Component {
                 <div className="rel">
                   <figure className="header-logo" aria-hidden="true">
                     <i className="manicon" aria-hidden="true">
-                      <Icon.ManifoldLogo size={26} />
+                      <Utility.IconComposer size={26} icon="manifoldLogo32" />
                     </i>
                   </figure>
                   <button

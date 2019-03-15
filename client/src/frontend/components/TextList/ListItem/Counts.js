@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 
 export default class TextListListItemCounts extends Component {
   static displayName = "TextList.ListItem.Counts";
@@ -26,8 +26,9 @@ export default class TextListListItemCounts extends Component {
     return (
       <ul className={`${this.props.baseClass}__interaction-list`}>
         <li className={`${this.props.baseClass}__interaction`}>
-          <Icon.SpeechBubble
+          <Utility.IconComposer
             size={32}
+            icon="comment32"
             iconClass={`${this.props.baseClass}__interaction-icon`}
           />
           {this.annotationsCount}
@@ -36,8 +37,9 @@ export default class TextListListItemCounts extends Component {
           </span>
         </li>
         <li className={`${this.props.baseClass}__interaction`}>
-          <Icon.PencilSimple
+          <Utility.IconComposer
             size={32}
+            icon="annotate32"
             iconClass={`${this.props.baseClass}__interaction-icon`}
           />
           {this.highlightsCount}

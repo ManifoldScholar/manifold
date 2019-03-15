@@ -26,7 +26,7 @@ describe("Frontend.Resource.Card component", () => {
             entities={projects}
             entityComponent={Project.ListItem}
             title={"3030"}
-            icon={"person"}
+            icon={"avatar64"}
           />
         </Provider>
       )

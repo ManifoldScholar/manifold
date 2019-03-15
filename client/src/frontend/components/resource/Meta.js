@@ -4,7 +4,7 @@ import TagList from "./TagList";
 import filesize from "filesize";
 import pickBy from "lodash/pickBy";
 import isNull from "lodash/isNull";
-import Utility from "global/components/utility";
+import IconComputed from "global/components/icon-computed";
 import Meta from "global/components/meta";
 
 export default class ResourceMeta extends Component {
@@ -63,7 +63,7 @@ export default class ResourceMeta extends Component {
       <section className="resource-meta">
         {this.props.showIcon ? (
           <figure className="resource-type" aria-hidden="true">
-            <Utility.IconComposer icon={`resource-${attr.kind}`} size={48} />
+            <IconComputed.Resource icon={attr.kind} size={48} />
           </figure>
         ) : null}
 

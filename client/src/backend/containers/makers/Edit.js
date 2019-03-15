@@ -88,7 +88,7 @@ export class MakersEditContainer extends PureComponent {
           buttons={[
             {
               onClick: this.handleMakerDestroy,
-              icon: "trash",
+              icon: "delete32",
               label: "Delete",
               entity: maker,
               ability: "delete"

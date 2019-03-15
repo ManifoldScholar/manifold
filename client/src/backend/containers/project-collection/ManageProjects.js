@@ -146,7 +146,7 @@ export class ProjectCollectionManageProjects extends PureComponent {
     return (
       <React.Fragment>
         <Navigation.DrawerHeader
-          manicon="collection-manual"
+          icon="BECollectionManual64"
           title={this.props.projectCollection.attributes.title}
         >
           <p className="instructions">

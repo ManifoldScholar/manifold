@@ -5,7 +5,7 @@ import Filters from "./Filters";
 import Grid from "./Grid";
 import size from "lodash/size";
 import union from "lodash/union";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 
 export default class ProjectListFollowing extends Component {
   static displayName = "ProjectList.Following";
@@ -46,7 +46,7 @@ export default class ProjectListFollowing extends Component {
           <header className={`${baseClass}__heading section-heading`}>
             <div className="main">
               <i className="manicon" aria-hidden="true">
-                <Icon.BooksWithGlasses size={54} />
+                <Utility.IconComposer size={54} icon="following64" />
               </i>
               <div className="body">
                 <h4 className="title">{"Projects You’re Following"}</h4>

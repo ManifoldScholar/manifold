@@ -28,7 +28,7 @@ export default class ProjectHeroCalloutDownload extends PureComponent {
   }
 
   get icon() {
-    return "arrow-down";
+    return "arrowDown16";
   }
 
   get iconSize() {

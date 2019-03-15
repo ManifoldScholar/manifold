@@ -11,6 +11,7 @@ exports[`Backend.ProjectCollection.Placeholder component renders correctly 1`] =
       <svg
         aria-hidden="true"
         className="manicon-svg"
+        fill="currentColor"
         stroke="#52e3ac"
         viewBox="0 0 60 60"
         xmlns="http://www.w3.org/2000/svg"

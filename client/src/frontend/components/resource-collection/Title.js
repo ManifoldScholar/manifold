@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 
 export default class ResourceCollectionTitle extends Component {
   static displayName = "ResourceCollection.Title";
@@ -35,7 +35,7 @@ export default class ResourceCollectionTitle extends Component {
       <header className="section-heading">
         <div className="main">
           <i className="manicon" aria-hidden="true">
-            <Icon.ResourceCollection size={54} />
+            <Utility.IconComposer size={54} icon="resourceCollection64" />
           </i>
           <div className="body">
             <h2 className="title">{attr.title}</h2>

@@ -33,7 +33,7 @@ export default class Social extends PureComponent {
         failureRedirect={lh.link("backendProject", this.project.id)}
       >
         <section>
-          <Navigation.DrawerHeader icon="BooksOnShelf" title="Social Links" />
+          <Navigation.DrawerHeader icon="projects64" title="Social Links" />
           <FormContainer.Form
             model={this.project}
             name="backend-project-update"

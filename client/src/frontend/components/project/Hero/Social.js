@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
+import IconComputed from "global/components/icon-computed";
 
 export default class ProjectHeroSocial extends PureComponent {
   static displayName = "ProjectHero.Social";
@@ -69,7 +69,7 @@ export default class ProjectHeroSocial extends PureComponent {
         href={this.socialUrl(service, id)}
         className={`${this.props.blockClass}__social-link`}
       >
-        <Utility.IconComposer icon={`social-${service}`} size={32} />
+        <IconComputed.Social icon={service} size={32} />
         <span className="screen-reader-text">
           {`View this project on ${service}`}
         </span>

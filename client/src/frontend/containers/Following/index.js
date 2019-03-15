@@ -12,7 +12,7 @@ import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import size from "lodash/size";
 import HeadContent from "global/components/HeadContent";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 
 import Authorize from "hoc/authorize";
 
@@ -130,7 +130,7 @@ export class FollowingContainer extends Component {
           <header className={`${baseClass}__heading section-heading`}>
             <div className="main">
               <i className="manicon" aria-hidden="true">
-                <Icon.Lamp size={54} />
+                <Utility.IconComposer size={54} icon="lamp64" />
               </i>
               <div className="body">
                 <h4 className="title">{"Featured Projects"}</h4>

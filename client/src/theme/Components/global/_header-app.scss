@@ -71,7 +71,7 @@
       grid-area: user-nav;
       -ms-grid-row: 1;
       -ms-grid-column: 3;
-      height: 36px;
+      height: 42px;
       -ms-grid-row-align: center;
 
       @include respond($break90) {
@@ -225,7 +225,7 @@
     // Browse specific menu layout/transition
     .button-search {
       font-size: 19px;
-      color: $neutral80;
+      color: $neutral70;
       vertical-align: middle;
 
       &:focus {

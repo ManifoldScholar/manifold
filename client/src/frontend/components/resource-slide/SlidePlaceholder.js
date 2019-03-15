@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Icon } from "global/components/svg";
+import Utility from "global/components/utility";
 
 export default class ResourceListSlidePlaceholder extends Component {
   static displayName = "ResourceSlide.Placeholder";
@@ -27,7 +27,7 @@ export default class ResourceListSlidePlaceholder extends Component {
         >
           <div className="resource-info">
             <i className="manicon" aria-hidden="true">
-              <Icon.ResourceCollection size={120} />
+              <Utility.IconComposer size={120} icon="resourceCollection64" />
             </i>
             <span className="resource-type">
               {"This collection has no resources"}

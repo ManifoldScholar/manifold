@@ -34,7 +34,7 @@ export default class Description extends PureComponent {
       >
         <section>
           <Navigation.DrawerHeader
-            icon="BooksOnShelf"
+            icon="projects64"
             title="Description + Images"
           />
           <FormContainer.Form

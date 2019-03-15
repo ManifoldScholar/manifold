@@ -14,7 +14,7 @@ export default class ProjectContentBlockTableOfContentsBlock extends PureCompone
   }
 
   static get icon() {
-    return "bulletList";
+    return "toc64";
   }
 
   get blockAttributes() {

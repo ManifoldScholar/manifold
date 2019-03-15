@@ -23,7 +23,7 @@ export default class ProjectContentBlockInListPartsEdit extends PureComponent {
         onClick={this.props.clickHandler}
       >
         <Utility.IconComposer
-          icon="pencil-simple"
+          icon="annotate32"
           size={26}
           iconClass={iconClass}
         />

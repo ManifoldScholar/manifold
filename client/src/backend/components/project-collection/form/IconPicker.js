@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GlobalForm from "global/components/form";
 import classNames from "classnames";
-import Utility from "global/components/utility";
+import IconComputed from "global/components/icon-computed";
 import labelId from "helpers/labelId";
 
 export default class IconPicker extends Component {
@@ -58,7 +58,7 @@ export default class IconPicker extends Component {
           tabIndex="0"
           aria-checked={selected === icon}
         >
-          <Utility.IconComposer icon={icon} size={48} />
+          <IconComputed.ProjectCollection icon={icon} size={48} />
         </div>
       </li>
     );

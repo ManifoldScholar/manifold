@@ -26,7 +26,7 @@ export default class ProjectContentBlockInListAvailable extends PureComponent {
               disabled={this.props.disabled}
             >
               <Utility.IconComposer
-                icon="circle-plus"
+                icon="circlePlus32"
                 size={32}
                 iconClass="content-block__icon content-block__icon--add"
               />

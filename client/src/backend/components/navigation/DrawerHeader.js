@@ -2,16 +2,15 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import Authorize from "hoc/authorize";
-import startsWith from "lodash/startsWith";
 
 export default class DrawerEntityHeader extends PureComponent {
   static displayName = "Drawer.EntityHeader";
 
   static propTypes = {
     title: PropTypes.string,
+    manicon: PropTypes.string,
     children: PropTypes.any,
     buttons: PropTypes.array,
-    manicon: PropTypes.string,
     icon: PropTypes.string
   };
 
@@ -20,15 +19,12 @@ export default class DrawerEntityHeader extends PureComponent {
   };
 
   iconClassFor(icon) {
-    if (icon === "trash") return "notice";
+    if (["trash", "delete32", "notifications24"].includes(icon))
+      return "notice";
   }
 
   buttonIcon(icon) {
     if (!icon) return null;
-    // TODO: Refactor out these old manicons.
-    if (startsWith(icon, "manicon")) {
-      return <i className={`manicon ${icon}`} aria-hidden="true" />;
-    }
     return (
       <Utility.IconComposer
         icon={icon}

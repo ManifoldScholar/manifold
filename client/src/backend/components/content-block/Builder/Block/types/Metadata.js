@@ -10,7 +10,7 @@ export default class ProjectContentBlocksMetadata extends PureComponent {
 
   static defaultProps = {
     title: "Metadata",
-    icon: "tag"
+    icon: "metadata64"
   };
 
   static isAvailable(currentBlocks) {

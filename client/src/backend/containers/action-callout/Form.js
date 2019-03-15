@@ -67,7 +67,7 @@ export class ActionCalloutForm extends Component {
       {
         onClick: this.onDelete,
         label: "delete",
-        icon: "trash"
+        icon: "delete32"
       }
     ];
   }
@@ -127,7 +127,7 @@ export class ActionCalloutForm extends Component {
     return (
       <React.Fragment>
         <Navigation.DrawerHeader
-          icon="Touch"
+          icon="touch64"
           title={this.drawerTitle}
           buttons={this.buttons}
         />
