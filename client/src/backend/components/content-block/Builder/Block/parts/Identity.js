@@ -23,7 +23,7 @@ export default class ProjectContentBlockIdentity extends PureComponent {
   }
 
   get icon() {
-    return this.requiresAttention ? "warning" : this.props.icon;
+    return this.requiresAttention ? "warningSign64" : this.props.icon;
   }
 
   render() {
