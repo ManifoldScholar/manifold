@@ -6,9 +6,7 @@ class VersionSerializer < ApplicationSerializer
 
   # Strip out lateral, nil-nil changes and updated_at
   def object_changes
-    object.object_changes.reject do |_key, value|
-      value[0].blank? && value[1].blank?
-    end.except("updated_at")
+    object.object_changes.except("updated_at")
   end
 
   def actor_name
