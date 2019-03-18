@@ -134,7 +134,7 @@ export default class SearchQuery extends PureComponent {
 
   internalStateFromIncomingState(initialState) {
     let newState = Object.assign(
-      { facets: [], scope: null, keyword: null },
+      { facets: [], scope: null, keyword: "" },
       initialState
     );
     newState = this.setDefaultScope(newState);
