@@ -424,6 +424,10 @@
     color: $neutral75;
     letter-spacing: 0.012em;
 
+    em {
+      font-style: normal;
+    }
+
     .project-hero--dark & {
       color: $neutral40;
     }
