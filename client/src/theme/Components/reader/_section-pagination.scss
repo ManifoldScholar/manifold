@@ -1,6 +1,11 @@
 .section-pagination {
   @include clearfix;
   background-color: $neutral20;
+  transition: background-color $duration $timing;
+
+  .scheme-dark & {
+    background-color: $neutral85;
+  }
 
   // Global button styles
   // <a>

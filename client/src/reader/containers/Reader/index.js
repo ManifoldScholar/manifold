@@ -27,6 +27,7 @@ import {
 } from "actions";
 import { setPersistentUI } from "actions/ui/persistentUi";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import get from "lodash/get";
 
 import ScrollAware from "hoc/scroll-aware";
 import BodyClass from "hoc/body-class";
@@ -128,6 +129,12 @@ export class ReaderContainer extends Component {
     this.props.dispatch(flush(requests.rMyFilteredAnnotationsForText));
   }
 
+  get bodyClass() {
+    let colorScheme = get(this.props, "appearance.colors.colorScheme");
+    colorScheme = colorScheme ? `scheme-${colorScheme}` : "scheme-light";
+    return `reader ${colorScheme}`;
+  }
+
   setPersistentUI = props => {
     const user = props.authentication.currentUser;
     if (!user) return null;
@@ -223,7 +230,7 @@ export class ReaderContainer extends Component {
     if (this.shouldRedirect(this.props)) return this.renderRedirect(this.props);
 
     return (
-      <BodyClass className="reader">
+      <BodyClass className={this.bodyClass}>
         <div>
           <Utility.SkipLink />
           <ScrollAware>
