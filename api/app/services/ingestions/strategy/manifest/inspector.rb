@@ -45,10 +45,20 @@ module Ingestions
         end
 
         def start_section_identifier
-          section = toc.detect { |item| item["start_section"].present? }
-          return nil unless section.present?
+          return nil unless toc_start_section_item.present?
 
-          Digest::MD5.hexdigest context.basename(section["source_path"])
+          Digest::MD5.hexdigest context.basename(toc_start_section_item["source_path"])
+        end
+
+        def toc_start_section_item(items = toc)
+          @toc_start_section_item ||= begin
+            items.each do |item|
+              return item if item["start_section"].present?
+              return toc_start_section_item(item["children"]) if item["children"].present?
+            end
+
+            nil
+          end
         end
 
         def manifest_meta_tag(tag)
