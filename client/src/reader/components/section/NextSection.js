@@ -2,21 +2,13 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
-import classNames from "classnames";
 
 export default class NextSection extends PureComponent {
   static propTypes = {
     sectionsMap: PropTypes.array.isRequired,
     text: PropTypes.object.isRequired,
     sectionId: PropTypes.string.isRequired,
-    typography: PropTypes.object,
-    colors: PropTypes.object
-  };
-
-  static defaultProps = {
-    colors: {
-      colorScheme: "light"
-    }
+    typography: PropTypes.object
   };
 
   getNextSectionName(map, sectionId) {
@@ -51,13 +43,7 @@ export default class NextSection extends PureComponent {
   }
 
   render() {
-    const { typography, colors } = this.props;
-
-    // Apply a conditional wrapper class to maintain selected color scheme
-    const sectionClass = classNames("section-next-section", {
-      "scheme-light": colors.colorScheme === "light",
-      "scheme-dark": colors.colorScheme === "dark"
-    });
+    const { typography } = this.props;
 
     // Apply a conditional container class that maps to a size in CSS
     const containerClass = `container-focus container-width-${
@@ -67,7 +53,7 @@ export default class NextSection extends PureComponent {
     if (!this.props.sectionsMap) return null;
     if (!this.props.sectionId) return null;
     return (
-      <section className={sectionClass}>
+      <section className="section-next-section">
         <div className={containerClass}>{this.renderSectionLink()}</div>
       </section>
     );

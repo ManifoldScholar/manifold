@@ -3,7 +3,17 @@
   text-align: center;
   background-color: $sp20Quinary;
   transition: opacity $durationFast $timing,
+    background-color $duration $timing,
     visibility $duration $timing;
+
+  .scheme-dark & {
+    background-color: $neutral75;
+
+    .label {
+      color: $neutral30;
+      border: 1px solid $neutral30;
+    }
+  }
 
   .label {
     @include utilityPrimary;
@@ -13,6 +23,7 @@
     font-weight: $light;
     color: $neutral80;
     border: 1px solid $neutral80;
+    transition: color $duration $timing, border $duration $timing;
   }
 
   &.fixed {

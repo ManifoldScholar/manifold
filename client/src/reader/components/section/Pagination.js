@@ -58,6 +58,7 @@ export default class Pagination extends Component {
   render() {
     const text = this.props.text;
     if (!text) return null;
+
     return (
       <nav className="section-pagination">
         <div className="container">

@@ -6,7 +6,13 @@
   width: 100%;
   background-color: $neutralWhite;
   border-top: 1px solid $neutral40;
-  transition: bottom $duration $timing;
+  transition: bottom $duration $timing,
+    background-color $duration $timing;
+
+  .scheme-dark & {
+    background-color: $neutral100;
+    border-color: $neutral90;
+  }
 
   @include respond($break50) {
     display: none;
@@ -43,6 +49,10 @@
     .button-appearance, .button-notes, .button-visibility {
       &.button-active {
         background-color: $neutral10;
+
+        .scheme-dark & {
+          background-color: $neutral90;
+        }
       }
 
       &:focus {

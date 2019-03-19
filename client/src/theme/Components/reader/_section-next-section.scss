@@ -1,7 +1,7 @@
 .section-next-section {
   transition: background-color $duration $timing;
 
-  &.scheme-dark {
+  .scheme-dark & {
     background-color: $neutral90;
 
     h3 {
