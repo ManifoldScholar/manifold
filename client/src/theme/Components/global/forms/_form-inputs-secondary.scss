@@ -89,7 +89,7 @@
   }
 
   .form-input {
-    .form-input-heading, .column-heading, label:not(.checkbox):not(.radio):not(.toggle) {
+    .form-input-heading, .column-heading, label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker) {
       @include formLabelPrimary;
       display: block;
       margin-top: 0;

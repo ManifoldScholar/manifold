@@ -13,6 +13,7 @@ export default class IconPicker extends Component {
     name: PropTypes.string,
     errors: PropTypes.array,
     label: PropTypes.string,
+    id: PropTypes.string,
     idForError: PropTypes.string,
     getModelValue: PropTypes.func,
     setOther: PropTypes.func,
@@ -21,7 +22,8 @@ export default class IconPicker extends Component {
 
   static defaultProps = {
     name: "attributes[icon]",
-    idForError: labelId("textarea-error-")
+    id: labelId("icon-picker-"),
+    idForError: labelId("icon-picker-error-")
   };
 
   get selected() {
@@ -67,7 +69,7 @@ export default class IconPicker extends Component {
 
   renderIconList() {
     return (
-      <ul className="icon-row">
+      <ul className="icon-row" id={this.props.id}>
         {this.icons.map(icon => {
           return this.renderIcon(icon);
         })}
@@ -90,7 +92,9 @@ export default class IconPicker extends Component {
           label={this.props.label}
           idForError={this.props.idForError}
         >
-          <h4 className="form-input-heading">Collection Icon:</h4>
+          <label className="form-input-heading" htmlFor={this.props.id}>
+            Collection Icon:
+          </label>
           <div>
             <span className="screen-reader-text">
               Select an icon for the project collection.

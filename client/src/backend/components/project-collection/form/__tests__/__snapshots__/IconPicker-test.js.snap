@@ -8,11 +8,12 @@ exports[`Backend.ProjectCollection.Form.IconPicker component renders correctly 1
     className="form-input"
     style={Object {}}
   >
-    <h4
+    <label
       className="form-input-heading"
+      htmlFor="icon-picker-1"
     >
       Collection Icon:
-    </h4>
+    </label>
     <div>
       <span
         className="screen-reader-text"
@@ -21,6 +22,7 @@ exports[`Backend.ProjectCollection.Form.IconPicker component renders correctly 1
       </span>
       <ul
         className="icon-row"
+        id="icon-picker-1"
       >
         <li
           className=""
