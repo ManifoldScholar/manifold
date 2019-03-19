@@ -64,8 +64,7 @@ RSpec.describe Ingestions::Strategies::Manifest do
         it "has one text section for every unique ingestion source referenced in TOC" do
           expected = [{ "source_identifier" => "02e9b3b8b5268c3fe8bd4150fd546a55", "name" => "Title Set From TOC", "kind" => "section", "position"  => 0, "build" => "build/02e9b3b8b5268c3fe8bd4150fd546a55.html" },
                       { "source_identifier" => "9fef2b7e781641e6861d1aa79a597a57", "name" => "Section 1.1", "kind" => "section", "position" => 1, "build" => "build/9fef2b7e781641e6861d1aa79a597a57.html" },
-                      { "source_identifier" => "e2fe424ecf8e3c87da127ea617e57107", "name" => "Section 1.1a", "kind" => "section", "position" => 2, "build" => "build/e2fe424ecf8e3c87da127ea617e57107.html" },
-                      { "source_identifier" => "02e9b3b8b5268c3fe8bd4150fd546a55", "name" => "Section 1#1", "kind" => "section", "position" => 3, "build" => "build/02e9b3b8b5268c3fe8bd4150fd546a55.html" }]
+                      { "source_identifier" => "e2fe424ecf8e3c87da127ea617e57107", "name" => "Section 1.1a", "kind" => "section", "position" => 2, "build" => "build/e2fe424ecf8e3c87da127ea617e57107.html" }]
           expect(manifest[:relationships][:text_sections]).to eq expected
         end
 

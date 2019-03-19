@@ -28,7 +28,7 @@ module Ingestions
         end
 
         def source_path
-          @source[:source_path].partition("#").first
+          @source[:source_path]
         end
 
         def path_without_ext

@@ -145,18 +145,31 @@ module Ingestions
 
         protected
 
+        # This is where we filter out duplicate sources.  A source is considered a duplicate
+        # if its source path references the same file.  We only accept the first reference (in TOC order)
+        # of a source file.
         def build_source_map(array = toc)
           out = []
           array.each do |entry|
-            out << {
-              label: entry["label"],
-              source_path: entry["source_path"]
-            }.with_indifferent_access
-
+            out << build_source_map_item(entry) unless source_in_sources?(entry, out)
             out << build_source_map(entry["children"]) if entry["children"].present?
           end
 
           out.flatten
+        end
+
+        def build_source_map_item(entry)
+          { label: entry["label"], source_path: base_source_path(entry["source_path"]) }.with_indifferent_access
+        end
+
+        def source_in_sources?(source, sources)
+          base_path = base_source_path(source["source_path"])
+
+          sources.flatten.any? { |ex_source| ex_source["source_path"] == base_path }
+        end
+
+        def base_source_path(path)
+          path.partition("#").first
         end
 
         def file_parsed(file_path)

@@ -30,7 +30,7 @@ RSpec.describe Ingestions::PostProcessors::SetStartSection do
     context "when starting section source is referenced multiple times" do
       let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local") }
 
-      include_examples "the start section assignment", "Section 1#1"
+      include_examples "the start section assignment", "Title Set From TOC"
     end
 
     context "when starting section is a child of another section" do
