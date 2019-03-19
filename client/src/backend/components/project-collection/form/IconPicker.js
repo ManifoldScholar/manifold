@@ -47,26 +47,27 @@ export default class IconPicker extends Component {
   renderIcon(icon) {
     const selected = this.selected;
     const iconClasses = classNames({
-      manicon: true,
       selected: selected === icon
     });
     return (
       <li key={icon} className={iconClasses}>
-        <div
+        <button
           onClick={() => this.handleIconChange(icon)}
-          role="radio"
-          tabIndex="0"
-          aria-checked={selected === icon}
+          type="button"
+          aria-describedby={`collection-form-icon-${icon}`}
         >
           <IconComputed.ProjectCollection icon={icon} size={48} />
-        </div>
+        </button>
+        <span className="aria-describedby" id={`collection-form-icon-${icon}`}>
+          {`Set project collection icon to ${icon}`}
+        </span>
       </li>
     );
   }
 
   renderIconList() {
     return (
-      <ul role="radiogroup" className="icon-row">
+      <ul className="icon-row">
         {this.icons.map(icon => {
           return this.renderIcon(icon);
         })}

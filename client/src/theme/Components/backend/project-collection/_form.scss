@@ -12,23 +12,6 @@
     }
   }
 
-  .icon-picker {
-    .icon-row {
-      flex-wrap: wrap;
-
-      li {
-        width: 60px;
-        height: 60px;
-        margin-top: -1px;
-        margin-left: -1px;
-
-        + li {
-          border-left: 1px solid;
-        }
-      }
-    }
-  }
-
   .has-many-list {
     > ul.bucket {
       @include respond($break60) {
