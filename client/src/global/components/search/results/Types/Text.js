@@ -42,7 +42,7 @@ export default class SearchResultsTypeText extends PureComponent {
             <Text.Cover text={text} />
           </figure>
           <div className="body">
-            <h3 className="with-highlights title">
+            <span className="with-highlights title">
               <span
                 dangerouslySetInnerHTML={{ __html: this.resultTitle(result) }}
               />
@@ -51,7 +51,7 @@ export default class SearchResultsTypeText extends PureComponent {
                   {" in "} {project.title}
                 </span>
               ) : null}
-            </h3>
+            </span>
             {this.resultBody(result) ? (
               <p
                 className="excerpt with-highlights"

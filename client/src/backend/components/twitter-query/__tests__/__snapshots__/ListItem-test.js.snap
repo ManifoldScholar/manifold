@@ -8,7 +8,9 @@ exports[`Backend.TwitterQuery.ListItem Component renders correctly 1`] = `
     href="/backend/projects/2/social/twitter-query/2"
     onClick={[Function]}
   >
-    <header>
+    <div
+      className="content"
+    >
       <figure
         aria-label="hidden"
       >
@@ -16,12 +18,12 @@ exports[`Backend.TwitterQuery.ListItem Component renders correctly 1`] = `
           className="manicon manicon-twitter"
         />
       </figure>
-      <h3
+      <span
         className="name large"
       >
         from:manifoldscholar
-      </h3>
-    </header>
+      </span>
+    </div>
     <span
       className="label"
     >

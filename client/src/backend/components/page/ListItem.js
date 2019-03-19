@@ -17,7 +17,7 @@ export default class PageListItem extends PureComponent {
     return (
       <li key={page.id}>
         <Link to={lh.link("backendRecordsPage", page.id)}>
-          <header>
+          <div className="content">
             <figure className="asset-image">
               <div className="asset-image-placeholder">
                 <Utility.IconComposer icon="resourceDocument64" />
@@ -29,7 +29,7 @@ export default class PageListItem extends PureComponent {
                 {attr.isExternalLink ? attr.externalLink : `/page/${attr.slug}`}
               </span>
             </div>
-          </header>
+          </div>
           <span className="label">{attr.purpose.replace(/_/g, " ")}</span>
         </Link>
       </li>

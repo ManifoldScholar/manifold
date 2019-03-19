@@ -21,7 +21,7 @@ export default class ResourceCollectionListItem extends PureComponent {
     return (
       <li>
         <Link to={lh.link("backendResourceCollection", collection.id)}>
-          <header>
+          <div className="content">
             <figure className="cover">
               <Resourceish.Thumbnail
                 key={collection.id}
@@ -33,14 +33,14 @@ export default class ResourceCollectionListItem extends PureComponent {
               />
             </figure>
             <div className="meta">
-              <h3 className="name">
+              <span className="name">
                 <span className="collection-title">{attr.title}</span>
                 <span className="subtitle">
                   <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
                 </span>
-              </h3>
+              </span>
             </div>
-          </header>
+          </div>
         </Link>
       </li>
     );

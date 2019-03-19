@@ -35,7 +35,7 @@ export default class SearchResultsTypeProject extends PureComponent {
             <Project.Avatar project={project} />
           </figure>
           <div className="body">
-            <h3
+            <span
               className="with-highlights title"
               dangerouslySetInnerHTML={{ __html: this.resultTitle(result) }}
             />

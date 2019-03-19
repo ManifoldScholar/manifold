@@ -20,7 +20,7 @@ export default class ResourceListItem extends PureComponent {
     return (
       <li>
         <Link to={lh.link("backendResource", this.props.entity.id)}>
-          <header>
+          <div className="content">
             <figure className="cover">
               <Resourceish.Thumbnail
                 key={resource.id}
@@ -32,16 +32,16 @@ export default class ResourceListItem extends PureComponent {
               />
             </figure>
             <div className="meta">
-              <h3 className="name">
+              <span className="name">
                 <span
                   dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
                 />
                 <span className="subtitle">
                   <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
                 </span>
-              </h3>
+              </span>
             </div>
-          </header>
+          </div>
         </Link>
       </li>
     );

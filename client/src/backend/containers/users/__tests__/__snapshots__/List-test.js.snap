@@ -115,7 +115,9 @@ exports[`Backend People Users List Container renders correctly 1`] = `
                       href="/backend/records/users/1"
                       onClick={[Function]}
                     >
-                      <header>
+                      <div
+                        className="content"
+                      >
                         <figure
                           className="avatar"
                         >
@@ -136,15 +138,15 @@ exports[`Backend People Users List Container renders correctly 1`] = `
                         <div
                           className="meta"
                         >
-                          <h3
+                          <span
                             className="name large"
                           >
                             Rowan
                              
                             Ida
-                          </h3>
+                          </span>
                         </div>
-                      </header>
+                      </div>
                       <span
                         className="label"
                       >

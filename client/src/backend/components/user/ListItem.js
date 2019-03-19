@@ -37,7 +37,7 @@ export default class UserListItem extends PureComponent {
           </div>
         </div> */}
         <Link to={lh.link("backendRecordsUser", user.id)}>
-          <header>
+          <div className="content">
             <figure className="avatar">
               <figcaption className="screen-reader-text">
                 User Avatar
@@ -56,11 +56,11 @@ export default class UserListItem extends PureComponent {
               )}
             </figure>
             <div className="meta">
-              <h3 className="name large">
+              <span className="name large">
                 {attr.firstName} {attr.lastName}
-              </h3>
+              </span>
             </div>
-          </header>
+          </div>
           <span className="label">
             {this.isCurrentUser(user.id)}
             {attr.role.replace(/_/g, " ")}

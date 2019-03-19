@@ -19,7 +19,7 @@ export default class FeatureListItem extends PureComponent {
     return (
       <li key={feature.id}>
         <Link to={lh.link("backendRecordsFeature", feature.id)}>
-          <header>
+          <div className="content">
             <figure className="asset-image">
               <div className="asset-image-placeholder">
                 <Utility.IconComposer icon="resourceDocument64" />
@@ -39,7 +39,7 @@ export default class FeatureListItem extends PureComponent {
                 />
               </span>
             </div>
-          </header>
+          </div>
           {attr.live && <span className="label">published</span>}
         </Link>
       </li>

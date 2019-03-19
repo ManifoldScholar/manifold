@@ -85,6 +85,7 @@
 
       .title {
         @include templateHead;
+        display: block;
         margin: 0 0 8px;
         font-size: 15px;
         font-weight: $semibold;

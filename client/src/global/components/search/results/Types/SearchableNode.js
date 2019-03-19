@@ -29,8 +29,8 @@ export default class SearchResultsTypeAnnotation extends PureComponent {
           className="result"
         >
           <div className="body">
-            <header>
-              <h3 className="title">
+            <div>
+              <span className="title">
                 <span>
                   {textSection.title
                     ? `"${textSection.title}"`
@@ -41,8 +41,8 @@ export default class SearchResultsTypeAnnotation extends PureComponent {
                     {" in "} {text.title}
                   </span>
                 ) : null}
-              </h3>
-            </header>
+              </span>
+            </div>
             {this.resultBody(result) ? (
               <p
                 className="with-highlights"

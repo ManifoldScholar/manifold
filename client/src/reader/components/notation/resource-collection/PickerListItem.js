@@ -31,7 +31,7 @@ export default class ResourceCollectionPickerListItem extends PureComponent {
           className="fake-link"
           onClick={this.handleClick}
         >
-          <header>
+          <div className="content">
             <figure className="cover">
               <Resourceish.Thumbnail
                 key={collection.id}
@@ -43,14 +43,14 @@ export default class ResourceCollectionPickerListItem extends PureComponent {
               />
             </figure>
             <div className="meta">
-              <h3 className="name">
+              <span className="name">
                 <span className="collection-title truncate">{attr.title}</span>
                 <span className="subtitle">
                   <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
                 </span>
-              </h3>
+              </span>
             </div>
-          </header>
+          </div>
         </span>
       </li>
     );
