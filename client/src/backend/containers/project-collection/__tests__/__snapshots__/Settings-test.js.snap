@@ -241,16 +241,14 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
             </span>
             <ul
               className="icon-row"
-              role="radiogroup"
             >
               <li
-                className="manicon"
+                className=""
               >
-                <div
-                  aria-checked={false}
+                <button
+                  aria-describedby="collection-form-icon-book-stack-vertical"
                   onClick={[Function]}
-                  role="radio"
-                  tabIndex="0"
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -274,16 +272,21 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
                       />
                     </g>
                   </svg>
-                </div>
+                </button>
+                <span
+                  className="aria-describedby"
+                  id="collection-form-icon-book-stack-vertical"
+                >
+                  Set project collection icon to book-stack-vertical
+                </span>
               </li>
               <li
-                className="manicon selected"
+                className="selected"
               >
-                <div
-                  aria-checked={true}
+                <button
+                  aria-describedby="collection-form-icon-lamp"
                   onClick={[Function]}
-                  role="radio"
-                  tabIndex="0"
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -309,16 +312,21 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
                       />
                     </g>
                   </svg>
-                </div>
+                </button>
+                <span
+                  className="aria-describedby"
+                  id="collection-form-icon-lamp"
+                >
+                  Set project collection icon to lamp
+                </span>
               </li>
               <li
-                className="manicon"
+                className=""
               >
-                <div
-                  aria-checked={false}
+                <button
+                  aria-describedby="collection-form-icon-new-round"
                   onClick={[Function]}
-                  role="radio"
-                  tabIndex="0"
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -344,16 +352,21 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
                       />
                     </g>
                   </svg>
-                </div>
+                </button>
+                <span
+                  className="aria-describedby"
+                  id="collection-form-icon-new-round"
+                >
+                  Set project collection icon to new-round
+                </span>
               </li>
               <li
-                className="manicon"
+                className=""
               >
-                <div
-                  aria-checked={false}
+                <button
+                  aria-describedby="collection-form-icon-books-on-shelf"
                   onClick={[Function]}
-                  role="radio"
-                  tabIndex="0"
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -377,16 +390,21 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
                       />
                     </g>
                   </svg>
-                </div>
+                </button>
+                <span
+                  className="aria-describedby"
+                  id="collection-form-icon-books-on-shelf"
+                >
+                  Set project collection icon to books-on-shelf
+                </span>
               </li>
               <li
-                className="manicon"
+                className=""
               >
-                <div
-                  aria-checked={false}
+                <button
+                  aria-describedby="collection-form-icon-globe"
                   onClick={[Function]}
-                  role="radio"
-                  tabIndex="0"
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -412,16 +430,21 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
                       />
                     </g>
                   </svg>
-                </div>
+                </button>
+                <span
+                  className="aria-describedby"
+                  id="collection-form-icon-globe"
+                >
+                  Set project collection icon to globe
+                </span>
               </li>
               <li
-                className="manicon"
+                className=""
               >
-                <div
-                  aria-checked={false}
+                <button
+                  aria-describedby="collection-form-icon-touch"
                   onClick={[Function]}
-                  role="radio"
-                  tabIndex="0"
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -447,16 +470,21 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
                       />
                     </g>
                   </svg>
-                </div>
+                </button>
+                <span
+                  className="aria-describedby"
+                  id="collection-form-icon-touch"
+                >
+                  Set project collection icon to touch
+                </span>
               </li>
               <li
-                className="manicon"
+                className=""
               >
-                <div
-                  aria-checked={false}
+                <button
+                  aria-describedby="collection-form-icon-mug"
                   onClick={[Function]}
-                  role="radio"
-                  tabIndex="0"
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -482,7 +510,13 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
                       />
                     </g>
                   </svg>
-                </div>
+                </button>
+                <span
+                  className="aria-describedby"
+                  id="collection-form-icon-mug"
+                >
+                  Set project collection icon to mug
+                </span>
               </li>
             </ul>
           </div>
