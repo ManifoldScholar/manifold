@@ -8,7 +8,9 @@ exports[`Backend.Permission.ListItem component renders correctly 1`] = `
     href="/backend/projects/1/permissions"
     onClick={[Function]}
   >
-    <header>
+    <div
+      className="content"
+    >
       <figure
         className="avatar"
       >
@@ -29,15 +31,15 @@ exports[`Backend.Permission.ListItem component renders correctly 1`] = `
       <div
         className="meta"
       >
-        <h3
+        <span
           className="name large"
         >
           Rowan
            
           Ida
-        </h3>
+        </span>
       </div>
-    </header>
+    </div>
     <span
       className="label"
     >

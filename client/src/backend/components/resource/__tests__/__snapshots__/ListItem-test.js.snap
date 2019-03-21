@@ -6,7 +6,9 @@ exports[`Backend.Resource.ListItem component renders correctly 1`] = `
     href="/backend/projects/resource/1"
     onClick={[Function]}
   >
-    <header>
+    <div
+      className="content"
+    >
       <figure
         className="cover"
       >
@@ -59,7 +61,7 @@ exports[`Backend.Resource.ListItem component renders correctly 1`] = `
       <div
         className="meta"
       >
-        <h3
+        <span
           className="name"
         >
           <span
@@ -76,9 +78,9 @@ exports[`Backend.Resource.ListItem component renders correctly 1`] = `
               April 24, 2017
             </span>
           </span>
-        </h3>
+        </span>
       </div>
-    </header>
+    </div>
   </a>
 </li>
 `;

@@ -30,12 +30,12 @@ export default class TwitterQueryListItem extends PureComponent {
         <Link
           to={lh.link("backendProjectSocialTwitterQuery", project.id, query.id)}
         >
-          <header>
+          <div className="content">
             <figure aria-label="hidden">
               <i className="manicon manicon-twitter" />
             </figure>
-            <h3 className="name large">{query.attributes.query}</h3>
-          </header>
+            <span className="name large">{query.attributes.query}</span>
+          </div>
           <span className={labelClasses}>
             <span className="specifier dull">
               {query.attributes.eventsCount} EVENTS{" "}

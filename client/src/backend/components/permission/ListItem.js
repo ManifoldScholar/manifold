@@ -47,7 +47,7 @@ export default class PermissionListItem extends PureComponent {
     return (
       <li key={entity.id} className={itemClasses}>
         <Link to={lh.link(this.props.linkName, resource.id, entity.id)}>
-          <header>
+          <div className="content">
             <figure className="avatar">
               <figcaption className="screen-reader-text">
                 User Avatar
@@ -68,11 +68,11 @@ export default class PermissionListItem extends PureComponent {
               )}
             </figure>
             <div className="meta">
-              <h3 className="name large">
+              <span className="name large">
                 {user.attributes.firstName} {user.attributes.lastName}
-              </h3>
+              </span>
             </div>
-          </header>
+          </div>
           <span className="label">{this.renderRoles(entity)}</span>
         </Link>
       </li>

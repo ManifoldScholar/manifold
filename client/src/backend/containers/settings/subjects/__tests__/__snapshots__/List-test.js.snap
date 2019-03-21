@@ -91,17 +91,19 @@ exports[`Backend Settings Subjects List Container renders correctly 1`] = `
                       href="/backend/settings/subjects/1"
                       onClick={[Function]}
                     >
-                      <header>
+                      <div
+                        className="content"
+                      >
                         <div
                           className="meta"
                         >
-                          <h3
+                          <span
                             className="name large"
                           >
                             Hip Hop
-                          </h3>
+                          </span>
                         </div>
-                      </header>
+                      </div>
                     </a>
                   </li>
                 </ul>

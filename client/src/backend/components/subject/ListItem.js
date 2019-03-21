@@ -19,11 +19,11 @@ export default class SubjectListItem extends PureComponent {
     return (
       <li key={subject.id} className={rowClasses}>
         <Link to={lh.link("backendSettingsSubject", subject.id)}>
-          <header>
+          <div className="content">
             <div className="meta">
-              <h3 className="name large">{attr.name}</h3>
+              <span className="name large">{attr.name}</span>
             </div>
-          </header>
+          </div>
         </Link>
       </li>
     );

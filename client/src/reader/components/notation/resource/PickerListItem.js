@@ -29,7 +29,7 @@ export default class ResourcePickerListItem extends PureComponent {
           className="fake-link"
           onClick={this.handleClick}
         >
-          <header>
+          <div className="content">
             <figure className="cover">
               <Resourceish.Thumbnail
                 key={resource.id}
@@ -41,7 +41,7 @@ export default class ResourcePickerListItem extends PureComponent {
               />
             </figure>
             <div className="meta">
-              <h3 className="name">
+              <span className="name">
                 <span
                   className="truncate"
                   dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
@@ -49,9 +49,9 @@ export default class ResourcePickerListItem extends PureComponent {
                 <span className="subtitle">
                   <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
                 </span>
-              </h3>
+              </span>
             </div>
-          </header>
+          </div>
         </span>
       </li>
     );

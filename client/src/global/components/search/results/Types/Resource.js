@@ -48,7 +48,7 @@ export default class SearchResultsTypeResource extends PureComponent {
             />
           </figure>
           <div className="body">
-            <h3 className="title with-highlights">
+            <span className="title with-highlights">
               <span
                 dangerouslySetInnerHTML={{ __html: this.resultTitle(result) }}
               />
@@ -57,7 +57,7 @@ export default class SearchResultsTypeResource extends PureComponent {
                   {" in "} {parent.title}
                 </span>
               ) : null}
-            </h3>
+            </span>
             {this.resultBody(result) ? (
               <p
                 className="excerpt with-highlights"

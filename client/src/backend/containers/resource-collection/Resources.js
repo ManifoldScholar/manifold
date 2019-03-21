@@ -162,7 +162,7 @@ export class ResourceCollectionResourcesContainer extends Component {
     return (
       <li>
         <Link to={lh.link("backendResource", resource.id)}>
-          <header>
+          <div className="content">
             <figure className="cover">
               <Resourceish.Thumbnail
                 key={resource.id}
@@ -173,7 +173,7 @@ export class ResourceCollectionResourcesContainer extends Component {
               />
             </figure>
             <div className="meta">
-              <h3 className="name">
+              <span className="name">
                 <span
                   dangerouslySetInnerHTML={{
                     __html: resource.attributes.titleFormatted
@@ -185,9 +185,9 @@ export class ResourceCollectionResourcesContainer extends Component {
                     date={resource.attributes.createdAt}
                   />
                 </span>
-              </h3>
+              </span>
             </div>
-          </header>
+          </div>
         </Link>
         <div className="form-input utility">
           <div className="toggle-indicator">
