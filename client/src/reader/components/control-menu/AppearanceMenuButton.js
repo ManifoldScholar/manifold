@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Utility from "global/components/utility";
 
 export default class AppearanceMenuButton extends Component {
   static displayName = "ControlMenu.AppearanceMenuButton";
@@ -26,7 +27,7 @@ export default class AppearanceMenuButton extends Component {
         onClick={this.clickHandler}
         data-id="toggle-appearance"
       >
-        <i className="manicon manicon-aa" aria-hidden="true" />
+        <Utility.IconComposer icon="text24" size={32} />
         <span className="screen-reader-text">
           {"Open reader appearance menu"}
         </span>

@@ -6,6 +6,7 @@ import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
 import withPluginReplacement from "hoc/with-plugin-replacement";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
+import Utility from "global/components/utility";
 
 class LayoutFooter extends Component {
   static displayName = "Layout.Footer";
@@ -242,7 +243,12 @@ class LayoutFooter extends Component {
             value={this.state.keyword}
             onChange={this.updateSearchWord}
           />
-          <button className="manicon manicon-magnify">
+          <button className="icon">
+            <Utility.IconComposer
+              className="search-icon"
+              icon="search16"
+              size={20}
+            />
             <span className="screen-reader-text">Search</span>
           </button>
         </div>

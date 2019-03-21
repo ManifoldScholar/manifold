@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import omitBy from "lodash/omitBy";
 import uniqueId from "lodash/uniqueId";
 import classNames from "classnames";
+import Utility from "global/components/utility";
 
 export default class ProjectListFilters extends Component {
   static displayName = "ProjectList.Filters";
@@ -97,7 +98,11 @@ export default class ProjectListFilters extends Component {
       <div className="search-input">
         <button className="search-button" type="submit">
           <span className="screen-reader-text">Search…</span>
-          <i className="manicon manicon-magnify" aria-hidden="true" />
+          <Utility.IconComposer
+            className="search-icon"
+            icon="search16"
+            size={20}
+          />
         </button>
         <label htmlFor={this.props.searchId} className="screen-reader-text">
           Enter Search Criteria
