@@ -34,6 +34,7 @@ env:
     - RAILS_DB_USER=postgres
     - PATH=./node_modules/.bin:$PATH
     - TRAVIS_NODE_VERSION="8.10.0"
+    - TZ=PST
 
 gemfile: api/Gemfile
 

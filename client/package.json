@@ -69,7 +69,8 @@
     ],
     "globals": {
       "__BROWSER__": false,
-      "__SERVER__": true
+      "__SERVER__": true,
+      "TZ": "PST"
     }
   },
   "dependencies": {
