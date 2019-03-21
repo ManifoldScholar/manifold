@@ -18,15 +18,17 @@ module Content
                               title: :string,
                               description: :text
 
+    delegate :texts, to: :project, prefix: true
+
     validates :show_authors, :show_descriptions, :show_subtitles, :show_covers,
               :show_dates, :show_category_labels, inclusion: { in: [true, false] }
 
     def texts
-      if included_categories.present?
-        project.texts.where(category: included_categories)
-      else
-        project.texts
-      end
+      scope = project_texts
+      scope = scope.by_category(included_categories) if included_categories.present?
+      return scope unless show_uncategorized?
+
+      scope.or(project_texts.uncategorized)
     end
   end
 end
