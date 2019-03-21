@@ -30,7 +30,7 @@ class SearchContainer extends PureComponent {
 
   get facets() {
     return [
-      { label: "Full Text", value: "SearchableNode" },
+      { label: "Full Text", value: "TextSection" },
       { label: "Annotations", value: "Annotation" }
     ];
   }

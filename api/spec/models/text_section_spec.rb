@@ -31,27 +31,6 @@ RSpec.describe TextSection, type: :model do
     expect { text_section.destroy }.to_not change { Stylesheet.count }
   end
 
-  describe "enqueues a job to reindex searchable nodes" do
-    it "when creating" do
-      expect { FactoryBot.create(:text_section) }.to have_enqueued_job(TextSectionJobs::ReindexSearchableNodes)
-    end
-
-    it "when body_json changes" do
-      text_section = FactoryBot.create(:text_section)
-      expect do
-        text_section.body_json = {"node_uuid" => "A", "tag" => "section", "node_type" => "element" }
-        text_section.save
-      end.to have_enqueued_job(TextSectionJobs::ReindexSearchableNodes)
-    end
-  end
-
-  it "adds a job to destroy searchable_nodes on destroy" do
-    text_section = FactoryBot.create(:text_section)
-    expect {
-      text_section.destroy
-    }.to have_enqueued_job TextSectionJobs::DestroySearchableNodes
-  end
-
   context "collapses body_json into searchable text nodes" do
 
     let(:text_section) {
@@ -107,7 +86,7 @@ RSpec.describe TextSection, type: :model do
     }
 
     it "collapses text nodes wrapped in inline tags into larger block-level chunks" do
-      expect(text_section.properties_for_searchable_nodes.length).to be 2
+      expect(text_section.properties_for_text_nodes.length).to be 2
     end
 
   end

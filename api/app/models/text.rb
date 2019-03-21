@@ -128,11 +128,12 @@ class Text < ApplicationRecord
   def search_data
     {
       title: title,
-      body: description,
-      project_id: project.id,
-      title_values: titles.map(&:value),
-      project_title: project.title,
-      makers: makers.map(&:name)
+      full_text: description,
+      parent_project: project&.id,
+      keywords: titles.map(&:value),
+      parent_keywords: [project&.title],
+      makers: makers.map(&:full_name),
+      metadata: metadata.values
     }.merge(search_hidden)
   end
 

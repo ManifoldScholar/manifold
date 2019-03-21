@@ -36,12 +36,8 @@ module SystemUpgrades
         Rails.application.eager_load!
         begin
           Searchkick.models.each do |model|
-            if model.name == "SearchableNode"
-              logger.info("Skipping #{model.name}...")
-            else
-              logger.info("Reindexing #{model.name}...")
-              model.reindex
-            end
+            logger.info("Reindexing #{model.name}...")
+            model.reindex
           end
         rescue Faraday::ConnectionFailed
           elastic_connection_error

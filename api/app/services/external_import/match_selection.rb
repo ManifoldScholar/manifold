@@ -17,6 +17,8 @@ module ExternalImport
 
       return if short_body?
 
+      # TODO: This will no longer work after Searchable Nodes are removed. Needs to be
+      # updated.
       @found_nodes = SearchableNode.
         in_texts(import_selection.text_id).
         includes(:text_section).

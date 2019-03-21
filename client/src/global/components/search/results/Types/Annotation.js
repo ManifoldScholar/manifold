@@ -1,47 +1,97 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { Link } from "react-router-dom";
-import Annotation from "reader/components/annotation";
+import withSearchResultHelper from "./searchResultHelper";
+import Utility from "global/components/utility";
+import Generic from "./Generic";
+import FormattedDate from "global/components/FormattedDate";
 
-export default class SearchResultsTypeAnnotation extends PureComponent {
+class SearchResultsTypeAnnotation extends PureComponent {
   static displayName = "Search.Results.Type.Annotation";
 
   static propTypes = {
-    result: PropTypes.object
+    result: PropTypes.object,
+    highlightedAttribute: PropTypes.func.isRequired
   };
 
-  render() {
-    const { result } = this.props;
-    const annotation = result.relationships.model;
-    const parents = result.attributes.parents;
-    const url = lh.link(
-      "readerSection",
-      parents.text.slug,
-      parents.textSection.id
-    );
-    const title = parents.text.title;
-    const section = parents.textSection.title;
+  get result() {
+    return this.props.result;
+  }
 
+  get model() {
+    return this.props.result.relationships.model;
+  }
+
+  get text() {
+    return this.result.attributes.parents.text;
+  }
+
+  get parent() {
+    return this.text.title;
+  }
+
+  get textSection() {
+    return this.result.attributes.parents.text;
+  }
+
+  get creatorAttributes() {
+    return this.model.relationships.creator.attributes;
+  }
+
+  get description() {
+    return this.props.highlightedAttribute("fullText");
+  }
+
+  get title() {
+    const name = this.creatorAttributes.fullName;
     return (
-      <li className="result-annotation" key={result.id}>
-        <Link to={`${url}#annotation-${result.attributes.searchableId}`}>
-          <div className="result">
-            <Annotation.Meta
-              subject={`Annotated "${section}" in ${title}`}
-              annotation={annotation}
-              creator={annotation.relationships.creator}
-              showAnnotationLabel
-            />
-            <p
-              className="snippet with-highlights"
-              dangerouslySetInnerHTML={{
-                __html: `\u2026 ${result.attributes.highlightedBody}\u2026`
-              }}
-            />
-          </div>
-        </Link>
-      </li>
+      <React.Fragment>
+        {name} <span className="search-result__subtitle">annotated</span>{" "}
+        {this.parent}
+      </React.Fragment>
+    );
+  }
+
+  get url() {
+    const base = lh.link("readerSection", this.text.slug, this.textSection.id);
+    return `${base}#annotation-${this.result.attributes.searchableId}`;
+  }
+
+  render() {
+    return (
+      <Generic
+        url={this.url}
+        title={this.title}
+        parentUrl={this.parentUrl}
+        description={this.description}
+        label="Annotation"
+        figure={
+          <React.Fragment>
+            {this.creatorAttributes.avatarStyles.smallSquare ? (
+              <img
+                className="search-result__avatar"
+                alt={`The avatar for ${this.creatorAttributes.fullName}`}
+                src={this.creatorAttributes.avatarStyles.smallSquare}
+              />
+            ) : (
+              <div className="search-result__avatar">
+                <Utility.IconComposer icon="avatar24" size="64" />
+              </div>
+            )}
+          </React.Fragment>
+        }
+        meta={
+          <React.Fragment>
+            <FormattedDate
+              format="distanceInWords"
+              date={this.model.attributes.createdAt}
+            />{" "}
+            ago
+          </React.Fragment>
+        }
+      />
     );
   }
 }
+
+export default withSearchResultHelper(SearchResultsTypeAnnotation);

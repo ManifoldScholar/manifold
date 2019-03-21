@@ -1,12 +1,12 @@
 import Annotation from "./Annotation";
-import SearchableNode from "./SearchableNode";
+import TextSection from "./TextSection";
 import Project from "./Project";
 import Text from "./Text";
 import Resource from "./Resource";
 
 export default {
   Annotation,
-  SearchableNode,
+  TextSection,
   Project,
   Text,
   Resource

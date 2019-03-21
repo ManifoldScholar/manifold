@@ -1,74 +1,87 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import get from "lodash/get";
-import { Link } from "react-router-dom";
-import classNames from "classnames";
-
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
-import Text from "frontend/components/text";
+import EntityThumbnail from "global/components/entity-thumbnail";
+import Generic from "./Generic";
+import withSearchResultHelper from "./searchResultHelper";
 
-export default class SearchResultsTypeText extends PureComponent {
+class SearchResultsTypeText extends PureComponent {
   static displayName = "Search.Results.Type.Text";
 
   static propTypes = {
     result: PropTypes.object,
-    typeLabel: PropTypes.string
+    typeLabel: PropTypes.string,
+    highlightedAttribute: PropTypes.func.isRequired
   };
 
-  resultTitle(result) {
-    return result.attributes.highlightedTitle || result.attributes.title;
+  get title() {
+    return this.props.highlightedAttribute("title");
   }
 
-  resultBody(result) {
-    return result.attributes.highlightedBody || result.attributes.body;
+  get description() {
+    return this.props.highlightedAttribute("fullText");
+  }
+
+  get model() {
+    return this.props.result.relationships.model;
+  }
+
+  get project() {
+    return this.result.attributes.parents.project;
+  }
+
+  get result() {
+    return this.props.result;
+  }
+
+  get url() {
+    const { attributes } = this.model;
+    return lh.link("reader", attributes.slug);
+  }
+
+  get parentUrl() {
+    const { slug } = this.project;
+    return lh.link("frontendProject", slug);
+  }
+
+  get createdAt() {
+    const { attributes } = this.model;
+    return attributes.createdAt;
+  }
+
+  get parent() {
+    const { title } = this.project;
+    return title;
   }
 
   render() {
-    const { result } = this.props;
-    const text = get(result, "relationships.model");
-    if (!text) return false;
-    const attr = text.attributes;
-    const project = result.attributes.parents.project;
-
     return (
-      <li className="result-text" key={result.id}>
-        <Link className="result" to={lh.link("reader", attr.slug)}>
-          <figure
-            className={classNames("image", {
-              icon: !get(attr, "coverStyles.small")
-            })}
-          >
-            <Text.Cover text={text} />
-          </figure>
-          <div className="body">
-            <span className="with-highlights title">
-              <span
-                dangerouslySetInnerHTML={{ __html: this.resultTitle(result) }}
-              />
-              {project ? (
-                <span className="title-parent">
-                  {" in "} {project.title}
-                </span>
-              ) : null}
-            </span>
-            {this.resultBody(result) ? (
-              <p
-                className="excerpt with-highlights"
-                dangerouslySetInnerHTML={{ __html: this.resultBody(result) }}
-              />
-            ) : null}
-            <div className="date">
-              <FormattedDate
-                prefix="Published"
-                format="MMMM, YYYY"
-                date={attr.createdAt}
-              />
-            </div>
-          </div>
-          <div className="marker tertiary">{this.props.typeLabel}</div>
-        </Link>
-      </li>
+      <Generic
+        url={this.url}
+        title={this.title}
+        parent={this.parent}
+        parentUrl={this.parentUrl}
+        description={this.description}
+        label="text"
+        figure={
+          <EntityThumbnail.Text
+            entity={this.model}
+            width="100%"
+            height={null}
+            className="search-result--figure-narrow-svg"
+          />
+        }
+        meta={
+          <FormattedDate
+            prefix="Published"
+            format="MMMM, YYYY"
+            date={this.createdAt}
+          />
+        }
+      />
     );
   }
 }
+
+export default withSearchResultHelper(SearchResultsTypeText);

@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190206180103) do
+ActiveRecord::Schema.define(version: 20190314125115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
-  enable_extension "pgcrypto"
   enable_extension "pg_trgm"
   enable_extension "citext"
 
@@ -191,12 +190,6 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.string "link_text"
     t.string "link_url"
     t.string "link_target"
-    t.integer "position"
-    t.text "style", default: "dark"
-    t.boolean "hidden", default: false
-    t.uuid "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "background_file_name_deprecated"
     t.string "background_content_type_deprecated"
     t.integer "background_file_size_deprecated"
@@ -205,6 +198,12 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.string "foreground_content_type_deprecated"
     t.integer "foreground_file_size_deprecated"
     t.datetime "foreground_updated_at_deprecated"
+    t.integer "position"
+    t.text "style", default: "dark"
+    t.boolean "hidden", default: false
+    t.uuid "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "background_color"
     t.string "foreground_color"
     t.string "header_color"
@@ -252,7 +251,6 @@ ActiveRecord::Schema.define(version: 20190206180103) do
 
   create_table "import_selection_matches", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "import_selection_id", null: false
-    t.uuid "searchable_node_id"
     t.uuid "text_section_id", null: false
     t.uuid "annotation_id"
     t.integer "start_char"
@@ -261,7 +259,6 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.datetime "updated_at", null: false
     t.index ["annotation_id"], name: "index_import_selection_matches_on_annotation_id"
     t.index ["import_selection_id"], name: "index_import_selection_matches_on_import_selection_id"
-    t.index ["searchable_node_id"], name: "index_import_selection_matches_on_searchable_node_id"
     t.index ["text_section_id"], name: "index_import_selection_matches_on_text_section_id"
   end
 
@@ -305,6 +302,10 @@ ActiveRecord::Schema.define(version: 20190206180103) do
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "state"
     t.string "log", array: true
+    t.string "source_file_name"
+    t.string "source_content_type"
+    t.integer "source_file_size"
+    t.datetime "source_updated_at"
     t.string "strategy"
     t.string "external_source_url"
     t.string "ingestion_type"
@@ -313,10 +314,6 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.uuid "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "source_file_name"
-    t.string "source_content_type"
-    t.integer "source_file_size"
-    t.datetime "source_updated_at"
     t.jsonb "source_data", default: {}, null: false
     t.index ["creator_id"], name: "index_ingestions_on_creator_id"
     t.index ["project_id"], name: "index_ingestions_on_project_id"
@@ -421,8 +418,8 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.string "cover_content_type_deprecated"
     t.integer "cover_file_size_deprecated"
     t.datetime "cover_updated_at_deprecated"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean "featured", default: false
     t.string "hashtag"
     t.string "purchase_url"
@@ -464,14 +461,14 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.string "title"
     t.text "description"
     t.uuid "project_id"
-    t.string "thumbnail_checksum"
-    t.string "fingerprint"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "thumbnail_file_name_deprecated"
     t.string "thumbnail_content_type_deprecated"
     t.integer "thumbnail_file_size_deprecated"
     t.datetime "thumbnail_updated_at_deprecated"
+    t.string "thumbnail_checksum"
+    t.string "fingerprint"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "collection_resources_count", default: 0
     t.integer "events_count", default: 0
@@ -525,6 +522,10 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.string "storage_type"
     t.string "storage_identifier"
     t.string "source", null: false
+    t.string "data_file_name_deprecated"
+    t.string "data_content_type_deprecated"
+    t.integer "data_file_size_deprecated"
+    t.datetime "data_updated_at_deprecated"
     t.string "url"
     t.integer "header_row", default: 1
     t.jsonb "column_map", default: {}, null: false
@@ -532,10 +533,6 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.boolean "parse_error", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "data_file_name_deprecated"
-    t.string "data_content_type_deprecated"
-    t.integer "data_file_size_deprecated"
-    t.datetime "data_updated_at_deprecated"
     t.jsonb "data_data", default: {}
     t.index ["creator_id"], name: "index_resource_imports_on_creator_id"
     t.index ["project_id"], name: "index_resource_imports_on_project_id"
@@ -627,17 +624,6 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
-  create_table "searchable_nodes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "text_section_id"
-    t.string "node_uuid"
-    t.text "content"
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "contains", default: [], array: true
-    t.index ["text_section_id"], name: "index_searchable_nodes_on_text_section_id"
-  end
-
   create_table "settings", id: :serial, force: :cascade do |t|
     t.jsonb "general", default: {}
     t.jsonb "theme", default: {}
@@ -703,11 +689,9 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
     t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
     t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
-    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
     t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
     t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
-    t.index ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id"
   end
 
   create_table "tags", id: :serial, force: :cascade do |t|
@@ -824,8 +808,8 @@ ActiveRecord::Schema.define(version: 20190206180103) do
     t.string "password_digest"
     t.string "password"
     t.string "password_confirmation"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text "nickname"
     t.string "avatar_file_name_deprecated"
     t.string "avatar_content_type_deprecated"
@@ -869,7 +853,6 @@ ActiveRecord::Schema.define(version: 20190206180103) do
   add_foreign_key "identities", "users", on_delete: :cascade
   add_foreign_key "import_selection_matches", "annotations", on_delete: :nullify
   add_foreign_key "import_selection_matches", "import_selections", on_delete: :cascade
-  add_foreign_key "import_selection_matches", "searchable_nodes", on_delete: :cascade
   add_foreign_key "import_selection_matches", "text_sections", on_delete: :cascade
   add_foreign_key "import_selections", "texts", on_delete: :cascade
   add_foreign_key "ingestions", "projects", on_delete: :restrict

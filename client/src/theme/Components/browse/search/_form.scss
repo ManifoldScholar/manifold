@@ -1,7 +1,11 @@
 // Can be abstracted for other wrappers
 .search-form-frontend {
-  padding: 47px 0 35px;
+  padding: 60px 0 40px;
   background-color: $neutral05;
+
+  .container {
+    max-width: $break90;
+  }
 
   header {
     padding-bottom: 25px;
@@ -31,11 +35,10 @@
     }
 
     input[type='text'] {
-      max-width: 615px;
       background-color: $neutralWhite;
 
       @include respond($break60) {
-        padding: 0.722em 1.111em 0.889em 47px;
+        padding: 0.722em 1.111em 0.889em 57px;
       }
     }
   }
