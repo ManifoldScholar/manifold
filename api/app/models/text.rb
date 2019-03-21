@@ -94,6 +94,9 @@ class Text < ApplicationRecord
 
   # Scopes
   scope :published, ->(published) { where(published: published) if published.present? }
+  scope :by_category, ->(category) { where(category: category) if category.present? }
+  scope :uncategorized, -> { where(category: nil) }
+  scope :categorized, -> { where.not(category: nil) }
 
   # Attachments
   manifold_has_attached_file :cover, :image
