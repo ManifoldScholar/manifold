@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Utility from "global/components/utility";
 
 export default class NotesButton extends PureComponent {
   static displayName = "ControlMenu.NotesButton";
@@ -26,7 +27,7 @@ export default class NotesButton extends PureComponent {
         onClick={this.clickHandler}
         data-id="toggle-notes"
       >
-        <i className="manicon manicon-notepad" aria-hidden="true" />
+        <Utility.IconComposer icon="notes24" size={32} />
         <span className="screen-reader-text">Open the notes menu</span>
       </button>
     );
