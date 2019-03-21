@@ -5,6 +5,7 @@ import mapKeys from "lodash/mapKeys";
 import humps from "humps";
 import startsWith from "lodash/startsWith";
 import smoothScroll from "../../../../../utils/smoothScroll";
+import attrConvert from "react-attr-converter";
 
 export default RenderComponent => {
   class ValidatedNode extends Component {
@@ -58,23 +59,11 @@ export default RenderComponent => {
     }
 
     cleanAttributes(attr) {
-      const map = {
-        class: "className",
-        for: "htmlFor",
-        colspan: "colSpan",
-        rowspan: "rowSpan",
-        viewbox: "viewBox",
-        itemprop: "itemProp",
-        preserveaspectratio: "preserveAspectRatio",
-        allowfullscreen: "allowFullScreen",
-        frameborder: "frameBorder"
-      };
       const mapped = mapKeys(attr, (attributeValue, attributeName) => {
-        if (map.hasOwnProperty(attributeName)) return map[attributeName];
         if (startsWith(attributeName, "data")) {
           return humps.decamelize(attributeName, { separator: "-" });
         }
-        return attributeName;
+        return attrConvert(attributeName);
       });
       if (mapped.hasOwnProperty("style")) {
         mapped.style = this.styleStringToObject(mapped.style);
