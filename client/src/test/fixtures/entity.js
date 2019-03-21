@@ -1,10 +1,6 @@
 import uuid from "uuid";
 import has from "lodash/has";
 
-// Must be constant for comment snapshot 'days ago' rendering
-const commentDate = new Date();
-commentDate.setDate(commentDate.getDate() - 4);
-
 const metadataProperties = [
   "abstract",
   "archive",
@@ -244,7 +240,7 @@ const defaults = {
     type: "comments",
     attributes: {
       body: "Plaid clash with polka dots, I hope you ain't mad.",
-      createdAt: commentDate,
+      createdAt: new Date(2018, 11, 24, 10, 33, 30, 0),
       abilities
     },
     relationships: {
