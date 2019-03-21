@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Utility from "global/components/utility";
 
 export default class VisibilityMenuButton extends PureComponent {
   static displayName = "ControlMenu.VisibilityMenuButton";
@@ -27,7 +28,7 @@ export default class VisibilityMenuButton extends PureComponent {
         onClick={this.clickHandler}
         data-id="toggle-visibility"
       >
-        <i className="manicon manicon-eye-outline" aria-hidden="true" />
+        <Utility.IconComposer icon="eyeball24" size={32} />
         <span className="screen-reader-text">Open the visibility menu</span>
       </button>
     );
