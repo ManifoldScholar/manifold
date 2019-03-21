@@ -137,20 +137,20 @@ class Resource < ApplicationRecord
     includes(:resource_collections, :project)
   }
 
+  # rubocop:disable Metrics/AbcSize
   def search_data
     {
       title: title_plaintext,
-      body: description_plaintext,
-      collection_titles: resource_collections.map(&:title),
-      project_id: project&.id,
-      project_titles: project.title,
-      kind: kind,
-      sub_kind: sub_kind,
-      metadata: metadata,
-      caption: caption,
-      attachment_file_name: attachment_file_name
+      full_text: [description_plaintext, caption].reject(&:blank?).join("\n"),
+      parent_project: project&.id,
+      parent_keywords: resource_collections.map(&:title) + [project&.title],
+      metadata: metadata.values.reject(&:blank?),
+      keywords: [
+        attachment_file_name
+      ].reject(&:blank?)
     }.merge(search_hidden)
   end
+  # rubocop:enable Metrics/AbcSize
 
   def search_hidden
     project.present? ? project.search_hidden : { hidden: true }

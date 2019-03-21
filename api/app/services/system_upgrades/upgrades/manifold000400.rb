@@ -4,7 +4,6 @@ module SystemUpgrades
 
       def perform!
         reindex_records
-        update_text_indexes
         create_twitter_queries
       end
 
@@ -23,30 +22,12 @@ module SystemUpgrades
         Rails.application.eager_load!
         begin
           Searchkick.models.each do |model|
-            if model.name == "SearchableNode"
-              logger.info("Skipping #{model.name}...")
-            else
-              logger.info("Reindexing #{model.name}...")
-              model.reindex
-            end
+            logger.info("Reindexing #{model.name}...")
+            model.reindex
           end
         rescue Faraday::ConnectionFailed
           elastic_connection_error
         end
-      end
-
-      def update_text_indexes
-        logger.info("===================================================================")
-        logger.info("Update Text Indexes                                                ")
-        logger.info("===================================================================")
-        logger.info("Manifold 0.4.0 stores every text_section text node in a table      ")
-        logger.info("called searchable_nodes. The contents of this table are indexed by ")
-        logger.info("Elasticsearch and used in full-text reader search. As part of this ")
-        logger.info("upgrade, Manifold will examine each text section and extract the   ")
-        logger.info("text nodes. This may take a few minutes, so please be patient.     ")
-        logger.info("===================================================================")
-
-        TextSection.update_text_indexes(logger)
       end
 
       def elastic_connection_error

@@ -44,8 +44,8 @@ module Demonstration
       clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource
                  Subject TextSubject TextTitle User Category Page Annotation
                  ProjectCollection CollectionResource ResourceCollection Comment Event
-                 Favorite Flag ProjectSubject Stylesheet Subject SearchableNode
-                 TwitterQuery UpgradeResult)
+                 Favorite Flag ProjectSubject Stylesheet Subject TwitterQuery
+                 UpgradeResult)
       clear.each do |model_name|
         @logger.info("Truncate #{model_name} table".red)
         model_name.constantize.destroy_all

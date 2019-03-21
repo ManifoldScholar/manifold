@@ -103,12 +103,14 @@ class Annotation < ApplicationRecord
   def search_data
     {
       title: subject,
-      body: body,
-      text_section_id: text_section&.id,
-      project_id: project&.id,
-      text_id: text&.id,
-      author_name: creator&.full_name,
-      text_title: text&.title,
+      full_text: body,
+      creator: creator&.full_name,
+      parent_project: project&.id,
+      parent_text_section: text_section&.id,
+      parent_text: text&.id,
+      parent_keywords: [
+        text&.title
+      ],
       hidden: false
     }
   end

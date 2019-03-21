@@ -31,7 +31,6 @@ class TextSection < ApplicationRecord
   belongs_to :ingestion_source
   # We intentionally do not destroy annotations because we want to handle the orphans.
   has_many :annotations, dependent: :nullify
-  has_many :searchable_nodes, -> { order(position: :asc) }, inverse_of: :text_section
   has_many :resources, through: :annotations
   has_many :resource_collections, through: :annotations
   has_many :text_section_stylesheets, dependent: :destroy
@@ -55,9 +54,7 @@ class TextSection < ApplicationRecord
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 
   # Callbacks
-  after_commit :update_text_index, if: :should_update_text_index?
   after_commit :adopt_or_orphan_annotations!
-  before_destroy :destroy_searchable_nodes!
 
   # Scopes
   scope :in_texts, lambda { |texts|
@@ -67,19 +64,18 @@ class TextSection < ApplicationRecord
   # Search
   searchkick(
     callbacks: :async,
-    batch_size: 500
+    batch_size: 500,
+    merge_mappings: true,
+    mappings: {
+      text_section: {
+        properties: {
+          text_nodes: {
+            type: "nested"
+          }
+        }
+      }
+    }
   )
-
-  def self.update_text_indexes(logger = Rails.logger)
-    count = TextSection.count
-    iteration = 1
-    TextSection.all.find_each do |text_section|
-      msg = "Committing searchable text nodes for text section"
-      logger.info "#{msg} #{text_section.id}: #{iteration}/#{count}"
-      text_section.update_text_index
-      iteration += 1
-    end
-  end
 
   scope :search_import, lambda {
     includes(
@@ -94,10 +90,11 @@ class TextSection < ApplicationRecord
   def search_data
     {
       title: name,
-      text_id: text.id,
-      project_id: text.project_id,
-      text_title: text.title,
-      creator_names: text&.makers&.map(&:full_name)
+      parent_text: text&.id,
+      parent_project: project&.id,
+      parent_keywords: [],
+      makers: [],
+      text_nodes: properties_for_text_nodes
     }.merge(search_hidden)
   end
 
@@ -125,12 +122,8 @@ class TextSection < ApplicationRecord
     name
   end
 
-  def update_text_index
-    TextSectionJobs::ReindexSearchableNodes.perform_later self
-  end
-
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-  def properties_for_searchable_nodes
+  def properties_for_text_nodes
     inline = Serializer::Html::INLINE_ELEMENTS
     *, nodes = text_nodes.reverse.inject([false, []]) do |(once_more, nodes), node|
       next [once_more, nodes] if node["content"].strip.blank?
@@ -181,17 +174,6 @@ class TextSection < ApplicationRecord
   end
 
   private
-
-  # Checking if ID changed allows us to use this in an after_commit callback
-  # while still returning true on initial create.
-  def should_update_text_index?
-    id_previously_changed? || body_json_previously_changed?
-  end
-
-  def destroy_searchable_nodes!
-    ids = searchable_nodes.pluck :id
-    TextSectionJobs::DestroySearchableNodes.perform_later ids
-  end
 
   def adopt_or_orphan_annotations!
     return unless body_json_previously_changed?

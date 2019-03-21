@@ -2,9 +2,10 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
 import isEqual from "lodash/isEqual";
+import Utility from "global/components/utility";
 
-export default class SearchQuery extends PureComponent {
-  static displayName = "Search.Query";
+export default class SearchQueryForm extends PureComponent {
+  static displayName = "Search.Query.Form";
 
   static propTypes = {
     initialState: PropTypes.object,
@@ -134,7 +135,7 @@ export default class SearchQuery extends PureComponent {
 
   internalStateFromIncomingState(initialState) {
     let newState = Object.assign(
-      { facets: [], scope: null, keyword: null },
+      { facets: [], scope: null, keyword: "" },
       initialState
     );
     newState = this.setDefaultScope(newState);
@@ -247,8 +248,13 @@ export default class SearchQuery extends PureComponent {
             value={this.state.keyword}
             placeholder={"Search…"}
           />
-          <button type="submit" className="manicon manicon-magnify">
-            <span className="screen-reader-text">Search</span>
+          <button type="submit" className="search-submit">
+            <Utility.IconComposer
+              className="search-icon"
+              icon="search16"
+              size={22}
+            />
+            <span className="screen-reader-text">Execute Search</span>
           </button>
         </div>
         {this.availableScopes.length > 0 ? (

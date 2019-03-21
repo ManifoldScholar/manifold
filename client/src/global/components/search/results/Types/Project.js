@@ -1,70 +1,87 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import get from "lodash/get";
-import { Link } from "react-router-dom";
-
+import Generic from "./Generic";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
-import Project from "global/components/project";
+import EntityThumbnail from "global/components/entity-thumbnail";
+import withSearchResultHelper from "./searchResultHelper";
 
-export default class SearchResultsTypeProject extends PureComponent {
+class SearchResultsTypeProject extends PureComponent {
   static displayName = "Search.Results.Type.Project";
 
   static propTypes = {
     result: PropTypes.object,
-    typeLabel: PropTypes.string
+    typeLabel: PropTypes.string,
+    highlightedAttribute: PropTypes.func.isRequired
   };
 
-  resultTitle(result) {
-    return result.attributes.highlightedTitle || result.attributes.title;
+  get hasCreators() {
+    if (!this.model) return false;
+    return this.model.relationships.creators.length > 0;
   }
 
-  resultBody(result) {
-    return result.attributes.highlightedBody || result.attributes.body;
+  get creators() {
+    if (!this.hasCreators) return [];
+    const { creators } = this.model.relationships;
+    return creators || [];
+  }
+
+  get result() {
+    return this.props.result;
+  }
+
+  get model() {
+    return this.props.result.relationships.model;
+  }
+
+  get creatorsString() {
+    return this.creators.map(c => c.attributes.fullName).join(", ");
+  }
+
+  get title() {
+    return this.props.highlightedAttribute("title");
+  }
+
+  get description() {
+    return this.props.highlightedAttribute("fullText");
+  }
+
+  get createdAt() {
+    const { attributes } = this.model;
+    return attributes.createdAt;
+  }
+
+  get url() {
+    const { attributes } = this.model;
+    return lh.link("frontendProject", attributes.slug);
   }
 
   render() {
-    const { result } = this.props;
-    const project = get(result, "relationships.model");
-    if (!project) return false;
-    const attr = project.attributes;
     return (
-      <li className="result-project" key={result.id}>
-        <Link className="result" to={lh.link("frontendProject", attr.slug)}>
-          <figure className="image">
-            <Project.Avatar project={project} />
-          </figure>
-          <div className="body">
-            <span
-              className="with-highlights title"
-              dangerouslySetInnerHTML={{ __html: this.resultTitle(result) }}
-            />
-            {project.relationships.creators.length > 0 ? (
-              <ul className="makers">
-                {project.relationships.creators.map(creator => {
-                  return (
-                    <li key={creator.id}>{creator.attributes.fullName}</li>
-                  );
-                })}
-              </ul>
-            ) : null}
-            {this.resultBody(result) ? (
-              <p
-                className="excerpt with-highlights"
-                dangerouslySetInnerHTML={{ __html: this.resultBody(result) }}
-              />
-            ) : null}
-            <div className="date">
-              <FormattedDate
-                prefix="Published"
-                format="MMMM, YYYY"
-                date={attr.createdAt}
-              />
-            </div>
-          </div>
-          <div className="marker tertiary">{this.props.typeLabel}</div>
-        </Link>
-      </li>
+      <Generic
+        url={this.url}
+        title={this.title}
+        attribution={this.creatorsString}
+        description={this.description}
+        label="project"
+        figure={
+          <EntityThumbnail.Project
+            placeholderAttributes={{ mode: "small" }}
+            entity={this.model}
+            width="100%"
+            height={null}
+          />
+        }
+        meta={
+          <FormattedDate
+            prefix="Published"
+            format="MMMM, YYYY"
+            date={this.createdAt}
+          />
+        }
+      />
     );
   }
 }
+
+export default withSearchResultHelper(SearchResultsTypeProject);

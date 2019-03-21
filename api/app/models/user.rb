@@ -1,7 +1,7 @@
 # The User model
 class User < ApplicationRecord
   # Constants
-  TYPEAHEAD_ATTRIBUTES = [:title, :full_name, :first_name, :last_name].freeze
+  TYPEAHEAD_ATTRIBUTES = [:title, :first_name, :last_name].freeze
 
   # Concerns
   include Authority::Abilities
@@ -82,10 +82,10 @@ class User < ApplicationRecord
 
   def search_data
     {
-      title: email,
+      title: full_name,
       first_name: first_name,
       last_name: last_name,
-      full_name: full_name,
+      keywords: [email, role],
       hidden: true
     }
   end

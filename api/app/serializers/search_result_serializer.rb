@@ -3,8 +3,8 @@ class SearchResultSerializer < ApplicationSerializer
 
   meta(partial: false)
 
-  attributes :score, :searchable_type, :searchable_id, :body, :highlighted_body,
-             :title, :highlighted_title, :parents
+  attributes :score, :searchable_type, :searchable_id, :full_text, :title, :parents,
+             :text_nodes, :keywords, :parent_keywords, :makers, :highlights
 
   has_one :model
 
@@ -18,7 +18,13 @@ class SearchResultSerializer < ApplicationSerializer
 
   def _type
     "search_result"
-    # object._type
+  end
+
+  def highlights
+    a = [:parent_keywords, :keywords, :makers, :full_text, :title].map do |k|
+      [k, object.dig("highlight", "#{k}.analyzed")]
+    end
+    a.to_h
   end
 
   def searchable_id
@@ -28,6 +34,25 @@ class SearchResultSerializer < ApplicationSerializer
   def searchable_type
     object._type.camelize(:lower)
   end
+
+  # rubocop:disable Metrics/AbcSize
+  def text_nodes
+    results = object.dig("inner_hits", "text_nodes")
+    return nil unless results
+
+    {
+      total: results.hits.total,
+      hits: results.hits.hits.each_with_index.map do |hit, _index|
+        {
+          content: hit._source.content,
+          content_highlighted: hit.highlight ? hit.highlight["text_nodes.content.analyzed"] : nil,
+          nodeUuid: hit._source.node_uuid,
+          position: hit._source.position
+        }
+      end
+    }
+  end
+  # rubocop:enable Metrics/AbcSize
 
   def score
     object._score
@@ -41,7 +66,9 @@ class SearchResultSerializer < ApplicationSerializer
   end
 
   def parents_for_text_section_child
-    text_section = object.model.text_section
+    text_section = object.model&.text_section
+    return {} unless text_section.present?
+
     {
       text_section: text_section_properties(text_section),
       text: text_properties(text_section&.text),
@@ -49,9 +76,22 @@ class SearchResultSerializer < ApplicationSerializer
     }
   end
   alias parents_for_annotation parents_for_text_section_child
-  alias parents_for_searchable_node parents_for_text_section_child
+
+  def parents_for_text_child
+    text = object.model&.text
+    project = object.model&.project
+    return {} unless text.present?
+
+    {
+      text: text_properties(text),
+      project: project_properties(project)
+    }
+  end
+  alias parents_for_text_section parents_for_text_child
 
   def parents_for_project_child
+    return {} unless object.model&.project.present?
+
     {
       project: project_properties(object.model.project)
     }

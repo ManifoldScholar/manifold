@@ -60,9 +60,11 @@ class Event < ApplicationRecord
   def search_data
     {
       title: subject_title_formatted,
-      body: attribution_name,
-      project_id: project&.id,
-      project_title: project.title
+      full_text: attribution_name,
+      parent_project: project&.id,
+      parent_keywords: [
+        project&.title
+      ]
     }.merge(search_hidden)
   end
 

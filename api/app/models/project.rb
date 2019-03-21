@@ -208,20 +208,18 @@ class Project < ApplicationRecord
              batch_size: 500,
              highlight: [:title, :body])
 
+  # rubocop:disable Metrics/AbcSize
   def search_data
     {
       title: title,
-      body: description_plaintext,
-      featured: featured,
-      maker_names: makers.map(&:full_name),
-      text_titles: texts.map(&:title),
-      subject_titles: subjects.map(&:title),
-      hashtag: hashtag,
-      publication_date: publication_date,
-      metadata: metadata,
-      tags: tag_list
+      full_text: description_plaintext,
+      keywords: (tag_list + texts.map(&:title) + subjects.map(&:title) + hashtag).reject(&:blank?),
+      creator: creator&.full_name,
+      makers: makers.map(&:full_name),
+      metadata: metadata.values.reject(&:blank?)
     }.merge(search_hidden)
   end
+  # rubocop:enable Metrics/AbcSize
 
   def search_hidden
     {
@@ -273,7 +271,6 @@ class Project < ApplicationRecord
     resources.reindex(:search_hidden, mode: :async)
     texts.reindex(:search_hidden, mode: :async)
     TextSection.in_texts(texts).reindex(:search_hidden, mode: :async)
-    SearchableNode.in_texts(texts).reindex(:search_hidden, mode: :async)
   end
 
   private

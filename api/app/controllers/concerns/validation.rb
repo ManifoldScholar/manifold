@@ -404,6 +404,9 @@ module Validation
       :text,
       :text_section,
       :raw,
+      :all_facets,
+      :search_num,
+      :scope,
       facets: [],
       page: [:number]
     )

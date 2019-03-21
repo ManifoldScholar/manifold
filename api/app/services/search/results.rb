@@ -17,8 +17,7 @@ module Search
       "project" => [:makers],
       "resource" => [:project],
       "collection" => [:project],
-      "annotation" => { text_section: { text: :project } },
-      "searchable_node" => { text_section: { text: :project } }
+      "annotation" => { text_section: { text: :project } }
     }.freeze
 
     include Enumerable

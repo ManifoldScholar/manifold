@@ -31,45 +31,18 @@ class SearchContainer extends PureComponent {
       { label: "Projects", value: "Project" },
       { label: "Resources", value: "Resource" },
       { label: "Texts", value: "Text" },
-      { label: "Full Text", value: "SearchableNode" }
+      { label: "Annotations", value: "Annotation" },
+      { label: "Full Text", value: "TextSection" }
     ];
-  }
-
-  renderHeader(results, resultsMeta) {
-    let output = (
-      <header>
-        <h1 className="title">{"Search"}</h1>
-      </header>
-    );
-
-    if (results) {
-      const resultsTotal = resultsMeta.pagination.totalCount;
-      const resultString = resultsTotal === 1 ? "result" : "results";
-
-      if (!resultsMeta.keyword.trim()) return output;
-
-      output = (
-        <header>
-          <h1 className="title">{"Search Results"}</h1>
-          <p className="subtitle">
-            {`${resultsTotal} ${resultString} for "${resultsMeta.keyword}"`}
-          </p>
-        </header>
-      );
-    }
-
-    return output;
   }
 
   render() {
     const results = this.props.results;
-    const resultsMeta = this.props.resultsMeta;
 
     return (
       <div>
         <div className="search-form-frontend">
           <div className="container">
-            {this.renderHeader(results, resultsMeta)}
             <SearchQuery.Form
               initialState={{
                 keyword: "",
@@ -81,18 +54,18 @@ class SearchContainer extends PureComponent {
             />
           </div>
         </div>
-        <div className="search-results-frontend">
-          <div className="container">
-            {this.props.results ? (
+        {this.props.results ? (
+          <div className="search-results-frontend">
+            <div className="container">
               <SearchResults.List
                 pagination={this.props.resultsMeta.pagination}
                 paginationClickHandler={this.props.setPage}
                 results={results}
                 context="frontend"
               />
-            ) : null}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     );
   }

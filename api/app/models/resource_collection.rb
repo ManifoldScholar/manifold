@@ -62,10 +62,10 @@ class ResourceCollection < ApplicationRecord
 
   def search_data
     {
-      title: title,
-      body: description,
-      project_id: project&.id,
-      project_title: project.title
+      title: title_plaintext,
+      full_text: description_plaintext,
+      parent_project: project&.id,
+      parent_keywords: [project&.title]
     }.merge(search_hidden)
   end
 

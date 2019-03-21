@@ -20,7 +20,7 @@ export default class SearchResultsList extends PureComponent {
 
   componentForType(type) {
     if (type === "project") return Types.Project;
-    if (type === "searchableNode") return Types.SearchableNode;
+    if (type === "textSection") return Types.TextSection;
     if (type === "annotation") return Types.Annotation;
     if (type === "resource") return Types.Resource;
     if (type === "text") return Types.Text;
@@ -28,7 +28,7 @@ export default class SearchResultsList extends PureComponent {
 
   labelForType(type) {
     if (type === "project") return "Project";
-    if (type === "searchableNode") return "Full Text";
+    if (type === "textSection") return "Full Text";
     if (type === "annotation") return "Annotation";
     if (type === "resource") return "Resource";
     if (type === "text") return "Text";
@@ -53,7 +53,7 @@ export default class SearchResultsList extends PureComponent {
 
   render() {
     if (this.props.results && this.props.results.length === 0) return <Empty />;
-
+    if (!this.props.results) return null;
     return (
       <div className="search-results">
         <span className="label-count">
@@ -63,7 +63,7 @@ export default class SearchResultsList extends PureComponent {
             pluralUnit={"results"}
           />
         </span>
-        <ul className="results">
+        <ul className="search-results__list">
           {this.props.results.map(result => {
             return this.renderResult(result);
           })}
