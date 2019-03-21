@@ -28,5 +28,6 @@ doc
 .generators
 
 config/oauth.yml
-/data/
+data/*
+!data/.gitkeep
 examples.txt
