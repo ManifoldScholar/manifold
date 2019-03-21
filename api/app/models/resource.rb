@@ -12,7 +12,10 @@ class Resource < ApplicationRecord
                   meta: {
                     parent_item_id: :project_id,
                     parent_item_type: "Project"
-                  }
+                  },
+                  skip:
+                    %i[attachment_data high_res_data variant_thumbnail_data variant_poster_data variant_format_one_data
+                       variant_format_two_data translation_data transcript_data]
 
   # Concerns
   include Authority::Abilities
