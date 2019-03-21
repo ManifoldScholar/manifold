@@ -74,9 +74,11 @@ exports[`Reader.Notation.Collection.PickerListItem component renders correctly 1
           <span
             className="subtitle"
           >
-            <span>
+            <time
+              dateTime="2017-04-24"
+            >
               April 24, 2017
-            </span>
+            </time>
           </span>
         </span>
       </div>

@@ -321,9 +321,11 @@ Array [
                 <span
                   className="texts-list__date"
                 >
-                  <span>
+                  <time
+                    dateTime="2017-04-24"
+                  >
                     Added April, 2017
-                  </span>
+                  </time>
                 </span>
               </div>
             </a>

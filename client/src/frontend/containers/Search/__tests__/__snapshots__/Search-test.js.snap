@@ -8,13 +8,6 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
     <div
       className="container"
     >
-      <header>
-        <h1
-          className="title"
-        >
-          Search
-        </h1>
-      </header>
       <form
         className="search-query"
         onSubmit={[Function]}
@@ -37,13 +30,37 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
             value=""
           />
           <button
-            className="manicon manicon-magnify"
+            className="search-submit"
             type="submit"
           >
+            <svg
+              aria-hidden={true}
+              className="manicon-svg"
+              height={22}
+              viewBox="0 0 16 16"
+              width={22}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+              >
+                <path
+                  d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
+                  fill="currentColor"
+                  fillRule="nonzero"
+                />
+                <path
+                  d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
+                  fill="currentColor"
+                  fillRule="nonzero"
+                />
+              </g>
+            </svg>
             <span
               className="screen-reader-text"
             >
-              Search
+              Execute Search
             </span>
           </button>
         </div>
@@ -140,11 +157,31 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
             </label>
             <label
               className="checkbox"
-              htmlFor="SearchableNode-3"
+              htmlFor="Annotation-3"
             >
               <input
                 checked={false}
-                id="SearchableNode-3"
+                id="Annotation-3"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <div
+                aria-hidden="true"
+                className="control-indicator"
+              >
+                <i
+                  className="manicon manicon-check"
+                />
+              </div>
+              Annotations
+            </label>
+            <label
+              className="checkbox"
+              htmlFor="TextSection-4"
+            >
+              <input
+                checked={false}
+                id="TextSection-4"
                 onChange={[Function]}
                 type="checkbox"
               />
@@ -162,13 +199,6 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
         </div>
       </form>
     </div>
-  </div>
-  <div
-    className="search-results-frontend"
-  >
-    <div
-      className="container"
-    />
   </div>
 </div>
 `;

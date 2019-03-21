@@ -20,9 +20,11 @@ exports[`Backend Project Log Container renders correctly when project change 1`]
           Nas
         </a>
          updated this project 
-        <span>
+        <time
+          dateTime="2017-04-24"
+        >
           on April 24, 2017
-        </span>
+        </time>
       </div>
     </h4>
     <div
@@ -69,9 +71,11 @@ exports[`Backend Project Log Container renders correctly when project child chan
           onClick={[Function]}
         />
         ”, 
-        <span>
+        <time
+          dateTime="2017-04-24"
+        >
           on April 24, 2017
-        </span>
+        </time>
       </div>
     </h4>
     <div

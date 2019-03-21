@@ -129,9 +129,11 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
             >
               Uploaded
                
-              <span>
+              <time
+                dateTime="2017-04-24"
+              >
                 April, 2017
-              </span>
+              </time>
             </span>
             <div
               className="arrow-link"
@@ -292,9 +294,11 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
             >
               Uploaded
                
-              <span>
+              <time
+                dateTime="2017-04-24"
+              >
                 April, 2017
-              </span>
+              </time>
             </span>
             <div
               className="arrow-link"

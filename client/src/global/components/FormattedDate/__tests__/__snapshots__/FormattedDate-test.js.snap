@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Global.Date component renders correctly 1`] = `
-<span>
+<time
+  dateTime="2017-01-01"
+>
   test January, 2017
-</span>
+</time>
 `;

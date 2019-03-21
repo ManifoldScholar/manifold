@@ -82,9 +82,11 @@ exports[`Reader.Notation.Resource.Detail component renders correctly 1`] = `
           className="resource-date"
         >
           Resource added 
-          <span>
+          <time
+            dateTime="2017-04-24"
+          >
             April, 2017
-          </span>
+          </time>
         </span>
       </div>
     </div>
@@ -162,9 +164,11 @@ exports[`Reader.Notation.Resource.Detail component renders correctly 1`] = `
           <div
             className="meta-value"
           >
-            <span>
+            <time
+              dateTime="2017-04-24"
+            >
               April 24, 2017
-            </span>
+            </time>
           </div>
         </li>
         <li>
