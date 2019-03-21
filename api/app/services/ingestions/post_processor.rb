@@ -49,15 +49,7 @@ module Ingestions
     end
 
     def set_start_section
-      return unless manifest[:start_section_identifier].present?
-
-      section = text.text_sections
-                    .find_by(source_identifier: manifest[:start_section_identifier])
-      return unless section.present?
-
-      text.update start_text_section: section
-      info "services.ingestions.post_processor.log.start_section",
-           source_identifier: section.source_identifier
+      compose PostProcessors::SetStartSection
     end
 
     def remove_stale_records

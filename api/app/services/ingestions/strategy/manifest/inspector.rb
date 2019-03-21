@@ -45,10 +45,20 @@ module Ingestions
         end
 
         def start_section_identifier
-          section = toc.detect { |item| item["start_section"].present? }
-          return nil unless section.present?
+          return nil unless toc_start_section_item.present?
 
-          Digest::MD5.hexdigest context.basename(section["source_path"])
+          Digest::MD5.hexdigest context.basename(toc_start_section_item["source_path"])
+        end
+
+        def toc_start_section_item(items = toc)
+          @toc_start_section_item ||= begin
+            items.each do |item|
+              return item if item["start_section"].present?
+              return toc_start_section_item(item["children"]) if item["children"].present?
+            end
+
+            nil
+          end
         end
 
         def manifest_meta_tag(tag)
@@ -135,18 +145,31 @@ module Ingestions
 
         protected
 
+        # This is where we filter out duplicate sources.  A source is considered a duplicate
+        # if its source path references the same file.  We only accept the first reference (in TOC order)
+        # of a source file.
         def build_source_map(array = toc)
           out = []
           array.each do |entry|
-            out << {
-              label: entry["label"],
-              source_path: entry["source_path"]
-            }.with_indifferent_access
-
+            out << build_source_map_item(entry) unless source_in_sources?(entry, out)
             out << build_source_map(entry["children"]) if entry["children"].present?
           end
 
           out.flatten
+        end
+
+        def build_source_map_item(entry)
+          { label: entry["label"], source_path: base_source_path(entry["source_path"]) }.with_indifferent_access
+        end
+
+        def source_in_sources?(source, sources)
+          base_path = base_source_path(source["source_path"])
+
+          sources.flatten.any? { |ex_source| ex_source["source_path"] == base_path }
+        end
+
+        def base_source_path(path)
+          path.partition("#").first
         end
 
         def file_parsed(file_path)
