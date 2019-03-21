@@ -14,6 +14,18 @@ export default class FormattedDate extends Component {
     date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
   };
 
+  get date() {
+    return this.props.date;
+  }
+
+  get value() {
+    return this.formatString(this.formatDate(this.date));
+  }
+
+  get dateTime() {
+    return format(this.date, "YYYY-MM-DD");
+  }
+
   formatDate(date) {
     if (!date) return;
     const out = isDate(date) ? date : parse(date);
@@ -28,12 +40,8 @@ export default class FormattedDate extends Component {
     return `${this.props.prefix} ${date}`;
   }
 
-  value() {
-    return this.formatString(this.formatDate(this.props.date));
-  }
-
   render() {
     if (!this.props.date) return null;
-    return <span>{this.value()}</span>;
+    return <time dateTime={this.dateTime}>{this.value}</time>;
   }
 }
