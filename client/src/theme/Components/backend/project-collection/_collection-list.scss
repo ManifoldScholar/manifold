@@ -96,8 +96,6 @@
       border: 0;
       border-radius: 0;
       transition: color $duration $timing;
-      -webkit-appearance: none;
-      -moz-appearance: none;
       appearance: none;
 
       &:hover {

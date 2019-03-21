@@ -9,8 +9,8 @@
     outline: 0;
 
     &:focus {
-      outline-offset: 2px;
       outline: thin dotted $neutral50;
+      outline-offset: 2px;
     }
   }
 
