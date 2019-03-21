@@ -1,6 +1,7 @@
 module SystemUpgrades
   class AbstractVersion < ActiveInteraction::Base
     include SystemUpgrades::HasLogger
+    include SystemUpgrades::Utilities
 
     boolean :noop, default: false
     boolean :force, default: false

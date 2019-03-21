@@ -44,15 +44,6 @@ module SystemUpgrades
         end
       end
 
-      def elastic_connection_error
-        logger.error("                                                                  ")
-        logger.error("UPGRADE ERROR: Unable to connect to Elasticsearch                 ")
-        logger.error("For this upgrade to complete successfully, Manifold must be able  ")
-        logger.error("to reindex all models. Is Elasticsearch running at the location   ")
-        logger.error("specified in the .env file?                                       ")
-        abort
-      end
-
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
