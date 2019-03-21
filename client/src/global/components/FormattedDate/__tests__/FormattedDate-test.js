@@ -26,7 +26,7 @@ describe("Global.Date component", () => {
       format: "MMMM, YYYY",
       date: "01-01-2017"
     });
-    expect(output.type).toBe("span");
+    expect(output.type).toBe("time");
     expect(output.props.children).toEqual("test January, 2017");
   });
 
@@ -36,7 +36,7 @@ describe("Global.Date component", () => {
       format: "MMMM, YYYY",
       date: new Date(2017, 0, 1)
     });
-    expect(output.type).toBe("span");
+    expect(output.type).toBe("time");
     expect(output.props.children).toEqual("prefix January, 2017");
   });
 
@@ -46,7 +46,7 @@ describe("Global.Date component", () => {
       format: "",
       date: new Date(2017, 0, 1)
     });
-    expect(output.type).toBe("span");
+    expect(output.type).toBe("time");
     expect(output.props.children).toEqual("January 01, 2017");
   });
 
