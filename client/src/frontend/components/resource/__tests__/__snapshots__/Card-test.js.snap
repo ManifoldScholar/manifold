@@ -107,9 +107,11 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
       >
         Uploaded
          
-        <span>
+        <time
+          dateTime="2017-04-24"
+        >
           April, 2017
-        </span>
+        </time>
       </span>
       <div
         className="arrow-link"

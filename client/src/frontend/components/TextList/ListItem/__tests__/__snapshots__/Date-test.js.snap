@@ -4,8 +4,10 @@ exports[`Frontend.TextList.ListItem.Date component renders correctly 1`] = `
 <span
   className="text-block__date text-block__date--block"
 >
-  <span>
+  <time
+    dateTime="2017-04-24"
+  >
     Added April 2017
-  </span>
+  </time>
 </span>
 `;

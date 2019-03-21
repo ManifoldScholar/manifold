@@ -34,9 +34,11 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
       <span
         className="datetime"
       >
-        <span>
-          4 days
-        </span>
+        <time
+          dateTime="2018-12-24"
+        >
+          3 months
+        </time>
          
         ago
       </span>

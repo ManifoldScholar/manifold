@@ -103,9 +103,9 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
           <svg
             aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--sentary"
-            height={48}
+            height="100%"
             viewBox="0 0 48 48"
-            width={48}
+            width="100%"
             xmlns="http://www.w3.org/2000/svg"
           >
             <g
@@ -302,9 +302,9 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
           <svg
             aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--sentary"
-            height={48}
+            height="100%"
             viewBox="0 0 48 48"
-            width={48}
+            width="100%"
             xmlns="http://www.w3.org/2000/svg"
           >
             <g
@@ -501,9 +501,9 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
           <svg
             aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--sentary"
-            height={48}
+            height="100%"
             viewBox="0 0 48 48"
-            width={48}
+            width="100%"
             xmlns="http://www.w3.org/2000/svg"
           >
             <g

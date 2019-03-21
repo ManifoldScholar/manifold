@@ -44,9 +44,11 @@ exports[`Frontend.Resource.Title component renders correctly 1`] = `
       className="resource-date"
     >
       Resource added 
-      <span>
+      <time
+        dateTime="2017-04-24"
+      >
         April, 2017
-      </span>
+      </time>
     </span>
   </div>
 </div>

@@ -54,9 +54,11 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
             <span
               className="date"
             >
-              <span>
+              <time
+                dateTime="2017-04-24"
+              >
                 Collection created April, 2017
-              </span>
+              </time>
             </span>
           </div>
         </div>

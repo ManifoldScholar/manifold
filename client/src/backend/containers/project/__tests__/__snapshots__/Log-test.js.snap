@@ -50,9 +50,11 @@ Array [
                   onClick={[Function]}
                 />
                 ”, 
-                <span>
+                <time
+                  dateTime="2017-04-24"
+                >
                   on April 24, 2017
-                </span>
+                </time>
               </div>
             </h4>
             <div
@@ -86,9 +88,11 @@ Array [
                   Nas
                 </a>
                  updated this project 
-                <span>
+                <time
+                  dateTime="2017-04-24"
+                >
                   on April 24, 2017
-                </span>
+                </time>
               </div>
             </h4>
             <div

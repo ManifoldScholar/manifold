@@ -54,9 +54,11 @@ exports[`Frontend.Event.List Component renders correctly 1`] = `
           <span
             className="event-tile__footer"
           >
-            <span>
+            <time
+              dateTime="2017-04-24"
+            >
               April 24th, 2017
-            </span>
+            </time>
           </span>
         </div>
       </div>
@@ -110,9 +112,11 @@ exports[`Frontend.Event.List Component renders correctly 1`] = `
           <span
             className="event-tile__footer"
           >
-            <span>
+            <time
+              dateTime="2017-04-24"
+            >
               April 24th, 2017
-            </span>
+            </time>
           </span>
         </div>
       </div>
