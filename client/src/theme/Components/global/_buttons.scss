@@ -405,6 +405,21 @@
       display: inline-block;
       width: calc(50% - 17px);
     }
+
+    // TODO: This needs to override the above breakpoint to only change
+    // button width when the drawer width changes.  These styles should be able to be
+    // improved as we continue to refactor styles to use BEM structures.
+    .drawer-backend & {
+      @include respond($break85) {
+        display: block;
+        width: 100%;
+      }
+
+      @include respond($break90) {
+        display: inline-block;
+        width: calc(50% - 17px);
+      }
+    }
   }
 
   // Swap full/abbreviated text if there is any
