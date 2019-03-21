@@ -6,7 +6,8 @@ export default class IconComputedSocial extends PureComponent {
   static displayName = "IconComputed.Resource";
 
   static propTypes = {
-    icon: PropTypes.string.isRequired
+    icon: PropTypes.string.isRequired,
+    svgProps: PropTypes.object
   };
 
   static defaultProps = {
