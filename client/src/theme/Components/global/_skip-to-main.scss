@@ -2,18 +2,18 @@
   @include buttonUnstyled;
   @include utilityPrimary;
   position: fixed;
-  width: auto;
-  height: auto;
-  margin: 0;
-  clip: unset;
-  padding: 14px 18px;
-  background: $neutral85;
-  color: $accentPrimary;
   top: 0;
   left: -400px;
-  text-decoration: none;
+  width: auto;
+  height: auto;
+  padding: 14px 18px;
+  margin: 0;
+  clip: unset;
   font-size: 15px;
-  opacity: .95;
+  color: $accentPrimary;
+  text-decoration: none;
+  background: $neutral85;
+  opacity: 0.95;
   transition: left $durationSlow $timing;
 
   &:focus {
