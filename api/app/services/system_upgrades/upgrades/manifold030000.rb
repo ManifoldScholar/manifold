@@ -6,6 +6,7 @@ module SystemUpgrades
       def perform!
         reprocess_text_covers!
         scaffold_project_content!
+        remove_searchable_node_index!
       end
 
       private
@@ -52,6 +53,27 @@ module SystemUpgrades
                                               configuration: configuration,
                                               logger: logger
         end
+      end
+
+      def remove_searchable_node_index!
+        logger.info("===================================================================")
+        logger.info("Removing SearchableNode Elasticsearch Index                        ")
+        logger.info("===================================================================")
+        logger.info("Manifold version 3.0.0 no longer uses SearchableNode records to    ")
+        logger.info("query text section body content in Elasticsearch.  As a result of  ")
+        logger.info("this change, the SearchableNode index in Elasticsearch is no longer")
+        logger.info("needed and can be removed.                                         ")
+        logger.info("===================================================================")
+
+        index_name = Rails.env.development? ? "searchable_nodes_development" : "searchable_nodes_production"
+
+        if Searchkick.client.indices.delete(index: index_name)
+          logger.info("Removed #{index_name} index from Elasticsearch.")
+        end
+      rescue Elasticsearch::Transport::Transport::Errors::NotFound
+        logger.info("SearchableNode index not present in Elasticsearch.")
+      rescue Faraday::ConnectionFailed
+        elastic_connection_error
       end
 
       # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
