@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
 import omitBy from "lodash/omitBy";
 import labelId from "helpers/labelId";
+import Utility from "global/components/utility";
 
 export default class ResourceListFilters extends Component {
   static displayName = "ResourceList.Filters";
@@ -63,7 +64,11 @@ export default class ResourceListFilters extends Component {
         <div className="search-input">
           <button className="search-button" type="submit">
             <span className="screen-reader-text">Search</span>
-            <i className="manicon manicon-magnify" aria-hidden="true" />
+            <Utility.IconComposer
+              className="search-icon"
+              icon="search16"
+              size={20}
+            />
           </button>
           <label htmlFor={this.props.searchId} className="screen-reader-text">
             Enter Search Criteria

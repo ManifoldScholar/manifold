@@ -9,7 +9,6 @@ import get from "lodash/get";
 import labelId from "helpers/labelId";
 import omitBy from "lodash/omitBy";
 import classnames from "classnames";
-
 import Authorize from "hoc/authorize";
 
 export class ListSearchable extends PureComponent {
@@ -297,7 +296,12 @@ export class ListSearchable extends PureComponent {
       <form className={formClasses} onSubmit={this.handleSubmit}>
         <div className="search">
           <button>
-            <i className="manicon manicon-magnify" aria-hidden="true" />
+            <Utility.IconComposer
+              className="search-icon"
+              iconClass="manicon-magnify"
+              icon="search16"
+              size={20}
+            />
             <span className="screen-reader-text">Search</span>
           </button>
           <label htmlFor={this.props.searchId} className="screen-reader-text">

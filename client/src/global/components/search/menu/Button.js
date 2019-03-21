@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Utility from "global/components/utility";
 
 export default class SearchMenuButton extends PureComponent {
   static propTypes = {
@@ -24,7 +25,11 @@ export default class SearchMenuButton extends PureComponent {
         onClick={this.clickHandler}
         data-id="toggle-menu"
       >
-        <i className="manicon manicon-magnify" aria-hidden="true" />
+        <Utility.IconComposer
+          className="search-icon"
+          icon="search16"
+          size={22}
+        />
         <span className="screen-reader-text">{"Open search"}</span>
       </button>
     );

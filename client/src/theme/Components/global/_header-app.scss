@@ -185,7 +185,7 @@
           margin-left: 3.34vw;
 
           @include respond($containerWidthFull) {
-            margin-left: 55px;
+            margin-left: 27px;
           }
         }
       }
@@ -319,13 +319,13 @@
     }
 
     .search-menu, .user-menu {
-      top: calc(100% + 22px);
+      top: calc(100% + 23px);
       opacity: 0;
       transition: opacity $duration $timing, transform $duration $timing;
       transform: translateY(-34px);
 
       .header-tall & {
-        top: calc(100% + 35px);
+        top: calc(100% + 34px);
       }
     }
 
