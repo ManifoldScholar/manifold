@@ -15,6 +15,7 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { open: false };
+    this.scrollTarget = React.createRef();
   }
 
   get excerpts() {
@@ -37,6 +38,11 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
     return isArray(this.allExcerpts) && this.allExcerpts.length > 0;
   }
 
+  holdScroll = ({ height }) => {
+    if (height !== 0) return;
+    this.scrollTarget.current.scrollIntoView({ block: "center" });
+  };
+
   toggle = event => {
     event.preventDefault();
     this.setState({ open: !this.state.open });
@@ -52,7 +58,7 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
 
     return (
       <React.Fragment>
-        <div className="search-result__excerpts">
+        <div className="search-result__excerpts" ref={this.scrollTarget}>
           {this.excerpts.map(excerpt => (
             <blockquote
               key={excerpt.nodeUuid}
@@ -70,7 +76,11 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
           ))}
         </div>
 
-        <Collapse className={expandedClass} isOpened={this.state.open}>
+        <Collapse
+          className={expandedClass}
+          isOpened={this.state.open}
+          onMeasure={this.holdScroll}
+        >
           <div className="search-result__excerpt-shim" />
           {this.expandedExcerpts.map(excerpt => (
             <blockquote
