@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 export default class ListSimpleList extends PureComponent {
   static displayName = "List.SimpleList";
@@ -12,8 +13,12 @@ export default class ListSimpleList extends PureComponent {
     destroyHandler: PropTypes.func,
     title: PropTypes.string,
     icon: PropTypes.string,
-    classNames: PropTypes.string
+    listClasses: PropTypes.string
   };
+
+  get listClasses() {
+    return classNames("simple-list", this.props.listClasses);
+  }
 
   // Can take either a builder function that returns JSX or
   // a component class as this.props.entityComponent
@@ -34,7 +39,7 @@ export default class ListSimpleList extends PureComponent {
 
   renderList(props) {
     return (
-      <ul className={props.classNames}>
+      <ul>
         {props.entities.map(entity => {
           return this.renderEntity(entity);
         })}
@@ -47,7 +52,7 @@ export default class ListSimpleList extends PureComponent {
     if (!entities) return null;
 
     return (
-      <section className="simple-list">
+      <section className={this.listClasses}>
         {this.props.title ? (
           <header className="section-heading-secondary">
             <h3>

@@ -49,7 +49,6 @@ export default class ProjectCollectionDetailManual extends PureComponent {
         entities={projects}
         entityComponent={this.projectCover}
         name="collection-projects"
-        listItemClassNames={"project-collection-grid-item"}
       />
     );
   }
