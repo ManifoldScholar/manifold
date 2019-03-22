@@ -83,5 +83,15 @@
       margin-right: -26px;
       margin-left: -26px;
     }
+
+    .list-total--empty {
+      width: calc(100% - 4.21vw);
+      padding-top: 0;
+      text-align: left;
+
+      @include respond($break75) {
+        margin: auto;
+      }
+    }
   }
 }

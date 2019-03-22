@@ -116,7 +116,7 @@ exports[`Backend Project Collections Container renders correctly 1`] = `
             </a>
           </div>
           <p
-            className="list-total empty"
+            className="list-total list-total--empty"
           >
             Sorry, no results were found.
           </p>
