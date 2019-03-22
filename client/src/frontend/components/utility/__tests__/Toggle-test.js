@@ -8,6 +8,7 @@ describe("Frontend.Utility.Toggle component", () => {
   const root = (
     <Toggle
       handleToggle={toggleMock}
+      label="options"
       optionOne={{
         iconClass: "manicon-cube-outline",
         label: "resources"

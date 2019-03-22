@@ -36,7 +36,7 @@ exports[`Frontend.Utility.Toggle component renders correctly 1`] = `
     className="aria-describedby"
     id="button-switch-1"
   >
-    Toggle undefined to collection
+    Toggle options to collection
   </span>
 </div>
 `;
