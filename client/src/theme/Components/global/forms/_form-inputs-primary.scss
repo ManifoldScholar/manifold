@@ -320,7 +320,10 @@
 
     .toggle-label {
       font-size: 14px;
-      color: $neutral30;
+
+      .backend & {
+        color: $neutral30;
+      }
     }
 
     + .toggle-instructions {
