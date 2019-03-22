@@ -12,6 +12,7 @@ export class SearchMenuBody extends PureComponent {
     history: PropTypes.object.isRequired,
     visibility: PropTypes.object.isRequired,
     searchType: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func,
     facets: PropTypes.array,
     scopes: PropTypes.array,
     initialState: PropTypes.object,
@@ -31,6 +32,7 @@ export class SearchMenuBody extends PureComponent {
 
   doSearch = () => {
     if (this.props.searchType === "reader") return this.doReaderSearch();
+    if (this.props.onSubmit) this.props.onSubmit();
     return this.doFrontendSearch();
   };
 

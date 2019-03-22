@@ -220,7 +220,7 @@ export class NavigationMobile extends Component {
                   })}
                   {this.props.mode === "frontend" ? (
                     <li>
-                      <MobileSearch />
+                      <MobileSearch closeNavigation={this.closeNavigation} />
                     </li>
                   ) : null}
                 </ul>
