@@ -416,7 +416,7 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
             className="project-list"
           >
             <section
-              className="simple-list"
+              className="simple-list simple-list--flush"
             >
               <header
                 className="section-heading-secondary"

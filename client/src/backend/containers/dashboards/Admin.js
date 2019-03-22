@@ -202,7 +202,7 @@ export class DashboardsAdminContainer extends PureComponent {
                       entityComponentProps={{ placeholderMode: "small" }}
                       title={"Recently Updated"}
                       icon={"manicon-bugle-small"}
-                      listClasses={"flush"}
+                      listClasses={"simple-list--flush"}
                     />
                   ) : null}
                 </nav>
