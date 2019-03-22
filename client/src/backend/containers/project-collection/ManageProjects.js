@@ -133,7 +133,7 @@ export class ProjectCollectionManageProjects extends PureComponent {
     const total = projectsMeta.pagination.totalCount || 0;
 
     return (
-      <div className="list-total extra-bottom">
+      <div className="list-total list-total--extra-bottom">
         You have added <span>{added}</span> of <span>{total}</span> available
         projects
       </div>

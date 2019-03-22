@@ -41,7 +41,7 @@ Array [
     </p>
   </header>,
   <div
-    className="list-total extra-bottom"
+    className="list-total list-total--extra-bottom"
   >
     You have added 
     <span>

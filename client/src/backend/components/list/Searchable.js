@@ -356,7 +356,7 @@ export class ListSearchable extends PureComponent {
             destroyHandler={this.props.destroyHandler}
           />
         ) : (
-          <p className="list-total empty">
+          <p className="list-total list-total--empty">
             {this.props.emptyMessage(this.state.filter)}
           </p>
         )}

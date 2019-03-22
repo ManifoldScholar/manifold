@@ -4,8 +4,13 @@
   color: $neutral50;
   transition: color $duration $timing;
 
-  &.extra-bottom {
+  &--extra-bottom {
     margin-bottom: 20px;
+  }
+
+  &--empty {
+    padding-top: 20px;
+    border-bottom: 0;
   }
 
   .drawer-backend & {
@@ -19,15 +24,13 @@
     margin-bottom: 15px;
     font-size: 15px;
     color: $neutral70;
-    border-bottom: 1px solid $neutral80;
+
+    &:not(.list-total--empty) {
+      border-bottom: 1px solid $neutral80;
+    }
 
     span {
       color: $neutral30;
-    }
-
-    &.empty {
-      padding-top: 20px;
-      border-bottom: 0;
     }
 
     .drawer-primary & {
