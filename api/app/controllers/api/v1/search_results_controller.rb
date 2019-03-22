@@ -34,7 +34,8 @@ module Api
         p = search_params
         {
           keyword: p[:keyword],
-          page_number: p.dig(:page, :number),
+          page_number: page_number,
+          per_page: page_size,
           facets: p[:facets],
           project: p[:project].presence,
           text: p[:text].presence,
