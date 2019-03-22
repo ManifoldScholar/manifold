@@ -1,7 +1,10 @@
 # Be sure to restart your server when you modify this file.
 
 # Configure sensitive parameters which will be filtered from the log file.
-Rails.application.config.filter_parameters += [:password]
+Rails.application.config.filter_parameters += [:email,
+                                               :first_name,
+                                               :last_name,
+                                               :password]
 
 # Let's not log secrets
 Rails.application.config.filter_parameters += [:secrets]
