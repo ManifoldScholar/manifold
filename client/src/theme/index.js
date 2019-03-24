@@ -1,2 +1,2 @@
-require("./theme.scss");
-require("./manicon.font.js");
+require("./styles/_index.scss");
+require("./manicon-font/index.font.js");

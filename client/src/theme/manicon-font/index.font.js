@@ -1,7 +1,7 @@
 const glob = require("glob");
 const path = require("path");
 
-const svgPath = path.resolve(__dirname, "assets/svg/fonts/manicon/*.svg");
+const svgPath = path.resolve(__dirname, "../assets/svg/fonts/manicon/*.svg");
 const svgFiles = glob.sync(svgPath);
 
 module.exports = {
