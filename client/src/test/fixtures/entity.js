@@ -156,6 +156,7 @@ const defaults = {
       coverStyles: {},
       avatarStyles: {},
       avatarMeta: {},
+      avatarColor: "primary",
       hashtag: "#cute_dog",
       hideActivity: false,
       downloadCallToAction: "Download the greatest dog",
@@ -195,6 +196,26 @@ const defaults = {
     relationships: {
       resource: null,
       resourceCollection: null
+    }
+  },
+
+  contentBlock: {
+    type: "contentBlocks",
+    attributes: {
+      type: "Content::MarkdownBlock",
+      position: 1,
+      visible: true,
+      configurable: true,
+      orderable: true,
+      abilities: {},
+      renderable: true,
+      incompleteRenderAttributes: [],
+      body: "body",
+      bodyFormatted: "bodyFormatted",
+      style: "shaded"
+    },
+    relationships: {
+      project: null
     }
   },
 
@@ -357,6 +378,8 @@ const defaults = {
   feature: {
     type: "features",
     attributes: {
+      createdAt: "2017-04-24T23:25:50.161Z",
+      live: true,
       header: "Rowan, Top Dog",
       headerFormatted: "Rowan, Top Dog",
       subheader: "Blah blah blah",
@@ -577,11 +600,19 @@ const subject = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("subject", id, attributes, relationships);
 };
 
-const twitterQuery = (id = null, attributes = {}, relationships = {}) => {
+const twitterQuery = (
+  id = null,
+  attributes = {},
+  relationships = { project: project() }
+) => {
   return buildEntity("twitterQuery", id, attributes, relationships);
 };
 
-const permission = (id = null, attributes = {}, relationships = {}) => {
+const permission = (
+  id = null,
+  attributes = {},
+  relationships = { resource: project(), user: user() }
+) => {
   return buildEntity("permission", id, attributes, relationships);
 };
 
@@ -599,6 +630,10 @@ const projectCollection = (id = null, attributes = {}, relationships = {}) => {
 
 const actionCallout = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("actionCallout", id, attributes, relationships);
+};
+
+const contentBlock = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("contentBlock", id, attributes, relationships);
 };
 
 export default {
@@ -625,5 +660,6 @@ export default {
   projectCollection,
   version,
   page,
-  actionCallout
+  actionCallout,
+  contentBlock
 };
