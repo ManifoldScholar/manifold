@@ -43,7 +43,7 @@ export class ProjectContent extends PureComponent {
     super(props);
 
     this.state = {
-      blocks: [],
+      blocks: ProjectContent.cloneBlocks(props),
       activeDraggableType: null,
       response: props.contentBlocksResponse
     };
