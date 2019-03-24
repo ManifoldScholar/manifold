@@ -1,4 +1,6 @@
 // Library defaults with some overrides by CIC
+
+/* stylelint-disable property-no-vendor-prefix */
 .rh5v-DefaultPlayer_component {
   // CIC override default sizing
   position: absolute;
@@ -13,14 +15,14 @@
 
 .rh5v-DefaultPlayer_controls {
   position: absolute;
-  bottom: 0;
   right: 0;
+  bottom: 0;
   left: 0;
-  height: 34px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  height: 34px;
   background-color: rgba(0,0,0,0.7);
   opacity: 0;
   -webkit-transition: opacity 0.2s;
@@ -37,8 +39,9 @@
 .rh5v-DefaultPlayer_component:hover .rh5v-DefaultPlayer_controls {
   opacity: 1;
 }
+
 .rh5v-Time_component {
-  padding: 0 10px 0 10px;
+  padding: 0 10px;
   line-height: 35px;
   color: #fff;
 }
@@ -51,6 +54,7 @@
   margin-left: 5px;
   color: #919191;
 }
+
 .rh5v-Seek_component {
   position: relative;
 }
@@ -58,13 +62,13 @@
 .rh5v-Seek_track {
   position: absolute;
   top: 50%;
-  left: 5px;
   right: 5px;
+  left: 5px;
   height: 4px;
+  background-color: #3e3e3e;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  background-color: #3e3e3e;
 }
 
 .rh5v-Seek_buffer,
@@ -86,9 +90,10 @@
 
 .rh5v-Seek_input {
   width: 100%;
-  opacity: 0;
   cursor: pointer;
+  opacity: 0;
 }
+
 .rh5v-Volume_component {
   position: relative;
 }
@@ -100,14 +105,14 @@
 .rh5v-Volume_button {
   width: 34px;
   height: 34px;
-  background: none;
-  border: 0;
-  color: inherit;
+  padding: 0;
+  overflow: visible;
   font: inherit;
   line-height: normal;
-  overflow: visible;
-  padding: 0;
+  color: inherit;
   cursor: pointer;
+  background: none;
+  border: 0;
 }
 
 .rh5v-Volume_button:focus {
@@ -119,11 +124,11 @@
 }
 
 .rh5v-Volume_slider {
-  display: none;
   position: absolute;
   right: 5px;
   bottom: 100%;
   left: 5px;
+  display: none;
   height: 56px;
   background-color: #000;
 }
@@ -138,10 +143,10 @@
   bottom: 8px;
   left: 50%;
   width: 4px;
+  background-color: #3e3e3e;
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  background-color: #3e3e3e;
 }
 
 .rh5v-Volume_fill,
@@ -150,8 +155,8 @@
   right: 0;
   bottom: 0;
   left: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
 }
 
 .rh5v-Volume_fill {
@@ -161,12 +166,14 @@
 .rh5v-Volume_input {
   padding: 0;
   margin: 0;
+  cursor: pointer;
   opacity: 0;
   -webkit-appearance: slider-vertical;
-  cursor: pointer;
-}.rh5v-Captions_component {
-   position: relative;
- }
+}
+
+.rh5v-Captions_component {
+  position: relative;
+}
 
 .rh5v-Captions_component:hover {
   background-color: #000;
@@ -175,14 +182,14 @@
 .rh5v-Captions_button {
   width: 34px;
   height: 34px;
-  background: none;
-  border: 0;
-  color: inherit;
+  padding: 0;
+  overflow: visible;
   font: inherit;
   line-height: normal;
-  overflow: visible;
-  padding: 0;
+  color: inherit;
   cursor: pointer;
+  background: none;
+  border: 0;
 }
 
 .rh5v-Captions_button:focus {
@@ -198,11 +205,11 @@
   right: 0;
   bottom: 100%;
   display: none;
-  background-color: rgba(0,0,0,0.7);
-  list-style: none;
   padding: 0;
   margin: 0;
   color: #fff;
+  list-style: none;
+  background-color: rgba(0,0,0,0.7);
 }
 
 .rh5v-Captions_component:hover .rh5v-Captions_trackList {
@@ -222,6 +229,7 @@
 .rh5v-Captions_activeTrackItem {
   text-decoration: underline;
 }
+
 .rh5v-PlayPause_component {}
 
 .rh5v-PlayPause_component:hover {
@@ -231,14 +239,14 @@
 .rh5v-PlayPause_button {
   width: 34px;
   height: 34px;
-  background: none;
-  border: 0;
-  color: inherit;
+  padding: 0;
+  overflow: visible;
   font: inherit;
   line-height: normal;
-  overflow: visible;
-  padding: 0;
+  color: inherit;
   cursor: pointer;
+  background: none;
+  border: 0;
 }
 
 .rh5v-PlayPause_button:focus {
@@ -248,6 +256,7 @@
 .rh5v-PlayPause_icon {
   padding: 5px;
 }
+
 .rh5v-Fullscreen_component {}
 
 .rh5v-Fullscreen_component:hover {
@@ -257,14 +266,14 @@
 .rh5v-Fullscreen_button {
   width: 34px;
   height: 34px;
-  background: none;
-  border: 0;
-  color: inherit;
+  padding: 0;
+  overflow: visible;
   font: inherit;
   line-height: normal;
-  overflow: visible;
-  padding: 0;
+  color: inherit;
   cursor: pointer;
+  background: none;
+  border: 0;
 }
 
 .rh5v-Fullscreen_button:focus {
@@ -274,14 +283,15 @@
 .rh5v-Fullscreen_icon {
   padding: 5px;
 }
+
 .rh5v-Overlay_component {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
   color: #fff;
   text-align: center;
   cursor: pointer;
@@ -289,19 +299,19 @@
 }
 
 .rh5v-Overlay_inner {
-  display: inline-block;
   position: absolute;
   top: 50%;
   right: 0;
   left: 50%;
+  display: inline-block;
   width: 60px;
   height: 60px;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
   margin-left: -30px;
   background-color: rgba(0,0,0,0.7);
   border-radius: 10px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .rh5v-Overlay_icon {
