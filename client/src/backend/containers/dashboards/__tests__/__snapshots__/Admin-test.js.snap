@@ -116,7 +116,7 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                         >
                           <svg
                             aria-label={null}
-                            className="project-thumb-placeholder project-thumb-placeholder--all project-thumb-placeholder--sentary"
+                            className="project-thumb-placeholder project-thumb-placeholder--all project-thumb-placeholder--primary"
                             height="100%"
                             viewBox="0 0 48 48"
                             width="100%"
@@ -227,7 +227,7 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                         >
                           <svg
                             aria-label={null}
-                            className="project-thumb-placeholder project-thumb-placeholder--all project-thumb-placeholder--sentary"
+                            className="project-thumb-placeholder project-thumb-placeholder--all project-thumb-placeholder--primary"
                             height="100%"
                             viewBox="0 0 48 48"
                             width="100%"
@@ -462,7 +462,7 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                     >
                       <svg
                         aria-label={null}
-                        className="project-thumb-placeholder project-thumb-placeholder--all project-thumb-placeholder--sentary"
+                        className="project-thumb-placeholder project-thumb-placeholder--all project-thumb-placeholder--primary"
                         height="100%"
                         viewBox="0 0 48 48"
                         width="100%"
@@ -573,7 +573,7 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                     >
                       <svg
                         aria-label={null}
-                        className="project-thumb-placeholder project-thumb-placeholder--all project-thumb-placeholder--sentary"
+                        className="project-thumb-placeholder project-thumb-placeholder--all project-thumb-placeholder--primary"
                         height="100%"
                         viewBox="0 0 48 48"
                         width="100%"

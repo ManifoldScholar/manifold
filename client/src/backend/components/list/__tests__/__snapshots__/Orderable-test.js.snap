@@ -18,7 +18,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
         >
           <svg
             aria-label={null}
-            className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--sentary"
+            className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
             height={134}
             viewBox="0 0 134 134"
             width={134}
@@ -102,7 +102,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
           </svg>
           <svg
             aria-label={null}
-            className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--sentary"
+            className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
             height="100%"
             viewBox="0 0 48 48"
             width="100%"
@@ -217,7 +217,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
         >
           <svg
             aria-label={null}
-            className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--sentary"
+            className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
             height={134}
             viewBox="0 0 134 134"
             width={134}
@@ -301,7 +301,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
           </svg>
           <svg
             aria-label={null}
-            className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--sentary"
+            className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
             height="100%"
             viewBox="0 0 48 48"
             width="100%"
@@ -416,7 +416,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
         >
           <svg
             aria-label={null}
-            className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--sentary"
+            className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
             height={134}
             viewBox="0 0 134 134"
             width={134}
@@ -500,7 +500,7 @@ exports[`Backend.List.Orderable component renders correctly 1`] = `
           </svg>
           <svg
             aria-label={null}
-            className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--sentary"
+            className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
             height="100%"
             viewBox="0 0 48 48"
             width="100%"
