@@ -3,24 +3,30 @@ import pluralize from "pluralize";
 import faker from "faker";
 import times from "lodash/times";
 import sample from "lodash/sample";
+import sampleSize from "lodash/sampleSize";
 import isPlainObject from "lodash/isPlainObject";
 import random from "lodash/random";
+import uuid from "uuid";
 
 const defaultCount = 5;
 
 function image() {
-  const value = faker.image.image(100, 100);
+  const square = faker.image.image(200, 200);
+  const landscape = faker.image.image(320, 200);
+  const portrait = faker.image.image(200, 300);
+  const original = random(0, 100) > 50 ? portrait : landscape;
+
   return {
-    original: value,
-    small: value,
-    small_square: value,
-    small_landscape: value,
-    small_portrait: value,
-    medium: value,
-    medium_square: value,
-    medium_landscape: value,
-    medium_portrait: value,
-    large_landscape: value
+    original,
+    small: original,
+    smallSquare: square,
+    smallLandscape: landscape,
+    smallPortrait: portrait,
+    medium: original,
+    mediumSquare: square,
+    mediumLandscape: landscape,
+    mediumPortrait: portrait,
+    largeLandscape: landscape
   };
 }
 
@@ -42,7 +48,7 @@ function arrayOf(type, count = defaultCount, attrBuilder = null) {
   const key = pluralize.singular(type);
   const entity = entities[key];
   times(count, () => {
-    out.push(entity());
+    out.push(entity(uuid()));
   });
   if (attrBuilder) {
     const adjusted = out.map(e => {
@@ -61,7 +67,11 @@ function users(count = defaultCount) {
     const lastName = faker.name.lastName();
     const fullName = `${firstName} ${lastName}`;
     const role = sample(["admin", "reader", "marketeer"]);
-    return { firstName, lastName, fullName, role };
+    const out = { firstName, lastName, fullName, role };
+    if (random(0, 100) > 50) {
+      out.avatarStyles = image();
+    }
+    return out;
   });
 }
 
@@ -93,7 +103,66 @@ function projects(count = defaultCount) {
       attr.coverStyles = image();
       attr.avatarMeta = imageMeta();
     }
+    if (random(0, 100) > 75) {
+      attr.draft = true;
+    }
     return attr;
+  });
+}
+
+function resources(count = defaultCount) {
+  return arrayOf("resourceCollections", count, () => {
+    const title = faker.company.catchPhrase();
+    const kind = sample([
+      "document",
+      "image",
+      "video",
+      "audio",
+      "file",
+      "link",
+      "pdf",
+      "spreadsheet",
+      "presentation",
+      "interactive"
+    ]);
+    const attr = {
+      titleFormatted: title,
+      title,
+      kind
+    };
+    if (random(0, 100) > 75) {
+      attr.variantThumbnailStyles = image();
+    }
+    return attr;
+  });
+}
+
+function resourceCollections(count = defaultCount) {
+  return arrayOf("resourceCollections", count, () => {
+    const title = faker.company.catchPhrase();
+    const count = random(0, 100) > 50 ? 0 : random(0, 100);
+    const attr = {
+      title,
+      collectionResourcesCount: count
+    };
+    if (random(0, 100) > 75) {
+      attr.thumbnailStyles = image();
+    }
+    return attr;
+  });
+}
+
+function permissions(count = defaultCount) {
+  const availableRoles = [
+    "project_editor",
+    "project_resource_editor",
+    "project_author"
+  ];
+  return arrayOf("permissions", count, permission => {
+    const user = users(1)[0];
+    const roles = sampleSize(availableRoles, random(1, 2));
+    permission.relationships.user = user;
+    permission.attributes.roleNames = roles;
   });
 }
 
@@ -102,5 +171,8 @@ export default {
   users,
   projects,
   contentBlocks,
-  makers: users
+  makers: users,
+  resourceCollections,
+  resources,
+  permissions
 };

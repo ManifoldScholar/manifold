@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import IconComputed from "global/components/icon-computed";
+import Utility from "./User";
 
 export default class EntityThumbnailResource extends PureComponent {
   static displayName = "EntityThumbnail.Resource";
@@ -14,7 +15,7 @@ export default class EntityThumbnailResource extends PureComponent {
   };
 
   static defaultProps = {
-    variant: "smallPortrait",
+    variant: "small",
     attributes: {}
   };
 
@@ -27,8 +28,12 @@ export default class EntityThumbnailResource extends PureComponent {
   }
 
   get src() {
-    const a = this.attr.variantThumbnailStyles[this.variant];
-    const b = this.attr.attachmentStyles[this.variant];
+    const a = this.attr.variantThumbnailStyles
+      ? this.attr.variantThumbnailStyles[this.variant]
+      : null;
+    const b = this.attr.attachmentStyles
+      ? this.attr.attachmentStyles[this.variant]
+      : null;
     return a || b;
   }
 
@@ -39,10 +44,7 @@ export default class EntityThumbnailResource extends PureComponent {
   get icon() {
     const { width, height, className } = this.props;
     return (
-      <IconComputed.Resource
-        svgProps={{ width, height, className }}
-        icon={this.kind}
-      />
+      <IconComputed.Resource svgProps={{ width, height }} icon={this.kind} />
     );
   }
 

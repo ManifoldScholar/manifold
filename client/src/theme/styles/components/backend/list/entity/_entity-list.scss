@@ -1,0 +1,145 @@
+.entity-list {
+
+  &__title {
+    @include templateHead;
+    margin: 0 0 34px 0;
+    color: $neutral45;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: $semibold;
+    letter-spacing: 2px;
+  }
+
+  &__title-icon {
+    display: inline-block;
+    margin-right: 12px;
+    width: 32px;
+    height: 32px;
+    color: $accentPrimary;
+  }
+
+  &__contents-wrapper {
+
+    &--with-section-title {
+      margin-left: 24px;
+    }
+
+  }
+
+  &__pagination {
+    margin-top: 28px;
+  }
+
+  &__header {
+    border-bottom: 1px solid $neutral75;
+    padding-top: 10px;
+    padding-bottom: 8px;
+  }
+
+  &__count {
+    margin-top: 18px; // TODO: Check.
+  }
+
+  &__button-set {
+    margin: 18px 0 0 0; // TODO: Check against comps when you have them.
+  }
+
+  &__button {
+    @include utilityPrimary;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: $accentPrimary;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: $semibold;
+    transition: color $duration ease-out;
+
+    + .entity-list__button {
+      margin-left: 24px;
+    }
+
+    &:hover {
+      color: $accentPrimaryPale;
+      svg {
+        color: $accentPrimaryPale;
+      }
+    }
+
+    svg {
+      color: $accentPrimary;
+      margin-top: -3px;
+      display: inline-block;
+      vertical-align: middle;
+      height: 24px;
+      width: 24px;
+      margin-right: 6px;
+    }
+  }
+
+  &__list {
+    @include listUnstyled;
+    color: $neutral30;
+
+    a {
+      color: $neutral30;
+    }
+
+    &--tiles {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 17px;
+      margin-bottom: -28px;
+
+      @include respond($break60) {
+        margin-left: -40px;
+
+        li {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+      }
+
+      @include respond($break65) {
+        margin-left: -24px;
+      }
+
+      @include respond($break95) {
+        li {
+          flex-basis: 50%;
+          max-width: 49.5%;
+        }
+      }
+
+      @include respond($break110) {
+        margin-left: -40px;
+      }
+    }
+
+    &--grid {
+
+      @include respond($break65) {
+        display: flex;
+        flex-direction: column;
+        flex-flow: row wrap;
+
+        margin-left: -25px;
+
+
+        li {
+          flex: 1 1 25%;
+          max-width: 25%;
+          padding-left: 25px;
+          margin-bottom: 18px;
+          border-bottom: none;
+        }
+      }
+
+    }
+
+  }
+
+
+
+
+
+}

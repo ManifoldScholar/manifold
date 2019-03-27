@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 
-export default class ProjectHeroCalloutDownload extends PureComponent {
-  static displayName = "ProjectHero.Callout.Download";
+export default class ProjectHeroCalloutLink extends PureComponent {
+  static displayName = "ProjectHero.Callout.Link";
 
   static propTypes = {
     callout: PropTypes.object,
@@ -24,11 +24,11 @@ export default class ProjectHeroCalloutDownload extends PureComponent {
   }
 
   get title() {
-    return this.props.callout.attributes.title || "Download";
+    return this.props.callout.attributes.title || "Link";
   }
 
   get icon() {
-    return !this.isButton ? "arrow16" : null;
+    return !this.isButton ? "arrowRight16" : null;
   }
 
   get iconSize() {

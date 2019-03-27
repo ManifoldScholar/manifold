@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import range from "lodash/range";
 import isString from "lodash/isString";
+import classNames from "classnames";
+import IconComposer from "./IconComposer";
 
 export default class UtilityPagination extends PureComponent {
   static displayName = "Utility.Pagination";
@@ -12,14 +14,12 @@ export default class UtilityPagination extends PureComponent {
     paginationTarget: PropTypes.string,
     padding: PropTypes.number,
     paginationClickHandler: PropTypes.func,
-    level: PropTypes.string,
     compact: PropTypes.bool
   };
 
   static defaultProps = {
     padding: 3,
-    paginationTarget: "#pagination-target",
-    level: "primary"
+    paginationTarget: "#pagination-target"
   };
 
   visiblePageArray(pagination) {
@@ -41,104 +41,96 @@ export default class UtilityPagination extends PureComponent {
     return out;
   }
 
+  propsAndComponentForPage(handler) {
+    let PageComponent, pageProps;
+    if (isString(handler)) {
+      PageComponent = Link;
+      pageProps = { to: handler }
+    } else {
+      PageComponent = "a";
+      pageProps = { onClick: handler, href: this.props.paginationTarget }
+    }
+    return { PageComponent, pageProps }
+  }
+
   previous(pagination) {
+
     const handler = this.props.paginationClickHandler(pagination.prevPage);
-    const disabledClass = pagination.prevPage ? "" : "disabled";
+    const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
+
+    const pageClassNames = classNames({
+      "list-pagination__page": true,
+      "list-pagination__page--prev": true,
+      "list-pagination__page--disabled": !pagination.prevPage,
+    });
+
     return (
-      <li className={`pagination-previous ${disabledClass}`} key="previous">
-        {isString(handler) ? (
-          <Link to={handler}>
-            <i className="manicon manicon-arrow-long-left" aria-hidden="true" />
-            <span aria-hidden="true">Prev</span>
-            <span className="screen-reader-text">Previous Page</span>
-          </Link>
-        ) : (
-          <a
-            href={this.props.paginationTarget}
-            onClick={handler}
-            data-id={"page-prev"}
-          >
-            <i className="manicon manicon-arrow-long-left" aria-hidden="true" />
-            <span aria-hidden="true">Prev</span>
-            <span className="screen-reader-text">Previous Page</span>
-          </a>
-        )}
+      <li className={pageClassNames} key="previous">
+        <PageComponent {...pageProps} disabled={!pagination.prevPage}>
+          <IconComposer icon="arrowLongLeft16" screenReaderText="previous page" />
+          <span className="list-pagination__icon-label">PREV</span>
+        </PageComponent>
       </li>
     );
   }
 
   next(pagination) {
     const handler = this.props.paginationClickHandler(pagination.nextPage);
-    const disabledClass = pagination.nextPage ? "" : "disabled";
+    const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
+
+    const pageClassNames = classNames({
+      "list-pagination__page": true,
+      "list-pagination__page--next": true,
+      "list-pagination__page--disabled": !pagination.nextPage,
+    });
+
     return (
-      <li className={`pagination-next ${disabledClass}`} key="next">
-        {isString(handler) ? (
-          <Link to={handler}>
-            <span className="screen-reader-text">Next Page</span>
-            <span aria-hidden="true">Next</span>
-            <i
-              className="manicon manicon-arrow-long-right"
-              aria-hidden="true"
-            />
-          </Link>
-        ) : (
-          <a
-            href={this.props.paginationTarget}
-            onClick={handler}
-            data-id={"page-next"}
-          >
-            <span className="screen-reader-text">Next Page</span>
-            <span aria-hidden="true">Next</span>
-            <i
-              className="manicon manicon-arrow-long-right"
-              aria-hidden="true"
-            />
-          </a>
-        )}
+      <li className={pageClassNames} key="next">
+        <PageComponent {...pageProps}>
+          <span className="list-pagination__icon-label">NEXT</span>
+          <IconComposer icon="arrowLongRight16" screenReaderText="next page" />
+        </PageComponent>
       </li>
-    );
+    )
   }
 
   number(page, handler) {
+    const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
+
+    const pageClassNames = classNames({
+      "list-pagination__page": true,
+      "list-pagination__page--ordinal": true,
+    });
+
     return (
-      <li key={page.key} className="ordinal">
-        {isString(handler) ? (
-          <Link to={handler}>
-            <span aria-hidden="true">{page.number}</span>
-            <span className="screen-reader-text">
+      <li className={pageClassNames} key={page.key}>
+        <PageComponent {...pageProps}>
+          <span aria-hidden="true">{page.number}</span>
+          <span className="screen-reader-text">
               Go to page: {page.number}
             </span>
-          </Link>
-        ) : (
-          <a href={this.props.paginationTarget} onClick={handler}>
-            <span aria-hidden="true">{page.number}</span>
-            <span className="screen-reader-text">
-              Go to page: {page.number}
-            </span>
-          </a>
-        )}
+        </PageComponent>
       </li>
     );
   }
 
   current(page, handler) {
+    const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
+
+    const pageClassNames = classNames({
+      "list-pagination__page": true,
+      "list-pagination__page--ordinal": true,
+      "list-pagination__page--disabled": true,
+    });
+
     return (
-      <li className="active ordinal" key={page.key}>
-        {isString(handler) ? (
-          <Link to={handler}>
-            <span aria-hidden="true">{page.number}</span>
-            <span className="screen-reader-text">
+      <li className={pageClassNames} key={page.key}>
+        <PageComponent {...pageProps}>
+          <span aria-hidden="true">{page.number}</span>
+          <span className="screen-reader-text">
               Go to page: {page.number}
             </span>
-          </Link>
-        ) : (
-          <a href={this.props.paginationTarget} onClick={handler}>
-            <span aria-hidden="true">{page.number}</span>
-            <span className="screen-reader-text">
-              Go to page: {page.number}
-            </span>
-          </a>
-        )}
+        </PageComponent>
       </li>
     );
   }
@@ -172,14 +164,31 @@ export default class UtilityPagination extends PureComponent {
     const pagination = this.props.pagination;
     if (pagination.totalPages === 1 || pagination.totalPages === 0) return null;
 
+    const wrapperClassNames = classNames({
+      "list-pagination": true,
+      "list-pagination--compact": this.props.compact
+    });
+
     return (
-      <nav className={`list-pagination-${this.props.level}`}>
-        <ul className={this.props.compact ? "compact" : null}>
-          {this.previous(pagination)}
-          {this.props.compact
-            ? this.renderCompact(pagination)
-            : this.renderRange(pages)}
-          {this.next(pagination)}
+      <nav className={wrapperClassNames}>
+        <ul className="list-pagination__columns">
+          <li className="list-pagination__column">
+            <ul>
+              {this.previous(pagination)}
+            </ul>
+          </li>
+          <li className="list-pagination__column-middle">
+            <ul className="list-pagination__pages">
+              {this.props.compact
+                ? this.renderCompact(pagination)
+                : this.renderRange(pages)}
+            </ul>
+          </li>
+          <li className="list-pagination__column">
+            <ul>
+              {this.next(pagination)}
+            </ul>
+          </li>
         </ul>
       </nav>
     );

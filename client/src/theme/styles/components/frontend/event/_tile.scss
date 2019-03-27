@@ -157,6 +157,24 @@
     }
   }
 
+  &__utility {
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+
+    @include respond($break60) {
+      font-size: 1.2em;
+    }
+
+    .manicon-trashcan {
+      color: $sp40Tertiary;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   &__header,
   &__footer {
     @include utilityPrimary;

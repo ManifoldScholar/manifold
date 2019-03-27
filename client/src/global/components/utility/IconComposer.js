@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Icons from "global/components/icon";
 import UniqueIcons from "global/components/icon/unique";
 import endsWith from "lodash/endsWith";
+import classNames from "classnames";
 
 import MissingIcon from "./MissingIcon";
 
@@ -51,14 +52,16 @@ export default class IconComposer extends PureComponent {
   render() {
     const { iconClass, size, fill, stroke, icon } = this.props;
     const IconComponent = this.iconComponent;
+    const adjustedIconClass = classNames(iconClass, `svg-icon--${icon}`);
 
-    return React.createElement(IconComponent, {
+    const props = {
       svgProps: this.props.svgProps,
-      iconClass,
+      iconClass: adjustedIconClass,
       icon,
       size,
       fill,
       stroke
-    });
+    };
+    return React.createElement(IconComponent, props);
   }
 }

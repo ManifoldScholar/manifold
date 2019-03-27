@@ -1,0 +1,237 @@
+.entity-row {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  border-bottom: 1px solid $neutral80;
+  transition: background-color $duration ease-out,
+  box-shadow $duration ease-out;
+  padding: 14px 0;
+
+  &--in-grid {
+    @include respond($break65) {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  &__text {
+    @include templateCopy;
+    font-weight: $regular;
+    color: $neutral50;
+    font-size: 17px;
+    flex-grow: 1;
+    align-self: flex-start;
+
+    &--valign-center {
+      align-self: center;
+      position: relative;
+      top: -2px;
+    }
+  }
+
+  &__labels {
+    display: inline-block;
+    margin: 0;
+  }
+
+  &__label {
+    @include blockLabelRound;
+    position: relative;
+    display: inline-block;
+    padding: 0.333em 5px;
+    margin: -3px 0 0 0;
+    font-size: 9px;
+    color: $neutral85;
+    vertical-align: middle;
+    background-color: $neutral30;
+    line-height: 1.2em;
+
+    & + .entity-row__label {
+      margin-left: 14px;
+    }
+  }
+
+  &__utility {
+
+  }
+
+  &__figure {
+    color: $neutral45;
+    margin-right: 18px;
+    margin-top: 4px;
+    align-self: flex-start;
+    position: relative;
+
+    &--valign-center {
+      margin-top: 0px;
+      align-self: center;
+    }
+
+    &--size-normal {
+      width: 50px;
+
+      img {
+        width: 50px;
+      }
+
+      &.entity-row__figure--shape-round {
+        height: 50px;
+        img {
+          height: 50px;
+        }
+      }
+
+      svg {
+        position: relative;
+        left: -4px;
+        top: -4px;
+        width: 55px;
+        height: 55px;
+
+        &.project-thumb-placeholder {
+          top: 0px;
+        }
+
+        &.svg-icon--resourceImage64 {
+          top: -10px;
+        }
+
+        &.svg-icon--resourceAudio64 {
+          top: -7px;
+        }
+
+        &.svg-icon--resourceCollection64 {
+          width: 58px;
+          height: 58px;
+          top: -10px;
+          left: -4px;
+        }
+      }
+    }
+
+    &--size-small {
+      margin-right: 14px;
+      width: 25px;
+
+      img {
+        width: 25px;
+      }
+
+      &.entity-row__figure--shape-round {
+        height: 25px;
+        img {
+          height: 25px;
+        }
+      }
+
+      svg {
+        position: relative;
+        left: -3px;
+        top: -3px;
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    &--shape-round {
+      img, svg {
+        border-radius: 50%;
+      }
+    }
+
+    &--in-grid {
+      @include respond($break65) {
+        margin-bottom: 14px;
+
+        img, svg {
+          left: 0;
+          height: 75px;
+          width: auto;
+        }
+      }
+    }
+
+    & .entity-row__figure--size-normal {
+      width: auto;
+    }
+
+  }
+
+  &__title {
+    @include templateHead;
+    font-size: 18px;
+    color: $neutral20;
+    margin: -1px 14px 0 0;
+    display: inline-block;
+    align-items: center;
+    line-height: 1.4em;
+    font-weight: $medium;
+
+    @include respond($break65) {
+      &--in-grid {
+        font-size: 16px;
+      }
+    }
+
+    a {
+      color: $accentPrimary;
+    }
+  }
+
+  &__title-inner {
+    display: inline-block;
+    margin-right: 14px;
+  }
+
+  &__count {
+    @include templateHead;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: $semibold;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: 18px;
+    font-style: italic;
+    font-weight: $regular;
+    margin: 0;
+
+    @include respond($break65) {
+      &--in-grid {
+        font-size: 16px;
+      }
+    }
+
+  }
+
+  &__meta {
+    margin: 0;
+    font-weight: $regular;
+    font-size: 17px;
+
+    @include respond($break65) {
+      &--in-grid {
+        font-size: 16px;
+      }
+    }
+
+
+    em {
+      font-style: normal;
+      color: $neutral30;
+    }
+  }
+
+  .entity-row__title + .entity-row__subtitle,
+  .entity-row__title + .entity-row__meta,
+  .entity-row__title + .entity-row__count,
+  .entity-row__subtitle + .entity-row__count,
+  .entity-row__subtitle + .entity-row__meta,
+  .entity-row__count + .entity-row__meta {
+    margin-top: 7px;
+  }
+
+
+}

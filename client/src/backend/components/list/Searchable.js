@@ -19,18 +19,18 @@ export class ListSearchable extends PureComponent {
   static displayName = "List.Searchable";
 
   static propTypes = {
-    entities: PropTypes.array,
-    listClassName: PropTypes.string,
-    columnarNav: PropTypes.bool,
-    showEntityCount: PropTypes.bool,
-    singularUnit: PropTypes.string,
-    pluralUnit: PropTypes.string,
-    pagination: PropTypes.object,
-    paginationClass: PropTypes.string,
-    paginationClickHandler: PropTypes.func,
-    entityComponentProps: PropTypes.object,
-    entityComponent: PropTypes.func.isRequired,
-    paginationPadding: PropTypes.number,
+    entities: PropTypes.array, // check
+    listClassName: PropTypes.string, // not necessary
+    columnarNav: PropTypes.bool, // replace with new buttons
+    showEntityCount: PropTypes.bool, // done
+    singularUnit: PropTypes.string, // done
+    pluralUnit: PropTypes.string, // done
+    pagination: PropTypes.object, // done
+    paginationClass: PropTypes.string, // stupid
+    paginationClickHandler: PropTypes.func, // done
+    entityComponentProps: PropTypes.object, // done
+    entityComponent: PropTypes.func.isRequired, // done
+    paginationPadding: PropTypes.number, // stupid
     newButton: PropTypes.shape({
       text: PropTypes.string,
       path: PropTypes.string,

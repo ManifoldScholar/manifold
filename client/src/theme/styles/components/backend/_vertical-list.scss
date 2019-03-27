@@ -386,46 +386,46 @@
       }
     }
 
-    .list-item {
-      position: relative;
-      width: 100%;
-
-      @include respond($break60) {
-        width: 100%;
-        min-height: 150px;
-        padding-left: 40px;
-        margin-bottom: 28px;
-        border-bottom: 0;
-      }
-
-      @include respond($break95) {
-        width: 50%;
-      }
-
-      .utility {
-        position: absolute;
-        right: 12px;
-        bottom: 8px;
-
-        @include respond($break60) {
-          font-size: 1.2em;
-        }
-
-        .manicon-trashcan {
-          color: $sp40Tertiary;
-        }
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-
-      &--tile {
-        .utility {
-          right: 18px;
-          bottom: 18px;
-        }
-      }
-    }
+    //.list-item {
+    //  position: relative;
+    //  width: 100%;
+    //
+    //  @include respond($break60) {
+    //    width: 100%;
+    //    min-height: 150px;
+    //    padding-left: 40px;
+    //    margin-bottom: 28px;
+    //    border-bottom: 0;
+    //  }
+    //
+    //  @include respond($break95) {
+    //    width: 50%;
+    //  }
+    //
+    //  .utility {
+    //    position: absolute;
+    //    right: 12px;
+    //    bottom: 8px;
+    //
+    //    @include respond($break60) {
+    //      font-size: 1.2em;
+    //    }
+    //
+    //    .manicon-trashcan {
+    //      color: $sp40Tertiary;
+    //    }
+    //
+    //    &:hover {
+    //      cursor: pointer;
+    //    }
+    //  }
+    //
+    //  &--tile {
+    //    .utility {
+    //      right: 18px;
+    //      bottom: 18px;
+    //    }
+    //  }
+    //}
   }
 }
