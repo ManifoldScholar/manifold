@@ -19,7 +19,7 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="manicon-svg"
+              className="manicon-svg svg-icon--notes24"
               height={32}
               viewBox="0 0 24 24"
               width={32}
@@ -56,7 +56,7 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="manicon-svg"
+              className="manicon-svg svg-icon--eyeball24"
               height={32}
               viewBox="0 0 24 24"
               width={32}
@@ -93,7 +93,7 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="manicon-svg"
+              className="manicon-svg svg-icon--text24"
               height={32}
               viewBox="0 0 24 24"
               width={32}

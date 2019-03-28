@@ -33,7 +33,7 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="manicon-svg eye-closed"
+              className="manicon-svg eye-closed svg-icon--eyeClosed32"
               height={32}
               viewBox="0 0 32 32"
               width={32}
@@ -64,7 +64,7 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="manicon-svg"
+              className="manicon-svg svg-icon--grabber32"
               height={30}
               viewBox="0 0 32 32"
               width={30}
@@ -121,7 +121,7 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="manicon-svg eye-closed"
+              className="manicon-svg eye-closed svg-icon--eyeClosed32"
               height={32}
               viewBox="0 0 32 32"
               width={32}
@@ -152,7 +152,7 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="manicon-svg"
+              className="manicon-svg svg-icon--grabber32"
               height={30}
               viewBox="0 0 32 32"
               width={30}

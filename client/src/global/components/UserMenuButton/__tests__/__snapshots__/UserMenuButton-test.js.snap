@@ -15,7 +15,7 @@ exports[`Global.UserMenu.UserMenuButton Component renders correctly 1`] = `
   >
     <svg
       aria-hidden={true}
-      className="manicon-svg"
+      className="manicon-svg svg-icon--Avatar64"
       height={null}
       viewBox="0 0 64 64"
       width={null}

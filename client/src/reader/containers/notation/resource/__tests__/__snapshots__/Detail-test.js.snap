@@ -47,7 +47,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg"
+                  className="manicon-svg svg-icon--resourceImage64"
                   height={50}
                   viewBox="0 0 64 64"
                   width={50}
@@ -79,7 +79,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg"
+                  className="manicon-svg svg-icon--resourceImage64"
                   height={60}
                   viewBox="0 0 64 64"
                   width={60}

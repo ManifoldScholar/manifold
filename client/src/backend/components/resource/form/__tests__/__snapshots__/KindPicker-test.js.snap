@@ -117,7 +117,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourceImage64"
                 height={64}
                 viewBox="0 0 64 64"
                 width={64}
@@ -162,7 +162,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourceVideo64"
                 height={64}
                 viewBox="0 0 64 64"
                 width={64}
@@ -205,7 +205,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourceAudio64"
                 height={64}
                 viewBox="0 0 64 64"
                 width={64}
@@ -250,7 +250,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourceFile64"
                 height={64}
                 viewBox="0 0 64 64"
                 width={64}
@@ -295,7 +295,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourceLink64"
                 height={64}
                 viewBox="0 0 64 64"
                 width={64}
@@ -340,7 +340,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourcePdf64"
                 height={64}
                 viewBox="0 0 64 64"
                 width={64}
@@ -385,7 +385,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourceDocument64"
                 height={64}
                 viewBox="0 0 64 64"
                 width={64}
@@ -430,7 +430,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourceSpreadsheet64"
                 height={64}
                 viewBox="0 0 64 64"
                 width={64}
@@ -475,7 +475,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourcePresentation64"
                 height={64}
                 viewBox="0 0 64 64"
                 width={64}
@@ -520,7 +520,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourceInteractive64"
                 height={64}
                 viewBox="0 0 64 64"
                 width={64}

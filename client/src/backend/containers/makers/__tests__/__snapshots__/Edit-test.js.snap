@@ -20,7 +20,7 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
       >
         <svg
           aria-hidden={true}
-          className="manicon-svg notice"
+          className="manicon-svg notice svg-icon--delete32"
           height={24}
           viewBox="0 0 32 32"
           width={24}

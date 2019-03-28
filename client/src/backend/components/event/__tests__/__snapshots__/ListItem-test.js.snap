@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Event.ListItem component renders correctly 1`] = `
-<li
+<div
   className="list-item list-item--tile"
 >
   <div
@@ -14,7 +14,7 @@ exports[`Event.ListItem component renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="manicon-svg event-tile__icon"
+        className="manicon-svg event-tile__icon svg-icon--activityTweet64"
         height={48}
         viewBox="0 0 64 64"
         width={48}
@@ -75,5 +75,5 @@ exports[`Event.ListItem component renders correctly 1`] = `
       Delete Event
     </span>
   </div>
-</li>
+</div>
 `;

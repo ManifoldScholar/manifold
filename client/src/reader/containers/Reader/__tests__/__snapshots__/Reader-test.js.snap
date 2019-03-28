@@ -73,7 +73,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--notes24"
                     height={32}
                     viewBox="0 0 24 24"
                     width={32}
@@ -110,7 +110,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--eyeball24"
                     height={32}
                     viewBox="0 0 24 24"
                     width={32}
@@ -147,7 +147,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--text24"
                     height={32}
                     viewBox="0 0 24 24"
                     width={32}
@@ -184,7 +184,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--search16"
                     height={22}
                     viewBox="0 0 16 16"
                     width={22}
@@ -228,7 +228,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg"
+                      className="manicon-svg svg-icon--Avatar64"
                       height={null}
                       viewBox="0 0 64 64"
                       width={null}
@@ -343,7 +343,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--notes24"
                 height={32}
                 viewBox="0 0 24 24"
                 width={32}
@@ -380,7 +380,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--eyeball24"
                 height={32}
                 viewBox="0 0 24 24"
                 width={32}
@@ -417,7 +417,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--text24"
                 height={32}
                 viewBox="0 0 24 24"
                 width={32}
