@@ -241,9 +241,9 @@ export default class EntitiesListRow extends PureComponent {
     this.labelId = labelId();
 
     return (
-      <li className={this.rowClassNames}>
+      <li>
         {this.blockLink(
-          <React.Fragment>
+          <div className={this.rowClassNames}>
             {this.figure && (
               <div className={this.figureClassNames}>
                 {this.inlineLink(this.figure)}
@@ -280,7 +280,7 @@ export default class EntitiesListRow extends PureComponent {
             {this.utility && (
               <div className="entity-row__utility">{this.utility}</div>
             )}
-          </React.Fragment>
+          </div>
         )}
       </li>
     );
