@@ -166,7 +166,7 @@ export class ProjectCollectionManageProjects extends PureComponent {
         <EntitiesList
           entities={this.props.projects}
           listStyle="grid"
-          entityComponent={this.projectCover}
+          entityComponent={ProjectRow}
           entityComponentProps={{
             projectCollection: this.props.projectCollection,
             addable: true
