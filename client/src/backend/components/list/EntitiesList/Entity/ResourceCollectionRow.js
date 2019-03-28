@@ -3,16 +3,27 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
-import { EntityRow } from "backend/components/list/EntitiesList";
+import EntityRow from "./Row";
 
-export default class ResourceCollectionListItem extends PureComponent {
-  static displayName = "ResourceCollection.ListItem";
+export default class EventRow extends PureComponent {
+  static displayName = "EntitiesList.Entity.ResourceCollectionRow";
 
   static propTypes = {
     entity: PropTypes.object,
     projectId: PropTypes.string,
-    active: PropTypes.string
+    active: PropTypes.string,
+    onRowClick: PropTypes.func
   };
+
+  get onRowClick() {
+    if (this.props.onRowClick)
+      return event => {
+        event.preventDefault();
+        event.stopPropagation();
+        return this.props.onRowClick(this.resourceCollection);
+      };
+    return lh.link("backendResourceCollection", this.id);
+  }
 
   get resourceCollection() {
     return this.props.entity;
@@ -44,7 +55,7 @@ export default class ResourceCollectionListItem extends PureComponent {
   render() {
     return (
       <EntityRow
-        onRowClick={lh.link("backendResourceCollection", this.id)}
+        onRowClick={this.onRowClick}
         title={this.title}
         count={this.count}
         meta={

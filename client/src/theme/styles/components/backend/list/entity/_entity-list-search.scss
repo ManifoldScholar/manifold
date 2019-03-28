@@ -25,14 +25,14 @@
   }
 
   &__text-button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
     display: none;
     margin-right: 14px;
     font-size: 13px;
     color: $neutral75;
     letter-spacing: 2px;
     transition: color $duration $timing;
-    @include buttonUnstyled;
-    @include utilityPrimary;
 
     @include respond($break60) {
       display: block;
@@ -61,10 +61,10 @@
   }
 
   &__keyword-input {
+    @include inputQuaternary;
     width: 100%;
     padding-left: 14px;
     border: 0;
-    @include inputQuaternary;
 
     &::placeholder {
       color: $neutral75;

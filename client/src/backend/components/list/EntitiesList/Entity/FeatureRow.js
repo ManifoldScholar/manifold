@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import lh from "helpers/linkHandler";
 import truncate from "lodash/truncate";
-import { EntityRow } from "backend/components/list/EntitiesList";
+import EntityRow from "./Row";
 import EntityThumbnail from "global/components/entity-thumbnail";
 
-export default class FeatureListItem extends PureComponent {
-  static displayName = "Feature.ListItem";
+export default class EventRow extends PureComponent {
+  static displayName = "EntitiesList.Entity.FeatureRow";
 
   static propTypes = {
     entity: PropTypes.object
@@ -38,7 +38,7 @@ export default class FeatureListItem extends PureComponent {
   }
 
   get url() {
-    lh.link("backendRecordsFeature", this.id);
+    return lh.link("backendRecordsFeature", this.id);
   }
 
   get name() {

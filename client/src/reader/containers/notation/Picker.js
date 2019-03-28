@@ -1,13 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import List from "backend/components/list";
-import Notation from "reader/components/notation";
 import Utility from "frontend/components/utility";
 import { projectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { connect } from "react-redux";
 import debounce from "lodash/debounce";
+import EntitiesList, {
+  ResourceRow,
+  ResourceCollectionRow
+} from "backend/components/list/EntitiesList";
 
 const { request } = entityStoreActions;
 const perPage = 5;
@@ -118,8 +120,7 @@ export class NotationPickerContainer extends PureComponent {
     let out = {
       entities: props.resources,
       singularUnit: "resource",
-      pluralUnit: "resources",
-      entityComponent: Notation.Resource.PickerListItem,
+      entityComponent: ResourceRow,
       pagination: props.resourcesMeta.pagination
     };
 
@@ -127,8 +128,7 @@ export class NotationPickerContainer extends PureComponent {
       out = {
         entities: props.resourceCollections,
         singularUnit: "resource collection",
-        pluralUnit: "resource collections",
-        entityComponent: Notation.ResourceCollection.PickerListItem,
+        entityComponent: ResourceCollectionRow,
         pagination: props.resourceCollectionsMeta.pagination
       };
     }
@@ -141,7 +141,6 @@ export class NotationPickerContainer extends PureComponent {
     const {
       entities,
       singularUnit,
-      pluralUnit,
       entityComponent,
       pagination
     } = this.composeProps(this.state.context, this.props);
@@ -162,18 +161,17 @@ export class NotationPickerContainer extends PureComponent {
               iconClass: "manicon-file-box"
             }}
           />
-          <List.Searchable
-            entities={entities}
-            singularUnit={singularUnit}
-            pluralUnit={pluralUnit}
-            pagination={pagination}
-            paginationClickHandler={this.pageChangeHandlerCreator}
-            paginationClass="secondary"
+          <EntitiesList
             entityComponent={entityComponent}
+            entities={entities}
+            unit={singularUnit}
+            pagination={pagination}
+            callbacks={{
+              onPageClick: this.pageChangeHandlerCreator
+            }}
             filterChangeHandler={this.filterChangeHandler}
-            paginationPadding={2}
             entityComponentProps={{
-              selectionHandler: this.props.selectionHandler
+              onRowClick: this.props.selectionHandler
             }}
           />
         </div>

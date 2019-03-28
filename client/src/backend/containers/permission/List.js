@@ -1,15 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Permission from "backend/components/permission";
-import List from "backend/components/list";
 import connectAndFetch from "utils/connectAndFetch";
 import { permissionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import entityUtils from "utils/entityUtils";
-
-import Authorize from "hoc/authorize";
+import EntitiesList, {
+  Button,
+  PermissionRow
+} from "backend/components/list/EntitiesList";
 
 const { select } = entityUtils;
 const { request } = entityStoreActions;
@@ -48,29 +47,27 @@ export class PermissionContainer extends PureComponent {
 
     return (
       <section>
-        <nav className="vertical-list-primary flush">
-          {permissions ? (
-            <List.SimpleList
-              entities={permissions}
-              entityComponent={Permission.ListItem}
-              entityComponentProps={{
-                active,
-                linkName: listUrl
-              }}
-            />
-          ) : null}
-          <Authorize entity={entity} ability="createPermissions">
-            <div className="buttons-icon-horizontal">
-              <Link
-                to={lh.link(newUrl, entity.id)}
-                className="button-icon-secondary"
-              >
-                <i className="manicon manicon-plus" aria-hidden="true" />
-                <span>Add New Permissions</span>
-              </Link>
-            </div>
-          </Authorize>
-        </nav>
+        {permissions && (
+          <EntitiesList
+            title="Mange Permissions"
+            titleStyle="section"
+            entities={permissions}
+            entityComponent={PermissionRow}
+            entityComponentProps={{
+              active,
+              linkName: listUrl
+            }}
+            buttons={[
+              <Button
+                path={lh.link(newUrl, entity.id)}
+                text="Add New Permissions"
+                type="add"
+                authorizedTo="createPermissions"
+                authorizedFor={entity}
+              />
+            ]}
+          />
+        )}
       </section>
     );
   }

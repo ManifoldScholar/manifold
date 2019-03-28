@@ -72,7 +72,7 @@
   }
 
   &__utility {
-
+    align-self: center;
   }
 
   &__figure {
@@ -81,6 +81,10 @@
     margin-top: 4px;
     margin-right: 18px;
     color: $neutral45;
+
+    button {
+      @include buttonUnstyled;
+    }
 
     &--valign-center {
       align-self: center;
@@ -92,6 +96,7 @@
 
       img {
         width: 50px;
+        height: auto;
       }
 
       &.entity-row__figure--shape-round {

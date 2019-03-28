@@ -1,12 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import ResourceCollection from "backend/components/resource-collection";
-import List from "backend/components/list";
 import { projectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
+import EntitiesList, {
+  Button,
+  Search,
+  ResourceCollectionRow
+} from "backend/components/list/EntitiesList";
 
 const { request } = entityStoreActions;
 const perPage = 5;
@@ -77,31 +80,33 @@ export class ProjectResourceCollectionsListContainer extends PureComponent {
     const project = this.props.project;
 
     return (
-      <div className="project-resource-list">
-        <header className="section-heading-secondary">
-          <h3>
-            {"Resource Collections"}{" "}
-            <i className="manicon manicon-file-box" aria-hidden="true" />
-          </h3>
-        </header>
-        <List.Searchable
-          newButton={{
-            path: lh.link("backendProjectResourceCollectionsNew", project.id),
-            text: "Add a New Resource Collection",
-            authorizedFor: project,
-            authorizedTo: "createResourceCollections"
-          }}
-          entities={this.props.resourceCollections}
-          singularUnit="resource collection"
-          pluralUnit="resource collections"
-          pagination={this.props.resourceCollectionsMeta.pagination}
-          paginationClickHandler={this.pageChangeHandlerCreator}
-          paginationClass="secondary"
-          entityComponent={ResourceCollection.ListItem}
-          filterChangeHandler={this.filterChangeHandler}
-          sortOptions={[{ label: "title", value: "title" }]}
-        />
-      </div>
+      <EntitiesList
+        entityComponent={ResourceCollectionRow}
+        title={"Resource Collections"}
+        titleIcon="resourceCollection64"
+        entities={this.props.resourceCollections}
+        unit="resource collection"
+        pagination={this.props.resourceCollectionsMeta.pagination}
+        showCount
+        callbacks={{
+          onPageClick: this.pageChangeHandlerCreator
+        }}
+        search={
+          <Search
+            sortOptions={[{ label: "title", value: "title" }]}
+            onChange={this.filterChangeHandler}
+          />
+        }
+        buttons={[
+          <Button
+            path={lh.link("backendProjectResourceCollectionsNew", project.id)}
+            text="Add a New Resource Collection"
+            authorizedFor={project}
+            authorizedTo="createResourceCollections"
+            type="add"
+          />
+        ]}
+      />
     );
   }
 }

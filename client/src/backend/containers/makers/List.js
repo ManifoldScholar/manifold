@@ -6,11 +6,13 @@ import { select, meta } from "utils/entityUtils";
 import { makersAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import get from "lodash/get";
-import Layout from "backend/components/layout";
-import List from "backend/components/list";
-import Maker from "backend/components/maker";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
+import EntitiesList, {
+  Search,
+  Button,
+  MakerRow
+} from "backend/components/list/EntitiesList";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -95,34 +97,41 @@ export class MakersListContainer extends PureComponent {
     };
 
     return (
-      <div>
+      <React.Fragment>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
-        <Layout.ViewHeader>{"Manage Makers"}</Layout.ViewHeader>
-        <Layout.BackendPanel>
-          {makers ? (
-            <List.Searchable
-              newButton={{
-                path: lh.link("backendRecordsMakersNew"),
-                text: "Add a New Maker",
-                authorizedFor: "maker"
-              }}
-              entities={makers}
-              singularUnit="maker"
-              pluralUnit="makers"
-              pagination={makersMeta.pagination}
-              paginationClickHandler={this.pageChangeHandlerCreator}
-              paginationClass="secondary"
-              entityComponent={Maker.ListItem}
-              entityComponentProps={{ active }}
-              filterChangeHandler={this.filterChangeHandler}
-              sortOptions={[
-                { label: "first name", value: "first_name" },
-                { label: "last name", value: "last_name" }
-              ]}
-            />
-          ) : null}
-        </Layout.BackendPanel>
-      </div>
+        {makers && (
+          <EntitiesList
+            title="Manage Makers"
+            titleStyle="bar"
+            buttons={[
+              <Button
+                path={lh.link("backendRecordsMakersNew")}
+                text="Add a New Maker"
+                type="add"
+                authorizedFor="maker"
+              />
+            ]}
+            search={
+              <Search
+                onChange={this.filterChangeHandler}
+                sortOptions={[
+                  { label: "first name", value: "first_name" },
+                  { label: "last name", value: "last_name" }
+                ]}
+              />
+            }
+            entities={makers}
+            entityComponent={MakerRow}
+            entityComponentProps={{ active }}
+            pagination={makersMeta.pagination}
+            showCount
+            unit="maker"
+            callbacks={{
+              onPageClick: this.pageChangeHandlerCreator
+            }}
+          />
+        )}
+      </React.Fragment>
     );
   }
 }

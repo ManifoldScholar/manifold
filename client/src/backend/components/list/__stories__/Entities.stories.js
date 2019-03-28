@@ -1,22 +1,22 @@
 import React from "react";
 import { build, storiesOf } from "helpers/storybook/exports";
+import EntityRow from "backend/components/list/EntitiesList/Entity/Row";
 import EntitiesList, {
   Button,
-  Search
+  Search,
+  EventRow,
+  FeatureRow,
+  LogRow,
+  MakerRow,
+  PageRow,
+  PermissionRow,
+  ProjectRow,
+  ResourceRow,
+  ResourceCollectionRow,
+  SubjectRow,
+  TwitterQueryRow,
+  UserRow
 } from "backend/components/list/EntitiesList";
-import UserListItem from "backend/components/user/EntityListItem";
-import MakerListItem from "backend/components/maker/EntityListItem";
-import FeatureListItem from "backend/components/feature/EntityListItem";
-import ProjectListItem from "backend/components/project/EntityListItem";
-import TwitterQueryListItem from "backend/components/twitter-query/EntityListItem";
-import EventListItem from "backend/components/event/EntityListItem";
-import PageListItem from "backend/components/page/EntityListItem";
-import SubjectListItem from "backend/components/subject/EntityListItem";
-import PermissionListItem from "backend/components/permission/EntityListItem";
-import ResourceCollectionListItem from "backend/components/resource-collection/EntityListItem";
-import ResourceListItem from "backend/components/resource/EntityListItem";
-import LogListItem from "backend/components/log/EntityListItem";
-import { EntityRow } from "backend/components/list/EntitiesList";
 
 const users = build.arrayOf.users(8);
 const makers = build.arrayOf.makers(8);
@@ -123,7 +123,7 @@ storiesOf("Backend/List/Entities", module)
       <EntitiesList
         title={"A List of Users"}
         entities={users}
-        entityComponent={UserListItem}
+        entityComponent={UserRow}
         showCount
         unit="resource"
         pagination={pagination}
@@ -154,7 +154,7 @@ storiesOf("Backend/List/Entities", module)
         pagination={pagination}
         callbacks={callbacks}
         buttons={[<Button path="/foo" text="Add New Query" type="add" />]}
-        entityComponent={TwitterQueryListItem}
+        entityComponent={TwitterQueryRow}
         search={
           <Search
             filters={threeFilters}
@@ -172,7 +172,7 @@ storiesOf("Backend/List/Entities", module)
         title={"Project Subjects"}
         titleStyle="bar"
         entities={subjects}
-        entityComponent={SubjectListItem}
+        entityComponent={SubjectRow}
         pagination={pagination}
         callbacks={callbacks}
         search={
@@ -189,7 +189,7 @@ storiesOf("Backend/List/Entities", module)
         title={"Resource Collections"}
         titleIcon="resourceCollection64"
         entities={resourceCollections}
-        entityComponent={ResourceCollectionListItem}
+        entityComponent={ResourceCollectionRow}
       />
     );
   })
@@ -204,7 +204,7 @@ storiesOf("Backend/List/Entities", module)
         callbacks={callbacks}
         showCount
         unit="resource"
-        entityComponent={ResourceListItem}
+        entityComponent={ResourceRow}
         buttons={[
           <Button path="/foo" text="Add New Resource" type="add" />,
           <Button path="/foo" text="Bulk Import Resources" icon="resource24" />
@@ -219,7 +219,7 @@ storiesOf("Backend/List/Entities", module)
         title={"Projects"}
         titleIcon="BEProject64"
         entities={projects}
-        entityComponent={ProjectListItem}
+        entityComponent={ProjectRow}
         pagination={pagination}
         showCount
         showCountInTitle
@@ -251,7 +251,7 @@ storiesOf("Backend/List/Entities", module)
         titleStyle="bar"
         listStyle="grid"
         entities={projects}
-        entityComponent={ProjectListItem}
+        entityComponent={ProjectRow}
         pagination={pagination}
         paginationStyle="compact"
         showCount
@@ -271,7 +271,7 @@ storiesOf("Backend/List/Entities", module)
       <EntitiesList
         title={"Permissions"}
         entities={permissions}
-        entityComponent={PermissionListItem}
+        entityComponent={PermissionRow}
         entityComponentProps={{
           linkName: "backendProjectPermission"
         }}
@@ -285,7 +285,7 @@ storiesOf("Backend/List/Entities", module)
         title={"Pages"}
         titleIcon="resourceDocument64"
         entities={pages}
-        entityComponent={PageListItem}
+        entityComponent={PageRow}
         search={
           <Search
             filters={threeFilters}
@@ -303,7 +303,7 @@ storiesOf("Backend/List/Entities", module)
         title={"Makers"}
         titleIcon="avatar64"
         entities={makers}
-        entityComponent={MakerListItem}
+        entityComponent={MakerRow}
       />
     );
   })
@@ -314,7 +314,7 @@ storiesOf("Backend/List/Entities", module)
         title={"Log"}
         titleIcon="BEActivity64"
         entities={versions}
-        entityComponent={LogListItem}
+        entityComponent={LogRow}
       />
     );
   })
@@ -325,7 +325,7 @@ storiesOf("Backend/List/Entities", module)
         title={"Features"}
         titleStyle="bar"
         entities={features}
-        entityComponent={FeatureListItem}
+        entityComponent={FeatureRow}
       />
     );
   })
@@ -337,7 +337,7 @@ storiesOf("Backend/List/Entities", module)
         titleIcon={"BEActivity64"}
         listStyle="tiles"
         entities={events}
-        entityComponent={EventListItem}
+        entityComponent={EventRow}
       />
     );
   })

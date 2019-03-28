@@ -3,13 +3,16 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import Layout from "backend/components/layout";
-import Project from "backend/components/project";
-import List from "backend/components/list";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
 import Authorization from "helpers/authorization";
+import EntitiesList, {
+  Button,
+  Search,
+  ProjectRow
+} from "backend/components/list/EntitiesList";
 
 const { request, flush } = entityStoreActions;
 
@@ -110,46 +113,50 @@ export class ProjectsListContainer extends PureComponent {
     const label = totalCount > 1 || totalCount === 0 ? " Projects" : " Project";
 
     return (
-      <div>
-        <Layout.ViewHeader icon="stack">
-          <span className="list-total">{totalCount}</span>
-          {label}
-        </Layout.ViewHeader>
-        <Layout.BackendPanel>
-          {this.props.projects && this.props.projectsMeta ? (
-            <List.Searchable
-              newButton={{
-                path: lh.link("backendProjectsNew"),
-                text: "Add a New Project",
-                authorizedFor: "project"
-              }}
-              columnarNav
-              showEntityCount={false}
-              initialFilter={this.state.filter}
-              defaultFilter={{ order: "sort_title ASC" }}
-              listClassName="project-list grid"
-              entities={this.props.projects}
-              entityComponent={Project.ListItem}
-              singularUnit="project"
-              pluralUnit="projects"
-              pagination={this.props.projectsMeta.pagination}
-              paginationClickHandler={this.updateHandlerCreator}
-              paginationClass="secondary"
-              filterChangeHandler={this.filterChangeHandler}
-              filterOptions={{
-                draft: {
-                  options: [true, false],
-                  labels: {
-                    true: "Show Draft Projects",
-                    false: "Hide Draft Projects"
+      <Layout.BackendPanel>
+        {this.props.projects && this.props.projectsMeta ? (
+          <EntitiesList
+            entityComponent={ProjectRow}
+            listStyle="grid"
+            title={label}
+            titleStyle="bar"
+            titleIcon="BEProject64"
+            entities={this.props.projects}
+            unit="project"
+            pagination={this.props.projectsMeta.pagination}
+            showCountInTitle
+            showCount
+            callbacks={{
+              onPageClick: this.updateHandlerCreator
+            }}
+            search={
+              <Search
+                sortOptions={[{ label: "title", value: "sort_title" }]}
+                onChange={this.filterChangeHandler}
+                defaultFilter={{ order: "sort_title ASC" }}
+                filters={[
+                  {
+                    label: "Draft",
+                    key: "draft",
+                    options: [
+                      { label: "Show Draft Projects", value: true },
+                      { label: "Hide Draft Projects", value: false }
+                    ]
                   }
-                }
-              }}
-              sortOptions={[{ label: "title", value: "sort_title" }]}
-            />
-          ) : null}
-        </Layout.BackendPanel>
-      </div>
+                ]}
+              />
+            }
+            buttons={[
+              <Button
+                path={lh.link("backendProjectsNew")}
+                text="Add a New Project"
+                authorizedFor="project"
+                type="add"
+              />
+            ]}
+          />
+        ) : null}
+      </Layout.BackendPanel>
     );
   }
 }

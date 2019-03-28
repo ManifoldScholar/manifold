@@ -1,13 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import List from "backend/components/list";
-import Page from "backend/components/page";
-import Layout from "backend/components/layout";
 import lh from "helpers/linkHandler";
 import { pagesAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";
 import { select } from "utils/entityUtils";
+import EntitiesList, {
+  Button,
+  PageRow
+} from "backend/components/list/EntitiesList";
 
 const { request } = entityStoreActions;
 
@@ -32,25 +33,22 @@ class PagesDashboardContainer extends PureComponent {
 
   render() {
     const { pages } = this.props;
+    if (!pages) return null;
     return (
-      <div>
-        <Layout.ViewHeader>Manage Pages</Layout.ViewHeader>
-        <Layout.BackendPanel>
-          {pages ? (
-            <List.Searchable
-              newButton={{
-                path: lh.link("backendRecordsPageNew"),
-                text: "Create a new page",
-                authorizedFor: "page"
-              }}
-              entities={pages}
-              entityComponent={Page.ListItem}
-              singularUnit="page"
-              pluralUnit="pages"
-            />
-          ) : null}
-        </Layout.BackendPanel>
-      </div>
+      <EntitiesList
+        entityComponent={PageRow}
+        title="Manage Pages"
+        titleStyle="bar"
+        entities={pages}
+        buttons={[
+          <Button
+            path={lh.link("backendRecordsPageNew")}
+            type="add"
+            text="Create a new page"
+            authorizedFor="page"
+          />
+        ]}
+      />
     );
   }
 }

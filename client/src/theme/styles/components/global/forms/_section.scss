@@ -34,7 +34,6 @@
       justify-content: space-between;
     }
 
-    > .vertical-list-primary,
     > .buttons-icon-horizontal {
       @include respond($break90) {
         flex-basis: 100%;

@@ -1,12 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Resource from "backend/components/resource";
-import List from "backend/components/list";
 import { projectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
+import EntitiesList, {
+  Button,
+  Search,
+  ResourceRow
+} from "backend/components/list/EntitiesList";
 
 const { request } = entityStoreActions;
 const perPage = 5;
@@ -36,6 +39,16 @@ export class ProjectResourcesListContainer extends PureComponent {
 
   componentDidMount() {
     this.fetchResources(1);
+  }
+
+  get tagFilterOptions() {
+    const tags = this.props.project.attributes.resourceTags || [];
+    return tags.map(t => ({ label: t, value: t }));
+  }
+
+  get kindFilterOptions() {
+    const tags = this.props.project.attributes.resourceKinds || [];
+    return tags.map(k => ({ label: k, value: k }));
   }
 
   fetchResources(page) {
@@ -73,43 +86,52 @@ export class ProjectResourcesListContainer extends PureComponent {
     const project = this.props.project;
 
     return (
-      <div className="project-resource-list">
-        <header className="section-heading-secondary">
-          <h3>
-            {"Resources"}{" "}
-            <i className="manicon manicon-cube-shine" aria-hidden="true" />
-          </h3>
-        </header>
-        <List.Searchable
-          newButton={{
-            path: lh.link("backendProjectResourcesNew", project.id),
-            text: "Add a New Resource",
-            authorizedFor: project,
-            authorizedTo: "createResources"
-          }}
-          secondaryButton={{
-            icon: "manicon-cube-multiple",
-            type: "narrow",
-            path: lh.link("backendResourceImport", project.id),
-            text: "Bulk Add Resources",
-            authorizedFor: project,
-            authorizedTo: "createResources"
-          }}
-          entities={this.props.resources}
-          singularUnit="resource"
-          pluralUnit="resources"
-          pagination={this.props.resourcesMeta.pagination}
-          paginationClickHandler={this.pageChangeHandlerCreator}
-          paginationClass="secondary"
-          entityComponent={Resource.ListItem}
-          filterChangeHandler={this.filterChangeHandler}
-          filterOptions={{
-            tag: this.props.project.attributes.resourceTags,
-            kind: this.props.project.attributes.resourceKinds
-          }}
-          sortOptions={[{ label: "title", value: "sort_title" }]}
-        />
-      </div>
+      <EntitiesList
+        entityComponent={ResourceRow}
+        title={"Resources"}
+        titleIcon="resourceCollection64"
+        entities={this.props.resources}
+        unit="resource"
+        pagination={this.props.resourcesMeta.pagination}
+        showCount
+        callbacks={{
+          onPageClick: this.pageChangeHandlerCreator
+        }}
+        search={
+          <Search
+            sortOptions={[{ label: "title", value: "sort_title" }]}
+            onChange={this.filterChangeHandler}
+            filters={[
+              {
+                label: "Tag",
+                key: "tag",
+                options: this.tagFilterOptions
+              },
+              {
+                label: "Kind",
+                key: "kind",
+                options: this.kindFilterOptions
+              }
+            ]}
+          />
+        }
+        buttons={[
+          <Button
+            path={lh.link("backendProjectResourcesNew", project.id)}
+            text="Add a New Resource"
+            authorizedFor={project}
+            authorizedTo="createResources"
+            type="add"
+          />,
+          <Button
+            path={lh.link("backendResourceImport", project.id)}
+            text="Bulk Add Resources"
+            authorizedFor={project}
+            authorizedTo="createResources"
+            icon="BEResourcesBoxes64"
+          />
+        ]}
+      />
     );
   }
 }
