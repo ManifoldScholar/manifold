@@ -19,46 +19,47 @@ export class ListSearchable extends PureComponent {
   static displayName = "List.Searchable";
 
   static propTypes = {
-    entities: PropTypes.array,
-    listClassName: PropTypes.string,
-    columnarNav: PropTypes.bool,
-    showEntityCount: PropTypes.bool,
-    singularUnit: PropTypes.string,
-    pluralUnit: PropTypes.string,
-    pagination: PropTypes.object,
-    paginationClass: PropTypes.string,
-    paginationClickHandler: PropTypes.func,
-    entityComponentProps: PropTypes.object,
-    entityComponent: PropTypes.func.isRequired,
-    paginationPadding: PropTypes.number,
+    entities: PropTypes.array, // check
+    listClassName: PropTypes.string, // not necessary
+    columnarNav: PropTypes.bool, // replace with new buttons
+    showEntityCount: PropTypes.bool, // done
+    singularUnit: PropTypes.string, // done
+    pluralUnit: PropTypes.string, // done
+    pagination: PropTypes.object, // done
+    paginationClass: PropTypes.string, // stupid
+    paginationClickHandler: PropTypes.func, // done
+    entityComponentProps: PropTypes.object, // done
+    entityComponent: PropTypes.func.isRequired, // done
+    paginationPadding: PropTypes.number, // stupid
     newButton: PropTypes.shape({
-      text: PropTypes.string,
-      path: PropTypes.string,
-      type: PropTypes.string,
+      // done
+      text: PropTypes.string, // done
+      path: PropTypes.string, // done
+      type: PropTypes.string, // done
       authorizedFor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
       authorizedTo: PropTypes.string
     }),
     secondaryButton: PropTypes.shape({
-      icon: PropTypes.string,
-      path: PropTypes.string,
-      type: PropTypes.string,
-      text: PropTypes.string,
+      icon: PropTypes.string, // done
+      path: PropTypes.string, // done
+      type: PropTypes.string, // done
+      text: PropTypes.string, // done
       authorizedFor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
       authorizedTo: PropTypes.string
     }),
     authentication: PropTypes.object,
-    filterOptions: PropTypes.object,
-    sortOptions: PropTypes.array,
+    filterOptions: PropTypes.object, // done
+    sortOptions: PropTypes.array, // done
     destroyHandler: PropTypes.func,
-    filterChangeHandler: PropTypes.func,
+    filterChangeHandler: PropTypes.func, // done
     currentUser: PropTypes.object,
     initialFilter: PropTypes.object, // Initial filter is to set filter state from an existing state
     defaultFilter: PropTypes.object, // Default filter is what filter is set to when resetSearch() is called
-    searchId: PropTypes.string,
-    filterId: PropTypes.string,
-    sortId: PropTypes.string,
+    searchId: PropTypes.string, // stupid
+    filterId: PropTypes.string, // stupid
+    sortId: PropTypes.string, // stupid
     emptyMessage: PropTypes.func,
-    compactPagination: PropTypes.bool
+    compactPagination: PropTypes.bool // done
   };
 
   static defaultProps = {

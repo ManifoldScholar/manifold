@@ -1,0 +1,275 @@
+.entity-row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid $neutral80;
+  transition: background-color $duration ease-out,
+    box-shadow $duration ease-out;
+
+  &--in-grid {
+    @include respond($break65) {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  &__text {
+    @include templateCopy;
+    flex-grow: 1;
+    align-self: flex-start;
+    font-size: 17px;
+    font-weight: $regular;
+    color: $neutral50;
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    a.entity-row__link {
+      &--inverted {
+        text-decoration: underline;
+
+        &:hover {
+          color: $accentPrimary;
+        }
+      }
+    }
+
+    &--valign-center {
+      position: relative;
+      top: -2px;
+      align-self: center;
+    }
+  }
+
+
+
+  &__labels {
+    display: inline-block;
+    margin: 0;
+  }
+
+  &__label {
+    @include blockLabelRound;
+    position: relative;
+    display: inline-block;
+    padding: 0.333em 5px;
+    margin: -3px 0 0 0;
+    font-size: 9px;
+    line-height: 1.2em;
+    color: $neutral85;
+    vertical-align: middle;
+    background-color: $neutral30;
+
+    + .entity-row__label {
+      margin-left: 14px;
+    }
+  }
+
+  &__utility {
+
+  }
+
+  &__figure {
+    position: relative;
+    align-self: flex-start;
+    margin-top: 4px;
+    margin-right: 18px;
+    color: $neutral45;
+
+    &--valign-center {
+      align-self: center;
+      margin-top: 0;
+    }
+
+    &--size-normal {
+      width: 50px;
+
+      img {
+        width: 50px;
+      }
+
+      &.entity-row__figure--shape-round {
+        height: 50px;
+
+        img {
+          height: 50px;
+        }
+      }
+
+      svg {
+        position: relative;
+        top: -4px;
+        left: -4px;
+        width: 55px;
+        height: 55px;
+
+        &.project-thumb-placeholder {
+          top: 0;
+          left: 0;
+          width: 50px;
+          height: 50px;
+        }
+
+        &.svg-icon--resourceImage64 {
+          top: -10px;
+        }
+
+        &.svg-icon--resourceAudio64 {
+          top: -7px;
+        }
+
+        &.svg-icon--resourceCollection64 {
+          top: -10px;
+          left: -4px;
+          width: 58px;
+          height: 58px;
+        }
+      }
+    }
+
+    &--size-small {
+      width: 25px;
+      margin-right: 14px;
+
+      img {
+        width: 25px;
+      }
+
+      &.entity-row__figure--shape-round {
+        height: 25px;
+
+        img {
+          height: 25px;
+        }
+      }
+
+      svg {
+        position: relative;
+        top: -3px;
+        left: -3px;
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    &--shape-round {
+      img, svg {
+        border-radius: 50%;
+      }
+    }
+
+    &--in-grid {
+      @include respond($break65) {
+        margin-bottom: 14px;
+
+        img, svg {
+          left: 0;
+          width: auto;
+          height: 75px;
+
+          &.project-thumb-placeholder {
+            top: 0;
+            left: 0;
+            width: 75px;
+            height: 75px;
+          }
+
+        }
+      }
+    }
+
+    .entity-row__figure--size-normal {
+      width: auto;
+    }
+
+  }
+
+  &__title {
+    @include templateHead;
+    display: inline-block;
+    align-items: center;
+    margin: -1px 14px 0 0;
+    font-size: 18px;
+    font-weight: $medium;
+    line-height: 1.4em;
+    color: $neutral20;
+
+    button {
+      @include buttonUnstyled;
+    }
+
+    @include respond($break65) {
+      &--in-grid {
+        font-size: 16px;
+      }
+    }
+
+  }
+
+  &__title-inner {
+    display: inline-block;
+    margin-right: 14px;
+
+    span {
+      display: inline; // needed for text-decoration: underline to work.
+    }
+  }
+
+  &__count {
+    @include templateHead;
+    margin: 0;
+    font-size: 14px;
+    font-weight: $semibold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: $regular;
+
+    @include respond($break65) {
+      &--in-grid {
+        font-size: 16px;
+      }
+    }
+
+  }
+
+  &__meta {
+    margin: 0;
+    font-size: 17px;
+    font-weight: $regular;
+
+    @include respond($break65) {
+      &--in-grid {
+        font-size: 16px;
+      }
+    }
+
+
+    em {
+      font-style: normal;
+      color: $neutral30;
+    }
+  }
+
+  .entity-row__title + .entity-row__subtitle,
+  .entity-row__title + .entity-row__meta,
+  .entity-row__title + .entity-row__count,
+  .entity-row__subtitle + .entity-row__count,
+  .entity-row__subtitle + .entity-row__meta,
+  .entity-row__count + .entity-row__meta {
+    margin-top: 7px;
+  }
+
+
+}

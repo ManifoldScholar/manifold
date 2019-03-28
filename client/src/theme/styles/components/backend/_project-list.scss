@@ -1,4 +1,8 @@
-// Global .project-grid class, scoped for backend
+// TODO: this is depreacted and should be removed when all searchable lists are removed
+// and we've replaced the FE and BE grid with the component.
+
+//// Global .project-grid class, scoped for backend.
+
 .project-list {
   .backend & {
     li {

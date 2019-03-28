@@ -1,7 +1,6 @@
 // Global backend header design
 .backend-header {
   @include panelRounded;
-  max-width: $containerWidthFull - 100;
 
   .breadcrumb-primary {
     border-radius: 8px;
@@ -25,8 +24,21 @@
       text-transform: none;
       letter-spacing: 0;
 
+      em {
+        font-style: normal;
+        color: $accentPrimary;
+      }
+
       @include respond($break60) {
         font-size: 30px;
+      }
+
+      .manicon-svg {
+        width: 34px;
+        height: 34px;
+        margin-top: -3px;
+        margin-right: 15px;
+        color: $accentPrimary;
       }
 
       .manicon {
@@ -56,4 +68,33 @@
       display: none;
     }
   }
+
+  &.section-heading-tertiary {
+    position: relative;
+
+    padding: 0.75em 1.5em 0.875em;
+    background-color: $neutral95;
+    border-radius: 8px;
+
+    h1, h2, h3 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: $bold;
+      color: $accentPrimary;
+      letter-spacing: 2px;
+    }
+
+    .section-heading-tertiary__shim {
+      position: relative;
+      top: 2px;
+    }
+
+    .manicon-svg {
+      width: 24px;
+      height: 24px;
+      margin-right: 15px;
+      color: $accentPrimary;
+    }
+  }
+
 }

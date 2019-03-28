@@ -209,8 +209,8 @@
   background: transparent;
   border-radius: 0;
   outline: 0;
-  appearance: none;
-
+  -webkit-appearance: none; // stylelint-disable-line
+  appearance: none; // stylelint-disable-line
   &:focus:-moz-focusring {
     color: transparent;
     // Add color back to text

@@ -11,10 +11,12 @@ export default class EntityThumbnailProject extends PureComponent {
     placeholderAttributes: PropTypes.object.isRequired,
     width: PropTypes.string,
     height: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
+    mode: PropTypes.string
   };
 
   static defaultProps = {
+    mode: "responsive",
     variant: "small",
     attributes: {},
     placeholderAttributes: {}
@@ -37,7 +39,7 @@ export default class EntityThumbnailProject extends PureComponent {
   get icon() {
     return (
       <UniqueIcons.ProjectPlaceholderUnique
-        mode="responsive"
+        mode={this.props.mode}
         color={this.attr.avatarColor}
         {...this.props.placeholderAttributes}
       />

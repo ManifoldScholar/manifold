@@ -1,0 +1,79 @@
+// Element wrapping a <ul>
+.list-pagination {
+
+  @include utilityPrimary;
+  font-size: 14px;
+  font-weight: $semibold;
+  color: $neutral50;
+  text-align: center;
+
+  a, a:visited {
+    color: $neutral50;
+    text-decoration: none;
+    transition: color $duration $timing;
+  }
+
+  a:hover {
+    color: $accentPrimary;
+  }
+
+  ul {
+    @include listUnstyled;
+  }
+
+  li {
+    line-height: 16px;
+  }
+
+  .manicon-svg {
+    width: 24px;
+    height: 16px;
+    margin-top: -4px;
+  }
+
+  &__columns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__icon-label {
+    margin: 0 8px;
+  }
+
+  &__column {
+    flex: 0 0 auto;
+  }
+
+  &__column-middle {
+    flex: 1 1 auto;
+  }
+
+  &__pages {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__page {
+    a {
+      display: block;
+      padding: 0 8px;
+    }
+
+    &--disabled {
+      a, a:visited {
+        color: $neutral80;
+        pointer-events: none;
+      }
+    }
+
+    &--prev, &--next {
+      a {
+        padding: 0;
+      }
+    }
+
+  }
+
+}
