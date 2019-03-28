@@ -85,7 +85,7 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     padding-top: 30px;
-    margin: 0 -11px -11px;
+    margin: 0 -11px;
   }
 
   &__option {
@@ -94,7 +94,7 @@
     @include respond($break60) {
       flex: 0 0 33.333%;
     }
-    padding: 11px;
+    padding: 0 11px;
   }
 
 
