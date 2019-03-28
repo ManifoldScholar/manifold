@@ -1,13 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { entityStoreActions } from "actions";
-import List from "backend/components/list";
-import Log from "backend/components/log";
-import Utility from "global/components/utility";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
+import EntitiesList, { LogRow } from "backend/components/list/EntitiesList";
 
 import Authorize from "hoc/authorize";
 
@@ -65,10 +63,6 @@ export class LogContainer extends PureComponent {
     };
   };
 
-  renderEmptyList = () => {
-    return <div className="no-results">No log entries have been made yet.</div>;
-  };
-
   render() {
     const project = this.props.project;
 
@@ -80,23 +74,18 @@ export class LogContainer extends PureComponent {
         failureRedirect={lh.link("backendProject", project.id)}
       >
         {this.props.versions && (
-          <React.Fragment>
-            <nav className="flush results-list">
-              <List.SimpleList
-                entities={this.props.versions}
-                entityComponent={Log.ListItem}
-                emptyListComponent={this.renderEmptyList}
-                title="Project Changes"
-                icon="manicon-pulse-small"
-              />
-            </nav>
-            <Utility.Pagination
-              pagination={this.props.versionsMeta.pagination}
-              paginationPadding={3}
-              paginationClickHandler={this.pageChangeHandlerCreator}
-              paginationClass="secondary"
-            />
-          </React.Fragment>
+          <EntitiesList
+            title="Project Changes"
+            titleIcon="BEActivity64"
+            entities={this.props.versions}
+            entityComponent={LogRow}
+            pagination={this.props.versionsMeta.pagination}
+            showCount
+            unit={"change"}
+            callbacks={{
+              onPageClick: this.pageChangeHandlerCreator
+            }}
+          />
         )}
       </Authorize>
     );

@@ -6,11 +6,12 @@ import { select, meta } from "utils/entityUtils";
 import { subjectsAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import get from "lodash/get";
-import Layout from "backend/components/layout";
-import List from "backend/components/list";
-import Subject from "backend/components/subject";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
+import EntitiesList, {
+  Button,
+  SubjectRow
+} from "backend/components/list/EntitiesList";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -96,30 +97,32 @@ export class SettingsSubjectsListContainer extends PureComponent {
     };
 
     return (
-      <div>
-        <Layout.ViewHeader>Project Subjects</Layout.ViewHeader>
-        <Layout.BackendPanel>
-          {childRoutes(this.props.route, { drawer: true, drawerProps })}
-          {subjects ? (
-            <List.Searchable
-              newButton={{
-                path: lh.link("backendSettingsSubjectsNew"),
-                text: "Add a New Subject",
-                authorizedFor: "subject"
-              }}
-              entities={subjects}
-              singularUnit="subject"
-              pluralUnit="subjects"
-              pagination={subjectsMeta.pagination}
-              paginationClickHandler={this.subjectsPageChangeHandlerCreator}
-              paginationClass="secondary"
-              entityComponent={Subject.ListItem}
-              entityComponentProps={{ active }}
-              filterChangeHandler={this.filterChangeHandler}
-            />
-          ) : null}
-        </Layout.BackendPanel>
-      </div>
+      <React.Fragment>
+        {childRoutes(this.props.route, { drawer: true, drawerProps })}
+        {subjects && (
+          <EntitiesList
+            entityComponent={SubjectRow}
+            entityComponentProps={{ active }}
+            title={"Project Subjects"}
+            titleStyle="bar"
+            entities={subjects}
+            unit="subject"
+            pagination={subjectsMeta.pagination}
+            showCountInHeader
+            callbacks={{
+              onPageClick: this.subjectsPageChangeHandlerCreator
+            }}
+            buttons={[
+              <Button
+                path={lh.link("backendSettingsSubjectsNew")}
+                text="Add a New Subject"
+                authorizedFor="subject"
+                type="add"
+              />
+            ]}
+          />
+        )}
+      </React.Fragment>
     );
   }
 }

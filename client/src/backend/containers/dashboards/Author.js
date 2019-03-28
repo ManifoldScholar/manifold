@@ -2,8 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
-import Project from "backend/components/project";
-import List from "backend/components/list";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import debounce from "lodash/debounce";
@@ -84,18 +82,7 @@ export class DashboardsAuthorContainer extends PureComponent {
                   <i className="manicon manicon-stack" aria-hidden="true" />
                 </h3>
               </header>
-              {this.props.projects && this.props.projectsMeta ? (
-                <List.Searchable
-                  entities={this.props.projects}
-                  singularUnit="project"
-                  pluralUnit="projects"
-                  pagination={this.props.projectsMeta.pagination}
-                  paginationClickHandler={this.updateHandlerCreator}
-                  paginationClass="secondary"
-                  entityComponent={Project.ListItem}
-                  filterChangeHandler={this.filterChangeHandler}
-                />
-              ) : null}
+              {/* put a list of projects here at some point. */}
             </section>
           </div>
         </section>

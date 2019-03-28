@@ -26,7 +26,8 @@ export default class EntitiesListRow extends PureComponent {
       PropTypes.node
     ]),
     active: PropTypes.bool,
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid"])
+    listStyle: PropTypes.oneOf(["rows", "tiles", "grid"]),
+    utility: PropTypes.node
   };
 
   static defaultProps = {
@@ -85,6 +86,10 @@ export default class EntitiesListRow extends PureComponent {
 
   get hasMeta() {
     return !!this.meta;
+  }
+
+  get utility() {
+    return this.props.utility;
   }
 
   get verticalAlignment() {
@@ -221,7 +226,9 @@ export default class EntitiesListRow extends PureComponent {
           )}
           {this.hasMeta && <h6 className={this.metaClassNames}>{this.meta}</h6>}
         </div>
-        {this.utility && <div className="entity-row__utility">Utility</div>}
+        {this.utility && (
+          <div className="entity-row__utility">{this.utility}</div>
+        )}
       </li>
     );
   }

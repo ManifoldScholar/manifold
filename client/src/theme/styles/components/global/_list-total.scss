@@ -25,25 +25,6 @@
     }
   }
 
-  .vertical-list-primary & {
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    font-size: 15px;
-    color: $neutral70;
-
-    &:not(.list-total--empty) {
-      border-bottom: 1px solid $neutral80;
-    }
-
-    span {
-      color: $neutral30;
-    }
-
-    .drawer-primary & {
-      padding-bottom: 8px;
-    }
-  }
-
   .section-heading-secondary & {
     float: right;
     color: $neutral75;
@@ -60,13 +41,4 @@
     letter-spacing: 0;
   }
 
-  .resource-list .resource-count & {
-    + .meta-value {
-      padding-top: 5px;
-
-      @include respond($break60) {
-        padding-top: 0;
-      }
-    }
-  }
 }

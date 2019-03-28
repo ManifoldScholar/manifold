@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import List from "backend/components/list";
-import Resourceish from "frontend/components/resourceish";
-import FormattedDate from "global/components/FormattedDate";
 import { resourceCollectionsAPI, projectsAPI, requests } from "api";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import find from "lodash/find";
-import lh from "helpers/linkHandler";
-import classnames from "classnames";
+import EntitiesList, {
+  Search,
+  ResourceRow
+} from "backend/components/list/EntitiesList";
 
 const { request, flush } = entityStoreActions;
 const perPage = 5;
@@ -45,6 +43,20 @@ export class ResourceCollectionResourcesContainer extends Component {
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.beResources));
+  }
+
+  get project() {
+    return this.props.resourceCollection.relationships.project;
+  }
+
+  get tagFilterOptions() {
+    const tags = this.project.attributes.resourceTags || [];
+    return tags.map(t => ({ label: t, value: t }));
+  }
+
+  get kindFilterOptions() {
+    const tags = this.project.attributes.resourceKinds || [];
+    return tags.map(k => ({ label: k, value: k }));
   }
 
   fetchResources(page) {
@@ -150,110 +162,59 @@ export class ResourceCollectionResourcesContainer extends Component {
     this.handleFilterChange(filter);
   };
 
-  buildResourceItem = props => {
-    const resource = props.entity;
-    if (!resource) return null;
-
-    const classes = classnames({
-      "boolean-primary": true,
-      checked: this.isInCollection(resource)
-    });
-
-    return (
-      <li>
-        <Link to={lh.link("backendResource", resource.id)}>
-          <div className="content">
-            <figure className="cover">
-              <Resourceish.Thumbnail
-                key={resource.id}
-                resourceish={resource}
-                showTitle={false}
-                showKind={false}
-                additionalClasses="icon-only"
-              />
-            </figure>
-            <div className="meta">
-              <span className="name">
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: resource.attributes.titleFormatted
-                  }}
-                />
-                <span className="subtitle">
-                  <FormattedDate
-                    format="MMMM DD, YYYY"
-                    date={resource.attributes.createdAt}
-                  />
-                </span>
-              </span>
-            </div>
-          </div>
-        </Link>
-        <div className="form-input utility">
-          <div className="toggle-indicator">
-            {/* Add .checked to .boolean-primary to change visual state */}
-            <div
-              onClick={event => this.handleSelect(event, resource)}
-              className={classes}
-              role="button"
-              tabIndex="0"
-            >
-              {this.isInCollection(resource) ? (
-                <span className="screen-reader-text">
-                  {`Remove Resource from Collection`}
-                </span>
-              ) : (
-                <span className="screen-reader-text">
-                  {`Add Resource to Collection`}
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      </li>
-    );
-  };
-
   render() {
     if (!this.props.resources) return null;
+
     const toggleLabel = this.state.filter.resourceCollection
       ? "Show all"
       : "Show collection only";
-    const project = this.props.resourceCollection.relationships.project;
-    const collectionFilter = {
-      options: [this.props.resourceCollection.id],
-      labels: {}
-    };
-    collectionFilter.labels[this.props.resourceCollection.id] = "In Collection";
 
     return (
-      <section className="collection-resources-list">
-        <div>
-          <header className="section-heading-secondary">
-            <h3>Resources</h3>
-          </header>
-          <button
-            onClick={this.toggleCollectionOnly}
-            className="button-bare-primary"
-          >
-            {toggleLabel}
-          </button>
-          <List.Searchable
-            entities={this.props.resources}
-            singularUnit="resource"
-            pluralUnit="resources"
-            pagination={this.props.resourcesMeta.pagination}
-            paginationClickHandler={this.pageChangeHandlerCreator}
-            paginationClass="secondary"
-            entityComponent={this.buildResourceItem}
-            filterChangeHandler={this.handleFilterChange}
-            filterOptions={{
-              tag: project.attributes.resourceTags,
-              kind: project.attributes.resourceKinds
-            }}
+      <EntitiesList
+        entityComponent={ResourceRow}
+        entityComponentProps={{
+          showSwitch: true,
+          onSwitchChange: this.handleSelect,
+          switchValue: this.isInCollection
+        }}
+        title={
+          <React.Fragment>
+            Resources
+            <button
+              style={{ marginLeft: 8 }}
+              onClick={this.toggleCollectionOnly}
+              className="button-bare-primary"
+            >
+              {toggleLabel}
+            </button>
+          </React.Fragment>
+        }
+        titleIcon="resourceCollection64"
+        entities={this.props.resources}
+        unit="resource"
+        pagination={this.props.resourcesMeta.pagination}
+        showCount
+        callbacks={{
+          onPageClick: this.pageChangeHandlerCreator
+        }}
+        search={
+          <Search
+            onChange={this.handleFilterChange}
+            filters={[
+              {
+                label: "Tag",
+                key: "tag",
+                options: this.tagFilterOptions
+              },
+              {
+                label: "Kind",
+                key: "kind",
+                options: this.kindFilterOptions
+              }
+            ]}
           />
-        </div>
-      </section>
+        }
+      />
     );
   }
 }

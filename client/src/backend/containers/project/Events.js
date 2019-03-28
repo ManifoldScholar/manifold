@@ -1,7 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import List from "backend/components/list";
-import Event from "backend/components/event";
 import withConfirmation from "hoc/with-confirmation";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -10,6 +8,10 @@ import { connect } from "react-redux";
 import get from "lodash/get";
 import config from "config";
 import lh from "helpers/linkHandler";
+import EntitiesList, {
+  Search,
+  EventRow
+} from "backend/components/list/EntitiesList";
 
 import Authorize from "hoc/authorize";
 
@@ -53,6 +55,16 @@ export class ProjectEventsContainer extends PureComponent {
 
   componentDidUpdate(prevProps) {
     this.maybeReload(prevProps.eventsMeta);
+  }
+
+  get eventTypeFilterOptions() {
+    const types = config.app.locale.event_types;
+    return Object.keys(types).map(key => {
+      return {
+        label: types[key],
+        value: key
+      };
+    });
   }
 
   maybeReload(prevEventMeta) {
@@ -117,29 +129,33 @@ export class ProjectEventsContainer extends PureComponent {
         failureRedirect={lh.link("backendProject", project.id)}
       >
         <section>
-          <header className="section-heading-secondary">
-            <h3>
-              {"Events"}{" "}
-              <i className="manicon manicon-bugle" aria-hidden="true" />
-            </h3>
-          </header>
-          <List.Searchable
-            entities={this.props.events}
-            singularUnit="event"
-            pluralUnit="events"
-            listClassName="vertical-list-primary tile-list"
-            pagination={this.props.eventsMeta.pagination}
-            paginationClickHandler={this.pageChangeHandlerCreator}
-            paginationClass="secondary"
-            entityComponent={Event.ListItem}
-            filterChangeHandler={this.filterChangeHandler}
-            destroyHandler={this.handleEventDestroy}
-            filterOptions={{
-              type: {
-                options: project.attributes.eventTypes,
-                labels: config.app.locale.event_types
-              }
+          <EntitiesList
+            entityComponent={EventRow}
+            entityComponentProps={{
+              destroyHandler: this.handleEventDestroy
             }}
+            entities={this.props.events}
+            listStyle="tiles"
+            showCount
+            title="Activity"
+            titleIcon="BENews64"
+            unit="event"
+            pagination={this.props.eventsMeta.pagination}
+            callbacks={{
+              onPageClick: this.pageChangeHandlerCreator
+            }}
+            search={
+              <Search
+                onChange={this.filterChangeHandler}
+                filters={[
+                  {
+                    label: "Type",
+                    key: "type",
+                    options: this.eventTypeFilterOptions
+                  }
+                ]}
+              />
+            }
           />
         </section>
       </Authorize>

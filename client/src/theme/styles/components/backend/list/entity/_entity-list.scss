@@ -43,6 +43,7 @@
   }
 
   &__button {
+    @include utilityPrimary;
     display: block;
     font-size: 14px;
     font-weight: $semibold;
@@ -50,7 +51,6 @@
     text-decoration: none;
     letter-spacing: 2px;
     transition: color $duration ease-out;
-    @include utilityPrimary;
 
     + .entity-list__button {
       margin-top: 24px;

@@ -40,7 +40,7 @@ export default class ListEntities extends PureComponent {
 
   static validateShowCounts = (props, propName) => {
     const value = props[propName];
-    if (!isBoolean(value)) return new Error(this.errors.showCountNotBool);
+    if (!isNil(value) && !isBoolean(value)) return;
     if (value && !props.pagination)
       return new Error(this.errors.showCountNoPagination);
   };
@@ -218,7 +218,11 @@ export default class ListEntities extends PureComponent {
             {this.hasSearch && this.search}
             {this.hasButtons && <ButtonSet buttons={this.buttons} />}
             {this.showCount && (
-              <Count unit={this.unit} pagination={this.pagination} />
+              <Count
+                showCount={this.showCount}
+                unit={this.unit}
+                pagination={this.pagination}
+              />
             )}
           </div>
           <ul className={listClassNames}>

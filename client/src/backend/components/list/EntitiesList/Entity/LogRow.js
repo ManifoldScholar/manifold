@@ -4,10 +4,10 @@ import FormattedDate from "global/components/FormattedDate";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import humps from "humps";
-import { EntityRow } from "backend/components/list/EntitiesList";
+import EntityRow from "./Row";
 
-export default class LogListItem extends PureComponent {
-  static displayName = "Log.ListItem";
+export default class EventRow extends PureComponent {
+  static displayName = "EntitiesList.Entity.LogRow";
 
   static propTypes = {
     entity: PropTypes.object

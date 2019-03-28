@@ -6,12 +6,14 @@ import { select, meta } from "utils/entityUtils";
 import { usersAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import get from "lodash/get";
-import Layout from "backend/components/layout";
-import List from "backend/components/list";
-import User from "backend/components/user";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import config from "config";
+import EntitiesList, {
+  Button,
+  Search,
+  UserRow
+} from "backend/components/list/EntitiesList";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -54,6 +56,17 @@ export class UsersListContainer extends PureComponent {
     this.maybeReload(prevProps.usersMeta);
   }
 
+  get roleOptions() {
+    const roles = Object.keys(config.app.locale.roles);
+    const labels = config.app.locale.roles;
+    return roles.map(role => {
+      return {
+        label: labels[role],
+        value: role
+      };
+    });
+  }
+
   maybeReload(prevUsersMeta) {
     const currentModified = get(this.props, "usersMeta.modified");
     const previousModified = get(prevUsersMeta, "modified");
@@ -90,9 +103,8 @@ export class UsersListContainer extends PureComponent {
 
   render() {
     const { match } = this.props;
-
     if (!this.props.users) return null;
-    const { users, usersMeta, currentUserId } = this.props;
+    const { users, usersMeta } = this.props;
     const active = match.params.id;
 
     const drawerProps = {
@@ -100,40 +112,46 @@ export class UsersListContainer extends PureComponent {
     };
 
     return (
-      <div>
+      <React.Fragment>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
-        <Layout.ViewHeader>{"Manage Users"}</Layout.ViewHeader>
-        <Layout.BackendPanel>
-          {users ? (
-            <List.Searchable
-              newButton={{
-                path: lh.link("backendRecordsUsersNew"),
-                text: "Add a New User",
-                authorizedFor: "user"
-              }}
-              entities={users}
-              singularUnit="user"
-              pluralUnit="users"
-              pagination={usersMeta.pagination}
-              paginationClickHandler={this.usersPageChangeHandlerCreator}
-              paginationClass="secondary"
-              entityComponent={User.ListItem}
-              entityComponentProps={{ currentUserId, active }}
-              filterChangeHandler={this.filterChangeHandler}
-              filterOptions={{
-                role: {
-                  options: Object.keys(config.app.locale.roles),
-                  labels: config.app.locale.roles
-                }
-              }}
+        <EntitiesList
+          entityComponent={UserRow}
+          entityComponentProps={{ active }}
+          title={"Manage Users"}
+          titleStyle="bar"
+          entities={users}
+          unit="user"
+          pagination={usersMeta.pagination}
+          showCount
+          callbacks={{
+            onPageClick: this.usersPageChangeHandlerCreator
+          }}
+          search={
+            <Search
               sortOptions={[
                 { label: "first name", value: "first_name" },
                 { label: "last name", value: "last_name" }
               ]}
+              onChange={this.filterChangeHandler}
+              filters={[
+                {
+                  label: "Role",
+                  key: "role",
+                  options: this.roleOptions
+                }
+              ]}
             />
-          ) : null}
-        </Layout.BackendPanel>
-      </div>
+          }
+          buttons={[
+            <Button
+              path={lh.link("backendRecordsUsersNew")}
+              text="Add a New User"
+              authorizedFor="user"
+              type="add"
+            />
+          ]}
+        />
+      </React.Fragment>
     );
   }
 }

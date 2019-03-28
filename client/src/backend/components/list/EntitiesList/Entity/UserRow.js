@@ -2,10 +2,10 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
-import { EntityRow } from "backend/components/list/EntitiesList";
+import EntityRow from "./Row";
 
-export default class UserListItem extends PureComponent {
-  static displayName = "User.ListItem";
+export default class SubjectRow extends PureComponent {
+  static displayName = "EntitiesList.Entity.UserRow";
 
   static propTypes = {
     entity: PropTypes.object,
