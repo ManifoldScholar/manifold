@@ -2,12 +2,15 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import ProjectCollection from "backend/components/project-collection";
-import List from "backend/components/list";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
+import EntitiesList, {
+  Search,
+  ProjectRow
+} from "backend/components/list/EntitiesList";
 
 const { request } = entityStoreActions;
 const perPage = 12;
@@ -110,13 +113,17 @@ export class ProjectCollectionManageProjects extends PureComponent {
     if (!entity) return null;
 
     return (
-      <li key={entity.id}>
-        <ProjectCollection.ProjectCover
-          removeHandler={this.handleProjectRemove}
-          addHandler={this.handleProjectAdd}
-          {...props}
-        />
-      </li>
+      <ProjectRow
+        entity={entity}
+        listStyle="grid"
+        figure={
+          <ProjectCollection.ProjectCover
+            removeHandler={this.handleProjectRemove}
+            addHandler={this.handleProjectAdd}
+            {...props}
+          />
+        }
+      />
     );
   };
 
@@ -133,10 +140,10 @@ export class ProjectCollectionManageProjects extends PureComponent {
     const total = projectsMeta.pagination.totalCount || 0;
 
     return (
-      <div className="list-total list-total--extra-bottom">
+      <p className="list-total">
         You have added <span>{added}</span> of <span>{total}</span> available
         projects
-      </div>
+      </p>
     );
   }
 
@@ -156,27 +163,30 @@ export class ProjectCollectionManageProjects extends PureComponent {
           </p>
         </Navigation.DrawerHeader>
 
-        {this.renderProjectCount(
-          this.props.projectCollection,
-          this.props.projectsMeta
-        )}
-        <List.Searchable
-          defaultFilter={{ order: "sort_title ASC" }}
-          listClassName="project-list grid"
+        <EntitiesList
           entities={this.props.projects}
+          listStyle="grid"
           entityComponent={this.projectCover}
           entityComponentProps={{
             projectCollection: this.props.projectCollection,
             addable: true
           }}
-          singularUnit="project"
-          pluralUnit="projects"
-          showEntityCount={false}
           pagination={this.props.projectsMeta.pagination}
-          filterChangeHandler={this.filterChangeHandler}
-          paginationClickHandler={this.updateHandlerCreator}
-          compactPagination
+          showCount={this.renderProjectCount(
+            this.props.projectCollection,
+            this.props.projectsMeta
+          )}
+          callbacks={{
+            onPageClick: this.updateHandlerCreator
+          }}
+          search={
+            <Search
+              defaultFilter={{ order: "sort_title ASC" }}
+              onChange={this.filterChangeHandler}
+            />
+          }
         />
+
         <div className="actions">
           <button className="button-icon-secondary" onClick={this.handleClose}>
             <span>Close</span>

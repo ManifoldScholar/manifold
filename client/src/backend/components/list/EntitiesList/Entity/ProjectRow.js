@@ -2,20 +2,26 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
-import { EntityRow } from "backend/components/list/EntitiesList";
+import EntityRow from "./Row";
 
-export default class ProjectListItem extends PureComponent {
-  static displayName = "Project.ListItem";
+export default class EventRow extends PureComponent {
+  static displayName = "EntitiesList.Entity.ProjectRow";
 
   static propTypes = {
     entity: PropTypes.object,
     placeholderMode: PropTypes.string,
-    listStyle: PropTypes.oneOf(["rows", "grid"])
+    listStyle: PropTypes.oneOf(["rows", "grid"]),
+    figure: PropTypes.node
   };
 
   static defaultProps = {
     placeholderMode: "responsive"
   };
+
+  get figure() {
+    if (this.props.figure) return this.props.figure;
+    return <EntityThumbnail.Project mode="small" entity={this.project} />;
+  }
 
   get project() {
     return this.props.entity;
@@ -29,13 +35,13 @@ export default class ProjectListItem extends PureComponent {
     return this.project.id;
   }
 
-  get makers() {
-    return this.project.relationships.makers;
+  get creators() {
+    return this.project.relationships.creators || [];
   }
 
-  get makerNames() {
-    return this.makers.map((maker, i) => {
-      let nameList = maker.attributes.fullName;
+  get creatorNames() {
+    return this.creators.map((creator, i) => {
+      let nameList = creator.attributes.fullName;
       if (i > 0) nameList = ", " + nameList;
       return nameList;
     });
@@ -67,9 +73,9 @@ export default class ProjectListItem extends PureComponent {
         }
         titlePlainText={this.attr.title}
         subtitle={this.attr.subtitle}
-        meta={this.makerNames}
+        meta={this.creatorNames}
         label={this.label}
-        figure={<EntityThumbnail.Project mode="small" entity={this.project} />}
+        figure={this.figure}
       />
     );
   }

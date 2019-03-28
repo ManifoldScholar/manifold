@@ -2,11 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Event from "frontend/components/event";
 
-export default class EventListItem extends PureComponent {
-  static displayName = "Event.ListItem";
+export default class EventRow extends PureComponent {
+  static displayName = "EntitiesList.Entity.EventRow";
 
   static propTypes = {
-    listStyle: PropTypes.oneOf(["rows", "grid"]),
+    listStyle: PropTypes.oneOf(["tiles"]),
     entity: PropTypes.object,
     destroyHandler: PropTypes.func
   };

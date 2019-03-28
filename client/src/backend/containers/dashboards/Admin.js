@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import DashboardComponents from "backend/components/dashboard";
-import Project from "backend/components/project";
-import List from "backend/components/list";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, statisticsAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import Authorization from "helpers/authorization";
-import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
+import EntitiesList, {
+  Search,
+  ProjectRow
+} from "backend/components/list/EntitiesList";
 
 import Authorize from "hoc/authorize";
 
@@ -161,51 +161,31 @@ export class DashboardsAdminContainer extends PureComponent {
           <div className="container">
             <section className="backend-dashboard">
               <div className="left">
-                <header className="section-heading-secondary">
-                  <h3>
-                    <Link to={lh.link("backendProjects")}>
-                      <i className="manicon manicon-stack" aria-hidden="true" />
-                      {"Projects"}
-                      {this.renderProjectCount()}
-                    </Link>
-                  </h3>
-                </header>
-                {this.props.projects && this.props.projectsMeta ? (
-                  <List.Searchable
-                    newButton={{
-                      text: "Add a New Project",
-                      path: lh.link("backendProjectsNew"),
-                      authorizedFor: "project",
-                      authorizedTo: "create"
-                    }}
-                    showEntityCount={false}
-                    initialFilter={this.state.filter}
-                    defaultFilter={{ order: "sort_title ASC" }}
-                    listClassName="project-list"
+                {this.props.projects && this.props.projectsMeta && (
+                  <EntitiesList
                     entities={this.props.projects}
+                    entityComponent={ProjectRow}
+                    title="Projects"
+                    titleIcon="BEProject64"
+                    showCountInTitle
+                    unit="project"
                     pagination={this.props.projectsMeta.pagination}
-                    paginationClickHandler={this.updateHandlerCreator}
-                    paginationClass="secondary"
-                    entityComponent={Project.ListItem}
-                    entityComponentProps={{ placeholderMode: "small" }}
-                    filterChangeHandler={this.filterChangeHandler}
-                    emptyMessage={this.renderNoProjects}
+                    callbacks={{
+                      onPageClick: this.updateHandlerCreator
+                    }}
+                    search={<Search onChange={this.filterChangeHandler} />}
                   />
-                ) : null}
+                )}
               </div>
               <div className="right">
-                <nav className="project-list">
-                  {this.props.recentProjects ? (
-                    <List.SimpleList
-                      entities={this.props.recentProjects}
-                      entityComponent={Project.ListItem}
-                      entityComponentProps={{ placeholderMode: "small" }}
-                      title={"Recently Updated"}
-                      icon={"manicon-bugle-small"}
-                      listClasses={"simple-list--flush"}
-                    />
-                  ) : null}
-                </nav>
+                {this.props.recentProjects && (
+                  <EntitiesList
+                    entities={this.props.recentProjects}
+                    entityComponent={ProjectRow}
+                    title="Recently Updated"
+                    titleIcon="BEProject64"
+                  />
+                )}
                 <Authorize entity="statistics" ability={"read"}>
                   <section>
                     <header className="section-heading-secondary">

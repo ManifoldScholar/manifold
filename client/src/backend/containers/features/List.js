@@ -1,13 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import List from "backend/components/list";
-import Layout from "backend/components/layout";
-import Feature from "backend/components/feature";
 import { featuresAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";
 import entityUtils from "utils/entityUtils";
+import EntitiesList, {
+  Button,
+  FeatureRow
+} from "backend/components/list/EntitiesList";
 
 const { select } = entityUtils;
 const { request } = entityStoreActions;
@@ -36,38 +37,24 @@ class ContentFeaturesList extends PureComponent {
     this.props.dispatch(featuresRequest);
   }
 
-  // updateFeaturePosition(feature, newPos) {
-  //   const changes = {
-  //     attributes: { position: newPos }
-  //   };
-  //   const call = featuresAPI.update(feature.id, changes);
-  //   const featureRequest = request(call, requests.beFeatureUpdate);
-  //   this.props.dispatch(featureRequest).promise.then(() => {
-  //     this.fetchFeatures();
-  //   });
-  // }
-
   render() {
     const { features } = this.props;
+    if (!features) return null;
     return (
-      <div>
-        <Layout.ViewHeader>Manage Features</Layout.ViewHeader>
-        <Layout.BackendPanel>
-          {features ? (
-            <List.Searchable
-              newButton={{
-                path: lh.link("backendRecordsFeatureNew"),
-                text: "Create a new feature",
-                authorizedFor: "feature"
-              }}
-              entities={features}
-              entityComponent={Feature.ListItem}
-              singularUnit="feature"
-              pluralUnit="features"
-            />
-          ) : null}
-        </Layout.BackendPanel>
-      </div>
+      <EntitiesList
+        title="Manage Features"
+        titleStyle="bar"
+        entityComponent={FeatureRow}
+        entities={features}
+        buttons={[
+          <Button
+            path={lh.link("backendRecordsFeatureNew")}
+            type="add"
+            text="Create a new feature"
+            authorizedFor="feature"
+          />
+        ]}
+      />
     );
   }
 }

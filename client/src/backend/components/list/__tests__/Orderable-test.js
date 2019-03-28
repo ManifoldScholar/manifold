@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Orderable from "../Orderable";
-import Project from "backend/components/project";
+import { ProjectRow } from "backend/components/list/EntitiesList";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
 import { wrapWithRouter } from "test/helpers/routing";
@@ -21,7 +21,7 @@ describe("Backend.List.Orderable component", () => {
           <Orderable
             entities={projects}
             orderChangeHandler={() => jest.func()}
-            entityComponent={Project.ListItem}
+            entityComponent={ProjectRow}
           />
         </Provider>
       )

@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { EntityRow } from "backend/components/list/EntitiesList";
+import EntityRow from "./Row";
 
-export default class TwitterQueryListItem extends PureComponent {
-  static displayName = "TwitterQuery.ListItem";
+export default class SubjectRow extends PureComponent {
+  static displayName = "EntitiesList.Entity.TwitterQuery";
 
   static propTypes = {
     entity: PropTypes.object,
