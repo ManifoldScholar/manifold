@@ -125,23 +125,26 @@
     }
 
     &--grid {
+      $grid-item-min-width: 192px;
 
       @include respond($break65) {
         display: flex;
         flex-direction: column;
         flex-flow: row wrap;
-
+        margin-top: 22px;
         margin-left: -25px;
 
-
-        li {
-          flex: 1 1 25%;
-          max-width: 25%;
-          padding-left: 25px;
-          margin-bottom: 18px;
-          border-bottom: none;
+        @supports (grid-auto-columns: min-content) {
+          display: grid;
+          grid-template-columns:repeat(auto-fit, minmax($grid-item-min-width, 1fr));
         }
 
+        li {
+          flex-basis: 25%;
+          flex-grow: 1;
+          min-width: $grid-item-min-width;
+          border-bottom: none;
+        }
       }
 
     }

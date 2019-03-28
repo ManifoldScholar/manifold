@@ -193,7 +193,8 @@ export default class EntitiesListRow extends PureComponent {
     const className = classNames({
       "entity-row__row-link": true,
       "entity-row__row-link--block": block,
-      "entity-row__row-link--atag": true
+      "entity-row__row-link--atag": true,
+      "entity-row__row-link--in-grid": this.listStyle === "grid"
     });
     return (
       <Link
@@ -210,7 +211,8 @@ export default class EntitiesListRow extends PureComponent {
     const className = classNames({
       "entity-row__row-link": true,
       "entity-row__row-link--block": block,
-      "entity-row__row-link--button": true
+      "entity-row__row-link--button": true,
+      "entity-row__row-link--in-grid": this.listStyle === "grid"
     });
     return (
       <button className={className} onClick={onClick}>
