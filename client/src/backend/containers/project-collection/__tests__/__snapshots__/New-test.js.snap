@@ -219,7 +219,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--projectCollections64"
                     height={48}
                     viewBox="0 0 64 64"
                     width={48}
@@ -257,7 +257,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--lamp64"
                     height={48}
                     viewBox="0 0 64 64"
                     width={48}
@@ -297,7 +297,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--new64"
                     height={48}
                     viewBox="0 0 64 64"
                     width={48}
@@ -337,7 +337,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--projects64"
                     height={48}
                     viewBox="0 0 64 64"
                     width={48}
@@ -375,7 +375,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--globe64"
                     height={48}
                     viewBox="0 0 64 64"
                     width={48}
@@ -415,7 +415,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--touch64"
                     height={48}
                     viewBox="0 0 64 64"
                     width={48}
@@ -455,7 +455,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--mug64"
                     height={48}
                     viewBox="0 0 64 64"
                     width={48}

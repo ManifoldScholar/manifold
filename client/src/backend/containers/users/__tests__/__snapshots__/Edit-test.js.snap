@@ -20,7 +20,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
       >
         <svg
           aria-hidden={true}
-          className="manicon-svg"
+          className="manicon-svg svg-icon--key32"
           height={24}
           viewBox="0 0 32 32"
           width={24}
@@ -51,7 +51,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
       >
         <svg
           aria-hidden={true}
-          className="manicon-svg notice"
+          className="manicon-svg notice svg-icon--notifications24"
           height={24}
           viewBox="0 0 24 24"
           width={24}
@@ -80,7 +80,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
       >
         <svg
           aria-hidden={true}
-          className="manicon-svg notice"
+          className="manicon-svg notice svg-icon--delete32"
           height={24}
           viewBox="0 0 32 32"
           width={24}

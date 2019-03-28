@@ -93,7 +93,7 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
       >
         <svg
           aria-hidden={true}
-          className="manicon-svg"
+          className="manicon-svg svg-icon--reload32"
           height={24}
           viewBox="0 0 32 32"
           width={24}
@@ -232,7 +232,7 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
       >
         <svg
           aria-hidden={true}
-          className="manicon-svg"
+          className="manicon-svg svg-icon--reload32"
           height={24}
           viewBox="0 0 32 32"
           width={24}

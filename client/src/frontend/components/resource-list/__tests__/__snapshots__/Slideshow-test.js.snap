@@ -225,7 +225,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly with no res
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg"
+                    className="manicon-svg svg-icon--resourceCollection64"
                     height={120}
                     viewBox="0 0 64 64"
                     width={120}

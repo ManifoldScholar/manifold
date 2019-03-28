@@ -27,7 +27,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="manicon-svg"
+              className="manicon-svg svg-icon--manifoldLogo32"
               height={26}
               viewBox="0 0 32 32"
               width={26}
@@ -131,7 +131,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg"
+                  className="manicon-svg svg-icon--Avatar64"
                   height={null}
                   viewBox="0 0 64 64"
                   width={null}

@@ -30,7 +30,7 @@ exports[`Frontend.TextList.ListItem.Meta component renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="manicon-svg text-block__interaction-icon"
+        className="manicon-svg text-block__interaction-icon svg-icon--comment32"
         height={32}
         viewBox="0 0 32 32"
         width={32}
@@ -64,7 +64,7 @@ exports[`Frontend.TextList.ListItem.Meta component renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="manicon-svg text-block__interaction-icon"
+        className="manicon-svg text-block__interaction-icon svg-icon--annotate32"
         height={32}
         viewBox="0 0 32 32"
         width={32}

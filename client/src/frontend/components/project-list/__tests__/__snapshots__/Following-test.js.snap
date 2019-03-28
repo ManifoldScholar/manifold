@@ -19,7 +19,7 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
         >
           <svg
             aria-hidden={true}
-            className="manicon-svg"
+            className="manicon-svg svg-icon--following64"
             height={54}
             viewBox="0 0 64 64"
             width={54}
@@ -71,7 +71,7 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
           </span>
           <svg
             aria-hidden={true}
-            className="manicon-svg"
+            className="manicon-svg svg-icon--search16"
             height={20}
             viewBox="0 0 16 16"
             width={20}

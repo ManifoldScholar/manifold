@@ -187,7 +187,7 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
           >
             <svg
               aria-hidden="true"
-              className="manicon-svg minus"
+              className="manicon-svg minus svg-icon--MinusUnique"
               fill="currentColor"
               height={28}
               viewBox="0 0 32 32"
@@ -203,7 +203,7 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
             </svg>
             <svg
               aria-hidden="true"
-              className="manicon-svg check"
+              className="manicon-svg check svg-icon--CheckUnique"
               fill="currentColor"
               height={28}
               viewBox="0 0 32 32"
@@ -216,7 +216,7 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
             </svg>
             <svg
               aria-hidden="true"
-              className="manicon-svg plus"
+              className="manicon-svg plus svg-icon--PlusUnique"
               fill="currentColor"
               height={28}
               viewBox="0 0 32 32"

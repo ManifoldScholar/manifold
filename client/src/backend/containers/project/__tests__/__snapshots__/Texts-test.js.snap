@@ -101,7 +101,7 @@ Array [
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg"
+                  className="manicon-svg svg-icon--delete32"
                   height={26}
                   viewBox="0 0 32 32"
                   width={26}
@@ -136,7 +136,7 @@ Array [
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg"
+                  className="manicon-svg svg-icon--annotate32"
                   height={26}
                   viewBox="0 0 32 32"
                   width={26}
@@ -180,7 +180,7 @@ Array [
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg"
+                  className="manicon-svg svg-icon--grabber32"
                   height={26}
                   viewBox="0 0 32 32"
                   width={26}
@@ -338,7 +338,7 @@ Array [
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg"
+                  className="manicon-svg svg-icon--delete32"
                   height={26}
                   viewBox="0 0 32 32"
                   width={26}
@@ -373,7 +373,7 @@ Array [
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg"
+                  className="manicon-svg svg-icon--annotate32"
                   height={26}
                   viewBox="0 0 32 32"
                   width={26}
@@ -417,7 +417,7 @@ Array [
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg"
+                  className="manicon-svg svg-icon--grabber32"
                   height={26}
                   viewBox="0 0 32 32"
                   width={26}
