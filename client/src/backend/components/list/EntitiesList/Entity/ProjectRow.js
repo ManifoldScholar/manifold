@@ -65,6 +65,7 @@ export default class EventRow extends PureComponent {
     return (
       <EntityRow
         onRowClick={this.url}
+        rowClickMode="block"
         listStyle={this.props.listStyle}
         title={
           <span

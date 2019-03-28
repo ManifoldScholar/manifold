@@ -12,6 +12,7 @@ export default class EntitiesListRow extends PureComponent {
 
   static propTypes = {
     onRowClick: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    rowClickMode: PropTypes.oneOf(["inline", "block"]),
     title: PropTypes.node,
     titlePlainText: PropTypes.string,
     count: PropTypes.node,
@@ -31,6 +32,7 @@ export default class EntitiesListRow extends PureComponent {
   };
 
   static defaultProps = {
+    rowClickMode: "inline",
     listStyle: "rows",
     figureSize: "normal",
     figureShape: "square",
@@ -105,6 +107,14 @@ export default class EntitiesListRow extends PureComponent {
     return this.props.titlePlainText || this.props.title;
   }
 
+  get onRowClick() {
+    return this.props.onRowClick;
+  }
+
+  get entireRowIsClickable() {
+    return this.rowClickMode === "block" && this.onRowClick;
+  }
+
   get figureClassNames() {
     return classNames({
       "entity-row__figure": true,
@@ -125,7 +135,8 @@ export default class EntitiesListRow extends PureComponent {
       "entity-row": true,
       "entity-row--in-grid": this.listStyle === "grid",
       "entity-row--in-tiles": this.listStyle === "tiles",
-      "entity-row--in-rows": this.listStyle === "rows"
+      "entity-row--in-rows": this.listStyle === "rows",
+      "entity-row--with-row-link": this.entireRowIsClickable
     });
   }
 
@@ -175,23 +186,55 @@ export default class EntitiesListRow extends PureComponent {
     });
   }
 
-  anchorLink(child, url) {
+  get rowClickMode() {
+    return this.props.rowClickMode;
+  }
+
+  wrapWithAnchor(child, url, block = false) {
+    const className = classNames({
+      "entity-row__row-link": true,
+      "entity-row__row-link--block": block,
+      "entity-row__row-link--atag": true
+    });
     return (
-      <Link to={url} aria-describedby={`${this.labelId}-describedby`}>
+      <Link
+        className={className}
+        to={url}
+        aria-describedby={`${this.labelId}-describedby`}
+      >
         {child}
       </Link>
     );
   }
 
-  callbackLink(child, onClick) {
-    return <button onClick={onClick}>{child}</button>;
+  wrapWithButton(child, onClick, block = false) {
+    const className = classNames({
+      "entity-row__row-link": true,
+      "entity-row__row-link--block": block,
+      "entity-row__row-link--button": true
+    });
+    return (
+      <button className={className} onClick={onClick}>
+        {child}
+      </button>
+    );
   }
 
-  link(child) {
-    const onRowClick = this.props.onRowClick;
-    if (!onRowClick) return child;
-    if (isString(onRowClick)) return this.anchorLink(child, onRowClick);
-    return this.callbackLink(child, onRowClick);
+  wrapWithClickHandler(child, block = false) {
+    if (!this.onRowClick) return child;
+    if (isString(this.onRowClick))
+      return this.wrapWithAnchor(child, this.onRowClick, block);
+    return this.wrapWithButton(child, this.onRowClick, block);
+  }
+
+  inlineLink(child) {
+    if (this.rowClickMode !== "inline") return child;
+    return this.wrapWithClickHandler(child, false);
+  }
+
+  blockLink(child) {
+    if (!this.entireRowIsClickable) return child;
+    return this.wrapWithClickHandler(child, true);
   }
 
   render() {
@@ -199,35 +242,45 @@ export default class EntitiesListRow extends PureComponent {
 
     return (
       <li className={this.rowClassNames}>
-        {this.figure && (
-          <div className={this.figureClassNames}>{this.link(this.figure)}</div>
-        )}
-        <div className={this.textClassNames}>
-          {this.title && (
-            <h4 className={this.titleClassNames}>
-              <span className="entity-row__title-inner">
-                {this.link(this.title)}
-              </span>
-              {this.hasLabels && <LabelSet labels={this.labels} />}
-              <span
-                id={`${this.labelId}-describedby`}
-                className="aria-describedby"
-              >
-                {`View ${this.titlePlainText}`}
-              </span>
-            </h4>
-          )}
-          {!this.title && this.hasLabels && <LabelSet labels={this.labels} />}
-          {this.hasSubtitle && (
-            <h5 className={this.subtitleClassNames}>{this.subtitle}</h5>
-          )}
-          {this.hasCount && (
-            <h5 className={this.countClassNames}>{this.count}</h5>
-          )}
-          {this.hasMeta && <h6 className={this.metaClassNames}>{this.meta}</h6>}
-        </div>
-        {this.utility && (
-          <div className="entity-row__utility">{this.utility}</div>
+        {this.blockLink(
+          <React.Fragment>
+            {this.figure && (
+              <div className={this.figureClassNames}>
+                {this.inlineLink(this.figure)}
+              </div>
+            )}
+            <div className={this.textClassNames}>
+              {this.title && (
+                <h4 className={this.titleClassNames}>
+                  <span className="entity-row__title-inner">
+                    {this.inlineLink(this.title)}
+                  </span>
+                  {this.hasLabels && <LabelSet labels={this.labels} />}
+                  <span
+                    id={`${this.labelId}-describedby`}
+                    className="aria-describedby"
+                  >
+                    {`View ${this.titlePlainText}`}
+                  </span>
+                </h4>
+              )}
+              {!this.title && this.hasLabels && (
+                <LabelSet labels={this.labels} />
+              )}
+              {this.hasSubtitle && (
+                <h5 className={this.subtitleClassNames}>{this.subtitle}</h5>
+              )}
+              {this.hasCount && (
+                <h5 className={this.countClassNames}>{this.count}</h5>
+              )}
+              {this.hasMeta && (
+                <h6 className={this.metaClassNames}>{this.meta}</h6>
+              )}
+            </div>
+            {this.utility && (
+              <div className="entity-row__utility">{this.utility}</div>
+            )}
+          </React.Fragment>
         )}
       </li>
     );
