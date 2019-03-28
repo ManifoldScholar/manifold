@@ -1,7 +1,16 @@
 .entity-list {
+
+  & + & {
+    margin-top: 64px;
+  }
+
+  .instructional-copy {
+    padding-bottom: 0; // sorry. hacked it.
+  }
+
   &__title {
     @include templateHead;
-    margin: 0 0 34px;
+    margin: 0 0 30px;
     font-size: 16px;
     font-weight: $semibold;
     color: $neutral45;
@@ -24,24 +33,6 @@
 
   }
 
-  &__pagination {
-    margin-top: 28px;
-  }
-
-  &__header {
-    padding-top: 10px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid $neutral75;
-  }
-
-  &__count {
-    margin-top: 26px;
-  }
-
-  &__button-set {
-    margin-top: 26px;
-  }
-
   &__button {
     @include utilityPrimary;
     display: block;
@@ -61,7 +52,7 @@
 
       + .entity-list__button {
         margin-top: 0;
-        margin-left: 24px;
+        margin-left: 12px;
       }
     }
 
@@ -146,9 +137,45 @@
           border-bottom: none;
         }
       }
-
     }
-
   }
+
+  &__header {
+    border-bottom: 1px solid $neutral75;
+    padding-top: 8px;
+    padding-bottom: 16px;
+  }
+
+  &__pagination {
+    margin-top: 32px;
+  }
+
+  &__button {
+    border: 1px solid $accentPrimary;
+    border-radius: 16px;
+    padding: 7px 15px 5px 10px;
+    text-transform: none;
+    font-weight: $medium;
+    letter-spacing: 0;
+    
+    &:hover {
+      svg {
+        background-color: inherit;
+        color: inherit;
+      }
+      background-color: $accentPrimary;
+      color: $neutral90;
+    }
+  }
+
+  .entity-list__button-set {
+    margin-bottom: 22px;
+  }
+
+  &__search {
+    margin-top: 32px;
+    margin-bottom: 24px;
+  }
+
 
 }

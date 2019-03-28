@@ -214,8 +214,8 @@ export default class ListEntities extends PureComponent {
           {this.instructions && (
             <Instructions instructions={this.instructions} />
           )}
+          {this.hasSearch && this.search}
           <div className="entity-list__header">
-            {this.hasSearch && this.search}
             {this.hasButtons && <ButtonSet buttons={this.buttons} />}
             {this.showCount && (
               <Count

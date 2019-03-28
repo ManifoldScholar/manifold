@@ -20,7 +20,7 @@ export default class EventRow extends PureComponent {
 
   get figure() {
     if (this.props.figure) return this.props.figure;
-    return <EntityThumbnail.Project mode="small" entity={this.project} />;
+    return <EntityThumbnail.Project mode="responsive" entity={this.project} />;
   }
 
   get project() {

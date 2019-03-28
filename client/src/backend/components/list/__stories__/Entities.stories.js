@@ -363,4 +363,61 @@ storiesOf("Backend/List/Entities", module)
         }}
       />
     );
+  })
+
+  .add("Header Margins", () => {
+    const row = UserRow;
+    const entities = [users[0]];
+    const titleStyle = "bar";
+    const unit = "user";
+    const buttons = [
+      <Button path="/foo" text="Add New Project" type="add" />,
+      <Button path="/foo" text="Add New Project" type="add" />
+    ];
+    const search = (
+      <Search
+        filters={threeFilters}
+        sortOptions={sortOptions}
+        onChange={callbacks.onSearchChange}
+      />
+    );
+
+    const wrap = child => {
+      return (
+        <div
+          style={{
+            padding: "40px 0",
+            border: 0,
+            borderBottom: "1px solid #424242",
+            borderStyle: "dashed"
+          }}
+        >
+          {child}
+        </div>
+      );
+    };
+
+    const baseProps = {
+      pagination,
+      callbacks,
+      entities,
+      titleStyle,
+      unit,
+      entityComponent: row
+    };
+
+    return (
+      <React.Fragment>
+        {wrap(
+          <EntitiesList
+            {...baseProps}
+            instructions={"foo bar"}
+            search={search}
+            buttons={buttons}
+            title={"All the things"}
+            showCount
+          />
+        )}
+      </React.Fragment>
+    );
   });
