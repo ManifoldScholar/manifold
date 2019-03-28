@@ -1,0 +1,147 @@
+.entity-list-search {
+  $inputHeight: 2.857em;
+
+
+  &__keyword-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid $neutral50;
+    border-radius: 8px;
+  }
+
+  &__search-button {
+    @include buttonUnstyled;
+    width: 20px;
+    height: 20px;
+    margin-top: -2px;
+    margin-left: 14px;
+    color: $neutral50;
+
+    &:focus {
+      color: $accentPrimary;
+      outline: 0;
+    }
+  }
+
+  &__text-button {
+    display: none;
+    margin-right: 14px;
+    font-size: 13px;
+    color: $neutral75;
+    letter-spacing: 2px;
+    transition: color $duration $timing;
+    @include buttonUnstyled;
+    @include utilityPrimary;
+
+    @include respond($break60) {
+      display: block;
+    }
+
+    &--foregrounded {
+      display: block;
+      color: $neutral50;
+    }
+
+    &:hover {
+      color: $accentPrimary;
+    }
+
+    &:focus {
+      color: $accentPrimaryPale;
+      outline: 0;
+    }
+
+  }
+
+  &__keyword-input-wrapper {
+    display: block;
+    flex: 1;
+    border-radius: 8px;
+  }
+
+  &__keyword-input {
+    width: 100%;
+    padding-left: 14px;
+    border: 0;
+    @include inputQuaternary;
+
+    &::placeholder {
+      color: $neutral75;
+    }
+
+    &:focus::placeholder {
+      color: $accentPrimary;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+  }
+
+  &__options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-top: 30px;
+    margin: 0 -11px -11px;
+  }
+
+  &__option {
+    flex: 0 0 100%;
+
+    @include respond($break60) {
+      flex: 0 0 33.333%;
+    }
+    padding: 11px;
+  }
+
+
+  &__options-label {
+    @include utilityPrimary;
+    display: block;
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: $semibold;
+    color: $neutral70;
+    letter-spacing: 2px;
+
+    &--empty {
+      display: none;
+      @include respond($break60) {
+        display: block;
+      }
+    }
+  }
+
+  &__select-wrapper {
+
+    position: relative;
+
+    select {
+      @include unstyledSelect;
+      @include utilityPrimary;
+      width: 100%;
+      height: $inputHeight;
+      padding-right: 32px;
+      padding-left: 13px;
+      font-size: 13px;
+      color: $neutral20;
+      border: 1px solid $neutral80;
+      border-radius: 8px;
+      transition: border-color $duration $timing;
+    }
+
+    svg {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 22px;
+      height: 22px;
+      color: $neutral50;
+      pointer-events: none;
+    }
+
+  }
+}

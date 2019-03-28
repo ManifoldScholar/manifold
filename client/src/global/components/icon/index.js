@@ -36,13 +36,10 @@ import Checkunique from "./unique/Check";
 import Plusunique from "./unique/Plus";
 import BooksOnShelfStrokeunique from "./unique/BooksOnShelfStroke";
 import DisclosureUp16 from "./16/DisclosureUp";
-import Arrow16 from "./16/Arrow";
 import DisclosureDown16 from "./16/DisclosureDown";
-import ArrowLong16 from "./16/ArrowLong";
 import Plus16 from "./16/Plus";
 import Close16 from "./16/Close";
 import Search16 from "./16/Search";
-import ArrowDown16 from "./16/ArrowDown";
 import TextsStacked64 from "./64/TextsStacked";
 import Avatar64 from "./64/Avatar";
 import ResourcePdf64 from "./64/ResourcePdf";
@@ -109,6 +106,12 @@ import Notifications24 from "./24/Notifications";
 import Text24 from "./24/Text";
 import EditProfile24 from "./24/EditProfile";
 import Share24 from "./24/Share";
+import ArrowRight16 from "./16/ArrowRight";
+import ArrowLongRight16 from "./16/ArrowLongRight";
+import ArrowLongLeft16 from "./16/ArrowLongLeft";
+import ArrowLeft16 from "./16/ArrowLeft";
+import ArrowUp16 from "./16/ArrowUp";
+import ArrowDown16 from "./16/ArrowDown";
 
 export default {
   Disclosure32,
@@ -149,13 +152,10 @@ export default {
   Plusunique,
   BooksOnShelfStrokeunique,
   DisclosureUp16,
-  Arrow16,
   DisclosureDown16,
-  ArrowLong16,
   Plus16,
   Close16,
   Search16,
-  ArrowDown16,
   TextsStacked64,
   Avatar64,
   ResourcePdf64,
@@ -221,5 +221,11 @@ export default {
   Notifications24,
   Text24,
   EditProfile24,
-  Share24
+  Share24,
+  ArrowRight16,
+  ArrowLongRight16,
+  ArrowLongLeft16,
+  ArrowLeft16,
+  ArrowUp16,
+  ArrowDown16
 };

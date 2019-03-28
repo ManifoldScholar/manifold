@@ -70,7 +70,7 @@ export class EventTile extends Component {
     });
 
     return (
-      <li className={this.props.itemClass}>
+      <div className={this.props.itemClass}>
         <div role="link" className={tileClass} onClick={this.handleTileClick}>
           <div className={`${baseClass}__inner`}>
             {icon && (
@@ -118,7 +118,7 @@ export class EventTile extends Component {
             <span className="screen-reader-text">Delete Event</span>
           </div>
         )}
-      </li>
+      </div>
     );
   }
 }

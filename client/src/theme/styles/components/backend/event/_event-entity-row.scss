@@ -1,0 +1,40 @@
+.event-entity-row {
+  position: relative;
+  width: 100%;
+
+  @include respond($break60) {
+    width: 100%;
+    padding-left: 40px;
+    margin-bottom: 28px;
+    border-bottom: 0;
+  }
+
+  @include respond($break95) {
+    width: 50%;
+  }
+
+  .utility {
+    position: absolute;
+    right: 12px;
+    bottom: 17px;
+
+    @include respond($break60) {
+      font-size: 1.2em;
+    }
+
+    .manicon-trashcan {
+      color: $sp40Tertiary;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &--tile {
+    .utility {
+      right: 18px;
+      bottom: 45px;
+    }
+  }
+}

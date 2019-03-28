@@ -167,7 +167,17 @@ const defaults = {
     },
     relationships: {
       resources: [],
-      actionCallouts: []
+      actionCallouts: [],
+      makers: [
+        {
+          type: "maker",
+          attributes: {
+            firstName: "John",
+            lastName: "Milton",
+            fullName: "John Milton"
+          }
+        }
+      ]
     }
   },
 
@@ -176,6 +186,7 @@ const defaults = {
     attributes: {
       title: "Rowan",
       slug: "",
+      collectionResourcesCount: 0,
       createdAt: "2017-04-24T23:25:50.161Z",
       resourceKinds: ["image", "video"],
       resourceTags: ["dog"],

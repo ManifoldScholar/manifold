@@ -16,16 +16,16 @@ export default class IconComputedSocial extends PureComponent {
 
   iconMap(safeKind) {
     const map = {
-      document: "ResourceDocument64",
-      image: "ResourceImage64",
-      video: "ResourceVideo64",
-      audio: "ResourceAudio64",
-      file: "ResourceFile64",
-      link: "ResourceLink64",
-      pdf: "ResourcePdf64",
-      spreadsheet: "ResourceSpreadsheet64",
-      presentation: "ResourcePresentation64",
-      interactive: "ResourceInteractive64"
+      document: "resourceDocument64",
+      image: "resourceImage64",
+      video: "resourceVideo64",
+      audio: "resourceAudio64",
+      file: "resourceFile64",
+      link: "resourceLink64",
+      pdf: "resourcePdf64",
+      spreadsheet: "resourceSpreadsheet64",
+      presentation: "resourcePresentation64",
+      interactive: "resourceInteractive64"
     };
     return map[safeKind];
   }
