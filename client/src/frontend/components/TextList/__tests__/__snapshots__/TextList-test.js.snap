@@ -35,7 +35,7 @@ exports[`Frontend.TextList component renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg text-block__cover-svg"
+                  className="manicon-svg text-block__cover-svg svg-icon--textsLoosePages64"
                   height={78}
                   viewBox="0 0 64 64"
                   width={78}
@@ -125,7 +125,7 @@ exports[`Frontend.TextList component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg text-block__interaction-icon"
+                className="manicon-svg text-block__interaction-icon svg-icon--comment32"
                 height={32}
                 viewBox="0 0 32 32"
                 width={32}
@@ -159,7 +159,7 @@ exports[`Frontend.TextList component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg text-block__interaction-icon"
+                className="manicon-svg text-block__interaction-icon svg-icon--annotate32"
                 height={32}
                 viewBox="0 0 32 32"
                 width={32}
@@ -215,7 +215,7 @@ exports[`Frontend.TextList component renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg text-block__cover-svg"
+                  className="manicon-svg text-block__cover-svg svg-icon--textsLoosePages64"
                   height={78}
                   viewBox="0 0 64 64"
                   width={78}
@@ -305,7 +305,7 @@ exports[`Frontend.TextList component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg text-block__interaction-icon"
+                className="manicon-svg text-block__interaction-icon svg-icon--comment32"
                 height={32}
                 viewBox="0 0 32 32"
                 width={32}
@@ -339,7 +339,7 @@ exports[`Frontend.TextList component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg text-block__interaction-icon"
+                className="manicon-svg text-block__interaction-icon svg-icon--annotate32"
                 height={32}
                 viewBox="0 0 32 32"
                 width={32}

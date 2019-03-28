@@ -21,7 +21,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
         >
           <svg
             aria-hidden={true}
-            className="manicon-svg"
+            className="manicon-svg svg-icon--lamp64"
             height={56}
             viewBox="0 0 64 64"
             width={56}

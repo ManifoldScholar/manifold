@@ -18,7 +18,7 @@ exports[`Frontend.ResourceCollectionList.Totals Component renders correctly 1`] 
      Total Collections
     <svg
       aria-hidden={true}
-      className="manicon-svg resource-total__icon"
+      className="manicon-svg resource-total__icon svg-icon--arrowLongRight16"
       height={30}
       viewBox="0 0 24 16"
       width={30}
@@ -31,10 +31,12 @@ exports[`Frontend.ResourceCollectionList.Totals Component renders correctly 1`] 
         <path
           d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
           fill="currentColor"
+          fillRule="nonzero"
         />
         <path
           d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
           fill="currentColor"
+          fillRule="nonzero"
         />
       </g>
     </svg>

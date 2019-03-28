@@ -32,7 +32,7 @@ exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = 
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourceCollection64"
                 height={48}
                 viewBox="0 0 64 64"
                 width={48}
@@ -89,7 +89,7 @@ exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = 
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg"
+                className="manicon-svg svg-icon--resourceCollection64"
                 height={48}
                 viewBox="0 0 64 64"
                 width={48}

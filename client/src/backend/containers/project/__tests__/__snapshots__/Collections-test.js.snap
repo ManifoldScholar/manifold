@@ -28,7 +28,7 @@ exports[`Backend Project Collections Container renders correctly 1`] = `
           <button>
             <svg
               aria-hidden={true}
-              className="manicon-svg manicon-magnify"
+              className="manicon-svg manicon-magnify svg-icon--search16"
               height={20}
               viewBox="0 0 16 16"
               width={20}
@@ -143,98 +143,149 @@ exports[`Backend Project Collections Container renders correctly 1`] = `
         </div>
       </nav>
       <nav
-        className="list-pagination-secondary"
+        className="list-pagination"
       >
         <ul
-          className={null}
+          className="list-pagination__columns"
         >
           <li
-            className="pagination-previous disabled"
+            className="list-pagination__column"
           >
-            <a
-              data-id="page-prev"
-              href="#pagination-target"
-              onClick={[Function]}
-            >
-              <i
-                aria-hidden="true"
-                className="manicon manicon-arrow-long-left"
-              />
-              <span
-                aria-hidden="true"
+            <ul>
+              <li
+                className="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
               >
-                Prev
-              </span>
-              <span
-                className="screen-reader-text"
-              >
-                Previous Page
-              </span>
-            </a>
+                <a
+                  disabled={true}
+                  href="#pagination-target"
+                  onClick={[Function]}
+                >
+                  <svg
+                    aria-hidden={true}
+                    className="manicon-svg svg-icon--arrowLongLeft16"
+                    height={null}
+                    viewBox="0 0 24 16"
+                    width={null}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      fill="none"
+                      fillRule="evenodd"
+                    >
+                      <path
+                        d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                        fill="currentColor"
+                        fillRule="nonzero"
+                        transform="rotate(180 12 8)"
+                      />
+                      <path
+                        d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                        fill="currentColor"
+                        fillRule="nonzero"
+                        transform="rotate(180 12 8)"
+                      />
+                    </g>
+                  </svg>
+                  <span
+                    className="list-pagination__icon-label"
+                  >
+                    PREV
+                  </span>
+                </a>
+              </li>
+            </ul>
           </li>
           <li
-            className="active ordinal"
+            className="list-pagination__column-middle"
           >
-            <a
-              href="#pagination-target"
-              onClick={[Function]}
+            <ul
+              className="list-pagination__pages"
             >
-              <span
-                aria-hidden="true"
+              <li
+                className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
               >
-                1
-              </span>
-              <span
-                className="screen-reader-text"
+                <a
+                  href="#pagination-target"
+                  onClick={[Function]}
+                >
+                  <span
+                    aria-hidden="true"
+                  >
+                    1
+                  </span>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Go to page: 
+                    1
+                  </span>
+                </a>
+              </li>
+              <li
+                className="list-pagination__page list-pagination__page--ordinal"
               >
-                Go to page: 
-                1
-              </span>
-            </a>
+                <a
+                  href="#pagination-target"
+                  onClick={[Function]}
+                >
+                  <span
+                    aria-hidden="true"
+                  >
+                    2
+                  </span>
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Go to page: 
+                    2
+                  </span>
+                </a>
+              </li>
+            </ul>
           </li>
           <li
-            className="ordinal"
+            className="list-pagination__column"
           >
-            <a
-              href="#pagination-target"
-              onClick={[Function]}
-            >
-              <span
-                aria-hidden="true"
+            <ul>
+              <li
+                className="list-pagination__page list-pagination__page--next"
               >
-                2
-              </span>
-              <span
-                className="screen-reader-text"
-              >
-                Go to page: 
-                2
-              </span>
-            </a>
-          </li>
-          <li
-            className="pagination-next "
-          >
-            <a
-              data-id="page-next"
-              href="#pagination-target"
-              onClick={[Function]}
-            >
-              <span
-                className="screen-reader-text"
-              >
-                Next Page
-              </span>
-              <span
-                aria-hidden="true"
-              >
-                Next
-              </span>
-              <i
-                aria-hidden="true"
-                className="manicon manicon-arrow-long-right"
-              />
-            </a>
+                <a
+                  href="#pagination-target"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="list-pagination__icon-label"
+                  >
+                    NEXT
+                  </span>
+                  <svg
+                    aria-hidden={true}
+                    className="manicon-svg svg-icon--arrowLongRight16"
+                    height={null}
+                    viewBox="0 0 24 16"
+                    width={null}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      fill="none"
+                      fillRule="evenodd"
+                    >
+                      <path
+                        d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                        fill="currentColor"
+                        fillRule="nonzero"
+                      />
+                      <path
+                        d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                        fill="currentColor"
+                        fillRule="nonzero"
+                      />
+                    </g>
+                  </svg>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
