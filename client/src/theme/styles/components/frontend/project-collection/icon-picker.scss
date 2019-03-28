@@ -10,8 +10,7 @@
 
   .icon-row {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     align-content: center;
     padding: 0;
 

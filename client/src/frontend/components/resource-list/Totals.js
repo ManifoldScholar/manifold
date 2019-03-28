@@ -51,7 +51,7 @@ export default class ResourceListTotals extends Component {
           {` Total ${this.unit}`}
           <Utility.IconComposer
             size={30}
-            icon="arrowLong16"
+            icon="arrowLongRight16"
             iconClass={`${baseClass}__icon`}
           />
         </Link>

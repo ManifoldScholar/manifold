@@ -24,7 +24,7 @@ export default class EntityCount extends PureComponent {
         <span>{`${start}-${end}`}</span>
         {" of "}
         <span>{totalCount}</span>
-        {` ${label}: `}
+        {label && ` ${label}: `}
       </p>
     );
   }

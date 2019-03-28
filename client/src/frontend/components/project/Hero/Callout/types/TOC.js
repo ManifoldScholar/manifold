@@ -30,7 +30,7 @@ export default class ProjectHeroCalloutTOC extends PureComponent {
   }
 
   get icon() {
-    return this.isButton ? "toc64" : "arrow16";
+    return this.isButton ? "toc64" : "arrowRight16";
   }
 
   get iconSize() {

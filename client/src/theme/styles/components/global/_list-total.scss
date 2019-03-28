@@ -19,6 +19,12 @@
     }
   }
 
+  .backend & {
+    span {
+      color: $neutral30;
+    }
+  }
+
   .vertical-list-primary & {
     padding-bottom: 15px;
     margin-bottom: 15px;
