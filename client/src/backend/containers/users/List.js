@@ -40,9 +40,8 @@ export class UsersListContainer extends PureComponent {
 
   constructor() {
     super();
-    this.state = { filter: {} };
     this.lastFetchedPage = null;
-    this.fetchUsers = debounce(this.fetchUsers.bind(this), 250, {
+    this.fetchUsers = debounce(this.fetchUsers, 250, {
       leading: false,
       trailing: true
     });
@@ -67,6 +66,10 @@ export class UsersListContainer extends PureComponent {
     });
   }
 
+  get defaultFilter() {
+    return { order: "last_name" };
+  }
+
   maybeReload(prevUsersMeta) {
     const currentModified = get(this.props, "usersMeta.modified");
     const previousModified = get(prevUsersMeta, "modified");
@@ -75,20 +78,19 @@ export class UsersListContainer extends PureComponent {
     this.fetchUsers(this.lastFetchedPage);
   }
 
-  fetchUsers(page) {
+  fetchUsers = (page, filter = {}) => {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
+    const filterParams = Object.assign({}, this.defaultFilter, filter);
     const action = request(
-      usersAPI.index(this.state.filter, pagination),
+      usersAPI.index(filterParams, pagination),
       requests.beUsers
     );
     this.props.dispatch(action);
-  }
+  };
 
   filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.fetchUsers(1);
-    });
+    this.fetchUsers(1, filter);
   };
 
   handleUsersPageChange(event, page) {

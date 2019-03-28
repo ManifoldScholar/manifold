@@ -37,9 +37,8 @@ export class MakersListContainer extends PureComponent {
 
   constructor() {
     super();
-    this.state = { filter: {} };
     this.lastFetchedPage = null;
-    this.fetchMakers = debounce(this.fetchMakers.bind(this), 250, {
+    this.fetchMakers = debounce(this.fetchMakers, 250, {
       leading: false,
       trailing: true
     });
@@ -53,6 +52,10 @@ export class MakersListContainer extends PureComponent {
     this.maybeReload(prevProps.makersMeta);
   }
 
+  get defaultFilter() {
+    return { order: "last_name" };
+  }
+
   maybeReload(prevUsersMeta) {
     const currentModified = get(this.props, "makersMeta.modified");
     const previousModified = get(prevUsersMeta, "modified");
@@ -61,20 +64,19 @@ export class MakersListContainer extends PureComponent {
     this.fetchMakers(this.lastFetchedPage);
   }
 
-  fetchMakers(page) {
+  fetchMakers = (page, filter = {}) => {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
+    const filterParams = Object.assign({}, this.defaultFilter, filter);
     const action = request(
-      makersAPI.index(this.state.filter, pagination),
+      makersAPI.index(filterParams, pagination),
       requests.beMakers
     );
     this.props.dispatch(action);
-  }
+  };
 
   filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.fetchMakers(1);
-    });
+    this.fetchMakers(1, filter);
   };
 
   handlePageChange(event, page) {

@@ -192,7 +192,7 @@ export default class ListEntitiesListSearch extends PureComponent {
                           }
                           value={this.getFilterValue(this.sortFilter)}
                         >
-                          <option value="">Default:</option>
+                          <option value="">Default</option>
                           {this.sortOptions.map((option, optionIndex) => (
                             <option key={optionIndex} value={option.value}>
                               {option.label}

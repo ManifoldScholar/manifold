@@ -209,7 +209,7 @@ Array [
                           <option
                             value=""
                           >
-                            Default:
+                            Default
                           </option>
                           <option
                             value="first_name"
