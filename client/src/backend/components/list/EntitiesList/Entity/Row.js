@@ -131,12 +131,11 @@ export default class EntitiesListRow extends PureComponent {
 
   get rowClassNames() {
     return classNames({
-      "entity-list__entity": true,
-      "entity-row": true,
-      "entity-row--in-grid": this.listStyle === "grid",
-      "entity-row--in-tiles": this.listStyle === "tiles",
-      "entity-row--in-rows": this.listStyle === "rows",
-      "entity-row--with-row-link": this.entireRowIsClickable
+      "entity-row__inner": true,
+      "entity-row__inner--in-grid": this.listStyle === "grid",
+      "entity-row__inner--in-tiles": this.listStyle === "tiles",
+      "entity-row__inner--in-rows": this.listStyle === "rows",
+      "entity-row__inner--with-row-link": this.entireRowIsClickable
     });
   }
 
@@ -241,7 +240,7 @@ export default class EntitiesListRow extends PureComponent {
     this.labelId = labelId();
 
     return (
-      <li>
+      <li className="entity-row entity-list__entity">
         {this.blockLink(
           <div className={this.rowClassNames}>
             {this.figure && (

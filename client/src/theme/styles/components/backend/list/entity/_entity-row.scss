@@ -1,16 +1,20 @@
 .entity-row {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  padding: 14px 0;
-  border-bottom: 1px solid $neutral80;
-  transition: background-color $duration ease-out,
+
+  &__inner {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid $neutral80;
+    transition: background-color $duration ease-out,
     box-shadow $duration ease-out;
 
-  &--in-grid {
-    @include respond($break65) {
-      flex-direction: column;
-      width: 100%;
+    &--in-grid {
+      @include respond($break65) {
+        border-bottom: 0;
+        flex-direction: column;
+        width: 100%;
+      }
     }
   }
 
