@@ -1,39 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend People Users List Container renders correctly 1`] = `
-<div>
-  <span />
-  <header
-    className="backend-header section-heading-secondary"
-  >
-    <h1>
-      Manage Users
-    </h1>
-  </header>
+Array [
+  <span />,
   <div
-    className="backend-panel"
+    className="entity-list"
   >
+    <header
+      className="entity-list__title backend-header section-heading-secondary"
+    >
+      <h1>
+         
+        Manage Users
+      </h1>
+    </header>
     <div
-      className="container"
+      className="entity-list__contents-wrapper"
     >
       <div
-        className="panel"
+        className="entity-list__header"
       >
-        <div>
+        <div
+          className="entity-list__search entity-list-search"
+        >
           <form
-            className="form-search-filter"
             onSubmit={[Function]}
           >
             <div
-              className="search"
+              className="entity-list-search__keyword-row"
             >
-              <button>
+              <button
+                className="entity-list-search__search-button"
+              >
                 <svg
                   aria-hidden={true}
                   className="manicon-svg manicon-magnify svg-icon--search16"
-                  height={20}
+                  height={null}
                   viewBox="0 0 16 16"
-                  width={20}
+                  width={null}
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <g
@@ -58,277 +62,475 @@ exports[`Backend People Users List Container renders correctly 1`] = `
                   Search
                 </span>
               </button>
-              <label
-                className="screen-reader-text"
-                htmlFor="list-search-1"
+              <div
+                className="entity-list-search__keyword-input-wrapper"
               >
-                Enter Search Criteria
-              </label>
-              <input
-                id="list-search-1"
-                onChange={[Function]}
-                placeholder="Search..."
-                type="text"
-                value=""
-              />
-            </div>
-            <div
-              className="button-row"
-            >
+                <label
+                  className="screen-reader-text"
+                  htmlFor="list-search-1"
+                >
+                  Enter Search Criteria
+                </label>
+                <input
+                  className="entity-list-search__keyword-input"
+                  id="list-search-1"
+                  onChange={[Function]}
+                  placeholder="Search..."
+                  type="text"
+                  value=""
+                />
+              </div>
               <button
-                className="button-bare-primary"
-                data-id="filter-toggle"
+                className="entity-list-search__text-button"
                 onClick={[Function]}
               >
-                Show Search Options
+                Reset
               </button>
               <button
-                className="button-bare-primary reset"
+                className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
                 onClick={[Function]}
               >
-                Reset Search
+                Options
               </button>
             </div>
           </form>
-          <nav
-            className="vertical-list-primary"
+          <div
+            className="ReactCollapse--collapse"
+            style={
+              Object {
+                "height": 0,
+                "overflow": "hidden",
+              }
+            }
           >
-            <div>
-              <p
-                className="list-total"
-              >
-                Showing 
-                <span>
-                  1-1
-                </span>
-                 of 
-                <span>
-                  2
-                </span>
-                 users: 
-              </p>
-              <div
-                className="buttons-icon-horizontal"
-              >
-                <a
-                  className="button-icon-secondary "
-                  href="/backend/records/users/new"
-                  onClick={[Function]}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-plus"
-                  />
-                  <span>
-                    Add a New User
-                  </span>
-                </a>
-              </div>
-              <section
-                className="simple-list"
-              >
-                <ul>
-                  <li
-                    className="user-list-item"
-                  >
-                    <a
-                      href="/backend/records/users/1"
-                      onClick={[Function]}
-                    >
-                      <div
-                        className="content"
-                      >
-                        <figure
-                          className="avatar"
-                        >
-                          <figcaption
-                            className="screen-reader-text"
-                          >
-                            User Avatar
-                          </figcaption>
-                          <div
-                            className="no-image"
-                          >
-                            <i
-                              aria-label="hidden"
-                              className="manicon manicon-person"
-                            />
-                          </div>
-                        </figure>
-                        <div
-                          className="meta"
-                        >
-                          <span
-                            className="name large"
-                          >
-                            Rowan
-                             
-                            Ida
-                          </span>
-                        </div>
-                      </div>
-                      <span
-                        className="label"
-                      >
-                        
-                        admin
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-              </section>
-            </div>
-          </nav>
-          <nav
-            className="list-pagination"
-          >
-            <ul
-              className="list-pagination__columns"
+            <div
+              className="ReactCollapse--content"
             >
-              <li
-                className="list-pagination__column"
-              >
-                <ul>
-                  <li
-                    className="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
-                  >
-                    <a
-                      disabled={true}
-                      href="#pagination-target"
-                      onClick={[Function]}
-                    >
-                      <svg
-                        aria-hidden={true}
-                        className="manicon-svg svg-icon--arrowLongLeft16"
-                        height={null}
-                        viewBox="0 0 24 16"
-                        width={null}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g
-                          fill="none"
-                          fillRule="evenodd"
-                        >
-                          <path
-                            d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                            fill="currentColor"
-                            fillRule="nonzero"
-                            transform="rotate(180 12 8)"
-                          />
-                          <path
-                            d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                            fill="currentColor"
-                            fillRule="nonzero"
-                            transform="rotate(180 12 8)"
-                          />
-                        </g>
-                      </svg>
-                      <span
-                        className="list-pagination__icon-label"
-                      >
-                        PREV
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li
-                className="list-pagination__column-middle"
-              >
-                <ul
-                  className="list-pagination__pages"
+              <div>
+                <div
+                  className="entity-list-search__options"
                 >
-                  <li
-                    className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
+                  <div
+                    className="entity-list-search__option"
                   >
-                    <a
-                      href="#pagination-target"
-                      onClick={[Function]}
+                    <div
+                      className="entity-list-search__option-inner"
                     >
                       <span
-                        aria-hidden="true"
+                        className="entity-list-search__options-label "
                       >
-                        1
+                        Filter Results:
                       </span>
-                      <span
-                        className="screen-reader-text"
+                      <div
+                        className="entity-list-search__select-wrapper"
                       >
-                        Go to page: 
-                        1
-                      </span>
-                    </a>
-                  </li>
-                  <li
-                    className="list-pagination__page list-pagination__page--ordinal"
-                  >
-                    <a
-                      href="#pagination-target"
-                      onClick={[Function]}
-                    >
-                      <span
-                        aria-hidden="true"
-                      >
-                        2
-                      </span>
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Go to page: 
-                        2
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li
-                className="list-pagination__column"
-              >
-                <ul>
-                  <li
-                    className="list-pagination__page list-pagination__page--next"
-                  >
-                    <a
-                      href="#pagination-target"
-                      onClick={[Function]}
-                    >
-                      <span
-                        className="list-pagination__icon-label"
-                      >
-                        NEXT
-                      </span>
-                      <svg
-                        aria-hidden={true}
-                        className="manicon-svg svg-icon--arrowLongRight16"
-                        height={null}
-                        viewBox="0 0 24 16"
-                        width={null}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g
-                          fill="none"
-                          fillRule="evenodd"
+                        <select
+                          id="list-search-1"
+                          onChange={[Function]}
+                          value=""
                         >
-                          <path
-                            d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                            fill="currentColor"
-                            fillRule="nonzero"
-                          />
-                          <path
-                            d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                            fill="currentColor"
-                            fillRule="nonzero"
-                          />
-                        </g>
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
+                          <option
+                            value=""
+                          >
+                            Filter by: Role
+                          </option>
+                          <option
+                            value="admin"
+                          >
+                            Admin
+                          </option>
+                          <option
+                            value="editor"
+                          >
+                            Editor
+                          </option>
+                          <option
+                            value="project_creator"
+                          >
+                            Project Creator
+                          </option>
+                          <option
+                            value="marketeer"
+                          >
+                            Marketeer
+                          </option>
+                          <option
+                            value="reader"
+                          >
+                            Reader
+                          </option>
+                        </select>
+                        <svg
+                          aria-hidden={true}
+                          className="manicon-svg svg-icon--disclosure24"
+                          height={null}
+                          viewBox="0 0 24 24"
+                          width={null}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g
+                            fill="none"
+                            fillRule="evenodd"
+                          >
+                            <polygon
+                              fill="currentColor"
+                              fillRule="nonzero"
+                              points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                            />
+                            <polygon
+                              fill="currentColor"
+                              fillRule="nonzero"
+                              points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                            />
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="entity-list-search__option"
+                  >
+                    <div
+                      className="entity-list-search__option-inner"
+                    >
+                      <span
+                        className="entity-list-search__options-label"
+                      >
+                        Sort By:
+                      </span>
+                      <div
+                        className="entity-list-search__select-wrapper"
+                      >
+                        <select
+                          id="list-search-1"
+                          onChange={[Function]}
+                          value=""
+                        >
+                          <option
+                            value=""
+                          >
+                            Default:
+                          </option>
+                          <option
+                            value="first_name"
+                          >
+                            first name
+                          </option>
+                          <option
+                            value="last_name"
+                          >
+                            last name
+                          </option>
+                        </select>
+                        <svg
+                          aria-hidden={true}
+                          className="manicon-svg svg-icon--disclosure24"
+                          height={null}
+                          viewBox="0 0 24 24"
+                          width={null}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g
+                            fill="none"
+                            fillRule="evenodd"
+                          >
+                            <polygon
+                              fill="currentColor"
+                              fillRule="nonzero"
+                              points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                            />
+                            <polygon
+                              fill="currentColor"
+                              fillRule="nonzero"
+                              points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                            />
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="entity-list__button-set"
+        >
+          <a
+            className="entity-list__button"
+            href="/backend/records/users/new"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden={true}
+              className="manicon-svg svg-icon--circlePlus32"
+              height={null}
+              viewBox="0 0 32 32"
+              width={null}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+              >
+                <path
+                  d="M9.99999998,16.5 L9.99999998,15.5 L22,15.5 L22,16.5 L9.99999998,16.5 Z M16.5,22 L15.5,22 L15.5,9.99999998 L16.5,9.99999998 L16.5,22 Z M16,27 C9.92486773,27 4.99999997,22.0751323 4.99999997,16 C4.99999997,9.92486773 9.92486773,4.99999997 16,4.99999997 C22.0751323,4.99999997 27,9.92486773 27,16 C27,22.0751323 22.0751323,27 16,27 Z M16,26 C21.5228475,26 26,21.5228475 26,16 C26,10.4771525 21.5228475,5.99999997 16,5.99999997 C10.4771525,5.99999997 5.99999997,10.4771525 5.99999997,16 C5.99999997,21.5228475 10.4771525,26 16,26 Z"
+                  fill="currentColor"
+                  fillRule="nonzero"
+                />
+                <path
+                  d="M9.99999998,16.5 L9.99999998,15.5 L22,15.5 L22,16.5 L9.99999998,16.5 Z M16.5,22 L15.5,22 L15.5,9.99999998 L16.5,9.99999998 L16.5,22 Z M16,27 C9.92486773,27 4.99999997,22.0751323 4.99999997,16 C4.99999997,9.92486773 9.92486773,4.99999997 16,4.99999997 C22.0751323,4.99999997 27,9.92486773 27,16 C27,22.0751323 22.0751323,27 16,27 Z M16,26 C21.5228475,26 26,21.5228475 26,16 C26,10.4771525 21.5228475,5.99999997 16,5.99999997 C10.4771525,5.99999997 5.99999997,10.4771525 5.99999997,16 C5.99999997,21.5228475 10.4771525,26 16,26 Z"
+                  fill="currentColor"
+                  fillRule="nonzero"
+                />
+              </g>
+            </svg>
+            Add a New User
+          </a>
+        </div>
+        <div
+          className="entity-list__count"
+        >
+          <p
+            className="list-total"
+          >
+            Showing 
+            <span>
+              1-1
+            </span>
+             of 
+            <span>
+              2
+            </span>
+             users: 
+          </p>
         </div>
       </div>
+      <ul
+        className="entity-list__list entity-list__list--rows"
+      >
+        <li
+          className="entity-list__entity entity-row entity-row--in-rows"
+        >
+          <div
+            className="entity-row__figure entity-row__figure--valign-center entity-row__figure--size-small entity-row__figure--shape-round entity-row--figure--in-rows"
+          >
+            <a
+              aria-describedby="undefined1-describedby"
+              href="/backend/records/users/1"
+              onClick={[Function]}
+            >
+              <svg
+                className="manicon-svg svg-icon--avatar64"
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  fill="none"
+                  fillRule="evenodd"
+                >
+                  <path
+                    d="M48.204,49.686 L48.109,49.118 C47.436,45.082 43.979,42.153 39.889,42.153 L24.108,42.153 C20.017,42.153 16.56,45.082 15.889,49.118 L15.794,49.684 C11.007,45.294 8,38.993 8,32 C8,18.767 18.767,8 32,8 C45.233,8 56,18.767 56,32 C56,38.994 52.992,45.295 48.204,49.686 M17.574,51.167 L17.861,49.446 C18.372,46.379 20.999,44.153 24.108,44.153 L39.889,44.153 C42.997,44.153 45.625,46.379 46.137,49.446 L46.424,51.168 C42.405,54.2 37.409,56 32,56 C26.59,56 21.593,54.2 17.574,51.167 M32,6 C17.663,6 6,17.664 6,32 C6,46.337 17.663,58 32,58 C46.337,58 58,46.337 58,32 C58,17.664 46.337,6 32,6 M31.9989,35.6704 C27.0359,35.6704 22.9989,31.6324 22.9989,26.6694 C22.9989,21.7054 27.0359,17.6674 31.9989,17.6674 C36.9619,17.6674 40.9989,21.7054 40.9989,26.6694 C40.9989,31.6324 36.9619,35.6704 31.9989,35.6704 M31.9989,15.6674 C25.9339,15.6674 20.9989,20.6034 20.9989,26.6694 C20.9989,32.7354 25.9339,37.6704 31.9989,37.6704 C38.0639,37.6704 42.9989,32.7354 42.9989,26.6694 C42.9989,20.6034 38.0639,15.6674 31.9989,15.6674"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M48.204,49.686 L48.109,49.118 C47.436,45.082 43.979,42.153 39.889,42.153 L24.108,42.153 C20.017,42.153 16.56,45.082 15.889,49.118 L15.794,49.684 C11.007,45.294 8,38.993 8,32 C8,18.767 18.767,8 32,8 C45.233,8 56,18.767 56,32 C56,38.994 52.992,45.295 48.204,49.686 M17.574,51.167 L17.861,49.446 C18.372,46.379 20.999,44.153 24.108,44.153 L39.889,44.153 C42.997,44.153 45.625,46.379 46.137,49.446 L46.424,51.168 C42.405,54.2 37.409,56 32,56 C26.59,56 21.593,54.2 17.574,51.167 M32,6 C17.663,6 6,17.664 6,32 C6,46.337 17.663,58 32,58 C46.337,58 58,46.337 58,32 C58,17.664 46.337,6 32,6 M31.9989,35.6704 C27.0359,35.6704 22.9989,31.6324 22.9989,26.6694 C22.9989,21.7054 27.0359,17.6674 31.9989,17.6674 C36.9619,17.6674 40.9989,21.7054 40.9989,26.6694 C40.9989,31.6324 36.9619,35.6704 31.9989,35.6704 M31.9989,15.6674 C25.9339,15.6674 20.9989,20.6034 20.9989,26.6694 C20.9989,32.7354 25.9339,37.6704 31.9989,37.6704 C38.0639,37.6704 42.9989,32.7354 42.9989,26.6694 C42.9989,20.6034 38.0639,15.6674 31.9989,15.6674"
+                    fill="currentColor"
+                  />
+                </g>
+              </svg>
+            </a>
+          </div>
+          <div
+            className="entity-row__text entity-row__text--valign-center entity-row__text--in-rows"
+          >
+            <h4
+              className="entity-row__title entity-row__title--in-rows"
+            >
+              <span
+                className="entity-row__title-inner"
+              >
+                <a
+                  aria-describedby="undefined1-describedby"
+                  href="/backend/records/users/1"
+                  onClick={[Function]}
+                >
+                  Rowan Ida
+                </a>
+              </span>
+              <span
+                className="entity-row__labels"
+              >
+                <span
+                  className="entity-row__label"
+                >
+                  
+                  admin
+                </span>
+              </span>
+              <span
+                className="aria-describedby"
+                id="undefined1-describedby"
+              >
+                View Rowan Ida
+              </span>
+            </h4>
+          </div>
+        </li>
+      </ul>
+      <div
+        className="entity-list__pagination"
+      >
+        <nav
+          className="list-pagination"
+        >
+          <ul
+            className="list-pagination__columns"
+          >
+            <li
+              className="list-pagination__column"
+            >
+              <ul>
+                <li
+                  className="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
+                >
+                  <a
+                    disabled={true}
+                    href="#pagination-target"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg svg-icon--arrowLongLeft16"
+                      height={null}
+                      viewBox="0 0 24 16"
+                      width={null}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g
+                        fill="none"
+                        fillRule="evenodd"
+                      >
+                        <path
+                          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                          fill="currentColor"
+                          fillRule="nonzero"
+                          transform="rotate(180 12 8)"
+                        />
+                        <path
+                          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                          fill="currentColor"
+                          fillRule="nonzero"
+                          transform="rotate(180 12 8)"
+                        />
+                      </g>
+                    </svg>
+                    <span
+                      className="list-pagination__icon-label"
+                    >
+                      PREV
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li
+              className="list-pagination__column-middle"
+            >
+              <ul
+                className="list-pagination__pages"
+              >
+                <li
+                  className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
+                >
+                  <a
+                    href="#pagination-target"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      1
+                    </span>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Go to page: 
+                      1
+                    </span>
+                  </a>
+                </li>
+                <li
+                  className="list-pagination__page list-pagination__page--ordinal"
+                >
+                  <a
+                    href="#pagination-target"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      2
+                    </span>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Go to page: 
+                      2
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li
+              className="list-pagination__column"
+            >
+              <ul>
+                <li
+                  className="list-pagination__page list-pagination__page--next"
+                >
+                  <a
+                    href="#pagination-target"
+                    onClick={[Function]}
+                  >
+                    <span
+                      className="list-pagination__icon-label"
+                    >
+                      NEXT
+                    </span>
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg svg-icon--arrowLongRight16"
+                      height={null}
+                      viewBox="0 0 24 16"
+                      width={null}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g
+                        fill="none"
+                        fillRule="evenodd"
+                      >
+                        <path
+                          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                          fill="currentColor"
+                          fillRule="nonzero"
+                        />
+                        <path
+                          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                          fill="currentColor"
+                          fillRule="nonzero"
+                        />
+                      </g>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;

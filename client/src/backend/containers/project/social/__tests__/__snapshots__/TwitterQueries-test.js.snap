@@ -2,234 +2,116 @@
 
 exports[`Backend Project Social Twitter Queries Container renders correctly 1`] = `
 <div
-  className="form-section"
+  className="entity-list"
 >
   <header
-    className="form-section-label"
+    className="entity-list__title backend-header section-heading-tertiary"
   >
-    <span>
-      Twitter Queries
-    </span>
+    <h2>
+      <span
+        className="section-heading-tertiary__shim"
+      >
+        Twitter Queries
+      </span>
+    </h2>
   </header>
-  <p
-    className="instructional-copy"
-  >
-    Manifold will periodically fetch tweets according to the queries specified below.
-  </p>
   <div
-    className="form-input-group"
+    className="entity-list__contents-wrapper entity-list__contents-wrapper--with-section-title"
   >
-    <nav
-      className="vertical-list-primary flush"
+    <div
+      className="instructional-copy"
+    >
+      
+            Manifold will periodically fetch tweets according to the queries specified
+            below.
+          
+    </div>
+    <div
+      className="entity-list__header"
     >
       <div
-        className="buttons-icon-horizontal"
+        className="entity-list__button-set"
       >
         <a
-          className="button-icon-secondary"
+          className="entity-list__button"
           href="/backend/projects/1/social/twitter-query/new"
           onClick={[Function]}
         >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-plus"
-          />
-          <span>
-            Add a New Twitter Query
-          </span>
+          <svg
+            aria-hidden={true}
+            className="manicon-svg svg-icon--circlePlus32"
+            height={null}
+            viewBox="0 0 32 32"
+            width={null}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+            >
+              <path
+                d="M9.99999998,16.5 L9.99999998,15.5 L22,15.5 L22,16.5 L9.99999998,16.5 Z M16.5,22 L15.5,22 L15.5,9.99999998 L16.5,9.99999998 L16.5,22 Z M16,27 C9.92486773,27 4.99999997,22.0751323 4.99999997,16 C4.99999997,9.92486773 9.92486773,4.99999997 16,4.99999997 C22.0751323,4.99999997 27,9.92486773 27,16 C27,22.0751323 22.0751323,27 16,27 Z M16,26 C21.5228475,26 26,21.5228475 26,16 C26,10.4771525 21.5228475,5.99999997 16,5.99999997 C10.4771525,5.99999997 5.99999997,10.4771525 5.99999997,16 C5.99999997,21.5228475 10.4771525,26 16,26 Z"
+                fill="currentColor"
+                fillRule="nonzero"
+              />
+              <path
+                d="M9.99999998,16.5 L9.99999998,15.5 L22,15.5 L22,16.5 L9.99999998,16.5 Z M16.5,22 L15.5,22 L15.5,9.99999998 L16.5,9.99999998 L16.5,22 Z M16,27 C9.92486773,27 4.99999997,22.0751323 4.99999997,16 C4.99999997,9.92486773 9.92486773,4.99999997 16,4.99999997 C22.0751323,4.99999997 27,9.92486773 27,16 C27,22.0751323 22.0751323,27 16,27 Z M16,26 C21.5228475,26 26,21.5228475 26,16 C26,10.4771525 21.5228475,5.99999997 16,5.99999997 C10.4771525,5.99999997 5.99999997,10.4771525 5.99999997,16 C5.99999997,21.5228475 10.4771525,26 16,26 Z"
+                fill="currentColor"
+                fillRule="nonzero"
+              />
+            </g>
+          </svg>
+          Add a new twitter query
         </a>
       </div>
-      <section
-        className="simple-list"
+    </div>
+    <ul
+      className="entity-list__list entity-list__list--rows"
+    >
+      <li
+        className="entity-list__entity entity-row entity-row--in-rows"
       >
-        <ul>
-          <li
-            className="active"
+        <div
+          className="entity-row__text entity-row__text--in-rows"
+        >
+          <h4
+            className="entity-row__title entity-row__title--in-rows"
           >
-            <a
-              href="/backend/projects/1/social/twitter-query/2"
-              onClick={[Function]}
+            <span
+              className="entity-row__title-inner"
             >
-              <div
-                className="content"
+              <a
+                aria-describedby="undefined1-describedby"
+                href="/backend/projects/1/social/twitter-query/2"
+                onClick={[Function]}
               >
-                <figure
-                  aria-label="hidden"
-                >
-                  <i
-                    className="manicon manicon-twitter"
-                  />
-                </figure>
-                <span
-                  className="name large"
-                >
-                  from:manifoldscholar
-                </span>
-              </div>
+                from:manifoldscholar
+              </a>
+            </span>
+            <span
+              className="entity-row__labels"
+            >
               <span
-                className="label"
+                className="entity-row__label"
               >
-                <span
-                  className="specifier dull"
-                >
-                  0
-                   EVENTS
-                   
-                </span>
                 Active
               </span>
-            </a>
-          </li>
-        </ul>
-      </section>
-    </nav>
-    <nav
-      className="list-pagination"
-    >
-      <ul
-        className="list-pagination__columns"
-      >
-        <li
-          className="list-pagination__column"
-        >
-          <ul>
-            <li
-              className="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
+            </span>
+            <span
+              className="aria-describedby"
+              id="undefined1-describedby"
             >
-              <a
-                disabled={true}
-                href="#pagination-target"
-                onClick={[Function]}
-              >
-                <svg
-                  aria-hidden={true}
-                  className="manicon-svg svg-icon--arrowLongLeft16"
-                  height={null}
-                  viewBox="0 0 24 16"
-                  width={null}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g
-                    fill="none"
-                    fillRule="evenodd"
-                  >
-                    <path
-                      d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                      fill="currentColor"
-                      fillRule="nonzero"
-                      transform="rotate(180 12 8)"
-                    />
-                    <path
-                      d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                      fill="currentColor"
-                      fillRule="nonzero"
-                      transform="rotate(180 12 8)"
-                    />
-                  </g>
-                </svg>
-                <span
-                  className="list-pagination__icon-label"
-                >
-                  PREV
-                </span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li
-          className="list-pagination__column-middle"
-        >
-          <ul
-            className="list-pagination__pages"
+              View from:manifoldscholar
+            </span>
+          </h4>
+          <h6
+            className="entity-row__meta entity-row__meta--in-rows"
           >
-            <li
-              className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
-            >
-              <a
-                href="#pagination-target"
-                onClick={[Function]}
-              >
-                <span
-                  aria-hidden="true"
-                >
-                  1
-                </span>
-                <span
-                  className="screen-reader-text"
-                >
-                  Go to page: 
-                  1
-                </span>
-              </a>
-            </li>
-            <li
-              className="list-pagination__page list-pagination__page--ordinal"
-            >
-              <a
-                href="#pagination-target"
-                onClick={[Function]}
-              >
-                <span
-                  aria-hidden="true"
-                >
-                  2
-                </span>
-                <span
-                  className="screen-reader-text"
-                >
-                  Go to page: 
-                  2
-                </span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li
-          className="list-pagination__column"
-        >
-          <ul>
-            <li
-              className="list-pagination__page list-pagination__page--next"
-            >
-              <a
-                href="#pagination-target"
-                onClick={[Function]}
-              >
-                <span
-                  className="list-pagination__icon-label"
-                >
-                  NEXT
-                </span>
-                <svg
-                  aria-hidden={true}
-                  className="manicon-svg svg-icon--arrowLongRight16"
-                  height={null}
-                  viewBox="0 0 24 16"
-                  width={null}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g
-                    fill="none"
-                    fillRule="evenodd"
-                  >
-                    <path
-                      d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                      fill="currentColor"
-                      fillRule="nonzero"
-                    />
-                    <path
-                      d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                      fill="currentColor"
-                      fillRule="nonzero"
-                    />
-                  </g>
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
+            No tweets have been fetched yet.
+          </h6>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
 `;
