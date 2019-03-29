@@ -9,6 +9,7 @@ import MakerRow from "./Entity/MakerRow";
 import PageRow from "./Entity/PageRow";
 import PermissionRow from "./Entity/PermissionRow";
 import ProjectRow from "./Entity/ProjectRow";
+import CollectionProjectRow from "./Entity/CollectionProjectRow";
 import ResourceRow from "./Entity/ResourceRow";
 import ResourceCollectionRow from "./Entity/ResourceCollectionRow";
 import SubjectRow from "./Entity/SubjectRow";
@@ -26,6 +27,7 @@ export {
   MakerRow,
   PageRow,
   PermissionRow,
+  CollectionProjectRow,
   ProjectRow,
   ResourceRow,
   ResourceCollectionRow,

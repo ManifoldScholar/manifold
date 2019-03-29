@@ -15,6 +15,14 @@
     padding-top: 1em;
     padding-bottom: 1.125em;
 
+    .manicon-svg {
+      width: 34px;
+      height: 34px;
+      margin-top: -3px;
+      margin-right: 15px;
+      color: $accentPrimary;
+    }
+
     h1 {
       // CABS abstract to all .section-heading-secondary?
       padding-left: 25px;
@@ -31,14 +39,6 @@
 
       @include respond($break60) {
         font-size: 30px;
-      }
-
-      .manicon-svg {
-        width: 34px;
-        height: 34px;
-        margin-top: -3px;
-        margin-right: 15px;
-        color: $accentPrimary;
       }
 
       .manicon {

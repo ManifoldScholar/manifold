@@ -30,7 +30,9 @@ export default class SubjectRow extends PureComponent {
   render() {
     return (
       <EntityRow
+        {...this.props}
         onRowClick={lh.link("backendSettingsSubject", this.id)}
+        rowClickMode="block"
         title={this.name}
         active={this.active}
       />

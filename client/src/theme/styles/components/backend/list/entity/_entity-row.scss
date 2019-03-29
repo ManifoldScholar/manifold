@@ -1,16 +1,87 @@
 .entity-row {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  padding: 14px 0;
-  border-bottom: 1px solid $neutral80;
-  transition: background-color $duration ease-out,
-    box-shadow $duration ease-out;
 
-  &--in-grid {
-    @include respond($break65) {
-      flex-direction: column;
-      width: 100%;
+  list-style: none;
+  user-select: none;
+
+  &__inner {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid $neutral80;
+    transition: background-color $duration ease-out,
+      box-shadow $duration ease-out;
+
+    &--in-grid {
+      @include respond($break65) {
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        padding: 20px 25px;
+        border-bottom: 0;
+      }
+    }
+
+    .entity-row__row-link--is-active & {
+      background-color: $neutral100;
+      border-color: $neutral100;
+      box-shadow: -21px 0 0 1px $neutral100, 21px 0 0 1px $neutral100;
+    }
+  }
+
+  &__row-link--button {
+    @include buttonUnstyled;
+    width: 100%;
+    text-align: left;
+  }
+
+  &--dragging {
+    .entity-row__inner {
+      border-bottom: none;
+    }
+
+    .entity-row__row-link--in-grid {
+
+      padding: 0 14px;
+      background-color: $neutral95;
+      border: 1px solid $neutral80;
+      outline-width: 0;
+
+      @include respond($break65) {
+        @include panelRounded;
+        padding: 0;
+        border: 0;
+        box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
+      }
+    }
+  }
+
+  &__row-link--block {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+
+    &:focus {
+      background-color: lighten($neutral90, 2%);
+      border-color: lighten($neutral90, 2%);
+      outline: none;
+      box-shadow: -21px 0 0 1px lighten($neutral90, 2%), 21px 0 0 1px lighten($neutral90, 2%);
+    }
+
+    &.entity-row__row-link--in-grid {
+
+      transition: background-color $duration ease-out,
+        box-shadow $duration ease-out;
+
+      &:hover,
+      &:focus {
+        outline-width: 0;
+
+        @include respond($break65) {
+          @include panelRounded;
+          box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
+        }
+      }
     }
   }
 
@@ -52,6 +123,12 @@
   &__labels {
     display: inline-block;
     margin: 0;
+  }
+
+  &__title--in-grid {
+    .entity-row__labels {
+      display: block;
+    }
   }
 
   &__label {
@@ -176,13 +253,14 @@
         img, svg {
           left: 0;
           width: auto;
-          height: 75px;
+          height: 120px;
 
           &.project-thumb-placeholder {
             top: 0;
             left: 0;
-            width: 75px;
-            height: 75px;
+            width: 110px;
+            height: 110px;
+            overflow: visible;
           }
 
         }
@@ -205,6 +283,15 @@
     line-height: 1.4em;
     color: $neutral20;
 
+    // in grids, labels are on a new line.
+    &--in-grid {
+      margin-right: 0;
+
+      .entity-row__title-inner {
+        margin-right: 0;
+      }
+    }
+
     button {
       @include buttonUnstyled;
     }
@@ -223,6 +310,22 @@
 
     span {
       display: inline; // needed for text-decoration: underline to work.
+    }
+
+    .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):hover &,
+    .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):focus & {
+      text-decoration: underline;
+    }
+
+    .entity-row__row-link--in-grid:hover &,
+    .entity-row__row-link--in-grid:focus & {
+      @include respond($break65 - 1, max) {
+        text-decoration: underline;
+      }
+    }
+
+    .entity-row__row-link--is-active & {
+      color: $accentPrimary;
     }
   }
 
@@ -276,5 +379,14 @@
     margin-top: 7px;
   }
 
+}
 
+// Bit of a hack to clear out the hover state on other items when the list is sortable
+// and an entity is being dragged.
+.entity-list--dragging .entity-row__row-link--in-grid {
+  &:hover {
+    background-color: inherit;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }

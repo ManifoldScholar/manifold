@@ -14,6 +14,7 @@ import EntitiesList, {
   Search,
   UserRow
 } from "backend/components/list/EntitiesList";
+import isEqual from "lodash/isEqual";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -40,20 +41,26 @@ export class UsersListContainer extends PureComponent {
 
   constructor() {
     super();
-    this.state = { filter: {} };
     this.lastFetchedPage = null;
-    this.fetchUsers = debounce(this.fetchUsers.bind(this), 250, {
+    this.state = { filter: this.defaultFilter };
+    this.fetchUsers = debounce(this.fetchUsers, 250, {
       leading: false,
       trailing: true
     });
   }
 
   componentDidMount() {
-    this.fetchUsers(1);
+    this.fetchUsers();
   }
 
-  componentDidUpdate(prevProps) {
-    this.maybeReload(prevProps.usersMeta);
+  componentDidUpdate(prevProps, prevState) {
+    if (this.shouldReload(prevProps.usersMeta)) {
+      return this.fetchUsers(this.lastFetchedPage);
+    }
+
+    if (this.shouldFetch(prevState)) {
+      return this.fetchUsers();
+    }
   }
 
   get roleOptions() {
@@ -67,15 +74,22 @@ export class UsersListContainer extends PureComponent {
     });
   }
 
-  maybeReload(prevUsersMeta) {
+  get defaultFilter() {
+    return { order: "last_name" };
+  }
+
+  shouldReload(prevUsersMeta) {
     const currentModified = get(this.props, "usersMeta.modified");
     const previousModified = get(prevUsersMeta, "modified");
     if (!currentModified) return;
-    if (currentModified && previousModified) return;
-    this.fetchUsers(this.lastFetchedPage);
+    return currentModified || previousModified;
   }
 
-  fetchUsers(page) {
+  shouldFetch(prevState) {
+    return !isEqual(prevState.filter, this.state.filter);
+  }
+
+  fetchUsers = (page = 1) => {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
@@ -83,22 +97,18 @@ export class UsersListContainer extends PureComponent {
       requests.beUsers
     );
     this.props.dispatch(action);
-  }
-
-  filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.fetchUsers(1);
-    });
   };
 
-  handleUsersPageChange(event, page) {
-    this.fetchUsers(page);
-  }
+  filterChangeHandler = filter => {
+    this.setState({ filter });
+  };
 
   usersPageChangeHandlerCreator = page => {
-    return event => {
-      this.handleUsersPageChange(event, page);
-    };
+    return () => this.fetchUsers(page);
+  };
+
+  resetSearch = () => {
+    this.setState({ filter: this.defaultFilter });
   };
 
   render() {
@@ -128,9 +138,11 @@ export class UsersListContainer extends PureComponent {
           }}
           search={
             <Search
+              filter={this.state.filter}
+              reset={this.resetSearch}
               sortOptions={[
-                { label: "first name", value: "first_name" },
-                { label: "last name", value: "last_name" }
+                { label: "last name", value: "last_name" },
+                { label: "first name", value: "first_name" }
               ]}
               onChange={this.filterChangeHandler}
               filters={[
@@ -145,7 +157,7 @@ export class UsersListContainer extends PureComponent {
           buttons={[
             <Button
               path={lh.link("backendRecordsUsersNew")}
-              text="Add a New User"
+              text="Add a new user"
               authorizedFor="user"
               type="add"
             />

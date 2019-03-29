@@ -37,27 +37,42 @@
 .event-list-secondary {
   @include listUnstyled;
   display: flex;
-  flex-wrap: wrap;
-  margin-bottom: -28px;
+  flex-flow: row wrap;
+  margin-top: -1 * event-entity(row-gap);
 
-  @include respond($break60) {
-    margin-left: -48px;
+  @include respond(event-entity(panel-breakpoint)) {
+    margin-left: -1 * event-entity(icon-size-large);
   }
 
-  li {
-    display: flex;
-    width: 100%;
+  @supports (grid-auto-columns: min-content) {
+    display: grid;
+    grid-template-columns: auto;
 
-    @include respond($break60) {
-      width: 50%;
-      min-height: 143px;
-      padding-left: 35px;
-      margin-bottom: 28px;
+    @include respond(event-entity(min-width) * 2) {
+      grid-template-columns:repeat(auto-fit, minmax(event-entity(min-width), 1fr));
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-grow: 1;
+    min-width: 100%;
+    margin-top: event-entity(row-gap);
+
+    @include respond(event-entity(panel-breakpoint)) {
+      min-height: event-entity(min-height);
+      padding-left: event-entity(icon-size-small);
+    }
+
+    @include respond(event-entity(list-layout-breakpoint)) {
+      flex-basis: 50%;
+      min-width: event-entity(min-width);
+      padding-left: event-entity(column-gap);
     }
 
     @include respond($break85) {
-      width: 33.333%;
-      margin-bottom: 40px;
+      flex-basis: 33.333%;
+      margin-top: 40px;
     }
 
     &:nth-child(n+3) {

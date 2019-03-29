@@ -115,7 +115,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
             buttons={[
               <Button
                 path={lh.link("backendSettingsSubjectsNew")}
-                text="Add a New Subject"
+                text="Add a new subject"
                 authorizedFor="subject"
                 type="add"
               />

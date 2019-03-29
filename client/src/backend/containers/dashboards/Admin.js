@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import DashboardComponents from "backend/components/dashboard";
+import Layout from "backend/components/layout";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, statisticsAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import Authorization from "helpers/authorization";
+import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 import EntitiesList, {
   Search,
@@ -14,10 +16,11 @@ import EntitiesList, {
 } from "backend/components/list/EntitiesList";
 
 import Authorize from "hoc/authorize";
+import isEqual from "lodash/isEqual";
 
 const { request } = entityStoreActions;
 
-const perPage = 5;
+const perPage = 10;
 
 export class DashboardsAdminContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -61,7 +64,7 @@ export class DashboardsAdminContainer extends PureComponent {
     const recentProjectsRequest = request(
       projectsAPI.index(
         this.buildFetchFilter(this.props, { order: "updated_at DESC" }),
-        { size: 2 }
+        { size: 5 }
       ),
       requests.beRecentProjects
     );
@@ -84,6 +87,18 @@ export class DashboardsAdminContainer extends PureComponent {
     return Promise.all(promises);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.shouldFetch(prevState)) return this.updateResults();
+  }
+
+  get defaultFilter() {
+    return { order: "updated_at DESC" };
+  }
+
+  shouldFetch(prevState) {
+    return !isEqual(prevState.filter, this.state.filter);
+  }
+
   initialState(props) {
     return Object.assign({}, { filter: props.projectsListSnapshot.filter });
   }
@@ -102,7 +117,7 @@ export class DashboardsAdminContainer extends PureComponent {
     this.props.snapshotCreator(snapshot);
   }
 
-  updateResults(eventIgnored = null, page = 1) {
+  updateResults = (page = 1) => {
     this.snapshotState(page);
 
     const pagination = { number: page, size: perPage };
@@ -114,27 +129,18 @@ export class DashboardsAdminContainer extends PureComponent {
       requests.beProjects
     );
     this.props.dispatch(action);
-  }
+  };
 
   filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.updateResults();
-    });
+    this.setState({ filter });
   };
 
   updateHandlerCreator = page => {
-    return event => {
-      this.updateResults(event, page);
-    };
+    return () => this.updateResults(page);
   };
 
-  renderProjectCount = () => {
-    if (!this.props.projectsMeta) return null;
-
-    const { totalCount } = this.props.projectsMeta.pagination;
-    const label = totalCount > 1 || totalCount === 0 ? "projects" : "project";
-
-    return <span className="list-total">{`${totalCount} ${label}`}</span>;
+  resetSearch = () => {
+    this.setState({ filter: this.defaultFilter }, this.updateResults);
   };
 
   renderNoProjects = filterState => {
@@ -162,45 +168,67 @@ export class DashboardsAdminContainer extends PureComponent {
             <section className="backend-dashboard">
               <div className="left">
                 {this.props.projects && this.props.projectsMeta && (
-                  <EntitiesList
-                    entities={this.props.projects}
-                    entityComponent={ProjectRow}
-                    title="Projects"
-                    titleIcon="BEProject64"
-                    showCountInTitle
-                    unit="project"
-                    pagination={this.props.projectsMeta.pagination}
-                    callbacks={{
-                      onPageClick: this.updateHandlerCreator
-                    }}
-                    search={<Search onChange={this.filterChangeHandler} />}
-                  />
+                  <Layout.DashboardPanel>
+                    <EntitiesList
+                      entities={this.props.projects}
+                      entityComponent={ProjectRow}
+                      title="Projects"
+                      titleLink={lh.link("backendProjects")}
+                      titleIcon="BEProject64"
+                      showCountInTitle
+                      unit="project"
+                      pagination={this.props.projectsMeta.pagination}
+                      callbacks={{
+                        onPageClick: this.updateHandlerCreator
+                      }}
+                      search={
+                        <Search
+                          onChange={this.filterChangeHandler}
+                          filter={this.state.filter}
+                          reset={this.resetSearch}
+                          sortOptions={[
+                            { label: "Newest", value: "created_at DESC" },
+                            { label: "Oldest", value: "created_at ASC" },
+                            {
+                              label: "Updated At ASC",
+                              value: "updated_at ASC"
+                            },
+                            {
+                              label: "Updated At DESC",
+                              value: "updated_at DESC"
+                            },
+                            { label: "Title ASC", value: "sort_title ASC" },
+                            { label: "Title DESC", value: "sort_title DESC" }
+                          ]}
+                        />
+                      }
+                    />
+                  </Layout.DashboardPanel>
                 )}
               </div>
               <div className="right">
                 {this.props.recentProjects && (
-                  <EntitiesList
-                    entities={this.props.recentProjects}
-                    entityComponent={ProjectRow}
-                    title="Recently Updated"
-                    titleIcon="BEProject64"
-                  />
+                  <Layout.DashboardPanel>
+                    <EntitiesList
+                      entities={this.props.recentProjects}
+                      entityComponent={ProjectRow}
+                      entityComponentProps={{ compact: true }}
+                      title="Recently Updated"
+                      titleIcon="BEProject64"
+                    />
+                  </Layout.DashboardPanel>
                 )}
                 <Authorize entity="statistics" ability={"read"}>
-                  <section>
-                    <header className="section-heading-secondary">
-                      <h3>
-                        <i
-                          className="manicon manicon-pulse-small"
-                          aria-hidden="true"
-                        />
-                        {"Activity"}{" "}
-                      </h3>
-                    </header>
+                  <Layout.DashboardPanel icon={"BEActivity64"} title="Activity">
                     <DashboardComponents.Activity
                       statistics={this.props.statistics}
                     />
-                  </section>
+                  </Layout.DashboardPanel>
+                  <Layout.DashboardPanel icon={"lamp64"} title="Statistics">
+                    <DashboardComponents.Counts
+                      statistics={this.props.statistics}
+                    />
+                  </Layout.DashboardPanel>
                 </Authorize>
               </div>
             </section>

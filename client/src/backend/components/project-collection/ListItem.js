@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import Handle from "backend/components/list/orderable-components/Handle";
+import { SortableHandle } from "react-sortable-hoc";
 import Utility from "global/components/utility";
 
 export default class ProjectCollectionListItem extends PureComponent {
@@ -62,8 +62,20 @@ export default class ProjectCollectionListItem extends PureComponent {
       selected: active
     });
 
+    const Handle = SortableHandle(() => {
+      return (
+        <i className="manicon drag-handle">
+          <Utility.IconComposer size={30} icon="grabber32" />
+          <span className="screen-reader-text">
+            Change the order of this list.
+          </span>
+        </i>
+      );
+    });
+
+    /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
     return (
-      <div className={itemClass} onClick={this.handleClick} role="button">
+      <li className={itemClass} onClick={this.handleClick}>
         <span className="item-text">{this.props.entity.attributes.title}</span>
         <div className="icon-group">
           <span className="item-text">{entity.attributes.projectsCount}</span>
@@ -79,7 +91,7 @@ export default class ProjectCollectionListItem extends PureComponent {
           </button>
           <Handle />
         </div>
-      </div>
+      </li>
     );
   }
 }

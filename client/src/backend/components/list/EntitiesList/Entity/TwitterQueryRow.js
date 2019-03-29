@@ -44,11 +44,13 @@ export default class SubjectRow extends PureComponent {
   render() {
     return (
       <EntityRow
+        {...this.props}
         onRowClick={lh.link(
           "backendProjectSocialTwitterQuery",
           this.projectId,
           this.id
         )}
+        rowClickMode="block"
         figureSize={"small"}
         title={this.name}
         meta={this.count}

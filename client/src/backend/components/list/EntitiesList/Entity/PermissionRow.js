@@ -30,12 +30,16 @@ export default class EventRow extends PureComponent {
   }
 
   get url() {
-    lh.link(this.props.linkName, this.resource.id, this.id);
+    return lh.link(this.props.linkName, this.resource.id, this.id);
   }
 
   get title() {
     const { fullName } = this.user.attributes;
     return fullName;
+  }
+
+  get active() {
+    return this.props.active === this.id;
   }
 
   roleName(name) {
@@ -60,7 +64,10 @@ export default class EventRow extends PureComponent {
   render() {
     return (
       <EntityRow
+        {...this.props}
+        active={this.active}
         onRowClick={this.url}
+        rowClickMode="block"
         title={this.title}
         label={this.roles()}
         figure={<EntityThumbnail.User entity={this.user} />}
