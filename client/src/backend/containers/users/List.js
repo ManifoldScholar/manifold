@@ -147,7 +147,7 @@ export class UsersListContainer extends PureComponent {
           buttons={[
             <Button
               path={lh.link("backendRecordsUsersNew")}
-              text="Add a New User"
+              text="Add a new user"
               authorizedFor="user"
               type="add"
             />

@@ -128,7 +128,7 @@ storiesOf("Backend/List/Entities", module)
         unit="resource"
         pagination={pagination}
         callbacks={callbacks}
-        buttons={[<Button path="/foo" text="Add a New User" type="add" />]}
+        buttons={[<Button path="/foo" text="Add a new user" type="add" />]}
         search={
           <Search
             filters={threeFilters}
