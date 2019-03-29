@@ -16,6 +16,7 @@ import EntitiesList, {
 } from "backend/components/list/EntitiesList";
 
 import Authorize from "hoc/authorize";
+import isEqual from "lodash/isEqual";
 
 const { request } = entityStoreActions;
 
@@ -86,6 +87,18 @@ export class DashboardsAdminContainer extends PureComponent {
     return Promise.all(promises);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.shouldFetch(prevState)) return this.updateResults();
+  }
+
+  get defaultFilter() {
+    return { order: "updated_at DESC" };
+  }
+
+  shouldFetch(prevState) {
+    return !isEqual(prevState.filter, this.state.filter);
+  }
+
   initialState(props) {
     return Object.assign({}, { filter: props.projectsListSnapshot.filter });
   }
@@ -104,7 +117,7 @@ export class DashboardsAdminContainer extends PureComponent {
     this.props.snapshotCreator(snapshot);
   }
 
-  updateResults(eventIgnored = null, page = 1) {
+  updateResults = (page = 1) => {
     this.snapshotState(page);
 
     const pagination = { number: page, size: perPage };
@@ -116,18 +129,18 @@ export class DashboardsAdminContainer extends PureComponent {
       requests.beProjects
     );
     this.props.dispatch(action);
-  }
+  };
 
   filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.updateResults();
-    });
+    this.setState({ filter });
   };
 
   updateHandlerCreator = page => {
-    return event => {
-      this.updateResults(event, page);
-    };
+    return () => this.updateResults(page);
+  };
+
+  resetSearch = () => {
+    this.setState({ filter: this.defaultFilter }, this.updateResults);
   };
 
   renderNoProjects = filterState => {
@@ -168,7 +181,27 @@ export class DashboardsAdminContainer extends PureComponent {
                       callbacks={{
                         onPageClick: this.updateHandlerCreator
                       }}
-                      search={<Search onChange={this.filterChangeHandler} />}
+                      search={
+                        <Search
+                          onChange={this.filterChangeHandler}
+                          filter={this.state.filter}
+                          reset={this.resetSearch}
+                          sortOptions={[
+                            { label: "Newest", value: "created_at DESC" },
+                            { label: "Oldest", value: "created_at ASC" },
+                            {
+                              label: "Updated At ASC",
+                              value: "updated_at ASC"
+                            },
+                            {
+                              label: "Updated At DESC",
+                              value: "updated_at DESC"
+                            },
+                            { label: "Title ASC", value: "sort_title ASC" },
+                            { label: "Title DESC", value: "sort_title DESC" }
+                          ]}
+                        />
+                      }
                     />
                   </Layout.DashboardPanel>
                 )}
