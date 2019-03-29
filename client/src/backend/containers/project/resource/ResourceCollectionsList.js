@@ -100,7 +100,7 @@ export class ProjectResourceCollectionsListContainer extends PureComponent {
         buttons={[
           <Button
             path={lh.link("backendProjectResourceCollectionsNew", project.id)}
-            text="Add a New Resource Collection"
+            text="Add a new resource collection"
             authorizedFor={project}
             authorizedTo="createResourceCollections"
             type="add"

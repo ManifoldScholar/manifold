@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import ListItem from "./ListItem";
-import List from "backend/components/list";
+import EntitiesList from "backend/components/list/EntitiesList";
 
 export default class ProjectCollectionList extends PureComponent {
   static displayName = "ProjectCollection.List";
@@ -22,7 +22,7 @@ export default class ProjectCollectionList extends PureComponent {
 
     return (
       <aside className="aside-wide project-collection-list">
-        <List.Orderable
+        <EntitiesList
           entities={this.props.projectCollections}
           entityComponent={ListItem}
           entityComponentProps={{
@@ -30,10 +30,11 @@ export default class ProjectCollectionList extends PureComponent {
             clickHandler: this.props.onCollectionSelect,
             visibilityToggleHandler: this.props.onToggleVisibility
           }}
-          match={this.props.match}
-          orderChangeHandler={this.props.onCollectionOrderChange}
-          name="project-collections"
-          dragHandle
+          useDragHandle
+          listStyle="bare"
+          callbacks={{
+            onReorder: this.props.onCollectionOrderChange
+          }}
         />
         <div className="actions">
           <button

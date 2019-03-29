@@ -5,6 +5,7 @@ import FormContainer from "backend/containers/form";
 import { usersAPI, permissionsAPI, requests } from "api";
 import connectAndFetch from "utils/connectAndFetch";
 import lh from "helpers/linkHandler";
+import EntityThumbnail from "global/components/entity-thumbnail";
 
 export class PermissionForm extends PureComponent {
   static displayName = "Permission.Form";
@@ -45,18 +46,7 @@ export class PermissionForm extends PureComponent {
       <div className="form-input">
         <div className="user">
           <figure className="avatar">
-            {attr.avatarStyles.smallSquare ? (
-              <div
-                className="image"
-                style={{
-                  backgroundImage: `url(${attr.avatarStyles.smallSquare})`
-                }}
-              />
-            ) : (
-              <div className="no-image">
-                <i className="manicon manicon-person" aria-hidden="true" />
-              </div>
-            )}
+            <EntityThumbnail.User entity={user} />
           </figure>
           <div className="meta">
             <h3 className="name large">{attr.fullName}</h3>

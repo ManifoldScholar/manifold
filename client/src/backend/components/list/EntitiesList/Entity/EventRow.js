@@ -11,6 +11,10 @@ export default class EventRow extends PureComponent {
     destroyHandler: PropTypes.func
   };
 
+  get itemClass() {
+    return "event-entity-row__inner";
+  }
+
   triggerDestroy = event => {
     event.preventDefault();
     this.props.destroyHandler(this.props.entity);
@@ -22,7 +26,7 @@ export default class EventRow extends PureComponent {
     return (
       <li className="event-entity-row">
         <Event.Event
-          itemClass=""
+          itemClass={this.itemClass}
           event={event}
           hideLink
           listStyle={this.props.listStyle}

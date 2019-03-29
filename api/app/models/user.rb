@@ -69,7 +69,7 @@ class User < ApplicationRecord
     where("email ILIKE ?", "#{email}%") if email.present?
   }
   scope :with_order, lambda { |by|
-    return order(:first_name, :last_name) unless by.present?
+    return order(:last_name, :first_name) unless by.present?
 
     order(by)
   }

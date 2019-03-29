@@ -124,6 +124,8 @@ export default class EventRow extends PureComponent {
   }
 
   render() {
-    return <EntityRow title={this.title} meta={this.changeList} />;
+    return (
+      <EntityRow {...this.props} title={this.title} meta={this.changeList} />
+    );
   }
 }

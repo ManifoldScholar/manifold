@@ -45,7 +45,13 @@ export default class EventList extends Component {
           }}
         >
           {this.props.events.map(event => {
-            return <Event event={event} key={event.id} />;
+            return (
+              <Event
+                event={event}
+                key={event.id}
+                itemClass={`${listClass}__item`}
+              />
+            );
           })}
         </ul>
         {this.props.pagination ? (

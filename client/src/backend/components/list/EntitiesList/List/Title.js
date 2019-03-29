@@ -8,8 +8,9 @@ export default class ListEntitiesListTitle extends PureComponent {
   static displayName = "List.Entities.List.Title";
 
   static propTypes = {
-    titleIcon: PropTypes.string,
     title: PropTypes.node,
+    titleIcon: PropTypes.string,
+    titleLink: PropTypes.string,
     titleStyle: PropTypes.oneOf(["bar", "title", "section"]),
     pagination: PropTypes.object,
     showCount: PropTypes.bool
@@ -39,6 +40,10 @@ export default class ListEntitiesListTitle extends PureComponent {
     return this.props.titleIcon;
   }
 
+  get titleLink() {
+    return this.props.titleLink;
+  }
+
   get count() {
     if (!this.showCount) return null;
     if (!this.pagination) return null;
@@ -56,6 +61,7 @@ export default class ListEntitiesListTitle extends PureComponent {
     const TitleComponent = this.titleComponent;
     return (
       <TitleComponent
+        titleLink={this.titleLink}
         count={this.count}
         title={this.title}
         titleIcon={this.titleIcon}

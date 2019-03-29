@@ -1,16 +1,16 @@
 .event-entity-row {
-  position: relative;
-  width: 100%;
+  $entity-column-gap: 40px;
+  $entity-row-gap: 28px;
 
-  @include respond($break60) {
-    width: 100%;
-    padding-left: 40px;
-    margin-bottom: 28px;
+  position: relative;
+  border-bottom: 1px solid $neutral80;
+
+  @include respond(event-entity(panel-breakpoint)) {
     border-bottom: 0;
   }
 
-  @include respond($break95) {
-    width: 50%;
+  &__inner {
+    height: 100%;
   }
 
   .utility {
@@ -18,7 +18,7 @@
     right: 12px;
     bottom: 17px;
 
-    @include respond($break60) {
+    @include respond(event-entity(panel-breakpoint)) {
       font-size: 1.2em;
     }
 

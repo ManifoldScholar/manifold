@@ -149,7 +149,7 @@ export class ProjectsListContainer extends PureComponent {
             buttons={[
               <Button
                 path={lh.link("backendProjectsNew")}
-                text="Add a New Project"
+                text="Add a new project"
                 authorizedFor="project"
                 type="add"
               />

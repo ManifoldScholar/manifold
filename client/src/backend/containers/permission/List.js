@@ -60,7 +60,7 @@ export class PermissionContainer extends PureComponent {
             buttons={[
               <Button
                 path={lh.link(newUrl, entity.id)}
-                text="Add New Permissions"
+                text="Grant new permissions"
                 type="add"
                 authorizedTo="createPermissions"
                 authorizedFor={entity}

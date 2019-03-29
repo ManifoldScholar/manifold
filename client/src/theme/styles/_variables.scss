@@ -178,3 +178,22 @@ $panelRoundedRadius: 8px;
 // --------------------------
 // Rarely used, but helpful for things like modals and height dependent interfaces
 $hbreak90: 900px;
+
+// Component variables
+// --------------------------
+$event-entity: (
+  list-margin-top: 17px,
+  list-layout-breakpoint: $break65,
+  row-gap: 28px,
+  flex-max-width: 460.5px,
+  min-width: 332px,
+  icon-size-small: 40px,
+  icon-size-med: 44px,
+  icon-size-large: 48px,
+  panel-breakpoint: $break60
+);
+
+// get value from $event-entity map
+@function event-entity($property) {
+  @return map-get($event-entity, $property);
+}

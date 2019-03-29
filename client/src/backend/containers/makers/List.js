@@ -13,6 +13,7 @@ import EntitiesList, {
   Button,
   MakerRow
 } from "backend/components/list/EntitiesList";
+import isEqual from "lodash/isEqual";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -37,31 +38,44 @@ export class MakersListContainer extends PureComponent {
 
   constructor() {
     super();
-    this.state = { filter: {} };
     this.lastFetchedPage = null;
-    this.fetchMakers = debounce(this.fetchMakers.bind(this), 250, {
+    this.state = { filter: this.defaultFilter };
+    this.fetchMakers = debounce(this.fetchMakers, 250, {
       leading: false,
       trailing: true
     });
   }
 
   componentDidMount() {
-    this.fetchMakers(1);
+    this.fetchMakers();
   }
 
-  componentDidUpdate(prevProps) {
-    this.maybeReload(prevProps.makersMeta);
+  componentDidUpdate(prevProps, prevState) {
+    if (this.shouldReload(prevProps.makersMeta)) {
+      return this.fetchMakers(this.lastFetchedPage);
+    }
+
+    if (this.shouldFetch(prevState)) {
+      return this.fetchMakers();
+    }
   }
 
-  maybeReload(prevUsersMeta) {
+  get defaultFilter() {
+    return { order: "last_name" };
+  }
+
+  shouldReload(prevUsersMeta) {
     const currentModified = get(this.props, "makersMeta.modified");
     const previousModified = get(prevUsersMeta, "modified");
     if (!currentModified) return;
-    if (currentModified && previousModified) return;
-    this.fetchMakers(this.lastFetchedPage);
+    return currentModified || previousModified;
   }
 
-  fetchMakers(page) {
+  shouldFetch(prevState) {
+    return !isEqual(prevState.filter, this.state.filter);
+  }
+
+  fetchMakers = (page = 1) => {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
@@ -69,22 +83,18 @@ export class MakersListContainer extends PureComponent {
       requests.beMakers
     );
     this.props.dispatch(action);
-  }
-
-  filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.fetchMakers(1);
-    });
   };
 
-  handlePageChange(event, page) {
-    this.fetchMakers(page);
-  }
+  filterChangeHandler = filter => {
+    this.setState({ filter });
+  };
 
   pageChangeHandlerCreator = page => {
-    return event => {
-      this.handlePageChange(event, page);
-    };
+    return () => this.fetchMakers(page);
+  };
+
+  resetSearch = () => {
+    this.setState({ filter: this.defaultFilter });
   };
 
   render() {
@@ -113,10 +123,13 @@ export class MakersListContainer extends PureComponent {
             ]}
             search={
               <Search
+                filter={this.state.filter}
+                reset={this.resetSearch}
                 onChange={this.filterChangeHandler}
+                defaultFilter={this.defaultFilter}
                 sortOptions={[
-                  { label: "first name", value: "first_name" },
-                  { label: "last name", value: "last_name" }
+                  { label: "last name", value: "last_name" },
+                  { label: "first name", value: "first_name" }
                 ]}
               />
             }

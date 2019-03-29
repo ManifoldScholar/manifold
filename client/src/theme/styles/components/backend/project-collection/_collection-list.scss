@@ -8,10 +8,6 @@
     }
   }
 
-  .orderable-list-item + .orderable-list-item {
-    margin-top: 10px;
-  }
-
   .actions {
     margin-top: 18px;
     margin-bottom: 18px;
@@ -39,6 +35,10 @@
   }
 }
 
+.project-collection-list-item + .project-collection-list-item {
+  margin-top: 10px;
+}
+
 .project-collection-list-item {
   display: flex;
   flex-wrap: nowrap;
@@ -59,6 +59,10 @@
 
     .icon-group > i:hover {
       color: $neutral75;
+    }
+
+    svg {
+      color: $neutral95;
     }
   }
 

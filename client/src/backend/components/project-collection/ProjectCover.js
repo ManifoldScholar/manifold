@@ -28,23 +28,6 @@ export default class ProjectCollectionProjectCover extends PureComponent {
     );
   }
 
-  renderProjectMakers(makers) {
-    let output = null;
-    if (makers && makers.length > 0) {
-      output = (
-        <div className="relations-list">
-          {makers.map((maker, i) => {
-            let nameList = maker.attributes.fullName;
-            if (i > 0) nameList = ", " + nameList;
-            return nameList;
-          })}
-        </div>
-      );
-    }
-
-    return output;
-  }
-
   render() {
     const project = this.props.entity;
 
@@ -54,23 +37,10 @@ export default class ProjectCollectionProjectCover extends PureComponent {
     });
 
     return (
-      <div className="item-wrapper">
-        <figure className={figureClass}>
-          <Project.Avatar project={project} />
-          {this.renderAddButton(this.props)}
-        </figure>
-        <div className="meta">
-          <h3 className="name">
-            <span
-              className="title-text"
-              dangerouslySetInnerHTML={{
-                __html: project.attributes.titleFormatted
-              }}
-            />
-          </h3>
-          {this.renderProjectMakers(project.relationships.creators)}
-        </div>
-      </div>
+      <figure className={figureClass}>
+        <Project.Avatar project={project} />
+        {this.renderAddButton(this.props)}
+      </figure>
     );
   }
 }

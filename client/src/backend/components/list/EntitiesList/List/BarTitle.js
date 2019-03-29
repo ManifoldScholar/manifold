@@ -7,8 +7,9 @@ export default class ListEntitiesListBarTitle extends PureComponent {
   static displayName = "List.Entities.List.BarTitle";
 
   static propTypes = {
-    titleIcon: PropTypes.string,
     title: PropTypes.node,
+    titleIcon: PropTypes.string,
+    titleLink: PropTypes.string,
     count: PropTypes.node
   };
 

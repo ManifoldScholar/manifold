@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
+import FormattedDate from "global/components/FormattedDate";
 
 export default class EventRow extends PureComponent {
   static displayName = "EntitiesList.Entity.ProjectRow";
@@ -11,16 +12,19 @@ export default class EventRow extends PureComponent {
     entity: PropTypes.object,
     placeholderMode: PropTypes.string,
     listStyle: PropTypes.oneOf(["rows", "grid"]),
-    figure: PropTypes.node
+    figure: PropTypes.node,
+    compact: PropTypes.bool
   };
 
   static defaultProps = {
-    placeholderMode: "responsive"
+    placeholderMode: "responsive",
+    compact: false
   };
 
   get figure() {
+    if (this.compact) return null;
     if (this.props.figure) return this.props.figure;
-    return <EntityThumbnail.Project mode="small" entity={this.project} />;
+    return <EntityThumbnail.Project mode="responsive" entity={this.project} />;
   }
 
   get project() {
@@ -39,6 +43,10 @@ export default class EventRow extends PureComponent {
     return this.project.relationships.creators || [];
   }
 
+  get compact() {
+    return this.props.compact;
+  }
+
   get creatorNames() {
     return this.creators.map((creator, i) => {
       let nameList = creator.attributes.fullName;
@@ -49,8 +57,9 @@ export default class EventRow extends PureComponent {
 
   get url() {
     if (
-      this.project.attributes.abilities.update === true ||
-      this.project.attributes.abilities.manageResources === true
+      this.project.attributes.abilities &&
+      (this.project.attributes.abilities.update === true ||
+        this.project.attributes.abilities.manageResources === true)
     ) {
       return lh.link("backendProject", this.id);
     }
@@ -58,13 +67,28 @@ export default class EventRow extends PureComponent {
   }
 
   get label() {
-    if (this.attr.draft) return "Draft";
+    const labels = [];
+    if (this.attr.draft) labels.push("Draft");
+    if (this.attr.featured) labels.push("Featured");
+    return labels;
+  }
+
+  get meta() {
+    if (!this.compact) return this.creatorNames;
+    return <FormattedDate prefix="Updated" date={this.attr.updatedAt} />;
+  }
+
+  get subtitle() {
+    if (this.compact) return null;
+    return this.attr.subtitle;
   }
 
   render() {
     return (
       <EntityRow
+        {...this.props}
         onRowClick={this.url}
+        rowClickMode="block"
         listStyle={this.props.listStyle}
         title={
           <span
@@ -72,8 +96,8 @@ export default class EventRow extends PureComponent {
           />
         }
         titlePlainText={this.attr.title}
-        subtitle={this.attr.subtitle}
-        meta={this.creatorNames}
+        subtitle={this.subtitle}
+        meta={this.meta}
         label={this.label}
         figure={this.figure}
       />
