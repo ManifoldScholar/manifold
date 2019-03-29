@@ -56,6 +56,7 @@ export default class EventRow extends PureComponent {
     return (
       <EntityRow
         onRowClick={this.url}
+        rowClickMode="block"
         title={this.name}
         meta={
           <FormattedDate

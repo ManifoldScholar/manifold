@@ -55,6 +55,7 @@ export default class SubjectRow extends PureComponent {
     return (
       <EntityRow
         onRowClick={lh.link("backendRecordsUser", this.id)}
+        rowClickMode="block"
         title={this.name}
         figure={<EntityThumbnail.User entity={this.entity} />}
         figureSize={"small"}

@@ -144,7 +144,6 @@ export default class ListEntitiesListSearch extends PureComponent {
         {this.isConfigurable && (
           <Collapse
             isOpened={this.state.open}
-            springConfig={{ stiffness: 390, damping: 50 }}
           >
             <div>
               <div className={`${baseClass}__options`}>

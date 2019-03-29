@@ -49,6 +49,7 @@ export default class SubjectRow extends PureComponent {
           this.projectId,
           this.id
         )}
+        rowClickMode="block"
         figureSize={"small"}
         title={this.name}
         meta={this.count}

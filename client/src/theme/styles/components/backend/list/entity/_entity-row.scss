@@ -19,6 +19,12 @@
     }
   }
 
+  &__row-link--button {
+    @include buttonUnstyled;
+    width: 100%;
+    text-align: left;
+  }
+
   &__row-link--block {
     display: block;
     height: 100%;

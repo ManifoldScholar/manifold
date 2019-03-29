@@ -28,33 +28,38 @@ Array [
         className="entity-list__list entity-list__list--rows"
       >
         <li
-          className="entity-list__entity entity-row entity-row--in-rows"
+          className="entity-row entity-list__entity"
         >
-          <div
-            className="entity-row__text entity-row__text--valign-center entity-row__text--in-rows"
+          <a
+            aria-describedby="undefined1-describedby"
+            className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
+            href="/backend/settings/subjects/1"
+            onClick={[Function]}
           >
-            <h4
-              className="entity-row__title entity-row__title--in-rows"
+            <div
+              className="entity-row__inner entity-row__inner--in-rows entity-row__inner--with-row-link"
             >
-              <span
-                className="entity-row__title-inner"
+              <div
+                className="entity-row__text entity-row__text--valign-center entity-row__text--in-rows"
               >
-                <a
-                  aria-describedby="undefined1-describedby"
-                  href="/backend/settings/subjects/1"
-                  onClick={[Function]}
+                <h4
+                  className="entity-row__title entity-row__title--in-rows"
                 >
-                  Hip Hop
-                </a>
-              </span>
-              <span
-                className="aria-describedby"
-                id="undefined1-describedby"
-              >
-                View Hip Hop
-              </span>
-            </h4>
-          </div>
+                  <span
+                    className="entity-row__title-inner"
+                  >
+                    Hip Hop
+                  </span>
+                  <span
+                    className="aria-describedby"
+                    id="undefined1-describedby"
+                  >
+                    View Hip Hop
+                  </span>
+                </h4>
+              </div>
+            </div>
+          </a>
         </li>
       </ul>
       <div

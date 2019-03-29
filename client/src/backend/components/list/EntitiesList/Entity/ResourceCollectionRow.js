@@ -56,6 +56,7 @@ export default class EventRow extends PureComponent {
     return (
       <EntityRow
         onRowClick={this.onRowClick}
+        rowClickMode="block"
         title={this.title}
         count={this.count}
         meta={

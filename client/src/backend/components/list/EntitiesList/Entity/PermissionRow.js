@@ -30,7 +30,7 @@ export default class EventRow extends PureComponent {
   }
 
   get url() {
-    lh.link(this.props.linkName, this.resource.id, this.id);
+    return lh.link(this.props.linkName, this.resource.id, this.id);
   }
 
   get title() {
@@ -61,6 +61,7 @@ export default class EventRow extends PureComponent {
     return (
       <EntityRow
         onRowClick={this.url}
+        rowClickMode="block"
         title={this.title}
         label={this.roles()}
         figure={<EntityThumbnail.User entity={this.user} />}

@@ -65,108 +65,116 @@ exports[`Backend Project Log Container renders correctly 1`] = `
       className="entity-list__list entity-list__list--rows"
     >
       <li
-        className="entity-list__entity entity-row entity-row--in-rows"
+        className="entity-row entity-list__entity"
       >
         <div
-          className="entity-row__text entity-row__text--in-rows"
+          className="entity-row__inner entity-row__inner--in-rows"
         >
-          <h4
-            className="entity-row__title entity-row__title--in-rows"
+          <div
+            className="entity-row__text entity-row__text--in-rows"
           >
-            <span
-              className="entity-row__title-inner"
+            <h4
+              className="entity-row__title entity-row__title--in-rows"
+            >
+              <span
+                className="entity-row__title-inner"
+              >
+                <span>
+                  <a
+                    className="entity-row__link--inverted"
+                    href="/backend/records/users/1"
+                    onClick={[Function]}
+                  >
+                    Nas
+                  </a>
+                   updated the Resource, “
+                  <a
+                    className="entity-row__link--inverted"
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "The World Is Yours",
+                      }
+                    }
+                    href="/backend/projects/resource/1"
+                    onClick={[Function]}
+                  />
+                  ”, 
+                  <time
+                    dateTime="2017-04-24"
+                  >
+                    on April 24, 2017
+                  </time>
+                </span>
+              </span>
+              <span
+                className="aria-describedby"
+                id="undefined1-describedby"
+              >
+                View [object Object]
+              </span>
+            </h4>
+            <h6
+              className="entity-row__meta entity-row__meta--in-rows"
             >
               <span>
-                <a
-                  className="entity-row__link--inverted"
-                  href="/backend/records/users/1"
-                  onClick={[Function]}
-                >
-                  Nas
-                </a>
-                 updated the Resource, “
-                <a
-                  className="entity-row__link--inverted"
-                  dangerouslySetInnerHTML={
-                    Object {
-                      "__html": "The World Is Yours",
-                    }
-                  }
-                  href="/backend/projects/resource/1"
-                  onClick={[Function]}
-                />
-                ”, 
-                <time
-                  dateTime="2017-04-24"
-                >
-                  on April 24, 2017
-                </time>
+                These fields were modified: 
+                <em>
+                  title
+                </em>
               </span>
-            </span>
-            <span
-              className="aria-describedby"
-              id="undefined1-describedby"
-            >
-              View [object Object]
-            </span>
-          </h4>
-          <h6
-            className="entity-row__meta entity-row__meta--in-rows"
-          >
-            <span>
-              These fields were modified: 
-              <em>
-                title
-              </em>
-            </span>
-          </h6>
+            </h6>
+          </div>
         </div>
       </li>
       <li
-        className="entity-list__entity entity-row entity-row--in-rows"
+        className="entity-row entity-list__entity"
       >
         <div
-          className="entity-row__text entity-row__text--in-rows"
+          className="entity-row__inner entity-row__inner--in-rows"
         >
-          <h4
-            className="entity-row__title entity-row__title--in-rows"
+          <div
+            className="entity-row__text entity-row__text--in-rows"
           >
-            <span
-              className="entity-row__title-inner"
+            <h4
+              className="entity-row__title entity-row__title--in-rows"
+            >
+              <span
+                className="entity-row__title-inner"
+              >
+                <span>
+                  <a
+                    className="entity-row__link--inverted"
+                    href="/backend/records/users/1"
+                    onClick={[Function]}
+                  >
+                    Nas
+                  </a>
+                   updated this project 
+                  <time
+                    dateTime="2017-04-24"
+                  >
+                    on April 24, 2017
+                  </time>
+                </span>
+              </span>
+              <span
+                className="aria-describedby"
+                id="undefined1-describedby"
+              >
+                View [object Object]
+              </span>
+            </h4>
+            <h6
+              className="entity-row__meta entity-row__meta--in-rows"
             >
               <span>
-                <a
-                  className="entity-row__link--inverted"
-                  href="/backend/records/users/1"
-                  onClick={[Function]}
-                >
-                  Nas
-                </a>
-                 updated this project 
-                <time
-                  dateTime="2017-04-24"
-                >
-                  on April 24, 2017
-                </time>
+                These fields were modified: 
+                <em>
+                  title
+                </em>
               </span>
-            </span>
-            <span
-              className="aria-describedby"
-              id="undefined1-describedby"
-            >
-              View [object Object]
-            </span>
-          </h4>
-          <h6
-            className="entity-row__meta entity-row__meta--in-rows"
-          >
-            <span>
-              These fields were modified: 
-              <em>
-                title
-              </em>
-            </span>
-          </h6>
+            </h6>
+          </div>
         </div>
       </li>
     </ul>
