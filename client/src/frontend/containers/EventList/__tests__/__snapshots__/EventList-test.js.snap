@@ -54,7 +54,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
           className="event-list-primary"
         >
           <div
-            className=""
+            className="event-list-primary__item"
           >
             <div
               className="event-tile event-tile--linked"
@@ -112,7 +112,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
             </div>
           </div>
           <div
-            className=""
+            className="event-list-primary__item"
           >
             <div
               className="event-tile event-tile--linked"

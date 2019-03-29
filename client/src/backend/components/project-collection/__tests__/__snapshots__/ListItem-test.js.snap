@@ -1,10 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend.ProjectCollection.ListItem component renders correctly 1`] = `
-<div
+<li
   className="project-collection-list-item"
   onClick={[Function]}
-  role="button"
 >
   <span
     className="item-text"
@@ -84,5 +83,5 @@ exports[`Backend.ProjectCollection.ListItem component renders correctly 1`] = `
       </span>
     </i>
   </div>
-</div>
+</li>
 `;

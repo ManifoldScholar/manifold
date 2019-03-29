@@ -3,6 +3,7 @@
 exports[`Backend Project Social Twitter Queries Container renders correctly 1`] = `
 <div
   className="entity-list"
+  id="entities-list1"
 >
   <header
     className="entity-list__title backend-header section-heading-tertiary"
@@ -69,47 +70,52 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
       className="entity-list__list entity-list__list--rows"
     >
       <li
-        className="entity-list__entity entity-row entity-row--in-rows"
+        className="entity-row entity-list__entity"
       >
-        <div
-          className="entity-row__text entity-row__text--in-rows"
+        <a
+          aria-describedby="undefined1-describedby"
+          className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag entity-row__row-link--is-active"
+          href="/backend/projects/1/social/twitter-query/2"
+          onClick={[Function]}
         >
-          <h4
-            className="entity-row__title entity-row__title--in-rows"
+          <div
+            className="entity-row__inner entity-row__inner--in-rows entity-row__inner--with-row-link"
           >
-            <span
-              className="entity-row__title-inner"
+            <div
+              className="entity-row__text entity-row__text--in-rows"
             >
-              <a
-                aria-describedby="undefined1-describedby"
-                href="/backend/projects/1/social/twitter-query/2"
-                onClick={[Function]}
+              <h4
+                className="entity-row__title entity-row__title--in-rows"
               >
-                from:manifoldscholar
-              </a>
-            </span>
-            <span
-              className="entity-row__labels"
-            >
-              <span
-                className="entity-row__label"
+                <span
+                  className="entity-row__title-inner"
+                >
+                  from:manifoldscholar
+                </span>
+                <span
+                  className="entity-row__labels"
+                >
+                  <span
+                    className="entity-row__label"
+                  >
+                    Active
+                  </span>
+                </span>
+                <span
+                  className="aria-describedby"
+                  id="undefined1-describedby"
+                >
+                  View from:manifoldscholar
+                </span>
+              </h4>
+              <h6
+                className="entity-row__meta entity-row__meta--in-rows"
               >
-                Active
-              </span>
-            </span>
-            <span
-              className="aria-describedby"
-              id="undefined1-describedby"
-            >
-              View from:manifoldscholar
-            </span>
-          </h4>
-          <h6
-            className="entity-row__meta entity-row__meta--in-rows"
-          >
-            No tweets have been fetched yet.
-          </h6>
-        </div>
+                No tweets have been fetched yet.
+              </h6>
+            </div>
+          </div>
+        </a>
       </li>
     </ul>
   </div>
