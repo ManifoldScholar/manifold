@@ -75,6 +75,30 @@ class Statistics
     Text.in_the_week_of(Date.current).count
   end
 
+  def total_project_count
+    Project.count
+  end
+
+  def total_text_count
+    Text.count
+  end
+
+  def total_resource_count
+    Resource.count
+  end
+
+  def total_annotation_count
+    Annotation.count
+  end
+
+  def total_comment_count
+    Comment.count
+  end
+
+  def total_user_count
+    User.count
+  end
+
   def read_attribute_for_serialization(attr)
     send(attr)
   end
