@@ -64,7 +64,7 @@ class TextSection < ApplicationRecord
   # Search
   searchkick(
     callbacks: :async,
-    batch_size: 500,
+    batch_size: 25,
     merge_mappings: true,
     mappings: {
       text_section: {
