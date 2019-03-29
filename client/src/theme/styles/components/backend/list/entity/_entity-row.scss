@@ -21,6 +21,12 @@
         border-bottom: 0;
       }
     }
+
+    .entity-row__row-link--is-active & {
+      background-color: $neutral100;
+      border-color: $neutral100;
+      box-shadow: -21px 0 0 1px $neutral100, 21px 0 0 1px $neutral100;
+    }
   }
 
   &__row-link--button {
@@ -299,8 +305,8 @@
       display: inline; // needed for text-decoration: underline to work.
     }
 
-    .entity-row__row-link--block:not(.entity-row__row-link--in-grid):hover &,
-    .entity-row__row-link--block:not(.entity-row__row-link--in-grid):focus & {
+    .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):hover &,
+    .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):focus & {
       text-decoration: underline;
     }
 
@@ -309,6 +315,10 @@
       @include respond($break65 - 1, max) {
         text-decoration: underline;
       }
+    }
+
+    .entity-row__row-link--is-active & {
+      color: $accentPrimary;
     }
   }
 
