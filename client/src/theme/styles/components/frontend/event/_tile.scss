@@ -27,7 +27,6 @@
 
     &:hover,
     &:focus {
-      color: $accentPrimary;
       outline: none;
       box-shadow: 0 10px 30px 2px rgba($neutralBlack, 0.13);
 
@@ -35,12 +34,7 @@
         box-shadow: 0 20px 30px 2px rgba($neutralBlack, 0.13);
       }
 
-      .event-tile__icon,
-      .event-tile__title,
-      .event-tile__header,
-      .event-tile__footer,
-      .event-tile__user,
-      .event-tile__user a {
+      .event-tile__icon {
         color: $accentPrimary;
       }
     }
@@ -145,7 +139,7 @@
     letter-spacing: 0.03em;
 
     a {
-      color: $accentPrimary;
+      color: $accentPrimaryDark;
       text-decoration: none;
     }
   }

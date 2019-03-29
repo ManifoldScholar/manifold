@@ -38,6 +38,10 @@ export default class EventRow extends PureComponent {
     return fullName;
   }
 
+  get active() {
+    return (this.props.active === this.id);
+  }
+
   roleName(name) {
     switch (name) {
       case "project_editor":
@@ -61,6 +65,7 @@ export default class EventRow extends PureComponent {
     return (
       <EntityRow
         {...this.props}
+        active={this.active}
         onRowClick={this.url}
         rowClickMode="block"
         title={this.title}

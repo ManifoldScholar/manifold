@@ -55,7 +55,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
                 />
               </g>
             </svg>
-            Add New Permissions
+            Grant new permissions
           </a>
         </div>
       </div>

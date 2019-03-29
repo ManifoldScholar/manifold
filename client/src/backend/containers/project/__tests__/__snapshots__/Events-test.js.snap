@@ -247,7 +247,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
           className="event-entity-row"
         >
           <div
-            className=""
+            className="event-entity-row__inner"
           >
             <div
               className="event-tile"
@@ -326,7 +326,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
           className="event-entity-row"
         >
           <div
-            className=""
+            className="event-entity-row__inner"
           >
             <div
               className="event-tile"

@@ -333,7 +333,7 @@ exports[`Backend Project Collections Container renders correctly 1`] = `
                 />
               </g>
             </svg>
-            Add a New Resource
+            Add a new resource
           </a>
           <a
             className="entity-list__button"
@@ -364,7 +364,7 @@ exports[`Backend Project Collections Container renders correctly 1`] = `
                 />
               </g>
             </svg>
-            Bulk Add Resources
+            Bulk add resources
           </a>
         </div>
         <div

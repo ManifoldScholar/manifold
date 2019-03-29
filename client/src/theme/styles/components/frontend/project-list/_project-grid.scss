@@ -2,6 +2,7 @@
 .project-list {
   .browse & {
     li {
+
       border-color: $neutral40;
       opacity: 1;
       transition: opacity $duration $timing;
@@ -76,6 +77,11 @@
       @include respond($break75) {
         li {
           padding-left: 0;
+        }
+
+        a {
+          transition: background-color $duration ease-out,
+            box-shadow $duration ease-out;
         }
 
         a:hover, a:focus {
