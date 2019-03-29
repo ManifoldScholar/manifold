@@ -45,7 +45,7 @@ export default class SortableEntities extends PureComponent {
     this.ul.current.classList.add("entity-list--dragging");
   };
 
-  onSortStart = result => {
+  onSortEnd = result => {
     if (!result) return null;
 
     const entity = this.state.orderedEntities[result.oldIndex];
@@ -53,6 +53,8 @@ export default class SortableEntities extends PureComponent {
 
     if (this.ul.current)
       this.ul.current.classList.remove("entity-list--dragging");
+
+    if (result.newIndex === result.oldIndex) return;
 
     this.setState(
       {
@@ -156,7 +158,7 @@ export default class SortableEntities extends PureComponent {
         entities={this.entities}
         helperClass="entity-row--dragging"
         updateBeforeSortStart={this.onUpdateBeforeSortStart}
-        onSortEnd={this.onSortStart}
+        onSortEnd={this.onSortEnd}
         useDragHandle={this.useDragHandle}
         axis={"xy"}
       />
