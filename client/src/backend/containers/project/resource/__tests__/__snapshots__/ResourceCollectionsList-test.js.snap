@@ -3,6 +3,7 @@
 exports[`Backend Project Resource CollectionList Container renders correctly 1`] = `
 <div
   className="entity-list"
+  id="entities-list1"
 >
   <h3
     className="entity-list__title"
@@ -41,153 +42,144 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
     className="entity-list__contents-wrapper"
   >
     <div
-      className="entity-list__header"
+      className="entity-list__search entity-list-search"
     >
-      <div
-        className="entity-list__search entity-list-search"
+      <form
+        onSubmit={[Function]}
       >
-        <form
-          onSubmit={[Function]}
-        >
-          <div
-            className="entity-list-search__keyword-row"
-          >
-            <button
-              className="entity-list-search__search-button"
-            >
-              <svg
-                aria-hidden={true}
-                className="manicon-svg manicon-magnify svg-icon--search16"
-                height={null}
-                viewBox="0 0 16 16"
-                width={null}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g
-                  fill="none"
-                  fillRule="evenodd"
-                >
-                  <path
-                    d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
-                    fill="currentColor"
-                    fillRule="nonzero"
-                  />
-                  <path
-                    d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
-                    fill="currentColor"
-                    fillRule="nonzero"
-                  />
-                </g>
-              </svg>
-              <span
-                className="screen-reader-text"
-              >
-                Search
-              </span>
-            </button>
-            <div
-              className="entity-list-search__keyword-input-wrapper"
-            >
-              <label
-                className="screen-reader-text"
-                htmlFor="list-search-1"
-              >
-                Enter Search Criteria
-              </label>
-              <input
-                className="entity-list-search__keyword-input"
-                id="list-search-1"
-                onChange={[Function]}
-                placeholder="Search..."
-                type="text"
-                value=""
-              />
-            </div>
-            <button
-              className="entity-list-search__text-button"
-              onClick={[Function]}
-            >
-              Reset
-            </button>
-            <button
-              className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
-              onClick={[Function]}
-            >
-              Options
-            </button>
-          </div>
-        </form>
         <div
-          className="ReactCollapse--collapse"
-          style={
-            Object {
-              "height": 0,
-              "overflow": "hidden",
-            }
-          }
+          className="entity-list-search__keyword-row"
         >
-          <div
-            className="ReactCollapse--content"
+          <button
+            className="entity-list-search__search-button"
           >
-            <div>
+            <svg
+              aria-hidden={true}
+              className="manicon-svg manicon-magnify svg-icon--search16"
+              height={null}
+              viewBox="0 0 16 16"
+              width={null}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+              >
+                <path
+                  d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
+                  fill="currentColor"
+                  fillRule="nonzero"
+                />
+                <path
+                  d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
+                  fill="currentColor"
+                  fillRule="nonzero"
+                />
+              </g>
+            </svg>
+            <span
+              className="screen-reader-text"
+            >
+              Search
+            </span>
+          </button>
+          <div
+            className="entity-list-search__keyword-input-wrapper"
+          >
+            <label
+              className="screen-reader-text"
+              htmlFor="list-search-1"
+            >
+              Enter Search Criteria
+            </label>
+            <input
+              className="entity-list-search__keyword-input"
+              id="list-search-1"
+              onChange={[Function]}
+              placeholder="Search..."
+              type="text"
+              value=""
+            />
+          </div>
+          <button
+            className="entity-list-search__text-button"
+            onClick={[Function]}
+          >
+            Reset
+          </button>
+          <button
+            className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
+            onClick={[Function]}
+          >
+            Options
+          </button>
+        </div>
+      </form>
+      <div
+        className="ReactCollapse--collapse"
+        style={
+          Object {
+            "height": 0,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          className="ReactCollapse--content"
+        >
+          <div>
+            <div
+              className="entity-list-search__options"
+            >
               <div
-                className="entity-list-search__options"
+                className="entity-list-search__option"
               >
                 <div
-                  className="entity-list-search__option"
+                  className="entity-list-search__option-inner"
                 >
-                  <div
-                    className="entity-list-search__option-inner"
+                  <span
+                    className="entity-list-search__options-label"
                   >
-                    <span
-                      className="entity-list-search__options-label"
+                    Sort By:
+                  </span>
+                  <div
+                    className="entity-list-search__select-wrapper"
+                  >
+                    <select
+                      id="list-search-1"
+                      onChange={[Function]}
+                      value=""
                     >
-                      Sort By:
-                    </span>
-                    <div
-                      className="entity-list-search__select-wrapper"
+                      <option
+                        value="title"
+                      >
+                        title
+                      </option>
+                    </select>
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg svg-icon--disclosure24"
+                      height={null}
+                      viewBox="0 0 24 24"
+                      width={null}
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <select
-                        id="list-search-1"
-                        onChange={[Function]}
-                        value=""
+                      <g
+                        fill="none"
+                        fillRule="evenodd"
                       >
-                        <option
-                          value=""
-                        >
-                          Default:
-                        </option>
-                        <option
-                          value="title"
-                        >
-                          title
-                        </option>
-                      </select>
-                      <svg
-                        aria-hidden={true}
-                        className="manicon-svg svg-icon--disclosure24"
-                        height={null}
-                        viewBox="0 0 24 24"
-                        width={null}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g
-                          fill="none"
-                          fillRule="evenodd"
-                        >
-                          <polygon
-                            fill="currentColor"
-                            fillRule="nonzero"
-                            points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-                          />
-                          <polygon
-                            fill="currentColor"
-                            fillRule="nonzero"
-                            points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-                          />
-                        </g>
-                      </svg>
-                    </div>
+                        <polygon
+                          fill="currentColor"
+                          fillRule="nonzero"
+                          points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                        />
+                        <polygon
+                          fill="currentColor"
+                          fillRule="nonzero"
+                          points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                        />
+                      </g>
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -195,6 +187,10 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
           </div>
         </div>
       </div>
+    </div>
+    <div
+      className="entity-list__header"
+    >
       <div
         className="entity-list__button-set"
       >
@@ -227,7 +223,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
               />
             </g>
           </svg>
-          Add a New Resource Collection
+          Add a new resource collection
         </a>
       </div>
       <div
@@ -252,152 +248,150 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
       className="entity-list__list entity-list__list--rows"
     >
       <li
-        className="entity-list__entity entity-row entity-row--in-rows"
+        className="entity-row entity-list__entity"
       >
-        <div
-          className="entity-row__figure entity-row__figure--size-normal entity-row__figure--shape-square entity-row--figure--in-rows"
+        <a
+          aria-describedby="undefined1-describedby"
+          className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
+          href="/backend/projects/resource-collection/2"
+          onClick={[Function]}
         >
-          <a
-            aria-describedby="undefined1-describedby"
-            href="/backend/projects/resource-collection/2"
-            onClick={[Function]}
+          <div
+            className="entity-row__inner entity-row__inner--in-rows entity-row__inner--with-row-link"
           >
-            <svg
-              className="manicon-svg svg-icon--resourceCollection64"
-              viewBox="0 0 64 64"
-              xmlns="http://www.w3.org/2000/svg"
+            <div
+              className="entity-row__figure entity-row__figure--size-normal entity-row__figure--shape-square entity-row--figure--in-rows"
             >
-              <g
-                fill="none"
-                fillRule="evenodd"
+              <svg
+                className="manicon-svg svg-icon--resourceCollection64"
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
-                  fill="currentColor"
-                  fillRule="nonzero"
-                />
-                <path
-                  d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
-                  fill="currentColor"
-                  fillRule="nonzero"
-                />
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div
-          className="entity-row__text entity-row__text--in-rows"
-        >
-          <h4
-            className="entity-row__title entity-row__title--in-rows"
-          >
-            <span
-              className="entity-row__title-inner"
+                <g
+                  fill="none"
+                  fillRule="evenodd"
+                >
+                  <path
+                    d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
+                    fill="currentColor"
+                    fillRule="nonzero"
+                  />
+                  <path
+                    d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
+                    fill="currentColor"
+                    fillRule="nonzero"
+                  />
+                </g>
+              </svg>
+            </div>
+            <div
+              className="entity-row__text entity-row__text--in-rows"
             >
-              <a
-                aria-describedby="undefined1-describedby"
-                href="/backend/projects/resource-collection/2"
-                onClick={[Function]}
+              <h4
+                className="entity-row__title entity-row__title--in-rows"
               >
-                Rowan
-              </a>
-            </span>
-            <span
-              className="aria-describedby"
-              id="undefined1-describedby"
-            >
-              View Rowan
-            </span>
-          </h4>
-          <h5
-            className="entity-row__count entity-row__count--in-rows"
-          >
-            0 resources
-          </h5>
-          <h6
-            className="entity-row__meta entity-row__meta--in-rows"
-          >
-            <time
-              dateTime="2017-04-24"
-            >
-              Created April 24, 2017
-            </time>
-          </h6>
-        </div>
+                <span
+                  className="entity-row__title-inner"
+                >
+                  Rowan
+                </span>
+                <span
+                  className="aria-describedby"
+                  id="undefined1-describedby"
+                >
+                  View Rowan
+                </span>
+              </h4>
+              <h5
+                className="entity-row__count entity-row__count--in-rows"
+              >
+                0 resources
+              </h5>
+              <h6
+                className="entity-row__meta entity-row__meta--in-rows"
+              >
+                <time
+                  dateTime="2017-04-24"
+                >
+                  Created April 24, 2017
+                </time>
+              </h6>
+            </div>
+          </div>
+        </a>
       </li>
       <li
-        className="entity-list__entity entity-row entity-row--in-rows"
+        className="entity-row entity-list__entity"
       >
-        <div
-          className="entity-row__figure entity-row__figure--size-normal entity-row__figure--shape-square entity-row--figure--in-rows"
+        <a
+          aria-describedby="undefined1-describedby"
+          className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
+          href="/backend/projects/resource-collection/3"
+          onClick={[Function]}
         >
-          <a
-            aria-describedby="undefined1-describedby"
-            href="/backend/projects/resource-collection/3"
-            onClick={[Function]}
+          <div
+            className="entity-row__inner entity-row__inner--in-rows entity-row__inner--with-row-link"
           >
-            <svg
-              className="manicon-svg svg-icon--resourceCollection64"
-              viewBox="0 0 64 64"
-              xmlns="http://www.w3.org/2000/svg"
+            <div
+              className="entity-row__figure entity-row__figure--size-normal entity-row__figure--shape-square entity-row--figure--in-rows"
             >
-              <g
-                fill="none"
-                fillRule="evenodd"
+              <svg
+                className="manicon-svg svg-icon--resourceCollection64"
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
-                  fill="currentColor"
-                  fillRule="nonzero"
-                />
-                <path
-                  d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
-                  fill="currentColor"
-                  fillRule="nonzero"
-                />
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div
-          className="entity-row__text entity-row__text--in-rows"
-        >
-          <h4
-            className="entity-row__title entity-row__title--in-rows"
-          >
-            <span
-              className="entity-row__title-inner"
+                <g
+                  fill="none"
+                  fillRule="evenodd"
+                >
+                  <path
+                    d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
+                    fill="currentColor"
+                    fillRule="nonzero"
+                  />
+                  <path
+                    d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
+                    fill="currentColor"
+                    fillRule="nonzero"
+                  />
+                </g>
+              </svg>
+            </div>
+            <div
+              className="entity-row__text entity-row__text--in-rows"
             >
-              <a
-                aria-describedby="undefined1-describedby"
-                href="/backend/projects/resource-collection/3"
-                onClick={[Function]}
+              <h4
+                className="entity-row__title entity-row__title--in-rows"
               >
-                Rowan
-              </a>
-            </span>
-            <span
-              className="aria-describedby"
-              id="undefined1-describedby"
-            >
-              View Rowan
-            </span>
-          </h4>
-          <h5
-            className="entity-row__count entity-row__count--in-rows"
-          >
-            0 resources
-          </h5>
-          <h6
-            className="entity-row__meta entity-row__meta--in-rows"
-          >
-            <time
-              dateTime="2017-04-24"
-            >
-              Created April 24, 2017
-            </time>
-          </h6>
-        </div>
+                <span
+                  className="entity-row__title-inner"
+                >
+                  Rowan
+                </span>
+                <span
+                  className="aria-describedby"
+                  id="undefined1-describedby"
+                >
+                  View Rowan
+                </span>
+              </h4>
+              <h5
+                className="entity-row__count entity-row__count--in-rows"
+              >
+                0 resources
+              </h5>
+              <h6
+                className="entity-row__meta entity-row__meta--in-rows"
+              >
+                <time
+                  dateTime="2017-04-24"
+                >
+                  Created April 24, 2017
+                </time>
+              </h6>
+            </div>
+          </div>
+        </a>
       </li>
     </ul>
     <div
@@ -418,7 +412,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
               >
                 <a
                   disabled={true}
-                  href="#pagination-target"
+                  href="entities-list1"
                   onClick={[Function]}
                 >
                   <svg
@@ -466,7 +460,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                 className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
               >
                 <a
-                  href="#pagination-target"
+                  href="entities-list1"
                   onClick={[Function]}
                 >
                   <span
@@ -486,7 +480,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                 className="list-pagination__page list-pagination__page--ordinal"
               >
                 <a
-                  href="#pagination-target"
+                  href="entities-list1"
                   onClick={[Function]}
                 >
                   <span
@@ -512,7 +506,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                 className="list-pagination__page list-pagination__page--next"
               >
                 <a
-                  href="#pagination-target"
+                  href="entities-list1"
                   onClick={[Function]}
                 >
                   <span

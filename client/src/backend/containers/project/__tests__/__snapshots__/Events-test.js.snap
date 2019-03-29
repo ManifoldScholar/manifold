@@ -4,6 +4,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
 <section>
   <div
     className="entity-list"
+    id="entities-list1"
   >
     <h3
       className="entity-list__title"
@@ -42,178 +43,174 @@ exports[`Backend Project Events Container renders correctly 1`] = `
       className="entity-list__contents-wrapper"
     >
       <div
-        className="entity-list__header"
+        className="entity-list__search entity-list-search"
       >
-        <div
-          className="entity-list__search entity-list-search"
+        <form
+          onSubmit={[Function]}
         >
-          <form
-            onSubmit={[Function]}
-          >
-            <div
-              className="entity-list-search__keyword-row"
-            >
-              <button
-                className="entity-list-search__search-button"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="manicon-svg manicon-magnify svg-icon--search16"
-                  height={null}
-                  viewBox="0 0 16 16"
-                  width={null}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g
-                    fill="none"
-                    fillRule="evenodd"
-                  >
-                    <path
-                      d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
-                      fill="currentColor"
-                      fillRule="nonzero"
-                    />
-                    <path
-                      d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
-                      fill="currentColor"
-                      fillRule="nonzero"
-                    />
-                  </g>
-                </svg>
-                <span
-                  className="screen-reader-text"
-                >
-                  Search
-                </span>
-              </button>
-              <div
-                className="entity-list-search__keyword-input-wrapper"
-              >
-                <label
-                  className="screen-reader-text"
-                  htmlFor="list-search-1"
-                >
-                  Enter Search Criteria
-                </label>
-                <input
-                  className="entity-list-search__keyword-input"
-                  id="list-search-1"
-                  onChange={[Function]}
-                  placeholder="Search..."
-                  type="text"
-                  value=""
-                />
-              </div>
-              <button
-                className="entity-list-search__text-button"
-                onClick={[Function]}
-              >
-                Reset
-              </button>
-              <button
-                className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
-                onClick={[Function]}
-              >
-                Options
-              </button>
-            </div>
-          </form>
           <div
-            className="ReactCollapse--collapse"
-            style={
-              Object {
-                "height": 0,
-                "overflow": "hidden",
-              }
-            }
+            className="entity-list-search__keyword-row"
           >
-            <div
-              className="ReactCollapse--content"
+            <button
+              className="entity-list-search__search-button"
             >
-              <div>
+              <svg
+                aria-hidden={true}
+                className="manicon-svg manicon-magnify svg-icon--search16"
+                height={null}
+                viewBox="0 0 16 16"
+                width={null}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  fill="none"
+                  fillRule="evenodd"
+                >
+                  <path
+                    d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
+                    fill="currentColor"
+                    fillRule="nonzero"
+                  />
+                  <path
+                    d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
+                    fill="currentColor"
+                    fillRule="nonzero"
+                  />
+                </g>
+              </svg>
+              <span
+                className="screen-reader-text"
+              >
+                Search
+              </span>
+            </button>
+            <div
+              className="entity-list-search__keyword-input-wrapper"
+            >
+              <label
+                className="screen-reader-text"
+                htmlFor="list-search-1"
+              >
+                Enter Search Criteria
+              </label>
+              <input
+                className="entity-list-search__keyword-input"
+                id="list-search-1"
+                onChange={[Function]}
+                placeholder="Search..."
+                type="text"
+                value=""
+              />
+            </div>
+            <button
+              className="entity-list-search__text-button"
+              onClick={[Function]}
+            >
+              Reset
+            </button>
+            <button
+              className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
+              onClick={[Function]}
+            >
+              Options
+            </button>
+          </div>
+        </form>
+        <div
+          className="ReactCollapse--collapse"
+          style={
+            Object {
+              "height": 0,
+              "overflow": "hidden",
+            }
+          }
+        >
+          <div
+            className="ReactCollapse--content"
+          >
+            <div>
+              <div
+                className="entity-list-search__options"
+              >
                 <div
-                  className="entity-list-search__options"
+                  className="entity-list-search__option"
                 >
                   <div
-                    className="entity-list-search__option"
+                    className="entity-list-search__option-inner"
                   >
-                    <div
-                      className="entity-list-search__option-inner"
+                    <span
+                      className="entity-list-search__options-label "
                     >
-                      <span
-                        className="entity-list-search__options-label "
+                      Filter Results:
+                    </span>
+                    <div
+                      className="entity-list-search__select-wrapper"
+                    >
+                      <select
+                        id="list-search-1"
+                        onChange={[Function]}
+                        value=""
                       >
-                        Filter Results:
-                      </span>
-                      <div
-                        className="entity-list-search__select-wrapper"
-                      >
-                        <select
-                          id="list-search-1"
-                          onChange={[Function]}
+                        <option
                           value=""
                         >
-                          <option
-                            value=""
-                          >
-                            Filter by: Type
-                          </option>
-                          <option
-                            value="project_created"
-                          >
-                            Project Created
-                          </option>
-                          <option
-                            value="text_added"
-                          >
-                            Text Added
-                          </option>
-                          <option
-                            value="text_annotated"
-                          >
-                            Text Annotated
-                          </option>
-                          <option
-                            value="resource_added"
-                          >
-                            Resource Added
-                          </option>
-                          <option
-                            value="comment_created"
-                          >
-                            Comment Created
-                          </option>
-                          <option
-                            value="tweet"
-                          >
-                            Tweet
-                          </option>
-                        </select>
-                        <svg
-                          aria-hidden={true}
-                          className="manicon-svg svg-icon--disclosure24"
-                          height={null}
-                          viewBox="0 0 24 24"
-                          width={null}
-                          xmlns="http://www.w3.org/2000/svg"
+                          Filter by: Type
+                        </option>
+                        <option
+                          value="project_created"
                         >
-                          <g
-                            fill="none"
-                            fillRule="evenodd"
-                          >
-                            <polygon
-                              fill="currentColor"
-                              fillRule="nonzero"
-                              points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-                            />
-                            <polygon
-                              fill="currentColor"
-                              fillRule="nonzero"
-                              points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-                            />
-                          </g>
-                        </svg>
-                      </div>
+                          Project Created
+                        </option>
+                        <option
+                          value="text_added"
+                        >
+                          Text Added
+                        </option>
+                        <option
+                          value="text_annotated"
+                        >
+                          Text Annotated
+                        </option>
+                        <option
+                          value="resource_added"
+                        >
+                          Resource Added
+                        </option>
+                        <option
+                          value="comment_created"
+                        >
+                          Comment Created
+                        </option>
+                        <option
+                          value="tweet"
+                        >
+                          Tweet
+                        </option>
+                      </select>
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg svg-icon--disclosure24"
+                        height={null}
+                        viewBox="0 0 24 24"
+                        width={null}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g
+                          fill="none"
+                          fillRule="evenodd"
+                        >
+                          <polygon
+                            fill="currentColor"
+                            fillRule="nonzero"
+                            points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                          />
+                          <polygon
+                            fill="currentColor"
+                            fillRule="nonzero"
+                            points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                          />
+                        </g>
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -221,6 +218,10 @@ exports[`Backend Project Events Container renders correctly 1`] = `
             </div>
           </div>
         </div>
+      </div>
+      <div
+        className="entity-list__header"
+      >
         <div
           className="entity-list__count"
         >
@@ -246,7 +247,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
           className="event-entity-row"
         >
           <div
-            className=""
+            className="event-entity-row__inner"
           >
             <div
               className="event-tile"
@@ -325,7 +326,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
           className="event-entity-row"
         >
           <div
-            className=""
+            className="event-entity-row__inner"
           >
             <div
               className="event-tile"
@@ -419,7 +420,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                 >
                   <a
                     disabled={true}
-                    href="#pagination-target"
+                    href="entities-list1"
                     onClick={[Function]}
                   >
                     <svg
@@ -467,7 +468,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                   className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
                 >
                   <a
-                    href="#pagination-target"
+                    href="entities-list1"
                     onClick={[Function]}
                   >
                     <span
@@ -487,7 +488,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                   className="list-pagination__page list-pagination__page--ordinal"
                 >
                   <a
-                    href="#pagination-target"
+                    href="entities-list1"
                     onClick={[Function]}
                   >
                     <span
@@ -513,7 +514,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                   className="list-pagination__page list-pagination__page--next"
                 >
                   <a
-                    href="#pagination-target"
+                    href="entities-list1"
                     onClick={[Function]}
                   >
                     <span
