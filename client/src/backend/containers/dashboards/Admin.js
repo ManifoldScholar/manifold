@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import DashboardComponents from "backend/components/dashboard";
+import Layout from "backend/components/layout";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, statisticsAPI, requests } from "api";
 import debounce from "lodash/debounce";
@@ -162,45 +163,40 @@ export class DashboardsAdminContainer extends PureComponent {
             <section className="backend-dashboard">
               <div className="left">
                 {this.props.projects && this.props.projectsMeta && (
-                  <EntitiesList
-                    entities={this.props.projects}
-                    entityComponent={ProjectRow}
-                    title="Projects"
-                    titleIcon="BEProject64"
-                    showCountInTitle
-                    unit="project"
-                    pagination={this.props.projectsMeta.pagination}
-                    callbacks={{
-                      onPageClick: this.updateHandlerCreator
-                    }}
-                    search={<Search onChange={this.filterChangeHandler} />}
-                  />
+                  <Layout.DashboardPanel>
+                    <EntitiesList
+                      entities={this.props.projects}
+                      entityComponent={ProjectRow}
+                      title="Projects"
+                      titleIcon="BEProject64"
+                      showCountInTitle
+                      unit="project"
+                      pagination={this.props.projectsMeta.pagination}
+                      callbacks={{
+                        onPageClick: this.updateHandlerCreator
+                      }}
+                      search={<Search onChange={this.filterChangeHandler} />}
+                    />
+                  </Layout.DashboardPanel>
                 )}
               </div>
               <div className="right">
                 {this.props.recentProjects && (
-                  <EntitiesList
-                    entities={this.props.recentProjects}
-                    entityComponent={ProjectRow}
-                    title="Recently Updated"
-                    titleIcon="BEProject64"
-                  />
+                  <Layout.DashboardPanel>
+                    <EntitiesList
+                      entities={this.props.recentProjects}
+                      entityComponent={ProjectRow}
+                      title="Recently Updated"
+                      titleIcon="BEProject64"
+                    />
+                  </Layout.DashboardPanel>
                 )}
                 <Authorize entity="statistics" ability={"read"}>
-                  <section>
-                    <header className="section-heading-secondary">
-                      <h3>
-                        <i
-                          className="manicon manicon-pulse-small"
-                          aria-hidden="true"
-                        />
-                        {"Activity"}{" "}
-                      </h3>
-                    </header>
+                  <Layout.DashboardPanel icon={"BEActivity64"} title="Activity">
                     <DashboardComponents.Activity
                       statistics={this.props.statistics}
                     />
-                  </section>
+                  </Layout.DashboardPanel>
                 </Authorize>
               </div>
             </section>
