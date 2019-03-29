@@ -104,10 +104,11 @@
 
       @supports (grid-auto-columns: min-content) {
         display: grid;
-        grid-template-columns:repeat(auto-fit, minmax(event-entity(min-width), 1fr));
+        grid-template-columns: auto;
       }
 
       @include respond(event-entity(panel-breakpoint)) {
+        grid-template-columns: repeat(auto-fit, minmax(event-entity(min-width), 1fr));
         margin-top: event-entity(list-margin-top) - event-entity(row-gap);
         margin-left: -1 * event-entity(icon-size-small);
       }
