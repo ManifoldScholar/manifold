@@ -1,5 +1,4 @@
 .entity-list {
-
   & + & {
     margin-top: 64px;
   }
@@ -141,9 +140,9 @@
   }
 
   &__header {
-    border-bottom: 1px solid $neutral75;
     padding-top: 8px;
     padding-bottom: 16px;
+    border-bottom: 1px solid $neutral75;
   }
 
   &__pagination {
@@ -151,20 +150,20 @@
   }
 
   &__button {
+    padding: 7px 15px 5px 10px;
+    font-weight: $medium;
+    text-transform: none;
+    letter-spacing: 0;
     border: 1px solid $accentPrimary;
     border-radius: 16px;
-    padding: 7px 15px 5px 10px;
-    text-transform: none;
-    font-weight: $medium;
-    letter-spacing: 0;
-    
+
     &:hover {
       svg {
-        background-color: inherit;
         color: inherit;
+        background-color: inherit;
       }
-      background-color: $accentPrimary;
       color: $neutral90;
+      background-color: $accentPrimary;
     }
   }
 
