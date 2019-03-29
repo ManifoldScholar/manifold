@@ -151,11 +151,6 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                       value=""
                     >
                       <option
-                        value=""
-                      >
-                        Default
-                      </option>
-                      <option
                         value="title"
                       >
                         title

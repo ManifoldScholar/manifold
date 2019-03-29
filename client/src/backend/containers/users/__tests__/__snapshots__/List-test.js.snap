@@ -202,22 +202,17 @@ Array [
                       <select
                         id="list-search-1"
                         onChange={[Function]}
-                        value=""
+                        value="last_name"
                       >
                         <option
-                          value=""
+                          value="last_name"
                         >
-                          Default
+                          last name
                         </option>
                         <option
                           value="first_name"
                         >
                           first name
-                        </option>
-                        <option
-                          value="last_name"
-                        >
-                          last name
                         </option>
                       </select>
                       <svg

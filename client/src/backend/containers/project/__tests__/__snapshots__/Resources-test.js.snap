@@ -256,11 +256,6 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
                         value=""
                       >
                         <option
-                          value=""
-                        >
-                          Default
-                        </option>
-                        <option
                           value="sort_title"
                         >
                           title

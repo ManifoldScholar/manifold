@@ -4,21 +4,20 @@ import Utility from "global/components/utility";
 import labelId from "helpers/labelId";
 import { Collapse } from "react-collapse";
 import isNil from "lodash/isNil";
-import get from "lodash/get";
-import omitBy from "lodash/omitBy";
 
 export default class ListEntitiesListSearch extends PureComponent {
   static displayName = "List.Entities.List.Search";
 
   static propTypes = {
+    filter: PropTypes.object.isRequired,
     filters: PropTypes.array,
+    reset: PropTypes.func.isRequired,
     sortOptions: PropTypes.array,
-    initialFilter: PropTypes.object,
-    defaultFilter: PropTypes.object,
     onChange: PropTypes.func.isRequired
   };
 
   static defaultProps = {
+    filter: {},
     filters: [],
     sortOptions: []
   };
@@ -26,17 +25,8 @@ export default class ListEntitiesListSearch extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
-      filter: {}
+      open: false
     };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (get(prevState, "filter") !== get(this.state, "filter")) {
-      const filter = omitBy(this.state.filter, value => value === "");
-      if (filter.keyword) filter.typeahead = true;
-      this.props.onChange(filter);
-    }
   }
 
   onSubmit = event => {
@@ -73,13 +63,14 @@ export default class ListEntitiesListSearch extends PureComponent {
 
   setFilterValue(event, { key }) {
     const value = event.target.value;
-    const filter = Object.assign({}, this.state.filter);
+    const filter = Object.assign({}, this.props.filter);
     filter[key] = value;
-    this.setState({ filter });
+    if (filter.keyword) filter.typeahead = true;
+    this.props.onChange(filter);
   }
 
   getFilterValue(filter) {
-    const value = this.state.filter[filter.key];
+    const value = this.props.filter[filter.key];
     if (isNil(value)) return "";
     return value;
   }
@@ -91,8 +82,7 @@ export default class ListEntitiesListSearch extends PureComponent {
 
   resetSearch = event => {
     event.preventDefault();
-    const resetState = this.props.defaultFilter ? this.props.defaultFilter : {};
-    this.setState({ filter: resetState });
+    this.props.reset();
   };
 
   /* eslint-disable react/no-array-index-key */
@@ -189,7 +179,6 @@ export default class ListEntitiesListSearch extends PureComponent {
                           }
                           value={this.getFilterValue(this.sortFilter)}
                         >
-                          <option value="">Default</option>
                           {this.sortOptions.map((option, optionIndex) => (
                             <option key={optionIndex} value={option.value}>
                               {option.label}

@@ -14,6 +14,7 @@ import EntitiesList, {
   Search,
   UserRow
 } from "backend/components/list/EntitiesList";
+import isEqual from "lodash/isEqual";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -41,6 +42,7 @@ export class UsersListContainer extends PureComponent {
   constructor() {
     super();
     this.lastFetchedPage = null;
+    this.state = { filter: this.defaultFilter };
     this.fetchUsers = debounce(this.fetchUsers, 250, {
       leading: false,
       trailing: true
@@ -48,11 +50,17 @@ export class UsersListContainer extends PureComponent {
   }
 
   componentDidMount() {
-    this.fetchUsers(1);
+    this.fetchUsers();
   }
 
-  componentDidUpdate(prevProps) {
-    this.maybeReload(prevProps.usersMeta);
+  componentDidUpdate(prevProps, prevState) {
+    if (this.shouldReload(prevProps.usersMeta)) {
+      return this.fetchUsers(this.lastFetchedPage);
+    }
+
+    if (this.shouldFetch(prevState)) {
+      return this.fetchUsers();
+    }
   }
 
   get roleOptions() {
@@ -70,37 +78,37 @@ export class UsersListContainer extends PureComponent {
     return { order: "last_name" };
   }
 
-  maybeReload(prevUsersMeta) {
+  shouldReload(prevUsersMeta) {
     const currentModified = get(this.props, "usersMeta.modified");
     const previousModified = get(prevUsersMeta, "modified");
     if (!currentModified) return;
-    if (currentModified && previousModified) return;
-    this.fetchUsers(this.lastFetchedPage);
+    return currentModified || previousModified;
   }
 
-  fetchUsers = (page, filter = {}) => {
+  shouldFetch(prevState) {
+    return !isEqual(prevState.filter, this.state.filter);
+  }
+
+  fetchUsers = (page = 1) => {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
-    const filterParams = Object.assign({}, this.defaultFilter, filter);
     const action = request(
-      usersAPI.index(filterParams, pagination),
+      usersAPI.index(this.state.filter, pagination),
       requests.beUsers
     );
     this.props.dispatch(action);
   };
 
   filterChangeHandler = filter => {
-    this.fetchUsers(1, filter);
+    this.setState({ filter });
   };
 
-  handleUsersPageChange(event, page) {
-    this.fetchUsers(page);
-  }
-
   usersPageChangeHandlerCreator = page => {
-    return event => {
-      this.handleUsersPageChange(event, page);
-    };
+    return () => this.fetchUsers(page);
+  };
+
+  resetSearch = () => {
+    this.setState({ filter: this.defaultFilter });
   };
 
   render() {
@@ -130,9 +138,11 @@ export class UsersListContainer extends PureComponent {
           }}
           search={
             <Search
+              filter={this.state.filter}
+              reset={this.resetSearch}
               sortOptions={[
-                { label: "first name", value: "first_name" },
-                { label: "last name", value: "last_name" }
+                { label: "last name", value: "last_name" },
+                { label: "first name", value: "first_name" }
               ]}
               onChange={this.filterChangeHandler}
               filters={[
