@@ -4,6 +4,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
 <section>
   <div
     className="entity-list"
+    id="entities-list1"
   >
     <header
       className="entity-list__title backend-header section-heading-tertiary"

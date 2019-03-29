@@ -6,10 +6,13 @@ import Instructions from "./Instructions";
 import Pagination from "./Pagination";
 import Count from "./Count";
 import ButtonSet from "./ButtonSet";
+import Entities from "./Entities";
+import SortableEntities from "./SortableEntities";
 import isPlainObject from "lodash/isPlainObject";
 import isFunction from "lodash/isFunction";
 import isBoolean from "lodash/isBoolean";
 import isNil from "lodash/isNil";
+import labelId from "helpers/labelId";
 
 export default class ListEntities extends PureComponent {
   static displayName = "List.Entities.List";
@@ -69,12 +72,14 @@ export default class ListEntities extends PureComponent {
     title: PropTypes.node,
     titleIcon: PropTypes.string,
     titleStyle: PropTypes.oneOf(["bar", "title", "section"]),
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid"]),
+    titleLink: PropTypes.string,
+    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"]),
     showCount: ListEntities.validateShowCounts,
     showCountInTitle: ListEntities.validateShowCounts,
     buttons: PropTypes.arrayOf(ListEntities.validateEnsureButton),
     search: ListEntities.validateSearch,
     pagination: PropTypes.object,
+    useDragHandle: PropTypes.bool,
     paginationStyle: PropTypes.oneOf(["compact", "normal"]),
     unit: PropTypes.oneOfType([
       PropTypes.string,
@@ -100,6 +105,10 @@ export default class ListEntities extends PureComponent {
 
   get title() {
     return this.props.title;
+  }
+
+  get titleLink() {
+    return this.props.titleLink;
   }
 
   get entities() {
@@ -168,26 +177,26 @@ export default class ListEntities extends PureComponent {
     return this.props.callbacks;
   }
 
+  get isSortable() {
+    return isFunction(this.callbacks.onReorder);
+  }
+
   callback(name) {
     if (!this.callbacks) return null;
     return this.callbacks[name];
   }
 
-  entityKey(index) {
-    const entity = this.entities[index];
-    if (!entity || !entity.id) return index;
-    return entity.id;
-  }
-
   render() {
-    const EntityComponent = this.entityComponent;
+    const listId = labelId("entities-list");
 
     const wrapperClassNames = classNames({
-      "entity-list": true
+      "entity-list": true,
+      "entity-list--bare": this.listStyle === "bare"
     });
 
     const listClassNames = classNames({
       "entity-list__list": true,
+      "entity-list__list--bare": this.listStyle === "bare",
       "entity-list__list--grid": this.listStyle === "grid",
       "entity-list__list--tiles": this.listStyle === "tiles",
       "entity-list__list--rows": this.listStyle === "rows"
@@ -200,14 +209,15 @@ export default class ListEntities extends PureComponent {
     });
 
     return (
-      <div className={wrapperClassNames}>
+      <div id={listId} className={wrapperClassNames}>
         {this.title && (
           <Title
-            titleStyle={this.titleStyle}
-            pagination={this.pagination}
-            showCount={this.showCountInTitle}
             title={this.title}
             titleIcon={this.titleIcon}
+            titleStyle={this.titleStyle}
+            titleLink={this.titleLink}
+            pagination={this.pagination}
+            showCount={this.showCountInTitle}
           />
         )}
         <div className={contentsWrapperClassName}>
@@ -225,18 +235,16 @@ export default class ListEntities extends PureComponent {
               />
             )}
           </div>
-          <ul className={listClassNames}>
-            {this.entities.map((entity, index) => (
-              <EntityComponent
-                key={this.entityKey(index)}
-                entity={entity}
-                {...this.entityComponentProps}
-              />
-            ))}
-          </ul>
+          {!this.isSortable && (
+            <Entities {...this.props} className={listClassNames} />
+          )}
+          {this.isSortable && (
+            <SortableEntities {...this.props} className={listClassNames} />
+          )}
           {this.pagination && (
             <Pagination
               pagination={this.pagination}
+              paginationTarget={listId}
               onPageClick={this.callback("onPageClick")}
               style={this.paginationStyle}
             />

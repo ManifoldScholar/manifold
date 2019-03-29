@@ -142,9 +142,7 @@ export default class ListEntitiesListSearch extends PureComponent {
           </div>
         </form>
         {this.isConfigurable && (
-          <Collapse
-            isOpened={this.state.open}
-          >
+          <Collapse isOpened={this.state.open}>
             <div>
               <div className={`${baseClass}__options`}>
                 {this.filters.map((filter, i) => (

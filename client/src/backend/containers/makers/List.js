@@ -116,6 +116,7 @@ export class MakersListContainer extends PureComponent {
             search={
               <Search
                 onChange={this.filterChangeHandler}
+                defaultFilter={this.defaultFilter}
                 sortOptions={[
                   { label: "first name", value: "first_name" },
                   { label: "last name", value: "last_name" }

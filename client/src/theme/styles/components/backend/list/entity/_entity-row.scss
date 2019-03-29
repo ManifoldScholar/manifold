@@ -1,4 +1,8 @@
 .entity-row {
+
+  list-style: none;
+  user-select: none;
+
   &__inner {
     position: relative;
     display: flex;
@@ -23,6 +27,27 @@
     @include buttonUnstyled;
     width: 100%;
     text-align: left;
+  }
+
+  &--dragging {
+    .entity-row__inner {
+      border-bottom: none;
+    }
+
+    .entity-row__row-link--in-grid {
+
+      padding: 0 14px;
+      background-color: $neutral95;
+      border: 1px solid $neutral80;
+      outline-width: 0;
+
+      @include respond($break65) {
+        @include panelRounded;
+        padding: 0;
+        border: 0;
+        box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
+      }
+    }
   }
 
   &__row-link--block {
@@ -81,6 +106,12 @@
   &__labels {
     display: inline-block;
     margin: 0;
+  }
+
+  &__title--in-grid {
+    .entity-row__labels {
+      display: block;
+    }
   }
 
   &__label {
@@ -235,6 +266,15 @@
     line-height: 1.4em;
     color: $neutral20;
 
+    // in grids, labels are on a new line.
+    &--in-grid {
+      margin-right: 0;
+
+      .entity-row__title-inner {
+        margin-right: 0;
+      }
+    }
+
     button {
       @include buttonUnstyled;
     }
@@ -318,5 +358,14 @@
     margin-top: 7px;
   }
 
+}
 
+// Bit of a hack to clear out the hover state on other items when the list is sortable
+// and an entity is being dragged.
+.entity-list--dragging .entity-row__row-link--in-grid {
+  &:hover {
+    background-color: inherit;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }

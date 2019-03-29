@@ -50,13 +50,21 @@ exports[`Backend.ProjectCollection.Detail container renders correctly 1`] = `
       </div>
     </form>
   </div>
-  <section
-    className="project-list grid"
+  <div
+    className="entity-list"
+    id="entities-list1"
   >
-    <ul
-      className="list-orderable"
-    />
-  </section>
+    <div
+      className="entity-list__contents-wrapper"
+    >
+      <div
+        className="entity-list__header"
+      />
+      <ul
+        className="entity-list__list entity-list__list--grid"
+      />
+    </div>
+  </div>
   <span />
 </div>
 `;

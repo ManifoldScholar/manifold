@@ -31,7 +31,8 @@ export default class EntityThumbnailProject extends PureComponent {
   }
 
   get src() {
-    const meta = this.attr.avatarMeta.original;
+    if (!this.attr.avatarStyles) return null;
+    const meta = this.attr.avatarMeta ? this.attr.avatarMeta.original : null;
     const style = meta && meta.width >= meta.height ? "smallSquare" : "small";
     return this.attr.avatarStyles[style];
   }

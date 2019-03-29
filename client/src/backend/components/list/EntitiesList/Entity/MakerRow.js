@@ -40,6 +40,7 @@ export default class EventRow extends PureComponent {
   render() {
     return (
       <EntityRow
+        {...this.props}
         onRowClick={this.url}
         title={this.name}
         figure={<EntityThumbnail.Maker entity={this.maker} />}

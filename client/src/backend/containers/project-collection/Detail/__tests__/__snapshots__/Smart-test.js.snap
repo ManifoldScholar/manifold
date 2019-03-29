@@ -3,6 +3,7 @@
 exports[`Backend.ProjectCollection.Detail.Smart component renders correctly 1`] = `
 <div
   className="entity-list"
+  id="entities-list1"
 >
   <div
     className="entity-list__contents-wrapper"

@@ -28,10 +28,12 @@ export default class EntitiesListRow extends PureComponent {
     ]),
     active: PropTypes.bool,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid"]),
-    utility: PropTypes.node
+    utility: PropTypes.node,
+    isSortable: PropTypes.bool
   };
 
   static defaultProps = {
+    isSortable: false,
     rowClickMode: "inline",
     listStyle: "rows",
     figureSize: "normal",
@@ -187,6 +189,10 @@ export default class EntitiesListRow extends PureComponent {
 
   get rowClickMode() {
     return this.props.rowClickMode;
+  }
+
+  get isSortable() {
+    return this.props.isSortable;
   }
 
   wrapWithAnchor(child, url, block = false) {

@@ -15,7 +15,7 @@ export default class EventRow extends PureComponent {
     showSwitch: PropTypes.bool,
     onSwitchChange: PropTypes.func,
     switchValue: PropTypes.func,
-    onRowClick: PropTypes.func,
+    onRowClick: PropTypes.func
   };
 
   get onRowClick() {
@@ -96,6 +96,7 @@ export default class EventRow extends PureComponent {
   render() {
     return (
       <EntityRow
+        {...this.props}
         onRowClick={this.onRowClick}
         rowClickMode="block"
         title={this.title}

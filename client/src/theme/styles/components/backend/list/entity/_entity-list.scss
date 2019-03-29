@@ -15,6 +15,17 @@
     color: $neutral20;
     text-transform: uppercase;
     letter-spacing: 2px;
+
+    a, a:visited {
+      color: $neutral20;
+      text-decoration: none;
+      transition: color $duration ease-out;
+    }
+
+    a:hover {
+      color: $accentPrimary;
+    }
+
   }
 
   &__title-icon {
@@ -83,6 +94,10 @@
       color: $neutral30;
     }
 
+    &--bare {
+
+    }
+
     &--tiles {
       display: flex;
       flex-wrap: wrap;
@@ -143,6 +158,14 @@
     padding-top: 8px;
     padding-bottom: 16px;
     border-bottom: 1px solid $neutral75;
+  }
+
+  &--bare {
+    .entity-list__header {
+      padding-top: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
   }
 
   &__pagination {

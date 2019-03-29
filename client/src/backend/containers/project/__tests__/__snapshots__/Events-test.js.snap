@@ -4,6 +4,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
 <section>
   <div
     className="entity-list"
+    id="entities-list1"
   >
     <h3
       className="entity-list__title"
@@ -419,7 +420,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                 >
                   <a
                     disabled={true}
-                    href="#pagination-target"
+                    href="entities-list1"
                     onClick={[Function]}
                   >
                     <svg
@@ -467,7 +468,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                   className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
                 >
                   <a
-                    href="#pagination-target"
+                    href="entities-list1"
                     onClick={[Function]}
                   >
                     <span
@@ -487,7 +488,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                   className="list-pagination__page list-pagination__page--ordinal"
                 >
                   <a
-                    href="#pagination-target"
+                    href="entities-list1"
                     onClick={[Function]}
                   >
                     <span
@@ -513,7 +514,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                   className="list-pagination__page list-pagination__page--next"
                 >
                   <a
-                    href="#pagination-target"
+                    href="entities-list1"
                     onClick={[Function]}
                   >
                     <span

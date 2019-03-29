@@ -55,6 +55,7 @@ export default class EventRow extends PureComponent {
   render() {
     return (
       <EntityRow
+        {...this.props}
         onRowClick={this.onRowClick}
         rowClickMode="block"
         title={this.title}

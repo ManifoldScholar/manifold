@@ -8,6 +8,7 @@ import { select, meta } from "utils/entityUtils";
 import { projectsAPI, statisticsAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import Authorization from "helpers/authorization";
+import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 import EntitiesList, {
   Search,
@@ -18,7 +19,7 @@ import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
-const perPage = 5;
+const perPage = 10;
 
 export class DashboardsAdminContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -62,7 +63,7 @@ export class DashboardsAdminContainer extends PureComponent {
     const recentProjectsRequest = request(
       projectsAPI.index(
         this.buildFetchFilter(this.props, { order: "updated_at DESC" }),
-        { size: 2 }
+        { size: 5 }
       ),
       requests.beRecentProjects
     );
@@ -129,15 +130,6 @@ export class DashboardsAdminContainer extends PureComponent {
     };
   };
 
-  renderProjectCount = () => {
-    if (!this.props.projectsMeta) return null;
-
-    const { totalCount } = this.props.projectsMeta.pagination;
-    const label = totalCount > 1 || totalCount === 0 ? "projects" : "project";
-
-    return <span className="list-total">{`${totalCount} ${label}`}</span>;
-  };
-
   renderNoProjects = filterState => {
     const filters = Object.assign({}, filterState);
     delete filters.order;
@@ -168,6 +160,7 @@ export class DashboardsAdminContainer extends PureComponent {
                       entities={this.props.projects}
                       entityComponent={ProjectRow}
                       title="Projects"
+                      titleLink={lh.link("backendProjects")}
                       titleIcon="BEProject64"
                       showCountInTitle
                       unit="project"
@@ -186,6 +179,7 @@ export class DashboardsAdminContainer extends PureComponent {
                     <EntitiesList
                       entities={this.props.recentProjects}
                       entityComponent={ProjectRow}
+                      entityComponentProps={{ compact: true }}
                       title="Recently Updated"
                       titleIcon="BEProject64"
                     />
@@ -194,6 +188,11 @@ export class DashboardsAdminContainer extends PureComponent {
                 <Authorize entity="statistics" ability={"read"}>
                   <Layout.DashboardPanel icon={"BEActivity64"} title="Activity">
                     <DashboardComponents.Activity
+                      statistics={this.props.statistics}
+                    />
+                  </Layout.DashboardPanel>
+                  <Layout.DashboardPanel icon={"lamp64"} title="Statistics">
+                    <DashboardComponents.Counts
                       statistics={this.props.statistics}
                     />
                   </Layout.DashboardPanel>
