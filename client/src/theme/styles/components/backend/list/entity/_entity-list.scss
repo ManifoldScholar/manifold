@@ -100,32 +100,40 @@
 
     &--tiles {
       display: flex;
-      flex-wrap: wrap;
-      margin-top: 17px;
-      margin-bottom: -28px;
+      flex-flow: row wrap;
 
-      @include respond($break60) {
-        margin-left: -40px;
+      @supports (grid-auto-columns: min-content) {
+        display: grid;
+        grid-template-columns:repeat(auto-fit, minmax(event-entity(min-width), 1fr));
+      }
 
-        li {
-          flex-basis: 100%;
-          max-width: 100%;
+      @include respond(event-entity(panel-breakpoint)) {
+        margin-top: event-entity(list-margin-top) - event-entity(row-gap);
+        margin-left: -1 * event-entity(icon-size-small);
+      }
+
+      @include respond(event-entity(list-layout-breakpoint)) {
+        margin-left: -1 / 2 * event-entity(icon-size-large);
+      }
+
+      li {
+        min-width: 100%;
+
+        @include respond(event-entity(panel-breakpoint)) {
+          padding-left: event-entity(icon-size-small);
+          margin-top: event-entity(row-gap);
         }
-      }
 
-      @include respond($break65) {
-        margin-left: -24px;
-      }
-
-      @include respond($break95) {
-        li {
+        @include respond(event-entity(list-layout-breakpoint)) {
           flex-basis: 50%;
-          max-width: 49.5%;
-        }
-      }
+          min-width: event-entity(min-width);
+          max-width: event-entity(flex-max-width);
+          padding-left: event-entity(column-gap);
 
-      @include respond($break110) {
-        margin-left: -40px;
+          @supports (grid-auto-columns: min-content) {
+            max-width: none;
+          }
+        }
       }
     }
 
@@ -134,7 +142,6 @@
 
       @include respond($break65) {
         display: flex;
-        flex-direction: column;
         flex-flow: row wrap;
         margin-top: 22px;
         margin-left: -25px;
