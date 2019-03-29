@@ -12,7 +12,7 @@
     height: 100%;
     color: $neutral30;
 
-    @include respond($break60) {
+    @include respond(event-entity(panel-breakpoint)) {
       @include panelRounded;
     }
   }
@@ -58,13 +58,6 @@
     height: 100%;
     padding-left: 32px;
 
-    // TODO: Should be removable after .vertical-list-primary refactor
-    a {
-      display: inline-block !important;
-      width: auto !important;
-      padding: 0 !important;
-    }
-
     .backend & {
       padding-left: 0;
 
@@ -82,8 +75,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 40px;
-    height: 40px;
+    width: event-entity(icon-size-small);
+    height: event-entity(icon-size-small);
     color: $neutral30;
     background-color: $neutralWhite;
     border-radius: 100%;
@@ -101,13 +94,13 @@
     }
 
     @include respond($break60) {
-      width: 44px;
-      height: 44px;
+      width: event-entity(icon-size-med);
+      height: event-entity(icon-size-med);
     }
 
     @include respond($break75) {
-      width: 48px;
-      height: 48px;
+      width: event-entity(icon-size-large);
+      height: event-entity(icon-size-large);
     }
   }
 
@@ -152,7 +145,7 @@
     letter-spacing: 0.03em;
 
     a {
-      color: $accentPrimary !important; // TODO: !important can be removed after .vertical-list-primary refactor
+      color: $accentPrimary;
       text-decoration: none;
     }
   }
