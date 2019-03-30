@@ -149,7 +149,7 @@ storiesOf("Backend/List/Entities", module)
         instructions={
           "Manifold will periodically fetch tweets according to the queries specified below."
         }
-        entities={[]}
+        entities={twitterQueries}
         showCountInTitle
         callbacks={callbacks}
         buttons={[<Button path="/foo" text="Add New Query" type="add" />]}
