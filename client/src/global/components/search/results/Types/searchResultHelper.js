@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import compact from "lodash/compact";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -26,7 +27,9 @@ export default function withSearchResultHelper(WrappedComponent) {
     }
 
     joinHighlightedFragments = fragments => {
-      return fragments.map(s => s.trim()).join("\u2026");
+      return compact(fragments)
+        .map(s => s.trim())
+        .join("\u2026");
     };
 
     highlightedAttribute = key => {

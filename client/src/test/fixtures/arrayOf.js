@@ -10,7 +10,7 @@ import uuid from "uuid";
 
 const defaultCount = 5;
 
-function image() {
+export function image() {
   const square = faker.image.image(200, 200);
   const landscape = faker.image.image(320, 200);
   const portrait = faker.image.image(200, 300);
