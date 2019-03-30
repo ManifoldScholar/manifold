@@ -152,39 +152,34 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                         value=""
                       >
                         <option
-                          value=""
-                        >
-                          Filter by: Type
-                        </option>
-                        <option
                           value="project_created"
                         >
-                          Project Created
+                          Type is "Project Created"
                         </option>
                         <option
                           value="text_added"
                         >
-                          Text Added
+                          Type is "Text Added"
                         </option>
                         <option
                           value="text_annotated"
                         >
-                          Text Annotated
+                          Type is "Text Annotated"
                         </option>
                         <option
                           value="resource_added"
                         >
-                          Resource Added
+                          Type is "Resource Added"
                         </option>
                         <option
                           value="comment_created"
                         >
-                          Comment Created
+                          Type is "Comment Created"
                         </option>
                         <option
                           value="tweet"
                         >
-                          Tweet
+                          Type is "Tweet"
                         </option>
                       </select>
                       <svg

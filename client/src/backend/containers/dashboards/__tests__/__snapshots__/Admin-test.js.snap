@@ -158,9 +158,9 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                                 className="entity-list-search__option-inner"
                               >
                                 <span
-                                  className="entity-list-search__options-label"
+                                  className="entity-list-search__options-label "
                                 >
-                                  Sort By:
+                                  Filter Results:
                                 </span>
                                 <div
                                   className="entity-list-search__select-wrapper"
@@ -171,34 +171,86 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                                     value=""
                                   >
                                     <option
-                                      value="created_at DESC"
+                                      value=""
                                     >
-                                      Newest
+                                      All projects
                                     </option>
                                     <option
-                                      value="created_at ASC"
+                                      value="true"
                                     >
-                                      Oldest
+                                      Only draft projects
                                     </option>
+                                    <option
+                                      value="false"
+                                    >
+                                      Only published projects
+                                    </option>
+                                  </select>
+                                  <svg
+                                    aria-hidden={true}
+                                    className="manicon-svg svg-icon--disclosureDown24"
+                                    height={null}
+                                    viewBox="0 0 24 24"
+                                    width={null}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <g
+                                      fill="none"
+                                      fillRule="evenodd"
+                                    >
+                                      <polygon
+                                        fill="currentColor"
+                                        fillRule="nonzero"
+                                        points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                                      />
+                                      <polygon
+                                        fill="currentColor"
+                                        fillRule="nonzero"
+                                        points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                                      />
+                                    </g>
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className="entity-list-search__option"
+                            >
+                              <div
+                                className="entity-list-search__option-inner"
+                              >
+                                <span
+                                  className="entity-list-search__options-label"
+                                >
+                                  Order Results:
+                                </span>
+                                <div
+                                  className="entity-list-search__select-wrapper"
+                                >
+                                  <select
+                                    id="list-search-1"
+                                    onChange={[Function]}
+                                    value="updated_at DESC"
+                                  >
                                     <option
                                       value="updated_at ASC"
                                     >
-                                      Updated At ASC
-                                    </option>
-                                    <option
-                                      value="updated_at DESC"
-                                    >
-                                      Updated At DESC
+                                      Most recently updated
                                     </option>
                                     <option
                                       value="sort_title ASC"
                                     >
-                                      Title ASC
+                                      Alphabetical by title
                                     </option>
                                     <option
-                                      value="sort_title DESC"
+                                      value="created_at DESC"
                                     >
-                                      Title DESC
+                                      Newest projects first
+                                    </option>
+                                    <option
+                                      value="created_at ASC"
+                                    >
+                                      Oldest projects first
                                     </option>
                                   </select>
                                   <svg

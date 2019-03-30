@@ -154,7 +154,7 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
                         <option
                           value=""
                         >
-                          Filter by: Tag
+                          Select a tag
                         </option>
                       </select>
                       <svg
@@ -206,7 +206,7 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
                         <option
                           value=""
                         >
-                          Filter by: Kind
+                          Select a type
                         </option>
                       </select>
                       <svg
@@ -245,7 +245,7 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
                     <span
                       className="entity-list-search__options-label"
                     >
-                      Sort By:
+                      Order Results:
                     </span>
                     <div
                       className="entity-list-search__select-wrapper"
@@ -253,12 +253,17 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
                       <select
                         id="list-search-1"
                         onChange={[Function]}
-                        value=""
+                        value="title"
                       >
                         <option
-                          value="sort_title"
+                          value="title"
                         >
-                          title
+                          Alphabetical by title
+                        </option>
+                        <option
+                          value="created_at"
+                        >
+                          Newest resources first
                         </option>
                       </select>
                       <svg

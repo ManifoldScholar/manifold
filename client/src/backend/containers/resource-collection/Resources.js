@@ -9,11 +9,13 @@ import EntitiesList, {
   Search,
   ResourceRow
 } from "backend/components/list/EntitiesList";
+import withFilteredLists, { resourceFilters } from "hoc/with-filtered-lists";
+import isNil from "lodash/isNil";
 
 const { request, flush } = entityStoreActions;
 const perPage = 5;
 
-export class ResourceCollectionResourcesContainer extends Component {
+export class container extends Component {
   static mapStateToProps = state => {
     return {
       resources: select(requests.beResources, state.entityStore),
@@ -33,12 +35,16 @@ export class ResourceCollectionResourcesContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: {}
+      collectionOnly: false
     };
   }
 
   componentDidMount() {
-    this.fetchResources(1);
+    this.fetchResources();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.filtersChanged(prevProps)) return this.fetchResources();
   }
 
   componentWillUnmount() {
@@ -49,21 +55,18 @@ export class ResourceCollectionResourcesContainer extends Component {
     return this.props.resourceCollection.relationships.project;
   }
 
-  get tagFilterOptions() {
-    const tags = this.project.attributes.resourceTags || [];
-    return tags.map(t => ({ label: t, value: t }));
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
   }
 
-  get kindFilterOptions() {
-    const tags = this.project.attributes.resourceKinds || [];
-    return tags.map(k => ({ label: k, value: k }));
-  }
-
-  fetchResources(page) {
+  fetchResources(page = 1) {
     const pagination = { number: page, size: perPage };
+    const filters = this.props.entitiesListSearchParams.resources;
     const projectId = this.props.resourceCollection.relationships.project.id;
     const action = request(
-      projectsAPI.resources(projectId, this.state.filter, pagination),
+      projectsAPI.resources(projectId, filters, pagination),
       requests.beResources
     );
     this.props.dispatch(action);
@@ -91,15 +94,6 @@ export class ResourceCollectionResourcesContainer extends Component {
     );
     this.props.dispatch(resourceCollectionRequest);
   }
-
-  handleFilterChange = filter => {
-    const newFilter = filter;
-    if (this.state.filter.resourceCollection)
-      newFilter.resourceCollection = this.state.filter.resourceCollection;
-    this.setState({ filter: newFilter }, () => {
-      this.fetchResources(1);
-    });
-  };
 
   handleResourcesPageChange(event, page) {
     this.fetchResources(page);
@@ -153,19 +147,24 @@ export class ResourceCollectionResourcesContainer extends Component {
 
   toggleCollectionOnly = event => {
     event.preventDefault();
-    const filter = this.state.filter;
-    if (this.state.filter.resourceCollection) {
-      delete filter.resourceCollection;
+    const { setParam } = this.props.entitiesListSearchProps("resources");
+    const params = this.props.entitiesListSearchParams.resources;
+    if (params.resourceCollection) {
+      setParam({ name: "resourceCollection" }, null);
     } else {
-      filter.resourceCollection = this.props.resourceCollection.id;
+      setParam(
+        { name: "resourceCollection" },
+        this.props.resourceCollection.id
+      );
     }
-    this.handleFilterChange(filter);
   };
 
   render() {
     if (!this.props.resources) return null;
+    const params = this.props.entitiesListSearchParams.resources;
+    const collectionFilterEnabled = !isNil(params.resourceCollection);
 
-    const toggleLabel = this.state.filter.resourceCollection
+    const toggleLabel = collectionFilterEnabled
       ? "Show all"
       : "Show collection only";
 
@@ -199,25 +198,23 @@ export class ResourceCollectionResourcesContainer extends Component {
         }}
         search={
           <Search
-            onChange={this.handleFilterChange}
-            filters={[
-              {
-                label: "Tag",
-                key: "tag",
-                options: this.tagFilterOptions
-              },
-              {
-                label: "Kind",
-                key: "kind",
-                options: this.kindFilterOptions
-              }
-            ]}
+            {...resourceFilters.dynamicParams(
+              this.props.entitiesListSearchProps("resources"),
+              this.project
+            )}
           />
         }
       />
     );
   }
 }
+
+export const ResourceCollectionResourcesContainer = withFilteredLists(
+  container,
+  {
+    resources: resourceFilters.defaultParams
+  }
+);
 
 export default connect(ResourceCollectionResourcesContainer.mapStateToProps)(
   ResourceCollectionResourcesContainer

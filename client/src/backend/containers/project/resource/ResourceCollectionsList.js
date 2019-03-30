@@ -10,11 +10,14 @@ import EntitiesList, {
   Search,
   ResourceCollectionRow
 } from "backend/components/list/EntitiesList";
+import withFilteredLists, {
+  resourceCollectionFilters
+} from "hoc/with-filtered-lists";
 
 const { request } = entityStoreActions;
 const perPage = 5;
 
-export class ProjectResourceCollectionsListContainer extends PureComponent {
+export class container extends PureComponent {
   static mapStateToProps = state => {
     return {
       resourceCollections: select(
@@ -34,16 +37,23 @@ export class ProjectResourceCollectionsListContainer extends PureComponent {
     project: PropTypes.object,
     resourceCollections: PropTypes.array,
     resourceCollectionsMeta: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    entitiesListSearchProps: PropTypes.func.isRequired,
+    entitiesListSearchParams: PropTypes.object.isRequired
   };
-
-  constructor(props) {
-    super(props);
-    this.state = { filter: {} };
-  }
 
   componentDidMount() {
     this.fetchCollections(1);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.filtersChanged(prevProps)) return this.fetchCollections();
+  }
+
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
   }
 
   fetchCollections(page) {
@@ -51,19 +61,13 @@ export class ProjectResourceCollectionsListContainer extends PureComponent {
     const action = request(
       projectsAPI.resourceCollections(
         this.props.project.id,
-        this.state.filter,
+        this.props.entitiesListSearchParams.resourceCollections,
         pagination
       ),
       requests.beResourceCollections
     );
     this.props.dispatch(action);
   }
-
-  filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.fetchCollections(1);
-    });
-  };
 
   handleCollectionsPageChange(event, page) {
     this.fetchCollections(page);
@@ -93,8 +97,7 @@ export class ProjectResourceCollectionsListContainer extends PureComponent {
         }}
         search={
           <Search
-            sortOptions={[{ label: "title", value: "title" }]}
-            onChange={this.filterChangeHandler}
+            {...this.props.entitiesListSearchProps("resourceCollections")}
           />
         }
         buttons={[
@@ -111,4 +114,10 @@ export class ProjectResourceCollectionsListContainer extends PureComponent {
   }
 }
 
+export const ProjectResourceCollectionsListContainer = withFilteredLists(
+  container,
+  {
+    resourceCollections: resourceCollectionFilters
+  }
+);
 export default connectAndFetch(ProjectResourceCollectionsListContainer);

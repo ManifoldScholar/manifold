@@ -127,8 +127,11 @@
       height: $inputHeight;
       padding-right: 32px;
       padding-left: 13px;
-      font-size: 13px;
+      font-size: 16px;
+      font-weight: $regular;
       color: $neutral20;
+      text-transform: none;
+      letter-spacing: normal;
       border: 1px solid $neutral80;
       border-radius: 8px;
       transition: border-color $duration $timing;

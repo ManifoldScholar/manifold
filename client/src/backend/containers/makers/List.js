@@ -8,17 +8,18 @@ import debounce from "lodash/debounce";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
+import withFilteredLists, { makerFilters } from "hoc/with-filtered-lists";
+
 import EntitiesList, {
   Search,
   Button,
   MakerRow
 } from "backend/components/list/EntitiesList";
-import isEqual from "lodash/isEqual";
 
 const { request } = entityStoreActions;
 const perPage = 10;
 
-export class MakersListContainer extends PureComponent {
+export class container extends PureComponent {
   static mapStateToProps = state => {
     return {
       makers: select(requests.beMakers, state.entityStore),
@@ -33,13 +34,14 @@ export class MakersListContainer extends PureComponent {
     makersMeta: PropTypes.object,
     dispatch: PropTypes.func,
     match: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
+    entitiesListSearchProps: PropTypes.func.isRequired,
+    entitiesListSearchParams: PropTypes.object.isRequired
   };
 
   constructor() {
     super();
     this.lastFetchedPage = null;
-    this.state = { filter: this.defaultFilter };
     this.fetchMakers = debounce(this.fetchMakers, 250, {
       leading: false,
       trailing: true
@@ -50,51 +52,44 @@ export class MakersListContainer extends PureComponent {
     this.fetchMakers();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.shouldReload(prevProps.makersMeta)) {
+  componentDidUpdate(prevProps) {
+    if (this.filtersChanged(prevProps)) return this.fetchMakers();
+    if (this.makerWasModified(prevProps))
       return this.fetchMakers(this.lastFetchedPage);
-    }
-
-    if (this.shouldFetch(prevState)) {
-      return this.fetchMakers();
-    }
   }
 
-  get defaultFilter() {
-    return { order: "last_name" };
-  }
-
-  shouldReload(prevUsersMeta) {
+  makerWasModified(prevProps) {
     const currentModified = get(this.props, "makersMeta.modified");
-    const previousModified = get(prevUsersMeta, "modified");
-    if (!currentModified) return;
-    return currentModified || previousModified;
+    const previousModified = get(prevProps, "makersMeta.modified");
+    if (!currentModified) return false;
+    return !(currentModified && previousModified);
   }
 
-  shouldFetch(prevState) {
-    return !isEqual(prevState.filter, this.state.filter);
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
   }
 
   fetchMakers = (page = 1) => {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
+    const filterParams = this.props.entitiesListSearchParams.makers;
     const action = request(
-      makersAPI.index(this.state.filter, pagination),
+      makersAPI.index(filterParams, pagination),
       requests.beMakers
     );
     this.props.dispatch(action);
   };
 
-  filterChangeHandler = filter => {
-    this.setState({ filter });
-  };
+  handlePageChange(event, page) {
+    this.fetchMakers(page);
+  }
 
   pageChangeHandlerCreator = page => {
-    return () => this.fetchMakers(page);
-  };
-
-  resetSearch = () => {
-    this.setState({ filter: this.defaultFilter });
+    return event => {
+      this.handlePageChange(event, page);
+    };
   };
 
   render() {
@@ -122,16 +117,7 @@ export class MakersListContainer extends PureComponent {
               />
             ]}
             search={
-              <Search
-                filter={this.state.filter}
-                reset={this.resetSearch}
-                onChange={this.filterChangeHandler}
-                defaultFilter={this.defaultFilter}
-                sortOptions={[
-                  { label: "last name", value: "last_name" },
-                  { label: "first name", value: "first_name" }
-                ]}
-              />
+              <Search {...this.props.entitiesListSearchProps("makers")} />
             }
             entities={makers}
             entityComponent={MakerRow}
@@ -149,6 +135,9 @@ export class MakersListContainer extends PureComponent {
   }
 }
 
+export const MakersListContainer = withFilteredLists(container, {
+  makers: makerFilters
+});
 export default connect(MakersListContainer.mapStateToProps)(
   MakersListContainer
 );

@@ -117,7 +117,7 @@ Array [
                     <span
                       className="entity-list-search__options-label"
                     >
-                      Sort By:
+                      Order Results:
                     </span>
                     <div
                       className="entity-list-search__select-wrapper"
@@ -128,14 +128,14 @@ Array [
                         value="last_name"
                       >
                         <option
-                          value="last_name"
-                        >
-                          last name
-                        </option>
-                        <option
                           value="first_name"
                         >
-                          first name
+                          Alphabetical by first name
+                        </option>
+                        <option
+                          value="last_name"
+                        >
+                          Alphabetical by last name
                         </option>
                       </select>
                       <svg

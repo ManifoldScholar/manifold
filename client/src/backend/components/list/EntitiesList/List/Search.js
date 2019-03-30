@@ -3,76 +3,131 @@ import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import labelId from "helpers/labelId";
 import { Collapse } from "react-collapse";
-import isNil from "lodash/isNil";
+import has from "lodash/has";
+
+import isPlainObject from "lodash/isPlainObject";
 
 export default class ListEntitiesListSearch extends PureComponent {
   static displayName = "List.Entities.List.Search";
 
   static propTypes = {
-    filter: PropTypes.object.isRequired,
-    filters: PropTypes.array,
-    reset: PropTypes.func.isRequired,
-    sortOptions: PropTypes.array,
-    onChange: PropTypes.func.isRequired
+    params: PropTypes.array,
+    values: PropTypes.object,
+    setParam: PropTypes.func.isRequired,
+    onReset: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    filter: {},
-    filters: [],
-    sortOptions: []
+    params: [],
+    values: {}
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      keyword: ""
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (has(prevProps, "values.keyword")) {
+      if (prevProps.values.keyword !== this.props.values.keyword) {
+        this.setState({ keyword: this.props.values.keyword });
+      }
+    }
   }
 
   onSubmit = event => {
     event.preventDefault();
   };
 
-  get filters() {
-    return this.props.filters || [];
+  get filterParams() {
+    return this.params.filter(
+      p => !this.reservedNames.includes(p.name) && !p.hidden
+    );
   }
 
-  get sortOptions() {
-    return this.props.sortOptions || [];
+  get reservedNames() {
+    return ["order", "keyword"];
   }
 
-  get isSortable() {
-    return this.sortOptions.length > 0;
+  get hasFilterParams() {
+    return this.filterParams.length > 0;
   }
 
-  get isFilterable() {
-    return this.filters.length > 0;
+  get hasOptions() {
+    return this.hasFilterParams || this.hasOrderParam;
   }
 
-  get isConfigurable() {
-    return this.isSortable || this.isFilterable;
+  get params() {
+    return this.props.params;
   }
 
-  get keywordFilter() {
-    return { key: "keyword" };
+  get values() {
+    return this.props.values;
   }
 
-  get sortFilter() {
-    return { key: "order" };
+  get keywordParam() {
+    return this.paramByName("keyword");
   }
 
-  setFilterValue(event, { key }) {
+  get orderParam() {
+    return this.paramByName("order");
+  }
+
+  get hasOrderParam() {
+    return this.hasParam(this.orderParam);
+  }
+
+  get hasKeywordParam() {
+    return this.hasParam(this.keywordParam);
+  }
+
+  setKeywordState(event) {
     const value = event.target.value;
-    const filter = Object.assign({}, this.props.filter);
-    filter[key] = value;
-    if (filter.keyword) filter.typeahead = true;
-    this.props.onChange(filter);
+    this.setState({ keyword: value });
   }
 
-  getFilterValue(filter) {
-    const value = this.props.filter[filter.key];
-    if (isNil(value)) return "";
-    return value;
+  setParam(event, paramLike) {
+    const param = this.ensureParamObject(paramLike);
+    const value = event.target.value;
+    const { setParam } = this.props;
+    setParam(param, value);
+  }
+
+  submitKeywordForm = event => {
+    event.preventDefault();
+    const { setParam } = this.props;
+    setParam(this.keywordParam, this.state.keyword);
+  };
+
+  ensureParamObject(param) {
+    return isPlainObject(param) ? param : this.paramByName(param);
+  }
+
+  paramValue(paramLike) {
+    const param = this.ensureParamObject(paramLike);
+    return this.values[param.name] || "";
+  }
+
+  paramLabel(paramLike) {
+    const param = this.ensureParamObject(paramLike);
+    return param.label || "";
+  }
+
+  paramOptions(paramLike) {
+    const param = this.ensureParamObject(paramLike);
+    return param.options || [];
+  }
+
+  paramByName(paramName) {
+    return this.params.find(p => p.name === paramName);
+  }
+
+  hasParam(paramLike) {
+    const param = this.ensureParamObject(paramLike);
+    return isPlainObject(param);
   }
 
   toggleOptions = event => {
@@ -82,7 +137,8 @@ export default class ListEntitiesListSearch extends PureComponent {
 
   resetSearch = event => {
     event.preventDefault();
-    this.props.reset();
+    this.setState({ keyword: "" });
+    this.props.onReset();
   };
 
   /* eslint-disable react/no-array-index-key */
@@ -93,49 +149,51 @@ export default class ListEntitiesListSearch extends PureComponent {
 
     return (
       <div className={`entity-list__search ${baseClass}`}>
-        <form onSubmit={this.onSubmit}>
-          <div className={`${baseClass}__keyword-row`}>
-            <button className={`${baseClass}__search-button`}>
-              <Utility.IconComposer
-                iconClass="manicon-magnify"
-                icon="search16"
-              />
-              <span className="screen-reader-text">Search</span>
-            </button>
-            <div className={`${baseClass}__keyword-input-wrapper`}>
-              <label htmlFor={label} className="screen-reader-text">
-                Enter Search Criteria
-              </label>
-              <input
-                className={`${baseClass}__keyword-input`}
-                id={label}
-                value={this.getFilterValue(this.keywordFilter)}
-                type="text"
-                placeholder="Search..."
-                onChange={e => this.setFilterValue(e, this.keywordFilter)}
-              />
-            </div>
-            <button
-              onClick={this.resetSearch}
-              className={`${baseClass}__text-button`}
-            >
-              Reset
-            </button>
-            {this.isConfigurable && (
-              <button
-                onClick={this.toggleOptions}
-                className={`${baseClass}__text-button ${baseClass}__text-button--foregrounded`}
-              >
-                Options
+        {this.hasKeywordParam && (
+          <form onSubmit={this.submitKeywordForm}>
+            <div className={`${baseClass}__keyword-row`}>
+              <button className={`${baseClass}__search-button`}>
+                <Utility.IconComposer
+                  iconClass="manicon-magnify"
+                  icon="search16"
+                />
+                <span className="screen-reader-text">Search</span>
               </button>
-            )}
-          </div>
-        </form>
-        {this.isConfigurable && (
+              <div className={`${baseClass}__keyword-input-wrapper`}>
+                <label htmlFor={label} className="screen-reader-text">
+                  Enter Search Criteria
+                </label>
+                <input
+                  className={`${baseClass}__keyword-input`}
+                  id={label}
+                  value={this.state.keyword}
+                  type="text"
+                  placeholder={this.paramLabel(this.keywordParam)}
+                  onChange={e => this.setKeywordState(e)}
+                />
+              </div>
+              <button
+                onClick={this.resetSearch}
+                className={`${baseClass}__text-button`}
+              >
+                Reset
+              </button>
+              {this.hasOptions && (
+                <button
+                  onClick={this.toggleOptions}
+                  className={`${baseClass}__text-button ${baseClass}__text-button--foregrounded`}
+                >
+                  Options
+                </button>
+              )}
+            </div>
+          </form>
+        )}
+        {this.hasOptions && (
           <Collapse isOpened={this.state.open}>
             <div>
               <div className={`${baseClass}__options`}>
-                {this.filters.map((filter, i) => (
+                {this.filterParams.map((param, i) => (
                   <div key={i} className={`${baseClass}__option`}>
                     <div className={`${baseClass}__option-inner`}>
                       <span
@@ -148,42 +206,47 @@ export default class ListEntitiesListSearch extends PureComponent {
                       <div className={`${baseClass}__select-wrapper`}>
                         <select
                           id={labelId("list-search-")}
-                          onChange={event => this.setFilterValue(event, filter)}
-                          value={this.getFilterValue(filter)}
+                          onChange={e => this.setParam(e, param)}
+                          value={this.paramValue(param)}
                         >
-                          <option value="">{`Filter by: ${
-                            filter.label
-                          }`}</option>
-                          {filter.options.map((option, optionIndex) => (
-                            <option key={optionIndex} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
+                          {this.paramOptions(param).map(
+                            (option, optionIndex) => (
+                              <option
+                                key={optionIndex}
+                                value={option.value || ""}
+                              >
+                                {option.label}
+                              </option>
+                            )
+                          )}
                         </select>
                         <Utility.IconComposer icon="disclosureDown24" />
                       </div>
                     </div>
                   </div>
                 ))}
-                {this.isSortable && (
+                {this.hasOrderParam && (
                   <div className={`${baseClass}__option`}>
                     <div className={`${baseClass}__option-inner`}>
                       <span className={`${baseClass}__options-label`}>
-                        Sort By:
+                        Order Results:
                       </span>
                       <div className={`${baseClass}__select-wrapper`}>
                         <select
                           id={labelId("list-search-")}
-                          onChange={event =>
-                            this.setFilterValue(event, this.sortFilter)
-                          }
-                          value={this.getFilterValue(this.sortFilter)}
+                          onChange={e => this.setParam(e, this.orderParam)}
+                          value={this.paramValue(this.orderParam)}
                         >
-                          {this.sortOptions.map((option, optionIndex) => (
-                            <option key={optionIndex} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
+                          {this.paramOptions(this.orderParam).map(
+                            (option, optionIndex) => (
+                              <option
+                                key={optionIndex}
+                                value={option.value || ""}
+                              >
+                                {option.label}
+                              </option>
+                            )
+                          )}
                         </select>
                         <Utility.IconComposer icon="disclosureDown24" />
                       </div>

@@ -140,7 +140,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                   <span
                     className="entity-list-search__options-label"
                   >
-                    Sort By:
+                    Order Results:
                   </span>
                   <div
                     className="entity-list-search__select-wrapper"
@@ -148,12 +148,12 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                     <select
                       id="list-search-1"
                       onChange={[Function]}
-                      value=""
+                      value="title"
                     >
                       <option
                         value="title"
                       >
-                        title
+                        Alphabetical by title
                       </option>
                     </select>
                     <svg

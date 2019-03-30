@@ -130,32 +130,32 @@ Array [
                         <option
                           value=""
                         >
-                          Filter by: Role
+                          All roles
                         </option>
                         <option
                           value="admin"
                         >
-                          Admin
+                          Role: Admin
                         </option>
                         <option
                           value="editor"
                         >
-                          Editor
+                          Role: Editor
                         </option>
                         <option
                           value="project_creator"
                         >
-                          Project Creator
+                          Role: Project Creator
                         </option>
                         <option
                           value="marketeer"
                         >
-                          Marketeer
+                          Role: Marketeer
                         </option>
                         <option
                           value="reader"
                         >
-                          Reader
+                          Role: Reader
                         </option>
                       </select>
                       <svg
@@ -194,7 +194,7 @@ Array [
                     <span
                       className="entity-list-search__options-label"
                     >
-                      Sort By:
+                      Order Results:
                     </span>
                     <div
                       className="entity-list-search__select-wrapper"
@@ -205,14 +205,14 @@ Array [
                         value="last_name"
                       >
                         <option
-                          value="last_name"
-                        >
-                          last name
-                        </option>
-                        <option
                           value="first_name"
                         >
-                          first name
+                          Alphabetical by first name
+                        </option>
+                        <option
+                          value="last_name"
+                        >
+                          Alphabetical by last name
                         </option>
                       </select>
                       <svg
