@@ -75,7 +75,7 @@ class SearchResultsTypeAnnotation extends PureComponent {
               />
             ) : (
               <div className="search-result__avatar">
-                <Utility.IconComposer icon="avatar24" size="64" />
+                <Utility.IconComposer icon="avatar64" />
               </div>
             )}
           </React.Fragment>
