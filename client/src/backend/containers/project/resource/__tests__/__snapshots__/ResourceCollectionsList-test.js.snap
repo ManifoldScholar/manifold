@@ -412,7 +412,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
               >
                 <a
                   disabled={true}
-                  href="entities-list1"
+                  href="#entities-list1"
                   onClick={[Function]}
                 >
                   <svg
@@ -460,7 +460,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                 className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
               >
                 <a
-                  href="entities-list1"
+                  href="#entities-list1"
                   onClick={[Function]}
                 >
                   <span
@@ -480,7 +480,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                 className="list-pagination__page list-pagination__page--ordinal"
               >
                 <a
-                  href="entities-list1"
+                  href="#entities-list1"
                   onClick={[Function]}
                 >
                   <span
@@ -506,7 +506,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
                 className="list-pagination__page list-pagination__page--next"
               >
                 <a
-                  href="entities-list1"
+                  href="#entities-list1"
                   onClick={[Function]}
                 >
                   <span
