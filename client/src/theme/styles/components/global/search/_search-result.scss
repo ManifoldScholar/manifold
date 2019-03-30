@@ -126,10 +126,19 @@
 
   }
 
-  &__avatar {
+  img.search-result__avatar {
     border: 2px solid $neutral50;
     border-radius: 50%;
   }
+
+  .search-result__avatar svg {
+    max-width: 68px;
+    width: 68px;
+    height: 68px;
+    position: relative;
+    left: -6px;
+  }
+
 
   &__excerpt-open-button {
     @include buttonUnstyled;
