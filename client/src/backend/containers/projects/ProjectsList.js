@@ -5,7 +5,6 @@ import { entityStoreActions } from "actions";
 import Layout from "backend/components/layout";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
-import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
 import Authorization from "helpers/authorization";
 import EntitiesList, {
@@ -13,17 +12,17 @@ import EntitiesList, {
   Search,
   ProjectRow
 } from "backend/components/list/EntitiesList";
+import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
 
 const { request, flush } = entityStoreActions;
 
 const perPage = 20;
 
-export class ProjectsListContainer extends PureComponent {
+export class container extends PureComponent {
   static mapStateToProps = state => {
     return {
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore),
-      projectsListSnapshot: state.ui.transitory.stateSnapshots.projectsList,
       authentication: state.authentication
     };
   };
@@ -32,79 +31,55 @@ export class ProjectsListContainer extends PureComponent {
     projects: PropTypes.array,
     dispatch: PropTypes.func,
     projectsMeta: PropTypes.object,
-    projectsListSnapshot: PropTypes.object.isRequired,
-    snapshotCreator: PropTypes.func.isRequired,
     authentication: PropTypes.object
   };
 
   constructor(props) {
     super(props);
-    this.state = this.initialState(props);
     this.authorization = new Authorization();
-    this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
   componentDidMount() {
-    const projectsRequest = request(
-      projectsAPI.index(this.buildFetchFilter(this.props, this.state.filter), {
-        number: this.props.projectsListSnapshot.page,
-        size: perPage
-      }),
-      requests.beProjects
-    );
+    this.fetchProjects();
+  }
 
-    const { promise: one } = this.props.dispatch(projectsRequest);
-    const promises = [one];
-
-    return Promise.all(promises);
+  componentDidUpdate(prevProps) {
+    if (this.filtersChanged(prevProps)) return this.fetchProjects();
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.beProjects));
   }
 
-  initialState(props) {
-    return Object.assign({}, { filter: props.projectsListSnapshot.filter });
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
   }
 
-  buildFetchFilter = (props, base) => {
-    const out = Object.assign({}, base);
-    const currentUser = props.authentication.currentUser;
+  fetchProjects(page = 1) {
+    const projectsRequest = request(
+      projectsAPI.index(this.filterParams("projects"), {
+        number: page,
+        size: perPage
+      }),
+      requests.beProjects
+    );
+    this.props.dispatch(projectsRequest);
+  }
+
+  filterParams(additionalParams = {}) {
+    const filterState = this.props.entitiesListSearchParams.projects || {};
+    const out = Object.assign({}, filterState, additionalParams);
+    const currentUser = this.props.authentication.currentUser;
     if (!currentUser) return out;
     if (currentUser.attributes.abilities.viewDrafts) return out;
     out.withUpdateAbility = true;
     return out;
-  };
-
-  snapshotState(page) {
-    const snapshot = { filter: this.state.filter, page };
-    this.props.snapshotCreator(snapshot);
   }
-
-  updateResults(eventIgnored = null, page = 1) {
-    this.snapshotState(page);
-
-    const pagination = { number: page, size: perPage };
-    const action = request(
-      projectsAPI.index(
-        this.buildFetchFilter(this.props, this.state.filter),
-        pagination
-      ),
-      requests.beProjects
-    );
-    this.props.dispatch(action);
-  }
-
-  filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.updateResults();
-    });
-  };
 
   updateHandlerCreator = page => {
-    return event => {
-      this.updateResults(event, page);
-    };
+    return () => this.fetchProjects(page);
   };
 
   render() {
@@ -130,21 +105,7 @@ export class ProjectsListContainer extends PureComponent {
               onPageClick: this.updateHandlerCreator
             }}
             search={
-              <Search
-                sortOptions={[{ label: "title", value: "sort_title" }]}
-                onChange={this.filterChangeHandler}
-                defaultFilter={{ order: "sort_title ASC" }}
-                filters={[
-                  {
-                    label: "Draft",
-                    key: "draft",
-                    options: [
-                      { label: "Show Draft Projects", value: true },
-                      { label: "Hide Draft Projects", value: false }
-                    ]
-                  }
-                ]}
-              />
+              <Search {...this.props.entitiesListSearchProps("projects")} />
             }
             buttons={[
               <Button
@@ -161,4 +122,7 @@ export class ProjectsListContainer extends PureComponent {
   }
 }
 
+export const ProjectsListContainer = withFilteredLists(container, {
+  projects: projectFilters
+});
 export default connectAndFetch(ProjectsListContainer);

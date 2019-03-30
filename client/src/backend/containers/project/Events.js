@@ -6,19 +6,19 @@ import { select, meta } from "utils/entityUtils";
 import { projectsAPI, eventsAPI, requests } from "api";
 import { connect } from "react-redux";
 import get from "lodash/get";
-import config from "config";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Search,
   EventRow
 } from "backend/components/list/EntitiesList";
+import withFilteredLists, { eventFilters } from "hoc/with-filtered-lists";
 
 import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 const perPage = 6;
 
-export class ProjectEventsContainer extends PureComponent {
+export class container extends PureComponent {
   static mapStateToProps = state => {
     return {
       events: select(requests.beEvents, state.entityStore),
@@ -34,7 +34,9 @@ export class ProjectEventsContainer extends PureComponent {
     confirm: PropTypes.func.isRequired,
     eventsMeta: PropTypes.object,
     refresh: PropTypes.func,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    entitiesListSearchProps: PropTypes.func.isRequired,
+    entitiesListSearchParams: PropTypes.object.isRequired
   };
 
   static defaultProps = {
@@ -43,9 +45,6 @@ export class ProjectEventsContainer extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      filter: {}
-    };
     this.lastFetchedPage = null;
   }
 
@@ -54,42 +53,34 @@ export class ProjectEventsContainer extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    this.maybeReload(prevProps.eventsMeta);
+    if (this.filtersChanged(prevProps)) return this.fetchEvents();
+    if (this.eventWasModified(prevProps))
+      return this.fetchEvents(this.lastFetchedPage);
   }
 
-  get eventTypeFilterOptions() {
-    const types = config.app.locale.event_types;
-    return Object.keys(types).map(key => {
-      return {
-        label: types[key],
-        value: key
-      };
-    });
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
   }
 
-  maybeReload(prevEventMeta) {
+  eventWasModified(prevProps) {
     const currentModified = get(this.props, "eventsMeta.modified");
-    const previousModified = get(prevEventMeta, "modified");
-    if (!currentModified) return;
-    if (currentModified && previousModified) return;
-    this.fetchEvents(this.lastFetchedPage);
+    const previousModified = get(prevProps, "eventsMeta.modified");
+    if (!currentModified) return false;
+    return !(currentModified && previousModified);
   }
 
-  fetchEvents(page) {
+  fetchEvents(page = 1) {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
+    const filters = this.props.entitiesListSearchParams.events;
     const action = request(
-      projectsAPI.events(this.props.project.id, this.state.filter, pagination),
+      projectsAPI.events(this.props.project.id, filters, pagination),
       requests.beEvents
     );
     this.props.dispatch(action);
   }
-
-  filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.fetchEvents(1);
-    });
-  };
 
   handleEventDestroy = event => {
     const heading = "Are you sure you want to delete this event?";
@@ -145,16 +136,7 @@ export class ProjectEventsContainer extends PureComponent {
               onPageClick: this.pageChangeHandlerCreator
             }}
             search={
-              <Search
-                onChange={this.filterChangeHandler}
-                filters={[
-                  {
-                    label: "Type",
-                    key: "type",
-                    options: this.eventTypeFilterOptions
-                  }
-                ]}
-              />
+              <Search {...this.props.entitiesListSearchProps("events")} />
             }
           />
         </section>
@@ -162,6 +144,10 @@ export class ProjectEventsContainer extends PureComponent {
     );
   }
 }
+
+export const ProjectEventsContainer = withFilteredLists(container, {
+  events: eventFilters
+});
 
 export default withConfirmation(
   connect(ProjectEventsContainer.mapStateToProps)(ProjectEventsContainer)

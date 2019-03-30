@@ -5,17 +5,17 @@ import { projectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { connect } from "react-redux";
-import debounce from "lodash/debounce";
 import EntitiesList, {
   Search,
   ResourceRow,
   ResourceCollectionRow
 } from "backend/components/list/EntitiesList";
+import withFilteredLists, { keywordFilter } from "hoc/with-filtered-lists";
 
 const { request } = entityStoreActions;
 const perPage = 5;
 
-export class NotationPickerContainer extends PureComponent {
+export class container extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       resources: select(requests.beResources, state.entityStore),
@@ -47,36 +47,44 @@ export class NotationPickerContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      context: "resources",
-      filter: {}
+      context: "resources"
     };
-    this.debouncedFetch = debounce(this.fetchContext.bind(this), 250);
   }
 
   componentDidMount() {
-    this.fetchResources(1);
-    this.fetchCollections(1);
+    this.fetchResources();
+    this.fetchCollections();
   }
 
-  fetchResources(page) {
+  componentDidUpdate(prevProps) {
+    if (this.filtersChanged(prevProps)) return this.fetchContext();
+  }
+
+  get filters() {
+    return this.props.entitiesListSearchParams.notations || {};
+  }
+
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
+  }
+
+  fetchResources(page = 1) {
     const pagination = { number: page, size: perPage };
     const action = request(
-      projectsAPI.resources(
-        this.props.projectId,
-        this.state.filter,
-        pagination
-      ),
+      projectsAPI.resources(this.props.projectId, this.filters, pagination),
       requests.beResources
     );
     this.props.dispatch(action);
   }
 
-  fetchCollections(page) {
+  fetchCollections(page = 1) {
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.resourceCollections(
         this.props.projectId,
-        this.state.filter,
+        this.filters,
         pagination
       ),
       requests.beResourceCollections
@@ -90,22 +98,15 @@ export class NotationPickerContainer extends PureComponent {
     return this.fetchResources(page);
   }
 
-  filterChangeHandler = filter => {
-    this.setState({ filter }, this.debouncedFetch);
-  };
-
   handleContextClick = () => {
-    if (this.state.context === "collections")
-      return this.setState({ context: "resources" });
-    return this.setState({ context: "collections" });
+    const { onReset } = this.props.entitiesListSearchProps("notations");
+    const context =
+      this.state.context === "collections" ? "resources" : "collections";
+    this.setState({ context }, onReset);
   };
 
   pageChangeHandlerCreator = page => {
     return () => this.fetchContext(page);
-  };
-
-  resetSearch = () => {
-    this.setState({ filter: {} }, this.fetchContext);
   };
 
   handleMouseDown(event) {
@@ -169,11 +170,7 @@ export class NotationPickerContainer extends PureComponent {
               onRowClick: this.props.selectionHandler
             }}
             search={
-              <Search
-                filter={this.state.filter}
-                onChange={this.filterChangeHandler}
-                reset={this.resetSearch}
-              />
+              <Search {...this.props.entitiesListSearchProps("notations")} />
             }
           />
         </div>
@@ -181,6 +178,10 @@ export class NotationPickerContainer extends PureComponent {
     );
   }
 }
+
+export const NotationPickerContainer = withFilteredLists(container, {
+  notations: keywordFilter
+});
 
 export default connect(NotationPickerContainer.mapStateToProps)(
   NotationPickerContainer

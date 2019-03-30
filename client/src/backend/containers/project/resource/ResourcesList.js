@@ -10,11 +10,12 @@ import EntitiesList, {
   Search,
   ResourceRow
 } from "backend/components/list/EntitiesList";
+import withFilteredLists, { resourceFilters } from "hoc/with-filtered-lists";
 
 const { request } = entityStoreActions;
 const perPage = 5;
 
-export class ProjectResourcesListContainer extends PureComponent {
+export class container extends PureComponent {
   static mapStateToProps = state => {
     return {
       resources: select(requests.beResources, state.entityStore),
@@ -34,42 +35,31 @@ export class ProjectResourcesListContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { filter: {} };
-    this.lastFetchedPage = null;
   }
 
   componentDidMount() {
-    this.fetchResources(1);
+    this.fetchResources();
   }
 
-  get tagFilterOptions() {
-    const tags = this.props.project.attributes.resourceTags || [];
-    return tags.map(t => ({ label: t, value: t }));
+  componentDidUpdate(prevProps) {
+    if (this.filtersChanged(prevProps)) return this.fetchResources();
   }
 
-  get kindFilterOptions() {
-    const tags = this.props.project.attributes.resourceKinds || [];
-    return tags.map(k => ({ label: k, value: k }));
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
   }
 
-  fetchResources(page) {
-    this.lastFetchedPage = page;
+  fetchResources(page = 1) {
     const pagination = { number: page, size: perPage };
+    const filters = this.props.entitiesListSearchParams.resources;
     const action = request(
-      projectsAPI.resources(
-        this.props.project.id,
-        this.state.filter,
-        pagination
-      ),
+      projectsAPI.resources(this.props.project.id, filters, pagination),
       requests.beResources
     );
     this.props.dispatch(action);
   }
-
-  filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.fetchResources(1);
-    });
-  };
 
   handleResourcesPageChange(event, page) {
     this.fetchResources(page);
@@ -99,20 +89,10 @@ export class ProjectResourcesListContainer extends PureComponent {
         }}
         search={
           <Search
-            sortOptions={[{ label: "title", value: "sort_title" }]}
-            onChange={this.filterChangeHandler}
-            filters={[
-              {
-                label: "Tag",
-                key: "tag",
-                options: this.tagFilterOptions
-              },
-              {
-                label: "Kind",
-                key: "kind",
-                options: this.kindFilterOptions
-              }
-            ]}
+            {...resourceFilters.dynamicParams(
+              this.props.entitiesListSearchProps("resources"),
+              project
+            )}
           />
         }
         buttons={[
@@ -136,4 +116,7 @@ export class ProjectResourcesListContainer extends PureComponent {
   }
 }
 
+export const ProjectResourcesListContainer = withFilteredLists(container, {
+  resources: resourceFilters.defaultParams
+});
 export default connectAndFetch(ProjectResourcesListContainer);

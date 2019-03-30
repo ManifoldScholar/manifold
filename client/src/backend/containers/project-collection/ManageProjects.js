@@ -11,11 +11,12 @@ import EntitiesList, {
   Search,
   ProjectRow
 } from "backend/components/list/EntitiesList";
+import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
 
 const { request } = entityStoreActions;
 const perPage = 12;
 
-export class ProjectCollectionManageProjects extends PureComponent {
+export class container extends PureComponent {
   static mapStateToProps = state => {
     return {
       projects: select(requests.beProjects, state.entityStore),
@@ -30,16 +31,27 @@ export class ProjectCollectionManageProjects extends PureComponent {
     projects: PropTypes.array,
     projectsMeta: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object
+    history: PropTypes.object,
+    entitiesListSearchProps: PropTypes.func.isRequired,
+    entitiesListSearchParams: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { filter: {} };
+  componentDidMount() {
+    this.fetchProjects();
   }
 
-  componentDidMount() {
-    this.updateResults();
+  componentDidUpdate(prevProps) {
+    if (this.filtersChanged(prevProps)) return this.fetchProjects();
+  }
+
+  get filters() {
+    return this.props.entitiesListSearchParams.projects || {};
+  }
+
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
   }
 
   projectsForProjectCollection(projectCollection) {
@@ -48,24 +60,18 @@ export class ProjectCollectionManageProjects extends PureComponent {
     );
   }
 
-  updateResults(eventIgnored = null, page = 1) {
+  fetchProjects(eventIgnored = null, page = 1) {
     const pagination = { number: page, size: perPage };
     const action = request(
-      projectsAPI.index(this.state.filter, pagination),
+      projectsAPI.index(this.filters, pagination),
       requests.beProjects
     );
     this.props.dispatch(action);
   }
 
-  filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.updateResults();
-    });
-  };
-
   updateHandlerCreator = page => {
     return event => {
-      this.updateResults(event, page);
+      this.fetchProjects(event, page);
     };
   };
 
@@ -180,10 +186,7 @@ export class ProjectCollectionManageProjects extends PureComponent {
             onPageClick: this.updateHandlerCreator
           }}
           search={
-            <Search
-              defaultFilter={{ order: "sort_title ASC" }}
-              onChange={this.filterChangeHandler}
-            />
+            <Search {...this.props.entitiesListSearchProps("projects")} />
           }
         />
 
@@ -198,4 +201,7 @@ export class ProjectCollectionManageProjects extends PureComponent {
   }
 }
 
+export const ProjectCollectionManageProjects = withFilteredLists(container, {
+  projects: projectFilters
+});
 export default connectAndFetch(ProjectCollectionManageProjects);

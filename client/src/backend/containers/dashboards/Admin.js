@@ -5,25 +5,23 @@ import { entityStoreActions } from "actions";
 import DashboardComponents from "backend/components/dashboard";
 import Layout from "backend/components/layout";
 import { select, meta } from "utils/entityUtils";
+import isEqual from "lodash/isEqual";
 import { projectsAPI, statisticsAPI, requests } from "api";
-import debounce from "lodash/debounce";
 import Authorization from "helpers/authorization";
 import lh from "helpers/linkHandler";
-import isEmpty from "lodash/isEmpty";
 import EntitiesList, {
   Button,
   Search,
   ProjectRow
 } from "backend/components/list/EntitiesList";
-
+import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
 import Authorize from "hoc/authorize";
-import isEqual from "lodash/isEqual";
 
 const { request } = entityStoreActions;
 
 const perPage = 10;
 
-export class DashboardsAdminContainer extends PureComponent {
+export class Container extends PureComponent {
   static mapStateToProps = state => {
     return {
       statistics: select(requests.beStats, state.entityStore),
@@ -31,8 +29,8 @@ export class DashboardsAdminContainer extends PureComponent {
       projectsMeta: meta(requests.beProjects, state.entityStore),
       recentProjects: select(requests.beRecentProjects, state.entityStore),
       authentication: state.authentication,
-      projectsListSnapshot:
-        state.ui.transitory.stateSnapshots.dashboardProjectsList
+      entitiesListSearchProps: PropTypes.func.isRequired,
+      entitiesListSearchParams: PropTypes.object.isRequired
     };
   };
 
@@ -43,122 +41,93 @@ export class DashboardsAdminContainer extends PureComponent {
     projectsMeta: PropTypes.object,
     recentProjects: PropTypes.array,
     authentication: PropTypes.object,
-    projectsListSnapshot: PropTypes.object.isRequired,
-    snapshotCreator: PropTypes.func.isRequired
+    entitiesListSearchProps: PropTypes.func.isRequired,
+    entitiesListSearchParams: PropTypes.object.isRequired
   };
 
   constructor(props) {
     super(props);
-    this.state = this.initialState(props);
     this.authorization = new Authorization();
-    this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
   componentDidMount() {
+    this.fetchProjects();
+    this.fetchRecentProjects();
+    this.fetchStats();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.filtersChanged(prevProps)) return this.fetchProjects();
+  }
+
+  fetchProjects(page = 1) {
     const projectsRequest = request(
-      projectsAPI.index(this.buildFetchFilter(this.props, this.state.filter), {
-        number: this.props.projectsListSnapshot.page,
+      projectsAPI.index(this.filterParams("projects"), {
+        number: page,
         size: perPage
       }),
       requests.beProjects
     );
+    this.props.dispatch(projectsRequest);
+  }
+
+  fetchRecentProjects() {
     const recentProjectsRequest = request(
       projectsAPI.index(
-        this.buildFetchFilter(this.props, { order: "updated_at DESC" }),
+        this.filterParams(this.props, { order: "updated_at DESC" }),
         { size: 5 }
       ),
       requests.beRecentProjects
     );
-    const statsRequest = request(statisticsAPI.show(), requests.beStats);
+    this.props.dispatch(recentProjectsRequest);
+  }
 
-    const { promise: one } = this.props.dispatch(projectsRequest);
-    const { promise: two } = this.props.dispatch(recentProjectsRequest);
-    const promises = [one, two];
-
+  fetchStats() {
     const readStats = this.authorization.authorizeAbility({
       authentication: this.props.authentication,
       entity: "statistics",
       ability: "read"
     });
     if (readStats) {
-      const { promise: three } = this.props.dispatch(statsRequest);
-      promises.push(three);
+      const statsRequest = request(statisticsAPI.show(), requests.beStats);
+      this.props.dispatch(statsRequest);
     }
-
-    return Promise.all(promises);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.shouldFetch(prevState)) return this.updateResults();
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
   }
 
-  get defaultFilter() {
-    return { order: "updated_at DESC" };
-  }
-
-  shouldFetch(prevState) {
-    return !isEqual(prevState.filter, this.state.filter);
-  }
-
-  initialState(props) {
-    return Object.assign({}, { filter: props.projectsListSnapshot.filter });
-  }
-
-  buildFetchFilter = (props, base) => {
-    const out = Object.assign({}, base);
-    const currentUser = props.authentication.currentUser;
+  filterParams(name = null, additionalParams = {}) {
+    const filterState = this.props.entitiesListSearchParams[name] || {};
+    const out = Object.assign({}, filterState, additionalParams);
+    const currentUser = this.props.authentication.currentUser;
     if (!currentUser) return out;
     if (currentUser.attributes.abilities.viewDrafts) return out;
     out.withUpdateAbility = true;
     return out;
-  };
-
-  snapshotState(page) {
-    const snapshot = { filter: this.state.filter, page };
-    this.props.snapshotCreator(snapshot);
   }
 
-  updateResults = (page = 1) => {
-    this.snapshotState(page);
-
-    const pagination = { number: page, size: perPage };
-    const action = request(
-      projectsAPI.index(
-        this.buildFetchFilter(this.props, this.state.filter),
-        pagination
-      ),
-      requests.beProjects
-    );
-    this.props.dispatch(action);
-  };
-
-  filterChangeHandler = filter => {
-    this.setState({ filter });
-  };
-
   updateHandlerCreator = page => {
-    return () => this.updateResults(page);
-  };
-
-  resetSearch = () => {
-    this.setState({ filter: this.defaultFilter }, this.updateResults);
+    return () => this.fetchProjects(page);
   };
 
   noProjects = () => {
-    const filters = Object.assign({}, this.state.filter);
-    delete filters.order;
+    const filterState = this.props.entitiesListSearchParams.projects;
+    const initialState = this.props.entitiesListSearchParams.initialProjects;
+
     const createProjects = this.authorization.authorizeAbility({
       authentication: this.props.authentication,
       entity: "project",
       ability: "create"
     });
 
-    if (!isEmpty(filters)) return "Sorry, no results were found.";
-
-    if (createProjects)
+    if (isEqual(initialState, filterState) && createProjects) {
       return "This Manifold Library is empty. Click the button above to create your first project.";
-
-    return "This Manifold Library is empty. Check back soon.";
+    }
+    return "Sorry, no results were found.";
   };
 
   render() {
@@ -185,23 +154,7 @@ export class DashboardsAdminContainer extends PureComponent {
                       emptyMessage={this.noProjects()}
                       search={
                         <Search
-                          onChange={this.filterChangeHandler}
-                          filter={this.state.filter}
-                          reset={this.resetSearch}
-                          sortOptions={[
-                            { label: "Newest", value: "created_at DESC" },
-                            { label: "Oldest", value: "created_at ASC" },
-                            {
-                              label: "Updated At ASC",
-                              value: "updated_at ASC"
-                            },
-                            {
-                              label: "Updated At DESC",
-                              value: "updated_at DESC"
-                            },
-                            { label: "Title ASC", value: "sort_title ASC" },
-                            { label: "Title DESC", value: "sort_title DESC" }
-                          ]}
+                          {...this.props.entitiesListSearchProps("projects")}
                         />
                       }
                       buttons={[
@@ -249,5 +202,8 @@ export class DashboardsAdminContainer extends PureComponent {
     );
   }
 }
+export const DashboardsAdminContainer = withFilteredLists(Container, {
+  projects: projectFilters
+});
 
 export default connectAndFetch(DashboardsAdminContainer);
