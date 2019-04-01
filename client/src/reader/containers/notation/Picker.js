@@ -7,6 +7,7 @@ import { select, meta } from "utils/entityUtils";
 import { connect } from "react-redux";
 import debounce from "lodash/debounce";
 import EntitiesList, {
+  Search,
   ResourceRow,
   ResourceCollectionRow
 } from "backend/components/list/EntitiesList";
@@ -83,16 +84,14 @@ export class NotationPickerContainer extends PureComponent {
     this.props.dispatch(action);
   }
 
-  fetchContext(page) {
+  fetchContext(page = 1) {
     if (this.state.context === "collections")
       return this.fetchCollections(page);
     return this.fetchResources(page);
   }
 
   filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.debouncedFetch(1);
-    });
+    this.setState({ filter }, this.debouncedFetch);
   };
 
   handleContextClick = () => {
@@ -101,15 +100,12 @@ export class NotationPickerContainer extends PureComponent {
     return this.setState({ context: "collections" });
   };
 
-  handleUsersPageChange(event, page) {
-    event.preventDefault();
-    this.fetchContext(page);
-  }
-
   pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleUsersPageChange(event, page);
-    };
+    return () => this.fetchContext(page);
+  };
+
+  resetSearch = () => {
+    this.setState({ filter: {} }, this.fetchContext);
   };
 
   handleMouseDown(event) {
@@ -169,10 +165,16 @@ export class NotationPickerContainer extends PureComponent {
             callbacks={{
               onPageClick: this.pageChangeHandlerCreator
             }}
-            filterChangeHandler={this.filterChangeHandler}
             entityComponentProps={{
               onRowClick: this.props.selectionHandler
             }}
+            search={
+              <Search
+                filter={this.state.filter}
+                onChange={this.filterChangeHandler}
+                reset={this.resetSearch}
+              />
+            }
           />
         </div>
       </section>
