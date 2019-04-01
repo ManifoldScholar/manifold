@@ -147,7 +147,7 @@ export class UsersEditContainer extends PureComponent {
             },
             {
               onClick: this.unsubscribeUser,
-              icon: "notifications24",
+              icon: "mail32",
               label: "Unsubscribe"
             },
             {
