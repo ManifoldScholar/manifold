@@ -90,7 +90,8 @@ export class PermissionEdit extends PureComponent {
             {
               onClick: this.handleRemoveAll,
               icon: "delete32",
-              label: "Delete User Permissions"
+              label: "Delete User Permissions",
+              iconClass: "notice"
             }
           ]}
         />

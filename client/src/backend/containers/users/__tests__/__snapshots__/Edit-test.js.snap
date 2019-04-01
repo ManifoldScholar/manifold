@@ -51,7 +51,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
       >
         <svg
           aria-hidden={true}
-          className="manicon-svg notice svg-icon--notifications24"
+          className="manicon-svg svg-icon--notifications24"
           height={24}
           viewBox="0 0 24 24"
           width={24}

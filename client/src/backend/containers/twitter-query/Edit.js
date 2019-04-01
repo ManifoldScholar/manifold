@@ -111,13 +111,19 @@ export class TwitterQueryEditContainer extends PureComponent {
     const projectId = this.props.match.params.pId;
 
     const buttons = [
-      { onClick: this.handleQueryDestroy, icon: "delete32", label: "Delete" }
+      {
+        onClick: this.handleQueryDestroy,
+        icon: "delete32",
+        label: "Delete",
+        iconClass: "notice"
+      }
     ];
     if (this.twitterEnabled)
       buttons.push({
         onClick: this.handleQueryFetch,
         icon: "reload32",
-        label: "Fetch Tweets"
+        label: "Fetch Tweets",
+        iconClass: "highlight"
       });
 
     return (

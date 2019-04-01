@@ -91,7 +91,8 @@ export class MakersEditContainer extends PureComponent {
               icon: "delete32",
               label: "Delete",
               entity: maker,
-              ability: "delete"
+              ability: "delete",
+              iconClass: "notice"
             }
           ]}
         />

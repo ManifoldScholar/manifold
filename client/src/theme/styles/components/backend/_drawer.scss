@@ -198,17 +198,24 @@
 
       /* stylelint-disable max-nesting-depth */
       button {
-        svg {
+        svg, svg.manicon-svg {
           margin-top: -5px;
-          margin-right: 5px;
-          color: $accentPrimary;
+          color: $neutral50;
+
+          &.highlight {
+            color: $accentPrimary;
+          }
 
           &.notice {
             color: $sp40Tertiary;
+          }
+        }
 
-            &:hover {
-              color: $neutral05;
-            }
+        &:hover {
+          color: $neutral05;
+
+          svg, svg.manicon-svg {
+            color: $neutral05;
           }
         }
       }
