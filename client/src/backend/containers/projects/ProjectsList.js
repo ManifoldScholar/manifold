@@ -81,7 +81,7 @@ export class ProjectsListContainer extends PureComponent {
     this.props.snapshotCreator(snapshot);
   }
 
-  updateResults(eventIgnored = null, page = 1) {
+  updateResults(page = 1) {
     this.snapshotState(page);
 
     const pagination = { number: page, size: perPage };
@@ -102,9 +102,11 @@ export class ProjectsListContainer extends PureComponent {
   };
 
   updateHandlerCreator = page => {
-    return event => {
-      this.updateResults(event, page);
-    };
+    return () => this.updateResults(page);
+  };
+
+  resetSearch = () => {
+    this.setState({ filter: { order: "sort_title ASC" } }, this.updateResults);
   };
 
   render() {
@@ -133,7 +135,7 @@ export class ProjectsListContainer extends PureComponent {
               <Search
                 sortOptions={[{ label: "title", value: "sort_title" }]}
                 onChange={this.filterChangeHandler}
-                defaultFilter={{ order: "sort_title ASC" }}
+                filter={this.state.filter}
                 filters={[
                   {
                     label: "Draft",
@@ -144,6 +146,7 @@ export class ProjectsListContainer extends PureComponent {
                     ]
                   }
                 ]}
+                reset={this.resetSearch}
               />
             }
             buttons={[

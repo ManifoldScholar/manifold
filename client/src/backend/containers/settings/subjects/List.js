@@ -48,15 +48,15 @@ export class SettingsSubjectsListContainer extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    this.maybeReload(prevProps.subjectsMeta);
+    if (this.shouldReload(prevProps.subjectsMeta)) {
+      return this.fetchSubjects(this.lastFetchedPage);
+    }
   }
 
-  maybeReload(prevSubjectsMeta) {
+  shouldReload(prevSubjectsMeta) {
     const currentModified = get(this.props, "subjectsMeta.modified");
     const previousModified = get(prevSubjectsMeta, "modified");
-    if (!currentModified) return;
-    if (currentModified && previousModified) return;
-    this.fetchSubjects(this.lastFetchedPage);
+    return currentModified || previousModified;
   }
 
   fetchSubjects(page) {

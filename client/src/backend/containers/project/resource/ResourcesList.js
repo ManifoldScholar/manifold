@@ -38,7 +38,7 @@ export class ProjectResourcesListContainer extends PureComponent {
   }
 
   componentDidMount() {
-    this.fetchResources(1);
+    this.fetchResources();
   }
 
   get tagFilterOptions() {
@@ -51,7 +51,7 @@ export class ProjectResourcesListContainer extends PureComponent {
     return tags.map(k => ({ label: k, value: k }));
   }
 
-  fetchResources(page) {
+  fetchResources(page = 1) {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
@@ -66,19 +66,15 @@ export class ProjectResourcesListContainer extends PureComponent {
   }
 
   filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.fetchResources(1);
-    });
+    this.setState({ filter }, this.fetchResources);
   };
 
-  handleResourcesPageChange(event, page) {
-    this.fetchResources(page);
-  }
-
   pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleResourcesPageChange(event, page);
-    };
+    return () => this.fetchResources(page);
+  };
+
+  resetSearch = () => {
+    this.setState({ filter: {} }, this.fetchResources);
   };
 
   render() {
@@ -99,6 +95,8 @@ export class ProjectResourcesListContainer extends PureComponent {
         }}
         search={
           <Search
+            filter={this.state.filter}
+            reset={this.resetSearch}
             sortOptions={[{ label: "title", value: "sort_title" }]}
             onChange={this.filterChangeHandler}
             filters={[

@@ -59,7 +59,7 @@ export class ResourceCollectionResourcesContainer extends Component {
     return tags.map(k => ({ label: k, value: k }));
   }
 
-  fetchResources(page) {
+  fetchResources(page = 1) {
     const pagination = { number: page, size: perPage };
     const projectId = this.props.resourceCollection.relationships.project.id;
     const action = request(
@@ -96,19 +96,15 @@ export class ResourceCollectionResourcesContainer extends Component {
     const newFilter = filter;
     if (this.state.filter.resourceCollection)
       newFilter.resourceCollection = this.state.filter.resourceCollection;
-    this.setState({ filter: newFilter }, () => {
-      this.fetchResources(1);
-    });
+    this.setState({ filter: newFilter }, this.fetchResources);
   };
 
-  handleResourcesPageChange(event, page) {
-    this.fetchResources(page);
-  }
-
   pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleResourcesPageChange(event, page);
-    };
+    return () => this.fetchResources(page);
+  };
+
+  resetSearch = () => {
+    this.setState({ filter: {} }, this.fetchResources);
   };
 
   addToCollection(entity, collectionResources) {
@@ -199,6 +195,8 @@ export class ResourceCollectionResourcesContainer extends Component {
         }}
         search={
           <Search
+            filter={this.state.filter}
+            reset={this.resetSearch}
             onChange={this.handleFilterChange}
             filters={[
               {

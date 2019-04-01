@@ -48,7 +48,7 @@ export class ProjectCollectionManageProjects extends PureComponent {
     );
   }
 
-  updateResults(eventIgnored = null, page = 1) {
+  updateResults(page = 1) {
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.index(this.state.filter, pagination),
@@ -63,10 +63,12 @@ export class ProjectCollectionManageProjects extends PureComponent {
     });
   };
 
+  resetSearch = () => {
+    this.setState({ filter: { order: "sort_title ASC" } }, this.updateResults);
+  };
+
   updateHandlerCreator = page => {
-    return event => {
-      this.updateResults(event, page);
-    };
+    return () => this.updateResults(page);
   };
 
   updateProjects = projects => {
@@ -181,8 +183,9 @@ export class ProjectCollectionManageProjects extends PureComponent {
           }}
           search={
             <Search
-              defaultFilter={{ order: "sort_title ASC" }}
               onChange={this.filterChangeHandler}
+              filter={this.state.filter}
+              reset={this.resetSearch}
             />
           }
         />

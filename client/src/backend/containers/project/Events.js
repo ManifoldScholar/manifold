@@ -50,7 +50,7 @@ export class ProjectEventsContainer extends PureComponent {
   }
 
   componentDidMount() {
-    this.fetchEvents(1);
+    this.fetchEvents();
   }
 
   componentDidUpdate(prevProps) {
@@ -75,7 +75,7 @@ export class ProjectEventsContainer extends PureComponent {
     this.fetchEvents(this.lastFetchedPage);
   }
 
-  fetchEvents(page) {
+  fetchEvents(page = 1) {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
@@ -86,9 +86,7 @@ export class ProjectEventsContainer extends PureComponent {
   }
 
   filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.fetchEvents(1);
-    });
+    this.setState({ filter }, this.fetchEvents);
   };
 
   handleEventDestroy = event => {
@@ -106,14 +104,12 @@ export class ProjectEventsContainer extends PureComponent {
     });
   }
 
-  handleUsersPageChange(event, page) {
-    this.fetchEvents(page);
-  }
-
   pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleUsersPageChange(event, page);
-    };
+    return () => this.fetchEvents(page);
+  };
+
+  resetSearch = () => {
+    this.setState({ filter: {} }, this.fetchEvents);
   };
 
   render() {
@@ -146,6 +142,8 @@ export class ProjectEventsContainer extends PureComponent {
             }}
             search={
               <Search
+                filter={this.state.filter}
+                reset={this.resetSearch}
                 onChange={this.filterChangeHandler}
                 filters={[
                   {
