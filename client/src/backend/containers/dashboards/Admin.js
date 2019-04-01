@@ -11,6 +11,7 @@ import Authorization from "helpers/authorization";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 import EntitiesList, {
+  Button,
   Search,
   ProjectRow
 } from "backend/components/list/EntitiesList";
@@ -202,6 +203,15 @@ export class DashboardsAdminContainer extends PureComponent {
                           ]}
                         />
                       }
+                      buttons={[
+                        <Button
+                          path={lh.link("backendProjectsNew")}
+                          text="Add a new project"
+                          authorizedFor="project"
+                          authorizedTo="create"
+                          type="add"
+                        />
+                      ]}
                     />
                   </Layout.DashboardPanel>
                 )}
