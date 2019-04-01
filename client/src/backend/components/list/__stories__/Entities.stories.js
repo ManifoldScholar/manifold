@@ -114,7 +114,10 @@ const sortOptions = [
 const fakeHandler = () => {};
 const callbacks = {
   onPageClick: fakeHandler,
-  onSearchChange: fakeHandler
+  search: {
+    onChange: fakeHandler,
+    reset: fakeHandler
+  }
 };
 
 storiesOf("Backend/List/Entities", module)
@@ -131,9 +134,10 @@ storiesOf("Backend/List/Entities", module)
         buttons={[<Button path="/foo" text="Add a new user" type="add" />]}
         search={
           <Search
+            filter={{}}
             filters={threeFilters}
             sortOptions={sortOptions}
-            onChange={callbacks.onSearchChange}
+            {...callbacks.search}
           />
         }
       />
@@ -156,9 +160,10 @@ storiesOf("Backend/List/Entities", module)
         entityComponent={TwitterQueryRow}
         search={
           <Search
+            filter={{}}
             filters={threeFilters}
             sortOptions={sortOptions}
-            onChange={callbacks.onSearchChange}
+            {...callbacks.search}
           />
         }
       />
@@ -175,7 +180,7 @@ storiesOf("Backend/List/Entities", module)
         pagination={pagination}
         callbacks={callbacks}
         search={
-          <Search filters={twoFilters} onChange={callbacks.onSearchChange} />
+          <Search filter={{}} filters={twoFilters} {...callbacks.search} />
         }
         buttons={[<Button path="/foo" text="Add New Subject" type="add" />]}
       />
@@ -228,9 +233,10 @@ storiesOf("Backend/List/Entities", module)
         }}
         search={
           <Search
+            filter={{}}
             filters={threeFilters}
             sortOptions={sortOptions}
-            onChange={callbacks.onSearchChange}
+            {...callbacks.search}
           />
         }
         buttons={[
@@ -287,9 +293,10 @@ storiesOf("Backend/List/Entities", module)
         entityComponent={PageRow}
         search={
           <Search
+            filter={{}}
             filters={threeFilters}
             sortOptions={sortOptions}
-            onChange={callbacks.onSearchChange}
+            {...callbacks.search}
           />
         }
       />
@@ -375,9 +382,10 @@ storiesOf("Backend/List/Entities", module)
     ];
     const search = (
       <Search
+        filter={{}}
         filters={threeFilters}
         sortOptions={sortOptions}
-        onChange={callbacks.onSearchChange}
+        {...callbacks.search}
       />
     );
 
