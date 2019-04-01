@@ -96,7 +96,7 @@ function handleAuthenticationFailure(
   dispatch,
   options = { status: 500, cookieHelper: null, destroyCookie: true }
 ) {
-  dispatch(actions.loginSetError(generateErrorPayload(500)));
+  dispatch(actions.loginSetError(generateErrorPayload(options.status)));
   dispatch(actions.loginComplete());
   if (options.destroyCookie) destroyCookie(options.cookieHelper);
 }
