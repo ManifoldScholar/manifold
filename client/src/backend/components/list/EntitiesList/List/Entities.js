@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import Empty from "./Empty";
 
 export default class ListEntitiesListEntities extends PureComponent {
   static displayName = "List.Entities.List.Entities";
@@ -9,6 +10,7 @@ export default class ListEntitiesListEntities extends PureComponent {
     entities: PropTypes.array,
     entityComponent: PropTypes.func.isRequired,
     entityComponentProps: PropTypes.object,
+    emptyMessage: PropTypes.node,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"])
   };
 
@@ -34,6 +36,14 @@ export default class ListEntitiesListEntities extends PureComponent {
     return this.props.className;
   }
 
+  get isEmpty() {
+    return this.entities.length === 0;
+  }
+
+  get emptyMessage() {
+    return this.props.emptyMessage;
+  }
+
   entityKey(index) {
     const entity = this.entities[index];
     if (!entity || !entity.id) return index;
@@ -42,6 +52,9 @@ export default class ListEntitiesListEntities extends PureComponent {
 
   render() {
     const EntityComponent = this.entityComponent;
+
+    if (this.isEmpty) return <Empty message={this.emptyMessage} />;
+
     return (
       <ul className={this.className}>
         {this.entities.map((entity, index) => (

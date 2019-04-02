@@ -17,6 +17,7 @@ import EntitiesList, {
   TwitterQueryRow,
   UserRow
 } from "backend/components/list/EntitiesList";
+import { text } from "@storybook/addon-knobs";
 
 const users = build.arrayOf.users(8);
 const makers = build.arrayOf.makers(8);
@@ -337,6 +338,19 @@ storiesOf("Backend/List/Entities", module)
         listStyle="tiles"
         entities={events}
         entityComponent={EventRow}
+      />
+    );
+  })
+
+  .add("Empty", () => {
+    const message = text("Message", null);
+
+    return (
+      <EntitiesList
+        title={"Empty List"}
+        entities={[]}
+        emptyMessage={message}
+        entityComponent={() => null}
       />
     );
   })

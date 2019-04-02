@@ -144,8 +144,8 @@ export class DashboardsAdminContainer extends PureComponent {
     this.setState({ filter: this.defaultFilter }, this.updateResults);
   };
 
-  renderNoProjects = filterState => {
-    const filters = Object.assign({}, filterState);
+  noProjects = () => {
+    const filters = Object.assign({}, this.state.filter);
     delete filters.order;
     const createProjects = this.authorization.authorizeAbility({
       authentication: this.props.authentication,
@@ -182,6 +182,7 @@ export class DashboardsAdminContainer extends PureComponent {
                       callbacks={{
                         onPageClick: this.updateHandlerCreator
                       }}
+                      emptyMessage={this.noProjects()}
                       search={
                         <Search
                           onChange={this.filterChangeHandler}
