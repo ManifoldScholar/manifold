@@ -357,6 +357,16 @@
     vertical-align: middle;
   }
 
+  .manicon-arrow-down {
+    margin-right: 16px;
+    font-size: 16px;
+
+    &::before {
+      position: relative;
+      top: 4px;
+    }
+  }
+
   .manicon-check.small,
   .manicon-x.small,
   .manicon-arrow-right.small,

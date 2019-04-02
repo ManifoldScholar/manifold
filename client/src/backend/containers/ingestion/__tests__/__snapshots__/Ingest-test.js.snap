@@ -5,68 +5,76 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
   <div
     className="ingestion-output"
   >
-    <header
-      className="entity-header-primary"
-    >
-      <figure
-        aria-hidden="true"
-      >
-        <i
-          className="manicon manicon-text-placeholder"
-        />
-      </figure>
-      <div
-        className="title"
-      >
-        <h1>
-          some-file.epub
-        </h1>
-      </div>
-    </header>
     <div
-      className="properties"
+      className="backend-header"
     >
       <div
-        className="item"
+        className="wrapper"
       >
-        <p
-          className="label"
+        <header
+          className="entity-header-primary"
         >
-          Current state
-        </p>
-        <p
-          className="value"
+          <figure
+            aria-hidden="true"
+          >
+            <i
+              className="manicon manicon-text-placeholder"
+            />
+          </figure>
+          <div
+            className="title"
+          >
+            <h1>
+              some-file.epub
+            </h1>
+          </div>
+        </header>
+        <div
+          className="properties"
         >
-          Finish
-        </p>
-      </div>
-      <div
-        className="item"
-      >
-        <p
-          className="label"
-        >
-          Strategy
-        </p>
-        <p
-          className="value"
-        >
-          None
-        </p>
-      </div>
-      <div
-        className="item"
-      >
-        <p
-          className="label"
-        >
-          Text ID
-        </p>
-        <p
-          className="value"
-        >
-          This ingestion will create a new text
-        </p>
+          <div
+            className="item"
+          >
+            <p
+              className="label"
+            >
+              Current state
+            </p>
+            <p
+              className="value"
+            >
+              Finish
+            </p>
+          </div>
+          <div
+            className="item"
+          >
+            <p
+              className="label"
+            >
+              Strategy
+            </p>
+            <p
+              className="value"
+            >
+              None
+            </p>
+          </div>
+          <div
+            className="item"
+          >
+            <p
+              className="label"
+            >
+              Text ID
+            </p>
+            <p
+              className="value"
+            >
+              This ingestion will create a new text
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -116,25 +124,6 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
         Restart Ingestion
       </button>
     </div>
-  </div>
-  <div
-    className="buttons-icon-horizontal"
-    style={
-      Object {
-        "marginTop": 30,
-      }
-    }
-  >
-    <button
-      className="button-icon-secondary dull"
-      onClick={[Function]}
-    >
-      <i
-        aria-hidden="true"
-        className="manicon manicon-x small"
-      />
-      Back
-    </button>
   </div>
 </div>
 `;
@@ -144,68 +133,76 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
   <div
     className="ingestion-output"
   >
-    <header
-      className="entity-header-primary"
-    >
-      <figure
-        aria-hidden="true"
-      >
-        <i
-          className="manicon manicon-text-placeholder"
-        />
-      </figure>
-      <div
-        className="title"
-      >
-        <h1>
-          some-file.epub
-        </h1>
-      </div>
-    </header>
     <div
-      className="properties"
+      className="backend-header"
     >
       <div
-        className="item"
+        className="wrapper"
       >
-        <p
-          className="label"
+        <header
+          className="entity-header-primary"
         >
-          Current state
-        </p>
-        <p
-          className="value"
+          <figure
+            aria-hidden="true"
+          >
+            <i
+              className="manicon manicon-text-placeholder"
+            />
+          </figure>
+          <div
+            className="title"
+          >
+            <h1>
+              some-file.epub
+            </h1>
+          </div>
+        </header>
+        <div
+          className="properties"
         >
-          Sleeping
-        </p>
-      </div>
-      <div
-        className="item"
-      >
-        <p
-          className="label"
-        >
-          Strategy
-        </p>
-        <p
-          className="value"
-        >
-          None
-        </p>
-      </div>
-      <div
-        className="item"
-      >
-        <p
-          className="label"
-        >
-          Text ID
-        </p>
-        <p
-          className="value"
-        >
-          This ingestion will create a new text
-        </p>
+          <div
+            className="item"
+          >
+            <p
+              className="label"
+            >
+              Current state
+            </p>
+            <p
+              className="value"
+            >
+              Sleeping
+            </p>
+          </div>
+          <div
+            className="item"
+          >
+            <p
+              className="label"
+            >
+              Strategy
+            </p>
+            <p
+              className="value"
+            >
+              None
+            </p>
+          </div>
+          <div
+            className="item"
+          >
+            <p
+              className="label"
+            >
+              Text ID
+            </p>
+            <p
+              className="value"
+            >
+              This ingestion will create a new text
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -255,25 +252,6 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
         Restart Ingestion
       </button>
     </div>
-  </div>
-  <div
-    className="buttons-icon-horizontal"
-    style={
-      Object {
-        "marginTop": 30,
-      }
-    }
-  >
-    <button
-      className="button-icon-secondary dull"
-      onClick={[Function]}
-    >
-      <i
-        aria-hidden="true"
-        className="manicon manicon-x small"
-      />
-      Back
-    </button>
   </div>
 </div>
 `;

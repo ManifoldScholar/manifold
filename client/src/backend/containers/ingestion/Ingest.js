@@ -5,9 +5,9 @@ import { ingestionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, isLoaded } from "utils/entityUtils";
 import Utility from "global/components/utility";
+import Heading from "./Heading";
+import Actions from "./Actions";
 import get from "lodash/get";
-import truncate from "lodash/truncate";
-import capitalize from "lodash/capitalize";
 import throttle from "lodash/throttle";
 import { websocketActions, notificationActions } from "actions";
 import classnames from "classnames";
@@ -101,32 +101,41 @@ export class IngestionIngest extends Component {
     this.props.setDialogClassName(dialogClass);
   }
 
-  get canProcess() {
-    const { ingestion, webSocketConnected } = this.props;
-    if (!ingestion || !webSocketConnected) return false;
-    return ingestion.attributes.availableEvents.includes("process");
-  }
-
   get canReset() {
     const { ingestion, webSocketConnected } = this.props;
     if (!ingestion || !webSocketConnected) return false;
     return ingestion.attributes.availableEvents.includes("reset");
   }
 
-  get isModal() {
-    return this.props.route.modal;
-  }
-
   get isReingestion() {
     return this.props.ingestion.attributes.textId;
   }
 
+  get editUrl() {
+    const { id, ingestionId } = this.props.match.params;
+    const path = this.props.text
+      ? "backendTextIngestionEdit"
+      : "backendProjectTextsIngestionEdit";
+
+    return lh.link(path, id, ingestionId);
+  }
+
+  get closeUrl() {
+    const { id } = this.props.match.params;
+    const path = this.props.text
+      ? "backendTextIngestionsNew"
+      : "backendProjectTexts";
+
+    return lh.link(path, id);
+  }
+
   reset = () => {
     if (this.state.loading) return;
-    this.setState({ textLog: "" });
-    this.props.dispatch(
-      websocketActions.triggerAction(this.channelName, "reset")
-    );
+    this.setState({ textLog: "" }, () => {
+      this.props.dispatch(
+        websocketActions.triggerAction(this.channelName, "reset")
+      );
+    });
   };
 
   ingest = () => {
@@ -144,12 +153,11 @@ export class IngestionIngest extends Component {
   };
 
   complete = () => {
-    this.props.history.push(this.closeUrl());
+    this.props.history.push(this.closeUrl);
   };
 
-  backToEdit = (event = null) => {
-    if (event) event.preventDefault();
-    this.props.history.push(this.editUrl(), { stage: "upload" });
+  backToEdit = () => {
+    this.props.history.push(this.editUrl, { stage: "upload" });
   };
 
   maybeProcessMessage(nextChannel, thisChannel, nextPropsIgnored) {
@@ -195,24 +203,6 @@ export class IngestionIngest extends Component {
     this.props.dispatch(websocketActions.unsubscribe(this.channelName));
   }
 
-  editUrl() {
-    if (this.props.text) {
-      const { id, ingestionId } = this.props.match.params;
-      return lh.link("backendTextIngestionEdit", id, ingestionId);
-    }
-    const { id, ingestionId } = this.props.match.params;
-    return lh.link("backendProjectTextsIngestionEdit", id, ingestionId);
-  }
-
-  closeUrl() {
-    if (this.props.text) {
-      const { id } = this.props.match.params;
-      return lh.link("backendTextIngestionsNew", id);
-    }
-    const { id } = this.props.match.params;
-    return lh.link("backendProjectTexts", id);
-  }
-
   scrollToLogBottom = throttle(() => {
     if (!this.logEl) return;
     this.logEl.scrollTop = this.logEl.scrollHeight;
@@ -222,12 +212,6 @@ export class IngestionIngest extends Component {
     if (message[0] === "DEBUG") return;
     const textLog = this.state.textLog.concat("\n").concat(message[1]);
     this.setState({ textLog });
-  }
-
-  title(attr) {
-    const title = attr.sourceFileName || attr.externalSourceUrl;
-    if (!title) return "";
-    return truncate(title, { length: 40 });
   }
 
   displayError() {
@@ -269,21 +253,8 @@ export class IngestionIngest extends Component {
     this.props.dispatch(notificationActions.addNotification(notification));
   }
 
-  renderFinished() {
-    if (this.isModal) {
-      return (
-        <button onClick={this.complete} className="button-icon-secondary">
-          <i className="manicon manicon-check small" aria-hidden="true" />
-          <span>{"Complete"}</span>
-        </button>
-      );
-    }
-    return null;
-  }
-
   render() {
     if (!this.props.ingestion) return null;
-    const attr = this.props.ingestion.attributes;
     const resetButtonClass = classnames("button-bare-primary", {
       loading: this.state.loading || !this.canReset
     });
@@ -295,32 +266,17 @@ export class IngestionIngest extends Component {
     return (
       <div>
         <div className="ingestion-output">
-          <header className="entity-header-primary">
-            <figure aria-hidden="true">
-              <i className="manicon manicon-text-placeholder" />
-            </figure>
-            <div className="title">
-              <h1>{this.title(attr)}</h1>
-            </div>
-          </header>
-          <div className="properties">
-            <div className="item">
-              <p className="label">Current state</p>
-              <p className="value">{capitalize(attr.state)}</p>
-            </div>
-            <div className="item">
-              <p className="label">Strategy</p>
-              <p className="value">{attr.strategyLabel || "None"}</p>
-            </div>
-            <div className="item">
-              <p className="label">Text ID</p>
-              <p className="value">
-                {this.isReingestion
-                  ? attr.textId
-                  : "This ingestion will create a new text"}
-              </p>
-            </div>
-          </div>
+          <Heading
+            ingestion={this.props.ingestion}
+            reingestion={!!this.isReingestion}
+          />
+          <Actions
+            ingestion={this.props.ingestion}
+            connected={this.props.webSocketConnected}
+            start={this.ingest}
+            cancel={this.backToEdit}
+            complete={this.complete}
+          />
           <div className="log">
             <p className="label">Log</p>
             <div
@@ -342,30 +298,6 @@ export class IngestionIngest extends Component {
               Restart Ingestion
             </button>
           </div>
-        </div>
-        <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
-          {this.props.ingestion.attributes.state !== "finished" &&
-          this.props.ingestion.attributes.state !== "processing" ? (
-            <button
-              onClick={this.backToEdit}
-              className="button-icon-secondary dull"
-            >
-              <i className="manicon manicon-x small" aria-hidden="true" />
-              Back
-            </button>
-          ) : null}
-          {this.canProcess ? (
-            <button onClick={this.ingest} className="button-icon-secondary">
-              <i
-                className="manicon manicon-arrow-right small"
-                aria-hidden="true"
-              />
-              <span>{"Ingest"}</span>
-            </button>
-          ) : null}
-          {this.props.ingestion.attributes.state === "finished"
-            ? this.renderFinished()
-            : null}
         </div>
       </div>
     );
