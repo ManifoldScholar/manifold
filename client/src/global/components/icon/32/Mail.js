@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-export default class Arrow extends Component {
+export default class Mail extends Component {
   static propTypes = {
     iconClass: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -20,11 +20,11 @@ export default class Arrow extends Component {
   };
 
   get defaultHeight() {
-    return 16;
+    return 32;
   }
 
   get defaultWidth() {
-    return 16;
+    return 32;
   }
 
   get size() {
@@ -44,7 +44,7 @@ export default class Arrow extends Component {
   }
 
   get viewBox() {
-    return "0 0 16 16";
+    return "0 0 32 32";
   }
 
   get classes() {
@@ -76,13 +76,11 @@ export default class Arrow extends Component {
         <g fill="none" fillRule="evenodd">
           <path
             fill={this.fill}
-            fillRule="nonzero"
-            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+            d="M5,23 L27,23 L27,9 L5,9 L5,23 Z M6.818,10 L25.182,10 L16,18.135 L6.818,10 Z M26,10.611 L26,22 L6,22 L6,10.611 L16,19.472 L26,10.611 Z"
           />
           <path
             fill={this.fill}
-            fillRule="nonzero"
-            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+            d="M5,23 L27,23 L27,9 L5,9 L5,23 Z M6.818,10 L25.182,10 L16,18.135 L6.818,10 Z M26,10.611 L26,22 L6,22 L6,10.611 L16,19.472 L26,10.611 Z"
           />
         </g>
       </svg>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-export default class ArrowLong extends Component {
+export default class ArrowUp extends Component {
   static propTypes = {
     iconClass: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -20,11 +20,11 @@ export default class ArrowLong extends Component {
   };
 
   get defaultHeight() {
-    return 16;
+    return 32;
   }
 
   get defaultWidth() {
-    return 24;
+    return 32;
   }
 
   get size() {
@@ -44,7 +44,7 @@ export default class ArrowLong extends Component {
   }
 
   get viewBox() {
-    return "0 0 24 16";
+    return "0 0 32 32";
   }
 
   get classes() {
@@ -76,11 +76,15 @@ export default class ArrowLong extends Component {
         <g fill="none" fillRule="evenodd">
           <path
             fill={this.fill}
-            d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+            fillRule="nonzero"
+            d="M14.0744069,7.75197978 L14.7335931,7 L25.0005111,15.9999899 L14.7335931,24.9999798 L14.0744069,24.2480001 L23.483489,15.9999899 L14.0744069,7.75197978 Z M24.1022001,15.4999899 L24.1022001,16.4999899 L7,16.4999899 L7,15.4999899 L24.1022001,15.4999899 Z"
+            transform="rotate(-90 16 16)"
           />
           <path
             fill={this.fill}
-            d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+            fillRule="nonzero"
+            d="M14.0744069,7.75197978 L14.7335931,7 L25.0005111,15.9999899 L14.7335931,24.9999798 L14.0744069,24.2480001 L23.483489,15.9999899 L14.0744069,7.75197978 Z M24.1022001,15.4999899 L24.1022001,16.4999899 L7,16.4999899 L7,15.4999899 L24.1022001,15.4999899 Z"
+            transform="rotate(-90 16 16)"
           />
         </g>
       </svg>
