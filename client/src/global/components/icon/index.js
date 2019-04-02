@@ -1,231 +1,219 @@
-import Disclosure32 from "./32/Disclosure";
-import GrabberInactive32 from "./32/GrabberInactive";
-import Key32 from "./32/Key";
-import SocialTwitter32 from "./32/SocialTwitter";
-import SocialSlack32 from "./32/SocialSlack";
-import Annotate32 from "./32/Annotate";
-import EyeOpen32 from "./32/EyeOpen";
-import Arrow32 from "./32/Arrow";
-import CircleMinus32 from "./32/CircleMinus";
-import Grabber32 from "./32/Grabber";
-import SocialFacebook32 from "./32/SocialFacebook";
-import SocialGithub32 from "./32/SocialGithub";
-import SocialEmail32 from "./32/SocialEmail";
-import Delete32 from "./32/Delete";
-import ManifoldLogo32 from "./32/ManifoldLogo";
-import Reload32 from "./32/Reload";
-import SocialInstagram32 from "./32/SocialInstagram";
-import Upload32 from "./32/Upload";
-import SocialLinkedIn32 from "./32/SocialLinkedIn";
-import Close32 from "./32/Close";
-import Comment32 from "./32/Comment";
-import CirclePlus32 from "./32/CirclePlus";
-import Duplicate32 from "./32/Duplicate";
-import EyeClosed32 from "./32/EyeClosed";
-import Menu32 from "./32/Menu";
-import Bookmark32 from "./32/Bookmark";
-import Search32 from "./32/Search";
-import SocialCite32 from "./32/SocialCite";
-import Settings32 from "./32/Settings";
-import SocialGoogle32 from "./32/SocialGoogle";
-import Lock32 from "./32/Lock";
-import BooksOnShelfColorunique from "./unique/BooksOnShelfColor";
-import ProjectPlaceholderunique from "./unique/ProjectPlaceholder";
-import Minusunique from "./unique/Minus";
-import Checkunique from "./unique/Check";
-import Plusunique from "./unique/Plus";
-import BooksOnShelfStrokeunique from "./unique/BooksOnShelfStroke";
-import DisclosureUp16 from "./16/DisclosureUp";
-import DisclosureDown16 from "./16/DisclosureDown";
-import Plus16 from "./16/Plus";
-import Close16 from "./16/Close";
-import Search16 from "./16/Search";
-import TextsStacked64 from "./64/TextsStacked";
-import Avatar64 from "./64/Avatar";
-import ResourcePdf64 from "./64/ResourcePdf";
-import TextsLoosePages64 from "./64/TextsLoosePages";
-import ArrowBack64 from "./64/ArrowBack";
-import ResourcePresentation64 from "./64/ResourcePresentation";
-import Lamp64 from "./64/Lamp";
-import Globe64 from "./64/Globe";
-import Glasses64 from "./64/Glasses";
-import ResourceFile64 from "./64/ResourceFile";
 import ActivityComments64 from "./64/ActivityComments";
-import Toc64 from "./64/Toc";
-import RecentActivity64 from "./64/RecentActivity";
-import ResourceCollection64 from "./64/ResourceCollection";
-import WarningSign64 from "./64/WarningSign";
-import ResourceDocument64 from "./64/ResourceDocument";
+import ActivityEgg64 from "./64/ActivityEgg";
+import ActivityResource64 from "./64/ActivityResource";
+import ActivityText64 from "./64/ActivityText";
+import ActivityTweet64 from "./64/ActivityTweet";
+import Annotate24 from "./24/Annotate";
+import Annotate32 from "./32/Annotate";
+import Arrow24 from "./24/Arrow";
+import ArrowDown16 from "./16/ArrowDown";
+import ArrowDown32 from "./32/ArrowDown";
+import ArrowLeft16 from "./16/ArrowLeft";
+import ArrowLeft32 from "./32/ArrowLeft";
+import ArrowLongLeft16 from "./16/ArrowLongLeft";
+import ArrowLongRight16 from "./16/ArrowLongRight";
+import ArrowRight16 from "./16/ArrowRight";
+import ArrowRight32 from "./32/ArrowRight";
+import ArrowUp16 from "./16/ArrowUp";
+import ArrowUp32 from "./32/ArrowUp";
+import Avatar24 from "./24/Avatar";
+import Avatar64 from "./64/Avatar";
+import BEActivity64 from "./64/BEActivity";
+import BECollectionManual64 from "./64/BECollectionManual";
+import BECollectionSmart64 from "./64/BECollectionSmart";
+import BELibrary64 from "./64/BELibrary";
+import BENews64 from "./64/BENews";
 import BEProject64 from "./64/BEProject";
 import BEResourcesBox64 from "./64/BEResourcesBox";
-import Metadata64 from "./64/Metadata";
-import ResourceInteractive64 from "./64/ResourceInteractive";
-import ResourceAudio64 from "./64/ResourceAudio";
-import Projects64 from "./64/Projects";
-import ActivityText64 from "./64/ActivityText";
-import ResourceVideo64 from "./64/ResourceVideo";
-import Mug64 from "./64/Mug";
-import BENews64 from "./64/BENews";
-import BELibrary64 from "./64/BELibrary";
-import ResourceImage64 from "./64/ResourceImage";
-import ActivityEgg64 from "./64/ActivityEgg";
-import TextsBook64 from "./64/TextsBook";
-import ResourceSpreadsheet64 from "./64/ResourceSpreadsheet";
-import BECollectionManual64 from "./64/BECollectionManual";
-import Following64 from "./64/Following";
-import ResourceLink64 from "./64/ResourceLink";
-import ActivityResource64 from "./64/ActivityResource";
-import BECollectionSmart64 from "./64/BECollectionSmart";
-import New64 from "./64/New";
-import Resources64 from "./64/Resources";
-import StopSign64 from "./64/StopSign";
-import ActivityTweet64 from "./64/ActivityTweet";
-import Touch64 from "./64/Touch";
-import ProjectCollections64 from "./64/ProjectCollections";
 import BEResourcesBoxes64 from "./64/BEResourcesBoxes";
-import BEActivity64 from "./64/BEActivity";
-import ActivityComments48 from "./48/ActivityComments";
-import ActivityText48 from "./48/ActivityText";
-import ActivityEgg48 from "./48/ActivityEgg";
-import ActivityResource48 from "./48/ActivityResource";
-import ActivityTweet48 from "./48/ActivityTweet";
-import Disclosure24 from "./24/Disclosure";
-import Eyeball24 from "./24/Eyeball";
-import Avatar24 from "./24/Avatar";
-import Annotate24 from "./24/Annotate";
-import Notes24 from "./24/Notes";
-import Copy24 from "./24/Copy";
-import Arrow24 from "./24/Arrow";
-import Resource24 from "./24/Resource";
-import Logout24 from "./24/Logout";
-import Reload24 from "./24/Reload";
-import Comment24 from "./24/Comment";
 import Bookmark24 from "./24/Bookmark";
-import Search24 from "./24/Search";
-import Notifications24 from "./24/Notifications";
-import Text24 from "./24/Text";
+import Bookmark32 from "./32/Bookmark";
+import CircleMinus32 from "./32/CircleMinus";
+import CirclePlus32 from "./32/CirclePlus";
+import Close16 from "./16/Close";
+import Close32 from "./32/Close";
+import Comment24 from "./24/Comment";
+import Comment32 from "./32/Comment";
+import Copy24 from "./24/Copy";
+import Delete32 from "./32/Delete";
+import DisclosureDown16 from "./16/DisclosureDown";
+import DisclosureDown24 from "./24/DisclosureDown";
+import DisclosureDown32 from "./32/DisclosureDown";
+import DisclosureUp16 from "./16/DisclosureUp";
+import DisclosureUp24 from "./24/DisclosureUp";
+import DisclosureUp32 from "./32/DisclosureUp";
+import Duplicate32 from "./32/Duplicate";
 import EditProfile24 from "./24/EditProfile";
+import EyeClosed32 from "./32/EyeClosed";
+import EyeOpen32 from "./32/EyeOpen";
+import Eyeball24 from "./24/Eyeball";
+import Following64 from "./64/Following";
+import Glasses64 from "./64/Glasses";
+import Globe64 from "./64/Globe";
+import Grabber32 from "./32/Grabber";
+import GrabberInactive32 from "./32/GrabberInactive";
+import Key32 from "./32/Key";
+import Lamp64 from "./64/Lamp";
+import Lock32 from "./32/Lock";
+import Logout24 from "./24/Logout";
+import Mail32 from "./32/Mail";
+import ManifoldLogo32 from "./32/ManifoldLogo";
+import Menu32 from "./32/Menu";
+import Metadata64 from "./64/Metadata";
+import Mug64 from "./64/Mug";
+import New64 from "./64/New";
+import Notes24 from "./24/Notes";
+import Notifications24 from "./24/Notifications";
+import Plus16 from "./16/Plus";
+import ProjectCollections64 from "./64/ProjectCollections";
+import Projects64 from "./64/Projects";
+import RecentActivity64 from "./64/RecentActivity";
+import Reload24 from "./24/Reload";
+import Reload32 from "./32/Reload";
+import Resource24 from "./24/Resource";
+import ResourceAudio64 from "./64/ResourceAudio";
+import ResourceCollection64 from "./64/ResourceCollection";
+import ResourceDocument64 from "./64/ResourceDocument";
+import ResourceFile64 from "./64/ResourceFile";
+import ResourceImage64 from "./64/ResourceImage";
+import ResourceInteractive64 from "./64/ResourceInteractive";
+import ResourceLink64 from "./64/ResourceLink";
+import ResourcePdf64 from "./64/ResourcePdf";
+import ResourcePresentation64 from "./64/ResourcePresentation";
+import ResourceSpreadsheet64 from "./64/ResourceSpreadsheet";
+import ResourceVideo64 from "./64/ResourceVideo";
+import Resources64 from "./64/Resources";
+import Search16 from "./16/Search";
+import Search24 from "./24/Search";
+import Search32 from "./32/Search";
+import Settings32 from "./32/Settings";
 import Share24 from "./24/Share";
-import ArrowRight16 from "./16/ArrowRight";
-import ArrowLongRight16 from "./16/ArrowLongRight";
-import ArrowLongLeft16 from "./16/ArrowLongLeft";
-import ArrowLeft16 from "./16/ArrowLeft";
-import ArrowUp16 from "./16/ArrowUp";
-import ArrowDown16 from "./16/ArrowDown";
+import SocialCite32 from "./32/SocialCite";
+import SocialEmail32 from "./32/SocialEmail";
+import SocialFacebook32 from "./32/SocialFacebook";
+import SocialGithub32 from "./32/SocialGithub";
+import SocialGoogle32 from "./32/SocialGoogle";
+import SocialInstagram32 from "./32/SocialInstagram";
+import SocialLinkedIn32 from "./32/SocialLinkedIn";
+import SocialSlack32 from "./32/SocialSlack";
+import SocialTwitter32 from "./32/SocialTwitter";
+import StopSign64 from "./64/StopSign";
+import Text24 from "./24/Text";
+import TextsBook64 from "./64/TextsBook";
+import TextsLoosePages64 from "./64/TextsLoosePages";
+import TextsStacked64 from "./64/TextsStacked";
+import Toc64 from "./64/Toc";
+import Touch64 from "./64/Touch";
+import Upload32 from "./32/Upload";
+import WarningSign64 from "./64/WarningSign";
 
 export default {
-  Disclosure32,
-  GrabberInactive32,
-  Key32,
-  SocialTwitter32,
-  SocialSlack32,
-  Annotate32,
-  EyeOpen32,
-  Arrow32,
-  CircleMinus32,
-  Grabber32,
-  SocialFacebook32,
-  SocialGithub32,
-  SocialEmail32,
-  Delete32,
-  ManifoldLogo32,
-  Reload32,
-  SocialInstagram32,
-  Upload32,
-  SocialLinkedIn32,
-  Close32,
-  Comment32,
-  CirclePlus32,
-  Duplicate32,
-  EyeClosed32,
-  Menu32,
-  Bookmark32,
-  Search32,
-  SocialCite32,
-  Settings32,
-  SocialGoogle32,
-  Lock32,
-  BooksOnShelfColorunique,
-  ProjectPlaceholderunique,
-  Minusunique,
-  Checkunique,
-  Plusunique,
-  BooksOnShelfStrokeunique,
-  DisclosureUp16,
-  DisclosureDown16,
-  Plus16,
-  Close16,
-  Search16,
-  TextsStacked64,
-  Avatar64,
-  ResourcePdf64,
-  TextsLoosePages64,
-  ArrowBack64,
-  ResourcePresentation64,
-  Lamp64,
-  Globe64,
-  Glasses64,
-  ResourceFile64,
   ActivityComments64,
-  Toc64,
-  RecentActivity64,
-  ResourceCollection64,
-  WarningSign64,
-  ResourceDocument64,
+  ActivityEgg64,
+  ActivityResource64,
+  ActivityText64,
+  ActivityTweet64,
+  Annotate24,
+  Annotate32,
+  Arrow24,
+  ArrowDown16,
+  ArrowDown32,
+  ArrowLeft16,
+  ArrowLeft32,
+  ArrowLongLeft16,
+  ArrowLongRight16,
+  ArrowRight16,
+  ArrowRight32,
+  ArrowUp16,
+  ArrowUp32,
+  Avatar24,
+  Avatar64,
+  BEActivity64,
+  BECollectionManual64,
+  BECollectionSmart64,
+  BELibrary64,
+  BENews64,
   BEProject64,
   BEResourcesBox64,
-  Metadata64,
-  ResourceInteractive64,
-  ResourceAudio64,
-  Projects64,
-  ActivityText64,
-  ResourceVideo64,
-  Mug64,
-  BENews64,
-  BELibrary64,
-  ResourceImage64,
-  ActivityEgg64,
-  TextsBook64,
-  ResourceSpreadsheet64,
-  BECollectionManual64,
-  Following64,
-  ResourceLink64,
-  ActivityResource64,
-  BECollectionSmart64,
-  New64,
-  Resources64,
-  StopSign64,
-  ActivityTweet64,
-  Touch64,
-  ProjectCollections64,
   BEResourcesBoxes64,
-  BEActivity64,
-  ActivityComments48,
-  ActivityText48,
-  ActivityEgg48,
-  ActivityResource48,
-  ActivityTweet48,
-  Disclosure24,
-  Eyeball24,
-  Avatar24,
-  Annotate24,
-  Notes24,
-  Copy24,
-  Arrow24,
-  Resource24,
-  Logout24,
-  Reload24,
-  Comment24,
   Bookmark24,
-  Search24,
-  Notifications24,
-  Text24,
+  Bookmark32,
+  CircleMinus32,
+  CirclePlus32,
+  Close16,
+  Close32,
+  Comment24,
+  Comment32,
+  Copy24,
+  Delete32,
+  DisclosureDown16,
+  DisclosureDown24,
+  DisclosureDown32,
+  DisclosureUp16,
+  DisclosureUp24,
+  DisclosureUp32,
+  Duplicate32,
   EditProfile24,
+  EyeClosed32,
+  EyeOpen32,
+  Eyeball24,
+  Following64,
+  Glasses64,
+  Globe64,
+  Grabber32,
+  GrabberInactive32,
+  Key32,
+  Lamp64,
+  Lock32,
+  Logout24,
+  Mail32,
+  ManifoldLogo32,
+  Menu32,
+  Metadata64,
+  Mug64,
+  New64,
+  Notes24,
+  Notifications24,
+  Plus16,
+  ProjectCollections64,
+  Projects64,
+  RecentActivity64,
+  Reload24,
+  Reload32,
+  Resource24,
+  ResourceAudio64,
+  ResourceCollection64,
+  ResourceDocument64,
+  ResourceFile64,
+  ResourceImage64,
+  ResourceInteractive64,
+  ResourceLink64,
+  ResourcePdf64,
+  ResourcePresentation64,
+  ResourceSpreadsheet64,
+  ResourceVideo64,
+  Resources64,
+  Search16,
+  Search24,
+  Search32,
+  Settings32,
   Share24,
-  ArrowRight16,
-  ArrowLongRight16,
-  ArrowLongLeft16,
-  ArrowLeft16,
-  ArrowUp16,
-  ArrowDown16
+  SocialCite32,
+  SocialEmail32,
+  SocialFacebook32,
+  SocialGithub32,
+  SocialGoogle32,
+  SocialInstagram32,
+  SocialLinkedIn32,
+  SocialSlack32,
+  SocialTwitter32,
+  StopSign64,
+  Text24,
+  TextsBook64,
+  TextsLoosePages64,
+  TextsStacked64,
+  Toc64,
+  Touch64,
+  Upload32,
+  WarningSign64
 };

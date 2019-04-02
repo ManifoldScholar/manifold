@@ -160,7 +160,7 @@ export default class ListEntitiesListSearch extends PureComponent {
                             </option>
                           ))}
                         </select>
-                        <Utility.IconComposer icon="disclosure24" />
+                        <Utility.IconComposer icon="disclosureDown24" />
                       </div>
                     </div>
                   </div>
@@ -185,7 +185,7 @@ export default class ListEntitiesListSearch extends PureComponent {
                             </option>
                           ))}
                         </select>
-                        <Utility.IconComposer icon="disclosure24" />
+                        <Utility.IconComposer icon="disclosureDown24" />
                       </div>
                     </div>
                   </div>

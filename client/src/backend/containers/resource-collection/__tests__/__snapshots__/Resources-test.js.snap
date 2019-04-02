@@ -169,7 +169,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
                     </select>
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg svg-icon--disclosure24"
+                      className="manicon-svg svg-icon--disclosureDown24"
                       height={null}
                       viewBox="0 0 24 24"
                       width={null}
@@ -221,7 +221,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
                     </select>
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg svg-icon--disclosure24"
+                      className="manicon-svg svg-icon--disclosureDown24"
                       height={null}
                       viewBox="0 0 24 24"
                       width={null}

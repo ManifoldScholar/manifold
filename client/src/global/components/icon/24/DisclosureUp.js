@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-export default class Disclosure extends Component {
+export default class DisclosureUp extends Component {
   static propTypes = {
     iconClass: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -78,11 +78,13 @@ export default class Disclosure extends Component {
             fill={this.fill}
             fillRule="nonzero"
             points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+            transform="rotate(180 12 13)"
           />
           <polygon
             fill={this.fill}
             fillRule="nonzero"
             points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+            transform="rotate(180 12 13)"
           />
         </g>
       </svg>

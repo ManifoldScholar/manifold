@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-export default class Disclosure extends Component {
+export default class DisclosureDown extends Component {
   static propTypes = {
     iconClass: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
