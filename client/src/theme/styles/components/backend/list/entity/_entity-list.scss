@@ -117,6 +117,11 @@
         margin-left: -1 / 2 * event-entity(icon-size-large);
       }
 
+      // breakpoint equal to event-entity(min-width) * 2 + gutter + remaining viewport space
+      @include respond(952px) {
+        grid-template-columns: repeat(2, minmax(event-entity(min-width), 1fr));
+      }
+
       li {
         min-width: 100%;
 

@@ -48,8 +48,14 @@
     display: grid;
     grid-template-columns: auto;
 
-    @include respond(event-entity(min-width) * 2) {
-      grid-template-columns:repeat(auto-fit, minmax(event-entity(min-width), 1fr));
+    // breakpoint equal to event-entity(min-width) * 2 + gutter + container padding
+    @include respond(692px) {
+      grid-template-columns:repeat(2, minmax(event-entity(min-width), 1fr));
+    }
+
+    // breakpoint equal to event-entity(min-width) * 3 + gutter + container padding
+    @include respond(1057px) {
+      grid-template-columns:repeat(3, minmax(event-entity(min-width), 1fr));
     }
   }
 
@@ -72,7 +78,12 @@
 
     @include respond($break85) {
       flex-basis: 33.333%;
+      max-width: 417.58px;
       margin-top: 40px;
+
+      @supports (grid-auto-columns: min-content) {
+        max-width: none;
+      }
     }
 
     &:nth-child(n+3) {
