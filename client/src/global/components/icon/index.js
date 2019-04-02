@@ -28,9 +28,16 @@ import BEResourcesBox64 from "./64/BEResourcesBox";
 import BEResourcesBoxes64 from "./64/BEResourcesBoxes";
 import Bookmark24 from "./24/Bookmark";
 import Bookmark32 from "./32/Bookmark";
+import CircleArrowDown64 from "./64/CircleArrowDown";
+import CircleArrowLeft64 from "./64/CircleArrowLeft";
+import CircleArrowRight64 from "./64/CircleArrowRight";
+import CircleArrowUp64 from "./64/CircleArrowUp";
+import CircleMinus24 from "./24/CircleMinus";
 import CircleMinus32 from "./32/CircleMinus";
+import CirclePlus24 from "./24/CirclePlus";
 import CirclePlus32 from "./32/CirclePlus";
 import Close16 from "./16/Close";
+import Close24 from "./24/Close";
 import Close32 from "./32/Close";
 import Comment24 from "./24/Comment";
 import Comment32 from "./32/Comment";
@@ -56,15 +63,18 @@ import Key32 from "./32/Key";
 import Lamp64 from "./64/Lamp";
 import Lock32 from "./32/Lock";
 import Logout24 from "./24/Logout";
+import Mail24 from "./24/Mail";
 import Mail32 from "./32/Mail";
 import ManifoldLogo32 from "./32/ManifoldLogo";
 import Menu32 from "./32/Menu";
 import Metadata64 from "./64/Metadata";
+import Minus24 from "./24/Minus";
 import Mug64 from "./64/Mug";
 import New64 from "./64/New";
 import Notes24 from "./24/Notes";
 import Notifications24 from "./24/Notifications";
 import Plus16 from "./16/Plus";
+import Plus24 from "./24/Plus";
 import ProjectCollections64 from "./64/ProjectCollections";
 import Projects64 from "./64/Projects";
 import RecentActivity64 from "./64/RecentActivity";
@@ -138,9 +148,16 @@ export default {
   BEResourcesBoxes64,
   Bookmark24,
   Bookmark32,
+  CircleArrowDown64,
+  CircleArrowLeft64,
+  CircleArrowRight64,
+  CircleArrowUp64,
+  CircleMinus24,
   CircleMinus32,
+  CirclePlus24,
   CirclePlus32,
   Close16,
+  Close24,
   Close32,
   Comment24,
   Comment32,
@@ -166,15 +183,18 @@ export default {
   Lamp64,
   Lock32,
   Logout24,
+  Mail24,
   Mail32,
   ManifoldLogo32,
   Menu32,
   Metadata64,
+  Minus24,
   Mug64,
   New64,
   Notes24,
   Notifications24,
   Plus16,
+  Plus24,
   ProjectCollections64,
   Projects64,
   RecentActivity64,
