@@ -5,6 +5,14 @@
 }
 
 .ingestion-output {
+  .backend-header {
+    margin-bottom: 30px;
+
+    .wrapper {
+      padding-top: 25px;
+      padding-bottom: 25px;
+    }
+  }
 
   // scss-lint:disable QualifyingElement
   p.label {
@@ -57,7 +65,6 @@
   }
 
   .entity-header-primary {
-
     padding-bottom: 0;
 
     .dialog-primary .dialog-box & {
@@ -129,6 +136,30 @@
           // Relatively sized to be just a tiny bit bigger than the base
           font-size: 1.071em;
           color: $neutral50;
+        }
+      }
+    }
+  }
+
+  .buttons-icon-horizontal {
+    margin: 15px 0;
+
+    button {
+      &:disabled {
+        color: darken($accentPrimary, 35%);
+        border-color: darken($accentPrimary, 35%);
+
+        &.dull {
+          color: darken($neutral80, 5%);
+          border-color: darken($neutral80, 5%);
+
+          .manicon {
+            color: darken($neutral80, 5%);
+          }
+
+          &:hover {
+            background-color: transparent;
+          }
         }
       }
     }
