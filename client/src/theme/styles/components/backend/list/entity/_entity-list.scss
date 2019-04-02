@@ -207,5 +207,12 @@
     margin-bottom: 24px;
   }
 
-
+  &__empty-message {
+    @include templateCopy;
+    padding: 18px 0;
+    font-size: 17px;
+    font-style: italic;
+    color: $neutral50;
+    border-bottom: 1px solid $neutral75;
+  }
 }

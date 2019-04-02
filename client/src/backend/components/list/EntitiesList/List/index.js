@@ -81,6 +81,7 @@ export default class ListEntities extends PureComponent {
     pagination: PropTypes.object,
     useDragHandle: PropTypes.bool,
     paginationStyle: PropTypes.oneOf(["compact", "normal"]),
+    emptyMessage: PropTypes.node,
     unit: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.shape({

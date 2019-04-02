@@ -380,9 +380,11 @@ exports[`Backend Project Collections Container renders correctly 1`] = `
           </p>
         </div>
       </div>
-      <ul
-        className="entity-list__list entity-list__list--rows"
-      />
+      <div
+        className="entity-list__empty-message"
+      >
+        Sorry, no results were found.
+      </div>
       <div
         className="entity-list__pagination"
       >
