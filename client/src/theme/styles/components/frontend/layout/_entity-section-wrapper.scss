@@ -43,6 +43,9 @@
     }
 
     .manicon-svg {
+      width: 56px;
+      height: 56px;
+
       @include respond($break60) {
         width: 60px;
         height: 60px;
