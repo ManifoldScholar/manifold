@@ -2,7 +2,7 @@
 class Comment < ApplicationRecord
 
   # Closure Tree
-  has_closure_tree order: "sort_order", dependent: :destroy
+  has_closure_tree order: "sort_order", numeric_order: true, dependent: :destroy
 
   # Authority
   include Authority::Abilities

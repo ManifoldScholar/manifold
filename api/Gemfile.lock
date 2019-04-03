@@ -95,9 +95,9 @@ GEM
     cleanroom (1.0.0)
     clockwork (2.0.3)
       tzinfo
-    closure_tree (6.6.0)
-      activerecord (>= 4.1.0)
-      with_advisory_lock (>= 3.0.0)
+    closure_tree (7.0.0)
+      activerecord (>= 4.2.10)
+      with_advisory_lock (>= 4.0.0)
     coderay (1.1.2)
     colorize (0.8.1)
     concurrent-ruby (1.1.5)
@@ -527,7 +527,7 @@ DEPENDENCIES
   classy_enum (~> 4.0.0)
   cleanroom
   clockwork (~> 2.0.0)
-  closure_tree (~> 6.0)
+  closure_tree (~> 7.0)
   colorize (~> 0.8.0)
   csl-styles (~> 1.0)
   css_parser (~> 1.0)
