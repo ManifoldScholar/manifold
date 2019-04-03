@@ -292,8 +292,8 @@ GEM
     os (0.9.6)
     paleta (0.3.0)
     pandoc-ruby (2.0.2)
-    paper_trail (8.1.2)
-      activerecord (>= 4.2, < 5.2)
+    paper_trail (10.2.1)
+      activerecord (>= 4.2, < 6.1)
       request_store (~> 1.1)
     paper_trail-globalid (0.2.0)
       globalid
@@ -320,7 +320,7 @@ GEM
       slop (~> 3.0)
     public_suffix (3.0.3)
     puma (3.12.0)
-    rack (2.0.6)
+    rack (2.0.7)
     rack-cors (1.0.2)
     rack-protection (2.0.5)
       rack
@@ -569,7 +569,7 @@ DEPENDENCIES
   omniauth-twitter (~> 1.4.0)
   paleta (~> 0.3.0)
   pandoc-ruby (~> 2.0)
-  paper_trail (~> 8.0)
+  paper_trail (~> 10.0)
   paper_trail-globalid (~> 0.2)
   pg (~> 0.21.0)
   premailer-rails (~> 1.0)
@@ -617,4 +617,4 @@ DEPENDENCIES
   with_model (~> 2.1)
 
 BUNDLED WITH
-   1.16.3
+   1.17.2
