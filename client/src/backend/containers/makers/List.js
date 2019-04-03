@@ -19,7 +19,7 @@ import EntitiesList, {
 const { request } = entityStoreActions;
 const perPage = 10;
 
-export class container extends PureComponent {
+class MakersListContainerImplementation extends PureComponent {
   static mapStateToProps = state => {
     return {
       makers: select(requests.beMakers, state.entityStore),
@@ -135,9 +135,12 @@ export class container extends PureComponent {
   }
 }
 
-export const MakersListContainer = withFilteredLists(container, {
-  makers: makerFilters
-});
+export const MakersListContainer = withFilteredLists(
+  MakersListContainerImplementation,
+  {
+    makers: makerFilters()
+  }
+);
 export default connect(MakersListContainer.mapStateToProps)(
   MakersListContainer
 );

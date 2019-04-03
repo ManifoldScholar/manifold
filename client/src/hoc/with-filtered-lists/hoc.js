@@ -4,6 +4,9 @@ import memoize from "lodash/memoize";
 import isPlainObject from "lodash/isPlainObject";
 import pickBy from "lodash/pickBy";
 import identity from "lodash/identity";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { uiStateSnapshotActions } from "actions";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -18,11 +21,27 @@ function withFilters(WrappedComponent, filteredLists = {}) {
     static WrappedComponent = WrappedComponent;
     static displayName = displayName;
 
-    static propTypes = {};
+    static mapStateToProps = state => {
+      return { snapshots: state.ui.transitory.stateSnapshots };
+    };
+
+    static propTypes = {
+      snapshot: PropTypes.object,
+      dispatch: PropTypes.func
+    };
 
     constructor(props) {
       super(props);
       this.state = this.initialState;
+    }
+
+    componentWillMount() {
+      this.managedLists.forEach(listKey => {
+        if (!this.state[listKey].config.snapshotState) return null;
+        const snapshot = this.props.snapshots[this.snapshotKey(listKey)];
+        if (!snapshot || !snapshot.filters) return null;
+        this.setValues(listKey, snapshot.filters);
+      });
     }
 
     onReset = key => {
@@ -35,17 +54,27 @@ function withFilters(WrappedComponent, filteredLists = {}) {
 
     get initialState() {
       const state = {};
-      this.managedLists.forEach(list => {
-        const listState = filteredLists[list]();
+      this.managedLists.forEach(listKey => {
+        const listDefinition = filteredLists[listKey];
+        const listState = {};
+        listState.config = listDefinition.config;
         listState.values = {};
-        listState.params.forEach(param => {
-          listState.values[param.name] = param.value;
-          /* eslint-disable no-param-reassign */
-          delete param.value;
-          /* eslint-disable no-param-reassign */
+        listState.params = [];
+        listDefinition.params.forEach(paramDefinition => {
+          const param = {
+            label: paramDefinition.label,
+            name: paramDefinition.name
+          };
+          if (paramDefinition.options) {
+            param.options = paramDefinition.options.map(o =>
+              Object.assign({}, o)
+            );
+          }
+          listState.params.push(param);
+          listState.values[param.name] = paramDefinition.value || "";
         });
-        listState.initialValues = listState.values;
-        state[list] = listState;
+        listState.initialValues = Object.assign({}, listState.values);
+        state[listKey] = listState;
       });
       return state;
     }
@@ -64,12 +93,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
     }
 
     initialValues(key) {
-      const listState = filteredLists[key]();
-      const values = {};
-      listState.params.forEach(param => {
-        values[param.name] = param.value;
-      });
-      return values;
+      return this.state[key].initialValues;
     }
 
     entitiesListSearchProps = key => {
@@ -131,6 +155,29 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       return this.state[key].params;
     };
 
+    snapshotKey(key) {
+      return `entities-list-search-${key}`;
+    }
+
+    saveSearchState = (key, pagination) => {
+      if (!this.state[key].config.snapshotState) return;
+      const action = uiStateSnapshotActions.takeSnapshot(
+        this.snapshotKey(key),
+        {
+          filters: this.requestParams(key),
+          pagination
+        }
+      );
+      this.props.dispatch(action);
+    };
+
+    savedSearchPaginationState = key => {
+      if (!this.state[key].config.snapshotState) return null;
+      const snapshot = this.props.snapshots[this.snapshotKey(key)];
+      if (!snapshot) return null;
+      return snapshot.pagination;
+    };
+
     render() {
       return (
         <React.Fragment>
@@ -138,13 +185,19 @@ function withFilters(WrappedComponent, filteredLists = {}) {
             {...this.props}
             entitiesListSearchProps={this.entitiesListSearchProps}
             entitiesListSearchParams={this.entitiesListSearchParams(this.state)}
+            saveSearchState={this.saveSearchState}
+            savedSearchPaginationState={this.savedSearchPaginationState}
           />
         </React.Fragment>
       );
     }
   }
 
-  return hoistStatics(WithFilters, WrappedComponent);
+  const connectedWithFilters = connect(WithFilters.mapStateToProps)(
+    WithFilters
+  );
+
+  return hoistStatics(connectedWithFilters, WrappedComponent);
 }
 
 export default withFilters;

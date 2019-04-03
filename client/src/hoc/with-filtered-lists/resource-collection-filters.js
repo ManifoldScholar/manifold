@@ -1,6 +1,10 @@
-export default function resourceCollectionFilters({ sticky = false } = {}) {
+export default function resourceCollectionFilters({
+  snapshotState = false
+} = {}) {
   return {
-    sticky,
+    config: {
+      snapshotState
+    },
     params: [
       {
         label: "Search...",

@@ -1,6 +1,8 @@
-function defaultParams({ sticky = false } = {}) {
+function defaultParams({ snapshotState = false } = {}) {
   return {
-    sticky,
+    config: {
+      snapshotState
+    },
     params: [
       {
         label: "Search...",

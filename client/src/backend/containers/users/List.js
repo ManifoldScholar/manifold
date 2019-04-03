@@ -17,7 +17,7 @@ import withFilteredLists, { userFilters } from "hoc/with-filtered-lists";
 const { request } = entityStoreActions;
 const perPage = 10;
 
-class container extends PureComponent {
+class UsersListContainerImplementation extends PureComponent {
   static mapStateToProps = state => {
     return {
       users: select(requests.beUsers, state.entityStore),
@@ -126,7 +126,10 @@ class container extends PureComponent {
   }
 }
 
-export const UsersListContainer = withFilteredLists(container, {
-  users: userFilters
-});
+export const UsersListContainer = withFilteredLists(
+  UsersListContainerImplementation,
+  {
+    users: userFilters()
+  }
+);
 export default connectAndFetch(UsersListContainer);

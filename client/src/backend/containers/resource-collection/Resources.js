@@ -15,7 +15,7 @@ import isNil from "lodash/isNil";
 const { request, flush } = entityStoreActions;
 const perPage = 5;
 
-export class container extends Component {
+class ResourceCollectionResourcesContainerImplementation extends Component {
   static mapStateToProps = state => {
     return {
       resources: select(requests.beResources, state.entityStore),
@@ -210,9 +210,9 @@ export class container extends Component {
 }
 
 export const ResourceCollectionResourcesContainer = withFilteredLists(
-  container,
+  ResourceCollectionResourcesContainerImplementation,
   {
-    resources: resourceFilters.defaultParams
+    resources: resourceFilters.defaultParams()
   }
 );
 

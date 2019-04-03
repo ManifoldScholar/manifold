@@ -16,7 +16,7 @@ import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
 const { request } = entityStoreActions;
 const perPage = 12;
 
-export class container extends PureComponent {
+class ProjectCollectionManageProjectsImplementation extends PureComponent {
   static mapStateToProps = state => {
     return {
       projects: select(requests.beProjects, state.entityStore),
@@ -201,7 +201,10 @@ export class container extends PureComponent {
   }
 }
 
-export const ProjectCollectionManageProjects = withFilteredLists(container, {
-  projects: projectFilters
-});
+export const ProjectCollectionManageProjects = withFilteredLists(
+  ProjectCollectionManageProjectsImplementation,
+  {
+    projects: projectFilters()
+  }
+);
 export default connectAndFetch(ProjectCollectionManageProjects);

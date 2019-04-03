@@ -21,16 +21,14 @@ const { request } = entityStoreActions;
 
 const perPage = 10;
 
-export class Container extends PureComponent {
+class DashboardsAdminContainerImplementation extends PureComponent {
   static mapStateToProps = state => {
     return {
       statistics: select(requests.beStats, state.entityStore),
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore),
       recentProjects: select(requests.beRecentProjects, state.entityStore),
-      authentication: state.authentication,
-      entitiesListSearchProps: PropTypes.func.isRequired,
-      entitiesListSearchParams: PropTypes.object.isRequired
+      authentication: state.authentication
     };
   };
 
@@ -51,7 +49,9 @@ export class Container extends PureComponent {
   }
 
   componentDidMount() {
-    this.fetchProjects();
+    const pagination = this.props.savedSearchPaginationState("projects");
+    const page = pagination ? pagination.number : 1;
+    this.fetchProjects(page);
     this.fetchRecentProjects();
     this.fetchStats();
   }
@@ -61,11 +61,12 @@ export class Container extends PureComponent {
   }
 
   fetchProjects(page = 1) {
+    const listKey = "projects";
+    const filters = this.filterParams(listKey);
+    const pagination = { number: page, size: perPage };
+    this.props.saveSearchState(listKey, pagination);
     const projectsRequest = request(
-      projectsAPI.index(this.filterParams("projects"), {
-        number: page,
-        size: perPage
-      }),
+      projectsAPI.index(filters, pagination),
       requests.beProjects
     );
     this.props.dispatch(projectsRequest);
@@ -202,8 +203,11 @@ export class Container extends PureComponent {
     );
   }
 }
-export const DashboardsAdminContainer = withFilteredLists(Container, {
-  projects: projectFilters
-});
+export const DashboardsAdminContainer = withFilteredLists(
+  DashboardsAdminContainerImplementation,
+  {
+    projects: projectFilters({ snapshotState: true })
+  }
+);
 
 export default connectAndFetch(DashboardsAdminContainer);

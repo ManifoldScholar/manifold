@@ -1,6 +1,8 @@
-export default function keywordFilter({ sticky = false } = {}) {
+export default function keywordFilter({ snapshotState = false } = {}) {
   return {
-    sticky,
+    config: {
+      snapshotState
+    },
     params: [
       {
         label: "Search...",

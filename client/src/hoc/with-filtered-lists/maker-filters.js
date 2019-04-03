@@ -1,6 +1,8 @@
-export default function makerFilters({ sticky = false } = {}) {
+export default function makerFilters({ snapshotState = false } = {}) {
   return {
-    sticky,
+    config: {
+      snapshotState
+    },
     params: [
       {
         label: "Search...",
