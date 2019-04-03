@@ -1,2 +1,1 @@
-Spring.watch "app/services"
-Spring.watch "spec/support"
+%w[app/services spec/support].each { |path| Spring.watch(path) }

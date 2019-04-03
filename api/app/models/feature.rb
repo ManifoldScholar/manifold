@@ -23,7 +23,7 @@ class Feature < ApplicationRecord
   scope :by_home, lambda { |home|
     next all if home.nil?
 
-    where(live: true).order("RANDOM()").limit(1)
+    where(live: true).order(Arel.sql("RANDOM()")).limit(1)
   }
 
   def to_s

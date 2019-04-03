@@ -1,15 +1,14 @@
-require File.expand_path("boot", __dir__)
+require_relative "boot"
 
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
-require "action_cable/engine"
 require "active_job/railtie"
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
-require "active_record/railtie"
+require "action_cable/engine"
 require "rails/test_unit/railtie"
 require "dynamic_mailer/mailer"
 
