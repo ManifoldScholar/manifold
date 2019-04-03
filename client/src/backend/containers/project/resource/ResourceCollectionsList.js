@@ -17,7 +17,7 @@ import withFilteredLists, {
 const { request } = entityStoreActions;
 const perPage = 5;
 
-export class container extends PureComponent {
+export class ProjectResourceCollectionsListContainerImplementation extends PureComponent {
   static mapStateToProps = state => {
     return {
       resourceCollections: select(
@@ -115,9 +115,9 @@ export class container extends PureComponent {
 }
 
 export const ProjectResourceCollectionsListContainer = withFilteredLists(
-  container,
+  ProjectResourceCollectionsListContainerImplementation,
   {
-    resourceCollections: resourceCollectionFilters
+    resourceCollections: resourceCollectionFilters()
   }
 );
 export default connectAndFetch(ProjectResourceCollectionsListContainer);

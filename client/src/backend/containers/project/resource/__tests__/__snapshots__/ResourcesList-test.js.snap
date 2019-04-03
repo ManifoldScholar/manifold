@@ -242,6 +242,52 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
                   className="entity-list-search__option-inner"
                 >
                   <span
+                    className="entity-list-search__options-label entity-list-search__options-label--empty"
+                  >
+                     
+                  </span>
+                  <div
+                    className="entity-list-search__select-wrapper"
+                  >
+                    <select
+                      id="list-search-1"
+                      onChange={[Function]}
+                      value=""
+                    />
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg svg-icon--disclosureDown24"
+                      height={null}
+                      viewBox="0 0 24 24"
+                      width={null}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g
+                        fill="none"
+                        fillRule="evenodd"
+                      >
+                        <polygon
+                          fill="currentColor"
+                          fillRule="nonzero"
+                          points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                        />
+                        <polygon
+                          fill="currentColor"
+                          fillRule="nonzero"
+                          points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                        />
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="entity-list-search__option"
+              >
+                <div
+                  className="entity-list-search__option-inner"
+                >
+                  <span
                     className="entity-list-search__options-label"
                   >
                     Order Results:

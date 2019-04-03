@@ -18,7 +18,7 @@ import Authorize from "hoc/authorize";
 const { request } = entityStoreActions;
 const perPage = 6;
 
-export class container extends PureComponent {
+class ProjectEventsContainerImplementation extends PureComponent {
   static mapStateToProps = state => {
     return {
       events: select(requests.beEvents, state.entityStore),
@@ -145,9 +145,12 @@ export class container extends PureComponent {
   }
 }
 
-export const ProjectEventsContainer = withFilteredLists(container, {
-  events: eventFilters
-});
+export const ProjectEventsContainer = withFilteredLists(
+  ProjectEventsContainerImplementation,
+  {
+    events: eventFilters()
+  }
+);
 
 export default withConfirmation(
   connect(ProjectEventsContainer.mapStateToProps)(ProjectEventsContainer)

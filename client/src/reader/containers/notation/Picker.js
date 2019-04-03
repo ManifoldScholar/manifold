@@ -15,7 +15,7 @@ import withFilteredLists, { keywordFilter } from "hoc/with-filtered-lists";
 const { request } = entityStoreActions;
 const perPage = 5;
 
-export class container extends PureComponent {
+export class NotationPickerContainerImplementation extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       resources: select(requests.beResources, state.entityStore),
@@ -179,9 +179,12 @@ export class container extends PureComponent {
   }
 }
 
-export const NotationPickerContainer = withFilteredLists(container, {
-  notations: keywordFilter
-});
+export const NotationPickerContainer = withFilteredLists(
+  NotationPickerContainerImplementation,
+  {
+    notations: keywordFilter()
+  }
+);
 
 export default connect(NotationPickerContainer.mapStateToProps)(
   NotationPickerContainer

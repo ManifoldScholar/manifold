@@ -1,6 +1,8 @@
-export default function projectFilters({ sticky = false } = {}) {
+export default function projectFilters({ snapshotState = false } = {}) {
   return {
-    sticky,
+    config: {
+      snapshotState
+    },
     params: [
       {
         label: "Search...",

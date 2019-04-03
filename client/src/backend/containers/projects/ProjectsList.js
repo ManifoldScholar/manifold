@@ -18,7 +18,9 @@ const { request, flush } = entityStoreActions;
 
 const perPage = 20;
 
-export class container extends PureComponent {
+class ProjectsListContainerImplementation extends PureComponent {
+  static displayName = "Projects.List";
+
   static mapStateToProps = state => {
     return {
       projects: select(requests.beProjects, state.entityStore),
@@ -31,7 +33,9 @@ export class container extends PureComponent {
     projects: PropTypes.array,
     dispatch: PropTypes.func,
     projectsMeta: PropTypes.object,
-    authentication: PropTypes.object
+    authentication: PropTypes.object,
+    savedSearchPaginationState: PropTypes.func.isRequired,
+    entitiesListSearchParams: PropTypes.object
   };
 
   constructor(props) {
@@ -40,11 +44,15 @@ export class container extends PureComponent {
   }
 
   componentDidMount() {
-    this.fetchProjects();
+    const pagination = this.props.savedSearchPaginationState("projectsList");
+    const page = pagination ? pagination.number : 1;
+    this.fetchProjects(page, true);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.filtersChanged(prevProps)) return this.fetchProjects();
+    if (this.filtersChanged(prevProps)) {
+      return this.fetchProjects();
+    }
   }
 
   componentWillUnmount() {
@@ -57,19 +65,20 @@ export class container extends PureComponent {
     );
   }
 
-  fetchProjects(page = 1) {
+  fetchProjects(page = 1, doNotSnapshot = false) {
+    const listKey = "projectsList";
+    const filters = this.filterParams();
+    const pagination = { number: page, size: perPage };
+    if (!doNotSnapshot) this.props.saveSearchState(listKey, pagination);
     const projectsRequest = request(
-      projectsAPI.index(this.filterParams("projects"), {
-        number: page,
-        size: perPage
-      }),
+      projectsAPI.index(filters, pagination),
       requests.beProjects
     );
     this.props.dispatch(projectsRequest);
   }
 
   filterParams(additionalParams = {}) {
-    const filterState = this.props.entitiesListSearchParams.projects || {};
+    const filterState = this.props.entitiesListSearchParams.projectsList || {};
     const out = Object.assign({}, filterState, additionalParams);
     const currentUser = this.props.authentication.currentUser;
     if (!currentUser) return out;
@@ -105,7 +114,7 @@ export class container extends PureComponent {
               onPageClick: this.updateHandlerCreator
             }}
             search={
-              <Search {...this.props.entitiesListSearchProps("projects")} />
+              <Search {...this.props.entitiesListSearchProps("projectsList")} />
             }
             buttons={[
               <Button
@@ -122,7 +131,10 @@ export class container extends PureComponent {
   }
 }
 
-export const ProjectsListContainer = withFilteredLists(container, {
-  projects: projectFilters
-});
+export const ProjectsListContainer = withFilteredLists(
+  ProjectsListContainerImplementation,
+  {
+    projectsList: projectFilters({ snapshotState: true })
+  }
+);
 export default connectAndFetch(ProjectsListContainer);

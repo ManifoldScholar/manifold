@@ -4,7 +4,6 @@ import { UsersListContainer } from "../List";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
-import withFilteredLists, { userFilters } from "hoc/with-filtered-lists";
 
 describe("Backend People Users List Container", () => {
   const store = build.store();

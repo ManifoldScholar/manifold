@@ -15,7 +15,7 @@ import withFilteredLists, { resourceFilters } from "hoc/with-filtered-lists";
 const { request } = entityStoreActions;
 const perPage = 5;
 
-export class container extends PureComponent {
+class ProjectResourcesListContainerImplementation extends PureComponent {
   static mapStateToProps = state => {
     return {
       resources: select(requests.beResources, state.entityStore),
@@ -116,7 +116,10 @@ export class container extends PureComponent {
   }
 }
 
-export const ProjectResourcesListContainer = withFilteredLists(container, {
-  resources: resourceFilters.defaultParams
-});
+export const ProjectResourcesListContainer = withFilteredLists(
+  ProjectResourcesListContainerImplementation,
+  {
+    resources: resourceFilters.defaultParams()
+  }
+);
 export default connectAndFetch(ProjectResourcesListContainer);

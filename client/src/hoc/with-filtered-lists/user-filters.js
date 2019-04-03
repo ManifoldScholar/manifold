@@ -1,6 +1,6 @@
 import config from "config";
 
-export default function userFilters({ sticky = false } = {}) {
+export default function userFilters({ snapshotState = false } = {}) {
   const roles = Object.keys(config.app.locale.roles);
   const labels = config.app.locale.roles;
   const roleOptions = roles.map(role => {
@@ -12,7 +12,9 @@ export default function userFilters({ sticky = false } = {}) {
   roleOptions.unshift({ label: "All roles", value: "" });
 
   return {
-    sticky,
+    config: {
+      snapshotState
+    },
     params: [
       {
         label: "Search...",

@@ -1,6 +1,6 @@
 import config from "config";
 
-export default function eventFilters({ sticky = false } = {}) {
+export default function eventFilters({ snapshotState = false } = {}) {
   const eventOptions = Object.keys(config.app.locale.event_types).map(key => {
     return {
       label: `Type is "${config.app.locale.event_types[key]}"`,
@@ -9,7 +9,9 @@ export default function eventFilters({ sticky = false } = {}) {
   });
 
   return {
-    sticky,
+    config: {
+      snapshotState
+    },
     params: [
       {
         label: "Search...",

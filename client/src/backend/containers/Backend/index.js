@@ -15,10 +15,6 @@ import ScrollAware from "hoc/scroll-aware";
 import BodyClass from "hoc/body-class";
 
 const { request } = entityStoreActions;
-const {
-  resetDashboardProjectsListSnapshot,
-  resetProjectsListSnapshot
-} = uiStateSnapshotActions;
 
 export class BackendContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -65,8 +61,7 @@ export class BackendContainer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(resetDashboardProjectsListSnapshot());
-    this.props.dispatch(resetProjectsListSnapshot());
+    this.props.dispatch(uiStateSnapshotActions.resetSnapshots());
   }
 
   setMinHeight() {
