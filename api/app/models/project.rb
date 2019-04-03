@@ -151,7 +151,7 @@ class Project < ApplicationRecord
   scope :by_featured, lambda { |featured|
     next all if featured.nil?
 
-    where(featured: to_boolean(featured)).order("RANDOM()").limit(4)
+    where(featured: to_boolean(featured)).order(Arel.sql("RANDOM()")).limit(4)
   }
 
   scope :by_subject, lambda { |subject|
