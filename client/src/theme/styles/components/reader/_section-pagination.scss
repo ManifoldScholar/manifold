@@ -7,20 +7,31 @@
     background-color: $neutral85;
   }
 
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
   // Global button styles
   // <a>
-  .pagination-previous, .pagination-next {
+  &__link {
     @include utilityPrimary;
-    display: inline-block;
-    padding: 28px 0 20px;
+    display: inline-flex;
+    flex-grow: 1;
+    align-items: center;
+    padding: 20px 0;
     font-size: 14px;
     color: $neutral40;
     text-decoration: none;
     vertical-align: middle;
 
     @include respond($break40) {
-      padding: 42px 0 25px;
+      padding: 28px 0;
       font-size: 18px;
+    }
+
+    @include respond($break75) {
+      padding: 26px 0;
     }
 
     &:hover, &:focus {
@@ -28,39 +39,39 @@
       outline: 0;
     }
 
-    .manicon {
-      display: inline-block;
-      font-size: 38px;
-      vertical-align: middle;
-
-      @include respond($break40) {
-        font-size: 48px;
-      }
-
-      @include respond($break75) {
-        font-size: 66px;
-      }
+    &--next {
+      justify-content: flex-end;
     }
   }
 
-  .pagination-previous {
-    .manicon {
-      margin-right: 10px;
-
-      @include respond($break40) {
-        margin-right: 30px;
-      }
-    }
+  &__text {
+    line-height: 1;
   }
 
-  .pagination-next {
-    float: right;
+  &__icon {
+    @include respond($break40) {
+      width: 59.08px;
+      height: 59.08px;
+    }
 
-    .manicon {
-      margin-left: 10px;
+    @include respond($break75) {
+      width: 81.231px;
+      height: 81.231px;
+    }
+
+    &--previous {
+      margin-right: 5px;
 
       @include respond($break40) {
-        margin-left: 30px;
+        margin-right: 24px;
+      }
+    }
+
+    &--next {
+      margin-left: 5px;
+
+      @include respond($break40) {
+        margin-left: 24px;
       }
     }
   }

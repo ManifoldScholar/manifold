@@ -60,7 +60,7 @@
     }
 
     .checkbox {
-      padding-left: 39px;
+      padding-left: 0;
       font-size: 14px;
       color: $neutral50;
       transition: color $duration $timing;
@@ -69,24 +69,29 @@
         color: $neutral75;
       }
 
-      .toggle-indicator {
-        padding-left: 4px; // OD
+      &__indicator {
         background-color: $neutralWhite;
       }
 
-      .manicon-check-bold {
-        font-size: 13px;
+      &__icon {
         color: $neutral70;
         opacity: 0;
         transition: opacity $durationFast $timing;
       }
 
       &.checked {
-        .manicon-check-bold {
+        .checkbox__indicator {
+          background-color: $neutralWhite;
+        }
+
+        .checkbox__icon {
           opacity: 1;
         }
       }
 
+      input:focus ~ .checkbox__indicator {
+        background-color: $neutralWhite;
+      }
     }
 
     .buttons {

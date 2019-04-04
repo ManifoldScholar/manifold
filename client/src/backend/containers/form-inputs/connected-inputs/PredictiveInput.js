@@ -5,6 +5,7 @@ import update from "immutability-helper";
 import debounce from "lodash/debounce";
 import classNames from "classnames";
 import { ApiClient } from "api";
+import IconComposer from "global/components/utility/IconComposer";
 
 class PredictiveInput extends PureComponent {
   static mapStateToProps = state => {
@@ -16,7 +17,6 @@ class PredictiveInput extends PureComponent {
   static displayName = "Form.PredictiveInput";
 
   static propTypes = {
-    className: PropTypes.string,
     onNew: PropTypes.func,
     onSelect: PropTypes.func.isRequired,
     label: PropTypes.func.isRequired,
@@ -228,19 +228,19 @@ class PredictiveInput extends PureComponent {
   }
 
   render() {
-    const classes = classNames(this.props.className, {
-      "predictive-open":
+    const classes = classNames("input-predictive", {
+      "input-predictive--open":
         this.state.open === true && this.hasOptions(this.state.options)
     });
 
     return (
       <div className={classes}>
-        <div className="input">
+        <div className="input-predictive__input">
           <input
             ref={input => {
               this.inputElement = input;
             }}
-            className="text-input"
+            className="input-predictive__text-input text-input"
             type="text"
             onChange={this.handleChange}
             value={this.state.value}
@@ -255,16 +255,22 @@ class PredictiveInput extends PureComponent {
           {this.props.onNew ? (
             <button
               type="button"
-              className="manicon manicon-plus"
               aria-hidden="true"
               onClick={this.handleNew}
-            />
+              className="input-predictive__button"
+            >
+              <IconComposer
+                icon="plus16"
+                size={20}
+                iconClass="input-predictive__icon"
+              />
+            </button>
           ) : null}
         </div>
-        <nav className="predictive-list">
-          <ul>
+        <nav className="input-predictive__results-wrapper">
+          <ul className="input-predictive__results">
             {this.state.options.map(option => {
-              const listingClass = classNames({
+              const listingClass = classNames("input-predictive__result", {
                 highlighted: option.id === this.state.highlighted
               });
               return (

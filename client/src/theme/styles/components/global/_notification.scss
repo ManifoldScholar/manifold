@@ -45,17 +45,19 @@
     .notification-close {
       @include buttonUnstyled;
       position: absolute;
-      top: 36px;
+      top: 50%;
       right: $containerPaddingResp;
-      margin-top: -14px;
-      font-size: 24px;
-
-      @include respond($break70) {
-        font-size: 28px;
-      }
+      transform: translateY(-50%);
 
       @include respond($break120) {
         right: 26px;
+      }
+
+      &__icon {
+        @include respond($break70) {
+          width: 49.778px;
+          height: 49.778px;
+        }
       }
     }
 
@@ -136,7 +138,7 @@
       margin: 8px 0 0;
       font-size: inherit;
 
-      .manicon {
+      &__icon {
         display: none;
       }
 

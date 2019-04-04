@@ -68,7 +68,7 @@ export class ActionCalloutForm extends Component {
         onClick: this.onDelete,
         label: "delete",
         icon: "delete32",
-        iconClass: "notice"
+        iconClass: "utility-button__icon--notice"
       }
     ];
   }

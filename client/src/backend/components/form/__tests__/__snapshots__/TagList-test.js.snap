@@ -15,12 +15,12 @@ exports[`Backend.Form.TagList component renders correctly 1`] = `
     className="input-predictive"
   >
     <div
-      className="input"
+      className="input-predictive__input"
     >
       <input
         aria-describedby={null}
         aria-label="Enter a Tag"
-        className="text-input"
+        className="input-predictive__text-input text-input"
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
@@ -32,15 +32,31 @@ exports[`Backend.Form.TagList component renders correctly 1`] = `
       />
       <button
         aria-hidden="true"
-        className="manicon manicon-plus"
+        className="input-predictive__button"
         onClick={[Function]}
         type="button"
-      />
+      >
+        <svg
+          aria-hidden={true}
+          className="manicon-svg input-predictive__icon svg-icon--plus16"
+          fill="currentColor"
+          height={20}
+          viewBox="0 0 16 16"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
+          />
+        </svg>
+      </button>
     </div>
     <nav
-      className="predictive-list"
+      className="input-predictive__results-wrapper"
     >
-      <ul />
+      <ul
+        className="input-predictive__results"
+      />
     </nav>
   </div>
   <div

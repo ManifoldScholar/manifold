@@ -6,21 +6,25 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
     className="drawer-header"
   >
     <h2
-      className="heading-quaternary"
+      className="drawer-header__title"
     >
-      Rowan Ida
+      <span
+        className="drawer-header__title-text"
+      >
+        Rowan Ida
+      </span>
     </h2>
     <div
-      className="buttons-bare-vertical"
+      className="drawer-header__utility utility-button-group utility-button-group--stack"
     >
       <button
-        className="button-bare-primary"
+        className="utility-button"
         onClick={[Function]}
         type="button"
       >
         <svg
           aria-hidden={true}
-          className="manicon-svg notice svg-icon--delete32"
+          className="manicon-svg utility-button__icon--notice utility-button__icon svg-icon--delete32"
           fill="currentColor"
           height={24}
           viewBox="0 0 32 32"
@@ -31,7 +35,11 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
             d="M22.5006476,10.9603607 L23.4993524,11.0112392 L22.8010808,24.6917831 C22.8222428,25.6607758 22.05432,26.4636781 21.074,26.4858 L10.9146542,26.4856713 C9.94567997,26.4636781 9.17775722,25.6607758 9.19944755,24.7281393 L8.50064755,11.0112392 L9.49935241,10.9603607 L10.1986808,24.713617 C10.1895701,25.1307915 10.5201792,25.4764602 10.926,25.4858 L21.0626542,25.4859288 C21.4798208,25.4764602 21.8104299,25.1307915 21.8018476,24.6772608 L22.5006476,10.9603607 Z M5.99999997,11.4266 L5.99999997,10.4266 L26,10.4266 L26,11.4266 L5.99999997,11.4266 Z M12.75,10.9266 L11.75,10.9266 L11.7501673,6.81953297 C11.732004,6.11756111 12.2857775,5.53349733 13.0014,5.51409997 L19.0122785,5.5142871 C19.7142225,5.53349733 20.267996,6.11756111 20.25,6.80659997 L20.25,10.9266 L19.25,10.9266 L19.2501673,6.79366698 C19.2540602,6.64321292 19.1353696,6.51803017 18.9986,6.51409997 L13.0150785,6.51391283 C12.8646304,6.51803017 12.7459398,6.64321292 12.75,6.80659997 L12.75,10.9266 Z M13.5,14.7217 L14.5,14.7217 L14.5,22.25 L13.5,22.25 L13.5,14.7217 Z M17.5,14.7217 L18.5,14.7217 L18.5,22.25 L17.5,22.25 L17.5,14.7217 Z"
           />
         </svg>
-        Delete
+        <span
+          className="utility-button__text"
+        >
+          Delete
+        </span>
       </button>
     </div>
   </header>
@@ -172,10 +180,25 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
               <div
                 className="contents-empty"
               >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-cloud-up"
-                />
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg contents-empty__icon svg-icon--upload64"
+                  height={82}
+                  viewBox="0 0 64 64"
+                  width={82}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    fill="none"
+                    fillRule="evenodd"
+                  >
+                    <path
+                      d="M32.9988,29.9144136 L32.9988,42.0002 L30.9988,42.0002 L30.9988,29.9144136 L25.7059068,35.2073068 L24.2916932,33.7930932 L31.9988,26.0859864 L39.7059068,33.7930932 L38.2916932,35.2073068 L32.9988,29.9144136 Z M50.1861877,22.5986557 C56.4497399,23.0677704 61.5405685,28.1667806 61.9686336,34.4041458 C62.4434658,41.2940362 57.365095,47.2462232 50.5614005,47.9604353 L50.4578781,47.9658996 L11.6699429,47.9977815 C8.53033255,47.7930939 5.62013166,45.6673177 3.63424187,42.4514574 C-0.606099659,35.5873073 3.82653587,26.5383733 11.8099093,26.1212576 C14.0599364,26.0038929 16.2272667,26.566062 18.0852466,27.6896237 C18.5412167,20.3542541 24.6631146,14.5469 32.145,14.5469 C37.9174389,14.5469 43.0124004,18.037155 45.1604639,23.2141812 C46.7581064,22.6838525 48.4567018,22.4699946 50.1861877,22.5986557 Z M44.9652102,25.4242014 C44.4268603,25.6530481 43.8078886,25.3729597 43.6244437,24.8174965 C42.0077096,19.9220973 37.4048058,16.5469 32.145,16.5469 C25.4688521,16.5469 20.058,21.9306221 20.058,28.5689 C20.058,28.8683971 20.0747493,29.1712969 20.1115458,29.6128545 C20.1868189,30.5161318 19.1178416,31.0455547 18.4449777,30.438241 C16.6714657,28.837504 14.3554563,27.9911971 11.9141769,28.1185379 C5.4789839,28.4547641 1.87879742,35.8043081 5.33584257,41.4004793 C7.00940449,44.1105699 9.38308844,45.8444436 11.7341219,45.9999004 L50.403086,45.965947 C56.1172051,45.3394064 60.3725258,40.33352 59.9733467,34.5413681 C59.6134776,29.2976912 55.3109878,24.9882098 50.0375627,24.5931257 C48.2705385,24.4617114 46.5473971,24.7516308 44.9652102,25.4242014 Z"
+                      fill="currentColor"
+                      fillRule="nonzero"
+                    />
+                  </g>
+                </svg>
                 <div
                   className="message"
                 >
@@ -208,7 +231,7 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
           className="form-input submit wide"
         >
           <input
-            className="button-secondary outlined"
+            className="button-secondary button-secondary--outlined"
             type="submit"
             value="Save Maker"
           />

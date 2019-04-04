@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class IngestionActions extends Component {
   static displayName = "Ingestion.Actions";
@@ -32,6 +34,13 @@ export default class IngestionActions extends Component {
     return this.ingestion.attributes.state === "processing";
   }
 
+  get buttonClasses() {
+    return classNames(
+      "buttons-icon-horizontal__button",
+      "button-icon-secondary"
+    );
+  }
+
   get startButton() {
     if (this.finished) return null;
     const label = this.inProgress ? "Ingesting" : "Start Ingestion";
@@ -39,10 +48,14 @@ export default class IngestionActions extends Component {
     return (
       <button
         onClick={this.props.start}
-        className="button-icon-secondary"
+        className={this.buttonClasses}
         disabled={this.inProgress}
       >
-        <i className="manicon manicon-arrow-down" aria-hidden="true" />
+        <IconComposer
+          icon="arrowDown16"
+          size="default"
+          iconClass="button-icon-secondary__icon"
+        />
         <span>{label}</span>
       </button>
     );
@@ -54,10 +67,17 @@ export default class IngestionActions extends Component {
     return (
       <button
         onClick={this.props.cancel}
-        className="button-icon-secondary dull"
+        className={classNames(
+          this.buttonClasses,
+          "button-icon-secondary--dull"
+        )}
         disabled={this.inProgress}
       >
-        <i className="manicon manicon-x small" aria-hidden="true" />
+        <IconComposer
+          icon="close16"
+          size="default"
+          iconClass="button-icon-secondary__icon"
+        />
         <span>Change Source</span>
       </button>
     );
@@ -67,8 +87,12 @@ export default class IngestionActions extends Component {
     if (!this.finished) return null;
 
     return (
-      <button onClick={this.props.complete} className="button-icon-secondary">
-        <i className="manicon manicon-check small" aria-hidden="true" />
+      <button onClick={this.props.complete} className={this.buttonClasses}>
+        <IconComposer
+          icon="check16"
+          size="default"
+          iconClass="button-icon-secondary__icon"
+        />
         <span>Complete</span>
       </button>
     );
@@ -78,7 +102,7 @@ export default class IngestionActions extends Component {
     if (!this.ingestion || !this.connected) return null;
 
     return (
-      <div className="buttons-icon-horizontal">
+      <div className="ingestion-output__buttons buttons-icon-horizontal">
         {this.startButton}
         {this.completeButton}
         {this.backButton}

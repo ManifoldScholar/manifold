@@ -7,6 +7,7 @@ import Form from "global/components/form";
 import { entityStoreActions } from "actions";
 import { usersAPI, requests, passwordsAPI } from "api";
 import { get } from "lodash";
+import classNames from "classnames";
 
 const { request, flush } = entityStoreActions;
 
@@ -140,12 +141,20 @@ class ResetPasswordWrapper extends PureComponent {
         <div className="row-1-p">
           <div className="form-input">
             <input
-              className="button-secondary outlined button-with-room"
+              className={classNames(
+                "button-secondary",
+                "button-secondary--outlined",
+                "button-secondary--with-room"
+              )}
               type="submit"
               value="Reset Password"
             />
             <button
-              className="button-secondary dull outlined"
+              className={classNames(
+                "button-secondary",
+                "button-secondary--outlined",
+                "button-secondary--dull"
+              )}
               onClick={event => this.handleStateChange(event, "editing", false)}
             >
               Cancel
@@ -172,21 +181,33 @@ class ResetPasswordWrapper extends PureComponent {
           <div className="form-input">
             <button
               onClick={event => this.handleStateChange(event, "confirm", true)}
-              className="button-secondary outlined"
+              className="button-secondary button-secondary--outlined"
             >
               Generate new password
             </button>
             <button
               onClick={event => this.handleStateChange(event, "editing", true)}
-              className="button-secondary outlined"
+              className="button-secondary button-secondary--outlined"
             >
               Set new password
             </button>
             <button
-              className="button-secondary dull outlined"
+              className={classNames(
+                "button-secondary",
+                "button-secondary--outlined",
+                "button-secondary--dull"
+              )}
               onClick={event => this.handleRejectClick(event)}
             >
-              Cancel
+              <span
+                className={classNames(
+                  "button-secondary__text",
+                  "button-secondary__text--white",
+                  "button-secondary__text--hover-dark"
+                )}
+              >
+                Cancel
+              </span>
             </button>
           </div>
         )}

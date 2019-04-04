@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ColorPicker extends Component {
   static displayName = "Project.Form.ColorPicker";
@@ -72,7 +73,13 @@ export default class ColorPicker extends Component {
                 onChange={() => this.props.onChange(color)}
               />
               <span className="toggle-indicator" aria-hidden="true">
-                {checked ? <i className="manicon manicon-check" /> : null}
+                {checked && (
+                  <IconComposer
+                    icon="check16"
+                    size={18.5}
+                    iconClass="toggle-indicator__icon"
+                  />
+                )}
               </span>
             </label>
           );

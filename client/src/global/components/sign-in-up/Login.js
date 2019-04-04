@@ -93,7 +93,7 @@ export default class Login extends Component {
                 </span>
               ) : null}
               <input
-                className="button-secondary button-with-room"
+                className="button-secondary button-secondary--with-room"
                 type="submit"
                 value="Log in"
               />

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceImportResultsFailed extends PureComponent {
   static displayName = "ResourceImport.Results.Failed";
@@ -13,10 +14,14 @@ export default class ResourceImportResultsFailed extends PureComponent {
 
     return (
       <React.Fragment>
-        <i className="manicon manicon-x small" aria-hidden="true" />
-        <span>{`Row #${
-          resourceImportRow.lineNumber
-        } failed with errors.`}</span>
+        <IconComposer
+          icon="close16"
+          size={18}
+          iconClass="results-header__icon"
+        />
+        <span>
+          {`Row #${resourceImportRow.lineNumber} failed with errors.`}
+        </span>
       </React.Fragment>
     );
   }

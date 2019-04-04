@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import { Link } from "react-router-dom";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceImportControlsParsed extends PureComponent {
   static displayName = "ResourceImport.Controls.Parsed";
@@ -10,6 +12,13 @@ export default class ResourceImportControlsParsed extends PureComponent {
     backLinkUrl: PropTypes.string,
     startImport: PropTypes.func
   };
+
+  get buttonClasses() {
+    return classNames(
+      "buttons-icon-horizontal__button",
+      "button-icon-secondary"
+    );
+  }
 
   render() {
     const resourceImport = this.props.resourceImport;
@@ -34,18 +43,26 @@ export default class ResourceImportControlsParsed extends PureComponent {
         >
           <button
             onClick={this.props.startImport}
-            className="button-icon-secondary"
+            className={this.buttonClasses}
           >
-            <i className="manicon manicon-check small" aria-hidden="true" />
+            <IconComposer
+              icon="check16"
+              size="default"
+              iconClass="button-icon-secondary__icon"
+            />
             <span>Start Import</span>
           </button>
           <Link
             to={this.props.backLinkUrl}
-            className="button-icon-secondary dull"
+            className={classNames(
+              this.buttonClasses,
+              "button-icon-secondary--dull"
+            )}
           >
-            <i
-              className="manicon manicon-arrow-left small"
-              aria-hidden="true"
+            <IconComposer
+              icon="close16"
+              size="default"
+              iconClass="button-icon-secondary__icon"
             />
             <span>Back</span>
           </Link>

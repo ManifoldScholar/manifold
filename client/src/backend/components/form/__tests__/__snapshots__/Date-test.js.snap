@@ -16,10 +16,23 @@ exports[`Backend.Form.Date component renders correctly 1`] = `
     <div
       className="form-select input-month"
     >
-      <i
-        aria-hidden="true"
-        className="manicon manicon-caret-down"
-      />
+      <div
+        className="form-select__icon"
+      >
+        <svg
+          aria-hidden={true}
+          className="manicon-svg svg-icon--disclosureDown16"
+          fill="currentColor"
+          height={20}
+          viewBox="0 0 16 16"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <polygon
+            points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+          />
+        </svg>
+      </div>
       <select
         onChange={[Function]}
         value="9"
@@ -90,10 +103,23 @@ exports[`Backend.Form.Date component renders correctly 1`] = `
     <div
       className="form-select input-day"
     >
-      <i
-        aria-hidden="true"
-        className="manicon manicon-caret-down"
-      />
+      <div
+        className="form-select__icon"
+      >
+        <svg
+          aria-hidden={true}
+          className="manicon-svg svg-icon--disclosureDown16"
+          fill="currentColor"
+          height={20}
+          viewBox="0 0 16 16"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <polygon
+            points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+          />
+        </svg>
+      </div>
       <select
         onChange={[Function]}
         value="10"

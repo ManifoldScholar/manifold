@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import debounce from "lodash/debounce";
 import classNames from "classnames";
 import { ApiClient } from "api";
+import IconComposer from "global/components/utility/IconComposer";
 
 class FetchSelect extends PureComponent {
   static mapStateToProps = state => {
@@ -135,22 +136,30 @@ class FetchSelect extends PureComponent {
     if (!this.hasOptions(this.state.options)) return null;
 
     return (
-      <div className="button-row">
+      <div className="fetch-select__utility utility-button-group utility-button-group--inline">
         <button
-          className="button-bare-primary add-button"
+          className="utility-button"
           type="button"
           onClick={this.selectAll}
         >
-          <i className="manicon manicon-plus-bold" />
-          Add All
+          <IconComposer
+            icon="circlePlus32"
+            size="default"
+            iconClass="utility-button__icon utility-button__icon--highlight"
+          />
+          <span className="utility-button__text">Add All</span>
         </button>
         <button
-          className="button-bare-primary remove-button"
+          className="utility-button"
           type="button"
           onClick={this.removeAll}
         >
-          <i className="manicon manicon-minus-bold" />
-          Remove All
+          <IconComposer
+            icon="circleMinus32"
+            size="default"
+            iconClass="utility-button__icon utility-button__icon--notice"
+          />
+          <span className="utility-button__text">Remove All</span>
         </button>
       </div>
     );
@@ -163,7 +172,7 @@ class FetchSelect extends PureComponent {
 
   render() {
     const listClasses = classNames(this.props.className, {
-      "fetch-select-open":
+      "fetch-select--open":
         this.state.open === true && this.hasOptions(this.state.options)
     });
 
@@ -171,16 +180,20 @@ class FetchSelect extends PureComponent {
       <nav className={listClasses}>
         <div
           role="button"
-          className="fetch-select-trigger"
+          className="fetch-select__trigger"
           onClick={this.toggle}
           ref={e => (this.selectElement = e)}
         >
           {this.renderValue(this.props)}
-          <i className="manicon manicon-caret-down" />
+          <IconComposer
+            icon="disclosureDown16"
+            size={20}
+            iconClass="fetch-select__trigger-icon"
+          />
         </div>
-        <ul ref={e => (this._list = e)}>
+        <ul ref={e => (this._list = e)} className="fetch-select__list">
           {this.state.options.map(option => {
-            const listingClass = classNames({
+            const listingClass = classNames("fetch-select__item", {
               highlighted: option.id === this.state.highlighted
             });
             return (

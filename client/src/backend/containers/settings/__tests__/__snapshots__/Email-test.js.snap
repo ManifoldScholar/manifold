@@ -3,11 +3,17 @@
 exports[`Backend Settings Email Container when delivery method is sendmail renders correctly 1`] = `
 <section>
   <header
-    className="backend-header section-heading-secondary"
+    className="backend-header"
   >
-    <h1>
-      Email Settings
-    </h1>
+    <div
+      className="backend-header__inner"
+    >
+      <h1
+        className="backend-header__title backend-header__title--large"
+      >
+        Email Settings
+      </h1>
+    </div>
   </header>
   <div
     className="backend-panel"
@@ -193,10 +199,19 @@ The Manifold Team"
                     <div
                       className="form-select"
                     >
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-caret-down"
-                      />
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg form-select__icon svg-icon--disclosureDown16"
+                        fill="currentColor"
+                        height={20}
+                        viewBox="0 0 16 16"
+                        width={20}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <polygon
+                          points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+                        />
+                      </svg>
                       <select
                         aria-describedby="select-error-1"
                         onChange={[Function]}
@@ -288,21 +303,19 @@ The Manifold Team"
               className="form-input submit wide"
             >
               <input
-                className="button-secondary outlined"
+                className="button-secondary button-secondary--outlined"
                 type="submit"
                 value="Save Settings"
               />
             </div>
-            <p
-              className="instructional-copy margin-top"
-            >
+            <div>
               <button
-                className="button-secondary-dark"
+                className="button-secondary button-secondary--dark button-secondary--with-room"
                 onClick={[Function]}
               >
                 Send test email
               </button>
-            </p>
+            </div>
           </form>
         </div>
       </div>
@@ -314,11 +327,17 @@ The Manifold Team"
 exports[`Backend Settings Email Container when delivery method is smtp renders correctly 1`] = `
 <section>
   <header
-    className="backend-header section-heading-secondary"
+    className="backend-header"
   >
-    <h1>
-      Email Settings
-    </h1>
+    <div
+      className="backend-header__inner"
+    >
+      <h1
+        className="backend-header__title backend-header__title--large"
+      >
+        Email Settings
+      </h1>
+    </div>
   </header>
   <div
     className="backend-panel"
@@ -504,10 +523,19 @@ The Manifold Team"
                     <div
                       className="form-select"
                     >
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-caret-down"
-                      />
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg form-select__icon svg-icon--disclosureDown16"
+                        fill="currentColor"
+                        height={20}
+                        viewBox="0 0 16 16"
+                        width={20}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <polygon
+                          points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+                        />
+                      </svg>
                       <select
                         aria-describedby="select-error-1"
                         onChange={[Function]}
@@ -645,21 +673,19 @@ The Manifold Team"
               className="form-input submit wide"
             >
               <input
-                className="button-secondary outlined"
+                className="button-secondary button-secondary--outlined"
                 type="submit"
                 value="Save Settings"
               />
             </div>
-            <p
-              className="instructional-copy margin-top"
-            >
+            <div>
               <button
-                className="button-secondary-dark"
+                className="button-secondary button-secondary--dark button-secondary--with-room"
                 onClick={[Function]}
               >
                 Send test email
               </button>
-            </p>
+            </div>
           </form>
         </div>
       </div>

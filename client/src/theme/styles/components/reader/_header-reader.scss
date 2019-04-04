@@ -83,6 +83,8 @@
     @include buttonUnstyled;
     @include utilityPrimary;
     position: relative;
+    display: flex;
+    align-items: center;
     float: left;
     height: 100%;
     padding: 0 18px 1px 30px;
@@ -110,15 +112,10 @@
       outline: 0;
     }
 
-    .manicon {
-      display: inline-block;
-      margin-top: -5px;
-      vertical-align: middle;
-    }
+    &__text {}
 
-    .manicon-caret-down {
-      margin-left: 18px;
-      font-size: 9px;
+    &__icon {
+      margin-left: 14px;
     }
   }
 
@@ -348,11 +345,9 @@
       right: -300px;
       transition: right $duration $timing;
 
-      li {
-        button, a {
-          @include respond($break40) {
-            padding-right: 76px;
-          }
+      &__link {
+        @include respond($break40) {
+          padding-right: 76px;
         }
       }
     }

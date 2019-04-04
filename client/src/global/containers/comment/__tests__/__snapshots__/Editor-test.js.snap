@@ -33,7 +33,7 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
           className="buttons"
         >
           <button
-            className="button-secondary dull"
+            className="button-secondary button-secondary--dull"
             onClick={[MockFunction]}
             type="button"
           >
@@ -47,7 +47,11 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
               aria-hidden="true"
               className="manicon manicon-word-bubble-lines"
             />
-            Update
+            <span
+              className="button-secondary__text"
+            >
+              Update
+            </span>
           </button>
         </div>
       </div>

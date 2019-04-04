@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceLink extends Component {
   static displayName = "Resource.Link";
@@ -24,8 +25,12 @@ export default class ResourceLink extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Visit Page{" "}
-            <i className="manicon manicon-arrow-right" aria-hidden="true" />
+            <span className="button-primary__text">Visit Page</span>
+            <IconComposer
+              icon="arrowRight16"
+              size="default"
+              iconClass="button-primary__icon"
+            />
           </a>
         );
         break;
@@ -37,8 +42,12 @@ export default class ResourceLink extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Download{" "}
-            <i className="manicon manicon-arrow-down" aria-hidden="true" />
+            <span className="button-primary__text">Download</span>
+            <IconComposer
+              icon="arrowDown16"
+              size="default"
+              iconClass="button-primary__icon"
+            />
           </a>
         ) : null;
         break;

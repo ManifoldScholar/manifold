@@ -184,10 +184,14 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
           </div>
         </div>
         <button
-          className="button-bare-primary"
+          className="utility-button"
           onClick={[Function]}
         >
-          Unsubscribe From All
+          <span
+            className="utility-button__text utility-button__text--underlined"
+          >
+            Unsubscribe From All
+          </span>
         </button>
       </div>
       <div
@@ -197,7 +201,7 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
           className="form-input form-error"
         >
           <input
-            className="button-secondary button-with-room"
+            className="button-secondary button-secondary--with-room"
             type="submit"
             value="Save Changes"
           />

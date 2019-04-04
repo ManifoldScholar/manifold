@@ -13,26 +13,14 @@
     height: 100%;
   }
 
-  .utility {
+  .utility-button {
     position: absolute;
-    right: 12px;
-    bottom: 17px;
-
-    @include respond(event-entity(panel-breakpoint)) {
-      font-size: 1.2em;
-    }
-
-    .manicon-trashcan {
-      color: $sp40Tertiary;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
+    right: 8px;
+    bottom: 16px;
   }
 
   &--tile {
-    .utility {
+    .utility-button {
       right: 18px;
       bottom: 45px;
     }

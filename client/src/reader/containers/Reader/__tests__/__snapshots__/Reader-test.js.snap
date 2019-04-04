@@ -30,11 +30,24 @@ exports[`Reader Reader Container renders correctly 1`] = `
             className="button-index"
             onClick={[Function]}
           >
-            Contents
-            <i
-              aria-hidden="true"
-              className="manicon manicon-caret-down"
-            />
+            <span
+              className="button-index__text"
+            >
+              Contents
+            </span>
+            <svg
+              aria-hidden={true}
+              className="manicon-svg button-index__icon svg-icon--disclosureDown24"
+              fill="currentColor"
+              height={24}
+              viewBox="0 0 24 24"
+              width={24}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+              />
+            </svg>
           </button>
           <header
             className="title"
@@ -151,7 +164,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg svg-icon--search16"
+                    className="manicon-svg search-icon svg-icon--search16"
                     fill="currentColor"
                     height={22}
                     viewBox="0 0 16 16"
@@ -248,17 +261,27 @@ exports[`Reader Reader Container renders correctly 1`] = `
       className="container"
     >
       <div
-        className="rel"
+        className="footer-reader__inner"
       >
-        <section
-          className="colophon"
+        <svg
+          aria-hidden={true}
+          className="manicon-svg footer-reader__logo svg-icon--manifoldLogo32"
+          fill="currentColor"
+          height={48}
+          viewBox="0 0 32 32"
+          width={48}
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-manifold-logo"
+          <polygon
+            fillRule="evenodd"
+            points="29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22"
           />
+        </svg>
+        <section
+          className="footer-reader__colophon"
+        >
           <p
-            className="powered-by"
+            className="footer-reader__powered-by"
           >
             Powered by Manifold Scholarship. Learn more at 
             <a

@@ -38,12 +38,8 @@ export default class ListEntitiesListSectionTitle extends PureComponent {
 
   render() {
     return (
-      <header className="entity-list__title backend-header section-heading-tertiary">
-        {this.link(
-          <h2>
-            <span className="section-heading-tertiary__shim">{this.title}</span>
-          </h2>
-        )}
+      <header className="entity-list__title-block entity-list__title backend-header">
+        {this.link(<h2 className="backend-header__h2-title">{this.title}</h2>)}
       </header>
     );
   }

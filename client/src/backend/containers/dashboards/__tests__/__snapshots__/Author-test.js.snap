@@ -13,10 +13,6 @@ exports[`Backend Dashboards Author Container renders correctly 1`] = `
           <h3>
             Projects
              
-            <i
-              aria-hidden="true"
-              className="manicon manicon-stack"
-            />
           </h3>
         </header>
       </section>

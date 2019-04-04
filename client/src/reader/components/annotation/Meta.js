@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class AnnotationDetail extends PureComponent {
   static displayName = "Annotation.Meta";
@@ -96,7 +97,7 @@ export default class AnnotationDetail extends PureComponent {
     const { creator, annotation } = this.props;
     const avatarClass = classNames({
       "author-avatar": true,
-      dull: !creator.attributes.isCurrentUser
+      "author-avatar--dull": !creator.attributes.isCurrentUser
     });
 
     return (
@@ -106,7 +107,7 @@ export default class AnnotationDetail extends PureComponent {
           <figure className={avatarClass}>
             {creator.attributes.avatarStyles.smallSquare ? (
               <div
-                className="image"
+                className="author-avatar__image"
                 style={{
                   backgroundImage: `url(${
                     creator.attributes.avatarStyles.smallSquare
@@ -118,8 +119,12 @@ export default class AnnotationDetail extends PureComponent {
                 </span>
               </div>
             ) : (
-              <div className="no-image">
-                <i className="manicon manicon-person" aria-hidden="true" />
+              <div className="author-avatar__no-image">
+                <IconComposer
+                  icon="avatar64"
+                  size={39.385}
+                  iconClass="author-avatar__icon"
+                />
               </div>
             )}
           </figure>

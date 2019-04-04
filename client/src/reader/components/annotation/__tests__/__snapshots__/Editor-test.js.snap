@@ -50,11 +50,22 @@ exports[`Reader.Annotation.Editor component renders correctly 1`] = `
           />
           <span
             aria-hidden="true"
-            className="toggle-indicator"
+            className="checkbox__indicator"
           >
-            <i
-              className="manicon manicon-check-bold"
-            />
+            <svg
+              aria-hidden={true}
+              className="manicon-svg checkbox__icon svg-icon--check16"
+              height={16}
+              viewBox="0 0 16 16"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                fill="currentColor"
+                fillRule="nonzero"
+                points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
+              />
+            </svg>
           </span>
           <span
             className="toggle-label"
@@ -67,10 +78,14 @@ exports[`Reader.Annotation.Editor component renders correctly 1`] = `
         className="buttons"
       >
         <button
-          className="button-primary dull"
+          className="button-primary button-primary--dull"
           onClick={[Function]}
         >
-          Cancel
+          <span
+            className="button-primary__text"
+          >
+            Cancel
+          </span>
         </button>
         <button
           className="button-secondary"

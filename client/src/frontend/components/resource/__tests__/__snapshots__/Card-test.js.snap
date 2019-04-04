@@ -15,7 +15,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
       tabIndex="0"
     >
       <div
-        className="resource-link"
+        className="resource-card__link"
         onClick={[Function]}
         role="link"
         tabIndex="0"
@@ -58,21 +58,23 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
           </div>
         </div>
         <div
-          className="preview-text"
+          className="resource-card__preview-text"
         >
-          <span>
+          <span
+            className="resource-card__view-text"
+          >
             Preview
-            <i
-              aria-hidden="true"
-              className="manicon manicon-eye-outline"
-            />
           </span>
+          <i
+            aria-hidden="true"
+            className="manicon manicon-eye-outline"
+          />
         </div>
       </div>
     </div>
   </div>
   <section
-    className="resource-info"
+    className="resource-card__info"
     onClick={[Function]}
     onMouseOut={[Function]}
     onMouseOver={[Function]}
@@ -81,7 +83,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
   >
     <div>
       <header
-        className="resource-title"
+        className="resource-card__title"
       >
         <h4
           dangerouslySetInnerHTML={
@@ -92,7 +94,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
         />
       </header>
       <span
-        className="resource-date"
+        className="resource-card__date"
       >
         Uploaded
          
@@ -103,13 +105,22 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
         </time>
       </span>
       <div
-        className="arrow-link"
+        className="resource-card__arrow-link"
         to="/projects/slug-2/resource/slug-1"
       >
-        <i
-          aria-hidden="true"
-          className="manicon manicon-arrow-right"
-        />
+        <svg
+          aria-hidden={true}
+          className="manicon-svg resource-card__arrow-link-icon svg-icon--arrowRight16"
+          fill="currentColor"
+          height={20}
+          viewBox="0 0 16 16"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+          />
+        </svg>
       </div>
     </div>
     <nav

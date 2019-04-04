@@ -14,14 +14,10 @@
     padding: 30px 35px;
   }
 
-  ul li > i {
-    margin-right: 10px;
-    font-size: 23px;
+  &__group-icon {
+    margin-right: 6px;
+    margin-left: -4px;
     color: $neutral75;
-
-    &::before {
-      vertical-align: middle;
-    }
   }
 
   label, span {

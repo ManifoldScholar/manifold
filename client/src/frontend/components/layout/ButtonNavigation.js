@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-import throttle from "lodash/throttle";
 import lh from "helpers/linkHandler";
 import withCurrentUser from "hoc/with-current-user";
+import IconComposer from "global/components/utility/IconComposer";
 
 export class LayoutButtonNavigation extends Component {
   static displayName = "Layout.ButtonNavigation";
@@ -25,34 +25,18 @@ export class LayoutButtonNavigation extends Component {
     showProjectCollections: false
   };
 
-  constructor() {
-    super();
-    this._projectsButtonEl = null;
-    this._followingButtonEl = null;
+  renderButtonInner(icon, label) {
+    return (
+      <React.Fragment>
+        <IconComposer
+          icon={icon}
+          size={48}
+          iconClass="button-icon-primary__icon"
+        />
+        <span className="button-icon-primary__text">{label}</span>
+      </React.Fragment>
+    );
   }
-
-  componentDidMount() {
-    this.throttledWidth = throttle(() => {
-      this.matchButtonWidths();
-    }, 200);
-    window.addEventListener("resize", this.throttledWidth);
-  }
-
-  componentDidUpdate() {
-    this.matchButtonWidths();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.throttledWidth);
-  }
-
-  matchButtonWidths = () => {
-    if (!this._projectsButtonEl || !this._followingButtonEl) return;
-    // This currently gets the wrong measurement most of the time
-    // console.log(this._followingButtonEl.offsetWidth, 'offset width');
-    const target = this._followingButtonEl.offsetWidth;
-    this._projectsButtonEl.style.width = `${target}px`;
-  };
 
   renderProjectsButton = () => {
     if (!this.props.showProjects && !this.props.showProjectCollections)
@@ -70,14 +54,7 @@ export class LayoutButtonNavigation extends Component {
 
     return (
       <Link to={url} className="button-icon-primary">
-        <span
-          ref={node => {
-            this._projectsButtonEl = node;
-          }}
-        >
-          <i className="manicon manicon-books-on-shelf" aria-hidden="true" />
-          {label}
-        </span>
+        {this.renderButtonInner("projects64", label)}
       </Link>
     );
   };
@@ -87,17 +64,7 @@ export class LayoutButtonNavigation extends Component {
     if (this.props.showFollowing !== true) return null;
     return (
       <Link to={lh.link("frontendFollowing")} className="button-icon-primary">
-        <span
-          ref={node => {
-            this._followingButtonEl = node;
-          }}
-        >
-          <i
-            className="manicon manicon-books-with-glasses"
-            aria-hidden="true"
-          />
-          {"Projects You’re Following"}
-        </span>
+        {this.renderButtonInner("following64", "Projects You’re Following")}
       </Link>
     );
   };
@@ -113,7 +80,7 @@ export class LayoutButtonNavigation extends Component {
     return (
       <section className={sectionClass}>
         <div className="container">
-          <nav className="button-nav">
+          <nav className="button-nav button-nav--default">
             {this.renderProjectsButton()}
             {this.renderFollowingButton()}
           </nav>

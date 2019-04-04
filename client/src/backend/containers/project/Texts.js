@@ -10,6 +10,8 @@ import Authorize from "hoc/authorize";
 import Category from "backend/components/category";
 import { Link } from "react-router-dom";
 import cloneDeep from "lodash/cloneDeep";
+import classNames from "classnames";
+import IconComposer from "global/components/utility/IconComposer";
 
 const { request } = entityStoreActions;
 
@@ -62,6 +64,13 @@ export class ProjectTextsContainer extends Component {
       updateCategoryPosition: this.updateCategoryPosition,
       updateTextCategoryAndPosition: this.updateTextCategoryAndPosition
     };
+  }
+
+  get buttonClasses() {
+    return classNames(
+      "buttons-icon-horizontal__button",
+      "button-icon-secondary"
+    );
   }
 
   handleCategoryDestroy = category => {
@@ -178,10 +187,17 @@ export class ProjectTextsContainer extends Component {
           <div className="buttons-icon-horizontal maintain">
             <Link
               to={lh.link("backendProjectTextsIngestionsNew", this.project.id)}
-              className="button-icon-secondary"
+              className={this.buttonClasses}
             >
               <span className="screen-reader-text">Add a new text</span>
-              <i className="manicon manicon-plus" aria-hidden="true" />
+              <IconComposer
+                icon="plus16"
+                size={18}
+                iconClass={classNames(
+                  "button-icon-secondary__icon",
+                  "button-icon-secondary__icon--large"
+                )}
+              />
               <span className="full" aria-hidden="true">
                 Add a new text
               </span>
@@ -192,10 +208,17 @@ export class ProjectTextsContainer extends Component {
 
             <Link
               to={lh.link("backendProjectCategoriesNew", this.project.id)}
-              className="button-icon-secondary"
+              className={this.buttonClasses}
             >
               <span className="screen-reader-text">Add a new category</span>
-              <i className="manicon manicon-plus" aria-hidden="true" />
+              <IconComposer
+                icon="plus16"
+                size={18}
+                iconClass={classNames(
+                  "button-icon-secondary__icon",
+                  "button-icon-secondary__icon--large"
+                )}
+              />
               <span className="full" aria-hidden="true">
                 Create a new category
               </span>

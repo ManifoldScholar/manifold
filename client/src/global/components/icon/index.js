@@ -29,6 +29,7 @@ import BEResourcesBox64 from "./64/BEResourcesBox";
 import BEResourcesBoxes64 from "./64/BEResourcesBoxes";
 import Bookmark24 from "./24/Bookmark";
 import Bookmark32 from "./32/Bookmark";
+import Check16 from "./16/Check";
 import CircleArrowDown64 from "./64/CircleArrowDown";
 import CircleArrowLeft64 from "./64/CircleArrowLeft";
 import CircleArrowRight64 from "./64/CircleArrowRight";
@@ -116,6 +117,7 @@ import TextsStacked64 from "./64/TextsStacked";
 import Toc64 from "./64/Toc";
 import Touch64 from "./64/Touch";
 import Upload32 from "./32/Upload";
+import Upload64 from "./64/Upload";
 import WarningSign64 from "./64/WarningSign";
 
 export default {
@@ -150,6 +152,7 @@ export default {
   BEResourcesBoxes64,
   Bookmark24,
   Bookmark32,
+  Check16,
   CircleArrowDown64,
   CircleArrowLeft64,
   CircleArrowRight64,
@@ -237,5 +240,6 @@ export default {
   Toc64,
   Touch64,
   Upload32,
+  Upload64,
   WarningSign64
 };

@@ -19,11 +19,24 @@ exports[`Reader.Header Component renders correctly 1`] = `
         className="button-index"
         onClick={[Function]}
       >
-        Contents
-        <i
-          aria-hidden="true"
-          className="manicon manicon-caret-down"
-        />
+        <span
+          className="button-index__text"
+        >
+          Contents
+        </span>
+        <svg
+          aria-hidden={true}
+          className="manicon-svg button-index__icon svg-icon--disclosureDown24"
+          fill="currentColor"
+          height={24}
+          viewBox="0 0 24 24"
+          width={24}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <polygon
+            points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+          />
+        </svg>
       </button>
       <nav
         className="menu-buttons"
@@ -89,7 +102,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg svg-icon--search16"
+                className="manicon-svg search-icon svg-icon--search16"
                 fill="currentColor"
                 height={22}
                 viewBox="0 0 16 16"
@@ -252,7 +265,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg svg-icon--search16"
+                className="manicon-svg search-icon svg-icon--search16"
                 fill="currentColor"
                 height={22}
                 viewBox="0 0 16 16"

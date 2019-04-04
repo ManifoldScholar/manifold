@@ -10,10 +10,6 @@ exports[`Reader.Notes.Partial.GroupItem Component renders correctly 1`] = `
   <span
     className="screen-reader-text"
   />
-  <i
-    aria-hidden="true"
-    className="manicon manicon-null"
-  />
   <span>
     Gods, Earths, and 85ers
   </span>

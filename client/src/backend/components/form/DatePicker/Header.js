@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class DatePickerHeader extends Component {
   static displayName = "Form.DatePicker.Header";
@@ -40,14 +41,14 @@ export default class DatePickerHeader extends Component {
           className="react-datepicker__navigation react-datepicker__navigation--next"
           onClick={this.props.increaseMonth}
         >
-          <i className="manicon manicon-arrow-right" />
+          <IconComposer icon="arrowRight16" size={20} />
         </button>
         <button
           type="button"
           className="react-datepicker__navigation react-datepicker__navigation--previous"
           onClick={this.props.decreaseMonth}
         >
-          <i className="manicon manicon-arrow-left" />
+          <IconComposer icon="arrowLeft16" size={20} />
         </button>
         <div className="react-datepicker__current-month">
           {this.monthName} {this.year}

@@ -1,9 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import FormContainer from "backend/containers/form";
 import Form from "backend/components/form";
 import connectAndFetch from "utils/connectAndFetch";
 import lh from "helpers/linkHandler";
+import IconComposer from "global/components/utility/IconComposer";
 
 export class ResourceImportNew extends PureComponent {
   static displayName = "ResourceImport.New";
@@ -22,6 +24,13 @@ export class ResourceImportNew extends PureComponent {
     const url = lh.link("backendResourceImportMap", projectId, importId);
     this.props.history.push(url);
   };
+
+  get buttonClasses() {
+    return classNames(
+      "buttons-icon-horizontal__button",
+      "button-icon-secondary"
+    );
+  }
 
   afterUrlChange = (value, set, setOther) => {
     if (value) {
@@ -123,8 +132,12 @@ export class ResourceImportNew extends PureComponent {
             marginTop: "30px"
           }}
         >
-          <button type="submit" className="button-icon-secondary">
-            <i className="manicon manicon-check small" aria-hidden="true" />
+          <button type="submit" className={this.buttonClasses}>
+            <IconComposer
+              icon="check16"
+              size="default"
+              iconClass="button-icon-secondary__icon"
+            />
             <span>Continue</span>
           </button>
         </div>

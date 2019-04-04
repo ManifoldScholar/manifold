@@ -46,7 +46,7 @@ export default class AnnotationPopupLink extends PureComponent {
           onClick={this.handleViewLinkClick}
           kind="none"
           label="Follow Link"
-          iconClass="manicon-arrow-right"
+          icon="arrowRight32"
         />
         <Button
           key={"annotation"}
@@ -57,7 +57,7 @@ export default class AnnotationPopupLink extends PureComponent {
               ? "View Annotations"
               : "View Annotation"
           }
-          iconClass="manicon-word-bubble"
+          icon="comment32"
         />
       </Panel>
     );

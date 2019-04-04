@@ -9,6 +9,7 @@ import get from "lodash/get";
 import hasIn from "lodash/hasIn";
 import Dropzone from "react-dropzone";
 import lh from "helpers/linkHandler";
+import IconComposer from "global/components/utility/IconComposer";
 
 const { request } = entityStoreActions;
 
@@ -231,23 +232,18 @@ class UpdateFormContainer extends Component {
                       position: "absolute"
                     }}
                   >
-                    {this.hasAvatar() ? (
-                      <i
+                    {this.hasAvatar() && (
+                      <button
                         onClick={this.handleRemoveAvatar}
-                        role="button"
                         tabIndex="0"
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          right: -8,
-                          fontSize: 10
-                        }}
-                        className="manicon manicon-x"
-                      />
-                    ) : null}
+                        className="dropzone-button__cancel-button"
+                      >
+                        <IconComposer icon="close16" size="default" />
+                      </button>
+                    )}
                     <Avatar style={{ margin: 0 }} url={this.displayAvatar()} />
                   </div>
-                  <span className="dropzone-button-text">
+                  <span className="dropzone-button__text">
                     Upload a file or
                     <br />
                     drag and drop
@@ -381,7 +377,7 @@ class UpdateFormContainer extends Component {
           <div className="row-1-p">
             <div className="form-input form-error">
               <input
-                className="button-secondary button-with-room"
+                className="button-secondary button-secondary--with-room"
                 type="submit"
                 value="Save Changes"
               />
@@ -390,13 +386,21 @@ class UpdateFormContainer extends Component {
         </form>
 
         <div className="subscriptions">
-          <span>Adjust your settings for email notifications:</span>
+          <span className="subscriptions__label">
+            Adjust your settings for email notifications:
+          </span>
           <button
-            className="button-secondary outlined"
+            className="button-secondary button-secondary--outlined button-secondary--color-white"
             onClick={this.redirectToSubscriptions}
           >
-            {`Notification Settings`}
-            <i className="manicon manicon-arrow-long-right" />
+            <span className="button-secondary__text">
+              Notification Settings
+            </span>
+            <IconComposer
+              icon="arrowLongRight16"
+              size="default"
+              iconClass="button-secondary__icon"
+            />
           </button>
         </div>
       </section>

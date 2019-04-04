@@ -36,15 +36,25 @@
 
   .overlay-title {
     @include templateHead;
+    display: flex;
+    align-items: center;
     padding: 0.85em 0;
     margin: 0;
     font-size: 22px;
     font-weight: $medium;
     color: $neutral75;
-    text-align: left;
 
     @include respond($break65) {
-      text-align: center;
+      justify-content: center;
+    }
+
+    &__icon {
+      position: relative;
+      top: 1px;
+    }
+
+    &__text {
+      margin-left: 10px;
     }
   }
 
@@ -53,11 +63,12 @@
     position: absolute;
     top: 50%;
     right: 17px;
-    margin-top: -8px;
     color: $neutral75;
+    transform: translateY(-50%);
+
+    &__icon {}
 
     @include respond($break65) {
-      margin-top: -16px;
       font-size: 17px;
     }
   }

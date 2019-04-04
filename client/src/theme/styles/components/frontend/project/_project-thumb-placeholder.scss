@@ -42,6 +42,19 @@
     }
   }
 
+  &--outlined {
+    .project-thumb-placeholder__tile {
+      fill: transparent;
+    }
+
+    .project-thumb-placeholder__illustration {
+      .backend &,
+      .project-hero--dark & {
+        stroke: $neutral50;
+      }
+    }
+  }
+
   &__tile {
     fill: $neutralWhite;
   }

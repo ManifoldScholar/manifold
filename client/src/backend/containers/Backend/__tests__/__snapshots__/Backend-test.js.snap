@@ -96,8 +96,8 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                         <nav className=\\"user-links show-75\\">
                                           <ul style={[undefined]}>
                                             <li>
-                                              <Link className=\\"button-mode\\" to=\\"/\\" replace={false}>
-                                                <a className=\\"button-mode\\" onClick={[Function]} href=\\"/\\">
+                                              <Link className=\\"header-app__mode-button\\" to=\\"/\\" replace={false}>
+                                                <a className=\\"header-app__mode-button\\" onClick={[Function]} href=\\"/\\">
                                                   Exit Admin Mode
                                                 </a>
                                               </Link>
@@ -140,12 +140,19 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                   <withRouter(Navigation.Mobile) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
                                     <Route>
                                       <Navigation.Mobile backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
-                                        <nav className=\\"nested-nav hide-75\\">
-                                          <MobileBreadcrumb links={{...}} location={{...}}>
-                                            <div className=\\"selected\\" />
-                                          </MobileBreadcrumb>
-                                          <i role=\\"button\\" className=\\"manicon manicon-bars-parallel-horizontal\\" onClick={[Function]} />
-                                        </nav>
+                                        <MobileBreadcrumb links={{...}} location={{...}}>
+                                          <nav className=\\"breadcrumb-list hide-75\\" />
+                                        </MobileBreadcrumb>
+                                        <nav className=\\"hide-75 nested-nav\\" />
+                                        <button onClick={[Function]} className=\\"mobile-nav-trigger\\">
+                                          <IconComposer icon=\\"menu32\\" size=\\"default\\" iconClass=\\"mobile-nav-trigger__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
+                                            <Menu svgProps={{...}} iconClass=\\"mobile-nav-trigger__icon svg-icon--menu32\\" icon=\\"menu32\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                              <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg mobile-nav-trigger__icon svg-icon--menu32\\" width={32} height={32} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                                <path d=\\"M25,15.5 L25,16.5 L6.99999997,16.5 L6.99999997,15.5 L25,15.5 Z M25,8.49999998 L25,9.49999998 L6.99999997,9.49999998 L6.99999997,8.49999998 L25,8.49999998 Z M25,22.5 L25,23.5 L6.99999997,23.5 L6.99999997,22.5 L25,22.5 Z\\" />
+                                              </svg>
+                                            </Menu>
+                                          </IconComposer>
+                                        </button>
                                       </Navigation.Mobile>
                                     </Route>
                                   </withRouter(Navigation.Mobile)>
@@ -221,31 +228,31 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                     </div>
                                     <div className=\\"rel left\\">
                                       <nav className=\\"text-nav\\">
-                                        <ul>
-                                          <li>
-                                            <ul className=\\"footer-nav\\">
-                                              <li>
-                                                <span className=\\"fake-link\\" role=\\"button\\" tabIndex=\\"0\\" onClick={[Function]}>
+                                        <ul className=\\"text-nav__list\\">
+                                          <li className=\\"text-nav__link-group\\">
+                                            <ul className=\\"footer-nav-list\\">
+                                              <li className=\\"footer-nav-list__item\\">
+                                                <span role=\\"button\\" tabIndex=\\"0\\" onClick={[Function]} className=\\"footer-nav-list__link\\">
                                                   Log Out
                                                 </span>
                                               </li>
-                                              <li>
-                                                <Link to=\\"/\\" replace={false}>
-                                                  <a onClick={[Function]} href=\\"/\\">
+                                              <li className=\\"footer-nav-list__item\\">
+                                                <Link to=\\"/\\" className=\\"footer-nav-list__link\\" replace={false}>
+                                                  <a className=\\"footer-nav-list__link\\" onClick={[Function]} href=\\"/\\">
                                                     Home
                                                   </a>
                                                 </Link>
                                               </li>
-                                              <li>
-                                                <Link to=\\"/projects/all\\" replace={false}>
-                                                  <a onClick={[Function]} href=\\"/projects/all\\">
+                                              <li className=\\"footer-nav-list__item\\">
+                                                <Link to=\\"/projects/all\\" className=\\"footer-nav-list__link\\" replace={false}>
+                                                  <a className=\\"footer-nav-list__link\\" onClick={[Function]} href=\\"/projects/all\\">
                                                     Projects
                                                   </a>
                                                 </Link>
                                               </li>
                                             </ul>
                                           </li>
-                                          <li />
+                                          <li className=\\"text-nav__link-group\\" />
                                         </ul>
                                       </nav>
                                     </div>
@@ -263,7 +270,13 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                 <section aria-hidden=\\"true\\">
                                   <div className=\\"container flush\\">
                                     <span className=\\"logo\\">
-                                      <i className=\\"manicon manicon-manifold-logo\\" />
+                                      <IconComposer icon=\\"manifoldLogo32\\" size=\\"default\\" iconClass=\\"footer-tertiary__manifold-logo\\" fill=\\"currentColor\\" svgProps={{...}}>
+                                        <ManifoldLogo svgProps={{...}} iconClass=\\"footer-tertiary__manifold-logo svg-icon--manifoldLogo32\\" icon=\\"manifoldLogo32\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                          <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg footer-tertiary__manifold-logo svg-icon--manifoldLogo32\\" width={32} height={32} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                            <polygon fillRule=\\"evenodd\\" points=\\"29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22\\" />
+                                          </svg>
+                                        </ManifoldLogo>
+                                      </IconComposer>
                                       <span className=\\"text\\">
                                         <span className=\\"neutral-text\\">
                                           Powered by

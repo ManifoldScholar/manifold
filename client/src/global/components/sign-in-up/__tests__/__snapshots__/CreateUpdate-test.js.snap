@@ -168,7 +168,7 @@ exports[`Global.SignInUp.CreateUpdate component renders correctly 1`] = `
         className="form-input form-error"
       >
         <input
-          className="button-secondary button-with-room"
+          className="button-secondary button-secondary--with-room"
           type="submit"
           value="Save Changes"
         />
@@ -178,17 +178,33 @@ exports[`Global.SignInUp.CreateUpdate component renders correctly 1`] = `
   <div
     className="subscriptions"
   >
-    <span>
+    <span
+      className="subscriptions__label"
+    >
       Adjust your settings for email notifications:
     </span>
     <button
-      className="button-secondary outlined"
+      className="button-secondary button-secondary--outlined button-secondary--color-white"
       onClick={[Function]}
     >
-      Notification Settings
-      <i
-        className="manicon manicon-arrow-long-right"
-      />
+      <span
+        className="button-secondary__text"
+      >
+        Notification Settings
+      </span>
+      <svg
+        aria-hidden={true}
+        className="manicon-svg button-secondary__icon svg-icon--arrowLongRight16"
+        fill="currentColor"
+        height={16}
+        viewBox="0 0 24 16"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+        />
+      </svg>
     </button>
   </div>
 </section>

@@ -63,7 +63,7 @@ export class NavigationPrimary extends PureComponent {
     );
     const backendButton =
       backendButtonLabel && currentUser ? (
-        <Link className="button-mode" to={lh.link(linkTo)}>
+        <Link className="header-app__mode-button" to={lh.link(linkTo)}>
           {this.backendButtonLabel(currentUser, this.props.mode)}
         </Link>
       ) : null;

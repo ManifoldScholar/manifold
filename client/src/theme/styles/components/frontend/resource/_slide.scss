@@ -32,8 +32,6 @@
     }
   }
 
-
-
   // Transition classes
   .slide-left-enter figure {
     transform: translate3d(100%, 0, 0);
@@ -140,24 +138,6 @@
       }
     }
 
-    .manicon {
-      display: block;
-      margin-bottom: 4px;
-      color: $neutral40;
-
-      svg {
-        @include respond($break50) {
-          width: 21.34vw;
-          height: 21.34vw;
-        }
-
-        @include respond($break120) {
-          width: 220px;
-          height: 220px;
-        }
-      }
-    }
-
     .resource-type {
       @include utilityPrimary;
       display: block;
@@ -212,6 +192,21 @@
       .zoom-indicator {
         color: $accentPrimary;
       }
+    }
+  }
+
+  &__resource-icon {
+    margin-bottom: 4px;
+    color: $neutral40;
+
+    @include respond($break50) {
+      width: 21.34vw;
+      height: 21.34vw;
+    }
+
+    @include respond($break120) {
+      width: 220px;
+      height: 220px;
     }
   }
 }

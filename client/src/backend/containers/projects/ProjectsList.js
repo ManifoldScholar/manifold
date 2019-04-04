@@ -97,36 +97,40 @@ class ProjectsListContainerImplementation extends PureComponent {
     const label = totalCount > 1 || totalCount === 0 ? " Projects" : " Project";
 
     return (
-      <Layout.BackendPanel>
-        {this.props.projects && this.props.projectsMeta ? (
-          <EntitiesList
-            entityComponent={ProjectRow}
-            listStyle="grid"
-            title={label}
-            titleStyle="bar"
-            titleIcon="BEProject64"
-            entities={this.props.projects}
-            unit="project"
-            pagination={this.props.projectsMeta.pagination}
-            showCountInTitle
-            showCount
-            callbacks={{
-              onPageClick: this.updateHandlerCreator
-            }}
-            search={
-              <Search {...this.props.entitiesListSearchProps("projectsList")} />
-            }
-            buttons={[
-              <Button
-                path={lh.link("backendProjectsNew")}
-                text="Add a new project"
-                authorizedFor="project"
-                type="add"
-              />
-            ]}
-          />
-        ) : null}
-      </Layout.BackendPanel>
+      <div>
+        <Layout.BackendPanel flush>
+          {this.props.projects && this.props.projectsMeta ? (
+            <EntitiesList
+              entityComponent={ProjectRow}
+              listStyle="grid"
+              title={label}
+              titleStyle="bar"
+              titleIcon="BEProject64"
+              entities={this.props.projects}
+              unit="project"
+              pagination={this.props.projectsMeta.pagination}
+              showCountInTitle
+              showCount
+              callbacks={{
+                onPageClick: this.updateHandlerCreator
+              }}
+              search={
+                <Search
+                  {...this.props.entitiesListSearchProps("projectsList")}
+                />
+              }
+              buttons={[
+                <Button
+                  path={lh.link("backendProjectsNew")}
+                  text="Add a new project"
+                  authorizedFor="project"
+                  type="add"
+                />
+              ]}
+            />
+          ) : null}
+        </Layout.BackendPanel>
+      </div>
     );
   }
 }

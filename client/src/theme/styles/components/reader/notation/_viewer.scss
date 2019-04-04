@@ -175,8 +175,6 @@
     z-index: 10;
     width: 17px;
     height: 17px;
-    padding-top: 2px;
-    font-size: 11px;
     color: $neutralOffBlack;
     cursor: pointer;
     background-color: $neutral40;
@@ -185,6 +183,10 @@
     &:hover, &:focus {
       background-color: $sp30Tertiary;
       outline: 0;
+    }
+
+    &__icon {
+      vertical-align: top;
     }
   }
 }

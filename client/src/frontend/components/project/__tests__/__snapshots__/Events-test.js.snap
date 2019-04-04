@@ -6,19 +6,35 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
     className="bg-neutral05"
   >
     <a
-      className="back-link-primary full"
+      className="back-link-primary back-link-primary--full"
       href="/projects/slug-1"
       onClick={[Function]}
     >
       <div
-        className="container flush"
+        className="container flush back-link-primary__container"
       >
-        <i
-          aria-hidden="true"
-          className="manicon manicon-arrow-left"
-        />
-        Back to Project
-        <span>
+        <svg
+          aria-hidden={true}
+          className="manicon-svg back-link-primary__icon svg-icon--arrowLeft16"
+          fill="currentColor"
+          height={16}
+          viewBox="0 0 16 16"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+            transform="rotate(180 8 8)"
+          />
+        </svg>
+        <span
+          className="back-link-primary__back-text"
+        >
+          Back to Project
+        </span>
+        <span
+          className="back-link-primary__title"
+        >
           Rowan Test
         </span>
       </div>
@@ -34,10 +50,19 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
         <div
           className="main"
         >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-pulse"
-          />
+          <svg
+            aria-hidden={true}
+            className="manicon-svg svg-icon--recentActivity64"
+            fill="currentColor"
+            height={56}
+            viewBox="0 0 64 64"
+            width={56}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M52.2719644,33.923 C52.6836878,32.7575987 53.7950317,31.9226 55.1014,31.9226 C56.7582543,31.9226 58.1014,33.2657458 58.1014,34.9226 C58.1014,36.5794543 56.7582543,37.9226 55.1014,37.9226 C53.7953307,37.9226 52.6841965,37.0879834 52.2722472,35.923 L42.9973494,35.923 L40.4160081,29.7522578 L32.4410526,47.1836502 L23.6697341,22.3737189 L18.0026907,35.923 L5.89899996,35.923 L5.89899996,33.923 L16.6713092,33.923 L23.8262659,16.816281 L32.6789474,41.8563499 L40.497992,24.7657422 L44.3286507,33.923 L52.2719644,33.923 L52.2719644,33.923 Z"
+            />
+          </svg>
           <div
             className="body"
           >
@@ -294,18 +319,30 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
       className="container"
     >
       <nav
-        className="button-nav"
+        className="button-nav button-nav--default"
       >
         <a
           className="button-icon-primary"
           href="/projects/all"
           onClick={[Function]}
         >
-          <span>
-            <i
-              aria-hidden="true"
-              className="manicon manicon-books-on-shelf"
+          <svg
+            aria-hidden={true}
+            className="manicon-svg button-icon-primary__icon svg-icon--projects64"
+            fill="currentColor"
+            height={48}
+            viewBox="0 0 64 64"
+            width={48}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M48.522,10 L36.417,11.872 L42.4,50.553 L35.188,50.553 L35.188,11.257 L22.939,11.257 L22.939,50.553 L20.819,50.553 L20.819,11.257 L8.57,11.257 L8.57,50.553 L4,50.553 L4,52.553 L59.467,52.553 L59.467,50.553 L50.237,50.553 L54.688,49.865 L48.522,10 Z M38.699,13.542 L46.851,12.281 L52.405,48.194 L44.254,49.455 L38.699,13.542 Z M24.939,15.622 L33.188,15.622 L33.188,13.257 L24.939,13.257 L24.939,15.622 Z M10.57,16.689 L18.819,16.689 L18.819,13.257 L10.57,13.257 L10.57,16.689 Z M24.939,19.725 L33.188,19.725 L33.188,17.622 L24.939,17.622 L24.939,19.725 Z M10.57,44.164 L18.819,44.164 L18.819,18.689 L10.57,18.689 L10.57,44.164 Z M24.939,41.127 L33.188,41.127 L33.188,21.726 L24.939,21.726 L24.939,41.127 Z M24.939,45.23 L33.188,45.23 L33.188,43.127 L24.939,43.127 L24.939,45.23 Z M10.57,49.596 L18.819,49.596 L18.819,46.163 L10.57,46.163 L10.57,49.596 Z M24.939,49.595 L33.188,49.595 L33.188,47.23 L24.939,47.23 L24.939,49.595 Z M45.8783,32.9758 C47.0433,32.7958 47.8403,31.7058 47.6603,30.5418 C47.4803,29.3778 46.3903,28.5798 45.2263,28.7598 C44.0623,28.9408 43.2643,30.0308 43.4443,31.1948 C43.6243,32.3588 44.7143,33.1568 45.8783,32.9758"
+              fillRule="evenodd"
             />
+          </svg>
+          <span
+            className="button-icon-primary__text"
+          >
             See All Projects
           </span>
         </a>

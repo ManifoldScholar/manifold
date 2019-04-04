@@ -280,13 +280,20 @@
         }
       }
 
-      img {
+      img, svg {
         display: inline-block;
         width: 42px;
         height: auto;
+      }
+
+      img {
         margin-right: 6px;
         border: 2px solid $neutralWhite;
         border-radius: 100%;
+      }
+
+      svg {
+        margin-right: 4px;
       }
 
       figcaption {

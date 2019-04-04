@@ -75,9 +75,11 @@ export default class ProjectListPlaceholder extends Component {
               {this.defaultMessage()}
             </Authorize>
             <Utility.IconComposer icon="BooksOnShelfColorUnique" />
-            <div className="button">
+            <div className="project-list-placeholder__button-nav button-nav">
               <Link to={lh.link("backend")} className="button-icon-primary">
-                <span>{"Create a collection Now"}</span>
+                <span className="button-icon-primary__text">
+                  {"Create a collection Now"}
+                </span>
               </Link>
             </div>
           </div>

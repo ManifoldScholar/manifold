@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import withPluginReplacement from "hoc/with-plugin-replacement";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
 import Utility from "global/components/utility";
+import classNames from "classnames";
 
 class LayoutFooter extends Component {
   static displayName = "Layout.Footer";
@@ -84,6 +85,7 @@ class LayoutFooter extends Component {
       <Link
         to={lh.link("frontendPage", page.attributes.slug)}
         target={page.attributes.openInNewTab ? "_blank" : null}
+        className="footer-nav-list__link"
       >
         {page.attributes.navTitle || page.attributes.title}
       </Link>
@@ -96,6 +98,7 @@ class LayoutFooter extends Component {
         href={page.attributes.externalLink}
         target={page.attributes.openInNewTab ? "_blank" : null}
         rel="noopener noreferrer"
+        className="footer-nav-list__link"
       >
         {page.attributes.navTitle || page.attributes.title}
       </a>
@@ -106,17 +109,21 @@ class LayoutFooter extends Component {
     if (this.props.authentication.authenticated) {
       return (
         <span
-          className="fake-link"
           role="button"
           tabIndex="0"
           onClick={this.handleLogoutClick}
+          className="footer-nav-list__link"
         >
           {"Log Out"}
         </span>
       );
     }
     return (
-      <span className="fake-link" role="button" onClick={this.handleLoginClick}>
+      <span
+        className="footer-nav-list__link"
+        role="button"
+        onClick={this.handleLoginClick}
+      >
         {"Log In"}
       </span>
     );
@@ -126,8 +133,12 @@ class LayoutFooter extends Component {
     if (!this.props.settings) return null;
     if (!this.props.settings.attributes.general.contactEmail) return null;
     return (
-      <Link to={lh.link("frontendContact")}>
-        <i className="manicon manicon-envelope-simple" />
+      <Link to={lh.link("frontendContact")} className="footer-nav-list__link">
+        <Utility.IconComposer
+          icon="socialEmail32"
+          size={24}
+          iconClass="footer-nav-list__icon"
+        />
         {"Email"}
       </Link>
     );
@@ -142,8 +153,13 @@ class LayoutFooter extends Component {
         target="_blank"
         rel="noopener noreferrer"
         href={`https://twitter.com/${name}`}
+        className="footer-nav-list__link"
       >
-        <i className="manicon manicon-twitter" />
+        <Utility.IconComposer
+          icon="socialTwitter32"
+          size={24}
+          iconClass="footer-nav-list__icon"
+        />
         {"Twitter"}
       </a>
     );
@@ -158,8 +174,13 @@ class LayoutFooter extends Component {
         target="_blank"
         rel="noopener noreferrer"
         href={`https://www.facebook.com/${page}`}
+        className="footer-nav-list__link"
       >
-        <i className="manicon manicon-facebook" />
+        <Utility.IconComposer
+          icon="socialFacebook32"
+          size={24}
+          iconClass="footer-nav-list__icon"
+        />
         {"Facebook"}
       </a>
     );
@@ -168,8 +189,19 @@ class LayoutFooter extends Component {
   buildPagesArray() {
     const pages = [];
     pages.push(this.buildAuthLink());
-    pages.push(<Link to={lh.link("frontend")}>{"Home"}</Link>);
-    pages.push(<Link to={lh.link("frontendProjectsAll")}>{"Projects"}</Link>);
+    pages.push(
+      <Link to={lh.link("frontend")} className="footer-nav-list__link">
+        {"Home"}
+      </Link>
+    );
+    pages.push(
+      <Link
+        to={lh.link("frontendProjectsAll")}
+        className="footer-nav-list__link"
+      >
+        {"Projects"}
+      </Link>
+    );
     pages.push(...this.buildContentPages());
     return pages.filter(p => p !== null);
   }
@@ -217,12 +249,14 @@ class LayoutFooter extends Component {
   }
 
   /* eslint-disable react/no-array-index-key */
-  renderLinkColumn(links, wrapperClass) {
+  renderLinkColumn(links) {
     if (links.length === 0) return null;
     return (
-      <ul className={wrapperClass}>
+      <ul className="footer-nav-list">
         {links.map((link, index) => (
-          <li key={index}>{link}</li>
+          <li key={index} className="footer-nav-list__item">
+            {link}
+          </li>
         ))}
       </ul>
     );
@@ -296,18 +330,21 @@ class LayoutFooter extends Component {
                 </div>
                 <div className="rel left">
                   <nav className="text-nav">
-                    <ul>
+                    <ul className="text-nav__list">
                       {chunkedPages.map(
                         (pageGroup, pageGroupIndex) => (
                           /* eslint-disable react/no-array-index-key */
-                          <li key={pageGroupIndex}>
-                            {this.renderLinkColumn(pageGroup, "footer-nav")}
+                          <li
+                            key={pageGroupIndex}
+                            className="text-nav__link-group"
+                          >
+                            {this.renderLinkColumn(pageGroup)}
                           </li>
                         )
                         /* eslint-enable react/no-array-index-key */
                       )}
-                      <li>
-                        {this.renderLinkColumn(socialLinks, "social-nav")}
+                      <li className="text-nav__link-group">
+                        {this.renderLinkColumn(socialLinks)}
                       </li>
                     </ul>
                   </nav>
@@ -331,7 +368,13 @@ class LayoutFooter extends Component {
             <section aria-hidden="true">
               <div className="container flush">
                 <span className={isPressLogo ? "logo dull" : "logo"}>
-                  <i className="manicon manicon-manifold-logo" />
+                  <Utility.IconComposer
+                    icon="manifoldLogo32"
+                    size="default"
+                    iconClass={classNames("footer-tertiary__manifold-logo", {
+                      "footer-tertiary__manifold-logo--dull": isPressLogo
+                    })}
+                  />
                   <span className="text">
                     <span className="neutral-text">Powered by</span>
                     <span className="white-text"> Manifold</span>

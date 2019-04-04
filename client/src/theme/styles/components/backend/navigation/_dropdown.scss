@@ -7,34 +7,48 @@
   text-transform: none;
   background-color: $neutral100;
 
-  .trigger {
+  &__trigger {
     @include buttonUnstyled;
     width: 100%;
-  }
+    transition: color $duration $timing;
 
-  &.open {
-    .selected {
+    &:hover {
       color: $accentPrimary;
-
-      .manicon {
-        transform: rotate(-180deg);
-      }
+      cursor: pointer;
     }
 
-    ul {
-      visibility: visible;
-      opacity: 1;
+    &:focus {
+      outline-width: 0;
     }
-  }
 
-  &.static {
-    &:hover .selected {
+    .dropdown-nav--open & {
+      color: $accentPrimary;
+    }
+
+    .dropdown-nav--static:hover & {
       color: $neutralWhite;
       cursor: default;
     }
   }
 
-  ul {
+  &__trigger-icon {
+    margin-top: 3px;
+    margin-left: 10px;
+    transition: transform $duration $timing;
+
+    .dropdown-nav--open & {
+      transform: rotate(-180deg);
+    }
+  }
+
+  &__selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 0 11px;
+  }
+
+  &__nav-list {
     @include listUnstyled;
     position: absolute;
     width: 100%;
@@ -46,43 +60,29 @@
     opacity: 0;
     transition: opacity $durationSlow $timing, visibility $durationSlow $timing;
 
-    li {
-      a {
-        display: inline-block;
-        width: 100%;
-        padding-top: 7px;
-        padding-bottom: 7px;
-        color: $neutral45;
-        text-decoration: none;
-        transition: color $duration $timing;
-
-        &:hover {
-          color: $accentPrimary;
-        }
-
-        &.active {
-          color: $accentPrimary;
-        }
-      }
+    .dropdown-nav--open & {
+      visibility: visible;
+      opacity: 1;
     }
   }
 
-  .selected {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
+  &__nav-item {}
 
-    .manicon {
-      margin-top: 3px;
-      margin-left: 10px;
-      font-size: 8px;
-      transition: transform $duration $timing;
-    }
+  &__link {
+    display: inline-block;
+    width: 100%;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: $neutral45;
+    text-decoration: none;
+    transition: color $duration $timing;
 
     &:hover {
       color: $accentPrimary;
-      cursor: pointer;
+    }
+
+    &--active {
+      color: $accentPrimary;
     }
   }
 }

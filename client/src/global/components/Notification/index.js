@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class Notification extends Component {
   static propTypes = {
@@ -50,7 +51,11 @@ export default class Notification extends Component {
             onClick={this.handleClose}
             data-id="close"
           >
-            <i className="manicon manicon-x" aria-hidden="true" />
+            <IconComposer
+              icon="close32"
+              size={42.667}
+              iconClass="notification-close__icon"
+            />
             <span className="screen-reader-text">{"Dismiss"}</span>
           </button>
         </div>

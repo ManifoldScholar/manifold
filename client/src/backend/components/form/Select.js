@@ -4,6 +4,7 @@ import labelId from "helpers/labelId";
 import GlobalForm from "global/components/form";
 import Instructions from "./Instructions";
 import withFormOptions from "hoc/with-form-options";
+import IconComposer from "global/components/utility/IconComposer";
 
 class FormSelect extends Component {
   static displayName = "Form.Select";
@@ -58,7 +59,11 @@ class FormSelect extends Component {
         >
           <label htmlFor={this.id}>{this.props.label}</label>
           <div className="form-select">
-            <i className="manicon manicon-caret-down" aria-hidden="true" />
+            <IconComposer
+              icon="disclosureDown16"
+              size={20}
+              iconClass="form-select__icon"
+            />
             <select
               id={this.id}
               aria-describedby={this.props.idForError}

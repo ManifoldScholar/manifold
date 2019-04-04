@@ -30,8 +30,9 @@ export default class FilteredList extends PureComponent {
   renderHeading() {
     return (
       <div className="drawer-bar">
-        <h2 className="drawer-title">
+        <h2 className="drawer-bar__title drawer-bar__title--large">
           <div
+            className="drawer-bar__title-button"
             role="button"
             tabIndex="0"
             onClick={this.props.handleSeeAllClick}
@@ -44,7 +45,7 @@ export default class FilteredList extends PureComponent {
             onClick={this.props.handleSeeAllClick}
             className="button-primary"
           >
-            See all
+            <span className="button-primary__text">See all</span>
           </button>
         ) : null}
       </div>

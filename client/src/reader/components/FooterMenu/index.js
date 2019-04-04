@@ -20,16 +20,6 @@ export default class Footer extends Component {
         <div className="container">
           <nav className="menu-buttons">
             <ul>
-              {/*
-                These buttons are hidden until functionality is
-                provided for them
-                <li>
-                  <button className="button-bookmarks">
-                    <i className="manicon manicon-bookmark-outline" aria-hidden="true"></i>
-                    <span className="Show text bookmarks"></span>
-                  </button>
-                </li>
-               */}
               <Authorize kind={"any"}>
                 <li>
                   <ControlMenu.NotesButton

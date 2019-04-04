@@ -1,18 +1,23 @@
-.project-collection-sort.form-flex {
+.project-collection-sort {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 20px;
 
   @include respond($break60) {
-    margin-bottom: 0;
+    flex-flow: row wrap;
+    align-items: flex-start;
   }
 
-  @include respond($break75) {
-    margin-bottom: 20px;
-  }
-
-  // scope .form-list-fiter styles
   .form-list-filter {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
     padding-bottom: 0;
+
+    @include respond($break60) {
+      flex-basis: 100%;
+      flex-direction: row;
+    }
 
     .instructional-copy {
       @include formInstructions;
@@ -20,10 +25,29 @@
     }
 
     .select-group {
+      flex: 0 1 auto;
       margin-bottom: 20px;
+
+      & + & {
+        margin-top: 0;
+      }
 
       @include respond($break60) {
         flex: 0 1 auto;
+        margin-right: 11px;
+        margin-left: 11px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        + .select-group {
+          margin-top: 0;
+        }
       }
 
       label {

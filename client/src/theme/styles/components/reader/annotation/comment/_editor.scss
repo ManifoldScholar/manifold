@@ -2,7 +2,7 @@
   @include drawerIndent(padding-left);
   padding-top: 18px;
 
-  .editor-label {
+  &__editor-label {
     @include utilityPrimary;
     display: flex;
     align-items: center;
@@ -14,16 +14,17 @@
     @include respond($break60) {
       font-size: 16px;
     }
+  }
 
-    .manicon {
-      margin-right: 13px;
-      font-size: 2em;
-      color: $neutral40;
+  &__label-icon {
+    margin-right: 7px;
+    margin-left: -3px;
+    color: $neutral40;
 
-      @include respond($break60) {
-        margin-right: 15px;
-        font-size: 2.313em;
-      }
+    @include respond($break60) {
+      width: 59.048px;
+      height: 59.048px;
+      margin-right: 9px;
     }
   }
 
@@ -62,30 +63,28 @@
 
     .button-secondary {
       min-width: 98px;
-      transition: background-color $duration $timing;
-    }
-
-    .button-secondary {
       padding: 1.188em 1.875em 1em;
+      transition: background-color $duration $timing;
+
+      &--dull {
+        color: $neutral70;
+        background-color: $neutral30;
+
+        &:hover {
+          color: $neutralWhite;
+          background-color: $neutral70;
+        }
+      }
+
+      &[disabled='disabled'],
+      &:disabled {
+        background-color: $accentPrimaryDull;
+      }
 
       .manicon-word-bubble-lines {
         margin-right: 0.469em;
         font-size: 2em;
       }
-    }
-
-    .button-secondary.dull {
-      color: $neutral70;
-      background-color: $neutral30;
-
-      &:hover {
-        color: $neutralWhite;
-        background-color: $neutral70;
-      }
-    }
-
-    .button-secondary[disabled='disabled'], .button-secondary:disabled {
-      background-color: $accentPrimaryDull;
     }
   }
 

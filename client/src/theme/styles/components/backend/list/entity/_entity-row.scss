@@ -89,6 +89,7 @@
     @include templateCopy;
     flex-grow: 1;
     align-self: flex-start;
+    width: 100%;
     font-size: 17px;
     font-weight: $regular;
     color: $neutral50;

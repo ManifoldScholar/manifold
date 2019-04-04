@@ -62,14 +62,14 @@ export default class ContentBlockDrawerHeader extends PureComponent {
         onClick: this.onVisibilityToggle,
         label: this.hidden ? "show" : "hide",
         icon: this.hidden ? "eyeOpen32" : "eyeClosed32",
-        iconClass: "highlight"
+        iconClass: "utility-button__icon--highlight"
       });
     if (this.onDelete)
       buttons.push({
         onClick: this.onDelete,
         label: "delete",
         icon: "delete32",
-        iconClass: "notice"
+        iconClass: "utility-button__icon--notice"
       });
     return buttons;
   }

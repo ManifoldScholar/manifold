@@ -1,7 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import ListItem from "./ListItem";
 import EntitiesList from "backend/components/list/EntitiesList";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ProjectCollectionList extends PureComponent {
   static displayName = "ProjectCollection.List";
@@ -38,10 +40,17 @@ export default class ProjectCollectionList extends PureComponent {
         />
         <div className="actions">
           <button
-            className="button-icon-secondary"
+            className="button-icon-secondary button-icon-secondary--full"
             onClick={this.props.onShowNew}
           >
-            <i className="manicon manicon-plus" />
+            <IconComposer
+              icon="plus16"
+              size={20}
+              iconClass={classNames(
+                "button-icon-secondary__icon",
+                "button-icon-secondary__icon--large"
+              )}
+            />
             <span>Create New Collection</span>
           </button>
         </div>

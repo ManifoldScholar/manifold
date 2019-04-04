@@ -14,14 +14,29 @@ exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
                     <div className=\\"drawer-backend\\">
                       <focus-trap-react active={false} focusTrapOptions={{...}}>
                         <div className=\\"drawer-bar\\">
-                          <div className=\\"drawer-title\\">
-                            wrapper
+                          <div className=\\"drawer-bar__title\\">
+                            <span className=\\"drawer-bar__title-text\\">
+                              wrapper
+                            </span>
                           </div>
-                          <div onClick={[Function]} role=\\"button\\" tabIndex=\\"0\\" className=\\"close-button-primary\\">
-                            <span className=\\"close-text\\">
+                          <div onClick={[Function]} role=\\"button\\" tabIndex=\\"0\\" className=\\"drawer-bar__close-button\\">
+                            <span className=\\"drawer-bar__close-text\\">
                               Close
                             </span>
-                            <i className=\\"manicon manicon-x\\" aria-hidden=\\"true\\" />
+                            <IconComposer icon=\\"close32\\" size={46.222} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--large\\" fill=\\"currentColor\\" svgProps={{...}}>
+                              <Close svgProps={{...}} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--large svg-icon--close32\\" icon=\\"close32\\" size={46.222} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg drawer-bar__close-icon drawer-bar__close-icon--large svg-icon--close32\\" width={46.222} height={46.222} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                  <path d=\\"M7.00007316,7.70847994 L7.70712678,7.00132 L24.9999268,24.2915201 L24.2928732,24.99868 L7.00007316,7.70847994 Z M7.70712678,24.99868 L7.00007316,24.2915201 L24.2928732,7.00132 L24.9999268,7.70847994 L7.70712678,24.99868 Z\\" />
+                                </svg>
+                              </Close>
+                            </IconComposer>
+                            <IconComposer icon=\\"close16\\" size=\\"default\\" iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--small\\" fill=\\"currentColor\\" svgProps={{...}}>
+                              <Close svgProps={{...}} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--small svg-icon--close16\\" icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg drawer-bar__close-icon drawer-bar__close-icon--small svg-icon--close16\\" width={16} height={16} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                  <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
+                                </svg>
+                              </Close>
+                            </IconComposer>
                           </div>
                         </div>
                       </focus-trap-react>

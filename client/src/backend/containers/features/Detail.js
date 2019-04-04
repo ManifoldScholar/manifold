@@ -11,6 +11,7 @@ import Navigation from "backend/components/navigation";
 import FrontendLayout from "frontend/components/layout";
 import withConfirmation from "hoc/with-confirmation";
 import get from "lodash/get";
+import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
 
@@ -166,10 +167,14 @@ class FeatureDetailContainer extends PureComponent {
 
   renderUtility() {
     return (
-      <div>
-        <button onClick={this.handleDestroy} className="button-bare-primary">
-          <i className="manicon manicon-trashcan" aria-hidden="true" />
-          Delete
+      <div className="utility-button-group utility-button-group--inline">
+        <button onClick={this.handleDestroy} className="utility-button">
+          <IconComposer
+            icon="delete32"
+            size={26}
+            iconClass="utility-button__icon utility-button__icon--notice"
+          />
+          <span className="utility-button__text">Delete</span>
         </button>
       </div>
     );

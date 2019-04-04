@@ -19,7 +19,7 @@ export default class KindPicker extends Component {
   };
 
   render() {
-    const selected = this.isSmart ? "Smart Collection" : "Manual Collection";
+    const selected = this.isSmart ? "Smart" : "Manual";
 
     return (
       <div className="form-input">
@@ -32,12 +32,12 @@ export default class KindPicker extends Component {
             selected={selected}
             label="kind"
             optionOne={{
-              label: "Manual Collection",
-              iconClass: "manicon-collection-manual"
+              label: "Manual",
+              icon: "BECollectionManual64"
             }}
             optionTwo={{
-              label: "Smart Collection",
-              iconClass: "manicon-collection-smart"
+              label: "Smart",
+              icon: "BECollectionSmart64"
             }}
           />
         </div>

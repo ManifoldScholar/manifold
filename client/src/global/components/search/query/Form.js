@@ -226,7 +226,7 @@ export default class SearchQueryForm extends PureComponent {
         ) : null}
         {this.props.searchType === "frontend" ? (
           <button type="submit" className="button-primary">
-            {"Search"}
+            <span className="button-primary__text">Search</span>
           </button>
         ) : null}
       </div>
@@ -250,7 +250,7 @@ export default class SearchQueryForm extends PureComponent {
           />
           <button type="submit" className="search-submit">
             <Utility.IconComposer
-              className="search-icon"
+              iconClass="search-icon"
               icon="search16"
               size={22}
             />
@@ -281,8 +281,12 @@ export default class SearchQueryForm extends PureComponent {
                       checked={this.state.scope === scope.value}
                       onChange={this.makeScopeHandler(scope.value)}
                     />
-                    <div className="control-indicator" aria-hidden="true">
-                      <i className="manicon manicon-check" />
+                    <div className="checkbox__indicator" aria-hidden="true">
+                      <Utility.IconComposer
+                        icon="check16"
+                        size="default"
+                        iconClass="checkbox__icon"
+                      />
                     </div>
                     {scope.label}
                   </label>
@@ -304,8 +308,12 @@ export default class SearchQueryForm extends PureComponent {
                   onChange={this.makeFacetHandler("All")}
                 />
                 {/* Fake control to allow for custom checkbox styles */}
-                <div className="control-indicator" aria-hidden="true">
-                  <i className="manicon manicon-check" />
+                <div className="checkbox__indicator" aria-hidden="true">
+                  <Utility.IconComposer
+                    icon="check16"
+                    size="default"
+                    iconClass="checkbox__icon"
+                  />
                 </div>
                 {"Everything"}
               </label>
@@ -325,8 +333,12 @@ export default class SearchQueryForm extends PureComponent {
                       onChange={this.makeFacetHandler(facet.value)}
                     />
                     {/* Fake control to allow for custom checkbox styles */}
-                    <div className="control-indicator" aria-hidden="true">
-                      <i className="manicon manicon-check" />
+                    <div className="checkbox__indicator" aria-hidden="true">
+                      <Utility.IconComposer
+                        icon="check16"
+                        size="default"
+                        iconClass="checkbox__icon"
+                      />
                     </div>
                     {facet.label}
                   </label>

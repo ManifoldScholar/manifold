@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import Utility from "global/components/utility";
 import Authorize from "hoc/authorize";
 
@@ -19,19 +20,23 @@ export default class DrawerEntityHeaderButton extends PureComponent {
     iconClass: ""
   };
 
+  get buttonClasses() {
+    return classNames(this.props.iconClass, "utility-button__icon");
+  }
+
   get Button() {
     return (
       <button
-        className="button-bare-primary"
+        className="utility-button"
         onClick={this.props.onClick}
         type="button"
       >
         <Utility.IconComposer
           icon={this.props.icon}
           size={24}
-          iconClass={this.props.iconClass}
+          iconClass={this.buttonClasses}
         />
-        {this.props.label}
+        <span className="utility-button__text">{this.props.label}</span>
       </button>
     );
   }

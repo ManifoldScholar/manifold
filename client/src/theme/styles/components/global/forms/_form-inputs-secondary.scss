@@ -192,7 +192,7 @@
     }
 
     &.submit {
-      .button-secondary, .button-secondary-dull {
+      .button-secondary, .button-secondary--dull {
         line-height: normal;
 
         + .button-secondary {
@@ -249,13 +249,13 @@
   .form-select {
     width: auto;
 
-    .manicon-caret-down {
+    &__icon {
       position: absolute;
-      top: 52%;
-      right: 6px;
-      font-size: 0.6em;
+      top: 42%;
+      right: 4px;
       color: $accentPrimary;
       pointer-events: none;
+      transform: translateY(-50%);
 
       // Use native dropdown arrow in IE9
       .ie9 & {
@@ -338,14 +338,11 @@
         overflow-wrap: break-word;
       }
 
-      .manicon-document {
+      &__icon {
         display: block;
-        padding-bottom: 22px;
-        font-size: 56px;
-        color: $neutralWhite;
-        text-align: center;
+        margin: 0 auto 20px;
+        color: $neutral10;
       }
-
     }
 
     .contents-image-preview {
@@ -394,6 +391,7 @@
     .contents-empty {
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
       height: 200px;
       padding: 15px;
@@ -415,12 +413,9 @@
       height: auto;
     }
 
-    .manicon-cloud-up {
+    .contents-empty__icon {
       display: block;
-      padding-bottom: 15px;
-      font-size: 36px;
       color: $neutralWhite;
-      text-align: center;
     }
 
   }

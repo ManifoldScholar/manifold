@@ -14,7 +14,7 @@ exports[`Backend Developer Container renders correctly 1`] = `
         }
       >
         <button
-          className="button-secondary outlined"
+          className="button-secondary button-secondary--outlined"
           onClick={[Function]}
         >
           Start websocket connection
@@ -28,7 +28,7 @@ exports[`Backend Developer Container renders correctly 1`] = `
         }
       >
         <button
-          className="button-secondary outlined"
+          className="button-secondary button-secondary--outlined"
           onClick={[Function]}
         >
           Close websocket connection

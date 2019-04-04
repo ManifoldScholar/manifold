@@ -29,7 +29,7 @@ class Fields extends Component {
             onClick: this.props.handleDestroy,
             icon: "delete32",
             label: "delete",
-            iconClass: "notice"
+            iconClass: "utility-button__icon--notice"
           }
         ]
       : [];

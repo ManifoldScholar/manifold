@@ -15,20 +15,20 @@ exports[`Frontend.Utility.Toggle component renders correctly 1`] = `
       <div
         className="button-switch-primary__side button-switch-primary__side--selected"
       >
-        <i
-          aria-hidden="true"
-          className="manicon manicon-cube-outline"
-        />
-        resources
+        <span
+          className="button-switch-primary__label"
+        >
+          resources
+        </span>
       </div>
       <div
         className="button-switch-primary__side"
       >
-        <i
-          aria-hidden="true"
-          className="manicon manicon-file-box"
-        />
-        collection
+        <span
+          className="button-switch-primary__label"
+        >
+          collection
+        </span>
       </div>
     </div>
   </button>

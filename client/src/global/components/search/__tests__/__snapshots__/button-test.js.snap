@@ -8,7 +8,7 @@ exports[`Reader.Search.Button component renders correctly when active 1`] = `
 >
   <svg
     aria-hidden={true}
-    className="manicon-svg svg-icon--search16"
+    className="manicon-svg search-icon svg-icon--search16"
     fill="currentColor"
     height={22}
     viewBox="0 0 16 16"
@@ -35,7 +35,7 @@ exports[`Reader.Search.Button component renders correctly when inactive 1`] = `
 >
   <svg
     aria-hidden={true}
-    className="manicon-svg svg-icon--search16"
+    className="manicon-svg search-icon svg-icon--search16"
     fill="currentColor"
     height={22}
     viewBox="0 0 16 16"

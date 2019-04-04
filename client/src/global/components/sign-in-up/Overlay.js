@@ -92,17 +92,19 @@ export default class Overlay extends Component {
               <div className="container">
                 <div className="rel">
                   <figure className="header-logo" aria-hidden="true">
-                    <i className="manicon" aria-hidden="true">
-                      <Utility.IconComposer size={26} icon="manifoldLogo32" />
-                    </i>
+                    <Utility.IconComposer size={26} icon="manifoldLogo32" />
                   </figure>
                   <button
                     onClick={this.props.hideSignInUpOverlay}
                     className="overlay-close"
                     data-id="overlay-close"
                   >
-                    Cancel
-                    <i className="manicon manicon-x" aria-hidden="true" />
+                    <span className="overlay-close__text">Cancel</span>
+                    <Utility.IconComposer
+                      size={56.889}
+                      icon="close32"
+                      iconClass="overlay-close__icon"
+                    />
                   </button>
                 </div>
               </div>

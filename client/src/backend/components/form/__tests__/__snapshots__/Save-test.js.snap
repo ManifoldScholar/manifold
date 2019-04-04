@@ -5,14 +5,14 @@ exports[`Backend.Form.Save component renders correctly 1`] = `
   className="form-input submit wide"
 >
   <a
-    className="button-secondary outlined dull"
+    className="button-secondary button-secondary--outlined button-secondary--dull"
     href="/cancel/this"
     onClick={[Function]}
   >
     Cancel
   </a>
   <input
-    className="button-secondary outlined"
+    className="button-secondary button-secondary--outlined"
     type="submit"
     value="Save"
   />

@@ -2,11 +2,11 @@
 
 exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
 <div
-  className="slide-caption"
+  className="resource-slideshow__caption"
 >
   <header>
     <h2
-      className="resource-title"
+      className="resource-slideshow__title"
       dangerouslySetInnerHTML={
         Object {
           "__html": "Image",
@@ -23,40 +23,52 @@ exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
     </span>
   </header>
   <div
-    className="resource-utility with-shadow"
+    className="resource-slideshow__utility resource-slideshow__utility--with-shadow"
   >
     <div
-      className="wrapper"
+      className="resource-slideshow__utility-inner"
     >
       <button
-        className="more-link"
+        className="resource-slideshow__more-link"
         onClick={[Function]}
       >
         <span
-          className="open-text"
+          className="resource-slideshow__open-text"
         >
           Read More
         </span>
         <span
-          className="close-text"
+          className="resource-slideshow__close-text"
         >
           Hide Description
         </span>
       </button>
       <a
-        className="download-link"
+        className="resource-slideshow__download-link"
         href="original-image.mock"
         rel="noopener noreferrer"
         target="_blank"
       >
-        Download
-        <i
-          aria-hidden="true"
-          className="manicon manicon-arrow-down"
-        />
+        <span>
+          Download
+        </span>
+        <svg
+          aria-hidden={true}
+          className="manicon-svg resource-slideshow__download-icon svg-icon--arrowDown16"
+          fill="currentColor"
+          height={16}
+          viewBox="0 0 16 16"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+            transform="rotate(90 8 8)"
+          />
+        </svg>
       </a>
       <a
-        className="detail-link"
+        className="resource-slideshow__detail-link"
         href="/projects/delegated-project-slug/resource/slug-1"
         onClick={[Function]}
       >

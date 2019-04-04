@@ -140,6 +140,10 @@
       @include respond($break75) {
         display: inline-block;
         width: 200px;
+
+        .form-search-filter & {
+          width: 100%;
+        }
       }
 
       select {
@@ -156,6 +160,11 @@
 
         &:focus {
           border-color: $focusPrimary;
+        }
+
+        .form-search-filter & {
+          font-size: 13px;
+          border: 1px solid #555;
         }
 
         option {
@@ -175,22 +184,6 @@
         .ie9 & {
           display: none;
         }
-      }
-    }
-
-    // Dropdown icon included in markup
-    .manicon-caret-down {
-      position: absolute;
-      top: 50%;
-      right: 13px;
-      margin-top: -3px;
-      font-size: 8px;
-      color: $accentPrimary;
-      pointer-events: none;
-
-      // Use native dropdown arrow in IE9
-      .ie9 & {
-        display: none;
       }
     }
   }

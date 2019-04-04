@@ -233,16 +233,6 @@
 
     .contents-empty {
       margin-top: 0;
-
-      .manicon {
-        height: 120px;
-        padding: 20px 0 0;
-
-        @include respond($break50) {
-          height: 60px;
-          padding: 15px 0;
-        }
-      }
     }
   }
 }

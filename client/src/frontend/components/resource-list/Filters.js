@@ -60,7 +60,10 @@ export default class ResourceListFilters extends Component {
 
   render() {
     return (
-      <form className="form-list-filter" onSubmit={this.updateResults}>
+      <form
+        className="form-list-filter entity-section-wrapper__tools entity-section-wrapper__tools--wide"
+        onSubmit={this.updateResults}
+      >
         <div className="search-input">
           <button className="search-button" type="submit">
             <span className="screen-reader-text">Search</span>
@@ -98,7 +101,11 @@ export default class ResourceListFilters extends Component {
                   })
                 : null}
             </select>
-            <i className="manicon manicon-caret-down" aria-hidden="true" />
+            <Utility.IconComposer
+              icon="disclosureDown16"
+              size={20}
+              iconClass="select__icon"
+            />
           </div>
           <div className="select">
             <select
@@ -116,7 +123,11 @@ export default class ResourceListFilters extends Component {
                   })
                 : null}
             </select>
-            <i className="manicon manicon-caret-down" aria-hidden="true" />
+            <Utility.IconComposer
+              icon="disclosureDown16"
+              size={20}
+              iconClass="select__icon"
+            />
           </div>
           <div className="select">
             <select
@@ -127,7 +138,11 @@ export default class ResourceListFilters extends Component {
               <option value="sort_title ASC">A-Z</option>
               <option value="sort_title DESC">Z-A</option>
             </select>
-            <i className="manicon manicon-caret-down" aria-hidden="true" />
+            <Utility.IconComposer
+              icon="disclosureDown16"
+              size={20}
+              iconClass="select__icon"
+            />
           </div>
         </div>
         <button className="reset-button" onClick={this.resetFilters}>

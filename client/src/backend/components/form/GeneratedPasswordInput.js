@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
 import setter from "./setter";
-import classnames from "classnames";
 import GlobalForm from "global/components/form";
 import generatePassword from "helpers/passwordGenerator";
+import IconComposer from "global/components/utility/IconComposer";
 
 class FormGeneratedPasswordInput extends Component {
   static displayName = "Form.GeneratedPasswordInput";
@@ -66,10 +66,6 @@ class FormGeneratedPasswordInput extends Component {
   }
 
   renderInput() {
-    // const inputClass = classnames({
-    //   hidden: !this.state.showPassword
-    // });
-    //
     const type = this.state.showPassword ? "text" : "password";
 
     return (
@@ -88,11 +84,7 @@ class FormGeneratedPasswordInput extends Component {
   }
 
   render() {
-    const iconClass = classnames({
-      manicon: true,
-      "manicon-eye-outline": !this.state.showPassword,
-      "manicon-eye-slash": this.state.showPassword
-    });
+    const icon = !this.state.showPassword ? "eyeClosed32" : "eyeOpen32";
 
     return (
       <GlobalForm.Errorable
@@ -104,12 +96,16 @@ class FormGeneratedPasswordInput extends Component {
       >
         <label htmlFor={this.props.id}>Password</label>
         <span
-          className="password-visibility-toggle"
+          className="password-input__visibility-toggle"
           onClick={event => this.togglePassword(event)}
           role="button"
           tabIndex="0"
         >
-          <i className={iconClass} aria-hidden="true" />
+          <IconComposer
+            icon={icon}
+            size="default"
+            iconClass="password-input__visibility-icon"
+          />
           <span className="screen-reader-text">
             {this.state.showPassword ? "hide password" : "show password"}
           </span>

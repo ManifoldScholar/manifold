@@ -17,10 +17,19 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
       onClick={[Function]}
     >
       Close
-      <i
-        aria-hidden="true"
-        className="manicon manicon-x"
-      />
+      <svg
+        aria-hidden={true}
+        className="manicon-svg overlay-close__icon svg-icon--close32"
+        fill="currentColor"
+        height={37.334}
+        viewBox="0 0 32 32"
+        width={37.334}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.00007316,7.70847994 L7.70712678,7.00132 L24.9999268,24.2915201 L24.2928732,24.99868 L7.00007316,7.70847994 Z M7.70712678,24.99868 L7.00007316,24.2915201 L24.2928732,7.00132 L24.9999268,7.70847994 L7.70712678,24.99868 Z"
+        />
+      </svg>
     </button>
     <div
       className="container"
@@ -41,29 +50,24 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
               className="container"
             >
               <header
-                className="section-heading"
+                className="entity-section-wrapper__heading entity-section-wrapper__heading--wide collection-detail__heading section-heading"
               >
                 <div
                   className="main"
                 >
-                  <i
-                    aria-hidden="true"
-                    className="manicon"
+                  <svg
+                    aria-hidden={true}
+                    className="manicon-svg svg-icon--resourceCollection64"
+                    fill="currentColor"
+                    height={54}
+                    viewBox="0 0 64 64"
+                    width={54}
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg svg-icon--resourceCollection64"
-                      fill="currentColor"
-                      height={54}
-                      viewBox="0 0 64 64"
-                      width={54}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
-                      />
-                    </svg>
-                  </i>
+                    <path
+                      d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
+                    />
+                  </svg>
                   <div
                     className="body"
                   >
@@ -118,14 +122,14 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                 </div>
               </div>
               <div
-                className="slide-footer"
+                className="resource-slideshow__footer"
               >
                 <div
-                  className="slide-caption"
+                  className="resource-slideshow__caption"
                 >
                   <header>
                     <h2
-                      className="resource-title"
+                      className="resource-slideshow__title"
                       dangerouslySetInnerHTML={
                         Object {
                           "__html": "Image",
@@ -142,40 +146,52 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                     </span>
                   </header>
                   <div
-                    className="resource-utility with-shadow"
+                    className="resource-slideshow__utility resource-slideshow__utility--with-shadow"
                   >
                     <div
-                      className="wrapper"
+                      className="resource-slideshow__utility-inner"
                     >
                       <button
-                        className="more-link"
+                        className="resource-slideshow__more-link"
                         onClick={[Function]}
                       >
                         <span
-                          className="open-text"
+                          className="resource-slideshow__open-text"
                         >
                           Read More
                         </span>
                         <span
-                          className="close-text"
+                          className="resource-slideshow__close-text"
                         >
                           Hide Description
                         </span>
                       </button>
                       <a
-                        className="download-link"
+                        className="resource-slideshow__download-link"
                         href="original-image.mock"
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        Download
-                        <i
-                          aria-hidden="true"
-                          className="manicon manicon-arrow-down"
-                        />
+                        <span>
+                          Download
+                        </span>
+                        <svg
+                          aria-hidden={true}
+                          className="manicon-svg resource-slideshow__download-icon svg-icon--arrowDown16"
+                          fill="currentColor"
+                          height={16}
+                          viewBox="0 0 16 16"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                            transform="rotate(90 8 8)"
+                          />
+                        </svg>
                       </a>
                       <a
-                        className="detail-link"
+                        className="resource-slideshow__detail-link"
                         href="/projects/delegated-project-slug/resource-collection/slug-1/resource/slug-3"
                         onClick={[Function]}
                       >
@@ -185,10 +201,10 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                   </div>
                 </div>
                 <div
-                  className="slide-pagination"
+                  className="resource-slideshow__pagination"
                 >
                   <span
-                    className="slide-ordinal"
+                    className="resource-slideshow__ordinal"
                   >
                     1
                      
@@ -198,21 +214,40 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                   </span>
                   <div>
                     <button
-                      className="slide-previous"
+                      className="resource-slideshow__button resource-slideshow__button--previous"
                       disabled={true}
                       onClick={[Function]}
                     >
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-arrow-left"
-                      />
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-arrow-round-left"
-                      />
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--left resource-slideshow__pagination-icon--large svg-icon--circleArrowLeft64"
+                        fill="currentColor"
+                        height={50}
+                        viewBox="0 0 64 64"
+                        width={50}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M32,58 C17.6405965,58 5.99999996,46.3594035 5.99999996,32 C5.99999996,17.6405965 17.6405965,5.99999996 32,5.99999996 C46.3594035,5.99999996 58,17.6405965 58,32 C58,46.3594035 46.3594035,58 32,58 Z M32,56 C45.254834,56 56,45.254834 56,32 C56,18.745166 45.254834,7.99999996 32,7.99999996 C18.745166,7.99999996 7.99999996,18.745166 7.99999996,32 C7.99999996,45.254834 18.745166,56 32,56 Z M19.6388077,32.9918997 L19.6403922,30.9919003 L44.0007923,31.0112003 L43.9992077,33.0111997 L19.6388077,32.9918997 Z M21.019947,32 L35.2169617,44.5045804 L33.8950383,46.0054197 L17.994053,32 L33.8950383,17.9945803 L35.2169617,19.4954196 L21.019947,32 Z"
+                        />
+                      </svg>
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--left resource-slideshow__pagination-icon--small svg-icon--arrowLeft16"
+                        fill="currentColor"
+                        height={16}
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                          transform="rotate(180 8 8)"
+                        />
+                      </svg>
                       <span
                         aria-hidden="true"
-                        className="text"
+                        className="resource-slideshow__pagination-text"
                       >
                         Prev
                       </span>
@@ -223,13 +258,13 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                       </span>
                     </button>
                     <button
-                      className="slide-next"
+                      className="resource-slideshow__button resource-slideshow__button--next"
                       disabled={false}
                       onClick={[Function]}
                     >
                       <span
                         aria-hidden="true"
-                        className="text"
+                        className="resource-slideshow__pagination-text"
                       >
                         Next
                       </span>
@@ -238,14 +273,33 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                       >
                         Go to next slide
                       </span>
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-arrow-round-right"
-                      />
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-arrow-right"
-                      />
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--right resource-slideshow__pagination-icon--large svg-icon--circleArrowRight64"
+                        fill="currentColor"
+                        height={50}
+                        viewBox="0 0 64 64"
+                        width={50}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M32,58 C17.6405965,58 5.99999996,46.3594035 5.99999996,32 C5.99999996,17.6405965 17.6405965,5.99999996 32,5.99999996 C46.3594035,5.99999996 58,17.6405965 58,32 C58,46.3594035 46.3594035,58 32,58 Z M32,56 C45.254834,56 56,45.254834 56,32 C56,18.745166 45.254834,7.99999996 32,7.99999996 C18.745166,7.99999996 7.99999996,18.745166 7.99999996,32 C7.99999996,45.254834 18.745166,56 32,56 Z M19.6388077,32.9918997 L19.6403922,30.9919003 L44.0007923,31.0112003 L43.9992077,33.0111997 L19.6388077,32.9918997 Z M21.019947,32 L35.2169617,44.5045804 L33.8950383,46.0054197 L17.994053,32 L33.8950383,17.9945803 L35.2169617,19.4954196 L21.019947,32 Z"
+                          transform="matrix(-1 0 0 1 64 0)"
+                        />
+                      </svg>
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--right resource-slideshow__pagination-icon--small svg-icon--arrowRight16"
+                        fill="currentColor"
+                        height={16}
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                        />
+                      </svg>
                     </button>
                   </div>
                 </div>
@@ -256,31 +310,58 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
             className="container"
           >
             <nav
-              className="button-nav"
+              className="button-nav button-nav--stack"
             >
               <br />
               <a
-                className="button-secondary outlined"
+                className="button-secondary button-secondary--outlined"
                 href="/projects/slug-2/resource-collection/slug-1"
                 onClick={[Function]}
               >
-                Visit Collection Page
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-arrow-right"
-                />
+                <span
+                  className="button-secondary__text"
+                >
+                  Visit Collection Page
+                </span>
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg button-secondary__icon svg-icon--arrowRight16"
+                  fill="currentColor"
+                  height={16}
+                  viewBox="0 0 16 16"
+                  width={16}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                  />
+                </svg>
               </a>
               <br />
               <button
-                className="button-secondary outlined dull"
+                className="button-secondary button-secondary--outlined button-secondary--dull"
                 data-id="close-overlay"
                 onClick={[Function]}
               >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-arrow-left"
-                />
-                Return to Reader
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg button-secondary__icon svg-icon--arrowLeft16"
+                  fill="currentColor"
+                  height={16}
+                  viewBox="0 0 16 16"
+                  width={16}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                    transform="rotate(180 8 8)"
+                  />
+                </svg>
+                <span
+                  className="button-secondary__text"
+                >
+                  Return to Reader
+                </span>
               </button>
             </nav>
           </div>

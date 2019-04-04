@@ -3,11 +3,17 @@
 exports[`Backend Settings General Container renders correctly 1`] = `
 <div>
   <header
-    className="backend-header section-heading-secondary"
+    className="backend-header"
   >
-    <h1>
-      General Settings
-    </h1>
+    <div
+      className="backend-header__inner"
+    >
+      <h1
+        className="backend-header__title backend-header__title--large"
+      >
+        General Settings
+      </h1>
+    </div>
   </header>
   <div
     className="backend-panel"
@@ -265,7 +271,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
               className="form-input submit wide"
             >
               <input
-                className="button-secondary outlined"
+                className="button-secondary button-secondary--outlined"
                 type="submit"
                 value="Save Settings"
               />

@@ -5,6 +5,8 @@ import ResourceCollection from "frontend/components/resource-collection";
 import ResourceList from "frontend/components/resource-list";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
+import classNames from "classnames";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceCollectionDetail extends PureComponent {
   static propTypes = {
@@ -70,20 +72,40 @@ export default class ResourceCollectionDetail extends PureComponent {
           slideOptions={{ enableZoom: false }}
         />
         <div className="container">
-          <nav className="button-nav">
+          <nav className="button-nav button-nav--stack">
             <br />
-            <Link to={collectionUrl} className="button-secondary outlined">
-              Visit Collection Page
-              <i className="manicon manicon-arrow-right" aria-hidden="true" />
+            <Link
+              to={collectionUrl}
+              className={classNames(
+                "button-secondary",
+                "button-secondary--outlined"
+              )}
+            >
+              <span className="button-secondary__text">
+                Visit Collection Page
+              </span>
+              <IconComposer
+                icon="arrowRight16"
+                size="default"
+                iconClass="button-secondary__icon"
+              />
             </Link>
             <br />
             <button
               onClick={this.props.handleClose}
-              className="button-secondary outlined dull"
+              className={classNames(
+                "button-secondary",
+                "button-secondary--outlined",
+                "button-secondary--dull"
+              )}
               data-id="close-overlay"
             >
-              <i className="manicon manicon-arrow-left" aria-hidden="true" />
-              Return to Reader
+              <IconComposer
+                icon="arrowLeft16"
+                size="default"
+                iconClass="button-secondary__icon"
+              />
+              <span className="button-secondary__text">Return to Reader</span>
             </button>
           </nav>
         </div>

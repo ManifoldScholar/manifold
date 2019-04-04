@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import CommentContainer from "global/containers/comment";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class CommentDeleted extends PureComponent {
   static propTypes = {
@@ -13,15 +14,17 @@ export default class CommentDeleted extends PureComponent {
     return (
       <li className="annotation-comment">
         <section className="annotation-meta">
-          <div>
-            <figure className="author-avatar dull">
-              <span className="screen-reader-text">Author Avatar</span>
-              <div className="no-image" aria-hidden="true">
-                <i className="manicon manicon-person" />
-              </div>
-            </figure>
-            <h4 className="deleted-notification">This comment was deleted.</h4>
-          </div>
+          <figure className="author-avatar author-avatar--dull">
+            <span className="screen-reader-text">Author Avatar</span>
+            <div className="author-avatar__no-image" aria-hidden="true">
+              <IconComposer
+                icon="avatar64"
+                size={39.385}
+                iconClass="author-avatar__icon"
+              />
+            </div>
+          </figure>
+          <h4 className="deleted-notification">This comment was deleted.</h4>
         </section>
         <CommentContainer.Thread
           subject={this.props.subject}

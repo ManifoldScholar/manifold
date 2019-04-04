@@ -69,16 +69,12 @@
     }
   }
 
+  &__buttons {
+    margin-top: 1.5em;
+  }
+
   .buttons {
     margin-top: 1.5em;
-
-    .button-bare-primary, .button-bare-primary {
-      font-size: 0.8em;
-    }
-
-    .button-bare-primary + .button-bare-primary {
-      margin-left: 2.308em;
-    }
   }
 
   .heading-primary {
@@ -109,18 +105,10 @@
     .heading-primary, .heading-secondary {
       color: $neutralWhite;
     }
-
-    .button-bare-primary {
-      color: $neutralWhite;
-    }
   }
 
   &.feature-light-style {
     .heading-primary, .heading-secondary {
-      color: $accentPrimaryDark;
-    }
-
-    .button-bare-primary {
       color: $accentPrimaryDark;
     }
   }

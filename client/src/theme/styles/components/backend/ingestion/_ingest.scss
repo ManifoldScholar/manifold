@@ -1,194 +1,58 @@
-.ingestion-error {
-  .dialog-header-small {
-
-  }
-}
-
 .ingestion-output {
-  .backend-header {
-    margin-bottom: 30px;
-
-    .wrapper {
-      padding-top: 25px;
-      padding-bottom: 25px;
-    }
-  }
-
-  // scss-lint:disable QualifyingElement
-  p.label {
+  &__label {
     @include formInputSecondary;
-    padding-bottom: 4px;
+    margin-top: 20px;
+    font-size: 12px;
     font-weight: $semibold;
-    color: $neutral75;
-  }
-  // scss-lint:enable QualifyingElement
-
-  .properties {
-    @include clearfix;
-    padding-top: 20px;
-    margin-top: 25px;
-    border-top: 1px solid $neutral80;
-
-    .item {
-      float: left;
-      width: 50%;
-    }
-
-    .value {
-      @include formInstructions;
-      padding-bottom: 12px;
-      font-size: 18px;
-      font-style: normal;
-      color: $neutral30;
-    }
+    color: $neutral70;
+    letter-spacing: 0.125em;
   }
 
-  .log {
-    .value {
-      @include utilityPrimary;
-      height: 200px;
-      padding: 10px 15px;
-      margin-top: 10px;
-      overflow-y: scroll;
-      font-size: 14px;
-      font-weight: normal;
-      line-height: 1.45em;
-      color: $neutral30;
-      text-transform: none;
-      white-space: pre-line;
-      border: 1px solid $neutral80;
+  &__value {
+    @include formInstructions;
+    margin-top: 12px;
+    font-size: 17px;
+    font-style: normal;
+    color: $neutral30;
+  }
 
-      @include respond($break90) {
-        height: 50vh;
-      }
+  &__properties {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    > * {
+      flex-basis: 50%;
     }
   }
 
-  .entity-header-primary {
-    padding-bottom: 0;
+  &__log {}
 
-    .dialog-primary .dialog-box & {
-      padding-bottom: 0;
-    }
-
-    figure {
-      float: left;
-      width: 68px;
-
-      @include respond($break30) {
-        width: 75px;
-      }
-
-      @include respond($break65) {
-        display: table-cell;
-        width: auto;
-        padding-right: 18px;
-        vertical-align: top;
-      }
-
-      .manicon {
-        font-size: 52px;
-        color: $neutral50;
-
-        @include respond($break65) {
-          font-size: 64px;
-        }
-      }
-    }
-
-    .title {
-
-      @include respond($break65) {
-        display: table-cell;
-        font-weight: normal;
-        vertical-align: top;
-      }
-
-      h1, h2, h3, h4, h5, h6 {
-        @include templateHead;
-        float: left;
-        max-width: calc(100% - 75px);
-        padding-top: 0;
-        padding-bottom: 10px;
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 22px;
-        font-weight: $medium;
-        color: $neutral20;
-
-        @include respond($break30) {
-          max-width: calc(100% - 86px);
-        }
-
-        @include respond($break60) {
-          font-size: 24px;
-        }
-
-        @include respond($break65) {
-          float: none;
-          max-width: none;
-          font-size: 28px;
-        }
-
-        span {
-          @include templateCopy;
-          margin-left: 0.433em;
-          // Relatively sized to be just a tiny bit bigger than the base
-          font-size: 1.071em;
-          color: $neutral50;
-        }
-      }
-    }
-  }
-
-  .buttons-icon-horizontal {
-    margin: 15px 0;
-
-    button {
-      &:disabled {
-        color: darken($accentPrimary, 35%);
-        border-color: darken($accentPrimary, 35%);
-
-        &.dull {
-          color: darken($neutral80, 5%);
-          border-color: darken($neutral80, 5%);
-
-          .manicon {
-            color: darken($neutral80, 5%);
-          }
-
-          &:hover {
-            background-color: transparent;
-          }
-        }
-      }
-    }
-  }
-
-  .utility {
-    @extend %header-utility-button;
+  &__log-value {
+    @include utilityPrimary;
+    height: 200px;
+    padding: 10px 15px;
     margin-top: 10px;
+    overflow-y: auto;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.45em;
+    color: $neutral30;
+    text-transform: none;
+    white-space: pre-line;
+    border: 1px solid $neutral50;
 
-    .loading, .loading:hover {
-      color: $neutral85;
-
-      .manicon-svg {
-        color: $neutral85;
-      }
+    @include respond($break90) {
+      height: 50vh;
     }
+  }
 
-    button {
-      font-size: 14px;
+  &__buttons {
+    margin: 30px 0 15px;
+  }
 
-      .manicon-svg {
-        margin-top: -3px;
-      }
-
-      &:hover {
-        .manicon-svg {
-          color: $neutral30;
-        }
-      }
-    }
+  &__utility {
+    margin-top: 20px;
   }
 }

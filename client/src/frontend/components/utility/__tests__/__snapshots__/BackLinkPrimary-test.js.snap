@@ -2,19 +2,35 @@
 
 exports[`Frontend.Utility.BackLinkPrimary component renders correctly 1`] = `
 <a
-  className="back-link-primary full"
+  className="back-link-primary back-link-primary--full"
   href="/test/link"
   onClick={[Function]}
 >
   <div
-    className="container flush"
+    className="container flush back-link-primary__container"
   >
-    <i
-      aria-hidden="true"
-      className="manicon manicon-arrow-left"
-    />
-    Back to Project
-    <span>
+    <svg
+      aria-hidden={true}
+      className="manicon-svg back-link-primary__icon svg-icon--arrowLeft16"
+      fill="currentColor"
+      height={16}
+      viewBox="0 0 16 16"
+      width={16}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+        transform="rotate(180 8 8)"
+      />
+    </svg>
+    <span
+      className="back-link-primary__back-text"
+    >
+      Back to Project
+    </span>
+    <span
+      className="back-link-primary__title"
+    >
       test
     </span>
   </div>

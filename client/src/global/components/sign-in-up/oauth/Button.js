@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { oauthActions } from "actions";
 import { get } from "lodash";
 import { providerSetting } from "utils/oauth";
+import IconComposer from "global/components/utility/IconComposer";
 
 import withSettings from "hoc/with-settings";
 
@@ -34,12 +35,17 @@ class Button extends Component {
     return get(this, `oauthSettings.enabled`);
   }
 
+  get providerTitled() {
+    const { provider } = this.props;
+    return provider.charAt(0).toUpperCase() + provider.slice(1);
+  }
+
   get iconClass() {
     if (this.props.iconName) {
       return this.props.iconName;
     }
 
-    return `manicon-${this.props.provider}`;
+    return `social${this.providerTitled}32`;
   }
 
   openWindow = eventIgnored => {
@@ -52,17 +58,26 @@ class Button extends Component {
     }
 
     const icon = this.props.hasIcon ? (
-      <i className={`manicon ${this.iconClass}`} aria-hidden="true" />
+      <IconComposer
+        icon={this.iconClass}
+        size={26}
+        iconClass="button-secondary__icon"
+      />
     ) : null;
 
     const label = this.props.children ? (
       this.props.children
     ) : (
-      <span>Log in with {this.props.provider}</span>
+      <span className="button-secondary__text">
+        Log in with {this.props.provider}
+      </span>
     );
 
     return (
-      <button className="button-secondary-dark" onClick={this.openWindow}>
+      <button
+        className="button-secondary button-secondary--dark"
+        onClick={this.openWindow}
+      >
         {icon}
         {label}
       </button>

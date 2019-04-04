@@ -112,7 +112,7 @@ export class FollowingContainer extends Component {
     return (
       <div className="utility right">
         <Link to={lh.link("frontendFeatured")} className="button-primary">
-          <span>See all featured</span>
+          <span className="button-primary__text">See all featured</span>
         </Link>
       </div>
     );

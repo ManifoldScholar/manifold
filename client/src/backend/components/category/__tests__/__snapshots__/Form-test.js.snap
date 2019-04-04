@@ -30,7 +30,7 @@ exports[`Backend.Category.Form Component renders correctly 1`] = `
       className="form-input submit wide"
     >
       <input
-        className="button-secondary outlined"
+        className="button-secondary button-secondary--outlined"
         type="submit"
         value="Create Category"
       />

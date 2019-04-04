@@ -3,7 +3,7 @@
 exports[`Backend.ProjectCollection.Detail container renders correctly 1`] = `
 <div>
   <div
-    className="project-collection-sort form-flex"
+    className="project-collection-sort"
   >
     <form
       className="form-search-filter"

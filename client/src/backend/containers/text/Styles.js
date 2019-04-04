@@ -1,9 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import { stylesheetsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
+import IconComposer from "global/components/utility/IconComposer";
 
 import Stylesheet from "backend/components/stylesheet";
 import withConfirmation from "hoc/with-confirmation";
@@ -37,6 +39,13 @@ export class TextStylesContainer extends PureComponent {
       updatePosition: this.updatePosition,
       confirmDestroy: this.confirmDestroy
     };
+  }
+
+  get buttonClasses() {
+    return classNames(
+      "buttons-icon-horizontal__button",
+      "button-icon-secondary"
+    );
   }
 
   confirmDestroy = stylesheet => {
@@ -92,10 +101,17 @@ export class TextStylesContainer extends PureComponent {
 
           <div className="buttons-icon-horizontal maintain">
             <Link
-              className="button-icon-secondary"
+              className={this.buttonClasses}
               to={lh.link("BackendTextStylesheetNew", this.text.id)}
             >
-              <i className="manicon manicon-plus" aria-hidden="true" />
+              <IconComposer
+                icon="plus16"
+                size={18}
+                iconClass={classNames(
+                  "button-icon-secondary__icon",
+                  "button-icon-secondary__icon--large"
+                )}
+              />
               <span>Add a New Stylesheet</span>
             </Link>
           </div>

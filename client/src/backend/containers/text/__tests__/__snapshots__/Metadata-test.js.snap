@@ -663,7 +663,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                           </FieldGroup>
                           <Form.Save text=\\"Save Metadata\\">
                             <div className=\\"form-input submit wide\\">
-                              <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Metadata\\" />
+                              <input className=\\"button-secondary button-secondary--outlined\\" type=\\"submit\\" value=\\"Save Metadata\\" />
                             </div>
                           </Form.Save>
                         </form>

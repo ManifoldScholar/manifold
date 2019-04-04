@@ -2,7 +2,7 @@
 
 exports[`Backend.ProjectCollection.SortBy component renders correctly 1`] = `
 <div
-  className="project-collection-sort form-flex"
+  className="project-collection-sort"
 >
   <form
     className="form-search-filter"

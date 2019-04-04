@@ -6,102 +6,135 @@
     max-width: 390px;
   }
 
-  ul {
+  &__list {
     @include listUnstyled;
     min-width: 260px;
   }
 
-  li + li {
-    border-top: 2px solid $neutral30;
+  &__item {
+    & + & {
+      border-top: 2px solid $neutral30;
+    }
   }
 
-  li a, li button {
+  &__link {
     @include buttonUnstyled;
     @include templateHead;
     display: block;
-    padding: 22px 20px;
+    width: 100%;
+    padding: 16px 20px;
     font-size: 18px;
     color: $neutral75;
+    text-align: left;
     text-decoration: none;
     letter-spacing: 0.004em;
     transition: color $duration $timing;
 
     @include respond($break60) {
-      padding: 26px;
+      padding: 17px 26px;
       font-size: 22px;
     }
 
     &:hover, &:focus {
       color: $accentPrimary;
       outline: 0;
-
-      i, span {
-        color: $accentPrimary;
-      }
     }
 
-    &.flush-bottom {
+    &--flush-bottom {
       padding-bottom: 0.38em;
-    }
-
-    i {
-      display: inline-block;
-      width: 60px;
-      color: $neutral50;
-      text-align: left;
-      vertical-align: middle;
-      transition: color $duration $timing;
-    }
-
-    .manicon-arrow-round-left {
-      padding-left: 4px;
-      font-size: 1.667em;
-    }
-
-    .manicon-books-with-glasses-simple {
-      margin-top: -5px;
-      font-size: 24px;
-    }
-
-    .manicon-books-on-shelf-simple {
-      margin-top: -6px;
-      font-size: 28px;
-    }
-
-    .manicon-manifold-logo {
-      padding-left: 9px;
-      font-size: 26px;
-    }
-
-    span {
-      display: block;
-      padding-top: 0.5em;
-      padding-left: 60px;
-      font-size: 17px;
-      color: $neutral50;
-      text-decoration: underline;
-      transition: color $duration $timing;
     }
   }
 
-  li .note {
+  &__link-icon,
+  &__logo-icon {
+    color: $neutral50;
+    transition: color $duration $timing;
+
+    .reader-return-menu__link:hover &,
+    .reader-return-menu__link:focus & {
+      color: $accentPrimary;
+    }
+  }
+
+  &__link-icon {
+    margin-right: 14px;
+    color: $neutral50;
+    transition: color $duration $timing;
+
+    @include respond($break60) {
+      width: 45.538px;
+      height: 45.538px;
+      margin-right: 16px;
+    }
+  }
+
+  &__link-text {
+    position: relative;
+    top: 1px;
+  }
+
+  &__logo-icon {
+    width: 28px;
+    height: 28px;
+    margin-right: 19px;
+    margin-left: 4px;
+
+    @include respond($break60) {
+      width: 34px;
+      height: 34px;
+      margin-right: 22px;
+      margin-left: 5px;
+    }
+  }
+
+  &__small-text {
+    display: block;
+    padding-bottom: 10px;
+    padding-left: 51px;
+    font-size: 17px;
+    color: $neutral50;
+    text-decoration: underline;
+    transition: color $duration $timing;
+
+    .reader-return-menu__link:hover &,
+    .reader-return-menu__link:focus & {
+      color: $accentPrimary;
+    }
+
+    @include respond($break60) {
+      padding-left: 61px;
+    }
+  }
+
+  &__note {
     @include templateHead;
     display: block;
-    padding: 0.5em 1.688em 1.75em 26px;
+    padding: 0.5em 1.688em 1.75em 24.5px;
     font-size: 16px;
     line-height: 1.5;
     color: $neutral50;
     text-decoration: underline;
+    transition: color $duration $timing;
 
-    @include respond($break60) {
-      padding-left: 35px;
+    &:hover,
+    &:focus {
+      color: $accentPrimary;
     }
 
+    @include respond($break60) {
+      padding-left: 32px;
+    }
+  }
 
-    span {
-      display: inline;
-      padding-left: 0; // OD
-      color: $neutral75;
+  &__note-bold {
+    display: inline;
+    padding-left: 0; // OD
+    color: $neutral75;
+    transition: color $duration $timing;
+
+    .reader-return-menu__note:hover &,
+    .reader-return-menu__note:focus & {
+      color: $accentPrimary;
     }
   }
 }

@@ -60,24 +60,34 @@
   .overlay-close {
     @include buttonClose;
     position: absolute;
-    top: 17px;
-    right: 17px;
+    top: 8px;
+    right: 8px;
     color: $neutral50;
     cursor: pointer;
     transition: color $duration $timing;
 
     @include respond($break70) {
-      top: 6.11vh;
+      top: 4.444vh;
       right: 35px;
 
       @include respond($hbreak90, min, height) {
-        top: 55px;
+        top: 40px;
       }
     }
 
     &:hover, &:focus {
       color: $accentPrimary;
       outline: 0;
+    }
+
+    &__icon {
+      margin-left: 4px;
+
+      @include respond($break70) {
+        width: 56.889px;
+        height: 56.889px;
+        margin-left: 14px;
+      }
     }
   }
 }

@@ -180,11 +180,11 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
           <React.Fragment>
             Resources
             <button
-              style={{ marginLeft: 8 }}
+              style={{ marginLeft: 3 }}
               onClick={this.toggleCollectionOnly}
-              className="button-bare-primary"
+              className="utility-button"
             >
-              {toggleLabel}
+              <span className="utility-button__text">{toggleLabel}</span>
             </button>
           </React.Fragment>
         }

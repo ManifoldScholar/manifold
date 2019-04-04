@@ -52,7 +52,6 @@ class FormOptionsList extends PureComponent {
   renderSearchable(props) {
     return (
       <ConnectedInputs.PredictiveInput
-        className="input-predictive"
         fetch={props.fetch}
         fetchOptions={props.fetchOptions}
         placeholder={props.placeholder}

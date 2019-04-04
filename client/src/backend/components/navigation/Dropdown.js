@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import { matchPath } from "react-router";
+import IconComposer from "global/components/utility/IconComposer";
 
 import BlurOnLocationChange from "hoc/blur-on-location-change";
 import Authorize from "hoc/authorize";
@@ -55,11 +56,12 @@ export class NavigationDropdown extends Component {
 
   renderItem(link) {
     return (
-      <li key={link.route}>
+      <li key={link.route} className="dropdown-nav__nav-item">
         <NavLink
           onClick={this.close}
           to={this.pathForLink(link)}
-          activeClassName="active"
+          className="dropdown-nav__link"
+          activeClassName="dropdown-nav__link--active"
         >
           {link.label}
         </NavLink>
@@ -72,8 +74,8 @@ export class NavigationDropdown extends Component {
     const label = selected ? selected.label : "menu";
 
     return (
-      <nav className={`dropdown-nav static ${props.classNames}`}>
-        <div className="selected">{label}</div>
+      <nav className={`dropdown-nav dropdown-nav--static ${props.classNames}`}>
+        <div className="dropdown-nav__selected">{label}</div>
       </nav>
     );
   }
@@ -81,18 +83,22 @@ export class NavigationDropdown extends Component {
   renderMenu(props) {
     const navClasses = classnames({
       "dropdown-nav": true,
-      open: this.state.open
+      "dropdown-nav--open": this.state.open
     });
 
     return (
       <nav className={`${navClasses} ${this.props.classNames}`}>
-        <button className="trigger" onClick={this.toggleOpen}>
-          <div className="selected">
+        <button className="dropdown-nav__trigger" onClick={this.toggleOpen}>
+          <div className="dropdown-nav__selected">
             {this.currentLabel}
-            <i className="manicon manicon-caret-down" />
+            <IconComposer
+              icon="disclosureDown16"
+              size="default"
+              iconClass="dropdown-nav__trigger-icon"
+            />
           </div>
         </button>
-        <ul>
+        <ul className="dropdown-nav__nav-list">
           {props.links.map(link => {
             if (link.ability)
               return (

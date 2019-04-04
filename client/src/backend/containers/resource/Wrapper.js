@@ -10,6 +10,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
 import withConfirmation from "hoc/with-confirmation";
+import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
 
@@ -99,18 +100,26 @@ export class ResourceWrapperContainer extends PureComponent {
 
   renderUtility(resource) {
     return (
-      <div>
-        <button onClick={this.doPreview} className="button-bare-primary">
-          <i className="manicon manicon-eye-outline" aria-hidden="true" />
-          Preview{" "}
+      <div className="utility-button-group utility-button-group--inline">
+        <button onClick={this.doPreview} className="utility-button">
+          <IconComposer
+            icon="eyeOpen32"
+            size={26}
+            iconClass="utility-button__icon utility-button__icon--highlight"
+          />
+          <span className="utility-button__text">Preview</span>
         </button>
         <Authorize entity={resource} ability={"delete"}>
           <button
             onClick={this.handleResourceDestroy}
-            className="button-bare-primary"
+            className="utility-button"
           >
-            <i className="manicon manicon-trashcan" aria-hidden="true" />
-            Delete
+            <IconComposer
+              icon="delete32"
+              size={26}
+              iconClass="utility-button__icon utility-button__icon--notice"
+            />
+            <span className="utility-button__text">Delete</span>
           </button>
         </Authorize>
       </div>

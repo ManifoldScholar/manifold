@@ -45,28 +45,24 @@
     }
   }
 
-  .button-bare-primary {
-    text-decoration: underline;
-    transition: color $duration $timing;
-
-    &:hover {
-      color: $neutral80;
-    }
-  }
-
   .sign-in-up-update & {
     width: auto;
     margin-top: 50px;
 
-    span {
+    .subscriptions__label {
       @include templateCopy;
       display: block;
       margin-bottom: 20px;
       font-style: italic;
     }
 
-    button {
+    .button-secondary {
       width: 100%;
+
+      &__icon {
+        width: 30px;
+        height: 20px;
+      }
     }
   }
 }

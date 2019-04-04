@@ -5,6 +5,7 @@ import Button from "../Button";
 import Panel from "../Panel";
 import lh from "helpers/linkHandler";
 import trim from "lodash/trim";
+import IconComposer from "global/components/utility/IconComposer";
 
 import withSettings from "hoc/with-settings";
 
@@ -97,16 +98,21 @@ class AnnotationPopupSecondaryShare extends PureComponent {
             onClick={this.props.onCiteClick}
             kind="any"
             label="Cite"
-            iconClass="manicon-quotes-left"
+            icon="socialCite32"
           />
         ) : null}
         <TwitterButton
           url={this.url()}
           message={this.message()}
           windowOptions={this.twitterWindowOptions}
+          className="annotation-popup__button"
         >
-          <i className="manicon manicon-twitter" aria-hidden="true" />
-          {"Twitter"}
+          <IconComposer
+            icon="socialTwitter32"
+            size="default"
+            iconClass="annotation-popup__button-icon"
+          />
+          <span className="annotation-popup__button-text">{"Twitter"}</span>
         </TwitterButton>
         {this.facebookAppId() ? (
           <FacebookButton
@@ -114,17 +120,22 @@ class AnnotationPopupSecondaryShare extends PureComponent {
             message={this.message()}
             windowOptions={this.twitterWindowOptions}
             appId={this.facebookAppId()}
+            className="annotation-popup__button"
           >
-            <i className="manicon manicon-facebook" aria-hidden="true" />
-            {"Facebook"}
+            <IconComposer
+              icon="socialFacebook32"
+              size="default"
+              iconClass="annotation-popup__button-icon"
+            />
+            <span className="annotation-popup__button-text">{"Facebook"}</span>
           </FacebookButton>
         ) : null}
         <Button
           onClick={this.props.onBackClick}
           kind="any"
           label="Back"
-          className="dark"
-          iconClass="manicon-arrow-bold-left"
+          className="annotation-popup__button--dark"
+          icon="arrowLeft32"
         />
       </Panel>
     );

@@ -108,13 +108,17 @@ export class EventTile extends Component {
         </div>
         {this.props.destroyCallback && (
           <div
-            className="utility"
+            className="utility-button"
             data-id={"destroy"}
             onClick={this.props.destroyCallback}
             role="button"
             tabIndex="0"
           >
-            <i className="manicon manicon-trashcan" aria-hidden="true" />
+            <Utility.IconComposer
+              icon="delete32"
+              size={26}
+              iconClass={"utility-button__icon utility-button__icon--notice"}
+            />
             <span className="screen-reader-text">Delete Event</span>
           </div>
         )}

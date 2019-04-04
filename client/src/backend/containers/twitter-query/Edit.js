@@ -115,7 +115,7 @@ export class TwitterQueryEditContainer extends PureComponent {
         onClick: this.handleQueryDestroy,
         icon: "delete32",
         label: "Delete",
-        iconClass: "notice"
+        iconClass: "utility-button__icon--notice"
       }
     ];
     if (this.twitterEnabled)
@@ -123,7 +123,7 @@ export class TwitterQueryEditContainer extends PureComponent {
         onClick: this.handleQueryFetch,
         icon: "reload32",
         label: "Fetch Tweets",
-        iconClass: "highlight"
+        iconClass: "utility-button__icon--highlight"
       });
 
     return (

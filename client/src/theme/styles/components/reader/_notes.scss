@@ -132,19 +132,6 @@
       }
     }
 
-    .drawer-title {
-      font-size: 22px;
-      color: $neutral90;
-      text-transform: none;
-      transition: color $duration $timing;
-
-      &:hover, div[role='button']:focus {
-        color: $neutral70;
-        cursor: pointer;
-        border: 0;
-      }
-    }
-
     .drawer-bar {
       padding: 6px 20px;
       border-bottom: 2px solid $neutral40;
@@ -153,7 +140,7 @@
         padding: 6px 32px;
       }
 
-      button {
+      .button-primary {
         font-size: 14px;
       }
     }
@@ -176,15 +163,14 @@
           padding: 18px 32px;
         }
 
-
         &.open {
-          i {
+          .item__disclosure-icon {
             transform: rotate(0);
           }
         }
 
-        i {
-          font-size: 8px;
+        &__disclosure-icon {
+          margin-left: -3px;
           transition: transform $duration $timing;
           transform: rotate(-0.25turn);
         }
@@ -193,7 +179,7 @@
           @include utilityPrimary;
           margin-top: -2px;
           margin-bottom: 0;
-          margin-left: 20px;
+          margin-left: 15px;
           font-size: 16px;
           color: inherit;
           text-transform: none;
@@ -229,14 +215,8 @@
           padding: 18px 32px 18px 60px;
         }
 
-        i {
-          font-size: 20px;
+        &__icon {
           color: $neutral50;
-          transform: rotate(0);
-
-          @include respond($break50) {
-            font-size: 21px;
-          }
         }
 
         span {
@@ -319,7 +299,7 @@
         .checkbox {
           display: block;
 
-          .control-indicator {
+          &__indicator {
             margin-top: -3px;
           }
         }

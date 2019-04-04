@@ -4,6 +4,7 @@ import isObject from "lodash/isObject";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class CommentMeta extends PureComponent {
   static propTypes = {
@@ -16,7 +17,7 @@ export default class CommentMeta extends PureComponent {
     const { comment, creator, parent } = this.props;
     const avatarClass = classNames({
       "author-avatar": true,
-      dull: creator && !creator.attributes.isCurrentUser
+      "author-avatar--dull": creator && !creator.attributes.isCurrentUser
     });
 
     return (
@@ -25,7 +26,7 @@ export default class CommentMeta extends PureComponent {
           <figure className={avatarClass}>
             {creator.attributes.avatarStyles.smallSquare ? (
               <div
-                className="image"
+                className="author-avatar__image"
                 style={{
                   backgroundImage: `url(${
                     creator.attributes.avatarStyles.smallSquare
@@ -37,11 +38,15 @@ export default class CommentMeta extends PureComponent {
                 </span>
               </div>
             ) : (
-              <div className="no-image">
+              <div className="author-avatar__no-image">
                 <span className="screen-reader-text">
                   Avatar for {creator.attributes.fullName}
                 </span>
-                <i className="manicon manicon-person" aria-hidden="true" />
+                <IconComposer
+                  icon="avatar64"
+                  size={39.385}
+                  iconClass="author-avatar__icon"
+                />
               </div>
             )}
           </figure>

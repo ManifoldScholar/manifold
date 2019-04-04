@@ -26,11 +26,12 @@
       padding-bottom: 20px;
     }
 
-    .manicon {
+    &__icon {
       position: absolute;
-      top: 0.4em;
+      top: 2px;
       left: 0;
       color: $neutralWhite;
+      transform: rotateX(180deg);
     }
   }
 

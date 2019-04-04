@@ -20,24 +20,6 @@
         color: $sp40Tertiary;
       }
 
-      .manicon {
-        padding: 5px;
-        margin-right: 10px;
-        font-size: 12px;
-        border: 1px solid $neutral70;
-        border-radius: 50%;
-
-        &.manicon-plus-bold {
-          color: $accentPrimary;
-          border-color: $accentPrimary;
-        }
-
-        &.manicon-minus-bold {
-          color: $sp40Tertiary;
-          border-color: $sp40Tertiary;
-        }
-      }
-
       + button {
         margin-left: 35px;
       }
@@ -135,13 +117,12 @@
       }
 
       .no-image {
-        @include buttonAvatar(29, $neutral40, $neutral20);
-        border: 2px solid $neutralWhite;
-
-        @include respond($break60) {
-          @include buttonAvatar(29, $neutral40, $neutral20);
-          border: 2px solid $neutralWhite;
-        }
+        position: relative;
+        top: -1.5px;
+        left: -1.5px;
+        width: 29px;
+        height: 29px;
+        color: $neutral40;
       }
 
       img {
@@ -180,7 +161,8 @@
       white-space: nowrap;
       vertical-align: middle;
 
-      button {
+      button,
+      &__button {
         @include buttonUnstyled;
         margin-left: 7px;
         font-size: 15px;
@@ -188,14 +170,14 @@
         transition: color $duration $timing;
       }
 
-      .manicon-arrow-up, .manicon-arrow-down, .manicon-pencil-simple {
+      &__icon--default {
         &:hover, &:focus {
           color: $accentPrimary;
           outline: 0;
         }
       }
 
-      .manicon-x {
+      &__icon--close {
         &:hover, &:focus {
           color: $sp40Tertiary;
           outline: 0;

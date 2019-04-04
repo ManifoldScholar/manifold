@@ -55,46 +55,12 @@
       @include respond($break75) {
         margin-bottom: 42px;
       }
-
-      .breadcrumb-primary {
-        @include respond($break75) {
-          display: none;
-        }
-      }
-
-      .wrapper {
-        @include respond($containerWidthFull) {
-          padding-left: 35px;
-        }
-      }
-
-      .button-bare-primary {
-        @include respond($break75) {
-          font-size: 0;
-
-          .manicon {
-            font-size: 16px;
-          }
-        }
-
-        @include respond($break85) {
-          font-size: 12px;
-        }
-      }
     }
   }
 
   .drawer-backend {
     .form-number-input input[type='number'] {
       color: $accentPrimary;
-    }
-
-    .heading-quaternary {
-      .manicon {
-        margin-right: 12px;
-        font-size: 32px;
-        color: $accentPrimary;
-      }
     }
   }
 }

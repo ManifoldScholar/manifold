@@ -20,7 +20,7 @@ export default class ResourceListCards extends PureComponent {
     const project = this.props.project;
 
     return (
-      <div>
+      <div className="entity-section-wrapper__body">
         <nav className="resource-list">
           <div className="resource-count">
             <Utility.EntityCount

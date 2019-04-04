@@ -64,14 +64,16 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
         />
       </svg>
       <div
-        className="button"
+        className="project-list-placeholder__button-nav button-nav"
       >
         <a
           className="button-icon-primary"
           href="/backend"
           onClick={[Function]}
         >
-          <span>
+          <span
+            className="button-icon-primary__text"
+          >
             Create a collection Now
           </span>
         </a>

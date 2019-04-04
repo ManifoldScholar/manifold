@@ -7,11 +7,23 @@ exports[`Frontend.Resource.Link component renders correctly 1`] = `
   rel="noopener noreferrer"
   target="_blank"
 >
-  Visit Page
-   
-  <i
-    aria-hidden="true"
-    className="manicon manicon-arrow-right"
-  />
+  <span
+    className="button-primary__text"
+  >
+    Visit Page
+  </span>
+  <svg
+    aria-hidden={true}
+    className="manicon-svg button-primary__icon svg-icon--arrowRight16"
+    fill="currentColor"
+    height={16}
+    viewBox="0 0 16 16"
+    width={16}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+    />
+  </svg>
 </a>
 `;

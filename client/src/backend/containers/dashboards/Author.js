@@ -77,10 +77,7 @@ export class DashboardsAuthorContainer extends PureComponent {
           <div className="container">
             <section>
               <header className="section-heading-secondary">
-                <h3>
-                  {"Projects"}{" "}
-                  <i className="manicon manicon-stack" aria-hidden="true" />
-                </h3>
+                <h3>{"Projects"} </h3>
               </header>
               {/* put a list of projects here at some point. */}
             </section>
