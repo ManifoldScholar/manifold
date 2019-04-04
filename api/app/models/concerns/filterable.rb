@@ -14,7 +14,7 @@ module Filterable
     def filter_with_query(params, user = nil)
       params.to_hash.inject all do |results, (key, value)|
         key_s = key.to_s
-        if key_s.start_with?("with_") && key_s.end_with?("_ability")
+        if scope_requires_user?(key_s)
           next results unless results.respond_to? key
 
           results.send key, user
@@ -40,6 +40,10 @@ module Filterable
         f.paginate params[:page], params[:per_page]
       end
       lookup search_query, filter
+    end
+
+    def scope_requires_user?(key)
+      key.start_with?("with_") && key.end_with?("_ability", "_role")
     end
 
     def validate_paginated_results(params, results)

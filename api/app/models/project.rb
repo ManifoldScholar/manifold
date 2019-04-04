@@ -170,6 +170,8 @@ class Project < ApplicationRecord
     order(by)
   }
 
+  scope :with_creator_role, ->(user = nil) { where(creator: user) if user.present? }
+
   scope :with_read_ability, lambda { |user = nil|
     next all if user && Project.drafts_readable_by?(user)
     next where(draft: false) unless user

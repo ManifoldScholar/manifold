@@ -20,6 +20,15 @@ export default function projectFilters({ snapshotState = false } = {}) {
         ]
       },
       {
+        label: "Creator",
+        name: "with_creator_role",
+        value: "",
+        options: [
+          { label: "Created by anyone", value: "" },
+          { label: "Created by me", value: "true" }
+        ]
+      },
+      {
         label: "Order",
         name: "order",
         value: "updated_at DESC",

@@ -139,10 +139,11 @@ RSpec.describe Project, type: :model do
 
     context "when there are models" do
       before(:each) do
+        @user = FactoryBot.create(:user)
         @subject_a = FactoryBot.create(:subject, name: "subject_a")
         @subject_b = FactoryBot.create(:subject, name: "subject_b")
         @project_a = FactoryBot.create(:project, title: "project_a", featured: true)
-        @project_b = FactoryBot.create(:project, title: "project_b", featured: false)
+        @project_b = FactoryBot.create(:project, title: "project_b", featured: false, creator: @user)
         @project_a.subjects = [@subject_a]
         @project_b.subjects = [@subject_b]
         @project_a.save
@@ -153,6 +154,11 @@ RSpec.describe Project, type: :model do
         Project.destroy_all
         results = Project.filter({page: 1, per_page: 10})
         expect(results).to respond_to :current_page
+      end
+
+      it "to only include creator's projects" do
+        results = Project.filter({with_creator_role: true}, user: @user)
+        expect(results).to match_array(@project_b)
       end
 
       it "to only include featured" do
