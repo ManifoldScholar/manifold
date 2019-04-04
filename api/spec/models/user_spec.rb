@@ -121,7 +121,7 @@ RSpec.describe User, type: :model do
       expect(results.length).to be 1
     end
 
-    fit "by email" do
+    it "by email" do
       results = User.filter({keyword: email, typeahead: true})
       expect(results.length).to be 1
     end
