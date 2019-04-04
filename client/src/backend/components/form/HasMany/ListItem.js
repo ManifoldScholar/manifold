@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class FormHasManyList extends PureComponent {
   static displayName = "Form.HasMany.List";
@@ -40,6 +41,16 @@ export default class FormHasManyList extends PureComponent {
     return this.props.entityName(this.props.entity);
   }
 
+  renderIcon(icon, modifier = "utility__icon--default") {
+    return (
+      <IconComposer
+        icon={icon}
+        size={26}
+        iconClass={`utility__icon ${modifier}`}
+      />
+    );
+  }
+
   renderAvatar() {
     if (!this.props.entityAvatarAttribute) return null;
     const path = `${this.props.entityAvatarAttribute}.smallSquare`;
@@ -51,7 +62,7 @@ export default class FormHasManyList extends PureComponent {
           <img src={avatar} alt="User Avatar" />
         ) : (
           <div className="no-image">
-            <i className="manicon manicon-person" aria-hidden="true" />
+            <IconComposer icon="avatar64" size={34} />
           </div>
         )}
       </figure>
@@ -62,29 +73,23 @@ export default class FormHasManyList extends PureComponent {
     if (!this.props.editHandler) return null;
 
     return (
-      <button
-        type="button"
-        className="manicon manicon-pencil-simple"
-        onClick={this.onEdit}
-      >
+      <button type="button" className="utility__button" onClick={this.onEdit}>
         <span className="screen-reader-text">
           Edit {this.name()}
           in the {this.props.label} list.
         </span>
+        {this.renderIcon("annotate32")}
       </button>
     );
   }
 
   renderRemoveButton() {
     return (
-      <button
-        type="button"
-        onClick={this.onRemove}
-        className="manicon manicon-x"
-      >
+      <button type="button" onClick={this.onRemove} className="utility__button">
         <span className="screen-reader-text">
           Remove {this.name()} from the {this.props.label} list.
         </span>
+        {this.renderIcon("close32", "utility__icon--close")}
       </button>
     );
   }
@@ -96,16 +101,14 @@ export default class FormHasManyList extends PureComponent {
       return null;
 
     const moveHandler = direction === "up" ? this.onMoveUp : this.onMoveDown;
+    const icon = direction === "up" ? "arrowUp32" : "arrowDown32";
 
     return (
-      <button
-        type="button"
-        onClick={moveHandler}
-        className={`manicon manicon-arrow-${direction}`}
-      >
+      <button type="button" onClick={moveHandler} className="utility__button">
         <span className="screen-reader-text">
           {`Move ${this.name()} ${direction} in the ${this.props.label} list`}
         </span>
+        {this.renderIcon(icon)}
       </button>
     );
   }

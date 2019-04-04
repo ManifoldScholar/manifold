@@ -45,7 +45,7 @@ export class DeveloperContainer extends PureComponent {
             <div style={{ marginBottom: 15 }}>
               <button
                 onClick={this.connect}
-                className="button-secondary outlined"
+                className="button-secondary button-secondary--outlined"
               >
                 Start websocket connection
               </button>
@@ -53,7 +53,7 @@ export class DeveloperContainer extends PureComponent {
             <div style={{ marginBottom: 15 }}>
               <button
                 onClick={this.disconnect}
-                className="button-secondary outlined"
+                className="button-secondary button-secondary--outlined"
               >
                 Close websocket connection
               </button>

@@ -51,9 +51,11 @@ export default class ResourceListSlideFigure extends Component {
           style={{ backgroundImage: `url(${bgImage})` }}
         >
           <div className={infoClassNames}>
-            <i className="manicon" aria-hidden="true">
-              <IconComputed.Resource icon={attr.kind} size={120} />
-            </i>
+            <IconComputed.Resource
+              size={120}
+              icon={attr.kind}
+              iconClass="resource-slide-figure__resource-icon"
+            />
             <span className="resource-type">{attr.kind}</span>
             <span className="resource-date">
               <FormattedDate

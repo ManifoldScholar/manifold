@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class VisibilityMenuBody extends PureComponent {
   static displayName = "ControlMenu.VisibilityMenuBody";
@@ -23,14 +24,14 @@ export default class VisibilityMenuBody extends PureComponent {
     return this.props.filterChangeHandler(filter);
   };
 
-  iconClasses = format => {
+  groupIcon = format => {
     switch (format) {
       case "annotation":
-        return "manicon manicon-word-bubble";
+        return "comment24";
       case "highlight":
-        return "manicon manicon-pencil-simple";
+        return "annotate24";
       case "resource":
-        return "manicon manicon-cube-outline";
+        return "resource24";
       default:
         return "";
     }
@@ -41,7 +42,11 @@ export default class VisibilityMenuBody extends PureComponent {
 
     return (
       <li key={`visibility-${format}`}>
-        <i className={this.iconClasses(format)} aria-hidden="true" />
+        <IconComposer
+          icon={this.groupIcon(format)}
+          size={30.667}
+          iconClass="visibility-menu__group-icon"
+        />
         <span>{label}</span>
         <div className="filters">
           {Object.keys(filterState).map((key, index) => {
@@ -65,8 +70,12 @@ export default class VisibilityMenuBody extends PureComponent {
           checked={filterState[key]}
           onChange={() => this.handleFilterClick(format, key)}
         />
-        <div className="control-indicator" aria-hidden="true">
-          <i className="manicon manicon-check" />
+        <div className="checkbox__indicator" aria-hidden="true">
+          <IconComposer
+            icon="check16"
+            size="default"
+            iconClass="checkbox__icon"
+          />
         </div>
         {label}
       </label>

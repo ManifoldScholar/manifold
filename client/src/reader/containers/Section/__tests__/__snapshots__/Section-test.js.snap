@@ -67,7 +67,7 @@ exports[`Reader Section Container renders correctly 1`] = `
       className="section-pagination"
     >
       <div
-        className="container"
+        className="section-pagination__inner container"
       />
     </nav>
   </div>

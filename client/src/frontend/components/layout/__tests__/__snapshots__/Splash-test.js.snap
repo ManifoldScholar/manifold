@@ -47,14 +47,18 @@ exports[`Frontend.Layout.Splash component renders correctly 1`] = `
         className="splash-content"
       />
       <nav
-        className="buttons"
+        className="feature__buttons utility-button-group utility-button-group--inline"
       >
         <a
-          className="button-bare-primary"
+          className="utility-button"
           href="http://dogs.com"
           target="blank"
         >
-          Click it, dog
+          <span
+            className="utility-button__text utility-button__text--large utility-button__text--light"
+          >
+            Click it, dog
+          </span>
         </a>
       </nav>
     </div>

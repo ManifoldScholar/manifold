@@ -7,8 +7,9 @@ import isString from "lodash/isString";
 import FocusTrap from "focus-trap-react";
 import tabbable from "tabbable";
 import has from "lodash/has";
-import classnames from "classnames";
+import classNames from "classnames";
 import { notificationActions } from "actions";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class DrawerWrapper extends PureComponent {
   static mapStateToProps() {
@@ -170,14 +171,17 @@ export default class DrawerWrapper extends PureComponent {
         {props.includeDrawerFrontMatter ? (
           <div className="drawer-bar">
             {hasTitle ? (
-              <div className="drawer-title">
-                {props.icon ? (
-                  <i
-                    className={`manicon manicon-${props.icon}`}
-                    aria-hidden="true"
+              <div className="drawer-bar__title">
+                {props.icon && (
+                  <IconComposer
+                    icon={props.icon}
+                    size={32}
+                    iconClass="drawer-bar__title-icon"
                   />
-                ) : null}
-                {props.title ? props.title : null}
+                )}
+                {props.title && (
+                  <span className="drawer-bar__title-text">{props.title}</span>
+                )}
               </div>
             ) : null}
             {hasClose ? (
@@ -185,10 +189,19 @@ export default class DrawerWrapper extends PureComponent {
                 onClick={this.handleLeaveEvent}
                 role="button"
                 tabIndex="0"
-                className="close-button-primary"
+                className="drawer-bar__close-button"
               >
-                <span className="close-text">Close</span>
-                <i className="manicon manicon-x" aria-hidden="true" />
+                <span className="drawer-bar__close-text">Close</span>
+                <Utility.IconComposer
+                  icon="close32"
+                  size={46.222}
+                  iconClass="drawer-bar__close-icon drawer-bar__close-icon--large"
+                />
+                <Utility.IconComposer
+                  icon="close16"
+                  size="default"
+                  iconClass="drawer-bar__close-icon drawer-bar__close-icon--small"
+                />
               </div>
             ) : null}
           </div>
@@ -206,7 +219,7 @@ export default class DrawerWrapper extends PureComponent {
   }
 
   renderDrawer() {
-    const drawerClasses = classnames(
+    const drawerClasses = classNames(
       `drawer-${this.props.style}`,
       { left: this.props.entrySide === "left" },
       { wide: this.props.wide }

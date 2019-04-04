@@ -32,17 +32,17 @@ export default class LoginExternal extends Component {
       <section className="login-external">
         <Oauth.Monitor dispatch={this.props.dispatch} />
         <Oauth.Button dispatch={this.props.dispatch} provider="facebook">
-          <span>Log in with Facebook</span>
+          <span className="button-secondary__text">Log in with Facebook</span>
         </Oauth.Button>
         <Oauth.Button
           dispatch={this.props.dispatch}
           provider="google"
-          iconName="manicon-envelope"
+          iconName="socialEmail32"
         >
-          <span>Log in with Google</span>
+          <span className="button-secondary__text">Log in with Google</span>
         </Oauth.Button>
         <Oauth.Button dispatch={this.props.dispatch} provider="twitter">
-          <span>Log in with Twitter</span>
+          <span className="button-secondary__text">Log in with Twitter</span>
         </Oauth.Button>
         {this.customOAuthButtons}
       </section>

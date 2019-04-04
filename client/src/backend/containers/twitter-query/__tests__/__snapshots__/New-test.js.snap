@@ -6,11 +6,11 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
     className="drawer-header"
   >
     <h2
-      className="heading-quaternary"
+      className="drawer-header__title"
     >
       <svg
         aria-hidden={true}
-        className="manicon-svg svg-icon--activityTweet64"
+        className="manicon-svg drawer-header__title-icon svg-icon--activityTweet64"
         fill="currentColor"
         height={44}
         viewBox="0 0 64 64"
@@ -22,7 +22,11 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
           fillRule="evenodd"
         />
       </svg>
-      New Twitter Query
+      <span
+        className="drawer-header__title-text"
+      >
+        New Twitter Query
+      </span>
     </h2>
   </header>
   <div>
@@ -77,10 +81,19 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
           <div
             className="form-select"
           >
-            <i
-              aria-hidden="true"
-              className="manicon manicon-caret-down"
-            />
+            <svg
+              aria-hidden={true}
+              className="manicon-svg form-select__icon svg-icon--disclosureDown16"
+              fill="currentColor"
+              height={20}
+              viewBox="0 0 16 16"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+              />
+            </svg>
             <select
               aria-describedby="select-error-1"
               onChange={[Function]}
@@ -134,7 +147,7 @@ exports[`Backend TwitterQuery New Container renders correctly 1`] = `
         className="form-input submit wide"
       >
         <input
-          className="button-secondary outlined"
+          className="button-secondary button-secondary--outlined"
           type="submit"
           value="Save Twitter Query"
         />

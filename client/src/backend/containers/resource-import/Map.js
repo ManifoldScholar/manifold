@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import FormContainer from "backend/containers/form";
 import Form from "backend/components/form";
 import connectAndFetch from "utils/connectAndFetch";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import IconComposer from "global/components/utility/IconComposer";
 
 export class ResourceImportMap extends PureComponent {
   static displayName = "ResourceImport.Map";
@@ -36,6 +38,13 @@ export class ResourceImportMap extends PureComponent {
     const url = lh.link("backendResourceImportResults", projectId, importId);
     this.props.history.push(url);
   };
+
+  get buttonClasses() {
+    return classNames(
+      "buttons-icon-horizontal__button",
+      "button-icon-secondary"
+    );
+  }
 
   backLinkUrl() {
     const { match } = this.props;
@@ -96,13 +105,24 @@ export class ResourceImportMap extends PureComponent {
             >
               <Link
                 to={this.backLinkUrl()}
-                className="button-icon-secondary dull"
+                className={classNames(
+                  this.buttonClasses,
+                  "button-icon-secondary--dull"
+                )}
               >
-                <i className="manicon manicon-x small" aria-hidden="true" />
+                <IconComposer
+                  icon="close16"
+                  size="default"
+                  iconClass="button-icon-secondary__icon"
+                />
                 <span>Back</span>
               </Link>
-              <button type="submit" className="button-icon-secondary">
-                <i className="manicon manicon-check small" aria-hidden="true" />
+              <button type="submit" className={this.buttonClasses}>
+                <IconComposer
+                  icon="check16"
+                  size="default"
+                  iconClass="button-icon-secondary__icon"
+                />
                 <span>Continue</span>
               </button>
             </div>

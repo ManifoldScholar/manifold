@@ -59,10 +59,6 @@
   }
 }
 
-.footer-fixed {
-  z-index: 200;
-}
-
 .drawer-reader {
   z-index: 150;
 }
@@ -71,7 +67,7 @@
   z-index: 140;
 }
 
-.predictive-list, .fetch-select {
+.input-predictive__results-wrapper, .fetch-select {
   z-index: 100;
 }
 

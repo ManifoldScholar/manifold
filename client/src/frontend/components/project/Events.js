@@ -5,6 +5,7 @@ import Event from "frontend/components/event";
 import Utility from "frontend/components/utility";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ProjectEvents extends Component {
   static displayName = "Project.Events";
@@ -37,7 +38,7 @@ export default class ProjectEvents extends Component {
           <div className="container entity-section-wrapper">
             <header className="section-heading entity-section-wrapper__heading">
               <div className="main">
-                <i className="manicon manicon-pulse" aria-hidden="true" />
+                <IconComposer icon="recentActivity64" size={56} />
                 <div className="body">
                   <h4 className="title">{"All Activity"}</h4>
                 </div>

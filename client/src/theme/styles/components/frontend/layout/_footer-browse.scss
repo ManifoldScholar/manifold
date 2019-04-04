@@ -76,62 +76,7 @@
     }
   }
 
-  // <nav> wrapper around nested <ul>
-  .text-nav {
-    margin-bottom: 20px;
-
-    @include respond($break75) {
-      margin-bottom: 0;
-    }
-
-    // Global styles
-    ul {
-      @include listUnstyled;
-    }
-
-    a, .fake-link {
-      @include templateHead;
-      display: inline-block;
-      font-size: 17px;
-      font-weight: $medium;
-      color: $neutralWhite;
-      text-decoration: none;
-      transition: color $duration $timing;
-
-      &:hover, &:focus {
-        color: $accentPrimary;
-        outline: 0;
-      }
-    }
-
-    > ul {
-      @include clearfix;
-
-      > li {
-        float: left;
-
-        width: 50%;
-        //margin-right: 60px;
-        margin-bottom: 1em;
-        font-size: 16px;
-
-        @include respond($break30) {
-          width: auto;
-          margin-right: 102px;
-        }
-
-        // Nested List
-        // Declared in em units to size
-        // relatively
-        li + li {
-          margin-top: 0.8em;
-        }
-      }
-    }
-  }
-
   .search-form {
-
     margin-bottom: 20px;
 
     @include respond($break40) {
@@ -191,13 +136,17 @@
       .logo, .logo.dull {
         color: $neutral80;
 
-        .manicon-manifold-logo {
-          color: $neutralWhite;
-        }
-
         .text .neutral-text {
           color: $neutralWhite;
         }
+      }
+
+      .footer-tertiary__manifold-logo {
+        color: $neutralWhite;
+      }
+
+      .footer-tertiary__manifold-logo--dull {
+        color: $neutral80;
       }
     }
 
@@ -213,19 +162,6 @@
 
       &.dull {
         color: $neutral30;
-
-        .manicon-manifold-logo {
-          color: $neutral70;
-        }
-      }
-
-      .manicon-manifold-logo {
-        display: inline-block;
-        margin-right: 22px;
-        font-size: 30px;
-        color: $accentPrimary;
-        vertical-align: top;
-        transition: color $duration $timing;
       }
 
       .text {
@@ -237,5 +173,83 @@
         }
       }
     }
+
+    &__manifold-logo {
+      position: relative;
+      top: -2px;
+      margin-right: 14px;
+      color: $accentPrimary;
+      transition: color $duration $timing;
+
+      &--dull {
+        color: $neutral70;
+      }
+    }
+  }
+}
+
+.footer-nav-list {
+  $icon-size: 24px;
+
+  @include listUnstyled;
+  font-size: 16px;
+
+  &__item {
+    min-height: $icon-size;
+
+    & + & {
+      margin-top: 0.75em;
+    }
+  }
+
+  &__link {
+    @include templateHead;
+    display: flex;
+    // align-items: center;
+    font-size: 17px;
+    font-weight: $medium;
+    color: $neutralWhite;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color $duration $timing;
+
+    &:hover, &:focus {
+      color: $accentPrimary;
+      outline: 0;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    top: -1px;
+    margin-right: 14px;
+    color: $neutral50;
+    transition: color $duration $timing;
+
+    .footer-nav-list__link:hover &,
+    .footer-nav-list__link:focus & {
+      color: $accentPrimary;
+    }
+  }
+}
+
+// <nav> wrapper around nested <ul>
+.text-nav {
+  margin-top: -20px;
+  margin-bottom: 20px;
+
+  @include respond($break75) {
+    margin-bottom: 0;
+  }
+
+  &__list {
+    @include listUnstyled;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__link-group {
+    margin-top: 20px;
+    margin-right: 70px;
   }
 }

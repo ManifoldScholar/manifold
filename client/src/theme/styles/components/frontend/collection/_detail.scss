@@ -1,12 +1,7 @@
 .collection-detail {
-  .collection-description {
-    @include templateCopy;
-    max-width: 840px;
-    font-size: 15px;
-    color: $neutral70;
-  }
+  &__heading {}
 
-  .utility {
+  &__utility {
     padding: 26px 0 12px;
 
     @include respond($break60) {
@@ -33,7 +28,7 @@
     }
   }
 
-  .collection-description {
+  &__description {
     @include templateCopy;
     max-width: 840px;
     font-size: 15px;

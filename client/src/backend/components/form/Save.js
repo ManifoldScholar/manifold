@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 
 export default class FormSave extends Component {
   static displayName = "Form.Save";
@@ -20,13 +21,20 @@ export default class FormSave extends Component {
         {this.props.cancelRoute ? (
           <Link
             to={this.props.cancelRoute}
-            className="button-secondary outlined dull"
+            className={classNames(
+              "button-secondary",
+              "button-secondary--outlined",
+              "button-secondary--dull"
+            )}
           >
             {"Cancel"}
           </Link>
         ) : null}
         <input
-          className="button-secondary outlined"
+          className={classNames(
+            "button-secondary",
+            "button-secondary--outlined"
+          )}
           type="submit"
           value={this.props.text}
         />

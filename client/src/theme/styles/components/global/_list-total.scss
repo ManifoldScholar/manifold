@@ -33,12 +33,4 @@
   .section-heading-secondary a:hover & {
     color: $accentPrimary;
   }
-
-  .backend-header.section-heading-secondary & {
-    float: none;
-    font-size: inherit;
-    color: $accentPrimary;
-    letter-spacing: 0;
-  }
-
 }

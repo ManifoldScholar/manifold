@@ -111,10 +111,6 @@
     display: block;
     width: 100%;
 
-    &.button-with-room {
-      margin-top: 40px;
-    }
-
     + .button-secondary {
       margin-top: 21px;
     }
@@ -174,6 +170,21 @@
   display: inline-block;
   // Default width
   width: 100%;
+
+  // Dropdown icon included in markup
+  &__disclosure-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    color: $accentPrimary;
+    pointer-events: none;
+    transform: translateY(-50%);
+
+    // Use native dropdown arrow in IE9
+    .ie9 & {
+      display: none;
+    }
+  }
 
   .manicon-caret-down {
     position: absolute;
@@ -470,7 +481,7 @@
     }
 
     &__navigation {
-      top: 12px;
+      top: 9px;
       width: auto;
       height: auto;
       font-size: 16px;
@@ -660,9 +671,9 @@
         float: left;
         width: 50%;
         padding: 0.6em 0.8em;
-        font-weight: $light;
-        color: $neutral85;
-        background-color: $neutral50;
+        font-weight: $medium;
+        color: $neutral90;
+        background-color: $neutral40;
 
         @include respond($break80) {
           width: calc(100% - 21vw);
@@ -692,7 +703,7 @@
           width: 0;
           height: 0;
           content: '';
-          border-color: transparent transparent transparent $neutral50;
+          border-color: transparent transparent transparent $neutral40;
           border-style: solid;
           border-width: 1.2em 0 1.2em 1em;
         }
@@ -766,7 +777,7 @@
       z-index: -1;
       display: block;
       padding: 0.6em 0.8em 0.6em 1.6em;
-      color: $neutral80;
+      color: $neutral45;
     }
   }
 }
@@ -778,25 +789,16 @@
     @include buttonUnstyled;
     position: absolute;
     top: 50%;
-    right: 7px;
-    width: 20px;
-    height: 20px;
-    margin-top: -9px;
-    font-size: 8px;
-    color: $neutralWhite;
-    visibility: hidden;
-    background-color: $neutral70;
-    border-radius: 100%;
-    opacity: 0;
-    transition: opacity $duration $timing,
-      visibility $duration $timing;
-
-    @include respond($break90) {
-      padding-top: 2px; // NP
-    }
+    right: 0;
+    width: 38px;
+    height: 100%;
+    font-size: 0;
+    color: $neutral90;
+    transition: color $duration $timing;
+    transform: translateY(-50%);
 
     &:hover {
-      background-color: $sp40Tertiary;
+      color: $sp40Tertiary;
     }
   }
 }
@@ -830,7 +832,7 @@
     color: $neutral90;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background-color: $neutral20;
+    background-color: $neutral05;
     transition: background-color $duration $timing;
 
     .matched & {
@@ -840,15 +842,15 @@
 
   &:hover {
     .text {
-      background-color: $neutral05;
+      background-color: $accentPrimaryPale;
     }
 
     &::before {
-      border-color: $neutral05 transparent transparent transparent;
+      border-color: $accentPrimaryPale transparent transparent transparent;
     }
 
     &::after {
-      border-color: transparent transparent $neutral05 transparent;
+      border-color: transparent transparent $accentPrimaryPale transparent;
     }
   }
 
@@ -860,7 +862,7 @@
     width: 0;
     height: 0;
     content: '';
-    border-color: $neutral20 transparent transparent transparent;
+    border-color: $neutral05 transparent transparent transparent;
     border-style: solid;
     border-width: 1.2em 0 1.2em 1em;
     transition: border-color $duration $timing;
@@ -873,7 +875,7 @@
     width: 0;
     height: 0;
     content: '';
-    border-color: transparent transparent $neutral20 transparent;
+    border-color: transparent transparent $neutral05 transparent;
     border-style: solid;
     border-width: 1.2em 0 1.2em 1em;
     transition: border-color $duration $timing;

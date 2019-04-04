@@ -25,7 +25,7 @@ export default class ResourceCollectionDetail extends PureComponent {
     if (!description) return null;
     return (
       <div
-        className="collection-description"
+        className="collection-detail__description"
         dangerouslySetInnerHTML={{ __html: description }}
       />
     );
@@ -40,10 +40,10 @@ export default class ResourceCollectionDetail extends PureComponent {
     const count = attr.collectionResourcesCount;
     return (
       <section className="collection-detail">
-        <div className="container flush-bottom">
+        <div className="collection-detail__container container flush-bottom">
           <Title resourceCollection={resourceCollection} showCreatedAt />
           {this.renderDescription(attr.descriptionFormatted)}
-          <div className="utility">
+          <div className="collection-detail__utility">
             <Utility.ShareBar url={this.props.resourceCollectionUrl} />
           </div>
         </div>

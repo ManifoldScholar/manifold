@@ -70,21 +70,6 @@
         }
       }
     }
-
-    .share-nav-primary {
-      li:first-child {
-        margin-left: 8px;
-      }
-
-      .manicon {
-        display: inline-block;
-        padding-top: 2px;
-      }
-
-      span {
-        color: $neutral40;
-      }
-    }
   }
 }
 
@@ -93,24 +78,6 @@
 
   a {
     text-decoration: none;
-  }
-
-  .avatar-list {
-    @include listHorizontal;
-    position: relative;
-
-    .avatar {
-      @include buttonAvatar(32);
-      position: relative;
-      margin-right: -20px;
-      border: 1px solid $neutral50;
-
-
-      &.dull {
-        @include buttonAvatar(32, $neutral50, $neutral20);
-        border: 1px solid $neutral50;
-      }
-    }
   }
 
   .label {

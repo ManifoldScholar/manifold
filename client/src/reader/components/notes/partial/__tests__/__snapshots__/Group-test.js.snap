@@ -8,10 +8,19 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
     role="button"
     tabIndex="0"
   >
-    <i
-      aria-hidden="true"
-      className="manicon manicon-caret-down"
-    />
+    <svg
+      aria-hidden={true}
+      className="manicon-svg item__disclosure-icon svg-icon--disclosureDown16"
+      fill="currentColor"
+      height={18}
+      viewBox="0 0 16 16"
+      width={18}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+      />
+    </svg>
     <h4
       className="item-label"
     >
@@ -42,10 +51,6 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
           <span
             className="screen-reader-text"
           />
-          <i
-            aria-hidden="true"
-            className="manicon manicon-null"
-          />
           <span>
             Gods, Earths, and 85ers
           </span>
@@ -58,10 +63,6 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
         >
           <span
             className="screen-reader-text"
-          />
-          <i
-            aria-hidden="true"
-            className="manicon manicon-null"
           />
           <span>
             Gods, Earths, and 85ers

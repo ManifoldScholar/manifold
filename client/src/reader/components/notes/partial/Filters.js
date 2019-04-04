@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class Filters extends Component {
   static displayName = "Notes.Partial.Filters";
@@ -37,8 +38,12 @@ export default class Filters extends Component {
           checked={checked}
           onChange={e => this.toggleFormat(e, format)}
         />
-        <div className="control-indicator" aria-hidden="true">
-          <i className="manicon manicon-check" />
+        <div className="checkbox__indicator" aria-hidden="true">
+          <IconComposer
+            icon="check16"
+            size="default"
+            iconClass="checkbox__icon"
+          />
         </div>
         {label}
       </label>

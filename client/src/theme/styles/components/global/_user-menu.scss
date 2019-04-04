@@ -16,94 +16,58 @@
 .user-menu {
   background-color: $neutral10;
 
-  .tail {
+  &__tail {
     @include panelTail;
     display: none;
   }
 
-  ul {
+  &__list {
     @include listUnstyled;
+  }
 
-    li {
-      @include templateHead;
-      font-size: 20px;
+  &__item {
+    @include templateHead;
+    font-size: 20px;
 
-      @include respond($break40) {
-        font-size: 22px;
-      }
+    @include respond($break40) {
+      font-size: 22px;
     }
 
-    // Menu items can be buttons or links
-    li {
-      button, a {
-        @include buttonUnstyled;
-        min-height: 66px;
-        padding: 15px 30px;
-        color: $neutral80;
-        text-decoration: none;
+    & + & {
+      border-top: 2px solid $neutral30;
+    }
+  }
 
-        i {
-          color: $neutral50;
-        }
+  &__link {
+    @include buttonUnstyled;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 66px;
+    padding: 9px 25px;
+    color: $neutral80;
+    text-decoration: none;
 
-        &:hover, &:focus {
-          color: $accentPrimary;
+    &:hover, &:focus {
+      color: $accentPrimary;
 
-          i {
-            color: $accentPrimary;
-          }
-        }
-      }
-
-      + li {
-        border-top: 2px solid $neutral30;
+      i {
+        color: $accentPrimary;
       }
     }
   }
 
-  // Icons used in menu
-  .manicon {
-    display: inline-block;
-    width: 32px;
-    margin-right: 18px;
-    text-align: right;
-    vertical-align: middle;
+  &__link-text {}
 
-    @include respond($break40) {
-      width: 35px;
-    }
+  &__icon {
+    position: relative;
+    top: 2px;
+    margin-right: 10px;
+    color: $neutral50;
 
-    // React generated element
-    + span {
-      display: inline-block;
-      vertical-align: middle;
-    }
-  }
-
-  .manicon-envelope-circle-right {
-    font-size: 24px;
-    vertical-align: top;
-
-    @include respond($break40) {
-      font-size: 27px;
-    }
-  }
-
-
-  .manicon-person-pencil-simple {
-    font-size: 38px;
-
-    @include respond($break40) {
-      font-size: 42px;
-    }
-  }
-
-  .manicon-circle-arrow-out-right {
-    padding-right: 6px; // NP
-    font-size: 28px;
-
-    @include respond($break40) {
-      font-size: 31px;
+    .user-menu__link:hover &,
+    .user-menu__link:focus & {
+      color: $accentPrimary;
     }
   }
 }

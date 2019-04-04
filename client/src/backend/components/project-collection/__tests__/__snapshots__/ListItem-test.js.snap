@@ -6,28 +6,28 @@ exports[`Backend.ProjectCollection.ListItem component renders correctly 1`] = `
   onClick={[Function]}
 >
   <span
-    className="item-text"
+    className="project-collection-list-item__item-text"
   >
     A Project Collection
   </span>
   <div
-    className="icon-group"
+    className="project-collection-list-item__icon-group"
   >
     <span
-      className="item-text"
+      className="project-collection-list-item__icon-group-item project-collection-list-item__count"
     />
     <button
       aria-label="Change visibility of A Project Collection to visible."
-      className="button-icon-primary"
+      className="project-collection-list-item__icon-group-item project-collection-list-item__button"
       onClick={[Function]}
     >
       <svg
         aria-hidden={true}
-        className="manicon-svg eye-closed svg-icon--eyeClosed32"
+        className="manicon-svg project-collection-list-item__icon eye-closed svg-icon--eyeClosed32"
         fill="currentColor"
-        height={32}
+        height={30}
         viewBox="0 0 32 32"
-        width={32}
+        width={30}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
@@ -41,12 +41,12 @@ exports[`Backend.ProjectCollection.ListItem component renders correctly 1`] = `
         Collection is not visible
       </span>
     </button>
-    <i
-      className="manicon drag-handle"
+    <div
+      className="project-collection-list-item__icon-group-item project-collection-list-item__button project-collection-list-item__button--drag-handle"
     >
       <svg
         aria-hidden={true}
-        className="manicon-svg svg-icon--grabber32"
+        className="manicon-svg project-collection-list-item__icon svg-icon--grabber32"
         fill="currentColor"
         height={30}
         viewBox="0 0 32 32"
@@ -62,7 +62,7 @@ exports[`Backend.ProjectCollection.ListItem component renders correctly 1`] = `
       >
         Change the order of this list.
       </span>
-    </i>
+    </div>
   </div>
 </li>
 `;

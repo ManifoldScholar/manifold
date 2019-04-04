@@ -45,7 +45,7 @@ export default class ListEntitiesListTextTitle extends PureComponent {
 
   render() {
     return (
-      <h3 className="entity-list__title">
+      <h3 className="entity-list__title-block entity-list__title">
         {this.link(
           <React.Fragment>
             {this.titleIcon && (

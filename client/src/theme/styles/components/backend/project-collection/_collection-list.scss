@@ -22,11 +22,6 @@
       display: flex;
       flex-wrap: nowrap;
     }
-
-    .button-icon-secondary {
-      width: 100%;
-      margin: 0;
-    }
   }
 
   .instructional-copy {
@@ -35,16 +30,11 @@
   }
 }
 
-.project-collection-list-item + .project-collection-list-item {
-  margin-top: 10px;
-}
-
 .project-collection-list-item {
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  padding: 11px 10px 11px 20px;
+  padding: 10px 10px 10px 20px;
   color: $neutral50;
   cursor: pointer;
   background-color: $neutral95;
@@ -53,71 +43,75 @@
     color $duration $timing,
     background-color $duration $timing;
 
-  &.selected {
+  & + & {
+    margin-top: 10px;
+  }
+
+  &--selected {
     color: $neutral95;
     background-color: $accentPrimary;
-
-    .icon-group > i:hover {
-      color: $neutral75;
-    }
-
-    svg {
-      color: $neutral95;
-    }
   }
 
-  .item-text {
+  &__item-text,
+  &__count {
     @include templateHead;
+    position: relative;
+    top: -2px;
     font-size: 16px;
-    line-height: 1;
   }
 
-  > .item-text {
+  &__item-text {
+    flex-grow: 1;
     padding: 3px 0;
-    margin-right: 12px;
+    margin-right: 6px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  .icon-group {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
+  &__count {
+    margin-right: 6px;
+  }
 
-    > .item-text {
-      padding-bottom: 2px;
-      margin-right: 5px;
+  &__button {
+    @include buttonUnstyled;
+    transition: color $duration $timing;
+
+    &--drag-handle {
+      cursor: grab;
     }
 
-    button {
-      height: auto;
-      padding: 0;
-      margin-left: 6px;
-      color: $neutral50;
-      cursor: pointer;
-      background: transparent;
-      border: 0;
-      border-radius: 0;
-      transition: color $duration $timing;
-      appearance: none;
+    &:hover {
+      color: $accentPrimary;
+    }
 
+    &:focus {
+      color: $accentPrimaryDull;
+      outline: thin dotted $neutral70;
+    }
+
+    .project-collection-list-item--selected & {
       &:hover {
-        color: $accentPrimary;
+        color: inherit;
       }
 
       &:focus {
-        color: $accentPrimaryDull;
-        outline: thin dotted $neutral70;
+        color: inherit;
+        outline-color: $neutral70;
       }
     }
-
-    i {
-      margin-left: 6px; // TODO: This icon will become a button as well once the draggable refactor happens
-    }
   }
 
-  .drag-handle {
-    cursor: grab;
+  &__icon-group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
   }
+
+  &__icon-group-item {
+    padding-right: 3px;
+    padding-left: 3px;
+  }
+
+  &__icon {}
 }

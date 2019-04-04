@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class FormColumnMapAttribute extends PureComponent {
   static displayName = "Form.ColumnMap.Attribute";
@@ -40,7 +41,11 @@ export default class FormColumnMapAttribute extends PureComponent {
                   {"Cancel mapping of "}
                   {`${this.props.name} to ${this.props.mapping}`}
                 </span>
-                <i className="manicon manicon-x-bold" aria-hidden="true" />
+                <IconComposer
+                  icon="close16"
+                  size="default"
+                  iconClass="cancel__icon"
+                />
               </button>
             </div>
           );

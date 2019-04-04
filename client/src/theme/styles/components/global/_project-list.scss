@@ -34,14 +34,6 @@
 
   // Optional grid-style layout for larger viewports
   &.grid {
-    .form-search-filter + & {
-      margin-top: 16px;
-
-      @include respond($break75) {
-        margin-top: 36px;
-      }
-    }
-
     a, .item-wrapper {
       @include projectGridItem;
     }

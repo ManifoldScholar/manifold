@@ -147,8 +147,8 @@
     }
   }
 
-  .manicon-caret-right {
-    font-size: 18px;
+  &__caret-icon {
     color: $accentPrimary;
+    transform: rotate(-90deg);
   }
 }

@@ -13,6 +13,7 @@ export default class MobileSearch extends PureComponent {
         onSubmit={this.props.closeNavigation}
         searchType={"frontend"}
         visibility={{ search: true }}
+        className="nested-nav__search-menu"
       />
     );
   }

@@ -4,6 +4,7 @@ import FocusTrap from "focus-trap-react";
 import isString from "lodash/isString";
 
 import BodyClass from "hoc/body-class";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class Overlay extends Component {
   static propTypes = {
@@ -73,8 +74,8 @@ export default class Overlay extends Component {
     return (
       <div className="container">
         <h3 className="overlay-title">
-          <i className={`manicon manicon-${icon}`} aria-hidden="true" />
-          {title}
+          <IconComposer icon={icon} size={32} iconClass="overlay-title__icon" />
+          <span className="overlay-title__text">{title}</span>
         </h3>
       </div>
     );
@@ -91,7 +92,11 @@ export default class Overlay extends Component {
           data-id="overlay-close"
         >
           Close
-          <i className="manicon manicon-x" aria-hidden="true" />
+          <IconComposer
+            icon="close32"
+            size={37.334}
+            iconClass="overlay-close__icon"
+          />
         </button>
       </header>
     );
@@ -120,7 +125,11 @@ export default class Overlay extends Component {
                 data-id="overlay-close"
               >
                 Close
-                <i className="manicon manicon-x" aria-hidden="true" />
+                <IconComposer
+                  icon="close32"
+                  size={37.334}
+                  iconClass="overlay-close__icon"
+                />
               </button>
             ) : null}
             <div

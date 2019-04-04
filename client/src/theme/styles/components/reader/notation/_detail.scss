@@ -57,16 +57,12 @@
     }
   }
 
-  .button-nav {
-    flex-direction: column;
+  .button-secondary {
+    width: 250px;
+    max-width: 100%;
 
-    .button-secondary {
-      width: 250px;
-      max-width: 100%;
-
-      @include respond($break60) {
-        width: 320px;
-      }
+    @include respond($break60) {
+      width: 320px;
     }
   }
 }

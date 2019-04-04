@@ -107,7 +107,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
             >
               <li>
                 <a
-                  className="button-mode"
+                  className="header-app__mode-button"
                   href="/backend"
                   onClick={[Function]}
                 >
@@ -122,7 +122,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="manicon-svg svg-icon--search16"
+                    className="manicon-svg search-icon svg-icon--search16"
                     fill="currentColor"
                     height={22}
                     viewBox="0 0 16 16"
@@ -180,29 +180,41 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
             </ul>
           </nav>
           <nav
-            className="nested-nav hide-75"
+            className="breadcrumb-list hide-75"
           >
-            <div
-              className="selected"
-            >
-              <span>
-                <a
-                  aria-current="page"
-                  className="segment active"
-                  href="/"
-                  onClick={[Function]}
-                  style={Object {}}
-                >
-                  Home
-                </a>
-              </span>
-            </div>
-            <i
-              className="manicon manicon-bars-parallel-horizontal"
-              onClick={[Function]}
-              role="button"
-            />
+            <span>
+              <a
+                aria-current="page"
+                className="breadcrumb active"
+                href="/"
+                onClick={[Function]}
+                style={Object {}}
+              >
+                Home
+              </a>
+            </span>
           </nav>
+          <nav
+            className="hide-75 nested-nav"
+          />
+          <button
+            className="mobile-nav-trigger"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden={true}
+              className="manicon-svg mobile-nav-trigger__icon svg-icon--menu32"
+              fill="currentColor"
+              height={32}
+              viewBox="0 0 32 32"
+              width={32}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M25,15.5 L25,16.5 L6.99999997,16.5 L6.99999997,15.5 L25,15.5 Z M25,8.49999998 L25,9.49999998 L6.99999997,9.49999998 L6.99999997,8.49999998 L25,8.49999998 Z M25,22.5 L25,23.5 L6.99999997,23.5 L6.99999997,22.5 L25,22.5 Z"
+              />
+            </svg>
+          </button>
         </div>
         <div
           className="header-border"
@@ -293,14 +305,20 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
               <nav
                 className="text-nav"
               >
-                <ul>
-                  <li>
+                <ul
+                  className="text-nav__list"
+                >
+                  <li
+                    className="text-nav__link-group"
+                  >
                     <ul
-                      className="footer-nav"
+                      className="footer-nav-list"
                     >
-                      <li>
+                      <li
+                        className="footer-nav-list__item"
+                      >
                         <span
-                          className="fake-link"
+                          className="footer-nav-list__link"
                           onClick={[Function]}
                           role="button"
                           tabIndex="0"
@@ -308,16 +326,22 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                           Log Out
                         </span>
                       </li>
-                      <li>
+                      <li
+                        className="footer-nav-list__item"
+                      >
                         <a
+                          className="footer-nav-list__link"
                           href="/"
                           onClick={[Function]}
                         >
                           Home
                         </a>
                       </li>
-                      <li>
+                      <li
+                        className="footer-nav-list__item"
+                      >
                         <a
+                          className="footer-nav-list__link"
                           href="/projects/all"
                           onClick={[Function]}
                         >
@@ -326,7 +350,9 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                       </li>
                     </ul>
                   </li>
-                  <li />
+                  <li
+                    className="text-nav__link-group"
+                  />
                 </ul>
               </nav>
             </div>
@@ -367,9 +393,20 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
             <span
               className="logo"
             >
-              <i
-                className="manicon manicon-manifold-logo"
-              />
+              <svg
+                aria-hidden={true}
+                className="manicon-svg footer-tertiary__manifold-logo svg-icon--manifoldLogo32"
+                fill="currentColor"
+                height={32}
+                viewBox="0 0 32 32"
+                width={32}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <polygon
+                  fillRule="evenodd"
+                  points="29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22"
+                />
+              </svg>
               <span
                 className="text"
               >

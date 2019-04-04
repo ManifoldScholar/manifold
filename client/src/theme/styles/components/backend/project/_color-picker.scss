@@ -55,12 +55,9 @@
         padding-top: 7px;
         background-color: transparent;
 
-        .manicon::before {
+        &__icon {
           display: inline-block;
-          font-size: 16px;
           color: $neutral90;
-          text-align: center;
-          vertical-align: middle;
         }
 
         &::before {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
+import classNames from "classnames";
+import IconComposer from "global/components/utility/IconComposer";
 
 const helpLink = "https://manifoldapp.org/docs/";
 
@@ -16,10 +17,7 @@ export default class ProjectCollectionPlaceholder extends Component {
       <section>
         <div className="project-collection-placeholder">
           <header className="section-heading">
-            <Utility.IconComposer
-              icon="booksOnShelfStrokeUnique"
-              stroke="#52e3ac"
-            />
+            <IconComposer icon="booksOnShelfStrokeUnique" stroke="#52e3ac" />
             <div className="main">
               <div className="body">
                 <h4 className="title">
@@ -41,7 +39,14 @@ export default class ProjectCollectionPlaceholder extends Component {
               className="button-icon-secondary"
               onClick={this.props.createClickHandler}
             >
-              <i className="manicon manicon-plus" />
+              <IconComposer
+                icon="plus16"
+                size={20}
+                iconClass={classNames(
+                  "button-icon-secondary__icon",
+                  "button-icon-secondary__icon--large"
+                )}
+              />
               <span>{"Create a Collection"}</span>
             </button>
           </div>

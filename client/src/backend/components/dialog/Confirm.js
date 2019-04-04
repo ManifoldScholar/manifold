@@ -1,7 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import Wrapper from "./Wrapper";
 import isString from "lodash/isString";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class DialogConfirm extends PureComponent {
   static displayName = "Dialog.Confirm";
@@ -31,6 +33,13 @@ export default class DialogConfirm extends PureComponent {
     if (this.context.unpauseKeyboardEvents)
       this.context.unpauseKeyboardEvents();
     window.removeEventListener("keyup", this.handleKeyPress);
+  }
+
+  get buttonClasses() {
+    return classNames(
+      "buttons-icon-horizontal__button",
+      "button-icon-secondary"
+    );
   }
 
   handleKeyPress = event => {
@@ -70,18 +79,29 @@ export default class DialogConfirm extends PureComponent {
         <div className="buttons-icon-horizontal">
           <button
             onClick={this.handleResolveClick}
-            className="button-icon-secondary"
+            className={this.buttonClasses}
             data-id="accept"
           >
-            <i className="manicon manicon-check small" aria-hidden="true" />
+            <IconComposer
+              icon="check16"
+              size="default"
+              iconClass="button-icon-secondary__icon"
+            />
             <span>Yes</span>
           </button>
           <button
-            className="button-icon-secondary dull"
+            className={classNames(
+              this.buttonClasses,
+              "button-icon-secondary--dull"
+            )}
             onClick={this.handleRejectClick}
             data-id="reject"
           >
-            <i className="manicon manicon-x small" aria-hidden="true" />
+            <IconComposer
+              icon="close16"
+              size="default"
+              iconClass="button-icon-secondary__icon"
+            />
             <span>No</span>
           </button>
         </div>

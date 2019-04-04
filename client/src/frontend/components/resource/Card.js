@@ -6,6 +6,7 @@ import FormattedDate from "global/components/FormattedDate";
 import Resourceish from "frontend/components/resourceish";
 import Preview from "frontend/components/resource-preview";
 import TagList from "./TagList";
+import IconComposer from "global/components/utility/IconComposer";
 
 import lh from "helpers/linkHandler";
 
@@ -43,10 +44,14 @@ class ResourceCard extends Component {
     const text = attr.downloadable ? (
       this.renderDownloadablePreview(type)
     ) : (
-      <span>
-        {"View"}
-        <i className="manicon manicon-arrow-right" aria-hidden="true" />
-      </span>
+      <React.Fragment>
+        <span className="resource-card__view-text">{"View"}</span>
+        <IconComposer
+          icon="arrowRight16"
+          size="default"
+          iconClass="resource-card__view-icon"
+        />
+      </React.Fragment>
     );
     return text;
   }
@@ -120,34 +125,42 @@ class ResourceCard extends Component {
       case "image":
       case "interactive":
         out = (
-          <span>
-            {"Preview"}
+          <React.Fragment>
+            <span className="resource-card__view-text">{"Preview"}</span>
             <i className="manicon manicon-eye-outline" aria-hidden="true" />
-          </span>
+          </React.Fragment>
         );
         break;
       case "link":
         out = (
-          <span>
-            {"Visit"}
-            <i className="manicon manicon-arrow-right" aria-hidden="true" />
-          </span>
+          <React.Fragment>
+            <span className="resource-card__view-text">{"Visit"}</span>
+            <IconComposer
+              icon="arrowRight16"
+              size="default"
+              iconClass="resource-card__view-icon"
+            />
+          </React.Fragment>
         );
         break;
       case "video":
         out = (
-          <span>
-            {"Play"}
+          <React.Fragment>
+            <span className="resource-card__view-text">{"Play"}</span>
             <i className="manicon manicon-triangle-right" aria-hidden="true" />
-          </span>
+          </React.Fragment>
         );
         break;
       default:
         out = (
-          <span>
-            {"Download"}
-            <i className="manicon manicon-arrow-down" aria-hidden="true" />
-          </span>
+          <React.Fragment>
+            <span className="resource-card__view-text">{"Download"}</span>
+            <IconComposer
+              icon="arrowDown16"
+              size="default"
+              iconClass="resource-card__view-icon"
+            />
+          </React.Fragment>
         );
     }
     return out;
@@ -159,20 +172,22 @@ class ResourceCard extends Component {
     const attr = resource.attributes;
 
     const infoClass = classNames({
-      "resource-info": true,
-      hover: this.state.infoHover
+      "resource-card__info": true,
+      "resource-card__info--hover": this.state.infoHover
     });
     return (
       <li className="resource-card">
         <Preview resource={resource}>
           <div
-            className="resource-link"
+            className="resource-card__link"
             onClick={this.handlePreviewClick}
             role="link"
             tabIndex="0"
           >
             <Resourceish.Thumbnail resourceish={resource} />
-            <div className="preview-text">{this.getPreviewText(attr)}</div>
+            <div className="resource-card__preview-text">
+              {this.getPreviewText(attr)}
+            </div>
           </div>
         </Preview>
         {/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */}
@@ -186,15 +201,19 @@ class ResourceCard extends Component {
         >
           {/* eslint-enable jsx-a11y/no-noninteractive-element-to-interactive-role */}
           <div>
-            <header className="resource-title">
+            <header className="resource-card__title">
               <h4 dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />
             </header>
-            <span className="resource-date">
+            <span className="resource-card__date">
               Uploaded{" "}
               <FormattedDate format="MMMM, YYYY" date={attr.createdAt} />
             </span>
-            <div to={this.detailUrl()} className="arrow-link">
-              <i className="manicon manicon-arrow-right" aria-hidden="true" />
+            <div to={this.detailUrl()} className="resource-card__arrow-link">
+              <IconComposer
+                icon="arrowRight16"
+                size={20}
+                iconClass="resource-card__arrow-link-icon"
+              />
             </div>
           </div>
           <TagList resource={resource} />

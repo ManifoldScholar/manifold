@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import FocusTrap from "focus-trap-react";
 import isString from "lodash/isString";
+import IconComposer from "global/components/utility/IconComposer";
 
 class DialogWrapper extends PureComponent {
   static displayName = "Dialog.Wrapper";
@@ -136,7 +137,7 @@ class DialogWrapper extends PureComponent {
                   role="button"
                   tabIndex="0"
                 >
-                  <i className="manicon manicon-x" aria-hidden="true" />
+                  <IconComposer icon="close16" size="default" />
                   <span className="screen-reader-text">Close Dialog</span>
                 </div>
               ) : null}

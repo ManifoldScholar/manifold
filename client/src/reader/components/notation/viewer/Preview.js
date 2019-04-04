@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Resourceish from "frontend/components/resourceish";
 import Link from "./Link";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class NotationViewerPreview extends PureComponent {
   static displayName = "NotationViewer.Preview";
@@ -38,7 +39,11 @@ export default class NotationViewerPreview extends PureComponent {
                 }}
               />
             </figure>
-            <i className="manicon manicon-caret-right" aria-hidden="true" />
+            <IconComposer
+              icon="disclosureDown32"
+              size="default"
+              iconClass="notation-preview-footer__caret-icon"
+            />
           </div>
         </Link>
       </div>

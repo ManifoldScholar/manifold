@@ -63,12 +63,12 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                                     </Connect(Stylesheet.Form.TextSections)>
                                     <Form.Save cancelRoute=\\"/backend/projects/text/undefined/styles\\" text=\\"Save Stylesheet\\">
                                       <div className=\\"form-input submit wide\\">
-                                        <Link to=\\"/backend/projects/text/undefined/styles\\" className=\\"button-secondary outlined dull\\" replace={false}>
-                                          <a className=\\"button-secondary outlined dull\\" onClick={[Function]} href=\\"/backend/projects/text/undefined/styles\\">
+                                        <Link to=\\"/backend/projects/text/undefined/styles\\" className=\\"button-secondary button-secondary--outlined button-secondary--dull\\" replace={false}>
+                                          <a className=\\"button-secondary button-secondary--outlined button-secondary--dull\\" onClick={[Function]} href=\\"/backend/projects/text/undefined/styles\\">
                                             Cancel
                                           </a>
                                         </Link>
-                                        <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Stylesheet\\" />
+                                        <input className=\\"button-secondary button-secondary--outlined\\" type=\\"submit\\" value=\\"Save Stylesheet\\" />
                                       </div>
                                     </Form.Save>
                                   </form>

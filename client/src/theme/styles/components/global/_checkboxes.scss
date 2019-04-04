@@ -18,23 +18,20 @@
     }
   }
 
-  .control-indicator {
+  &__indicator {
     display: inline-block;
     width: 24px;
     height: 24px;
-    padding-top: 6px;
     margin-right: 12px;
     text-align: center;
     vertical-align: middle;
     background-color: $neutralWhite;
     border-radius: 3px;
+  }
 
-    // Styled, but hidden until checked
-    .manicon-check {
-      font-size: 11px;
-      color: $neutralWhite;
-      visibility: hidden;
-    }
+  &__icon {
+    color: $neutralWhite;
+    visibility: hidden;
   }
 
   input {
@@ -43,10 +40,10 @@
     opacity: 0;
   }
 
-  input:checked ~ .control-indicator {
+  input:checked ~ .checkbox__indicator {
     background-color: $accentPrimary;
 
-    .manicon-check {
+    .checkbox__icon {
       visibility: visible;
     }
   }
@@ -54,10 +51,10 @@
   input:focus {
     outline: 0;
 
-    ~ .control-indicator {
+    ~ .checkbox__indicator {
       background-color: $focusPrimary;
 
-      .manicon-check {
+      .checkbox__icon {
         color: $neutral90;
       }
     }

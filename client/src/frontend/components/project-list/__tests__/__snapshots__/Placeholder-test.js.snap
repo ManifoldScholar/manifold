@@ -62,14 +62,16 @@ exports[`Frontend.ProjectList.Placeholder component renders correctly 1`] = `
         />
       </svg>
       <div
-        className="button"
+        className="project-list-placeholder__button-nav button-nav"
       >
         <a
           className="button-icon-primary"
           href="/backend/projects"
           onClick={[Function]}
         >
-          <span>
+          <span
+            className="button-icon-primary__text"
+          >
             Publish a Project Now
           </span>
         </a>

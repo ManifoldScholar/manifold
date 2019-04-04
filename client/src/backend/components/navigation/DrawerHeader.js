@@ -8,7 +8,6 @@ export default class DrawerEntityHeader extends PureComponent {
 
   static propTypes = {
     title: PropTypes.string,
-    manicon: PropTypes.string,
     children: PropTypes.any,
     buttons: PropTypes.array,
     icon: PropTypes.string,
@@ -23,22 +22,22 @@ export default class DrawerEntityHeader extends PureComponent {
     return (
       <header className="drawer-header">
         {this.props.title && (
-          <h2 className="heading-quaternary">
-            {this.props.manicon && (
-              <i
-                className={`manicon manicon-${this.props.manicon}`}
-                aria-hidden="true"
+          <h2 className="drawer-header__title">
+            {this.props.icon && (
+              <Utility.IconComposer
+                icon={this.props.icon}
+                size={44}
+                iconClass="drawer-header__title-icon"
               />
             )}
-            {this.props.icon && (
-              <Utility.IconComposer icon={this.props.icon} size={44} />
-            )}
-            {this.props.title}
+            <span className="drawer-header__title-text">
+              {this.props.title}
+            </span>
           </h2>
         )}
         {this.props.children}
         {this.props.buttons.length > 0 && (
-          <div className="buttons-bare-vertical">
+          <div className="drawer-header__utility utility-button-group utility-button-group--stack">
             {this.props.buttons &&
               this.props.buttons.map(button => (
                 <Button key={button.label} {...button} />

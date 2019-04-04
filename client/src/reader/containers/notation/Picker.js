@@ -151,11 +151,11 @@ export class NotationPickerContainerImplementation extends PureComponent {
             label="options"
             optionOne={{
               label: "resources",
-              iconClass: "manicon-cube-outline"
+              icon: "resource24"
             }}
             optionTwo={{
               label: "collections",
-              iconClass: "manicon-file-box"
+              icon: "resourceCollection64"
             }}
           />
           <EntitiesList

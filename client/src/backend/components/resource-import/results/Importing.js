@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceImportResultsImporting extends PureComponent {
   static displayName = "ResourceImport.Results.Importing";
@@ -14,7 +15,11 @@ export default class ResourceImportResultsImporting extends PureComponent {
 
     return (
       <React.Fragment>
-        <i className="manicon manicon-plus small" aria-hidden="true" />
+        <IconComposer
+          icon="plus16"
+          size={18}
+          iconClass="results-header__icon"
+        />
         <span>{`Row #${resourceImportRow.lineNumber} is being imported.`}</span>
       </React.Fragment>
     );

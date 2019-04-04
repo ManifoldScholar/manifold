@@ -40,7 +40,8 @@
       position: absolute;
       top: 50%;
       left: 20px;
-      margin-top: -10px;
+      margin-top: -9px;
+      line-height: 0;
       color: $neutral50;
     }
 
@@ -129,11 +130,10 @@
         margin-bottom: 14px;
       }
 
-      .control-indicator {
+      &__indicator {
         display: inline-block;
         width: 24px;
         height: 24px;
-        padding-top: 6px;
         margin-right: 12px;
         text-align: center;
         vertical-align: middle;
@@ -142,13 +142,13 @@
         .search-menu & {
           background-color: $neutralWhite;
         }
+      }
 
-        // Styled, but hidden until checked
-        .manicon-check {
-          font-size: 11px;
-          color: $neutralOffBlack;
-          visibility: hidden;
-        }
+      // Styled, but hidden until checked
+      &__icon {
+        font-size: 11px;
+        color: $neutralOffBlack;
+        visibility: hidden;
       }
 
       input {
@@ -157,13 +157,13 @@
         opacity: 0;
       }
 
-      input:checked ~ .control-indicator {
-        .manicon-check {
+      input:checked ~ .checkbox__indicator {
+        .checkbox__icon {
           visibility: visible;
         }
       }
 
-      input:focus ~ .control-indicator {
+      input:focus ~ .checkbox__indicator {
         background-color:  $focusPrimary;
       }
 

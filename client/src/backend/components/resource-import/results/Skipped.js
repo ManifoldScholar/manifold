@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceImportResultsSkipped extends PureComponent {
   static displayName = "ResourceImport.Results.Skipped";
@@ -14,10 +15,14 @@ export default class ResourceImportResultsSkipped extends PureComponent {
 
     return (
       <React.Fragment>
-        <i className="manicon manicon-arrow-right small" aria-hidden="true" />
-        <span>{`Row #${
-          resourceImportRow.lineNumber
-        } was skipped as marked.`}</span>
+        <IconComposer
+          icon="arrowRight16"
+          size={18}
+          iconClass="results-header__icon"
+        />
+        <span>
+          {`Row #${resourceImportRow.lineNumber} was skipped as marked.`}
+        </span>
       </React.Fragment>
     );
   }

@@ -6,9 +6,13 @@ exports[`Backend Project Category Edit Container renders correctly 1`] = `
     className="drawer-header"
   >
     <h2
-      className="heading-quaternary"
+      className="drawer-header__title"
     >
-      Edit Category
+      <span
+        className="drawer-header__title-text"
+      >
+        Edit Category
+      </span>
     </h2>
   </header>
   <div>
@@ -40,7 +44,7 @@ exports[`Backend Project Category Edit Container renders correctly 1`] = `
         className="form-input submit wide"
       >
         <input
-          className="button-secondary outlined"
+          className="button-secondary button-secondary--outlined"
           type="submit"
           value="Update Category"
         />

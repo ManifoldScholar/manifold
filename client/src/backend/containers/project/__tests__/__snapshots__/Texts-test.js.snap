@@ -7,7 +7,7 @@ Array [
     className="buttons-icon-horizontal maintain"
   >
     <a
-      className="button-icon-secondary"
+      className="buttons-icon-horizontal__button button-icon-secondary"
       href="/backend/projects/1/texts/ingestions/new"
       onClick={[Function]}
     >
@@ -16,10 +16,19 @@ Array [
       >
         Add a new text
       </span>
-      <i
-        aria-hidden="true"
-        className="manicon manicon-plus"
-      />
+      <svg
+        aria-hidden={true}
+        className="manicon-svg button-icon-secondary__icon button-icon-secondary__icon--large svg-icon--plus16"
+        fill="currentColor"
+        height={18}
+        viewBox="0 0 16 16"
+        width={18}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
+        />
+      </svg>
       <span
         aria-hidden="true"
         className="full"
@@ -34,7 +43,7 @@ Array [
       </span>
     </a>
     <a
-      className="button-icon-secondary"
+      className="buttons-icon-horizontal__button button-icon-secondary"
       href="/backend/projects/1/texts/category/new"
       onClick={[Function]}
     >
@@ -43,10 +52,19 @@ Array [
       >
         Add a new category
       </span>
-      <i
-        aria-hidden="true"
-        className="manicon manicon-plus"
-      />
+      <svg
+        aria-hidden={true}
+        className="manicon-svg button-icon-secondary__icon button-icon-secondary__icon--large svg-icon--plus16"
+        fill="currentColor"
+        height={18}
+        viewBox="0 0 16 16"
+        width={18}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
+        />
+      </svg>
       <span
         aria-hidden="true"
         className="full"

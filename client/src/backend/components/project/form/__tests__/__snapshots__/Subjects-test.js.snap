@@ -17,12 +17,12 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
       className="input-predictive"
     >
       <div
-        className="input"
+        className="input-predictive__input"
       >
         <input
           aria-describedby={null}
           aria-label="Add a Subject"
-          className="text-input"
+          className="input-predictive__text-input text-input"
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
@@ -34,9 +34,11 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
         />
       </div>
       <nav
-        className="predictive-list"
+        className="input-predictive__results-wrapper"
       >
-        <ul />
+        <ul
+          className="input-predictive__results"
+        />
       </nav>
     </div>
     <ul
@@ -56,7 +58,7 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
           className="utility"
         >
           <button
-            className="manicon manicon-x"
+            className="utility__button"
             onClick={[Function]}
             type="button"
           >
@@ -69,6 +71,19 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
               Subjects
                list.
             </span>
+            <svg
+              aria-hidden={true}
+              className="manicon-svg utility__icon utility__icon--close svg-icon--close32"
+              fill="currentColor"
+              height={26}
+              viewBox="0 0 32 32"
+              width={26}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.00007316,7.70847994 L7.70712678,7.00132 L24.9999268,24.2915201 L24.2928732,24.99868 L7.00007316,7.70847994 Z M7.70712678,24.99868 L7.00007316,24.2915201 L24.2928732,7.00132 L24.9999268,7.70847994 L7.70712678,24.99868 Z"
+              />
+            </svg>
           </button>
         </div>
       </li>

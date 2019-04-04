@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class FormUploadFilePreview extends PureComponent {
   static propTypes = {
@@ -13,7 +14,11 @@ export default class FormUploadFilePreview extends PureComponent {
     return (
       <div className="contents-icon-preview">
         <div className="message" data-id="preview">
-          <i className="manicon manicon-document" aria-hidden="true" />
+          <IconComposer
+            icon="resourceDocument64"
+            size="default"
+            iconClass="contents-icon-preview__icon"
+          />
           <p className="primary">{this.props.fileName}</p>
           <p className="secondary">
             <span

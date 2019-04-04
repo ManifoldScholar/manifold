@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class Notifications extends Component {
   static displayName = "Dashboard.Notifications";
@@ -17,7 +18,8 @@ export default class Notifications extends Component {
                 {"work in progress!"}
               </a>
             </p>
-            <button className="manicon manicon-x">
+            <button className="notification-list-block__close-button">
+              <IconComposer icon="close16" size="default" />
               <span className="screen-reader-text">Close Notification</span>
             </button>
           </li>
@@ -28,16 +30,19 @@ export default class Notifications extends Component {
                 {"placeholders"}
               </a>
             </p>
-            <button className="manicon manicon-x">
+            <button className="notification-list-block__close-button">
+              <IconComposer icon="close16" size="default" />
               <span className="screen-reader-text">Close Notification</span>
             </button>
           </li>
         </ul>
         <a
           href="https://en.wikipedia.org/wiki/Placeholder"
-          className="button-bare-primary"
+          className="utility-button"
         >
-          {"Notification History"}
+          <span className="utility-button__text utility-button__text--highlight">
+            {"Notification History"}
+          </span>
         </a>
       </nav>
     );

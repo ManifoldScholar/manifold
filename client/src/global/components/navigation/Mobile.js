@@ -9,6 +9,7 @@ import UserLinks from "./mobile-components/UserLinks";
 import MobileSearch from "./mobile-components/Search";
 import MobileBreadcrumb from "./mobile-components/Breadcrumb";
 import FocusTrap from "focus-trap-react";
+import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
 import BodyClass from "hoc/body-class";
@@ -55,6 +56,10 @@ export class NavigationMobile extends Component {
       expanded: [],
       open: false
     };
+  }
+
+  get triggerIcon() {
+    return this.state.open ? "close32" : "menu32";
   }
 
   pathForLink(link) {
@@ -130,6 +135,7 @@ export class NavigationMobile extends Component {
         href={link.externalUrl}
         target={link.newTab ? "_blank" : null}
         rel="noopener noreferrer"
+        className="nested-nav__link"
       >
         {link.label}
       </a>
@@ -146,6 +152,7 @@ export class NavigationMobile extends Component {
         exact={exact}
         onClick={this.closeNavigation}
         target={link.newTab ? "_blank" : null}
+        className="nested-nav__link"
         activeClassName="active"
       >
         {link.label}
@@ -159,85 +166,98 @@ export class NavigationMobile extends Component {
     const hasChildren = children && children.length > 0;
     const expanded = this.state.expanded.includes(link.route);
     const wrapperClasses = classnames({
-      nested: hasChildren,
-      open: expanded
+      "nested-nav__item": true,
+      "nested-nav__grid-item": true,
+      "nested-nav__item--nested": hasChildren,
+      "nested-nav__item--open": expanded
     });
 
     return (
       <li key={`${link.label}-${index}`} className={wrapperClasses}>
-        {hasChildren ? (
-          <i
-            role="button"
+        {hasChildren && (
+          <button
             onClick={this.createExpandToggleHandler(link.route)}
-            className={`manicon manicon-caret-up`}
-          />
-        ) : null}
+            className="nested-nav__disclosure-button"
+          >
+            <IconComposer
+              icon="disclosureDown16"
+              size="default"
+              iconClass="nested-nav__disclosure-icon"
+            />
+          </button>
+        )}
         {link.route
           ? this.renderManifoldLink(link)
           : this.renderExternalLink(link)}
-        {hasChildren ? (
-          <ul>{children.map(child => this.renderItem(child))}</ul>
-        ) : null}
+        {hasChildren && (
+          <ul className="nested-nav__list nested-nav__list--nested">
+            {children.map(child => this.renderItem(child))}
+          </ul>
+        )}
       </li>
+    );
+  }
+
+  renderNavigationMenu() {
+    return (
+      <BodyClass className={"no-scroll"}>
+        <FocusTrap
+          focusTrapOptions={{
+            clickOutsideDeactivates: true
+          }}
+        >
+          <div className="nested-nav__content">
+            <ul className="nested-nav__list nested-nav__list--primary-links">
+              {this.props.links.map((link, index) => {
+                if (link.ability)
+                  return (
+                    <Authorize
+                      key={`${link.route}-wrapped`}
+                      entity={link.entity}
+                      ability={link.ability}
+                    >
+                      {this.renderItem(link, index)}
+                    </Authorize>
+                  );
+                return this.renderItem(link, index);
+              })}
+              {this.props.mode === "frontend" && (
+                <li className="nested-nav__item">
+                  <MobileSearch closeNavigation={this.closeNavigation} />
+                </li>
+              )}
+            </ul>
+            <UserLinks {...this.props} closeNavigation={this.closeNavigation} />
+          </div>
+        </FocusTrap>
+      </BodyClass>
     );
   }
 
   render() {
     const navClasses = classnames({
-      "nested-nav": true,
       "hide-75": true,
-      open: this.state.open
+      "nested-nav": true,
+      "nested-nav--open": this.state.open
     });
-    const triggerClass = this.state.open ? "x" : "bars-parallel-horizontal";
 
     return (
-      <nav className={navClasses}>
+      <React.Fragment>
         <MobileBreadcrumb
           links={this.props.links}
           location={this.props.location}
         />
-        {this.state.open ? (
-          <BodyClass className={"no-scroll"}>
-            <FocusTrap
-              focusTrapOptions={{
-                clickOutsideDeactivates: true
-              }}
-            >
-              <div className="nested-nav-content">
-                <ul className="primary-links">
-                  {this.props.links.map((link, index) => {
-                    if (link.ability)
-                      return (
-                        <Authorize
-                          key={`${link.route}-wrapped`}
-                          entity={link.entity}
-                          ability={link.ability}
-                        >
-                          {this.renderItem(link, index)}
-                        </Authorize>
-                      );
-                    return this.renderItem(link, index);
-                  })}
-                  {this.props.mode === "frontend" ? (
-                    <li>
-                      <MobileSearch closeNavigation={this.closeNavigation} />
-                    </li>
-                  ) : null}
-                </ul>
-                <UserLinks
-                  {...this.props}
-                  closeNavigation={this.closeNavigation}
-                />
-              </div>
-            </FocusTrap>
-          </BodyClass>
-        ) : null}
-        <i
-          role="button"
-          className={`manicon manicon-${triggerClass}`}
-          onClick={this.toggleOpen}
-        />
-      </nav>
+        <nav className={navClasses}>
+          {this.state.open && this.renderNavigationMenu()}
+        </nav>
+        <button onClick={this.toggleOpen} className="mobile-nav-trigger">
+          <IconComposer
+            icon={this.triggerIcon}
+            size="default"
+            iconClass="mobile-nav-trigger__icon"
+          />
+        </button>
+      </React.Fragment>
     );
   }
 }

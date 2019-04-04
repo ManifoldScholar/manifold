@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import IconComposer from "global/components/utility/IconComposer";
 
 export class UserMenuBodyComponent extends Component {
   static propTypes = {
@@ -39,45 +40,54 @@ export class UserMenuBodyComponent extends Component {
 
     return (
       <nav className={menuClass}>
-        <i className="tail" />
-        <ul>
-          <li>
+        <i className="user-menu__tail tail" />
+        <ul className="user-menu__list">
+          <li className="user-menu__item">
             <button
+              className="user-menu__link"
               onClick={this.handleProfileClick}
               aria-describedby="user-menu-edit-profile"
             >
-              <i
-                className="manicon manicon-person-pencil-simple"
-                aria-hidden="true"
+              <IconComposer
+                icon="editProfile24"
+                size={53.3}
+                iconClass="user-menu__icon"
               />
-              {"Edit Profile"}
+              <span className="user-menu__link-text">Edit Profile</span>
             </button>
             <span id="user-menu-edit-profile" className="aria-describedby">
               Edit your profile
             </span>
           </li>
-          <li>
+          <li className="user-menu__item">
             <button
+              className="user-menu__link"
               onClick={this.handleNotificationsClick}
               aria-describedby="user-menu-notifications"
             >
-              <i
-                className="manicon manicon-envelope-circle-right"
-                aria-hidden="true"
+              <IconComposer
+                icon="notifications24"
+                size={53.3}
+                iconClass="user-menu__icon"
               />
-              {"Notifications"}
+              <span className="user-menu__link-text">Notifications</span>
             </button>
             <span id="user-menu-notifications" className="aria-describedby">
               Edit your notification settings
             </span>
           </li>
-          <li>
-            <button onClick={this.logout} aria-describedby="user-menu-logout">
-              <i
-                className="manicon manicon-circle-arrow-out-right"
-                aria-hidden="true"
+          <li className="user-menu__item">
+            <button
+              className="user-menu__link"
+              onClick={this.logout}
+              aria-describedby="user-menu-logout"
+            >
+              <IconComposer
+                icon="logout24"
+                size={53.3}
+                iconClass="user-menu__icon"
               />
-              {"Logout"}
+              <span className="user-menu__link-text">Logout</span>
             </button>
             <span id="user-menu-logout" className="aria-describedby">
               Logout of Manifold

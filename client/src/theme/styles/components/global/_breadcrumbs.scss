@@ -1,0 +1,60 @@
+.breadcrumbs {
+  @include utilityPrimary;
+  display: block;
+  padding: 0.5em 1em 0.6em;
+  font-size: 16px;
+  line-height: 1.4;
+  color: $neutral70;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0;
+  background-color: $neutral100;
+
+  @include respond($break50) {
+    padding-top: 0.45em;
+    padding-bottom: 0.5em;
+    font-size: 20px;
+  }
+
+  &--hidden-desktop {
+    @include respond($break75) {
+      display: none;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+
+  &__link {
+    color: $neutral70;
+    text-decoration: none;
+    transition: color $duration $timing;
+
+    &:hover, &:focus {
+      color: $accentPrimary;
+      outline: 0;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    top: -0.045em;
+    margin-right: 0.5em;
+
+    &--small {
+      @include respond($break50) {
+        display: none;
+      }
+    }
+
+    &--large {
+      display: none;
+
+      @include respond($break50) {
+        display: inline-block;
+      }
+    }
+  }
+}

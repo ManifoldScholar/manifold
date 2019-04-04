@@ -14,6 +14,7 @@ import Layout from "reader/components/layout";
 import memoize from "lodash/memoize";
 import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
+import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
@@ -88,8 +89,12 @@ export default class Header extends Component {
         className={buttonIndexClass}
         onClick={this.handleContentsButtonClick}
       >
-        {"Contents"}
-        <i className="manicon manicon-caret-down" aria-hidden="true" />
+        <span className="button-index__text">Contents</span>
+        <IconComposer
+          icon="disclosureDown24"
+          size="default"
+          iconClass="button-index__icon"
+        />
       </button>
     );
   };

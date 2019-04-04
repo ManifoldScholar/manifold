@@ -18,32 +18,32 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
         className="entity-list__list entity-list__list--bare"
       >
         <li
-          className="project-collection-list-item selected"
+          className="project-collection-list-item project-collection-list-item--selected"
           onClick={[Function]}
         >
           <span
-            className="item-text"
+            className="project-collection-list-item__item-text"
           >
             A Project Collection
           </span>
           <div
-            className="icon-group"
+            className="project-collection-list-item__icon-group"
           >
             <span
-              className="item-text"
+              className="project-collection-list-item__icon-group-item project-collection-list-item__count"
             />
             <button
               aria-label="Change visibility of A Project Collection to visible."
-              className="button-icon-primary"
+              className="project-collection-list-item__icon-group-item project-collection-list-item__button"
               onClick={[Function]}
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg eye-closed svg-icon--eyeClosed32"
+                className="manicon-svg project-collection-list-item__icon eye-closed svg-icon--eyeClosed32"
                 fill="currentColor"
-                height={32}
+                height={30}
                 viewBox="0 0 32 32"
-                width={32}
+                width={30}
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
@@ -57,12 +57,12 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
                 Collection is not visible
               </span>
             </button>
-            <i
-              className="manicon drag-handle"
+            <div
+              className="project-collection-list-item__icon-group-item project-collection-list-item__button project-collection-list-item__button--drag-handle"
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg svg-icon--grabber32"
+                className="manicon-svg project-collection-list-item__icon svg-icon--grabber32"
                 fill="currentColor"
                 height={30}
                 viewBox="0 0 32 32"
@@ -78,7 +78,7 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
               >
                 Change the order of this list.
               </span>
-            </i>
+            </div>
           </div>
         </li>
         <li
@@ -86,28 +86,28 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
           onClick={[Function]}
         >
           <span
-            className="item-text"
+            className="project-collection-list-item__item-text"
           >
             A Project Collection
           </span>
           <div
-            className="icon-group"
+            className="project-collection-list-item__icon-group"
           >
             <span
-              className="item-text"
+              className="project-collection-list-item__icon-group-item project-collection-list-item__count"
             />
             <button
               aria-label="Change visibility of A Project Collection to visible."
-              className="button-icon-primary"
+              className="project-collection-list-item__icon-group-item project-collection-list-item__button"
               onClick={[Function]}
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg eye-closed svg-icon--eyeClosed32"
+                className="manicon-svg project-collection-list-item__icon eye-closed svg-icon--eyeClosed32"
                 fill="currentColor"
-                height={32}
+                height={30}
                 viewBox="0 0 32 32"
-                width={32}
+                width={30}
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
@@ -121,12 +121,12 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
                 Collection is not visible
               </span>
             </button>
-            <i
-              className="manicon drag-handle"
+            <div
+              className="project-collection-list-item__icon-group-item project-collection-list-item__button project-collection-list-item__button--drag-handle"
             >
               <svg
                 aria-hidden={true}
-                className="manicon-svg svg-icon--grabber32"
+                className="manicon-svg project-collection-list-item__icon svg-icon--grabber32"
                 fill="currentColor"
                 height={30}
                 viewBox="0 0 32 32"
@@ -142,7 +142,7 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
               >
                 Change the order of this list.
               </span>
-            </i>
+            </div>
           </div>
         </li>
       </ul>
@@ -152,12 +152,22 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
     className="actions"
   >
     <button
-      className="button-icon-secondary"
+      className="button-icon-secondary button-icon-secondary--full"
       onClick={[Function]}
     >
-      <i
-        className="manicon manicon-plus"
-      />
+      <svg
+        aria-hidden={true}
+        className="manicon-svg button-icon-secondary__icon button-icon-secondary__icon--large svg-icon--plus16"
+        fill="currentColor"
+        height={20}
+        viewBox="0 0 16 16"
+        width={20}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
+        />
+      </svg>
       <span>
         Create New Collection
       </span>

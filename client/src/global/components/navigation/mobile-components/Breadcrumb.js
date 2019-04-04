@@ -3,6 +3,7 @@ import { matchPath } from "react-router";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class MobileBreadcrumb extends PureComponent {
   static propTypes = {
@@ -48,21 +49,25 @@ export default class MobileBreadcrumb extends PureComponent {
     const size = segments.length;
 
     return (
-      <div className="selected">
+      <nav className="breadcrumb-list hide-75">
         {this.segments.map(link => {
           count += 1;
           return (
             <span key={count}>
-              <NavLink className="segment" to={this.pathForLink(link)}>
+              <NavLink className="breadcrumb" to={this.pathForLink(link)}>
                 {link.label}
               </NavLink>
-              {count < size ? (
-                <i className="manicon manicon-caret-right" />
-              ) : null}
+              {count < size && (
+                <IconComposer
+                  icon="disclosureDown16"
+                  size="default"
+                  iconClass="breadcrumb-icon"
+                />
+              )}
             </span>
           );
         })}
-      </div>
+      </nav>
     );
   }
 }

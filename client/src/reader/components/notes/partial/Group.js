@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import debounce from "lodash/debounce";
 import { Collapse } from "react-collapse";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class Group extends Component {
   static displayName = "Notes.Partial.Group";
@@ -75,7 +76,11 @@ export default class Group extends Component {
           role="button"
           tabIndex="0"
         >
-          <i className={`manicon manicon-caret-down`} aria-hidden="true" />
+          <IconComposer
+            icon="disclosureDown16"
+            size={18}
+            iconClass="item__disclosure-icon"
+          />
           <h4 className="item-label">{this.props.sectionName}</h4>
         </div>
         {this.renderGroupItems(this.props.annotations)}

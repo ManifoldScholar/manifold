@@ -61,9 +61,7 @@ export default class FormRadioOption extends PureComponent {
               this.inputElement = input;
             }}
           />
-          <span className="toggle-indicator" aria-hidden="true">
-            {this.checked ? <i className="manicon" /> : null}
-          </span>
+          <span className="toggle-indicator" aria-hidden="true" />
           <span className="toggle-label">{this.option.label}</span>
         </label>
         {this.instructions && !this.inline && (

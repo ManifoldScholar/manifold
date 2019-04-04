@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class Pagination extends Component {
   static propTypes = {
@@ -31,9 +32,16 @@ export default class Pagination extends Component {
     if (previousNode) {
       const previousPath = this.getSectionPath(previousNode);
       previousLink = (
-        <Link to={previousPath} className="pagination-previous">
-          <i className="manicon manicon-arrow-round-left" aria-hidden="true" />
-          <span className="text">Previous</span>
+        <Link
+          to={previousPath}
+          className="section-pagination__link section-pagination__link--previous"
+        >
+          <IconComposer
+            icon="circleArrowLeft64"
+            size={46.77}
+            iconClass="section-pagination__icon section-pagination__icon--previous"
+          />
+          <span className="section-pagination__text">Previous</span>
         </Link>
       );
     }
@@ -46,9 +54,16 @@ export default class Pagination extends Component {
     if (nextNode) {
       const nextPath = this.getSectionPath(nextNode);
       nextLink = (
-        <Link to={nextPath} className="pagination-next">
-          <span className="text">Next</span>
-          <i className="manicon manicon-arrow-round-right" aria-hidden="true" />
+        <Link
+          to={nextPath}
+          className="section-pagination__link section-pagination__link--next"
+        >
+          <span className="section-pagination__text">Next</span>
+          <IconComposer
+            icon="circleArrowRight64"
+            size={46.77}
+            iconClass="section-pagination__icon section-pagination__icon--next"
+          />
         </Link>
       );
     }
@@ -61,7 +76,7 @@ export default class Pagination extends Component {
 
     return (
       <nav className="section-pagination">
-        <div className="container">
+        <div className="section-pagination__inner container">
           {this.getPreviousLink(text)}
           {this.getNextLink(text)}
         </div>

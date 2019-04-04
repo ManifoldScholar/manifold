@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class FormUploadEmpty extends PureComponent {
   static propTypes = {
@@ -21,7 +22,11 @@ export default class FormUploadEmpty extends PureComponent {
   render() {
     return (
       <div className="contents-empty">
-        <i className="manicon manicon-cloud-up" aria-hidden="true" />
+        <IconComposer
+          icon="upload64"
+          size={82}
+          iconClass="contents-empty__icon"
+        />
         <div className="message">
           <p className="primary">
             {this.props.progress ? (

@@ -6,9 +6,10 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
     className="drawer-bar"
   >
     <h2
-      className="drawer-title"
+      className="drawer-bar__title drawer-bar__title--large"
     >
       <div
+        className="drawer-bar__title-button"
         onClick={[MockFunction]}
         role="button"
         tabIndex="0"
@@ -20,7 +21,11 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
       className="button-primary"
       onClick={[MockFunction]}
     >
-      See all
+      <span
+        className="button-primary__text"
+      >
+        See all
+      </span>
     </button>
   </div>
   <nav
@@ -46,11 +51,22 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
         />
         <div
           aria-hidden="true"
-          className="control-indicator"
+          className="checkbox__indicator"
         >
-          <i
-            className="manicon manicon-check"
-          />
+          <svg
+            aria-hidden={true}
+            className="manicon-svg checkbox__icon svg-icon--check16"
+            height={16}
+            viewBox="0 0 16 16"
+            width={16}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              fill="currentColor"
+              fillRule="nonzero"
+              points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
+            />
+          </svg>
         </div>
         Highlights
       </label>
@@ -66,11 +82,22 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
         />
         <div
           aria-hidden="true"
-          className="control-indicator"
+          className="checkbox__indicator"
         >
-          <i
-            className="manicon manicon-check"
-          />
+          <svg
+            aria-hidden={true}
+            className="manicon-svg checkbox__icon svg-icon--check16"
+            height={16}
+            viewBox="0 0 16 16"
+            width={16}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              fill="currentColor"
+              fillRule="nonzero"
+              points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
+            />
+          </svg>
         </div>
         Annotations
       </label>
@@ -85,10 +112,19 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
           role="button"
           tabIndex="0"
         >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-caret-down"
-          />
+          <svg
+            aria-hidden={true}
+            className="manicon-svg item__disclosure-icon svg-icon--disclosureDown16"
+            fill="currentColor"
+            height={18}
+            viewBox="0 0 16 16"
+            width={18}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+            />
+          </svg>
           <h4
             className="item-label"
           >
@@ -119,10 +155,6 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
                 <span
                   className="screen-reader-text"
                 />
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-null"
-                />
                 <span>
                   Gods, Earths, and 85ers
                 </span>
@@ -135,10 +167,6 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
               >
                 <span
                   className="screen-reader-text"
-                />
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-null"
                 />
                 <span>
                   Gods, Earths, and 85ers

@@ -7,6 +7,7 @@ import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 import { Collapse } from "react-collapse";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceListSlideCaption extends Component {
   static visibleCaptionHeight = 48;
@@ -82,19 +83,23 @@ export default class ResourceListSlideCaption extends Component {
   };
 
   hideExpandable() {
-    this._utility.classList.remove("expandable");
+    this._utility.classList.remove("resource-slideshow__utility--expandable");
   }
 
   showExpandable() {
-    this._utility.classList.add("expandable");
+    this._utility.classList.add("resource-slideshow__utility--expandable");
   }
 
   checkCollapsed = () => {
     if (!this._description) return null;
     if (this.state.expanded) {
-      this._description.classList.remove("collapsed");
+      this._description.classList.remove(
+        "resource-slideshow__description--collapsed"
+      );
     } else {
-      this._description.classList.add("collapsed");
+      this._description.classList.add(
+        "resource-slideshow__description--collapsed"
+      );
     }
   };
 
@@ -119,8 +124,8 @@ export default class ResourceListSlideCaption extends Component {
     if (!this.hasCaption(resource)) return null;
     const attr = resource.attributes;
     const descriptionClasses = classNames({
-      "resource-description": true,
-      expanded: this.state.expanded
+      "resource-slideshow__description": true,
+      "resource-slideshow__description--expanded": this.state.expanded
     });
     const contents = this.createDescription(attr.captionFormatted);
 
@@ -141,22 +146,22 @@ export default class ResourceListSlideCaption extends Component {
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
-    const moreLinkClass = classNames("more-link", {
-      open: this.state.expanded
+    const moreLinkClass = classNames("resource-slideshow__more-link", {
+      "resource-slideshow__more-link--open": this.state.expanded
     });
 
-    const utilityClass = classNames("resource-utility", {
-      "with-shadow": this.hasCaption(resource),
-      expanded: this.state.expanded
+    const utilityClass = classNames("resource-slideshow__utility", {
+      "resource-slideshow__utility--with-shadow": this.hasCaption(resource),
+      "resource-slideshow__utility--expanded": this.state.expanded
     });
 
     const detailUrl = this.detailUrl();
 
     return (
-      <div className="slide-caption">
+      <div className="resource-slideshow__caption">
         <header>
           <h2
-            className="resource-title"
+            className="resource-slideshow__title"
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
           />
           <span className="screen-reader-text" role="alert">
@@ -170,24 +175,32 @@ export default class ResourceListSlideCaption extends Component {
             this._utility = e;
           }}
         >
-          <div className="wrapper">
+          <div className="resource-slideshow__utility-inner">
             <button className={moreLinkClass} onClick={this.handleReadMore}>
-              <span className="open-text">{"Read More"}</span>
-              <span className="close-text">{"Hide Description"}</span>
+              <span className="resource-slideshow__open-text">
+                {"Read More"}
+              </span>
+              <span className="resource-slideshow__close-text">
+                {"Hide Description"}
+              </span>
             </button>
             {this.canDownload(resource) ? (
               <a
                 href={attr.attachmentStyles.original}
                 target="_blank"
-                className="download-link"
+                className="resource-slideshow__download-link"
                 rel="noopener noreferrer"
               >
-                {"Download"}
-                <i className="manicon manicon-arrow-down" aria-hidden="true" />
+                <span>{"Download"}</span>
+                <IconComposer
+                  icon="arrowDown16"
+                  size="default"
+                  iconClass="resource-slideshow__download-icon"
+                />
               </a>
             ) : null}
             {detailUrl && !this.props.hideDetailUrl ? (
-              <Link className="detail-link" to={detailUrl}>
+              <Link className="resource-slideshow__detail-link" to={detailUrl}>
                 {"View Resource"}
               </Link>
             ) : null}

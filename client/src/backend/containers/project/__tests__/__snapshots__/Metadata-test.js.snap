@@ -743,7 +743,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         className="form-input submit wide"
       >
         <input
-          className="button-secondary outlined"
+          className="button-secondary button-secondary--outlined"
           type="submit"
           value="Save Metadata"
         />

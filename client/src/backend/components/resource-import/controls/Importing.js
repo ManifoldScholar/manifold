@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceImportControlsImporting extends PureComponent {
   static displayName = "ResourceImport.Controls.Importing";
@@ -33,9 +34,13 @@ export default class ResourceImportControlsImporting extends PureComponent {
         >
           <button
             onClick={this.props.refreshResults}
-            className="button-icon-secondary"
+            className="buttons-icon-horizontal__button button-icon-secondary"
           >
-            <i className="manicon manicon-check small" aria-hidden="true" />
+            <IconComposer
+              icon="check16"
+              size="default"
+              iconClass="button-icon-secondary__icon"
+            />
             <span>Refresh Results</span>
           </button>
         </div>

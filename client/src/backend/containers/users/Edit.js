@@ -154,7 +154,7 @@ export class UsersEditContainer extends PureComponent {
               onClick: this.handleUserDestroy,
               icon: "delete32",
               label: "Delete",
-              iconClass: "notice"
+              iconClass: "utility-button__icon--notice"
             }
           ]}
         />

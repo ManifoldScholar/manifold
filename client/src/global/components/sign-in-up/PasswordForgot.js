@@ -106,7 +106,7 @@ class PasswordForgotContainer extends Component {
           <div className="row-1-p">
             <div className="form-input">
               <input
-                className="button-secondary button-with-room"
+                className="button-secondary button-secondary--with-room"
                 type="submit"
                 value="Send Password Reset Email"
               />

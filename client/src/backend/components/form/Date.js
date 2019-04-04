@@ -13,6 +13,7 @@ import GlobalForm from "global/components/form";
 import labelId from "helpers/labelId";
 import MaskedInput from "react-text-mask";
 import isNull from "lodash/isNull";
+import IconComposer from "global/components/utility/IconComposer";
 
 class FormDate extends Component {
   static displayName = "Form.Date";
@@ -180,6 +181,14 @@ class FormDate extends Component {
     return out;
   }
 
+  renderSelectIcon() {
+    return (
+      <div className="form-select__icon">
+        <IconComposer icon="disclosureDown16" size={20} />
+      </div>
+    );
+  }
+
   render() {
     const inputClasses = classnames({
       "form-input": true,
@@ -197,7 +206,7 @@ class FormDate extends Component {
         <h4 className="form-input-heading">{this.props.label}</h4>
         <div className="form-date">
           <div className="form-select input-month">
-            <i className="manicon manicon-caret-down" aria-hidden="true" />
+            {this.renderSelectIcon()}
             <select
               onChange={this.setInputMonth}
               value={this.state.input.month}
@@ -213,7 +222,7 @@ class FormDate extends Component {
             </select>
           </div>
           <div className="form-select input-day">
-            <i className="manicon manicon-caret-down" aria-hidden="true" />
+            {this.renderSelectIcon()}
             <select onChange={this.setInputDay} value={this.state.input.day}>
               <option />
               {this.days().map(day => {

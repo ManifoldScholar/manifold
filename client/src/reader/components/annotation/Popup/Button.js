@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
 
@@ -15,7 +16,7 @@ export default class DefaultButton extends PureComponent {
     ability: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     onClick: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
-    iconClass: PropTypes.string,
+    icon: PropTypes.string,
     className: PropTypes.string,
     children: PropTypes.element
   };
@@ -35,18 +36,25 @@ export default class DefaultButton extends PureComponent {
       kind,
       className,
       onClick,
-      iconClass,
+      icon,
       label
     } = this.props;
-    const iconClassName = classNames("manicon", iconClass);
+
     return (
       <Authorize kind={kind} entity={entity} ability={ability}>
         {this.props.children ? (
           this.renderChild()
         ) : (
-          <button className={className} onClick={onClick}>
-            {iconClass ? (
-              <i className={iconClassName} aria-hidden="true" />
+          <button
+            className={classNames("annotation-popup__button", className)}
+            onClick={onClick}
+          >
+            {icon ? (
+              <IconComposer
+                icon={this.props.icon}
+                size={32}
+                iconClass="annotation-popup__button-icon"
+              />
             ) : null}
             {label}
           </button>

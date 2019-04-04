@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceImportResultsQueued extends PureComponent {
   static displayName = "ResourceImport.Results.Queued";
@@ -9,6 +10,10 @@ export default class ResourceImportResultsQueued extends PureComponent {
   static propTypes = {
     resourceImportRow: PropTypes.object.isRequired
   };
+
+  get icon() {
+    return this.props.resourceImportRow.isSkip ? "arrowRight16" : "plus16";
+  }
 
   renderMessage(resourceImportRow) {
     if (resourceImportRow.isUpdate) {
@@ -37,22 +42,17 @@ export default class ResourceImportResultsQueued extends PureComponent {
     );
   }
 
-  renderIcon(resourceImportRow) {
-    if (resourceImportRow.isSkip)
-      return (
-        <i className="manicon manicon-arrow-right small" aria-hidden="true" />
-      );
-
-    return <i className="manicon manicon-plus small" aria-hidden="true" />;
-  }
-
   render() {
     const resourceImportRow = this.props.resourceImportRow;
     if (!resourceImportRow) return null;
 
     return (
       <React.Fragment>
-        {this.renderIcon(resourceImportRow)}
+        <IconComposer
+          icon={this.icon}
+          size={18}
+          iconClass="results-header__icon"
+        />
         {this.renderMessage(resourceImportRow)}
       </React.Fragment>
     );

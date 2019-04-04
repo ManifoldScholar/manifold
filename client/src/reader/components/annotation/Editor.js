@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import GlobalForm from "global/components/form";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class AnnotationEditor extends PureComponent {
   static displayName = "Annotation.Editor";
@@ -114,8 +115,12 @@ export default class AnnotationEditor extends PureComponent {
                   checked={this.state.private}
                   onChange={this.handlePrivacyChange}
                 />
-                <span className="toggle-indicator" aria-hidden="true">
-                  <i className="manicon manicon-check-bold" />
+                <span className="checkbox__indicator" aria-hidden="true">
+                  <IconComposer
+                    icon="check16"
+                    size="default"
+                    iconClass="checkbox__icon"
+                  />
                 </span>
                 <span className="toggle-label">This Annotation is Private</span>
               </label>
@@ -123,9 +128,9 @@ export default class AnnotationEditor extends PureComponent {
             <div className="buttons">
               <button
                 onClick={this.handleCancel}
-                className="button-primary dull"
+                className="button-primary button-primary--dull"
               >
-                Cancel
+                <span className="button-primary__text">Cancel</span>
               </button>
               <button className="button-secondary" disabled={!this.state.body}>
                 Save

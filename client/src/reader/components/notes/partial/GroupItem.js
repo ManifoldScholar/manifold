@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class GroupItem extends Component {
   static displayName = "Notes.Partial.GroupItem";
@@ -9,22 +10,22 @@ export default class GroupItem extends Component {
     visitHandler: PropTypes.func
   };
 
-  getIconClasses(format) {
+  getIcon(format) {
     let icon = null;
     switch (format) {
       case "annotation":
-        icon = "word-bubble";
+        icon = "comment32";
         break;
       case "highlight":
-        icon = "pencil-simple";
+        icon = "annotate32";
         break;
       case "bookmark":
-        icon = "bookmark-outline";
+        icon = "bookmark32";
         break;
       default:
         break;
     }
-    return `manicon manicon-${icon}`;
+    return icon;
   }
 
   handleVisitAnnotation = event => {
@@ -37,9 +38,7 @@ export default class GroupItem extends Component {
   }
 
   render() {
-    const iconClasses = this.getIconClasses(
-      this.props.annotation.attributes.format
-    );
+    const icon = this.getIcon(this.props.annotation.attributes.format);
     return (
       /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
       <li
@@ -51,7 +50,7 @@ export default class GroupItem extends Component {
         <span className="screen-reader-text">
           {this.props.annotation.attributes.format}
         </span>
-        <i className={iconClasses} aria-hidden="true" />
+        {icon && <IconComposer icon={icon} size={32} iconClass="item__icon" />}
         <span>
           {this.maybeTruncateText(this.props.annotation.attributes.subject)}
         </span>

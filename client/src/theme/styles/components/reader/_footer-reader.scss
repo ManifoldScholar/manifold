@@ -11,8 +11,29 @@
     padding: 100px 0;
   }
 
-  .colophon {
+  &__inner {
+    display: flex;
+    flex-direction: column;
+
+    @include respond($break75) {
+      flex-direction: row;
+    }
+  }
+
+  &__logo {
+    flex-shrink: 0;
+    color: $accentPrimary;
+
+    @include respond($break75) {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  &__colophon {
     @include templateCopy;
+    flex-grow: 1;
+    padding-top: 12px;
     font-size: 16px;
     line-height: 1.556;
 
@@ -20,49 +41,38 @@
       font-size: 18px;
     }
 
-    .manicon-manifold-logo {
-      display: block;
-      padding-bottom: 18px;
-      font-size: 48px;
-      color: $accentPrimary;
-
-      @include respond($break75) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 62px;
-        height: 62px;
-        font-size: 62px;
-      }
+    @include respond($break75) {
+      padding-top: 0;
+      padding-left: 27px;
     }
+  }
 
-    .powered-by {
-      font-size: 15px;
-    }
+  &__powered-by {
+    font-size: 15px;
+  }
 
-    a {
+  a {
+    color: $accentPrimaryMedium;
+    transition: color $durationFast $timing;
+
+    &:visited {
       color: $accentPrimaryMedium;
-      transition: color $durationFast $timing;
-
-      &:visited {
-        color: $accentPrimaryMedium;
-      }
-
-      &:hover, &:focus {
-        color: $accentPrimaryDark;
-        outline: 0;
-      }
     }
 
-    p, .rights {
-      @include respond($break75) {
-        padding-top: 2px;
-        padding-left: 93px;
+    &:hover, &:focus {
+      color: $accentPrimaryDark;
+      outline: 0;
+    }
+  }
 
-        p {
-          padding-top: 0;
-          padding-left: 0;
-        }
+  p,
+  &__rights {
+    @include respond($break75) {
+      padding-top: 2px;
+
+      p {
+        padding-top: 0;
+        padding-left: 0;
       }
     }
   }

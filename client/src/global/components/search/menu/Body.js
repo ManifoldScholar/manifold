@@ -19,12 +19,19 @@ export class SearchMenuBody extends PureComponent {
     description: PropTypes.string,
     projectId: PropTypes.string,
     textId: PropTypes.string,
-    sectionId: PropTypes.string
+    sectionId: PropTypes.string,
+    className: PropTypes.string
   };
 
   static defaultProps = {
     toggleVisibility: () => {}
   };
+
+  get containerClass() {
+    if (this.props.className) return this.props.className;
+
+    return "search-menu";
+  }
 
   setQueryState = queryParams => {
     this.setState(queryParams, this.doSearch);
@@ -61,7 +68,7 @@ export class SearchMenuBody extends PureComponent {
 
   render() {
     return (
-      <nav className="search-menu">
+      <nav className={this.containerClass}>
         <ReactCSSTransitionGroup
           transitionName="visibility"
           transitionEnterTimeout={500}

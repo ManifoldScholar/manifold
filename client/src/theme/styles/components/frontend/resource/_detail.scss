@@ -174,7 +174,7 @@
       }
 
       @include respond($break65) {
-        display: block;
+        display: flex;
         max-width: 100%;
       }
 
@@ -184,11 +184,6 @@
         @include respond($break65) {
           margin-left: 0;
         }
-      }
-
-      .manicon {
-        margin-left: 8px;
-        font-size: 13px;
       }
     }
 
@@ -237,7 +232,7 @@
       padding-top: 16px;
       padding-left: 0;
 
-      .button-secondary.dull {
+      .button-secondary--dull {
         display: none;
       }
     }

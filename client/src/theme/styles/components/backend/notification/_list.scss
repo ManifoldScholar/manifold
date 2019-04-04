@@ -30,25 +30,19 @@
         }
 
         a {
-          color: $accentPrimary;
           text-decoration: none;
         }
-      }
-
-      // Close button
-      .manicon-x {
-        @include buttonUnstyled;
-        position: absolute;
-        top: 50%;
-        right: 22px;
-        margin-top: -8px;
-        font-size: 19px;
-        color: $neutral40;
       }
     }
   }
 
-  .button-bare-primary {
-    margin-top: 10px;
+  // Close button
+  &__close-button {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 50%;
+    right: 22px;
+    margin-top: -8px;
+    color: $neutral40;
   }
 }

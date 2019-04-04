@@ -162,10 +162,14 @@ exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = 
     </div>
   </div>
   <button
-    className="button-bare-primary"
+    className="utility-button"
     onClick={[MockFunction]}
   >
-    Unsubscribe From All
+    <span
+      className="utility-button__text utility-button__text--underlined"
+    >
+      Unsubscribe From All
+    </span>
   </button>
 </div>
 `;

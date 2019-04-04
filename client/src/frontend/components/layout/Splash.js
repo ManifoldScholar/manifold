@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
-import classnames from "classnames";
+import classNames from "classnames";
 
 export default class Splash extends Component {
   static displayName = "Layout.Splash";
@@ -146,7 +146,7 @@ export default class Splash extends Component {
   }
 
   wrapperClass() {
-    return classnames("feature", {
+    return classNames("feature", {
       "feature-dark-style": this.isDarkStyle(),
       "feature-light-style": this.isLightStyle(),
       "feature-preview": this.isPreview()
@@ -186,25 +186,47 @@ export default class Splash extends Component {
               dangerouslySetInnerHTML={{ __html: this.body() }}
             />
             <div className="splash-content" />
-            <nav className="buttons">
+            <nav className="feature__buttons utility-button-group utility-button-group--inline">
               {this.hasLink() ? (
                 <a
                   href={this.attribute("linkUrl")}
                   target="blank"
-                  className="button-bare-primary"
+                  className="utility-button"
                 >
-                  {this.attribute("linkText")}
+                  <span
+                    className={classNames(
+                      "utility-button__text",
+                      "utility-button__text--large",
+                      {
+                        "utility-button__text--dark-green": this.isLightStyle(),
+                        "utility-button__text--light": this.isDarkStyle()
+                      }
+                    )}
+                  >
+                    {this.attribute("linkText")}
+                  </span>
                 </a>
               ) : null}
               {this.showSignUpButton() ? (
                 <span
                   onClick={this.handleSignUp}
                   target="blank"
-                  className="button-bare-primary"
+                  className="utility-button"
                   role="button"
                   tabIndex="0"
                 >
-                  {"Sign Up"}
+                  <span
+                    className={classNames(
+                      "utility-button__text",
+                      "utility-button__text--large",
+                      {
+                        "utility-button__text--dark-green": this.isLightStyle(),
+                        "utility-button__text--light": this.isDarkStyle()
+                      }
+                    )}
+                  >
+                    {"Sign Up"}
+                  </span>
                 </span>
               ) : null}
             </nav>

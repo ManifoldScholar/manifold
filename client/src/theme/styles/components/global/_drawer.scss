@@ -100,73 +100,151 @@
   .reader & {
     top: 0;
   }
+}
 
-  .drawer-bar {
+.drawer-bar {
+  &__close-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    transition: color $duration $timing;
+  }
+
+  &__close-icon {
+    &--large {
+      margin-right: -9px;
+
+      @include respond($break50) {
+        width: 56.889px;
+        height: 56.889px;
+        margin-right: -12px;
+      }
+    }
+  }
+
+  .drawer-backend & {
+    padding-bottom: 18px;
+    text-align: right;
+
+    @include respond($break50) {
+      padding-bottom: 26px;
+    }
+
+    &__close-button {
+      color: $neutral70;
+      cursor: pointer;
+
+      &:hover {
+        color: $accentPrimary;
+        outline-width: 0;
+      }
+
+      &:focus {
+        color: $focusPrimary;
+      }
+    }
+
+    &__close-text {
+      @include utilityPrimary;
+      margin-right: 12px;
+      font-size: 12px;
+      font-weight: $semibold;
+      letter-spacing: 0.125em;
+    }
+
+    &__close-icon {
+      &--large {
+        display: none;
+      }
+    }
+  }
+
+  .drawer-frontend &,
+  .drawer-reader & {
     @include drawerPadding(padding-right, 'heavy');
     @include drawerPadding(padding-left);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding-top: 17px;
-    padding-bottom: 17px;
+    justify-content: flex-end;
+    padding-top: 3px;
+    padding-bottom: 10px;
 
     @include respond($break60) {
-      padding-top: 31px;
-      padding-bottom: 30px;
+      padding-top: 16px;
+      padding-bottom: 18px;
     }
 
-    .drawer-title {
+    &__title {
       @include utilityPrimary;
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
       font-size: 14px;
       color: $neutral50;
 
-      .manicon {
-        margin-right: 14px;
-        font-size: 1.6em;
-        vertical-align: middle;
+      &--large {
+        font-size: 22px;
+        text-transform: none;
       }
     }
 
-    .close-button-primary {
-      @include templateHead;
-      width: 100%;
-      font-size: 17px;
-      text-align: right;
-      letter-spacing: 0.015em;
+    &__title-button {
+      color: $neutral90;
+      cursor: pointer;
+      border: 0;
       transition: color $duration $timing;
 
-      .close-text {
-        display: none;
-
-        @include respond($break50) {
-          display: inline;
-        }
-      }
-
+      &:hover,
       &:focus {
-        outline: none;
-
-        > .manicon {
-          outline: thin dotted;
-        }
+        color: $neutral70;
+        outline: 0;
       }
+    }
+
+    &__title-icon {
+      position: relative;
+      top: 2px;
+      margin-right: 10px;
+    }
+
+    &__close-button {
+      font-size: 17px;
+      color: $neutral50;
+      cursor: pointer;
+      transition: color $duration $timing;
 
       &:hover {
         color: $neutral75;
       }
 
-      .manicon {
-        margin-left: 25px;
-        font-size: 26px;
-        vertical-align: middle;
+      &:focus {
+        outline: none;
+      }
+    }
 
-        @include respond($break50) {
-          font-size: 31px;
-        }
+    &__close-text {
+      @include templateHead;
+      display: none;
+      font-size: 17px;
+      letter-spacing: 0.015em;
+
+      @include respond($break50) {
+        display: inline;
+      }
+    }
+
+    &__close-icon {
+      margin-left: 16px;
+
+      &--small {
+        display: none;
+      }
+
+      .drawer-bar__close-button:focus & {
+        outline: thin dotted;
       }
     }
   }
-
 }
 
 .drawer-overlay {

@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import Form from "backend/components/form";
+import IconComposer from "global/components/utility/IconComposer";
 
 class IngestionFormUpload extends PureComponent {
   static displayName = "ProjectDetail.Text.Ingestion.Form.Upload";
@@ -37,6 +39,14 @@ class IngestionFormUpload extends PureComponent {
 
   get ingestionSourceUrl() {
     return this.props.getModelValue("attributes[externalSourceUrl]");
+  }
+
+  get buttonClasses() {
+    return classNames(
+      "buttons-icon-horizontal__button",
+      "button-icon-secondary",
+      "button-icon-secondary--in-drawer"
+    );
   }
 
   handleCancelClick = event => {
@@ -91,18 +101,29 @@ class IngestionFormUpload extends PureComponent {
           {this.props.cancelUrl ? (
             <button
               onClick={this.handleCancelClick}
-              className="button-icon-secondary dull"
+              className={classNames(
+                this.buttonClasses,
+                "button-icon-secondary--dull"
+              )}
             >
-              <i className="manicon manicon-x small" aria-hidden="true" />
+              <IconComposer
+                icon="close16"
+                size="default"
+                iconClass="button-icon-secondary__icon"
+              />
               <span>Cancel</span>
             </button>
           ) : null}
           <button
             type="submit"
-            className="button-icon-secondary"
+            className={this.buttonClasses}
             disabled={!this.valid}
           >
-            <i className="manicon manicon-check small" aria-hidden="true" />
+            <IconComposer
+              icon="check16"
+              size="default"
+              iconClass="button-icon-secondary__icon"
+            />
             <span>Continue</span>
           </button>
         </div>

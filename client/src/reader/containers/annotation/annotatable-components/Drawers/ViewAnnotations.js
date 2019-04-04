@@ -5,7 +5,7 @@ import List from "../../List";
 export default class ViewAnnotations extends PureComponent {
   static drawerProps = () => {
     return {
-      icon: "word-bubble",
+      icon: "comment32",
       title: "Annotations"
     };
   };

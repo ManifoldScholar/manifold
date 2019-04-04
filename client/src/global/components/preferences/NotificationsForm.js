@@ -35,10 +35,12 @@ export default class NotificationsForm extends Component {
           {this.renderNotificationContent(preferences)}
         </div>
         <button
-          className="button-bare-primary"
+          className="utility-button"
           onClick={this.props.unsubscribeAllHandler}
         >
-          Unsubscribe From All
+          <span className="utility-button__text utility-button__text--underlined">
+            {"Unsubscribe From All"}
+          </span>
         </button>
       </div>
     );

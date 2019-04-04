@@ -6,7 +6,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
   id="entities-list1"
 >
   <h3
-    className="entity-list__title"
+    className="entity-list__title-block entity-list__title"
   >
     <figure
       className="entity-list__title-icon"
@@ -27,15 +27,19 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
     </figure>
     Resources
     <button
-      className="button-bare-primary"
+      className="utility-button"
       onClick={[Function]}
       style={
         Object {
-          "marginLeft": 8,
+          "marginLeft": 3,
         }
       }
     >
-      Show collection only
+      <span
+        className="utility-button__text"
+      >
+        Show collection only
+      </span>
     </button>
   </h3>
   <div

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ResourceList from "frontend/components/resource-list";
+import Utility from "global/components/utility";
 
 export default class ProjectResources extends Component {
   static displayName = "Project.Resources";
@@ -18,10 +19,10 @@ export default class ProjectResources extends Component {
     const project = this.props.project;
     return (
       <section>
-        <div className="container">
-          <header className="section-heading">
+        <div className="entity-section-wrapper container">
+          <header className="entity-section-wrapper__heading section-heading">
             <div className="main">
-              <i className="manicon manicon-cube-shine" aria-hidden="true" />
+              <Utility.IconComposer icon="resources64" size={56} />
               <div className="body">
                 <h2 className="title">All Project Resources</h2>
               </div>

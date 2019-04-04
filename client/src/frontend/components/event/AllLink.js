@@ -23,7 +23,7 @@ export default class EventAllLink extends Component {
           to={lh.link("frontendProjectEvents", project.attributes.slug)}
           className="button-primary"
         >
-          See all Activity
+          <span className="button-primary__text">See all Activity</span>
         </Link>
       </div>
     );

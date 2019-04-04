@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import FormattedDate from "global/components/FormattedDate";
 import Utility from "global/components/utility";
 
@@ -32,11 +33,16 @@ export default class ResourceCollectionTitle extends Component {
     const attr = this.props.resourceCollection.attributes;
 
     return (
-      <header className="section-heading">
+      <header
+        className={classNames(
+          "entity-section-wrapper__heading",
+          "entity-section-wrapper__heading--wide",
+          "collection-detail__heading",
+          "section-heading"
+        )}
+      >
         <div className="main">
-          <i className="manicon" aria-hidden="true">
-            <Utility.IconComposer size={54} icon="resourceCollection64" />
-          </i>
+          <Utility.IconComposer size={54} icon="resourceCollection64" />
           <div className="body">
             <h2 className="title">{attr.title}</h2>
             {this.renderDate(attr)}

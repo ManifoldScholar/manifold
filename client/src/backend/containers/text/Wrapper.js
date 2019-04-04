@@ -10,6 +10,7 @@ import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import withConfirmation from "hoc/with-confirmation";
+import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
 
@@ -99,17 +100,22 @@ export class TextWrapperContainer extends PureComponent {
 
   renderUtility() {
     return (
-      <div>
-        <button onClick={this.doPreview} className="button-bare-primary">
-          <i className="manicon manicon-eye-outline" aria-hidden="true" />
-          Preview{" "}
+      <div className="utility-button-group utility-button-group--inline">
+        <button onClick={this.doPreview} className="utility-button">
+          <IconComposer
+            icon="eyeOpen32"
+            size={26}
+            iconClass="utility-button__icon utility-button__icon--highlight"
+          />
+          <span className="utility-button__text">Preview</span>
         </button>
-        <button
-          onClick={this.handleTextDestroy}
-          className="button-bare-primary"
-        >
-          <i className="manicon manicon-trashcan" aria-hidden="true" />
-          Delete
+        <button onClick={this.handleTextDestroy} className="utility-button">
+          <IconComposer
+            icon="delete32"
+            size={26}
+            iconClass="utility-button__icon utility-button__icon--notice"
+          />
+          <span className="utility-button__text">Delete</span>
         </button>
       </div>
     );

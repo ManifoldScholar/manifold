@@ -61,9 +61,19 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                 className="button-icon-secondary"
                 onClick={[Function]}
               >
-                <i
-                  className="manicon manicon-plus"
-                />
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg button-icon-secondary__icon button-icon-secondary__icon--large svg-icon--plus16"
+                  fill="currentColor"
+                  height={20}
+                  viewBox="0 0 16 16"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
+                  />
+                </svg>
                 <span>
                   Create a Collection
                 </span>
@@ -115,32 +125,32 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
               className="entity-list__list entity-list__list--bare"
             >
               <li
-                className="project-collection-list-item selected"
+                className="project-collection-list-item project-collection-list-item--selected"
                 onClick={[Function]}
               >
                 <span
-                  className="item-text"
+                  className="project-collection-list-item__item-text"
                 >
                   A Project Collection
                 </span>
                 <div
-                  className="icon-group"
+                  className="project-collection-list-item__icon-group"
                 >
                   <span
-                    className="item-text"
+                    className="project-collection-list-item__icon-group-item project-collection-list-item__count"
                   />
                   <button
                     aria-label="Change visibility of A Project Collection to visible."
-                    className="button-icon-primary"
+                    className="project-collection-list-item__icon-group-item project-collection-list-item__button"
                     onClick={[Function]}
                   >
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg eye-closed svg-icon--eyeClosed32"
+                      className="manicon-svg project-collection-list-item__icon eye-closed svg-icon--eyeClosed32"
                       fill="currentColor"
-                      height={32}
+                      height={30}
                       viewBox="0 0 32 32"
-                      width={32}
+                      width={30}
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -154,12 +164,12 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                       Collection is not visible
                     </span>
                   </button>
-                  <i
-                    className="manicon drag-handle"
+                  <div
+                    className="project-collection-list-item__icon-group-item project-collection-list-item__button project-collection-list-item__button--drag-handle"
                   >
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg svg-icon--grabber32"
+                      className="manicon-svg project-collection-list-item__icon svg-icon--grabber32"
                       fill="currentColor"
                       height={30}
                       viewBox="0 0 32 32"
@@ -175,7 +185,7 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     >
                       Change the order of this list.
                     </span>
-                  </i>
+                  </div>
                 </div>
               </li>
               <li
@@ -183,28 +193,28 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                 onClick={[Function]}
               >
                 <span
-                  className="item-text"
+                  className="project-collection-list-item__item-text"
                 >
                   A Project Collection
                 </span>
                 <div
-                  className="icon-group"
+                  className="project-collection-list-item__icon-group"
                 >
                   <span
-                    className="item-text"
+                    className="project-collection-list-item__icon-group-item project-collection-list-item__count"
                   />
                   <button
                     aria-label="Change visibility of A Project Collection to visible."
-                    className="button-icon-primary"
+                    className="project-collection-list-item__icon-group-item project-collection-list-item__button"
                     onClick={[Function]}
                   >
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg eye-closed svg-icon--eyeClosed32"
+                      className="manicon-svg project-collection-list-item__icon eye-closed svg-icon--eyeClosed32"
                       fill="currentColor"
-                      height={32}
+                      height={30}
                       viewBox="0 0 32 32"
-                      width={32}
+                      width={30}
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -218,12 +228,12 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                       Collection is not visible
                     </span>
                   </button>
-                  <i
-                    className="manicon drag-handle"
+                  <div
+                    className="project-collection-list-item__icon-group-item project-collection-list-item__button project-collection-list-item__button--drag-handle"
                   >
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg svg-icon--grabber32"
+                      className="manicon-svg project-collection-list-item__icon svg-icon--grabber32"
                       fill="currentColor"
                       height={30}
                       viewBox="0 0 32 32"
@@ -239,7 +249,7 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     >
                       Change the order of this list.
                     </span>
-                  </i>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -249,12 +259,22 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
           className="actions"
         >
           <button
-            className="button-icon-secondary"
+            className="button-icon-secondary button-icon-secondary--full"
             onClick={[Function]}
           >
-            <i
-              className="manicon manicon-plus"
-            />
+            <svg
+              aria-hidden={true}
+              className="manicon-svg button-icon-secondary__icon button-icon-secondary__icon--large svg-icon--plus16"
+              fill="currentColor"
+              height={20}
+              viewBox="0 0 16 16"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
+              />
+            </svg>
             <span>
               Create New Collection
             </span>
@@ -273,38 +293,60 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
           className="backend-header"
         >
           <nav
-            className="breadcrumb-primary"
+            className="backend-header__breadcrumbs breadcrumbs breadcrumbs--hidden-desktop"
           >
             <div
-              className="container flush"
+              className="breadcrumbs__inner"
             >
               <a
+                className="breadcrumbs__link"
                 href="/backend/projects/project-collections"
                 onClick={[Function]}
               >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-arrow-left"
-                />
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg breadcrumbs__icon breadcrumbs__icon--small svg-icon--arrowLeft16"
+                  fill="currentColor"
+                  height={16}
+                  viewBox="0 0 16 16"
+                  width={16}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                    transform="rotate(180 8 8)"
+                  />
+                </svg>
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg breadcrumbs__icon breadcrumbs__icon--large svg-icon--arrowLeft32"
+                  fill="currentColor"
+                  height={32}
+                  viewBox="0 0 32 32"
+                  width={32}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14.0744069,7.75197978 L14.7335931,7 L25.0005111,15.9999899 L14.7335931,24.9999798 L14.0744069,24.2480001 L23.483489,15.9999899 L14.0744069,7.75197978 Z M24.1022001,15.4999899 L24.1022001,16.4999899 L7,16.4999899 L7,15.4999899 L24.1022001,15.4999899 Z"
+                    transform="rotate(180 16 16)"
+                  />
+                </svg>
                 Back
               </a>
             </div>
           </nav>
           <div
-            className="wrapper"
+            className="backend-header__inner backend-header__inner--padded"
           >
             <header
-              className="entity-header-primary"
+              className="backend-header__content-wrapper"
             >
-              <figure>
-                <i
-                  className="manicon manicon-collection-manual"
-                />
-              </figure>
               <div
-                className="title"
+                className="backend-header__title-block"
               >
-                <h1>
+                <h1
+                  className="backend-header__title"
+                >
                   <span
                     dangerouslySetInnerHTML={
                       Object {
@@ -313,38 +355,88 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     }
                   />
                   <span
-                    className="subtitle"
+                    className="backend-header__subtitle"
                   />
                 </h1>
+              </div>
+              <div
+                className="backend-header__utility-block"
+              >
                 <div
-                  className="utility"
+                  className="utility-button-group utility-button-group--inline"
                 >
-                  <div>
-                    <a
-                      className="button-bare-primary"
-                      href="/backend/projects/project-collections/1/settings"
-                      onClick={[Function]}
+                  <a
+                    className="utility-button"
+                    href="/backend/projects/project-collections/1/settings"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg utility-button__icon utility-button__icon--highlight svg-icon--settings32"
+                      fill="currentColor"
+                      height={26}
+                      viewBox="0 0 32 32"
+                      width={26}
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-settings"
+                      <path
+                        d="M23.5,14.4504509 C22.6093161,14.2483654 21.9444,13.4518324 21.9444,12.5 C21.9444,11.5481675 22.6093161,10.7516345 23.5,10.5495491 L23.5,5.99999997 L24.5,5.99999997 L24.5,10.5781832 C25.3342621,10.8189409 25.9444,11.5882178 25.9444,12.5 C25.9444,13.4117822 25.3342621,14.1810591 24.5,14.4218168 L24.5,26 L23.5,26 L23.5,14.4504509 Z M7.49999997,14.4218168 C6.66573791,14.1810591 6.05559997,13.4117822 6.05559997,12.5 C6.05559997,11.5882178 6.66573791,10.8189409 7.49999997,10.5781832 L7.49999997,5.99999997 L8.49999998,5.99999997 L8.49999998,10.5495491 C9.39068395,10.7516345 10.0556,11.5481675 10.0556,12.5 C10.0556,13.4518324 9.39068395,14.2483654 8.49999998,14.4504509 L8.49999998,26 L7.49999997,26 L7.49999997,14.4218168 L7.49999997,14.4218168 Z M15.5,21.4369913 C14.6373864,21.2149699 14,20.4319197 14,19.5 C14,18.5680803 14.6373864,17.7850301 15.5,17.5630087 L15.5,5.99999997 L16.5,5.99999997 L16.5,17.5630087 C17.3626136,17.7850301 18,18.5680803 18,19.5 C18,20.4319197 17.3626136,21.2149699 16.5,21.4369913 L16.5,26 L15.5,26 L15.5,21.4369913 Z"
                       />
+                    </svg>
+                    <span
+                      className="utility-button__text"
+                    >
                       Settings
-                    </a>
-                    <a
-                      className="button-bare-primary"
-                      href="/backend/projects/project-collections/1/manage-projects"
-                      onClick={[Function]}
+                    </span>
+                  </a>
+                  <a
+                    className="utility-button"
+                    href="/backend/projects/project-collections/1/manage-projects"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg utility-button__icon utility-button__icon--highlight svg-icon--BEProject64"
+                      fill="currentColor"
+                      height={26}
+                      viewBox="0 0 64 64"
+                      width={26}
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <i
-                        aria-hidden="true"
-                        className="manicon manicon-stack"
+                      <path
+                        d="M9.103,24.948 L32.045,34.722 L54.984,24.948 L32.045,15.174 L9.103,24.948 Z M32.045,36.896 L4,24.948 L32.045,13 L60.086,24.948 L32.045,36.896 Z M60.009,32.175 L60.009,30 L32.01,41.94 L4,30.021 L4,32.194 L32.011,44.113 L60.009,32.175 Z M60.009,39.175 L60.009,37 L32.01,48.94 L4,37.02 L4,39.194 L32.011,51.113 L60.009,39.175 Z"
+                        fillRule="evenodd"
                       />
+                    </svg>
+                    <span
+                      className="utility-button__text"
+                    >
                       Manage Projects
-                    </a>
-                  </div>
+                    </span>
+                  </a>
                 </div>
               </div>
+              <figure
+                className="backend-header__figure-block"
+              >
+                <div
+                  className="backend-header__figure backend-header__figure--rounded backend-header__figure--accented"
+                >
+                  <svg
+                    aria-hidden={true}
+                    className="manicon-svg backend-header__type-icon svg-icon--BECollectionManual64"
+                    fill="currentColor"
+                    height={64}
+                    viewBox="0 0 64 64"
+                    width={64}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M33.0042,49.9968 L31.0042,49.9968 L31.0042,37.6356 L33.0042,37.6356 L33.0042,49.9968 Z M38.1758,42.8162 L38.1758,44.8162 L25.8326,44.8162 L25.8326,42.8162 L38.1758,42.8162 Z M9.99999997,46.833 L15.017,46.833 L15.017,48.833 L7.99999996,48.833 L7.99999996,19.723 L56,19.723 L56,48.833 L48.983,48.833 L48.983,46.833 L54,46.833 L54,21.723 L9.99999997,21.723 L9.99999997,46.833 Z M13.0112,15.6977 L13.0112,13.6977 L50.9888,13.6977 L50.9888,15.6977 L13.0112,15.6977 Z M17.0224,9.67219997 L17.0224,7.67219996 L46.9776,7.67219996 L46.9776,9.67219997 L17.0224,9.67219997 Z M31.878,56.3278 C24.976932,56.3278 19.3831,50.7258412 19.3831,43.8162 C19.3831,36.9065589 24.976932,31.3046 31.878,31.3046 C38.779068,31.3046 44.3729,36.9065589 44.3729,43.8162 C44.3729,50.7258412 38.779068,56.3278 31.878,56.3278 Z M31.878,54.3278 C37.673848,54.3278 42.3729,49.6219211 42.3729,43.8162 C42.3729,38.0104789 37.673848,33.3046 31.878,33.3046 C26.082152,33.3046 21.3831,38.0104789 21.3831,43.8162 C21.3831,49.6219211 26.082152,54.3278 31.878,54.3278 Z"
+                    />
+                  </svg>
+                </div>
+              </figure>
             </header>
           </div>
         </section>

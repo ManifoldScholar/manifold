@@ -1,20 +1,60 @@
 .input-predictive {
   position: relative;
 
-  .input {
+  &__input {
     display: flex;
     align-items: center;
     width: 100%;
     border: 1px solid $accentPrimary;
   }
 
-  .manicon {
+  &__button {
     @include buttonUnstyled;
-    display: inline-block;
-    min-width: 50px;
-    font-size: 13px;
+    padding: 8px 13px;
     color: $accentPrimary;
-    text-align: center;
+  }
+
+  &__results-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 210px;
+    overflow: auto;
+    visibility: hidden;
+    background-color: $neutral90;
+    border-color: $neutral80;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    opacity: 0;
+    transition: opacity $durationFast $timing
+      visibility $durationFast $timing;
+
+    .input-predictive--open & {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__results {
+    @include listUnstyled;
+    padding: 12px 0;
+  }
+
+  &__result {
+    @include templateHead;
+    padding: 0.425em 1.3em;
+    font-size: 20px;
+    color: $neutral70;
+    cursor: pointer;
+
+    & + & {
+      border: 0; // OD
+    }
+
+    &:hover, &.highlighted {
+      color: $neutral40;
+    }
   }
 
   // Required for override
@@ -55,50 +95,5 @@
 
   + .has-many-list {
     margin-top: 20px;
-  }
-}
-
-.predictive-list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-height: 210px;
-  overflow: scroll;
-  visibility: hidden;
-  background-color: $neutral90;
-  border-color: $neutral80;
-  border-style: solid;
-  border-width: 0 1px 1px;
-  opacity: 0;
-  transition: opacity $durationFast $timing
-    visibility $durationFast $timing;
-
-  ul {
-    @include listUnstyled;
-    padding: 12px 0;
-
-    li {
-      @include templateHead;
-      padding: 0.425em 1.3em;
-      font-size: 20px;
-      color: $neutral70;
-      cursor: pointer;
-
-      + li {
-        border: 0; // OD
-      }
-
-      &:hover, &.highlighted {
-        color: $neutral40;
-      }
-    }
-  }
-}
-
-.predictive-open {
-  .predictive-list {
-    visibility: visible;
-    opacity: 1;
   }
 }

@@ -4,6 +4,7 @@ import labelId from "helpers/labelId";
 import classNames from "classnames";
 import IconComputed from "global/components/icon-computed";
 import Form from "backend/components/form";
+import IconComposer from "global/components/utility/IconComposer";
 
 class KindPicker extends PureComponent {
   static displayName = "Resource.KindPicker";
@@ -91,7 +92,11 @@ class KindPicker extends PureComponent {
           <label htmlFor={this.props.id}>Kind</label>
           <div className={selectClass}>
             <div className="form-select">
-              <i className="manicon manicon-caret-down" aria-hidden="true" />
+              <IconComposer
+                icon="disclosureDown16"
+                size={22}
+                iconClass="form-select__icon"
+              />
               <select
                 id={this.props.id}
                 onChange={event => {

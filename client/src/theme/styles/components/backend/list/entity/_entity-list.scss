@@ -7,9 +7,12 @@
     padding-bottom: 0; // sorry. hacked it.
   }
 
+  &__title-block {
+    margin: 0 0 32px;
+  }
+
   &__title {
     @include templateHead;
-    margin: 0 0 30px;
     font-size: 16px;
     font-weight: $semibold;
     color: $neutral20;
@@ -155,12 +158,15 @@
         @supports (grid-auto-columns: min-content) {
           display: grid;
           grid-template-columns:repeat(3, 1fr);
+
+          li {
+            min-width: $grid-item-min-width;
+          }
         }
 
         li {
           flex-basis: 33.3333%;
           flex-grow: 1;
-          min-width: $grid-item-min-width;
           border-bottom: none;
         }
       }
@@ -219,7 +225,6 @@
   }
 
   &__search {
-    margin-top: 32px;
     margin-bottom: 24px;
   }
 

@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Citation from "./Citation";
 import Selection from "../Selection";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class AnnotationShareWrapper extends PureComponent {
   static displayName = "Annotation.Share.Wrapper";
@@ -56,7 +57,11 @@ export default class AnnotationShareWrapper extends PureComponent {
       <div className="annotation-selection">
         <div className="selection-text">
           <div className="container">
-            <i className="manicon manicon-quote" aria-hidden="true" />
+            <IconComposer
+              icon="socialCite32"
+              size="default"
+              iconClass="selection-text__icon"
+            />
             {this.maybeTruncateSelection()}
           </div>
         </div>

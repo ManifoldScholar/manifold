@@ -9,7 +9,11 @@ exports[`Frontend.Event.AllLink Component renders correctly 1`] = `
     href="/projects/slug-1/events"
     onClick={[Function]}
   >
-    See all Activity
+    <span
+      className="button-primary__text"
+    >
+      See all Activity
+    </span>
   </a>
 </div>
 `;

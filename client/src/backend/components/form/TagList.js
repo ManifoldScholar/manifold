@@ -114,7 +114,6 @@ class FormTagList extends Component {
           {this.props.label}
         </label>
         <ConnectedFormInputs.PredictiveInput
-          className="input-predictive"
           placeholder="Enter a Tag"
           fetch={tagsAPI.index}
           fetchOptions={this.fetchOptions}

@@ -6,7 +6,7 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
   id="entities-list1"
 >
   <h3
-    className="entity-list__title"
+    className="entity-list__title-block entity-list__title"
   >
     <figure
       className="entity-list__title-icon"

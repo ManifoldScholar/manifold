@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Link from "./Link";
 import Notation from "./Notation";
+import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
 
@@ -47,7 +48,11 @@ export default class NotationViewerSingle extends PureComponent {
             className="notation-delete"
           >
             <span className="screen-reader-text">Delete Notation</span>
-            <i className="manicon manicon-x" aria-hidden="true" />
+            <IconComposer
+              icon="close16"
+              size="default"
+              iconClass="notation-delete__icon"
+            />
           </button>
         </Authorize>
         <Link notation={notation} params={params} className={linkClass}>

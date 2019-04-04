@@ -6,14 +6,12 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
   id="entities-list1"
 >
   <header
-    className="entity-list__title backend-header section-heading-tertiary"
+    className="entity-list__title-block entity-list__title backend-header"
   >
-    <h2>
-      <span
-        className="section-heading-tertiary__shim"
-      >
-        Twitter Queries
-      </span>
+    <h2
+      className="backend-header__h2-title"
+    >
+      Twitter Queries
     </h2>
   </header>
   <div

@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import uniqueId from "lodash/uniqueId";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ProjectCollectionSortBy extends PureComponent {
   static displayName = "ProjectCollection.SortBy";
@@ -82,7 +83,11 @@ export default class ProjectCollectionSortBy extends PureComponent {
               Publication Date (Oldest First)
             </option>
           </select>
-          <i className="manicon manicon-caret-down" aria-hidden="true" />
+          <IconComposer
+            icon="disclosureDown16"
+            size={22}
+            iconClass="form-select__disclosure-icon"
+          />
         </div>
       </div>
     );
@@ -123,7 +128,7 @@ export default class ProjectCollectionSortBy extends PureComponent {
     if (!this.props.projectCollection) return null;
 
     return (
-      <div className="project-collection-sort form-flex">
+      <div className="project-collection-sort">
         <form className="form-search-filter" onSubmit={this.handleSubmit}>
           <div className="form-list-filter">
             {this.renderSortList(this.props.projectCollection)}

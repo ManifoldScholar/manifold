@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import Swipeable from "react-swipeable";
 import includes from "lodash/includes";
+import classNames from "classnames";
 import ResourceSlide from "frontend/components/resource-slide";
 import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
+import IconComposer from "global/components/utility/IconComposer";
 
 const { request } = entityStoreActions;
 
@@ -217,7 +219,7 @@ export default class ResourceSlideshow extends PureComponent {
               </ReactCSSTransitionGroup>
             </div>
           </Swipeable>
-          <div className="slide-footer">
+          <div className="resource-slideshow__footer">
             {this.isLoaded(position) ? (
               <ResourceSlide.Caption
                 resource={collectionResource}
@@ -228,26 +230,42 @@ export default class ResourceSlideshow extends PureComponent {
             ) : (
               <ResourceSlide.LoadingCaption />
             )}
-            {this.props.collectionResources.length > 0 ? (
-              <div className="slide-pagination">
-                <span className="slide-ordinal">
+            {this.props.collectionResources.length > 0 && (
+              <div className="resource-slideshow__pagination">
+                <span className="resource-slideshow__ordinal">
                   {position} {"/"} {totalCount}
                 </span>
                 <div>
                   <button
-                    className="slide-previous"
+                    className={classNames(
+                      "resource-slideshow__button",
+                      "resource-slideshow__button--previous"
+                    )}
                     onClick={this.handleSlidePrev}
                     disabled={position === 1}
                   >
-                    <i
-                      className="manicon manicon-arrow-left"
-                      aria-hidden="true"
+                    <IconComposer
+                      icon="circleArrowLeft64"
+                      size={50}
+                      iconClass={classNames(
+                        "resource-slideshow__pagination-icon",
+                        "resource-slideshow__pagination-icon--left",
+                        "resource-slideshow__pagination-icon--large"
+                      )}
                     />
-                    <i
-                      className="manicon manicon-arrow-round-left"
-                      aria-hidden="true"
+                    <IconComposer
+                      icon="arrowLeft16"
+                      size="default"
+                      iconClass={classNames(
+                        "resource-slideshow__pagination-icon",
+                        "resource-slideshow__pagination-icon--left",
+                        "resource-slideshow__pagination-icon--small"
+                      )}
                     />
-                    <span className="text" aria-hidden="true">
+                    <span
+                      className="resource-slideshow__pagination-text"
+                      aria-hidden="true"
+                    >
                       Prev
                     </span>
                     <span className="screen-reader-text">
@@ -255,28 +273,44 @@ export default class ResourceSlideshow extends PureComponent {
                     </span>
                   </button>
                   <button
-                    className="slide-next"
+                    className={classNames(
+                      "resource-slideshow__button",
+                      "resource-slideshow__button--next"
+                    )}
                     onClick={this.handleSlideNext}
                     disabled={position === totalCount}
                   >
-                    <span className="text" aria-hidden="true">
+                    <span
+                      className="resource-slideshow__pagination-text"
+                      aria-hidden="true"
+                    >
                       Next
                     </span>
                     <span className="screen-reader-text">
                       {"Go to next slide"}
                     </span>
-                    <i
-                      className="manicon manicon-arrow-round-right"
-                      aria-hidden="true"
+                    <IconComposer
+                      icon="circleArrowRight64"
+                      size={50}
+                      iconClass={classNames(
+                        "resource-slideshow__pagination-icon",
+                        "resource-slideshow__pagination-icon--right",
+                        "resource-slideshow__pagination-icon--large"
+                      )}
                     />
-                    <i
-                      className="manicon manicon-arrow-right"
-                      aria-hidden="true"
+                    <IconComposer
+                      icon="arrowRight16"
+                      size="default"
+                      iconClass={classNames(
+                        "resource-slideshow__pagination-icon",
+                        "resource-slideshow__pagination-icon--right",
+                        "resource-slideshow__pagination-icon--small"
+                      )}
                     />
                   </button>
                 </div>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </div>

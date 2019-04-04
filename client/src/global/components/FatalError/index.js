@@ -4,6 +4,7 @@ import BodyClass from "hoc/body-class";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 import config from "config";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class FatalError extends PureComponent {
   static propTypes = {
@@ -17,7 +18,7 @@ export default class FatalError extends PureComponent {
   };
 
   static defaultProps = {
-    headerLineOne: "We're at a bit of a loose end.",
+    headerLineOne: "We’re at a bit of a loose end.",
     headerLineTwo: "Frightfully sorry."
   };
 
@@ -47,15 +48,16 @@ export default class FatalError extends PureComponent {
     const showDetail = config.environment.isDevelopment;
 
     return (
-      <BodyClass className="  fatal-error-page">
+      <BodyClass className="fatal-error-page">
         <section className="fatal-error">
           <div className="error-wrapper">
             <div className="container">
               <header>
-                <div className="stop-sign" aria-hidden="true">
-                  <i className="manicon manicon-octagon" />
-                  <i className="manicon manicon-bang" />
-                </div>
+                <IconComposer
+                  icon="stopSign64"
+                  size={60}
+                  iconClass="fatal-error__stop-icon"
+                />
                 <h3>
                   {this.props.headerLineOne}
                   {this.props.headerLineTwo ? (

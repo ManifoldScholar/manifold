@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class UtilityBackLinkPrimary extends Component {
   static displayName = "Utility.BackLinkPrimary";
@@ -17,11 +18,20 @@ export default class UtilityBackLinkPrimary extends Component {
 
   render() {
     return (
-      <Link to={this.props.link} className="back-link-primary full">
-        <div className="container flush">
-          <i className="manicon manicon-arrow-left" aria-hidden="true" />
-          {this.props.backText}
-          <span>{this.props.title}</span>
+      <Link
+        to={this.props.link}
+        className="back-link-primary back-link-primary--full"
+      >
+        <div className="container flush back-link-primary__container">
+          <IconComposer
+            icon="arrowLeft16"
+            size="default"
+            iconClass="back-link-primary__icon"
+          />
+          <span className="back-link-primary__back-text">
+            {this.props.backText}
+          </span>
+          <span className="back-link-primary__title">{this.props.title}</span>
         </div>
       </Link>
     );

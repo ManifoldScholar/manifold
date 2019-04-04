@@ -10,7 +10,6 @@ import Actions from "./Actions";
 import get from "lodash/get";
 import throttle from "lodash/throttle";
 import { websocketActions, notificationActions } from "actions";
-import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import config from "config";
 
@@ -255,9 +254,6 @@ export class IngestionIngest extends Component {
 
   render() {
     if (!this.props.ingestion) return null;
-    const resetButtonClass = classnames("button-bare-primary", {
-      loading: this.state.loading || !this.canReset
-    });
 
     if (this.props.webSocketFailure === true) {
       return null;
@@ -277,10 +273,10 @@ export class IngestionIngest extends Component {
             cancel={this.backToEdit}
             complete={this.complete}
           />
-          <div className="log">
-            <p className="label">Log</p>
+          <div className="ingestion-output__log">
+            <p className="ingestion-output__label">Log</p>
             <div
-              className="value"
+              className="ingestion-output__log-value"
               ref={el => {
                 this.logEl = el;
               }}
@@ -288,14 +284,18 @@ export class IngestionIngest extends Component {
               {this.state.textLog.trim()}
             </div>
           </div>
-          <div className="utility">
+          <div className="ingestion-output__utility">
             <button
-              className={resetButtonClass}
+              className="utility-button"
               onClick={this.reset}
               disabled={this.state.loading || !this.canReset}
             >
-              <Utility.IconComposer icon="reload32" size={24} />
-              Restart Ingestion
+              <Utility.IconComposer
+                icon="reload32"
+                size={24}
+                iconClass="utility-button__icon utility-button__icon--highlight"
+              />
+              <span className="utility-button__text">Restart Ingestion</span>
             </button>
           </div>
         </div>

@@ -3,19 +3,35 @@
 exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
 <div>
   <a
-    className="back-link-primary full"
+    className="back-link-primary back-link-primary--full"
     href="/projects/slug-1"
     onClick={[Function]}
   >
     <div
-      className="container flush"
+      className="container flush back-link-primary__container"
     >
-      <i
-        aria-hidden="true"
-        className="manicon manicon-arrow-left"
-      />
-      Back to Project
-      <span>
+      <svg
+        aria-hidden={true}
+        className="manicon-svg back-link-primary__icon svg-icon--arrowLeft16"
+        fill="currentColor"
+        height={16}
+        viewBox="0 0 16 16"
+        width={16}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+          transform="rotate(180 8 8)"
+        />
+      </svg>
+      <span
+        className="back-link-primary__back-text"
+      >
+        Back to Project
+      </span>
+      <span
+        className="back-link-primary__title"
+      >
         Rowan Test
       </span>
     </div>
@@ -24,32 +40,27 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
     className="collection-detail"
   >
     <div
-      className="container flush-bottom"
+      className="collection-detail__container container flush-bottom"
     >
       <header
-        className="section-heading"
+        className="entity-section-wrapper__heading entity-section-wrapper__heading--wide collection-detail__heading section-heading"
       >
         <div
           className="main"
         >
-          <i
-            aria-hidden="true"
-            className="manicon"
+          <svg
+            aria-hidden={true}
+            className="manicon-svg svg-icon--resourceCollection64"
+            fill="currentColor"
+            height={54}
+            viewBox="0 0 64 64"
+            width={54}
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              aria-hidden={true}
-              className="manicon-svg svg-icon--resourceCollection64"
-              fill="currentColor"
-              height={54}
-              viewBox="0 0 64 64"
-              width={54}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
-              />
-            </svg>
-          </i>
+            <path
+              d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
+            />
+          </svg>
           <div
             className="body"
           >
@@ -71,24 +82,40 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
         </div>
       </header>
       <div
-        className="utility"
+        className="collection-detail__utility"
       >
         <nav
           className="share-nav-primary"
         >
-          <span>
+          <span
+            className="share-nav-primary__label"
+          >
             Share
           </span>
-          <ul>
-            <li>
+          <ul
+            className="share-nav-primary__list"
+          >
+            <li
+              className="share-nav-primary__item"
+            >
               <button
+                className="share-nav-primary__link"
                 onClick={[Function]}
                 target="_blank"
               >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-twitter"
-                />
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg svg-icon--socialTwitter32"
+                  fill="currentColor"
+                  height={20}
+                  viewBox="0 0 32 32"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M30,7.31619997 C28.9515228,7.78072545 27.8393881,8.0856069 26.7006,8.22069998 C27.9003003,7.50286885 28.798046,6.37328518 29.2265,5.04249997 C28.0989009,5.71176382 26.8651508,6.18326004 25.5786,6.43659997 C23.7976636,4.54435699 20.9689701,4.0817104 18.6779871,5.30797114 C16.3870042,6.53423188 15.2031629,9.14460899 15.79,11.676 C11.1708147,11.4447105 6.86706167,9.26302756 3.94999996,5.67399997 C2.42561389,8.29903306 3.20400896,11.6568278 5.72789997,13.3434 C4.81566995,13.3148893 3.92350112,13.0685314 3.12589996,12.6249 L3.12539996,12.6971 C3.12573033,15.4316379 5.05254245,17.7873646 7.73269997,18.33 C6.8867092,18.5599269 5.99937697,18.5935827 5.13839997,18.4284 C5.8907162,20.7684358 8.04713954,22.3715983 10.5047,22.4179 C8.46977147,24.0149399 5.95678428,24.8810499 3.36999996,24.8769 C2.91216116,24.877069 2.45470735,24.8503564 1.99999996,24.7969 C4.62662885,26.4847185 7.68363698,27.3806651 10.8058,27.3777 C21.3722,27.3777 27.1502,18.6244 27.1502,11.0332 C27.1502,10.7842 27.1446667,10.5365 27.1336,10.2901 C28.2582178,9.47703381 29.2288714,8.46997741 30,7.31619997 L30,7.31619997 Z"
+                  />
+                </svg>
                 <span
                   className="screen-reader-text"
                 >
@@ -153,14 +180,14 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
           </div>
         </div>
         <div
-          className="slide-footer"
+          className="resource-slideshow__footer"
         >
           <div
-            className="slide-caption"
+            className="resource-slideshow__caption"
           >
             <header>
               <h2
-                className="resource-title"
+                className="resource-slideshow__title"
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "Image",
@@ -177,40 +204,52 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
               </span>
             </header>
             <div
-              className="resource-utility with-shadow"
+              className="resource-slideshow__utility resource-slideshow__utility--with-shadow"
             >
               <div
-                className="wrapper"
+                className="resource-slideshow__utility-inner"
               >
                 <button
-                  className="more-link"
+                  className="resource-slideshow__more-link"
                   onClick={[Function]}
                 >
                   <span
-                    className="open-text"
+                    className="resource-slideshow__open-text"
                   >
                     Read More
                   </span>
                   <span
-                    className="close-text"
+                    className="resource-slideshow__close-text"
                   >
                     Hide Description
                   </span>
                 </button>
                 <a
-                  className="download-link"
+                  className="resource-slideshow__download-link"
                   href="original-image.mock"
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  Download
-                  <i
-                    aria-hidden="true"
-                    className="manicon manicon-arrow-down"
-                  />
+                  <span>
+                    Download
+                  </span>
+                  <svg
+                    aria-hidden={true}
+                    className="manicon-svg resource-slideshow__download-icon svg-icon--arrowDown16"
+                    fill="currentColor"
+                    height={16}
+                    viewBox="0 0 16 16"
+                    width={16}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                      transform="rotate(90 8 8)"
+                    />
+                  </svg>
                 </a>
                 <a
-                  className="detail-link"
+                  className="resource-slideshow__detail-link"
                   href="/projects/delegated-project-slug/resource-collection/slug-2/resource/slug-3"
                   onClick={[Function]}
                 >
@@ -220,10 +259,10 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
             </div>
           </div>
           <div
-            className="slide-pagination"
+            className="resource-slideshow__pagination"
           >
             <span
-              className="slide-ordinal"
+              className="resource-slideshow__ordinal"
             >
               1
                
@@ -233,21 +272,40 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
             </span>
             <div>
               <button
-                className="slide-previous"
+                className="resource-slideshow__button resource-slideshow__button--previous"
                 disabled={true}
                 onClick={[Function]}
               >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-arrow-left"
-                />
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-arrow-round-left"
-                />
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--left resource-slideshow__pagination-icon--large svg-icon--circleArrowLeft64"
+                  fill="currentColor"
+                  height={50}
+                  viewBox="0 0 64 64"
+                  width={50}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M32,58 C17.6405965,58 5.99999996,46.3594035 5.99999996,32 C5.99999996,17.6405965 17.6405965,5.99999996 32,5.99999996 C46.3594035,5.99999996 58,17.6405965 58,32 C58,46.3594035 46.3594035,58 32,58 Z M32,56 C45.254834,56 56,45.254834 56,32 C56,18.745166 45.254834,7.99999996 32,7.99999996 C18.745166,7.99999996 7.99999996,18.745166 7.99999996,32 C7.99999996,45.254834 18.745166,56 32,56 Z M19.6388077,32.9918997 L19.6403922,30.9919003 L44.0007923,31.0112003 L43.9992077,33.0111997 L19.6388077,32.9918997 Z M21.019947,32 L35.2169617,44.5045804 L33.8950383,46.0054197 L17.994053,32 L33.8950383,17.9945803 L35.2169617,19.4954196 L21.019947,32 Z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--left resource-slideshow__pagination-icon--small svg-icon--arrowLeft16"
+                  fill="currentColor"
+                  height={16}
+                  viewBox="0 0 16 16"
+                  width={16}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                    transform="rotate(180 8 8)"
+                  />
+                </svg>
                 <span
                   aria-hidden="true"
-                  className="text"
+                  className="resource-slideshow__pagination-text"
                 >
                   Prev
                 </span>
@@ -258,13 +316,13 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
                 </span>
               </button>
               <button
-                className="slide-next"
+                className="resource-slideshow__button resource-slideshow__button--next"
                 disabled={false}
                 onClick={[Function]}
               >
                 <span
                   aria-hidden="true"
-                  className="text"
+                  className="resource-slideshow__pagination-text"
                 >
                   Next
                 </span>
@@ -273,14 +331,33 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
                 >
                   Go to next slide
                 </span>
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-arrow-round-right"
-                />
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-arrow-right"
-                />
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--right resource-slideshow__pagination-icon--large svg-icon--circleArrowRight64"
+                  fill="currentColor"
+                  height={50}
+                  viewBox="0 0 64 64"
+                  width={50}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M32,58 C17.6405965,58 5.99999996,46.3594035 5.99999996,32 C5.99999996,17.6405965 17.6405965,5.99999996 32,5.99999996 C46.3594035,5.99999996 58,17.6405965 58,32 C58,46.3594035 46.3594035,58 32,58 Z M32,56 C45.254834,56 56,45.254834 56,32 C56,18.745166 45.254834,7.99999996 32,7.99999996 C18.745166,7.99999996 7.99999996,18.745166 7.99999996,32 C7.99999996,45.254834 18.745166,56 32,56 Z M19.6388077,32.9918997 L19.6403922,30.9919003 L44.0007923,31.0112003 L43.9992077,33.0111997 L19.6388077,32.9918997 Z M21.019947,32 L35.2169617,44.5045804 L33.8950383,46.0054197 L17.994053,32 L33.8950383,17.9945803 L35.2169617,19.4954196 L21.019947,32 Z"
+                    transform="matrix(-1 0 0 1 64 0)"
+                  />
+                </svg>
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg resource-slideshow__pagination-icon resource-slideshow__pagination-icon--right resource-slideshow__pagination-icon--small svg-icon--arrowRight16"
+                  fill="currentColor"
+                  height={16}
+                  viewBox="0 0 16 16"
+                  width={16}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                  />
+                </svg>
               </button>
             </div>
           </div>
@@ -321,7 +398,7 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
         </a>
       </div>
       <form
-        className="form-list-filter"
+        className="form-list-filter entity-section-wrapper__tools entity-section-wrapper__tools--wide"
         onSubmit={[Function]}
       >
         <div
@@ -390,10 +467,19 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
                 Video
               </option>
             </select>
-            <i
-              aria-hidden="true"
-              className="manicon manicon-caret-down"
-            />
+            <svg
+              aria-hidden={true}
+              className="manicon-svg select__icon svg-icon--disclosureDown16"
+              fill="currentColor"
+              height={20}
+              viewBox="0 0 16 16"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+              />
+            </svg>
           </div>
           <div
             className="select"
@@ -413,10 +499,19 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
                 Dog
               </option>
             </select>
-            <i
-              aria-hidden="true"
-              className="manicon manicon-caret-down"
-            />
+            <svg
+              aria-hidden={true}
+              className="manicon-svg select__icon svg-icon--disclosureDown16"
+              fill="currentColor"
+              height={20}
+              viewBox="0 0 16 16"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+              />
+            </svg>
           </div>
           <div
             className="select"
@@ -441,10 +536,19 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
                 Z-A
               </option>
             </select>
-            <i
-              aria-hidden="true"
-              className="manicon manicon-caret-down"
-            />
+            <svg
+              aria-hidden={true}
+              className="manicon-svg select__icon svg-icon--disclosureDown16"
+              fill="currentColor"
+              height={20}
+              viewBox="0 0 16 16"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+              />
+            </svg>
           </div>
         </div>
         <button
@@ -454,7 +558,9 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
           Reset Search + Filters
         </button>
       </form>
-      <div>
+      <div
+        className="entity-section-wrapper__body"
+      >
         <nav
           className="resource-list"
         >
@@ -490,7 +596,7 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
                   tabIndex="0"
                 >
                   <div
-                    className="resource-link"
+                    className="resource-card__link"
                     onClick={[Function]}
                     role="link"
                     tabIndex="0"
@@ -533,21 +639,23 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
                       </div>
                     </div>
                     <div
-                      className="preview-text"
+                      className="resource-card__preview-text"
                     >
-                      <span>
+                      <span
+                        className="resource-card__view-text"
+                      >
                         Preview
-                        <i
-                          aria-hidden="true"
-                          className="manicon manicon-eye-outline"
-                        />
                       </span>
+                      <i
+                        aria-hidden="true"
+                        className="manicon manicon-eye-outline"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
               <section
-                className="resource-info"
+                className="resource-card__info"
                 onClick={[Function]}
                 onMouseOut={[Function]}
                 onMouseOver={[Function]}
@@ -556,7 +664,7 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
               >
                 <div>
                   <header
-                    className="resource-title"
+                    className="resource-card__title"
                   >
                     <h4
                       dangerouslySetInnerHTML={
@@ -567,7 +675,7 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
                     />
                   </header>
                   <span
-                    className="resource-date"
+                    className="resource-card__date"
                   >
                     Uploaded
                      
@@ -578,13 +686,22 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
                     </time>
                   </span>
                   <div
-                    className="arrow-link"
+                    className="resource-card__arrow-link"
                     to="/projects/slug-1/resource-collection/slug-2/resource/slug-3"
                   >
-                    <i
-                      aria-hidden="true"
-                      className="manicon manicon-arrow-right"
-                    />
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg resource-card__arrow-link-icon svg-icon--arrowRight16"
+                      fill="currentColor"
+                      height={20}
+                      viewBox="0 0 16 16"
+                      width={20}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                      />
+                    </svg>
                   </div>
                 </div>
                 <nav
@@ -770,18 +887,29 @@ exports[`Frontend ResourceCollectionDetail Container renders correctly 1`] = `
         href="/projects/slug-1"
         onClick={[Function]}
       >
-        <i
-          aria-hidden="true"
-          className="manicon manicon-arrow-round-left"
-        />
-        <div>
+        <svg
+          aria-hidden={true}
+          className="manicon-svg back-link-secondary__icon svg-icon--circleArrowLeft64"
+          fill="currentColor"
+          height={56}
+          viewBox="0 0 64 64"
+          width={56}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M32,58 C17.6405965,58 5.99999996,46.3594035 5.99999996,32 C5.99999996,17.6405965 17.6405965,5.99999996 32,5.99999996 C46.3594035,5.99999996 58,17.6405965 58,32 C58,46.3594035 46.3594035,58 32,58 Z M32,56 C45.254834,56 56,45.254834 56,32 C56,18.745166 45.254834,7.99999996 32,7.99999996 C18.745166,7.99999996 7.99999996,18.745166 7.99999996,32 C7.99999996,45.254834 18.745166,56 32,56 Z M19.6388077,32.9918997 L19.6403922,30.9919003 L44.0007923,31.0112003 L43.9992077,33.0111997 L19.6388077,32.9918997 Z M21.019947,32 L35.2169617,44.5045804 L33.8950383,46.0054197 L17.994053,32 L33.8950383,17.9945803 L35.2169617,19.4954196 L21.019947,32 Z"
+          />
+        </svg>
+        <div
+          className="back-link-secondary__text"
+        >
           <span
-            className="back-text"
+            className="back-link-secondary__back-text"
           >
             Back to Project
           </span>
           <span
-            className="project-title"
+            className="back-link-secondary__project-title"
           >
             Rowan Test
           </span>

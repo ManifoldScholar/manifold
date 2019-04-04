@@ -8,6 +8,7 @@ import { singularEntityName } from "utils/entityUtils";
 import { bindActionCreators } from "redux";
 import { commentsAPI } from "api";
 import labelId from "helpers/labelId";
+import IconComposer from "global/components/utility/IconComposer";
 
 const { request } = entityStoreActions;
 import GlobalForm from "global/components/form";
@@ -169,9 +170,15 @@ export class CommentEditor extends PureComponent {
     return (
       <div className="comment-editor">
         {this.props.label ? (
-          <h3 className="editor-label">
-            <i className="manicon manicon-pencil" aria-hidden="true" />
-            {this.props.label}
+          <h3 className="comment-editor__editor-label">
+            <IconComposer
+              icon="annotate32"
+              size={44.91}
+              iconClass="comment-editor__label-icon"
+            />
+            <span className="comment-editor__label-text">
+              {this.props.label}
+            </span>
           </h3>
         ) : null}
         <Authorize kind="unauthenticated">
@@ -206,7 +213,7 @@ export class CommentEditor extends PureComponent {
                   <button
                     type="button"
                     onClick={this.props.cancel}
-                    className="button-secondary dull"
+                    className="button-secondary button-secondary--dull"
                   >
                     Cancel
                   </button>
@@ -218,7 +225,9 @@ export class CommentEditor extends PureComponent {
                       className="manicon manicon-word-bubble-lines"
                       aria-hidden="true"
                     />
-                    {this.buttonLabel(this.props)}
+                    <span className="button-secondary__text">
+                      {this.buttonLabel(this.props)}
+                    </span>
                   </button>
                 </div>
               </div>

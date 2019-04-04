@@ -107,150 +107,6 @@
     top: 0;
   }
 
-  .drawer-bar {
-    padding-bottom: 18px;
-    text-align: right;
-
-    @include respond($break50) {
-      padding-bottom: 26px;
-    }
-
-    .close-button-primary {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-
-      &:focus {
-        color: $focusPrimary;
-        outline: none;
-      }
-
-      .manicon::before {
-        vertical-align: middle;
-      }
-
-      .close-text {
-        @include utilityPrimary;
-        margin-right: 12px;
-        font-size: 12px;
-        font-weight: $semibold;
-        letter-spacing: 0.125em;
-      }
-    }
-  }
-
-  .drawer-header {
-    padding-bottom: 21px;
-
-    @include respond($break50) {
-      padding-bottom: 33px;
-    }
-
-    @include respond($break50) {
-      padding-bottom: 48px;
-    }
-
-    @include respond($break90) {
-      padding-bottom: 60px;
-    }
-
-    .subtitle {
-      @include subtitlePrimary;
-      padding: 5px 0;
-      color: $neutralWhite;
-    }
-
-    .instructions {
-      @include templateCopy;
-      display: block;
-      padding-top: 12px;
-      margin-bottom: 0;
-      font-size: 17px;
-      font-style: italic;
-      color: $neutral50;
-      text-transform: none;
-    }
-
-    .form-input {
-      input[type='text'] {
-        height: auto;
-        padding: 0 0 0.4em;
-        font-size: 24px;
-
-        @include respond($break90) {
-          padding: 0 0 0.25em;
-          font-size: 30px;
-        }
-      }
-    }
-
-    .buttons-bare-vertical {
-      @extend %header-utility-button;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 11px;
-
-      .button-bare-primary {
-        margin-left: 0;
-        font-size: 12px;
-      }
-
-      /* stylelint-disable max-nesting-depth */
-      button {
-        svg, svg.manicon-svg {
-          margin-top: -5px;
-          color: $neutral50;
-
-          &.highlight {
-            color: $accentPrimary;
-          }
-
-          &.notice {
-            color: $sp40Tertiary;
-          }
-        }
-
-        &:hover {
-          color: $neutral05;
-
-          svg, svg.manicon-svg {
-            color: $neutral05;
-          }
-        }
-      }
-      /* stylelint-enable max-nesting-depth */
-    }
-
-  }
-
-  .heading-quaternary {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    padding: 5px 0 0;
-    color: $neutralWhite;
-
-    span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    &.less-space-bottom {
-      padding-bottom: 0;
-    }
-
-    .manicon, .manicon-svg {
-      margin-right: 10px;
-      color: $neutral75;
-
-      &.manicon-twitter {
-        font-size: 24px;
-      }
-    }
-  }
-
   .utility-primary {
     color: $neutralWhite;
   }
@@ -270,20 +126,72 @@
     @include respond($break95) {
       margin-top: 60px;
     }
+  }
 
-    .button-icon-secondary {
-      @include utilityPrimary;
-      justify-content: center;
-      width: 100%;
-      padding-top: 1.125em;
-      padding-bottom: 1.375em;
-      margin: 0;
-      font-size: 12px;
+  // TODO: unnest once reader drawers are refactored
+  .drawer-header {
+    padding-bottom: 21px;
 
-      .manicon-x {
-        margin-left: 13px;
-        font-size: 14px;
-        vertical-align: middle;
+    @include respond($break50) {
+      padding-bottom: 33px;
+    }
+
+    @include respond($break50) {
+      padding-bottom: 48px;
+    }
+
+    @include respond($break90) {
+      padding-bottom: 53px;
+    }
+
+    &__title {
+      @include headingQuaternary;
+      display: flex;
+      min-width: 0;
+      color: $neutralWhite;
+    }
+
+    &__title-icon {
+      margin-right: 10px;
+      margin-left: -8px;
+      color: $neutral75;
+    }
+
+    &__title-text {
+      padding-top: 2px;
+    }
+
+    &__utility {
+      margin-top: 24px;
+    }
+
+    &__instructions {
+      @include templateCopy;
+      display: block;
+      margin-top: 8px;
+      margin-bottom: 0;
+      font-size: 17px;
+      font-style: italic;
+      color: $neutral50;
+      text-transform: none;
+    }
+
+    .subtitle {
+      @include subtitlePrimary;
+      padding: 5px 0;
+      color: $neutralWhite;
+    }
+
+    .form-input {
+      input[type='text'] {
+        height: auto;
+        padding: 0 0 0.4em;
+        font-size: 24px;
+
+        @include respond($break90) {
+          padding: 0 0 0.25em;
+          font-size: 30px;
+        }
       }
     }
   }

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import connectAndFetch from "utils/connectAndFetch";
 import ProjectCollection from "backend/components/project-collection";
 import { select, meta } from "utils/entityUtils";
@@ -12,6 +13,7 @@ import EntitiesList, {
   ProjectRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
+import IconComposer from "global/components/utility/IconComposer";
 
 const { request } = entityStoreActions;
 const perPage = 12;
@@ -46,6 +48,23 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
 
   get filters() {
     return this.props.entitiesListSearchParams.projects || {};
+  }
+
+  get buttonClasses() {
+    return classNames(
+      "button-icon-secondary",
+      "button-icon-secondary--full",
+      "button-icon-secondary--centered",
+      "button-icon-secondary--smallcaps"
+    );
+  }
+
+  get buttonIconClasses() {
+    return classNames(
+      "button-icon-secondary__icon",
+      "button-icon-secondary__icon--right",
+      "button-icon-secondary__icon--short"
+    );
   }
 
   filtersChanged(prevProps) {
@@ -162,7 +181,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
           icon="BECollectionManual64"
           title={this.props.projectCollection.attributes.title}
         >
-          <p className="instructions">
+          <p className="instructions drawer-header__instructions">
             Select which projects should be included in this collection. Click
             the plus sign to add a project to the collection. Click the
             checkmark to remove a project.
@@ -191,9 +210,13 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
         />
 
         <div className="actions">
-          <button className="button-icon-secondary" onClick={this.handleClose}>
+          <button className={this.buttonClasses} onClick={this.handleClose}>
             <span>Close</span>
-            <i className="manicon manicon-x" />
+            <IconComposer
+              icon="close16"
+              size="default"
+              iconClass={this.buttonIconClasses}
+            />
           </button>
         </div>
       </React.Fragment>

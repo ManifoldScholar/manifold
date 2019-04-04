@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class MakerAvatar extends Component {
   static displayName = "Maker.Avatar";
@@ -15,9 +16,7 @@ export default class MakerAvatar extends Component {
         {attr.avatarStyles.smallSquare ? (
           <img src={attr.avatarStyles.smallSquare} alt="User Avatar" />
         ) : (
-          <div className="no-image">
-            <i className="manicon manicon-person" aria-hidden="true" />
-          </div>
+          <IconComposer icon="avatar64" size="42" />
         )}
         <figcaption>{attr.fullName}</figcaption>
       </figure>

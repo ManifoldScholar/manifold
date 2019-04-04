@@ -6,34 +6,137 @@
     @include containerPrototype;
   }
 
-  .resource-slide-figure figure {
-    height: calc(100% - 39px); // Slide pagination footer height
+  &__figure {
+    figure {
+      height: calc(100% - 39px); // Slide pagination footer height
 
-    @include respond($break60) {
-      height: 100%;
+      @include respond($break60) {
+        height: 100%;
+      }
     }
   }
 
-  .slide-footer {
+  &__footer {
     position: relative;
     padding: 10px $containerPaddingResp;
 
     @include respond($break60) {
-      display: table;
+      display: flex;
+      justify-content: flex-end;
       width: 100%;
       padding: 17px 23px;
       background-color: $neutral90;
     }
   }
 
-  .slide-caption {
+  &__caption {
     position: relative;
-    display: table-cell;
-    width: 100%;
-    vertical-align: top;
+    flex-grow: 1;
   }
 
-  .resource-title {
+  &__pagination {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: transparentize($neutral90, 0.1);
+
+    @include respond($break60) {
+      position: static;
+      width: 160px;
+      padding-top: 2px;
+      text-align: right;
+      background: transparent;
+    }
+  }
+
+  &__ordinal {
+    @include utilityPrimary;
+    display: inline-block;
+    padding: 11px 0 13px;
+    font-size: 13px;
+    color: $neutral50;
+    letter-spacing: 0.05em;
+
+    @include respond($break60) {
+      padding: 0;
+      font-size: 16px;
+    }
+  }
+
+  &__button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    position: absolute;
+    top: 50%;
+    display: inline-flex;
+    align-items: center;
+    margin-top: -9px;
+    font-size: 13px;
+    color: $neutral40;
+    letter-spacing: 0.05em;
+
+    @include respond($break60) {
+      position: static;
+      margin-top: 13px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+    }
+
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
+      color: $accentPrimary;
+    }
+
+    &--previous {
+      left: 20px;
+    }
+
+    &--next {
+      right: 20px;
+      float: right;
+
+      @include respond($break60) {
+        margin-right: -4px;
+        margin-left: 11px;
+      }
+    }
+  }
+
+  &__pagination-text {
+    @include respond($break60) {
+      display: none;
+    }
+  }
+
+  &__pagination-icon {
+    &--large {
+      display: none;
+
+      @include respond($break60) {
+        display: inline-block;
+      }
+    }
+
+    &--small {
+      @include respond($break60) {
+        display: none;
+      }
+
+      &.resource-slideshow__pagination-icon--right {
+        margin-left: 8px;
+      }
+
+      &.resource-slideshow__pagination-icon--left {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  &__title {
     @include templateHead;
     margin-top: 0;
     margin-bottom: 0.2em;
@@ -52,17 +155,29 @@
     }
   }
 
-  .resource-description {
+  &__description {
     @include templateCopy;
     max-width: $slideCopyFocus;
     height: 48px;
     padding-bottom: 5em;
     overflow: visible;
     font-size: 15px;
-    color: $neutral40;
+    color: $neutral70;
+
+    @include respond($break60) {
+      color: $neutral40;
+    }
 
     @include respond($break40) {
       padding-bottom: 3.5em;
+    }
+
+    &--collapsed {
+      overflow: hidden;
+    }
+
+    &--expanded {
+      height: auto;
     }
 
     p + p {
@@ -76,148 +191,12 @@
         color: $neutral40;
       }
     }
-
-    &.collapsed {
-      overflow: hidden;
-    }
-
-    &.expanded {
-      height: auto;
-    }
   }
 
-  .slide-pagination {
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    background-color: transparentize($neutral90, 0.1);
-
-    @include respond($break60) {
-      position: static;
-      width: 160px;
-      padding-top: 2px;
-      text-align: right;
-      background: transparent;
-    }
-
-    .slide-ordinal {
-      @include utilityPrimary;
-      display: inline-block;
-      padding: 11px 0 13px;
-      font-size: 13px;
-      color: $neutral50;
-      letter-spacing: 0.05em;
-
-      @include respond($break60) {
-        padding: 0;
-        font-size: 16px;
-      }
-    }
-
-    .slide-previous, .slide-next {
-      @include buttonUnstyled;
-      @include utilityPrimary;
-      position: absolute;
-      top: 50%;
-      margin-top: -9px;
-      font-size: 13px;
-      color: $neutral40;
-      letter-spacing: 0.05em;
-
-      @include respond($break60) {
-        position: static;
-        margin-top: 16px;
-      }
-
-      .text {
-        @include respond($break60) {
-          display: none;
-        }
-      }
-
-      .manicon-arrow-left, .manicon-arrow-right {
-        display: inline-block;
-        margin-top: -1px;
-        font-size: 0.923em;
-        vertical-align: middle;
-
-        @include respond($break60) {
-          display: none;
-        }
-      }
-
-      .manicon-arrow-left {
-        margin-right: 9px;
-      }
-
-      .manicon-arrow-right {
-        margin-left: 9px;
-      }
-
-      .manicon-arrow-round-right, .manicon-arrow-round-left {
-        display: none;
-        font-size: 42px;
-
-        @include respond($break60) {
-          display: inline-block;
-        }
-      }
-
-      &:disabled {
-        opacity: 0.4;
-      }
-
-      &:not(:disabled):hover, &:not(:disabled):focus {
-        color: $accentPrimary;
-      }
-    }
-
-    .slide-previous {
-      left: 20px;
-    }
-
-    .slide-next {
-      right: 20px;
-
-      @include respond($break60) {
-        margin-left: 14px;
-      }
-    }
-  }
-
-  .resource-utility {
+  &__utility {
     position: relative;
 
-    .wrapper {
-      padding: 9px 0 15px;
-      background-color: $neutralWhite;
-
-      @include respond($break60) {
-        background-color: $neutral90;
-      }
-
-      .overlay-full & {
-        background-color: $neutral90;
-      }
-    }
-
-    &.expandable {
-      &.expanded {
-        .wrapper {
-          margin-top: 0;
-        }
-      }
-
-      .more-link {
-        display: block;
-
-        @include respond($break40) {
-          display: inline;
-        }
-      }
-
+    &--expandable {
       &::before {
         // Resource utility fade that hides part of the
         // above description
@@ -240,69 +219,98 @@
         }
       }
     }
+  }
 
-    .more-link, .download-link, .detail-link {
-      @include utilityPrimary;
-      @include buttonUnstyled;
-      display: block;
-      margin-top: 7px;
-      font-size: 13px;
+  &__utility-inner {
+    padding: 9px 0 13px;
+    background-color: $neutralWhite;
+
+    @include respond($break60) {
+      background-color: $neutral90;
+    }
+
+    .resource-slideshow__utility--expandable.resource-slideshow__utility--expanded & {
+      margin-top: 0;
+    }
+
+    .overlay-full & {
+      background-color: $neutral90;
+    }
+  }
+
+  &__more-link,
+  &__download-link,
+  &__detail-link {
+    @include utilityPrimary;
+    @include buttonUnstyled;
+    display: block;
+    margin-top: 7px;
+    font-size: 13px;
+    color: $neutral70;
+    text-decoration: none;
+    transition: color $duration $timing;
+
+    @include respond($break40) {
+      display: inline;
+      margin-top: 0;
+      margin-right: 22px;
+    }
+
+    @include respond($break60) {
+      color: $neutral50;
+    }
+
+    .overlay-full & {
+      color: $neutral50;
+    }
+
+    &:hover, &:focus {
+      color: $accentPrimary;
+    }
+  }
+
+  &__more-link {
+    // Only show more link when expandable (see above)
+    display: none;
+    color: $neutral50;
+
+    @include respond($break60) {
       color: $neutral40;
-      text-decoration: none;
-      transition: color $duration $timing;
+    }
+
+    .overlay-full & {
+      color: $neutral40;
+    }
+
+    .resource-slideshow__utility--expandable & {
+      display: block;
 
       @include respond($break40) {
         display: inline;
-        margin-top: 0;
-        margin-right: 22px;
-        color: $neutral50;
-      }
-
-      .overlay-full & {
-        color: $neutral50;
-      }
-
-      &:hover, &:focus {
-        color: $accentPrimary;
       }
     }
+  }
 
-    .more-link {
-      // Only show more link when expandable (see above)
+  &__close-text {
+    display: none;
+
+    .resource-slideshow__more-link--open & {
+      display: inline;
+    }
+  }
+
+  &__open-text {
+    .resource-slideshow__more-link--open & {
       display: none;
-      color: $neutral50;
-
-      @include respond($break60) {
-        color: $neutral40;
-      }
-
-      .overlay-full & {
-        color: $neutral40;
-      }
-
-      .close-text {
-        display: none;
-      }
-
-      &.open {
-        .open-text {
-          display: none;
-        }
-
-        .close-text {
-          display: inline;
-        }
-      }
     }
+  }
 
-    .download-link {
-      .manicon-arrow-down {
-        display: inline-block;
-        margin-top: -2px;
-        margin-left: 6px;
-        font-size: 11px;
-        vertical-align: middle;
-      }
-    }
+  &__download-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__download-icon {
+    margin-left: 4px;
   }
 }

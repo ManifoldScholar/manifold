@@ -1,67 +1,113 @@
 // Global backend header design
+/* stylelint-disable property-no-vendor-prefix */
 .backend-header {
+  $border-radius: 8px;
+
   @include panelRounded;
 
-  .breadcrumb-primary {
-    border-radius: 8px;
-  }
+  // layout elements
+  &__inner {
+    padding: $containerPaddingNarrow $containerPaddingNarrow + 5;
+    margin-right: auto;
+    margin-left: auto;
 
-  .wrapper {
-    @include containerPrototype;
-    padding-top: 25px;
-  }
+    &--padded {
+      @include respond($break35) {
+        padding-right: $containerPaddingResp;
+        padding-left: $containerPaddingResp;
+      }
 
-  &.section-heading-secondary {
-    padding-top: 1em;
-    padding-bottom: 1.125em;
-
-    .manicon-svg {
-      width: 34px;
-      height: 34px;
-      margin-top: -3px;
-      margin-right: 15px;
-      color: $accentPrimary;
+      @include respond($break120) {
+        padding-right: $containerPaddingFull;
+        padding-left: $containerPaddingFull;
+      }
     }
 
-    h1 {
-      // CABS abstract to all .section-heading-secondary?
-      padding-left: 25px;
-      font-size: 20px;
-      font-weight: $medium;
-      color: $neutral70;
-      text-transform: none;
-      letter-spacing: 0;
+    &--empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
 
-      em {
-        font-style: normal;
-        color: $accentPrimary;
-      }
+    &--narrow {
+      padding: $containerPaddingNarrow * 0.6 $containerPaddingNarrow * 0.75;
 
       @include respond($break60) {
-        font-size: 30px;
+        padding: $containerPaddingNarrow * 0.8 $containerPaddingNarrow * 1.2;
       }
-
-      .manicon {
-        margin-right: 18px;
-      }
-    }
-
-    .manicon {
-      margin-right: 9px;
-      margin-left: 0;
     }
   }
 
-  .section-nav {
+  &__content-wrapper {
+    display: -ms-grid;
+    display: grid;
+    grid-template:
+      'figure title' auto
+      'figure utility' auto / auto 1fr;
+    -ms-grid-rows: auto 9px auto;
+    -ms-grid-columns: auto 25px 1fr;
+    column-gap: 25px;
+    row-gap: 9px;
+  }
+
+  &__content-flex-wrapper {
+    display: flex;
+    align-items: center;
+
+    &--aib {
+      align-items: baseline;
+    }
+
+    > * + * {
+      margin-left: 8px;
+
+      @include respond($break60) {
+        margin-left: 20px;
+      }
+    }
+
+    &--tight {
+      > * + * {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  &__title-block {
+    grid-area: title;
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+  }
+
+  &__utility-block {
+    grid-area: utility;
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+  }
+
+  &__figure-block {
+    grid-area: figure;
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-row-span: 3;
+
+    &--shift-left {
+      margin-left: -14px;
+    }
+  }
+
+  &__section-nav {
     display: block;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 $border-radius $border-radius;
 
     &.open {
       border-radius: 0;
     }
 
     ul {
-      border-radius: 0 0 8px 8px;
+      border-radius: 0 0 $border-radius $border-radius;
     }
 
     @include respond($break65) {
@@ -69,32 +115,136 @@
     }
   }
 
-  &.section-heading-tertiary {
+  &__body {
+    margin-top: 20px;
+  }
+
+  // single elements
+  &__title {
+    @include templateHead;
+    margin: 0;
+    font-size: 16px;
+    font-weight: $medium;
+    color: $neutral20;
+
+    @include respond($break65) {
+      font-size: 23px;
+    }
+
+    &--large {
+      margin-top: -0.133em;
+      font-size: 20px;
+      color: $neutral70;
+
+      @include respond($break60) {
+        font-size: 30px;
+      }
+    }
+  }
+
+  &__h2-title {
     position: relative;
-
+    top: -1px;
     padding: 0.75em 1.5em 0.875em;
-    background-color: $neutral95;
-    border-radius: 8px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: $bold;
+    color: $accentPrimary;
+    letter-spacing: 0.143em;
+  }
 
-    h1, h2, h3 {
-      margin: 0;
-      font-size: 14px;
-      font-weight: $bold;
-      color: $accentPrimary;
-      letter-spacing: 2px;
+  &__subtitle {
+    @include templateCopy;
+    margin-left: 0.433em;
+    font-size: 1.071em;
+    color: $neutral50;
+  }
+
+  &__emphasis {
+    font-style: normal;
+    color: $accentPrimary;
+  }
+
+  &__empty-text {
+    @include templateHead;
+    font-weight: $semibold;
+    color: $neutral30;
+    text-align: center;
+  }
+
+  &__note {
+    @include templateCopy;
+    font-size: 14px;
+    line-height: initial;
+    color: $neutral50;
+
+    @include respond($break65) {
+      font-size: 17px;
+    }
+  }
+
+  &__figure {
+    color: $neutral50;
+
+    &--rounded {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background-color: $neutral90;
+      border-radius: $border-radius;
+
+      @include respond($break65) {
+        width: 60px;
+        height: 60px;
+      }
     }
 
-    .section-heading-tertiary__shim {
-      position: relative;
-      top: 2px;
-    }
-
-    .manicon-svg {
-      width: 24px;
-      height: 24px;
-      margin-right: 15px;
+    &--accented {
       color: $accentPrimary;
     }
   }
 
+  &__type-icon {
+    width: 59px;
+    height: 59px;
+
+    @include respond($break65) {
+      width: 64px;
+      height: 64px;
+    }
+
+    &--project {
+      margin-top: 4px;
+
+      @at-root svg#{&} { // override `svg:not(:root)` normalize selector
+        overflow: visible;
+      }
+    }
+
+    &--small {
+      width: 26px;
+      height: 26px;
+
+      @include respond($break65) {
+        width: 34px;
+        height: 34px;
+      }
+    }
+
+    .backend-header__figure--rounded & {
+      width: 40px;
+      height: 40px;
+
+      @include respond($break65) {
+        width: 44px;
+        height: 44px;
+      }
+    }
+  }
+
+  &__breadcrumbs {
+    border-radius: $border-radius $border-radius 0 0;
+  }
 }

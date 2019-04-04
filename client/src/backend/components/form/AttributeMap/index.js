@@ -91,7 +91,10 @@ class FormColumnMap extends PureComponent {
           instructions={this.props.instructions}
         />
         <div className="form-input">
-          <button onClick={this.autoMap} className="button-secondary outlined">
+          <button
+            onClick={this.autoMap}
+            className="button-secondary button-secondary--outlined"
+          >
             {"Automatically Map Attributes"}
           </button>
         </div>

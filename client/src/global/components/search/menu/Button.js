@@ -26,7 +26,7 @@ export default class SearchMenuButton extends PureComponent {
         data-id="toggle-menu"
       >
         <Utility.IconComposer
-          className="search-icon"
+          iconClass="search-icon"
           icon="search16"
           size={22}
         />

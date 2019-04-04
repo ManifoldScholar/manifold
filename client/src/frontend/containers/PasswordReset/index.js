@@ -128,7 +128,7 @@ export class PasswordResetContainer extends Component {
                 errors={errors}
               >
                 <input
-                  className="button-secondary button-with-room"
+                  className="button-secondary button-secondary--with-room"
                   type="submit"
                   value="Reset Password"
                 />

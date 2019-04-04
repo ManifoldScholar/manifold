@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { TwitterButton, FacebookButton } from "react-sociable";
+import IconComposer from "global/components/utility/IconComposer";
 
 import withSettings from "hoc/with-settings";
 
@@ -62,44 +63,36 @@ class ShareBar extends Component {
 
     return (
       <nav className="share-nav-primary">
-        {this.props.label ? <span>{this.props.label}</span> : null}
-        <ul>
-          <li>
+        {this.props.label && (
+          <span className="share-nav-primary__label">{this.props.label}</span>
+        )}
+        <ul className="share-nav-primary__list">
+          <li className="share-nav-primary__item">
             <TwitterButton
               url={this.url()}
               message={this.message()}
               windowOptions={twitterWindowOptions}
+              className="share-nav-primary__link"
             >
-              <i className="manicon manicon-twitter" aria-hidden="true" />
+              <IconComposer icon="socialTwitter32" size={20} />
               <span className="screen-reader-text">Share on Twitter</span>
             </TwitterButton>
           </li>
           {/* Facebook App Id is required for this component to load */}
           {this.facebookAppId() ? (
-            <li>
+            <li className="share-nav-primary__item">
               <FacebookButton
                 url={this.url()}
                 appId={this.facebookAppId()}
                 message={this.message()}
                 windowOptions={twitterWindowOptions}
+                className="share-nav-primary__link"
               >
-                <i className="manicon manicon-facebook" aria-hidden="true" />
+                <IconComposer icon="socialFacebook32" size={20} />
                 <span className="screen-reader-text">Share on Facebook</span>
               </FacebookButton>
             </li>
           ) : null}
-          {/*
-            Hiding email share button until we have more robust
-            functionality for custom mailing
-            NB: `EmailButton` component from react-sociable required
-            for this one in particular.
-
-            <li>
-              <EmailButton url={this.props.url}>
-                <i className="manicon manicon-envelope-simple"></i>
-              </EmailButton>
-            </li>
-          */}
         </ul>
       </nav>
     );

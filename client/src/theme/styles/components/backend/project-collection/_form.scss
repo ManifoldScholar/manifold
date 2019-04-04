@@ -9,9 +9,12 @@
       font-weight: $regular;
       text-transform: none;
       letter-spacing: 0;
+    }
 
-      .manicon {
-        margin-right: 0.58em;
+    &__label::after {
+      @include respond(500px, min) {
+        display: inline;
+        content: ' Collection';
       }
     }
   }

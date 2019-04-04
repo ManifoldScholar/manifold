@@ -50,11 +50,6 @@ export default class ResourceDetail extends Component {
             <div className="container flush-top">
               <aside>
                 <Link attributes={attr} />
-                {/*
-                <Link to="#" className="button-primary">
-                  View in Text <i className="manicon manicon-arrow-right" aria-hidden="true" ></i>
-                </Link>
-                */}
                 <Utility.ShareBar url={resourceUrl} />
                 <Meta resource={resource} layout={"secondary"} />
                 <VariantList resource={resource} />

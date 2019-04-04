@@ -5,7 +5,7 @@ import Annotation from "reader/components/annotation";
 export default class Citation extends PureComponent {
   static drawerProps = () => {
     return {
-      icon: "nodes",
+      icon: "share24",
       title: "Share"
     };
   };

@@ -5,20 +5,17 @@ exports[`Backend.Navigation.DetailHeader component renders correctly 1`] = `
   className="backend-header"
 >
   <div
-    className="wrapper"
+    className="backend-header__inner backend-header__inner--padded"
   >
     <header
-      className="entity-header-primary"
+      className="backend-header__content-wrapper"
     >
-      <figure>
-        <i
-          className="manicon manicon-project-placeholder"
-        />
-      </figure>
       <div
-        className="title"
+        className="backend-header__title-block"
       >
-        <h1>
+        <h1
+          className="backend-header__title"
+        >
           <span
             dangerouslySetInnerHTML={
               Object {
@@ -27,15 +24,95 @@ exports[`Backend.Navigation.DetailHeader component renders correctly 1`] = `
             }
           />
           <span
-            className="subtitle"
+            className="backend-header__subtitle"
           >
             World's Greatest Dog
           </span>
         </h1>
-        <div
-          className="utility"
-        />
       </div>
+      <div
+        className="backend-header__utility-block"
+      />
+      <figure
+        className="backend-header__figure-block"
+      >
+        <div
+          className="backend-header__figure"
+        >
+          <svg
+            aria-label="Default Project Thumbnail"
+            className="project-thumb-placeholder backend-header__type-icon backend-header__type-icon--project project-thumb-placeholder--all project-thumb-placeholder--outlined"
+            height="100%"
+            viewBox="0 0 48 48"
+            width="100%"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+            >
+              <polygon
+                className="project-thumb-placeholder__tile"
+                fill="#CBF7E6"
+                points="0 42 42 42 42 0 0 0"
+              />
+              <g
+                className="project-thumb-placeholder__illustration"
+                transform="translate(9 8)"
+              >
+                <g
+                  transform="translate(20.683 2.244)"
+                >
+                  <polygon
+                    points=".161 2.954 .161 21.013 1.612 23.598 3.06 21.013 3.06 2.954"
+                  />
+                  <path
+                    d="M3.06081501,21.012797 L0.161633021,21.012797"
+                  />
+                  <path
+                    d="M0.162011257,2.95560225 L3.06119325,2.95560225 L3.06119325,1.53299812 C3.06119325,0.980713374 2.613478,0.532998124 2.06119325,0.532998124 L1.16201126,0.532998124 C0.609726507,0.532998124 0.162011257,0.980713374 0.162011257,1.53299812 L0.162011257,2.95560225 Z"
+                    strokeLinejoin="round"
+                  />
+                </g>
+                <g
+                  transform="translate(.195 11.463)"
+                >
+                  <polygon
+                    points="14.898 .419 .985 .419 .985 11.282 8.141 11.282 8.141 14.378 10.844 11.282 14.898 11.282"
+                  />
+                  <path
+                    d="M12.5237854 3.46905816L3.32696735 3.46905816M12.5237854 8.00165403L3.32696735 8.00165403M12.5237854 5.73507242L3.32696735 5.73507242"
+                  />
+                </g>
+                <g
+                  transform="translate(.195 .195)"
+                >
+                  <path
+                    d="M11.8853223 5.12585966C11.8853223 6.3608015 10.8848871 7.36123677 9.64994522 7.36123677 8.41689456 7.36123677 7.41645929 6.3608015 7.41645929 5.12585966 7.41645929 3.89091782 8.41689456 2.89048255 9.64994522 2.89048255 10.8848871 2.89048255 11.8853223 3.89091782 11.8853223 5.12585966zM11.8853223 5.23573734L15.0417051 2.0793546C15.6109508 1.51010882 16.5849096 1.91293058 16.5849096 2.71857411M3.99814784 3.09718874L6.63067317.464663415C7.20181013-.106473546 8.17576886.2982394 8.17576886 1.10388293"
+                  />
+                  <path
+                    d="M5.22155347 5.12585966C5.22155347 6.3608015 4.2211182 7.36123677 2.98617636 7.36123677 1.7531257 7.36123677.752690432 6.3608015.752690432 5.12585966.752690432 3.89091782 1.7531257 2.89048255 2.98617636 2.89048255 4.2211182 2.89048255 5.22155347 3.89091782 5.22155347 5.12585966zM5.22155347 5.34334559L5.71136961 5.13720675C6.09906191 4.97267392 6.53781614 4.97267392 6.92739962 5.13720675L7.41532458 5.34334559"
+                  />
+                </g>
+              </g>
+              <g
+                className="project-thumb-placeholder__frame"
+                stroke="#828282"
+              >
+                <polyline
+                  points="48 6 48 48 6 48"
+                />
+                <polyline
+                  points="45 3 45 45 3 45"
+                />
+                <polygon
+                  points="0 42 42 42 42 0 0 0"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </figure>
     </header>
   </div>
 </section>

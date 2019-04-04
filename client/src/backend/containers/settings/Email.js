@@ -145,14 +145,14 @@ export class SettingsEmailContainer extends PureComponent {
               </Form.FieldGroup>
             ) : null}
             <Form.Save text="Save Settings" />
-            <p className="instructional-copy margin-top">
+            <div>
               <button
-                className="button-secondary-dark"
+                className="button-secondary button-secondary--dark button-secondary--with-room"
                 onClick={this.sendTestEmail}
               >
                 Send test email
               </button>
-            </p>
+            </div>
           </FormContainer.Form>
         </Layout.BackendPanel>
       </section>

@@ -61,7 +61,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
         onClick={onClick}
         kind="any"
         label="Highlight"
-        iconClass="manicon-pencil-simple"
+        icon="annotate24"
       />
     );
   }
@@ -74,7 +74,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
         onTouchStart={this.actions.openNewAnnotationDrawer}
         kind="any"
         label="Annotate"
-        iconClass="manicon-word-bubble"
+        icon="comment24"
       />
     );
   }
@@ -87,7 +87,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
         ability="notate"
         entity={this.props.text}
         label="Resource"
-        iconClass="manicon-cube-outline"
+        icon="resource24"
       />
     );
   }
@@ -99,7 +99,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
         onClick={this.props.showShare}
         kind="any"
         label="Share"
-        iconClass="manicon-nodes"
+        icon="share24"
       />
     );
   }
@@ -111,7 +111,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
         onClick={this.actions.showLogin}
         kind="unauthenticated"
         label="Login to Annotate"
-        iconClass="manicon-person-pencil"
+        icon="editProfile24"
       />
     );
   }

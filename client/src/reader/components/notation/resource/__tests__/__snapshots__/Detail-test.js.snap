@@ -170,44 +170,84 @@ exports[`Reader.Notation.Resource.Detail component renders correctly 1`] = `
       </ul>
     </section>
     <nav
-      className="button-nav"
+      className="button-nav button-nav--stack"
     >
       <a
-        className="button-secondary outlined"
+        className="button-secondary button-secondary--outlined"
         href="original-image.mock"
         rel="noopener noreferrer"
         target="_blank"
       >
-        Download
-         
-        <i
-          aria-hidden="true"
-          className="manicon manicon-arrow-down"
-        />
+        <span
+          className="button-primary__text"
+        >
+          Download
+        </span>
+        <svg
+          aria-hidden={true}
+          className="manicon-svg button-primary__icon svg-icon--arrowDown16"
+          fill="currentColor"
+          height={16}
+          viewBox="0 0 16 16"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+            transform="rotate(90 8 8)"
+          />
+        </svg>
       </a>
       <br />
       <a
-        className="button-secondary outlined"
+        className="button-secondary button-secondary--outlined"
         href="/projects/delegated-project-slug/resource/slug-1"
         onClick={[Function]}
       >
-        Visit Resource Page
-        <i
-          aria-hidden="true"
-          className="manicon manicon-arrow-right"
-        />
+        <span
+          className="button-secondary__text"
+        >
+          Visit Resource Page
+        </span>
+        <svg
+          aria-hidden={true}
+          className="manicon-svg button-secondary__icon svg-icon--arrowRight16"
+          fill="currentColor"
+          height={16}
+          viewBox="0 0 16 16"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+          />
+        </svg>
       </a>
       <br />
       <button
-        className="button-secondary outlined dull"
+        className="button-secondary button-secondary--outlined button-secondary--dull"
         data-id="close-overlay"
         onClick={[MockFunction]}
       >
-        <i
-          aria-hidden="true"
-          className="manicon manicon-arrow-left"
-        />
-        Return to Reader
+        <svg
+          aria-hidden={true}
+          className="manicon-svg button-secondary__icon svg-icon--arrowLeft16"
+          fill="currentColor"
+          height={16}
+          viewBox="0 0 16 16"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+            transform="rotate(180 8 8)"
+          />
+        </svg>
+        <span
+          className="button-secondary__text"
+        >
+          Return to Reader
+        </span>
       </button>
     </nav>
   </div>

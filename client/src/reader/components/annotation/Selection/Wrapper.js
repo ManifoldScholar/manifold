@@ -4,6 +4,7 @@ import Truncated from "./Truncated";
 import nl2br from "nl2br";
 
 import Authorize from "hoc/authorize";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class AnnotationSelectionWrapper extends PureComponent {
   static displayName = "Annotation.Selection.Wrapper";
@@ -47,7 +48,11 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     return (
       <div className="selection-text">
         <div className="container">
-          <i className="manicon manicon-quote" aria-hidden="true" />
+          <IconComposer
+            icon="socialCite32"
+            size="default"
+            iconClass="selection-text__icon"
+          />
           {this.maybeTruncateSelection()}
         </div>
         {this.viewable && (
