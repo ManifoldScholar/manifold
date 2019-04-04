@@ -1,4 +1,8 @@
 .project-collection-form {
+  @include respond($break75) {
+    max-width: 446.44px; // set explicity to prevent drawer from expanding
+  }
+
   .button-switch-primary {
     &__side {
       font-size: 17px;
@@ -8,14 +12,6 @@
 
       .manicon {
         margin-right: 0.58em;
-      }
-    }
-  }
-
-  .has-many-list {
-    > ul.bucket {
-      @include respond($break60) {
-        max-width: 446.44px; // set explicity to prevent drawer from expanding
       }
     }
   }
