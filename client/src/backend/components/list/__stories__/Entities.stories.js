@@ -320,12 +320,22 @@ storiesOf("Backend/List/Entities", module)
   })
 
   .add("Features", () => {
+    const toggle = (event, feature) => {
+      const toChange = features.find(f => f.id === feature.id);
+      if (!toChange) return null;
+
+      return (toChange.attributes.live = !toChange.attributes.live);
+    };
+
     return (
       <EntitiesList
         title={"Features"}
         titleStyle="bar"
         entities={features}
         entityComponent={FeatureRow}
+        entityComponentProps={{
+          onSwitchChange: toggle
+        }}
       />
     );
   })
