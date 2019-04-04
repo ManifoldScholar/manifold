@@ -1,6 +1,5 @@
 import BaseInput from "./BaseInput";
 import BelongsTo from "./BelongsTo";
-import Checkboxes from "./Checkboxes";
 import CodeArea from "./CodeArea";
 import AttributeMap from "./AttributeMap";
 import Date from "./Date";
@@ -29,7 +28,6 @@ import Upload from "./Upload";
 export default {
   BaseInput,
   BelongsTo,
-  Checkboxes,
   CodeArea,
   AttributeMap,
   Date,
