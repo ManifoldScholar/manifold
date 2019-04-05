@@ -99,7 +99,14 @@
 
     &--vertical {
       flex: none;
-      padding: 30px 0 0;
+      padding: 0;
+
+      .entity-list-search__options-label {
+        &--empty {
+          padding-top: 0;
+        }
+        padding-top: 30px;
+      }
     }
 
     @include respond($break60) {
