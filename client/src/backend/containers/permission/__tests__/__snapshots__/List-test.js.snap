@@ -13,7 +13,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
         <span
           className="section-heading-tertiary__shim"
         >
-          Mange Permissions
+          Manage Permissions
         </span>
       </h2>
     </header>
