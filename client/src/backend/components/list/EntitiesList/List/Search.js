@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import labelId from "helpers/labelId";
 import { Collapse } from "react-collapse";
+import classNames from "classnames";
 import has from "lodash/has";
 
 import isPlainObject from "lodash/isPlainObject";
@@ -14,12 +15,14 @@ export default class ListEntitiesListSearch extends PureComponent {
     params: PropTypes.array,
     values: PropTypes.object,
     setParam: PropTypes.func.isRequired,
-    onReset: PropTypes.func.isRequired
+    onReset: PropTypes.func.isRequired,
+    searchStyle: PropTypes.oneOf(["horizontal", "vertical"])
   };
 
   static defaultProps = {
     params: [],
-    values: {}
+    values: {},
+    searchStyle: "horizontal"
   };
 
   constructor(props) {
@@ -84,6 +87,10 @@ export default class ListEntitiesListSearch extends PureComponent {
     return this.hasParam(this.keywordParam);
   }
 
+  get searchStyle() {
+    return this.props.searchStyle;
+  }
+
   setKeywordState(event) {
     const value = event.target.value;
     this.setState({ keyword: value });
@@ -141,6 +148,14 @@ export default class ListEntitiesListSearch extends PureComponent {
     this.props.onReset();
   };
 
+  classNameWithStyle(className) {
+    return classNames({
+      [className]: true,
+      [`${className}--horizontal`]: this.searchStyle === "horizontal",
+      [`${className}--vertical`]: this.searchStyle === "vertical"
+    });
+  }
+
   /* eslint-disable react/no-array-index-key */
   /* these filters never change after render */
   render() {
@@ -192,9 +207,12 @@ export default class ListEntitiesListSearch extends PureComponent {
         {this.hasOptions && (
           <Collapse isOpened={this.state.open}>
             <div>
-              <div className={`${baseClass}__options`}>
+              <div className={this.classNameWithStyle(`${baseClass}__options`)}>
                 {this.filterParams.map((param, i) => (
-                  <div key={i} className={`${baseClass}__option`}>
+                  <div
+                    key={i}
+                    className={this.classNameWithStyle(`${baseClass}__option`)}
+                  >
                     <div className={`${baseClass}__option-inner`}>
                       <span
                         className={`${baseClass}__options-label ${
@@ -226,7 +244,9 @@ export default class ListEntitiesListSearch extends PureComponent {
                   </div>
                 ))}
                 {this.hasOrderParam && (
-                  <div className={`${baseClass}__option`}>
+                  <div
+                    className={this.classNameWithStyle(`${baseClass}__option`)}
+                  >
                     <div className={`${baseClass}__option-inner`}>
                       <span className={`${baseClass}__options-label`}>
                         Order Results:
