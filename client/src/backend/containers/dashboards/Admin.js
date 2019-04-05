@@ -155,6 +155,7 @@ class DashboardsAdminContainerImplementation extends PureComponent {
                       emptyMessage={this.noProjects()}
                       search={
                         <Search
+                          searchStyle="vertical"
                           {...this.props.entitiesListSearchProps("projects")}
                         />
                       }

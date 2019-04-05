@@ -130,10 +130,10 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                       >
                         <div>
                           <div
-                            className="entity-list-search__options"
+                            className="entity-list-search__options entity-list-search__options--vertical"
                           >
                             <div
-                              className="entity-list-search__option"
+                              className="entity-list-search__option entity-list-search__option--vertical"
                             >
                               <div
                                 className="entity-list-search__option-inner"
@@ -184,7 +184,7 @@ exports[`Backend Dashboards Admin Container renders correctly 1`] = `
                               </div>
                             </div>
                             <div
-                              className="entity-list-search__option"
+                              className="entity-list-search__option entity-list-search__option--vertical"
                             >
                               <div
                                 className="entity-list-search__option-inner"

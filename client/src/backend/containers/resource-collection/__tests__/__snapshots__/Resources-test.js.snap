@@ -118,10 +118,10 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
         >
           <div>
             <div
-              className="entity-list-search__options"
+              className="entity-list-search__options entity-list-search__options--horizontal"
             >
               <div
-                className="entity-list-search__option"
+                className="entity-list-search__option entity-list-search__option--horizontal"
               >
                 <div
                   className="entity-list-search__option-inner"
@@ -162,7 +162,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
                 </div>
               </div>
               <div
-                className="entity-list-search__option"
+                className="entity-list-search__option entity-list-search__option--horizontal"
               >
                 <div
                   className="entity-list-search__option-inner"
@@ -203,7 +203,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
                 </div>
               </div>
               <div
-                className="entity-list-search__option"
+                className="entity-list-search__option entity-list-search__option--horizontal"
               >
                 <div
                   className="entity-list-search__option-inner"
@@ -238,7 +238,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
                 </div>
               </div>
               <div
-                className="entity-list-search__option"
+                className="entity-list-search__option entity-list-search__option--horizontal"
               >
                 <div
                   className="entity-list-search__option-inner"
