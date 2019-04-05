@@ -87,28 +87,16 @@ Array [
                     <svg
                       aria-hidden={true}
                       className="manicon-svg svg-icon--arrowLongLeft16"
+                      fill="currentColor"
                       height={null}
                       viewBox="0 0 24 16"
                       width={null}
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g
-                        fill="none"
-                        fillRule="evenodd"
-                      >
-                        <path
-                          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                          fill="currentColor"
-                          fillRule="nonzero"
-                          transform="rotate(180 12 8)"
-                        />
-                        <path
-                          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                          fill="currentColor"
-                          fillRule="nonzero"
-                          transform="rotate(180 12 8)"
-                        />
-                      </g>
+                      <path
+                        d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                        transform="rotate(180 12 8)"
+                      />
                     </svg>
                     <span
                       className="list-pagination__icon-label"
@@ -186,26 +174,15 @@ Array [
                     <svg
                       aria-hidden={true}
                       className="manicon-svg svg-icon--arrowLongRight16"
+                      fill="currentColor"
                       height={null}
                       viewBox="0 0 24 16"
                       width={null}
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g
-                        fill="none"
-                        fillRule="evenodd"
-                      >
-                        <path
-                          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                          fill="currentColor"
-                          fillRule="nonzero"
-                        />
-                        <path
-                          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                          fill="currentColor"
-                          fillRule="nonzero"
-                        />
-                      </g>
+                      <path
+                        d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                      />
                     </svg>
                   </a>
                 </li>
