@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Event from "./Event";
-import classNames from "classnames";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 
@@ -11,12 +10,10 @@ export default class EventList extends Component {
   static propTypes = {
     events: PropTypes.array.isRequired,
     project: PropTypes.object.isRequired,
-    columns: PropTypes.number.isRequired,
     pagination: PropTypes.object
   };
 
   static defaultProps = {
-    columns: 2,
     limit: 10
   };
 
@@ -31,15 +28,10 @@ export default class EventList extends Component {
   render() {
     if (!this.props.events) return null;
 
-    const listClass = classNames({
-      "event-list-primary": this.props.columns === 2,
-      "event-list-secondary": this.props.columns === 3
-    });
-
     return (
-      <div>
+      <div className="entity-section-wrapper__body">
         <ul
-          className={listClass}
+          className="event-list"
           ref={eventList => {
             this.eventList = eventList;
           }}
@@ -49,16 +41,18 @@ export default class EventList extends Component {
               <Event
                 event={event}
                 key={event.id}
-                itemClass={`${listClass}__item`}
+                itemClass={"event-list__item"}
               />
             );
           })}
         </ul>
         {this.props.pagination ? (
-          <Utility.Pagination
-            paginationClickHandler={this.paginationClickHandler}
-            pagination={this.props.pagination}
-          />
+          <div className="entity-section-wrapper__pagination">
+            <Utility.Pagination
+              paginationClickHandler={this.paginationClickHandler}
+              pagination={this.props.pagination}
+            />
+          </div>
         ) : null}
       </div>
     );

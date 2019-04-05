@@ -34,8 +34,8 @@ export default class ProjectEvents extends Component {
           />
         </section>
         <section>
-          <div className="container">
-            <header className="section-heading">
+          <div className="container entity-section-wrapper">
+            <header className="section-heading entity-section-wrapper__heading">
               <div className="main">
                 <i className="manicon manicon-pulse" aria-hidden="true" />
                 <div className="body">
@@ -43,7 +43,6 @@ export default class ProjectEvents extends Component {
                 </div>
               </div>
             </header>
-
             <Event.List
               project={this.props.project}
               events={this.props.events}
