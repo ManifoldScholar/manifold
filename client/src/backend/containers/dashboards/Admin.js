@@ -143,6 +143,9 @@ class DashboardsAdminContainerImplementation extends PureComponent {
                     <EntitiesList
                       entities={this.props.projects}
                       entityComponent={ProjectRow}
+                      entityComponentProps={{
+                        placeholderMode: "small"
+                      }}
                       title="Projects"
                       titleLink={lh.link("backendProjects")}
                       titleIcon="BEProject64"
