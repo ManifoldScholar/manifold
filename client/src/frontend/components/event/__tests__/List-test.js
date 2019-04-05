@@ -17,11 +17,11 @@ describe("Frontend.Event.List Component", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("has the event-list-primary class", () => {
+  it("has the event-list class", () => {
     expect(
       shallow(<List project={project} events={[]} />)
         .find("ul")
-        .is(".event-list-primary")
+        .is(".event-list")
     ).toBe(true);
   });
 
