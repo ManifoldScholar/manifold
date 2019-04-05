@@ -66,25 +66,15 @@ export default class Close extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z"
-          />
-        </g>
+        <path d="M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z" />
       </svg>
     );
   }

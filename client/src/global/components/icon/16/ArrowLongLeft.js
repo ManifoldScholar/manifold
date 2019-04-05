@@ -66,27 +66,18 @@ export default class ArrowLongLeft extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-            transform="rotate(180 12 8)"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-            transform="rotate(180 12 8)"
-          />
-        </g>
+        <path
+          d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+          transform="rotate(180 12 8)"
+        />
       </svg>
     );
   }

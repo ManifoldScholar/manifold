@@ -66,25 +66,15 @@ export default class ArrowRight extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
-          />
-        </g>
+        <path d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z" />
       </svg>
     );
   }

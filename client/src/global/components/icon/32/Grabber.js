@@ -66,25 +66,15 @@ export default class Grabber extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z"
-          />
-        </g>
+        <path d="M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z" />
       </svg>
     );
   }

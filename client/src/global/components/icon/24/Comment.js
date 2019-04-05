@@ -66,25 +66,15 @@ export default class Comment extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M7.99999998,16 L3.99999997,16 L3.99999997,4.99999997 L20,4.99999997 L20,16 L14.1773533,16 L7.99999998,21.0495005 L7.99999998,16 Z M19,5.99999998 L4.99999997,5.99999998 L4.99999997,15 L8.99999999,15 L8.99999999,18.9404996 L13.8206467,15 L19,15 L19,5.99999998 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M7.99999998,16 L3.99999997,16 L3.99999997,4.99999997 L20,4.99999997 L20,16 L14.1773533,16 L7.99999998,21.0495005 L7.99999998,16 Z M19,5.99999998 L4.99999997,5.99999998 L4.99999997,15 L8.99999999,15 L8.99999999,18.9404996 L13.8206467,15 L19,15 L19,5.99999998 Z"
-          />
-        </g>
+        <path d="M7.99999998,16 L3.99999997,16 L3.99999997,4.99999997 L20,4.99999997 L20,16 L14.1773533,16 L7.99999998,21.0495005 L7.99999998,16 Z M19,5.99999998 L4.99999997,5.99999998 L4.99999997,15 L8.99999999,15 L8.99999999,18.9404996 L13.8206467,15 L19,15 L19,5.99999998 Z" />
       </svg>
     );
   }

@@ -6,6 +6,7 @@ import ActivityTweet64 from "./64/ActivityTweet";
 import Annotate24 from "./24/Annotate";
 import Annotate32 from "./32/Annotate";
 import Arrow24 from "./24/Arrow";
+import ArrowBack64 from "./64/ArrowBack";
 import ArrowDown16 from "./16/ArrowDown";
 import ArrowDown32 from "./32/ArrowDown";
 import ArrowLeft16 from "./16/ArrowLeft";
@@ -126,6 +127,7 @@ export default {
   Annotate24,
   Annotate32,
   Arrow24,
+  ArrowBack64,
   ArrowDown16,
   ArrowDown32,
   ArrowLeft16,

@@ -66,25 +66,15 @@ export default class Arrow extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M19.483489,12 L10.0744069,3.75198985 L10.7335931,3.00001007 L21.0005111,12 L10.7335931,20.9999899 L10.0744069,20.2480101 L19.483489,12 Z M20.2415,11.5 L20.2415,12.5 L2.99999996,12.5 L2.99999996,11.5 L20.2415,11.5 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M19.483489,12 L10.0744069,3.75198985 L10.7335931,3.00001007 L21.0005111,12 L10.7335931,20.9999899 L10.0744069,20.2480101 L19.483489,12 Z M20.2415,11.5 L20.2415,12.5 L2.99999996,12.5 L2.99999996,11.5 L20.2415,11.5 Z"
-          />
-        </g>
+        <path d="M19.483489,12 L10.0744069,3.75198985 L10.7335931,3.00001007 L21.0005111,12 L10.7335931,20.9999899 L10.0744069,20.2480101 L19.483489,12 Z M20.2415,11.5 L20.2415,12.5 L2.99999996,12.5 L2.99999996,11.5 L20.2415,11.5 Z" />
       </svg>
     );
   }

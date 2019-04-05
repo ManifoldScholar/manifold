@@ -66,23 +66,18 @@ export default class Mail extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            d="M5,23 L27,23 L27,9 L5,9 L5,23 Z M6.818,10 L25.182,10 L16,18.135 L6.818,10 Z M26,10.611 L26,22 L6,22 L6,10.611 L16,19.472 L26,10.611 Z"
-          />
-          <path
-            fill={this.fill}
-            d="M5,23 L27,23 L27,9 L5,9 L5,23 Z M6.818,10 L25.182,10 L16,18.135 L6.818,10 Z M26,10.611 L26,22 L6,22 L6,10.611 L16,19.472 L26,10.611 Z"
-          />
-        </g>
+        <path
+          fillRule="evenodd"
+          d="M5,23 L27,23 L27,9 L5,9 L5,23 Z M6.818,10 L25.182,10 L16,18.135 L6.818,10 Z M26,10.611 L26,22 L6,22 L6,10.611 L16,19.472 L26,10.611 Z"
+        />
       </svg>
     );
   }

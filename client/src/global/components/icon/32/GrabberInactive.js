@@ -66,25 +66,15 @@ export default class GrabberInactive extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z M21.3804056,5.54685843 L22.2550253,6.03166805 L10.6195944,27.022541 L9.74497468,26.5377314 L21.3804056,5.54685843 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z M21.3804056,5.54685843 L22.2550253,6.03166805 L10.6195944,27.022541 L9.74497468,26.5377314 L21.3804056,5.54685843 Z"
-          />
-        </g>
+        <path d="M25,11.5 L25,12.5 L6.99999997,12.5 L6.99999997,11.5 L25,11.5 Z M25,19.5 L25,20.5 L6.99999997,20.5 L6.99999997,19.5 L25,19.5 Z M21.3804056,5.54685843 L22.2550253,6.03166805 L10.6195944,27.022541 L9.74497468,26.5377314 L21.3804056,5.54685843 Z" />
       </svg>
     );
   }
