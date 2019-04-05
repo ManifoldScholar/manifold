@@ -49,7 +49,7 @@ export class PermissionContainer extends PureComponent {
       <section>
         {permissions && (
           <EntitiesList
-            title="Mange Permissions"
+            title="Manage Permissions"
             titleStyle="section"
             entities={permissions}
             entityComponent={PermissionRow}
