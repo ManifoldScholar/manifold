@@ -5,7 +5,7 @@ import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import FormattedDate from "global/components/FormattedDate";
 
-export default class EventRow extends PureComponent {
+export default class ProjectRow extends PureComponent {
   static displayName = "EntitiesList.Entity.ProjectRow";
 
   static propTypes = {
@@ -24,7 +24,12 @@ export default class EventRow extends PureComponent {
   get figure() {
     if (this.compact) return null;
     if (this.props.figure) return this.props.figure;
-    return <EntityThumbnail.Project mode="responsive" entity={this.project} />;
+    return (
+      <EntityThumbnail.Project
+        mode={this.props.placeholderMode}
+        entity={this.project}
+      />
+    );
   }
 
   get project() {
