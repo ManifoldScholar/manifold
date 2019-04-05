@@ -66,25 +66,15 @@ export default class DisclosureDown extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <polygon
-            fill={this.fill}
-            fillRule="nonzero"
-            points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-          />
-          <polygon
-            fill={this.fill}
-            fillRule="nonzero"
-            points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-          />
-        </g>
+        <polygon points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718" />
       </svg>
     );
   }

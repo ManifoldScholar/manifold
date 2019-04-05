@@ -66,25 +66,15 @@ export default class BEActivity extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <polygon
-            fill={this.fill}
-            fillRule="nonzero"
-            points="22.791 18.269 15.088 36.872 3.991 36.872 3.991 34.872 13.752 34.872 22.947 12.661 34.599 45.963 44.925 23.154 49.777 34.872 60.009 34.872 60.009 36.872 48.441 36.872 44.843 28.184 34.361 51.339"
-          />
-          <polygon
-            fill={this.fill}
-            fillRule="nonzero"
-            points="22.791 18.269 15.088 36.872 3.991 36.872 3.991 34.872 13.752 34.872 22.947 12.661 34.599 45.963 44.925 23.154 49.777 34.872 60.009 34.872 60.009 36.872 48.441 36.872 44.843 28.184 34.361 51.339"
-          />
-        </g>
+        <polygon points="22.791 18.269 15.088 36.872 3.991 36.872 3.991 34.872 13.752 34.872 22.947 12.661 34.599 45.963 44.925 23.154 49.777 34.872 60.009 34.872 60.009 36.872 48.441 36.872 44.843 28.184 34.361 51.339" />
       </svg>
     );
   }

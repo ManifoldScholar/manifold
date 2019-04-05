@@ -66,25 +66,15 @@ export default class Bookmark extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M23,6.49999997 L8.99999998,6.49999997 L8.99999998,24.7347124 L16,20.542179 L23,24.7347124 L23,6.49999997 Z M7.99999997,26.4992877 L7.99999997,5.49999997 L24,5.49999997 L24,26.4992877 L16,21.707821 L7.99999997,26.4992877 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M23,6.49999997 L8.99999998,6.49999997 L8.99999998,24.7347124 L16,20.542179 L23,24.7347124 L23,6.49999997 Z M7.99999997,26.4992877 L7.99999997,5.49999997 L24,5.49999997 L24,26.4992877 L16,21.707821 L7.99999997,26.4992877 Z"
-          />
-        </g>
+        <path d="M23,6.49999997 L8.99999998,6.49999997 L8.99999998,24.7347124 L16,20.542179 L23,24.7347124 L23,6.49999997 Z M7.99999997,26.4992877 L7.99999997,5.49999997 L24,5.49999997 L24,26.4992877 L16,21.707821 L7.99999997,26.4992877 Z" />
       </svg>
     );
   }

@@ -66,25 +66,15 @@ export default class Mail extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M4,8.05842693 L4,16.499 L20,16.499 L20,8.05875634 L12.0002,14.6468269 L4,8.05842693 Z M4.89374698,7.499 L12.0002,13.3513731 L19.106653,7.499 L4.89374698,7.499 Z M3,17.499 L3,6.499 L21,6.499 L21,17.499 L3,17.499 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M4,8.05842693 L4,16.499 L20,16.499 L20,8.05875634 L12.0002,14.6468269 L4,8.05842693 Z M4.89374698,7.499 L12.0002,13.3513731 L19.106653,7.499 L4.89374698,7.499 Z M3,17.499 L3,6.499 L21,6.499 L21,17.499 L3,17.499 Z"
-          />
-        </g>
+        <path d="M4,8.05842693 L4,16.499 L20,16.499 L20,8.05875634 L12.0002,14.6468269 L4,8.05842693 Z M4.89374698,7.499 L12.0002,13.3513731 L19.106653,7.499 L4.89374698,7.499 Z M3,17.499 L3,6.499 L21,6.499 L21,17.499 L3,17.499 Z" />
       </svg>
     );
   }

@@ -66,25 +66,15 @@ export default class Minus extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <polygon
-            fill={this.fill}
-            fillRule="nonzero"
-            points="4 12 4 11 20 11.002 20 12.002"
-          />
-          <polygon
-            fill={this.fill}
-            fillRule="nonzero"
-            points="4 12 4 11 20 11.002 20 12.002"
-          />
-        </g>
+        <polygon points="4 12 4 11 20 11.002 20 12.002" />
       </svg>
     );
   }

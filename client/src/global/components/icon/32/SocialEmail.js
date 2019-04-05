@@ -66,25 +66,15 @@ export default class SocialEmail extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M28.586,6.99999997 L3.41499996,6.99999997 L16,18.159 L28.586,6.99999997 L28.586,6.99999997 Z M16,20.584 L2.99999996,9.05699998 L2.99999996,25 L29,25 L29,9.05699998 L16,20.584 L16,20.584 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M28.586,6.99999997 L3.41499996,6.99999997 L16,18.159 L28.586,6.99999997 L28.586,6.99999997 Z M16,20.584 L2.99999996,9.05699998 L2.99999996,25 L29,25 L29,9.05699998 L16,20.584 L16,20.584 Z"
-          />
-        </g>
+        <path d="M28.586,6.99999997 L3.41499996,6.99999997 L16,18.159 L28.586,6.99999997 L28.586,6.99999997 Z M16,20.584 L2.99999996,9.05699998 L2.99999996,25 L29,25 L29,9.05699998 L16,20.584 L16,20.584 Z" />
       </svg>
     );
   }

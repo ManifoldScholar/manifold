@@ -66,27 +66,18 @@ export default class DisclosureUp extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <polygon
-            fill={this.fill}
-            fillRule="nonzero"
-            points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-            transform="matrix(1 0 0 -1 0 16)"
-          />
-          <polygon
-            fill={this.fill}
-            fillRule="nonzero"
-            points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-            transform="matrix(1 0 0 -1 0 16)"
-          />
-        </g>
+        <polygon
+          points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+          transform="matrix(1 0 0 -1 0 16)"
+        />
       </svg>
     );
   }

@@ -66,25 +66,15 @@ export default class ResourceSpreadsheet extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M5.99999996,12.9999 L5.99999996,52 L58,52 L58,12.9999 L5.99999996,12.9999 Z M60,10.9999 L60,54 L3.99999996,54 L3.99999996,10.9999 L60,10.9999 Z M59,22 L59,24 L4.99999996,24 L4.99999996,22 L59,22 Z M16,12 L18,12 L18,53 L16,53 L16,12 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M5.99999996,12.9999 L5.99999996,52 L58,52 L58,12.9999 L5.99999996,12.9999 Z M60,10.9999 L60,54 L3.99999996,54 L3.99999996,10.9999 L60,10.9999 Z M59,22 L59,24 L4.99999996,24 L4.99999996,22 L59,22 Z M16,12 L18,12 L18,53 L16,53 L16,12 Z"
-          />
-        </g>
+        <path d="M5.99999996,12.9999 L5.99999996,52 L58,52 L58,12.9999 L5.99999996,12.9999 Z M60,10.9999 L60,54 L3.99999996,54 L3.99999996,10.9999 L60,10.9999 Z M59,22 L59,24 L4.99999996,24 L4.99999996,22 L59,22 Z M16,12 L18,12 L18,53 L16,53 L16,12 Z" />
       </svg>
     );
   }

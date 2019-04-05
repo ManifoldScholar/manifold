@@ -66,25 +66,15 @@ export default class Plus extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
+      fill: this.fill
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
 
     return (
       <svg {...svgProps}>
-        <g fill="none" fillRule="evenodd">
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
-          />
-          <path
-            fill={this.fill}
-            fillRule="nonzero"
-            d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
-          />
-        </g>
+        <path d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z" />
       </svg>
     );
   }
