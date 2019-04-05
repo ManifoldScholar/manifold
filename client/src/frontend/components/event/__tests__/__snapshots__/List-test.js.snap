@@ -1,12 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.Event.List Component renders correctly 1`] = `
-<div>
+<div
+  className="entity-section-wrapper__body"
+>
   <ul
-    className="event-list-primary"
+    className="event-list"
   >
     <div
-      className="event-list-primary__item"
+      className="event-list__item"
     >
       <div
         className="event-tile event-tile--linked"
@@ -56,7 +58,7 @@ exports[`Frontend.Event.List Component renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="event-list-primary__item"
+      className="event-list__item"
     >
       <div
         className="event-tile event-tile--linked"
