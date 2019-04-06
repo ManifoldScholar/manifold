@@ -7,7 +7,7 @@
     position: relative;
     display: flex;
     align-items: flex-start;
-    padding: 14px 0;
+    padding: 14px 19px 14px 0;
     border-bottom: 1px solid $neutral80;
     transition: background-color $duration ease-out,
       box-shadow $duration ease-out;
@@ -150,6 +150,11 @@
 
   &__utility {
     align-self: center;
+  }
+
+  &__utility-button {
+    @include buttonUnstyled;
+    color: $neutral50;
   }
 
   &__figure {

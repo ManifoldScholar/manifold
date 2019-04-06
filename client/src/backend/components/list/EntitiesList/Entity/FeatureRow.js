@@ -5,14 +5,20 @@ import lh from "helpers/linkHandler";
 import truncate from "lodash/truncate";
 import EntityRow from "./Row";
 import EntityThumbnail from "global/components/entity-thumbnail";
-import classNames from "classnames";
+import Utility from "global/components/utility";
 
 export default class EventRow extends PureComponent {
   static displayName = "EntitiesList.Entity.FeatureRow";
 
   static propTypes = {
     entity: PropTypes.object,
-    onSwitchChange: PropTypes.func.isRequired
+    onTogglePublish: PropTypes.func.isRequired
+  };
+
+  onTogglePublish = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.props.onTogglePublish(this.feature);
   };
 
   get feature() {
@@ -54,39 +60,26 @@ export default class EventRow extends PureComponent {
     return null;
   }
 
-  get onSwitchChange() {
-    return this.props.onSwitchChange;
-  }
-
   get utility() {
-    const classes = classNames({
-      "boolean-primary": true,
-      checked: this.live
-    });
+    if (this.live)
+      return (
+        <button
+          className="entity-row__utility-button"
+          onClick={this.onTogglePublish}
+          title="Unpublish feature"
+        >
+          <Utility.IconComposer icon="eyeClosed32" size={26} />
+        </button>
+      );
 
     return (
-      <div className="form-input">
-        <label htmlFor={`${this.feature.id}-published`}>Published?</label>
-        <div className="toggle-indicator">
-          <div
-            id={`${this.feature.id}-published`}
-            onClick={event => this.onSwitchChange(event, this.feature)}
-            className={classes}
-            role="button"
-            tabIndex="0"
-          >
-            {this.live ? (
-              <span className="screen-reader-text">
-                {`Publish this feature`}
-              </span>
-            ) : (
-              <span className="screen-reader-text">
-                {`Unpublish this feature`}
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
+      <button
+        className="entity-row__utility-button"
+        onClick={this.onTogglePublish}
+        title="Publish feature"
+      >
+        <Utility.IconComposer icon="eyeOpen32" size={26} />
+      </button>
     );
   }
 
@@ -95,7 +88,7 @@ export default class EventRow extends PureComponent {
       <EntityRow
         {...this.props}
         onRowClick={this.url}
-        rowClickMode="block"
+        rowClickMode="inline"
         title={this.name}
         meta={
           <FormattedDate
