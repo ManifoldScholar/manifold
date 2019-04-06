@@ -127,6 +127,19 @@
     }
   }
 
+  &__label {
+    @include blockLabelRound;
+    position: relative;
+    display: inline-block;
+    padding: 0.333em 5px;
+    margin: -2px 0 0 14px;
+    font-size: 9px;
+    line-height: 1.2em;
+    color: $neutral85;
+    vertical-align: middle;
+    background-color: $neutral30;
+  }
+
   &__button-list {
     display: flex;
 

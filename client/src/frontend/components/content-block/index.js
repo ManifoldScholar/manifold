@@ -17,8 +17,12 @@ export default class ProjectContent extends PureComponent {
     return this.project.relationships.contentBlocks || [];
   }
 
+  get visibleContentBlocks() {
+    return this.contentBlocks.filter(block => block.attributes.visible);
+  }
+
   render() {
-    return this.contentBlocks.map(block => {
+    return this.visibleContentBlocks.map(block => {
       return <Block block={block} key={block.id} project={this.project} />;
     });
   }

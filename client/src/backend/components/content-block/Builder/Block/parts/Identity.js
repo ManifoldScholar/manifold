@@ -10,7 +10,8 @@ export default class ProjectContentBlockIdentity extends PureComponent {
     icon: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     requiresAttention: PropTypes.bool,
-    size: PropTypes.oneOf(["small", "large"])
+    size: PropTypes.oneOf(["small", "large"]),
+    entity: PropTypes.object
   };
 
   static defaultProps = {
@@ -24,6 +25,15 @@ export default class ProjectContentBlockIdentity extends PureComponent {
 
   get icon() {
     return this.requiresAttention ? "warningSign64" : this.props.icon;
+  }
+
+  get showVisibility() {
+    return !!this.props.entity;
+  }
+
+  get visible() {
+    if (!this.props.entity) return;
+    return this.props.entity.attributes.visible;
   }
 
   render() {
@@ -43,7 +53,12 @@ export default class ProjectContentBlockIdentity extends PureComponent {
           iconClass={iconClasses}
           size={iconSize}
         />
-        <span className={titleClasses}>{this.props.title}</span>
+        <span className={titleClasses}>
+          {this.props.title}
+          {this.showVisibility && !this.visible && (
+            <span className="content-block__label">Hidden</span>
+          )}
+        </span>
       </header>
     );
   }
