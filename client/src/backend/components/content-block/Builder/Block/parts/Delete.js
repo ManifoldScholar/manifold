@@ -21,6 +21,7 @@ export default class ProjectContentBlockInListPartsDelete extends PureComponent 
           this.props.baseClass
         }__button--delete`}
         onClick={this.props.clickHandler}
+        title="Delete content block"
       >
         <Utility.IconComposer icon="delete32" size={26} iconClass={iconClass} />
       </button>

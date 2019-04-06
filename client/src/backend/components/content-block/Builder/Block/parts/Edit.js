@@ -21,6 +21,7 @@ export default class ProjectContentBlockInListPartsEdit extends PureComponent {
       <button
         className={`${this.props.baseClass}__button`}
         onClick={this.props.clickHandler}
+        title="Edit content block"
       >
         <Utility.IconComposer
           icon="annotate32"

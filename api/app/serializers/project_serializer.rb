@@ -29,4 +29,13 @@ class ProjectSerializer < ApplicationSerializer
   def resource_tags
     object.resource_tags.sort
   end
+
+  def content_blocks
+    if current_user&.can_update? object
+      object.content_blocks
+    else
+      object.content_blocks.visible
+    end
+  end
+
 end

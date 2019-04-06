@@ -37,6 +37,10 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
     return this.entity.attributes.renderable || false;
   }
 
+  get visible() {
+    return this.entity.attributes.visible || true;
+  }
+
   render() {
     const TypeComponent = this.props.typeComponent;
     const baseClass = "content-block";
@@ -50,6 +54,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
               title={block.title}
               requiresAttention={!this.renderable}
               size={"large"}
+              entity={this.entity}
             />
             <div className={`${baseClass}__button-list`}>
               <Authorize entity={this.entity} ability="delete">

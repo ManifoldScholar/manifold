@@ -24,6 +24,8 @@ class ContentBlock < ApplicationRecord
   validate :references_belong_to_project!
   validate :render_attributes_present!, on: :render
 
+  scope :visible, -> { where(visible: true) }
+
   def renderable?
     valid? :render
   end

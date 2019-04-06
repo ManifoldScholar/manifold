@@ -22,6 +22,7 @@ export default class ProjectContentBlockInListAvailable extends PureComponent {
             <Identity icon={block.icon} title={block.title} />
             <button
               className="content-block__button"
+              title="Add content block"
               onClick={this.props.onClickAdd}
               disabled={this.props.disabled}
             >
