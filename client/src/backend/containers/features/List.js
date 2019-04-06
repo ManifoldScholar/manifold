@@ -37,14 +37,12 @@ class ContentFeaturesList extends PureComponent {
     this.props.dispatch(featuresRequest);
   }
 
-  togglePublished = (event, feature) => {
-    event.preventDefault();
+  togglePublished = feature => {
     if (!feature) return null;
-
-    const adjusted = Object.assign({}, feature);
-    adjusted.attributes.live = !feature.attributes.live;
-
-    const call = featuresAPI.update(feature.id, adjusted);
+    const attributes = {
+      live: !feature.attributes.live
+    };
+    const call = featuresAPI.update(feature.id, { attributes });
     const featureRequest = request(call, requests.beFeatureUpdate);
     this.props.dispatch(featureRequest);
   };
@@ -58,7 +56,7 @@ class ContentFeaturesList extends PureComponent {
         titleStyle="bar"
         entityComponent={FeatureRow}
         entityComponentProps={{
-          onSwitchChange: this.togglePublished
+          onTogglePublish: this.togglePublished
         }}
         entities={features}
         buttons={[
