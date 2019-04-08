@@ -8,7 +8,6 @@ class Seed
     _anonymous_user = make_anonymous_user(logger)
     cli_user = make_cli_user(logger)
     make_feature(logger, cli_user)
-    upgrade_system(logger)
   end
 
   def self.make_feature(logger, creator)
@@ -42,11 +41,6 @@ class Seed
 
   def self.make_cli_user(logger)
     make_system_user(logger, :command_line)
-  end
-
-  def self.upgrade_system(logger)
-    SystemUpgrades::Perform.run force: false, noop: true, stdout: true
-    logger.info("Running system upgrades".green)
   end
 
   # @api private
