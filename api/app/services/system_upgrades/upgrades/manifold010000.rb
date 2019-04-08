@@ -5,7 +5,6 @@ module SystemUpgrades
     class Manifold010000 < SystemUpgrades::AbstractVersion
 
       def perform!
-        reindex_records
         delete_creatorless_annotations
       end
 
@@ -23,25 +22,6 @@ module SystemUpgrades
           .joins("left join users on users.id = annotations.creator_id")
           .where("users.id is null")
           .destroy_all
-      end
-
-      def reindex_records
-        logger.info("===================================================================")
-        logger.info("Reindex All Records                                                ")
-        logger.info("===================================================================")
-        logger.info("Manifold 1.0.0 includes changes to what model data is indexed. To  ")
-        logger.info("accommodate those changes, all records must be reindexed. This may ")
-        logger.info("take a few minutes, so now is a good time to make that cup of tea. ")
-        logger.info("===================================================================")
-        Rails.application.eager_load!
-        begin
-          Searchkick.models.each do |model|
-            logger.info("Reindexing #{model.name}...")
-            model.reindex
-          end
-        rescue Faraday::ConnectionFailed
-          elastic_connection_error
-        end
       end
 
     end
