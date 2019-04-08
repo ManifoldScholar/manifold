@@ -45,7 +45,7 @@ class Seed
   end
 
   def self.upgrade_system(logger)
-    SystemUpgrades::Perform.run force: false, noop: false, stdout: true
+    SystemUpgrades::Perform.run force: false, noop: true, stdout: true
     logger.info("Running system upgrades".green)
   end
 
