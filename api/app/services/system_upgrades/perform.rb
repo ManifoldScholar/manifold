@@ -6,6 +6,10 @@ module SystemUpgrades
     boolean :noop, default: false
     boolean :stdout, default: false
 
+    set_callback :execute, :before, :load_upgrades!
+
+    attr_reader :upgrade_interactions
+
     # @return [String]
     def execute
       upgrade_interactions.each do |upgrade_interaction|
@@ -17,12 +21,10 @@ module SystemUpgrades
       output.string
     end
 
-    def upgrade_interactions
-      @upgrade_interactions ||=
-        begin
-          Rails.application.eager_load! unless Rails.env.test?
-          SystemUpgrades::AbstractVersion.descendants.sort_by(&:version)
-        end
+    private
+
+    def load_upgrades!
+      @upgrade_interactions = SystemUpgrades.eager_load_upgrades!
     end
   end
 end

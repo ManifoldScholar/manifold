@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SystemUpgrades::Perform do
+RSpec.describe SystemUpgrades do
   class Test000100 < SystemUpgrades::AbstractVersion
     def perform!
       logger.debug "Test"
@@ -13,7 +13,7 @@ RSpec.describe SystemUpgrades::Perform do
   end
 
   it "retrieves and orders upgrade version files" do
-    expect(SystemUpgrades::Perform.new.upgrade_interactions).to match_array([Test000100, Test000200])
+    expect(SystemUpgrades.eager_load_upgrades!).to match_array([Test000100, Test000200])
   end
 
 end
