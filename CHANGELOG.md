@@ -1,62 +1,105 @@
 # Changelog
 
-## Unreleased - TBD
+## [v3.0.0](https://github.com/ManifoldScholar/manifold/tree/v3.0.0) - 04/09/19
 
 ### Features
 
--  Refactor and redesign backend lists [#2075](https://github.com/ManifoldScholar/manifold/pull/2075) ([zdavis](https://api.github.com/users/zdavis))
 -  Generate thumbnail images for PDF resources [#2073](https://github.com/ManifoldScholar/manifold/pull/2073) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Remove IP addresses and reduce API log verbosity [#2071](https://github.com/ManifoldScholar/manifold/pull/2071) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Add Storybook to Manifold [#2069](https://github.com/ManifoldScholar/manifold/pull/2069) ([zdavis](https://api.github.com/users/zdavis))
--  Improve reader dark mode styles [#2051](https://github.com/ManifoldScholar/manifold/pull/2051) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Add keyboard accessibility to PC icon picker [#2050](https://github.com/ManifoldScholar/manifold/pull/2050) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Improve manifest start section identification [#2032](https://github.com/ManifoldScholar/manifold/pull/2032) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Bump rails to 5.1.6.2 [#2019](https://github.com/ManifoldScholar/manifold/pull/2019) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Refactor and improve full text search [#1999](https://github.com/ManifoldScholar/manifold/pull/1999) ([zdavis](https://api.github.com/users/zdavis))
--  Restrict first and last names to 50 characters [#1989](https://github.com/ManifoldScholar/manifold/pull/1989) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Add logging to ScaffoldProjectContent [#1987](https://github.com/ManifoldScholar/manifold/pull/1987) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Automatically parse video URLs for video resources [#1983](https://github.com/ManifoldScholar/manifold/pull/1983) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Improve &#39;restart ingestion&#39; icon [#1966](https://github.com/ManifoldScholar/manifold/pull/1966) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Add new project setup questions [#1963](https://github.com/ManifoldScholar/manifold/pull/1963) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Improve radio button UX design [#1962](https://github.com/ManifoldScholar/manifold/pull/1962) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Improve performance for ingestions with many sources [#1955](https://github.com/ManifoldScholar/manifold/pull/1955) ([zdavis](https://api.github.com/users/zdavis))
--  Admins can unsubscribe a user from notifications [#1945](https://github.com/ManifoldScholar/manifold/pull/1945) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+
+## [v3.0.0-rc.3](https://github.com/ManifoldScholar/manifold/tree/v3.0.0-rc.3) - 04/08/19
 
 ### Bugs
 
+-  Reindex only one time during upgrade [#2133](https://github.com/ManifoldScholar/manifold/pull/2133) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve eager loading upgrade files [#2132](https://github.com/ManifoldScholar/manifold/pull/2132) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Set fixed columns on grid entity lists [#2131](https://github.com/ManifoldScholar/manifold/pull/2131) ([zdavis](https://api.github.com/users/zdavis))
+
+## [v3.0.0-rc.2](https://github.com/ManifoldScholar/manifold/tree/v3.0.0-rc.2) - 04/08/19
+
+### Features
+
+-  Add publish toggle to feature list [#2115](https://github.com/ManifoldScholar/manifold/pull/2115) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Add created by me filter to projects lists [#2121](https://github.com/ManifoldScholar/manifold/pull/2121) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+
+### Bugs
+
+-  Fix typo in BE header [#2129](https://github.com/ManifoldScholar/manifold/pull/2129) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Use small project placeholder on dashboard [#2128](https://github.com/ManifoldScholar/manifold/pull/2128) ([zdavis](https://api.github.com/users/zdavis))
+-  Remove noop from seed upgrade call [#2126](https://github.com/ManifoldScholar/manifold/pull/2126) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Stack filters vertically on narrow project list [#2125](https://github.com/ManifoldScholar/manifold/pull/2125) ([zdavis](https://api.github.com/users/zdavis))
+-  Remove duplicate paths from icon svgs [#2124](https://github.com/ManifoldScholar/manifold/pull/2124) ([zdavis](https://api.github.com/users/zdavis))
+-  Set max-width on PC drawer form [#2122](https://github.com/ManifoldScholar/manifold/pull/2122) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Use correct font in DatePicker [#2123](https://github.com/ManifoldScholar/manifold/pull/2123) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
+### Refactored
+
+-  Standardize frontend event lists with single class &quot;event-list&quot; [#2127](https://github.com/ManifoldScholar/manifold/pull/2127) ([dananjohnson](https://api.github.com/users/dananjohnson))
+
+## [v3.0.0-rc.1](https://github.com/ManifoldScholar/manifold/tree/v3.0.0-rc.1) - 04/04/19
+
+### Features
+
+-  Add empty message to entities list [#2096](https://github.com/ManifoldScholar/manifold/pull/2096) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Remove IP addresses and reduce API log verbosity [#2071](https://github.com/ManifoldScholar/manifold/pull/2071) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Refactor and redesign backend lists [#2075](https://github.com/ManifoldScholar/manifold/pull/2075) ([zdavis](https://api.github.com/users/zdavis))
+-  Add Storybook to Manifold [#2069](https://github.com/ManifoldScholar/manifold/pull/2069) ([zdavis](https://api.github.com/users/zdavis))
+-  Refactor and improve full text search [#1999](https://github.com/ManifoldScholar/manifold/pull/1999) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve reader dark mode styles [#2051](https://github.com/ManifoldScholar/manifold/pull/2051) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Add keyboard accessibility to PC icon picker [#2050](https://github.com/ManifoldScholar/manifold/pull/2050) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Improve manifest start section identification [#2032](https://github.com/ManifoldScholar/manifold/pull/2032) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Add logging to ScaffoldProjectContent [#1987](https://github.com/ManifoldScholar/manifold/pull/1987) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Automatically parse video URLs for video resources [#1983](https://github.com/ManifoldScholar/manifold/pull/1983) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Bump rails to 5.1.6.2 [#2019](https://github.com/ManifoldScholar/manifold/pull/2019) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Restrict first and last names to 50 characters [#1989](https://github.com/ManifoldScholar/manifold/pull/1989) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Add new project setup questions [#1963](https://github.com/ManifoldScholar/manifold/pull/1963) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Admins can unsubscribe a user from notifications [#1945](https://github.com/ManifoldScholar/manifold/pull/1945) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Improve &#39;restart ingestion&#39; icon [#1966](https://github.com/ManifoldScholar/manifold/pull/1966) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Improve radio button UX design [#1962](https://github.com/ManifoldScholar/manifold/pull/1962) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+
+### Bugs
+
+-  Restore email search to users [#2112](https://github.com/ManifoldScholar/manifold/pull/2112) ([zdavis](https://api.github.com/users/zdavis))
+-  Improve list filter state management [#2086](https://github.com/ManifoldScholar/manifold/pull/2086) ([zdavis](https://api.github.com/users/zdavis))
+-  Fix layout of FE &amp; BE event tiles [#2100](https://github.com/ManifoldScholar/manifold/pull/2100) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix size of project block header icon [#2102](https://github.com/ManifoldScholar/manifold/pull/2102) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Fix font-family in BE dashboard stats [#2098](https://github.com/ManifoldScholar/manifold/pull/2098) ([dananjohnson](https://api.github.com/users/dananjohnson))
+-  Add search back to reader notations drawer [#2092](https://github.com/ManifoldScholar/manifold/pull/2092) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Fix incorrect feedback on invalid login [#2089](https://github.com/ManifoldScholar/manifold/pull/2089) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Add new project button back to dashboard [#2088](https://github.com/ManifoldScholar/manifold/pull/2088) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Include open_in_new_tab in pages serializer [#2072](https://github.com/ManifoldScholar/manifold/pull/2072) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix form radio label text colors [#2065](https://github.com/ManifoldScholar/manifold/pull/2065) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix Utility.Toggle test prop type error [#2061](https://github.com/ManifoldScholar/manifold/pull/2061) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix TextsBlock texts scoping [#2060](https://github.com/ManifoldScholar/manifold/pull/2060) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Remove italic styling from hero image credits [#2039](https://github.com/ManifoldScholar/manifold/pull/2039) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix backend drawer button widths [#2047](https://github.com/ManifoldScholar/manifold/pull/2047) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Add margin to text subtitle in list item [#2045](https://github.com/ManifoldScholar/manifold/pull/2045) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Fix incomplete content block icon [#2042](https://github.com/ManifoldScholar/manifold/pull/2042) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Ignore attachment changes in resource versions [#2040](https://github.com/ManifoldScholar/manifold/pull/2040) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Remove italic styling from hero image credits [#2039](https://github.com/ManifoldScholar/manifold/pull/2039) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Fix incomplete content block icon [#2042](https://github.com/ManifoldScholar/manifold/pull/2042) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Show close text in backend drawers [#2011](https://github.com/ManifoldScholar/manifold/pull/2011) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Add describedby text to user menu buttons [#2027](https://github.com/ManifoldScholar/manifold/pull/2027) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Add aria-describedby to Utility.Toggle [#2023](https://github.com/ManifoldScholar/manifold/pull/2023) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix PC visibility toggle accessibility [#2018](https://github.com/ManifoldScholar/manifold/pull/2018) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Use label tags for form switch labels [#2015](https://github.com/ManifoldScholar/manifold/pull/2015) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Fix backend project list item accessibility [#2013](https://github.com/ManifoldScholar/manifold/pull/2013) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Show close text in backend drawers [#2011](https://github.com/ManifoldScholar/manifold/pull/2011) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Remove secondary skip-to links [#2005](https://github.com/ManifoldScholar/manifold/pull/2005) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Use label tags for form switch labels [#2015](https://github.com/ManifoldScholar/manifold/pull/2015) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix content block scaffold in dev data [#1998](https://github.com/ManifoldScholar/manifold/pull/1998) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Adjust list margins between button/content [#1993](https://github.com/ManifoldScholar/manifold/pull/1993) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Fix backend project list item accessibility [#2013](https://github.com/ManifoldScholar/manifold/pull/2013) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Overwrite invalid or expired cookies [#1991](https://github.com/ManifoldScholar/manifold/pull/1991) ([zdavis](https://api.github.com/users/zdavis))
 -  Adjust project draft switch label text [#1990](https://github.com/ManifoldScholar/manifold/pull/1990) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Ensure upgrades run in prod env [#1985](https://github.com/ManifoldScholar/manifold/pull/1985) ([zdavis](https://api.github.com/users/zdavis))
 -  Adjust permissions authorization [#1982](https://github.com/ManifoldScholar/manifold/pull/1982) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Don&#39;t show warnings on pending blocks [#1978](https://github.com/ManifoldScholar/manifold/pull/1978) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Fix content block HasMany form fields [#1977](https://github.com/ManifoldScholar/manifold/pull/1977) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Adjust spacing between content blocks [#1849](https://github.com/ManifoldScholar/manifold/pull/1849) ([dananjohnson](https://api.github.com/users/dananjohnson))
--  Fix DrawerHeader prop type requirements [#1839](https://github.com/ManifoldScholar/manifold/pull/1839) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
--  Simplify event tiles and fix unlinked tiles [#1816](https://github.com/ManifoldScholar/manifold/pull/1816) ([zdavis](https://api.github.com/users/zdavis))
+-  Don&#39;t show warnings on pending blocks [#1978](https://github.com/ManifoldScholar/manifold/pull/1978) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 
 ### Refactored
 
+-  Restore persistent project list states [#2111](https://github.com/ManifoldScholar/manifold/pull/2111) ([zdavis](https://api.github.com/users/zdavis))
+-  Refactor DrawerHeader buttons [#2090](https://github.com/ManifoldScholar/manifold/pull/2090) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Improve ingestion UI [#2103](https://github.com/ManifoldScholar/manifold/pull/2103) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
 -  Dump STACSS and reorganize sass partials [#2070](https://github.com/ManifoldScholar/manifold/pull/2070) ([zdavis](https://api.github.com/users/zdavis))
--  Refactor icons and IconComposer [#2030](https://github.com/ManifoldScholar/manifold/pull/2030) ([zdavis](https://api.github.com/users/zdavis))
 -  Refactor activity stats to not use table [#2007](https://github.com/ManifoldScholar/manifold/pull/2007) ([SMaxOwok](https://api.github.com/users/SMaxOwok))
+-  Refactor icons and IconComposer [#2030](https://github.com/ManifoldScholar/manifold/pull/2030) ([zdavis](https://api.github.com/users/zdavis))
 
 ## [v3.0.0-beta.1](https://github.com/ManifoldScholar/manifold/tree/v3.0.0-beta.1) - 02/24/19
 
