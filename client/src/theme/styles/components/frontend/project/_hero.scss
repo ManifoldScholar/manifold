@@ -428,6 +428,14 @@
       font-style: normal;
     }
 
+    a {
+      color: inherit;
+
+      &:visited {
+        color: inherit;
+      }
+    }
+
     .project-hero--dark & {
       color: $neutral40;
     }
