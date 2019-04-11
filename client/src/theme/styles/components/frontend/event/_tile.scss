@@ -104,6 +104,7 @@
     margin-bottom: 0;
     font-size: 16px;
     font-weight: $regular;
+    hyphens: none;
 
     @include respond($break40) {
       font-size: 17px;
