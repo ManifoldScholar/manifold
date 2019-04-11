@@ -19,9 +19,7 @@ export default class ProjectContentBlockHeading extends PureComponent {
       <React.Fragment>
         <header className="entity-section-wrapper__heading section-heading">
           <div className="main">
-            <i className="manicon" aria-hidden="true">
-              <Utility.IconComposer icon={icon} />
-            </i>
+            <Utility.IconComposer icon={icon} />
             <div className="body">
               <h4 className="title">{title}</h4>
             </div>
