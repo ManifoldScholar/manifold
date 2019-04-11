@@ -19,8 +19,7 @@ export default class ProjectListGrid extends Component {
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func,
     viewAllUrl: PropTypes.string,
-    viewAllLabel: PropTypes.string,
-    additionalClass: PropTypes.string
+    viewAllLabel: PropTypes.string
   };
 
   static defaultProps = {
@@ -66,14 +65,8 @@ export default class ProjectListGrid extends Component {
   }
 
   renderPagination(props) {
-    const additionalClass = this.props.additionalClass;
-
     return (
-      <div
-        className={classNames({
-          [`${additionalClass}__pagination`]: additionalClass
-        })}
-      >
+      <div className="entity-section-wrapper__pagination">
         <Utility.Pagination
           paginationClickHandler={props.paginationClickHandler}
           pagination={props.pagination}
@@ -88,18 +81,16 @@ export default class ProjectListGrid extends Component {
     if (props.projects.length <= props.limit) return null;
     if (!props.viewAllUrl) return null;
 
-    const additionalClass = this.props.additionalClass;
-
     return (
       <div
-        className={classNames({
-          [`${additionalClass}__utility`]: additionalClass,
-          [`${additionalClass}__utility--footer`]: additionalClass
-        })}
+        className={classNames(
+          "entity-section-wrapper__utility",
+          "entity-section-wrapper__utility--footer"
+        )}
       >
         <Link to={this.props.viewAllUrl}>
           {this.props.viewAllLabel}
-          <i className="manicon manicon-arrow-long-right" />
+          <Utility.IconComposer icon="arrowLongRight16" size="default" />
         </Link>
       </div>
     );
@@ -109,15 +100,10 @@ export default class ProjectListGrid extends Component {
     const projects = this.projectsList();
     if (!projects) return null;
     const hideDesc = true;
-    const additionalClass = this.props.additionalClass;
 
     return (
       <React.Fragment>
-        <nav
-          className={classNames("project-list grid", {
-            [`${additionalClass}__body`]: additionalClass
-          })}
-        >
+        <nav className="project-list grid entity-section-wrapper__body">
           <ReactCSSTransitionGroup
             transitionName="project-list grid"
             transitionEnter={this.enableAnimation}

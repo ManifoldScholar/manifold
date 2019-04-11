@@ -162,6 +162,20 @@
           color: $neutralBlack;
         }
       }
+
+      &__icon {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        color: $accentPrimary;
+        pointer-events: none;
+        transform: translateY(-50%);
+
+        // Use native dropdown arrow in IE9
+        .ie9 & {
+          display: none;
+        }
+      }
     }
 
     // Dropdown icon included in markup
