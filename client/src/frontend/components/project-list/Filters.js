@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import omitBy from "lodash/omitBy";
 import uniqueId from "lodash/uniqueId";
-import classNames from "classnames";
 import Utility from "global/components/utility";
 
 export default class ProjectListFilters extends Component {
@@ -13,8 +12,7 @@ export default class ProjectListFilters extends Component {
     initialFilterState: PropTypes.object,
     subjects: PropTypes.array,
     hideFeatured: PropTypes.bool,
-    searchId: PropTypes.string,
-    additionalClasses: PropTypes.string
+    searchId: PropTypes.string
   };
 
   static defaultProps = {
@@ -129,7 +127,11 @@ export default class ProjectListFilters extends Component {
           <option value="sort_title ASC">A-Z</option>
           <option value="sort_title DESC">Z-A</option>
         </select>
-        <i className="manicon manicon-caret-down" aria-hidden="true" />
+        <Utility.IconComposer
+          icon="disclosureDown16"
+          size={20}
+          iconClass="select__icon"
+        />
       </div>
     );
   }
@@ -144,7 +146,11 @@ export default class ProjectListFilters extends Component {
           {this.featuredOptions()}
           {this.subjectOptions()}
         </select>
-        <i className="manicon manicon-caret-down" aria-hidden="true" />
+        <Utility.IconComposer
+          icon="disclosureDown16"
+          size={20}
+          iconClass="select__icon"
+        />
       </div>
     );
   }
@@ -152,7 +158,7 @@ export default class ProjectListFilters extends Component {
   render() {
     return (
       <form
-        className={classNames("form-list-filter", this.props.additionalClasses)}
+        className="form-list-filter entity-section-wrapper__tools"
         onSubmit={this.updateResults}
       >
         {this.renderSearch()}

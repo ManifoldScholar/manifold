@@ -7,6 +7,7 @@ import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
+import Utility from "global/components/utility";
 
 const { request } = entityStoreActions;
 const perPage = 20;
@@ -56,13 +57,10 @@ export class HomeProjectsContainer extends Component {
 
     return (
       <section className="bg-neutral05">
-        <div className="container project-list-container extra-top">
-          <header className="section-heading">
+        <div className="entity-section-wrapper container">
+          <header className="entity-section-wrapper__heading section-heading">
             <div className="main">
-              <i
-                className="manicon manicon-books-on-shelf"
-                aria-hidden="true"
-              />
+              <Utility.IconComposer size={56} icon="projects64" />
               <div className="body">
                 <h4 className="title">{"Our Projects"}</h4>
               </div>

@@ -2,7 +2,7 @@
 
 exports[`Frontend.ProjectCollection.Filters component renders correctly 1`] = `
 <form
-  className="form-list-filter"
+  className="entity-section-wrapper__tools form-list-filter"
   onSubmit={[Function]}
 >
   <div
@@ -19,7 +19,7 @@ exports[`Frontend.ProjectCollection.Filters component renders correctly 1`] = `
       </span>
       <svg
         aria-hidden={true}
-        className="manicon-svg svg-icon--search16"
+        className="manicon-svg search-icon svg-icon--search16"
         fill="currentColor"
         height={20}
         viewBox="0 0 16 16"
@@ -71,10 +71,19 @@ exports[`Frontend.ProjectCollection.Filters component renders correctly 1`] = `
           Z-A
         </option>
       </select>
-      <i
-        aria-hidden="true"
-        className="manicon manicon-caret-down"
-      />
+      <svg
+        aria-hidden={true}
+        className="manicon-svg select__icon svg-icon--disclosureDown16"
+        fill="currentColor"
+        height={20}
+        viewBox="0 0 16 16"
+        width={20}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon
+          points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+        />
+      </svg>
     </div>
   </div>
   <button

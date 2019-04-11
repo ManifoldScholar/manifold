@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import omitBy from "lodash/omitBy";
 import uniqueId from "lodash/uniqueId";
-import classNames from "classnames";
 import Utility from "global/components/utility";
 
 export default class ProjectCollectionFilters extends Component {
@@ -11,8 +10,7 @@ export default class ProjectCollectionFilters extends Component {
   static propTypes = {
     filterChangeHandler: PropTypes.func.isRequired,
     initialFilterState: PropTypes.object,
-    searchId: PropTypes.string,
-    additionalClasses: PropTypes.string
+    searchId: PropTypes.string
   };
 
   static defaultProps = {
@@ -60,14 +58,14 @@ export default class ProjectCollectionFilters extends Component {
   render() {
     return (
       <form
-        className={classNames("form-list-filter", this.props.additionalClasses)}
+        className="entity-section-wrapper__tools form-list-filter"
         onSubmit={this.updateResults}
       >
         <div className="search-input">
           <button className="search-button" type="submit">
             <span className="screen-reader-text">Search…</span>
             <Utility.IconComposer
-              className="search-icon"
+              iconClass="search-icon"
               icon="search16"
               size={20}
             />
@@ -93,7 +91,11 @@ export default class ProjectCollectionFilters extends Component {
               <option value="sort_title ASC">A-Z</option>
               <option value="sort_title DESC">Z-A</option>
             </select>
-            <i className="manicon manicon-caret-down" aria-hidden="true" />
+            <Utility.IconComposer
+              icon="disclosureDown16"
+              size={20}
+              iconClass="select__icon"
+            />
           </div>
         </div>
         <button className="reset-button" onClick={this.resetFilters}>

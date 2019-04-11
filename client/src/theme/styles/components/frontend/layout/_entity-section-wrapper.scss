@@ -33,22 +33,29 @@
     }
 
     .main {
-      align-items: baseline;
+      align-items: center;
 
       .title {
         @include respond($break75, max) {
           font-size: 18px;
         }
       }
-    }
 
-    .manicon-svg {
-      width: 56px;
-      height: 56px;
+      .manicon-svg {
+        position: relative;
+        top: 2px;
+        flex-shrink: 0;
+        width: 56px;
+        height: 56px;
+        margin-right: 6px;
+        margin-left: -4px;
+        color: $neutral40;
 
-      @include respond($break60) {
-        width: 60px;
-        height: 60px;
+        @include respond($break60) {
+          width: 60px;
+          height: 60px;
+          margin-right: 14px;
+        }
       }
     }
   }
@@ -83,7 +90,7 @@
       align-self: flex-start;
       justify-content: flex-end;
       width: auto;
-      margin-top: 9px;
+      margin-top: 11px;
       margin-bottom: 0;
     }
 
@@ -273,8 +280,18 @@
         color: $accentPrimary;
       }
 
-      i {
-        margin-left: 15px;
+      .manicon-svg {
+        position: relative;
+        top: -1px;
+        width: 24px;
+        height: 16px;
+        margin-left: 12px;
+
+        @include respond($break75) {
+          width: 30px;
+          height: 20px;
+          margin-left: 15px;
+        }
       }
     }
   }
