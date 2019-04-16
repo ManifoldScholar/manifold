@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import withPluginReplacement from "hoc/with-plugin-replacement";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
 import Utility from "global/components/utility";
+import FooterSearch from "../utility/FooterSearch";
 import classNames from "classnames";
 
 class LayoutFooter extends Component {
@@ -36,13 +37,6 @@ class LayoutFooter extends Component {
       push: () => {}
     }
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      keyword: ""
-    };
-  }
 
   handleLogoutClick = event => {
     event.preventDefault();
@@ -219,19 +213,6 @@ class LayoutFooter extends Component {
     return socials;
   }
 
-  updateSearchWord = event => {
-    this.setState({ keyword: event.target.value });
-  };
-
-  doSearch = event => {
-    event.preventDefault();
-    const path = lh.link("frontendSearch");
-    this.props.history.push(path, {
-      searchQueryState: { keyword: this.state.keyword }
-    });
-    this.setState({ keyword: "" });
-  };
-
   checkPressLogo(pressLogo) {
     return pressLogo && pressLogo.original !== null;
   }
@@ -265,28 +246,7 @@ class LayoutFooter extends Component {
 
   renderSearchForm() {
     return (
-      <form className="search-form" onSubmit={this.doSearch}>
-        <div className="search-button-inline">
-          <label htmlFor="footer-search" className="screen-reader-text">
-            Site Search
-          </label>
-          <input
-            type="text"
-            id="footer-search"
-            placeholder="Search"
-            value={this.state.keyword}
-            onChange={this.updateSearchWord}
-          />
-          <button className="icon">
-            <Utility.IconComposer
-              className="search-icon"
-              icon="search16"
-              size={20}
-            />
-            <span className="screen-reader-text">Search</span>
-          </button>
-        </div>
-      </form>
+      <FooterSearch push={this.props.history.push}></FooterSearch>
     );
   }
 
