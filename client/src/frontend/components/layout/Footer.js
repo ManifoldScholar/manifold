@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import withPluginReplacement from "hoc/with-plugin-replacement";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
 import Utility from "global/components/utility";
+import FooterLogo from "./FooterLogo";
 import FooterSearch from "../utility/FooterSearch";
 import classNames from "classnames";
 
@@ -250,18 +251,6 @@ class LayoutFooter extends Component {
     );
   }
 
-  renderPressLogo(pressLogo, pressSite) {
-    return (
-      <a
-        href={pressSite}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="press-logo"
-      >
-        <img className="logo-image" alt="Press Site" src={pressLogo.original} />
-      </a>
-    );
-  }
 
   render() {
     const chunkedPages = chunk(this.buildPagesArray(), 3);
@@ -284,9 +273,13 @@ class LayoutFooter extends Component {
             <div className="container flush">
               <div className="flex-row">
                 <div className="right">
-                  {isPressLogo
-                    ? this.renderPressLogo(pressLogo, pressSite)
-                    : this.renderSearchForm()}
+                    <FooterLogo
+                      pressLogo={pressLogo}
+                      isPressLogo={isPressLogo}
+                      pressSite={pressSite}
+                      push={this.props.history.push}
+                    >
+                    </FooterLogo>
                 </div>
                 <div className="rel left">
                   <nav className="text-nav">
