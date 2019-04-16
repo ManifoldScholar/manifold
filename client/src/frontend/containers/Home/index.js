@@ -10,6 +10,7 @@ import { requests } from "api";
 import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
+import PreFooter from "./PreFooter";
 
 import withSettings from "hoc/with-settings";
 
@@ -97,6 +98,8 @@ export class HomeContainer extends Component {
           grayBg={false}
           showFollowing={this.showFollowing()}
         />
+
+        <PreFooter />
       </div>
     );
   }
