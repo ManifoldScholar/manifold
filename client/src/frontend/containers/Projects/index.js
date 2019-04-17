@@ -134,16 +134,12 @@ export class ProjectsContainer extends Component {
   renderProjectLibrary() {
     if (this.showPlaceholder()) return <ProjectList.Placeholder />;
 
-    const baseClass = "entity-section-wrapper";
-
     return (
       <section className="bg-neutral05">
-        <div className={`${baseClass} container`}>
-          <header className={`${baseClass}__heading section-heading`}>
+        <div className="entity-section-wrapper container">
+          <header className="entity-section-wrapper__heading section-heading">
             <div className="main">
-              <i className="manicon" aria-hidden="true">
-                <Utility.IconComposer size={54} icon="projects64" />
-              </i>
+              <Utility.IconComposer size={56} icon="projects64" />
               <div className="body">
                 <h4 className="title">{"All Projects"}</h4>
               </div>
@@ -153,9 +149,8 @@ export class ProjectsContainer extends Component {
             filterChangeHandler={this.filterChangeHandler}
             initialFilterState={this.state.filter}
             subjects={this.props.subjects}
-            additionalClasses={`${baseClass}__tools`}
           />
-          <div className={`${baseClass}__details`}>
+          <div className="entity-section-wrapper__details">
             <Utility.EntityCount
               pagination={get(this.props.projectsMeta, "pagination")}
               singularUnit="project"
@@ -171,7 +166,6 @@ export class ProjectsContainer extends Component {
             pagination={get(this.props.projectsMeta, "pagination")}
             paginationClickHandler={this.pageChangeHandlerCreator}
             limit={perPage}
-            additionalClass={baseClass}
           />
         </div>
       </section>

@@ -122,16 +122,12 @@ export class FollowingContainer extends Component {
     if (!this.props.featuredProjects || !this.props.featuredProjects.length > 0)
       return null;
 
-    const baseClass = "entity-section-wrapper";
-
     return (
       <section>
-        <div className={`${baseClass} container`}>
-          <header className={`${baseClass}__heading section-heading`}>
+        <div className="entity-section-wrapper container">
+          <header className="entity-section-wrapper__heading section-heading">
             <div className="main">
-              <i className="manicon" aria-hidden="true">
-                <Utility.IconComposer size={54} icon="lamp64" />
-              </i>
+              <Utility.IconComposer size={56} icon="lamp64" />
               <div className="body">
                 <h4 className="title">{"Featured Projects"}</h4>
               </div>
@@ -148,7 +144,6 @@ export class FollowingContainer extends Component {
               dispatch={this.props.dispatch}
               projects={this.props.featuredProjects}
               limit={featuredLimit}
-              additionalClass={baseClass}
             />
           ) : null}
         </div>

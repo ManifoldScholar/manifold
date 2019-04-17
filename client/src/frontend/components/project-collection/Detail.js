@@ -28,8 +28,6 @@ export default class ProjectCollectionDetail extends Component {
     const projectCollection = this.props.projectCollection;
     if (!projectCollection) return null;
 
-    const baseClass = "entity-section-wrapper";
-
     const iconFill =
       projectCollection.attributes.icon === "new-round"
         ? "#52e3ac"
@@ -37,16 +35,14 @@ export default class ProjectCollectionDetail extends Component {
 
     return (
       <section key={projectCollection.id} className="bg-neutral05">
-        <div className={`${baseClass} container`}>
-          <div className={`${baseClass}__heading section-heading`}>
+        <div className="container entity-section-wrapper">
+          <div className="section-heading entity-section-wrapper__heading">
             <div className="main">
-              <i className={"manicon"} aria-hidden="true">
-                <IconComputed.ProjectCollection
-                  icon={projectCollection.attributes.icon}
-                  size={56}
-                  fill={iconFill}
-                />
-              </i>
+              <IconComputed.ProjectCollection
+                icon={projectCollection.attributes.icon}
+                size={56}
+                fill={iconFill}
+              />
               <div className="body">
                 <h4 className="title">{projectCollection.attributes.title}</h4>
               </div>
@@ -55,9 +51,8 @@ export default class ProjectCollectionDetail extends Component {
           <Filters
             filterChangeHandler={this.props.filterChangeHandler}
             initialState={this.props.initialState}
-            additionalClasses={`${baseClass}__tools`}
           />
-          <div className={`${baseClass}__details`}>
+          <div className="entity-section-wrapper__details">
             {this.description && (
               <p
                 className="description"
@@ -80,7 +75,6 @@ export default class ProjectCollectionDetail extends Component {
             dispatch={this.props.dispatch}
             paginationClickHandler={this.props.paginationClickHandler}
             pagination={this.props.pagination}
-            additionalClass={baseClass}
           />
         </div>
       </section>

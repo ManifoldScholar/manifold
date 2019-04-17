@@ -9,6 +9,7 @@ import { select } from "utils/entityUtils";
 import { projectsAPI, subjectsAPI, requests } from "api";
 import get from "lodash/get";
 import HeadContent from "global/components/HeadContent";
+import Utility from "global/components/utility";
 
 const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;
@@ -81,22 +82,20 @@ export class FeaturedContainer extends Component {
       >
         <HeadContent title="Featured" appendTitle />
         <section className="bg-neutral05">
-          <div className="container">
-            <header className="section-heading">
+          <div className="entity-section-wrapper container">
+            <header className="entity-section-wrapper__heading section-heading">
               <div className="main">
-                <i className="manicon manicon-lamp" aria-hidden="true" />
+                <Utility.IconComposer size={56} icon="lamp64" />
                 <div className="body">
                   <h4 className="title">{"Featured Projects"}</h4>
                 </div>
               </div>
-              <div className="utility right">
-                <ProjectList.Filters
-                  updateAction={boundSetFilters}
-                  subjects={subjects}
-                  hideFeatured
-                />
-              </div>
             </header>
+            <ProjectList.Filters
+              updateAction={boundSetFilters}
+              subjects={subjects}
+              hideFeatured
+            />
             {this.props.featuredProjects ? (
               <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}

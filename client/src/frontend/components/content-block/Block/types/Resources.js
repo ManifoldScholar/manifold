@@ -93,14 +93,6 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
           project={this.project}
           resources={this.visibleResources}
         />
-        {!this.hasVisibleCollections && (
-          <ResourceCollectionList.Totals
-            alignLeft={this.isSparse}
-            tight
-            project={this.project}
-            count={this.countProjectCollections}
-          />
-        )}
         <ResourceList.Totals
           alignLeft={this.isSparse}
           project={this.project}

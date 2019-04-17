@@ -2,7 +2,7 @@
 
 exports[`Frontend.ProjectList.Filters component renders correctly 1`] = `
 <form
-  className="form-list-filter"
+  className="form-list-filter entity-section-wrapper__tools"
   onSubmit={[Function]}
 >
   <div
@@ -71,10 +71,19 @@ exports[`Frontend.ProjectList.Filters component renders correctly 1`] = `
           Z-A
         </option>
       </select>
-      <i
-        aria-hidden="true"
-        className="manicon manicon-caret-down"
-      />
+      <svg
+        aria-hidden={true}
+        className="manicon-svg select__icon svg-icon--disclosureDown16"
+        fill="currentColor"
+        height={20}
+        viewBox="0 0 16 16"
+        width={20}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon
+          points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+        />
+      </svg>
     </div>
     <div
       className="select"
@@ -104,10 +113,19 @@ exports[`Frontend.ProjectList.Filters component renders correctly 1`] = `
           Subject 2
         </option>
       </select>
-      <i
-        aria-hidden="true"
-        className="manicon manicon-caret-down"
-      />
+      <svg
+        aria-hidden={true}
+        className="manicon-svg select__icon svg-icon--disclosureDown16"
+        fill="currentColor"
+        height={20}
+        viewBox="0 0 16 16"
+        width={20}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon
+          points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+        />
+      </svg>
     </div>
   </div>
   <button
