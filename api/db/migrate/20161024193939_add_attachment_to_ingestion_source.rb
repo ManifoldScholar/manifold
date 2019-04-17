@@ -1,3 +1,5 @@
+require Rails.root.join "lib", "paperclip_migrator"
+
 class AddAttachmentToIngestionSource < ActiveRecord::Migration[5.0]
   include PaperclipMigrator
 

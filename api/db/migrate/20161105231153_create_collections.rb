@@ -1,3 +1,5 @@
+require Rails.root.join "lib", "paperclip_migrator"
+
 class CreateCollections < ActiveRecord::Migration[5.0]
   include PaperclipMigrator
 
