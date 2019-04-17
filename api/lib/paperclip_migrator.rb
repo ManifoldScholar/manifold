@@ -1,3 +1,4 @@
+using Refinements::HandleRenamedCollections
 # The primary entry point for this subsystem is {PaperclipMigrator.migrate_all!}.
 #
 # Its intention is to divorce all dependencies on Paperclip itself so that migrations
