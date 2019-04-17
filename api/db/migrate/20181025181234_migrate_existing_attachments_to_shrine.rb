@@ -1,3 +1,5 @@
+require Rails.root.join "lib", "paperclip_migrator"
+
 using Refinements::HandleRenamedCollections
 
 class MigrateExistingAttachmentsToShrine < ActiveRecord::Migration[5.0]
@@ -43,7 +45,7 @@ class MigrateExistingAttachmentsToShrine < ActiveRecord::Migration[5.0]
             say_with_time "Restoring #{klass}##{attachment.to_s} paperclip columns" do
               %w(file_name content_type file_size updated_at).each do |suffix|
                 column_name = "#{attachment}_#{suffix}"
-                rename_column klass.underscore.pluralize.to_sym, "#{column_name}_deprecated".to_sym, column_name.to_sym
+                rename_column klass.constantize.table_name, "#{column_name}_deprecated".to_sym, column_name.to_sym
               end
             end
           end

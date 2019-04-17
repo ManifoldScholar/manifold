@@ -1,7 +1,6 @@
 require "shrine/storage/file_system"
 require "shrine/storage/memory"
 require "shrine/storage/tus"
-require Rails.root.join "lib", "paperclip_migrator"
 
 Shrine.storages = {
   cache: Shrine::Storage::FileSystem.new("public", prefix: "system/cache"),
