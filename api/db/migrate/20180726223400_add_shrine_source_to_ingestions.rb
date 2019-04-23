@@ -1,3 +1,5 @@
+require Rails.root.join "lib", "paperclip_migrator"
+
 class AddShrineSourceToIngestions < ActiveRecord::Migration[5.0]
   def change
     add_column :ingestions, :source_data, :jsonb, null: false, default: {}
