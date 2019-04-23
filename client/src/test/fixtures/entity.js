@@ -523,6 +523,7 @@ const defaults = {
       location: "left",
       position: 1,
       url: "https://github.com/ManifoldScholar/manifold",
+      externalLink: true,
       button: true
     },
     relationships: {

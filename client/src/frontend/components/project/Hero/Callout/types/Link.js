@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
+import { Link } from "react-router-dom";
 
 export default class ProjectHeroCalloutLink extends PureComponent {
   static displayName = "ProjectHero.Callout.Link";
@@ -35,38 +36,68 @@ export default class ProjectHeroCalloutLink extends PureComponent {
     return this.isButton ? 46 : 17.333;
   }
 
-  renderIcon() {
+  get blockClass() {
+    return this.props.blockClass;
+  }
+
+  get calloutClass() {
+    return classNames({
+      [`${this.blockClass}__button ${this.blockClass}__button--secondary ${
+        this.blockClass
+      }__button--centered`]: this.isButton,
+      [`${this.blockClass}__link`]: !this.isButton
+    });
+  }
+
+  get iconComponent() {
     return (
       <Utility.IconComposer
         icon={this.icon}
         size={this.iconSize}
-        iconClass={`${this.props.blockClass}__${this.typeClass}-icon`}
+        iconClass={`${this.blockClass}__${this.typeClass}-icon`}
       />
+    );
+  }
+
+  get isExternal() {
+    return this.props.callout.attributes.externalLink;
+  }
+
+  get contents() {
+    return (
+      <>
+        {this.icon && this.iconComponent}
+        <span className={`${this.blockClass}__${this.typeClass}-text`}>
+          {this.title}
+        </span>
+      </>
+    );
+  }
+
+  renderExternalLink() {
+    return (
+      <a
+        href={this.url}
+        className={this.calloutClass}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {this.contents}
+      </a>
+    );
+  }
+
+  renderLink() {
+    return (
+      <Link to={this.url} className={this.calloutClass}>
+        {this.contents}
+      </Link>
     );
   }
 
   render() {
     if (!this.url) return null;
 
-    const blockClass = this.props.blockClass;
-    const calloutClass = classNames({
-      [`${blockClass}__button ${blockClass}__button--secondary ${blockClass}__button--centered`]: this
-        .isButton,
-      [`${blockClass}__link`]: !this.isButton
-    });
-
-    return (
-      <a
-        href={this.url}
-        className={calloutClass}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {this.icon && this.renderIcon()}
-        <span className={`${blockClass}__${this.typeClass}-text`}>
-          {this.title}
-        </span>
-      </a>
-    );
+    return this.isExternal ? this.renderExternalLink() : this.renderLink();
   }
 }

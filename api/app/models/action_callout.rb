@@ -34,7 +34,18 @@ class ActionCallout < ApplicationRecord
                              no_styles: true,
                              validate_content_type: false
 
+  def external_link?
+    return false unless requires_url?
+    return false unless parsed_url.scheme.present? && parsed_url.host.present?
+
+    parsed_url.host.sub(/^www\./, "") != ENV["DOMAIN"]
+  end
+
   private
+
+  def parsed_url
+    URI.parse(url)
+  end
 
   def requires_url?
     link?
