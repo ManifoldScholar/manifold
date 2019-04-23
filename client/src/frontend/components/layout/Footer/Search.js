@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 
-export default class FooterSearch extends PureComponent {
-  static displayName = "Utility.FooterSearch";
+export default class Search extends PureComponent {
+  static displayName = "Layout.Footer.Search";
 
   constructor(props) {
     super(props);
