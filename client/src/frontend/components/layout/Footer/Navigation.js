@@ -186,7 +186,7 @@ export default class Navigation extends PureComponent {
     return (
       <ul className="footer-nav-list">
         {links.map((link, index) => (
-          <li key={index}>{link}</li>
+          <li key={index} className="footer-nav-list__item">{link}</li>
         ))}
       </ul>
     );

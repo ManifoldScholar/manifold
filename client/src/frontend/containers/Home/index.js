@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Layout from "frontend/components/layout";
 import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
 import get from "lodash/get";
@@ -11,6 +10,7 @@ import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
 import PreFooter from "./PreFooter";
+import ButtonNavigation from "./ButtonNavigation";
 
 import withSettings from "hoc/with-settings";
 
@@ -70,10 +70,6 @@ export class HomeContainer extends Component {
     );
   }
 
-  showFollowing() {
-    return true;
-  }
-
   render() {
     return (
       <div
@@ -93,12 +89,7 @@ export class HomeContainer extends Component {
         ) : (
           <Collections authentication={this.props.authentication} />
         )}
-
-        <Layout.ButtonNavigation
-          grayBg={false}
-          showFollowing={this.showFollowing()}
-        />
-
+        <ButtonNavigation />
         <PreFooter />
       </div>
     );
