@@ -69,6 +69,77 @@ RSpec.describe Citable do
     it_behaves_like "a citable class"
   end
 
+
+  with_model :CitableClass do
+    table do |t|
+      t.string :title
+      t.string :subtitle
+      t.jsonb :citations, default: {}
+    end
+
+    model do
+      include Citable
+
+      has_many :children, class_name: 'CitableChild'
+
+      with_citation do |citable_class|
+        {
+          title: citable_class.title,
+          author: "Rowan Ono",
+          issued: "10/03/2013"
+        }
+      end
+
+      with_citable_children :children
+    end
+  end
+
+  with_model :CitableChild do
+    table do |t|
+      t.jsonb :citations, default: {}
+      t.belongs_to :citable_class, index: { name: "index_name" }
+    end
+
+    model do
+      include Citable
+
+      belongs_to :citable_class
+
+      with_citation do |child|
+        child.citable_class.citation_parts
+      end
+    end
+  end
+
+  describe "with_citable_children" do
+    let!(:parent) { CitableClass.create(title: "Initial") }
+    let!(:child) { CitableChild.create(citable_class_id: parent.id) }
+
+    context "when citations change" do
+      it "updates the child citations" do
+        expect do
+          perform_enqueued_jobs do
+            parent.title = "Updated"
+            parent.save
+          end
+
+          child.reload
+        end.to change(child, :citations)
+      end
+    end
+
+    context "when citations do not change" do
+      it "does not update the child citations" do
+        expect do
+          perform_enqueued_jobs do
+            parent.subtitle = "Updated"
+            parent.save
+          end
+        end.to_not change(child, :citations)
+      end
+    end
+  end
+
 end
 
 
