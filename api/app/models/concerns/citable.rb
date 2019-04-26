@@ -40,7 +40,7 @@ module Citable
   end
 
   def update_citable_children
-    return unless citations != citations_was
+    return unless previous_changes.key?(:citations)
 
     UpdateCitatableChildren.perform_later(self)
   end
