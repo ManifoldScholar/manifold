@@ -6,9 +6,8 @@ class ProjectSerializer < ApplicationSerializer
   attributes :title, :subtitle, :publication_date,
              :created_at, :updated_at, :download_url, :download_call_to_action,
              :avatar_styles, :hero_styles, :recently_updated, :updated, :slug,
-             :avatar_color, :avatar_meta, :draft,
-             :abilities,
-             :subtitle_formatted, :title_formatted, :title_plaintext
+             :avatar_color, :avatar_meta, :draft, :abilities,
+             :subtitle_formatted, :title_formatted, :title_plaintext, :standalone
 
   has_many :creators, serializer: MakerSerializer
 
@@ -18,6 +17,10 @@ class ProjectSerializer < ApplicationSerializer
 
   def updated
     object.updated?
+  end
+
+  def standalone
+    object.standalone?
   end
 
 end

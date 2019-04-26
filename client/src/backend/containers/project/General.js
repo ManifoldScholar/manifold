@@ -68,6 +68,15 @@ export default class ProjectGeneralContainer extends PureComponent {
                 name="attributes[featured]"
                 instructions="Featured projects are highlighted on the home page."
               />
+              <Form.Select
+                label="Standalone Mode"
+                name="attributes[standaloneMode]"
+                options={[
+                  { value: "disabled", label: "Disabled" },
+                  { value: "enabled", label: "Enabled" },
+                  { value: "enforced", label: "Enforced" }
+                ]}
+              />
             </Form.FieldGroup>
             <Form.FieldGroup label="Other">
               <Form.Date

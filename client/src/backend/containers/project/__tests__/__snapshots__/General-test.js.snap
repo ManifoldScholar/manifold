@@ -163,6 +163,47 @@ exports[`Backend Project General Container renders correctly 1`] = `
               Featured projects are highlighted on the home page.
             </span>
           </div>
+          <div
+            className="form-input"
+          >
+            <div
+              className="form-input"
+              style={Object {}}
+            >
+              <label>
+                Standalone Mode
+              </label>
+              <div
+                className="form-select"
+              >
+                <i
+                  aria-hidden="true"
+                  className="manicon manicon-caret-down"
+                />
+                <select
+                  aria-describedby="select-error-1"
+                  onChange={[Function]}
+                  value=""
+                >
+                  <option
+                    value="disabled"
+                  >
+                    Disabled
+                  </option>
+                  <option
+                    value="enabled"
+                  >
+                    Enabled
+                  </option>
+                  <option
+                    value="enforced"
+                  >
+                    Enforced
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div

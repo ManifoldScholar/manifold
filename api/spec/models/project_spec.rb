@@ -296,4 +296,24 @@ RSpec.describe Project, type: :model do
       expect(project.metadata["publisher_place"]).to eq "Portland, OR"
     end
   end
+
+  describe "#standalone?" do
+    context "when :disabled" do
+      it "returns false" do
+        expect(FactoryBot.create(:project, standalone_mode: "disabled").standalone?).to eq false
+      end
+    end
+
+    context "when :enabled" do
+      it "returns true" do
+        expect(FactoryBot.create(:project, standalone_mode: "disabled").standalone?).to eq false
+      end
+    end
+
+    context "when :enforced" do
+      it "returns true" do
+        expect(FactoryBot.create(:project, standalone_mode: "disabled").standalone?).to eq false
+      end
+    end
+  end
 end

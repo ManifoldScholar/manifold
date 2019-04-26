@@ -142,6 +142,12 @@ class Project < ApplicationRecord
             unless: :avatar?
   validates :draft, inclusion: { in: [true, false] }
 
+  enum standalone_mode: {
+    disabled: 0,
+    enabled: 1,
+    enforced: 2
+  }, _prefix: true
+
   # Attachments
   manifold_has_attached_file :cover, :image
   manifold_has_attached_file :hero, :image
@@ -287,6 +293,10 @@ class Project < ApplicationRecord
     resources.reindex(:search_hidden, mode: :async)
     texts.reindex(:search_hidden, mode: :async)
     TextSection.in_texts(texts).reindex(:search_hidden, mode: :async)
+  end
+
+  def standalone?
+    !standalone_mode_disabled?
   end
 
   private
