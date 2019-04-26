@@ -60,7 +60,7 @@ export default class ProjectGeneralContainer extends PureComponent {
                 className="form-toggle-secondary"
                 label="Draft Mode"
                 name="attributes[draft]"
-                instructions="A draft project is only visible to users who are able to modify it.."
+                instructions="A draft project is only visible to users who are able to modify it."
               />
               <Form.Switch
                 className="form-toggle-secondary"
