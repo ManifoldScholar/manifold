@@ -46,7 +46,9 @@ class SearchResultsTypeAnnotation extends PureComponent {
     const name = this.creatorAttributes.fullName;
     return (
       <React.Fragment>
-        {name} <span className="search-result__subtitle">annotated</span>{" "}
+        {name}
+        <span className="search-result__subtitle">annotated</span>
+        {" "}
         {this.parent}
       </React.Fragment>
     );

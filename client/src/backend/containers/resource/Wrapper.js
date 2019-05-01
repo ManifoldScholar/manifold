@@ -21,6 +21,7 @@ export class ResourceWrapperContainer extends PureComponent {
       resource: select(requests.beResource, state.entityStore)
     };
   };
+
   static displayName = "Resource.Wrapper";
 
   static propTypes = {

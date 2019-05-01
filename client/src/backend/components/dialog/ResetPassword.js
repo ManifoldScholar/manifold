@@ -16,6 +16,7 @@ class ResetPasswordWrapper extends PureComponent {
       response: get(state.entityStore.responses, requests.beUserUpdate)
     };
   };
+
   static displayName = "ResetPassword.Confirm";
 
   static propTypes = {

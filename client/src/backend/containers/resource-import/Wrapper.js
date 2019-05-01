@@ -35,7 +35,9 @@ export class ResourceImportWrapper extends PureComponent {
       project: select(requests.feProject, state.entityStore)
     };
   };
+
   static displayName = "ResourceImport.Wrapper";
+
   static propTypes = {
     history: PropTypes.object,
     match: PropTypes.object,

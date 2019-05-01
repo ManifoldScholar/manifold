@@ -17,6 +17,7 @@ export default function withDispatch(WrappedComponent) {
     };
 
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     render() {

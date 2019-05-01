@@ -20,6 +20,7 @@ function withSearch(WrappedComponent) {
 
   class WithSearch extends PureComponent {
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     static mapStateToProps = state => {

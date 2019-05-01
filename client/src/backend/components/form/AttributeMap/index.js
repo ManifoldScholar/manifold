@@ -24,6 +24,7 @@ const sortHeaders = props => {
 
 class FormColumnMap extends PureComponent {
   static displayName = "Form.ColumnMap";
+
   static propTypes = {
     set: PropTypes.func.isRequired,
     instructions: PropTypes.string.isRequired,

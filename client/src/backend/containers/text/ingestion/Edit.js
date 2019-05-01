@@ -22,6 +22,7 @@ export class IngestionEditContainer extends PureComponent {
       ingestion: select(requests.beIngestionShow, state.entityStore)
     };
   };
+
   static displayName = "Text.Ingestion.Edit";
 
   static propTypes = {

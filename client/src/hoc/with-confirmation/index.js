@@ -13,6 +13,7 @@ function withConfirmation(WrappedComponent) {
 
   class WithConfirmation extends Component {
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     constructor(props) {
