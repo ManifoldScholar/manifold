@@ -83,7 +83,7 @@ export default class Overlay extends Component {
   renderHeader(props) {
     if (!props.title) return null;
     return (
-      <header className="overlay-full-header" key={"globalOverlayHeader"}>
+      <header className="overlay-full-header" key="globalOverlayHeader">
         {this.renderTitle(this.props.icon, this.props.title)}
         <button
           onClick={this.handleCloseEvent}
@@ -99,10 +99,10 @@ export default class Overlay extends Component {
 
   render() {
     return (
-      <BodyClass className={"no-scroll overlay"}>
+      <BodyClass className="no-scroll overlay">
         <div
           className={this.overlayClass()}
-          key={"globalOverlay"}
+          key="globalOverlay"
           ref={el => {
             this.scrollableEl = el;
           }}

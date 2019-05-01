@@ -246,7 +246,7 @@ export default class SearchQueryForm extends PureComponent {
             autoFocus
             onChange={this.setKeyword}
             value={this.state.keyword}
-            placeholder={"Search…"}
+            placeholder="Search…"
           />
           <button type="submit" className="search-submit">
             <Utility.IconComposer
@@ -260,11 +260,11 @@ export default class SearchQueryForm extends PureComponent {
         {this.availableScopes.length > 0 ? (
           <div className="filters">
             {this.props.searchType !== "reader" ? (
-              <h4 className="group-label">{"Search within:"}</h4>
+              <h4 className="group-label">Search within:</h4>
             ) : null}
             <div className="checkbox-group">
               {this.props.searchType === "reader" ? (
-                <h4 className="group-label">{"Search within:"}</h4>
+                <h4 className="group-label">Search within:</h4>
               ) : null}
               {this.availableScopes.map((scope, index) => {
                 const filterCheckboxId = scope.value + "-" + index;
@@ -294,9 +294,9 @@ export default class SearchQueryForm extends PureComponent {
 
         {this.props.facets.length > 0 ? (
           <div className="filters">
-            <h4 className="group-label">{"Show Results For:"}</h4>
+            <h4 className="group-label">Show Results For:</h4>
             <div className="checkbox-group">
-              <label htmlFor="all-filters" key={"all"} className="checkbox">
+              <label htmlFor="all-filters" key="all" className="checkbox">
                 <input
                   type="checkbox"
                   id="all-filters"

@@ -65,7 +65,7 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
             placeholder="Add a Category"
             name="relationships[includedCategories]"
             options={this.categories}
-            entityLabelAttribute={"title"}
+            entityLabelAttribute="title"
             wide
           />
         )}

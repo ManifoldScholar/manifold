@@ -86,7 +86,7 @@ export default class ResourcePreview extends Component {
     return (
       <div className={linkWrapperClass}>
         <ReactCSSTransitionGroup
-          transitionName={"overlay-full"}
+          transitionName="overlay-full"
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}
         >

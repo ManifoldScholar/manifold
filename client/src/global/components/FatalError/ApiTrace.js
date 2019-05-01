@@ -13,15 +13,15 @@ export default class FatalErrorApiTrace extends PureComponent {
   render() {
     const trace = this.trace;
     return (
-      <div className={"stacks"}>
+      <div className="stacks">
         {Object.keys(trace).map(stackName => {
           return (
-            <div className={"stack"} key={stackName}>
+            <div className="stack" key={stackName}>
               <h3>API {stackName}</h3>
               <ol>
                 {Object.values(trace[stackName]).map(line => {
                   return (
-                    <li className={"line"} key={line.id}>
+                    <li className="line" key={line.id}>
                       {line.trace}
                     </li>
                   );

@@ -132,7 +132,7 @@ class ManifoldContainer extends PureComponent {
         <HeadContent />
         <LoadingBar loading={this.props.loading} />
         <ReactCSSTransitionGroup
-          transitionName={"overlay-login"}
+          transitionName="overlay-login"
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}
         >

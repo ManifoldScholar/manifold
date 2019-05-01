@@ -172,8 +172,8 @@ export default class ResourceListSlideCaption extends Component {
         >
           <div className="wrapper">
             <button className={moreLinkClass} onClick={this.handleReadMore}>
-              <span className="open-text">{"Read More"}</span>
-              <span className="close-text">{"Hide Description"}</span>
+              <span className="open-text">Read More</span>
+              <span className="close-text">Hide Description</span>
             </button>
             {this.canDownload(resource) ? (
               <a

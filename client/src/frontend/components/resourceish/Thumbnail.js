@@ -92,7 +92,7 @@ export default class ResourceishThumbnail extends Component {
         break;
       case "resourceCollections":
         out = (
-          <i className={`icon-thumbnail-icon resource-collection`}>
+          <i className="icon-thumbnail-icon resource-collection">
             <Utility.IconComposer icon="resourceCollection64" size={56} />
           </i>
         );

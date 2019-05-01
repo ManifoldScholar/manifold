@@ -80,7 +80,7 @@ export class BackendContainer extends PureComponent {
 
   render() {
     return (
-      <BodyClass className={"backend bg-neutral90"}>
+      <BodyClass className="backend bg-neutral90">
         <div>
           <RedirectToFirstMatch
             from={lh.link("backend")}

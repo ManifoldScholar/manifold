@@ -53,7 +53,7 @@ export class StylesheetTextSections extends PureComponent {
         name="relationships[textSections]"
         fetch={this.fetchTextSections}
         entities={stylesheet.relationships.textSections}
-        entityLabelAttribute={"name"}
+        entityLabelAttribute="name"
         errors={get(this.props, "updateTextSections.errors")}
         searchable={false}
         wide

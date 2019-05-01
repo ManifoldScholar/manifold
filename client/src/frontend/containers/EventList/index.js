@@ -41,7 +41,7 @@ export class ProjectEventsContainer extends Component {
   };
 
   renderRedirect() {
-    return <Redirect to={"/"} />;
+    return <Redirect to="/" />;
   }
 
   render() {

@@ -102,7 +102,7 @@ class UsersListContainerImplementation extends PureComponent {
         <EntitiesList
           entityComponent={UserRow}
           entityComponentProps={{ active }}
-          title={"Manage Users"}
+          title="Manage Users"
           titleStyle="bar"
           entities={users}
           unit="user"

@@ -71,8 +71,8 @@ export default class EventRow extends PureComponent {
         title={this.title}
         label={this.roles()}
         figure={<EntityThumbnail.User entity={this.user} />}
-        figureSize={"small"}
-        figureShape={"circle"}
+        figureSize="small"
+        figureShape="circle"
       />
     );
   }

@@ -71,7 +71,7 @@ export default class ResourceDetail extends PureComponent {
         <div className="container">
           <Resource.Meta
             resource={resource}
-            layout={"secondary columnar"}
+            layout="secondary columnar"
             showIcon={false}
             showTags={false}
           />

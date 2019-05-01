@@ -123,7 +123,7 @@ export default class CommentDetail extends PureComponent {
         <section className="body">
           <Helper.SimpleFormat text={comment.attributes.body} />
         </section>
-        <Authorize kind={"any"}>
+        <Authorize kind="any">
           <nav className="utility">
             <ul>
               <li>
@@ -131,26 +131,26 @@ export default class CommentDetail extends PureComponent {
                   {"Reply"}
                 </button>
               </li>
-              <Authorize entity={comment} ability={"update"}>
+              <Authorize entity={comment} ability="update">
                 <li>
-                  <button onClick={this.startEdit}>{"Edit"}</button>
+                  <button onClick={this.startEdit}>Edit</button>
                 </li>
               </Authorize>
-              <Authorize entity={comment} ability={"delete"}>
+              <Authorize entity={comment} ability="delete">
                 {!comment.attributes.deleted ? (
                   <li>
-                    <button onClick={this.handleDelete}>{"Delete"}</button>
+                    <button onClick={this.handleDelete}>Delete</button>
                   </li>
                 ) : null}
               </Authorize>
               {comment.attributes.deleted ? (
                 <li>
-                  <button onClick={this.handleRestore}>{"Restore"}</button>
+                  <button onClick={this.handleRestore}>Restore</button>
                 </li>
               ) : null}
               {comment.attributes.deleted ? (
                 <li>
-                  <button onClick={this.handleDestroy}>{"Destroy"}</button>
+                  <button onClick={this.handleDestroy}>Destroy</button>
                 </li>
               ) : null}
               {comment.attributes.flagged ? (
@@ -161,7 +161,7 @@ export default class CommentDetail extends PureComponent {
                 </li>
               ) : (
                 <li>
-                  <button onClick={this.handleFlag}>{"Flag"}</button>
+                  <button onClick={this.handleFlag}>Flag</button>
                 </li>
               )}
             </ul>

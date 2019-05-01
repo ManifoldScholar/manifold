@@ -29,8 +29,8 @@ export default class ResourceListSlideFigureLoading extends Component {
             <i className="manicon" aria-hidden="true">
               <Utility.IconComposer size={120} icon="resourceFile64" />
             </i>
-            <span className="resource-type">{"loading"}</span>
-            <span className="resource-date">{"loading"}</span>
+            <span className="resource-type">loading</span>
+            <span className="resource-date">loading</span>
           </div>
         </div>
       </figure>

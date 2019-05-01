@@ -139,7 +139,7 @@ export class ProjectCollectionDetail extends PureComponent {
       <Utility.Pagination
         paginationClickHandler={this.pageChangeHandlerCreator}
         pagination={collectionProjectsPagination}
-        level={"secondary"}
+        level="secondary"
       />
     );
   }

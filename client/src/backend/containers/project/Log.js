@@ -81,7 +81,7 @@ export class LogContainer extends PureComponent {
             entityComponent={LogRow}
             pagination={this.props.versionsMeta.pagination}
             showCount
-            unit={"change"}
+            unit="change"
             callbacks={{
               onPageClick: this.pageChangeHandlerCreator
             }}

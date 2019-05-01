@@ -56,7 +56,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
       : this.actions.createHighlight;
     return (
       <Button
-        key={"highlight"}
+        key="highlight"
         className={className}
         onClick={onClick}
         kind="any"
@@ -69,7 +69,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   rowAnnotate() {
     return (
       <Button
-        key={"annotate"}
+        key="annotate"
         onClick={this.actions.openNewAnnotationDrawer}
         onTouchStart={this.actions.openNewAnnotationDrawer}
         kind="any"
@@ -82,7 +82,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   rowNotate() {
     return (
       <Button
-        key={"notate"}
+        key="notate"
         onClick={this.actions.openNewNotationDrawer}
         ability="notate"
         entity={this.props.text}
@@ -95,7 +95,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   rowShare() {
     return (
       <Button
-        key={"share"}
+        key="share"
         onClick={this.props.showShare}
         kind="any"
         label="Share"
@@ -107,7 +107,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   rowLogin() {
     return (
       <Button
-        key={"login"}
+        key="login"
         onClick={this.actions.showLogin}
         kind="unauthenticated"
         label="Login to Annotate"

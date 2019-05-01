@@ -104,7 +104,7 @@ export class ResourceWrapperContainer extends PureComponent {
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
           Preview{" "}
         </button>
-        <Authorize entity={resource} ability={"delete"}>
+        <Authorize entity={resource} ability="delete">
           <button
             onClick={this.handleResourceDestroy}
             className="button-bare-primary"

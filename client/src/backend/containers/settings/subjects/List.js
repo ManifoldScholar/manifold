@@ -103,7 +103,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
           <EntitiesList
             entityComponent={SubjectRow}
             entityComponentProps={{ active }}
-            title={"Project Subjects"}
+            title="Project Subjects"
             titleStyle="bar"
             entities={subjects}
             unit="subject"

@@ -50,7 +50,7 @@ class HighlightDetail extends PureComponent {
                 </button>
               </li>
             ) : null}
-            <Authorize entity={annotation} ability={"delete"}>
+            <Authorize entity={annotation} ability="delete">
               <li>
                 <Utility.ConfirmableButton
                   label="Delete"

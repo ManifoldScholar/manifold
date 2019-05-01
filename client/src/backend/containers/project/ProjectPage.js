@@ -52,9 +52,7 @@ export default class ProjectProjectPageContainer extends PureComponent {
                 readFrom="attributes[heroStyles][small]"
                 name="attributes[hero]"
                 remove="attributes[removeHero]"
-                instructions={
-                  "The Hero Image is displayed at the top of the project landing page. Images will be resized to 1280x800 and cropped along the bottom edge."
-                }
+                instructions="The Hero Image is displayed at the top of the project landing page. Images will be resized to 1280x800 and cropped along the bottom edge."
               />
               <Form.Upload
                 layout="portrait"

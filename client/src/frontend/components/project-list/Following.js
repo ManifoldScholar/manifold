@@ -45,7 +45,7 @@ export default class ProjectListFollowing extends Component {
             <div className="main">
               <Utility.IconComposer size={56} icon="following64" />
               <div className="body">
-                <h4 className="title">{"Projects You’re Following"}</h4>
+                <h4 className="title">Projects You’re Following</h4>
               </div>
             </div>
           </header>

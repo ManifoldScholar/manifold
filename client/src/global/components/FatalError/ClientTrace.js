@@ -51,13 +51,13 @@ export default class FatalErrorClientTrace extends PureComponent {
     if (!this.state.stackLines) return null;
 
     return (
-      <div className={"stacks"}>
-        <div className={"stack"}>
+      <div className="stacks">
+        <div className="stack">
           <h3>{this.props.truncate ? "Truncated" : null} Client Stack</h3>
           <ol>
             {this.state.stackLines.map(line => {
               return (
-                <li className={"line"} key={line.id}>
+                <li className="line" key={line.id}>
                   {line.method}
                   <span className="location">{line.location}</span>
                 </li>

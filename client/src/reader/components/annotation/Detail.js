@@ -109,7 +109,7 @@ class AnnotationDetail extends PureComponent {
             <section className="body">
               <Helper.SimpleFormat text={annotation.attributes.body} />
             </section>
-            <Authorize kind={"any"}>
+            <Authorize kind="any">
               <nav className="utility">
                 <ul>
                   {this.props.includeComments ? (
@@ -122,7 +122,7 @@ class AnnotationDetail extends PureComponent {
                       </button>
                     </li>
                   ) : null}
-                  <Authorize entity={annotation} ability={"update"}>
+                  <Authorize entity={annotation} ability="update">
                     <li>
                       <button
                         className={editButtonClass}
@@ -132,7 +132,7 @@ class AnnotationDetail extends PureComponent {
                       </button>
                     </li>
                   </Authorize>
-                  <Authorize entity={annotation} ability={"delete"}>
+                  <Authorize entity={annotation} ability="delete">
                     <li>
                       <Utility.ConfirmableButton
                         label="Delete"
@@ -148,7 +148,7 @@ class AnnotationDetail extends PureComponent {
                     </li>
                   ) : (
                     <li>
-                      <button onClick={this.handleFlag}>{"Flag"}</button>
+                      <button onClick={this.handleFlag}>Flag</button>
                     </li>
                   )}
                 </ul>

@@ -51,7 +51,7 @@ export default class Notification extends Component {
             data-id="close"
           >
             <i className="manicon manicon-x" aria-hidden="true" />
-            <span className="screen-reader-text">{"Dismiss"}</span>
+            <span className="screen-reader-text">Dismiss</span>
           </button>
         </div>
       </div>

@@ -39,7 +39,7 @@ export default class ProjectEvents extends Component {
               <div className="main">
                 <i className="manicon manicon-pulse" aria-hidden="true" />
                 <div className="body">
-                  <h4 className="title">{"All Activity"}</h4>
+                  <h4 className="title">All Activity</h4>
                 </div>
               </div>
             </header>

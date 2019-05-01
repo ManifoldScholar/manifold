@@ -81,7 +81,7 @@ export default class Overlay extends Component {
 
   render() {
     return (
-      <BodyClass className={"no-scroll"}>
+      <BodyClass className="no-scroll">
         <div className="overlay-full-primary">
           <FocusTrap
             focusTrapOptions={{

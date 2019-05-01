@@ -161,7 +161,7 @@ export class ActionCalloutForm extends Component {
                   placeholder="Select Text"
                   name="relationships[text]"
                   options={this.textOptions}
-                  entityLabelAttribute={"title"}
+                  entityLabelAttribute="title"
                 />
               )}
               {this.shouldShowUrlForKind(getModelValue("attributes[kind]")) && (

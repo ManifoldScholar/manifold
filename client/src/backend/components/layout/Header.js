@@ -25,7 +25,7 @@ export default class LayoutHeader extends Component {
 
     return (
       <BlurOnLocationChange location={this.props.location}>
-        <header className={"header-app dark"}>
+        <header className="header-app dark">
           <div className="header-container">
             <Link to={lh.link("frontend")} className="header-logo">
               <span className="screen-reader-text">Return to home</span>

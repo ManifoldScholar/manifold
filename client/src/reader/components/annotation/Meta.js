@@ -75,7 +75,7 @@ export default class AnnotationDetail extends PureComponent {
           <div className="marker tertiary">Author</div>
         ) : null}
         {annotation.attributes.private ? (
-          <div className="marker secondary">{"Private"}</div>
+          <div className="marker secondary">Private</div>
         ) : null}
         <Authorize kind="admin">
           {annotation.attributes.flagsCount > 0 ? (
@@ -86,7 +86,7 @@ export default class AnnotationDetail extends PureComponent {
           ) : null}
         </Authorize>
         {this.props.showAnnotationLabel ? (
-          <div className="marker tertiary">{"Annotation"}</div>
+          <div className="marker tertiary">Annotation</div>
         ) : null}
       </div>
     );

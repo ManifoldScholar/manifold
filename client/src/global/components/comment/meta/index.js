@@ -67,7 +67,7 @@ export default class CommentMeta extends PureComponent {
         </div>
         <div className="markers">
           {comment.attributes.authorCreated ? (
-            <div className="marker tertiary">{"Author"}</div>
+            <div className="marker tertiary">Author</div>
           ) : null}
           {comment.attributes.deleted ? (
             <div className="marker secondary">Deleted</div>

@@ -71,10 +71,10 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
           entityComponentProps={{ active }}
           title="Twitter Queries"
           titleStyle="section"
-          instructions={`
+          instructions="
             Manifold will periodically fetch tweets according to the queries specified
             below.
-          `}
+          "
           buttons={[
             <Button
               path={lh.link("backendProjectSocialTwitterQueryNew", project.id)}

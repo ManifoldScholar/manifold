@@ -14,9 +14,9 @@ export default class ResourceImportResultsFailed extends PureComponent {
     return (
       <React.Fragment>
         <i className="manicon manicon-x small" aria-hidden="true" />
-        <span>{`Row #${
-          resourceImportRow.lineNumber
-        } failed with errors.`}</span>
+        <span>
+          {`Row #${resourceImportRow.lineNumber} failed with errors.`}
+        </span>
       </React.Fragment>
     );
   }

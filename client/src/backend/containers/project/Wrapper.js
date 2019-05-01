@@ -90,7 +90,7 @@ export class ProjectWrapperContainer extends PureComponent {
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
           Preview{" "}
         </button>
-        <Authorize entity={project} ability={"delete"}>
+        <Authorize entity={project} ability="delete">
           <button
             onClick={this.handleProjectDestroy}
             className="button-bare-primary"

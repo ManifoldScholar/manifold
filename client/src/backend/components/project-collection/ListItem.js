@@ -15,17 +15,13 @@ export default class ProjectCollectionListItem extends PureComponent {
   get icon() {
     if (this.props.entity.attributes.visible)
       return (
-        <Utility.IconComposer
-          size={32}
-          iconClass={"eye-open"}
-          icon="eyeOpen32"
-        />
+        <Utility.IconComposer size={32} iconClass="eye-open" icon="eyeOpen32" />
       );
 
     return (
       <Utility.IconComposer
         size={32}
-        iconClass={"eye-closed"}
+        iconClass="eye-closed"
         icon="eyeClosed32"
       />
     );
@@ -80,14 +76,16 @@ export default class ProjectCollectionListItem extends PureComponent {
         <div className="icon-group">
           <span className="item-text">{entity.attributes.projectsCount}</span>
           <button
-            className={`button-icon-primary`}
+            className="button-icon-primary"
             onClick={this.toggleVisibility}
             aria-label={this.ariaLabel}
           >
             {this.icon}
-            <span className="screen-reader-text">{`Collection is ${
-              entity.attributes.visible ? "visible" : "not visible"
-            }`}</span>
+            <span className="screen-reader-text">
+              {`Collection is ${
+                entity.attributes.visible ? "visible" : "not visible"
+              }`}
+            </span>
           </button>
           <Handle />
         </div>

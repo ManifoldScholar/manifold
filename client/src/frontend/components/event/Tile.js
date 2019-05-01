@@ -109,7 +109,7 @@ export class EventTile extends Component {
         {this.props.destroyCallback && (
           <div
             className="utility"
-            data-id={"destroy"}
+            data-id="destroy"
             onClick={this.props.destroyCallback}
             role="button"
             tabIndex="0"

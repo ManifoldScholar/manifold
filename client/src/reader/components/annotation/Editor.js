@@ -98,7 +98,7 @@ export default class AnnotationEditor extends PureComponent {
               id="annotation-textarea"
               aria-describedby="annotation-textarea-error"
               style={{ width: "100%" }}
-              placeholder={"Annotate this passage..."}
+              placeholder="Annotate this passage..."
               onChange={this.handleBodyChange}
               value={this.state.body}
             />

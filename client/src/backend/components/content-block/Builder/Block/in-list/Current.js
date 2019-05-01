@@ -53,7 +53,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
               icon={block.icon}
               title={block.title}
               requiresAttention={!this.renderable}
-              size={"large"}
+              size="large"
               entity={this.entity}
             />
             <div className={`${baseClass}__button-list`}>

@@ -160,7 +160,7 @@ export default class SortableEntities extends PureComponent {
         updateBeforeSortStart={this.onUpdateBeforeSortStart}
         onSortEnd={this.onSortEnd}
         useDragHandle={this.useDragHandle}
-        axis={"xy"}
+        axis="xy"
       />
     );
   }

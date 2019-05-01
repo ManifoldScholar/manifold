@@ -53,7 +53,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
     return (
       <Authorize
         entity={project}
-        ability={"createResourceCollections"}
+        ability="createResourceCollections"
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
@@ -62,11 +62,9 @@ export class ResourceCollectionNewContainer extends PureComponent {
             type="resourceCollection"
             backUrl={lh.link("backendProjectResourceCollections", project.id)}
             backLabel={project.attributes.titlePlaintext}
-            title={"New Collection"}
+            title="New Collection"
             showUtility={false}
-            note={
-              "Enter a name and a brief description. Press save to continue."
-            }
+            note="Enter a name and a brief description. Press save to continue."
           />
           <Layout.BackendPanel>
             <FormContainer.Form

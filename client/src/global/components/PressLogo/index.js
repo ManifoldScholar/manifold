@@ -16,7 +16,7 @@ export default class PressLogo extends Component {
         <i className="manicon" aria-hidden="true">
           <Utility.IconComposer size={26} icon="manifoldLogo32" />
         </i>
-        <span className="screen-reader-text">{"Manifold Logo"}</span>
+        <span className="screen-reader-text">Manifold Logo</span>
       </React.Fragment>
     );
   }

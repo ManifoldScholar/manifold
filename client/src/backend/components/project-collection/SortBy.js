@@ -55,7 +55,7 @@ export default class ProjectCollectionSortBy extends PureComponent {
             id={this.props.sortId}
             onChange={this.handleChange}
             value={selected}
-            data-id={"filter"}
+            data-id="filter"
           >
             <option key="created_at_desc" value="created_at_desc">
               Date Created (Newest First)

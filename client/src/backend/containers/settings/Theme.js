@@ -33,7 +33,7 @@ export class SettingsThemeContainer extends PureComponent {
             create={settingsAPI.update}
             className="form-secondary"
           >
-            <Form.FieldGroup label={"Branding"}>
+            <Form.FieldGroup label="Branding">
               <Form.TextInput
                 label="Press Website URL"
                 name="attributes[general][pressSite]"
@@ -86,7 +86,7 @@ export class SettingsThemeContainer extends PureComponent {
                 instructions={`Use this field to adjust the vertical position of header navigation. For example, enter "5" to move the header down 5 pixels. Enter "-5" to move it up 5 pixels.`}
               />
             </Form.FieldGroup>
-            <Form.FieldGroup label={"Typography"}>
+            <Form.FieldGroup label="Typography">
               <Form.TextInput
                 label="Typekit ID"
                 name="attributes[theme][typekitId]"

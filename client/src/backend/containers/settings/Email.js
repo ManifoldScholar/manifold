@@ -104,7 +104,7 @@ export class SettingsEmailContainer extends PureComponent {
             {this.props.form.getModelValue(
               "attributes[email][deliveryMethod]"
             ) === "smtp" ? (
-              <Form.FieldGroup label={"SMTP Configuration"}>
+              <Form.FieldGroup label="SMTP Configuration">
                 <Form.TextInput
                   label="SMTP Address"
                   name="attributes[email][smtpSettingsAddress]"

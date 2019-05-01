@@ -187,13 +187,13 @@ class DashboardsAdminContainerImplementation extends PureComponent {
                     />
                   </Layout.DashboardPanel>
                 )}
-                <Authorize entity="statistics" ability={"read"}>
-                  <Layout.DashboardPanel icon={"BEActivity64"} title="Activity">
+                <Authorize entity="statistics" ability="read">
+                  <Layout.DashboardPanel icon="BEActivity64" title="Activity">
                     <DashboardComponents.Activity
                       statistics={this.props.statistics}
                     />
                   </Layout.DashboardPanel>
-                  <Layout.DashboardPanel icon={"lamp64"} title="Statistics">
+                  <Layout.DashboardPanel icon="lamp64" title="Statistics">
                     <DashboardComponents.Counts
                       statistics={this.props.statistics}
                     />

@@ -75,7 +75,7 @@ export default class Group extends Component {
           role="button"
           tabIndex="0"
         >
-          <i className={`manicon manicon-caret-down`} aria-hidden="true" />
+          <i className="manicon manicon-caret-down" aria-hidden="true" />
           <h4 className="item-label">{this.props.sectionName}</h4>
         </div>
         {this.renderGroupItems(this.props.annotations)}

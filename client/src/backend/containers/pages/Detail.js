@@ -129,12 +129,10 @@ class PageDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="page"
         backUrl={lh.link("backendRecordsPages")}
-        backLabel={"All Pages"}
+        backLabel="All Pages"
         title="New Page"
         showUtility={false}
-        note={
-          "Enter the name of your page and, optionally, a slug. Press save to continue."
-        }
+        note="Enter the name of your page and, optionally, a slug. Press save to continue."
       />
     );
   }
@@ -149,7 +147,7 @@ class PageDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="page"
         backUrl={lh.link("backendRecordsPages")}
-        backLabel={"All Pages"}
+        backLabel="All Pages"
         title={page.attributes.title}
         subtitle={subtitle}
         utility={this.renderUtility()}

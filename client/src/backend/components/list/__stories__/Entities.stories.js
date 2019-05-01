@@ -122,7 +122,7 @@ storiesOf("Backend/List/Entities", module)
   .add("Users", () => {
     return (
       <EntitiesList
-        title={"A List of Users"}
+        title="A List of Users"
         entities={users}
         entityComponent={UserRow}
         showCount
@@ -144,12 +144,10 @@ storiesOf("Backend/List/Entities", module)
   .add("TwitterQueries", () => {
     return (
       <EntitiesList
-        title={"Twitter Queries"}
-        titleIcon={"activityTweet64"}
-        titleStyle={"section"}
-        instructions={
-          "Manifold will periodically fetch tweets according to the queries specified below."
-        }
+        title="Twitter Queries"
+        titleIcon="activityTweet64"
+        titleStyle="section"
+        instructions="Manifold will periodically fetch tweets according to the queries specified below."
         entities={twitterQueries}
         showCountInTitle
         callbacks={callbacks}
@@ -169,7 +167,7 @@ storiesOf("Backend/List/Entities", module)
   .add("Subjects", () => {
     return (
       <EntitiesList
-        title={"Project Subjects"}
+        title="Project Subjects"
         titleStyle="bar"
         entities={subjects}
         entityComponent={SubjectRow}
@@ -186,7 +184,7 @@ storiesOf("Backend/List/Entities", module)
   .add("Res. Collections", () => {
     return (
       <EntitiesList
-        title={"Resource Collections"}
+        title="Resource Collections"
         titleIcon="resourceCollection64"
         entities={resourceCollections}
         entityComponent={ResourceCollectionRow}
@@ -197,7 +195,7 @@ storiesOf("Backend/List/Entities", module)
   .add("Resources", () => {
     return (
       <EntitiesList
-        title={"Resources"}
+        title="Resources"
         titleIcon="resources64"
         entities={resources}
         pagination={pagination}
@@ -216,7 +214,7 @@ storiesOf("Backend/List/Entities", module)
   .add("Projects", () => {
     return (
       <EntitiesList
-        title={"Projects"}
+        title="Projects"
         titleIcon="BEProject64"
         entities={projects}
         entityComponent={ProjectRow}
@@ -269,7 +267,7 @@ storiesOf("Backend/List/Entities", module)
   .add("Permissions", () => {
     return (
       <EntitiesList
-        title={"Permissions"}
+        title="Permissions"
         entities={permissions}
         entityComponent={PermissionRow}
         entityComponentProps={{
@@ -282,7 +280,7 @@ storiesOf("Backend/List/Entities", module)
   .add("Pages", () => {
     return (
       <EntitiesList
-        title={"Pages"}
+        title="Pages"
         titleIcon="resourceDocument64"
         entities={pages}
         entityComponent={PageRow}
@@ -300,7 +298,7 @@ storiesOf("Backend/List/Entities", module)
   .add("Makers", () => {
     return (
       <EntitiesList
-        title={"Makers"}
+        title="Makers"
         titleIcon="avatar64"
         entities={makers}
         entityComponent={MakerRow}
@@ -311,7 +309,7 @@ storiesOf("Backend/List/Entities", module)
   .add("Log", () => {
     return (
       <EntitiesList
-        title={"Log"}
+        title="Log"
         titleIcon="BEActivity64"
         entities={versions}
         entityComponent={LogRow}
@@ -329,7 +327,7 @@ storiesOf("Backend/List/Entities", module)
 
     return (
       <EntitiesList
-        title={"Features"}
+        title="Features"
         titleStyle="bar"
         entities={features}
         entityComponent={FeatureRow}
@@ -343,8 +341,8 @@ storiesOf("Backend/List/Entities", module)
   .add("Activity", () => {
     return (
       <EntitiesList
-        title={"Activity"}
-        titleIcon={"BEActivity64"}
+        title="Activity"
+        titleIcon="BEActivity64"
         listStyle="tiles"
         entities={events}
         entityComponent={EventRow}
@@ -357,7 +355,7 @@ storiesOf("Backend/List/Entities", module)
 
     return (
       <EntitiesList
-        title={"Empty List"}
+        title="Empty List"
         entities={[]}
         emptyMessage={message}
         entityComponent={() => null}
@@ -369,8 +367,8 @@ storiesOf("Backend/List/Entities", module)
   .add("Custom Row", () => {
     return (
       <EntitiesList
-        instructions={"This list generates rows using an arrow function."}
-        title={"A Custom List"}
+        instructions="This list generates rows using an arrow function."
+        title="A Custom List"
         entities={users}
         entityComponent={props => {
           const { entity } = props;
@@ -434,10 +432,10 @@ storiesOf("Backend/List/Entities", module)
         {wrap(
           <EntitiesList
             {...baseProps}
-            instructions={"foo bar"}
+            instructions="foo bar"
             search={search}
             buttons={buttons}
-            title={"All the things"}
+            title="All the things"
             showCount
           />
         )}

@@ -122,7 +122,7 @@ export class ProjectsCollectionsContainer extends Component {
       <div style={{ overflowX: "hidden" }}>
         <Utility.BackLinkPrimary
           link={lh.link("frontendProjectsAll")}
-          backText={"Back to projects"}
+          backText="Back to projects"
         />
         {this.renderProjectCollections()}
         {this.props.projectCollectionsMeta ? (

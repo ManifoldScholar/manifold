@@ -41,7 +41,7 @@ export default class EventList extends Component {
               <Event
                 event={event}
                 key={event.id}
-                itemClass={"event-list__item"}
+                itemClass="event-list__item"
               />
             );
           })}

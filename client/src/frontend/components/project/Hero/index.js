@@ -132,14 +132,14 @@ export default class ProjectHero extends PureComponent {
             <CalloutList
               blockClass={blockClass}
               callouts={this.leftCallouts}
-              layoutClass={"inline"}
-              visibilityClass={"desktop"}
+              layoutClass="inline"
+              visibilityClass="desktop"
             />
             <CalloutList
               blockClass={blockClass}
               callouts={this.allCallouts}
-              layoutClass={"stacked"}
-              visibilityClass={"mobile"}
+              layoutClass="stacked"
+              visibilityClass="mobile"
             />
           </div>
           <Social
@@ -152,8 +152,8 @@ export default class ProjectHero extends PureComponent {
             <CalloutList
               blockClass={blockClass}
               callouts={this.rightCallouts}
-              layoutClass={"stacked"}
-              visibilityClass={"desktop"}
+              layoutClass="stacked"
+              visibilityClass="desktop"
             />
           </div>
           <Credits

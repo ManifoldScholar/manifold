@@ -30,7 +30,7 @@ export default class SearchMenuButton extends PureComponent {
           icon="search16"
           size={22}
         />
-        <span className="screen-reader-text">{"Open search"}</span>
+        <span className="screen-reader-text">Open search</span>
       </button>
     );
   }

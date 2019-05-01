@@ -56,11 +56,11 @@ export default class ResourceDetail extends Component {
                 </Link>
                 */}
                 <Utility.ShareBar url={resourceUrl} />
-                <Meta resource={resource} layout={"secondary"} />
+                <Meta resource={resource} layout="secondary" />
                 <VariantList resource={resource} />
               </aside>
               <div className="resource-meta-mobile">
-                <Meta resource={resource} layout={"secondary"} />
+                <Meta resource={resource} layout="secondary" />
               </div>
               <div className="resource-variants-mobile">
                 <VariantList resource={resource} />
@@ -80,7 +80,7 @@ export default class ResourceDetail extends Component {
                   <CommentContainer.Thread subject={resource} />
                   <CommentContainer.Editor
                     focus={false}
-                    label={"Add Comment"}
+                    label="Add Comment"
                     subject={resource}
                     cancel={event => this.cancelComment(event)}
                   />

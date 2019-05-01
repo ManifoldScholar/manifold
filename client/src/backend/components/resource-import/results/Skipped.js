@@ -15,9 +15,9 @@ export default class ResourceImportResultsSkipped extends PureComponent {
     return (
       <React.Fragment>
         <i className="manicon manicon-arrow-right small" aria-hidden="true" />
-        <span>{`Row #${
-          resourceImportRow.lineNumber
-        } was skipped as marked.`}</span>
+        <span>
+          {`Row #${resourceImportRow.lineNumber} was skipped as marked.`}
+        </span>
       </React.Fragment>
     );
   }

@@ -80,7 +80,7 @@ class FormGeneratedPasswordInput extends Component {
         id={this.props.id}
         aria-describedby={this.props.idForError}
         type={type}
-        placeholder={"Enter a password"}
+        placeholder="Enter a password"
         onChange={event => this.handlePasswordChange(event)}
         value={this.state.password}
       />

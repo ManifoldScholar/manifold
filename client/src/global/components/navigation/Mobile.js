@@ -169,7 +169,7 @@ export class NavigationMobile extends Component {
           <i
             role="button"
             onClick={this.createExpandToggleHandler(link.route)}
-            className={`manicon manicon-caret-up`}
+            className="manicon manicon-caret-up"
           />
         ) : null}
         {link.route
@@ -197,7 +197,7 @@ export class NavigationMobile extends Component {
           location={this.props.location}
         />
         {this.state.open ? (
-          <BodyClass className={"no-scroll"}>
+          <BodyClass className="no-scroll">
             <FocusTrap
               focusTrapOptions={{
                 clickOutsideDeactivates: true

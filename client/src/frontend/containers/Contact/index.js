@@ -91,7 +91,7 @@ export class ContactContainer extends Component {
             <div className="row-1-p">
               <Form.Errorable
                 className="form-input"
-                name={"attributes[fullName]"}
+                name="attributes[fullName]"
                 errors={errors}
                 idForError="create-name-error"
               >

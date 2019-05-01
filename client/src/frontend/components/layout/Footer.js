@@ -168,8 +168,8 @@ class LayoutFooter extends Component {
   buildPagesArray() {
     const pages = [];
     pages.push(this.buildAuthLink());
-    pages.push(<Link to={lh.link("frontend")}>{"Home"}</Link>);
-    pages.push(<Link to={lh.link("frontendProjectsAll")}>{"Projects"}</Link>);
+    pages.push(<Link to={lh.link("frontend")}>Home</Link>);
+    pages.push(<Link to={lh.link("frontendProjectsAll")}>Projects</Link>);
     pages.push(...this.buildContentPages());
     return pages.filter(p => p !== null);
   }

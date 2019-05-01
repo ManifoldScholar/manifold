@@ -43,7 +43,7 @@ export default class FormColumnMapMapping extends PureComponent {
                     mapping={this.props.name}
                   />
                 ) : null}
-                <span className="placeholder">{"Drag column ..."}</span>
+                <span className="placeholder">Drag column ...</span>
               </div>
             );
           }}

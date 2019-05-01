@@ -138,12 +138,10 @@ class FeatureDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="feature"
         backUrl={lh.link("backendRecordsFeatures")}
-        backLabel={"All Features"}
+        backLabel="All Features"
         title="New Feature"
         showUtility={false}
-        note={
-          "Complete the form below to make a new feature. Press save to continue."
-        }
+        note="Complete the form below to make a new feature. Press save to continue."
       />
     );
   }
@@ -154,7 +152,7 @@ class FeatureDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="feature"
         backUrl={lh.link("backendRecordsFeatures")}
-        backLabel={"All Features"}
+        backLabel="All Features"
         title={
           feature.attributes.header ||
           `Untitled #${feature.attributes.position}`

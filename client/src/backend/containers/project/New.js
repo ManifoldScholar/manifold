@@ -64,7 +64,7 @@ export class ProjectNewContainer extends PureComponent {
   render() {
     return (
       <Authorize
-        entity={"project"}
+        entity="project"
         ability="create"
         failureNotification
         failureRedirect={lh.link("backend")}
@@ -72,11 +72,9 @@ export class ProjectNewContainer extends PureComponent {
         <div>
           <Navigation.DetailHeader
             type="project"
-            title={"New Project"}
+            title="New Project"
             showUtility={false}
-            note={
-              "Enter the name of your project, and a brief description. Press save to continue."
-            }
+            note="Enter the name of your project, and a brief description. Press save to continue."
           />
           <Layout.BackendPanel>
             <FormContainer.Form
@@ -115,9 +113,7 @@ export class ProjectNewContainer extends PureComponent {
                   label="Texts"
                   prompt="Will your project include more than one text?"
                   name="attributes[configuration][multipleTexts]"
-                  instructions={
-                    "Manifold projects can include a single text or multiple texts."
-                  }
+                  instructions="Manifold projects can include a single text or multiple texts."
                   options={[
                     { label: "Yes", value: true },
                     { label: "No", value: false }
@@ -129,9 +125,7 @@ export class ProjectNewContainer extends PureComponent {
                   label="Resources"
                   prompt="Do you have resources you want to add in addition to any texts you are loading?"
                   name="attributes[configuration][resources]"
-                  instructions={
-                    "Enhance your texts with media or create a project composed only of media resources."
-                  }
+                  instructions="Enhance your texts with media or create a project composed only of media resources."
                   options={[
                     { label: "Yes", value: true },
                     { label: "No", value: false }
@@ -143,9 +137,7 @@ export class ProjectNewContainer extends PureComponent {
                   label="Extended Description"
                   prompt="Do you need additional space to describe your project?"
                   name="attributes[configuration][markdown]"
-                  instructions={
-                    "A freeform content block can be used to add text contextualizing your project."
-                  }
+                  instructions="A freeform content block can be used to add text contextualizing your project."
                   options={[
                     { label: "Yes", value: true },
                     { label: "No", value: false }
@@ -157,9 +149,7 @@ export class ProjectNewContainer extends PureComponent {
                   label="Activity"
                   prompt="Will your project change frequently?"
                   name="attributes[configuration][recentActivity]"
-                  instructions={
-                    "Manifold can showcase the evolution of your project on the platform and in the Twitterverse."
-                  }
+                  instructions="Manifold can showcase the evolution of your project on the platform and in the Twitterverse."
                   options={[
                     { label: "Yes", value: true },
                     { label: "No", value: false }

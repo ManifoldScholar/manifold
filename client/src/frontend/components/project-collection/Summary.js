@@ -102,7 +102,7 @@ export default class ProjectCollectionSummary extends Component {
                 "frontendProjectCollection",
                 this.collection.attributes.slug
               )}
-              viewAllLabel={"See the full collection"}
+              viewAllLabel="See the full collection"
             />
           ) : (
             <div className="entity-section-wrapper__body project-list empty">

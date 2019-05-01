@@ -25,8 +25,8 @@ export default class ResourceListCards extends PureComponent {
           <div className="resource-count">
             <Utility.EntityCount
               pagination={this.props.pagination}
-              singularUnit={"resource"}
-              pluralUnit={"resources"}
+              singularUnit="resource"
+              pluralUnit="resources"
             />
             {project ? (
               <Meta.DOI

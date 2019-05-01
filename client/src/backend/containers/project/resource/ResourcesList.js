@@ -78,7 +78,7 @@ class ProjectResourcesListContainerImplementation extends PureComponent {
     return (
       <EntitiesList
         entityComponent={ResourceRow}
-        title={"Resources"}
+        title="Resources"
         titleIcon="resourceCollection64"
         entities={this.props.resources}
         unit="resource"

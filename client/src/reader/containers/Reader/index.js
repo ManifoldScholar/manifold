@@ -195,8 +195,8 @@ export class ReaderContainer extends Component {
       <Authorize kind="any">
         <Overlay
           closeCallback={this.props.history.goBack}
-          title={"Your Notes"}
-          icon={"notepad"}
+          title="Your Notes"
+          icon="notepad"
           contentWidth={850}
         >
           <ReaderNotes>

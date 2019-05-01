@@ -117,7 +117,7 @@ export default class Header extends Component {
             ) : null}
             <nav className="menu-buttons">
               <ul>
-                <Authorize kind={"any"}>
+                <Authorize kind="any">
                   <li>
                     <ControlMenu.NotesButton
                       toggle={this.panelToggleHandler("notes")}

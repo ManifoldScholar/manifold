@@ -30,7 +30,7 @@ export default class ResourceCollectionCover extends Component {
               <i className="manicon" aria-hidden="true">
                 <Utility.IconComposer size={48} icon="resourceCollection64" />
               </i>
-              <span>{"Resource Collection"}</span>
+              <span>Resource Collection</span>
             </div>
           </div>
         </Link>

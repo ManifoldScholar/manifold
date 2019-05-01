@@ -66,8 +66,8 @@ class SearchContainer extends PureComponent {
       <Overlay
         triggerScrollToTop={this.searchNum}
         closeCallback={this.close}
-        title={"Search Results"}
-        icon={"magnify"}
+        title="Search Results"
+        icon="magnify"
         contentWidth={850}
       >
         <div>

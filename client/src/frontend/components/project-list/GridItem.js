@@ -52,7 +52,7 @@ export default class ProjectGridItem extends Component {
     let marker = null;
 
     if (project.attributes.draft) {
-      marker = <div className="block-label">{"Draft"}</div>;
+      marker = <div className="block-label">Draft</div>;
     }
 
     return marker;

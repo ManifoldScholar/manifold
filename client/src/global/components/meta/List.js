@@ -69,7 +69,7 @@ export default class List extends Component {
 
     return (
       <li key={doi}>
-        <DOI label={"doi"} doi={doi} />
+        <DOI label="doi" doi={doi} />
       </li>
     );
   }

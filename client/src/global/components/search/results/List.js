@@ -59,8 +59,8 @@ export default class SearchResultsList extends PureComponent {
         <span className="label-count">
           <Utility.EntityCount
             pagination={this.props.pagination}
-            singularUnit={"result"}
-            pluralUnit={"results"}
+            singularUnit="result"
+            pluralUnit="results"
           />
         </span>
         <ul className="search-results__list">

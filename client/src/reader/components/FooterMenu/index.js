@@ -30,7 +30,7 @@ export default class Footer extends Component {
                   </button>
                 </li>
                */}
-              <Authorize kind={"any"}>
+              <Authorize kind="any">
                 <li>
                   <ControlMenu.NotesButton
                     toggle={() => this.handlePanelToggle("notes")}

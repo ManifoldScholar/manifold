@@ -11,7 +11,7 @@ export default class MobileSearch extends PureComponent {
     return (
       <SearchMenu.Body
         onSubmit={this.props.closeNavigation}
-        searchType={"frontend"}
+        searchType="frontend"
         visibility={{ search: true }}
       />
     );

@@ -46,7 +46,7 @@ export default class SubjectRow extends PureComponent {
   isCurrentUser(id) {
     let output = "";
     if (this.props.currentUserId === id) {
-      output = <span className="specifier">{"You"}</span>;
+      output = <span className="specifier">You</span>;
     }
     return output;
   }
@@ -59,8 +59,8 @@ export default class SubjectRow extends PureComponent {
         rowClickMode="block"
         title={this.name}
         figure={<EntityThumbnail.User entity={this.entity} />}
-        figureSize={"small"}
-        figureShape={"circle"}
+        figureSize="small"
+        figureShape="circle"
         label={this.role}
         active={this.active}
       />

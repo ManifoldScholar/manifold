@@ -87,7 +87,7 @@ export class FeaturedContainer extends Component {
               <div className="main">
                 <Utility.IconComposer size={56} icon="lamp64" />
                 <div className="body">
-                  <h4 className="title">{"Featured Projects"}</h4>
+                  <h4 className="title">Featured Projects</h4>
                 </div>
               </div>
             </header>

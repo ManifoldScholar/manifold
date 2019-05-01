@@ -20,13 +20,13 @@ export default class FatalErrorCompnentTrace extends PureComponent {
 
   render() {
     return (
-      <div className={"stacks"}>
-        <div className={"stack"}>
+      <div className="stacks">
+        <div className="stack">
           <h3>Component Stack</h3>
           <ol>
             {this.stackLines.map(line => {
               return (
-                <li className={"line"} key={line.index}>
+                <li className="line" key={line.index}>
                   {line.index === 0 ? (
                     <div>
                       {"The above error occurred in the "}

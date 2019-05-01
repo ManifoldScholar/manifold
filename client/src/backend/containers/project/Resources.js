@@ -19,7 +19,7 @@ export default class ProjectResourcesContainer extends PureComponent {
     return (
       <Authorize
         entity={project}
-        ability={"manageResources"}
+        ability="manageResources"
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >

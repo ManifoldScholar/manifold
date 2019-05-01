@@ -86,7 +86,7 @@ export class ProjectResourceCollectionsListContainerImplementation extends PureC
     return (
       <EntitiesList
         entityComponent={ResourceCollectionRow}
-        title={"Resource Collections"}
+        title="Resource Collections"
         titleIcon="resourceCollection64"
         entities={this.props.resourceCollections}
         unit="resource collection"

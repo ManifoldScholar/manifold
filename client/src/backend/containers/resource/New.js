@@ -59,7 +59,7 @@ export class ResourceNewContainer extends PureComponent {
     return (
       <Authorize
         entity={project}
-        ability={"createResources"}
+        ability="createResources"
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
@@ -68,7 +68,7 @@ export class ResourceNewContainer extends PureComponent {
             type="resource"
             backUrl={lh.link("backendProjectResources", project.id)}
             backLabel={project.attributes.titlePlaintext}
-            title={"New Resource"}
+            title="New Resource"
             showUtility={false}
             note={
               "Select your resource type, then enter a name and a brief description." +

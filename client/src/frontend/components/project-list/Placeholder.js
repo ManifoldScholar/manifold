@@ -71,7 +71,7 @@ export default class ProjectListPlaceholder extends Component {
                 to={lh.link("backendProjects")}
                 className="button-icon-primary"
               >
-                <span>{"Publish a Project Now"}</span>
+                <span>Publish a Project Now</span>
               </Link>
             </div>
           </div>
