@@ -35,7 +35,7 @@ export default class ResourceDetail extends Component {
   render() {
     const { resource, resourceUrl } = this.props;
     if (!resource) return null;
-    const attr = resource.attributes;
+    const { attributes: attr } = resource;
 
     return (
       <div>

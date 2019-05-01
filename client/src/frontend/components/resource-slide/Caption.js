@@ -117,7 +117,7 @@ export default class ResourceListSlideCaption extends Component {
 
   renderDescription(resource) {
     if (!this.hasCaption(resource)) return null;
-    const attr = resource.attributes;
+    const { attributes: attr } = resource;
     const descriptionClasses = classNames({
       "resource-description": true,
       expanded: this.state.expanded
@@ -140,7 +140,7 @@ export default class ResourceListSlideCaption extends Component {
 
   render() {
     const resource = this.props.resource;
-    const attr = resource.attributes;
+    const { attributes: attr } = resource;
     const moreLinkClass = classNames("more-link", {
       open: this.state.expanded
     });

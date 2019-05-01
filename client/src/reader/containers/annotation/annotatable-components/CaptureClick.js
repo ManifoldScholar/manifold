@@ -44,7 +44,7 @@ export default class AnnotatableCaptureClick extends Component {
 
   handleClick = event => {
     if (!event || !event.target) return;
-    const el = event.target;
+    const { target: el } = event;
     if (this.doesElementContainAnnotationAndHighlight(el))
       this.handleDisambiguationClick(event, el);
     if (this.doesElementContainRemovableHighlight(el))

@@ -4,9 +4,9 @@ const waitOn = require("wait-on");
 const argv = require("minimist")(process.argv.slice(2));
 const ch = require("../src/helpers/consoleHelpers");
 
-const base = argv.base;
+const { base } = argv;
 const resources = argv.on.split(",").map(resource => `${base}${resource}`);
-const name = argv.name;
+const { name } = argv;
 const opts = {
   resources,
   log: false,

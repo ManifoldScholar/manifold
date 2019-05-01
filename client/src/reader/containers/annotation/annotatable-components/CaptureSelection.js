@@ -138,7 +138,7 @@ export default class AnnotatableCaptureSelection extends Component {
   mapSelectionToAnnotation(selection, nativeSelection) {
     if (!selection) return null;
 
-    const range = selection.range;
+    const { range } = selection;
 
     // 1. Find the closest element with a data-node-uuid attribute
     const startNode = selectionHelpers.findClosestTextNode(

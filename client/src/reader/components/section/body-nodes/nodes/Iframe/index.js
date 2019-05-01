@@ -72,7 +72,7 @@ class IframeNode extends Component {
   render() {
     const attributes = this.props.attributes;
     if (this.hasComponent) {
-      const SupportedComponent = this.component;
+      const { component: SupportedComponent } = this;
       return <SupportedComponent {...attributes} />;
     }
 

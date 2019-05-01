@@ -25,7 +25,7 @@ export default class ResourceMeta extends Component {
   generateResourceMetadataMap(baseMeta, resource) {
     const keys = Object.keys(baseMeta).sort();
     const metadata = Object.assign({}, baseMeta);
-    const attr = resource.attributes;
+    const { attributes: attr } = resource;
 
     if (attr.attachmentFileSize) {
       metadata.fileSize = `${filesize(attr.attachmentFileSize, { round: 0 })}`;

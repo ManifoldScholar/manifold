@@ -44,7 +44,7 @@ export class ProjectCollectionDetail extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const { match } = this.props;
-    const prevMatch = prevProps.match;
+    const { match: prevMatch } = prevProps;
     if (!prevProps.projectCollection) return this.fetchProjectCollection();
 
     if (prevMatch.params.id !== match.params.id) {

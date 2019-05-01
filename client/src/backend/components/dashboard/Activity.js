@@ -20,7 +20,7 @@ export default class Activity extends Component {
   };
 
   formatReaderIncrease(stats) {
-    const increase = stats.readerIncrease;
+    const { readerIncrease: increase } = stats;
 
     if (increase === null) return "";
     if (increase > 0) return "+" + increase.toString() + "%";

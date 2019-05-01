@@ -37,7 +37,7 @@ export default class FatalErrorClientTrace extends PureComponent {
   static getDerivedStateFromProps(props) {
     let stackLines = props.trace.split("\n");
     stackLines.shift();
-    const count = stackLines.length;
+    const { length: count } = stackLines;
     let hidden = 0;
     if (props.truncate) {
       stackLines = stackLines.slice(0, props.truncate);

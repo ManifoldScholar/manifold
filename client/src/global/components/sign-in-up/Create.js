@@ -114,7 +114,7 @@ export class CreateContainer extends Component {
       p => p.attributes.purpose === "terms_and_conditions"
     );
     if (!termsPage) return null;
-    const attr = termsPage.attributes;
+    const { attributes: attr } = termsPage;
     const name = props.settings.attributes.general.installationName;
 
     const linkProps = attr.isExternalLink

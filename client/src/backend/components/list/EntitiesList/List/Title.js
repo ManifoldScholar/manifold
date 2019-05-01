@@ -58,7 +58,7 @@ export default class ListEntitiesListTitle extends PureComponent {
   }
 
   render() {
-    const TitleComponent = this.titleComponent;
+    const { titleComponent: TitleComponent } = this;
     return (
       <TitleComponent
         titleLink={this.titleLink}

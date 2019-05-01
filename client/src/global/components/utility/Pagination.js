@@ -23,7 +23,7 @@ export default class UtilityPagination extends PureComponent {
   };
 
   visiblePageArray(pagination) {
-    const current = pagination.currentPage;
+    const { currentPage: current } = pagination;
     let start = current - this.props.padding;
     if (start < 1) start = 1;
     let last = current + this.props.padding;

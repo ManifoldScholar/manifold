@@ -124,7 +124,7 @@ export default class SortableEntities extends PureComponent {
   }
 
   render() {
-    const EntityComponent = this.entityComponent;
+    const { entityComponent: EntityComponent } = this;
 
     const SortableEntityComponent = SortableElement(
       ({ sortableEntity, index }) => {

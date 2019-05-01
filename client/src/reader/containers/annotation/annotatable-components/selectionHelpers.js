@@ -18,7 +18,7 @@ const closest = (el, selector) => {
 
 const findClosestTextNode = node => {
   if (node.nodeType === Node.TEXT_NODE) {
-    const parent = node.parentElement;
+    const { parentElement: parent } = node;
     if (has(parent.dataset, "nodeUuid")) {
       return parent;
     }
@@ -54,7 +54,7 @@ const parentContainsSelection = (parent, nativeSelection) => {
 };
 
 const selectionMatchesAnnotation = (selectionState, annotation) => {
-  const compare = selectionState.selectionAnnotation;
+  const { selectionAnnotation: compare } = selectionState;
   if (!annotation || !compare) return false;
   const {
     attributes: { endChar, endNode, startChar, startNode }

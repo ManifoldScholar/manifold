@@ -19,7 +19,7 @@ const deleteFavorite = (state, action) => {
 };
 
 const setError = (state, action) => {
-  const error = action.payload;
+  const { payload: error } = action;
   return Object.assign({}, state, { error });
 };
 
@@ -28,7 +28,7 @@ const logout = () => {
 };
 
 const setAuthToken = (state, action) => {
-  const authToken = action.payload;
+  const { payload: authToken } = action;
   if (!authToken) return state;
   const newState = { authToken };
   return Object.assign({}, state, newState);

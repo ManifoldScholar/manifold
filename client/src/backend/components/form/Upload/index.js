@@ -114,7 +114,7 @@ export class FormUpload extends Component {
   };
 
   accepts(props) {
-    const key = props.accepts;
+    const { accepts: key } = props;
     let config;
     config = get(FormUpload.types, key);
     if (!config) config = FormUpload.types.any;

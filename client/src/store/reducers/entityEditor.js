@@ -48,7 +48,7 @@ const open = (state, action) => {
 };
 
 const close = (state, action) => {
-  const key = action.payload;
+  const { payload: key } = action;
   const newSessions = Object.assign({}, state.sessions);
   delete newSessions[key];
   return update(state, { sessions: { $set: newSessions } });
@@ -57,7 +57,7 @@ const close = (state, action) => {
 const removeChangedFlag = (state, action) => {
   const { entity } = action.payload;
   if (!entity) return state;
-  const id = entity.id;
+  const { id } = entity;
   const clear = {};
   Object.keys(state.sessions).forEach(sessionKey => {
     const source = state.sessions[sessionKey].source;

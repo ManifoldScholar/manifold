@@ -27,7 +27,7 @@ export default class ProjectGridItem extends Component {
   };
 
   renderPublishedDate(project) {
-    const attr = project.attributes;
+    const { attributes: attr } = project;
     if (attr.publicationDate && !this.props.hideDate) {
       return (
         <div className="date">

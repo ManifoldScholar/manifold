@@ -151,8 +151,8 @@ export default class AnnotationPopupPositioner extends PureComponent {
     if (!this.isPositionable) return;
 
     try {
-      const selectionRect = this.selectionRect;
-      const scrollTop = this.scrollTop;
+      const { selectionRect } = this;
+      const { scrollTop } = this;
       const { height: popupHeight, width: popupWidth } = this.popupDimensions;
       const { minLeft, maxLeft } = this.minAndMaxLeft(
         selectionRect,

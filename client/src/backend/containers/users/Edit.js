@@ -77,7 +77,7 @@ export class UsersEditContainer extends PureComponent {
   };
 
   destroyUser = () => {
-    const user = this.user;
+    const { user } = this;
     const call = usersAPI.destroy(user.id);
     const options = { removes: user };
     const userRequest = request(call, requests.beUserDestroy, options);
@@ -126,7 +126,7 @@ export class UsersEditContainer extends PureComponent {
   render() {
     if (!this.user) return null;
     const attr = this.user.attributes;
-    const user = this.user;
+    const { user } = this;
 
     return (
       <div>

@@ -48,7 +48,7 @@ class FormMaskedTextInput extends Component {
       const wordChar = /^[A-Za-z0-9-]$/;
       const notWordChar = /[^A-Za-z0-9-]/g;
       const adjusted = raw.replace(notWordChar, "").replace("_", "");
-      const length = adjusted.length;
+      const { length } = adjusted;
       let mask = Array(length);
       mask.unshift("#");
       fill(mask, wordChar, 1);
@@ -62,7 +62,7 @@ class FormMaskedTextInput extends Component {
       const base = "https://doi.org/10.".split("");
       const wordChar = /^[A-Za-z0-9_.;()\-/]$/;
       const adjusted = raw.replace(/\s/g, "");
-      const length = adjusted.length;
+      const { length } = adjusted;
       let mask =
         length >= base.length ? Array(length - base.length) : Array(length);
       mask.unshift(...base);

@@ -1,5 +1,5 @@
 const webpack = require("webpack");
-const DefinePlugin = webpack.DefinePlugin;
+const { DefinePlugin } = webpack;
 const path = require('path');
 
 // Export a function. Accept the base config as the only param.

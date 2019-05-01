@@ -79,7 +79,7 @@ export default class ProjectContentBlock extends PureComponent {
     if (!this.showBlock) return null;
 
     const title = this.renderable ? this.title : this.placeholderTitle;
-    const TypeComponent = this.typeComponent;
+    const { typeComponent: TypeComponent } = this;
 
     return (
       <Wrapper additionalClasses={this.style}>

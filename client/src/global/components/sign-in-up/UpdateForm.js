@@ -93,7 +93,7 @@ class UpdateFormContainer extends Component {
     if (this.state.avatar) {
       const reader = new FileReader();
       reader.onload = eIgnored => {
-        const data = reader.result;
+        const { result: data } = reader;
         this.doUpdateRequest(data);
       };
       reader.readAsDataURL(this.state.avatar);

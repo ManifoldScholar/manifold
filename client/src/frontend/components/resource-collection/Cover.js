@@ -14,7 +14,7 @@ export default class ResourceCollectionCover extends Component {
   render() {
     const collectionsBackground = "/static/images/resource-collection.jpg";
     const resourceCollection = this.props.resourceCollection;
-    const attr = resourceCollection.attributes;
+    const { attributes: attr } = resourceCollection;
     const bgImage = attr.thumbnailStyles.medium
       ? attr.thumbnailStyles.medium
       : collectionsBackground;

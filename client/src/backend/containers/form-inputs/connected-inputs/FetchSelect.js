@@ -103,7 +103,7 @@ class FetchSelect extends PureComponent {
 
     const client = new ApiClient();
     client.call(endpoint, method, options).then(results => {
-      const items = results.data;
+      const { data: items } = results;
       // Check to see if key-selected option is still available
       const selected = this.getHighlightedOption(items, this.state.highlighted);
       this.setState({

@@ -35,7 +35,7 @@ class EntryBrowser {
   }
 
   performBootstrap() {
-    const store = this.store;
+    const { store } = this;
     const cookie = new CookieHelper();
     ch.error("Bootstrapping on the client.", "rain_cloud");
     return manifoldBootstrap(store.getState, store.dispatch, cookie).catch(

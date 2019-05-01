@@ -62,7 +62,7 @@ class NotationMarker extends Component {
     return (
       <span>
         {this.props.annotations.map(annotation => {
-          const id = annotation.id;
+          const { id } = annotation;
           const markerClassNames = classnames({
             "notation-marker": true,
             active: id === this.props.activeAnnotation

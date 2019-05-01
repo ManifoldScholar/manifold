@@ -26,7 +26,7 @@ export default class FormMakers extends PureComponent {
   }
 
   get baseStructure() {
-    const keys = this.metadataProperties;
+    const { metadataProperties: keys } = this;
     return [
       {
         label: "Copyright",
@@ -87,7 +87,7 @@ export default class FormMakers extends PureComponent {
   }
 
   get structure() {
-    const keys = this.metadataProperties;
+    const { metadataProperties: keys } = this;
     const filteredStructure = this.baseStructure.filter(
       group => group.children.length > 0
     );

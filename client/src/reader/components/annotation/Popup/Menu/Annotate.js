@@ -49,7 +49,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   }
 
   rowHighlight() {
-    const highlighted = this.hasActiveAnnotation;
+    const { hasActiveAnnotation: highlighted } = this;
     const className = classNames({ selected: highlighted });
     const onClick = highlighted
       ? () => this.actions.destroyAnnotation(this.props.activeAnnotation)

@@ -86,7 +86,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
 
     setValues(key, updatedValues) {
       const listState = this.listState(key);
-      const values = listState.values;
+      const { values } = listState;
       const newValues = Object.assign({}, values, updatedValues);
       const newListState = Object.assign({}, listState, { values: newValues });
       this.setState({ [key]: newListState });

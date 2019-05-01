@@ -36,8 +36,8 @@ export default class ResourceCollectionDetail extends PureComponent {
     const resourceCollection = this.props.resourceCollection;
     if (!project || !resourceCollection) return null;
 
-    const attr = resourceCollection.attributes;
-    const count = attr.collectionResourcesCount;
+    const { attributes: attr } = resourceCollection;
+    const { collectionResourcesCount: count } = attr;
     return (
       <section className="collection-detail">
         <div className="container flush-bottom">

@@ -55,7 +55,7 @@ class FormColumnMap extends PureComponent {
     if (!result.destination) return;
     const currentMap = this.props.value;
     const headerPosition = result.destination.droppableId;
-    const column = result.draggableId;
+    const { draggableId: column } = result;
     const updated = omitBy(currentMap, value => value === column);
     updated[headerPosition] = column;
     this.props.set(updated);

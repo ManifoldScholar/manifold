@@ -41,7 +41,7 @@ export class PermissionForm extends PureComponent {
 
   renderSelectedUser(user) {
     if (!user) return null;
-    const attr = user.attributes;
+    const { attributes: attr } = user;
     return (
       <div className="form-input">
         <div className="user">

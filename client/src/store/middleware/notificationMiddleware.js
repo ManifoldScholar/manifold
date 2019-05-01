@@ -13,7 +13,7 @@ function isApiResponseAction(action) {
 }
 
 function handleAddNotificationAction(dispatch, action) {
-  const notification = action.payload;
+  const { payload: notification } = action;
   if (!notification.scope) notification.scope = "global";
   if (
     notification.expiration &&

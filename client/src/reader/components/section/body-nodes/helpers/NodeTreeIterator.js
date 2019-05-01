@@ -63,7 +63,7 @@ export default class NodeTreeIterator {
   }
 
   visitChildren(node) {
-    const children = node.children;
+    const { children } = node;
     if (Array.isArray(children)) {
       const childElements = [];
       children.forEach((child, index) => {

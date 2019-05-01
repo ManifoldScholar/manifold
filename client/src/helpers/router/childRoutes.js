@@ -22,7 +22,7 @@ const renderChildRoutes = (route, renderOptions) => {
     routeOptions,
     renderOptions
   );
-  const childRoutes = route.routes;
+  const { routes: childRoutes } = route;
 
   const defaultRender = childRoute => props => {
     const adjustedProps = Object.assign({}, props);

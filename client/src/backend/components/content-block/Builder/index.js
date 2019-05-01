@@ -60,7 +60,7 @@ export class ProjectContent extends PureComponent {
       this.currentBlocks
     );
     if (!draggableHelper.actionable) return;
-    const action = draggableHelper.action;
+    const { action } = draggableHelper;
     let callback;
     if (action === "move")
       callback = () => this.updateBlock(draggableHelper.block);

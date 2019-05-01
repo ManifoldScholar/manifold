@@ -87,7 +87,7 @@ class Toc extends PureComponent {
     if (!this.props.section) return false;
     if (!this.state.mounted) return false;
     const { location } = this.props.history;
-    const nodeId = node.id;
+    const { id: nodeId } = node;
     const nodeHash = node.anchor ? `#${node.anchor}` : "";
     return this.props.section.id === nodeId && location.hash === nodeHash;
   }

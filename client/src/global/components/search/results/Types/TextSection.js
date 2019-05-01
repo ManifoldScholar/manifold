@@ -46,13 +46,13 @@ class SearchResultsTypeTextSection extends PureComponent {
   }
 
   get hasExcerpts() {
-    const textNodes = this.textNodes;
+    const { textNodes } = this;
     return textNodes && textNodes.total > 0;
   }
 
   get excerpts() {
-    const text = this.text;
-    const model = this.model;
+    const { text } = this;
+    const { model } = this;
     if (!this.hasExcerpts) return [];
     const { hits } = this.textNodes;
     return hits.map(h =>

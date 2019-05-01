@@ -64,7 +64,7 @@ export default class TextNode extends Component {
 
   propsToLocalAnnotationsArray(openAnnotations) {
     return values(openAnnotations).map(a => {
-      const id = a.id;
+      const { id } = a;
       const type = a.attributes.format;
       const isCreator =
         a.id === "selection" ? true : a.attributes.currentUserIsCreator;

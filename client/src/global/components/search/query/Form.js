@@ -62,7 +62,7 @@ export default class SearchQueryForm extends PureComponent {
 
   /* eslint-disable no-param-reassign */
   setDefaultScope(state) {
-    const availableScopes = this.availableScopes;
+    const { availableScopes } = this;
     if (availableScopes.length > 0 && !state.scope) {
       if (availableScopes.find(s => s.value === "text")) {
         state.scope = "text";
@@ -99,8 +99,8 @@ export default class SearchQueryForm extends PureComponent {
   }
 
   setKeyword = event => {
-    const target = event.target;
-    const value = target.value;
+    const { target } = event;
+    const { value } = target;
     this.setState({ keyword: value });
   };
 

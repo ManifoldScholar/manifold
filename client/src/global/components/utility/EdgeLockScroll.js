@@ -63,7 +63,7 @@ export default class EdgeLockScroll extends PureComponent {
     if (event.target !== this.child) return; // Ignore locking if the element being scrolled is not the direct child
 
     const delta = touchDelta || event.deltaY;
-    const offset = scroller.offsetTop;
+    const { offsetTop: offset } = scroller;
     if (delta < 0 && scroller.scrollTop <= 0) {
       event.preventDefault();
     }

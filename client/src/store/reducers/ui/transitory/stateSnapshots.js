@@ -8,7 +8,7 @@ const takeSnapshot = (state, action) => {
 };
 
 const resetSnapshot = (state, action) => {
-  const key = action.payload;
+  const { payload: key } = action;
   const newState = Object.assign({}, state);
   delete newState[key];
   return newState;

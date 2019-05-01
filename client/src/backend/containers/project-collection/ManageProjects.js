@@ -115,7 +115,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
   };
 
   projectCover = props => {
-    const entity = props.entity;
+    const { entity } = props;
     if (!entity) return null;
 
     return (

@@ -28,7 +28,7 @@ function reducePropsToState(propsList) {
 function handleStateChangeOnClient(classes) {
   const htmlClasses = classes.map(className => className.trim());
   if (htmlClasses.join(",") === lastHtmlElementClassValue) return;
-  const element = document.documentElement;
+  const { documentElement: element } = document;
   if (!element || !element.dataset) return;
   if (element.dataset.addedClasses) {
     const previouslyAddedClasses = element.dataset.addedClasses.split(",");

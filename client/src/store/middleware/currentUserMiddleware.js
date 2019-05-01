@@ -179,7 +179,7 @@ export function authenticateWithCookie(dispatch, cookieHelper) {
 
 export default function currentUserMiddleware({ dispatch, getState }) {
   return next => action => {
-    const payload = action.payload;
+    const { payload } = action;
 
     if (action.type === "RESTORE_SESSION") {
       dispatch(actions.loginStart());

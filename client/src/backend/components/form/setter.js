@@ -132,8 +132,8 @@ export default function setter(WrappedComponent) {
 
     buildOnChangeHandler(props) {
       return event => {
-        const target = event.target;
-        const value = target.value;
+        const { target } = event;
+        const { value } = target;
         this.setValue(value, props);
       };
     }

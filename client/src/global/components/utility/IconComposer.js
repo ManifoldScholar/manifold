@@ -37,7 +37,7 @@ export default class IconComposer extends PureComponent {
 
   get iconComponent() {
     if (!this.props.icon) return this.failure;
-    const key = this.iconKey;
+    const { iconKey: key } = this;
     const source = this.iconSource(key);
     const component = source[key];
     if (!component) return this.failure;
@@ -51,7 +51,7 @@ export default class IconComposer extends PureComponent {
 
   render() {
     const { iconClass, size, fill, stroke, icon } = this.props;
-    const IconComponent = this.iconComponent;
+    const { iconComponent: IconComponent } = this;
     const adjustedIconClass = classNames(iconClass, `svg-icon--${icon}`);
 
     const props = {

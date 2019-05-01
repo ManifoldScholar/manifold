@@ -41,7 +41,7 @@ export default class ResourceCollectionDetail extends PureComponent {
 
   render() {
     const resourceCollection = this.props.resourceCollection;
-    const attr = resourceCollection.attributes;
+    const { attributes: attr } = resourceCollection;
     const collectionUrl =
       this.props.resourceCollectionUrl ||
       this.buildRedirectUrl(resourceCollection);

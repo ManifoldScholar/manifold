@@ -10,8 +10,8 @@ export default function webServer(
   options = { socket: null, port: null }
 ) {
   const pretty = new PrettyError();
-  const socket = options.socket;
-  const port = options.port;
+  const { socket } = options;
+  const { port } = options;
   const servers = [];
 
   // Helpers

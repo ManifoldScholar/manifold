@@ -51,7 +51,7 @@ export default class DraggableEventHelper {
 
   get blocks() {
     let blocks = this.clonedBlocks;
-    const block = this.block;
+    const { block } = this;
     if (this.isMove) {
       blocks = blocks.filter(b => b.id !== block.id);
     }
@@ -146,7 +146,7 @@ export default class DraggableEventHelper {
   }
 
   get position() {
-    const index = this.destinationIndex;
+    const { destinationIndex: index } = this;
     const offset = 1; // position starts from 1, index from 0
     if (this.isTop) return index + offset;
     // Blocks in the bottom list have to add the top count.

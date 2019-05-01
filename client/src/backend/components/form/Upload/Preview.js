@@ -25,7 +25,7 @@ export default class FormUploadPreview extends PureComponent {
     )
       return true;
     if (this.currentPreviewIsPath) {
-      const ext = this.currentPreviewExtension;
+      const { currentPreviewExtension: ext } = this;
       return (
         startsWith(ext, ".png") ||
         startsWith(ext, ".gif") ||
@@ -57,7 +57,7 @@ export default class FormUploadPreview extends PureComponent {
   }
 
   get currentPreviewIsFileObject() {
-    const file = this.currentPreview;
+    const { currentPreview: file } = this;
     // JS File Object
     if (!isObject(file)) return false;
     if (file.hasOwnProperty("data")) return true;

@@ -40,7 +40,7 @@ export class ProjectContentTypeForm extends PureComponent {
   }
 
   render() {
-    const TypeForm = this.typeComponent;
+    const { typeComponent: TypeForm } = this;
 
     return <TypeForm {...this.props} />;
   }

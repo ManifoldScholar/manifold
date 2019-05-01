@@ -18,7 +18,7 @@ export default class ServerCookie {
   }
 
   read(key) {
-    const parsed = this.parsed;
+    const { parsed } = this;
     return parsed[key];
   }
 

@@ -11,7 +11,7 @@ export default class FatalErrorApiTrace extends PureComponent {
   }
 
   render() {
-    const trace = this.trace;
+    const { trace } = this;
     return (
       <div className="stacks">
         {Object.keys(trace).map(stackName => {

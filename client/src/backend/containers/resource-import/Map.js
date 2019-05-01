@@ -32,7 +32,7 @@ export class ResourceImportMap extends PureComponent {
 
   onSuccess = model => {
     const { projectId } = this.props.match.params;
-    const importId = model.id;
+    const { id: importId } = model;
     const url = lh.link("backendResourceImportResults", projectId, importId);
     this.props.history.push(url);
   };

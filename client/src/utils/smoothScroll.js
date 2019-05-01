@@ -24,7 +24,7 @@ export default function smoothScroll(
   if (!el) return null;
   const adjustedDuration = duration || 500;
   const adjustedContext = context || window;
-  const start = window.pageYOffset;
+  const { pageYOffset: start } = window;
 
   let end;
   if (typeof el === "number") {

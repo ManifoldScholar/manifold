@@ -47,7 +47,7 @@ export default class IconPicker extends Component {
   };
 
   renderIcon(icon) {
-    const selected = this.selected;
+    const { selected } = this;
     const iconClasses = classNames({
       selected: selected === icon
     });

@@ -51,7 +51,7 @@ export default class ListEntitiesListEntities extends PureComponent {
   }
 
   render() {
-    const EntityComponent = this.entityComponent;
+    const { entityComponent: EntityComponent } = this;
 
     if (this.isEmpty) return <Empty message={this.emptyMessage} />;
 

@@ -29,8 +29,8 @@ class LinkNode extends Component {
 
   adjustedAttributes() {
     const parsedURI = URI.parse(this.props.attributes.href);
-    const pathname = parsedURI.path;
-    const query = parsedURI.query;
+    const { path: pathname } = parsedURI;
+    const { query } = parsedURI;
     const adjustedAttributes = { to: { pathname, query } };
     if (parsedURI.fragment) {
       adjustedAttributes.to.hash = `#${parsedURI.fragment}`;

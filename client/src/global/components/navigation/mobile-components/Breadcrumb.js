@@ -44,8 +44,8 @@ export default class MobileBreadcrumb extends PureComponent {
 
   render() {
     let count = 0;
-    const segments = this.segments;
-    const size = segments.length;
+    const { segments } = this;
+    const { length: size } = segments;
 
     return (
       <div className="selected">

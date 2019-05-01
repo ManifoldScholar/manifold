@@ -72,7 +72,7 @@ export class SettingsSubjectsEditContainer extends PureComponent {
   render() {
     const subject = this.props.subject;
     if (!subject) return null;
-    const attr = subject.attributes;
+    const { attributes: attr } = subject;
     return (
       <div>
         <Navigation.DrawerHeader

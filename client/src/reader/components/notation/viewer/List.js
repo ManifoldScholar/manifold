@@ -93,7 +93,7 @@ class NotationViewerList extends PureComponent {
   }
 
   setPreviewEntry(props) {
-    const aId = props.activeAnnotation;
+    const { activeAnnotation: aId } = props;
     if (!aId) return this.clearPreviewAnnotation();
     const annotation = props.annotations.find(a => a.id === aId);
     const notation = this.notationForAnnotation(props, annotation);
@@ -156,7 +156,7 @@ class NotationViewerList extends PureComponent {
   };
 
   updateScrollY = throttle(eventIgnored => {
-    const scrollY = window.pageYOffset;
+    const { pageYOffset: scrollY } = window;
     if (!this.listIsVisible()) this.autoSetActive(this.props);
     this.setState({ scrollY });
   }, 250);

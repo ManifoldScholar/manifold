@@ -58,7 +58,7 @@ export default class Builder extends PureComponent {
   };
 
   render() {
-    const DrawerContents = this.drawerComponent;
+    const { drawerComponent: DrawerContents } = this;
 
     return (
       <React.Fragment>

@@ -35,7 +35,7 @@ function normalizeCollection(payload) {
 }
 
 function normalizeEntity(payload) {
-  const entity = payload.data;
+  const { data: entity } = payload;
   const entities = {
     [entity.type]: {}
   };
@@ -132,7 +132,7 @@ function buildMeta(object, baseMeta = {}) {
 }
 
 function errorResponse(state, action) {
-  const meta = action.meta;
+  const { meta } = action;
   const responses = Object.assign({}, state.responses, {
     [meta]: {
       status: action.payload.status,
@@ -167,7 +167,7 @@ function touchResponses(responses, entities) {
 
 function successResponse(state, action) {
   const payload = normalizePayload(action.payload);
-  const meta = action.meta;
+  const { meta } = action;
   const isNull = !payload;
   const shouldTouchResponses = !isNull && !action.payload.noTouch;
   const overwritePartials = !isNull && action.payload.force;
@@ -211,7 +211,7 @@ function handleResponse(state, action) {
 }
 
 function handleRequest(state, action) {
-  const meta = action.meta;
+  const { meta } = action;
   if (state.responses[meta]) return state;
   const responses = Object.assign({}, state.responses, {
     [meta]: {
@@ -224,7 +224,7 @@ function handleRequest(state, action) {
 }
 
 function handleFlush(state, action) {
-  const metasToFlush = action.payload;
+  const { payload: metasToFlush } = action;
   const responses = Object.assign({}, state.responses);
   metasToFlush.forEach(meta => {
     delete responses[meta];
@@ -286,7 +286,7 @@ function handleAdd(state, action) {
 }
 
 export default (state = initialState, action) => {
-  const type = action.type;
+  const { type } = action;
   let newState = state;
   if (type === "ENTITY_STORE_REMOVE") return handleRemove(newState, action);
   if (type === "ENTITY_STORE_ADD") return handleAdd(newState, action);

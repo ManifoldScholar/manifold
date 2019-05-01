@@ -146,7 +146,7 @@ class PredictiveInput extends PureComponent {
     options.authToken = this.props.authToken;
     const client = new ApiClient();
     client.call(endpoint, method, options).then(results => {
-      const items = results.data;
+      const { data: items } = results;
       const open = results.data.length > 0;
       // Check to see if key-selected option is still available
       const selected = this.getHighlightedOption(items, this.state.highlighted);

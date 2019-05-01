@@ -6,7 +6,7 @@ export const initialState = {
 };
 
 const setActiveAnnotation = (state, action) => {
-  const payload = action.payload;
+  const { payload } = action;
   let newState;
   if (!payload) {
     newState = { activeAnnotation: null, activeAnnotationPassive: false };

@@ -70,7 +70,7 @@ export class ReaderNotesContainer extends Component {
   }
 
   getSectionName(text, sectionId) {
-    const attrs = text.attributes;
+    const { attributes: attrs } = text;
     const section = attrs.sectionsMap.find(s => s.id === sectionId);
     if (!section) return null;
     return section.name;
@@ -97,7 +97,7 @@ export class ReaderNotesContainer extends Component {
 
   handleVisitAnnotation = annotation => {
     const { match, history } = this.props;
-    const attr = annotation.attributes;
+    const { attributes: attr } = annotation;
     const url = lh.link(
       "readerSection",
       match.params.textId,

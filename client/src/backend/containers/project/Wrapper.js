@@ -105,7 +105,7 @@ export class ProjectWrapperContainer extends PureComponent {
 
   renderRoutes() {
     const { project, projectResponse } = this.props;
-    const refresh = this.fetchProject;
+    const { fetchProject: refresh } = this;
     return childRoutes(this.props.route, {
       childProps: { refresh, project, projectResponse }
     });

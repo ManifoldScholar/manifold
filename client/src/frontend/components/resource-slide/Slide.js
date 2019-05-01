@@ -20,7 +20,7 @@ export default class ResourceListSlideFigure extends Component {
 
   render() {
     const resource = this.props.resource;
-    const attr = resource.attributes;
+    const { attributes: attr } = resource;
     const poster = get(attr, "variantPosterStyles.mediumLandscape");
     let bgImage;
     if (poster) {

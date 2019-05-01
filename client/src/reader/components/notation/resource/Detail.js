@@ -37,7 +37,7 @@ export default class ResourceDetail extends PureComponent {
 
   render() {
     const resource = this.props.resource;
-    const attr = resource.attributes;
+    const { attributes: attr } = resource;
     const resourceUrl = this.buildRedirectUrl(resource);
 
     return (

@@ -39,7 +39,7 @@ class ResourceCard extends Component {
   }
 
   getPreviewText(attr) {
-    const type = attr.kind;
+    const { kind: type } = attr;
     const text = attr.downloadable ? (
       this.renderDownloadablePreview(type)
     ) : (
@@ -156,7 +156,7 @@ class ResourceCard extends Component {
   render() {
     const resource = this.props.resource;
     if (!resource) return null;
-    const attr = resource.attributes;
+    const { attributes: attr } = resource;
 
     const infoClass = classNames({
       "resource-info": true,

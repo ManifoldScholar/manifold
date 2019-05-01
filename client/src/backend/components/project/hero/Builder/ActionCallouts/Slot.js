@@ -40,7 +40,7 @@ class Slot extends PureComponent {
   }
 
   openNewDrawer = () => {
-    const attributes = this.attributes;
+    const { attributes } = this;
     const actionCallout = { attributes };
     return this.props.history.push(
       lh.link("backendProjectActionCalloutNew", this.project.id),

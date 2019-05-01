@@ -31,7 +31,7 @@ export default class Event extends PureComponent {
 
   eventProps() {
     const attributes = this.props.event.attributes;
-    const type = attributes.eventType;
+    const { eventType: type } = attributes;
 
     switch (type) {
       case "annotation_created":

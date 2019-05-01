@@ -52,8 +52,8 @@ export default class CategoryListCategory extends PureComponent {
   }
 
   render() {
-    const category = this.category;
-    const project = this.project;
+    const { category } = this;
+    const { project } = this;
 
     return (
       <Draggable type="category" index={this.props.index} draggableId={this.id}>
