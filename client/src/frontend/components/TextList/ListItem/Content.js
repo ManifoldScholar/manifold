@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Bibliographic from "./Bibliographic";
 import Cover from "frontend/components/text/Cover";
+import Bibliographic from "./Bibliographic";
 
 export default class TextListListItemContent extends Component {
   static displayName = "TextList.ListItem.Content";

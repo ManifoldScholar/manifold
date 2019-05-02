@@ -1,5 +1,5 @@
-import blocks from "../Block/types";
 import contentBlockHelpers from "helpers/contentBlockHelpers";
+import blocks from "../Block/types";
 
 class Resolver {
   typeToBlockComponent(type) {

@@ -5,7 +5,6 @@ import { projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import ProjectCollection from "backend/components/project-collection";
-import New from "./New";
 import Drawer from "global/components/drawer";
 import { childRoutes } from "helpers/router";
 import size from "lodash/size";
@@ -13,6 +12,7 @@ import lh from "helpers/linkHandler";
 import classnames from "classnames";
 
 import Authorize from "hoc/authorize";
+import New from "./New";
 
 const { request, flush } = entityStoreActions;
 

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import LoadingBlock from "global/components/loading-block";
 import Layout from "frontend/components/layout";
-import Hero from "./Hero";
 import ContentBlock from "frontend/components/content-block";
+import Hero from "./Hero";
 
 class Detail extends Component {
   static displayName = "Project.Detail";

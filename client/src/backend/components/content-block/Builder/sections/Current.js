@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { Droppable } from "react-beautiful-dnd";
+import classNames from "classnames";
 import Header from "./parts/Header";
 import resolver from "../../helpers/resolver";
 import Block from "../Block";
-import { Droppable } from "react-beautiful-dnd";
-import classNames from "classnames";
 
 export default class ProjectContentSectionsCurrent extends PureComponent {
   static displayName = "Project.Content.Sections.Current";

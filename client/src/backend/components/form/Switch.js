@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import labelId from "helpers/labelId";
 import setter from "./setter";
 import Instructions from "./Instructions";
-import labelId from "helpers/labelId";
 
 class FormSwitch extends Component {
   static displayName = "Form.Switch";

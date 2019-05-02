@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import setter from "./setter";
 import parse from "date-fns/parse";
 import range from "lodash/range";
 import getMonth from "date-fns/get_month";
@@ -13,6 +12,7 @@ import GlobalForm from "global/components/form";
 import labelId from "helpers/labelId";
 import MaskedInput from "react-text-mask";
 import isNull from "lodash/isNull";
+import setter from "./setter";
 
 class FormDate extends Component {
   static displayName = "Form.Date";

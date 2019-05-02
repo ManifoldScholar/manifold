@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "backend/containers/form";
-import Upload from "./Upload";
 import cloneDeep from "lodash/cloneDeep";
 import { ingestionsAPI } from "api";
+import Upload from "./Upload";
 
 export default class IngestionFormWrapper extends PureComponent {
   static displayName = "ProjectDetail.Text.Ingestion.Form.Wrapper";

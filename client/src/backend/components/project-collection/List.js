@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import ListItem from "./ListItem";
 import EntitiesList from "backend/components/list/EntitiesList";
+import ListItem from "./ListItem";
 
 export default class ProjectCollectionList extends PureComponent {
   static displayName = "ProjectCollection.List";

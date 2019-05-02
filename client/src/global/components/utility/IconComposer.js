@@ -5,9 +5,8 @@ import UniqueIcons from "global/components/icon/unique";
 import endsWith from "lodash/endsWith";
 import classNames from "classnames";
 
-import MissingIcon from "./MissingIcon";
-
 import humps from "humps";
+import MissingIcon from "./MissingIcon";
 
 export default class IconComposer extends PureComponent {
   static displayName = "IconComposer";

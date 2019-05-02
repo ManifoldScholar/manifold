@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import TagList from "./TagList";
 import filesize from "filesize";
 import pickBy from "lodash/pickBy";
 import isNull from "lodash/isNull";
 import IconComputed from "global/components/icon-computed";
 import Meta from "global/components/meta";
+import TagList from "./TagList";
 
 export default class ResourceMeta extends Component {
   static displayName = "Resource.Meta";

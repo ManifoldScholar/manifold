@@ -1,9 +1,9 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import ChildSwitch from "./ChildSwitch";
 import DrawerSwitch from "./DrawerSwitch";
 import Passthrough from "./Passthrough";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 
 const renderChildRoutes = (route, renderOptions) => {
   const defaultOptions = {

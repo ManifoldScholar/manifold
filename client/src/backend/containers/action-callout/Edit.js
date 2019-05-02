@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { actionCalloutsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
-import Form from "./Form";
 import { entityStoreActions } from "actions";
+import Form from "./Form";
 
 const { request } = entityStoreActions;
 

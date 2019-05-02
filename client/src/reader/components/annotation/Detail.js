@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helper from "global/components/helper";
 import Utility from "frontend/components/utility";
-import Editor from "./Editor";
-import Meta from "./Meta";
 import CommentContainer from "global/containers/comment";
 import classNames from "classnames";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 
 import Authorize from "hoc/authorize";
+import Meta from "./Meta";
+import Editor from "./Editor";
 
 const { request } = entityStoreActions;
 

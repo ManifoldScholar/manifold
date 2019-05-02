@@ -3,10 +3,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Authorize from "hoc/authorize";
 import Link from "./Link";
 import Notation from "./Notation";
-
-import Authorize from "hoc/authorize";
 
 // This class represents a single notation in the margin. It's used to show the active
 // notation when notations are grouped, and it's used to show a single notation in the

@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import classNames from "classnames";
-import Body from "./Body";
 import Annotation from "reader/containers/annotation";
 import locationHelper from "helpers/location";
 
 import HtmlClass from "hoc/html-class";
+import Body from "./Body";
 
 export default class Text extends Component {
   static filterAnnotations(visibilityFilters, annotations) {

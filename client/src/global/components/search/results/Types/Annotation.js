@@ -2,10 +2,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import withSearchResultHelper from "./searchResultHelper";
 import Utility from "global/components/utility";
-import Generic from "./Generic";
 import FormattedDate from "global/components/FormattedDate";
+import withSearchResultHelper from "./searchResultHelper";
+import Generic from "./Generic";
 
 class SearchResultsTypeAnnotation extends PureComponent {
   static displayName = "Search.Results.Type.Annotation";

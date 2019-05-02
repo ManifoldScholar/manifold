@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isArray from "lodash/isArray";
-import BaseInput from "./BaseInput";
 import labelId from "helpers/labelId";
+import BaseInput from "./BaseInput";
 
 export default class FormTextInput extends Component {
   static displayName = "Form.TextInput";

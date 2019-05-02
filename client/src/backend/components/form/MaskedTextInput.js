@@ -4,9 +4,9 @@ import labelId from "helpers/labelId";
 import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
 import fill from "lodash/fill";
-import setter from "./setter";
 import classnames from "classnames";
 import isString from "lodash/isString";
+import setter from "./setter";
 import Instructions from "./Instructions";
 
 class FormMaskedTextInput extends Component {

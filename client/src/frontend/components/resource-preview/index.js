@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Preview from "./Types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import GlobalOverlay from "global/components/Overlay";
 import has from "lodash/has";
 import capitalize from "lodash/capitalize";
+import Preview from "./Types";
 
 export default class ResourcePreview extends Component {
   static canPreview = resource => {

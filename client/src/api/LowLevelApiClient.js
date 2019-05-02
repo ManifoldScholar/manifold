@@ -1,6 +1,6 @@
-import config from "../config";
 import qs from "qs";
 import humps from "humps";
+import config from "../config";
 
 export default class LowLevelApiClient {
   constructor() {

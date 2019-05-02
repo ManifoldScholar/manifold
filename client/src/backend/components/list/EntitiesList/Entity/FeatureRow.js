@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import lh from "helpers/linkHandler";
 import truncate from "lodash/truncate";
-import EntityRow from "./Row";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import Utility from "global/components/utility";
+import EntityRow from "./Row";
 
 export default class EventRow extends PureComponent {
   static displayName = "EntitiesList.Entity.FeatureRow";

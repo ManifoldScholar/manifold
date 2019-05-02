@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import selectionHelpers from "./selectionHelpers";
 import isString from "lodash/isString";
+import selectionHelpers from "./selectionHelpers";
 
 export default class AnnotatableCaptureClick extends Component {
   static propTypes = {

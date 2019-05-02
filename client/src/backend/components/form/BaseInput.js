@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
 import GlobalForm from "global/components/form";
 import classnames from "classnames";
 import isString from "lodash/isString";
+import setter from "./setter";
 import Instructions from "./Instructions";
 
 class FormBaseInput extends Component {

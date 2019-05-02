@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { Droppable } from "react-beautiful-dnd";
 import Header from "./parts/Header";
 import Block from "../Block";
-import { Droppable } from "react-beautiful-dnd";
 import resolver from "../../helpers/resolver";
 
 export default class ProjectContentSectionsAvailable extends PureComponent {

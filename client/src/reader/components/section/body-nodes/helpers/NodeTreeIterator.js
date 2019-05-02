@@ -1,7 +1,7 @@
 import React from "react";
-import Nodes from "../nodes";
 import has from "lodash/has";
 import upperFirst from "lodash/upperFirst";
+import Nodes from "../nodes";
 
 export default class NodeTreeIterator {
   constructor(bodyProps) {

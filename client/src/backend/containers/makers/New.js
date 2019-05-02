@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Form from "./Form";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
+import Form from "./Form";
 
 export class MakersNewContainer extends PureComponent {
   static displayName = "Makers.New";

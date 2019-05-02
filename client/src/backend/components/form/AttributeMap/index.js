@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import omitBy from "lodash/omitBy";
+import difference from "lodash/difference";
 import Mapping from "./Mapping";
 import Instructions from "../Instructions";
 import Attribute from "./Attribute";
 import setter from "../setter";
-import omitBy from "lodash/omitBy";
-import difference from "lodash/difference";
 
 const sortAttributes = props => {
   const attributes = Object.values(props.getModelValue(props.attributes));

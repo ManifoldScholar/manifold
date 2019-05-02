@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
-import OptionsList from "./OptionsList";
 import GlobalForm from "global/components/form";
 import get from "lodash/get";
+import setter from "./setter";
+import OptionsList from "./OptionsList";
 
 class FormBelongsTo extends PureComponent {
   static displayName = "Form.BelongsTo";

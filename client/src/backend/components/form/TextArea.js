@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
-import setter from "./setter";
 import GlobalForm from "global/components/form";
 import isString from "lodash/isString";
 import classnames from "classnames";
+import setter from "./setter";
 import Instructions from "./Instructions";
 
 class FormTextArea extends Component {

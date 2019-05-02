@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Drawer from "global/containers/drawer";
-import Drawers from "./Drawers";
 import upperFirst from "lodash/upperFirst";
 import isFunction from "lodash/isFunction";
+import Drawers from "./Drawers";
 
 export default class AnnotatableDrawer extends PureComponent {
   static propTypes = {

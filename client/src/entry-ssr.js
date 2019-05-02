@@ -1,17 +1,9 @@
 /* eslint-disable no-console */
 import config from "config";
-import ch from "./helpers/consoleHelpers";
 import React from "react";
 import ReactDOM from "react-dom/server";
-import Html from "./helpers/Html";
 import App from "global/containers/App";
-import createStore from "./store/createStore";
-import webServer from "./servers/common/server";
-import webApp from "./servers/common/app";
-import readStats from "./servers/common/read-stats";
 import CookieHelper from "helpers/cookie/Server";
-import exceptionRenderer from "./helpers/exceptionRenderer";
-import manifoldBootstrap from "./bootstrap";
 import { isPromise } from "utils/promise";
 import isFunction from "lodash/isFunction";
 import has from "lodash/has";
@@ -19,6 +11,14 @@ import { matchRoutes } from "react-router-config";
 import { createLocation } from "history";
 import getRoutes from "/routes";
 import FatalError from "global/components/FatalError";
+import manifoldBootstrap from "./bootstrap";
+import exceptionRenderer from "./helpers/exceptionRenderer";
+import readStats from "./servers/common/read-stats";
+import webApp from "./servers/common/app";
+import webServer from "./servers/common/server";
+import createStore from "./store/createStore";
+import Html from "./helpers/Html";
+import ch from "./helpers/consoleHelpers";
 
 // Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
 // default TLS value appears to fix this. I believe this issue has

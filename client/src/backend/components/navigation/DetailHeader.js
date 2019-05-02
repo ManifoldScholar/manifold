@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
+import Dropdown from "./Dropdown";
 
 export default class DetailHeader extends PureComponent {
   static displayName = "Navigation.DetailHeader";

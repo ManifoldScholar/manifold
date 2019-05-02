@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Identity from "../parts/Identity";
 import Utility from "global/components/utility";
+import Identity from "../parts/Identity";
 
 export default class ProjectContentBlockInListAvailable extends PureComponent {
   static displayName = "Project.Content.Block.InList.Available";

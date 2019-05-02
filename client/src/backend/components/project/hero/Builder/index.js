@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import Drawer from "global/containers/drawer";
 import Block from "./Block";
 import Forms from "./forms";
-import Drawer from "global/containers/drawer";
 import ActionCallouts from "./ActionCallouts";
 
 export default class Builder extends PureComponent {

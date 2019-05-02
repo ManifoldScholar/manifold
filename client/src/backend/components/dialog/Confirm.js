@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Wrapper from "./Wrapper";
 import isString from "lodash/isString";
+import Wrapper from "./Wrapper";
 
 export default class DialogConfirm extends PureComponent {
   static displayName = "Dialog.Confirm";

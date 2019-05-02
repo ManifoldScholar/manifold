@@ -1,7 +1,7 @@
-import blocks from "../Builder/Block/types";
-import forms from "../TypeForm/types";
 import contentBlockHelpers from "helpers/contentBlockHelpers";
 import transform from "lodash/transform";
+import blocks from "../Builder/Block/types";
+import forms from "../TypeForm/types";
 
 class Resolver {
   blockComponentsByType() {

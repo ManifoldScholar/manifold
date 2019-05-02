@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
 import GlobalForm from "global/components/form";
-import Instructions from "./Instructions";
 import withFormOptions from "hoc/with-form-options";
+import Instructions from "./Instructions";
 
 class FormSelect extends Component {
   static displayName = "Form.Select";

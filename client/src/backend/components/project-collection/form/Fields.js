@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Form from "backend/components/form";
 import PropTypes from "prop-types";
+import Navigation from "backend/components/navigation";
 import KindPicker from "./KindPicker";
 import IconPicker from "./IconPicker";
 import SmartAttributes from "./SmartAttributes";
-import Navigation from "backend/components/navigation";
 
 class Fields extends Component {
   static displayName = "ProjectCollection.Form.Fields";

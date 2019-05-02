@@ -1,4 +1,6 @@
 import { createStore as _createStore, applyMiddleware, compose } from "redux";
+import promiseMiddleware from "redux-promise";
+import pluginInitializer from "services/plugin/initializer";
 import thunkMiddleware from "./middleware/thunkMiddleware";
 import oauthMiddleware from "./middleware/oauthMiddleware";
 import entityStoreMiddleware from "./middleware/entityStoreMiddleware";
@@ -9,9 +11,7 @@ import websocketMiddleware from "./middleware/websocketMiddleware";
 import pluginMiddleware from "./middleware/pluginMiddleware";
 import onPersistentUIChange from "./subscriptions/onPersistentUIChange";
 import onUserIsCurrentUserUpdate from "./subscriptions/onUserIsCurrentUserUpdate";
-import promiseMiddleware from "redux-promise";
 import reducers from "./reducers";
-import pluginInitializer from "services/plugin/initializer";
 
 export default function createStore(data) {
   const middleware = [];

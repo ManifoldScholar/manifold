@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Date from "./Date";
 import { Link } from "react-router-dom";
+import Date from "./Date";
 
 export default class TextListListItemBibliographic extends Component {
   static displayName = "TextList.ListItem.Bibliographic";

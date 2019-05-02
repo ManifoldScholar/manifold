@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Query from "../query";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import Query from "../query";
 
 export class SearchMenuBody extends PureComponent {
   static propTypes = {

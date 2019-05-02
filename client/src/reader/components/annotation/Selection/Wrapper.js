@@ -1,9 +1,9 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
-import Truncated from "./Truncated";
 import nl2br from "nl2br";
 
 import Authorize from "hoc/authorize";
+import Truncated from "./Truncated";
 
 export default class AnnotationSelectionWrapper extends PureComponent {
   static displayName = "Annotation.Selection.Wrapper";

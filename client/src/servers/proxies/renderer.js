@@ -1,10 +1,10 @@
 import config from "config";
 import proxy from "http-proxy-middleware";
+import manifoldBootstrap from "bootstrap";
+import CookieHelper from "helpers/cookie/Server";
 import ch from "../../helpers/consoleHelpers";
 import createStore from "../../store/createStore";
 import exceptionRenderer from "../../helpers/exceptionRenderer";
-import manifoldBootstrap from "bootstrap";
-import CookieHelper from "helpers/cookie/Server";
 
 const ssrRenderUrl = `http://${config.services.client.domain}:${
   config.services.client.sparePort

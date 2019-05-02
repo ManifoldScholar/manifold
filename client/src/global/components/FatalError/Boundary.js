@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import FatalError from "./index";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import locationHelper from "helpers/location";
+import FatalError from "./index";
 
 class FatalErrorBoundary extends Component {
   static propTypes = {

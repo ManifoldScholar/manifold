@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import withConfirmation from "hoc/with-confirmation";
 import Form from "backend/components/form";
 import GlobalForm from "global/components/form";
-import ColorPicker from "./ColorPicker";
 import UniqueIcons from "global/components/icon/unique";
 import classNames from "classnames";
+import ColorPicker from "./ColorPicker";
 
 class AvatarBuilder extends Component {
   static displayName = "Project.Form.AvatarBuilder";

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
 import GlobalForm from "global/components/form";
 import ConnectedFormInputs from "backend/containers/form-inputs/connected-inputs";
-import List from "./HasMany/List";
 import classnames from "classnames";
 import isString from "lodash/isString";
 import uniqueId from "lodash/uniqueId";
-import Instructions from "./Instructions";
 import { tagsAPI } from "api";
+import Instructions from "./Instructions";
+import List from "./HasMany/List";
+import setter from "./setter";
 
 class FormTagList extends Component {
   static displayName = "Form.TagList";

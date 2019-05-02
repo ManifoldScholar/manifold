@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import mapKeys from "lodash/mapKeys";
 import humps from "humps";
 import startsWith from "lodash/startsWith";
-import smoothScroll from "../../../../../utils/smoothScroll";
 import attrConvert from "react-attr-converter";
+import smoothScroll from "../../../../../utils/smoothScroll";
 
 export default RenderComponent => {
   class ValidatedNode extends Component {

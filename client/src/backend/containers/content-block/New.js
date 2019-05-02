@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import Form from "./Form";
 import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import ContentBlock from "backend/components/content-block";
+import Form from "./Form";
 
 export class ContentBlockNewContainer extends Component {
   static displayName = "ContentBlock.New";

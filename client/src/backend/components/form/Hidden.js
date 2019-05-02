@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
 import isNull from "lodash/isNull";
+import setter from "./setter";
 
 class FormHiddenInput extends Component {
   static displayName = "Form.HiddenInput";

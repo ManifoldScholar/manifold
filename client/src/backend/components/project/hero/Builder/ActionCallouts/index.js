@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Slot from "./Slot";
 import { DragDropContext } from "react-beautiful-dnd";
 import { actionCalloutsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
+import Slot from "./Slot";
 
 const { request } = entityStoreActions;
 

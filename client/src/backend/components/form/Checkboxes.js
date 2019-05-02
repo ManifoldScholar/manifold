@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
 import classNames from "classnames";
+import setter from "./setter";
 
 class FormCheckboxes extends Component {
   static displayName = "Form.Checkboxes";

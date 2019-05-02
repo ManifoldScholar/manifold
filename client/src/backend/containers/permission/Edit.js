@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Form from "./Form";
 import { permissionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";
 import { select } from "utils/entityUtils";
 import Navigation from "backend/components/navigation";
 import withConfirmation from "hoc/with-confirmation";
+import Form from "./Form";
 
 const { request, flush } = entityStoreActions;
 

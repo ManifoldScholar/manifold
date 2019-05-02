@@ -1,7 +1,7 @@
 import connect from "connect";
 import morgan from "morgan";
-import ProxyHelper from "./ProxyHelper";
 import config from "config";
+import ProxyHelper from "./ProxyHelper";
 
 export default function webApp(
   name,

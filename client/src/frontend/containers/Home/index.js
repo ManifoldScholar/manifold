@@ -7,11 +7,10 @@ import get from "lodash/get";
 import { select } from "utils/entityUtils";
 import { requests } from "api";
 
+import withSettings from "hoc/with-settings";
 import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
-
-import withSettings from "hoc/with-settings";
 
 export class HomeContainer extends Component {
   static showProjects(getState) {

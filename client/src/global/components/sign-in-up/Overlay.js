@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
 import Utility from "global/components/utility";
+import BodyClass from "hoc/body-class";
 import PasswordForgot from "./PasswordForgot";
 import Login from "./Login";
 import CreateUpdate from "./CreateUpdate";
 import Update from "./Update";
 import Create from "./Create";
-
-import BodyClass from "hoc/body-class";
 
 export default class Overlay extends Component {
   static propTypes = {

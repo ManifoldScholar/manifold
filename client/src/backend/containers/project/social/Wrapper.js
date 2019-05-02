@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import TwitterQueries from "./TwitterQueries";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 
 import Authorize from "hoc/authorize";
+import TwitterQueries from "./TwitterQueries";
 
 export default class ProjectSocialWrapperContainer extends Component {
   static displayName = "Project.Social.Wrapper";

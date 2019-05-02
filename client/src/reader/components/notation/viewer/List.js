@@ -1,9 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Fader from "./Fader";
-import Group from "./Group";
-import Single from "./Single";
-import Preview from "./Preview";
 
 import { connect } from "react-redux";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
@@ -14,6 +10,10 @@ import config from "config";
 import throttle from "lodash/throttle";
 import { scrollOptions } from "utils/domUtils";
 import withConfirmation from "hoc/with-confirmation";
+import Preview from "./Preview";
+import Single from "./Single";
+import Group from "./Group";
+import Fader from "./Fader";
 
 const { request } = entityStoreActions;
 

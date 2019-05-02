@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import GroupItem from "./GroupItem";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import debounce from "lodash/debounce";
 import { Collapse } from "react-collapse";
+import GroupItem from "./GroupItem";
 
 export default class Group extends Component {
   static displayName = "Notes.Partial.Group";

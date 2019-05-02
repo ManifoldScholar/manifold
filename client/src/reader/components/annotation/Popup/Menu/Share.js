@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { TwitterButton, FacebookButton } from "react-sociable";
-import Button from "../Button";
-import Panel from "../Panel";
 import lh from "helpers/linkHandler";
 import trim from "lodash/trim";
 
 import withSettings from "hoc/with-settings";
+import Panel from "../Panel";
+import Button from "../Button";
 
 class AnnotationPopupSecondaryShare extends PureComponent {
   static displayName = "Annotation.Popup.Secondary.Share";

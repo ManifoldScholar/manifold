@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import indexOf from "lodash/indexOf";
-import ListItem from "./ListItem";
 import isString from "lodash/isString";
 import classnames from "classnames";
+import ListItem from "./ListItem";
 
 export default class FormHasManyList extends PureComponent {
   static displayName = "Form.HasMany.List";

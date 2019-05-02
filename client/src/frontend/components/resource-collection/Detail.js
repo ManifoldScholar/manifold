@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Title from "./Title";
 import ResourceList from "frontend/components/resource-list";
 import Utility from "frontend/components/utility";
+import Title from "./Title";
 
 export default class ResourceCollectionDetail extends PureComponent {
   static displayName = "ResourceCollection.Detail";

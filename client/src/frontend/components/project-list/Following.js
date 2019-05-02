@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Layout from "frontend/components/layout";
-import Filters from "./Filters";
-import Grid from "./Grid";
 import size from "lodash/size";
 import union from "lodash/union";
 import Utility from "global/components/utility";
+import Grid from "./Grid";
+import Filters from "./Filters";
 
 export default class ProjectListFollowing extends Component {
   static displayName = "ProjectList.Following";

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GlobalForm from "global/components/form";
-import Option from "./Radio/Option";
-import RadioLabel from "./Radio/Label";
 import classnames from "classnames";
 import labelId from "helpers/labelId";
 import isString from "lodash/isString";
-import Instructions from "./Instructions";
 import withFormOptions from "hoc/with-form-options";
+import Instructions from "./Instructions";
+import RadioLabel from "./Radio/Label";
+import Option from "./Radio/Option";
 
 class FormRadios extends Component {
   static displayName = "Form.Radios";

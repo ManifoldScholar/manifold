@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import isArray from "lodash/isArray";
 import isString from "lodash/isString";
-import LabelSet from "./LabelSet";
 import { Link } from "react-router-dom";
 import labelId from "helpers/labelId";
+import LabelSet from "./LabelSet";
 
 export default class EntitiesListRow extends PureComponent {
   static displayName = "List.EntitiesList.Entity.Row";

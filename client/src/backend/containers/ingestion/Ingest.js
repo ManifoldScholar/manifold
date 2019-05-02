@@ -5,14 +5,14 @@ import { ingestionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, isLoaded } from "utils/entityUtils";
 import Utility from "global/components/utility";
-import Heading from "./Heading";
-import Actions from "./Actions";
 import get from "lodash/get";
 import throttle from "lodash/throttle";
 import { websocketActions, notificationActions } from "actions";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import config from "config";
+import Actions from "./Actions";
+import Heading from "./Heading";
 
 const { request, flush } = entityStoreActions;
 

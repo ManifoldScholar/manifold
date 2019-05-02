@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import BodyClass from "hoc/body-class";
+import config from "config";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
-import config from "config";
 
 export default class FatalError extends PureComponent {
   static propTypes = {

@@ -6,9 +6,9 @@ import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { makersAPI, requests } from "api";
 import get from "lodash/get";
-import Form from "./Form";
 import lh from "helpers/linkHandler";
 import Navigation from "backend/components/navigation";
+import Form from "./Form";
 
 const { request, flush } = entityStoreActions;
 

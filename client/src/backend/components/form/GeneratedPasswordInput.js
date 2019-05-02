@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
-import setter from "./setter";
 import classnames from "classnames";
 import GlobalForm from "global/components/form";
 import generatePassword from "helpers/passwordGenerator";
+import setter from "./setter";
 
 class FormGeneratedPasswordInput extends Component {
   static displayName = "Form.GeneratedPasswordInput";

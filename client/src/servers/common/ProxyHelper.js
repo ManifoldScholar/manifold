@@ -1,9 +1,9 @@
-import ch from "../../helpers/consoleHelpers";
 import proxy from "http-proxy-middleware";
 import config from "config";
 import isRegExp from "lodash/isRegExp";
 import serveStatic from "serve-static";
 import path from "path";
+import ch from "../../helpers/consoleHelpers";
 
 class ProxyHelper {
   constructor(name) {

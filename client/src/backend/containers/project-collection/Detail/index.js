@@ -7,12 +7,12 @@ import { entityStoreActions } from "actions";
 import { meta } from "utils/entityUtils";
 import { projectCollectionsAPI, requests } from "api";
 import { childRoutes } from "helpers/router";
-import Manual from "./Manual";
-import Smart from "./Smart";
 import lh from "helpers/linkHandler";
 import get from "lodash/get";
 
 import Authorize from "hoc/authorize";
+import Smart from "./Smart";
+import Manual from "./Manual";
 
 const { request, flush } = entityStoreActions;
 const perPage = 12;

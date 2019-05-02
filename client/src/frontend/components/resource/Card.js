@@ -5,9 +5,8 @@ import classNames from "classnames";
 import FormattedDate from "global/components/FormattedDate";
 import Resourceish from "frontend/components/resourceish";
 import Preview from "frontend/components/resource-preview";
-import TagList from "./TagList";
-
 import lh from "helpers/linkHandler";
+import TagList from "./TagList";
 
 class ResourceCard extends Component {
   static displayName = "Card";

@@ -1,5 +1,4 @@
 import uuid from "uuid";
-import entities from "./entity";
 import pluralize from "pluralize";
 import faker from "faker";
 import times from "lodash/times";
@@ -7,6 +6,7 @@ import sample from "lodash/sample";
 import sampleSize from "lodash/sampleSize";
 import isPlainObject from "lodash/isPlainObject";
 import random from "lodash/random";
+import entities from "./entity";
 
 const defaultCount = 5;
 

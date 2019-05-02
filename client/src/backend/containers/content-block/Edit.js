@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { contentBlocksAPI, requests } from "api";
 import { select } from "utils/entityUtils";
-import Form from "./Form";
 import { entityStoreActions } from "actions";
 import ContentBlock from "backend/components/content-block";
 import lh from "helpers/linkHandler";
 import withConfirmation from "hoc/with-confirmation";
+import Form from "./Form";
 
 const { request, flush } = entityStoreActions;
 

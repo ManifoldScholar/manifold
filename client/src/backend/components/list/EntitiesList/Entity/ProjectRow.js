@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
-import EntityRow from "./Row";
 import FormattedDate from "global/components/FormattedDate";
+import EntityRow from "./Row";
 
 export default class ProjectRow extends PureComponent {
   static displayName = "EntitiesList.Entity.ProjectRow";

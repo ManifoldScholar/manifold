@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import get from "lodash/get";
 import validatedNode from "../../higher-order/ValidatedNode";
 import H5p from "./H5p";
-import get from "lodash/get";
 
 class IframeNode extends Component {
   static propTypes = {};

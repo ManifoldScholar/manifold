@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import typeResolver from "../helpers/resolver";
 import setter from "backend/components/form/setter";
+import typeResolver from "../helpers/resolver";
 
 export class ProjectContentTypeForm extends PureComponent {
   static displayName = "Project.Content.TypeForm";

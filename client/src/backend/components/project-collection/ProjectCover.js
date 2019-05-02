@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Project from "global/components/project";
-import AddButton from "./AddButton";
 import classNames from "classnames";
+import AddButton from "./AddButton";
 
 export default class ProjectCollectionProjectCover extends PureComponent {
   static displayName = "ProjectCollection.ProjectCover";

@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import Button from "../Button";
 import Panel from "../Panel";
-import classNames from "classnames";
 
 export default class AnnotationPopupAnnotate extends PureComponent {
   static displayName = "Annotation.Popup.Annotate";

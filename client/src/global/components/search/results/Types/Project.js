@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Generic from "./Generic";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import EntityThumbnail from "global/components/entity-thumbnail";
+import Generic from "./Generic";
 import withSearchResultHelper from "./searchResultHelper";
 
 class SearchResultsTypeProject extends PureComponent {

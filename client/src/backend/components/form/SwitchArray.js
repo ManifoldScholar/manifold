@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Switch from "./Switch";
 import GlobalForm from "global/components/form";
+import Switch from "./Switch";
 import FieldGroup from "./FieldGroup";
 import setter from "./setter";
 

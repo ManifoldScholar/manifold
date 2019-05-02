@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
+import EntityThumbnail from "global/components/entity-thumbnail";
 import Generic from "./Generic";
 import withSearchResultHelper from "./searchResultHelper";
-import EntityThumbnail from "global/components/entity-thumbnail";
 
 class SearchResultsTypeTextSection extends PureComponent {
   static displayName = "Search.Results.Type.TextSection";

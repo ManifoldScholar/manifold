@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import withSearchResultHelper from "../searchResultHelper";
 import isArray from "lodash/isArray";
 import classNames from "classnames";
 import { Collapse } from "react-collapse";
+import withSearchResultHelper from "../searchResultHelper";
 
 class SearchResultsTypeGenericExcerpts extends PureComponent {
   static propTypes = {

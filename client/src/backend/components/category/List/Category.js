@@ -2,9 +2,9 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import Texts from "./Texts";
 import { Draggable } from "react-beautiful-dnd";
 import Utility from "global/components/utility";
+import Texts from "./Texts";
 
 export default class CategoryListCategory extends PureComponent {
   static displayName = "Category.List.Category";

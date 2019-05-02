@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import Authorization from "helpers/authorization";
 import typeResolver from "../helpers/resolver";
 import Heading from "./parts/Heading";
 import Wrapper from "./parts/Wrapper";
 import Incomplete from "./parts/Incomplete";
-import Authorization from "helpers/authorization";
 
 export default class ProjectContentBlock extends PureComponent {
   static displayName = "Project.Content.Blocks.Block";

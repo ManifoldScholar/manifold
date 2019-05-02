@@ -1,7 +1,7 @@
 import React from "react";
 import { build, storiesOf } from "helpers/storybook/exports";
-import Builder from "../Builder";
 import { setCurrentUser } from "actions/currentUser";
+import Builder from "../Builder";
 
 const project = build.entity.project();
 const admin = build.entity.user();

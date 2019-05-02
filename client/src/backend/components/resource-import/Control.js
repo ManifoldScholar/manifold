@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Controls from "./controls";
 import lh from "helpers/linkHandler";
+import Controls from "./controls";
 
 export default class ResourceImportState extends PureComponent {
   static displayName = "ResourceImport.State";

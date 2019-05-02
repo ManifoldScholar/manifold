@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
+import get from "lodash/get";
 import setter from "../setter";
 import Base from "./Base";
-import get from "lodash/get";
 
 export class FormUpload extends Component {
   static types = {

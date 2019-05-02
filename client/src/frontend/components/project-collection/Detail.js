@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Filters from "./Filters";
 import ProjectList from "frontend/components/project-list";
 import IconComputed from "global/components/icon-computed";
 import Utility from "global/components/utility";
 import get from "lodash/get";
+import Filters from "./Filters";
 
 export default class ProjectCollectionDetail extends Component {
   static displayName = "ProjectCollectionDetail";

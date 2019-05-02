@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import labelId from "helpers/labelId";
-import setter from "./setter";
-import Base from "./Upload/Base";
 import tus from "tus-js-client";
 import config from "config";
+import setter from "./setter";
+import Base from "./Upload/Base";
 
 export class FormTusUpload extends Component {
   static displayName = "Form.TusUpload";

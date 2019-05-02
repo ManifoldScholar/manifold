@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Content from "./Content";
-import Meta from "./Meta";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
 import { closest } from "utils/domUtils";
+import Meta from "./Meta";
+import Content from "./Content";
 
 class TextListListItem extends Component {
   static displayName = "TextList.ListItem";

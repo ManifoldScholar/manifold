@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import Authorize from "hoc/authorize";
 import Identity from "../parts/Identity";
 import Edit from "../parts/Edit";
 import Drag from "../parts/Drag";
 import Delete from "../parts/Delete";
 import VisibilityToggle from "../parts/VisibilityToggle";
-import Authorize from "hoc/authorize";
 
 export default class ProjectContentBlockInListCurrent extends PureComponent {
   static displayName = "Project.Content.Block.InList.Current";

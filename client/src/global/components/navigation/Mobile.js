@@ -5,13 +5,12 @@ import { matchPath } from "react-router";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import memoize from "lodash/memoize";
+import FocusTrap from "focus-trap-react";
+import Authorize from "hoc/authorize";
+import BodyClass from "hoc/body-class";
 import UserLinks from "./mobile-components/UserLinks";
 import MobileSearch from "./mobile-components/Search";
 import MobileBreadcrumb from "./mobile-components/Breadcrumb";
-import FocusTrap from "focus-trap-react";
-
-import Authorize from "hoc/authorize";
-import BodyClass from "hoc/body-class";
 
 export class NavigationMobile extends Component {
   static displayName = "Navigation.Mobile";

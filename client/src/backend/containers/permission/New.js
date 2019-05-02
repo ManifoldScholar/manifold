@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Form from "./Form";
 import Navigation from "backend/components/navigation";
+import Form from "./Form";
 
 export default class PermissionNew extends PureComponent {
   static displayName = "Permission.New";

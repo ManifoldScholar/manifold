@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Event from "./Event";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
+import Event from "./Event";
 
 export default class EventList extends Component {
   static displayName = "Event.List";

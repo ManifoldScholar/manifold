@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
 import GlobalForm from "global/components/form";
-import Header from "./DatePicker/Header";
 import labelId from "helpers/labelId";
-import MaskedInput from "./MaskedTextInput";
 import classnames from "classnames";
 import ReactDatePicker from "react-datepicker";
 import isDate from "lodash/isDate";
+import MaskedInput from "./MaskedTextInput";
+import Header from "./DatePicker/Header";
+import setter from "./setter";
 
 class DatePicker extends PureComponent {
   static propTypes = {

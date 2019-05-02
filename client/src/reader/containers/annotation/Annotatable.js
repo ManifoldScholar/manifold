@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
+import locationHelper from "helpers/location";
 import AnnotatableDebug from "./annotatable-components/Debug";
 import AnnotatableDrawer from "./annotatable-components/Drawer";
 import AnnotatablePopup from "./annotatable-components/Popup";
@@ -10,7 +11,6 @@ import CaptureSelection from "./annotatable-components/CaptureSelection";
 import CaptureClick from "./annotatable-components/CaptureClick";
 import AnnotationNotationViewer from "./annotatable-components/NotationViewer";
 import selectionHelpers from "./annotatable-components/selectionHelpers";
-import locationHelper from "helpers/location";
 
 const { request } = entityStoreActions;
 

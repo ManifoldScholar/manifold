@@ -8,12 +8,12 @@ import "theme";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "global/containers/App";
-import ch from "./helpers/consoleHelpers";
 import config from "config";
-import manifoldBootstrap from "./bootstrap";
 import has from "lodash/has";
 import createStore from "store/createStore";
 import CookieHelper from "helpers/cookie/Browser";
+import manifoldBootstrap from "./bootstrap";
+import ch from "./helpers/consoleHelpers";
 
 class EntryBrowser {
   constructor() {

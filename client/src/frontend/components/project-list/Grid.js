@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import GridItem from "./GridItem";
 import Utility from "global/components/utility";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import difference from "lodash/difference";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import GridItem from "./GridItem";
 
 export default class ProjectListGrid extends Component {
   static displayName = "ProjectList.Grid";

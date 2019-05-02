@@ -1,7 +1,7 @@
 import React from "react";
 import { build, storiesOf } from "helpers/storybook/exports";
-import Results from "../List";
 import cloneDeep from "lodash/cloneDeep";
+import Results from "../List";
 
 const project = build.arrayOf.projects(1)[0];
 const user = build.arrayOf.users(1)[0];

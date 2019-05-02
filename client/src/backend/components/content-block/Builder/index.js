@@ -1,15 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import AvailableSection from "./sections/Available";
-import CurrentSection from "./sections/Current";
-import DraggableEventHelper from "../helpers/draggableEvent";
 import { contentBlocksAPI, requests } from "api";
 import { DragDropContext } from "react-beautiful-dnd";
 import withConfirmation from "hoc/with-confirmation";
 import lh from "helpers/linkHandler";
 import { entityStoreActions } from "actions";
-import configHelper from "../helpers/configurations";
 import cloneDeep from "lodash/cloneDeep";
+import configHelper from "../helpers/configurations";
+import DraggableEventHelper from "../helpers/draggableEvent";
+import CurrentSection from "./sections/Current";
+import AvailableSection from "./sections/Available";
 
 const { request } = entityStoreActions;
 

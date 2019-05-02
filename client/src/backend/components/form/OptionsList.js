@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
 import ConnectedInputs from "backend/containers/form-inputs/connected-inputs";
+import setter from "./setter";
 
 class FormOptionsList extends PureComponent {
   static displayName = "Form.OptionsList";

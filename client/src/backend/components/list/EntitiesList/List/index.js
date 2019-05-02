@@ -1,6 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import isPlainObject from "lodash/isPlainObject";
+import isFunction from "lodash/isFunction";
+import isBoolean from "lodash/isBoolean";
+import isNil from "lodash/isNil";
+import labelId from "helpers/labelId";
 import Title from "./Title";
 import Instructions from "./Instructions";
 import Pagination from "./Pagination";
@@ -8,11 +13,6 @@ import Count from "./Count";
 import ButtonSet from "./ButtonSet";
 import Entities from "./Entities";
 import SortableEntities from "./SortableEntities";
-import isPlainObject from "lodash/isPlainObject";
-import isFunction from "lodash/isFunction";
-import isBoolean from "lodash/isBoolean";
-import isNil from "lodash/isNil";
-import labelId from "helpers/labelId";
 
 export default class ListEntities extends PureComponent {
   static displayName = "List.Entities.List";

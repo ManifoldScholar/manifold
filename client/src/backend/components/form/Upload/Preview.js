@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import ImagePreview from "./ImagePreview";
-import FilePreview from "./FilePreview";
 import head from "lodash/head";
 import split from "lodash/split";
 import has from "lodash/has";
 import isString from "lodash/isString";
 import isObject from "lodash/isObject";
 import startsWith from "lodash/startsWith";
+import FilePreview from "./FilePreview";
+import ImagePreview from "./ImagePreview";
 
 const path = require("path");
 

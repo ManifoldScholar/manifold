@@ -2,11 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
 import classNames from "classnames";
+import isFunction from "lodash/isFunction";
 import Current from "./in-list/Current";
 import Available from "./in-list/Available";
 import AvailablePlaceholder from "./in-list/AvailablePlaceholder";
 import typeResolver from "../../helpers/resolver";
-import isFunction from "lodash/isFunction";
 
 export default class ProjectContentBlock extends PureComponent {
   static displayName = "Project.Content.Blocks.Block";

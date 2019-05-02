@@ -1,8 +1,8 @@
 import fs from "fs";
-import ch from "../../helpers/consoleHelpers";
 import PrettyError from "pretty-error";
 import http from "http";
 import httpShutdown from "http-shutdown";
+import ch from "../../helpers/consoleHelpers";
 
 export default function webServer(
   app,
