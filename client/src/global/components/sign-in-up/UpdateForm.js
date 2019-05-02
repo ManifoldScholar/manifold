@@ -372,8 +372,7 @@ class UpdateFormContainer extends Component {
           ) : (
             <div>
               <h4 className="form-heading">
-                Hello,
-                {" "}
+                Hello,{" "}
                 <span className="nickname">{this.displayNickname()}</span>.
               </h4>
             </div>

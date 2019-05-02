@@ -141,7 +141,6 @@ export default class DrawerWrapper extends PureComponent {
   };
 
   handleLeaveEvent = event => {
-
     this.clearDrawerNotifications();
 
     /*

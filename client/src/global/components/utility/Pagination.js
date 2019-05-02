@@ -150,9 +150,7 @@ export default class UtilityPagination extends PureComponent {
         <span>
           Page
           {pagination.currentPage}
-          {` `}
-          /
-          {` `}
+          {` `}/{` `}
           {pagination.totalPages}
         </span>
       </li>
