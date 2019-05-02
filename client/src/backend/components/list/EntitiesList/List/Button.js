@@ -28,6 +28,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
   get icon() {
     if (this.props.icon) return this.props.icon;
     if (this.type === "add") return "circlePlus32";
+    return null;
   }
 
   get text() {

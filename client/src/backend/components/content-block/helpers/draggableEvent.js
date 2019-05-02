@@ -47,6 +47,7 @@ export default class DraggableEventHelper {
   get block() {
     if (this.isMove) return this.movedBlock;
     if (this.isInsert) return this.insertedBlock;
+    return null;
   }
 
   get blocks() {

@@ -27,12 +27,10 @@ export function closest(el, selector) {
 /* eslint-disable no-empty */
 export function detectPassiveEventOptionsSupport() {
   if (!window && window.addEventListener) return false;
-  let passiveSupported = false;
+  const passiveSupported = false;
   try {
     const options = Object.defineProperty({}, "passive", {
-      get() {
-        passiveSupported = true;
-      }
+      passiveSupported: true
     });
     window.addEventListener("test", null, options);
   } catch (err) {}

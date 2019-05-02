@@ -61,8 +61,7 @@ export default class AnnotationDetail extends PureComponent {
     } else if (annotation.attributes.authorCreated) {
       label = "Author";
     }
-
-    if (!label) return null;
+    return label;
   }
 
   renderMarkers(annotation) {
