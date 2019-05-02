@@ -21,7 +21,8 @@ export default class ResourceImportResultsPending extends PureComponent {
           .
         </span>
       );
-    } else if (resourceImportRow.isSkip) {
+    }
+    if (resourceImportRow.isSkip) {
       return (
         <span>
           {`Row #${resourceImportRow.lineNumber} will be skipped as marked.`}

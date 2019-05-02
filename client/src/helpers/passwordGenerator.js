@@ -7,7 +7,8 @@ function getRandomByte() {
     const result = new Uint8Array(1);
     window.crypto.getRandomValues(result);
     return result[0];
-  } else if (window.msCrypto && window.msCrypto.getRandomValues) {
+  }
+  if (window.msCrypto && window.msCrypto.getRandomValues) {
     const result = new Uint8Array(1);
     window.msCrypto.getRandomValues(result);
     return result[0];
