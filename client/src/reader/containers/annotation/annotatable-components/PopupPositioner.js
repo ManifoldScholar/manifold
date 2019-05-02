@@ -141,7 +141,7 @@ export default class AnnotationPopupPositioner extends PureComponent {
 
   validateLeft(left, minLeft, maxLeft) {
     let out = left;
-    if (isNaN(out)) out = minLeft;
+    if (Number.isNaN(out)) out = minLeft;
     if (out < minLeft) out = minLeft;
     if (out > maxLeft) out = maxLeft;
     return out;

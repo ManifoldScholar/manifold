@@ -64,7 +64,7 @@ export class PermissionEdit extends PureComponent {
   };
 
   removeAllPermissions = () => {
-    event.preventDefault();
+    window.event.preventDefault();
     const entity = this.props.entity;
     const permission = this.props.permission;
     const options = { removes: permission };

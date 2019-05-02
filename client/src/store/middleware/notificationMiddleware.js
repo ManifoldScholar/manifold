@@ -23,7 +23,7 @@ function handleAddNotificationAction(dispatch, action) {
     let expire = parseInt(notification.expiration, 10);
     if (expire === 0) return;
 
-    if (isNaN(expire)) expire = 5000;
+    if (Number.isNaN(expire)) expire = 5000;
     setTimeout(() => {
       dispatch(notificationActions.removeNotification(notification.id));
     }, expire);

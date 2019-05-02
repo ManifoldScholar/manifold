@@ -50,6 +50,7 @@ class ShareBar extends Component {
 
   url() {
     if (!this.state.inBrowser) return null;
+    // eslint-disable-next-line no-restricted-globals
     const url = location.hostname + this.props.url;
     return url;
   }
