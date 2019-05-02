@@ -14,37 +14,34 @@ export default class ResourceLink extends Component {
   };
 
   renderButton(attr) {
-    let button;
-    switch (attr.kind.toLowerCase()) {
-      case "link":
-        button = (
-          <a
-            href={attr.externalUrl}
-            className={this.props.buttonClass}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Visit Page{" "}
-            <i className="manicon manicon-arrow-right" aria-hidden="true" />
-          </a>
-        );
-        break;
-      default:
-        button = attr.downloadable ? (
-          <a
-            href={attr.attachmentStyles.original}
-            className={this.props.buttonClass}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Download{" "}
-            <i className="manicon manicon-arrow-down" aria-hidden="true" />
-          </a>
-        ) : null;
-        break;
+    if (attr.kind.toLowerCase() === "link") {
+      return (
+        <a
+          href={attr.externalUrl}
+          className={this.props.buttonClass}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit Page{" "}
+          <i className="manicon manicon-arrow-right" aria-hidden="true" />
+        </a>
+      );
     }
 
-    return button;
+    if (attr.downloadable) {
+      return (
+        <a
+          href={attr.attachmentStyles.original}
+          download=""
+          type="submit"
+          className={this.props.buttonClass}
+        >
+          Download{" "}
+          <i className="manicon manicon-arrow-down" aria-hidden="true" />
+        </a>
+      );
+    }
+    return null;
   }
 
   render() {

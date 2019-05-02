@@ -1,3 +1,5 @@
+/* eslint jsx-a11y/anchor-is-valid: 0 */
+// Link class will render the correct element conditionally on the type
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Resourceish from "frontend/components/resourceish";

@@ -101,9 +101,9 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
           <aside>
             <a
               className="button-primary"
+              download=""
               href="original-image.mock"
-              rel="noopener noreferrer"
-              target="_blank"
+              type="submit"
             >
               Download
                

@@ -174,9 +174,9 @@ exports[`Reader.Notation.Resource.Detail component renders correctly 1`] = `
     >
       <a
         className="button-secondary outlined"
+        download=""
         href="original-image.mock"
-        rel="noopener noreferrer"
-        target="_blank"
+        type="submit"
       >
         Download
          

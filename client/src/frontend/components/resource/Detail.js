@@ -1,3 +1,5 @@
+/* eslint jsx-a11y/anchor-is-valid: 0 */
+// Link class will render the correct element conditionally on the type
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import CommentContainer from "global/containers/comment";
@@ -50,11 +52,6 @@ export default class ResourceDetail extends Component {
             <div className="container flush-top">
               <aside>
                 <Link attributes={attr} />
-                {/*
-                <Link to="#" className="button-primary">
-                  View in Text <i className="manicon manicon-arrow-right" aria-hidden="true" ></i>
-                </Link>
-                */}
                 <Utility.ShareBar url={resourceUrl} />
                 <Meta resource={resource} layout="secondary" />
                 <VariantList resource={resource} />
