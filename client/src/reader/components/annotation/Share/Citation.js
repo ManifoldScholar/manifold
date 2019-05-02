@@ -36,10 +36,6 @@ export default class AnnotationShareEditor extends PureComponent {
     }
   };
 
-  handleCitationChange = event => {
-    this.setState({ citation: event.target.value, copied: false });
-  };
-
   handleCopyClick = event => {
     event.preventDefault();
     const range = document.createRange();

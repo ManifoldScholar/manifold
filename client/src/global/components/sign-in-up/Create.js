@@ -36,7 +36,6 @@ export class CreateContainer extends Component {
   constructor() {
     super();
     this.state = {
-      authenticating: false,
       user: {
         email: "",
         name: "",
@@ -77,7 +76,6 @@ export class CreateContainer extends Component {
   }
 
   authenticateUser = () => {
-    this.setState({ authenticating: true });
     const { dispatch } = this.props;
     dispatch(
       currentUserActions.login({

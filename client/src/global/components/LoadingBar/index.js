@@ -9,7 +9,6 @@ export default class LoadingBar extends Component {
   constructor(props) {
     super(props);
     this.timer = null;
-    this.state = { status: 0 };
   }
 
   componentDidUpdate(prevProps) {

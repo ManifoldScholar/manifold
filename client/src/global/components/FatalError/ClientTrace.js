@@ -27,7 +27,7 @@ export default class FatalErrorClientTrace extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = { stackLines: [], count: 0, hidden: 0 };
+    this.state = { stackLines: [], hidden: 0 };
   }
 
   componentDidMount() {

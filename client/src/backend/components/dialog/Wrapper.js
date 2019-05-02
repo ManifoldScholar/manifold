@@ -30,8 +30,7 @@ class DialogWrapper extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      leaving: false,
-      additionaClassNames: ""
+      leaving: false
     };
   }
 

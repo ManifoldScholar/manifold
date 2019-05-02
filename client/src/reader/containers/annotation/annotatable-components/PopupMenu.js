@@ -20,7 +20,6 @@ export default class AnnotatablePopup extends PureComponent {
     super(props);
 
     this.state = {
-      contents: "annotation",
       activePanel: "primary"
     };
   }

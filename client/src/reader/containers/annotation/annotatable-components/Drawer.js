@@ -13,15 +13,6 @@ export default class AnnotatableDrawer extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = this.initialState;
-  }
-
-  get initialState() {
-    return {
-      drawerWrapperProps: {
-        style: "frontend"
-      }
-    };
   }
 
   get isOpen() {
@@ -33,22 +24,12 @@ export default class AnnotatableDrawer extends PureComponent {
     return upperFirst(this.props.drawerState);
   }
 
-  setDrawerWrapperProps = drawerWrapperProps => {
-    this.setState({ drawerWrapperProps });
-  };
-
-  closeDrawer = () => {
-    this.setState(this.initialState);
-    this.props.actions.closeDrawer();
-  };
-
   render() {
     const DrawerContents = Drawers[this.componentKey];
 
     let drawerProps = {
       style: "frontend",
       open: this.isOpen,
-      closeCallback: this.closeDrawer,
       lockScroll: "always"
     };
     if (DrawerContents && isFunction(DrawerContents.drawerProps)) {

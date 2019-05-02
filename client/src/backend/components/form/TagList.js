@@ -35,7 +35,6 @@ class FormTagList extends Component {
 
   constructor() {
     super();
-    this.state = { value: "" };
   }
 
   componentDidMount() {

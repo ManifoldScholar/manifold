@@ -17,19 +17,6 @@ export default class LockBodyScroll extends PureComponent {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      currentScrollTop: __SERVER__ ? 0 : document.body.scrollTop
-    };
-  }
-
-  componentDidMount() {
-    // document.body.scrollTop = this.state.currentScrollTop;
-  }
-
-  componentWillUnmount() {
-    // Apply back scrolltop (for touch)
-    // document.body.scrollTop = this.state.currentScrollTop;
   }
 
   render() {

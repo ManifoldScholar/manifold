@@ -34,9 +34,6 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      collectionOnly: false
-    };
   }
 
   componentDidMount() {

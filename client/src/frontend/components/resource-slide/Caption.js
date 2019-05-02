@@ -26,7 +26,6 @@ export default class ResourceListSlideCaption extends Component {
   constructor() {
     super();
     this.state = {
-      init: true,
       expanded: false
     };
   }

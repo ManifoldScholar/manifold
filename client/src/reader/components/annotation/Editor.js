@@ -21,7 +21,6 @@ export default class AnnotationEditor extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      format: "annotation",
       body: props.annotation.attributes.body || "",
       private: props.annotation.attributes.private || false,
       errors: []

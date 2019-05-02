@@ -30,7 +30,7 @@ export default class NotationViewerGroup extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = { defaultActive: null };
+    this.state = {};
   }
 
   componentDidUpdate(prevProps) {

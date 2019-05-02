@@ -19,17 +19,7 @@ export default class AnnotationShareWrapper extends PureComponent {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      editorOpen: true
-    };
   }
-
-  handleCloseEditor = () => {
-    this.setState({
-      editorOpen: false
-    });
-  };
 
   maybeTruncateSelection() {
     const {

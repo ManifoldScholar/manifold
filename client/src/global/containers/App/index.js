@@ -18,8 +18,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bootstrapped: false,
-      store: null,
       routerConfirm: false,
       routerConfirmCallback: null,
       routerConfirmMessage: null

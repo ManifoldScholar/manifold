@@ -21,9 +21,6 @@ export default class Overlay extends Component {
 
   constructor() {
     super();
-    this.state = {
-      view: null
-    };
   }
 
   componentDidMount() {

@@ -67,7 +67,6 @@ export default class DrawerWrapper extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      leaving: false,
       keyboardEventsPaused: false,
       focusable: false
     };
@@ -142,7 +141,6 @@ export default class DrawerWrapper extends PureComponent {
   };
 
   handleLeaveEvent = event => {
-    this.setState({ leaving: true });
 
     this.clearDrawerNotifications();
 

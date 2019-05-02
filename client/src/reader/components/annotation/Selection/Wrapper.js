@@ -18,9 +18,6 @@ export default class AnnotationSelectionWrapper extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      editorOpen: false
-    };
   }
 
   get viewable() {

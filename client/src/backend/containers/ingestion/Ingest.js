@@ -60,7 +60,6 @@ export class IngestionIngest extends Component {
 
     this.state = {
       textLog: "Connecting to Manifold websocket...",
-      updates: 0,
       loading: false
     };
 

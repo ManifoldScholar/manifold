@@ -33,7 +33,6 @@ export default class SortableEntities extends PureComponent {
     super(props);
     this.ul = React.createRef();
     this.state = {
-      sorting: false,
       orderedEntities: this.constructor.cloneEntities(props.entities),
       ref: props.entities
     };

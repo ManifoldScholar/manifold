@@ -49,9 +49,6 @@ export class ResourceImportWrapper extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      fileLoaded: false
-    };
   }
 
   componentDidMount() {

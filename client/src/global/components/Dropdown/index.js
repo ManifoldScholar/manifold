@@ -9,9 +9,6 @@ export default class Dropdown extends Component {
 
   constructor() {
     super();
-    this.state = {
-      bodyVisible: null
-    };
   }
 
   componentDidMount() {

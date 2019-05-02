@@ -27,7 +27,6 @@ class PasswordForgotContainer extends Component {
   constructor(propsIgnored) {
     super();
     this.state = {
-      submitted: false,
       email: "",
       errors: []
     };
@@ -41,7 +40,7 @@ class PasswordForgotContainer extends Component {
     event.preventDefault(event.target);
     const action = passwordsAPI.create(this.state.email);
     const resetRequest = request(action, requests.gPasswordRequest);
-    this.setState({ submitted: true }, () => {
+    this.setState({}, () => {
       this.props
         .dispatch(resetRequest)
         .promise.then(() => {
@@ -49,7 +48,7 @@ class PasswordForgotContainer extends Component {
         })
         .catch(res => {
           const errors = res.body.errors;
-          this.setState({ errors, submitted: false });
+          this.setState({ errors });
         });
     });
   };

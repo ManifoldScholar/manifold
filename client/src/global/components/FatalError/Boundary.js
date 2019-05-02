@@ -12,7 +12,7 @@ class FatalErrorBoundary extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null, info: null };
+    this.state = { hasError: false, error: null };
   }
 
   componentDidUpdate(prevProps) {
@@ -47,7 +47,7 @@ class FatalErrorBoundary extends Component {
   }
 
   clearError = () => {
-    this.setState({ hasError: false, error: null, info: null });
+    this.setState({ hasError: false, error: null });
   };
 
   body(error) {

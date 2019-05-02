@@ -1,3 +1,4 @@
+/* eslint react/no-unused-state: 0 */
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
@@ -36,6 +37,8 @@ export class CallToActionNew extends PureComponent {
   }
 
   render() {
+    // The attributes variable is being used when the state is being set
+    // on the actionCallout variable
     return <Form actionCallout={this.state} project={this.project} />;
   }
 }
