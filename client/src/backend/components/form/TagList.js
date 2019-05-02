@@ -33,10 +33,6 @@ class FormTagList extends Component {
     idForError: uniqueId("tag-list-error-")
   };
 
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     if (this.props.focusOnMount === true && this.inputElement) {
       this.inputElement.focus();

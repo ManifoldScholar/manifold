@@ -7,10 +7,6 @@ export default class Dropdown extends Component {
     bodyComponent: PropTypes.func
   };
 
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     // Add logic here to show/hide menu
   }

@@ -15,10 +15,6 @@ export default class LockBodyScroll extends PureComponent {
     lockClass: "no-scroll"
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="lock-body-scroll">

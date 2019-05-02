@@ -11,10 +11,6 @@ export default class AnnotatableDrawer extends PureComponent {
     actions: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   get isOpen() {
     const { drawerState } = this.props;
     return drawerState !== null;

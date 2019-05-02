@@ -19,10 +19,6 @@ export default class Overlay extends Component {
     triggerScrollToTop: PropTypes.any
   };
 
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     window.addEventListener("keyup", this.handleEscape);
   }

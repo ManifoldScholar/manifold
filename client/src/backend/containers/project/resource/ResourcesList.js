@@ -32,10 +32,6 @@ class ProjectResourcesListContainerImplementation extends PureComponent {
     dispatch: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.fetchResources();
   }

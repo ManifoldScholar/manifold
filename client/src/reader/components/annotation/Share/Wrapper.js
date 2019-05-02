@@ -17,10 +17,6 @@ export default class AnnotationShareWrapper extends PureComponent {
     closeOnSave: true
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   maybeTruncateSelection() {
     const {
       annotation: { subject }

@@ -32,10 +32,6 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
     resourcesMeta: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.fetchResources();
   }

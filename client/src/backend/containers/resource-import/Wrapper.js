@@ -47,10 +47,6 @@ export class ResourceImportWrapper extends PureComponent {
     dispatch: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.fetchProject();
   }
