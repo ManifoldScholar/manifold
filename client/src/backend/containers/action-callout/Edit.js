@@ -11,18 +11,18 @@ const { request } = entityStoreActions;
 export class CallToActionEdit extends Component {
   static displayName = "CallToAction.Edit";
 
+  static mapStateToProps = (state, ownPropsIgnored) => {
+    return {
+      actionCallout: select(requests.beActionCallout, state.entityStore)
+    };
+  };
+
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired,
     actionCallout: PropTypes.object
-  };
-
-  static mapStateToProps = (state, ownPropsIgnored) => {
-    return {
-      actionCallout: select(requests.beActionCallout, state.entityStore)
-    };
   };
 
   componentDidMount() {
@@ -35,10 +35,6 @@ export class CallToActionEdit extends Component {
     }
   }
 
-  get project() {
-    return this.props.project;
-  }
-
   get actionCallout() {
     return this.props.actionCallout;
   }
@@ -47,6 +43,10 @@ export class CallToActionEdit extends Component {
     const call = actionCalloutsAPI.show(id);
     const actionCalloutRequest = request(call, requests.beActionCallout);
     this.props.dispatch(actionCalloutRequest);
+  }
+
+  get project() {
+    return this.props.project;
   }
 
   render() {

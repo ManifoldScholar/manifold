@@ -17,20 +17,7 @@ import New from "./New";
 const { request, flush } = entityStoreActions;
 
 export class ProjectCollectionWrapperContainer extends PureComponent {
-  static mapStateToProps = (state, ownPropsIgnored) => {
-    return {
-      projectCollections: select(
-        requests.beProjectCollections,
-        state.entityStore
-      )
-    };
-  };
-
-  static fetchProjectCollections = dispatch => {
-    const call = projectCollectionsAPI.index({ order: "position ASC" });
-
-    return dispatch(request(call, requests.beProjectCollections));
-  };
+  static displayName = "ProjectCollection.Wrapper";
 
   static fetchData = (getState, dispatch) => {
     const promises = [];
@@ -45,7 +32,20 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     return Promise.all(promises);
   };
 
-  static displayName = "ProjectCollection.Wrapper";
+  static fetchProjectCollections = dispatch => {
+    const call = projectCollectionsAPI.index({ order: "position ASC" });
+
+    return dispatch(request(call, requests.beProjectCollections));
+  };
+
+  static mapStateToProps = (state, ownPropsIgnored) => {
+    return {
+      projectCollections: select(
+        requests.beProjectCollections,
+        state.entityStore
+      )
+    };
+  };
 
   static propTypes = {
     projectCollections: PropTypes.array,
@@ -73,21 +73,6 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     return projectCollections.find(pc => pc.id === match.params.id);
   }
 
-  updateProjectCollection = (projectCollection, changes, options = {}) => {
-    const call = projectCollectionsAPI.update(projectCollection.id, changes);
-    const projectCollectionRequest = request(
-      call,
-      requests.beProjectCollection,
-      options
-    );
-
-    this.props.dispatch(projectCollectionRequest).promise.then(() => {
-      ProjectCollectionWrapperContainer.fetchProjectCollections(
-        this.props.dispatch
-      );
-    });
-  };
-
   handleCollectionOrderChange = result => {
     const changes = { attributes: { position: result.position } };
 
@@ -97,11 +82,6 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   handleCollectionSelect = collection => {
     const url = lh.link("backendProjectCollection", collection.id);
     this.props.history.push(url);
-  };
-
-  handleShowNew = event => {
-    if (event) event.preventDefault();
-    this.setState({ showNew: true });
   };
 
   handleHideNew = event => {
@@ -115,9 +95,29 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     this.handleHideNew();
   };
 
+  handleShowNew = event => {
+    if (event) event.preventDefault();
+    this.setState({ showNew: true });
+  };
+
   handleToggleVisibility = (projectCollection, visible) => {
     const changes = { attributes: { visible } };
     this.updateProjectCollection(projectCollection, changes);
+  };
+
+  updateProjectCollection = (projectCollection, changes, options = {}) => {
+    const call = projectCollectionsAPI.update(projectCollection.id, changes);
+    const projectCollectionRequest = request(
+      call,
+      requests.beProjectCollection,
+      options
+    );
+
+    this.props.dispatch(projectCollectionRequest).promise.then(() => {
+      ProjectCollectionWrapperContainer.fetchProjectCollections(
+        this.props.dispatch
+      );
+    });
   };
 
   renderChildRoutes(active, projectCollections) {

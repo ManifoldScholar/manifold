@@ -41,14 +41,6 @@ class Monitor extends Component {
     }
   };
 
-  get popup() {
-    return get(this, "props.oauth.popup");
-  }
-
-  get started() {
-    return get(this, "props.oauth.started");
-  }
-
   get errors() {
     return get(this, "props.oauth.errors");
   }
@@ -62,6 +54,14 @@ class Monitor extends Component {
       this.props.dispatch(oauthActions.cancel());
     }
   };
+
+  get popup() {
+    return get(this, "props.oauth.popup");
+  }
+
+  get started() {
+    return get(this, "props.oauth.started");
+  }
 
   render() {
     let errorList = null;

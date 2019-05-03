@@ -8,6 +8,10 @@ import classNames from "classnames";
 import ColorPicker from "./ColorPicker";
 
 class AvatarBuilder extends Component {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   static displayName = "Project.Form.AvatarBuilder";
 
   static propTypes = {
@@ -17,10 +21,6 @@ class AvatarBuilder extends Component {
     getModelValue: PropTypes.func,
     setOther: PropTypes.func,
     wide: PropTypes.bool
-  };
-
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
   };
 
   onColorChange = color => {
@@ -38,15 +38,15 @@ class AvatarBuilder extends Component {
     this.setAvatarImage(image);
   };
 
+  setAvatarColor(color) {
+    if (!color) return null;
+    this.props.setOther(color.value, "attributes[avatarColor]");
+  }
+
   setAvatarImage(image) {
     if (!image) return null;
     this.props.setOther(false, "attributes[removeAvatar]");
     this.props.setOther(image, "attributes[avatar]");
-  }
-
-  setAvatarColor(color) {
-    if (!color) return null;
-    this.props.setOther(color.value, "attributes[avatarColor]");
   }
 
   handleColorChange = color => {

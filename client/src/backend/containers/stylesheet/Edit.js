@@ -14,6 +14,8 @@ import has from "lodash/has";
 const { request } = entityStoreActions;
 
 export class StylesheetEditContainer extends PureComponent {
+  static displayName = "Stylesheet.Edit";
+
   static fetchData = (getState, dispatch, location, match) => {
     if (!match.params.stylesheet) return;
     const call = stylesheetsAPI.show(match.params.stylesheet);
@@ -24,8 +26,6 @@ export class StylesheetEditContainer extends PureComponent {
   static mapStateToProps = state => ({
     stylesheet: select(requests.beStylesheetShow, state.entityStore)
   });
-
-  static displayName = "Stylesheet.Edit";
 
   static propTypes = {
     match: PropTypes.object,

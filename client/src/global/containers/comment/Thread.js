@@ -12,6 +12,10 @@ const { request } = entityStoreActions;
 const perPage = 50;
 
 export class CommentThread extends PureComponent {
+  static defaultProps = {
+    parentId: null
+  };
+
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       comments: select(
@@ -35,10 +39,6 @@ export class CommentThread extends PureComponent {
     dispatch: PropTypes.func.isRequired
   };
 
-  static defaultProps = {
-    parentId: null
-  };
-
   componentDidMount() {
     if (this.props.subject && !this.props.comments) {
       this.fetchComments({ number: 1, size: 1 });
@@ -52,25 +52,25 @@ export class CommentThread extends PureComponent {
     this.props.dispatch(request(call, commentRequest, options));
   };
 
+  handleCommentDelete = (event, comment) => {
+    const call = commentsAPI.update(comment.id, { deleted: true });
+    this.props.dispatch(request(call, requests.rCommentUpdate));
+  };
+
   handleCommentDestroy = (event, comment) => {
     const call = commentsAPI.destroy(comment);
     const options = { removes: { type: "comments", id: comment.id } };
     this.props.dispatch(request(call, requests.rCommentDestroy, options));
   };
 
-  handleCommentDelete = (event, comment) => {
-    const call = commentsAPI.update(comment.id, { deleted: true });
-    this.props.dispatch(request(call, requests.rCommentUpdate));
+  handleCommentFlag = (event, comment) => {
+    const call = commentsAPI.flag(comment);
+    this.props.dispatch(request(call, requests.rCommentFlag));
   };
 
   handleCommentRestore = (event, comment) => {
     const call = commentsAPI.update(comment.id, { deleted: false });
     this.props.dispatch(request(call, requests.rCommentUpdate));
-  };
-
-  handleCommentFlag = (event, comment) => {
-    const call = commentsAPI.flag(comment);
-    this.props.dispatch(request(call, requests.rCommentFlag));
   };
 
   handleCommentUnflag = (event, comment) => {
@@ -89,6 +89,12 @@ export class CommentThread extends PureComponent {
       c => c.attributes.parentId === parentId
     );
     return children;
+  }
+
+  renderViewMore(commentsPagination) {
+    if (!commentsPagination) return null;
+    if (commentsPagination.totalPages > commentsPagination.currentPage)
+      return this.renderViewNext(commentsPagination);
   }
 
   renderViewNext(commentsPagination) {
@@ -110,12 +116,6 @@ export class CommentThread extends PureComponent {
         {`See next ${nextCount} comments`}
       </button>
     );
-  }
-
-  renderViewMore(commentsPagination) {
-    if (!commentsPagination) return null;
-    if (commentsPagination.totalPages > commentsPagination.currentPage)
-      return this.renderViewNext(commentsPagination);
   }
 
   render() {

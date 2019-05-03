@@ -19,19 +19,6 @@ function withFormOptions(WrappedComponent) {
 
     static displayName = displayName;
 
-    static propTypes = {
-      name: PropTypes.string.isRequired,
-      set: PropTypes.func.isRequired,
-      options: PropTypes.arrayOf(
-        PropTypes.shape({
-          label: PropTypes.string.isRequired,
-          instructions: PropTypes.string,
-          value: PropTypes.any.isRequired
-        })
-      ),
-      value: PropTypes.any
-    };
-
     static getDerivedStateFromProps(props, stateIgnored) {
       const options = props.options.map(option => {
         const internalValue = WithFormOptions.toInternalValue(option.value);
@@ -44,6 +31,19 @@ function withFormOptions(WrappedComponent) {
     static isSimpleValue(value) {
       return isString(value) || isNumber(value) || isBoolean(value);
     }
+
+    static propTypes = {
+      name: PropTypes.string.isRequired,
+      set: PropTypes.func.isRequired,
+      options: PropTypes.arrayOf(
+        PropTypes.shape({
+          label: PropTypes.string.isRequired,
+          instructions: PropTypes.string,
+          value: PropTypes.any.isRequired
+        })
+      ),
+      value: PropTypes.any
+    };
 
     static toInternalValue(value) {
       if (!value) return "";
@@ -66,6 +66,10 @@ function withFormOptions(WrappedComponent) {
       };
     }
 
+    handleChange = event => {
+      return this.props.set(this.byInternalValue(event.target.value));
+    };
+
     byInternalValue(value) {
       const option = this.state.options.find(opt => {
         return opt.internalValue.toString() === value.toString();
@@ -73,10 +77,6 @@ function withFormOptions(WrappedComponent) {
       if (!option) return null;
       return option.value;
     }
-
-    handleChange = event => {
-      return this.props.set(this.byInternalValue(event.target.value));
-    };
 
     render() {
       return React.createElement(

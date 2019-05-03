@@ -18,14 +18,18 @@ const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class FeatureDetailContainer extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "Feature.Detail";
+
   static mapStateToProps = state => {
     return {
       feature: select(requests.beFeature, state.entityStore),
       session: get(state.entityEditor.sessions, "backend-feature-update")
     };
   };
-
-  static displayName = "Feature.Detail";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -34,10 +38,6 @@ class FeatureDetailContainer extends PureComponent {
     confirm: PropTypes.func.isRequired,
     feature: PropTypes.object,
     route: PropTypes.object
-  };
-
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
   };
 
   componentDidMount() {
@@ -55,31 +55,6 @@ class FeatureDetailContainer extends PureComponent {
     this.props.dispatch(flush(requests.beFeature));
   }
 
-  fetchFeature(props) {
-    const id = this.id(props);
-    if (!id) return;
-    const call = featuresAPI.show(id);
-    const featureRequest = request(call, requests.beFeature);
-    props.dispatch(featureRequest);
-  }
-
-  redirectToFeatures() {
-    const path = lh.link("backendRecordsFeatures");
-    this.props.history.push(path);
-  }
-
-  handleSuccess = featureIgnored => {
-    this.redirectToFeatures();
-  };
-
-  handleDestroy = () => {
-    const { feature } = this.props;
-    if (!feature) return;
-    const heading = "Are you sure you want to delete this feature?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, () => this.doDestroy(feature));
-  };
-
   doDestroy = feature => {
     const call = featuresAPI.destroy(feature.id);
     const options = { removes: feature };
@@ -90,9 +65,65 @@ class FeatureDetailContainer extends PureComponent {
     });
   };
 
-  redirectToList() {
-    const path = lh.link("backendRecordsFeatures");
-    this.props.history.push(path);
+  feature(props) {
+    return props.feature;
+  }
+
+  featureHeader(feature) {
+    if (!feature) return null;
+    return (
+      <Navigation.DetailHeader
+        type="feature"
+        backUrl={lh.link("backendRecordsFeatures")}
+        backLabel="All Features"
+        title={
+          feature.attributes.header ||
+          `Untitled #${feature.attributes.position}`
+        }
+        utility={this.renderUtility()}
+      />
+    );
+  }
+
+  fetchFeature(props) {
+    const id = this.id(props);
+    if (!id) return;
+    const call = featuresAPI.show(id);
+    const featureRequest = request(call, requests.beFeature);
+    props.dispatch(featureRequest);
+  }
+
+  handleDestroy = () => {
+    const { feature } = this.props;
+    if (!feature) return;
+    const heading = "Are you sure you want to delete this feature?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, () => this.doDestroy(feature));
+  };
+
+  handleSuccess = featureIgnored => {
+    this.redirectToFeatures();
+  };
+
+  id(props) {
+    return props.match.params.id;
+  }
+
+  isNew(props) {
+    return this.id(props) === "new";
+  }
+
+  newHeader() {
+    return (
+      <Navigation.DetailHeader
+        type="feature"
+        backUrl={lh.link("backendRecordsFeatures")}
+        backLabel="All Features"
+        title="New Feature"
+        showUtility={false}
+        note="Complete the form below to make a new feature. Press save to continue."
+      />
+    );
   }
 
   notifyDestroy(feature) {
@@ -121,45 +152,21 @@ class FeatureDetailContainer extends PureComponent {
     return preview;
   }
 
-  isNew(props) {
-    return this.id(props) === "new";
+  redirectToFeatures() {
+    const path = lh.link("backendRecordsFeatures");
+    this.props.history.push(path);
   }
 
-  id(props) {
-    return props.match.params.id;
+  redirectToList() {
+    const path = lh.link("backendRecordsFeatures");
+    this.props.history.push(path);
   }
 
-  feature(props) {
-    return props.feature;
-  }
-
-  newHeader() {
-    return (
-      <Navigation.DetailHeader
-        type="feature"
-        backUrl={lh.link("backendRecordsFeatures")}
-        backLabel="All Features"
-        title="New Feature"
-        showUtility={false}
-        note="Complete the form below to make a new feature. Press save to continue."
-      />
-    );
-  }
-
-  featureHeader(feature) {
-    if (!feature) return null;
-    return (
-      <Navigation.DetailHeader
-        type="feature"
-        backUrl={lh.link("backendRecordsFeatures")}
-        backLabel="All Features"
-        title={
-          feature.attributes.header ||
-          `Untitled #${feature.attributes.position}`
-        }
-        utility={this.renderUtility()}
-      />
-    );
+  renderRoutes() {
+    const { feature } = this.props;
+    return childRoutes(this.props.route, {
+      childProps: { feature, sessionName: "backend-feature-update" }
+    });
   }
 
   renderUtility() {
@@ -171,13 +178,6 @@ class FeatureDetailContainer extends PureComponent {
         </button>
       </div>
     );
-  }
-
-  renderRoutes() {
-    const { feature } = this.props;
-    return childRoutes(this.props.route, {
-      childProps: { feature, sessionName: "backend-feature-update" }
-    });
   }
 
   render() {

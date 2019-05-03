@@ -9,6 +9,11 @@ import humps from "humps";
 import MissingIcon from "./MissingIcon";
 
 export default class IconComposer extends PureComponent {
+  static defaultProps = {
+    fill: "currentColor",
+    svgProps: { "aria-hidden": true }
+  };
+
   static displayName = "IconComposer";
 
   static propTypes = {
@@ -20,18 +25,8 @@ export default class IconComposer extends PureComponent {
     svgProps: PropTypes.object
   };
 
-  static defaultProps = {
-    fill: "currentColor",
-    svgProps: { "aria-hidden": true }
-  };
-
   get failure() {
     return MissingIcon;
-  }
-
-  get iconKey() {
-    if (!this.props.icon) return "";
-    return humps.pascalize(this.props.icon);
   }
 
   get iconComponent() {
@@ -41,6 +36,11 @@ export default class IconComposer extends PureComponent {
     const component = source[key];
     if (!component) return this.failure;
     return component;
+  }
+
+  get iconKey() {
+    if (!this.props.icon) return "";
+    return humps.pascalize(this.props.icon);
   }
 
   iconSource(key) {

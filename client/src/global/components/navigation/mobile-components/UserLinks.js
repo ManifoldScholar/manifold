@@ -13,7 +13,13 @@ export default class UserLinks extends PureComponent {
     closeNavigation: PropTypes.func.isRequired
   };
 
-  handleProfileClick = event => {
+  handleLogOutClick = event => {
+    event.preventDefault();
+    this.props.commonActions.logout();
+    this.props.closeNavigation();
+  };
+
+  handleLoginClick = event => {
     event.preventDefault();
     this.props.commonActions.toggleSignInUpOverlay();
     this.props.closeNavigation();
@@ -25,13 +31,7 @@ export default class UserLinks extends PureComponent {
     this.props.history.push(lh.link("subscriptions"));
   };
 
-  handleLogOutClick = event => {
-    event.preventDefault();
-    this.props.commonActions.logout();
-    this.props.closeNavigation();
-  };
-
-  handleLoginClick = event => {
+  handleProfileClick = event => {
     event.preventDefault();
     this.props.commonActions.toggleSignInUpOverlay();
     this.props.closeNavigation();

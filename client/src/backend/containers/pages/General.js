@@ -9,45 +9,19 @@ import connectAndFetch from "utils/connectAndFetch";
 import withFormSession from "hoc/with-form-session";
 
 class PagesGeneralContainer extends PureComponent {
+  static displayName = "Pages.General";
+
   static mapStateToProps = state => {
     return {
       page: select("backend-page", state.entityStore)
     };
   };
 
-  static displayName = "Pages.General";
-
   static propTypes = {
     page: PropTypes.object.isRequired,
     onSuccess: PropTypes.func,
     form: PropTypes.object
   };
-
-  renderPath() {
-    const isExternal = this.props.form.getModelValue(
-      "attributes[isExternalLink]"
-    );
-    if (isExternal)
-      return (
-        <Form.TextInput
-          validation={["required"]}
-          label="External URL"
-          name="attributes[externalLink]"
-          placeholder="Enter External URL"
-          instructions="The absolute URL for the page."
-        />
-      );
-    return (
-      <Form.TextInput
-        wide
-        validation={["required"]}
-        label="Slug"
-        name="attributes[slug]"
-        placeholder="Enter URL Slug"
-        instructions="The page URL is based on the slug."
-      />
-    );
-  }
 
   renderBody() {
     const isExternal = this.props.form.getModelValue(
@@ -75,6 +49,32 @@ class PagesGeneralContainer extends PureComponent {
         wide
         label="Open page in new tab?"
         name="attributes[openInNewTab]"
+      />
+    );
+  }
+
+  renderPath() {
+    const isExternal = this.props.form.getModelValue(
+      "attributes[isExternalLink]"
+    );
+    if (isExternal)
+      return (
+        <Form.TextInput
+          validation={["required"]}
+          label="External URL"
+          name="attributes[externalLink]"
+          placeholder="Enter External URL"
+          instructions="The absolute URL for the page."
+        />
+      );
+    return (
+      <Form.TextInput
+        wide
+        validation={["required"]}
+        label="Slug"
+        name="attributes[slug]"
+        placeholder="Enter URL Slug"
+        instructions="The page URL is based on the slug."
       />
     );
   }

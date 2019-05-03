@@ -53,67 +53,12 @@ class UpdateFormContainer extends Component {
     return params;
   }
 
-  initialState(props) {
-    return {
-      nickname: this.currentUserAttribute(props, "nickname"),
-      firstName: this.currentUserAttribute(props, "firstName"),
-      lastName: this.currentUserAttribute(props, "lastName"),
-      email: this.currentUserAttribute(props, "email"),
-      password: "",
-      passwordConfirmation: "",
-      removeAvatar: false,
-      avatar: null
-    };
-  }
-
-  handleInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  doUpdateRequest = (avatarData = null) => {
-    const params = this.setParams();
-    params.removeAvatar = this.state.removeAvatar;
-    if (avatarData) {
-      params.avatar = {
-        data: avatarData,
-        content_type: this.state.avatar.type,
-        filename: this.state.avatar.name
-      };
+  currentUserAttribute = (props, attribute) => {
+    if (!props.authentication.currentUser) return "";
+    if (hasIn(props.authentication, `currentUser.attributes[${attribute}]`)) {
+      return props.authentication.currentUser.attributes[attribute];
     }
-    const { promise } = this.props.dispatch(
-      request(meAPI.update(params), requests.gAuthenticatedUserUpdate)
-    );
-    promise.then(() => {
-      this.props.hideSignInUpOverlay();
-    });
-  };
-
-  updateUser = event => {
-    event.preventDefault();
-    if (this.state.avatar) {
-      const reader = new FileReader();
-      reader.onload = eIgnored => {
-        const { result: data } = reader;
-        this.doUpdateRequest(data);
-      };
-      reader.readAsDataURL(this.state.avatar);
-    } else {
-      this.doUpdateRequest();
-    }
-  };
-
-  hasAvatar = () => {
-    return !!this.displayAvatar();
-  };
-
-  handleRemoveAvatar = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.setState({ avatar: null, removeAvatar: true });
-  };
-
-  handleFileDrop = file => {
-    this.setState({ avatar: file[0], removeAvatar: false });
+    return "";
   };
 
   displayAvatar = () => {
@@ -141,12 +86,40 @@ class UpdateFormContainer extends Component {
     }
   };
 
-  currentUserAttribute = (props, attribute) => {
-    if (!props.authentication.currentUser) return "";
-    if (hasIn(props.authentication, `currentUser.attributes[${attribute}]`)) {
-      return props.authentication.currentUser.attributes[attribute];
+  doUpdateRequest = (avatarData = null) => {
+    const params = this.setParams();
+    params.removeAvatar = this.state.removeAvatar;
+    if (avatarData) {
+      params.avatar = {
+        data: avatarData,
+        content_type: this.state.avatar.type,
+        filename: this.state.avatar.name
+      };
     }
-    return "";
+    const { promise } = this.props.dispatch(
+      request(meAPI.update(params), requests.gAuthenticatedUserUpdate)
+    );
+    promise.then(() => {
+      this.props.hideSignInUpOverlay();
+    });
+  };
+
+  handleFileDrop = file => {
+    this.setState({ avatar: file[0], removeAvatar: false });
+  };
+
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleRemoveAvatar = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.setState({ avatar: null, removeAvatar: true });
+  };
+
+  hasAvatar = () => {
+    return !!this.displayAvatar();
   };
 
   redirectToSubscriptions = event => {
@@ -154,6 +127,33 @@ class UpdateFormContainer extends Component {
     this.props.hideSignInUpOverlay();
     this.props.history.push(lh.link("subscriptions"));
   };
+
+  updateUser = event => {
+    event.preventDefault();
+    if (this.state.avatar) {
+      const reader = new FileReader();
+      reader.onload = eIgnored => {
+        const { result: data } = reader;
+        this.doUpdateRequest(data);
+      };
+      reader.readAsDataURL(this.state.avatar);
+    } else {
+      this.doUpdateRequest();
+    }
+  };
+
+  initialState(props) {
+    return {
+      nickname: this.currentUserAttribute(props, "nickname"),
+      firstName: this.currentUserAttribute(props, "firstName"),
+      lastName: this.currentUserAttribute(props, "lastName"),
+      email: this.currentUserAttribute(props, "email"),
+      password: "",
+      passwordConfirmation: "",
+      removeAvatar: false,
+      avatar: null
+    };
+  }
 
   renderProfileForm(errors) {
     return (

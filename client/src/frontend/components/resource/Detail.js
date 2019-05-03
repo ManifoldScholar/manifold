@@ -19,19 +19,19 @@ export default class ResourceDetail extends Component {
     resource: PropTypes.object
   };
 
-  createDescription(description) {
-    if (!description) return { __html: "No content provided." };
-    return {
-      __html: description
-    };
-  }
-
   // The cancel prop is required by CommentEditor.
   // We don't render the cancel button in this context,
   // so this is basically a stub. --MO
   cancelComment(event) {
     if (!event) return null;
     event.preventDefault();
+  }
+
+  createDescription(description) {
+    if (!description) return { __html: "No content provided." };
+    return {
+      __html: description
+    };
   }
 
   render() {

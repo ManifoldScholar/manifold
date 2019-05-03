@@ -3,6 +3,13 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 
 export default class MissingIcon extends Component {
+  static defaultProps = {
+    iconClass: "",
+    size: "inherit",
+    stroke: "currentColor",
+    fill: "currentColor"
+  };
+
   static propTypes = {
     iconClass: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -10,12 +17,10 @@ export default class MissingIcon extends Component {
     fill: PropTypes.string
   };
 
-  static defaultProps = {
-    iconClass: "",
-    size: "inherit",
-    stroke: "currentColor",
-    fill: "currentColor"
-  };
+  get classes() {
+    const { iconClass } = this.props;
+    return classnames("manicon-svg", iconClass);
+  }
 
   get defaultHeight() {
     return 64;
@@ -25,14 +30,8 @@ export default class MissingIcon extends Component {
     return 64;
   }
 
-  get size() {
-    return this.props.size;
-  }
-
-  get width() {
-    if (this.size === null || this.size === "inherit") return null;
-    if (this.size === "default") return this.defaultWidth;
-    return this.size;
+  get fill() {
+    return this.props.fill;
   }
 
   get height() {
@@ -41,21 +40,22 @@ export default class MissingIcon extends Component {
     return this.size;
   }
 
-  get viewBox() {
-    return "0 0 64 64";
-  }
-
-  get classes() {
-    const { iconClass } = this.props;
-    return classnames("manicon-svg", iconClass);
-  }
-
-  get fill() {
-    return this.props.fill;
+  get size() {
+    return this.props.size;
   }
 
   get stroke() {
     return this.props.stroke;
+  }
+
+  get viewBox() {
+    return "0 0 64 64";
+  }
+
+  get width() {
+    if (this.size === null || this.size === "inherit") return null;
+    if (this.size === "default") return this.defaultWidth;
+    return this.size;
   }
 
   render() {

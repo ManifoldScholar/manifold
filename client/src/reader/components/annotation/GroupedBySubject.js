@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { hash } from "utils/string";
 
 export default class AnnotationGroupedBySubject extends PureComponent {
+  static defaultProps = {
+    annotations: []
+  };
+
   static displayName = "Annotation.GroupedBySubject";
 
   static propTypes = {
     annotations: PropTypes.array.isRequired,
     render: PropTypes.func.isRequired
-  };
-
-  static defaultProps = {
-    annotations: []
   };
 
   /* eslint-disable no-param-reassign */

@@ -25,15 +25,6 @@ export class SettingsEmailContainer extends PureComponent {
     dispatch: PropTypes.func.isRequired
   };
 
-  sendTestEmail = event => {
-    event.preventDefault();
-    const call = testMailsAPI.create();
-    const testMailRequest = request(call, requests.beCreateTestMail);
-    this.props
-      .dispatch(testMailRequest)
-      .promise.then(this.notifyEmailSuccess, this.notifyEmailFail);
-  };
-
   notifyEmailSuccess = responseIgnored => {
     const notification = {
       level: 0,
@@ -43,6 +34,15 @@ export class SettingsEmailContainer extends PureComponent {
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
+  };
+
+  sendTestEmail = event => {
+    event.preventDefault();
+    const call = testMailsAPI.create();
+    const testMailRequest = request(call, requests.beCreateTestMail);
+    this.props
+      .dispatch(testMailRequest)
+      .promise.then(this.notifyEmailSuccess, this.notifyEmailFail);
   };
 
   render() {

@@ -10,7 +10,29 @@ import { entityStoreActions } from "actions";
 const { request } = entityStoreActions;
 
 export default class ResourceSlideshow extends PureComponent {
+  static defaultProps = {
+    slideOptions: {},
+    hideDetailUrl: false,
+    hideDownload: false
+  };
+
   static displayName = "ResourceSlideshow";
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextState = {};
+    if (nextProps.pagination.totalCount > 0) {
+      nextState.totalCount = nextProps.pagination.totalCount;
+    }
+
+    const loadedPages = prevState.loadedPages.slice(0);
+    const page = nextProps.pagination.currentPage;
+    if (!includes(loadedPages, page)) {
+      loadedPages.push(page);
+      nextState.loadedPages = loadedPages;
+    }
+
+    return nextState === {} ? null : nextState;
+  }
 
   static propTypes = {
     collectionResources: PropTypes.array,
@@ -20,12 +42,6 @@ export default class ResourceSlideshow extends PureComponent {
     hideDetailUrl: PropTypes.bool,
     hideDownload: PropTypes.bool,
     slideOptions: PropTypes.object
-  };
-
-  static defaultProps = {
-    slideOptions: {},
-    hideDetailUrl: false,
-    hideDownload: false
   };
 
   constructor(props) {
@@ -45,22 +61,6 @@ export default class ResourceSlideshow extends PureComponent {
       props.pagination
     );
     this.state.totalCount = props.pagination.totalCount || 0;
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const nextState = {};
-    if (nextProps.pagination.totalCount > 0) {
-      nextState.totalCount = nextProps.pagination.totalCount;
-    }
-
-    const loadedPages = prevState.loadedPages.slice(0);
-    const page = nextProps.pagination.currentPage;
-    if (!includes(loadedPages, page)) {
-      loadedPages.push(page);
-      nextState.loadedPages = loadedPages;
-    }
-
-    return nextState === {} ? null : nextState;
   }
 
   componentDidMount() {
@@ -95,29 +95,18 @@ export default class ResourceSlideshow extends PureComponent {
     }
   };
 
-  handleUnloadedSlide = position => {
-    const page = this.positionToPage(position, this.props.pagination.perPage);
-    if (!this.isPageLoaded(page)) {
-      const fetch = resourceCollectionsAPI.collectionResources(
-        this.props.resourceCollection.id,
-        {},
-        { number: page, size: this.props.pagination.perPage }
-      );
-      this.props.dispatch(request(fetch, requests.feSlideshow));
-    }
-  };
+  buildNewMap(collectionResources, pagination) {
+    const updates = {};
+    const start = pagination.perPage * (pagination.currentPage - 1) + 1;
+    collectionResources.forEach((collectionResource, index) => {
+      updates[start + index] = collectionResource;
+    });
+    return Object.assign({}, this.state.map, updates);
+  }
 
-  handleSlidePrev = () => {
-    if (this.state.slideDirection !== "right") {
-      this.setState({
-        slideDirection: "right"
-      });
-    }
-
-    let newPosition = this.state.position - 1;
-    if (newPosition < 1) newPosition = 1;
-    this.updatePosition(newPosition);
-  };
+  current() {
+    return this.state.map[this.state.currentPosition];
+  }
 
   handleSlideNext = () => {
     if (this.state.slideDirection !== "left") {
@@ -132,20 +121,40 @@ export default class ResourceSlideshow extends PureComponent {
     this.updatePosition(newPosition);
   };
 
+  handleSlidePrev = () => {
+    if (this.state.slideDirection !== "right") {
+      this.setState({
+        slideDirection: "right"
+      });
+    }
+
+    let newPosition = this.state.position - 1;
+    if (newPosition < 1) newPosition = 1;
+    this.updatePosition(newPosition);
+  };
+
+  handleUnloadedSlide = position => {
+    const page = this.positionToPage(position, this.props.pagination.perPage);
+    if (!this.isPageLoaded(page)) {
+      const fetch = resourceCollectionsAPI.collectionResources(
+        this.props.resourceCollection.id,
+        {},
+        { number: page, size: this.props.pagination.perPage }
+      );
+      this.props.dispatch(request(fetch, requests.feSlideshow));
+    }
+  };
+
   isLoaded(position) {
     return this.state.map.hasOwnProperty(position);
-  }
-
-  positionToPage(position, perPage) {
-    return Math.ceil(position / perPage);
   }
 
   isPageLoaded(page) {
     return includes(this.state.loadedPages, page);
   }
 
-  current() {
-    return this.state.map[this.state.currentPosition];
+  positionToPage(position, perPage) {
+    return Math.ceil(position / perPage);
   }
 
   updateMap(collectionResources, pagination) {
@@ -160,13 +169,8 @@ export default class ResourceSlideshow extends PureComponent {
     this.setState({ position: newPosition });
   }
 
-  buildNewMap(collectionResources, pagination) {
-    const updates = {};
-    const start = pagination.perPage * (pagination.currentPage - 1) + 1;
-    collectionResources.forEach((collectionResource, index) => {
-      updates[start + index] = collectionResource;
-    });
-    return Object.assign({}, this.state.map, updates);
+  renderPlaceholder() {
+    return <ResourceSlide.SlidePlaceholder />;
   }
 
   renderSlideShow() {
@@ -182,10 +186,6 @@ export default class ResourceSlideshow extends PureComponent {
         )}
       </div>
     );
-  }
-
-  renderPlaceholder() {
-    return <ResourceSlide.SlidePlaceholder />;
   }
 
   render() {

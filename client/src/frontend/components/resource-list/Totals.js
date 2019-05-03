@@ -6,6 +6,10 @@ import Utility from "global/components/utility";
 import classNames from "classnames";
 
 export default class ResourceListTotals extends Component {
+  static defaultProps = {
+    belongsTo: "project"
+  };
+
   static displayName = "ResourceList.Totals";
 
   static propTypes = {
@@ -14,10 +18,6 @@ export default class ResourceListTotals extends Component {
     belongsTo: PropTypes.string,
     alignLeft: PropTypes.bool,
     tight: PropTypes.bool
-  };
-
-  static defaultProps = {
-    belongsTo: "project"
   };
 
   get count() {

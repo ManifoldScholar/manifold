@@ -17,6 +17,10 @@ const defaultPage = 1;
 const perPage = 20;
 
 export class ProjectsContainer extends Component {
+  static defaultProps = {
+    location: {}
+  };
+
   static fetchData = (getState, dispatch, location) => {
     const search = queryString.parse(location.search);
     const { page, ...filters } = search;
@@ -52,10 +56,6 @@ export class ProjectsContainer extends Component {
     projectsMeta: PropTypes.object
   };
 
-  static defaultProps = {
-    location: {}
-  };
-
   constructor(props) {
     super(props);
     this.state = this.initialState(queryString.parse(props.location.search));
@@ -69,37 +69,6 @@ export class ProjectsContainer extends Component {
     ) {
       this.props.fetchData(this.props);
     }
-  }
-
-  initialState(init) {
-    const filter = omitBy(init, (vIgnored, k) => k === "page");
-
-    return {
-      filter: Object.assign({}, filter),
-      pagination: {
-        number: init.page || defaultPage,
-        size: perPage
-      }
-    };
-  }
-
-  updateUrl() {
-    const pathname = this.props.location.pathname;
-    const filters = this.state.filter;
-    const pageParam = this.state.pagination.number;
-    const params = Object.assign({}, filters);
-    if (pageParam !== 1) params.page = pageParam;
-
-    const search = queryString.stringify(params);
-    this.props.history.push({ pathname, search });
-  }
-
-  updateResults(filter = this.state.filter) {
-    const action = request(
-      projectsAPI.index(filter, this.state.pagination),
-      requests.feProjectsFiltered
-    );
-    this.props.dispatch(action);
   }
 
   doUpdate() {
@@ -118,6 +87,18 @@ export class ProjectsContainer extends Component {
     this.setState({ pagination }, this.doUpdate);
   };
 
+  initialState(init) {
+    const filter = omitBy(init, (vIgnored, k) => k === "page");
+
+    return {
+      filter: Object.assign({}, filter),
+      pagination: {
+        number: init.page || defaultPage,
+        size: perPage
+      }
+    };
+  }
+
   pageChangeHandlerCreator = pageParam => {
     return event => {
       event.preventDefault();
@@ -129,6 +110,25 @@ export class ProjectsContainer extends Component {
     const { location, projects } = this.props;
     if (location.search) return false; // There are search filters applied, skip the check
     if (!projects || projects.length === 0) return true;
+  }
+
+  updateResults(filter = this.state.filter) {
+    const action = request(
+      projectsAPI.index(filter, this.state.pagination),
+      requests.feProjectsFiltered
+    );
+    this.props.dispatch(action);
+  }
+
+  updateUrl() {
+    const pathname = this.props.location.pathname;
+    const filters = this.state.filter;
+    const pageParam = this.state.pagination.number;
+    const params = Object.assign({}, filters);
+    if (pageParam !== 1) params.page = pageParam;
+
+    const search = queryString.stringify(params);
+    this.props.history.push({ pathname, search });
   }
 
   renderProjectLibrary() {

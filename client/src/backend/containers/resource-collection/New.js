@@ -15,11 +15,7 @@ import Authorize from "hoc/authorize";
 const { request } = entityStoreActions;
 
 export class ResourceCollectionNewContainer extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      project: select(requests.beProject, state.entityStore)
-    };
-  };
+  static displayName = "ResourceCollection.New";
 
   static fetchData = (getState, dispatch, location, match) => {
     const promises = [];
@@ -29,7 +25,11 @@ export class ResourceCollectionNewContainer extends PureComponent {
     return Promise.all(promises);
   };
 
-  static displayName = "ResourceCollection.New";
+  static mapStateToProps = state => {
+    return {
+      project: select(requests.beProject, state.entityStore)
+    };
+  };
 
   static propTypes = {
     project: PropTypes.object,
@@ -38,14 +38,14 @@ export class ResourceCollectionNewContainer extends PureComponent {
     resourceCollection: PropTypes.object
   };
 
+  handleSuccess = resourceCollection => {
+    this.redirectToCollection(resourceCollection);
+  };
+
   redirectToCollection(resourceCollection) {
     const path = lh.link("backendResourceCollection", resourceCollection.id);
     this.props.history.push(path);
   }
-
-  handleSuccess = resourceCollection => {
-    this.redirectToCollection(resourceCollection);
-  };
 
   render() {
     const { project } = this.props;

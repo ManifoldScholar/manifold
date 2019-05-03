@@ -6,6 +6,10 @@ import { Link, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
 export class NavigationPrimary extends PureComponent {
+  static defaultProps = {
+    exact: false
+  };
+
   static displayName = "Navigation.Primary";
 
   static propTypes = {
@@ -18,10 +22,6 @@ export class NavigationPrimary extends PureComponent {
     exact: PropTypes.bool,
     desktopStyle: PropTypes.object,
     mobileStyle: PropTypes.object
-  };
-
-  static defaultProps = {
-    exact: false
   };
 
   backendButtonLabel(currentUser, mode) {

@@ -76,27 +76,6 @@ class ManifoldContainer extends PureComponent {
       this.doPostLogout();
   }
 
-  routeChanged(prevLocation, location) {
-    return prevLocation.pathname !== location.pathname;
-  }
-
-  receivedGaTrackingId(settings) {
-    const path = "attributes.integrations.gaTrackingId";
-    return has(settings, path) && get(settings, path) !== "";
-  }
-
-  userJustLoggedOut(prevAuth, auth) {
-    return auth.authenticated === false && prevAuth.authenticated === true;
-  }
-
-  doPostLogout() {
-    this.redirectToHome();
-  }
-
-  redirectToHome() {
-    this.props.history.push("/");
-  }
-
   handleGlobalClick = event => {
     if (!closest(event.target, ".panel-visible"))
       return this.props.dispatch(uiVisibilityActions.panelHideAll());
@@ -104,6 +83,27 @@ class ManifoldContainer extends PureComponent {
       return this.props.dispatch(uiVisibilityActions.panelHideAll());
     return null;
   };
+
+  doPostLogout() {
+    this.redirectToHome();
+  }
+
+  receivedGaTrackingId(settings) {
+    const path = "attributes.integrations.gaTrackingId";
+    return has(settings, path) && get(settings, path) !== "";
+  }
+
+  redirectToHome() {
+    this.props.history.push("/");
+  }
+
+  routeChanged(prevLocation, location) {
+    return prevLocation.pathname !== location.pathname;
+  }
+
+  userJustLoggedOut(prevAuth, auth) {
+    return auth.authenticated === false && prevAuth.authenticated === true;
+  }
 
   renderTypekit() {
     const tkId = get(this.props.settings, "attributes.theme.typekitId");

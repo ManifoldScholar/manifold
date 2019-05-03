@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 export default class SVGProjectPlaceholder extends Component {
+  static defaultProps = {
+    mode: "responsive",
+    ariaLabel: true
+  };
+
   static displayName = "SVG.ProjectPlaceholder";
 
   static propTypes = {
@@ -11,63 +16,24 @@ export default class SVGProjectPlaceholder extends Component {
     mode: PropTypes.oneOf(["responsive", "small", "large"])
   };
 
-  static defaultProps = {
-    mode: "responsive",
-    ariaLabel: true
-  };
+  get ariaLabel() {
+    return this.props.ariaLabel ? "Default Project Thumbnail" : null;
+  }
 
   get blockClass() {
     return "project-thumb-placeholder";
   }
 
-  get ariaLabel() {
-    return this.props.ariaLabel ? "Default Project Thumbnail" : null;
-  }
+  classes(type) {
+    const colorModifier =
+      !this.props.color || this.props.color === "sentary"
+        ? "sentary"
+        : this.props.color;
 
-  small(className) {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 48 48"
-        width="100%"
-        height="100%"
-        className={this.classes(className)}
-        aria-label={this.ariaLabel}
-      >
-        <g fill="none" fillRule="evenodd">
-          <polygon
-            className={`${this.blockClass}__tile`}
-            fill="#CBF7E6"
-            points="0 42 42 42 42 0 0 0"
-          />
-          <g
-            className={`${this.blockClass}__illustration`}
-            transform="translate(9 8)"
-          >
-            <g transform="translate(20.683 2.244)">
-              <polygon points=".161 2.954 .161 21.013 1.612 23.598 3.06 21.013 3.06 2.954" />
-              <path d="M3.06081501,21.012797 L0.161633021,21.012797" />
-              <path
-                strokeLinejoin="round"
-                d="M0.162011257,2.95560225 L3.06119325,2.95560225 L3.06119325,1.53299812 C3.06119325,0.980713374 2.613478,0.532998124 2.06119325,0.532998124 L1.16201126,0.532998124 C0.609726507,0.532998124 0.162011257,0.980713374 0.162011257,1.53299812 L0.162011257,2.95560225 Z"
-              />
-            </g>
-            <g transform="translate(.195 11.463)">
-              <polygon points="14.898 .419 .985 .419 .985 11.282 8.141 11.282 8.141 14.378 10.844 11.282 14.898 11.282" />
-              <path d="M12.5237854 3.46905816L3.32696735 3.46905816M12.5237854 8.00165403L3.32696735 8.00165403M12.5237854 5.73507242L3.32696735 5.73507242" />
-            </g>
-            <g transform="translate(.195 .195)">
-              <path d="M11.8853223 5.12585966C11.8853223 6.3608015 10.8848871 7.36123677 9.64994522 7.36123677 8.41689456 7.36123677 7.41645929 6.3608015 7.41645929 5.12585966 7.41645929 3.89091782 8.41689456 2.89048255 9.64994522 2.89048255 10.8848871 2.89048255 11.8853223 3.89091782 11.8853223 5.12585966zM11.8853223 5.23573734L15.0417051 2.0793546C15.6109508 1.51010882 16.5849096 1.91293058 16.5849096 2.71857411M3.99814784 3.09718874L6.63067317.464663415C7.20181013-.106473546 8.17576886.2982394 8.17576886 1.10388293" />
-              <path d="M5.22155347 5.12585966C5.22155347 6.3608015 4.2211182 7.36123677 2.98617636 7.36123677 1.7531257 7.36123677.752690432 6.3608015.752690432 5.12585966.752690432 3.89091782 1.7531257 2.89048255 2.98617636 2.89048255 4.2211182 2.89048255 5.22155347 3.89091782 5.22155347 5.12585966zM5.22155347 5.34334559L5.71136961 5.13720675C6.09906191 4.97267392 6.53781614 4.97267392 6.92739962 5.13720675L7.41532458 5.34334559" />
-            </g>
-          </g>
-          <g className={`${this.blockClass}__frame`} stroke="#828282">
-            <polyline points="48 6 48 48 6 48" />
-            <polyline points="45 3 45 45 3 45" />
-            <polygon points="0 42 42 42 42 0 0 0" />
-          </g>
-        </g>
-      </svg>
+    return classNames(
+      this.blockClass,
+      `${this.blockClass}--${type}`,
+      `${this.blockClass}--${colorModifier}`
     );
   }
 
@@ -134,16 +100,50 @@ export default class SVGProjectPlaceholder extends Component {
     );
   }
 
-  classes(type) {
-    const colorModifier =
-      !this.props.color || this.props.color === "sentary"
-        ? "sentary"
-        : this.props.color;
-
-    return classNames(
-      this.blockClass,
-      `${this.blockClass}--${type}`,
-      `${this.blockClass}--${colorModifier}`
+  small(className) {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 48 48"
+        width="100%"
+        height="100%"
+        className={this.classes(className)}
+        aria-label={this.ariaLabel}
+      >
+        <g fill="none" fillRule="evenodd">
+          <polygon
+            className={`${this.blockClass}__tile`}
+            fill="#CBF7E6"
+            points="0 42 42 42 42 0 0 0"
+          />
+          <g
+            className={`${this.blockClass}__illustration`}
+            transform="translate(9 8)"
+          >
+            <g transform="translate(20.683 2.244)">
+              <polygon points=".161 2.954 .161 21.013 1.612 23.598 3.06 21.013 3.06 2.954" />
+              <path d="M3.06081501,21.012797 L0.161633021,21.012797" />
+              <path
+                strokeLinejoin="round"
+                d="M0.162011257,2.95560225 L3.06119325,2.95560225 L3.06119325,1.53299812 C3.06119325,0.980713374 2.613478,0.532998124 2.06119325,0.532998124 L1.16201126,0.532998124 C0.609726507,0.532998124 0.162011257,0.980713374 0.162011257,1.53299812 L0.162011257,2.95560225 Z"
+              />
+            </g>
+            <g transform="translate(.195 11.463)">
+              <polygon points="14.898 .419 .985 .419 .985 11.282 8.141 11.282 8.141 14.378 10.844 11.282 14.898 11.282" />
+              <path d="M12.5237854 3.46905816L3.32696735 3.46905816M12.5237854 8.00165403L3.32696735 8.00165403M12.5237854 5.73507242L3.32696735 5.73507242" />
+            </g>
+            <g transform="translate(.195 .195)">
+              <path d="M11.8853223 5.12585966C11.8853223 6.3608015 10.8848871 7.36123677 9.64994522 7.36123677 8.41689456 7.36123677 7.41645929 6.3608015 7.41645929 5.12585966 7.41645929 3.89091782 8.41689456 2.89048255 9.64994522 2.89048255 10.8848871 2.89048255 11.8853223 3.89091782 11.8853223 5.12585966zM11.8853223 5.23573734L15.0417051 2.0793546C15.6109508 1.51010882 16.5849096 1.91293058 16.5849096 2.71857411M3.99814784 3.09718874L6.63067317.464663415C7.20181013-.106473546 8.17576886.2982394 8.17576886 1.10388293" />
+              <path d="M5.22155347 5.12585966C5.22155347 6.3608015 4.2211182 7.36123677 2.98617636 7.36123677 1.7531257 7.36123677.752690432 6.3608015.752690432 5.12585966.752690432 3.89091782 1.7531257 2.89048255 2.98617636 2.89048255 4.2211182 2.89048255 5.22155347 3.89091782 5.22155347 5.12585966zM5.22155347 5.34334559L5.71136961 5.13720675C6.09906191 4.97267392 6.53781614 4.97267392 6.92739962 5.13720675L7.41532458 5.34334559" />
+            </g>
+          </g>
+          <g className={`${this.blockClass}__frame`} stroke="#828282">
+            <polyline points="48 6 48 48 6 48" />
+            <polyline points="45 3 45 45 3 45" />
+            <polygon points="0 42 42 42 42 0 0 0" />
+          </g>
+        </g>
+      </svg>
     );
   }
 

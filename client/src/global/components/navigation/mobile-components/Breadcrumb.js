@@ -10,19 +10,6 @@ export default class MobileBreadcrumb extends PureComponent {
     location: PropTypes.object.isRequired
   };
 
-  get segments() {
-    const segments = [];
-    const first = this.match(this.props.links);
-    if (first) {
-      segments.push(first);
-      const second = this.match(first.children);
-      if (second) {
-        segments.push(second);
-      }
-    }
-    return segments;
-  }
-
   match(links) {
     if (!links) return null;
     return links.find(link => {
@@ -40,6 +27,19 @@ export default class MobileBreadcrumb extends PureComponent {
     const args = link.args || [];
     const route = link.linksTo || link.route;
     return lh.link(route, ...args);
+  }
+
+  get segments() {
+    const segments = [];
+    const first = this.match(this.props.links);
+    if (first) {
+      segments.push(first);
+      const second = this.match(first.children);
+      if (second) {
+        segments.push(second);
+      }
+    }
+    return segments;
   }
 
   render() {

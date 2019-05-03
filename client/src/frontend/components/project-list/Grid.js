@@ -8,6 +8,11 @@ import classNames from "classnames";
 import GridItem from "./GridItem";
 
 export default class ProjectListGrid extends Component {
+  static defaultProps = {
+    limit: null,
+    viewAllLabel: "See All Projects"
+  };
+
   static displayName = "ProjectList.Grid";
 
   static propTypes = {
@@ -20,11 +25,6 @@ export default class ProjectListGrid extends Component {
     paginationClickHandler: PropTypes.func,
     viewAllUrl: PropTypes.string,
     viewAllLabel: PropTypes.string
-  };
-
-  static defaultProps = {
-    limit: null,
-    viewAllLabel: "See All Projects"
   };
 
   constructor() {

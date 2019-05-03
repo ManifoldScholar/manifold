@@ -17,14 +17,14 @@ const { request } = entityStoreActions;
 const perPage = 12;
 
 class ProjectCollectionManageProjectsImplementation extends PureComponent {
+  static displayName = "ProjectCollection.ManageProjects";
+
   static mapStateToProps = state => {
     return {
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore)
     };
   };
-
-  static displayName = "ProjectCollection.ManageProjects";
 
   static propTypes = {
     projectCollection: PropTypes.object.isRequired,
@@ -44,6 +44,15 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     if (this.filtersChanged(prevProps)) return this.fetchProjects();
   }
 
+  fetchProjects(eventIgnored = null, page = 1) {
+    const pagination = { number: page, size: perPage };
+    const action = request(
+      projectsAPI.index(this.filters, pagination),
+      requests.beProjects
+    );
+    this.props.dispatch(action);
+  }
+
   get filters() {
     return this.props.entitiesListSearchParams.projects || {};
   }
@@ -54,46 +63,12 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     );
   }
 
-  projectsForProjectCollection(projectCollection) {
-    return projectCollection.relationships.collectionProjects.map(
-      cp => cp.relationships.project
+  handleClose = () => {
+    const url = lh.link(
+      "backendProjectCollection",
+      this.props.projectCollection.id
     );
-  }
-
-  fetchProjects(eventIgnored = null, page = 1) {
-    const pagination = { number: page, size: perPage };
-    const action = request(
-      projectsAPI.index(this.filters, pagination),
-      requests.beProjects
-    );
-    this.props.dispatch(action);
-  }
-
-  updateHandlerCreator = page => {
-    return event => {
-      this.fetchProjects(event, page);
-    };
-  };
-
-  updateProjects = projects => {
-    const adjustedProjects = projects.map(project => {
-      return { id: project.id, type: "projects" };
-    });
-    const projectCollection = {
-      id: this.props.projectCollection.id,
-      type: "projectCollections",
-      relationships: { projects: { data: adjustedProjects } }
-    };
-
-    const call = projectCollectionsAPI.update(
-      projectCollection.id,
-      projectCollection
-    );
-    const projectCollectionRequest = request(
-      call,
-      requests.beProjectCollectionUpdate
-    );
-    this.props.dispatch(projectCollectionRequest);
+    return this.props.history.push(url);
   };
 
   handleProjectAdd = project => {
@@ -133,12 +108,37 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     );
   };
 
-  handleClose = () => {
-    const url = lh.link(
-      "backendProjectCollection",
-      this.props.projectCollection.id
+  projectsForProjectCollection(projectCollection) {
+    return projectCollection.relationships.collectionProjects.map(
+      cp => cp.relationships.project
     );
-    return this.props.history.push(url);
+  }
+
+  updateHandlerCreator = page => {
+    return event => {
+      this.fetchProjects(event, page);
+    };
+  };
+
+  updateProjects = projects => {
+    const adjustedProjects = projects.map(project => {
+      return { id: project.id, type: "projects" };
+    });
+    const projectCollection = {
+      id: this.props.projectCollection.id,
+      type: "projectCollections",
+      relationships: { projects: { data: adjustedProjects } }
+    };
+
+    const call = projectCollectionsAPI.update(
+      projectCollection.id,
+      projectCollection
+    );
+    const projectCollectionRequest = request(
+      call,
+      requests.beProjectCollectionUpdate
+    );
+    this.props.dispatch(projectCollectionRequest);
   };
 
   renderProjectCount(projectCollection, projectsMeta) {

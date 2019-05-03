@@ -30,10 +30,8 @@ export default class Login extends Component {
     }
   }
 
-  updateInput = event => {
-    const key = event.target.name;
-    const value = event.target.value;
-    this.setState(Object.assign({}, this.state, { [key]: value }));
+  authenticationError = () => {
+    return get(this.props.authentication, "error.body");
   };
 
   handleLogin = event => {
@@ -46,8 +44,10 @@ export default class Login extends Component {
     dispatch(action);
   };
 
-  authenticationError = () => {
-    return get(this.props.authentication, "error.body");
+  updateInput = event => {
+    const key = event.target.name;
+    const value = event.target.value;
+    this.setState(Object.assign({}, this.state, { [key]: value }));
   };
 
   render() {

@@ -16,6 +16,12 @@ import Authorize from "hoc/authorize";
 const { request, flush } = entityStoreActions;
 
 export class ResourceCollectionWrapperContainer extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "ResourceCollection.Wrapper";
+
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       resourceCollection: select(
@@ -24,8 +30,6 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
       )
     };
   };
-
-  static displayName = "ResourceCollection.Wrapper";
 
   static propTypes = {
     resourceCollection: PropTypes.object,
@@ -36,10 +40,6 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     confirm: PropTypes.func.isRequired
   };
 
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
-  };
-
   componentDidMount() {
     this.fetchCollection();
   }
@@ -47,26 +47,6 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
   componentWillUnmount() {
     this.props.dispatch(flush(requests.beResourceCollection));
   }
-
-  fetchCollection = () => {
-    const call = resourceCollectionsAPI.show(this.props.match.params.id);
-    const resourceCollectionRequest = request(
-      call,
-      requests.beResourceCollection
-    );
-    this.props.dispatch(resourceCollectionRequest);
-  };
-
-  doPreview = event => {
-    event.preventDefault();
-    const previewUrl = lh.link(
-      "frontendProjectResourceCollection",
-      this.props.resourceCollection.relationships.project.attributes.slug,
-      this.props.resourceCollection.attributes.slug
-    );
-    const win = window.open(previewUrl, "_blank");
-    win.focus();
-  };
 
   doDestroy = () => {
     const call = resourceCollectionsAPI.destroy(
@@ -84,11 +64,31 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     });
   };
 
-  redirectToProjectCollections() {
-    const projectId = this.props.resourceCollection.relationships.project.id;
-    const redirectUrl = lh.link("backendProjectResourceCollections", projectId);
-    this.props.history.push(redirectUrl);
-  }
+  doPreview = event => {
+    event.preventDefault();
+    const previewUrl = lh.link(
+      "frontendProjectResourceCollection",
+      this.props.resourceCollection.relationships.project.attributes.slug,
+      this.props.resourceCollection.attributes.slug
+    );
+    const win = window.open(previewUrl, "_blank");
+    win.focus();
+  };
+
+  fetchCollection = () => {
+    const call = resourceCollectionsAPI.show(this.props.match.params.id);
+    const resourceCollectionRequest = request(
+      call,
+      requests.beResourceCollection
+    );
+    this.props.dispatch(resourceCollectionRequest);
+  };
+
+  handleCollectionDestroy = () => {
+    const heading = "Are you sure you want to delete this resource collection?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, this.doDestroy);
+  };
 
   notifyDestroy() {
     const notification = {
@@ -103,11 +103,18 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     this.props.dispatch(notificationActions.addNotification(notification));
   }
 
-  handleCollectionDestroy = () => {
-    const heading = "Are you sure you want to delete this resource collection?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, this.doDestroy);
-  };
+  redirectToProjectCollections() {
+    const projectId = this.props.resourceCollection.relationships.project.id;
+    const redirectUrl = lh.link("backendProjectResourceCollections", projectId);
+    this.props.history.push(redirectUrl);
+  }
+
+  renderRoutes() {
+    const { resourceCollection } = this.props;
+    return childRoutes(this.props.route, {
+      childProps: { resourceCollection }
+    });
+  }
 
   renderUtility() {
     return (
@@ -125,13 +132,6 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
         </button>
       </div>
     );
-  }
-
-  renderRoutes() {
-    const { resourceCollection } = this.props;
-    return childRoutes(this.props.route, {
-      childProps: { resourceCollection }
-    });
   }
 
   render() {

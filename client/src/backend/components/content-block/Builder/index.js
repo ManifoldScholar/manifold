@@ -14,7 +14,19 @@ import AvailableSection from "./sections/Available";
 const { request } = entityStoreActions;
 
 export class ProjectContent extends PureComponent {
+  static cloneBlocks(props) {
+    const blocks = props.contentBlocks || [];
+    return cloneDeep(blocks);
+  }
+
   static displayName = "ContentBlock.Builder";
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.contentBlocksResponse === state.response) return null;
+
+    const blocks = ProjectContent.cloneBlocks(props);
+    return { blocks, response: props.contentBlocksResponse };
+  }
 
   static propTypes = {
     project: PropTypes.object,
@@ -27,18 +39,6 @@ export class ProjectContent extends PureComponent {
     dispatch: PropTypes.func.isRequired
   };
 
-  static cloneBlocks(props) {
-    const blocks = props.contentBlocks || [];
-    return cloneDeep(blocks);
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    if (props.contentBlocksResponse === state.response) return null;
-
-    const blocks = ProjectContent.cloneBlocks(props);
-    return { blocks, response: props.contentBlocksResponse };
-  }
-
   constructor(props) {
     super(props);
 
@@ -48,10 +48,6 @@ export class ProjectContent extends PureComponent {
       response: props.contentBlocksResponse
     };
   }
-
-  onDragStart = draggable => {
-    this.setState({ activeDraggableType: draggable.type });
-  };
 
   onDragEnd = draggable => {
     this.setState({ activeDraggableType: null });
@@ -68,50 +64,8 @@ export class ProjectContent extends PureComponent {
     this.setState({ blocks: draggableHelper.blocks }, callback);
   };
 
-  get projectId() {
-    return this.props.project.id;
-  }
-
-  get currentBlocks() {
-    return this.state.blocks;
-  }
-
-  get entityCallbacks() {
-    return {
-      showBlock: this.showBlock,
-      hideBlock: this.hideBlock,
-      deleteBlock: this.handleDeleteBlock,
-      saveBlockPosition: this.updateBlock,
-      editBlock: this.editBlock
-    };
-  }
-
-  get drawerCloseCallback() {
-    if (!this.pendingBlock) return null;
-    return this.resetState;
-  }
-
-  get pendingBlock() {
-    return this.state.blocks.find(block => block.id === "pending");
-  }
-
-  resetState = () => {
-    this.setState({ blocks: this.constructor.cloneBlocks(this.props) });
-  };
-
-  editBlock = block => {
-    this.props.history.push(
-      lh.link("backendProjectContentBlock", this.projectId, block.id),
-      { noScroll: true }
-    );
-  };
-
-  newBlock = () => {
-    configHelper.isConfigurable(this.pendingBlock.attributes.type)
-      ? this.props.history.push(
-          lh.link("backendProjectContentBlockNew", this.projectId)
-        )
-      : this.createBlock();
+  onDragStart = draggable => {
+    this.setState({ activeDraggableType: draggable.type });
   };
 
   createBlock() {
@@ -122,16 +76,9 @@ export class ProjectContent extends PureComponent {
     });
   }
 
-  updateBlock = block => {
-    const call = contentBlocksAPI.update(block.id, {
-      attributes: block.attributes
-    });
-    const options = { noTouch: true, notificationScope: "none" };
-    const updateRequest = request(call, requests.beContentBlockUpdate, options);
-    this.props.dispatch(updateRequest).promise.then(() => {
-      this.props.refresh();
-    });
-  };
+  get currentBlocks() {
+    return this.state.blocks;
+  }
 
   deleteBlock = block => {
     const call = contentBlocksAPI.destroy(block.id);
@@ -146,20 +93,27 @@ export class ProjectContent extends PureComponent {
     });
   };
 
-  toggleBlockVisibility(block, visible) {
-    const adjusted = Object.assign({}, block);
-    adjusted.attributes.visible = visible;
-
-    this.updateBlock(adjusted);
+  get drawerCloseCallback() {
+    if (!this.pendingBlock) return null;
+    return this.resetState;
   }
 
-  showBlock = block => {
-    this.toggleBlockVisibility(block, true);
+  editBlock = block => {
+    this.props.history.push(
+      lh.link("backendProjectContentBlock", this.projectId, block.id),
+      { noScroll: true }
+    );
   };
 
-  hideBlock = block => {
-    this.toggleBlockVisibility(block, false);
-  };
+  get entityCallbacks() {
+    return {
+      showBlock: this.showBlock,
+      hideBlock: this.hideBlock,
+      deleteBlock: this.handleDeleteBlock,
+      saveBlockPosition: this.updateBlock,
+      editBlock: this.editBlock
+    };
+  }
 
   handleAddEntity = type => {
     const draggableHelper = new DraggableEventHelper(
@@ -173,6 +127,52 @@ export class ProjectContent extends PureComponent {
     const heading = "Are you sure you want to delete this content block?";
     const message = "This action cannot be undone.";
     this.props.confirm(heading, message, () => this.deleteBlock(block));
+  };
+
+  hideBlock = block => {
+    this.toggleBlockVisibility(block, false);
+  };
+
+  newBlock = () => {
+    configHelper.isConfigurable(this.pendingBlock.attributes.type)
+      ? this.props.history.push(
+          lh.link("backendProjectContentBlockNew", this.projectId)
+        )
+      : this.createBlock();
+  };
+
+  get pendingBlock() {
+    return this.state.blocks.find(block => block.id === "pending");
+  }
+
+  get projectId() {
+    return this.props.project.id;
+  }
+
+  resetState = () => {
+    this.setState({ blocks: this.constructor.cloneBlocks(this.props) });
+  };
+
+  showBlock = block => {
+    this.toggleBlockVisibility(block, true);
+  };
+
+  toggleBlockVisibility(block, visible) {
+    const adjusted = Object.assign({}, block);
+    adjusted.attributes.visible = visible;
+
+    this.updateBlock(adjusted);
+  }
+
+  updateBlock = block => {
+    const call = contentBlocksAPI.update(block.id, {
+      attributes: block.attributes
+    });
+    const options = { noTouch: true, notificationScope: "none" };
+    const updateRequest = request(call, requests.beContentBlockUpdate, options);
+    this.props.dispatch(updateRequest).promise.then(() => {
+      this.props.refresh();
+    });
   };
 
   render() {

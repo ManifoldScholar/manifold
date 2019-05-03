@@ -8,6 +8,11 @@ import FocusTrap from "focus-trap-react";
 import isString from "lodash/isString";
 
 class DialogWrapper extends PureComponent {
+  static defaultProps = {
+    showCloseButton: true,
+    closeOnOverlayClick: true
+  };
+
   static displayName = "Dialog.Wrapper";
 
   static propTypes = {
@@ -20,11 +25,6 @@ class DialogWrapper extends PureComponent {
     history: PropTypes.object,
     closeHandler: PropTypes.func,
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-  };
-
-  static defaultProps = {
-    showCloseButton: true,
-    closeOnOverlayClick: true
   };
 
   constructor(props) {
@@ -46,15 +46,12 @@ class DialogWrapper extends PureComponent {
     this.setState({ additionalClassNames });
   };
 
-  handleEscape = event => {
-    if (event.keyCode === 27 && this.props.showCloseButton === true) {
-      this.doClose();
-    }
-  };
+  closeWithCallback() {
+    this.leave(this.props.closeCallback);
+  }
 
-  leave(callback) {
-    this.setState({ leaving: true });
-    setTimeout(callback, 200);
+  closeWithNoAction() {
+    this.leave(() => {});
   }
 
   closeWithUrlChange() {
@@ -63,27 +60,30 @@ class DialogWrapper extends PureComponent {
     });
   }
 
-  closeWithNoAction() {
-    this.leave(() => {});
-  }
-
-  closeWithCallback() {
-    this.leave(this.props.closeCallback);
-  }
-
   doClose() {
     if (this.props.closeUrl) return this.closeWithUrlChange();
     if (!this.props.closeHandler) return this.closeWithCallback();
     return this.closeWithNoAction();
   }
 
+  handleCloseClick = eventIgnored => {
+    this.doClose();
+  };
+
+  handleEscape = event => {
+    if (event.keyCode === 27 && this.props.showCloseButton === true) {
+      this.doClose();
+    }
+  };
+
   handleOverlayClick = eventIgnored => {
     if (this.props.closeOnOverlayClick) this.doClose();
   };
 
-  handleCloseClick = eventIgnored => {
-    this.doClose();
-  };
+  leave(callback) {
+    this.setState({ leaving: true });
+    setTimeout(callback, 200);
+  }
 
   style() {
     const style = {};

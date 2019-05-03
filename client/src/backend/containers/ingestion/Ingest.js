@@ -17,6 +17,12 @@ import Heading from "./Heading";
 const { request, flush } = entityStoreActions;
 
 export class IngestionIngest extends Component {
+  static defaultProps = {
+    setDialogClassName: () => {} // noop
+  };
+
+  static displayName = "ProjectDetail.Text.Ingest";
+
   static fetchData = (getState, dispatch, location, match) => {
     if (isLoaded(requests.beIngestionShow, getState())) return;
     const call = ingestionsAPI.show(match.params.ingestionId);
@@ -35,8 +41,6 @@ export class IngestionIngest extends Component {
     };
   };
 
-  static displayName = "ProjectDetail.Text.Ingest";
-
   static propTypes = {
     ingestion: PropTypes.object,
     channel: PropTypes.object,
@@ -49,10 +53,6 @@ export class IngestionIngest extends Component {
     setDialogClassName: PropTypes.func,
     webSocketConnected: PropTypes.bool,
     webSocketFailure: PropTypes.bool
-  };
-
-  static defaultProps = {
-    setDialogClassName: () => {} // noop
   };
 
   constructor(props) {
@@ -100,23 +100,24 @@ export class IngestionIngest extends Component {
     this.props.setDialogClassName(dialogClass);
   }
 
+  appendToLog(message) {
+    if (message[0] === "DEBUG") return;
+    const textLog = this.state.textLog.concat("\n").concat(message[1]);
+    this.setState({ textLog });
+  }
+
+  backToEdit = () => {
+    this.props.history.push(this.editUrl, { stage: "upload" });
+  };
+
   get canReset() {
     const { ingestion, webSocketConnected } = this.props;
     if (!ingestion || !webSocketConnected) return false;
     return ingestion.attributes.availableEvents.includes("reset");
   }
 
-  get isReingestion() {
-    return this.props.ingestion.attributes.textId;
-  }
-
-  get editUrl() {
-    const { id, ingestionId } = this.props.match.params;
-    const path = this.props.text
-      ? "backendTextIngestionEdit"
-      : "backendProjectTextsIngestionEdit";
-
-    return lh.link(path, id, ingestionId);
+  closeSocket() {
+    this.props.dispatch(websocketActions.unsubscribe(this.channelName));
   }
 
   get closeUrl() {
@@ -128,90 +129,9 @@ export class IngestionIngest extends Component {
     return lh.link(path, id);
   }
 
-  reset = () => {
-    if (this.state.loading) return;
-    this.setState({ textLog: "" }, () => {
-      this.props.dispatch(
-        websocketActions.triggerAction(this.channelName, "reset")
-      );
-    });
-  };
-
-  ingest = () => {
-    if (this.state.loading) return;
-    this.props.dispatch(
-      websocketActions.triggerAction(this.channelName, "process")
-    );
-  };
-
-  reingest = () => {
-    if (this.state.loading) return;
-    this.props.dispatch(
-      websocketActions.triggerAction(this.channelName, "reingest")
-    );
-  };
-
   complete = () => {
     this.props.history.push(this.closeUrl);
   };
-
-  backToEdit = () => {
-    this.props.history.push(this.editUrl, { stage: "upload" });
-  };
-
-  maybeProcessMessage(nextChannel, thisChannel, nextPropsIgnored) {
-    const nextMessage = get(nextChannel, "message");
-    const lastMessage = get(thisChannel, "message");
-    const nextMessageId = get(nextMessage, "id");
-    const lastMessageId = get(lastMessage, "id");
-    if (!nextMessage) return;
-    if (nextMessageId === lastMessageId) return;
-    if (nextMessage.type === "message") this.handleMessage(nextMessage.payload);
-    if (nextMessage.type === "log") this.appendToLog(nextMessage.payload);
-  }
-
-  handleMessage(payload) {
-    if (payload === "START_ACTION") return this.startLoading(payload);
-    if (payload === "END_ACTION") return this.stopLoading(payload);
-  }
-
-  startLoading() {
-    this.setState({ loading: true }, () => {
-      this.props.dispatch({
-        type: "START_LOADING",
-        payload: "ingestion-websocket"
-      });
-    });
-  }
-
-  stopLoading() {
-    this.setState({ loading: false }, () => {
-      this.props.dispatch({
-        type: "STOP_LOADING",
-        payload: "ingestion-websocket"
-      });
-    });
-  }
-
-  openSocket(ingestionId) {
-    const options = { ingestion: ingestionId };
-    this.props.dispatch(websocketActions.subscribe(this.channelName, options));
-  }
-
-  closeSocket() {
-    this.props.dispatch(websocketActions.unsubscribe(this.channelName));
-  }
-
-  scrollToLogBottom = throttle(() => {
-    if (!this.logEl) return;
-    this.logEl.scrollTop = this.logEl.scrollHeight;
-  }, 250);
-
-  appendToLog(message) {
-    if (message[0] === "DEBUG") return;
-    const textLog = this.state.textLog.concat("\n").concat(message[1]);
-    this.setState({ textLog });
-  }
 
   displayError() {
     const body = (
@@ -250,6 +170,86 @@ export class IngestionIngest extends Component {
       removeNotification: this.complete
     };
     this.props.dispatch(notificationActions.addNotification(notification));
+  }
+
+  get editUrl() {
+    const { id, ingestionId } = this.props.match.params;
+    const path = this.props.text
+      ? "backendTextIngestionEdit"
+      : "backendProjectTextsIngestionEdit";
+
+    return lh.link(path, id, ingestionId);
+  }
+
+  handleMessage(payload) {
+    if (payload === "START_ACTION") return this.startLoading(payload);
+    if (payload === "END_ACTION") return this.stopLoading(payload);
+  }
+
+  ingest = () => {
+    if (this.state.loading) return;
+    this.props.dispatch(
+      websocketActions.triggerAction(this.channelName, "process")
+    );
+  };
+
+  get isReingestion() {
+    return this.props.ingestion.attributes.textId;
+  }
+
+  maybeProcessMessage(nextChannel, thisChannel, nextPropsIgnored) {
+    const nextMessage = get(nextChannel, "message");
+    const lastMessage = get(thisChannel, "message");
+    const nextMessageId = get(nextMessage, "id");
+    const lastMessageId = get(lastMessage, "id");
+    if (!nextMessage) return;
+    if (nextMessageId === lastMessageId) return;
+    if (nextMessage.type === "message") this.handleMessage(nextMessage.payload);
+    if (nextMessage.type === "log") this.appendToLog(nextMessage.payload);
+  }
+
+  openSocket(ingestionId) {
+    const options = { ingestion: ingestionId };
+    this.props.dispatch(websocketActions.subscribe(this.channelName, options));
+  }
+
+  reingest = () => {
+    if (this.state.loading) return;
+    this.props.dispatch(
+      websocketActions.triggerAction(this.channelName, "reingest")
+    );
+  };
+
+  reset = () => {
+    if (this.state.loading) return;
+    this.setState({ textLog: "" }, () => {
+      this.props.dispatch(
+        websocketActions.triggerAction(this.channelName, "reset")
+      );
+    });
+  };
+
+  scrollToLogBottom = throttle(() => {
+    if (!this.logEl) return;
+    this.logEl.scrollTop = this.logEl.scrollHeight;
+  }, 250);
+
+  startLoading() {
+    this.setState({ loading: true }, () => {
+      this.props.dispatch({
+        type: "START_LOADING",
+        payload: "ingestion-websocket"
+      });
+    });
+  }
+
+  stopLoading() {
+    this.setState({ loading: false }, () => {
+      this.props.dispatch({
+        type: "STOP_LOADING",
+        payload: "ingestion-websocket"
+      });
+    });
   }
 
   render() {

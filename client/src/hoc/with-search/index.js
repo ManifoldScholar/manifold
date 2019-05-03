@@ -85,6 +85,17 @@ function withSearch(WrappedComponent) {
       this.props.dispatch(uiSearchActions.resetSearch());
     }
 
+    setPage = page => {
+      return event => {
+        event.preventDefault();
+        this.doSearch(page);
+      };
+    };
+
+    setQueryState = queryParams => {
+      return this.props.dispatch(uiSearchActions.setSearchQuery(queryParams));
+    };
+
     get childProps() {
       return {
         setQueryState: this.setQueryState,
@@ -95,17 +106,6 @@ function withSearch(WrappedComponent) {
         ref: this.searchComponent
       };
     }
-
-    setQueryState = queryParams => {
-      return this.props.dispatch(uiSearchActions.setSearchQuery(queryParams));
-    };
-
-    setPage = page => {
-      return event => {
-        event.preventDefault();
-        this.doSearch(page);
-      };
-    };
 
     doSearch(page = 1) {
       const pagination = { number: page };

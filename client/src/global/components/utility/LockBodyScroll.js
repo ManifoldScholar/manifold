@@ -4,15 +4,15 @@ import PropTypes from "prop-types";
 import BodyClass from "hoc/body-class";
 
 export default class LockBodyScroll extends PureComponent {
+  static defaultProps = {
+    lockClass: "no-scroll"
+  };
+
   static displayName = "Utility.LockBodyScroll";
 
   static propTypes = {
     lockClass: PropTypes.string,
     children: PropTypes.element.isRequired
-  };
-
-  static defaultProps = {
-    lockClass: "no-scroll"
   };
 
   render() {

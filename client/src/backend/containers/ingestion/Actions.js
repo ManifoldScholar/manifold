@@ -12,42 +12,6 @@ export default class IngestionActions extends Component {
     complete: PropTypes.func.isRequired
   };
 
-  get ingestion() {
-    return this.props.ingestion;
-  }
-
-  get connected() {
-    return this.props.connected;
-  }
-
-  get canCancel() {
-    return !this.finished && !this.inProgress;
-  }
-
-  get finished() {
-    return this.ingestion.attributes.state === "finished";
-  }
-
-  get inProgress() {
-    return this.ingestion.attributes.state === "processing";
-  }
-
-  get startButton() {
-    if (this.finished) return null;
-    const label = this.inProgress ? "Ingesting" : "Start Ingestion";
-
-    return (
-      <button
-        onClick={this.props.start}
-        className="button-icon-secondary"
-        disabled={this.inProgress}
-      >
-        <i className="manicon manicon-arrow-down" aria-hidden="true" />
-        <span>{label}</span>
-      </button>
-    );
-  }
-
   get backButton() {
     if (this.finished) return null;
 
@@ -63,6 +27,10 @@ export default class IngestionActions extends Component {
     );
   }
 
+  get canCancel() {
+    return !this.finished && !this.inProgress;
+  }
+
   get completeButton() {
     if (!this.finished) return null;
 
@@ -70,6 +38,38 @@ export default class IngestionActions extends Component {
       <button onClick={this.props.complete} className="button-icon-secondary">
         <i className="manicon manicon-check small" aria-hidden="true" />
         <span>Complete</span>
+      </button>
+    );
+  }
+
+  get connected() {
+    return this.props.connected;
+  }
+
+  get finished() {
+    return this.ingestion.attributes.state === "finished";
+  }
+
+  get inProgress() {
+    return this.ingestion.attributes.state === "processing";
+  }
+
+  get ingestion() {
+    return this.props.ingestion;
+  }
+
+  get startButton() {
+    if (this.finished) return null;
+    const label = this.inProgress ? "Ingesting" : "Start Ingestion";
+
+    return (
+      <button
+        onClick={this.props.start}
+        className="button-icon-secondary"
+        disabled={this.inProgress}
+      >
+        <i className="manicon manicon-arrow-down" aria-hidden="true" />
+        <span>{label}</span>
       </button>
     );
   }

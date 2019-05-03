@@ -9,10 +9,6 @@ export default class Filters extends Component {
     filter: PropTypes.object
   };
 
-  filteredBy(filter, format) {
-    return filter.indexOf(format) > -1;
-  }
-
   toggleFormat = (event, format) => {
     event.preventDefault();
     const formatsFilter = this.props.filter.formats;
@@ -23,6 +19,10 @@ export default class Filters extends Component {
     }
     this.props.filterChangeHandler("formats", formatsFilter);
   };
+
+  filteredBy(filter, format) {
+    return filter.indexOf(format) > -1;
+  }
 
   renderCheckBox(label, format) {
     const formats = this.props.filter.formats;

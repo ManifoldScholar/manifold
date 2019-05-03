@@ -9,6 +9,13 @@ import BlurOnLocationChange from "hoc/blur-on-location-change";
 import Utility from "global/components/utility";
 
 class LayoutFooter extends Component {
+  static defaultProps = {
+    pages: [],
+    history: {
+      push: () => {}
+    }
+  };
+
   static displayName = "Layout.Footer";
 
   static propTypes = {
@@ -29,77 +36,11 @@ class LayoutFooter extends Component {
     })
   };
 
-  static defaultProps = {
-    pages: [],
-    history: {
-      push: () => {}
-    }
-  };
-
   constructor(props) {
     super(props);
     this.state = {
       keyword: ""
     };
-  }
-
-  handleLogoutClick = event => {
-    event.preventDefault();
-    this.props.commonActions.logout();
-  };
-
-  handleLoginClick = event => {
-    event.preventDefault();
-    this.props.commonActions.toggleSignInUpOverlay();
-  };
-
-  visiblePages(props) {
-    if (!props.pages) return [];
-    return props.pages.filter(p => {
-      return p.attributes.showInFooter && !p.attributes.hidden;
-    });
-  }
-
-  sortedPages(props) {
-    const out = [];
-    this.visiblePages(props).map(page => {
-      return page.attributes.purpose === "supplemental_content"
-        ? out.unshift(page)
-        : out.push(page);
-    });
-
-    return out;
-  }
-
-  buildContentPages() {
-    return this.sortedPages(this.props).map(page => {
-      return page.attributes.isExternalLink
-        ? this.buildExternalPageLink(page)
-        : this.buildInternalPageLink(page);
-    });
-  }
-
-  buildInternalPageLink(page) {
-    return (
-      <Link
-        to={lh.link("frontendPage", page.attributes.slug)}
-        target={page.attributes.openInNewTab ? "_blank" : null}
-      >
-        {page.attributes.navTitle || page.attributes.title}
-      </Link>
-    );
-  }
-
-  buildExternalPageLink(page) {
-    return (
-      <a
-        href={page.attributes.externalLink}
-        target={page.attributes.openInNewTab ? "_blank" : null}
-        rel="noopener noreferrer"
-      >
-        {page.attributes.navTitle || page.attributes.title}
-      </a>
-    );
   }
 
   buildAuthLink() {
@@ -122,6 +63,14 @@ class LayoutFooter extends Component {
     );
   }
 
+  buildContentPages() {
+    return this.sortedPages(this.props).map(page => {
+      return page.attributes.isExternalLink
+        ? this.buildExternalPageLink(page)
+        : this.buildInternalPageLink(page);
+    });
+  }
+
   buildEmailLink() {
     if (!this.props.settings) return null;
     if (!this.props.settings.attributes.general.contactEmail) return null;
@@ -133,18 +82,14 @@ class LayoutFooter extends Component {
     );
   }
 
-  buildTwitterLink() {
-    if (!this.props.settings) return null;
-    if (!this.props.settings.attributes.general.twitter) return null;
-    const name = this.props.settings.attributes.general.twitter;
+  buildExternalPageLink(page) {
     return (
       <a
-        target="_blank"
+        href={page.attributes.externalLink}
+        target={page.attributes.openInNewTab ? "_blank" : null}
         rel="noopener noreferrer"
-        href={`https://twitter.com/${name}`}
       >
-        <i className="manicon manicon-twitter" />
-        {"Twitter"}
+        {page.attributes.navTitle || page.attributes.title}
       </a>
     );
   }
@@ -162,6 +107,17 @@ class LayoutFooter extends Component {
         <i className="manicon manicon-facebook" />
         {"Facebook"}
       </a>
+    );
+  }
+
+  buildInternalPageLink(page) {
+    return (
+      <Link
+        to={lh.link("frontendPage", page.attributes.slug)}
+        target={page.attributes.openInNewTab ? "_blank" : null}
+      >
+        {page.attributes.navTitle || page.attributes.title}
+      </Link>
     );
   }
 
@@ -187,9 +143,25 @@ class LayoutFooter extends Component {
     return socials;
   }
 
-  updateSearchWord = event => {
-    this.setState({ keyword: event.target.value });
-  };
+  buildTwitterLink() {
+    if (!this.props.settings) return null;
+    if (!this.props.settings.attributes.general.twitter) return null;
+    const name = this.props.settings.attributes.general.twitter;
+    return (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href={`https://twitter.com/${name}`}
+      >
+        <i className="manicon manicon-twitter" />
+        {"Twitter"}
+      </a>
+    );
+  }
+
+  checkPressLogo(pressLogo) {
+    return pressLogo && pressLogo.original !== null;
+  }
 
   doSearch = event => {
     event.preventDefault();
@@ -200,8 +172,36 @@ class LayoutFooter extends Component {
     this.setState({ keyword: "" });
   };
 
-  checkPressLogo(pressLogo) {
-    return pressLogo && pressLogo.original !== null;
+  handleLoginClick = event => {
+    event.preventDefault();
+    this.props.commonActions.toggleSignInUpOverlay();
+  };
+
+  handleLogoutClick = event => {
+    event.preventDefault();
+    this.props.commonActions.logout();
+  };
+
+  sortedPages(props) {
+    const out = [];
+    this.visiblePages(props).map(page => {
+      return page.attributes.purpose === "supplemental_content"
+        ? out.unshift(page)
+        : out.push(page);
+    });
+
+    return out;
+  }
+
+  updateSearchWord = event => {
+    this.setState({ keyword: event.target.value });
+  };
+
+  visiblePages(props) {
+    if (!props.pages) return [];
+    return props.pages.filter(p => {
+      return p.attributes.showInFooter && !p.attributes.hidden;
+    });
   }
 
   renderCopyright() {
@@ -227,6 +227,20 @@ class LayoutFooter extends Component {
       </ul>
     );
   }
+
+  renderPressLogo(pressLogo, pressSite) {
+    return (
+      <a
+        href={pressSite}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="press-logo"
+      >
+        <img className="logo-image" alt="Press Site" src={pressLogo.original} />
+      </a>
+    );
+  }
+
   /* eslint-enable react/no-array-index-key */
 
   renderSearchForm() {
@@ -253,19 +267,6 @@ class LayoutFooter extends Component {
           </button>
         </div>
       </form>
-    );
-  }
-
-  renderPressLogo(pressLogo, pressSite) {
-    return (
-      <a
-        href={pressSite}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="press-logo"
-      >
-        <img className="logo-image" alt="Press Site" src={pressLogo.original} />
-      </a>
     );
   }
 

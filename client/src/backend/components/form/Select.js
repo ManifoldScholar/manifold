@@ -6,6 +6,11 @@ import withFormOptions from "hoc/with-form-options";
 import Instructions from "./Instructions";
 
 class FormSelect extends Component {
+  static defaultProps = {
+    id: labelId("select-"),
+    idForError: labelId("select-error-")
+  };
+
   static displayName = "Form.Select";
 
   static propTypes = {
@@ -25,11 +30,6 @@ class FormSelect extends Component {
     focusOnMount: PropTypes.bool,
     id: PropTypes.string,
     idForError: PropTypes.string
-  };
-
-  static defaultProps = {
-    id: labelId("select-"),
-    idForError: labelId("select-error-")
   };
 
   componentDidMount() {

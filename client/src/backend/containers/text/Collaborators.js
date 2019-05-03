@@ -16,14 +16,14 @@ export class TextCollaboratorsContainer extends Component {
     route: PropTypes.object
   };
 
-  closeUrl(props) {
-    return lh.link("backendTextCollaborators", props.text.id);
-  }
-
   close = () => {
     this.props.refresh();
     this.props.history.push(this.closeUrl(this.props));
   };
+
+  closeUrl(props) {
+    return lh.link("backendTextCollaborators", props.text.id);
+  }
 
   render() {
     const text = this.props.text;

@@ -13,6 +13,10 @@ import BlurOnLocationChange from "hoc/blur-on-location-change";
 import PreHeader from "./PreHeader";
 
 export default class LayoutHeader extends PureComponent {
+  static defaultProps = {
+    pages: []
+  };
+
   static displayName = "Layout.Header";
 
   static propTypes = {
@@ -25,9 +29,18 @@ export default class LayoutHeader extends PureComponent {
     pages: PropTypes.array
   };
 
-  static defaultProps = {
-    pages: []
-  };
+  frontendLinks(props) {
+    const out = navigation.frontend(this.props.authentication);
+    const pages = props.pages || [];
+    const pageLinks = pages.reduce((list, page) => {
+      const item = this.pageItem(page);
+      if (item) list.push(item);
+
+      return list;
+    }, []);
+
+    return out.concat(pageLinks);
+  }
 
   pageItem(page) {
     if (!page.attributes.showInHeader) return null;
@@ -45,19 +58,6 @@ export default class LayoutHeader extends PureComponent {
     }
 
     return attrs;
-  }
-
-  frontendLinks(props) {
-    const out = navigation.frontend(this.props.authentication);
-    const pages = props.pages || [];
-    const pageLinks = pages.reduce((list, page) => {
-      const item = this.pageItem(page);
-      if (item) list.push(item);
-
-      return list;
-    }, []);
-
-    return out.concat(pageLinks);
   }
 
   render() {

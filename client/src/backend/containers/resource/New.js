@@ -17,11 +17,7 @@ import Authorize from "hoc/authorize";
 const { request } = entityStoreActions;
 
 export class ResourceNewContainer extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      project: select(requests.beProject, state.entityStore)
-    };
-  };
+  static displayName = "Resource.New";
 
   static fetchData = (getState, dispatch, location, match) => {
     const promises = [];
@@ -31,7 +27,11 @@ export class ResourceNewContainer extends PureComponent {
     return Promise.all(promises);
   };
 
-  static displayName = "Resource.New";
+  static mapStateToProps = state => {
+    return {
+      project: select(requests.beProject, state.entityStore)
+    };
+  };
 
   static propTypes = {
     project: PropTypes.object,
@@ -44,14 +44,14 @@ export class ResourceNewContainer extends PureComponent {
     this.defaultResource = { attributes: { kind: "image" } };
   }
 
+  handleSuccess = resource => {
+    this.redirectToResource(resource);
+  };
+
   redirectToResource(resource) {
     const path = lh.link("backendResource", resource.id);
     this.props.history.push(path);
   }
-
-  handleSuccess = resource => {
-    this.redirectToResource(resource);
-  };
 
   render() {
     const { project } = this.props;

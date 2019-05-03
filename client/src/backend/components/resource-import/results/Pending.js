@@ -10,6 +10,15 @@ export default class ResourceImportResultsPending extends PureComponent {
     resourceImportRow: PropTypes.object.isRequired
   };
 
+  renderIcon(resourceImportRow) {
+    if (resourceImportRow.isSkip)
+      return (
+        <i className="manicon manicon-arrow-right small" aria-hidden="true" />
+      );
+
+    return <i className="manicon manicon-plus small" aria-hidden="true" />;
+  }
+
   renderMessage(resourceImportRow) {
     if (resourceImportRow.isUpdate) {
       return (
@@ -34,15 +43,6 @@ export default class ResourceImportResultsPending extends PureComponent {
         {`Row #${resourceImportRow.lineNumber} will create a new resource.`}
       </span>
     );
-  }
-
-  renderIcon(resourceImportRow) {
-    if (resourceImportRow.isSkip)
-      return (
-        <i className="manicon manicon-arrow-right small" aria-hidden="true" />
-      );
-
-    return <i className="manicon manicon-plus small" aria-hidden="true" />;
   }
 
   render() {

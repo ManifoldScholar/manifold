@@ -4,6 +4,8 @@ import GlobalForm from "global/components/form";
 import brackets2dots from "brackets2dots";
 
 export default class FormHigherOrderValidation extends Component {
+  static defaultProps = {};
+
   static displayName = "Form.HigherOrder.Validation";
 
   static propTypes = {
@@ -18,8 +20,6 @@ export default class FormHigherOrderValidation extends Component {
     setValue: PropTypes.func,
     idForError: PropTypes.string
   };
-
-  static defaultProps = {};
 
   constructor(props) {
     super(props);
@@ -37,43 +37,6 @@ export default class FormHigherOrderValidation extends Component {
     }
   }
 
-  reportErrorStateChange() {
-    if (!this.props.errorHandler) return;
-    const hasErrors = Object.keys(this.state.errors).length > 0;
-    this.props.errorHandler(this.props.name, hasErrors);
-  }
-
-  validate(value) {
-    this.props.validation.forEach(validation => {
-      if (validation === "required") this.validateRequired(value);
-    });
-  }
-
-  validateValue() {
-    this.validate(this.props.value);
-  }
-
-  validateRequired(value) {
-    const key = "required";
-    if (value === "" || value === null) {
-      this.addError(key, "is required");
-    } else {
-      this.removeError(key);
-    }
-  }
-
-  pointerFor(name) {
-    const dotNotation = brackets2dots(name);
-    const jsonPointer = dotNotation.replace(".", "/");
-    return `/data/${jsonPointer}`;
-  }
-
-  removeError(key) {
-    const errors = Object.assign({}, this.state.errors);
-    delete errors[key];
-    this.setState({ errors });
-  }
-
   addError(key, detail) {
     const error = {
       detail,
@@ -83,6 +46,12 @@ export default class FormHigherOrderValidation extends Component {
     };
     const errors = Object.assign({}, this.state.errors, { [key]: error });
     this.setState({ errors });
+  }
+
+  pointerFor(name) {
+    const dotNotation = brackets2dots(name);
+    const jsonPointer = dotNotation.replace(".", "/");
+    return `/data/${jsonPointer}`;
   }
 
   proxyOnChange(callback) {
@@ -97,6 +66,37 @@ export default class FormHigherOrderValidation extends Component {
       this.validate(value);
       callback(value);
     };
+  }
+
+  removeError(key) {
+    const errors = Object.assign({}, this.state.errors);
+    delete errors[key];
+    this.setState({ errors });
+  }
+
+  reportErrorStateChange() {
+    if (!this.props.errorHandler) return;
+    const hasErrors = Object.keys(this.state.errors).length > 0;
+    this.props.errorHandler(this.props.name, hasErrors);
+  }
+
+  validate(value) {
+    this.props.validation.forEach(validation => {
+      if (validation === "required") this.validateRequired(value);
+    });
+  }
+
+  validateRequired(value) {
+    const key = "required";
+    if (value === "" || value === null) {
+      this.addError(key, "is required");
+    } else {
+      this.removeError(key);
+    }
+  }
+
+  validateValue() {
+    this.validate(this.props.value);
   }
 
   render() {

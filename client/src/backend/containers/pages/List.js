@@ -13,6 +13,8 @@ import EntitiesList, {
 const { request } = entityStoreActions;
 
 class PagesDashboardContainer extends PureComponent {
+  static displayName = "Pages.List";
+
   static fetchData = (getState, dispatch) => {
     const pages = request(pagesAPI.index(), requests.gPages);
     const { promise: one } = dispatch(pages);
@@ -24,8 +26,6 @@ class PagesDashboardContainer extends PureComponent {
       pages: select(requests.gPages, state.entityStore)
     };
   };
-
-  static displayName = "Pages.List";
 
   static propTypes = {
     pages: PropTypes.array

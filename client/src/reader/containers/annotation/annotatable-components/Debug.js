@@ -5,14 +5,14 @@ import isFunction from "lodash/isFunction";
 import Developer from "global/components/developer";
 
 export default class AnnotatableDebug extends PureComponent {
+  static defaultProps() {
+    return {};
+  }
+
   static propTypes = {
     annotatableState: PropTypes.object,
     annotatableProps: PropTypes.object
   };
-
-  static defaultProps() {
-    return {};
-  }
 
   get subject() {
     const newSelection = {};

@@ -4,13 +4,13 @@ import isString from "lodash/isString";
 import classnames from "classnames";
 
 export default class Instructions extends PureComponent {
+  static defaultProps = {
+    instructions: null
+  };
+
   static propTypes = {
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     className: PropTypes.string
-  };
-
-  static defaultProps = {
-    instructions: null
   };
 
   renderInstructions() {

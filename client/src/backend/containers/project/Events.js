@@ -19,14 +19,18 @@ const { request } = entityStoreActions;
 const perPage = 6;
 
 class ProjectEventsContainerImplementation extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "Project.Events";
+
   static mapStateToProps = state => {
     return {
       events: select(requests.beEvents, state.entityStore),
       eventsMeta: meta(requests.beEvents, state.entityStore)
     };
   };
-
-  static displayName = "Project.Events";
 
   static propTypes = {
     project: PropTypes.object,
@@ -37,10 +41,6 @@ class ProjectEventsContainerImplementation extends PureComponent {
     dispatch: PropTypes.func,
     entitiesListSearchProps: PropTypes.func.isRequired,
     entitiesListSearchParams: PropTypes.object.isRequired
-  };
-
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
   };
 
   constructor(props) {
@@ -58,10 +58,13 @@ class ProjectEventsContainerImplementation extends PureComponent {
       return this.fetchEvents(this.lastFetchedPage);
   }
 
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
+  destroyEvent(event) {
+    const call = eventsAPI.destroy(event.id);
+    const options = { removes: event };
+    const eventRequest = request(call, requests.beEventDestroy, options);
+    this.props.dispatch(eventRequest).promise.then(() => {
+      this.props.refresh();
+    });
   }
 
   eventWasModified(prevProps) {
@@ -82,20 +85,17 @@ class ProjectEventsContainerImplementation extends PureComponent {
     this.props.dispatch(action);
   }
 
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
+  }
+
   handleEventDestroy = event => {
     const heading = "Are you sure you want to delete this event?";
     const message = "This action cannot be undone.";
     this.props.confirm(heading, message, () => this.destroyEvent(event));
   };
-
-  destroyEvent(event) {
-    const call = eventsAPI.destroy(event.id);
-    const options = { removes: event };
-    const eventRequest = request(call, requests.beEventDestroy, options);
-    this.props.dispatch(eventRequest).promise.then(() => {
-      this.props.refresh();
-    });
-  }
 
   handleUsersPageChange(event, page) {
     this.fetchEvents(page);

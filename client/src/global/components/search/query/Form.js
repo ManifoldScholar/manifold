@@ -5,6 +5,21 @@ import isEqual from "lodash/isEqual";
 import Utility from "global/components/utility";
 
 export default class SearchQueryForm extends PureComponent {
+  /* eslint-disable no-console */
+  static defaultProps = {
+    searchOnScopeChange: true,
+    facets: [],
+    scopes: [],
+    setQueryState: state => {
+      console.warn(
+        "The SearchQuery component expects a setQueryState callback."
+      );
+      console.warn("Current SearchQuery State");
+      console.warn(state);
+    },
+    searchId: labelId("query-search-")
+  };
+
   static displayName = "Search.Query.Form";
 
   static propTypes = {
@@ -22,20 +37,6 @@ export default class SearchQueryForm extends PureComponent {
     sectionId: PropTypes.string
   };
 
-  /* eslint-disable no-console */
-  static defaultProps = {
-    searchOnScopeChange: true,
-    facets: [],
-    scopes: [],
-    setQueryState: state => {
-      console.warn(
-        "The SearchQuery component expects a setQueryState callback."
-      );
-      console.warn("Current SearchQuery State");
-      console.warn(state);
-    },
-    searchId: labelId("query-search-")
-  };
   /* eslint-enable no-console */
 
   constructor(props) {
@@ -81,6 +82,19 @@ export default class SearchQueryForm extends PureComponent {
     }
     return state;
   }
+
+  setKeyword = event => {
+    const { target } = event;
+    const { value } = target;
+    this.setState({ keyword: value });
+  };
+
+  setScope(scope) {
+    if (scope === this.state.scope) return;
+    const callback = this.props.searchOnScopeChange ? this.doSearch : null;
+    this.setState(this.setScopeIdFromScopeString({ scope }), callback);
+  }
+
   /* eslint-enable no-param-reassign */
 
   setScopeIdFromScopeString(state) {
@@ -92,24 +106,20 @@ export default class SearchQueryForm extends PureComponent {
     return Object.assign({}, state, newState);
   }
 
-  setScope(scope) {
-    if (scope === this.state.scope) return;
-    const callback = this.props.searchOnScopeChange ? this.doSearch : null;
-    this.setState(this.setScopeIdFromScopeString({ scope }), callback);
-  }
-
-  setKeyword = event => {
-    const { target } = event;
-    const { value } = target;
-    this.setState({ keyword: value });
-  };
-
   setSelectedFacets(facets, allFacets = false) {
     facets.sort();
     const facetsUnchanged = isEqual(facets, this.state.facets);
     if (facetsUnchanged && allFacets === this.state.allFacets) return;
     const callback = facetsUnchanged ? null : this.doSearch;
     return this.setState({ facets, allFacets }, callback);
+  }
+
+  get allFacetsSelected() {
+    return isEqual(this.availableFacetValues, this.selectedFacets);
+  }
+
+  get availableFacetValues() {
+    return this.props.facets.map(f => f.value).sort();
   }
 
   get availableScopes() {
@@ -119,49 +129,6 @@ export default class SearchQueryForm extends PureComponent {
     if (textId) scopes.push({ label: "Text", value: "text" });
     if (projectId) scopes.push({ label: "Project", value: "project" });
     return scopes;
-  }
-
-  get availableFacetValues() {
-    return this.props.facets.map(f => f.value).sort();
-  }
-
-  get selectedFacets() {
-    return this.state.facets;
-  }
-
-  get allFacetsSelected() {
-    return isEqual(this.availableFacetValues, this.selectedFacets);
-  }
-
-  internalStateFromIncomingState(initialState) {
-    let newState = Object.assign(
-      { facets: [], scope: null, keyword: "" },
-      initialState
-    );
-    newState = this.setDefaultScope(newState);
-    newState = this.setScopeIdFromScopeString(newState);
-    newState = this.setFacetsFromAllFacets(newState);
-    return newState;
-  }
-
-  facetChecked(value) {
-    if (this.state.allFacets) {
-      return value === "All";
-    }
-    return this.facetSelected(value);
-  }
-
-  facetSelected(value) {
-    return this.selectedFacets.includes(value);
-  }
-
-  selectFacet(key) {
-    if (this.allFacetsSelected) {
-      return this.setSelectedFacets([key]);
-    }
-    const selected = this.state.facets;
-    const updated = this.facetSelected(key) ? selected : [...selected, key];
-    return this.setSelectedFacets(updated);
   }
 
   deselectFacet(key) {
@@ -178,19 +145,32 @@ export default class SearchQueryForm extends PureComponent {
     return this.setSelectedFacets(updated, allFacets);
   }
 
-  valueFromEvent(event) {
-    const { target } = event;
-    return target.type === "checkbox" ? target.checked : target.value;
+  doSearch = (event = null) => {
+    if (event) event.preventDefault();
+    if (!this.state.keyword) return null; // If there's no keyword, don't do anything yet.
+    this.props.setQueryState(this.state);
+  };
+
+  facetChecked(value) {
+    if (this.state.allFacets) {
+      return value === "All";
+    }
+    return this.facetSelected(value);
   }
 
-  makeScopeHandler(value) {
-    let handler = this.handlers.scopes[value];
-    if (handler) return handler;
-    handler = () => {
-      this.setScope(value);
-    };
-    this.handlers.scopes[value] = handler;
-    return handler;
+  facetSelected(value) {
+    return this.selectedFacets.includes(value);
+  }
+
+  internalStateFromIncomingState(initialState) {
+    let newState = Object.assign(
+      { facets: [], scope: null, keyword: "" },
+      initialState
+    );
+    newState = this.setDefaultScope(newState);
+    newState = this.setScopeIdFromScopeString(newState);
+    newState = this.setFacetsFromAllFacets(newState);
+    return newState;
   }
 
   makeFacetHandler(key) {
@@ -209,11 +189,33 @@ export default class SearchQueryForm extends PureComponent {
     return handler;
   }
 
-  doSearch = (event = null) => {
-    if (event) event.preventDefault();
-    if (!this.state.keyword) return null; // If there's no keyword, don't do anything yet.
-    this.props.setQueryState(this.state);
-  };
+  makeScopeHandler(value) {
+    let handler = this.handlers.scopes[value];
+    if (handler) return handler;
+    handler = () => {
+      this.setScope(value);
+    };
+    this.handlers.scopes[value] = handler;
+    return handler;
+  }
+
+  selectFacet(key) {
+    if (this.allFacetsSelected) {
+      return this.setSelectedFacets([key]);
+    }
+    const selected = this.state.facets;
+    const updated = this.facetSelected(key) ? selected : [...selected, key];
+    return this.setSelectedFacets(updated);
+  }
+
+  get selectedFacets() {
+    return this.state.facets;
+  }
+
+  valueFromEvent(event) {
+    const { target } = event;
+    return target.type === "checkbox" ? target.checked : target.value;
+  }
 
   renderFooter() {
     if (this.props.searchType !== "frontend" && !this.props.description)

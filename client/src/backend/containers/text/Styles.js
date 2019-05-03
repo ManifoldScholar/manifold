@@ -11,6 +11,10 @@ import withConfirmation from "hoc/with-confirmation";
 const { request } = entityStoreActions;
 
 export class TextStylesContainer extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   static displayName = "Text.Styles";
 
   static propTypes = {
@@ -19,18 +23,6 @@ export class TextStylesContainer extends PureComponent {
     refresh: PropTypes.func,
     confirm: PropTypes.func.isRequired
   };
-
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
-  };
-
-  get text() {
-    return this.props.text;
-  }
-
-  get stylesheets() {
-    return this.text.relationships.stylesheets;
-  }
 
   get callbacks() {
     return {
@@ -57,6 +49,14 @@ export class TextStylesContainer extends PureComponent {
       this.props.refresh();
     });
   };
+
+  get stylesheets() {
+    return this.text.relationships.stylesheets;
+  }
+
+  get text() {
+    return this.props.text;
+  }
 
   updatePosition = (stylesheet, newPos) => {
     const changes = {

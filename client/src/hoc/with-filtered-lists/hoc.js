@@ -31,6 +31,22 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       dispatch: PropTypes.func
     };
 
+    entitiesListSearchParams = memoize(stateIgnored => {
+      const params = {};
+      this.managedLists.forEach(key => {
+        params[key] = this.requestParams(key);
+        params[`initial${key}`] = this.initialRequestParams(key);
+      });
+      return params;
+    });
+
+    buildMemoizedHandler = memoize((name, key) => {
+      const handler = this[name];
+      return (...args) => {
+        return handler(key, ...args);
+      };
+    });
+
     constructor(props) {
       super(props);
       this.state = this.initialState;
@@ -49,8 +65,17 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       this.setValues(key, this.initialValues(key));
     };
 
-    get managedLists() {
-      return Object.keys(filteredLists);
+    setParam = (key, paramLike, value) => {
+      const param = this.ensureParamObject(key, paramLike);
+      this.setValues(key, { [param.name]: value });
+    };
+
+    setValues(key, updatedValues) {
+      const listState = this.listState(key);
+      const { values } = listState;
+      const newValues = Object.assign({}, values, updatedValues);
+      const newListState = Object.assign({}, listState, { values: newValues });
+      this.setState({ [key]: newListState });
     }
 
     get initialState() {
@@ -80,21 +105,8 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       return state;
     }
 
-    setParam = (key, paramLike, value) => {
-      const param = this.ensureParamObject(key, paramLike);
-      this.setValues(key, { [param.name]: value });
-    };
-
-    setValues(key, updatedValues) {
-      const listState = this.listState(key);
-      const { values } = listState;
-      const newValues = Object.assign({}, values, updatedValues);
-      const newListState = Object.assign({}, listState, { values: newValues });
-      this.setState({ [key]: newListState });
-    }
-
-    initialValues(key) {
-      return this.state[key].initialValues;
+    get managedLists() {
+      return Object.keys(filteredLists);
     }
 
     entitiesListSearchProps = key => {
@@ -106,59 +118,12 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       };
     };
 
-    entitiesListSearchParams = memoize(stateIgnored => {
-      const params = {};
-      this.managedLists.forEach(key => {
-        params[key] = this.requestParams(key);
-        params[`initial${key}`] = this.initialRequestParams(key);
-      });
-      return params;
-    });
-
-    listState(key) {
-      return this.state[key];
-    }
-
-    paramsFor(key) {
-      return this.listState(key).params || [];
-    }
-
-    valuesFor(key) {
-      return this.listState(key).values || {};
-    }
-
-    requestParams(key) {
-      return pickBy(this.listState(key).values, identity);
-    }
-
-    initialRequestParams(key) {
-      return pickBy(this.listState(key).initialValues, identity);
-    }
-
-    paramByName(key, paramName) {
-      const params = this.paramsFor(key);
-      return params.find(p => p.name === paramName);
-    }
-
-    ensureParamObject(key, paramLike) {
-      const name = isPlainObject(paramLike) ? paramLike.name : paramLike;
-      return this.paramByName(key, name);
-    }
-
-    buildMemoizedHandler = memoize((name, key) => {
-      const handler = this[name];
-      return (...args) => {
-        return handler(key, ...args);
-      };
-    });
-
-    paramsFor = key => {
-      return this.state[key].params;
+    savedSearchPaginationState = key => {
+      if (!this.state[key].config.snapshotState) return null;
+      const snapshot = this.props.snapshots[this.snapshotKey(key)];
+      if (!snapshot) return null;
+      return snapshot.pagination;
     };
-
-    snapshotKey(key) {
-      return `entities-list-search-${key}`;
-    }
 
     saveSearchState = (key, pagination) => {
       if (!this.state[key].config.snapshotState) return;
@@ -172,12 +137,43 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       this.props.dispatch(action);
     };
 
-    savedSearchPaginationState = key => {
-      if (!this.state[key].config.snapshotState) return null;
-      const snapshot = this.props.snapshots[this.snapshotKey(key)];
-      if (!snapshot) return null;
-      return snapshot.pagination;
-    };
+    paramsFor(key) {
+      return this.listState(key).params || [];
+    }
+
+    paramByName(key, paramName) {
+      const params = this.paramsFor(key);
+      return params.find(p => p.name === paramName);
+    }
+
+    requestParams(key) {
+      return pickBy(this.listState(key).values, identity);
+    }
+
+    listState(key) {
+      return this.state[key];
+    }
+
+    ensureParamObject(key, paramLike) {
+      const name = isPlainObject(paramLike) ? paramLike.name : paramLike;
+      return this.paramByName(key, name);
+    }
+
+    initialValues(key) {
+      return this.state[key].initialValues;
+    }
+
+    initialRequestParams(key) {
+      return pickBy(this.listState(key).initialValues, identity);
+    }
+
+    snapshotKey(key) {
+      return `entities-list-search-${key}`;
+    }
+
+    valuesFor(key) {
+      return this.listState(key).values || {};
+    }
 
     render() {
       return (

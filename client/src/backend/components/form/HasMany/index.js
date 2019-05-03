@@ -10,6 +10,12 @@ import setter from "../setter";
 import OptionsList from "../OptionsList";
 
 export class FormHasMany extends PureComponent {
+  static defaultProps = {
+    idForError: labelId("predictive-text-belongs-to-error-"),
+    searchable: true,
+    emptyMessage: "None Added"
+  };
+
   static displayName = "Form.HasMany";
 
   static propTypes = {
@@ -37,10 +43,9 @@ export class FormHasMany extends PureComponent {
     value: PropTypes.any
   };
 
-  static defaultProps = {
-    idForError: labelId("predictive-text-belongs-to-error-"),
-    searchable: true,
-    emptyMessage: "None Added"
+  onChange = (entities, kind) => {
+    if (this.props.name) return this.props.set(entities);
+    return this.props.changeHandler(entities, kind);
   };
 
   onNew = value => {
@@ -56,11 +61,6 @@ export class FormHasMany extends PureComponent {
     });
   };
 
-  onChange = (entities, kind) => {
-    if (this.props.name) return this.props.set(entities);
-    return this.props.changeHandler(entities, kind);
-  };
-
   onSelect = entityOrEntities => {
     if (isArray(entityOrEntities)) return this.selectMany(entityOrEntities);
     return this.selectOne(entityOrEntities);
@@ -71,20 +71,20 @@ export class FormHasMany extends PureComponent {
     return entities || [];
   }
 
+  entityName = entity => {
+    return entity.attributes[this.props.entityLabelAttribute];
+  };
+
+  selectMany(entities) {
+    this.onChange(entities, "select");
+  }
+
   selectOne(entity) {
     const newEntities = this.entities.slice(0);
     if (!newEntities.find(e => e.id === entity.id)) newEntities.push(entity);
 
     this.onChange(newEntities, "select");
   }
-
-  selectMany(entities) {
-    this.onChange(entities, "select");
-  }
-
-  entityName = entity => {
-    return entity.attributes[this.props.entityLabelAttribute];
-  };
 
   renderList(renderConditions, props) {
     if (!renderConditions) return null;

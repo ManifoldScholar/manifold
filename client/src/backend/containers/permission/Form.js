@@ -18,13 +18,6 @@ export class PermissionForm extends PureComponent {
     dispatch: PropTypes.func
   };
 
-  handleSuccess = newPermission => {
-    if (this.props.permission) return null; // Skip if this permission already existed
-    const base = lh.nameFromType("backend", "Permission", this.props.entity);
-    const url = lh.link(base, this.props.entity.id, newPermission.id);
-    return this.props.history.push(url, { keepNotifications: true });
-  };
-
   composeCreateCall = permission => {
     const entity = this.props.entity;
     if (!permission || !entity) return null;
@@ -35,6 +28,13 @@ export class PermissionForm extends PureComponent {
     const entity = this.props.entity;
     if (!permission || !entity) return null;
     return permissionsAPI.update(entity, id, permission);
+  };
+
+  handleSuccess = newPermission => {
+    if (this.props.permission) return null; // Skip if this permission already existed
+    const base = lh.nameFromType("backend", "Permission", this.props.entity);
+    const url = lh.link(base, this.props.entity.id, newPermission.id);
+    return this.props.history.push(url, { keepNotifications: true });
   };
 
   labelUser = user => user.attributes.fullName;

@@ -4,6 +4,11 @@ import ConnectedInputs from "backend/containers/form-inputs/connected-inputs";
 import setter from "./setter";
 
 class FormOptionsList extends PureComponent {
+  static defaultProps = {
+    focusOnMount: false,
+    searchable: true
+  };
+
   static displayName = "Form.OptionsList";
 
   static propTypes = {
@@ -20,11 +25,6 @@ class FormOptionsList extends PureComponent {
     searchable: PropTypes.bool
   };
 
-  static defaultProps = {
-    focusOnMount: false,
-    searchable: true
-  };
-
   componentDidMount() {
     if (this.props.focusOnMount === true && this.inputElement) {
       this.inputElement.focus();
@@ -34,21 +34,6 @@ class FormOptionsList extends PureComponent {
   handleSelect = entity => {
     this.props.onSelect(entity);
   };
-
-  renderStatic(props) {
-    return (
-      <ConnectedInputs.FetchSelect
-        fetch={props.fetch}
-        fetchOptions={props.fetchOptions}
-        options={props.options}
-        placeholder={props.placeholder}
-        label={props.label}
-        onSelect={this.handleSelect}
-        mode={props.mode}
-        selectedValue={props.selectedValue}
-      />
-    );
-  }
 
   renderSearchable(props) {
     return (
@@ -62,6 +47,21 @@ class FormOptionsList extends PureComponent {
         onNew={props.onNew}
         idForError={props.idForError}
         focusOnMount={props.focusOnMount}
+      />
+    );
+  }
+
+  renderStatic(props) {
+    return (
+      <ConnectedInputs.FetchSelect
+        fetch={props.fetch}
+        fetchOptions={props.fetchOptions}
+        options={props.options}
+        placeholder={props.placeholder}
+        label={props.label}
+        onSelect={this.handleSelect}
+        mode={props.mode}
+        selectedValue={props.selectedValue}
       />
     );
   }

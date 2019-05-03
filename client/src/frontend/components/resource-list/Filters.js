@@ -6,7 +6,19 @@ import labelId from "helpers/labelId";
 import Utility from "global/components/utility";
 
 export default class ResourceListFilters extends Component {
+  static defaultProps = {
+    searchId: labelId("filters-search-")
+  };
+
   static displayName = "ResourceList.Filters";
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.initialFilterState !== prevState.filters) {
+      return Object.assign({}, nextProps.initialFilterState);
+    }
+
+    return null;
+  }
 
   static propTypes = {
     kinds: PropTypes.array,
@@ -16,21 +28,9 @@ export default class ResourceListFilters extends Component {
     searchId: PropTypes.string
   };
 
-  static defaultProps = {
-    searchId: labelId("filters-search-")
-  };
-
   constructor(props) {
     super(props);
     this.state = this.initialState(props.initialFilterState);
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.initialFilterState !== prevState.filters) {
-      return Object.assign({}, nextProps.initialFilterState);
-    }
-
-    return null;
   }
 
   setFilters = (event, label) => {
@@ -42,12 +42,6 @@ export default class ResourceListFilters extends Component {
     this.setState({ filters }, this.updateResults);
   };
 
-  updateResults = event => {
-    if (event) event.preventDefault();
-    const filter = omitBy(this.state.filters, value => value === "");
-    this.props.filterChangeHandler(filter);
-  };
-
   initialState(init) {
     const filters = Object.assign({}, init);
     return { filters };
@@ -56,6 +50,12 @@ export default class ResourceListFilters extends Component {
   resetFilters = event => {
     event.preventDefault();
     this.setState(this.initialState(), this.updateResults);
+  };
+
+  updateResults = event => {
+    if (event) event.preventDefault();
+    const filter = omitBy(this.state.filters, value => value === "");
+    this.props.filterChangeHandler(filter);
   };
 
   render() {

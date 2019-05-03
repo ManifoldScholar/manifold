@@ -15,6 +15,14 @@ export class ProjectContentTypeForm extends PureComponent {
     if (this.isNew) this.setDefaults();
   }
 
+  setDefaults() {
+    const defaults = this.typeComponent.defaultAttributes;
+    if (!defaults) return null;
+    Object.keys(defaults).forEach(attr =>
+      this.props.setOther(defaults[attr], `attributes[${attr}]`)
+    );
+  }
+
   get contentBlock() {
     return this.props.contentBlock;
   }
@@ -29,14 +37,6 @@ export class ProjectContentTypeForm extends PureComponent {
 
   get typeComponent() {
     return typeResolver.typeToFormComponent(this.type);
-  }
-
-  setDefaults() {
-    const defaults = this.typeComponent.defaultAttributes;
-    if (!defaults) return null;
-    Object.keys(defaults).forEach(attr =>
-      this.props.setOther(defaults[attr], `attributes[${attr}]`)
-    );
   }
 
   render() {

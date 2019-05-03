@@ -7,6 +7,10 @@ import { providerSetting } from "utils/oauth";
 import withSettings from "hoc/with-settings";
 
 class Button extends Component {
+  static defaultProps = {
+    hasIcon: true
+  };
+
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     provider: PropTypes.string.isRequired,
@@ -16,22 +20,8 @@ class Button extends Component {
     settings: PropTypes.object
   };
 
-  static defaultProps = {
-    hasIcon: true
-  };
-
   shouldComponentUpdate(nextProps) {
     return this.props.settings !== nextProps.settings;
-  }
-
-  get oauthSettings() {
-    const settingsKey = providerSetting(this.props.provider);
-
-    return get(this.props, `settings.attributes.oauth.${settingsKey}`);
-  }
-
-  get isEnabled() {
-    return get(this, `oauthSettings.enabled`);
   }
 
   get iconClass() {
@@ -40,6 +30,16 @@ class Button extends Component {
     }
 
     return `manicon-${this.props.provider}`;
+  }
+
+  get isEnabled() {
+    return get(this, `oauthSettings.enabled`);
+  }
+
+  get oauthSettings() {
+    const settingsKey = providerSetting(this.props.provider);
+
+    return get(this.props, `settings.attributes.oauth.${settingsKey}`);
   }
 
   openWindow = eventIgnored => {

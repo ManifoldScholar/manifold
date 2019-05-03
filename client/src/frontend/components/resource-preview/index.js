@@ -13,6 +13,16 @@ export default class ResourcePreview extends Component {
 
   static displayName = "Resource.Preview";
 
+  static getPreviewableComponent = resource => {
+    let component = null;
+    const kind = resource.attributes.kind;
+    const key = capitalize(kind);
+    if (has(Preview, key)) {
+      component = Preview[key];
+    }
+    return component;
+  };
+
   static propTypes = {
     resource: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired
@@ -33,19 +43,13 @@ export default class ResourcePreview extends Component {
     window.removeEventListener("keyup", this.handleEscape);
   }
 
-  static getPreviewableComponent = resource => {
-    let component = null;
-    const kind = resource.attributes.kind;
-    const key = capitalize(kind);
-    if (has(Preview, key)) {
-      component = Preview[key];
-    }
-    return component;
-  };
-
   getPreviewComponent(resource) {
     return ResourcePreview.getPreviewableComponent(resource);
   }
+
+  closeOverlay = eventIgnored => {
+    this.setState({ overlayOpen: false });
+  };
 
   handleEscape = event => {
     if (event.keyCode === 27) {
@@ -56,10 +60,6 @@ export default class ResourcePreview extends Component {
   handleOpenPreviewClick = event => {
     event.stopPropagation();
     this.setState({ overlayOpen: true });
-  };
-
-  closeOverlay = eventIgnored => {
-    this.setState({ overlayOpen: false });
   };
 
   renderChildren = () => {

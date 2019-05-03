@@ -7,6 +7,12 @@ import setter from "./setter";
 import Base from "./Upload/Base";
 
 export class FormTusUpload extends Component {
+  static defaultProps = {
+    layout: "square",
+    inputId: labelId("upload-"),
+    idForError: labelId("upload-error-")
+  };
+
   static displayName = "Form.TusUpload";
 
   static propTypes = {
@@ -31,23 +37,12 @@ export class FormTusUpload extends Component {
     idForError: PropTypes.string
   };
 
-  static defaultProps = {
-    layout: "square",
-    inputId: labelId("upload-"),
-    idForError: labelId("upload-error-")
-  };
-
   constructor(props) {
     super(props);
     this.state = {
       progress: null,
       error: null
     };
-  }
-
-  removeFile() {
-    this.props.set(null);
-    this.setState({ progress: null, error: null });
   }
 
   handleUploadError = error => {
@@ -75,6 +70,11 @@ export class FormTusUpload extends Component {
     };
     set(source);
   };
+
+  removeFile() {
+    this.props.set(null);
+    this.setState({ progress: null, error: null });
+  }
 
   updateValue = state => {
     const { attachment } = state;

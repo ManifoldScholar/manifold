@@ -4,6 +4,10 @@ import Utility from "global/components/utility";
 import Authorize from "hoc/authorize";
 
 export default class DrawerEntityHeaderButton extends PureComponent {
+  static defaultProps = {
+    iconClass: ""
+  };
+
   static displayName = "Drawer.EntityHeader.Button";
 
   static propTypes = {
@@ -13,10 +17,6 @@ export default class DrawerEntityHeaderButton extends PureComponent {
     iconClass: PropTypes.string,
     ability: PropTypes.string,
     entity: PropTypes.object
-  };
-
-  static defaultProps = {
-    iconClass: ""
   };
 
   get Button() {

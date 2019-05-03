@@ -24,9 +24,12 @@ class IngestionFormUpload extends PureComponent {
     this.props.setOther(null, "attributes[source]");
   };
 
-  get valid() {
-    return this.ingestionSource || this.ingestionSourceUrl;
-  }
+  handleCancelClick = event => {
+    event.preventDefault();
+    this.props.cancelUrl
+      ? this.props.history.push(this.props.cancelUrl)
+      : this.props.history.goBack();
+  };
 
   get ingestionSource() {
     return (
@@ -39,12 +42,9 @@ class IngestionFormUpload extends PureComponent {
     return this.props.getModelValue("attributes[externalSourceUrl]");
   }
 
-  handleCancelClick = event => {
-    event.preventDefault();
-    this.props.cancelUrl
-      ? this.props.history.push(this.props.cancelUrl)
-      : this.props.history.goBack();
-  };
+  get valid() {
+    return this.ingestionSource || this.ingestionSourceUrl;
+  }
 
   render() {
     const formHeader = this.props.header || "Upload";

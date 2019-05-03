@@ -15,6 +15,10 @@ import Editor from "./Editor";
 const { request } = entityStoreActions;
 
 class AnnotationDetail extends PureComponent {
+  static defaultProps = {
+    includeComments: true
+  };
+
   static displayName = "Annotation.Detail";
 
   static propTypes = {
@@ -22,10 +26,6 @@ class AnnotationDetail extends PureComponent {
     annotation: PropTypes.object.isRequired,
     showLogin: PropTypes.func,
     includeComments: PropTypes.bool.isRequired
-  };
-
-  static defaultProps = {
-    includeComments: true
   };
 
   constructor(props) {
@@ -36,22 +36,14 @@ class AnnotationDetail extends PureComponent {
     };
   }
 
-  startReply = () => {
-    this.setState({
-      action: "replying"
-    });
-  };
-
-  startEdit = () => {
-    this.setState({
-      action: "editing"
-    });
-  };
-
-  stopAction = () => {
-    this.setState({
-      action: null
-    });
+  deleteAnnotation = () => {
+    const { annotation } = this.props;
+    const call = annotationsAPI.destroy(annotation.id);
+    const options = { removes: { type: "annotations", id: annotation.id } };
+    const res = this.props.dispatch(
+      request(call, requests.rAnnotationDestroy, options)
+    );
+    return res.promise;
   };
 
   handleFlag = () => {
@@ -72,14 +64,22 @@ class AnnotationDetail extends PureComponent {
     return res.promise;
   };
 
-  deleteAnnotation = () => {
-    const { annotation } = this.props;
-    const call = annotationsAPI.destroy(annotation.id);
-    const options = { removes: { type: "annotations", id: annotation.id } };
-    const res = this.props.dispatch(
-      request(call, requests.rAnnotationDestroy, options)
-    );
-    return res.promise;
+  startEdit = () => {
+    this.setState({
+      action: "editing"
+    });
+  };
+
+  startReply = () => {
+    this.setState({
+      action: "replying"
+    });
+  };
+
+  stopAction = () => {
+    this.setState({
+      action: null
+    });
   };
 
   render() {

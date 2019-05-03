@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export default class UtilityBackLinkPrimary extends Component {
+  static defaultProps = {
+    backText: "Back to Project"
+  };
+
   static displayName = "Utility.BackLinkPrimary";
 
   static propTypes = {
     link: PropTypes.string,
     backText: PropTypes.string,
     title: PropTypes.string
-  };
-
-  static defaultProps = {
-    backText: "Back to Project"
   };
 
   render() {

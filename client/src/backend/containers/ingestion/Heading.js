@@ -11,20 +11,12 @@ export default class IngestionHeader extends Component {
     reingestion: PropTypes.bool
   };
 
-  get ingestion() {
-    return this.props.ingestion;
-  }
-
-  get title() {
-    const title =
-      this.ingestion.attributes.sourceFileName ||
-      this.ingestion.attributes.externalSourceUrl;
-    if (!title) return "";
-    return truncate(title, { length: 40 });
-  }
-
   get currentState() {
     return capitalize(this.ingestion.attributes.state);
+  }
+
+  get ingestion() {
+    return this.props.ingestion;
   }
 
   get strategy() {
@@ -35,6 +27,14 @@ export default class IngestionHeader extends Component {
     if (this.props.reingestion) return this.ingestion.attributes.textId;
 
     return "This ingestion will create a new text";
+  }
+
+  get title() {
+    const title =
+      this.ingestion.attributes.sourceFileName ||
+      this.ingestion.attributes.externalSourceUrl;
+    if (!title) return "";
+    return truncate(title, { length: 40 });
   }
 
   render() {

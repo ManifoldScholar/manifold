@@ -7,12 +7,6 @@ import Stylesheet from "./Stylesheet";
 export default class CategoryList extends Component {
   static displayName = "Stylesheet.List";
 
-  static propTypes = {
-    text: PropTypes.object,
-    stylesheets: PropTypes.array,
-    callbacks: PropTypes.object.isRequired
-  };
-
   static getDerivedStateFromProps(props, state = {}) {
     if (props.text === state.text) return null;
     return {
@@ -20,6 +14,12 @@ export default class CategoryList extends Component {
       stylesheets: props.stylesheets.slice(0)
     };
   }
+
+  static propTypes = {
+    text: PropTypes.object,
+    stylesheets: PropTypes.array,
+    callbacks: PropTypes.object.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -29,10 +29,6 @@ export default class CategoryList extends Component {
       this.constructor.getDerivedStateFromProps(props)
     );
   }
-
-  onDragStart = draggableIgnored => {
-    this.setState({ dragging: true });
-  };
 
   onDragEnd = draggable => {
     this.setState({ dragging: false });
@@ -44,13 +40,9 @@ export default class CategoryList extends Component {
     this.callbacks.updatePosition(stylesheet, index + 1);
   };
 
-  get stylesheets() {
-    return this.state.stylesheets;
-  }
-
-  get text() {
-    return this.props.text;
-  }
+  onDragStart = draggableIgnored => {
+    this.setState({ dragging: true });
+  };
 
   get callbacks() {
     return this.props.callbacks;
@@ -58,6 +50,14 @@ export default class CategoryList extends Component {
 
   findStylesheet(id) {
     return this.stylesheets.find(ss => ss.id === id);
+  }
+
+  get stylesheets() {
+    return this.state.stylesheets;
+  }
+
+  get text() {
+    return this.props.text;
   }
 
   updateInternalState(stylesheet, index) {

@@ -6,6 +6,13 @@ import Utility from "global/components/utility";
 import { withRouter } from "react-router-dom";
 
 export class EventTile extends Component {
+  static defaultProps = {
+    linkTarget: "_self",
+    hideLink: false,
+    visible: true,
+    itemClass: ""
+  };
+
   static displayName = "Event.Tile";
 
   static propTypes = {
@@ -26,13 +33,6 @@ export class EventTile extends Component {
     linkHref: PropTypes.string,
     linkTarget: PropTypes.string,
     history: PropTypes.object
-  };
-
-  static defaultProps = {
-    linkTarget: "_self",
-    hideLink: false,
-    visible: true,
-    itemClass: ""
   };
 
   handleTileClick = event => {

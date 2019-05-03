@@ -9,13 +9,13 @@ import GlobalForm from "global/components/form";
 const { request, flush } = entityStoreActions;
 
 class PasswordForgotContainer extends Component {
+  static displayName = "PasswordForgotContainer";
+
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       response: get(state.entityStore.responses, "request-reset-password")
     };
   };
-
-  static displayName = "PasswordForgotContainer";
 
   static propTypes = {
     handleViewChange: PropTypes.func.isRequired,
@@ -35,6 +35,30 @@ class PasswordForgotContainer extends Component {
   componentWillUnmount() {
     this.props.dispatch(flush([requests.gPasswordRequest]));
   }
+
+  closeOverlay() {
+    this.props.hideSignInUpOverlay();
+  }
+
+  createSuccessNotification() {
+    const notification = {
+      level: 0,
+      id: "PASSWORD_RESET_SENT",
+      heading: `Email sent to ${
+        this.state.email
+      } with instructions to reset your password.`
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+    setTimeout(() => {
+      this.props.dispatch(
+        notificationActions.removeNotification(notification.id)
+      );
+    }, 5000);
+  }
+
+  handleInputChange = event => {
+    this.setState({ email: event.target.value });
+  };
 
   handleSubmit = event => {
     event.preventDefault(event.target);
@@ -57,30 +81,6 @@ class PasswordForgotContainer extends Component {
     this.createSuccessNotification();
     this.closeOverlay();
   }
-
-  createSuccessNotification() {
-    const notification = {
-      level: 0,
-      id: "PASSWORD_RESET_SENT",
-      heading: `Email sent to ${
-        this.state.email
-      } with instructions to reset your password.`
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-    setTimeout(() => {
-      this.props.dispatch(
-        notificationActions.removeNotification(notification.id)
-      );
-    }, 5000);
-  }
-
-  closeOverlay() {
-    this.props.hideSignInUpOverlay();
-  }
-
-  handleInputChange = event => {
-    this.setState({ email: event.target.value });
-  };
 
   render() {
     return (

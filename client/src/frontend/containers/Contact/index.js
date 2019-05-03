@@ -36,6 +36,13 @@ export class ContactContainer extends Component {
     this.props.dispatch(flush(requests.gContactForm));
   }
 
+  handleInputChange = event => {
+    const contact = Object.assign({}, this.state.contact, {
+      [event.target.name]: event.target.value
+    });
+    this.setState({ contact });
+  };
+
   redirectToHome() {
     this.props.history.push("/");
   }
@@ -52,13 +59,6 @@ export class ContactContainer extends Component {
       .promise.then(() => {
         this.redirectToHome();
       });
-  };
-
-  handleInputChange = event => {
-    const contact = Object.assign({}, this.state.contact, {
-      [event.target.name]: event.target.value
-    });
-    this.setState({ contact });
   };
 
   render() {

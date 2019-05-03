@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 
 export default class EntityThumbnailResource extends PureComponent {
+  static defaultProps = {
+    variant: "smallLandscape",
+    attributes: {}
+  };
+
   static displayName = "EntityThumbnail.ResourceCollection";
 
   static propTypes = {
@@ -13,26 +18,8 @@ export default class EntityThumbnailResource extends PureComponent {
     className: PropTypes.string
   };
 
-  static defaultProps = {
-    variant: "smallLandscape",
-    attributes: {}
-  };
-
   get attr() {
     return this.props.entity.attributes;
-  }
-
-  get variant() {
-    return this.props.variant;
-  }
-
-  get src() {
-    if (!this.attr.thumbnailStyles) return null;
-    return this.attr.thumbnailStyles[this.variant];
-  }
-
-  get kind() {
-    return this.attr.kind;
   }
 
   get icon() {
@@ -46,10 +33,6 @@ export default class EntityThumbnailResource extends PureComponent {
     );
   }
 
-  get useImage() {
-    return !!this.src;
-  }
-
   get image() {
     const { width, height, className } = this.props;
     return (
@@ -61,6 +44,23 @@ export default class EntityThumbnailResource extends PureComponent {
         className={className}
       />
     );
+  }
+
+  get kind() {
+    return this.attr.kind;
+  }
+
+  get src() {
+    if (!this.attr.thumbnailStyles) return null;
+    return this.attr.thumbnailStyles[this.variant];
+  }
+
+  get useImage() {
+    return !!this.src;
+  }
+
+  get variant() {
+    return this.props.variant;
   }
 
   render() {

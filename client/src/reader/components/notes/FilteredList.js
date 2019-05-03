@@ -4,6 +4,15 @@ import Partial from "./partial";
 import EmptyMessage from "./EmptyMessage";
 
 export default class FilteredList extends PureComponent {
+  static defaultProps = {
+    annotated: false,
+    loaded: false
+  };
+
+  static defaultProps = {
+    annotations: []
+  };
+
   static displayName = "Notes.FilteredList";
 
   static propTypes = {
@@ -16,15 +25,6 @@ export default class FilteredList extends PureComponent {
     filter: PropTypes.object,
     annotated: PropTypes.bool,
     loaded: PropTypes.bool
-  };
-
-  static defaultProps = {
-    annotated: false,
-    loaded: false
-  };
-
-  static defaultProps = {
-    annotations: []
   };
 
   renderHeading() {

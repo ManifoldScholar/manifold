@@ -5,6 +5,10 @@ import classNames from "classnames";
 import Authorize from "hoc/authorize";
 
 export default class DefaultButton extends PureComponent {
+  static defaultProps = {
+    kind: "any"
+  };
+
   static propTypes = {
     kind: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     entity: PropTypes.oneOfType([
@@ -18,10 +22,6 @@ export default class DefaultButton extends PureComponent {
     iconClass: PropTypes.string,
     className: PropTypes.string,
     children: PropTypes.element
-  };
-
-  static defaultProps = {
-    kind: "any"
   };
 
   renderChild() {

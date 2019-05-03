@@ -13,14 +13,14 @@ class FeaturesNewContainer extends PureComponent {
     sessionName: PropTypes.string.isRequired
   };
 
+  handleSuccess = feature => {
+    this.redirectToFeature(feature);
+  };
+
   redirectToFeature(feature) {
     const path = lh.link("backendRecordsFeatureGeneral", feature.id);
     this.props.history.push(path);
   }
-
-  handleSuccess = feature => {
-    this.redirectToFeature(feature);
-  };
 
   render() {
     return (

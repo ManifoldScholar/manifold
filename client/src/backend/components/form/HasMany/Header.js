@@ -11,21 +11,21 @@ export default class FormHasManyHeader extends PureComponent {
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
+  renderHeader(label, instructions) {
+    return (
+      <React.Fragment>
+        <h4 className="form-input-heading">{label}</h4>
+        <Instructions instructions={instructions} />
+      </React.Fragment>
+    );
+  }
+
   renderLabelHeader(label, instructions) {
     return (
       <React.Fragment>
         <header className="section-heading-secondary">
           <h3>{label}</h3>
         </header>
-        <Instructions instructions={instructions} />
-      </React.Fragment>
-    );
-  }
-
-  renderHeader(label, instructions) {
-    return (
-      <React.Fragment>
-        <h4 className="form-input-heading">{label}</h4>
         <Instructions instructions={instructions} />
       </React.Fragment>
     );

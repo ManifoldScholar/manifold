@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class EventThumbnail extends Component {
+  static defaultProps = {};
+
   static displayName = "Event.Thumbnail";
 
   static propTypes = {
     event: PropTypes.object.isRequired
   };
-
-  static defaultProps = {};
 
   getEventIcon(type) {
     const eventIconMap = {

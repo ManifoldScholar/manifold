@@ -24,14 +24,6 @@ export default class FormRadioOption extends PureComponent {
     }
   }
 
-  get option() {
-    return this.props.option;
-  }
-
-  get instructions() {
-    return this.option.instructions;
-  }
-
   get checked() {
     return this.props.value === this.props.option.internalValue;
   }
@@ -45,6 +37,14 @@ export default class FormRadioOption extends PureComponent {
       checked: this.checked,
       inline: this.inline
     });
+  }
+
+  get instructions() {
+    return this.option.instructions;
+  }
+
+  get option() {
+    return this.props.option;
   }
 
   render() {

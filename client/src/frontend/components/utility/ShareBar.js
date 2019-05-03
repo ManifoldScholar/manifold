@@ -5,6 +5,10 @@ import { TwitterButton, FacebookButton } from "react-sociable";
 import withSettings from "hoc/with-settings";
 
 class ShareBar extends Component {
+  static defaultProps = {
+    label: "Share"
+  };
+
   static displayName = "Utility.ShareBar";
 
   static propTypes = {
@@ -12,10 +16,6 @@ class ShareBar extends Component {
     url: PropTypes.string,
     message: PropTypes.string,
     settings: PropTypes.object
-  };
-
-  static defaultProps = {
-    label: "Share"
   };
 
   constructor() {

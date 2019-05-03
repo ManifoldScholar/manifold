@@ -34,52 +34,6 @@ export default class Html extends Component {
     return get(state, "entityStore.entities.settings.0");
   }
 
-  reduceAssets(ext) {
-    const test = asset => {
-      return endsWith(asset, ext);
-    };
-
-    const chunks = this.props.stats.assetsByChunkName;
-    return reduce(
-      chunks,
-      (entries, assets, chunkName) => {
-        if (!["build/manifold-client-browser"].includes(chunkName))
-          return entries;
-        if (isString(assets) && test(assets)) entries.push(assets);
-        if (isArray(assets)) {
-          assets.forEach(asset => {
-            if (test(asset)) entries.push(asset);
-          });
-        }
-        return entries;
-      },
-      []
-    );
-  }
-
-  stylesheets = () => {
-    if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
-    const stylesheets = this.reduceAssets(".css");
-    return stylesheets.map(stylesheet => (
-      <link
-        href={`/${stylesheet}`}
-        key={stylesheet}
-        media="screen, projection"
-        rel="stylesheet"
-        type="text/css"
-        charSet="UTF-8"
-      />
-    ));
-  };
-
-  javascripts = () => {
-    if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
-    const scripts = this.reduceAssets(".js");
-    return scripts.map(script => {
-      return <script src={`/${script}`} key={script} charSet="UTF-8" />;
-    });
-  };
-
   favicons = () => {
     const favicons = get(this.settings, "attributes.faviconStyles");
     if (!favicons || !favicons.original) {
@@ -110,6 +64,52 @@ export default class Html extends Component {
       </React.Fragment>
     );
   };
+
+  javascripts = () => {
+    if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
+    const scripts = this.reduceAssets(".js");
+    return scripts.map(script => {
+      return <script src={`/${script}`} key={script} charSet="UTF-8" />;
+    });
+  };
+
+  stylesheets = () => {
+    if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
+    const stylesheets = this.reduceAssets(".css");
+    return stylesheets.map(stylesheet => (
+      <link
+        href={`/${stylesheet}`}
+        key={stylesheet}
+        media="screen, projection"
+        rel="stylesheet"
+        type="text/css"
+        charSet="UTF-8"
+      />
+    ));
+  };
+
+  reduceAssets(ext) {
+    const test = asset => {
+      return endsWith(asset, ext);
+    };
+
+    const chunks = this.props.stats.assetsByChunkName;
+    return reduce(
+      chunks,
+      (entries, assets, chunkName) => {
+        if (!["build/manifold-client-browser"].includes(chunkName))
+          return entries;
+        if (isString(assets) && test(assets)) entries.push(assets);
+        if (isArray(assets)) {
+          assets.forEach(asset => {
+            if (test(asset)) entries.push(asset);
+          });
+        }
+        return entries;
+      },
+      []
+    );
+  }
 
   render() {
     const { component, store, disableBrowserRender } = this.props;

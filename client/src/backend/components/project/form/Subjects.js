@@ -10,6 +10,8 @@ import Authorization from "helpers/authorization";
 const { request, flush } = entityStoreActions;
 
 export class ProjectSubjects extends PureComponent {
+  static displayName = "Project.Form.Subjects";
+
   static mapStateToProps = state => {
     return {
       createSubject: get(state.entityStore.responses, "create-subject"),
@@ -17,8 +19,6 @@ export class ProjectSubjects extends PureComponent {
       authentication: state.authentication
     };
   };
-
-  static displayName = "Project.Form.Subjects";
 
   static propTypes = {
     project: PropTypes.object,
@@ -34,6 +34,16 @@ export class ProjectSubjects extends PureComponent {
 
   componentWillUnmount() {
     this.props.dispatch(flush(["update-subjects", "create-subject"]));
+  }
+
+  maybeHandleNew() {
+    const canCreate = this.authorization.authorizeAbility({
+      authentication: this.props.authentication,
+      entity: "subject",
+      ability: "create"
+    });
+    if (!canCreate) return null;
+    return this.newSubject;
   }
 
   newSubject = value => {
@@ -65,16 +75,6 @@ export class ProjectSubjects extends PureComponent {
     const entityRequest = request(call, `update-subjects`);
     this.props.dispatch(entityRequest);
   };
-
-  maybeHandleNew() {
-    const canCreate = this.authorization.authorizeAbility({
-      authentication: this.props.authentication,
-      entity: "subject",
-      ability: "create"
-    });
-    if (!canCreate) return null;
-    return this.newSubject;
-  }
 
   render() {
     const project = this.props.project;

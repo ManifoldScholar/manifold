@@ -6,6 +6,12 @@ import isUndefined from "lodash/isUndefined";
 import BaseInput from "./BaseInput";
 
 export default class FormNumberInput extends Component {
+  static defaultProps = {
+    focusOnMount: false,
+    id: labelId("text-input-"),
+    idForError: labelId("text-input-error-")
+  };
+
   static displayName = "Form.NumberInput";
 
   static propTypes = {
@@ -21,12 +27,6 @@ export default class FormNumberInput extends Component {
     id: PropTypes.string,
     idForError: PropTypes.string,
     wide: PropTypes.bool
-  };
-
-  static defaultProps = {
-    focusOnMount: false,
-    id: labelId("text-input-"),
-    idForError: labelId("text-input-error-")
   };
 
   renderValue = value => {

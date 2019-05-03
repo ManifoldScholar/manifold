@@ -9,12 +9,6 @@ export default class LoginExternal extends Component {
     dispatch: PropTypes.func.isRequired
   };
 
-  get customOAuthProviders() {
-    return values(get(this.props, "settings.attributes.oauth")).filter(
-      provider => provider.custom
-    );
-  }
-
   get customOAuthButtons() {
     return this.customOAuthProviders.map(provider => (
       <Oauth.Button
@@ -25,6 +19,12 @@ export default class LoginExternal extends Component {
         Log in with {provider.descriptiveName}
       </Oauth.Button>
     ));
+  }
+
+  get customOAuthProviders() {
+    return values(get(this.props, "settings.attributes.oauth")).filter(
+      provider => provider.custom
+    );
   }
 
   render() {

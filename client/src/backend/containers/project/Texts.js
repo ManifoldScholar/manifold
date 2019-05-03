@@ -14,21 +14,11 @@ import cloneDeep from "lodash/cloneDeep";
 const { request } = entityStoreActions;
 
 export class ProjectTextsContainer extends Component {
-  static displayName = "Project.Texts";
-
-  static propTypes = {
-    project: PropTypes.object,
-    projectResponse: PropTypes.object,
-    dispatch: PropTypes.func,
-    refresh: PropTypes.func,
-    confirm: PropTypes.func.isRequired,
-    route: PropTypes.object,
-    match: PropTypes.object
-  };
-
   static defaultProps = {
     confirm: (heading, message, callback) => callback()
   };
+
+  static displayName = "Project.Texts";
 
   static getDerivedStateFromProps(props, state = {}) {
     if (
@@ -44,15 +34,21 @@ export class ProjectTextsContainer extends Component {
     };
   }
 
+  static propTypes = {
+    project: PropTypes.object,
+    projectResponse: PropTypes.object,
+    dispatch: PropTypes.func,
+    refresh: PropTypes.func,
+    confirm: PropTypes.func.isRequired,
+    route: PropTypes.object,
+    match: PropTypes.object
+  };
+
   constructor(props) {
     super(props);
     this.state = this.constructor.getDerivedStateFromProps(props, {
       categories: []
     });
-  }
-
-  get project() {
-    return this.props.project;
   }
 
   get callbacks() {
@@ -62,6 +58,38 @@ export class ProjectTextsContainer extends Component {
       updateCategoryPosition: this.updateCategoryPosition,
       updateTextCategoryAndPosition: this.updateTextCategoryAndPosition
     };
+  }
+
+  childRoutes() {
+    const { refresh } = this.props;
+    const closeUrl = lh.link("backendProjectTexts", this.project.id);
+
+    return childRoutes(this.props.route, {
+      drawer: true,
+      drawerProps: {
+        lockScroll: "always",
+        wide: true,
+        lockScrollClickCloses: false,
+        closeUrl
+      },
+      childProps: { refresh, project: this.project }
+    });
+  }
+
+  destroyCategory = category => {
+    const call = textCategoriesAPI.destroy(category.id);
+    const categoryRequest = request(call, requests.beTextCategoryDestroy);
+    this.props.dispatch(categoryRequest).promise.then(() => {
+      this.props.refresh();
+    });
+  };
+
+  destroyText(text) {
+    const call = textsAPI.destroy(text.id);
+    const textRequest = request(call, requests.beTextDestroy);
+    this.props.dispatch(textRequest).promise.then(() => {
+      this.props.refresh();
+    });
   }
 
   handleCategoryDestroy = category => {
@@ -79,10 +107,8 @@ export class ProjectTextsContainer extends Component {
     this.props.confirm(heading, message, () => this.destroyText(text));
   };
 
-  updateCategoryPositionInternal(category, position) {
-    const categories = this.state.categories.filter(c => c.id !== category.id);
-    categories.splice(position - 1, 0, category);
-    this.setState({ categories });
+  get project() {
+    return this.props.project;
   }
 
   updateCategoryPosition = (category, position) => {
@@ -101,6 +127,12 @@ export class ProjectTextsContainer extends Component {
       this.props.refresh();
     });
   };
+
+  updateCategoryPositionInternal(category, position) {
+    const categories = this.state.categories.filter(c => c.id !== category.id);
+    categories.splice(position - 1, 0, category);
+    this.setState({ categories });
+  }
 
   updateTextCategoryAndPosition = (text, category, position) => {
     let catPayload;
@@ -129,38 +161,6 @@ export class ProjectTextsContainer extends Component {
     clone.relationships.category = changes.relationships.category.data;
     texts.splice(clone.attributes.position - 1, 0, clone);
     this.setState({ texts });
-  }
-
-  destroyCategory = category => {
-    const call = textCategoriesAPI.destroy(category.id);
-    const categoryRequest = request(call, requests.beTextCategoryDestroy);
-    this.props.dispatch(categoryRequest).promise.then(() => {
-      this.props.refresh();
-    });
-  };
-
-  destroyText(text) {
-    const call = textsAPI.destroy(text.id);
-    const textRequest = request(call, requests.beTextDestroy);
-    this.props.dispatch(textRequest).promise.then(() => {
-      this.props.refresh();
-    });
-  }
-
-  childRoutes() {
-    const { refresh } = this.props;
-    const closeUrl = lh.link("backendProjectTexts", this.project.id);
-
-    return childRoutes(this.props.route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        wide: true,
-        lockScrollClickCloses: false,
-        closeUrl
-      },
-      childProps: { refresh, project: this.project }
-    });
   }
 
   render() {

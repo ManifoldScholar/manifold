@@ -46,26 +46,21 @@ export default class AnnotatableCaptureSelection extends Component {
     return this.validateNativeSelection(window.getSelection());
   }
 
-  selectActiveAnnotation() {
-    const { activeAnnotation, activeEvent } = this.props;
-    const [first, last] = this.firstAndLastAnnotationNode(activeAnnotation);
-    if (!first || !last) return;
-    const sel = window.getSelection();
-    const range = document.createRange();
-    range.setStart(first, 0);
-    range.setEnd(last, last.length);
-    sel.removeAllRanges();
-    sel.addRange(range);
-    this.updateSelectionState(activeEvent, true);
-  }
+  handleKeyDown = event => {
+    this.updateSelectionState(event);
+  };
 
-  firstAndLastAnnotationNode(id) {
-    const nodes = document.querySelectorAll(`[data-annotation-ids*="${id}"]`);
-    const finder = n => n.nodeType === Node.TEXT_NODE;
-    const first = [...nodes[0].childNodes].find(finder);
-    const last = [...nodes[nodes.length - 1].childNodes].find(finder);
-    return [first, last];
-  }
+  handleMouseUp = event => {
+    this.updateSelectionState(event, true);
+  };
+
+  handleSelectionChange = event => {
+    this.updateSelectionState(event);
+  };
+
+  handleTouchEnd = event => {
+    this.updateSelectionState(event, true);
+  };
 
   emptySelection(merge = {}) {
     return Object.assign(
@@ -81,10 +76,43 @@ export default class AnnotatableCaptureSelection extends Component {
     );
   }
 
-  validateNativeSelection(nativeSelection) {
-    if (this.isNativeSelectionEmpty(nativeSelection)) return null;
-    if (this.isNativeSelectionOutOfBounds(nativeSelection)) return null;
-    return nativeSelection;
+  extractText(nativeSelection) {
+    try {
+      const range = nativeSelection.getRangeAt(0);
+      if (!range) return nativeSelection.toString();
+      const fragment = range.cloneContents();
+      const blockRegex = /^(address|fieldset|li|article|figcaption|main|aside|figure|nav|blockquote|footer|ol|details|form|p|dialog|h1|h2|h3|h4|h5|h6|pre|div|header|section|table|ul|hr)$/i;
+
+      let text = "";
+      fragment.childNodes.forEach(node => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          text += node.innerText;
+          if (blockRegex.test(node.nodeName)) {
+            text += "\n";
+          }
+        } else if (node.nodeType === Node.TEXT_NODE) {
+          text += " ";
+          text += node.textContent;
+        }
+      });
+      text = text.trim();
+      return text;
+    } catch (error) {
+      return nativeSelection.toString();
+    }
+  }
+
+  firstAndLastAnnotationNode(id) {
+    const nodes = document.querySelectorAll(`[data-annotation-ids*="${id}"]`);
+    const finder = n => n.nodeType === Node.TEXT_NODE;
+    const first = [...nodes[0].childNodes].find(finder);
+    const last = [...nodes[nodes.length - 1].childNodes].find(finder);
+    return [first, last];
+  }
+
+  isLocatableEvent(event) {
+    if (!event) return false;
+    return event.type !== "selectionchange";
   }
 
   isNativeSelectionEmpty(nativeSelection) {
@@ -104,34 +132,22 @@ export default class AnnotatableCaptureSelection extends Component {
     return false;
   }
 
-  isLocatableEvent(event) {
-    if (!event) return false;
-    return event.type !== "selectionchange";
-  }
+  mapNativeSelection(nativeSelection) {
+    if (!nativeSelection) return null;
+    const range = nativeSelection.getRangeAt(0);
+    const text = nativeSelection.toString();
+    if (text.length === 0 || !text.trim()) return null;
 
-  updateSelectionState(event = null, selectionComplete = false) {
-    try {
-      const { selectionState } = this.props;
-      const selection = this.mapNativeSelection(this.nativeSelection);
-      if (!selection) return this.props.updateSelection(this.emptySelection());
-      let complete = selectionComplete;
-      if (selectionState.selectionComplete) complete = true;
-      const { x, y } = this.getEventXY(event);
-      const newState = this.emptySelection({
-        selection,
-        selectionAnnotation: this.mapSelectionToAnnotation(
-          selection,
-          this.nativeSelection
-        ),
-        selectionComplete: complete,
-        popupTriggerX: selection && x ? x : selectionState.popupTriggerX,
-        popupTriggerY: selection && y ? y : selectionState.popupTriggerY
-      });
-      this.props.updateSelection(newState);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log("There was an error in updateSelection: %o", error);
-    }
+    const mappedSelection = {
+      range,
+      text,
+      anchorNode: nativeSelection.anchorNode,
+      anchorOffset: nativeSelection.anchorOffset,
+      focusNode: nativeSelection.focusNode,
+      focusOffset: nativeSelection.focusOffset,
+      startNode: selectionHelpers.findClosestTextNode(range.startContainer)
+    };
+    return mappedSelection;
   }
 
   // Maps selection to an annotation data structure
@@ -190,65 +206,49 @@ export default class AnnotatableCaptureSelection extends Component {
     return annotation;
   }
 
-  extractText(nativeSelection) {
-    try {
-      const range = nativeSelection.getRangeAt(0);
-      if (!range) return nativeSelection.toString();
-      const fragment = range.cloneContents();
-      const blockRegex = /^(address|fieldset|li|article|figcaption|main|aside|figure|nav|blockquote|footer|ol|details|form|p|dialog|h1|h2|h3|h4|h5|h6|pre|div|header|section|table|ul|hr)$/i;
+  selectActiveAnnotation() {
+    const { activeAnnotation, activeEvent } = this.props;
+    const [first, last] = this.firstAndLastAnnotationNode(activeAnnotation);
+    if (!first || !last) return;
+    const sel = window.getSelection();
+    const range = document.createRange();
+    range.setStart(first, 0);
+    range.setEnd(last, last.length);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    this.updateSelectionState(activeEvent, true);
+  }
 
-      let text = "";
-      fragment.childNodes.forEach(node => {
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          text += node.innerText;
-          if (blockRegex.test(node.nodeName)) {
-            text += "\n";
-          }
-        } else if (node.nodeType === Node.TEXT_NODE) {
-          text += " ";
-          text += node.textContent;
-        }
+  updateSelectionState(event = null, selectionComplete = false) {
+    try {
+      const { selectionState } = this.props;
+      const selection = this.mapNativeSelection(this.nativeSelection);
+      if (!selection) return this.props.updateSelection(this.emptySelection());
+      let complete = selectionComplete;
+      if (selectionState.selectionComplete) complete = true;
+      const { x, y } = this.getEventXY(event);
+      const newState = this.emptySelection({
+        selection,
+        selectionAnnotation: this.mapSelectionToAnnotation(
+          selection,
+          this.nativeSelection
+        ),
+        selectionComplete: complete,
+        popupTriggerX: selection && x ? x : selectionState.popupTriggerX,
+        popupTriggerY: selection && y ? y : selectionState.popupTriggerY
       });
-      text = text.trim();
-      return text;
+      this.props.updateSelection(newState);
     } catch (error) {
-      return nativeSelection.toString();
+      // eslint-disable-next-line no-console
+      console.log("There was an error in updateSelection: %o", error);
     }
   }
 
-  mapNativeSelection(nativeSelection) {
-    if (!nativeSelection) return null;
-    const range = nativeSelection.getRangeAt(0);
-    const text = nativeSelection.toString();
-    if (text.length === 0 || !text.trim()) return null;
-
-    const mappedSelection = {
-      range,
-      text,
-      anchorNode: nativeSelection.anchorNode,
-      anchorOffset: nativeSelection.anchorOffset,
-      focusNode: nativeSelection.focusNode,
-      focusOffset: nativeSelection.focusOffset,
-      startNode: selectionHelpers.findClosestTextNode(range.startContainer)
-    };
-    return mappedSelection;
+  validateNativeSelection(nativeSelection) {
+    if (this.isNativeSelectionEmpty(nativeSelection)) return null;
+    if (this.isNativeSelectionOutOfBounds(nativeSelection)) return null;
+    return nativeSelection;
   }
-
-  handleTouchEnd = event => {
-    this.updateSelectionState(event, true);
-  };
-
-  handleMouseUp = event => {
-    this.updateSelectionState(event, true);
-  };
-
-  handleKeyDown = event => {
-    this.updateSelectionState(event);
-  };
-
-  handleSelectionChange = event => {
-    this.updateSelectionState(event);
-  };
 
   render() {
     return (

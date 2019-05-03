@@ -129,25 +129,21 @@ export class ReaderContainer extends Component {
     this.props.dispatch(flush(requests.rMyFilteredAnnotationsForText));
   }
 
-  get bodyClass() {
-    let colorScheme = get(this.props, "appearance.colors.colorScheme");
-    colorScheme = colorScheme ? `scheme-${colorScheme}` : "scheme-light";
-    return `reader ${colorScheme}`;
-  }
-
   setPersistentUI = props => {
     const user = props.authentication.currentUser;
     if (!user) return null;
     this.readerActions.setPersistentUI(user.attributes.persistentUi.reader);
   };
 
-  shouldRedirect(props) {
-    const matches = matchRoutes(
-      props.route.routes,
-      this.props.location.pathname
-    );
-    return matches.length === 0;
+  get bodyClass() {
+    let colorScheme = get(this.props, "appearance.colors.colorScheme");
+    colorScheme = colorScheme ? `scheme-${colorScheme}` : "scheme-light";
+    return `reader ${colorScheme}`;
   }
+
+  hideTocDrawer = () => {
+    this.commonActions.panelHide("tocDrawer");
+  };
 
   makeReaderActions = dispatch => {
     const b = bindActionCreators;
@@ -162,10 +158,6 @@ export class ReaderContainer extends Component {
     };
   };
 
-  hideTocDrawer = () => {
-    this.commonActions.panelHide("tocDrawer");
-  };
-
   toggleMeta = () => {
     this.setState({ showMeta: !this.state.showMeta });
   };
@@ -177,17 +169,12 @@ export class ReaderContainer extends Component {
     return null;
   }
 
-  renderTextMetaOverlay() {
-    const text = this.props.text;
-    return (
-      <Overlay closeCallback={this.toggleMeta} appearance="overlay-full">
-        <TextMeta
-          title={text.attributes.titlePlaintext}
-          subtitle={text.attributes.subtitle}
-          meta={text.attributes.metadataFormatted}
-        />
-      </Overlay>
+  shouldRedirect(props) {
+    const matches = matchRoutes(
+      props.route.routes,
+      this.props.location.pathname
     );
+    return matches.length === 0;
   }
 
   renderNotesOverlay() {
@@ -223,6 +210,19 @@ export class ReaderContainer extends Component {
     /* eslint-enable no-unused-vars */
     const childProps = { ...otherProps, ...this.readerActions };
     return childRoutes(this.props.route, { childProps, switch: false });
+  }
+
+  renderTextMetaOverlay() {
+    const text = this.props.text;
+    return (
+      <Overlay closeCallback={this.toggleMeta} appearance="overlay-full">
+        <TextMeta
+          title={text.attributes.titlePlaintext}
+          subtitle={text.attributes.subtitle}
+          meta={text.attributes.metadataFormatted}
+        />
+      </Overlay>
+    );
   }
 
   render() {

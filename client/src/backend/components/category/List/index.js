@@ -21,10 +21,6 @@ export default class CategoryList extends PureComponent {
     this.state = { activeType: null };
   }
 
-  onDragStart = draggable => {
-    this.setState({ activeType: draggable.type });
-  };
-
   onDragEnd = draggable => {
     this.setState({ activeType: null });
     if (!draggable.destination) return;
@@ -33,20 +29,32 @@ export default class CategoryList extends PureComponent {
       this.updateTextCategoryAndPosition(draggable);
   };
 
-  get project() {
-    return this.props.project;
+  onDragStart = draggable => {
+    this.setState({ activeType: draggable.type });
+  };
+
+  get callbacks() {
+    return this.props.callbacks;
   }
 
   get categories() {
     return this.props.categories;
   }
 
-  get texts() {
-    return this.props.texts;
+  findCategory(id) {
+    return this.categories.find(c => c.id === id);
   }
 
-  get callbacks() {
-    return this.props.callbacks;
+  findText(id) {
+    return this.texts.find(t => t.id === id);
+  }
+
+  get project() {
+    return this.props.project;
+  }
+
+  get texts() {
+    return this.props.texts;
   }
 
   get uncategorizedTexts() {
@@ -55,14 +63,6 @@ export default class CategoryList extends PureComponent {
       .sort((a, b) => {
         return a.attributes.position - b.attributes.position;
       });
-  }
-
-  findText(id) {
-    return this.texts.find(t => t.id === id);
-  }
-
-  findCategory(id) {
-    return this.categories.find(c => c.id === id);
   }
 
   updateCategoryPosition(draggable) {

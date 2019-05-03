@@ -21,6 +21,19 @@ export default class PressLogo extends Component {
     );
   }
 
+  getMobilePressImage() {
+    const className = classNames("image", {
+      "image-mobile": this.props.url
+    });
+    return (
+      <img
+        src={this.props.mobileUrl}
+        alt="Publisher Logo: Click to return to the browse page"
+        className={className}
+      />
+    );
+  }
+
   getPressImage() {
     const className = classNames("image", {
       "image-desktop": this.props.mobileUrl
@@ -42,19 +55,6 @@ export default class PressLogo extends Component {
         alt="Publisher Logo: Click to return to the browse page"
         className={className}
         style={style}
-      />
-    );
-  }
-
-  getMobilePressImage() {
-    const className = classNames("image", {
-      "image-mobile": this.props.url
-    });
-    return (
-      <img
-        src={this.props.mobileUrl}
-        alt="Publisher Logo: Click to return to the browse page"
-        className={className}
       />
     );
   }

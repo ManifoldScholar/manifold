@@ -13,10 +13,9 @@ import Projects from "./Projects";
 import Feature from "./Feature";
 
 export class HomeContainer extends Component {
-  static showProjects(getState) {
-    const settings = select(requests.settings, getState().entityStore);
-    return get(settings, "attributes.calculated.homePageShowProjects");
-  }
+  static defaultProps = {
+    location: {}
+  };
 
   static fetchData(getState, dispatch) {
     const promises = [];
@@ -43,9 +42,10 @@ export class HomeContainer extends Component {
     dispatch: PropTypes.func
   };
 
-  static defaultProps = {
-    location: {}
-  };
+  static showProjects(getState) {
+    const settings = select(requests.settings, getState().entityStore);
+    return get(settings, "attributes.calculated.homePageShowProjects");
+  }
 
   constructor(props) {
     super(props);
@@ -61,15 +61,15 @@ export class HomeContainer extends Component {
     }
   }
 
+  showFollowing() {
+    return true;
+  }
+
   get showProjects() {
     return get(
       this.props.settings,
       "attributes.calculated.homePageShowProjects"
     );
-  }
-
-  showFollowing() {
-    return true;
   }
 
   render() {

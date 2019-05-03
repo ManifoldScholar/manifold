@@ -5,6 +5,10 @@ import locationHelper from "helpers/location";
 import FatalError from "./index";
 
 class FatalErrorBoundary extends Component {
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
   static propTypes = {
     children: PropTypes.node,
     location: PropTypes.object
@@ -24,13 +28,18 @@ class FatalErrorBoundary extends Component {
     }
   }
 
+  body(error) {
+    if (error.name === "Error") return `"${error.message}"`;
+    return `"${error.name}: ${error.message}"`;
+  }
+
+  clearError = () => {
+    this.setState({ hasError: false, error: null });
+  };
+
   // noop, this lifecycle method just needs to be present
   // to log the component stack to the console in development
   componentDidCatch(errorIgnored, infoIgnored) {}
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
 
   get fatalError() {
     const error = this.state.error;
@@ -44,15 +53,6 @@ class FatalErrorBoundary extends Component {
         clientTraceTruncate: 5
       }
     };
-  }
-
-  clearError = () => {
-    this.setState({ hasError: false, error: null });
-  };
-
-  body(error) {
-    if (error.name === "Error") return `"${error.message}"`;
-    return `"${error.name}: ${error.message}"`;
   }
 
   render() {

@@ -6,6 +6,11 @@ import classnames from "classnames";
 import ListItem from "./ListItem";
 
 export default class FormHasManyList extends PureComponent {
+  static defaultProps = {
+    entityName: name => name,
+    emptyMessage: "None added"
+  };
+
   static displayName = "Form.HasMany.List";
 
   static propTypes = {
@@ -17,11 +22,6 @@ export default class FormHasManyList extends PureComponent {
     entities: PropTypes.array.isRequired,
     entityAvatarAttribute: PropTypes.string,
     emptyMessage: PropTypes.string
-  };
-
-  static defaultProps = {
-    entityName: name => name,
-    emptyMessage: "None added"
   };
 
   onMove = (event, entity, direction) => {

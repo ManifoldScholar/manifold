@@ -23,13 +23,6 @@ export class ResourceImportNew extends PureComponent {
     this.props.history.push(url);
   };
 
-  afterUrlChange = (value, set, setOther) => {
-    if (value) {
-      setOther("google_sheet", "attributes[source]");
-      setOther(null, "attributes[data]");
-    }
-  };
-
   afterSourceChange = (value, set, setOther) => {
     if (value) {
       setOther("attached_data", "attributes[source]");
@@ -37,12 +30,23 @@ export class ResourceImportNew extends PureComponent {
     }
   };
 
+  afterUrlChange = (value, set, setOther) => {
+    if (value) {
+      setOther("google_sheet", "attributes[source]");
+      setOther(null, "attributes[data]");
+    }
+  };
+
   create = model => {
     return this.props.create(this.preSave(model));
   };
 
-  update = (id, model) => {
-    return this.props.update(id, this.preSave(model));
+  /* eslint-enable no-param-reassign */
+
+  headerRowOptions = () => {
+    return [1, 2, 3, 4, 5, 6].map(i => {
+      return { label: i.toString(), value: i };
+    });
   };
 
   /* eslint-disable no-param-reassign */
@@ -51,12 +55,9 @@ export class ResourceImportNew extends PureComponent {
     model.attributes.storageType = "google_drive";
     return model;
   };
-  /* eslint-enable no-param-reassign */
 
-  headerRowOptions = () => {
-    return [1, 2, 3, 4, 5, 6].map(i => {
-      return { label: i.toString(), value: i };
-    });
+  update = (id, model) => {
+    return this.props.update(id, this.preSave(model));
   };
 
   render() {

@@ -26,6 +26,14 @@ export default class Panel extends PureComponent {
     }
   }
 
+  setWrapperRef = el => {
+    this.wrapperRef = el;
+  };
+
+  get isHidden() {
+    return !this.props.visible;
+  }
+
   get isPrimary() {
     return this.props.primary === true;
   }
@@ -34,26 +42,18 @@ export default class Panel extends PureComponent {
     return !this.isPrimary;
   }
 
-  get isHidden() {
-    return !this.props.visible;
-  }
-
-  setWrapperRef = el => {
-    this.wrapperRef = el;
+  handleTailBlur = condition => {
+    if (condition) {
+      this.setState({
+        tailHighlight: false
+      });
+    }
   };
 
   handleTailHighlight = condition => {
     if (condition) {
       this.setState({
         tailHighlight: true
-      });
-    }
-  };
-
-  handleTailBlur = condition => {
-    if (condition) {
-      this.setState({
-        tailHighlight: false
       });
     }
   };

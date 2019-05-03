@@ -6,6 +6,12 @@ import setter from "./setter";
 import Instructions from "./Instructions";
 
 class FormSwitch extends Component {
+  static defaultProps = {
+    labelPos: "above",
+    id: labelId("switch-input-"),
+    focusOnMount: false
+  };
+
   static displayName = "Form.Switch";
 
   static propTypes = {
@@ -23,12 +29,6 @@ class FormSwitch extends Component {
     focusOnMount: PropTypes.bool,
     id: PropTypes.string,
     wide: PropTypes.bool
-  };
-
-  static defaultProps = {
-    labelPos: "above",
-    id: labelId("switch-input-"),
-    focusOnMount: false
   };
 
   constructor(props) {
@@ -50,6 +50,53 @@ class FormSwitch extends Component {
     window.removeEventListener("keydown", this.handleKeyPress);
   }
 
+  blur = () => {
+    this.setState({ focused: false });
+  };
+
+  get checked() {
+    return this.determineChecked(this.props.value);
+  }
+
+  determineChecked(value) {
+    if (this.props.customValues) return value === this.props.customValues.true;
+    return this.truthy(value);
+  }
+
+  focus = () => {
+    this.setState({ focused: true });
+    if (this.button) {
+      this.button.focus();
+    }
+  };
+
+  handleBooleans() {
+    this.props.set(!this.truthy(this.props.value));
+  }
+
+  handleClick = event => {
+    event.preventDefault();
+    if (this.props.customValues) return this.handleCustomValues();
+    return this.handleBooleans();
+  };
+
+  handleCustomValues() {
+    const trueValue = this.props.customValues.true;
+    const falseValue = this.props.customValues.false;
+    if (this.props.value === trueValue) return this.props.set(falseValue);
+    return this.props.set(trueValue);
+  }
+
+  handleKeyPress = event => {
+    const spaceOrEnter = event.keyCode === 32 || event.keyCode === 13;
+    if (spaceOrEnter && this.state.focused) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (this.props.customValues) return this.handleCustomValues();
+      return this.handleBooleans();
+    }
+  };
+
   get labelClasses() {
     return classnames(
       "form-input-heading",
@@ -66,6 +113,10 @@ class FormSwitch extends Component {
     });
   }
 
+  truthy(value) {
+    return value === true || value === "true";
+  }
+
   get wrapperClasses() {
     return classnames(
       {
@@ -75,57 +126,6 @@ class FormSwitch extends Component {
       this.props.className
     );
   }
-
-  get checked() {
-    return this.determineChecked(this.props.value);
-  }
-
-  truthy(value) {
-    return value === true || value === "true";
-  }
-
-  handleClick = event => {
-    event.preventDefault();
-    if (this.props.customValues) return this.handleCustomValues();
-    return this.handleBooleans();
-  };
-
-  handleKeyPress = event => {
-    const spaceOrEnter = event.keyCode === 32 || event.keyCode === 13;
-    if (spaceOrEnter && this.state.focused) {
-      event.preventDefault();
-      event.stopPropagation();
-      if (this.props.customValues) return this.handleCustomValues();
-      return this.handleBooleans();
-    }
-  };
-
-  handleCustomValues() {
-    const trueValue = this.props.customValues.true;
-    const falseValue = this.props.customValues.false;
-    if (this.props.value === trueValue) return this.props.set(falseValue);
-    return this.props.set(trueValue);
-  }
-
-  handleBooleans() {
-    this.props.set(!this.truthy(this.props.value));
-  }
-
-  determineChecked(value) {
-    if (this.props.customValues) return value === this.props.customValues.true;
-    return this.truthy(value);
-  }
-
-  focus = () => {
-    this.setState({ focused: true });
-    if (this.button) {
-      this.button.focus();
-    }
-  };
-
-  blur = () => {
-    this.setState({ focused: false });
-  };
 
   render() {
     const label = (

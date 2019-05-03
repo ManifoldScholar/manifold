@@ -33,15 +33,21 @@ class Analytics extends Component {
     }
   }
 
-  trackRouteUpdate(props) {
-    if (__SERVER__) return;
-    if (!this.state.initialized) return;
-    ReactGA.ga("send", "pageview", props.location.pathname);
-    // this.logTrack(props);
-  }
-
   gaid(propsIgnored) {
     return get(this.props.settings, "attributes.integrations.gaTrackingId");
+  }
+
+  initialize(props) {
+    if (this.state.initialized === true) return;
+    const id = this.gaid(props);
+    if (!id) return;
+    if (this.lock) return;
+    ReactGA.initialize(id);
+    this.lock = true;
+    this.logInit(props);
+    this.setState({ initialized: true }, () => {
+      this.lock = false;
+    });
   }
 
   logInit(propsIgnored) {
@@ -59,17 +65,11 @@ class Analytics extends Component {
     }
   }
 
-  initialize(props) {
-    if (this.state.initialized === true) return;
-    const id = this.gaid(props);
-    if (!id) return;
-    if (this.lock) return;
-    ReactGA.initialize(id);
-    this.lock = true;
-    this.logInit(props);
-    this.setState({ initialized: true }, () => {
-      this.lock = false;
-    });
+  trackRouteUpdate(props) {
+    if (__SERVER__) return;
+    if (!this.state.initialized) return;
+    ReactGA.ga("send", "pageview", props.location.pathname);
+    // this.logTrack(props);
   }
 
   render() {

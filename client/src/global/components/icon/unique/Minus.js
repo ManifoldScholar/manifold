@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 
 export default class IconMinus extends Component {
+  static defaultProps = {
+    size: 32,
+    fill: "currentColor"
+  };
+
   static displayName = "Icon.Minus";
 
   static propTypes = {
@@ -10,11 +15,6 @@ export default class IconMinus extends Component {
     size: PropTypes.number,
     fill: PropTypes.string,
     stroke: PropTypes.string
-  };
-
-  static defaultProps = {
-    size: 32,
-    fill: "currentColor"
   };
 
   render() {

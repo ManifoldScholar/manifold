@@ -3,6 +3,13 @@ import PropTypes from "prop-types";
 import UniqueIcons from "global/components/icon/unique";
 
 export default class EntityThumbnailProject extends PureComponent {
+  static defaultProps = {
+    mode: "responsive",
+    variant: "small",
+    attributes: {},
+    placeholderAttributes: {}
+  };
+
   static displayName = "EntityThumbnail.Project";
 
   static propTypes = {
@@ -15,26 +22,8 @@ export default class EntityThumbnailProject extends PureComponent {
     mode: PropTypes.string
   };
 
-  static defaultProps = {
-    mode: "responsive",
-    variant: "small",
-    attributes: {},
-    placeholderAttributes: {}
-  };
-
   get attr() {
     return this.props.entity.attributes;
-  }
-
-  get variant() {
-    return this.props.variant;
-  }
-
-  get src() {
-    if (!this.attr.avatarStyles) return null;
-    const meta = this.attr.avatarMeta ? this.attr.avatarMeta.original : null;
-    const style = meta && meta.width >= meta.height ? "smallSquare" : "small";
-    return this.attr.avatarStyles[style];
   }
 
   get icon() {
@@ -45,10 +34,6 @@ export default class EntityThumbnailProject extends PureComponent {
         {...this.props.placeholderAttributes}
       />
     );
-  }
-
-  get useImage() {
-    return !!this.src;
   }
 
   get image() {
@@ -62,6 +47,21 @@ export default class EntityThumbnailProject extends PureComponent {
         className={className}
       />
     );
+  }
+
+  get src() {
+    if (!this.attr.avatarStyles) return null;
+    const meta = this.attr.avatarMeta ? this.attr.avatarMeta.original : null;
+    const style = meta && meta.width >= meta.height ? "smallSquare" : "small";
+    return this.attr.avatarStyles[style];
+  }
+
+  get useImage() {
+    return !!this.src;
+  }
+
+  get variant() {
+    return this.props.variant;
   }
 
   render() {

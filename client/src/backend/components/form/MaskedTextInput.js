@@ -10,6 +10,10 @@ import setter from "./setter";
 import Instructions from "./Instructions";
 
 class FormMaskedTextInput extends Component {
+  static defaultProps = {
+    id: labelId("masked-text-")
+  };
+
   static displayName = "Form.MaskedTextInput";
 
   static propTypes = {
@@ -27,10 +31,6 @@ class FormMaskedTextInput extends Component {
     wide: PropTypes.bool
   };
 
-  static defaultProps = {
-    id: labelId("masked-text-")
-  };
-
   constructor() {
     super();
     this.placeholderChar = "\u005F"; // react-text-mask default "_"
@@ -41,20 +41,6 @@ class FormMaskedTextInput extends Component {
       prefix: "$",
       allowDecimal: true
     });
-  }
-
-  hashTagMask() {
-    return raw => {
-      const wordChar = /^[A-Za-z0-9-]$/;
-      const notWordChar = /[^A-Za-z0-9-]/g;
-      const adjusted = raw.replace(notWordChar, "").replace("_", "");
-      const { length } = adjusted;
-      let mask = Array(length);
-      mask.unshift("#");
-      fill(mask, wordChar, 1);
-      if (mask.length === 1) mask = [/#/];
-      return mask;
-    };
   }
 
   doiMask() {
@@ -68,6 +54,20 @@ class FormMaskedTextInput extends Component {
       mask.unshift(...base);
       fill(mask, wordChar, base.length);
       if (mask.length === base.length) mask = base;
+      return mask;
+    };
+  }
+
+  hashTagMask() {
+    return raw => {
+      const wordChar = /^[A-Za-z0-9-]$/;
+      const notWordChar = /[^A-Za-z0-9-]/g;
+      const adjusted = raw.replace(notWordChar, "").replace("_", "");
+      const { length } = adjusted;
+      let mask = Array(length);
+      mask.unshift("#");
+      fill(mask, wordChar, 1);
+      if (mask.length === 1) mask = [/#/];
       return mask;
     };
   }

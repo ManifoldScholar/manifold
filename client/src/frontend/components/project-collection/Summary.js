@@ -19,10 +19,6 @@ export default class ProjectCollectionSummary extends Component {
     ordinal: PropTypes.number
   };
 
-  get limit() {
-    return this.props.limit;
-  }
-
   get collection() {
     return this.props.projectCollection;
   }
@@ -31,12 +27,12 @@ export default class ProjectCollectionSummary extends Component {
     return this.collection.attributes.descriptionFormatted;
   }
 
-  get projects() {
-    return this.mappedProjects(this.collection);
-  }
-
   get hasProjects() {
     return this.projects.length > 0;
+  }
+
+  get limit() {
+    return this.props.limit;
   }
 
   mappedProjects = memoize(() => {
@@ -44,6 +40,10 @@ export default class ProjectCollectionSummary extends Component {
       cp => cp.relationships.project
     );
   });
+
+  get projects() {
+    return this.mappedProjects(this.collection);
+  }
 
   render() {
     if (!this.collection) return null;

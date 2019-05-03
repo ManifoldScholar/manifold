@@ -2,12 +2,12 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 export default class FormUploadFilePreview extends PureComponent {
+  static defaultProps = {};
+
   static propTypes = {
     fileName: PropTypes.string,
     handleRemove: PropTypes.func.isRequired
   };
-
-  static defaultProps = {};
 
   render() {
     return (

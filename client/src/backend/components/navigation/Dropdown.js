@@ -23,11 +23,24 @@ export class NavigationDropdown extends Component {
     this.state = { open: false };
   }
 
+  close = () => {
+    this.setState({ open: false });
+  };
+
   get currentLabel() {
     const selected = this.visitLinks(this.props.links);
     if (!selected) return "";
     return selected.headerLabel || selected.label;
   }
+
+  pathForLink(link) {
+    const args = link.args || [];
+    return lh.link(link.route, ...args);
+  }
+
+  toggleOpen = () => {
+    this.setState({ open: !this.state.open });
+  };
 
   visitLinks(links) {
     const activeLink = links.find(link => {
@@ -38,19 +51,6 @@ export class NavigationDropdown extends Component {
       return this.visitLinks(activeLink.children);
     }
     return activeLink;
-  }
-
-  toggleOpen = () => {
-    this.setState({ open: !this.state.open });
-  };
-
-  close = () => {
-    this.setState({ open: false });
-  };
-
-  pathForLink(link) {
-    const args = link.args || [];
-    return lh.link(link.route, ...args);
   }
 
   renderItem(link) {
@@ -64,17 +64,6 @@ export class NavigationDropdown extends Component {
           {link.label}
         </NavLink>
       </li>
-    );
-  }
-
-  renderStatic(props) {
-    const selected = this.getSelected(props);
-    const label = selected ? selected.label : "menu";
-
-    return (
-      <nav className={`dropdown-nav static ${props.classNames}`}>
-        <div className="selected">{label}</div>
-      </nav>
     );
   }
 
@@ -107,6 +96,17 @@ export class NavigationDropdown extends Component {
             return this.renderItem(link);
           })}
         </ul>
+      </nav>
+    );
+  }
+
+  renderStatic(props) {
+    const selected = this.getSelected(props);
+    const label = selected ? selected.label : "menu";
+
+    return (
+      <nav className={`dropdown-nav static ${props.classNames}`}>
+        <div className="selected">{label}</div>
       </nav>
     );
   }

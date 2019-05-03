@@ -6,6 +6,12 @@ import IconComputed from "global/components/icon-computed";
 import labelId from "helpers/labelId";
 
 export default class IconPicker extends Component {
+  static defaultProps = {
+    name: "attributes[icon]",
+    id: labelId("icon-picker-"),
+    idForError: labelId("icon-picker-error-")
+  };
+
   static displayName = "ProjectCollection.Form.IconPicker";
 
   static propTypes = {
@@ -20,15 +26,9 @@ export default class IconPicker extends Component {
     wide: PropTypes.bool
   };
 
-  static defaultProps = {
-    name: "attributes[icon]",
-    id: labelId("icon-picker-"),
-    idForError: labelId("icon-picker-error-")
+  handleIconChange = icon => {
+    this.props.setOther(icon, "attributes[icon]");
   };
-
-  get selected() {
-    return this.props.getModelValue("attributes[icon]");
-  }
 
   get icons() {
     return [
@@ -42,9 +42,9 @@ export default class IconPicker extends Component {
     ];
   }
 
-  handleIconChange = icon => {
-    this.props.setOther(icon, "attributes[icon]");
-  };
+  get selected() {
+    return this.props.getModelValue("attributes[icon]");
+  }
 
   renderIcon(icon) {
     const { selected } = this;

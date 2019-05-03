@@ -4,35 +4,15 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
 export default class ResourceTagList extends Component {
+  static defaultProps = {
+    disabledLinks: false
+  };
+
   static displayName = "Resource.TagList";
 
   static propTypes = {
     resource: PropTypes.object,
     disabledLinks: PropTypes.bool
-  };
-
-  static defaultProps = {
-    disabledLinks: false
-  };
-
-  mapTagsToLinks(resource) {
-    const tags = resource.attributes.tagList;
-    const project = resource.relationships.project;
-    const out = [];
-    tags.map((tag, index) => {
-      return out.push(this.createTagLink(tag, project.attributes.slug, index));
-    });
-    return out;
-  }
-
-  hasTags(resource) {
-    return (
-      resource.attributes.tagList && resource.attributes.tagList.length > 0
-    );
-  }
-
-  stopPropagation = event => {
-    event.stopPropagation();
   };
 
   createTagLink(tag, projectSlug, index) {
@@ -52,6 +32,26 @@ export default class ResourceTagList extends Component {
       </li>
     );
   }
+
+  hasTags(resource) {
+    return (
+      resource.attributes.tagList && resource.attributes.tagList.length > 0
+    );
+  }
+
+  mapTagsToLinks(resource) {
+    const tags = resource.attributes.tagList;
+    const project = resource.relationships.project;
+    const out = [];
+    tags.map((tag, index) => {
+      return out.push(this.createTagLink(tag, project.attributes.slug, index));
+    });
+    return out;
+  }
+
+  stopPropagation = event => {
+    event.stopPropagation();
+  };
 
   render() {
     if (!this.props.resource) return null;

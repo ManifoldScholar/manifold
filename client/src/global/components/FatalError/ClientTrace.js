@@ -20,6 +20,19 @@ export default class FatalErrorClientTrace extends PureComponent {
       .filter(i => !!i);
   }
 
+  static getDerivedStateFromProps(props) {
+    let stackLines = props.trace.split("\n");
+    stackLines.shift();
+    const { length: count } = stackLines;
+    let hidden = 0;
+    if (props.truncate) {
+      stackLines = stackLines.slice(0, props.truncate);
+      hidden = count - props.truncate;
+    }
+    stackLines = FatalErrorClientTrace.adjustedStackLines(stackLines);
+    return { stackLines, count, hidden };
+  }
+
   static propTypes = {
     trace: PropTypes.string.isRequired,
     truncate: PropTypes.number
@@ -32,19 +45,6 @@ export default class FatalErrorClientTrace extends PureComponent {
 
   componentDidMount() {
     console.error(this.props.trace); // eslint-disable-line no-console
-  }
-
-  static getDerivedStateFromProps(props) {
-    let stackLines = props.trace.split("\n");
-    stackLines.shift();
-    const { length: count } = stackLines;
-    let hidden = 0;
-    if (props.truncate) {
-      stackLines = stackLines.slice(0, props.truncate);
-      hidden = count - props.truncate;
-    }
-    stackLines = FatalErrorClientTrace.adjustedStackLines(stackLines);
-    return { stackLines, count, hidden };
   }
 
   render() {

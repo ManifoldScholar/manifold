@@ -44,6 +44,28 @@ export default function fetchData(WrappedComponent) {
       }
     }
 
+    fetchData = props => {
+      if (!this.canFetchData(props)) return;
+      const result = WrappedComponent.fetchData(
+        this.context.store.getState,
+        this.context.store.dispatch,
+        props.location,
+        props.match
+      );
+      if (isPromise(result)) {
+        result.catch(() => {
+          ch.error(
+            `Unable to fetch route data for ${getDisplayName(
+              WrappedComponent
+            )}`,
+            "rain_cloud"
+          );
+        });
+      }
+      this.addFetchResultToStaticContext(result);
+      this.log(props);
+    };
+
     addFetchResultToStaticContext(result) {
       if (!this.props.staticContext) return;
       const promises = [];
@@ -68,28 +90,6 @@ export default function fetchData(WrappedComponent) {
         );
       }
     }
-
-    fetchData = props => {
-      if (!this.canFetchData(props)) return;
-      const result = WrappedComponent.fetchData(
-        this.context.store.getState,
-        this.context.store.dispatch,
-        props.location,
-        props.match
-      );
-      if (isPromise(result)) {
-        result.catch(() => {
-          ch.error(
-            `Unable to fetch route data for ${getDisplayName(
-              WrappedComponent
-            )}`,
-            "rain_cloud"
-          );
-        });
-      }
-      this.addFetchResultToStaticContext(result);
-      this.log(props);
-    };
 
     canFetchData(propsIgnored) {
       if (!isFunction(WrappedComponent.fetchData)) return false;

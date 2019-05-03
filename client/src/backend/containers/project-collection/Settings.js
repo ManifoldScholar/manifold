@@ -15,6 +15,10 @@ const { request } = entityStoreActions;
 const perPage = 12;
 
 export class ProjectCollectionSettings extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
   static displayName = "ProjectCollection.Settings";
 
   static propTypes = {
@@ -22,16 +26,6 @@ export class ProjectCollectionSettings extends PureComponent {
     projectCollectionMeta: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
     confirm: PropTypes.func.isRequired
-  };
-
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
-  };
-
-  handleDestroy = () => {
-    const heading = "Are you sure you want to delete this project collection?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, this.destroyProjectCollection);
   };
 
   destroyProjectCollection = () => {
@@ -53,12 +47,11 @@ export class ProjectCollectionSettings extends PureComponent {
     return props.history.push(lh.link("backendProjectCollections"));
   }
 
-  shouldPaginate(model) {
-    const { projectCollection } = this.props;
-    return (
-      model.attributes.smart || !projectCollection.attributes.manuallySorted
-    );
-  }
+  handleDestroy = () => {
+    const heading = "Are you sure you want to delete this project collection?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, this.destroyProjectCollection);
+  };
 
   handleUpdate = (id, model) => {
     const pagination = this.props.projectCollectionMeta.relationships
@@ -71,6 +64,13 @@ export class ProjectCollectionSettings extends PureComponent {
       };
     return projectCollectionsAPI.update(id, model, page);
   };
+
+  shouldPaginate(model) {
+    const { projectCollection } = this.props;
+    return (
+      model.attributes.smart || !projectCollection.attributes.manuallySorted
+    );
+  }
 
   render() {
     const { projectCollection } = this.props;

@@ -95,12 +95,6 @@ class DashboardsAdminContainerImplementation extends PureComponent {
     }
   }
 
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
-
   filterParams(name = null, additionalParams = {}) {
     const filterState = this.props.entitiesListSearchParams[name] || {};
     const out = Object.assign({}, filterState, additionalParams);
@@ -111,9 +105,11 @@ class DashboardsAdminContainerImplementation extends PureComponent {
     return out;
   }
 
-  updateHandlerCreator = page => {
-    return () => this.fetchProjects(page);
-  };
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
+  }
 
   noProjects = () => {
     const filterState = this.props.entitiesListSearchParams.projects;
@@ -129,6 +125,10 @@ class DashboardsAdminContainerImplementation extends PureComponent {
       return "This Manifold Library is empty. Click the button above to create your first project.";
     }
     return "Sorry, no results were found.";
+  };
+
+  updateHandlerCreator = page => {
+    return () => this.fetchProjects(page);
   };
 
   render() {

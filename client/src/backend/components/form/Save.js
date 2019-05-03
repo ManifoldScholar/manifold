@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export default class FormSave extends Component {
+  static defaultProps = {
+    text: "Save"
+  };
+
   static displayName = "Form.Save";
 
   static propTypes = {
     text: PropTypes.string,
     cancelRoute: PropTypes.string
-  };
-
-  static defaultProps = {
-    text: "Save"
   };
 
   render() {

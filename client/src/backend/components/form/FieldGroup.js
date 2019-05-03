@@ -5,19 +5,19 @@ import classNames from "classnames";
 import Instructions from "./Instructions";
 
 export default class FieldGroup extends PureComponent {
+  static defaultProps = {
+    disabled: false,
+    horizontal: false,
+    wide: false,
+    instructions: null
+  };
+
   static propTypes = {
     disabled: PropTypes.bool,
     horizontal: PropTypes.bool,
     wide: PropTypes.bool,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     label: PropTypes.string
-  };
-
-  static defaultProps = {
-    disabled: false,
-    horizontal: false,
-    wide: false,
-    instructions: null
   };
 
   renderChildren(props) {

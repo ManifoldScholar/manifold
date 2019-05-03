@@ -13,6 +13,8 @@ const page = 1;
 const perPage = 10;
 
 export class NotationResourceCollectionDetailContainer extends PureComponent {
+  static displayName = "ReaderContainer.Notation.ResourceCollection.Detail";
+
   static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
     const promises = [];
@@ -50,8 +52,6 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
     };
     return Object.assign({}, newState, ownProps);
   };
-
-  static displayName = "ReaderContainer.Notation.ResourceCollection.Detail";
 
   static propTypes = {
     route: PropTypes.object,

@@ -5,6 +5,10 @@ import classNames from "classnames";
 import Authorize from "hoc/authorize";
 
 export default class AnnotationDetail extends PureComponent {
+  static defaultProps = {
+    showAnnotationLabel: false
+  };
+
   static displayName = "Annotation.Meta";
 
   static propTypes = {
@@ -13,32 +17,6 @@ export default class AnnotationDetail extends PureComponent {
     showAnnotationLabel: PropTypes.bool,
     subject: PropTypes.string
   };
-
-  static defaultProps = {
-    showAnnotationLabel: false
-  };
-
-  get subtitle() {
-    if (!this.props.subject) return this.dateSubtitle;
-    return this.subjectSubtitle;
-  }
-
-  get name() {
-    const { creator, annotation } = this.props;
-    const isCreator = annotation.attributes.currentUserIsCreator;
-    let name = creator.attributes.fullName;
-    if (isCreator) name = "Me";
-    return <h4 className="author-name">{name}</h4>;
-  }
-
-  get subjectSubtitle() {
-    const { subject } = this.props;
-    return (
-      <div className="subtitle">
-        {subject} {this.dateSubtitle}
-      </div>
-    );
-  }
 
   get dateSubtitle() {
     const { annotation } = this.props;
@@ -62,6 +40,28 @@ export default class AnnotationDetail extends PureComponent {
       label = "Author";
     }
     return label;
+  }
+
+  get name() {
+    const { creator, annotation } = this.props;
+    const isCreator = annotation.attributes.currentUserIsCreator;
+    let name = creator.attributes.fullName;
+    if (isCreator) name = "Me";
+    return <h4 className="author-name">{name}</h4>;
+  }
+
+  get subjectSubtitle() {
+    const { subject } = this.props;
+    return (
+      <div className="subtitle">
+        {subject} {this.dateSubtitle}
+      </div>
+    );
+  }
+
+  get subtitle() {
+    if (!this.props.subject) return this.dateSubtitle;
+    return this.subjectSubtitle;
   }
 
   renderMarkers(annotation) {

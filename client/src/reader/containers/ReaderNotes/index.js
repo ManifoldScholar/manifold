@@ -15,6 +15,12 @@ const { request } = entityStoreActions;
 const INITIAL_FORMATS = ["highlight", "annotation", "bookmark"];
 
 export class ReaderNotesContainer extends Component {
+  static defaultProps = {
+    filterable: false
+  };
+
+  static displayName = "Reader.ReaderNotes";
+
   static mapStateToProps = (state, ownProps) => {
     const requestName = ownProps.filterable
       ? requests.rMyFilteredAnnotationsForText
@@ -34,8 +40,6 @@ export class ReaderNotesContainer extends Component {
     return Object.assign({}, newState, ownProps);
   };
 
-  static displayName = "Reader.ReaderNotes";
-
   static propTypes = {
     myAnnotations: PropTypes.array,
     annotations: PropTypes.array,
@@ -46,10 +50,6 @@ export class ReaderNotesContainer extends Component {
     history: PropTypes.object,
     dispatch: PropTypes.func,
     children: PropTypes.object
-  };
-
-  static defaultProps = {
-    filterable: false
   };
 
   constructor(props) {
@@ -86,15 +86,6 @@ export class ReaderNotesContainer extends Component {
     };
   };
 
-  triggerHideNotes = () => {
-    this.commonActions.panelToggle("notes");
-  };
-
-  fetchAnnotations(state, props) {
-    const annotationsCall = meAPI.annotations(state.filter);
-    props.dispatch(request(annotationsCall, this.requestName));
-  }
-
   handleVisitAnnotation = annotation => {
     const { match, history } = this.props;
     const { attributes: attr } = annotation;
@@ -110,6 +101,14 @@ export class ReaderNotesContainer extends Component {
     return history.push(url);
   };
 
+  handleFilterChange = (key, filters) => {
+    const filter = Object.assign({}, this.state.filter);
+    filter[key] = filters;
+    this.setState({ filter }, () =>
+      this.fetchAnnotations(this.state, this.props)
+    );
+  };
+
   handleSeeAllClick = event => {
     event.preventDefault();
     const { match, history } = this.props;
@@ -123,13 +122,30 @@ export class ReaderNotesContainer extends Component {
     return history.push(url);
   };
 
-  handleFilterChange = (key, filters) => {
-    const filter = Object.assign({}, this.state.filter);
-    filter[key] = filters;
-    this.setState({ filter }, () =>
-      this.fetchAnnotations(this.state, this.props)
-    );
+  triggerHideNotes = () => {
+    this.commonActions.panelToggle("notes");
   };
+
+  childProps(props) {
+    const sortedAnnotations = this.mapAnnotationsToSections(props);
+
+    return {
+      sortedAnnotations,
+      annotations: props.annotations,
+      section: props.section,
+      handleVisitAnnotation: this.handleVisitAnnotation,
+      handleFilterChange: this.handleFilterChange,
+      handleSeeAllClick: this.handleSeeAllClick,
+      annotated: props.annotated,
+      loaded: props.loaded,
+      filter: this.state.filter
+    };
+  }
+
+  fetchAnnotations(state, props) {
+    const annotationsCall = meAPI.annotations(state.filter);
+    props.dispatch(request(annotationsCall, this.requestName));
+  }
 
   mapAnnotationsToSections(props) {
     const { text, myAnnotations } = props;
@@ -146,22 +162,6 @@ export class ReaderNotesContainer extends Component {
     });
 
     return out;
-  }
-
-  childProps(props) {
-    const sortedAnnotations = this.mapAnnotationsToSections(props);
-
-    return {
-      sortedAnnotations,
-      annotations: props.annotations,
-      section: props.section,
-      handleVisitAnnotation: this.handleVisitAnnotation,
-      handleFilterChange: this.handleFilterChange,
-      handleSeeAllClick: this.handleSeeAllClick,
-      annotated: props.annotated,
-      loaded: props.loaded,
-      filter: this.state.filter
-    };
   }
 
   renderChildren() {

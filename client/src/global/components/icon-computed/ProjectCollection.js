@@ -3,14 +3,14 @@ import Utility from "global/components/utility";
 import PropTypes from "prop-types";
 
 export default class IconComputedProjectCollection extends PureComponent {
+  static defaultProps = {
+    size: 48
+  };
+
   static displayName = "IconComputed.ProjectCollection";
 
   static propTypes = {
     icon: PropTypes.string.isRequired
-  };
-
-  static defaultProps = {
-    size: 48
   };
 
   iconForValue(value) {

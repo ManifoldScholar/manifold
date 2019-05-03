@@ -7,6 +7,13 @@ import lh from "helpers/linkHandler";
 import withCurrentUser from "hoc/with-current-user";
 
 export class LayoutButtonNavigation extends Component {
+  static defaultProps = {
+    grayBg: true,
+    showProjects: true,
+    showFollowing: true,
+    showProjectCollections: false
+  };
+
   static displayName = "Layout.ButtonNavigation";
 
   static propTypes = {
@@ -16,13 +23,6 @@ export class LayoutButtonNavigation extends Component {
     showProjectCollections: PropTypes.bool,
     hideAtNarrow: PropTypes.bool,
     currentUser: PropTypes.object
-  };
-
-  static defaultProps = {
-    grayBg: true,
-    showProjects: true,
-    showFollowing: true,
-    showProjectCollections: false
   };
 
   constructor() {
@@ -54,6 +54,26 @@ export class LayoutButtonNavigation extends Component {
     this._projectsButtonEl.style.width = `${target}px`;
   };
 
+  renderFollowingButton = () => {
+    if (!this.props.currentUser) return null;
+    if (this.props.showFollowing !== true) return null;
+    return (
+      <Link to={lh.link("frontendFollowing")} className="button-icon-primary">
+        <span
+          ref={node => {
+            this._followingButtonEl = node;
+          }}
+        >
+          <i
+            className="manicon manicon-books-with-glasses"
+            aria-hidden="true"
+          />
+          {"Projects You’re Following"}
+        </span>
+      </Link>
+    );
+  };
+
   renderProjectsButton = () => {
     if (!this.props.showProjects && !this.props.showProjectCollections)
       return null;
@@ -77,26 +97,6 @@ export class LayoutButtonNavigation extends Component {
         >
           <i className="manicon manicon-books-on-shelf" aria-hidden="true" />
           {label}
-        </span>
-      </Link>
-    );
-  };
-
-  renderFollowingButton = () => {
-    if (!this.props.currentUser) return null;
-    if (this.props.showFollowing !== true) return null;
-    return (
-      <Link to={lh.link("frontendFollowing")} className="button-icon-primary">
-        <span
-          ref={node => {
-            this._followingButtonEl = node;
-          }}
-        >
-          <i
-            className="manicon manicon-books-with-glasses"
-            aria-hidden="true"
-          />
-          {"Projects You’re Following"}
         </span>
       </Link>
     );

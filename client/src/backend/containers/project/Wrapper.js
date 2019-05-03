@@ -16,14 +16,18 @@ import get from "lodash/get";
 const { request, flush } = entityStoreActions;
 
 export class ProjectWrapperContainer extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "Project.Wrapper";
+
   static mapStateToProps = state => {
     return {
       projectResponse: get(state.entityStore.responses, requests.beProject),
       project: select(requests.beProject, state.entityStore)
     };
   };
-
-  static displayName = "Project.Wrapper";
 
   static propTypes = {
     projectResponse: PropTypes.object,
@@ -36,10 +40,6 @@ export class ProjectWrapperContainer extends PureComponent {
     location: PropTypes.object
   };
 
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
-  };
-
   componentDidMount() {
     this.fetchProject();
   }
@@ -48,11 +48,13 @@ export class ProjectWrapperContainer extends PureComponent {
     this.props.dispatch(flush(requests.beProject));
   }
 
-  fetchProject = () => {
-    const call = projectsAPI.show(this.props.match.params.id);
-    const options = { force: true };
-    const projectRequest = request(call, requests.beProject, options);
-    this.props.dispatch(projectRequest);
+  doDestroy = () => {
+    const call = projectsAPI.destroy(this.props.project.id);
+    const options = { removes: this.props.project };
+    const projectRequest = request(call, requests.beProjectDestroy, options);
+    this.props.dispatch(projectRequest).promise.then(() => {
+      this.redirectToDashboard();
+    });
   };
 
   doPreview = event => {
@@ -64,24 +66,30 @@ export class ProjectWrapperContainer extends PureComponent {
     win.focus();
   };
 
-  doDestroy = () => {
-    const call = projectsAPI.destroy(this.props.project.id);
-    const options = { removes: this.props.project };
-    const projectRequest = request(call, requests.beProjectDestroy, options);
-    this.props.dispatch(projectRequest).promise.then(() => {
-      this.redirectToDashboard();
-    });
+  fetchProject = () => {
+    const call = projectsAPI.show(this.props.match.params.id);
+    const options = { force: true };
+    const projectRequest = request(call, requests.beProject, options);
+    this.props.dispatch(projectRequest);
   };
-
-  redirectToDashboard() {
-    this.props.history.push(lh.link("backend"));
-  }
 
   handleProjectDestroy = () => {
     const heading = "Are you sure you want to delete this project?";
     const message = "This action cannot be undone.";
     this.props.confirm(heading, message, this.doDestroy);
   };
+
+  redirectToDashboard() {
+    this.props.history.push(lh.link("backend"));
+  }
+
+  renderRoutes() {
+    const { project, projectResponse } = this.props;
+    const { fetchProject: refresh } = this;
+    return childRoutes(this.props.route, {
+      childProps: { refresh, project, projectResponse }
+    });
+  }
 
   renderUtility(project) {
     return (
@@ -101,14 +109,6 @@ export class ProjectWrapperContainer extends PureComponent {
         </Authorize>
       </div>
     );
-  }
-
-  renderRoutes() {
-    const { project, projectResponse } = this.props;
-    const { fetchProject: refresh } = this;
-    return childRoutes(this.props.route, {
-      childProps: { refresh, project, projectResponse }
-    });
   }
 
   render() {

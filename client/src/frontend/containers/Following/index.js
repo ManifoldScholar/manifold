@@ -21,6 +21,15 @@ const { request } = entityStoreActions;
 const featuredLimit = 4;
 
 export class FollowingContainer extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
+  static defaultProps = {
+    featuredProjects: [],
+    followedProjects: []
+  };
+
   static fetchData = (getState, dispatch) => {
     const state = getState();
     if (state.authentication.authenticated) {
@@ -56,15 +65,6 @@ export class FollowingContainer extends Component {
     dispatch: PropTypes.func.isRequired,
     authentication: PropTypes.object,
     subjects: PropTypes.array
-  };
-
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
-
-  static defaultProps = {
-    featuredProjects: [],
-    followedProjects: []
   };
 
   componentDidMount() {

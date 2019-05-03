@@ -17,6 +17,16 @@ import BodyClass from "hoc/body-class";
 const { request } = entityStoreActions;
 
 export class BackendContainer extends PureComponent {
+  static fetchData = (getState, dispatch) => {
+    if (!entityUtils.isLoaded(requests.gPages, getState())) {
+      const pages = request(pagesAPI.index(), requests.gPages, {
+        oneTime: true
+      });
+      const { promise: one } = dispatch(pages);
+      return Promise.all([one]);
+    }
+  };
+
   static mapStateToProps = state => {
     return {
       authentication: state.authentication,
@@ -27,16 +37,6 @@ export class BackendContainer extends PureComponent {
       pages: entityUtils.select(requests.gPages, state.entityStore),
       settings: entityUtils.select(requests.settings, state.entityStore)
     };
-  };
-
-  static fetchData = (getState, dispatch) => {
-    if (!entityUtils.isLoaded(requests.gPages, getState())) {
-      const pages = request(pagesAPI.index(), requests.gPages, {
-        oneTime: true
-      });
-      const { promise: one } = dispatch(pages);
-      return Promise.all([one]);
-    }
   };
 
   static propTypes = {

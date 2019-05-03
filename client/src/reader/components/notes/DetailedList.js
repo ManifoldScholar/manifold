@@ -4,6 +4,10 @@ import Full from "./full";
 import EmptyMessage from "./EmptyMessage";
 
 export default class DetailedList extends PureComponent {
+  static defaultProps = {
+    annotations: []
+  };
+
   static displayName = "Notes.DetailedList";
 
   static propTypes = {
@@ -13,10 +17,6 @@ export default class DetailedList extends PureComponent {
     handleDeleteAnnotation: PropTypes.func,
     annotated: PropTypes.bool,
     loaded: PropTypes.bool
-  };
-
-  static defaultProps = {
-    annotations: []
   };
 
   render() {

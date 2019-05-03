@@ -25,6 +25,18 @@ const sortHeaders = props => {
 class FormColumnMap extends PureComponent {
   static displayName = "Form.ColumnMap";
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (!prevState) return null;
+    const nextAttributes = sortAttributes(nextProps);
+    if (difference(prevState.sortedAttributes, nextAttributes)) {
+      return {
+        sortedAttributes: nextAttributes
+      };
+    }
+
+    return null;
+  }
+
   static propTypes = {
     set: PropTypes.func.isRequired,
     instructions: PropTypes.string.isRequired,
@@ -40,18 +52,6 @@ class FormColumnMap extends PureComponent {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (!prevState) return null;
-    const nextAttributes = sortAttributes(nextProps);
-    if (difference(prevState.sortedAttributes, nextAttributes)) {
-      return {
-        sortedAttributes: nextAttributes
-      };
-    }
-
-    return null;
-  }
-
   onDragEnd = result => {
     if (!result.destination) return;
     const currentMap = this.props.value;
@@ -62,14 +62,14 @@ class FormColumnMap extends PureComponent {
     this.props.set(updated);
   };
 
+  getCurrentMapping = position => {
+    return this.props.value[position] || null;
+  };
+
   getHeaderPosition(header, props) {
     const headers = props.getModelValue(props.headers);
     return Object.keys(headers).find(key => headers[key] === header);
   }
-
-  getCurrentMapping = position => {
-    return this.props.value[position] || null;
-  };
 
   autoMap = event => {
     event.preventDefault();

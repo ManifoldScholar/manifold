@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 
 export default class EntityThumbnailText extends PureComponent {
+  static defaultProps = {
+    variant: "smallPortrait",
+    attributes: {}
+  };
+
   static displayName = "EntityThumbnail.Text";
 
   static propTypes = {
@@ -13,21 +18,8 @@ export default class EntityThumbnailText extends PureComponent {
     className: PropTypes.string
   };
 
-  static defaultProps = {
-    variant: "smallPortrait",
-    attributes: {}
-  };
-
   get attr() {
     return this.props.entity.attributes;
-  }
-
-  get variant() {
-    return this.props.variant;
-  }
-
-  get src() {
-    return this.attr.coverStyles[this.variant];
   }
 
   get icon() {
@@ -41,10 +33,6 @@ export default class EntityThumbnailText extends PureComponent {
     );
   }
 
-  get useImage() {
-    return !!this.src;
-  }
-
   get image() {
     const { width, height, className } = this.props;
     return (
@@ -56,6 +44,18 @@ export default class EntityThumbnailText extends PureComponent {
         className={className}
       />
     );
+  }
+
+  get src() {
+    return this.attr.coverStyles[this.variant];
+  }
+
+  get useImage() {
+    return !!this.src;
+  }
+
+  get variant() {
+    return this.props.variant;
   }
 
   render() {

@@ -9,7 +9,10 @@ import isEmpty from "lodash/isEmpty";
 import { Collapse } from "react-collapse";
 
 export default class ResourceListSlideCaption extends Component {
-  static visibleCaptionHeight = 48;
+  static defaultProps = {
+    hideDetailUrl: false,
+    hideDownload: false
+  };
 
   static propTypes = {
     resource: PropTypes.object,
@@ -18,10 +21,7 @@ export default class ResourceListSlideCaption extends Component {
     hideDownload: PropTypes.bool
   };
 
-  static defaultProps = {
-    hideDetailUrl: false,
-    hideDownload: false
-  };
+  static visibleCaptionHeight = 48;
 
   constructor() {
     super();
@@ -47,24 +47,6 @@ export default class ResourceListSlideCaption extends Component {
     return get(resource, "attributes.downloadable") || false;
   }
 
-  hasCaption(resource) {
-    return !isEmpty(get(resource, "attributes.captionFormatted"));
-  }
-
-  handleReadMore = () => {
-    if (!this.canExpand()) return;
-
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  };
-
-  createDescription(description) {
-    return {
-      __html: description || ""
-    };
-  }
-
   canExpand() {
     if (!this._utility) return false;
     if (!this._descriptionContents) return false;
@@ -72,20 +54,6 @@ export default class ResourceListSlideCaption extends Component {
       this._descriptionContents.offsetHeight >
       ResourceListSlideCaption.visibleCaptionHeight
     );
-  }
-
-  checkExpandable = () => {
-    if (!this._utility) return;
-    if (this.canExpand()) return this.showExpandable();
-    this.hideExpandable();
-  };
-
-  hideExpandable() {
-    this._utility.classList.remove("expandable");
-  }
-
-  showExpandable() {
-    this._utility.classList.add("expandable");
   }
 
   checkCollapsed = () => {
@@ -96,6 +64,18 @@ export default class ResourceListSlideCaption extends Component {
       this._description.classList.add("collapsed");
     }
   };
+
+  checkExpandable = () => {
+    if (!this._utility) return;
+    if (this.canExpand()) return this.showExpandable();
+    this.hideExpandable();
+  };
+
+  createDescription(description) {
+    return {
+      __html: description || ""
+    };
+  }
 
   detailUrl() {
     const { resource, resourceCollection } = this.props;
@@ -112,6 +92,26 @@ export default class ResourceListSlideCaption extends Component {
       resource.attributes.projectSlug,
       resource.attributes.slug
     );
+  }
+
+  handleReadMore = () => {
+    if (!this.canExpand()) return;
+
+    this.setState({
+      expanded: !this.state.expanded
+    });
+  };
+
+  hasCaption(resource) {
+    return !isEmpty(get(resource, "attributes.captionFormatted"));
+  }
+
+  hideExpandable() {
+    this._utility.classList.remove("expandable");
+  }
+
+  showExpandable() {
+    this._utility.classList.add("expandable");
   }
 
   renderDescription(resource) {

@@ -6,6 +6,11 @@ import FieldGroup from "./FieldGroup";
 import setter from "./setter";
 
 class FormSwitchArray extends Component {
+  static defaultProps = {
+    value: [],
+    focusOnMount: false
+  };
+
   static displayName = "Form.SwitchArray";
 
   static propTypes = {
@@ -18,11 +23,6 @@ class FormSwitchArray extends Component {
     errors: PropTypes.array,
     label: PropTypes.string,
     focusOnMount: PropTypes.bool
-  };
-
-  static defaultProps = {
-    value: [],
-    focusOnMount: false
   };
 
   handleChange(value) {

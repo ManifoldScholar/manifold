@@ -13,46 +13,12 @@ export default class ContentBlockDrawerHeader extends PureComponent {
     icon: PropTypes.string
   };
 
-  get contentBlock() {
-    return this.props.contentBlock;
-  }
-
-  get title() {
-    const BlockComponent = resolver.typeToBlockComponent(
-      this.contentBlock.attributes.type
-    );
-    if (
-      BlockComponent &&
-      BlockComponent.defaultProps &&
-      BlockComponent.defaultProps.title
-    )
-      return BlockComponent.defaultProps.title;
-    return "Content Block";
-  }
-
-  get icon() {
-    const BlockComponent = resolver.typeToBlockComponent(
-      this.contentBlock.attributes.type
-    );
-    if (
-      BlockComponent &&
-      BlockComponent.defaultProps &&
-      BlockComponent.defaultProps.icon
-    )
-      return BlockComponent.defaultProps.icon;
-    return null;
-  }
-
   get onDelete() {
     return this.props.onDelete;
   }
 
   get onVisibilityToggle() {
     return this.props.onVisibilityToggle;
-  }
-
-  get hidden() {
-    return this.contentBlock && !this.contentBlock.attributes.visible;
   }
 
   get buttons() {
@@ -72,6 +38,40 @@ export default class ContentBlockDrawerHeader extends PureComponent {
         iconClass: "notice"
       });
     return buttons;
+  }
+
+  get contentBlock() {
+    return this.props.contentBlock;
+  }
+
+  get hidden() {
+    return this.contentBlock && !this.contentBlock.attributes.visible;
+  }
+
+  get icon() {
+    const BlockComponent = resolver.typeToBlockComponent(
+      this.contentBlock.attributes.type
+    );
+    if (
+      BlockComponent &&
+      BlockComponent.defaultProps &&
+      BlockComponent.defaultProps.icon
+    )
+      return BlockComponent.defaultProps.icon;
+    return null;
+  }
+
+  get title() {
+    const BlockComponent = resolver.typeToBlockComponent(
+      this.contentBlock.attributes.type
+    );
+    if (
+      BlockComponent &&
+      BlockComponent.defaultProps &&
+      BlockComponent.defaultProps.title
+    )
+      return BlockComponent.defaultProps.title;
+    return "Content Block";
   }
 
   render() {

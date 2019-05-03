@@ -13,14 +13,18 @@ import Form from "./Form";
 const { request, flush } = entityStoreActions;
 
 export class MakersEditContainer extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "Makers.Edit";
+
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       maker: select(requests.beMaker, state.entityStore),
       updateMakers: get(state.entityStore.responses, requests.beMakerUpdate)
     };
   };
-
-  static displayName = "Makers.Edit";
 
   static propTypes = {
     maker: PropTypes.object,
@@ -29,10 +33,6 @@ export class MakersEditContainer extends PureComponent {
     history: PropTypes.object,
     afterDestroy: PropTypes.func,
     dispatch: PropTypes.func
-  };
-
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
   };
 
   componentDidMount() {
@@ -49,18 +49,6 @@ export class MakersEditContainer extends PureComponent {
     this.props.dispatch(flush([requests.beMakerUpdate]));
   }
 
-  fetchMaker(id) {
-    const call = makersAPI.show(id);
-    const makerRequest = request(call, requests.beMaker);
-    this.props.dispatch(makerRequest);
-  }
-
-  handleMakerDestroy = () => {
-    const heading = "Are you sure you want to delete this maker?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, this.destroyMaker);
-  };
-
   destroyMaker = () => {
     const maker = this.props.maker;
     const call = makersAPI.destroy(maker.id);
@@ -75,6 +63,18 @@ export class MakersEditContainer extends PureComponent {
     if (props.afterDestroy) return props.afterDestroy();
     return props.history.push(lh.link("backendRecordsMakers"));
   }
+
+  fetchMaker(id) {
+    const call = makersAPI.show(id);
+    const makerRequest = request(call, requests.beMaker);
+    this.props.dispatch(makerRequest);
+  }
+
+  handleMakerDestroy = () => {
+    const heading = "Are you sure you want to delete this maker?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, this.destroyMaker);
+  };
 
   render() {
     if (!this.props.maker) return null;

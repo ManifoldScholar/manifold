@@ -25,18 +25,6 @@ class ResourceCard extends Component {
     };
   }
 
-  getResourceType(type) {
-    let formattedType =
-      type
-        .toLowerCase()
-        .charAt(0)
-        .toUpperCase() + type.slice(1);
-    if (type.toLowerCase() === "pdf") {
-      formattedType = "PDF";
-    }
-    return formattedType;
-  }
-
   getPreviewText(attr) {
     const { kind: type } = attr;
     const text = attr.downloadable ? (
@@ -48,6 +36,18 @@ class ResourceCard extends Component {
       </span>
     );
     return text;
+  }
+
+  getResourceType(type) {
+    let formattedType =
+      type
+        .toLowerCase()
+        .charAt(0)
+        .toUpperCase() + type.slice(1);
+    if (type.toLowerCase() === "pdf") {
+      formattedType = "PDF";
+    }
+    return formattedType;
   }
 
   detailUrl() {
@@ -66,25 +66,29 @@ class ResourceCard extends Component {
     );
   }
 
-  previewable(resource) {
-    return Preview.canPreview(resource);
-  }
-
-  linkable(resource) {
-    return resource.attributes.kind.toLowerCase() === "link";
+  doDownload(resource) {
+    window.open(resource.attributes.attachmentStyles.original);
   }
 
   downloadable(resource) {
     return resource.attributes.downloadable || false;
   }
 
-  doDownload(resource) {
-    window.open(resource.attributes.attachmentStyles.original);
-  }
+  handleInfoClick = () => {
+    this.props.history.push(this.detailUrl());
+  };
 
-  openLink(resource) {
-    window.open(resource.attributes.externalUrl);
-  }
+  handleInfoMouseOut = () => {
+    this.setState({
+      infoHover: false
+    });
+  };
+
+  handleInfoMouseOver = () => {
+    this.setState({
+      infoHover: true
+    });
+  };
 
   handlePreviewClick = event => {
     event.preventDefault();
@@ -96,21 +100,17 @@ class ResourceCard extends Component {
     return this.handleInfoClick();
   };
 
-  handleInfoMouseOver = () => {
-    this.setState({
-      infoHover: true
-    });
-  };
+  linkable(resource) {
+    return resource.attributes.kind.toLowerCase() === "link";
+  }
 
-  handleInfoMouseOut = () => {
-    this.setState({
-      infoHover: false
-    });
-  };
+  openLink(resource) {
+    window.open(resource.attributes.externalUrl);
+  }
 
-  handleInfoClick = () => {
-    this.props.history.push(this.detailUrl());
-  };
+  previewable(resource) {
+    return Preview.canPreview(resource);
+  }
 
   renderDownloadablePreview(type) {
     if (!type) return null;

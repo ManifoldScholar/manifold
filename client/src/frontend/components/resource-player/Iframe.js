@@ -6,15 +6,15 @@ import throttle from "lodash/throttle";
 import { closest } from "utils/domUtils";
 
 export default class ResourcePlayerIframe extends Component {
+  static defaultProps = {
+    flexibleHeight: false,
+    noPlaceholder: false
+  };
+
   static propTypes = {
     resource: PropTypes.object.isRequired,
     flexibleHeight: PropTypes.bool,
     noPlaceholder: PropTypes.bool
-  };
-
-  static defaultProps = {
-    flexibleHeight: false,
-    noPlaceholder: false
   };
 
   constructor(props) {
@@ -50,15 +50,9 @@ export default class ResourcePlayerIframe extends Component {
     });
   };
 
-  updateContainerState = (w = null, h = null) => {
-    const containerWidth = w === null ? this.containerWidth() : w;
-    const containerHeight = h === null ? this.containerHeight() : h;
-    this.setState({ containerWidth, containerHeight });
-  };
-
-  containerWidth() {
-    if (!this.containerRef) return 0;
-    return this.containerRef.offsetWidth;
+  canShowIFrame() {
+    if (this.props.noPlaceholder) return true;
+    return this.containerIsWideEnough() && this.containerIsTallEnough();
   }
 
   containerHeight() {
@@ -66,13 +60,18 @@ export default class ResourcePlayerIframe extends Component {
     return this.containerRef.offsetHeight;
   }
 
+  containerIsTallEnough() {
+    if (this.props.flexibleHeight) return true;
+    return this.minimumHeight() <= this.state.containerHeight;
+  }
+
   containerIsWideEnough() {
     return this.minimumWidth() <= this.state.containerWidth;
   }
 
-  containerIsTallEnough() {
-    if (this.props.flexibleHeight) return true;
-    return this.minimumHeight() <= this.state.containerHeight;
+  containerWidth() {
+    if (!this.containerRef) return 0;
+    return this.containerRef.offsetWidth;
   }
 
   minimumHeight() {
@@ -87,10 +86,11 @@ export default class ResourcePlayerIframe extends Component {
     return minimumWidth;
   }
 
-  canShowIFrame() {
-    if (this.props.noPlaceholder) return true;
-    return this.containerIsWideEnough() && this.containerIsTallEnough();
-  }
+  updateContainerState = (w = null, h = null) => {
+    const containerWidth = w === null ? this.containerWidth() : w;
+    const containerHeight = h === null ? this.containerHeight() : h;
+    this.setState({ containerWidth, containerHeight });
+  };
 
   renderIframe() {
     const { resource } = this.props;

@@ -49,70 +49,6 @@ export class NavigationMobile extends Component {
     this.setState(this.initialState);
   }
 
-  get initialState() {
-    return {
-      expanded: [],
-      open: false
-    };
-  }
-
-  pathForLink(link) {
-    const args = link.args || [];
-    return lh.link(link.route, ...args);
-  }
-
-  createExpandToggleHandler = memoize(key => {
-    return event => {
-      event.preventDefault();
-      this.toggleExpanded(key);
-    };
-  });
-
-  toggleOpen = () => {
-    if (this.state.open) {
-      this.closeNavigation();
-    } else {
-      this.openNavigation();
-    }
-  };
-
-  toggleExpanded = key => {
-    if (this.state.expanded.includes(key)) {
-      this.collapse(key);
-    } else {
-      this.expand(key);
-    }
-  };
-
-  handleEscape = event => {
-    if (event.keyCode !== 27) return;
-    this.closeNavigation();
-  };
-
-  expand(key) {
-    if (this.state.expanded.includes(key)) return;
-    const expanded = this.state.expanded.slice(0);
-    expanded.push(key);
-    this.setState({ expanded });
-  }
-
-  collapse(key) {
-    if (!this.state.expanded.includes(key)) return;
-    const expanded = this.state.expanded.slice(0);
-    expanded.splice(expanded.indexOf(key), 1);
-    this.setState({ expanded });
-  }
-
-  closeNavigation = () => {
-    this.setState({ open: false, expanded: [] });
-    window.removeEventListener("keyup", this.handleEscape);
-  };
-
-  openNavigation = () => {
-    this.setState({ open: true, expanded: this.activeRoutes() });
-    window.addEventListener("keyup", this.handleEscape);
-  };
-
   activeRoutes() {
     const active = [];
     this.props.links.forEach(link => {
@@ -123,6 +59,70 @@ export class NavigationMobile extends Component {
     return active;
   }
 
+  closeNavigation = () => {
+    this.setState({ open: false, expanded: [] });
+    window.removeEventListener("keyup", this.handleEscape);
+  };
+
+  collapse(key) {
+    if (!this.state.expanded.includes(key)) return;
+    const expanded = this.state.expanded.slice(0);
+    expanded.splice(expanded.indexOf(key), 1);
+    this.setState({ expanded });
+  }
+
+  createExpandToggleHandler = memoize(key => {
+    return event => {
+      event.preventDefault();
+      this.toggleExpanded(key);
+    };
+  });
+
+  expand(key) {
+    if (this.state.expanded.includes(key)) return;
+    const expanded = this.state.expanded.slice(0);
+    expanded.push(key);
+    this.setState({ expanded });
+  }
+
+  handleEscape = event => {
+    if (event.keyCode !== 27) return;
+    this.closeNavigation();
+  };
+
+  get initialState() {
+    return {
+      expanded: [],
+      open: false
+    };
+  }
+
+  openNavigation = () => {
+    this.setState({ open: true, expanded: this.activeRoutes() });
+    window.addEventListener("keyup", this.handleEscape);
+  };
+
+  pathForLink(link) {
+    const args = link.args || [];
+    return lh.link(link.route, ...args);
+  }
+
+  toggleExpanded = key => {
+    if (this.state.expanded.includes(key)) {
+      this.collapse(key);
+    } else {
+      this.expand(key);
+    }
+  };
+
+  toggleOpen = () => {
+    if (this.state.open) {
+      this.closeNavigation();
+    } else {
+      this.openNavigation();
+    }
+  };
+
   renderExternalLink(link) {
     return (
       <a
@@ -132,23 +132,6 @@ export class NavigationMobile extends Component {
       >
         {link.label}
       </a>
-    );
-  }
-
-  renderManifoldLink(link) {
-    const path = this.pathForLink(link);
-    const exact = path === "/";
-
-    return (
-      <NavLink
-        to={path}
-        exact={exact}
-        onClick={this.closeNavigation}
-        target={link.newTab ? "_blank" : null}
-        activeClassName="active"
-      >
-        {link.label}
-      </NavLink>
     );
   }
 
@@ -178,6 +161,23 @@ export class NavigationMobile extends Component {
           <ul>{children.map(child => this.renderItem(child))}</ul>
         ) : null}
       </li>
+    );
+  }
+
+  renderManifoldLink(link) {
+    const path = this.pathForLink(link);
+    const exact = path === "/";
+
+    return (
+      <NavLink
+        to={path}
+        exact={exact}
+        onClick={this.closeNavigation}
+        target={link.newTab ? "_blank" : null}
+        activeClassName="active"
+      >
+        {link.label}
+      </NavLink>
     );
   }
 

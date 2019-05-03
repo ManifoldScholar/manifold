@@ -10,6 +10,14 @@ import Empty from "./Empty";
 import Preview from "./Preview";
 
 export default class FormUpload extends Component {
+  static defaultProps = {
+    layout: "square",
+    accepts: null,
+    wide: false,
+    inputId: labelId("upload-"),
+    idForError: labelId("upload-error-")
+  };
+
   static displayName = "Form.Upload.Base";
 
   static propTypes = {
@@ -40,14 +48,6 @@ export default class FormUpload extends Component {
     getModelValue: PropTypes.func
   };
 
-  static defaultProps = {
-    layout: "square",
-    accepts: null,
-    wide: false,
-    inputId: labelId("upload-"),
-    idForError: labelId("upload-error-")
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -63,11 +63,6 @@ export default class FormUpload extends Component {
     ) {
       this.props.updateValue(this.state);
     }
-  }
-
-  get previewable() {
-    if (this.currentPreview) return true;
-    return false;
   }
 
   get currentPreview() {
@@ -91,6 +86,11 @@ export default class FormUpload extends Component {
     event.stopPropagation();
     this.setState({ attachment: null, removed: true });
   };
+
+  get previewable() {
+    if (this.currentPreview) return true;
+    return false;
+  }
 
   render() {
     const labelClass = classnames({

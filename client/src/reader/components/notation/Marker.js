@@ -26,15 +26,6 @@ class NotationMarker extends Component {
     );
   }
 
-  hasTouchSupport() {
-    return (
-      "ontouchstart" in window ||
-      (window.DocumentTouch && document instanceof window.DocumentTouch) ||
-      navigator.maxTouchPoints > 0 ||
-      window.navigator.msMaxTouchPoints > 0
-    );
-  }
-
   handleClick(event, annotation) {
     event.preventDefault();
     if (!this.hasTouchSupport()) {
@@ -54,6 +45,15 @@ class NotationMarker extends Component {
     } else {
       this.setActiveAnnotation(annotation.id);
     }
+  }
+
+  hasTouchSupport() {
+    return (
+      "ontouchstart" in window ||
+      (window.DocumentTouch && document instanceof window.DocumentTouch) ||
+      navigator.maxTouchPoints > 0 ||
+      window.navigator.msMaxTouchPoints > 0
+    );
   }
 
   render() {

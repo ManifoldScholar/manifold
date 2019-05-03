@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class ConfirmableButton extends Component {
+  static defaultProps = {};
+
   static displayName = "Utility.ConfirmableButton";
 
   static propTypes = {
@@ -9,20 +11,24 @@ export default class ConfirmableButton extends Component {
     confirmHandler: PropTypes.func.isRequired
   };
 
-  static defaultProps = {};
-
   constructor() {
     super();
     this.state = { confirmation: false };
   }
 
+  handleConfirm = () => {
+    this.props.confirmHandler();
+  };
+
   toggleConfirmation = () => {
     this.setState({ confirmation: !this.state.confirmation });
   };
 
-  handleConfirm = () => {
-    this.props.confirmHandler();
-  };
+  renderButton() {
+    return (
+      <button onClick={this.toggleConfirmation}>{this.props.label}</button>
+    );
+  }
 
   renderConfirmation() {
     return (
@@ -35,12 +41,6 @@ export default class ConfirmableButton extends Component {
           Cancel
         </button>
       </div>
-    );
-  }
-
-  renderButton() {
-    return (
-      <button onClick={this.toggleConfirmation}>{this.props.label}</button>
     );
   }
 

@@ -8,6 +8,12 @@ import setter from "./setter";
 import Instructions from "./Instructions";
 
 class FormTextArea extends Component {
+  static defaultProps = {
+    height: 100,
+    id: labelId("textarea-"),
+    idForError: labelId("textarea-error-")
+  };
+
   static displayName = "Form.TextArea";
 
   static propTypes = {
@@ -22,12 +28,6 @@ class FormTextArea extends Component {
     idForError: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     wide: PropTypes.bool
-  };
-
-  static defaultProps = {
-    height: 100,
-    id: labelId("textarea-"),
-    idForError: labelId("textarea-error-")
   };
 
   render() {

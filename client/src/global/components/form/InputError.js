@@ -13,6 +13,13 @@ export default class InputError extends Component {
     idForError: PropTypes.string
   };
 
+  errorString(error) {
+    const param = get(error, "source.param");
+    const pointer = get(error, "source.pointer");
+    const name = this.props.name || param || this.nameFromPointer(pointer);
+    return `${capitalize(name)} ${error.detail}.  `;
+  }
+
   hasErrors = () => {
     return this.props.errors.length > 0;
   };
@@ -26,13 +33,6 @@ export default class InputError extends Component {
       return get(config, lookup);
     }
     return attribute;
-  }
-
-  errorString(error) {
-    const param = get(error, "source.param");
-    const pointer = get(error, "source.pointer");
-    const name = this.props.name || param || this.nameFromPointer(pointer);
-    return `${capitalize(name)} ${error.detail}.  `;
   }
 
   /* eslint-disable react/no-array-index-key */

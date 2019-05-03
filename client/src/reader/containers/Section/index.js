@@ -130,11 +130,6 @@ export class SectionContainer extends Component {
     props.dispatch(request(annotationsCall, requests.rAnnotations));
   }
 
-  fetchResources(props) {
-    const resourcesCall = resourcesAPI.forSection(props.match.params.sectionId);
-    props.dispatch(request(resourcesCall, requests.rSectionResources));
-  }
-
   fetchCollections(props) {
     const collectionsCall = resourceCollectionsAPI.forSection(
       props.match.params.sectionId
@@ -142,6 +137,11 @@ export class SectionContainer extends Component {
     props.dispatch(
       request(collectionsCall, requests.rSectionResourceCollections)
     );
+  }
+
+  fetchResources(props) {
+    const resourcesCall = resourcesAPI.forSection(props.match.params.sectionId);
+    props.dispatch(request(resourcesCall, requests.rSectionResources));
   }
 
   hasMissingResourcesOrCollections(annotations, resourcesIn, collectionsIn) {
@@ -173,6 +173,12 @@ export class SectionContainer extends Component {
     return false;
   }
 
+  renderRoutes() {
+    const { text, section } = this.props;
+    const childProps = { text, section };
+    return childRoutes(this.props.route, { childProps });
+  }
+
   renderStyles = props => {
     return values(props.section.relationships.stylesheets).map(stylesheet => {
       return (
@@ -183,12 +189,6 @@ export class SectionContainer extends Component {
       );
     });
   };
-
-  renderRoutes() {
-    const { text, section } = this.props;
-    const childProps = { text, section };
-    return childRoutes(this.props.route, { childProps });
-  }
 
   render() {
     if (!this.props.section || !this.props.text) return null;

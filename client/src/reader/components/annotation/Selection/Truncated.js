@@ -31,10 +31,6 @@ export default class AnnotationSelectionTruncated extends PureComponent {
     return <div dangerouslySetInnerHTML={{ __html: nl2br(text) }} />;
   }
 
-  truncateSelection() {
-    return this.props.selection.substring(0, this.props.truncate) + "...";
-  }
-
   handleShowFull = () => {
     this.setState({
       truncated: false
@@ -44,6 +40,10 @@ export default class AnnotationSelectionTruncated extends PureComponent {
       this.wrapper.style.height = this.content.offsetHeight + "px";
     }, 50);
   };
+
+  truncateSelection() {
+    return this.props.selection.substring(0, this.props.truncate) + "...";
+  }
 
   render() {
     const truncatedWrapperClass = classNames({

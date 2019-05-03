@@ -34,10 +34,6 @@ export default function withFormSession(WrappedComponent, sessionKey) {
       errors: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
     };
 
-    nameToPath(name) {
-      return brackets2dots(name);
-    }
-
     lookupValue = (name, props) => {
       if (!props.session) return null;
       const path = this.nameToPath(name);
@@ -49,6 +45,10 @@ export default function withFormSession(WrappedComponent, sessionKey) {
       }
       return null;
     };
+
+    nameToPath(name) {
+      return brackets2dots(name);
+    }
 
     render() {
       const childProps = {

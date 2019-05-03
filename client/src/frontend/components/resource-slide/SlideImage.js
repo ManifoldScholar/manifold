@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import ResourcePreview from "frontend/components/resource-preview";
 
 export default class ResourceListSlideFigureImage extends Component {
+  static defaultProps = {
+    enableZoom: true
+  };
+
   static propTypes = {
     resource: PropTypes.object,
     enableZoom: PropTypes.bool
-  };
-
-  static defaultProps = {
-    enableZoom: true
   };
 
   render() {

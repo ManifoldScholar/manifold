@@ -14,6 +14,8 @@ import Authorize from "hoc/authorize";
 const { request } = entityStoreActions;
 
 export class ResourceImportWrapper extends PureComponent {
+  static displayName = "ResourceImport.Wrapper";
+
   static fetchData = (getState, dispatch, location, match) => {
     if (isEntityLoaded("resourceImports", match.params.id, getState())) return;
     if (!match.params.projectId || !match.params.id) return;
@@ -36,8 +38,6 @@ export class ResourceImportWrapper extends PureComponent {
     };
   };
 
-  static displayName = "ResourceImport.Wrapper";
-
   static propTypes = {
     history: PropTypes.object,
     match: PropTypes.object,
@@ -51,22 +51,6 @@ export class ResourceImportWrapper extends PureComponent {
     this.fetchProject();
   }
 
-  fetchProject() {
-    const call = projectsAPI.show(this.props.match.params.projectId);
-    const projectRequest = request(call, requests.feProject);
-    this.props.dispatch(projectRequest);
-  }
-
-  fetch = () => {
-    const { match, dispatch } = this.props;
-    const call = resourceImportsAPI.show(
-      match.params.projectId,
-      match.params.id
-    );
-    const resourceImport = request(call, requests.beResourceImportFetch);
-    return dispatch(resourceImport);
-  };
-
   create = model => {
     const { match } = this.props;
     return resourceImportsAPI.create(match.params.projectId, model);
@@ -78,6 +62,22 @@ export class ResourceImportWrapper extends PureComponent {
     const resourceImport = request(call, requests.beResourceImportFetch);
     return dispatch(resourceImport);
   };
+
+  fetch = () => {
+    const { match, dispatch } = this.props;
+    const call = resourceImportsAPI.show(
+      match.params.projectId,
+      match.params.id
+    );
+    const resourceImport = request(call, requests.beResourceImportFetch);
+    return dispatch(resourceImport);
+  };
+
+  fetchProject() {
+    const call = projectsAPI.show(this.props.match.params.projectId);
+    const projectRequest = request(call, requests.feProject);
+    this.props.dispatch(projectRequest);
+  }
 
   update = (idIgnored, model) => {
     const { match } = this.props;

@@ -4,17 +4,17 @@ import FormattedDate from "global/components/FormattedDate";
 import IconComputed from "global/components/icon-computed";
 
 export default class ResourceTitle extends Component {
+  static defaultProps = {
+    showIcon: true,
+    showDate: true
+  };
+
   static displayName = "Resource.Title";
 
   static propTypes = {
     resource: PropTypes.object,
     showIcon: PropTypes.bool,
     showDate: PropTypes.bool
-  };
-
-  static defaultProps = {
-    showIcon: true,
-    showDate: true
   };
 
   render() {

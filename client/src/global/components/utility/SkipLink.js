@@ -2,16 +2,16 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 export default class SkipLink extends PureComponent {
-  static propTypes = {
-    skipId: PropTypes.string,
-    skipLinkText: PropTypes.string,
-    skipMessage: PropTypes.string
-  };
-
   static defaultProps = {
     skipId: "skip-to-main",
     skipLinkText: "Skip to main content",
     skipMessage: "Skipped to Main Content"
+  };
+
+  static propTypes = {
+    skipId: PropTypes.string,
+    skipLinkText: PropTypes.string,
+    skipMessage: PropTypes.string
   };
 
   constructor(props) {

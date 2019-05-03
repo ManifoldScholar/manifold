@@ -6,6 +6,10 @@ import { ingestionsAPI } from "api";
 import Upload from "./Upload";
 
 export default class IngestionFormWrapper extends PureComponent {
+  static defaultProps = {
+    ingestion: {}
+  };
+
   static displayName = "ProjectDetail.Text.Ingestion.Form.Wrapper";
 
   static propTypes = {
@@ -19,14 +23,6 @@ export default class IngestionFormWrapper extends PureComponent {
     triggerClose: PropTypes.func,
     cancelUrl: PropTypes.string,
     header: PropTypes.string
-  };
-
-  static defaultProps = {
-    ingestion: {}
-  };
-
-  updateIngestion = (id, attributes) => {
-    return ingestionsAPI.update(this.props.ingestion.id, attributes);
   };
 
   createIngestion = _data => {
@@ -43,6 +39,10 @@ export default class IngestionFormWrapper extends PureComponent {
     }
 
     return ingestionsAPI.create(this.props.project.id, data);
+  };
+
+  updateIngestion = (id, attributes) => {
+    return ingestionsAPI.update(this.props.ingestion.id, attributes);
   };
 
   render() {

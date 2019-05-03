@@ -4,6 +4,10 @@ import classnames from "classnames";
 import uniqueId from "lodash/uniqueId";
 
 export default class ProjectCollectionSortBy extends PureComponent {
+  static defaultProps = {
+    sortId: uniqueId("collection-sort-")
+  };
+
   static displayName = "ProjectCollection.SortBy";
 
   static propTypes = {
@@ -12,14 +16,11 @@ export default class ProjectCollectionSortBy extends PureComponent {
     sortId: PropTypes.string
   };
 
-  static defaultProps = {
-    sortId: uniqueId("collection-sort-")
+  handleChange = event => {
+    event.preventDefault();
+    const order = event.target.value;
+    return this.props.sortChangeHandler(order);
   };
-
-  isManualSort(projectCollection) {
-    if (!projectCollection) return false;
-    return projectCollection.attributes.manuallySorted;
-  }
 
   handleClick = event => {
     event.preventDefault();
@@ -28,15 +29,14 @@ export default class ProjectCollectionSortBy extends PureComponent {
     return this.props.sortChangeHandler(order);
   };
 
-  handleChange = event => {
-    event.preventDefault();
-    const order = event.target.value;
-    return this.props.sortChangeHandler(order);
-  };
-
   handleSubmit = event => {
     event.preventDefault();
   };
+
+  isManualSort(projectCollection) {
+    if (!projectCollection) return false;
+    return projectCollection.attributes.manuallySorted;
+  }
 
   renderSortList(projectCollection) {
     if (this.isManualSort(projectCollection))

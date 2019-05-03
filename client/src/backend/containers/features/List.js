@@ -14,13 +14,13 @@ const { select } = entityUtils;
 const { request } = entityStoreActions;
 
 class ContentFeaturesList extends PureComponent {
+  static displayName = "Features.List";
+
   static mapStateToProps = state => {
     return {
       features: select(requests.beFeatures, state.entityStore)
     };
   };
-
-  static displayName = "Features.List";
 
   static propTypes = {
     features: PropTypes.array,

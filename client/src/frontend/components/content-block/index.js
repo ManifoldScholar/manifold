@@ -9,12 +9,12 @@ export default class ProjectContent extends PureComponent {
     project: PropTypes.object
   };
 
-  get project() {
-    return this.props.project;
-  }
-
   get contentBlocks() {
     return this.project.relationships.contentBlocks || [];
+  }
+
+  get project() {
+    return this.props.project;
   }
 
   get visibleContentBlocks() {

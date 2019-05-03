@@ -16,13 +16,17 @@ import Authorize from "hoc/authorize";
 const { request, flush } = entityStoreActions;
 
 export class ResourceWrapperContainer extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "Resource.Wrapper";
+
   static mapStateToProps = state => {
     return {
       resource: select(requests.beResource, state.entityStore)
     };
   };
-
-  static displayName = "Resource.Wrapper";
 
   static propTypes = {
     resource: PropTypes.object,
@@ -33,10 +37,6 @@ export class ResourceWrapperContainer extends PureComponent {
     confirm: PropTypes.func.isRequired
   };
 
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
-  };
-
   componentDidMount() {
     this.fetchResource();
   }
@@ -45,10 +45,14 @@ export class ResourceWrapperContainer extends PureComponent {
     this.props.dispatch(flush(requests.beResource));
   }
 
-  fetchResource = () => {
-    const call = resourcesAPI.show(this.props.match.params.id);
-    const resourceRequest = request(call, requests.beResource);
-    this.props.dispatch(resourceRequest);
+  doDestroy = () => {
+    const call = resourcesAPI.destroy(this.props.resource.id);
+    const options = { removes: this.props.resource };
+    const resourceRequest = request(call, requests.beResourceDestroy, options);
+    this.props.dispatch(resourceRequest).promise.then(() => {
+      this.notifyDestroy();
+      this.redirectToProjectResources();
+    });
   };
 
   doPreview = event => {
@@ -63,21 +67,17 @@ export class ResourceWrapperContainer extends PureComponent {
     win.focus();
   };
 
-  doDestroy = () => {
-    const call = resourcesAPI.destroy(this.props.resource.id);
-    const options = { removes: this.props.resource };
-    const resourceRequest = request(call, requests.beResourceDestroy, options);
-    this.props.dispatch(resourceRequest).promise.then(() => {
-      this.notifyDestroy();
-      this.redirectToProjectResources();
-    });
+  fetchResource = () => {
+    const call = resourcesAPI.show(this.props.match.params.id);
+    const resourceRequest = request(call, requests.beResource);
+    this.props.dispatch(resourceRequest);
   };
 
-  redirectToProjectResources() {
-    const projectId = this.props.resource.relationships.project.id;
-    const redirectUrl = lh.link("backendProjectResources", projectId);
-    this.props.history.push(redirectUrl);
-  }
+  handleResourceDestroy = () => {
+    const heading = "Are you sure you want to delete this resource?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, this.doDestroy);
+  };
 
   notifyDestroy() {
     const notification = {
@@ -92,11 +92,16 @@ export class ResourceWrapperContainer extends PureComponent {
     this.props.dispatch(notificationActions.addNotification(notification));
   }
 
-  handleResourceDestroy = () => {
-    const heading = "Are you sure you want to delete this resource?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, this.doDestroy);
-  };
+  redirectToProjectResources() {
+    const projectId = this.props.resource.relationships.project.id;
+    const redirectUrl = lh.link("backendProjectResources", projectId);
+    this.props.history.push(redirectUrl);
+  }
+
+  renderRoutes() {
+    const { resource } = this.props;
+    return childRoutes(this.props.route, { childProps: { resource } });
+  }
 
   renderUtility(resource) {
     return (
@@ -116,11 +121,6 @@ export class ResourceWrapperContainer extends PureComponent {
         </Authorize>
       </div>
     );
-  }
-
-  renderRoutes() {
-    const { resource } = this.props;
-    return childRoutes(this.props.route, { childProps: { resource } });
   }
 
   render() {

@@ -22,16 +22,6 @@ export class NavigationSecondary extends Component {
     return lh.link(link.route, ...args);
   }
 
-  renderItem(link) {
-    return (
-      <li key={link.route}>
-        <NavLink to={this.pathForLink(link)} activeClassName="active">
-          {link.label}
-        </NavLink>
-      </li>
-    );
-  }
-
   renderContents(props) {
     const navClasses = classnames({
       "secondary-nav": true,
@@ -59,13 +49,23 @@ export class NavigationSecondary extends Component {
     );
   }
 
-  renderPanel(props) {
-    return <aside className="aside">{this.renderContents(props)}</aside>;
+  renderItem(link) {
+    return (
+      <li key={link.route}>
+        <NavLink to={this.pathForLink(link)} activeClassName="active">
+          {link.label}
+        </NavLink>
+      </li>
+    );
   }
 
   renderNav(props) {
     if (props.panel) return this.renderPanel(props);
     return this.renderContents(props);
+  }
+
+  renderPanel(props) {
+    return <aside className="aside">{this.renderContents(props)}</aside>;
   }
 
   render() {

@@ -7,6 +7,11 @@ import classNames from "classnames";
 import IconComposer from "./IconComposer";
 
 export default class UtilityPagination extends PureComponent {
+  static defaultProps = {
+    padding: 3,
+    paginationTarget: "#pagination-target"
+  };
+
   static displayName = "Utility.Pagination";
 
   static propTypes = {
@@ -17,61 +22,20 @@ export default class UtilityPagination extends PureComponent {
     compact: PropTypes.bool
   };
 
-  static defaultProps = {
-    padding: 3,
-    paginationTarget: "#pagination-target"
-  };
-
-  visiblePageArray(pagination) {
-    const { currentPage: current } = pagination;
-    let start = current - this.props.padding;
-    if (start < 1) start = 1;
-    let last = current + this.props.padding;
-    if (last > pagination.totalPages) last = pagination.totalPages;
-    const pages = range(start, last + 1);
-    const out = pages.map(page => {
-      return {
-        number: page,
-        key: page,
-        current: page === current,
-        first: page === 1,
-        last: page === pagination.totalPages
-      };
-    });
-    return out;
-  }
-
-  propsAndComponentForPage(handler) {
-    let PageComponent;
-    let pageProps;
-    if (isString(handler)) {
-      PageComponent = Link;
-      pageProps = { to: handler };
-    } else {
-      PageComponent = "a";
-      pageProps = { onClick: handler, href: this.props.paginationTarget };
-    }
-    return { PageComponent, pageProps };
-  }
-
-  previous(pagination) {
-    const handler = this.props.paginationClickHandler(pagination.prevPage);
+  current(page, handler) {
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
     const pageClassNames = classNames({
       "list-pagination__page": true,
-      "list-pagination__page--prev": true,
-      "list-pagination__page--disabled": !pagination.prevPage
+      "list-pagination__page--ordinal": true,
+      "list-pagination__page--disabled": true
     });
 
     return (
-      <li className={pageClassNames} key="previous">
-        <PageComponent {...pageProps} disabled={!pagination.prevPage}>
-          <IconComposer
-            icon="arrowLongLeft16"
-            screenReaderText="previous page"
-          />
-          <span className="list-pagination__icon-label">PREV</span>
+      <li className={pageClassNames} key={page.key}>
+        <PageComponent {...pageProps}>
+          <span aria-hidden="true">{page.number}</span>
+          <span className="screen-reader-text">Go to page: {page.number}</span>
         </PageComponent>
       </li>
     );
@@ -115,33 +79,59 @@ export default class UtilityPagination extends PureComponent {
     );
   }
 
-  current(page, handler) {
+  previous(pagination) {
+    const handler = this.props.paginationClickHandler(pagination.prevPage);
     const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
 
     const pageClassNames = classNames({
       "list-pagination__page": true,
-      "list-pagination__page--ordinal": true,
-      "list-pagination__page--disabled": true
+      "list-pagination__page--prev": true,
+      "list-pagination__page--disabled": !pagination.prevPage
     });
 
     return (
-      <li className={pageClassNames} key={page.key}>
-        <PageComponent {...pageProps}>
-          <span aria-hidden="true">{page.number}</span>
-          <span className="screen-reader-text">Go to page: {page.number}</span>
+      <li className={pageClassNames} key="previous">
+        <PageComponent {...pageProps} disabled={!pagination.prevPage}>
+          <IconComposer
+            icon="arrowLongLeft16"
+            screenReaderText="previous page"
+          />
+          <span className="list-pagination__icon-label">PREV</span>
         </PageComponent>
       </li>
     );
   }
 
-  renderRange(pages) {
-    return pages.map(page => {
-      const url = this.props.paginationClickHandler(page.number);
-      if (page.current) {
-        return this.current(page, url);
-      }
-      return this.number(page, url);
+  propsAndComponentForPage(handler) {
+    let PageComponent;
+    let pageProps;
+    if (isString(handler)) {
+      PageComponent = Link;
+      pageProps = { to: handler };
+    } else {
+      PageComponent = "a";
+      pageProps = { onClick: handler, href: this.props.paginationTarget };
+    }
+    return { PageComponent, pageProps };
+  }
+
+  visiblePageArray(pagination) {
+    const { currentPage: current } = pagination;
+    let start = current - this.props.padding;
+    if (start < 1) start = 1;
+    let last = current + this.props.padding;
+    if (last > pagination.totalPages) last = pagination.totalPages;
+    const pages = range(start, last + 1);
+    const out = pages.map(page => {
+      return {
+        number: page,
+        key: page,
+        current: page === current,
+        first: page === 1,
+        last: page === pagination.totalPages
+      };
     });
+    return out;
   }
 
   renderCompact(pagination) {
@@ -155,6 +145,16 @@ export default class UtilityPagination extends PureComponent {
         </span>
       </li>
     );
+  }
+
+  renderRange(pages) {
+    return pages.map(page => {
+      const url = this.props.paginationClickHandler(page.number);
+      if (page.current) {
+        return this.current(page, url);
+      }
+      return this.number(page, url);
+    });
   }
 
   render() {

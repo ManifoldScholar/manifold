@@ -19,6 +19,22 @@ const { request, flush } = entityStoreActions;
 const { close, open, set } = entityEditorActions;
 
 export class FormContainer extends PureComponent {
+  static defaultProps = {
+    doNotWarn: false,
+    notificationScope: "global",
+    model: {
+      attributes: {},
+      relationships: {}
+    },
+    debug: false,
+    groupErrors: false,
+    flushOnUnmount: true,
+    modelName: "This model",
+    options: {}
+  };
+
+  static displayName = "Form.Form";
+
   static mapStateToProps = (state, ownProps) => {
     return {
       session: get(state.entityEditor.sessions, ownProps.name),
@@ -26,8 +42,6 @@ export class FormContainer extends PureComponent {
       errors: get(state.entityStore.responses, `${ownProps.name}.errors`)
     };
   };
-
-  static displayName = "Form.Form";
 
   static propTypes = {
     doNotWarn: PropTypes.bool,
@@ -54,20 +68,6 @@ export class FormContainer extends PureComponent {
     notificationScope: PropTypes.string
   };
 
-  static defaultProps = {
-    doNotWarn: false,
-    notificationScope: "global",
-    model: {
-      attributes: {},
-      relationships: {}
-    },
-    debug: false,
-    groupErrors: false,
-    flushOnUnmount: true,
-    modelName: "This model",
-    options: {}
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -89,45 +89,6 @@ export class FormContainer extends PureComponent {
     this.flushSave(this.props);
   }
 
-  closeSession(props) {
-    props.dispatch(close(props.name));
-  }
-
-  flushSave(props) {
-    if (props.flushOnUnmount) props.dispatch(flush(props.name));
-  }
-
-  maybeOpenSession(props, prevProps = {}) {
-    const model = props.model || {};
-
-    if (prevProps.model !== props.model) {
-      return this.openSession(props.name, model);
-    }
-    if (props.session) return null;
-    this.openSession(props.name, model);
-  }
-
-  openSession(name, model = {}) {
-    this.props.dispatch(open(name, model));
-  }
-
-  handleSubmit = (event = null) => {
-    if (event) event.preventDefault();
-    this.setState({ submitKey: this.createKey() });
-    if (this.props.session.source.id) {
-      this.update();
-    } else {
-      this.create();
-    }
-  };
-
-  createKey() {
-    const keyLength = 6;
-    return Math.random()
-      .toString(36)
-      .substr(2, keyLength);
-  }
-
   adjustedRelationships(relationships) {
     if (!relationships) return {};
     const adjusted = Object.assign({}, relationships);
@@ -142,6 +103,105 @@ export class FormContainer extends PureComponent {
     });
 
     return adjusted;
+  }
+
+  closeSession(props) {
+    props.dispatch(close(props.name));
+  }
+
+  contextProps = props => {
+    const out = {
+      actions: {
+        set: bindActionCreators(set, props.dispatch)
+      },
+      dirtyModel: props.session.dirty,
+      sourceModel: props.session.source,
+      getModelValue: name => this.lookupValue(name, this.props),
+      sessionKey: props.name,
+      submitKey: this.state.submitKey
+    };
+    if (!this.props.groupErrors) out.errors = props.errors || [];
+    return out;
+  };
+
+  create() {
+    const { dirty, source } = this.props.session;
+    const call = this.props.create({
+      attributes: Object.assign({}, source.attributes, dirty.attributes),
+      relationships: this.adjustedRelationships(dirty.relationships)
+    });
+    const action = request(call, this.props.name, this.requestOptions());
+    const res = this.props.dispatch(action);
+    if (res.hasOwnProperty("promise") && this.props.onSuccess) {
+      res.promise.then(() => {
+        this.setState({ preventDirtyWarning: true }, () => {
+          this.props.onSuccess(this.props.response.entity);
+        });
+      });
+    }
+  }
+
+  createKey() {
+    const keyLength = 6;
+    return Math.random()
+      .toString(36)
+      .substr(2, keyLength);
+  }
+
+  flushSave(props) {
+    if (props.flushOnUnmount) props.dispatch(flush(props.name));
+  }
+
+  handleSubmit = (event = null) => {
+    if (event) event.preventDefault();
+    this.setState({ submitKey: this.createKey() });
+    if (this.props.session.source.id) {
+      this.update();
+    } else {
+      this.create();
+    }
+  };
+
+  isBlocking() {
+    if (this.props.doNotWarn === true) return false;
+    if (this.state.preventDirtyWarning === true) return false;
+    if (this.props.session.changed === true) return true;
+    return false;
+  }
+
+  lookupValue(name, props) {
+    const path = this.nameToPath(name);
+    if (has(props.session.dirty, path)) {
+      return get(props.session.dirty, path);
+    }
+    if (has(props.session.source, path)) {
+      return get(props.session.source, path);
+    }
+    return null;
+  }
+
+  maybeOpenSession(props, prevProps = {}) {
+    const model = props.model || {};
+
+    if (prevProps.model !== props.model) {
+      return this.openSession(props.name, model);
+    }
+    if (props.session) return null;
+    this.openSession(props.name, model);
+  }
+
+  nameToPath(name) {
+    return brackets2dots(name);
+  }
+
+  openSession(name, model = {}) {
+    this.props.dispatch(open(name, model));
+  }
+
+  requestOptions() {
+    return Object.assign({}, this.props.options, {
+      notificationScope: this.props.notificationScope
+    });
   }
 
   update() {
@@ -162,64 +222,13 @@ export class FormContainer extends PureComponent {
     }
   }
 
-  requestOptions() {
-    return Object.assign({}, this.props.options, {
-      notificationScope: this.props.notificationScope
-    });
-  }
-
-  create() {
-    const { dirty, source } = this.props.session;
-    const call = this.props.create({
-      attributes: Object.assign({}, source.attributes, dirty.attributes),
-      relationships: this.adjustedRelationships(dirty.relationships)
-    });
-    const action = request(call, this.props.name, this.requestOptions());
-    const res = this.props.dispatch(action);
-    if (res.hasOwnProperty("promise") && this.props.onSuccess) {
-      res.promise.then(() => {
-        this.setState({ preventDirtyWarning: true }, () => {
-          this.props.onSuccess(this.props.response.entity);
-        });
-      });
-    }
-  }
-
-  nameToPath(name) {
-    return brackets2dots(name);
-  }
-
-  lookupValue(name, props) {
-    const path = this.nameToPath(name);
-    if (has(props.session.dirty, path)) {
-      return get(props.session.dirty, path);
-    }
-    if (has(props.session.source, path)) {
-      return get(props.session.source, path);
-    }
-    return null;
-  }
-
-  contextProps = props => {
-    const out = {
-      actions: {
-        set: bindActionCreators(set, props.dispatch)
-      },
-      dirtyModel: props.session.dirty,
-      sourceModel: props.session.source,
-      getModelValue: name => this.lookupValue(name, this.props),
-      sessionKey: props.name,
-      submitKey: this.state.submitKey
+  renderDebugger() {
+    if (!this.props.debug) return null;
+    const debug = {
+      session: this.props.session,
+      errors: this.props.errors
     };
-    if (!this.props.groupErrors) out.errors = props.errors || [];
-    return out;
-  };
-
-  isBlocking() {
-    if (this.props.doNotWarn === true) return false;
-    if (this.state.preventDirtyWarning === true) return false;
-    if (this.props.session.changed === true) return true;
-    return false;
+    return <Developer.Debugger object={debug} />;
   }
 
   renderGroupedErrors(props) {
@@ -243,15 +252,6 @@ export class FormContainer extends PureComponent {
         nameForError={props.modelName}
       />
     );
-  }
-
-  renderDebugger() {
-    if (!this.props.debug) return null;
-    const debug = {
-      session: this.props.session,
-      errors: this.props.errors
-    };
-    return <Developer.Debugger object={debug} />;
   }
 
   render() {

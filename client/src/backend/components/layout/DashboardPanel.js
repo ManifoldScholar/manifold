@@ -14,12 +14,12 @@ export default class DashboardPanel extends PureComponent {
     icon: PropTypes.string
   };
 
-  get title() {
-    return this.props.title;
-  }
-
   get icon() {
     return this.props.icon;
+  }
+
+  get title() {
+    return this.props.title;
   }
 
   render() {

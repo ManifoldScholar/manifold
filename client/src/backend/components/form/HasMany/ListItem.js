@@ -19,21 +19,21 @@ export default class FormHasManyList extends PureComponent {
     editHandler: PropTypes.func
   };
 
-  onRemove = event => {
-    return this.props.removeHandler(event, this.props.entity);
-  };
-
   onEdit = event => {
     event.preventDefault();
     return this.props.editHandler(this.props.entity);
+  };
+
+  onMoveDown = event => {
+    return this.props.moveHandler(event, this.props.entity, "down");
   };
 
   onMoveUp = event => {
     return this.props.moveHandler(event, this.props.entity, "up");
   };
 
-  onMoveDown = event => {
-    return this.props.moveHandler(event, this.props.entity, "down");
+  onRemove = event => {
+    return this.props.removeHandler(event, this.props.entity);
   };
 
   name() {
@@ -75,20 +75,6 @@ export default class FormHasManyList extends PureComponent {
     );
   }
 
-  renderRemoveButton() {
-    return (
-      <button
-        type="button"
-        onClick={this.onRemove}
-        className="manicon manicon-x"
-      >
-        <span className="screen-reader-text">
-          Remove {this.name()} from the {this.props.label} list.
-        </span>
-      </button>
-    );
-  }
-
   renderOrderButton(direction, ordinal) {
     if (!this.props.orderable) return null;
     if (direction === "up" && ordinal === 0) return null;
@@ -105,6 +91,20 @@ export default class FormHasManyList extends PureComponent {
       >
         <span className="screen-reader-text">
           {`Move ${this.name()} ${direction} in the ${this.props.label} list`}
+        </span>
+      </button>
+    );
+  }
+
+  renderRemoveButton() {
+    return (
+      <button
+        type="button"
+        onClick={this.onRemove}
+        className="manicon manicon-x"
+      >
+        <span className="screen-reader-text">
+          Remove {this.name()} from the {this.props.label} list.
         </span>
       </button>
     );

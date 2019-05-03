@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import Texts from "./Texts";
 
 export default class CategoryListUncategorized extends PureComponent {
+  static defaultProps = {
+    texts: []
+  };
+
   static displayName = "Category.List.Uncategorized";
 
   static propTypes = {
@@ -13,9 +17,9 @@ export default class CategoryListUncategorized extends PureComponent {
     callbacks: PropTypes.object.isRequired
   };
 
-  static defaultProps = {
-    texts: []
-  };
+  get callbacks() {
+    return this.props.callbacks;
+  }
 
   get category() {
     return this.props.category;
@@ -27,10 +31,6 @@ export default class CategoryListUncategorized extends PureComponent {
 
   get texts() {
     return this.props.texts;
-  }
-
-  get callbacks() {
-    return this.props.callbacks;
   }
 
   render() {

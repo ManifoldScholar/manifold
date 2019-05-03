@@ -7,6 +7,10 @@ import Utility from "global/components/utility";
 import Texts from "./Texts";
 
 export default class CategoryListCategory extends PureComponent {
+  static defaultProps = {
+    texts: []
+  };
+
   static displayName = "Category.List.Category";
 
   static propTypes = {
@@ -18,17 +22,21 @@ export default class CategoryListCategory extends PureComponent {
     index: PropTypes.number.isRequired
   };
 
-  static defaultProps = {
-    texts: []
-  };
-
   onDelete = event => {
     event.preventDefault();
     this.callbacks.destroyCategory(this.category);
   };
 
+  get callbacks() {
+    return this.props.callbacks;
+  }
+
   get category() {
     return this.props.category;
+  }
+
+  get id() {
+    return this.category.id;
   }
 
   get project() {
@@ -37,14 +45,6 @@ export default class CategoryListCategory extends PureComponent {
 
   get texts() {
     return this.props.texts;
-  }
-
-  get callbacks() {
-    return this.props.callbacks;
-  }
-
-  get id() {
-    return this.category.id;
   }
 
   get title() {

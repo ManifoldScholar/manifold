@@ -79,6 +79,25 @@ class ProjectResourcesContainer extends Component {
     this.props.dispatch(flush(requests.feResources));
   }
 
+  doUpdate() {
+    this.updateResults();
+    this.updateUrl();
+  }
+
+  filterChange = filter => {
+    const pagination = Object.assign({}, this.state.pagination, {
+      number: page
+    });
+    this.setState({ filter, pagination }, this.doUpdate);
+  };
+
+  handlePageChange = pageParam => {
+    const pagination = Object.assign({}, this.state.pagination, {
+      number: pageParam
+    });
+    this.setState({ pagination }, this.doUpdate);
+  };
+
   initialState(init) {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
 
@@ -91,10 +110,12 @@ class ProjectResourcesContainer extends Component {
     };
   }
 
-  doUpdate() {
-    this.updateResults();
-    this.updateUrl();
-  }
+  pageChangeHandlerCreator = pageParam => {
+    return event => {
+      event.preventDefault();
+      this.handlePageChange(pageParam);
+    };
+  };
 
   updateResults() {
     const action = request(
@@ -118,27 +139,6 @@ class ProjectResourcesContainer extends Component {
     const search = queryString.stringify(params);
     this.props.history.push({ pathname, search });
   }
-
-  filterChange = filter => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: page
-    });
-    this.setState({ filter, pagination }, this.doUpdate);
-  };
-
-  handlePageChange = pageParam => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: pageParam
-    });
-    this.setState({ pagination }, this.doUpdate);
-  };
-
-  pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      this.handlePageChange(pageParam);
-    };
-  };
 
   render() {
     const { project, settings } = this.props;

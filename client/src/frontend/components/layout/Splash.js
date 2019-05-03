@@ -5,6 +5,12 @@ import get from "lodash/get";
 import classnames from "classnames";
 
 export default class Splash extends Component {
+  static defaultProps = {
+    toggleSignInUpOverlay: () => {},
+    preview: false,
+    authenticated: true
+  };
+
   static displayName = "Layout.Splash";
 
   static propTypes = {
@@ -12,12 +18,6 @@ export default class Splash extends Component {
     toggleSignInUpOverlay: PropTypes.func,
     feature: PropTypes.object,
     preview: PropTypes.bool
-  };
-
-  static defaultProps = {
-    toggleSignInUpOverlay: () => {},
-    preview: false,
-    authenticated: true
   };
 
   componentDidMount() {
@@ -28,11 +28,84 @@ export default class Splash extends Component {
     this.sizeForeground();
   }
 
+  attribute(name) {
+    return get(this.props.feature, `attributes.${name}`);
+  }
+
+  backgroundStyle() {
+    const backgroundColor = get(
+      this.props.feature,
+      "attributes.backgroundColor"
+    );
+    const backgroundImage = this.wrapUrlValue(
+      get(this.props.feature, "attributes.backgroundStyles.original")
+    );
+    return this.stripNullStyles({ backgroundColor, backgroundImage });
+  }
+
+  body(formatted = true) {
+    if (!formatted) return this.attribute("body");
+    return this.attribute("bodyFormatted") || this.attribute("body");
+  }
+
+  feature(props) {
+    return props.feature;
+  }
+
   foregroundStyle() {
     const top = get(this.props.feature, "attributes.foregroundTop");
     const left = get(this.props.feature, "attributes.foregroundLeft");
     const maxWidth = 600;
     return this.stripNullStyles({ top, left, maxWidth });
+  }
+
+  foregroundTextStyle() {
+    const color = get(this.props.feature, "attributes.foregroundColor");
+    return this.stripNullStyles({ color });
+  }
+
+  handleSignUp = event => {
+    event.preventDefault();
+    this.props.toggleSignInUpOverlay();
+  };
+
+  hasAttribute(attribute) {
+    return !isEmpty(this.attribute(attribute));
+  }
+
+  hasForeground() {
+    return this.hasAttribute("foregroundStyles.original");
+  }
+
+  hasLink() {
+    return this.hasAttribute("linkText") && this.hasAttribute("linkUrl");
+  }
+
+  header(formatted = true) {
+    if (!formatted) return this.attribute("header");
+    return this.attribute("headerFormatted") || this.attribute("header");
+  }
+
+  headerStyle() {
+    const color = get(this.props.feature, "attributes.headerColor");
+    return this.stripNullStyles({ color });
+  }
+
+  isDarkStyle() {
+    const style = this.style();
+    return style === "dark" || isEmpty(style);
+  }
+
+  isLightStyle() {
+    return this.style() === "light";
+  }
+
+  isPreview(props = this.props) {
+    return props.preview || false;
+  }
+
+  showSignUpButton() {
+    return this.attribute("includeSignUp") && !this.props.authenticated;
   }
 
   sizeForeground = () => {
@@ -50,19 +123,6 @@ export default class Splash extends Component {
     }
   };
 
-  handleSignUp = event => {
-    event.preventDefault();
-    this.props.toggleSignInUpOverlay();
-  };
-
-  feature(props) {
-    return props.feature;
-  }
-
-  isPreview(props = this.props) {
-    return props.preview || false;
-  }
-
   stripNullStyles(style) {
     const newStyle = Object.assign({}, style);
     Object.keys(newStyle).forEach(
@@ -71,55 +131,8 @@ export default class Splash extends Component {
     return newStyle;
   }
 
-  headerStyle() {
-    const color = get(this.props.feature, "attributes.headerColor");
-    return this.stripNullStyles({ color });
-  }
-
-  foregroundTextStyle() {
-    const color = get(this.props.feature, "attributes.foregroundColor");
-    return this.stripNullStyles({ color });
-  }
-
-  backgroundStyle() {
-    const backgroundColor = get(
-      this.props.feature,
-      "attributes.backgroundColor"
-    );
-    const backgroundImage = this.wrapUrlValue(
-      get(this.props.feature, "attributes.backgroundStyles.original")
-    );
-    return this.stripNullStyles({ backgroundColor, backgroundImage });
-  }
-
-  wrapUrlValue(url) {
-    if (!url) return null;
-    return `url(${url})`;
-  }
-
-  attribute(name) {
-    return get(this.props.feature, `attributes.${name}`);
-  }
-
-  hasAttribute(attribute) {
-    return !isEmpty(this.attribute(attribute));
-  }
-
-  hasLink() {
-    return this.hasAttribute("linkText") && this.hasAttribute("linkUrl");
-  }
-
-  showSignUpButton() {
-    return this.attribute("includeSignUp") && !this.props.authenticated;
-  }
-
-  hasForeground() {
-    return this.hasAttribute("foregroundStyles.original");
-  }
-
-  header(formatted = true) {
-    if (!formatted) return this.attribute("header");
-    return this.attribute("headerFormatted") || this.attribute("header");
+  style() {
+    return this.attribute("style");
   }
 
   subheader(formatted = true) {
@@ -127,22 +140,9 @@ export default class Splash extends Component {
     return this.attribute("subheaderFormatted") || this.attribute("subheader");
   }
 
-  body(formatted = true) {
-    if (!formatted) return this.attribute("body");
-    return this.attribute("bodyFormatted") || this.attribute("body");
-  }
-
-  isLightStyle() {
-    return this.style() === "light";
-  }
-
-  isDarkStyle() {
-    const style = this.style();
-    return style === "dark" || isEmpty(style);
-  }
-
-  style() {
-    return this.attribute("style");
+  wrapUrlValue(url) {
+    if (!url) return null;
+    return `url(${url})`;
   }
 
   wrapperClass() {

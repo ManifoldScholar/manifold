@@ -6,6 +6,10 @@ import IconComputed from "global/components/icon-computed";
 import Form from "backend/components/form";
 
 class KindPicker extends PureComponent {
+  static defaultProps = {
+    id: labelId("kind-")
+  };
+
   static displayName = "Resource.KindPicker";
 
   static propTypes = {
@@ -13,10 +17,6 @@ class KindPicker extends PureComponent {
     includeButtons: PropTypes.bool,
     set: PropTypes.func,
     id: PropTypes.string
-  };
-
-  static defaultProps = {
-    id: labelId("kind-")
   };
 
   renderKindPickerButtons(kindList) {

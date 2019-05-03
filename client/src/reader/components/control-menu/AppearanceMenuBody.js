@@ -20,14 +20,9 @@ export default class AppearanceMenuBody extends Component {
     this.props.setColorScheme(scheme);
   };
 
-  selectFontHandler = (event, font) => {
+  decrementMarginsHandler = event => {
     event.stopPropagation();
-    this.props.selectFont(font);
-  };
-
-  incrementSizeHandler = (event, enabled) => {
-    event.stopPropagation();
-    if (enabled) this.props.incrementFontSize();
+    this.props.decrementMargins();
   };
 
   decrementSizeHandler = (event, enabled) => {
@@ -35,30 +30,35 @@ export default class AppearanceMenuBody extends Component {
     if (enabled) this.props.decrementFontSize();
   };
 
-  incrementMarginsHandler = event => {
-    event.stopPropagation();
-    this.props.incrementMargins();
-  };
-
-  decrementMarginsHandler = event => {
-    event.stopPropagation();
-    this.props.decrementMargins();
-  };
-
-  serifButtonHandler = event => {
-    this.selectFontHandler(event, "serif");
-  };
-
-  sansSerifButtonHandler = event => {
-    this.selectFontHandler(event, "sans-serif");
+  handleDarkButtonClick = event => {
+    this.setColorHandler(event, "dark");
   };
 
   handleLightButtonClick = event => {
     this.setColorHandler(event, "light");
   };
 
-  handleDarkButtonClick = event => {
-    this.setColorHandler(event, "dark");
+  incrementMarginsHandler = event => {
+    event.stopPropagation();
+    this.props.incrementMargins();
+  };
+
+  incrementSizeHandler = (event, enabled) => {
+    event.stopPropagation();
+    if (enabled) this.props.incrementFontSize();
+  };
+
+  sansSerifButtonHandler = event => {
+    this.selectFontHandler(event, "sans-serif");
+  };
+
+  selectFontHandler = (event, font) => {
+    event.stopPropagation();
+    this.props.selectFont(font);
+  };
+
+  serifButtonHandler = event => {
+    this.selectFontHandler(event, "serif");
   };
 
   render() {

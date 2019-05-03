@@ -10,6 +10,8 @@ import Authorization from "helpers/authorization";
 const { flush } = entityStoreActions;
 
 export class StylesheetTextSections extends PureComponent {
+  static displayName = "Stylesheet.Form.TextSections";
+
   static mapStateToProps = state => {
     return {
       updateStylesheets: get(
@@ -19,8 +21,6 @@ export class StylesheetTextSections extends PureComponent {
       authentication: state.authentication
     };
   };
-
-  static displayName = "Stylesheet.Form.TextSections";
 
   static propTypes = {
     stylesheet: PropTypes.object,

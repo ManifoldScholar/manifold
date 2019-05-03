@@ -8,6 +8,11 @@ import Meta from "global/components/meta";
 import TagList from "./TagList";
 
 export default class ResourceMeta extends Component {
+  static defaultProps = {
+    showIcon: true,
+    showTags: true
+  };
+
   static displayName = "Resource.Meta";
 
   static propTypes = {
@@ -15,11 +20,6 @@ export default class ResourceMeta extends Component {
     layout: PropTypes.string,
     showIcon: PropTypes.bool,
     showTags: PropTypes.bool
-  };
-
-  static defaultProps = {
-    showIcon: true,
-    showTags: true
   };
 
   generateResourceMetadataMap(baseMeta, resource) {

@@ -5,7 +5,19 @@ import uniqueId from "lodash/uniqueId";
 import Utility from "global/components/utility";
 
 export default class ProjectListFilters extends Component {
+  static defaultProps = {
+    searchId: uniqueId("filters-search-")
+  };
+
   static displayName = "ProjectList.Filters";
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.initialFilterState !== prevState.filters) {
+      return Object.assign({}, nextProps.initialFilterState);
+    }
+
+    return null;
+  }
 
   static propTypes = {
     filterChangeHandler: PropTypes.func,
@@ -15,21 +27,9 @@ export default class ProjectListFilters extends Component {
     searchId: PropTypes.string
   };
 
-  static defaultProps = {
-    searchId: uniqueId("filters-search-")
-  };
-
   constructor(props) {
     super(props);
     this.state = this.initialState(props.initialFilterState);
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.initialFilterState !== prevState.filters) {
-      return Object.assign({}, nextProps.initialFilterState);
-    }
-
-    return null;
   }
 
   setFilters = (event, label) => {
@@ -52,6 +52,18 @@ export default class ProjectListFilters extends Component {
     this.setState({ filters }, this.updateResults);
   };
 
+  featuredOptions() {
+    if (this.props.hideFeatured) return null;
+    return <option value="featured">Featured Projects</option>;
+  }
+
+  filterValue() {
+    const { featured, subject } = this.state.filters;
+    if (featured === true || featured === "true") return "featured";
+    if (subject) return subject;
+    return "";
+  }
+
   initialState(init) {
     const filters = Object.assign({}, init);
     return { filters };
@@ -60,12 +72,6 @@ export default class ProjectListFilters extends Component {
   resetFilters = event => {
     event.preventDefault();
     this.setState(this.initialState(), this.updateResults);
-  };
-
-  updateResults = event => {
-    if (event) event.preventDefault();
-    const filter = omitBy(this.state.filters, value => value === "");
-    this.props.filterChangeHandler(filter);
   };
 
   subjectOptions() {
@@ -79,16 +85,29 @@ export default class ProjectListFilters extends Component {
     });
   }
 
-  featuredOptions() {
-    if (this.props.hideFeatured) return null;
-    return <option value="featured">Featured Projects</option>;
-  }
+  updateResults = event => {
+    if (event) event.preventDefault();
+    const filter = omitBy(this.state.filters, value => value === "");
+    this.props.filterChangeHandler(filter);
+  };
 
-  filterValue() {
-    const { featured, subject } = this.state.filters;
-    if (featured === true || featured === "true") return "featured";
-    if (subject) return subject;
-    return "";
+  renderFilters() {
+    if (!this.featuredOptions() && !this.subjectOptions()) return null;
+
+    return (
+      <div className="select">
+        <select value={this.filterValue()} onChange={this.setFilters}>
+          <option value="">Show All</option>
+          {this.featuredOptions()}
+          {this.subjectOptions()}
+        </select>
+        <Utility.IconComposer
+          icon="disclosureDown16"
+          size={20}
+          iconClass="select__icon"
+        />
+      </div>
+    );
   }
 
   renderSearch() {
@@ -126,25 +145,6 @@ export default class ProjectListFilters extends Component {
           <option value="">Sort</option>
           <option value="sort_title ASC">A-Z</option>
           <option value="sort_title DESC">Z-A</option>
-        </select>
-        <Utility.IconComposer
-          icon="disclosureDown16"
-          size={20}
-          iconClass="select__icon"
-        />
-      </div>
-    );
-  }
-
-  renderFilters() {
-    if (!this.featuredOptions() && !this.subjectOptions()) return null;
-
-    return (
-      <div className="select">
-        <select value={this.filterValue()} onChange={this.setFilters}>
-          <option value="">Show All</option>
-          {this.featuredOptions()}
-          {this.subjectOptions()}
         </select>
         <Utility.IconComposer
           icon="disclosureDown16"

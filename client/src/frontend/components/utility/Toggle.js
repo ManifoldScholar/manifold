@@ -4,6 +4,10 @@ import labelId from "helpers/labelId";
 import classNames from "classnames";
 
 export default class Toggle extends Component {
+  static defaultProps = {
+    id: labelId("button-switch-")
+  };
+
   static displayName = "Utility.Toggle";
 
   static propTypes = {
@@ -21,16 +25,17 @@ export default class Toggle extends Component {
     selected: PropTypes.string
   };
 
-  static defaultProps = {
-    id: labelId("button-switch-")
+  handleClick = event => {
+    event.preventDefault();
+    this.props.handleToggle();
   };
-
-  get selected() {
-    return this.props.selected;
-  }
 
   get options() {
     return [this.props.optionOne, this.props.optionTwo];
+  }
+
+  get selected() {
+    return this.props.selected;
   }
 
   get unselected() {
@@ -39,11 +44,6 @@ export default class Toggle extends Component {
     );
     return unselected ? unselected.label : null;
   }
-
-  handleClick = event => {
-    event.preventDefault();
-    this.props.handleToggle();
-  };
 
   renderOption(option) {
     const selected = this.props.selected === option.label;

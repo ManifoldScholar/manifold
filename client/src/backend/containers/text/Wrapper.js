@@ -16,13 +16,17 @@ import Authorize from "hoc/authorize";
 const { request } = entityStoreActions;
 
 export class TextWrapperContainer extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "Text.Wrapper";
+
   static mapStateToProps = state => {
     return {
       text: select(requests.beText, state.entityStore)
     };
   };
-
-  static displayName = "Text.Wrapper";
 
   static propTypes = {
     children: PropTypes.object,
@@ -35,10 +39,6 @@ export class TextWrapperContainer extends PureComponent {
     confirm: PropTypes.func.isRequired
   };
 
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
-  };
-
   componentDidMount() {
     this.fetchText();
   }
@@ -46,12 +46,6 @@ export class TextWrapperContainer extends PureComponent {
   componentWillUnmount() {
     this.props.dispatch(entityStoreActions.flush(requests.beText));
   }
-
-  fetchText = () => {
-    const call = textsAPI.show(this.props.match.params.id);
-    const textRequest = request(call, requests.beText);
-    this.props.dispatch(textRequest);
-  };
 
   doDestroy = () => {
     const call = textsAPI.destroy(this.props.text.id);
@@ -61,6 +55,27 @@ export class TextWrapperContainer extends PureComponent {
       this.notifyDestroy();
       this.redirectToProjectTexts();
     });
+  };
+
+  doPreview = event => {
+    event.preventDefault();
+    const win = window.open(
+      lh.link("reader", this.props.text.attributes.slug),
+      "_blank"
+    );
+    win.focus();
+  };
+
+  fetchText = () => {
+    const call = textsAPI.show(this.props.match.params.id);
+    const textRequest = request(call, requests.beText);
+    this.props.dispatch(textRequest);
+  };
+
+  handleTextDestroy = () => {
+    const heading = "Are you sure you want to delete this text?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, this.doDestroy);
   };
 
   notifyDestroy() {
@@ -82,20 +97,13 @@ export class TextWrapperContainer extends PureComponent {
     this.props.history.push(redirectUrl);
   }
 
-  handleTextDestroy = () => {
-    const heading = "Are you sure you want to delete this text?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, this.doDestroy);
-  };
-
-  doPreview = event => {
-    event.preventDefault();
-    const win = window.open(
-      lh.link("reader", this.props.text.attributes.slug),
-      "_blank"
-    );
-    win.focus();
-  };
+  renderRoutes() {
+    /* eslint-disable no-unused-vars */
+    const { match, history, location, ...otherProps } = this.props;
+    /* eslint-enable no-unused-vars */
+    otherProps.refresh = this.fetchText;
+    return childRoutes(this.props.route, { childProps: otherProps });
+  }
 
   renderUtility() {
     return (
@@ -113,14 +121,6 @@ export class TextWrapperContainer extends PureComponent {
         </button>
       </div>
     );
-  }
-
-  renderRoutes() {
-    /* eslint-disable no-unused-vars */
-    const { match, history, location, ...otherProps } = this.props;
-    /* eslint-enable no-unused-vars */
-    otherProps.refresh = this.fetchText;
-    return childRoutes(this.props.route, { childProps: otherProps });
   }
 
   render() {

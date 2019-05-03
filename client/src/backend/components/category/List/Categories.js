@@ -13,24 +13,16 @@ export default class CategoryListCategories extends PureComponent {
     callbacks: PropTypes.object.isRequired
   };
 
-  get categories() {
-    return this.props.categories;
-  }
-
-  get project() {
-    return this.props.project;
+  get activeType() {
+    return this.props.activeType;
   }
 
   get callbacks() {
     return this.props.callbacks;
   }
 
-  get activeType() {
-    return this.props.activeType;
-  }
-
-  get texts() {
-    return this.props.texts;
+  get categories() {
+    return this.props.categories;
   }
 
   categoryTexts(category) {
@@ -43,6 +35,14 @@ export default class CategoryListCategories extends PureComponent {
       .sort((a, b) => {
         return a.attributes.position - b.attributes.position;
       });
+  }
+
+  get project() {
+    return this.props.project;
+  }
+
+  get texts() {
+    return this.props.texts;
   }
 
   render() {

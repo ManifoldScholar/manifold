@@ -12,34 +12,42 @@ export default class NotificationsForm extends Component {
     unsubscribeAllHandler: PropTypes.func.isRequired
   };
 
-  renderNotificationSettings(preferences) {
-    const digestOpen = preferences.digest !== "never";
+  renderContentOption(
+    preference,
+    value,
+    options = { never: "No", always: "Yes" }
+  ) {
+    if (!preference || !value) return null;
 
     return (
-      <div className="subscriptions">
-        <h3 className="section-heading-secondary">Project Activity</h3>
-        <div className="form-group">
-          <div className="form-input">
-            <span className="instructions">
-              {`Manifold can send you a daily or weekly email with information about texts,
-            resources, and resource collections that have been added to projects.`}
-            </span>
-          </div>
-          {this.renderDigestFrequency(preferences)}
-          <Collapse isOpened={digestOpen}>
-            {this.renderDigestContent(preferences)}
-          </Collapse>
-        </div>
-        <h3 className="section-heading-secondary">Other Activity</h3>
-        <div className="form-group">
-          {this.renderNotificationContent(preferences)}
-        </div>
-        <button
-          className="button-bare-primary"
-          onClick={this.props.unsubscribeAllHandler}
-        >
-          Unsubscribe From All
-        </button>
+      <div className="form-input" key={preference.key}>
+        <label htmlFor={preference.key}>{preference.label}</label>
+        <span className="instructions">{preference.instructions}</span>
+        {Object.keys(options).map(option => {
+          const checked = value === option;
+          const inputClassNames = classNames("form-toggle", "radio", "inline", {
+            checked
+          });
+
+          return (
+            <label
+              className={inputClassNames}
+              key={`${preference.key}-${option}`}
+            >
+              <input
+                type="radio"
+                name={preference.key}
+                value={option}
+                checked={checked}
+                onChange={this.props.changeHandler}
+              />
+              <span className="toggle-indicator">
+                {checked ? <i className="manicon" /> : null}
+              </span>
+              <span className="toggle-label">{options[option]}</span>
+            </label>
+          );
+        })}
       </div>
     );
   }
@@ -117,42 +125,34 @@ export default class NotificationsForm extends Component {
     });
   }
 
-  renderContentOption(
-    preference,
-    value,
-    options = { never: "No", always: "Yes" }
-  ) {
-    if (!preference || !value) return null;
+  renderNotificationSettings(preferences) {
+    const digestOpen = preferences.digest !== "never";
 
     return (
-      <div className="form-input" key={preference.key}>
-        <label htmlFor={preference.key}>{preference.label}</label>
-        <span className="instructions">{preference.instructions}</span>
-        {Object.keys(options).map(option => {
-          const checked = value === option;
-          const inputClassNames = classNames("form-toggle", "radio", "inline", {
-            checked
-          });
-
-          return (
-            <label
-              className={inputClassNames}
-              key={`${preference.key}-${option}`}
-            >
-              <input
-                type="radio"
-                name={preference.key}
-                value={option}
-                checked={checked}
-                onChange={this.props.changeHandler}
-              />
-              <span className="toggle-indicator">
-                {checked ? <i className="manicon" /> : null}
-              </span>
-              <span className="toggle-label">{options[option]}</span>
-            </label>
-          );
-        })}
+      <div className="subscriptions">
+        <h3 className="section-heading-secondary">Project Activity</h3>
+        <div className="form-group">
+          <div className="form-input">
+            <span className="instructions">
+              {`Manifold can send you a daily or weekly email with information about texts,
+            resources, and resource collections that have been added to projects.`}
+            </span>
+          </div>
+          {this.renderDigestFrequency(preferences)}
+          <Collapse isOpened={digestOpen}>
+            {this.renderDigestContent(preferences)}
+          </Collapse>
+        </div>
+        <h3 className="section-heading-secondary">Other Activity</h3>
+        <div className="form-group">
+          {this.renderNotificationContent(preferences)}
+        </div>
+        <button
+          className="button-bare-primary"
+          onClick={this.props.unsubscribeAllHandler}
+        >
+          Unsubscribe From All
+        </button>
       </div>
     );
   }

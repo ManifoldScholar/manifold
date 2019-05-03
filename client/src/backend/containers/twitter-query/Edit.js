@@ -12,14 +12,18 @@ import withConfirmation from "hoc/with-confirmation";
 const { request, flush } = entityStoreActions;
 
 export class TwitterQueryEditContainer extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "TwitterQuery.Edit";
+
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       settings: select(requests.settings, state.entityStore),
       twitterQuery: select(requests.beTwitterQuery, state.entityStore)
     };
   };
-
-  static displayName = "TwitterQuery.Edit";
 
   static propTypes = {
     twitterQuery: PropTypes.object,
@@ -28,10 +32,6 @@ export class TwitterQueryEditContainer extends PureComponent {
     dispatch: PropTypes.func,
     settings: PropTypes.object,
     confirm: PropTypes.func.isRequired
-  };
-
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
   };
 
   componentDidMount() {
@@ -48,16 +48,15 @@ export class TwitterQueryEditContainer extends PureComponent {
     this.props.dispatch(flush([requests.beTwitterQuery]));
   }
 
-  get twitterEnabled() {
-    const { settings } = this.props;
-    if (!settings) return false;
-
-    const {
-      twitterAppId,
-      twitterAccessToken
-    } = settings.attributes.integrations;
-    return twitterAppId && twitterAccessToken;
-  }
+  destroyQuery = () => {
+    const { twitterQuery } = this.props;
+    const call = twitterQueriesAPI.destroy(twitterQuery.id);
+    const options = { removes: twitterQuery };
+    const queryRequest = request(call, requests.beTwitterQueryDestroy, options);
+    this.props.dispatch(queryRequest).promise.then(() => {
+      this.redirectToProjectSocial(this.props.match.params.pId);
+    });
+  };
 
   fetchTwitterQuery(id) {
     const call = twitterQueriesAPI.show(id);
@@ -83,16 +82,6 @@ export class TwitterQueryEditContainer extends PureComponent {
     this.props.confirm(heading, message, this.destroyQuery);
   };
 
-  destroyQuery = () => {
-    const { twitterQuery } = this.props;
-    const call = twitterQueriesAPI.destroy(twitterQuery.id);
-    const options = { removes: twitterQuery };
-    const queryRequest = request(call, requests.beTwitterQueryDestroy, options);
-    this.props.dispatch(queryRequest).promise.then(() => {
-      this.redirectToProjectSocial(this.props.match.params.pId);
-    });
-  };
-
   handleQueryFetch = () => {
     const call = twitterQueriesAPI.fetch(this.props.twitterQuery.id);
     const queryRequest = request(call, requests.beTwitterQueryFetch);
@@ -103,6 +92,17 @@ export class TwitterQueryEditContainer extends PureComponent {
 
   redirectToProjectSocial(pId) {
     return this.props.history.push(lh.link("backendProjectSocial", pId));
+  }
+
+  get twitterEnabled() {
+    const { settings } = this.props;
+    if (!settings) return false;
+
+    const {
+      twitterAppId,
+      twitterAccessToken
+    } = settings.attributes.integrations;
+    return twitterAppId && twitterAccessToken;
   }
 
   render() {

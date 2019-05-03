@@ -62,17 +62,6 @@ export default class Overlay extends Component {
     });
   }
 
-  renderTitle(icon, title) {
-    return (
-      <div className="container">
-        <h3 className="overlay-title">
-          <i className={`manicon manicon-${icon}`} aria-hidden="true" />
-          {title}
-        </h3>
-      </div>
-    );
-  }
-
   renderHeader(props) {
     if (!props.title) return null;
     return (
@@ -87,6 +76,17 @@ export default class Overlay extends Component {
           <i className="manicon manicon-x" aria-hidden="true" />
         </button>
       </header>
+    );
+  }
+
+  renderTitle(icon, title) {
+    return (
+      <div className="container">
+        <h3 className="overlay-title">
+          <i className={`manicon manicon-${icon}`} aria-hidden="true" />
+          {title}
+        </h3>
+      </div>
     );
   }
 

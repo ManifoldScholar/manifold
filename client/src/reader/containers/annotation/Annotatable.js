@@ -15,6 +15,10 @@ import selectionHelpers from "./annotatable-components/selectionHelpers";
 const { request } = entityStoreActions;
 
 export class Annotatable extends Component {
+  static defaultProps = {
+    debug: false
+  };
+
   static mapStateToProps() {
     return {};
   }
@@ -37,64 +41,26 @@ export class Annotatable extends Component {
     notations: PropTypes.array
   };
 
-  static defaultProps = {
-    debug: false
-  };
-
   constructor(props) {
     super(props);
 
     this.state = this.initialState;
   }
 
-  get initialState() {
-    return {
-      selectionState: {
-        selection: null,
-        selectionComplete: false,
-        selectionAnnotation: null,
-        popupTriggerX: null,
-        popupTriggerY: null
-      },
-      activeEvent: null,
-      annotation: null, // the ID of the active annotation
-      annotationState: null, // null, pending, active
-      drawerState: null, // a key indicating visible drawer content
-      drawerProps: {} // props to be passed to the drawer when it opens
-    };
-  }
-
-  get debuggable() {
-    return this.props.debug;
-  }
-
-  get actions() {
-    const actions = [
-      "openNewNotationDrawer",
-      "destroyAnnotation",
-      "createHighlight",
-      "createAnnotation",
-      "openNewAnnotationDrawer",
-      "openCitationDrawer",
-      "openViewAnnotationsDrawer",
-      "showLogin",
-      "closeDrawer"
-    ];
-    /* eslint-disable no-param-reassign */
-    return actions.reduce((map, action) => {
-      map[action] = this[action];
-      return map;
-    }, {});
-    /* eslint-enable no-param-reassign */
-  }
-
-  get activeAnnotationObject() {
-    if (!this.props.annotations) return null;
-    const compareId = Array.isArray(this.state.annotation)
-      ? this.state.annotation[0]
-      : this.state.annotation;
-    return this.props.annotations.find(a => a.id === compareId);
-  }
+  setActiveAnnotation = (annotationId, event = null, eventInfo = {}) => {
+    this.setState({
+      activeEvent: Object.assign(
+        {
+          type: event.type,
+          clientX: event.clientX,
+          clientY: event.clientY
+        },
+        eventInfo
+      ),
+      annotation: annotationId,
+      annotationState: "active"
+    });
+  };
 
   setAnnotatableRef = el => {
     this.annotatableRef = el;
@@ -128,48 +94,59 @@ export class Annotatable extends Component {
     });
   };
 
-  setActiveAnnotation = (annotationId, event = null, eventInfo = {}) => {
-    this.setState({
-      activeEvent: Object.assign(
-        {
-          type: event.type,
-          clientX: event.clientX,
-          clientY: event.clientY
-        },
-        eventInfo
-      ),
-      annotation: annotationId,
-      annotationState: "active"
-    });
-  };
+  get actions() {
+    const actions = [
+      "openNewNotationDrawer",
+      "destroyAnnotation",
+      "createHighlight",
+      "createAnnotation",
+      "openNewAnnotationDrawer",
+      "openCitationDrawer",
+      "openViewAnnotationsDrawer",
+      "showLogin",
+      "closeDrawer"
+    ];
+    /* eslint-disable no-param-reassign */
+    return actions.reduce((map, action) => {
+      map[action] = this[action];
+      return map;
+    }, {});
+    /* eslint-enable no-param-reassign */
+  }
 
-  openNewAnnotationDrawer = (event = null) => {
-    if (event) event.stopPropagation();
-    this.setState({
-      drawerProps: {
-        pendingAnnotation: this.state.selectionState.selectionAnnotation
-      }
-    });
-    this.openDrawer("newAnnotation");
-  };
+  get activeAnnotationObject() {
+    if (!this.props.annotations) return null;
+    const compareId = Array.isArray(this.state.annotation)
+      ? this.state.annotation[0]
+      : this.state.annotation;
+    return this.props.annotations.find(a => a.id === compareId);
+  }
 
-  openCitationDrawer = () => {
-    this.setState({
-      drawerProps: {
-        annotation: this.state.selectionState.selectionAnnotation,
-        section: this.props.section
-      }
-    });
-    this.openDrawer("citation");
-  };
+  get debuggable() {
+    return this.props.debug;
+  }
 
-  createHighlight = () => {
-    const attributes = Object.assign(
-      {},
-      this.state.selectionState.selectionAnnotation,
-      { format: "highlight" }
-    );
-    this.createAnnotation({ attributes });
+  get initialState() {
+    return {
+      selectionState: {
+        selection: null,
+        selectionComplete: false,
+        selectionAnnotation: null,
+        popupTriggerX: null,
+        popupTriggerY: null
+      },
+      activeEvent: null,
+      annotation: null, // the ID of the active annotation
+      annotationState: null, // null, pending, active
+      drawerState: null, // a key indicating visible drawer content
+      drawerProps: {} // props to be passed to the drawer when it opens
+    };
+  }
+
+  closeDrawer = () => {
+    this.maybeRemoveAnnotationHashFromUrl();
+    this.unlockSelection();
+    this.resetState();
   };
 
   createAnnotation = ({ attributes }, options = {}) => {
@@ -194,6 +171,15 @@ export class Annotatable extends Component {
     return res.promise;
   };
 
+  createHighlight = () => {
+    const attributes = Object.assign(
+      {},
+      this.state.selectionState.selectionAnnotation,
+      { format: "highlight" }
+    );
+    this.createAnnotation({ attributes });
+  };
+
   destroyAnnotation = annotation => {
     if (!annotation) return;
     const call = annotationsAPI.destroy(annotation.id);
@@ -205,6 +191,38 @@ export class Annotatable extends Component {
       this.resetState();
     });
     return res.promise;
+  };
+
+  showLogin = () => {
+    this.props.dispatch(
+      uiVisibilityActions.visibilityToggle("signInUpOverlay")
+    );
+  };
+
+  openCitationDrawer = () => {
+    this.setState({
+      drawerProps: {
+        annotation: this.state.selectionState.selectionAnnotation,
+        section: this.props.section
+      }
+    });
+    this.openDrawer("citation");
+  };
+
+  openDrawer = (drawerState, event = null, lock = true) => {
+    if (event) event.preventDefault();
+    if (lock) this.lockSelection();
+    this.setState({ drawerState });
+  };
+
+  openNewAnnotationDrawer = (event = null) => {
+    if (event) event.stopPropagation();
+    this.setState({
+      drawerProps: {
+        pendingAnnotation: this.state.selectionState.selectionAnnotation
+      }
+    });
+    this.openDrawer("newAnnotation");
   };
 
   openNewNotationDrawer = (event = null) => {
@@ -229,18 +247,13 @@ export class Annotatable extends Component {
     this.openDrawer("viewAnnotations", event, false);
   };
 
-  lockSelection() {
-    this.setState({ annotationState: "locked" });
-  }
-
-  unlockSelection() {
-    this.setState({ annotationState: "pending" });
-  }
-
-  showLogin = () => {
-    this.props.dispatch(
-      uiVisibilityActions.visibilityToggle("signInUpOverlay")
-    );
+  resetState = () => {
+    this.setState(this.initialState);
+    if (window.getSelection) {
+      window.getSelection().removeAllRanges();
+    } else if (document.selection) {
+      document.selection.empty();
+    }
   };
 
   maybeRemoveAnnotationHashFromUrl() {
@@ -250,26 +263,13 @@ export class Annotatable extends Component {
     this.props.history.push({ hash: "", state: { noScroll: true } });
   }
 
-  openDrawer = (drawerState, event = null, lock = true) => {
-    if (event) event.preventDefault();
-    if (lock) this.lockSelection();
-    this.setState({ drawerState });
-  };
+  lockSelection() {
+    this.setState({ annotationState: "locked" });
+  }
 
-  closeDrawer = () => {
-    this.maybeRemoveAnnotationHashFromUrl();
-    this.unlockSelection();
-    this.resetState();
-  };
-
-  resetState = () => {
-    this.setState(this.initialState);
-    if (window.getSelection) {
-      window.getSelection().removeAllRanges();
-    } else if (document.selection) {
-      document.selection.empty();
-    }
-  };
+  unlockSelection() {
+    this.setState({ annotationState: "pending" });
+  }
 
   render() {
     return (

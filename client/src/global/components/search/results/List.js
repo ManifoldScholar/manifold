@@ -5,6 +5,10 @@ import Empty from "./Empty";
 import Types from "./Types";
 
 export default class SearchResultsList extends PureComponent {
+  static defaultProps = {
+    context: "frontend"
+  };
+
   static displayName = "Search.Results.List";
 
   static propTypes = {
@@ -12,10 +16,6 @@ export default class SearchResultsList extends PureComponent {
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func.isRequired,
     context: PropTypes.string
-  };
-
-  static defaultProps = {
-    context: "frontend"
   };
 
   componentForType(type) {

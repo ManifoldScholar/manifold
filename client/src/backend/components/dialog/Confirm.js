@@ -4,15 +4,6 @@ import isString from "lodash/isString";
 import Wrapper from "./Wrapper";
 
 export default class DialogConfirm extends PureComponent {
-  static displayName = "Dialog.Confirm";
-
-  static propTypes = {
-    resolve: PropTypes.func.isRequired,
-    reject: PropTypes.func.isRequired,
-    heading: PropTypes.string,
-    message: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
-  };
-
   static contextTypes = {
     pauseKeyboardEvents: PropTypes.func,
     unpauseKeyboardEvents: PropTypes.func
@@ -20,6 +11,15 @@ export default class DialogConfirm extends PureComponent {
 
   static defaultProps = {
     heading: "Are you sure?"
+  };
+
+  static displayName = "Dialog.Confirm";
+
+  static propTypes = {
+    resolve: PropTypes.func.isRequired,
+    reject: PropTypes.func.isRequired,
+    heading: PropTypes.string,
+    message: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
   componentDidMount() {
@@ -39,14 +39,14 @@ export default class DialogConfirm extends PureComponent {
     if (event.keyCode === 13) return this.handleResolveClick(event);
   };
 
-  handleResolveClick = event => {
-    event.preventDefault();
-    this.props.resolve(event);
-  };
-
   handleRejectClick = event => {
     event.preventDefault();
     this.props.reject(event);
+  };
+
+  handleResolveClick = event => {
+    event.preventDefault();
+    this.props.resolve(event);
   };
 
   render() {

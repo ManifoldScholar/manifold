@@ -15,6 +15,11 @@ import isNull from "lodash/isNull";
 import setter from "./setter";
 
 class FormDate extends Component {
+  static defaultProps = {
+    id: labelId("date-input-"),
+    idForError: labelId("date-input-error-")
+  };
+
   static displayName = "Form.Date";
 
   static propTypes = {
@@ -27,11 +32,6 @@ class FormDate extends Component {
     id: PropTypes.string,
     idForError: PropTypes.string,
     wide: PropTypes.bool
-  };
-
-  static defaultProps = {
-    id: labelId("date-input-"),
-    idForError: labelId("date-input-error-")
   };
 
   constructor(props) {
@@ -94,13 +94,55 @@ class FormDate extends Component {
     this.setState({ input });
   };
 
-  validateFormSubmit(prevProps) {
-    if (prevProps.submitKey === this.props.submitKey) return false;
+  broadcastValue() {
+    const newValue = this.validStateDate();
+    if (isEqual(newValue, this.props.value)) return;
+    this.props.set(newValue);
+  }
+
+  dateToStateObject(date) {
+    const out = { month: "", day: "", year: "" };
+    if (date == null) return out;
+    out.month = getMonth(date);
+    out.day = getDate(date);
+    out.year = getYear(date);
+    return out;
+  }
+
+  dateToUserInput(date) {
+    const parts = this.dateToStateObject(date);
+    return {
+      month: parts.month.toString(),
+      day: parts.day.toString(),
+      year: parts.year.toString()
+    };
+  }
+
+  days() {
+    const end = this.isValid() ? getDaysInMonth(this.validStateDate()) + 1 : 32;
+    return range(1, end);
+  }
+
+  isValid() {
+    if (!this.state.validated) return false;
     return (
-      prevProps.value !== this.props.value &&
-      prevProps.value !== "" &&
-      prevProps.value !== null
+      this.state.validated.month &&
+      this.state.validated.day &&
+      this.state.validated.year
     );
+  }
+
+  maxDayForMonthAndYear(month, year) {
+    if (!parseInt(month, 10) || !parseInt(year, 10)) return 31;
+    const date = new Date(year, month, 1);
+    const max = getDaysInMonth(date);
+    return max;
+  }
+
+  parse(string) {
+    if (isNull(string)) return null;
+    if (string === "") return null;
+    return parse(string);
   }
 
   updateStateFromPropValue(value) {
@@ -110,6 +152,12 @@ class FormDate extends Component {
       validated: this.validate(parts)
     };
     this.setState(newState);
+  }
+
+  validStateDate() {
+    const v = this.state.validated;
+    if (v === null) return null;
+    return new Date(v.year, v.month, v.day);
   }
 
   validate(parts) {
@@ -123,61 +171,13 @@ class FormDate extends Component {
     return { month, year, day };
   }
 
-  dateToUserInput(date) {
-    const parts = this.dateToStateObject(date);
-    return {
-      month: parts.month.toString(),
-      day: parts.day.toString(),
-      year: parts.year.toString()
-    };
-  }
-
-  broadcastValue() {
-    const newValue = this.validStateDate();
-    if (isEqual(newValue, this.props.value)) return;
-    this.props.set(newValue);
-  }
-
-  isValid() {
-    if (!this.state.validated) return false;
+  validateFormSubmit(prevProps) {
+    if (prevProps.submitKey === this.props.submitKey) return false;
     return (
-      this.state.validated.month &&
-      this.state.validated.day &&
-      this.state.validated.year
+      prevProps.value !== this.props.value &&
+      prevProps.value !== "" &&
+      prevProps.value !== null
     );
-  }
-
-  validStateDate() {
-    const v = this.state.validated;
-    if (v === null) return null;
-    return new Date(v.year, v.month, v.day);
-  }
-
-  parse(string) {
-    if (isNull(string)) return null;
-    if (string === "") return null;
-    return parse(string);
-  }
-
-  maxDayForMonthAndYear(month, year) {
-    if (!parseInt(month, 10) || !parseInt(year, 10)) return 31;
-    const date = new Date(year, month, 1);
-    const max = getDaysInMonth(date);
-    return max;
-  }
-
-  days() {
-    const end = this.isValid() ? getDaysInMonth(this.validStateDate()) + 1 : 32;
-    return range(1, end);
-  }
-
-  dateToStateObject(date) {
-    const out = { month: "", day: "", year: "" };
-    if (date == null) return out;
-    out.month = getMonth(date);
-    out.day = getDate(date);
-    out.year = getYear(date);
-    return out;
   }
 
   render() {

@@ -9,15 +9,6 @@ export default class ResourceImportResult extends PureComponent {
     resourceImportRow: PropTypes.object.isRequired
   };
 
-  renderKind(kind) {
-    if (!kind) return null;
-    return (
-      <div className="results-secondary">
-        <span>{kind}</span>
-      </div>
-    );
-  }
-
   renderErrors(errors) {
     if (!errors || errors.length === 0) return null;
     return (
@@ -47,6 +38,15 @@ export default class ResourceImportResult extends PureComponent {
           resourceImportRow.state
         }`;
     }
+  }
+
+  renderKind(kind) {
+    if (!kind) return null;
+    return (
+      <div className="results-secondary">
+        <span>{kind}</span>
+      </div>
+    );
   }
 
   render() {

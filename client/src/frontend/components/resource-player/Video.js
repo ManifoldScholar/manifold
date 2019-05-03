@@ -18,6 +18,35 @@ export default class ResourcePlayerVideo extends Component {
       this.setState({ inBrowser: true });
     }
   }
+
+  renderFileVideo(resource) {
+    if (!this.state.inBrowser) return null;
+
+    return (
+      <div className="figure-video">
+        <Video
+          controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
+          poster={resource.attributes.variantPosterStyles.mediumLandscape}
+        >
+          <source
+            src={resource.attributes.attachmentStyles.original}
+            type="video/mp4"
+          />
+        </Video>
+      </div>
+    );
+  }
+
+  renderVideo(resource) {
+    if (resource.attributes.subKind === "external_video") {
+      return this.renderVideoByService(
+        resource.attributes.externalType,
+        resource.attributes.externalId
+      );
+    }
+    return this.renderFileVideo(resource);
+  }
+
   /* eslint-enable react/no-did-mount-set-state */
 
   renderVideoByService(service, id) {
@@ -54,34 +83,6 @@ export default class ResourcePlayerVideo extends Component {
         {output}
       </div>
     );
-  }
-
-  renderFileVideo(resource) {
-    if (!this.state.inBrowser) return null;
-
-    return (
-      <div className="figure-video">
-        <Video
-          controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
-          poster={resource.attributes.variantPosterStyles.mediumLandscape}
-        >
-          <source
-            src={resource.attributes.attachmentStyles.original}
-            type="video/mp4"
-          />
-        </Video>
-      </div>
-    );
-  }
-
-  renderVideo(resource) {
-    if (resource.attributes.subKind === "external_video") {
-      return this.renderVideoByService(
-        resource.attributes.externalType,
-        resource.attributes.externalId
-      );
-    }
-    return this.renderFileVideo(resource);
   }
 
   render() {

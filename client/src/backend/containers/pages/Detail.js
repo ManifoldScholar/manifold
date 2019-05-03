@@ -17,13 +17,17 @@ const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class PageDetailContainer extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "Pages.Edit";
+
   static mapStateToProps = state => {
     return {
       page: select(requests.bePage, state.entityStore)
     };
   };
-
-  static displayName = "Pages.Edit";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -32,10 +36,6 @@ class PageDetailContainer extends PureComponent {
     route: PropTypes.object.isRequired,
     page: PropTypes.object,
     confirm: PropTypes.func.isRequired
-  };
-
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
   };
 
   componentDidMount() {
@@ -52,44 +52,6 @@ class PageDetailContainer extends PureComponent {
   componentWillUnmount() {
     this.props.dispatch(flush(requests.bePage));
   }
-
-  fetchPage(props) {
-    const id = this.id(props);
-    const call = pagesAPI.show(id);
-    const pageRequest = request(call, requests.bePage);
-    props.dispatch(pageRequest);
-  }
-
-  redirectToPages() {
-    const path = lh.link("backendRecordsPages");
-    this.props.history.push(path);
-  }
-
-  redirectToList() {
-    const path = lh.link("backendRecordsPages");
-    this.props.history.push(path);
-  }
-
-  notifyDestroy(feature) {
-    const notification = {
-      level: 0,
-      id: `PAGE_DESTROYED_${feature.id}`,
-      heading: "The page has been deleted.",
-      body: `And we're sorry to see it go.`,
-      expiration: 3000
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-  }
-
-  handleSuccess = pageIgnored => {
-    this.redirectToPages();
-  };
-
-  handleDestroy = () => {
-    const heading = "Are you sure you want to delete this page?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, this.doDestroy);
-  };
 
   doDestroy = () => {
     const { page } = this.props;
@@ -112,75 +74,54 @@ class PageDetailContainer extends PureComponent {
     win.focus();
   };
 
+  fetchPage(props) {
+    const id = this.id(props);
+    const call = pagesAPI.show(id);
+    const pageRequest = request(call, requests.bePage);
+    props.dispatch(pageRequest);
+  }
+
+  handleDestroy = () => {
+    const heading = "Are you sure you want to delete this page?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, this.doDestroy);
+  };
+
+  handleSuccess = pageIgnored => {
+    this.redirectToPages();
+  };
+
+  id(props) {
+    return props.match.params.id;
+  }
+
   isNew(props) {
     return this.id(props) === "new";
   }
 
-  id(props) {
-    return props.match.params.id;
+  notifyDestroy(feature) {
+    const notification = {
+      level: 0,
+      id: `PAGE_DESTROYED_${feature.id}`,
+      heading: "The page has been deleted.",
+      body: `And we're sorry to see it go.`,
+      expiration: 3000
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
   }
 
   page(props) {
     return props.page;
   }
 
-  renderNewHeader() {
-    return (
-      <Navigation.DetailHeader
-        type="page"
-        backUrl={lh.link("backendRecordsPages")}
-        backLabel="All Pages"
-        title="New Page"
-        showUtility={false}
-        note="Enter the name of your page and, optionally, a slug. Press save to continue."
-      />
-    );
+  redirectToList() {
+    const path = lh.link("backendRecordsPages");
+    this.props.history.push(path);
   }
 
-  renderExistingHeader(page) {
-    if (!page) return null;
-    const subtitle = page.attributes.isExternalLink
-      ? page.attributes.externalLink
-      : `/page/${page.attributes.slug}`;
-
-    return (
-      <Navigation.DetailHeader
-        type="page"
-        backUrl={lh.link("backendRecordsPages")}
-        backLabel="All Pages"
-        title={page.attributes.title}
-        subtitle={subtitle}
-        utility={this.renderUtility()}
-      />
-    );
-  }
-
-  renderUtility() {
-    return (
-      <div>
-        <button onClick={this.doPreview} className="button-bare-primary">
-          <i className="manicon manicon-eye-outline" aria-hidden="true" />
-          Preview{" "}
-        </button>
-        <Authorize entity={this.props.page} ability="update">
-          <button onClick={this.handleDestroy} className="button-bare-primary">
-            <i className="manicon manicon-trashcan" aria-hidden="true" />
-            Delete
-          </button>
-        </Authorize>
-      </div>
-    );
-  }
-
-  renderNew() {
-    return (
-      <div>
-        {this.renderNewHeader()}
-        <Layout.BackendPanel>
-          <section>{this.renderRoutes()}</section>
-        </Layout.BackendPanel>
-      </div>
-    );
+  redirectToPages() {
+    const path = lh.link("backendRecordsPages");
+    this.props.history.push(path);
   }
 
   renderExisting(page) {
@@ -203,9 +144,68 @@ class PageDetailContainer extends PureComponent {
     );
   }
 
+  renderExistingHeader(page) {
+    if (!page) return null;
+    const subtitle = page.attributes.isExternalLink
+      ? page.attributes.externalLink
+      : `/page/${page.attributes.slug}`;
+
+    return (
+      <Navigation.DetailHeader
+        type="page"
+        backUrl={lh.link("backendRecordsPages")}
+        backLabel="All Pages"
+        title={page.attributes.title}
+        subtitle={subtitle}
+        utility={this.renderUtility()}
+      />
+    );
+  }
+
+  renderNew() {
+    return (
+      <div>
+        {this.renderNewHeader()}
+        <Layout.BackendPanel>
+          <section>{this.renderRoutes()}</section>
+        </Layout.BackendPanel>
+      </div>
+    );
+  }
+
+  renderNewHeader() {
+    return (
+      <Navigation.DetailHeader
+        type="page"
+        backUrl={lh.link("backendRecordsPages")}
+        backLabel="All Pages"
+        title="New Page"
+        showUtility={false}
+        note="Enter the name of your page and, optionally, a slug. Press save to continue."
+      />
+    );
+  }
+
   renderRoutes() {
     const { page } = this.props;
     return childRoutes(this.props.route, { childProps: { page } });
+  }
+
+  renderUtility() {
+    return (
+      <div>
+        <button onClick={this.doPreview} className="button-bare-primary">
+          <i className="manicon manicon-eye-outline" aria-hidden="true" />
+          Preview{" "}
+        </button>
+        <Authorize entity={this.props.page} ability="update">
+          <button onClick={this.handleDestroy} className="button-bare-primary">
+            <i className="manicon manicon-trashcan" aria-hidden="true" />
+            Delete
+          </button>
+        </Authorize>
+      </div>
+    );
   }
 
   render() {

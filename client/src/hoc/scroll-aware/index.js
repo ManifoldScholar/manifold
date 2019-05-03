@@ -4,17 +4,6 @@ import { throttle } from "lodash";
 import classNames from "classnames";
 
 export default class ScrollAware extends Component {
-  static propTypes = {
-    children: PropTypes.object,
-    threshold: PropTypes.number,
-    topClass: PropTypes.string,
-    notTopClass: PropTypes.string,
-    startPinned: PropTypes.bool,
-    pinnedClass: PropTypes.string,
-    notPinnedClass: PropTypes.string,
-    pinThreshold: PropTypes.number
-  };
-
   static defaultProps = {
     threshold: 200,
     topClass: "top",
@@ -26,6 +15,17 @@ export default class ScrollAware extends Component {
     pinnedClass: "pinned",
     notPinnedClass: "not-pinned",
     pinThreshold: 50
+  };
+
+  static propTypes = {
+    children: PropTypes.object,
+    threshold: PropTypes.number,
+    topClass: PropTypes.string,
+    notTopClass: PropTypes.string,
+    startPinned: PropTypes.bool,
+    pinnedClass: PropTypes.string,
+    notPinnedClass: PropTypes.string,
+    pinThreshold: PropTypes.number
   };
 
   constructor() {
@@ -70,6 +70,21 @@ export default class ScrollAware extends Component {
     return scrollTop;
   }
 
+  handleScroll() {
+    const top = this.getScrollTop() < this.props.threshold;
+    const direction = this.getScrollTop() > this.state.scroll ? "down" : "up";
+    const log = this.maybeLog(direction);
+    const pinned = this.isPinned(direction, log);
+
+    this.setState({
+      top,
+      pinned,
+      direction,
+      log,
+      scroll: this.getScrollTop()
+    });
+  }
+
   isPinned(direction, log) {
     // Note that direction and log are the next direction/log
     // Unpin by default
@@ -98,21 +113,6 @@ export default class ScrollAware extends Component {
     }
 
     return log;
-  }
-
-  handleScroll() {
-    const top = this.getScrollTop() < this.props.threshold;
-    const direction = this.getScrollTop() > this.state.scroll ? "down" : "up";
-    const log = this.maybeLog(direction);
-    const pinned = this.isPinned(direction, log);
-
-    this.setState({
-      top,
-      pinned,
-      direction,
-      log,
-      scroll: this.getScrollTop()
-    });
   }
 
   renderChildren() {

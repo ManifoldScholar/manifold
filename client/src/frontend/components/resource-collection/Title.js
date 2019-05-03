@@ -4,15 +4,15 @@ import FormattedDate from "global/components/FormattedDate";
 import Utility from "global/components/utility";
 
 export default class ResourceCollectionTitle extends Component {
+  static defaultProps = {
+    showCreatedAt: true
+  };
+
   static displayName = "ResourceCollection.Title";
 
   static propTypes = {
     resourceCollection: PropTypes.object,
     showCreatedAt: PropTypes.bool
-  };
-
-  static defaultProps = {
-    showCreatedAt: true
   };
 
   renderDate(attributes) {

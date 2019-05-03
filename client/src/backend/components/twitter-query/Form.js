@@ -5,6 +5,10 @@ import FormContainer from "backend/containers/form";
 import Form from "backend/components/form";
 
 export default class TwitterQueryForm extends PureComponent {
+  static defaultProps = {
+    notificationScope: "drawer"
+  };
+
   static displayName = "TwitterQuery.Form";
 
   static propTypes = {
@@ -13,10 +17,6 @@ export default class TwitterQueryForm extends PureComponent {
     successHandler: PropTypes.func,
     notificationScope: PropTypes.string,
     name: PropTypes.string.isRequired
-  };
-
-  static defaultProps = {
-    notificationScope: "drawer"
   };
 
   handleSuccess = () => {

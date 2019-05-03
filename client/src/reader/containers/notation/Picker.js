@@ -16,6 +16,8 @@ const { request } = entityStoreActions;
 const perPage = 5;
 
 export class NotationPickerContainerImplementation extends PureComponent {
+  static displayName = "ReaderContainer.Notation.Picker";
+
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       resources: select(requests.beResources, state.entityStore),
@@ -31,8 +33,6 @@ export class NotationPickerContainerImplementation extends PureComponent {
     };
     return Object.assign({}, newState, ownProps);
   };
-
-  static displayName = "ReaderContainer.Notation.Picker";
 
   static propTypes = {
     projectId: PropTypes.string,
@@ -64,19 +64,35 @@ export class NotationPickerContainerImplementation extends PureComponent {
     return this.props.entitiesListSearchParams.notations || {};
   }
 
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
+  pageChangeHandlerCreator = page => {
+    return () => this.fetchContext(page);
+  };
 
-  fetchResources(page = 1) {
-    const pagination = { number: page, size: perPage };
-    const action = request(
-      projectsAPI.resources(this.props.projectId, this.filters, pagination),
-      requests.beResources
-    );
-    this.props.dispatch(action);
+  handleContextClick = () => {
+    const { onReset } = this.props.entitiesListSearchProps("notations");
+    const context =
+      this.state.context === "collections" ? "resources" : "collections";
+    this.setState({ context }, onReset);
+  };
+
+  composeProps(context, props) {
+    let out = {
+      entities: props.resources,
+      singularUnit: "resource",
+      entityComponent: ResourceRow,
+      pagination: props.resourcesMeta.pagination
+    };
+
+    if (context === "collections") {
+      out = {
+        entities: props.resourceCollections,
+        singularUnit: "resource collection",
+        entityComponent: ResourceCollectionRow,
+        pagination: props.resourceCollectionsMeta.pagination
+      };
+    }
+
+    return out;
   }
 
   fetchCollections(page = 1) {
@@ -98,39 +114,23 @@ export class NotationPickerContainerImplementation extends PureComponent {
     return this.fetchResources(page);
   }
 
-  handleContextClick = () => {
-    const { onReset } = this.props.entitiesListSearchProps("notations");
-    const context =
-      this.state.context === "collections" ? "resources" : "collections";
-    this.setState({ context }, onReset);
-  };
+  fetchResources(page = 1) {
+    const pagination = { number: page, size: perPage };
+    const action = request(
+      projectsAPI.resources(this.props.projectId, this.filters, pagination),
+      requests.beResources
+    );
+    this.props.dispatch(action);
+  }
 
-  pageChangeHandlerCreator = page => {
-    return () => this.fetchContext(page);
-  };
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
+  }
 
   handleMouseDown(event) {
     event.stopPropagation();
-  }
-
-  composeProps(context, props) {
-    let out = {
-      entities: props.resources,
-      singularUnit: "resource",
-      entityComponent: ResourceRow,
-      pagination: props.resourcesMeta.pagination
-    };
-
-    if (context === "collections") {
-      out = {
-        entities: props.resourceCollections,
-        singularUnit: "resource collection",
-        entityComponent: ResourceCollectionRow,
-        pagination: props.resourceCollectionsMeta.pagination
-      };
-    }
-
-    return out;
   }
 
   render() {

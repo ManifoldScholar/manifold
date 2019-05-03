@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 
 export default class EntityThumbnailTextSection extends PureComponent {
+  static defaultProps = {
+    variant: "smallPortrait"
+  };
+
   static displayName = "EntityThumbnail.TextSection";
 
   static propTypes = {
@@ -13,20 +17,8 @@ export default class EntityThumbnailTextSection extends PureComponent {
     className: PropTypes.string
   };
 
-  static defaultProps = {
-    variant: "smallPortrait"
-  };
-
   get attr() {
     return this.props.entity.attributes;
-  }
-
-  get variant() {
-    return this.props.variant;
-  }
-
-  get src() {
-    return false; // we don't have icons for these yet.
   }
 
   get icon() {
@@ -40,12 +32,20 @@ export default class EntityThumbnailTextSection extends PureComponent {
     );
   }
 
+  get image() {
+    return null;
+  }
+
+  get src() {
+    return false; // we don't have icons for these yet.
+  }
+
   get useImage() {
     return false;
   }
 
-  get image() {
-    return null;
+  get variant() {
+    return this.props.variant;
   }
 
   render() {

@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 
 export default class IconBooksOnShelfStroke extends Component {
+  static defaultProps = {
+    stroke: "currentColor"
+  };
+
   static displayName = "Icon.BooksOnShelfStroke";
 
   static propTypes = {
@@ -10,10 +14,6 @@ export default class IconBooksOnShelfStroke extends Component {
     size: PropTypes.number,
     fill: PropTypes.string,
     stroke: PropTypes.string
-  };
-
-  static defaultProps = {
-    stroke: "currentColor"
   };
 
   render() {

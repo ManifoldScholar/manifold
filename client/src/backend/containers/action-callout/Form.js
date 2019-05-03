@@ -22,12 +22,6 @@ export class ActionCalloutForm extends Component {
     actionCallout: PropTypes.object.isRequired
   };
 
-  onDelete = () => {
-    const heading = "Are you sure you want to delete this call-to-action?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, () => this.onConfirmedDelete());
-  };
-
   onConfirmedDelete = () => {
     const call = actionCalloutsAPI.destroy(this.actionCallout.id);
     const options = {
@@ -43,23 +37,14 @@ export class ActionCalloutForm extends Component {
     });
   };
 
-  get project() {
-    return this.props.project;
-  }
-
-  get requestName() {
-    return this.actionCallout.id
-      ? requests.beActionCalloutCreate
-      : requests.beActionCalloutUpdate;
-  }
+  onDelete = () => {
+    const heading = "Are you sure you want to delete this call-to-action?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, () => this.onConfirmedDelete());
+  };
 
   get actionCallout() {
     return this.props.actionCallout;
-  }
-
-  get drawerTitle() {
-    if (this.actionCallout.id) return "Edit Call-to-Action";
-    return "New Call-to-Action";
   }
 
   get buttons() {
@@ -73,23 +58,6 @@ export class ActionCalloutForm extends Component {
     ];
   }
 
-  get kindOptions() {
-    return [
-      { label: "Link", value: "link" },
-      { label: "Start Reading", value: "read" },
-      { label: "Table of Contents", value: "toc" },
-      { label: "Download", value: "download" }
-    ];
-  }
-
-  get textOptions() {
-    const options = [{ label: "Select Text", value: "" }];
-    const texts = this.project.relationships.texts.map(text => {
-      return { label: text.attributes.title, value: text };
-    });
-    return options.concat(texts);
-  }
-
   closeDrawer = () => {
     this.fetchActionCallouts();
     return this.props.history.push(
@@ -98,22 +66,15 @@ export class ActionCalloutForm extends Component {
     );
   };
 
-  shouldShowTextsForKind(kind) {
-    return kind === "read" || kind === "toc";
-  }
-
-  shouldShowUrlForKind(kind) {
-    return kind === "link";
-  }
-
-  shouldShowAttachmentForKind(kind) {
-    return kind === "download";
-  }
-
   create = model => {
     const adjusted = Object.assign({}, model);
     return actionCalloutsAPI.create(this.project.id, adjusted);
   };
+
+  get drawerTitle() {
+    if (this.actionCallout.id) return "Edit Call-to-Action";
+    return "New Call-to-Action";
+  }
 
   fetchActionCallouts = () => {
     const call = projectsAPI.actionCallouts(this.project.id);
@@ -123,6 +84,45 @@ export class ActionCalloutForm extends Component {
     );
     this.props.dispatch(actionCalloutsRequest);
   };
+
+  get kindOptions() {
+    return [
+      { label: "Link", value: "link" },
+      { label: "Start Reading", value: "read" },
+      { label: "Table of Contents", value: "toc" },
+      { label: "Download", value: "download" }
+    ];
+  }
+
+  get project() {
+    return this.props.project;
+  }
+
+  get requestName() {
+    return this.actionCallout.id
+      ? requests.beActionCalloutCreate
+      : requests.beActionCalloutUpdate;
+  }
+
+  shouldShowAttachmentForKind(kind) {
+    return kind === "download";
+  }
+
+  shouldShowTextsForKind(kind) {
+    return kind === "read" || kind === "toc";
+  }
+
+  shouldShowUrlForKind(kind) {
+    return kind === "link";
+  }
+
+  get textOptions() {
+    const options = [{ label: "Select Text", value: "" }];
+    const texts = this.project.relationships.texts.map(text => {
+      return { label: text.attributes.title, value: text };
+    });
+    return options.concat(texts);
+  }
 
   render() {
     return (

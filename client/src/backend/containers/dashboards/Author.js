@@ -47,17 +47,6 @@ export class DashboardsAuthorContainer extends PureComponent {
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
-  updateResults(eventIgnored = null, page = 1) {
-    const pagination = { number: page, size: perPage };
-    const filter = this.state.filter;
-    filter.withUpdateAbility = true;
-    const action = request(
-      projectsAPI.index(filter, pagination),
-      requests.beProjects
-    );
-    this.props.dispatch(action);
-  }
-
   filterChangeHandler = filter => {
     this.setState({ filter }, () => {
       this.updateResults();
@@ -69,6 +58,17 @@ export class DashboardsAuthorContainer extends PureComponent {
       this.updateResults(event, page);
     };
   };
+
+  updateResults(eventIgnored = null, page = 1) {
+    const pagination = { number: page, size: perPage };
+    const filter = this.state.filter;
+    filter.withUpdateAbility = true;
+    const action = request(
+      projectsAPI.index(filter, pagination),
+      requests.beProjects
+    );
+    this.props.dispatch(action);
+  }
 
   render() {
     return (

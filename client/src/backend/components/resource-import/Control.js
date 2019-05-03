@@ -13,11 +13,6 @@ export default class ResourceImportState extends PureComponent {
     fetch: PropTypes.func.isRequired
   };
 
-  get finishUrl() {
-    const { match } = this.props;
-    return lh.link("backendProjectResources", match.params.projectId);
-  }
-
   get backLinkUrl() {
     const { match } = this.props;
     return lh.link(
@@ -27,6 +22,15 @@ export default class ResourceImportState extends PureComponent {
     );
   }
 
+  get finishUrl() {
+    const { match } = this.props;
+    return lh.link("backendProjectResources", match.params.projectId);
+  }
+
+  refreshResults = () => {
+    this.props.fetch();
+  };
+
   resetImport = event => {
     event.preventDefault();
     this.props.updateImportState("mapped");
@@ -35,10 +39,6 @@ export default class ResourceImportState extends PureComponent {
   startImport = event => {
     event.preventDefault();
     this.props.updateImportState("importing");
-  };
-
-  refreshResults = () => {
-    this.props.fetch();
   };
 
   render() {

@@ -18,14 +18,14 @@ export class ProjectCollaboratorsContainer extends Component {
     route: PropTypes.object
   };
 
-  closeUrl(props) {
-    return lh.link("backendProjectCollaborators", props.project.id);
-  }
-
   close = () => {
     this.props.refresh();
     this.props.history.push(this.closeUrl(this.props));
   };
+
+  closeUrl(props) {
+    return lh.link("backendProjectCollaborators", props.project.id);
+  }
 
   render() {
     const project = this.props.project;

@@ -5,22 +5,11 @@ import uniqueId from "lodash/uniqueId";
 import Utility from "global/components/utility";
 
 export default class ProjectCollectionFilters extends Component {
-  static displayName = "ProjectCollection.Filters";
-
-  static propTypes = {
-    filterChangeHandler: PropTypes.func.isRequired,
-    initialFilterState: PropTypes.object,
-    searchId: PropTypes.string
-  };
-
   static defaultProps = {
     searchId: uniqueId("filters-search-")
   };
 
-  constructor(props) {
-    super(props);
-    this.state = this.initialState(props.initialFilterState);
-  }
+  static displayName = "ProjectCollection.Filters";
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.initialFilterState !== prevState.filters) {
@@ -28,6 +17,17 @@ export default class ProjectCollectionFilters extends Component {
     }
 
     return null;
+  }
+
+  static propTypes = {
+    filterChangeHandler: PropTypes.func.isRequired,
+    initialFilterState: PropTypes.object,
+    searchId: PropTypes.string
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = this.initialState(props.initialFilterState);
   }
 
   setFilters = (event, label) => {
@@ -39,12 +39,6 @@ export default class ProjectCollectionFilters extends Component {
     this.setState({ filters }, this.updateResults);
   };
 
-  updateResults = event => {
-    if (event) event.preventDefault();
-    const filter = omitBy(this.state.filters, value => value === "");
-    this.props.filterChangeHandler(filter);
-  };
-
   initialState(init) {
     const filters = Object.assign({}, init);
     return { filters };
@@ -53,6 +47,12 @@ export default class ProjectCollectionFilters extends Component {
   resetFilters = event => {
     event.preventDefault();
     this.setState(this.initialState(), this.updateResults);
+  };
+
+  updateResults = event => {
+    if (event) event.preventDefault();
+    const filter = omitBy(this.state.filters, value => value === "");
+    this.props.filterChangeHandler(filter);
   };
 
   render() {

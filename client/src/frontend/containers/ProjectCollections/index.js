@@ -15,6 +15,10 @@ const { request } = entityStoreActions;
 const perPage = 8;
 
 export class ProjectsCollectionsContainer extends Component {
+  static defaultProps = {
+    location: {}
+  };
+
   static fetchData = (getState, dispatch, location) => {
     const query = queryString.parse(location.search);
     const pagination = {
@@ -59,10 +63,6 @@ export class ProjectsCollectionsContainer extends Component {
     projectCollectionsMeta: PropTypes.object
   };
 
-  static defaultProps = {
-    location: {}
-  };
-
   constructor(props) {
     super(props);
     this.commonActions = commonActions(props.dispatch);
@@ -77,16 +77,16 @@ export class ProjectsCollectionsContainer extends Component {
     return queryString.parse(this.props.location.search);
   }
 
+  doQuery(query) {
+    const url = lh.link("frontendProjectCollections", query);
+    this.props.history.push(url);
+  }
+
   handlePageChange = (event, page) => {
     event.preventDefault();
     const query = Object.assign({}, this.currentQuery(), { page });
     this.doQuery(query);
   };
-
-  doQuery(query) {
-    const url = lh.link("frontendProjectCollections", query);
-    this.props.history.push(url);
-  }
 
   pageChangeHandlerCreator = page => {
     return event => {

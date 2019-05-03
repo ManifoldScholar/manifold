@@ -9,6 +9,10 @@ import HtmlClass from "hoc/html-class";
 import Body from "./Body";
 
 export default class Text extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
   static filterAnnotations(visibilityFilters, annotations) {
     if (!visibilityFilters) return annotations;
 
@@ -47,38 +51,6 @@ export default class Text extends Component {
     return filtered;
   }
 
-  static propTypes = {
-    text: PropTypes.object,
-    authentication: PropTypes.object,
-    section: PropTypes.object,
-    resources: PropTypes.array,
-    resourceCollections: PropTypes.array,
-    annotations: PropTypes.array,
-    appearance: PropTypes.object,
-    location: PropTypes.object,
-    match: PropTypes.object,
-    children: PropTypes.object,
-    visibility: PropTypes.object,
-    history: PropTypes.object.isRequired
-  };
-
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      visibilityFiltersMemo: props.visibility.visibilityFilters,
-      annotationsMemo: props.annotations,
-      filteredAnnotations: Text.filterAnnotations(
-        props.visibility.annotation,
-        props.annotations,
-        props.authentication.currentUser
-      )
-    };
-  }
-
   static getDerivedStateFromProps(props, state) {
     if (
       props.visibility.visibilityFilters !== state.visibilityFiltersMemo ||
@@ -94,6 +66,34 @@ export default class Text extends Component {
       };
     }
     return null;
+  }
+
+  static propTypes = {
+    text: PropTypes.object,
+    authentication: PropTypes.object,
+    section: PropTypes.object,
+    resources: PropTypes.array,
+    resourceCollections: PropTypes.array,
+    annotations: PropTypes.array,
+    appearance: PropTypes.object,
+    location: PropTypes.object,
+    match: PropTypes.object,
+    children: PropTypes.object,
+    visibility: PropTypes.object,
+    history: PropTypes.object.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      visibilityFiltersMemo: props.visibility.visibilityFilters,
+      annotationsMemo: props.annotations,
+      filteredAnnotations: Text.filterAnnotations(
+        props.visibility.annotation,
+        props.annotations,
+        props.authentication.currentUser
+      )
+    };
   }
 
   componentDidUpdate() {

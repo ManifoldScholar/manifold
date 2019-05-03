@@ -16,6 +16,31 @@ const { request } = entityStoreActions;
 export class ProjectContentContainer extends PureComponent {
   static displayName = "Project.ContentContainer";
 
+  static fetchActionCallouts(projectId, dispatch) {
+    const call = projectsAPI.actionCallouts(projectId);
+    const actionCalloutsRequest = request(
+      call,
+      requests.beProjectActionCallouts
+    );
+    const { promise } = dispatch(actionCalloutsRequest);
+    return promise;
+  }
+
+  static fetchContentBlocks(projectId, dispatch) {
+    const call = projectsAPI.contentBlocks(projectId);
+    const contentBlocksRequest = request(call, requests.beProjectContentBlocks);
+    const { promise } = dispatch(contentBlocksRequest);
+    return promise;
+  }
+
+  static fetchData = (getState, dispatch, location, match) => {
+    if (!match || !match.params || !match.params.id) return;
+    return Promise.all([
+      ProjectContentContainer.fetchContentBlocks(match.params.id, dispatch),
+      ProjectContentContainer.fetchActionCallouts(match.params.id, dispatch)
+    ]);
+  };
+
   static mapStateToProps = state => {
     return {
       contentBlocks: select(requests.beProjectContentBlocks, state.entityStore),
@@ -47,35 +72,6 @@ export class ProjectContentContainer extends PureComponent {
     route: PropTypes.object
   };
 
-  static fetchData = (getState, dispatch, location, match) => {
-    if (!match || !match.params || !match.params.id) return;
-    return Promise.all([
-      ProjectContentContainer.fetchContentBlocks(match.params.id, dispatch),
-      ProjectContentContainer.fetchActionCallouts(match.params.id, dispatch)
-    ]);
-  };
-
-  static fetchContentBlocks(projectId, dispatch) {
-    const call = projectsAPI.contentBlocks(projectId);
-    const contentBlocksRequest = request(call, requests.beProjectContentBlocks);
-    const { promise } = dispatch(contentBlocksRequest);
-    return promise;
-  }
-
-  static fetchActionCallouts(projectId, dispatch) {
-    const call = projectsAPI.actionCallouts(projectId);
-    const actionCalloutsRequest = request(
-      call,
-      requests.beProjectActionCallouts
-    );
-    const { promise } = dispatch(actionCalloutsRequest);
-    return promise;
-  }
-
-  get projectId() {
-    return this.props.project.id;
-  }
-
   get drawerProps() {
     const { project } = this.props;
 
@@ -85,6 +81,13 @@ export class ProjectContentContainer extends PureComponent {
     };
   }
 
+  fetchActionCallouts = () => {
+    ProjectContentContainer.fetchActionCallouts(
+      this.projectId,
+      this.props.dispatch
+    );
+  };
+
   fetchContentBlocks = () => {
     ProjectContentContainer.fetchContentBlocks(
       this.projectId,
@@ -92,12 +95,9 @@ export class ProjectContentContainer extends PureComponent {
     );
   };
 
-  fetchActionCallouts = () => {
-    ProjectContentContainer.fetchActionCallouts(
-      this.projectId,
-      this.props.dispatch
-    );
-  };
+  get projectId() {
+    return this.props.project.id;
+  }
 
   render() {
     const project = this.props.project;

@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
 
 export default class DetailHeader extends PureComponent {
+  static defaultProps = {
+    type: "project"
+  };
+
   static displayName = "Navigation.DetailHeader";
 
   static propTypes = {
@@ -16,10 +20,6 @@ export default class DetailHeader extends PureComponent {
     secondaryLinks: PropTypes.array,
     backUrl: PropTypes.string,
     backLabel: PropTypes.string
-  };
-
-  static defaultProps = {
-    type: "project"
   };
 
   typeToManiconClass(type, iconName) {
@@ -54,14 +54,14 @@ export default class DetailHeader extends PureComponent {
     );
   }
 
-  renderTitle() {
-    return <span dangerouslySetInnerHTML={{ __html: this.props.title }} />;
-  }
-
   renderSectionNav(props) {
     if (!props.secondaryLinks) return null;
 
     return <Dropdown classNames="section-nav" links={props.secondaryLinks} />;
+  }
+
+  renderTitle() {
+    return <span dangerouslySetInnerHTML={{ __html: this.props.title }} />;
   }
 
   render() {

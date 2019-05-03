@@ -31,39 +31,12 @@ export class ProjectContentFormContainer extends Component {
     this.contentBlock = this.props.contentBlock;
   }
 
-  get isPendingBlock() {
-    return this.props.contentBlock.id === "pending";
-  }
-
-  get initializeContentBlock() {
-    if (this.isPendingBlock) {
-      return Object.assign({}, this.props.contentBlock, { id: null });
-    }
-    return this.props.contentBlock;
-  }
-
-  get project() {
-    return this.props.project;
-  }
-
-  get requestName() {
-    return this.isPendingBlock
-      ? requests.beContentBlockCreate
-      : requests.beContentBlockUpdate;
-  }
-
   closeDrawer = () => {
     this.fetchContentBlocks();
     return this.props.history.push(
       lh.link("backendProjectLayout", this.project.id),
       { noScroll: true }
     );
-  };
-
-  fetchContentBlocks = () => {
-    const call = projectsAPI.contentBlocks(this.project.id);
-    const contentBlocksRequest = request(call, requests.beProjectContentBlocks);
-    this.props.dispatch(contentBlocksRequest);
   };
 
   // We manually assign these values because they come from the pending block, which acts as the
@@ -76,6 +49,33 @@ export class ProjectContentFormContainer extends Component {
 
     return contentBlocksAPI.create(this.project.id, adjusted);
   };
+
+  fetchContentBlocks = () => {
+    const call = projectsAPI.contentBlocks(this.project.id);
+    const contentBlocksRequest = request(call, requests.beProjectContentBlocks);
+    this.props.dispatch(contentBlocksRequest);
+  };
+
+  get initializeContentBlock() {
+    if (this.isPendingBlock) {
+      return Object.assign({}, this.props.contentBlock, { id: null });
+    }
+    return this.props.contentBlock;
+  }
+
+  get isPendingBlock() {
+    return this.props.contentBlock.id === "pending";
+  }
+
+  get project() {
+    return this.props.project;
+  }
+
+  get requestName() {
+    return this.isPendingBlock
+      ? requests.beContentBlockCreate
+      : requests.beContentBlockUpdate;
+  }
 
   render() {
     return (

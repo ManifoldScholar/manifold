@@ -6,6 +6,10 @@ import has from "lodash/has";
 import InputError from "./InputError";
 
 export default class Errorable extends PureComponent {
+  static defaultProps = {
+    containerStyle: {}
+  };
+
   // If name = "*" this component will show all errors, rather than a specific
   // field error.
   static propTypes = {
@@ -16,10 +20,6 @@ export default class Errorable extends PureComponent {
     children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     nameForError: PropTypes.string,
     idForError: PropTypes.string
-  };
-
-  static defaultProps = {
-    containerStyle: {}
   };
 
   allErrors() {

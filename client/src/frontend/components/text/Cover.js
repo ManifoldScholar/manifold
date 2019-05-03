@@ -4,6 +4,11 @@ import get from "lodash/get";
 import Utility from "global/components/utility";
 
 export default class TextCover extends PureComponent {
+  static defaultProps = {
+    iconOnly: true,
+    baseClass: "text-cover"
+  };
+
   static displayName = "Text.Cover";
 
   static propTypes = {
@@ -12,18 +17,13 @@ export default class TextCover extends PureComponent {
     baseClass: PropTypes.string
   };
 
-  static defaultProps = {
-    iconOnly: true,
-    baseClass: "text-cover"
-  };
-
-  get text() {
-    return this.props.text;
-  }
-
   get hasCover() {
     if (this.props.iconOnly) return false;
     return get(this.text.attributes, "coverStyles.smallPortrait");
+  }
+
+  get text() {
+    return this.props.text;
   }
 
   render() {

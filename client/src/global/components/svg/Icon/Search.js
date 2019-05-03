@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class Search extends Component {
-  static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
-    className: PropTypes.string
-  };
-
   static defaultProps = {
     className: "",
     width: 18,
     height: 18
+  };
+
+  static propTypes = {
+    width: PropTypes.number,
+    height: PropTypes.number,
+    className: PropTypes.string
   };
 
   render() {

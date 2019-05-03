@@ -12,6 +12,15 @@ export default class Item extends Component {
     children: PropTypes.oneOfType([PropTypes.element, PropTypes.string])
   };
 
+  renderLabel(label) {
+    if (!label) return null;
+    return (
+      <span className="meta-label">
+        {humps.decamelize(this.props.label, { separator: " " })}
+      </span>
+    );
+  }
+
   renderValue(children, value) {
     if (!children)
       return (
@@ -25,15 +34,6 @@ export default class Item extends Component {
       ? this.props.children
       : React.cloneElement(this.props.children);
     return <div className="meta-value">{childEl}</div>;
-  }
-
-  renderLabel(label) {
-    if (!label) return null;
-    return (
-      <span className="meta-label">
-        {humps.decamelize(this.props.label, { separator: " " })}
-      </span>
-    );
   }
 
   render() {

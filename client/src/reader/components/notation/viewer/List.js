@@ -43,6 +43,12 @@ class NotationViewerList extends PureComponent {
     confirm: PropTypes.func.isRequired
   };
 
+  updateScrollY = throttle(eventIgnored => {
+    const { pageYOffset: scrollY } = window;
+    if (!this.listIsVisible()) this.autoSetActive(this.props);
+    this.setState({ scrollY });
+  }, 250);
+
   constructor(props) {
     super(props);
     const bac = bindActionCreators;
@@ -103,6 +109,20 @@ class NotationViewerList extends PureComponent {
     });
   }
 
+  startDestroy = entry => {
+    const { heading, message } = config.app.locale.dialogs.notation.destroy;
+    this.props.confirm(heading, message, () => this.doDestroy(entry));
+  };
+
+  listIsVisible = () => {
+    // If the list element hasn't rendered yet, we'll assume that it's going to.
+    if (!this.listEl) return true;
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent
+    // offsetParent is null when the element has display: none.
+    // There are other ways to check for this, but not as fast.
+    return this.listEl.offsetParent !== null;
+  };
+
   markerByAnnotationId(props, aId) {
     return [...this.markerNodes(props)].find(marker => {
       return marker.dataset.annotationNotation === aId;
@@ -145,21 +165,6 @@ class NotationViewerList extends PureComponent {
       this.actions.makeActive({ annotationId, passive: true });
     }
   }
-
-  listIsVisible = () => {
-    // If the list element hasn't rendered yet, we'll assume that it's going to.
-    if (!this.listEl) return true;
-    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent
-    // offsetParent is null when the element has display: none.
-    // There are other ways to check for this, but not as fast.
-    return this.listEl.offsetParent !== null;
-  };
-
-  updateScrollY = throttle(eventIgnored => {
-    const { pageYOffset: scrollY } = window;
-    if (!this.listIsVisible()) this.autoSetActive(this.props);
-    this.setState({ scrollY });
-  }, 250);
 
   updateEntries(props) {
     const entries = this.groupOverlappingEntries(this.entries(props));
@@ -222,11 +227,6 @@ class NotationViewerList extends PureComponent {
     );
     this.props.dispatch(destroyRequest);
   }
-
-  startDestroy = entry => {
-    const { heading, message } = config.app.locale.dialogs.notation.destroy;
-    this.props.confirm(heading, message, () => this.doDestroy(entry));
-  };
 
   entries(props) {
     return this.markerNodes(props)

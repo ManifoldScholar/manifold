@@ -5,16 +5,16 @@ import lh from "helpers/linkHandler";
 import Event from "./Event";
 
 export default class EventList extends Component {
+  static defaultProps = {
+    limit: 10
+  };
+
   static displayName = "Event.List";
 
   static propTypes = {
     events: PropTypes.array.isRequired,
     project: PropTypes.object.isRequired,
     pagination: PropTypes.object
-  };
-
-  static defaultProps = {
-    limit: 10
   };
 
   paginationClickHandler = page => {

@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class ResourceLink extends Component {
+  static defaultProps = {
+    buttonClass: "button-primary"
+  };
+
   static displayName = "Resource.Link";
 
   static propTypes = {
     attributes: PropTypes.object,
     buttonClass: PropTypes.string
-  };
-
-  static defaultProps = {
-    buttonClass: "button-primary"
   };
 
   renderButton(attr) {

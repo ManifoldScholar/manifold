@@ -11,13 +11,17 @@ import Form from "./Form";
 const { request, flush } = entityStoreActions;
 
 export class PermissionEdit extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "Permission.Edit";
+
   static mapStateToProps = state => {
     return {
       permission: select(requests.bePermission, state.entityStore)
     };
   };
-
-  static displayName = "Permission.Edit";
 
   static propTypes = {
     entity: PropTypes.object,
@@ -27,10 +31,6 @@ export class PermissionEdit extends PureComponent {
     closeUrl: PropTypes.string.isRequired,
     history: PropTypes.object,
     confirm: PropTypes.func.isRequired
-  };
-
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
   };
 
   componentDidMount() {

@@ -10,6 +10,11 @@ import Header from "./DatePicker/Header";
 import setter from "./setter";
 
 class DatePicker extends PureComponent {
+  static defaultProps = {
+    id: labelId("date-picker-"),
+    idForError: labelId("date-picker-error-")
+  };
+
   static propTypes = {
     label: PropTypes.string,
     placeholder: PropTypes.string,
@@ -18,19 +23,9 @@ class DatePicker extends PureComponent {
     wide: PropTypes.bool
   };
 
-  static defaultProps = {
-    id: labelId("date-picker-"),
-    idForError: labelId("date-picker-error-")
+  clear = () => {
+    this.props.set(null);
   };
-
-  get value() {
-    if (!this.props.value) return null;
-    const date = isDate(this.props.value)
-      ? this.props.value
-      : new Date(this.props.value);
-
-    return this.dateUTC(date);
-  }
 
   // The API returns values in UTC, but the JS tries to render dates in the user's local
   // timezone.  The DatePicker library we're using requires an actual Date object, so we can't just
@@ -45,9 +40,14 @@ class DatePicker extends PureComponent {
     return this.props.set(date);
   };
 
-  clear = () => {
-    this.props.set(null);
-  };
+  get value() {
+    if (!this.props.value) return null;
+    const date = isDate(this.props.value)
+      ? this.props.value
+      : new Date(this.props.value);
+
+    return this.dateUTC(date);
+  }
 
   render() {
     const inputClasses = classnames({

@@ -16,14 +16,14 @@ const { request, flush } = entityStoreActions;
 const perPage = 5;
 
 class ResourceCollectionResourcesContainerImplementation extends Component {
+  static displayName = "ResourceCollection.Resources";
+
   static mapStateToProps = state => {
     return {
       resources: select(requests.beResources, state.entityStore),
       resourcesMeta: meta(requests.beResources, state.entityStore)
     };
   };
-
-  static displayName = "ResourceCollection.Resources";
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -44,14 +44,10 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
     this.props.dispatch(flush(requests.beResources));
   }
 
-  get project() {
-    return this.props.resourceCollection.relationships.project;
-  }
-
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
+  addToCollection(entity, collectionResources) {
+    const newEntities = collectionResources.slice(0);
+    newEntities.push(entity);
+    this.updateResources(newEntities, "select");
   }
 
   fetchResources(page = 1) {
@@ -65,50 +61,14 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
     this.props.dispatch(action);
   }
 
-  updateResources(resources, changeTypeIgnored) {
-    const adjustedResources = resources.map(e => {
-      return {
-        id: e.id,
-        type: e.type
-      };
-    });
-    const resourceCollection = {
-      type: "resourceCollections",
-      id: this.props.resourceCollection.id,
-      relationships: { resources: { data: adjustedResources } }
-    };
-    const call = resourceCollectionsAPI.update(
-      resourceCollection.id,
-      resourceCollection
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
     );
-    const resourceCollectionRequest = request(
-      call,
-      requests.beResourceCollectionUpdate
-    );
-    this.props.dispatch(resourceCollectionRequest);
   }
 
   handleResourcesPageChange(event, page) {
     this.fetchResources(page);
-  }
-
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleResourcesPageChange(event, page);
-    };
-  };
-
-  addToCollection(entity, collectionResources) {
-    const newEntities = collectionResources.slice(0);
-    newEntities.push(entity);
-    this.updateResources(newEntities, "select");
-  }
-
-  removeFromCollection(entity, collectionResources) {
-    const newEntities = collectionResources.filter(compare => {
-      return compare.id !== entity.id;
-    });
-    this.updateResources(newEntities, "remove");
   }
 
   handleSelect = (event, resource) => {
@@ -138,6 +98,23 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
     );
   };
 
+  pageChangeHandlerCreator = page => {
+    return event => {
+      this.handleResourcesPageChange(event, page);
+    };
+  };
+
+  get project() {
+    return this.props.resourceCollection.relationships.project;
+  }
+
+  removeFromCollection(entity, collectionResources) {
+    const newEntities = collectionResources.filter(compare => {
+      return compare.id !== entity.id;
+    });
+    this.updateResources(newEntities, "remove");
+  }
+
   toggleCollectionOnly = event => {
     event.preventDefault();
     const { setParam } = this.props.entitiesListSearchProps("resources");
@@ -151,6 +128,29 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
       );
     }
   };
+
+  updateResources(resources, changeTypeIgnored) {
+    const adjustedResources = resources.map(e => {
+      return {
+        id: e.id,
+        type: e.type
+      };
+    });
+    const resourceCollection = {
+      type: "resourceCollections",
+      id: this.props.resourceCollection.id,
+      relationships: { resources: { data: adjustedResources } }
+    };
+    const call = resourceCollectionsAPI.update(
+      resourceCollection.id,
+      resourceCollection
+    );
+    const resourceCollectionRequest = request(
+      call,
+      requests.beResourceCollectionUpdate
+    );
+    this.props.dispatch(resourceCollectionRequest);
+  }
 
   render() {
     if (!this.props.resources) return null;

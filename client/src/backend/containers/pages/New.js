@@ -24,14 +24,14 @@ class PagesNewContainer extends PureComponent {
     };
   }
 
+  handleSuccess = page => {
+    this.redirectToPage(page);
+  };
+
   redirectToPage(page) {
     const path = lh.link("backendRecordsPageGeneral", page.id);
     this.props.history.push(path);
   }
-
-  handleSuccess = page => {
-    this.redirectToPage(page);
-  };
 
   renderPath() {
     const isExternal = this.props.form.getModelValue(

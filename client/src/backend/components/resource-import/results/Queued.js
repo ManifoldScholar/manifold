@@ -10,6 +10,15 @@ export default class ResourceImportResultsQueued extends PureComponent {
     resourceImportRow: PropTypes.object.isRequired
   };
 
+  renderIcon(resourceImportRow) {
+    if (resourceImportRow.isSkip)
+      return (
+        <i className="manicon manicon-arrow-right small" aria-hidden="true" />
+      );
+
+    return <i className="manicon manicon-plus small" aria-hidden="true" />;
+  }
+
   renderMessage(resourceImportRow) {
     if (resourceImportRow.isUpdate) {
       return (
@@ -36,15 +45,6 @@ export default class ResourceImportResultsQueued extends PureComponent {
         } is queued to create a new resource.`}
       </span>
     );
-  }
-
-  renderIcon(resourceImportRow) {
-    if (resourceImportRow.isSkip)
-      return (
-        <i className="manicon manicon-arrow-right small" aria-hidden="true" />
-      );
-
-    return <i className="manicon manicon-plus small" aria-hidden="true" />;
   }
 
   render() {

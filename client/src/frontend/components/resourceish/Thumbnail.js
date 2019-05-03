@@ -6,6 +6,13 @@ import Utility from "global/components/utility";
 import IconComputed from "global/components/icon-computed";
 
 export default class ResourceishThumbnail extends Component {
+  static defaultProps = {
+    showKind: true,
+    showTitle: false,
+    variant: "smallPortrait",
+    additionalClasses: ""
+  };
+
   static displayName = "Resourceish.Thumbnail";
 
   static propTypes = {
@@ -16,33 +23,6 @@ export default class ResourceishThumbnail extends Component {
     noCrop: PropTypes.bool,
     additionalClasses: PropTypes.string
   };
-
-  static defaultProps = {
-    showKind: true,
-    showTitle: false,
-    variant: "smallPortrait",
-    additionalClasses: ""
-  };
-
-  getResourceKind(kind) {
-    let out = "File";
-    switch (this.type()) {
-      case "resources":
-        if (!kind) break;
-        out =
-          kind
-            .toLowerCase()
-            .charAt(0)
-            .toUpperCase() + kind.slice(1);
-        break;
-      case "resourceCollections":
-        out = "Resource Collection";
-        break;
-      default:
-        break;
-    }
-    return out;
-  }
 
   getImage(resourceish) {
     let attributeName = null;
@@ -65,6 +45,26 @@ export default class ResourceishThumbnail extends Component {
       resourceish,
       `attributes.${attributeName}.${this.props.variant}`
     );
+  }
+
+  getResourceKind(kind) {
+    let out = "File";
+    switch (this.type()) {
+      case "resources":
+        if (!kind) break;
+        out =
+          kind
+            .toLowerCase()
+            .charAt(0)
+            .toUpperCase() + kind.slice(1);
+        break;
+      case "resourceCollections":
+        out = "Resource Collection";
+        break;
+      default:
+        break;
+    }
+    return out;
   }
 
   hasImage(resourceish) {

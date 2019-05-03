@@ -4,6 +4,11 @@ import classNames from "classnames";
 import GlobalForm from "global/components/form";
 
 export default class AnnotationEditor extends PureComponent {
+  static defaultProps = {
+    closeOnSave: true,
+    annotation: { attributes: {} }
+  };
+
   static displayName = "Annotation.Editor";
 
   static propTypes = {
@@ -11,11 +16,6 @@ export default class AnnotationEditor extends PureComponent {
     annotation: PropTypes.object,
     cancel: PropTypes.func,
     closeOnSave: PropTypes.bool
-  };
-
-  static defaultProps = {
-    closeOnSave: true,
-    annotation: { attributes: {} }
   };
 
   constructor(props) {
@@ -35,6 +35,22 @@ export default class AnnotationEditor extends PureComponent {
     clearTimeout(this.focusTimeout);
   }
 
+  handleBodyChange = event => {
+    this.setState({ body: event.target.value });
+  };
+
+  handleCancel = (event = null) => {
+    if (event) event.preventDefault();
+    if (this.props.cancel) {
+      this.props.cancel(event);
+    }
+  };
+
+  handlePrivacyChange = eventIgnored => {
+    const value = !this.state.private;
+    this.setState({ private: value });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     const { closeOnSave, saveAnnotation, annotation } = this.props;
@@ -52,22 +68,6 @@ export default class AnnotationEditor extends PureComponent {
     promise.catch(response => {
       this.handleErrors(response.body.errors);
     });
-  };
-
-  handleBodyChange = event => {
-    this.setState({ body: event.target.value });
-  };
-
-  handleCancel = (event = null) => {
-    if (event) event.preventDefault();
-    if (this.props.cancel) {
-      this.props.cancel(event);
-    }
-  };
-
-  handlePrivacyChange = eventIgnored => {
-    const value = !this.state.private;
-    this.setState({ private: value });
   };
 
   handleErrors(errors) {

@@ -4,6 +4,10 @@ import classNames from "classnames";
 import ListItem from "./ListItem";
 
 export default class TextList extends Component {
+  static defaultProps = {
+    baseClass: "text-list"
+  };
+
   static displayName = "TextList";
 
   static propTypes = {
@@ -15,10 +19,6 @@ export default class TextList extends Component {
     showDates: PropTypes.bool,
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool
-  };
-
-  static defaultProps = {
-    baseClass: "text-list"
   };
 
   get texts() {

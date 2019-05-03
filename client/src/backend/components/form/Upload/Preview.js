@@ -18,42 +18,17 @@ export default class FormUploadPreview extends PureComponent {
     fileName: PropTypes.string
   };
 
-  get isImage() {
-    if (
-      this.currentPreviewIsFileObject &&
-      startsWith(this.currentPreview.content_type, "image/")
-    )
-      return true;
-    if (this.currentPreviewIsPath) {
-      const { currentPreviewExtension: ext } = this;
-      return (
-        startsWith(ext, ".png") ||
-        startsWith(ext, ".gif") ||
-        startsWith(ext, ".jpg") ||
-        startsWith(ext, ".jpeg")
-      );
-    }
-    return false;
-  }
-
   get currentPreview() {
     return this.props.preview;
   }
 
-  get currentPreviewIsUrl() {
-    return RegExp("^https?://", "i").test(this.currentPreview);
+  get currentPreviewExtension() {
+    const filename = this.fileNameForPath(this.currentPreview);
+    return path.extname(filename).toLowerCase();
   }
 
   get currentPreviewIsAbsolutePath() {
     return startsWith(this.currentPreview, "/");
-  }
-
-  get currentPreviewIsPath() {
-    return this.currentPreviewIsUrl || this.currentPreviewIsAbsolutePath;
-  }
-
-  get currentPreviewIsString() {
-    return isString(this.currentPreview);
   }
 
   get currentPreviewIsFileObject() {
@@ -65,21 +40,16 @@ export default class FormUploadPreview extends PureComponent {
     return file.hasOwnProperty("id");
   }
 
-  get previewFileName() {
-    if (!this.previewable) return null;
-    if (this.currentPreviewIsPath)
-      return this.fileNameForPath(this.currentPreview);
-    if (this.currentPreviewIsString) return this.currentPreview;
-    return this.fileNameForObject(this.currentPreview);
+  get currentPreviewIsPath() {
+    return this.currentPreviewIsUrl || this.currentPreviewIsAbsolutePath;
   }
 
-  get currentPreviewExtension() {
-    const filename = this.fileNameForPath(this.currentPreview);
-    return path.extname(filename).toLowerCase();
+  get currentPreviewIsString() {
+    return isString(this.currentPreview);
   }
 
-  get previewable() {
-    return this.currentPreviewIsString || this.currentPreviewIsFileObject;
+  get currentPreviewIsUrl() {
+    return RegExp("^https?://", "i").test(this.currentPreview);
   }
 
   fileNameForObject(fileObject) {
@@ -101,6 +71,36 @@ export default class FormUploadPreview extends PureComponent {
   fileNameForPath(pathString) {
     if (this.props.fileName) return this.props.fileName;
     return head(split(path.basename(pathString), "?"));
+  }
+
+  get isImage() {
+    if (
+      this.currentPreviewIsFileObject &&
+      startsWith(this.currentPreview.content_type, "image/")
+    )
+      return true;
+    if (this.currentPreviewIsPath) {
+      const { currentPreviewExtension: ext } = this;
+      return (
+        startsWith(ext, ".png") ||
+        startsWith(ext, ".gif") ||
+        startsWith(ext, ".jpg") ||
+        startsWith(ext, ".jpeg")
+      );
+    }
+    return false;
+  }
+
+  get previewFileName() {
+    if (!this.previewable) return null;
+    if (this.currentPreviewIsPath)
+      return this.fileNameForPath(this.currentPreview);
+    if (this.currentPreviewIsString) return this.currentPreview;
+    return this.fileNameForObject(this.currentPreview);
+  }
+
+  get previewable() {
+    return this.currentPreviewIsString || this.currentPreviewIsFileObject;
   }
 
   render() {

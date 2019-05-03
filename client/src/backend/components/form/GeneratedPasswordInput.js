@@ -7,6 +7,12 @@ import generatePassword from "helpers/passwordGenerator";
 import setter from "./setter";
 
 class FormGeneratedPasswordInput extends Component {
+  static defaultProps = {
+    focusOnMount: false,
+    id: labelId("generated-password-"),
+    idForError: labelId("generated-password-error-")
+  };
+
   static displayName = "Form.GeneratedPasswordInput";
 
   static propTypes = {
@@ -18,12 +24,6 @@ class FormGeneratedPasswordInput extends Component {
     set: PropTypes.func,
     id: PropTypes.string,
     idForError: PropTypes.string
-  };
-
-  static defaultProps = {
-    focusOnMount: false,
-    id: labelId("generated-password-"),
-    idForError: labelId("generated-password-error-")
   };
 
   constructor(props) {
@@ -50,19 +50,19 @@ class FormGeneratedPasswordInput extends Component {
     set(password, false);
   }
 
-  togglePassword(event) {
+  handlePasswordChange(event) {
     event.preventDefault();
-    this.setState({ showPassword: !this.state.showPassword });
+    const value = event.target.value;
+    this.setState({ password: value });
   }
 
   initializePassword() {
     return generatePassword();
   }
 
-  handlePasswordChange(event) {
+  togglePassword(event) {
     event.preventDefault();
-    const value = event.target.value;
-    this.setState({ password: value });
+    this.setState({ showPassword: !this.state.showPassword });
   }
 
   renderInput() {

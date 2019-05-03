@@ -47,6 +47,10 @@ class Toc extends PureComponent {
     return hasChildren;
   };
 
+  showMeta = () => {
+    this.props.showMeta();
+  };
+
   visitNode = node => {
     this.counter = this.counter + 1;
     let children = null;
@@ -91,10 +95,6 @@ class Toc extends PureComponent {
     const nodeHash = node.anchor ? `#${node.anchor}` : "";
     return this.props.section.id === nodeId && location.hash === nodeHash;
   }
-
-  showMeta = () => {
-    this.props.showMeta();
-  };
 
   renderContents(text) {
     if (text.attributes.toc.length <= 0) return this.renderEmpty();

@@ -39,14 +39,15 @@ export default class Header extends Component {
     match: PropTypes.object
   };
 
+  panelToggleHandler = memoize(panel => {
+    return () => {
+      this.props.commonActions.panelToggle(panel);
+    };
+  });
+
   get projectId() {
     if (!this.props.text) return null;
     return this.props.text.relationships.project.id;
-  }
-
-  get textId() {
-    if (!this.props.text) return null;
-    return this.props.text.id;
   }
 
   get sectionId() {
@@ -54,24 +55,23 @@ export default class Header extends Component {
     return this.props.section.id;
   }
 
+  get textId() {
+    if (!this.props.text) return null;
+    return this.props.text.id;
+  }
+
   handleContentsButtonClick = event => {
     event.stopPropagation();
     this.props.commonActions.panelToggle("tocDrawer");
-  };
-
-  triggerShowSignInUpOverlay = () => {
-    this.props.commonActions.visibilityShow("signInUpOverlay");
   };
 
   handleVisibilityFilterChange = filters => {
     this.props.commonActions.visibilityChange({ visibilityFilters: filters });
   };
 
-  panelToggleHandler = memoize(panel => {
-    return () => {
-      this.props.commonActions.panelToggle(panel);
-    };
-  });
+  triggerShowSignInUpOverlay = () => {
+    this.props.commonActions.visibilityShow("signInUpOverlay");
+  };
 
   renderContentsButton = textAttrs => {
     if (textAttrs.toc.length <= 0 && isEmpty(textAttrs.metadata)) {

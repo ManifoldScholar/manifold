@@ -6,15 +6,28 @@ import labelId from "helpers/labelId";
 import lh from "helpers/linkHandler";
 
 export default class ProjectCollectionHeader extends PureComponent {
+  static defaultProps = {
+    sortId: labelId("project-collection-header-")
+  };
+
   static displayName = "ProjectCollection.Header";
 
   static propTypes = {
     projectCollection: PropTypes.object
   };
 
-  static defaultProps = {
-    sortId: labelId("project-collection-header-")
-  };
+  renderPlaceholder() {
+    return (
+      <section className="backend-header">
+        <div className="wrapper">
+          <header className="entity-header-primary instructional">
+            Please select a Project Collection from the list to edit its content
+            and settings.
+          </header>
+        </div>
+      </section>
+    );
+  }
 
   renderUtility = projectCollection => {
     const smart = projectCollection.attributes.smart;
@@ -43,19 +56,6 @@ export default class ProjectCollectionHeader extends PureComponent {
       </div>
     );
   };
-
-  renderPlaceholder() {
-    return (
-      <section className="backend-header">
-        <div className="wrapper">
-          <header className="entity-header-primary instructional">
-            Please select a Project Collection from the list to edit its content
-            and settings.
-          </header>
-        </div>
-      </section>
-    );
-  }
 
   render() {
     const { projectCollection } = this.props;

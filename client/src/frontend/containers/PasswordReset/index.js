@@ -38,6 +38,10 @@ export class PasswordResetContainer extends Component {
     this.props.dispatch(flush([requests.gPasswordReset]));
   }
 
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   handleSubmit = event => {
     event.preventDefault(event.target);
     const action = passwordsAPI.update(
@@ -51,11 +55,6 @@ export class PasswordResetContainer extends Component {
     });
   };
 
-  postUpdate(data) {
-    this.loginUser(data);
-    this.redirectToHome();
-  }
-
   loginUser(user) {
     this.props.dispatch(
       currentUserActions.login({
@@ -65,13 +64,14 @@ export class PasswordResetContainer extends Component {
     );
   }
 
+  postUpdate(data) {
+    this.loginUser(data);
+    this.redirectToHome();
+  }
+
   redirectToHome() {
     this.props.history.push("/");
   }
-
-  handleInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
 
   render() {
     const errors = get(this.props.response, "errors") || [];

@@ -15,6 +15,13 @@ export default class Group extends Component {
     visitHandler: PropTypes.func
   };
 
+  preOpenItem = debounce(() => {
+    const expanded =
+      this.props.readerSection.attributes.name === this.props.sectionName;
+
+    return this.setState({ expanded });
+  }, 200);
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,13 +32,6 @@ export default class Group extends Component {
   componentDidMount() {
     this.preOpenItem();
   }
-
-  preOpenItem = debounce(() => {
-    const expanded =
-      this.props.readerSection.attributes.name === this.props.sectionName;
-
-    return this.setState({ expanded });
-  }, 200);
 
   handleClick = event => {
     event.stopPropagation();

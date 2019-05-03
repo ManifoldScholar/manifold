@@ -18,6 +18,8 @@ const { request } = entityStoreActions;
 const perPage = 10;
 
 class UsersListContainerImplementation extends PureComponent {
+  static displayName = "Users.List";
+
   static mapStateToProps = state => {
     return {
       users: select(requests.beUsers, state.entityStore),
@@ -25,8 +27,6 @@ class UsersListContainerImplementation extends PureComponent {
       currentUserId: get(state, "authentication.currentUser.id")
     };
   };
-
-  static displayName = "Users.List";
 
   static propTypes = {
     users: PropTypes.array,
@@ -52,19 +52,6 @@ class UsersListContainerImplementation extends PureComponent {
       return this.fetchUsers(this.lastFetchedPage);
   }
 
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
-
-  userWasModified(prevProps) {
-    const currentModified = get(this.props, "usersMeta.modified");
-    const previousModified = get(prevProps, "usersMeta.modified");
-    if (!currentModified) return false;
-    return !(currentModified && previousModified);
-  }
-
   fetchUsers = (page = 1) => {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
@@ -76,8 +63,21 @@ class UsersListContainerImplementation extends PureComponent {
     this.props.dispatch(action);
   };
 
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
+  }
+
   handleUsersPageChange(event, page) {
     this.fetchUsers(page);
+  }
+
+  userWasModified(prevProps) {
+    const currentModified = get(this.props, "usersMeta.modified");
+    const previousModified = get(prevProps, "usersMeta.modified");
+    if (!currentModified) return false;
+    return !(currentModified && previousModified);
   }
 
   usersPageChangeHandlerCreator = page => {

@@ -16,6 +16,11 @@ export default class TextTitles extends Component {
     };
   }
 
+  handleTitleClick = () => {
+    // Not using event, but handler stub will allow it if it becomes necessary
+    this.toggleTitles();
+  };
+
   toggleTitles() {
     // Only toggle the title back showSection is coming from scrollAware
     if (this.props.showSection && this.state.showSection) {
@@ -30,11 +35,6 @@ export default class TextTitles extends Component {
       }, 2500);
     }
   }
-
-  handleTitleClick = () => {
-    // Not using event, but handler stub will allow it if it becomes necessary
-    this.toggleTitles();
-  };
 
   render() {
     const titleClass = classNames({

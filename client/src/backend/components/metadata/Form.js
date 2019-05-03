@@ -20,11 +20,6 @@ export default class FormMakers extends PureComponent {
     return this.props.model.attributes;
   }
 
-  get metadataProperties() {
-    if (!this.attributes || !this.attributes.metadataProperties) return [];
-    return this.attributes.metadataProperties.sort();
-  }
-
   get baseStructure() {
     const { metadataProperties: keys } = this;
     return [
@@ -86,6 +81,47 @@ export default class FormMakers extends PureComponent {
     ];
   }
 
+  componentFor(prop) {
+    const key = this.configValueFor(prop, "type");
+    const component = Form[key];
+    return component || Form.TextInput;
+  }
+
+  get config() {
+    return config.app.locale.metadata;
+  }
+
+  configFor(prop) {
+    return this.config[prop];
+  }
+
+  configValueFor(prop, key) {
+    const propConfig = this.configFor(prop);
+    if (!propConfig || !propConfig.placeholder) return null;
+    return propConfig[key];
+  }
+
+  inputPropsFor(prop) {
+    return this.configValueFor(prop, "inputProps");
+  }
+
+  instructionsFor(prop) {
+    return this.configValueFor(prop, "instructions");
+  }
+
+  labelize(prop) {
+    return humps.decamelize(prop, { separator: " " });
+  }
+
+  get metadataProperties() {
+    if (!this.attributes || !this.attributes.metadataProperties) return [];
+    return this.attributes.metadataProperties.sort();
+  }
+
+  placeholderFor(prop) {
+    return this.configValueFor(prop, "placeholder");
+  }
+
   get structure() {
     const { metadataProperties: keys } = this;
     const filteredStructure = this.baseStructure.filter(
@@ -106,42 +142,6 @@ export default class FormMakers extends PureComponent {
       });
     }
     return filteredStructure;
-  }
-
-  get config() {
-    return config.app.locale.metadata;
-  }
-
-  configFor(prop) {
-    return this.config[prop];
-  }
-
-  labelize(prop) {
-    return humps.decamelize(prop, { separator: " " });
-  }
-
-  configValueFor(prop, key) {
-    const propConfig = this.configFor(prop);
-    if (!propConfig || !propConfig.placeholder) return null;
-    return propConfig[key];
-  }
-
-  placeholderFor(prop) {
-    return this.configValueFor(prop, "placeholder");
-  }
-
-  inputPropsFor(prop) {
-    return this.configValueFor(prop, "inputProps");
-  }
-
-  componentFor(prop) {
-    const key = this.configValueFor(prop, "type");
-    const component = Form[key];
-    return component || Form.TextInput;
-  }
-
-  instructionsFor(prop) {
-    return this.configValueFor(prop, "instructions");
   }
 
   render() {

@@ -9,14 +9,18 @@ import { select } from "utils/entityUtils";
 const { request } = entityStoreActions;
 
 export class AnnotationList extends PureComponent {
+  static defaultProps = {
+    annotations: []
+  };
+
+  static displayName = "Annotation.List";
+
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       annotations: select(requests.rDrawerAnnotations, state.entityStore) || []
     };
     return Object.assign({}, newState, ownProps);
   };
-
-  static displayName = "Annotation.List";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -26,10 +30,6 @@ export class AnnotationList extends PureComponent {
     annotations: PropTypes.array,
     closeDrawer: PropTypes.func,
     sectionId: PropTypes.string
-  };
-
-  static defaultProps = {
-    annotations: []
   };
 
   constructor(props) {
@@ -52,13 +52,9 @@ export class AnnotationList extends PureComponent {
     }
   }
 
-  fetchAnnotations(props) {
-    const sId = this.props.sectionId;
-    const annotationsCall = annotationsAPI.forSection(sId, {
-      ids: this.props.annotationIds
-    });
-    props.dispatch(request(annotationsCall, requests.rDrawerAnnotations));
-  }
+  hideEditor = () => {
+    this.setState({ editorVisible: false });
+  };
 
   saveAnnotation = (model, group) => {
     const attributes = Object.assign({}, group.selection, model.attributes);
@@ -70,9 +66,13 @@ export class AnnotationList extends PureComponent {
     this.setState({ editorVisible: true });
   };
 
-  hideEditor = () => {
-    this.setState({ editorVisible: false });
-  };
+  fetchAnnotations(props) {
+    const sId = this.props.sectionId;
+    const annotationsCall = annotationsAPI.forSection(sId, {
+      ids: this.props.annotationIds
+    });
+    props.dispatch(request(annotationsCall, requests.rDrawerAnnotations));
+  }
 
   render() {
     const { annotations } = this.props;

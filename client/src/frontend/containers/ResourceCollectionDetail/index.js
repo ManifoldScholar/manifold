@@ -20,31 +20,9 @@ const page = 1;
 const perPage = 10;
 
 export class ResourceCollectionDetailContainer extends PureComponent {
-  static fetchProject(id, dispatch) {
-    const p = projectsAPI.show(id);
-    const { promise } = dispatch(request(p, requests.tmpProject));
-    return promise;
-  }
-
   static fetchCollection(id, dispatch) {
     const c = resourceCollectionsAPI.show(id);
     const { promise } = dispatch(request(c, requests.feResourceCollection));
-    return promise;
-  }
-
-  static fetchResources(
-    metas,
-    id,
-    dispatch,
-    filter = {},
-    pagination = { number: page, size: perPage }
-  ) {
-    const cr = resourceCollectionsAPI.collectionResources(
-      id,
-      filter,
-      pagination
-    );
-    const { promise } = dispatch(request(cr, metas));
     return promise;
   }
 
@@ -97,6 +75,28 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     return Promise.all(promises);
   };
 
+  static fetchProject(id, dispatch) {
+    const p = projectsAPI.show(id);
+    const { promise } = dispatch(request(p, requests.tmpProject));
+    return promise;
+  }
+
+  static fetchResources(
+    metas,
+    id,
+    dispatch,
+    filter = {},
+    pagination = { number: page, size: perPage }
+  ) {
+    const cr = resourceCollectionsAPI.collectionResources(
+      id,
+      filter,
+      pagination
+    );
+    const { promise } = dispatch(request(cr, metas));
+    return promise;
+  }
+
   static mapStateToProps = (state, ownProps) => {
     const props = {
       project: grab("projects", ownProps.match.params.id, state.entityStore),
@@ -144,6 +144,32 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     this.flushStoreRequests();
   }
 
+  doUpdate() {
+    this.updateResults();
+    this.updateUrl();
+  }
+
+  filterChange = filter => {
+    const pagination = Object.assign({}, this.state.pagination, {
+      number: page
+    });
+    this.setState({ filter, pagination }, this.doUpdate);
+  };
+
+  flushStoreRequests = () => {
+    this.props.dispatch(flush(requests.tmpProject));
+    this.props.dispatch(flush(requests.feSlideshow));
+    this.props.dispatch(flush(requests.feResourceCollection));
+    this.props.dispatch(flush(requests.feCollectionResources));
+  };
+
+  handlePageChange = pageParam => {
+    const pagination = Object.assign({}, this.state.pagination, {
+      number: pageParam
+    });
+    this.setState({ pagination }, this.doUpdate);
+  };
+
   initialState(init) {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
 
@@ -156,17 +182,12 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     };
   }
 
-  flushStoreRequests = () => {
-    this.props.dispatch(flush(requests.tmpProject));
-    this.props.dispatch(flush(requests.feSlideshow));
-    this.props.dispatch(flush(requests.feResourceCollection));
-    this.props.dispatch(flush(requests.feCollectionResources));
+  pageChangeHandlerCreator = pageParam => {
+    return event => {
+      event.preventDefault();
+      this.handlePageChange(pageParam);
+    };
   };
-
-  doUpdate() {
-    this.updateResults();
-    this.updateUrl();
-  }
 
   updateResults() {
     const cId = this.props.resourceCollection.id;
@@ -192,27 +213,6 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     const search = queryString.stringify(params);
     this.props.history.push({ pathname, search });
   }
-
-  filterChange = filter => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: page
-    });
-    this.setState({ filter, pagination }, this.doUpdate);
-  };
-
-  handlePageChange = pageParam => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: pageParam
-    });
-    this.setState({ pagination }, this.doUpdate);
-  };
-
-  pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      this.handlePageChange(pageParam);
-    };
-  };
 
   render() {
     const { project, resourceCollection, settings } = this.props;

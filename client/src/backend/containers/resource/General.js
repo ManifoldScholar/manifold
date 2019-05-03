@@ -20,16 +20,16 @@ export class ResourceGeneralContainer extends PureComponent {
     this.state = this.initialState();
   }
 
+  handleSuccess = () => {
+    this.setState(this.initialState);
+  };
+
   initialState() {
     return {
       newKind: null,
       changeKind: false
     };
   }
-
-  handleSuccess = () => {
-    this.setState(this.initialState);
-  };
 
   render() {
     const resource = this.props.resource.attributes;

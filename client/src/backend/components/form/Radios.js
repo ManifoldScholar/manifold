@@ -10,6 +10,12 @@ import RadioLabel from "./Radio/Label";
 import Option from "./Radio/Option";
 
 class FormRadios extends Component {
+  static defaultProps = {
+    focusOnMount: false,
+    id: labelId("radios-"),
+    idForError: labelId("radios-error-")
+  };
+
   static displayName = "Form.Radios";
 
   static propTypes = {
@@ -34,18 +40,17 @@ class FormRadios extends Component {
     focusOnMount: PropTypes.bool
   };
 
-  static defaultProps = {
-    focusOnMount: false,
-    id: labelId("radios-"),
-    idForError: labelId("radios-error-")
-  };
-
   get focusOnMount() {
     return this.props.focusOnMount;
   }
 
-  get options() {
-    return this.props.options;
+  get inputClasses() {
+    return classnames(this.props.inputClasses, {
+      "form-input": true,
+      "form-input-radios": true,
+      "extra-space-bottom": true,
+      wide: this.props.wide
+    });
   }
 
   get optionProps() {
@@ -56,13 +61,8 @@ class FormRadios extends Component {
     };
   }
 
-  get inputClasses() {
-    return classnames(this.props.inputClasses, {
-      "form-input": true,
-      "form-input-radios": true,
-      "extra-space-bottom": true,
-      wide: this.props.wide
-    });
+  get options() {
+    return this.props.options;
   }
 
   render() {

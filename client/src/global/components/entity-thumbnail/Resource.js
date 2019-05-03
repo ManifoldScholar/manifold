@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import IconComputed from "global/components/icon-computed";
 
 export default class EntityThumbnailResource extends PureComponent {
+  static defaultProps = {
+    variant: "small",
+    attributes: {}
+  };
+
   static displayName = "EntityThumbnail.Resource";
 
   static propTypes = {
@@ -13,31 +18,8 @@ export default class EntityThumbnailResource extends PureComponent {
     className: PropTypes.string
   };
 
-  static defaultProps = {
-    variant: "small",
-    attributes: {}
-  };
-
   get attr() {
     return this.props.entity.attributes;
-  }
-
-  get variant() {
-    return this.props.variant;
-  }
-
-  get src() {
-    const a = this.attr.variantThumbnailStyles
-      ? this.attr.variantThumbnailStyles[this.variant]
-      : null;
-    const b = this.attr.attachmentStyles
-      ? this.attr.attachmentStyles[this.variant]
-      : null;
-    return a || b;
-  }
-
-  get kind() {
-    return this.attr.kind;
   }
 
   get icon() {
@@ -45,10 +27,6 @@ export default class EntityThumbnailResource extends PureComponent {
     return (
       <IconComputed.Resource svgProps={{ width, height }} icon={this.kind} />
     );
-  }
-
-  get useImage() {
-    return !!this.src;
   }
 
   get image() {
@@ -62,6 +40,28 @@ export default class EntityThumbnailResource extends PureComponent {
         className={className}
       />
     );
+  }
+
+  get kind() {
+    return this.attr.kind;
+  }
+
+  get src() {
+    const a = this.attr.variantThumbnailStyles
+      ? this.attr.variantThumbnailStyles[this.variant]
+      : null;
+    const b = this.attr.attachmentStyles
+      ? this.attr.attachmentStyles[this.variant]
+      : null;
+    return a || b;
+  }
+
+  get useImage() {
+    return !!this.src;
+  }
+
+  get variant() {
+    return this.props.variant;
   }
 
   render() {

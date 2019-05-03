@@ -31,24 +31,30 @@ export default class CommentDetail extends PureComponent {
     };
   }
 
-  handleFlag = event => {
-    this.props.handleFlag(event, this.props.comment);
-  };
-
-  handleUnflag = event => {
-    this.props.handleUnflag(event, this.props.comment);
+  closeEditor = () => {
+    this.setState({
+      editor: null
+    });
   };
 
   handleDelete = event => {
     this.props.handleDelete(event, this.props.comment);
   };
 
+  handleDestroy = event => {
+    this.props.handleDestroy(event, this.props.comment);
+  };
+
+  handleFlag = event => {
+    this.props.handleFlag(event, this.props.comment);
+  };
+
   handleRestore = event => {
     this.props.handleRestore(event, this.props.comment);
   };
 
-  handleDestroy = event => {
-    this.props.handleDestroy(event, this.props.comment);
+  handleUnflag = event => {
+    this.props.handleUnflag(event, this.props.comment);
   };
 
   startEdit = () => {
@@ -76,39 +82,6 @@ export default class CommentDetail extends PureComponent {
       }
     );
   };
-
-  closeEditor = () => {
-    this.setState({
-      editor: null
-    });
-  };
-
-  renderEditor() {
-    if (!this.state.editor) return null;
-    if (this.state.editor === "reply") return this.renderReplyEditor();
-    if (this.state.editor === "edit") return this.renderEditEditor();
-    return null;
-  }
-
-  renderReplyEditor() {
-    return (
-      <CommentContainer.Editor
-        subject={this.props.subject}
-        parentId={this.props.comment.id}
-        cancel={this.closeEditor}
-      />
-    );
-  }
-
-  renderEditEditor() {
-    return (
-      <CommentContainer.Editor
-        comment={this.props.comment}
-        subject={this.props.subject}
-        cancel={this.closeEditor}
-      />
-    );
-  }
 
   renderComment() {
     const replyButtonClass = classNames({
@@ -185,6 +158,33 @@ export default class CommentDetail extends PureComponent {
           parentId={comment.id}
         />
       </li>
+    );
+  }
+
+  renderEditEditor() {
+    return (
+      <CommentContainer.Editor
+        comment={this.props.comment}
+        subject={this.props.subject}
+        cancel={this.closeEditor}
+      />
+    );
+  }
+
+  renderEditor() {
+    if (!this.state.editor) return null;
+    if (this.state.editor === "reply") return this.renderReplyEditor();
+    if (this.state.editor === "edit") return this.renderEditEditor();
+    return null;
+  }
+
+  renderReplyEditor() {
+    return (
+      <CommentContainer.Editor
+        subject={this.props.subject}
+        parentId={this.props.comment.id}
+        cancel={this.closeEditor}
+      />
     );
   }
 

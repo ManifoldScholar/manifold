@@ -7,15 +7,15 @@ import classnames from "classnames";
 import IconComputed from "global/components/icon-computed";
 
 export default class ResourceListSlideFigure extends Component {
+  static defaultProps = {
+    enableZoom: false,
+    zoomLabel: "Zoom"
+  };
+
   static propTypes = {
     resource: PropTypes.object,
     enableZoom: PropTypes.bool,
     zoomLabel: PropTypes.string
-  };
-
-  static defaultProps = {
-    enableZoom: false,
-    zoomLabel: "Zoom"
   };
 
   render() {

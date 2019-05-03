@@ -24,15 +24,6 @@ const regenerateState = metadata => {
 export default class MetaList extends Component {
   static displayName = "MetaList";
 
-  static propTypes = {
-    metadata: PropTypes.object
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = regenerateState(props.metadata);
-  }
-
   static getDerivedStateFromProps(nextProps, prevState) {
     const newState = regenerateState(nextProps.metadata);
     if (newState !== prevState) {
@@ -40,6 +31,15 @@ export default class MetaList extends Component {
     }
 
     return null;
+  }
+
+  static propTypes = {
+    metadata: PropTypes.object
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = regenerateState(props.metadata);
   }
 
   render() {

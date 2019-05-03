@@ -20,17 +20,10 @@ export default class CategoryList extends PureComponent {
     return this.props.callbacks;
   }
 
-  get text() {
-    return this.props.text;
-  }
-
-  get stylesheet() {
-    return this.props.stylesheet;
-  }
-
-  get type() {
-    return this.stylesheet.attributes.ingested ? "(Ingested)" : "User Created";
-  }
+  confirmDestroy = event => {
+    event.preventDefault();
+    this.callbacks.confirmDestroy(this.stylesheet);
+  };
 
   get editUrl() {
     return lh.link(
@@ -44,10 +37,17 @@ export default class CategoryList extends PureComponent {
     return this.props.index;
   }
 
-  confirmDestroy = event => {
-    event.preventDefault();
-    this.callbacks.confirmDestroy(this.stylesheet);
-  };
+  get stylesheet() {
+    return this.props.stylesheet;
+  }
+
+  get text() {
+    return this.props.text;
+  }
+
+  get type() {
+    return this.stylesheet.attributes.ingested ? "(Ingested)" : "User Created";
+  }
 
   render() {
     const baseClass = "ordered-records-item";

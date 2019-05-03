@@ -10,19 +10,19 @@ export default class Pagination extends Component {
     spine: PropTypes.array
   };
 
-  getSiblingSection(id, shift) {
-    if (!this.props.spine) return;
-    let siblingSection = false;
-    const index = this.props.spine.indexOf(id);
-    if (this.props.spine[index + shift] || index !== -1) {
-      siblingSection = this.props.spine[index + shift];
+  getNextLink() {
+    let nextLink = null;
+    const nextNode = this.getSiblingSection(this.props.sectionId, 1);
+    if (nextNode) {
+      const nextPath = this.getSectionPath(nextNode);
+      nextLink = (
+        <Link to={nextPath} className="pagination-next">
+          <span className="text">Next</span>
+          <i className="manicon manicon-arrow-round-right" aria-hidden="true" />
+        </Link>
+      );
     }
-
-    return siblingSection;
-  }
-
-  getSectionPath(id) {
-    return lh.link("readerSection", this.props.text.attributes.slug, id);
+    return nextLink;
   }
 
   getPreviousLink() {
@@ -40,19 +40,19 @@ export default class Pagination extends Component {
     return previousLink;
   }
 
-  getNextLink() {
-    let nextLink = null;
-    const nextNode = this.getSiblingSection(this.props.sectionId, 1);
-    if (nextNode) {
-      const nextPath = this.getSectionPath(nextNode);
-      nextLink = (
-        <Link to={nextPath} className="pagination-next">
-          <span className="text">Next</span>
-          <i className="manicon manicon-arrow-round-right" aria-hidden="true" />
-        </Link>
-      );
+  getSectionPath(id) {
+    return lh.link("readerSection", this.props.text.attributes.slug, id);
+  }
+
+  getSiblingSection(id, shift) {
+    if (!this.props.spine) return;
+    let siblingSection = false;
+    const index = this.props.spine.indexOf(id);
+    if (this.props.spine[index + shift] || index !== -1) {
+      siblingSection = this.props.spine[index + shift];
     }
-    return nextLink;
+
+    return siblingSection;
   }
 
   render() {

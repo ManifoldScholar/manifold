@@ -13,14 +13,14 @@ export class MakersNewContainer extends PureComponent {
     history: PropTypes.object.isRequired
   };
 
+  handleSuccess = maker => {
+    this.redirectToMaker(maker);
+  };
+
   redirectToMaker(maker) {
     const path = lh.link("backendRecordsMaker", maker.id);
     this.props.history.push(path, { keepNotifications: true });
   }
-
-  handleSuccess = maker => {
-    this.redirectToMaker(maker);
-  };
 
   render() {
     return (

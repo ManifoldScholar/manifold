@@ -7,6 +7,11 @@ import endsWith from "lodash/endsWith";
 import FormattedDate from "global/components/FormattedDate";
 
 export default class List extends Component {
+  static defaultProps = {
+    level: "primary",
+    sortByLength: true
+  };
+
   static displayName = "Meta.List";
 
   static propTypes = {
@@ -14,11 +19,6 @@ export default class List extends Component {
     level: PropTypes.string,
     map: PropTypes.array,
     sortByLength: PropTypes.bool
-  };
-
-  static defaultProps = {
-    level: "primary",
-    sortByLength: true
   };
 
   constructor(props) {
@@ -41,26 +41,6 @@ export default class List extends Component {
       long,
       short
     };
-  }
-
-  renderValue(key, value) {
-    if (!value) return null;
-    const dateValues = ["updatedAt", "updatedOn", "createdAt", "createdOn"]; // TODO: Improve date checking, regex?
-
-    if (dateValues.includes(key))
-      return (
-        <li key={key}>
-          <Item label={key}>
-            <FormattedDate format="MMMM DD, YYYY" date={value} />
-          </Item>
-        </li>
-      );
-
-    return (
-      <li key={key}>
-        <Item label={key} value={value} />
-      </li>
-    );
   }
 
   renderDoi() {
@@ -116,6 +96,26 @@ export default class List extends Component {
           </ul>
         )}
       </React.Fragment>
+    );
+  }
+
+  renderValue(key, value) {
+    if (!value) return null;
+    const dateValues = ["updatedAt", "updatedOn", "createdAt", "createdOn"]; // TODO: Improve date checking, regex?
+
+    if (dateValues.includes(key))
+      return (
+        <li key={key}>
+          <Item label={key}>
+            <FormattedDate format="MMMM DD, YYYY" date={value} />
+          </Item>
+        </li>
+      );
+
+    return (
+      <li key={key}>
+        <Item label={key} value={value} />
+      </li>
     );
   }
 

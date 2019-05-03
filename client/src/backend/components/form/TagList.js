@@ -11,6 +11,11 @@ import List from "./HasMany/List";
 import setter from "./setter";
 
 class FormTagList extends Component {
+  static defaultProps = {
+    id: uniqueId("tag-list-"),
+    idForError: uniqueId("tag-list-error-")
+  };
+
   static displayName = "Form.TagList";
 
   static propTypes = {
@@ -28,15 +33,15 @@ class FormTagList extends Component {
     idForError: PropTypes.string
   };
 
-  static defaultProps = {
-    id: uniqueId("tag-list-"),
-    idForError: uniqueId("tag-list-error-")
-  };
-
   componentDidMount() {
     if (this.props.focusOnMount === true && this.inputElement) {
       this.inputElement.focus();
     }
+  }
+
+  arrayEntities(value) {
+    if (!value) return [];
+    return isString(value) ? value.split(",").map(tag => tag.trim()) : value;
   }
 
   get fetchOptions() {
@@ -44,11 +49,6 @@ class FormTagList extends Component {
     if (this.props.tagScope) options.kind = this.props.tagScope;
 
     return options;
-  }
-
-  arrayEntities(value) {
-    if (!value) return [];
-    return isString(value) ? value.split(",").map(tag => tag.trim()) : value;
   }
 
   handleAdd = value => {

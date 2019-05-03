@@ -13,9 +13,10 @@ export class UserMenuBodyComponent extends Component {
     visible: PropTypes.bool
   };
 
-  logout = () => {
-    this.props.startLogout();
+  handleNotificationsClick = event => {
+    event.preventDefault();
     this.props.hideUserMenu();
+    this.props.history.push(lh.link("subscriptions"));
   };
 
   handleProfileClick = event => {
@@ -24,10 +25,9 @@ export class UserMenuBodyComponent extends Component {
     this.props.showLoginOverlay();
   };
 
-  handleNotificationsClick = event => {
-    event.preventDefault();
+  logout = () => {
+    this.props.startLogout();
     this.props.hideUserMenu();
-    this.props.history.push(lh.link("subscriptions"));
   };
 
   render() {

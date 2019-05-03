@@ -92,30 +92,6 @@ export class ProjectCollectionDetailContainer extends Component {
     this.props.dispatch(flush(requests.feProjectCollection));
   }
 
-  initialState(init) {
-    const filter = omitBy(init, (vIgnored, k) => k === "page");
-
-    return {
-      filter: Object.assign({}, filter),
-      pagination: {
-        number: init.page || page,
-        size: perPage
-      }
-    };
-  }
-
-  updateResults(filter = this.state.filter) {
-    const updatedFilter = Object.assign({}, filter, {
-      collectionOrder: this.props.projectCollection.id
-    });
-
-    const action = request(
-      projectsAPI.index(updatedFilter, this.state.pagination),
-      requests.feCollectionProjects
-    );
-    this.props.dispatch(action);
-  }
-
   filterChangeHandler = filter => {
     this.setState({ filter }, () => {
       this.updateResults(filter);
@@ -129,12 +105,36 @@ export class ProjectCollectionDetailContainer extends Component {
     this.setState({ pagination }, this.updateResults);
   };
 
+  initialState(init) {
+    const filter = omitBy(init, (vIgnored, k) => k === "page");
+
+    return {
+      filter: Object.assign({}, filter),
+      pagination: {
+        number: init.page || page,
+        size: perPage
+      }
+    };
+  }
+
   pageChangeHandlerCreator = pageParam => {
     return event => {
       event.preventDefault();
       this.handlePageChange(pageParam);
     };
   };
+
+  updateResults(filter = this.state.filter) {
+    const updatedFilter = Object.assign({}, filter, {
+      collectionOrder: this.props.projectCollection.id
+    });
+
+    const action = request(
+      projectsAPI.index(updatedFilter, this.state.pagination),
+      requests.feCollectionProjects
+    );
+    this.props.dispatch(action);
+  }
 
   renderProjects(props) {
     if (!props.projects || !props.projectsMeta) return null;

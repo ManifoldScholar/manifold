@@ -8,6 +8,12 @@ import classNames from "classnames";
 import lh from "helpers/linkHandler";
 
 export default class ProjectGridItem extends Component {
+  static defaultProps = {
+    hideMeta: false,
+    hideDate: false,
+    hideDesc: false
+  };
+
   static displayName = "Project.GridItem";
 
   static propTypes = {
@@ -20,11 +26,33 @@ export default class ProjectGridItem extends Component {
     dispatch: PropTypes.func
   };
 
-  static defaultProps = {
-    hideMeta: false,
-    hideDate: false,
-    hideDesc: false
-  };
+  renderProjectDesc(project) {
+    if (this.props.hideDesc || !project.attributes.subtitle) return null;
+    return <p className="description">{project.attributes.subtitle}</p>;
+  }
+
+  renderProjectMakers(project) {
+    const creators = project.relationships.creators;
+    if (!creators || creators.length === 0) return null;
+    return (
+      <div className="relations-list">
+        <span>
+          {creators.map(maker => maker.attributes.fullName).join(", ")}
+        </span>
+      </div>
+    );
+  }
+
+  renderProjectStatusMarker(project) {
+    // Currently, this can only return a 'draft' marker
+    let marker = null;
+
+    if (project.attributes.draft) {
+      marker = <div className="block-label">Draft</div>;
+    }
+
+    return marker;
+  }
 
   renderPublishedDate(project) {
     const { attributes: attr } = project;
@@ -40,34 +68,6 @@ export default class ProjectGridItem extends Component {
       );
     }
     return null;
-  }
-
-  renderProjectDesc(project) {
-    if (this.props.hideDesc || !project.attributes.subtitle) return null;
-    return <p className="description">{project.attributes.subtitle}</p>;
-  }
-
-  renderProjectStatusMarker(project) {
-    // Currently, this can only return a 'draft' marker
-    let marker = null;
-
-    if (project.attributes.draft) {
-      marker = <div className="block-label">Draft</div>;
-    }
-
-    return marker;
-  }
-
-  renderProjectMakers(project) {
-    const creators = project.relationships.creators;
-    if (!creators || creators.length === 0) return null;
-    return (
-      <div className="relations-list">
-        <span>
-          {creators.map(maker => maker.attributes.fullName).join(", ")}
-        </span>
-      </div>
-    );
   }
 
   renderUpdatedDate(project) {

@@ -6,7 +6,18 @@ import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-
 import Utility from "global/components/utility";
 
 export default class CoverButton extends Component {
+  static defaultProps = {
+    addText: "Add",
+    removeText: "Remove"
+  };
+
   static displayName = "Project.CoverButton";
+
+  static getDerivedStateFromProps(props, state) {
+    const view = props.selected ? "remove" : "add";
+    if (startsWith(state.view, view)) return null;
+    return { view };
+  }
 
   static propTypes = {
     selected: PropTypes.object,
@@ -18,11 +29,6 @@ export default class CoverButton extends Component {
     removeText: PropTypes.string.isRequired
   };
 
-  static defaultProps = {
-    addText: "Add",
-    removeText: "Remove"
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -30,37 +36,30 @@ export default class CoverButton extends Component {
     };
   }
 
-  static getDerivedStateFromProps(props, state) {
-    const view = props.selected ? "remove" : "add";
-    if (startsWith(state.view, view)) return null;
-    return { view };
-  }
-
   setView(view) {
     this.setState(Object.assign({}, this.state, { view }));
   }
 
+  activate = () => {
+    if (this.state.view === "add") {
+      this.setView("add-active");
+    } else if (this.state.view === "remove") {
+      this.setView("remove-active");
+    }
+  };
+
+  deactivate = () => {
+    if (this.state.view === "add-active") {
+      this.setView("add");
+    } else if (this.state.view === "remove-confirm-active") {
+      this.setView("remove");
+    } else if (this.state.view === "remove-active") {
+      this.setView("remove");
+    }
+  };
+
   handleAdd = () => {
     this.props.addHandler(this.props.project);
-  };
-
-  handleRemove = () => {
-    this.props.removeHandler(this.props.selected);
-  };
-
-  maybeRemove = () => {
-    if (this.props.confirm) return this.setView("remove-confirm-active");
-    return this.handleRemove();
-  };
-
-  toggleFollow = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    if (this.props.selected) {
-      this.handleRemove();
-    } else {
-      this.handleAdd();
-    }
   };
 
   handleClick = event => {
@@ -81,6 +80,15 @@ export default class CoverButton extends Component {
     }
   };
 
+  handleRemove = () => {
+    this.props.removeHandler(this.props.selected);
+  };
+
+  maybeRemove = () => {
+    if (this.props.confirm) return this.setView("remove-confirm-active");
+    return this.handleRemove();
+  };
+
   screenReaderButtonText() {
     switch (this.state.view) {
       case "add":
@@ -94,21 +102,13 @@ export default class CoverButton extends Component {
     }
   }
 
-  activate = () => {
-    if (this.state.view === "add") {
-      this.setView("add-active");
-    } else if (this.state.view === "remove") {
-      this.setView("remove-active");
-    }
-  };
-
-  deactivate = () => {
-    if (this.state.view === "add-active") {
-      this.setView("add");
-    } else if (this.state.view === "remove-confirm-active") {
-      this.setView("remove");
-    } else if (this.state.view === "remove-active") {
-      this.setView("remove");
+  toggleFollow = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.props.selected) {
+      this.handleRemove();
+    } else {
+      this.handleAdd();
     }
   };
 

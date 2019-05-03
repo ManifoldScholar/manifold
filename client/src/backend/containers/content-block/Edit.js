@@ -62,10 +62,6 @@ export class ContentBlockEditContainer extends Component {
     return this.props.contentBlock;
   }
 
-  get project() {
-    return this.props.project;
-  }
-
   doDelete = () => {
     const call = contentBlocksAPI.destroy(this.contentBlock.id);
     const options = {
@@ -87,6 +83,10 @@ export class ContentBlockEditContainer extends Component {
     const call = contentBlocksAPI.show(id);
     const contentBlockRequest = request(call, requests.beContentBlock);
     this.props.dispatch(contentBlockRequest);
+  }
+
+  get project() {
+    return this.props.project;
   }
 
   render() {

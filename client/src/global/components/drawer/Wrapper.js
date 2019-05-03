@@ -11,36 +11,6 @@ import classnames from "classnames";
 import { notificationActions } from "actions";
 
 export default class DrawerWrapper extends PureComponent {
-  static mapStateToProps() {
-    return {
-      connected: true
-    };
-  }
-
-  static displayName = "Drawer.Wrapper";
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    connected: PropTypes.bool.isRequired,
-    open: PropTypes.bool,
-    children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-    title: PropTypes.string,
-    icon: PropTypes.string,
-    identifier: PropTypes.string,
-    closeUrl: PropTypes.string,
-    closeCallback: PropTypes.func,
-    lockScroll: PropTypes.string,
-    lockScrollClickCloses: PropTypes.bool,
-    entrySide: PropTypes.string,
-    style: PropTypes.string,
-    history: PropTypes.object,
-    includeDrawerFrontMatter: PropTypes.bool,
-    returnFocusOnDeactivate: PropTypes.bool,
-    focusTrap: PropTypes.bool,
-    wide: PropTypes.bool,
-    extraClasses: PropTypes.string
-  };
-
   static childContextTypes = {
     pauseKeyboardEvents: PropTypes.func,
     unpauseKeyboardEvents: PropTypes.func
@@ -64,6 +34,44 @@ export default class DrawerWrapper extends PureComponent {
     focusTrap: true
   };
 
+  static displayName = "Drawer.Wrapper";
+
+  static getDerivedStateFromProps(nextProps, prevStateIgnored) {
+    if (React.Children.count(nextProps.children) <= 0) {
+      return { focusable: false };
+    }
+
+    return null;
+  }
+
+  static mapStateToProps() {
+    return {
+      connected: true
+    };
+  }
+
+  static propTypes = {
+    dispatch: PropTypes.func,
+    connected: PropTypes.bool.isRequired,
+    open: PropTypes.bool,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+    title: PropTypes.string,
+    icon: PropTypes.string,
+    identifier: PropTypes.string,
+    closeUrl: PropTypes.string,
+    closeCallback: PropTypes.func,
+    lockScroll: PropTypes.string,
+    lockScrollClickCloses: PropTypes.bool,
+    entrySide: PropTypes.string,
+    style: PropTypes.string,
+    history: PropTypes.object,
+    includeDrawerFrontMatter: PropTypes.bool,
+    returnFocusOnDeactivate: PropTypes.bool,
+    focusTrap: PropTypes.bool,
+    wide: PropTypes.bool,
+    extraClasses: PropTypes.string
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -81,14 +89,6 @@ export default class DrawerWrapper extends PureComponent {
       pauseKeyboardEvents: this.pauseKeyboardEvents,
       unpauseKeyboardEvents: this.unpauseKeyboardEvents
     };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevStateIgnored) {
-    if (React.Children.count(nextProps.children) <= 0) {
-      return { focusable: false };
-    }
-
-    return null;
   }
 
   componentDidMount() {
@@ -125,21 +125,6 @@ export default class DrawerWrapper extends PureComponent {
       this.props.dispatch(notificationActions.removeNotifications("global"));
   }
 
-  handleLeaveKey = event => {
-    if (this.state.keyboardEventsPaused) return null;
-    if (event.keyCode === 27) {
-      this.handleLeaveEvent(event);
-    }
-  };
-
-  pauseKeyboardEvents = () => {
-    this.setState({ keyboardEventsPaused: true });
-  };
-
-  unpauseKeyboardEvents = () => {
-    this.setState({ keyboardEventsPaused: false });
-  };
-
   handleLeaveEvent = event => {
     this.clearDrawerNotifications();
 
@@ -158,6 +143,58 @@ export default class DrawerWrapper extends PureComponent {
       }, 200);
     }
   };
+
+  handleLeaveKey = event => {
+    if (this.state.keyboardEventsPaused) return null;
+    if (event.keyCode === 27) {
+      this.handleLeaveEvent(event);
+    }
+  };
+
+  pauseKeyboardEvents = () => {
+    this.setState({ keyboardEventsPaused: true });
+  };
+
+  unpauseKeyboardEvents = () => {
+    this.setState({ keyboardEventsPaused: false });
+  };
+
+  renderChildren() {
+    if (!this.props.children) return null;
+    if (isString(this.props.children.type)) return this.props.children;
+    return React.cloneElement(this.props.children, {
+      closeDrawer: this.handleLeaveEvent
+    });
+  }
+
+  renderDrawer() {
+    const drawerClasses = classnames(
+      `drawer-${this.props.style}`,
+      { left: this.props.entrySide === "left" },
+      { wide: this.props.wide }
+    );
+
+    return (
+      <div key="drawer" className={drawerClasses}>
+        <FocusTrap
+          ref={this.focusTrapNode}
+          active={this.state.focusable && this.props.focusTrap}
+          focusTrapOptions={{
+            clickOutsideDeactivates: true,
+            escapeDeactivates: false,
+            returnFocusOnDeactivate: this.props.returnFocusOnDeactivate
+          }}
+        >
+          {this.renderDrawerFrontMatter(this.props)}
+          {this.props.connected && (
+            <Notifications scope="drawer" style="drawer" animate={false} />
+          )}
+          {/* Render children without props if they aren't a component */}
+          {this.renderChildren()}
+        </FocusTrap>
+      </div>
+    );
+  }
 
   renderDrawerFrontMatter(props) {
     const hasTitle = props.title || props.icon;
@@ -200,43 +237,6 @@ export default class DrawerWrapper extends PureComponent {
         )}
       </React.Fragment>
     );
-  }
-
-  renderDrawer() {
-    const drawerClasses = classnames(
-      `drawer-${this.props.style}`,
-      { left: this.props.entrySide === "left" },
-      { wide: this.props.wide }
-    );
-
-    return (
-      <div key="drawer" className={drawerClasses}>
-        <FocusTrap
-          ref={this.focusTrapNode}
-          active={this.state.focusable && this.props.focusTrap}
-          focusTrapOptions={{
-            clickOutsideDeactivates: true,
-            escapeDeactivates: false,
-            returnFocusOnDeactivate: this.props.returnFocusOnDeactivate
-          }}
-        >
-          {this.renderDrawerFrontMatter(this.props)}
-          {this.props.connected && (
-            <Notifications scope="drawer" style="drawer" animate={false} />
-          )}
-          {/* Render children without props if they aren't a component */}
-          {this.renderChildren()}
-        </FocusTrap>
-      </div>
-    );
-  }
-
-  renderChildren() {
-    if (!this.props.children) return null;
-    if (isString(this.props.children.type)) return this.props.children;
-    return React.cloneElement(this.props.children, {
-      closeDrawer: this.handleLeaveEvent
-    });
   }
 
   renderDrawerWrapper() {

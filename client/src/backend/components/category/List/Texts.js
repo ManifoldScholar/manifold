@@ -5,6 +5,10 @@ import classNames from "classnames";
 import TextsInner from "./TextsInner";
 
 export default class CategoryListTexts extends PureComponent {
+  static defaultProps = {
+    texts: []
+  };
+
   static displayName = "Category.List.Texts";
 
   static propTypes = {
@@ -14,16 +18,12 @@ export default class CategoryListTexts extends PureComponent {
     callbacks: PropTypes.object.isRequired
   };
 
-  static defaultProps = {
-    texts: []
-  };
-
-  get texts() {
-    return this.props.texts;
-  }
-
   get callbacks() {
     return this.props.callbacks;
+  }
+
+  get category() {
+    return this.props.category;
   }
 
   get categoryId() {
@@ -31,12 +31,12 @@ export default class CategoryListTexts extends PureComponent {
     return "uncategorized";
   }
 
-  get category() {
-    return this.props.category;
-  }
-
   get noTexts() {
     return this.texts.length === 0;
+  }
+
+  get texts() {
+    return this.props.texts;
   }
 
   render() {

@@ -37,11 +37,6 @@ export default class Overlay extends Component {
     }
   }
 
-  updateView = (view, event = null) => {
-    if (event) event.preventDefault();
-    this.setState(Object.assign(this.state, {}, { view }));
-  };
-
   childProps = () => {
     return {
       handleViewChange: this.updateView,
@@ -50,6 +45,11 @@ export default class Overlay extends Component {
       hideSignInUpOverlay: this.props.hideSignInUpOverlay,
       authentication: this.props.authentication
     };
+  };
+
+  updateView = (view, event = null) => {
+    if (event) event.preventDefault();
+    this.setState(Object.assign(this.state, {}, { view }));
   };
 
   renderChild() {

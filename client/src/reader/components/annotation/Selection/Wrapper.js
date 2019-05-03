@@ -16,16 +16,16 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     onLogin: PropTypes.func
   };
 
-  get viewable() {
-    return !!this.props.onViewInText;
-  }
-
   get annotatable() {
     return !!this.props.onAnnotate;
   }
 
   get canLogin() {
     return !!this.props.onLogin;
+  }
+
+  get viewable() {
+    return !!this.props.onViewInText;
   }
 
   maybeTruncateSelection() {

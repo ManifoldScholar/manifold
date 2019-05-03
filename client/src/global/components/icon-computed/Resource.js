@@ -3,15 +3,15 @@ import Utility from "global/components/utility";
 import PropTypes from "prop-types";
 
 export default class IconComputedSocial extends PureComponent {
+  static defaultProps = {
+    size: 48
+  };
+
   static displayName = "IconComputed.Resource";
 
   static propTypes = {
     icon: PropTypes.string.isRequired,
     svgProps: PropTypes.object
-  };
-
-  static defaultProps = {
-    size: 48
   };
 
   iconMap(safeKind) {

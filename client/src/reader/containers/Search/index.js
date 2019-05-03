@@ -40,14 +40,14 @@ class SearchContainer extends PureComponent {
     return this.props.text.relationships.project.id;
   }
 
-  get textId() {
-    if (!this.props.text) return null;
-    return this.props.text.id;
-  }
-
   get sectionId() {
     if (!this.props.section) return null;
     return this.props.section.id;
+  }
+
+  get textId() {
+    if (!this.props.text) return null;
+    return this.props.text.id;
   }
 
   close = () => {

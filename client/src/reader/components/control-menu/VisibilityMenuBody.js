@@ -36,22 +36,6 @@ export default class VisibilityMenuBody extends PureComponent {
     }
   };
 
-  renderCheckboxGroup(format, filterState) {
-    const label = `${capitalize(format)}s`;
-
-    return (
-      <li key={`visibility-${format}`}>
-        <i className={this.iconClasses(format)} aria-hidden="true" />
-        <span>{label}</span>
-        <div className="filters">
-          {Object.keys(filterState).map((key, index) => {
-            return this.renderCheckbox(key, filterState, format, index);
-          })}
-        </div>
-      </li>
-    );
-  }
-
   renderCheckbox(key, filterState, format, index) {
     let label = capitalize(key);
     const checkboxId = format + "-checkbox-" + index;
@@ -70,6 +54,22 @@ export default class VisibilityMenuBody extends PureComponent {
         </div>
         {label}
       </label>
+    );
+  }
+
+  renderCheckboxGroup(format, filterState) {
+    const label = `${capitalize(format)}s`;
+
+    return (
+      <li key={`visibility-${format}`}>
+        <i className={this.iconClasses(format)} aria-hidden="true" />
+        <span>{label}</span>
+        <div className="filters">
+          {Object.keys(filterState).map((key, index) => {
+            return this.renderCheckbox(key, filterState, format, index);
+          })}
+        </div>
+      </li>
     );
   }
 

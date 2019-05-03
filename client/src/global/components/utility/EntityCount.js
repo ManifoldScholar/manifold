@@ -2,6 +2,10 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 export default class EntityCount extends PureComponent {
+  static defaultProps = {
+    countOnly: false
+  };
+
   static propTypes = {
     pagination: PropTypes.shape({
       currentPage: PropTypes.number.isRequired,
@@ -13,9 +17,14 @@ export default class EntityCount extends PureComponent {
     countOnly: PropTypes.bool
   };
 
-  static defaultProps = {
-    countOnly: false
-  };
+  renderCount(totalCount, label) {
+    return (
+      <p className="list-total">
+        <span>{totalCount}</span>
+        {` ${label}`}
+      </p>
+    );
+  }
 
   renderRange(start, end, totalCount, label) {
     return (
@@ -25,15 +34,6 @@ export default class EntityCount extends PureComponent {
         {" of "}
         <span>{totalCount}</span>
         {label && ` ${label}: `}
-      </p>
-    );
-  }
-
-  renderCount(totalCount, label) {
-    return (
-      <p className="list-total">
-        <span>{totalCount}</span>
-        {` ${label}`}
       </p>
     );
   }

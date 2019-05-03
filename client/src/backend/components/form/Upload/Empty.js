@@ -2,15 +2,15 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 export default class FormUploadEmpty extends PureComponent {
+  static defaultProps = {
+    placeholder: "cover"
+  };
+
   static propTypes = {
     accepts: PropTypes.object,
     placeholder: PropTypes.string,
     progress: PropTypes.string,
     uploadError: PropTypes.string
-  };
-
-  static defaultProps = {
-    placeholder: "cover"
   };
 
   get extensions() {

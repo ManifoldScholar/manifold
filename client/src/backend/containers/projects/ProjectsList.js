@@ -59,12 +59,6 @@ class ProjectsListContainerImplementation extends PureComponent {
     this.props.dispatch(flush(requests.beProjects));
   }
 
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
-
   fetchProjects(page = 1, doNotSnapshot = false) {
     const listKey = "projectsList";
     const filters = this.filterParams();
@@ -85,6 +79,12 @@ class ProjectsListContainerImplementation extends PureComponent {
     if (currentUser.attributes.abilities.viewDrafts) return out;
     out.withUpdateAbility = true;
     return out;
+  }
+
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
   }
 
   updateHandlerCreator = page => {

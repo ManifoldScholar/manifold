@@ -11,11 +11,6 @@ export default class Notification extends Component {
     removeNotification: PropTypes.func
   };
 
-  // Close notification in handler in case event access is required
-  handleClose = () => {
-    this.props.removeNotification(this.props.id);
-  };
-
   bodyCopy() {
     let output = null;
     if (this.props.body) {
@@ -28,6 +23,11 @@ export default class Notification extends Component {
 
     return output;
   }
+
+  // Close notification in handler in case event access is required
+  handleClose = () => {
+    this.props.removeNotification(this.props.id);
+  };
 
   render() {
     const notificationClass = classNames({

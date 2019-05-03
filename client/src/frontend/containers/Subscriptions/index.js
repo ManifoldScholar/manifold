@@ -26,15 +26,6 @@ export class SubscriptionsContainer extends Component {
     this.state = this.initialState(props);
   }
 
-  initialState(props) {
-    const currentUser = props.authentication.currentUser;
-    if (!currentUser) return { notificationPreferencesByKind: {} };
-    return {
-      notificationPreferencesByKind:
-        currentUser.attributes.notificationPreferences
-    };
-  }
-
   handlePreferenceChange = event => {
     const notifications = Object.assign(
       {},
@@ -59,6 +50,15 @@ export class SubscriptionsContainer extends Component {
 
     this.setState({ notificationPreferencesByKind: notifications });
   };
+
+  initialState(props) {
+    const currentUser = props.authentication.currentUser;
+    if (!currentUser) return { notificationPreferencesByKind: {} };
+    return {
+      notificationPreferencesByKind:
+        currentUser.attributes.notificationPreferences
+    };
+  }
 
   unsubscribeAll = event => {
     event.preventDefault();

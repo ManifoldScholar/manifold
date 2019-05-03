@@ -6,15 +6,15 @@ import throttle from "lodash/throttle";
 import labelId from "helpers/labelId";
 
 export default class ResourcePlayerAudio extends Component {
+  static defaultProps = {
+    progressBarId: labelId("progress-bar-"),
+    volumeBarId: labelId("volume-bar-")
+  };
+
   static propTypes = {
     resource: PropTypes.object,
     progressBarId: PropTypes.string,
     volumeBarId: PropTypes.string
-  };
-
-  static defaultProps = {
-    progressBarId: labelId("progress-bar-"),
-    volumeBarId: labelId("volume-bar-")
   };
 
   constructor() {
@@ -49,15 +49,6 @@ export default class ResourcePlayerAudio extends Component {
     window.removeEventListener("resize", this.debouncedResize);
   }
 
-  setVolume = event => {
-    event.preventDefault();
-    const volume = parseInt(event.target.value, 10);
-    this.setState({ volume, muted: false }, () => {
-      this.audio.setMute(false);
-      this.audio.setVolume(volume / 100);
-    });
-  };
-
   setReady = () => {
     const duration = this.audio.getDuration();
     this.setState({
@@ -67,21 +58,42 @@ export default class ResourcePlayerAudio extends Component {
     });
   };
 
-  togglePlayback = event => {
+  setVolume = event => {
     event.preventDefault();
-    this.setState({ playing: !this.audio.isPlaying() }, () =>
-      this.audio.playPause()
-    );
+    const volume = parseInt(event.target.value, 10);
+    this.setState({ volume, muted: false }, () => {
+      this.audio.setMute(false);
+      this.audio.setVolume(volume / 100);
+    });
   };
 
-  toggleMute = event => {
-    event.preventDefault();
-    const muted = !this.audio.getMute();
-    this.setState({ muted }, () => this.audio.toggleMute());
+  calcTime = time => {
+    const min = Math.floor(time / 60);
+    let sec = Math.round(time - min * 60);
+    if (sec < 10) sec = `0${sec}`;
+    return `${min}:${sec}`;
   };
 
-  resizeWaveform = () => {
-    this.audio.drawBuffer();
+  handleError = error => {
+    const message = `${error}.<br/>This audio file is not playable in your browser.<br/><br/>Click the download button to listen to the file on your device.`;
+    this.setState({ error: message });
+  };
+
+  handlePlayback = currentTime => {
+    const progress = currentTime / this.state.duration;
+    this.updateProgress(progress);
+    this.throttleUpdateTime();
+  };
+
+  handleProgressClick = event => {
+    const current = (event.target.value / 100) * this.state.duration;
+    const progress = current / this.state.duration;
+    this.audio.seekTo(progress);
+  };
+
+  handleSeek = progress => {
+    this.updateProgress(progress);
+    this.updateTime();
   };
 
   initializeWaveform(resource) {
@@ -116,33 +128,27 @@ export default class ResourcePlayerAudio extends Component {
     this.audio.load(resource.attributes.attachmentStyles.original);
   }
 
-  calcTime = time => {
-    const min = Math.floor(time / 60);
-    let sec = Math.round(time - min * 60);
-    if (sec < 10) sec = `0${sec}`;
-    return `${min}:${sec}`;
+  resizeWaveform = () => {
+    this.audio.drawBuffer();
   };
 
-  handlePlayback = currentTime => {
-    const progress = currentTime / this.state.duration;
-    this.updateProgress(progress);
-    this.throttleUpdateTime();
+  startPlayback = event => {
+    event.preventDefault();
+    if (!this.state.ready) return null;
+    this.setState({ started: true, playing: true }, () => this.audio.play());
   };
 
-  handleSeek = progress => {
-    this.updateProgress(progress);
-    this.updateTime();
+  toggleMute = event => {
+    event.preventDefault();
+    const muted = !this.audio.getMute();
+    this.setState({ muted }, () => this.audio.toggleMute());
   };
 
-  handleProgressClick = event => {
-    const current = (event.target.value / 100) * this.state.duration;
-    const progress = current / this.state.duration;
-    this.audio.seekTo(progress);
-  };
-
-  handleError = error => {
-    const message = `${error}.<br/>This audio file is not playable in your browser.<br/><br/>Click the download button to listen to the file on your device.`;
-    this.setState({ error: message });
+  togglePlayback = event => {
+    event.preventDefault();
+    this.setState({ playing: !this.audio.isPlaying() }, () =>
+      this.audio.playPause()
+    );
   };
 
   updateProgress = progress => {
@@ -156,12 +162,6 @@ export default class ResourcePlayerAudio extends Component {
     this.setState({
       currentTime: this.calcTime(this.audio.getCurrentTime())
     });
-  };
-
-  startPlayback = event => {
-    event.preventDefault();
-    if (!this.state.ready) return null;
-    this.setState({ started: true, playing: true }, () => this.audio.play());
   };
 
   renderError() {

@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 
 export default class EntityThumbnailPage extends PureComponent {
+  static defaultProps = {
+    attributes: {}
+  };
+
   static displayName = "EntityThumbnail.TwitterQuery";
 
   static propTypes = {
@@ -10,10 +14,6 @@ export default class EntityThumbnailPage extends PureComponent {
     width: PropTypes.string,
     height: PropTypes.string,
     className: PropTypes.string
-  };
-
-  static defaultProps = {
-    attributes: {}
   };
 
   get icon() {

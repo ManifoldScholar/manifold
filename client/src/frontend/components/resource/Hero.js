@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import ResourceSlide from "frontend/components/resource-slide";
 
 export default class ResourceHero extends Component {
+  static defaultProps = {
+    slideOptions: {}
+  };
+
   static displayName = "Resource.Hero";
 
   static propTypes = {
     resource: PropTypes.object,
     slideOptions: PropTypes.object
-  };
-
-  static defaultProps = {
-    slideOptions: {}
   };
 
   getFigureByType = resource => {

@@ -6,6 +6,10 @@ import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-
 import Query from "../query";
 
 export class SearchMenuBody extends PureComponent {
+  static defaultProps = {
+    toggleVisibility: () => {}
+  };
+
   static propTypes = {
     toggleVisibility: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
@@ -22,18 +26,8 @@ export class SearchMenuBody extends PureComponent {
     sectionId: PropTypes.string
   };
 
-  static defaultProps = {
-    toggleVisibility: () => {}
-  };
-
   setQueryState = queryParams => {
     this.setState(queryParams, this.doSearch);
-  };
-
-  doSearch = () => {
-    if (this.props.searchType === "reader") return this.doReaderSearch();
-    if (this.props.onSubmit) this.props.onSubmit();
-    return this.doFrontendSearch();
   };
 
   doFrontendSearch = () => {
@@ -57,6 +51,12 @@ export class SearchMenuBody extends PureComponent {
         noScroll: true
       });
     }, 250);
+  };
+
+  doSearch = () => {
+    if (this.props.searchType === "reader") return this.doReaderSearch();
+    if (this.props.onSubmit) this.props.onSubmit();
+    return this.doFrontendSearch();
   };
 
   render() {

@@ -10,6 +10,10 @@ import lh from "helpers/linkHandler";
 import Authorize from "hoc/authorize";
 
 export class NavigationStatic extends PureComponent {
+  static defaultProps = {
+    exact: false
+  };
+
   static displayName = "Navigation.Static";
 
   static propTypes = {
@@ -23,10 +27,6 @@ export class NavigationStatic extends PureComponent {
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
     exact: PropTypes.bool,
     style: PropTypes.object
-  };
-
-  static defaultProps = {
-    exact: false
   };
 
   pathForLink(link) {
@@ -60,17 +60,6 @@ export class NavigationStatic extends PureComponent {
     );
   }
 
-  renderStaticItem(link, index) {
-    if (link.hideInNav) return null;
-    return (
-      <li key={`${link.label}-${index}`}>
-        {link.route
-          ? this.renderManifoldLink(link)
-          : this.renderExternalLink(link)}
-      </li>
-    );
-  }
-
   renderSearch(props) {
     if (props.mode === "backend") return null;
 
@@ -93,6 +82,17 @@ export class NavigationStatic extends PureComponent {
           description="Search across all content and projects"
           hidePanel={this.props.commonActions.hideSearchPanel}
         />
+      </li>
+    );
+  }
+
+  renderStaticItem(link, index) {
+    if (link.hideInNav) return null;
+    return (
+      <li key={`${link.label}-${index}`}>
+        {link.route
+          ? this.renderManifoldLink(link)
+          : this.renderExternalLink(link)}
       </li>
     );
   }

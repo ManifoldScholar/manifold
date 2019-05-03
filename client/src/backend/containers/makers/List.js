@@ -20,14 +20,14 @@ const { request } = entityStoreActions;
 const perPage = 10;
 
 class MakersListContainerImplementation extends PureComponent {
+  static displayName = "Makers.List";
+
   static mapStateToProps = state => {
     return {
       makers: select(requests.beMakers, state.entityStore),
       makersMeta: meta(requests.beMakers, state.entityStore)
     };
   };
-
-  static displayName = "Makers.List";
 
   static propTypes = {
     makers: PropTypes.array,
@@ -58,19 +58,6 @@ class MakersListContainerImplementation extends PureComponent {
       return this.fetchMakers(this.lastFetchedPage);
   }
 
-  makerWasModified(prevProps) {
-    const currentModified = get(this.props, "makersMeta.modified");
-    const previousModified = get(prevProps, "makersMeta.modified");
-    if (!currentModified) return false;
-    return !(currentModified && previousModified);
-  }
-
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
-
   fetchMakers = (page = 1) => {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
@@ -82,8 +69,21 @@ class MakersListContainerImplementation extends PureComponent {
     this.props.dispatch(action);
   };
 
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
+  }
+
   handlePageChange(event, page) {
     this.fetchMakers(page);
+  }
+
+  makerWasModified(prevProps) {
+    const currentModified = get(this.props, "makersMeta.modified");
+    const previousModified = get(prevProps, "makersMeta.modified");
+    if (!currentModified) return false;
+    return !(currentModified && previousModified);
   }
 
   pageChangeHandlerCreator = page => {

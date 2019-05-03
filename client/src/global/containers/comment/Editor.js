@@ -15,12 +15,18 @@ import GlobalForm from "global/components/form";
 import Authorize from "hoc/authorize";
 
 export class CommentEditor extends PureComponent {
+  static defaultProps = {
+    focus: true,
+    id: labelId("comment-textarea-"),
+    idForError: labelId("comment-textarea-error-")
+  };
+
+  static displayName = "Comment.Editor";
+
   static mapStateToProps = (state, ownProps) => {
     const newState = {};
     return Object.assign({}, newState, ownProps);
   };
-
-  static displayName = "Comment.Editor";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -37,12 +43,6 @@ export class CommentEditor extends PureComponent {
     idForError: PropTypes.string
   };
 
-  static defaultProps = {
-    focus: true,
-    id: labelId("comment-textarea-"),
-    idForError: labelId("comment-textarea-error-")
-  };
-
   constructor(props) {
     super(props);
     this.state = this.initialState(props);
@@ -53,14 +53,6 @@ export class CommentEditor extends PureComponent {
     if (this.props.focus) {
       this.ci.focus();
     }
-  }
-
-  initialState(props) {
-    const body = this.isEdit(props) ? props.comment.attributes.body : "";
-    return {
-      body,
-      errors: []
-    };
   }
 
   submitOnReturnKey = event => {
@@ -78,31 +70,13 @@ export class CommentEditor extends PureComponent {
     return this.createComment(this.props, this.state);
   };
 
-  createComment(props, state) {
-    const comment = this.commentFromPropsAndState(props, state);
-    const call = commentsAPI.create(props.subject, comment);
-    const options = { adds: `comments-for-${props.subject.id}` };
-    const createRequest = request(call, requests.rCommentCreate, options);
-    this.processRequest(createRequest);
-  }
+  handleBodyChange = event => {
+    this.setState({ body: event.target.value });
+  };
 
-  updateComment(props, state) {
-    const comment = this.commentFromPropsAndState(props, state);
-    const call = commentsAPI.update(props.comment.id, comment);
-    const options = { adds: `comments-for-${props.subject.id}` };
-    const updateRequest = request(call, requests.rCommentCreate, options);
-    this.processRequest(updateRequest);
-  }
-
-  processRequest(apiRequest) {
-    this.props.dispatch(apiRequest).promise.then(
-      () => {
-        this.handleSuccess();
-      },
-      response => {
-        this.handleErrors(response.body.errors);
-      }
-    );
+  buttonLabel(props) {
+    if (this.isEdit(props)) return "Update";
+    return "Post";
   }
 
   commentFromPropsAndState(props, state) {
@@ -112,18 +86,34 @@ export class CommentEditor extends PureComponent {
     };
   }
 
-  handleSuccess() {
-    this.setState(this.initialState(this.props));
-    this.props.cancel();
+  createComment(props, state) {
+    const comment = this.commentFromPropsAndState(props, state);
+    const call = commentsAPI.create(props.subject, comment);
+    const options = { adds: `comments-for-${props.subject.id}` };
+    const createRequest = request(call, requests.rCommentCreate, options);
+    this.processRequest(createRequest);
   }
 
   handleErrors(errors) {
     this.setState({ errors });
   }
 
-  handleBodyChange = event => {
-    this.setState({ body: event.target.value });
-  };
+  handleSuccess() {
+    this.setState(this.initialState(this.props));
+    this.props.cancel();
+  }
+
+  initialState(props) {
+    const body = this.isEdit(props) ? props.comment.attributes.body : "";
+    return {
+      body,
+      errors: []
+    };
+  }
+
+  isComment(props) {
+    return this.mode(props) === "comment";
+  }
 
   isEdit(props) {
     return this.mode(props) === "edit";
@@ -131,10 +121,6 @@ export class CommentEditor extends PureComponent {
 
   isReply(props) {
     return this.mode(props) === "reply";
-  }
-
-  isComment(props) {
-    return this.mode(props) === "comment";
   }
 
   mode(props) {
@@ -152,9 +138,23 @@ export class CommentEditor extends PureComponent {
     }
   }
 
-  buttonLabel(props) {
-    if (this.isEdit(props)) return "Update";
-    return "Post";
+  processRequest(apiRequest) {
+    this.props.dispatch(apiRequest).promise.then(
+      () => {
+        this.handleSuccess();
+      },
+      response => {
+        this.handleErrors(response.body.errors);
+      }
+    );
+  }
+
+  updateComment(props, state) {
+    const comment = this.commentFromPropsAndState(props, state);
+    const call = commentsAPI.update(props.comment.id, comment);
+    const options = { adds: `comments-for-${props.subject.id}` };
+    const updateRequest = request(call, requests.rCommentCreate, options);
+    this.processRequest(updateRequest);
   }
 
   render() {

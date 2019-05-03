@@ -6,6 +6,11 @@ import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 
 export default class FatalError extends PureComponent {
+  static defaultProps = {
+    headerLineOne: "We're at a bit of a loose end.",
+    headerLineTwo: "Frightfully sorry."
+  };
+
   static propTypes = {
     fatalError: PropTypes.shape({
       error: PropTypes.object,
@@ -15,16 +20,6 @@ export default class FatalError extends PureComponent {
     headerLineTwo: PropTypes.string.isRequired,
     dismiss: PropTypes.func
   };
-
-  static defaultProps = {
-    headerLineOne: "We're at a bit of a loose end.",
-    headerLineTwo: "Frightfully sorry."
-  };
-
-  get error() {
-    const { error } = this.props.fatalError;
-    return error;
-  }
 
   get apiTrace() {
     if (!this.error || !this.error.apiTrace) return null;
@@ -39,6 +34,11 @@ export default class FatalError extends PureComponent {
   get clientTraceTruncate() {
     if (!this.error || !this.error.clientTraceTruncate) return null;
     return this.error.clientTraceTruncate;
+  }
+
+  get error() {
+    const { error } = this.props.fatalError;
+    return error;
   }
 
   render() {

@@ -50,14 +50,14 @@ export class ResourceImportMap extends PureComponent {
     return this.props.create(this.preSave(model));
   };
 
-  update = (id, model) => {
-    return this.props.update(id, this.preSave(model));
-  };
-
   /* eslint-disable no-param-reassign */
   preSave = model => {
     model.attributes.state = "mapped";
     return model;
+  };
+
+  update = (id, model) => {
+    return this.props.update(id, this.preSave(model));
   };
   /* eslint-enable no-param-reassign */
 

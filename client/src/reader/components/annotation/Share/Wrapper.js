@@ -4,6 +4,10 @@ import Citation from "./Citation";
 import Selection from "../Selection";
 
 export default class AnnotationShareWrapper extends PureComponent {
+  static defaultProps = {
+    closeOnSave: true
+  };
+
   static displayName = "Annotation.Share.Wrapper";
 
   static propTypes = {
@@ -11,10 +15,6 @@ export default class AnnotationShareWrapper extends PureComponent {
     closeDrawer: PropTypes.func,
     truncate: PropTypes.number,
     shareType: PropTypes.string
-  };
-
-  static defaultProps = {
-    closeOnSave: true
   };
 
   maybeTruncateSelection() {

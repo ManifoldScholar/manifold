@@ -8,6 +8,13 @@ import { fatalErrorActions, notificationActions } from "actions";
 import Authorization from "helpers/authorization";
 
 export class AuthorizeComponent extends PureComponent {
+  static defaultProps = {
+    successBehavior: "show",
+    failureRedirect: null,
+    failureNotification: null,
+    failureFatalError: null
+  };
+
   static mapStateToProps = state => {
     return {
       authentication: state.authentication
@@ -43,13 +50,6 @@ export class AuthorizeComponent extends PureComponent {
     authentication: PropTypes.object
   };
 
-  static defaultProps = {
-    successBehavior: "show",
-    failureRedirect: null,
-    failureNotification: null,
-    failureFatalError: null
-  };
-
   constructor(props) {
     super(props);
     this.state = { redirect: false };
@@ -64,16 +64,6 @@ export class AuthorizeComponent extends PureComponent {
 
   componentDidUpdate() {
     if (this.maybeRedirect(this.props)) this.setState({ redirect: true });
-  }
-
-  maybeRedirect(props) {
-    if (!isString(props.failureRedirect)) return false;
-    if (props.failureFatalError) return false;
-    return !this.authorization.authorize(props);
-  }
-
-  successBehavior(props) {
-    return props.successBehavior;
   }
 
   maybeError(props) {
@@ -106,6 +96,16 @@ export class AuthorizeComponent extends PureComponent {
       }
       props.dispatch(notificationActions.addNotification(error));
     }
+  }
+
+  maybeRedirect(props) {
+    if (!isString(props.failureRedirect)) return false;
+    if (props.failureFatalError) return false;
+    return !this.authorization.authorize(props);
+  }
+
+  successBehavior(props) {
+    return props.successBehavior;
   }
 
   renderHide(props) {

@@ -5,6 +5,14 @@ import labelId from "helpers/labelId";
 import BaseInput from "./BaseInput";
 
 export default class FormTextInput extends Component {
+  static defaultProps = {
+    focusOnMount: false,
+    password: false,
+    join: array => array.join(", "),
+    id: labelId("text-input-"),
+    idForError: labelId("text-input-error-")
+  };
+
   static displayName = "Form.TextInput";
 
   static propTypes = {
@@ -22,14 +30,6 @@ export default class FormTextInput extends Component {
     id: PropTypes.string,
     idForError: PropTypes.string,
     wide: PropTypes.bool
-  };
-
-  static defaultProps = {
-    focusOnMount: false,
-    password: false,
-    join: array => array.join(", "),
-    id: labelId("text-input-"),
-    idForError: labelId("text-input-error-")
   };
 
   renderValue = value => {

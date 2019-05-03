@@ -15,6 +15,12 @@ import Navigation from "backend/components/navigation";
 const { request, flush } = entityStoreActions;
 
 export class UsersEditContainer extends PureComponent {
+  static defaultProps = {
+    confirm: (heading, message, callback) => callback()
+  };
+
+  static displayName = "Users.Edit";
+
   static mapStateToProps = state => {
     return {
       user: select(requests.beUser, state.entityStore),
@@ -25,18 +31,12 @@ export class UsersEditContainer extends PureComponent {
     };
   };
 
-  static displayName = "Users.Edit";
-
   static propTypes = {
     match: PropTypes.object,
     confirm: PropTypes.func.isRequired,
     dispatch: PropTypes.func,
     user: PropTypes.object,
     history: PropTypes.object
-  };
-
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
   };
 
   constructor(props) {
@@ -60,21 +60,9 @@ export class UsersEditContainer extends PureComponent {
     this.props.dispatch(flush([requests.beUserUpdate, requests.beMakerCreate]));
   }
 
-  get user() {
-    return this.props.user;
+  closeResetDialog() {
+    this.setState({ resetPassword: null });
   }
-
-  fetchUser(id) {
-    const call = usersAPI.show(id);
-    const userRequest = request(call, requests.beUser);
-    this.props.dispatch(userRequest);
-  }
-
-  handleUserDestroy = () => {
-    const heading = "Are you sure you want to delete this user?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, this.destroyUser);
-  };
 
   destroyUser = () => {
     const { user } = this;
@@ -86,23 +74,10 @@ export class UsersEditContainer extends PureComponent {
     });
   };
 
-  unsubscribeUser = () => {
-    const heading = "Are you sure?";
-    const message =
-      "This user will be unsubscribed from all Manifold email notifications.";
-    this.props.confirm(heading, message, () => {
-      const adjustedUser = Object.assign({}, this.user);
-      adjustedUser.attributes.unsubscribe = true;
-
-      const call = usersAPI.update(this.user.id, adjustedUser);
-      const options = { notificationScope: "drawer" };
-      const userRequest = request(call, requests.beUserUpdate, options);
-      return this.props.dispatch(userRequest);
-    });
-  };
-
-  closeResetDialog() {
-    this.setState({ resetPassword: null });
+  fetchUser(id) {
+    const call = usersAPI.show(id);
+    const userRequest = request(call, requests.beUser);
+    this.props.dispatch(userRequest);
   }
 
   handleResetPasswordClick = () => {
@@ -122,6 +97,31 @@ export class UsersEditContainer extends PureComponent {
       }
     );
   };
+
+  handleUserDestroy = () => {
+    const heading = "Are you sure you want to delete this user?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, this.destroyUser);
+  };
+
+  unsubscribeUser = () => {
+    const heading = "Are you sure?";
+    const message =
+      "This user will be unsubscribed from all Manifold email notifications.";
+    this.props.confirm(heading, message, () => {
+      const adjustedUser = Object.assign({}, this.user);
+      adjustedUser.attributes.unsubscribe = true;
+
+      const call = usersAPI.update(this.user.id, adjustedUser);
+      const options = { notificationScope: "drawer" };
+      const userRequest = request(call, requests.beUserUpdate, options);
+      return this.props.dispatch(userRequest);
+    });
+  };
+
+  get user() {
+    return this.props.user;
+  }
 
   render() {
     if (!this.user) return null;

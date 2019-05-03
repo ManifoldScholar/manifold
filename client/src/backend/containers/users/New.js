@@ -19,11 +19,6 @@ export class UsersNewContainer extends PureComponent {
     this.defaultUser = { attributes: { role: "reader" } };
   }
 
-  redirectToUser(user) {
-    const path = lh.link("backendRecordsUser", user.id);
-    this.props.history.push(path, { keepNotifications: true });
-  }
-
   createUser(user) {
     const meta = { createdByAdmin: true };
     return usersAPI.create(Object.assign({}, user, { meta }));
@@ -32,6 +27,11 @@ export class UsersNewContainer extends PureComponent {
   handleSuccess = user => {
     this.redirectToUser(user);
   };
+
+  redirectToUser(user) {
+    const path = lh.link("backendRecordsUser", user.id);
+    this.props.history.push(path, { keepNotifications: true });
+  }
 
   render() {
     return (
