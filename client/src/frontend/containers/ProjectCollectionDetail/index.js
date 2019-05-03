@@ -99,10 +99,12 @@ export class ProjectCollectionDetailContainer extends Component {
   };
 
   handlePageChange = pageParam => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: pageParam
-    });
-    this.setState({ pagination }, this.updateResults);
+    this.setState(function(prevState) {
+      const pagination = Object.assign({}, prevState.pagination, {
+        number: pageParam
+      });
+      return { pagination };
+    }, this.updateResults);
   };
 
   pageChangeHandlerCreator = pageParam => {

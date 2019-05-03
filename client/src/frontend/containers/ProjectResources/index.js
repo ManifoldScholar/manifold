@@ -80,17 +80,21 @@ class ProjectResourcesContainer extends Component {
   }
 
   filterChange = filter => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: page
-    });
-    this.setState({ filter, pagination }, this.doUpdate);
+    this.setState(function(prevState) {
+      const pagination = Object.assign({}, prevState.pagination, {
+        number: page
+      });
+      return { filter, pagination };
+    }, this.doUpdate);
   };
 
   handlePageChange = pageParam => {
-    const pagination = Object.assign({}, this.state.pagination, {
-      number: pageParam
-    });
-    this.setState({ pagination }, this.doUpdate);
+    this.setState(function(prevState) {
+      const pagination = Object.assign({}, prevState.pagination, {
+        number: pageParam
+      });
+      return { pagination };
+    }, this.doUpdate);
   };
 
   pageChangeHandlerCreator = pageParam => {

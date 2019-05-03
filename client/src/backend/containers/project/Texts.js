@@ -125,9 +125,11 @@ export class ProjectTextsContainer extends Component {
   };
 
   updateCategoryPositionInternal(category, position) {
-    const categories = this.state.categories.filter(c => c.id !== category.id);
-    categories.splice(position - 1, 0, category);
-    this.setState({ categories });
+    this.setState(function(prevState) {
+      const categories = prevState.categories.filter(c => c.id !== category.id);
+      categories.splice(position - 1, 0, category);
+      return { categories };
+    });
   }
 
   destroyText(text) {
@@ -155,12 +157,14 @@ export class ProjectTextsContainer extends Component {
   }
 
   updateTextCategoryAndPositionInternal(text, category, changes) {
-    const texts = this.state.texts.filter(t => t.id !== text.id);
-    const clone = cloneDeep(this.state.texts.find(t => t.id === text.id));
-    clone.attributes = Object.assign(clone.attributes, changes.attributes);
-    clone.relationships.category = changes.relationships.category.data;
-    texts.splice(clone.attributes.position - 1, 0, clone);
-    this.setState({ texts });
+    this.setState(function(prevState) {
+      const texts = prevState.texts.filter(t => t.id !== text.id);
+      const clone = cloneDeep(prevState.texts.find(t => t.id === text.id));
+      clone.attributes = Object.assign(clone.attributes, changes.attributes);
+      clone.relationships.category = changes.relationships.category.data;
+      texts.splice(clone.attributes.position - 1, 0, clone);
+      return { texts };
+    });
   }
 
   render() {

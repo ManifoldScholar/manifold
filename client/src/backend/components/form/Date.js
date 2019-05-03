@@ -73,25 +73,31 @@ class FormDate extends Component {
   /* eslint-enable react/no-did-update-set-state */
 
   setInputDay = event => {
-    const input = Object.assign({}, this.state.input);
-    input.day = event.target.value;
-    this.setState({ input });
+    this.setState(function(prevState) {
+      const input = Object.assign({}, prevState.input);
+      input.day = event.target.value;
+      return { input };
+    });
   };
 
   setInputMonth = event => {
-    const input = Object.assign({}, this.state.input);
-    input.month = event.target.value;
-    const max = this.maxDayForMonthAndYear(input.month, input.year);
-    input.day = input.day > max ? max : input.day;
-    this.setState({ input });
+    this.setState(function(prevState) {
+      const input = Object.assign({}, prevState.input);
+      input.month = event.target.value;
+      const max = this.maxDayForMonthAndYear(input.month, input.year);
+      input.day = input.day > max ? max : input.day;
+      return { input };
+    });
   };
 
   setInputYear = event => {
-    const input = Object.assign({}, this.state.input);
-    input.year = event.target.value;
-    const max = this.maxDayForMonthAndYear(input.month, input.year);
-    input.day = input.day > max ? max : input.day;
-    this.setState({ input });
+    this.setState(function(prevState) {
+      const input = Object.assign({}, prevState.input);
+      input.year = event.target.value;
+      const max = this.maxDayForMonthAndYear(input.month, input.year);
+      input.day = input.day > max ? max : input.day;
+      return { input };
+    });
   };
 
   broadcastValue() {
