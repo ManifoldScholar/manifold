@@ -101,6 +101,7 @@ export class ReaderNotesContainer extends Component {
     return history.push(url);
   };
 
+  /* eslint-disable react/no-access-state-in-setstate */
   handleFilterChange = (key, filters) => {
     const filter = Object.assign({}, this.state.filter);
     filter[key] = filters;

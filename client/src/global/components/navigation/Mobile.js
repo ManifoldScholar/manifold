@@ -104,6 +104,7 @@ export class NavigationMobile extends Component {
     return active;
   }
 
+  /* eslint-disable react/no-access-state-in-setstate */
   collapse(key) {
     if (!this.state.expanded.includes(key)) return;
     const expanded = this.state.expanded.slice(0);

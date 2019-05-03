@@ -68,6 +68,7 @@ export class NotationPickerContainerImplementation extends PureComponent {
     return () => this.fetchContext(page);
   };
 
+  /* eslint-disable react/no-access-state-in-setstate */
   handleContextClick = () => {
     const { onReset } = this.props.entitiesListSearchProps("notations");
     const context =

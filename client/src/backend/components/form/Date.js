@@ -59,6 +59,7 @@ class FormDate extends Component {
   }
 
   /* eslint-disable react/no-did-update-set-state */
+  /* eslint-disable react/no-access-state-in-setstate */
   componentDidUpdate(prevProps, prevState) {
     if (this.validateFormSubmit(prevProps)) {
       this.updateStateFromPropValue(this.props.value);
@@ -71,6 +72,7 @@ class FormDate extends Component {
     }
   }
   /* eslint-enable react/no-did-update-set-state */
+  /* eslint-enable react/no-access-state-in-setstate */
 
   setInputDay = event => {
     this.setState(function(prevState) {

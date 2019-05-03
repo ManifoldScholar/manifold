@@ -69,6 +69,7 @@ export default class FormHigherOrderValidation extends Component {
     };
   }
 
+  /* eslint-disable react/no-access-state-in-setstate */
   removeError(key) {
     const errors = Object.assign({}, this.state.errors);
     delete errors[key];

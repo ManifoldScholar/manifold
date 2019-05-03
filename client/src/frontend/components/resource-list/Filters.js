@@ -33,6 +33,7 @@ export default class ResourceListFilters extends Component {
     this.state = this.initialState(props.initialFilterState);
   }
 
+  /* eslint-disable react/no-access-state-in-setstate */
   setFilters = (event, label) => {
     event.preventDefault();
     const value = event.target.value;

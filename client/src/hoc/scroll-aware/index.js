@@ -70,6 +70,7 @@ export default class ScrollAware extends Component {
     return scrollTop;
   }
 
+  /* eslint-disable react/no-access-state-in-setstate */
   handleScroll() {
     const top = this.getScrollTop() < this.props.threshold;
     const direction = this.getScrollTop() > this.state.scroll ? "down" : "up";
