@@ -227,7 +227,7 @@ export default class EntitiesListRow extends PureComponent {
       "entity-row__row-link--is-active": this.active
     });
     return (
-      <button className={className} onClick={onClick}>
+      <button className={className} onClick={onClick} type="button">
         {child}
       </button>
     );

@@ -71,6 +71,7 @@ export default class Overlay extends Component {
           onClick={this.handleCloseEvent}
           className="overlay-close"
           data-id="overlay-close"
+          type="button"
         >
           Close
           <i className="manicon manicon-x" aria-hidden="true" />
@@ -111,6 +112,7 @@ export default class Overlay extends Component {
                 onClick={this.handleCloseEvent}
                 className="overlay-close"
                 data-id="overlay-close"
+                type="button"
               >
                 Close
                 <i className="manicon manicon-x" aria-hidden="true" />

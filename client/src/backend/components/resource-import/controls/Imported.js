@@ -44,6 +44,7 @@ export default class ResourceImportControlsImported extends PureComponent {
           <button
             onClick={this.props.resetImport}
             className="button-icon-secondary dull"
+            type="button"
           >
             <i className="manicon manicon-check small" aria-hidden="true" />
             <span>Reset Import</span>

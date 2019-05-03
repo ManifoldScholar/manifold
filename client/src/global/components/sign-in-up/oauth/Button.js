@@ -62,7 +62,11 @@ class Button extends Component {
     );
 
     return (
-      <button className="button-secondary-dark" onClick={this.openWindow}>
+      <button
+        className="button-secondary-dark"
+        onClick={this.openWindow}
+        type="button"
+      >
         {icon}
         {label}
       </button>

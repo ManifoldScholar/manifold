@@ -103,6 +103,7 @@ export default class AppearanceMenuBody extends Component {
               <button
                 className={serifButtonClass}
                 onClick={this.serifButtonHandler}
+                type="button"
               >
                 {"Serif"}
               </button>
@@ -112,6 +113,7 @@ export default class AppearanceMenuBody extends Component {
                   onClick={event => {
                     this.decrementSizeHandler(event, serifDecreasable);
                   }}
+                  type="button"
                 >
                   <i className="manicon manicon-dash" aria-hidden="true" />
                   <span className="screen-reader-text">
@@ -123,6 +125,7 @@ export default class AppearanceMenuBody extends Component {
                   onClick={event => {
                     this.incrementSizeHandler(event, serifIncreasable);
                   }}
+                  type="button"
                 >
                   <i className="manicon manicon-plus" aria-hidden="true" />
                   <span className="screen-reader-text">
@@ -135,6 +138,7 @@ export default class AppearanceMenuBody extends Component {
               <button
                 className={sansSerifButtonClass}
                 onClick={this.sansSerifButtonHandler}
+                type="button"
               >
                 {"Sans-serif"}
               </button>
@@ -145,6 +149,7 @@ export default class AppearanceMenuBody extends Component {
                   onClick={event => {
                     this.decrementSizeHandler(event, sansDecreasable);
                   }}
+                  type="button"
                 >
                   <i className="manicon manicon-dash" aria-hidden="true" />
                   <span className="screen-reader-text">
@@ -156,6 +161,7 @@ export default class AppearanceMenuBody extends Component {
                   onClick={event => {
                     this.incrementSizeHandler(event, sansIncreasable);
                   }}
+                  type="button"
                 >
                   <i className="manicon manicon-plus" aria-hidden="true" />
                   <span className="screen-reader-text">
@@ -170,6 +176,7 @@ export default class AppearanceMenuBody extends Component {
               <button
                 className={lightSchemeButtonClass}
                 onClick={this.handleLightButtonClick}
+                type="button"
               >
                 <i className="manicon manicon-check" aria-hidden="true" />
                 <span className="screen-reader-text">
@@ -179,6 +186,7 @@ export default class AppearanceMenuBody extends Component {
               <button
                 className={darkSchemeButtonClass}
                 onClick={this.handleDarkButtonClick}
+                type="button"
               >
                 <i className="manicon manicon-check" aria-hidden="true" />
                 <span className="screen-reader-text">
@@ -192,6 +200,7 @@ export default class AppearanceMenuBody extends Component {
               <button
                 className="margin-increase"
                 onClick={this.incrementMarginsHandler}
+                type="button"
               >
                 <i className="compound-icon" aria-hidden="true">
                   <i className="manicon manicon-margins-narrow-arrows" />
@@ -204,6 +213,7 @@ export default class AppearanceMenuBody extends Component {
               <button
                 className="margin-decrease"
                 onClick={this.decrementMarginsHandler}
+                type="button"
               >
                 <i className="compound-icon" aria-hidden="true">
                   <i className="manicon manicon-margins-wide-arrows" />

@@ -21,6 +21,7 @@ export default class ReturnMenuButton extends Component {
         className="button-menu"
         onClick={this.clickHandler}
         data-id="toggle-menu"
+        type="button"
       >
         Menu
       </button>

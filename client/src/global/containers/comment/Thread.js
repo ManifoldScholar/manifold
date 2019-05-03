@@ -108,6 +108,7 @@ export class CommentThread extends PureComponent {
       <button
         className="comment-more"
         onClick={() => this.handleNextClick(commentsPagination)}
+        type="button"
       >
         <i
           className="manicon manicon-word-bubble-multiple"

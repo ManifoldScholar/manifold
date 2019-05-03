@@ -56,6 +56,7 @@ export default class AnnotationShareEditor extends PureComponent {
           <button
             className={selected === style ? "active" : null}
             onClick={event => this.setStyle(event, style)}
+            type="button"
           >
             {style}
           </button>
@@ -91,12 +92,14 @@ export default class AnnotationShareEditor extends PureComponent {
               <button
                 onClick={this.handleCancel}
                 className="button-primary dull"
+                type="button"
               >
                 <span>Cancel</span>
               </button>
               <button
                 className="button-secondary button-icon-secondary"
                 onClick={this.handleCopyClick}
+                type="button"
               >
                 <i className="manicon manicon-copy" aria-hidden="true" />
                 <span>Copy</span>

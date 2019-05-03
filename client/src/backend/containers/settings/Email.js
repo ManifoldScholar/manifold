@@ -149,6 +149,7 @@ export class SettingsEmailContainer extends PureComponent {
               <button
                 className="button-secondary-dark"
                 onClick={this.sendTestEmail}
+                type="button"
               >
                 Send test email
               </button>

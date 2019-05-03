@@ -10,8 +10,6 @@
   },
   "rules": {
 
-    //////////////// NEW /////////////////
-
     "prefer-destructuring": ["error", {
       "array": false,
       "object": false
@@ -19,10 +17,9 @@
       "enforceForRenamedProperties": false
     }],
 
+    // destructuring is a good idea if you can do it, but not required
     "react/destructuring-assignment": 0,
-    "react/button-has-type": 0,
     "react/default-props-match-prop-types": 0,
-    "jsx-a11y/label-has-associated-control": 0,
     "react/prop-types": 0,
 
     // this does not let you use anonymous functions
@@ -30,8 +27,6 @@
 
     // This gets in the way of what is pretty and easy to read
     "react/jsx-one-expression-per-line": 0,
-
-    ///////// END NEW //////////////////
 
     "prettier/prettier": "error",
 
@@ -146,6 +141,9 @@
         "allowChildren": false
       }
     ],
+
+    // this requires every button to have a label
+    "jsx-a11y/label-has-associated-control": 0,
 
     // Rules for WCAG we should eventually enable
     "jsx-a11y/aria-activedescendant-has-tabindex": 0,

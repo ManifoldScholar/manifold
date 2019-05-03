@@ -99,7 +99,11 @@ export default class ProjectCollectionFilters extends Component {
             />
           </div>
         </div>
-        <button className="reset-button" onClick={this.resetFilters}>
+        <button
+          className="reset-button"
+          onClick={this.resetFilters}
+          type="button"
+        >
           {"Reset Search + Filters"}
         </button>
       </form>

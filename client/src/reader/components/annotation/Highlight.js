@@ -45,7 +45,7 @@ class HighlightDetail extends PureComponent {
           <ul>
             {this.props.visitHandler ? (
               <li>
-                <button onClick={this.handleVisitHighlight}>
+                <button onClick={this.handleVisitHighlight} type="button">
                   {"View In Text"}
                 </button>
               </li>

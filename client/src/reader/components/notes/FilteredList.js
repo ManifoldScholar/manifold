@@ -43,6 +43,7 @@ export default class FilteredList extends PureComponent {
           <button
             onClick={this.props.handleSeeAllClick}
             className="button-primary"
+            type="button"
           >
             See all
           </button>

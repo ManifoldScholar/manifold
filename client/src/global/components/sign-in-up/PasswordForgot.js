@@ -118,6 +118,7 @@ class PasswordForgotContainer extends Component {
               this.props.handleViewChange("account-login", event)
             }
             data-id="show-login"
+            type="button"
           >
             {"Remember your password?"}
           </button>
@@ -126,6 +127,7 @@ class PasswordForgotContainer extends Component {
               this.props.handleViewChange("account-create", event)
             }
             data-id="show-create"
+            type="button"
           >
             {"Need to sign up?"}
           </button>

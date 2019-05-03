@@ -45,6 +45,7 @@ export class UserMenuBodyComponent extends Component {
             <button
               onClick={this.handleProfileClick}
               aria-describedby="user-menu-edit-profile"
+              type="button"
             >
               <i
                 className="manicon manicon-person-pencil-simple"
@@ -60,6 +61,7 @@ export class UserMenuBodyComponent extends Component {
             <button
               onClick={this.handleNotificationsClick}
               aria-describedby="user-menu-notifications"
+              type="button"
             >
               <i
                 className="manicon manicon-envelope-circle-right"
@@ -72,7 +74,11 @@ export class UserMenuBodyComponent extends Component {
             </span>
           </li>
           <li>
-            <button onClick={this.logout} aria-describedby="user-menu-logout">
+            <button
+              onClick={this.logout}
+              aria-describedby="user-menu-logout"
+              type="button"
+            >
               <i
                 className="manicon manicon-circle-arrow-out-right"
                 aria-hidden="true"

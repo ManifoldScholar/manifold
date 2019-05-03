@@ -44,7 +44,11 @@ export default class AnnotationSelectionWrapper extends PureComponent {
           {this.maybeTruncateSelection()}
         </div>
         {this.viewable && (
-          <button className="annotate-button" onClick={this.props.onViewInText}>
+          <button
+            className="annotate-button"
+            onClick={this.props.onViewInText}
+            type="button"
+          >
             {"View In Text"}
           </button>
         )}
@@ -54,6 +58,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
               <button
                 className="annotate-button"
                 onClick={this.props.onAnnotate}
+                type="button"
               >
                 {"Annotate"}
               </button>
@@ -63,6 +68,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
                 <button
                   className="annotate-button"
                   onClick={this.props.onLogin}
+                  type="button"
                 >
                   {"Login to annotate"}
                 </button>

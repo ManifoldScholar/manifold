@@ -24,6 +24,7 @@ export default class SearchMenuButton extends PureComponent {
         className={buttonClass}
         onClick={this.clickHandler}
         data-id="toggle-menu"
+        type="button"
       >
         <Utility.IconComposer
           className="search-icon"

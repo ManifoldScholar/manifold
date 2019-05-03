@@ -98,6 +98,7 @@ export default class CategoryListTexts extends PureComponent {
                   onClick={event => {
                     this.onDelete(event, text);
                   }}
+                  type="button"
                 >
                   <Utility.IconComposer icon="delete32" size={26} />
                   <span className="screen-reader-text">Delete Text</span>

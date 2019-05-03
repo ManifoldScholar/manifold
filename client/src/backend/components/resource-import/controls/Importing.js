@@ -34,6 +34,7 @@ export default class ResourceImportControlsImporting extends PureComponent {
           <button
             onClick={this.props.refreshResults}
             className="button-icon-secondary"
+            type="button"
           >
             <i className="manicon manicon-check small" aria-hidden="true" />
             <span>Refresh Results</span>

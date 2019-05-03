@@ -40,6 +40,7 @@ export default class ProjectCollectionPlaceholder extends Component {
             <button
               className="button-icon-secondary"
               onClick={this.props.createClickHandler}
+              type="button"
             >
               <i className="manicon manicon-plus" />
               <span>Create a Collection</span>

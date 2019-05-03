@@ -167,7 +167,7 @@ export default class ListEntitiesListSearch extends PureComponent {
         {this.hasKeywordParam && (
           <form onSubmit={this.submitKeywordForm}>
             <div className={`${baseClass}__keyword-row`}>
-              <button className={`${baseClass}__search-button`}>
+              <button className={`${baseClass}__search-button`} type="button">
                 <Utility.IconComposer
                   iconClass="manicon-magnify"
                   icon="search16"
@@ -190,6 +190,7 @@ export default class ListEntitiesListSearch extends PureComponent {
               <button
                 onClick={this.resetSearch}
                 className={`${baseClass}__text-button`}
+                type="button"
               >
                 Reset
               </button>
@@ -197,6 +198,7 @@ export default class ListEntitiesListSearch extends PureComponent {
                 <button
                   onClick={this.toggleOptions}
                   className={`${baseClass}__text-button ${baseClass}__text-button--foregrounded`}
+                  type="button"
                 >
                   Options
                 </button>

@@ -40,6 +40,7 @@ export default class ProjectCollectionList extends PureComponent {
           <button
             className="button-icon-secondary"
             onClick={this.props.onShowNew}
+            type="button"
           >
             <i className="manicon manicon-plus" />
             <span>Create New Collection</span>

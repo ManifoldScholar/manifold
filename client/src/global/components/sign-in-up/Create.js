@@ -246,6 +246,7 @@ export class CreateContainer extends Component {
               this.props.handleViewChange("account-login", event)
             }
             data-id="show-login"
+            type="button"
           >
             {"Already have an account?"}
           </button>

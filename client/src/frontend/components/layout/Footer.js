@@ -257,7 +257,7 @@ class LayoutFooter extends Component {
             value={this.state.keyword}
             onChange={this.updateSearchWord}
           />
-          <button className="icon">
+          <button className="icon" type="button">
             <Utility.IconComposer
               className="search-icon"
               icon="search16"

@@ -26,7 +26,9 @@ export default class ConfirmableButton extends Component {
 
   renderButton() {
     return (
-      <button onClick={this.toggleConfirmation}>{this.props.label}</button>
+      <button onClick={this.toggleConfirmation} type="button">
+        {this.props.label}
+      </button>
     );
   }
 
@@ -34,10 +36,14 @@ export default class ConfirmableButton extends Component {
     return (
       <div className="confirmation">
         <div className="confirmation-label">{this.props.label}</div>
-        <button className="confirm" onClick={this.handleConfirm}>
+        <button className="confirm" onClick={this.handleConfirm} type="button">
           Confirm
         </button>
-        <button className="deny" onClick={this.toggleConfirmation}>
+        <button
+          className="deny"
+          onClick={this.toggleConfirmation}
+          type="button"
+        >
           Cancel
         </button>
       </div>

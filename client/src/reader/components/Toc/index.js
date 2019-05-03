@@ -139,7 +139,7 @@ class Toc extends PureComponent {
           {this.renderContents(text)}
           {!isEmpty(metadata) ? (
             <div className="toc-footer">
-              <button onClick={this.showMeta}>
+              <button onClick={this.showMeta} type="button">
                 <h4>
                   <i className="manicon manicon-i-round" aria-hidden="true" />
                   About This Text

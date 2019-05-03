@@ -46,6 +46,7 @@ export default class UserLinks extends PureComponent {
               <button
                 onClick={this.handleLoginClick}
                 aria-describedby="user-menu-login-mobile"
+                type="button"
               >
                 <Avatar />
                 {"Login"}
@@ -81,6 +82,7 @@ export default class UserLinks extends PureComponent {
             <button
               onClick={this.handleProfileClick}
               aria-describedby="user-menu-edit-profile-mobile"
+              type="button"
             >
               <i
                 className="manicon manicon-person-pencil-simple"
@@ -99,6 +101,7 @@ export default class UserLinks extends PureComponent {
             <button
               onClick={this.handleNotificationsClick}
               aria-describedby="user-menu-notifications-mobile"
+              type="button"
             >
               <i
                 className="manicon manicon-envelope-circle-right"
@@ -117,6 +120,7 @@ export default class UserLinks extends PureComponent {
             <button
               onClick={this.handleLogOutClick}
               aria-describedby="user-menu-logout-mobile"
+              type="button"
             >
               <i
                 className="manicon manicon-circle-arrow-out-right-long"

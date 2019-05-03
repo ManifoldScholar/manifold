@@ -67,6 +67,7 @@ export default class EventRow extends PureComponent {
           className="entity-row__utility-button"
           onClick={this.onTogglePublish}
           title="Unpublish feature"
+          type="button"
         >
           <Utility.IconComposer icon="eyeClosed32" size={26} />
         </button>
@@ -77,6 +78,7 @@ export default class EventRow extends PureComponent {
         className="entity-row__utility-button"
         onClick={this.onTogglePublish}
         title="Publish feature"
+        type="button"
       >
         <Utility.IconComposer icon="eyeOpen32" size={26} />
       </button>

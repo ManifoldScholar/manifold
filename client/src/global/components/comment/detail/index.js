@@ -100,41 +100,59 @@ export default class CommentDetail extends PureComponent {
           <nav className="utility">
             <ul>
               <li>
-                <button className={replyButtonClass} onClick={this.startReply}>
+                <button
+                  className={replyButtonClass}
+                  onClick={this.startReply}
+                  type="button"
+                >
                   {"Reply"}
                 </button>
               </li>
               <Authorize entity={comment} ability="update">
                 <li>
-                  <button onClick={this.startEdit}>Edit</button>
+                  <button onClick={this.startEdit} type="button">
+                    Edit
+                  </button>
                 </li>
               </Authorize>
               <Authorize entity={comment} ability="delete">
                 {!comment.attributes.deleted ? (
                   <li>
-                    <button onClick={this.handleDelete}>Delete</button>
+                    <button onClick={this.handleDelete} type="button">
+                      Delete
+                    </button>
                   </li>
                 ) : null}
               </Authorize>
               {comment.attributes.deleted ? (
                 <li>
-                  <button onClick={this.handleRestore}>Restore</button>
+                  <button onClick={this.handleRestore} type="button">
+                    Restore
+                  </button>
                 </li>
               ) : null}
               {comment.attributes.deleted ? (
                 <li>
-                  <button onClick={this.handleDestroy}>Destroy</button>
+                  <button onClick={this.handleDestroy} type="button">
+                    Destroy
+                  </button>
                 </li>
               ) : null}
               {comment.attributes.flagged ? (
                 <li>
-                  <button className="secondary" onClick={this.handleUnflag}>
+                  <button
+                    className="secondary"
+                    onClick={this.handleUnflag}
+                    type="button"
+                  >
                     {"Unflag"}
                   </button>
                 </li>
               ) : (
                 <li>
-                  <button onClick={this.handleFlag}>Flag</button>
+                  <button onClick={this.handleFlag} type="button">
+                    Flag
+                  </button>
                 </li>
               )}
             </ul>
@@ -145,7 +163,7 @@ export default class CommentDetail extends PureComponent {
           <nav className="utility">
             <ul>
               <li>
-                <button onClick={this.props.showLogin}>
+                <button onClick={this.props.showLogin} type="button">
                   {"Login to reply"}
                 </button>
               </li>

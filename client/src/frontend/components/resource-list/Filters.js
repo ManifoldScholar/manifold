@@ -131,7 +131,11 @@ export default class ResourceListFilters extends Component {
             <i className="manicon manicon-caret-down" aria-hidden="true" />
           </div>
         </div>
-        <button className="reset-button" onClick={this.resetFilters}>
+        <button
+          className="reset-button"
+          onClick={this.resetFilters}
+          type="button"
+        >
           {"Reset Search + Filters"}
         </button>
       </form>

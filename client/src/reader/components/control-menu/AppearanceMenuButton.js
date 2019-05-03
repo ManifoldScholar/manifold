@@ -26,6 +26,7 @@ export default class AppearanceMenuButton extends Component {
         className={buttonClass}
         onClick={this.clickHandler}
         data-id="toggle-appearance"
+        type="button"
       >
         <Utility.IconComposer icon="text24" size={32} />
         <span className="screen-reader-text">

@@ -25,6 +25,7 @@ export default class ProjectContentBlockInListAvailable extends PureComponent {
               title="Add content block"
               onClick={this.props.onClickAdd}
               disabled={this.props.disabled}
+              type="button"
             >
               <Utility.IconComposer
                 icon="circlePlus32"

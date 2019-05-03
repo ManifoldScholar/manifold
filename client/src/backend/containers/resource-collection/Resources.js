@@ -176,6 +176,7 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
               style={{ marginLeft: 8 }}
               onClick={this.toggleCollectionOnly}
               className="button-bare-primary"
+              type="button"
             >
               {toggleLabel}
             </button>

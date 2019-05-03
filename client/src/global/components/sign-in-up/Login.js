@@ -106,6 +106,7 @@ export default class Login extends Component {
               this.props.handleViewChange("account-password-forgot", event)
             }
             data-id="show-forgot"
+            type="button"
           >
             {"Forgot your password?"}
           </button>
@@ -114,6 +115,7 @@ export default class Login extends Component {
               this.props.handleViewChange("account-create", event)
             }
             data-id="show-create"
+            type="button"
           >
             {"Need to sign up?"}
           </button>

@@ -231,6 +231,7 @@ export default class DrawerWrapper extends PureComponent {
             onClick={this.handleLeaveEvent}
             tabIndex="0"
             className="screen-reader-text"
+            type="button"
           >
             Close
           </button>

@@ -137,18 +137,21 @@ class ResetPasswordWrapper extends PureComponent {
             <button
               onClick={event => this.handleStateChange(event, "confirm", true)}
               className="button-secondary outlined"
+              type="button"
             >
               Generate new password
             </button>
             <button
               onClick={event => this.handleStateChange(event, "editing", true)}
               className="button-secondary outlined"
+              type="button"
             >
               Set new password
             </button>
             <button
               className="button-secondary dull outlined"
               onClick={event => this.handleRejectClick(event)}
+              type="button"
             >
               Cancel
             </button>
@@ -197,6 +200,7 @@ class ResetPasswordWrapper extends PureComponent {
             <button
               className="button-secondary dull outlined"
               onClick={event => this.handleStateChange(event, "editing", false)}
+              type="button"
             >
               Cancel
             </button>

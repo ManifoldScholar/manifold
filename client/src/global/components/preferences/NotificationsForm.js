@@ -150,6 +150,7 @@ export default class NotificationsForm extends Component {
         <button
           className="button-bare-primary"
           onClick={this.props.unsubscribeAllHandler}
+          type="button"
         >
           Unsubscribe From All
         </button>

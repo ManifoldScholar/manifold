@@ -172,7 +172,11 @@ class FeatureDetailContainer extends PureComponent {
   renderUtility() {
     return (
       <div>
-        <button onClick={this.handleDestroy} className="button-bare-primary">
+        <button
+          onClick={this.handleDestroy}
+          className="button-bare-primary"
+          type="button"
+        >
           <i className="manicon manicon-trashcan" aria-hidden="true" />
           Delete
         </button>

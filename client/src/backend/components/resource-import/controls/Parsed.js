@@ -35,6 +35,7 @@ export default class ResourceImportControlsParsed extends PureComponent {
           <button
             onClick={this.props.startImport}
             className="button-icon-secondary"
+            type="button"
           >
             <i className="manicon manicon-check small" aria-hidden="true" />
             <span>Start Import</span>

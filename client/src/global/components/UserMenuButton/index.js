@@ -27,7 +27,7 @@ export default class UserMenuButton extends Component {
       "button-active": this.props.active
     });
     return (
-      <button onClick={this.clickHandler} className={buttonClass}>
+      <button onClick={this.clickHandler} className={buttonClass} type="button">
         <span className="screen-reader-text">
           {"Login or open user settings"}
         </span>

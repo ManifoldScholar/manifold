@@ -81,6 +81,7 @@ export default class ResourceCollectionDetail extends PureComponent {
               onClick={this.props.handleClose}
               className="button-secondary outlined dull"
               data-id="close-overlay"
+              type="button"
             >
               <i className="manicon manicon-arrow-left" aria-hidden="true" />
               Return to Reader

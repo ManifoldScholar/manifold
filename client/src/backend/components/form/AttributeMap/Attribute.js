@@ -35,7 +35,11 @@ export default class FormColumnMapAttribute extends PureComponent {
               </div>
               {provided.placeholder}
 
-              <button className="cancel" onClick={this.handleCancel}>
+              <button
+                className="cancel"
+                onClick={this.handleCancel}
+                type="button"
+              >
                 <span className="screen-reader-text">
                   {"Cancel mapping of "}
                   {`${this.props.name} to ${this.props.mapping}`}

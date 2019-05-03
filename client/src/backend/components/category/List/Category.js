@@ -76,6 +76,7 @@ export default class CategoryListCategory extends PureComponent {
                   <button
                     className="text-categories__button text-categories__button--notice"
                     onClick={this.onDelete}
+                    type="button"
                   >
                     <Utility.IconComposer icon="delete32" size={26} />
                     <span className="screen-reader-text">Delete Category</span>

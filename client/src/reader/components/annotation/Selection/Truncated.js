@@ -77,6 +77,7 @@ export default class AnnotationSelectionTruncated extends PureComponent {
           <button
             className={constShowFullButtonClass}
             onClick={this.handleShowFull}
+            type="button"
           >
             {"Read Full Passage"}
           </button>

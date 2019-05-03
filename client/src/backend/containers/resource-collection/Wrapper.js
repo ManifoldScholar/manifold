@@ -119,13 +119,18 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
   renderUtility() {
     return (
       <div>
-        <button onClick={this.doPreview} className="button-bare-primary">
+        <button
+          onClick={this.doPreview}
+          className="button-bare-primary"
+          type="button"
+        >
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
           Preview{" "}
         </button>
         <button
           onClick={this.handleCollectionDestroy}
           className="button-bare-primary"
+          type="button"
         >
           <i className="manicon manicon-trashcan" aria-hidden="true" />
           Delete

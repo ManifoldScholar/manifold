@@ -27,6 +27,7 @@ export default class VisibilityMenuButton extends PureComponent {
         className={buttonClass}
         onClick={this.clickHandler}
         data-id="toggle-visibility"
+        type="button"
       >
         <Utility.IconComposer icon="eyeball24" size={32} />
         <span className="screen-reader-text">Open the visibility menu</span>

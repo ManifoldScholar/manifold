@@ -191,7 +191,11 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
         />
 
         <div className="actions">
-          <button className="button-icon-secondary" onClick={this.handleClose}>
+          <button
+            className="button-icon-secondary"
+            onClick={this.handleClose}
+            type="button"
+          >
             <span>Close</span>
             <i className="manicon manicon-x" />
           </button>

@@ -94,7 +94,11 @@ export class ProjectWrapperContainer extends PureComponent {
   renderUtility(project) {
     return (
       <div>
-        <button onClick={this.doPreview} className="button-bare-primary">
+        <button
+          onClick={this.doPreview}
+          className="button-bare-primary"
+          type="button"
+        >
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
           Preview{" "}
         </button>
@@ -102,6 +106,7 @@ export class ProjectWrapperContainer extends PureComponent {
           <button
             onClick={this.handleProjectDestroy}
             className="button-bare-primary"
+            type="button"
           >
             <i className="manicon manicon-trashcan" aria-hidden="true" />
             Delete

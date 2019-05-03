@@ -92,6 +92,7 @@ export default class CategoryList extends PureComponent {
                 <button
                   className={`${baseClass}__button ${baseClass}__button--notice`}
                   onClick={this.confirmDestroy}
+                  type="button"
                 >
                   <Utility.IconComposer icon="delete32" size={26} />
                   <span className="screen-reader-text">Delete Stylesheet</span>
@@ -103,6 +104,7 @@ export default class CategoryList extends PureComponent {
                 <button
                   {...provided.dragHandleProps}
                   className={`${baseClass}__button`}
+                  type="button"
                 >
                   <Utility.IconComposer icon="grabber32" size={26} />
                 </button>

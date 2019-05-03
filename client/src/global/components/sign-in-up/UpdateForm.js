@@ -394,6 +394,7 @@ class UpdateFormContainer extends Component {
           <button
             className="button-secondary outlined"
             onClick={this.redirectToSubscriptions}
+            type="button"
           >
             {`Notification Settings`}
             <i className="manicon manicon-arrow-long-right" />

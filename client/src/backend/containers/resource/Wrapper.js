@@ -106,7 +106,11 @@ export class ResourceWrapperContainer extends PureComponent {
   renderUtility(resource) {
     return (
       <div>
-        <button onClick={this.doPreview} className="button-bare-primary">
+        <button
+          onClick={this.doPreview}
+          className="button-bare-primary"
+          type="button"
+        >
           <i className="manicon manicon-eye-outline" aria-hidden="true" />
           Preview{" "}
         </button>
@@ -114,6 +118,7 @@ export class ResourceWrapperContainer extends PureComponent {
           <button
             onClick={this.handleResourceDestroy}
             className="button-bare-primary"
+            type="button"
           >
             <i className="manicon manicon-trashcan" aria-hidden="true" />
             Delete

@@ -170,7 +170,11 @@ export default class ResourceListSlideCaption extends Component {
           }}
         >
           <div className="wrapper">
-            <button className={moreLinkClass} onClick={this.handleReadMore}>
+            <button
+              className={moreLinkClass}
+              onClick={this.handleReadMore}
+              type="button"
+            >
               <span className="open-text">Read More</span>
               <span className="close-text">Hide Description</span>
             </button>

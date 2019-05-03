@@ -71,6 +71,7 @@ export default class Toggle extends Component {
           className="button-switch-primary__button"
           onClick={this.handleClick}
           aria-describedby={this.props.id}
+          type="button"
         >
           <div className="button-switch-primary__wrapper">
             {options.map(option => {

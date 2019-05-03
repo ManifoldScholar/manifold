@@ -154,7 +154,11 @@ export default class CoverButton extends Component {
 
     return (
       <div>
-        <button className="screen-reader-text" onClick={this.toggleFollow}>
+        <button
+          className="screen-reader-text"
+          onClick={this.toggleFollow}
+          type="button"
+        >
           {this.screenReaderButtonText()}
         </button>
         <div

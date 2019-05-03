@@ -228,7 +228,11 @@ export default class ResourcePlayerAudio extends Component {
           ref={container => (this.container = container)}
         />
         <div className="control-bar">
-          <button className="play-pause" onClick={this.togglePlayback}>
+          <button
+            className="play-pause"
+            onClick={this.togglePlayback}
+            type="button"
+          >
             <span className="screen-reader-text">
               {this.state.playing ? "Pause Playback" : "Start Playback"}
             </span>
@@ -261,7 +265,7 @@ export default class ResourcePlayerAudio extends Component {
             <div className="time duration">{this.state.durationFormatted}</div>
           </div>
           <div className="volume">
-            <button className="mute" onClick={this.toggleMute}>
+            <button className="mute" onClick={this.toggleMute} type="button">
               <span className="screen-reader-text">
                 {this.state.muted ? "Unmute" : "Mute"}
               </span>

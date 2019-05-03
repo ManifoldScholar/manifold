@@ -77,7 +77,7 @@ export class NavigationDropdown extends Component {
 
     return (
       <nav className={`${navClasses} ${this.props.classNames}`}>
-        <button className="trigger" onClick={this.toggleOpen}>
+        <button className="trigger" onClick={this.toggleOpen} type="button">
           <div className="selected">
             {this.currentLabel}
             <i className="manicon manicon-caret-down" />

@@ -55,6 +55,7 @@ export default class ReturnMenuBody extends PureComponent {
                 onClick={this.props.toggleSignInUpOverlay}
                 data-id="toggle-overlay"
                 className="flush-bottom"
+                type="button"
               >
                 <i
                   className="manicon manicon-manifold-logo"

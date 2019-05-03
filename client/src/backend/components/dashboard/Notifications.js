@@ -17,7 +17,7 @@ export default class Notifications extends Component {
                 {"work in progress!"}
               </a>
             </p>
-            <button className="manicon manicon-x">
+            <button className="manicon manicon-x" type="button">
               <span className="screen-reader-text">Close Notification</span>
             </button>
           </li>
@@ -28,7 +28,7 @@ export default class Notifications extends Component {
                 {"placeholders"}
               </a>
             </p>
-            <button className="manicon manicon-x">
+            <button className="manicon manicon-x" type="button">
               <span className="screen-reader-text">Close Notification</span>
             </button>
           </li>

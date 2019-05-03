@@ -51,6 +51,7 @@ export default class UIPanel extends Component {
               <button
                 className="screen-reader-text"
                 onClick={this.props.hidePanel}
+                type="button"
               >
                 Close Panel
               </button>

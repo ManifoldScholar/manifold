@@ -46,6 +46,7 @@ export default class NotationViewerSingle extends PureComponent {
           <button
             onClick={() => actions.startDestroy(entry)}
             className="notation-delete"
+            type="button"
           >
             <span className="screen-reader-text">Delete Notation</span>
             <i className="manicon manicon-x" aria-hidden="true" />

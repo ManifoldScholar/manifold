@@ -26,6 +26,7 @@ export default class NotesButton extends PureComponent {
         className={buttonClass}
         onClick={this.clickHandler}
         data-id="toggle-notes"
+        type="button"
       >
         <Utility.IconComposer icon="notes24" size={32} />
         <span className="screen-reader-text">Open the notes menu</span>

@@ -44,7 +44,7 @@ export default class DefaultButton extends PureComponent {
         {this.props.children ? (
           this.renderChild()
         ) : (
-          <button className={className} onClick={onClick}>
+          <button className={className} onClick={onClick} type="button">
             {iconClass ? (
               <i className={iconClassName} aria-hidden="true" />
             ) : null}

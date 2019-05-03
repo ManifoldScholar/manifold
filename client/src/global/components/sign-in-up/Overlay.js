@@ -99,6 +99,7 @@ export default class Overlay extends Component {
                     onClick={this.props.hideSignInUpOverlay}
                     className="overlay-close"
                     data-id="overlay-close"
+                    type="button"
                   >
                     Cancel
                     <i className="manicon manicon-x" aria-hidden="true" />

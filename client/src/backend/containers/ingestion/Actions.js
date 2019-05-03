@@ -20,6 +20,7 @@ export default class IngestionActions extends Component {
         onClick={this.props.cancel}
         className="button-icon-secondary dull"
         disabled={this.inProgress}
+        type="button"
       >
         <i className="manicon manicon-x small" aria-hidden="true" />
         <span>Change Source</span>
@@ -35,7 +36,11 @@ export default class IngestionActions extends Component {
     if (!this.finished) return null;
 
     return (
-      <button onClick={this.props.complete} className="button-icon-secondary">
+      <button
+        onClick={this.props.complete}
+        className="button-icon-secondary"
+        type="button"
+      >
         <i className="manicon manicon-check small" aria-hidden="true" />
         <span>Complete</span>
       </button>
@@ -67,6 +72,7 @@ export default class IngestionActions extends Component {
         onClick={this.props.start}
         className="button-icon-secondary"
         disabled={this.inProgress}
+        type="button"
       >
         <i className="manicon manicon-arrow-down" aria-hidden="true" />
         <span>{label}</span>

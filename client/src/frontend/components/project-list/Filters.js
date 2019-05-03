@@ -167,7 +167,11 @@ export default class ProjectListFilters extends Component {
           {this.renderSort()}
           {this.renderFilters()}
         </div>
-        <button className="reset-button" onClick={this.resetFilters}>
+        <button
+          className="reset-button"
+          onClick={this.resetFilters}
+          type="button"
+        >
           {"Reset Search + Filters"}
         </button>
       </form>

@@ -176,7 +176,9 @@ export class CommentEditor extends PureComponent {
         ) : null}
         <Authorize kind="unauthenticated">
           <div className="placeholder">
-            <button onClick={showLogin}>Login to post a comment</button>
+            <button onClick={showLogin} type="button">
+              Login to post a comment
+            </button>
           </div>
         </Authorize>
         <Authorize kind="any">
@@ -213,6 +215,7 @@ export class CommentEditor extends PureComponent {
                   <button
                     className="button-secondary"
                     disabled={!this.state.body}
+                    type="button"
                   >
                     <i
                       className="manicon manicon-word-bubble-lines"

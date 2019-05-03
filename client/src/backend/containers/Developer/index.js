@@ -46,6 +46,7 @@ export class DeveloperContainer extends PureComponent {
               <button
                 onClick={this.connect}
                 className="button-secondary outlined"
+                type="button"
               >
                 Start websocket connection
               </button>
@@ -54,6 +55,7 @@ export class DeveloperContainer extends PureComponent {
               <button
                 onClick={this.disconnect}
                 className="button-secondary outlined"
+                type="button"
               >
                 Close websocket connection
               </button>

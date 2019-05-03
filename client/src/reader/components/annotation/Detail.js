@@ -117,6 +117,7 @@ class AnnotationDetail extends PureComponent {
                       <button
                         className={replyButtonClass}
                         onClick={this.startReply}
+                        type="button"
                       >
                         {"Reply"}
                       </button>
@@ -127,6 +128,7 @@ class AnnotationDetail extends PureComponent {
                       <button
                         className={editButtonClass}
                         onClick={this.startEdit}
+                        type="button"
                       >
                         {"Edit"}
                       </button>
@@ -142,13 +144,19 @@ class AnnotationDetail extends PureComponent {
                   </Authorize>
                   {annotation.attributes.flagged ? (
                     <li>
-                      <button className="secondary" onClick={this.handleUnflag}>
+                      <button
+                        className="secondary"
+                        onClick={this.handleUnflag}
+                        type="button"
+                      >
                         {"Unflag"}
                       </button>
                     </li>
                   ) : (
                     <li>
-                      <button onClick={this.handleFlag}>Flag</button>
+                      <button onClick={this.handleFlag} type="button">
+                        Flag
+                      </button>
                     </li>
                   )}
                 </ul>
@@ -165,7 +173,7 @@ class AnnotationDetail extends PureComponent {
                 <nav className="utility">
                   <ul>
                     <li>
-                      <button onClick={this.props.showLogin}>
+                      <button onClick={this.props.showLogin} type="button">
                         {"Login to reply"}
                       </button>
                     </li>

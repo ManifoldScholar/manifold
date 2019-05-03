@@ -92,6 +92,7 @@ class IngestionFormUpload extends PureComponent {
             <button
               onClick={this.handleCancelClick}
               className="button-icon-secondary dull"
+              type="button"
             >
               <i className="manicon manicon-x small" aria-hidden="true" />
               <span>Cancel</span>

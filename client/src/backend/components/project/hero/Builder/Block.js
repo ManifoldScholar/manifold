@@ -58,7 +58,7 @@ export default class Block extends PureComponent {
               </p>
             )}
           </div>
-          <button className="hero-builder-block__button">
+          <button className="hero-builder-block__button" type="button">
             <span className="hero-builder-block__button-label">Edit</span>
             <Utility.IconComposer icon="annotate32" size={26} />
           </button>

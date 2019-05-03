@@ -88,6 +88,7 @@ export default class FatalError extends PureComponent {
                           role="link"
                           onClick={this.props.dismiss}
                           className="dismiss"
+                          type="button"
                         >
                           Try again.
                         </button>

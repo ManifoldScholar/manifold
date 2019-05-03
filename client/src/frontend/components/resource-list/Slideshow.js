@@ -238,6 +238,7 @@ export default class ResourceSlideshow extends PureComponent {
                     className="slide-previous"
                     onClick={this.handleSlidePrev}
                     disabled={position === 1}
+                    type="button"
                   >
                     <i
                       className="manicon manicon-arrow-left"
@@ -258,6 +259,7 @@ export default class ResourceSlideshow extends PureComponent {
                     className="slide-next"
                     onClick={this.handleSlideNext}
                     disabled={position === totalCount}
+                    type="button"
                   >
                     <span className="text" aria-hidden="true">
                       Next

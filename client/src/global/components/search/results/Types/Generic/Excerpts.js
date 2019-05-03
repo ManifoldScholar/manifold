@@ -103,6 +103,7 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
           <button
             className="search-result__excerpt-open-button"
             onClick={this.toggle}
+            type="button"
           >
             {!this.state.open
               ? "Show all excerpts"

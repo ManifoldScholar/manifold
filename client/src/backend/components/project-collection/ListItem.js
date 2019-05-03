@@ -79,6 +79,7 @@ export default class ProjectCollectionListItem extends PureComponent {
             className="button-icon-primary"
             onClick={this.toggleVisibility}
             aria-label={this.ariaLabel}
+            type="button"
           >
             {this.icon}
             <span className="screen-reader-text">

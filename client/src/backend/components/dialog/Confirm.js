@@ -72,6 +72,7 @@ export default class DialogConfirm extends PureComponent {
             onClick={this.handleResolveClick}
             className="button-icon-secondary"
             data-id="accept"
+            type="button"
           >
             <i className="manicon manicon-check small" aria-hidden="true" />
             <span>Yes</span>
@@ -80,6 +81,7 @@ export default class DialogConfirm extends PureComponent {
             className="button-icon-secondary dull"
             onClick={this.handleRejectClick}
             data-id="reject"
+            type="button"
           >
             <i className="manicon manicon-x small" aria-hidden="true" />
             <span>No</span>

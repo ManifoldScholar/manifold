@@ -122,10 +122,15 @@ export default class AnnotationEditor extends PureComponent {
               <button
                 onClick={this.handleCancel}
                 className="button-primary dull"
+                type="button"
               >
                 Cancel
               </button>
-              <button className="button-secondary" disabled={!this.state.body}>
+              <button
+                className="button-secondary"
+                disabled={!this.state.body}
+                type="button"
+              >
                 Save
               </button>
             </div>
