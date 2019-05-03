@@ -37,7 +37,7 @@ export default class CoverButton extends Component {
   }
 
   setView(view) {
-    this.setState(prevState => (Object.assign({}, prevState, { view })));
+    this.setState(prevState => Object.assign({}, prevState, { view }));
   }
 
   activate = () => {

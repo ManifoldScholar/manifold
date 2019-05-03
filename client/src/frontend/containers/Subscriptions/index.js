@@ -26,6 +26,7 @@ export class SubscriptionsContainer extends Component {
     this.state = this.initialState(props);
   }
 
+  /* eslint-disable react/no-access-state-in-setstate */
   handlePreferenceChange = event => {
     const notifications = Object.assign(
       {},

@@ -37,9 +37,11 @@ export class ContactContainer extends Component {
   }
 
   handleInputChange = event => {
-    this.setState(prevState => (Object.assign({}, prevState.contact, {
-      [event.target.name]: event.target.value
-    })));
+    this.setState(prevState =>
+      Object.assign({}, prevState.contact, {
+        [event.target.name]: event.target.value
+      })
+    );
   };
 
   sendMessage = event => {
