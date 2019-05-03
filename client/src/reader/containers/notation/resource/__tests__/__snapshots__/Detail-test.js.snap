@@ -15,6 +15,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
       className="overlay-close"
       data-id="overlay-close"
       onClick={[Function]}
+      type="button"
     >
       Close
       <i
@@ -234,6 +235,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
                 className="button-secondary outlined dull"
                 data-id="close-overlay"
                 onClick={[Function]}
+                type="button"
               >
                 <i
                   aria-hidden="true"

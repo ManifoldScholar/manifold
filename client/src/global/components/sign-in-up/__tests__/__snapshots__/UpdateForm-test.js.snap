@@ -181,6 +181,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
     <button
       className="button-secondary outlined"
       onClick={[Function]}
+      type="button"
     >
       Notification Settings
       <i
@@ -375,6 +376,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
     <button
       className="button-secondary outlined"
       onClick={[Function]}
+      type="button"
     >
       Notification Settings
       <i

@@ -23,13 +23,13 @@ exports[`Backend.Dialog.Confirm Component renders correctly 1`] = `
                           All the players came from far and wide
                         </p>
                         <div className=\\"buttons-icon-horizontal\\">
-                          <button onClick={[Function]} className=\\"button-icon-secondary\\" data-id=\\"accept\\">
+                          <button onClick={[Function]} className=\\"button-icon-secondary\\" data-id=\\"accept\\" type=\\"button\\">
                             <i className=\\"manicon manicon-check small\\" aria-hidden=\\"true\\" />
                             <span>
                               Yes
                             </span>
                           </button>
-                          <button className=\\"button-icon-secondary dull\\" onClick={[Function]} data-id=\\"reject\\">
+                          <button className=\\"button-icon-secondary dull\\" onClick={[Function]} data-id=\\"reject\\" type=\\"button\\">
                             <i className=\\"manicon manicon-x small\\" aria-hidden=\\"true\\" />
                             <span>
                               No

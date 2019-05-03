@@ -400,6 +400,7 @@ exports[`Frontend.Resource.Detail component renders correctly 1`] = `
               >
                 <button
                   onClick={[Function]}
+                  type="button"
                 >
                   Login to post a comment
                 </button>

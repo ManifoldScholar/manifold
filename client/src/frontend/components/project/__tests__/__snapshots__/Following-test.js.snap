@@ -5,6 +5,7 @@ exports[`Frontend.Project.Follow component renders correctly 1`] = `
   <button
     className="screen-reader-text"
     onClick={[Function]}
+    type="button"
   >
     add Rowan Test
   </button>

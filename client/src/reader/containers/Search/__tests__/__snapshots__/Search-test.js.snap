@@ -31,6 +31,7 @@ exports[`Reader SearchContainer renders correctly 1`] = `
         className="overlay-close"
         data-id="overlay-close"
         onClick={[Function]}
+        type="button"
       >
         Close
         <i

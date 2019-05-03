@@ -36,6 +36,7 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
               aria-label="Change visibility of A Project Collection to visible."
               className="button-icon-primary"
               onClick={[Function]}
+              type="button"
             >
               <svg
                 aria-hidden={true}
@@ -100,6 +101,7 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
               aria-label="Change visibility of A Project Collection to visible."
               className="button-icon-primary"
               onClick={[Function]}
+              type="button"
             >
               <svg
                 aria-hidden={true}
@@ -154,6 +156,7 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
     <button
       className="button-icon-secondary"
       onClick={[Function]}
+      type="button"
     >
       <i
         className="manicon manicon-plus"

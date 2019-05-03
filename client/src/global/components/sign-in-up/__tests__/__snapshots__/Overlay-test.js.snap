@@ -48,6 +48,7 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
             className="overlay-close"
             data-id="overlay-close"
             onClick={[MockFunction]}
+            type="button"
           >
             Cancel
             <i
@@ -134,12 +135,14 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
               <button
                 data-id="show-forgot"
                 onClick={[Function]}
+                type="button"
               >
                 Forgot your password?
               </button>
               <button
                 data-id="show-create"
                 onClick={[Function]}
+                type="button"
               >
                 Need to sign up?
               </button>
@@ -151,6 +154,7 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
               <button
                 className="button-secondary-dark"
                 onClick={[Function]}
+                type="button"
               >
                 <i
                   aria-hidden="true"
@@ -163,6 +167,7 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
               <button
                 className="button-secondary-dark"
                 onClick={[Function]}
+                type="button"
               >
                 <i
                   aria-hidden="true"

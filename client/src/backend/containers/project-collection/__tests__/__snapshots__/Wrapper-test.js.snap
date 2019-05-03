@@ -60,6 +60,7 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
               <button
                 className="button-icon-secondary"
                 onClick={[Function]}
+                type="button"
               >
                 <i
                   className="manicon manicon-plus"
@@ -133,6 +134,7 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     aria-label="Change visibility of A Project Collection to visible."
                     className="button-icon-primary"
                     onClick={[Function]}
+                    type="button"
                   >
                     <svg
                       aria-hidden={true}
@@ -197,6 +199,7 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
                     aria-label="Change visibility of A Project Collection to visible."
                     className="button-icon-primary"
                     onClick={[Function]}
+                    type="button"
                   >
                     <svg
                       aria-hidden={true}
@@ -251,6 +254,7 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
           <button
             className="button-icon-secondary"
             onClick={[Function]}
+            type="button"
           >
             <i
               className="manicon manicon-plus"

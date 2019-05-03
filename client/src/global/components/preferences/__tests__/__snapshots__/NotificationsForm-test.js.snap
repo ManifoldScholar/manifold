@@ -164,6 +164,7 @@ exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = 
   <button
     className="button-bare-primary"
     onClick={[MockFunction]}
+    type="button"
   >
     Unsubscribe From All
   </button>

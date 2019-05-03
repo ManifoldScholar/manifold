@@ -29,6 +29,7 @@ Array [
           >
             <button
               className="entity-list-search__search-button"
+              type="button"
             >
               <svg
                 aria-hidden={true}
@@ -70,12 +71,14 @@ Array [
             <button
               className="entity-list-search__text-button"
               onClick={[Function]}
+              type="button"
             >
               Reset
             </button>
             <button
               className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
               onClick={[Function]}
+              type="button"
             >
               Options
             </button>

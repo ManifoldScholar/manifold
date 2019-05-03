@@ -186,6 +186,7 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
         <button
           className="button-bare-primary"
           onClick={[Function]}
+          type="button"
         >
           Unsubscribe From All
         </button>

@@ -118,6 +118,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
               <button
                 className="more-link"
                 onClick={[Function]}
+                type="button"
               >
                 <span
                   className="open-text"
@@ -169,6 +170,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
               className="slide-previous"
               disabled={true}
               onClick={[Function]}
+              type="button"
             >
               <i
                 aria-hidden="true"
@@ -194,6 +196,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
               className="slide-next"
               disabled={false}
               onClick={[Function]}
+              type="button"
             >
               <span
                 aria-hidden="true"
@@ -243,6 +246,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
         className="button-secondary outlined dull"
         data-id="close-overlay"
         onClick={[MockFunction]}
+        type="button"
       >
         <i
           aria-hidden="true"

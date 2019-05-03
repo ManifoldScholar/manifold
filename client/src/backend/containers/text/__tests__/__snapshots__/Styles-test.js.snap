@@ -70,7 +70,7 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                                 </a>
                                               </Link>
                                               <div className=\\"ordered-records-item__utility\\">
-                                                <button className=\\"ordered-records-item__button ordered-records-item__button--notice\\" onClick={[Function]}>
+                                                <button className=\\"ordered-records-item__button ordered-records-item__button--notice\\" onClick={[Function]} type=\\"button\\">
                                                   <IconComposer icon=\\"delete32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
                                                     <Delete svgProps={{...}} iconClass=\\"svg-icon--delete32\\" icon=\\"delete32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
                                                       <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--delete32\\" width={26} height={26} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
@@ -96,7 +96,7 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                                     </span>
                                                   </a>
                                                 </Link>
-                                                <button onMouseDown={[Function]} onKeyDown={[Function]} onTouchStart={[Function]} onTouchMove={[Function]} onClick={[Function]} tabIndex={0} aria-grabbed={false} data-react-beautiful-dnd-drag-handle=\\"0\\" draggable={false} onDragStart={[Function: getFalse]} onDrop={[Function: getFalse]} className=\\"ordered-records-item__button\\">
+                                                <button onMouseDown={[Function]} onKeyDown={[Function]} onTouchStart={[Function]} onTouchMove={[Function]} onClick={[Function]} tabIndex={0} aria-grabbed={false} data-react-beautiful-dnd-drag-handle=\\"0\\" draggable={false} onDragStart={[Function: getFalse]} onDrop={[Function: getFalse]} className=\\"ordered-records-item__button\\" type=\\"button\\">
                                                   <IconComposer icon=\\"grabber32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
                                                     <Grabber svgProps={{...}} iconClass=\\"svg-icon--grabber32\\" icon=\\"grabber32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
                                                       <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--grabber32\\" width={26} height={26} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
@@ -149,7 +149,7 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                                 </a>
                                               </Link>
                                               <div className=\\"ordered-records-item__utility\\">
-                                                <button className=\\"ordered-records-item__button ordered-records-item__button--notice\\" onClick={[Function]}>
+                                                <button className=\\"ordered-records-item__button ordered-records-item__button--notice\\" onClick={[Function]} type=\\"button\\">
                                                   <IconComposer icon=\\"delete32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
                                                     <Delete svgProps={{...}} iconClass=\\"svg-icon--delete32\\" icon=\\"delete32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
                                                       <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--delete32\\" width={26} height={26} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
@@ -175,7 +175,7 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                                     </span>
                                                   </a>
                                                 </Link>
-                                                <button onMouseDown={[Function]} onKeyDown={[Function]} onTouchStart={[Function]} onTouchMove={[Function]} onClick={[Function]} tabIndex={0} aria-grabbed={false} data-react-beautiful-dnd-drag-handle=\\"0\\" draggable={false} onDragStart={[Function: getFalse]} onDrop={[Function: getFalse]} className=\\"ordered-records-item__button\\">
+                                                <button onMouseDown={[Function]} onKeyDown={[Function]} onTouchStart={[Function]} onTouchMove={[Function]} onClick={[Function]} tabIndex={0} aria-grabbed={false} data-react-beautiful-dnd-drag-handle=\\"0\\" draggable={false} onDragStart={[Function: getFalse]} onDrop={[Function: getFalse]} className=\\"ordered-records-item__button\\" type=\\"button\\">
                                                   <IconComposer icon=\\"grabber32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
                                                     <Grabber svgProps={{...}} iconClass=\\"svg-icon--grabber32\\" icon=\\"grabber32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
                                                       <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--grabber32\\" width={26} height={26} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>

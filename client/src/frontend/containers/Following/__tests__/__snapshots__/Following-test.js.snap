@@ -158,6 +158,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
         <button
           className="reset-button"
           onClick={[Function]}
+          type="button"
         >
           Reset Search + Filters
         </button>
@@ -334,6 +335,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
                   <button
                     className="screen-reader-text"
                     onClick={[Function]}
+                    type="button"
                   >
                     add Rowan Test
                   </button>
@@ -601,6 +603,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
                   <button
                     className="screen-reader-text"
                     onClick={[Function]}
+                    type="button"
                   >
                     add Rowan Test
                   </button>
@@ -910,6 +913,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
                   <button
                     className="screen-reader-text"
                     onClick={[Function]}
+                    type="button"
                   >
                     add Rowan Test
                   </button>
@@ -1177,6 +1181,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
                   <button
                     className="screen-reader-text"
                     onClick={[Function]}
+                    type="button"
                   >
                     add Rowan Test
                   </button>

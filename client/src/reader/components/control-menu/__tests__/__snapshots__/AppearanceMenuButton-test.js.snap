@@ -5,6 +5,7 @@ exports[`Reader.ControlMenu.AppearanceMenuButton Component renders correctly 1`]
   className="button-appearance"
   data-id="toggle-appearance"
   onClick={[Function]}
+  type="button"
 >
   <svg
     aria-hidden={true}

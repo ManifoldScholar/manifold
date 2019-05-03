@@ -6,6 +6,7 @@ exports[`Reader.Annotation.Popup.Menu.Link Component renders correctly 1`] = `
 >
   <button
     onClick={[Function]}
+    type="button"
   >
     <i
       aria-hidden="true"
@@ -15,6 +16,7 @@ exports[`Reader.Annotation.Popup.Menu.Link Component renders correctly 1`] = `
   </button>
   <button
     onClick={[Function]}
+    type="button"
   >
     <i
       aria-hidden="true"

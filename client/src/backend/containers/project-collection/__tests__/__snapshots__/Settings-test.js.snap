@@ -71,6 +71,7 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
               aria-describedby="button-switch-1"
               className="button-switch-primary__button"
               onClick={[Function]}
+              type="button"
             >
               <div
                 className="button-switch-primary__wrapper"

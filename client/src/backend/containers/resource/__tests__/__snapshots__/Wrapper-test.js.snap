@@ -56,6 +56,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
               <button
                 className="button-bare-primary"
                 onClick={[Function]}
+                type="button"
               >
                 <i
                   aria-hidden="true"
@@ -67,6 +68,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
               <button
                 className="button-bare-primary"
                 onClick={[Function]}
+                type="button"
               >
                 <i
                   aria-hidden="true"
@@ -86,6 +88,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
         <button
           className="trigger"
           onClick={[Function]}
+          type="button"
         >
           <div
             className="selected"

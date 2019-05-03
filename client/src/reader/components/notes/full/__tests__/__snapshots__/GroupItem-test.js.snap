@@ -17,6 +17,7 @@ exports[`Reader.Notes.Full.GroupItem Component renders correctly 1`] = `
         <li>
           <button
             onClick={[Function]}
+            type="button"
           >
             View In Text
           </button>
@@ -24,6 +25,7 @@ exports[`Reader.Notes.Full.GroupItem Component renders correctly 1`] = `
         <li>
           <button
             onClick={[Function]}
+            type="button"
           >
             Delete
           </button>

@@ -5,6 +5,7 @@ exports[`Reader.Search.Button component renders correctly when active 1`] = `
   className="button-search button-active"
   data-id="toggle-menu"
   onClick={[Function]}
+  type="button"
 >
   <svg
     aria-hidden={true}
@@ -32,6 +33,7 @@ exports[`Reader.Search.Button component renders correctly when inactive 1`] = `
   className="button-search"
   data-id="toggle-menu"
   onClick={[Function]}
+  type="button"
 >
   <svg
     aria-hidden={true}

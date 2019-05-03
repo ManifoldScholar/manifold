@@ -12,6 +12,7 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
       <button
         aria-describedby="user-menu-edit-profile"
         onClick={[Function]}
+        type="button"
       >
         <i
           aria-hidden="true"
@@ -30,6 +31,7 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
       <button
         aria-describedby="user-menu-notifications"
         onClick={[Function]}
+        type="button"
       >
         <i
           aria-hidden="true"
@@ -48,6 +50,7 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
       <button
         aria-describedby="user-menu-logout"
         onClick={[Function]}
+        type="button"
       >
         <i
           aria-hidden="true"

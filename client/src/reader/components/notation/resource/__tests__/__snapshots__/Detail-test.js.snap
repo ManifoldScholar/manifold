@@ -202,6 +202,7 @@ exports[`Reader.Notation.Resource.Detail component renders correctly 1`] = `
         className="button-secondary outlined dull"
         data-id="close-overlay"
         onClick={[MockFunction]}
+        type="button"
       >
         <i
           aria-hidden="true"

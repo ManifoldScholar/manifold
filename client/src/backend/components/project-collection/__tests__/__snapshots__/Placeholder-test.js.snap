@@ -47,6 +47,7 @@ exports[`Backend.ProjectCollection.Placeholder component renders correctly 1`] =
       <button
         className="button-icon-secondary"
         onClick={[Function]}
+        type="button"
       >
         <i
           className="manicon manicon-plus"

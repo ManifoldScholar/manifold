@@ -31,6 +31,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
         <button
           className="annotate-button"
           onClick={[MockFunction]}
+          type="button"
         >
           Login to annotate
         </button>
@@ -97,6 +98,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                   <li>
                     <button
                       onClick={[MockFunction]}
+                      type="button"
                     >
                       Login to reply
                     </button>
@@ -161,6 +163,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                   <li>
                     <button
                       onClick={[MockFunction]}
+                      type="button"
                     >
                       Login to reply
                     </button>

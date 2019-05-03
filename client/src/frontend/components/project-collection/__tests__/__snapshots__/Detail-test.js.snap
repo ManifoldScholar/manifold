@@ -125,6 +125,7 @@ exports[`Frontend.ProjectCollection.Detail component renders correctly 1`] = `
       <button
         className="reset-button"
         onClick={[Function]}
+        type="button"
       >
         Reset Search + Filters
       </button>

@@ -299,6 +299,7 @@ The Manifold Team"
               <button
                 className="button-secondary-dark"
                 onClick={[Function]}
+                type="button"
               >
                 Send test email
               </button>
@@ -656,6 +657,7 @@ The Manifold Team"
               <button
                 className="button-secondary-dark"
                 onClick={[Function]}
+                type="button"
               >
                 Send test email
               </button>

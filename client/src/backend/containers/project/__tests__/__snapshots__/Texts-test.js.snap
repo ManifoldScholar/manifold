@@ -98,6 +98,7 @@ Array [
               <button
                 className="text-categories__button text-categories__button--notice"
                 onClick={[Function]}
+                type="button"
               >
                 <svg
                   aria-hidden={true}
@@ -302,6 +303,7 @@ Array [
               <button
                 className="texts-list__button texts-list__button--notice"
                 onClick={[Function]}
+                type="button"
               >
                 <svg
                   aria-hidden={true}

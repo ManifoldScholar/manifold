@@ -5,6 +5,7 @@ exports[`Reader.ReturnMenu.Button component renders correctly 1`] = `
   className="button-menu"
   data-id="toggle-menu"
   onClick={[Function]}
+  type="button"
 >
   Menu
 </button>

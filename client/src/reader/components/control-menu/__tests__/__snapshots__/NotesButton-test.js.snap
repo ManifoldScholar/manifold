@@ -5,6 +5,7 @@ exports[`Reader.ControlMenu.NotesButton Component renders correctly 1`] = `
   className="button-notes"
   data-id="toggle-notes"
   onClick={[Function]}
+  type="button"
 >
   <svg
     aria-hidden={true}

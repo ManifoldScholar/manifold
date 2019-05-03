@@ -4,6 +4,7 @@ exports[`Global.UserMenu.UserMenuButton Component renders correctly 1`] = `
 <button
   className="button-avatar"
   onClick={[Function]}
+  type="button"
 >
   <span
     className="screen-reader-text"

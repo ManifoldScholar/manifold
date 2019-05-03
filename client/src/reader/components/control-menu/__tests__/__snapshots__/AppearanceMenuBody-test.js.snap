@@ -12,6 +12,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
         <button
           className="font-type serif"
           onClick={[Function]}
+          type="button"
         >
           Serif
         </button>
@@ -21,6 +22,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           <button
             disabled={true}
             onClick={[Function]}
+            type="button"
           >
             <i
               aria-hidden="true"
@@ -35,6 +37,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           <button
             disabled={true}
             onClick={[Function]}
+            type="button"
           >
             <i
               aria-hidden="true"
@@ -54,6 +57,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
         <button
           className="font-type sans-serif"
           onClick={[Function]}
+          type="button"
         >
           Sans-serif
         </button>
@@ -63,6 +67,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           <button
             disabled={true}
             onClick={[Function]}
+            type="button"
           >
             <i
               aria-hidden="true"
@@ -77,6 +82,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           <button
             disabled={true}
             onClick={[Function]}
+            type="button"
           >
             <i
               aria-hidden="true"
@@ -98,6 +104,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
         <button
           className="color-scheme light"
           onClick={[Function]}
+          type="button"
         >
           <i
             aria-hidden="true"
@@ -112,6 +119,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
         <button
           className="color-scheme dark"
           onClick={[Function]}
+          type="button"
         >
           <i
             aria-hidden="true"
@@ -132,6 +140,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
         <button
           className="margin-increase"
           onClick={[Function]}
+          type="button"
         >
           <i
             aria-hidden="true"
@@ -153,6 +162,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
         <button
           className="margin-decrease"
           onClick={[Function]}
+          type="button"
         >
           <i
             aria-hidden="true"

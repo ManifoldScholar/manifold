@@ -29,6 +29,7 @@ exports[`Global.HeaderNotification component renders correctly 1`] = `
       className="notification-close"
       data-id="close"
       onClick={[Function]}
+      type="button"
     >
       <i
         aria-hidden="true"

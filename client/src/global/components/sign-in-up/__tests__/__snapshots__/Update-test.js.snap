@@ -181,6 +181,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
     <button
       className="button-secondary outlined"
       onClick={[Function]}
+      type="button"
     >
       Notification Settings
       <i

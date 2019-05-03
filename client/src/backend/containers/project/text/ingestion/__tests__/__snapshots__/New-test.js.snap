@@ -137,6 +137,7 @@ exports[`Project Text Ingestion New Container renders correctly 1`] = `
           <button
             className="button-icon-secondary dull"
             onClick={[Function]}
+            type="button"
           >
             <i
               aria-hidden="true"

@@ -6,6 +6,7 @@ exports[`Reader.Annotation.Popup.Menu.Annotate Component renders correctly when 
 >
   <button
     onClick={[MockFunction]}
+    type="button"
   >
     <i
       aria-hidden="true"

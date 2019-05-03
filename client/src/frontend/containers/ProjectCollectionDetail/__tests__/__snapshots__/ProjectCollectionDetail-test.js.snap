@@ -142,6 +142,7 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
         <button
           className="reset-button"
           onClick={[Function]}
+          type="button"
         >
           Reset Search + Filters
         </button>

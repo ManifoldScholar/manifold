@@ -65,7 +65,9 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
   >
     <ul>
       <li>
-        <button>
+        <button
+          type="button"
+        >
           Login to reply
         </button>
       </li>

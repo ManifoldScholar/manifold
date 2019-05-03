@@ -168,6 +168,7 @@ exports[`Frontend.Project.Thumbnail component renders correctly 1`] = `
       <button
         className="screen-reader-text"
         onClick={[Function]}
+        type="button"
       >
         add Rowan Test
       </button>

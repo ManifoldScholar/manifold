@@ -112,6 +112,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
             <button
               className="button-avatar"
               onClick={[Function]}
+              type="button"
             >
               <span
                 className="screen-reader-text"

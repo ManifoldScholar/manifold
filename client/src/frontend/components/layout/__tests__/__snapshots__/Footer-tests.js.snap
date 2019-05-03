@@ -39,6 +39,7 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
                 />
                 <button
                   className="icon"
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}

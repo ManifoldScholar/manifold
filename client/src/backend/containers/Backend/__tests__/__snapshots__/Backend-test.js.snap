@@ -104,7 +104,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                             </li>
                                             <li>
                                               <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
-                                                <button onClick={[Function]} className=\\"button-avatar\\">
+                                                <button onClick={[Function]} className=\\"button-avatar\\" type=\\"button\\">
                                                   <span className=\\"screen-reader-text\\">
                                                     Login or open user settings
                                                   </span>
@@ -204,7 +204,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                             Site Search
                                           </label>
                                           <input type=\\"text\\" id=\\"footer-search\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
-                                          <button className=\\"icon\\">
+                                          <button className=\\"icon\\" type=\\"button\\">
                                             <IconComposer className=\\"search-icon\\" icon=\\"search16\\" size={20} fill=\\"currentColor\\" svgProps={{...}}>
                                               <Search svgProps={{...}} iconClass=\\"svg-icon--search16\\" icon=\\"search16\\" size={20} fill=\\"currentColor\\" stroke=\\"currentColor\\">
                                                 <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--search16\\" width={20} height={20} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>

@@ -69,12 +69,14 @@ exports[`Reader.Annotation.Editor component renders correctly 1`] = `
         <button
           className="button-primary dull"
           onClick={[Function]}
+          type="button"
         >
           Cancel
         </button>
         <button
           className="button-secondary"
           disabled={true}
+          type="button"
         >
           Save
         </button>

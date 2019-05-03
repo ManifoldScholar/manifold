@@ -129,6 +129,7 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
     <button
       className="button-secondary-dark"
       onClick={[Function]}
+      type="button"
     >
       <i
         aria-hidden="true"
@@ -141,6 +142,7 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
     <button
       className="button-secondary-dark"
       onClick={[Function]}
+      type="button"
     >
       <i
         aria-hidden="true"
@@ -169,6 +171,7 @@ exports[`Global.SignInUp.Create component renders correctly 1`] = `
     <button
       data-id="show-login"
       onClick={[Function]}
+      type="button"
     >
       Already have an account?
     </button>

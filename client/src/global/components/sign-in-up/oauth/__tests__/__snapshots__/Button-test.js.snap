@@ -4,6 +4,7 @@ exports[`Global.Oauth.Button component renders correctly 1`] = `
 <button
   className="button-secondary-dark"
   onClick={[Function]}
+  type="button"
 >
   <i
     aria-hidden="true"

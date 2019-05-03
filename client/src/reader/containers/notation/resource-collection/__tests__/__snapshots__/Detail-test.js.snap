@@ -15,6 +15,7 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
       className="overlay-close"
       data-id="overlay-close"
       onClick={[Function]}
+      type="button"
     >
       Close
       <i
@@ -150,6 +151,7 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                       <button
                         className="more-link"
                         onClick={[Function]}
+                        type="button"
                       >
                         <span
                           className="open-text"
@@ -201,6 +203,7 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                       className="slide-previous"
                       disabled={true}
                       onClick={[Function]}
+                      type="button"
                     >
                       <i
                         aria-hidden="true"
@@ -226,6 +229,7 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                       className="slide-next"
                       disabled={false}
                       onClick={[Function]}
+                      type="button"
                     >
                       <span
                         aria-hidden="true"
@@ -275,6 +279,7 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                 className="button-secondary outlined dull"
                 data-id="close-overlay"
                 onClick={[Function]}
+                type="button"
               >
                 <i
                   aria-hidden="true"

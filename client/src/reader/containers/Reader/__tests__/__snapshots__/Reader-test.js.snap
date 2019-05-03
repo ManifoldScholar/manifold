@@ -23,12 +23,14 @@ exports[`Reader Reader Container renders correctly 1`] = `
             className="button-menu"
             data-id="toggle-menu"
             onClick={[Function]}
+            type="button"
           >
             Menu
           </button>
           <button
             className="button-index"
             onClick={[Function]}
+            type="button"
           >
             Contents
             <i
@@ -70,6 +72,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                   className="button-notes"
                   data-id="toggle-notes"
                   onClick={[Function]}
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -96,6 +99,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                   className="button-visibility"
                   data-id="toggle-visibility"
                   onClick={[Function]}
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -122,6 +126,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                   className="button-appearance"
                   data-id="toggle-appearance"
                   onClick={[Function]}
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -148,6 +153,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                   className="button-search"
                   data-id="toggle-menu"
                   onClick={[Function]}
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -173,6 +179,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 <button
                   className="button-avatar"
                   onClick={[Function]}
+                  type="button"
                 >
                   <span
                     className="screen-reader-text"
@@ -288,6 +295,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
               className="button-notes"
               data-id="toggle-notes"
               onClick={[Function]}
+              type="button"
             >
               <svg
                 aria-hidden={true}
@@ -314,6 +322,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
               className="button-visibility"
               data-id="toggle-visibility"
               onClick={[Function]}
+              type="button"
             >
               <svg
                 aria-hidden={true}
@@ -340,6 +349,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
               className="button-appearance"
               data-id="toggle-appearance"
               onClick={[Function]}
+              type="button"
             >
               <svg
                 aria-hidden={true}

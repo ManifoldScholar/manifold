@@ -86,6 +86,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
             <button
               className="more-link"
               onClick={[Function]}
+              type="button"
             >
               <span
                 className="open-text"
@@ -137,6 +138,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
             className="slide-previous"
             disabled={true}
             onClick={[Function]}
+            type="button"
           >
             <i
               aria-hidden="true"
@@ -162,6 +164,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
             className="slide-next"
             disabled={false}
             onClick={[Function]}
+            type="button"
           >
             <span
               aria-hidden="true"

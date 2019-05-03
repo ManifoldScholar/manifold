@@ -31,6 +31,7 @@ exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
       <button
         className="more-link"
         onClick={[Function]}
+        type="button"
       >
         <span
           className="open-text"

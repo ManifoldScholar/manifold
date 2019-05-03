@@ -132,6 +132,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
         <button
           className="reset-button"
           onClick={[Function]}
+          type="button"
         >
           Reset Search + Filters
         </button>
@@ -308,6 +309,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
                   <button
                     className="screen-reader-text"
                     onClick={[Function]}
+                    type="button"
                   >
                     add Rowan Test
                   </button>
@@ -575,6 +577,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
                   <button
                     className="screen-reader-text"
                     onClick={[Function]}
+                    type="button"
                   >
                     add Rowan Test
                   </button>

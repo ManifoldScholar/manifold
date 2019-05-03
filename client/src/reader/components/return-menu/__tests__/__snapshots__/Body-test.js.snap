@@ -37,6 +37,7 @@ exports[`Reader.ReturnMenu.Body component renders correctly 1`] = `
         className="flush-bottom"
         data-id="toggle-overlay"
         onClick={[MockFunction]}
+        type="button"
       >
         <i
           aria-hidden="true"

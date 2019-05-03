@@ -119,6 +119,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                   className="button-search"
                   data-id="toggle-menu"
                   onClick={[Function]}
+                  type="button"
                 >
                   <svg
                     aria-hidden={true}
@@ -145,6 +146,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                 <button
                   className="button-avatar"
                   onClick={[Function]}
+                  type="button"
                 >
                   <span
                     className="screen-reader-text"
@@ -264,6 +266,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                   />
                   <button
                     className="icon"
+                    type="button"
                   >
                     <svg
                       aria-hidden={true}

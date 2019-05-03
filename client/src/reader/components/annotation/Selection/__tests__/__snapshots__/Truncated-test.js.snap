@@ -9,7 +9,7 @@ exports[`Reader.Annotation.Selection.Truncated Component renders correctly 1`] =
           <div dangerouslySetInnerHTML={{...}} />
         </div>
       </div>
-      <button className=\\"button-trim-primary trim-top\\" onClick={[Function]}>
+      <button className=\\"button-trim-primary trim-top\\" onClick={[Function]} type=\\"button\\">
         Read Full Passage
       </button>
     </div>

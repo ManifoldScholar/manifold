@@ -25,6 +25,7 @@ exports[`Reader.Toc Component renders correctly 1`] = `
             className="screen-reader-text"
             onClick={[Function]}
             tabIndex="0"
+            type="button"
           >
             Close
           </button>
@@ -56,6 +57,7 @@ exports[`Reader.Toc Component renders correctly 1`] = `
             >
               <button
                 onClick={[Function]}
+                type="button"
               >
                 <h4>
                   <i
@@ -99,6 +101,7 @@ exports[`Reader.Toc Component renders correctly with empty toc 1`] = `
             className="screen-reader-text"
             onClick={[Function]}
             tabIndex="0"
+            type="button"
           >
             Close
           </button>
@@ -116,6 +119,7 @@ exports[`Reader.Toc Component renders correctly with empty toc 1`] = `
             >
               <button
                 onClick={[Function]}
+                type="button"
               >
                 <h4>
                   <i
