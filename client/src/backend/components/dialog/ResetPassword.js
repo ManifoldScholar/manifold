@@ -59,12 +59,9 @@ class ResetPasswordWrapper extends PureComponent {
     this.props.dispatch(flush([requests.beUserUpdate]));
   }
 
-  handleInputChange(event) {
-    event.preventDefault();
-    this.setState({
-      password: event.target.value
-    });
-  }
+  handleResolveClick = () => {
+    this.props.uiProps.resolve();
+  };
 
   handleKeyPress = event => {
     event.preventDefault();
@@ -76,6 +73,13 @@ class ResetPasswordWrapper extends PureComponent {
     this.props.uiProps.reject();
   };
 
+  handleInputChange(event) {
+    event.preventDefault();
+    this.setState({
+      password: event.target.value
+    });
+  }
+
   handleResetEmailClick(event, user) {
     event.preventDefault();
     const call = passwordsAPI.admin_reset_password(user.id);
@@ -84,10 +88,6 @@ class ResetPasswordWrapper extends PureComponent {
       this.handleResolveClick();
     });
   }
-
-  handleResolveClick = () => {
-    this.props.uiProps.resolve();
-  };
 
   handleStateChange(event, name, value) {
     event.preventDefault();

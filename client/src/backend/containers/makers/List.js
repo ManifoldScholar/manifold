@@ -69,6 +69,12 @@ class MakersListContainerImplementation extends PureComponent {
     this.props.dispatch(action);
   };
 
+  pageChangeHandlerCreator = page => {
+    return event => {
+      this.handlePageChange(event, page);
+    };
+  };
+
   filtersChanged(prevProps) {
     return (
       prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
@@ -85,12 +91,6 @@ class MakersListContainerImplementation extends PureComponent {
     if (!currentModified) return false;
     return !(currentModified && previousModified);
   }
-
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handlePageChange(event, page);
-    };
-  };
 
   render() {
     const { makers, makersMeta, match } = this.props;

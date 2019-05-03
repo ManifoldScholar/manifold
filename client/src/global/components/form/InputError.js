@@ -13,16 +13,16 @@ export default class InputError extends Component {
     idForError: PropTypes.string
   };
 
+  hasErrors = () => {
+    return this.props.errors.length > 0;
+  };
+
   errorString(error) {
     const param = get(error, "source.param");
     const pointer = get(error, "source.pointer");
     const name = this.props.name || param || this.nameFromPointer(pointer);
     return `${capitalize(name)} ${error.detail}.  `;
   }
-
-  hasErrors = () => {
-    return this.props.errors.length > 0;
-  };
 
   nameFromPointer(pointer) {
     const attribute = humps.decamelize(pointer.split("/").pop(), {

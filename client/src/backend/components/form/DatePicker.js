@@ -23,8 +23,21 @@ class DatePicker extends PureComponent {
     wide: PropTypes.bool
   };
 
+  get value() {
+    if (!this.props.value) return null;
+    const date = isDate(this.props.value)
+      ? this.props.value
+      : new Date(this.props.value);
+
+    return this.dateUTC(date);
+  }
+
   clear = () => {
     this.props.set(null);
+  };
+
+  handleChange = date => {
+    return this.props.set(date);
   };
 
   // The API returns values in UTC, but the JS tries to render dates in the user's local
@@ -34,19 +47,6 @@ class DatePicker extends PureComponent {
   dateUTC(date) {
     const adjusted = date.getTime() + date.getTimezoneOffset() * 60000;
     return new Date(adjusted);
-  }
-
-  handleChange = date => {
-    return this.props.set(date);
-  };
-
-  get value() {
-    if (!this.props.value) return null;
-    const date = isDate(this.props.value)
-      ? this.props.value
-      : new Date(this.props.value);
-
-    return this.dateUTC(date);
   }
 
   render() {

@@ -31,12 +31,6 @@ class ContentFeaturesList extends PureComponent {
     this.fetchFeatures();
   }
 
-  fetchFeatures() {
-    const call = featuresAPI.index();
-    const featuresRequest = request(call, requests.beFeatures);
-    this.props.dispatch(featuresRequest);
-  }
-
   togglePublished = feature => {
     if (!feature) return null;
     const attributes = {
@@ -46,6 +40,12 @@ class ContentFeaturesList extends PureComponent {
     const featureRequest = request(call, requests.beFeatureUpdate);
     this.props.dispatch(featureRequest);
   };
+
+  fetchFeatures() {
+    const call = featuresAPI.index();
+    const featuresRequest = request(call, requests.beFeatures);
+    this.props.dispatch(featuresRequest);
+  }
 
   render() {
     const { features } = this.props;

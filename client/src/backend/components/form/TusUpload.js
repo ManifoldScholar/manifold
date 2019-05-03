@@ -71,11 +71,6 @@ export class FormTusUpload extends Component {
     set(source);
   };
 
-  removeFile() {
-    this.props.set(null);
-    this.setState({ progress: null, error: null });
-  }
-
   updateValue = state => {
     const { attachment } = state;
     if (attachment) {
@@ -100,6 +95,11 @@ export class FormTusUpload extends Component {
       this.removeFile();
     }
   };
+
+  removeFile() {
+    this.props.set(null);
+    this.setState({ progress: null, error: null });
+  }
 
   render() {
     const { set: setIgnored, ...baseProps } = this.props;

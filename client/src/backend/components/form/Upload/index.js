@@ -97,14 +97,6 @@ export class FormUpload extends Component {
     }
   };
 
-  accepts(props) {
-    const { accepts: key } = props;
-    let config;
-    config = get(FormUpload.types, key);
-    if (!config) config = FormUpload.types.any;
-    return config;
-  }
-
   updateValue = state => {
     const { attachment, removed } = state;
     const { set, setOther, remove: removeName } = this.props;
@@ -120,6 +112,14 @@ export class FormUpload extends Component {
       set(null);
     }
   };
+
+  accepts(props) {
+    const { accepts: key } = props;
+    let config;
+    config = get(FormUpload.types, key);
+    if (!config) config = FormUpload.types.any;
+    return config;
+  }
 
   render() {
     const { set: _set, setOther: _setOther, ...baseProps } = this.props;

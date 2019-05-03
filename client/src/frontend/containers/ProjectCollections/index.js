@@ -73,15 +73,6 @@ export class ProjectsCollectionsContainer extends Component {
     this.props.fetchData(this.props);
   }
 
-  currentQuery() {
-    return queryString.parse(this.props.location.search);
-  }
-
-  doQuery(query) {
-    const url = lh.link("frontendProjectCollections", query);
-    this.props.history.push(url);
-  }
-
   handlePageChange = (event, page) => {
     event.preventDefault();
     const query = Object.assign({}, this.currentQuery(), { page });
@@ -93,6 +84,15 @@ export class ProjectsCollectionsContainer extends Component {
       this.handlePageChange(event, page);
     };
   };
+
+  currentQuery() {
+    return queryString.parse(this.props.location.search);
+  }
+
+  doQuery(query) {
+    const url = lh.link("frontendProjectCollections", query);
+    this.props.history.push(url);
+  }
 
   showPlaceholder() {
     const { location, projectCollections } = this.props;

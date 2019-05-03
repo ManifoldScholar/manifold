@@ -50,6 +50,12 @@ export class ProjectResourceCollectionsListContainerImplementation extends PureC
     if (this.filtersChanged(prevProps)) return this.fetchCollections();
   }
 
+  pageChangeHandlerCreator = page => {
+    return event => {
+      this.handleCollectionsPageChange(event, page);
+    };
+  };
+
   filtersChanged(prevProps) {
     return (
       prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
@@ -72,12 +78,6 @@ export class ProjectResourceCollectionsListContainerImplementation extends PureC
   handleCollectionsPageChange(event, page) {
     this.fetchCollections(page);
   }
-
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleCollectionsPageChange(event, page);
-    };
-  };
 
   render() {
     if (!this.props.resourceCollections) return null;

@@ -131,6 +131,16 @@ export default class SearchQueryForm extends PureComponent {
     return scopes;
   }
 
+  get selectedFacets() {
+    return this.state.facets;
+  }
+
+  doSearch = (event = null) => {
+    if (event) event.preventDefault();
+    if (!this.state.keyword) return null; // If there's no keyword, don't do anything yet.
+    this.props.setQueryState(this.state);
+  };
+
   deselectFacet(key) {
     const selected = this.state.facets;
     let updated = selected;
@@ -144,12 +154,6 @@ export default class SearchQueryForm extends PureComponent {
     }
     return this.setSelectedFacets(updated, allFacets);
   }
-
-  doSearch = (event = null) => {
-    if (event) event.preventDefault();
-    if (!this.state.keyword) return null; // If there's no keyword, don't do anything yet.
-    this.props.setQueryState(this.state);
-  };
 
   facetChecked(value) {
     if (this.state.allFacets) {
@@ -206,10 +210,6 @@ export default class SearchQueryForm extends PureComponent {
     const selected = this.state.facets;
     const updated = this.facetSelected(key) ? selected : [...selected, key];
     return this.setSelectedFacets(updated);
-  }
-
-  get selectedFacets() {
-    return this.state.facets;
   }
 
   valueFromEvent(event) {

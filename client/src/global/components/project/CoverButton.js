@@ -89,6 +89,16 @@ export default class CoverButton extends Component {
     return this.handleRemove();
   };
 
+  toggleFollow = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.props.selected) {
+      this.handleRemove();
+    } else {
+      this.handleAdd();
+    }
+  };
+
   screenReaderButtonText() {
     switch (this.state.view) {
       case "add":
@@ -101,16 +111,6 @@ export default class CoverButton extends Component {
         return null;
     }
   }
-
-  toggleFollow = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    if (this.props.selected) {
-      this.handleRemove();
-    } else {
-      this.handleAdd();
-    }
-  };
 
   renderButton(view) {
     switch (view) {

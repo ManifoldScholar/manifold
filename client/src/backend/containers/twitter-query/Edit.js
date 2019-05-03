@@ -48,6 +48,17 @@ export class TwitterQueryEditContainer extends PureComponent {
     this.props.dispatch(flush([requests.beTwitterQuery]));
   }
 
+  get twitterEnabled() {
+    const { settings } = this.props;
+    if (!settings) return false;
+
+    const {
+      twitterAppId,
+      twitterAccessToken
+    } = settings.attributes.integrations;
+    return twitterAppId && twitterAccessToken;
+  }
+
   destroyQuery = () => {
     const { twitterQuery } = this.props;
     const call = twitterQueriesAPI.destroy(twitterQuery.id);
@@ -57,12 +68,6 @@ export class TwitterQueryEditContainer extends PureComponent {
       this.redirectToProjectSocial(this.props.match.params.pId);
     });
   };
-
-  fetchTwitterQuery(id) {
-    const call = twitterQueriesAPI.show(id);
-    const queryRequest = request(call, requests.beTwitterQuery);
-    this.props.dispatch(queryRequest);
-  }
 
   handleQueryDestroy = () => {
     const heading = "Are you sure you want to delete this twitter query?";
@@ -90,19 +95,14 @@ export class TwitterQueryEditContainer extends PureComponent {
     });
   };
 
-  redirectToProjectSocial(pId) {
-    return this.props.history.push(lh.link("backendProjectSocial", pId));
+  fetchTwitterQuery(id) {
+    const call = twitterQueriesAPI.show(id);
+    const queryRequest = request(call, requests.beTwitterQuery);
+    this.props.dispatch(queryRequest);
   }
 
-  get twitterEnabled() {
-    const { settings } = this.props;
-    if (!settings) return false;
-
-    const {
-      twitterAppId,
-      twitterAccessToken
-    } = settings.attributes.integrations;
-    return twitterAppId && twitterAccessToken;
+  redirectToProjectSocial(pId) {
+    return this.props.history.push(lh.link("backendProjectSocial", pId));
   }
 
   render() {

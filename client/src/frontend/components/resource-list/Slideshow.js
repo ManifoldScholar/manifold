@@ -95,19 +95,6 @@ export default class ResourceSlideshow extends PureComponent {
     }
   };
 
-  buildNewMap(collectionResources, pagination) {
-    const updates = {};
-    const start = pagination.perPage * (pagination.currentPage - 1) + 1;
-    collectionResources.forEach((collectionResource, index) => {
-      updates[start + index] = collectionResource;
-    });
-    return Object.assign({}, this.state.map, updates);
-  }
-
-  current() {
-    return this.state.map[this.state.currentPosition];
-  }
-
   handleSlideNext = () => {
     if (this.state.slideDirection !== "left") {
       this.setState({
@@ -144,6 +131,19 @@ export default class ResourceSlideshow extends PureComponent {
       this.props.dispatch(request(fetch, requests.feSlideshow));
     }
   };
+
+  buildNewMap(collectionResources, pagination) {
+    const updates = {};
+    const start = pagination.perPage * (pagination.currentPage - 1) + 1;
+    collectionResources.forEach((collectionResource, index) => {
+      updates[start + index] = collectionResource;
+    });
+    return Object.assign({}, this.state.map, updates);
+  }
+
+  current() {
+    return this.state.map[this.state.currentPosition];
+  }
 
   isLoaded(position) {
     return this.state.map.hasOwnProperty(position);

@@ -89,11 +89,6 @@ class FetchSelect extends PureComponent {
     return (this._list.scrollTop = 0);
   };
 
-  hasOptions(options) {
-    if (!options) return false;
-    return options.length > 0;
-  }
-
   updateOptions = fetch => {
     const { endpoint, method, options } = fetch({ ...this.props.fetchOptions });
 
@@ -113,6 +108,14 @@ class FetchSelect extends PureComponent {
     });
   };
 
+  selectAll = () => {
+    this.select(this.state.options);
+  };
+
+  removeAll = () => {
+    this.select([]);
+  };
+
   select(option) {
     this.close();
     this.props.onSelect(option);
@@ -122,13 +125,10 @@ class FetchSelect extends PureComponent {
     this.select(option);
   }
 
-  selectAll = () => {
-    this.select(this.state.options);
-  };
-
-  removeAll = () => {
-    this.select([]);
-  };
+  hasOptions(options) {
+    if (!options) return false;
+    return options.length > 0;
+  }
 
   renderAddRemoveAll() {
     if (!this.multiSelect) return null;

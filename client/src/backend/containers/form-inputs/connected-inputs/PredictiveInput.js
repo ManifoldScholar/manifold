@@ -71,29 +71,9 @@ class PredictiveInput extends PureComponent {
       .indexOf(id);
   }
 
-  clear() {
-    const state = update(this.state, { value: { $set: "" } });
-    this.setState(state);
-  }
-
-  close() {
-    const state = update(this.state, { open: { $set: false } });
-    this.setState(state);
-  }
-
-  open() {
-    const state = update(this.state, { open: { $set: true } });
-    this.setState(state);
-  }
-
   handleFocus = eventIgnored => {
     this.open();
   };
-
-  hasOptions(options) {
-    if (!options) return false;
-    return options.length > 0;
-  }
 
   handleKeyPress = event => {
     if (event.key === "Enter") {
@@ -210,6 +190,26 @@ class PredictiveInput extends PureComponent {
     event.preventDefault();
     this.submit();
   };
+
+  clear() {
+    const state = update(this.state, { value: { $set: "" } });
+    this.setState(state);
+  }
+
+  close() {
+    const state = update(this.state, { open: { $set: false } });
+    this.setState(state);
+  }
+
+  open() {
+    const state = update(this.state, { open: { $set: true } });
+    this.setState(state);
+  }
+
+  hasOptions(options) {
+    if (!options) return false;
+    return options.length > 0;
+  }
 
   submit() {
     this.props.onNew(this.state.value);

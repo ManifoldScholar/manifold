@@ -48,16 +48,16 @@ export default class CategoryList extends Component {
     return this.props.callbacks;
   }
 
-  findStylesheet(id) {
-    return this.stylesheets.find(ss => ss.id === id);
-  }
-
   get stylesheets() {
     return this.state.stylesheets;
   }
 
   get text() {
     return this.props.text;
+  }
+
+  findStylesheet(id) {
+    return this.stylesheets.find(ss => ss.id === id);
   }
 
   updateInternalState(stylesheet, index) {

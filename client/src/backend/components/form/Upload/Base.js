@@ -77,6 +77,11 @@ export default class FormUpload extends Component {
     return this.props.getModelValue(this.props.fileNameFrom);
   }
 
+  get previewable() {
+    if (this.currentPreview) return true;
+    return false;
+  }
+
   handleFileDrop = file => {
     this.setState({ attachment: file[0], removed: false });
   };
@@ -86,11 +91,6 @@ export default class FormUpload extends Component {
     event.stopPropagation();
     this.setState({ attachment: null, removed: true });
   };
-
-  get previewable() {
-    if (this.currentPreview) return true;
-    return false;
-  }
 
   render() {
     const labelClass = classnames({

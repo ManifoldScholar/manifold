@@ -41,14 +41,6 @@ export default class CategoryList extends PureComponent {
     return this.props.categories;
   }
 
-  findCategory(id) {
-    return this.categories.find(c => c.id === id);
-  }
-
-  findText(id) {
-    return this.texts.find(t => t.id === id);
-  }
-
   get project() {
     return this.props.project;
   }
@@ -63,6 +55,14 @@ export default class CategoryList extends PureComponent {
       .sort((a, b) => {
         return a.attributes.position - b.attributes.position;
       });
+  }
+
+  findCategory(id) {
+    return this.categories.find(c => c.id === id);
+  }
+
+  findText(id) {
+    return this.texts.find(t => t.id === id);
   }
 
   updateCategoryPosition(draggable) {

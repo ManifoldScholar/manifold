@@ -44,31 +44,8 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
     this.props.dispatch(flush(requests.beResources));
   }
 
-  addToCollection(entity, collectionResources) {
-    const newEntities = collectionResources.slice(0);
-    newEntities.push(entity);
-    this.updateResources(newEntities, "select");
-  }
-
-  fetchResources(page = 1) {
-    const pagination = { number: page, size: perPage };
-    const filters = this.props.entitiesListSearchParams.resources;
-    const projectId = this.props.resourceCollection.relationships.project.id;
-    const action = request(
-      projectsAPI.resources(projectId, filters, pagination),
-      requests.beResources
-    );
-    this.props.dispatch(action);
-  }
-
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
-
-  handleResourcesPageChange(event, page) {
-    this.fetchResources(page);
+  get project() {
+    return this.props.resourceCollection.relationships.project;
   }
 
   handleSelect = (event, resource) => {
@@ -104,17 +81,6 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
     };
   };
 
-  get project() {
-    return this.props.resourceCollection.relationships.project;
-  }
-
-  removeFromCollection(entity, collectionResources) {
-    const newEntities = collectionResources.filter(compare => {
-      return compare.id !== entity.id;
-    });
-    this.updateResources(newEntities, "remove");
-  }
-
   toggleCollectionOnly = event => {
     event.preventDefault();
     const { setParam } = this.props.entitiesListSearchProps("resources");
@@ -128,6 +94,40 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
       );
     }
   };
+
+  removeFromCollection(entity, collectionResources) {
+    const newEntities = collectionResources.filter(compare => {
+      return compare.id !== entity.id;
+    });
+    this.updateResources(newEntities, "remove");
+  }
+
+  fetchResources(page = 1) {
+    const pagination = { number: page, size: perPage };
+    const filters = this.props.entitiesListSearchParams.resources;
+    const projectId = this.props.resourceCollection.relationships.project.id;
+    const action = request(
+      projectsAPI.resources(projectId, filters, pagination),
+      requests.beResources
+    );
+    this.props.dispatch(action);
+  }
+
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
+  }
+
+  handleResourcesPageChange(event, page) {
+    this.fetchResources(page);
+  }
+
+  addToCollection(entity, collectionResources) {
+    const newEntities = collectionResources.slice(0);
+    newEntities.push(entity);
+    this.updateResources(newEntities, "select");
+  }
 
   updateResources(resources, changeTypeIgnored) {
     const adjustedResources = resources.map(e => {

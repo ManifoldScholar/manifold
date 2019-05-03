@@ -36,26 +36,6 @@ class PasswordForgotContainer extends Component {
     this.props.dispatch(flush([requests.gPasswordRequest]));
   }
 
-  closeOverlay() {
-    this.props.hideSignInUpOverlay();
-  }
-
-  createSuccessNotification() {
-    const notification = {
-      level: 0,
-      id: "PASSWORD_RESET_SENT",
-      heading: `Email sent to ${
-        this.state.email
-      } with instructions to reset your password.`
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-    setTimeout(() => {
-      this.props.dispatch(
-        notificationActions.removeNotification(notification.id)
-      );
-    }, 5000);
-  }
-
   handleInputChange = event => {
     this.setState({ email: event.target.value });
   };
@@ -76,6 +56,26 @@ class PasswordForgotContainer extends Component {
         });
     });
   };
+
+  closeOverlay() {
+    this.props.hideSignInUpOverlay();
+  }
+
+  createSuccessNotification() {
+    const notification = {
+      level: 0,
+      id: "PASSWORD_RESET_SENT",
+      heading: `Email sent to ${
+        this.state.email
+      } with instructions to reset your password.`
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+    setTimeout(() => {
+      this.props.dispatch(
+        notificationActions.removeNotification(notification.id)
+      );
+    }, 5000);
+  }
 
   postSubmit() {
     this.createSuccessNotification();

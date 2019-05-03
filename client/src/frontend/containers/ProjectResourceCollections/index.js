@@ -59,6 +59,13 @@ class ProjectResourceCollectionsContainer extends Component {
     this.props.dispatch(flush(requests.feResourceCollections));
   }
 
+  handlePaginationClick = pageParam => {
+    return event => {
+      event.preventDefault();
+      return this.fetchResourceCollections(pageParam);
+    };
+  };
+
   fetchResourceCollections(pageParam = 1) {
     const action = request(
       projectsAPI.resourceCollections(
@@ -70,13 +77,6 @@ class ProjectResourceCollectionsContainer extends Component {
     );
     this.props.dispatch(action);
   }
-
-  handlePaginationClick = pageParam => {
-    return event => {
-      event.preventDefault();
-      return this.fetchResourceCollections(pageParam);
-    };
-  };
 
   render() {
     const { project, settings } = this.props;

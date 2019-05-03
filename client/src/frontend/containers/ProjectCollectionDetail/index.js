@@ -105,6 +105,13 @@ export class ProjectCollectionDetailContainer extends Component {
     this.setState({ pagination }, this.updateResults);
   };
 
+  pageChangeHandlerCreator = pageParam => {
+    return event => {
+      event.preventDefault();
+      this.handlePageChange(pageParam);
+    };
+  };
+
   initialState(init) {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
 
@@ -116,13 +123,6 @@ export class ProjectCollectionDetailContainer extends Component {
       }
     };
   }
-
-  pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      this.handlePageChange(pageParam);
-    };
-  };
 
   updateResults(filter = this.state.filter) {
     const updatedFilter = Object.assign({}, filter, {

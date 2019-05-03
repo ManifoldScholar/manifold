@@ -10,13 +10,13 @@ export default class KindPicker extends Component {
     setOther: PropTypes.func
   };
 
-  handleSmartClick = () => {
-    this.props.setOther(!this.isSmart, "attributes[smart]");
-  };
-
   get isSmart() {
     return this.props.getModelValue("attributes[smart]");
   }
+
+  handleSmartClick = () => {
+    this.props.setOther(!this.isSmart, "attributes[smart]");
+  };
 
   render() {
     const selected = this.isSmart ? "Smart Collection" : "Manual Collection";

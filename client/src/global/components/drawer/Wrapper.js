@@ -115,16 +115,6 @@ export default class DrawerWrapper extends PureComponent {
     this.clearGlobalNotifications();
   }
 
-  clearDrawerNotifications() {
-    if (this.props.dispatch)
-      this.props.dispatch(notificationActions.removeNotifications("drawer"));
-  }
-
-  clearGlobalNotifications() {
-    if (this.props.dispatch)
-      this.props.dispatch(notificationActions.removeNotifications("global"));
-  }
-
   handleLeaveEvent = event => {
     this.clearDrawerNotifications();
 
@@ -158,6 +148,16 @@ export default class DrawerWrapper extends PureComponent {
   unpauseKeyboardEvents = () => {
     this.setState({ keyboardEventsPaused: false });
   };
+
+  clearDrawerNotifications() {
+    if (this.props.dispatch)
+      this.props.dispatch(notificationActions.removeNotifications("drawer"));
+  }
+
+  clearGlobalNotifications() {
+    if (this.props.dispatch)
+      this.props.dispatch(notificationActions.removeNotifications("global"));
+  }
 
   renderChildren() {
     if (!this.props.children) return null;

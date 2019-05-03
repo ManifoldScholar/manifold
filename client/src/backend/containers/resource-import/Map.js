@@ -37,15 +37,6 @@ export class ResourceImportMap extends PureComponent {
     this.props.history.push(url);
   };
 
-  backLinkUrl() {
-    const { match } = this.props;
-    return lh.link(
-      "backendResourceImportEdit",
-      match.params.projectId,
-      match.params.id
-    );
-  }
-
   create = model => {
     return this.props.create(this.preSave(model));
   };
@@ -60,6 +51,15 @@ export class ResourceImportMap extends PureComponent {
     return this.props.update(id, this.preSave(model));
   };
   /* eslint-enable no-param-reassign */
+
+  backLinkUrl() {
+    const { match } = this.props;
+    return lh.link(
+      "backendResourceImportEdit",
+      match.params.projectId,
+      match.params.id
+    );
+  }
 
   render() {
     const { resourceImport } = this.props;

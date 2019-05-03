@@ -19,14 +19,14 @@ export class UsersNewContainer extends PureComponent {
     this.defaultUser = { attributes: { role: "reader" } };
   }
 
+  handleSuccess = user => {
+    this.redirectToUser(user);
+  };
+
   createUser(user) {
     const meta = { createdByAdmin: true };
     return usersAPI.create(Object.assign({}, user, { meta }));
   }
-
-  handleSuccess = user => {
-    this.redirectToUser(user);
-  };
 
   redirectToUser(user) {
     const path = lh.link("backendRecordsUser", user.id);

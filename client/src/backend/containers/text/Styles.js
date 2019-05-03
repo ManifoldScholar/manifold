@@ -31,6 +31,14 @@ export class TextStylesContainer extends PureComponent {
     };
   }
 
+  get stylesheets() {
+    return this.text.relationships.stylesheets;
+  }
+
+  get text() {
+    return this.props.text;
+  }
+
   confirmDestroy = stylesheet => {
     const heading = "Are you sure you want to delete this stylesheet?";
     const message = "This action cannot be undone.";
@@ -49,14 +57,6 @@ export class TextStylesContainer extends PureComponent {
       this.props.refresh();
     });
   };
-
-  get stylesheets() {
-    return this.text.relationships.stylesheets;
-  }
-
-  get text() {
-    return this.props.text;
-  }
 
   updatePosition = (stylesheet, newPos) => {
     const changes = {

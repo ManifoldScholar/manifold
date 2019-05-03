@@ -26,10 +26,6 @@ export default class IconPicker extends Component {
     wide: PropTypes.bool
   };
 
-  handleIconChange = icon => {
-    this.props.setOther(icon, "attributes[icon]");
-  };
-
   get icons() {
     return [
       "book-stack-vertical",
@@ -45,6 +41,10 @@ export default class IconPicker extends Component {
   get selected() {
     return this.props.getModelValue("attributes[icon]");
   }
+
+  handleIconChange = icon => {
+    this.props.setOther(icon, "attributes[icon]");
+  };
 
   renderIcon(icon) {
     const { selected } = this;

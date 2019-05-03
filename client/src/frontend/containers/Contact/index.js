@@ -43,10 +43,6 @@ export class ContactContainer extends Component {
     this.setState({ contact });
   };
 
-  redirectToHome() {
-    this.props.history.push("/");
-  }
-
   sendMessage = event => {
     event.preventDefault(event.target);
     this.props
@@ -60,6 +56,10 @@ export class ContactContainer extends Component {
         this.redirectToHome();
       });
   };
+
+  redirectToHome() {
+    this.props.history.push("/");
+  }
 
   render() {
     const errors = get(this.props.response, "errors") || [];

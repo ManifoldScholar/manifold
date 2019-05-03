@@ -44,23 +44,8 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     if (this.filtersChanged(prevProps)) return this.fetchProjects();
   }
 
-  fetchProjects(eventIgnored = null, page = 1) {
-    const pagination = { number: page, size: perPage };
-    const action = request(
-      projectsAPI.index(this.filters, pagination),
-      requests.beProjects
-    );
-    this.props.dispatch(action);
-  }
-
   get filters() {
     return this.props.entitiesListSearchParams.projects || {};
-  }
-
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
   }
 
   handleClose = () => {
@@ -108,12 +93,6 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     );
   };
 
-  projectsForProjectCollection(projectCollection) {
-    return projectCollection.relationships.collectionProjects.map(
-      cp => cp.relationships.project
-    );
-  }
-
   updateHandlerCreator = page => {
     return event => {
       this.fetchProjects(event, page);
@@ -140,6 +119,27 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     );
     this.props.dispatch(projectCollectionRequest);
   };
+
+  projectsForProjectCollection(projectCollection) {
+    return projectCollection.relationships.collectionProjects.map(
+      cp => cp.relationships.project
+    );
+  }
+
+  filtersChanged(prevProps) {
+    return (
+      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
+    );
+  }
+
+  fetchProjects(eventIgnored = null, page = 1) {
+    const pagination = { number: page, size: perPage };
+    const action = request(
+      projectsAPI.index(this.filters, pagination),
+      requests.beProjects
+    );
+    this.props.dispatch(action);
+  }
 
   renderProjectCount(projectCollection, projectsMeta) {
     const added = projectCollection.attributes.projectsCount || 0;

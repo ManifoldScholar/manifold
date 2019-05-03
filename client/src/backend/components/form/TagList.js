@@ -39,11 +39,6 @@ class FormTagList extends Component {
     }
   }
 
-  arrayEntities(value) {
-    if (!value) return [];
-    return isString(value) ? value.split(",").map(tag => tag.trim()) : value;
-  }
-
   get fetchOptions() {
     const options = {};
     if (this.props.tagScope) options.kind = this.props.tagScope;
@@ -69,6 +64,11 @@ class FormTagList extends Component {
   tagLabel = tag => {
     return tag.attributes.name;
   };
+
+  arrayEntities(value) {
+    if (!value) return [];
+    return isString(value) ? value.split(",").map(tag => tag.trim()) : value;
+  }
 
   renderList(value) {
     const tags = this.arrayEntities(value);

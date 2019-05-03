@@ -61,15 +61,15 @@ export class HomeContainer extends Component {
     }
   }
 
-  showFollowing() {
-    return true;
-  }
-
   get showProjects() {
     return get(
       this.props.settings,
       "attributes.calculated.homePageShowProjects"
     );
+  }
+
+  showFollowing() {
+    return true;
   }
 
   render() {

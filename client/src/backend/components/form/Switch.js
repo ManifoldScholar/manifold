@@ -50,52 +50,9 @@ class FormSwitch extends Component {
     window.removeEventListener("keydown", this.handleKeyPress);
   }
 
-  blur = () => {
-    this.setState({ focused: false });
-  };
-
   get checked() {
     return this.determineChecked(this.props.value);
   }
-
-  determineChecked(value) {
-    if (this.props.customValues) return value === this.props.customValues.true;
-    return this.truthy(value);
-  }
-
-  focus = () => {
-    this.setState({ focused: true });
-    if (this.button) {
-      this.button.focus();
-    }
-  };
-
-  handleBooleans() {
-    this.props.set(!this.truthy(this.props.value));
-  }
-
-  handleClick = event => {
-    event.preventDefault();
-    if (this.props.customValues) return this.handleCustomValues();
-    return this.handleBooleans();
-  };
-
-  handleCustomValues() {
-    const trueValue = this.props.customValues.true;
-    const falseValue = this.props.customValues.false;
-    if (this.props.value === trueValue) return this.props.set(falseValue);
-    return this.props.set(trueValue);
-  }
-
-  handleKeyPress = event => {
-    const spaceOrEnter = event.keyCode === 32 || event.keyCode === 13;
-    if (spaceOrEnter && this.state.focused) {
-      event.preventDefault();
-      event.stopPropagation();
-      if (this.props.customValues) return this.handleCustomValues();
-      return this.handleBooleans();
-    }
-  };
 
   get labelClasses() {
     return classnames(
@@ -113,10 +70,6 @@ class FormSwitch extends Component {
     });
   }
 
-  truthy(value) {
-    return value === true || value === "true";
-  }
-
   get wrapperClasses() {
     return classnames(
       {
@@ -125,6 +78,53 @@ class FormSwitch extends Component {
       },
       this.props.className
     );
+  }
+
+  blur = () => {
+    this.setState({ focused: false });
+  };
+
+  handleKeyPress = event => {
+    const spaceOrEnter = event.keyCode === 32 || event.keyCode === 13;
+    if (spaceOrEnter && this.state.focused) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (this.props.customValues) return this.handleCustomValues();
+      return this.handleBooleans();
+    }
+  };
+
+  handleClick = event => {
+    event.preventDefault();
+    if (this.props.customValues) return this.handleCustomValues();
+    return this.handleBooleans();
+  };
+
+  focus = () => {
+    this.setState({ focused: true });
+    if (this.button) {
+      this.button.focus();
+    }
+  };
+
+  determineChecked(value) {
+    if (this.props.customValues) return value === this.props.customValues.true;
+    return this.truthy(value);
+  }
+
+  handleBooleans() {
+    this.props.set(!this.truthy(this.props.value));
+  }
+
+  handleCustomValues() {
+    const trueValue = this.props.customValues.true;
+    const falseValue = this.props.customValues.false;
+    if (this.props.value === trueValue) return this.props.set(falseValue);
+    return this.props.set(trueValue);
+  }
+
+  truthy(value) {
+    return value === true || value === "true";
   }
 
   render() {

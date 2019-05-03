@@ -60,8 +60,8 @@ export class UsersEditContainer extends PureComponent {
     this.props.dispatch(flush([requests.beUserUpdate, requests.beMakerCreate]));
   }
 
-  closeResetDialog() {
-    this.setState({ resetPassword: null });
+  get user() {
+    return this.props.user;
   }
 
   destroyUser = () => {
@@ -73,12 +73,6 @@ export class UsersEditContainer extends PureComponent {
       this.props.history.push(lh.link("backendRecordsUsers"));
     });
   };
-
-  fetchUser(id) {
-    const call = usersAPI.show(id);
-    const userRequest = request(call, requests.beUser);
-    this.props.dispatch(userRequest);
-  }
 
   handleResetPasswordClick = () => {
     const heading = "How would you like to reset the user's password?";
@@ -119,8 +113,14 @@ export class UsersEditContainer extends PureComponent {
     });
   };
 
-  get user() {
-    return this.props.user;
+  fetchUser(id) {
+    const call = usersAPI.show(id);
+    const userRequest = request(call, requests.beUser);
+    this.props.dispatch(userRequest);
+  }
+
+  closeResetDialog() {
+    this.setState({ resetPassword: null });
   }
 
   render() {

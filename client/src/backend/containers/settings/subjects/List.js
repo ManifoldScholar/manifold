@@ -52,6 +52,18 @@ export class SettingsSubjectsListContainer extends PureComponent {
     this.maybeReload(prevProps.subjectsMeta);
   }
 
+  filterChangeHandler = filter => {
+    this.setState({ filter }, () => {
+      this.fetchSubjects(1);
+    });
+  };
+
+  subjectsPageChangeHandlerCreator = page => {
+    return event => {
+      this.handleSubjectsPageChange(event, page);
+    };
+  };
+
   maybeReload(prevSubjectsMeta) {
     const currentModified = get(this.props, "subjectsMeta.modified");
     const previousModified = get(prevSubjectsMeta, "modified");
@@ -70,21 +82,9 @@ export class SettingsSubjectsListContainer extends PureComponent {
     this.props.dispatch(action);
   }
 
-  filterChangeHandler = filter => {
-    this.setState({ filter }, () => {
-      this.fetchSubjects(1);
-    });
-  };
-
   handleSubjectsPageChange(event, page) {
     this.fetchSubjects(page);
   }
-
-  subjectsPageChangeHandlerCreator = page => {
-    return event => {
-      this.handleSubjectsPageChange(event, page);
-    };
-  };
 
   render() {
     const { match } = this.props;

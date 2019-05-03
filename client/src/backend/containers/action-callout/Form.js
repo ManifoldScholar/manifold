@@ -58,32 +58,10 @@ export class ActionCalloutForm extends Component {
     ];
   }
 
-  closeDrawer = () => {
-    this.fetchActionCallouts();
-    return this.props.history.push(
-      lh.link("backendProjectLayout", this.project.id),
-      { noScroll: true }
-    );
-  };
-
-  create = model => {
-    const adjusted = Object.assign({}, model);
-    return actionCalloutsAPI.create(this.project.id, adjusted);
-  };
-
   get drawerTitle() {
     if (this.actionCallout.id) return "Edit Call-to-Action";
     return "New Call-to-Action";
   }
-
-  fetchActionCallouts = () => {
-    const call = projectsAPI.actionCallouts(this.project.id);
-    const actionCalloutsRequest = request(
-      call,
-      requests.beProjectActionCallouts
-    );
-    this.props.dispatch(actionCalloutsRequest);
-  };
 
   get kindOptions() {
     return [
@@ -104,6 +82,36 @@ export class ActionCalloutForm extends Component {
       : requests.beActionCalloutUpdate;
   }
 
+  get textOptions() {
+    const options = [{ label: "Select Text", value: "" }];
+    const texts = this.project.relationships.texts.map(text => {
+      return { label: text.attributes.title, value: text };
+    });
+    return options.concat(texts);
+  }
+
+  closeDrawer = () => {
+    this.fetchActionCallouts();
+    return this.props.history.push(
+      lh.link("backendProjectLayout", this.project.id),
+      { noScroll: true }
+    );
+  };
+
+  create = model => {
+    const adjusted = Object.assign({}, model);
+    return actionCalloutsAPI.create(this.project.id, adjusted);
+  };
+
+  fetchActionCallouts = () => {
+    const call = projectsAPI.actionCallouts(this.project.id);
+    const actionCalloutsRequest = request(
+      call,
+      requests.beProjectActionCallouts
+    );
+    this.props.dispatch(actionCalloutsRequest);
+  };
+
   shouldShowAttachmentForKind(kind) {
     return kind === "download";
   }
@@ -114,14 +122,6 @@ export class ActionCalloutForm extends Component {
 
   shouldShowUrlForKind(kind) {
     return kind === "link";
-  }
-
-  get textOptions() {
-    const options = [{ label: "Select Text", value: "" }];
-    const texts = this.project.relationships.texts.map(text => {
-      return { label: text.attributes.title, value: text };
-    });
-    return options.concat(texts);
   }
 
   render() {

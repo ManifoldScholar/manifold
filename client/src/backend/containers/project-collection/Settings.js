@@ -42,11 +42,6 @@ export class ProjectCollectionSettings extends PureComponent {
     });
   };
 
-  doAfterDestroy(props) {
-    if (props.afterDestroy) return props.afterDestroy();
-    return props.history.push(lh.link("backendProjectCollections"));
-  }
-
   handleDestroy = () => {
     const heading = "Are you sure you want to delete this project collection?";
     const message = "This action cannot be undone.";
@@ -64,6 +59,11 @@ export class ProjectCollectionSettings extends PureComponent {
       };
     return projectCollectionsAPI.update(id, model, page);
   };
+
+  doAfterDestroy(props) {
+    if (props.afterDestroy) return props.afterDestroy();
+    return props.history.push(lh.link("backendProjectCollections"));
+  }
 
   shouldPaginate(model) {
     const { projectCollection } = this.props;

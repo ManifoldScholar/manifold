@@ -58,6 +58,22 @@ class ProjectEventsContainerImplementation extends PureComponent {
       return this.fetchEvents(this.lastFetchedPage);
   }
 
+  handleEventDestroy = event => {
+    const heading = "Are you sure you want to delete this event?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, () => this.destroyEvent(event));
+  };
+
+  pageChangeHandlerCreator = page => {
+    return event => {
+      this.handleUsersPageChange(event, page);
+    };
+  };
+
+  handleUsersPageChange(event, page) {
+    this.fetchEvents(page);
+  }
+
   destroyEvent(event) {
     const call = eventsAPI.destroy(event.id);
     const options = { removes: event };
@@ -90,22 +106,6 @@ class ProjectEventsContainerImplementation extends PureComponent {
       prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
     );
   }
-
-  handleEventDestroy = event => {
-    const heading = "Are you sure you want to delete this event?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, () => this.destroyEvent(event));
-  };
-
-  handleUsersPageChange(event, page) {
-    this.fetchEvents(page);
-  }
-
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleUsersPageChange(event, page);
-    };
-  };
 
   render() {
     if (!this.props.events) return null;

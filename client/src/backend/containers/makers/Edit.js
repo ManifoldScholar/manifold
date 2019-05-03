@@ -59,6 +59,12 @@ export class MakersEditContainer extends PureComponent {
     });
   };
 
+  handleMakerDestroy = () => {
+    const heading = "Are you sure you want to delete this maker?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, this.destroyMaker);
+  };
+
   doAfterDestroy(props) {
     if (props.afterDestroy) return props.afterDestroy();
     return props.history.push(lh.link("backendRecordsMakers"));
@@ -69,12 +75,6 @@ export class MakersEditContainer extends PureComponent {
     const makerRequest = request(call, requests.beMaker);
     this.props.dispatch(makerRequest);
   }
-
-  handleMakerDestroy = () => {
-    const heading = "Are you sure you want to delete this maker?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, this.destroyMaker);
-  };
 
   render() {
     if (!this.props.maker) return null;

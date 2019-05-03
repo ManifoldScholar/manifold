@@ -36,16 +36,6 @@ export class ProjectSubjects extends PureComponent {
     this.props.dispatch(flush(["update-subjects", "create-subject"]));
   }
 
-  maybeHandleNew() {
-    const canCreate = this.authorization.authorizeAbility({
-      authentication: this.props.authentication,
-      entity: "subject",
-      ability: "create"
-    });
-    if (!canCreate) return null;
-    return this.newSubject;
-  }
-
   newSubject = value => {
     const subject = {
       type: "subject",
@@ -75,6 +65,16 @@ export class ProjectSubjects extends PureComponent {
     const entityRequest = request(call, `update-subjects`);
     this.props.dispatch(entityRequest);
   };
+
+  maybeHandleNew() {
+    const canCreate = this.authorization.authorizeAbility({
+      authentication: this.props.authentication,
+      entity: "subject",
+      ability: "create"
+    });
+    if (!canCreate) return null;
+    return this.newSubject;
+  }
 
   render() {
     const project = this.props.project;

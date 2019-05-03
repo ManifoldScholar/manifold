@@ -45,8 +45,12 @@ class Monitor extends Component {
     return get(this, "props.oauth.errors");
   }
 
-  hasErrors() {
-    return isArray(this.errors) && this.errors.length > 0;
+  get popup() {
+    return get(this, "props.oauth.popup");
+  }
+
+  get started() {
+    return get(this, "props.oauth.started");
   }
 
   monitorPopup = () => {
@@ -55,12 +59,8 @@ class Monitor extends Component {
     }
   };
 
-  get popup() {
-    return get(this, "props.oauth.popup");
-  }
-
-  get started() {
-    return get(this, "props.oauth.started");
+  hasErrors() {
+    return isArray(this.errors) && this.errors.length > 0;
   }
 
   render() {

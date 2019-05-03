@@ -25,11 +25,6 @@ export default class Toggle extends Component {
     selected: PropTypes.string
   };
 
-  handleClick = event => {
-    event.preventDefault();
-    this.props.handleToggle();
-  };
-
   get options() {
     return [this.props.optionOne, this.props.optionTwo];
   }
@@ -44,6 +39,11 @@ export default class Toggle extends Component {
     );
     return unselected ? unselected.label : null;
   }
+
+  handleClick = event => {
+    event.preventDefault();
+    this.props.handleToggle();
+  };
 
   renderOption(option) {
     const selected = this.props.selected === option.label;

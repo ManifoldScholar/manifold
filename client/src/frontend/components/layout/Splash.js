@@ -28,6 +28,26 @@ export default class Splash extends Component {
     this.sizeForeground();
   }
 
+  sizeForeground = () => {
+    if (!this.imgEl) return;
+    if (!this.rightEl) return;
+    const containerWidth = this.rightEl.offsetWidth;
+    this.imgEl.style.position = get(
+      this.props.feature,
+      "attributes.foregroundPosition"
+    );
+    if (this.imgEl.offsetWidth > containerWidth) {
+      this.imgEl.style.width = `${containerWidth}px`;
+      this.imgEl.style.maxWidth = `${this.imgEl.naturalWidth}px`;
+      this.imgEl.style.maxHeight = `${this.imgEl.naturalHeight}px`;
+    }
+  };
+
+  handleSignUp = event => {
+    event.preventDefault();
+    this.props.toggleSignInUpOverlay();
+  };
+
   attribute(name) {
     return get(this.props.feature, `attributes.${name}`);
   }
@@ -63,11 +83,6 @@ export default class Splash extends Component {
     const color = get(this.props.feature, "attributes.foregroundColor");
     return this.stripNullStyles({ color });
   }
-
-  handleSignUp = event => {
-    event.preventDefault();
-    this.props.toggleSignInUpOverlay();
-  };
 
   hasAttribute(attribute) {
     return !isEmpty(this.attribute(attribute));
@@ -107,21 +122,6 @@ export default class Splash extends Component {
   showSignUpButton() {
     return this.attribute("includeSignUp") && !this.props.authenticated;
   }
-
-  sizeForeground = () => {
-    if (!this.imgEl) return;
-    if (!this.rightEl) return;
-    const containerWidth = this.rightEl.offsetWidth;
-    this.imgEl.style.position = get(
-      this.props.feature,
-      "attributes.foregroundPosition"
-    );
-    if (this.imgEl.offsetWidth > containerWidth) {
-      this.imgEl.style.width = `${containerWidth}px`;
-      this.imgEl.style.maxWidth = `${this.imgEl.naturalWidth}px`;
-      this.imgEl.style.maxHeight = `${this.imgEl.naturalHeight}px`;
-    }
-  };
 
   stripNullStyles(style) {
     const newStyle = Object.assign({}, style);

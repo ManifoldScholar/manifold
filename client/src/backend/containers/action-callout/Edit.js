@@ -39,14 +39,14 @@ export class CallToActionEdit extends Component {
     return this.props.actionCallout;
   }
 
+  get project() {
+    return this.props.project;
+  }
+
   fetchActionCallout(id) {
     const call = actionCalloutsAPI.show(id);
     const actionCalloutRequest = request(call, requests.beActionCallout);
     this.props.dispatch(actionCalloutRequest);
-  }
-
-  get project() {
-    return this.props.project;
   }
 
   render() {

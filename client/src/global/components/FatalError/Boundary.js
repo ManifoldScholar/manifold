@@ -28,19 +28,6 @@ class FatalErrorBoundary extends Component {
     }
   }
 
-  body(error) {
-    if (error.name === "Error") return `"${error.message}"`;
-    return `"${error.name}: ${error.message}"`;
-  }
-
-  clearError = () => {
-    this.setState({ hasError: false, error: null });
-  };
-
-  // noop, this lifecycle method just needs to be present
-  // to log the component stack to the console in development
-  componentDidCatch(errorIgnored, infoIgnored) {}
-
   get fatalError() {
     const error = this.state.error;
     return {
@@ -54,6 +41,19 @@ class FatalErrorBoundary extends Component {
       }
     };
   }
+
+  clearError = () => {
+    this.setState({ hasError: false, error: null });
+  };
+
+  body(error) {
+    if (error.name === "Error") return `"${error.message}"`;
+    return `"${error.name}: ${error.message}"`;
+  }
+
+  // noop, this lifecycle method just needs to be present
+  // to log the component stack to the console in development
+  componentDidCatch(errorIgnored, infoIgnored) {}
 
   render() {
     if (this.state.hasError) {

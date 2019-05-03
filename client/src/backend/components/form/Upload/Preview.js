@@ -52,27 +52,6 @@ export default class FormUploadPreview extends PureComponent {
     return RegExp("^https?://", "i").test(this.currentPreview);
   }
 
-  fileNameForObject(fileObject) {
-    // It's a regular JS File Object, and we get it from filename.
-    if (fileObject.hasOwnProperty("filename")) return fileObject.filename;
-    // It was a Tus Upload, in which case it's structured differently.
-    if (has(fileObject, "metadata.filename")) {
-      return fileObject.metadata.filename;
-    }
-    // We don't know what it is.
-    /* eslint-disable no-console */
-    console.log(
-      "Form.Upload.Preview component passed a file object with an unexpected shape."
-    );
-    /* eslint-enable no-console */
-    return "";
-  }
-
-  fileNameForPath(pathString) {
-    if (this.props.fileName) return this.props.fileName;
-    return head(split(path.basename(pathString), "?"));
-  }
-
   get isImage() {
     if (
       this.currentPreviewIsFileObject &&
@@ -101,6 +80,27 @@ export default class FormUploadPreview extends PureComponent {
 
   get previewable() {
     return this.currentPreviewIsString || this.currentPreviewIsFileObject;
+  }
+
+  fileNameForObject(fileObject) {
+    // It's a regular JS File Object, and we get it from filename.
+    if (fileObject.hasOwnProperty("filename")) return fileObject.filename;
+    // It was a Tus Upload, in which case it's structured differently.
+    if (has(fileObject, "metadata.filename")) {
+      return fileObject.metadata.filename;
+    }
+    // We don't know what it is.
+    /* eslint-disable no-console */
+    console.log(
+      "Form.Upload.Preview component passed a file object with an unexpected shape."
+    );
+    /* eslint-enable no-console */
+    return "";
+  }
+
+  fileNameForPath(pathString) {
+    if (this.props.fileName) return this.props.fileName;
+    return head(split(path.basename(pathString), "?"));
   }
 
   render() {

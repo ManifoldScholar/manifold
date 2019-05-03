@@ -27,6 +27,10 @@ export class ResourceImportResults extends PureComponent {
     this.stopMonitoring();
   }
 
+  updateImportState = state => {
+    this.props.executeUpdate({ attributes: { state } });
+  };
+
   maybeStartMonitoring(resourceImport) {
     const { state } = resourceImport.attributes;
     if (state === "importing" && !this.resourceImportRefresh) {
@@ -47,10 +51,6 @@ export class ResourceImportResults extends PureComponent {
     clearInterval(this.resourceImportRefresh);
     this.resourceImportRefresh = null;
   }
-
-  updateImportState = state => {
-    this.props.executeUpdate({ attributes: { state } });
-  };
 
   render() {
     const { resourceImport } = this.props;

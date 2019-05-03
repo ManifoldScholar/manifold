@@ -50,30 +50,6 @@ class ResourceCard extends Component {
     return formattedType;
   }
 
-  detailUrl() {
-    if (this.props.resourceCollection) {
-      return lh.link(
-        "frontendProjectCollectionResource",
-        this.props.project.attributes.slug,
-        this.props.resourceCollection.attributes.slug,
-        this.props.resource.attributes.slug
-      );
-    }
-    return lh.link(
-      "frontendProjectResource",
-      this.props.project.attributes.slug,
-      this.props.resource.attributes.slug
-    );
-  }
-
-  doDownload(resource) {
-    window.open(resource.attributes.attachmentStyles.original);
-  }
-
-  downloadable(resource) {
-    return resource.attributes.downloadable || false;
-  }
-
   handleInfoClick = () => {
     this.props.history.push(this.detailUrl());
   };
@@ -99,6 +75,30 @@ class ResourceCard extends Component {
     // Open the resource detail view if all else fails.
     return this.handleInfoClick();
   };
+
+  detailUrl() {
+    if (this.props.resourceCollection) {
+      return lh.link(
+        "frontendProjectCollectionResource",
+        this.props.project.attributes.slug,
+        this.props.resourceCollection.attributes.slug,
+        this.props.resource.attributes.slug
+      );
+    }
+    return lh.link(
+      "frontendProjectResource",
+      this.props.project.attributes.slug,
+      this.props.resource.attributes.slug
+    );
+  }
+
+  doDownload(resource) {
+    window.open(resource.attributes.attachmentStyles.original);
+  }
+
+  downloadable(resource) {
+    return resource.attributes.downloadable || false;
+  }
 
   linkable(resource) {
     return resource.attributes.kind.toLowerCase() === "link";

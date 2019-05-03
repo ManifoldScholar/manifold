@@ -23,24 +23,24 @@ export class NavigationDropdown extends Component {
     this.state = { open: false };
   }
 
-  close = () => {
-    this.setState({ open: false });
-  };
-
   get currentLabel() {
     const selected = this.visitLinks(this.props.links);
     if (!selected) return "";
     return selected.headerLabel || selected.label;
   }
 
-  pathForLink(link) {
-    const args = link.args || [];
-    return lh.link(link.route, ...args);
-  }
+  close = () => {
+    this.setState({ open: false });
+  };
 
   toggleOpen = () => {
     this.setState({ open: !this.state.open });
   };
+
+  pathForLink(link) {
+    const args = link.args || [];
+    return lh.link(link.route, ...args);
+  }
 
   visitLinks(links) {
     const activeLink = links.find(link => {

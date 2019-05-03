@@ -67,12 +67,6 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     this.props.dispatch(flush(requests.beProjects));
   }
 
-  activeProjectCollection() {
-    const { match, projectCollections } = this.props;
-    if (!size(projectCollections) > 0) return null;
-    return projectCollections.find(pc => pc.id === match.params.id);
-  }
-
   handleCollectionOrderChange = result => {
     const changes = { attributes: { position: result.position } };
 
@@ -119,6 +113,12 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       );
     });
   };
+
+  activeProjectCollection() {
+    const { match, projectCollections } = this.props;
+    if (!size(projectCollections) > 0) return null;
+    return projectCollections.find(pc => pc.id === match.params.id);
+  }
 
   renderChildRoutes(active, projectCollections) {
     if (size(projectCollections) === 0)

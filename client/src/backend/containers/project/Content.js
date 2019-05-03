@@ -81,6 +81,10 @@ export class ProjectContentContainer extends PureComponent {
     };
   }
 
+  get projectId() {
+    return this.props.project.id;
+  }
+
   fetchActionCallouts = () => {
     ProjectContentContainer.fetchActionCallouts(
       this.projectId,
@@ -94,10 +98,6 @@ export class ProjectContentContainer extends PureComponent {
       this.props.dispatch
     );
   };
-
-  get projectId() {
-    return this.props.project.id;
-  }
 
   render() {
     const project = this.props.project;

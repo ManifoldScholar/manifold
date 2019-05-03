@@ -42,19 +42,13 @@ export default class ResourceListSlideCaption extends Component {
     this.checkExpandable();
   }
 
-  canDownload(resource) {
-    if (this.props.hideDownload) return false;
-    return get(resource, "attributes.downloadable") || false;
-  }
+  handleReadMore = () => {
+    if (!this.canExpand()) return;
 
-  canExpand() {
-    if (!this._utility) return false;
-    if (!this._descriptionContents) return false;
-    return (
-      this._descriptionContents.offsetHeight >
-      ResourceListSlideCaption.visibleCaptionHeight
-    );
-  }
+    this.setState({
+      expanded: !this.state.expanded
+    });
+  };
 
   checkCollapsed = () => {
     if (!this._description) return null;
@@ -70,6 +64,20 @@ export default class ResourceListSlideCaption extends Component {
     if (this.canExpand()) return this.showExpandable();
     this.hideExpandable();
   };
+
+  canDownload(resource) {
+    if (this.props.hideDownload) return false;
+    return get(resource, "attributes.downloadable") || false;
+  }
+
+  canExpand() {
+    if (!this._utility) return false;
+    if (!this._descriptionContents) return false;
+    return (
+      this._descriptionContents.offsetHeight >
+      ResourceListSlideCaption.visibleCaptionHeight
+    );
+  }
 
   createDescription(description) {
     return {
@@ -93,14 +101,6 @@ export default class ResourceListSlideCaption extends Component {
       resource.attributes.slug
     );
   }
-
-  handleReadMore = () => {
-    if (!this.canExpand()) return;
-
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  };
 
   hasCaption(resource) {
     return !isEmpty(get(resource, "attributes.captionFormatted"));

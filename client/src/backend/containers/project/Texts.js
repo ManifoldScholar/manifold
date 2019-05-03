@@ -60,36 +60,8 @@ export class ProjectTextsContainer extends Component {
     };
   }
 
-  childRoutes() {
-    const { refresh } = this.props;
-    const closeUrl = lh.link("backendProjectTexts", this.project.id);
-
-    return childRoutes(this.props.route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        wide: true,
-        lockScrollClickCloses: false,
-        closeUrl
-      },
-      childProps: { refresh, project: this.project }
-    });
-  }
-
-  destroyCategory = category => {
-    const call = textCategoriesAPI.destroy(category.id);
-    const categoryRequest = request(call, requests.beTextCategoryDestroy);
-    this.props.dispatch(categoryRequest).promise.then(() => {
-      this.props.refresh();
-    });
-  };
-
-  destroyText(text) {
-    const call = textsAPI.destroy(text.id);
-    const textRequest = request(call, requests.beTextDestroy);
-    this.props.dispatch(textRequest).promise.then(() => {
-      this.props.refresh();
-    });
+  get project() {
+    return this.props.project;
   }
 
   handleCategoryDestroy = category => {
@@ -106,10 +78,6 @@ export class ProjectTextsContainer extends Component {
       "This action cannot be undone.";
     this.props.confirm(heading, message, () => this.destroyText(text));
   };
-
-  get project() {
-    return this.props.project;
-  }
 
   updateCategoryPosition = (category, position) => {
     this.updateCategoryPositionInternal(category, position);
@@ -128,11 +96,13 @@ export class ProjectTextsContainer extends Component {
     });
   };
 
-  updateCategoryPositionInternal(category, position) {
-    const categories = this.state.categories.filter(c => c.id !== category.id);
-    categories.splice(position - 1, 0, category);
-    this.setState({ categories });
-  }
+  destroyCategory = category => {
+    const call = textCategoriesAPI.destroy(category.id);
+    const categoryRequest = request(call, requests.beTextCategoryDestroy);
+    this.props.dispatch(categoryRequest).promise.then(() => {
+      this.props.refresh();
+    });
+  };
 
   updateTextCategoryAndPosition = (text, category, position) => {
     let catPayload;
@@ -153,6 +123,36 @@ export class ProjectTextsContainer extends Component {
       this.props.refresh();
     });
   };
+
+  updateCategoryPositionInternal(category, position) {
+    const categories = this.state.categories.filter(c => c.id !== category.id);
+    categories.splice(position - 1, 0, category);
+    this.setState({ categories });
+  }
+
+  destroyText(text) {
+    const call = textsAPI.destroy(text.id);
+    const textRequest = request(call, requests.beTextDestroy);
+    this.props.dispatch(textRequest).promise.then(() => {
+      this.props.refresh();
+    });
+  }
+
+  childRoutes() {
+    const { refresh } = this.props;
+    const closeUrl = lh.link("backendProjectTexts", this.project.id);
+
+    return childRoutes(this.props.route, {
+      drawer: true,
+      drawerProps: {
+        lockScroll: "always",
+        wide: true,
+        lockScrollClickCloses: false,
+        closeUrl
+      },
+      childProps: { refresh, project: this.project }
+    });
+  }
 
   updateTextCategoryAndPositionInternal(text, category, changes) {
     const texts = this.state.texts.filter(t => t.id !== text.id);

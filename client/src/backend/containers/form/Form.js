@@ -89,25 +89,15 @@ export class FormContainer extends PureComponent {
     this.flushSave(this.props);
   }
 
-  adjustedRelationships(relationships) {
-    if (!relationships) return {};
-    const adjusted = Object.assign({}, relationships);
-    forEach(adjusted, (value, key) => {
-      const adjustedValue = isArray(value)
-        ? value.map(relation => pick(relation, ["id", "type"]))
-        : pick(value, ["id", "type"]);
-
-      adjusted[key] = {
-        data: adjustedValue
-      };
-    });
-
-    return adjusted;
-  }
-
-  closeSession(props) {
-    props.dispatch(close(props.name));
-  }
+  handleSubmit = (event = null) => {
+    if (event) event.preventDefault();
+    this.setState({ submitKey: this.createKey() });
+    if (this.props.session.source.id) {
+      this.update();
+    } else {
+      this.create();
+    }
+  };
 
   contextProps = props => {
     const out = {
@@ -141,6 +131,26 @@ export class FormContainer extends PureComponent {
     }
   }
 
+  adjustedRelationships(relationships) {
+    if (!relationships) return {};
+    const adjusted = Object.assign({}, relationships);
+    forEach(adjusted, (value, key) => {
+      const adjustedValue = isArray(value)
+        ? value.map(relation => pick(relation, ["id", "type"]))
+        : pick(value, ["id", "type"]);
+
+      adjusted[key] = {
+        data: adjustedValue
+      };
+    });
+
+    return adjusted;
+  }
+
+  closeSession(props) {
+    props.dispatch(close(props.name));
+  }
+
   createKey() {
     const keyLength = 6;
     return Math.random()
@@ -151,16 +161,6 @@ export class FormContainer extends PureComponent {
   flushSave(props) {
     if (props.flushOnUnmount) props.dispatch(flush(props.name));
   }
-
-  handleSubmit = (event = null) => {
-    if (event) event.preventDefault();
-    this.setState({ submitKey: this.createKey() });
-    if (this.props.session.source.id) {
-      this.update();
-    } else {
-      this.create();
-    }
-  };
 
   isBlocking() {
     if (this.props.doNotWarn === true) return false;

@@ -63,6 +63,12 @@ class UsersListContainerImplementation extends PureComponent {
     this.props.dispatch(action);
   };
 
+  usersPageChangeHandlerCreator = page => {
+    return event => {
+      this.handleUsersPageChange(event, page);
+    };
+  };
+
   filtersChanged(prevProps) {
     return (
       prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
@@ -79,12 +85,6 @@ class UsersListContainerImplementation extends PureComponent {
     if (!currentModified) return false;
     return !(currentModified && previousModified);
   }
-
-  usersPageChangeHandlerCreator = page => {
-    return event => {
-      this.handleUsersPageChange(event, page);
-    };
-  };
 
   render() {
     const { match, entitiesListSearchProps } = this.props;

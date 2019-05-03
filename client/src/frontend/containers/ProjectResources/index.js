@@ -79,11 +79,6 @@ class ProjectResourcesContainer extends Component {
     this.props.dispatch(flush(requests.feResources));
   }
 
-  doUpdate() {
-    this.updateResults();
-    this.updateUrl();
-  }
-
   filterChange = filter => {
     const pagination = Object.assign({}, this.state.pagination, {
       number: page
@@ -98,6 +93,13 @@ class ProjectResourcesContainer extends Component {
     this.setState({ pagination }, this.doUpdate);
   };
 
+  pageChangeHandlerCreator = pageParam => {
+    return event => {
+      event.preventDefault();
+      this.handlePageChange(pageParam);
+    };
+  };
+
   initialState(init) {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
 
@@ -110,12 +112,10 @@ class ProjectResourcesContainer extends Component {
     };
   }
 
-  pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      this.handlePageChange(pageParam);
-    };
-  };
+  doUpdate() {
+    this.updateResults();
+    this.updateUrl();
+  }
 
   updateResults() {
     const action = request(

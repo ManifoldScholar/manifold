@@ -42,11 +42,6 @@ export default class ResourceListFilters extends Component {
     this.setState({ filters }, this.updateResults);
   };
 
-  initialState(init) {
-    const filters = Object.assign({}, init);
-    return { filters };
-  }
-
   resetFilters = event => {
     event.preventDefault();
     this.setState(this.initialState(), this.updateResults);
@@ -57,6 +52,11 @@ export default class ResourceListFilters extends Component {
     const filter = omitBy(this.state.filters, value => value === "");
     this.props.filterChangeHandler(filter);
   };
+
+  initialState(init) {
+    const filters = Object.assign({}, init);
+    return { filters };
+  }
 
   render() {
     return (

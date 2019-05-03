@@ -43,6 +43,29 @@ class LayoutFooter extends Component {
     };
   }
 
+  doSearch = event => {
+    event.preventDefault();
+    const path = lh.link("frontendSearch");
+    this.props.history.push(path, {
+      searchQueryState: { keyword: this.state.keyword }
+    });
+    this.setState({ keyword: "" });
+  };
+
+  handleLoginClick = event => {
+    event.preventDefault();
+    this.props.commonActions.toggleSignInUpOverlay();
+  };
+
+  handleLogoutClick = event => {
+    event.preventDefault();
+    this.props.commonActions.logout();
+  };
+
+  updateSearchWord = event => {
+    this.setState({ keyword: event.target.value });
+  };
+
   buildAuthLink() {
     if (this.props.authentication.authenticated) {
       return (
@@ -163,25 +186,6 @@ class LayoutFooter extends Component {
     return pressLogo && pressLogo.original !== null;
   }
 
-  doSearch = event => {
-    event.preventDefault();
-    const path = lh.link("frontendSearch");
-    this.props.history.push(path, {
-      searchQueryState: { keyword: this.state.keyword }
-    });
-    this.setState({ keyword: "" });
-  };
-
-  handleLoginClick = event => {
-    event.preventDefault();
-    this.props.commonActions.toggleSignInUpOverlay();
-  };
-
-  handleLogoutClick = event => {
-    event.preventDefault();
-    this.props.commonActions.logout();
-  };
-
   sortedPages(props) {
     const out = [];
     this.visiblePages(props).map(page => {
@@ -192,10 +196,6 @@ class LayoutFooter extends Component {
 
     return out;
   }
-
-  updateSearchWord = event => {
-    this.setState({ keyword: event.target.value });
-  };
 
   visiblePages(props) {
     if (!props.pages) return [];

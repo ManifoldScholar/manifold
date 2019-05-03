@@ -71,11 +71,6 @@ export class ProjectsContainer extends Component {
     }
   }
 
-  doUpdate() {
-    this.updateResults();
-    this.updateUrl();
-  }
-
   filterChangeHandler = filter => {
     this.setState({ filter }, this.doUpdate);
   };
@@ -85,6 +80,13 @@ export class ProjectsContainer extends Component {
       number: pageParam
     });
     this.setState({ pagination }, this.doUpdate);
+  };
+
+  pageChangeHandlerCreator = pageParam => {
+    return event => {
+      event.preventDefault();
+      this.handlePageChange(pageParam);
+    };
   };
 
   initialState(init) {
@@ -99,12 +101,10 @@ export class ProjectsContainer extends Component {
     };
   }
 
-  pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      this.handlePageChange(pageParam);
-    };
-  };
+  doUpdate() {
+    this.updateResults();
+    this.updateUrl();
+  }
 
   showPlaceholder() {
     const { location, projects } = this.props;

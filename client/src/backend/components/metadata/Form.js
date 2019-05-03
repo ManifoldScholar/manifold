@@ -81,14 +81,41 @@ export default class FormMakers extends PureComponent {
     ];
   }
 
+  get config() {
+    return config.app.locale.metadata;
+  }
+
+  get metadataProperties() {
+    if (!this.attributes || !this.attributes.metadataProperties) return [];
+    return this.attributes.metadataProperties.sort();
+  }
+
+  get structure() {
+    const { metadataProperties: keys } = this;
+    const filteredStructure = this.baseStructure.filter(
+      group => group.children.length > 0
+    );
+    const leftovers = difference(
+      keys,
+      reduce(
+        filteredStructure,
+        (used, group) => concat(used, group.children),
+        []
+      )
+    );
+    if (leftovers.length > 0) {
+      filteredStructure.push({
+        label: "Other",
+        children: leftovers
+      });
+    }
+    return filteredStructure;
+  }
+
   componentFor(prop) {
     const key = this.configValueFor(prop, "type");
     const component = Form[key];
     return component || Form.TextInput;
-  }
-
-  get config() {
-    return config.app.locale.metadata;
   }
 
   configFor(prop) {
@@ -113,35 +140,8 @@ export default class FormMakers extends PureComponent {
     return humps.decamelize(prop, { separator: " " });
   }
 
-  get metadataProperties() {
-    if (!this.attributes || !this.attributes.metadataProperties) return [];
-    return this.attributes.metadataProperties.sort();
-  }
-
   placeholderFor(prop) {
     return this.configValueFor(prop, "placeholder");
-  }
-
-  get structure() {
-    const { metadataProperties: keys } = this;
-    const filteredStructure = this.baseStructure.filter(
-      group => group.children.length > 0
-    );
-    const leftovers = difference(
-      keys,
-      reduce(
-        filteredStructure,
-        (used, group) => concat(used, group.children),
-        []
-      )
-    );
-    if (leftovers.length > 0) {
-      filteredStructure.push({
-        label: "Other",
-        children: leftovers
-      });
-    }
-    return filteredStructure;
   }
 
   render() {

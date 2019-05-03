@@ -144,11 +144,6 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     this.flushStoreRequests();
   }
 
-  doUpdate() {
-    this.updateResults();
-    this.updateUrl();
-  }
-
   filterChange = filter => {
     const pagination = Object.assign({}, this.state.pagination, {
       number: page
@@ -170,6 +165,13 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     this.setState({ pagination }, this.doUpdate);
   };
 
+  pageChangeHandlerCreator = pageParam => {
+    return event => {
+      event.preventDefault();
+      this.handlePageChange(pageParam);
+    };
+  };
+
   initialState(init) {
     const filter = omitBy(init, (vIgnored, k) => k === "page");
 
@@ -182,12 +184,10 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     };
   }
 
-  pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      this.handlePageChange(pageParam);
-    };
-  };
+  doUpdate() {
+    this.updateResults();
+    this.updateUrl();
+  }
 
   updateResults() {
     const cId = this.props.resourceCollection.id;

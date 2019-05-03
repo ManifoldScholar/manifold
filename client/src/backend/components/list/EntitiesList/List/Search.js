@@ -109,6 +109,17 @@ export default class ListEntitiesListSearch extends PureComponent {
     setParam(this.keywordParam, this.state.keyword);
   };
 
+  toggleOptions = event => {
+    event.preventDefault();
+    this.setState({ open: !this.state.open });
+  };
+
+  resetSearch = event => {
+    event.preventDefault();
+    this.setState({ keyword: "" });
+    this.props.onReset();
+  };
+
   ensureParamObject(param) {
     return isPlainObject(param) ? param : this.paramByName(param);
   }
@@ -136,17 +147,6 @@ export default class ListEntitiesListSearch extends PureComponent {
     const param = this.ensureParamObject(paramLike);
     return isPlainObject(param);
   }
-
-  toggleOptions = event => {
-    event.preventDefault();
-    this.setState({ open: !this.state.open });
-  };
-
-  resetSearch = event => {
-    event.preventDefault();
-    this.setState({ keyword: "" });
-    this.props.onReset();
-  };
 
   classNameWithStyle(className) {
     return classNames({

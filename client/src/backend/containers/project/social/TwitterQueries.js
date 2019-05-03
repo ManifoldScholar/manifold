@@ -38,6 +38,12 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
     this.fetchTwitterQueries(1);
   }
 
+  pageChangeHandlerCreator = page => {
+    return event => {
+      this.handlePageChange(event, page);
+    };
+  };
+
   fetchTwitterQueries(page) {
     const pagination = { number: page, size: perPage };
     const action = request(
@@ -50,12 +56,6 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
   handlePageChange(event, page) {
     this.fetchTwitterQueries(page);
   }
-
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handlePageChange(event, page);
-    };
-  };
 
   render() {
     const { twitterQueries, twitterQueriesMeta, project } = this.props;

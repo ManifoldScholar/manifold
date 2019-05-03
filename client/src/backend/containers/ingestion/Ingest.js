@@ -55,6 +55,11 @@ export class IngestionIngest extends Component {
     webSocketFailure: PropTypes.bool
   };
 
+  scrollToLogBottom = throttle(() => {
+    if (!this.logEl) return;
+    this.logEl.scrollTop = this.logEl.scrollHeight;
+  }, 250);
+
   constructor(props) {
     super(props);
 
@@ -95,29 +100,10 @@ export class IngestionIngest extends Component {
     if (this.props.refresh) this.props.refresh();
   }
 
-  setDialogClassName() {
-    const dialogClass = this.props.webSocketFailure ? "dialog-error" : "";
-    this.props.setDialogClassName(dialogClass);
-  }
-
-  appendToLog(message) {
-    if (message[0] === "DEBUG") return;
-    const textLog = this.state.textLog.concat("\n").concat(message[1]);
-    this.setState({ textLog });
-  }
-
-  backToEdit = () => {
-    this.props.history.push(this.editUrl, { stage: "upload" });
-  };
-
   get canReset() {
     const { ingestion, webSocketConnected } = this.props;
     if (!ingestion || !webSocketConnected) return false;
     return ingestion.attributes.availableEvents.includes("reset");
-  }
-
-  closeSocket() {
-    this.props.dispatch(websocketActions.unsubscribe(this.channelName));
   }
 
   get closeUrl() {
@@ -129,9 +115,64 @@ export class IngestionIngest extends Component {
     return lh.link(path, id);
   }
 
+  get editUrl() {
+    const { id, ingestionId } = this.props.match.params;
+    const path = this.props.text
+      ? "backendTextIngestionEdit"
+      : "backendProjectTextsIngestionEdit";
+
+    return lh.link(path, id, ingestionId);
+  }
+
+  get isReingestion() {
+    return this.props.ingestion.attributes.textId;
+  }
+
+  setDialogClassName() {
+    const dialogClass = this.props.webSocketFailure ? "dialog-error" : "";
+    this.props.setDialogClassName(dialogClass);
+  }
+
+  reset = () => {
+    if (this.state.loading) return;
+    this.setState({ textLog: "" }, () => {
+      this.props.dispatch(
+        websocketActions.triggerAction(this.channelName, "reset")
+      );
+    });
+  };
+
+  ingest = () => {
+    if (this.state.loading) return;
+    this.props.dispatch(
+      websocketActions.triggerAction(this.channelName, "process")
+    );
+  };
+
+  reingest = () => {
+    if (this.state.loading) return;
+    this.props.dispatch(
+      websocketActions.triggerAction(this.channelName, "reingest")
+    );
+  };
+
   complete = () => {
     this.props.history.push(this.closeUrl);
   };
+
+  backToEdit = () => {
+    this.props.history.push(this.editUrl, { stage: "upload" });
+  };
+
+  appendToLog(message) {
+    if (message[0] === "DEBUG") return;
+    const textLog = this.state.textLog.concat("\n").concat(message[1]);
+    this.setState({ textLog });
+  }
+
+  closeSocket() {
+    this.props.dispatch(websocketActions.unsubscribe(this.channelName));
+  }
 
   displayError() {
     const body = (
@@ -172,29 +213,9 @@ export class IngestionIngest extends Component {
     this.props.dispatch(notificationActions.addNotification(notification));
   }
 
-  get editUrl() {
-    const { id, ingestionId } = this.props.match.params;
-    const path = this.props.text
-      ? "backendTextIngestionEdit"
-      : "backendProjectTextsIngestionEdit";
-
-    return lh.link(path, id, ingestionId);
-  }
-
   handleMessage(payload) {
     if (payload === "START_ACTION") return this.startLoading(payload);
     if (payload === "END_ACTION") return this.stopLoading(payload);
-  }
-
-  ingest = () => {
-    if (this.state.loading) return;
-    this.props.dispatch(
-      websocketActions.triggerAction(this.channelName, "process")
-    );
-  };
-
-  get isReingestion() {
-    return this.props.ingestion.attributes.textId;
   }
 
   maybeProcessMessage(nextChannel, thisChannel, nextPropsIgnored) {
@@ -212,27 +233,6 @@ export class IngestionIngest extends Component {
     const options = { ingestion: ingestionId };
     this.props.dispatch(websocketActions.subscribe(this.channelName, options));
   }
-
-  reingest = () => {
-    if (this.state.loading) return;
-    this.props.dispatch(
-      websocketActions.triggerAction(this.channelName, "reingest")
-    );
-  };
-
-  reset = () => {
-    if (this.state.loading) return;
-    this.setState({ textLog: "" }, () => {
-      this.props.dispatch(
-        websocketActions.triggerAction(this.channelName, "reset")
-      );
-    });
-  };
-
-  scrollToLogBottom = throttle(() => {
-    if (!this.logEl) return;
-    this.logEl.scrollTop = this.logEl.scrollHeight;
-  }, 250);
 
   startLoading() {
     this.setState({ loading: true }, () => {

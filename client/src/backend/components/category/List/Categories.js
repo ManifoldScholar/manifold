@@ -25,6 +25,14 @@ export default class CategoryListCategories extends PureComponent {
     return this.props.categories;
   }
 
+  get project() {
+    return this.props.project;
+  }
+
+  get texts() {
+    return this.props.texts;
+  }
+
   categoryTexts(category) {
     return this.texts
       .filter(
@@ -35,14 +43,6 @@ export default class CategoryListCategories extends PureComponent {
       .sort((a, b) => {
         return a.attributes.position - b.attributes.position;
       });
-  }
-
-  get project() {
-    return this.props.project;
-  }
-
-  get texts() {
-    return this.props.texts;
   }
 
   render() {

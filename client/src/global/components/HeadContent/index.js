@@ -24,6 +24,38 @@ export class HeadContentComponent extends Component {
     settings: PropTypes.object
   };
 
+  get defaultTitle() {
+    return get(this.props.settings, "attributes.general.headTitle");
+  }
+
+  get description() {
+    if (this.props.description) return this.props.description;
+    return get(this.props.settings, "attributes.general.headDescription");
+  }
+
+  get image() {
+    const image =
+      this.props.image ||
+      get(this.props.settings, "attributes.pressLogoStyles.medium") ||
+      `/static/logo.jpg`;
+    return `${config.services.client.url}${image}`;
+  }
+
+  get title() {
+    let title = this.props.title;
+    if (!title) return null;
+    if (this.props.appendTitle) title = `${this.defaultTitle} | ${title}`;
+
+    return title;
+  }
+
+  get twitterSite() {
+    const twitter =
+      get(this.props.settings, "attributes.general.twitter") ||
+      this.props.twitterSite;
+    return `@${twitter}`;
+  }
+
   addMeta(meta, key, overrideKey = null, overrideValue = null) {
     const value = overrideValue || this.readPropValue(key);
     if (!value) return meta;
@@ -53,46 +85,14 @@ export class HeadContentComponent extends Component {
     return meta;
   }
 
-  get defaultTitle() {
-    return get(this.props.settings, "attributes.general.headTitle");
-  }
-
-  get description() {
-    if (this.props.description) return this.props.description;
-    return get(this.props.settings, "attributes.general.headDescription");
-  }
-
-  get image() {
-    const image =
-      this.props.image ||
-      get(this.props.settings, "attributes.pressLogoStyles.medium") ||
-      `/static/logo.jpg`;
-    return `${config.services.client.url}${image}`;
-  }
-
   readPropValue(key) {
     return this.props[key];
-  }
-
-  get title() {
-    let title = this.props.title;
-    if (!title) return null;
-    if (this.props.appendTitle) title = `${this.defaultTitle} | ${title}`;
-
-    return title;
   }
 
   titleTemplate(props) {
     if (!props.appendTitle) return null;
 
     return `${this.defaultTitle} | %s`;
-  }
-
-  get twitterSite() {
-    const twitter =
-      get(this.props.settings, "attributes.general.twitter") ||
-      this.props.twitterSite;
-    return `@${twitter}`;
   }
 
   render() {

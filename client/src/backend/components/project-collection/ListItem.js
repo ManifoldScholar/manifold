@@ -18,12 +18,6 @@ export default class ProjectCollectionListItem extends PureComponent {
     return `Change visibility of ${entity.attributes.title} to ${target}.`;
   }
 
-  handleClick = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    return this.props.clickHandler(this.props.entity);
-  };
-
   get icon() {
     if (this.props.entity.attributes.visible)
       return (
@@ -38,6 +32,12 @@ export default class ProjectCollectionListItem extends PureComponent {
       />
     );
   }
+
+  handleClick = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    return this.props.clickHandler(this.props.entity);
+  };
 
   toggleVisibility = event => {
     event.preventDefault();

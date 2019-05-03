@@ -39,6 +39,16 @@ export class LogContainer extends PureComponent {
     this.fetchVersions(1);
   }
 
+  pageChangeHandlerCreator = page => {
+    return event => {
+      this.handleVersionsPageChange(event, page);
+    };
+  };
+
+  handleVersionsPageChange(event, page) {
+    this.fetchVersions(page);
+  }
+
   fetchVersions(page) {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
@@ -52,16 +62,6 @@ export class LogContainer extends PureComponent {
     );
     this.props.dispatch(action);
   }
-
-  handleVersionsPageChange(event, page) {
-    this.fetchVersions(page);
-  }
-
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleVersionsPageChange(event, page);
-    };
-  };
 
   render() {
     const project = this.props.project;

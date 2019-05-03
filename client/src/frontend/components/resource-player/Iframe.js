@@ -50,6 +50,12 @@ export default class ResourcePlayerIframe extends Component {
     });
   };
 
+  updateContainerState = (w = null, h = null) => {
+    const containerWidth = w === null ? this.containerWidth() : w;
+    const containerHeight = h === null ? this.containerHeight() : h;
+    this.setState({ containerWidth, containerHeight });
+  };
+
   canShowIFrame() {
     if (this.props.noPlaceholder) return true;
     return this.containerIsWideEnough() && this.containerIsTallEnough();
@@ -85,12 +91,6 @@ export default class ResourcePlayerIframe extends Component {
     if (!minimumWidth) return 1020;
     return minimumWidth;
   }
-
-  updateContainerState = (w = null, h = null) => {
-    const containerWidth = w === null ? this.containerWidth() : w;
-    const containerHeight = h === null ? this.containerHeight() : h;
-    this.setState({ containerWidth, containerHeight });
-  };
 
   renderIframe() {
     const { resource } = this.props;

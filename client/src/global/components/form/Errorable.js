@@ -22,13 +22,6 @@ export default class Errorable extends PureComponent {
     idForError: PropTypes.string
   };
 
-  allErrors() {
-    if (!this.props.errors) return [];
-    return this.props.errors.filter(error => {
-      return has(error, "source");
-    });
-  }
-
   fieldErrors = () => {
     if (!this.props.errors) return [];
     if (this.props.name === "*") return this.allErrors();
@@ -47,6 +40,13 @@ export default class Errorable extends PureComponent {
     });
     return errors;
   };
+
+  allErrors() {
+    if (!this.props.errors) return [];
+    return this.props.errors.filter(error => {
+      return has(error, "source");
+    });
+  }
 
   pointerFor(name) {
     const dotNotation = brackets2dots(name);

@@ -68,16 +68,31 @@ export class ProjectContent extends PureComponent {
     this.setState({ activeDraggableType: draggable.type });
   };
 
-  createBlock() {
-    const call = contentBlocksAPI.create(this.projectId, this.pendingBlock);
-    const createRequest = request(call, requests.beContentBlockCreate);
-    this.props.dispatch(createRequest).promise.then(() => {
-      this.props.refresh();
-    });
-  }
-
   get currentBlocks() {
     return this.state.blocks;
+  }
+
+  get drawerCloseCallback() {
+    if (!this.pendingBlock) return null;
+    return this.resetState;
+  }
+
+  get entityCallbacks() {
+    return {
+      showBlock: this.showBlock,
+      hideBlock: this.hideBlock,
+      deleteBlock: this.handleDeleteBlock,
+      saveBlockPosition: this.updateBlock,
+      editBlock: this.editBlock
+    };
+  }
+
+  get pendingBlock() {
+    return this.state.blocks.find(block => block.id === "pending");
+  }
+
+  get projectId() {
+    return this.props.project.id;
   }
 
   deleteBlock = block => {
@@ -93,27 +108,12 @@ export class ProjectContent extends PureComponent {
     });
   };
 
-  get drawerCloseCallback() {
-    if (!this.pendingBlock) return null;
-    return this.resetState;
-  }
-
   editBlock = block => {
     this.props.history.push(
       lh.link("backendProjectContentBlock", this.projectId, block.id),
       { noScroll: true }
     );
   };
-
-  get entityCallbacks() {
-    return {
-      showBlock: this.showBlock,
-      hideBlock: this.hideBlock,
-      deleteBlock: this.handleDeleteBlock,
-      saveBlockPosition: this.updateBlock,
-      editBlock: this.editBlock
-    };
-  }
 
   handleAddEntity = type => {
     const draggableHelper = new DraggableEventHelper(
@@ -141,14 +141,6 @@ export class ProjectContent extends PureComponent {
       : this.createBlock();
   };
 
-  get pendingBlock() {
-    return this.state.blocks.find(block => block.id === "pending");
-  }
-
-  get projectId() {
-    return this.props.project.id;
-  }
-
   resetState = () => {
     this.setState({ blocks: this.constructor.cloneBlocks(this.props) });
   };
@@ -156,13 +148,6 @@ export class ProjectContent extends PureComponent {
   showBlock = block => {
     this.toggleBlockVisibility(block, true);
   };
-
-  toggleBlockVisibility(block, visible) {
-    const adjusted = Object.assign({}, block);
-    adjusted.attributes.visible = visible;
-
-    this.updateBlock(adjusted);
-  }
 
   updateBlock = block => {
     const call = contentBlocksAPI.update(block.id, {
@@ -174,6 +159,21 @@ export class ProjectContent extends PureComponent {
       this.props.refresh();
     });
   };
+
+  toggleBlockVisibility(block, visible) {
+    const adjusted = Object.assign({}, block);
+    adjusted.attributes.visible = visible;
+
+    this.updateBlock(adjusted);
+  }
+
+  createBlock() {
+    const call = contentBlocksAPI.create(this.projectId, this.pendingBlock);
+    const createRequest = request(call, requests.beContentBlockCreate);
+    this.props.dispatch(createRequest).promise.then(() => {
+      this.props.refresh();
+    });
+  }
 
   render() {
     return (

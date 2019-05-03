@@ -32,10 +32,6 @@ export class ProjectNewContainer extends PureComponent {
     };
   }
 
-  handleSuccess = project => {
-    this.redirectToProject(project);
-  };
-
   // TODO: Update documentation link when content block docs are added
   get layoutInstructions() {
     return (
@@ -55,6 +51,10 @@ export class ProjectNewContainer extends PureComponent {
       </span>
     );
   }
+
+  handleSuccess = project => {
+    this.redirectToProject(project);
+  };
 
   redirectToProject(project) {
     const path = lh.link("backendProject", project.id);

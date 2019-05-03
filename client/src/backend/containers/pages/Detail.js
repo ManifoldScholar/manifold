@@ -74,13 +74,6 @@ class PageDetailContainer extends PureComponent {
     win.focus();
   };
 
-  fetchPage(props) {
-    const id = this.id(props);
-    const call = pagesAPI.show(id);
-    const pageRequest = request(call, requests.bePage);
-    props.dispatch(pageRequest);
-  }
-
   handleDestroy = () => {
     const heading = "Are you sure you want to delete this page?";
     const message = "This action cannot be undone.";
@@ -90,6 +83,13 @@ class PageDetailContainer extends PureComponent {
   handleSuccess = pageIgnored => {
     this.redirectToPages();
   };
+
+  fetchPage(props) {
+    const id = this.id(props);
+    const call = pagesAPI.show(id);
+    const pageRequest = request(call, requests.bePage);
+    props.dispatch(pageRequest);
+  }
 
   id(props) {
     return props.match.params.id;

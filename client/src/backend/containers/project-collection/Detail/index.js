@@ -58,18 +58,6 @@ export class ProjectCollectionDetail extends PureComponent {
     this.props.dispatch(flush(requests.beProjectCollectionUpdate));
   }
 
-  fetchProjectCollection(page = 1) {
-    const { projectCollection } = this.props;
-    if (!projectCollection) return null;
-
-    const pageParams = { number: page };
-    if (!projectCollection.attributes.manuallySorted) pageParams.size = perPage;
-    const pagination = { collectionProjects: pageParams };
-
-    const call = projectCollectionsAPI.show(projectCollection.id, pagination);
-    this.props.dispatch(request(call, requests.beProjectCollection));
-  }
-
   handleProjectOrderChange = result => {
     const changes = { attributes: { position: result.position } };
     const call = projectCollectionsAPI.updateCollectionProject(
@@ -110,6 +98,12 @@ export class ProjectCollectionDetail extends PureComponent {
     });
   };
 
+  pageChangeHandlerCreator = page => {
+    return event => {
+      this.handlePageChange(event, page);
+    };
+  };
+
   drawerProps(props) {
     return {
       lockScroll: "always",
@@ -122,11 +116,17 @@ export class ProjectCollectionDetail extends PureComponent {
     this.fetchProjectCollection(page);
   }
 
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handlePageChange(event, page);
-    };
-  };
+  fetchProjectCollection(page = 1) {
+    const { projectCollection } = this.props;
+    if (!projectCollection) return null;
+
+    const pageParams = { number: page };
+    if (!projectCollection.attributes.manuallySorted) pageParams.size = perPage;
+    const pagination = { collectionProjects: pageParams };
+
+    const call = projectCollectionsAPI.show(projectCollection.id, pagination);
+    this.props.dispatch(request(call, requests.beProjectCollection));
+  }
 
   renderPagination(projectCollection, projectCollectionMeta) {
     if (projectCollection.attributes.manuallySorted) return null;

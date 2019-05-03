@@ -15,6 +15,10 @@ export default class ResourceTagList extends Component {
     disabledLinks: PropTypes.bool
   };
 
+  stopPropagation = event => {
+    event.stopPropagation();
+  };
+
   createTagLink(tag, projectSlug, index) {
     if (!tag || !projectSlug) return null;
     const url = lh.link("frontendProjectResources", projectSlug, {
@@ -48,10 +52,6 @@ export default class ResourceTagList extends Component {
     });
     return out;
   }
-
-  stopPropagation = event => {
-    event.stopPropagation();
-  };
 
   render() {
     if (!this.props.resource) return null;

@@ -60,6 +60,26 @@ class DashboardsAdminContainerImplementation extends PureComponent {
     if (this.filtersChanged(prevProps)) return this.fetchProjects();
   }
 
+  updateHandlerCreator = page => {
+    return () => this.fetchProjects(page);
+  };
+
+  noProjects = () => {
+    const filterState = this.props.entitiesListSearchParams.projects;
+    const initialState = this.props.entitiesListSearchParams.initialProjects;
+
+    const createProjects = this.authorization.authorizeAbility({
+      authentication: this.props.authentication,
+      entity: "project",
+      ability: "create"
+    });
+
+    if (isEqual(initialState, filterState) && createProjects) {
+      return "This Manifold Library is empty. Click the button above to create your first project.";
+    }
+    return "Sorry, no results were found.";
+  };
+
   fetchProjects(page = 1) {
     const listKey = "projects";
     const filters = this.filterParams(listKey);
@@ -110,26 +130,6 @@ class DashboardsAdminContainerImplementation extends PureComponent {
       prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
     );
   }
-
-  noProjects = () => {
-    const filterState = this.props.entitiesListSearchParams.projects;
-    const initialState = this.props.entitiesListSearchParams.initialProjects;
-
-    const createProjects = this.authorization.authorizeAbility({
-      authentication: this.props.authentication,
-      entity: "project",
-      ability: "create"
-    });
-
-    if (isEqual(initialState, filterState) && createProjects) {
-      return "This Manifold Library is empty. Click the button above to create your first project.";
-    }
-    return "Sorry, no results were found.";
-  };
-
-  updateHandlerCreator = page => {
-    return () => this.fetchProjects(page);
-  };
 
   render() {
     return (

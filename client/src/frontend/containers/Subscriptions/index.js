@@ -51,15 +51,6 @@ export class SubscriptionsContainer extends Component {
     this.setState({ notificationPreferencesByKind: notifications });
   };
 
-  initialState(props) {
-    const currentUser = props.authentication.currentUser;
-    if (!currentUser) return { notificationPreferencesByKind: {} };
-    return {
-      notificationPreferencesByKind:
-        currentUser.attributes.notificationPreferences
-    };
-  }
-
   unsubscribeAll = event => {
     event.preventDefault();
     const notifications = mapValues(
@@ -79,6 +70,15 @@ export class SubscriptionsContainer extends Component {
       )
     );
   };
+
+  initialState(props) {
+    const currentUser = props.authentication.currentUser;
+    if (!currentUser) return { notificationPreferencesByKind: {} };
+    return {
+      notificationPreferencesByKind:
+        currentUser.attributes.notificationPreferences
+    };
+  }
 
   render() {
     return (

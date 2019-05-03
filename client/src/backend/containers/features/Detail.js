@@ -65,6 +65,18 @@ class FeatureDetailContainer extends PureComponent {
     });
   };
 
+  handleDestroy = () => {
+    const { feature } = this.props;
+    if (!feature) return;
+    const heading = "Are you sure you want to delete this feature?";
+    const message = "This action cannot be undone.";
+    this.props.confirm(heading, message, () => this.doDestroy(feature));
+  };
+
+  handleSuccess = featureIgnored => {
+    this.redirectToFeatures();
+  };
+
   feature(props) {
     return props.feature;
   }
@@ -92,18 +104,6 @@ class FeatureDetailContainer extends PureComponent {
     const featureRequest = request(call, requests.beFeature);
     props.dispatch(featureRequest);
   }
-
-  handleDestroy = () => {
-    const { feature } = this.props;
-    if (!feature) return;
-    const heading = "Are you sure you want to delete this feature?";
-    const message = "This action cannot be undone.";
-    this.props.confirm(heading, message, () => this.doDestroy(feature));
-  };
-
-  handleSuccess = featureIgnored => {
-    this.redirectToFeatures();
-  };
 
   id(props) {
     return props.match.params.id;

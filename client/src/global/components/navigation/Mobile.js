@@ -25,6 +25,13 @@ export class NavigationMobile extends Component {
     style: PropTypes.object
   };
 
+  createExpandToggleHandler = memoize(key => {
+    return event => {
+      event.preventDefault();
+      this.toggleExpanded(key);
+    };
+  });
+
   constructor(props) {
     super(props);
     this.state = this.initialState;
@@ -49,62 +56,11 @@ export class NavigationMobile extends Component {
     this.setState(this.initialState);
   }
 
-  activeRoutes() {
-    const active = [];
-    this.props.links.forEach(link => {
-      const route = lh.routeFromName(link.route);
-      const match = matchPath(this.props.location.pathname, route) !== null;
-      if (match) active.push(link.route);
-    });
-    return active;
-  }
-
-  closeNavigation = () => {
-    this.setState({ open: false, expanded: [] });
-    window.removeEventListener("keyup", this.handleEscape);
-  };
-
-  collapse(key) {
-    if (!this.state.expanded.includes(key)) return;
-    const expanded = this.state.expanded.slice(0);
-    expanded.splice(expanded.indexOf(key), 1);
-    this.setState({ expanded });
-  }
-
-  createExpandToggleHandler = memoize(key => {
-    return event => {
-      event.preventDefault();
-      this.toggleExpanded(key);
-    };
-  });
-
-  expand(key) {
-    if (this.state.expanded.includes(key)) return;
-    const expanded = this.state.expanded.slice(0);
-    expanded.push(key);
-    this.setState({ expanded });
-  }
-
-  handleEscape = event => {
-    if (event.keyCode !== 27) return;
-    this.closeNavigation();
-  };
-
   get initialState() {
     return {
       expanded: [],
       open: false
     };
-  }
-
-  openNavigation = () => {
-    this.setState({ open: true, expanded: this.activeRoutes() });
-    window.addEventListener("keyup", this.handleEscape);
-  };
-
-  pathForLink(link) {
-    const args = link.args || [];
-    return lh.link(link.route, ...args);
   }
 
   toggleExpanded = key => {
@@ -122,6 +78,50 @@ export class NavigationMobile extends Component {
       this.openNavigation();
     }
   };
+
+  openNavigation = () => {
+    this.setState({ open: true, expanded: this.activeRoutes() });
+    window.addEventListener("keyup", this.handleEscape);
+  };
+
+  handleEscape = event => {
+    if (event.keyCode !== 27) return;
+    this.closeNavigation();
+  };
+
+  closeNavigation = () => {
+    this.setState({ open: false, expanded: [] });
+    window.removeEventListener("keyup", this.handleEscape);
+  };
+
+  activeRoutes() {
+    const active = [];
+    this.props.links.forEach(link => {
+      const route = lh.routeFromName(link.route);
+      const match = matchPath(this.props.location.pathname, route) !== null;
+      if (match) active.push(link.route);
+    });
+    return active;
+  }
+
+  collapse(key) {
+    if (!this.state.expanded.includes(key)) return;
+    const expanded = this.state.expanded.slice(0);
+    expanded.splice(expanded.indexOf(key), 1);
+    this.setState({ expanded });
+  }
+
+  expand(key) {
+    if (this.state.expanded.includes(key)) return;
+    const expanded = this.state.expanded.slice(0);
+    expanded.push(key);
+    this.setState({ expanded });
+  }
+
+  pathForLink(link) {
+    const args = link.args || [];
+    return lh.link(link.route, ...args);
+  }
 
   renderExternalLink(link) {
     return (

@@ -40,6 +40,12 @@ class ProjectResourcesListContainerImplementation extends PureComponent {
     if (this.filtersChanged(prevProps)) return this.fetchResources();
   }
 
+  pageChangeHandlerCreator = page => {
+    return event => {
+      this.handleResourcesPageChange(event, page);
+    };
+  };
+
   filtersChanged(prevProps) {
     return (
       prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
@@ -59,12 +65,6 @@ class ProjectResourcesListContainerImplementation extends PureComponent {
   handleResourcesPageChange(event, page) {
     this.fetchResources(page);
   }
-
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleResourcesPageChange(event, page);
-    };
-  };
 
   render() {
     if (!this.props.resources) return null;

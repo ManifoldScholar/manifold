@@ -52,6 +52,17 @@ export default class ProjectListFilters extends Component {
     this.setState({ filters }, this.updateResults);
   };
 
+  resetFilters = event => {
+    event.preventDefault();
+    this.setState(this.initialState(), this.updateResults);
+  };
+
+  updateResults = event => {
+    if (event) event.preventDefault();
+    const filter = omitBy(this.state.filters, value => value === "");
+    this.props.filterChangeHandler(filter);
+  };
+
   featuredOptions() {
     if (this.props.hideFeatured) return null;
     return <option value="featured">Featured Projects</option>;
@@ -69,11 +80,6 @@ export default class ProjectListFilters extends Component {
     return { filters };
   }
 
-  resetFilters = event => {
-    event.preventDefault();
-    this.setState(this.initialState(), this.updateResults);
-  };
-
   subjectOptions() {
     if (!this.props.subjects || this.props.subjects.length === 0) return null;
     return this.props.subjects.map(subject => {
@@ -84,12 +90,6 @@ export default class ProjectListFilters extends Component {
       );
     });
   }
-
-  updateResults = event => {
-    if (event) event.preventDefault();
-    const filter = omitBy(this.state.filters, value => value === "");
-    this.props.filterChangeHandler(filter);
-  };
 
   renderFilters() {
     if (!this.featuredOptions() && !this.subjectOptions()) return null;

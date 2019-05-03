@@ -22,6 +22,10 @@ export default class FormattedDate extends Component {
     return format(this.date, "YYYY-MM-DD");
   }
 
+  get value() {
+    return this.formatString(this.formatDate(this.date));
+  }
+
   formatDate(date) {
     if (!date) return;
     const out = isDate(date) ? date : parse(date);
@@ -34,10 +38,6 @@ export default class FormattedDate extends Component {
   formatString(date) {
     if (!this.props.prefix || this.props.prefix.length === 0) return date;
     return `${this.props.prefix} ${date}`;
-  }
-
-  get value() {
-    return this.formatString(this.formatDate(this.date));
   }
 
   render() {

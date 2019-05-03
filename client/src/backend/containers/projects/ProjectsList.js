@@ -59,6 +59,10 @@ class ProjectsListContainerImplementation extends PureComponent {
     this.props.dispatch(flush(requests.beProjects));
   }
 
+  updateHandlerCreator = page => {
+    return () => this.fetchProjects(page);
+  };
+
   fetchProjects(page = 1, doNotSnapshot = false) {
     const listKey = "projectsList";
     const filters = this.filterParams();
@@ -86,10 +90,6 @@ class ProjectsListContainerImplementation extends PureComponent {
       prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
     );
   }
-
-  updateHandlerCreator = page => {
-    return () => this.fetchProjects(page);
-  };
 
   render() {
     if (!this.props.projectsMeta) return null;

@@ -46,6 +46,20 @@ class DialogWrapper extends PureComponent {
     this.setState({ additionalClassNames });
   };
 
+  handleCloseClick = eventIgnored => {
+    this.doClose();
+  };
+
+  handleEscape = event => {
+    if (event.keyCode === 27 && this.props.showCloseButton === true) {
+      this.doClose();
+    }
+  };
+
+  handleOverlayClick = eventIgnored => {
+    if (this.props.closeOnOverlayClick) this.doClose();
+  };
+
   closeWithCallback() {
     this.leave(this.props.closeCallback);
   }
@@ -65,20 +79,6 @@ class DialogWrapper extends PureComponent {
     if (!this.props.closeHandler) return this.closeWithCallback();
     return this.closeWithNoAction();
   }
-
-  handleCloseClick = eventIgnored => {
-    this.doClose();
-  };
-
-  handleEscape = event => {
-    if (event.keyCode === 27 && this.props.showCloseButton === true) {
-      this.doClose();
-    }
-  };
-
-  handleOverlayClick = eventIgnored => {
-    if (this.props.closeOnOverlayClick) this.doClose();
-  };
 
   leave(callback) {
     this.setState({ leaving: true });

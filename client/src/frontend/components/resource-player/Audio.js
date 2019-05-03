@@ -96,38 +96,6 @@ export default class ResourcePlayerAudio extends Component {
     this.updateTime();
   };
 
-  initializeWaveform(resource) {
-    if (!this.WaveSurfer || !resource) return null;
-
-    const WebAudioApi =
-      window.AudioContext ||
-      window.webkitAudioContext ||
-      window.mozAudioContext ||
-      window.oAudioContext ||
-      window.msAudioContext;
-
-    if (WebAudioApi) {
-      this.audio = this.WaveSurfer.create({
-        container: this.container,
-        height: 275,
-        waveColor: "#555", // $neutral80
-        progressColor: "#52e3ac", // $accentPrimary
-        barWidth: 5,
-        barHeight: 1,
-        cursorWidth: 0
-      });
-    }
-
-    this.audio.on("error", this.handleError);
-    this.audio.on("ready", this.setReady);
-    this.audio.on("seek", progress => this.handleSeek(progress));
-    this.audio.on("audioprocess", currentTime =>
-      this.handlePlayback(currentTime)
-    );
-
-    this.audio.load(resource.attributes.attachmentStyles.original);
-  }
-
   resizeWaveform = () => {
     this.audio.drawBuffer();
   };
@@ -163,6 +131,38 @@ export default class ResourcePlayerAudio extends Component {
       currentTime: this.calcTime(this.audio.getCurrentTime())
     });
   };
+
+  initializeWaveform(resource) {
+    if (!this.WaveSurfer || !resource) return null;
+
+    const WebAudioApi =
+      window.AudioContext ||
+      window.webkitAudioContext ||
+      window.mozAudioContext ||
+      window.oAudioContext ||
+      window.msAudioContext;
+
+    if (WebAudioApi) {
+      this.audio = this.WaveSurfer.create({
+        container: this.container,
+        height: 275,
+        waveColor: "#555", // $neutral80
+        progressColor: "#52e3ac", // $accentPrimary
+        barWidth: 5,
+        barHeight: 1,
+        cursorWidth: 0
+      });
+    }
+
+    this.audio.on("error", this.handleError);
+    this.audio.on("ready", this.setReady);
+    this.audio.on("seek", progress => this.handleSeek(progress));
+    this.audio.on("audioprocess", currentTime =>
+      this.handlePlayback(currentTime)
+    );
+
+    this.audio.load(resource.attributes.attachmentStyles.original);
+  }
 
   renderError() {
     if (!this.state.error) return null;

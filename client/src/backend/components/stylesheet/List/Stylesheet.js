@@ -20,11 +20,6 @@ export default class CategoryList extends PureComponent {
     return this.props.callbacks;
   }
 
-  confirmDestroy = event => {
-    event.preventDefault();
-    this.callbacks.confirmDestroy(this.stylesheet);
-  };
-
   get editUrl() {
     return lh.link(
       "BackendTextStylesheetEdit",
@@ -48,6 +43,11 @@ export default class CategoryList extends PureComponent {
   get type() {
     return this.stylesheet.attributes.ingested ? "(Ingested)" : "User Created";
   }
+
+  confirmDestroy = event => {
+    event.preventDefault();
+    this.callbacks.confirmDestroy(this.stylesheet);
+  };
 
   render() {
     const baseClass = "ordered-records-item";

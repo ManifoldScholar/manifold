@@ -73,12 +73,6 @@ export class ResourceImportWrapper extends PureComponent {
     return dispatch(resourceImport);
   };
 
-  fetchProject() {
-    const call = projectsAPI.show(this.props.match.params.projectId);
-    const projectRequest = request(call, requests.feProject);
-    this.props.dispatch(projectRequest);
-  }
-
   update = (idIgnored, model) => {
     const { match } = this.props;
     return resourceImportsAPI.update(
@@ -87,6 +81,12 @@ export class ResourceImportWrapper extends PureComponent {
       model
     );
   };
+
+  fetchProject() {
+    const call = projectsAPI.show(this.props.match.params.projectId);
+    const projectRequest = request(call, requests.feProject);
+    this.props.dispatch(projectRequest);
+  }
 
   renderRoutes() {
     const { match, project, resourceImport } = this.props;

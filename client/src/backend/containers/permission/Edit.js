@@ -47,15 +47,6 @@ export class PermissionEdit extends PureComponent {
     this.props.dispatch(flush(requests.bePermission));
   }
 
-  fetchPermission(id) {
-    const entity = this.props.entity;
-    const action = request(
-      permissionsAPI.show(entity, id),
-      requests.bePermission
-    );
-    this.props.dispatch(action);
-  }
-
   handleRemoveAll = () => {
     const heading =
       "Are you sure you want to remove all permissions from this user?";
@@ -77,6 +68,15 @@ export class PermissionEdit extends PureComponent {
       this.props.history.push(this.props.closeUrl);
     });
   };
+
+  fetchPermission(id) {
+    const entity = this.props.entity;
+    const action = request(
+      permissionsAPI.show(entity, id),
+      requests.bePermission
+    );
+    this.props.dispatch(action);
+  }
 
   render() {
     const permission = this.props.permission;

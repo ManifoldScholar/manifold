@@ -19,6 +19,12 @@ export default class ProjectCollectionSummary extends Component {
     ordinal: PropTypes.number
   };
 
+  mappedProjects = memoize(() => {
+    return this.collection.relationships.collectionProjects.map(
+      cp => cp.relationships.project
+    );
+  });
+
   get collection() {
     return this.props.projectCollection;
   }
@@ -34,12 +40,6 @@ export default class ProjectCollectionSummary extends Component {
   get limit() {
     return this.props.limit;
   }
-
-  mappedProjects = memoize(() => {
-    return this.collection.relationships.collectionProjects.map(
-      cp => cp.relationships.project
-    );
-  });
 
   get projects() {
     return this.mappedProjects(this.collection);
