@@ -21,7 +21,7 @@ export default class ConfirmableButton extends Component {
   };
 
   toggleConfirmation = () => {
-    this.setState({ confirmation: !this.state.confirmation });
+    this.setState(prevState => ({ confirmation: !prevState.confirmation }));
   };
 
   renderButton() {

@@ -49,7 +49,7 @@ export default class Overlay extends Component {
 
   updateView = (view, event = null) => {
     if (event) event.preventDefault();
-    this.setState(Object.assign(this.state, {}, { view }));
+    this.setState(prevState => (Object.assign(prevState, {}, { view }));
   };
 
   renderChild() {

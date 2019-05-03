@@ -111,7 +111,7 @@ export default class ListEntitiesListSearch extends PureComponent {
 
   toggleOptions = event => {
     event.preventDefault();
-    this.setState({ open: !this.state.open });
+    this.setState(prevState => ({ open: !prevState.open }));
   };
 
   resetSearch = event => {

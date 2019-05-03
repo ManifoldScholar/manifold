@@ -34,7 +34,9 @@ export class NavigationDropdown extends Component {
   };
 
   toggleOpen = () => {
-    this.setState({ open: !this.state.open });
+    this.setState(prevState => ({
+      open: !prevState.open
+    }));
   };
 
   pathForLink(link) {

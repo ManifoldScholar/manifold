@@ -45,9 +45,9 @@ export default class ResourceListSlideCaption extends Component {
   handleReadMore = () => {
     if (!this.canExpand()) return;
 
-    this.setState({
-      expanded: !this.state.expanded
-    });
+    this.setState(prevState => ({
+      expanded: !prevState.expanded
+    }));
   };
 
   checkCollapsed = () => {

@@ -35,7 +35,7 @@ export default class Group extends Component {
 
   handleClick = event => {
     event.stopPropagation();
-    return this.setState({ expanded: !this.state.expanded });
+    return this.setState(prevState => ({ expanded: !prevState.expanded }));
   };
 
   renderGroupItems(annotations) {

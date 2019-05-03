@@ -100,10 +100,9 @@ export class CreateContainer extends Component {
   };
 
   handleInputChange = event => {
-    const user = Object.assign({}, this.state.user, {
+    this.setState(prevState => (Object.assign({}, prevState.user {
       [event.target.name]: event.target.value
-    });
-    this.setState({ user });
+    })));
   };
 
   renderTermsAndConditions(props) {

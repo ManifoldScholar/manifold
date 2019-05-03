@@ -159,7 +159,7 @@ export class ReaderContainer extends Component {
   };
 
   toggleMeta = () => {
-    this.setState({ showMeta: !this.state.showMeta });
+    this.setState(prevState => ({ showMeta: !prevState.showMeta }));
   };
 
   maybeRenderOverlay(props) {

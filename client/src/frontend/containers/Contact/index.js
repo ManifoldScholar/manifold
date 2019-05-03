@@ -37,10 +37,9 @@ export class ContactContainer extends Component {
   }
 
   handleInputChange = event => {
-    const contact = Object.assign({}, this.state.contact, {
+    this.setState(prevState => (Object.assign({}, prevState.contact, {
       [event.target.name]: event.target.value
-    });
-    this.setState({ contact });
+    })));
   };
 
   sendMessage = event => {

@@ -166,8 +166,9 @@ export class IngestionIngest extends Component {
 
   appendToLog(message) {
     if (message[0] === "DEBUG") return;
-    const textLog = this.state.textLog.concat("\n").concat(message[1]);
-    this.setState({ textLog });
+    this.setState(prevState => ({
+      textLog: prevState.textLog.concat("\n").concat(message[1])
+    }));
   }
 
   closeSocket() {

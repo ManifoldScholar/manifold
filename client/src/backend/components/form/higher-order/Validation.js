@@ -44,8 +44,9 @@ export default class FormHigherOrderValidation extends Component {
         pointer: this.pointerFor(this.props.name)
       }
     };
-    const errors = Object.assign({}, this.state.errors, { [key]: error });
-    this.setState({ errors });
+    this.setState(prevState => ({
+      errors: Object.assign({}, prevState.errors, { [key]: error })
+    }));
   }
 
   pointerFor(name) {

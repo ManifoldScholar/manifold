@@ -45,7 +45,7 @@ class SearchResultsTypeGenericExcerpts extends PureComponent {
 
   toggle = event => {
     event.preventDefault();
-    this.setState({ open: !this.state.open });
+    this.setState(prevState => ({ open: !prevState.open }));
   };
 
   render() {

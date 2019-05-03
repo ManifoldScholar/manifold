@@ -54,7 +54,9 @@ export default class Builder extends PureComponent {
   };
 
   toggleActionCallouts = () => {
-    this.setState({ actionCalloutsOpen: !this.state.actionCalloutsOpen });
+    this.setState(prevState => ({
+      actionCalloutsOpen: !prevState.actionCalloutsOpen
+    }));
   };
 
   render() {

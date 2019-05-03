@@ -47,8 +47,7 @@ export default class AnnotationEditor extends PureComponent {
   };
 
   handlePrivacyChange = eventIgnored => {
-    const value = !this.state.private;
-    this.setState({ private: value });
+    this.setState(prevState => ({ private: !prevState.private }));
   };
 
   handleSubmit = event => {

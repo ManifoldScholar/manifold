@@ -200,12 +200,12 @@ export class Annotatable extends Component {
   };
 
   openCitationDrawer = () => {
-    this.setState({
+    this.setState(prevState => ({
       drawerProps: {
-        annotation: this.state.selectionState.selectionAnnotation,
+        annotation: prevState.selectionState.selectionAnnotation,
         section: this.props.section
       }
-    });
+    }));
     this.openDrawer("citation");
   };
 
@@ -217,21 +217,21 @@ export class Annotatable extends Component {
 
   openNewAnnotationDrawer = (event = null) => {
     if (event) event.stopPropagation();
-    this.setState({
+    this.setState(prevState => ({
       drawerProps: {
-        pendingAnnotation: this.state.selectionState.selectionAnnotation
+        pendingAnnotation: prevState.selectionState.selectionAnnotation
       }
-    });
+    }));
     this.openDrawer("newAnnotation");
   };
 
   openNewNotationDrawer = (event = null) => {
-    this.setState({
+    this.setState(prevState => ({
       drawerProps: {
-        pendingAnnotation: this.state.selectionState.selectionAnnotation,
+        pendingAnnotation: prevState.selectionState.selectionAnnotation,
         projectId: this.props.projectId
       }
-    });
+    }));
     this.openDrawer("newNotation", event);
   };
 

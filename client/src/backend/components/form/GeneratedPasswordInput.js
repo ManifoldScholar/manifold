@@ -62,7 +62,7 @@ class FormGeneratedPasswordInput extends Component {
 
   togglePassword(event) {
     event.preventDefault();
-    this.setState({ showPassword: !this.state.showPassword });
+    this.setState(prevState => ({ showPassword: !prevState.showPassword }));
   }
 
   renderInput() {
