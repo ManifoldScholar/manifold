@@ -32,7 +32,7 @@ export default class ResourceLink extends Component {
       return (
         <a
           href={attr.attachmentStyles.original}
-          download=""
+          download
           type="submit"
           className={this.props.buttonClass}
         >
