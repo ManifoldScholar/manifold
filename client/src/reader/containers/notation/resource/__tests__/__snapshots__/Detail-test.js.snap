@@ -207,7 +207,7 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
             >
               <a
                 className="button-secondary outlined"
-                download=""
+                download={true}
                 href="original-image.mock"
                 type="submit"
               >

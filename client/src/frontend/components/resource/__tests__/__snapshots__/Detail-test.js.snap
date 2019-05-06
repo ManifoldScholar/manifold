@@ -82,7 +82,7 @@ exports[`Frontend.Resource.Detail component renders correctly 1`] = `
         <aside>
           <a
             className="button-primary"
-            download=""
+            download={true}
             href="original-image.mock"
             type="submit"
           >
