@@ -13,7 +13,6 @@ class ProjectCollectionSerializer < ApplicationSerializer
                      serializer: CollectionProjectSerializer do |serializer|
     serializer.object
               .collection_projects
-              .with_collection_order
               .projects_with_read_ability serializer.current_user
   end
 

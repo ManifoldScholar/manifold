@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190314125115) do
+ActiveRecord::Schema.define(version: 20190506192655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -877,6 +877,83 @@ ActiveRecord::Schema.define(version: 20190314125115) do
        JOIN users_roles ur ON ((ur.role_id = r.id)))
     GROUP BY ur.user_id, r.resource_id, r.resource_type
    HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
+  SQL
+
+  create_view "project_collection_sort_orders", materialized: true,  sql_definition: <<-SQL
+      WITH allowed_columns AS (
+           SELECT t.column_name
+             FROM ( VALUES ('created_at'::text), ('updated_at'::text), ('publication_date'::text), ('title'::text)) t(column_name)
+          ), allowed_directions AS (
+           SELECT t.direction
+             FROM ( VALUES ('asc'::text), ('desc'::text)) t(direction)
+          ), allowed_sort_orders AS (
+           SELECT allowed_columns.column_name,
+              allowed_directions.direction,
+              concat(allowed_columns.column_name, '_', allowed_directions.direction) AS sort_order,
+              (allowed_directions.direction = 'asc'::text) AS ascending,
+              (allowed_directions.direction = 'desc'::text) AS descending
+             FROM allowed_columns,
+              allowed_directions
+          )
+   SELECT allowed_sort_orders.column_name,
+      allowed_sort_orders.direction,
+      allowed_sort_orders.sort_order,
+      allowed_sort_orders.ascending,
+      allowed_sort_orders.descending
+     FROM allowed_sort_orders;
+  SQL
+
+  add_index "project_collection_sort_orders", ["sort_order"], name: "project_collection_sort_orders_pkey", unique: true
+
+  create_view "collection_project_rankings",  sql_definition: <<-SQL
+      SELECT cp.id AS collection_project_id,
+      cp.project_collection_id,
+      cp.project_id,
+      rank() OVER outer_w AS ranking,
+      rank() OVER global_w AS global_ranking,
+      pc.sort_order,
+      sv.sort_order AS dynamic_sort_order,
+      dsv.dynamic_sort_value,
+      manual.ranking AS manual_sort_value
+     FROM (((((collection_projects cp
+       JOIN project_collections pc ON ((pc.id = cp.project_collection_id)))
+       JOIN projects p ON ((p.id = cp.project_id)))
+       LEFT JOIN LATERAL ( SELECT cp."position" AS ranking
+            WHERE ((pc.sort_order)::text = 'manual'::text)) manual ON (((pc.sort_order)::text = 'manual'::text)))
+       LEFT JOIN project_collection_sort_orders sv ON ((((pc.sort_order)::text <> 'manual'::text) AND ((pc.sort_order)::text = sv.sort_order))))
+       LEFT JOIN LATERAL ( SELECT
+                  CASE sv.column_name
+                      WHEN 'created_at'::text THEN ((p.created_at)::text)::character varying
+                      WHEN 'updated_at'::text THEN ((p.updated_at)::text)::character varying
+                      WHEN 'publication_date'::text THEN ((p.publication_date)::text)::character varying
+                      WHEN 'title'::text THEN p.title
+                      ELSE p.title
+                  END AS dynamic_sort_value) dsv ON (((pc.sort_order)::text <> 'manual'::text)))
+    WINDOW outer_w AS (PARTITION BY cp.project_collection_id ORDER BY
+          CASE
+              WHEN ((pc.sort_order)::text = 'manual'::text) THEN manual.ranking
+              ELSE NULL::integer
+          END,
+          CASE
+              WHEN sv.descending THEN dsv.dynamic_sort_value
+              ELSE NULL::character varying
+          END DESC,
+          CASE
+              WHEN sv.ascending THEN dsv.dynamic_sort_value
+              ELSE NULL::character varying
+          END), global_w AS (ORDER BY pc."position",
+          CASE
+              WHEN ((pc.sort_order)::text = 'manual'::text) THEN manual.ranking
+              ELSE NULL::integer
+          END,
+          CASE
+              WHEN sv.descending THEN dsv.dynamic_sort_value
+              ELSE NULL::character varying
+          END DESC,
+          CASE
+              WHEN sv.ascending THEN dsv.dynamic_sort_value
+              ELSE NULL::character varying
+          END);
   SQL
 
 end
