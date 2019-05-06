@@ -68,6 +68,7 @@ class Project < ApplicationRecord
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project
+  has_many :collection_project_rankings, through: :collection_projects, source: :ranking
   has_many :project_collections, through: :collection_projects, dependent: :destroy
   has_many :texts, dependent: :destroy, inverse_of: :project
   has_many :published_texts,
@@ -164,6 +165,19 @@ class Project < ApplicationRecord
     where(draft: to_boolean(draft)) unless draft.nil?
   }
 
+  scope :ranked_by_collection, (lambda do
+    is_same_project = CollectionProjectRanking
+        .arel_table[:project_id]
+        .eq(arel_table[:id])
+
+    in_same_collection = CollectionProject
+        .arel_table[:id]
+        .eq(CollectionProjectRanking.arel_table[:collection_project_id])
+
+    joins(:collection_project_rankings).merge(CollectionProjectRanking.ranked)
+      .where(is_same_project.and(in_same_collection))
+  end)
+
   scope :with_order, lambda { |by = nil|
     next order(:sort_title, :title) unless by.present?
 
@@ -188,9 +202,9 @@ class Project < ApplicationRecord
 
   scope :with_collection_order, lambda { |collection|
     pc = ProjectCollection.friendly.find(collection)
-    joins(:collection_projects)
+    ranked_by_collection
+      .joins(:collection_projects)
       .where(collection_projects: { project_collection: pc })
-      .order("collection_projects.position ASC")
   }
 
   # Search

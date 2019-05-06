@@ -26,22 +26,9 @@ class ProjectCollection < ApplicationRecord
   has_formatted_attribute :description, include_wrap: false
 
   # Relationships
-  has_many :collection_projects, dependent: :destroy, inverse_of: :project_collection do
-    def with_collection_order
-      return with_manual_order if proxy_association.owner.manually_sorted?
+  has_many :collection_projects, -> { ranked }, dependent: :destroy, inverse_of: :project_collection
 
-      with_dynamic_order
-    end
-
-    def with_manual_order
-      order(position: :asc)
-    end
-
-    def with_dynamic_order
-      joins(:project).order(proxy_association.owner.project_sorting)
-    end
-  end
-  has_many :projects, through: :collection_projects, dependent: :destroy
+  has_many :projects, -> { ranked_by_collection }, through: :collection_projects
   has_many :project_collection_subjects, dependent: :destroy
   has_many :subjects, through: :project_collection_subjects
 

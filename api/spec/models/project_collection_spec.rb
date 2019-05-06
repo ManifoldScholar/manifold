@@ -6,31 +6,31 @@ RSpec.describe ProjectCollection, type: :model do
     expect(FactoryBot.build(:project_collection)).to be_valid
   end
 
-  describe "its collection_project relationship" do
+  describe "#projects" do
     let(:project_a) { FactoryBot.create(:project, title: "A") }
     let(:project_b) { FactoryBot.create(:project, title: "B") }
     let(:project_c) { FactoryBot.create(:project, title: "C") }
     let(:project_d) { FactoryBot.create(:project, title: "D") }
-    let(:project_collection) do
-      pc = FactoryBot.create(:project_collection, sort_order: "title_desc")
-      pc.projects << [project_c, project_b, project_d, project_a]
-      pc
+    let(:sort_order) { "title_desc" }
+    let(:positioned_projects) { [project_c, project_b, project_d, project_a] }
+    let!(:project_collection) do
+      pc = FactoryBot.create(:project_collection, sort_order: sort_order)
+      pc.projects << positioned_projects
+      pc.reload
     end
 
-    it "has a scope that orders based on position" do
-      project_titles = project_collection.collection_projects.with_manual_order.map { |cp| cp.project.title }
-      expect(project_titles).to eq %w(C B D A)
+    subject { project_collection.projects.reload.to_a }
+
+    context "when the scope is based on position" do
+      let(:sort_order) { "manual" }
+
+      it { is_expected.to eq positioned_projects }
     end
 
-    it "has a scope that orders based on specified attribute" do
-      project_titles = project_collection.collection_projects.with_dynamic_order.map { |cp| cp.project.title }
-      expect(project_titles).to eq %w(D C B A)
-    end
+    context "when the scope is based on specified attribute" do
+      let(:sort_order) { "title_desc" }
 
-    it "maintains consecutive positions when removing project" do
-      project_collection.projects = project_collection.projects.where.not(id: project_b.id)
-      project_collection.save
-      expect(project_collection.collection_projects.pluck(:position)).to eq [1, 2, 3]
+      it { is_expected.to eq [project_d, project_c, project_b, project_a] }
     end
   end
 
