@@ -104,7 +104,7 @@ export default class Text extends Component {
   // filteredAnnotations), but is in the unfiltered collection, then we can remove
   // it from the URL because the user has filtered it off the screen for now.
   checkRequestAnnotationHash() {
-    const { location } = this.props;
+    const location = window.location;
     if (!Array.isArray(this.state.filteredAnnotations)) return;
     if (this.state.filteredAnnotations.length === 0) return;
     if (!locationHelper.hashed(location)) return;
