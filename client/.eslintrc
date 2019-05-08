@@ -17,6 +17,9 @@
       "enforceForRenamedProperties": false
     }],
 
+    // turn this off until we make the changes to fix it
+    "prefer-promise-reject-errors": 0,
+
     // destructuring is a good idea if you can do it, but not required
     "react/destructuring-assignment": 0,
     "react/default-props-match-prop-types": 0,
