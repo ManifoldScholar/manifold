@@ -1,3 +1,6 @@
+require_relative "./interaction_testing"
+require_relative "./data_uri"
+
 RSpec.shared_context "updaters v2" do
   let(:interaction_inputs) do
     build_interaction_inputs
