@@ -210,6 +210,8 @@ module Updaters
           string :filename
         end
 
+        boolean :"remove_#{name}", default: nil
+
         define_attachment_fields! name
       end
 

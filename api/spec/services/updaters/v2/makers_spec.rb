@@ -20,5 +20,17 @@ RSpec.describe Updaters::V2::Makers, updaters_v2: true do
         e.to keep_the_same(Maker, :count)
       end
     end
+
+    context "and removing the existing avatar" do
+      it "removes the attachment" do
+        perform_within_expectation! do |e|
+          e.to keep_the_same(Maker, :count)
+        end
+
+        perform_within_expectation! remove_avatar: true do |e|
+          e.to change { model.reload.avatar.present? }.from(true).to(false) 
+        end
+      end
+    end
   end
 end
