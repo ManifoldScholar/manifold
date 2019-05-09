@@ -35,26 +35,18 @@
     }
 
     @include respond(event-entity(list-layout-breakpoint)) {
-      flex-basis: 50%;
+      flex-basis: calc(50% - 40px);
       min-width: event-entity(min-width);
       padding-left: event-entity(column-gap);
     }
 
     @include respond($break85) {
-      flex-basis: 33.333%;
+      flex-basis: calc(33.333% - 40px);
       max-width: 417.58px;
       margin-top: 40px;
 
       @supports (grid-auto-columns: min-content) {
         max-width: none;
-      }
-    }
-
-    &:nth-child(n+3) {
-      //display: none;
-
-      @include respond($break60) {
-        display: flex;
       }
     }
   }
