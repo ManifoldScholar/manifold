@@ -1,7 +1,13 @@
-require Rails.root.join("lib", "patches", "metadown_custom_renderer").to_s
-require Rails.root.join("lib", "patches", "better_enums").to_s
-require Rails.root.join("lib", "patches", "for_shrine").to_s
-require Rails.root.join("lib", "patches", "friendly_id_uniqueness").to_s
+[
+  "metadown_custom_renderer",
+  "better_enums",
+  "simpler_params_casting",
+  "better_interactions",
+  "for_shrine",
+  "friendly_id_uniqueness"
+].each do |patch_name|
+  require Rails.root.join("lib", "patches", patch_name).to_s
+end
 
 # See https://github.com/nahi/httpclient/issues/252
 class WebAgent
