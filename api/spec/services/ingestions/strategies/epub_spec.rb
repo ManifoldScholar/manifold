@@ -59,7 +59,7 @@ RSpec.describe Ingestions::Strategies::Epub do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
+    let!(:manifest) { described_class.run! context: context }
 
     include_examples "outcome assertions"
 
@@ -102,7 +102,7 @@ RSpec.describe Ingestions::Strategies::Epub do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
+    let!(:manifest) { described_class.run! context: context }
 
     include_examples "outcome assertions"
 
@@ -142,7 +142,7 @@ RSpec.describe Ingestions::Strategies::Epub do
       WebMock.allow_net_connect!
       context = create_context(ingestion)
       WebMock.disable_net_connect!
-      @manifest = described_class.run(context: context).result
+      @manifest = described_class.run! context: context
     end
 
     describe "the returned manifest" do

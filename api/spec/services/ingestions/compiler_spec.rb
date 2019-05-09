@@ -12,8 +12,8 @@ RSpec.describe Ingestions::Compiler do
     end
     let(:context) { create_context(ingestion) }
     let(:manifest) do
-      manifest = Ingestions::Strategies::Epub.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest = Ingestions::Strategies::Epub.run! context: context
+      manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
       manifest
     end
 
@@ -38,8 +38,8 @@ RSpec.describe Ingestions::Compiler do
     end
     let(:context) { create_context(ingestion) }
     let(:manifest) do
-      manifest = Ingestions::Strategies::Manifest.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest = Ingestions::Strategies::Manifest.run! context: context
+      manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
       manifest
     end
 
@@ -65,8 +65,8 @@ RSpec.describe Ingestions::Compiler do
     end
     let(:context) { create_context(ingestion) }
     let(:manifest) do
-      manifest = Ingestions::Strategies::Document.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest = Ingestions::Strategies::Document.run! context: context
+      manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
       manifest
     end
 
@@ -91,8 +91,8 @@ RSpec.describe Ingestions::Compiler do
     end
     let(:context) { create_context(ingestion) }
     let(:manifest) do
-      manifest = Ingestions::Strategies::Document.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest = Ingestions::Strategies::Document.run! context: context
+      manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
       manifest
     end
 
@@ -117,8 +117,8 @@ RSpec.describe Ingestions::Compiler do
     end
     let(:context) { create_context(ingestion) }
     let(:manifest) do
-      manifest = Ingestions::Strategies::Document.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest = Ingestions::Strategies::Document.run! context: context
+      manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
       manifest
     end
 

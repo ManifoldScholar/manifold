@@ -97,7 +97,7 @@ RSpec.describe Ingestions::Ingestor do
         allow(ingestion).to receive(:ingestion_source).and_return(path)
         ingestion
       end
-      let!(:text) { Ingestions::Ingestor.run(ingestion: ingestion).result }
+      let!(:text) { Ingestions::Ingestor.run! ingestion: ingestion }
 
       it "returns a valid text" do
         expect(text.valid?).to eq true

@@ -11,11 +11,11 @@ RSpec.describe Ingestions::PostProcessors::TextSectionBody do
   end
   let!(:context) { create_context(ingestion) }
   let(:manifest) do
-    manifest = Ingestions::Strategies::Document.run(context: context).result
-    manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+    manifest = Ingestions::Strategies::Document.run! context: context
+    manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
     manifest
   end
-  let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+  let!(:text) { Ingestions::Compiler.run! manifest: manifest, context: context }
   let!(:text_section) { text.text_sections.first }
 
   it "correctly maps an html encoded path to a string path" do

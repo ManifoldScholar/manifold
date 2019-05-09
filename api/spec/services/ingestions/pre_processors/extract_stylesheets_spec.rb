@@ -11,7 +11,7 @@ RSpec.describe Ingestions::PreProcessors::ExtractStylesheets do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let(:manifest) { Ingestions::Strategies::Epub.run(context: context).result }
+    let(:manifest) { Ingestions::Strategies::Epub.run! context: context }
 
     it "assigns the correct stylesheet attributes" do
       expected = [{"name"=>"stylesheet-1", "position"=>1, "hashed_content"=>"c47a911e406d63e16e29c5d7874f7397", "build"=>"build/stylesheet-1.css", "source_identifier"=>"/OEBPS/styles/some%20stylesheet.css"}]
@@ -28,7 +28,7 @@ RSpec.describe Ingestions::PreProcessors::ExtractStylesheets do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let(:manifest) { Ingestions::Strategies::Document.run(context: context).result }
+    let(:manifest) { Ingestions::Strategies::Document.run! context: context }
 
     it "assigns the correct stylesheet attributes" do
       expected = [{"name"=>"stylesheet-1", "position"=>1, "hashed_content"=>"1826716b1ed8d8c12ba4e77ea2f1315b", "build"=>"build/stylesheet-1.css", "source_identifier"=>"a-stylesheet.css"},
@@ -47,7 +47,7 @@ RSpec.describe Ingestions::PreProcessors::ExtractStylesheets do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let(:manifest) { Ingestions::Strategies::Manifest.run(context: context).result }
+    let(:manifest) { Ingestions::Strategies::Manifest.run! context: context }
 
     it "assigns the correct stylesheet attributes" do
       expected = [{"name"=>"stylesheet-1", "position"=>1, "hashed_content"=>"1826716b1ed8d8c12ba4e77ea2f1315b", "build"=>"build/stylesheet-1.css", "source_identifier"=>"stylesheet.css"},

@@ -11,10 +11,10 @@ RSpec.describe Ingestions::PreProcessor do
   end
   let(:context) { create_context(ingestion) }
   let(:manifest) do
-    manifest = Ingestions::Strategies::Document.run(context: context).result
-    Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+    manifest = Ingestions::Strategies::Document.run! context: context
+    Ingestions::PreProcessor.run! context: context, manifest: manifest
   end
-  let(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+  let(:text) { Ingestions::Compiler.run! manifest: manifest, context: context }
   let!(:outcome) { Ingestions::PostProcessor.run(manifest: manifest, text: text, context: context) }
 
   it "does not unnecessarily change non-latin text" do

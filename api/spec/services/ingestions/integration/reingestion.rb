@@ -8,8 +8,8 @@ RSpec.describe "When re-ingesting a text using the Document strategy", integrati
   let(:after_source) { File.open(after_path) }
   let(:before_ingestion) { FactoryBot.create(:ingestion, text: nil, source: before_source, external_source_url: nil) }
   let(:after_ingestion) { FactoryBot.create(:ingestion, text: text, source: after_source, external_source_url: nil) }
-  let(:text) { Ingestions::Ingestor.run(ingestion: before_ingestion).result }
-  let(:after_text) { Ingestions::Ingestor.run(ingestion: after_ingestion).result }
+  let(:text) { Ingestions::Ingestor.run! ingestion: before_ingestion }
+  let(:after_text) { Ingestions::Ingestor.run! ingestion: after_ingestion }
 
   let(:section) { text.text_sections.first }
 

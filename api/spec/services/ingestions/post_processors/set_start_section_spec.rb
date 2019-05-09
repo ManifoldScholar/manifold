@@ -21,11 +21,11 @@ RSpec.describe Ingestions::PostProcessors::SetStartSection do
     end
     let(:context) { create_context(ingestion) }
     let(:manifest) do
-      manifest = Ingestions::Strategies::Manifest.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest = Ingestions::Strategies::Manifest.run! context: context
+      manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
       manifest
     end
-    let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+    let!(:text) { Ingestions::Compiler.run! manifest: manifest, context: context }
 
     context "when starting section source is referenced multiple times" do
       let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local") }
@@ -48,11 +48,11 @@ RSpec.describe Ingestions::PostProcessors::SetStartSection do
     end
     let(:context) { create_context(ingestion) }
     let(:manifest) do
-      manifest = Ingestions::Strategies::Epub.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest = Ingestions::Strategies::Epub.run! context: context
+      manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
       manifest
     end
-    let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+    let!(:text) { Ingestions::Compiler.run! manifest: manifest, context: context }
 
     context "when V2" do
       let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2") }

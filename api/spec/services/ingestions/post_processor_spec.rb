@@ -11,11 +11,11 @@ RSpec.describe Ingestions::PostProcessor do
   end
   let(:context) { create_context(ingestion) }
   let(:manifest) do
-    manifest = Ingestions::Strategies::Epub.run(context: context).result
-    manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+    manifest = Ingestions::Strategies::Epub.run!(context: context)
+    manifest = Ingestions::PreProcessor.run!(context: context, manifest: manifest)
     manifest
   end
-  let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+  let!(:text) { Ingestions::Compiler.run!(manifest: manifest, context: context) }
   let!(:outcome) { Ingestions::PostProcessor.run(manifest: manifest, text: text, context: context) }
 
   describe "the text section bodies" do
@@ -73,11 +73,11 @@ RSpec.describe Ingestions::PostProcessor do
     end
     let(:reingestion_context) { create_context(after_ingestion) }
     let(:reingestion_manifest) do
-      reingestion_manifest = Ingestions::Strategies::Epub.run(context: reingestion_context).result
-      reingestion_manifest = Ingestions::PreProcessor.run(context: reingestion_context, manifest: reingestion_manifest).result
+      reingestion_manifest = Ingestions::Strategies::Epub.run! context: reingestion_context
+      reingestion_manifest = Ingestions::PreProcessor.run! context: reingestion_context, manifest: reingestion_manifest
       reingestion_manifest
     end
-    let!(:after_text) { Ingestions::Compiler.run(manifest: reingestion_manifest, context: reingestion_context).result }
+    let!(:after_text) { Ingestions::Compiler.run! manifest: reingestion_manifest, context: reingestion_context }
 
     context "when text sections" do
       it "destroys the compiled records" do

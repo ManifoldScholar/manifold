@@ -34,11 +34,11 @@ RSpec.describe Ingestions::PostProcessors::TOC do
     end
     let!(:context) { create_context(ingestion) }
     let(:manifest) do
-      manifest = Ingestions::Strategies::Epub.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest = Ingestions::Strategies::Epub.run! context: context
+      manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
       manifest
     end
-    let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+    let!(:text) { Ingestions::Compiler.run! manifest: manifest, context: context }
     let(:hashed) { text.toc.detect { |item| item["label"] == "Section 2#1" } }
     let(:unhashed) { text.toc.detect { |item| item["label"] == "Section 2" } }
 
@@ -54,11 +54,11 @@ RSpec.describe Ingestions::PostProcessors::TOC do
     end
     let!(:context) { create_context(ingestion) }
     let(:manifest) do
-      manifest = Ingestions::Strategies::Manifest.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest = Ingestions::Strategies::Manifest.run! context: context
+      manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
       manifest
     end
-    let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+    let!(:text) { Ingestions::Compiler.run! manifest: manifest, context: context }
     let(:hashed) { text.toc.detect { |item| item["label"] == "Section 1#1" } }
     let(:unhashed) { text.toc.detect { |item| item["label"] == "Title Set From TOC" } }
 
@@ -74,11 +74,11 @@ RSpec.describe Ingestions::PostProcessors::TOC do
     end
     let!(:context) { create_context(ingestion) }
     let(:manifest) do
-      manifest = Ingestions::Strategies::Document.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+      manifest = Ingestions::Strategies::Document.run! context: context
+      manifest = Ingestions::PreProcessor.run! context: context, manifest: manifest
       manifest
     end
-    let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+    let!(:text) { Ingestions::Compiler.run! manifest: manifest, context: context }
     let(:hashed) { text.toc.detect { |item| item["label"] == "Header 2" } }
 
     before(:each) { described_class.run text: text, context: context }

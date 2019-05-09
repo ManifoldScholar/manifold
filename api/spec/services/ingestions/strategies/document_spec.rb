@@ -126,12 +126,12 @@ RSpec.describe Ingestions::Strategies::Document do
     }
 
     it "does not have an empty TOC" do
-      manifest = described_class.run(context: context).result
+      manifest = described_class.run! context: context
       expect(manifest[:attributes][:toc]).to_not eq []
     end
 
     it "correctly generates the TOC and excludes blank entries" do
-      manifest = described_class.run(context: context).result
+      manifest = described_class.run! context: context
       expect(manifest[:attributes][:toc]).to eq toc
     end
 
@@ -147,7 +147,7 @@ RSpec.describe Ingestions::Strategies::Document do
         ingestion
       end
       let(:context) { create_context(ingestion) }
-      let!(:manifest) { described_class.run(context: context).result }
+      let!(:manifest) { described_class.run!(context: context) }
 
       include_examples "outcome assertions"
 
@@ -171,7 +171,7 @@ RSpec.describe Ingestions::Strategies::Document do
           ingestion
         end
         let(:context) { create_context(ingestion) }
-        let!(:manifest) { described_class.run(context: context).result }
+        let!(:manifest) { described_class.run!(context: context) }
 
         include_examples "outcome assertions"
 
@@ -194,7 +194,7 @@ RSpec.describe Ingestions::Strategies::Document do
           ingestion
         end
         let(:context) { create_context(ingestion) }
-        let!(:manifest) { described_class.run(context: context).result }
+        let!(:manifest) { described_class.run!(context: context) }
 
         include_examples "outcome assertions"
 
@@ -219,7 +219,7 @@ RSpec.describe Ingestions::Strategies::Document do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
+    let!(:manifest) { described_class.run!(context: context) }
 
     include_examples "outcome assertions"
 
@@ -243,7 +243,7 @@ RSpec.describe Ingestions::Strategies::Document do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
+    let!(:manifest) { described_class.run!(context: context) }
 
     it "has one text section" do
       expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "Pandoc User’s Guide", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
@@ -264,7 +264,7 @@ RSpec.describe Ingestions::Strategies::Document do
       WebMock.allow_net_connect!
       context = create_context(ingestion)
       WebMock.disable_net_connect!
-      @manifest = described_class.run(context: context).result
+      @manifest = described_class.run!(context: context)
     end
 
     it "has one main title" do
@@ -293,7 +293,7 @@ RSpec.describe Ingestions::Strategies::Document do
       ingestion
     end
     let(:context) { create_context(ingestion) }
-    let!(:manifest) { described_class.run(context: context).result }
+    let!(:manifest) { described_class.run!(context: context) }
 
     it "has an ingestion source for document and each media item" do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 2
