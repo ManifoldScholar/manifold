@@ -34,7 +34,7 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
       <time
         dateTime="2018-12-24"
       >
-        4 months
+        5 months
       </time>
        
       ago
