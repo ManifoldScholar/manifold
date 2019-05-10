@@ -157,7 +157,7 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="manicon-svg footer-tertiary__manifold-logo svg-icon--manifoldLogo32"
+              className="manicon-svg footer-tertiary__manifold-logo footer-tertiary__manifold-logo--dull svg-icon--manifoldLogo32"
               fill="currentColor"
               height={32}
               viewBox="0 0 32 32"
