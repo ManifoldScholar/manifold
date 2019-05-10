@@ -34,9 +34,9 @@ export default class ResourceImportResultsPending extends PureComponent {
       );
     }
     return (
-      <span>{`Row #${
-        resourceImportRow.lineNumber
-      } will create a new resource.`}</span>
+      <span>
+        {`Row #${resourceImportRow.lineNumber} will create a new resource.`}
+      </span>
     );
   }
 
