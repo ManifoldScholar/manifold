@@ -65,8 +65,10 @@ module Updaters
 
     # @return [void]
     def assign_creator!
+      # if a user is given
       return unless given?(:creator) && model.respond_to?(:creator=)
 
+      # assign the creator to this model so tests can have access
       model.creator = creator
     end
 

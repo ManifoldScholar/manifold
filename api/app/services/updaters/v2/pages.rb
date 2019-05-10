@@ -8,13 +8,14 @@ module Updaters
         boolean :show_in_header
         string :slug
         boolean :hidden
-        text :body
+        string :body
         boolean :is_external_link
-        text :external_link
+        string :external_link
         boolean :open_in_new_tab
-        string :creator_id
         string :purpose
       end
+
+      validates :creator, presence: true
     end
   end
 end

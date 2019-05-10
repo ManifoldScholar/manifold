@@ -1,11 +1,12 @@
 module Updaters
   module V2
     class Categories < Updaters::AbstractUpdater
-        with_options default: nil do
-        string :project_id
+
+      # has_position!
+
+      with_options default: nil do
         string :title
         string :role
-        integer :position
       end
     end
   end
