@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import ListItem from "./ListItem/";
+import ListItem from "./ListItem";
 
 export default class TextList extends Component {
   static displayName = "TextList";
