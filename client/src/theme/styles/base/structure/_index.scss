@@ -210,8 +210,8 @@ $readerContainerWidths: (790px, 680px, 500px);
 @mixin headerContainerPrimary {
   @include containerPrototype;
   position: relative;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-top: 9px;
+  padding-bottom: 9px;
 
   @include respond($break40) {
     padding-top: 20px;

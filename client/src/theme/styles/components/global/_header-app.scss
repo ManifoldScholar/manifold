@@ -128,6 +128,7 @@
 
   .mobile-nav-trigger {
     @include buttonUnstyled;
+    position: relative;
     grid-area: hamburger;
     -ms-grid-row: 1;
     -ms-grid-column: 3;
