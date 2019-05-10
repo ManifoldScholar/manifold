@@ -71,7 +71,7 @@ module Concerns
       def build_association_getter(name)
         class_eval <<~RUBY, __FILE__, __LINE__ + 1
           def #{name}
-            reference_associations[:#{name}]
+            reference_associations[:#{name}].compact
           end
         RUBY
       end
