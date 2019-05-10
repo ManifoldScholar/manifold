@@ -10,6 +10,37 @@
   },
   "rules": {
 
+    //////////////// NEW /////////////////
+
+    "prefer-destructuring": ["error", {
+      "array": false,
+      "object": false
+    }, {
+      "enforceForRenamedProperties": false
+    }],
+
+    "react/destructuring-assignment": 0,
+    "react/button-has-type": 0,
+    "react/default-props-match-prop-types": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "import/order": 0,
+    "react/prop-types": 0,
+    "react/sort-comp": 0,
+    "react/no-access-state-in-setstate": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-curly-brace-presence": 0,
+    "react/no-unused-state": 0,
+    "no-restricted-globals": 0,
+    "react/no-typos": 0,
+    "getter-return": 0,
+    "lines-between-class-members": 0,
+    "prefer-promise-reject-errors": 0,
+    "no-else-return": 0,
+    "import/no-useless-path-segments": 0,
+    "react/jsx-closing-tag-location": 0,
+
+    ///////// END NEW //////////////////
+
     "prettier/prettier": "error",
 
     // Developer should choose whether concatenation or string templates make more sense.
