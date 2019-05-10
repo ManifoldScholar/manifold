@@ -32,6 +32,7 @@ export class ResourceNewContainer extends PureComponent {
   };
 
   static displayName = "Resource.New";
+
   static propTypes = {
     project: PropTypes.object,
     history: PropTypes.object,

@@ -13,6 +13,7 @@ export default function withSearchResultHelper(WrappedComponent) {
 
   class WithSearchResultHelper extends PureComponent {
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     static propTypes = {

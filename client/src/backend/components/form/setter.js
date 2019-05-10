@@ -15,6 +15,7 @@ export default function setter(WrappedComponent) {
 
   class Setter extends React.PureComponent {
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     static propTypes = {

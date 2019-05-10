@@ -19,6 +19,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
 
   class WithFilters extends Component {
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     static mapStateToProps = state => {
