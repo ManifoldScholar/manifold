@@ -55,7 +55,7 @@ class ContentBlock < ApplicationRecord
   # rubocop:disable Metrics/AbcSize
   def references_belong_to_project!
     reference_configurations.each do |config|
-      association = __send__(config.name).compact
+      association = __send__(config.name)
       return true unless association.present?
 
       matcher = if association.is_a? Array

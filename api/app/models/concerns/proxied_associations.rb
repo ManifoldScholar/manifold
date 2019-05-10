@@ -71,7 +71,9 @@ module Concerns
       def build_association_getter(name)
         class_eval <<~RUBY, __FILE__, __LINE__ + 1
           def #{name}
-            reference_associations[:#{name}].compact
+            association = reference_associations[:#{name}]
+            return association.compact if association.is_a? Array
+            association
           end
         RUBY
       end
