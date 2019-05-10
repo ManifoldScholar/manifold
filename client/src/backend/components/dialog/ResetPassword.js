@@ -22,7 +22,7 @@ class ResetPasswordWrapper extends PureComponent {
   static propTypes = {
     uiProps: PropTypes.shape({
       message: PropTypes.string,
-      heading: PropTypes.heading,
+      heading: PropTypes.string,
       resolve: PropTypes.func.isRequired,
       reject: PropTypes.func.isRequired
     }).isRequired,
