@@ -12,7 +12,7 @@ export default class AnnotationPopupPositioner extends PureComponent {
     annotatableRef: PropTypes.object,
     selectionState: PropTypes.shape({
       selection: PropTypes.object,
-      selectionComplete: PropTypes.boolean,
+      selectionComplete: PropTypes.bool,
       selectionAnnotation: PropTypes.object,
       popupTriggerX: PropTypes.number,
       popupTriggerY: PropTypes.number
