@@ -16,6 +16,7 @@ export default function withFormContext(WrappedComponent) {
 
   class WithFormContext extends React.PureComponent {
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     render() {

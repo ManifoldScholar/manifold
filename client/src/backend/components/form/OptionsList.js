@@ -19,6 +19,7 @@ class FormOptionsList extends PureComponent {
     selectedValue: PropTypes.string,
     searchable: PropTypes.bool
   };
+
   static defaultProps = {
     focusOnMount: false,
     searchable: true

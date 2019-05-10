@@ -16,6 +16,7 @@ function withFormOptions(WrappedComponent) {
 
   class WithFormOptions extends Component {
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     static propTypes = {

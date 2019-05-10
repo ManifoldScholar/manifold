@@ -62,6 +62,7 @@ export class NavigationSecondary extends Component {
   renderPanel(props) {
     return <aside className="aside">{this.renderContents(props)}</aside>;
   }
+
   renderNav(props) {
     if (props.panel) return this.renderPanel(props);
     return this.renderContents(props);

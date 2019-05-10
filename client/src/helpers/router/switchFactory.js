@@ -12,6 +12,7 @@ export default function switchFactory(Wrapper) {
 
   class RouterSwitch extends React.PureComponent {
     static Wrapper = Wrapper;
+
     static displayName = displayName;
 
     static propTypes = {

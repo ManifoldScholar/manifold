@@ -19,6 +19,7 @@ export default function withSettings(WrappedComponent) {
     };
 
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     render() {

@@ -30,6 +30,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
   };
 
   static displayName = "ResourceCollection.New";
+
   static propTypes = {
     project: PropTypes.object,
     history: PropTypes.object,

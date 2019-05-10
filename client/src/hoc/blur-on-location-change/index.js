@@ -12,6 +12,7 @@ export default class BlurOnLocationChange extends PureComponent {
     super(props);
     this.wrapperRef = React.createRef();
   }
+
   componentDidUpdate(prevProps) {
     if (!this.props.location) return;
     if (!this.wrapperRef.current) return;

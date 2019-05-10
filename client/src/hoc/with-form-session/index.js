@@ -25,6 +25,7 @@ export default function withFormSession(WrappedComponent, sessionKey) {
     };
 
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     static propTypes = {

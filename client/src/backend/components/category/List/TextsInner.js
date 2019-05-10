@@ -36,6 +36,7 @@ export default class CategoryListTexts extends PureComponent {
   get hasTexts() {
     return this.texts.length > 0;
   }
+
   get hasCategory() {
     return !!this.props.category;
   }

@@ -16,6 +16,7 @@ export default function fetchData(WrappedComponent) {
 
   class FetchData extends React.PureComponent {
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     fetchData = propsIgnored => {

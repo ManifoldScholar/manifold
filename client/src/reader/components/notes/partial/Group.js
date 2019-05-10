@@ -22,6 +22,7 @@ export default class Group extends Component {
       expanded: false
     };
   }
+
   componentDidMount() {
     this.preOpenItem();
   }

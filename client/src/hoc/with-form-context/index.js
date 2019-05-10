@@ -12,6 +12,7 @@ function withFormContext(WrappedComponent) {
 
   class WithFormContext extends Component {
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     render() {

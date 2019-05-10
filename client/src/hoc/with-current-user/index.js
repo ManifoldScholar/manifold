@@ -22,6 +22,7 @@ export default function withCurrentUser(WrappedComponent) {
     };
 
     static WrappedComponent = WrappedComponent;
+
     static displayName = displayName;
 
     render() {
