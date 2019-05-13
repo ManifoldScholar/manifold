@@ -10,7 +10,7 @@ import lh from "helpers/linkHandler";
 
 import withSettings from "hoc/with-settings";
 
-const { request, flush } = entityStoreActions;
+const { request } = entityStoreActions;
 
 export class ProjectWrapper extends Component {
   static fetchData = (getState, dispatch, location, match) => {
@@ -46,11 +46,12 @@ export class ProjectWrapper extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(requests.feProject));
+    // this.props.dispatch(flush(requests.feProject));
     window.removeEventListener("keyup", this.maybeReloadProject);
   }
 
   get standaloneMode() {
+    return true;
     // Will return true if standaloneMode.project.id in the store matches
     // the current project.id; otherwise will return false
     const { project: currentProject, standaloneMode } = this.props;
@@ -66,14 +67,6 @@ export class ProjectWrapper extends Component {
 
     return false;
   }
-
-  maybeReloadProject = event => {
-    // ctrl + r
-    if (event.ctrlKey && event.keyCode === 82) {
-      if (!this.props.fetchData) return;
-      this.props.fetchData(this.props);
-    }
-  };
 
   renderRoutes() {
     const {

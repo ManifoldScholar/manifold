@@ -81,6 +81,7 @@ export class FrontendContainer extends Component {
   }
 
   get standaloneMode() {
+    return true;
     const { standaloneMode } = this.props;
     return standaloneMode && standaloneMode.project;
   }
