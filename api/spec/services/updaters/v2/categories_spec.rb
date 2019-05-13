@@ -2,19 +2,22 @@ require "rails_helper"
 
 RSpec.describe Updaters::V2::Categories, updaters_v2: true do
 
-  # let(:title) { Faker::String.random(4) }
-  # let(:role) { Faker::String.random(4) }
-  #
-  # let(:position) { 1 }
-  #
-  # let(:attributes) { { title: title, role: role, position: position } }
-  #
-  # it "can create a category" do
-  #   # there should be one more category
-  #   perform_within_expectation! do |e|
-  #     e.to change(Category, :count).by(1)
-  #   end
-  # end
+  let!(:project) { FactoryBot.create :project }
+
+  let(:attributes) { {
+    title:     "Some category",
+    role:      "text",
+    position:  1,
+    project:   project
+  } }
+
+  it "can create a category" do
+    # there should be one more category
+    perform_within_expectation!
+    # perform_within_expectation! do |e|
+    #   e.to change(Category, :count).by(1)
+    # end
+  end
 
   # context "when updating an existing model" do
   #   let!(:model) { FactoryBot.create :category }
