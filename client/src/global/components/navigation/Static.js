@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/UserMenuButton";
 import UserMenuBody from "global/components/UserMenuBody";
@@ -22,12 +23,25 @@ export class NavigationStatic extends PureComponent {
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
     exact: PropTypes.bool,
-    style: PropTypes.object
+    style: PropTypes.object,
+    darkTheme: PropTypes.bool
   };
 
   static defaultProps = {
     exact: false
   };
+
+  get userMenuClasses() {
+    return classNames({
+      "user-links": true,
+      "show-75": true,
+      "user-links--dark": this.props.darkTheme
+    });
+  }
+
+  get hasLinks() {
+    return this.props.links && this.props.links.length > 0;
+  }
 
   pathForLink(link) {
     const args = link.args || [];
@@ -99,7 +113,7 @@ export class NavigationStatic extends PureComponent {
 
   renderUserMenu(props) {
     return (
-      <nav className="user-links show-75">
+      <nav className={this.userMenuClasses}>
         <ul aria-label="User Links" style={this.props.style}>
           {this.props.backendButton && <li>{this.props.backendButton}</li>}
           {this.renderSearch(props)}
@@ -125,9 +139,8 @@ export class NavigationStatic extends PureComponent {
     );
   }
 
-  render() {
+  renderPageNav() {
     return (
-      <React.Fragment>
         <nav className="page-nav show-75" aria-label="Primary Navigation">
           <ul
             aria-label="Page Links"
@@ -149,6 +162,13 @@ export class NavigationStatic extends PureComponent {
             })}
           </ul>
         </nav>
+    );
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        {this.hasLinks && this.renderPageNav()}
         {this.renderUserMenu(this.props)}
       </React.Fragment>
     );

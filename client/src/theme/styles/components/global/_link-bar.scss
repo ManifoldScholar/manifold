@@ -1,0 +1,31 @@
+.link-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $neutralWhite;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    color $duration $timing,
+    background-color $duration $timing;
+
+  &:hover,
+  &:focus {
+    color: $neutral90;
+    /* stylelint-disable-next-line declaration-no-important */
+    background-color: $accentPrimary !important; // overrides component's inline value
+  }
+
+  &__inner {
+    @include containerPrototype;
+    width: 100%;
+    padding-top: 9.5px;
+    padding-bottom: 9.5px;
+  }
+
+  &__text {
+    @include templateHead;
+    font-size: 16px;
+    font-weight: $semibold;
+  }
+}

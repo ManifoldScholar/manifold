@@ -26,6 +26,10 @@
     background-color: $neutral95;
   }
 
+  &--standalone {
+    padding-top: 0;
+  }
+
   // background-image
   &__bg-image-wrapper {
     position: absolute;
@@ -83,6 +87,10 @@
     @include respond($break120) {
       row-gap: $row-gap-large;
       column-gap: $column-gap-large;
+    }
+
+    .header-app--standalone + & {
+      padding-top: 48px;
     }
   }
 

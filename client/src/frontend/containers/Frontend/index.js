@@ -7,8 +7,8 @@ import { pagesAPI, subjectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, isLoaded } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
-import { renderRoutes } from "react-router-config";
 import get from "lodash/get";
+import { childRoutes } from "helpers/router";
 
 import ScrollAware from "hoc/scroll-aware";
 import BodyClass from "hoc/body-class";
@@ -42,7 +42,8 @@ export class FrontendContainer extends Component {
       loading: state.ui.transitory.loading.active,
       notifications: state.notifications,
       pages: select(requests.gPages, state.entityStore),
-      settings: select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore),
+      standaloneMode: state.ui.persistent.standaloneMode
     };
   };
 
@@ -55,8 +56,13 @@ export class FrontendContainer extends Component {
     notifications: PropTypes.object,
     pages: PropTypes.array,
     settings: PropTypes.object,
+    standaloneMode: PropTypes.shape({
+      project: PropTypes.object
+    }),
     route: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
+    project: PropTypes.object,
+    projectResponse: PropTypes.object
   };
 
   constructor(props) {
@@ -74,6 +80,18 @@ export class FrontendContainer extends Component {
     }
   }
 
+  get standaloneMode() {
+    const { standaloneMode } = this.props;
+    return standaloneMode && standaloneMode.project;
+  }
+
+  renderRoutes() {
+    const { standaloneMode } = this.props;
+    return childRoutes(this.props.route, {
+      childProps: { standaloneMode }
+    });
+  }
+
   render() {
     const mainClasses = get(
       this.props.settings,
@@ -86,18 +104,20 @@ export class FrontendContainer extends Component {
       <BodyClass className={"browse"}>
         <div>
           <Utility.ScrollToTop />
-          <ScrollAware>
-            <Layout.Header
-              pages={this.props.pages}
-              visibility={this.props.visibility}
-              match={this.props.match}
-              location={this.props.location}
-              authentication={this.props.authentication}
-              notifications={this.props.notifications}
-              commonActions={this.commonActions}
-              settings={this.props.settings}
-            />
-          </ScrollAware>
+          {!this.standaloneMode && (
+            <ScrollAware>
+              <Layout.Header
+                pages={this.props.pages}
+                visibility={this.props.visibility}
+                match={this.props.match}
+                location={this.props.location}
+                authentication={this.props.authentication}
+                notifications={this.props.notifications}
+                commonActions={this.commonActions}
+                settings={this.props.settings}
+              />
+            </ScrollAware>
+          )}
           <main
             ref={mainContainer => {
               this.mainContainer = mainContainer;
@@ -105,13 +125,14 @@ export class FrontendContainer extends Component {
             id="skip-to-main"
             className={mainClasses}
           >
-            <div>{renderRoutes(this.props.route.routes)}</div>
+            <div>{this.renderRoutes()}</div>
           </main>
           <Layout.Footer
             pages={this.props.pages}
             authentication={this.props.authentication}
             commonActions={this.commonActions}
             settings={this.props.settings}
+            standaloneMode={this.standaloneMode}
           />
         </div>
       </BodyClass>

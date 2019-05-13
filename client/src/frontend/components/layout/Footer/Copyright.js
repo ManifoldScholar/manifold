@@ -3,13 +3,18 @@ import React, { PureComponent } from "react";
 export default class Copyright extends PureComponent {
   static displayName = "Layout.Footer.Copyright";
 
+  get settings() {
+    return this.props.settings;
+  }
+
   renderCopyright() {
-    if (!this.props.settings) return null;
-    if (!this.props.settings.attributes.copyrightFormatted) return null;
+    if (!this.settings) return null;
+    if (!this.settings.attributes.copyrightFormatted) return null;
+
     return (
       <div
         dangerouslySetInnerHTML={{
-          __html: this.props.settings.attributes.copyrightFormatted
+          __html: this.settings.attributes.copyrightFormatted
         }}
       />
     );

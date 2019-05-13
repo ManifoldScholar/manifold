@@ -10,7 +10,8 @@ class Detail extends Component {
 
   static propTypes = {
     project: PropTypes.object,
-    settings: PropTypes.object
+    settings: PropTypes.object,
+    standaloneMode: PropTypes.bool
   };
 
   componentDidMount() {
@@ -18,12 +19,13 @@ class Detail extends Component {
   }
 
   render() {
-    if (!this.props.project) return <LoadingBlock />;
+    const { project, standaloneMode } = this.props;
+    if (!project) return <LoadingBlock />;
     return (
       <div>
-        <Hero project={this.props.project} />
-        <ContentBlock project={this.props.project} />
-        <Layout.ButtonNavigation />
+        <Hero project={project} standaloneMode={standaloneMode} />
+        <ContentBlock project={project} />
+        {!standaloneMode && <Layout.ButtonNavigation />}
       </div>
     );
   }

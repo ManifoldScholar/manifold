@@ -3,9 +3,14 @@ import chunk from "lodash/chunk";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import Utility from "global/components/utility";
+import classNames from "classnames";
 
 export default class Navigation extends PureComponent {
   static displayName = "Layout.Footer.Navigation";
+
+  get settings() {
+    return this.props.settings;
+  }
 
   handleLogoutClick = event => {
     event.preventDefault();
@@ -50,7 +55,9 @@ export default class Navigation extends PureComponent {
         target={page.attributes.openInNewTab ? "_blank" : null}
         className="footer-nav-list__link"
       >
-        {page.attributes.navTitle || page.attributes.title}
+        <span className="footer-nav-list__text">
+          {page.attributes.navTitle || page.attributes.title}
+        </span>
       </Link>
     );
   }
@@ -63,7 +70,9 @@ export default class Navigation extends PureComponent {
         rel="noopener noreferrer"
         className="footer-nav-list__link"
       >
-        {page.attributes.navTitle || page.attributes.title}
+        <span className="footer-nav-list__text">
+          {page.attributes.navTitle || page.attributes.title}
+        </span>
       </a>
     );
   }
@@ -77,7 +86,7 @@ export default class Navigation extends PureComponent {
           onClick={this.handleLogoutClick}
           className="footer-nav-list__link"
         >
-          {"Log Out"}
+          <span className="footer-nav-list__text">{"Log Out"}</span>
         </span>
       );
     }
@@ -87,14 +96,14 @@ export default class Navigation extends PureComponent {
         role="button"
         onClick={this.handleLoginClick}
       >
-        {"Log In"}
+        <span className="footer-nav-list__text">{"Log In"}</span>
       </span>
     );
   }
 
   buildEmailLink() {
-    if (!this.props.settings) return null;
-    if (!this.props.settings.attributes.general.contactEmail) return null;
+    if (!this.settings || !this.settings.attributes.general.contactEmail)
+      return null;
     return (
       <Link to={lh.link("frontendContact")} className="footer-nav-list__link">
         <Utility.IconComposer
@@ -102,15 +111,15 @@ export default class Navigation extends PureComponent {
           size={24}
           iconClass="footer-nav-list__icon"
         />
-        {"Email"}
+        <span className="footer-nav-list__text">{"Email"}</span>
       </Link>
     );
   }
 
   buildTwitterLink() {
-    if (!this.props.settings) return null;
-    if (!this.props.settings.attributes.general.twitter) return null;
-    const name = this.props.settings.attributes.general.twitter;
+    if (!this.settings || !this.settings.attributes.general.twitter)
+      return null;
+    const name = this.settings.attributes.general.twitter;
     return (
       <a
         target="_blank"
@@ -123,15 +132,15 @@ export default class Navigation extends PureComponent {
           size={24}
           iconClass="footer-nav-list__icon"
         />
-        {"Twitter"}
+        <span className="footer-nav-list__text">{"Twitter"}</span>
       </a>
     );
   }
 
   buildFacebookLink() {
-    if (!this.props.settings) return null;
-    if (!this.props.settings.attributes.general.facebook) return null;
-    const page = this.props.settings.attributes.general.facebook;
+    if (!this.settings || !this.settings.attributes.general.facebook)
+      return null;
+    const page = this.settings.attributes.general.facebook;
     return (
       <a
         target="_blank"
@@ -144,7 +153,7 @@ export default class Navigation extends PureComponent {
           size={24}
           iconClass="footer-nav-list__icon"
         />
-        {"Facebook"}
+        <span className="footer-nav-list__text">{"Facebook"}</span>
       </a>
     );
   }
@@ -154,7 +163,7 @@ export default class Navigation extends PureComponent {
     pages.push(this.buildAuthLink());
     pages.push(
       <Link to={lh.link("frontend")} className="footer-nav-list__link">
-        {"Home"}
+        <span className="footer-nav-list__text">{"Home"}</span>
       </Link>
     );
     pages.push(
@@ -162,7 +171,7 @@ export default class Navigation extends PureComponent {
         to={lh.link("frontendProjectsAll")}
         className="footer-nav-list__link"
       >
-        {"Projects"}
+        <span className="footer-nav-list__text">{"Projects"}</span>
       </Link>
     );
     pages.push(...this.buildContentPages());
@@ -183,10 +192,15 @@ export default class Navigation extends PureComponent {
   }
 
   /* eslint-disable react/no-array-index-key */
-  renderLinkColumn(links) {
+  renderLinkColumn(links, simpleTheme) {
     if (links.length === 0) return null;
     return (
-      <ul className="footer-nav-list">
+      <ul
+        className={classNames({
+          "footer-nav-list": true,
+          "footer-nav-list--simple": simpleTheme
+        })}
+      >
         {links.map((link, index) => (
           <li key={index} className="footer-nav-list__item">
             {link}

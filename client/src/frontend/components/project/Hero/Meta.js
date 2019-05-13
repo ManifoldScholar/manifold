@@ -9,11 +9,24 @@ export default class ProjectHeroMeta extends PureComponent {
 
   static propTypes = {
     blockClass: PropTypes.string,
-    project: PropTypes.object.isRequired
+    project: PropTypes.object.isRequired,
+    standaloneMode: PropTypes.bool
   };
+
+  get standaloneMode() {
+    return this.props.standaloneMode;
+  }
+
+  get showTitle() {
+    return !this.standaloneMode && this.props.project.attributes.titleFormatted;
+  }
 
   get title() {
     return this.props.project.attributes.titleFormatted;
+  }
+
+  get showSubtitle() {
+    return !this.standaloneMode && this.props.project.attributes.titleFormatted;
   }
 
   get subtitle() {
@@ -96,20 +109,22 @@ export default class ProjectHeroMeta extends PureComponent {
     const blockClass = this.props.blockClass;
     return (
       <div className={`${blockClass}__meta-block`}>
-        <header className={`${blockClass}__heading`}>
-          {this.title && (
-            <h1
-              className={`${blockClass}__title`}
-              dangerouslySetInnerHTML={{ __html: this.title }}
-            />
-          )}
-          {this.subtitle && (
-            <div
-              className={`${blockClass}__subtitle`}
-              dangerouslySetInnerHTML={{ __html: this.subtitle }}
-            />
-          )}
-        </header>
+        {(this.showTitle || this.showSubtitle) && (
+          <header className={`${blockClass}__heading`}>
+            {this.showTitle && (
+              <h1
+                className={`${blockClass}__title`}
+                dangerouslySetInnerHTML={{ __html: this.title }}
+              />
+            )}
+            {this.showSubtitle && (
+              <div
+                className={`${blockClass}__subtitle`}
+                dangerouslySetInnerHTML={{ __html: this.subtitle }}
+              />
+            )}
+          </header>
+        )}
         {this.creators && this.renderCreatorList(blockClass)}
         {this.contributors && this.renderContributorList(blockClass)}
         {this.description && (

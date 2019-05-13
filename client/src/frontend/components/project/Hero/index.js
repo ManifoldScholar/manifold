@@ -1,18 +1,21 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import orderBy from "lodash/orderBy";
+import classNames from "classnames";
 import Cover from "./Cover";
 import Meta from "./Meta";
 import CalloutList from "./CalloutList";
 import Social from "./Social";
 import Credits from "./Credits";
 import Authorization from "helpers/authorization";
+import StandaloneHeader from "../StandaloneHeader";
 
 export default class ProjectHero extends PureComponent {
   static displayName = "Project.Hero";
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    standaloneMode: PropTypes.bool
   };
 
   constructor(props) {
@@ -42,6 +45,10 @@ export default class ProjectHero extends PureComponent {
     return this.props.project.attributes.darkMode;
   }
 
+  get standaloneMode() {
+    return this.props.standaloneMode;
+  }
+
   get backgroundImage() {
     return this.props.project.attributes.heroStyles;
   }
@@ -58,6 +65,10 @@ export default class ProjectHero extends PureComponent {
       entity: this.props.project,
       ability: "update"
     });
+  }
+
+  get darkTheme() {
+    return this.hasBackgroundImage || this.darkMode;
   }
 
   get actionCallouts() {
@@ -130,14 +141,25 @@ export default class ProjectHero extends PureComponent {
 
   render() {
     const blockClass = "project-hero";
-    const themeModifier =
-      this.hasBackgroundImage || this.darkMode ? "dark" : "light";
+    const containerClasses = classNames({
+      [`${blockClass}`]: true,
+      [`${blockClass}--light`]: !this.darkTheme,
+      [`${blockClass}--dark`]: this.darkTheme,
+      [`${blockClass}--standalone`]: this.standaloneMode
+    });
 
     return (
-      <section className={`${blockClass} ${blockClass}--${themeModifier}`}>
+      <section className={containerClasses}>
+        {this.standaloneMode && (
+          <StandaloneHeader project={this.props.project} full />
+        )}
         <div className={`${blockClass}__inner`}>
           <div className={`${blockClass}__left-top-block`}>
-            <Meta blockClass={blockClass} project={this.props.project} />
+            <Meta
+              blockClass={blockClass}
+              project={this.props.project}
+              standaloneMode={this.standaloneMode}
+            />
             <CalloutList
               blockClass={blockClass}
               callouts={this.leftCallouts}

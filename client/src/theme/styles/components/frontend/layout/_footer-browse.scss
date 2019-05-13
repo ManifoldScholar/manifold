@@ -10,6 +10,10 @@
     padding-top: 67px;
   }
 
+  &--standalone {
+    padding-top: 0;
+  }
+
   .footer-primary {
     @include clearfix;
     @include respond($break65) {
@@ -121,71 +125,6 @@
       color: inherit;
     }
   }
-
-  .footer-tertiary {
-    display: block;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    background-color: $neutral80;
-    transition: background-color $duration $timing;
-
-    &:hover, &:focus {
-      background-color: $accentPrimary;
-      outline: 0;
-
-      .logo, .logo.dull {
-        color: $neutral80;
-
-        .text .neutral-text {
-          color: $neutralWhite;
-        }
-      }
-
-      .footer-tertiary__manifold-logo {
-        color: $neutralWhite;
-      }
-
-      .footer-tertiary__manifold-logo--dull {
-        color: $neutral80;
-      }
-    }
-
-    .logo {
-      @include templateHead;
-      display: block;
-      font-size: 20px;
-      font-weight: $semibold;
-      line-height: 33px;
-      color: $neutralWhite;
-      text-decoration: none;
-      transition: color $duration $timing;
-
-      &.dull {
-        color: $neutral30;
-      }
-
-      .text {
-        display: inline-block;
-
-        .neutral-text {
-          color: $neutral70;
-          transition: color $duration $timing;
-        }
-      }
-    }
-
-    &__manifold-logo {
-      position: relative;
-      top: -2px;
-      margin-right: 14px;
-      color: $accentPrimary;
-      transition: color $duration $timing;
-
-      &--dull {
-        color: $neutral70;
-      }
-    }
-  }
 }
 
 .footer-nav-list {
@@ -193,6 +132,18 @@
 
   @include listUnstyled;
   font-size: 16px;
+
+  &--simple {
+    display: flex;
+
+    .footer-nav-list__item + .footer-nav-list__item {
+      margin-top: 0;
+    }
+
+    .footer-nav-list__text {
+      @include screenReaderText;
+    }
+  }
 
   &__item {
     min-height: $icon-size;
@@ -251,5 +202,111 @@
   &__link-group {
     margin-top: 20px;
     margin-right: 70px;
+  }
+}
+
+/* stylelint-disable property-no-vendor-prefix */
+.manifold-footer {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: $neutral80;
+  transition: background-color $duration $timing;
+
+  &__inner {
+    $grid-gap: 25px;
+
+    @include containerPrototype;
+    display: -ms-grid;
+    display: grid;
+    grid-template:
+      'logo . social' auto
+      'colophon colophon colophon' auto / auto 1fr max-content;
+    -ms-grid-rows: auto auto;
+    -ms-grid-columns: 1fr max-content;
+  }
+
+  &__logo-link {
+    display: block;
+    grid-area: logo;
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+
+    &--block {
+      &:hover,
+      &:focus {
+        background-color: $accentPrimary;
+        outline: 0;
+      }
+    }
+  }
+
+  &__colophon {
+    grid-area: colophon;
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 3;
+    margin-top: 20px;
+  }
+
+  &__social-nav {
+    align-self: center;
+    grid-area: social;
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    -ms-grid-row-align: center;
+  }
+
+  &__logo {
+    @include templateHead;
+    display: block;
+    font-size: 20px;
+    font-weight: $semibold;
+    line-height: 33px;
+    color: $neutralWhite;
+    text-decoration: none;
+
+    &--dull {
+      color: $neutral30;
+    }
+  }
+
+  &__logo-text {
+    display: inline-block;
+
+    &--neutral {
+      color: $neutral70;
+      transition: color $duration $timing;
+
+      .manifold-footer__logo-link:hover &,
+      .manifold-footer__logo-link:focus & {
+        color: $neutralWhite;
+      }
+    }
+
+    &--white {
+      transition: color $duration $timing;
+
+      .manifold-footer__logo-link--block:hover &,
+      .manifold-footer__logo-link--block:focus & {
+        color: $neutral80;
+      }
+    }
+  }
+
+  &__manifold-logo-icon {
+    position: relative;
+    top: -2px;
+    margin-right: 14px;
+    color: $accentPrimary;
+    transition: color $duration $timing;
+
+    &--dull {
+      color: $neutral70;
+    }
+
+    .manifold-footer__logo-link:hover &,
+    .manifold-footer__logo-link:focus & {
+      color: $neutralWhite;
+    }
   }
 }

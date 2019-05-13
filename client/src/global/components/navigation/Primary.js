@@ -17,7 +17,9 @@ export class NavigationPrimary extends PureComponent {
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
     exact: PropTypes.bool,
     desktopStyle: PropTypes.object,
-    mobileStyle: PropTypes.object
+    mobileStyle: PropTypes.object,
+    standaloneMode: PropTypes.bool,
+    darkTheme: PropTypes.bool
   };
 
   static defaultProps = {
@@ -74,6 +76,7 @@ export class NavigationPrimary extends PureComponent {
           backendButton={backendButton}
           {...this.props}
           style={this.props.desktopStyle}
+          darkTheme={this.props.darkTheme}
         />
         <Mobile
           backendButton={backendButton}

@@ -30,6 +30,30 @@ export default class LayoutHeader extends PureComponent {
     pages: []
   };
 
+  get bodyClasses() {
+    return classNames({
+      standalone: this.standaloneMode,
+      "header-tall": get(
+        this.props.settings,
+        "attributes.pressLogoStyles.small"
+      )
+    });
+  }
+
+  get headerClasses() {
+    return classNames({
+      "header-app": true,
+      "header-app--default": true
+    });
+  }
+
+  get containerClasses() {
+    return classNames({
+      "header-container": true,
+      "header-container--default": true
+    });
+  }
+
   pageItem(page) {
     if (!page.attributes.showInHeader) return null;
     const attrs = {
@@ -63,12 +87,6 @@ export default class LayoutHeader extends PureComponent {
 
   render() {
     const links = this.frontendLinks(this.props);
-    const bodyClasses = classNames({
-      "header-tall": get(
-        this.props.settings,
-        "attributes.pressLogoStyles.small"
-      )
-    });
     const offset = get(this.props, "settings.attributes.theme.headerOffset");
     const navStyle = offset
       ? { position: "relative", top: parseInt(offset, 10) }
@@ -83,11 +101,11 @@ export default class LayoutHeader extends PureComponent {
 
     return (
       <BlurOnLocationChange location={this.props.location}>
-        <BodyClass className={bodyClasses}>
-          <header className="header-app">
+        <BodyClass className={this.bodyClasses}>
+          <header className={this.headerClasses}>
             <Utility.SkipLink />
             <PreHeader />
-            <div className="header-container">
+            <div className={this.containerClasses}>
               <Link to={lh.link("frontend")} className="header-logo">
                 <span className="screen-reader-text">Return to home</span>
                 <PressLogo
@@ -107,6 +125,8 @@ export default class LayoutHeader extends PureComponent {
                 authentication={this.props.authentication}
                 visibility={this.props.visibility}
                 mode="frontend"
+                standaloneMode={this.standaloneMode}
+                darkMode={this.darkMode}
               />
             </div>
 

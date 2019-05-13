@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { renderRoutes } from "react-router-config";
-import { RedirectToFirstMatch } from "helpers/router";
+import { RedirectToFirstMatch, childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 
 export default class ProjectsWrapper extends Component {
   static propTypes = {
-    route: PropTypes.object
+    route: PropTypes.object,
+    standaloneMode: PropTypes.shape({
+      project: PropTypes.object
+    })
   };
+
+  renderRoutes() {
+    const { standaloneMode } = this.props;
+    return childRoutes(this.props.route, {
+      childProps: { standaloneMode }
+    });
+  }
 
   render() {
     return (
@@ -21,7 +30,7 @@ export default class ProjectsWrapper extends Component {
             }
           ]}
         />
-        {renderRoutes(this.props.route.routes)}
+        {this.renderRoutes()}
       </div>
     );
   }

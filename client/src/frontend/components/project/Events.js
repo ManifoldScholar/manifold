@@ -6,6 +6,7 @@ import Utility from "frontend/components/utility";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import IconComposer from "global/components/utility/IconComposer";
+import StandaloneHeader from "./StandaloneHeader";
 
 export default class ProjectEvents extends Component {
   static displayName = "Project.Events";
@@ -13,7 +14,8 @@ export default class ProjectEvents extends Component {
   static propTypes = {
     project: PropTypes.object,
     events: PropTypes.array,
-    pagination: PropTypes.object
+    pagination: PropTypes.object,
+    standaloneMode: PropTypes.bool
   };
 
   render() {
@@ -28,12 +30,16 @@ export default class ProjectEvents extends Component {
           image={this.props.project.attributes.avatarStyles.mediumSquare}
           appendTitle
         />
-        <section className="bg-neutral05">
-          <Utility.BackLinkPrimary
-            link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.titlePlaintext}
-          />
-        </section>
+        {this.props.standaloneMode ? (
+          <StandaloneHeader project={this.props.project} theme={["simple"]} />
+        ) : (
+          <section className="bg-neutral05">
+            <Utility.BackLinkPrimary
+              link={lh.link("frontendProject", project.attributes.slug)}
+              title={project.attributes.titlePlaintext}
+            />
+          </section>
+        )}
         <section>
           <div className="container entity-section-wrapper">
             <header className="section-heading entity-section-wrapper__heading">
@@ -51,7 +57,7 @@ export default class ProjectEvents extends Component {
             />
           </div>
         </section>
-        <Layout.ButtonNavigation />
+        {!this.props.standaloneMode && <Layout.ButtonNavigation />}
       </div>
     );
   }

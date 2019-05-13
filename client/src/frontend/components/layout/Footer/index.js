@@ -9,6 +9,7 @@ import Copyright from "./Copyright";
 import PostFooter from "./PostFooter";
 import Navigation from "./Navigation";
 import FooterLogic from "./FooterLogic";
+import classNames from "classnames";
 
 class Footer extends Component {
   static displayName = "Layout.Footer";
@@ -19,6 +20,7 @@ class Footer extends Component {
     history: PropTypes.object,
     location: PropTypes.object,
     pages: PropTypes.array,
+    standaloneMode: PropTypes.bool,
     settings: PropTypes.shape({
       attributes: PropTypes.shape({
         general: PropTypes.object,
@@ -38,12 +40,42 @@ class Footer extends Component {
     }
   };
 
+  get standaloneMode() {
+    return this.props.standaloneMode;
+  }
+
+  get containerClasses() {
+    return classNames({
+      "footer-browse": true,
+      "footer-browse--default": !this.standaloneMode,
+      "footer-browse--standalone": this.standaloneMode
+    });
+  }
+
+  get settings() {
+    return this.props.settings;
+  }
+
+  get pressSite() {
+    return this.settings && this.settings.attributes.general.pressSite;
+  }
+
+  get pressLogo() {
+    return this.settings && this.settings.attributes.pressLogoFooterStyles;
+  }
+
+  get isPressLogo() {
+    if (!this.settings) return false;
+
+    return this.pressLogo && this.pressLogo.original !== null;
+  }
+
   render() {
     const { settings } = this.props;
 
     return (
       <BlurOnLocationChange location={this.props.location}>
-        <footer className="footer-browse">
+        <footer className={this.containerClasses}>
           <FooterLogic pressLogo={settings.attributes.pressLogoFooterStyles}>
             {searchPosition => (
               <React.Fragment>
@@ -78,7 +110,7 @@ class Footer extends Component {
                   </div>
                 </section>
                 <Copyright settings={settings} />
-                <PostFooter searchPosition={searchPosition} />
+                <PostFooter standaloneMode={this.standaloneMode} searchPosition={searchPosition} />
               </React.Fragment>
             )}
           </FooterLogic>

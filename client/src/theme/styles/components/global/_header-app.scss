@@ -1,10 +1,6 @@
 .header-app {
   /* stylelint-disable property-no-vendor-prefix */
-  position: fixed;
   width: 100%;
-  background-color: $neutralWhite;
-  border-bottom: 1px solid transparent;
-  transition: border-color $duration $timing;
 
   .header-tall & {
     @include respond($break75) {
@@ -49,34 +45,136 @@
     }
   }
 
+  &--default {
+    position: fixed;
+    background-color: $neutralWhite;
+    border-bottom: 1px solid transparent;
+    transition: border-color $duration $timing;
+  }
+
+  &--default-dark {
+    position: fixed;
+  }
+
+  &--standalone {
+    position: relative;
+    background-color: transparent;
+  }
+
+  &--standalone-light {
+    color: $neutral80;
+    background-color: $neutral10;
+  }
+
+  &--standalone-dark-full {
+    color: $neutralWhite;
+    background-color: rgba(#000, 0.15);
+    transition:
+      background-color $duration $timing,
+      border-color $duration $timing;
+
+    .scroll-aware.not-top & {
+      background-color: $neutral95;
+    }
+  }
+
+  &--standalone-dark-simple {
+    color: $neutralWhite;
+    background:
+      linear-gradient(90deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.15) 100%),
+      $neutral95;
+    transition:
+      background-color $duration $timing,
+      border-color $duration $timing;
+
+    .scroll-aware.not-top & {
+      background-color: $neutral95;
+    }
+  }
+
+  &--with-link-bar {
+    .nested-nav--open + .mobile-nav-trigger {
+      top: -37px;
+    }
+  }
+
   .header-container {
     @include headerContainerPrimary;
     display: -ms-grid;
     display: grid;
-    -ms-grid-rows: auto;
-    -ms-grid-columns: 1fr auto 1fr;
-    grid-template: // logo is in _header-logo.scss
-      'logo breadcrumbs hamburger' / 1fr auto 1fr;
-    height: 100%;
-    background-color: $neutralWhite;
 
-    @include respond($break75) {
-      -ms-grid-columns: auto max-content 1fr max-content;
+    &--default {
+      -ms-grid-rows: auto;
+      -ms-grid-columns: 1fr auto 1fr;
+      grid-template: // logo is in _header-logo.scss
+        'logo breadcrumbs hamburger' / 1fr auto 1fr;
+      height: 100%;
+      background-color: $neutralWhite;
+
+      @include respond($break75) {
+        -ms-grid-columns: 1fr max-content max-content;
+        grid-template:
+          'logo page-nav . user-nav' / fit-content(300px) max-content 1fr max-content;
+
+        > .user-links {
+          align-self: center;
+          -ms-grid-row-align: center;
+
+          @include respond($break75) {
+            -ms-grid-row: 1;
+            -ms-grid-column: 4;
+          }
+        }
+      }
+    }
+
+    &--standalone {
+      -ms-grid-rows: auto;
+      -ms-grid-columns: auto minmax(25px, 1fr) max-content;
       grid-template:
-        'logo page-nav . user-nav' / fit-content(300px) max-content 1fr max-content;
+        'heading . hamburger' / auto minmax(75px, 1fr) max-content;
+      height: 100%;
+      background-color: transparent;
+
+      @include respond($break75) {
+        -ms-grid-columns: auto minmax(75px, 1fr) max-content;
+        grid-template:
+          'heading . user-nav' / auto minmax(75px, 1fr) max-content;
+        padding-top: 42px;
+        padding-bottom: 42px;
+      }
+
+      > .user-links {
+        align-self: baseline;
+        -ms-grid-row-align: start;
+      }
+    }
+
+    &--standalone-full {
+      max-width: 1178px;
+
+      @include respond($break75) {
+        padding-top: 42px;
+        padding-bottom: 42px;
+      }
+    }
+
+    &--standalone-simple {
+      @include respond($break75) {
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
     }
 
     > .user-links {
-      align-self: center;
       grid-area: user-nav;
       -ms-grid-row: 1;
       -ms-grid-column: 3;
       height: 42px;
-      -ms-grid-row-align: center;
+      --button-color: #{$neutral70};
 
-      @include respond($break75) {
-        -ms-grid-row: 1;
-        -ms-grid-column: 4;
+      &--dark {
+        --button-color: #{$accentPrimary};
       }
     }
   }
@@ -188,7 +286,8 @@
       outline: 0;
     }
 
-    .bg-neutral90 & {
+    .bg-neutral90 &,
+    .user-links--dark & {
       &:hover {
         color: $neutral90;
         background-color: $accentPrimary;
@@ -198,6 +297,64 @@
         color: $accentPrimary;
         background-color: $neutral95;
         outline: 0;
+      }
+    }
+  }
+
+  &__standalone-header {
+    @include templateCopy;
+    grid-area: heading;
+    line-height: 1.188;
+
+    .header-container--standalone-simple & {
+      position: relative;
+      top: -3px;
+      align-self: center;
+      -ms-grid-row-align: center;
+    }
+  }
+
+  &__standalone-text-link {
+    text-decoration: none;
+  }
+
+  &__standalone-title {
+    @include templateHead;
+    margin: 0;
+    font-size: 21px;
+    font-weight: $semibold;
+
+    @include respond($break60) {
+      font-size: 32px;
+    }
+
+    // headroom settings {
+    .header-container--standalone-simple & {
+      display: inline-block;
+      margin-right: 16px;
+      font-size: 21px;
+    }
+
+    .header-app__standalone-text-link:hover &,
+    .header-app__standalone-text-link:focus & {
+      text-decoration: underline;
+    }
+  }
+
+  &__standalone-subtitle {
+    display: none;
+    margin-top: 11px;
+    font-size: 24px;
+    font-style: italic;
+    letter-spacing: 0.028em;
+
+    @include respond($break75) {
+      display: block;
+
+      // headroom settings {
+      .header-container--standalone-simple & {
+        display: inline-block;
+        font-size: 18px;
       }
     }
   }
@@ -299,6 +456,7 @@
     .button-search {
       font-size: 19px;
       color: $neutral70;
+      color: var(--button-color, $neutral70);
       vertical-align: middle;
 
       &:focus {
@@ -332,6 +490,11 @@
     .button-avatar {
       height: 100%;
       vertical-align: middle;
+
+      .avatar {
+        color: $neutral70;
+        color: var(--button-color, $neutral70);
+      }
 
       &:focus {
         outline: 0;
@@ -451,6 +614,12 @@
       @include respond($break75) {
         padding-top: 105px;
       }
+    }
+  }
+
+  &--standalone {
+    main {
+      padding-top: 0;
     }
   }
 }

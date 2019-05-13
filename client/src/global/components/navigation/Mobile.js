@@ -62,6 +62,10 @@ export class NavigationMobile extends Component {
     return this.state.open ? "close32" : "menu32";
   }
 
+  get hasLinks() {
+    return this.props.links && this.props.links.length > 0;
+  }
+
   pathForLink(link) {
     const args = link.args || [];
     return lh.link(link.route, ...args);
@@ -120,6 +124,7 @@ export class NavigationMobile extends Component {
   };
 
   activeRoutes() {
+    if (!this.props.links) return null;
     const active = [];
     this.props.links.forEach(link => {
       const route = lh.routeFromName(link.route);
@@ -216,7 +221,8 @@ export class NavigationMobile extends Component {
               aria-label="Page Links"
               className="nested-nav__list nested-nav__list--primary-links"
             >
-              {this.props.links.map((link, index) => {
+              {this.hasLinks &&
+                this.props.links.map((link, index) => {
                 if (link.ability)
                   return (
                     <Authorize
@@ -251,10 +257,12 @@ export class NavigationMobile extends Component {
 
     return (
       <React.Fragment>
+        {this.hasLinks && (
         <MobileBreadcrumb
           links={this.props.links}
           location={this.props.location}
         />
+        )}
         <nav className={navClasses} aria-label="Mobile Navigation">
           {this.state.open && this.renderNavigationMenu()}
         </nav>
