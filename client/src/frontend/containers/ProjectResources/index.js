@@ -13,6 +13,7 @@ import omitBy from "lodash/omitBy";
 import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
+import StandaloneHeader from "frontend/components/project/StandaloneHeader";
 
 import withSettings from "hoc/with-settings";
 
@@ -22,10 +23,6 @@ const perPage = 10;
 
 class ProjectResourcesContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
-    const projectRequest = request(
-      projectsAPI.show(match.params.id),
-      requests.feProject
-    );
     const params = queryString.parse(location.search);
     const pagination = {
       number: params.page ? params.page : page,
@@ -36,14 +33,12 @@ class ProjectResourcesContainer extends Component {
       projectsAPI.resources(match.params.id, filter, pagination),
       requests.feResources
     );
-    const { promise: one } = dispatch(projectRequest);
-    const { promise: two } = dispatch(resourcesRequest);
-    return Promise.all([one, two]);
+    const { promise: one } = dispatch(resourcesRequest);
+    return Promise.all([one]);
   };
 
   static mapStateToProps = state => {
     const props = {
-      project: select(requests.feProject, state.entityStore),
       resources: select(requests.feResources, state.entityStore),
       meta: meta(requests.feResources, state.entityStore)
     };
@@ -57,7 +52,8 @@ class ProjectResourcesContainer extends Component {
     meta: PropTypes.object,
     dispatch: PropTypes.func,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object
+    history: PropTypes.object,
+    standaloneMode: PropTypes.bool
   };
 
   constructor(props) {
@@ -75,7 +71,6 @@ class ProjectResourcesContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(requests.feProject));
     this.props.dispatch(flush(requests.feResources));
   }
 
@@ -141,7 +136,7 @@ class ProjectResourcesContainer extends Component {
   };
 
   render() {
-    const { project, settings } = this.props;
+    const { project, settings, standaloneMode } = this.props;
     if (!project) return <LoadingBlock />;
 
     const filter = this.state.filter;
@@ -156,15 +151,16 @@ class ProjectResourcesContainer extends Component {
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
-        <h1 className="screen-reader-text">
-          {`${project.attributes.titlePlaintext} Resources`}
-        </h1>
-        <section className="bg-neutral05">
-          <Utility.BackLinkPrimary
-            link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.titlePlaintext}
-          />
-        </section>
+        {standaloneMode ? (
+          <StandaloneHeader project={project} theme={["simple"]} />
+        ) : (
+          <section className="bg-neutral05">
+            <Utility.BackLinkPrimary
+              link={lh.link("frontendProjectDetail", project.attributes.slug)}
+              title={project.attributes.titlePlaintext}
+            />
+          </section>
+        )}
         {this.props.resources ? (
           <Project.Resources
             project={project}
@@ -178,7 +174,7 @@ class ProjectResourcesContainer extends Component {
         ) : null}
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
-            link={lh.link("frontendProject", project.attributes.slug)}
+            link={lh.link("frontendProjectDetail", project.attributes.slug)}
             title={project.attributes.titlePlaintext}
           />
         </section>

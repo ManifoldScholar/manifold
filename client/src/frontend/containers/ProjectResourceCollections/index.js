@@ -10,6 +10,7 @@ import Utility from "frontend/components/utility";
 import GlobalUtility from "global/components/utility";
 import HeadContent from "global/components/HeadContent";
 import ResourceCollectionList from "frontend/components/resource-collection-list";
+import StandaloneHeader from "frontend/components/project/StandaloneHeader";
 
 import withSettings from "hoc/with-settings";
 
@@ -19,10 +20,6 @@ const perPage = 10;
 
 class ProjectResourceCollectionsContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
-    const projectRequest = request(
-      projectsAPI.show(match.params.id),
-      requests.feProject
-    );
     const pagination = {
       number: page,
       size: perPage
@@ -31,14 +28,12 @@ class ProjectResourceCollectionsContainer extends Component {
       projectsAPI.resourceCollections(match.params.id, {}, pagination),
       requests.feResourceCollections
     );
-    const { promise: one } = dispatch(projectRequest);
-    const { promise: two } = dispatch(resourceCollectionRequest);
-    return Promise.all([one, two]);
+    const { promise: one } = dispatch(resourceCollectionRequest);
+    return Promise.all([one]);
   };
 
   static mapStateToProps = state => {
     return {
-      project: select(requests.feProject, state.entityStore),
       resourceCollections: select(
         requests.feResourceCollections,
         state.entityStore
@@ -52,7 +47,8 @@ class ProjectResourceCollectionsContainer extends Component {
     resourceCollections: PropTypes.array,
     meta: PropTypes.object,
     settings: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    standaloneMode: PropTypes.bool
   };
 
   componentWillUnmount() {
@@ -79,7 +75,7 @@ class ProjectResourceCollectionsContainer extends Component {
   };
 
   render() {
-    const { project, settings } = this.props;
+    const { project, settings, standaloneMode } = this.props;
     if (!project) return <LoadingBlock />;
 
     return (
@@ -93,15 +89,19 @@ class ProjectResourceCollectionsContainer extends Component {
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
+        {standaloneMode ? (
+          <StandaloneHeader project={project} theme={["simple"]} />
+        ) : (
         <h1 className="screen-reader-text">
           {`${project.attributes.titlePlaintext} Resource Collections`}
         </h1>
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
-            link={lh.link("frontendProject", project.attributes.slug)}
+              link={lh.link("frontendProjectDetail", project.attributes.slug)}
             title={project.attributes.titlePlaintext}
           />
         </section>
+        )}
         <section>
           <div className="container">
             {this.props.resourceCollections && (
@@ -121,7 +121,7 @@ class ProjectResourceCollectionsContainer extends Component {
         </section>
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
-            link={lh.link("frontendProject", project.attributes.slug)}
+            link={lh.link("frontendProjectDetail", project.attributes.slug)}
             title={project.attributes.titlePlaintext}
           />
         </section>

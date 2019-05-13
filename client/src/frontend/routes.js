@@ -47,78 +47,88 @@ const routes = {
         },
         {
           name: "frontendProject",
-          exact: true,
-          component: "ProjectDetail",
+          exact: false,
+          component: "ProjectWrapper",
           path: "/projects/:id",
-          helper: p => `/projects/${p}`
-        },
-        {
-          name: "frontendProjectResources",
-          exact: true,
-          component: "ProjectResources",
-          path: "/projects/:id/resources",
-          helper: (p, params = {}) => {
-            const query = queryString.stringify(params);
-            if (!query) return `/projects/${p}/resources`;
-            return `/projects/${p}/resources/?${query}`;
-          }
-        },
-        {
-          name: "frontendProjectResourceCollections",
-          exact: true,
-          component: "ProjectResourceCollections",
-          path: "/projects/:id/resource-collections",
-          helper: p => {
-            return `/projects/${p}/resource-collections`;
-          }
-        },
-        {
-          name: "frontendProjectCollectionResource",
-          exact: true,
-          component: "ResourceDetail",
-          path:
-            "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId",
-          helper: (p, c, r) =>
-            `/projects/${p}/resource-collection/${c}/resource/${r}`
-        },
-        {
-          name: "frontendProjectResource",
-          exact: true,
-          component: "ResourceDetail",
-          path: "/projects/:id/resource/:resourceId",
-          helpers: {
-            frontendProjectResource: (p, r) => `/projects/${p}/resource/${r}`,
-            frontendProjectResourceRelative: r => `resource/${r}`
-          }
-        },
-        {
-          name: "frontendProjectResourceCollection",
-          exact: true,
-          component: "ResourceCollectionDetail",
-          path: "/projects/:id/resource-collection/:resourceCollectionId",
-          helpers: {
-            frontendProjectResourceCollection: (p, c, params = {}) => {
-              const query = queryString.stringify(params);
-              if (!query) return `/projects/${p}/resource-collection/${c}`;
-              return `/projects/${p}/resource-collection/${c}?${query}`;
+          helper: p => `/projects/${p}`,
+          routes: [
+            {
+              name: "frontendProjectDetail",
+              exact: true,
+              component: "ProjectDetail",
+              path: "/projects/:id",
+              helper: p => `/projects/${p}`
             },
-            frontendProjectResourceCollectionRelative: c =>
-              `resource-collection/${c}`
-          }
-        },
-        {
-          name: "frontendProjectEvents",
-          exact: true,
-          component: "EventList",
-          path: "/projects/:id/events/:page?",
-          helpers: {
-            frontendProjectEvents: p => `/projects/${p}/events`,
-            frontendProjectEventsPage: (pr, pg) =>
-              `/projects/${pr}/events/${pg}`
-          }
-        },
-        {
-          component: NotFound
+            {
+              name: "frontendProjectResources",
+              exact: true,
+              component: "ProjectResources",
+              path: "/projects/:id/resources",
+              helper: (p, params = {}) => {
+                const query = queryString.stringify(params);
+                if (!query) return `/projects/${p}/resources`;
+                return `/projects/${p}/resources/?${query}`;
+              }
+            },
+            {
+              name: "frontendProjectResourceCollections",
+              exact: true,
+              component: "ProjectResourceCollections",
+              path: "/projects/:id/resource-collections",
+              helper: p => {
+                return `/projects/${p}/resource-collections`;
+              }
+            },
+            {
+              name: "frontendProjectCollectionResource",
+              exact: true,
+              component: "ResourceDetail",
+              path:
+                "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId",
+              helper: (p, c, r) =>
+                `/projects/${p}/resource-collection/${c}/resource/${r}`
+            },
+            {
+              name: "frontendProjectResource",
+              exact: true,
+              component: "ResourceDetail",
+              path: "/projects/:id/resource/:resourceId",
+              helpers: {
+                frontendProjectResource: (p, r) =>
+                  `/projects/${p}/resource/${r}`,
+                frontendProjectResourceRelative: r => `resource/${r}`
+              }
+            },
+            {
+              name: "frontendProjectResourceCollection",
+              exact: true,
+              component: "ResourceCollectionDetail",
+              path: "/projects/:id/resource-collection/:resourceCollectionId",
+              helpers: {
+                frontendProjectResourceCollection: (p, c, params = {}) => {
+                  const query = queryString.stringify(params);
+                  if (!query) return `/projects/${p}/resource-collection/${c}`;
+                  return `/projects/${p}/resource-collection/${c}?${query}`;
+                },
+                frontendProjectResourceCollectionRelative: c =>
+                  `resource-collection/${c}`
+              }
+            },
+            {
+              name: "frontendProjectEvents",
+              exact: true,
+              component: "EventList",
+              path: "/projects/:id/events/:page?",
+              helpers: {
+                frontendProjectEvents: p => `/projects/${p}/events`,
+                frontendProjectEventsPage: (pr, pg) =>
+                  `/projects/${pr}/events/${pg}`
+              }
+            },
+            {
+              component: NotFound
+            }
+          ]
         }
       ]
     },

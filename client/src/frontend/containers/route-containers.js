@@ -4,6 +4,7 @@ import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
 import Projects from "frontend/containers/Projects";
 import ProjectCollections from "frontend/containers/ProjectCollections";
 import ProjectCollectionDetail from "frontend/containers/ProjectCollectionDetail";
+import ProjectWrapper from "frontend/containers/ProjectWrapper";
 import ProjectDetail from "frontend/containers/ProjectDetail";
 import ProjectResources from "frontend/containers/ProjectResources";
 import ResourceDetail from "frontend/containers/ResourceDetail";
@@ -27,6 +28,7 @@ export default {
   Projects,
   ProjectCollections,
   ProjectCollectionDetail,
+  ProjectWrapper,
   ProjectDetail,
   ProjectResources,
   ResourceDetail,

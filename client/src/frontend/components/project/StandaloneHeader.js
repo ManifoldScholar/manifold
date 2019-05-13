@@ -73,7 +73,7 @@ class StandaloneHeader extends PureComponent {
   }
 
   get darkTheme() {
-    return this.hasBackgroundImage || this.darkMode;
+    return !!(this.hasBackgroundImage || this.darkMode);
   }
 
   get fullTheme() {
@@ -140,7 +140,7 @@ class StandaloneHeader extends PureComponent {
     return (
       <header className="header-app__standalone-header">
         <Link
-          to={lh.link("frontendProject", this.projectSlug)}
+          to={lh.link("frontendProjectDetail", this.projectSlug)}
           className="header-app__standalone-text-link"
         >
           {this.title && (

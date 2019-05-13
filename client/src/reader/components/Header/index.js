@@ -166,7 +166,7 @@ export default class Header extends Component {
               visibility={this.props.visibility.uiPanels}
               bodyComponent={ReturnMenu.Body}
               returnUrl={lh.link(
-                "frontendProject",
+                "frontendProjectDetail",
                 this.props.text.relationships.project.attributes.slug
               )}
               projectId={this.props.text.relationships.project.id}
