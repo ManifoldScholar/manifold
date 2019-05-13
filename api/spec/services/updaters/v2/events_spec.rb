@@ -24,7 +24,7 @@ RSpec.describe Updaters::V2::Events, updaters_v2: true do
 
   } }
 
-  fit "can create a event" do
+  it "can create a event" do
     perform_within_expectation!
   end
 end

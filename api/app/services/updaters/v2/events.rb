@@ -15,7 +15,6 @@ module Updaters
         string :external_subject_id
         string :external_subject_type
         string :excerpt
-
         record :subject, class: "ApplicationRecord"
         record :project
         record :twitter_query
