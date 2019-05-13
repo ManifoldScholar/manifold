@@ -16,16 +16,13 @@ module Updaters
         string :external_subject_type
         string :excerpt
 
-        record :subject
+        record :subject, class: "ApplicationRecord"
         record :project
         record :twitter_query
       end
 
-      # table => subjects
       validates :subject, presence: true
       validates :project, presence: true
-      # table => twitter_queries
-      validates :twitter_query, presence: true
     end
   end
 end

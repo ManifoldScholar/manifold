@@ -44,6 +44,10 @@ module Updaters
     # @return [:create, :update]
     attr_reader :update_action
 
+    def inspect
+      "#{self.class}(#{target_klass}##{@update_action})"
+    end
+
     def created?
       update_action == :create && valid?
     end
