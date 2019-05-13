@@ -1,4 +1,4 @@
-module Updates
+module Updaters
   module Meta
     module HasPosition
       extend ActiveSupport::Concern
