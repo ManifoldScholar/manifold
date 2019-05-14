@@ -8,6 +8,7 @@ RSpec.describe Updaters::V2::Users, updaters_v2: true do
     email:                  "JohnRambo@rambo.com",
     first_name:             Faker::Name.first_name,
     last_name:              Faker::Name.last_name,
+    nickname:                "nikname",
     password:               "password",
     password_confirmation:  "password"
   } }

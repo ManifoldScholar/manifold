@@ -8,6 +8,7 @@ module Updaters
         string :email
         string :first_name
         string :last_name
+        string :nickname
         string :password
         string :password_confirmation
       end
