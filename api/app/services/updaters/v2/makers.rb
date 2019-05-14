@@ -7,7 +7,7 @@ module Updaters
         string :first_name
         string :middle_name
         string :last_name
-        string :display_name
+        string :name
         string :prefix
         string :suffix
       end
