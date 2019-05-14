@@ -5,10 +5,10 @@ RSpec.describe Updaters::V2::Texts, updaters_v2: true do
   let!(:creator) { FactoryBot.create :user }
 
   let(:attributes) { {
-     title:            Faker::String.random(4),
-     description:      Faker::String.random(4),
-     section_kind:     Faker::String.random(4),
-     subtitle:         Faker::String.random(4),
+     title:            "string",
+     description:      "string",
+     section_kind:     "string",
+     subtitle:         "string",
      publication_date: Faker::Date.backward(1),
      published:        true,
      creator:          creator
