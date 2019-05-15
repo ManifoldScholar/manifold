@@ -20,7 +20,7 @@ RSpec.describe Updaters::V2::CollectionProjects, updaters_v2: true do
   context "when updating an existing model" do
     let!(:model) { FactoryBot.create :collection_project }
 
-    fit "can update the collection of projects" do
+    it "can update the collection of projects" do
       perform_within_expectation! do |e|
         e.to keep_the_same(CollectionProject, :count)
       end
