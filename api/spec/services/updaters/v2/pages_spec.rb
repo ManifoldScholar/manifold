@@ -4,11 +4,11 @@ RSpec.describe Updaters::V2::Pages, updaters_v2: true do
   let!(:creator) { FactoryBot.create :user }
 
   let(:attributes) { {
-    title:            Faker::String.random(4),
-    nav_title:        Faker::String.random(4),
-    slug:             Faker::String.random(4),
-    body:             Faker::String.random(4),
-    external_link:    Faker::String.random(4),
+    title:            "string",
+    nav_title:        "string",
+    slug:             "string",
+    body:             "string",
+    external_link:    "string",
     show_in_header:   true,
     hidden:           true,
     is_external_link: true,
