@@ -7,8 +7,6 @@ FactoryBot.define do
     link_target { "MyString" }
     background { "" }
     foreground { "" }
-    pos_left { 1 }
-    pos_bottom { 1 }
     position { 1 }
   end
 end
