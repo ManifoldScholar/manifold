@@ -25,7 +25,7 @@ RSpec.describe Updaters::V2::Projects, updaters_v2: true do
     image_credits:          "string",
   } }
 
-  fit "can create a user" do
+  it "can create a user" do
     perform_within_expectation!
   end
 end
