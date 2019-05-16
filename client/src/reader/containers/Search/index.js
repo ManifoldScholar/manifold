@@ -67,7 +67,7 @@ class SearchContainer extends PureComponent {
         triggerScrollToTop={this.searchNum}
         closeCallback={this.close}
         title={"Search Results"}
-        icon={"magnify"}
+        icon={"search24"}
         contentWidth={850}
       >
         <div>
