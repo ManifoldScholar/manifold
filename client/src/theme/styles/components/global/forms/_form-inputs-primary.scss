@@ -117,10 +117,24 @@
   }
 
   & &-radios {
-    label {
-      + .form-input-radios__prompt {
-        margin-top: 16px;
+    &__wrapper,
+    &__legend {
+      padding: 0;
+      margin: 0;
+      border: none;
+    }
+
+    &__legend {
+      + .instructions {
+        margin-top: 7px;
       }
+    }
+
+    &__title {
+      @include formLabelPrimary;
+      display: inline-block;
+      margin-bottom: 1em;
+      color: $neutral70;
     }
 
     &__prompt {
@@ -131,10 +145,6 @@
       color: $neutral30;
       text-transform: none;
       letter-spacing: 0;
-
-      + .instructions {
-        margin-top: 7px;
-      }
     }
   }
 
