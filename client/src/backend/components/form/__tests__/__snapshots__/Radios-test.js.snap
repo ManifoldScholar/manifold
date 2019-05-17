@@ -5,60 +5,69 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
   className="form-input form-input-radios extra-space-bottom"
   style={Object {}}
 >
-  <label
-    htmlFor="radios-1"
+  <fieldset
+    className="form-input-radios__wrapper"
   >
-    Label this
-  </label>
-  <span
-    className="form-input-radios__prompt"
-  >
-    Pick the right choice
-  </span>
-  <label
-    className="form-toggle radio"
-  >
-    <input
-      checked={false}
-      name="option-1"
-      onChange={[Function]}
-      type="radio"
-      value="1"
-    />
-    <span
-      aria-hidden="true"
-      className="toggle-indicator"
-    />
-    <span
-      className="toggle-label"
+    <legend
+      className="form-input-radios__legend"
     >
-      option-1
-    </span>
-  </label>
-  <span
-    className="toggle-instructions"
-  >
-    What does this option really mean?
-  </span>
-  <label
-    className="form-toggle radio"
-  >
-    <input
-      checked={false}
-      name="option-2"
-      onChange={[Function]}
-      type="radio"
-      value="2"
-    />
-    <span
-      aria-hidden="true"
-      className="toggle-indicator"
-    />
-    <span
-      className="toggle-label"
+      <span
+        aria-hidden={true}
+        className="form-input-radios__title"
+      >
+        Label this
+      </span>
+      <span
+        className="form-input-radios__prompt"
+      >
+        Pick the right choice
+      </span>
+    </legend>
+    <label
+      className="form-toggle radio"
     >
-      option-2
+      <input
+        checked={false}
+        name="option-1"
+        onChange={[Function]}
+        type="radio"
+        value="1"
+      />
+      <span
+        aria-hidden="true"
+        className="toggle-indicator"
+      />
+      <span
+        className="toggle-label"
+      >
+        option-1
+      </span>
+    </label>
+    <span
+      className="toggle-instructions"
+    >
+      What does this option really mean?
     </span>
-  </label>
+    <label
+      className="form-toggle radio"
+    >
+      <input
+        checked={false}
+        name="option-2"
+        onChange={[Function]}
+        type="radio"
+        value="2"
+      />
+      <span
+        aria-hidden="true"
+        className="toggle-indicator"
+      />
+      <span
+        className="toggle-label"
+      >
+        option-2
+      </span>
+    </label>
+  </fieldset>
 </div>
 `;

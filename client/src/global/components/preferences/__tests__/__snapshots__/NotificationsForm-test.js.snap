@@ -22,17 +22,14 @@ exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = 
             resources, and resource collections that have been added to projects.
       </span>
     </div>
-    <div
-      className="form-input"
+    <fieldset
+      className="subscriptions__radio-group form-input"
     >
-      <label
-        htmlFor="digest"
+      <legend
+        className="subscriptions__legend"
       >
         How often would you like to be notified?
-      </label>
-      <span
-        className="instructions"
-      />
+      </legend>
       <label
         className="form-toggle radio inline"
       >
@@ -94,7 +91,7 @@ exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = 
           Weekly
         </span>
       </label>
-    </div>
+    </fieldset>
   </div>
   <h3
     className="section-heading-secondary"
@@ -104,14 +101,14 @@ exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = 
   <div
     className="form-group"
   >
-    <div
-      className="form-input"
+    <fieldset
+      className="subscriptions__radio-group form-input"
     >
-      <label
-        htmlFor="repliesToMe"
+      <legend
+        className="subscriptions__legend"
       >
         Notify you when someone replies to you?
-      </label>
+      </legend>
       <span
         className="instructions"
       >
@@ -159,7 +156,7 @@ exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = 
           Yes
         </span>
       </label>
-    </div>
+    </fieldset>
   </div>
   <button
     className="utility-button"

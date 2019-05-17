@@ -74,21 +74,22 @@ class FormRadios extends Component {
         label={this.props.label}
         idForError={this.props.idForError}
       >
-        <RadioLabel
-          id={this.props.id}
-          label={this.props.label}
-          prompt={this.props.prompt}
-          hasInstructions={isString(this.props.instructions)}
-        />
-        <Instructions instructions={this.props.instructions} />
-        {this.options.map((option, index) => (
-          <Option
-            key={`${this.props.id}-${option.internalValue}`}
-            option={option}
-            focusOnMount={this.focusOnMount && index === 0}
-            {...this.optionProps}
+        <fieldset className="form-input-radios__wrapper">
+          <RadioLabel
+            label={this.props.label}
+            prompt={this.props.prompt}
+            hasInstructions={isString(this.props.instructions)}
           />
-        ))}
+          <Instructions instructions={this.props.instructions} />
+          {this.options.map((option, index) => (
+            <Option
+              key={`${this.props.id}-${option.internalValue}`}
+              option={option}
+              focusOnMount={this.focusOnMount && index === 0}
+              {...this.optionProps}
+            />
+          ))}
+        </fieldset>
       </GlobalForm.Errorable>
     );
   }

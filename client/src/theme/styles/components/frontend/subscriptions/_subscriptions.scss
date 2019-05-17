@@ -45,6 +45,25 @@
     }
   }
 
+  &__legend,
+  &__radio-group {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  &__legend {
+    @include formLabelPrimary;
+    display: block;
+    margin-bottom: 1em;
+    font-size: 14px;
+    color: $neutral50;
+
+    + .form-toggle {
+      margin-top: 4px;
+    }
+  }
+
   .sign-in-up-update & {
     width: auto;
     margin-top: 50px;

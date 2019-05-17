@@ -5,8 +5,7 @@ export default class FormRadioLabel extends Component {
   static displayName = "Form.Radio.Label";
 
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    label: PropTypes.string,
+    label: PropTypes.string.isRequired,
     prompt: PropTypes.string
   };
 
@@ -20,12 +19,16 @@ export default class FormRadioLabel extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        {this.label && <label htmlFor={this.props.id}>{this.label}</label>}
+      <legend className="form-input-radios__legend">
+        {this.label && (
+          <span className="form-input-radios__title" aria-hidden>
+            {this.label}
+          </span>
+        )}
         {this.prompt && (
           <span className="form-input-radios__prompt">{this.prompt}</span>
         )}
-      </React.Fragment>
+      </legend>
     );
   }
 }

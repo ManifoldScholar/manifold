@@ -32,51 +32,60 @@ Array [
     className="form-input form-input-radios extra-space-bottom wide"
     style={Object {}}
   >
-    <label
-      htmlFor="radios-1"
+    <fieldset
+      className="form-input-radios__wrapper"
     >
-      Style
-    </label>
-    <label
-      className="form-toggle radio inline"
-    >
-      <input
-        checked={false}
-        name="Normal"
-        onChange={[Function]}
-        type="radio"
-        value="normal"
-      />
-      <span
-        aria-hidden="true"
-        className="toggle-indicator"
-      />
-      <span
-        className="toggle-label"
+      <legend
+        className="form-input-radios__legend"
       >
-        Normal
-      </span>
-    </label>
-    <label
-      className="form-toggle radio inline"
-    >
-      <input
-        checked={false}
-        name="Shaded"
-        onChange={[Function]}
-        type="radio"
-        value="shaded"
-      />
-      <span
-        aria-hidden="true"
-        className="toggle-indicator"
-      />
-      <span
-        className="toggle-label"
+        <span
+          aria-hidden={true}
+          className="form-input-radios__title"
+        >
+          Style
+        </span>
+      </legend>
+      <label
+        className="form-toggle radio inline"
       >
-        Shaded
-      </span>
-    </label>
+        <input
+          checked={false}
+          name="Normal"
+          onChange={[Function]}
+          type="radio"
+          value="normal"
+        />
+        <span
+          aria-hidden="true"
+          className="toggle-indicator"
+        />
+        <span
+          className="toggle-label"
+        >
+          Normal
+        </span>
+      </label>
+      <label
+        className="form-toggle radio inline"
+      >
+        <input
+          checked={false}
+          name="Shaded"
+          onChange={[Function]}
+          type="radio"
+          value="shaded"
+        />
+        <span
+          aria-hidden="true"
+          className="toggle-indicator"
+        />
+        <span
+          className="toggle-label"
+        >
+          Shaded
+        </span>
+      </label>
+    </fieldset>
   </div>,
 ]
 `;

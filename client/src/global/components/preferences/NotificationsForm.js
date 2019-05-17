@@ -12,6 +12,10 @@ export default class NotificationsForm extends Component {
     unsubscribeAllHandler: PropTypes.func.isRequired
   };
 
+  get defaultOptions() {
+    return { never: "No", always: "Yes" };
+  }
+
   renderNotificationSettings(preferences) {
     const digestOpen = preferences.digest !== "never";
 
@@ -27,7 +31,7 @@ export default class NotificationsForm extends Component {
           </div>
           {this.renderDigestFrequency(preferences)}
           <Collapse isOpened={digestOpen}>
-            {this.renderDigestContent(preferences)}
+            {this.renderDigestContent(preferences, digestOpen)}
           </Collapse>
         </div>
         <h3 className="section-heading-secondary">Other Activity</h3>
@@ -46,7 +50,7 @@ export default class NotificationsForm extends Component {
     );
   }
 
-  renderDigestContent(preferences) {
+  renderDigestContent(preferences, digestOpen) {
     const items = config.app.locale.notificationPreferences.digest;
 
     const options = [
@@ -57,10 +61,14 @@ export default class NotificationsForm extends Component {
 
     return (
       <React.Fragment>
-        <div className="form-input" key="digest-projects">
-          <label htmlFor="digest-projects">
+        <fieldset
+          className="subscriptions__radio-group form-input"
+          key="digest-projects"
+          disabled={!digestOpen}
+        >
+          <legend className="subscriptions__legend">
             Which projects should be included?
-          </label>
+          </legend>
           {options.map(option => {
             const checked = preferences[option.key] === "always";
             const inputClassNames = classNames(
@@ -90,11 +98,16 @@ export default class NotificationsForm extends Component {
               </label>
             );
           })}
-        </div>
+        </fieldset>
 
         {items.map(item => {
           const checked = preferences[item.key];
-          return this.renderContentOption(item, checked);
+          return this.renderContentOption(
+            item,
+            checked,
+            this.defaultOptions,
+            !digestOpen
+          );
         })}
       </React.Fragment>
     );
@@ -122,14 +135,21 @@ export default class NotificationsForm extends Component {
   renderContentOption(
     preference,
     value,
-    options = { never: "No", always: "Yes" }
+    options = this.defaultOptions,
+    disabled
   ) {
     if (!preference || !value) return null;
 
     return (
-      <div className="form-input" key={preference.key}>
-        <label htmlFor={preference.key}>{preference.label}</label>
-        <span className="instructions">{preference.instructions}</span>
+      <fieldset
+        className="subscriptions__radio-group form-input"
+        key={preference.key}
+        disabled={disabled}
+      >
+        <legend className="subscriptions__legend">{preference.label}</legend>
+        {preference.instructions && (
+          <span className="instructions">{preference.instructions}</span>
+        )}
         {Object.keys(options).map(option => {
           const checked = value === option;
           const inputClassNames = classNames("form-toggle", "radio", "inline", {
@@ -155,7 +175,7 @@ export default class NotificationsForm extends Component {
             </label>
           );
         })}
-      </div>
+      </fieldset>
     );
   }
 
