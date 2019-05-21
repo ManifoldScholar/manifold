@@ -14,7 +14,12 @@ exports[`Frontend Home Container renders correctly 1`] = `
     <div
       className="container"
     >
-      <nav
+      <h2
+        className="screen-reader-text"
+      >
+        Project Navigation
+      </h2>
+      <div
         className="button-nav button-nav--default"
       >
         <a
@@ -42,7 +47,7 @@ exports[`Frontend Home Container renders correctly 1`] = `
             See All Projects
           </span>
         </a>
-      </nav>
+      </div>
     </div>
   </section>
 </div>
@@ -62,7 +67,12 @@ exports[`Frontend Home Container renders correctly with project collections pres
     <div
       className="container"
     >
-      <nav
+      <h2
+        className="screen-reader-text"
+      >
+        Project Navigation
+      </h2>
+      <div
         className="button-nav button-nav--default"
       >
         <a
@@ -90,7 +100,7 @@ exports[`Frontend Home Container renders correctly with project collections pres
             See All Projects
           </span>
         </a>
-      </nav>
+      </div>
     </div>
   </section>
 </div>

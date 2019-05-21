@@ -134,6 +134,7 @@ class DashboardsAdminContainerImplementation extends PureComponent {
   render() {
     return (
       <div>
+        <h1 className="screen-reader-text">Dashboard</h1>
         <section>
           <div className="container">
             <section className="backend-dashboard">

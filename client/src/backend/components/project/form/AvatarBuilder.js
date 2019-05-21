@@ -111,7 +111,7 @@ class AvatarBuilder extends Component {
         label="Avatar"
       >
         <div className={inputClasses}>
-          <h4 className="form-input-heading">Project Thumbnail</h4>
+          <div className="form-input-heading">Project Thumbnail</div>
           <div className="grid">
             <div className="section current">
               <span className="label" aria-hidden="true">

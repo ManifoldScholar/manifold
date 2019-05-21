@@ -60,7 +60,7 @@ class SearchResultsTypeGeneric extends PureComponent {
             <div className="search-result__text-column-top">
               <div className="search-result__text-column-top-left">
                 {this.hasProp("parent") && (
-                  <h4
+                  <div
                     className="search-result__parent"
                     {...this.attributesFor("parent")}
                   >
@@ -68,7 +68,7 @@ class SearchResultsTypeGeneric extends PureComponent {
                       this.props.parentUrl,
                       this.valueFor("parent")
                     )}
-                  </h4>
+                  </div>
                 )}
                 {this.hasProp("title") &&
                   this.wrapWithLink(

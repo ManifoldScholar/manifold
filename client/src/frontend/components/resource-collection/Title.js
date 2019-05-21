@@ -44,7 +44,7 @@ export default class ResourceCollectionTitle extends Component {
         <div className="main">
           <Utility.IconComposer size={54} icon="resourceCollection64" />
           <div className="body">
-            <h2 className="title">{attr.title}</h2>
+            <h1 className="title">{attr.title}</h1>
             {this.renderDate(attr)}
           </div>
         </div>

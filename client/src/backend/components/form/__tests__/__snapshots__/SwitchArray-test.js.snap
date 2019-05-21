@@ -11,9 +11,9 @@ exports[`Backend.Form.SwitchArray component renders correctly 1`] = `
     <header
       className="form-section-label"
     >
-      <span>
+      <h2>
         Label this
-      </span>
+      </h2>
     </header>
     <div
       className="form-input-group"

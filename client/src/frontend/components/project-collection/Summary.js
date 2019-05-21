@@ -78,7 +78,7 @@ export default class ProjectCollectionSummary extends Component {
                 fill={iconFill}
               />
               <div className="body">
-                <h4 className="title">{this.collection.attributes.title}</h4>
+                <h2 className="title">{this.collection.attributes.title}</h2>
               </div>
             </div>
           </Link>

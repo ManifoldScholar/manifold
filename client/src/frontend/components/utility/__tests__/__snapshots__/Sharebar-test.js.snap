@@ -2,6 +2,7 @@
 
 exports[`Frontend.Utility.ShareBar component renders correctly 1`] = `
 <nav
+  aria-label="Share"
   className="share-nav-primary"
 >
   <span

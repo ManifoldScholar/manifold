@@ -37,7 +37,7 @@ exports[`Frontend.Event.List Component renders correctly 1`] = `
           >
             Text Added
           </div>
-          <h5
+          <h3
             className="event-tile__title"
             dangerouslySetInnerHTML={
               Object {
@@ -87,7 +87,7 @@ exports[`Frontend.Event.List Component renders correctly 1`] = `
           >
             Text Added
           </div>
-          <h5
+          <h3
             className="event-tile__title"
             dangerouslySetInnerHTML={
               Object {

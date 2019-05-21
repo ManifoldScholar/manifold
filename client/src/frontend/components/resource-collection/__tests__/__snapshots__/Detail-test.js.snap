@@ -29,11 +29,11 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
         <div
           className="body"
         >
-          <h2
+          <h1
             className="title"
           >
             Rowan
-          </h2>
+          </h1>
           <span
             className="date"
           >
@@ -50,6 +50,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
       className="collection-detail__utility"
     >
       <nav
+        aria-label="Share"
         className="share-nav-primary"
       >
         <span
@@ -92,6 +93,11 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
       </nav>
     </div>
   </div>
+  <h2
+    className="screen-reader-text"
+  >
+    Resource Slideshow
+  </h2>
   <div
     className="resource-slideshow"
   >
@@ -151,7 +157,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
           className="resource-slideshow__caption"
         >
           <header>
-            <h2
+            <h3
               className="resource-slideshow__title"
               dangerouslySetInnerHTML={
                 Object {
@@ -332,6 +338,11 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
   <div
     className="container flush-top"
   >
+    <h2
+      className="screen-reader-text"
+    >
+      Resource List
+    </h2>
     <div
       className="resource-total"
     >
@@ -526,7 +537,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
     <div
       className="entity-section-wrapper__body"
     >
-      <nav
+      <div
         className="resource-list"
       >
         <div
@@ -628,10 +639,9 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
               tabIndex="0"
             >
               <div>
-                <header
-                  className="resource-card__title"
-                >
-                  <h4
+                <header>
+                  <h3
+                    className="resource-card__title"
                     dangerouslySetInnerHTML={
                       Object {
                         "__html": "Image",
@@ -714,6 +724,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
           </li>
         </ul>
         <nav
+          aria-label="Pagination"
           className="list-pagination"
         >
           <ul
@@ -833,7 +844,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
             </li>
           </ul>
         </nav>
-      </nav>
+      </div>
     </div>
   </div>
 </section>

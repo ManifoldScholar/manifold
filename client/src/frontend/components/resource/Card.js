@@ -17,7 +17,12 @@ class ResourceCard extends Component {
     history: PropTypes.object.isRequired,
     resource: PropTypes.object,
     project: PropTypes.object.isRequired,
-    resourceCollection: PropTypes.object
+    resourceCollection: PropTypes.object,
+    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
+  };
+
+  static defaultProps = {
+    itemHeadingLevel: 4
   };
 
   constructor() {
@@ -25,6 +30,10 @@ class ResourceCard extends Component {
     this.state = {
       infoHover: false
     };
+  }
+
+  get titleTag() {
+    return `h${this.props.itemHeadingLevel}`;
   }
 
   getResourceType(type) {
@@ -170,11 +179,18 @@ class ResourceCard extends Component {
     const resource = this.props.resource;
     if (!resource) return null;
     const attr = resource.attributes;
+    const Title = props => (
+      <this.titleTag
+        className="resource-card__title"
+        dangerouslySetInnerHTML={{ __html: props.children }}
+      />
+    );
 
     const infoClass = classNames({
       "resource-card__info": true,
       "resource-card__info--hover": this.state.infoHover
     });
+
     return (
       <li className="resource-card">
         <Preview resource={resource}>
@@ -201,8 +217,8 @@ class ResourceCard extends Component {
         >
           {/* eslint-enable jsx-a11y/no-noninteractive-element-to-interactive-role */}
           <div>
-            <header className="resource-card__title">
-              <h4 dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />
+            <header>
+              <Title>{attr.titleFormatted}</Title>
             </header>
             <span className="resource-card__date">
               Uploaded{" "}

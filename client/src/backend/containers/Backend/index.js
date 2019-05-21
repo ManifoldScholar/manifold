@@ -92,7 +92,6 @@ export class BackendContainer extends PureComponent {
             ]}
           />
 
-          <Utility.SkipLink />
           <Utility.ScrollToTop />
           <ScrollAware>
             <LayoutBackend.Header

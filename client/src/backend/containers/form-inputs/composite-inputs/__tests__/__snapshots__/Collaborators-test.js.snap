@@ -9,11 +9,11 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
       className="form-input"
       style={Object {}}
     >
-      <h4
+      <h2
         className="form-input-heading"
       >
         Authors
-      </h4>
+      </h2>
       <nav
         className="has-many-list"
       >
@@ -44,11 +44,11 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
                   </svg>
                 </div>
               </figure>
-              <h4
+              <div
                 className="association-name"
               >
                 Rowan Ida
-              </h4>
+              </div>
             </div>
             <div
               className="utility"
@@ -166,11 +166,11 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
       className="form-input"
       style={Object {}}
     >
-      <h4
+      <h2
         className="form-input-heading"
       >
         Contributors
-      </h4>
+      </h2>
       <nav
         className="has-many-list"
       >
@@ -201,11 +201,11 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
                   </svg>
                 </div>
               </figure>
-              <h4
+              <div
                 className="association-name"
               >
                 Rowan Ida
-              </h4>
+              </div>
             </div>
             <div
               className="utility"

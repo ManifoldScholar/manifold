@@ -36,9 +36,9 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Message Settings
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -179,9 +179,9 @@ The Manifold Team"
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Email Delivery Method
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -244,9 +244,9 @@ The Manifold Team"
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Sendmail Configuration
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -360,9 +360,9 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Message Settings
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -503,9 +503,9 @@ The Manifold Team"
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Email Delivery Method
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -568,9 +568,9 @@ The Manifold Team"
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   SMTP Configuration
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"

@@ -21,7 +21,7 @@ export default class NotificationsForm extends Component {
 
     return (
       <div className="subscriptions">
-        <h3 className="section-heading-secondary">Project Activity</h3>
+        <h2 className="section-heading-secondary">Project Activity</h2>
         <div className="form-group">
           <div className="form-input">
             <span className="instructions">
@@ -34,7 +34,7 @@ export default class NotificationsForm extends Component {
             {this.renderDigestContent(preferences, digestOpen)}
           </Collapse>
         </div>
-        <h3 className="section-heading-secondary">Other Activity</h3>
+        <h2 className="section-heading-secondary">Other Activity</h2>
         <div className="form-group">
           {this.renderNotificationContent(preferences)}
         </div>

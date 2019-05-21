@@ -66,12 +66,12 @@ export default class CategoryListCategory extends PureComponent {
               className="text-categories__category"
             >
               <header className="text-categories__header">
-                <h4 className="text-categories__label">
+                <h2 className="text-categories__label">
                   <span className="text-categories__label-type--light">
                     Category:{" "}
                   </span>
                   {this.title}
-                </h4>
+                </h2>
                 <div className="text-categories__utility">
                   <button
                     className="text-categories__button text-categories__button--notice"

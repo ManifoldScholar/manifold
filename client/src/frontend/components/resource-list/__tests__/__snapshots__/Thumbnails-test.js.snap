@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
-<nav
+<div
   className="resource-thumbnail-list"
 >
   <ul>
@@ -112,5 +112,5 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
       </a>
     </li>
   </ul>
-</nav>
+</div>
 `;

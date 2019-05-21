@@ -6,6 +6,7 @@ import PressLogo from "global/components/PressLogo";
 import HeaderNotifications from "global/components/HeaderNotifications";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
+import Utility from "global/components/utility";
 
 import BlurOnLocationChange from "hoc/blur-on-location-change";
 
@@ -26,6 +27,7 @@ export default class LayoutHeader extends Component {
     return (
       <BlurOnLocationChange location={this.props.location}>
         <header className={"header-app dark"}>
+          <Utility.SkipLink />
           <div className="header-container">
             <Link to={lh.link("frontend")} className="header-logo">
               <span className="screen-reader-text">Return to home</span>

@@ -171,6 +171,9 @@ export class ProjectCollectionDetailContainer extends Component {
             this.props.projectCollection.attributes.descriptionPlaintext
           }
         />
+        <h1 className="screen-reader-text">
+          {this.props.projectCollection.attributes.title}
+        </h1>
         {this.renderProjects(this.props)}
         <Layout.ButtonNavigation
           showFollowing={false}

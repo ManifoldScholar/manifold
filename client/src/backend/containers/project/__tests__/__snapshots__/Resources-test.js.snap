@@ -6,7 +6,7 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
     className="entity-list"
     id="entities-list1"
   >
-    <h3
+    <h2
       className="entity-list__title-block entity-list__title"
     >
       <figure
@@ -27,7 +27,7 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
         </svg>
       </figure>
       Resources
-    </h3>
+    </h2>
     <div
       className="entity-list__contents-wrapper"
     >
@@ -352,6 +352,7 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
         className="entity-list__pagination"
       >
         <nav
+          aria-label="Pagination"
           className="list-pagination"
         >
           <ul

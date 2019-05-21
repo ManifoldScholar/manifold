@@ -141,7 +141,7 @@ export default class TocBlockToc extends PureComponent {
 
   render() {
     return (
-      <nav role="navigation" className={this.props.blockClass}>
+      <nav aria-label="Table of Contents" className={this.props.blockClass}>
         {this.props.showTextTitle && this.renderTextHeading()}
         {this.renderContents()}
       </nav>

@@ -66,6 +66,7 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
             className="rel left"
           >
             <nav
+              aria-label="Footer Navigation"
               className="text-nav"
             >
               <ul

@@ -233,11 +233,11 @@ exports[`Backend Resource General Container renders correctly 1`] = `
               <div
                 className="association"
               >
-                <h4
+                <div
                   className="association-name"
                 >
                   dog
-                </h4>
+                </div>
               </div>
               <div
                 className="utility"
@@ -276,11 +276,11 @@ exports[`Backend Resource General Container renders correctly 1`] = `
               <div
                 className="association"
               >
-                <h4
+                <div
                   className="association-name"
                 >
                   puppy
-                </h4>
+                </div>
               </div>
               <div
                 className="utility"
@@ -319,11 +319,11 @@ exports[`Backend Resource General Container renders correctly 1`] = `
               <div
                 className="association"
               >
-                <h4
+                <div
                   className="association-name"
                 >
                   GOAT
-                </h4>
+                </div>
               </div>
               <div
                 className="utility"

@@ -7,9 +7,18 @@ export default class FormHasManyHeader extends PureComponent {
 
   static propTypes = {
     label: PropTypes.string.isRequired,
+    labelTag: PropTypes.oneOf(["div", "h2", "h3", "h4"]),
     labelHeader: PropTypes.bool,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
+
+  static defaultProps = {
+    labelTag: "div"
+  };
+
+  get labelTag() {
+    return this.props.labelTag;
+  }
 
   renderLabelHeader(label, instructions) {
     return (
@@ -23,9 +32,15 @@ export default class FormHasManyHeader extends PureComponent {
   }
 
   renderHeader(label, instructions) {
+    const Label = props => (
+      <this.labelTag className="form-input-heading">
+        {props.children}
+      </this.labelTag>
+    );
+
     return (
       <React.Fragment>
-        <h4 className="form-input-heading">{label}</h4>
+        <Label>{label}</Label>
         <Instructions instructions={instructions} />
       </React.Fragment>
     );

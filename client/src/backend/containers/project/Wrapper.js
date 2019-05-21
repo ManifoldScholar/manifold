@@ -146,7 +146,13 @@ export class ProjectWrapperContainer extends PureComponent {
             secondaryLinks={secondaryLinks}
           />
           <Layout.BackendPanel
-            sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
+            sidebar={
+              <Navigation.Secondary
+                links={secondaryLinks}
+                panel
+                ariaLabel="Project Settings"
+              />
+            }
           >
             <div>{this.renderRoutes()}</div>
           </Layout.BackendPanel>

@@ -5,6 +5,7 @@ exports[`Backend.ProjectCollection.Header component renders correctly 1`] = `
   className="backend-header"
 >
   <nav
+    aria-label="Breadcrumbs"
     className="backend-header__breadcrumbs breadcrumbs breadcrumbs--hidden-desktop"
   >
     <div

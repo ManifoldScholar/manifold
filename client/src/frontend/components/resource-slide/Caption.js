@@ -160,7 +160,7 @@ export default class ResourceListSlideCaption extends Component {
     return (
       <div className="resource-slideshow__caption">
         <header>
-          <h2
+          <h3
             className="resource-slideshow__title"
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
           />

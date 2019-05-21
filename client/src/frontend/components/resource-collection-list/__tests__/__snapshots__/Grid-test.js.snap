@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = `
-<nav
+<div
   className="resource-collections-list"
 >
   <ul>
@@ -98,5 +98,5 @@ exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = 
       </a>
     </li>
   </ul>
-</nav>
+</div>
 `;

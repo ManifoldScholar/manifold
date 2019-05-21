@@ -37,11 +37,11 @@ export default class CategoryListUncategorized extends PureComponent {
     return (
       <div className="text-categories__category">
         <header className="text-categories__header">
-          <h4 className="text-categories__label">
+          <h2 className="text-categories__label">
             <span className="text-categories__label--notice">
               Uncategorized
             </span>
-          </h4>
+          </h2>
         </header>
         <Texts
           activeType={this.props.activeType}

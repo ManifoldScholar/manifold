@@ -3,6 +3,7 @@
 exports[`Backend.Navigation.Secondary component renders correctly 1`] = `
 <div>
   <nav
+    aria-label="Secondary Navigation"
     className="secondary-nav"
   >
     <ul>

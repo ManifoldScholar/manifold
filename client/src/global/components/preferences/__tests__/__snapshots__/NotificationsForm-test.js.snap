@@ -4,11 +4,11 @@ exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = 
 <div
   className="subscriptions"
 >
-  <h3
+  <h2
     className="section-heading-secondary"
   >
     Project Activity
-  </h3>
+  </h2>
   <div
     className="form-group"
   >
@@ -93,11 +93,11 @@ exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = 
       </label>
     </fieldset>
   </div>
-  <h3
+  <h2
     className="section-heading-secondary"
   >
     Other Activity
-  </h3>
+  </h2>
   <div
     className="form-group"
   >

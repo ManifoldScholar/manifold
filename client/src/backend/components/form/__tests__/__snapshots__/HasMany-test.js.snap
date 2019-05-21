@@ -5,11 +5,11 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
   className="form-input"
   style={Object {}}
 >
-  <h4
+  <div
     className="form-input-heading"
   >
     makers
-  </h4>
+  </div>
   <nav
     className="has-many-list"
   >
@@ -20,11 +20,11 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
         <div
           className="association"
         >
-          <h4
+          <div
             className="association-name"
           >
             John
-          </h4>
+          </div>
         </div>
         <div
           className="utility"
@@ -88,11 +88,11 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
         <div
           className="association"
         >
-          <h4
+          <div
             className="association-name"
           >
             Jane
-          </h4>
+          </div>
         </div>
         <div
           className="utility"

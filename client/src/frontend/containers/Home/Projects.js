@@ -62,7 +62,7 @@ export class HomeProjectsContainer extends Component {
             <div className="main">
               <Utility.IconComposer size={56} icon="projects64" />
               <div className="body">
-                <h4 className="title">{"Our Projects"}</h4>
+                <h2 className="title">{"Our Projects"}</h2>
               </div>
             </div>
           </header>

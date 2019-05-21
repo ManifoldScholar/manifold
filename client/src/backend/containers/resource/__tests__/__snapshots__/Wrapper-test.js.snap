@@ -6,6 +6,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
     className="backend-header"
   >
     <nav
+      aria-label="Breadcrumbs"
       className="backend-header__breadcrumbs breadcrumbs"
     >
       <div
@@ -231,6 +232,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
           className="aside"
         >
           <nav
+            aria-label="Resource Settings"
             className="secondary-nav panel-nav"
           >
             <ul>

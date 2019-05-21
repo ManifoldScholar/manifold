@@ -68,7 +68,7 @@ export class ContactContainer extends Component {
       <section>
         <div className="container">
           <form method="post" onSubmit={this.sendMessage}>
-            <h4 className="form-heading">Send a Message</h4>
+            <h1 className="form-heading">Send a Message</h1>
             <div className="row-1-p">
               <Form.Errorable
                 className="form-input"

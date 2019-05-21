@@ -53,9 +53,9 @@ export default class ProjectListPlaceholder extends Component {
             <header className="section-heading">
               <div className="main">
                 <div className="body">
-                  <h4 className="title">
+                  <h2 className="title">
                     {"Uh-oh. This Manifold Library is empty."}
-                  </h4>
+                  </h2>
                 </div>
               </div>
             </header>

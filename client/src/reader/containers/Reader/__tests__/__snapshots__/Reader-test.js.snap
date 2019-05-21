@@ -2,13 +2,6 @@
 
 exports[`Reader Reader Container renders correctly 1`] = `
 <div>
-  <a
-    className="skip-to-main screen-reader-text"
-    href="#skip-to-main"
-    onClick={[Function]}
-  >
-    Skip to main content
-  </a>
   <div
     className="scroll-aware top pinned"
   >
@@ -16,6 +9,13 @@ exports[`Reader Reader Container renders correctly 1`] = `
       <header
         className="header-reader"
       >
+        <a
+          className="skip-to-main screen-reader-text"
+          href="#skip-to-main"
+          onClick={[Function]}
+        >
+          Skip to main content
+        </a>
         <nav
           className="container-banner"
         >

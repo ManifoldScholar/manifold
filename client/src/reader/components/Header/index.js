@@ -14,7 +14,7 @@ import Layout from "reader/components/layout";
 import memoize from "lodash/memoize";
 import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
-import IconComposer from "global/components/utility/IconComposer";
+import Utility from "global/components/utility";
 
 import Authorize from "hoc/authorize";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
@@ -90,7 +90,7 @@ export default class Header extends Component {
         onClick={this.handleContentsButtonClick}
       >
         <span className="button-index__text">Contents</span>
-        <IconComposer
+        <Utility.IconComposer
           icon="disclosureDown24"
           size="default"
           iconClass="button-index__icon"
@@ -107,6 +107,7 @@ export default class Header extends Component {
     return (
       <BlurOnLocationChange location={this.props.location}>
         <header className="header-reader">
+          <Utility.SkipLink />
           <Layout.PreHeader />
           <nav className={containerClass}>
             <ReturnMenu.Button

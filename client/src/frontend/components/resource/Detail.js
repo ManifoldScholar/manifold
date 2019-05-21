@@ -65,7 +65,7 @@ export default class ResourceDetail extends Component {
                   dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
                 />
 
-                <h3 className="attribute-header">Full Description</h3>
+                <h2 className="attribute-header">Full Description</h2>
                 <div
                   dangerouslySetInnerHTML={this.createDescription(
                     attr.descriptionFormatted

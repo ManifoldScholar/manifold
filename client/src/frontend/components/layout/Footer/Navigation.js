@@ -198,7 +198,7 @@ export default class Navigation extends PureComponent {
     const socialLinks = this.buildSocialsArray();
 
     return (
-      <nav className="text-nav">
+      <nav className="text-nav" aria-label="Footer Navigation">
         <ul className="text-nav__list">
           {chunkedPages.map(
             (pageGroup, pageGroupIndex) => (

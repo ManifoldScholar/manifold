@@ -232,7 +232,6 @@ export class ReaderContainer extends Component {
     return (
       <BodyClass className={this.bodyClass}>
         <div>
-          <Utility.SkipLink />
           <ScrollAware>
             {/* Header inside scroll-aware HOC */}
             <Header

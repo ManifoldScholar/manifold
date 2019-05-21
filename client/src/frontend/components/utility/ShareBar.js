@@ -62,7 +62,7 @@ class ShareBar extends Component {
     const twitterWindowOptions = ["", "", "width=600,height=300"];
 
     return (
-      <nav className="share-nav-primary">
+      <nav className="share-nav-primary" aria-label="Share">
         {this.props.label && (
           <span className="share-nav-primary__label">{this.props.label}</span>
         )}

@@ -41,8 +41,10 @@ class SearchContainer extends PureComponent {
 
     return (
       <div>
+        <h1 className="screen-reader-text">Search</h1>
         <div className="search-form-frontend">
           <div className="container">
+            <h2 className="screen-reader-text">Search Form</h2>
             <SearchQuery.Form
               initialState={{
                 keyword: "",
@@ -57,6 +59,7 @@ class SearchContainer extends PureComponent {
         {this.props.results ? (
           <div className="search-results-frontend">
             <div className="container">
+              <h2 className="screen-reader-text">Search Results</h2>
               <SearchResults.List
                 pagination={this.props.resultsMeta.pagination}
                 paginationClickHandler={this.props.setPage}

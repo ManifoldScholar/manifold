@@ -85,7 +85,6 @@ export class FrontendContainer extends Component {
     return (
       <BodyClass className={"browse"}>
         <div>
-          <Utility.SkipLink />
           <Utility.ScrollToTop />
           <ScrollAware>
             <Layout.Header

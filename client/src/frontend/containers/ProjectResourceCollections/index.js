@@ -93,6 +93,9 @@ class ProjectResourceCollectionsContainer extends Component {
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
+        <h1 className="screen-reader-text">
+          {`${project.attributes.titlePlaintext} Resource Collections`}
+        </h1>
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
             link={lh.link("frontendProject", project.attributes.slug)}
@@ -105,6 +108,7 @@ class ProjectResourceCollectionsContainer extends Component {
               <ResourceCollectionList.Grid
                 project={this.props.project}
                 resourceCollections={this.props.resourceCollections}
+                itemHeadingLevel={2}
               />
             )}
             {this.props.meta && (

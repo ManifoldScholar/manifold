@@ -564,7 +564,7 @@ Array [
               <div
                 className="entity-row__text entity-row__text--in-grid"
               >
-                <h4
+                <h3
                   className="entity-row__title entity-row__title--in-grid"
                 >
                   <span
@@ -584,13 +584,13 @@ Array [
                   >
                     View Rowan Test
                   </span>
-                </h4>
-                <h5
+                </h3>
+                <h4
                   className="entity-row__subtitle entity-row__subtitle--in-grid"
                 >
                   World's Greatest Dog
-                </h5>
-                <h6
+                </h4>
+                <div
                   className="entity-row__meta entity-row__meta--in-grid"
                 />
               </div>
@@ -860,7 +860,7 @@ Array [
               <div
                 className="entity-row__text entity-row__text--in-grid"
               >
-                <h4
+                <h3
                   className="entity-row__title entity-row__title--in-grid"
                 >
                   <span
@@ -880,13 +880,13 @@ Array [
                   >
                     View Rowan Test
                   </span>
-                </h4>
-                <h5
+                </h3>
+                <h4
                   className="entity-row__subtitle entity-row__subtitle--in-grid"
                 >
                   World's Greatest Dog
-                </h5>
-                <h6
+                </h4>
+                <div
                   className="entity-row__meta entity-row__meta--in-grid"
                 />
               </div>
@@ -898,6 +898,7 @@ Array [
         className="entity-list__pagination"
       >
         <nav
+          aria-label="Pagination"
           className="list-pagination"
         >
           <ul

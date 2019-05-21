@@ -12,16 +12,17 @@ export default class ResourceListCards extends PureComponent {
     resources: PropTypes.array.isRequired,
     project: PropTypes.object.isRequired,
     pagination: PropTypes.object,
-    paginationClickHandler: PropTypes.func
+    paginationClickHandler: PropTypes.func,
+    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
   };
 
   render() {
     if (!this.props.resources) return null;
-    const project = this.props.project;
+    const { project, itemHeadingLevel } = this.props;
 
     return (
       <div className="entity-section-wrapper__body">
-        <nav className="resource-list">
+        <div className="resource-list">
           <div className="resource-count">
             <Utility.EntityCount
               pagination={this.props.pagination}
@@ -42,6 +43,7 @@ export default class ResourceListCards extends PureComponent {
                   key={resource.id}
                   resource={resource}
                   project={this.props.project}
+                  itemHeadingLevel={itemHeadingLevel}
                 />
               );
             })}
@@ -52,7 +54,7 @@ export default class ResourceListCards extends PureComponent {
               pagination={this.props.pagination}
             />
           ) : null}
-        </nav>
+        </div>
       </div>
     );
   }

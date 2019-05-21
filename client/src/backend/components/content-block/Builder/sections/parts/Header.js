@@ -23,7 +23,7 @@ export default class ProjectContentSectionsPartsHeader extends PureComponent {
         )}
         {this.props.subtitle && (
           <header className="form-subsection-label">
-            <h2>{this.props.subtitle}</h2>
+            <h3>{this.props.subtitle}</h3>
           </header>
         )}
       </React.Fragment>

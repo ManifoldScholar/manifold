@@ -105,7 +105,7 @@ export default class ProjectCollectionSortBy extends PureComponent {
     return (
       <form className="form-secondary">
         <div className="form-input">
-          <h4 className="form-input-heading">Order Manually</h4>
+          <div className="form-input-heading">Order Manually</div>
           <div className="toggle-indicator">
             <div
               onClick={this.handleClick}

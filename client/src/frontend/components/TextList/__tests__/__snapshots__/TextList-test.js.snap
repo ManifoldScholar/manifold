@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.TextList component renders correctly 1`] = `
-<nav
+<div
   className="text-list__category"
 >
-  <h4
+  <h3
     className="text-list__category-heading"
   >
     A Label
-  </h4>
+  </h3>
   <ul
     className="text-list__list"
   >
@@ -55,7 +55,7 @@ exports[`Frontend.TextList component renders correctly 1`] = `
                 href="/read/slug-1"
                 onClick={[Function]}
               >
-                <h3
+                <h4
                   className="text-block__name"
                 >
                   <span
@@ -66,7 +66,7 @@ exports[`Frontend.TextList component renders correctly 1`] = `
                       }
                     }
                   />
-                </h3>
+                </h4>
               </a>
               <div
                 className="text-block__creators"
@@ -202,7 +202,7 @@ exports[`Frontend.TextList component renders correctly 1`] = `
                 href="/read/slug-2"
                 onClick={[Function]}
               >
-                <h3
+                <h4
                   className="text-block__name"
                 >
                   <span
@@ -213,7 +213,7 @@ exports[`Frontend.TextList component renders correctly 1`] = `
                       }
                     }
                   />
-                </h3>
+                </h4>
               </a>
               <div
                 className="text-block__creators"
@@ -307,5 +307,5 @@ exports[`Frontend.TextList component renders correctly 1`] = `
       </div>
     </li>
   </ul>
-</nav>
+</div>
 `;

@@ -29,11 +29,11 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
         <div
           className="body"
         >
-          <h4
+          <h2
             className="title"
           >
             Projects You’re Following
-          </h4>
+          </h2>
         </div>
       </div>
     </header>
@@ -161,7 +161,7 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
         Reset Search + Filters
       </button>
     </form>
-    <nav
+    <div
       className="project-list grid entity-section-wrapper__body"
     >
       <ul>
@@ -532,7 +532,7 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
           </a>
         </li>
       </ul>
-    </nav>
+    </div>
   </div>
 </section>
 `;
@@ -573,7 +573,12 @@ exports[`Frontend.ProjectList.Following component renders correctly with no proj
     <div
       className="container"
     >
-      <nav
+      <h2
+        className="screen-reader-text"
+      >
+        Project Navigation
+      </h2>
+      <div
         className="button-nav button-nav--default"
       >
         <a
@@ -601,7 +606,7 @@ exports[`Frontend.ProjectList.Following component renders correctly with no proj
             See All Projects
           </span>
         </a>
-      </nav>
+      </div>
     </div>
   </section>
 </div>

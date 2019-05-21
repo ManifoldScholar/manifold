@@ -129,7 +129,7 @@ export class FollowingContainer extends Component {
             <div className="main">
               <Utility.IconComposer size={56} icon="lamp64" />
               <div className="body">
-                <h4 className="title">{"Featured Projects"}</h4>
+                <h2 className="title">{"Featured Projects"}</h2>
               </div>
             </div>
             {this.renderFeaturedButton(featuredLimit)}
@@ -165,6 +165,7 @@ export class FollowingContainer extends Component {
       >
         <div>
           <HeadContent title="Following" appendTitle />
+          <h1 className="screen-reader-text">Projects You’re Following</h1>
           <ProjectList.Following
             followedProjects={this.props.followedProjects}
             authentication={this.props.authentication}

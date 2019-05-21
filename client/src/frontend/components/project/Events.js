@@ -40,7 +40,7 @@ export default class ProjectEvents extends Component {
               <div className="main">
                 <IconComposer icon="recentActivity64" size={56} />
                 <div className="body">
-                  <h4 className="title">{"All Activity"}</h4>
+                  <h2 className="title">{"All Activity"}</h2>
                 </div>
               </div>
             </header>

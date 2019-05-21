@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
-<nav
+<div
   className="project-list grid entity-section-wrapper__body"
 >
   <ul>
@@ -273,5 +273,5 @@ exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
       </a>
     </li>
   </ul>
-</nav>
+</div>
 `;

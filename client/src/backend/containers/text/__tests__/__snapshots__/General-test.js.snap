@@ -87,11 +87,11 @@ exports[`Backend Text General Container renders correctly 1`] = `
         className="form-input"
         style={Object {}}
       >
-        <h4
+        <div
           className="form-input-heading"
         >
           Publication Date
-        </h4>
+        </div>
         <div
           className="form-date"
         >

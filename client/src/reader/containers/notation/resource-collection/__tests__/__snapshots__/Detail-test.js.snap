@@ -71,11 +71,11 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                   <div
                     className="body"
                   >
-                    <h2
+                    <h1
                       className="title"
                     >
                       Rowan
-                    </h2>
+                    </h1>
                     <span
                       className="date"
                     >
@@ -128,7 +128,7 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                   className="resource-slideshow__caption"
                 >
                   <header>
-                    <h2
+                    <h3
                       className="resource-slideshow__title"
                       dangerouslySetInnerHTML={
                         Object {

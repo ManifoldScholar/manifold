@@ -2,6 +2,11 @@
 
 exports[`Backend.ProjectCollection.Detail container renders correctly 1`] = `
 <div>
+  <h2
+    className="screen-reader-text"
+  >
+    Project List
+  </h2>
   <div
     className="project-collection-sort"
   >
@@ -25,11 +30,11 @@ exports[`Backend.ProjectCollection.Detail container renders correctly 1`] = `
       <div
         className="form-input"
       >
-        <h4
+        <div
           className="form-input-heading"
         >
           Order Manually
-        </h4>
+        </div>
         <div
           className="toggle-indicator"
         >

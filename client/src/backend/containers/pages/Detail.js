@@ -206,7 +206,13 @@ class PageDetailContainer extends PureComponent {
         />
         {this.renderExistingHeader(page)}
         <Layout.BackendPanel
-          sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
+          sidebar={
+            <Navigation.Secondary
+              links={secondaryLinks}
+              panel
+              ariaLabel="Page Settings"
+            />
+          }
         >
           <div>{this.renderRoutes()}</div>
         </Layout.BackendPanel>

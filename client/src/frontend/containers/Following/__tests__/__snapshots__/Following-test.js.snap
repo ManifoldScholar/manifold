@@ -2,6 +2,11 @@
 
 exports[`Frontend Following Container renders correctly 1`] = `
 <div>
+  <h1
+    className="screen-reader-text"
+  >
+    Projects You’re Following
+  </h1>
   <section
     className="bg-neutral05"
   >
@@ -30,11 +35,11 @@ exports[`Frontend Following Container renders correctly 1`] = `
           <div
             className="body"
           >
-            <h4
+            <h2
               className="title"
             >
               Projects You’re Following
-            </h4>
+            </h2>
           </div>
         </div>
       </header>
@@ -162,7 +167,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
           Reset Search + Filters
         </button>
       </form>
-      <nav
+      <div
         className="project-list grid entity-section-wrapper__body"
       >
         <ul>
@@ -701,7 +706,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
             </a>
           </li>
         </ul>
-      </nav>
+      </div>
     </div>
   </section>
   <section>
@@ -730,15 +735,15 @@ exports[`Frontend Following Container renders correctly 1`] = `
           <div
             className="body"
           >
-            <h4
+            <h2
               className="title"
             >
               Featured Projects
-            </h4>
+            </h2>
           </div>
         </div>
       </header>
-      <nav
+      <div
         className="project-list grid entity-section-wrapper__body"
       >
         <ul>
@@ -1277,7 +1282,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
             </a>
           </li>
         </ul>
-      </nav>
+      </div>
     </div>
   </section>
   <section
@@ -1286,7 +1291,12 @@ exports[`Frontend Following Container renders correctly 1`] = `
     <div
       className="container"
     >
-      <nav
+      <h2
+        className="screen-reader-text"
+      >
+        Project Navigation
+      </h2>
+      <div
         className="button-nav button-nav--default"
       >
         <a
@@ -1314,7 +1324,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
             See All Projects
           </span>
         </a>
-      </nav>
+      </div>
     </div>
   </section>
 </div>

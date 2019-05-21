@@ -170,23 +170,25 @@ export default class Splash extends Component {
             &nbsp;
           </figure>
           <div className="left">
-            <h2
+            <h1
               style={this.headerStyle()}
               className="heading-primary"
               dangerouslySetInnerHTML={{ __html: this.header() }}
             />
-            <h3
-              style={this.headerStyle()}
-              className="heading-secondary"
-              dangerouslySetInnerHTML={{ __html: this.subheader() }}
-            />
+            {this.subheader() && (
+              <h2
+                style={this.headerStyle()}
+                className="heading-secondary"
+                dangerouslySetInnerHTML={{ __html: this.subheader() }}
+              />
+            )}
             <div
               style={this.foregroundTextStyle()}
               className="feature-body"
               dangerouslySetInnerHTML={{ __html: this.body() }}
             />
             <div className="splash-content" />
-            <nav className="feature__buttons utility-button-group utility-button-group--inline">
+            <div className="feature__buttons utility-button-group utility-button-group--inline">
               {this.hasLink() ? (
                 <a
                   href={this.attribute("linkUrl")}
@@ -229,7 +231,7 @@ export default class Splash extends Component {
                   </span>
                 </span>
               ) : null}
-            </nav>
+            </div>
           </div>
         </div>
       </section>

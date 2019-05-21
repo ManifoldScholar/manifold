@@ -142,9 +142,9 @@ exports[`Backend Project New Container renders correctly 1`] = `
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Title and Description
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -221,9 +221,9 @@ exports[`Backend Project New Container renders correctly 1`] = `
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Layout
-                </span>
+                </h2>
               </header>
               <span
                 className="instructions"
