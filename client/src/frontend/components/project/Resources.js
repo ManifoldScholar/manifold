@@ -12,11 +12,12 @@ export default class ProjectResources extends Component {
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func,
     filterChange: PropTypes.func.isRequired,
-    initialFilterState: PropTypes.object
+    initialFilterState: PropTypes.object,
+    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
   };
 
   render() {
-    const project = this.props.project;
+    const { project, itemHeadingLevel } = this.props;
     return (
       <section>
         <div className="entity-section-wrapper container">
@@ -40,6 +41,7 @@ export default class ProjectResources extends Component {
             pagination={this.props.pagination}
             resources={this.props.resources}
             paginationClickHandler={this.props.paginationClickHandler}
+            itemHeadingLevel={itemHeadingLevel}
           />
         </div>
       </section>

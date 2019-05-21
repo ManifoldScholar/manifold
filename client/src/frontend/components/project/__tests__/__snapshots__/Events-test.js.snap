@@ -66,11 +66,11 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
           <div
             className="body"
           >
-            <h4
+            <h2
               className="title"
             >
               All Activity
-            </h4>
+            </h2>
           </div>
         </div>
       </header>
@@ -110,7 +110,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
                 >
                   Text Added
                 </div>
-                <h5
+                <h3
                   className="event-tile__title"
                   dangerouslySetInnerHTML={
                     Object {
@@ -160,7 +160,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
                 >
                   Text Added
                 </div>
-                <h5
+                <h3
                   className="event-tile__title"
                   dangerouslySetInnerHTML={
                     Object {
@@ -185,6 +185,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
           className="entity-section-wrapper__pagination"
         >
           <nav
+            aria-label="Pagination"
             className="list-pagination"
           >
             <ul
@@ -318,7 +319,12 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
     <div
       className="container"
     >
-      <nav
+      <h2
+        className="screen-reader-text"
+      >
+        Project Navigation
+      </h2>
+      <div
         className="button-nav button-nav--default"
       >
         <a
@@ -346,7 +352,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
             See All Projects
           </span>
         </a>
-      </nav>
+      </div>
     </div>
   </section>
 </div>

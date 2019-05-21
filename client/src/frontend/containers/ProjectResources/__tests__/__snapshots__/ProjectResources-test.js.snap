@@ -2,6 +2,11 @@
 
 exports[`Frontend ProjectResources Container renders correctly 1`] = `
 <div>
+  <h1
+    className="screen-reader-text"
+  >
+    Rowan Test Resources
+  </h1>
   <section
     className="bg-neutral05"
   >
@@ -223,7 +228,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
       <div
         className="entity-section-wrapper__body"
       >
-        <nav
+        <div
           className="resource-list"
         >
           <div
@@ -325,10 +330,9 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
                 tabIndex="0"
               >
                 <div>
-                  <header
-                    className="resource-card__title"
-                  >
-                    <h4
+                  <header>
+                    <h3
+                      className="resource-card__title"
                       dangerouslySetInnerHTML={
                         Object {
                           "__html": "Image",
@@ -411,6 +415,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
             </li>
           </ul>
           <nav
+            aria-label="Pagination"
             className="list-pagination"
           >
             <ul
@@ -534,7 +539,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
               </li>
             </ul>
           </nav>
-        </nav>
+        </div>
       </div>
     </div>
   </section>

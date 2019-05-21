@@ -203,7 +203,7 @@ class FormDate extends Component {
         label={this.props.label}
         idForError={this.props.idForError}
       >
-        <h4 className="form-input-heading">{this.props.label}</h4>
+        <div className="form-input-heading">{this.props.label}</div>
         <div className="form-date">
           <div className="form-select input-month">
             {this.renderSelectIcon()}

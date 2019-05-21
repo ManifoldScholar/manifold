@@ -172,7 +172,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                 <div
                   className="entity-row__text entity-row__text--in-rows"
                 >
-                  <h4
+                  <h3
                     className="entity-row__title entity-row__title--in-rows"
                   >
                     <span
@@ -195,8 +195,8 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                     >
                       View Image
                     </span>
-                  </h4>
-                  <h6
+                  </h3>
+                  <div
                     className="entity-row__meta entity-row__meta--in-rows"
                   >
                     <time
@@ -204,7 +204,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                     >
                       Created April 24, 2017
                     </time>
-                  </h6>
+                  </div>
                 </div>
               </div>
             </a>
@@ -238,7 +238,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                 <div
                   className="entity-row__text entity-row__text--in-rows"
                 >
-                  <h4
+                  <h3
                     className="entity-row__title entity-row__title--in-rows"
                   >
                     <span
@@ -261,8 +261,8 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                     >
                       View Image
                     </span>
-                  </h4>
-                  <h6
+                  </h3>
+                  <div
                     className="entity-row__meta entity-row__meta--in-rows"
                   >
                     <time
@@ -270,7 +270,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                     >
                       Created April 24, 2017
                     </time>
-                  </h6>
+                  </div>
                 </div>
               </div>
             </a>
@@ -280,6 +280,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
           className="entity-list__pagination"
         >
           <nav
+            aria-label="Pagination"
             className="list-pagination"
           >
             <ul

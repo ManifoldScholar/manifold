@@ -64,11 +64,11 @@ Array [
     className="form-input"
     style={Object {}}
   >
-    <h4
+    <div
       className="form-input-heading"
     >
       Subjects
-    </h4>
+    </div>
     <span
       className="instructions"
     >

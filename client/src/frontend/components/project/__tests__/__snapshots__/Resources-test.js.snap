@@ -184,7 +184,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
     <div
       className="entity-section-wrapper__body"
     >
-      <nav
+      <div
         className="resource-list"
       >
         <div
@@ -286,10 +286,9 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
               tabIndex="0"
             >
               <div>
-                <header
-                  className="resource-card__title"
-                >
+                <header>
                   <h4
+                    className="resource-card__title"
                     dangerouslySetInnerHTML={
                       Object {
                         "__html": "Image",
@@ -451,10 +450,9 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
               tabIndex="0"
             >
               <div>
-                <header
-                  className="resource-card__title"
-                >
+                <header>
                   <h4
+                    className="resource-card__title"
                     dangerouslySetInnerHTML={
                       Object {
                         "__html": "Image",
@@ -537,6 +535,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
           </li>
         </ul>
         <nav
+          aria-label="Pagination"
           className="list-pagination"
         >
           <ul
@@ -656,7 +655,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
             </li>
           </ul>
         </nav>
-      </nav>
+      </div>
     </div>
   </div>
 </section>

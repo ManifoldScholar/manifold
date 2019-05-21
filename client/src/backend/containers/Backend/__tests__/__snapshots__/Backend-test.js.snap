@@ -15,11 +15,6 @@ exports[`Backend Backend Container renders correctly 1`] = `
                   </Connect(RedirectToFirstMatch)>
                 </Route>
               </withRouter(Connect(RedirectToFirstMatch))>
-              <SkipLink skipId=\\"skip-to-main\\" skipLinkText=\\"Skip to main content\\" skipMessage=\\"Skipped to Main Content\\">
-                <a className=\\"skip-to-main screen-reader-text\\" href=\\"#skip-to-main\\" onClick={[Function]}>
-                  Skip to main content
-                </a>
-              </SkipLink>
               <withRouter(ScrollToTop)>
                 <Route>
                   <ScrollToTop match={{...}} location={{...}} history={{...}} staticContext={[undefined]} />
@@ -31,6 +26,11 @@ exports[`Backend Backend Container renders correctly 1`] = `
                     <BlurOnLocationChange location={[undefined]}>
                       <div>
                         <header className=\\"header-app dark\\">
+                          <SkipLink skipId=\\"skip-to-main\\" skipLinkText=\\"Skip to main content\\" skipMessage=\\"Skipped to Main Content\\">
+                            <a className=\\"skip-to-main screen-reader-text\\" href=\\"#skip-to-main\\" onClick={[Function]}>
+                              Skip to main content
+                            </a>
+                          </SkipLink>
                           <div className=\\"header-container\\">
                             <Link to=\\"/\\" className=\\"header-logo\\" replace={false}>
                               <a className=\\"header-logo\\" onClick={[Function]} href=\\"/\\">
@@ -61,7 +61,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                   <withRouter(Navigation.Static) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
                                     <Route>
                                       <Navigation.Static backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
-                                        <nav className=\\"page-nav show-75\\">
+                                        <nav className=\\"page-nav show-75\\" aria-label=\\"Primary Navigation\\">
                                           <ul style={[undefined]} className=\\"links\\">
                                             <li>
                                               <NavLink to=\\"/backend/dashboard\\" exact={false} target={{...}} activeClassName=\\"active\\" aria-current=\\"page\\">
@@ -233,7 +233,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                           </div>
                                           <div className=\\"rel left\\">
                                             <Layout.Footer.Navigation commonActions={{...}} pages={{...}} settings={{...}} authentication={{...}}>
-                                              <nav className=\\"text-nav\\">
+                                              <nav className=\\"text-nav\\" aria-label=\\"Footer Navigation\\">
                                                 <ul className=\\"text-nav__list\\">
                                                   <li className=\\"text-nav__link-group\\">
                                                     <ul className=\\"footer-nav-list\\">

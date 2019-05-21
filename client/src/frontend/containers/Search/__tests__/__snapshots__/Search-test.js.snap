@@ -2,12 +2,22 @@
 
 exports[`Frontend SearchContainer renders correctly 1`] = `
 <div>
+  <h1
+    className="screen-reader-text"
+  >
+    Search
+  </h1>
   <div
     className="search-form-frontend"
   >
     <div
       className="container"
     >
+      <h2
+        className="screen-reader-text"
+      >
+        Search Form
+      </h2>
       <form
         className="search-query"
         onSubmit={[Function]}

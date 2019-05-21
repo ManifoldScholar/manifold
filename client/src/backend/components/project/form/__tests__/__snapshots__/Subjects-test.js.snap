@@ -5,11 +5,11 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
   className="form-input wide"
   style={Object {}}
 >
-  <h4
+  <div
     className="form-input-heading"
   >
     Subjects
-  </h4>
+  </div>
   <nav
     className="has-many-list"
   >
@@ -48,11 +48,11 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
         <div
           className="association"
         >
-          <h4
+          <div
             className="association-name"
           >
             Hip Hop
-          </h4>
+          </div>
         </div>
         <div
           className="utility"

@@ -128,7 +128,7 @@ export class NavigationStatic extends PureComponent {
   render() {
     return (
       <React.Fragment>
-        <nav className="page-nav show-75">
+        <nav className="page-nav show-75" aria-label="Primary Navigation">
           <ul style={this.props.style} className="links">
             {this.props.links.map((link, index) => {
               if (link.ability)

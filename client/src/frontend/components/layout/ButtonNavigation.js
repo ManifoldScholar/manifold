@@ -80,10 +80,11 @@ export class LayoutButtonNavigation extends Component {
     return (
       <section className={sectionClass}>
         <div className="container">
-          <nav className="button-nav button-nav--default">
+          <h2 className="screen-reader-text">Project Navigation</h2>
+          <div className="button-nav button-nav--default">
             {this.renderProjectsButton()}
             {this.renderFollowingButton()}
-          </nav>
+          </div>
         </div>
       </section>
     );

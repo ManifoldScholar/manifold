@@ -305,7 +305,7 @@ Array [
               <div
                 className="entity-row__text entity-row__text--valign-center entity-row__text--in-rows"
               >
-                <h4
+                <h3
                   className="entity-row__title entity-row__title--in-rows"
                 >
                   <span
@@ -329,7 +329,7 @@ Array [
                   >
                     View Rowan Ida
                   </span>
-                </h4>
+                </h3>
               </div>
             </div>
           </a>
@@ -339,6 +339,7 @@ Array [
         className="entity-list__pagination"
       >
         <nav
+          aria-label="Pagination"
           className="list-pagination"
         >
           <ul

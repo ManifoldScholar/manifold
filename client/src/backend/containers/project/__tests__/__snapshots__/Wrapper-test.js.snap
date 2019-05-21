@@ -345,6 +345,7 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
           className="aside"
         >
           <nav
+            aria-label="Project Settings"
             className="secondary-nav panel-nav"
           >
             <ul>

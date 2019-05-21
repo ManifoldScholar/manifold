@@ -177,7 +177,13 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
             secondaryLinks={secondaryLinks}
           />
           <Layout.BackendPanel
-            sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
+            sidebar={
+              <Navigation.Secondary
+                links={secondaryLinks}
+                panel
+                ariaLabel="Resource Collection Settings"
+              />
+            }
           >
             <div>{this.renderRoutes()}</div>
           </Layout.BackendPanel>

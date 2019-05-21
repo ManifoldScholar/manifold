@@ -103,7 +103,7 @@ export default class ProjectListGrid extends Component {
 
     return (
       <React.Fragment>
-        <nav className="project-list grid entity-section-wrapper__body">
+        <div className="project-list grid entity-section-wrapper__body">
           <ReactCSSTransitionGroup
             transitionName="project-list grid"
             transitionEnter={this.enableAnimation}
@@ -126,7 +126,7 @@ export default class ProjectListGrid extends Component {
               );
             })}
           </ReactCSSTransitionGroup>
-        </nav>
+        </div>
         {this.props.pagination
           ? this.renderPagination(this.props)
           : this.renderViewAll(this.props)}

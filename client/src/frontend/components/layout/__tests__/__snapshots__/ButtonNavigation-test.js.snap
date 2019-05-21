@@ -7,7 +7,12 @@ exports[`Frontend.Layout.ButtonNavigation component doesn't render anything when
   <div
     className="container"
   >
-    <nav
+    <h2
+      className="screen-reader-text"
+    >
+      Project Navigation
+    </h2>
+    <div
       className="button-nav button-nav--default"
     >
       <a
@@ -35,7 +40,7 @@ exports[`Frontend.Layout.ButtonNavigation component doesn't render anything when
           See All Projects
         </span>
       </a>
-    </nav>
+    </div>
   </div>
 </section>
 `;
@@ -47,7 +52,12 @@ exports[`Frontend.Layout.ButtonNavigation component renders correctly 1`] = `
   <div
     className="container"
   >
-    <nav
+    <h2
+      className="screen-reader-text"
+    >
+      Project Navigation
+    </h2>
+    <div
       className="button-nav button-nav--default"
     >
       <a
@@ -75,7 +85,7 @@ exports[`Frontend.Layout.ButtonNavigation component renders correctly 1`] = `
           See All Projects
         </span>
       </a>
-    </nav>
+    </div>
   </div>
 </section>
 `;
@@ -87,7 +97,12 @@ exports[`Frontend.Layout.ButtonNavigation component respects the grayBg prop 1`]
   <div
     className="container"
   >
-    <nav
+    <h2
+      className="screen-reader-text"
+    >
+      Project Navigation
+    </h2>
+    <div
       className="button-nav button-nav--default"
     >
       <a
@@ -115,7 +130,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the grayBg prop 1`]
           See All Projects
         </span>
       </a>
-    </nav>
+    </div>
   </div>
 </section>
 `;
@@ -127,7 +142,12 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showBrowse prop
   <div
     className="container"
   >
-    <nav
+    <h2
+      className="screen-reader-text"
+    >
+      Project Navigation
+    </h2>
+    <div
       className="button-nav button-nav--default"
     >
       <a
@@ -155,7 +175,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showBrowse prop
           See All Projects
         </span>
       </a>
-    </nav>
+    </div>
   </div>
 </section>
 `;
@@ -167,7 +187,12 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showFollowing p
   <div
     className="container"
   >
-    <nav
+    <h2
+      className="screen-reader-text"
+    >
+      Project Navigation
+    </h2>
+    <div
       className="button-nav button-nav--default"
     >
       <a
@@ -195,7 +220,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showFollowing p
           See All Projects
         </span>
       </a>
-    </nav>
+    </div>
   </div>
 </section>
 `;

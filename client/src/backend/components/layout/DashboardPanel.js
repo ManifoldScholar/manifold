@@ -27,10 +27,10 @@ export default class DashboardPanel extends PureComponent {
       <div className="dashboard-panel">
         {this.title && (
           <header className="section-heading-secondary">
-            <h3>
+            <h2>
               {this.icon && <Utility.IconComposer icon={this.icon} />}
               {this.title}
-            </h3>
+            </h2>
           </header>
         )}
         <div className="panel">{this.props.children}</div>

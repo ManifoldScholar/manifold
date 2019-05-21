@@ -82,7 +82,7 @@ export class EventTile extends Component {
             )}
             {header && <div className={`${baseClass}__header`}>{header}</div>}
             {title && (
-              <h5
+              <h3
                 className={`${baseClass}__title`}
                 dangerouslySetInnerHTML={{ __html: title }}
               />

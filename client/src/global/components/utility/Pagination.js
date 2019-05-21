@@ -169,7 +169,7 @@ export default class UtilityPagination extends PureComponent {
     });
 
     return (
-      <nav className={wrapperClassNames}>
+      <nav className={wrapperClassNames} aria-label="Pagination">
         <ul className="list-pagination__columns">
           <li className="list-pagination__column">
             <ul>{this.previous(pagination)}</ul>

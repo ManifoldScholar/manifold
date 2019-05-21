@@ -18,9 +18,9 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                           <FieldGroup label=\\"Identity\\" disabled={false} horizontal={false} wide={false} instructions={{...}}>
                             <div className=\\"form-section\\">
                               <header className=\\"form-section-label\\">
-                                <span>
+                                <h2>
                                   Identity
-                                </span>
+                                </h2>
                               </header>
                               <Instructions instructions={{...}} />
                               <div className=\\"form-input-group\\">
@@ -64,9 +64,9 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                           <FieldGroup label=\\"Publisher\\" disabled={false} horizontal={false} wide={false} instructions={{...}}>
                             <div className=\\"form-section\\">
                               <header className=\\"form-section-label\\">
-                                <span>
+                                <h2>
                                   Publisher
-                                </span>
+                                </h2>
                               </header>
                               <Instructions instructions={{...}} />
                               <div className=\\"form-input-group\\">
@@ -148,9 +148,9 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                           <FieldGroup label=\\"Bibliographic\\" disabled={false} horizontal={false} wide={false} instructions={{...}}>
                             <div className=\\"form-section\\">
                               <header className=\\"form-section-label\\">
-                                <span>
+                                <h2>
                                   Bibliographic
-                                </span>
+                                </h2>
                               </header>
                               <Instructions instructions={{...}} />
                               <div className=\\"form-input-group\\">
@@ -278,9 +278,9 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                           <FieldGroup label=\\"Other\\" disabled={false} horizontal={false} wide={false} instructions={{...}}>
                             <div className=\\"form-section\\">
                               <header className=\\"form-section-label\\">
-                                <span>
+                                <h2>
                                   Other
-                                </span>
+                                </h2>
                               </header>
                               <Instructions instructions={{...}} />
                               <div className=\\"form-input-group\\">

@@ -5,6 +5,13 @@ exports[`Reader.Header Component renders correctly 1`] = `
   <header
     className="header-reader"
   >
+    <a
+      className="skip-to-main screen-reader-text"
+      href="#skip-to-main"
+      onClick={[Function]}
+    >
+      Skip to main content
+    </a>
     <nav
       className="container-banner"
     >
@@ -191,6 +198,13 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
   <header
     className="header-reader"
   >
+    <a
+      className="skip-to-main screen-reader-text"
+      href="#skip-to-main"
+      onClick={[Function]}
+    >
+      Skip to main content
+    </a>
     <nav
       className="container-banner"
     >

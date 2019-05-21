@@ -16,7 +16,7 @@ exports[`Frontend.Layout.Splash component renders correctly 1`] = `
     <div
       className="left"
     >
-      <h2
+      <h1
         className="heading-primary"
         dangerouslySetInnerHTML={
           Object {
@@ -25,7 +25,7 @@ exports[`Frontend.Layout.Splash component renders correctly 1`] = `
         }
         style={Object {}}
       />
-      <h3
+      <h2
         className="heading-secondary"
         dangerouslySetInnerHTML={
           Object {
@@ -46,7 +46,7 @@ exports[`Frontend.Layout.Splash component renders correctly 1`] = `
       <div
         className="splash-content"
       />
-      <nav
+      <div
         className="feature__buttons utility-button-group utility-button-group--inline"
       >
         <a
@@ -60,7 +60,7 @@ exports[`Frontend.Layout.Splash component renders correctly 1`] = `
             Click it, dog
           </span>
         </a>
-      </nav>
+      </div>
     </div>
   </div>
 </section>

@@ -71,7 +71,7 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
             <div
               className="entity-row__text entity-row__text--in-rows"
             >
-              <h4
+              <h3
                 className="entity-row__title entity-row__title--in-rows"
               >
                 <span
@@ -94,12 +94,12 @@ exports[`Backend Project Social Twitter Queries Container renders correctly 1`] 
                 >
                   View from:manifoldscholar
                 </span>
-              </h4>
-              <h6
+              </h3>
+              <div
                 className="entity-row__meta entity-row__meta--in-rows"
               >
                 No tweets have been fetched yet.
-              </h6>
+              </div>
             </div>
           </div>
         </a>

@@ -8,16 +8,31 @@ export default class ResourceCollectionCover extends Component {
 
   static propTypes = {
     resourceCollection: PropTypes.object.isRequired,
-    urlCreator: PropTypes.func.isRequired
+    urlCreator: PropTypes.func.isRequired,
+    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
   };
+
+  static defaultProps = {
+    itemHeadingLevel: 4
+  };
+
+  get titleTag() {
+    return `h${this.props.itemHeadingLevel}`;
+  }
 
   render() {
     const collectionsBackground = "/static/images/resource-collection.jpg";
-    const resourceCollection = this.props.resourceCollection;
+    const { resourceCollection, itemHeadingLevel } = this.props;
     const attr = resourceCollection.attributes;
     const bgImage = attr.thumbnailStyles.medium
       ? attr.thumbnailStyles.medium
       : collectionsBackground;
+    const Title = props => (
+      <this.titleTag className="collection-title">
+        {props.children}
+      </this.titleTag>
+    );
+
     return (
       <li>
         <Link
@@ -25,7 +40,7 @@ export default class ResourceCollectionCover extends Component {
           style={{ backgroundImage: "url(" + bgImage + ")" }}
         >
           <div className="title-overlay">
-            <h4 className="collection-title">{attr.title}</h4>
+            <Title>{attr.title}</Title>
             <div className="icon">
               <i className="manicon" aria-hidden="true">
                 <Utility.IconComposer size={48} icon="resourceCollection64" />

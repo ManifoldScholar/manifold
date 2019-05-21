@@ -239,7 +239,12 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
       <div
         className="container"
       >
-        <nav
+        <h2
+          className="screen-reader-text"
+        >
+          Project Navigation
+        </h2>
+        <div
           className="button-nav button-nav--default"
         >
           <a
@@ -267,7 +272,7 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
               See All Projects
             </span>
           </a>
-        </nav>
+        </div>
       </div>
     </section>
   </div>

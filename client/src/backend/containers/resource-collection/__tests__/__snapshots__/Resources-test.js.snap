@@ -5,7 +5,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
   className="entity-list"
   id="entities-list1"
 >
-  <h3
+  <h2
     className="entity-list__title-block entity-list__title"
   >
     <figure
@@ -41,7 +41,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
         Show collection only
       </span>
     </button>
-  </h3>
+  </h2>
   <div
     className="entity-list__contents-wrapper"
   >
@@ -345,7 +345,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
             <div
               className="entity-row__text entity-row__text--in-rows"
             >
-              <h4
+              <h3
                 className="entity-row__title entity-row__title--in-rows"
               >
                 <span
@@ -368,8 +368,8 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
                 >
                   View Image
                 </span>
-              </h4>
-              <h6
+              </h3>
+              <div
                 className="entity-row__meta entity-row__meta--in-rows"
               >
                 <time
@@ -377,7 +377,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
                 >
                   Created April 24, 2017
                 </time>
-              </h6>
+              </div>
             </div>
             <div
               className="entity-row__utility"
@@ -435,7 +435,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
             <div
               className="entity-row__text entity-row__text--in-rows"
             >
-              <h4
+              <h3
                 className="entity-row__title entity-row__title--in-rows"
               >
                 <span
@@ -458,8 +458,8 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
                 >
                   View Image
                 </span>
-              </h4>
-              <h6
+              </h3>
+              <div
                 className="entity-row__meta entity-row__meta--in-rows"
               >
                 <time
@@ -467,7 +467,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
                 >
                   Created April 24, 2017
                 </time>
-              </h6>
+              </div>
             </div>
             <div
               className="entity-row__utility"
@@ -501,6 +501,7 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
       className="entity-list__pagination"
     >
       <nav
+        aria-label="Pagination"
         className="list-pagination"
       >
         <ul

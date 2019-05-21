@@ -5,6 +5,13 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
   <header
     className="header-app"
   >
+    <a
+      className="skip-to-main screen-reader-text"
+      href="#skip-to-main"
+      onClick={[Function]}
+    >
+      Skip to main content
+    </a>
     <div
       className="header-container"
     >
@@ -48,6 +55,7 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
         </figure>
       </a>
       <nav
+        aria-label="Primary Navigation"
         className="page-nav show-75"
       >
         <ul

@@ -21,7 +21,7 @@ export default class ProjectContentBlockHeading extends PureComponent {
           <div className="main">
             <Utility.IconComposer icon={icon} />
             <div className="body">
-              <h4 className="title">{title}</h4>
+              <h2 className="title">{title}</h2>
             </div>
           </div>
         </header>

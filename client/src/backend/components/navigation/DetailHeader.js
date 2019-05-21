@@ -128,6 +128,7 @@ export default class DetailHeader extends PureComponent {
   breadcrumbs() {
     return (
       <nav
+        aria-label="Breadcrumbs"
         className={classNames("backend-header__breadcrumbs", "breadcrumbs", {
           "breadcrumbs--hidden-desktop": this.backHiddenDesktop
         })}

@@ -142,6 +142,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
               </svg>
             </a>
             <nav
+              aria-label="Share"
               className="share-nav-primary"
             >
               <span
@@ -432,11 +433,11 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                 }
               }
             />
-            <h3
+            <h2
               className="attribute-header"
             >
               Full Description
-            </h3>
+            </h2>
             <div
               dangerouslySetInnerHTML={
                 Object {
@@ -450,7 +451,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
               <div
                 className="comment-editor"
               >
-                <h3
+                <h2
                   className="comment-editor__editor-label"
                 >
                   <svg
@@ -471,7 +472,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   >
                     Add Comment
                   </span>
-                </h3>
+                </h2>
                 <div
                   className="placeholder"
                 >

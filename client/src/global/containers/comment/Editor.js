@@ -170,7 +170,7 @@ export class CommentEditor extends PureComponent {
     return (
       <div className="comment-editor">
         {this.props.label ? (
-          <h3 className="comment-editor__editor-label">
+          <h2 className="comment-editor__editor-label">
             <IconComposer
               icon="annotate32"
               size={44.91}
@@ -179,7 +179,7 @@ export class CommentEditor extends PureComponent {
             <span className="comment-editor__label-text">
               {this.props.label}
             </span>
-          </h3>
+          </h2>
         ) : null}
         <Authorize kind="unauthenticated">
           <div className="placeholder">

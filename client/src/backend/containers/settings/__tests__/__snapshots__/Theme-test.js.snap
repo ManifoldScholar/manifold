@@ -36,9 +36,9 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Branding
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -463,9 +463,9 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Typography
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"

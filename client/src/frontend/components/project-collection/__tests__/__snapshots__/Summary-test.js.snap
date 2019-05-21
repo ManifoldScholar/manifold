@@ -31,15 +31,15 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
         <div
           className="body"
         >
-          <h4
+          <h2
             className="title"
           >
             A Project Collection
-          </h4>
+          </h2>
         </div>
       </div>
     </a>
-    <nav
+    <div
       className="project-list grid entity-section-wrapper__body"
     >
       <ul>
@@ -227,7 +227,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
           </a>
         </li>
       </ul>
-    </nav>
+    </div>
     <div
       className="entity-section-wrapper__utility entity-section-wrapper__utility--footer"
     >

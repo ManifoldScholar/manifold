@@ -156,6 +156,9 @@ class ProjectResourcesContainer extends Component {
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
+        <h1 className="screen-reader-text">
+          {`${project.attributes.titlePlaintext} Resources`}
+        </h1>
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
             link={lh.link("frontendProject", project.attributes.slug)}
@@ -170,6 +173,7 @@ class ProjectResourcesContainer extends Component {
             paginationClickHandler={this.pageChangeHandlerCreator}
             filterChange={this.filterChange}
             initialFilterState={initialFilter}
+            itemHeadingLevel={3}
           />
         ) : null}
         <section className="bg-neutral05">

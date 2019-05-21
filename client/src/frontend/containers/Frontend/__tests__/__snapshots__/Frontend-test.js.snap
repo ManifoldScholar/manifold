@@ -2,13 +2,6 @@
 
 exports[`Frontend Frontend Container renders correctly 1`] = `
 <div>
-  <a
-    className="skip-to-main screen-reader-text"
-    href="#skip-to-main"
-    onClick={[Function]}
-  >
-    Skip to main content
-  </a>
   <div
     className="scroll-aware top pinned"
   >
@@ -16,6 +9,13 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
       <header
         className="header-app"
       >
+        <a
+          className="skip-to-main screen-reader-text"
+          href="#skip-to-main"
+          onClick={[Function]}
+        >
+          Skip to main content
+        </a>
         <div
           className="header-container"
         >
@@ -59,6 +59,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
             </figure>
           </a>
           <nav
+            aria-label="Primary Navigation"
             className="page-nav show-75"
           >
             <ul
@@ -303,6 +304,7 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
               className="rel left"
             >
               <nav
+                aria-label="Footer Navigation"
                 className="text-nav"
               >
                 <ul

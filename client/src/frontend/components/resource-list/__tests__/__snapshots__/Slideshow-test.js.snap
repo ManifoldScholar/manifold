@@ -60,7 +60,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
         className="resource-slideshow__caption"
       >
         <header>
-          <h2
+          <h3
             className="resource-slideshow__title"
             dangerouslySetInnerHTML={
               Object {

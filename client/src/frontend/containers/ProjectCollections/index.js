@@ -124,6 +124,7 @@ export class ProjectsCollectionsContainer extends Component {
           link={lh.link("frontendProjectsAll")}
           backText={"Back to projects"}
         />
+        <h1 className="screen-reader-text">Project Collections</h1>
         {this.renderProjectCollections()}
         {this.props.projectCollectionsMeta ? (
           <GlobalUtility.Pagination

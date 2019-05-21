@@ -160,7 +160,13 @@ export class TextWrapperContainer extends PureComponent {
             secondaryLinks={secondaryLinks}
           />
           <Layout.BackendPanel
-            sidebar={<Navigation.Secondary links={secondaryLinks} panel />}
+            sidebar={
+              <Navigation.Secondary
+                links={secondaryLinks}
+                panel
+                ariaLabel="Text Settings"
+              />
+            }
           >
             <div>{this.renderRoutes()}</div>
           </Layout.BackendPanel>

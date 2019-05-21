@@ -15,7 +15,7 @@ export default class ResourceListThumbnails extends Component {
   render() {
     if (!this.props.resources) return null;
     return (
-      <nav className="resource-thumbnail-list">
+      <div className="resource-thumbnail-list">
         <ul>
           {this.props.resources.map(resource => {
             return (
@@ -38,7 +38,7 @@ export default class ResourceListThumbnails extends Component {
             );
           })}
         </ul>
-      </nav>
+      </div>
     );
   }
 }

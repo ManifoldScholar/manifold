@@ -14,7 +14,12 @@ export class NavigationSecondary extends Component {
   static propTypes = {
     links: PropTypes.array,
     location: PropTypes.object,
-    panel: PropTypes.bool
+    panel: PropTypes.bool,
+    ariaLabel: PropTypes.string
+  };
+
+  static defaultProps = {
+    ariaLabel: "Secondary Navigation"
   };
 
   pathForLink(link) {
@@ -39,7 +44,7 @@ export class NavigationSecondary extends Component {
     });
 
     return (
-      <nav className={navClasses}>
+      <nav className={navClasses} aria-label={this.props.ariaLabel}>
         <ul>
           {this.props.links.map(link => {
             if (link.ability)

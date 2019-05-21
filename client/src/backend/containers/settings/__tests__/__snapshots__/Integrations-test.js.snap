@@ -36,9 +36,9 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Facebook
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -87,9 +87,9 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Twitter
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -174,9 +174,9 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Google Services Integration
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -367,9 +367,9 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Google OAuth
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"
@@ -418,9 +418,9 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               <header
                 className="form-section-label"
               >
-                <span>
+                <h2>
                   Google Analytics
-                </span>
+                </h2>
               </header>
               <div
                 className="form-input-group"

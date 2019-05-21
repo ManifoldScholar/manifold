@@ -14,9 +14,9 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         <header
           className="form-section-label"
         >
-          <span>
+          <h2>
             Identity
-          </span>
+          </h2>
         </header>
         <div
           className="form-input-group"
@@ -67,9 +67,9 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         <header
           className="form-section-label"
         >
-          <span>
+          <h2>
             Publisher
-          </span>
+          </h2>
         </header>
         <div
           className="form-input-group"
@@ -163,9 +163,9 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         <header
           className="form-section-label"
         >
-          <span>
+          <h2>
             Bibliographic
-          </span>
+          </h2>
         </header>
         <div
           className="form-input-group"
@@ -312,9 +312,9 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         <header
           className="form-section-label"
         >
-          <span>
+          <h2>
             Other
-          </span>
+          </h2>
         </header>
         <div
           className="form-input-group"

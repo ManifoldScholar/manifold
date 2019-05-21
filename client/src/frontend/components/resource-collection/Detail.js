@@ -47,6 +47,7 @@ export default class ResourceCollectionDetail extends PureComponent {
             <Utility.ShareBar url={this.props.resourceCollectionUrl} />
           </div>
         </div>
+        <h2 className="screen-reader-text">Resource Slideshow</h2>
         <ResourceList.Slideshow
           resourceCollection={this.props.resourceCollection}
           collectionResources={this.props.slideshowResources}
@@ -55,6 +56,7 @@ export default class ResourceCollectionDetail extends PureComponent {
           dispatch={this.props.dispatch}
         />
         <div className="container flush-top">
+          <h2 className="screen-reader-text">Resource List</h2>
           <ResourceList.Totals
             belongsTo="collection"
             count={count}
@@ -74,6 +76,7 @@ export default class ResourceCollectionDetail extends PureComponent {
             paginationClickHandler={
               this.props.resourceCollectionPaginationHandler
             }
+            itemHeadingLevel={3}
           />
         </div>
       </section>

@@ -14,6 +14,7 @@ export class FormHasMany extends PureComponent {
 
   static propTypes = {
     label: PropTypes.string.isRequired,
+    labelTag: PropTypes.oneOf(["div", "h2", "h3", "h4"]),
     labelHeader: PropTypes.bool,
     emptyMessage: PropTypes.string,
     onNew: PropTypes.func,
@@ -119,6 +120,7 @@ export class FormHasMany extends PureComponent {
       >
         <Header
           label={this.props.label}
+          labelTag={this.props.labelTag}
           labelHeader={this.props.labelHeader}
           instructions={this.props.instructions}
         />

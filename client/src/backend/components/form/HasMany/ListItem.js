@@ -121,7 +121,7 @@ export default class FormHasManyList extends PureComponent {
       <li>
         <div className="association">
           {this.renderAvatar()}
-          <h4 className="association-name">{this.name()}</h4>
+          <div className="association-name">{this.name()}</div>
         </div>
 
         <div className="utility">

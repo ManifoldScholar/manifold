@@ -24,11 +24,11 @@ exports[`Backend.ProjectCollection.SortBy component renders correctly 1`] = `
     <div
       className="form-input"
     >
-      <h4
+      <div
         className="form-input-heading"
       >
         Order Manually
-      </h4>
+      </div>
       <div
         className="toggle-indicator"
       >

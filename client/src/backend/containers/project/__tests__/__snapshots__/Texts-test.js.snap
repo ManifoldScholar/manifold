@@ -99,7 +99,7 @@ Array [
           <header
             className="text-categories__header"
           >
-            <h4
+            <h2
               className="text-categories__label"
             >
               <span
@@ -109,7 +109,7 @@ Array [
                  
               </span>
               Hip Hop Classics
-            </h4>
+            </h2>
             <div
               className="text-categories__utility"
             >
@@ -215,7 +215,7 @@ Array [
       <header
         className="text-categories__header"
       >
-        <h4
+        <h2
           className="text-categories__label"
         >
           <span
@@ -223,7 +223,7 @@ Array [
           >
             Uncategorized
           </span>
-        </h4>
+        </h2>
       </header>
       <div
         className="texts-list"

@@ -85,6 +85,7 @@ export class FormCollaborators extends Component {
         <form className="form-secondary">
           <Form.HasMany
             label="Authors"
+            labelTag="h2"
             placeholder="Add an Author"
             onNew={value => {
               return this.newMaker(value, "creator");
@@ -103,6 +104,7 @@ export class FormCollaborators extends Component {
           />
           <Form.HasMany
             label="Contributors"
+            labelTag="h2"
             placeholder="Add a Contributor"
             onNew={value => {
               return this.newMaker(value, "contributor");

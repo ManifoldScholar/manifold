@@ -44,7 +44,7 @@ export default class ProjectCollectionDetail extends Component {
                 fill={iconFill}
               />
               <div className="body">
-                <h4 className="title">{projectCollection.attributes.title}</h4>
+                <h2 className="title">{projectCollection.attributes.title}</h2>
               </div>
             </div>
           </div>

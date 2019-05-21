@@ -100,12 +100,12 @@ export class SubscriptionsContainer extends Component {
               method="post"
               onSubmit={this.updateUser}
             >
-              <h2 className="form-heading">
+              <h1 className="form-heading">
                 Notification Settings
                 <span className="instructions">
                   Edit your email notifications and subscriptions.
                 </span>
-              </h2>
+              </h1>
               <Preferences.NotificationsForm
                 preferences={this.state.notificationPreferencesByKind}
                 changeHandler={this.handlePreferenceChange}

@@ -141,7 +141,7 @@ export class ProjectsContainer extends Component {
             <div className="main">
               <Utility.IconComposer size={56} icon="projects64" />
               <div className="body">
-                <h4 className="title">{"All Projects"}</h4>
+                <h2 className="title">{"All Projects"}</h2>
               </div>
             </div>
           </header>
@@ -181,6 +181,7 @@ export class ProjectsContainer extends Component {
           overflowX: "hidden"
         }}
       >
+        <h1 className="screen-reader-text">All Projects</h1>
         {this.renderProjectLibrary()}
         <Layout.ButtonNavigation
           showProjectCollections

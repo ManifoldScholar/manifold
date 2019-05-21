@@ -19,11 +19,11 @@ exports[`Frontend.ProjectList.Placeholder component renders correctly 1`] = `
           <div
             className="body"
           >
-            <h4
+            <h2
               className="title"
             >
               Uh-oh. This Manifold Library is empty.
-            </h4>
+            </h2>
           </div>
         </div>
       </header>

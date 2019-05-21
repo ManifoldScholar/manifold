@@ -6,6 +6,7 @@ exports[`Backend ResourceCollection New Container renders correctly 1`] = `
     className="backend-header"
   >
     <nav
+      aria-label="Breadcrumbs"
       className="backend-header__breadcrumbs breadcrumbs"
     >
       <div

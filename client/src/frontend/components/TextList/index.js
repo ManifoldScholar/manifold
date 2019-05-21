@@ -36,11 +36,11 @@ export default class TextList extends Component {
     if (!this.texts || this.texts.length === 0) return null;
 
     return (
-      <nav className={classNames(`${baseClass}__category`)}>
+      <div className={classNames(`${baseClass}__category`)}>
         {this.props.label && (
-          <h4 className={`${baseClass}__category-heading`}>
+          <h3 className={`${baseClass}__category-heading`}>
             {this.props.label}
-          </h4>
+          </h3>
         )}
         <ul
           className={classNames(`${baseClass}__list`, {
@@ -63,7 +63,7 @@ export default class TextList extends Component {
             );
           })}
         </ul>
-      </nav>
+      </div>
     );
   }
 }

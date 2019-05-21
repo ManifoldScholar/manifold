@@ -40,6 +40,11 @@ exports[`Frontend ProjectCollections Container renders correctly 1`] = `
       />
     </div>
   </a>
+  <h1
+    className="screen-reader-text"
+  >
+    Project Collections
+  </h1>
   <section
     className="project-collection-summary bg-neutral05"
   >
@@ -70,11 +75,11 @@ exports[`Frontend ProjectCollections Container renders correctly 1`] = `
           <div
             className="body"
           >
-            <h4
+            <h2
               className="title"
             >
               A Project Collection
-            </h4>
+            </h2>
           </div>
         </div>
       </a>
@@ -119,11 +124,11 @@ exports[`Frontend ProjectCollections Container renders correctly 1`] = `
           <div
             className="body"
           >
-            <h4
+            <h2
               className="title"
             >
               A Project Collection
-            </h4>
+            </h2>
           </div>
         </div>
       </a>

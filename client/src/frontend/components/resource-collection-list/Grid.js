@@ -8,7 +8,8 @@ export default class ResourceCollectionGrid extends Component {
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    resourceCollections: PropTypes.array.isRequired
+    resourceCollections: PropTypes.array.isRequired,
+    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
   };
 
   urlCreator = collection => {
@@ -20,11 +21,11 @@ export default class ResourceCollectionGrid extends Component {
   };
 
   render() {
-    const resourceCollections = this.props.resourceCollections;
+    const { resourceCollections, itemHeadingLevel } = this.props;
     if (!resourceCollections) return null;
 
     return (
-      <nav className="resource-collections-list">
+      <div className="resource-collections-list">
         <ul>
           {resourceCollections.map(collection => {
             return (
@@ -32,11 +33,12 @@ export default class ResourceCollectionGrid extends Component {
                 key={collection.id}
                 urlCreator={this.urlCreator}
                 resourceCollection={collection}
+                itemHeadingLevel={itemHeadingLevel}
               />
             );
           })}
         </ul>
-      </nav>
+      </div>
     );
   }
 }

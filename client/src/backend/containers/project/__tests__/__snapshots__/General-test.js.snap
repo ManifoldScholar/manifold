@@ -14,9 +14,9 @@ exports[`Backend Project General Container renders correctly 1`] = `
         <header
           className="form-section-label"
         >
-          <span>
+          <h2>
             Title
-          </span>
+          </h2>
         </header>
         <div
           className="form-input-group"
@@ -86,9 +86,9 @@ exports[`Backend Project General Container renders correctly 1`] = `
         <header
           className="form-section-label"
         >
-          <span>
+          <h2>
             Visibility
-          </span>
+          </h2>
         </header>
         <div
           className="form-input-group"
@@ -171,9 +171,9 @@ exports[`Backend Project General Container renders correctly 1`] = `
         <header
           className="form-section-label"
         >
-          <span>
+          <h2>
             Other
-          </span>
+          </h2>
         </header>
         <div
           className="form-input-group"
@@ -182,11 +182,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
             className="form-input"
             style={Object {}}
           >
-            <h4
+            <div
               className="form-input-heading"
             >
               Publication Date
-            </h4>
+            </div>
             <div
               className="form-date"
             >
@@ -408,11 +408,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
             className="form-input wide"
             style={Object {}}
           >
-            <h4
+            <div
               className="form-input-heading"
             >
               Subjects
-            </h4>
+            </div>
             <nav
               className="has-many-list"
             >
@@ -471,11 +471,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
                   <div
                     className="association"
                   >
-                    <h4
+                    <div
                       className="association-name"
                     >
                       Hip Hop
-                    </h4>
+                    </div>
                   </div>
                   <div
                     className="utility"
@@ -592,11 +592,11 @@ exports[`Backend Project General Container renders correctly 1`] = `
             <div
               className="form-input avatar-builder wide"
             >
-              <h4
+              <div
                 className="form-input-heading"
               >
                 Project Thumbnail
-              </h4>
+              </div>
               <div
                 className="grid"
               >

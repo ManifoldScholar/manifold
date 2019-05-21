@@ -78,6 +78,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
       <div className="entity-section-wrapper__body">
         {this.hasVisibleCollections && (
           <React.Fragment>
+            <h3 className="screen-reader-text">Resource Collections</h3>
             <ResourceCollectionList.Grid
               project={this.project}
               resourceCollections={this.visibleCollections}
@@ -89,6 +90,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
             />
           </React.Fragment>
         )}
+        <h3 className="screen-reader-text">Single Resources</h3>
         <ResourceList.Thumbnails
           project={this.project}
           resources={this.visibleResources}

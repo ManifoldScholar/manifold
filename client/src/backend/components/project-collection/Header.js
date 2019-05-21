@@ -64,8 +64,11 @@ export default class ProjectCollectionHeader extends PureComponent {
       <section className="backend-header">
         <div className="backend-header__inner backend-header__inner--empty">
           <header className="backend-header__empty-text">
-            Please select a Project Collection from the list to edit its content
-            and settings.
+            <h1 className="screen-reader-text">Project Collections</h1>
+            <span>
+              Please select a Project Collection from the list to edit its
+              content and settings.
+            </span>
           </header>
         </div>
       </section>

@@ -14,9 +14,9 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         <header
           className="form-section-label"
         >
-          <span>
+          <h2>
             Appearance
-          </span>
+          </h2>
         </header>
         <div
           className="form-input-group"
@@ -265,9 +265,9 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         <header
           className="form-section-label"
         >
-          <span>
+          <h2>
             Purchase Options
-          </span>
+          </h2>
         </header>
         <div
           className="form-input-group"
@@ -374,9 +374,9 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         <header
           className="form-section-label"
         >
-          <span>
+          <h2>
             Download Options
-          </span>
+          </h2>
         </header>
         <span
           className="instructions"

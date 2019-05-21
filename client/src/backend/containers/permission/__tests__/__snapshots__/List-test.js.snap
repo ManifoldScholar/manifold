@@ -79,7 +79,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
               <div
                 className="entity-row__text entity-row__text--valign-center entity-row__text--in-rows"
               >
-                <h4
+                <h3
                   className="entity-row__title entity-row__title--in-rows"
                 >
                   <span
@@ -102,7 +102,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
                   >
                     View Rowan Ida
                   </span>
-                </h4>
+                </h3>
               </div>
             </div>
           </a>

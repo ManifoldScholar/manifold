@@ -2,6 +2,7 @@
 
 exports[`Global.Utility.Pagination component renders correctly 1`] = `
 <nav
+  aria-label="Pagination"
   className="list-pagination"
 >
   <ul
@@ -129,6 +130,7 @@ exports[`Global.Utility.Pagination component renders correctly 1`] = `
 
 exports[`Global.Utility.Pagination component renders correctly when compact style 1`] = `
 <nav
+  aria-label="Pagination"
   className="list-pagination list-pagination--compact"
 >
   <ul

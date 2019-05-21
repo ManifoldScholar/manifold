@@ -162,17 +162,15 @@
   }
 
   &__title {
-    h4 {
-      @include templateHead;
-      margin: 0;
-      margin-bottom: 6px;
-      font-size: 16px;
-      font-weight: $regular;
-      color: $neutral75;
+    @include templateHead;
+    margin: 0;
+    margin-bottom: 6px;
+    font-size: 16px;
+    font-weight: $regular;
+    color: $neutral75;
 
-      @include respond($break85) {
-        font-size: 17px;
-      }
+    @include respond($break85) {
+      font-size: 17px;
     }
   }
 

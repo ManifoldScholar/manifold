@@ -13,7 +13,7 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
       method="post"
       onSubmit={[Function]}
     >
-      <h2
+      <h1
         className="form-heading"
       >
         Notification Settings
@@ -22,15 +22,15 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
         >
           Edit your email notifications and subscriptions.
         </span>
-      </h2>
+      </h1>
       <div
         className="subscriptions"
       >
-        <h3
+        <h2
           className="section-heading-secondary"
         >
           Project Activity
-        </h3>
+        </h2>
         <div
           className="form-group"
         >
@@ -118,11 +118,11 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
             </label>
           </div>
         </div>
-        <h3
+        <h2
           className="section-heading-secondary"
         >
           Other Activity
-        </h3>
+        </h2>
         <div
           className="form-group"
         >

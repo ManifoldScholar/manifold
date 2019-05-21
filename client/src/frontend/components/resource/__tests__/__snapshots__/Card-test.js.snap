@@ -82,10 +82,9 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
     tabIndex="0"
   >
     <div>
-      <header
-        className="resource-card__title"
-      >
+      <header>
         <h4
+          className="resource-card__title"
           dangerouslySetInnerHTML={
             Object {
               "__html": "Image",

@@ -264,7 +264,7 @@ export default class EntitiesListRow extends PureComponent {
             )}
             <div className={this.textClassNames}>
               {this.title && (
-                <h4 className={this.titleClassNames}>
+                <h3 className={this.titleClassNames}>
                   <span className="entity-row__title-inner">
                     {this.inlineLink(this.title)}
                   </span>
@@ -275,19 +275,19 @@ export default class EntitiesListRow extends PureComponent {
                   >
                     {`View ${this.titlePlainText}`}
                   </span>
-                </h4>
+                </h3>
               )}
               {!this.title && this.hasLabels && (
                 <LabelSet labels={this.labels} />
               )}
               {this.hasSubtitle && (
-                <h5 className={this.subtitleClassNames}>{this.subtitle}</h5>
+                <h4 className={this.subtitleClassNames}>{this.subtitle}</h4>
               )}
               {this.hasCount && (
-                <h5 className={this.countClassNames}>{this.count}</h5>
+                <h4 className={this.countClassNames}>{this.count}</h4>
               )}
               {this.hasMeta && (
-                <h6 className={this.metaClassNames}>{this.meta}</h6>
+                <div className={this.metaClassNames}>{this.meta}</div>
               )}
             </div>
             {this.utility && (

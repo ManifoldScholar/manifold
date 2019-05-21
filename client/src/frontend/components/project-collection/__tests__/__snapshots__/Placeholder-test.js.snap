@@ -19,11 +19,11 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
           <div
             className="body"
           >
-            <h4
+            <h2
               className="title"
             >
               Oh no. There are no project collections in this Manifold Library.
-            </h4>
+            </h2>
           </div>
         </div>
       </header>

@@ -60,9 +60,9 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
             <header
               className="form-section-label"
             >
-              <span>
+              <h2>
                 Permissions
-              </span>
+              </h2>
             </header>
             <div
               className="form-input-group"

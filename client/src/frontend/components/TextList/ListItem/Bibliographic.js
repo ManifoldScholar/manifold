@@ -33,7 +33,7 @@ export default class TextListListItemBibliographic extends Component {
     return (
       <div className={`${baseClass}__bibliographic`}>
         <Link to={this.readUrl}>
-          <h3 className={`${baseClass}__name`}>
+          <h4 className={`${baseClass}__name`}>
             <span
               className={`${baseClass}__title`}
               dangerouslySetInnerHTML={{
@@ -45,7 +45,7 @@ export default class TextListListItemBibliographic extends Component {
                 {this.props.subtitle}
               </span>
             )}
-          </h3>
+          </h4>
         </Link>
         {this.props.creatorNames && (
           <div className={`${baseClass}__creators`}>

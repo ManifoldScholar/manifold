@@ -36,7 +36,7 @@ exports[`Frontend.TextList.ListItem.Content component renders correctly 1`] = `
         href="/foo"
         onClick={[Function]}
       >
-        <h3
+        <h4
           className="text-block__name"
         >
           <span
@@ -47,7 +47,7 @@ exports[`Frontend.TextList.ListItem.Content component renders correctly 1`] = `
               }
             }
           />
-        </h3>
+        </h4>
       </a>
       <div
         className="text-block__creators"

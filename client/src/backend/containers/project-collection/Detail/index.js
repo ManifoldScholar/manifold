@@ -161,6 +161,7 @@ export class ProjectCollectionDetail extends PureComponent {
         ability="update"
       >
         <div>
+          <h2 className="screen-reader-text">Project List</h2>
           <ProjectCollection.SortBy
             sortChangeHandler={this.handleSortOrderChange}
             projectCollection={this.props.projectCollection}
