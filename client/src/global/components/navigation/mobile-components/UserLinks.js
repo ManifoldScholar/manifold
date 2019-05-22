@@ -61,7 +61,10 @@ export default class UserLinks extends PureComponent {
     const { currentUser } = this.props.authentication;
 
     return (
-      <ul className="nested-nav__list nested-nav__list--user-links">
+      <ul
+        aria-label="User Links"
+        className="nested-nav__list nested-nav__list--user-links"
+      >
         <li className="nested-nav__item">
           <div
             className="nested-nav__grid-item"

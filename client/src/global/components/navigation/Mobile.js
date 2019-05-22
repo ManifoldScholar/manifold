@@ -174,11 +174,19 @@ export class NavigationMobile extends Component {
 
     return (
       <li key={`${link.label}-${index}`} className={wrapperClasses}>
+        {link.route
+          ? this.renderManifoldLink(link)
+          : this.renderExternalLink(link)}
         {hasChildren && (
           <button
             onClick={this.createExpandToggleHandler(link.route)}
             className="nested-nav__disclosure-button"
+            aria-haspopup="true"
+            aria-expanded={expanded}
           >
+            <span className="screen-reader-text">
+              {`${expanded ? "Close" : "Open"} submenu`}
+            </span>
             <IconComposer
               icon="disclosureDown16"
               size="default"
@@ -186,9 +194,6 @@ export class NavigationMobile extends Component {
             />
           </button>
         )}
-        {link.route
-          ? this.renderManifoldLink(link)
-          : this.renderExternalLink(link)}
         {hasChildren && (
           <ul className="nested-nav__list nested-nav__list--nested">
             {children.map(child => this.renderItem(child))}
@@ -207,7 +212,10 @@ export class NavigationMobile extends Component {
           }}
         >
           <div className="nested-nav__content">
-            <ul className="nested-nav__list nested-nav__list--primary-links">
+            <ul
+              aria-label="Page Links"
+              className="nested-nav__list nested-nav__list--primary-links"
+            >
               {this.props.links.map((link, index) => {
                 if (link.ability)
                   return (
@@ -247,10 +255,18 @@ export class NavigationMobile extends Component {
           links={this.props.links}
           location={this.props.location}
         />
-        <nav className={navClasses}>
+        <nav className={navClasses} aria-label="Mobile Navigation">
           {this.state.open && this.renderNavigationMenu()}
         </nav>
-        <button onClick={this.toggleOpen} className="mobile-nav-trigger">
+        <button
+          onClick={this.toggleOpen}
+          className="mobile-nav-trigger"
+          aria-haspopup
+          aria-expanded={this.state.open}
+        >
+          <span className="screen-reader-text">
+            {`${this.state.open ? "Close" : "Open"} mobile navigation menu`}
+          </span>
           <IconComposer
             icon={this.triggerIcon}
             size="default"
