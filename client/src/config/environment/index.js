@@ -15,7 +15,7 @@ const environmentSpecificConfig = {
   },
   production: {
     isProduction: true,
-    isDevelopment: true
+    isDevelopment: false
   }
 }[name];
 
