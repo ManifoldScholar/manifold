@@ -12,8 +12,8 @@ module SystemUpgrades
     attr_reader :upgrade_interactions
 
     # @return [String]
+    # rubocop:disable Lint/UnderscorePrefixedVariableName
     def execute
-
       applied = false
 
       upgrade_interactions.each do |upgrade_interaction|
@@ -26,9 +26,11 @@ module SystemUpgrades
 
       output.string
     end
+    # rubocop:enable Lint/UnderscorePrefixedVariableName
 
     private
 
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def reindex_records
       logger.info("[-ANY-]===================================================================")
       logger.info("[-ANY-]Reindex All Records                                                ")
@@ -48,6 +50,7 @@ module SystemUpgrades
         elastic_connection_error
       end
     end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     def load_upgrades!
       @upgrade_interactions = SystemUpgrades.eager_load_upgrades!

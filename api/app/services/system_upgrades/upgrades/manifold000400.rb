@@ -8,6 +8,7 @@ module SystemUpgrades
 
       private
 
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       def create_twitter_queries
         logger.info("===================================================================")
         logger.info("Create Twitter Queries                                             ")
@@ -31,6 +32,7 @@ module SystemUpgrades
           end
         end
       end
+      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
       def build_query(following)
         parts = []
@@ -49,8 +51,7 @@ module SystemUpgrades
         end
         parts.join(" ")
       end
-      # rubocop:enable Metrics/AbcSize
-      # rubocop:enable Metrics/MethodLength
+
     end
   end
 end
