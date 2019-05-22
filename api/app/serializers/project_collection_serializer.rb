@@ -17,6 +17,15 @@ class ProjectCollectionSerializer < ApplicationSerializer
               .projects_with_read_ability serializer.current_user
   end
 
+  def page_params(association_name)
+    return [1, object.homepage_count] if
+      instance_options[:paginate_for_homepage] && association_name == :collection_projects
+
+    per = pagination.dig(association_name, :size)
+    page = pagination.dig(association_name, :number) || 1
+    [page, per]
+  end
+
   def manually_sorted
     object.manually_sorted?
   end

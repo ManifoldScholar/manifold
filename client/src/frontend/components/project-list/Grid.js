@@ -75,11 +75,17 @@ export default class ProjectListGrid extends Component {
     );
   }
 
+  shouldShowViewAll(props) {
+    if (props.showViewAll) return true;
+    if (!props.projects || props.projects.length === 0) return false;
+    if (props.limit === null) return false;
+    if (props.projects.length <= props.limit) return false;
+    if (!props.viewAllUrl) return false;
+    return true;
+  }
+
   renderViewAll(props) {
-    if (!props.projects || props.projects.length === 0) return null;
-    if (props.limit === null) return null;
-    if (props.projects.length <= props.limit) return null;
-    if (!props.viewAllUrl) return null;
+    if (!this.shouldShowViewAll(props)) return null;
 
     return (
       <div
