@@ -148,6 +148,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
             {...props}
           />
         }
+        renderWithoutLink
       />
     );
   };

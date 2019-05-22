@@ -13,7 +13,8 @@ export default class ProjectRow extends PureComponent {
     placeholderMode: PropTypes.string,
     listStyle: PropTypes.oneOf(["rows", "grid"]),
     figure: PropTypes.node,
-    compact: PropTypes.bool
+    compact: PropTypes.bool,
+    renderWithoutLink: PropTypes.bool
   };
 
   static defaultProps = {
@@ -61,6 +62,7 @@ export default class ProjectRow extends PureComponent {
   }
 
   get url() {
+    if (this.props.renderWithoutLink) return null;
     if (
       this.project.attributes.abilities &&
       (this.project.attributes.abilities.update === true ||

@@ -748,6 +748,8 @@
       position: absolute;
       top: 0;
       left: 0;
+      width: 28px;
+      height: 28px;
       transition: transform $duration $timing;
 
       @include respond($break75) {
