@@ -57,7 +57,7 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
               className="project-hero__figure project-hero__figure--constrained"
             >
               <svg
-                aria-label="Default Project Thumbnail"
+                aria-label={null}
                 className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
                 height={134}
                 viewBox="0 0 134 134"
@@ -141,7 +141,7 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
                 </g>
               </svg>
               <svg
-                aria-label="Default Project Thumbnail"
+                aria-label={null}
                 className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
                 height="100%"
                 viewBox="0 0 48 48"

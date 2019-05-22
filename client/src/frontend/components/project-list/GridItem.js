@@ -30,7 +30,7 @@ export default class ProjectGridItem extends Component {
     const attr = project.attributes;
     if (attr.publicationDate && !this.props.hideDate) {
       return (
-        <div className="date">
+        <div className="date" aria-hidden>
           <FormattedDate
             prefix="Published"
             format="MMMM, YYYY"
@@ -44,7 +44,11 @@ export default class ProjectGridItem extends Component {
 
   renderProjectDesc(project) {
     if (this.props.hideDesc || !project.attributes.subtitle) return null;
-    return <p className="description">{project.attributes.subtitle}</p>;
+    return (
+      <p className="description" aria-hidden>
+        {project.attributes.subtitle}
+      </p>
+    );
   }
 
   renderProjectStatusMarker(project) {
@@ -52,7 +56,11 @@ export default class ProjectGridItem extends Component {
     let marker = null;
 
     if (project.attributes.draft) {
-      marker = <div className="block-label">{"Draft"}</div>;
+      marker = (
+        <div className="block-label" aria-hidden>
+          {"Draft"}
+        </div>
+      );
     }
 
     return marker;
@@ -62,7 +70,7 @@ export default class ProjectGridItem extends Component {
     const creators = project.relationships.creators;
     if (!creators || creators.length === 0) return null;
     return (
-      <div className="relations-list">
+      <div className="relations-list" aria-hidden>
         <span>
           {creators.map(maker => maker.attributes.fullName).join(", ")}
         </span>
@@ -77,7 +85,7 @@ export default class ProjectGridItem extends Component {
       alert: project.attributes.recentlyUpdated
     });
     return (
-      <div className={classes}>
+      <div className={classes} aria-hidden>
         <FormattedDate
           prefix="Updated"
           format="MMMM, YYYY"
@@ -117,18 +125,20 @@ export default class ProjectGridItem extends Component {
     });
 
     return (
-      <Link to={lh.link("frontendProject", project.attributes.slug)}>
-        <figure className={figureClass}>
-          <GlobalProject.Avatar project={project} />
-          <Project.Follow
-            project={project}
-            authenticated={this.props.authenticated}
-            favorites={this.props.favorites}
-            dispatch={this.props.dispatch}
-          />
-        </figure>
-        {projectMeta}
-      </Link>
+      <React.Fragment>
+        <Link to={lh.link("frontendProject", project.attributes.slug)}>
+          <figure className={figureClass}>
+            <GlobalProject.Avatar project={project} />
+          </figure>
+          {projectMeta}
+        </Link>
+        <Project.Follow
+          project={project}
+          authenticated={this.props.authenticated}
+          favorites={this.props.favorites}
+          dispatch={this.props.dispatch}
+        />
+      </React.Fragment>
     );
   }
 }

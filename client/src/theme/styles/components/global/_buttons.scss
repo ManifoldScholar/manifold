@@ -650,25 +650,48 @@
 }
 
 .project-cover-button-wrapper {
+  @include buttonUnstyled;
   position: absolute;
-  top: 10.526%;
+  top: 10px;
   left: -15px;
   width: 28px;
   height: 28px;
 
   @include respond($break75) {
+    top: 15px;
     width: 30px;
     height: 30px;
   }
 
+  .project-list__item--pos-rel & {
+    // aligned to <li> to separate button from anchor
+    top: 25px;
+    left: 0;
+
+    @include respond($break75) {
+      top: calc(2.105vw + 15px);
+      left: calc(2.105vw - 15px);
+    }
+
+    @include respond($break120) {
+      top: 40px;
+      left: 10px;
+    }
+  }
+
   &.active {
     width: 100%;
+  }
+
+  &:focus {
+    outline-width: 0;
   }
 }
 
 .project-cover-button {
   @include templateHead;
   position: absolute;
+  top: 0;
   left: 0;
   display: block;
   max-width: 100%;

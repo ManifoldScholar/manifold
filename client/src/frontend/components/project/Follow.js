@@ -4,7 +4,9 @@ import get from "lodash/get";
 import { currentUserActions } from "actions";
 import Project from "global/components/project";
 
-export default class ProjectFollow extends Component {
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
+
+class ProjectFollow extends Component {
   static displayName = "Project.Follow";
 
   static propTypes = {
@@ -14,6 +16,14 @@ export default class ProjectFollow extends Component {
     project: PropTypes.object
   };
 
+  get followMessage() {
+    return "You are now following this project";
+  }
+
+  get unfollowMessage() {
+    return "You are no longer following this project.";
+  }
+
   getFollowed(props) {
     return get(props.favorites, props.project.id);
   }
@@ -21,12 +31,14 @@ export default class ProjectFollow extends Component {
   handleFollow = () => {
     const { id, type } = this.props.project;
     this.props.dispatch(currentUserActions.follow({ id, type }));
+    this.props.setScreenReaderStatus(this.followMessage);
   };
 
   handleUnfollow = followed => {
     this.props.dispatch(
       currentUserActions.unfollow(this.props.project.id, followed.id)
     );
+    this.props.setScreenReaderStatus(this.unfollowMessage);
   };
 
   render() {
@@ -45,3 +57,5 @@ export default class ProjectFollow extends Component {
     );
   }
 }
+
+export default withScreenReaderStatus(ProjectFollow);

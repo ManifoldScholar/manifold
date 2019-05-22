@@ -32,6 +32,10 @@
     }
   }
 
+  &__item--pos-rel {
+    position: relative;
+  }
+
   // Optional grid-style layout for larger viewports
   &.grid {
     a, .item-wrapper {

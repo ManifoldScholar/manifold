@@ -82,13 +82,14 @@ export default class CoverButton extends Component {
   };
 
   screenReaderButtonText() {
+    const { addText, removeText, project } = this.props;
     switch (this.state.view) {
       case "add":
       case "add-active":
-        return "add " + this.props.project.attributes.titlePlaintext;
+        return `${addText} ${project.attributes.titlePlaintext}`;
       case "remove":
       case "remove-active":
-        return "Follow " + this.props.project.attributes.titlePlaintext;
+        return `${removeText} ${project.attributes.titlePlaintext}`;
       default:
         return null;
     }
@@ -157,13 +158,13 @@ export default class CoverButton extends Component {
         <button className="screen-reader-text" onClick={this.toggleFollow}>
           {this.screenReaderButtonText()}
         </button>
-        <div
+        <button
           onClick={this.handleClick}
           onMouseEnter={this.activate}
           onMouseLeave={this.deactivate}
           className={wrapperClasses}
-          role="presentation"
           aria-hidden="true"
+          tabIndex={-1}
         >
           <div className="project-cover-button" aria-hidden="true">
             <div className="icons">
@@ -191,7 +192,7 @@ export default class CoverButton extends Component {
               {this.renderButton(this.state.view)}
             </ReactCSSTransitionGroup>
           </div>
-        </div>
+        </button>
       </div>
     );
   }

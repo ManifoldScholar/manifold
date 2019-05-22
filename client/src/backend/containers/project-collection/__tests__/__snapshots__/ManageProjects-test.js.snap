@@ -2,6 +2,12 @@
 
 exports[`Backend.ProjectCollection.ManageProjects container renders correctly 1`] = `
 Array [
+  <div
+    aria-atomic={true}
+    aria-live="polite"
+    className="screen-reader-text"
+    role="status"
+  />,
   <header
     className="drawer-header"
   >
@@ -314,7 +320,7 @@ Array [
                 className="cover"
               >
                 <svg
-                  aria-label="Default Project Thumbnail"
+                  aria-label={null}
                   className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
                   height={134}
                   viewBox="0 0 134 134"
@@ -398,7 +404,7 @@ Array [
                   </g>
                 </svg>
                 <svg
-                  aria-label="Default Project Thumbnail"
+                  aria-label={null}
                   className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
                   height="100%"
                   viewBox="0 0 48 48"
@@ -474,15 +480,15 @@ Array [
                     className="screen-reader-text"
                     onClick={[Function]}
                   >
-                    Follow Rowan Test
+                    Exclude Rowan Test
                   </button>
-                  <div
+                  <button
                     aria-hidden="true"
                     className="remove project-cover-button-wrapper"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
-                    role="presentation"
+                    tabIndex={-1}
                   >
                     <div
                       aria-hidden="true"
@@ -551,7 +557,7 @@ Array [
                         </span>
                       </span>
                     </div>
-                  </div>
+                  </button>
                 </div>
               </figure>
             </div>
@@ -603,7 +609,7 @@ Array [
                 className="cover"
               >
                 <svg
-                  aria-label="Default Project Thumbnail"
+                  aria-label={null}
                   className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
                   height={134}
                   viewBox="0 0 134 134"
@@ -687,7 +693,7 @@ Array [
                   </g>
                 </svg>
                 <svg
-                  aria-label="Default Project Thumbnail"
+                  aria-label={null}
                   className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
                   height="100%"
                   viewBox="0 0 48 48"
@@ -763,15 +769,15 @@ Array [
                     className="screen-reader-text"
                     onClick={[Function]}
                   >
-                    Follow Rowan Test
+                    Exclude Rowan Test
                   </button>
-                  <div
+                  <button
                     aria-hidden="true"
                     className="remove project-cover-button-wrapper"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
-                    role="presentation"
+                    tabIndex={-1}
                   >
                     <div
                       aria-hidden="true"
@@ -840,7 +846,7 @@ Array [
                         </span>
                       </span>
                     </div>
-                  </div>
+                  </button>
                 </div>
               </figure>
             </div>

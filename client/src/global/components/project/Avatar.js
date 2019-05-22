@@ -16,9 +16,7 @@ export default class ProjectAvatar extends Component {
       meta.width >= meta.height
         ? project.attributes.avatarStyles.smallSquare
         : project.attributes.avatarStyles.small;
-    return (
-      <img src={imageStyle} alt={`View ${project.attributes.titlePlaintext}`} />
-    );
+    return <img src={imageStyle} alt="" />;
   }
 
   renderPlaceholderImage(project) {
@@ -28,6 +26,7 @@ export default class ProjectAvatar extends Component {
         <UniqueIcons.ProjectPlaceholderUnique
           mode="responsive"
           color={project.attributes.avatarColor}
+          ariaLabel={false}
         />
       </React.Fragment>
     );

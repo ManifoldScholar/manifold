@@ -5,7 +5,7 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
   className="cover"
 >
   <svg
-    aria-label="Default Project Thumbnail"
+    aria-label={null}
     className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
     height={134}
     viewBox="0 0 134 134"
@@ -89,7 +89,7 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
     </g>
   </svg>
   <svg
-    aria-label="Default Project Thumbnail"
+    aria-label={null}
     className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
     height="100%"
     viewBox="0 0 48 48"
@@ -165,15 +165,15 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
       className="screen-reader-text"
       onClick={[Function]}
     >
-      add Rowan Test
+      Include Rowan Test
     </button>
-    <div
+    <button
       aria-hidden="true"
       className="add project-cover-button-wrapper"
       onClick={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
-      role="presentation"
+      tabIndex={-1}
     >
       <div
         aria-hidden="true"
@@ -242,7 +242,7 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
           </span>
         </span>
       </div>
-    </div>
+    </button>
   </div>
 </figure>
 `;
