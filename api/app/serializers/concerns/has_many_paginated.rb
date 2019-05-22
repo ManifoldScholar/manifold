@@ -6,13 +6,12 @@ module HasManyPaginated
   class_methods do
     def has_many_paginated(association_name, **options)
       __send__(:has_many, association_name, options) do |serializer|
-        paginated = if block_given?
-                      yield serializer
-                    else
-                      serializer.object.__send__ association_name
-                    end
-        paginated = serializer.paginate_scope paginated, association_name
-
+        scope = if block_given?
+                  yield serializer
+                else
+                  serializer.object.__send__ association_name
+                end
+        paginated = serializer.paginate_scope scope, association_name
         links = serializer.has_many_links association_name, paginated
         links.each { |key, value| link key, value }
 

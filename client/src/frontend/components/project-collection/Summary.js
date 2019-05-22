@@ -35,6 +35,10 @@ export default class ProjectCollectionSummary extends Component {
     return this.mappedProjects(this.collection);
   }
 
+  get projectsCount() {
+    return this.collection.attributes.projectsCount;
+  }
+
   get hasProjects() {
     return this.projects.length > 0;
   }
@@ -98,6 +102,7 @@ export default class ProjectCollectionSummary extends Component {
               projects={this.projects}
               dispatch={this.props.dispatch}
               limit={this.limit}
+              showViewAll={this.projects.length < this.projectsCount}
               viewAllUrl={lh.link(
                 "frontendProjectCollection",
                 this.collection.attributes.slug
