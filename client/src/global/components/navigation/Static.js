@@ -100,7 +100,7 @@ export class NavigationStatic extends PureComponent {
   renderUserMenu(props) {
     return (
       <nav className="user-links show-75">
-        <ul style={this.props.style}>
+        <ul aria-label="User Links" style={this.props.style}>
           {this.props.backendButton && <li>{this.props.backendButton}</li>}
           {this.renderSearch(props)}
           <li>
@@ -129,7 +129,11 @@ export class NavigationStatic extends PureComponent {
     return (
       <React.Fragment>
         <nav className="page-nav show-75" aria-label="Primary Navigation">
-          <ul style={this.props.style} className="links">
+          <ul
+            aria-label="Page Links"
+            style={this.props.style}
+            className="links"
+          >
             {this.props.links.map((link, index) => {
               if (link.ability)
                 return (

@@ -62,7 +62,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                     <Route>
                                       <Navigation.Static backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
                                         <nav className=\\"page-nav show-75\\" aria-label=\\"Primary Navigation\\">
-                                          <ul style={[undefined]} className=\\"links\\">
+                                          <ul aria-label=\\"Page Links\\" style={[undefined]} className=\\"links\\">
                                             <li>
                                               <NavLink to=\\"/backend/dashboard\\" exact={false} target={{...}} activeClassName=\\"active\\" aria-current=\\"page\\">
                                                 <Route path=\\"\\\\\\\\/backend\\\\\\\\/dashboard\\" exact={false} strict={[undefined]} location={[undefined]}>
@@ -94,7 +94,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                           </ul>
                                         </nav>
                                         <nav className=\\"user-links show-75\\">
-                                          <ul style={[undefined]}>
+                                          <ul aria-label=\\"User Links\\" style={[undefined]}>
                                             <li>
                                               <Link className=\\"header-app__mode-button\\" to=\\"/\\" replace={false}>
                                                 <a className=\\"header-app__mode-button\\" onClick={[Function]} href=\\"/\\">
@@ -143,8 +143,11 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                         <MobileBreadcrumb links={{...}} location={{...}}>
                                           <nav className=\\"breadcrumb-list hide-75\\" />
                                         </MobileBreadcrumb>
-                                        <nav className=\\"hide-75 nested-nav\\" />
-                                        <button onClick={[Function]} className=\\"mobile-nav-trigger\\">
+                                        <nav className=\\"hide-75 nested-nav\\" aria-label=\\"Mobile Navigation\\" />
+                                        <button onClick={[Function]} className=\\"mobile-nav-trigger\\" aria-haspopup={true} aria-expanded={false}>
+                                          <span className=\\"screen-reader-text\\">
+                                            Open mobile navigation menu
+                                          </span>
                                           <IconComposer icon=\\"menu32\\" size=\\"default\\" iconClass=\\"mobile-nav-trigger__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
                                             <Menu svgProps={{...}} iconClass=\\"mobile-nav-trigger__icon svg-icon--menu32\\" icon=\\"menu32\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
                                               <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg mobile-nav-trigger__icon svg-icon--menu32\\" width={32} height={32} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>

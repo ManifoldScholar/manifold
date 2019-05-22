@@ -59,6 +59,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
         className="page-nav show-75"
       >
         <ul
+          aria-label="Page Links"
           className="links"
         >
           <li>
@@ -106,7 +107,9 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
       <nav
         className="user-links show-75"
       >
-        <ul>
+        <ul
+          aria-label="User Links"
+        >
           <li>
             <a
               className="header-app__mode-button"
@@ -158,12 +161,20 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
         className="breadcrumb-list hide-75"
       />
       <nav
+        aria-label="Mobile Navigation"
         className="hide-75 nested-nav"
       />
       <button
+        aria-expanded={false}
+        aria-haspopup={true}
         className="mobile-nav-trigger"
         onClick={[Function]}
       >
+        <span
+          className="screen-reader-text"
+        >
+          Open mobile navigation menu
+        </span>
         <svg
           aria-hidden={true}
           className="manicon-svg mobile-nav-trigger__icon svg-icon--menu32"
