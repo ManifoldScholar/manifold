@@ -14,7 +14,10 @@ module Api
       # GET /project-collections
       def index
         @project_collections = load_project_collections
-        render_multiple_resources @project_collections, include: INCLUDES
+        render_multiple_resources @project_collections,
+                                  paginate_for_homepage: filtering_for_home_page,
+                                  pagination: params[:page],
+                                  include: INCLUDES
       end
 
       # GET /project-collections/1
@@ -50,6 +53,11 @@ module Api
       end
 
       protected
+
+      def filtering_for_home_page
+        return false unless project_collection_filter_params
+        Utilities::Truthy.truthy? project_collection_filter_params[:visible_on_homepage]
+      end
 
       def scope_for_project_collections
         ProjectCollection.friendly.includes(

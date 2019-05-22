@@ -19,7 +19,11 @@ export class ProjectsCollectionsContainer extends Component {
     const query = queryString.parse(location.search);
     const pagination = {
       number: query.page || 1,
-      size: perPage
+      size: perPage,
+      collectionProjects: {
+        number: 1,
+        size: 4
+      }
     };
 
     const collectionsFetch = projectCollectionsAPI.index(
