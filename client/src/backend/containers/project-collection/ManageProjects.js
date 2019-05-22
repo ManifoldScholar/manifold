@@ -13,6 +13,7 @@ import EntitiesList, {
   ProjectRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { projectFilters } from "hoc/with-filtered-lists";
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
 import IconComposer from "global/components/utility/IconComposer";
 
 const { request } = entityStoreActions;
@@ -67,6 +68,16 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     );
   }
 
+  projectAddMessage(project) {
+    const title = project.attributes.title;
+    return `You have added ${title} to the collection.`;
+  }
+
+  projectRemoveMessage(project) {
+    const title = project.attributes.title;
+    return `You have removed ${title} from the collection.`;
+  }
+
   filtersChanged(prevProps) {
     return (
       prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
@@ -116,6 +127,8 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
   };
 
   handleProjectAdd = project => {
+    this.props.setScreenReaderStatus(this.projectAddMessage(project));
+
     const projects = this.projectsForProjectCollection(
       this.props.projectCollection
     );
@@ -125,6 +138,8 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
   };
 
   handleProjectRemove = project => {
+    this.props.setScreenReaderStatus(this.projectRemoveMessage(project));
+
     const projects = this.projectsForProjectCollection(
       this.props.projectCollection
     );
@@ -226,7 +241,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
 }
 
 export const ProjectCollectionManageProjects = withFilteredLists(
-  ProjectCollectionManageProjectsImplementation,
+  withScreenReaderStatus(ProjectCollectionManageProjectsImplementation),
   {
     projects: projectFilters()
   }

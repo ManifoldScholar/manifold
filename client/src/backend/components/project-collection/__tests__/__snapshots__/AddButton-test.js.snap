@@ -6,15 +6,15 @@ exports[`Backend.ProjectCollection.AddButton component renders correctly 1`] = `
     className="screen-reader-text"
     onClick={[Function]}
   >
-    add Rowan Test
+    Include Rowan Test
   </button>
-  <div
+  <button
     aria-hidden="true"
     className="add project-cover-button-wrapper"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    role="presentation"
+    tabIndex={-1}
   >
     <div
       aria-hidden="true"
@@ -83,6 +83,6 @@ exports[`Backend.ProjectCollection.AddButton component renders correctly 1`] = `
         </span>
       </span>
     </div>
-  </div>
+  </button>
 </div>
 `;

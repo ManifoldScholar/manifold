@@ -5,7 +5,9 @@ exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
   className="project-list grid entity-section-wrapper__body"
 >
   <ul>
-    <li>
+    <li
+      className="project-list__item--pos-rel"
+    >
       <a
         href="/projects/slug-1"
         onClick={[Function]}
@@ -14,7 +16,7 @@ exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
           className="cover"
         >
           <svg
-            aria-label="Default Project Thumbnail"
+            aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--desktop project-thumb-placeholder--primary"
             height={134}
             viewBox="0 0 134 134"
@@ -98,7 +100,7 @@ exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
             </g>
           </svg>
           <svg
-            aria-label="Default Project Thumbnail"
+            aria-label={null}
             className="project-thumb-placeholder project-thumb-placeholder--mobile project-thumb-placeholder--primary"
             height="100%"
             viewBox="0 0 48 48"
@@ -169,90 +171,6 @@ exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
               </g>
             </g>
           </svg>
-          <div>
-            <button
-              className="screen-reader-text"
-              onClick={[Function]}
-            >
-              add Rowan Test
-            </button>
-            <div
-              aria-hidden="true"
-              className="add project-cover-button-wrapper"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-              role="presentation"
-            >
-              <div
-                aria-hidden="true"
-                className="project-cover-button"
-              >
-                <div
-                  className="icons"
-                >
-                  <svg
-                    aria-hidden="true"
-                    className="manicon-svg minus svg-icon--MinusUnique"
-                    fill="currentColor"
-                    height={28}
-                    viewBox="0 0 32 32"
-                    width={28}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      height="2"
-                      width="14"
-                      x="9"
-                      y="15"
-                    />
-                  </svg>
-                  <svg
-                    aria-hidden="true"
-                    className="manicon-svg check svg-icon--CheckUnique"
-                    fill="currentColor"
-                    height={28}
-                    viewBox="0 0 32 32"
-                    width={28}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <polygon
-                      points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
-                    />
-                  </svg>
-                  <svg
-                    aria-hidden="true"
-                    className="manicon-svg plus svg-icon--PlusUnique"
-                    fill="currentColor"
-                    height={28}
-                    viewBox="0 0 32 32"
-                    width={28}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      height="2"
-                      width="14"
-                      x="9"
-                      y="15"
-                    />
-                    <rect
-                      height="14"
-                      width="2"
-                      x="15"
-                      y="9"
-                    />
-                  </svg>
-                </div>
-                <span>
-                  <span
-                    className="action-text"
-                  >
-                    Follow
-                  </span>
-                </span>
-              </div>
-            </div>
-          </div>
         </figure>
         <div
           className="meta"
@@ -271,6 +189,96 @@ exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
           </h3>
         </div>
       </a>
+      <div
+        aria-atomic={true}
+        aria-live="polite"
+        className="screen-reader-text"
+        role="status"
+      />
+      <div>
+        <button
+          className="screen-reader-text"
+          onClick={[Function]}
+        >
+          Follow Rowan Test
+        </button>
+        <button
+          aria-hidden="true"
+          className="add project-cover-button-wrapper"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          tabIndex={-1}
+        >
+          <div
+            aria-hidden="true"
+            className="project-cover-button"
+          >
+            <div
+              className="icons"
+            >
+              <svg
+                aria-hidden="true"
+                className="manicon-svg minus svg-icon--MinusUnique"
+                fill="currentColor"
+                height={28}
+                viewBox="0 0 32 32"
+                width={28}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="2"
+                  width="14"
+                  x="9"
+                  y="15"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="manicon-svg check svg-icon--CheckUnique"
+                fill="currentColor"
+                height={28}
+                viewBox="0 0 32 32"
+                width={28}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <polygon
+                  points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="manicon-svg plus svg-icon--PlusUnique"
+                fill="currentColor"
+                height={28}
+                viewBox="0 0 32 32"
+                width={28}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="2"
+                  width="14"
+                  x="9"
+                  y="15"
+                />
+                <rect
+                  height="14"
+                  width="2"
+                  x="15"
+                  y="9"
+                />
+              </svg>
+            </div>
+            <span>
+              <span
+                className="action-text"
+              >
+                Follow
+              </span>
+            </span>
+          </div>
+        </button>
+      </div>
     </li>
   </ul>
 </div>

@@ -120,7 +120,7 @@ export default class ProjectListGrid extends Component {
           >
             {projects.map(project => {
               return (
-                <li key={project.id}>
+                <li key={project.id} className="project-list__item--pos-rel">
                   <GridItem
                     authenticated={this.props.authenticated}
                     favorites={this.props.favorites}
