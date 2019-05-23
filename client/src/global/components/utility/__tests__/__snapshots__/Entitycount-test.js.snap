@@ -1,17 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Global.Utility.EntityCount component renders correctly 1`] = `
-<p
-  className="list-total"
->
-  Showing 
-  <span>
-    1-5
-  </span>
-   of 
-  <span>
-    10
-  </span>
-   entities: 
-</p>
+Array [
+  <p
+    aria-hidden={true}
+    className="list-total"
+  >
+    Showing 
+    <span>
+      1-5
+    </span>
+     of 
+    <span>
+      10
+    </span>
+     entities: 
+  </p>,
+  <div
+    aria-atomic={true}
+    aria-live="polite"
+    className="screen-reader-text"
+    role="status"
+  >
+    10 entities. Showing results 1 through 5.
+  </div>,
+]
 `;

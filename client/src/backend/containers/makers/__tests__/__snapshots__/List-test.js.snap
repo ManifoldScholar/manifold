@@ -2,6 +2,12 @@
 
 exports[`Backend People Makers List Container renders correctly 1`] = `
 Array [
+  <div
+    aria-atomic={true}
+    aria-live="polite"
+    className="screen-reader-text"
+    role="status"
+  />,
   <span />,
   <div
     className="entity-list"
@@ -87,6 +93,8 @@ Array [
               Reset
             </button>
             <button
+              aria-expanded={false}
+              aria-haspopup={true}
               className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
               onClick={[Function]}
             >
@@ -171,6 +179,7 @@ Array [
           className="entity-list__count"
         >
           <p
+            aria-hidden={true}
             className="list-total"
           >
             Showing 
@@ -183,6 +192,14 @@ Array [
             </span>
              makers: 
           </p>
+          <div
+            aria-atomic={true}
+            aria-live="polite"
+            className="screen-reader-text"
+            role="status"
+          >
+            2 makers. Showing results 1 through 1.
+          </div>
         </div>
       </div>
       <ul

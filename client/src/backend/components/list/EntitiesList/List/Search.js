@@ -5,7 +5,6 @@ import labelId from "helpers/labelId";
 import { Collapse } from "react-collapse";
 import classNames from "classnames";
 import has from "lodash/has";
-
 import isPlainObject from "lodash/isPlainObject";
 
 export default class ListEntitiesListSearch extends PureComponent {
@@ -31,6 +30,7 @@ export default class ListEntitiesListSearch extends PureComponent {
       open: false,
       keyword: ""
     };
+    this.searchInput = React.createRef();
   }
 
   componentDidUpdate(prevProps) {
@@ -146,6 +146,9 @@ export default class ListEntitiesListSearch extends PureComponent {
     event.preventDefault();
     this.setState({ keyword: "" });
     this.props.onReset();
+
+    // focus on search field
+    this.searchInput.current.focus();
   };
 
   classNameWithStyle(className) {
@@ -179,6 +182,7 @@ export default class ListEntitiesListSearch extends PureComponent {
                   Enter Search Criteria
                 </label>
                 <input
+                  ref={this.searchInput}
                   className={`${baseClass}__keyword-input`}
                   id={label}
                   value={this.state.keyword}
@@ -197,6 +201,8 @@ export default class ListEntitiesListSearch extends PureComponent {
                 <button
                   onClick={this.toggleOptions}
                   className={`${baseClass}__text-button ${baseClass}__text-button--foregrounded`}
+                  aria-haspopup
+                  aria-expanded={this.state.open}
                 >
                   Options
                 </button>

@@ -10,7 +10,14 @@ export default class SearchResultsEmpty extends PureComponent {
     return (
       <div className="search-results">
         <span className="label-count">
-          <span className="list-total">No results were found.</span>
+          <span
+            className="list-total"
+            role="status"
+            aria-live="polite"
+            aria-atomic
+          >
+            No results were found.
+          </span>
         </span>
       </div>
     );

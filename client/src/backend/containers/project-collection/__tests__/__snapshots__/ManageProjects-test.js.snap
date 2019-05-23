@@ -102,6 +102,8 @@ Array [
               Reset
             </button>
             <button
+              aria-expanded={false}
+              aria-haspopup={true}
               className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
               onClick={[Function]}
             >
@@ -290,6 +292,7 @@ Array [
           className="entity-list__count"
         >
           <p
+            aria-hidden={true}
             className="list-total"
           >
             You have added 
@@ -302,6 +305,14 @@ Array [
             </span>
              available projects
           </p>
+          <div
+            aria-atomic={true}
+            aria-live="polite"
+            className="screen-reader-text"
+            role="status"
+          >
+            You have added 0 of 2 available projects.
+          </div>
         </div>
       </div>
       <ul

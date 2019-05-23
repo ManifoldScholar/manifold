@@ -19,19 +19,31 @@ export default class EntityCount extends PureComponent {
 
   renderRange(start, end, totalCount, label) {
     return (
-      <p className="list-total">
-        {"Showing "}
-        <span>{`${start}-${end}`}</span>
-        {" of "}
-        <span>{totalCount}</span>
-        {label && ` ${label}: `}
-      </p>
+      <React.Fragment>
+        <p className="list-total" aria-hidden>
+          {"Showing "}
+          <span>{`${start}-${end}`}</span>
+          {" of "}
+          <span>{totalCount}</span>
+          {label && ` ${label}: `}
+        </p>
+        {/* Better readout for screen readers */}
+        <div
+          role="status"
+          aria-live="polite"
+          aria-atomic
+          className="screen-reader-text"
+        >
+          {`${totalCount} ${label &&
+            label}. Showing results ${start} through ${end}.`}
+        </div>
+      </React.Fragment>
     );
   }
 
   renderCount(totalCount, label) {
     return (
-      <p className="list-total">
+      <p className="list-total" role="status" aria-atomic aria-live="polite">
         <span>{totalCount}</span>
         {` ${label}`}
       </p>

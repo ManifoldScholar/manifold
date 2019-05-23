@@ -37,6 +37,7 @@ exports[`Backend Project Log Container renders correctly 1`] = `
         className="entity-list__count"
       >
         <p
+          aria-hidden={true}
           className="list-total"
         >
           Showing 
@@ -49,6 +50,14 @@ exports[`Backend Project Log Container renders correctly 1`] = `
           </span>
            changes: 
         </p>
+        <div
+          aria-atomic={true}
+          aria-live="polite"
+          className="screen-reader-text"
+          role="status"
+        >
+          2 changes. Showing results 1 through 1.
+        </div>
       </div>
     </div>
     <ul

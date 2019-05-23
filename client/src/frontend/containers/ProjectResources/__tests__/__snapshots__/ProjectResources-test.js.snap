@@ -79,6 +79,12 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
           </div>
         </div>
       </header>
+      <div
+        aria-atomic={true}
+        aria-live="polite"
+        className="screen-reader-text"
+        role="status"
+      />
       <form
         className="form-list-filter entity-section-wrapper__tools entity-section-wrapper__tools--wide"
         onSubmit={[Function]}
@@ -218,12 +224,6 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
             </svg>
           </div>
         </div>
-        <button
-          className="reset-button"
-          onClick={[Function]}
-        >
-          Reset Search + Filters
-        </button>
       </form>
       <div
         className="entity-section-wrapper__body"
@@ -235,6 +235,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
             className="resource-count"
           >
             <p
+              aria-hidden={true}
               className="list-total"
             >
               Showing 
@@ -247,6 +248,14 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
               </span>
                resources: 
             </p>
+            <div
+              aria-atomic={true}
+              aria-live="polite"
+              className="screen-reader-text"
+              role="status"
+            >
+              2 resources. Showing results 1 through 1.
+            </div>
           </div>
           <ul>
             <li

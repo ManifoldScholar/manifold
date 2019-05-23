@@ -75,6 +75,12 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
           </div>
         </div>
       </div>
+      <div
+        aria-atomic={true}
+        aria-live="polite"
+        className="screen-reader-text"
+        role="status"
+      />
       <form
         className="entity-section-wrapper__tools form-list-filter"
         onSubmit={[Function]}
@@ -160,18 +166,15 @@ exports[`Frontend ProjectCollection Detail Container renders correctly 1`] = `
             </svg>
           </div>
         </div>
-        <button
-          className="reset-button"
-          onClick={[Function]}
-        >
-          Reset Search + Filters
-        </button>
       </form>
       <div
         className="entity-section-wrapper__details"
       >
         <p
+          aria-atomic={true}
+          aria-live="polite"
           className="list-total"
+          role="status"
         >
           <span>
             2
