@@ -37,6 +37,12 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
         </div>
       </div>
     </header>
+    <div
+      aria-atomic={true}
+      aria-live="polite"
+      className="screen-reader-text"
+      role="status"
+    />
     <form
       className="form-list-filter entity-section-wrapper__tools"
       onSubmit={[Function]}
@@ -154,12 +160,6 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
           </svg>
         </div>
       </div>
-      <button
-        className="reset-button"
-        onClick={[Function]}
-      >
-        Reset Search + Filters
-      </button>
     </form>
     <div
       className="project-list grid entity-section-wrapper__body"

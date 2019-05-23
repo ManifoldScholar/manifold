@@ -46,7 +46,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
     }
 
     onReset = key => {
-      this.setValues(key, this.initialValues(key));
+      this.setValues(key, this.initialValues(key), true);
     };
 
     get managedLists() {
@@ -80,17 +80,30 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       return state;
     }
 
+    get resetMessage() {
+      return "Search and filters reset.";
+    }
+
     setParam = (key, paramLike, value) => {
       const param = this.ensureParamObject(key, paramLike);
       this.setValues(key, { [param.name]: value });
     };
 
-    setValues(key, updatedValues) {
+    setValues(key, updatedValues, isReset) {
       const listState = this.listState(key);
       const values = listState.values;
       const newValues = Object.assign({}, values, updatedValues);
       const newListState = Object.assign({}, listState, { values: newValues });
-      this.setState({ [key]: newListState });
+      this.setState({
+        [key]: newListState,
+        message: isReset ? this.resetMessage : null
+      });
+
+      // remove message on timeout was a reset
+      isReset &&
+        setTimeout(() => {
+          this.setState({ message: null });
+        }, 1000);
     }
 
     initialValues(key) {
@@ -179,9 +192,23 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       return snapshot.pagination;
     };
 
+    renderLiveRegion() {
+      return (
+        <div
+          role="status"
+          aria-live="polite"
+          aria-atomic
+          className="screen-reader-text"
+        >
+          {this.state.message}
+        </div>
+      );
+    }
+
     render() {
       return (
         <React.Fragment>
+          {this.renderLiveRegion()}
           <WrappedComponent
             {...this.props}
             entitiesListSearchProps={this.entitiesListSearchProps}

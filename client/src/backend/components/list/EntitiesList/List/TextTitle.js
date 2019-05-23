@@ -38,6 +38,16 @@ export default class ListEntitiesListTextTitle extends PureComponent {
     return this.props.titleLink;
   }
 
+  get ariaAttributes() {
+    if (!this.props.count) return null;
+
+    return {
+      role: "status",
+      "aria-live": "polite",
+      "aria-atomic": true
+    };
+  }
+
   link(child) {
     if (!this.titleLink) return child;
     return <Link to={this.titleLink}>{child}</Link>;
@@ -45,7 +55,10 @@ export default class ListEntitiesListTextTitle extends PureComponent {
 
   render() {
     return (
-      <h2 className="entity-list__title-block entity-list__title">
+      <h2
+        className="entity-list__title-block entity-list__title"
+        {...this.ariaAttributes}
+      >
         {this.link(
           <React.Fragment>
             {this.titleIcon && (

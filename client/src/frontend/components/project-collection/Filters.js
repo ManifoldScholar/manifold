@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import omitBy from "lodash/omitBy";
 import uniqueId from "lodash/uniqueId";
+import isEmpty from "lodash/isEmpty";
 import Utility from "global/components/utility";
 
-export default class ProjectCollectionFilters extends Component {
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
+
+export class ProjectCollectionFilters extends Component {
   static displayName = "ProjectCollection.Filters";
 
   static propTypes = {
@@ -20,6 +23,7 @@ export default class ProjectCollectionFilters extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState(props.initialFilterState);
+    this.searchInput = React.createRef();
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -28,6 +32,14 @@ export default class ProjectCollectionFilters extends Component {
     }
 
     return null;
+  }
+
+  get showResetButton() {
+    return !isEmpty(this.state.filters);
+  }
+
+  get resetMessage() {
+    return "Search and filters reset.";
   }
 
   setFilters = (event, label) => {
@@ -53,6 +65,10 @@ export default class ProjectCollectionFilters extends Component {
   resetFilters = event => {
     event.preventDefault();
     this.setState(this.initialState(), this.updateResults);
+    // update SR message
+    this.props.setScreenReaderStatus(this.resetMessage);
+    // focus on search field
+    this.searchInput.current.focus();
   };
 
   render() {
@@ -74,6 +90,7 @@ export default class ProjectCollectionFilters extends Component {
             Enter Search Criteria
           </label>
           <input
+            ref={this.searchInput}
             value={this.state.filters.keyword || ""}
             type="text"
             id={this.props.searchId}
@@ -98,10 +115,14 @@ export default class ProjectCollectionFilters extends Component {
             />
           </div>
         </div>
-        <button className="reset-button" onClick={this.resetFilters}>
-          {"Reset Search + Filters"}
-        </button>
+        {this.showResetButton && (
+          <button className="reset-button" onClick={this.resetFilters}>
+            {"Reset Search + Filters"}
+          </button>
+        )}
       </form>
     );
   }
 }
+
+export default withScreenReaderStatus(ProjectCollectionFilters);

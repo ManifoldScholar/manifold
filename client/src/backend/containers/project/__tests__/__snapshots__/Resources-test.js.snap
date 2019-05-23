@@ -3,6 +3,12 @@
 exports[`Backend Project Resources Container renders correctly 1`] = `
 <section>
   <div
+    aria-atomic={true}
+    aria-live="polite"
+    className="screen-reader-text"
+    role="status"
+  />
+  <div
     className="entity-list"
     id="entities-list1"
   >
@@ -87,6 +93,8 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
               Reset
             </button>
             <button
+              aria-expanded={false}
+              aria-haspopup={true}
               className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
               onClick={[Function]}
             >
@@ -329,6 +337,7 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
           className="entity-list__count"
         >
           <p
+            aria-hidden={true}
             className="list-total"
           >
             Showing 
@@ -341,6 +350,14 @@ exports[`Backend Project Resources Container renders correctly 1`] = `
             </span>
              resources: 
           </p>
+          <div
+            aria-atomic={true}
+            aria-live="polite"
+            className="screen-reader-text"
+            role="status"
+          >
+            2 resources. Showing results 1 through 1.
+          </div>
         </div>
       </div>
       <div

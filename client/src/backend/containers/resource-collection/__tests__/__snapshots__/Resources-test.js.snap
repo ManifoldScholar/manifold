@@ -1,289 +1,299 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend ResourceCollection Resources Container renders correctly 1`] = `
-<div
-  className="entity-list"
-  id="entities-list1"
->
-  <h2
-    className="entity-list__title-block entity-list__title"
-  >
-    <figure
-      className="entity-list__title-icon"
-    >
-      <svg
-        aria-hidden={true}
-        className="manicon-svg svg-icon--resourceCollection64"
-        fill="currentColor"
-        height={null}
-        viewBox="0 0 64 64"
-        width={null}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
-        />
-      </svg>
-    </figure>
-    Resources
-    <button
-      className="utility-button"
-      onClick={[Function]}
-      style={
-        Object {
-          "marginLeft": 3,
-        }
-      }
-    >
-      <span
-        className="utility-button__text"
-      >
-        Show collection only
-      </span>
-    </button>
-  </h2>
+Array [
   <div
-    className="entity-list__contents-wrapper"
+    aria-atomic={true}
+    aria-live="polite"
+    className="screen-reader-text"
+    role="status"
+  />,
+  <div
+    className="entity-list"
+    id="entities-list1"
   >
-    <div
-      className="entity-list__search entity-list-search"
+    <h2
+      className="entity-list__title-block entity-list__title"
     >
-      <form
-        onSubmit={[Function]}
+      <figure
+        className="entity-list__title-icon"
       >
-        <div
-          className="entity-list-search__keyword-row"
+        <svg
+          aria-hidden={true}
+          className="manicon-svg svg-icon--resourceCollection64"
+          fill="currentColor"
+          height={null}
+          viewBox="0 0 64 64"
+          width={null}
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <button
-            className="entity-list-search__search-button"
-          >
-            <svg
-              aria-hidden={true}
-              className="manicon-svg manicon-magnify svg-icon--search16"
-              fill="currentColor"
-              height={null}
-              viewBox="0 0 16 16"
-              width={null}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
-              />
-            </svg>
-            <span
-              className="screen-reader-text"
-            >
-              Search
-            </span>
-          </button>
-          <div
-            className="entity-list-search__keyword-input-wrapper"
-          >
-            <label
-              className="screen-reader-text"
-              htmlFor="list-search-1"
-            >
-              Enter Search Criteria
-            </label>
-            <input
-              className="entity-list-search__keyword-input"
-              id="list-search-1"
-              onChange={[Function]}
-              placeholder="Search..."
-              type="text"
-              value=""
-            />
-          </div>
-          <button
-            className="entity-list-search__text-button"
-            onClick={[Function]}
-          >
-            Reset
-          </button>
-          <button
-            className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
-            onClick={[Function]}
-          >
-            Options
-          </button>
-        </div>
-      </form>
-      <div
-        className="ReactCollapse--collapse"
+          <path
+            d="M24,39 L24,45 L40,45 L40,39 L24,39 Z M42,37 L42,47 L22,47 L22,37 L42,37 Z M56,20.4707664 L47.6615077,14 L16.3394622,14 L7.99999996,20.4707998 L7.99999996,25 L56,25 L56,20.4707664 Z M58,27 L5.99999996,27 L5.99999996,19.4912002 L15.6545377,12 L48.3464923,12 L58,19.4912335 L58,27 Z M57,19 L57,21 L6.99999996,21 L6.99999996,19 L57,19 Z M54,52 L54,26 L56,26 L56,54 L7.99999996,54 L7.99999996,26 L9.99999997,26 L9.99999997,52 L54,52 Z M34.998,26.0006 L36.998,26.0006 C36.9980001,27.7862134 36.0453867,29.4361883 34.499,30.3289951 C32.9526134,31.2218018 31.0473866,31.2218018 29.501,30.3289951 C27.9546133,29.4361883 27.0019999,27.7862134 27.002,26.0006 L29.002,26.0006 C29.002,27.0716823 29.5734155,28.0614031 30.501,28.5969443 C31.4285844,29.1324854 32.5714156,29.1324854 33.499,28.5969443 C34.4265845,28.0614031 34.998,27.0716823 34.998,26.0006 Z"
+          />
+        </svg>
+      </figure>
+      Resources
+      <button
+        className="utility-button"
+        onClick={[Function]}
         style={
           Object {
-            "height": 0,
-            "overflow": "hidden",
+            "marginLeft": 3,
           }
         }
       >
-        <div
-          className="ReactCollapse--content"
+        <span
+          className="utility-button__text"
         >
-          <div>
-            <div
-              className="entity-list-search__options entity-list-search__options--horizontal"
+          Show collection only
+        </span>
+      </button>
+    </h2>
+    <div
+      className="entity-list__contents-wrapper"
+    >
+      <div
+        className="entity-list__search entity-list-search"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <div
+            className="entity-list-search__keyword-row"
+          >
+            <button
+              className="entity-list-search__search-button"
             >
+              <svg
+                aria-hidden={true}
+                className="manicon-svg manicon-magnify svg-icon--search16"
+                fill="currentColor"
+                height={null}
+                viewBox="0 0 16 16"
+                width={null}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z"
+                />
+              </svg>
+              <span
+                className="screen-reader-text"
+              >
+                Search
+              </span>
+            </button>
+            <div
+              className="entity-list-search__keyword-input-wrapper"
+            >
+              <label
+                className="screen-reader-text"
+                htmlFor="list-search-1"
+              >
+                Enter Search Criteria
+              </label>
+              <input
+                className="entity-list-search__keyword-input"
+                id="list-search-1"
+                onChange={[Function]}
+                placeholder="Search..."
+                type="text"
+                value=""
+              />
+            </div>
+            <button
+              className="entity-list-search__text-button"
+              onClick={[Function]}
+            >
+              Reset
+            </button>
+            <button
+              aria-expanded={false}
+              aria-haspopup={true}
+              className="entity-list-search__text-button entity-list-search__text-button--foregrounded"
+              onClick={[Function]}
+            >
+              Options
+            </button>
+          </div>
+        </form>
+        <div
+          className="ReactCollapse--collapse"
+          style={
+            Object {
+              "height": 0,
+              "overflow": "hidden",
+            }
+          }
+        >
+          <div
+            className="ReactCollapse--content"
+          >
+            <div>
               <div
-                className="entity-list-search__option entity-list-search__option--horizontal"
+                className="entity-list-search__options entity-list-search__options--horizontal"
               >
                 <div
-                  className="entity-list-search__option-inner"
+                  className="entity-list-search__option entity-list-search__option--horizontal"
                 >
-                  <span
-                    className="entity-list-search__options-label "
-                  >
-                    Filter Results:
-                  </span>
                   <div
-                    className="entity-list-search__select-wrapper"
+                    className="entity-list-search__option-inner"
                   >
-                    <select
-                      id="list-search-1"
-                      onChange={[Function]}
-                      value=""
+                    <span
+                      className="entity-list-search__options-label "
                     >
-                      <option
+                      Filter Results:
+                    </span>
+                    <div
+                      className="entity-list-search__select-wrapper"
+                    >
+                      <select
+                        id="list-search-1"
+                        onChange={[Function]}
                         value=""
                       >
-                        Select a tag
-                      </option>
-                    </select>
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg svg-icon--disclosureDown24"
-                      fill="currentColor"
-                      height={null}
-                      viewBox="0 0 24 24"
-                      width={null}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <polygon
-                        points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-                      />
-                    </svg>
+                        <option
+                          value=""
+                        >
+                          Select a tag
+                        </option>
+                      </select>
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg svg-icon--disclosureDown24"
+                        fill="currentColor"
+                        height={null}
+                        viewBox="0 0 24 24"
+                        width={null}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <polygon
+                          points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="entity-list-search__option entity-list-search__option--horizontal"
-              >
                 <div
-                  className="entity-list-search__option-inner"
+                  className="entity-list-search__option entity-list-search__option--horizontal"
                 >
-                  <span
-                    className="entity-list-search__options-label entity-list-search__options-label--empty"
-                  >
-                     
-                  </span>
                   <div
-                    className="entity-list-search__select-wrapper"
+                    className="entity-list-search__option-inner"
                   >
-                    <select
-                      id="list-search-1"
-                      onChange={[Function]}
-                      value=""
+                    <span
+                      className="entity-list-search__options-label entity-list-search__options-label--empty"
                     >
-                      <option
+                       
+                    </span>
+                    <div
+                      className="entity-list-search__select-wrapper"
+                    >
+                      <select
+                        id="list-search-1"
+                        onChange={[Function]}
                         value=""
                       >
-                        Select a type
-                      </option>
-                    </select>
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg svg-icon--disclosureDown24"
-                      fill="currentColor"
-                      height={null}
-                      viewBox="0 0 24 24"
-                      width={null}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <polygon
-                        points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-                      />
-                    </svg>
+                        <option
+                          value=""
+                        >
+                          Select a type
+                        </option>
+                      </select>
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg svg-icon--disclosureDown24"
+                        fill="currentColor"
+                        height={null}
+                        viewBox="0 0 24 24"
+                        width={null}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <polygon
+                          points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="entity-list-search__option entity-list-search__option--horizontal"
-              >
                 <div
-                  className="entity-list-search__option-inner"
+                  className="entity-list-search__option entity-list-search__option--horizontal"
                 >
-                  <span
-                    className="entity-list-search__options-label entity-list-search__options-label--empty"
-                  >
-                     
-                  </span>
                   <div
-                    className="entity-list-search__select-wrapper"
+                    className="entity-list-search__option-inner"
                   >
-                    <select
-                      id="list-search-1"
-                      onChange={[Function]}
-                      value=""
-                    />
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg svg-icon--disclosureDown24"
-                      fill="currentColor"
-                      height={null}
-                      viewBox="0 0 24 24"
-                      width={null}
-                      xmlns="http://www.w3.org/2000/svg"
+                    <span
+                      className="entity-list-search__options-label entity-list-search__options-label--empty"
                     >
-                      <polygon
-                        points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                       
+                    </span>
+                    <div
+                      className="entity-list-search__select-wrapper"
+                    >
+                      <select
+                        id="list-search-1"
+                        onChange={[Function]}
+                        value=""
                       />
-                    </svg>
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg svg-icon--disclosureDown24"
+                        fill="currentColor"
+                        height={null}
+                        viewBox="0 0 24 24"
+                        width={null}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <polygon
+                          points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="entity-list-search__option entity-list-search__option--horizontal"
-              >
                 <div
-                  className="entity-list-search__option-inner"
+                  className="entity-list-search__option entity-list-search__option--horizontal"
                 >
-                  <span
-                    className="entity-list-search__options-label"
-                  >
-                    Order Results:
-                  </span>
                   <div
-                    className="entity-list-search__select-wrapper"
+                    className="entity-list-search__option-inner"
                   >
-                    <select
-                      id="list-search-1"
-                      onChange={[Function]}
-                      value="title"
+                    <span
+                      className="entity-list-search__options-label"
                     >
-                      <option
+                      Order Results:
+                    </span>
+                    <div
+                      className="entity-list-search__select-wrapper"
+                    >
+                      <select
+                        id="list-search-1"
+                        onChange={[Function]}
                         value="title"
                       >
-                        Alphabetical by title
-                      </option>
-                      <option
-                        value="created_at"
+                        <option
+                          value="title"
+                        >
+                          Alphabetical by title
+                        </option>
+                        <option
+                          value="created_at"
+                        >
+                          Newest resources first
+                        </option>
+                      </select>
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg svg-icon--disclosureDown24"
+                        fill="currentColor"
+                        height={null}
+                        viewBox="0 0 24 24"
+                        width={null}
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        Newest resources first
-                      </option>
-                    </select>
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg svg-icon--disclosureDown24"
-                      fill="currentColor"
-                      height={null}
-                      viewBox="0 0 24 24"
-                      width={null}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <polygon
-                        points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-                      />
-                    </svg>
+                        <polygon
+                          points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -291,341 +301,350 @@ exports[`Backend ResourceCollection Resources Container renders correctly 1`] = 
           </div>
         </div>
       </div>
-    </div>
-    <div
-      className="entity-list__header"
-    >
       <div
-        className="entity-list__count"
+        className="entity-list__header"
       >
-        <p
-          className="list-total"
+        <div
+          className="entity-list__count"
         >
-          Showing 
-          <span>
-            1-1
-          </span>
-           of 
-          <span>
-            2
-          </span>
-           resources: 
-        </p>
+          <p
+            aria-hidden={true}
+            className="list-total"
+          >
+            Showing 
+            <span>
+              1-1
+            </span>
+             of 
+            <span>
+              2
+            </span>
+             resources: 
+          </p>
+          <div
+            aria-atomic={true}
+            aria-live="polite"
+            className="screen-reader-text"
+            role="status"
+          >
+            2 resources. Showing results 1 through 1.
+          </div>
+        </div>
+      </div>
+      <ul
+        className="entity-list__list entity-list__list--rows"
+      >
+        <li
+          className="entity-row entity-list__entity"
+        >
+          <a
+            aria-describedby="undefined1-describedby"
+            className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
+            href="/backend/projects/resource/3"
+            onClick={[Function]}
+          >
+            <div
+              className="entity-row__inner entity-row__inner--in-rows entity-row__inner--with-row-link"
+            >
+              <div
+                className="entity-row__figure entity-row__figure--size-normal entity-row__figure--shape-square entity-row--figure--in-rows"
+              >
+                <svg
+                  className="manicon-svg svg-icon--resourceImage64"
+                  fill="currentColor"
+                  viewBox="0 0 64 64"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5.99999996,13 L5.99999996,51 L58,51 L58,13 L5.99999996,13 Z M60,11 L60,53 L3.99999996,53 L3.99999996,11 L60,11 Z M45.114319,36.7052772 C46.0891538,35.776283 47.4070852,35.2956435 48.7511053,35.3789689 C50.0951254,35.4622943 51.3435959,36.1020435 52.2251484,37.1814515 L59.8029485,47.3896515 L58.1970516,48.5817485 L50.6481834,38.4106653 C50.1480528,37.7992777 49.4157245,37.4240133 48.6273486,37.3751363 C47.8389728,37.3262592 47.0659001,37.608193 46.5124285,38.1351833 L39.6414917,45.0279719 L38.9387682,44.1921171 L25.4012973,28.0888039 C24.8721474,27.5066301 24.1255162,27.1696052 23.3388857,27.1578435 C22.5522552,27.1460819 21.7958816,27.4606339 21.2723966,28.0022606 L5.74239658,45.2113607 L4.25760333,43.8714394 L19.8104371,26.6378727 C20.7408786,25.6737527 22.029067,25.1380356 23.3687863,25.1580671 C24.7085055,25.1780985 25.9801016,25.7520894 26.9067318,26.7726829 L39.7669351,42.06926 L45.114319,36.7052772 Z M45.0127,29.9813 C41.6989915,29.9813 39.0127,27.2950085 39.0127,23.9813 C39.0127,20.6675915 41.6989915,17.9813 45.0127,17.9813 C48.3264085,17.9813 51.0127,20.6675915 51.0127,23.9813 C51.0127,27.2950085 48.3264085,29.9813 45.0127,29.9813 Z M45.0127,27.9813 C47.221839,27.9813 49.0127,26.190439 49.0127,23.9813 C49.0127,21.772161 47.221839,19.9813 45.0127,19.9813 C42.803561,19.9813 41.0127,21.772161 41.0127,23.9813 C41.0127,26.190439 42.803561,27.9813 45.0127,27.9813 Z"
+                  />
+                </svg>
+              </div>
+              <div
+                className="entity-row__text entity-row__text--in-rows"
+              >
+                <h3
+                  className="entity-row__title entity-row__title--in-rows"
+                >
+                  <span
+                    className="entity-row__title-inner"
+                  >
+                    Image
+                  </span>
+                  <span
+                    className="entity-row__labels"
+                  >
+                    <span
+                      className="entity-row__label"
+                    >
+                      image
+                    </span>
+                  </span>
+                  <span
+                    className="aria-describedby"
+                    id="undefined1-describedby"
+                  >
+                    View Image
+                  </span>
+                </h3>
+                <div
+                  className="entity-row__meta entity-row__meta--in-rows"
+                >
+                  <time
+                    dateTime="2017-04-24"
+                  >
+                    Created April 24, 2017
+                  </time>
+                </div>
+              </div>
+              <div
+                className="entity-row__utility"
+              >
+                <div
+                  className="form-input"
+                >
+                  <div
+                    className="toggle-indicator"
+                  >
+                    <div
+                      className="boolean-primary checked"
+                      onClick={[Function]}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Remove Resource from Collection
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li
+          className="entity-row entity-list__entity"
+        >
+          <a
+            aria-describedby="undefined1-describedby"
+            className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
+            href="/backend/projects/resource/4"
+            onClick={[Function]}
+          >
+            <div
+              className="entity-row__inner entity-row__inner--in-rows entity-row__inner--with-row-link"
+            >
+              <div
+                className="entity-row__figure entity-row__figure--size-normal entity-row__figure--shape-square entity-row--figure--in-rows"
+              >
+                <svg
+                  className="manicon-svg svg-icon--resourceImage64"
+                  fill="currentColor"
+                  viewBox="0 0 64 64"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5.99999996,13 L5.99999996,51 L58,51 L58,13 L5.99999996,13 Z M60,11 L60,53 L3.99999996,53 L3.99999996,11 L60,11 Z M45.114319,36.7052772 C46.0891538,35.776283 47.4070852,35.2956435 48.7511053,35.3789689 C50.0951254,35.4622943 51.3435959,36.1020435 52.2251484,37.1814515 L59.8029485,47.3896515 L58.1970516,48.5817485 L50.6481834,38.4106653 C50.1480528,37.7992777 49.4157245,37.4240133 48.6273486,37.3751363 C47.8389728,37.3262592 47.0659001,37.608193 46.5124285,38.1351833 L39.6414917,45.0279719 L38.9387682,44.1921171 L25.4012973,28.0888039 C24.8721474,27.5066301 24.1255162,27.1696052 23.3388857,27.1578435 C22.5522552,27.1460819 21.7958816,27.4606339 21.2723966,28.0022606 L5.74239658,45.2113607 L4.25760333,43.8714394 L19.8104371,26.6378727 C20.7408786,25.6737527 22.029067,25.1380356 23.3687863,25.1580671 C24.7085055,25.1780985 25.9801016,25.7520894 26.9067318,26.7726829 L39.7669351,42.06926 L45.114319,36.7052772 Z M45.0127,29.9813 C41.6989915,29.9813 39.0127,27.2950085 39.0127,23.9813 C39.0127,20.6675915 41.6989915,17.9813 45.0127,17.9813 C48.3264085,17.9813 51.0127,20.6675915 51.0127,23.9813 C51.0127,27.2950085 48.3264085,29.9813 45.0127,29.9813 Z M45.0127,27.9813 C47.221839,27.9813 49.0127,26.190439 49.0127,23.9813 C49.0127,21.772161 47.221839,19.9813 45.0127,19.9813 C42.803561,19.9813 41.0127,21.772161 41.0127,23.9813 C41.0127,26.190439 42.803561,27.9813 45.0127,27.9813 Z"
+                  />
+                </svg>
+              </div>
+              <div
+                className="entity-row__text entity-row__text--in-rows"
+              >
+                <h3
+                  className="entity-row__title entity-row__title--in-rows"
+                >
+                  <span
+                    className="entity-row__title-inner"
+                  >
+                    Image
+                  </span>
+                  <span
+                    className="entity-row__labels"
+                  >
+                    <span
+                      className="entity-row__label"
+                    >
+                      image
+                    </span>
+                  </span>
+                  <span
+                    className="aria-describedby"
+                    id="undefined1-describedby"
+                  >
+                    View Image
+                  </span>
+                </h3>
+                <div
+                  className="entity-row__meta entity-row__meta--in-rows"
+                >
+                  <time
+                    dateTime="2017-04-24"
+                  >
+                    Created April 24, 2017
+                  </time>
+                </div>
+              </div>
+              <div
+                className="entity-row__utility"
+              >
+                <div
+                  className="form-input"
+                >
+                  <div
+                    className="toggle-indicator"
+                  >
+                    <div
+                      className="boolean-primary"
+                      onClick={[Function]}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Add Resource to Collection
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <div
+        className="entity-list__pagination"
+      >
+        <nav
+          aria-label="Pagination"
+          className="list-pagination"
+        >
+          <ul
+            className="list-pagination__columns"
+          >
+            <li
+              className="list-pagination__column"
+            >
+              <ul>
+                <li
+                  className="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
+                >
+                  <a
+                    disabled={true}
+                    href="#entities-list1"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg svg-icon--arrowLongLeft16"
+                      fill="currentColor"
+                      height={null}
+                      viewBox="0 0 24 16"
+                      width={null}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                        transform="rotate(180 12 8)"
+                      />
+                    </svg>
+                    <span
+                      className="list-pagination__icon-label"
+                    >
+                      PREV
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li
+              className="list-pagination__column-middle"
+            >
+              <ul
+                className="list-pagination__pages"
+              >
+                <li
+                  className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
+                >
+                  <a
+                    href="#entities-list1"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      1
+                    </span>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Go to page: 
+                      1
+                    </span>
+                  </a>
+                </li>
+                <li
+                  className="list-pagination__page list-pagination__page--ordinal"
+                >
+                  <a
+                    href="#entities-list1"
+                    onClick={[Function]}
+                  >
+                    <span
+                      aria-hidden="true"
+                    >
+                      2
+                    </span>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Go to page: 
+                      2
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li
+              className="list-pagination__column"
+            >
+              <ul>
+                <li
+                  className="list-pagination__page list-pagination__page--next"
+                >
+                  <a
+                    href="#entities-list1"
+                    onClick={[Function]}
+                  >
+                    <span
+                      className="list-pagination__icon-label"
+                    >
+                      NEXT
+                    </span>
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg svg-icon--arrowLongRight16"
+                      fill="currentColor"
+                      height={null}
+                      viewBox="0 0 24 16"
+                      width={null}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+                      />
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
-    <ul
-      className="entity-list__list entity-list__list--rows"
-    >
-      <li
-        className="entity-row entity-list__entity"
-      >
-        <a
-          aria-describedby="undefined1-describedby"
-          className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
-          href="/backend/projects/resource/3"
-          onClick={[Function]}
-        >
-          <div
-            className="entity-row__inner entity-row__inner--in-rows entity-row__inner--with-row-link"
-          >
-            <div
-              className="entity-row__figure entity-row__figure--size-normal entity-row__figure--shape-square entity-row--figure--in-rows"
-            >
-              <svg
-                className="manicon-svg svg-icon--resourceImage64"
-                fill="currentColor"
-                viewBox="0 0 64 64"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5.99999996,13 L5.99999996,51 L58,51 L58,13 L5.99999996,13 Z M60,11 L60,53 L3.99999996,53 L3.99999996,11 L60,11 Z M45.114319,36.7052772 C46.0891538,35.776283 47.4070852,35.2956435 48.7511053,35.3789689 C50.0951254,35.4622943 51.3435959,36.1020435 52.2251484,37.1814515 L59.8029485,47.3896515 L58.1970516,48.5817485 L50.6481834,38.4106653 C50.1480528,37.7992777 49.4157245,37.4240133 48.6273486,37.3751363 C47.8389728,37.3262592 47.0659001,37.608193 46.5124285,38.1351833 L39.6414917,45.0279719 L38.9387682,44.1921171 L25.4012973,28.0888039 C24.8721474,27.5066301 24.1255162,27.1696052 23.3388857,27.1578435 C22.5522552,27.1460819 21.7958816,27.4606339 21.2723966,28.0022606 L5.74239658,45.2113607 L4.25760333,43.8714394 L19.8104371,26.6378727 C20.7408786,25.6737527 22.029067,25.1380356 23.3687863,25.1580671 C24.7085055,25.1780985 25.9801016,25.7520894 26.9067318,26.7726829 L39.7669351,42.06926 L45.114319,36.7052772 Z M45.0127,29.9813 C41.6989915,29.9813 39.0127,27.2950085 39.0127,23.9813 C39.0127,20.6675915 41.6989915,17.9813 45.0127,17.9813 C48.3264085,17.9813 51.0127,20.6675915 51.0127,23.9813 C51.0127,27.2950085 48.3264085,29.9813 45.0127,29.9813 Z M45.0127,27.9813 C47.221839,27.9813 49.0127,26.190439 49.0127,23.9813 C49.0127,21.772161 47.221839,19.9813 45.0127,19.9813 C42.803561,19.9813 41.0127,21.772161 41.0127,23.9813 C41.0127,26.190439 42.803561,27.9813 45.0127,27.9813 Z"
-                />
-              </svg>
-            </div>
-            <div
-              className="entity-row__text entity-row__text--in-rows"
-            >
-              <h3
-                className="entity-row__title entity-row__title--in-rows"
-              >
-                <span
-                  className="entity-row__title-inner"
-                >
-                  Image
-                </span>
-                <span
-                  className="entity-row__labels"
-                >
-                  <span
-                    className="entity-row__label"
-                  >
-                    image
-                  </span>
-                </span>
-                <span
-                  className="aria-describedby"
-                  id="undefined1-describedby"
-                >
-                  View Image
-                </span>
-              </h3>
-              <div
-                className="entity-row__meta entity-row__meta--in-rows"
-              >
-                <time
-                  dateTime="2017-04-24"
-                >
-                  Created April 24, 2017
-                </time>
-              </div>
-            </div>
-            <div
-              className="entity-row__utility"
-            >
-              <div
-                className="form-input"
-              >
-                <div
-                  className="toggle-indicator"
-                >
-                  <div
-                    className="boolean-primary checked"
-                    onClick={[Function]}
-                    role="button"
-                    tabIndex="0"
-                  >
-                    <span
-                      className="screen-reader-text"
-                    >
-                      Remove Resource from Collection
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-      <li
-        className="entity-row entity-list__entity"
-      >
-        <a
-          aria-describedby="undefined1-describedby"
-          className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
-          href="/backend/projects/resource/4"
-          onClick={[Function]}
-        >
-          <div
-            className="entity-row__inner entity-row__inner--in-rows entity-row__inner--with-row-link"
-          >
-            <div
-              className="entity-row__figure entity-row__figure--size-normal entity-row__figure--shape-square entity-row--figure--in-rows"
-            >
-              <svg
-                className="manicon-svg svg-icon--resourceImage64"
-                fill="currentColor"
-                viewBox="0 0 64 64"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5.99999996,13 L5.99999996,51 L58,51 L58,13 L5.99999996,13 Z M60,11 L60,53 L3.99999996,53 L3.99999996,11 L60,11 Z M45.114319,36.7052772 C46.0891538,35.776283 47.4070852,35.2956435 48.7511053,35.3789689 C50.0951254,35.4622943 51.3435959,36.1020435 52.2251484,37.1814515 L59.8029485,47.3896515 L58.1970516,48.5817485 L50.6481834,38.4106653 C50.1480528,37.7992777 49.4157245,37.4240133 48.6273486,37.3751363 C47.8389728,37.3262592 47.0659001,37.608193 46.5124285,38.1351833 L39.6414917,45.0279719 L38.9387682,44.1921171 L25.4012973,28.0888039 C24.8721474,27.5066301 24.1255162,27.1696052 23.3388857,27.1578435 C22.5522552,27.1460819 21.7958816,27.4606339 21.2723966,28.0022606 L5.74239658,45.2113607 L4.25760333,43.8714394 L19.8104371,26.6378727 C20.7408786,25.6737527 22.029067,25.1380356 23.3687863,25.1580671 C24.7085055,25.1780985 25.9801016,25.7520894 26.9067318,26.7726829 L39.7669351,42.06926 L45.114319,36.7052772 Z M45.0127,29.9813 C41.6989915,29.9813 39.0127,27.2950085 39.0127,23.9813 C39.0127,20.6675915 41.6989915,17.9813 45.0127,17.9813 C48.3264085,17.9813 51.0127,20.6675915 51.0127,23.9813 C51.0127,27.2950085 48.3264085,29.9813 45.0127,29.9813 Z M45.0127,27.9813 C47.221839,27.9813 49.0127,26.190439 49.0127,23.9813 C49.0127,21.772161 47.221839,19.9813 45.0127,19.9813 C42.803561,19.9813 41.0127,21.772161 41.0127,23.9813 C41.0127,26.190439 42.803561,27.9813 45.0127,27.9813 Z"
-                />
-              </svg>
-            </div>
-            <div
-              className="entity-row__text entity-row__text--in-rows"
-            >
-              <h3
-                className="entity-row__title entity-row__title--in-rows"
-              >
-                <span
-                  className="entity-row__title-inner"
-                >
-                  Image
-                </span>
-                <span
-                  className="entity-row__labels"
-                >
-                  <span
-                    className="entity-row__label"
-                  >
-                    image
-                  </span>
-                </span>
-                <span
-                  className="aria-describedby"
-                  id="undefined1-describedby"
-                >
-                  View Image
-                </span>
-              </h3>
-              <div
-                className="entity-row__meta entity-row__meta--in-rows"
-              >
-                <time
-                  dateTime="2017-04-24"
-                >
-                  Created April 24, 2017
-                </time>
-              </div>
-            </div>
-            <div
-              className="entity-row__utility"
-            >
-              <div
-                className="form-input"
-              >
-                <div
-                  className="toggle-indicator"
-                >
-                  <div
-                    className="boolean-primary"
-                    onClick={[Function]}
-                    role="button"
-                    tabIndex="0"
-                  >
-                    <span
-                      className="screen-reader-text"
-                    >
-                      Add Resource to Collection
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
-    <div
-      className="entity-list__pagination"
-    >
-      <nav
-        aria-label="Pagination"
-        className="list-pagination"
-      >
-        <ul
-          className="list-pagination__columns"
-        >
-          <li
-            className="list-pagination__column"
-          >
-            <ul>
-              <li
-                className="list-pagination__page list-pagination__page--prev list-pagination__page--disabled"
-              >
-                <a
-                  disabled={true}
-                  href="#entities-list1"
-                  onClick={[Function]}
-                >
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg svg-icon--arrowLongLeft16"
-                    fill="currentColor"
-                    height={null}
-                    viewBox="0 0 24 16"
-                    width={null}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                      transform="rotate(180 12 8)"
-                    />
-                  </svg>
-                  <span
-                    className="list-pagination__icon-label"
-                  >
-                    PREV
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li
-            className="list-pagination__column-middle"
-          >
-            <ul
-              className="list-pagination__pages"
-            >
-              <li
-                className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
-              >
-                <a
-                  href="#entities-list1"
-                  onClick={[Function]}
-                >
-                  <span
-                    aria-hidden="true"
-                  >
-                    1
-                  </span>
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Go to page: 
-                    1
-                  </span>
-                </a>
-              </li>
-              <li
-                className="list-pagination__page list-pagination__page--ordinal"
-              >
-                <a
-                  href="#entities-list1"
-                  onClick={[Function]}
-                >
-                  <span
-                    aria-hidden="true"
-                  >
-                    2
-                  </span>
-                  <span
-                    className="screen-reader-text"
-                  >
-                    Go to page: 
-                    2
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li
-            className="list-pagination__column"
-          >
-            <ul>
-              <li
-                className="list-pagination__page list-pagination__page--next"
-              >
-                <a
-                  href="#entities-list1"
-                  onClick={[Function]}
-                >
-                  <span
-                    className="list-pagination__icon-label"
-                  >
-                    NEXT
-                  </span>
-                  <svg
-                    aria-hidden={true}
-                    className="manicon-svg svg-icon--arrowLongRight16"
-                    fill="currentColor"
-                    height={null}
-                    viewBox="0 0 24 16"
-                    width={null}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-                    />
-                  </svg>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</div>
+  </div>,
+]
 `;

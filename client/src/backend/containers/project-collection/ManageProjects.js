@@ -166,10 +166,21 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     const total = projectsMeta.pagination.totalCount || 0;
 
     return (
-      <p className="list-total">
-        You have added <span>{added}</span> of <span>{total}</span> available
-        projects
-      </p>
+      <React.Fragment>
+        <p className="list-total" aria-hidden>
+          You have added <span>{added}</span> of <span>{total}</span> available
+          projects
+        </p>
+        {/* Better readout for screen readers */}
+        <div
+          role="status"
+          aria-live="polite"
+          aria-atomic
+          className="screen-reader-text"
+        >
+          {`You have added ${added} of ${total} available projects.`}
+        </div>
+      </React.Fragment>
     );
   }
 
