@@ -27,7 +27,14 @@ export default class NoFollow extends Component {
               <figure className="demo-animation">
                 <img
                   src="/static/images/browse_no-follow-animation.gif"
-                  alt="No follow demo animation"
+                  alt={
+                    "A cursor icon hovers over a project thumbnail " +
+                    "illustration, which depicts a stack of papers, a pencil," +
+                    " a speech bubble, and a pair of glasses. The cursor" +
+                    " clicks on a green plus icon to demonstrate how to" +
+                    "follow a project. When clicked, the icon changes into a" +
+                    " blue checkmark."
+                  }
                 />
               </figure>
             </section>
