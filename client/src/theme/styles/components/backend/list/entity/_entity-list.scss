@@ -121,7 +121,14 @@
           flex-basis: 25%;
         }
       }
+    }
 
+    &--sortable {
+      @include dropzone(9px, '.show-dropzone');
+
+      .entity-list__entity:first-child {
+        margin-top: 10px;
+      }
     }
   }
 

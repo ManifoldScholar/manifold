@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import classNames from "classnames";
 
 export default class SortableEntities extends PureComponent {
   static displayName = "List.Entities.List.SortableEntities";
@@ -32,7 +33,6 @@ export default class SortableEntities extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.ul = React.createRef();
     this.state = {
       sorting: false,
       orderedEntities: this.constructor.cloneEntities(props.entities),
@@ -40,33 +40,25 @@ export default class SortableEntities extends PureComponent {
     };
   }
 
-  // Returning a promise from this did not work as advertised in the docs.
-  onUpdateBeforeSortStart = () => {
-    if (!this.ul.current) return;
-    this.ul.current.classList.add("entity-list--dragging");
-  };
+  findEntity(id) {
+    return this.state.orderedEntities.find(e => e.id === id);
+  }
 
-  onSortEnd = result => {
-    if (!result) return null;
+  onDragEnd = result => {
+    const { draggableId, source, destination } = result;
+    const entity = this.findEntity(draggableId);
 
-    const entity = this.state.orderedEntities[result.oldIndex];
-    if (!entity) return null;
-
-    if (this.ul.current)
-      this.ul.current.classList.remove("entity-list--dragging");
-
-    if (result.newIndex === result.oldIndex) return;
+    if (!destination || !entity || source.index === destination.index)
+      return null;
 
     this.setState(
       {
-        orderedEntities: this.setOrderByChange(result.oldIndex, result.newIndex)
+        orderedEntities: this.setOrderByChange(source.index, destination.index)
       },
       () => {
-        const adjustedPosition = this.getAdjustedPosition(result.newIndex);
-
         this.reorderCallback({
           id: entity.id,
-          position: adjustedPosition
+          position: this.getAdjustedPosition(destination.index)
         });
       }
     );
@@ -94,10 +86,6 @@ export default class SortableEntities extends PureComponent {
 
   get reorderCallback() {
     return this.props.callbacks.onReorder;
-  }
-
-  get className() {
-    return this.props.className;
   }
 
   get idForInstructions() {
@@ -129,46 +117,49 @@ export default class SortableEntities extends PureComponent {
   render() {
     const EntityComponent = this.entityComponent;
 
-    const SortableEntityComponent = SortableElement(
-      ({ sortableEntity, index }) => {
-        return (
+    const SortableEntityComponent = ({ sortableEntity, index }) => (
+      <Draggable
+        key={this.entityKey(index)}
+        draggableId={this.entityKey(index)}
+        index={index}
+      >
+        {(provided, snapshot) => (
           <EntityComponent
-            isSortable
-            key={this.entityKey(index)}
+            innerRef={provided.innerRef}
             entity={sortableEntity}
+            dragHandleProps={provided.dragHandleProps}
+            draggableProps={provided.draggableProps}
+            useDragHandle={this.useDragHandle}
+            isDragging={snapshot.isDragging}
             {...this.entityComponentProps}
           />
-        );
-      }
+        )}
+      </Draggable>
     );
 
-    const List = SortableContainer(({ entities }) => {
-      return (
-        <ul
-          ref={this.ul}
-          className={this.className}
-          aria-describedby={this.idForInstructions}
-        >
-          {entities.map((entity, index) => (
-            <SortableEntityComponent
-              sortableEntity={entity}
-              key={this.entityKey(index)}
-              index={index}
-            />
-          ))}
-        </ul>
-      );
-    });
-
     return (
-      <List
-        entities={this.entities}
-        helperClass="entity-row--dragging"
-        updateBeforeSortStart={this.onUpdateBeforeSortStart}
-        onSortEnd={this.onSortEnd}
-        useDragHandle={this.useDragHandle}
-        axis={"xy"}
-      />
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <Droppable droppableId="sortableEntities">
+          {(provided, snapshot) => (
+            <ul
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className={classNames(this.props.className, {
+                "show-dropzone": snapshot.isDraggingOver
+              })}
+            >
+              {this.entities.map((entity, index) => (
+                <SortableEntityComponent
+                  key={this.entityKey(index)}
+                  index={index}
+                  sortableEntity={entity}
+                />
+              ))}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
     );
   }
 }

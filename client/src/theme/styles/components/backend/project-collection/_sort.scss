@@ -21,6 +21,7 @@
 
     .instructional-copy {
       @include formInstructions;
+      margin-top: 0;
     }
 
     .select-group {

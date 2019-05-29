@@ -21,6 +21,20 @@
       }
     }
 
+    &--sortable {
+      @include draggable;
+      padding: 14px 9px 14px 11px;
+      border-bottom: none;
+
+      @include respond($break90) {
+        padding: 10px 19px 10px 23px;
+      }
+    }
+
+    &--is-dragging {
+      @include dragging;
+    }
+
     .entity-row__row-link--is-active & {
       background-color: $neutral100;
       border-color: $neutral100;
@@ -34,24 +48,9 @@
     text-align: left;
   }
 
-  &--dragging {
-    .entity-row__inner {
-      border-bottom: none;
-    }
-
-    .entity-row__row-link--in-grid {
-      padding: 0 14px;
-      background-color: $neutral95;
-      border: 1px solid $neutral80;
-      outline: 0;
-
-      @include respond($break65) {
-        @include panelRoundedDark;
-        @include boxShadow(0, 31px, 26px, -13px, $neutralBlack, 0.33);
-        padding: 0;
-        border: 0;
-      }
-    }
+  &__drag-container {
+    padding-top: 9px;
+    padding-bottom: 9px;
   }
 
   &__row-link {

@@ -151,7 +151,6 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-side-effect": "^2.1",
     "react-sociable": "^0.x",
-    "react-sortable-hoc": "^1.8.3",
     "react-swipeable": "^5.x",
     "react-text-mask": "5.x",
     "react-transition-group": "^4.3.0",
