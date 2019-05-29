@@ -40,7 +40,7 @@ export default class ProjectCollectionDetailManual extends PureComponent {
           this.isManuallySorted ? CollectionProjectRow : ProjectRow
         }
         entities={this.entities}
-        listStyle="grid"
+        listStyle="rows"
         callbacks={this.callbacks}
       />
     );

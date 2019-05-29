@@ -30,25 +30,44 @@
 }
 
 .project-collection-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 10px 10px 20px;
-  color: $neutral50;
-  cursor: pointer;
-  background-color: $neutral95;
-  border-radius: 5px;
-  transition:
-    color $duration $timing,
-    background-color $duration $timing;
+  $_inner-padding: 10px;
 
-  & + & {
-    margin-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  &__inner {
+    @include draggable;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+
+    &--is-dragging {
+      @include dragging;
+    }
+
+    .project-collection-list-item--selected & {
+      color: $neutral95;
+      background-color: $accentPrimary;
+    }
   }
 
-  &--selected {
-    color: $neutral95;
-    background-color: $accentPrimary;
+  &__link {
+    @include buttonUnstyled;
+    flex-grow: 1;
+    padding: $_inner-padding $_inner-padding $_inner-padding $_inner-padding * 2;
+    text-align: left;
+
+    .project-collection-list-item--selected & {
+      &:hover {
+        color: inherit;
+      }
+
+      &:focus-visible {
+        color: inherit;
+        outline-color: $neutralUIDark;
+      }
+    }
   }
 
   &__item-text,
@@ -64,6 +83,7 @@
     padding: 3px 0;
     margin-right: 6px;
     overflow: hidden;
+    text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -96,6 +116,7 @@
     display: flex;
     flex-shrink: 0;
     align-items: center;
+    padding: $_inner-padding;
   }
 
   &__icon-group-item {

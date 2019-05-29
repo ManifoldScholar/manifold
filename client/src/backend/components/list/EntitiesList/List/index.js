@@ -207,7 +207,8 @@ export default class ListEntities extends PureComponent {
       "entity-list__list--bare": this.listStyle === "bare",
       "entity-list__list--grid": this.listStyle === "grid",
       "entity-list__list--tiles": this.listStyle === "tiles",
-      "entity-list__list--rows": this.listStyle === "rows"
+      "entity-list__list--rows": this.listStyle === "rows",
+      "entity-list__list--sortable": this.isSortable
     });
 
     const contentsWrapperClassName = classNames({
@@ -238,16 +239,18 @@ export default class ListEntities extends PureComponent {
                 />
               )}
               {this.hasSearch && this.search}
-              <div className="entity-list__header">
-                {this.hasButtons && <ButtonSet buttons={this.buttons} />}
-                {this.showCount && (
-                  <Count
-                    showCount={this.showCount}
-                    unit={this.unit}
-                    pagination={this.pagination}
-                  />
-                )}
-              </div>
+              {(this.hasButtons || this.showCount) && (
+                <div className="entity-list__header">
+                  {this.hasButtons && <ButtonSet buttons={this.buttons} />}
+                  {this.showCount && (
+                    <Count
+                      showCount={this.showCount}
+                      unit={this.unit}
+                      pagination={this.pagination}
+                    />
+                  )}
+                </div>
+              )}
               {!this.isSortable && (
                 <Entities
                   {...this.props}

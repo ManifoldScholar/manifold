@@ -15,7 +15,9 @@ export default class ProjectRow extends PureComponent {
     listStyle: PropTypes.oneOf(["rows", "grid"]),
     figure: PropTypes.node,
     compact: PropTypes.bool,
-    renderWithoutLink: PropTypes.bool
+    renderWithoutLink: PropTypes.bool,
+    dragHandleProps: PropTypes.object,
+    draggableProps: PropTypes.object
   };
 
   static defaultProps = {

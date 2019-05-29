@@ -624,3 +624,32 @@ body {
     padding: 25px;
   }
 }
+
+// Drag and Drop styles
+@mixin dropzone($margin: 9px, $active-selector: '--show-dropzone') {
+  @include panelRoundedDark;
+  display: block;
+  padding: 0 $margin;
+  margin-right: -$margin;
+  margin-left: -$margin;
+  background-color: transparent;
+  transition: background-color 0.4s ease;
+
+  &#{$active-selector} {
+    background-color: lighten($neutral90, 5%);
+  }
+}
+
+@mixin draggable {
+  @include panelRoundedDark;
+  cursor: move; // fallback for older browsers
+  cursor: grab;
+  transition:
+    color $duration $timing,
+    background-color $duration $timing,
+    border-color $duration $timing;
+}
+
+@mixin dragging {
+  @include boxShadow(0, 31px, 26px, -13px, $neutralBlack, 0.33);
+}
