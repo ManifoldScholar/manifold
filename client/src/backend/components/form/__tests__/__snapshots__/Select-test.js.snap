@@ -8,7 +8,9 @@ exports[`Backend.Form.Select component renders correctly 1`] = `
     className="form-input"
     style={Object {}}
   >
-    <label>
+    <label
+      htmlFor="select-1"
+    >
       Label this
     </label>
     <div
@@ -29,6 +31,7 @@ exports[`Backend.Form.Select component renders correctly 1`] = `
       </svg>
       <select
         aria-describedby="select-error-1"
+        id="select-1"
         onChange={[Function]}
         value=""
       >

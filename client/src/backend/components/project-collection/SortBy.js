@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import uniqueId from "lodash/uniqueId";
+import { UID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class ProjectCollectionSortBy extends PureComponent {
@@ -9,13 +9,12 @@ export default class ProjectCollectionSortBy extends PureComponent {
 
   static propTypes = {
     projectCollection: PropTypes.object,
-    sortChangeHandler: PropTypes.func.isRequired,
-    sortId: PropTypes.string
+    sortChangeHandler: PropTypes.func.isRequired
   };
 
-  static defaultProps = {
-    sortId: uniqueId("collection-sort-")
-  };
+  get idPrefix() {
+    return "collection-sort";
+  }
 
   isManualSort(projectCollection) {
     if (!projectCollection) return false;
@@ -49,47 +48,54 @@ export default class ProjectCollectionSortBy extends PureComponent {
     const selected = projectCollection.attributes.sortOrder;
 
     return (
-      <div className="select-group">
-        <label htmlFor={this.props.sortId}>Order Collection By:</label>
-        <div className="select" key="filter[order]">
-          <select
-            id={this.props.sortId}
-            onChange={this.handleChange}
-            value={selected}
-            data-id={"filter"}
-          >
-            <option key="created_at_desc" value="created_at_desc">
-              Date Created (Newest First)
-            </option>
-            <option key="created_at_asc" value="created_at_asc">
-              Date Created (Oldest First)
-            </option>
-            <option key="updated_at_desc" value="updated_at_desc">
-              Last Updated (Newest First)
-            </option>
-            <option key="updated_at_asc" value="updated_at_asc">
-              Last Updated (Oldest First)
-            </option>
-            <option key="title_asc" value="title_asc">
-              Title A to Z
-            </option>
-            <option key="title_desc" value="title_desc">
-              Title Z to A
-            </option>
-            <option key="publication_date_desc" value="publication_date_desc">
-              Publication Date (Newest First)
-            </option>
-            <option key="publication_date_asc" value="publication_date_asc">
-              Publication Date (Oldest First)
-            </option>
-          </select>
-          <IconComposer
-            icon="disclosureDown16"
-            size={22}
-            iconClass="form-select__disclosure-icon"
-          />
-        </div>
-      </div>
+      <UID name={id => `${this.idPrefix}-${id}`}>
+        {id => (
+          <div className="select-group">
+            <label htmlFor={id}>Order Collection By:</label>
+            <div className="select" key="filter[order]">
+              <select
+                id={id}
+                onChange={this.handleChange}
+                value={selected}
+                data-id={"filter"}
+              >
+                <option key="created_at_desc" value="created_at_desc">
+                  Date Created (Newest First)
+                </option>
+                <option key="created_at_asc" value="created_at_asc">
+                  Date Created (Oldest First)
+                </option>
+                <option key="updated_at_desc" value="updated_at_desc">
+                  Last Updated (Newest First)
+                </option>
+                <option key="updated_at_asc" value="updated_at_asc">
+                  Last Updated (Oldest First)
+                </option>
+                <option key="title_asc" value="title_asc">
+                  Title A to Z
+                </option>
+                <option key="title_desc" value="title_desc">
+                  Title Z to A
+                </option>
+                <option
+                  key="publication_date_desc"
+                  value="publication_date_desc"
+                >
+                  Publication Date (Newest First)
+                </option>
+                <option key="publication_date_asc" value="publication_date_asc">
+                  Publication Date (Oldest First)
+                </option>
+              </select>
+              <IconComposer
+                icon="disclosureDown16"
+                size={22}
+                iconClass="form-select__disclosure-icon"
+              />
+            </div>
+          </div>
+        )}
+      </UID>
     );
   }
 

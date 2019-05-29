@@ -49,13 +49,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[general][pressSite]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Press Website URL
                   </label>
                   <input
-                    aria-describedby="attributes[general][pressSite]-text-input-1"
-                    id="attributes[general][pressSite]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="Enter URL"
                     type="text"
@@ -413,13 +413,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[theme][logoStyles]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Logo Styles
                   </label>
                   <input
-                    aria-describedby="attributes[theme][logoStyles]-text-input-1"
-                    id="attributes[theme][logoStyles]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="Additional Logo CSS"
                     type="text"
@@ -437,13 +437,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[theme][headerOffset]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Header Navigation Offset
                   </label>
                   <input
-                    aria-describedby="attributes[theme][headerOffset]-text-input-1"
-                    id="attributes[theme][headerOffset]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="0"
                     type="text"
@@ -476,13 +476,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                 >
                   <label
                     className=""
-                    htmlFor="attributes[theme][typekitId]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Typekit ID
                   </label>
                   <input
-                    aria-describedby="attributes[theme][typekitId]-text-input-1"
-                    id="attributes[theme][typekitId]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="Enter Typekit ID"
                     type="text"

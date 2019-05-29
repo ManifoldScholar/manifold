@@ -107,13 +107,13 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="attributes[email]-text-input-1"
+            htmlFor="text-input-1"
           >
             Email
           </label>
           <input
-            aria-describedby="attributes[email]-text-input-1"
-            id="attributes[email]-text-input-1"
+            aria-describedby="text-input-error-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder="Email"
             type="text"
@@ -126,13 +126,13 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="attributes[firstName]-text-input-1"
+            htmlFor="text-input-1"
           >
             First Name
           </label>
           <input
-            aria-describedby="attributes[firstName]-text-input-1"
-            id="attributes[firstName]-text-input-1"
+            aria-describedby="text-input-error-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder="First Name"
             type="text"
@@ -145,13 +145,13 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="attributes[lastName]-text-input-1"
+            htmlFor="text-input-1"
           >
             Last Name
           </label>
           <input
-            aria-describedby="attributes[lastName]-text-input-1"
-            id="attributes[lastName]-text-input-1"
+            aria-describedby="text-input-error-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder="Last Name"
             type="text"
@@ -165,7 +165,9 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
             className="form-input"
             style={Object {}}
           >
-            <label>
+            <label
+              htmlFor="select-1"
+            >
               Role
             </label>
             <div
@@ -186,6 +188,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
               </svg>
               <select
                 aria-describedby="select-error-1"
+                id="select-1"
                 onChange={[Function]}
                 value="admin"
               >

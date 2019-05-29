@@ -4,7 +4,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
 <section>
   <div
     className="entity-list"
-    id="entities-list1"
+    id={1}
   >
     <header
       className="entity-list__title-block entity-list__title backend-header"
@@ -53,7 +53,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
           className="entity-row entity-list__entity"
         >
           <a
-            aria-describedby="undefined1-describedby"
+            aria-describedby="1-describedby"
             className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag entity-row__row-link--is-active"
             href="/backend/projects/1/permissions/2"
             onClick={[Function]}
@@ -98,7 +98,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
                   </span>
                   <span
                     className="aria-describedby"
-                    id="undefined1-describedby"
+                    id="1-describedby"
                   >
                     View Rowan Ida
                   </span>

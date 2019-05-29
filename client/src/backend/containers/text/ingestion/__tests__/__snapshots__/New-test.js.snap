@@ -129,7 +129,7 @@ exports[`Backend Text Ingestion New Container renders correctly 1`] = `
             URL
           </label>
           <input
-            aria-describedby="text-input-1"
+            aria-describedby="text-input-error-1"
             id="text-input-1"
             onChange={[Function]}
             type="text"

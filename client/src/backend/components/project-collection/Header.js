@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Navigation from "backend/components/navigation";
 import { Link } from "react-router-dom";
-import labelId from "helpers/labelId";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -11,10 +10,6 @@ export default class ProjectCollectionHeader extends PureComponent {
 
   static propTypes = {
     projectCollection: PropTypes.object
-  };
-
-  static defaultProps = {
-    sortId: labelId("project-collection-header-")
   };
 
   get iconName() {

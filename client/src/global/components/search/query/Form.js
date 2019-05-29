@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import isEqual from "lodash/isEqual";
 import Utility from "global/components/utility";
 
@@ -15,7 +15,6 @@ export default class SearchQueryForm extends PureComponent {
     scopes: PropTypes.array,
     description: PropTypes.string,
     searchType: PropTypes.string,
-    searchId: PropTypes.string,
     searchOnScopeChange: PropTypes.bool,
     projectId: PropTypes.string,
     textId: PropTypes.string,
@@ -33,8 +32,7 @@ export default class SearchQueryForm extends PureComponent {
       );
       console.warn("Current SearchQuery State");
       console.warn(state);
-    },
-    searchId: labelId("query-search-")
+    }
   };
   /* eslint-enable no-console */
 
@@ -131,6 +129,10 @@ export default class SearchQueryForm extends PureComponent {
 
   get allFacetsSelected() {
     return isEqual(this.availableFacetValues, this.selectedFacets);
+  }
+
+  get searchIdPrefix() {
+    return "query-search";
   }
 
   internalStateFromIncomingState(initialState) {
@@ -237,17 +239,23 @@ export default class SearchQueryForm extends PureComponent {
     return (
       <form className="search-query" onSubmit={this.doSearch}>
         <div className="input-magnify">
-          <label htmlFor={this.props.searchId} className="screen-reader-text">
-            Enter Search Criteria
-          </label>
-          <input
-            type="text"
-            id={this.props.searchId}
-            autoFocus
-            onChange={this.setKeyword}
-            value={this.state.keyword}
-            placeholder={"Search…"}
-          />
+          <UID name={id => `${this.searchIdPrefix}-${id}`}>
+            {id => (
+              <React.Fragment>
+                <label htmlFor={id} className="screen-reader-text">
+                  Enter Search Criteria
+                </label>
+                <input
+                  type="text"
+                  id={id}
+                  autoFocus
+                  onChange={this.setKeyword}
+                  value={this.state.keyword}
+                  placeholder={"Search…"}
+                />
+              </React.Fragment>
+            )}
+          </UID>
           <button type="submit" className="search-submit">
             <Utility.IconComposer
               iconClass="search-icon"

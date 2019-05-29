@@ -8,7 +8,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
     className="form-input"
   >
     <label
-      htmlFor="kind-1"
+      htmlFor={1}
     >
       Kind
     </label>
@@ -32,7 +32,7 @@ exports[`Backend.Resource.Form.KindPicker component renders correctly 1`] = `
           />
         </svg>
         <select
-          id="kind-1"
+          id={1}
           onChange={[Function]}
           value="image"
         >

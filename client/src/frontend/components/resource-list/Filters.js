@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
 import omitBy from "lodash/omitBy";
 import isEmpty from "lodash/isEmpty";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import Utility from "global/components/utility";
 
 import withScreenReaderStatus from "hoc/with-screen-reader-status";
@@ -15,12 +15,7 @@ export class ResourceListFilters extends Component {
     kinds: PropTypes.array,
     tags: PropTypes.array,
     filterChangeHandler: PropTypes.func.isRequired,
-    initialFilterState: PropTypes.object,
-    searchId: PropTypes.string
-  };
-
-  static defaultProps = {
-    searchId: labelId("filters-search-")
+    initialFilterState: PropTypes.object
   };
 
   constructor(props) {
@@ -43,6 +38,10 @@ export class ResourceListFilters extends Component {
 
   get resetMessage() {
     return "Search and filters reset.";
+  }
+
+  get idPrefix() {
+    return "filters-search";
   }
 
   setFilters = (event, label) => {
@@ -89,17 +88,23 @@ export class ResourceListFilters extends Component {
               size={20}
             />
           </button>
-          <label htmlFor={this.props.searchId} className="screen-reader-text">
-            Enter Search Criteria
-          </label>
-          <input
-            ref={this.searchInput}
-            value={this.state.filters.keyword || ""}
-            type="text"
-            id={this.props.searchId}
-            onChange={event => this.setFilters(event, "keyword")}
-            placeholder="Search"
-          />
+          <UID name={id => `${this.idPrefix}-${id}`}>
+            {id => (
+              <React.Fragment>
+                <label htmlFor={id} className="screen-reader-text">
+                  Enter Search Criteria
+                </label>
+                <input
+                  ref={this.searchInput}
+                  value={this.state.filters.keyword || ""}
+                  type="text"
+                  id={id}
+                  onChange={event => this.setFilters(event, "keyword")}
+                  placeholder="Search"
+                />
+              </React.Fragment>
+            )}
+          </UID>
         </div>
         <div className="select-group inline">
           <div className="select">

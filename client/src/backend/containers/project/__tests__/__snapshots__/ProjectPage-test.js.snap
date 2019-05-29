@@ -26,7 +26,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="form-input-heading toggle above"
-              htmlFor="switch-input-1"
+              htmlFor={1}
             >
               Hide Project Activity
             </label>
@@ -36,7 +36,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               <div
                 aria-pressed={false}
                 className="boolean-primary"
-                id="switch-input-1"
+                id={1}
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -278,13 +278,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[purchaseUrl]-text-input-1"
+              htmlFor="text-input-1"
             >
               Purchase URL
             </label>
             <input
-              aria-describedby="attributes[purchaseUrl]-text-input-1"
-              id="attributes[purchaseUrl]-text-input-1"
+              aria-describedby="text-input-error-1"
+              id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Purchase URL"
               type="text"
@@ -302,13 +302,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[purchaseCallToAction]-text-input-1"
+              htmlFor="text-input-1"
             >
               Purchase Call To Action
             </label>
             <input
-              aria-describedby="attributes[purchaseCallToAction]-text-input-1"
-              id="attributes[purchaseCallToAction]-text-input-1"
+              aria-describedby="text-input-error-1"
+              id="text-input-1"
               onChange={[Function]}
               placeholder="Buy Print Version"
               type="text"
@@ -325,12 +325,12 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="masked-text-1"
+              htmlFor={1}
             >
               Purchase Price
             </label>
             <react-text-mask
-              id="masked-text-1"
+              id={1}
               mask={[Function]}
               onChange={[Function]}
               placeholderChar="_"
@@ -348,13 +348,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[purchasePriceCurrency]-text-input-1"
+              htmlFor="text-input-1"
             >
               Currency
             </label>
             <input
-              aria-describedby="attributes[purchasePriceCurrency]-text-input-1"
-              id="attributes[purchasePriceCurrency]-text-input-1"
+              aria-describedby="text-input-error-1"
+              id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Purchase Price Currency Code"
               type="text"
@@ -392,13 +392,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[downloadUrl]-text-input-1"
+              htmlFor="text-input-1"
             >
               Download URL
             </label>
             <input
-              aria-describedby="attributes[downloadUrl]-text-input-1"
-              id="attributes[downloadUrl]-text-input-1"
+              aria-describedby="text-input-error-1"
+              id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Download URL"
               type="text"
@@ -411,13 +411,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor="attributes[downloadCallToAction]-text-input-1"
+              htmlFor="text-input-1"
             >
               Download Call To Action
             </label>
             <input
-              aria-describedby="attributes[downloadCallToAction]-text-input-1"
-              id="attributes[downloadCallToAction]-text-input-1"
+              aria-describedby="text-input-error-1"
+              id="text-input-1"
               onChange={[Function]}
               placeholder="Download eBook"
               type="text"

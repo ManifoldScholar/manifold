@@ -12,7 +12,7 @@ import isPlainObject from "lodash/isPlainObject";
 import isFunction from "lodash/isFunction";
 import isBoolean from "lodash/isBoolean";
 import isNil from "lodash/isNil";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 
 export default class ListEntities extends PureComponent {
   static displayName = "List.Entities.List";
@@ -182,14 +182,16 @@ export default class ListEntities extends PureComponent {
     return isFunction(this.callbacks.onReorder);
   }
 
+  get idPrefix() {
+    return "entities-list";
+  }
+
   callback(name) {
     if (!this.callbacks) return null;
     return this.callbacks[name];
   }
 
   render() {
-    const listId = labelId("entities-list");
-
     const wrapperClassNames = classNames({
       "entity-list": true,
       "entity-list--bare": this.listStyle === "bare"
@@ -210,48 +212,52 @@ export default class ListEntities extends PureComponent {
     });
 
     return (
-      <div id={listId} className={wrapperClassNames}>
-        {this.title && (
-          <Title
-            title={this.title}
-            titleIcon={this.titleIcon}
-            titleStyle={this.titleStyle}
-            titleLink={this.titleLink}
-            pagination={this.pagination}
-            showCount={this.showCountInTitle}
-          />
-        )}
-        <div className={contentsWrapperClassName}>
-          {this.instructions && (
-            <Instructions instructions={this.instructions} />
-          )}
-          {this.hasSearch && this.search}
-          <div className="entity-list__header">
-            {this.hasButtons && <ButtonSet buttons={this.buttons} />}
-            {this.showCount && (
-              <Count
-                showCount={this.showCount}
-                unit={this.unit}
+      <UID name={id => `${this.idPrefix}-${id}`}>
+        {id => (
+          <div id={id} className={wrapperClassNames}>
+            {this.title && (
+              <Title
+                title={this.title}
+                titleIcon={this.titleIcon}
+                titleStyle={this.titleStyle}
+                titleLink={this.titleLink}
                 pagination={this.pagination}
+                showCount={this.showCountInTitle}
               />
             )}
+            <div className={contentsWrapperClassName}>
+              {this.instructions && (
+                <Instructions instructions={this.instructions} />
+              )}
+              {this.hasSearch && this.search}
+              <div className="entity-list__header">
+                {this.hasButtons && <ButtonSet buttons={this.buttons} />}
+                {this.showCount && (
+                  <Count
+                    showCount={this.showCount}
+                    unit={this.unit}
+                    pagination={this.pagination}
+                  />
+                )}
+              </div>
+              {!this.isSortable && (
+                <Entities {...this.props} className={listClassNames} />
+              )}
+              {this.isSortable && (
+                <SortableEntities {...this.props} className={listClassNames} />
+              )}
+              {this.pagination && (
+                <Pagination
+                  pagination={this.pagination}
+                  paginationTarget={`#${id}`}
+                  onPageClick={this.callback("onPageClick")}
+                  style={this.paginationStyle}
+                />
+              )}
+            </div>
           </div>
-          {!this.isSortable && (
-            <Entities {...this.props} className={listClassNames} />
-          )}
-          {this.isSortable && (
-            <SortableEntities {...this.props} className={listClassNames} />
-          )}
-          {this.pagination && (
-            <Pagination
-              pagination={this.pagination}
-              paginationTarget={`#${listId}`}
-              onPageClick={this.callback("onPageClick")}
-              style={this.paginationStyle}
-            />
-          )}
-        </div>
-      </div>
+        )}
+      </UID>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import { UID } from "react-uid";
 import setter from "./setter";
 import parse from "date-fns/parse";
 import range from "lodash/range";
@@ -10,7 +11,6 @@ import getYear from "date-fns/get_year";
 import isEqual from "date-fns/is_equal";
 import getDaysInMonth from "date-fns/get_days_in_month";
 import GlobalForm from "global/components/form";
-import labelId from "helpers/labelId";
 import MaskedInput from "react-text-mask";
 import isNull from "lodash/isNull";
 import IconComposer from "global/components/utility/IconComposer";
@@ -25,14 +25,7 @@ class FormDate extends Component {
     submitKey: PropTypes.string,
     name: PropTypes.string,
     errors: PropTypes.array,
-    id: PropTypes.string,
-    idForError: PropTypes.string,
     wide: PropTypes.bool
-  };
-
-  static defaultProps = {
-    id: labelId("date-input-"),
-    idForError: labelId("date-input-error-")
   };
 
   constructor(props) {
@@ -72,6 +65,10 @@ class FormDate extends Component {
     }
   }
   /* eslint-enable react/no-did-update-set-state */
+
+  get idForErrorPrefix() {
+    return "date-input-error";
+  }
 
   setInputDay = event => {
     const input = Object.assign({}, this.state.input);
@@ -196,51 +193,58 @@ class FormDate extends Component {
     });
 
     return (
-      <GlobalForm.Errorable
-        className={inputClasses}
-        name={this.props.name}
-        errors={this.props.errors}
-        label={this.props.label}
-        idForError={this.props.idForError}
-      >
-        <div className="form-input-heading">{this.props.label}</div>
-        <div className="form-date">
-          <div className="form-select input-month">
-            {this.renderSelectIcon()}
-            <select
-              onChange={this.setInputMonth}
-              value={this.state.input.month}
-            >
-              <option />
-              {this.months.map((month, index) => {
-                return (
-                  <option value={index} key={month}>
-                    {month}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <div className="form-select input-day">
-            {this.renderSelectIcon()}
-            <select onChange={this.setInputDay} value={this.state.input.day}>
-              <option />
-              {this.days().map(day => {
-                return <option key={day}>{day}</option>;
-              })}
-            </select>
-          </div>
-          <div className="form-input">
-            <MaskedInput
-              type="text"
-              mask={[/\d/, /\d/, /\d/, /\d/]}
-              className="input-year"
-              onChange={this.setInputYear}
-              value={this.state.input.year}
-            />
-          </div>
-        </div>
-      </GlobalForm.Errorable>
+      <UID>
+        {id => (
+          <GlobalForm.Errorable
+            className={inputClasses}
+            name={this.props.name}
+            errors={this.props.errors}
+            label={this.props.label}
+            idForError={`${this.idForErrorPrefix}-${id}`}
+          >
+            <div className="form-input-heading">{this.props.label}</div>
+            <div className="form-date">
+              <div className="form-select input-month">
+                {this.renderSelectIcon()}
+                <select
+                  onChange={this.setInputMonth}
+                  value={this.state.input.month}
+                >
+                  <option />
+                  {this.months.map((month, index) => {
+                    return (
+                      <option value={index} key={month}>
+                        {month}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="form-select input-day">
+                {this.renderSelectIcon()}
+                <select
+                  onChange={this.setInputDay}
+                  value={this.state.input.day}
+                >
+                  <option />
+                  {this.days().map(day => {
+                    return <option key={day}>{day}</option>;
+                  })}
+                </select>
+              </div>
+              <div className="form-input">
+                <MaskedInput
+                  type="text"
+                  mask={[/\d/, /\d/, /\d/, /\d/]}
+                  className="input-year"
+                  onChange={this.setInputYear}
+                  value={this.state.input.year}
+                />
+              </div>
+            </div>
+          </GlobalForm.Errorable>
+        )}
+      </UID>
     );
   }
 }

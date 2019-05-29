@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { UID } from "react-uid";
 import setter from "./setter";
 import GlobalForm from "global/components/form";
 import Header from "./DatePicker/Header";
-import labelId from "helpers/labelId";
 import MaskedInput from "./MaskedTextInput";
 import classnames from "classnames";
 import ReactDatePicker from "react-datepicker";
@@ -18,11 +18,6 @@ class DatePicker extends PureComponent {
     wide: PropTypes.bool
   };
 
-  static defaultProps = {
-    id: labelId("date-picker-"),
-    idForError: labelId("date-picker-error-")
-  };
-
   get value() {
     if (!this.props.value) return null;
     const date = isDate(this.props.value)
@@ -30,6 +25,10 @@ class DatePicker extends PureComponent {
       : new Date(this.props.value);
 
     return this.dateUTC(date);
+  }
+
+  get idForErrorPrefix() {
+    return "date-picker-error";
   }
 
   // The API returns values in UTC, but the JS tries to render dates in the user's local
@@ -57,38 +56,53 @@ class DatePicker extends PureComponent {
     });
 
     return (
-      <GlobalForm.Errorable
-        className={inputClasses}
-        name={this.props.name}
-        errors={this.props.errors}
-        label={this.props.label}
-        idForError={this.props.idForError}
-      >
-        <h4 className="form-input-heading">{this.props.label}</h4>
-        <ReactDatePicker
-          customInput={
-            <MaskedInput
-              type="text"
-              mask={[/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/]}
-            />
-          }
-          placeholderText={this.props.placeholder}
-          dropdownMode="scroll"
-          dateFormat="MM/dd/yyyy"
-          selected={this.value}
-          onChange={this.handleChange}
-          renderCustomHeader={props => <Header {...props} />}
-        />
-        {this.props.value && (
-          <button
-            type="button"
-            className="form-date-picker__button"
-            onClick={this.clear}
+      <UID>
+        {id => (
+          <GlobalForm.Errorable
+            className={inputClasses}
+            name={this.props.name}
+            errors={this.props.errors}
+            label={this.props.label}
+            idForError={`${this.idForErrorPrefix}-${id}`}
           >
-            Clear
-          </button>
+            <h4 className="form-input-heading">{this.props.label}</h4>
+            <ReactDatePicker
+              customInput={
+                <MaskedInput
+                  type="text"
+                  mask={[
+                    /\d/,
+                    /\d/,
+                    "/",
+                    /\d/,
+                    /\d/,
+                    "/",
+                    /\d/,
+                    /\d/,
+                    /\d/,
+                    /\d/
+                  ]}
+                />
+              }
+              placeholderText={this.props.placeholder}
+              dropdownMode="scroll"
+              dateFormat="MM/dd/yyyy"
+              selected={this.value}
+              onChange={this.handleChange}
+              renderCustomHeader={props => <Header {...props} />}
+            />
+            {this.props.value && (
+              <button
+                type="button"
+                className="form-date-picker__button"
+                onClick={this.clear}
+              >
+                Clear
+              </button>
+            )}
+          </GlobalForm.Errorable>
         )}
-      </GlobalForm.Errorable>
+      </UID>
     );
   }
 }

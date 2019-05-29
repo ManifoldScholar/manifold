@@ -23,7 +23,7 @@ exports[`Backend.Form.SwitchArray component renders correctly 1`] = `
       >
         <label
           className="form-input-heading toggle above"
-          htmlFor="switch-input-1"
+          htmlFor={1}
         >
           Option one
         </label>
@@ -33,7 +33,7 @@ exports[`Backend.Form.SwitchArray component renders correctly 1`] = `
           <div
             aria-pressed={false}
             className="boolean-primary"
-            id="switch-input-1"
+            id={1}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -53,7 +53,7 @@ exports[`Backend.Form.SwitchArray component renders correctly 1`] = `
       >
         <label
           className="form-input-heading toggle above"
-          htmlFor="switch-input-1"
+          htmlFor={1}
         >
           Option two
         </label>
@@ -63,7 +63,7 @@ exports[`Backend.Form.SwitchArray component renders correctly 1`] = `
           <div
             aria-pressed={false}
             className="boolean-primary"
-            id="switch-input-1"
+            id={1}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

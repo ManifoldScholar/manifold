@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
 import fill from "lodash/fill";
@@ -22,18 +22,17 @@ class FormMaskedTextInput extends Component {
     onChange: PropTypes.func,
     value: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    id: PropTypes.string,
     onClick: PropTypes.func,
     wide: PropTypes.bool
-  };
-
-  static defaultProps = {
-    id: labelId("masked-text-")
   };
 
   constructor() {
     super();
     this.placeholderChar = "\u005F"; // react-text-mask default "_"
+  }
+
+  get idPrefix() {
+    return "masked-text";
   }
 
   currencyMask() {
@@ -97,22 +96,26 @@ class FormMaskedTextInput extends Component {
     });
 
     return (
-      <div className={inputClasses}>
-        <label htmlFor={this.props.id} className={labelClass}>
-          {this.props.label}
-        </label>
-        <MaskedInput
-          onChange={this.props.onChange}
-          value={this.props.value}
-          id={this.props.id}
-          type="text"
-          mask={mask}
-          placeholder={this.props.placeholder}
-          placeholderChar={this.placeholderChar}
-          onClick={this.props.onClick}
-        />
-        <Instructions instructions={this.props.instructions} />
-      </div>
+      <UID name={id => `${this.idPrefix}-${id}`}>
+        {id => (
+          <div className={inputClasses}>
+            <label htmlFor={id} className={labelClass}>
+              {this.props.label}
+            </label>
+            <MaskedInput
+              onChange={this.props.onChange}
+              value={this.props.value}
+              id={id}
+              type="text"
+              mask={mask}
+              placeholder={this.props.placeholder}
+              placeholderChar={this.placeholderChar}
+              onClick={this.props.onClick}
+            />
+            <Instructions instructions={this.props.instructions} />
+          </div>
+        )}
+      </UID>
     );
   }
 }

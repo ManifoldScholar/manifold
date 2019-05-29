@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { UID } from "react-uid";
 import GlobalForm from "global/components/form";
 import List from "./List";
 import Header from "./Header";
-import labelId from "helpers/labelId";
 import setter from "../setter";
 import OptionsList from "../OptionsList";
 import isArray from "lodash/isArray";
@@ -29,7 +29,6 @@ export class FormHasMany extends PureComponent {
     entityAvatarAttribute: PropTypes.string,
     placeholder: PropTypes.string,
     errors: PropTypes.array,
-    idForError: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     set: PropTypes.func,
     name: PropTypes.string,
@@ -39,7 +38,6 @@ export class FormHasMany extends PureComponent {
   };
 
   static defaultProps = {
-    idForError: labelId("predictive-text-belongs-to-error-"),
     searchable: true,
     emptyMessage: "None Added"
   };
@@ -70,6 +68,10 @@ export class FormHasMany extends PureComponent {
   get entities() {
     const entities = this.props.name ? this.props.value : this.props.entities;
     return entities || [];
+  }
+
+  get idForErrorPrefix() {
+    return "predictive-text-belongs-to-error";
   }
 
   selectOne(entity) {
@@ -111,41 +113,45 @@ export class FormHasMany extends PureComponent {
     });
 
     return (
-      <GlobalForm.Errorable
-        className={inputClasses}
-        name={this.props.name}
-        errors={this.props.errors}
-        label={this.props.label}
-        idForError={this.props.idForError}
-      >
-        <Header
-          label={this.props.label}
-          labelTag={this.props.labelTag}
-          labelHeader={this.props.labelHeader}
-          instructions={this.props.instructions}
-        />
-        <nav className="has-many-list">
-          {this.renderList(
-            this.props.orderable || this.props.editClickHandler,
-            this.props
-          )}
-          <OptionsList
-            placeholder={this.props.placeholder}
-            label={this.entityName}
-            onNew={this.props.onNew ? this.onNew : null}
-            onSelect={this.onSelect}
-            fetch={this.props.fetch}
-            fetchOptions={this.props.fetchOptions}
-            options={this.props.options}
-            searchable={this.props.searchable}
-            idForError={this.props.idForError}
-          />
-          {this.renderList(
-            !this.props.orderable && !this.props.editClickHandler,
-            this.props
-          )}
-        </nav>
-      </GlobalForm.Errorable>
+      <UID name={id => `${this.idForErrorPrefix}-${id}`}>
+        {id => (
+          <GlobalForm.Errorable
+            className={inputClasses}
+            name={this.props.name}
+            errors={this.props.errors}
+            label={this.props.label}
+            idForError={id}
+          >
+            <Header
+              label={this.props.label}
+              labelTag={this.props.labelTag}
+              labelHeader={this.props.labelHeader}
+              instructions={this.props.instructions}
+            />
+            <nav className="has-many-list">
+              {this.renderList(
+                this.props.orderable || this.props.editClickHandler,
+                this.props
+              )}
+              <OptionsList
+                placeholder={this.props.placeholder}
+                label={this.entityName}
+                onNew={this.props.onNew ? this.onNew : null}
+                onSelect={this.onSelect}
+                fetch={this.props.fetch}
+                fetchOptions={this.props.fetchOptions}
+                options={this.props.options}
+                searchable={this.props.searchable}
+                idForError={id}
+              />
+              {this.renderList(
+                !this.props.orderable && !this.props.editClickHandler,
+                this.props
+              )}
+            </nav>
+          </GlobalForm.Errorable>
+        )}
+      </UID>
     );
   }
 }

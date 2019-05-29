@@ -7,13 +7,13 @@ exports[`Backend.Form.NumberInput component renders correctly 1`] = `
 >
   <label
     className=""
-    htmlFor="attributes[property]-text-input-1"
+    htmlFor="number-input-1"
   >
     A form label
   </label>
   <input
-    aria-describedby="attributes[property]-text-input-1"
-    id="attributes[property]-text-input-1"
+    aria-describedby="number-input-error-1"
+    id="number-input-1"
     onChange={[Function]}
     type="number"
     value=""

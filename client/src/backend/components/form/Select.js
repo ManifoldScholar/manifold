@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import GlobalForm from "global/components/form";
 import Instructions from "./Instructions";
 import withFormOptions from "hoc/with-form-options";
@@ -23,20 +23,21 @@ class FormSelect extends Component {
         internalValue: PropTypes.any.isRequired
       })
     ).isRequired,
-    focusOnMount: PropTypes.bool,
-    id: PropTypes.string,
-    idForError: PropTypes.string
-  };
-
-  static defaultProps = {
-    id: labelId("select-"),
-    idForError: labelId("select-error-")
+    focusOnMount: PropTypes.bool
   };
 
   componentDidMount() {
     if (this.props.focusOnMount === true && this.inputElement) {
       this.inputElement.focus();
     }
+  }
+
+  get idPrefix() {
+    return "select";
+  }
+
+  get idForErrorPrefix() {
+    return "select-error";
   }
 
   render() {
@@ -49,36 +50,42 @@ class FormSelect extends Component {
     });
 
     return (
-      <div className="form-input">
-        <GlobalForm.Errorable
-          className="form-input"
-          name={this.props.name}
-          errors={this.props.errors}
-          label={this.props.label}
-          idForError={this.props.idForError}
-        >
-          <label htmlFor={this.id}>{this.props.label}</label>
-          <div className="form-select">
-            <IconComposer
-              icon="disclosureDown16"
-              size={20}
-              iconClass="form-select__icon"
-            />
-            <select
-              id={this.id}
-              aria-describedby={this.props.idForError}
-              onChange={this.props.onChange}
-              value={this.props.value}
-              ref={input => {
-                this.inputElement = input;
-              }}
+      <UID>
+        {id => (
+          <div className="form-input">
+            <GlobalForm.Errorable
+              className="form-input"
+              name={this.props.name}
+              errors={this.props.errors}
+              label={this.props.label}
+              idForError={`${this.idForErrorPrefix}-${id}`}
             >
-              {options}
-            </select>
+              <label htmlFor={`${this.idPrefix}-${id}`}>
+                {this.props.label}
+              </label>
+              <div className="form-select">
+                <IconComposer
+                  icon="disclosureDown16"
+                  size={20}
+                  iconClass="form-select__icon"
+                />
+                <select
+                  id={`${this.idPrefix}-${id}`}
+                  aria-describedby={`${this.idForErrorPrefix}-${id}`}
+                  onChange={this.props.onChange}
+                  value={this.props.value}
+                  ref={input => {
+                    this.inputElement = input;
+                  }}
+                >
+                  {options}
+                </select>
+              </div>
+              <Instructions instructions={this.props.instructions} />
+            </GlobalForm.Errorable>
           </div>
-          <Instructions instructions={this.props.instructions} />
-        </GlobalForm.Errorable>
-      </div>
+        )}
+      </UID>
     );
   }
 }

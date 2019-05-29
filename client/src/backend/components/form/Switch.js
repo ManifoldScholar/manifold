@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import { UID } from "react-uid";
 import setter from "./setter";
 import Instructions from "./Instructions";
-import labelId from "helpers/labelId";
 
 class FormSwitch extends Component {
   static displayName = "Form.Switch";
@@ -21,13 +21,11 @@ class FormSwitch extends Component {
       false: PropTypes.string
     }),
     focusOnMount: PropTypes.bool,
-    id: PropTypes.string,
     wide: PropTypes.bool
   };
 
   static defaultProps = {
     labelPos: "above",
-    id: labelId("switch-input-"),
     focusOnMount: false
   };
 
@@ -80,6 +78,10 @@ class FormSwitch extends Component {
     return this.determineChecked(this.props.value);
   }
 
+  get idPrefix() {
+    return "switch-input";
+  }
+
   truthy(value) {
     return value === true || value === "true";
   }
@@ -127,37 +129,43 @@ class FormSwitch extends Component {
     this.setState({ focused: false });
   };
 
-  render() {
-    const label = (
-      <label className={this.labelClasses} htmlFor={this.props.id}>
+  renderLabel(id) {
+    return (
+      <label className={this.labelClasses} htmlFor={id}>
         {this.props.label}
       </label>
     );
+  }
 
+  render() {
     return (
-      <div className={this.wrapperClasses}>
-        {this.props.labelPos === "above" ? label : null}
-        <div className="toggle-indicator">
-          {/* Add .checked to .boolean-primary to change visual state */}
-          <div
-            ref={b => {
-              this.button = b;
-            }}
-            onFocus={this.focus}
-            onBlur={this.blur}
-            onClick={this.handleClick}
-            className={this.switchClasses}
-            role="button"
-            tabIndex="0"
-            aria-pressed={this.checked}
-            id={this.props.id}
-          >
-            <span className="screen-reader-text">{this.props.label}</span>
+      <UID name={id => `${this.idPrefix}-${id}`}>
+        {id => (
+          <div className={this.wrapperClasses}>
+            {this.props.labelPos === "above" && this.renderLabel(id)}
+            <div className="toggle-indicator">
+              {/* Add .checked to .boolean-primary to change visual state */}
+              <div
+                ref={b => {
+                  this.button = b;
+                }}
+                onFocus={this.focus}
+                onBlur={this.blur}
+                onClick={this.handleClick}
+                className={this.switchClasses}
+                role="button"
+                tabIndex="0"
+                aria-pressed={this.checked}
+                id={id}
+              >
+                <span className="screen-reader-text">{this.props.label}</span>
+              </div>
+            </div>
+            {this.props.labelPos === "below" && this.renderLabel(id)}
+            <Instructions instructions={this.props.instructions} />
           </div>
-        </div>
-        {this.props.labelPos === "below" ? label : null}
-        <Instructions instructions={this.props.instructions} />
-      </div>
+        )}
+      </UID>
     );
   }
 }

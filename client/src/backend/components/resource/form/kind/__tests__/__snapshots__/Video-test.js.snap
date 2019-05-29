@@ -9,7 +9,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
   >
     <label
       className="form-input-heading toggle above"
-      htmlFor="switch-input-1"
+      htmlFor={1}
     >
       Is this an externally linked video?
     </label>
@@ -19,7 +19,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
       <div
         aria-pressed={false}
         className="boolean-primary"
-        id="switch-input-1"
+        id={1}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -126,7 +126,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
   >
     <label
       className="form-input-heading toggle above"
-      htmlFor="switch-input-1"
+      htmlFor={1}
     >
       Is this an externally linked video?
     </label>
@@ -136,7 +136,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
       <div
         aria-pressed={false}
         className="boolean-primary"
-        id="switch-input-1"
+        id={1}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -160,13 +160,13 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
     >
       <label
         className="has-instructions"
-        htmlFor="attributes[externalId]-text-input-1"
+        htmlFor="text-input-1"
       >
         Video ID
       </label>
       <input
-        aria-describedby="attributes[externalId]-text-input-1"
-        id="attributes[externalId]-text-input-1"
+        aria-describedby="text-input-error-1"
+        id="text-input-1"
         onChange={[Function]}
         placeholder="Video ID"
         type="text"
@@ -185,7 +185,9 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
         className="form-input"
         style={Object {}}
       >
-        <label>
+        <label
+          htmlFor="select-1"
+        >
           External Video Type
         </label>
         <div
@@ -206,6 +208,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
           </svg>
           <select
             aria-describedby="select-error-1"
+            id="select-1"
             onChange={[Function]}
             value=""
           >

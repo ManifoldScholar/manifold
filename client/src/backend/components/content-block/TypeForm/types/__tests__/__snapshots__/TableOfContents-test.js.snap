@@ -8,13 +8,13 @@ Array [
   >
     <label
       className=""
-      htmlFor="attributes[title]-text-input-1"
+      htmlFor="text-input-1"
     >
       Title
     </label>
     <input
-      aria-describedby="attributes[title]-text-input-1"
-      id="attributes[title]-text-input-1"
+      aria-describedby="text-input-error-1"
+      id="text-input-1"
       onChange={[Function]}
       type="text"
       value=""
@@ -27,7 +27,9 @@ Array [
       className="form-input"
       style={Object {}}
     >
-      <label>
+      <label
+        htmlFor="select-1"
+      >
         Text
       </label>
       <div
@@ -48,6 +50,7 @@ Array [
         </svg>
         <select
           aria-describedby="select-error-1"
+          id="select-1"
           onChange={[Function]}
           value=""
         >
@@ -71,13 +74,13 @@ Array [
   >
     <label
       className=""
-      htmlFor="attributes[depth]-text-input-1"
+      htmlFor="number-input-1"
     >
       Depth
     </label>
     <input
-      aria-describedby="attributes[depth]-text-input-1"
-      id="attributes[depth]-text-input-1"
+      aria-describedby="number-input-error-1"
+      id="number-input-1"
       onChange={[Function]}
       type="number"
       value=""
@@ -88,7 +91,7 @@ Array [
   >
     <label
       className="form-input-heading toggle above"
-      htmlFor="switch-input-1"
+      htmlFor={1}
     >
       Show Text Title?
     </label>
@@ -98,7 +101,7 @@ Array [
       <div
         aria-pressed={false}
         className="boolean-primary"
-        id="switch-input-1"
+        id={1}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}

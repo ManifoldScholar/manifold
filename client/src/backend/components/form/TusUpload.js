@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import setter from "./setter";
 import Base from "./Upload/Base";
 import tus from "tus-js-client";
@@ -26,15 +26,11 @@ export class FormTusUpload extends Component {
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
-    errors: PropTypes.array,
-    inputId: PropTypes.string,
-    idForError: PropTypes.string
+    errors: PropTypes.array
   };
 
   static defaultProps = {
-    layout: "square",
-    inputId: labelId("upload-"),
-    idForError: labelId("upload-error-")
+    layout: "square"
   };
 
   constructor(props) {
@@ -43,6 +39,14 @@ export class FormTusUpload extends Component {
       progress: null,
       error: null
     };
+  }
+
+  get idPrefix() {
+    return "upload";
+  }
+
+  get idForErrorPrefix() {
+    return "upload-error";
   }
 
   removeFile() {
@@ -104,16 +108,22 @@ export class FormTusUpload extends Component {
   render() {
     const { set: setIgnored, ...baseProps } = this.props;
     return (
-      <Base
-        {...baseProps}
-        accepts={{
-          accepts: null,
-          extensions: null
-        }}
-        progress={this.state.progress}
-        uploadError={this.state.error}
-        updateValue={this.updateValue}
-      />
+      <UID>
+        {id => (
+          <Base
+            {...baseProps}
+            accepts={{
+              accepts: null,
+              extensions: null
+            }}
+            progress={this.state.progress}
+            uploadError={this.state.error}
+            updateValue={this.updateValue}
+            inputId={`${this.idPrefix}-${id}`}
+            idForError={`${this.idForErrorPrefix}-${id}`}
+          />
+        )}
+      </UID>
     );
   }
 }
