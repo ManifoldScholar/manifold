@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import setter from "./setter";
 import GlobalForm from "global/components/form";
 import isString from "lodash/isString";
@@ -18,17 +18,21 @@ class FormTextArea extends Component {
     value: PropTypes.string,
     errors: PropTypes.array,
     name: PropTypes.string,
-    id: PropTypes.string,
-    idForError: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     wide: PropTypes.bool
   };
 
   static defaultProps = {
-    height: 100,
-    id: labelId("textarea-"),
-    idForError: labelId("textarea-error-")
+    height: 100
   };
+
+  get idPrefix() {
+    return "textarea";
+  }
+
+  get idForErrorPrefix() {
+    return "textarea-error";
+  }
 
   render() {
     const labelClass = classnames({
@@ -40,28 +44,32 @@ class FormTextArea extends Component {
     });
 
     return (
-      <div className={inputClasses}>
-        <GlobalForm.Errorable
-          className="form-input"
-          name={this.props.name}
-          errors={this.props.errors}
-          label={this.props.label}
-          idForError={this.props.idForError}
-        >
-          <label htmlFor={this.props.id} className={labelClass}>
-            {this.props.label}
-          </label>
-          <Instructions instructions={this.props.instructions} />
-          <textarea
-            id={this.props.id}
-            aria-describedby={this.props.idForError}
-            style={{ height: this.props.height }}
-            placeholder={this.props.placeholder}
-            onChange={this.props.onChange}
-            value={this.props.value || ""}
-          />
-        </GlobalForm.Errorable>
-      </div>
+      <UID>
+        {id => (
+          <div className={inputClasses}>
+            <GlobalForm.Errorable
+              className="form-input"
+              name={this.props.name}
+              errors={this.props.errors}
+              label={this.props.label}
+              idForError={`${this.idForErrorPrefix}-${id}`}
+            >
+              <label htmlFor={`${this.idPrefix}-${id}`} className={labelClass}>
+                {this.props.label}
+              </label>
+              <Instructions instructions={this.props.instructions} />
+              <textarea
+                id={`${this.idPrefix}-${id}`}
+                aria-describedby={`${this.idForErrorPrefix}-${id}`}
+                style={{ height: this.props.height }}
+                placeholder={this.props.placeholder}
+                onChange={this.props.onChange}
+                value={this.props.value || ""}
+              />
+            </GlobalForm.Errorable>
+          </div>
+        )}
+      </UID>
     );
   }
 }

@@ -14,7 +14,7 @@ exports[`Backend.ProjectCollection.Form.KindPicker component renders correctly 1
       className="button-switch-primary"
     >
       <button
-        aria-describedby="button-switch-1"
+        aria-describedby={1}
         className="button-switch-primary__button"
         onClick={[Function]}
       >
@@ -69,7 +69,7 @@ exports[`Backend.ProjectCollection.Form.KindPicker component renders correctly 1
       </button>
       <span
         className="aria-describedby"
-        id="button-switch-1"
+        id={1}
       >
         Toggle kind to Smart
       </span>

@@ -3,7 +3,7 @@
 exports[`Backend.ProjectCollection.Detail.Smart component renders correctly 1`] = `
 <div
   className="entity-list"
-  id="entities-list1"
+  id={1}
 >
   <div
     className="entity-list__contents-wrapper"
@@ -18,7 +18,7 @@ exports[`Backend.ProjectCollection.Detail.Smart component renders correctly 1`] 
         className="entity-row entity-list__entity"
       >
         <a
-          aria-describedby="undefined1-describedby"
+          aria-describedby="1-describedby"
           className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag entity-row__row-link--in-grid"
           href="/backend/projects/2"
           onClick={[Function]}
@@ -205,7 +205,7 @@ exports[`Backend.ProjectCollection.Detail.Smart component renders correctly 1`] 
                 </span>
                 <span
                   className="aria-describedby"
-                  id="undefined1-describedby"
+                  id="1-describedby"
                 >
                   View Rowan Test
                 </span>

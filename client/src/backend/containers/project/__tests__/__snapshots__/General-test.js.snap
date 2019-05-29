@@ -27,13 +27,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[title]-text-input-1"
+              htmlFor="text-input-1"
             >
               Title
             </label>
             <input
-              aria-describedby="attributes[title]-text-input-1"
-              id="attributes[title]-text-input-1"
+              aria-describedby="text-input-error-1"
+              id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Title"
               type="text"
@@ -46,13 +46,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[subtitle]-text-input-1"
+              htmlFor="text-input-1"
             >
               Subtitle
             </label>
             <input
-              aria-describedby="attributes[subtitle]-text-input-1"
-              id="attributes[subtitle]-text-input-1"
+              aria-describedby="text-input-error-1"
+              id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Subtitle"
               type="text"
@@ -65,13 +65,13 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[slug]-text-input-1"
+              htmlFor="text-input-1"
             >
               Slug
             </label>
             <input
-              aria-describedby="attributes[slug]-text-input-1"
-              id="attributes[slug]-text-input-1"
+              aria-describedby="text-input-error-1"
+              id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Slug"
               type="text"
@@ -98,7 +98,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className="form-input-heading toggle above"
-              htmlFor="switch-input-1"
+              htmlFor={1}
             >
               Draft Mode
             </label>
@@ -108,7 +108,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               <div
                 aria-pressed={false}
                 className="boolean-primary"
-                id="switch-input-1"
+                id={1}
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -133,7 +133,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className="form-input-heading toggle above"
-              htmlFor="switch-input-1"
+              htmlFor={1}
             >
               Featured
             </label>
@@ -143,7 +143,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               <div
                 aria-pressed={false}
                 className="boolean-primary"
-                id="switch-input-1"
+                id={1}
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -519,7 +519,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className=""
-              htmlFor="attributes[tagList]-tag-list-1"
+              htmlFor="tag-list-1"
             >
               Tags
             </label>

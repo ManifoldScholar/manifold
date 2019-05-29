@@ -8,13 +8,13 @@ Array [
   >
     <label
       className="has-instructions"
-      htmlFor="attributes[numberOfProjects]-text-input-1"
+      htmlFor="number-input-1"
     >
       Number of Projects:
     </label>
     <input
-      aria-describedby="attributes[numberOfProjects]-text-input-1"
-      id="attributes[numberOfProjects]-text-input-1"
+      aria-describedby="number-input-error-1"
+      id="number-input-1"
       onChange={[Function]}
       type="number"
       value=""
@@ -30,7 +30,7 @@ Array [
   >
     <label
       className="form-input-heading toggle above"
-      htmlFor="switch-input-1"
+      htmlFor={1}
     >
       Featured Projects:
     </label>
@@ -40,7 +40,7 @@ Array [
       <div
         aria-pressed={false}
         className="boolean-primary"
-        id="switch-input-1"
+        id={1}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -122,7 +122,7 @@ Array [
   >
     <label
       className=""
-      htmlFor="attributes[tagList]-tag-list-1"
+      htmlFor="tag-list-1"
     >
       Tags
     </label>

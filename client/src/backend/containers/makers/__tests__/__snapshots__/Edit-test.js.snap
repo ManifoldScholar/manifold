@@ -58,13 +58,13 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="attributes[prefix]-text-input-1"
+            htmlFor="text-input-1"
           >
             Title
           </label>
           <input
-            aria-describedby="attributes[prefix]-text-input-1"
-            id="attributes[prefix]-text-input-1"
+            aria-describedby="text-input-error-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder="Title"
             type="text"
@@ -77,13 +77,13 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="attributes[firstName]-text-input-1"
+            htmlFor="text-input-1"
           >
             First Name
           </label>
           <input
-            aria-describedby="attributes[firstName]-text-input-1"
-            id="attributes[firstName]-text-input-1"
+            aria-describedby="text-input-error-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder="First Name"
             type="text"
@@ -96,13 +96,13 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="attributes[middleName]-text-input-1"
+            htmlFor="text-input-1"
           >
             Middle Name
           </label>
           <input
-            aria-describedby="attributes[middleName]-text-input-1"
-            id="attributes[middleName]-text-input-1"
+            aria-describedby="text-input-error-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder="Middle Name"
             type="text"
@@ -115,13 +115,13 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="attributes[lastName]-text-input-1"
+            htmlFor="text-input-1"
           >
             Last Name
           </label>
           <input
-            aria-describedby="attributes[lastName]-text-input-1"
-            id="attributes[lastName]-text-input-1"
+            aria-describedby="text-input-error-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder="Last Name"
             type="text"
@@ -134,13 +134,13 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="attributes[suffix]-text-input-1"
+            htmlFor="text-input-1"
           >
             Suffix
           </label>
           <input
-            aria-describedby="attributes[suffix]-text-input-1"
-            id="attributes[suffix]-text-input-1"
+            aria-describedby="text-input-error-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder="Suffix"
             type="text"

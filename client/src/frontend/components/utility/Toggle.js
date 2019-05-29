@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -10,7 +10,6 @@ export default class Toggle extends Component {
   static propTypes = {
     handleToggle: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
     optionOne: PropTypes.shape({
       icon: PropTypes.string,
       label: PropTypes.string
@@ -20,10 +19,6 @@ export default class Toggle extends Component {
       label: PropTypes.string
     }).isRequired,
     selected: PropTypes.string
-  };
-
-  static defaultProps = {
-    id: labelId("button-switch-")
   };
 
   get selected() {
@@ -39,6 +34,10 @@ export default class Toggle extends Component {
       option => this.selected !== option.label
     );
     return unselected ? unselected.label : null;
+  }
+
+  get idPrefix() {
+    return "button-switch";
   }
 
   handleClick = event => {
@@ -65,22 +64,26 @@ export default class Toggle extends Component {
     const options = [this.props.optionOne, this.props.optionTwo];
 
     return (
-      <div className="button-switch-primary">
-        <button
-          className="button-switch-primary__button"
-          onClick={this.handleClick}
-          aria-describedby={this.props.id}
-        >
-          <div className="button-switch-primary__wrapper">
-            {options.map(option => {
-              return this.renderOption(option);
-            })}
+      <UID name={id => `${this.idPrefix}-${id}`}>
+        {id => (
+          <div className="button-switch-primary">
+            <button
+              className="button-switch-primary__button"
+              onClick={this.handleClick}
+              aria-describedby={id}
+            >
+              <div className="button-switch-primary__wrapper">
+                {options.map(option => {
+                  return this.renderOption(option);
+                })}
+              </div>
+            </button>
+            <span id={id} className="aria-describedby">
+              {`Toggle ${this.props.label} to ${this.unselected}`}
+            </span>
           </div>
-        </button>
-        <span id={this.props.id} className="aria-describedby">
-          {`Toggle ${this.props.label} to ${this.unselected}`}
-        </span>
-      </div>
+        )}
+      </UID>
     );
   }
 }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isArray from "lodash/isArray";
+import { UID } from "react-uid";
 import BaseInput from "./BaseInput";
-import labelId from "helpers/labelId";
 
 export default class FormTextInput extends Component {
   static displayName = "Form.TextInput";
@@ -19,18 +19,22 @@ export default class FormTextInput extends Component {
     errors: PropTypes.array,
     password: PropTypes.bool,
     join: PropTypes.func,
-    id: PropTypes.string,
-    idForError: PropTypes.string,
     wide: PropTypes.bool
   };
 
   static defaultProps = {
     focusOnMount: false,
     password: false,
-    join: array => array.join(", "),
-    id: labelId("text-input-"),
-    idForError: labelId("text-input-error-")
+    join: array => array.join(", ")
   };
+
+  get idPrefix() {
+    return "text-input";
+  }
+
+  get idForErrorPrefix() {
+    return "text-input-error";
+  }
 
   renderValue = value => {
     if (!value) return "";
@@ -40,21 +44,19 @@ export default class FormTextInput extends Component {
 
   render() {
     const inputType = this.props.password ? "password" : "text";
-    const id = this.props.name
-      ? this.props.name + "-" + this.props.id
-      : this.props.id;
-    const errorId = this.props.name
-      ? this.props.name + "-" + this.props.id
-      : this.props.id;
 
     return (
-      <BaseInput
-        {...this.props}
-        id={id}
-        idForError={errorId}
-        inputType={inputType}
-        renderValue={this.renderValue}
-      />
+      <UID>
+        {id => (
+          <BaseInput
+            {...this.props}
+            id={`${this.idPrefix}-${id}`}
+            idForError={`${this.idForErrorPrefix}-${id}`}
+            inputType={inputType}
+            renderValue={this.renderValue}
+          />
+        )}
+      </UID>
     );
   }
 }

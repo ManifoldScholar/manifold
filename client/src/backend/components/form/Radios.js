@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { UID } from "react-uid";
 import GlobalForm from "global/components/form";
 import Option from "./Radio/Option";
 import RadioLabel from "./Radio/Label";
 import classnames from "classnames";
-import labelId from "helpers/labelId";
 import isString from "lodash/isString";
 import Instructions from "./Instructions";
 import withFormOptions from "hoc/with-form-options";
@@ -27,17 +27,13 @@ class FormRadios extends Component {
     name: PropTypes.string,
     value: PropTypes.any,
     set: PropTypes.func,
-    id: PropTypes.string,
-    idForError: PropTypes.string,
     inputClasses: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     focusOnMount: PropTypes.bool
   };
 
   static defaultProps = {
-    focusOnMount: false,
-    id: labelId("radios-"),
-    idForError: labelId("radios-error-")
+    focusOnMount: false
   };
 
   get focusOnMount() {
@@ -65,32 +61,44 @@ class FormRadios extends Component {
     });
   }
 
+  get idPrefix() {
+    return "radios";
+  }
+
+  get idForErrorPrefix() {
+    return "radios-error";
+  }
+
   render() {
     return (
-      <GlobalForm.Errorable
-        className={this.inputClasses}
-        name={this.props.name}
-        errors={this.props.errors}
-        label={this.props.label}
-        idForError={this.props.idForError}
-      >
-        <fieldset className="form-input-radios__wrapper">
-          <RadioLabel
+      <UID>
+        {id => (
+          <GlobalForm.Errorable
+            className={this.inputClasses}
+            name={this.props.name}
+            errors={this.props.errors}
             label={this.props.label}
-            prompt={this.props.prompt}
-            hasInstructions={isString(this.props.instructions)}
-          />
-          <Instructions instructions={this.props.instructions} />
-          {this.options.map((option, index) => (
-            <Option
-              key={`${this.props.id}-${option.internalValue}`}
-              option={option}
-              focusOnMount={this.focusOnMount && index === 0}
-              {...this.optionProps}
-            />
-          ))}
-        </fieldset>
-      </GlobalForm.Errorable>
+            idForError={`${this.idForErrorPrefix}-${id}`}
+          >
+            <fieldset className="form-input-radios__wrapper">
+              <RadioLabel
+                label={this.props.label}
+                prompt={this.props.prompt}
+                hasInstructions={isString(this.props.instructions)}
+              />
+              <Instructions instructions={this.props.instructions} />
+              {this.options.map((option, index) => (
+                <Option
+                  key={`${this.idPrefix}-${id}-${option.internalValue}`}
+                  option={option}
+                  focusOnMount={this.focusOnMount && index === 0}
+                  {...this.optionProps}
+                />
+              ))}
+            </fieldset>
+          </GlobalForm.Errorable>
+        )}
+      </UID>
     );
   }
 }

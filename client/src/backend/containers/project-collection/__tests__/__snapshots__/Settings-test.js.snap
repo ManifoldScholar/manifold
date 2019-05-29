@@ -17,13 +17,13 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="attributes[title]-text-input-1"
+            htmlFor="text-input-1"
           >
             Collection Title:
           </label>
           <input
-            aria-describedby="attributes[title]-text-input-1"
-            id="attributes[title]-text-input-1"
+            aria-describedby="text-input-error-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder="Enter collection name"
             type="text"
@@ -72,7 +72,7 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
             className="button-switch-primary"
           >
             <button
-              aria-describedby="button-switch-1"
+              aria-describedby={1}
               className="button-switch-primary__button"
               onClick={[Function]}
             >
@@ -127,7 +127,7 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
             </button>
             <span
               className="aria-describedby"
-              id="button-switch-1"
+              id={1}
             >
               Toggle kind to Smart
             </span>
@@ -140,13 +140,13 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="attributes[slug]-text-input-1"
+          htmlFor="text-input-1"
         >
           Slug:
         </label>
         <input
-          aria-describedby="attributes[slug]-text-input-1"
-          id="attributes[slug]-text-input-1"
+          aria-describedby="text-input-error-1"
+          id="text-input-1"
           onChange={[Function]}
           placeholder="Enter slug"
           type="text"
@@ -185,7 +185,7 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
       >
         <label
           className="form-input-heading toggle above"
-          htmlFor="switch-input-1"
+          htmlFor={1}
         >
           Visible:
         </label>
@@ -195,7 +195,7 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
           <div
             aria-pressed={false}
             className="boolean-primary"
-            id="switch-input-1"
+            id={1}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -215,7 +215,7 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
       >
         <label
           className="form-input-heading toggle above"
-          htmlFor="switch-input-1"
+          htmlFor={1}
         >
           Show on homepage:
         </label>
@@ -225,7 +225,7 @@ exports[`Backend.ProjectCollection.Settings container renders correctly 1`] = `
           <div
             aria-pressed={false}
             className="boolean-primary"
-            id="switch-input-1"
+            id={1}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

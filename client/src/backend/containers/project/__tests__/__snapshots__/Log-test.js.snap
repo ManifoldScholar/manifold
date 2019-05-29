@@ -3,7 +3,7 @@
 exports[`Backend Project Log Container renders correctly 1`] = `
 <div
   className="entity-list"
-  id="entities-list1"
+  id={1}
 >
   <h2
     className="entity-list__title-block entity-list__title"
@@ -107,7 +107,7 @@ exports[`Backend Project Log Container renders correctly 1`] = `
               </span>
               <span
                 className="aria-describedby"
-                id="undefined1-describedby"
+                id="1-describedby"
               >
                 View [object Object]
               </span>
@@ -158,7 +158,7 @@ exports[`Backend Project Log Container renders correctly 1`] = `
               </span>
               <span
                 className="aria-describedby"
-                id="undefined1-describedby"
+                id="1-describedby"
               >
                 View [object Object]
               </span>
@@ -196,7 +196,7 @@ exports[`Backend Project Log Container renders correctly 1`] = `
               >
                 <a
                   disabled={true}
-                  href="#entities-list1"
+                  href="#1"
                   onClick={[Function]}
                 >
                   <svg
@@ -232,7 +232,7 @@ exports[`Backend Project Log Container renders correctly 1`] = `
                 className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
               >
                 <a
-                  href="#entities-list1"
+                  href="#1"
                   onClick={[Function]}
                 >
                   <span
@@ -252,7 +252,7 @@ exports[`Backend Project Log Container renders correctly 1`] = `
                 className="list-pagination__page list-pagination__page--ordinal"
               >
                 <a
-                  href="#entities-list1"
+                  href="#1"
                   onClick={[Function]}
                 >
                   <span
@@ -278,7 +278,7 @@ exports[`Backend Project Log Container renders correctly 1`] = `
                 className="list-pagination__page list-pagination__page--next"
               >
                 <a
-                  href="#entities-list1"
+                  href="#1"
                   onClick={[Function]}
                 >
                   <span

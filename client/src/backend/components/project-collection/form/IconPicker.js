@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import GlobalForm from "global/components/form";
 import classNames from "classnames";
 import IconComputed from "global/components/icon-computed";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 
 export default class IconPicker extends Component {
   static displayName = "ProjectCollection.Form.IconPicker";
@@ -13,17 +13,13 @@ export default class IconPicker extends Component {
     name: PropTypes.string,
     errors: PropTypes.array,
     label: PropTypes.string,
-    id: PropTypes.string,
-    idForError: PropTypes.string,
     getModelValue: PropTypes.func,
     setOther: PropTypes.func,
     wide: PropTypes.bool
   };
 
   static defaultProps = {
-    name: "attributes[icon]",
-    id: labelId("icon-picker-"),
-    idForError: labelId("icon-picker-error-")
+    name: "attributes[icon]"
   };
 
   get selected() {
@@ -40,6 +36,14 @@ export default class IconPicker extends Component {
       "touch",
       "mug"
     ];
+  }
+
+  get idPrefix() {
+    return "icon-picker";
+  }
+
+  get idForErrorPrefix() {
+    return "icon-picker";
   }
 
   handleIconChange = icon => {
@@ -67,9 +71,9 @@ export default class IconPicker extends Component {
     );
   }
 
-  renderIconList() {
+  renderIconList(id) {
     return (
-      <ul className="icon-row" id={this.props.id}>
+      <ul className="icon-row" id={`${this.idPrefix}-${id}`}>
         {this.icons.map(icon => {
           return this.renderIcon(icon);
         })}
@@ -84,25 +88,32 @@ export default class IconPicker extends Component {
     });
 
     return (
-      <div className={inputClasses}>
-        <GlobalForm.Errorable
-          className="form-input"
-          name={this.props.name}
-          errors={this.props.errors}
-          label={this.props.label}
-          idForError={this.props.idForError}
-        >
-          <label className="form-input-heading" htmlFor={this.props.id}>
-            Collection Icon:
-          </label>
-          <div>
-            <span className="screen-reader-text">
-              Select an icon for the project collection.
-            </span>
-            {this.renderIconList()}
+      <UID>
+        {id => (
+          <div className={inputClasses}>
+            <GlobalForm.Errorable
+              className="form-input"
+              name={this.props.name}
+              errors={this.props.errors}
+              label={this.props.label}
+              idForError={`${this.idForErrorPrefix}-${id}`}
+            >
+              <label
+                className="form-input-heading"
+                htmlFor={`${this.idPrefix}-${id}`}
+              >
+                Collection Icon:
+              </label>
+              <div>
+                <span className="screen-reader-text">
+                  Select an icon for the project collection.
+                </span>
+                {this.renderIconList(id)}
+              </div>
+            </GlobalForm.Errorable>
           </div>
-        </GlobalForm.Errorable>
-      </div>
+        )}
+      </UID>
     );
   }
 }

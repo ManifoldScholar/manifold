@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { UID } from "react-uid";
 import Utility from "global/components/utility";
-import labelId from "helpers/labelId";
 import { Collapse } from "react-collapse";
 import classNames from "classnames";
 import has from "lodash/has";
@@ -91,6 +91,10 @@ export default class ListEntitiesListSearch extends PureComponent {
     return this.props.searchStyle;
   }
 
+  get idPrefix() {
+    return "list-search";
+  }
+
   setKeywordState(event) {
     const value = event.target.value;
     this.setState({ keyword: value });
@@ -162,7 +166,6 @@ export default class ListEntitiesListSearch extends PureComponent {
   /* eslint-disable react/no-array-index-key */
   /* these filters never change after render */
   render() {
-    const label = labelId("list-search-");
     const baseClass = "entity-list-search";
 
     return (
@@ -178,18 +181,24 @@ export default class ListEntitiesListSearch extends PureComponent {
                 <span className="screen-reader-text">Search</span>
               </button>
               <div className={`${baseClass}__keyword-input-wrapper`}>
-                <label htmlFor={label} className="screen-reader-text">
-                  Enter Search Criteria
-                </label>
-                <input
-                  ref={this.searchInput}
-                  className={`${baseClass}__keyword-input`}
-                  id={label}
-                  value={this.state.keyword}
-                  type="text"
-                  placeholder={this.paramLabel(this.keywordParam)}
-                  onChange={e => this.setKeywordState(e)}
-                />
+                <UID name={id => `${this.idPrefix}-${id}`}>
+                  {id => (
+                    <React.Fragment>
+                      <label htmlFor={id} className="screen-reader-text">
+                        Enter Search Criteria
+                      </label>
+                      <input
+                        ref={this.searchInput}
+                        className={`${baseClass}__keyword-input`}
+                        id={id}
+                        value={this.state.keyword}
+                        type="text"
+                        placeholder={this.paramLabel(this.keywordParam)}
+                        onChange={e => this.setKeywordState(e)}
+                      />
+                    </React.Fragment>
+                  )}
+                </UID>
               </div>
               <button
                 onClick={this.resetSearch}
@@ -228,22 +237,26 @@ export default class ListEntitiesListSearch extends PureComponent {
                         {i === 0 ? "Filter Results:" : "\u00A0"}
                       </span>
                       <div className={`${baseClass}__select-wrapper`}>
-                        <select
-                          id={labelId("list-search-")}
-                          onChange={e => this.setParam(e, param)}
-                          value={this.paramValue(param)}
-                        >
-                          {this.paramOptions(param).map(
-                            (option, optionIndex) => (
-                              <option
-                                key={optionIndex}
-                                value={option.value || ""}
-                              >
-                                {option.label}
-                              </option>
-                            )
+                        <UID name={id => `${this.idPrefix}-${id}`}>
+                          {id => (
+                            <select
+                              id={id}
+                              onChange={e => this.setParam(e, param)}
+                              value={this.paramValue(param)}
+                            >
+                              {this.paramOptions(param).map(
+                                (option, optionIndex) => (
+                                  <option
+                                    key={optionIndex}
+                                    value={option.value || ""}
+                                  >
+                                    {option.label}
+                                  </option>
+                                )
+                              )}
+                            </select>
                           )}
-                        </select>
+                        </UID>
                         <Utility.IconComposer icon="disclosureDown24" />
                       </div>
                     </div>
@@ -258,22 +271,26 @@ export default class ListEntitiesListSearch extends PureComponent {
                         Order Results:
                       </span>
                       <div className={`${baseClass}__select-wrapper`}>
-                        <select
-                          id={labelId("list-search-")}
-                          onChange={e => this.setParam(e, this.orderParam)}
-                          value={this.paramValue(this.orderParam)}
-                        >
-                          {this.paramOptions(this.orderParam).map(
-                            (option, optionIndex) => (
-                              <option
-                                key={optionIndex}
-                                value={option.value || ""}
-                              >
-                                {option.label}
-                              </option>
-                            )
+                        <UID name={id => `${this.idPrefix}-${id}`}>
+                          {id => (
+                            <select
+                              id={id}
+                              onChange={e => this.setParam(e, this.orderParam)}
+                              value={this.paramValue(this.orderParam)}
+                            >
+                              {this.paramOptions(this.orderParam).map(
+                                (option, optionIndex) => (
+                                  <option
+                                    key={optionIndex}
+                                    value={option.value || ""}
+                                  >
+                                    {option.label}
+                                  </option>
+                                )
+                              )}
+                            </select>
                           )}
-                        </select>
+                        </UID>
                         <Utility.IconComposer icon="disclosureDown24" />
                       </div>
                     </div>

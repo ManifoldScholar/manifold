@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import setter from "../setter";
 import Base from "./Base";
 import get from "lodash/get";
@@ -85,17 +85,21 @@ export class FormUpload extends Component {
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array,
-    inputId: PropTypes.string,
-    fileNameFrom: PropTypes.string,
-    idForError: PropTypes.string
+    fileNameFrom: PropTypes.string
   };
 
   static defaultProps = {
     layout: "square",
-    accepts: "any",
-    inputId: labelId("upload-"),
-    idForError: labelId("upload-error-")
+    accepts: "any"
   };
+
+  get idPrefix() {
+    return "upload";
+  }
+
+  get idForErrorPrefix() {
+    return "upload-error";
+  }
 
   updateValue = state => {
     const { attachment, removed } = state;
@@ -124,11 +128,17 @@ export class FormUpload extends Component {
   render() {
     const { set: _set, setOther: _setOther, ...baseProps } = this.props;
     return (
-      <Base
-        {...baseProps}
-        accepts={this.accepts(this.props)}
-        updateValue={this.updateValue}
-      />
+      <UID>
+        {id => (
+          <Base
+            {...baseProps}
+            accepts={this.accepts(this.props)}
+            updateValue={this.updateValue}
+            inputId={`${this.idPrefix}-${id}`}
+            idForError={`${this.idForErrorPrefix}-${id}`}
+          />
+        )}
+      </UID>
     );
   }
 }

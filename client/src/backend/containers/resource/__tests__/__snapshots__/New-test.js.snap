@@ -128,7 +128,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                 className="form-input"
               >
                 <label
-                  htmlFor="kind-1"
+                  htmlFor={1}
                 >
                   Kind
                 </label>
@@ -152,7 +152,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       />
                     </svg>
                     <select
-                      id="kind-1"
+                      id={1}
                       onChange={[Function]}
                       value="image"
                     >
@@ -577,13 +577,13 @@ exports[`Backend Resource New Container renders correctly 1`] = `
             >
               <label
                 className=""
-                htmlFor="attributes[title]-text-input-1"
+                htmlFor="text-input-1"
               >
                 Title
               </label>
               <input
-                aria-describedby="attributes[title]-text-input-1"
-                id="attributes[title]-text-input-1"
+                aria-describedby="text-input-error-1"
+                id="text-input-1"
                 onChange={[Function]}
                 placeholder="Enter a resource title"
                 type="text"

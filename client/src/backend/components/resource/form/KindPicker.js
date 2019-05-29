@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import classNames from "classnames";
 import IconComputed from "global/components/icon-computed";
 import Form from "backend/components/form";
@@ -12,13 +12,12 @@ class KindPicker extends PureComponent {
   static propTypes = {
     getModelValue: PropTypes.func,
     includeButtons: PropTypes.bool,
-    set: PropTypes.func,
-    id: PropTypes.string
+    set: PropTypes.func
   };
 
-  static defaultProps = {
-    id: labelId("kind-")
-  };
+  get idPrefix() {
+    return "kind";
+  }
 
   renderKindPickerButtons(kindList) {
     if (!kindList) return null;
@@ -87,42 +86,46 @@ class KindPicker extends PureComponent {
     });
 
     return (
-      <div className="resource-kind-picker form-secondary">
-        <div className="form-input">
-          <label htmlFor={this.props.id}>Kind</label>
-          <div className={selectClass}>
-            <div className="form-select">
-              <IconComposer
-                icon="disclosureDown16"
-                size={22}
-                iconClass="form-select__icon"
-              />
-              <select
-                id={this.props.id}
-                onChange={event => {
-                  this.props.set(event.target.value);
-                }}
-                value={this.props
-                  .getModelValue("attributes[kind]")
-                  .toLowerCase()}
-              >
-                {kindList.map(kind => {
-                  const safeKind = kind.toLowerCase();
+      <UID name={id => `${this.idPrefix}-${id}`}>
+        {id => (
+          <div className="resource-kind-picker form-secondary">
+            <div className="form-input">
+              <label htmlFor={id}>Kind</label>
+              <div className={selectClass}>
+                <div className="form-select">
+                  <IconComposer
+                    icon="disclosureDown16"
+                    size={22}
+                    iconClass="form-select__icon"
+                  />
+                  <select
+                    id={id}
+                    onChange={event => {
+                      this.props.set(event.target.value);
+                    }}
+                    value={this.props
+                      .getModelValue("attributes[kind]")
+                      .toLowerCase()}
+                  >
+                    {kindList.map(kind => {
+                      const safeKind = kind.toLowerCase();
 
-                  return (
-                    <option key={safeKind} value={safeKind} id={safeKind}>
-                      {kind}
-                    </option>
-                  );
-                })}
-              </select>
+                      return (
+                        <option key={safeKind} value={safeKind} id={safeKind}>
+                          {kind}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
+              {this.props.includeButtons
+                ? this.renderKindPickerButtons(kindList)
+                : null}
             </div>
           </div>
-          {this.props.includeButtons
-            ? this.renderKindPickerButtons(kindList)
-            : null}
-        </div>
-      </div>
+        )}
+      </UID>
     );
   }
 }

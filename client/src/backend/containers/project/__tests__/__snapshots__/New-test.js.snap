@@ -155,13 +155,13 @@ exports[`Backend Project New Container renders correctly 1`] = `
                 >
                   <label
                     className=""
-                    htmlFor="attributes[title]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Title
                   </label>
                   <input
-                    aria-describedby="attributes[title]-text-input-1"
-                    id="attributes[title]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="Enter Project Title"
                     type="text"
@@ -174,13 +174,13 @@ exports[`Backend Project New Container renders correctly 1`] = `
                 >
                   <label
                     className=""
-                    htmlFor="attributes[subtitle]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Subtitle
                   </label>
                   <input
-                    aria-describedby="attributes[subtitle]-text-input-1"
-                    id="attributes[subtitle]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="Enter Project Subtitle"
                     type="text"

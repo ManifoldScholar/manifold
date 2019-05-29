@@ -49,13 +49,13 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][fromAddress]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Email from address
                   </label>
                   <input
-                    aria-describedby="attributes[email][fromAddress]-text-input-1"
-                    id="attributes[email][fromAddress]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="do-not-reply@manifoldapp.org"
                     type="text"
@@ -73,13 +73,13 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][fromName]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Email from name
                   </label>
                   <input
-                    aria-describedby="attributes[email][fromName]-text-input-1"
-                    id="attributes[email][fromName]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="Manifold Scholarship"
                     type="text"
@@ -97,13 +97,13 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][replyToAddress]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Email reply-to address
                   </label>
                   <input
-                    aria-describedby="attributes[email][replyToAddress]-text-input-1"
-                    id="attributes[email][replyToAddress]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="do-not-reply@manifoldapp.org"
                     type="text"
@@ -121,13 +121,13 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][replyToName]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Email reply-to name
                   </label>
                   <input
-                    aria-describedby="attributes[email][replyToName]-text-input-1"
-                    id="attributes[email][replyToName]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     type="text"
                     value=""
@@ -193,7 +193,9 @@ The Manifold Team"
                     className="form-input"
                     style={Object {}}
                   >
-                    <label>
+                    <label
+                      htmlFor="select-1"
+                    >
                       Email Delivery Method
                     </label>
                     <div
@@ -214,6 +216,7 @@ The Manifold Team"
                       </svg>
                       <select
                         aria-describedby="select-error-1"
+                        id="select-1"
                         onChange={[Function]}
                         value=""
                       >
@@ -257,13 +260,13 @@ The Manifold Team"
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][sendmailSettingsLocation]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Sendmail Location
                   </label>
                   <input
-                    aria-describedby="attributes[email][sendmailSettingsLocation]-text-input-1"
-                    id="attributes[email][sendmailSettingsLocation]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     type="text"
                     value=""
@@ -280,13 +283,13 @@ The Manifold Team"
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][sendmailSettingsArguments]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Sendmail Arguments
                   </label>
                   <input
-                    aria-describedby="attributes[email][sendmailSettingsArguments]-text-input-1"
-                    id="attributes[email][sendmailSettingsArguments]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     type="text"
                     value=""
@@ -373,13 +376,13 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][fromAddress]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Email from address
                   </label>
                   <input
-                    aria-describedby="attributes[email][fromAddress]-text-input-1"
-                    id="attributes[email][fromAddress]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="do-not-reply@manifoldapp.org"
                     type="text"
@@ -397,13 +400,13 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][fromName]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Email from name
                   </label>
                   <input
-                    aria-describedby="attributes[email][fromName]-text-input-1"
-                    id="attributes[email][fromName]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="Manifold Scholarship"
                     type="text"
@@ -421,13 +424,13 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][replyToAddress]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Email reply-to address
                   </label>
                   <input
-                    aria-describedby="attributes[email][replyToAddress]-text-input-1"
-                    id="attributes[email][replyToAddress]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     placeholder="do-not-reply@manifoldapp.org"
                     type="text"
@@ -445,13 +448,13 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][replyToName]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     Email reply-to name
                   </label>
                   <input
-                    aria-describedby="attributes[email][replyToName]-text-input-1"
-                    id="attributes[email][replyToName]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     type="text"
                     value=""
@@ -517,7 +520,9 @@ The Manifold Team"
                     className="form-input"
                     style={Object {}}
                   >
-                    <label>
+                    <label
+                      htmlFor="select-1"
+                    >
                       Email Delivery Method
                     </label>
                     <div
@@ -538,6 +543,7 @@ The Manifold Team"
                       </svg>
                       <select
                         aria-describedby="select-error-1"
+                        id="select-1"
                         onChange={[Function]}
                         value=""
                       >
@@ -581,13 +587,13 @@ The Manifold Team"
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][smtpSettingsAddress]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     SMTP Address
                   </label>
                   <input
-                    aria-describedby="attributes[email][smtpSettingsAddress]-text-input-1"
-                    id="attributes[email][smtpSettingsAddress]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     type="text"
                     value=""
@@ -604,13 +610,13 @@ The Manifold Team"
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][smtpSettingsPort]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     SMTP Port
                   </label>
                   <input
-                    aria-describedby="attributes[email][smtpSettingsPort]-text-input-1"
-                    id="attributes[email][smtpSettingsPort]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     type="text"
                     value=""
@@ -627,13 +633,13 @@ The Manifold Team"
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[email][smtpSettingsUserName]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     SMTP Username
                   </label>
                   <input
-                    aria-describedby="attributes[email][smtpSettingsUserName]-text-input-1"
-                    id="attributes[email][smtpSettingsUserName]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     type="text"
                     value=""
@@ -650,13 +656,13 @@ The Manifold Team"
                 >
                   <label
                     className="has-instructions"
-                    htmlFor="attributes[secrets][smtpSettingsPassword]-text-input-1"
+                    htmlFor="text-input-1"
                   >
                     SMTP Password
                   </label>
                   <input
-                    aria-describedby="attributes[secrets][smtpSettingsPassword]-text-input-1"
-                    id="attributes[secrets][smtpSettingsPassword]-text-input-1"
+                    aria-describedby="text-input-error-1"
+                    id="text-input-1"
                     onChange={[Function]}
                     type="password"
                     value=""

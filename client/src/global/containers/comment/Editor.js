@@ -7,7 +7,7 @@ import { entityStoreActions, uiVisibilityActions } from "actions";
 import { singularEntityName } from "utils/entityUtils";
 import { bindActionCreators } from "redux";
 import { commentsAPI } from "api";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
 
 const { request } = entityStoreActions;
@@ -33,15 +33,11 @@ export class CommentEditor extends PureComponent {
     onSuccess: PropTypes.func,
     subject: PropTypes.object.isRequired,
     parentId: PropTypes.string,
-    focus: PropTypes.bool,
-    id: PropTypes.string,
-    idForError: PropTypes.string
+    focus: PropTypes.bool
   };
 
   static defaultProps = {
-    focus: true,
-    id: labelId("comment-textarea-"),
-    idForError: labelId("comment-textarea-error-")
+    focus: true
   };
 
   constructor(props) {
@@ -62,6 +58,14 @@ export class CommentEditor extends PureComponent {
       body,
       errors: []
     };
+  }
+
+  get idPrefix() {
+    return "comment-textarea";
+  }
+
+  get idForErrorPrefix() {
+    return "comment-textarea-error";
   }
 
   submitOnReturnKey = event => {
@@ -188,50 +192,57 @@ export class CommentEditor extends PureComponent {
         </Authorize>
         <Authorize kind="any">
           <form onSubmit={this.handleSubmit}>
-            <GlobalForm.Errorable
-              name="attributes[body]"
-              errors={this.state.errors}
-              idForError={this.props.idForError}
-            >
-              <label htmlFor={this.props.id} className="screen-reader-text">
-                {this.placeholder(this.props)}
-              </label>
-              <textarea
-                ref={ci => {
-                  this.ci = ci;
-                }}
-                id={this.props.id}
-                onKeyDown={this.submitOnReturnKey}
-                className={textClass}
-                placeholder={this.placeholder(this.props)}
-                onChange={this.handleBodyChange}
-                value={this.state.body}
-                aria-describedby={this.props.idForError}
-              />
-              <div className="utility">
-                <div className="buttons">
-                  <button
-                    type="button"
-                    onClick={this.props.cancel}
-                    className="button-secondary button-secondary--dull"
+            <UID>
+              {id => (
+                <GlobalForm.Errorable
+                  name="attributes[body]"
+                  errors={this.state.errors}
+                  idForError={`${this.idForErrorPrefix}-${id}`}
+                >
+                  <label
+                    htmlFor={`${this.idPrefix}-${id}`}
+                    className="screen-reader-text"
                   >
-                    Cancel
-                  </button>
-                  <button
-                    className="button-secondary"
-                    disabled={!this.state.body}
-                  >
-                    <i
-                      className="manicon manicon-word-bubble-lines"
-                      aria-hidden="true"
-                    />
-                    <span className="button-secondary__text">
-                      {this.buttonLabel(this.props)}
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </GlobalForm.Errorable>
+                    {this.placeholder(this.props)}
+                  </label>
+                  <textarea
+                    ref={ci => {
+                      this.ci = ci;
+                    }}
+                    id={`${this.idPrefix}-${id}`}
+                    onKeyDown={this.submitOnReturnKey}
+                    className={textClass}
+                    placeholder={this.placeholder(this.props)}
+                    onChange={this.handleBodyChange}
+                    value={this.state.body}
+                    aria-describedby={`${this.idForErrorPrefix}-${id}`}
+                  />
+                  <div className="utility">
+                    <div className="buttons">
+                      <button
+                        type="button"
+                        onClick={this.props.cancel}
+                        className="button-secondary button-secondary--dull"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className="button-secondary"
+                        disabled={!this.state.body}
+                      >
+                        <i
+                          className="manicon manicon-word-bubble-lines"
+                          aria-hidden="true"
+                        />
+                        <span className="button-secondary__text">
+                          {this.buttonLabel(this.props)}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </GlobalForm.Errorable>
+              )}
+            </UID>
           </form>
         </Authorize>
       </div>

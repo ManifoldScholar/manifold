@@ -58,13 +58,13 @@ exports[`Backend Settings Subjects Edit Container renders correctly 1`] = `
         >
           <label
             className=""
-            htmlFor="attributes[name]-text-input-1"
+            htmlFor="text-input-1"
           >
             Name
           </label>
           <input
-            aria-describedby="attributes[name]-text-input-1"
-            id="attributes[name]-text-input-1"
+            aria-describedby="text-input-error-1"
+            id="text-input-1"
             onChange={[Function]}
             placeholder="Name"
             type="text"

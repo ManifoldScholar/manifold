@@ -6,7 +6,7 @@ exports[`Backend.ProjectCollection.List component renders correctly 1`] = `
 >
   <div
     className="entity-list entity-list--bare"
-    id="entities-list1"
+    id={1}
   >
     <div
       className="entity-list__contents-wrapper"

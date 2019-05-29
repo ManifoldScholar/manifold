@@ -13,6 +13,11 @@ jest.mock("date-fns/distance_in_words", () => {
 });
 
 jest.mock("focus-trap-react", () => "focus-trap-react");
+jest.mock("react-uid", () => {
+  return {
+    UID: jest.fn(props => props.children(1))
+  };
+});
 
 // Mocked fetchData is a noop component that renders its child.
 // see src/components/global/HigherOrder/__mocks__/fetchData.js
@@ -25,5 +30,4 @@ jest.mock("hoc/with-form-context");
 // To mock returned data or collection responses, adjust src/api/__mocks__/client.js
 jest.mock("api/client");
 
-jest.mock("helpers/labelId");
 jest.mock("services/plugin/initializer");

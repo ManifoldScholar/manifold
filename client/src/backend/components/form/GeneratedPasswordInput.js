@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 import setter from "./setter";
 import GlobalForm from "global/components/form";
 import generatePassword from "helpers/passwordGenerator";
@@ -15,15 +15,11 @@ class FormGeneratedPasswordInput extends Component {
     value: PropTypes.any,
     focusOnMount: PropTypes.bool,
     errors: PropTypes.array,
-    set: PropTypes.func,
-    id: PropTypes.string,
-    idForError: PropTypes.string
+    set: PropTypes.func
   };
 
   static defaultProps = {
-    focusOnMount: false,
-    id: labelId("generated-password-"),
-    idForError: labelId("generated-password-error-")
+    focusOnMount: false
   };
 
   constructor(props) {
@@ -42,6 +38,14 @@ class FormGeneratedPasswordInput extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) this.setValueFromCurrentState();
+  }
+
+  get idPrefix() {
+    return "generated-password";
+  }
+
+  get idForErrorPrefix() {
+    return "generated-password-error";
   }
 
   setValueFromCurrentState() {
@@ -65,7 +69,7 @@ class FormGeneratedPasswordInput extends Component {
     this.setState({ password: value });
   }
 
-  renderInput() {
+  renderInput(id) {
     const type = this.state.showPassword ? "text" : "password";
 
     return (
@@ -73,7 +77,7 @@ class FormGeneratedPasswordInput extends Component {
         ref={input => {
           this.inputElement = input;
         }}
-        id={this.props.id}
+        id={`${this.idPrefix}-${id}`}
         aria-describedby={this.props.idForError}
         type={type}
         placeholder={"Enter a password"}
@@ -87,31 +91,35 @@ class FormGeneratedPasswordInput extends Component {
     const icon = !this.state.showPassword ? "eyeClosed32" : "eyeOpen32";
 
     return (
-      <GlobalForm.Errorable
-        className="form-input password-input"
-        name={this.props.name}
-        errors={this.props.errors}
-        label="Password"
-        idForError={this.props.idForError}
-      >
-        <label htmlFor={this.props.id}>Password</label>
-        <span
-          className="password-input__visibility-toggle"
-          onClick={event => this.togglePassword(event)}
-          role="button"
-          tabIndex="0"
-        >
-          <IconComposer
-            icon={icon}
-            size="default"
-            iconClass="password-input__visibility-icon"
-          />
-          <span className="screen-reader-text">
-            {this.state.showPassword ? "hide password" : "show password"}
-          </span>
-        </span>
-        {this.renderInput()}
-      </GlobalForm.Errorable>
+      <UID>
+        {id => (
+          <GlobalForm.Errorable
+            className="form-input password-input"
+            name={this.props.name}
+            errors={this.props.errors}
+            label="Password"
+            idForError={`${this.idForErrorPrefix}-${id}`}
+          >
+            <label htmlFor={`${this.idPrefix}-${id}`}>Password</label>
+            <span
+              className="password-input__visibility-toggle"
+              onClick={event => this.togglePassword(event)}
+              role="button"
+              tabIndex="0"
+            >
+              <IconComposer
+                icon={icon}
+                size="default"
+                iconClass="password-input__visibility-icon"
+              />
+              <span className="screen-reader-text">
+                {this.state.showPassword ? "hide password" : "show password"}
+              </span>
+            </span>
+            {this.renderInput(id)}
+          </GlobalForm.Errorable>
+        )}
+      </UID>
     );
   }
 }

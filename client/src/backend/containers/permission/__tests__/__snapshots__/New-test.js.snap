@@ -76,7 +76,7 @@ exports[`Backend Permission New Container renders correctly 1`] = `
               >
                 <label
                   className="form-input-heading toggle above"
-                  htmlFor="switch-input-1"
+                  htmlFor={1}
                 >
                   Can modify project?
                 </label>
@@ -86,7 +86,7 @@ exports[`Backend Permission New Container renders correctly 1`] = `
                   <div
                     aria-pressed={false}
                     className="boolean-primary"
-                    id="switch-input-1"
+                    id={1}
                     onBlur={[Function]}
                     onClick={[Function]}
                     onFocus={[Function]}
@@ -106,7 +106,7 @@ exports[`Backend Permission New Container renders correctly 1`] = `
               >
                 <label
                   className="form-input-heading toggle above"
-                  htmlFor="switch-input-1"
+                  htmlFor={1}
                 >
                   Can modify resource metadata?
                 </label>
@@ -116,7 +116,7 @@ exports[`Backend Permission New Container renders correctly 1`] = `
                   <div
                     aria-pressed={false}
                     className="boolean-primary"
-                    id="switch-input-1"
+                    id={1}
                     onBlur={[Function]}
                     onClick={[Function]}
                     onFocus={[Function]}
@@ -136,7 +136,7 @@ exports[`Backend Permission New Container renders correctly 1`] = `
               >
                 <label
                   className="form-input-heading toggle above"
-                  htmlFor="switch-input-1"
+                  htmlFor={1}
                 >
                   Is a project author?
                 </label>
@@ -146,7 +146,7 @@ exports[`Backend Permission New Container renders correctly 1`] = `
                   <div
                     aria-pressed={false}
                     className="boolean-primary"
-                    id="switch-input-1"
+                    id={1}
                     onBlur={[Function]}
                     onClick={[Function]}
                     onFocus={[Function]}

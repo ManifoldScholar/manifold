@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import labelId from "helpers/labelId";
 import Dropzone from "react-dropzone";
 import GlobalForm from "global/components/form";
 import classnames from "classnames";
@@ -31,8 +30,8 @@ export default class FormUpload extends Component {
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array,
-    inputId: PropTypes.string,
-    idForError: PropTypes.string,
+    inputId: PropTypes.string.isRequired,
+    idForError: PropTypes.string.isRequired,
     wide: PropTypes.bool,
     progress: PropTypes.string,
     fileNameFrom: PropTypes.string,
@@ -43,9 +42,7 @@ export default class FormUpload extends Component {
   static defaultProps = {
     layout: "square",
     accepts: null,
-    wide: false,
-    inputId: labelId("upload-"),
-    idForError: labelId("upload-error-")
+    wide: false
   };
 
   constructor(props) {

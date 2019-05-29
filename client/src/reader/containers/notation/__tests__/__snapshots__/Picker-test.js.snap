@@ -19,7 +19,7 @@ Array [
         className="button-switch-primary"
       >
         <button
-          aria-describedby="button-switch-1"
+          aria-describedby={1}
           className="button-switch-primary__button"
           onClick={[Function]}
         >
@@ -74,14 +74,14 @@ Array [
         </button>
         <span
           className="aria-describedby"
-          id="button-switch-1"
+          id={1}
         >
           Toggle options to collections
         </span>
       </div>
       <div
         className="entity-list"
-        id="entities-list1"
+        id={1}
       >
         <div
           className="entity-list__contents-wrapper"
@@ -122,13 +122,13 @@ Array [
                 >
                   <label
                     className="screen-reader-text"
-                    htmlFor="list-search-1"
+                    htmlFor={1}
                   >
                     Enter Search Criteria
                   </label>
                   <input
                     className="entity-list-search__keyword-input"
-                    id="list-search-1"
+                    id={1}
                     onChange={[Function]}
                     placeholder="Search..."
                     type="text"
@@ -154,7 +154,7 @@ Array [
               className="entity-row entity-list__entity"
             >
               <a
-                aria-describedby="undefined1-describedby"
+                aria-describedby="1-describedby"
                 className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
                 href="/backend/projects/resource/1"
                 onClick={[Function]}
@@ -198,7 +198,7 @@ Array [
                       </span>
                       <span
                         className="aria-describedby"
-                        id="undefined1-describedby"
+                        id="1-describedby"
                       >
                         View Image
                       </span>
@@ -220,7 +220,7 @@ Array [
               className="entity-row entity-list__entity"
             >
               <a
-                aria-describedby="undefined1-describedby"
+                aria-describedby="1-describedby"
                 className="entity-row__row-link entity-row__row-link--block entity-row__row-link--atag"
                 href="/backend/projects/resource/2"
                 onClick={[Function]}
@@ -264,7 +264,7 @@ Array [
                       </span>
                       <span
                         className="aria-describedby"
-                        id="undefined1-describedby"
+                        id="1-describedby"
                       >
                         View Image
                       </span>
@@ -302,7 +302,7 @@ Array [
                     >
                       <a
                         disabled={true}
-                        href="#entities-list1"
+                        href="#1"
                         onClick={[Function]}
                       >
                         <svg
@@ -338,7 +338,7 @@ Array [
                       className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
                     >
                       <a
-                        href="#entities-list1"
+                        href="#1"
                         onClick={[Function]}
                       >
                         <span
@@ -358,7 +358,7 @@ Array [
                       className="list-pagination__page list-pagination__page--ordinal"
                     >
                       <a
-                        href="#entities-list1"
+                        href="#1"
                         onClick={[Function]}
                       >
                         <span
@@ -384,7 +384,7 @@ Array [
                       className="list-pagination__page list-pagination__page--next"
                     >
                       <a
-                        href="#entities-list1"
+                        href="#1"
                         onClick={[Function]}
                       >
                         <span

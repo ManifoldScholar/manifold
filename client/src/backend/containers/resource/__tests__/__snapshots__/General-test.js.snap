@@ -15,7 +15,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           className="form-input"
         >
           <label
-            htmlFor="kind-1"
+            htmlFor={1}
           >
             Kind
           </label>
@@ -39,7 +39,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
                 />
               </svg>
               <select
-                id="kind-1"
+                id={1}
                 onChange={[Function]}
                 value="image"
               >
@@ -114,13 +114,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="attributes[title]-text-input-1"
+          htmlFor="text-input-1"
         >
           Title
         </label>
         <input
-          aria-describedby="attributes[title]-text-input-1"
-          id="attributes[title]-text-input-1"
+          aria-describedby="text-input-error-1"
+          id="text-input-1"
           onChange={[Function]}
           placeholder="Enter a title"
           type="text"
@@ -133,13 +133,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="attributes[fingerprint]-text-input-1"
+          htmlFor="text-input-1"
         >
           Fingerprint
         </label>
         <input
-          aria-describedby="attributes[fingerprint]-text-input-1"
-          id="attributes[fingerprint]-text-input-1"
+          aria-describedby="text-input-error-1"
+          id="text-input-1"
           onChange={[Function]}
           placeholder="Enter fingerprint"
           type="text"
@@ -152,13 +152,13 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="attributes[slug]-text-input-1"
+          htmlFor="text-input-1"
         >
           Slug
         </label>
         <input
-          aria-describedby="attributes[slug]-text-input-1"
-          id="attributes[slug]-text-input-1"
+          aria-describedby="text-input-error-1"
+          id="text-input-1"
           onChange={[Function]}
           placeholder="Enter slug"
           type="text"
@@ -171,7 +171,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="attributes[tagList]-tag-list-1"
+          htmlFor="tag-list-1"
         >
           Tags
         </label>

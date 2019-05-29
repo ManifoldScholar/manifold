@@ -5,7 +5,7 @@ import isArray from "lodash/isArray";
 import isString from "lodash/isString";
 import LabelSet from "./LabelSet";
 import { Link } from "react-router-dom";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 
 export default class EntitiesListRow extends PureComponent {
   static displayName = "List.EntitiesList.Entity.Row";
@@ -199,7 +199,7 @@ export default class EntitiesListRow extends PureComponent {
     return this.props.isSortable;
   }
 
-  wrapWithAnchor(child, url, block = false) {
+  wrapWithAnchor(child, id, url, block = false) {
     const className = classNames({
       "entity-row__row-link": true,
       "entity-row__row-link--block": block,
@@ -211,7 +211,7 @@ export default class EntitiesListRow extends PureComponent {
       <Link
         className={className}
         to={url}
-        aria-describedby={`${this.labelId}-describedby`}
+        aria-describedby={`${id}-describedby`}
       >
         {child}
       </Link>
@@ -233,69 +233,72 @@ export default class EntitiesListRow extends PureComponent {
     );
   }
 
-  wrapWithClickHandler(child, block = false) {
+  wrapWithClickHandler(child, id, block = false) {
     if (!this.onRowClick) return child;
     if (isString(this.onRowClick))
-      return this.wrapWithAnchor(child, this.onRowClick, block);
+      return this.wrapWithAnchor(child, id, this.onRowClick, block);
     return this.wrapWithButton(child, this.onRowClick, block);
   }
 
-  inlineLink(child) {
+  inlineLink(child, id) {
     if (this.rowClickMode !== "inline") return child;
-    return this.wrapWithClickHandler(child, false);
+    return this.wrapWithClickHandler(child, id, false);
   }
 
-  blockLink(child) {
+  blockLink(child, id) {
     if (!this.entireRowIsClickable) return child;
-    return this.wrapWithClickHandler(child, true);
+    return this.wrapWithClickHandler(child, id, true);
   }
 
   render() {
-    this.labelId = labelId();
-
     return (
-      <li className="entity-row entity-list__entity">
-        {this.blockLink(
-          <div className={this.rowClassNames}>
-            {this.figure && (
-              <div className={this.figureClassNames}>
-                {this.inlineLink(this.figure)}
-              </div>
+      <UID>
+        {id => (
+          <li className="entity-row entity-list__entity">
+            {this.blockLink(
+              <div className={this.rowClassNames}>
+                {this.figure && (
+                  <div className={this.figureClassNames}>
+                    {this.inlineLink(this.figure)}
+                  </div>
+                )}
+                <div className={this.textClassNames}>
+                  {this.title && (
+                    <h3 className={this.titleClassNames}>
+                      <span className="entity-row__title-inner">
+                        {this.inlineLink(this.title, id)}
+                      </span>
+                      {this.hasLabels && <LabelSet labels={this.labels} />}
+                      <span
+                        id={`${id}-describedby`}
+                        className="aria-describedby"
+                      >
+                        {`View ${this.titlePlainText}`}
+                      </span>
+                    </h3>
+                  )}
+                  {!this.title && this.hasLabels && (
+                    <LabelSet labels={this.labels} />
+                  )}
+                  {this.hasSubtitle && (
+                    <h4 className={this.subtitleClassNames}>{this.subtitle}</h4>
+                  )}
+                  {this.hasCount && (
+                    <h4 className={this.countClassNames}>{this.count}</h4>
+                  )}
+                  {this.hasMeta && (
+                    <div className={this.metaClassNames}>{this.meta}</div>
+                  )}
+                </div>
+                {this.utility && (
+                  <div className="entity-row__utility">{this.utility}</div>
+                )}
+              </div>,
+              id
             )}
-            <div className={this.textClassNames}>
-              {this.title && (
-                <h3 className={this.titleClassNames}>
-                  <span className="entity-row__title-inner">
-                    {this.inlineLink(this.title)}
-                  </span>
-                  {this.hasLabels && <LabelSet labels={this.labels} />}
-                  <span
-                    id={`${this.labelId}-describedby`}
-                    className="aria-describedby"
-                  >
-                    {`View ${this.titlePlainText}`}
-                  </span>
-                </h3>
-              )}
-              {!this.title && this.hasLabels && (
-                <LabelSet labels={this.labels} />
-              )}
-              {this.hasSubtitle && (
-                <h4 className={this.subtitleClassNames}>{this.subtitle}</h4>
-              )}
-              {this.hasCount && (
-                <h4 className={this.countClassNames}>{this.count}</h4>
-              )}
-              {this.hasMeta && (
-                <div className={this.metaClassNames}>{this.meta}</div>
-              )}
-            </div>
-            {this.utility && (
-              <div className="entity-row__utility">{this.utility}</div>
-            )}
-          </div>
+          </li>
         )}
-      </li>
+      </UID>
     );
   }
 }

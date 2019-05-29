@@ -3,18 +3,11 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import debounce from "lodash/debounce";
 import throttle from "lodash/throttle";
-import labelId from "helpers/labelId";
+import { UID } from "react-uid";
 
 export default class ResourcePlayerAudio extends Component {
   static propTypes = {
-    resource: PropTypes.object,
-    progressBarId: PropTypes.string,
-    volumeBarId: PropTypes.string
-  };
-
-  static defaultProps = {
-    progressBarId: labelId("progress-bar-"),
-    volumeBarId: labelId("volume-bar-")
+    resource: PropTypes.object
   };
 
   constructor() {
@@ -47,6 +40,14 @@ export default class ResourcePlayerAudio extends Component {
     this.audio.destroy();
     this.audio = null;
     window.removeEventListener("resize", this.debouncedResize);
+  }
+
+  get progressBarIdPrefix() {
+    return "progress-bar";
+  }
+
+  get volumeBarIdPrefix() {
+    return "volume-bar";
   }
 
   setVolume = event => {
@@ -243,20 +244,23 @@ export default class ResourcePlayerAudio extends Component {
                   left: `calc(${this.state.percent}% - 10px)`
                 }}
               />
-              <label
-                htmlFor={this.props.progressBarId}
-                className="screen-reader-text"
-              >
-                Progress Bar
-              </label>
-              <input
-                id={this.props.progressBarId}
-                type="range"
-                min="0"
-                max="100"
-                value={this.state.percent}
-                onChange={this.handleProgressClick}
-              />
+              <UID name={id => `${this.progressBarIdPrefix}-${id}`}>
+                {id => (
+                  <React.Fragment>
+                    <label htmlFor={id} className="screen-reader-text">
+                      Progress Bar
+                    </label>
+                    <input
+                      id={id}
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={this.state.percent}
+                      onChange={this.handleProgressClick}
+                    />
+                  </React.Fragment>
+                )}
+              </UID>
             </div>
             <div className="time duration">{this.state.durationFormatted}</div>
           </div>
@@ -274,20 +278,23 @@ export default class ResourcePlayerAudio extends Component {
                   left: `${volume * 0.7 - 10}px`
                 }}
               />
-              <label
-                htmlFor={this.props.volumeBarId}
-                className="screen-reader-text"
-              >
-                Adjust Volume
-              </label>
-              <input
-                id={this.props.volumeBarId}
-                type="range"
-                min="0"
-                max="100"
-                value={volume}
-                onChange={this.setVolume}
-              />
+              <UID name={id => `${this.volumeBarIdPrefix}-${id}`}>
+                {id => (
+                  <React.Fragment>
+                    <label htmlFor={id} className="screen-reader-text">
+                      Adjust Volume
+                    </label>
+                    <input
+                      id={id}
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={volume}
+                      onChange={this.setVolume}
+                    />
+                  </React.Fragment>
+                )}
+              </UID>
             </div>
           </div>
         </div>

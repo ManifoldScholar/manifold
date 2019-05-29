@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import omitBy from "lodash/omitBy";
-import uniqueId from "lodash/uniqueId";
+import { UID } from "react-uid";
 import isEmpty from "lodash/isEmpty";
 import Utility from "global/components/utility";
 
@@ -14,12 +14,7 @@ export class ProjectListFilters extends Component {
     filterChangeHandler: PropTypes.func,
     initialFilterState: PropTypes.object,
     subjects: PropTypes.array,
-    hideFeatured: PropTypes.bool,
-    searchId: PropTypes.string
-  };
-
-  static defaultProps = {
-    searchId: uniqueId("filters-search-")
+    hideFeatured: PropTypes.bool
   };
 
   constructor(props) {
@@ -42,6 +37,10 @@ export class ProjectListFilters extends Component {
 
   get resetMessage() {
     return "Search and filters reset.";
+  }
+
+  get idPrefix() {
+    return "filters-search";
   }
 
   setFilters = (event, label) => {
@@ -118,17 +117,23 @@ export class ProjectListFilters extends Component {
             size={20}
           />
         </button>
-        <label htmlFor={this.props.searchId} className="screen-reader-text">
-          Enter Search Criteria
-        </label>
-        <input
-          ref={this.searchInput}
-          value={this.state.filters.keyword || ""}
-          type="text"
-          id={this.props.searchId}
-          onChange={event => this.setFilters(event, "keyword")}
-          placeholder="Search…"
-        />
+        <UID name={id => `${this.idPrefix}-${id}`}>
+          {id => (
+            <React.Fragment>
+              <label htmlFor={id} className="screen-reader-text">
+                Enter Search Criteria
+              </label>
+              <input
+                ref={this.searchInput}
+                value={this.state.filters.keyword || ""}
+                type="text"
+                id={id}
+                onChange={event => this.setFilters(event, "keyword")}
+                placeholder="Search…"
+              />
+            </React.Fragment>
+          )}
+        </UID>
       </div>
     );
   }

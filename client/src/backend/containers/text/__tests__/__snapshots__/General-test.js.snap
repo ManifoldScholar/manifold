@@ -21,13 +21,13 @@ exports[`Backend Text General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="attributes[title]-text-input-1"
+          htmlFor="text-input-1"
         >
           Title
         </label>
         <input
-          aria-describedby="attributes[title]-text-input-1"
-          id="attributes[title]-text-input-1"
+          aria-describedby="text-input-error-1"
+          id="text-input-1"
           onChange={[Function]}
           placeholder="Enter Text Title"
           type="text"
@@ -40,13 +40,13 @@ exports[`Backend Text General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="attributes[subtitle]-text-input-1"
+          htmlFor="text-input-1"
         >
           Subtitle
         </label>
         <input
-          aria-describedby="attributes[subtitle]-text-input-1"
-          id="attributes[subtitle]-text-input-1"
+          aria-describedby="text-input-error-1"
+          id="text-input-1"
           onChange={[Function]}
           placeholder="Enter Subtitle"
           type="text"
@@ -58,7 +58,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
       >
         <label
           className="form-input-heading toggle above"
-          htmlFor="switch-input-1"
+          htmlFor={1}
         >
           Published?
         </label>
@@ -68,7 +68,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
           <div
             aria-pressed={true}
             className="boolean-primary checked"
-            id="switch-input-1"
+            id={1}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -355,13 +355,13 @@ exports[`Backend Text General Container renders correctly 1`] = `
       >
         <label
           className="has-instructions"
-          htmlFor="attributes[sectionKind]-text-input-1"
+          htmlFor="text-input-1"
         >
           Section Label
         </label>
         <input
-          aria-describedby="attributes[sectionKind]-text-input-1"
-          id="attributes[sectionKind]-text-input-1"
+          aria-describedby="text-input-error-1"
+          id="text-input-1"
           onChange={[Function]}
           placeholder="Enter a label for sections in this text"
           type="text"
