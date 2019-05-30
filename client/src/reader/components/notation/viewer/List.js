@@ -88,7 +88,7 @@ class NotationViewerList extends PureComponent {
   }
 
   getNotationLocation(top) {
-    if (top <= 120) return 0;
+    if (top <= 120) return 120;
     return top - 10;
   }
 
