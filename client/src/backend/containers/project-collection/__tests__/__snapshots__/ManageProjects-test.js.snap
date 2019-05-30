@@ -8,6 +8,12 @@ Array [
     className="screen-reader-text"
     role="status"
   />,
+  <div
+    aria-atomic={true}
+    aria-live="polite"
+    className="screen-reader-text"
+    role="status"
+  />,
   <header
     className="drawer-header"
   >
