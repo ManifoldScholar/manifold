@@ -6,7 +6,7 @@ class ProjectFullSerializer < ProjectSerializer
 
   attributes :hashtag, :description, :featured, :purchase_url, :purchase_price_money,
              :purchase_price_currency, :purchase_price, :purchase_call_to_action,
-             :twitter_id, :instagram_id, :facebook_id, :hero_styles, :cover_styles,
+             :twitter_id, :instagram_id, :facebook_id, :cover_styles,
              :description_formatted, :resource_kinds, :resource_tags, :dark_mode,
              :image_credits, :image_credits_formatted, :tag_list
 

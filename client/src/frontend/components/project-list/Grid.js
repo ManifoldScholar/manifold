@@ -64,17 +64,6 @@ export default class ProjectListGrid extends Component {
     }
   }
 
-  renderPagination(props) {
-    return (
-      <div className="entity-section-wrapper__pagination">
-        <Utility.Pagination
-          paginationClickHandler={props.paginationClickHandler}
-          pagination={props.pagination}
-        />
-      </div>
-    );
-  }
-
   shouldShowViewAll(props) {
     if (props.showViewAll) return true;
     if (!props.projects || props.projects.length === 0) return false;
@@ -98,6 +87,17 @@ export default class ProjectListGrid extends Component {
           {this.props.viewAllLabel}
           <Utility.IconComposer icon="arrowLongRight16" size="default" />
         </Link>
+      </div>
+    );
+  }
+
+  renderPagination(props) {
+    return (
+      <div className="entity-section-wrapper__pagination">
+        <Utility.Pagination
+          paginationClickHandler={props.paginationClickHandler}
+          pagination={props.pagination}
+        />
       </div>
     );
   }

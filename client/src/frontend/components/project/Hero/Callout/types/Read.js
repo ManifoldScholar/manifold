@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Error from "./Error";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import Utility from "global/components/utility";
@@ -19,6 +20,10 @@ export default class ProjectHeroCalloutRead extends PureComponent {
 
   get typeClass() {
     return this.isButton ? "button" : "link";
+  }
+
+  get hasText() {
+    return Boolean(this.props.callout.relationships.text);
   }
 
   get slug() {
@@ -48,6 +53,9 @@ export default class ProjectHeroCalloutRead extends PureComponent {
   }
 
   render() {
+    if (!this.hasText)
+      return <Error {...this.props} message={"Text Missing"} />;
+
     const blockClass = this.props.blockClass;
     const calloutClass = classNames({
       [`${blockClass}__button ${blockClass}__button--primary`]: this.isButton,

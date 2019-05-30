@@ -334,7 +334,13 @@ Array [
                   <span
                     className="entity-row__title-inner"
                   >
-                    Image
+                    <span
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "Image",
+                        }
+                      }
+                    />
                   </span>
                   <span
                     className="entity-row__labels"
@@ -349,7 +355,7 @@ Array [
                     className="aria-describedby"
                     id="1-describedby"
                   >
-                    View Image
+                    View [object Object]
                   </span>
                 </h3>
                 <div
@@ -424,7 +430,13 @@ Array [
                   <span
                     className="entity-row__title-inner"
                   >
-                    Image
+                    <span
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "Image",
+                        }
+                      }
+                    />
                   </span>
                   <span
                     className="entity-row__labels"
@@ -439,7 +451,7 @@ Array [
                     className="aria-describedby"
                     id="1-describedby"
                   >
-                    View Image
+                    View [object Object]
                   </span>
                 </h3>
                 <div
