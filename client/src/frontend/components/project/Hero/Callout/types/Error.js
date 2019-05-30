@@ -8,7 +8,8 @@ export default class ProjectHeroCalloutRead extends PureComponent {
   static propTypes = {
     callout: PropTypes.object,
     blockClass: PropTypes.string,
-    showErrors: PropTypes.bool
+    showErrors: PropTypes.bool,
+    message: PropTypes.string
   };
 
   static defaultProps = {
