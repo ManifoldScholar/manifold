@@ -103,6 +103,7 @@
 
       .entity-list-search__options-label {
         &--empty {
+          display: block;
           padding-top: 0;
         }
         padding-top: 30px;
