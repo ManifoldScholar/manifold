@@ -3,7 +3,7 @@
 exports[`Backend.ProjectCollection.Detail.Smart component renders correctly 1`] = `
 <div
   className="entity-list"
-  id={1}
+  id="entities-list-1"
 >
   <div
     className="entity-list__contents-wrapper"
@@ -12,6 +12,7 @@ exports[`Backend.ProjectCollection.Detail.Smart component renders correctly 1`] 
       className="entity-list__header"
     />
     <ul
+      aria-describedby="entities-list-instructions-1"
       className="entity-list__list entity-list__list--grid"
     >
       <li

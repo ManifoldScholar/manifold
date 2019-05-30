@@ -49,6 +49,10 @@ export class FormTusUpload extends Component {
     return "upload-error";
   }
 
+  get idForInstructionsPrefix() {
+    return "upload-instructions";
+  }
+
   removeFile() {
     this.props.set(null);
     this.setState({ progress: null, error: null });
@@ -121,6 +125,7 @@ export class FormTusUpload extends Component {
             updateValue={this.updateValue}
             inputId={`${this.idPrefix}-${id}`}
             idForError={`${this.idForErrorPrefix}-${id}`}
+            idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
           />
         )}
       </UID>

@@ -52,6 +52,10 @@ class FormTagList extends Component {
     return "tag-list-error";
   }
 
+  get idForInstructionsPrefix() {
+    return "tag-list-instructions";
+  }
+
   arrayEntities(value) {
     if (!value) return [];
     return isString(value) ? value.split(",").map(tag => tag.trim()) : value;
@@ -117,8 +121,13 @@ class FormTagList extends Component {
               onSelect={this.handleAdd}
               onNew={this.handleAdd}
               label={this.tagLabel}
+              idForError={`${this.idForErrorPrefix}-${id}`}
+              idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
             />
-            <Instructions instructions={this.props.instructions} />
+            <Instructions
+              instructions={this.props.instructions}
+              id={`${this.idForInstructionsPrefix}-${id}`}
+            />
             <div className="has-many-list">
               {this.renderList(this.props.value)}
             </div>

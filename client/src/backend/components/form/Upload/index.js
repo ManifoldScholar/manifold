@@ -101,6 +101,10 @@ export class FormUpload extends Component {
     return "upload-error";
   }
 
+  get idForInstructionsPrefix() {
+    return "upload-instructions";
+  }
+
   updateValue = state => {
     const { attachment, removed } = state;
     const { set, setOther, remove: removeName } = this.props;
@@ -136,6 +140,7 @@ export class FormUpload extends Component {
             updateValue={this.updateValue}
             inputId={`${this.idPrefix}-${id}`}
             idForError={`${this.idForErrorPrefix}-${id}`}
+            idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
           />
         )}
       </UID>

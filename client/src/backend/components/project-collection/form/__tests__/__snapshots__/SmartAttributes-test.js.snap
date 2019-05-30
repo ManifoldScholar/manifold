@@ -13,7 +13,7 @@ Array [
       Number of Projects:
     </label>
     <input
-      aria-describedby="number-input-error-1"
+      aria-describedby="number-input-error-1 number-input-instructions-1"
       id="number-input-1"
       onChange={[Function]}
       type="number"
@@ -21,6 +21,7 @@ Array [
     />
     <span
       className="instructions"
+      id="number-input-instructions-1"
     >
       Number of projects included in this Collection.
     </span>
@@ -30,7 +31,7 @@ Array [
   >
     <label
       className="form-input-heading toggle above"
-      htmlFor={1}
+      htmlFor="switch-input-1"
     >
       Featured Projects:
     </label>
@@ -38,9 +39,10 @@ Array [
       className="toggle-indicator"
     >
       <div
+        aria-describedby="switch-input-instructions-1"
         aria-pressed={false}
         className="boolean-primary"
-        id={1}
+        id="switch-input-1"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -56,6 +58,7 @@ Array [
     </div>
     <span
       className="instructions"
+      id="switch-input-instructions-1"
     >
       Include only featured projects in this Collection.
     </span>
@@ -71,6 +74,7 @@ Array [
     </div>
     <span
       className="instructions"
+      id="predictive-text-belongs-to-instructions-1"
     >
       Include all Projects with these subjects.
     </span>
@@ -84,7 +88,7 @@ Array [
           className="input-predictive__input"
         >
           <input
-            aria-describedby={null}
+            aria-describedby="predictive-text-belongs-to-error-1 predictive-text-belongs-to-instructions-1"
             aria-label="Add a Subject"
             className="input-predictive__text-input text-input"
             onBlur={[Function]}
@@ -133,7 +137,7 @@ Array [
         className="input-predictive__input"
       >
         <input
-          aria-describedby={null}
+          aria-describedby="tag-list-error-1 tag-list-instructions-1"
           aria-label="Enter a Tag"
           className="input-predictive__text-input text-input"
           onBlur={[Function]}

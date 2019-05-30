@@ -19,7 +19,7 @@ exports[`Backend ResourceCollection General Container renders correctly 1`] = `
           Title
         </label>
         <input
-          aria-describedby="text-input-error-1"
+          aria-describedby="text-input-error-1 text-input-instructions-1"
           id="text-input-1"
           onChange={[Function]}
           placeholder="Enter a title"
@@ -41,7 +41,7 @@ exports[`Backend ResourceCollection General Container renders correctly 1`] = `
             Description
           </label>
           <textarea
-            aria-describedby="textarea-error-1"
+            aria-describedby="textarea-error-1 textarea-instructions-1"
             id="textarea-1"
             onChange={[Function]}
             placeholder="Enter a description"
@@ -77,7 +77,7 @@ exports[`Backend ResourceCollection General Container renders correctly 1`] = `
             className="form-dropzone style-landscape"
             inputProps={
               Object {
-                "aria-describedby": "upload-error-1",
+                "aria-describedby": "upload-error-1 upload-instructions-1",
                 "id": "upload-1",
               }
             }

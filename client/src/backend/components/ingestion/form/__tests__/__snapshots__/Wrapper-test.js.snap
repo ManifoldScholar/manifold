@@ -38,7 +38,7 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
             className="form-dropzone style-landscape"
             inputProps={
               Object {
-                "aria-describedby": "upload-error-1",
+                "aria-describedby": "upload-error-1 upload-instructions-1",
                 "id": "upload-1",
               }
             }
@@ -128,7 +128,7 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
           URL
         </label>
         <input
-          aria-describedby="text-input-error-1"
+          aria-describedby="text-input-error-1 text-input-instructions-1"
           id="text-input-1"
           onChange={[Function]}
           type="text"
@@ -136,6 +136,7 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
         />
         <span
           className="instructions"
+          id="text-input-instructions-1"
         >
           Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file.
         </span>

@@ -11,7 +11,8 @@ export default class ListEntitiesListEntities extends PureComponent {
     entityComponent: PropTypes.func.isRequired,
     entityComponentProps: PropTypes.object,
     emptyMessage: PropTypes.node,
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"])
+    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"]),
+    idForInstructions: PropTypes.string
   };
 
   get entities() {
@@ -44,6 +45,10 @@ export default class ListEntitiesListEntities extends PureComponent {
     return this.props.emptyMessage;
   }
 
+  get idForInstructions() {
+    return this.props.idForInstructions;
+  }
+
   entityKey(index) {
     const entity = this.entities[index];
     if (!entity || !entity.id) return index;
@@ -56,7 +61,7 @@ export default class ListEntitiesListEntities extends PureComponent {
     if (this.isEmpty) return <Empty message={this.emptyMessage} />;
 
     return (
-      <ul className={this.className}>
+      <ul className={this.className} aria-describedby={this.idForInstructions}>
         {this.entities.map((entity, index) => (
           <EntityComponent
             key={this.entityKey(index)}

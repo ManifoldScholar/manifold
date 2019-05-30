@@ -113,7 +113,7 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
       >
         <div
           className="entity-list entity-list--bare"
-          id={1}
+          id="entities-list-1"
         >
           <div
             className="entity-list__contents-wrapper"
@@ -122,6 +122,7 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
               className="entity-list__header"
             />
             <ul
+              aria-describedby="entities-list-instructions-1"
               className="entity-list__list entity-list__list--bare"
             >
               <li

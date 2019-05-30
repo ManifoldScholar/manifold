@@ -15,7 +15,7 @@ exports[`Backend Settings Placeholder Container renders correctly 1`] = `
       A All temporary stuff setting
     </label>
     <input
-      aria-describedby="text-input-error-1"
+      aria-describedby="text-input-error-1 text-input-instructions-1"
       id="text-input-1"
       onChange={[Function]}
       placeholder="Some setting could go here"
@@ -34,7 +34,7 @@ exports[`Backend Settings Placeholder Container renders correctly 1`] = `
       Another All temporary stuff setting
     </label>
     <input
-      aria-describedby="text-input-error-1"
+      aria-describedby="text-input-error-1 text-input-instructions-1"
       id="text-input-1"
       onChange={[Function]}
       placeholder="Some other setting could go here"

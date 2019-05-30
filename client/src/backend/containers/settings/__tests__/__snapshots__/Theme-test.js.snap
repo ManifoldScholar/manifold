@@ -54,7 +54,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     Press Website URL
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     placeholder="Enter URL"
@@ -63,6 +63,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                   />
                   <span
                     className="instructions"
+                    id="text-input-instructions-1"
                   >
                     If present, the footer press logo image will link to this URL.
                   </span>
@@ -90,7 +91,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                       className="form-dropzone style-square"
                       inputProps={
                         Object {
-                          "aria-describedby": "upload-error-1",
+                          "aria-describedby": "upload-error-1 upload-instructions-1",
                           "id": "upload-1",
                         }
                       }
@@ -147,6 +148,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     </react-dropzone>
                     <span
                       className="instructions"
+                      id="upload-instructions-1"
                     >
                       The header logo appears in the top left of the frontend header. The logo will be resized to a max height of 60px.
                     </span>
@@ -175,7 +177,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                       className="form-dropzone style-square"
                       inputProps={
                         Object {
-                          "aria-describedby": "upload-error-1",
+                          "aria-describedby": "upload-error-1 upload-instructions-1",
                           "id": "upload-1",
                         }
                       }
@@ -232,6 +234,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     </react-dropzone>
                     <span
                       className="instructions"
+                      id="upload-instructions-1"
                     >
                       This header logo will be used on mobile devices. We strongly recommend using a square logo here.
                     </span>
@@ -260,7 +263,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                       className="form-dropzone style-square"
                       inputProps={
                         Object {
-                          "aria-describedby": "upload-error-1",
+                          "aria-describedby": "upload-error-1 upload-instructions-1",
                           "id": "upload-1",
                         }
                       }
@@ -317,6 +320,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     </react-dropzone>
                     <span
                       className="instructions"
+                      id="upload-instructions-1"
                     >
                       The footer logo appears in the footer. The logo dimensions will be capped at 325px width and 200px height.
                     </span>
@@ -345,7 +349,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                       className="form-dropzone style-square"
                       inputProps={
                         Object {
-                          "aria-describedby": "upload-error-1",
+                          "aria-describedby": "upload-error-1 upload-instructions-1",
                           "id": "upload-1",
                         }
                       }
@@ -402,6 +406,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     </react-dropzone>
                     <span
                       className="instructions"
+                      id="upload-instructions-1"
                     >
                       The favicon will appear in the browser tab next to the page title.  The favicon will be cropped to a square, thus we strongly recommend using a square image here.
                     </span>
@@ -418,7 +423,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     Logo Styles
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     placeholder="Additional Logo CSS"
@@ -427,6 +432,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                   />
                   <span
                     className="instructions"
+                    id="text-input-instructions-1"
                   >
                     Enter a JSON style object, which will be applied to the logo image. For example: {"left": -1}
                   </span>
@@ -442,7 +448,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     Header Navigation Offset
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     placeholder="0"
@@ -451,6 +457,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                   />
                   <span
                     className="instructions"
+                    id="text-input-instructions-1"
                   >
                     Use this field to adjust the vertical position of header navigation. For example, enter "5" to move the header down 5 pixels. Enter "-5" to move it up 5 pixels.
                   </span>
@@ -481,7 +488,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                     Typekit ID
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     placeholder="Enter Typekit ID"

@@ -41,7 +41,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 How do you refer to your Manifold installation?
               </label>
               <input
-                aria-describedby="text-input-error-1"
+                aria-describedby="text-input-error-1 text-input-instructions-1"
                 id="text-input-1"
                 onChange={[Function]}
                 placeholder="Manifold"
@@ -50,6 +50,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
               />
               <span
                 className="instructions"
+                id="text-input-instructions-1"
               >
                 There are various places throughout the application where               Manifold refers to itself. If you set a value here, Manifold will use it where               appropriate. For example, you could call it "Manifold at the University of               Minnesota Press" or just "University of Minnesota Digital Books." Or, if you              prefer, you can leave this blank, and Manifold will just refer to itself as               "Manifold."
               </span>
@@ -65,7 +66,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 Default Page Title
               </label>
               <input
-                aria-describedby="text-input-error-1"
+                aria-describedby="text-input-error-1 text-input-instructions-1"
                 id="text-input-1"
                 onChange={[Function]}
                 placeholder="Enter page title"
@@ -74,6 +75,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
               />
               <span
                 className="instructions"
+                id="text-input-instructions-1"
               >
                 This field will be used as the page title on the home page, and will be appended to the page title on core Manifold pages. Defaults to 'Manifold Scholarship'.
               </span>
@@ -93,11 +95,12 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 </label>
                 <span
                   className="instructions"
+                  id="textarea-instructions-1"
                 >
                   This field will be used as the page description on the home page. Defaults to 'Transforming scholarly publications into living digital works'.
                 </span>
                 <textarea
-                  aria-describedby="textarea-error-1"
+                  aria-describedby="textarea-error-1 textarea-instructions-1"
                   id="textarea-1"
                   onChange={[Function]}
                   placeholder="Enter page description"
@@ -121,7 +124,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 Default Publisher
               </label>
               <input
-                aria-describedby="text-input-error-1"
+                aria-describedby="text-input-error-1 text-input-instructions-1"
                 id="text-input-1"
                 onChange={[Function]}
                 placeholder="Enter Default Publisher"
@@ -140,7 +143,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 Default Place of Publication
               </label>
               <input
-                aria-describedby="text-input-error-1"
+                aria-describedby="text-input-error-1 text-input-instructions-1"
                 id="text-input-1"
                 onChange={[Function]}
                 placeholder="Enter Default Place of Publication"
@@ -159,7 +162,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 Copyright
               </label>
               <input
-                aria-describedby="text-input-error-1"
+                aria-describedby="text-input-error-1 text-input-instructions-1"
                 id="text-input-1"
                 onChange={[Function]}
                 placeholder="Enter Copyright Information"
@@ -168,6 +171,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
               />
               <span
                 className="instructions"
+                id="text-input-instructions-1"
               >
                 Enter the installation copyright information to be displayed in the footer.
               </span>
@@ -183,7 +187,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 Social Sharing Message
               </label>
               <input
-                aria-describedby="text-input-error-1"
+                aria-describedby="text-input-error-1 text-input-instructions-1"
                 id="text-input-1"
                 onChange={[Function]}
                 type="text"
@@ -191,6 +195,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
               />
               <span
                 className="instructions"
+                id="text-input-instructions-1"
               >
                 Enter the text you would like to appear when a page is shared.
               </span>
@@ -206,7 +211,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 Twitter Account
               </label>
               <input
-                aria-describedby="text-input-error-1"
+                aria-describedby="text-input-error-1 text-input-instructions-1"
                 id="text-input-1"
                 onChange={[Function]}
                 placeholder="Enter Twitter account"
@@ -215,6 +220,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
               />
               <span
                 className="instructions"
+                id="text-input-instructions-1"
               >
                 Enter the twitter account associated with this installation.
               </span>
@@ -230,7 +236,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 Facebook Page ID
               </label>
               <input
-                aria-describedby="text-input-error-1"
+                aria-describedby="text-input-error-1 text-input-instructions-1"
                 id="text-input-1"
                 onChange={[Function]}
                 placeholder="Enter Facebook ID"
@@ -239,6 +245,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
               />
               <span
                 className="instructions"
+                id="text-input-instructions-1"
               >
                 Enter an ID for this installation/organization's Facebook page.
               </span>
@@ -254,7 +261,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
                 Contact Email
               </label>
               <input
-                aria-describedby="text-input-error-1"
+                aria-describedby="text-input-error-1 text-input-instructions-1"
                 id="text-input-1"
                 onChange={[Function]}
                 placeholder="Enter an email address"
@@ -263,6 +270,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
               />
               <span
                 className="instructions"
+                id="text-input-instructions-1"
               >
                 If present, the footer will contain a link to a contact form that will be delivered to this address.
               </span>

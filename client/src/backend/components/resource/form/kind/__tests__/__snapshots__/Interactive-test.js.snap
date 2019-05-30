@@ -15,7 +15,7 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
       Minimum Width
     </label>
     <input
-      aria-describedby="text-input-error-1"
+      aria-describedby="text-input-error-1 text-input-instructions-1"
       id="text-input-1"
       onChange={[Function]}
       placeholder="The minimum display width"
@@ -34,7 +34,7 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
       Minimum Height
     </label>
     <input
-      aria-describedby="text-input-error-1"
+      aria-describedby="text-input-error-1 text-input-instructions-1"
       id="text-input-1"
       onChange={[Function]}
       placeholder="The minimum display height"
@@ -53,7 +53,7 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
       iFrame URL
     </label>
     <input
-      aria-describedby="text-input-error-1"
+      aria-describedby="text-input-error-1 text-input-instructions-1"
       id="text-input-1"
       onChange={[Function]}
       placeholder="Enter iFrame URL"
@@ -79,7 +79,7 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
       Minimum Width
     </label>
     <input
-      aria-describedby="text-input-error-1"
+      aria-describedby="text-input-error-1 text-input-instructions-1"
       id="text-input-1"
       onChange={[Function]}
       placeholder="The minimum display width"
@@ -98,7 +98,7 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
       Minimum Height
     </label>
     <input
-      aria-describedby="text-input-error-1"
+      aria-describedby="text-input-error-1 text-input-instructions-1"
       id="text-input-1"
       onChange={[Function]}
       placeholder="The minimum display height"
@@ -117,7 +117,7 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
       iFrame URL
     </label>
     <input
-      aria-describedby="text-input-error-1"
+      aria-describedby="text-input-error-1 text-input-instructions-1"
       id="text-input-1"
       onChange={[Function]}
       placeholder="Enter iFrame URL"

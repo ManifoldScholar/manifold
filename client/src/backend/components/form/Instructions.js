@@ -6,7 +6,8 @@ import classnames from "classnames";
 export default class Instructions extends PureComponent {
   static propTypes = {
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    className: PropTypes.string
+    className: PropTypes.string,
+    id: PropTypes.string
   };
 
   static defaultProps = {
@@ -18,7 +19,11 @@ export default class Instructions extends PureComponent {
     const classes = classnames("instructions", this.props.className);
 
     if (isString(instructions)) {
-      return <span className={classes}>{instructions}</span>;
+      return (
+        <span className={classes} id={this.props.id}>
+          {instructions}
+        </span>
+      );
     }
     return instructions;
   }

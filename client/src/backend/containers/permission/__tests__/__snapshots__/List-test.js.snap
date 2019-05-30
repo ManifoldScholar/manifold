@@ -4,7 +4,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
 <section>
   <div
     className="entity-list"
-    id={1}
+    id="entities-list-1"
   >
     <header
       className="entity-list__title-block entity-list__title backend-header"
@@ -47,6 +47,7 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
         </div>
       </div>
       <ul
+        aria-describedby="entities-list-instructions-1"
         className="entity-list__list entity-list__list--rows"
       >
         <li

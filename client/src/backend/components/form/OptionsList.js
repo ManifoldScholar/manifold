@@ -17,7 +17,9 @@ class FormOptionsList extends PureComponent {
     placeholder: PropTypes.string,
     mode: PropTypes.string,
     selectedValue: PropTypes.string,
-    searchable: PropTypes.bool
+    searchable: PropTypes.bool,
+    idForError: PropTypes.string,
+    idForInstructions: PropTypes.string
   };
 
   static defaultProps = {
@@ -60,6 +62,7 @@ class FormOptionsList extends PureComponent {
         onSelect={this.handleSelect}
         onNew={props.onNew}
         idForError={props.idForError}
+        idForInstructions={props.idForInstructions}
         focusOnMount={props.focusOnMount}
       />
     );

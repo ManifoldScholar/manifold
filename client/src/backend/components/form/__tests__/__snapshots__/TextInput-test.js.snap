@@ -12,7 +12,7 @@ exports[`Backend.Form.TextInput component renders correctly 1`] = `
     A form label
   </label>
   <input
-    aria-describedby="text-input-error-1"
+    aria-describedby="text-input-error-1 text-input-instructions-1"
     id="text-input-1"
     onChange={[Function]}
     type="text"

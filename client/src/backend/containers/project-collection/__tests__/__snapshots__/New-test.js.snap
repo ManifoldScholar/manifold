@@ -22,7 +22,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
             Collection Title:
           </label>
           <input
-            aria-describedby="text-input-error-1"
+            aria-describedby="text-input-error-1 text-input-instructions-1"
             id="text-input-1"
             onChange={[Function]}
             placeholder="Enter collection name"
@@ -117,7 +117,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
           Slug:
         </label>
         <input
-          aria-describedby="text-input-error-1"
+          aria-describedby="text-input-error-1 text-input-instructions-1"
           id="text-input-1"
           onChange={[Function]}
           placeholder="Enter slug"
@@ -139,7 +139,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
             Description:
           </label>
           <textarea
-            aria-describedby="textarea-error-1"
+            aria-describedby="textarea-error-1 textarea-instructions-1"
             id="textarea-1"
             onChange={[Function]}
             placeholder="Enter description"
@@ -157,7 +157,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
       >
         <label
           className="form-input-heading toggle above"
-          htmlFor={1}
+          htmlFor="switch-input-1"
         >
           Visible:
         </label>
@@ -165,9 +165,10 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
           className="toggle-indicator"
         >
           <div
+            aria-describedby="switch-input-instructions-1"
             aria-pressed={false}
             className="boolean-primary"
-            id={1}
+            id="switch-input-1"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -187,7 +188,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
       >
         <label
           className="form-input-heading toggle above"
-          htmlFor={1}
+          htmlFor="switch-input-1"
         >
           Show on homepage:
         </label>
@@ -195,9 +196,10 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
           className="toggle-indicator"
         >
           <div
+            aria-describedby="switch-input-instructions-1"
             aria-pressed={false}
             className="boolean-primary"
-            id={1}
+            id="switch-input-1"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

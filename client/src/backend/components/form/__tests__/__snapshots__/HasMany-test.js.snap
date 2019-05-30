@@ -160,7 +160,7 @@ exports[`Backend.Form.HasMany component renders correctly 1`] = `
         className="input-predictive__input"
       >
         <input
-          aria-describedby={null}
+          aria-describedby="predictive-text-belongs-to-error-1 predictive-text-belongs-to-instructions-1"
           className="input-predictive__text-input text-input"
           onBlur={[Function]}
           onChange={[Function]}

@@ -35,7 +35,7 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
             Title
           </label>
           <input
-            aria-describedby="text-input-error-1"
+            aria-describedby="text-input-error-1 text-input-instructions-1"
             id="text-input-1"
             onChange={[Function]}
             placeholder="Title"
@@ -54,7 +54,7 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
             First Name
           </label>
           <input
-            aria-describedby="text-input-error-1"
+            aria-describedby="text-input-error-1 text-input-instructions-1"
             id="text-input-1"
             onChange={[Function]}
             placeholder="First Name"
@@ -73,7 +73,7 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
             Middle Name
           </label>
           <input
-            aria-describedby="text-input-error-1"
+            aria-describedby="text-input-error-1 text-input-instructions-1"
             id="text-input-1"
             onChange={[Function]}
             placeholder="Middle Name"
@@ -92,7 +92,7 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
             Last Name
           </label>
           <input
-            aria-describedby="text-input-error-1"
+            aria-describedby="text-input-error-1 text-input-instructions-1"
             id="text-input-1"
             onChange={[Function]}
             placeholder="Last Name"
@@ -111,7 +111,7 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
             Suffix
           </label>
           <input
-            aria-describedby="text-input-error-1"
+            aria-describedby="text-input-error-1 text-input-instructions-1"
             id="text-input-1"
             onChange={[Function]}
             placeholder="Suffix"
@@ -142,7 +142,7 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
               className="form-dropzone style-square"
               inputProps={
                 Object {
-                  "aria-describedby": "upload-error-1",
+                  "aria-describedby": "upload-error-1 upload-instructions-1",
                   "id": "upload-1",
                 }
               }

@@ -81,7 +81,7 @@ Array [
       </div>
       <div
         className="entity-list"
-        id={1}
+        id="entities-list-1"
       >
         <div
           className="entity-list__contents-wrapper"
@@ -148,6 +148,7 @@ Array [
             className="entity-list__header"
           />
           <ul
+            aria-describedby="entities-list-instructions-1"
             className="entity-list__list entity-list__list--rows"
           >
             <li
@@ -314,7 +315,7 @@ Array [
                     >
                       <a
                         disabled={true}
-                        href="#1"
+                        href="#entities-list-1"
                         onClick={[Function]}
                       >
                         <svg
@@ -350,7 +351,7 @@ Array [
                       className="list-pagination__page list-pagination__page--ordinal list-pagination__page--disabled"
                     >
                       <a
-                        href="#1"
+                        href="#entities-list-1"
                         onClick={[Function]}
                       >
                         <span
@@ -370,7 +371,7 @@ Array [
                       className="list-pagination__page list-pagination__page--ordinal"
                     >
                       <a
-                        href="#1"
+                        href="#entities-list-1"
                         onClick={[Function]}
                       >
                         <span
@@ -396,7 +397,7 @@ Array [
                       className="list-pagination__page list-pagination__page--next"
                     >
                       <a
-                        href="#1"
+                        href="#entities-list-1"
                         onClick={[Function]}
                       >
                         <span

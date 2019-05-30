@@ -32,7 +32,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               isbn
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="International Standard Book Number"
@@ -51,7 +51,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               issn
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="International Standard Serial Number"
@@ -85,7 +85,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               publisher
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="The Publisher"
@@ -104,7 +104,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               publisher place
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Geographic location of the publisher"
@@ -113,6 +113,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             />
             <span
               className="instructions"
+              id="text-input-instructions-1"
             >
               e.g "Minneapolis, MN"
             </span>
@@ -128,7 +129,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               original publisher
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Original publisher, for items that have been republished by a different publisher"
@@ -147,7 +148,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               original publisher place
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Geographic location of the original publisher"
@@ -181,7 +182,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               container title
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Title of the container holding the item"
@@ -190,6 +191,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             />
             <span
               className="instructions"
+              id="text-input-instructions-1"
             >
               e.g. the book title for a book chapter, the journal title for a journal article
             </span>
@@ -205,7 +207,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               version
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Version of the item"
@@ -224,7 +226,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               edition
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="(Container) edition holding the item"
@@ -233,6 +235,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             />
             <span
               className="instructions"
+              id="text-input-instructions-1"
             >
               e.g. "3" when citing a chapter in the third edition of a book
             </span>
@@ -248,7 +251,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               issue
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="(Container) issue holding the item"
@@ -257,6 +260,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             />
             <span
               className="instructions"
+              id="text-input-instructions-1"
             >
               e.g. "5" when citing a journal article from journal volume 2, issue 5
             </span>
@@ -272,7 +276,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               volume
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="(Container) volume holding the item "
@@ -281,6 +285,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
             />
             <span
               className="instructions"
+              id="text-input-instructions-1"
             >
               e.g. “2” when citing a chapter from book volume 2
             </span>
@@ -296,7 +301,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               original title
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Title of the original version"
@@ -330,7 +335,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               abstract
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -349,7 +354,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               archive
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -368,7 +373,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               archive location
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -387,7 +392,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               archive place
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -406,7 +411,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               authority
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -425,7 +430,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               call number
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -444,7 +449,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               chapter number
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -463,7 +468,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               collection number
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -482,7 +487,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               collection title
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -501,7 +506,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               dimensions
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -520,7 +525,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               event
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -539,7 +544,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               event place
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -558,7 +563,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               jurisdiction
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -577,7 +582,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               medium
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -596,7 +601,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               number
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -615,7 +620,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               number of pages
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -634,7 +639,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               number of volumes
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -653,7 +658,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               pmcid
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -672,7 +677,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               pmid
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -691,7 +696,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               reviewed title
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -710,7 +715,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               section
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}
@@ -729,7 +734,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
               year suffix
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder={null}

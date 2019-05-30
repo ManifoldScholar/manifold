@@ -5,14 +5,23 @@ export default class ListEntitiesListInstructions extends PureComponent {
   static displayName = "List.Entities.List.Instructions";
 
   static propTypes = {
-    instructions: PropTypes.node.isRequired
+    instructions: PropTypes.node.isRequired,
+    id: PropTypes.string
   };
 
   get instructions() {
     return this.props.instructions;
   }
 
+  get id() {
+    return this.props.id;
+  }
+
   render() {
-    return <div className="instructional-copy">{this.instructions}</div>;
+    return (
+      <div className="instructional-copy" id={this.id}>
+        {this.instructions}
+      </div>
+    );
   }
 }

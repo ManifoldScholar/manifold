@@ -82,6 +82,10 @@ class FormSwitch extends Component {
     return "switch-input";
   }
 
+  get idForInstructionsPrefix() {
+    return "switch-input-instructions";
+  }
+
   truthy(value) {
     return value === true || value === "true";
   }
@@ -139,10 +143,11 @@ class FormSwitch extends Component {
 
   render() {
     return (
-      <UID name={id => `${this.idPrefix}-${id}`}>
+      <UID>
         {id => (
           <div className={this.wrapperClasses}>
-            {this.props.labelPos === "above" && this.renderLabel(id)}
+            {this.props.labelPos === "above" &&
+              this.renderLabel(`${this.idPrefix}-${id}`)}
             <div className="toggle-indicator">
               {/* Add .checked to .boolean-primary to change visual state */}
               <div
@@ -156,13 +161,18 @@ class FormSwitch extends Component {
                 role="button"
                 tabIndex="0"
                 aria-pressed={this.checked}
-                id={id}
+                id={`${this.idPrefix}-${id}`}
+                aria-describedby={`${this.idForInstructionsPrefix}-${id}`}
               >
                 <span className="screen-reader-text">{this.props.label}</span>
               </div>
             </div>
-            {this.props.labelPos === "below" && this.renderLabel(id)}
-            <Instructions instructions={this.props.instructions} />
+            {this.props.labelPos === "below" &&
+              this.renderLabel(`${this.idPrefix}-${id}`)}
+            <Instructions
+              instructions={this.props.instructions}
+              id={`${this.idForInstructionsPrefix}-${id}`}
+            />
           </div>
         )}
       </UID>

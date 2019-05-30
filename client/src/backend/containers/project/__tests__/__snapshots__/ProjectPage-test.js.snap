@@ -26,7 +26,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="form-input-heading toggle above"
-              htmlFor={1}
+              htmlFor="switch-input-1"
             >
               Hide Project Activity
             </label>
@@ -34,9 +34,10 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               className="toggle-indicator"
             >
               <div
+                aria-describedby="switch-input-instructions-1"
                 aria-pressed={false}
                 className="boolean-primary"
-                id={1}
+                id="switch-input-1"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -52,6 +53,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             </div>
             <span
               className="instructions"
+              id="switch-input-instructions-1"
             >
               If set, project activity will not be shown on the project page.
             </span>
@@ -71,11 +73,12 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               </label>
               <span
                 className="instructions"
+                id="textarea-instructions-1"
               >
                 Enter a brief description of your project. This field accepts basic Markdown.
               </span>
               <textarea
-                aria-describedby="textarea-error-1"
+                aria-describedby="textarea-error-1 textarea-instructions-1"
                 id="textarea-1"
                 onChange={[Function]}
                 style={
@@ -110,7 +113,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 className="form-dropzone style-landscape"
                 inputProps={
                   Object {
-                    "aria-describedby": "upload-error-1",
+                    "aria-describedby": "upload-error-1 upload-instructions-1",
                     "id": "upload-1",
                   }
                 }
@@ -167,6 +170,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               </react-dropzone>
               <span
                 className="instructions"
+                id="upload-instructions-1"
               >
                 The Hero Image is displayed at the top of the project landing page. Images will be resized to 1280x800 and cropped along the bottom edge.
               </span>
@@ -195,7 +199,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 className="form-dropzone style-portrait"
                 inputProps={
                   Object {
-                    "aria-describedby": "upload-error-1",
+                    "aria-describedby": "upload-error-1 upload-instructions-1",
                     "id": "upload-1",
                   }
                 }
@@ -252,6 +256,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               </react-dropzone>
               <span
                 className="instructions"
+                id="upload-instructions-1"
               >
                 If a cover is set for the project, it will appear over the hero, to the right of the description on the landing page.
               </span>
@@ -283,7 +288,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               Purchase URL
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Purchase URL"
@@ -292,6 +297,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             />
             <span
               className="instructions"
+              id="text-input-instructions-1"
             >
               A URL where users can purchase the published edition
             </span>
@@ -307,7 +313,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               Purchase Call To Action
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Buy Print Version"
@@ -316,6 +322,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             />
             <span
               className="instructions"
+              id="text-input-instructions-1"
             >
               If set, this text will appear in the buy button on the project page
             </span>
@@ -325,12 +332,13 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             <label
               className="has-instructions"
-              htmlFor={1}
+              htmlFor="masked-text-1"
             >
               Purchase Price
             </label>
             <react-text-mask
-              id={1}
+              aria-describedby="masked-text-instructions-1"
+              id="masked-text-1"
               mask={[Function]}
               onChange={[Function]}
               placeholderChar="_"
@@ -338,6 +346,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             />
             <span
               className="instructions"
+              id="masked-text-instructions-1"
             >
               The cost of the published edition
             </span>
@@ -353,7 +362,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               Currency
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Purchase Price Currency Code"
@@ -362,6 +371,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             />
             <span
               className="instructions"
+              id="text-input-instructions-1"
             >
               For example, USD for US Dollars
             </span>
@@ -397,7 +407,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               Download URL
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Download URL"
@@ -416,7 +426,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               Download Call To Action
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Download eBook"
@@ -425,6 +435,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
             />
             <span
               className="instructions"
+              id="text-input-instructions-1"
             >
               If set, this text will appear in the download link on the project page
             </span>

@@ -62,7 +62,7 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
             >
               <label
                 className="form-input-heading toggle above"
-                htmlFor={1}
+                htmlFor="switch-input-1"
               >
                 Can modify project?
               </label>
@@ -70,9 +70,10 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
                 className="toggle-indicator"
               >
                 <div
+                  aria-describedby="switch-input-instructions-1"
                   aria-pressed={false}
                   className="boolean-primary"
-                  id={1}
+                  id="switch-input-1"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
@@ -92,7 +93,7 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
             >
               <label
                 className="form-input-heading toggle above"
-                htmlFor={1}
+                htmlFor="switch-input-1"
               >
                 Can modify resource metadata?
               </label>
@@ -100,9 +101,10 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
                 className="toggle-indicator"
               >
                 <div
+                  aria-describedby="switch-input-instructions-1"
                   aria-pressed={false}
                   className="boolean-primary"
-                  id={1}
+                  id="switch-input-1"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
@@ -122,7 +124,7 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
             >
               <label
                 className="form-input-heading toggle above"
-                htmlFor={1}
+                htmlFor="switch-input-1"
               >
                 Is a project author?
               </label>
@@ -130,9 +132,10 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
                 className="toggle-indicator"
               >
                 <div
+                  aria-describedby="switch-input-instructions-1"
                   aria-pressed={false}
                   className="boolean-primary"
-                  id={1}
+                  id="switch-input-1"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}

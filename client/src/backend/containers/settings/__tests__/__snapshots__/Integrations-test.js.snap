@@ -54,7 +54,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Facebook App ID
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="text"
@@ -72,7 +72,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Facebook App Secret
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="password"
@@ -105,7 +105,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Twitter Consumer Key
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="text"
@@ -123,7 +123,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Twitter Consumer Secret
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="password"
@@ -141,7 +141,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Twitter Access Token
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="text"
@@ -159,7 +159,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Twitter Access Token Secret
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="password"
@@ -204,7 +204,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                       className="form-dropzone style-square"
                       inputProps={
                         Object {
-                          "aria-describedby": "upload-error-1",
+                          "aria-describedby": "upload-error-1 upload-instructions-1",
                           "id": "upload-1",
                         }
                       }
@@ -275,7 +275,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                       Google Private Key
                     </label>
                     <textarea
-                      aria-describedby="textarea-error-1"
+                      aria-describedby="textarea-error-1 textarea-instructions-1"
                       id="textarea-1"
                       onChange={[Function]}
                       style={
@@ -298,7 +298,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Google Project Id
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="text"
@@ -316,7 +316,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Google Private Key ID
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="text"
@@ -334,7 +334,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Google Client Email
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="text"
@@ -352,7 +352,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Google Client ID
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="text"
@@ -385,7 +385,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Google OAuth Client ID
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="text"
@@ -403,7 +403,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Google Client Secret
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     type="password"
@@ -430,12 +430,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                 >
                   <label
                     className=""
-                    htmlFor={1}
+                    htmlFor="masked-text-1"
                   >
                     Google Analytics Profile ID
                   </label>
                   <react-text-mask
-                    id={1}
+                    aria-describedby="masked-text-instructions-1"
+                    id="masked-text-1"
                     mask={
                       Array [
                         "g",
@@ -470,7 +471,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                     Google Analytics Tracking ID
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     placeholder="UA-000000-00"

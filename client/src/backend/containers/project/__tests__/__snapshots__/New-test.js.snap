@@ -160,7 +160,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     Title
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     placeholder="Enter Project Title"
@@ -179,7 +179,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     Subtitle
                   </label>
                   <input
-                    aria-describedby="text-input-error-1"
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
                     id="text-input-1"
                     onChange={[Function]}
                     placeholder="Enter Project Subtitle"
@@ -201,7 +201,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                       Brief Description
                     </label>
                     <textarea
-                      aria-describedby="textarea-error-1"
+                      aria-describedby="textarea-error-1 textarea-instructions-1"
                       id="textarea-1"
                       onChange={[Function]}
                       style={
@@ -249,6 +249,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                   style={Object {}}
                 >
                   <fieldset
+                    aria-describedby="radios-error-1 radios-instructions-1"
                     className="form-input-radios__wrapper"
                   >
                     <legend
@@ -268,6 +269,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     </legend>
                     <span
                       className="instructions"
+                      id="radios-instructions-1"
                     >
                       Manifold projects can include a single text or multiple texts.
                     </span>
@@ -318,6 +320,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                   style={Object {}}
                 >
                   <fieldset
+                    aria-describedby="radios-error-1 radios-instructions-1"
                     className="form-input-radios__wrapper"
                   >
                     <legend
@@ -337,6 +340,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     </legend>
                     <span
                       className="instructions"
+                      id="radios-instructions-1"
                     >
                       Enhance your texts with media or create a project composed only of media resources.
                     </span>
@@ -387,6 +391,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                   style={Object {}}
                 >
                   <fieldset
+                    aria-describedby="radios-error-1 radios-instructions-1"
                     className="form-input-radios__wrapper"
                   >
                     <legend
@@ -406,6 +411,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     </legend>
                     <span
                       className="instructions"
+                      id="radios-instructions-1"
                     >
                       A freeform content block can be used to add text contextualizing your project.
                     </span>
@@ -456,6 +462,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                   style={Object {}}
                 >
                   <fieldset
+                    aria-describedby="radios-error-1 radios-instructions-1"
                     className="form-input-radios__wrapper"
                   >
                     <legend
@@ -475,6 +482,7 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     </legend>
                     <span
                       className="instructions"
+                      id="radios-instructions-1"
                     >
                       Manifold can showcase the evolution of your project on the platform and in the Twitterverse.
                     </span>

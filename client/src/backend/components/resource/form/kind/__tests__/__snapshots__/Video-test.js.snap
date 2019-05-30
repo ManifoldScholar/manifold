@@ -9,7 +9,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
   >
     <label
       className="form-input-heading toggle above"
-      htmlFor={1}
+      htmlFor="switch-input-1"
     >
       Is this an externally linked video?
     </label>
@@ -17,9 +17,10 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
       className="toggle-indicator"
     >
       <div
+        aria-describedby="switch-input-instructions-1"
         aria-pressed={false}
         className="boolean-primary"
-        id={1}
+        id="switch-input-1"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -57,7 +58,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
         className="form-dropzone style-square"
         inputProps={
           Object {
-            "aria-describedby": "upload-error-1",
+            "aria-describedby": "upload-error-1 upload-instructions-1",
             "id": "upload-1",
           }
         }
@@ -126,7 +127,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
   >
     <label
       className="form-input-heading toggle above"
-      htmlFor={1}
+      htmlFor="switch-input-1"
     >
       Is this an externally linked video?
     </label>
@@ -134,9 +135,10 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
       className="toggle-indicator"
     >
       <div
+        aria-describedby="switch-input-instructions-1"
         aria-pressed={false}
         className="boolean-primary"
-        id={1}
+        id="switch-input-1"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -165,7 +167,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
         Video ID
       </label>
       <input
-        aria-describedby="text-input-error-1"
+        aria-describedby="text-input-error-1 text-input-instructions-1"
         id="text-input-1"
         onChange={[Function]}
         placeholder="Video ID"
@@ -174,6 +176,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
       />
       <span
         className="instructions"
+        id="text-input-instructions-1"
       >
         The video's ID is located after "?v=" in YouTube URLs, and after "vimeo.com/" in Vimeo URLs.
       </span>
@@ -207,7 +210,7 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
             />
           </svg>
           <select
-            aria-describedby="select-error-1"
+            aria-describedby="select-error-1 select-instructions-1"
             id="select-1"
             onChange={[Function]}
             value=""

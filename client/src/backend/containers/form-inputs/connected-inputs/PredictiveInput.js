@@ -25,6 +25,7 @@ class PredictiveInput extends PureComponent {
     placeholder: PropTypes.string,
     authToken: PropTypes.string,
     idForError: PropTypes.string,
+    idForInstructions: PropTypes.string,
     focusOnMount: PropTypes.bool
   };
 
@@ -55,6 +56,14 @@ class PredictiveInput extends PureComponent {
     if (prevState.value !== this.state.value) {
       this.debouncedUpdateOptions(this.state.value, this.props.fetch);
     }
+  }
+
+  get ariaDescribedBy() {
+    const { idForError, idForInstructions } = this.props;
+
+    if (!idForError && !idForInstructions) return null;
+
+    return [idForError, idForInstructions].filter(Boolean).join(" ");
   }
 
   getHighlightedOption(list, id) {
@@ -250,7 +259,7 @@ class PredictiveInput extends PureComponent {
             onKeyPress={this.handleKeyPress}
             onKeyDown={this.handleKeyDown}
             aria-label={this.props.placeholder}
-            aria-describedby={this.idForError ? this.idForError : null}
+            aria-describedby={this.ariaDescribedBy}
           />
           {this.props.onNew ? (
             <button

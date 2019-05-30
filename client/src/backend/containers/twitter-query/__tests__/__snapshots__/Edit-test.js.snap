@@ -54,7 +54,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
             Query
           </label>
           <input
-            aria-describedby="text-input-error-1"
+            aria-describedby="text-input-error-1 text-input-instructions-1"
             id="text-input-1"
             onChange={[Function]}
             placeholder="Enter query"
@@ -105,7 +105,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
                 />
               </svg>
               <select
-                aria-describedby="select-error-1"
+                aria-describedby="select-error-1 select-instructions-1"
                 id="select-1"
                 onChange={[Function]}
                 value=""
@@ -129,7 +129,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
         >
           <label
             className="form-input-heading toggle above"
-            htmlFor={1}
+            htmlFor="switch-input-1"
           >
             Active
           </label>
@@ -137,9 +137,10 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
             className="toggle-indicator"
           >
             <div
+              aria-describedby="switch-input-instructions-1"
               aria-pressed={true}
               className="boolean-primary checked"
-              id={1}
+              id="switch-input-1"
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
