@@ -49,6 +49,6 @@ export default class Search extends PureComponent {
           </button>
         </div>
       </form>
-    )
+    );
   }
 }

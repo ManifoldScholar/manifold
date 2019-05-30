@@ -100,10 +100,11 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       });
 
       // remove message on timeout was a reset
-      isReset &&
+      if (isReset) {
         setTimeout(() => {
           this.setState({ message: null });
         }, 1000);
+      }
     }
 
     initialValues(key) {

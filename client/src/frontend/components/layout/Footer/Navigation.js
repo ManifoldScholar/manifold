@@ -85,7 +85,8 @@ export default class Navigation extends PureComponent {
       <span
         className="footer-nav-list__link"
         role="button"
-        onClick={this.handleLoginClick}>
+        onClick={this.handleLoginClick}
+      >
         {"Log In"}
       </span>
     );
@@ -159,8 +160,9 @@ export default class Navigation extends PureComponent {
     pages.push(
       <Link
         to={lh.link("frontendProjectsAll")}
-        className="footer-nav-list__link">
-          {"Projects"}
+        className="footer-nav-list__link"
+      >
+        {"Projects"}
       </Link>
     );
     pages.push(...this.buildContentPages());
@@ -186,7 +188,9 @@ export default class Navigation extends PureComponent {
     return (
       <ul className="footer-nav-list">
         {links.map((link, index) => (
-          <li key={index} className="footer-nav-list__item">{link}</li>
+          <li key={index} className="footer-nav-list__item">
+            {link}
+          </li>
         ))}
       </ul>
     );
@@ -214,6 +218,6 @@ export default class Navigation extends PureComponent {
           </li>
         </ul>
       </nav>
-    )
+    );
   }
 }

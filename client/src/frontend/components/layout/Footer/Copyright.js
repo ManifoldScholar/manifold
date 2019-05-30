@@ -22,6 +22,6 @@ export default class Copyright extends PureComponent {
           <div className="colophon">{this.renderCopyright()}</div>
         </div>
       </section>
-    )
+    );
   }
 }

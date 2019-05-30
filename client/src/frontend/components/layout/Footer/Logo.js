@@ -1,12 +1,11 @@
 import React, { PureComponent } from "react";
 import withPluginReplacement from "hoc/with-plugin-replacement";
-import Search from "./Search";
 
 class Logo extends PureComponent {
   static displayName = "Layout.Footer.Logo";
 
   render() {
-    const { pressSite, pressLogo} = this.props;
+    const { pressSite, pressLogo } = this.props;
 
     return (
       <a
@@ -17,7 +16,7 @@ class Logo extends PureComponent {
       >
         <img className="logo-image" alt="Press Site" src={pressLogo.original} />
       </a>
-    )
+    );
   }
 }
 

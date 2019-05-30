@@ -22,7 +22,7 @@ export default class ResourceCollectionCover extends Component {
 
   render() {
     const collectionsBackground = "/static/images/resource-collection.jpg";
-    const { resourceCollection, itemHeadingLevel } = this.props;
+    const { resourceCollection } = this.props;
     const attr = resourceCollection.attributes;
     const bgImage = attr.thumbnailStyles.medium
       ? attr.thumbnailStyles.medium
