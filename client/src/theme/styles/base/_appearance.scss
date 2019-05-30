@@ -427,6 +427,7 @@
 
     > svg {
       max-height: 50px;
+      overflow: visible;
       transition: fill $duration $timing;
     }
   }
