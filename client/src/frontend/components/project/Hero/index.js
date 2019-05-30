@@ -6,6 +6,7 @@ import Meta from "./Meta";
 import CalloutList from "./CalloutList";
 import Social from "./Social";
 import Credits from "./Credits";
+import Authorization from "helpers/authorization";
 
 export default class ProjectHero extends PureComponent {
   static displayName = "Project.Hero";
@@ -16,6 +17,7 @@ export default class ProjectHero extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.authorization = new Authorization();
 
     this.state = {
       objectFit: true
@@ -49,6 +51,13 @@ export default class ProjectHero extends PureComponent {
       this.backgroundImage.mediumLandscape &&
       this.backgroundImage.largeLandscape
     );
+  }
+
+  get showErrors() {
+    return this.authorization.authorizeAbility({
+      entity: this.props.project,
+      ability: "update"
+    });
   }
 
   get actionCallouts() {
@@ -133,12 +142,14 @@ export default class ProjectHero extends PureComponent {
               blockClass={blockClass}
               callouts={this.leftCallouts}
               layoutClass={"inline"}
+              showErrors={this.showErrors}
               visibilityClass={"desktop"}
             />
             <CalloutList
               blockClass={blockClass}
               callouts={this.allCallouts}
               layoutClass={"stacked"}
+              showErrors={this.showErrors}
               visibilityClass={"mobile"}
             />
           </div>
@@ -153,6 +164,7 @@ export default class ProjectHero extends PureComponent {
               blockClass={blockClass}
               callouts={this.rightCallouts}
               layoutClass={"stacked"}
+              showErrors={this.showErrors}
               visibilityClass={"desktop"}
             />
           </div>

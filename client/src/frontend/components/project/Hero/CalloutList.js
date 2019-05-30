@@ -10,7 +10,12 @@ export default class ProjectHeroCalloutList extends PureComponent {
     callouts: PropTypes.array.isRequired,
     blockClass: PropTypes.string,
     layoutClass: PropTypes.string,
-    visibilityClass: PropTypes.string
+    visibilityClass: PropTypes.string,
+    showErrors: PropTypes.bool
+  };
+
+  static defaultProps = {
+    showErrors: false
   };
 
   get callouts() {
@@ -23,6 +28,10 @@ export default class ProjectHeroCalloutList extends PureComponent {
 
   get links() {
     return this.callouts.filter(callout => !callout.attributes.button);
+  }
+
+  get showErrors() {
+    return this.props.showErrors;
   }
 
   renderCallouts(callouts) {
@@ -38,6 +47,7 @@ export default class ProjectHeroCalloutList extends PureComponent {
         >
           {callouts.map(callout => (
             <Callout
+              showErrors={this.showErrors}
               key={callout.id}
               callout={callout}
               blockClass={calloutClass}

@@ -81,6 +81,17 @@
       }
     }
 
+    &--error {
+      color: $neutral90;
+      background-color: $sp30Secondary;
+
+      &:hover,
+      &:focus {
+        background-color: $sp20Quaternary;
+      }
+
+    }
+
     &--centered {
       -ms-grid-rows: auto;
       -ms-grid-columns: 1fr auto 1fr;
@@ -134,7 +145,18 @@
         color: inherit;
       }
     }
+
+    &--error {
+      color: $sp30Secondary;
+
+      &:hover,
+      &:focus {
+        color: $sp20Quaternary;
+      }
+    }
   }
+
+
 
   &__link-text {}
 

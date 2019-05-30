@@ -10,7 +10,12 @@ export default class ProjectHeroCallout extends PureComponent {
 
   static propTypes = {
     callout: PropTypes.object.isRequired,
-    blockClass: PropTypes.string
+    blockClass: PropTypes.string,
+    showErrors: PropTypes.bool
+  };
+
+  static defaultProps = {
+    showErrors: false
   };
 
   get callout() {
