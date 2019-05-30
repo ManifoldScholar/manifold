@@ -24,18 +24,18 @@ export default function withScreenReaderStatus(WrappedComponent) {
     get childProps() {
       return {
         setScreenReaderStatus: this.setStatus
-      }
+      };
     }
 
     setStatus = message => {
       // temporarily update state with new message
-      this.setState({ message: message });
+      this.setState({ message });
 
       // remove message
       setTimeout(() => {
-        this.setState({ message: null })
+        this.setState({ message: null });
       }, 1000);
-    }
+    };
 
     renderLiveRegion() {
       return (

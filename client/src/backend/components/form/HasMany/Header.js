@@ -32,7 +32,7 @@ export default class FormHasManyHeader extends PureComponent {
   }
 
   renderHeader(label, instructions) {
-    const Label = props => (
+    const Header = props => (
       <this.labelTag className="form-input-heading">
         {props.children}
       </this.labelTag>
@@ -40,7 +40,7 @@ export default class FormHasManyHeader extends PureComponent {
 
     return (
       <React.Fragment>
-        <Label>{label}</Label>
+        <Header>{label}</Header>
         <Instructions instructions={instructions} />
       </React.Fragment>
     );

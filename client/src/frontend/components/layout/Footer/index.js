@@ -3,14 +3,12 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import withPluginReplacement from "hoc/with-plugin-replacement";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
-import Utility from "global/components/utility";
 import Logo from "./Logo";
 import Search from "./Search";
 import Copyright from "./Copyright";
 import PostFooter from "./PostFooter";
 import Navigation from "./Navigation";
 import FooterLogic from "./FooterLogic";
-
 
 class Footer extends Component {
   static displayName = "Layout.Footer";
@@ -53,15 +51,17 @@ class Footer extends Component {
                   <div className="container flush">
                     <div className="flex-row">
                       <div className="right">
-                      { searchPosition === "right"
-                        && <Search push={this.props.history.push} />
-                      }
-                      { searchPosition === "left"
-                        &&  <Logo
-                              pressLogo={settings.attributes.pressLogoFooterStyles}
-                              pressSite={settings.attributes.general.pressSite}
-                              />
-                        }
+                        {searchPosition === "right" && (
+                          <Search push={this.props.history.push} />
+                        )}
+                        {searchPosition === "left" && (
+                          <Logo
+                            pressLogo={
+                              settings.attributes.pressLogoFooterStyles
+                            }
+                            pressSite={settings.attributes.general.pressSite}
+                          />
+                        )}
                       </div>
                       <div className="rel left">
                         <Navigation
@@ -70,9 +70,9 @@ class Footer extends Component {
                           settings={settings}
                           authentication={this.props.authentication}
                         />
-                        { searchPosition === "left"
-                          && <Search push={this.props.history.push} />
-                        }
+                        {searchPosition === "left" && (
+                          <Search push={this.props.history.push} />
+                        )}
                       </div>
                     </div>
                   </div>

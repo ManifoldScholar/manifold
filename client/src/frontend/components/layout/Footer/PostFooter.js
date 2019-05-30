@@ -16,12 +16,17 @@ class PostFooter extends PureComponent {
       >
         <section aria-hidden="true">
           <div className="container flush">
-            <span className={this.props.searchPosition === "left" ? "logo dull" : "logo"}>
+            <span
+              className={
+                this.props.searchPosition === "left" ? "logo dull" : "logo"
+              }
+            >
               <Utility.IconComposer
                 icon="manifoldLogo32"
                 size="default"
                 iconClass={classNames("footer-tertiary__manifold-logo", {
-                  "footer-tertiary__manifold-logo--dull": this.props.searchPosition
+                  "footer-tertiary__manifold-logo--dull": this.props
+                    .searchPosition
                 })}
               />
               <span className="text">
