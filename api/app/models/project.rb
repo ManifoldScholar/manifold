@@ -121,7 +121,7 @@ class Project < ApplicationRecord
   before_save :prepare_to_reindex_children, on: [:update], if: :draft_changed?
   before_create :assign_publisher_defaults!
   after_commit :trigger_creation_event, on: [:create]
-  after_commit :queue_reindex_children_job, :update_smart_collection_caches
+  after_commit :queue_reindex_children_job
 
   # Delegations
   delegate :count, to: :resource_collections, prefix: true
@@ -316,10 +316,6 @@ class Project < ApplicationRecord
 
     ProjectJobs::ReindexChildren.perform_later(self)
     @reindex_children = false
-  end
-
-  def update_smart_collection_caches
-    ProjectCollectionJobs::QueueCacheCollectionProjectsJob.perform_later
   end
 
   def trigger_creation_event
