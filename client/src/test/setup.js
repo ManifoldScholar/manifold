@@ -7,6 +7,11 @@ jest.mock("react-text-mask", () => "react-text-mask");
 jest.mock("helpers/passwordGenerator", () => {
   return jest.fn(() => "testtest123");
 });
+
+jest.mock("date-fns/distance_in_words", () => {
+  return () => "mocked-distance-in-words-for-snapshot"
+});
+
 jest.mock("focus-trap-react", () => "focus-trap-react");
 
 // Mocked fetchData is a noop component that renders its child.
