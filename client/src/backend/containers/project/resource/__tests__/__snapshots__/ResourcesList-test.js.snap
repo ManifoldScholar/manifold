@@ -380,7 +380,13 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
                 <span
                   className="entity-row__title-inner"
                 >
-                  Image
+                  <span
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Image",
+                      }
+                    }
+                  />
                 </span>
                 <span
                   className="entity-row__labels"
@@ -395,7 +401,7 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
                   className="aria-describedby"
                   id="undefined1-describedby"
                 >
-                  View Image
+                  View [object Object]
                 </span>
               </h4>
               <h6
@@ -446,7 +452,13 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
                 <span
                   className="entity-row__title-inner"
                 >
-                  Image
+                  <span
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Image",
+                      }
+                    }
+                  />
                 </span>
                 <span
                   className="entity-row__labels"
@@ -461,7 +473,7 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
                   className="aria-describedby"
                   id="undefined1-describedby"
                 >
-                  View Image
+                  View [object Object]
                 </span>
               </h4>
               <h6

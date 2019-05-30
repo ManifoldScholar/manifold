@@ -41,7 +41,13 @@ export default class EventRow extends PureComponent {
   }
 
   get title() {
-    return this.resource.attributes.titleFormatted;
+    return (
+      <span
+        dangerouslySetInnerHTML={{
+          __html: this.resource.attributes.titleFormatted
+        }}
+      />
+    );
   }
 
   get createdAt() {

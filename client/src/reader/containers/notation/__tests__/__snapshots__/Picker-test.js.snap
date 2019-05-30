@@ -152,7 +152,13 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                     <span
                       className="entity-row__title-inner"
                     >
-                      Image
+                      <span
+                        dangerouslySetInnerHTML={
+                          Object {
+                            "__html": "Image",
+                          }
+                        }
+                      />
                     </span>
                     <span
                       className="entity-row__labels"
@@ -167,7 +173,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                       className="aria-describedby"
                       id="undefined1-describedby"
                     >
-                      View Image
+                      View [object Object]
                     </span>
                   </h4>
                   <h6
@@ -218,7 +224,13 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                     <span
                       className="entity-row__title-inner"
                     >
-                      Image
+                      <span
+                        dangerouslySetInnerHTML={
+                          Object {
+                            "__html": "Image",
+                          }
+                        }
+                      />
                     </span>
                     <span
                       className="entity-row__labels"
@@ -233,7 +245,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                       className="aria-describedby"
                       id="undefined1-describedby"
                     >
-                      View Image
+                      View [object Object]
                     </span>
                   </h4>
                   <h6
