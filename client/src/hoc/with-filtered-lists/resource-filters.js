@@ -20,12 +20,6 @@ function defaultParams({ snapshotState = false } = {}) {
         options: []
       },
       {
-        label: "Resource Collection",
-        name: "resourceCollection",
-        hidden: true,
-        options: []
-      },
-      {
         label: "Order",
         name: "order",
         value: "title",
