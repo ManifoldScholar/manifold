@@ -145,11 +145,14 @@
       height: $inputHeight;
       padding-right: 32px;
       padding-left: 13px;
+      overflow: hidden;
       font-size: 16px;
       font-weight: $regular;
       color: $neutral20;
+      text-overflow: ellipsis;
       text-transform: none;
       letter-spacing: normal;
+      white-space: nowrap;
       border: 1px solid $neutral80;
       border-radius: 8px;
       transition: border-color $duration $timing;
