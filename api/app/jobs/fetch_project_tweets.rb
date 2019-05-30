@@ -3,7 +3,7 @@ class FetchProjectTweets < ApplicationJob
   queue_as :default
 
   rescue_from(Twitter::Error::BadRequest) do |e|
-    project = ResourceImportRow.find(arguments[0])
+    project = Project.find(arguments[0])
     Rails.logger.error(
       "Fetch Project Tweets: failed to fetch tweets for #{project.title}."
     )
