@@ -47,7 +47,7 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
         <time
           dateTime="2018-12-24"
         >
-          5 months
+          mocked-distance-in-words-for-snapshot
         </time>
          
         ago
