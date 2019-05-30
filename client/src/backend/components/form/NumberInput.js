@@ -33,6 +33,10 @@ export default class FormNumberInput extends Component {
     return "number-input-error";
   }
 
+  get idForInstructionsPrefix() {
+    return "number-input-instructions";
+  }
+
   renderValue = value => {
     if (isNull(value) || isUndefined(value)) return "";
     return value;
@@ -47,6 +51,7 @@ export default class FormNumberInput extends Component {
             inputClasses="form-number-input"
             id={`${this.idPrefix}-${id}`}
             idForError={`${this.idForErrorPrefix}-${id}`}
+            idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
             inputType="number"
             renderValue={this.renderValue}
           />

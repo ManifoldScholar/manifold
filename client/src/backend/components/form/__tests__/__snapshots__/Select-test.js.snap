@@ -30,7 +30,7 @@ exports[`Backend.Form.Select component renders correctly 1`] = `
         />
       </svg>
       <select
-        aria-describedby="select-error-1"
+        aria-describedby="select-error-1 select-instructions-1"
         id="select-1"
         onChange={[Function]}
         value=""

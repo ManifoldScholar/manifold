@@ -24,7 +24,7 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-1",
+          "aria-describedby": "upload-error-1 upload-instructions-1",
           "id": "upload-1",
         }
       }
@@ -107,7 +107,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-1",
+          "aria-describedby": "upload-error-1 upload-instructions-1",
           "id": "upload-1",
         }
       }
@@ -185,7 +185,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-1",
+          "aria-describedby": "upload-error-1 upload-instructions-1",
           "id": "upload-1",
         }
       }
@@ -263,7 +263,7 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
       className="form-dropzone style-portrait"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-1",
+          "aria-describedby": "upload-error-1 upload-instructions-1",
           "id": "upload-1",
         }
       }

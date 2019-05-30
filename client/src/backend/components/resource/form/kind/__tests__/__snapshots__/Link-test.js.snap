@@ -15,7 +15,7 @@ exports[`Backend.Resource.Form.Link component renders correctly 1`] = `
       Link URL
     </label>
     <input
-      aria-describedby="text-input-error-1"
+      aria-describedby="text-input-error-1 text-input-instructions-1"
       id="text-input-1"
       onChange={[Function]}
       placeholder="Enter link URL"

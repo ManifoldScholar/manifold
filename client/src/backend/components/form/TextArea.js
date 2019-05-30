@@ -34,6 +34,10 @@ class FormTextArea extends Component {
     return "textarea-error";
   }
 
+  get idForInstructionsPrefix() {
+    return "textarea-instructions";
+  }
+
   render() {
     const labelClass = classnames({
       "has-instructions": isString(this.props.instructions)
@@ -57,10 +61,15 @@ class FormTextArea extends Component {
               <label htmlFor={`${this.idPrefix}-${id}`} className={labelClass}>
                 {this.props.label}
               </label>
-              <Instructions instructions={this.props.instructions} />
+              <Instructions
+                instructions={this.props.instructions}
+                id={`${this.idForInstructionsPrefix}-${id}`}
+              />
               <textarea
                 id={`${this.idPrefix}-${id}`}
-                aria-describedby={`${this.idForErrorPrefix}-${id}`}
+                aria-describedby={`${this.idForErrorPrefix}-${id} ${
+                  this.idForInstructionsPrefix
+                }-${id}`}
                 style={{ height: this.props.height }}
                 placeholder={this.props.placeholder}
                 onChange={this.props.onChange}

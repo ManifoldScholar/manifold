@@ -186,6 +186,10 @@ export default class ListEntities extends PureComponent {
     return "entities-list";
   }
 
+  get idForInstructionsPrefix() {
+    return "entities-list-instructions";
+  }
+
   callback(name) {
     if (!this.callbacks) return null;
     return this.callbacks[name];
@@ -212,9 +216,9 @@ export default class ListEntities extends PureComponent {
     });
 
     return (
-      <UID name={id => `${this.idPrefix}-${id}`}>
+      <UID>
         {id => (
-          <div id={id} className={wrapperClassNames}>
+          <div id={`${this.idPrefix}-${id}`} className={wrapperClassNames}>
             {this.title && (
               <Title
                 title={this.title}
@@ -227,7 +231,10 @@ export default class ListEntities extends PureComponent {
             )}
             <div className={contentsWrapperClassName}>
               {this.instructions && (
-                <Instructions instructions={this.instructions} />
+                <Instructions
+                  instructions={this.instructions}
+                  id={`${this.idForInstructionsPrefix}-${id}`}
+                />
               )}
               {this.hasSearch && this.search}
               <div className="entity-list__header">
@@ -241,15 +248,23 @@ export default class ListEntities extends PureComponent {
                 )}
               </div>
               {!this.isSortable && (
-                <Entities {...this.props} className={listClassNames} />
+                <Entities
+                  {...this.props}
+                  className={listClassNames}
+                  idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
+                />
               )}
               {this.isSortable && (
-                <SortableEntities {...this.props} className={listClassNames} />
+                <SortableEntities
+                  {...this.props}
+                  className={listClassNames}
+                  idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
+                />
               )}
               {this.pagination && (
                 <Pagination
                   pagination={this.pagination}
-                  paginationTarget={`#${id}`}
+                  paginationTarget={`#${this.idPrefix}-${id}`}
                   onPageClick={this.callback("onPageClick")}
                   style={this.paginationStyle}
                 />

@@ -32,6 +32,7 @@ export default class FormUpload extends Component {
     errors: PropTypes.array,
     inputId: PropTypes.string.isRequired,
     idForError: PropTypes.string.isRequired,
+    idForInstructions: PropTypes.string.isRequired,
     wide: PropTypes.bool,
     progress: PropTypes.string,
     fileNameFrom: PropTypes.string,
@@ -99,7 +100,9 @@ export default class FormUpload extends Component {
     });
     const inputProps = {
       id: this.props.inputId,
-      "aria-describedby": this.props.idForError
+      "aria-describedby": `${this.props.idForError} ${
+        this.props.idForInstructions
+      }`
     };
     return (
       <div className={inputClasses}>
@@ -141,7 +144,10 @@ export default class FormUpload extends Component {
               />
             )}
           </Dropzone>
-          <Instructions instructions={this.props.instructions} />
+          <Instructions
+            instructions={this.props.instructions}
+            id={this.props.idForInstructions}
+          />
         </GlobalForm.Errorable>
       </div>
     );

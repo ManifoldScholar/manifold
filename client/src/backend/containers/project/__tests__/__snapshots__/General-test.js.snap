@@ -32,7 +32,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               Title
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Title"
@@ -51,7 +51,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               Subtitle
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Subtitle"
@@ -70,7 +70,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               Slug
             </label>
             <input
-              aria-describedby="text-input-error-1"
+              aria-describedby="text-input-error-1 text-input-instructions-1"
               id="text-input-1"
               onChange={[Function]}
               placeholder="Enter Project Slug"
@@ -98,7 +98,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className="form-input-heading toggle above"
-              htmlFor={1}
+              htmlFor="switch-input-1"
             >
               Draft Mode
             </label>
@@ -106,9 +106,10 @@ exports[`Backend Project General Container renders correctly 1`] = `
               className="toggle-indicator"
             >
               <div
+                aria-describedby="switch-input-instructions-1"
                 aria-pressed={false}
                 className="boolean-primary"
-                id={1}
+                id="switch-input-1"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -124,6 +125,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
             </div>
             <span
               className="instructions"
+              id="switch-input-instructions-1"
             >
               A draft project is only visible to users who are able to modify it.
             </span>
@@ -133,7 +135,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           >
             <label
               className="form-input-heading toggle above"
-              htmlFor={1}
+              htmlFor="switch-input-1"
             >
               Featured
             </label>
@@ -141,9 +143,10 @@ exports[`Backend Project General Container renders correctly 1`] = `
               className="toggle-indicator"
             >
               <div
+                aria-describedby="switch-input-instructions-1"
                 aria-pressed={false}
                 className="boolean-primary"
-                id={1}
+                id="switch-input-1"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -159,6 +162,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
             </div>
             <span
               className="instructions"
+              id="switch-input-instructions-1"
             >
               Featured projects are highlighted on the home page.
             </span>
@@ -423,7 +427,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                   className="input-predictive__input"
                 >
                   <input
-                    aria-describedby={null}
+                    aria-describedby="predictive-text-belongs-to-error-1 predictive-text-belongs-to-instructions-1"
                     aria-label="Add a Subject"
                     className="input-predictive__text-input text-input"
                     onBlur={[Function]}
@@ -530,7 +534,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                 className="input-predictive__input"
               >
                 <input
-                  aria-describedby={null}
+                  aria-describedby="tag-list-error-1 tag-list-instructions-1"
                   aria-label="Enter a Tag"
                   className="input-predictive__text-input text-input"
                   onBlur={[Function]}
@@ -985,7 +989,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                         className="form-dropzone style-square"
                         inputProps={
                           Object {
-                            "aria-describedby": "upload-error-1",
+                            "aria-describedby": "upload-error-1 upload-instructions-1",
                             "id": "upload-1",
                           }
                         }

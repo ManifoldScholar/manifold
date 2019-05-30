@@ -6,7 +6,7 @@ exports[`Backend.Form.Switch component renders correctly 1`] = `
 >
   <label
     className="form-input-heading toggle above"
-    htmlFor={1}
+    htmlFor="switch-input-1"
   >
     Label this
   </label>
@@ -14,9 +14,10 @@ exports[`Backend.Form.Switch component renders correctly 1`] = `
     className="toggle-indicator"
   >
     <div
+      aria-describedby="switch-input-instructions-1"
       aria-pressed={false}
       className="boolean-primary"
-      id={1}
+      id="switch-input-1"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}

@@ -112,7 +112,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
             Email
           </label>
           <input
-            aria-describedby="text-input-error-1"
+            aria-describedby="text-input-error-1 text-input-instructions-1"
             id="text-input-1"
             onChange={[Function]}
             placeholder="Email"
@@ -131,7 +131,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
             First Name
           </label>
           <input
-            aria-describedby="text-input-error-1"
+            aria-describedby="text-input-error-1 text-input-instructions-1"
             id="text-input-1"
             onChange={[Function]}
             placeholder="First Name"
@@ -150,7 +150,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
             Last Name
           </label>
           <input
-            aria-describedby="text-input-error-1"
+            aria-describedby="text-input-error-1 text-input-instructions-1"
             id="text-input-1"
             onChange={[Function]}
             placeholder="Last Name"
@@ -187,7 +187,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
                 />
               </svg>
               <select
-                aria-describedby="select-error-1"
+                aria-describedby="select-error-1 select-instructions-1"
                 id="select-1"
                 onChange={[Function]}
                 value="admin"

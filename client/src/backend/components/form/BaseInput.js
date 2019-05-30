@@ -24,6 +24,7 @@ class FormBaseInput extends Component {
     join: PropTypes.func,
     id: PropTypes.string,
     idForError: PropTypes.string,
+    idForInstructions: PropTypes.string,
     renderValue: PropTypes.func,
     wide: PropTypes.bool
   };
@@ -47,6 +48,7 @@ class FormBaseInput extends Component {
       "form-input": true,
       wide: this.props.wide
     });
+    const { id, idForError, idForInstructions } = this.props;
 
     return (
       <GlobalForm.Errorable
@@ -54,23 +56,26 @@ class FormBaseInput extends Component {
         name={this.props.name}
         errors={this.props.errors}
         label={this.props.label}
-        idForError={this.props.idForError}
+        idForError={idForError}
       >
-        <label htmlFor={this.props.id} className={labelClass}>
+        <label htmlFor={id} className={labelClass}>
           {this.props.label}
         </label>
         <input
           ref={input => {
             this.inputElement = input;
           }}
-          id={this.props.id}
+          id={id}
           type={this.props.inputType}
           placeholder={this.props.placeholder}
           onChange={this.props.onChange}
           value={this.renderValue(this.props)}
-          aria-describedby={this.props.idForError}
+          aria-describedby={`${idForError} ${idForInstructions}`}
         />
-        <Instructions instructions={this.props.instructions} />
+        <Instructions
+          instructions={this.props.instructions}
+          id={idForInstructions}
+        />
       </GlobalForm.Errorable>
     );
   }

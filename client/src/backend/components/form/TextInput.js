@@ -36,6 +36,10 @@ export default class FormTextInput extends Component {
     return "text-input-error";
   }
 
+  get idForInstructionsPrefix() {
+    return "text-input-instructions";
+  }
+
   renderValue = value => {
     if (!value) return "";
     if (!isArray(value)) return value;
@@ -52,6 +56,7 @@ export default class FormTextInput extends Component {
             {...this.props}
             id={`${this.idPrefix}-${id}`}
             idForError={`${this.idForErrorPrefix}-${id}`}
+            idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
             inputType={inputType}
             renderValue={this.renderValue}
           />

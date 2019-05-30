@@ -24,7 +24,7 @@ exports[`Backend.Resource.Form.Document component renders correctly 1`] = `
       className="form-dropzone style-square"
       inputProps={
         Object {
-          "aria-describedby": "upload-error-1",
+          "aria-describedby": "upload-error-1 upload-instructions-1",
           "id": "upload-1",
         }
       }

@@ -13,7 +13,7 @@ Array [
       Title
     </label>
     <input
-      aria-describedby="text-input-error-1"
+      aria-describedby="text-input-error-1 text-input-instructions-1"
       id="text-input-1"
       onChange={[Function]}
       type="text"
@@ -49,7 +49,7 @@ Array [
           />
         </svg>
         <select
-          aria-describedby="select-error-1"
+          aria-describedby="select-error-1 select-instructions-1"
           id="select-1"
           onChange={[Function]}
           value=""
@@ -79,7 +79,7 @@ Array [
       Depth
     </label>
     <input
-      aria-describedby="number-input-error-1"
+      aria-describedby="number-input-error-1 number-input-instructions-1"
       id="number-input-1"
       onChange={[Function]}
       type="number"
@@ -91,7 +91,7 @@ Array [
   >
     <label
       className="form-input-heading toggle above"
-      htmlFor={1}
+      htmlFor="switch-input-1"
     >
       Show Text Title?
     </label>
@@ -99,9 +99,10 @@ Array [
       className="toggle-indicator"
     >
       <div
+        aria-describedby="switch-input-instructions-1"
         aria-pressed={false}
         className="boolean-primary"
-        id={1}
+        id="switch-input-1"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}

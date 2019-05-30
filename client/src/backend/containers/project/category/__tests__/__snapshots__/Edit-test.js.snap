@@ -32,7 +32,7 @@ exports[`Backend Project Category Edit Container renders correctly 1`] = `
           Title
         </label>
         <input
-          aria-describedby="text-input-error-1"
+          aria-describedby="text-input-error-1 text-input-instructions-1"
           id="text-input-1"
           onChange={[Function]}
           placeholder="What would you like to call this category?"

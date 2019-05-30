@@ -74,6 +74,10 @@ export class FormHasMany extends PureComponent {
     return "predictive-text-belongs-to-error";
   }
 
+  get idForInstructionsPrefix() {
+    return "predictive-text-belongs-to-instructions";
+  }
+
   selectOne(entity) {
     const newEntities = this.entities.slice(0);
     if (!newEntities.find(e => e.id === entity.id)) newEntities.push(entity);
@@ -113,20 +117,21 @@ export class FormHasMany extends PureComponent {
     });
 
     return (
-      <UID name={id => `${this.idForErrorPrefix}-${id}`}>
+      <UID>
         {id => (
           <GlobalForm.Errorable
             className={inputClasses}
             name={this.props.name}
             errors={this.props.errors}
             label={this.props.label}
-            idForError={id}
+            idForError={`${this.idForErrorPrefix}-${id}`}
           >
             <Header
               label={this.props.label}
               labelTag={this.props.labelTag}
               labelHeader={this.props.labelHeader}
               instructions={this.props.instructions}
+              idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
             />
             <nav className="has-many-list">
               {this.renderList(
@@ -142,7 +147,8 @@ export class FormHasMany extends PureComponent {
                 fetchOptions={this.props.fetchOptions}
                 options={this.props.options}
                 searchable={this.props.searchable}
-                idForError={id}
+                idForError={`${this.idForErrorPrefix}-${id}`}
+                idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
               />
               {this.renderList(
                 !this.props.orderable && !this.props.editClickHandler,

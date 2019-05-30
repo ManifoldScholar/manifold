@@ -21,10 +21,11 @@ exports[`Backend.Form.DatePicker component renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor={1}
+          htmlFor="masked-text-1"
         />
         <react-text-mask
-          id={1}
+          aria-describedby="masked-text-instructions-1"
+          id="masked-text-1"
           mask={
             Array [
               /\\\\d/,

@@ -69,6 +69,10 @@ class FormRadios extends Component {
     return "radios-error";
   }
 
+  get idForInstructionsPrefix() {
+    return "radios-instructions";
+  }
+
   render() {
     return (
       <UID>
@@ -80,13 +84,21 @@ class FormRadios extends Component {
             label={this.props.label}
             idForError={`${this.idForErrorPrefix}-${id}`}
           >
-            <fieldset className="form-input-radios__wrapper">
+            <fieldset
+              className="form-input-radios__wrapper"
+              aria-describedby={`${this.idForErrorPrefix}-${id} ${
+                this.idForInstructionsPrefix
+              }-${id}`}
+            >
               <RadioLabel
                 label={this.props.label}
                 prompt={this.props.prompt}
                 hasInstructions={isString(this.props.instructions)}
               />
-              <Instructions instructions={this.props.instructions} />
+              <Instructions
+                instructions={this.props.instructions}
+                id={`${this.idForInstructionsPrefix}-${id}`}
+              />
               {this.options.map((option, index) => (
                 <Option
                   key={`${this.idPrefix}-${id}-${option.internalValue}`}

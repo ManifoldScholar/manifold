@@ -16,7 +16,8 @@ export default class SortableEntities extends PureComponent {
     entityComponent: PropTypes.func.isRequired,
     entityComponentProps: PropTypes.object,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare"]),
-    useDragHandle: PropTypes.bool
+    useDragHandle: PropTypes.bool,
+    idForInstructions: PropTypes.string
   };
 
   static defaultProps = {
@@ -101,6 +102,10 @@ export default class SortableEntities extends PureComponent {
     return this.props.className;
   }
 
+  get idForInstructions() {
+    return this.props.idForInstructions;
+  }
+
   getAdjustedPosition(position) {
     const entityCount = this.state.orderedEntities.length;
 
@@ -141,7 +146,11 @@ export default class SortableEntities extends PureComponent {
 
     const List = SortableContainer(({ entities }) => {
       return (
-        <ul ref={this.ul} className={this.className}>
+        <ul
+          ref={this.ul}
+          className={this.className}
+          aria-describedby={this.idForInstructions}
+        >
           {entities.map((entity, index) => (
             <SortableEntityComponent
               sortableEntity={entity}

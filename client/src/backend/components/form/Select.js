@@ -40,6 +40,10 @@ class FormSelect extends Component {
     return "select-error";
   }
 
+  get idForInstructionsPrefix() {
+    return "select-instructions";
+  }
+
   render() {
     const options = this.props.options.map(option => {
       return (
@@ -71,7 +75,9 @@ class FormSelect extends Component {
                 />
                 <select
                   id={`${this.idPrefix}-${id}`}
-                  aria-describedby={`${this.idForErrorPrefix}-${id}`}
+                  aria-describedby={`${this.idForErrorPrefix}-${id} ${
+                    this.idForInstructionsPrefix
+                  }-${id}`}
                   onChange={this.props.onChange}
                   value={this.props.value}
                   ref={input => {
@@ -81,7 +87,10 @@ class FormSelect extends Component {
                   {options}
                 </select>
               </div>
-              <Instructions instructions={this.props.instructions} />
+              <Instructions
+                instructions={this.props.instructions}
+                id={`${this.idForInstructionsPrefix}-${id}`}
+              />
             </GlobalForm.Errorable>
           </div>
         )}

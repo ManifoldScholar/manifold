@@ -34,7 +34,7 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
               className="form-dropzone style-square"
               inputProps={
                 Object {
-                  "aria-describedby": "upload-error-1",
+                  "aria-describedby": "upload-error-1 upload-instructions-1",
                   "id": "upload-1",
                 }
               }
@@ -114,7 +114,7 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
               className="form-dropzone style-square"
               inputProps={
                 Object {
-                  "aria-describedby": "upload-error-1",
+                  "aria-describedby": "upload-error-1 upload-instructions-1",
                   "id": "upload-1",
                 }
               }

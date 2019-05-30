@@ -18,7 +18,7 @@ exports[`Backend.Form.TagList component renders correctly 1`] = `
       className="input-predictive__input"
     >
       <input
-        aria-describedby={null}
+        aria-describedby="tag-list-error-1 tag-list-instructions-1"
         aria-label="Enter a Tag"
         className="input-predictive__text-input text-input"
         onBlur={[Function]}

@@ -6,6 +6,7 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
   style={Object {}}
 >
   <fieldset
+    aria-describedby="radios-error-1 radios-instructions-1"
     className="form-input-radios__wrapper"
   >
     <legend

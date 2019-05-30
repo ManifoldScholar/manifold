@@ -35,6 +35,10 @@ class FormMaskedTextInput extends Component {
     return "masked-text";
   }
 
+  get idForInstructionsPrefix() {
+    return "masked-text-instructions";
+  }
+
   currencyMask() {
     return createNumberMask({
       prefix: "$",
@@ -96,23 +100,27 @@ class FormMaskedTextInput extends Component {
     });
 
     return (
-      <UID name={id => `${this.idPrefix}-${id}`}>
+      <UID>
         {id => (
           <div className={inputClasses}>
-            <label htmlFor={id} className={labelClass}>
+            <label htmlFor={`${this.idPrefix}-${id}`} className={labelClass}>
               {this.props.label}
             </label>
             <MaskedInput
               onChange={this.props.onChange}
               value={this.props.value}
-              id={id}
+              id={`${this.idPrefix}-${id}`}
               type="text"
               mask={mask}
               placeholder={this.props.placeholder}
               placeholderChar={this.placeholderChar}
               onClick={this.props.onClick}
+              aria-describedby={`${this.idForInstructionsPrefix}-${id}`}
             />
-            <Instructions instructions={this.props.instructions} />
+            <Instructions
+              instructions={this.props.instructions}
+              id={`${this.idForInstructionsPrefix}-${id}`}
+            />
           </div>
         )}
       </UID>
