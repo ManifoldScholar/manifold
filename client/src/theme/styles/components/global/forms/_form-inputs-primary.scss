@@ -7,6 +7,12 @@
     margin-top: 40px;
   }
 
+  &__wrapper {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
   // Avoid styling checkbox/radio labels
   label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker) {
     @include formLabelPrimary;

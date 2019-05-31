@@ -66,6 +66,10 @@ class FormDate extends Component {
   }
   /* eslint-enable react/no-did-update-set-state */
 
+  get idPrefix() {
+    return "date-input";
+  }
+
   get idForErrorPrefix() {
     return "date-input-error";
   }
@@ -202,46 +206,69 @@ class FormDate extends Component {
             label={this.props.label}
             idForError={`${this.idForErrorPrefix}-${id}`}
           >
-            <div className="form-input-heading">{this.props.label}</div>
-            <div className="form-date">
-              <div className="form-select input-month">
-                {this.renderSelectIcon()}
-                <select
-                  onChange={this.setInputMonth}
-                  value={this.state.input.month}
-                >
-                  <option />
-                  {this.months.map((month, index) => {
-                    return (
-                      <option value={index} key={month}>
-                        {month}
-                      </option>
-                    );
-                  })}
-                </select>
+            <fieldset className="form-input__wrapper">
+              <legend className="form-input-heading">{this.props.label}</legend>
+              <div className="form-date">
+                <div className="form-select input-month">
+                  <label
+                    htmlFor={`${this.idPrefix}-${id}-month`}
+                    className="screen-reader-text"
+                  >
+                    Month
+                  </label>
+                  {this.renderSelectIcon()}
+                  <select
+                    onChange={this.setInputMonth}
+                    value={this.state.input.month}
+                    id={`${this.idPrefix}-${id}-month`}
+                  >
+                    <option />
+                    {this.months.map((month, index) => {
+                      return (
+                        <option value={index} key={month}>
+                          {month}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className="form-select input-day">
+                  <label
+                    htmlFor={`${this.idPrefix}-${id}-day`}
+                    className="screen-reader-text"
+                  >
+                    Day
+                  </label>
+                  {this.renderSelectIcon()}
+                  <select
+                    onChange={this.setInputDay}
+                    value={this.state.input.day}
+                    id={`${this.idPrefix}-${id}-day`}
+                  >
+                    <option />
+                    {this.days().map(day => {
+                      return <option key={day}>{day}</option>;
+                    })}
+                  </select>
+                </div>
+                <div className="form-input">
+                  <label
+                    htmlFor={`${this.idPrefix}-${id}-year`}
+                    className="screen-reader-text"
+                  >
+                    Year
+                  </label>
+                  <MaskedInput
+                    type="text"
+                    mask={[/\d/, /\d/, /\d/, /\d/]}
+                    className="input-year"
+                    onChange={this.setInputYear}
+                    value={this.state.input.year}
+                    id={`${this.idPrefix}-${id}-year`}
+                  />
+                </div>
               </div>
-              <div className="form-select input-day">
-                {this.renderSelectIcon()}
-                <select
-                  onChange={this.setInputDay}
-                  value={this.state.input.day}
-                >
-                  <option />
-                  {this.days().map(day => {
-                    return <option key={day}>{day}</option>;
-                  })}
-                </select>
-              </div>
-              <div className="form-input">
-                <MaskedInput
-                  type="text"
-                  mask={[/\d/, /\d/, /\d/, /\d/]}
-                  className="input-year"
-                  onChange={this.setInputYear}
-                  value={this.state.input.year}
-                />
-              </div>
-            </div>
+            </fieldset>
           </GlobalForm.Errorable>
         )}
       </UID>
