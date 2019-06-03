@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 import debounce from "lodash/debounce";
 import throttle from "lodash/throttle";
 import { UID } from "react-uid";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourcePlayerAudio extends Component {
   static propTypes = {
@@ -172,7 +172,11 @@ export default class ResourcePlayerAudio extends Component {
       <div className="audio-player">
         <div className="cover error">
           <div className="indicator">
-            <i className="manicon manicon-octagon-bang" aria-hidden="true" />
+            <IconComposer
+              icon="stopSign64"
+              iconClass="indicator__icon"
+              size={56.615}
+            />
           </div>
           <div
             className="message"
@@ -195,9 +199,10 @@ export default class ResourcePlayerAudio extends Component {
       >
         <span className="screen-reader-text">Start Playback</span>
         <div className="indicator">
-          <i
-            className="manicon manicon-triangle-right-fill"
-            aria-hidden="true"
+          <IconComposer
+            icon="playSolid24"
+            iconClass="indicator__icon"
+            size={42.667}
           />
         </div>
       </div>
@@ -205,17 +210,8 @@ export default class ResourcePlayerAudio extends Component {
   }
 
   render() {
-    const playPauseClasses = classnames({
-      manicon: true,
-      "manicon-triangle-right-fill": !this.state.playing,
-      "manicon-bars-parallel": this.state.playing
-    });
-
-    const muteClasses = classnames({
-      manicon: true,
-      "manicon-speaker": this.state.muted,
-      "manicon-speaker-with-sound": !this.state.muted
-    });
+    const playPauseIcon = this.state.playing ? "pauseSolid24" : "playSolid24";
+    const muteIcon = this.state.muted ? "speakerMuted24" : "speaker24";
 
     const volume = this.state.muted ? 0 : this.state.volume;
 
@@ -233,7 +229,11 @@ export default class ResourcePlayerAudio extends Component {
             <span className="screen-reader-text">
               {this.state.playing ? "Pause Playback" : "Start Playback"}
             </span>
-            <i className={playPauseClasses} aria-hidden="true" />
+            <IconComposer
+              icon={playPauseIcon}
+              iconClass="audio-player__icon audio-player__icon--play-pause"
+              size={19.2}
+            />
           </button>
           <div className="progress">
             <div className="time">{this.state.currentTime}</div>
@@ -269,7 +269,11 @@ export default class ResourcePlayerAudio extends Component {
               <span className="screen-reader-text">
                 {this.state.muted ? "Unmute" : "Mute"}
               </span>
-              <i className={muteClasses} aria-hidden="true" />
+              <IconComposer
+                icon={muteIcon}
+                iconClass="audio-player__icon audio-player__icon--mute"
+                size={21.333}
+              />
             </button>
             <div className="slider">
               <div

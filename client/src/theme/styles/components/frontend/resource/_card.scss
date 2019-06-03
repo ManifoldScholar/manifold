@@ -52,6 +52,7 @@
   &__preview-text {
     @include utilityPrimary;
     position: relative; // Required to rise above overlay
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,6 +88,8 @@
   }
 
   &__view-icon {
+    position: relative;
+    top: -1px;
     margin-left: 7px;
 
     @include respond($break50) {
