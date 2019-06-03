@@ -136,7 +136,11 @@ class ResourceCard extends Component {
         out = (
           <React.Fragment>
             <span className="resource-card__view-text">{"Preview"}</span>
-            <i className="manicon manicon-eye-outline" aria-hidden="true" />
+            <IconComposer
+              icon="eyeOpen16"
+              size={21.333}
+              iconClass="resource-card__view-icon"
+            />
           </React.Fragment>
         );
         break;
@@ -156,7 +160,11 @@ class ResourceCard extends Component {
         out = (
           <React.Fragment>
             <span className="resource-card__view-text">{"Play"}</span>
-            <i className="manicon manicon-triangle-right" aria-hidden="true" />
+            <IconComposer
+              icon="play16"
+              size={19.2}
+              iconClass="resource-card__view-icon"
+            />
           </React.Fragment>
         );
         break;

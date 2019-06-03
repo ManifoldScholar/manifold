@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ResourcePreview from "frontend/components/resource-preview";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceListSlideFigureImage extends Component {
   static propTypes = {
@@ -19,8 +20,12 @@ export default class ResourceListSlideFigureImage extends Component {
         {this.props.enableZoom ? (
           <ResourcePreview resource={this.props.resource}>
             <div className="zoom-indicator">
-              Zoom
-              <i className="manicon manicon-magnify-plus" aria-hidden="true" />
+              <span className="zoom-indicator__text">Zoom</span>
+              <IconComposer
+                icon="zoomIn16"
+                size={21.333}
+                iconClass="zoom-indicator__icon"
+              />
             </div>
           </ResourcePreview>
         ) : null}

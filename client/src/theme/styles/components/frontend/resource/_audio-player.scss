@@ -50,18 +50,7 @@
       border: 0;
       border-radius: 50%;
 
-      .manicon {
-        font-size: 32px;
-
-        &.manicon-octagon-bang {
-          margin-top: 2px;
-          font-size: 46px;
-        }
-
-        &.manicon-triangle-right-fill {
-          margin-left: 4px;
-        }
-      }
+      &__icon {}
     }
   }
 
@@ -83,7 +72,7 @@
     padding: 0 15px 10px;
 
     @include respond($break60) {
-      padding: 0 25px 25px;
+      padding: 0 25px 19px;
     }
 
     button {
@@ -95,7 +84,7 @@
       &:hover, &:focus {
         outline: 0;
 
-        .manicon {
+        .audio-player__icon {
           color: $accentPrimary;
         }
       }
@@ -156,14 +145,6 @@
 
         @include respond($break60) {
           margin-right: 7px;
-        }
-
-        .manicon {
-          font-size: 15px;
-
-          @include respond($break60) {
-            font-size: 18px;
-          }
         }
       }
     }
@@ -226,18 +207,27 @@
         }
       }
     }
+  }
 
-    .manicon {
-      font-size: 16px;
-      color: $neutralWhite;
-      transition: color $durationFast $timing;
+  &__icon {
+    position: relative;
+    color: $neutralWhite;
+    transition: color $durationFast $timing;
+
+    &--play-pause {
+      top: 1px;
 
       @include respond($break60) {
-        font-size: 24px;
+        width: 32px;
+        height: 32px;
       }
+    }
 
-      &::before {
-        vertical-align: middle;
+    &--mute {
+      @include respond($break60) {
+        top: 1px;
+        width: 27.429px;
+        height: 27.429px;
       }
     }
   }
