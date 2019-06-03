@@ -83,7 +83,7 @@ export default class DialogConfirm extends PureComponent {
             data-id="accept"
           >
             <IconComposer
-              icon="check16"
+              icon="checkmark16"
               size="default"
               iconClass="button-icon-secondary__icon"
             />

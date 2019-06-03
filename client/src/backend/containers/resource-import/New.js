@@ -134,7 +134,7 @@ export class ResourceImportNew extends PureComponent {
         >
           <button type="submit" className={this.buttonClasses}>
             <IconComposer
-              icon="check16"
+              icon="checkmark16"
               size="default"
               iconClass="button-icon-secondary__icon"
             />

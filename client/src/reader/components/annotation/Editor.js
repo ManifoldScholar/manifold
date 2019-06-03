@@ -117,7 +117,7 @@ export default class AnnotationEditor extends PureComponent {
                 />
                 <span className="checkbox__indicator" aria-hidden="true">
                   <IconComposer
-                    icon="check16"
+                    icon="checkmark16"
                     size="default"
                     iconClass="checkbox__icon"
                   />

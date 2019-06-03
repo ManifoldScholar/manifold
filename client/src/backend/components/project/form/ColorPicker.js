@@ -75,7 +75,7 @@ export default class ColorPicker extends Component {
               <span className="toggle-indicator" aria-hidden="true">
                 {checked && (
                   <IconComposer
-                    icon="check16"
+                    icon="checkmark16"
                     size={18.5}
                     iconClass="toggle-indicator__icon"
                   />

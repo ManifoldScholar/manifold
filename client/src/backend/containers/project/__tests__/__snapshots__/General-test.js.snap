@@ -825,7 +825,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           >
                             <svg
                               aria-hidden={true}
-                              className="manicon-svg toggle-indicator__icon svg-icon--check16"
+                              className="manicon-svg toggle-indicator__icon svg-icon--checkmark16"
                               height={18.5}
                               viewBox="0 0 16 16"
                               width={18.5}

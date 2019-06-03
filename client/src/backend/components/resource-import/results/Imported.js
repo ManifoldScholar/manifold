@@ -20,7 +20,7 @@ export default class ResourceImportResultsImported extends PureComponent {
     return (
       <React.Fragment>
         <IconComposer
-          icon="check16"
+          icon="checkmark16"
           size={18}
           iconClass="results-header__icon"
         />

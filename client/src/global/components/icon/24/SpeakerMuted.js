@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-export default class Check extends Component {
+export default class SpeakerMuted extends Component {
   static propTypes = {
     iconClass: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -20,11 +20,11 @@ export default class Check extends Component {
   };
 
   get defaultHeight() {
-    return 16;
+    return 24;
   }
 
   get defaultWidth() {
-    return 16;
+    return 24;
   }
 
   get size() {
@@ -44,7 +44,7 @@ export default class Check extends Component {
   }
 
   get viewBox() {
-    return "0 0 16 16";
+    return "0 0 24 24";
   }
 
   get classes() {
@@ -73,11 +73,12 @@ export default class Check extends Component {
 
     return (
       <svg {...svgProps}>
-        <polygon
-          fill={this.fill}
-          fillRule="nonzero"
-          points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-        />
+        <g fill="none" fillRule="evenodd">
+          <polygon
+            fill={this.fill}
+            points="5.935 9.333 2 9.333 2 14.422 5.935 14.422 11.965 19.755 11.965 4"
+          />
+        </g>
       </svg>
     );
   }

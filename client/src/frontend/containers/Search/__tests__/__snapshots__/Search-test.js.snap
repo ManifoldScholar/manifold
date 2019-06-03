@@ -90,7 +90,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg checkbox__icon svg-icon--check16"
+                  className="manicon-svg checkbox__icon svg-icon--checkmark16"
                   height={16}
                   viewBox="0 0 16 16"
                   width={16}
@@ -121,7 +121,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg checkbox__icon svg-icon--check16"
+                  className="manicon-svg checkbox__icon svg-icon--checkmark16"
                   height={16}
                   viewBox="0 0 16 16"
                   width={16}
@@ -152,7 +152,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg checkbox__icon svg-icon--check16"
+                  className="manicon-svg checkbox__icon svg-icon--checkmark16"
                   height={16}
                   viewBox="0 0 16 16"
                   width={16}
@@ -183,7 +183,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg checkbox__icon svg-icon--check16"
+                  className="manicon-svg checkbox__icon svg-icon--checkmark16"
                   height={16}
                   viewBox="0 0 16 16"
                   width={16}
@@ -214,7 +214,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg checkbox__icon svg-icon--check16"
+                  className="manicon-svg checkbox__icon svg-icon--checkmark16"
                   height={16}
                   viewBox="0 0 16 16"
                   width={16}
@@ -245,7 +245,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg checkbox__icon svg-icon--check16"
+                  className="manicon-svg checkbox__icon svg-icon--checkmark16"
                   height={16}
                   viewBox="0 0 16 16"
                   width={16}

@@ -120,7 +120,7 @@ class IngestionFormUpload extends PureComponent {
             disabled={!this.valid}
           >
             <IconComposer
-              icon="check16"
+              icon="checkmark16"
               size="default"
               iconClass="button-icon-secondary__icon"
             />
