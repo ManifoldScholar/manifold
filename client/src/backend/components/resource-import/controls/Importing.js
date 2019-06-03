@@ -37,7 +37,7 @@ export default class ResourceImportControlsImporting extends PureComponent {
             className="buttons-icon-horizontal__button button-icon-secondary"
           >
             <IconComposer
-              icon="check16"
+              icon="checkmark16"
               size="default"
               iconClass="button-icon-secondary__icon"
             />

@@ -5,8 +5,9 @@ import ActivityText64 from "./64/ActivityText";
 import ActivityTweet64 from "./64/ActivityTweet";
 import Annotate24 from "./24/Annotate";
 import Annotate32 from "./32/Annotate";
+import AnnotationGroup24 from "./24/AnnotationGroup";
+import AnnotationGroupAlt24 from "./24/AnnotationGroupAlt";
 import Arrow24 from "./24/Arrow";
-import ArrowBack64 from "./64/ArrowBack";
 import ArrowDown16 from "./16/ArrowDown";
 import ArrowDown32 from "./32/ArrowDown";
 import ArrowLeft16 from "./16/ArrowLeft";
@@ -29,7 +30,7 @@ import BEResourcesBox64 from "./64/BEResourcesBox";
 import BEResourcesBoxes64 from "./64/BEResourcesBoxes";
 import Bookmark24 from "./24/Bookmark";
 import Bookmark32 from "./32/Bookmark";
-import Check16 from "./16/Check";
+import Checkmark16 from "./16/Checkmark";
 import CircleArrowDown64 from "./64/CircleArrowDown";
 import CircleArrowLeft64 from "./64/CircleArrowLeft";
 import CircleArrowRight64 from "./64/CircleArrowRight";
@@ -43,6 +44,8 @@ import Close24 from "./24/Close";
 import Close32 from "./32/Close";
 import Comment24 from "./24/Comment";
 import Comment32 from "./32/Comment";
+import CommentPencil32 from "./32/CommentPencil";
+import CommentPost32 from "./32/CommentPost";
 import Copy24 from "./24/Copy";
 import Delete32 from "./32/Delete";
 import DisclosureDown16 from "./16/DisclosureDown";
@@ -54,6 +57,7 @@ import DisclosureUp32 from "./32/DisclosureUp";
 import Duplicate32 from "./32/Duplicate";
 import EditProfile24 from "./24/EditProfile";
 import EyeClosed32 from "./32/EyeClosed";
+import EyeOpen16 from "./16/EyeOpen";
 import EyeOpen32 from "./32/EyeOpen";
 import Eyeball24 from "./24/Eyeball";
 import Following64 from "./64/Following";
@@ -61,8 +65,10 @@ import Glasses64 from "./64/Glasses";
 import Globe64 from "./64/Globe";
 import Grabber32 from "./32/Grabber";
 import GrabberInactive32 from "./32/GrabberInactive";
+import Info16 from "./16/Info";
 import Key32 from "./32/Key";
 import Lamp64 from "./64/Lamp";
+import Lock16 from "./16/Lock";
 import Lock32 from "./32/Lock";
 import Logout24 from "./24/Logout";
 import Mail24 from "./24/Mail";
@@ -75,6 +81,9 @@ import Mug64 from "./64/Mug";
 import New64 from "./64/New";
 import Notes24 from "./24/Notes";
 import Notifications24 from "./24/Notifications";
+import PauseSolid24 from "./24/PauseSolid";
+import Play16 from "./16/Play";
+import PlaySolid24 from "./24/PlaySolid";
 import Plus16 from "./16/Plus";
 import Plus24 from "./24/Plus";
 import ProjectCollections64 from "./64/ProjectCollections";
@@ -82,11 +91,14 @@ import Projects64 from "./64/Projects";
 import RecentActivity64 from "./64/RecentActivity";
 import Reload24 from "./24/Reload";
 import Reload32 from "./32/Reload";
+import Reply16 from "./16/Reply";
 import Resource24 from "./24/Resource";
 import ResourceAudio64 from "./64/ResourceAudio";
 import ResourceCollection64 from "./64/ResourceCollection";
 import ResourceDocument64 from "./64/ResourceDocument";
 import ResourceFile64 from "./64/ResourceFile";
+import ResourceFilled16 from "./16/ResourceFilled";
+import ResourceFilled24 from "./24/ResourceFilled";
 import ResourceImage64 from "./64/ResourceImage";
 import ResourceInteractive64 from "./64/ResourceInteractive";
 import ResourceLink64 from "./64/ResourceLink";
@@ -109,6 +121,8 @@ import SocialInstagram32 from "./32/SocialInstagram";
 import SocialLinkedIn32 from "./32/SocialLinkedIn";
 import SocialSlack32 from "./32/SocialSlack";
 import SocialTwitter32 from "./32/SocialTwitter";
+import Speaker24 from "./24/Speaker";
+import SpeakerMuted24 from "./24/SpeakerMuted";
 import StopSign64 from "./64/StopSign";
 import Text24 from "./24/Text";
 import TextsBook64 from "./64/TextsBook";
@@ -119,6 +133,8 @@ import Touch64 from "./64/Touch";
 import Upload32 from "./32/Upload";
 import Upload64 from "./64/Upload";
 import WarningSign64 from "./64/WarningSign";
+import ZoomIn16 from "./16/ZoomIn";
+import ZoomOut16 from "./16/ZoomOut";
 
 export default {
   ActivityComments64,
@@ -128,8 +144,9 @@ export default {
   ActivityTweet64,
   Annotate24,
   Annotate32,
+  AnnotationGroup24,
+  AnnotationGroupAlt24,
   Arrow24,
-  ArrowBack64,
   ArrowDown16,
   ArrowDown32,
   ArrowLeft16,
@@ -152,7 +169,7 @@ export default {
   BEResourcesBoxes64,
   Bookmark24,
   Bookmark32,
-  Check16,
+  Checkmark16,
   CircleArrowDown64,
   CircleArrowLeft64,
   CircleArrowRight64,
@@ -166,6 +183,8 @@ export default {
   Close32,
   Comment24,
   Comment32,
+  CommentPencil32,
+  CommentPost32,
   Copy24,
   Delete32,
   DisclosureDown16,
@@ -177,6 +196,7 @@ export default {
   Duplicate32,
   EditProfile24,
   EyeClosed32,
+  EyeOpen16,
   EyeOpen32,
   Eyeball24,
   Following64,
@@ -184,8 +204,10 @@ export default {
   Globe64,
   Grabber32,
   GrabberInactive32,
+  Info16,
   Key32,
   Lamp64,
+  Lock16,
   Lock32,
   Logout24,
   Mail24,
@@ -198,6 +220,9 @@ export default {
   New64,
   Notes24,
   Notifications24,
+  PauseSolid24,
+  Play16,
+  PlaySolid24,
   Plus16,
   Plus24,
   ProjectCollections64,
@@ -205,11 +230,14 @@ export default {
   RecentActivity64,
   Reload24,
   Reload32,
+  Reply16,
   Resource24,
   ResourceAudio64,
   ResourceCollection64,
   ResourceDocument64,
   ResourceFile64,
+  ResourceFilled16,
+  ResourceFilled24,
   ResourceImage64,
   ResourceInteractive64,
   ResourceLink64,
@@ -232,6 +260,8 @@ export default {
   SocialLinkedIn32,
   SocialSlack32,
   SocialTwitter32,
+  Speaker24,
+  SpeakerMuted24,
   StopSign64,
   Text24,
   TextsBook64,
@@ -241,5 +271,7 @@ export default {
   Touch64,
   Upload32,
   Upload64,
-  WarningSign64
+  WarningSign64,
+  ZoomIn16,
+  ZoomOut16
 };

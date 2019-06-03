@@ -291,7 +291,7 @@ export default class SearchQueryForm extends PureComponent {
                     />
                     <div className="checkbox__indicator" aria-hidden="true">
                       <Utility.IconComposer
-                        icon="check16"
+                        icon="checkmark16"
                         size="default"
                         iconClass="checkbox__icon"
                       />
@@ -318,7 +318,7 @@ export default class SearchQueryForm extends PureComponent {
                 {/* Fake control to allow for custom checkbox styles */}
                 <div className="checkbox__indicator" aria-hidden="true">
                   <Utility.IconComposer
-                    icon="check16"
+                    icon="checkmark16"
                     size="default"
                     iconClass="checkbox__icon"
                   />
@@ -343,7 +343,7 @@ export default class SearchQueryForm extends PureComponent {
                     {/* Fake control to allow for custom checkbox styles */}
                     <div className="checkbox__indicator" aria-hidden="true">
                       <Utility.IconComposer
-                        icon="check16"
+                        icon="checkmark16"
                         size="default"
                         iconClass="checkbox__icon"
                       />

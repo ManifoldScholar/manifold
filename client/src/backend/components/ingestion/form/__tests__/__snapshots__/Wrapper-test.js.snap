@@ -155,7 +155,7 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
         >
           <svg
             aria-hidden={true}
-            className="manicon-svg button-icon-secondary__icon svg-icon--check16"
+            className="manicon-svg button-icon-secondary__icon svg-icon--checkmark16"
             height={16}
             viewBox="0 0 16 16"
             width={16}

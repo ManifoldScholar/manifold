@@ -89,7 +89,7 @@ export default class IngestionActions extends Component {
     return (
       <button onClick={this.props.complete} className={this.buttonClasses}>
         <IconComposer
-          icon="check16"
+          icon="checkmark16"
           size="default"
           iconClass="button-icon-secondary__icon"
         />
