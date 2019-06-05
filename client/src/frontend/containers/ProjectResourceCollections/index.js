@@ -89,12 +89,12 @@ class ProjectResourceCollectionsContainer extends Component {
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
-        {standaloneMode ? (
-          <StandaloneHeader project={project} theme={["simple"]} />
-        ) : (
         <h1 className="screen-reader-text">
           {`${project.attributes.titlePlaintext} Resource Collections`}
         </h1>
+        {standaloneMode ? (
+          <StandaloneHeader project={project} theme={["simple"]} />
+        ) : (
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
               link={lh.link("frontendProjectDetail", project.attributes.slug)}
