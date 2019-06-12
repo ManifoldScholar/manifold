@@ -18,6 +18,11 @@ const selectFont = (state, action) => {
   return Object.assign({}, state, { font: action.payload });
 };
 
+// TODO: get nested attributes to reset to initialState
+const resetAllAttributes = () => {
+  return Object.assign({}, initialState);
+};
+
 const incrementAttribute = (state, attribute) => {
   const parameter = state[attribute];
   if (parameter.current < parameter.max) {
@@ -53,7 +58,8 @@ export default handleActions(
     },
     DECREMENT_MARGINS: state => {
       return decrementAttribute(state, "margins");
-    }
+    },
+    RESET_TYPOGRAPHY: resetAllAttributes
   },
   initialState
 );

@@ -12,13 +12,24 @@
 .appearance-menu {
   @include uiPanelMenu;
 
-  ul li {
+  &__heading {
+    @include templateHead;
+    font-size: 15px;
+    color: $neutral75;
+    font-weight: $medium;
+    margin: 0;
+  }
+
+  &__section {
+    &:nth-child(odd) {
+      background-color: $neutral10;
+    }
+
     &:last-child {
       padding: 0;
       border-top: none;
 
       @include respond($break50) {
-        border-top: 2px solid $neutral30;
 
         &:last-child {
           padding: 0;
@@ -26,47 +37,70 @@
 
           @include respond($break40) {
             padding: 30px 28px;
-            border-top: 2px solid $neutral30;
           }
         }
       }
     }
   }
 
-  .control-font {
-    @include clearfix;
+  &__button-base {
+    @include buttonUnstyled;
 
-    + .control-font {
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+
+  &__primary-hover-button {
+    transition: all $durationFast $timing;
+
+    &:hover:not(:disabled) {
+      background-color: $accentPrimary;
+      color: $neutralWhite;
+    }
+  }
+
+  &__font-controls {
+    display: flex;
+    justify-content: space-between;
+
+    &:first-child {
+      padding-top: 16px;
+    }
+
+    &:last-child {
+      padding-bottom: 16px;
+    }
+
+    + .appearance-menu__font-controls {
       margin-top: 23px;
 
       @include respond($break50) {
-        margin-top: 40px;
+        margin-top: 29px;
       }
     }
   }
 
   // <button> that sets font type
-  .font-type {
-    @include buttonUnstyled;
-    float: left;
+  &__font-type {
     padding-bottom: 3px;
     margin-top: 2px;
     color: $neutral70;
     border-bottom: 2px solid transparent;
     transition: color $durationFast $timing, border-color $durationFast $timing;
 
-    &.button-active {
+    &--active {
       color: $neutralOffBlack;
       border-color: $neutralOffBlack;
     }
 
-    &:hover, &:focus {
+    &:hover {
       color: $accentPrimary;
       border-color: $accentPrimary;
       outline: 0;
     }
 
-    &.serif {
+    &--serif {
       @include templateCopy;
       font-size: 25px;
 
@@ -75,7 +109,7 @@
       }
     }
 
-    &.sans-serif {
+    &--sans-serif {
       @include templateHead;
       font-size: 24px;
 
@@ -86,60 +120,37 @@
   }
 
   // Set of buttons for setting font-size
-  .font-size {
-    float: right;
+  &__font-size-button {
+    width: 44px;
+    height: 44px;
+    vertical-align: top;
+    background-color: $neutralWhite;
+    border-radius: 100%;
 
-    button {
-      @include buttonUnstyled;
-      width: 44px;
-      height: 44px;
-      vertical-align: top;
-      background-color: $neutral05;
-      border-radius: 100%;
-      transition: color $durationFast $timing, background-color $durationFast $timing;
+    @include respond($break50) {
+      width: 35px;
+      height: 35px;
+    }
 
-      @include respond($break50) {
-        width: 35px;
-        height: 35px;
-      }
+    &:hover {
+      outline: 0;
+    }
 
-      &:hover, &:focus {
-        color: $neutralWhite;
-        background-color: $accentPrimary;
-        outline: 0;
-      }
+    &:disabled {
+      color: $neutral40;
+      background-color: $neutral20;
+    }
 
-      &:disabled {
-        color: $neutral40;
-        background-color: $neutral20;
-      }
-
-      .manicon-plus {
-        font-size: 17px;
-        line-height: 44px;
-
-        @include respond($break50) {
-          line-height: 35px;
-        }
-      }
-
-      .manicon-dash {
-        font-size: 2px;
-        line-height: 44px;
-
-        @include respond($break50) {
-          line-height: 34px;
-        }
-      }
-
-      + button {
-        margin-left: 15px;
-      }
+    &:not(:first-child) {
+      margin-left: 15px;
     }
   }
 
-  .color-scheme {
-    @include buttonUnstyled;
+  &__color-buttons-container {
+    padding: 15px 0;
+  }
+
+  &__color-scheme {
     width: calc(50% - 10px);
     height: 39px;
     border: 4px solid transparent;
@@ -149,109 +160,97 @@
       width: 96px;
     }
 
-    .manicon {
-      opacity: 0;
-      transition: opacity $durationFast $timing;
-    }
-
-    &.light {
+    &--light {
       color: $neutralOffBlack;
       background-color: $neutralWhite;
     }
 
-    &.dark {
+    &--dark {
       color: $neutralWhite;
       background-color: $neutral80;
     }
 
-    &.button-active {
-      .manicon {
+    &--active {
+      > svg {
         opacity: 1;
       }
     }
 
-    &:hover, &:focus {
+    &:not(.appearance-menu__color-scheme--active) {
+      > svg {
+        opacity: 0;
+      }
+    }
+
+    &:hover {
       border-color: $accentPrimary;
       outline: 0;
-
-      .manicon {
-        opacity: 1;
-      }
-    }
-
-    + button {
-      margin-left: 20px;
     }
   }
 
-  .control-margins {
+  &__control-margins {
     display: none;
     border-top: none;
 
     @include respond($break50) {
       display: block;
     }
+  }
 
-    button {
-      @include buttonUnstyled;
-      width: calc(50% - 10px);
-      height: 46px;
-      background-color: $neutralWhite;
-      transition: color $duration $timing, background-color $duration $timing;
+  &__menu-icon {
+    &--dark {
+      fill: $neutral80;
+    }
 
-      @include respond($break50) {
-        width: 96px;
-      }
+    &--light {
+      fill: $neutral40;
+    }
+  }
 
-      &.margin-increase .compound-icon {
-        position: relative;
-        display: inline-block;
-        width: 83px;
-        height: 23px;
+  &__margin-button {
+    width: 96px;
+    height: 46px;
+    background-color: $neutralWhite;
 
-        i {
-          position: absolute;
-          top: 0;
-          left: 0;
-          font-size: 28px;
-        }
-      }
-
-      &.margin-decrease .compound-icon {
-        position: relative;
-        display: inline-block;
-        width: 85px;
-        height: 23px;
-
-        i {
-          position: absolute;
-          top: 0;
-          left: 0;
-          font-size: 28px;
-        }
-      }
-
-      // Icon coloring
-      .manicon-margins-narrow-text, .manicon-margins-wide-text {
-        color: $neutral40;
-      }
-
-      .manicon-margins-narrow-arrows, .manicon-margins-wide-arrows {
-        color: $neutralOffBlack;
-      }
-
-      &:hover, &:focus {
-        background-color: $accentPrimary;
+    &:hover {
+      &:not(:disabled) {
         outline: 0;
 
-        i {
-          color: $neutralWhite;
+        > svg path {
+          fill: $neutralWhite;
         }
       }
+    }
 
-      + button {
-        margin-left: 20px;
+    &:disabled {
+      background-color: $neutral20;
+      > svg {
+        opacity: 0.5;
       }
     }
+  }
+
+  &__reset-button {
+    @include templateHead;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: $semibold;
+    width: 100%;
+    padding: 12px 45px 10px;
+    color: $neutral75;
+    background-color: $neutral05;
+    transition: all $timing $duration;
+
+    @include respond($break50) {
+      background-color: $neutral10;
+    }
+
+    &:disabled {
+      color: transparentize($neutral75, .5);
+    }
+  }
+
+  &__reload-icon {
+    margin-right: 10px;
   }
 }
