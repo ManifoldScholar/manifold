@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Annotation from "reader/components/annotation";
 import { connect } from "react-redux";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
+import Annotation from "global/components/Annotation";
 
 const { request } = entityStoreActions;
 
@@ -31,13 +31,6 @@ export class AnnotationList extends PureComponent {
   static defaultProps = {
     annotations: []
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      editorVisible: false
-    };
-  }
 
   componentDidMount() {
     this.fetchAnnotations(this.props);
@@ -66,57 +59,16 @@ export class AnnotationList extends PureComponent {
     return this.props.createHandler(newModel);
   };
 
-  showEditor = () => {
-    this.setState({ editorVisible: true });
-  };
-
-  hideEditor = () => {
-    this.setState({ editorVisible: false });
-  };
-
   render() {
     const { annotations } = this.props;
 
     return (
-      <div className="annotation-selection">
-        <ul className="selection-list">
-          <Annotation.GroupedBySubject
-            annotations={annotations}
-            render={group => (
-              <li key={group.selection.hash} className="annotation-detail">
-                <Annotation.Selection.Wrapper
-                  subject={group.selection.subject}
-                  onAnnotate={this.showEditor}
-                  onLogin={this.props.loginHandler}
-                  truncate={250}
-                />
-                {this.state.editorVisible && (
-                  <Annotation.Editor
-                    annotation={{ attributes: {} }}
-                    cancel={this.hideEditor}
-                    saveAnnotation={attr => this.saveAnnotation(attr, group)}
-                  />
-                )}
-                <div className="container">
-                  <ul className="annotation-list">
-                    {group.annotations.map(annotation => {
-                      return (
-                        <Annotation.Detail
-                          dispatch={this.props.dispatch}
-                          key={annotation.id}
-                          creator={annotation.relationships.creator}
-                          showLogin={this.props.loginHandler}
-                          annotation={annotation}
-                        />
-                      );
-                    })}
-                  </ul>
-                </div>
-              </li>
-            )}
-          />
-        </ul>
-      </div>
+      <Annotation.List.GroupedBySelection
+        saveAnnotation={this.saveAnnotation}
+        annotations={annotations}
+        loginHandler={this.props.loginHandler}
+        dispatch={this.props.dispatch}
+      />
     );
   }
 }

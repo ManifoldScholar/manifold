@@ -87,6 +87,30 @@
   z-index: 50;
 }
 
+.member-arrow {
+  z-index: 50;
+}
+
+.table__row-link {
+  z-index: 25;
+}
+
+.table__nested-link {
+  z-index: 50;
+}
+
+.remove-member-button {
+  z-index: 50;
+}
+
+.annotation-selection__button-absolute {
+  z-index: 50;
+}
+
+.annotation-selection__expand-button {
+  z-index: 75;
+}
+
 /* stylelint-disable selector-max-id */
 #global-notification-container .notifications-list {
   z-index: 200;

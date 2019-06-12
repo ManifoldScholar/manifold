@@ -10,7 +10,11 @@
     padding-bottom: 43px;
   }
 
-  .annotation-selection {
+  &--rounded-corners {
+    border-radius: 8px;
+  }
+
+  &__selection {
     @include templateHead;
     width: 100%;
     font-size: 18px;
@@ -29,19 +33,23 @@
     }
   }
 
-  .utility {
+  &__utility {
     padding-top: 0;
 
     @include respond($break70) {
       padding-top: 25px;
     }
+  }
 
+  &__list {
+    @include listHorizontal;
 
-    .confirmation {
-      label {
-        font-size: 14px;
+    > li {
+      + li {
+        margin-left: 1.571em;
       }
     }
+  }
 
     ul {
       @include listHorizontal;

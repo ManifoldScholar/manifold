@@ -49,11 +49,7 @@
       }
 
       a, button {
-        @include buttonUnstyled;
-        @include utilityPrimary;
-        font-size: 14px;
-        color: $neutral40;
-        transition: color $duration $timing;
+        @include listButtonSimple
 
         &.secondary {
           color: $sp40Tertiary;

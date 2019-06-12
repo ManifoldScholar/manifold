@@ -5,6 +5,7 @@ import IconComposer from "./IconComposer";
 import LockBodyScroll from "./LockBodyScroll";
 import ScrollToTop from "./ScrollToTop";
 import SkipLink from "./SkipLink";
+import LabelWithIcon from "./LabelWithIcon";
 
 export default {
   Pagination,
@@ -13,5 +14,6 @@ export default {
   IconComposer,
   LockBodyScroll,
   ScrollToTop,
-  SkipLink
+  SkipLink,
+  LabelWithIcon
 };

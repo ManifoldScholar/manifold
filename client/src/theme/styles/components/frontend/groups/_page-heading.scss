@@ -1,0 +1,64 @@
+.group-page-heading {
+  @include respond($break80) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__text-container {
+    display: flex;
+    color: $neutral90;
+
+    &--narrow {
+      @include respond($break80) {
+        max-width: calc(100% - 292px);
+        padding-right: 13px;
+      }
+    }
+  }
+
+  &__icon {
+    min-width: 32px;
+    @include respond($break80) {
+      margin-top: 3px;
+    }
+  }
+
+  &__text {
+    padding-left: 13px;
+    margin-bottom: 0;
+    font-size: 18px;
+    word-wrap: break-word;
+
+    @include respond($break80) {
+      font-size: 26px;
+    }
+  }
+
+  &__subtitle {
+    color: $neutral70;
+  }
+
+  &__button-container {
+    padding-top: 18px;
+
+    @include respond($break80) {
+      padding-top: 0;
+    }
+  }
+
+  &__nav-button {
+    @include buttonTertiary;
+    width: calc(50% - 5px);
+    background-color: $neutralWhite;
+    text-align: center;
+
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+
+    @include respond($break80) {
+      width: auto;
+    }
+  }
+}

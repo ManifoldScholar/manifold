@@ -89,15 +89,6 @@
   }
 
   .placeholder button {
-    @include buttonUnstyled;
-    @include utilityPrimary;
-    font-size: 14px;
-    color: $neutral40;
-    border: 0;
-    transition: color $duration $timing;
-
-    &:hover, &.active {
-      color: $accentPrimaryDark;
-    }
+    @include listButtonSimple;
   }
 }

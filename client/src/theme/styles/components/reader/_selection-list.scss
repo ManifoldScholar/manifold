@@ -1,0 +1,42 @@
+.selection-list {
+  @include listUnstyled;
+  padding-bottom: 50px;
+
+  @include respond($break75) {
+    padding-bottom: 110px;
+  }
+
+  // Separated list, used on list pages/overlays
+  &--separated {
+
+    .selection-group-heading + li {
+      margin-top: 35px;
+    }
+
+    li + .selection-group-heading {
+      margin-top: 96px;
+    }
+
+    .annotation-detail .selection-text,
+    .annotation-detail > .container,
+    .annotation-highlight-detail {
+      padding-right: 20px;
+      padding-left: 20px;
+
+      @include respond($break75) {
+        padding-right: 50px;
+        padding-left: 50px;
+      }
+
+      @include respond($break95) {
+        padding-right: 7.2vw;
+        padding-left: 7.2vw;
+      }
+
+      @include respond($break120) {
+        padding-right: 89px;
+        padding-left: 89px;
+      }
+    }
+  }
+}

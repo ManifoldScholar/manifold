@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Annotation from "reader/components/annotation";
+import AnnotationEditor from "global/components/Annotation/Editor/index";
+import AnnotationSelectionWrapper from "global/components/Annotation/Annotation/TextContent/index";
 
 export default class NewAnnotation extends PureComponent {
   static propTypes = {
@@ -24,11 +25,11 @@ export default class NewAnnotation extends PureComponent {
 
     return (
       <div className="annotation-selection">
-        <Annotation.Selection.Wrapper
+        <AnnotationSelectionWrapper
           subject={pendingAnnotation.subject}
           truncate={300}
         />
-        <Annotation.Editor
+        <AnnotationEditor
           cancel={this.props.actions.closeDrawer}
           annotation={{ attributes: {} }}
           saveAnnotation={this.saveAnnotation}

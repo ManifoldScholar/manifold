@@ -33,6 +33,7 @@ export default class Header extends Component {
     decrementFontSize: PropTypes.func,
     incrementMargins: PropTypes.func,
     decrementMargins: PropTypes.func,
+    resetTypography: PropTypes.func,
     setColorScheme: PropTypes.func,
     scrollAware: PropTypes.object,
     commonActions: PropTypes.object,
@@ -229,6 +230,7 @@ export default class Header extends Component {
               decrementFontSize={this.props.decrementFontSize}
               incrementMargins={this.props.incrementMargins}
               decrementMargins={this.props.decrementMargins}
+              resetTypography={this.props.resetTypography}
               hidePanel={this.props.commonActions.hideAppearancePanel}
             />
             <UIPanel

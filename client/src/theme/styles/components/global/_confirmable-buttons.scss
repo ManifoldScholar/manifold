@@ -3,27 +3,24 @@
   flex-direction: column;
   align-items: flex-start;
 
-  .confirmation-label {
+  &__button {
+    @include listButtonSimple;
+
+    &--deny {
+      &:hover, &:focus {
+        color: $sp40Tertiary;
+      }
+    }
+  }
+
+  &__button-expanded {
+    @include buttonUnstyled;
     @include utilityPrimary;
     font-size: 14px;
     color: $neutral80;
   }
 
-  button {
-    @include buttonUnstyled;
+  &__button, &__button-expanded {
     margin-top: 5px;
-    transition: color $duration $timing;
-
-    &.confirm {
-      &:hover {
-        color: $accentPrimaryDark;
-      }
-    }
-
-    &.deny {
-      &:hover {
-        color: $sp40Tertiary;
-      }
-    }
   }
 }

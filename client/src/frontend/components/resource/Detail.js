@@ -9,7 +9,7 @@ import Title from "./Title";
 import VariantList from "./VariantList";
 
 export default class ResourceDetail extends Component {
-  static displayName = "Resource.Detail";
+  static displayName = "Resource.AnnotationDetail";
 
   static propTypes = {
     projectUrl: PropTypes.string,
