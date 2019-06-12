@@ -123,6 +123,38 @@ const routes = {
       ]
     },
     {
+      name: "groups",
+      exact: false,
+      component: "GroupsContainer",
+      path: "/my/groups",
+      helper: () => "/my/groups",
+      routes: [
+        {
+          name: "group",
+          exact: true,
+          component: "GroupWrapper",
+          path: "/my/groups/:groupId",
+          helper: () => "/my/groups/:groupId",
+          routes: [
+            {
+              name: "groupMembers",
+              exact: true,
+              component: "GroupMembersList",
+              path: "/my/groups/:groupId/members",
+              helper: () => "/my/groups/:groupId/members"
+            },
+            {
+              name: "groupDetail",
+              exact: true,
+              component: "GroupDetail",
+              path: "/my/groups/:groupId",
+              helper: () => "/my/groups/:groupId"
+            }
+          ]
+        },
+      ]
+    },
+    {
       name: "frontendFollowing",
       exact: true,
       component: "Following",

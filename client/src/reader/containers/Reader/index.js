@@ -37,7 +37,8 @@ const {
   incrementFontSize,
   decrementFontSize,
   incrementMargins,
-  decrementMargins
+  decrementMargins,
+  resetTypography
 } = uiTypographyActions;
 const { setColorScheme } = uiColorActions;
 const { request, flush } = entityStoreActions;
@@ -156,6 +157,7 @@ export class ReaderContainer extends Component {
       decrementFontSize: b(decrementFontSize, dispatch),
       incrementMargins: b(incrementMargins, dispatch),
       decrementMargins: b(decrementMargins, dispatch),
+      resetTypography: b(resetTypography, dispatch),
       setColorScheme: b(el => setColorScheme(el), dispatch),
       setPersistentUI: b(userUi => setPersistentUI(userUi), dispatch)
     };

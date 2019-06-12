@@ -9,7 +9,7 @@ import classNames from "classnames";
 import Authorize from "hoc/authorize";
 
 export default class CommentDetail extends PureComponent {
-  static displayName = "Comment.Detail";
+  static displayName = "Comment.AnnotationDetail";
 
   static propTypes = {
     subject: PropTypes.object.isRequired,

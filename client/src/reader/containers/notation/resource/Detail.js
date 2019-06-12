@@ -29,7 +29,7 @@ export class NotationResourceDetailContainer extends PureComponent {
     return Promise.all(promises);
   };
 
-  static displayName = "ReaderContainer.Notation.Resource.Detail";
+  static displayName = "ReaderContainer.Notation.Resource.AnnotationDetail";
 
   static propTypes = {
     route: PropTypes.object,

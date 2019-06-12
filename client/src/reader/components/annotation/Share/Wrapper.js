@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Citation from "./Citation";
-import Selection from "../Selection";
+import { TruncatedTextContent } from "global/components/Annotation";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class AnnotationShareWrapper extends PureComponent {
@@ -38,7 +38,7 @@ export default class AnnotationShareWrapper extends PureComponent {
     } = this.props;
     if (this.props.truncate && subject.length > this.props.truncate) {
       return (
-        <Selection.Truncated
+        <TruncatedTextContent
           selection={subject}
           truncate={this.props.truncate}
         />

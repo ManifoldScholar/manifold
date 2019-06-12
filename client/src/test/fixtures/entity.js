@@ -406,6 +406,7 @@ const defaults = {
   annotation: {
     type: "annotations",
     attributes: {
+      createdAt: "2017-04-24T23:25:50.161Z",
       subject: "Gods, Earths, and 85ers",
       body:
         "Hands on your boxes, turn 'em up like seven notches." +
@@ -414,6 +415,22 @@ const defaults = {
       endNode: "another-node",
       startChar: 4,
       endChar: 13,
+      abilities
+    }
+  },
+
+  group: {
+    type: "group",
+    attributes: {
+
+      abilities
+    }
+  },
+
+  member: {
+    type: "member",
+    attributes: {
+
       abilities
     }
   },
@@ -636,6 +653,14 @@ const page = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("page", id, attributes, relationships);
 };
 
+const group = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("group", id, attributes, relationships);
+};
+
+const member = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("member", id, attributes, relationships);
+};
+
 const projectCollection = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("projectCollection", id, attributes, relationships);
 };
@@ -672,6 +697,8 @@ export default {
   projectCollection,
   version,
   page,
+  group,
+  member,
   actionCallout,
   contentBlock
 };

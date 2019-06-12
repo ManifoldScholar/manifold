@@ -75,6 +75,45 @@ function users(count = defaultCount) {
   });
 }
 
+function groups(count = defaultCount) {
+  return arrayOf("groups", count, () => {
+    const name = faker.company.catchPhrase();
+    const type = "private";
+    const role = "member";
+    const number = 15;
+    return {
+      name,
+      type,
+      role,
+      memberCount: number,
+      annotationCount: number,
+      highlightCount: number
+    };
+ });
+}
+
+function members(count = defaultCount) {
+  return arrayOf("members", count, () => {
+    const firstName = faker.name.firstName();
+    const lastName = faker.name.lastName();
+    const fullName = `${firstName} ${lastName}`;
+    const role = "member";
+    const number = 17;
+    const out = {
+      firstName,
+      lastName,
+      fullName ,
+      role,
+      annotationCount: number,
+      highlightCount: number
+    };
+    if (random(0, 100) > 50) {
+      out.avatarStyles = image();
+    }
+    return out;
+  });
+}
+
 function contentBlocks(count = defaultCount) {
   let id = 0;
   return arrayOf("contentBlocks", count, e => {
@@ -90,13 +129,16 @@ function projects(count = defaultCount) {
   return arrayOf("projects", count, () => {
     const title = faker.company.catchPhrase();
     const subtitle = faker.company.catchPhrase();
+    const name = faker.company.catchPhrase();
     const attr = {
       title,
       titleFormatted: title,
       titlePlaintext: title,
+      textTitle: title,
       subtitle,
       subtitleFormatted: subtitle,
-      subtitlePlaintext: subtitle
+      subtitlePlaintext: subtitle,
+      name
     };
     if (random(0, 100) > 50) {
       attr.avatarStyles = image();
@@ -167,6 +209,27 @@ function permissions(count = defaultCount) {
   });
 }
 
+function annotations(count = defaultCount, withHighlights = false) {
+  const selectionOne = faker.lorem.sentences(5);
+  const selectionTwo = faker.lorem.sentences(3);
+
+  return arrayOf("annotations", count, annotation => {
+    const user = users(1)[0];
+    const project = projects(1)[0];
+    annotation.attributes.subject = sample([true, false]) ? selectionOne : selectionTwo;
+    annotation.relationships.creator = user;
+    annotation.relationships.textSection = project;
+    annotation.attributes.body = faker.lorem.sentences(sample([1,2,3]));
+    if (withHighlights) {
+      annotation.attributes.format = sample(["annotation", "highlight"]);
+    }
+  });
+}
+
+function pages(count = defaultCount) {
+  return arrayOf("pages", count);
+}
+
 export default {
   type: arrayOf,
   users,
@@ -175,5 +238,9 @@ export default {
   makers: users,
   resourceCollections,
   resources,
-  permissions
+  permissions,
+  groups,
+  members,
+  pages,
+  annotations
 };

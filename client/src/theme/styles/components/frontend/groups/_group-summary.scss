@@ -1,0 +1,90 @@
+.group-summary {
+  @include panelRoundedLight;
+  padding: 20px;
+
+  @include respond($break85) {
+    padding: 30px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 8px;
+
+    @include respond($break85) {
+      display: inline-grid;
+      grid-template-columns: auto auto auto;
+      grid-column-gap: 64px;
+      grid-row-gap: 18px;
+    }
+  }
+
+  &__mobile-left {
+    grid-column-start: 1;
+
+    @include respond($break85) {
+      grid-column-start: auto;
+    }
+  }
+
+  &__mobile-right {
+    grid-column-start: 2;
+
+    @include respond($break85) {
+      grid-column-start: auto;
+    }
+  }
+
+  &__mobile-top {
+    grid-row-start: 1;
+
+    @include respond($break85) {
+      grid-row-start: auto;
+    }
+  }
+
+  &__desktop-top {
+    @include respond($break85) {
+      grid-row-start: 1;
+    }
+  }
+
+  &__desktop-bottom {
+    @include respond($break85) {
+      grid-row-start: 2;
+    }
+  }
+
+  &__item {
+    display: block;
+    margin-inline-start: 0;
+
+    @include respond($break85) {
+      display: inline-block;
+    }
+  }
+
+  &__value {
+    @include formLabelPrimary;
+    font-size: 13px;
+    color: $neutral90;
+
+    @include respond($break85) {
+      padding-left: 10px;
+    }
+  }
+
+  &__mobile-indent {
+    padding-left: 32px;
+
+    @include respond($break85) {
+      padding-left: 0;
+    }
+  }
+
+  &__private-icon {
+    color: $neutral70;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+}
