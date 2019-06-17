@@ -8,6 +8,13 @@ class Seed
     _anonymous_user = make_anonymous_user(logger)
     cli_user = make_cli_user(logger)
     make_feature(logger, cli_user)
+  rescue Faraday::ConnectionFailed
+    Rails.logger.warn <<~TEXT
+      The database was seeded before ElasticSearch was running. This means that
+      the CLI user may not have been successfully added to the ElasticSearch
+      index. You may want to re-index your users to address this once
+      ElasticSearch is available.
+    TEXT
   end
 
   def self.make_feature(logger, creator)
