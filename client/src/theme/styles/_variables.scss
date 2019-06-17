@@ -31,16 +31,15 @@ $neutral40hex: str-slice(#{$neutral40}, 2);
 $neutralOffWhite: $neutral05;
 $neutralOffBlack: $neutral90;
 
-// Accent Colors
 $accentPrimary: #52e3ac !default;
-$accentPrimaryDark: #34a178 !default;
-$accentPrimaryMedium: #3dbd8c !default;
-$accentPrimaryLight: #75e9bd !default;
-$accentPrimaryDull: #b1ead2 !default;
-$accentPrimaryPale: #c1f7e4 !default;
-$accentPrimaryOffWhite: #f0faf7 !default;
+$accentPrimaryDark: darken(desaturate($accentPrimary, 20.97), 18.82) !default; // #34a178
+$accentPrimaryMedium: darken(desaturate($accentPrimary, 20.94), 11.57) !default; // #3dbd8c
+$accentPrimaryLight: lighten(saturate($accentPrimary, 0.36), 8.04) !default; // #75e9bd
+$accentPrimaryDull: lighten(desaturate(adjust-hue($accentPrimary, -3), 14.56), 20.00) !default; // #b1ead2
+$accentPrimaryPale: lighten(saturate(adjust-hue($accentPrimary, 2), 5.00), 25.69) !default; // #c1f7e4
+$accentPrimaryOffWhite: lighten(desaturate(adjust-hue($accentPrimary, 5), 22.14), 35.49) !default; // #f0faf7
 
-$focusPrimary: #c0f8e5;
+$focusPrimary: lighten(saturate(adjust-hue($accentPrimary, 2), 7.86), 25.69) !default; // #c0f8e5
 $focusSecondary: $neutral20;
 $focusTertiary: $neutral30;
 
@@ -51,10 +50,10 @@ $accentPrimaryHex: str-slice(#{$accentPrimary}, 2);
 // Color spectra are number by group and then given ordinal names, attributes
 
 // SP 20 Reader Annotations, Highlighting, Labels
-$sp20Primary: #2bd1fa;
-$sp20PrimaryLight: #99e3f5;
-$sp20PrimaryPale: #d9f5fb;
-$sp20PrimaryPaleLowContrast: #808f9b;
+$sp20Primary: #2bd1fa !default; // #2bd1fa;
+$sp20PrimaryLight: lighten(desaturate($sp20Primary, 13.25), 20.59); // #99e3f5;
+$sp20PrimaryPale: lighten(desaturate(adjust-hue($sp20Primary, -1), 14.44), 34.31); // #d9f5fb;
+$sp20PrimaryPaleLowContrast: darken(desaturate(adjust-hue($sp20Primary, 15), 83.50), 1.96); // #808f9b;
 
 $sp20Secondary: #70c930;
 $sp20SecondaryLight: #c6eaac;
@@ -80,7 +79,7 @@ $sp40Secondary: #ffa74a;
 $sp40Tertiary: #f75884;
 
 // SP 50 Project Placeholder tile backgrounds
-$sp50Primary: #cbf7e6;
+$sp50Primary: lighten(saturate($accentPrimary, 1.19), 27.65); // #cbf7e6;
 $sp50Secondary: #ebebeb;
 $sp50Tertiary: #deecf9;
 $sp50Quaternary: #ffebce;
