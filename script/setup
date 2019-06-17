@@ -8,7 +8,7 @@ if which boxen &>/dev/null; then
 fi
 
 PROJ_DIR=$(pwd)
-PROJ_NAME="manifold"
+PROJ_NAME=$(basename "$PWD")
 
 # Bootstrap first
 echo "==> Execute ./script/bootstrap"
