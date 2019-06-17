@@ -1,20 +1,20 @@
-upstream manifold-api.<%= tld.strip %> {
+upstream <%= name %>-api.<%= tld.strip %> {
  server unix:<%= api_socket_dir %>/manifold-api;
 }
 
-upstream manifold-cable.<%= tld.strip %> {
+upstream <%= name %>-cable.<%= tld.strip %> {
  server unix:<%= api_socket_dir %>/manifold-cable;
 }
 
-upstream manifold-client.<%= tld.strip %> {
+upstream <%= name %>-client.<%= tld.strip %> {
   server unix:<%= client_socket_dir %>/manifold-client;
 }
 
 server {
 
   listen 80;
-  listen 443 default_server ssl;
-  server_name manifold.<%= tld.strip %>;
+  listen 443 ssl;
+  server_name <%= name %>.<%= tld.strip %>;
   root <%= root %>/client/dist/manifold/www;
 
   access_log <%= log_dir %>/nginx.access.log combined;
@@ -47,7 +47,7 @@ server {
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_pass http://manifold-api.<%= tld.strip %>;
+    proxy_pass http://<%= name %>-api.<%= tld.strip %>;
   }
 
   location /system {
@@ -58,7 +58,7 @@ server {
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_pass http://manifold-api.<%= tld.strip %>;
+    proxy_pass http://<%= name %>-api.<%= tld.strip %>;
   }
 
   location /cable {
@@ -68,21 +68,21 @@ server {
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_pass http://manifold-cable.<%= tld.strip %>;
+    proxy_pass http://<%= name %>-cable.<%= tld.strip %>;
   }
 
   location /sidekiq {
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_pass http://manifold-api.<%= tld.strip %>;
+    proxy_pass http://<%= name %>-api.<%= tld.strip %>;
   }
 
   location /rails {
     proxy_set_header Host            $host;
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_pass http://manifold-api.<%= tld.strip %>;
+    proxy_pass http://<%= name %>-api.<%= tld.strip %>;
   }
 
   location / {
@@ -99,7 +99,7 @@ server {
     }
 
     if (!-f $request_filename) {
-      proxy_pass http://manifold-client.<%= tld.strip %>;
+      proxy_pass http://<%= name %>-client.<%= tld.strip %>;
       break;
     }
   }
