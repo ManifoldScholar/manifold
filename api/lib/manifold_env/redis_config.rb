@@ -4,9 +4,9 @@ module ManifoldEnv
 
     # @param [String] url
     # @param [String] namespace_prefix
-    def initialize(url: default_url, namespace_prefix: "manifold")
+    def initialize(url: default_url, namespace_prefix: nil)
       @url = url
-      @namespace_prefix = namespace_prefix
+      @namespace_prefix = namespace_prefix || default_namespace_prefix
     end
 
     def namespace(*parts)
@@ -35,6 +35,10 @@ module ManifoldEnv
     end
 
     private
+
+    def default_namespace_prefix
+      ENV["RAILS_REDIS_NAMESPACE"] || "manifold"
+    end
 
     def default_url
       ENV["BOXEN_REDIS_URL"] || ENV["RAILS_REDIS_URL"] || "redis://127.0.0.1:6379"
