@@ -75,6 +75,23 @@ function users(count = defaultCount) {
   });
 }
 
+function groups(count = defaultCount) {
+  return arrayOf("groups", count, () => {
+    const name = faker.company.catchPhrase();
+    const type = "public";
+    const role = "member";
+    const number = 15;
+    return {
+      name,
+      type,
+      role,
+      memberCount: number,
+      annotationCount: number,
+      highlightCount: number
+    };
+ });
+}
+
 function contentBlocks(count = defaultCount) {
   let id = 0;
   return arrayOf("contentBlocks", count, e => {
@@ -175,5 +192,6 @@ export default {
   makers: users,
   resourceCollections,
   resources,
-  permissions
+  permissions,
+  groups
 };
