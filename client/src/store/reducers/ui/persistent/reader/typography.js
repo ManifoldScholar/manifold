@@ -1,27 +1,29 @@
 import { handleActions } from "redux-actions";
 
-export const initialState = {
-  font: "serif",
-  fontSize: {
-    current: 3,
-    max: 5,
-    min: 0
-  },
-  margins: {
-    current: 1,
-    max: 2,
-    min: 0
-  }
-};
+const getInitialState = () => ({
+   font: "serif",
+   fontSize: {
+     current: 3,
+     max: 5,
+     min: 0
+   },
+   margins: {
+     current: 1,
+     max: 2,
+     min: 0
+   }
+ })
+
+ export const initialState = getInitialState();
 
 const selectFont = (state, action) => {
   return Object.assign({}, state, { font: action.payload });
 };
 
 // TODO: get nested attributes to reset to initialState
-const resetAllAttributes = () => {
-  return Object.assign({}, initialState);
-};
+const resetAllAttributes = () =>  (
+  getInitialState()
+);
 
 const incrementAttribute = (state, attribute) => {
   const parameter = state[attribute];
@@ -40,7 +42,7 @@ const decrementAttribute = (state, attribute) => {
 };
 
 const setPersistentUI = (state, action) => {
-  return Object.assign({}, initialState, action.payload.typography);
+  return Object.assign({}, getInitialState(), action.payload.typography);
 };
 
 export default handleActions(
@@ -61,5 +63,5 @@ export default handleActions(
     },
     RESET_TYPOGRAPHY: resetAllAttributes
   },
-  initialState
+  getInitialState()
 );

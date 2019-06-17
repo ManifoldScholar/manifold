@@ -19,6 +19,10 @@ import Page from "frontend/containers/Page";
 import Subscriptions from "frontend/containers/Subscriptions";
 import Unsubscribe from "frontend/containers/Unsubscribe";
 import Home from "frontend/containers/Home";
+import GroupMembersList from "frontend/containers/GroupMembersList";
+import GroupsContainer from "frontend/containers/GroupsContainer";
+import GroupWrapper from "frontend/containers/GroupWrapper";
+import GroupDetail from "frontend/containers/GroupDetail";
 
 export default {
   NotFound,
@@ -41,5 +45,9 @@ export default {
   Page,
   Subscriptions,
   Unsubscribe,
-  Home
+  Home,
+  GroupMembersList,
+  GroupsContainer,
+  GroupWrapper,
+  GroupDetail
 };
