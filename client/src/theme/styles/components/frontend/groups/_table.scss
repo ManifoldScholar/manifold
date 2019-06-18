@@ -1,0 +1,136 @@
+.group-table {
+
+  &__table-heading {
+    @include formLabelPrimary;
+    color: $neutral70;
+  }
+
+  &__label-icon {
+    margin-right: 8px;
+    align-self: center;
+  }
+
+  &__hover-arrow {
+    opacity: 0;
+    margin-left: 20px;
+    transition: opacity $duration $timing;
+  }
+
+  &__member-arrow {
+    opacity: 0;
+    right: 12px;
+    position: absolute;
+    top: 9px;
+    transition: opacity $duration $timing;
+  }
+
+  &__member-link {
+    text-decoration: none;
+    position: relative;
+    border-radius: 15px;
+    padding: 4px 32px 5px 17px;
+    margin-left: -17px;
+    transition: background-color $duration $timing;
+
+    @include respond($break85) {
+      margin-left: 17px;
+    }
+
+    &:hover {
+      background-color: $neutralWhite;
+
+      .group-table__member-arrow {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__mobile-columns {
+    display: flex;
+    justify-content: space-between;
+
+    @include respond($break40) {
+      justify-content: flex-start;
+    }
+  }
+
+  &__row {
+    padding-bottom: 22px;
+    border-bottom: 1px solid $neutral45;
+    transition: background-color $duration $timing;
+    display: block;
+    position: relative;
+
+    @include respond($break85) {
+      display: table-row;
+
+      > td {
+        padding: 16px 22px;
+      }
+    }
+
+    &:hover {
+      background-color:$neutral05;
+
+      .group-table__hover-arrow {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__row-link {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  &__body-text {
+    @include templateHead;
+    color: $neutral90;
+    position: relative;
+  }
+
+  &__row-name {
+    font-weight: $medium;
+    font-size: 18px;
+    background-color: inherit;
+    padding: 20px 0;
+    margin: 0;
+
+    @include respond($break85) {
+      font-size: 21px;
+    }
+  }
+
+  &__row-info {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: $semibold;
+  }
+
+  &__number {
+    padding-left: 32px;
+
+    @include respond($break85) {
+      padding-left: 0;
+      text-align: center;
+    }
+  }
+
+  &__column-right {
+    > div:not(:last-child) {
+      padding-bottom: 8px;
+    }
+  }
+
+  &__column-left {
+    padding-right: 100px;
+
+    > div:not(:last-child) {
+      padding-bottom: 13px;
+    }
+  }
+}

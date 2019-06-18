@@ -7,7 +7,7 @@ const groups = build.arrayOf.groups(8);
 storiesOf("Frontend/Group", module)
   .add("Table", () => {
     return (
-      <Table />
+      <Table groups={groups} />
     );
   })
   .add("Join Box", () => {
@@ -15,4 +15,3 @@ storiesOf("Frontend/Group", module)
       <div>This will be the join box.</div>
     );
   })
-
