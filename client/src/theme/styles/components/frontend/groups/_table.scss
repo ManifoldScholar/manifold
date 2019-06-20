@@ -106,9 +106,8 @@
   }
 
   &__row-info {
+    @include utilityPrimary;
     font-size: 14px;
-    text-transform: uppercase;
-    font-weight: $semibold;
   }
 
   &__number {
