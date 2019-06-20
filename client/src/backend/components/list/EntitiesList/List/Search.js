@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { UID } from "react-uid";
 import Utility from "global/components/utility";
-import { Collapse } from "react-collapse";
+import { UnmountClosed as Collapse } from "react-collapse";
 import classNames from "classnames";
 import has from "lodash/has";
 import isPlainObject from "lodash/isPlainObject";

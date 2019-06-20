@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
-import { Collapse } from "react-collapse";
+import { UnmountClosed as Collapse } from "react-collapse";
 
 export default class Block extends PureComponent {
   static displayName = "Project.Hero.Builder.Block";
