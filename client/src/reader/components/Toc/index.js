@@ -130,7 +130,8 @@ class Toc extends PureComponent {
       entrySide: "left",
       closeCallback: this.UIHideTocDrawer,
       includeDrawerFrontMatter: false,
-      returnFocusOnDeactivate: false
+      returnFocusOnDeactivate: false,
+      includeSRCloseButton: true
     };
 
     return (

@@ -39,7 +39,8 @@ export default class DrawerWrapper extends PureComponent {
     returnFocusOnDeactivate: PropTypes.bool,
     focusTrap: PropTypes.bool,
     wide: PropTypes.bool,
-    extraClasses: PropTypes.string
+    extraClasses: PropTypes.string,
+    includeSRCloseButton: PropTypes.bool
   };
 
   static childContextTypes = {
@@ -62,7 +63,8 @@ export default class DrawerWrapper extends PureComponent {
     entrySide: "right",
     includeDrawerFrontMatter: true,
     returnFocusOnDeactivate: true,
-    focusTrap: true
+    focusTrap: true,
+    includeSRCloseButton: false
   };
 
   constructor(props) {
@@ -168,7 +170,7 @@ export default class DrawerWrapper extends PureComponent {
     const hasClose = props.closeCallback || props.closeUrl;
     return (
       <React.Fragment>
-        {props.includeDrawerFrontMatter ? (
+        {props.includeDrawerFrontMatter && (
           <div className="drawer-bar">
             {hasTitle ? (
               <div className="drawer-bar__title">
@@ -205,7 +207,8 @@ export default class DrawerWrapper extends PureComponent {
               </div>
             ) : null}
           </div>
-        ) : (
+        )}
+        {props.includeSRCloseButton && (
           <button
             onClick={this.handleLeaveEvent}
             tabIndex="0"
@@ -268,14 +271,7 @@ export default class DrawerWrapper extends PureComponent {
         <div>
           <Utility.LockBodyScroll>
             <div className={this.props.identifier}>
-              <div
-                className="drawer-overlay"
-                role="button"
-                tabIndex="0"
-                {...(this.props.lockScrollClickCloses
-                  ? { onClick: this.handleLeaveEvent }
-                  : {})}
-              />
+              <div className="drawer-overlay" />
               {this.renderDrawer()}
             </div>
           </Utility.LockBodyScroll>
