@@ -3,6 +3,7 @@
 exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
 <li>
   <div
+    aria-expanded={false}
     className="item"
     onClick={[Function]}
     role="button"
@@ -26,50 +27,6 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
     >
       Test
     </h4>
-  </div>
-  <div
-    className="ReactCollapse--collapse"
-    style={
-      Object {
-        "height": 0,
-        "overflow": "hidden",
-      }
-    }
-  >
-    <div
-      className="ReactCollapse--content"
-    >
-      <ul
-        className=""
-      >
-        <li
-          className="item"
-          onClick={[Function]}
-          role="button"
-          tabIndex="0"
-        >
-          <span
-            className="screen-reader-text"
-          />
-          <span>
-            Gods, Earths, and 85ers
-          </span>
-        </li>
-        <li
-          className="item"
-          onClick={[Function]}
-          role="button"
-          tabIndex="0"
-        >
-          <span
-            className="screen-reader-text"
-          />
-          <span>
-            Gods, Earths, and 85ers
-          </span>
-        </li>
-      </ul>
-    </div>
   </div>
 </li>
 `;

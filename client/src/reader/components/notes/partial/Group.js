@@ -3,7 +3,7 @@ import GroupItem from "./GroupItem";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import debounce from "lodash/debounce";
-import { Collapse } from "react-collapse";
+import { UnmountClosed as Collapse } from "react-collapse";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class Group extends Component {
@@ -76,6 +76,7 @@ export default class Group extends Component {
           onClick={this.handleClick}
           role="button"
           tabIndex="0"
+          aria-expanded={this.state.expanded}
         >
           <IconComposer
             icon="disclosureDown16"

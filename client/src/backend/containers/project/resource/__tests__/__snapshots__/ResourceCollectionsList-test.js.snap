@@ -102,67 +102,6 @@ Array [
             </button>
           </div>
         </form>
-        <div
-          className="ReactCollapse--collapse"
-          style={
-            Object {
-              "height": 0,
-              "overflow": "hidden",
-            }
-          }
-        >
-          <div
-            className="ReactCollapse--content"
-          >
-            <div>
-              <div
-                className="entity-list-search__options entity-list-search__options--horizontal"
-              >
-                <div
-                  className="entity-list-search__option entity-list-search__option--horizontal"
-                >
-                  <div
-                    className="entity-list-search__option-inner"
-                  >
-                    <span
-                      className="entity-list-search__options-label"
-                    >
-                      Order Results:
-                    </span>
-                    <div
-                      className="entity-list-search__select-wrapper"
-                    >
-                      <select
-                        id={1}
-                        onChange={[Function]}
-                        value="title"
-                      >
-                        <option
-                          value="title"
-                        >
-                          Alphabetical by title
-                        </option>
-                      </select>
-                      <svg
-                        aria-hidden={true}
-                        className="manicon-svg svg-icon--disclosureDown24"
-                        fill="currentColor"
-                        height={null}
-                        viewBox="0 0 24 24"
-                        width={null}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <polygon
-                          points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div
         className="entity-list__header"
