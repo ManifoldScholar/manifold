@@ -7,8 +7,8 @@ module Validator
 
     extend Memoist
 
-    def initialize
-      @config = Rails.configuration.manifold.css_validator
+    def initialize(config = nil)
+      @config = config || Rails.configuration.manifold.css_validator.defaults
     end
 
     # @param css [String] the CSS to be validated

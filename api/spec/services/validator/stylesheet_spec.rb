@@ -3,8 +3,8 @@ require "rails_helper"
 # rubocop:disable Metrics/LineLength
 # rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::Stylesheet do
-  let(:scope_selector) { Rails.configuration.manifold.css_validator.scope }
-  let(:dark_scope_selector) { Rails.configuration.manifold.css_validator.dark_scope }
+  let(:scope_selector) { Rails.configuration.manifold.css_validator.defaults.scope }
+  let(:dark_scope_selector) { Rails.configuration.manifold.css_validator.defaults.dark_scope }
   let(:validator) { Validator::Stylesheet.new }
   let(:blacklisted_property) { "font-family" }
 

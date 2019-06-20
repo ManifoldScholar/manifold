@@ -38,7 +38,23 @@ class Stylesheet < ApplicationRecord
   end
 
   def revalidate
-    self.styles = ::Validator::Stylesheet.new.validate(raw_styles)
+    self.styles = ::Validator::Stylesheet.new(validator_config).validate(raw_styles)
+  end
+
+  def validator_config
+    ingested? ? validator_config_ingested : validator_config_user
+  end
+
+  def validator_config_ingested
+    Rails.configuration.manifold.css_validator.ingested
+  end
+
+  def validator_config_user
+    Rails.configuration.manifold.css_validator.user
+  end
+
+  def user_stylesheet?
+    !ingested
   end
 
   def beautify_raw
