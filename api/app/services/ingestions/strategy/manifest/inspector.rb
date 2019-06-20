@@ -136,7 +136,7 @@ module Ingestions
 
         def update_toc_entry(entry)
           sm_entry = source_map.detect do |compare|
-            compare[:remote_source_path] == entry["source_path"]
+            compare[:remote_source_path] == base_source_path(entry["source_path"])
           end
           entry["source_path"] = sm_entry[:source_path] if sm_entry
           entry["children"] = update_toc_entries(entry["children"]) if entry["children"]
