@@ -1,7 +1,30 @@
 .group-table {
 
-  &__table-heading {
+  &__count-container {
+    @include panelRoundedLight;
+    padding: 15px 22px;
+    margin-bottom: 8px;
+  }
+
+  &__heading-small {
     @include formLabelPrimary;
+  }
+
+  &__table-count-heading {
+    color: $neutral75;
+    font-size: 13px;
+    margin: 0;
+  }
+
+  &__count-figure {
+    color: $neutral90;
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__table-heading {
     color: $neutral70;
   }
 
@@ -69,11 +92,13 @@
       }
     }
 
-    &:hover {
-      background-color:$neutral05;
+    &--body {
+      &:hover {
+        background-color:$neutral05;
 
-      .group-table__hover-arrow {
-        opacity: 1;
+        .group-table__hover-arrow {
+          opacity: 1;
+        }
       }
     }
   }
@@ -91,6 +116,7 @@
     @include templateHead;
     color: $neutral90;
     position: relative;
+    max-width: 360px;
   }
 
   &__row-name {
@@ -131,5 +157,9 @@
     > div:not(:last-child) {
       padding-bottom: 13px;
     }
+  }
+
+  &__pagination {
+    padding-top: 30px;
   }
 }

@@ -426,6 +426,14 @@ const defaults = {
     }
   },
 
+  member: {
+    type: "member",
+    attributes: {
+
+      abilities
+    }
+  },
+
   textSection: {
     type: "textSections",
     kind: "section",
@@ -648,6 +656,10 @@ const group = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("group", id, attributes, relationships);
 };
 
+const member = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("member", id, attributes, relationships);
+};
+
 const projectCollection = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("projectCollection", id, attributes, relationships);
 };
@@ -685,6 +697,7 @@ export default {
   version,
   page,
   group,
+  member,
   actionCallout,
   contentBlock
 };

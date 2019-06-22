@@ -1,0 +1,9 @@
+.group-page-heading {
+  color: $neutral90;
+  display: flex;
+
+  &__text {
+    display: inline-block;
+    padding-left: 13px;
+  }
+}

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import classNames from "classnames";
 
-export default class GroupTable extends PureComponent {
+export default class Table extends PureComponent {
 
   static propTypes = {
     groups: PropTypes.array,
@@ -43,32 +43,48 @@ export default class GroupTable extends PureComponent {
             isMobile: false
           });
     });
-  };
+  }
 
   get containerClassNames() {
-    return "group-table";
+    return classNames({
+      "group-name": true
+    });
+  }
+
+  get tableClassNames() {
+    return "group-table__table";
   }
 
   get headingClassNames() {
-    return "group-table__table-heading";
+    return classNames({
+      "group-table__table-heading": true,
+      "group-table__heading-small": true
+    });
   }
 
   get rowClassNames() {
     return "group-table__row";
   }
 
+  get bodyRowClassNames() {
+    return classNames({
+      "group-table__row": true,
+      "group-table__row--body": true
+    });
+  }
+
   get rowNameClassNames() {
     return classNames({
       "group-table__body-text" : true,
       "group-table__row-name": true,
-    })
+    });
   }
 
   get rowInfoTextClassNames() {
     return classNames({
       "group-table__body-text" : true,
       "group-table__row-info": true,
-    })
+    });
   }
 
   get rowInfoNumberClassNames() {
@@ -76,7 +92,7 @@ export default class GroupTable extends PureComponent {
       "group-table__body-text" : true,
       "group-table__row-info": true,
       "group-table__number": true
-    })
+    });
   }
 
   get mobileColumnsClassName() {
@@ -112,7 +128,26 @@ export default class GroupTable extends PureComponent {
   }
 
   get memberCountClassNames() {
-    return "group-table__member-count"
+    return "group-table__member-count";
+  }
+
+  get paginationClassNames() {
+    return "group-table__pagination";
+  }
+
+  get tableCountContainerClassNames() {
+    return "group-table__count-container";
+  }
+
+  get tableCountHeading() {
+    return classNames({
+      "group-table__table-count-heading": true,
+      "group-table__heading-small": true
+    });
+  }
+
+  get tableCountFigure() {
+    return "group-table__count-figure";
   }
 
   renderLabel(name, icon) {
@@ -127,7 +162,7 @@ export default class GroupTable extends PureComponent {
         )}
         {name}:
       </span>
-    )
+    );
   }
 
   get nameLabel() {
@@ -162,6 +197,46 @@ export default class GroupTable extends PureComponent {
     return "/test";
   }
 
+  get paginationTarget() {
+    return "#sample-target";
+  }
+
+  get currentPageCount() {
+    const { pagination } = this.props;
+    const pageRemainder = pagination.totalCount % pagination.perPage;
+
+    if (pagination.currentPage > pagination.totalPages
+      ||  pageRemainder === 0) {
+      return pagination.perPage;
+    } else {
+      return pageRemainder;
+    }
+  }
+
+  onPageClick() {
+    console.log("page clicked");
+  }
+
+  renderTableCount() {
+    const { pagination } = this.props;
+
+    return (
+      <div className={this.tableCountContainerClassNames}>
+        <h4 className={this.tableCountHeading}>
+          {"Showing "}
+          <span className={this.tableCountFigure}>
+            {this.currentPageCount}
+          </span>
+          {" of "}
+          <span className={this.tableCountFigure}>
+            {pagination.totalCount}
+          </span>
+          {" Groups:"}
+        </h4>
+      </div>
+    );
+  }
+
   renderTableHead() {
     return (
       <thead>
@@ -174,7 +249,7 @@ export default class GroupTable extends PureComponent {
           <td>{this.highlightsLabel}</td>
         </tr>
       </thead>
-    )
+    );
   }
 
   renderMemberLink(memberCount) {
@@ -187,7 +262,7 @@ export default class GroupTable extends PureComponent {
           iconClass={this.memberArrowClassNames}
         />
       </a>
-    )
+    );
   }
 
 
@@ -198,7 +273,7 @@ export default class GroupTable extends PureComponent {
         {groups.map(groupData => {
           const group = groupData.attributes;
           return(
-            <tr key={groupData.id} className={this.rowClassNames}>
+            <tr key={groupData.id} className={this.bodyRowClassNames}>
               <td className={this.rowNameClassNames}>
                 <a href={this.groupLink} className={this.rowLinkClassNames}/>
                 {group.name}
@@ -232,28 +307,28 @@ export default class GroupTable extends PureComponent {
           )
         })}
       </tbody>
-    )
+    );
   }
 
   renderDesktopTable() {
     return (
-      <table className={this.containerClassNames}>
+      <table className={this.tableClassNames}>
         {this.renderTableHead()}
         {this.renderTableBody()}
       </table>
-    )
+    );
   }
 
   renderMobileList() {
     const { groups } = this.props;
     return(
-      <div className={this.containerClassNames}>
+      <div>
         {groups.map(groupData => {
           const group = groupData.attributes;
           return(
             <div
               key={groupData.id}
-              className={this.rowClassNames}
+              className={this.bodyRowClassNames}
             >
               <a href={this.groupLink} className={this.rowLinkClassNames}/>
               <h3 className={this.rowNameClassNames}>{group.name}</h3>
@@ -297,16 +372,34 @@ export default class GroupTable extends PureComponent {
           )
         })}
       </div>
-    )
+    );
+  }
+
+  renderPagination() {
+    const { pagination } = this.props;
+
+    return(
+      <div className={this.paginationClassNames}>
+        <Utility.Pagination
+          pagination={pagination}
+          paginationTarget={this.paginationTarget}
+          paginationClickHandler={this.onPageClick}
+        />
+      </div>
+    );
   }
 
   render() {
     const { isMobile } = this.state;
+    console.log(this.props.members);
+
     return (
-      <React.Fragment>
+      <div className={this.containerClassNames}>
+        {this.renderTableCount()}
         {!isMobile && this.renderDesktopTable()}
         {isMobile && this.renderMobileList()}
-      </React.Fragment>
-    )
+        {this.renderPagination()}
+      </div>
+    );
   }
 }

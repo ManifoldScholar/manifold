@@ -92,6 +92,28 @@ function groups(count = defaultCount) {
  });
 }
 
+function members(count = defaultCount) {
+  return arrayOf("members", count, () => {
+    const firstName = faker.name.firstName();
+    const lastName = faker.name.lastName();
+    const fullName = `${firstName} ${lastName}`;
+    const role = "member";
+    const number = 17;
+    const out = {
+      firstName,
+      lastName,
+      fullName ,
+      role,
+      annotationCount: number,
+      highlightCount: number
+    };
+    if (random(0, 100) > 50) {
+      out.avatarStyles = image();
+    }
+    return out;
+  });
+}
+
 function contentBlocks(count = defaultCount) {
   let id = 0;
   return arrayOf("contentBlocks", count, e => {
@@ -193,5 +215,6 @@ export default {
   resourceCollections,
   resources,
   permissions,
-  groups
+  groups,
+  members
 };
