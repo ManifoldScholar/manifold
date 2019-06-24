@@ -9,7 +9,7 @@ jest.mock("helpers/passwordGenerator", () => {
 });
 
 jest.mock("date-fns/distance_in_words", () => {
-  return () => "mocked-distance-in-words-for-snapshot"
+  return () => "mocked-distance-in-words-for-snapshot";
 });
 
 jest.mock("focus-trap-react", () => "focus-trap-react");
