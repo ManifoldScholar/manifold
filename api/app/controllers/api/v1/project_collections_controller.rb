@@ -56,6 +56,7 @@ module Api
 
       def filtering_for_home_page
         return false unless project_collection_filter_params
+
         Utilities::Truthy.truthy? project_collection_filter_params[:visible_on_homepage]
       end
 
