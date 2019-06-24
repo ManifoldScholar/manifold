@@ -93,8 +93,10 @@ common: &1
         - "width"
   :css_validator:
     :defaults: &defaults
-      :scope: ".manifold-text-section"
+      :class_scope: ".manifold-text-section"
+      :id_scope: "#manifold-text-section"
       :dark_scope: ".scheme-dark"
+      :allow_important: false
       :selector_replace:
         -
           :match: !ruby/regexp '/(?<=\[)epub\|type(?=.*\])/'
@@ -161,6 +163,7 @@ common: &1
       <<: *defaults
     :user:
       <<: *defaults
+      :allow_important: true
       :exclusions:
         :selectors: *selectors
         :properties: []

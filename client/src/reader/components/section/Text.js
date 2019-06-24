@@ -178,7 +178,11 @@ export default class Text extends Component {
               section={this.props.section}
               render={pendingAnnotation => (
                 <div className={containerClass}>
-                  <div data-id="body" className={textSectionClass}>
+                  <div
+                    data-id="body"
+                    id="manifold-text-section"
+                    className={textSectionClass}
+                  >
                     <Body
                       location={this.props.location}
                       pendingAnnotation={pendingAnnotation}

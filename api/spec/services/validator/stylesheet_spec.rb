@@ -3,7 +3,7 @@ require "rails_helper"
 # rubocop:disable Metrics/LineLength
 # rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::Stylesheet do
-  let(:scope_selector) { Rails.configuration.manifold.css_validator.defaults.scope }
+  let(:scope_selector) { Rails.configuration.manifold.css_validator.defaults.class_scope }
   let(:dark_scope_selector) { Rails.configuration.manifold.css_validator.defaults.dark_scope }
   let(:validator) { Validator::Stylesheet.new }
   let(:blacklisted_property) { "font-family" }
@@ -42,7 +42,6 @@ RSpec.describe Validator::Stylesheet do
 
   # XHTML supports namespaced selectors, but HTML does not.
   describe "when mapping attributes" do
-    operators = %w(= !- |= ^= $= *=)
     operators = %w(*=)
     operators.each do |op|
       it "it should translate namespaced a namespaced attribute to data a data attribute with an #{op} operator" do
