@@ -2,10 +2,14 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import classNames from "classnames";
+import TableCount from "./Count";
+import TableHeaders from "./Headers";
+import TablePagination from "./Pagination";
 
 export default class Table extends PureComponent {
 
   static propTypes = {
+    rowComponent: PropTypes.func.isRequired,
     groups: PropTypes.array,
     pagination: PropTypes.object
   };
@@ -131,25 +135,6 @@ export default class Table extends PureComponent {
     return "group-table__member-count";
   }
 
-  get paginationClassNames() {
-    return "group-table__pagination";
-  }
-
-  get tableCountContainerClassNames() {
-    return "group-table__count-container";
-  }
-
-  get tableCountHeading() {
-    return classNames({
-      "group-table__table-count-heading": true,
-      "group-table__heading-small": true
-    });
-  }
-
-  get tableCountFigure() {
-    return "group-table__count-figure";
-  }
-
   renderLabel(name, icon) {
     return (
       <span className={this.headingClassNames}>
@@ -160,7 +145,7 @@ export default class Table extends PureComponent {
             iconClass={this.labelIconClass}
           />
         )}
-        {name}:
+        {name && name + ":"}
       </span>
     );
   }
@@ -215,41 +200,6 @@ export default class Table extends PureComponent {
 
   onPageClick() {
     console.log("page clicked");
-  }
-
-  renderTableCount() {
-    const { pagination } = this.props;
-
-    return (
-      <div className={this.tableCountContainerClassNames}>
-        <h4 className={this.tableCountHeading}>
-          {"Showing "}
-          <span className={this.tableCountFigure}>
-            {this.currentPageCount}
-          </span>
-          {" of "}
-          <span className={this.tableCountFigure}>
-            {pagination.totalCount}
-          </span>
-          {" Groups:"}
-        </h4>
-      </div>
-    );
-  }
-
-  renderTableHead() {
-    return (
-      <thead>
-        <tr className={this.rowClassNames}>
-          <td>{this.nameLabel}</td>
-          <td>{this.typeLabel}</td>
-          <td>{this.roleLabel}</td>
-          <td>{this.membersLabel}</td>
-          <td>{this.annotationsLabel}</td>
-          <td>{this.highlightsLabel}</td>
-        </tr>
-      </thead>
-    );
   }
 
   renderMemberLink(memberCount) {
@@ -319,6 +269,11 @@ export default class Table extends PureComponent {
     );
   }
 
+  get rowComponentHeaders() {
+    console.log(this.props.rowComponent.headers);
+    return this.props.rowComponent.headers;
+  }
+
   renderMobileList() {
     const { groups } = this.props;
     return(
@@ -375,30 +330,25 @@ export default class Table extends PureComponent {
     );
   }
 
-  renderPagination() {
-    const { pagination } = this.props;
-
-    return(
-      <div className={this.paginationClassNames}>
-        <Utility.Pagination
-          pagination={pagination}
-          paginationTarget={this.paginationTarget}
-          paginationClickHandler={this.onPageClick}
-        />
-      </div>
-    );
-  }
-
   render() {
     const { isMobile } = this.state;
-    console.log(this.props.members);
+    const { pagination} = this.props;
 
     return (
       <div className={this.containerClassNames}>
-        {this.renderTableCount()}
-        {!isMobile && this.renderDesktopTable()}
-        {isMobile && this.renderMobileList()}
-        {this.renderPagination()}
+        <TableCount
+          pagination={pagination}
+          currentPageCount={this.currentPageCount}
+        />
+        <TableHeaders
+          headers={this.rowComponentHeaders()}
+          renderLabel={this.renderLabel}
+        />
+        <TablePagination
+          pagination={pagination}
+          paginationTarget={this.paginationTarget}
+          onPageClick={this.onPageClick}
+        />
       </div>
     );
   }

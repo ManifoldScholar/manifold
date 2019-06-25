@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Utility from "global/components/utility";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import Table from "../Base/index";
+import MemberRow from "./Row";
 
 export default class MembersTable extends Component {
 
@@ -14,9 +13,15 @@ export default class MembersTable extends Component {
     return this.props.pagination;
   }
 
+
   render() {
     return(
-      <Table groups={this.members} pagination ={this.pagination}/>
+      <Table
+        model={this.members}
+        pagination ={this.pagination}
+        headers={MemberRow.headers()}
+        rowComponent={MemberRow}
+      />
     )
   }
 }
