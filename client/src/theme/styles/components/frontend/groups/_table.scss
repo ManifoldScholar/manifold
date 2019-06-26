@@ -39,7 +39,7 @@
     transition: opacity $duration $timing;
   }
 
-  &__member-arrow {
+  &__nested-link-arrow {
     opacity: 0;
     right: 12px;
     position: absolute;
@@ -47,7 +47,7 @@
     transition: opacity $duration $timing;
   }
 
-  &__member-link {
+  &__nested-link {
     text-decoration: none;
     position: relative;
     border-radius: 15px;
@@ -62,7 +62,7 @@
     &:hover {
       background-color: $neutralWhite;
 
-      .group-table__member-arrow {
+      .group-table__nested-link-arrow {
         opacity: 1;
       }
     }
@@ -119,7 +119,7 @@
     max-width: 360px;
   }
 
-  &__row-name {
+  &__value-large {
     font-weight: $medium;
     font-size: 18px;
     background-color: inherit;
@@ -131,12 +131,12 @@
     }
   }
 
-  &__row-info {
+  &__value-standard {
     @include utilityPrimary;
     font-size: 14px;
   }
 
-  &__number {
+  &__centered {
     padding-left: 32px;
 
     @include respond($break85) {

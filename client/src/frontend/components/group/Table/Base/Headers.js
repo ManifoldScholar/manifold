@@ -8,7 +8,6 @@ export default class TableHeaders extends React.PureComponent {
   }
 
   get headers() {
-    console.log(this.props);
     return this.props.headers;
   }
 

@@ -6,8 +6,7 @@ import Cell from "../Base/Cell";
 
 export default class MemberRow extends Component {
 
-  static headers = ()=> {
-    [
+  static headers = ()=> [
         {
           name: "memberAvatar",
         },
@@ -32,56 +31,48 @@ export default class MemberRow extends Component {
         {
           name: "removeMember",
         }
-      ]
-  }
+      ];
 
   get model() {
     return this.props.model;
+  }
+
+  get modelAttributes() {
+    return this.model.attributes;
   }
 
   get id() {
     return this.model.id;
   }
 
-  get cells() {
-    return [
-      {
-        name: "avatar",
-        value: this.model.avatar,
-        customCell: "avatar"
-      },
-      {
-        name: "memberName",
-        value: this.model.name,
-      },
-      {
-        name: "memberRole",
-        value: this.model.role
-      },
-      {}
-    ]
+  get alignCenter() {
+    return "center";
   }
-
-  get cellModel() {
-    return (
-      <Row className="my-custom-row">
-        <Cell>
-
-        </Cell>
-        <Cell>
-
-        </Cell>
-        <Cell align="center">
-
-        </Cell>
-      </Row>
-    )
-  }
-
 
   render() {
-
-
-    return this.props.children(this.id, this.columns);
+    console.log(this.constructor.headers());
+    return(
+      <Row modelId={this.id}>
+        <Cell avatar>
+          {this.modelAttributes.avatar}
+        </Cell>
+        <Cell textStyle={"value-large"}>
+          {this.modelAttributes.fullName}
+        </Cell>
+        <Cell>
+          {this.modelAttributes.role}
+        </Cell>
+        <Cell align={this.alignCenter}>
+          {this.modelAttributes.annotationCount}
+        </Cell>
+        <Cell align={this.alignCenter}>
+          {this.modelAttributes.highlightCount}
+        </Cell>
+        <Cell
+          removeUser
+          align={this.alignCenter}
+        />
+      </Row>
+    );
   }
 }

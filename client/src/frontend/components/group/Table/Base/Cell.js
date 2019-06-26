@@ -1,16 +1,148 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
+import Utility from "global/components/utility";
 
 export default class TableCell extends React.PureComponent {
 
   static propTypes = {
   }
 
-  render() {
+  constructor(props) {
+    super(props);
 
+    this.resizeId = null;
+    this.breakpoint = 880;
+
+    this.state = {
+      isMobile: window.innerWidth < this.breakpoint
+    };
+  };
+
+  componentWillMount() {
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  handleResize = () => {
+    if (this.resizeId) {
+      window.cancelAnimationFrame(this.resizeId);
+    }
+
+    this.resizeId = window.requestAnimationFrame(() => {
+      window.innerWidth < this.breakpoint
+        ? this.setState({
+            isMobile: true
+          })
+        : this.setState({
+            isMobile: false
+          });
+    });
+  }
+
+  get alignment() {
+    return this.props.align;
+  }
+
+  get textStyle() {
+    return this.props.textStyle;
+  }
+
+  get isMobile() {
+    return this.props.isMobile;
+  }
+
+  get cellClassNames() {
+    return classNames({
+      "group-table__body-text": true,
+      "group-table__centered": this.alignment === "center",
+      "group-table__value-large": this.textStyle === "valueLarge",
+      "group-table__value-standard": !this.textStyle
+    });
+  }
+
+  get rowLinkClassNames() {
+    return "group-table__row-link";
+  }
+
+  get hoverArrowClassNames() {
+    return "group-table__hover-arrow";
+  }
+
+  get nestedLinkArrowClassNames() {
+    return "group-table__nested-link-arrow";
+  }
+
+  get nestedLinkClassNames() {
+    return "group-table__nested-link";
+  }
+
+  get link() {
+    return "/";
+  }
+
+  renderArrowIcon(iconClass, size) {
     return (
-        <td>cell</td>
+      <Utility.IconComposer
+        icon="arrowRight16"
+        size={size}
+        iconClass={iconClass}
+      />
     )
+  }
 
+  renderNestedLink() {
+    return (
+      <a className={this.nestedLinkClassNames} href={this.nestedLink}>
+        <span>{this.props.value}</span>
+        {this.renderArrowIcon(this.nestedLinkArrowClassNames, 14)}
+      </a>
+    );
+  }
+
+  get hoverIcon() {
+    return this.props.hoverIcon;
+  }
+
+  get nestedLink() {
+    return this.props.nestedLink;
+  }
+
+  renderDesktopCell() {
+    return (
+      <td className={this.cellClassNames}>
+        <a href={this.link} className={this.rowLinkClassNames}/>
+        {!this.nestedLink && this.props.value}
+        {this.hoverIcon === "arrow"
+          && this.renderArrowIcon(this.hoverArrowClassNames, 18)}
+        {this.nestedLink && this.renderNestedLink()}
+      </td>
+    )
+  }
+
+  renderMobileItem() {
+    return(
+      <React.Fragment>
+
+        <dt>
+{this.props.header}
+        </dt>
+        <dl className={this.cellClassNames}>
+          {this.props.children}
+        </dl>
+      </React.Fragment>
+    )
+  }
+
+  render() {
+    return(
+      <React.Fragment>
+        {this.isMobile && this.renderMobileItem()}
+        {!this.isMobile && this.renderDesktopCell()}
+      </React.Fragment>
+    )
   }
 }

@@ -22,16 +22,32 @@ export default class TableCount extends React.PureComponent {
     return "group-table__count-figure";
   }
 
-  render() {
+  get pagination() {
+    return this.props.pagination;
+  }
 
-    const {pagination, currentPageCount} = this.props;
+  get currentPageCount() {
+    const pagination = this.pagination;
+    const pageRemainder = pagination.totalCount % pagination.perPage;
+
+    if (pagination.currentPage > pagination.totalPages
+      ||  pageRemainder === 0) {
+      return pagination.perPage;
+    } else {
+      return pageRemainder;
+    }
+  }
+
+
+  render() {
+    const pagination = this.pagination;
 
     return (
       <div className={this.tableCountContainerClassNames}>
         <h4 className={this.tableCountHeading}>
           {"Showing "}
           <span className={this.tableCountFigure}>
-            {currentPageCount}
+            {this.currentPageCount}
           </span>
           {" of "}
           <span className={this.tableCountFigure}>

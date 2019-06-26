@@ -1,11 +1,9 @@
-import React, { Component } from "react";
-import Utility from "global/components/utility";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import Table from "../Base/index";
 import GroupRow from "./Row";
 
-export default class GroupsTable extends Component {
+export default class GroupsTable extends PureComponent {
 
   static propTypes = {
     groups: PropTypes.array.isRequired
@@ -26,6 +24,6 @@ export default class GroupsTable extends Component {
         pagination={this.pagination}
         rowComponent={GroupRow}
       />
-    )
+    );
   }
 }
