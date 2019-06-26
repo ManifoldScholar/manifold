@@ -8,51 +8,12 @@ export default class TableCell extends React.PureComponent {
   static propTypes = {
   }
 
-  constructor(props) {
-    super(props);
-
-    this.resizeId = null;
-    this.breakpoint = 880;
-
-    this.state = {
-      isMobile: window.innerWidth < this.breakpoint
-    };
-  };
-
-  componentWillMount() {
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
-
-  handleResize = () => {
-    if (this.resizeId) {
-      window.cancelAnimationFrame(this.resizeId);
-    }
-
-    this.resizeId = window.requestAnimationFrame(() => {
-      window.innerWidth < this.breakpoint
-        ? this.setState({
-            isMobile: true
-          })
-        : this.setState({
-            isMobile: false
-          });
-    });
-  }
-
   get alignment() {
     return this.props.align;
   }
 
   get textStyle() {
     return this.props.textStyle;
-  }
-
-  get isMobile() {
-    return this.props.isMobile;
   }
 
   get cellClassNames() {
@@ -97,7 +58,7 @@ export default class TableCell extends React.PureComponent {
   renderNestedLink() {
     return (
       <a className={this.nestedLinkClassNames} href={this.nestedLink}>
-        <span>{this.props.value}</span>
+        <span>{this.props.children}</span>
         {this.renderArrowIcon(this.nestedLinkArrowClassNames, 14)}
       </a>
     );
@@ -115,7 +76,7 @@ export default class TableCell extends React.PureComponent {
     return (
       <td className={this.cellClassNames}>
         <a href={this.link} className={this.rowLinkClassNames}/>
-        {!this.nestedLink && this.props.value}
+        {!this.nestedLink && this.props.children}
         {this.hoverIcon === "arrow"
           && this.renderArrowIcon(this.hoverArrowClassNames, 18)}
         {this.nestedLink && this.renderNestedLink()}
@@ -140,8 +101,8 @@ export default class TableCell extends React.PureComponent {
   render() {
     return(
       <React.Fragment>
-        {this.isMobile && this.renderMobileItem()}
-        {!this.isMobile && this.renderDesktopCell()}
+        {this.renderMobileItem()}
+        {this.renderDesktopCell()}
       </React.Fragment>
     )
   }

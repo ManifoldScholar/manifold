@@ -69,27 +69,18 @@ export default class TableBody extends React.PureComponent {
   }
 
   renderTableInner() {
-    const RowComponent = this.props.rowComponent;
 
     return (
       <React.Fragment>
       {
         this.props.models.map((model, i)=>  {
           return(
-            <RowComponent
+            <Row
               key={i}
               model={model}
-            >
-              {(id, cells) => {
-                return (
-                  <Row
-                    isMobile={this.state.isMobile}
-                    cells={cells}
-                    headers={this.rowComponentHeaders}
-                  />
-                )
-              }}
-            </RowComponent>
+              headers={this.rowComponentHeaders}
+              rowComponent={this.props.rowComponent}
+            />
           )
         })
       }
