@@ -18,8 +18,12 @@ export default class TableHeaders extends React.PureComponent {
   get headingClassNames() {
     return classNames({
       "group-table__table-heading": true,
-      "group-table__heading-small": true
+      "group-table__heading-small": true,
     });
+  }
+
+  get cellClassNames() {
+    return "group-table__padded-cell";
   }
 
   get labelIconClass() {
@@ -37,7 +41,7 @@ export default class TableHeaders extends React.PureComponent {
         <tr className={this.rowClassNames}>
           {headers.map(header => {
             return(
-              <td key={header.name}>
+              <td key={header.name} className={this.cellClassNames}>
                 {this.renderLabel(header.label, header.icon)}
               </td>
             )

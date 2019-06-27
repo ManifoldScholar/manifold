@@ -10,6 +10,49 @@
     @include formLabelPrimary;
   }
 
+  &__row {
+    padding: 15px 22px 16px;
+    margin: 0;
+    border-bottom: 1px solid $neutral45;
+    transition: background-color $duration $timing;
+    position: relative;
+
+    &--body {
+      &:hover {
+        background-color:$neutral05;
+
+        .group-table__hover-arrow {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__list {
+    display: grid;
+
+    @include respond($break85) {
+      @include screenReaderText
+    }
+  }
+
+  &__list-item-container {
+    padding-bottom:  15px;
+  }
+
+  &__list-value {
+    margin-inline-start: 0;
+  }
+
+  &__table {
+    display: none;
+
+    @include respond($break85) {
+      display: table;
+      width: 100%;
+    }
+  }
+
   &__table-count-heading {
     color: $neutral75;
     font-size: 13px;
@@ -18,10 +61,6 @@
 
   &__count-figure {
     color: $neutral90;
-  }
-
-  &__table {
-    width: 100%;
   }
 
   &__table-heading {
@@ -77,30 +116,8 @@
     }
   }
 
-  &__row {
-    padding-bottom: 22px;
-    border-bottom: 1px solid $neutral45;
-    transition: background-color $duration $timing;
-    display: block;
-    position: relative;
-
-    @include respond($break85) {
-      display: table-row;
-
-      > td {
-        padding: 16px 22px;
-      }
-    }
-
-    &--body {
-      &:hover {
-        background-color:$neutral05;
-
-        .group-table__hover-arrow {
-          opacity: 1;
-        }
-      }
-    }
+  &__padded-cell {
+    padding: 16px 22px;
   }
 
   &__row-link {
@@ -116,19 +133,43 @@
     @include templateHead;
     color: $neutral90;
     position: relative;
-    max-width: 360px;
+
+    @include respond($break85) {
+      max-width: 360px;
+    }
   }
 
   &__value-large {
     font-weight: $medium;
     font-size: 18px;
     background-color: inherit;
-    padding: 20px 0;
+    padding: 10px 0 20px;
     margin: 0;
 
     @include respond($break85) {
       font-size: 21px;
+      padding: 18px 22px;
     }
+  }
+
+  &__no-left-padding {
+    padding-left: 0;
+  }
+
+  &__grid-item-left {
+    grid-column-start: 1;
+  }
+
+  &__grid-item-right {
+    grid-column-start: 2;
+  }
+
+  &__grid-item-top-align {
+    grid-row-start: 2;
+  }
+
+  &__grid-item-colspan {
+    grid-column-end: span 2;
   }
 
   &__value-standard {
@@ -161,5 +202,25 @@
 
   &__pagination {
     padding-top: 30px;
+  }
+
+  &__avatar-placeholder {
+    color: $neutral50;
+  }
+
+  &__remove-member-button {
+    @include buttonUnstyled;
+    @include formLabelPrimary;
+    position: relative;
+    border: 1px solid $sp40Tertiary;
+    color: $sp40Tertiary;
+    border-radius: 12px;
+    padding: 4px 15px 5px;
+    transition: all $duration $timing;
+
+    &:hover {
+      color: $neutralWhite;
+      background-color: $sp40Tertiary;
+    }
   }
 }

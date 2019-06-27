@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Utility from "global/components/utility";
 import PropTypes from "prop-types";
-import Row from "../Base/Row";
 import Cell from "../Base/Cell";
+import Avatar from "../Base/Avatar";
+import RemoveMemberButton from "../Base/RemoveMember";
 
 export default class MemberRow extends Component {
 
@@ -50,29 +51,30 @@ export default class MemberRow extends Component {
   }
 
   render() {
-    console.log(this.constructor.headers());
     return(
-      <Row modelId={this.id}>
-        <Cell avatar>
-          {this.modelAttributes.avatar}
-        </Cell>
-        <Cell textStyle={"value-large"}>
-          {this.modelAttributes.fullName}
-        </Cell>
-        <Cell>
-          {this.modelAttributes.role}
-        </Cell>
-        <Cell align={this.alignCenter}>
-          {this.modelAttributes.annotationCount}
-        </Cell>
-        <Cell align={this.alignCenter}>
-          {this.modelAttributes.highlightCount}
+      <React.Fragment>
+        <Cell index={0}>
+          <Avatar avatar={this.modelAttributes.avatar} />
         </Cell>
         <Cell
-          removeUser
-          align={this.alignCenter}
-        />
-      </Row>
+          textStyle={"valueLarge"}
+          cellPadding={"noLeft"}
+          index={1}>
+          {this.modelAttributes.fullName}
+        </Cell>
+        <Cell index={2}>
+          {this.modelAttributes.role}
+        </Cell>
+        <Cell align={this.alignCenter} index={3}>
+          {this.modelAttributes.annotationCount}
+        </Cell>
+        <Cell align={this.alignCenter} index={4}>
+          {this.modelAttributes.highlightCount}
+        </Cell>
+        <Cell align={this.alignCenter} index={5}>
+          <RemoveMemberButton />
+        </Cell>
+      </React.Fragment>
     );
   }
 }

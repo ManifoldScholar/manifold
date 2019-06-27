@@ -34,15 +34,14 @@ export default class TableBody extends React.PureComponent {
     );
   }
 
-
   render() {
-
     const headers = this.rowComponentHeaders;
     const context = {
       getHeader: (index) => {
-        return headers[index].label;
+        return headers[index];
       },
-      markup: this.props.markup
+      markup: this.props.markup,
+      renderLabel: this.renderLabel
     };
 
     const rows = this.props.models.map((model, i)=>  {
@@ -52,6 +51,7 @@ export default class TableBody extends React.PureComponent {
           model={model}
           headers={this.headers}
           rowComponent={this.props.rowComponent}
+          renderLabel={this.renderLabel}
         />
       )
     });
@@ -59,7 +59,7 @@ export default class TableBody extends React.PureComponent {
     return (
       <TableHeaderContext.Provider value={context} >
         {this.props.markup === "table" &&
-          <table className={this.tableClassNames}>
+          <table className={this.tableClassNames} aria-hidden="true">
             <TableHeaders
               headers={headers}
               renderLabel={this.renderLabel}

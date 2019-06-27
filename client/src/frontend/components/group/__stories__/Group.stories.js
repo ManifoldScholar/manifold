@@ -32,8 +32,8 @@ storiesOf("Frontend/Group", module)
       <Heading />
     );
   })
-  // .add("Members Table", () => {
-  //   return (
-  //     <MembersTable members={members} pagination={pagination} />
-  //   );
-  // })
+  .add("Members Table", () => {
+    return (
+      <MembersTable members={members} pagination={pagination} />
+    );
+  })
