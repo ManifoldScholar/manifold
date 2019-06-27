@@ -60,72 +60,47 @@ export default class GroupRow extends React.PureComponent {
     return "/test"
   }
 
-  get cells() {
-    return [
-      <Cell
-        hoverIcon={this.hoverIcon}
-        textStyle={"valueLarge"}
-      >
-        {this.modelAttributes.name}
-      </Cell>,
-      <Cell>
-        {this.modelAttributes.type}
-      </Cell>,
-      <Cell>
-        {this.modelAttributes.role}
-      </Cell>,
-      <Cell
-        align={this.alignCenter}
-        nestedLink={this.nestedLink}
-      >
-        {this.modelAttributes.memberCount}
-      </Cell>,
-      <Cell align={this.alignCenter}>
-        {this.modelAttributes.annotationCount}
-      </Cell>,
-      <Cell align={this.alignCenter}>
-        {this.modelAttributes.highlightCount}
-      </Cell>
-
-    ]
-  }
-
-  // get cells() {
-  //   return [
-  //     {
-  //       name: "groupName",
-  //       value: this.modelAttributes.name,
-  //       hoverIcon: this.hoverIcon,
-  //       textStyle: "valueLarge"
-  //     },
-  //     {
-  //       name: "groupType",
-  //       value: this.modelAttributes.type
-  //     },
-  //     {
-  //       name: "memberRole",
-  //       value: this.modelAttributes.role
-  //     },
-  //     {
-  //       name: "groupMemberCount",
-  //       value: this.modelAttributes.memberCount,
-  //       nestedLink: this.nestedLink,
-  //       align: this.alignCenter
-  //     },
-  //     {
-  //       name: "groupAnnotationCount",
-  //       value: this.modelAttributes.annotationCount,
-  //       align: this.alignCenter
-  //     },
-  //     {
-  //       name: "groupHighlightCount",
-  //       value: this.modelAttributes.highlightCount,
-  //       align: this.alignCenter
-  //     },
-  //   ]
-  // }
 
   render() {
-    return this.cells;
+    return (
+      <React.Fragment>
+        <Cell
+          index={0}
+          hoverIcon={this.hoverIcon}
+          textStyle={"valueLarge"}
+        >
+          {this.modelAttributes.name}
+        </Cell>
+        <Cell
+          index={1}
+        >
+          {this.modelAttributes.type}
+        </Cell>
+        <Cell
+          index={2}
+        >
+          {this.modelAttributes.role}
+        </Cell>
+        <Cell
+          index={3}
+          align={this.alignCenter}
+          nestedLink={this.nestedLink}
+        >
+          {this.modelAttributes.memberCount}
+        </Cell>
+        <Cell
+          index={4}
+          align={this.alignCenter}
+        >
+          {this.modelAttributes.annotationCount}
+        </Cell>
+        <Cell
+          index={5}
+          align={this.alignCenter}
+        >
+          {this.modelAttributes.highlightCount}
+        </Cell>
+      </React.Fragment>
+    )
   }
 }

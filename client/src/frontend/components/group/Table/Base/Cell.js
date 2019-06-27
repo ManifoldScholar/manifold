@@ -2,11 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
+import { TableHeaderContext } from "helpers/contexts";
 
 export default class TableCell extends React.PureComponent {
 
   static propTypes = {
-  }
+  };
+
+  static contextType = TableHeaderContext;
 
   get alignment() {
     return this.props.align;
@@ -72,37 +75,20 @@ export default class TableCell extends React.PureComponent {
     return this.props.nestedLink;
   }
 
-  renderDesktopCell() {
-    return (
-      <td className={this.cellClassNames}>
-        <a href={this.link} className={this.rowLinkClassNames}/>
-        {!this.nestedLink && this.props.children}
-        {this.hoverIcon === "arrow"
-          && this.renderArrowIcon(this.hoverArrowClassNames, 18)}
-        {this.nestedLink && this.renderNestedLink()}
-      </td>
-    )
-  }
-
-  renderMobileItem() {
-    return(
-      <React.Fragment>
-
-        <dt>
-{this.props.header}
-        </dt>
-        <dl className={this.cellClassNames}>
-          {this.props.children}
-        </dl>
-      </React.Fragment>
-    )
-  }
 
   render() {
+    const isTable = this.context.markup === "table";
+
+    if (isTable) return (
+      <td className={this.cellClassNames}>
+        {this.props.children}
+      </td>
+   );
+
     return(
       <React.Fragment>
-        {this.renderMobileItem()}
-        {this.renderDesktopCell()}
+        <dt>{this.context.getHeader(this.props.index)}</dt>
+        <dd>{this.props.children}</dd>
       </React.Fragment>
     )
   }

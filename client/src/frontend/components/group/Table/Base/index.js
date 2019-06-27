@@ -5,6 +5,7 @@ import classNames from "classnames";
 import TableCount from "./Count";
 import TablePagination from "./Pagination";
 import TableBody from "./Body";
+import { TableHeaderContext } from "helpers/contexts";
 
 export default class Table extends PureComponent {
 
@@ -116,20 +117,27 @@ export default class Table extends PureComponent {
   }
 
   render() {
+
     const { pagination} = this.props;
 
     return (
-      <div className={this.containerClassNames}>
-        <TableCount
-          pagination={pagination}
-        />
-        <TableBody {...this.props} />
-        <TablePagination
-          pagination={pagination}
-          paginationTarget={this.paginationTarget}
-          onPageClick={this.onPageClick}
-        />
-      </div>
+        <div className={this.containerClassNames}>
+          <TableCount
+            pagination={pagination}
+          />
+          <TableBody {...this.props} markup="table" />
+
+          {/* Remove this at some point */}
+          <div style={{margin: 50}} />
+
+          <TableBody {...this.props} markup="dl" />
+
+          <TablePagination
+            pagination={pagination}
+            paginationTarget={this.paginationTarget}
+            onPageClick={this.onPageClick}
+          />
+        </div>
     );
   }
 }

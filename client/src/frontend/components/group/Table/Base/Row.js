@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { TableHeaderContext } from "helpers/contexts";
 
 export default class TableRow extends React.PureComponent {
 
   static propTypes = {
     cells: PropTypes.array
-  }
+  };
+
+  static contextType = TableHeaderContext;
 
   get rowClassNames() {
     return classNames({
@@ -26,46 +29,58 @@ export default class TableRow extends React.PureComponent {
     })
   }
 
+  lookupHeader = (index) => {
+    return "foo"
+  };
+
   get rowLink() {
     return "/";
   }
 
-  renderDesktopRow() {
-    return (
+  // renderDesktopRow() {
+  //   return (
+  //     <tr
+  //       className={this.rowClassNames}
+  //     >
+  //     {React.Children.map(this.props.children, (child, i) => {
+  //       console.log(child);
+  //       return React.cloneElement(child);
+  //     })}
+  //     </tr>
+  //   );
+  // }
+  //
+  // renderMobileList() {
+  //   console.log(this.props.rowComponent);
+  //
+  //   return(
+  //     <div className={this.rowClassNames}>
+  //       <a className={this.rowLinkClassNames} href={this.rowLink} />
+  //       <dl>
+  //         {React.Children.map(this.props.children, (child, i) => {
+  //           return React.cloneElement(child, { header: this.props.headers[i]});
+  //         })}
+  //       </dl>
+  //     </div>
+  //
+  //   );
+  // }
+
+  render() {
+    const RowComponent = this.props.rowComponent;
+    const isTable = this.context.markup === "table";
+    const row = <RowComponent model={this.props.model} />;
+    if (isTable) return (
       <tr
         className={this.rowClassNames}
       >
-      {React.Children.map(this.props.children, (child, i) => {
-        console.log(child);
-        return React.cloneElement(child);
-      })}
+        {row}
       </tr>
     );
-  }
-
-  renderMobileList() {
-    console.log(this.props.rowComponent);
-
-    return(
-      <div className={this.rowClassNames}>
-        <a className={this.rowLinkClassNames} href={this.rowLink} />
-        <dl>
-          {React.Children.map(this.props.children, (child, i) => {
-            return React.cloneElement(child, { header: this.props.headers[i]});
-          })}
-        </dl>
-      </div>
-
-    );
-  }
-
-  render() {
-    const { isMobile } = this.props;
     return (
-      <React.Fragment>
-        {this.renderMobileList()}
-        {this.renderDesktopRow()}
-      </React.Fragment>
+      <dl style={{ border: "1px solid green"}}>
+        {row}
+      </dl>
     );
   }
 }

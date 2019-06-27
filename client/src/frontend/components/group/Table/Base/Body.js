@@ -3,47 +3,13 @@ import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import TableHeaders from "./Headers";
 import Row from "./Row";
+import { TableHeaderContext } from "helpers/contexts";
 
 export default class TableBody extends React.PureComponent {
 
   static propTypes = {
     rows: PropTypes.array
-  }
-
-  constructor(props) {
-    super(props);
-
-    this.resizeId = null;
-    this.breakpoint = 880;
-
-    this.state = {
-      isMobile: window.innerWidth < this.breakpoint
-    };
   };
-
-  componentWillMount() {
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
-
-  handleResize = () => {
-    if (this.resizeId) {
-      window.cancelAnimationFrame(this.resizeId);
-    }
-
-    this.resizeId = window.requestAnimationFrame(() => {
-      window.innerWidth < this.breakpoint
-        ? this.setState({
-            isMobile: true
-          })
-        : this.setState({
-            isMobile: false
-          });
-    });
-  }
 
   get rowComponentHeaders() {
     return this.props.rowComponent.headers();
@@ -68,47 +34,41 @@ export default class TableBody extends React.PureComponent {
     );
   }
 
-  renderTableInner() {
-
-    return (
-      <React.Fragment>
-      {
-        this.props.models.map((model, i)=>  {
-          return(
-            <Row
-              key={i}
-              model={model}
-              headers={this.rowComponentHeaders}
-              rowComponent={this.props.rowComponent}
-            />
-          )
-        })
-      }
-      </React.Fragment>
-    )
-  }
 
   render() {
-    const { isMobile } = this.state;
+
+    const headers = this.rowComponentHeaders;
+    const context = {
+      getHeader: (index) => {
+        return headers[index].label;
+      },
+      markup: this.props.markup
+    };
+
+    const rows = this.props.models.map((model, i)=>  {
+      return(
+        <Row
+          key={i}
+          model={model}
+          headers={this.headers}
+          rowComponent={this.props.rowComponent}
+        />
+      )
+    });
 
     return (
-       <React.Fragment>
-       {!isMobile &&
-         <table className={this.tableClassNames}>
-           <TableHeaders
-             headers={this.rowComponentHeaders}
-             renderLabel={this.renderLabel}
-           />
-           <tbody>
-            {this.renderTableInner()}
-           </tbody>
-         </table>}
-         {isMobile &&
-           <div>
-            {this.renderTableInner()}
-           </div>
-         }
-      </React.Fragment>
+      <TableHeaderContext.Provider value={context} >
+        {this.props.markup === "table" &&
+          <table className={this.tableClassNames}>
+            <TableHeaders
+              headers={headers}
+              renderLabel={this.renderLabel}
+            />
+            <tbody>{rows}</tbody>
+          </table>
+        }
+        {this.props.markup === "dl" && rows}
+      </TableHeaderContext.Provider>
     );
   }
 }
