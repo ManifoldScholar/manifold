@@ -61,6 +61,10 @@ export default class GroupRow extends React.PureComponent {
     return "/test"
   }
 
+  get lockIconClassNames() {
+    return "group-table__private-icon";
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -76,6 +80,13 @@ export default class GroupRow extends React.PureComponent {
           columnPosition={"left"}
         >
           {this.modelAttributes.type}
+          {this.modelAttributes.type === "private" &&
+            <Utility.IconComposer
+              icon="lock16"
+              size={16}
+              iconClass={this.lockIconClassNames}
+            />
+          }
         </Cell>
         <Cell
           index={2}

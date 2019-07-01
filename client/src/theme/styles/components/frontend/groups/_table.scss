@@ -86,6 +86,12 @@
     transition: opacity $duration $timing;
   }
 
+  &__private-icon {
+    color: $neutral70;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+
   &__nested-link {
     text-decoration: none;
     position: relative;
@@ -249,7 +255,6 @@
   }
 
   &__hide-desktop {
-
     @include respond($break85) {
       display: none;
     }

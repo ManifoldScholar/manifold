@@ -78,7 +78,7 @@ function users(count = defaultCount) {
 function groups(count = defaultCount) {
   return arrayOf("groups", count, () => {
     const name = faker.company.catchPhrase();
-    const type = "public";
+    const type = "private";
     const role = "member";
     const number = 15;
     return {
