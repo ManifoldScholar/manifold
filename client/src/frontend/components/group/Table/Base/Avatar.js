@@ -10,7 +10,8 @@ export default class Avatar extends React.PureComponent {
   get avatarClassNames() {
     return classNames({
       "group-table__avatar-placeholder" : !this.avatar,
-      "group-table__avatar-container": this.avatar
+      "group-table__avatar-container": this.avatar,
+      "group-table__hide-desktop": this.viewportVisibility === "hideDesktop"
     });
   }
 
@@ -20,6 +21,10 @@ export default class Avatar extends React.PureComponent {
 
   get avatar() {
     return this.props.avatar;
+  }
+
+  get viewportVisibility() {
+    return this.props.viewportVisibility;
   }
 
   render() {

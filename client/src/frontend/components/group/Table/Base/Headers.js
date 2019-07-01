@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Label from "./Label";
 
 export default class TableHeaders extends React.PureComponent {
 
@@ -15,19 +16,11 @@ export default class TableHeaders extends React.PureComponent {
     return "group-table__row";
   }
 
-  get headingClassNames() {
+  cellClassNames(cellPadding) {
     return classNames({
-      "group-table__table-heading": true,
-      "group-table__heading-small": true,
+      "group-table__padded-cell": true,
+      "group-table__small-padding-left": cellPadding === "leftSmall"
     });
-  }
-
-  get cellClassNames() {
-    return "group-table__padded-cell";
-  }
-
-  get labelIconClass() {
-    return "group-table__label-icon";
   }
 
   get renderLabel() {
@@ -41,8 +34,14 @@ export default class TableHeaders extends React.PureComponent {
         <tr className={this.rowClassNames}>
           {headers.map(header => {
             return(
-              <td key={header.name} className={this.cellClassNames}>
-                {this.renderLabel(header.label, header.icon)}
+              <td
+                key={header.name}
+                className={this.cellClassNames(header.cellPadding)}
+              >
+                <Label
+                  label={header.label}
+                  icon={header.icon}
+                />
               </td>
             )
           })}

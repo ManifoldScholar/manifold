@@ -3,7 +3,7 @@ import Utility from "global/components/utility";
 import PropTypes from "prop-types";
 import Cell from "../Base/Cell";
 import NestedLink from "../Base/NestedLink";
-
+import NameWithArrow from "../Base/NameWithArrow";
 
 export default class GroupRow extends React.PureComponent {
 
@@ -66,29 +66,28 @@ export default class GroupRow extends React.PureComponent {
       <React.Fragment>
         <Cell
           index={0}
-          hoverIcon={this.hoverIcon}
           textStyle={"valueLarge"}
-          column={"all"}
+          columnPosition={"all"}
         >
-          {this.modelAttributes.name}
+          <NameWithArrow name={this.modelAttributes.name} />
         </Cell>
         <Cell
           index={1}
-          column={"left"}
+          columnPosition={"left"}
         >
           {this.modelAttributes.type}
         </Cell>
         <Cell
           index={2}
-          column={"left"}
+          columnPosition={"left"}
         >
           {this.modelAttributes.role}
         </Cell>
         <Cell
           index={3}
           align={this.alignCenter}
-          column={"right"}
-          row={2}
+          columnPosition={"right"}
+          rowPosition={2}
         >
           <NestedLink link={this.groupMembersLink}>
             {this.modelAttributes.memberCount}
@@ -97,14 +96,14 @@ export default class GroupRow extends React.PureComponent {
         <Cell
           index={4}
           align={this.alignCenter}
-          column={"right"}
+          columnPosition={"right"}
         >
           {this.modelAttributes.annotationCount}
         </Cell>
         <Cell
           index={5}
           align={this.alignCenter}
-          column={"right"}
+          columnPosition={"right"}
         >
           {this.modelAttributes.highlightCount}
         </Cell>

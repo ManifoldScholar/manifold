@@ -145,10 +145,23 @@
     background-color: inherit;
     padding: 10px 0 20px;
     margin: 0;
+    display: flex;
+    align-items: center;
 
     @include respond($break85) {
       font-size: 21px;
-      padding: 18px 22px;
+      padding: 21px 22px;
+    }
+  }
+
+  &__name-container {
+    @include respond($break85) {
+      max-width: calc(100% - 38px);
+      height: 26px;
+      display: inline-block;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
     }
   }
 
@@ -164,8 +177,12 @@
     grid-column-start: 2;
   }
 
-  &__grid-item-top-align {
+  &__grid-item-row-2 {
     grid-row-start: 2;
+  }
+
+  &__grid-item-row-3 {
+    grid-row-start: 3;
   }
 
   &__grid-item-colspan {
@@ -184,6 +201,24 @@
       padding-left: 0;
       text-align: center;
     }
+  }
+
+  &__right {
+    text-align: right;
+  }
+
+  &__cell-small {
+    width: 44px;
+  }
+
+  &__small-padding-left {
+    @include respond($break85) {
+      padding-left: 10px;
+    }
+  }
+
+  &__right-unpadded {
+    padding-right: 0;
   }
 
   &__column-right {
@@ -206,6 +241,26 @@
 
   &__avatar-placeholder {
     color: $neutral50;
+    padding-right: 8px;
+
+    @include respond($break85) {
+      padding-right: 0;
+    }
+  }
+
+  &__hide-desktop {
+
+    @include respond($break85) {
+      display: none;
+    }
+  }
+
+  &__hide-mobile {
+    display: none;
+
+    @include respond($break85) {
+      display: inline-block;
+    }
   }
 
   &__remove-member-button {

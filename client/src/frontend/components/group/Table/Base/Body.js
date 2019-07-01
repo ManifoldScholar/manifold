@@ -19,21 +19,6 @@ export default class TableBody extends React.PureComponent {
     return "group-table__table";
   }
 
-  renderLabel(name, icon) {
-    return (
-      <span className={this.headingClassNames}>
-        {icon && (
-          <Utility.IconComposer
-            icon={icon}
-            size={24}
-            iconClass={this.labelIconClass}
-          />
-        )}
-        {name && name + ":"}
-      </span>
-    );
-  }
-
   render() {
     const headers = this.rowComponentHeaders;
     const context = {
@@ -62,7 +47,6 @@ export default class TableBody extends React.PureComponent {
           <table className={this.tableClassNames} aria-hidden="true">
             <TableHeaders
               headers={headers}
-              renderLabel={this.renderLabel}
             />
             <tbody>{rows}</tbody>
           </table>

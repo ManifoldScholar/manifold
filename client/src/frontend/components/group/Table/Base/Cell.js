@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import { TableHeaderContext } from "helpers/contexts";
+import Label from "./Label";
 
 export default class TableCell extends React.PureComponent {
 
@@ -19,27 +20,38 @@ export default class TableCell extends React.PureComponent {
     return this.props.textStyle;
   }
 
-  get column() {
-    return this.props.column;
+  get columnPosition() {
+    return this.props.columnPosition;
   }
 
-  get row() {
-    return this.props.row;
+  get rowPosition() {
+    return this.props.rowPosition;
   }
 
   get cellPadding() {
     return this.props.cellPadding;
   }
 
+  get viewportVisibility() {
+    return this.props.viewportVisibility;
+  }
+
+  get cellSize() {
+    return this.props.cellSize;
+  }
+
   get cellClassNames() {
     return classNames({
       "group-table__body-text": true,
       "group-table__centered": this.alignment === "center",
+      "group-table__right": this.alignment === "right",
       "group-table__value-large": this.textStyle === "valueLarge",
-      "group-table__no-left-padding": this.cellPadding === "noLeft",
+      "group-table__right-unpadded": this.cellPadding === "rightUnpadded",
+      "group-table__small-padding-left": this.cellPadding === "leftSmall",
       "group-table__value-standard": !this.textStyle,
       "group-table__padded-cell": this.isTable,
-      "group-table__list-value": !this.isTable
+      "group-table__list-value": !this.isTable,
+      "group-table__cell-small": this.cellSize === "cellSmall"
     });
   }
 
@@ -47,10 +59,12 @@ export default class TableCell extends React.PureComponent {
     return classNames({
       "group-table__list-item-container": !this.textStyle,
       "group-table__list-header-container": this.textStyle,
-      "group-table__grid-item-right": this.column === "right",
-      "group-table__grid-item-left": this.column === "left",
-      "group-table__grid-item-colspan": this.column == "all",
-      "group-table__grid-item-top-align": this.row === 2
+      "group-table__grid-item-right": this.columnPosition === "right",
+      "group-table__grid-item-left": this.columnPosition === "left",
+      "group-table__grid-item-colspan": this.columnPosition === "all",
+      "group-table__grid-item-row-2": this.rowPosition === 2,
+      "group-table__grid-item-row-3": this.rowPosition === 3,
+      "group-table__hide-mobile": this.viewportVisibility === "hideMobile"
     });
   }
 
@@ -58,27 +72,8 @@ export default class TableCell extends React.PureComponent {
     return "group-table__row-link";
   }
 
-  get hoverArrowClassNames() {
-    return "group-table__hover-arrow";
-  }
-
-  get labelIconClass() {
-    return "group-table__label-icon";
-  }
-
-  get headingClassNames() {
-    return classNames({
-      "group-table__table-heading": true,
-      "group-table__heading-small": true,
-    });
-  }
-
   get link() {
     return "/";
-  }
-
-  get hoverIcon() {
-    return this.props.hoverIcon;
   }
 
   get isTable() {
@@ -96,12 +91,6 @@ export default class TableCell extends React.PureComponent {
       <td className={this.cellClassNames}>
         <a href={this.link} className={this.rowLinkClassNames}/>
         {this.props.children}
-        {this.hoverIcon === "arrow" &&
-        <Utility.IconComposer
-          icon="arrowRight16"
-          size={18}
-          iconClass={this.hoverArrowClassNames}
-        />}
       </td>
    );
 
@@ -109,7 +98,10 @@ export default class TableCell extends React.PureComponent {
       <div className={this.listItemContainerClassNames}>
         {this.textStyle !== "valueLarge" &&
           <dt>
-            {this.renderLabel(header.label, header.icon)}
+          <Label
+            label={header.label}
+            icon={header.icon}
+          />
           </dt>
         }
         <dd className={this.cellClassNames}>
