@@ -15,7 +15,6 @@ import Authorize from "hoc/authorize";
 const { request } = entityStoreActions;
 
 class AnnotationDetail extends PureComponent {
-
   static displayName = "Annotation.Annotation.UserContent";
 
   static propTypes = {
@@ -111,7 +110,7 @@ class AnnotationDetail extends PureComponent {
               <Helper.SimpleFormat text={annotation.attributes.body} />
             </section>
             <Authorize kind={"any"}>
-              <nav className="utility">
+              <div className="utility">
                 <ul>
                   {this.props.includeComments ? (
                     <li>
@@ -159,7 +158,7 @@ class AnnotationDetail extends PureComponent {
                     cancel={this.stopAction}
                   />
                 ) : null}
-              </nav>
+              </div>
             </Authorize>
             {this.props.showLogin && (
               <Authorize kind="unauthenticated">
