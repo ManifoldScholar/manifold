@@ -31,12 +31,17 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
             onSubmit={[Function]}
           >
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
               className="form-section"
+              role="group"
             >
               <header
                 className="form-section-label"
               >
-                <h2>
+                <h2
+                  id="1-header"
+                >
                   Branding
                 </h2>
               </header>
@@ -465,12 +470,17 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
               </div>
             </div>
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
               className="form-section"
+              role="group"
             >
               <header
                 className="form-section-label"
               >
-                <h2>
+                <h2
+                  id="1-header"
+                >
                   Typography
                 </h2>
               </header>

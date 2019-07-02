@@ -116,10 +116,13 @@ exports[`Reader SearchContainer renders correctly 1`] = `
             </button>
           </div>
           <div
+            aria-labelledby="show-results-for-header"
             className="filters"
+            role="group"
           >
             <h4
               className="group-label"
+              id="show-results-for-header"
             >
               Show Results For:
             </h4>

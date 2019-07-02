@@ -221,26 +221,39 @@ export default class ListEntitiesListSearch extends PureComponent {
         )}
         {this.hasOptions && (
           <Collapse isOpened={this.state.open}>
-            <div>
-              <div className={this.classNameWithStyle(`${baseClass}__options`)}>
-                {this.filterParams.map((param, i) => (
+            <UID name={id => `${this.idPrefix}-${id}`}>
+              {id => (
+                <div role="group" aria-labelledby={`${id}-header`}>
+                  <p id={`${id}-header`} className="screen-reader-text">
+                    Search options
+                  </p>
                   <div
-                    key={i}
-                    className={this.classNameWithStyle(`${baseClass}__option`)}
+                    className={this.classNameWithStyle(`${baseClass}__options`)}
                   >
-                    <div className={`${baseClass}__option-inner`}>
-                      <span
-                        className={`${baseClass}__options-label ${
-                          i > 0 ? `${baseClass}__options-label--empty` : ""
-                        }`}
+                    {this.filterParams.map((param, i) => (
+                      <div
+                        key={i}
+                        className={this.classNameWithStyle(
+                          `${baseClass}__option`
+                        )}
                       >
-                        {i === 0 ? "Filter Results:" : "\u00A0"}
-                      </span>
-                      <div className={`${baseClass}__select-wrapper`}>
-                        <UID name={id => `${this.idPrefix}-${id}`}>
-                          {id => (
+                        <div className={`${baseClass}__option-inner`}>
+                          <span
+                            className={`${baseClass}__options-label ${
+                              i > 0 ? `${baseClass}__options-label--empty` : ""
+                            }`}
+                          >
+                            {i === 0 ? "Filter Results:" : "\u00A0"}
+                          </span>
+                          <div className={`${baseClass}__select-wrapper`}>
+                            <label
+                              htmlFor={`${id}-filter-${i}`}
+                              className="screen-reader-text"
+                            >
+                              {`Filter results by ${param.label}`}
+                            </label>
                             <select
-                              id={id}
+                              id={`${id}-filter-${i}`}
                               onChange={e => this.setParam(e, param)}
                               value={this.paramValue(param)}
                             >
@@ -255,26 +268,30 @@ export default class ListEntitiesListSearch extends PureComponent {
                                 )
                               )}
                             </select>
-                          )}
-                        </UID>
-                        <Utility.IconComposer icon="disclosureDown24" />
+                            <Utility.IconComposer icon="disclosureDown24" />
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
-                {this.hasOrderParam && (
-                  <div
-                    className={this.classNameWithStyle(`${baseClass}__option`)}
-                  >
-                    <div className={`${baseClass}__option-inner`}>
-                      <span className={`${baseClass}__options-label`}>
-                        Order Results:
-                      </span>
-                      <div className={`${baseClass}__select-wrapper`}>
-                        <UID name={id => `${this.idPrefix}-${id}`}>
-                          {id => (
+                    ))}
+                    {this.hasOrderParam && (
+                      <div
+                        className={this.classNameWithStyle(
+                          `${baseClass}__option`
+                        )}
+                      >
+                        <div className={`${baseClass}__option-inner`}>
+                          <span className={`${baseClass}__options-label`}>
+                            Order Results:
+                          </span>
+                          <div className={`${baseClass}__select-wrapper`}>
+                            <label
+                              htmlFor={`${id}-order`}
+                              className="screen-reader-text"
+                            >
+                              {`Order results`}
+                            </label>
                             <select
-                              id={id}
+                              id={`${id}-order`}
                               onChange={e => this.setParam(e, this.orderParam)}
                               value={this.paramValue(this.orderParam)}
                             >
@@ -289,15 +306,15 @@ export default class ListEntitiesListSearch extends PureComponent {
                                 )
                               )}
                             </select>
-                          )}
-                        </UID>
-                        <Utility.IconComposer icon="disclosureDown24" />
+                            <Utility.IconComposer icon="disclosureDown24" />
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
-                )}
-              </div>
-            </div>
+                </div>
+              )}
+            </UID>
           </Collapse>
         )}
       </div>

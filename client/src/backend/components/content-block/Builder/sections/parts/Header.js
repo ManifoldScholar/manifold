@@ -7,7 +7,9 @@ export default class ProjectContentSectionsPartsHeader extends PureComponent {
   static propTypes = {
     title: PropTypes.string,
     children: PropTypes.string,
-    subtitle: PropTypes.string
+    subtitle: PropTypes.string,
+    headerId: PropTypes.string,
+    instructionsId: PropTypes.string
   };
 
   render() {
@@ -15,11 +17,13 @@ export default class ProjectContentSectionsPartsHeader extends PureComponent {
       <React.Fragment>
         {this.props.title && (
           <header className="form-section-label">
-            <h2>{this.props.title}</h2>
+            <h2 id={this.props.headerId}>{this.props.title}</h2>
           </header>
         )}
         {this.props.children && (
-          <span className="instructions">{this.props.children}</span>
+          <span id={this.props.instructionsId} className="instructions">
+            {this.props.children}
+          </span>
         )}
         {this.props.subtitle && (
           <header className="form-subsection-label">

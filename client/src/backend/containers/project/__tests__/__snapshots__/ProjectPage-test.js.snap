@@ -9,12 +9,17 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       onSubmit={[Function]}
     >
       <div
+        aria-describedby="1-instructions"
+        aria-labelledby="1-header"
         className="form-section"
+        role="group"
       >
         <header
           className="form-section-label"
         >
-          <h2>
+          <h2
+            id="1-header"
+          >
             Appearance
           </h2>
         </header>
@@ -265,12 +270,17 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         </div>
       </div>
       <div
+        aria-describedby="1-instructions"
+        aria-labelledby="1-header"
         className="form-section"
+        role="group"
       >
         <header
           className="form-section-label"
         >
-          <h2>
+          <h2
+            id="1-header"
+          >
             Purchase Options
           </h2>
         </header>
@@ -379,17 +389,23 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         </div>
       </div>
       <div
+        aria-describedby="1-instructions"
+        aria-labelledby="1-header"
         className="form-section"
+        role="group"
       >
         <header
           className="form-section-label"
         >
-          <h2>
+          <h2
+            id="1-header"
+          >
             Download Options
           </h2>
         </header>
         <span
           className="instructions"
+          id="1-instructions"
         >
           If a URL or file is provided, a button to download the file will appear on the project page.  A file takes precedence over a URL.
         </span>

@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isString from "lodash/isString";
 import classNames from "classnames";
+import { UID } from "react-uid";
 import Instructions from "./Instructions";
 
 export default class FieldGroup extends PureComponent {
@@ -45,17 +46,30 @@ export default class FieldGroup extends PureComponent {
     });
 
     return (
-      <div className={classes} key="group">
-        {isString(this.props.label) ? (
-          <header className="form-section-label">
-            <h2>{this.props.label}</h2>
-          </header>
-        ) : null}
-        <Instructions instructions={this.props.instructions} />
-        <div className="form-input-group">
-          {this.renderChildren(this.props)}
-        </div>
-      </div>
+      <UID name={id => `field-group-${id}`}>
+        {id => (
+          <div
+            className={classes}
+            key="group"
+            role="group"
+            aria-labelledby={`${id}-header`}
+            aria-describedby={`${id}-instructions`}
+          >
+            {isString(this.props.label) ? (
+              <header className="form-section-label">
+                <h2 id={`${id}-header`}>{this.props.label}</h2>
+              </header>
+            ) : null}
+            <Instructions
+              id={`${id}-instructions`}
+              instructions={this.props.instructions}
+            />
+            <div className="form-input-group">
+              {this.renderChildren(this.props)}
+            </div>
+          </div>
+        )}
+      </UID>
     );
   }
 }

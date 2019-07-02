@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import config from "config";
 import { UnmountClosed as Collapse } from "react-collapse";
 import classNames from "classnames";
+import { UID } from "react-uid";
 
 export default class NotificationsForm extends Component {
   static propTypes = {
@@ -21,23 +22,43 @@ export default class NotificationsForm extends Component {
 
     return (
       <div className="subscriptions">
-        <h2 className="section-heading-secondary">Project Activity</h2>
-        <div className="form-group">
-          <div className="form-input">
-            <span className="instructions">
-              {`Manifold can send you a daily or weekly email with information about texts,
-            resources, and resource collections that have been added to projects.`}
-            </span>
-          </div>
-          {this.renderDigestFrequency(preferences)}
-          <Collapse isOpened={digestOpen}>
-            {this.renderDigestContent(preferences, digestOpen)}
-          </Collapse>
-        </div>
-        <h2 className="section-heading-secondary">Other Activity</h2>
-        <div className="form-group">
-          {this.renderNotificationContent(preferences)}
-        </div>
+        <UID name={id => `project-activity-${id}`}>
+          {id => (
+            <div
+              role="group"
+              aria-labelledby={`${id}-header`}
+              aria-describedby={`${id}-instructions`}
+            >
+              <h2 id={`${id}-header`} className="section-heading-secondary">
+                Project Activity
+              </h2>
+              <div className="form-group">
+                <div className="form-input">
+                  <span id={`${id}-instructions`} className="instructions">
+                    {`Manifold can send you a daily or weekly email with information about texts,
+                  resources, and resource collections that have been added to projects.`}
+                  </span>
+                </div>
+                {this.renderDigestFrequency(preferences)}
+                <Collapse isOpened={digestOpen}>
+                  {this.renderDigestContent(preferences, digestOpen)}
+                </Collapse>
+              </div>
+            </div>
+          )}
+        </UID>
+        <UID name={id => `other-activity-${id}`}>
+          {id => (
+            <div role="group" aria-labelledby={`${id}-header`}>
+              <h2 id={`${id}-header`} className="section-heading-secondary">
+                Other Activity
+              </h2>
+              <div className="form-group">
+                {this.renderNotificationContent(preferences)}
+              </div>
+            </div>
+          )}
+        </UID>
         <button
           className="utility-button"
           onClick={this.props.unsubscribeAllHandler}

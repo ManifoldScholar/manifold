@@ -10,6 +10,7 @@ import lh from "helpers/linkHandler";
 import { entityStoreActions } from "actions";
 import configHelper from "../helpers/configurations";
 import cloneDeep from "lodash/cloneDeep";
+import { UID } from "react-uid";
 
 const { request } = entityStoreActions;
 
@@ -178,23 +179,34 @@ export class ProjectContent extends PureComponent {
   render() {
     return (
       <section className="backend-project-content">
-        <div className="form-secondary">
-          <DragDropContext
-            onDragStart={this.onDragStart}
-            onDragEnd={this.onDragEnd}
-          >
-            <AvailableSection
-              onClickAdd={this.handleAddEntity}
-              currentBlocks={this.currentBlocks}
-            />
-            <CurrentSection
-              activeDraggableType={this.state.activeDraggableType}
-              entityCallbacks={this.entityCallbacks}
-              currentBlocks={this.currentBlocks}
-            />
-          </DragDropContext>
-          {this.props.children(this.drawerCloseCallback, this.pendingBlock)}
-        </div>
+        <UID name={id => `content-block-builder-${id}`}>
+          {id => (
+            <div
+              className="form-secondary"
+              role="group"
+              aria-labelledby={`${id}-header`}
+              aria-describedby={`${id}-instructions`}
+            >
+              <DragDropContext
+                onDragStart={this.onDragStart}
+                onDragEnd={this.onDragEnd}
+              >
+                <AvailableSection
+                  onClickAdd={this.handleAddEntity}
+                  currentBlocks={this.currentBlocks}
+                  headerId={`${id}-header`}
+                  instructionsId={`${id}-instructions`}
+                />
+                <CurrentSection
+                  activeDraggableType={this.state.activeDraggableType}
+                  entityCallbacks={this.entityCallbacks}
+                  currentBlocks={this.currentBlocks}
+                />
+              </DragDropContext>
+              {this.props.children(this.drawerCloseCallback, this.pendingBlock)}
+            </div>
+          )}
+        </UID>
       </section>
     );
   }

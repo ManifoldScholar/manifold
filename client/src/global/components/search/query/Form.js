@@ -266,13 +266,21 @@ export default class SearchQueryForm extends PureComponent {
           </button>
         </div>
         {this.availableScopes.length > 0 ? (
-          <div className="filters">
+          <div
+            role="group"
+            aria-labelledby="search-within-header"
+            className="filters"
+          >
             {this.props.searchType !== "reader" ? (
-              <h4 className="group-label">{"Search within:"}</h4>
+              <h4 id="search-within-header" className="group-label">
+                {"Search within:"}
+              </h4>
             ) : null}
             <div className="checkbox-group">
               {this.props.searchType === "reader" ? (
-                <h4 className="group-label">{"Search within:"}</h4>
+                <h4 id="search-within-header" className="group-label">
+                  {"Search within:"}
+                </h4>
               ) : null}
               {this.availableScopes.map((scope, index) => {
                 const filterCheckboxId = scope.value + "-" + index;
@@ -305,8 +313,14 @@ export default class SearchQueryForm extends PureComponent {
         ) : null}
 
         {this.props.facets.length > 0 ? (
-          <div className="filters">
-            <h4 className="group-label">{"Show Results For:"}</h4>
+          <div
+            role="group"
+            aria-labelledby="show-results-for-header"
+            className="filters"
+          >
+            <h4 id="show-results-for-header" className="group-label">
+              {"Show Results For:"}
+            </h4>
             <div className="checkbox-group">
               <label htmlFor="all-filters" key={"all"} className="checkbox">
                 <input
