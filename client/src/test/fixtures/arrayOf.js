@@ -206,6 +206,25 @@ function permissions(count = defaultCount) {
   });
 }
 
+function annotations(count = defaultCount, withHighlights = false) {
+  const selectionOne = faker.lorem.sentences(5);
+  const selectionTwo = faker.lorem.sentences(3);
+
+  return arrayOf("annotations", count, annotation => {
+    const user = users(1)[0];
+    annotation.attributes.subject = sample([true, false]) ? selectionOne : selectionTwo;
+    annotation.relationships.creator = user;
+    annotation.attributes.body = faker.lorem.sentences(sample([1,2,3]));
+    if (withHighlights) {
+      annotation.attributes.format = sample(["annotation", "highlight"]);
+    }
+  });
+}
+
+function pages(count = defaultCount) {
+  return arrayOf("pages", count);
+}
+
 export default {
   type: arrayOf,
   users,
@@ -216,5 +235,7 @@ export default {
   resources,
   permissions,
   groups,
-  members
+  members,
+  pages,
+  annotations
 };

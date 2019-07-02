@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helper from "global/components/helper";
 import Utility from "frontend/components/utility";
-import Editor from "./Editor";
+import Editor from "../../Editor";
 import Meta from "./Meta";
 import CommentContainer from "global/containers/comment";
 import classNames from "classnames";
@@ -15,7 +15,8 @@ import Authorize from "hoc/authorize";
 const { request } = entityStoreActions;
 
 class AnnotationDetail extends PureComponent {
-  static displayName = "Annotation.Detail";
+
+  static displayName = "Annotation.Annotation.UserContent";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,

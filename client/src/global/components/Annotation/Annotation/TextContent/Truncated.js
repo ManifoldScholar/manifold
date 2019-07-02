@@ -4,7 +4,8 @@ import classNames from "classnames";
 import nl2br from "nl2br";
 
 export default class AnnotationSelectionTruncated extends PureComponent {
-  static displayName = "Annotation.Selection.Truncated";
+
+  static displayName = "Annotation.Annotation.TextContentTruncated";
 
   static propTypes = {
     selection: PropTypes.string,

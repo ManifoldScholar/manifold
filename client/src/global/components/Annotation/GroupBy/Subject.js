@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { hash } from "utils/string";
 
 export default class AnnotationGroupedBySubject extends PureComponent {
-  static displayName = "Annotation.GroupedBySubject";
+
+  static displayName = "Annotation.GroupBy.Subject";
 
   static propTypes = {
     annotations: PropTypes.array.isRequired,

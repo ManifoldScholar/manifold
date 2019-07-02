@@ -406,6 +406,7 @@ const defaults = {
   annotation: {
     type: "annotations",
     attributes: {
+      createdAt: "2017-04-24T23:25:50.161Z",
       subject: "Gods, Earths, and 85ers",
       body:
         "Hands on your boxes, turn 'em up like seven notches." +

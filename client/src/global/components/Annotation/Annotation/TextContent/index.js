@@ -7,7 +7,8 @@ import Authorize from "hoc/authorize";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class AnnotationSelectionWrapper extends PureComponent {
-  static displayName = "Annotation.Selection.Wrapper";
+
+  static displayName = "Annotation.Annotation.TextContent";
 
   static propTypes = {
     truncate: PropTypes.number,

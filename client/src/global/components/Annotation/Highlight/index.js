@@ -10,6 +10,7 @@ import Authorize from "hoc/authorize";
 const { request } = entityStoreActions;
 
 class HighlightDetail extends PureComponent {
+
   static displayName = "Annotation.Highlight";
 
   static propTypes = {
