@@ -8,7 +8,7 @@ export default class RemoveMemberButton extends React.PureComponent {
   };
 
   get buttonClassNames() {
-    return "group-table__remove-member-button";
+    return "remove-member-button";
   }
 
   removeMember = event => {

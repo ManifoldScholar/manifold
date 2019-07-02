@@ -13,20 +13,20 @@ export default class TableRow extends React.PureComponent {
 
   get rowClassNames() {
     return classNames({
-      "group-table__row": true,
-      "group-table__row--body": true,
-      "group-table__list": !this.isTable,
+      "table__row": true,
+      "table__row--body": true,
+      "table__list": !this.isTable,
     });
   }
 
   get rowLinkClassNames() {
-    return "group-table__row-link";
+    return "table__row-link";
   }
 
   get itemHeadingClassNames() {
     return classNames({
-      "group-table__body-text" : true,
-      "group-table__value-large": true,
+      "table__body-text" : true,
+      "table__value-large": true,
     })
   }
 

@@ -9,7 +9,7 @@ export default class TablePagination extends React.PureComponent {
   }
 
   get paginationClassNames() {
-    return "group-table__pagination";
+    return "table__pagination";
   }
 
   render() {

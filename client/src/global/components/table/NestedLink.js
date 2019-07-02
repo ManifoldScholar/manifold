@@ -8,11 +8,11 @@ export default class NestedLink extends React.PureComponent {
   };
 
   get nestedLinkArrowClassNames() {
-    return "group-table__nested-link-arrow";
+    return "table__nested-link-arrow";
   }
 
   get nestedLinkClassNames() {
-    return "group-table__nested-link";
+    return "table__nested-link";
   }
 
   get nestedLink() {

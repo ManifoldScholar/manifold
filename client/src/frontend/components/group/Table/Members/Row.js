@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Utility from "global/components/utility";
 import PropTypes from "prop-types";
-import Cell from "../Base/Cell";
-import Avatar from "../Base/Avatar";
-import RemoveMemberButton from "../Base/RemoveMember";
-import NameWithArrow from "../Base/NameWithArrow";
+import Cell from "global/components/table/Cell";
+import Avatar from "global/components/table/Avatar";
+import RemoveMemberButton from "./RemoveMember";
+import NameWithArrow from "global/components/table/NameWithArrow";
 
 export default class MemberRow extends Component {
 

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Utility from "global/components/utility";
 import PropTypes from "prop-types";
-import Cell from "../Base/Cell";
-import NestedLink from "../Base/NestedLink";
-import NameWithArrow from "../Base/NameWithArrow";
+import Cell from "global/components/table/Cell";
+import NestedLink from "global/components/table/NestedLink";
+import NameWithArrow from "global/components/table/NameWithArrow";
 
 export default class GroupRow extends React.PureComponent {
 
@@ -62,7 +62,7 @@ export default class GroupRow extends React.PureComponent {
   }
 
   get lockIconClassNames() {
-    return "group-table__private-icon";
+    return "table__private-icon";
   }
 
   render() {

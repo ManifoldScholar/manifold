@@ -12,11 +12,11 @@ export default class NameWithArrow extends React.PureComponent {
   }
 
   get hoverArrowClassNames() {
-    return "group-table__hover-arrow";
+    return "table__hover-arrow";
   }
 
   get nameContainerClassNames() {
-    return "group-table__name-container"
+    return "table__name-container"
   }
 
   render() {

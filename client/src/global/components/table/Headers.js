@@ -13,13 +13,13 @@ export default class TableHeaders extends React.PureComponent {
   }
 
   get rowClassNames() {
-    return "group-table__row";
+    return "table__row";
   }
 
   cellClassNames(cellPadding) {
     return classNames({
-      "group-table__padded-cell": true,
-      "group-table__small-padding-left": cellPadding === "leftSmall"
+      "table__padded-cell": true,
+      "table__small-padding-left": cellPadding === "leftSmall"
     });
   }
 

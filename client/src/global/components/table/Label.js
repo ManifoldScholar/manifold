@@ -16,13 +16,13 @@ export default class Label extends React.PureComponent {
   }
 
   get labelIconClass() {
-    return "group-table__label-icon";
+    return "table__label-icon";
   }
 
   get headingClassNames() {
     return classNames({
-      "group-table__table-heading": true,
-      "group-table__heading-small": true,
+      "table__table-heading": true,
+      "table__heading-small": true,
     });
   }
 

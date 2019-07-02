@@ -1,4 +1,4 @@
-.group-table {
+.table {
 
   &__count-container {
     @include panelRoundedLight;
@@ -21,7 +21,7 @@
       &:hover {
         background-color:$neutral05;
 
-        .group-table__hover-arrow {
+        .table__hover-arrow {
           opacity: 1;
         }
       }
@@ -107,7 +107,7 @@
     &:hover {
       background-color: $neutralWhite;
 
-      .group-table__nested-link-arrow {
+      .table__nested-link-arrow {
         opacity: 1;
       }
     }
@@ -265,22 +265,6 @@
 
     @include respond($break85) {
       display: inline-block;
-    }
-  }
-
-  &__remove-member-button {
-    @include buttonUnstyled;
-    @include formLabelPrimary;
-    position: relative;
-    border: 1px solid $sp40Tertiary;
-    color: $sp40Tertiary;
-    border-radius: 12px;
-    padding: 4px 15px 5px;
-    transition: all $duration $timing;
-
-    &:hover {
-      color: $neutralWhite;
-      background-color: $sp40Tertiary;
     }
   }
 }

@@ -42,34 +42,34 @@ export default class TableCell extends React.PureComponent {
 
   get cellClassNames() {
     return classNames({
-      "group-table__body-text": true,
-      "group-table__centered": this.alignment === "center",
-      "group-table__right": this.alignment === "right",
-      "group-table__value-large": this.textStyle === "valueLarge",
-      "group-table__right-unpadded": this.cellPadding === "rightUnpadded",
-      "group-table__small-padding-left": this.cellPadding === "leftSmall",
-      "group-table__value-standard": !this.textStyle,
-      "group-table__padded-cell": this.isTable,
-      "group-table__list-value": !this.isTable,
-      "group-table__cell-small": this.cellSize === "cellSmall"
+      "table__body-text": true,
+      "table__centered": this.alignment === "center",
+      "table__right": this.alignment === "right",
+      "table__value-large": this.textStyle === "valueLarge",
+      "table__right-unpadded": this.cellPadding === "rightUnpadded",
+      "table__small-padding-left": this.cellPadding === "leftSmall",
+      "table__value-standard": !this.textStyle,
+      "table__padded-cell": this.isTable,
+      "table__list-value": !this.isTable,
+      "table__cell-small": this.cellSize === "cellSmall"
     });
   }
 
   get listItemContainerClassNames() {
     return classNames({
-      "group-table__list-item-container": !this.textStyle,
-      "group-table__list-header-container": this.textStyle,
-      "group-table__grid-item-right": this.columnPosition === "right",
-      "group-table__grid-item-left": this.columnPosition === "left",
-      "group-table__grid-item-colspan": this.columnPosition === "all",
-      "group-table__grid-item-row-2": this.rowPosition === 2,
-      "group-table__grid-item-row-3": this.rowPosition === 3,
-      "group-table__hide-mobile": this.viewportVisibility === "hideMobile"
+      "table__list-item-container": !this.textStyle,
+      "table__list-header-container": this.textStyle,
+      "table__grid-item-right": this.columnPosition === "right",
+      "table__grid-item-left": this.columnPosition === "left",
+      "table__grid-item-colspan": this.columnPosition === "all",
+      "table__grid-item-row-2": this.rowPosition === 2,
+      "table__grid-item-row-3": this.rowPosition === 3,
+      "table__hide-mobile": this.viewportVisibility === "hideMobile"
     });
   }
 
   get rowLinkClassNames() {
-    return "group-table__row-link";
+    return "table__row-link";
   }
 
   get link() {

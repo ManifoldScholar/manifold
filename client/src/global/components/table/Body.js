@@ -16,7 +16,7 @@ export default class TableBody extends React.PureComponent {
   }
 
   get tableClassNames() {
-    return "group-table__table";
+    return "table__table";
   }
 
   render() {

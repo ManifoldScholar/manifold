@@ -9,14 +9,14 @@ export default class Avatar extends React.PureComponent {
 
   get avatarClassNames() {
     return classNames({
-      "group-table__avatar-placeholder" : !this.avatar,
-      "group-table__avatar-container": this.avatar,
-      "group-table__hide-desktop": this.viewportVisibility === "hideDesktop"
+      "table__avatar-placeholder" : !this.avatar,
+      "table__avatar-container": this.avatar,
+      "table__hide-desktop": this.viewportVisibility === "hideDesktop"
     });
   }
 
   get avatarImageClassNames() {
-    return "group-table__avatar-image";
+    return "table__avatar-image";
   }
 
   get avatar() {

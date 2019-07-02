@@ -8,18 +8,18 @@ export default class TableCount extends React.PureComponent {
   }
 
   get tableCountContainerClassNames() {
-    return "group-table__count-container";
+    return "table__count-container";
   }
 
   get tableCountHeading() {
     return classNames({
-      "group-table__table-count-heading": true,
-      "group-table__heading-small": true
+      "table__table-count-heading": true,
+      "table__heading-small": true
     });
   }
 
   get tableCountFigure() {
-    return "group-table__count-figure";
+    return "table__count-figure";
   }
 
   get pagination() {
