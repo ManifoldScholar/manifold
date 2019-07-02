@@ -52,13 +52,15 @@ export default class Filters extends Component {
 
   render() {
     return (
-      <nav className="filters">
-        <h4 className="label">Show your:</h4>
-        <div className="checkbox-group">
-          {this.renderCheckBox("Highlights", "highlight")}
-          {this.renderCheckBox("Annotations", "annotation")}
+      <fieldset className="filters">
+        <div className="notes-drawer__filters-inner">
+          <legend className="label">Show your:</legend>
+          <div className="checkbox-group">
+            {this.renderCheckBox("Highlights", "highlight")}
+            {this.renderCheckBox("Annotations", "annotation")}
+          </div>
         </div>
-      </nav>
+      </fieldset>
     );
   }
 }

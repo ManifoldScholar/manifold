@@ -28,81 +28,85 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
       </span>
     </button>
   </div>
-  <nav
+  <fieldset
     className="filters"
   >
-    <h4
-      className="label"
-    >
-      Show your:
-    </h4>
     <div
-      className="checkbox-group"
+      className="notes-drawer__filters-inner"
     >
-      <label
-        className="checkbox"
-        htmlFor="highlight-checkbox"
+      <legend
+        className="label"
       >
-        <input
-          checked={true}
-          id="highlight-checkbox"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <div
-          aria-hidden="true"
-          className="checkbox__indicator"
-        >
-          <svg
-            aria-hidden={true}
-            className="manicon-svg checkbox__icon svg-icon--checkmark16"
-            height={16}
-            viewBox="0 0 16 16"
-            width={16}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polygon
-              fill="currentColor"
-              fillRule="nonzero"
-              points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-            />
-          </svg>
-        </div>
-        Highlights
-      </label>
-      <label
-        className="checkbox"
-        htmlFor="annotation-checkbox"
+        Show your:
+      </legend>
+      <div
+        className="checkbox-group"
       >
-        <input
-          checked={true}
-          id="annotation-checkbox"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <div
-          aria-hidden="true"
-          className="checkbox__indicator"
+        <label
+          className="checkbox"
+          htmlFor="highlight-checkbox"
         >
-          <svg
-            aria-hidden={true}
-            className="manicon-svg checkbox__icon svg-icon--checkmark16"
-            height={16}
-            viewBox="0 0 16 16"
-            width={16}
-            xmlns="http://www.w3.org/2000/svg"
+          <input
+            checked={true}
+            id="highlight-checkbox"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            aria-hidden="true"
+            className="checkbox__indicator"
           >
-            <polygon
-              fill="currentColor"
-              fillRule="nonzero"
-              points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-            />
-          </svg>
-        </div>
-        Annotations
-      </label>
+            <svg
+              aria-hidden={true}
+              className="manicon-svg checkbox__icon svg-icon--checkmark16"
+              height={16}
+              viewBox="0 0 16 16"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                fill="currentColor"
+                fillRule="nonzero"
+                points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
+              />
+            </svg>
+          </div>
+          Highlights
+        </label>
+        <label
+          className="checkbox"
+          htmlFor="annotation-checkbox"
+        >
+          <input
+            checked={true}
+            id="annotation-checkbox"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            aria-hidden="true"
+            className="checkbox__indicator"
+          >
+            <svg
+              aria-hidden={true}
+              className="manicon-svg checkbox__icon svg-icon--checkmark16"
+              height={16}
+              viewBox="0 0 16 16"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                fill="currentColor"
+                fillRule="nonzero"
+                points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
+              />
+            </svg>
+          </div>
+          Annotations
+        </label>
+      </div>
     </div>
-  </nav>
+  </fieldset>
   <nav>
     <ul>
       <li>

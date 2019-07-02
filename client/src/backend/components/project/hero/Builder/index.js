@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { UID } from "react-uid";
 import Block from "./Block";
 import Forms from "./forms";
 import Drawer from "global/containers/drawer";
@@ -63,42 +64,51 @@ export default class Builder extends PureComponent {
     return (
       <React.Fragment>
         <section className="hero-builder form-secondary">
-          <div className="form-section">
-            <header className="form-section-label">
-              <h2>Hero Block</h2>
-            </header>
-            <span className="instructions">
-              The Hero Block is the top of your project page. Customize its
-              content, layout, and settings here.
-            </span>
+          <UID name={id => `hero-builder-${id}`}>
+            {id => (
+              <div
+                className="form-section"
+                role="group"
+                aria-labelledby={`${id}-header`}
+                aria-describedby={`${id}-instructions`}
+              >
+                <header className="form-section-label">
+                  <h2 id={`${id}-header`}>Hero Block</h2>
+                </header>
+                <span id={`${id}-instructions`} className="instructions">
+                  The Hero Block is the top of your project page. Customize its
+                  content, layout, and settings here.
+                </span>
 
-            <Block
-              title="Description + Images"
-              description="Description Text, Cover Art, and Background Image"
-              onEdit={this.openDescriptionDrawer}
-            />
-            <Block
-              title="Calls-to-Action"
-              description="Buttons and links to related resources"
-              onEdit={this.toggleActionCallouts}
-              open={this.isActionCalloutsOpen}
-            >
-              {this.props.actionCallouts && (
-                <ActionCallouts
-                  refresh={this.props.refresh}
-                  dispatch={this.props.dispatch}
-                  project={this.props.project}
-                  actionCallouts={this.props.actionCallouts}
-                  actionCalloutsResponse={this.props.actionCalloutsResponse}
+                <Block
+                  title="Description + Images"
+                  description="Description Text, Cover Art, and Background Image"
+                  onEdit={this.openDescriptionDrawer}
                 />
-              )}
-            </Block>
-            <Block
-              title="Social Links"
-              description="Links to social platforms and hashtag"
-              onEdit={this.openSocialDrawer}
-            />
-          </div>
+                <Block
+                  title="Calls-to-Action"
+                  description="Buttons and links to related resources"
+                  onEdit={this.toggleActionCallouts}
+                  open={this.isActionCalloutsOpen}
+                >
+                  {this.props.actionCallouts && (
+                    <ActionCallouts
+                      refresh={this.props.refresh}
+                      dispatch={this.props.dispatch}
+                      project={this.props.project}
+                      actionCallouts={this.props.actionCallouts}
+                      actionCalloutsResponse={this.props.actionCalloutsResponse}
+                    />
+                  )}
+                </Block>
+                <Block
+                  title="Social Links"
+                  description="Links to social platforms and hashtag"
+                  onEdit={this.openSocialDrawer}
+                />
+              </div>
+            )}
+          </UID>
         </section>
         <Drawer.Wrapper
           lockScroll="always"
