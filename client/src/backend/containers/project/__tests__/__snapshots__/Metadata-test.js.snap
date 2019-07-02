@@ -9,12 +9,17 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
       onSubmit={[Function]}
     >
       <div
+        aria-describedby="1-instructions"
+        aria-labelledby="1-header"
         className="form-section"
+        role="group"
       >
         <header
           className="form-section-label"
         >
-          <h2>
+          <h2
+            id="1-header"
+          >
             Identity
           </h2>
         </header>
@@ -62,12 +67,17 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         </div>
       </div>
       <div
+        aria-describedby="1-instructions"
+        aria-labelledby="1-header"
         className="form-section"
+        role="group"
       >
         <header
           className="form-section-label"
         >
-          <h2>
+          <h2
+            id="1-header"
+          >
             Publisher
           </h2>
         </header>
@@ -159,12 +169,17 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         </div>
       </div>
       <div
+        aria-describedby="1-instructions"
+        aria-labelledby="1-header"
         className="form-section"
+        role="group"
       >
         <header
           className="form-section-label"
         >
-          <h2>
+          <h2
+            id="1-header"
+          >
             Bibliographic
           </h2>
         </header>
@@ -312,12 +327,17 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
         </div>
       </div>
       <div
+        aria-describedby="1-instructions"
+        aria-labelledby="1-header"
         className="form-section"
+        role="group"
       >
         <header
           className="form-section-label"
         >
-          <h2>
+          <h2
+            id="1-header"
+          >
             Other
           </h2>
         </header>

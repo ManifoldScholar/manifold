@@ -42,17 +42,21 @@ export default class VisibilityMenuBody extends PureComponent {
 
     return (
       <li key={`visibility-${format}`}>
-        <IconComposer
-          icon={this.groupIcon(format)}
-          size={30.667}
-          iconClass="visibility-menu__group-icon"
-        />
-        <span>{label}</span>
-        <div className="filters">
-          {Object.keys(filterState).map((key, index) => {
-            return this.renderCheckbox(key, filterState, format, index);
-          })}
-        </div>
+        <fieldset className="visibility-menu__group">
+          <legend className="visibility-menu__legend">
+            <IconComposer
+              icon={this.groupIcon(format)}
+              size={30.667}
+              iconClass="visibility-menu__group-icon"
+            />
+            <span>{label}</span>
+          </legend>
+          <div className="visibility-menu__filters">
+            {Object.keys(filterState).map((key, index) => {
+              return this.renderCheckbox(key, filterState, format, index);
+            })}
+          </div>
+        </fieldset>
       </li>
     );
   }

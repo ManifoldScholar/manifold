@@ -59,12 +59,17 @@ exports[`Backend Permission New Container renders correctly 1`] = `
           style={Object {}}
         >
           <div
+            aria-describedby="1-instructions"
+            aria-labelledby="1-header"
             className="form-section horizontal"
+            role="group"
           >
             <header
               className="form-section-label"
             >
-              <h2>
+              <h2
+                id="1-header"
+              >
                 Permissions
               </h2>
             </header>

@@ -31,12 +31,17 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
             onSubmit={[Function]}
           >
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
               className="form-section"
+              role="group"
             >
               <header
                 className="form-section-label"
               >
-                <h2>
+                <h2
+                  id="1-header"
+                >
                   Message Settings
                 </h2>
               </header>
@@ -179,12 +184,17 @@ The Manifold Team"
               </div>
             </div>
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
               className="form-section"
+              role="group"
             >
               <header
                 className="form-section-label"
               >
-                <h2>
+                <h2
+                  id="1-header"
+                >
                   Email Delivery Method
                 </h2>
               </header>
@@ -247,12 +257,17 @@ The Manifold Team"
               </div>
             </div>
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
               className="form-section"
+              role="group"
             >
               <header
                 className="form-section-label"
               >
-                <h2>
+                <h2
+                  id="1-header"
+                >
                   Sendmail Configuration
                 </h2>
               </header>
@@ -365,12 +380,17 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
             onSubmit={[Function]}
           >
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
               className="form-section"
+              role="group"
             >
               <header
                 className="form-section-label"
               >
-                <h2>
+                <h2
+                  id="1-header"
+                >
                   Message Settings
                 </h2>
               </header>
@@ -513,12 +533,17 @@ The Manifold Team"
               </div>
             </div>
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
               className="form-section"
+              role="group"
             >
               <header
                 className="form-section-label"
               >
-                <h2>
+                <h2
+                  id="1-header"
+                >
                   Email Delivery Method
                 </h2>
               </header>
@@ -581,12 +606,17 @@ The Manifold Team"
               </div>
             </div>
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
               className="form-section"
+              role="group"
             >
               <header
                 className="form-section-label"
               >
-                <h2>
+                <h2
+                  id="1-header"
+                >
                   SMTP Configuration
                 </h2>
               </header>

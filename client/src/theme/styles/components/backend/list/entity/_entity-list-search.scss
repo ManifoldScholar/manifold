@@ -156,6 +156,10 @@
       border: 1px solid $neutral80;
       border-radius: 8px;
       transition: border-color $duration $timing;
+
+      &:focus {
+        @include focusOutline;
+      }
     }
 
     svg {

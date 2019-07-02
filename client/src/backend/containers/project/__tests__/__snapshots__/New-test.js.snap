@@ -137,12 +137,17 @@ exports[`Backend Project New Container renders correctly 1`] = `
             onSubmit={[Function]}
           >
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
               className="form-section"
+              role="group"
             >
               <header
                 className="form-section-label"
               >
-                <h2>
+                <h2
+                  id="1-header"
+                >
                   Title and Description
                 </h2>
               </header>
@@ -216,12 +221,17 @@ exports[`Backend Project New Container renders correctly 1`] = `
               </div>
             </div>
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
               className="form-section"
+              role="group"
             >
               <header
                 className="form-section-label"
               >
-                <h2>
+                <h2
+                  id="1-header"
+                >
                   Layout
                 </h2>
               </header>

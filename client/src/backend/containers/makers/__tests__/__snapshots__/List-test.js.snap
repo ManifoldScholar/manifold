@@ -114,7 +114,16 @@ Array [
           <div
             className="ReactCollapse--content"
           >
-            <div>
+            <div
+              aria-labelledby="1-header"
+              role="group"
+            >
+              <p
+                className="screen-reader-text"
+                id="1-header"
+              >
+                Search options
+              </p>
               <div
                 className="entity-list-search__options entity-list-search__options--horizontal"
               >
@@ -132,8 +141,14 @@ Array [
                     <div
                       className="entity-list-search__select-wrapper"
                     >
+                      <label
+                        className="screen-reader-text"
+                        htmlFor="1-order"
+                      >
+                        Order results
+                      </label>
                       <select
-                        id={1}
+                        id="1-order"
                         onChange={[Function]}
                         value="last_name"
                       >

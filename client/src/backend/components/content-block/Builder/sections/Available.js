@@ -10,7 +10,9 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
 
   static propTypes = {
     currentBlocks: PropTypes.array.isRequired,
-    onClickAdd: PropTypes.func
+    onClickAdd: PropTypes.func,
+    headerId: PropTypes.string,
+    instructionsId: PropTypes.string
   };
 
   static defaultProps = {
@@ -24,7 +26,12 @@ export default class ProjectContentSectionsAvailable extends PureComponent {
   render() {
     return (
       <div className="form-section">
-        <Header title="Content Blocks" subtitle="Blocks:">
+        <Header
+          title="Content Blocks"
+          subtitle="Blocks:"
+          headerId={this.props.headerId}
+          instructionsId={this.props.instructionsId}
+        >
           Customize the rest of the content on your project page. Add, delete,
           and reorder content blocks, edit settings, and toggle visibility.
         </Header>
