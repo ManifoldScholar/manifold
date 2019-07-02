@@ -141,6 +141,10 @@
     position: relative;
 
     @include respond($break85) {
+      max-width: 245px;
+    }
+
+    @include respond($break95) {
       max-width: 360px;
     }
   }
@@ -215,6 +219,14 @@
 
   &__cell-small {
     width: 44px;
+  }
+
+  &__cell-medium {
+    width: 132px;
+    // display: inline-block;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
   }
 
   &__small-padding-left {

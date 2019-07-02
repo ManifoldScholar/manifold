@@ -53,6 +53,10 @@ export default class GroupRow extends React.PureComponent {
     return "center";
   }
 
+  get cellMedium() {
+    return "cellMedium";
+  }
+
   get hoverIcon() {
     return "arrow";
   }
@@ -78,6 +82,7 @@ export default class GroupRow extends React.PureComponent {
         <Cell
           index={1}
           columnPosition={"left"}
+          cellSize={this.cellMedium}
         >
           {this.modelAttributes.type}
           {this.modelAttributes.type === "private" &&
@@ -91,6 +96,7 @@ export default class GroupRow extends React.PureComponent {
         <Cell
           index={2}
           columnPosition={"left"}
+          cellSize={this.cellMedium}
         >
           {this.modelAttributes.role}
         </Cell>

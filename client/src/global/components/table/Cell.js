@@ -51,7 +51,8 @@ export default class TableCell extends React.PureComponent {
       "table__value-standard": !this.textStyle,
       "table__padded-cell": this.isTable,
       "table__list-value": !this.isTable,
-      "table__cell-small": this.cellSize === "cellSmall"
+      "table__cell-small": this.cellSize === "cellSmall",
+      "table__cell-medium": this.cellSize === "cellMedium"
     });
   }
 

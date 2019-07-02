@@ -83,7 +83,7 @@ export default class MemberRow extends Component {
           />
           <NameWithArrow name={this.modelAttributes.fullName} />
         </Cell>
-        <Cell index={2} columnPosition={"left"}>
+        <Cell index={2} columnPosition={"left"} cellSize={"cellMedium"}>
           {this.modelAttributes.role}
         </Cell>
         <Cell align={this.alignCenter} index={3} columnPosition={"right"}>
@@ -92,7 +92,12 @@ export default class MemberRow extends Component {
         <Cell align={this.alignCenter} index={4} columnPosition={"right"}>
           {this.modelAttributes.highlightCount}
         </Cell>
-        <Cell index={5} columnPosition={"left"} rowPosition={3}>
+        <Cell
+          index={5}
+          columnPosition={"left"}
+          rowPosition={3}
+          cellSize={"cellMedium"}
+        >
           <RemoveMemberButton />
         </Cell>
       </React.Fragment>
