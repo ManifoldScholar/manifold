@@ -35,8 +35,9 @@
     > ul {
       @include listHorizontal;
       @include drawerIndent(padding-left);
+      display: flex;
 
-      li {
+      > li {
         + li {
           margin-left: 1.571em;
         }

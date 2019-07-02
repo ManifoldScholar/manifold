@@ -1,26 +1,36 @@
-.confirmation {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.confirmable-button {
+  &__confirm-list {
+    @include listUnstyled;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__confirm-item {}
 
   &__button {
-    @include listButtonSimple;
+    @include buttonUnstyled;
+    transition: color $duration $timing;
 
-    &--deny {
-      &:hover, &:focus {
-        color: $sp40Tertiary;
+    &--delete {}
+
+    &--confirm {
+      margin-top: 5px;
+
+      &:hover,
+      &:focus {
+        color: $accentPrimaryDark;
       }
     }
-  }
 
-  &__button-expanded {
-    @include buttonUnstyled;
-    @include utilityPrimary;
-    font-size: 14px;
-    color: $neutral80;
-  }
+    &--deny {
+      margin-top: 5px;
 
-  &__button, &__button-expanded {
-    margin-top: 5px;
+      &:hover,
+      &:focus {
+        // remove !important once .annotation-annotation is refactored
+        color: $sp40Tertiary !important; /* stylelint-disable-line declaration-no-important */
+      }
+    }
   }
 }
