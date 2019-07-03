@@ -10,8 +10,12 @@
 .visibility-menu {
   @include uiPanelMenu;
 
-  ul li {
-    padding: 30px 35px;
+  ul {
+    @include listUnstyled;
+
+    li {
+      padding: 30px 35px;
+    }
   }
 
   &__group-icon {

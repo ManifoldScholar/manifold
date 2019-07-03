@@ -18,15 +18,19 @@ export class AppearanceMenuBody extends Component {
     resetTypography: PropTypes.func
   };
 
-  setColorHandler = (event, scheme) => {
-    event.stopPropagation();
-    this.props.setColorScheme(scheme);
+  handleFontStyleControl = event => {
+    this.props.selectFont(event.target.value);
+    this.props.setScreenReaderStatus(
+      this.resetOptionMessage("font", event.target.value)
+    );
   };
 
-  selectFontHandler = (event, font) => {
-    event.stopPropagation();
-    this.props.selectFont(font);
-  };
+  handleColorSchemeControl = event => {
+    this.props.setColorScheme(event.target.value);
+    this.props.setScreenReaderStatus(
+      this.resetOptionMessage("color scheme", event.target.value)
+    );
+  }
 
   incrementSizeHandler = (event, enabled) => {
     event.stopPropagation();
@@ -46,7 +50,7 @@ export class AppearanceMenuBody extends Component {
 
   resetHandler = event => {
     event.stopPropagation();
-    this.setColorHandler(event, "light");
+    this.props.setColorScheme("light");
     this.props.resetTypography();
     this.props.setScreenReaderStatus(this.resetMessage);
   };
@@ -61,38 +65,6 @@ export class AppearanceMenuBody extends Component {
     event.stopPropagation();
     this.props.decrementMargins();
     this.props.setScreenReaderStatus(this.decrementMarginsMessage);
-  };
-
-  serifButtonHandler = event => {
-    const fontType = "serif";
-    this.selectFontHandler(event, fontType);
-    this.props.setScreenReaderStatus(
-      this.resetOptionMessage("font", fontType)
-    );
-  };
-
-  sansSerifButtonHandler = event => {
-    const fontType = "sans-serif";
-    this.selectFontHandler(event, "sans-serif");
-    this.props.setScreenReaderStatus(
-      this.resetOptionMessage("font", fontType)
-    );
-  };
-
-  handleLightButtonClick = event => {
-    const colorScheme = "light";
-    this.setColorHandler(event, colorScheme);
-    this.props.setScreenReaderStatus(
-      this.resetOptionMessage("color scheme", colorScheme)
-    );
-  };
-
-  handleDarkButtonClick = event => {
-    const colorScheme = "dark";
-    this.setColorHandler(event, colorScheme);
-    this.props.setScreenReaderStatus(
-      this.resetOptionMessage("color scheme", colorScheme)
-    );
   };
 
   resetOptionMessage(appearanceType, option) {
@@ -143,24 +115,20 @@ export class AppearanceMenuBody extends Component {
     return this.props.appearance.colors.colorScheme;
   }
 
-  get sansDecreasable() {
-    return this.fontSize.current > this.fontSize.min
-    && this.typography.font === "sans-serif";
+  get sansDisabled() {
+    return this.typography.font !== "sans-serif";
   }
 
-  get sansIncreasable() {
-    return this.fontSize.current < this.fontSize.max
-    && this.typography.font === "sans-serif";
+  get serifDisabled() {
+    return this.typography.font !== "serif";
   }
 
-  get serifDecreasable() {
-    return this.fontSize.current > this.fontSize.min
-    && this.typography.font === "serif";
+  get fontSizeDecreasable() {
+    return this.fontSize.current > this.fontSize.min;
   }
 
-  get serifIncreasable() {
-    return this.fontSize.current < this.fontSize.max
-    && this.typography.font === "serif";
+  get fontSizeIncreasable() {
+    return this.fontSize.current < this.fontSize.max;
   }
 
   get resetDisabled() {
@@ -182,6 +150,10 @@ export class AppearanceMenuBody extends Component {
     return "appearance-menu";
   }
 
+  get headerClassNames() {
+    return "appearance-menu__header";
+  }
+
   get headingClassNames() {
     return "appearance-menu__heading";
   }
@@ -190,8 +162,20 @@ export class AppearanceMenuBody extends Component {
     return "appearance-menu__section";
   }
 
+  get listClassNames() {
+    return "appearance-menu__list";
+  }
+
+  get controlFontWrapperClassNames() {
+    return "appearance-menu__font-control-group";
+  }
+
+  get controlFontStyleClassNames() {
+    return "appearance-menu__font-style-control";
+  }
+
   get controlFontClassNames() {
-    return "appearance-menu__font-controls";
+    return "appearance-menu__font-size-control";
   }
 
   get fontSizeButtonClassNames() {
@@ -204,22 +188,6 @@ export class AppearanceMenuBody extends Component {
 
   get screenReaderTextClassNames() {
     return "screen-reader-text";
-  }
-
-  get serifButtonClassNames() {
-    return classNames({
-      "appearance-menu__font-type appearance-menu__font-type--serif": true,
-      "appearance-menu__font-type--active": this.typography.font === "serif",
-      "appearance-menu__button-base": true
-    });
-  }
-
-  get sansSerifButtonClassNames() {
-    return classNames({
-      "appearance-menu__font-type appearance-menu__font-type--sans-serif": true,
-      "appearance-menu__font-type--active": this.typography.font === "sans-serif",
-      "appearance-menu__button-base": true
-    });
   }
 
   get colorButtonContainerClassNames() {
@@ -272,76 +240,175 @@ export class AppearanceMenuBody extends Component {
     return "appearance-menu__reload-icon"
   }
 
+  get fontStyleOptions() {
+    return [
+      {
+        label: "Serif",
+        value: "serif"
+      }, {
+        label: "Sans-serif",
+        value: "sans-serif"
+      }
+    ];
+  }
+
+  get colorSchemeOptions() {
+    return [
+      {
+        label: "Light",
+        value: "light"
+      }, {
+        label: "Dark",
+        value: "dark"
+      }
+    ];
+  }
+
+  get fontStyleControlName() {
+    return "font-style-radios";
+  }
+
+  get colorSchemeControlName() {
+    return "color-scheme-radios";
+  }
+
+  renderFontStyleControl() {
+    const labelClassName = option => classNames({
+      "appearance-menu__button-base": true,
+      "appearance-menu__font-style": true,
+      [`appearance-menu__font-style--${option.value}`]: true,
+      "appearance-menu__font-style--active": this.typography.font === option.value
+    });
+
+    return (
+      <fieldset className="appearance-menu__radio-group">
+        <legend className="screen-reader-text">
+          Select font style for reader
+        </legend>
+        <div className="appearance-menu__radio-stack">
+          {this.fontStyleOptions.map(option => (
+            <label key={option.value} className={labelClassName(option)}>
+              <input
+                value={option.value}
+                name={this.fontStyleControlName}
+                type="radio"
+                checked={option.value === this.typography.font}
+                onChange={this.handleFontStyleControl}
+                className="appearance-menu__radio-input"
+              />
+              <span className="appearance-menu__radio-label">
+                {option.label}
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    );
+  }
+
+  renderColorSchemeControl() {
+    const labelClassName = option => classNames({
+      "appearance-menu__button-base": true,
+      "appearance-menu__color-scheme": true,
+      [`appearance-menu__color-scheme--${option.value}`]: true,
+      "appearance-menu__color-scheme--active": this.colorScheme === option.value
+    });
+
+    return (
+      <fieldset className="appearance-menu__radio-group">
+        <legend className="screen-reader-text">
+          Select color scheme for reader
+        </legend>
+        {this.colorSchemeOptions.map(option => (
+          <label key={option.value} className={labelClassName(option)}>
+            <input
+              value={option.value}
+              name={this.colorSchemeControlName}
+              type="radio"
+              checked={option.value === this.colorScheme}
+              onChange={this.handleColorSchemeControl}
+              className="appearance-menu__radio-input"
+            />
+            <Utility.IconComposer
+              icon="CheckUnique"
+              size={30}
+              iconClass="appearance-menu__color-scheme-icon"
+            />
+            <span className="screen-reader-text">
+              {option.label}
+            </span>
+          </label>
+        ))}
+      </fieldset>
+    );
+  }
+
   renderFontControls() {
     return (
       <li className={this.sectionClassNames}>
-        <div className={this.controlFontClassNames}>
-          <button
-            className={this.serifButtonClassNames}
-            onClick={this.serifButtonHandler}
-          >
-            {"Serif"}
-          </button>
-          <div>
-            <button
-              className={this.fontSizeButtonClassNames}
-              disabled={!this.serifDecreasable}
-              onClick={event => {
-                this.decrementSizeHandler(event, this.serifDecreasable);
-              }}
-            >
-              <Utility.IconComposer icon="MinusUnique" size={30} />
-              <span className={this.screenReaderTextClassNames}>
-                {"Decrease font size"}
-              </span>
-            </button>
-            <button
-              className={this.fontSizeButtonClassNames}
-              disabled={!this.serifIncreasable}
-              onClick={event => {
-                this.incrementSizeHandler(event, this.serifIncreasable);
-              }}
-            >
-              <Utility.IconComposer icon="PlusUnique" size={30} />
-              <span className={this.screenReaderTextClassNames}>
-                {"Increase font size"}
-              </span>
-            </button>
+        <div className={this.controlFontWrapperClassNames}>
+          <div className={this.controlFontStyleClassNames}>
+            {this.renderFontStyleControl()}
           </div>
-        </div>
-        <div className={this.controlFontClassNames}>
-          <button
-            className={this.sansSerifButtonClassNames}
-            onClick={this.sansSerifButtonHandler}
-          >
-            {"Sans-serif"}
-          </button>
-
-          <div>
-            <button
-              className={this.fontSizeButtonClassNames}
-              disabled={!this.sansDecreasable}
-              onClick={event => {
-                this.decrementSizeHandler(event, this.sansDecreasable);
-              }}
-            >
-              <Utility.IconComposer icon="MinusUnique" size={30} />
-              <span className={this.screenReaderTextClassNames}>
-                {"Decrease font size"}
-              </span>
-            </button>
-            <button
-              className={this.fontSizeButtonClassNames}
-              disabled={!this.sansIncreasable}
-              onClick={event => {
-                this.incrementSizeHandler(event, this.sansIncreasable);
-              }}
-            >
-              <Utility.IconComposer icon="PlusUnique" size={30} />
-              <span className={this.screenReaderTextClassNames}>
-                {"Increase font size"}
-              </span>
-            </button>
+          <div className={this.controlFontClassNames}>
+            <div role="group" aria-label="Adjust font size">
+              <button
+                className={this.fontSizeButtonClassNames}
+                disabled={this.serifDisabled}
+                aria-disabled={!this.fontSizeDecreasable}
+                onClick={event => {
+                  this.decrementSizeHandler(event, this.fontSizeDecreasable);
+                }}
+              >
+                <Utility.IconComposer icon="MinusUnique" size={30} />
+                <span className={this.screenReaderTextClassNames}>
+                  {"Decrease font size"}
+                </span>
+              </button>
+              <button
+                className={this.fontSizeButtonClassNames}
+                disabled={this.serifDisabled}
+                aria-disabled={!this.fontSizeIncreasable}
+                onClick={event => {
+                  this.incrementSizeHandler(event, this.fontSizeIncreasable);
+                }}
+              >
+                <Utility.IconComposer icon="PlusUnique" size={30} />
+                <span className={this.screenReaderTextClassNames}>
+                  {"Increase font size"}
+                </span>
+              </button>
+            </div>
+          </div>
+          <div className={this.controlFontClassNames}>
+            <div>
+              <button
+                className={this.fontSizeButtonClassNames}
+                disabled={this.sansDisabled}
+                aria-disabled={!this.fontSizeDecreasable}
+                onClick={event => {
+                  this.decrementSizeHandler(event, this.fontSizeDecreasable);
+                }}
+              >
+                <Utility.IconComposer icon="MinusUnique" size={30} />
+                <span className={this.screenReaderTextClassNames}>
+                  {"Decrease font size"}
+                </span>
+              </button>
+              <button
+                className={this.fontSizeButtonClassNames}
+                disabled={this.sansDisabled}
+                aria-disabled={!this.fontSizeIncreasable}
+                onClick={event => {
+                  this.incrementSizeHandler(event, this.fontSizeIncreasable);
+                }}
+              >
+                <Utility.IconComposer icon="PlusUnique" size={30} />
+                <span className={this.screenReaderTextClassNames}>
+                  {"Increase font size"}
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </li>
@@ -352,24 +419,7 @@ export class AppearanceMenuBody extends Component {
     return (
       <li className={this.sectionClassNames}>
         <div className={this.colorButtonContainerClassNames}>
-          <button
-            className={this.lightSchemeButtonClassNames}
-            onClick={this.handleLightButtonClick}
-          >
-            <Utility.IconComposer icon="CheckUnique" size={30} />
-            <span className={this.screenReaderTextClassNames}>
-              {"Use light color scheme in reader"}
-            </span>
-          </button>
-          <button
-            className={this.darkSchemeButtonClassNames}
-            onClick={this.handleDarkButtonClick}
-          >
-            <Utility.IconComposer icon="CheckUnique" size={30} />
-            <span className={this.screenReaderTextClassNames}>
-              {"Use dark color scheme in reader"}
-            </span>
-          </button>
+          {this.renderColorSchemeControl()}
         </div>
       </li>
     )
@@ -378,10 +428,14 @@ export class AppearanceMenuBody extends Component {
   renderMarginControls() {
     return (
       <li className={this.sectionClassNames}>
-        <div className={this.controlMarginsClassNames}>
+        <div
+          role="group"
+          aria-label="Adjust text margins"
+          className={this.controlMarginsClassNames}
+        >
           <button
             className={this.marginButtonClassNames}
-            disabled={!this.marginIncreaseable}
+            aria-disabled={!this.marginIncreaseable}
             onClick={this.incrementMarginsHandler}
           >
             <Utility.IconComposer
@@ -394,7 +448,7 @@ export class AppearanceMenuBody extends Component {
           </button>
           <button
             className={this.marginButtonClassNames}
-            disabled={!this.marginDecreasable}
+            aria-disabled={!this.marginDecreasable}
             onClick={this.decrementMarginsHandler}
           >
             <Utility.IconComposer
@@ -412,11 +466,11 @@ export class AppearanceMenuBody extends Component {
 
   render() {
     return (
-      <nav className={this.containerClassNames}>
-        <ul>
-          <li className={this.sectionClassNames}>
-            <h4 className={this.headingClassNames}>{"Adjust Appearance:"}</h4>
-          </li>
+      <div className={this.containerClassNames}>
+        <header className={this.headerClassNames}>
+          <h4 className={this.headingClassNames}>{"Adjust Appearance:"}</h4>
+        </header>
+        <ul className={this.listClassNames}>
           {this.renderFontControls()}
           {this.renderColorSchemeControls()}
           {this.renderMarginControls()}
@@ -437,7 +491,7 @@ export class AppearanceMenuBody extends Component {
             </span>
           </button>
         </div>
-      </nav>
+      </div>
     );
   }
 }
