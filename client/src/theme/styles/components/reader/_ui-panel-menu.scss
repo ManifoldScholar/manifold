@@ -34,14 +34,6 @@
     width: auto;
   }
 
-  ul {
-    @include listUnstyled;
-
-    li {
-      padding: 15px 30px;
-    }
-  }
-
   .panel-visible & {
     animation: slideUpMobile $duration $timing forwards;
 
