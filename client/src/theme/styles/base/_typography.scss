@@ -191,6 +191,7 @@ $readerFontSizes: (
   (18px, 22px),
   (20px, 26px),
   (24px, 32px),
+  (28px, 38px)
 );
 
 @for $i from 1 through length($readerFontSizes) {
