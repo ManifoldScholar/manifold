@@ -4,12 +4,12 @@ const getInitialState = () => ({
    font: "serif",
    fontSize: {
      current: 3,
-     max: 5,
+     max: 6,
      min: 0
    },
    margins: {
      current: 1,
-     max: 2,
+     max: 4,
      min: 0
    }
  })
