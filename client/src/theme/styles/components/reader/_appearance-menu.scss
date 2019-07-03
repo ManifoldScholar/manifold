@@ -12,6 +12,15 @@
 .appearance-menu {
   @include uiPanelMenu;
 
+  &__header,
+  &__section {
+    padding: 15px 30px;
+  }
+
+  &__header {
+    background-color: $neutral10;
+  }
+
   &__heading {
     @include templateHead;
     font-size: 15px;
@@ -20,8 +29,12 @@
     margin: 0;
   }
 
+  &__list {
+    @include listUnstyled;
+  }
+
   &__section {
-    &:nth-child(odd) {
+    &:nth-child(even) {
       background-color: $neutral10;
     }
 
@@ -43,10 +56,49 @@
     }
   }
 
+  &__radio-group {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  &__radio-stack {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__radio-input {
+    position: absolute;
+    z-index: -5;
+    opacity: 0;
+
+    &:focus {}
+  }
+
+  &__radio-label {
+    color: $neutral70;
+    border-bottom: 2px solid transparent;
+    transition: color $durationFast $timing, border-color $durationFast $timing;
+
+    .appearance-menu__font-style--active & {
+      color: $neutralOffBlack;
+      border-color: $neutralOffBlack;
+    }
+
+    .appearance-menu__font-style:hover &,
+    .appearance-menu__radio-input:focus ~ & {
+      color: $accentPrimary;
+      border-color: $accentPrimary;
+    }
+  }
+
   &__button-base {
     @include buttonUnstyled;
 
-    &:not(:first-child) {
+    &:not(:first-of-type) {
       margin-left: 20px;
     }
   }
@@ -54,40 +106,41 @@
   &__primary-hover-button {
     transition: all $durationFast $timing;
 
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled):not([aria-disabled="true"]) {
       background-color: $accentPrimary;
       color: $neutralWhite;
     }
   }
 
-  &__font-controls {
-    display: flex;
-    justify-content: space-between;
+  &__font-control-group {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    grid-row-gap: 23px;
 
-    &:first-child {
-      padding-top: 16px;
-    }
-
-    &:last-child {
-      padding-bottom: 16px;
-    }
-
-    + .appearance-menu__font-controls {
-      margin-top: 23px;
-
-      @include respond($break50) {
-        margin-top: 29px;
-      }
+    @include respond($break50) {
+      grid-row-gap: 29px;
     }
   }
 
+  &__font-style-control {
+    grid-row: 1 / -1;
+  }
+
+  &__font-size-control {
+    display: flex;
+    justify-content: space-between;
+  }
+
   // <button> that sets font type
-  &__font-type {
+  &__font-style {
+    position: relative;
+    display: block;
     padding-bottom: 3px;
-    margin-top: 2px;
-    color: $neutral70;
-    border-bottom: 2px solid transparent;
-    transition: color $durationFast $timing, border-color $durationFast $timing;
+    margin-top: 3px;
+    margin-bottom: 3px;
 
     &--active {
       color: $neutralOffBlack;
@@ -151,14 +204,16 @@
       height: 35px;
     }
 
-    // &:hover {
-    //   outline: 0;
-    // }
-    //
-    // &:disabled {
-    //   color: $neutral40;
-    //   background-color: $neutral20;
-    // }
+    &:hover {
+      outline: 0;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      color: $neutral40;
+      background-color: $neutral20;
+      cursor: default;
+    }
 
     &:not(:first-child) {
       margin-left: 15px;
@@ -170,6 +225,9 @@
   }
 
   &__color-scheme {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: calc(50% - 10px);
     height: 39px;
     border: 4px solid transparent;
@@ -216,6 +274,13 @@
     }
   }
 
+  &__color-scheme-icon {
+    .appearance-menu__radio-input:focus ~ & {
+      color: $accentPrimary;
+      opacity: 1;
+    }
+  }
+
   &__control-margins {
     display: none;
     border-top: none;
@@ -241,7 +306,7 @@
     background-color: $neutralWhite;
 
     &:hover {
-      &:not(:disabled) {
+      &:not([aria-disabled="true"]) {
         outline: 0;
 
         > svg path {
@@ -250,8 +315,9 @@
       }
     }
 
-    &:disabled {
+    &[aria-disabled="true"] {
       background-color: $neutral20;
+      cursor: default;
       > svg {
         opacity: 0.5;
       }
