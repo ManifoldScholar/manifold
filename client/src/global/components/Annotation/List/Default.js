@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react"
 import Annotation from "../Annotation";
 import Highlight from "../Highlight";
+import classNames from "classnames";
 
 export default class Default extends PureComponent {
 
   static displayName = "Annotation.List.Ungrouped";
+
 
   renderHighlight(annotation) {
     return (
@@ -24,14 +26,25 @@ export default class Default extends PureComponent {
     )
   }
 
+  get notesListClassNames() {
+    return "notes-list";
+  }
+
+  get selectionListClassNames() {
+    return "notes-list__item-outer";
+  }
+
   render() {
     const { annotations } = this.props;
-
+    console.log(annotations);
     return (
-      <ul className="notes-list">
+      <ul className={this.notesListClassNames}>
         {annotations.map((annotation, i) => {
           return (
-            <li key={i}>
+            <li
+              key={i}
+              className={this.selectionListClassNames}
+            >
               {annotation.attributes.format === "annotation"
                 ? this.renderAnnotation(annotation)
                 : this.renderHighlight(annotation)}
@@ -40,7 +53,5 @@ export default class Default extends PureComponent {
         })}
       </ul>
     );
-
   }
-
 }

@@ -6,12 +6,16 @@ export default class Annotation extends PureComponent {
 
   static displayName = "Annotation.Annotation";
 
+  get annotationDetailClassNames() {
+    return "annotation-detail";
+  }
+
   render() {
 
     const { annotation, visitHandler } = this.props;
 
     return (
-      <div className="annotation-detail">
+      <div className={this.annotationDetailClassNames}>
         <div className="annotation-selection">
           <TextContent
             {...annotation.attributes}

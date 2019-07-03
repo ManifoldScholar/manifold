@@ -218,15 +218,11 @@
   }
 
   &__cell-small {
-    width: 44px;
+    width: 55px;
   }
 
   &__cell-medium {
-    width: 132px;
-    // display: inline-block;
-    white-space: nowrap;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
+    width: 135px;
   }
 
   &__small-padding-left {
@@ -257,7 +253,7 @@
     padding-top: 30px;
   }
 
-  &__avatar-placeholder {
+  &__avatar-container {
     color: $neutral50;
     padding-right: 8px;
 

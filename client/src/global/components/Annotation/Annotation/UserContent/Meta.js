@@ -4,6 +4,7 @@ import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
 import IconComposer from "global/components/utility/IconComposer";
+import Avatar from "global/components/avatar/index";
 
 export default class AnnotationDetail extends PureComponent {
   static displayName = "Annotation.Meta";
@@ -105,28 +106,7 @@ export default class AnnotationDetail extends PureComponent {
         {/* NB: Empty div required for flex-positioning of private/author marker */}
         <div>
           <figure className={avatarClass}>
-            {creator.attributes.avatarStyles.smallSquare ? (
-              <div
-                className="author-avatar__image"
-                style={{
-                  backgroundImage: `url(${
-                    creator.attributes.avatarStyles.smallSquare
-                  })`
-                }}
-              >
-                <span className="screen-reader-text">
-                  Avatar for {creator.attributes.fullName}
-                </span>
-              </div>
-            ) : (
-              <div className="author-avatar__no-image">
-                <IconComposer
-                  icon="avatar64"
-                  size={39.385}
-                  iconClass="author-avatar__icon"
-                />
-              </div>
-            )}
+            <Avatar url={creator.attributes.avatarStyles.smallSquare} />
           </figure>
           {this.name}
           {this.subtitle}

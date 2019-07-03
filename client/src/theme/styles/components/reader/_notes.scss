@@ -7,15 +7,6 @@
   &.button-active {
     background-color: $neutral10;
   }
-
-}
-
-.notes-list {
-  padding: 0;
-
-  ul {
-    @include listUnstyled;
-  }
 }
 
 .notes-drawer {

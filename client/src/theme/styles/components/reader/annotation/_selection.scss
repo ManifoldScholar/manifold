@@ -1,5 +1,5 @@
 .annotation-selection {
-  .selection-text {
+  &__text {
     @include templateHead;
     @include drawerPadding(padding-right, 'heavy');
     @include drawerPadding(padding-left);
@@ -8,7 +8,7 @@
     font-size: 18px;
     line-height: 1.6;
     word-wrap: break-word;
-    background-color: $accentPrimary;
+    background-color: $neutral10;
 
     @include respond($break80) {
       padding-top: 41px;
@@ -18,72 +18,69 @@
     @include respond($break90) {
       font-size: 20px;
     }
+  }
 
-    .container {
-      @include drawerIndent(padding-left);
-      position: relative;
-      padding-right: 0; // OD
-      padding-bottom: 20px;
-    }
+  &__container {
+    @include drawerIndent(padding-left);
+    position: relative;
+    padding-right: 0; // OD
+    padding-bottom: 20px;
+  }
 
-    &__icon {
+  &__icon {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    color:$accentPrimary;
+    transform: rotateX(180deg);
+  }
+
+  &__truncated-wrapper {
+    position: relative;
+    overflow: hidden;
+    transition: height $duration $timing;
+
+    &::after {
       position: absolute;
-      top: 2px;
+      bottom: 0;
       left: 0;
-      color: $neutralWhite;
-      transform: rotateX(180deg);
-    }
-  }
-
-  // Truncated variety
-  .selection-truncated {
-    .wrapper {
-      position: relative;
-      overflow: hidden;
-      transition: height $duration $timing;
-
-      &::after {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 4em;
-        content: '';
-        background: linear-gradient(to top, $accentPrimary 10%, transparentize($accentPrimary, 1) 100%);
-        opacity: 0;
-        transition: opacity $durationSlow $timing $duration;
-      }
-
-      &.blur::after {
-        opacity: 1;
-      }
+      width: 100%;
+      height: 4em;
+      content: '';
+      background: linear-gradient(to top, $neutral10 10%, transparentize($accentPrimary, 1) 100%);
+      opacity: 0;
+      transition: opacity $durationSlow $timing $duration;
     }
 
-    .button-trim-primary {
-      position: relative;
-      margin-top: -8px;
-      color: $neutralOffBlack;
-      visibility: visible;
-      background-color: $accentPrimary;
+    &--blur::after {
       opacity: 1;
-      transition: margin $duration linear,
-        color $duration $timing,
-        opacity $duration $timing $durationFast,
-        visibility $duration $timing $durationFast;
-
-      &:hover {
-        color: $neutral75;
-      }
-
-      &.hidden {
-        margin-top: -38px;
-        visibility: hidden;
-        opacity: 0;
-      }
     }
   }
 
-  .annotate-button {
+  &__button-trim {
+    position: relative;
+    margin-top: -8px;
+    color: $neutralOffBlack;
+    visibility: visible;
+    background-color: $neutral10;
+    opacity: 1;
+    transition: margin $duration linear,
+      color $duration $timing,
+      opacity $duration $timing $durationFast,
+      visibility $duration $timing $durationFast;
+
+    &:hover {
+      color: $neutral75;
+    }
+
+    &--hidden {
+      margin-top: -38px;
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  &__button {
     @include buttonUnstyled;
     @include utilityPrimary;
     @include drawerIndent(margin-left);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Utility from "global/components/utility";
 import PropTypes from "prop-types";
 import Cell from "global/components/table/Cell";
-import Avatar from "global/components/table/Avatar";
+import TableAvatar from "global/components/table/Avatar";
 import RemoveMemberButton from "./RemoveMember";
 import NameWithArrow from "global/components/table/NameWithArrow";
 
@@ -60,6 +60,13 @@ export default class MemberRow extends Component {
     return "hideMobile";
   }
 
+  get avatarUrl() {
+    if (this.modelAttributes.avatarStyles) {
+      return this.modelAttributes.avatarStyles.smallSquare
+    } else return null;
+
+  }
+
   render() {
     return(
       <React.Fragment>
@@ -69,7 +76,7 @@ export default class MemberRow extends Component {
           align={"right"}
           cellSize={"cellSmall"}
           >
-          <Avatar avatar={this.modelAttributes.avatar} />
+          <TableAvatar avatar={this.avatarUrl} />
         </Cell>
         <Cell
           textStyle={"valueLarge"}
@@ -77,8 +84,8 @@ export default class MemberRow extends Component {
           columnPosition={"all"}
           cellPadding={"leftSmall"}
           >
-          <Avatar
-            avatar={this.modelAttributes.avatar}
+          <TableAvatar
+            avatar={this.avatarUrl}
             viewportVisibility={this.hideDesktop}
           />
           <NameWithArrow name={this.modelAttributes.fullName} />

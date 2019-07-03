@@ -31,6 +31,10 @@ export default class GroupedList extends PureComponent {
     this.setState({ editorVisible: false });
   };
 
+  get annotationDetailClassNames() {
+    return "annotation-detail";
+  }
+
   render() {
     const { annotations, saveAnnotation, loginHandler, dispatch } = this.props;
 
@@ -40,7 +44,7 @@ export default class GroupedList extends PureComponent {
           <GroupBySubject
             annotations={annotations}
             render={group => (
-              <li key={group.selection.hash} className="annotation-detail">
+              <li key={group.selection.hash} className={this.annotationDetailClassNames}>
                 <TextContent
                   subject={group.selection.subject}
                   onAnnotate={this.showEditor}

@@ -37,6 +37,22 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     return !!this.props.onLogin;
   }
 
+  get selectionTextClassNames() {
+    return "annotation-selection__text";
+  }
+
+  get iconClassNames() {
+    return "annotation-selection__icon";
+  }
+
+  get selectionContainerClassNames() {
+    return "annotation-selection__container";
+  }
+
+  get buttonClassNames() {
+    return "annotation-selection__button";
+  }
+
   maybeTruncateSelection() {
     const { subject, truncate } = this.props;
     if (truncate && subject && subject.length > truncate) {
@@ -47,17 +63,17 @@ export default class AnnotationSelectionWrapper extends PureComponent {
 
   render() {
     return (
-      <div className="selection-text">
-        <div className="container">
+      <div className={this.selectionTextClassNames}>
+        <div className={this.selectionContainerClassNames}>
           <IconComposer
             icon="socialCite32"
             size="default"
-            iconClass="selection-text__icon"
+            iconClass={this.iconClassNames}
           />
           {this.maybeTruncateSelection()}
         </div>
         {this.viewable && (
-          <button className="annotate-button" onClick={this.props.onViewInText}>
+          <button className={this.buttonClassNames} onClick={this.props.onViewInText}>
             {"View In Text"}
           </button>
         )}
@@ -65,7 +81,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
           <Fragment>
             <Authorize kind="any">
               <button
-                className="annotate-button"
+                className={this.buttonClassNames}
                 onClick={this.props.onAnnotate}
               >
                 {"Annotate"}
@@ -74,7 +90,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             {this.canLogin && (
               <Authorize kind="unauthenticated">
                 <button
-                  className="annotate-button"
+                  className={this.buttonClassNames}
                   onClick={this.props.onLogin}
                 >
                   {"Login to annotate"}
