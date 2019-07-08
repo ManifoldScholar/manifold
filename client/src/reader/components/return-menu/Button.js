@@ -5,7 +5,8 @@ export default class ReturnMenuButton extends Component {
   static displayName = "ReturnMenuButton";
 
   static propTypes = {
-    toggleReaderMenu: PropTypes.func.isRequired
+    toggleReaderMenu: PropTypes.func.isRequired,
+    expanded: PropTypes.bool
   };
 
   clickHandler = event => {
@@ -21,6 +22,8 @@ export default class ReturnMenuButton extends Component {
         className="button-menu"
         onClick={this.clickHandler}
         data-id="toggle-menu"
+        aria-haspopup
+        aria-expanded={this.props.expanded}
       >
         Menu
       </button>

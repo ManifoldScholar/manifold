@@ -2,6 +2,7 @@
 
 exports[`Reader.ControlMenu.NotesButton Component renders correctly 1`] = `
 <button
+  aria-haspopup={true}
   className="button-notes"
   data-id="toggle-notes"
   onClick={[Function]}
@@ -22,7 +23,7 @@ exports[`Reader.ControlMenu.NotesButton Component renders correctly 1`] = `
   <span
     className="screen-reader-text"
   >
-    Open the notes menu
+    Notes
   </span>
 </button>
 `;

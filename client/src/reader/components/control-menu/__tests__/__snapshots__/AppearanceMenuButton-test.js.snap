@@ -2,6 +2,7 @@
 
 exports[`Reader.ControlMenu.AppearanceMenuButton Component renders correctly 1`] = `
 <button
+  aria-haspopup={true}
   className="button-appearance"
   data-id="toggle-appearance"
   onClick={[Function]}
@@ -22,7 +23,7 @@ exports[`Reader.ControlMenu.AppearanceMenuButton Component renders correctly 1`]
   <span
     className="screen-reader-text"
   >
-    Open reader appearance menu
+    Reader appearance
   </span>
 </button>
 `;

@@ -306,14 +306,14 @@ class NotationViewerList extends PureComponent {
   }
 
   render() {
-    if (!this.state.entries) return null;
+    if (!this.state.entries || this.state.entries.length < 1) return null;
 
     const { textId, sectionId } = this.props;
     const viewerClass = `notation-viewer container-width-${
       this.props.containerSize
     }`;
     return (
-      <nav className={viewerClass}>
+      <nav className={viewerClass} aria-label="Notations">
         <ul className="viewer-list" ref={el => (this.listEl = el)}>
           {this.state.entries.map(entry => {
             return (

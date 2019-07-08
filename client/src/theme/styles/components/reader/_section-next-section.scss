@@ -3,13 +3,9 @@
 
   .scheme-dark & {
     background-color: $neutral90;
-
-    h3 {
-      color: $neutral20;
-    }
   }
 
-  a {
+  &__link {
     display: block;
     padding: 0 0 50px;
     text-decoration: none;
@@ -24,14 +20,10 @@
 
     &:hover, &:focus {
       outline: 0;
-
-      h3 {
-        color: $accentPrimary;
-      }
     }
   }
 
-  header {
+  &__header {
     @include utilityPrimary;
     display: inline-block;
     padding-bottom: 4px;
@@ -40,8 +32,10 @@
     border-bottom: 2px solid $neutral40;
   }
 
-  h3 {
+  &__title {
     @include templateHead;
+    margin-top: 1em;
+    margin-bottom: 1em;
     font-size: 24px;
     font-weight: $semibold;
     color: $neutral70;
@@ -49,6 +43,15 @@
 
     @include respond($break70) {
       font-size: 32px;
+    }
+
+    .scheme-dark & {
+      color: $neutral20;
+    }
+
+    .section-next-section__link:hover &,
+    .section-next-section__link:focus & {
+      color: $accentPrimary;
     }
   }
 }

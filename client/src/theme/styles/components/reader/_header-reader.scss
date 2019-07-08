@@ -160,8 +160,12 @@
     ul {
       @include listHorizontal;
       position: relative;
-      display: block;
+      display: none;
       height: 100%;
+
+      @include respond($break50) {
+        display: block;
+      }
 
       li {
         position: relative;
@@ -169,12 +173,8 @@
         vertical-align: middle;
 
         button {
-          display: none;
+          display: inline-block;
           padding: 0 10px;
-
-          @include respond($break50) {
-            display: inline-block;
-          }
 
           &.button-active {
             background-color: $neutral10;

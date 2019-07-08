@@ -8,17 +8,20 @@ exports[`NextSection component renders correctly 1`] = `
     className="container-focus container-width-undefined"
   >
     <a
+      className="section-next-section__link"
       href="/read/slug-1/section/2345-5678-1111"
       onClick={[Function]}
     >
-      <header>
+      <header
+        className="section-next-section__header"
+      >
         Next Chapter
       </header>
-      <h3>
-        <div>
-          Second Section
-        </div>
-      </h3>
+      <div
+        className="section-next-section__title"
+      >
+        Second Section
+      </div>
     </a>
   </div>
 </section>

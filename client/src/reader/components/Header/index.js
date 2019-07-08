@@ -81,13 +81,15 @@ export default class Header extends Component {
 
     const buttonIndexClass = classNames({
       "button-index": true,
-      active: this.props.visibility.tocDrawer
+      active: this.props.visibility.uiPanels.tocDrawer
     });
 
     return (
       <button
         className={buttonIndexClass}
         onClick={this.handleContentsButtonClick}
+        aria-haspopup
+        aria-expanded={this.props.visibility.uiPanels.tocDrawer}
       >
         <span className="button-index__text">Contents</span>
         <Utility.IconComposer
@@ -112,6 +114,7 @@ export default class Header extends Component {
           <nav className={containerClass}>
             <ReturnMenu.Button
               toggleReaderMenu={this.panelToggleHandler("readerReturn")}
+              expanded={this.props.visibility.uiPanels.readerReturn}
             />
             {this.renderContentsButton(this.props.text.attributes)}
             {this.props.section ? (
@@ -121,8 +124,8 @@ export default class Header extends Component {
                 showSection={!this.props.scrollAware.top}
               />
             ) : null}
-            <nav className="menu-buttons">
-              <ul>
+            <div className="menu-buttons">
+              <ul aria-label="Reader Settings and Search">
                 <Authorize kind={"any"}>
                   <li>
                     <ControlMenu.NotesButton
@@ -158,9 +161,9 @@ export default class Header extends Component {
                   />
                 </li>
               </ul>
-            </nav>
+            </div>
           </nav>
-          <nav className="menu-panels-left">
+          <div className="menu-panels-left">
             <UIPanel
               id="readerReturn"
               visibility={this.props.visibility.uiPanels}
@@ -180,9 +183,9 @@ export default class Header extends Component {
               // TODO: More link (and eventually, the link text) should be pulled from settings
               moreLink="http://manifold.umn.edu/about/"
             />
-          </nav>
+          </div>
 
-          <nav className="menu-panels-right">
+          <div className="menu-panels-right">
             <UIPanel
               id="notes"
               visibility={this.props.visibility.uiPanels}
@@ -238,7 +241,7 @@ export default class Header extends Component {
               hideUserMenu={this.props.commonActions.toggleUserPanel}
               hidePanel={this.props.commonActions.hideUserPanel}
             />
-          </nav>
+          </div>
           <HeaderNotifications />
         </header>
       </BlurOnLocationChange>

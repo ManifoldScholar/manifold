@@ -2,6 +2,7 @@
 
 exports[`Reader.Section.Pagination component renders correctly 1`] = `
 <nav
+  aria-label="Pagination"
   className="section-pagination"
 >
   <div
@@ -38,6 +39,7 @@ exports[`Reader.Section.Pagination component renders correctly 1`] = `
 
 exports[`Reader.Section.Pagination component renders correctly with text section kind 1`] = `
 <nav
+  aria-label="Pagination"
   className="section-pagination"
 >
   <div

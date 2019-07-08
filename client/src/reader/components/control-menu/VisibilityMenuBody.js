@@ -89,13 +89,13 @@ export default class VisibilityMenuBody extends PureComponent {
   render() {
     const { filter } = this.props;
     return (
-      <nav className="visibility-menu">
+      <div className="visibility-menu">
         <ul>
           {Object.keys(filter).map(format => {
             return this.renderCheckboxGroup(format, filter[format]);
           })}
         </ul>
-      </nav>
+      </div>
     );
   }
 }

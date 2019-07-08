@@ -83,7 +83,7 @@ export default class Group extends Component {
             size={18}
             iconClass="item__disclosure-icon"
           />
-          <h4 className="item-label">{this.props.sectionName}</h4>
+          <h3 className="item-label">{this.props.sectionName}</h3>
         </div>
         {this.renderGroupItems(this.props.annotations)}
       </li>

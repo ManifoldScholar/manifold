@@ -11,7 +11,7 @@ export default class EmptyMessage extends PureComponent {
   template(title, body) {
     return (
       <div className="notes-message">
-        <h5 className="heading-primary">{title}</h5>
+        <h3 className="heading-primary">{title}</h3>
         <p>{body}</p>
       </div>
     );

@@ -2,6 +2,7 @@
 
 exports[`Reader.ReturnMenu.Body component renders correctly 1`] = `
 <nav
+  aria-label="Site Navigation"
   className="reader-return-menu"
 >
   <ul

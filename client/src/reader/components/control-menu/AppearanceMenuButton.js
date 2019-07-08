@@ -26,11 +26,11 @@ export default class AppearanceMenuButton extends Component {
         className={buttonClass}
         onClick={this.clickHandler}
         data-id="toggle-appearance"
+        aria-haspopup
+        aria-expanded={this.props.active}
       >
         <Utility.IconComposer icon="text24" size={32} />
-        <span className="screen-reader-text">
-          {"Open reader appearance menu"}
-        </span>
+        <span className="screen-reader-text">{"Reader appearance"}</span>
       </button>
     );
   }

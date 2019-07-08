@@ -24,13 +24,15 @@ export default class SearchMenuButton extends PureComponent {
         className={buttonClass}
         onClick={this.clickHandler}
         data-id="toggle-menu"
+        aria-haspopup
+        aria-expanded={this.props.active}
       >
         <Utility.IconComposer
           iconClass="search-icon"
           icon="search16"
           size={22}
         />
-        <span className="screen-reader-text">{"Open search"}</span>
+        <span className="screen-reader-text">{"Search"}</span>
       </button>
     );
   }

@@ -104,12 +104,12 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                             </li>
                                             <li>
                                               <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
-                                                <button onClick={[Function]} className=\\"button-avatar\\">
+                                                <button onClick={[Function]} className=\\"button-avatar\\" aria-haspopup={true} aria-expanded={[undefined]}>
                                                   <span className=\\"screen-reader-text\\">
-                                                    Login or open user settings
+                                                    User settings
                                                   </span>
-                                                  <Avatar url={[undefined]}>
-                                                    <figure style={[undefined]} className=\\"avatar\\">
+                                                  <Avatar url={[undefined]} ariaHidden={true}>
+                                                    <figure style={[undefined]} className=\\"avatar\\" aria-hidden={true}>
                                                       <IconComposer className=\\"manicon-person\\" icon=\\"Avatar64\\" fill=\\"currentColor\\" svgProps={{...}}>
                                                         <Avatar svgProps={{...}} iconClass=\\"svg-icon--Avatar64\\" icon=\\"Avatar64\\" size=\\"inherit\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
                                                           <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--Avatar64\\" width={{...}} height={{...}} viewBox=\\"0 0 64 64\\" fill=\\"currentColor\\" aria-hidden={true}>

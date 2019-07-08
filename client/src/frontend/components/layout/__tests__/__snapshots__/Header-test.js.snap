@@ -96,6 +96,7 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
         >
           <li>
             <button
+              aria-haspopup={true}
               className="button-search"
               data-id="toggle-menu"
               onClick={[Function]}
@@ -116,22 +117,24 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
               <span
                 className="screen-reader-text"
               >
-                Open search
+                Search
               </span>
             </button>
             <span />
           </li>
           <li>
             <button
+              aria-haspopup={true}
               className="button-avatar"
               onClick={[Function]}
             >
               <span
                 className="screen-reader-text"
               >
-                Login or open user settings
+                User settings
               </span>
               <figure
+                aria-hidden={true}
                 className="avatar"
               >
                 <svg

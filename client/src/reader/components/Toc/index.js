@@ -52,9 +52,9 @@ class Toc extends PureComponent {
     let children = null;
     if (node.children && node.children.length > 0) {
       children = (
-        <ul className="toc-nested-level">
+        <ol className="toc-nested-level">
           {node.children.map(this.visitNode)}
-        </ul>
+        </ol>
       );
     }
 
@@ -99,7 +99,7 @@ class Toc extends PureComponent {
   renderContents(text) {
     if (text.attributes.toc.length <= 0) return this.renderEmpty();
     return (
-      <ul className="toc-list">{text.attributes.toc.map(this.visitNode)}</ul>
+      <ol className="toc-list">{text.attributes.toc.map(this.visitNode)}</ol>
     );
   }
 
@@ -136,7 +136,7 @@ class Toc extends PureComponent {
 
     return (
       <Drawer.Wrapper {...drawerProps}>
-        <nav className={tocClass}>
+        <nav className={tocClass} aria-label="Table of Contents">
           {this.renderContents(text)}
           {!isEmpty(metadata) ? (
             <div className="toc-footer">

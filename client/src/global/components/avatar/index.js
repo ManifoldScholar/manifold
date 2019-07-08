@@ -5,7 +5,8 @@ import Utility from "global/components/utility";
 export default class Avatar extends Component {
   static propTypes = {
     url: PropTypes.string,
-    style: PropTypes.object
+    style: PropTypes.object,
+    ariaHidden: PropTypes.bool
   };
 
   render() {
@@ -20,14 +21,22 @@ export default class Avatar extends Component {
         borderRadius: "100%"
       };
       return (
-        <figure style={this.props.style} className="avatar">
+        <figure
+          style={this.props.style}
+          className="avatar"
+          aria-hidden={this.props.ariaHidden}
+        >
           <span className="screen-reader-text">Avatar</span>
           <div style={style} />
         </figure>
       );
     }
     return (
-      <figure style={this.props.style} className="avatar">
+      <figure
+        style={this.props.style}
+        className="avatar"
+        aria-hidden={this.props.ariaHidden}
+      >
         <Utility.IconComposer className="manicon-person" icon="Avatar64" />
         <span className="screen-reader-text">Avatar</span>
       </figure>

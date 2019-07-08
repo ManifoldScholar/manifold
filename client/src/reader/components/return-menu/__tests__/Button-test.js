@@ -7,7 +7,7 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 describe("Reader.ReturnMenu.Button component", () => {
   const toggleMock = jest.fn();
 
-  const root = <Button toggleReaderMenu={toggleMock} />;
+  const root = <Button toggleReaderMenu={toggleMock} expanded={false} />;
 
   it("renders correctly", () => {
     const component = renderer.create(root);

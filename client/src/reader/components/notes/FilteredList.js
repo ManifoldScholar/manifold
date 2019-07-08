@@ -81,7 +81,7 @@ export default class FilteredList extends PureComponent {
           filterChangeHandler={this.props.handleFilterChange}
           filter={this.props.filter}
         />
-        <nav>{this.props.loaded ? this.renderList() : null}</nav>
+        <div>{this.props.loaded ? this.renderList() : null}</div>
       </div>
     );
   }

@@ -2,6 +2,8 @@
 
 exports[`Reader.Search.Button component renders correctly when active 1`] = `
 <button
+  aria-expanded={true}
+  aria-haspopup={true}
   className="button-search button-active"
   data-id="toggle-menu"
   onClick={[Function]}
@@ -22,13 +24,15 @@ exports[`Reader.Search.Button component renders correctly when active 1`] = `
   <span
     className="screen-reader-text"
   >
-    Open search
+    Search
   </span>
 </button>
 `;
 
 exports[`Reader.Search.Button component renders correctly when inactive 1`] = `
 <button
+  aria-expanded={false}
+  aria-haspopup={true}
   className="button-search"
   data-id="toggle-menu"
   onClick={[Function]}
@@ -49,7 +53,7 @@ exports[`Reader.Search.Button component renders correctly when inactive 1`] = `
   <span
     className="screen-reader-text"
   >
-    Open search
+    Search
   </span>
 </button>
 `;
