@@ -86,11 +86,11 @@
     @include drawerIndent(margin-left);
     display: block;
     font-size: 14px;
-    color: $neutralWhite;
+    color: $accentPrimary;
     transition: color $duration $timing;
 
     &:hover, &:focus {
-      color: $accentPrimaryPale;
+      color: $accentPrimaryDark;
       outline: 0;
     }
   }

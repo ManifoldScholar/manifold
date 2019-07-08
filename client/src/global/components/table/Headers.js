@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Label from "./Label";
+import Utility from "global/components/utility";
 
 export default class TableHeaders extends React.PureComponent {
 
@@ -38,7 +38,7 @@ export default class TableHeaders extends React.PureComponent {
                 key={header.name}
                 className={this.cellClassNames(header.cellPadding)}
               >
-                <Label
+                <Utility.LabelWithIcon
                   label={header.label}
                   icon={header.icon}
                 />

@@ -25,8 +25,7 @@ export default class TableBody extends React.PureComponent {
       getHeader: (index) => {
         return headers[index];
       },
-      markup: this.props.markup,
-      renderLabel: this.renderLabel
+      markup: this.props.markup
     };
 
     const rows = this.props.models.map((model, i)=>  {

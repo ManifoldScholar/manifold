@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import { TableHeaderContext } from "helpers/contexts";
-import Label from "./Label";
 
 export default class TableCell extends React.PureComponent {
 
@@ -81,10 +80,6 @@ export default class TableCell extends React.PureComponent {
     return this.context.markup === "table";
   }
 
-  get renderLabel() {
-    return this.context.renderLabel;
-  }
-
   render() {
     const header = this.context.getHeader(this.props.index)
 
@@ -99,7 +94,7 @@ export default class TableCell extends React.PureComponent {
       <div className={this.listItemContainerClassNames}>
         {this.textStyle !== "valueLarge" &&
           <dt>
-          <Label
+          <Utility.LabelWithIcon
             label={header.label}
             icon={header.icon}
           />

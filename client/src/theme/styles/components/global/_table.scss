@@ -63,15 +63,6 @@
     color: $neutral90;
   }
 
-  &__table-heading {
-    color: $neutral70;
-  }
-
-  &__label-icon {
-    margin-right: 8px;
-    align-self: center;
-  }
-
   &__hover-arrow {
     opacity: 0;
     margin-left: 20px;
@@ -253,12 +244,24 @@
     padding-top: 30px;
   }
 
-  &__avatar-container {
+  &__avatar-placeholder-container {
     color: $neutral50;
-    padding-right: 8px;
+    width: 38px;
+    margin-left: -2px;
+    margin-right: 8px;
+  }
+
+  &__avatar-image-container {
+    width: 32px;
+    border: 1px solid $neutral50;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
+
+  &__avatar-base-container {
 
     @include respond($break85) {
-      padding-right: 0;
+      margin-right: 0;
     }
   }
 

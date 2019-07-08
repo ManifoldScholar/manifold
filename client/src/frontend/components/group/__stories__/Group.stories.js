@@ -4,6 +4,7 @@ import GroupsTable from "../Table/Groups/index";
 import MembersTable from "../Table/Members/index";
 import JoinBox from "../JoinBox/index";
 import Heading from "../Heading/index";
+import GroupSummaryBox from "../GroupSummaryBox/index";
 
 const groups = build.arrayOf.groups(8);
 const members = build.arrayOf.members(8);
@@ -15,6 +16,7 @@ const pagination = {
   totalPages: 10,
   totalCount: 32
 };
+const group = groups[0];
 
 storiesOf("Frontend/Group", module)
   .add("Groups Table", () => {
@@ -35,5 +37,10 @@ storiesOf("Frontend/Group", module)
   .add("Members Table", () => {
     return (
       <MembersTable members={members} pagination={pagination} />
+    );
+  })
+  .add("Group Summary Box", () => {
+    return (
+      <GroupSummaryBox group={group} />
     );
   })

@@ -10,8 +10,10 @@ export default class TableAvatar extends React.PureComponent {
 
   get avatarClassNames() {
     return classNames({
-      "table__avatar-container": true,
-      "table__hide-desktop": this.viewportVisibility === "hideDesktop"
+      "table__avatar-base-container": true,
+      "table__hide-desktop": this.viewportVisibility === "hideDesktop",
+      "table__avatar-placeholder-container": !this.avatar,
+      "table__avatar-image-container": this.avatar
     });
   }
 

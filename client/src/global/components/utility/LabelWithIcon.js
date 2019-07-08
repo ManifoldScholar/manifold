@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Utility from "global/components/utility";
+import IconComposer from "./IconComposer";
 
-export default class Label extends React.PureComponent {
+export default class LabelWithIcon extends React.PureComponent {
   static propTypes = {
   };
 
@@ -15,22 +15,26 @@ export default class Label extends React.PureComponent {
     return this.props.label;
   }
 
-  get labelIconClass() {
-    return "table__label-icon";
+  get textStyle() {
+    return this.props.textStyle;
   }
 
-  get headingClassNames() {
+  get labelIconClass() {
+    return "label-with-icon__icon";
+  }
+
+  get containerClassNames() {
     return classNames({
-      "table__table-heading": true,
-      "table__heading-small": true,
+      "label-with-icon": true,
+      "label-with-icon__text-large": this.textStyle === "large"
     });
   }
 
   render() {
     return (
-      <span className={this.headingClassNames}>
+      <span className={this.containerClassNames}>
         {this.icon && (
-          <Utility.IconComposer
+          <IconComposer
             icon={this.icon}
             size={24}
             iconClass={this.labelIconClass}
