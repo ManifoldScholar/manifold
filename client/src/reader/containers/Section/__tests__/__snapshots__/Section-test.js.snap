@@ -44,14 +44,6 @@ exports[`Reader Section Container renders correctly 1`] = `
         role="presentation"
       />
       <span />
-      <nav
-        className="notation-viewer container-width-100"
-      >
-        <ul
-          className="viewer-list"
-        />
-        <span />
-      </nav>
     </section>
     <span />
   </div>
@@ -64,6 +56,7 @@ exports[`Reader Section Container renders correctly 1`] = `
       />
     </section>
     <nav
+      aria-label="Pagination"
       className="section-pagination"
     >
       <div

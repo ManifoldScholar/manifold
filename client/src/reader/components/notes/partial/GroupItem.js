@@ -48,7 +48,7 @@ export default class GroupItem extends Component {
         onClick={this.handleVisitAnnotation}
       >
         <span className="screen-reader-text">
-          {this.props.annotation.attributes.format}
+          {`${this.props.annotation.attributes.format}.`}
         </span>
         {icon && <IconComposer icon={icon} size={32} iconClass="item__icon" />}
         <span>

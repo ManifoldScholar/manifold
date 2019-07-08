@@ -18,7 +18,7 @@ export default class ReturnMenuBody extends PureComponent {
 
   render() {
     return (
-      <nav className="reader-return-menu">
+      <nav className="reader-return-menu" aria-label="Site Navigation">
         <ul className="reader-return-menu__list">
           <li className="reader-return-menu__item">
             <Link

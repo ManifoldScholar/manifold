@@ -34,7 +34,7 @@
 
   .table-of-contents {
     // Global Styles
-    ul {
+    ol {
       @include listUnstyled;
       @include templateHead;
 
@@ -61,7 +61,7 @@
     }
 
     // Top Level links
-    > ul > li {
+    > ol > li {
       > a {
         @include tocBasePadding;
         padding-top: 1.091em;
@@ -73,7 +73,7 @@
         }
       }
 
-      > ul > li {
+      > ol > li {
         // Secondary level globals
         a {
           @include tocBasePadding;
@@ -88,13 +88,13 @@
 
         // Third level indenting
         // scss-lint:disable SelectorDepth
-        > ul > li > a {
+        > ol > li > a {
           @include tocBasePadding($tocNestedPadding);
         }
 
         // Fourth level (and on) indenting
         // scss-lint:disable SelectorDepth
-        > ul > li > ul > li > a {
+        > ol > li > ol > li > a {
           @include tocBasePadding($tocNestedPadding * 2);
         }
       }

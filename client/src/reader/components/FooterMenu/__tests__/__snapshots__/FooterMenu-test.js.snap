@@ -7,12 +7,15 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
   <div
     className="container"
   >
-    <nav
+    <div
       className="menu-buttons"
     >
-      <ul>
+      <ul
+        aria-label="Reader Settings"
+      >
         <li>
           <button
+            aria-haspopup={true}
             className="button-notes"
             data-id="toggle-notes"
             onClick={[Function]}
@@ -33,12 +36,13 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Open the notes menu
+              Notes
             </span>
           </button>
         </li>
         <li>
           <button
+            aria-haspopup={true}
             className="button-visibility"
             data-id="toggle-visibility"
             onClick={[Function]}
@@ -59,12 +63,13 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Open the visibility menu
+              Visibility
             </span>
           </button>
         </li>
         <li>
           <button
+            aria-haspopup={true}
             className="button-appearance"
             data-id="toggle-appearance"
             onClick={[Function]}
@@ -85,12 +90,12 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
             <span
               className="screen-reader-text"
             >
-              Open reader appearance menu
+              Reader appearance
             </span>
           </button>
         </li>
       </ul>
-    </nav>
+    </div>
   </div>
 </footer>
 `;

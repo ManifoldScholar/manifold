@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Reader.TextTitles Component renders correctly 1`] = `
-<header
+<div
   className="title show-section"
   onClick={[Function]}
 >
-  <h3
+  <h1
     className="screen-reader-text"
   >
-    Rowan: Greatest Dog Chapter 1
-  </h3>
-  <h3
+    Rowan: Greatest Dog: Chapter 1
+  </h1>
+  <h1
     aria-hidden="true"
     className="text-title"
     dangerouslySetInnerHTML={
@@ -19,11 +19,11 @@ exports[`Reader.TextTitles Component renders correctly 1`] = `
       }
     }
   />
-  <h2
+  <h1
     aria-hidden="true"
     className="section-title"
   >
     Chapter 1
-  </h2>
-</header>
+  </h1>
+</div>
 `;

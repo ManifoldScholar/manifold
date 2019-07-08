@@ -27,15 +27,19 @@ export default class UserMenuButton extends Component {
       "button-active": this.props.active
     });
     return (
-      <button onClick={this.clickHandler} className={buttonClass}>
-        <span className="screen-reader-text">
-          {"Login or open user settings"}
-        </span>
+      <button
+        onClick={this.clickHandler}
+        className={buttonClass}
+        aria-haspopup
+        aria-expanded={this.props.active}
+      >
+        <span className="screen-reader-text">{"User settings"}</span>
         <Avatar
           url={get(
             this.props.authentication,
             "currentUser.attributes.avatarStyles.smallSquare"
           )}
+          ariaHidden
         />
       </button>
     );

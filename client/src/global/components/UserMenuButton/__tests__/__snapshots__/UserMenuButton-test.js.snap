@@ -2,15 +2,17 @@
 
 exports[`Global.UserMenu.UserMenuButton Component renders correctly 1`] = `
 <button
+  aria-haspopup={true}
   className="button-avatar"
   onClick={[Function]}
 >
   <span
     className="screen-reader-text"
   >
-    Login or open user settings
+    User settings
   </span>
   <figure
+    aria-hidden={true}
     className="avatar"
   >
     <svg

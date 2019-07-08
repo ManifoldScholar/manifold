@@ -16,6 +16,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
       className="container-banner"
     >
       <button
+        aria-haspopup={true}
         className="button-menu"
         data-id="toggle-menu"
         onClick={[Function]}
@@ -23,6 +24,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
         Menu
       </button>
       <button
+        aria-haspopup={true}
         className="button-index"
         onClick={[Function]}
       >
@@ -45,12 +47,15 @@ exports[`Reader.Header Component renders correctly 1`] = `
           />
         </svg>
       </button>
-      <nav
+      <div
         className="menu-buttons"
       >
-        <ul>
+        <ul
+          aria-label="Reader Settings and Search"
+        >
           <li>
             <button
+              aria-haspopup={true}
               className="button-visibility"
               data-id="toggle-visibility"
               onClick={[Function]}
@@ -71,12 +76,13 @@ exports[`Reader.Header Component renders correctly 1`] = `
               <span
                 className="screen-reader-text"
               >
-                Open the visibility menu
+                Visibility
               </span>
             </button>
           </li>
           <li>
             <button
+              aria-haspopup={true}
               className="button-appearance"
               data-id="toggle-appearance"
               onClick={[Function]}
@@ -97,12 +103,13 @@ exports[`Reader.Header Component renders correctly 1`] = `
               <span
                 className="screen-reader-text"
               >
-                Open reader appearance menu
+                Reader appearance
               </span>
             </button>
           </li>
           <li>
             <button
+              aria-haspopup={true}
               className="button-search"
               data-id="toggle-menu"
               onClick={[Function]}
@@ -123,21 +130,23 @@ exports[`Reader.Header Component renders correctly 1`] = `
               <span
                 className="screen-reader-text"
               >
-                Open search
+                Search
               </span>
             </button>
           </li>
           <li>
             <button
+              aria-haspopup={true}
               className="button-avatar"
               onClick={[Function]}
             >
               <span
                 className="screen-reader-text"
               >
-                Login or open user settings
+                User settings
               </span>
               <figure
+                aria-hidden={true}
                 className="avatar"
               >
                 <svg
@@ -163,14 +172,14 @@ exports[`Reader.Header Component renders correctly 1`] = `
             </button>
           </li>
         </ul>
-      </nav>
+      </div>
     </nav>
-    <nav
+    <div
       className="menu-panels-left"
     >
       <span />
-    </nav>
-    <nav
+    </div>
+    <div
       className="menu-panels-right"
     >
       <span />
@@ -178,7 +187,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
       <span />
       <span />
       <span />
-    </nav>
+    </div>
     <section
       className="notifications-container"
       role="alert"
@@ -209,18 +218,22 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
       className="container-banner"
     >
       <button
+        aria-haspopup={true}
         className="button-menu"
         data-id="toggle-menu"
         onClick={[Function]}
       >
         Menu
       </button>
-      <nav
+      <div
         className="menu-buttons"
       >
-        <ul>
+        <ul
+          aria-label="Reader Settings and Search"
+        >
           <li>
             <button
+              aria-haspopup={true}
               className="button-visibility"
               data-id="toggle-visibility"
               onClick={[Function]}
@@ -241,12 +254,13 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               <span
                 className="screen-reader-text"
               >
-                Open the visibility menu
+                Visibility
               </span>
             </button>
           </li>
           <li>
             <button
+              aria-haspopup={true}
               className="button-appearance"
               data-id="toggle-appearance"
               onClick={[Function]}
@@ -267,12 +281,13 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               <span
                 className="screen-reader-text"
               >
-                Open reader appearance menu
+                Reader appearance
               </span>
             </button>
           </li>
           <li>
             <button
+              aria-haspopup={true}
               className="button-search"
               data-id="toggle-menu"
               onClick={[Function]}
@@ -293,21 +308,23 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
               <span
                 className="screen-reader-text"
               >
-                Open search
+                Search
               </span>
             </button>
           </li>
           <li>
             <button
+              aria-haspopup={true}
               className="button-avatar"
               onClick={[Function]}
             >
               <span
                 className="screen-reader-text"
               >
-                Login or open user settings
+                User settings
               </span>
               <figure
+                aria-hidden={true}
                 className="avatar"
               >
                 <svg
@@ -333,14 +350,14 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
             </button>
           </li>
         </ul>
-      </nav>
+      </div>
     </nav>
-    <nav
+    <div
       className="menu-panels-left"
     >
       <span />
-    </nav>
-    <nav
+    </div>
+    <div
       className="menu-panels-right"
     >
       <span />
@@ -348,7 +365,7 @@ exports[`Reader.Header Component renders correctly when no TOC or metadata 1`] =
       <span />
       <span />
       <span />
-    </nav>
+    </div>
     <section
       className="notifications-container"
       role="alert"

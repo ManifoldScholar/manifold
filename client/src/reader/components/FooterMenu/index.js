@@ -18,8 +18,8 @@ export default class Footer extends Component {
     return (
       <footer className="reader-footer-menu">
         <div className="container">
-          <nav className="menu-buttons">
-            <ul>
+          <div className="menu-buttons">
+            <ul aria-label="Reader Settings">
               <Authorize kind={"any"}>
                 <li>
                   <ControlMenu.NotesButton
@@ -43,7 +43,7 @@ export default class Footer extends Component {
                 />
               </li>
             </ul>
-          </nav>
+          </div>
         </div>
       </footer>
     );

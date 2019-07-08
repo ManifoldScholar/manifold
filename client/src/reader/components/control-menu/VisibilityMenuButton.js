@@ -27,9 +27,11 @@ export default class VisibilityMenuButton extends PureComponent {
         className={buttonClass}
         onClick={this.clickHandler}
         data-id="toggle-visibility"
+        aria-haspopup
+        aria-expanded={this.props.active}
       >
         <Utility.IconComposer icon="eyeball24" size={32} />
-        <span className="screen-reader-text">Open the visibility menu</span>
+        <span className="screen-reader-text">Visibility</span>
       </button>
     );
   }

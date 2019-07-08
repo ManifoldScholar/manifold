@@ -44,19 +44,19 @@ export default class TextTitles extends Component {
 
     return (
       /* eslint-disable jsx-a11y/no-static-element-interactions */
-      <header className={titleClass} onClick={this.handleTitleClick}>
-        <h3 className="screen-reader-text">
-          {`${this.props.textTitle} ${this.props.sectionTitle}`}
-        </h3>
-        <h3
+      <div className={titleClass} onClick={this.handleTitleClick}>
+        <h1 className="screen-reader-text">
+          {`${this.props.textTitle}: ${this.props.sectionTitle}`}
+        </h1>
+        <h1
           className="text-title"
           aria-hidden="true"
           dangerouslySetInnerHTML={{ __html: this.props.textTitle }}
         />
-        <h2 className="section-title" aria-hidden="true">
+        <h1 className="section-title" aria-hidden="true">
           {this.props.sectionTitle}
-        </h2>
-      </header>
+        </h1>
+      </div>
       /* eslint-enable jsx-a11y/no-static-element-interactions */
     );
   }

@@ -75,7 +75,7 @@ export default class Pagination extends Component {
     if (!text) return null;
 
     return (
-      <nav className="section-pagination">
+      <nav className="section-pagination" aria-label="Pagination">
         <div className="section-pagination__inner container">
           {this.getPreviousLink(text)}
           {this.getNextLink(text)}

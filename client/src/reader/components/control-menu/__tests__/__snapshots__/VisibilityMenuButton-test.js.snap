@@ -2,6 +2,8 @@
 
 exports[`Reader.ControlMenu.VisibilityMenuButton Component renders correctly 1`] = `
 <button
+  aria-expanded={false}
+  aria-haspopup={true}
   className="button-visibility"
   data-id="toggle-visibility"
   onClick={[Function]}
@@ -22,7 +24,7 @@ exports[`Reader.ControlMenu.VisibilityMenuButton Component renders correctly 1`]
   <span
     className="screen-reader-text"
   >
-    Open the visibility menu
+    Visibility
   </span>
 </button>
 `;

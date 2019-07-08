@@ -29,15 +29,16 @@ export default class NextSection extends PureComponent {
     const { text } = this.props;
     if (!nextSection || !nextSection.name) return null;
     return (
-      <Link to={this.getSectionPath(nextSection.id)}>
-        <header>
+      <Link
+        to={this.getSectionPath(nextSection.id)}
+        className="section-next-section__link"
+      >
+        <header className="section-next-section__header">
           {text.attributes.sectionKind
             ? `Next ${text.attributes.sectionKind}`
             : "Next Chapter"}
         </header>
-        <h3>
-          <div>{nextSection.name}</div>
-        </h3>
+        <div className="section-next-section__title">{nextSection.name}</div>
       </Link>
     );
   }
