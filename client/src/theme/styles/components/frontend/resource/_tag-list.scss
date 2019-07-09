@@ -24,9 +24,8 @@
       pointer-events: none;
     }
 
-    &:not(.disabled):hover, &:not(.disabled):focus {
+    &:not(.disabled):hover {
       color: $accentPrimary;
-      outline: 0;
     }
   }
 }

@@ -60,9 +60,9 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
             className="primary"
           >
             <span
+              aria-hidden={true}
               className="fake-link"
               role="button"
-              tabIndex="0"
             >
               Upload a file
             </span>
@@ -137,9 +137,9 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
             or
              
             <span
+              aria-hidden={true}
               className="fake-link"
               role="button"
-              tabIndex="0"
             >
               Upload an image
             </span>
@@ -215,9 +215,9 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
             or
              
             <span
+              aria-hidden={true}
               className="fake-link"
               role="button"
-              tabIndex="0"
             >
               Upload an image
             </span>
@@ -293,9 +293,9 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
             or
              
             <span
+              aria-hidden={true}
               className="fake-link"
               role="button"
-              tabIndex="0"
             >
               Upload an image
             </span>

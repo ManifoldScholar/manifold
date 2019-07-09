@@ -80,7 +80,10 @@ export default function buildWebpackConfiguration(target = "web") {
               loader: "postcss-loader",
               options: {
                 syntax: "postcss-scss",
-                plugins: () => [require("autoprefixer")]
+                plugins: () => [
+                  require("autoprefixer"),
+                  require("postcss-focus-visible")
+                ]
               }
             },
             {

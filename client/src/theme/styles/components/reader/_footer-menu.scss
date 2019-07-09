@@ -54,10 +54,6 @@
           background-color: $neutral90;
         }
       }
-
-      &:focus {
-        @include focusOutline;
-      }
     }
   }
 }

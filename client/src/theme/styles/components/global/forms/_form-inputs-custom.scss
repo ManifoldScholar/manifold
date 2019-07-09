@@ -71,6 +71,10 @@
     }
   }
 
+  &:focus-visible {
+    outline-offset: 2px;
+  }
+
   &::before {
     position: absolute;
     top: 0;

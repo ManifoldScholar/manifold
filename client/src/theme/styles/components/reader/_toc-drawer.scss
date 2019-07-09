@@ -48,7 +48,7 @@
         transition: color $duration $timing,
           background-color $duration $timing;
 
-        &:hover, &:focus {
+        &:hover, &:focus-visible {
           color: $neutral75;
           background-color: $accentPrimaryPale;
           outline: 0;
@@ -133,10 +133,6 @@
       @include buttonUnstyled;
       color: $neutral50;
       text-decoration: none;
-
-      &:focus {
-        @include focusOutline;
-      }
     }
 
     h4 {

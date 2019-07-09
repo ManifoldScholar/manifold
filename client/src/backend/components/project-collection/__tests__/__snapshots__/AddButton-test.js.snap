@@ -3,7 +3,7 @@
 exports[`Backend.ProjectCollection.AddButton component renders correctly 1`] = `
 <div>
   <button
-    className="screen-reader-text"
+    className="project-cover-button--sr-only screen-reader-text"
     onClick={[Function]}
   >
     Include Rowan Test

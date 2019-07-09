@@ -104,7 +104,6 @@ class ResourceCard extends Component {
   handlePreviewClick = event => {
     event.preventDefault();
     const resource = this.props.resource;
-    if (this.previewable(resource)) return;
     if (this.downloadable(resource)) return this.doDownload(resource);
     if (this.linkable(resource)) return this.openLink(resource);
     // Open the resource detail view if all else fails.
@@ -193,6 +192,19 @@ class ResourceCard extends Component {
         dangerouslySetInnerHTML={{ __html: props.children }}
       />
     );
+    const PreviewLink = props => {
+      const linkProps = !this.previewable(resource) && {
+        onClick: this.handlePreviewClick,
+        role: "link",
+        tabIndex: "0"
+      };
+
+      return (
+        <div className="resource-card__link" {...linkProps}>
+          {props.children}
+        </div>
+      );
+    };
 
     const infoClass = classNames({
       "resource-card__info": true,
@@ -202,17 +214,12 @@ class ResourceCard extends Component {
     return (
       <li className="resource-card">
         <Preview resource={resource}>
-          <div
-            className="resource-card__link"
-            onClick={this.handlePreviewClick}
-            role="link"
-            tabIndex="0"
-          >
+          <PreviewLink>
             <Resourceish.Thumbnail resourceish={resource} />
             <div className="resource-card__preview-text">
               {this.getPreviewText(attr)}
             </div>
-          </div>
+          </PreviewLink>
         </Preview>
         {/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */}
         <section

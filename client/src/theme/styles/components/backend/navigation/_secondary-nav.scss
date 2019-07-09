@@ -23,23 +23,9 @@
     letter-spacing: 0;
     transition: color $duration $timing;
 
-    &:hover{
-      color: $neutral20;
-    }
-
-    &:focus {
-      color: $accentPrimary;
-      outline: 0;
-    }
-
+    &:hover,
     &.active {
       color: $neutral20;
-
-      &:focus {
-        @include focusOutline;
-        color: $neutral20;
-        outline-offset: 2px;
-      }
     }
   }
 

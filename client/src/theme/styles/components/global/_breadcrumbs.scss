@@ -32,7 +32,7 @@
     text-decoration: none;
     transition: color $duration $timing;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       color: $accentPrimary;
       outline: 0;
     }

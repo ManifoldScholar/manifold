@@ -92,7 +92,7 @@
     color: $neutralWhite;
     transition: color $duration $timing;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       color: $accentPrimaryPale;
       outline: 0;
     }

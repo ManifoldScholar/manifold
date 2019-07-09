@@ -28,7 +28,7 @@
       color: $neutral50;
       transition: color $duration $timing;
 
-      &:hover, &:focus {
+      &:hover, &:focus-visible {
         color: $accentPrimary;
         outline: 0;
       }
@@ -36,12 +36,6 @@
 
     .page-nav .links a.active {
       color: $neutralWhite;
-
-      &:focus {
-        @include focusOutline;
-        color: $neutralWhite;
-        outline-offset: 2px;
-      }
 
       &::before {
         display: none;
@@ -142,7 +136,7 @@
     }
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       color: $accentPrimary;
       outline: 0;
     }
@@ -182,22 +176,20 @@
     transition: color $duration $timing,
       background-color $duration $timing;
 
-    &:hover, &:focus {
-      color: $neutralWhite;
-      background-color: $accentPrimary;
-      outline: 0;
+    .browse & {
+      &:hover, &:focus-visible {
+        color: $neutralWhite;
+        background-color: $accentPrimary;
+        outline: 0;
+      }
     }
 
-    .bg-neutral90 & {
+    .backend & {
+      @include focusVisibleFill(rgba($accentPrimary, 0.2));
+
       &:hover {
         color: $neutral90;
         background-color: $accentPrimary;
-      }
-
-      &:focus {
-        color: $accentPrimary;
-        background-color: $neutral95;
-        outline: 0;
       }
     }
   }
@@ -235,9 +227,8 @@
             font-size: 16px;
           }
 
-          &:hover, &:focus {
+          &:hover {
             color: $accentPrimary;
-            outline: 0;
           }
 
           &.active {
@@ -253,11 +244,6 @@
               height: 2px;
               content: '';
               background-color: $neutral90;
-            }
-
-            &:focus {
-              @include focusOutline;
-              outline-offset: 2px;
             }
             /* stylelint-enable max-nesting-depth */
           }
@@ -301,11 +287,6 @@
       color: $neutral70;
       vertical-align: middle;
 
-      &:focus {
-        color: $accentPrimary;
-        outline: 0;
-      }
-
       &::after {
         @include tailUp;
         position: absolute;
@@ -333,17 +314,14 @@
       height: 100%;
       vertical-align: middle;
 
-      &:focus {
+      &:focus-visible {
         outline: 0;
 
         .avatar {
-          @include focusOutline;
-          outline-offset: 2px;
-        }
+          @include defaultFocusStyle;
 
-        &:active {
-          .avatar {
-            outline: 0;
+          .backend & {
+            outline-color: $accentPrimary;
           }
         }
       }

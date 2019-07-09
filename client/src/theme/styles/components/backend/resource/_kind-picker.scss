@@ -45,7 +45,7 @@
         border-color: $neutral80;
       }
 
-      &:hover, &:focus {
+      &:hover, &:focus-visible {
         border-color: $accentPrimary;
         outline: 0;
       }

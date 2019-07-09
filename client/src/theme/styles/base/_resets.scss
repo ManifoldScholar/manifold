@@ -52,22 +52,9 @@ p {
 }
 
 // Normalize focus outlines
-@mixin focusOutline {
-  outline: thin dotted;
-
-  .browse & {
-    outline-color: $neutral90;
-  }
-
-  .backend & {
-    outline-color: $neutral20;
-  }
-}
-
-button:focus,
-div[role='button']:focus,
-a:focus,
-.fake-link:focus,
-input:focus {
-  @include focusOutline;
+button,
+[role='button'],
+a,
+input {
+  @include focusVisibleOutline;
 }

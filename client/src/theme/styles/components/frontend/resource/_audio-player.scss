@@ -5,6 +5,7 @@
   height: 100%;
 
   .cover {
+    @include focusVisible;
     position: absolute;
     top: 0;
     left: 0;
@@ -13,10 +14,6 @@
     height: 100%;
     cursor: pointer;
     background: transparentize($neutralBlack, 0.5);
-
-    &:focus {
-      @include focusOutline;
-    }
 
     &.error {
       pointer-events: none;
@@ -81,9 +78,7 @@
       border: 0;
       outline: none;
 
-      &:hover, &:focus {
-        outline: 0;
-
+      &:hover, &:focus-visible {
         .audio-player__icon {
           color: $accentPrimary;
         }
@@ -110,12 +105,6 @@
 
           &::-webkit-slider-thumb {
             box-shadow: -1024px 0 0 1024px $neutralWhite;
-          }
-
-          &:focus {
-            @include focusOutline;
-            outline-color: $neutralWhite;
-            outline-offset: 4px;
           }
         }
       }
@@ -179,12 +168,6 @@
 
         &:hover {
           cursor: pointer;
-        }
-
-        &:focus {
-          @include focusOutline;
-          outline-color: $neutralWhite;
-          outline-offset: 4px;
         }
 
         &::-webkit-slider-runnable-track {

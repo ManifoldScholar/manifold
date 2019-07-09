@@ -132,9 +132,9 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                             className="primary"
                           >
                             <span
+                              aria-hidden={true}
                               className="fake-link"
                               role="button"
-                              tabIndex="0"
                             >
                               Upload a file
                             </span>
@@ -218,9 +218,9 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                             className="primary"
                           >
                             <span
+                              aria-hidden={true}
                               className="fake-link"
                               role="button"
-                              tabIndex="0"
                             >
                               Upload a file
                             </span>
@@ -304,9 +304,9 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                             className="primary"
                           >
                             <span
+                              aria-hidden={true}
                               className="fake-link"
                               role="button"
-                              tabIndex="0"
                             >
                               Upload a file
                             </span>
@@ -390,9 +390,9 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                             className="primary"
                           >
                             <span
+                              aria-hidden={true}
                               className="fake-link"
                               role="button"
-                              tabIndex="0"
                             >
                               Upload a file
                             </span>

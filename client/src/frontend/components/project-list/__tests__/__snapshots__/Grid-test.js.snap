@@ -197,7 +197,7 @@ exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
       />
       <div>
         <button
-          className="screen-reader-text"
+          className="project-cover-button--sr-only screen-reader-text"
           onClick={[Function]}
         >
           Follow Rowan Test

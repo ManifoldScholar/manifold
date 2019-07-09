@@ -273,9 +273,6 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
                 >
                   <div
                     className="resource-card__link"
-                    onClick={[Function]}
-                    role="link"
-                    tabIndex="0"
                   >
                     <div
                       className="icon-thumbnail-primary "
@@ -570,13 +567,13 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
   <section
     className="bg-neutral05"
   >
-    <div
-      className="container flush"
+    <a
+      className="back-link-secondary"
+      href="/projects/slug-1"
+      onClick={[Function]}
     >
-      <a
-        className="back-link-secondary"
-        href="/projects/slug-1"
-        onClick={[Function]}
+      <div
+        className="container flush back-link-secondary__container"
       >
         <svg
           aria-hidden={true}
@@ -605,8 +602,8 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
             Rowan Test
           </span>
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
   </section>
 </div>
 `;

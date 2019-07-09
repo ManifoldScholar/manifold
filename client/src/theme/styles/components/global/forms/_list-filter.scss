@@ -31,9 +31,21 @@
     background-color: $neutral05;
     border: 0;
 
+    &:focus-visible::placeholder {
+      color: $accentPrimary;
+    }
+
     .bg-neutral05 & {
       background-color: transparent;
       border: 2px solid $neutral30;
+
+      &:focus-visible {
+        border-color: $accentPrimary;
+
+        &::placeholder {
+          color: inherit;
+        }
+      }
     }
   }
 
@@ -58,7 +70,7 @@
       font-size: 13px;
       color: $neutral75;
 
-      &:focus {
+      &:focus-visible {
         color: $accentPrimary;
       }
     }
@@ -66,7 +78,7 @@
     input[type='text'] {
       padding-left: 40px;
 
-      &:focus {
+      &:focus-visible {
         outline: 0;
       }
     }
@@ -161,13 +173,17 @@
         border: 2px solid $neutral30;
         transition: border-color $duration $timing;
 
-        &:focus {
-          border-color: $focusPrimary;
+        &:focus-visible {
+          border-color: $accentPrimary;
         }
 
         .form-search-filter & {
           font-size: 13px;
           border: 1px solid #555;
+
+          &:focus-visible {
+            border-color: $accentPrimary;
+          }
         }
 
         option {
@@ -198,7 +214,7 @@
     font-size: 14px;
     color: $neutral40;
 
-    &:focus {
+    &:focus-visible {
       color: $accentPrimary;
     }
   }

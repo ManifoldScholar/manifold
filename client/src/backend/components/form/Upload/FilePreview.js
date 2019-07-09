@@ -32,7 +32,7 @@ export default class FormUploadFilePreview extends PureComponent {
             </span>
             <br />
             or{" "}
-            <span className="fake-link" role="button" tabIndex="0">
+            <span className="fake-link" role="button" aria-hidden>
               Upload a new file
             </span>
           </p>

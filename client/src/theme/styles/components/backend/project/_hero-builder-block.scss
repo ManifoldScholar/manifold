@@ -41,9 +41,7 @@
     @include buttonUnstyled;
     color: $neutral50;
 
-    &:focus {
-      outline: none;
-
+    &:focus-visible {
       svg {
         color: $accentPrimary;
       }

@@ -6,7 +6,7 @@
     flex-direction: row;
   }
 
-  &:hover, &:focus {
+  &:hover, &:focus-within {
     cursor: pointer;
     outline: 0;
 
@@ -17,6 +17,12 @@
 
     .text-block__cover-image {
       border-color: $accentPrimary;
+    }
+  }
+
+  a {
+    &:focus-visible {
+      outline: 0;
     }
   }
 

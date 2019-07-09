@@ -241,6 +241,10 @@
       textarea {
         border: 1px solid $neutral10;
         border-bottom: 0;
+
+        &:focus-visible::placeholder {
+          color: $accentPrimary;
+        }
       }
     }
   }

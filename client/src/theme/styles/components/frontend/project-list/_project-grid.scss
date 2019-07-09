@@ -84,7 +84,7 @@
             box-shadow $duration ease-out;
         }
 
-        a:hover, a:focus {
+        a:hover, a:focus-visible {
           background-color: $neutral05;
           box-shadow: 0 31px 44px 2px rgba($neutralBlack, 0.13);
 
@@ -115,7 +115,7 @@
   }
 
   .browse .bg-neutral05 &.grid {
-    a:hover, a:focus {
+    a:hover, a:focus-visible {
       @include respond($break75) {
         background-color: $neutral10;
       }

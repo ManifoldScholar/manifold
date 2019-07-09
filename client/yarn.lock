@@ -6991,6 +6991,11 @@ focus-trap@^2.0.1:
   dependencies:
     tabbable "^1.0.3"
 
+focus-visible@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/focus-visible/-/focus-visible-5.0.1.tgz#8bbe2d938bf88f067a252d72ac3a1cb2c3cb4767"
+  integrity sha512-xmuzsbC+LsF8iHlbBUvLsM6sfqyeUCAJTq3GK9JboFAdCqdDt/d4XoeE9jWT3cct2NFs/BKZ8IM8Yjkk1wgO3Q==
+
 follow-redirects@^1.0.0:
   version "1.5.10"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
@@ -11460,6 +11465,13 @@ postcss-flexbugs-fixes@^4.1.0:
   integrity sha512-jr1LHxQvStNNAHlgco6PzY308zvLklh7SJVYuWUwyUQncofaAlD2l+P/gxKHOdqWKe7xJSkVLFF/2Tp+JqMSZA==
   dependencies:
     postcss "^7.0.0"
+
+postcss-focus-visible@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-focus-visible/-/postcss-focus-visible-4.0.0.tgz#477d107113ade6024b14128317ade2bd1e17046e"
+  integrity sha512-Z5CkWBw0+idJHSV6+Bgf2peDOFf/x4o+vX/pwcNYrWpXFrSfTkQ3JQ1ojrq9yS+upnAlNRHeg8uEwFTgorjI8g==
+  dependencies:
+    postcss "^7.0.2"
 
 postcss-html@^0.34.0:
   version "0.34.0"

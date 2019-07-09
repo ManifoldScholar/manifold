@@ -60,7 +60,7 @@
       border-color: $neutralOffBlack;
     }
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       color: $accentPrimary;
       border-color: $accentPrimary;
       outline: 0;
@@ -103,7 +103,7 @@
         height: 35px;
       }
 
-      &:hover, &:focus {
+      &:hover, &:focus-visible {
         color: $neutralWhite;
         background-color: $accentPrimary;
         outline: 0;
@@ -170,7 +170,7 @@
       }
     }
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       border-color: $accentPrimary;
       outline: 0;
 
@@ -240,7 +240,7 @@
         color: $neutralOffBlack;
       }
 
-      &:hover, &:focus {
+      &:hover, &:focus-visible {
         background-color: $accentPrimary;
         outline: 0;
 

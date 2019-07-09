@@ -12,8 +12,7 @@
 
 // Contents
 // --------------------------
-// - Imports
-// - Prototypes
+// - Interactions
 // - Utilities
 // - Layout
 // - Type
@@ -23,6 +22,43 @@
 // - Buttons/Links
 // - Browser UI
 // - Tables
+
+// Interactions
+// --------------------
+@mixin defaultFocusStyle {
+  outline: solid 2px;
+}
+
+@mixin focusVisible($property: "outline", $value: "solid 2px") {
+  &:focus:not(:focus-visible) {
+    outline: 0;
+  }
+
+  &:focus-visible {
+    #{$property}: #{$value};
+  }
+}
+
+@mixin focusVisibleOutline($color: var(--default-focus-color, $accentPrimary)) {
+  @include focusVisible("outline", "solid 2px #{$color}");
+}
+
+@mixin focusVisibleFill($color: $accentPrimary) {
+  @include focusVisible("background-color", $color);
+
+  &:focus-visible {
+    outline: 0;
+  }
+}
+
+.browse, .reader.scheme-light {
+  --default-focus-color: #{$neutral80};
+}
+
+.backend, .reader.scheme-dark, .bg-neutral90, .bg-neutral95 {
+  --default-focus-color: #{$accentPrimary};
+}
+
 
 // Utility
 // --------------------------------------------------------
@@ -205,7 +241,7 @@
   outline: 0;
   -webkit-appearance: none; // stylelint-disable-line
   appearance: none; // stylelint-disable-line
-  &:focus:-moz-focusring {
+  &:focus-visible:-moz-focusring {
     color: transparent;
     // Add color back to text
     text-shadow: 0 0 0 $neutral80;
@@ -232,7 +268,7 @@
     line-height: $baseLineHeight;
     border: 2px solid $neutral40;
 
-    &:focus {
+    &:focus-visible {
       border-color: $accentPrimary;
     }
   }
@@ -281,7 +317,7 @@
   border: 2px solid $accentPrimary;
   outline: none;
 
-  &:focus {
+  &:focus-visible {
     border-color: $neutralWhite;
   }
 }
@@ -304,7 +340,7 @@
   border: 3px solid $neutralWhite;
   outline: none;
 
-  &:focus {
+  &:focus-visible {
     border-color: $accentPrimary;
   }
 }
@@ -318,7 +354,7 @@
   border: 3px solid $accentPrimary;
   outline: none;
 
-  &:focus {
+  &:focus-visible {
     border-color: $neutralWhite;
   }
 }
@@ -333,14 +369,17 @@
   border-radius: 0;
   appearance: none;
   outline: none;
-  transition: border-color $duration $timing;
-
-  &:focus {
-    border-color: $accentPrimary;
-  }
 
   &::placeholder {
-    color: $accentPrimary;
+    color: $neutral75;
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::placeholder {
+      color: $accentPrimary;
+    }
   }
 }
 

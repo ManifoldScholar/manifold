@@ -85,17 +85,12 @@
       color: $accentPrimary;
     }
 
-    &:focus {
-      color: $accentPrimaryDull;
-      outline: thin dotted $neutral70;
-    }
-
     .project-collection-list-item--selected & {
       &:hover {
         color: inherit;
       }
 
-      &:focus {
+      &:focus-visible {
         color: inherit;
         outline-color: $neutral70;
       }

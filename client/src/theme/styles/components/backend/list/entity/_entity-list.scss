@@ -48,6 +48,7 @@
 
   &__button {
     @include utilityPrimary;
+    @include focusVisibleFill(rgba($accentPrimary, 0.2));
     display: block;
     font-size: 14px;
     font-weight: $semibold;

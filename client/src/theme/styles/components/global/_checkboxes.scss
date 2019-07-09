@@ -48,7 +48,7 @@
     }
   }
 
-  input:focus {
+  input:focus-visible {
     outline: 0;
 
     ~ .checkbox__indicator {

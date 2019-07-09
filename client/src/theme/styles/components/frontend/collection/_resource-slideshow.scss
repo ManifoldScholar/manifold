@@ -1,5 +1,7 @@
 .resource-slideshow {
   $slideCopyFocus: 570px;
+  --default-focus-color: #{$accentPrimary};
+
   padding-bottom: 38px;
 
   @include respond($break60) {
@@ -86,8 +88,7 @@
       opacity: 0.4;
     }
 
-    &:not(:disabled):hover,
-    &:not(:disabled):focus {
+    &:not(:disabled):hover {
       color: $accentPrimary;
     }
 
@@ -264,7 +265,7 @@
       color: $neutral50;
     }
 
-    &:hover, &:focus {
+    &:hover {
       color: $accentPrimary;
     }
   }

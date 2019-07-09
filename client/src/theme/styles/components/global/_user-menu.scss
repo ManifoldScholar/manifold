@@ -48,12 +48,8 @@
     color: $neutral80;
     text-decoration: none;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       color: $accentPrimary;
-
-      i {
-        color: $accentPrimary;
-      }
     }
   }
 
@@ -66,7 +62,7 @@
     color: $neutral50;
 
     .user-menu__link:hover &,
-    .user-menu__link:focus & {
+    .user-menu__link:focus-visible & {
       color: $accentPrimary;
     }
   }

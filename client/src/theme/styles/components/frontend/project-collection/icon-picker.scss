@@ -36,7 +36,7 @@
         height: 100%;
         transition: background-color $duration $timing, color $duration $timing, border-color $duration $timing;
 
-        &:focus {
+        &:focus-visible {
           color: $neutral110;
           background-color: $accentPrimaryPale;
           border-color: $accentPrimaryPale;

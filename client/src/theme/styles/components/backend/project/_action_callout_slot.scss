@@ -51,9 +51,9 @@
       -webkit-touch-callout: none;
     }
 
-    &:focus {
+    &:focus-visible {
       color: $accentPrimary;
-      outline: none;
+      outline: 0;
     }
 
     &:not(:disabled):hover {

@@ -69,9 +69,9 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
                 className="primary"
               >
                 <span
+                  aria-hidden={true}
                   className="fake-link"
                   role="button"
-                  tabIndex="0"
                 >
                   Upload a file
                 </span>
@@ -144,9 +144,9 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
                 className="primary"
               >
                 <span
+                  aria-hidden={true}
                   className="fake-link"
                   role="button"
-                  tabIndex="0"
                 >
                   Upload a file
                 </span>
@@ -227,9 +227,9 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
               className="primary"
             >
               <span
+                aria-hidden={true}
                 className="fake-link"
                 role="button"
-                tabIndex="0"
               >
                 Upload a file
               </span>
@@ -307,9 +307,9 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
               className="primary"
             >
               <span
+                aria-hidden={true}
                 className="fake-link"
                 role="button"
-                tabIndex="0"
               >
                 Upload a file
               </span>
@@ -394,9 +394,9 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
               className="primary"
             >
               <span
+                aria-hidden={true}
                 className="fake-link"
                 role="button"
-                tabIndex="0"
               >
                 Upload a file
               </span>

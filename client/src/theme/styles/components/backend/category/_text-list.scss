@@ -110,6 +110,7 @@
 
   &__button {
     @include buttonUnstyled;
+    @include focusVisibleOutline($accentPrimary);
     display: block;
     padding: 0;
     color: $neutral50;
