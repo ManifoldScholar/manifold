@@ -45,7 +45,7 @@
       padding: 0 14px;
       background-color: $neutral95;
       border: 1px solid $neutral80;
-      outline-width: 0;
+      outline: 0;
 
       @include respond($break65) {
         @include panelRounded;
@@ -61,7 +61,7 @@
     height: 100%;
     text-decoration: none;
 
-    &:focus {
+    &:focus-visible {
       background-color: lighten($neutral90, 2%);
       border-color: lighten($neutral90, 2%);
       outline: none;
@@ -74,8 +74,8 @@
         box-shadow $duration ease-out;
 
       &:hover,
-      &:focus {
-        outline-width: 0;
+      &:focus-visible {
+        outline: 0;
 
         @include respond($break65) {
           @include panelRounded;
@@ -320,12 +320,12 @@
     }
 
     .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):hover &,
-    .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):focus & {
+    .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):focus-visible & {
       text-decoration: underline;
     }
 
     .entity-row__row-link--in-grid:hover &,
-    .entity-row__row-link--in-grid:focus & {
+    .entity-row__row-link--in-grid:focus-visible & {
       @include respond($break65 - 1, max) {
         text-decoration: underline;
       }

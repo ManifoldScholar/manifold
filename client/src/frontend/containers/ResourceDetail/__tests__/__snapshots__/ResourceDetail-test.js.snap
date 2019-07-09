@@ -518,13 +518,13 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
   <section
     className="bg-neutral05"
   >
-    <div
-      className="container flush"
+    <a
+      className="back-link-secondary"
+      href="/projects/slug-1/resources"
+      onClick={[Function]}
     >
-      <a
-        className="back-link-secondary"
-        href="/projects/slug-1/resources"
-        onClick={[Function]}
+      <div
+        className="container flush back-link-secondary__container"
       >
         <svg
           aria-hidden={true}
@@ -551,8 +551,8 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
             className="back-link-secondary__project-title"
           />
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
   </section>
 </div>
 `;

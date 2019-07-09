@@ -337,7 +337,7 @@
     // transition: color $duration $timing;
     //
     // &:hover,
-    // &:focus {
+    // &:focus-visible {
     //   color: $accentPrimary;
     // }
   }
@@ -352,8 +352,7 @@
       color: inherit;
     }
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: $accentPrimary;
     }
   }

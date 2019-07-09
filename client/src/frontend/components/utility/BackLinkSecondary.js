@@ -18,8 +18,8 @@ export default class UtilityBackLinkSecondary extends Component {
 
   render() {
     return (
-      <div className="container flush">
-        <Link to={this.props.link} className="back-link-secondary">
+      <Link to={this.props.link} className="back-link-secondary">
+        <div className="container flush back-link-secondary__container">
           <IconComposer
             icon="circleArrowLeft64"
             size={56}
@@ -33,8 +33,8 @@ export default class UtilityBackLinkSecondary extends Component {
               {this.props.title}
             </span>
           </div>
-        </Link>
-      </div>
+        </div>
+      </Link>
     );
   }
 }

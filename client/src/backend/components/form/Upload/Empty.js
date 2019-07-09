@@ -38,7 +38,7 @@ export default class FormUploadEmpty extends PureComponent {
               </span>
             ) : (
               <React.Fragment>
-                <span className="fake-link" role="button" tabIndex="0">
+                <span className="fake-link" role="button" aria-hidden>
                   {"Upload a file"}
                 </span>
                 {" or "}

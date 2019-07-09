@@ -32,7 +32,7 @@
       }
 
       button {
-        &:hover, &:focus {
+        &:hover, &:focus-visible {
           color: $accentPrimary;
           outline: 0;
 

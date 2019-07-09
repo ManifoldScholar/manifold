@@ -35,9 +35,8 @@
       font-size: 22px;
     }
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       color: $accentPrimary;
-      outline: 0;
     }
 
     &--flush-bottom {
@@ -51,7 +50,7 @@
     transition: color $duration $timing;
 
     .reader-return-menu__link:hover &,
-    .reader-return-menu__link:focus & {
+    .reader-return-menu__link:focus-visible & {
       color: $accentPrimary;
     }
   }
@@ -97,7 +96,7 @@
     transition: color $duration $timing;
 
     .reader-return-menu__link:hover &,
-    .reader-return-menu__link:focus & {
+    .reader-return-menu__link:focus-visible & {
       color: $accentPrimary;
     }
 
@@ -117,7 +116,7 @@
     transition: color $duration $timing;
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       color: $accentPrimary;
     }
 
@@ -133,7 +132,7 @@
     transition: color $duration $timing;
 
     .reader-return-menu__note:hover &,
-    .reader-return-menu__note:focus & {
+    .reader-return-menu__note:focus-visible & {
       color: $accentPrimary;
     }
   }

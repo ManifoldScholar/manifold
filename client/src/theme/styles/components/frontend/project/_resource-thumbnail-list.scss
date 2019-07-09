@@ -33,7 +33,7 @@
       }
     }
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       outline: none;
 
       .icon-thumbnail-primary {

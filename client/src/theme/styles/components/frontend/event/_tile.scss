@@ -26,8 +26,8 @@
     cursor: pointer;
 
     &:hover,
-    &:focus {
-      outline: none;
+    &:focus-visible {
+      outline: 0;
       box-shadow: 0 10px 30px 2px rgba($neutralBlack, 0.13);
 
       @include respond($break60) {

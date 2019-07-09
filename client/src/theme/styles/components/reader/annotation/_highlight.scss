@@ -59,12 +59,12 @@
         color: $neutral40;
         transition: color $duration $timing;
 
-        &:hover, &.active, &:focus {
+        &:hover, &.active, &:focus-visible {
           color: $accentPrimaryDark;
           outline: 0;
         }
 
-        &.deny:hover, &.deny:focus {
+        &.deny:hover, &.deny:focus-visible {
           color: $sp40Tertiary;
         }
       }

@@ -136,10 +136,10 @@
 
       &:hover {
         color: $accentPrimary;
-        outline-width: 0;
+        outline: 0;
       }
 
-      &:focus {
+      &:focus-visible {
         color: $focusPrimary;
       }
     }
@@ -195,7 +195,7 @@
       transition: color $duration $timing;
 
       &:hover,
-      &:focus {
+      &:focus-visible {
         color: $neutral70;
         outline: 0;
       }
@@ -216,10 +216,6 @@
       &:hover {
         color: $neutral75;
       }
-
-      &:focus {
-        outline: none;
-      }
     }
 
     &__close-text {
@@ -238,10 +234,6 @@
 
       &--small {
         display: none;
-      }
-
-      .drawer-bar__close-button:focus & {
-        outline: thin dotted;
       }
     }
   }

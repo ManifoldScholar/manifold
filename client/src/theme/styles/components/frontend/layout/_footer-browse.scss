@@ -1,4 +1,6 @@
 .footer-browse {
+  --default-focus-color: #{$accentPrimary};
+
   padding-top: 32px;
   background-color: $neutral75;
 
@@ -92,7 +94,7 @@
 
 
     button {
-      &:focus {
+      &:focus-visible {
         color: $accentPrimary;
       }
     }
@@ -129,7 +131,7 @@
     background-color: $neutral80;
     transition: background-color $duration $timing;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       background-color: $accentPrimary;
       outline: 0;
 
@@ -213,9 +215,8 @@
     cursor: pointer;
     transition: color $duration $timing;
 
-    &:hover, &:focus {
+    &:hover {
       color: $accentPrimary;
-      outline: 0;
     }
   }
 
@@ -227,7 +228,7 @@
     transition: color $duration $timing;
 
     .footer-nav-list__link:hover &,
-    .footer-nav-list__link:focus & {
+    .footer-nav-list__link:focus-visible & {
       color: $accentPrimary;
     }
   }

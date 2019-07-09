@@ -60,9 +60,9 @@ exports[`Backend.Resource.Form.KindAttributes component when kind is audio rende
             className="primary"
           >
             <span
+              aria-hidden={true}
               className="fake-link"
               role="button"
-              tabIndex="0"
             >
               Upload a file
             </span>

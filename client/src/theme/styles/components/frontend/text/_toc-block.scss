@@ -99,7 +99,7 @@
       background-color $duration $timing;
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       color: $accentPrimaryDark;
       background-color: $accentPrimaryOffWhite;
     }

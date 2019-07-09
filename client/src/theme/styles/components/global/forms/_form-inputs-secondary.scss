@@ -110,7 +110,7 @@
       @include formInputSecondary;
       transition: border-color $duration $timing;
 
-      &:focus {
+      &:focus-visible {
         border-color: $accentPrimaryLight;
       }
     }
@@ -130,6 +130,10 @@
       @include respond($break70) {
         padding: 1.579em;
         font-size: 18px;
+      }
+
+      &:focus-visible {
+        border-color: $accentPrimary;
       }
     }
 
@@ -270,7 +274,7 @@
       line-height: normal;
       text-transform: none; // OD
 
-      &:focus {
+      &:focus-visible {
         color: $neutral40;
         border-color: $accentPrimaryLight;
       }
@@ -286,6 +290,11 @@
     max-width: 350px;
     min-height: 200px;
     border: 1px solid $neutral80;
+    transition: border-color 0.2s;
+
+    &:focus-within {
+      border-color: $accentPrimary;
+    }
 
     .primary {
       @include utilityPrimary;
@@ -319,7 +328,7 @@
     a, .fake-link {
       transition: color $duration $timing;
 
-      &:hover, &:focus {
+      &:hover, &:focus-visible {
         color: $accentPrimary;
         outline: 0;
       }

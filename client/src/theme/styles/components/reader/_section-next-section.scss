@@ -18,8 +18,10 @@
       padding: 64px 0 101px;
     }
 
-    &:hover, &:focus {
-      outline: 0;
+    &:hover {
+      h3 {
+        color: $accentPrimary;
+      }
     }
   }
 

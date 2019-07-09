@@ -48,35 +48,54 @@
     -ms-grid-columns: 1fr 9px auto 9px auto 9px 1fr;
     grid-template:
       '. icon text .' auto / 1fr auto auto 1fr;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 13px;
+    padding-left: 13px;
     color: $neutral90;
-    transition: background-color $duration $timing;
+    border: 2px solid transparent;
+    transition:
+      background-color $duration $timing,
+      border-color background-color $duration $timing;
+
+    &:focus-visible {
+      outline: 0;
+    }
 
     &--primary {
       background-color: $accentPrimary;
 
       &:hover,
-      &:focus {
+      &:focus-visible {
         background-color: $accentPrimaryDull;
+      }
+
+      &:focus-visible {
+        border-color: $accentPrimary;
       }
     }
 
     &--secondary {
       background-color: $neutral20;
 
-      &:hover,
-      &:focus {
+      &:hover {
         background-color: rgba($neutral20, 0.6);
+      }
+
+      &:focus-visible {
+        border-color: $neutral70;
       }
 
       .project-hero--dark & {
         color: $neutral45;
         background-color: #424242;
+        border-color: #424242;
 
         &:hover,
-        &:focus {
+        &:focus-visible {
           background-color: $neutral75;
+        }
+
+        &:focus-visible {
+          border-color: $neutral75;
         }
       }
     }
@@ -86,7 +105,7 @@
       background-color: $sp30Secondary;
 
       &:hover,
-      &:focus {
+      &:focus-visible {
         background-color: $sp20Quaternary;
       }
 
@@ -117,8 +136,8 @@
     grid-area: text;
     -ms-grid-row: 1;
     -ms-grid-column: 5;
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 
     .action-callout-list__button--centered & {
       -ms-grid-row: 1;
@@ -126,8 +145,8 @@
     }
 
     @include respond($break60) {
-      padding-top: 19px;
-      padding-bottom: 19px;
+      padding-top: 17px;
+      padding-bottom: 17px;
     }
   }
   /* stylelint-enable property-no-vendor-prefix */
@@ -137,8 +156,7 @@
     min-height: 17.33px;
     transition: color $duration $timing;
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: $accentPrimary;
 
       .action-callout-list__link-icon {
@@ -150,7 +168,7 @@
       color: $sp30Secondary;
 
       &:hover,
-      &:focus {
+      &:focus-visible {
         color: $sp20Quaternary;
       }
     }

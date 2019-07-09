@@ -322,7 +322,7 @@ Array [
                 </svg>
                 <div>
                   <button
-                    className="screen-reader-text"
+                    className="project-cover-button--sr-only screen-reader-text"
                     onClick={[Function]}
                   >
                     Exclude Rowan Test
@@ -611,7 +611,7 @@ Array [
                 </svg>
                 <div>
                   <button
-                    className="screen-reader-text"
+                    className="project-cover-button--sr-only screen-reader-text"
                     onClick={[Function]}
                   >
                     Exclude Rowan Test

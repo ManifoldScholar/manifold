@@ -35,7 +35,7 @@
       color: $neutral40;
     }
 
-    &:focus {
+    &:focus-visible {
       color: $neutralWhite;
       border-color: $accentPrimary;
 
@@ -75,12 +75,6 @@
 
     + .dropzone-button {
       margin-top: 25px;
-    }
-
-    .manicon {
-      &:focus {
-        @include focusOutline;
-      }
     }
   }
 
@@ -125,7 +119,7 @@
     color: $neutral70;
     cursor: pointer;
 
-    &:focus {
+    &:focus-visible {
       outline: 0;
     }
   }

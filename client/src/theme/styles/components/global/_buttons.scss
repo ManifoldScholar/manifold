@@ -11,8 +11,7 @@
 
   &__icon:not(.utility-button__icon--light),
   &__text:not(.utility-button__text--light) {
-    .backend .utility-button:not(:disabled):hover &,
-    .backend .utility-button:not(:disabled):focus & {
+    .backend .utility-button:not(:disabled):hover & {
       color: $neutral20;
     }
 
@@ -121,9 +120,13 @@
     background-color: $accentPrimaryOffWhite;
   }
 
-  &:focus {
+  &:focus-visible {
     background-color: $focusPrimary;
     outline: 0;
+
+    .browse & {
+      outline: 0;
+    }
   }
 
   &:active {
@@ -139,7 +142,7 @@
       background-color: $neutral05;
     }
 
-    &:focus {
+    &:focus-visible {
       background-color: $focusSecondary;
     }
 
@@ -188,11 +191,9 @@
     font-size: 14px;
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: $neutralWhite;
     background-color: $accentPrimary;
-    outline: 0;
   }
 
   &:active {
@@ -207,13 +208,20 @@
     }
   }
 
+  .browse & {
+    @include focusVisibleFill($accentPrimaryDull);
+
+    &:focus-visible {
+      outline: 0;
+    }
+  }
+
   &__icon {
     margin-right: 7px;
     color: $neutral40;
     transition: color $duration $timing;
 
-    .button-icon-primary:hover &,
-    .button-icon-primary:focus & {
+    .button-icon-primary:hover & {
       color: $neutralWhite;
     }
 
@@ -273,19 +281,18 @@
     border: 1px solid $neutral80;
   }
 
-  &:focus:not([disabled]) {
-    background-color: $neutral95;
+  &:focus-visible:not([disabled]) {
+    background-color: rgba($accentPrimary, 0.2);
     outline: 0;
   }
 
   &:hover:not([disabled]),
-  &:focus:hover:not([disabled])
   &:active:not([disabled]) {
     color: $neutral90;
     background-color: $accentPrimary;
   }
 
-  &:focus:disabled {
+  &:focus-visible:disabled {
     outline-offset: 2px;
   }
 
@@ -294,11 +301,14 @@
     border-color: $neutral50;
 
     &:hover:not([disabled]),
-    &:focus:not([disabled]),
     &:active:not([disabled]) {
       color: $accentPrimary;
       background-color: transparent;
       border-color: $accentPrimary;
+    }
+
+    &:focus-visible:not([disabled]) {
+      background-color: rgba($neutral50, 0.2);
       outline: 0;
     }
   }
@@ -419,7 +429,7 @@
     background-color: $accentPrimaryDull;
   }
 
-  &:focus {
+  &:focus-visible {
     background-color: $focusPrimary;
     outline: 0;
   }
@@ -442,7 +452,7 @@
       background-color: $neutral10;
     }
 
-    &:focus {
+    &:focus-visible {
       background-color: $neutral30;
       outline: 0;
     }
@@ -463,7 +473,7 @@
       background-color: $accentPrimaryDull;
     }
 
-    &:focus {
+    &:focus-visible {
       color: $neutralWhite;
       background-color: $neutral95;
       outline: 0;
@@ -481,7 +491,7 @@
     background: none;
     border: 1px solid $accentPrimary;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       color: $neutral90;
       background-color: $accentPrimary;
       outline: 0;
@@ -491,7 +501,10 @@
       }
     }
 
-    .bg-neutral90 & {
+    .bg-neutral90 &,
+    .bg-neutral100 &,
+    .drawer-backend & {
+      @include focusVisibleFill(rgba($accentPrimary, 0.2));
       color: $neutralWhite;
 
       &:hover {
@@ -503,25 +516,7 @@
         }
       }
 
-      &:focus {
-        color: $neutralWhite;
-        background-color: $neutral95;
-        outline: 0;
-
-        .manicon {
-          color: $neutralWhite;
-        }
-      }
-    }
-
-    .bg-neutral100 &, .drawer-backend & {
-      color: $neutralWhite;
-
-      &:focus {
-        color: $neutralWhite;
-        background-color: $neutralBlack;
-        outline: 0;
-
+      &:focus-visible {
         .manicon {
           color: $neutralWhite;
         }
@@ -529,10 +524,11 @@
     }
 
     &.button-secondary--dull {
+      @include focusVisibleFill(rgba($neutral70, 0.2));
       color: $neutral70;
       border-color: $neutral70;
 
-      &:hover, &:focus {
+      &:hover {
         color: $neutral90;
         background-color: $neutral70;
         outline: 0;
@@ -559,7 +555,7 @@
         color: $neutral95;
       }
 
-      &:focus {
+      &:focus-visible {
         background-color: $neutral95;
       }
 
@@ -569,7 +565,7 @@
     }
 
     .overlay-full-primary & {
-      &:hover, &:focus {
+      &:hover, &:focus-visible {
         color: $neutral80;
       }
     }
@@ -597,7 +593,7 @@
       transition: color $duration $timing;
 
       .button-secondary:hover &,
-      .button-secondary:focus & {
+      .button-secondary:focus-visible & {
         color: $neutral90;
       }
     }
@@ -632,7 +628,7 @@
     color: $accentPrimaryMedium;
   }
 
-  &:focus {
+  &:focus-visible {
     color: $neutral95;
     outline: 0;
   }
@@ -682,10 +678,6 @@
   &.active {
     width: 100%;
   }
-
-  &:focus {
-    outline-width: 0;
-  }
 }
 
 .project-cover-button {
@@ -710,6 +702,13 @@
 
   @include respond($break75) {
     font-size: 18px;
+  }
+
+  &--sr-only {
+    &:focus-visible ~ .project-cover-button-wrapper {
+      @include defaultFocusStyle;
+      outline-color: $accentPrimary;
+    }
   }
 
   .remove & {
@@ -821,7 +820,7 @@
   .bg-neutral95 & {
     background-color: $neutral95;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       color: $accentPrimary !important;
       background-color: $neutral95;
       outline: 0;
@@ -832,7 +831,7 @@
     background-color: $neutral20;
   }
 
-  &:focus {
+  &:focus-visible {
     color: $neutral80 !important;
     background-color: $focusTertiary;
     outline: 0;
@@ -872,23 +871,35 @@
 }
 
 .back-link-secondary {
-  display: flex;
-  align-items: center;
-  padding: 31px 0 28px;
+  display: block;
   text-decoration: none !important;
+  background-color: $neutral10;
+  transition: background-color $duration $timing;
 
-  &:hover {}
+  &:hover, &:active {
+    background-color: $neutral20;
+  }
 
-  &:focus {
+  &:focus-visible {
+    background-color: $focusTertiary;
     outline: 0;
   }
 
-  &__icon, &__back-text, &__project-title {
+  &__container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 31px;
+    padding-bottom: 28px;
+  }
+
+  &__icon, &__project-title {
     .back-link-secondary:hover & {
-      color: $neutral45;
+      color: $neutral70;
     }
 
-    .back-link-secondary:focus & {
+    .back-link-secondary:focus-visible & {
       color: $neutral80;
     }
 
@@ -910,8 +921,7 @@
   &__back-text {
     @include utilityPrimary;
     font-size: 14px;
-    color: $neutral70;
-    transition: color $duration $timing;
+    color: $neutral75;
   }
 
   &__project-title {

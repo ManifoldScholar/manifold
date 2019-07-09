@@ -180,7 +180,7 @@
     background-color: $neutral40;
     transition: background-color $duration $timing;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       background-color: $sp30Tertiary;
       outline: 0;
     }
@@ -247,7 +247,7 @@
       position: relative;
       cursor: pointer;
 
-      &.highlighted, a:focus {
+      &.highlighted, a:focus-visible {
         outline: 0;
 
         .icon-thumbnail-primary::before {

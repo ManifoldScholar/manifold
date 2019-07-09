@@ -1,4 +1,6 @@
 .footer-reader {
+  --default-focus-color: #{$accentPrimary};
+
   padding: 40px 0 80px;
   color: $neutral05;
   background-color: $neutral80;
@@ -59,7 +61,7 @@
       color: $accentPrimaryMedium;
     }
 
-    &:hover, &:focus {
+    &:hover {
       color: $accentPrimaryDark;
       outline: 0;
     }

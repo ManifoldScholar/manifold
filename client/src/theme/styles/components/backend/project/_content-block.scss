@@ -16,9 +16,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 10px 15px 12px;
+    padding: 14px 9px 14px 11px;
     cursor: move; // fallback for older browsers
     cursor: grab;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
 
     .content-block--current & {
       padding-right: 12px;
@@ -33,8 +35,9 @@
       box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
     }
 
-    &:focus {
-      outline: none;
+    &:focus-visible {
+      outline: 0;
+      border-color: $accentPrimary;
 
       .content-block--available.content-block--active & {
         .content-block__heading {
@@ -70,7 +73,7 @@
     // otherwise use a modifier to set a different color.
     .content-block--inactive &,
     .content-block--available .content-block__heading:hover &,
-    .content-block--available .content-block__inner:focus &
+    .content-block--available .content-block__inner:focus-visible &
      {
       color: inherit;
       transition: none;
@@ -168,9 +171,7 @@
     }
 
     &:not(:disabled):hover,
-    &:not(:disabled):focus {
-      outline: none;
-
+    &:not(:disabled):focus-visible {
       > .content-block__icon {
         color: $accentPrimary; // fallback
         color: var(--hover-color, $accentPrimary);

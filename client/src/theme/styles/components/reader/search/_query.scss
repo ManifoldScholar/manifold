@@ -11,6 +11,10 @@
     outline: none;
     appearance: none;
 
+    &:focus-visible::placeholder {
+      color: $accentPrimary;
+    }
+
     .search-menu & {
       background-color: $neutralWhite;
     }
@@ -43,10 +47,12 @@
       margin-top: -9px;
       line-height: 0;
       color: $neutral50;
-    }
+      transition: color $duration $timing;
 
-    input:focus + .manicon-magnify, .manicon-magnify:focus {
-      color: $accentPrimary;
+      &:hover,
+      &:focus-visible {
+        color: $accentPrimary;
+      }
     }
   }
 
@@ -163,7 +169,7 @@
         }
       }
 
-      input:focus ~ .checkbox__indicator {
+      input:focus-visible ~ .checkbox__indicator {
         background-color:  $focusPrimary;
       }
 

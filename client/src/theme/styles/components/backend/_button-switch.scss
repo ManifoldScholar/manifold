@@ -8,9 +8,8 @@
     border: 0;
     outline: 0;
 
-    &:focus {
-      outline: thin dotted $neutral50;
-      outline-offset: 2px;
+    &:focus-visible {
+      outline-offset: 4px;
     }
   }
 

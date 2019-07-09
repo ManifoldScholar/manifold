@@ -49,9 +49,6 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
           >
             <div
               className="resource-card__link"
-              onClick={[Function]}
-              role="link"
-              tabIndex="0"
             >
               <div
                 className="icon-thumbnail-primary "
@@ -228,9 +225,6 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
           >
             <div
               className="resource-card__link"
-              onClick={[Function]}
-              role="link"
-              tabIndex="0"
             >
               <div
                 className="icon-thumbnail-primary "

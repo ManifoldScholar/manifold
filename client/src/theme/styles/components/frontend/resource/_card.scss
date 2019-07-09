@@ -31,7 +31,7 @@
     background-position: 50% 50%;
     background-size: cover;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       outline: 0;
 
       .icon-thumbnail-type,
@@ -76,7 +76,8 @@
     }
 
     .resource-card__link:hover &,
-    .resource-card__link:focus & {
+    .resource-card__link:focus-visible &,
+    .resource-preview-wrapper:focus-visible & {
       color: $neutralWhite;
       background-color: $accentPrimary;
     }
@@ -119,7 +120,7 @@
       width: calc(100% - 155px);
     }
 
-    &--hover, &:focus {
+    &--hover, &:focus-visible {
       cursor: pointer;
       outline: 0;
     }
@@ -151,7 +152,7 @@
 
     &:hover,
     .resource-card__info--hover &,
-    .resource-card__info:focus & {
+    .resource-card__info:focus-visible & {
       color: $neutralWhite;
       background-color: $accentPrimary;
     }
@@ -190,6 +191,15 @@
   .resource-preview-wrapper {
     display: flex;
     width: 100%;
+
+    &:focus-visible {
+      outline: 0;
+
+      .icon-thumbnail-type,
+      .icon-thumbnail-icon {
+        color: $accentPrimary;
+      }
+    }
   }
 
   .resource-tag-list {

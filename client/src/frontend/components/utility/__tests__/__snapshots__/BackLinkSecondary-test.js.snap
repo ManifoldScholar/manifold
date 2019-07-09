@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.Utility.BackLinkSecondary component renders correctly 1`] = `
-<div
-  className="container flush"
+<a
+  className="back-link-secondary"
+  href="/test/link"
+  onClick={[Function]}
 >
-  <a
-    className="back-link-secondary"
-    href="/test/link"
-    onClick={[Function]}
+  <div
+    className="container flush back-link-secondary__container"
   >
     <svg
       aria-hidden={true}
@@ -36,6 +36,6 @@ exports[`Frontend.Utility.BackLinkSecondary component renders correctly 1`] = `
         test
       </span>
     </div>
-  </a>
-</div>
+  </div>
+</a>
 `;

@@ -89,7 +89,7 @@
         }
       }
 
-      input:focus ~ .checkbox__indicator {
+      input:focus-visible ~ .checkbox__indicator {
         background-color: $neutralWhite;
       }
     }

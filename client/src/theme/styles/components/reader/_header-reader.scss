@@ -7,9 +7,10 @@
     .container-banner {
       background-color: $neutral100;
 
-      button:focus {
+      button:focus-visible {
         color: $neutral40;
         background-color: $neutral85;
+        outline: 0;
       }
 
       &::after {
@@ -66,7 +67,7 @@
       padding: 0 25px 1px;
     }
 
-    &:focus {
+    &:focus-visible {
       color: $neutral80;
       background-color: $focusTertiary;
       outline: 0;
@@ -95,7 +96,7 @@
     transition: color $duration $timing,
       background-color $duration $timing;
 
-    &:focus {
+    &:focus-visible {
       color: $neutral80;
       background-color: $focusTertiary;
       outline: 0;
@@ -178,6 +179,12 @@
 
           &.button-active {
             background-color: $neutral10;
+          }
+
+          &:focus-visible {
+            color: $neutral70;
+            background-color: $neutral20;
+            outline: 0;
           }
         }
       }

@@ -191,7 +191,7 @@
           }
         }
 
-        &:hover, &:focus {
+        &:hover, &:focus-visible {
           color: $neutral75;
           cursor: pointer;
           background-color: $accentPrimaryLight;
@@ -227,7 +227,7 @@
           color: $neutral75;
         }
 
-        &:focus {
+        &:focus-visible {
           color: $neutral75;
           background-color: $accentPrimaryLight;
           border: 0;
@@ -242,7 +242,7 @@
             border: 0;
           }
 
-          &:focus {
+          &:focus-visible {
             color: $neutral75;
             background-color: $accentPrimaryLight;
             border: 0;
@@ -253,7 +253,7 @@
         &:last-child {
           border-bottom: 2px solid $neutral40;
 
-          &:hover, &:focus {
+          &:hover, &:focus-visible {
             border-bottom: 2px solid $neutral40;
           }
         }
