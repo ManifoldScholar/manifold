@@ -226,20 +226,6 @@
     padding-right: 0;
   }
 
-  &__column-right {
-    > div:not(:last-child) {
-      padding-bottom: 8px;
-    }
-  }
-
-  &__column-left {
-    padding-right: 100px;
-
-    > div:not(:last-child) {
-      padding-bottom: 13px;
-    }
-  }
-
   &__pagination {
     padding-top: 30px;
   }
@@ -259,7 +245,6 @@
   }
 
   &__avatar-base-container {
-
     @include respond($break85) {
       margin-right: 0;
     }

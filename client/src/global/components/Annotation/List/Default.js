@@ -13,6 +13,7 @@ export default class Default extends PureComponent {
       <Highlight
         visitHandler={this.props.handleVisitAnnotation}
         annotation={annotation}
+        displayFormat="fullPage"
       />
     );
   }
@@ -20,8 +21,9 @@ export default class Default extends PureComponent {
   renderAnnotation(annotation) {
     return (
       <Annotation
-        visitHandler={this.props.handleVisitAnnotation}
+        // visitHandler={this.props.handleVisitAnnotation}
         annotation={annotation}
+        displayFormat="fullPage"
       />
     )
   }
@@ -36,7 +38,6 @@ export default class Default extends PureComponent {
 
   render() {
     const { annotations } = this.props;
-    console.log(annotations);
     return (
       <ul className={this.notesListClassNames}>
         {annotations.map((annotation, i) => {

@@ -18,6 +18,11 @@
     @include respond($break90) {
       font-size: 20px;
     }
+
+    &--rounded-top {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
   }
 
   &__container {
@@ -57,13 +62,17 @@
     }
   }
 
-  &__button-trim {
+  &__expand-button {
+    @include buttonTrimPrimary;
     position: relative;
     margin-top: -8px;
     color: $neutralOffBlack;
     visibility: visible;
-    background-color: $neutral10;
     opacity: 1;
+    padding-top: 11px;
+    padding-bottom: 0;
+    border: 0; // OD
+    border-top: 2px solid $neutral90;
     transition: margin $duration linear,
       color $duration $timing,
       opacity $duration $timing $durationFast,

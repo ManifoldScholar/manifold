@@ -49,24 +49,10 @@
       }
 
       a, button {
-        @include buttonUnstyled;
-        @include utilityPrimary;
-        font-size: 14px;
-        color: $neutral40;
-        transition: color $duration $timing;
+        @include listButtonSimple
 
         &.secondary {
           color: $sp40Tertiary;
-        }
-
-        &:hover, &.active, &:focus {
-          color: $accentPrimaryDark;
-          outline: 0;
-        }
-
-        &.deny:hover, &.deny:focus {
-          color: $sp40Tertiary;
-          outline: 0;
         }
       }
     }

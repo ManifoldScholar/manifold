@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
 import Truncated from "./Truncated";
 import nl2br from "nl2br";
-
+import classNames from "classnames";
 import Authorize from "hoc/authorize";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -37,8 +37,15 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     return !!this.props.onLogin;
   }
 
+  get displayFormat() {
+    return this.props.displayFormat;
+  }
+
   get selectionTextClassNames() {
-    return "annotation-selection__text";
+    return classNames({
+      "annotation-selection__text": true,
+      "annotation-selection__text--rounded-top": this.displayFormat === "fullPage"
+    });
   }
 
   get iconClassNames() {

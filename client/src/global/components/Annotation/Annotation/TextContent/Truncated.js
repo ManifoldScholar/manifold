@@ -55,18 +55,15 @@ export default class AnnotationSelectionTruncated extends PureComponent {
 
   get showFullButtonClassNames() {
     return classNames({
-      "annotation-selection__button-trim": true,
-      "button-trim-primary": true,
-      "trim-top": true,
-      "annotation-selection__button-trim--hidden": !this.state.truncated
+      "annotation-selection__expand-button": true,
+      "annotation-selection__expand-button--hidden": !this.state.truncated,
     });
   }
 
   render() {
 
     return (
-      <div>
-        <div>
+        <React.Fragment>
           <div
             className={this.truncatedWrapperClassNames}
             ref={wrapper => {
@@ -87,8 +84,7 @@ export default class AnnotationSelectionTruncated extends PureComponent {
           >
             {"Read Full Passage"}
           </button>
-        </div>
-      </div>
+        </React.Fragment>
     );
   }
 }

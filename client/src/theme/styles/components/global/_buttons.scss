@@ -609,24 +609,18 @@
 }
 
 // Text only button with full width bottom border
-.button-trim-primary {
+@mixin buttonTrimPrimary {
   @include buttonUnstyled;
   @include utilityPrimary;
   display: block;
   width: 100%;
   padding-bottom: 13px;
   font-size: 14px;
-  color: $accentPrimaryDark;
   text-align: left;
-  border-bottom: 1px solid $neutral40;
-  transition: color $duration $timing;
+}
 
-  &.trim-top {
-    padding-top: 11px;
-    padding-bottom: 0;
-    border: 0; // OD
-    border-top: 2px solid $neutral90;
-  }
+.button-trim-primary {
+  @include buttonTrimPrimary;
 
   &:hover {
     color: $accentPrimaryMedium;
@@ -646,6 +640,19 @@
 .login-external {
   .button-secondary--dark + .button-secondary--dark {
     margin-top: 21px;
+  }
+}
+
+@mixin listButtonSimple {
+  @include buttonUnstyled;
+  @include utilityPrimary;
+  color: $neutral40;
+  font-size: 14px;
+  border: 0;
+  transition: color $duration $timing;
+
+  &:hover, &.active, &:focus {
+    color: $accentPrimaryDark;
   }
 }
 

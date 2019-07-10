@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
+import classNames from "classnames";
 
 import Authorize from "hoc/authorize";
 
@@ -34,34 +35,48 @@ class HighlightDetail extends PureComponent {
     this.props.visitHandler(this.props.annotation);
   };
 
+  get displayFormat() {
+    return this.props.displayFormat;
+  }
+
+  get containerClassNames() {
+    return classNames({
+      "annotation-highlight-detail": true,
+      "annotation-highlight-detail--rounded-corners": this.displayFormat === "fullPage"
+    });
+  }
+
   render() {
     const annotation = this.props.annotation;
+    console.log(this.props);
     return (
-      <div className="annotation-highlight-detail">
-        <span className="annotation-selection">
-          {annotation.attributes.subject}
-        </span>
-
-        <nav className="utility">
-          <ul>
-            {this.props.visitHandler ? (
-              <li>
-                <button onClick={this.handleVisitHighlight}>
-                  {"View In Text"}
-                </button>
-              </li>
-            ) : null}
-            <Authorize entity={annotation} ability={"delete"}>
-              <li>
-                <Utility.ConfirmableButton
-                  label="Delete"
-                  confirmHandler={this.deleteAnnotation}
-                />
-              </li>
-            </Authorize>
-          </ul>
-        </nav>
-      </div>
+        <div className={this.containerClassNames}>
+          <span className="annotation-highlight-detail__selection">
+            {annotation.attributes.subject}
+          </span>
+          <nav className="annotation-highlight-detail__utility">
+            <ul className="annotation-highlight-detail__list">
+              {this.props.visitHandler ? (
+                <li>
+                  <button
+                    className="annotation-highlight-detail__button-simple"
+                    onClick={this.handleVisitHighlight}
+                  >
+                    {"View In Text"}
+                  </button>
+                </li>
+              ) : null}
+              <Authorize entity={annotation} ability={"delete"}>
+                <li>
+                  <Utility.ConfirmableButton
+                    label="Delete"
+                    confirmHandler={this.deleteAnnotation}
+                  />
+                </li>
+              </Authorize>
+            </ul>
+          </nav>
+        </div>
     );
   }
 }
