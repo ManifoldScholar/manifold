@@ -2,10 +2,7 @@
   @include listUnstyled;
   padding: 0;
 
-  &__item-outer {
-
-    + .notes-list__item-outer {
-      padding-top: 43px;
-    }
+ >li + li {
+    padding-top: 43px;
   }
 }

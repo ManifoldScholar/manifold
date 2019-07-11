@@ -129,13 +129,16 @@ function projects(count = defaultCount) {
   return arrayOf("projects", count, () => {
     const title = faker.company.catchPhrase();
     const subtitle = faker.company.catchPhrase();
+    const name = faker.company.catchPhrase();
     const attr = {
       title,
       titleFormatted: title,
       titlePlaintext: title,
+      textTitle: title,
       subtitle,
       subtitleFormatted: subtitle,
-      subtitlePlaintext: subtitle
+      subtitlePlaintext: subtitle,
+      name
     };
     if (random(0, 100) > 50) {
       attr.avatarStyles = image();
@@ -212,8 +215,10 @@ function annotations(count = defaultCount, withHighlights = false) {
 
   return arrayOf("annotations", count, annotation => {
     const user = users(1)[0];
+    const project = projects(1)[0];
     annotation.attributes.subject = sample([true, false]) ? selectionOne : selectionTwo;
     annotation.relationships.creator = user;
+    annotation.relationships.textSection = project;
     annotation.attributes.body = faker.lorem.sentences(sample([1,2,3]));
     if (withHighlights) {
       annotation.attributes.format = sample(["annotation", "highlight"]);

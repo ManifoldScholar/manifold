@@ -5,6 +5,7 @@ import nl2br from "nl2br";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
 import IconComposer from "global/components/utility/IconComposer";
+import SourceSummary from "./SourceSummary";
 
 export default class AnnotationSelectionWrapper extends PureComponent {
 
@@ -37,14 +38,17 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     return !!this.props.onLogin;
   }
 
-  get displayFormat() {
-    return this.props.displayFormat;
+  get fullPageFormat() {
+    return this.props.displayFormat === "fullPage";
   }
 
   get selectionTextClassNames() {
     return classNames({
-      "annotation-selection__text": true,
-      "annotation-selection__text--rounded-top": this.displayFormat === "fullPage"
+      "annotation-selection__text-container": true,
+      "annotation-selection__text-container--dark": this.fullPageFormat,
+      "annotation-selection__text-container--light": !this.fullPageFormat,
+      "annotation-selection__hover-link": this.viewable
+
     });
   }
 
@@ -60,17 +64,34 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     return "annotation-selection__button";
   }
 
+  get wholeSelectionButtonClassNames() {
+    return "annotation-selection__button-absolute";
+  }
+
   maybeTruncateSelection() {
-    const { subject, truncate } = this.props;
+    const { subject, truncate, displayFormat } = this.props;
     if (truncate && subject && subject.length > truncate) {
-      return <Truncated selection={subject} truncate={truncate} />;
+      return (
+        <Truncated
+          selection={subject}
+          truncate={truncate}
+          displayFormat={displayFormat}
+        />);
     }
     return <div dangerouslySetInnerHTML={{ __html: nl2br(subject) }} />;
   }
 
   render() {
+    const { projectTitle, sectionTitle } = this.props;
     return (
       <div className={this.selectionTextClassNames}>
+      {this.viewable && (
+        <button
+          className={this.wholeSelectionButtonClassNames}
+          onClick={this.props.onViewInText}
+          aria-label="View selection within text."
+        />
+      )}
         <div className={this.selectionContainerClassNames}>
           <IconComposer
             icon="socialCite32"
@@ -78,12 +99,13 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             iconClass={this.iconClassNames}
           />
           {this.maybeTruncateSelection()}
+          {this.viewable && (
+            <SourceSummary
+              projectTitle={projectTitle}
+              sectionTitle={sectionTitle}
+            />
+          )}
         </div>
-        {this.viewable && (
-          <button className={this.buttonClassNames} onClick={this.props.onViewInText}>
-            {"View In Text"}
-          </button>
-        )}
         {this.annotatable && (
           <Fragment>
             <Authorize kind="any">

@@ -8,9 +8,6 @@
 
   // Separated list, used on list pages/overlays
   &--separated {
-    li + li {
-      margin-top: 43px;
-    }
 
     .selection-group-heading + li {
       margin-top: 35px;
@@ -40,10 +37,6 @@
         padding-right: 89px;
         padding-left: 89px;
       }
-    }
-
-    .annotation-detail {
-      background-color: $neutralOffWhite;
     }
   }
 }

@@ -6,6 +6,8 @@ import Avatar from "global/components/avatar/index";
 
 export default class TableAvatar extends React.PureComponent {
   static propTypes = {
+    avatar: PropTypes.string,
+    viewportVisibility: PropTypes.string
   };
 
   get avatarClassNames() {

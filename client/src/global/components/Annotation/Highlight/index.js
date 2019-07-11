@@ -48,7 +48,6 @@ class HighlightDetail extends PureComponent {
 
   render() {
     const annotation = this.props.annotation;
-    console.log(this.props);
     return (
         <div className={this.containerClassNames}>
           <span className="annotation-highlight-detail__selection">

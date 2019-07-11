@@ -21,7 +21,7 @@ export default class Default extends PureComponent {
   renderAnnotation(annotation) {
     return (
       <Annotation
-        // visitHandler={this.props.handleVisitAnnotation}
+        visitHandler={this.props.handleVisitAnnotation}
         annotation={annotation}
         displayFormat="fullPage"
       />

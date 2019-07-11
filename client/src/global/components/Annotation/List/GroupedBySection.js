@@ -20,6 +20,7 @@ export default class GroupedBySection extends PureComponent {
       <Highlight
         visitHandler={this.props.handleVisitAnnotation}
         annotation={annotation}
+        displayFormat="fullPage"
       />
     );
   }
@@ -29,6 +30,7 @@ export default class GroupedBySection extends PureComponent {
       <Annotation
         visitHandler={this.props.handleVisitAnnotation}
         annotation={annotation}
+        displayFormat="fullPage"
       />
     )
   }

@@ -46,10 +46,16 @@ export default class AnnotationSelectionTruncated extends PureComponent {
     }, 50);
   };
 
+  get fullPageFormat() {
+    return this.props.displayFormat === "fullPage";
+  }
+
   get truncatedWrapperClassNames() {
     return classNames({
      "annotation-selection__truncated-wrapper": true,
-     "annotation-selection__truncated-wrapper--blur": this.state.truncated
+     "annotation-selection__truncated-wrapper--blur": this.state.truncated,
+     "annotation-selection__truncated-wrapper--light": !this.fullPageFormat,
+     "annotation-selection__truncated-wrapper--dark": this.fullPageFormat,
    });
   }
 

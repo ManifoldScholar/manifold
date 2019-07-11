@@ -1,27 +1,53 @@
 .annotation-selection {
-  &__text {
+  &__text-container {
     @include templateHead;
     @include drawerPadding(padding-right, 'heavy');
     @include drawerPadding(padding-left);
-    padding-top: 30px;
-    padding-bottom: 18px;
-    font-size: 18px;
     line-height: 1.6;
     word-wrap: break-word;
-    background-color: $neutral10;
 
-    @include respond($break80) {
-      padding-top: 41px;
-      padding-bottom: 26px;
-    }
-
-    @include respond($break90) {
-      font-size: 20px;
-    }
-
-    &--rounded-top {
+    &--dark {
+      position: relative;
+      background-color: $neutral10;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
+      padding-top: 23px;
+      padding-bottom: 23px;
+      transition: background-color $duration $timing;
+      font-size: 16px;
+
+      @include respond($break80) {
+        font-size: 18px;
+        padding-top: 31px;
+        padding-bottom: 25px;
+      }
+    }
+
+    &--light {
+      background-color: $neutral05;
+      padding-top: 30px;
+      padding-bottom: 26px;
+      font-size: 18px;
+
+      @include respond($break80) {
+        padding-top: 41px;
+        padding-bottom: 34px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  &__hover-link {
+    &:hover {
+      background-color: $neutral20;
+
+      .annotation-selection__hover-arrow {
+        opacity: 1;
+      }
+
+      .annotation-selection__truncated-wrapper::after {
+        background: linear-gradient(to top, $neutral20 10%, transparentize($accentPrimary, 1) 100%);
+      }
     }
   }
 
@@ -29,7 +55,6 @@
     @include drawerIndent(padding-left);
     position: relative;
     padding-right: 0; // OD
-    padding-bottom: 20px;
   }
 
   &__icon {
@@ -52,9 +77,16 @@
       width: 100%;
       height: 4em;
       content: '';
-      background: linear-gradient(to top, $neutral10 10%, transparentize($accentPrimary, 1) 100%);
       opacity: 0;
       transition: opacity $durationSlow $timing $duration;
+    }
+
+    &--light::after {
+      background: linear-gradient(to top, $neutral05 10%, transparentize($accentPrimary, 1) 100%);
+    }
+
+    &--dark::after {
+      background: linear-gradient(to top, $neutral10 10%, transparentize($accentPrimary, 1) 100%);
     }
 
     &--blur::after {
@@ -94,6 +126,7 @@
     @include utilityPrimary;
     @include drawerIndent(margin-left);
     display: block;
+    margin-top: 20px;
     font-size: 14px;
     color: $accentPrimary;
     transition: color $duration $timing;
@@ -102,5 +135,34 @@
       color: $accentPrimaryDark;
       outline: 0;
     }
+  }
+
+  &__button-absolute {
+    @include buttonUnstyled;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  &__source-summary {
+    padding-top: 3px;
+    color: $neutral90;
+  }
+
+  &__source-summary-text {
+    @include templateCopy
+    font-size: 14px;
+
+    @include respond($break80) {
+      font-size: 16px;
+    }
+  }
+
+  &__hover-arrow {
+    margin-left: 12px;
+    opacity: 0;
+    transition: opacity $duration $timing;
   }
 }
