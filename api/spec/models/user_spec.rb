@@ -73,6 +73,11 @@ RSpec.describe User, type: :model do
     expect(user.full_name).to eq("John Rambo")
   end
 
+  fit "excludes uncommon titles from namae's default list" do
+    user = FactoryBot.build(:user, name: "Elder Deacon")
+    expect(user.full_name).to eq("Elder Deacon")
+  end
+
   it "has a default role 'reader'" do
     user = FactoryBot.create(:user)
     expect(user.has_role? :reader).to eq true
