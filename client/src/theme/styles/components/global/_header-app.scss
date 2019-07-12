@@ -169,37 +169,7 @@
   }
 
   &__mode-button {
-    @include utilityPrimary;
-    display: inline-block;
-    padding: 0.76em 1.7em;
-    font-size: 11.18px;
-    color: $accentPrimary;
-    text-decoration: none;
-    letter-spacing: 0.134em;
-    white-space: nowrap;
-    border: 1px solid $accentPrimary;
-    border-radius: 4px;
-    transition: color $duration $timing,
-      background-color $duration $timing;
-
-    &:hover, &:focus {
-      color: $neutralWhite;
-      background-color: $accentPrimary;
-      outline: 0;
-    }
-
-    .bg-neutral90 & {
-      &:hover {
-        color: $neutral90;
-        background-color: $accentPrimary;
-      }
-
-      &:focus {
-        color: $accentPrimary;
-        background-color: $neutral95;
-        outline: 0;
-      }
-    }
+    @include buttonTertiary;
   }
 
   // <nav> wrapper around <ul>

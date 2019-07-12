@@ -17,6 +17,7 @@ const pagination = {
   totalCount: 32
 };
 const group = groups[0];
+const groupName = group.attributes.name;
 
 storiesOf("Frontend/Group", module)
   .add("Groups Table", () => {
@@ -29,9 +30,29 @@ storiesOf("Frontend/Group", module)
       <JoinBox />
     );
   })
-  .add("Heading", () => {
+  .add("Group List Heading", () => {
     return (
-      <Heading />
+      <Heading
+        pageType={"groupList"}
+      />
+    );
+  })
+  .add("Members List Heading", () => {
+    return (
+      <Heading
+        pageType={"memberList"}
+        groupName={groupName}
+      />
+    );
+  })
+  .add("Group Detail Heading", () => {
+    return (
+      <Heading
+        pageType={"groupDetail"}
+        groupName={groupName}
+        openEditDrawer={() => console.log("Drawer opened")}
+        memberListLink={"/"}
+      />
     );
   })
   .add("Members Table", () => {

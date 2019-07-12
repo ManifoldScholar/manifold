@@ -1,33 +1,61 @@
-import React, { Component } from "react";
+import React from "react";
 import Utility from "global/components/utility";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import GroupNavButtons from "./GroupNavButtons";
 
-export default class Heading extends Component {
+export default class Heading extends React.PureComponent {
+
+  get groupName() {
+    return this.props.groupName;
+  }
+
+  get pageType() {
+    return this.props.pageType;
+  }
 
   get pageTitle() {
-    return "Manage Annotation Groups";
+    if (this.pageType === "groupList") {
+      return "Manage Annotation Groups";
+    } else if (this.pageType === "groupDetail") {
+      return this.groupName;
+    } else if (this.pageType === "memberList") {
+      return (
+        <React.Fragment>
+          {this.groupName}:
+          <span className={"group-page-heading__subtitle"}>{" Members"}</span>
+        </React.Fragment>
+      )
+    }
   }
 
-  get groupHeadingClassNames() {
-    return "group-page-heading";
-  }
-
-  get headingTextClassNames() {
+  get textContainerClassNames() {
     return classNames({
-      "heading-primary": true,
-      "group-page-heading__text": true
+      "group-page-heading__text-container": true,
+      "group-page-heading__text-container--narrow": this.pageType === "groupDetail"
     })
   }
 
   render() {
+    const { memberListLink, openEditDrawer } = this.props;
     return (
-      <div className={this.groupHeadingClassNames}>
-        <Utility.IconComposer
-          icon="annotationGroup24"
-          size={32}
-        />
-        <h2 className={this.headingTextClassNames}>{this.pageTitle}</h2>
+      <div className={"group-page-heading"}>
+        <div className={this.textContainerClassNames}>
+          <Utility.IconComposer
+            icon="annotationGroup24"
+            size={32}
+            iconClass={"group-page-heading__icon"}
+          />
+          <h2 className={"heading-primary group-page-heading__text"}>
+            {this.pageTitle}
+          </h2>
+        </div>
+        {this.pageType === "groupDetail" &&
+          <GroupNavButtons
+            memberListLink={memberListLink}
+            openEditDrawer={openEditDrawer}
+          />
+        }
       </div>
     );
   }
