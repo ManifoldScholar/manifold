@@ -6,4 +6,4 @@ export default {
   GroupedBySelection,
   GroupedBySection,
   Default
-}
+};

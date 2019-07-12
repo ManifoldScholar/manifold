@@ -4,7 +4,6 @@ import Utility from "global/components/utility";
 import classNames from "classnames";
 
 export default class GroupSummaryItem extends React.Component {
-
   get mobileColumn() {
     return this.props.mobileColumn;
   }
@@ -63,12 +62,10 @@ export default class GroupSummaryItem extends React.Component {
             label={this.labelText}
             icon={this.icon}
             textStyle={"large"}
-            />
+          />
         </dt>
-        <dd className={this.listValueClassNames}>
-          {this.props.children}
-        </dd>
+        <dd className={this.listValueClassNames}>{this.props.children}</dd>
       </div>
-    )
+    );
   }
 }

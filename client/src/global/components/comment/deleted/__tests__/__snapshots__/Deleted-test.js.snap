@@ -2,7 +2,7 @@
 
 exports[`Global.Comment.Deleted component renders correctly 1`] = `
 <li
-  className="annotation-comment"
+  className="annotation-reply"
 >
   <section
     className="annotation-meta"

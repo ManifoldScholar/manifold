@@ -4,8 +4,7 @@ import classNames from "classnames";
 import IconComposer from "./IconComposer";
 
 export default class LabelWithIcon extends React.PureComponent {
-  static propTypes = {
-  };
+  static propTypes = {};
 
   get icon() {
     return this.props.icon;
@@ -42,6 +41,6 @@ export default class LabelWithIcon extends React.PureComponent {
         )}
         {this.name && this.name + ":"}
       </span>
-    )
+    );
   }
 }

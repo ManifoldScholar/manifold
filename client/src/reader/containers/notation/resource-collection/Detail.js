@@ -51,7 +51,8 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
     return Object.assign({}, newState, ownProps);
   };
 
-  static displayName = "ReaderContainer.Notation.ResourceCollection.AnnotationDetail";
+  static displayName =
+    "ReaderContainer.Notation.ResourceCollection.Detail";
 
   static propTypes = {
     route: PropTypes.object,

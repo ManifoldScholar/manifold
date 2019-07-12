@@ -5,25 +5,19 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
   className="annotation-meta"
 >
   <div>
-    <figure
-      className="author-avatar"
+    <div
+      className="annotation-meta__avatar annotation-meta__avatar-placeholder-container"
     >
-      <div
-        className="author-avatar__no-image"
+      <figure
+        className="avatar"
       >
-        <span
-          className="screen-reader-text"
-        >
-          Avatar for 
-          Rowan Ida
-        </span>
         <svg
           aria-hidden={true}
-          className="manicon-svg author-avatar__icon svg-icon--avatar64"
+          className="manicon-svg svg-icon--Avatar64"
           fill="currentColor"
-          height={39.385}
+          height={null}
           viewBox="0 0 64 64"
-          width={39.385}
+          width={null}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -31,15 +25,20 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
             fillRule="evenodd"
           />
         </svg>
-      </div>
-    </figure>
+        <span
+          className="screen-reader-text"
+        >
+          Avatar
+        </span>
+      </figure>
+    </div>
     <h4
-      className="author-name"
+      className="annotation-meta__author-name"
     >
       Rowan Ida
     </h4>
     <span
-      className="datetime"
+      className="annotation-meta__datetime"
     >
       <time
         dateTime="2018-12-24"

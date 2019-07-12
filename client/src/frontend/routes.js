@@ -151,7 +151,7 @@ const routes = {
               helper: () => "/my/groups/:groupId"
             }
           ]
-        },
+        }
       ]
     },
     {

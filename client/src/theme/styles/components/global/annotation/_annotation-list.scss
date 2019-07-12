@@ -1,23 +1,23 @@
 .annotation-list {
   @include listUnstyled;
-  @include drawerPadding(padding-right, 'heavy');
   @include drawerPadding(padding-left);
   padding-bottom: 37px;
 
-  &--background-dark {
+  &--dark {
+    @include drawerPadding(padding-right);
     background-color: $neutral05;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
   }
 
-  .annotation-annotation {
+  .annotation-comments {
     padding-top: 32px;
 
     @include respond($break65) {
       padding-top: 40px;
     }
 
-    + .annotation-annotation, + .annotation-more {
+    + .annotation-comments {
       margin-top: 23px;
       border-top: 1px solid $neutral40;
     }

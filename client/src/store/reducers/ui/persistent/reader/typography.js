@@ -1,29 +1,27 @@
 import { handleActions } from "redux-actions";
 
 const getInitialState = () => ({
-   font: "serif",
-   fontSize: {
-     current: 3,
-     max: 6,
-     min: 0
-   },
-   margins: {
-     current: 1,
-     max: 4,
-     min: 0
-   }
- })
+  font: "serif",
+  fontSize: {
+    current: 3,
+    max: 6,
+    min: 0
+  },
+  margins: {
+    current: 1,
+    max: 4,
+    min: 0
+  }
+});
 
- export const initialState = getInitialState();
+export const initialState = getInitialState();
 
 const selectFont = (state, action) => {
   return Object.assign({}, state, { font: action.payload });
 };
 
 // TODO: get nested attributes to reset to initialState
-const resetAllAttributes = () =>  (
-  getInitialState()
-);
+const resetAllAttributes = () => getInitialState();
 
 const incrementAttribute = (state, attribute) => {
   const parameter = state[attribute];

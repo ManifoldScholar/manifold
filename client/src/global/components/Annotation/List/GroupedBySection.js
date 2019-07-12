@@ -1,11 +1,10 @@
-import React, { PureComponent } from "react"
+import React, { PureComponent } from "react";
 import Annotation from "../Annotation";
 import Highlight from "../Highlight";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
 export default class GroupedBySection extends PureComponent {
-
   static displayName = "Annotation.List.GroupedBySection";
 
   static propTypes = {
@@ -32,7 +31,7 @@ export default class GroupedBySection extends PureComponent {
         annotation={annotation}
         displayFormat="fullPage"
       />
-    )
+    );
   }
 
   get notesListClassNames() {
@@ -51,12 +50,9 @@ export default class GroupedBySection extends PureComponent {
 
     return (
       <ul className={this.notesListClassNames}>
-        {groupedAnnotations.map((group) => {
+        {groupedAnnotations.map(group => {
           return (
-            <li
-              key={group.sectionId}
-              className={this.selectionListClassNames}
-            >
+            <li key={group.sectionId} className={this.selectionListClassNames}>
               <div className="selection-group-heading">
                 <h2>{group.name}</h2>
               </div>
@@ -72,7 +68,7 @@ export default class GroupedBySection extends PureComponent {
                 })}
               </ul>
             </li>
-          )
+          );
         })}
       </ul>
     );

@@ -1,0 +1,55 @@
+.notes-filter {
+  @include respond($break65) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__dropdown-container {
+    padding-top: 30px;
+
+    @include respond($break65) {
+      display: flex;
+      padding-left: 20px;
+      padding-top: 0;
+    }
+  }
+
+  &__select-container {
+    color: $neutral70;
+    position: relative;
+
+    @include respond($break65) {
+      width: 182px;
+    }
+
+    &:not(:first-child) {
+      margin-top: 12px;
+
+      @include respond($break65) {
+        margin-top: 0;
+        margin-left: 12px;
+      }
+    }
+  }
+
+  &__select {
+    @include filterSelectBase;
+    position: relative;
+    font-size: 13px;
+    height: 40px;
+    width: 100%;
+    border: 1px solid $neutral70;
+    border-radius: 8px;
+
+    @include respond($break65) {
+      border-radius: 0;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 11px;
+    right: 12px;
+  }
+}

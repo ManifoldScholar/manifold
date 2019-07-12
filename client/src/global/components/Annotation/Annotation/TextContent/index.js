@@ -5,10 +5,9 @@ import nl2br from "nl2br";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
 import IconComposer from "global/components/utility/IconComposer";
-import SourceSummary from "./SourceSummary";
+import SourceSummary from "../../SourceSummary/index";
 
 export default class AnnotationSelectionWrapper extends PureComponent {
-
   static displayName = "Annotation.Annotation.TextContent";
 
   static propTypes = {
@@ -48,7 +47,6 @@ export default class AnnotationSelectionWrapper extends PureComponent {
       "annotation-selection__text-container--dark": this.fullPageFormat,
       "annotation-selection__text-container--light": !this.fullPageFormat,
       "annotation-selection__hover-link": this.viewable
-
     });
   }
 
@@ -76,7 +74,8 @@ export default class AnnotationSelectionWrapper extends PureComponent {
           selection={subject}
           truncate={truncate}
           displayFormat={displayFormat}
-        />);
+        />
+      );
     }
     return <div dangerouslySetInnerHTML={{ __html: nl2br(subject) }} />;
   }
@@ -85,13 +84,13 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     const { projectTitle, sectionTitle } = this.props;
     return (
       <div className={this.selectionTextClassNames}>
-      {this.viewable && (
-        <button
-          className={this.wholeSelectionButtonClassNames}
-          onClick={this.props.onViewInText}
-          aria-label="View selection within text."
-        />
-      )}
+        {this.viewable && (
+          <button
+            className={this.wholeSelectionButtonClassNames}
+            onClick={this.props.onViewInText}
+            aria-label="View selection within text."
+          />
+        )}
         <div className={this.selectionContainerClassNames}>
           <IconComposer
             icon="socialCite32"

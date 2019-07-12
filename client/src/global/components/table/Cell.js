@@ -5,9 +5,7 @@ import Utility from "global/components/utility";
 import { TableHeaderContext } from "helpers/contexts";
 
 export default class TableCell extends React.PureComponent {
-
-  static propTypes = {
-  };
+  static propTypes = {};
 
   static contextType = TableHeaderContext;
 
@@ -42,8 +40,8 @@ export default class TableCell extends React.PureComponent {
   get cellClassNames() {
     return classNames({
       "table__body-text": true,
-      "table__centered": this.alignment === "center",
-      "table__right": this.alignment === "right",
+      table__centered: this.alignment === "center",
+      table__right: this.alignment === "right",
       "table__value-large": this.textStyle === "valueLarge",
       "table__right-unpadded": this.cellPadding === "rightUnpadded",
       "table__small-padding-left": this.cellPadding === "leftSmall",
@@ -81,29 +79,27 @@ export default class TableCell extends React.PureComponent {
   }
 
   render() {
-    const header = this.context.getHeader(this.props.index)
+    const header = this.context.getHeader(this.props.index);
 
-    if (this.isTable) return (
-      <td className={this.cellClassNames}>
-        <a href={this.link} className={this.rowLinkClassNames}/>
-        {this.props.children}
-      </td>
-   );
-
-    return(
-      <div className={this.listItemContainerClassNames}>
-        {this.textStyle !== "valueLarge" &&
-          <dt>
-          <Utility.LabelWithIcon
-            label={header.label}
-            icon={header.icon}
-          />
-          </dt>
-        }
-        <dd className={this.cellClassNames}>
+    if (this.isTable)
+      return (
+        <td className={this.cellClassNames}>
+          <a href={this.link} className={this.rowLinkClassNames}>
+            <span className="screen-reader-text">Visit detail view</span>
+          </a>
           {this.props.children}
-        </dd>
+        </td>
+      );
+
+    return (
+      <div className={this.listItemContainerClassNames}>
+        {this.textStyle !== "valueLarge" && (
+          <dt>
+            <Utility.LabelWithIcon label={header.label} icon={header.icon} />
+          </dt>
+        )}
+        <dd className={this.cellClassNames}>{this.props.children}</dd>
       </div>
-    )
+    );
   }
 }

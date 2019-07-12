@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class JoinBox extends Component {
-
   get containerClassNames() {
     return "group-join-box";
   }
@@ -42,7 +41,7 @@ export default class JoinBox extends Component {
   handleJoinButton = event => {
     event.stopPropagation();
     console.log("Join button clicked");
-  }
+  };
 
   render() {
     return (
@@ -70,6 +69,6 @@ export default class JoinBox extends Component {
           </button>
         </form>
       </div>
-    )
+    );
   }
 }

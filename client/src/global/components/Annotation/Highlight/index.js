@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import classNames from "classnames";
+import SourceSummary from "../SourceSummary/index";
 
 import Authorize from "hoc/authorize";
 
 const { request } = entityStoreActions;
 
 class HighlightDetail extends PureComponent {
-
   static displayName = "Annotation.Highlight";
 
   static propTypes = {
@@ -39,43 +39,67 @@ class HighlightDetail extends PureComponent {
     return this.props.displayFormat;
   }
 
+  get viewable() {
+    return !!this.props.visitHandler;
+  }
+
   get containerClassNames() {
     return classNames({
-      "annotation-highlight-detail": true,
-      "annotation-highlight-detail--rounded-corners": this.displayFormat === "fullPage"
+      "annotation-selection__text-container": true,
+      "annotation-selection__text-container--light": true,
+      "annotation-selection__text-container--rounded-corners":
+        this.displayFormat === "fullPage",
+      "annotation-selection__hover-link": this.viewable
     });
+  }
+
+  get projectTitle() {
+    return this.props.annotation.relationships.textSection.attributes.textTitle;
+  }
+
+  get sectionTitle() {
+    return this.props.annotation.relationships.textSection.attributes.name;
+  }
+
+  get user() {
+    return this.props.annotation.relationships.creator.attributes.fullName;
+  }
+
+  get highlightDate() {
+    return this.props.annotation.attributes.createdAt;
   }
 
   render() {
     const annotation = this.props.annotation;
     return (
-        <div className={this.containerClassNames}>
-          <span className="annotation-highlight-detail__selection">
-            {annotation.attributes.subject}
-          </span>
-          <nav className="annotation-highlight-detail__utility">
-            <ul className="annotation-highlight-detail__list">
-              {this.props.visitHandler ? (
-                <li>
-                  <button
-                    className="annotation-highlight-detail__button-simple"
-                    onClick={this.handleVisitHighlight}
-                  >
-                    {"View In Text"}
-                  </button>
-                </li>
-              ) : null}
-              <Authorize entity={annotation} ability={"delete"}>
-                <li>
-                  <Utility.ConfirmableButton
-                    label="Delete"
-                    confirmHandler={this.deleteAnnotation}
-                  />
-                </li>
-              </Authorize>
-            </ul>
-          </nav>
-        </div>
+      <div className={this.containerClassNames}>
+        {this.viewable && (
+          <button
+            className="annotation-selection__button-absolute"
+            onClick={this.handleVisitHighlight}
+            aria-label="View selection within text."
+          />
+        )}
+        <span className="annotation-selection__highlight-text">
+          {annotation.attributes.subject}
+        </span>
+        {this.viewable && (
+          <SourceSummary
+            user={this.user}
+            projectTitle={this.projectTitle}
+            sectionTitle={this.sectionTitle}
+            highlightDate={this.highlightDate}
+          />
+        )}
+        <Authorize entity={annotation} ability={"delete"}>
+          <div className="annotation-selection__action-buttons">
+            <Utility.ConfirmableButton
+              label="Delete"
+              confirmHandler={this.deleteAnnotation}
+            />
+          </div>
+        </Authorize>
+      </div>
     );
   }
 }

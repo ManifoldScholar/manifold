@@ -5,7 +5,7 @@ import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 
-describe("Backend.ProjectCollection.AnnotationDetail.Manual component", () => {
+describe("Backend.ProjectCollection.Detail.Manual component", () => {
   const projectCollection = build.entity.projectCollection("1", {
     manuallySorted: false
   });

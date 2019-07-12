@@ -9,7 +9,7 @@ import classNames from "classnames";
 import Authorize from "hoc/authorize";
 
 export default class CommentDetail extends PureComponent {
-  static displayName = "Comment.AnnotationDetail";
+  static displayName = "Comment.Detail";
 
   static propTypes = {
     subject: PropTypes.object.isRequired,
@@ -110,58 +110,104 @@ export default class CommentDetail extends PureComponent {
     );
   }
 
-  renderComment() {
-    const replyButtonClass = classNames({
-      active: this.state.replying
+  get listButtonBaseClassNames() {
+    return "annotation-reply__list-button";
+  }
+
+  get replyButtonClassNames() {
+    return classNames({
+      "annotation-reply__list-button": true,
+      "annotation-reply__list-button--active": this.state.replying
     });
+  }
+
+  get secondaryButtonClassNames() {
+    return classNames({
+      "annotation-reply__list-button": true,
+      "annotation-reply__list-button--secondary": true
+    });
+  }
+
+  renderComment() {
     const { comment, parent } = this.props;
     const { creator } = comment.relationships;
 
     return (
-      <li className="annotation-comment">
+      <li className="annotation-reply">
         <Meta comment={comment} creator={creator} parent={parent} />
-        <section className="body">
+        <section className="annotation-reply__body">
           <Helper.SimpleFormat text={comment.attributes.body} />
         </section>
         <Authorize kind={"any"}>
-          <nav className="utility">
-            <ul>
+          <nav className="annotation-reply__utility">
+            <ul className="annotation-reply__utility-list">
               <li>
-                <button className={replyButtonClass} onClick={this.startReply}>
+                <button
+                  className={this.replyButtonClassNames}
+                  onClick={this.startReply}
+                >
                   {"Reply"}
                 </button>
               </li>
               <Authorize entity={comment} ability={"update"}>
                 <li>
-                  <button onClick={this.startEdit}>{"Edit"}</button>
+                  <button
+                    onClick={this.startEdit}
+                    className={this.listButtonBaseClassNames}
+                  >
+                    {"Edit"}
+                  </button>
                 </li>
               </Authorize>
               <Authorize entity={comment} ability={"delete"}>
                 {!comment.attributes.deleted ? (
                   <li>
-                    <button onClick={this.handleDelete}>{"Delete"}</button>
+                    <button
+                      onClick={this.handleDelete}
+                      className={this.listButtonBaseClassNames}
+                    >
+                      {"Delete"}
+                    </button>
                   </li>
                 ) : null}
               </Authorize>
               {comment.attributes.deleted ? (
                 <li>
-                  <button onClick={this.handleRestore}>{"Restore"}</button>
+                  <button
+                    onClick={this.handleRestore}
+                    className={this.listButtonBaseClassNames}
+                  >
+                    {"Restore"}
+                  </button>
                 </li>
               ) : null}
               {comment.attributes.deleted ? (
                 <li>
-                  <button onClick={this.handleDestroy}>{"Destroy"}</button>
+                  <button
+                    onClick={this.handleDestroy}
+                    className={this.listButtonBaseClassNames}
+                  >
+                    {"Destroy"}
+                  </button>
                 </li>
               ) : null}
               {comment.attributes.flagged ? (
                 <li>
-                  <button className="secondary" onClick={this.handleUnflag}>
+                  <button
+                    className={this.secondaryButtonClassNames}
+                    onClick={this.handleUnflag}
+                  >
                     {"Unflag"}
                   </button>
                 </li>
               ) : (
                 <li>
-                  <button onClick={this.handleFlag}>{"Flag"}</button>
+                  <button
+                    onClick={this.handleFlag}
+                    className={this.listButtonBaseClassNames}
+                  >
+                    {"Flag"}
+                  </button>
                 </li>
               )}
             </ul>
@@ -172,7 +218,10 @@ export default class CommentDetail extends PureComponent {
           <nav className="utility">
             <ul>
               <li>
-                <button onClick={this.props.showLogin}>
+                <button
+                  onClick={this.props.showLogin}
+                  className={this.listButtonBaseClassNames}
+                >
                   {"Login to reply"}
                 </button>
               </li>

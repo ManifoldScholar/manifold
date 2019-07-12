@@ -4,7 +4,7 @@ import classNames from "classnames";
 import Utility from "global/components/utility";
 import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
-export class AppearanceMenuBody extends Component {
+class AppearanceMenuBody extends Component {
   static displayName = "ControlMenu.AppearanceMenuBody";
 
   static propTypes = {
@@ -30,14 +30,14 @@ export class AppearanceMenuBody extends Component {
     this.props.setScreenReaderStatus(
       this.resetOptionMessage("color scheme", event.target.value)
     );
-  }
+  };
 
   incrementSizeHandler = (event, enabled) => {
     event.stopPropagation();
     if (enabled) {
       this.props.incrementFontSize();
       this.props.setScreenReaderStatus(this.incrementFontMessage);
-    };
+    }
   };
 
   decrementSizeHandler = (event, enabled) => {
@@ -45,7 +45,7 @@ export class AppearanceMenuBody extends Component {
     if (enabled) {
       this.props.decrementFontSize();
       this.props.setScreenReaderStatus(this.decrementFontMessage);
-    };
+    }
   };
 
   resetHandler = event => {
@@ -85,17 +85,15 @@ export class AppearanceMenuBody extends Component {
 
   get incrementFontMessage() {
     const baseMessage = "Reader font size increased";
-    const appendedMessage = this.fontSize.current < this.fontSize.max
-    ? "."
-    : " to maximum size.";
+    const appendedMessage =
+      this.fontSize.current < this.fontSize.max ? "." : " to maximum size.";
     return baseMessage + appendedMessage;
   }
 
   get decrementFontMessage() {
     const baseMessage = "Reader font size decreased";
-    const appendedMessage = this.fontSize.current > this.fontSize.min
-    ? "."
-    : " to minimum size.";
+    const appendedMessage =
+      this.fontSize.current > this.fontSize.min ? "." : " to minimum size.";
     return baseMessage + appendedMessage;
   }
 
@@ -132,10 +130,12 @@ export class AppearanceMenuBody extends Component {
   }
 
   get resetDisabled() {
-    return this.typography.font === "serif"
-    && this.fontSize.current === 3
-    && this.typography.margins.current === 1
-    && this.colorScheme === "light";
+    return (
+      this.typography.font === "serif" &&
+      this.fontSize.current === 3 &&
+      this.typography.margins.current === 1 &&
+      this.colorScheme === "light"
+    );
   }
 
   get marginIncreaseable() {
@@ -183,7 +183,7 @@ export class AppearanceMenuBody extends Component {
       "appearance-menu__font-size-button": true,
       "appearance-menu__primary-hover-button": true,
       "appearance-menu__button-base": true
-    })
+    });
   }
 
   get screenReaderTextClassNames() {
@@ -221,23 +221,23 @@ export class AppearanceMenuBody extends Component {
       "appearance-menu__margin-button": true,
       "appearance-menu__button-base": true,
       "appearance-menu__primary-hover-button": true
-    })
+    });
   }
 
   get resetButtonClassNames() {
     return classNames({
       "appearance-menu__reset-button": true,
       "appearance-menu__primary-hover-button": true,
-      "appearance-menu__button-base": true,
-    })
+      "appearance-menu__button-base": true
+    });
   }
 
   get marginIconClassNames() {
-    return "appearance-menu__menu-icon"
+    return "appearance-menu__menu-icon";
   }
 
   get reloadIconClassNames() {
-    return "appearance-menu__reload-icon"
+    return "appearance-menu__reload-icon";
   }
 
   get fontStyleOptions() {
@@ -245,7 +245,8 @@ export class AppearanceMenuBody extends Component {
       {
         label: "Serif",
         value: "serif"
-      }, {
+      },
+      {
         label: "Sans-serif",
         value: "sans-serif"
       }
@@ -257,7 +258,8 @@ export class AppearanceMenuBody extends Component {
       {
         label: "Light",
         value: "light"
-      }, {
+      },
+      {
         label: "Dark",
         value: "dark"
       }
@@ -273,12 +275,14 @@ export class AppearanceMenuBody extends Component {
   }
 
   renderFontStyleControl() {
-    const labelClassName = option => classNames({
-      "appearance-menu__button-base": true,
-      "appearance-menu__font-style": true,
-      [`appearance-menu__font-style--${option.value}`]: true,
-      "appearance-menu__font-style--active": this.typography.font === option.value
-    });
+    const labelClassName = option =>
+      classNames({
+        "appearance-menu__button-base": true,
+        "appearance-menu__font-style": true,
+        [`appearance-menu__font-style--${option.value}`]: true,
+        "appearance-menu__font-style--active":
+          this.typography.font === option.value
+      });
 
     return (
       <fieldset className="appearance-menu__radio-group">
@@ -307,12 +311,14 @@ export class AppearanceMenuBody extends Component {
   }
 
   renderColorSchemeControl() {
-    const labelClassName = option => classNames({
-      "appearance-menu__button-base": true,
-      "appearance-menu__color-scheme": true,
-      [`appearance-menu__color-scheme--${option.value}`]: true,
-      "appearance-menu__color-scheme--active": this.colorScheme === option.value
-    });
+    const labelClassName = option =>
+      classNames({
+        "appearance-menu__button-base": true,
+        "appearance-menu__color-scheme": true,
+        [`appearance-menu__color-scheme--${option.value}`]: true,
+        "appearance-menu__color-scheme--active":
+          this.colorScheme === option.value
+      });
 
     return (
       <fieldset className="appearance-menu__radio-group">
@@ -334,9 +340,7 @@ export class AppearanceMenuBody extends Component {
               size={30}
               iconClass="appearance-menu__color-scheme-icon"
             />
-            <span className="screen-reader-text">
-              {option.label}
-            </span>
+            <span className="screen-reader-text">{option.label}</span>
           </label>
         ))}
       </fieldset>
@@ -412,7 +416,7 @@ export class AppearanceMenuBody extends Component {
           </div>
         </div>
       </li>
-    )
+    );
   }
 
   renderColorSchemeControls() {
@@ -422,7 +426,7 @@ export class AppearanceMenuBody extends Component {
           {this.renderColorSchemeControl()}
         </div>
       </li>
-    )
+    );
   }
 
   renderMarginControls() {
@@ -454,14 +458,14 @@ export class AppearanceMenuBody extends Component {
             <Utility.IconComposer
               icon="MarginDecreaseUnique"
               iconClass={this.marginIconClassNames}
-              />
+            />
             <span className={this.screenReaderTextClassNames}>
               {"Decrease text margins"}
             </span>
           </button>
         </div>
       </li>
-    )
+    );
   }
 
   render() {
@@ -477,18 +481,16 @@ export class AppearanceMenuBody extends Component {
         </ul>
         <div>
           <button
-          className={this.resetButtonClassNames}
-          disabled={this.resetDisabled}
-          onClick={this.resetHandler}
+            className={this.resetButtonClassNames}
+            disabled={this.resetDisabled}
+            onClick={this.resetHandler}
           >
             <Utility.IconComposer
               icon="reload24"
               size={32}
               iconClass={this.reloadIconClassNames}
             />
-            <span>
-              {"Reset to Defaults"}
-            </span>
+            <span>{"Reset to Defaults"}</span>
           </button>
         </div>
       </div>

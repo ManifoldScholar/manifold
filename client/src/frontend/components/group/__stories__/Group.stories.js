@@ -5,9 +5,12 @@ import MembersTable from "../Table/Members/index";
 import JoinBox from "../JoinBox/index";
 import Heading from "../Heading/index";
 import GroupSummaryBox from "../GroupSummaryBox/index";
+import NoteFilter from "../NoteFilter/index";
 
 const groups = build.arrayOf.groups(8);
 const members = build.arrayOf.members(8);
+const projects = build.arrayOf.projects(8);
+const makers = build.arrayOf.makers(8);
 const pagination = {
   perPage: 8,
   currentPage: 3,
@@ -22,28 +25,30 @@ const groupName = group.attributes.name;
 storiesOf("Frontend/Group", module)
   .add("Groups Table", () => {
     return (
-      <GroupsTable groups={groups} pagination={pagination} />
+      <GroupsTable
+        groups={groups}
+        pagination={pagination}
+        onPageClick={() => console.log("Pagination clicked")}
+      />
+    );
+  })
+  .add("Members Table", () => {
+    return (
+      <MembersTable
+        members={members}
+        pagination={pagination}
+        onPageClick={() => console.log("Pagination clicked")}
+      />
     );
   })
   .add("Join Box", () => {
-    return (
-      <JoinBox />
-    );
+    return <JoinBox />;
   })
   .add("Group List Heading", () => {
-    return (
-      <Heading
-        pageType={"groupList"}
-      />
-    );
+    return <Heading pageType={"groupList"} />;
   })
   .add("Members List Heading", () => {
-    return (
-      <Heading
-        pageType={"memberList"}
-        groupName={groupName}
-      />
-    );
+    return <Heading pageType={"memberList"} groupName={groupName} />;
   })
   .add("Group Detail Heading", () => {
     return (
@@ -55,13 +60,11 @@ storiesOf("Frontend/Group", module)
       />
     );
   })
-  .add("Members Table", () => {
-    return (
-      <MembersTable members={members} pagination={pagination} />
-    );
-  })
   .add("Group Summary Box", () => {
-    return (
-      <GroupSummaryBox group={group} />
-    );
+    return <GroupSummaryBox group={group} />;
   })
+  .add("Note Filter", () => {
+    return (
+      <NoteFilter projects={projects} makers={makers} pagination={pagination} />
+    );
+  });

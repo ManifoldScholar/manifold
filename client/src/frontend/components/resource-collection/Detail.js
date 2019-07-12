@@ -5,7 +5,7 @@ import ResourceList from "frontend/components/resource-list";
 import Utility from "frontend/components/utility";
 
 export default class ResourceCollectionDetail extends PureComponent {
-  static displayName = "ResourceCollection.AnnotationDetail";
+  static displayName = "ResourceCollection.Detail";
 
   static propTypes = {
     resourceCollection: PropTypes.object,

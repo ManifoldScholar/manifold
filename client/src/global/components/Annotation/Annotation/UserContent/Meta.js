@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
-import IconComposer from "global/components/utility/IconComposer";
 import Avatar from "global/components/avatar/index";
 
 export default class AnnotationDetail extends PureComponent {
@@ -30,13 +29,13 @@ export default class AnnotationDetail extends PureComponent {
     const isCreator = annotation.attributes.currentUserIsCreator;
     let name = creator.attributes.fullName;
     if (isCreator) name = "Me";
-    return <h4 className="author-name">{name}</h4>;
+    return <h4 className="annotation-meta__author-name">{name}</h4>;
   }
 
   get subjectSubtitle() {
     const { subject } = this.props;
     return (
-      <div className="subtitle">
+      <div className="annotation-meta__subtitle">
         {subject} {this.dateSubtitle}
       </div>
     );
@@ -45,7 +44,7 @@ export default class AnnotationDetail extends PureComponent {
   get dateSubtitle() {
     const { annotation } = this.props;
     return (
-      <span className="datetime">
+      <span className="annotation-meta__datetime">
         <FormattedDate
           format="distanceInWords"
           date={annotation.attributes.createdAt}
@@ -65,6 +64,22 @@ export default class AnnotationDetail extends PureComponent {
     }
 
     if (!label) return null;
+  }
+
+  get avatarUrl() {
+    if (this.props.creator.attributes.avatarStyles) {
+      return this.props.creator.attributes.avatarStyles.smallSquare;
+    } else return null;
+  }
+
+  get avatarClassNames() {
+    return classNames({
+      "annotation-meta__avatar": true,
+      "annotation-meta__avatar--dull": !this.props.creator.attributes
+        .isCurrentUser,
+      "annotation-meta__avatar-placeholder-container": !this.avatarUrl,
+      "annotation-meta__avatar-image-container": this.avatarUrl
+    });
   }
 
   renderMarkers(annotation) {
@@ -95,19 +110,15 @@ export default class AnnotationDetail extends PureComponent {
   }
 
   render() {
-    const { creator, annotation } = this.props;
-    const avatarClass = classNames({
-      "author-avatar": true,
-      "author-avatar--dull": !creator.attributes.isCurrentUser
-    });
+    const { annotation } = this.props;
 
     return (
       <section className="annotation-meta">
         {/* NB: Empty div required for flex-positioning of private/author marker */}
         <div>
-          <figure className={avatarClass}>
-            <Avatar url={creator.attributes.avatarStyles.smallSquare} />
-          </figure>
+          <div className={this.avatarClassNames}>
+            <Avatar url={this.avatarUrl} />
+          </div>
           {this.name}
           {this.subtitle}
         </div>

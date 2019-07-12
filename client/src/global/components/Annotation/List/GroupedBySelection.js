@@ -3,17 +3,16 @@ import PropTypes from "prop-types";
 import GroupBySubject from "../GroupBy/Subject";
 import Editor from "../Editor";
 import TextContent from "../Annotation/TextContent";
-import UserContent from "../Annotation/UserContent"
+import UserContent from "../Annotation/UserContent";
 
 export default class GroupedList extends PureComponent {
-
   static displayName = "Annotation.List.GroupedBySelection";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     loginHandler: PropTypes.func.isRequired,
     annotations: PropTypes.array,
-    closeDrawer: PropTypes.func,
+    closeDrawer: PropTypes.func
   };
 
   constructor(props) {
@@ -74,7 +73,6 @@ export default class GroupedList extends PureComponent {
           />
         </ul>
       </div>
-    )
+    );
   }
-
 }

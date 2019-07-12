@@ -253,14 +253,6 @@
       }
     }
 
-// <<<<<<< HEAD
-//     &:hover, &:focus-visible {
-//       border-color: $accentPrimary;
-//       outline: 0;
-//
-//       .manicon {
-//         opacity: 1;
-
     &:not(.appearance-menu__color-scheme--active) {
       > svg {
         opacity: 0;
@@ -323,11 +315,6 @@
       }
     }
   }
-
-// <<<<<<< HEAD
-//       &:hover, &:focus-visible {
-//         background-color: $accentPrimary;
-//         outline: 0;
 
   &__reset-button {
     @include templateHead;

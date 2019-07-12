@@ -403,26 +403,9 @@ const defaults = {
     }
   },
 
-  annotation: {
-    type: "annotations",
-    attributes: {
-      createdAt: "2017-04-24T23:25:50.161Z",
-      subject: "Gods, Earths, and 85ers",
-      body:
-        "Hands on your boxes, turn 'em up like seven notches." +
-        " Your Magnavoxes amplify my super conscious.",
-      startNode: "some-node",
-      endNode: "another-node",
-      startChar: 4,
-      endChar: 13,
-      abilities
-    }
-  },
-
   group: {
     type: "group",
     attributes: {
-
       abilities
     }
   },
@@ -430,7 +413,6 @@ const defaults = {
   member: {
     type: "member",
     attributes: {
-
       abilities
     }
   },
@@ -464,6 +446,38 @@ const defaults = {
               }
             }
           }
+        }
+      }
+    }
+  },
+
+  annotation: {
+    type: "annotations",
+    attributes: {
+      createdAt: "2017-04-24T23:25:50.161Z",
+      subject: "Gods, Earths, and 85ers",
+      body:
+        "Hands on your boxes, turn 'em up like seven notches." +
+        " Your Magnavoxes amplify my super conscious.",
+      startNode: "some-node",
+      endNode: "another-node",
+      startChar: 4,
+      endChar: 13,
+      abilities
+    },
+    relationships: {
+      creator: {
+        attributes: {
+          fullName: "Harry Henderson",
+          firstName: "Harry",
+          lastName: "Henderson"
+        }
+      },
+      textSection: {
+        attributes: {
+          name: "Title Page",
+          textTitle: "Hail Seitan",
+          metadataProperties
         }
       }
     }

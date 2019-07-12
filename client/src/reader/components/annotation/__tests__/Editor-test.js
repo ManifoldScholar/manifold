@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import Editor from "../Editor";
+import AnnotationEditor from "global/components/Annotation/Editor/index.js";
 import renderer from "react-test-renderer";
 import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
@@ -14,7 +14,7 @@ describe("Reader.Annotation.Editor component", () => {
 
   const root = wrapWithRouter(
     <Provider store={store}>
-      <Editor
+      <AnnotationEditor
         subject={annotation.attributes.subject}
         startChar={annotation.attributes.startChar}
         endChar={annotation.attributes.endChar}

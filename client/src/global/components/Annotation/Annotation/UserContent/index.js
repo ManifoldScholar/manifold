@@ -82,21 +82,41 @@ class AnnotationDetail extends PureComponent {
     return res.promise;
   };
 
+  get listButtonBaseClassNames() {
+    return "annotation-comments__list-button";
+  }
+
+  get replyButtonClassNames() {
+    return classNames({
+      "annotation-comments__list-button": true,
+      "annotation-comments__list-button--active":
+        this.state.action === "replying"
+    });
+  }
+
+  get editButtonClassNames() {
+    return classNames({
+      "annotation-comments__list-button": true,
+      "annotation-comments__list-button--active":
+        this.state.action === "editing"
+    });
+  }
+
+  get secondaryButtonClassNames() {
+    return classNames({
+      "annotation-comments__list-button": true,
+      "annotation-comments__list-button--secondary": true
+    });
+  }
+
   render() {
     const { annotation } = this.props;
     if (!annotation) return null;
 
-    const replyButtonClass = classNames({
-      active: this.state.action === "replying"
-    });
-    const editButtonClass = classNames({
-      active: this.state.action === "editing"
-    });
-
     const creator = this.props.annotation.relationships.creator;
 
     return (
-      <li className="annotation-annotation">
+      <li className="annotation-comments">
         <Meta annotation={annotation} creator={creator} />
         {this.state.action === "editing" ? (
           <Editor
@@ -106,16 +126,16 @@ class AnnotationDetail extends PureComponent {
           />
         ) : (
           <div>
-            <section className="body">
+            <section className="annotation-comments__body">
               <Helper.SimpleFormat text={annotation.attributes.body} />
             </section>
             <Authorize kind={"any"}>
-              <div className="utility">
-                <ul>
+              <div className="annotation-comments__utility">
+                <ul className="annotation-comments__utility-list">
                   {this.props.includeComments ? (
                     <li>
                       <button
-                        className={replyButtonClass}
+                        className={this.replyButtonClassNames}
                         onClick={this.startReply}
                       >
                         {"Reply"}
@@ -125,7 +145,7 @@ class AnnotationDetail extends PureComponent {
                   <Authorize entity={annotation} ability={"update"}>
                     <li>
                       <button
-                        className={editButtonClass}
+                        className={this.editButtonClassNames}
                         onClick={this.startEdit}
                       >
                         {"Edit"}
@@ -142,13 +162,21 @@ class AnnotationDetail extends PureComponent {
                   </Authorize>
                   {annotation.attributes.flagged ? (
                     <li>
-                      <button className="secondary" onClick={this.handleUnflag}>
+                      <button
+                        className={this.secondaryButtonClassNames}
+                        onClick={this.handleUnflag}
+                      >
                         {"Unflag"}
                       </button>
                     </li>
                   ) : (
                     <li>
-                      <button onClick={this.handleFlag}>{"Flag"}</button>
+                      <button
+                        onClick={this.handleFlag}
+                        className={this.listButtonBaseClassNames}
+                      >
+                        {"Flag"}
+                      </button>
                     </li>
                   )}
                 </ul>
@@ -162,10 +190,13 @@ class AnnotationDetail extends PureComponent {
             </Authorize>
             {this.props.showLogin && (
               <Authorize kind="unauthenticated">
-                <nav className="utility">
-                  <ul>
+                <nav className="annotation-comments__utility">
+                  <ul className="annotation-comments__utility-list">
                     <li>
-                      <button onClick={this.props.showLogin}>
+                      <button
+                        onClick={this.props.showLogin}
+                        className={this.listButtonBaseClassNames}
+                      >
                         {"Login to reply"}
                       </button>
                     </li>

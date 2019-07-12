@@ -8,7 +8,7 @@ export default class MarginIncrease extends Component {
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     stroke: PropTypes.string,
     fill: PropTypes.string,
-    svgProps: PropTypes.object,
+    svgProps: PropTypes.object
   };
 
   static defaultProps = {
@@ -16,7 +16,7 @@ export default class MarginIncrease extends Component {
     size: "inherit",
     stroke: "currentColor",
     fill: "currentColor",
-    svgProps: {},
+    svgProps: {}
   };
 
   get defaultHeight() {
@@ -61,7 +61,7 @@ export default class MarginIncrease extends Component {
   }
 
   get innerFillClassDark() {
-   return "appearance-menu__menu-icon--dark";
+    return "appearance-menu__menu-icon--dark";
   }
 
   get innerFillClassLight() {
@@ -83,8 +83,14 @@ export default class MarginIncrease extends Component {
     return (
       <svg {...svgProps}>
         <g>
-          <path className={this.innerFillClassDark} d="M24.2967426,24 L19.3492086,19.7592566 L20.6507914,18.2407434 L28.5365907,25 L20.6507914,31.7592566 L19.3492086,30.2407434 L24.2967426,26 L12,26 L12,24 L24.2967426,24 Z M71.7032574,24 L84,24 L84,26 L71.7032574,26 L76.6507914,30.2407434 L75.3492086,31.7592566 L67.4634093,25 L75.3492086,18.2407434 L76.6507914,19.7592566 L71.7032574,24 Z"/>
-          <path className={this.innerFillClassLight} d="M57,12 L57,14 L39,14 L39,12 L57,12 Z M57,18 L57,20 L39,20 L39,18 L57,18 Z M57,24 L57,26 L39,26 L39,24 L57,24 Z M57,30 L57,32 L39,32 L39,30 L57,30 Z M57,36 L57,38 L39,38 L39,36 L57,36 Z"/>
+          <path
+            className={this.innerFillClassDark}
+            d="M24.2967426,24 L19.3492086,19.7592566 L20.6507914,18.2407434 L28.5365907,25 L20.6507914,31.7592566 L19.3492086,30.2407434 L24.2967426,26 L12,26 L12,24 L24.2967426,24 Z M71.7032574,24 L84,24 L84,26 L71.7032574,26 L76.6507914,30.2407434 L75.3492086,31.7592566 L67.4634093,25 L75.3492086,18.2407434 L76.6507914,19.7592566 L71.7032574,24 Z"
+          />
+          <path
+            className={this.innerFillClassLight}
+            d="M57,12 L57,14 L39,14 L39,12 L57,12 Z M57,18 L57,20 L39,20 L39,18 L57,18 Z M57,24 L57,26 L39,26 L39,24 L57,24 Z M57,30 L57,32 L39,32 L39,30 L57,30 Z M57,36 L57,38 L39,38 L39,36 L57,36 Z"
+          />
         </g>
       </svg>
     );

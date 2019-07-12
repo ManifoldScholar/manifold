@@ -6,7 +6,7 @@ import Hero from "./Hero";
 import ContentBlock from "frontend/components/content-block";
 
 class Detail extends Component {
-  static displayName = "Project.AnnotationDetail";
+  static displayName = "Project.Detail";
 
   static propTypes = {
     project: PropTypes.object,

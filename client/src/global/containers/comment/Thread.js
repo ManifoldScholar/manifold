@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { select, meta } from "utils/entityUtils";
 import Detail from "global/components/comment/detail";
 import { commentsAPI } from "api";
+import Utility from "global/components/utility";
 
 const { request } = entityStoreActions;
 const perPage = 50;
@@ -103,11 +104,12 @@ export class CommentThread extends PureComponent {
         className="comment-more"
         onClick={() => this.handleNextClick(commentsPagination)}
       >
-        <i
-          className="manicon manicon-word-bubble-multiple"
-          aria-hidden="true"
-        />
         {`See next ${nextCount} comments`}
+        <Utility.IconComposer
+          icon="disclosureDown16"
+          size={16}
+          iconClass="comment-more__icon"
+        />
       </button>
     );
   }

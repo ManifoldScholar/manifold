@@ -1,23 +1,25 @@
 .annotation-selection {
   &__text-container {
     @include templateHead;
-    @include drawerPadding(padding-right, 'heavy');
+    @include drawerPadding(padding-right);
     @include drawerPadding(padding-left);
-    line-height: 1.6;
+    color: $neutral90;
+    line-height: 1.3;
     word-wrap: break-word;
+    font-size: 16px;
+
+    @include respond($break80) {
+      font-size: 18px;
+    }
 
     &--dark {
-      position: relative;
       background-color: $neutral10;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
       padding-top: 23px;
       padding-bottom: 23px;
-      transition: background-color $duration $timing;
-      font-size: 16px;
 
       @include respond($break80) {
-        font-size: 18px;
         padding-top: 31px;
         padding-bottom: 25px;
       }
@@ -27,17 +29,28 @@
       background-color: $neutral05;
       padding-top: 30px;
       padding-bottom: 26px;
-      font-size: 18px;
 
       @include respond($break80) {
         padding-top: 41px;
         padding-bottom: 34px;
-        font-size: 20px;
       }
+    }
+
+    &--rounded-corners {
+      border-radius: 8px;
     }
   }
 
+  &__highlight-text {
+    width: 100%;
+    background-color: $sp20PrimaryPale;
+    line-height: 1.6;
+  }
+
   &__hover-link {
+    position: relative;
+    transition: background-color $duration $timing;
+
     &:hover {
       background-color: $neutral20;
 
@@ -45,7 +58,7 @@
         opacity: 1;
       }
 
-      .annotation-selection__truncated-wrapper::after {
+      .truncated__wrapper::after {
         background: linear-gradient(to top, $neutral20 10%, transparentize($accentPrimary, 1) 100%);
       }
     }
@@ -65,69 +78,13 @@
     transform: rotateX(180deg);
   }
 
-  &__truncated-wrapper {
-    position: relative;
-    overflow: hidden;
-    transition: height $duration $timing;
-
-    &::after {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 4em;
-      content: '';
-      opacity: 0;
-      transition: opacity $durationSlow $timing $duration;
-    }
-
-    &--light::after {
-      background: linear-gradient(to top, $neutral05 10%, transparentize($accentPrimary, 1) 100%);
-    }
-
-    &--dark::after {
-      background: linear-gradient(to top, $neutral10 10%, transparentize($accentPrimary, 1) 100%);
-    }
-
-    &--blur::after {
-      opacity: 1;
-    }
-  }
-
-  &__expand-button {
-    @include buttonTrimPrimary;
-    position: relative;
-    margin-top: -8px;
-    color: $neutralOffBlack;
-    visibility: visible;
-    opacity: 1;
-    padding-top: 11px;
-    padding-bottom: 0;
-    border: 0; // OD
-    border-top: 2px solid $neutral90;
-    transition: margin $duration linear,
-      color $duration $timing,
-      opacity $duration $timing $durationFast,
-      visibility $duration $timing $durationFast;
-
-    &:hover {
-      color: $neutral75;
-    }
-
-    &--hidden {
-      margin-top: -38px;
-      visibility: hidden;
-      opacity: 0;
-    }
-  }
-
   &__button {
     @include buttonUnstyled;
     @include utilityPrimary;
     @include drawerIndent(margin-left);
     display: block;
     margin-top: 20px;
-    font-size: 14px;
+    font-size: 13px;
     color: $accentPrimary;
     transition: color $duration $timing;
 
@@ -147,8 +104,7 @@
   }
 
   &__source-summary {
-    padding-top: 3px;
-    color: $neutral90;
+    padding-top: 10px;
   }
 
   &__source-summary-text {
@@ -164,5 +120,10 @@
     margin-left: 12px;
     opacity: 0;
     transition: opacity $duration $timing;
+  }
+
+  &__action-buttons {
+    color: $neutral70;
+    position: relative;
   }
 }

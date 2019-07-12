@@ -12,7 +12,7 @@ export default class CommentDeleted extends PureComponent {
   render() {
     const { comment } = this.props;
     return (
-      <li className="annotation-comment">
+      <li className="annotation-reply">
         <section className="annotation-meta">
           <figure className="author-avatar author-avatar--dull">
             <span className="screen-reader-text">Author Avatar</span>

@@ -1,0 +1,24 @@
+.comment-more {
+  @include utilityPrimary;
+  @include buttonUnstyled;
+  display: block;
+  width: 100%;
+  padding-top: 13px;
+  padding-bottom: 3px;
+  margin-top: 20px;
+  font-size: 13px;
+  color: $neutral90;
+  text-align: left;
+  border-bottom: 1px solid $neutral90;
+  transition: all $duration $timing;
+
+  &:hover {
+    color: $accentPrimary;
+    border-color: $accentPrimary;
+  }
+
+  &__icon {
+    margin-left: 12px;
+    margin-bottom: 2px;
+  }
+}
