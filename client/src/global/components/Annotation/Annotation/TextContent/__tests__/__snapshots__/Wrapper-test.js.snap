@@ -2,14 +2,14 @@
 
 exports[`Reader.Annotation.Selection.Wrapper component renders correctly 1`] = `
 <div
-  className="selection-text"
+  className="annotation-selection__text-container annotation-selection__text-container--light"
 >
   <div
-    className="container"
+    className="annotation-selection__container"
   >
     <svg
       aria-hidden={true}
-      className="manicon-svg selection-text__icon svg-icon--socialCite32"
+      className="manicon-svg annotation-selection__icon svg-icon--socialCite32"
       fill="currentColor"
       height={32}
       viewBox="0 0 32 32"

@@ -5,7 +5,7 @@ exports[`Reader.Notes.DetailedList Component renders correctly 1`] = `
   className="notes-list"
 >
   <li
-    className="selection-list separated"
+    className="selection-list selection-list--separated"
   >
     <div
       className="selection-group-heading"
@@ -14,67 +14,139 @@ exports[`Reader.Notes.DetailedList Component renders correctly 1`] = `
         Test
       </h2>
     </div>
-    <ul>
+    <ul
+      className="notes-list"
+    >
       <li>
         <div
-          className="annotation-highlight-detail"
+          className="annotation-selection__text-container annotation-selection__text-container--light annotation-selection__text-container--rounded-corners annotation-selection__hover-link"
         >
+          <button
+            aria-label="View selection within text."
+            className="annotation-selection__button-absolute"
+            onClick={[Function]}
+          />
           <span
-            className="annotation-selection"
+            className="annotation-selection__highlight-text"
           >
             Gods, Earths, and 85ers
           </span>
-          <nav
-            className="utility"
+          <div
+            className="annotation-selection__source-summary"
           >
-            <ul>
-              <li>
-                <button
-                  onClick={[Function]}
-                >
-                  View In Text
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={[Function]}
-                >
-                  Delete
-                </button>
-              </li>
-            </ul>
-          </nav>
+            <span
+              className="annotation-selection__source-summary-text"
+            >
+              <i>
+                Harry Henderson
+              </i>
+               highlighted 
+              "Title Page" in 
+              <i>
+                Hail Seitan
+              </i>
+               on 
+              <time
+                dateTime="2017-04-24"
+              >
+                April 24, 2017
+              </time>
+            </span>
+            <svg
+              aria-hidden={true}
+              className="manicon-svg annotation-selection__hover-arrow svg-icon--arrowLongRight16"
+              fill="currentColor"
+              height={24}
+              viewBox="0 0 24 16"
+              width={24}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+              />
+            </svg>
+          </div>
+          <div
+            className="annotation-selection__action-buttons"
+          >
+            <div
+              className="confirmable-button"
+            >
+              <button
+                className="confirmable-button__button confirmable-button__button--delete"
+                disabled={false}
+                onClick={[Function]}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
       </li>
       <li>
         <div
-          className="annotation-highlight-detail"
+          className="annotation-selection__text-container annotation-selection__text-container--light annotation-selection__text-container--rounded-corners annotation-selection__hover-link"
         >
+          <button
+            aria-label="View selection within text."
+            className="annotation-selection__button-absolute"
+            onClick={[Function]}
+          />
           <span
-            className="annotation-selection"
+            className="annotation-selection__highlight-text"
           >
             Gods, Earths, and 85ers
           </span>
-          <nav
-            className="utility"
+          <div
+            className="annotation-selection__source-summary"
           >
-            <ul>
-              <li>
-                <button
-                  onClick={[Function]}
-                >
-                  View In Text
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={[Function]}
-                >
-                  Delete
-                </button>
-              </li>
-            </ul>
-          </nav>
+            <span
+              className="annotation-selection__source-summary-text"
+            >
+              <i>
+                Harry Henderson
+              </i>
+               highlighted 
+              "Title Page" in 
+              <i>
+                Hail Seitan
+              </i>
+               on 
+              <time
+                dateTime="2017-04-24"
+              >
+                April 24, 2017
+              </time>
+            </span>
+            <svg
+              aria-hidden={true}
+              className="manicon-svg annotation-selection__hover-arrow svg-icon--arrowLongRight16"
+              fill="currentColor"
+              height={24}
+              viewBox="0 0 24 16"
+              width={24}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
+              />
+            </svg>
+          </div>
+          <div
+            className="annotation-selection__action-buttons"
+          >
+            <div
+              className="confirmable-button"
+            >
+              <button
+                className="confirmable-button__button confirmable-button__button--delete"
+                disabled={false}
+                onClick={[Function]}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
       </li>
     </ul>

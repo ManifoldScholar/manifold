@@ -51,8 +51,8 @@
     @include listUnstyled;
     @include drawerIndent(padding-left);
 
-    .annotation-comment {
-      + .annotation-comment {
+    .annotation-reply {
+      + .annotation-reply {
         padding-top: 20px;
       }
     }

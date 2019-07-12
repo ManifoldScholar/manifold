@@ -2,6 +2,7 @@
   @include drawerIndent(padding-left);
   position: relative;
   margin-bottom: 10px;
+  color: $neutral90;
 
   @include respond($break50) {
     display: flex;
@@ -9,68 +10,45 @@
     justify-content: space-between;
   }
 
-  .author-avatar {
+  &__avatar {
     position: absolute;
     top: 0;
     left: 0;
     width: 32px;
     height: 32px;
     color: $neutral70;
-    cursor: default;
 
     &--dull {
-      cursor: default;
-
-      .author-avatar__icon {
-        color: $neutral20;
-      }
-    }
-
-    &__image {
-      position: relative;
-      top: 2px;
-      width: 100%;
-      height: 0;
-      padding-top: 100%;
-      background-position: 50% 50%;
-      background-size: cover;
-      border-radius: 50%;
-    }
-
-    &__icon {
-      margin-left: -3.5px;
-      color: $accentPrimary;
+    cursor: default;
+    color: $neutral20;
     }
   }
 
-  .author-name {
+  &__avatar-placeholder-container {
+    width: 38px;
+    margin-left: -2px;
+  }
+
+  &__avatar-image-container {
+    width: 32px;
+    border: 1px solid $neutral50;
+    border-radius: 100%;
+  }
+
+  &__author-name {
     @include templateHead;
     margin: 0;
     font-weight: $semibold;
-
-    .reply-to {
-      display: inline-block;
-      margin-left: 6px;
-      color: $neutral40;
-
-      .manicon {
-        display: inline-block;
-        margin-right: 4px;
-        font-size: 14px;
-      }
-    }
   }
 
   .deleted-notification {
     @include subtitlePrimary;
     margin-top: 8px;
-    color: $neutral70;
   }
 
-  .datetime, .subtitle {
+  &__datetime, &__subtitle {
     @include subtitlePrimary;
     margin-top: 2px;
-    color: $neutral70;
   }
 
   .markers {

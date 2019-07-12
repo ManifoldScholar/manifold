@@ -4,10 +4,9 @@ import Table from "global/components/table/index";
 import GroupRow from "./Row";
 
 export default class GroupsTable extends PureComponent {
-
   static propTypes = {
     groups: PropTypes.array.isRequired
-  }
+  };
 
   get groups() {
     return this.props.groups;
@@ -17,12 +16,18 @@ export default class GroupsTable extends PureComponent {
     return this.props.pagination;
   }
 
+  get onPageClick() {
+    return this.props.onPageClick;
+  }
+
   render() {
-    return(
+    return (
       <Table
         models={this.groups}
         pagination={this.pagination}
         rowComponent={GroupRow}
+        onPageClick={this.onPageClick}
+        countLabel={"Groups"}
       />
     );
   }

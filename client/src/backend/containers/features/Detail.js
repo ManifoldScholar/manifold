@@ -26,7 +26,7 @@ class FeatureDetailContainer extends PureComponent {
     };
   };
 
-  static displayName = "Feature.AnnotationDetail";
+  static displayName = "Feature.Detail";
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,

@@ -1,5 +1,4 @@
 .table {
-
   &__count-container {
     @include panelRoundedLight;
     padding: 15px 22px;
@@ -11,11 +10,11 @@
   }
 
   &__row {
+    position: relative;
     padding: 15px 22px 16px;
     margin: 0;
     border-bottom: 1px solid $neutral45;
     transition: background-color $duration $timing;
-    position: relative;
 
     &--body {
       &:hover {
@@ -32,7 +31,7 @@
     display: grid;
 
     @include respond($break85) {
-      @include screenReaderText
+      @include screenReaderText;
     }
   }
 
@@ -53,42 +52,40 @@
     }
   }
 
-  &__table-count-heading {
-    color: $neutral75;
-    font-size: 13px;
-    margin: 0;
-  }
+  &__ordered-list {
+    @include listUnstyled
 
-  &__count-figure {
-    color: $neutral90;
+      @include respond($break85) {
+      display: none;
+    }
   }
 
   &__hover-arrow {
-    opacity: 0;
     margin-left: 20px;
+    opacity: 0;
     transition: opacity $duration $timing;
   }
 
   &__nested-link-arrow {
-    opacity: 0;
-    right: 12px;
     position: absolute;
     top: 9px;
+    right: 12px;
+    opacity: 0;
     transition: opacity $duration $timing;
   }
 
   &__private-icon {
-    color: $neutral70;
-    margin-left: 10px;
     margin-bottom: 5px;
+    margin-left: 10px;
+    color: $neutral70;
   }
 
   &__nested-link {
-    text-decoration: none;
     position: relative;
-    border-radius: 15px;
     padding: 4px 32px 5px 17px;
     margin-left: -17px;
+    text-decoration: none;
+    border-radius: 15px;
     transition: background-color $duration $timing;
 
     @include respond($break85) {
@@ -119,17 +116,17 @@
 
   &__row-link {
     position: absolute;
+    top: 0;
+    left: 0;
     display: inline-block;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
   }
 
   &__body-text {
     @include templateHead;
-    color: $neutral90;
     position: relative;
+    color: $neutral90;
 
     @include respond($break85) {
       max-width: 245px;
@@ -141,28 +138,28 @@
   }
 
   &__value-large {
-    font-weight: $medium;
-    font-size: 18px;
-    background-color: inherit;
-    padding: 10px 0 20px;
-    margin: 0;
     display: flex;
     align-items: center;
+    padding: 10px 0 20px;
+    margin: 0;
+    font-size: 18px;
+    font-weight: $medium;
+    background-color: inherit;
 
     @include respond($break85) {
-      font-size: 21px;
       padding: 21px 22px;
+      font-size: 21px;
     }
   }
 
   &__name-container {
     @include respond($break85) {
+      display: inline-block;
       max-width: calc(100% - 38px);
       height: 26px;
-      display: inline-block;
-      white-space: nowrap;
       overflow-x: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
@@ -231,17 +228,17 @@
   }
 
   &__avatar-placeholder-container {
-    color: $neutral50;
     width: 38px;
-    margin-left: -2px;
     margin-right: 8px;
+    margin-left: -2px;
+    color: $neutral50;
   }
 
   &__avatar-image-container {
     width: 32px;
+    margin-right: 10px;
     border: 1px solid $neutral50;
     border-radius: 100%;
-    margin-right: 10px;
   }
 
   &__avatar-base-container {

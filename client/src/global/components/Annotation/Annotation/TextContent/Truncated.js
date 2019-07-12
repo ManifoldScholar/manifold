@@ -4,7 +4,6 @@ import classNames from "classnames";
 import nl2br from "nl2br";
 
 export default class AnnotationSelectionTruncated extends PureComponent {
-
   static displayName = "Annotation.Annotation.TextContentTruncated";
 
   static propTypes = {
@@ -52,45 +51,44 @@ export default class AnnotationSelectionTruncated extends PureComponent {
 
   get truncatedWrapperClassNames() {
     return classNames({
-     "annotation-selection__truncated-wrapper": true,
-     "annotation-selection__truncated-wrapper--blur": this.state.truncated,
-     "annotation-selection__truncated-wrapper--light": !this.fullPageFormat,
-     "annotation-selection__truncated-wrapper--dark": this.fullPageFormat,
-   });
+      truncated__wrapper: true,
+      "truncated__wrapper--blur": this.state.truncated,
+      "truncated__wrapper--light": !this.fullPageFormat,
+      "truncated__wrapper--dark": this.fullPageFormat
+    });
   }
 
   get showFullButtonClassNames() {
     return classNames({
-      "annotation-selection__expand-button": true,
-      "annotation-selection__expand-button--hidden": !this.state.truncated,
+      "truncated__expand-button": true,
+      "truncated__expand-button--hidden": !this.state.truncated
     });
   }
 
   render() {
-
     return (
-        <React.Fragment>
+      <React.Fragment>
+        <div
+          className={this.truncatedWrapperClassNames}
+          ref={wrapper => {
+            this.wrapper = wrapper;
+          }}
+        >
           <div
-            className={this.truncatedWrapperClassNames}
-            ref={wrapper => {
-              this.wrapper = wrapper;
+            ref={content => {
+              this.content = content;
             }}
           >
-            <div
-              ref={content => {
-                this.content = content;
-              }}
-            >
-              {this.getPassage()}
-            </div>
+            {this.getPassage()}
           </div>
-          <button
-            className={this.showFullButtonClassNames}
-            onClick={this.handleShowFull}
-          >
-            {"Read Full Passage"}
-          </button>
-        </React.Fragment>
+        </div>
+        <button
+          className={this.showFullButtonClassNames}
+          onClick={this.handleShowFull}
+        >
+          {"Read Full Passage"}
+        </button>
+      </React.Fragment>
     );
   }
 }

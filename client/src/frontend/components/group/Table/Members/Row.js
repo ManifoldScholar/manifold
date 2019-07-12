@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Utility from "global/components/utility";
 import PropTypes from "prop-types";
 import Cell from "global/components/table/Cell";
 import TableAvatar from "global/components/table/Avatar";
@@ -7,34 +6,33 @@ import RemoveMemberButton from "./RemoveMember";
 import NameWithArrow from "global/components/table/NameWithArrow";
 
 export default class MemberRow extends Component {
-
-  static headers = ()=> [
-        {
-          name: "memberAvatar",
-        },
-        {
-          name: "memberName",
-          label: "Name",
-          cellPadding: "leftSmall"
-        },
-        {
-          name: "memberRole",
-          label: "Role"
-        },
-        {
-          name: "memberAnnotationCount",
-          label: "Annotations",
-          icon: "comment24"
-        },
-        {
-          name: "memberHighlightCount",
-          label: "Highlights",
-          icon: "annotate24"
-        },
-        {
-          name: "removeMember",
-        }
-      ];
+  static headers = () => [
+    {
+      name: "memberAvatar"
+    },
+    {
+      name: "memberName",
+      label: "Name",
+      cellPadding: "leftSmall"
+    },
+    {
+      name: "memberRole",
+      label: "Role"
+    },
+    {
+      name: "memberAnnotationCount",
+      label: "Annotations",
+      icon: "comment24"
+    },
+    {
+      name: "memberHighlightCount",
+      label: "Highlights",
+      icon: "annotate24"
+    },
+    {
+      name: "removeMember"
+    }
+  ];
 
   get model() {
     return this.props.model;
@@ -62,20 +60,20 @@ export default class MemberRow extends Component {
 
   get avatarUrl() {
     if (this.modelAttributes.avatarStyles) {
-      return this.modelAttributes.avatarStyles.smallSquare
+      return this.modelAttributes.avatarStyles.smallSquare;
     } else return null;
-
   }
 
   render() {
-    return(
+    return (
       <React.Fragment>
-        <Cell index={0}
+        <Cell
+          index={0}
           viewportVisibility={this.hideMobile}
           cellPadding={"rightUnpadded"}
           align={"right"}
           cellSize={"cellSmall"}
-          >
+        >
           <TableAvatar avatar={this.avatarUrl} />
         </Cell>
         <Cell
@@ -83,7 +81,7 @@ export default class MemberRow extends Component {
           index={1}
           columnPosition={"all"}
           cellPadding={"leftSmall"}
-          >
+        >
           <TableAvatar
             avatar={this.avatarUrl}
             viewportVisibility={this.hideDesktop}

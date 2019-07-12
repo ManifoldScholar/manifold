@@ -4,9 +4,7 @@ import classNames from "classnames";
 import Utility from "global/components/utility";
 
 export default class TableHeaders extends React.PureComponent {
-
-  static propTypes = {
-  }
+  static propTypes = {};
 
   get headers() {
     return this.props.headers;
@@ -33,7 +31,7 @@ export default class TableHeaders extends React.PureComponent {
       <thead>
         <tr className={this.rowClassNames}>
           {headers.map(header => {
-            return(
+            return (
               <td
                 key={header.name}
                 className={this.cellClassNames(header.cellPadding)}
@@ -43,7 +41,7 @@ export default class TableHeaders extends React.PureComponent {
                   icon={header.icon}
                 />
               </td>
-            )
+            );
           })}
         </tr>
       </thead>

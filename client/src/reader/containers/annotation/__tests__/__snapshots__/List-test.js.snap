@@ -11,14 +11,14 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
       className="annotation-detail"
     >
       <div
-        className="selection-text"
+        className="annotation-selection__text-container annotation-selection__text-container--light"
       >
         <div
-          className="container"
+          className="annotation-selection__container"
         >
           <svg
             aria-hidden={true}
-            className="manicon-svg selection-text__icon svg-icon--socialCite32"
+            className="manicon-svg annotation-selection__icon svg-icon--socialCite32"
             fill="currentColor"
             height={32}
             viewBox="0 0 32 32"
@@ -38,7 +38,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
           />
         </div>
         <button
-          className="annotate-button"
+          className="annotation-selection__button"
           onClick={[MockFunction]}
         >
           Login to annotate
@@ -51,25 +51,25 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
           className="annotation-list"
         >
           <li
-            className="annotation-annotation"
+            className="annotation-comments"
           >
             <section
               className="annotation-meta"
             >
               <div>
-                <figure
-                  className="author-avatar"
+                <div
+                  className="annotation-meta__avatar annotation-meta__avatar-placeholder-container"
                 >
-                  <div
-                    className="author-avatar__no-image"
+                  <figure
+                    className="avatar"
                   >
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg author-avatar__icon svg-icon--avatar64"
+                      className="manicon-svg svg-icon--Avatar64"
                       fill="currentColor"
-                      height={39.385}
+                      height={null}
                       viewBox="0 0 64 64"
-                      width={39.385}
+                      width={null}
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -77,16 +77,26 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                         fillRule="evenodd"
                       />
                     </svg>
-                  </div>
-                </figure>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Avatar
+                    </span>
+                  </figure>
+                </div>
                 <h4
-                  className="author-name"
+                  className="annotation-meta__author-name"
                 >
                   Rowan Ida
                 </h4>
                 <span
-                  className="datetime"
+                  className="annotation-meta__datetime"
                 >
+                  <time
+                    dateTime="2017-04-24"
+                  >
+                    mocked-distance-in-words-for-snapshot
+                  </time>
                    
                   ago
                 </span>
@@ -97,7 +107,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
             </section>
             <div>
               <section
-                className="body"
+                className="annotation-comments__body"
               >
                 <div>
                   <p
@@ -110,11 +120,14 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                 </div>
               </section>
               <nav
-                className="utility"
+                className="annotation-comments__utility"
               >
-                <ul>
+                <ul
+                  className="annotation-comments__utility-list"
+                >
                   <li>
                     <button
+                      className="annotation-comments__list-button"
                       onClick={[MockFunction]}
                     >
                       Login to reply
@@ -125,25 +138,25 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
             </div>
           </li>
           <li
-            className="annotation-annotation"
+            className="annotation-comments"
           >
             <section
               className="annotation-meta"
             >
               <div>
-                <figure
-                  className="author-avatar"
+                <div
+                  className="annotation-meta__avatar annotation-meta__avatar-placeholder-container"
                 >
-                  <div
-                    className="author-avatar__no-image"
+                  <figure
+                    className="avatar"
                   >
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg author-avatar__icon svg-icon--avatar64"
+                      className="manicon-svg svg-icon--Avatar64"
                       fill="currentColor"
-                      height={39.385}
+                      height={null}
                       viewBox="0 0 64 64"
-                      width={39.385}
+                      width={null}
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -151,16 +164,26 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                         fillRule="evenodd"
                       />
                     </svg>
-                  </div>
-                </figure>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Avatar
+                    </span>
+                  </figure>
+                </div>
                 <h4
-                  className="author-name"
+                  className="annotation-meta__author-name"
                 >
                   Rowan Ida
                 </h4>
                 <span
-                  className="datetime"
+                  className="annotation-meta__datetime"
                 >
+                  <time
+                    dateTime="2017-04-24"
+                  >
+                    mocked-distance-in-words-for-snapshot
+                  </time>
                    
                   ago
                 </span>
@@ -171,7 +194,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
             </section>
             <div>
               <section
-                className="body"
+                className="annotation-comments__body"
               >
                 <div>
                   <p
@@ -184,11 +207,14 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                 </div>
               </section>
               <nav
-                className="utility"
+                className="annotation-comments__utility"
               >
-                <ul>
+                <ul
+                  className="annotation-comments__utility-list"
+                >
                   <li>
                     <button
+                      className="annotation-comments__list-button"
                       onClick={[MockFunction]}
                     >
                       Login to reply

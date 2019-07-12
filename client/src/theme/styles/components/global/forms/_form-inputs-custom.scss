@@ -123,5 +123,14 @@
       }
     }
   }
+}
 
+@mixin filterSelectBase {
+  @include unstyledSelect;
+  @include utilityPrimary;
+  padding-right: 32px;
+  padding-left: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

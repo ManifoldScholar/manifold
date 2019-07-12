@@ -5,7 +5,6 @@ import classNames from "classnames";
 import GroupNavButtons from "./GroupNavButtons";
 
 export default class Heading extends React.PureComponent {
-
   get groupName() {
     return this.props.groupName;
   }
@@ -25,15 +24,16 @@ export default class Heading extends React.PureComponent {
           {this.groupName}:
           <span className={"group-page-heading__subtitle"}>{" Members"}</span>
         </React.Fragment>
-      )
+      );
     }
   }
 
   get textContainerClassNames() {
     return classNames({
       "group-page-heading__text-container": true,
-      "group-page-heading__text-container--narrow": this.pageType === "groupDetail"
-    })
+      "group-page-heading__text-container--narrow":
+        this.pageType === "groupDetail"
+    });
   }
 
   render() {
@@ -50,12 +50,12 @@ export default class Heading extends React.PureComponent {
             {this.pageTitle}
           </h2>
         </div>
-        {this.pageType === "groupDetail" &&
+        {this.pageType === "groupDetail" && (
           <GroupNavButtons
             memberListLink={memberListLink}
             openEditDrawer={openEditDrawer}
           />
-        }
+        )}
       </div>
     );
   }

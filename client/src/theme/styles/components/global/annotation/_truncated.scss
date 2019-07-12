@@ -1,0 +1,60 @@
+.truncated {
+  &__wrapper {
+    position: relative;
+    overflow: hidden;
+    transition: height $duration $timing;
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4em;
+      content: '';
+      opacity: 0;
+      transition: opacity $durationSlow $timing $duration;
+    }
+
+    &--light::after {
+      background: linear-gradient(to top, $neutral05 10%, transparentize($accentPrimary, 1) 100%);
+    }
+
+    &--dark::after {
+      background: linear-gradient(to top, $neutral10 10%, transparentize($accentPrimary, 1) 100%);
+    }
+
+    &--blur::after {
+      opacity: 1;
+    }
+  }
+
+  &__expand-button {
+    @include buttonTrimPrimary;
+    position: relative;
+    margin-top: -8px;
+    color: $neutralOffBlack;
+    font-size: 13px;
+    visibility: visible;
+    opacity: 1;
+    padding-top: 11px;
+    padding-bottom: 0;
+    border: 0; // OD
+    border-top: 1px solid $neutral90;
+    transition: margin $duration linear,
+      color $duration $timing,
+      border-color $duration $timing,
+      opacity $duration $timing $durationFast,
+      visibility $duration $timing $durationFast;
+
+    &:hover {
+      color: $accentPrimary;
+      border-color: $accentPrimary;
+    }
+
+    &--hidden {
+      margin-top: -38px;
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}

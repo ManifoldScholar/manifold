@@ -1,12 +1,9 @@
-import React, { PureComponent } from "react"
+import React, { PureComponent } from "react";
 import Annotation from "../Annotation";
 import Highlight from "../Highlight";
-import classNames from "classnames";
 
 export default class Default extends PureComponent {
-
   static displayName = "Annotation.List.Ungrouped";
-
 
   renderHighlight(annotation) {
     return (
@@ -25,7 +22,7 @@ export default class Default extends PureComponent {
         annotation={annotation}
         displayFormat="fullPage"
       />
-    )
+    );
   }
 
   get notesListClassNames() {
@@ -40,17 +37,14 @@ export default class Default extends PureComponent {
     const { annotations } = this.props;
     return (
       <ul className={this.notesListClassNames}>
-        {annotations.map((annotation, i) => {
+        {annotations.map(annotation => {
           return (
-            <li
-              key={i}
-              className={this.selectionListClassNames}
-            >
+            <li key={annotation.id} className={this.selectionListClassNames}>
               {annotation.attributes.format === "annotation"
                 ? this.renderAnnotation(annotation)
                 : this.renderHighlight(annotation)}
             </li>
-          )
+          );
         })}
       </ul>
     );

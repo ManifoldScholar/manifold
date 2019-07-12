@@ -1,5 +1,5 @@
 import React from "react";
-import Wrapper from "../Wrapper";
+import AnnotationSelectionWrapper from "../index";
 import renderer from "react-test-renderer";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
@@ -11,7 +11,7 @@ describe("Reader.Annotation.Selection.Wrapper component", () => {
 
   const root = (
     <Provider store={store}>
-      <Wrapper
+      <AnnotationSelectionWrapper
         subject={annotation.attributes.subject}
         startNode={annotation.attributes.startNode}
         endNode={annotation.attributes.endNode}

@@ -1,178 +1,401 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] = `
-<nav
-  className="appearance-menu"
->
-  <ul>
-    <li>
-      <div
-        className="control-font"
+Array [
+  <div
+    aria-atomic={true}
+    aria-live="polite"
+    className="screen-reader-text"
+    role="status"
+  />,
+  <div
+    className="appearance-menu"
+  >
+    <header
+      className="appearance-menu__header"
+    >
+      <h4
+        className="appearance-menu__heading"
       >
-        <button
-          className="font-type serif"
-          onClick={[Function]}
-        >
-          Serif
-        </button>
+        Adjust Appearance:
+      </h4>
+    </header>
+    <ul
+      className="appearance-menu__list"
+    >
+      <li
+        className="appearance-menu__section"
+      >
         <div
-          className="font-size"
+          className="appearance-menu__font-control-group"
+        >
+          <div
+            className="appearance-menu__font-style-control"
+          >
+            <fieldset
+              className="appearance-menu__radio-group"
+            >
+              <legend
+                className="screen-reader-text"
+              >
+                Select font style for reader
+              </legend>
+              <div
+                className="appearance-menu__radio-stack"
+              >
+                <label
+                  className="appearance-menu__button-base appearance-menu__font-style appearance-menu__font-style--serif"
+                >
+                  <input
+                    checked={false}
+                    className="appearance-menu__radio-input"
+                    name="font-style-radios"
+                    onChange={[Function]}
+                    type="radio"
+                    value="serif"
+                  />
+                  <span
+                    className="appearance-menu__radio-label"
+                  >
+                    Serif
+                  </span>
+                </label>
+                <label
+                  className="appearance-menu__button-base appearance-menu__font-style appearance-menu__font-style--sans-serif"
+                >
+                  <input
+                    checked={false}
+                    className="appearance-menu__radio-input"
+                    name="font-style-radios"
+                    onChange={[Function]}
+                    type="radio"
+                    value="sans-serif"
+                  />
+                  <span
+                    className="appearance-menu__radio-label"
+                  >
+                    Sans-serif
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+          <div
+            className="appearance-menu__font-size-control"
+          >
+            <div
+              aria-label="Adjust font size"
+              role="group"
+            >
+              <button
+                aria-disabled={true}
+                className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
+                disabled={true}
+                onClick={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="manicon-svg svg-icon--MinusUnique"
+                  fill="currentColor"
+                  height={30}
+                  viewBox="0 0 32 32"
+                  width={30}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    height="2"
+                    width="14"
+                    x="9"
+                    y="15"
+                  />
+                </svg>
+                <span
+                  className="screen-reader-text"
+                >
+                  Decrease font size
+                </span>
+              </button>
+              <button
+                aria-disabled={true}
+                className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
+                disabled={true}
+                onClick={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="manicon-svg svg-icon--PlusUnique"
+                  fill="currentColor"
+                  height={30}
+                  viewBox="0 0 32 32"
+                  width={30}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    height="2"
+                    width="14"
+                    x="9"
+                    y="15"
+                  />
+                  <rect
+                    height="14"
+                    width="2"
+                    x="15"
+                    y="9"
+                  />
+                </svg>
+                <span
+                  className="screen-reader-text"
+                >
+                  Increase font size
+                </span>
+              </button>
+            </div>
+          </div>
+          <div
+            className="appearance-menu__font-size-control"
+          >
+            <div>
+              <button
+                aria-disabled={true}
+                className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
+                disabled={true}
+                onClick={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="manicon-svg svg-icon--MinusUnique"
+                  fill="currentColor"
+                  height={30}
+                  viewBox="0 0 32 32"
+                  width={30}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    height="2"
+                    width="14"
+                    x="9"
+                    y="15"
+                  />
+                </svg>
+                <span
+                  className="screen-reader-text"
+                >
+                  Decrease font size
+                </span>
+              </button>
+              <button
+                aria-disabled={true}
+                className="appearance-menu__font-size-button appearance-menu__primary-hover-button appearance-menu__button-base"
+                disabled={true}
+                onClick={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="manicon-svg svg-icon--PlusUnique"
+                  fill="currentColor"
+                  height={30}
+                  viewBox="0 0 32 32"
+                  width={30}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    height="2"
+                    width="14"
+                    x="9"
+                    y="15"
+                  />
+                  <rect
+                    height="14"
+                    width="2"
+                    x="15"
+                    y="9"
+                  />
+                </svg>
+                <span
+                  className="screen-reader-text"
+                >
+                  Increase font size
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li
+        className="appearance-menu__section"
+      >
+        <div
+          className="appearance-menu__color-buttons-container"
+        >
+          <fieldset
+            className="appearance-menu__radio-group"
+          >
+            <legend
+              className="screen-reader-text"
+            >
+              Select color scheme for reader
+            </legend>
+            <label
+              className="appearance-menu__button-base appearance-menu__color-scheme appearance-menu__color-scheme--light"
+            >
+              <input
+                checked={false}
+                className="appearance-menu__radio-input"
+                name="color-scheme-radios"
+                onChange={[Function]}
+                type="radio"
+                value="light"
+              />
+              <svg
+                aria-hidden="true"
+                className="manicon-svg appearance-menu__color-scheme-icon svg-icon--CheckUnique"
+                fill="currentColor"
+                height={30}
+                viewBox="0 0 32 32"
+                width={30}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <polygon
+                  points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
+                />
+              </svg>
+              <span
+                className="screen-reader-text"
+              >
+                Light
+              </span>
+            </label>
+            <label
+              className="appearance-menu__button-base appearance-menu__color-scheme appearance-menu__color-scheme--dark"
+            >
+              <input
+                checked={false}
+                className="appearance-menu__radio-input"
+                name="color-scheme-radios"
+                onChange={[Function]}
+                type="radio"
+                value="dark"
+              />
+              <svg
+                aria-hidden="true"
+                className="manicon-svg appearance-menu__color-scheme-icon svg-icon--CheckUnique"
+                fill="currentColor"
+                height={30}
+                viewBox="0 0 32 32"
+                width={30}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <polygon
+                  points="14.314 23.462 7.317 16.909 8.684 15.449 14.118 20.538 23.225 9.368 24.775 10.632 14.314 23.462"
+                />
+              </svg>
+              <span
+                className="screen-reader-text"
+              >
+                Dark
+              </span>
+            </label>
+          </fieldset>
+        </div>
+      </li>
+      <li
+        className="appearance-menu__section"
+      >
+        <div
+          aria-label="Adjust text margins"
+          className="appearance-menu__control-margins"
+          role="group"
         >
           <button
-            disabled={true}
+            aria-disabled={true}
+            className="appearance-menu__margin-button appearance-menu__button-base appearance-menu__primary-hover-button"
             onClick={[Function]}
           >
-            <i
-              aria-hidden="true"
-              className="manicon manicon-dash"
-            />
+            <svg
+              aria-hidden={true}
+              className="manicon-svg icon-two-color appearance-menu__menu-icon svg-icon--MarginIncreaseUnique"
+              fill="currentColor"
+              height={null}
+              viewBox="0 0 96 50"
+              width={null}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  className="appearance-menu__menu-icon--dark"
+                  d="M24.2967426,24 L19.3492086,19.7592566 L20.6507914,18.2407434 L28.5365907,25 L20.6507914,31.7592566 L19.3492086,30.2407434 L24.2967426,26 L12,26 L12,24 L24.2967426,24 Z M71.7032574,24 L84,24 L84,26 L71.7032574,26 L76.6507914,30.2407434 L75.3492086,31.7592566 L67.4634093,25 L75.3492086,18.2407434 L76.6507914,19.7592566 L71.7032574,24 Z"
+                />
+                <path
+                  className="appearance-menu__menu-icon--light"
+                  d="M57,12 L57,14 L39,14 L39,12 L57,12 Z M57,18 L57,20 L39,20 L39,18 L57,18 Z M57,24 L57,26 L39,26 L39,24 L57,24 Z M57,30 L57,32 L39,32 L39,30 L57,30 Z M57,36 L57,38 L39,38 L39,36 L57,36 Z"
+                />
+              </g>
+            </svg>
             <span
               className="screen-reader-text"
             >
-              Decrease font size
+              Increase text margins
             </span>
           </button>
           <button
-            disabled={true}
+            aria-disabled={true}
+            className="appearance-menu__margin-button appearance-menu__button-base appearance-menu__primary-hover-button"
             onClick={[Function]}
           >
-            <i
-              aria-hidden="true"
-              className="manicon manicon-plus"
-            />
+            <svg
+              aria-hidden={true}
+              className="manicon-svg appearance-menu__menu-icon svg-icon--MarginDecreaseUnique"
+              fill="currentColor"
+              height={null}
+              viewBox="0 0 96 50"
+              width={null}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  className="appearance-menu__menu-icon--dark"
+                  d="M14.2398482,24 L25.5365907,24 L25.5365907,26 L14.2398482,26 L19.1873821,30.2407434 L17.8857994,31.7592566 L10,25 L17.8857994,18.2407434 L19.1873821,19.7592566 L14.2398482,24 Z M80.8333333,26 L69.5365907,26 L69.5365907,24 L80.8333333,24 L75.8857994,19.7592566 L77.1873821,18.2407434 L85.0731815,25 L77.1873821,31.7592566 L75.8857994,30.2407434 L80.8333333,26 Z"
+                />
+                <path
+                  className="appearance-menu__menu-icon--light"
+                  d="M63.5365907,12 L63.5365907,14 L31.5365907,14 L31.5365907,12 L63.5365907,12 Z M63.5365907,18 L63.5365907,20 L31.5365907,20 L31.5365907,18 L63.5365907,18 Z M63.5365907,24 L63.5365907,26 L31.5365907,26 L31.5365907,24 L63.5365907,24 Z M63.5365907,30 L63.5365907,32 L31.5365907,32 L31.5365907,30 L63.5365907,30 Z M63.5365907,36 L63.5365907,38 L31.5365907,38 L31.5365907,36 L63.5365907,36 Z"
+                />
+              </g>
+            </svg>
             <span
               className="screen-reader-text"
             >
-              Increase font size
+              Decrease text margins
             </span>
           </button>
         </div>
-      </div>
-      <div
-        className="control-font"
+      </li>
+    </ul>
+    <div>
+      <button
+        className="appearance-menu__reset-button appearance-menu__primary-hover-button appearance-menu__button-base"
+        disabled={false}
+        onClick={[Function]}
       >
-        <button
-          className="font-type sans-serif"
-          onClick={[Function]}
+        <svg
+          aria-hidden={true}
+          className="manicon-svg appearance-menu__reload-icon svg-icon--reload24"
+          fill="currentColor"
+          height={32}
+          viewBox="0 0 24 24"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
         >
-          Sans-serif
-        </button>
-        <div
-          className="font-size"
-        >
-          <button
-            disabled={true}
-            onClick={[Function]}
-          >
-            <i
-              aria-hidden="true"
-              className="manicon manicon-dash"
-            />
-            <span
-              className="screen-reader-text"
-            >
-              Decrease font size
-            </span>
-          </button>
-          <button
-            disabled={true}
-            onClick={[Function]}
-          >
-            <i
-              aria-hidden="true"
-              className="manicon manicon-plus"
-            />
-            <span
-              className="screen-reader-text"
-            >
-              Increase font size
-            </span>
-          </button>
-        </div>
-      </div>
-    </li>
-    <li>
-      <div
-        className="control-colors"
-      >
-        <button
-          className="color-scheme light"
-          onClick={[Function]}
-        >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-check"
+          <path
+            d="M11.84,17.9997 C13.726,17.9997 15.409,17.1237 16.51,15.7587 L17.291,16.3807 C16.006,17.9757 14.041,18.9997 11.84,18.9997 C7.981,18.9997 4.84,15.8587 4.84,11.9997 C4.84,11.8297 4.863,11.6657 4.876,11.4987 L2.637,13.3467 L2,12.5747 L5.319,9.8357 L8.638,12.5747 L8.001,13.3467 L5.861,11.5797 C5.852,11.7197 5.84,11.8577 5.84,11.9997 C5.84,15.3087 8.531,17.9997 11.84,17.9997 Z M21.0432,10.653 L21.6802,11.424 L18.3602,14.164 L15.0412,11.424 L15.6782,10.653 L17.8182,12.42 C17.8282,12.281 17.8402,12.141 17.8402,12 C17.8402,8.691 15.1482,6 11.8402,6 C9.9542,6 8.2712,6.876 7.1702,8.241 L6.3892,7.619 C7.6732,6.024 9.6392,5 11.8402,5 C15.6992,5 18.8402,8.14 18.8402,12 C18.8402,12.17 18.8162,12.334 18.8042,12.501 L21.0432,10.653 Z"
+            fillRule="evenodd"
           />
-          <span
-            className="screen-reader-text"
-          >
-            Use light color scheme in reader
-          </span>
-        </button>
-        <button
-          className="color-scheme dark"
-          onClick={[Function]}
-        >
-          <i
-            aria-hidden="true"
-            className="manicon manicon-check"
-          />
-          <span
-            className="screen-reader-text"
-          >
-            Use dark color scheme in reader
-          </span>
-        </button>
-      </div>
-    </li>
-    <li>
-      <div
-        className="control-margins"
-      >
-        <button
-          className="margin-increase"
-          onClick={[Function]}
-        >
-          <i
-            aria-hidden="true"
-            className="compound-icon"
-          >
-            <i
-              className="manicon manicon-margins-narrow-arrows"
-            />
-            <i
-              className="manicon manicon-margins-narrow-text"
-            />
-          </i>
-          <span
-            className="screen-reader-text"
-          >
-            Increase text margins
-          </span>
-        </button>
-        <button
-          className="margin-decrease"
-          onClick={[Function]}
-        >
-          <i
-            aria-hidden="true"
-            className="compound-icon"
-          >
-            <i
-              className="manicon manicon-margins-wide-arrows"
-            />
-            <i
-              className="manicon manicon-margins-wide-text"
-            />
-          </i>
-          <span
-            className="screen-reader-text"
-          >
-            Decrease text margins
-          </span>
-        </button>
-      </div>
-    </li>
-  </ul>
-</nav>
+        </svg>
+        <span>
+          Reset to Defaults
+        </span>
+      </button>
+    </div>
+  </div>,
+]
 `;

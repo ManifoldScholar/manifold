@@ -6,6 +6,7 @@ import LockBodyScroll from "./LockBodyScroll";
 import ScrollToTop from "./ScrollToTop";
 import SkipLink from "./SkipLink";
 import LabelWithIcon from "./LabelWithIcon";
+import Count from "./Count";
 
 export default {
   Pagination,
@@ -15,5 +16,6 @@ export default {
   LockBodyScroll,
   ScrollToTop,
   SkipLink,
-  LabelWithIcon
+  LabelWithIcon,
+  Count
 };

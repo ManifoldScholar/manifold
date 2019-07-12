@@ -1,20 +1,15 @@
-import React, { PureComponent } from "react"
+import React, { PureComponent } from "react";
 import TextContent from "./TextContent";
 import UserContent from "./UserContent";
 import classNames from "classnames";
 
 export default class Annotation extends PureComponent {
-
   static displayName = "Annotation.Annotation";
-
-  get annotationDetailClassNames() {
-    return "annotation-detail";
-  }
 
   get annotationListClassNames() {
     return classNames({
       "annotation-list": true,
-      "annotation-list--background-dark": this.props.displayFormat === "fullPage"
+      "annotation-list--dark": this.props.displayFormat === "fullPage"
     });
   }
 
@@ -29,7 +24,7 @@ export default class Annotation extends PureComponent {
   render() {
     const { annotation, visitHandler, displayFormat } = this.props;
     return (
-      <div className={this.annotationDetailClassNames}>
+      <React.Fragment>
         <div className="annotation-selection">
           <TextContent
             {...annotation.attributes}
@@ -40,15 +35,14 @@ export default class Annotation extends PureComponent {
             displayFormat={displayFormat}
           />
         </div>
-          <ul className={this.annotationListClassNames}>
-            <UserContent
-              creator={annotation.relationships.creator}
-              annotation={annotation}
-              includeComments={false}
-            />
-          </ul>
-      </div>
+        <ul className={this.annotationListClassNames}>
+          <UserContent
+            creator={annotation.relationships.creator}
+            annotation={annotation}
+            includeComments={false}
+          />
+        </ul>
+      </React.Fragment>
     );
   }
-
 }

@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
-import classNames from "classnames";
 import GroupSummaryItem from "./Item";
 
 export default class GroupSummaryBox extends React.Component {
-
   get containerClassNames() {
     return "group-summary";
   }
@@ -59,7 +57,6 @@ export default class GroupSummaryBox extends React.Component {
   }
 
   render() {
-
     return (
       <div className={this.containerClassNames}>
         <dl className={this.listClassNames}>
@@ -68,21 +65,21 @@ export default class GroupSummaryBox extends React.Component {
             mobileColumn={this.columnLeft}
             desktopRow={this.rowTop}
           >
-              {this.type}
-              {this.type === "private" &&
-                <Utility.IconComposer
-                  icon="lock16"
-                  size={16}
-                  iconClass={this.privateIconClassNames}
-                />
-              }
+            {this.type}
+            {this.type === "private" && (
+              <Utility.IconComposer
+                icon="lock16"
+                size={16}
+                iconClass={this.privateIconClassNames}
+              />
+            )}
           </GroupSummaryItem>
           <GroupSummaryItem
             labelText={"Your Role"}
             mobileColumn={this.columnLeft}
             desktopRow={this.rowTop}
           >
-              {this.role}
+            {this.role}
           </GroupSummaryItem>
           <GroupSummaryItem
             labelText={"Members"}
@@ -114,6 +111,6 @@ export default class GroupSummaryBox extends React.Component {
           </GroupSummaryItem>
         </dl>
       </div>
-    )
+    );
   }
 }

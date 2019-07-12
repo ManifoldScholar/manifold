@@ -5,7 +5,8 @@ import AppearanceMenuBody from "../AppearanceMenuBody";
 describe("Reader.ControlMenu.AppearanceMenuBody Component", () => {
   const appearance = {
     typography: {
-      fontSize: {}
+      fontSize: {},
+      margins: {}
     },
     colors: {}
   };

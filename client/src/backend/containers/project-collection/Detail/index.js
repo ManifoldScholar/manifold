@@ -27,7 +27,7 @@ export class ProjectCollectionDetail extends PureComponent {
     };
   };
 
-  static displayName = "ProjectCollection.AnnotationDetail";
+  static displayName = "ProjectCollection.Detail";
 
   static propTypes = {
     projectCollection: PropTypes.object,

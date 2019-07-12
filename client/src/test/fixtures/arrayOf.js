@@ -89,7 +89,7 @@ function groups(count = defaultCount) {
       annotationCount: number,
       highlightCount: number
     };
- });
+  });
 }
 
 function members(count = defaultCount) {
@@ -102,7 +102,7 @@ function members(count = defaultCount) {
     const out = {
       firstName,
       lastName,
-      fullName ,
+      fullName,
       role,
       annotationCount: number,
       highlightCount: number
@@ -216,10 +216,12 @@ function annotations(count = defaultCount, withHighlights = false) {
   return arrayOf("annotations", count, annotation => {
     const user = users(1)[0];
     const project = projects(1)[0];
-    annotation.attributes.subject = sample([true, false]) ? selectionOne : selectionTwo;
+    annotation.attributes.subject = sample([true, false])
+      ? selectionOne
+      : selectionTwo;
     annotation.relationships.creator = user;
     annotation.relationships.textSection = project;
-    annotation.attributes.body = faker.lorem.sentences(sample([1,2,3]));
+    annotation.attributes.body = faker.lorem.sentences(sample([1, 2, 3]));
     if (withHighlights) {
       annotation.attributes.format = sample(["annotation", "highlight"]);
     }

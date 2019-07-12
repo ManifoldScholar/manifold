@@ -4,10 +4,9 @@ import Table from "global/components/table/index";
 import MemberRow from "./Row";
 
 export default class MembersTable extends PureComponent {
-
   static propTypes = {
     members: PropTypes.array.isRequired
-  }
+  };
 
   get members() {
     return this.props.members;
@@ -17,12 +16,18 @@ export default class MembersTable extends PureComponent {
     return this.props.pagination;
   }
 
+  get onPageClick() {
+    return this.props.onPageClick;
+  }
+
   render() {
-    return(
+    return (
       <Table
         models={this.members}
-        pagination ={this.pagination}
+        pagination={this.pagination}
         rowComponent={MemberRow}
+        onPageClick={this.onPageClick}
+        countLabel={"Members"}
       />
     );
   }

@@ -107,8 +107,16 @@
   z-index: 50;
 }
 
-.annotation-selection__expand-button {
+.truncated__expand-button {
   z-index: 75;
+}
+
+.annotation-selection__action-buttons {
+  z-index: 75;
+}
+
+.notes-filter__icon {
+  z-index: -5;
 }
 
 /* stylelint-disable selector-max-id */

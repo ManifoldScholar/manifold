@@ -1,10 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import isObject from "lodash/isObject";
 import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
-import IconComposer from "global/components/utility/IconComposer";
+import Avatar from "global/components/avatar/index";
 
 export default class CommentMeta extends PureComponent {
   static propTypes = {
@@ -13,56 +12,35 @@ export default class CommentMeta extends PureComponent {
     parent: PropTypes.object
   };
 
-  render() {
-    const { comment, creator, parent } = this.props;
-    const avatarClass = classNames({
-      "author-avatar": true,
-      "author-avatar--dull": creator && !creator.attributes.isCurrentUser
+  get avatarUrl() {
+    if (this.props.creator.attributes.avatarStyles) {
+      return this.props.creator.attributes.avatarStyles.smallSquare;
+    } else return null;
+  }
+
+  get avatarClassNames() {
+    return classNames({
+      "annotation-meta__avatar": true,
+      "annotation-meta__avatar--dull": !this.props.creator.attributes
+        .isCurrentUser,
+      "annotation-meta__avatar-placeholder-container": !this.avatarUrl,
+      "annotation-meta__avatar-image-container": this.avatarUrl
     });
+  }
+
+  render() {
+    const { comment, creator } = this.props;
 
     return (
       <section className="annotation-meta">
         <div>
-          <figure className={avatarClass}>
-            {creator.attributes.avatarStyles.smallSquare ? (
-              <div
-                className="author-avatar__image"
-                style={{
-                  backgroundImage: `url(${
-                    creator.attributes.avatarStyles.smallSquare
-                  })`
-                }}
-              >
-                <span className="screen-reader-text">
-                  Avatar for {creator.attributes.fullName}
-                </span>
-              </div>
-            ) : (
-              <div className="author-avatar__no-image">
-                <span className="screen-reader-text">
-                  Avatar for {creator.attributes.fullName}
-                </span>
-                <IconComposer
-                  icon="avatar64"
-                  size={39.385}
-                  iconClass="author-avatar__icon"
-                />
-              </div>
-            )}
-          </figure>
-          <h4 className="author-name">
+          <div className={this.avatarClassNames}>
+            <Avatar url={this.avatarUrl} />
+          </div>
+          <h4 className="annotation-meta__author-name">
             {creator.attributes.fullName}
-            {isObject(parent) ? (
-              <span className="reply-to">
-                <i
-                  className="manicon manicon-arrow-curved-right"
-                  aria-hidden="true"
-                />
-                Reply to {parent.relationships.creator.attributes.fullName}
-              </span>
-            ) : null}
           </h4>
-          <span className="datetime">
+          <span className="annotation-meta__datetime">
             <FormattedDate
               format="distanceInWords"
               date={comment.attributes.createdAt}

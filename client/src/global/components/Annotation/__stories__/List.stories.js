@@ -2,11 +2,10 @@ import React from "react";
 import { build, storiesOf } from "helpers/storybook/exports";
 import Annotation from "global/components/Annotation";
 
-
 storiesOf("Global/Annotation/List", module)
   .add("Default", () => {
     return (
-      <div style={{backgroundColor: "white"}}>
+      <div style={{ backgroundColor: "white" }}>
         <Annotation.List.Default
           annotations={build.arrayOf.annotations(8, true)}
           dispatch={() => console.log("dispatched")}
@@ -16,7 +15,7 @@ storiesOf("Global/Annotation/List", module)
   })
   .add("GroupedBySelection", () => {
     return (
-      <div style={{backgroundColor: "white"}}>
+      <div style={{ backgroundColor: "white" }}>
         <Annotation.List.GroupedBySelection
           annotations={build.arrayOf.annotations(8, false)}
           saveAnnotation={() => console.log("annotation saved")}
@@ -28,13 +27,13 @@ storiesOf("Global/Annotation/List", module)
   })
   .add("GroupedBySection", () => {
     return (
-      <div style={{backgroundColor: "white"}}>
+      <div style={{ backgroundColor: "white" }}>
         <Annotation.List.GroupedBySection
           groupedAnnotations={[
             {
-            name: "A Section",
-            sectionId: "111",
-            annotations: build.arrayOf.annotations(4, true)
+              name: "A Section",
+              sectionId: "111",
+              annotations: build.arrayOf.annotations(4, true)
             },
             {
               name: "Another Section",
@@ -49,5 +48,3 @@ storiesOf("Global/Annotation/List", module)
       </div>
     );
   });
-
-
