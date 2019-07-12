@@ -74,7 +74,9 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    Rails.root.join("tmp", "ingestion").children.each do |child|
+    ingestion_dir = Rails.root.join("tmp", "ingestion")
+    next unless File.directory? ingestion_dir
+    ingestion_dir.children.each do |child|
       child.rmtree
     end
   end
