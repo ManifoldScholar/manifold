@@ -19,45 +19,6 @@ RSpec.describe ActionCallout do
     expect(FactoryBot.build(:action_callout, location: nil)).to_not be_valid
   end
 
-  describe "#external_link??" do
-    context "when domain matches installation domain" do
-
-      before(:each) { ENV["DOMAIN"] = "test.domain" }
-
-      context "when full url" do
-        let(:action_callout) { FactoryBot.create(:link_action_callout, kind: "link", url: "https://www.test.domain/relative/page") }
-
-        it "returns false" do
-          expect(action_callout.external_link?).to eq false
-        end
-      end
-
-      context "when short url" do
-        let(:action_callout) { FactoryBot.create(:link_action_callout, kind: "link", url: "https://test.domain/relative/page") }
-
-        it "returns false" do
-          expect(action_callout.external_link?).to eq false
-        end
-      end
-    end
-
-    context "when relative url" do
-      let(:action_callout) { FactoryBot.create(:link_action_callout, kind: "link", url: "/relative/page") }
-
-      it "returns false" do
-        expect(action_callout.external_link?).to eq false
-      end
-    end
-
-    context "when absolute url" do
-      let(:action_callout) { FactoryBot.create(:link_action_callout, kind: "link", url: "http://www.dailyrowan.com") }
-
-      it "returns true" do
-        expect(action_callout.external_link?).to eq true
-      end
-    end
-  end
-
   describe "#kind" do
     context "when start_reading" do
       let(:action_callout) { FactoryBot.create(:read_action_callout, kind: "read") }
@@ -86,6 +47,5 @@ RSpec.describe ActionCallout do
     context "when link" do
       let(:action_callout) { FactoryBot.create(:link_action_callout, kind: "link") }
     end
-
   end
 end
