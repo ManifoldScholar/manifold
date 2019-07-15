@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Helper from "global/components/helper";
 import Utility from "global/components/utility";
-import { Link } from "react-router-dom";
 
 export default class ProjectHeroCalloutLink extends PureComponent {
   static displayName = "ProjectHero.Callout.Link";
@@ -59,10 +59,6 @@ export default class ProjectHeroCalloutLink extends PureComponent {
     );
   }
 
-  get isExternal() {
-    return this.props.callout.attributes.externalLink;
-  }
-
   get contents() {
     return (
       <>
@@ -74,30 +70,12 @@ export default class ProjectHeroCalloutLink extends PureComponent {
     );
   }
 
-  renderExternalLink() {
-    return (
-      <a
-        href={this.url}
-        className={this.calloutClass}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {this.contents}
-      </a>
-    );
-  }
-
-  renderLink() {
-    return (
-      <Link to={this.url} className={this.calloutClass}>
-        {this.contents}
-      </Link>
-    );
-  }
-
   render() {
     if (!this.url) return null;
-
-    return this.isExternal ? this.renderExternalLink() : this.renderLink();
+    return (
+      <Helper.UserLink url={this.url} className={this.calloutClass}>
+        {this.contents}
+      </Helper.UserLink>
+    );
   }
 }
