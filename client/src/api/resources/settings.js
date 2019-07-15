@@ -11,11 +11,11 @@ export default {
   },
   /* eslint-enable no-unused-vars */
 
-  show() {
+  show(options = {}) {
     return {
       endpoint: `/api/v1/settings`,
       method: "GET",
-      options: {}
+      options
     };
   }
 };
