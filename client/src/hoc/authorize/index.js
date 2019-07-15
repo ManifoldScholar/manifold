@@ -39,7 +39,7 @@ export class AuthorizeComponent extends PureComponent {
         body: PropTypes.string
       })
     ]),
-    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    children: PropTypes.node,
     authentication: PropTypes.object
   };
 
