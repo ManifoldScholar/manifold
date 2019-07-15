@@ -12,13 +12,18 @@ import { settingsAPI, requests } from "api";
 export default function bootstrap(getState, dispatch, cookieHelper) {
   const promises = [];
   const state = getState();
+  const authToken = cookieHelper.read("authToken");
 
   // Load settings if they have not already been loaded.
   const loaded = has(state, "entityStore.entities.settings.0");
   if (!loaded) {
-    const settingsRequest = request(settingsAPI.show(), requests.settings, {
-      oneTime: true
-    });
+    const settingsRequest = request(
+      settingsAPI.show({ authToken }),
+      requests.settings,
+      {
+        oneTime: true
+      }
+    );
     const settingsPromise = dispatch(settingsRequest).promise;
     settingsPromise.then(
       () => {

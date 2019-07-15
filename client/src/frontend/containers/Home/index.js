@@ -6,23 +6,23 @@ import { commonActions } from "actions/helpers";
 import get from "lodash/get";
 import { select } from "utils/entityUtils";
 import { requests } from "api";
-
 import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
-
 import withSettings from "hoc/with-settings";
 
 export class HomeContainer extends Component {
-  static showProjects(getState) {
-    const settings = select(requests.settings, getState().entityStore);
-    return get(settings, "attributes.calculated.homePageShowProjects");
+  static showProjects(settings) {
+    return !get(
+      settings,
+      "attributes.calculated.hasVisibleHomeProjectCollections"
+    );
   }
 
   static fetchData(getState, dispatch) {
     const promises = [];
     promises.push(Feature.fetchFeatures(getState, dispatch));
-    if (this.showProjects(getState)) {
+    if (this.showProjects(select(requests.settings, getState().entityStore))) {
       promises.push(Projects.fetchProjects(getState, dispatch));
     } else {
       promises.push(Collections.fetchCollections(getState, dispatch));
@@ -63,10 +63,11 @@ export class HomeContainer extends Component {
   }
 
   get showProjects() {
-    return get(
-      this.props.settings,
-      "attributes.calculated.homePageShowProjects"
-    );
+    return this.constructor.showProjects(this.props.settings);
+  }
+
+  get hasVisibleProjects() {
+    return get(this.props.settings, "attributes.calculated.hasVisibleProjects");
   }
 
   showFollowing() {
@@ -93,10 +94,12 @@ export class HomeContainer extends Component {
           <Collections authentication={this.props.authentication} />
         )}
 
-        <Layout.ButtonNavigation
-          grayBg={false}
-          showFollowing={this.showFollowing()}
-        />
+        {this.hasVisibleProjects && (
+          <Layout.ButtonNavigation
+            grayBg={false}
+            showFollowing={this.showFollowing()}
+          />
+        )}
       </div>
     );
   }

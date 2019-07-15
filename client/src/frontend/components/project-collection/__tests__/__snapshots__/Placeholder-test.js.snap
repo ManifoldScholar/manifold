@@ -22,7 +22,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
             <h4
               className="title"
             >
-              Oh no. There are no project collections in this Manifold Library.
+              There are no project collections in this Manifold library.
             </h4>
           </div>
         </div>
@@ -30,22 +30,7 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
       <div
         className="centered-message"
       >
-        But it’s easy to create new project collections with Manifold. If you have project creation privileges, 
-        <a
-          href="/backend/projects/project-collections"
-          onClick={[Function]}
-        >
-          login to the backend
-        </a>
-         to get started. For more help, you can learn about creating and publishing Manifold Project Collections 
-        <a
-          href="https://manifoldapp.org/docs/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          here
-        </a>
-        .
+        Please check back soon!
       </div>
       <svg
         viewBox="0 0 122.6 63.8"
@@ -63,19 +48,6 @@ exports[`Frontend.ProjectCollection.Placeholder component renders correctly 1`] 
           fill="#c3c3c3"
         />
       </svg>
-      <div
-        className="button"
-      >
-        <a
-          className="button-icon-primary"
-          href="/backend"
-          onClick={[Function]}
-        >
-          <span>
-            Create a collection Now
-          </span>
-        </a>
-      </div>
     </div>
   </div>
 </section>

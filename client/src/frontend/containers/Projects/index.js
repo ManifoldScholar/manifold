@@ -11,6 +11,7 @@ import get from "lodash/get";
 import queryString from "query-string";
 import omitBy from "lodash/omitBy";
 import debounce from "lodash/debounce";
+import withSettings from "hoc/with-settings";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;
@@ -49,7 +50,8 @@ export class ProjectsContainer extends Component {
     dispatch: PropTypes.func,
     fetchData: PropTypes.func.isRequired,
     subjects: PropTypes.array,
-    projectsMeta: PropTypes.object
+    projectsMeta: PropTypes.object,
+    settings: PropTypes.object
   };
 
   static defaultProps = {
@@ -69,6 +71,10 @@ export class ProjectsContainer extends Component {
     ) {
       this.props.fetchData(this.props);
     }
+  }
+
+  get hasVisibleProjects() {
+    return get(this.props.settings, "attributes.calculated.hasVisibleProjects");
   }
 
   initialState(init) {
@@ -182,15 +188,17 @@ export class ProjectsContainer extends Component {
         }}
       >
         {this.renderProjectLibrary()}
-        <Layout.ButtonNavigation
-          showProjectCollections
-          showFollowing={false}
-          showProjects={false}
-          grayBg={false}
-        />
+        {this.hasVisibleProjects && (
+          <Layout.ButtonNavigation
+            showProjectCollections
+            showFollowing={false}
+            showProjects={false}
+            grayBg={false}
+          />
+        )}
       </div>
     );
   }
 }
 
-export default connectAndFetch(ProjectsContainer);
+export default connectAndFetch(withSettings(ProjectsContainer));
