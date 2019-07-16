@@ -54,6 +54,25 @@ exports[`Backend Text General Container renders correctly 1`] = `
         />
       </div>
       <div
+        className="form-input wide"
+        style={Object {}}
+      >
+        <label
+          className=""
+          htmlFor="attributes[slug]-text-input-1"
+        >
+          Slug
+        </label>
+        <input
+          aria-describedby="attributes[slug]-text-input-1"
+          id="attributes[slug]-text-input-1"
+          onChange={[Function]}
+          placeholder="Enter Text Slug"
+          type="text"
+          value="slug-1"
+        />
+      </div>
+      <div
         className="form-input"
       >
         <label

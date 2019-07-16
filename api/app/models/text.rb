@@ -5,23 +5,20 @@ class Text < ApplicationRecord
 
   TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
 
-  # Authorization
+  # Concerns
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
-  include Concerns::ValidatesSlugPresence
+  include Concerns::Sluggable
   include WithMarkdown
-
-  # Default Scope
-  default_scope { order(position: :asc).includes(:titles, :text_subjects, :category) }
-
-  # Concerns
   extend Memoist
   include Collaborative
   include Citable
   include TrackedCreator
   include Metadata
-  extend FriendlyId
   include Attachments
+
+  # Default Scope
+  default_scope { order(position: :asc).includes(:titles, :text_subjects, :category) }
 
   # Magic
   has_formatted_attributes :description
@@ -43,9 +40,6 @@ class Text < ApplicationRecord
     }
   end
   with_citable_children :text_sections
-
-  # URLs
-  friendly_id :title, use: :slugged
 
   # Fields
   serialize :structure_titles, Hash

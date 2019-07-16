@@ -6,18 +6,12 @@ class ProjectCollection < ApplicationRecord
 
   # Concerns
   include Concerns::HasFormattedAttributes
-  include Concerns::ValidatesSlugPresence
   include Filterable
   include TrackedCreator
-
-  # Authority
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
   include Concerns::Taggable
-
-  # Slugs
-  extend FriendlyId
-  friendly_id :title, use: :slugged
+  include Concerns::Sluggable
 
   # Ordering
   acts_as_list
