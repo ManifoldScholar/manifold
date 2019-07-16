@@ -27,7 +27,20 @@ module Ingestions
       end
 
       def text_attributes
-        manifest[:attributes].merge(project: ingestion.project, creator: context.creator)
+        attr = manifest[:attributes].merge(project: ingestion.project, creator: context.creator)
+        add_pending_slug!(attr) unless ingestion.text
+        attr
+      end
+
+      def add_pending_slug!(attributes)
+        title = text_titles.find { |t| t["kind"] == "main" } || text_titles.first
+        value = title&.fetch("value", nil)
+        value = value&.downcase == "index" ? "untitled" : value
+        attributes[:pending_slug] = value
+      end
+
+      def text_titles
+        manifest[:relationships][:text_titles] || []
       end
 
       # rubocop:disable Metrics/AbcSize, Metrics/MethodLength

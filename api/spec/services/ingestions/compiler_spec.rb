@@ -17,15 +17,20 @@ RSpec.describe Ingestions::Compiler do
       manifest
     end
 
+    it "sets the slug correctly" do
+      outcome = described_class.run(context: context, manifest: manifest)
+      expect(outcome.result.slug).to eq "your-title-here"
+    end
+
     it "creates the correct number of records" do
       expect do
         described_class.run(context: context, manifest: manifest)
       end.to change(Text, :count).by(1)
-               .and change(TextSection, :count).by(4)
-                      .and change(TextTitle, :count).by(1)
-                             .and change(IngestionSource, :count).by(7)
-                                    .and change(Maker, :count).by(1)
-                                            .and change(Stylesheet, :count).by(1)
+        .and change(TextSection, :count).by(4)
+        .and change(TextTitle, :count).by(1)
+        .and change(IngestionSource, :count).by(7)
+        .and change(Maker, :count).by(1)
+        .and change(Stylesheet, :count).by(1)
     end
   end
 
@@ -43,15 +48,20 @@ RSpec.describe Ingestions::Compiler do
       manifest
     end
 
+    it "sets the slug correctly" do
+      outcome = described_class.run(context: context, manifest: manifest)
+      expect(outcome.result.slug).to eq "a-manifest-ingestion"
+    end
+
     it "creates the correct number of records" do
       expect do
         described_class.run(context: context, manifest: manifest)
       end.to change(Text, :count).by(1)
-               .and change(TextSection, :count).by(3)
-                      .and change(TextTitle, :count).by(1)
-                             .and change(IngestionSource, :count).by(6)
-                                    .and change(Maker, :count).by(2)
-                                           .and change(Stylesheet, :count).by(4)
+        .and change(TextSection, :count).by(3)
+        .and change(TextTitle, :count).by(1)
+        .and change(IngestionSource, :count).by(6)
+        .and change(Maker, :count).by(2)
+        .and change(Stylesheet, :count).by(4)
     end
   end
 
@@ -70,15 +80,20 @@ RSpec.describe Ingestions::Compiler do
       manifest
     end
 
+    it "sets the slug correctly" do
+      outcome = described_class.run(context: context, manifest: manifest)
+      expect(outcome.result.slug).to eq "title"
+    end
+
     it "creates the correct number of records" do
       expect do
         described_class.run(context: context, manifest: manifest)
       end.to change(Text, :count).by(1)
-               .and change(TextSection, :count).by(1)
-                      .and change(TextTitle, :count).by(1)
-                             .and change(IngestionSource, :count).by(1)
-                                    .and change(Maker, :count).by(2)
-                                           .and change(Stylesheet, :count).by(2)
+        .and change(TextSection, :count).by(1)
+        .and change(TextTitle, :count).by(1)
+        .and change(IngestionSource, :count).by(1)
+        .and change(Maker, :count).by(2)
+        .and change(Stylesheet, :count).by(2)
     end
   end
 
@@ -96,15 +111,20 @@ RSpec.describe Ingestions::Compiler do
       manifest
     end
 
+    it "sets the slug correctly" do
+      outcome = described_class.run(context: context, manifest: manifest)
+      expect(outcome.result.slug).to eq "title"
+    end
+
     it "creates the correct number of records" do
       expect do
         described_class.run(context: context, manifest: manifest)
       end.to change(Text, :count).by(1)
-               .and change(TextSection, :count).by(1)
-                      .and change(TextTitle, :count).by(1)
-                             .and change(IngestionSource, :count).by(2)
-                                    .and change(Maker, :count).by(2)
-                                           .and change(Stylesheet, :count).by(1)
+        .and change(TextSection, :count).by(1)
+        .and change(TextTitle, :count).by(1)
+        .and change(IngestionSource, :count).by(2)
+        .and change(Maker, :count).by(2)
+        .and change(Stylesheet, :count).by(1)
     end
   end
 
@@ -122,15 +142,20 @@ RSpec.describe Ingestions::Compiler do
       manifest
     end
 
+    it "sets the slug correctly" do
+      outcome = described_class.run(context: context, manifest: manifest)
+      expect(outcome.result.slug).to eq "google-doc-prime"
+    end
+
     it "creates the correct number of records" do
       expect do
         described_class.run(context: context, manifest: manifest)
       end.to change(Text, :count).by(1)
-               .and change(TextSection, :count).by(1)
-                      .and change(TextTitle, :count).by(1)
-                             .and change(IngestionSource, :count).by(1)
-                                    .and change(Maker, :count).by(0)
-                                           .and change(Stylesheet, :count).by(2)
+        .and change(TextSection, :count).by(1)
+        .and change(TextTitle, :count).by(1)
+        .and change(IngestionSource, :count).by(1)
+        .and change(Maker, :count).by(0)
+        .and change(Stylesheet, :count).by(2)
     end
   end
 end

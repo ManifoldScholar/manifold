@@ -106,7 +106,6 @@ RSpec.describe Ingestions::Ingestor do
       it "correctly references text sections in the toc" do
         expect(text.toc[0][:id]).to eq text.text_sections.first.id
       end
-
     end
 
     context "when source has extraneous files and complex paths" do
@@ -137,17 +136,30 @@ RSpec.describe Ingestions::Ingestor do
         it "updates the existing text" do
           expect do
             described_class.run ingestion: ingestion
-          end.to change(text, :updated_at)
+          end.to change { text.reload.updated_at }
+        end
+
+        it "does change the text's title" do
+          expect do
+            described_class.run ingestion: ingestion
+          end.to change { text.reload.title }
+        end
+
+        it "does not change the text's slug" do
+          expect do
+            described_class.run ingestion: ingestion
+          end.to_not change(text, :slug)
         end
       end
 
       describe "a reingestion with failures" do
         it "does not persist updates" do
-          allow_any_instance_of(Ingestions::Compilers::TextSection).to receive(:text_section).and_raise(::Ingestions::IngestionError)
+          allow_any_instance_of(Ingestions::Compilers::TextSection)
+            .to receive(:text_section).and_raise(::Ingestions::IngestionError)
 
           expect do
             described_class.run ingestion: ingestion
-          end.to_not change(text, :title)
+          end.to_not change { text.reload.title }
         end
       end
     end
