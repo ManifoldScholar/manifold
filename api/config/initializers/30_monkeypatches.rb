@@ -1,3 +1,4 @@
+require Rails.root.join("lib", "patches", "better_interactions").to_s
 require Rails.root.join("lib", "patches", "metadown_custom_renderer").to_s
 require Rails.root.join("lib", "patches", "better_enums").to_s
 require Rails.root.join("lib", "patches", "for_shrine").to_s
