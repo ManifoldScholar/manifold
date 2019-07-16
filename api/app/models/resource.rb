@@ -29,10 +29,9 @@ class Resource < ApplicationRecord
   include Concerns::HasFormattedAttributes
   include Concerns::HasSortTitle
   include Concerns::Fingerprinted
-  include Concerns::ValidatesSlugPresence
   include Concerns::Taggable
+  include Concerns::Sluggable
   include Metadata
-  extend FriendlyId
 
   # Magic
   with_metadata %w(
@@ -42,8 +41,6 @@ class Resource < ApplicationRecord
     creator alt_text credit copyright_status
   )
   has_sort_title :title_plaintext
-
-  friendly_id :title, use: :slugged
 
   # Associations
   belongs_to :project

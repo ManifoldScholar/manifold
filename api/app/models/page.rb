@@ -6,10 +6,9 @@ class Page < ApplicationRecord
   include Concerns::SerializedAbilitiesFor
 
   # Concerns
-  include FriendlyId
   include TrackedCreator
+  include Concerns::Sluggable
   include Concerns::HasFormattedAttributes
-  include Concerns::ValidatesSlugPresence
   include ClassyEnum::ActiveRecord
 
   classy_enum_attr :purpose, class_name: "PagePurpose"
@@ -31,12 +30,8 @@ class Page < ApplicationRecord
 
   # Validation
   validates :title, presence: true
-  validates :slug, presence: true, uniqueness: true
   validates :external_link, presence: true, if: :is_external_link?
   validate :policy_purpose_is_unique!
-
-  # Misc
-  friendly_id :slug_candidates, use: :slugged
 
   def slug_candidates
     [:nav_title, :title]

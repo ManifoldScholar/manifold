@@ -91,7 +91,8 @@ module Validation
 
   def resource_collection_params
     params.require(:data)
-    attributes = [:title, :description, attachment(:thumbnail), :remove_thumbnail]
+    attributes = [:title, :description, attachment(:thumbnail), :remove_thumbnail,
+                  :slug]
     relationships = [:project, :resources]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -232,7 +233,7 @@ module Validation
   def text_params
     params.require(:data)
     attributes = [:title, :language, :position, :description, :publication_date,
-                  metadata(Text), :rights, :section_kind, :subtitle, :published]
+                  metadata(Text), :rights, :section_kind, :subtitle, :published, :slug]
     relationships = [:category, :contributors, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
