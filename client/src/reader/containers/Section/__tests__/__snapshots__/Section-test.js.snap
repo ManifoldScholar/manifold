@@ -28,6 +28,7 @@ exports[`Reader Section Container renders correctly 1`] = `
               <div
                 className="manifold-text-section text-section font-size-undefined"
                 data-id="body"
+                id="manifold-text-section"
               >
                 <section
                   className="chapter"

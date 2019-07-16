@@ -29,20 +29,7 @@ export default class ProjectListPlaceholder extends Component {
   }
 
   defaultMessage() {
-    const adminLink = lh.link("backend");
-
-    return (
-      <div className="centered-message">
-        {
-          "But it’s easy to create and publish projects with Manifold. If you have project creation privileges, "
-        }
-        <Link to={adminLink}>login to the backend</Link>
-        {
-          " to get started. For more help, you can learn about creating and publishing Manifold Projects "
-        }
-        <a href={helpLink}>here</a>.
-      </div>
-    );
+    return <div className="centered-message">Please check back soon!</div>;
   }
 
   render() {
@@ -54,7 +41,16 @@ export default class ProjectListPlaceholder extends Component {
               <div className="main">
                 <div className="body">
                   <h2 className="title">
-                    {"Uh-oh. This Manifold Library is empty."}
+                    <Authorize entity="projectCollection" ability="create">
+                      Uh-oh. This Manifold library is empty.
+                    </Authorize>
+                    <Authorize
+                      entity="project"
+                      ability="create"
+                      successBehavior="hide"
+                    >
+                      This Manifold library is empty.
+                    </Authorize>
                   </h2>
                 </div>
               </div>
@@ -66,16 +62,18 @@ export default class ProjectListPlaceholder extends Component {
               {this.defaultMessage()}
             </Authorize>
             <Utility.IconComposer icon="BooksOnShelfColorUnique" />
-            <div className="project-list-placeholder__button-nav button-nav">
-              <Link
-                to={lh.link("backendProjects")}
-                className="button-icon-primary"
-              >
-                <span className="button-icon-primary__text">
-                  {"Publish a Project Now"}
-                </span>
-              </Link>
-            </div>
+            <Authorize entity="project" ability="create">
+              <div className="project-list-placeholder__button-nav button-nav">
+                <Link
+                  to={lh.link("backendProjects")}
+                  className="button-icon-primary"
+                >
+                  <span className="button-icon-primary__text">
+                    {"Publish a Project Now"}
+                  </span>
+                </Link>
+              </div>
+            </Authorize>
           </div>
         </div>
       </section>

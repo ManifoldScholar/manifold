@@ -39,12 +39,9 @@ export class StylesheetEditContainer extends PureComponent {
     this.state = { redirect: null };
   }
 
-  onSuccess = stylesheet => {
-    const { params } = this.props.match;
-    if (stylesheet) {
-      const redirect = lh.link("backendTextStyles", params.id);
-      this.setState({ redirect });
-    }
+  onSuccess = () => {
+    if (!__BROWSER__) return;
+    window.scrollTo(0, 0);
     this.props.refresh();
   };
 

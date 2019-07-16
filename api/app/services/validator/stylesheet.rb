@@ -7,8 +7,8 @@ module Validator
 
     extend Memoist
 
-    def initialize
-      @config = Rails.configuration.manifold.css_validator
+    def initialize(config = nil)
+      @config = config || Rails.configuration.manifold.css_validator.defaults
     end
 
     # @param css [String] the CSS to be validated
@@ -197,8 +197,8 @@ module Validator
     # @param value [String]
     # @param _important [Boolean]
     # @return [String]
-    def compose_declaration(property, value, _important)
-      "#{property}: #{value};"
+    def compose_declaration(property, value, important)
+      "#{property}: #{value}#{' !important' if important && @config.allow_important};"
     end
 
     # Composes a CSS rule set from a selector and declarations
@@ -232,7 +232,7 @@ module Validator
     def scope_selector(selector)
       return selector if scoped?(selector)
 
-      "#{@config.scope} #{selector}"
+      "#{@config.class_scope} #{selector}"
     end
 
     # Maps a CSS declaration value if necessary
@@ -368,7 +368,7 @@ module Validator
     # @param selector [String]
     # @return [Boolean]
     def scoped?(selector)
-      selector.start_with? @config.scope
+      selector.start_with?(@config.class_scope) || selector.start_with?(@config.id_scope)
     end
 
     # Is the selector allowed?

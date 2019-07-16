@@ -76,10 +76,10 @@ class Settings < ApplicationRecord
     Settings::UpdateOauthProviders.run!
   end
 
-  def calculated
+  def calculated(current_user = nil)
     {
-      home_page_show_projects:
-        ProjectCollection.by_visible_on_homepage.count.zero?
+      has_visible_home_project_collections: ProjectCollection.by_visible_on_homepage.exists?,
+      has_visible_projects: Project.with_read_ability(current_user).exists?
     }
   end
 

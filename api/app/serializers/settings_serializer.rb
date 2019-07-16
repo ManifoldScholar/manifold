@@ -13,6 +13,10 @@ class SettingsSerializer < ApplicationSerializer
     0
   end
 
+  def calculated
+    object.calculated(current_user)
+  end
+
   def secrets
     object.secrets.transform_values do |_value|
       "(redacted)"

@@ -9,44 +9,52 @@ exports[`Frontend Home Container renders correctly 1`] = `
   }
 >
   <section
-    className=""
+    className="bg-neutral05"
   >
     <div
       className="container"
     >
-      <h2
-        className="screen-reader-text"
-      >
-        Project Navigation
-      </h2>
       <div
-        className="button-nav button-nav--default"
+        className="project-list-placeholder"
       >
-        <a
-          className="button-icon-primary"
-          href="/projects/all"
-          onClick={[Function]}
+        <header
+          className="section-heading"
         >
-          <svg
-            aria-hidden={true}
-            className="manicon-svg button-icon-primary__icon svg-icon--projects64"
-            fill="currentColor"
-            height={48}
-            viewBox="0 0 64 64"
-            width={48}
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            className="main"
           >
-            <path
-              d="M48.522,10 L36.417,11.872 L42.4,50.553 L35.188,50.553 L35.188,11.257 L22.939,11.257 L22.939,50.553 L20.819,50.553 L20.819,11.257 L8.57,11.257 L8.57,50.553 L4,50.553 L4,52.553 L59.467,52.553 L59.467,50.553 L50.237,50.553 L54.688,49.865 L48.522,10 Z M38.699,13.542 L46.851,12.281 L52.405,48.194 L44.254,49.455 L38.699,13.542 Z M24.939,15.622 L33.188,15.622 L33.188,13.257 L24.939,13.257 L24.939,15.622 Z M10.57,16.689 L18.819,16.689 L18.819,13.257 L10.57,13.257 L10.57,16.689 Z M24.939,19.725 L33.188,19.725 L33.188,17.622 L24.939,17.622 L24.939,19.725 Z M10.57,44.164 L18.819,44.164 L18.819,18.689 L10.57,18.689 L10.57,44.164 Z M24.939,41.127 L33.188,41.127 L33.188,21.726 L24.939,21.726 L24.939,41.127 Z M24.939,45.23 L33.188,45.23 L33.188,43.127 L24.939,43.127 L24.939,45.23 Z M10.57,49.596 L18.819,49.596 L18.819,46.163 L10.57,46.163 L10.57,49.596 Z M24.939,49.595 L33.188,49.595 L33.188,47.23 L24.939,47.23 L24.939,49.595 Z M45.8783,32.9758 C47.0433,32.7958 47.8403,31.7058 47.6603,30.5418 C47.4803,29.3778 46.3903,28.5798 45.2263,28.7598 C44.0623,28.9408 43.2643,30.0308 43.4443,31.1948 C43.6243,32.3588 44.7143,33.1568 45.8783,32.9758"
-              fillRule="evenodd"
-            />
-          </svg>
-          <span
-            className="button-icon-primary__text"
-          >
-            See All Projects
-          </span>
-        </a>
+            <div
+              className="body"
+            >
+              <h2
+                className="title"
+              >
+                This Manifold library is empty.
+              </h2>
+            </div>
+          </div>
+        </header>
+        <div
+          className="centered-message"
+        >
+          Please check back soon!
+        </div>
+        <svg
+          viewBox="0 0 122.6 63.8"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>
+            Books on a Shelf
+          </title>
+          <path
+            d="M28.5 10.6h14.3v44.7H28.5V10.6zm0 46.4h14.3v5.1H28.5V57zm0-53.2h14.3v5.1H28.5V3.8zm64.4 55.9L83.9 2 69.8 4.2l8.9 57.7 14.2-2.2zm-16.4-27c-.4-2.7 1.4-5.2 4.1-5.6s5.2 1.4 5.6 4.1-1.4 5.2-4.1 5.6c-.3 0-.5.1-.8.1-2.4-.1-4.5-1.8-4.8-4.2zM50 52.3h14.3v3H50v-3zm0 4.7h14.3v5.1H50V57zm0-53.2h14.3v5.1H50V3.8zm0 6.8h14.3v3H50v-3zm0 4.8h14.3v35.2H50V15.4z"
+            fill="#cbf7e6"
+          />
+          <path
+            d="M82.1 36.8c2.7-.4 4.5-2.9 4.1-5.6s-2.9-4.5-5.6-4.1-4.5 2.9-4.1 5.6c.4 2.4 2.5 4.1 4.8 4.1h.8zm-1.3-8h.5c1.5 0 2.9 1.1 3.1 2.7.3 1.7-.9 3.3-2.6 3.6-1.7.3-3.3-.9-3.6-2.6-.3-1.8.9-3.4 2.6-3.7zm40.9 33.3H88.5l5.5-.9c.2 0 .4-.2.6-.3.1-.2.2-.4.2-.7L85.5.8c0-.2-.2-.4-.3-.6-.2-.1-.4-.1-.7-.1L68.6 2.6c-.5.1-.8.5-.7 1L77 62.1H66V2.9c0-.5-.4-.9-.9-.9h-16c-.5 0-.9.4-.9.9v59.2h-3.6V2.9c0-.5-.4-.9-.9-.9H27.6c-.5 0-.9.4-.9.9v59.2H.9c-.5 0-.9.4-.9.9s.4.9.9.9h121c.5 0 .9-.4.9-.9s-.6-.9-1.1-.9zM83.9 2l8.9 57.7-14.2 2.2-8.8-57.7L83.9 2zM64.3 50.5H50V15.4h14.3v35.1zm0-41.7H50v-5h14.3v5zm0 1.8v3H50v-3h14.3zM50 52.3h14.3v3H50v-3zm0 4.7h14.3v5.1H50V57zm-7.2-1.7H28.5V10.6h14.3v44.7zm0-51.5v5.1H28.5V3.8h14.3zM28.5 57h14.3v5.1H28.5V57z"
+            fill="#c3c3c3"
+          />
+        </svg>
       </div>
     </div>
   </section>
@@ -62,44 +70,52 @@ exports[`Frontend Home Container renders correctly with project collections pres
   }
 >
   <section
-    className=""
+    className="bg-neutral05"
   >
     <div
       className="container"
     >
-      <h2
-        className="screen-reader-text"
-      >
-        Project Navigation
-      </h2>
       <div
-        className="button-nav button-nav--default"
+        className="project-list-placeholder"
       >
-        <a
-          className="button-icon-primary"
-          href="/projects/all"
-          onClick={[Function]}
+        <header
+          className="section-heading"
         >
-          <svg
-            aria-hidden={true}
-            className="manicon-svg button-icon-primary__icon svg-icon--projects64"
-            fill="currentColor"
-            height={48}
-            viewBox="0 0 64 64"
-            width={48}
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            className="main"
           >
-            <path
-              d="M48.522,10 L36.417,11.872 L42.4,50.553 L35.188,50.553 L35.188,11.257 L22.939,11.257 L22.939,50.553 L20.819,50.553 L20.819,11.257 L8.57,11.257 L8.57,50.553 L4,50.553 L4,52.553 L59.467,52.553 L59.467,50.553 L50.237,50.553 L54.688,49.865 L48.522,10 Z M38.699,13.542 L46.851,12.281 L52.405,48.194 L44.254,49.455 L38.699,13.542 Z M24.939,15.622 L33.188,15.622 L33.188,13.257 L24.939,13.257 L24.939,15.622 Z M10.57,16.689 L18.819,16.689 L18.819,13.257 L10.57,13.257 L10.57,16.689 Z M24.939,19.725 L33.188,19.725 L33.188,17.622 L24.939,17.622 L24.939,19.725 Z M10.57,44.164 L18.819,44.164 L18.819,18.689 L10.57,18.689 L10.57,44.164 Z M24.939,41.127 L33.188,41.127 L33.188,21.726 L24.939,21.726 L24.939,41.127 Z M24.939,45.23 L33.188,45.23 L33.188,43.127 L24.939,43.127 L24.939,45.23 Z M10.57,49.596 L18.819,49.596 L18.819,46.163 L10.57,46.163 L10.57,49.596 Z M24.939,49.595 L33.188,49.595 L33.188,47.23 L24.939,47.23 L24.939,49.595 Z M45.8783,32.9758 C47.0433,32.7958 47.8403,31.7058 47.6603,30.5418 C47.4803,29.3778 46.3903,28.5798 45.2263,28.7598 C44.0623,28.9408 43.2643,30.0308 43.4443,31.1948 C43.6243,32.3588 44.7143,33.1568 45.8783,32.9758"
-              fillRule="evenodd"
-            />
-          </svg>
-          <span
-            className="button-icon-primary__text"
-          >
-            See All Projects
-          </span>
-        </a>
+            <div
+              className="body"
+            >
+              <h2
+                className="title"
+              >
+                This Manifold library is empty.
+              </h2>
+            </div>
+          </div>
+        </header>
+        <div
+          className="centered-message"
+        >
+          Please check back soon!
+        </div>
+        <svg
+          viewBox="0 0 122.6 63.8"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>
+            Books on a Shelf
+          </title>
+          <path
+            d="M28.5 10.6h14.3v44.7H28.5V10.6zm0 46.4h14.3v5.1H28.5V57zm0-53.2h14.3v5.1H28.5V3.8zm64.4 55.9L83.9 2 69.8 4.2l8.9 57.7 14.2-2.2zm-16.4-27c-.4-2.7 1.4-5.2 4.1-5.6s5.2 1.4 5.6 4.1-1.4 5.2-4.1 5.6c-.3 0-.5.1-.8.1-2.4-.1-4.5-1.8-4.8-4.2zM50 52.3h14.3v3H50v-3zm0 4.7h14.3v5.1H50V57zm0-53.2h14.3v5.1H50V3.8zm0 6.8h14.3v3H50v-3zm0 4.8h14.3v35.2H50V15.4z"
+            fill="#cbf7e6"
+          />
+          <path
+            d="M82.1 36.8c2.7-.4 4.5-2.9 4.1-5.6s-2.9-4.5-5.6-4.1-4.5 2.9-4.1 5.6c.4 2.4 2.5 4.1 4.8 4.1h.8zm-1.3-8h.5c1.5 0 2.9 1.1 3.1 2.7.3 1.7-.9 3.3-2.6 3.6-1.7.3-3.3-.9-3.6-2.6-.3-1.8.9-3.4 2.6-3.7zm40.9 33.3H88.5l5.5-.9c.2 0 .4-.2.6-.3.1-.2.2-.4.2-.7L85.5.8c0-.2-.2-.4-.3-.6-.2-.1-.4-.1-.7-.1L68.6 2.6c-.5.1-.8.5-.7 1L77 62.1H66V2.9c0-.5-.4-.9-.9-.9h-16c-.5 0-.9.4-.9.9v59.2h-3.6V2.9c0-.5-.4-.9-.9-.9H27.6c-.5 0-.9.4-.9.9v59.2H.9c-.5 0-.9.4-.9.9s.4.9.9.9h121c.5 0 .9-.4.9-.9s-.6-.9-1.1-.9zM83.9 2l8.9 57.7-14.2 2.2-8.8-57.7L83.9 2zM64.3 50.5H50V15.4h14.3v35.1zm0-41.7H50v-5h14.3v5zm0 1.8v3H50v-3h14.3zM50 52.3h14.3v3H50v-3zm0 4.7h14.3v5.1H50V57zm-7.2-1.7H28.5V10.6h14.3v44.7zm0-51.5v5.1H28.5V3.8h14.3zM28.5 57h14.3v5.1H28.5V57z"
+            fill="#c3c3c3"
+          />
+        </svg>
       </div>
     </div>
   </section>

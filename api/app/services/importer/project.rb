@@ -41,7 +41,7 @@ module Importer
           title: @project_json[:attributes][:title]
         )
       else
-        ::Project.new
+        ::Project.new(draft: false)
       end
     end
 
@@ -60,12 +60,11 @@ module Importer
       excludes = %w(cover_ avatar_ hero_)
       unset_untouched(project, @project_json[:attributes], excludes)
       raise "Invalid project: #{project.errors.full_messages}" unless project.valid?
-      project.draft = false
       project.save
       create_twitter_queries(project)
       import_collaborators(project)
       import_subject(project)
-      import_texts(project, @project_json[:published_texts], published: true) if include_texts
+      import_texts(project, @project_json[:published_text], published: true) if include_texts
       import_texts(project, @project_json[:texts]) if include_texts
       import_resources(project)
       scaffold_content(project)

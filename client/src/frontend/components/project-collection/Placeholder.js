@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import Utility from "global/components/utility";
-
 import Authorize from "hoc/authorize";
 
 const helpLink = "https://manifoldapp.org/docs/";
@@ -33,23 +32,7 @@ export default class ProjectListPlaceholder extends Component {
   }
 
   defaultMessage() {
-    const adminLink = lh.link("backendProjectCollections");
-
-    return (
-      <div className="centered-message">
-        {
-          "But it’s easy to create new project collections with Manifold. If you have project creation privileges, "
-        }
-        <Link to={adminLink}>login to the backend</Link>
-        {
-          " to get started. For more help, you can learn about creating and publishing Manifold Project Collections "
-        }
-        <a href={helpLink} target="_blank" rel="noopener noreferrer">
-          here
-        </a>
-        .
-      </div>
-    );
+    return <div className="centered-message">Please check back soon!</div>;
   }
 
   render() {
@@ -61,9 +44,17 @@ export default class ProjectListPlaceholder extends Component {
               <div className="main">
                 <div className="body">
                   <h2 className="title">
-                    {
-                      "Oh no. There are no project collections in this Manifold Library."
-                    }
+                    <Authorize entity="projectCollection" ability="create">
+                      Oh no. There are no project collections in this Manifold
+                      library.
+                    </Authorize>
+                    <Authorize
+                      entity="project"
+                      ability="create"
+                      successBehavior="hide"
+                    >
+                      There are no project collections in this Manifold library.
+                    </Authorize>
                   </h2>
                 </div>
               </div>
@@ -75,13 +66,15 @@ export default class ProjectListPlaceholder extends Component {
               {this.defaultMessage()}
             </Authorize>
             <Utility.IconComposer icon="BooksOnShelfColorUnique" />
-            <div className="project-list-placeholder__button-nav button-nav">
-              <Link to={lh.link("backend")} className="button-icon-primary">
-                <span className="button-icon-primary__text">
-                  {"Create a collection Now"}
-                </span>
-              </Link>
-            </div>
+            <Authorize entity="projectCollection" ability="create">
+              <div className="project-list-placeholder__button-nav button-nav">
+                <Link to={lh.link("backend")} className="button-icon-primary">
+                  <span className="button-icon-primary__text">
+                    {"Create a collection Now"}
+                  </span>
+                </Link>
+              </div>
+            </Authorize>
           </div>
         </div>
       </section>

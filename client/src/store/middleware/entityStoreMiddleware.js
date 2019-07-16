@@ -1,6 +1,7 @@
 import { ApiClient } from "api";
 import { constantizeMeta } from "utils/entityUtils";
 import get from "lodash/get";
+import has from "lodash/has";
 
 function sendRequest(request, authToken) {
   const client = new ApiClient();
@@ -56,11 +57,16 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
       return next(action);
     }
 
+    // If the authToken is explicitly included in the request options, use it.
+    // Generally speaking we pull the authToken from the store. However, when we load
+    // the settings during the server-side bootstrap, it's easier to just include the
+    // token from the cookie. This condition supports that possibility.
+    const authToken = has(action, "payload.request.options.authToken")
+      ? action.payload.request.options.authToken
+      : state.authentication.authToken;
+
     // Inject headers, etc. from state
-    const requestPromise = sendRequest(
-      action.payload.request,
-      state.authentication.authToken
-    );
+    const requestPromise = sendRequest(action.payload.request, authToken);
 
     setTimeout(() => {
       // Start and stop loading indication based on this promise.
