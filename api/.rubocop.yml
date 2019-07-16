@@ -10,6 +10,7 @@ AllCops:
       - 'api/db/**/*'
       - 'api/bin/**/*'
       - 'api/spec/**/*'
+      - 'api/lib/patches/**/*'
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
