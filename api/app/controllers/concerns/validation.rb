@@ -349,6 +349,13 @@ module Validation
     params.permit(param_config)
   end
 
+  def contact_params
+    params.require(:data)
+    attributes = [:email, :full_name, :message]
+    param_config = structure_params(attributes: attributes)
+    params.permit(param_config)
+  end
+
   def permission_params
     params.require(:data)
     attributes = [{ role_names: [] }]
