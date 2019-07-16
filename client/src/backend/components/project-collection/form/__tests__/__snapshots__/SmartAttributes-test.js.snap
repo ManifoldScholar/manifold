@@ -67,7 +67,7 @@ Array [
     <h4
       className="form-input-heading"
     >
-      Subjects
+      Subjects:
     </h4>
     <span
       className="instructions"
@@ -122,7 +122,7 @@ Array [
       className=""
       htmlFor="attributes[tagList]-tag-list-1"
     >
-      Tags
+      Tags:
     </label>
     <div
       className="input-predictive"
