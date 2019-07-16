@@ -42,7 +42,7 @@ class PagesGeneralContainer extends PureComponent {
         wide
         validation={["required"]}
         label="Slug"
-        name="attributes[slug]"
+        name="attributes[pendingSlug]"
         placeholder="Enter URL Slug"
         instructions="The page URL is based on the slug."
       />

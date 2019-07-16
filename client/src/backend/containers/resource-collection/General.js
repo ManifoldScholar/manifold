@@ -43,8 +43,8 @@ export class ResourceCollectionGeneralContainer extends PureComponent {
           <Form.TextInput
             wide
             label="Slug"
-            name="attributes[slug]"
-            placeholder="Enter Project Slug"
+            name="attributes[pendingSlug]"
+            placeholder="Enter URL Slug"
           />
           <Form.Upload
             layout="landscape"

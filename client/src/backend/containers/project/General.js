@@ -51,7 +51,7 @@ export default class ProjectGeneralContainer extends PureComponent {
               <Form.TextInput
                 wide
                 label="Slug"
-                name="attributes[slug]"
+                name="attributes[pendingSlug]"
                 placeholder="Enter Project Slug"
               />
             </Form.FieldGroup>
