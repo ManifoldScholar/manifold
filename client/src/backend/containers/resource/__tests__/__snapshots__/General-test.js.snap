@@ -143,17 +143,17 @@ exports[`Backend Resource General Container renders correctly 1`] = `
       >
         <label
           className=""
-          htmlFor="attributes[slug]-text-input-1"
+          htmlFor="attributes[pendingSlug]-text-input-1"
         >
           Slug
         </label>
         <input
-          aria-describedby="attributes[slug]-text-input-1"
-          id="attributes[slug]-text-input-1"
+          aria-describedby="attributes[pendingSlug]-text-input-1"
+          id="attributes[pendingSlug]-text-input-1"
           onChange={[Function]}
-          placeholder="Enter slug"
+          placeholder="Enter URL Slug"
           type="text"
-          value="slug-1"
+          value=""
         />
       </div>
       <div
