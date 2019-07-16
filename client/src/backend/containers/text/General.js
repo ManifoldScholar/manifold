@@ -35,7 +35,7 @@ export default class TextGeneralContainer extends PureComponent {
           <Form.TextInput
             wide
             label="Slug"
-            name="attributes[slug]"
+            name="attributes[pendingSlug]"
             placeholder="Enter Text Slug"
           />
           <Form.Switch label="Published?" name="attributes[published]" />

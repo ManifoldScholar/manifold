@@ -46,7 +46,7 @@ module Validation
                   :remove_avatar, attachment(:avatar), attachment(:hero), :download_url,
                   attachment(:cover), :remove_hero, :draft, :remove_cover,
                   :download_call_to_action, :publication_date, metadata(Project),
-                  :avatar_color, :slug, :tag_list, :dark_mode, :image_credits]
+                  :avatar_color, :pending_slug, :tag_list, :dark_mode, :image_credits]
     relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -66,7 +66,7 @@ module Validation
 
   def page_params
     params.require(:data)
-    attributes = [:title, :slug, :nav_title, :body, :show_in_footer, :show_in_header,
+    attributes = [:title, :pending_slug, :nav_title, :body, :show_in_footer, :show_in_header,
                   :hidden, :external_link, :is_external_link, :purpose, :open_in_new_tab]
     relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
@@ -92,7 +92,7 @@ module Validation
   def resource_collection_params
     params.require(:data)
     attributes = [:title, :description, attachment(:thumbnail), :remove_thumbnail,
-                  :slug]
+                  :pending_slug]
     relationships = [:project, :resources]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -101,8 +101,9 @@ module Validation
   def project_collection_params
     params.require(:data)
     attributes = [:title, :sort_order, :visible, :homepage, :smart, :position, :icon,
-                  :tag_list, :number_of_projects, :featured_only, :description, :slug,
-                  :homepage_start_date, :homepage_end_date, :homepage_count]
+                  :tag_list, :number_of_projects, :featured_only, :description,
+                  :pending_slug, :homepage_start_date, :homepage_end_date,
+                  :homepage_count]
     relationships = [:projects, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -139,7 +140,7 @@ module Validation
                   :allow_download, :external_type, :external_url, :external_id,
                   :embed_code, :subject, :minimum_width, :maximum_width, :minimum_height,
                   :maximum_height, :iframe_allow_fullscreen, metadata(Resource),
-                  :fingerprint, :slug]
+                  :fingerprint, :pending_slug]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -233,7 +234,8 @@ module Validation
   def text_params
     params.require(:data)
     attributes = [:title, :language, :position, :description, :publication_date,
-                  metadata(Text), :rights, :section_kind, :subtitle, :published, :slug]
+                  metadata(Text), :rights, :section_kind, :subtitle, :published,
+                  :pending_slug]
     relationships = [:category, :contributors, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

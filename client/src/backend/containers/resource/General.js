@@ -60,8 +60,8 @@ export class ResourceGeneralContainer extends PureComponent {
           />
           <Form.TextInput
             label="Slug"
-            name="attributes[slug]"
-            placeholder="Enter slug"
+            name="attributes[pendingSlug]"
+            placeholder="Enter URL Slug"
           />
           <Form.TagList
             label="Tags"
