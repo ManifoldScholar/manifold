@@ -31,9 +31,9 @@ module Ingestions
         end
 
         text.text_sections
-            .where(source_identifier: identifiers)
-            .order(position: :asc)
-            .pluck(:id)
+          .where(source_identifier: identifiers)
+          .order(position: :asc)
+          .pluck(:id)
       end
     end
   end

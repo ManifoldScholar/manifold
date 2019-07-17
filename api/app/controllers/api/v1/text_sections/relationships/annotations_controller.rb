@@ -29,8 +29,8 @@ module Api
 
           def create
             @annotation = ::Updaters::Default
-                          .new(annotation_params)
-                          .update_without_save(@text_section.annotations.new)
+              .new(annotation_params)
+              .update_without_save(@text_section.annotations.new)
             @annotation.creator = @current_user
             @annotation.save
             authorize_action_for @annotation

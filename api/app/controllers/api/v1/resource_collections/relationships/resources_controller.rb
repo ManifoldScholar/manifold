@@ -39,7 +39,7 @@ module Api
 
           def set_collection
             @collection = ResourceCollection.friendly
-                                            .find(params[:resource_collection_id])
+              .find(params[:resource_collection_id])
           end
 
         end

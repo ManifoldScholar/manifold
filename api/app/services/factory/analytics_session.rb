@@ -10,8 +10,8 @@ module Factory
 
       client = Google::Apis::AnalyticsV3::AnalyticsService.new
       client.authorization = Signet::OAuth2::Client
-                             .new(auth_options)
-                             .tap(&:fetch_access_token!)
+        .new(auth_options)
+        .tap(&:fetch_access_token!)
       client
     rescue OpenSSL::PKey::RSAError => e
       Rails.logger.error("Google Analytics Key error: #{e}")

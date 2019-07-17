@@ -21,8 +21,8 @@ module Api
 
       def create
         @stylesheet = ::Updaters::Default
-                      .new(stylesheet_params)
-                      .update_without_save(@text.stylesheets.new)
+          .new(stylesheet_params)
+          .update_without_save(@text.stylesheets.new)
         authorize_action_for @stylesheet
         @stylesheet.creator = @current_user
         @stylesheet.save
