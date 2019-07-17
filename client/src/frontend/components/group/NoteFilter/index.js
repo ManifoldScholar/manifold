@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { UID } from "react-uid";
 import Utility from "global/components/utility";
 import Filter from "./Filter";
 
@@ -38,14 +39,29 @@ export default class SelectFilter extends React.PureComponent {
     return this.props.pagination;
   }
 
+  get idPrefix() {
+    return "notes-filter";
+  }
+
   render() {
     return (
       <div className={"notes-filter"}>
         <Utility.Count pagination={this.pagination} countLabel={"Notes"} />
-        <div className={"notes-filter__dropdown-container"}>
-          <Filter label={"Text Filter"} options={this.titles} />
-          <Filter label={"Author Filter"} options={this.authors} />
-        </div>
+        <UID name={id => `${this.idPrefix}-${id}`}>
+          {id => (
+            <div
+              role="group"
+              aria-labelledby={`${id}-header`}
+              className={"notes-filter__dropdown-container"}
+            >
+              <p id={`${id}-header`} className="screen-reader-text">
+                Notes filters
+              </p>
+              <Filter label={"Text Filter"} options={this.titles} />
+              <Filter label={"Author Filter"} options={this.authors} />
+            </div>
+          )}
+        </UID>
       </div>
     );
   }

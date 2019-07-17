@@ -52,7 +52,7 @@
     }
 
     .section-next-section__link:hover &,
-    .section-next-section__link:focus & {
+    .section-next-section__link:focus-visible & {
       color: $accentPrimary;
     }
   }

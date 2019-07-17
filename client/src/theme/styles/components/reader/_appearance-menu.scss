@@ -75,7 +75,7 @@
     z-index: -5;
     opacity: 0;
 
-    &:focus {}
+    &:focus-visible {}
   }
 
   &__radio-label {
@@ -89,7 +89,7 @@
     }
 
     .appearance-menu__font-style:hover &,
-    .appearance-menu__radio-input:focus ~ & {
+    .appearance-menu__radio-input:focus-visible ~ & {
       color: $accentPrimary;
       border-color: $accentPrimary;
     }
@@ -145,6 +145,10 @@
     &--active {
       color: $neutralOffBlack;
       border-color: $neutralOffBlack;
+    }
+
+    &:not(:first-of-type) {
+      margin-left: 0;
     }
 
     &:hover, &:focus-visible {
@@ -267,7 +271,7 @@
   }
 
   &__color-scheme-icon {
-    .appearance-menu__radio-input:focus ~ & {
+    .appearance-menu__radio-input:focus-visible ~ & {
       color: $accentPrimary;
       opacity: 1;
     }

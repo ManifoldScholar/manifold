@@ -8,8 +8,10 @@
   padding: 4px 15px 5px;
   transition: all $duration $timing;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: $neutralWhite;
     background-color: $sp40Tertiary;
+    outline: 0;
   }
 }

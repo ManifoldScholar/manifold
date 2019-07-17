@@ -618,7 +618,7 @@
   transition: color $duration $timing,
     background-color $duration $timing;
 
-  &:hover, &:focus {
+  &:hover, &:focus-visible {
     color: $neutralWhite;
     background-color: $accentPrimary;
     outline: 0;
@@ -630,7 +630,7 @@
       background-color: $accentPrimary;
     }
 
-    &:focus {
+    &:focus-visible {
       color: $accentPrimary;
       background-color: $neutral95;
       outline: 0;
@@ -685,7 +685,7 @@
   border: 0;
   transition: color $duration $timing;
 
-  &:hover, &.active, &:focus {
+  &:hover, &.active, &:focus-visible {
     color: $accentPrimaryDark;
   }
 }

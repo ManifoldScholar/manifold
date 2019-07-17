@@ -36,14 +36,13 @@
     color: $neutral70;
     transition: color $duration $timing;
 
-    &:hover, &--active, &:focus &:focus-visible {
+    &:hover, &--active {
       color: $accentPrimary;
-      outline: 0;
     }
 
     &--secondary {
       color: $sp40Tertiary;
-      &--active, &:focus &:focus-visible {
+      &--active, &:focus-visible {
         color: $sp40Tertiary;
       }
     }
