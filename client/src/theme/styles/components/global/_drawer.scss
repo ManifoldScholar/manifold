@@ -195,10 +195,8 @@
       border: 0;
       transition: color $duration $timing;
 
-      &:hover,
-      &:focus-visible {
+      &:hover {
         color: $neutral70;
-        outline: 0;
       }
     }
 

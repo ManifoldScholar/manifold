@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { UID } from "react-uid";
 
 export default class JoinBox extends Component {
   get containerClassNames() {
@@ -38,6 +39,10 @@ export default class JoinBox extends Component {
     return "Enter Code";
   }
 
+  get idPrefix() {
+    return "join-box";
+  }
+
   handleJoinButton = event => {
     event.stopPropagation();
     console.log("Join button clicked");
@@ -55,10 +60,18 @@ export default class JoinBox extends Component {
           </span>
         </div>
         <form className={this.formClassNames}>
-          <input
-            placeholder={this.inputPlaceholder}
-            className={this.inputClassNames}
-          />
+          <UID name={id => `${this.idPrefix}-${id}`}>
+            {id => (
+              <label htmlFor={id}>
+                <span className="screen-reader-text">Code to join</span>
+                <input
+                  id={id}
+                  placeholder={this.inputPlaceholder}
+                  className={this.inputClassNames}
+                />
+              </label>
+            )}
+          </UID>
           <button
             onClick={event => {
               this.handleJoinButton(event);

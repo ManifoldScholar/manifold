@@ -88,9 +88,8 @@
     color: $accentPrimary;
     transition: color $duration $timing;
 
-    &:hover, &:focus-visible {
+    &:hover {
       color: $accentPrimaryDark;
-      outline: 0;
     }
   }
 

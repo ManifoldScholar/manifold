@@ -42,6 +42,10 @@
     outline: 0;
     transition: height $durationFast $timing;
 
+    &:focus-visible::placeholder {
+      color: $accentPrimary;
+    }
+
     &.expanded {
       height: 145px;
     }
@@ -64,13 +68,16 @@
     .button-secondary {
       min-width: 98px;
       padding: 1.188em 1.875em 1em;
-      transition: background-color $duration $timing;
+      transition:
+        color $duration $timing,
+        background-color $duration $timing;
 
       &--dull {
         color: $neutral70;
         background-color: $neutral30;
 
-        &:hover {
+        &:hover,
+        &:focus-visible {
           color: $neutralWhite;
           background-color: $neutral70;
         }
@@ -81,9 +88,8 @@
         background-color: $accentPrimaryDull;
       }
 
-      .manicon-word-bubble-lines {
-        margin-right: 0.469em;
-        font-size: 2em;
+      &:active {
+        color: inherit;
       }
     }
   }

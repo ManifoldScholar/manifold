@@ -38,6 +38,10 @@
     &::placeholder {
       color: $neutral40;
     }
+
+    &:focus-visible::placeholder {
+      color: $accentPrimary;
+    }
   }
 
   .utility {
@@ -90,7 +94,7 @@
       }
 
       input:focus-visible ~ .checkbox__indicator {
-        background-color: $neutralWhite;
+        background-color: $accentPrimaryLight;
       }
     }
 
@@ -112,8 +116,15 @@
         font-size: 14px;
       }
 
-      .button-secondary[disabled='disabled'], .button-secondary:disabled {
-        background-color: $accentPrimaryDull;
+      .button-secondary {
+        &[disabled='disabled'],
+        &.button-secondary:disabled {
+          background-color: $accentPrimaryDull;
+        }
+
+        &:active {
+          color: inherit;
+        }
       }
     }
   }

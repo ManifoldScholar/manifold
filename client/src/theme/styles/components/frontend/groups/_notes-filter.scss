@@ -42,6 +42,10 @@
     border: 1px solid $neutral70;
     border-radius: 8px;
 
+    &:focus-visible {
+      border-color: $accentPrimary;
+    }
+
     @include respond($break65) {
       border-radius: 0;
     }

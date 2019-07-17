@@ -70,5 +70,15 @@
     padding: 12px 22px;
     border-radius: 4px;
     margin-left: 12px;
+    transition:
+      color $duration $timing,
+      background-color $duration $timing;
+
+    &:hover,
+    &:focus-visible {
+      color: $neutralWhite;
+      background-color: $neutral50;
+      outline: 0;
+    }
   }
 }
