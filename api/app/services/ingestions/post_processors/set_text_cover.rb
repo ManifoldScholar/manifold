@@ -32,7 +32,7 @@ module Ingestions
 
       def cover_source
         @cover_source ||= text.ingestion_sources
-                              .find_by(kind: IngestionSource::KIND_COVER_IMAGE)
+          .find_by(kind: IngestionSource::KIND_COVER_IMAGE)
       end
     end
   end

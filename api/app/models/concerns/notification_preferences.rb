@@ -45,7 +45,7 @@ module Concerns
 
     def wants_notifications_for?(kind)
       notification_preferences.by_kind(kind)
-                              .where(frequency: NotificationFrequency[:always]).present?
+        .where(frequency: NotificationFrequency[:always]).present?
     end
 
     def unsubscribe_all

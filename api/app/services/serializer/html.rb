@@ -114,8 +114,8 @@ module Serializer
       representation[:node_type] = "element"
       representation[:tag] = node.name
       representation[:attributes] = node.attributes
-                                        .transform_keys(&:to_sym)
-                                        .transform_values(&:content)
+        .transform_keys(&:to_sym)
+        .transform_values(&:content)
       true
     end
 

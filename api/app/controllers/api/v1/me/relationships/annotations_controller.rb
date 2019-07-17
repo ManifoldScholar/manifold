@@ -30,8 +30,8 @@ module Api
             meta = build_meta_for models
             if params[:filter][:text]
               meta[:annotated] = Annotation.created_by(current_user)
-                                           .by_text(params[:filter][:text])
-                                           .exists?
+                .by_text(params[:filter][:text])
+                .exists?
             end
             meta
           end

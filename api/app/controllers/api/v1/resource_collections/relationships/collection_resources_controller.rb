@@ -13,8 +13,8 @@ module Api
           resourceful! CollectionResource,
                        authorize_options: { except: [:index, :show] } do
             @collection.collection_resources
-                       .page(page_number)
-                       .per(page_size)
+              .page(page_number)
+              .per(page_size)
           end
 
           def index
@@ -40,7 +40,7 @@ module Api
 
           def set_collection
             @collection = ResourceCollection.friendly
-                                            .find(params[:resource_collection_id])
+              .find(params[:resource_collection_id])
           end
 
         end

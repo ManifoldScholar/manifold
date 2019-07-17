@@ -24,8 +24,8 @@ module Notifications
                        include_digest?(NotificationKind[:followed_projects])
 
       event_scope.created(date_range)
-                 .by_subject_type(%w(Text Resource ResourceCollection))
-                 .group_by(&:project)
+        .by_subject_type(%w(Text Resource ResourceCollection))
+        .group_by(&:project)
     end
 
     # rubocop:disable Metrics/AbcSize, Metrics/LineLength
@@ -33,11 +33,11 @@ module Notifications
       return {} unless include_digest? NotificationKind[:digest_comments_and_annotations]
 
       annotations = event_scope(subject: { text: :text_sections }).created(date_range)
-                                                                  .by_subject_type("Annotation")
-                                                                  .group_by(&:project)
+        .by_subject_type("Annotation")
+        .group_by(&:project)
       comments = event_scope(subject: :subject).created(date_range)
-                                               .by_subject_type("Comment")
-                                               .group_by { |e| e.subject.subject.project }
+        .by_subject_type("Comment")
+        .group_by { |e| e.subject.subject.project }
 
       annotations.merge(comments) { |_key, a_events, c_events| a_events + c_events }
     end
@@ -62,8 +62,8 @@ module Notifications
 
     def kinds
       @kinds ||= user.notification_preferences
-                     .by_frequency(NotificationFrequency[:always])
-                     .map(&:kind)
+        .by_frequency(NotificationFrequency[:always])
+        .map(&:kind)
     end
 
     def include_digest?(kind)

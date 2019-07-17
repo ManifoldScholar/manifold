@@ -21,8 +21,8 @@ module Api
 
       def create
         @ingestion = ::Updaters::Ingestion
-                     .new(ingestion_params)
-                     .update_without_save(@project.ingestions.new)
+          .new(ingestion_params)
+          .update_without_save(@project.ingestions.new)
         @ingestion.creator = current_user
         authorize_action_for @ingestion
         @ingestion.save

@@ -7,8 +7,8 @@ class FavoriteSerializer < ApplicationSerializer
 
   def subject_ids
     out = object.favorite_subjects
-                .select { |arr| arr.include?(object.favoritable_id) }
-                .flatten
+      .select { |arr| arr.include?(object.favoritable_id) }
+      .flatten
     out.delete(object.favoritable_id)
     out
   end

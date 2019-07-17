@@ -26,7 +26,7 @@ module Api
           def create
             @twitter_query =
               ::Updaters::Default.new(twitter_query_params)
-                                 .update_without_save(@project.twitter_queries.new)
+                .update_without_save(@project.twitter_queries.new)
             @twitter_query.creator = @current_user
             authorize_action_for @twitter_query
             @twitter_query.save
