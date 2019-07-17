@@ -33,9 +33,8 @@ class Project < ApplicationRecord
   include Metadata
   include Concerns::HasFormattedAttributes
   include Concerns::HasSortTitle
-  include Concerns::ValidatesSlugPresence
   include WithPermittedUsers
-  extend FriendlyId
+  include Concerns::Sluggable
 
   # Magic
   has_formatted_attributes :description, :subtitle, :image_credits
@@ -57,9 +56,6 @@ class Project < ApplicationRecord
   has_sort_title do |project|
     project.title[/^((a|the|an) )?(?<title>.*)$/i, :title]
   end
-
-  # URLs
-  friendly_id :title, use: :slugged
 
   # PaperTrail
   has_paper_trail on: [:update],

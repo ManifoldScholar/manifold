@@ -31,7 +31,7 @@ export default class SmartAttributes extends Component {
                 instructions="Include only featured projects in this Collection."
               />
               <Form.HasMany
-                label="Subjects"
+                label="Subjects:"
                 placeholder="Add a Subject"
                 instructions="Include all Projects with these subjects."
                 entityLabelAttribute="name"
@@ -41,7 +41,7 @@ export default class SmartAttributes extends Component {
               <Form.TagList
                 name="attributes[tagList]"
                 placeholder="Add a Tag"
-                label="Tags"
+                label="Tags:"
                 tagScope="Project"
               />
             </React.Fragment>

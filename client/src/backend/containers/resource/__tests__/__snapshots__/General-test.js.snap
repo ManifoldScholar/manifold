@@ -160,9 +160,9 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           aria-describedby="text-input-error-1 text-input-instructions-1"
           id="text-input-1"
           onChange={[Function]}
-          placeholder="Enter slug"
+          placeholder="Enter URL Slug"
           type="text"
-          value="slug-1"
+          value=""
         />
       </div>
       <div

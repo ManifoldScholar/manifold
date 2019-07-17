@@ -1,16 +1,17 @@
 module Ingestions
   class Compiler < AbstractInteraction
+
     hash :manifest, strip: false
 
     def execute
       create_text
+      destroy_value_objects :titles
       create_records :text_titles
       create_records :creators
       create_records :contributors
       create_records :ingestion_sources
       create_records :stylesheets
       create_records :text_sections
-
       text.reload
     end
 
@@ -22,6 +23,10 @@ module Ingestions
 
     def create_text
       compose_into :text, Compilers::Text
+    end
+
+    def destroy_value_objects(association)
+      text.send(association).destroy_all
     end
 
     def create_records(klass)

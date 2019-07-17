@@ -9,14 +9,14 @@ RSpec.describe "Contacts API", type: :request do
     { attributes: {
       full_name: "Rowan Dog",
       email: "woof@bark.dog",
-      message: "I am dog." }
-    }
+      message: "I am dog."
+    } }
   end
   let(:invalid_params) do
     { attributes: {
       full_name: "Rowan Dog",
-      email: "woof@bark.dog" }
-    }
+      email: "woof@bark.dog"
+    } }
   end
 
   describe "sends the message to installation" do
@@ -26,12 +26,6 @@ RSpec.describe "Contacts API", type: :request do
           post api_v1_contacts_path, headers: headers, params: json_payload(valid_params)
           expect(response).to have_http_status(204)
         end
-
-        # it "enqueues the mailer" do
-        #   expect {
-        #     post api_v1_contacts_path, headers: headers, params: json_payload(valid_params)
-        #   }.to have_enqueued_job.on_queue "mailers"
-        # end
       end
     end
 
@@ -46,7 +40,7 @@ RSpec.describe "Contacts API", type: :request do
 
         it "has the field errors" do
           errors = JSON.parse(response.body)["errors"]
-          expect(errors).to eq [{"source"=>{"pointer"=>"/data/attributes/message"}, "detail"=>"is required"}]
+          expect(errors).to eq [{ "detail" => "is required", "source" => { "pointer" => "/data/attributes/message" } }]
         end
       end
     end

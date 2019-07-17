@@ -50,8 +50,8 @@ class Fields extends Component {
         <Form.TextInput
           wide
           label="Slug:"
-          name="attributes[slug]"
-          placeholder="Enter slug"
+          name="attributes[pendingSlug]"
+          placeholder="Enter URL slug"
         />
         <Form.TextArea
           wide

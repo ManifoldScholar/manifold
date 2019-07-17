@@ -10,9 +10,13 @@ AllCops:
       - 'api/db/**/*'
       - 'api/bin/**/*'
       - 'api/spec/**/*'
+      - 'api/lib/patches/**/*'
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Style/CollectionMethods:
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -31,6 +35,9 @@ Metrics/ClassLength:
 
 Layout/DotPosition:
   EnforcedStyle: leading
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
 
 Rails:
   Enabled: true
@@ -71,6 +78,12 @@ Naming/UncommunicativeMethodParamName:
     - 'id'
     - 'io'
     - 'e'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
 
 Layout/AlignHash:
   EnforcedLastArgumentHashStyle: ignore_implicit

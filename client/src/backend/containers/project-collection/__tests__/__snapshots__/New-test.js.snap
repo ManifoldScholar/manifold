@@ -120,7 +120,7 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
           aria-describedby="text-input-error-1 text-input-instructions-1"
           id="text-input-1"
           onChange={[Function]}
-          placeholder="Enter slug"
+          placeholder="Enter URL slug"
           type="text"
           value=""
         />

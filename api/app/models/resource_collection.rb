@@ -9,15 +9,11 @@ class ResourceCollection < ApplicationRecord
   # Concerns
   include Filterable
   include Attachments
-  extend FriendlyId
-
-  # Authorization
   include Authority::Abilities
+  include Concerns::Sluggable
   include Concerns::SerializedAbilitiesFor
-  include Concerns::ValidatesSlugPresence
-  self.authorizer_name = "ProjectChildAuthorizer"
 
-  friendly_id :title, use: :slugged
+  self.authorizer_name = "ProjectChildAuthorizer"
 
   # Associations
   belongs_to :project

@@ -4,7 +4,8 @@ class ResourceCollectionSerializer < ApplicationSerializer
 
   attributes :id, :title, :title_formatted, :created_at, :description,
              :description_formatted, :project_id, :resource_kinds, :resource_tags,
-             :thumbnail_styles, :collection_resources_count, :slug, :abilities
+             :thumbnail_styles, :collection_resources_count, :slug, :pending_slug,
+             :abilities
 
   has_many :resources
   belongs_to :project

@@ -6,6 +6,7 @@ gem "active_model_serializers", "~> 0.10"
 gem "activejob-retry", "~> 0.4"
 gem "activejob-traffic_control", "~>0.1.0"
 gem "activerecord-import", "~> 0.22.0"
+gem "activerecord-wrapped_transaction", "~> 0.5.1"
 gem "acts-as-taggable-on", "~> 6.0"
 gem "acts_as_list", "~>0.9"
 # Project is now unmaintained. Fixing to 3.3 for now.

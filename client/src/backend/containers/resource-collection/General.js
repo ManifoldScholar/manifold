@@ -40,6 +40,12 @@ export class ResourceCollectionGeneralContainer extends PureComponent {
             placeholder="Enter a description"
             {...this.props}
           />
+          <Form.TextInput
+            wide
+            label="Slug"
+            name="attributes[pendingSlug]"
+            placeholder="Enter URL Slug"
+          />
           <Form.Upload
             layout="landscape"
             accepts="images"
