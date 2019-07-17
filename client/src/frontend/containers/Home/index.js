@@ -9,6 +9,7 @@ import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
 import withSettings from "hoc/with-settings";
+import Layout from "frontend/components/layout"
 
 export class HomeContainer extends Component {
   static showProjects(settings) {
@@ -92,7 +93,7 @@ export class HomeContainer extends Component {
         {this.hasVisibleProjects && (
           <Layout.ButtonNavigation
             grayBg={false}
-            showFollowing={this.showFollowing()}
+            showFollowing
           />
         )}
       </div>
