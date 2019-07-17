@@ -35,9 +35,9 @@ module ResourceImports
     # or have failed for some reason.
     guard_transition(to: :imported) do |resource_import|
       count = resource_import
-              .data_rows
-              .not_in_state(COMPLETE_STATES)
-              .count
+        .data_rows
+        .not_in_state(COMPLETE_STATES)
+        .count
       count.zero?
     end
 

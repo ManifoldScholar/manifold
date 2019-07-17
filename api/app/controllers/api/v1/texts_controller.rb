@@ -19,7 +19,7 @@ module Api
       def show
         @text = scope_for_texts.includes(:project, :text_sections, :stylesheets,
                                          :toc_section)
-                               .find(params[:id])
+          .find(params[:id])
         includes = INCLUDES + %w(category creators contributors stylesheets)
         authorize_action_for @text
         render_single_resource @text,

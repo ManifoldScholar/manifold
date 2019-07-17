@@ -305,7 +305,7 @@ module Importer
 
     def find_or_initialize_collection(fingerprint)
       collection = @project.resource_collections
-                           .find_or_initialize_by fingerprint: fingerprint
+        .find_or_initialize_by fingerprint: fingerprint
       # rubocop:disable LineLength
       @logger.info "    Found existing resource collection with id #{collection.id}" unless collection.new_record?
       @logger.info "    No collection exists for fingerprint. Creating new collection" if collection.new_record?

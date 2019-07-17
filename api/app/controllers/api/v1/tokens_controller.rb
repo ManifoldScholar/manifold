@@ -8,7 +8,7 @@ module Api
 
       def create
         authenticated_user = User.find_by(email: token_params[:email])
-                                 .try(:authenticate, token_params[:password])
+          .try(:authenticate, token_params[:password])
         render_authenticated_user(authenticated_user)
       end
 

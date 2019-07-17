@@ -20,7 +20,7 @@ module Api
           def create
             @action_callout =
               ::Updaters::ActionCallout.new(action_callout_params)
-                                       .update(@project.action_callouts.new)
+                .update(@project.action_callouts.new)
             @action_callout.save
             authorize_action_for @action_callout
 

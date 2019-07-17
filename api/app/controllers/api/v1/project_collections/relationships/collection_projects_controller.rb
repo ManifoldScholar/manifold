@@ -13,9 +13,9 @@ module Api
             includes = [:creators, :contributors, :project]
 
             @project_collection.collection_projects
-                               .includes(includes)
-                               .page(page_number)
-                               .per(page_size)
+              .includes(includes)
+              .page(page_number)
+              .per(page_size)
           end
 
           # GET /resources
@@ -42,7 +42,7 @@ module Api
 
           def set_project_collection
             @project_collection = ProjectCollection.friendly
-                                                   .find(params[:project_collection_id])
+              .find(params[:project_collection_id])
           end
 
           # rubocop:disable Metrics/LineLength

@@ -12,8 +12,8 @@ class AttachmentUploader < Shrine
   plugin :store_dimensions, analyzer: lambda { |io, analyzers|
     mime_type = determine_mime_type(io)
     return nil unless mime_type && MANIFOLD_CONFIG.attachments
-                                                  .validations[:image][:allowed_mime]
-                                                  .include?(mime_type)
+      .validations[:image][:allowed_mime]
+      .include?(mime_type)
 
     analyzers[:mini_magick].call io
   }
@@ -28,7 +28,7 @@ class AttachmentUploader < Shrine
   Attacher.validate do
     attachment_options = record.__send__("#{name}_options")
     attachment_validation = MANIFOLD_CONFIG.attachments
-                                           .validations[attachment_options[:type]]
+      .validations[attachment_options[:type]]
 
     validate_mime_type_inclusion attachment_validation[:allowed_mime] if attachment_options[:validate_content_type]
 

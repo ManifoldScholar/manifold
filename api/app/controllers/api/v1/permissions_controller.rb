@@ -21,7 +21,7 @@ module Api
 
       def create
         permission = ::Updaters::Default.new(permission_params)
-                                        .update_without_save(permissions_scope.new)
+          .update_without_save(permissions_scope.new)
         authorize_action_for permission
         outcome = Permissions::Save.run permission: permission
         render_single_resource outcome.result,
@@ -33,7 +33,7 @@ module Api
         permission = load_permission
         authorize_action_for permission
         permission = ::Updaters::Default.new(permission_params)
-                                        .update_without_save(permission)
+          .update_without_save(permission)
         outcome = Permissions::Save.run permission: permission
         render_single_resource outcome.result,
                                location: location(outcome.result),

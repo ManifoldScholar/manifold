@@ -32,7 +32,7 @@ module Api
 
           def set_project_collection
             @project_collection = ProjectCollection.friendly
-                                                   .find(params[:project_collection_id])
+              .find(params[:project_collection_id])
           end
 
           def location

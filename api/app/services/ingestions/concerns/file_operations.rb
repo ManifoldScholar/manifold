@@ -134,8 +134,8 @@ module Ingestions
 
       def sources
         Dir.glob(File.join(source_root, "**", "*"))
-           .reject { |path| File.directory?(path) }
-           .map { |path| rel(path) }
+          .reject { |path| File.directory?(path) }
+          .map { |path| rel(path) }
       end
 
       def source_url(path = source_path)
@@ -229,7 +229,7 @@ module Ingestions
       def top_level_entities(path = source_root_path)
         reject = /(^\..*|^_.*)/
         entities = Dir.glob(File.join(path, "*"))
-                      .reject { |d| File.basename(d).match(reject) }
+          .reject { |d| File.basename(d).match(reject) }
         files = entities.select { |e| File.file?(e) }
         dirs = entities.select { |e| File.directory?(e) }
         { files: files, dirs: dirs }

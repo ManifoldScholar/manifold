@@ -22,7 +22,7 @@ module Api
                                                                           :attributes,
                                                                           :type))
             @content_block = ::Updaters::ContentBlock.new(permitted_params)
-                                                     .update(@content_block)
+              .update(@content_block)
             @content_block.save
             authorize_action_for @content_block
 

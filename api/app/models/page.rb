@@ -47,9 +47,9 @@ class Page < ApplicationRecord
     return true unless policy_page?
 
     errors.add(:purpose, :in_use) if Page
-                                     .where.not(id: id)
-                                     .by_purpose(purpose)
-                                     .any?
+      .where.not(id: id)
+      .by_purpose(purpose)
+      .any?
   end
 
   def policy_page?

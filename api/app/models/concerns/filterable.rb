@@ -6,7 +6,7 @@ module Filterable
   class_methods do
     def filter(params, scope: all, user: nil)
       results = scope.filter_with_query(params, user)
-                     .filter_with_elasticsearch(params)
+        .filter_with_elasticsearch(params)
 
       validate_paginated_results(params, results)
     end
