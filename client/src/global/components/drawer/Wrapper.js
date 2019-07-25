@@ -187,9 +187,8 @@ export default class DrawerWrapper extends PureComponent {
               </div>
             ) : null}
             {hasClose ? (
-              <div
+              <button
                 onClick={this.handleLeaveEvent}
-                role="button"
                 tabIndex="0"
                 className="drawer-bar__close-button"
               >
@@ -204,7 +203,7 @@ export default class DrawerWrapper extends PureComponent {
                   size="default"
                   iconClass="drawer-bar__close-icon drawer-bar__close-icon--small"
                 />
-              </div>
+              </button>
             ) : null}
           </div>
         )}

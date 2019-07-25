@@ -19,7 +19,7 @@ exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
                               wrapper
                             </span>
                           </div>
-                          <div onClick={[Function]} role=\\"button\\" tabIndex=\\"0\\" className=\\"drawer-bar__close-button\\">
+                          <button onClick={[Function]} tabIndex=\\"0\\" className=\\"drawer-bar__close-button\\">
                             <span className=\\"drawer-bar__close-text\\">
                               Close
                             </span>
@@ -37,7 +37,7 @@ exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
                                 </svg>
                               </Close>
                             </IconComposer>
-                          </div>
+                          </button>
                         </div>
                       </focus-trap-react>
                     </div>
