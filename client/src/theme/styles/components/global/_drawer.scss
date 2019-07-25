@@ -104,7 +104,8 @@
 
 .drawer-bar {
   &__close-button {
-    display: flex;
+    @include buttonUnstyled;
+    display: inline-flex;
     align-items: center;
     justify-content: flex-end;
     transition: color $duration $timing;
