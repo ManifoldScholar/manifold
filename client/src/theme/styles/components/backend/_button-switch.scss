@@ -1,21 +1,6 @@
 .button-switch-primary {
+  display: flex;
   border: 1px solid $accentPrimary;
-
-  &__button {
-    width: 100%;
-    padding: 0;
-    background: transparent;
-    border: 0;
-    outline: 0;
-
-    &:focus-visible {
-      outline-offset: 4px;
-    }
-  }
-
-  &__wrapper {
-    display: flex;
-  }
 
   &__side {
     @include buttonUnstyled;
@@ -37,19 +22,36 @@
       font-size: 14px;
     }
 
+    &:focus-within {
+      color: $accentPrimary;
+      background-color: rgba($accentPrimary, 0.2);
+    }
+
     &--selected {
       color: $neutral100;
       background-color: $accentPrimary;
-    }
 
-    .manicon-svg {
-      margin-right: 0.65em;
-
-      @include respond($break90) {
-        width: 36px;
-        height: 36px;
+      &:focus-within {
+        color: $neutral100;
+        background-color: $accentPrimaryPale;
+        border-color: $accentPrimaryPale;
       }
     }
+  }
+
+  &__icon {
+    margin-right: 0.65em;
+
+    @include respond($break90) {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
   }
 
   .drawer-backend & {
