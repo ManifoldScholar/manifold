@@ -45,17 +45,38 @@ export default class Toggle extends Component {
     this.props.handleToggle();
   };
 
-  renderOption(option) {
+  renderOption(option, id) {
     const selected = this.props.selected === option.label;
-    const optionClasses = classNames("button-switch-primary__side", {
+    const optionClasses = classNames({
+      radio: true,
+      "button-switch-primary__side": true,
       "button-switch-primary__side--selected": selected
     });
 
     return (
-      <div key={option.label} className={optionClasses}>
-        {option.icon && <IconComposer icon={option.icon} size={30} />}
+      <label
+        key={option.label}
+        htmlFor={`${id}-${option.label}`}
+        className={optionClasses}
+      >
+        {option.icon && (
+          <IconComposer
+            icon={option.icon}
+            size={30}
+            iconClass="button-switch-primary__icon"
+          />
+        )}
         <span className="button-switch-primary__label">{option.label}</span>
-      </div>
+        <input
+          type="radio"
+          id={`${id}-${option.label}`}
+          name={this.props.label}
+          value={option.label}
+          checked={selected}
+          onChange={this.props.handleToggle}
+          className="button-switch-primary__input"
+        />
+      </label>
     );
   }
 
@@ -66,18 +87,12 @@ export default class Toggle extends Component {
     return (
       <UID name={id => `${this.idPrefix}-${id}`}>
         {id => (
-          <div className="button-switch-primary">
-            <button
-              className="button-switch-primary__button"
-              onClick={this.handleClick}
-              aria-describedby={id}
-            >
-              <div className="button-switch-primary__wrapper">
-                {options.map(option => {
-                  return this.renderOption(option);
-                })}
-              </div>
-            </button>
+          <div
+            role="group"
+            aria-describedby={id}
+            className="button-switch-primary"
+          >
+            {options.map(option => this.renderOption(option, id))}
             <span id={id} className="aria-describedby">
               {`Toggle ${this.props.label} to ${this.unselected}`}
             </span>

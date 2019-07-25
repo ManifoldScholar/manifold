@@ -2,36 +2,48 @@
 
 exports[`Frontend.Utility.Toggle component renders correctly 1`] = `
 <div
+  aria-describedby={1}
   className="button-switch-primary"
+  role="group"
 >
-  <button
-    aria-describedby={1}
-    className="button-switch-primary__button"
-    onClick={[Function]}
+  <label
+    className="radio button-switch-primary__side button-switch-primary__side--selected"
+    htmlFor="1-resources"
   >
-    <div
-      className="button-switch-primary__wrapper"
+    <span
+      className="button-switch-primary__label"
     >
-      <div
-        className="button-switch-primary__side button-switch-primary__side--selected"
-      >
-        <span
-          className="button-switch-primary__label"
-        >
-          resources
-        </span>
-      </div>
-      <div
-        className="button-switch-primary__side"
-      >
-        <span
-          className="button-switch-primary__label"
-        >
-          collection
-        </span>
-      </div>
-    </div>
-  </button>
+      resources
+    </span>
+    <input
+      checked={true}
+      className="button-switch-primary__input"
+      id="1-resources"
+      name="options"
+      onChange={[MockFunction]}
+      type="radio"
+      value="resources"
+    />
+  </label>
+  <label
+    className="radio button-switch-primary__side"
+    htmlFor="1-collection"
+  >
+    <span
+      className="button-switch-primary__label"
+    >
+      collection
+    </span>
+    <input
+      checked={false}
+      className="button-switch-primary__input"
+      id="1-collection"
+      name="options"
+      onChange={[MockFunction]}
+      type="radio"
+      value="collection"
+    />
+  </label>
   <span
     className="aria-describedby"
     id={1}
