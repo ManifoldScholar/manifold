@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import withPluginReplacement from "hoc/with-plugin-replacement";
 
-class LayoutPreHeader extends PureComponent {
-  static displayName = "Layout.PreHeader";
+class LayoutCustomHeader extends PureComponent {
+  static displayName = "Layout.Header.CustomHeader";
 
   render() {
     return null;
@@ -10,6 +10,6 @@ class LayoutPreHeader extends PureComponent {
 }
 
 export default withPluginReplacement(
-  LayoutPreHeader,
-  "Frontend.Components.Layout.PreHeader"
+  LayoutCustomHeader,
+  "Frontend.Components.Layout.Header.CustomHeader"
 );

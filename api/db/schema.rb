@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_192655) do
+ActiveRecord::Schema.define(version: 2019_07_30_220353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -454,6 +454,9 @@ ActiveRecord::Schema.define(version: 2019_05_06_192655) do
     t.jsonb "avatar_data", default: {}
     t.boolean "dark_mode", default: false, null: false
     t.text "image_credits"
+    t.integer "standalone_mode", default: 0, null: false
+    t.string "standalone_mode_press_bar_text"
+    t.string "standalone_mode_press_bar_url"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 

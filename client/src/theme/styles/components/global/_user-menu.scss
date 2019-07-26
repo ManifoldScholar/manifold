@@ -3,25 +3,30 @@
   @include buttonUnstyled;
   height: 100%;
   vertical-align: middle;
-  transition: background-color $duration $timing;
 
-  .avatar {
-    @include buttonAvatar(32, var(--button-color, $neutral70));
+  .header-app & {
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 
-  &:focus {
+  .avatar {
+    color: $neutral70; // fallback
+    @include buttonAvatar(32, var(--button-color, $neutral70));
+    transition: color $duration $duration $timing;
+  }
+
+  &:hover,
+  &.button-active {
     outline: 0;
 
     .avatar {
-      @include focusVisibleOutline;
-      outline-offset: 2px;
+      color: $accentPrimary;
+      transition: color $duration $timing;
     }
+  }
 
-    &:active {
-      .avatar {
-        outline: 0;
-      }
-    }
+  svg {
+    color: inherit;
   }
 }
 
@@ -30,17 +35,19 @@
   $menuWidth: 235px;
   $tailHeight: 17px;
 
-  @include boxShadow;
   min-width: $menuWidth;
   background-color: $neutral05;
-  border-radius: $panelRoundedRadius;
+
+  .header-app & {
+    @include boxShadow(5px, 15px, 35px, 8px);
+    border-radius: $panelRoundedRadius;
+  }
 
   &__tail {
     @include tailUp($neutral05, $tailHeight);
     position: absolute;
     top: -$tailHeight;
-    right: 28px;
-    display: none;
+    right: 25px;
   }
 
   &__list {
@@ -87,14 +94,5 @@
 
   @include respond($break40) {
     right: -24px;
-  }
-
-  &__tail {
-    right: 21px;
-    display: block;
-
-    @include respond($break40) {
-      right: 28px;
-    }
   }
 }

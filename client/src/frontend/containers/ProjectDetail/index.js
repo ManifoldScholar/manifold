@@ -4,6 +4,7 @@ import Project from "frontend/components/project";
 import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
+import { uiFrontendModeActions } from "actions";
 
 export default class ProjectDetailContainer extends Component {
   static propTypes = {
@@ -13,6 +14,10 @@ export default class ProjectDetailContainer extends Component {
     dispatch: PropTypes.func.isRequired,
     fetchData: PropTypes.func
   };
+
+  componentWillMount() {
+    this.props.dispatch(uiFrontendModeActions.isProjectHomepage());
+  }
 
   render() {
     if (!this.props.projectResponse) return null;

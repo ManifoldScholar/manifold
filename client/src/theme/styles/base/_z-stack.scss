@@ -23,8 +23,12 @@
   }
 }
 
-.overlay-full-header {
-  z-index: 350;
+.dialog-primary {
+  z-index: 600;
+}
+
+.press-header {
+  z-index: 575;
 }
 
 .mobile-nav-toggle {
@@ -34,17 +38,16 @@
 .backend .header-app {
   z-index: 500;
 }
+.nested-nav--open {
+  z-index: 425;
+}
 
 .drawer-backend, .drawer-frontend, .drawer-overlay {
   z-index: 400;
 }
 
-.dialog-primary {
-  z-index: 600;
-}
-
-.reader-footer-menu {
-  z-index: 200;
+.overlay-full-header {
+  z-index: 350;
 }
 
 .header-app--sticky {
@@ -63,6 +66,10 @@
   }
 }
 
+.reader-footer-menu {
+  z-index: 200;
+}
+
 .drawer-reader {
   z-index: 150;
 }
@@ -77,6 +84,14 @@
 
 .annotation-popup {
   z-index: 100;
+}
+
+.truncated__expand-button {
+  z-index: 75;
+}
+
+.annotation-selection__action-buttons {
+  z-index: 75;
 }
 
 .section-category-label.fixed {
@@ -107,16 +122,12 @@
   z-index: 50;
 }
 
-.truncated__expand-button {
-  z-index: 75;
-}
-
-.annotation-selection__action-buttons {
-  z-index: 75;
-}
-
 .notes-filter__icon {
   z-index: -5;
+}
+
+.standalone-header {
+  z-index: 10;
 }
 
 /* stylelint-disable selector-max-id */

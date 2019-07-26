@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Utility from "frontend/components/utility";
 import Resource from "frontend/components/resource";
-import { entityStoreActions, fatalErrorActions } from "actions";
+import {
+  entityStoreActions,
+  uiFrontendModeActions,
+  fatalErrorActions
+} from "actions";
 import { select } from "utils/entityUtils";
 import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
@@ -54,6 +58,10 @@ export class ResourceDetailContainer extends PureComponent {
     dispatch: PropTypes.func,
     visibility: PropTypes.object
   };
+
+  componentDidMount() {
+    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
+  }
 
   componentWillMount() {
     if (this.props.resource && this.props.resourceCollection) {

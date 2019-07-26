@@ -7,7 +7,7 @@ import { projectsAPI, requests } from "api";
 import { RedirectToFirstMatch, childRoutes } from "helpers/router";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
-
+import { FrontendModeContext } from "helpers/contexts";
 import withSettings from "hoc/with-settings";
 
 const { request } = entityStoreActions;
@@ -29,6 +29,8 @@ export class ProjectWrapper extends Component {
     };
   };
 
+  static contextType = FrontendModeContext;
+
   static propTypes = {
     route: PropTypes.object,
     project: PropTypes.object,
@@ -45,9 +47,7 @@ export class ProjectWrapper extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("keyup", this.maybeReloadProject);
-    this.props.dispatch(
-      uiFrontendModeActions.setFrontendModeToLibrary()
-    );
+    this.props.dispatch(uiFrontendModeActions.setFrontendModeToLibrary());
   }
 
   componentDidUpdate(prevProps) {

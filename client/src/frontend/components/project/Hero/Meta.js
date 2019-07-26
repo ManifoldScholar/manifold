@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import some from "lodash/some";
 import isEmpty from "lodash/isEmpty";
 import Maker from "frontend/components/maker";
+import Heading from "./Heading";
 
 export default class ProjectHeroMeta extends PureComponent {
   static displayName = "ProjectHero.Meta";
@@ -11,14 +12,6 @@ export default class ProjectHeroMeta extends PureComponent {
     blockClass: PropTypes.string,
     project: PropTypes.object.isRequired
   };
-
-  get title() {
-    return this.props.project.attributes.titleFormatted;
-  }
-
-  get subtitle() {
-    return this.props.project.attributes.subtitleFormatted;
-  }
 
   get creators() {
     const creators = this.props.project.relationships.creators;
@@ -93,23 +86,9 @@ export default class ProjectHeroMeta extends PureComponent {
   }
 
   render() {
-    const blockClass = this.props.blockClass;
+    const { blockClass, project } = this.props;
     return (
       <div className={`${blockClass}__meta-block`}>
-        <header className={`${blockClass}__heading`}>
-          {this.title && (
-            <h1
-              className={`${blockClass}__title`}
-              dangerouslySetInnerHTML={{ __html: this.title }}
-            />
-          )}
-          {this.subtitle && (
-            <div
-              className={`${blockClass}__subtitle`}
-              dangerouslySetInnerHTML={{ __html: this.subtitle }}
-            />
-          )}
-        </header>
         {this.creators && this.renderCreatorList(blockClass)}
         {this.contributors && this.renderContributorList(blockClass)}
         {this.description && (

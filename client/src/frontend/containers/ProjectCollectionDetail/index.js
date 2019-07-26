@@ -4,7 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import Layout from "frontend/components/layout";
 import Utility from "frontend/components/utility";
 import ProjectCollection from "frontend/components/project-collection";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, uiFrontendModeActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
 import { projectCollectionsAPI, projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
@@ -78,6 +78,10 @@ export class ProjectCollectionDetailContainer extends Component {
     super(props);
     this.state = this.initialState(queryString.parse(props.location.search));
     this.updateResults = debounce(this.updateResults.bind(this), 250);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
   }
 
   componentDidUpdate(prevProps) {

@@ -21,8 +21,8 @@
     height: 100%;
 
     @include respond($break75) {
-      -ms-grid-columns: 1fr max-content max-content;
-      grid-template: 'logo site-nav . user-nav' / fit-content(300px) max-content 1fr max-content;
+      -ms-grid-columns: max-content max-content 1fr max-content;
+      grid-template: 'logo site-nav . user-nav' / max-content max-content 1fr max-content;
     }
   }
 

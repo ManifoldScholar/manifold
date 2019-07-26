@@ -111,7 +111,7 @@ function withSearch(WrappedComponent) {
       const pagination = { number: page };
       const query = Object.assign({}, this.props.searchQueryState);
       query.page = pagination;
-
+      console.log(query, "query");
       const call = searchResultsAPI.index(query);
       const { promise: one } = this.props.dispatch(
         request(call, requests.rSearchResults)

@@ -6,7 +6,7 @@ import BackLink from "frontend/components/back-link";
 import Layout from "frontend/components/layout";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, subjectsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, uiFrontendModeActions } from "actions";
 import { select, isLoaded } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
 import { renderRoutes } from "react-router-config";
@@ -41,6 +41,7 @@ export class FrontendContainer extends Component {
       visibility: state.ui.transitory.visibility,
       loading: state.ui.transitory.loading.active,
       notifications: state.notifications,
+      frontendMode: state.ui.persistent.frontendMode,
       pages: select(requests.gPages, state.entityStore),
       settings: select(requests.settings, state.entityStore)
     };

@@ -59,7 +59,7 @@ class SearchResultsTypeGeneric extends PureComponent {
           <div className="search-result__text-column">
             <div className="search-result__text-column-top">
               <div className="search-result__text-column-top-left">
-                {this.hasProp("parent") && (
+                {this.hasProp("parent") && !this.props.hideParent && (
                   <div
                     className="search-result__parent"
                     {...this.attributesFor("parent")}

@@ -2,17 +2,16 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Utility from "global/components/utility";
-import LayoutBackend from "backend/components/layout";
 import Footers from "global/components/Footers";
+import Layout from "backend/components/layout";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, requests } from "api";
 import { uiStateSnapshotActions, entityStoreActions } from "actions";
 import entityUtils from "utils/entityUtils";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
-
-import ScrollAware from "hoc/scroll-aware";
 import BodyClass from "hoc/body-class";
+import { FrontendModeContext } from "../../../helpers/contexts";
 
 const { request } = entityStoreActions;
 
@@ -81,7 +80,7 @@ export class BackendContainer extends PureComponent {
   render() {
     return (
       <BodyClass className={"backend bg-neutral90"}>
-        <div>
+        <React.Fragment>
           <RedirectToFirstMatch
             from={lh.link("backend")}
             candidates={[
@@ -91,17 +90,14 @@ export class BackendContainer extends PureComponent {
               }
             ]}
           />
-
           <Utility.ScrollToTop />
-          <ScrollAware>
-            <LayoutBackend.Header
-              visibility={this.props.visibility}
-              match={this.props.match}
-              location={this.props.location}
-              authentication={this.props.authentication}
-              commonActions={this.commonActions}
-            />
-          </ScrollAware>
+          <Layout.Header
+            visibility={this.props.visibility}
+            match={this.props.match}
+            location={this.props.location}
+            authentication={this.props.authentication}
+            commonActions={this.commonActions}
+          />
           <main
             ref={mainContainer => {
               this.mainContainer = mainContainer;
@@ -116,7 +112,7 @@ export class BackendContainer extends PureComponent {
             commonActions={this.commonActions}
             settings={this.props.settings}
           />
-        </div>
+        </React.Fragment>
       </BodyClass>
     );
   }

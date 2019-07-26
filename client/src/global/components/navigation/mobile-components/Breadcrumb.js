@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { matchPath } from "react-router";
+import { matchPath } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
@@ -54,14 +54,17 @@ export default class MobileBreadcrumb extends PureComponent {
           count += 1;
           return (
             <span key={count}>
-              <NavLink className="breadcrumb" to={this.pathForLink(link)}>
+              <NavLink
+                className="breadcrumb-list__link"
+                to={this.pathForLink(link)}
+              >
                 {link.label}
               </NavLink>
               {count < size && (
                 <IconComposer
                   icon="disclosureDown16"
                   size="default"
-                  iconClass="breadcrumb-icon"
+                  iconClass="breadcrumb-list__icon"
                 />
               )}
             </span>

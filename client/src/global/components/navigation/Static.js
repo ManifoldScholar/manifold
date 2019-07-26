@@ -1,11 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/UserMenuButton";
 import UserMenuBody from "global/components/UserMenuBody";
 import UIPanel from "global/components/UIPanel";
 import { NavLink, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import { FrontendModeContext } from "helpers/contexts";
 
 import Authorize from "hoc/authorize";
 
@@ -22,12 +24,35 @@ export class NavigationStatic extends PureComponent {
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
     exact: PropTypes.bool,
-    style: PropTypes.object
+    style: PropTypes.object,
+    darkTheme: PropTypes.bool
   };
+
+  static contextType = FrontendModeContext;
 
   static defaultProps = {
     exact: false
   };
+
+  get userMenuClasses() {
+    return classNames({
+      "user-nav": true,
+      "show-75": true,
+      "user-nav--dark": this.props.darkTheme
+    });
+  }
+
+  get siteNavClasses() {
+    return classNames({
+      "site-nav": true,
+      "show-75": true,
+      "site-nav--backend": this.props.mode === "backend"
+    });
+  }
+
+  get hasLinks() {
+    return this.props.links && this.props.links.length > 0;
+  }
 
   pathForLink(link) {
     const args = link.args || [];
@@ -40,6 +65,7 @@ export class NavigationStatic extends PureComponent {
         href={link.externalUrl}
         target={link.newTab ? "_blank" : null}
         rel="noopener noreferrer"
+        className="site-nav__link"
       >
         {link.label}
       </a>
@@ -53,7 +79,8 @@ export class NavigationStatic extends PureComponent {
         to={this.pathForLink(link)}
         exact={exact}
         target={link.newTab ? "_blank" : null}
-        activeClassName="active"
+        className="site-nav__link"
+        activeClassName="site-nav__link--active"
       >
         {link.label}
       </NavLink>
@@ -63,7 +90,7 @@ export class NavigationStatic extends PureComponent {
   renderStaticItem(link, index) {
     if (link.hideInNav) return null;
     return (
-      <li key={`${link.label}-${index}`}>
+      <li key={`${link.label}-${index}`} className="site-nav__item">
         {link.route
           ? this.renderManifoldLink(link)
           : this.renderExternalLink(link)}
@@ -73,9 +100,13 @@ export class NavigationStatic extends PureComponent {
 
   renderSearch(props) {
     if (props.mode === "backend") return null;
+    const description = this.context.isLibrary
+      ? "Search across all content and projects"
+      : "Search across all project content";
+    const projectId = this.context.isLibrary ? null : this.context.project.id;
 
     return (
-      <li>
+      <li className="user-nav__item">
         <SearchMenu.Button
           toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
           active={this.props.visibility.uiPanels.search}
@@ -85,12 +116,13 @@ export class NavigationStatic extends PureComponent {
           toggleVisibility={this.props.commonActions.toggleSearchPanel}
           visibility={this.props.visibility.uiPanels}
           bodyComponent={SearchMenu.Body}
-          searchType="frontend"
+          searchType={projectId ? "project" : "library"}
+          projectId={projectId}
           initialState={{
             keyword: "",
             allFacets: true
           }}
-          description="Search across all content and projects"
+          description={description}
           hidePanel={this.props.commonActions.hideSearchPanel}
         />
       </li>
@@ -99,16 +131,23 @@ export class NavigationStatic extends PureComponent {
 
   renderUserMenu(props) {
     return (
-      <nav className="user-links show-75">
-        <ul aria-label="User Links" style={this.props.style}>
-          {this.props.backendButton && <li>{this.props.backendButton}</li>}
+      <nav className={this.userMenuClasses}>
+        <ul
+          aria-label="User Links"
+          style={this.props.style}
+          className="user-nav__list"
+        >
+          {this.props.backendButton && (
+            <li className="user-nav__item">{this.props.backendButton}</li>
+          )}
           {this.renderSearch(props)}
-          <li>
+          <li className="user-nav__item">
             <UserMenuButton
               authentication={props.authentication}
               active={props.visibility.uiPanels.user}
               showLoginOverlay={props.commonActions.toggleSignInUpOverlay}
               toggleUserMenu={props.commonActions.toggleUserPanel}
+              darkTheme={props.darkTheme}
             />
             <UIPanel
               id="user"
@@ -125,30 +164,36 @@ export class NavigationStatic extends PureComponent {
     );
   }
 
+  renderSiteNav() {
+    return (
+      <nav className={this.siteNavClasses} aria-label="Primary Navigation">
+        <ul
+          aria-label="Page Links"
+          style={this.props.style}
+          className="site-nav__list"
+        >
+          {this.props.links.map((link, index) => {
+            if (link.ability)
+              return (
+                <Authorize
+                  key={`${link.route}-wrapped`}
+                  entity={link.entity}
+                  ability={link.ability}
+                >
+                  {this.renderStaticItem(link, index)}
+                </Authorize>
+              );
+            return this.renderStaticItem(link, index);
+          })}
+        </ul>
+      </nav>
+    );
+  }
+
   render() {
     return (
       <React.Fragment>
-        <nav className="page-nav show-75" aria-label="Primary Navigation">
-          <ul
-            aria-label="Page Links"
-            style={this.props.style}
-            className="links"
-          >
-            {this.props.links.map((link, index) => {
-              if (link.ability)
-                return (
-                  <Authorize
-                    key={`${link.route}-wrapped`}
-                    entity={link.entity}
-                    ability={link.ability}
-                  >
-                    {this.renderStaticItem(link, index)}
-                  </Authorize>
-                );
-              return this.renderStaticItem(link, index);
-            })}
-          </ul>
-        </nav>
+        {this.hasLinks && this.renderSiteNav()}
         {this.renderUserMenu(this.props)}
       </React.Fragment>
     );

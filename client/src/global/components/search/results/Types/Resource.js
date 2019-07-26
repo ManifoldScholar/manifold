@@ -69,6 +69,7 @@ class SearchResultsTypeResource extends PureComponent {
         url={this.url}
         title={this.title}
         parent={this.parent}
+        hideParent={this.props.hideParent}
         attribution={this.creatorsString}
         description={this.description}
         label="resource"

@@ -25,27 +25,35 @@ export default class LayoutHeader extends Component {
     const links = navigation.backend();
 
     return (
-      <BlurOnLocationChange location={this.props.location}>
-        <header className={"header-app dark"}>
+      <BlurOnLocationChange
+        tag="header"
+        className="header-app header-app--sticky"
+        location={this.props.location}
+      >
+      <Utility.SetCSSProperty
+        measurement="height"
+        propertyName="--header-height"
+      >
           <Utility.SkipLink />
-          <div className="header-container">
-            <Link to={lh.link("frontend")} className="header-logo">
-              <span className="screen-reader-text">Return to home</span>
-              <PressLogo aria-hidden="true" />
-            </Link>
-
-            <Navigation.Primary
-              links={links}
-              commonActions={this.props.commonActions}
-              authentication={this.props.authentication}
-              visibility={this.props.visibility}
-              mode="backend"
-            />
+          <div className="library-header library-header--dark">
+            <div className="library-header__inner">
+              <Link to={lh.link("frontend")} className="header-logo">
+                <span className="screen-reader-text">Return to home</span>
+                <PressLogo aria-hidden="true" />
+              </Link>
+              <Navigation.Primary
+                links={links}
+                commonActions={this.props.commonActions}
+                authentication={this.props.authentication}
+                visibility={this.props.visibility}
+                mode="backend"
+                darkTheme
+              />
+            </div>
           </div>
-
           <div className="header-border" />
-          <HeaderNotifications scope="global" />
-        </header>
+        </Utility.SetCSSProperty>
+        <HeaderNotifications scope="global" />
       </BlurOnLocationChange>
     );
   }

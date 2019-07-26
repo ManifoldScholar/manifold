@@ -1,12 +1,16 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import orderBy from "lodash/orderBy";
+import classNames from "classnames";
 import Cover from "./Cover";
 import Meta from "./Meta";
 import CalloutList from "./CalloutList";
 import Social from "./Social";
 import Credits from "./Credits";
 import Authorization from "helpers/authorization";
+import Image from "./Image";
+import Heading from "./Heading";
+import { FrontendModeContext } from "helpers/contexts";
 
 export default class ProjectHero extends PureComponent {
   static displayName = "Project.Hero";
@@ -15,18 +19,57 @@ export default class ProjectHero extends PureComponent {
     project: PropTypes.object
   };
 
+  static contextType = FrontendModeContext;
+
   constructor(props) {
     super(props);
     this.authorization = new Authorization();
-
+    this.rightColRef = React.createRef();
+    this.headingRef = React.createRef();
     this.state = {
       objectFit: true
     };
 
     this.bgImage = React.createRef();
+    this.resizeId = null;
+    this.breakpoint = 620;
+  }
+
+  componentDidMount() {
+    this.addMarginToCoverIfStandalone();
+    window.addEventListener("resize", this.handleResize);
   }
 
   componentDidUpdate(prevProps, prevState) {
+    this.detectObjectFit(prevState);
+    this.addMarginToCoverIfStandalone();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+  }
+
+  addMarginToCoverIfStandalone() {
+    if (!this.isStandalone) return;
+    if (!this.rightColRef || !this.rightColRef.current) return;
+    if (!this.headingRef || !this.headingRef.current) return;
+    const height = this.headingRef.current.offsetHeight;
+    this.rightColRef.current.style.marginTop = `${height}px`;
+  }
+
+  handleResize = () => {
+    if (!this.isStandalone) return;
+
+    if (this.resizeId) {
+      window.cancelAnimationFrame(this.resizeId);
+    }
+
+    this.resizeId = window.requestAnimationFrame(() => {
+      this.addMarginToCoverIfStandalone();
+    });
+  }
+
+  detectObjectFit(prevState) {
     // only need to test for objectFit once, so if state.objectFit is already
     // false, don't test again
     if (!prevState.objectFit) return null;
@@ -38,8 +81,9 @@ export default class ProjectHero extends PureComponent {
     if (!supports) this.setState({ objectFit: false });
   }
 
-  get darkMode() {
-    return this.props.project.attributes.darkMode;
+  get lightMode() {
+    if (this.hasBackgroundImage) return false;
+    return !this.props.project.attributes.darkMode;
   }
 
   get backgroundImage() {
@@ -47,10 +91,14 @@ export default class ProjectHero extends PureComponent {
   }
 
   get hasBackgroundImage() {
-    return (
+    return Boolean(
       this.backgroundImage.mediumLandscape &&
-      this.backgroundImage.largeLandscape
+        this.backgroundImage.largeLandscape
     );
+  }
+
+  get isStandalone() {
+    return this.context.isStandalone;
   }
 
   get showErrors() {
@@ -100,43 +148,23 @@ export default class ProjectHero extends PureComponent {
     return this.props.project.attributes.imageCreditsFormatted;
   }
 
-  renderBgImage(blockClass) {
-    const sizes = { retina: 2560, large: 1280, medium: 640 };
-
-    return (
-      <div
-        style={{
-          backgroundImage:
-            !this.state.objectFit &&
-            `url(${this.backgroundImage.largeLandscape})`
-        }}
-        className={`${blockClass}__bg-image-wrapper`}
-        aria-hidden
-      >
-        <img
-          ref={this.bgImage}
-          srcSet={`
-            ${this.backgroundImage.largeLandscape} ${sizes.large}w,
-            ${this.backgroundImage.mediumLandscape} ${sizes.medium}w
-          `}
-          src={this.backgroundImage.largeLandscape}
-          alt=""
-          className={`${blockClass}__bg-image`}
-          style={{ opacity: !this.state.objectFit ? 0 : 1 }}
-        />
-      </div>
-    );
-  }
-
   render() {
     const blockClass = "project-hero";
-    const themeModifier =
-      this.hasBackgroundImage || this.darkMode ? "dark" : "light";
+
+    const containerClasses = classNames({
+      [`${blockClass}`]: true,
+      [`${blockClass}--dark`]: !this.lightMode,
+      [`${blockClass}--light`]: this.lightMode,
+      [`${blockClass}--standalone`]: this.isStandalone
+    });
 
     return (
-      <section className={`${blockClass} ${blockClass}--${themeModifier}`}>
+      <section className={containerClasses}>
         <div className={`${blockClass}__inner`}>
           <div className={`${blockClass}__left-top-block`}>
+            <div ref={this.headingRef}>
+              <Heading project={this.props.project} />
+            </div>
             <Meta blockClass={blockClass} project={this.props.project} />
             <CalloutList
               blockClass={blockClass}
@@ -158,7 +186,10 @@ export default class ProjectHero extends PureComponent {
             blockClass={blockClass}
             project={this.props.project}
           />
-          <div className={`${blockClass}__right-top-block`}>
+          <div
+            ref={this.rightColRef}
+            className={`${blockClass}__right-top-block`}
+          >
             <Cover blockClass={blockClass} project={this.props.project} />
             <CalloutList
               blockClass={blockClass}
@@ -174,7 +205,10 @@ export default class ProjectHero extends PureComponent {
             copy={this.credits}
           />
         </div>
-        {this.hasBackgroundImage && this.renderBgImage(blockClass)}
+        <Image
+          {...this.props}
+          backgroundImage={this.props.project.attributes.heroStyles}
+        />
       </section>
     );
   }
