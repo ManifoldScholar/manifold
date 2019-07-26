@@ -1,7 +1,43 @@
-.colors {
+.color-picker {
   display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
 
-  .wrapper {
+  &::after {
+    @include templateHead;
+    position: absolute;
+    top: calc(100% - 13px);
+    left: calc(50% - 25px);
+    z-index: 1;
+    width: 50px;
+    height: 26px;
+    font-size: 14px;
+    font-weight: $semibold;
+    line-height: 26px;
+    color: $neutral20;
+    text-transform: uppercase;
+    letter-spacing: 0.107em;
+    content: 'Or';
+    background-color: $neutral90;
+
+    @include respond($break95) {
+      top: calc(50% - 50px);
+      right: -13px;
+      left: auto;
+      width: 26px;
+      height: 100px;
+      line-height: 100px;
+    }
+  }
+
+  &__inner {
+    display: flex;
+  }
+
+  &__list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -10,64 +46,95 @@
     @include respond($break60) {
       width: 138px;
     }
+  }
 
-    .form-toggle {
-      display: block;
-      width: 38px;
-      height: 38px;
-      margin-bottom: 13px;
+  &__item {
+    position: relative;
+    display: block;
+    width: 38px;
+    height: 38px;
+    margin-bottom: 13px;
+    cursor: pointer;
 
-      &.checked .toggle-indicator {
-        background-color: transparent;
-      }
+    & + & {
+      margin-top: 0; // OD
+    }
 
-      &.primary {
-        background: $sp50Primary;
-      }
+    &--primary {
+      background: $sp50Primary;
+    }
 
-      &.secondary {
-        background: $sp50Secondary;
-      }
+    &--secondary {
+      background: $sp50Secondary;
+    }
 
-      &.tertiary {
-        background: $sp50Tertiary;
-      }
+    &--tertiary {
+      background: $sp50Tertiary;
+    }
 
-      &.quaternary {
-        background: $sp50Quaternary;
-      }
+    &--quaternary {
+      background: $sp50Quaternary;
+    }
 
-      &.quinary {
-        background: $sp50Quinary;
-      }
+    &--quinary {
+      background: $sp50Quinary;
+    }
 
-      &.sentary {
-        background: $neutralWhite;
-      }
+    &--sentary {
+      background: $neutralWhite;
+    }
+  }
 
-      + .form-toggle {
-        margin-top: 0; // OD
-      }
+  &__input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
 
-      .toggle-indicator {
-        width: 100%;
-        height: 100%;
-        padding-top: 7px;
-        background-color: transparent;
+    &:focus-visible ~ .color-picker__indicator {
+      @include defaultFocusStyle;
+      outline-color: var(--default-focus-color, $accentPrimary);
+      outline-offset: 3px;
+    }
+  }
 
-        &__icon {
-          display: inline-block;
-          color: $neutral90;
-        }
+  &__indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
 
-        &::before {
-          display: none;
-        }
-      }
+    &::before {
+      display: none;
+    }
 
-      .toggle-label {
-        display: none;
-      }
+    .color-picker__item--checked & {
+      background-color: transparent;
+    }
+  }
+
+  &__indicator-icon {
+    display: inline-block;
+    color: $neutral90;
+  }
+
+  &__description {
+    @include templateHead;
+    max-width: 150px;
+    margin-top: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.533em;
+    color: $neutral70;
+    text-transform: uppercase;
+    letter-spacing: 0.125em;
+
+    @include respond($break50) {
+      font-size: 12px;
     }
   }
 }

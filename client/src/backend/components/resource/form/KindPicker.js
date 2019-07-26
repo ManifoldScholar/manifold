@@ -15,54 +15,92 @@ class KindPicker extends PureComponent {
     set: PropTypes.func
   };
 
+  get selectClasses() {
+    return classNames({
+      "resource-kind-picker__select": true,
+      "resource-kind-picker__select--only": !this.props.includeButtons
+    });
+  }
+
   get idPrefix() {
     return "kind";
   }
 
-  renderKindPickerButtons(kindList) {
+  renderSelect(kindList, id) {
+    return (
+      <React.Fragment>
+        <label htmlFor={id}>Kind</label>
+        <div className={this.selectClasses}>
+          <div className="form-select">
+            <IconComposer
+              icon="disclosureDown16"
+              size={22}
+              iconClass="form-select__icon"
+            />
+            <select
+              id={id}
+              onChange={event => {
+                this.props.set(event.target.value);
+              }}
+              value={this.props.getModelValue("attributes[kind]").toLowerCase()}
+            >
+              {kindList.map(kind => {
+                const safeKind = kind.toLowerCase();
+
+                return (
+                  <option key={safeKind} value={safeKind} id={safeKind}>
+                    {kind}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  }
+
+  renderRadios(kindList, id) {
     if (!kindList) return null;
     return (
-      <ul role="radiogroup">
+      <div
+        role="group"
+        aria-label="Resource Kind"
+        className="resource-kind-picker__list"
+      >
         {kindList.map(kind => {
           const safeKind = kind.toLowerCase();
           const kindValue = this.props.getModelValue("attributes[kind]");
           const isActive = safeKind === kindValue;
-          const buttonClass = classNames({
-            button: true,
-            active: isActive
+          const itemClass = classNames({
+            "resource-kind-picker__item": true,
+            radio: true,
+            "resource-kind-picker__item--active": isActive
           });
           return (
-            <li key={safeKind}>
-              <div
-                onClick={() => {
-                  this.props.set(safeKind);
-                }}
-                className={buttonClass}
-                role="radio"
-                tabIndex="0"
-                aria-checked={isActive}
-              >
-                <figure>
-                  <figcaption>
-                    <span>
-                      {kind}
-                      {safeKind ===
-                      this.props.getModelValue("attributes[kind]") ? (
-                        <span className="screen-reader-text">
-                          Selected Kind
-                        </span>
-                      ) : null}
-                    </span>
-                  </figcaption>
-                  <div className={`resource-icon ${safeKind}`}>
-                    <IconComputed.Resource size="default" icon={safeKind} />
-                  </div>
-                </figure>
-              </div>
-            </li>
+            <label
+              key={safeKind}
+              htmlFor={`${id}-${safeKind}`}
+              className={itemClass}
+            >
+              <input
+                type="radio"
+                value={safeKind}
+                id={`${id}-${safeKind}`}
+                checked={isActive}
+                onChange={() => this.props.set(safeKind)}
+                className="resource-kind-picker__input"
+              />
+              <span className="resource-kind-picker__label">{kind}</span>
+              <IconComputed.Resource
+                size="default"
+                icon={safeKind}
+                iconClass="resource-kind-picker__icon"
+              />
+            </label>
           );
         })}
-      </ul>
+      </div>
     );
   }
 
@@ -80,47 +118,14 @@ class KindPicker extends PureComponent {
       "Interactive"
     ];
 
-    const selectClass = classNames({
-      "picker-select": true,
-      "select-only": !this.props.includeButtons
-    });
-
     return (
       <UID name={id => `${this.idPrefix}-${id}`}>
         {id => (
           <div className="resource-kind-picker form-secondary">
             <div className="form-input">
-              <label htmlFor={id}>Kind</label>
-              <div className={selectClass}>
-                <div className="form-select">
-                  <IconComposer
-                    icon="disclosureDown16"
-                    size={22}
-                    iconClass="form-select__icon"
-                  />
-                  <select
-                    id={id}
-                    onChange={event => {
-                      this.props.set(event.target.value);
-                    }}
-                    value={this.props
-                      .getModelValue("attributes[kind]")
-                      .toLowerCase()}
-                  >
-                    {kindList.map(kind => {
-                      const safeKind = kind.toLowerCase();
-
-                      return (
-                        <option key={safeKind} value={safeKind} id={safeKind}>
-                          {kind}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </div>
+              {this.renderSelect(kindList, id)}
               {this.props.includeButtons
-                ? this.renderKindPickerButtons(kindList)
+                ? this.renderRadios(kindList, id)
                 : null}
             </div>
           </div>

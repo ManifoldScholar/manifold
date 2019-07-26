@@ -1,102 +1,81 @@
 .resource-kind-picker {
+  $grid-gap: 15px;
+
   padding-bottom: 40px;
 
   @include respond($break65) {
     padding-bottom: 12px;
   }
 
-  ul {
+  &__list {
     @include listUnstyled;
     display: none;
     flex-wrap: wrap;
-    margin-left: -15px;
+    margin-left: -$grid-gap;
 
     @include respond($break65) {
       display: flex;
     }
+  }
 
-    li {
-      display: flex;
-      width: 50%;
-      padding-bottom: 15px;
-      padding-left: 15px;
+  &__item {
+    @include buttonUnstyled;
+    display: flex;
+    flex-basis: calc(50% - #{$grid-gap});
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 10px;
+    margin-bottom: $grid-gap;
+    margin-left: $grid-gap;
+    color: $neutral50;
+    border: 1px solid $neutral80;
+    transition: background-color $durationFast $timing,
+      border-color $duration $timing;
 
-      @include respond($break60) {
-        width: 25%;
-      }
-
-      @include respond($break80) {
-        width: 20%;
-      }
+    @include respond($break60) {
+      flex-basis: calc(25% - #{$grid-gap});
     }
 
-    .button {
-      @include buttonUnstyled;
-      display: flex;
-      width: 100%;
-      padding: 18px 10px;
-      color: $neutral50;
-      border: 1px solid $neutral80;
-      transition: background-color $durationFast $timing,
-        border-color $duration $timing;
-
-      &.active {
-        background-color: $neutral80;
-        border-color: $neutral80;
-      }
-
-      &:hover, &:focus-visible {
-        border-color: $accentPrimary;
-        outline: 0;
-      }
+    @include respond($break80) {
+      flex-basis: calc(20% - #{$grid-gap});
     }
 
-    figure {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      text-align: center;
+    &--active {
+      background-color: $neutral80;
+      border-color: $neutral80;
+    }
 
-      figcaption {
-        @include templateHead;
-        padding-bottom: 18px;
-        font-size: 14px;
-        font-weight: $medium;
-        line-height: 1.2;
-        text-transform: uppercase;
-      }
-
-      .resource-icon {
-        margin: 0 auto;
-      }
+    &:hover,
+    &:focus-within {
+      border-color: $accentPrimary;
+      outline: 0;
     }
   }
 
-  .resource-label {
-    @include utilityPrimary;
-    padding-bottom: 3px;
+  &__label {
+    @include templateHead;
+    padding-bottom: 18px;
+    font-size: 14px;
+    font-weight: $medium;
+    line-height: 1.2;
     color: $neutral50;
     text-decoration: none;
+    text-transform: uppercase;
     transition: color $duration $timing;
   }
 
-  .picker-select {
+  &__input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
 
+  &__select {
     @include respond($break65) {
       display: none;
     }
 
-    figure {
-      height: 80px;
-
-      svg {
-        width: auto;
-        height: 100%;
-        fill: $neutral50;
-      }
-    }
-
-    &.select-only {
+    &--only {
       display: block;
 
       @include respond($break65) {

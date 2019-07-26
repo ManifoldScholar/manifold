@@ -841,14 +841,16 @@ exports[`Backend Project General Container renders correctly 1`] = `
                     className="color-picker"
                   >
                     <div
-                      className="colors"
+                      className="color-picker__inner"
                     >
                       <div
-                        className="wrapper"
+                        aria-label="Background Color Picker"
+                        className="color-picker__list"
+                        role="group"
                       >
                         <label
-                          className="form-toggle radio primary checked"
-                          htmlFor="primary"
+                          className="color-picker__item radio color-picker__item--primary checked"
+                          htmlFor="1-primary"
                         >
                           <span
                             className="screen-reader-text"
@@ -857,18 +859,19 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           </span>
                           <input
                             checked={true}
-                            id="primary"
+                            className="color-picker__input"
+                            id="1-primary"
                             onChange={[Function]}
                             type="radio"
                             value="primary"
                           />
                           <span
                             aria-hidden="true"
-                            className="toggle-indicator"
+                            className="color-picker__indicator"
                           >
                             <svg
                               aria-hidden={true}
-                              className="manicon-svg toggle-indicator__icon svg-icon--checkmark16"
+                              className="manicon-svg color-picker__indicator-icon svg-icon--checkmark16"
                               height={18.5}
                               viewBox="0 0 16 16"
                               width={18.5}
@@ -883,8 +886,8 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           </span>
                         </label>
                         <label
-                          className="form-toggle radio secondary"
-                          htmlFor="secondary"
+                          className="color-picker__item radio color-picker__item--secondary"
+                          htmlFor="1-secondary"
                         >
                           <span
                             className="screen-reader-text"
@@ -893,19 +896,20 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           </span>
                           <input
                             checked={false}
-                            id="secondary"
+                            className="color-picker__input"
+                            id="1-secondary"
                             onChange={[Function]}
                             type="radio"
                             value="secondary"
                           />
                           <span
                             aria-hidden="true"
-                            className="toggle-indicator"
+                            className="color-picker__indicator"
                           />
                         </label>
                         <label
-                          className="form-toggle radio tertiary"
-                          htmlFor="tertiary"
+                          className="color-picker__item radio color-picker__item--tertiary"
+                          htmlFor="1-tertiary"
                         >
                           <span
                             className="screen-reader-text"
@@ -914,19 +918,20 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           </span>
                           <input
                             checked={false}
-                            id="tertiary"
+                            className="color-picker__input"
+                            id="1-tertiary"
                             onChange={[Function]}
                             type="radio"
                             value="tertiary"
                           />
                           <span
                             aria-hidden="true"
-                            className="toggle-indicator"
+                            className="color-picker__indicator"
                           />
                         </label>
                         <label
-                          className="form-toggle radio quaternary"
-                          htmlFor="quaternary"
+                          className="color-picker__item radio color-picker__item--quaternary"
+                          htmlFor="1-quaternary"
                         >
                           <span
                             className="screen-reader-text"
@@ -935,19 +940,20 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           </span>
                           <input
                             checked={false}
-                            id="quaternary"
+                            className="color-picker__input"
+                            id="1-quaternary"
                             onChange={[Function]}
                             type="radio"
                             value="quaternary"
                           />
                           <span
                             aria-hidden="true"
-                            className="toggle-indicator"
+                            className="color-picker__indicator"
                           />
                         </label>
                         <label
-                          className="form-toggle radio quinary"
-                          htmlFor="quinary"
+                          className="color-picker__item radio color-picker__item--quinary"
+                          htmlFor="1-quinary"
                         >
                           <span
                             className="screen-reader-text"
@@ -956,19 +962,20 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           </span>
                           <input
                             checked={false}
-                            id="quinary"
+                            className="color-picker__input"
+                            id="1-quinary"
                             onChange={[Function]}
                             type="radio"
                             value="quinary"
                           />
                           <span
                             aria-hidden="true"
-                            className="toggle-indicator"
+                            className="color-picker__indicator"
                           />
                         </label>
                         <label
-                          className="form-toggle radio sentary"
-                          htmlFor="sentary"
+                          className="color-picker__item radio color-picker__item--sentary"
+                          htmlFor="1-sentary"
                         >
                           <span
                             className="screen-reader-text"
@@ -977,21 +984,22 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           </span>
                           <input
                             checked={false}
-                            id="sentary"
+                            className="color-picker__input"
+                            id="1-sentary"
                             onChange={[Function]}
                             type="radio"
                             value="sentary"
                           />
                           <span
                             aria-hidden="true"
-                            className="toggle-indicator"
+                            className="color-picker__indicator"
                           />
                         </label>
                       </div>
                     </div>
                     <div
                       aria-hidden="true"
-                      className="default-description"
+                      className="color-picker__description"
                     >
                       Select A Different Background Color
                     </div>
