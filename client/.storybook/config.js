@@ -1,8 +1,13 @@
-import { configure, addParameters, addDecorator, setAddon } from '@storybook/react';
+import {
+  configure,
+  addParameters,
+  addDecorator,
+  setAddon
+} from "@storybook/react";
 import manifoldContext from "./decorators/manifoldContext";
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
-import JSXAddon from 'storybook-addon-jsx';
+import { withA11y } from "@storybook/addon-a11y";
+import { withKnobs } from "@storybook/addon-knobs";
+import JSXAddon from "storybook-addon-jsx";
 
 // the storybook theme, not to be confused with the manifold theme, below.
 import theme from "./theme";
@@ -11,7 +16,7 @@ import theme from "./theme";
 import "theme";
 
 // Load all files ending in .stories.js
-const req = require.context('../src', true, /\.stories\.js$/);
+const req = require.context("../src", true, /\.stories\.js$/);
 function loadStories() {
   req.keys().forEach(filename => req(filename));
 }

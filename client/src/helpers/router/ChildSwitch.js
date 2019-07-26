@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { matchPath, withRouter } from "react-router-dom";
+import { withRouter, matchPath } from "react-router-dom";
 import NotFound from "global/containers/NotFound";
 
 /**

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { withRouter, matchPath } from "react-router-dom";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
-import { matchPath } from "react-router";
+import reactRouter from "react-router";
 import IconComposer from "global/components/utility/IconComposer";
 
 import BlurOnLocationChange from "hoc/blur-on-location-change";
