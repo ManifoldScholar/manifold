@@ -5,7 +5,13 @@ import locationHelper from "helpers/location";
 export default class BlurOnLocationChange extends PureComponent {
   static propTypes = {
     location: PropTypes.object,
-    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    className: PropTypes.string,
+    tag: PropTypes.string
+  };
+
+  static defaultProps = {
+    tag: "div"
   };
 
   constructor(props) {
@@ -23,9 +29,14 @@ export default class BlurOnLocationChange extends PureComponent {
   }
 
   render() {
+
+    const Tag = this.props.tag;
+
     return (
       <React.Fragment>
-        <div ref={this.wrapperRef}>{this.props.children}</div>
+        <Tag className={this.props.className} ref={this.wrapperRef}>
+          {this.props.children}
+        </Tag>
       </React.Fragment>
     );
   }
