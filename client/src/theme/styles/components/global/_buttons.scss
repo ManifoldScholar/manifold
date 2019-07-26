@@ -701,6 +701,7 @@
 
 .project-cover-button {
   @include templateHead;
+  @include boxShadow(2px, 4px, 10px, 0, $neutral90, 0.36);
   position: absolute;
   top: 0;
   left: 0;
@@ -715,7 +716,6 @@
   cursor: pointer;
   background-color: $accentPrimary;
   border-radius: 22.5px;
-  box-shadow: 2px 4px 10px 0 rgba($neutral90, 0.36);
   transition: max-width $duration $timing,
     background-color $duration $timing;
 
