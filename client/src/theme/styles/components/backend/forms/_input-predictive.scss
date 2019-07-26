@@ -14,12 +14,14 @@
     color: $accentPrimary;
   }
 
-  &__results-wrapper {
+  &__results {
+    @include listUnstyled;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     max-height: 210px;
+    padding: 12px 0;
     overflow: auto;
     visibility: hidden;
     background-color: $neutral90;
@@ -34,11 +36,6 @@
       visibility: visible;
       opacity: 1;
     }
-  }
-
-  &__results {
-    @include listUnstyled;
-    padding: 12px 0;
   }
 
   &__result {

@@ -26,8 +26,8 @@
     }
   }
 
-  .input-predictive + ul,
-  .fetch-select + ul {
+  .input-predictive ~ ul,
+  .fetch-select ~ ul {
     margin-top: 25px;
   }
 

@@ -133,7 +133,7 @@ export class FormHasMany extends PureComponent {
               instructions={this.props.instructions}
               idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
             />
-            <nav className="has-many-list">
+            <div className="has-many-list">
               {this.renderList(
                 this.props.orderable || this.props.editClickHandler,
                 this.props
@@ -154,7 +154,7 @@ export class FormHasMany extends PureComponent {
                 !this.props.orderable && !this.props.editClickHandler,
                 this.props
               )}
-            </nav>
+            </div>
           </GlobalForm.Errorable>
         )}
       </UID>

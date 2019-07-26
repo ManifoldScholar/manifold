@@ -75,8 +75,7 @@ export default class FormHasManyList extends PureComponent {
     return (
       <button type="button" className="utility__button" onClick={this.onEdit}>
         <span className="screen-reader-text">
-          Edit {this.name()}
-          in the {this.props.label} list.
+          {`Edit ${this.name()} in the ${this.props.label} list.`}
         </span>
         {this.renderIcon("annotate32")}
       </button>
@@ -87,7 +86,7 @@ export default class FormHasManyList extends PureComponent {
     return (
       <button type="button" onClick={this.onRemove} className="utility__button">
         <span className="screen-reader-text">
-          Remove {this.name()} from the {this.props.label} list.
+          {`Remove ${this.name()} from the ${this.props.label} list.`}
         </span>
         {this.renderIcon("close32", "utility__icon--close")}
       </button>

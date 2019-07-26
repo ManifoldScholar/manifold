@@ -5,7 +5,10 @@ import update from "immutability-helper";
 import debounce from "lodash/debounce";
 import classNames from "classnames";
 import { ApiClient } from "api";
+import { UID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
+
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
 
 class PredictiveInput extends PureComponent {
   static mapStateToProps = state => {
@@ -64,6 +67,10 @@ class PredictiveInput extends PureComponent {
     if (!idForError && !idForInstructions) return null;
 
     return [idForError, idForInstructions].filter(Boolean).join(" ");
+  }
+
+  get idPrefix() {
+    return "predictive-input";
   }
 
   getHighlightedOption(list, id) {
@@ -229,81 +236,121 @@ class PredictiveInput extends PureComponent {
   select(option) {
     this.close();
     this.clear();
+    if (this.inputElement) {
+      this.inputElement.focus();
+    }
     this.props.onSelect(option);
+    this.props.setScreenReaderStatus(`${this.props.label(option)} added.`);
   }
 
   handleSelect(event, option) {
     this.select(option);
   }
 
+  renderInput(id) {
+    // aria-controls` is placed on input in this case rather than combobox
+    /* eslint-disable jsx-a11y/role-has-required-aria-props */
+    return (
+      <div
+        role="combobox"
+        aria-expanded={this.state.options.length > 0}
+        aria-owns={`${id}-listbox`}
+        aria-haspopup="listbox"
+        className="input-predictive__input"
+      >
+        <input
+          ref={input => {
+            this.inputElement = input;
+          }}
+          className="input-predictive__text-input text-input"
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.value}
+          placeholder={this.props.placeholder}
+          onBlur={this.handleBlur}
+          onFocus={this.handleFocus}
+          onKeyPress={this.handleKeyPress}
+          onKeyDown={this.handleKeyDown}
+          aria-describedby={this.ariaDescribedBy}
+          aria-autocomplete="list"
+          aria-controls={`${id}-listbox`}
+          aria-activedescendant={this.state.highlighted || null}
+        />
+        {this.props.onNew ? (
+          <button
+            type="button"
+            aria-hidden="true"
+            onClick={this.handleNew}
+            className="input-predictive__button"
+          >
+            <IconComposer
+              icon="plus16"
+              size={20}
+              iconClass="input-predictive__icon"
+            />
+          </button>
+        ) : null}
+      </div>
+    );
+    /* eslint-enable jsx-a11y/role-has-required-aria-props */
+  }
+
+  renderResults(id) {
+    return (
+      <ul
+        aria-label={this.props.placeholder}
+        role="listbox"
+        id={`${id}-listbox`}
+        className="input-predictive__results"
+      >
+        {this.state.options.map(option => {
+          const listingClass = classNames("input-predictive__result", {
+            highlighted: option.id === this.state.highlighted
+          });
+          return (
+            /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+            <li
+              key={option.id}
+              role="option"
+              id={option.id}
+              aria-selected={option.id === this.state.highlighted}
+              className={listingClass}
+              onClick={event => {
+                this.handleSelect(event, option);
+              }}
+              onMouseOver={event => {
+                this.clearHighlighted(event);
+              }}
+            >
+              {this.props.label(option)}
+            </li>
+            /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
+          );
+        })}
+      </ul>
+    );
+  }
+
   render() {
-    const classes = classNames("input-predictive", {
+    const wrapperClasses = classNames({
+      "input-predictive": true,
       "input-predictive--open":
         this.state.open === true && this.hasOptions(this.state.options)
     });
 
     return (
-      <div className={classes}>
-        <div className="input-predictive__input">
-          <input
-            ref={input => {
-              this.inputElement = input;
-            }}
-            className="input-predictive__text-input text-input"
-            type="text"
-            onChange={this.handleChange}
-            value={this.state.value}
-            placeholder={this.props.placeholder}
-            onBlur={this.handleBlur}
-            onFocus={this.handleFocus}
-            onKeyPress={this.handleKeyPress}
-            onKeyDown={this.handleKeyDown}
-            aria-label={this.props.placeholder}
-            aria-describedby={this.ariaDescribedBy}
-          />
-          {this.props.onNew ? (
-            <button
-              type="button"
-              aria-hidden="true"
-              onClick={this.handleNew}
-              className="input-predictive__button"
-            >
-              <IconComposer
-                icon="plus16"
-                size={20}
-                iconClass="input-predictive__icon"
-              />
-            </button>
-          ) : null}
-        </div>
-        <nav className="input-predictive__results-wrapper">
-          <ul className="input-predictive__results">
-            {this.state.options.map(option => {
-              const listingClass = classNames("input-predictive__result", {
-                highlighted: option.id === this.state.highlighted
-              });
-              return (
-                /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-                <li
-                  key={option.id}
-                  className={listingClass}
-                  onClick={event => {
-                    this.handleSelect(event, option);
-                  }}
-                  onMouseOver={event => {
-                    this.clearHighlighted(event);
-                  }}
-                >
-                  {this.props.label(option)}
-                </li>
-                /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
+      <UID name={id => `${this.idPrefix}-${id}`}>
+        {id => (
+          <div className={wrapperClasses}>
+            {this.renderInput(id)}
+            {this.renderResults(id)}
+          </div>
+        )}
+      </UID>
     );
   }
 }
 
-export default connect(PredictiveInput.mapStateToProps)(PredictiveInput);
+export default connect(PredictiveInput.mapStateToProps)(
+  withScreenReaderStatus(PredictiveInput)
+);
