@@ -20,7 +20,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
             Kind
           </label>
           <div
-            className="picker-select select-only"
+            className="resource-kind-picker__select resource-kind-picker__select--only"
           >
             <div
               className="form-select"
