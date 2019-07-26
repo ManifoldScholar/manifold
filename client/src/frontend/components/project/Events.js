@@ -6,6 +6,7 @@ import Utility from "frontend/components/utility";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import IconComposer from "global/components/utility/IconComposer";
+import { FrontendModeContext } from "helpers/contexts";
 
 export default class ProjectEvents extends Component {
   static displayName = "Project.Events";
@@ -15,6 +16,8 @@ export default class ProjectEvents extends Component {
     events: PropTypes.array,
     pagination: PropTypes.object
   };
+
+  static contextType = FrontendModeContext;
 
   render() {
     const project = this.props.project;
@@ -28,12 +31,6 @@ export default class ProjectEvents extends Component {
           image={this.props.project.attributes.avatarStyles.mediumSquare}
           appendTitle
         />
-        <section className="bg-neutral05">
-          <Utility.BackLinkPrimary
-            link={lh.link("frontendProjectDetail", project.attributes.slug)}
-            title={project.attributes.titlePlaintext}
-          />
-        </section>
         <section>
           <div className="container entity-section-wrapper">
             <header className="section-heading entity-section-wrapper__heading">
@@ -51,7 +48,7 @@ export default class ProjectEvents extends Component {
             />
           </div>
         </section>
-        <Layout.ButtonNavigation />
+        {!this.context.isStandalone && <Layout.ButtonNavigation />}
       </div>
     );
   }

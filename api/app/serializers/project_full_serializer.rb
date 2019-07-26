@@ -12,7 +12,7 @@ class ProjectFullSerializer < ProjectSerializer
 
   attributes :event_count, :metadata, :resource_collections_count, :resources_count,
              :event_types, :metadata_properties, :citations, :hide_activity,
-             :metadata_formatted
+             :metadata_formatted, :standalone_mode
 
   has_many :texts
   has_many :published_texts

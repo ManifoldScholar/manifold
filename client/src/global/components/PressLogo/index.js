@@ -20,8 +20,8 @@ export default class PressLogo extends Component {
   }
 
   getPressImage() {
-    const className = classNames("image", {
-      "image-desktop": this.props.mobileUrl
+    const className = classNames("custom-logo__image", {
+      "custom-logo__image--desktop": this.props.mobileUrl
     });
     let style = {};
     if (this.props.styles) {
@@ -45,8 +45,8 @@ export default class PressLogo extends Component {
   }
 
   getMobilePressImage() {
-    const className = classNames("image", {
-      "image-mobile": this.props.url
+    const className = classNames("custom-logo__image", {
+      "custom-logo__image--mobile": this.props.url
     });
     return (
       <img

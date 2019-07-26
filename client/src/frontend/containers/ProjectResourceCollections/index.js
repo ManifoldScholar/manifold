@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, uiFrontendModeActions } from "actions";
 import { projectsAPI, requests } from "api";
 import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
@@ -47,6 +47,10 @@ class ProjectResourceCollectionsContainer extends Component {
     settings: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
   };
+
+  componentDidMount() {
+    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
+  }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.feResourceCollections));

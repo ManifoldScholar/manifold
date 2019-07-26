@@ -3,8 +3,8 @@
   $row-gap-medium: 3.159vw;
   $column-gap-medium: 4.839vw;
   $row-gap-large: 48px;
-  $column-gap-large: 66px;
-  $right-column-width: 22.907%;
+  $column-gap-large: 100px;
+  $right-column-width: 28%;
 
   position: relative;
   padding-top: 20px;
@@ -24,8 +24,16 @@
     background-color: $neutral05;
   }
 
+  &--dark {
+    --default-focus-color: #{$accentPrimary};
+  }
+
   &--standalone {
-    padding-top: 44px;
+    padding-top: calc(#{$grid-gap-small} + var(--standalone-header-height));
+
+    @include respond($break60) {
+      padding-top: 30px;
+    }
   }
 
   &__bg-image-wrapper {
@@ -74,6 +82,10 @@
     -ms-grid-columns: 100%;
 
     @include respond($break60) {
+
+      padding-left: 20px;
+      padding-right: 20px;
+
       grid-template-columns: 1fr minmax(220px, $right-column-width);
       row-gap: $row-gap-medium;
       column-gap: $column-gap-medium;
@@ -100,6 +112,7 @@
     grid-row: 2;
     -ms-grid-column: 1;
     grid-column: 1;
+
 
     @include respond($break60) {
       -ms-grid-row: 1;
@@ -130,10 +143,7 @@
     grid-row: 1;
     -ms-grid-column: 1;
     grid-column: 1;
-
-    .project-hero--standalone & {
-      margin-top: 110px;
-    }
+    padding-right: 60px;
 
     @include respond($break60) {
       -ms-grid-row: 1;
@@ -219,10 +229,15 @@
 
   // Meta elements
   &__heading {
+    display: none;
     line-height: 1.188;
     position: relative;
     z-index: 50;
     margin-bottom: 24px;
+
+    @include respond($break60) {
+      display: block;
+    }
   }
 
   &__title {
@@ -235,6 +250,11 @@
       font-size: 32px;
     }
 
+    .project-hero--standalone & {
+      @include respond($break60) {
+        max-width: 90%;
+      }
+    }
   }
 
   &__subtitle {
@@ -337,17 +357,7 @@
   }
 
   // Link elements
-  &__link-inline {
-    // color: inherit;
-    // text-decoration: none;
-    // box-shadow: inset 0 -1px 0;
-    // transition: color $duration $timing;
-    //
-    // &:hover,
-    // &:focus-visible {
-    //   color: $accentPrimary;
-    // }
-  }
+  &__link-inline {}
 
   // Social elements
   &__social-link,

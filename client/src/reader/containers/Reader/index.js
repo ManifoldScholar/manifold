@@ -22,12 +22,12 @@ import { matchRoutes } from "react-router-config";
 import {
   uiColorActions,
   uiTypographyActions,
-  entityStoreActions
+  entityStoreActions,
+  uiFrontendModeActions
 } from "actions";
 import { setPersistentUI } from "actions/ui/persistentUi";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import get from "lodash/get";
-
 import ScrollAware from "hoc/scroll-aware";
 import BodyClass from "hoc/body-class";
 import Authorize from "hoc/authorize";
@@ -110,6 +110,7 @@ export class ReaderContainer extends Component {
 
   componentDidMount() {
     this.setPersistentUI(this.props);
+    this.checkStandaloneMode(null, this.props.text);
   }
 
   componentDidUpdate(prevProps) {
@@ -121,12 +122,27 @@ export class ReaderContainer extends Component {
     ) {
       window.scrollTo(0, 0);
     }
+    this.checkStandaloneMode(prevProps.text, this.props.text);
+  }
+
+  checkStandaloneMode(prevText, text) {
+    if (prevText === text) return;
+    if (prevText && text && prevText.id === text.id) return;
+    if (!text.relationships.project) return;
+    this.props.dispatch(
+      uiFrontendModeActions.setMode(
+        text.relationships.project.attributes.standaloneMode,
+        text.relationships.project,
+        this.props.location.search
+      )
+    );
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.rText));
     this.props.dispatch(flush(requests.rMyAnnotationsForText));
     this.props.dispatch(flush(requests.rMyFilteredAnnotationsForText));
+    this.props.dispatch(uiFrontendModeActions.setFrontendModeToLibrary());
   }
 
   get bodyClass() {

@@ -1,4 +1,5 @@
 .press-header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,11 +7,12 @@
   text-align: center;
   text-decoration: none;
   transition:
-          color $duration $timing,
-          background-color $duration $timing;
+    color $duration $timing,
+    background-color $duration $timing;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
+    outline: 0;
     color: $neutral90;
     /* stylelint-disable-next-line declaration-no-important */
     background-color: $accentPrimary !important; // overrides component's inline value
@@ -25,7 +27,11 @@
 
   &__text {
     @include templateHead;
+    display: block;
     font-size: 16px;
     font-weight: $semibold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

@@ -62,7 +62,9 @@ export default class SearchQueryForm extends PureComponent {
   setDefaultScope(state) {
     const availableScopes = this.availableScopes;
     if (availableScopes.length > 0 && !state.scope) {
-      if (availableScopes.find(s => s.value === "text")) {
+      if (availableScopes.find(s => s.value === "project")) {
+        state.scope = "project";
+      } else if (availableScopes.find(s => s.value === "text")) {
         state.scope = "text";
       } else {
         state.scope = availableScopes[availableScopes.length - 1];
@@ -265,7 +267,7 @@ export default class SearchQueryForm extends PureComponent {
             <span className="screen-reader-text">Execute Search</span>
           </button>
         </div>
-        {this.availableScopes.length > 0 ? (
+        {this.availableScopes.length > 1 ? (
           <div
             role="group"
             aria-labelledby="search-within-header"

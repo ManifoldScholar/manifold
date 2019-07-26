@@ -25,7 +25,7 @@ exports[`Global.FatalError component renders correctly 1`] = `
           />
         </svg>
         <h3>
-          We’re at a bit of a loose end.
+          We're at a bit of a loose end.
           <span>
             <br />
             Frightfully sorry.
@@ -40,7 +40,7 @@ exports[`Global.FatalError component renders correctly 1`] = `
       >
         <h1>
           404
-           Error: 
+           Error:
           Kriss Kross'll make you
         </h1>
       </div>

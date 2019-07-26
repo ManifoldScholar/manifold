@@ -19,6 +19,7 @@
   }
 
   &__item {
+    // height: 100%;
     padding-bottom: header-layout(padding-vertical-mobile);
 
     @include respond($break40) {

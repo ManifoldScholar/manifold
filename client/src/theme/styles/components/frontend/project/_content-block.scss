@@ -1,12 +1,4 @@
 .project-content-block {
-  @include respond($break60) {
-    margin-top: 0.648vw;
-  }
-
-  @include respond($break120) {
-    margin-top: 8px;
-  }
-
   &.bg-neutral05 {
     padding-bottom: 30px;
 

@@ -1,48 +1,56 @@
 // Search Menu button and panel global styles (see header styles for context specific styles)
 .button-search {
-  $tailHeight: 17px;
-
   @include buttonUnstyled;
   height: 100%;
   padding: 10px;
   color: $neutral70;
   color: var(--button-color, $neutral70);
   vertical-align: middle;
-  transition: background-color $duration $timing;
 
-  &:focus {
-    color: $accentPrimary;
-    outline: 0;
+  .header-reader & {
+    transition: background-color $duration $timing;
   }
 
-  &::after {
-    @include tailUp($neutral10, $tailHeight);
-    position: absolute;
-    bottom: 14px;
-    top: calc(100% - #{$tailHeight});
-    left: 50%;
-    display: block;
-    margin-left: -15px;
-    content: '';
-    opacity: 0;
-    transition: transform $duration $timing, opacity $duration $timing;
-    transform: translateY(-1 * header-layout(menu-slide-distance));
-  }
+  .header-app & {
+    $tailHeight: 17px;
+    transition: color $duration $duration $timing;
 
-  &--active::after {
-    opacity: 1;
-    transform: translateY(0px);
+    &:hover,
+    &.button-active {
+      color: $accentPrimary;
+      transition: color $duration $timing;
+    }
+
+    &::after {
+      @include tailUp($neutral10, $tailHeight);
+      position: absolute;
+      bottom: 14px;
+      top: calc(100% - #{$tailHeight});
+      left: 50%;
+      display: block;
+      margin-left: -15px;
+      content: '';
+      opacity: 0;
+      transition: transform $duration $timing, opacity $duration $timing;
+      transform: translateY(-1 * header-layout(menu-slide-distance));
+    }
+
+    &.button-active::after {
+      opacity: 1;
+      transform: translateY(0px);
+      z-index: 1;
+    }
   }
 }
 
 .search-menu {
-  @include boxShadow;
   width: 100vw;
   background-color: $neutral10;
-  border-radius: $panelRoundedRadius;
 
   .header-app & {
+    @include boxShadow(5px, 15px, 35px, 8px);
     padding: 28px 22px 22px;
+    border-radius: $panelRoundedRadius;
 
     @include respond($break40) {
       padding: 20px 24px 22px;

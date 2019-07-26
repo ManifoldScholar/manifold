@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
-
+import { FrontendModeContext } from "helpers/contexts";
 import Authorize from "hoc/authorize";
 
 export default class ReturnMenuBody extends PureComponent {
@@ -15,6 +15,8 @@ export default class ReturnMenuBody extends PureComponent {
     toggleSignInUpOverlay: PropTypes.func.isRequired,
     moreLink: PropTypes.string
   };
+
+  static contextType = FrontendModeContext;
 
   render() {
     return (
@@ -38,35 +40,39 @@ export default class ReturnMenuBody extends PureComponent {
               </span>
             </Link>
           </li>
-          <li className="reader-return-menu__item">
-            <Link to={lh.link("frontend")} className="reader-return-menu__link">
-              <IconComposer
-                icon="projects64"
-                size={36.923}
-                iconClass="reader-return-menu__link-icon"
-              />
-              <span className="reader-return-menu__link-text">
-                {"Projects"}
-              </span>
-            </Link>
-          </li>
-          <Authorize kind="any">
-            <li className="reader-return-menu__item">
-              <Link
-                to={lh.link("frontendFollowing")}
-                className="reader-return-menu__link"
-              >
-                <IconComposer
-                  icon="following64"
-                  size={36.923}
-                  iconClass="reader-return-menu__link-icon"
-                />
-                <span className="reader-return-menu__link-text">
+          {this.context.isLibrary &&
+            <React.Fragment>
+              <li className="reader-return-menu__item">
+                <Link to={lh.link("frontend")} className="reader-return-menu__link">
+                  <IconComposer
+                    icon="projects64"
+                    size={36.923}
+                    iconClass="reader-return-menu__link-icon"
+                  />
+                  <span className="reader-return-menu__link-text">
+                  {"Projects"}
+                </span>
+                </Link>
+              </li>
+              <Authorize kind="any">
+                <li className="reader-return-menu__item">
+                  <Link
+                    to={lh.link("frontendFollowing")}
+                    className="reader-return-menu__link"
+                  >
+                    <IconComposer
+                      icon="following64"
+                      size={36.923}
+                      iconClass="reader-return-menu__link-icon"
+                    />
+                    <span className="reader-return-menu__link-text">
                   {"Following"}
                 </span>
-              </Link>
-            </li>
-          </Authorize>
+                  </Link>
+                </li>
+              </Authorize>
+            </React.Fragment>
+          }
           <Authorize kind="unauthenticated">
             <li className="reader-return-menu__item">
               <button

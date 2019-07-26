@@ -3,18 +3,22 @@
   display: inline-block;
   padding: 0.76em 1.7em;
   font-size: 11.18px;
-  color: $accentPrimary;
+  color: $neutral70;
+  color: var(--button-color, $neutral70);
   text-decoration: none;
   letter-spacing: 0.134em;
   white-space: nowrap;
-  border: 1px solid $accentPrimary;
+  border: 1px solid $neutral70;
+  border: 1px solid var(--button-color, $neutral70);
   border-radius: 4px;
   transition: color $duration $timing,
-    background-color $duration $timing;
+    background-color $duration $timing,
+    border-color $duration $timing;
 
   &:hover, &:focus {
     color: $neutralWhite;
     background-color: $accentPrimary;
+    border-color: $accentPrimary;
     outline: 0;
   }
 

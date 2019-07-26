@@ -11,11 +11,13 @@ export default class SearchResultsList extends PureComponent {
     results: PropTypes.array,
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func.isRequired,
-    context: PropTypes.string
+    context: PropTypes.string,
+    hideParent: PropTypes.bool
   };
 
   static defaultProps = {
-    context: "frontend"
+    context: "frontend",
+    hideParent: false
   };
 
   componentForType(type) {
@@ -41,6 +43,7 @@ export default class SearchResultsList extends PureComponent {
     if (Component) {
       return (
         <Component
+          hideParent={this.props.hideParent}
           key={result.id}
           result={result}
           context={this.props.context}

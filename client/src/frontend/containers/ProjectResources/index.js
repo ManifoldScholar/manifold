@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Project from "frontend/components/project";
 import LoadingBlock from "global/components/loading-block";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, uiFrontendModeActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import queryString from "query-string";
@@ -57,6 +57,10 @@ class ProjectResourcesContainer extends Component {
     super(props);
     this.state = this.initialState(queryString.parse(props.location.search));
     this.updateResults = debounce(this.updateResults.bind(this), 250);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
   }
 
   componentDidUpdate(prevProps) {

@@ -56,6 +56,7 @@ export class NavigationPrimary extends PureComponent {
 
   render() {
     const currentUser = this.props.authentication.currentUser;
+
     const linkTo = this.props.mode === "backend" ? "frontend" : "backend";
     const backendButtonLabel = this.backendButtonLabel(
       currentUser,
@@ -63,7 +64,7 @@ export class NavigationPrimary extends PureComponent {
     );
     const backendButton =
       backendButtonLabel && currentUser ? (
-        <Link className="header-app__mode-button" to={lh.link(linkTo)}>
+        <Link className="mode-button" to={lh.link(linkTo)}>
           {this.backendButtonLabel(currentUser, this.props.mode)}
         </Link>
       ) : null;
@@ -79,6 +80,7 @@ export class NavigationPrimary extends PureComponent {
           backendButton={backendButton}
           {...this.props}
           style={this.props.mobileStyle}
+          mode={this.props.mode}
         />
       </React.Fragment>
     );

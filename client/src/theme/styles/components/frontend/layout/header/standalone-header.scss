@@ -1,21 +1,27 @@
 /* stylelint-disable property-no-vendor-prefix */
 .standalone-header {
   background-color: $neutral100;
-  transition: background-color 0.3s 0.2s $timing;
   position: fixed;
   left: 0;
   width: 100%;
 
   &--visible {
+    transition: background-color $duration $timing;
     position: fixed;
     background-color: $neutral100;
   }
 
-  &--light {
+  &--dark {
+    --default-focus-color: #{$accentPrimary};
+  }
+
+  &--light:not(.standalone-header--hidden) {
+    @include boxShadow(0px, -10px, 20px, 7px, $neutralBlack, 0.25);
     background-color: $neutral10;
   }
 
   &--hidden {
+    transition: background-color $duration $timing;
     background-color: transparent;
     position: fixed;
   }
@@ -28,11 +34,11 @@
     @include headerContainerPrimary;
     color: $neutralWhite;
 
+
     .standalone-header--light & {
       color: $neutral80;
     }
 
-    max-width: standalone-header-layout(max-width);
     display: -ms-grid;
     display: grid;
     -ms-grid-rows: auto;
@@ -41,11 +47,6 @@
       'heading . hamburger' / auto minmax(75px, 1fr) max-content;
     padding-top: standalone-header-layout(padding-top-mobile);
     padding-bottom: standalone-header-layout(padding-top-mobile);
-
-    @include respond($break40) {
-      padding-top: standalone-header-layout(padding-top-desktop);
-      padding-bottom: standalone-header-layout(padding-top-desktop);
-    }
 
     @include respond($break75) {
       -ms-grid-columns: auto minmax(75px, 1fr) max-content;
@@ -61,29 +62,29 @@
         padding-top: standalone-header-layout(padding-top-desktop);
       }
     }
+
   }
 
   &__header {
     @include templateCopy;
-    opacity: 0;
     position: relative;
     top: 3px;
+    transition: opacity $duration $timing;
+    opacity: 1;
     grid-area: heading;
     line-height: 1.188;
-    transition: opacity 0.2s $timing;
 
     @include respond($break75) {
-      top: 0px;
     }
-
-    opacity: 1;
-    transition: opacity 0.3s 0.2s $timing;
 
     .standalone-header--hidden & {
       opacity: 0;
-      transition: opacity 0.3s 0.2s $timing;
+      transition: opacity $duration $timing;
     }
+  }
 
+  &__title-link {
+    line-height: 1.45;
   }
 
   &__title {
@@ -92,7 +93,10 @@
     margin: 0 16px 0 0;
     font-size: 18px;
     font-weight: $semibold;
-    transition: font-size $duration ease-out;
+
+    a:hover & {
+      text-decoration: underline;
+    }
 
     @include respond($break40) {
       font-size: 21px;
@@ -100,16 +104,10 @@
   }
 
   &__subtitle {
-    display: none;
-    margin-top: 11px;
+    display: inline-block;
     font-size: 18px;
     font-style: italic;
     letter-spacing: 0.028em;
-    transition: font-size $duration ease-out;
-
-    @include respond($break75) {
-      display: inline-block;
-    }
   }
 
   .user-nav {
@@ -126,5 +124,7 @@
     -ms-grid-column: 3;
     -ms-grid-column-align: end;
     justify-self: flex-end;
+    -ms-grid-row-align: baseline;
+    align-self: baseline;
   }
 }

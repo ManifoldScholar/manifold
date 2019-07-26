@@ -19,6 +19,7 @@ import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
 import getRoutes from "routes";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
+import { FrontendModeContext } from "helpers/contexts";
 
 const routes = getRoutes();
 const { visibilityHide } = uiVisibilityActions;
@@ -28,6 +29,7 @@ class ManifoldContainer extends PureComponent {
     return {
       authentication: state.authentication,
       visibility: state.ui.transitory.visibility,
+      frontendMode: state.ui.persistent.frontendMode,
       loading: state.ui.transitory.loading.active,
       fatalError: state.fatalError,
       routing: state.routing,
@@ -114,6 +116,7 @@ class ManifoldContainer extends PureComponent {
 
   render() {
     const fatalError = this.props.fatalError;
+
     const hideSignInUpOverlay = bindActionCreators(
       () => visibilityHide("signInUpOverlay"),
       this.props.dispatch
@@ -127,33 +130,35 @@ class ManifoldContainer extends PureComponent {
       >
         <div id="global-notification-container" />
         <div id="global-overlay-container" />
-        {this.renderTypekit()}
-        {this.props.confirm}
-        <HeadContent />
-        <LoadingBar loading={this.props.loading} />
-        <ReactCSSTransitionGroup
-          transitionName={"overlay-login"}
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}
-        >
-          {this.props.visibility.signInUpOverlay ? (
-            <SignInUp.Overlay
-              key="signInUpOverlay"
-              hideSignInUpOverlay={hideSignInUpOverlay}
-              authentication={this.props.authentication}
-              settings={this.props.settings}
-              dispatch={this.props.dispatch}
-              hash={get(this, "props.routing.locationBeforeTransitions.hash")}
-            />
-          ) : null}
-        </ReactCSSTransitionGroup>
-        {fatalError.error ? (
-          <div className="global-container">
-            <FatalError fatalError={fatalError} />
-          </div>
-        ) : (
-          <FatalErrorBoundary>{renderRoutes(routes)}</FatalErrorBoundary>
-        )}
+        <FrontendModeContext.Provider value={this.props.frontendMode}>
+          {this.renderTypekit()}
+          {this.props.confirm}
+          <HeadContent />
+          <LoadingBar loading={this.props.loading} />
+          <ReactCSSTransitionGroup
+            transitionName={"overlay-login"}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+          >
+            {this.props.visibility.signInUpOverlay ? (
+              <SignInUp.Overlay
+                key="signInUpOverlay"
+                hideSignInUpOverlay={hideSignInUpOverlay}
+                authentication={this.props.authentication}
+                settings={this.props.settings}
+                dispatch={this.props.dispatch}
+                hash={get(this, "props.routing.locationBeforeTransitions.hash")}
+              />
+            ) : null}
+          </ReactCSSTransitionGroup>
+          {fatalError.error ? (
+            <div className="global-container">
+              <FatalError fatalError={fatalError} />
+            </div>
+          ) : (
+            <FatalErrorBoundary>{renderRoutes(routes)}</FatalErrorBoundary>
+          )}
+        </FrontendModeContext.Provider>
       </div>
     );
   }

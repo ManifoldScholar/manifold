@@ -46,7 +46,8 @@ module Validation
                   :remove_avatar, attachment(:avatar), attachment(:hero), :download_url,
                   attachment(:cover), :remove_hero, :draft, :remove_cover,
                   :download_call_to_action, :publication_date, metadata(Project),
-                  :avatar_color, :pending_slug, :tag_list, :dark_mode, :image_credits]
+                  :avatar_color, :pending_slug, :tag_list, :dark_mode, :image_credits,
+                  :standalone_mode, :standalone_mode_press_bar_text, :standalone_mode_press_bar_url]
     relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -319,7 +320,11 @@ module Validation
         theme: [
           :logo_styles,
           :typekit_id,
-          :header_offset
+          :header_offset,
+          :top_bar_text,
+          :top_bar_url,
+          :top_bar_color,
+          :top_bar_mode
         ]
       },
       :remove_press_logo, attachment(:press_logo),

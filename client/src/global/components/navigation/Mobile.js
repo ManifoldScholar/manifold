@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { NavLink, withRouter } from "react-router-dom";
-import { matchPath } from "react-router";
+import { NavLink, withRouter, matchPath } from "react-router-dom";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import memoize from "lodash/memoize";
@@ -10,6 +9,7 @@ import MobileSearch from "./mobile-components/Search";
 import MobileBreadcrumb from "./mobile-components/Breadcrumb";
 import FocusTrap from "focus-trap-react";
 import IconComposer from "global/components/utility/IconComposer";
+import { FrontendModeContext } from "helpers/contexts";
 
 import Authorize from "hoc/authorize";
 import BodyClass from "hoc/body-class";
@@ -26,6 +26,8 @@ export class NavigationMobile extends Component {
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
     style: PropTypes.object
   };
+
+  static contextType = FrontendModeContext;
 
   constructor(props) {
     super(props);
@@ -60,6 +62,14 @@ export class NavigationMobile extends Component {
 
   get triggerIcon() {
     return this.state.open ? "close32" : "menu32";
+  }
+
+  get hasLinks() {
+    return this.props.links && this.props.links.length > 0;
+  }
+
+  get isStandalone() {
+    return this.context.isStandalone;
   }
 
   pathForLink(link) {
@@ -120,6 +130,7 @@ export class NavigationMobile extends Component {
   };
 
   activeRoutes() {
+    if (!this.props.links) return null;
     const active = [];
     this.props.links.forEach(link => {
       const route = lh.routeFromName(link.route);
@@ -127,6 +138,31 @@ export class NavigationMobile extends Component {
       if (match) active.push(link.route);
     });
     return active;
+  }
+
+  renderStandaloneHeading() {
+    if (!this.isStandalone || !this.context.project) return null;
+
+    const { titleFormatted, subtitleFormatted } = this.context.project;
+
+    return (
+      <li className="nested-nav__item">
+        <div className="nested-nav__standalone-heading">
+          {titleFormatted && (
+            <div
+              className="nested-nav__standalone-title"
+              dangerouslySetInnerHTML={{ __html: titleFormatted }}
+            />
+          )}
+          {subtitleFormatted && (
+            <div
+              className="nested-nav__standalone-subtitle"
+              dangerouslySetInnerHTML={{ __html: subtitleFormatted }}
+            />
+          )}
+        </div>
+      </li>
+    );
   }
 
   renderExternalLink(link) {
@@ -216,19 +252,21 @@ export class NavigationMobile extends Component {
               aria-label="Page Links"
               className="nested-nav__list nested-nav__list--primary-links"
             >
-              {this.props.links.map((link, index) => {
-                if (link.ability)
-                  return (
-                    <Authorize
-                      key={`${link.route}-wrapped`}
-                      entity={link.entity}
-                      ability={link.ability}
-                    >
-                      {this.renderItem(link, index)}
-                    </Authorize>
-                  );
-                return this.renderItem(link, index);
-              })}
+              {this.isStandalone && this.renderStandaloneHeading()}
+              {this.hasLinks &&
+                this.props.links.map((link, index) => {
+                  if (link.ability)
+                    return (
+                      <Authorize
+                        key={`${link.route}-wrapped`}
+                        entity={link.entity}
+                        ability={link.ability}
+                      >
+                        {this.renderItem(link, index)}
+                      </Authorize>
+                    );
+                  return this.renderItem(link, index);
+                })}
               {this.props.mode === "frontend" && (
                 <li className="nested-nav__item">
                   <MobileSearch closeNavigation={this.closeNavigation} />
@@ -246,21 +284,24 @@ export class NavigationMobile extends Component {
     const navClasses = classnames({
       "hide-75": true,
       "nested-nav": true,
-      "nested-nav--open": this.state.open
+      "nested-nav--open": this.state.open,
+      "nested-nav--dark": this.props.mode === "backend"
     });
 
     return (
       <React.Fragment>
-        <MobileBreadcrumb
-          links={this.props.links}
-          location={this.props.location}
-        />
+        {this.hasLinks && (
+          <MobileBreadcrumb
+            links={this.props.links}
+            location={this.props.location}
+          />
+        )}
         <nav className={navClasses} aria-label="Mobile Navigation">
           {this.state.open && this.renderNavigationMenu()}
         </nav>
         <button
           onClick={this.toggleOpen}
-          className="mobile-nav-trigger"
+          className="mobile-nav-toggle"
           aria-haspopup
           aria-expanded={this.state.open}
         >

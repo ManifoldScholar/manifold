@@ -18,7 +18,7 @@ export default class FatalError extends PureComponent {
   };
 
   static defaultProps = {
-    headerLineOne: "We’re at a bit of a loose end.",
+    headerLineOne: "We're at a bit of a loose end.",
     headerLineTwo: "Frightfully sorry."
   };
 

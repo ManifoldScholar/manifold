@@ -93,7 +93,33 @@ export class SettingsThemeContainer extends PureComponent {
                 placeholder="Enter Typekit ID"
               />
             </Form.FieldGroup>
-
+            <Form.FieldGroup label={"Press Header Bar"}>
+              <Form.TextInput
+                label="Text"
+                name="attributes[theme][topBarText]"
+                placeholder="Enter Press Bar Text"
+              />
+              <Form.TextInput
+                label="Color"
+                name="attributes[theme][topBarColor]"
+                placeholder="Enter Press Bar Color"
+                instructions="Enter a hex code beginning with #"
+              />
+              <Form.TextInput
+                label="URL"
+                name="attributes[theme][topBarUrl]"
+                placeholder="Enter Press Bar Link URL"
+              />
+              <Form.Select
+                label="Press Bar Display Mode"
+                name="attributes[theme][topBarMode]"
+                options={[
+                  { label: "Disabled", value: "disabled" },
+                  { label: "Always Visible", value: "enforced" },
+                  { label: "Only Visible in Standalone Mode", value: "enabled" }
+                ]}
+              />
+            </Form.FieldGroup>
             <Form.Save text="Save Settings" />
           </FormContainer.Form>
         </Layout.BackendPanel>

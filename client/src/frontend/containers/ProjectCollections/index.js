@@ -4,7 +4,7 @@ import Utility from "frontend/components/utility";
 import ProjectCollection from "frontend/components/project-collection";
 import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, uiFrontendModeActions } from "actions";
 import GlobalUtility from "global/components/utility";
 import { select, meta } from "utils/entityUtils";
 import { projectCollectionsAPI, requests } from "api";
@@ -70,6 +70,10 @@ export class ProjectsCollectionsContainer extends Component {
   constructor(props) {
     super(props);
     this.commonActions = commonActions(props.dispatch);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
   }
 
   componentDidUpdate(prevProps) {

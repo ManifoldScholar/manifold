@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import ResourceCollection from "frontend/components/resource-collection";
 import Utility from "frontend/components/utility";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, uiFrontendModeActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
 import { resourceCollectionsAPI, requests } from "api";
 import HeadContent from "global/components/HeadContent";
@@ -120,6 +120,10 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
+  componentDidMount() {
+    this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.location.search === this.props.location.search) return null;
     this.setState(
@@ -202,11 +206,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
   };
 
   render() {
-    const {
-      project,
-      resourceCollection,
-      settings
-    } = this.props;
+    const { project, resourceCollection, settings } = this.props;
     const filter = this.state.filter;
     const initialFilter = filter || null;
     if (!project || !resourceCollection) return null;
