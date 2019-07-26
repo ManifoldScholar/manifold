@@ -84,20 +84,18 @@ export class FrontendContainer extends Component {
 
     return (
       <BodyClass className={"browse"}>
-        <div>
+        <BackLink.Provider>
           <Utility.ScrollToTop />
-          <ScrollAware>
-            <Layout.Header
-              pages={this.props.pages}
-              visibility={this.props.visibility}
-              match={this.props.match}
-              location={this.props.location}
-              authentication={this.props.authentication}
-              notifications={this.props.notifications}
-              commonActions={this.commonActions}
-              settings={this.props.settings}
-            />
-          </ScrollAware>
+          <Layout.Header
+            pages={this.props.pages}
+            visibility={this.props.visibility}
+            match={this.props.match}
+            location={this.props.location}
+            authentication={this.props.authentication}
+            notifications={this.props.notifications}
+            commonActions={this.commonActions}
+            settings={this.props.settings}
+          />
           <main
             ref={mainContainer => {
               this.mainContainer = mainContainer;
@@ -113,7 +111,7 @@ export class FrontendContainer extends Component {
             commonActions={this.commonActions}
             settings={this.props.settings}
           />
-        </div>
+        </BackLink.Provider>
       </BodyClass>
     );
   }

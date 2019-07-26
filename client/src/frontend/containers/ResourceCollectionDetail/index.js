@@ -12,7 +12,7 @@ import debounce from "lodash/debounce";
 import omitBy from "lodash/omitBy";
 import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
-
+import BackLink from "frontend/components/back-link";
 import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
@@ -225,8 +225,8 @@ export class ResourceCollectionDetailContainer extends PureComponent {
           description={resourceCollection.attributes.description}
           image={resourceCollection.attributes.thumbnailStyles.medium}
         />
-        <Utility.BackLinkPrimary
-          link={lh.link("frontendProject", project.attributes.slug)}
+        <BackLink.Register
+          link={lh.link("frontendProjectDetail", project.attributes.slug)}
           title={project.attributes.titlePlaintext}
         />
         {this.props.slideshowResources && this.props.resources ? (
@@ -244,12 +244,6 @@ export class ResourceCollectionDetailContainer extends PureComponent {
             initialFilterState={initialFilter}
           />
         ) : null}
-        <section className="bg-neutral05">
-          <Utility.BackLinkSecondary
-            link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.titlePlaintext}
-          />
-        </section>
       </div>
     );
   }

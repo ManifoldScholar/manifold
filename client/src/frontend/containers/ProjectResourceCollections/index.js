@@ -6,11 +6,10 @@ import { projectsAPI, requests } from "api";
 import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
-import Utility from "frontend/components/utility";
 import GlobalUtility from "global/components/utility";
 import HeadContent from "global/components/HeadContent";
 import ResourceCollectionList from "frontend/components/resource-collection-list";
-
+import BackLink from "frontend/components/back-link";
 import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
@@ -90,12 +89,10 @@ class ProjectResourceCollectionsContainer extends Component {
         <h1 className="screen-reader-text">
           {`${project.attributes.titlePlaintext} Resource Collections`}
         </h1>
-        <section className="bg-neutral05">
-          <Utility.BackLinkPrimary
-            link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.titlePlaintext}
-          />
-        </section>
+        <BackLink.Register
+          link={lh.link("frontendProjectDetail", project.attributes.slug)}
+          title={project.attributes.titlePlaintext}
+        />
         <section>
           <div className="container">
             {this.props.resourceCollections && (
@@ -112,12 +109,6 @@ class ProjectResourceCollectionsContainer extends Component {
               />
             )}
           </div>
-        </section>
-        <section className="bg-neutral05">
-          <Utility.BackLinkSecondary
-            link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.titlePlaintext}
-          />
         </section>
       </div>
     );

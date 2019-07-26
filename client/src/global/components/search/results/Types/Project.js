@@ -53,7 +53,7 @@ class SearchResultsTypeProject extends PureComponent {
 
   get url() {
     const { attributes } = this.model;
-    return lh.link("frontendProject", attributes.slug);
+    return lh.link("frontendProjectDetail", attributes.slug);
   }
 
   render() {
