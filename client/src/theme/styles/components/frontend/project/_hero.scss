@@ -10,6 +10,9 @@
   padding-top: 20px;
   padding-bottom: 35px;
 
+  color: $neutralWhite;
+  background-color: $neutral95;
+
   @include respond($break60) {
     padding-top: 70px;
     padding-bottom: 80px;
@@ -21,12 +24,10 @@
     background-color: $neutral05;
   }
 
-  &--dark {
-    color: $neutralWhite;
-    background-color: $neutral95;
+  &--standalone {
+    padding-top: 44px;
   }
 
-  // background-image
   &__bg-image-wrapper {
     position: absolute;
     top: 0;
@@ -56,7 +57,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: top;
   }
 
   // Layout
@@ -68,7 +69,7 @@
     display: -ms-grid;
     display: grid;
     grid-row-gap: $grid-gap-small;
-    max-width: 1178px;
+    max-width: standalone-header-layout(max-width);
     -ms-grid-rows: auto $grid-gap-small auto $grid-gap-small auto $grid-gap-small auto;
     -ms-grid-columns: 100%;
 
@@ -84,6 +85,7 @@
       row-gap: $row-gap-large;
       column-gap: $column-gap-large;
     }
+
   }
 
   &__left-top-block,
@@ -128,6 +130,10 @@
     grid-row: 1;
     -ms-grid-column: 1;
     grid-column: 1;
+
+    .project-hero--standalone & {
+      margin-top: 110px;
+    }
 
     @include respond($break60) {
       -ms-grid-row: 1;
@@ -213,12 +219,10 @@
 
   // Meta elements
   &__heading {
-    margin-bottom: 24px;
     line-height: 1.188;
-
-    @include respond($break60) {
-      margin-bottom: 28px;
-    }
+    position: relative;
+    z-index: 50;
+    margin-bottom: 24px;
   }
 
   &__title {
@@ -230,9 +234,11 @@
     @include respond($break60) {
       font-size: 32px;
     }
+
   }
 
   &__subtitle {
+    @include templateCopy;
     margin-top: 2px;
     font-size: 18px;
     font-style: italic;
@@ -242,6 +248,7 @@
       margin-top: 11px;
       font-size: 24px;
     }
+
   }
 
   &__creators,
@@ -347,10 +354,7 @@
   &__hashtag {
     text-decoration: none;
     transition: color $duration $timing;
-
-    .project-hero--dark & {
-      color: inherit;
-    }
+    color: inherit;
 
     &:hover {
       color: $accentPrimary;
@@ -376,7 +380,6 @@
     display: block;
     font-size: 16px;
     font-weight: $semibold;
-    color: $neutral75;
 
     @include respond($break60) {
       font-size: 18px;

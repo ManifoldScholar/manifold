@@ -14,8 +14,7 @@
 @import './overlay-full-header';
 @import './overlay-full-primary';
 @import './checkboxes';
-@import './header-app';
-@import './header-logo';
+@import './header/index';
 @import './notification';
 @import './loading-bar';
 @import './project-list';
@@ -33,3 +32,4 @@
 @import "./pagination-count";
 @import 'annotation/index';
 @import "./comment-more";
+@import './footer';

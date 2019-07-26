@@ -1,0 +1,86 @@
+/* stylelint-disable property-no-vendor-prefix */
+.library-header {
+  &--light {
+    background-color: $neutralWhite;
+  }
+
+  &--dark {
+    background-color: $neutral85;
+  }
+
+  &__inner {
+    @include headerContainerPrimary;
+    width: 100%;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 1fr auto 1fr;
+    grid-template:
+      // logo is in _header-logo.scss
+      'logo breadcrumbs hamburger' / 1fr auto 1fr;
+    height: 100%;
+
+    @include respond($break75) {
+      -ms-grid-columns: 1fr max-content max-content;
+      grid-template: 'logo site-nav . user-nav' / fit-content(300px) max-content 1fr max-content;
+    }
+  }
+
+  .header-logo,
+  .breadcrumb-list,
+  .mobile-nav-toggle {
+    // Set margin on individual items (also applied to .site-nav__item, .user-nav__item),
+    // rather than on the container itself. Done primarily for .user-nav__items (which has pos:rel),
+    // which allows .search-menu  and .user-menu to easily appear at the bottom of the header,
+    // rather than setting magic numbers for `top` and `transformY` values.
+    margin-bottom: header-layout(padding-vertical-mobile);
+
+    @include respond($break40) {
+      margin-bottom: header-layout(padding-vertical-desktop);
+    }
+  }
+
+  .site-nav {
+    align-self: center;
+    grid-area: site-nav;
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+    -ms-grid-row-align: center;
+
+    @include respond($break75) {
+      margin-left: 25px;
+    }
+  }
+
+  .user-nav {
+    align-self: center;
+    grid-area: user-nav;
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    -ms-grid-row-align: center;
+
+    @include respond($break75) {
+      -ms-grid-row: 1;
+      -ms-grid-column: 4;
+    }
+  }
+
+  .breadcrumb-list {
+    align-self: center;
+    grid-area: breadcrumbs;
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+
+    @include respond($break75) {
+      display: none;
+    }
+  }
+
+  .mobile-nav-toggle {
+    grid-area: hamburger;
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    -ms-grid-column-align: end;
+    justify-self: flex-end;
+  }
+}

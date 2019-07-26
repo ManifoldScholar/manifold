@@ -1,0 +1,91 @@
+// User navigation menu in site header
+//===============
+
+.user-nav {
+  --button-color: #{$neutral70};
+
+  height: 100%;
+
+  &--dark {
+    --button-color: #{$accentPrimary};
+  }
+
+  &__list {
+    @include listUnstyled;
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    height: 100%;
+  }
+
+  &__item {
+    padding-bottom: header-layout(padding-vertical-mobile);
+
+    @include respond($break40) {
+      padding-bottom: header-layout(padding-vertical-desktop);
+    }
+
+    @include respond($break80) {
+      position: relative;
+    }
+
+    & + & {
+      margin-left: 1.875vw;
+
+      @include respond($containerWidthFull) {
+        margin-left: 24px;
+      }
+    }
+  }
+
+  .mode-button {
+    margin-right: 4px;
+  }
+
+  @keyframes menuSlideFade {
+    from {
+      opacity: 0;
+      transform: translateY(-1 * header-layout(menu-slide-distance));
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .search-menu,
+  .user-menu {
+    top: 100%;
+    opacity: 0;
+    transition: opacity $duration $timing, transform $duration $timing;
+    transform: translateY(-1 * header-layout(menu-slide-distance));
+  }
+
+  .search-menu {
+    padding: 28px 22px 22px;
+
+    @include respond($break40) {
+      padding: 20px 24px 22px;
+    }
+  }
+
+  .panel-visible .search-menu,
+  .panel-visible .user-menu {
+    opacity: 1;
+    animation: menuSlideFade $duration $timing forwards;
+  }
+
+  .panel-leave .search-menu,
+  .panel-leave .user-menu {
+    opacity: 1;
+    transform: translateY(0);
+    animation: menuSlideFade $duration $timing backwards;
+  }
+
+  .panel-leave.panel-leave-active .search-menu,
+  .panel-leave.panel-leave-active .user-menu {
+     opacity: 0;
+     transform: translateY(-1 * header-layout(menu-slide-distance));
+  }
+}

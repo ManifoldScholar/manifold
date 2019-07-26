@@ -46,16 +46,24 @@
   }
 }
 
-.hide-60 {
-  @include hide($break60);
-}
-
 .show-50 {
   @include show($break50);
 }
 
+.hide-60 {
+  @include hide($break60);
+}
+
 .show-60 {
   @include show($break60);
+}
+
+.hide-75 {
+  @include hide($break75);
+}
+
+.show-75 {
+  @include show($break75, block);
 }
 
 
@@ -210,12 +218,10 @@ $readerContainerWidths: (1063px, 916px, 790px, 680px, 500px);
 @mixin headerContainerPrimary {
   @include containerPrototype;
   position: relative;
-  padding-top: 9px;
-  padding-bottom: 9px;
+  padding-top: header-layout(padding-vertical-mobile);
 
   @include respond($break40) {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: header-layout(padding-vertical-desktop);
   }
 }
 
