@@ -50,7 +50,7 @@ export class UserMenuBodyComponent extends Component {
             >
               <IconComposer
                 icon="editProfile24"
-                size={53.3}
+                size={32}
                 iconClass="user-menu__icon"
               />
               <span className="user-menu__link-text">Edit Profile</span>
@@ -67,7 +67,7 @@ export class UserMenuBodyComponent extends Component {
             >
               <IconComposer
                 icon="notifications24"
-                size={53.3}
+                size={32}
                 iconClass="user-menu__icon"
               />
               <span className="user-menu__link-text">Notifications</span>
@@ -84,7 +84,7 @@ export class UserMenuBodyComponent extends Component {
             >
               <IconComposer
                 icon="logout24"
-                size={53.3}
+                size={32}
                 iconClass="user-menu__icon"
               />
               <span className="user-menu__link-text">Logout</span>
