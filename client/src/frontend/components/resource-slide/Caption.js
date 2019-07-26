@@ -34,10 +34,13 @@ export default class ResourceListSlideCaption extends Component {
 
   componentDidMount() {
     this.checkExpandable();
-
     // Check expandable on resize
-    const debouncedExpand = debounce(this.checkExpandable, 120);
-    window.addEventListener("resize", debouncedExpand);
+    this.debouncedExpand = debounce(this.checkExpandable, 120);
+    window.addEventListener("resize", this.debouncedExpand);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.debouncedExpand);
   }
 
   componentDidUpdate() {
