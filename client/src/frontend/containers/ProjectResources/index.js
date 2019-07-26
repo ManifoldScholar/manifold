@@ -22,10 +22,6 @@ const perPage = 10;
 
 class ProjectResourcesContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
-    const projectRequest = request(
-      projectsAPI.show(match.params.id),
-      requests.feProject
-    );
     const params = queryString.parse(location.search);
     const pagination = {
       number: params.page ? params.page : page,
@@ -36,14 +32,12 @@ class ProjectResourcesContainer extends Component {
       projectsAPI.resources(match.params.id, filter, pagination),
       requests.feResources
     );
-    const { promise: one } = dispatch(projectRequest);
-    const { promise: two } = dispatch(resourcesRequest);
-    return Promise.all([one, two]);
+    const { promise: one } = dispatch(resourcesRequest);
+    return Promise.all([one]);
   };
 
   static mapStateToProps = state => {
     const props = {
-      project: select(requests.feProject, state.entityStore),
       resources: select(requests.feResources, state.entityStore),
       meta: meta(requests.feResources, state.entityStore)
     };
@@ -75,7 +69,6 @@ class ProjectResourcesContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(requests.feProject));
     this.props.dispatch(flush(requests.feResources));
   }
 
