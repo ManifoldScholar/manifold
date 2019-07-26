@@ -70,7 +70,7 @@ export default class ProjectRow extends PureComponent {
     ) {
       return lh.link("backendProject", this.id);
     }
-    return lh.link("frontendProject", this.id);
+    return lh.link("frontendProjectDetail", this.id);
   }
 
   get label() {

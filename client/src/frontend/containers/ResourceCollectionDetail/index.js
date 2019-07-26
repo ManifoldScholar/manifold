@@ -5,7 +5,7 @@ import ResourceCollection from "frontend/components/resource-collection";
 import Utility from "frontend/components/utility";
 import { entityStoreActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
-import { projectsAPI, resourceCollectionsAPI, requests } from "api";
+import { resourceCollectionsAPI, requests } from "api";
 import HeadContent from "global/components/HeadContent";
 import queryString from "query-string";
 import debounce from "lodash/debounce";
@@ -20,12 +20,6 @@ const page = 1;
 const perPage = 10;
 
 export class ResourceCollectionDetailContainer extends PureComponent {
-  static fetchProject(id, dispatch) {
-    const p = projectsAPI.show(id);
-    const { promise } = dispatch(request(p, requests.tmpProject));
-    return promise;
-  }
-
   static fetchCollection(id, dispatch) {
     const c = resourceCollectionsAPI.show(id);
     const { promise } = dispatch(request(c, requests.feResourceCollection));
@@ -51,7 +45,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
   static fetchData = (getState, dispatch, location, match) => {
     const self = ResourceCollectionDetailContainer;
     const state = getState();
-    const { id, resourceCollectionId } = match.params;
+    const { resourceCollectionId } = match.params;
     const promises = [];
     const params = queryString.parse(location.search);
     const filter = omitBy(params, (v, k) => k === "page");
@@ -60,11 +54,6 @@ export class ResourceCollectionDetailContainer extends PureComponent {
       size: perPage
     };
     const isFirstPage = pagination.number === 1;
-
-    // Load project, unless it is already loaded
-    if (!isEntityLoaded("projects", id, state)) {
-      promises.push(self.fetchProject(id, dispatch));
-    }
 
     // Load the collection, unless it is already loaded
     if (!isEntityLoaded("resourceCollections", resourceCollectionId, state)) {
@@ -99,7 +88,6 @@ export class ResourceCollectionDetailContainer extends PureComponent {
 
   static mapStateToProps = (state, ownProps) => {
     const props = {
-      project: grab("projects", ownProps.match.params.id, state.entityStore),
       resourceCollection: grab(
         "resourceCollections",
         ownProps.match.params.resourceCollectionId,
@@ -157,7 +145,6 @@ export class ResourceCollectionDetailContainer extends PureComponent {
   }
 
   flushStoreRequests = () => {
-    this.props.dispatch(flush(requests.tmpProject));
     this.props.dispatch(flush(requests.feSlideshow));
     this.props.dispatch(flush(requests.feResourceCollection));
     this.props.dispatch(flush(requests.feCollectionResources));
@@ -215,7 +202,11 @@ export class ResourceCollectionDetailContainer extends PureComponent {
   };
 
   render() {
-    const { project, resourceCollection, settings } = this.props;
+    const {
+      project,
+      resourceCollection,
+      settings
+    } = this.props;
     const filter = this.state.filter;
     const initialFilter = filter || null;
     if (!project || !resourceCollection) return null;

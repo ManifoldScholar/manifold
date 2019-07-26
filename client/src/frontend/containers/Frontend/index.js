@@ -11,8 +11,6 @@ import { select, isLoaded } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
 import { renderRoutes } from "react-router-config";
 import get from "lodash/get";
-
-import ScrollAware from "hoc/scroll-aware";
 import BodyClass from "hoc/body-class";
 
 const { request } = entityStoreActions;

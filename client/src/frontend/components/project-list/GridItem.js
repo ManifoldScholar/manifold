@@ -126,7 +126,7 @@ export default class ProjectGridItem extends Component {
 
     return (
       <React.Fragment>
-        <Link to={lh.link("frontendProject", project.attributes.slug)}>
+      <Link to={lh.link("frontendProjectDetail", project.attributes.slug)}>
           <figure className={figureClass}>
             <GlobalProject.Avatar project={project} />
           </figure>

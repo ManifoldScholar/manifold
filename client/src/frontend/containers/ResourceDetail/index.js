@@ -5,12 +5,7 @@ import Utility from "frontend/components/utility";
 import Resource from "frontend/components/resource";
 import { entityStoreActions, fatalErrorActions } from "actions";
 import { select } from "utils/entityUtils";
-import {
-  projectsAPI,
-  resourcesAPI,
-  resourceCollectionsAPI,
-  requests
-} from "api";
+import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
 import HeadContent from "global/components/HeadContent";
@@ -22,13 +17,10 @@ const { request, flush } = entityStoreActions;
 
 export class ResourceDetailContainer extends PureComponent {
   static fetchData = (getState, dispatch, location, match) => {
-    const projectFetch = projectsAPI.show(match.params.id);
     const resourceFetch = resourcesAPI.show(match.params.resourceId);
-    const projectAction = request(projectFetch, requests.feProject);
     const resourceAction = request(resourceFetch, requests.feResource);
-    const { promise: one } = dispatch(projectAction);
-    const { promise: two } = dispatch(resourceAction);
-    const promises = [one, two];
+    const { promise: one } = dispatch(resourceAction);
+    const promises = [one];
     if (match.params.resourceCollectionId) {
       const collectionFetch = resourceCollectionsAPI.show(
         match.params.resourceCollectionId
@@ -37,8 +29,8 @@ export class ResourceDetailContainer extends PureComponent {
         collectionFetch,
         requests.feResourceCollection
       );
-      const { promise: three } = dispatch(collectionAction);
-      promises.push(three);
+      const { promise: two } = dispatch(collectionAction);
+      promises.push(two);
     }
     return Promise.all(promises);
   };
@@ -49,7 +41,6 @@ export class ResourceDetailContainer extends PureComponent {
         requests.feResourceCollection,
         state.entityStore
       ),
-      project: select(requests.feProject, state.entityStore),
       resource: select(requests.feResource, state.entityStore),
       visibility: state.ui.transitory.visibility
     };
@@ -78,7 +69,6 @@ export class ResourceDetailContainer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(requests.feProject));
     this.props.dispatch(flush(requests.feResource));
   }
 
@@ -112,7 +102,8 @@ export class ResourceDetailContainer extends PureComponent {
   }
 
   render() {
-    const { project, resource, settings, resourceCollection } = this.props;
+    const { project, resource, resourceCollection, settings } = this.props;
+
     if (!project || !resource) {
       return <LoadingBlock />;
     }
