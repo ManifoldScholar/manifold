@@ -8,9 +8,9 @@ import { select } from "utils/entityUtils";
 import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
+import BackLink from "frontend/components/back-link";
 import HeadContent from "global/components/HeadContent";
 import some from "lodash/some";
-
 import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
@@ -121,13 +121,13 @@ export class ResourceDetailContainer extends PureComponent {
           }
         />
         {resourceCollection ? (
-          <Utility.BackLinkPrimary
+          <BackLink.Register
             backText="Back to Collection"
             link={this.collectionUrl()}
             title={resourceCollection.attributes.title}
           />
         ) : (
-          <Utility.BackLinkPrimary
+          <BackLink.Register
             backText="Back to Project Resources"
             link={this.projectUrl()}
             title={project.attributes.titlePlaintext}

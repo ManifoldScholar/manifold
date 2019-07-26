@@ -42,7 +42,7 @@ class SearchResultsTypeText extends PureComponent {
 
   get parentUrl() {
     const { slug } = this.project;
-    return lh.link("frontendProject", slug);
+    return lh.link("frontendProjectDetail", slug);
   }
 
   get createdAt() {

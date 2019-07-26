@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Project from "frontend/components/project";
-import Utility from "frontend/components/utility";
 import LoadingBlock from "global/components/loading-block";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -13,7 +12,7 @@ import omitBy from "lodash/omitBy";
 import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
-
+import BackLink from "frontend/components/back-link";
 import withSettings from "hoc/with-settings";
 
 const { request, flush } = entityStoreActions;
@@ -149,15 +148,10 @@ class ProjectResourcesContainer extends Component {
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
-        <h1 className="screen-reader-text">
-          {`${project.attributes.titlePlaintext} Resources`}
-        </h1>
-        <section className="bg-neutral05">
-          <Utility.BackLinkPrimary
-            link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.titlePlaintext}
-          />
-        </section>
+        <BackLink.Register
+          link={lh.link("frontendProjectDetail", project.attributes.slug)}
+          title={project.attributes.titlePlaintext}
+        />
         {this.props.resources ? (
           <Project.Resources
             project={project}
@@ -169,12 +163,6 @@ class ProjectResourcesContainer extends Component {
             itemHeadingLevel={3}
           />
         ) : null}
-        <section className="bg-neutral05">
-          <Utility.BackLinkSecondary
-            link={lh.link("frontendProject", project.attributes.slug)}
-            title={project.attributes.titlePlaintext}
-          />
-        </section>
       </div>
     );
   }
