@@ -49,9 +49,9 @@
 
       @include respond($break65) {
         @include panelRounded;
+        @include boxShadow(0, 31px, 26px, -13px, $neutralBlack, 0.33);
         padding: 0;
         border: 0;
-        box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
       }
     }
   }
@@ -79,7 +79,7 @@
 
         @include respond($break65) {
           @include panelRounded;
-          box-shadow: 0 31px 26px -13px rgba($neutralBlack, 0.33);
+          @include boxShadow(0, 31px, 26px, -13px, $neutralBlack, 0.33);
         }
       }
     }

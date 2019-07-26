@@ -122,6 +122,10 @@
   background-color: $neutral95;
 }
 
+@mixin boxShadow($x: 10px, $y: 31px, $blur: 44px, $spread: 2px, $color: $neutralBlack, $opacity: 0.13) {
+  box-shadow: $x $y $blur $spread rgba($color, $opacity);
+}
+
 
 // SVG Icons
 // --------------------------------------------------------
