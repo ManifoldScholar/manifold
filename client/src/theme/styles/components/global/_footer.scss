@@ -1,0 +1,392 @@
+.app-footer {
+  padding-top: 32px;
+  background-color: $neutral75;
+
+  @include respond($break50) {
+    padding-top: 40px;
+  }
+
+  @include respond($break65) {
+    padding-top: 67px;
+  }
+
+  &--reader {
+    padding-top: 0;
+  }
+
+  // Breaking BEM rules here to keep things a little simpler in this complex footer.
+  &--branded {
+    .app-footer__column--right {
+      display: none;
+      @include respond($break65) {
+        display: block;
+      }
+    }
+    .app-footer-search-form {
+    }
+  }
+
+  &--standalone {
+    padding-top: 0;
+  }
+
+  &__columns {
+    @include clearfix;
+
+    margin-bottom: 30px;
+
+    @include respond($break65) {
+      min-height: 105px;
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column-reverse;
+
+    @include respond($break65) {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+  }
+
+  &__socials {
+    float: right;
+    width: 200px;
+    margin-top: 38px;
+  }
+
+  &__socials-list {
+    @include listUnstyled;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  &__socials-item {
+    padding: 0;
+
+    &:hover {
+      svg {
+        color: $accentPrimary;
+      }
+    }
+
+    .svg-icon--socialTwitter32 {
+      margin-left: 10px; // A little adjustment
+    }
+  }
+
+  &__column {
+
+    &--right {
+
+      padding-top: 30px;
+
+      @include respond($break65) {
+        padding-top: 0;
+        order: 2;
+      }
+    }
+
+    &--left {
+      @include respond($break65) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__copyright {
+    color: $neutral50;
+    position: relative;
+    padding-bottom: 20px;
+    @include templateCopy;
+    font-size: 14px;
+
+    @include respond($break30) {
+      padding-top: 8px;
+      padding-bottom: 25px;
+    }
+
+    @include respond($break40) {
+      font-size: 16px;
+    }
+
+    &--standalone {
+      padding: 0;
+    }
+
+    &--with-top-margin {
+      margin-top: 30px;
+      @include respond($break65) {
+        padding-top: 67px;
+      }
+    }
+
+    a {
+      color: inherit;
+    }
+
+  }
+
+
+  &__press-logo {
+    display: none;
+    padding: 0;
+    margin-bottom: 14px;
+
+    @include respond($break65) {
+      display: inline-block;
+      float: right;
+      margin-bottom: 0;
+    }
+  }
+
+  &__press-logo-image {
+    max-width: 328px;
+    max-height: 202px;
+  }
+
+}
+
+
+.app-footer-navigation {
+
+  &--mobile {
+    @include respond($break85) {
+      display: none;
+    }
+  }
+
+  &--desktop {
+    display: none;
+
+    @include respond($break85) {
+      display: block;
+    }
+  }
+
+  margin-top: -20px;
+  margin-bottom: 20px;
+  @include listUnstyled;
+  font-size: 16px;
+
+  @include respond($break75) {
+    margin-bottom: 0;
+  }
+
+  &__list {
+    @include listUnstyled;
+    display: flex;
+    flex-wrap: wrap;
+    @include respond($break85) {
+    }
+  }
+
+  &__group {
+    @include listUnstyled;
+    margin-right: 30px;
+    margin-bottom: .8em;
+    max-width: 150px;
+
+    @include respond($break90) {
+      margin-right: 70px;
+      max-width: 160px;
+    }
+
+  }
+
+  &__item {
+
+    & + .app-footer-navigation__item {
+      margin-top: .8em;
+    }
+
+    @include templateHead;
+    display: flex;
+    font-size: 17px;
+    font-weight: $medium;
+  }
+
+  &__icon {
+    position: relative;
+    top: -1px;
+    margin-right: 14px;
+    color: $neutral50;
+    transition: color $duration $timing;
+
+    .app-footer-navigation__link:hover &,
+    .app-footer-navigation__link:focus & {
+      color: $accentPrimary;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    transition: color $duration $timing;
+    color: $neutralWhite;
+    cursor: pointer;
+
+    &:hover, &:focus {
+      color: $accentPrimary;
+      outline: 0;
+    }
+  }
+
+  &__link-text {
+
+  }
+}
+
+.app-footer-powered-by {
+
+  display: block;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: $neutral80;
+  transition: background-color $duration $timing;
+
+  &--standalone {
+    background-color: $neutral90;
+  }
+
+  &--with-hover {
+    &:hover,
+    &:focus {
+      background-color: $accentPrimary;
+      outline: 0;
+    }
+  }
+
+  &__copyright {
+    @include templateCopy;
+    vertical-align: top;
+    line-height: 1.4em;
+    font-weight: normal;
+    display: inline-block;
+    margin-top: 13px;
+    font-size: 15px;
+
+    @include respond($break65) {
+      margin-top: -6px;
+      font-size: 17px;
+
+    }
+
+  }
+
+  &__logo {
+    @include templateHead;
+    display: block;
+    font-size: 20px;
+    font-weight: $semibold;
+    line-height: 33px;
+    color: $neutralWhite;
+    text-decoration: none;
+
+    &--dull {
+      @include respond($break65) {
+        color: $neutral30;
+      }
+    }
+  }
+
+  &__logo-icon {
+    position: relative;
+    top: -2px;
+    margin-right: 14px;
+    color: $accentPrimary;
+    transition: color $duration $timing;
+
+    .app-footer-powered-by--with-hover:hover &,
+    .app-footer-powered-by__logo--with-hover:hover & {
+      color: $neutralWhite;
+    }
+
+    &--dull {
+      @include respond($break65) {
+        color: $neutral70;
+      }
+    }
+
+  }
+
+  &__logo-text {
+
+    a, a:visited {
+      color: $accentPrimary;
+    }
+
+    a:hover {
+      color: $accentPrimaryPale;
+    }
+
+    display: inline-block;
+
+    &--tiny {
+      margin-top: 11px;
+      font-size: 12px;
+      line-height: 1.4em;
+      @include respond($break65) {
+        margin-top: 0;
+        font-size: 13px;
+      }
+    }
+
+    &--neutral {
+      color: $neutral70;
+      transition: color $duration $timing;
+
+      .app-footer-powered-by--with-hover:hover &,
+      .app-footer-powered-by__logo--with-hover:hover & {
+        color: $neutralWhite;
+      }
+    }
+
+    &--white {
+      transition: color $duration $timing;
+
+      .app-footer-powered-by--with-hover:hover & {
+        color: $neutral80;
+      }
+      .app-footer-powered-by__logo--with-hover:hover & {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  &__postscript {
+    margin-top: 20px;
+  }
+
+}
+
+
+.app-footer-search-form {
+
+  input {
+    border: 1px solid;
+  }
+
+  @include respond($break65) {
+    input {
+      border: 2px solid;
+    }
+  }
+
+  &--with-top-margin {
+    margin-top: 30px;
+
+    @include respond($break65) {
+      margin-top: 60px;
+    }
+
+  }
+
+}
+

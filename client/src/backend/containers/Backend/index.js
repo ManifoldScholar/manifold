@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Utility from "global/components/utility";
-import LayoutFrontend from "frontend/components/layout";
 import LayoutBackend from "backend/components/layout";
+import Footers from "global/components/Footers";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, requests } from "api";
 import { uiStateSnapshotActions, entityStoreActions } from "actions";
@@ -110,7 +110,7 @@ export class BackendContainer extends PureComponent {
           >
             {childRoutes(this.props.route, { childProps: this.childProps() })}
           </main>
-          <LayoutFrontend.Footer
+          <Footers.FrontendFooter
             pages={this.props.pages}
             authentication={this.props.authentication}
             commonActions={this.commonActions}

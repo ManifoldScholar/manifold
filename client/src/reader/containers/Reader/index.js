@@ -8,7 +8,7 @@ import Layout from "reader/components/layout";
 import Notes from "reader/components/notes";
 import Toc from "reader/components/Toc";
 import FooterMenu from "reader/components/FooterMenu";
-import Footer from "reader/components/Footer";
+import Footers from "global/components/Footers";
 import Header from "reader/components/Header";
 import ReaderNotes from "reader/containers/ReaderNotes";
 import { select, grab, isEntityLoaded } from "utils/entityUtils";
@@ -267,7 +267,7 @@ export class ReaderContainer extends Component {
             </ReactCSSTransitionGroup>
             {this.renderRoutes()}
           </main>
-          <Footer text={this.props.text} />
+          <Footers.ReaderFooter text={this.props.text} />
           <FooterMenu
             visibility={this.props.visibility}
             commonActions={this.commonActions}
