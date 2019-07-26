@@ -3,7 +3,7 @@
   display: none;
   background-color: $neutralWhite;
 
-  .header-app.dark & {
+  &--dark {
     background-color: $neutral110;
   }
 
@@ -92,7 +92,7 @@
       text-align: left;
       background-color: $neutral05;
 
-      .header-app.dark & {
+      .nested-nav--dark & {
         background-color: $neutral95;
       }
     }
@@ -115,11 +115,11 @@
       color: $neutral100;
     }
 
-    .header-app.dark &.active {
+    .nested-nav--dark &.active {
       color: $neutralWhite;
     }
 
-    .header-app.dark & {
+    .nested-nav--dark & {
       color: $neutral45;
     }
   }
@@ -157,8 +157,8 @@
   &__disclosure-button {
     &:hover,
     &:focus,
-    .header-app.dark &:hover,
-    .header-app.dark &:hover {
+    .nested-nav--dark &:hover,
+    .nested-nav--dark &:hover {
       color: $accentPrimary;
       outline: 0;
     }

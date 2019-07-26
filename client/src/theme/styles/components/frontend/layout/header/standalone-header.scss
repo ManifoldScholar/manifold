@@ -1,0 +1,130 @@
+/* stylelint-disable property-no-vendor-prefix */
+.standalone-header {
+  background-color: $neutral100;
+  transition: background-color 0.3s 0.2s $timing;
+  position: fixed;
+  left: 0;
+  width: 100%;
+
+  &--visible {
+    position: fixed;
+    background-color: $neutral100;
+  }
+
+  &--light {
+    background-color: $neutral10;
+  }
+
+  &--hidden {
+    background-color: transparent;
+    position: fixed;
+  }
+
+  &__shim {
+    position: relative;
+  }
+
+  &__inner {
+    @include headerContainerPrimary;
+    color: $neutralWhite;
+
+    .standalone-header--light & {
+      color: $neutral80;
+    }
+
+    max-width: standalone-header-layout(max-width);
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: auto minmax(25px, 1fr) max-content;
+    grid-template:
+      'heading . hamburger' / auto minmax(75px, 1fr) max-content;
+    padding-top: standalone-header-layout(padding-top-mobile);
+    padding-bottom: standalone-header-layout(padding-top-mobile);
+
+    @include respond($break40) {
+      padding-top: standalone-header-layout(padding-top-desktop);
+      padding-bottom: standalone-header-layout(padding-top-desktop);
+    }
+
+    @include respond($break75) {
+      -ms-grid-columns: auto minmax(75px, 1fr) max-content;
+      grid-template:
+        'heading . user-nav' / auto minmax(75px, 1fr) max-content;
+      padding-bottom: 0;
+    }
+
+    &--hidden {
+      padding-top: standalone-header-layout(padding-top-mobile);
+
+      @include respond($break60) {
+        padding-top: standalone-header-layout(padding-top-desktop);
+      }
+    }
+  }
+
+  &__header {
+    @include templateCopy;
+    opacity: 0;
+    position: relative;
+    top: 3px;
+    grid-area: heading;
+    line-height: 1.188;
+    transition: opacity 0.2s $timing;
+
+    @include respond($break75) {
+      top: 0px;
+    }
+
+    opacity: 1;
+    transition: opacity 0.3s 0.2s $timing;
+
+    .standalone-header--hidden & {
+      opacity: 0;
+      transition: opacity 0.3s 0.2s $timing;
+    }
+
+  }
+
+  &__title {
+    @include templateHead;
+    display: inline-block;
+    margin: 0 16px 0 0;
+    font-size: 18px;
+    font-weight: $semibold;
+    transition: font-size $duration ease-out;
+
+    @include respond($break40) {
+      font-size: 21px;
+    }
+  }
+
+  &__subtitle {
+    display: none;
+    margin-top: 11px;
+    font-size: 18px;
+    font-style: italic;
+    letter-spacing: 0.028em;
+    transition: font-size $duration ease-out;
+
+    @include respond($break75) {
+      display: inline-block;
+    }
+  }
+
+  .user-nav {
+    grid-area: user-nav;
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    justify-self: end;
+    -ms-grid-column-align: end;
+  }
+
+  .mobile-nav-toggle {
+    grid-area: hamburger;
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    -ms-grid-column-align: end;
+    justify-self: flex-end;
+  }
+}

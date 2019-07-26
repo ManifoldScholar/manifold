@@ -81,24 +81,15 @@
   clip: rect(0 0 0 0);
   border: 0;
 }
-
 // Layout
 // --------------------------------------------------------
 // Apply to a pseudo element to get a tail/triangle pointing up
-@mixin tailUp($color: $neutral10) {
+@mixin tailUp($color: $neutral10, $height: 17px) {
   width: 0;
   height: 0;
-  border-color: transparent transparent $neutral10;
+  border-color: transparent transparent $color;
   border-style: solid;
-  border-width: 0 15.5px 17px;
-}
-
-// Added to UI panels/dropdowns with tails
-@mixin panelTail {
-  position: absolute;
-  top: -17px;
-  right: 28px;
-  @include tailUp;
+  border-width: 0 15.5px $height;
 }
 
 // Background color utility classes
@@ -153,14 +144,14 @@
   border-radius: 7px;
 }
 
-@mixin buttonAvatar($size: 36) {
+@mixin buttonAvatar($size: 36, $color: $neutral70) {
   @include buttonUnstyled;
   // Default size from browse view that may be
   // changed in scope
   width: #{$size}px;
   height: #{$size}px;
   overflow: hidden;
-  color: $neutral70;
+  color: $color;
   text-align: center;
   border-radius: 100%;
 

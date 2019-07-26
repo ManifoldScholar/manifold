@@ -1,23 +1,45 @@
 // User Menu button and panel global styles
 .button-avatar {
   @include buttonUnstyled;
+  height: 100%;
+  vertical-align: middle;
   transition: background-color $duration $timing;
 
   .avatar {
-    @include buttonAvatar(32);
+    @include buttonAvatar(32, var(--button-color, $neutral70));
+  }
 
-    @include respond($break40) {
-      @include buttonAvatar(42);
+  &:focus {
+    outline: 0;
+
+    .avatar {
+      @include focusVisibleOutline;
+      outline-offset: 2px;
+    }
+
+    &:active {
+      .avatar {
+        outline: 0;
+      }
     }
   }
 }
 
 // Global styles
 .user-menu {
-  background-color: $neutral10;
+  $menuWidth: 235px;
+  $tailHeight: 17px;
+
+  @include boxShadow;
+  min-width: $menuWidth;
+  background-color: $neutral05;
+  border-radius: $panelRoundedRadius;
 
   &__tail {
-    @include panelTail;
+    @include tailUp($neutral05, $tailHeight);
+    position: absolute;
+    top: -$tailHeight;
+    right: 28px;
     display: none;
   }
 
@@ -27,15 +49,7 @@
 
   &__item {
     @include templateHead;
-    font-size: 20px;
-
-    @include respond($break40) {
-      font-size: 22px;
-    }
-
-    & + & {
-      border-top: 2px solid $neutral30;
-    }
+    font-size: 17px;
   }
 
   &__link {
@@ -43,8 +57,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    min-height: 66px;
-    padding: 9px 25px;
+    padding: 14px 25px;
     color: $neutral80;
     text-decoration: none;
 
@@ -64,6 +77,24 @@
     .user-menu__link:hover &,
     .user-menu__link:focus-visible & {
       color: $accentPrimary;
+    }
+  }
+
+  // browse styles
+  position: absolute;
+  right: -20px;
+  white-space: nowrap;
+
+  @include respond($break40) {
+    right: -24px;
+  }
+
+  &__tail {
+    right: 21px;
+    display: block;
+
+    @include respond($break40) {
+      right: 28px;
     }
   }
 }

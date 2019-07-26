@@ -1,0 +1,11 @@
+.header-app {
+  width: 100%;
+  top: 0;
+  position: relative;
+
+  &--sticky {
+    position: sticky;
+  }
+
+  &--static {}
+}

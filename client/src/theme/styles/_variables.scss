@@ -171,12 +171,14 @@ $break20: 350px;
 // Minimum site width
 $break10: $containerWidthMin;
 
-$panelRoundedRadius: 8px;
-
 // Height Breakpoints
 // --------------------------
 // Rarely used, but helpful for things like modals and height dependent interfaces
 $hbreak90: 900px;
+
+// Appearance variables
+// --------------------------
+$panelRoundedRadius: 8px;
 
 // Component variables
 // --------------------------
@@ -195,4 +197,25 @@ $event-entity: (
 // get value from $event-entity map
 @function event-entity($property) {
   @return map-get($event-entity, $property);
+}
+
+$header-layout: (
+  padding-vertical-mobile: 9px,
+  padding-vertical-desktop: 20px,
+  menu-slide-distance: 30px
+);
+
+@function header-layout($property) {
+  @return map-get($header-layout, $property);
+}
+
+// shared between StandaloneHeader & Project.Hero components
+$standalone-header-layout: (
+  max-width: 1178px,
+  padding-top-mobile: 24px,
+  padding-top-desktop: 45px
+);
+
+@function standalone-header-layout($property) {
+  @return map-get($standalone-header-layout, $property);
 }

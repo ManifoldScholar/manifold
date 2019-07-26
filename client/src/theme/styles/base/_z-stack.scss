@@ -27,7 +27,7 @@
   z-index: 350;
 }
 
-.mobile-nav-trigger {
+.mobile-nav-toggle {
   z-index: 550;
 }
 
@@ -47,12 +47,12 @@
   z-index: 200;
 }
 
-.header-app {
-  z-index: 200;
+.header-app--sticky {
+  z-index: 225;
+}
 
-  .header-container {
-    z-index: 200;
-  }
+.header-app--static {
+  z-index: 200;
 }
 
 .header-reader {
