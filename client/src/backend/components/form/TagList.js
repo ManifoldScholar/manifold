@@ -114,21 +114,21 @@ class FormTagList extends Component {
             <label htmlFor={`${this.idPrefix}-${id}`} className={labelClass}>
               {this.props.label}
             </label>
-            <ConnectedFormInputs.PredictiveInput
-              placeholder="Enter a Tag"
-              fetch={tagsAPI.index}
-              fetchOptions={this.fetchOptions}
-              onSelect={this.handleAdd}
-              onNew={this.handleAdd}
-              label={this.tagLabel}
-              idForError={`${this.idForErrorPrefix}-${id}`}
-              idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
-            />
-            <Instructions
-              instructions={this.props.instructions}
-              id={`${this.idForInstructionsPrefix}-${id}`}
-            />
             <div className="has-many-list">
+              <ConnectedFormInputs.PredictiveInput
+                placeholder="Enter a Tag"
+                fetch={tagsAPI.index}
+                fetchOptions={this.fetchOptions}
+                onSelect={this.handleAdd}
+                onNew={this.handleAdd}
+                label={this.tagLabel}
+                idForError={`${this.idForErrorPrefix}-${id}`}
+                idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
+              />
+              <Instructions
+                instructions={this.props.instructions}
+                id={`${this.idForInstructionsPrefix}-${id}`}
+              />
               {this.renderList(this.props.value)}
             </div>
           </GlobalForm.Errorable>

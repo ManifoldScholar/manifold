@@ -5,7 +5,9 @@ import ListItem from "./ListItem";
 import isString from "lodash/isString";
 import classnames from "classnames";
 
-export default class FormHasManyList extends PureComponent {
+import withScreenReaderStatus from "hoc/with-screen-reader-status";
+
+class FormHasManyList extends PureComponent {
   static displayName = "Form.HasMany.List";
 
   static propTypes = {
@@ -35,6 +37,9 @@ export default class FormHasManyList extends PureComponent {
     newEntities[target] = entity;
     newEntities[index] = tmp;
     this.props.onChange(newEntities, "move");
+    this.props.setScreenReaderStatus(
+      `${this.props.entityName(entity)} moved ${direction}.`
+    );
   };
 
   onRemove = (event, entity) => {
@@ -43,6 +48,9 @@ export default class FormHasManyList extends PureComponent {
       return compare !== entity;
     });
     this.props.onChange(newEntities, "remove");
+    this.props.setScreenReaderStatus(
+      `${this.props.entityName(entity)} removed.`
+    );
   };
 
   maybeRenderPlaceholder(renderConditions) {
@@ -61,7 +69,11 @@ export default class FormHasManyList extends PureComponent {
     });
 
     return (
-      <ul className={listClasses}>
+      <ul
+        role="group"
+        aria-label={`Active ${this.props.label}`}
+        className={listClasses}
+      >
         {hasEntities
           ? entities.map((entity, index) => {
               const key = isString(entity) ? entity : entity.id;
@@ -87,3 +99,5 @@ export default class FormHasManyList extends PureComponent {
     );
   }
 }
+
+export default withScreenReaderStatus(FormHasManyList);

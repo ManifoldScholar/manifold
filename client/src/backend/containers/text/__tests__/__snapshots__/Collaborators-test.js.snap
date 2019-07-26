@@ -15,11 +15,19 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
         >
           Authors
         </h2>
-        <nav
+        <div
           className="has-many-list"
         >
+          <div
+            aria-atomic={true}
+            aria-live="polite"
+            className="screen-reader-text"
+            role="status"
+          />
           <ul
+            aria-label="Active Authors"
             className=""
+            role="group"
           >
             <li>
               <div
@@ -62,11 +70,7 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
                   <span
                     className="screen-reader-text"
                   >
-                    Edit 
-                    Rowan Ida
-                    in the 
-                    Authors
-                     list.
+                    Edit Rowan Ida in the Authors list.
                   </span>
                   <svg
                     aria-hidden={true}
@@ -90,11 +94,7 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
                   <span
                     className="screen-reader-text"
                   >
-                    Remove 
-                    Rowan Ida
-                     from the 
-                    Authors
-                     list.
+                    Remove Rowan Ida from the Authors list.
                   </span>
                   <svg
                     aria-hidden={true}
@@ -114,14 +114,26 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
             </li>
           </ul>
           <div
+            aria-atomic={true}
+            aria-live="polite"
+            className="screen-reader-text"
+            role="status"
+          />
+          <div
             className="input-predictive"
           >
             <div
+              aria-expanded={false}
+              aria-haspopup="listbox"
+              aria-owns="1-listbox"
               className="input-predictive__input"
+              role="combobox"
             >
               <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-controls="1-listbox"
                 aria-describedby="predictive-text-belongs-to-error-1 predictive-text-belongs-to-instructions-1"
-                aria-label="Add an Author"
                 className="input-predictive__text-input text-input"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -153,15 +165,14 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
                 </svg>
               </button>
             </div>
-            <nav
-              className="input-predictive__results-wrapper"
-            >
-              <ul
-                className="input-predictive__results"
-              />
-            </nav>
+            <ul
+              aria-label="Add an Author"
+              className="input-predictive__results"
+              id="1-listbox"
+              role="listbox"
+            />
           </div>
-        </nav>
+        </div>
       </div>
       <div
         className="form-input"
@@ -172,11 +183,19 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
         >
           Contributors
         </h2>
-        <nav
+        <div
           className="has-many-list"
         >
+          <div
+            aria-atomic={true}
+            aria-live="polite"
+            className="screen-reader-text"
+            role="status"
+          />
           <ul
+            aria-label="Active Contributors"
             className=""
+            role="group"
           >
             <li>
               <div
@@ -219,11 +238,7 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
                   <span
                     className="screen-reader-text"
                   >
-                    Edit 
-                    Rowan Ida
-                    in the 
-                    Contributors
-                     list.
+                    Edit Rowan Ida in the Contributors list.
                   </span>
                   <svg
                     aria-hidden={true}
@@ -247,11 +262,7 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
                   <span
                     className="screen-reader-text"
                   >
-                    Remove 
-                    Rowan Ida
-                     from the 
-                    Contributors
-                     list.
+                    Remove Rowan Ida from the Contributors list.
                   </span>
                   <svg
                     aria-hidden={true}
@@ -271,14 +282,26 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
             </li>
           </ul>
           <div
+            aria-atomic={true}
+            aria-live="polite"
+            className="screen-reader-text"
+            role="status"
+          />
+          <div
             className="input-predictive"
           >
             <div
+              aria-expanded={false}
+              aria-haspopup="listbox"
+              aria-owns="1-listbox"
               className="input-predictive__input"
+              role="combobox"
             >
               <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-controls="1-listbox"
                 aria-describedby="predictive-text-belongs-to-error-1 predictive-text-belongs-to-instructions-1"
-                aria-label="Add a Contributor"
                 className="input-predictive__text-input text-input"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -310,15 +333,14 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
                 </svg>
               </button>
             </div>
-            <nav
-              className="input-predictive__results-wrapper"
-            >
-              <ul
-                className="input-predictive__results"
-              />
-            </nav>
+            <ul
+              aria-label="Add a Contributor"
+              className="input-predictive__results"
+              id="1-listbox"
+              role="listbox"
+            />
           </div>
-        </nav>
+        </div>
       </div>
     </form>
   </section>
