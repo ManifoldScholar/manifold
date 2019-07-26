@@ -58,10 +58,6 @@ export class FollowingContainer extends Component {
     subjects: PropTypes.array
   };
 
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
-
   static defaultProps = {
     featuredProjects: [],
     followedProjects: []

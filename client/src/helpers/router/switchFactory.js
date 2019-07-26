@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import hoistStatics from "hoist-non-react-statics";
-import { matchPath, withRouter } from "react-router-dom";
+import { withRouter, matchPath } from "react-router-dom";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -23,14 +23,8 @@ export default function switchFactory(Wrapper) {
       staticContext: PropTypes.object
     };
 
-    static contextTypes = {
-      router: PropTypes.shape({
-        route: PropTypes.object.isRequired
-      }).isRequired
-    };
-
     match() {
-      const { route } = this.context.router;
+      const route = this.props.match;
       const { children } = this.props;
       const location = this.props.location || route.location;
       let match;

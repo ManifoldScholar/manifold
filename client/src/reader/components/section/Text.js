@@ -62,10 +62,6 @@ export default class Text extends Component {
     history: PropTypes.object.isRequired
   };
 
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
-
   constructor(props) {
     super(props);
     this.state = {
