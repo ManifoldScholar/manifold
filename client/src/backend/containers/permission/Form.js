@@ -67,8 +67,8 @@ export class PermissionForm extends PureComponent {
         renderAttribute="fullName"
         fetch={usersAPI.index}
         fetchOptions={{ order: "first_name, last_name" }}
-        placeholder="Select User"
-        label={this.labelUser}
+        inputLabel="Select User"
+        selectedLabel={this.labelUser}
         relationName="user"
         focusOnMount={!this.props.showUserInput}
         searchable={false}

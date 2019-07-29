@@ -22,7 +22,7 @@ class PredictiveInput extends PureComponent {
   static propTypes = {
     onNew: PropTypes.func,
     onSelect: PropTypes.func.isRequired,
-    label: PropTypes.func.isRequired,
+    selectedLabel: PropTypes.func.isRequired,
     fetch: PropTypes.func.isRequired,
     fetchOptions: PropTypes.object,
     placeholder: PropTypes.string,
@@ -245,7 +245,9 @@ class PredictiveInput extends PureComponent {
       this.inputElement.focus();
     }
     this.props.onSelect(option);
-    this.props.setScreenReaderStatus(`${this.props.label(option)} added.`);
+    this.props.setScreenReaderStatus(
+      `${this.props.selectedLabel(option)} added.`
+    );
   }
 
   handleSelect(event, option) {
@@ -331,7 +333,7 @@ class PredictiveInput extends PureComponent {
                 this.clearHighlighted(event);
               }}
             >
-              {this.props.label(option)}
+              {this.props.selectedLabel(option)}
             </li>
             /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
           );

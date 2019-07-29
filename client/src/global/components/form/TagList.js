@@ -121,7 +121,7 @@ class FormTagList extends Component {
                 fetchOptions={this.fetchOptions}
                 onSelect={this.handleAdd}
                 onNew={this.handleAdd}
-                label={this.tagLabel}
+                selectedLabel={this.tagLabel}
                 idForError={`${this.idForErrorPrefix}-${id}`}
                 idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
               />
