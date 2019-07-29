@@ -23,12 +23,7 @@ exports[`Backend.Ingestion.Form.Upload component renders correctly 1`] = `
         Upload a file
       </label>
       <react-dropzone
-        accepts={
-          Object {
-            "accepts": null,
-            "extensions": null,
-          }
-        }
+        accept={null}
         className="form-dropzone style-landscape"
         inputProps={
           Object {
@@ -72,13 +67,13 @@ exports[`Backend.Ingestion.Form.Upload component renders correctly 1`] = `
             <p
               className="primary"
             >
-              <span
+              <button
                 aria-hidden={true}
-                className="fake-link"
-                role="button"
+                className="form-dropzone__inline-button"
+                tabIndex="-1"
               >
                 Upload a file
-              </span>
+              </button>
                or 
               <br />
               drag and drop here

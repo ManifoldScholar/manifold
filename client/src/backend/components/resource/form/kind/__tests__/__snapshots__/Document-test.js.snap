@@ -15,12 +15,7 @@ exports[`Backend.Resource.Form.Document component renders correctly 1`] = `
       Document File
     </label>
     <react-dropzone
-      accepts={
-        Object {
-          "accepts": "application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,text/*,application/vnd.oasis.opendocument.text",
-          "extensions": "doc, docx, txt, odt",
-        }
-      }
+      accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,text/*,application/vnd.oasis.opendocument.text"
       className="form-dropzone style-square"
       inputProps={
         Object {
@@ -59,13 +54,13 @@ exports[`Backend.Resource.Form.Document component renders correctly 1`] = `
           <p
             className="primary"
           >
-            <span
+            <button
               aria-hidden={true}
-              className="fake-link"
-              role="button"
+              className="form-dropzone__inline-button"
+              tabIndex="-1"
             >
               Upload a file
-            </span>
+            </button>
              or 
             <br />
             drag and drop here

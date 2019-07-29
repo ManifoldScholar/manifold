@@ -15,12 +15,7 @@ exports[`Backend.Resource.Form.Pdf component renders correctly 1`] = `
       PDF File
     </label>
     <react-dropzone
-      accepts={
-        Object {
-          "accepts": "application/pdf",
-          "extensions": "pdf",
-        }
-      }
+      accept="application/pdf"
       className="form-dropzone style-square"
       inputProps={
         Object {
@@ -59,13 +54,13 @@ exports[`Backend.Resource.Form.Pdf component renders correctly 1`] = `
           <p
             className="primary"
           >
-            <span
+            <button
               aria-hidden={true}
-              className="fake-link"
-              role="button"
+              className="form-dropzone__inline-button"
+              tabIndex="-1"
             >
               Upload a file
-            </span>
+            </button>
              or 
             <br />
             drag and drop here

@@ -24,12 +24,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
           Variant #1
         </label>
         <react-dropzone
-          accepts={
-            Object {
-              "accepts": null,
-              "extensions": null,
-            }
-          }
+          accept={null}
           className="form-dropzone style-square"
           inputProps={
             Object {
@@ -68,13 +63,13 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
               <p
                 className="primary"
               >
-                <span
+                <button
                   aria-hidden={true}
-                  className="fake-link"
-                  role="button"
+                  className="form-dropzone__inline-button"
+                  tabIndex="-1"
                 >
                   Upload a file
-                </span>
+                </button>
                  or 
                 <br />
                 drag and drop here
@@ -99,12 +94,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
           Variant #2
         </label>
         <react-dropzone
-          accepts={
-            Object {
-              "accepts": null,
-              "extensions": null,
-            }
-          }
+          accept={null}
           className="form-dropzone style-square"
           inputProps={
             Object {
@@ -143,13 +133,13 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
               <p
                 className="primary"
               >
-                <span
+                <button
                   aria-hidden={true}
-                  className="fake-link"
-                  role="button"
+                  className="form-dropzone__inline-button"
+                  tabIndex="-1"
                 >
                   Upload a file
-                </span>
+                </button>
                  or 
                 <br />
                 drag and drop here
@@ -182,12 +172,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
         High Resolution Image
       </label>
       <react-dropzone
-        accepts={
-          Object {
-            "accepts": "image/*",
-            "extensions": "gif, jpeg, jpg, png",
-          }
-        }
+        accept="image/*"
         className="form-dropzone style-square"
         inputProps={
           Object {
@@ -226,13 +211,13 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             <p
               className="primary"
             >
-              <span
+              <button
                 aria-hidden={true}
-                className="fake-link"
-                role="button"
+                className="form-dropzone__inline-button"
+                tabIndex="-1"
               >
                 Upload a file
-              </span>
+              </button>
                or 
               <br />
               drag and drop here
@@ -262,12 +247,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
         Thumbnail Image
       </label>
       <react-dropzone
-        accepts={
-          Object {
-            "accepts": "image/*",
-            "extensions": "gif, jpeg, jpg, png",
-          }
-        }
+        accept="image/*"
         className="form-dropzone style-square"
         inputProps={
           Object {
@@ -306,13 +286,13 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             <p
               className="primary"
             >
-              <span
+              <button
                 aria-hidden={true}
-                className="fake-link"
-                role="button"
+                className="form-dropzone__inline-button"
+                tabIndex="-1"
               >
                 Upload a file
-              </span>
+              </button>
                or 
               <br />
               drag and drop here
@@ -349,12 +329,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
         Thumbnail Image
       </label>
       <react-dropzone
-        accepts={
-          Object {
-            "accepts": "image/*",
-            "extensions": "gif, jpeg, jpg, png",
-          }
-        }
+        accept="image/*"
         className="form-dropzone style-square"
         inputProps={
           Object {
@@ -393,13 +368,13 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
             <p
               className="primary"
             >
-              <span
+              <button
                 aria-hidden={true}
-                className="fake-link"
-                role="button"
+                className="form-dropzone__inline-button"
+                tabIndex="-1"
               >
                 Upload a file
-              </span>
+              </button>
                or 
               <br />
               drag and drop here

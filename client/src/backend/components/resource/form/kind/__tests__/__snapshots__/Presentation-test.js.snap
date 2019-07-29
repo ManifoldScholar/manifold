@@ -15,12 +15,7 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
       Presentation File
     </label>
     <react-dropzone
-      accepts={
-        Object {
-          "accepts": "application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint,application/vnd.oasis.opendocument.presentation",
-          "extensions": "ppt, pptx, odp",
-        }
-      }
+      accept="application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint,application/vnd.oasis.opendocument.presentation"
       className="form-dropzone style-square"
       inputProps={
         Object {
@@ -59,13 +54,13 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
           <p
             className="primary"
           >
-            <span
+            <button
               aria-hidden={true}
-              className="fake-link"
-              role="button"
+              className="form-dropzone__inline-button"
+              tabIndex="-1"
             >
               Upload a file
-            </span>
+            </button>
              or 
             <br />
             drag and drop here

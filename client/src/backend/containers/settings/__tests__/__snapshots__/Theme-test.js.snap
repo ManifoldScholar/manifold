@@ -87,12 +87,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                       Header Logo
                     </label>
                     <react-dropzone
-                      accepts={
-                        Object {
-                          "accepts": "image/*",
-                          "extensions": "gif, jpeg, jpg, png",
-                        }
-                      }
+                      accept="image/*"
                       className="form-dropzone style-square"
                       inputProps={
                         Object {
@@ -131,13 +126,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                           <p
                             className="primary"
                           >
-                            <span
+                            <button
                               aria-hidden={true}
-                              className="fake-link"
-                              role="button"
+                              className="form-dropzone__inline-button"
+                              tabIndex="-1"
                             >
                               Upload a file
-                            </span>
+                            </button>
                              or 
                             <br />
                             drag and drop here
@@ -173,12 +168,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                       Mobile Header Logo
                     </label>
                     <react-dropzone
-                      accepts={
-                        Object {
-                          "accepts": "image/*",
-                          "extensions": "gif, jpeg, jpg, png",
-                        }
-                      }
+                      accept="image/*"
                       className="form-dropzone style-square"
                       inputProps={
                         Object {
@@ -217,13 +207,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                           <p
                             className="primary"
                           >
-                            <span
+                            <button
                               aria-hidden={true}
-                              className="fake-link"
-                              role="button"
+                              className="form-dropzone__inline-button"
+                              tabIndex="-1"
                             >
                               Upload a file
-                            </span>
+                            </button>
                              or 
                             <br />
                             drag and drop here
@@ -259,12 +249,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                       Press Footer Logo
                     </label>
                     <react-dropzone
-                      accepts={
-                        Object {
-                          "accepts": "image/*",
-                          "extensions": "gif, jpeg, jpg, png",
-                        }
-                      }
+                      accept="image/*"
                       className="form-dropzone style-square"
                       inputProps={
                         Object {
@@ -303,13 +288,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                           <p
                             className="primary"
                           >
-                            <span
+                            <button
                               aria-hidden={true}
-                              className="fake-link"
-                              role="button"
+                              className="form-dropzone__inline-button"
+                              tabIndex="-1"
                             >
                               Upload a file
-                            </span>
+                            </button>
                              or 
                             <br />
                             drag and drop here
@@ -345,12 +330,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                       Favicon
                     </label>
                     <react-dropzone
-                      accepts={
-                        Object {
-                          "accepts": "image/*",
-                          "extensions": "gif, jpeg, jpg, png",
-                        }
-                      }
+                      accept="image/*"
                       className="form-dropzone style-square"
                       inputProps={
                         Object {
@@ -389,13 +369,13 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                           <p
                             className="primary"
                           >
-                            <span
+                            <button
                               aria-hidden={true}
-                              className="fake-link"
-                              role="button"
+                              className="form-dropzone__inline-button"
+                              tabIndex="-1"
                             >
                               Upload a file
-                            </span>
+                            </button>
                              or 
                             <br />
                             drag and drop here

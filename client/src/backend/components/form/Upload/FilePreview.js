@@ -21,20 +21,22 @@ export default class FormUploadFilePreview extends PureComponent {
           />
           <p className="primary">{this.props.fileName}</p>
           <p className="secondary">
-            <span
-              role="button"
+            <button
               tabIndex="0"
-              className="fake-link"
+              className="form-dropzone__inline-button"
               onClick={this.props.handleRemove}
-              href="#"
             >
               Remove this file
-            </span>
+            </button>
             <br />
             or{" "}
-            <span className="fake-link" role="button" aria-hidden>
+            <button
+              className="form-dropzone__inline-button"
+              aria-hidden
+              tabIndex="-1"
+            >
               Upload a new file
-            </span>
+            </button>
           </p>
         </div>
       </div>

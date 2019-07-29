@@ -21,20 +21,23 @@ export default class FormUploadImagePreview extends PureComponent {
       <div className="contents-image-preview" data-id="preview">
         <div className="message">
           <p className="secondary">
-            <span
-              role="button"
+            <button
               tabIndex="0"
               data-id="remove"
-              className="fake-link"
+              className="form-dropzone__inline-button"
               onClick={this.props.handleRemove}
             >
               Remove this image
-            </span>
+            </button>
             <br />
             or{" "}
-            <span className="fake-link" role="button" aria-hidden>
+            <button
+              className="form-dropzone__inline-button"
+              aria-hidden
+              tabIndex="-1"
+            >
               Upload an image
-            </span>
+            </button>
           </p>
         </div>
         <img alt="Upload preview" className="preview" src={this.imageUrl} />

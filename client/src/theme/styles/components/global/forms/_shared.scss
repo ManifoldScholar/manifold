@@ -49,6 +49,14 @@
 .form-dropzone {
   cursor: pointer;
 
+  &__inline-button {
+    @include buttonUnstyled;
+    display: inline;
+    text-decoration: underline;
+    text-transform: inherit;
+    letter-spacing: inherit;
+  }
+
   .dropzone-button {
     @include buttonUnstyled;
     @include buttonRounded;

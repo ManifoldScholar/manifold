@@ -38,9 +38,13 @@ export default class FormUploadEmpty extends PureComponent {
               </span>
             ) : (
               <React.Fragment>
-                <span className="fake-link" role="button" aria-hidden>
+                <button
+                  className="form-dropzone__inline-button"
+                  aria-hidden
+                  tabIndex="-1"
+                >
                   {"Upload a file"}
-                </span>
+                </button>
                 {" or "}
                 <br />
                 {"drag and drop here"}

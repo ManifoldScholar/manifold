@@ -127,7 +127,7 @@ export default class FormUpload extends Component {
               this.dropzone = dropzone;
             }}
             onDrop={this.handleFileDrop}
-            accepts={this.props.accepts}
+            accept={this.props.accepts.accepts}
           >
             {this.previewable ? (
               <Preview
