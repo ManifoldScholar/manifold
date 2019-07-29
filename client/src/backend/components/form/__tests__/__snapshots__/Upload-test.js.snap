@@ -15,12 +15,7 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
       Cover
     </label>
     <react-dropzone
-      accepts={
-        Object {
-          "accepts": "image/*",
-          "extensions": "gif, jpeg, jpg, png",
-        }
-      }
+      accept="image/*"
       className="form-dropzone style-portrait"
       inputProps={
         Object {
@@ -59,13 +54,13 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
           <p
             className="primary"
           >
-            <span
+            <button
               aria-hidden={true}
-              className="fake-link"
-              role="button"
+              className="form-dropzone__inline-button"
+              tabIndex="-1"
             >
               Upload a file
-            </span>
+            </button>
              or 
             <br />
             drag and drop here
@@ -98,12 +93,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
       Cover
     </label>
     <react-dropzone
-      accepts={
-        Object {
-          "accepts": "image/*",
-          "extensions": "gif, jpeg, jpg, png",
-        }
-      }
+      accept="image/*"
       className="form-dropzone style-portrait"
       inputProps={
         Object {
@@ -124,25 +114,24 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
           <p
             className="secondary"
           >
-            <span
-              className="fake-link"
+            <button
+              className="form-dropzone__inline-button"
               data-id="remove"
               onClick={[Function]}
-              role="button"
               tabIndex="0"
             >
               Remove this image
-            </span>
+            </button>
             <br />
             or
              
-            <span
+            <button
               aria-hidden={true}
-              className="fake-link"
-              role="button"
+              className="form-dropzone__inline-button"
+              tabIndex="-1"
             >
               Upload an image
-            </span>
+            </button>
           </p>
         </div>
         <img
@@ -176,12 +165,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
       Cover
     </label>
     <react-dropzone
-      accepts={
-        Object {
-          "accepts": "image/*",
-          "extensions": "gif, jpeg, jpg, png",
-        }
-      }
+      accept="image/*"
       className="form-dropzone style-portrait"
       inputProps={
         Object {
@@ -202,25 +186,24 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
           <p
             className="secondary"
           >
-            <span
-              className="fake-link"
+            <button
+              className="form-dropzone__inline-button"
               data-id="remove"
               onClick={[Function]}
-              role="button"
               tabIndex="0"
             >
               Remove this image
-            </span>
+            </button>
             <br />
             or
              
-            <span
+            <button
               aria-hidden={true}
-              className="fake-link"
-              role="button"
+              className="form-dropzone__inline-button"
+              tabIndex="-1"
             >
               Upload an image
-            </span>
+            </button>
           </p>
         </div>
         <img
@@ -254,12 +237,7 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
       Cover
     </label>
     <react-dropzone
-      accepts={
-        Object {
-          "accepts": "image/*",
-          "extensions": "gif, jpeg, jpg, png",
-        }
-      }
+      accept="image/*"
       className="form-dropzone style-portrait"
       inputProps={
         Object {
@@ -280,25 +258,24 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
           <p
             className="secondary"
           >
-            <span
-              className="fake-link"
+            <button
+              className="form-dropzone__inline-button"
               data-id="remove"
               onClick={[Function]}
-              role="button"
               tabIndex="0"
             >
               Remove this image
-            </span>
+            </button>
             <br />
             or
              
-            <span
+            <button
               aria-hidden={true}
-              className="fake-link"
-              role="button"
+              className="form-dropzone__inline-button"
+              tabIndex="-1"
             >
               Upload an image
-            </span>
+            </button>
           </p>
         </div>
         <img

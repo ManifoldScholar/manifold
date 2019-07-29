@@ -210,12 +210,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                       Google Service Config File
                     </label>
                     <react-dropzone
-                      accepts={
-                        Object {
-                          "accepts": "application/json",
-                          "extensions": "json",
-                        }
-                      }
+                      accept="application/json"
                       className="form-dropzone style-square"
                       inputProps={
                         Object {
@@ -254,13 +249,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                           <p
                             className="primary"
                           >
-                            <span
+                            <button
                               aria-hidden={true}
-                              className="fake-link"
-                              role="button"
+                              className="form-dropzone__inline-button"
+                              tabIndex="-1"
                             >
                               Upload a file
-                            </span>
+                            </button>
                              or 
                             <br />
                             drag and drop here
