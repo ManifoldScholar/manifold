@@ -148,8 +148,8 @@ export class FormHasMany extends PureComponent {
                 this.props
               )}
               <OptionsList
-                placeholder={this.props.placeholder}
-                label={this.entityName}
+                inputLabel={this.props.placeholder}
+                selectedLabel={this.entityName}
                 onNew={this.props.onNew ? this.onNew : null}
                 onSelect={this.onSelect}
                 fetch={this.props.fetch}

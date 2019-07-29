@@ -9,12 +9,12 @@ class FormOptionsList extends PureComponent {
   static propTypes = {
     setOther: PropTypes.func,
     onSelect: PropTypes.func.isRequired,
-    label: PropTypes.func.isRequired,
+    selectedLabel: PropTypes.func.isRequired,
     options: PropTypes.array,
     fetch: PropTypes.func,
     fetchOptions: PropTypes.object,
     focusOnMount: PropTypes.bool,
-    placeholder: PropTypes.string,
+    inputLabel: PropTypes.string,
     mode: PropTypes.string,
     selectedValue: PropTypes.string,
     searchable: PropTypes.bool,
@@ -44,11 +44,11 @@ class FormOptionsList extends PureComponent {
         fetch={props.fetch}
         fetchOptions={props.fetchOptions}
         options={props.options}
-        placeholder={props.placeholder}
-        label={props.label}
+        inputLabel={props.inputLabel}
+        selectedLabel={props.selectedLabel}
         onSelect={this.handleSelect}
         mode={props.mode}
-        selectedValue={props.selectedValue}
+        selectedOption={props.selectedOption}
       />
     );
   }
@@ -58,8 +58,8 @@ class FormOptionsList extends PureComponent {
       <ConnectedInputs.PredictiveInput
         fetch={props.fetch}
         fetchOptions={props.fetchOptions}
-        placeholder={props.placeholder}
-        label={props.label}
+        placeholder={props.inputLabel}
+        selectedLabel={props.selectedLabel}
         onSelect={this.handleSelect}
         onNew={props.onNew}
         idForLabel={props.idForLabel}
