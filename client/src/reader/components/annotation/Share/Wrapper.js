@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Citation from "./Citation";
-import { TruncatedTextContent } from "global/components/Annotation";
+import TruncatedTextContent from "global/components/Annotation/Annotation/TextContent/Truncated.js";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class AnnotationShareWrapper extends PureComponent {
