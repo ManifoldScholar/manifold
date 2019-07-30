@@ -113,18 +113,7 @@
 
   // Link with notation marker cube
   .notation-marker {
-    display: inline-flex;
-    align-self: center;
-    margin: 0 0.18em;
-    font-size: 1em;
-    text-decoration: none;
-    text-indent: 0;
-    letter-spacing: normal;
     cursor: pointer;
-
-    i {
-      position: relative;
-    }
   }
 
   .node-flash {

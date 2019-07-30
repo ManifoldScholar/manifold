@@ -10,11 +10,11 @@ describe("Frontend.Utility.Toggle component", () => {
       handleToggle={toggleMock}
       label="options"
       optionOne={{
-        iconClass: "manicon-cube-outline",
+        icon: "resource24",
         label: "resources"
       }}
       optionTwo={{
-        iconClass: "manicon-file-box",
+        icon: "resourceCollection64",
         label: "collection"
       }}
       selected="resources"

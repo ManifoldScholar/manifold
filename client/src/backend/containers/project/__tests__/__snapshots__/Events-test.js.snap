@@ -52,11 +52,11 @@ Array [
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg manicon-magnify svg-icon--search16"
+                  className="manicon-svg svg-icon--search16"
                   fill="currentColor"
-                  height={null}
+                  height={20}
                   viewBox="0 0 16 16"
-                  width={null}
+                  width={20}
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path

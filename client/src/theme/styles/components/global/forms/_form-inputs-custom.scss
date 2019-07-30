@@ -19,12 +19,6 @@
     }
   }
 
-  &.checked {
-    .manicon-check {
-      opacity: 1;
-    }
-  }
-
   .toggle-indicator {
     display: inline-block;
     width: 25px;
@@ -38,14 +32,6 @@
     display: inline-block;
     margin-left: 9px;
     vertical-align: middle;
-  }
-
-  // If check icon exists, hide it until selected
-  .manicon-check {
-    font-size: 11px;
-    color: $neutralOffBlack;
-    opacity: 0;
-    transition: opacity $duration $timing;
   }
 }
 
@@ -99,21 +85,6 @@
 
   .repeatable-input {
     position: relative;
-
-    .manicon-x {
-      position: absolute;
-      top: 7px;
-      right: 7px;
-      color: $sp40Tertiary;
-
-      @include respond($break60) {
-        top: 11px;
-      }
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
 
     + .repeatable-input {
       margin-top: 24px;

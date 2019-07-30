@@ -5,19 +5,15 @@
   position: relative;
 
   // <button>
-  .manicon-magnify, .icon {
+  .icon {
     @include buttonUnstyled;
     position: absolute;
     top: 50%;
     left: 10px;
-    margin-top: -9px;
+    margin-top: -11px;
     font-size: 17px;
     color: $neutral50;
     transition: color $duration $timing;
-  }
-
-  .icon {
-    margin-top: -11px;
   }
 
   input {
@@ -38,10 +34,6 @@
     &:focus-visible {
       color: $neutralWhite;
       border-color: $accentPrimary;
-
-      + .manicon-magnify  {
-        color: $accentPrimary;
-      }
     }
   }
 }

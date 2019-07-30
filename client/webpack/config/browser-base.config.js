@@ -9,7 +9,6 @@ import path from "path";
 import merge from "webpack-merge";
 
 const config = merge(baseConfig("web"), {
-
   entry: {
     "build/manifold-client-browser": ["./src/entry-browser.js"]
   },
@@ -20,11 +19,10 @@ const config = merge(baseConfig("web"), {
 
   // Browser javascript is written into the www folder in the dist directory.
   output: {
-    path: path.join(paths.build, "www"),
+    path: path.join(paths.build, "www")
   },
 
   plugins: [
-
     new DefinePlugin({
       __BROWSER__: true,
       __SERVER__: false
@@ -42,7 +40,6 @@ const config = merge(baseConfig("web"), {
     }),
 
     new CopyWebpackPlugin([
-
       // We always want to include the env.js file in the client build. This file is
       // loaded by the client, and it provides an environment of sorts for the browser
       // code.
@@ -52,9 +49,7 @@ const config = merge(baseConfig("web"), {
         transform: compileEnv
       }
     ])
-
   ]
-
 });
 
 export default config;

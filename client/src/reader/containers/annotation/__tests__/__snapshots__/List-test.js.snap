@@ -65,11 +65,11 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg svg-icon--Avatar64"
+                      className="manicon-svg avatar__icon svg-icon--Avatar64"
                       fill="currentColor"
-                      height={null}
+                      height={64}
                       viewBox="0 0 64 64"
-                      width={null}
+                      width={64}
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -152,11 +152,11 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="manicon-svg svg-icon--Avatar64"
+                      className="manicon-svg avatar__icon svg-icon--Avatar64"
                       fill="currentColor"
-                      height={null}
+                      height={64}
                       viewBox="0 0 64 64"
-                      width={null}
+                      width={64}
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path

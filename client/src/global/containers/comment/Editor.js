@@ -230,9 +230,10 @@ export class CommentEditor extends PureComponent {
                         className="button-secondary"
                         disabled={!this.state.body}
                       >
-                        <i
-                          className="manicon manicon-word-bubble-lines"
-                          aria-hidden="true"
+                        <IconComposer
+                          icon="commentPost32"
+                          size="default"
+                          iconClass="button-secondary__icon"
                         />
                         <span className="button-secondary__text">
                           {this.buttonLabel(this.props)}

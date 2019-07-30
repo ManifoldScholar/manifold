@@ -42,7 +42,7 @@
     background-color: $neutral90;
   }
 
-  a {
+  &__link {
     display: block;
     color: $neutral80;
     text-decoration: none;
@@ -64,33 +64,23 @@
         }
       }
     }
+  }
 
-    > div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      padding: 17px $containerPaddingResp;
+  &__link-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 17px $containerPaddingResp;
 
-      .scheme-dark & {
-        color: $neutralWhite;
-      }
+    .scheme-dark & {
+      color: $neutralWhite;
     }
   }
 
-  figure {
+  &__figure {
     display: flex;
     flex-grow: 2;
-
-    .manicon-cube-fill {
-      margin-right: 0.643em;
-      font-size: 14px;
-      color: $accentPrimary;
-
-      @include respond($break60) {
-        font-size: 16px;
-      }
-    }
 
     .icon-thumbnail-primary {
       position: relative;
@@ -130,21 +120,25 @@
           transition: fill $duration $timing;
         }
       }
-
     }
+  }
 
-    figcaption {
-      @include templateHead;
-      margin-top: -0.231em;
-      margin-left: 10px;
-      font-size: 13px;
-      font-weight: $light;
-      letter-spacing: 0.06em;
+  &__figcaption {
+    @include templateHead;
+    margin-top: -0.231em;
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: $light;
+    letter-spacing: 0.06em;
 
-      @include respond($break60) {
-        font-size: 16px;
-      }
+    @include respond($break60) {
+      font-size: 16px;
     }
+  }
+
+  &__cube-icon {
+    margin-right: 0.375em;
+    color: $accentPrimary;
   }
 
   &__caret-icon {

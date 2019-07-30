@@ -461,10 +461,6 @@
       color: $neutralWhite;
       background-color: $neutral50;
     }
-
-    .manicon {
-      color: $neutral70;
-    }
   }
 
   .bg-neutral90 & {
@@ -495,10 +491,6 @@
       color: $neutral90;
       background-color: $accentPrimary;
       outline: 0;
-
-      .manicon {
-        color: $neutral90;
-      }
     }
 
     .bg-neutral90 &,
@@ -510,16 +502,6 @@
       &:hover {
         color: $neutral90;
         background-color: $accentPrimary;
-
-        .manicon {
-          color: $neutral90;
-        }
-      }
-
-      &:focus-visible {
-        .manicon {
-          color: $neutralWhite;
-        }
       }
     }
 
@@ -532,14 +514,6 @@
         color: $neutral90;
         background-color: $neutral70;
         outline: 0;
-
-        .manicon {
-          color: $neutral90;
-        }
-      }
-
-      .manicon {
-        color: $neutral70;
       }
     }
   }

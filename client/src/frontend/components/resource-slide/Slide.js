@@ -5,6 +5,7 @@ import ResourcePreview from "frontend/components/resource-preview";
 import get from "lodash/get";
 import classnames from "classnames";
 import IconComputed from "global/components/icon-computed";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class ResourceListSlideFigure extends Component {
   static propTypes = {
@@ -38,8 +39,14 @@ export default class ResourceListSlideFigure extends Component {
         {this.props.enableZoom ? (
           <ResourcePreview resource={this.props.resource}>
             <div className="zoom-indicator">
-              {this.props.zoomLabel}
-              <i className="manicon manicon-magnify-plus" aria-hidden="true" />
+              <span className="zoom-indicator__text">
+                {this.props.zoomLabel}
+              </span>
+              <IconComposer
+                icon="zoomIn16"
+                size={21.333}
+                iconClass="zoom-indicator__icon"
+              />
             </div>
           </ResourcePreview>
         ) : null}
