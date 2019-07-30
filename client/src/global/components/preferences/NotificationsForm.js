@@ -112,9 +112,7 @@ export default class NotificationsForm extends Component {
                   checked={checked}
                   onChange={this.props.digestProjectsChangeHandler}
                 />
-                <span className="toggle-indicator">
-                  {checked ? <i className="manicon" /> : null}
-                </span>
+                <span className="toggle-indicator" />
                 <span className="toggle-label">{option.label}</span>
               </label>
             );
@@ -189,9 +187,7 @@ export default class NotificationsForm extends Component {
                 checked={checked}
                 onChange={this.props.changeHandler}
               />
-              <span className="toggle-indicator">
-                {checked ? <i className="manicon" /> : null}
-              </span>
+              <span className="toggle-indicator" />
               <span className="toggle-label">{options[option]}</span>
             </label>
           );

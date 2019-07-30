@@ -1,10 +1,14 @@
 .notation-marker {
-  &.active .manicon-cube-fill {
+  color: $neutral40;
+  transition: color $duration $timing;
+
+  &--active {
     color: $accentPrimary;
   }
 
-  .manicon-cube-fill {
-    color: $neutral40;
-    transition: color $duration $timing;
+  &__icon {
+    position: relative;
+    top: -1px;
+    color: inherit;
   }
 }

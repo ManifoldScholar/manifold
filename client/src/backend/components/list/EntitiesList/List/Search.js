@@ -174,10 +174,7 @@ export default class ListEntitiesListSearch extends PureComponent {
           <form onSubmit={this.submitKeywordForm}>
             <div className={`${baseClass}__keyword-row`}>
               <button className={`${baseClass}__search-button`}>
-                <Utility.IconComposer
-                  iconClass="manicon-magnify"
-                  icon="search16"
-                />
+                <Utility.IconComposer icon="search16" size={20} />
                 <span className="screen-reader-text">Search</span>
               </button>
               <div className={`${baseClass}__keyword-input-wrapper`}>

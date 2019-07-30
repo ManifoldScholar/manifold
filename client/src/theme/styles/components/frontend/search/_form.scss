@@ -28,12 +28,6 @@
   }
 
   .search-query {
-    .manicon-magnify {
-      @include respond($break70) {
-        font-size: 20px;
-      }
-    }
-
     input[type='text'] {
       background-color: $neutralWhite;
 

@@ -12,28 +12,6 @@
     text-align: center;
   }
 
-  .manicon {
-    &.manicon-notepad {
-      margin-right: 14px;
-      font-size: 26px;
-
-      &::before {
-        vertical-align: bottom;
-      }
-    }
-
-    &.manicon-magnify {
-      position: relative;
-      margin-right: 30px;
-      font-size: 18px;
-
-      &::before {
-        position: absolute;
-        top: 3px;
-      }
-    }
-  }
-
   .overlay-title {
     @include templateHead;
     display: flex;

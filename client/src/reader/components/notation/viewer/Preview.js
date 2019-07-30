@@ -22,10 +22,18 @@ export default class NotationViewerPreview extends PureComponent {
 
     return (
       <div className="notation-preview-footer">
-        <Link notation={notation} params={params}>
-          <div>
-            <figure>
-              <i className="manicon manicon-cube-fill" aria-hidden="true" />
+        <Link
+          notation={notation}
+          params={params}
+          className="notation-preview-footer__link"
+        >
+          <div className="notation-preview-footer__link-inner">
+            <figure className="notation-preview-footer__figure">
+              <IconComposer
+                icon="resourceFilled16"
+                size="default"
+                iconClass="notation-preview-footer__cube-icon"
+              />
               <Resourceish.Thumbnail
                 resourceish={notation}
                 showTitle={false}
@@ -33,7 +41,7 @@ export default class NotationViewerPreview extends PureComponent {
                 additionalClasses="icon-only"
               />
               <figcaption
-                className="title"
+                className="notation-preview-footer__figcaption"
                 dangerouslySetInnerHTML={{
                   __html: notation.attributes.titleFormatted
                 }}

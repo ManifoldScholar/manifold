@@ -3,12 +3,12 @@
     width: 100%;
     text-decoration: none;
 
-    .manicon, .title {
+    .title {
       transition: color $duration $timing;
     }
 
     &:hover {
-      .manicon, .title {
+      .title {
         color: $accentPrimary;
       }
     }

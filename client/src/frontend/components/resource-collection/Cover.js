@@ -42,9 +42,7 @@ export default class ResourceCollectionCover extends Component {
           <div className="title-overlay">
             <Title>{attr.title}</Title>
             <div className="icon">
-              <i className="manicon" aria-hidden="true">
-                <Utility.IconComposer size={48} icon="resourceCollection64" />
-              </i>
+              <Utility.IconComposer size={48} icon="resourceCollection64" />
               <span>{"Resource Collection"}</span>
             </div>
           </div>

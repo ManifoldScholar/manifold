@@ -119,34 +119,43 @@
   }
 
   .toc-footer {
-    @include tocBasePadding;
     display: block;
-    padding-top: 30px;
-    padding-bottom: 71px;
 
-    @include respond($break50) {
-      padding-top: 41px;
-      padding-bottom: 41px;
-    };
-
-    button {
+    &__button {
       @include buttonUnstyled;
+      @include tocBasePadding;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding-top: 29px;
+      padding-bottom: 70px;
       color: $neutral50;
       text-decoration: none;
+      transition: color $duration $timing,
+        background-color $duration $timing;
+
+      &:hover, &:focus-visible {
+        color: $neutral75;
+        background-color: $accentPrimaryPale;
+        outline: 0;
+      }
+
+      @include respond($break50) {
+        padding-top: 40px;
+        padding-bottom: 40px;
+      };
     }
 
-    h4 {
-      @include utilityPrimary;
-      margin: 0;
-      font-size: 14px;
+    &__icon {
+      position: relative;
+      top: 1px;
+      color: inherit;
+    }
 
-      i {
-        display: inline-block;
-        margin-top: -3px;
-        margin-right: 16px;
-        font-size: 2.286em;
-        vertical-align: middle;
-      }
+    &__text {
+      @include utilityPrimary;
+      margin: 0 0 0 1em;
+      font-size: 14px;
     }
   }
 }

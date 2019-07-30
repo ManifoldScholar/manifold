@@ -90,11 +90,7 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
                 />
                 <span
                   className="toggle-indicator"
-                >
-                  <i
-                    className="manicon"
-                  />
-                </span>
+                />
                 <span
                   className="toggle-label"
                 >
@@ -180,11 +176,7 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
                 />
                 <span
                   className="toggle-indicator"
-                >
-                  <i
-                    className="manicon"
-                  />
-                </span>
+                />
                 <span
                   className="toggle-label"
                 >

@@ -19,8 +19,13 @@
     color: $neutral70;
 
     &--dull {
-    cursor: default;
-    color: $neutral20;
+      cursor: default;
+      color: $neutral20;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
     }
   }
 

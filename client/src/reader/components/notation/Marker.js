@@ -4,6 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import classnames from "classnames";
 import { uiReaderActions } from "actions";
 import lh from "helpers/linkHandler";
+import IconComposer from "global/components/utility/IconComposer";
 
 class NotationMarker extends Component {
   static mapStateToProps = (state, ownProps) => {
@@ -65,7 +66,7 @@ class NotationMarker extends Component {
           const id = annotation.id;
           const markerClassNames = classnames({
             "notation-marker": true,
-            active: id === this.props.activeAnnotation
+            "notation-marker--active": id === this.props.activeAnnotation
           });
           return (
             <span
@@ -84,7 +85,11 @@ class NotationMarker extends Component {
                 if (!touch) this.setActiveAnnotation(null);
               }}
             >
-              <i className="manicon manicon-cube-fill" aria-hidden="true" />
+              <IconComposer
+                icon="resourceFilled24"
+                size={28}
+                iconClass="notation-marker__icon"
+              />
             </span>
           );
         })}

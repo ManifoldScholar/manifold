@@ -1,5 +1,10 @@
 import baseConfig from "./base.config";
-import { DefinePlugin, BannerPlugin, NormalModuleReplacementPlugin, optimize } from "webpack";
+import {
+  DefinePlugin,
+  BannerPlugin,
+  NormalModuleReplacementPlugin,
+  optimize
+} from "webpack";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import paths from "../helpers/paths";
 import environment from "../helpers/environment";
@@ -7,7 +12,6 @@ import merge from "webpack-merge";
 const compileEnv = require("../transforms/env");
 
 const config = merge(baseConfig("node"), {
-
   entry: {
     "ssr/manifold-client-ssr": ["./src/entry-ssr.js"]
   },
@@ -32,7 +36,6 @@ const config = merge(baseConfig("node"), {
   },
 
   plugins: [
-
     new DefinePlugin({
       __BROWSER__: false,
       __SERVER__: true,
@@ -66,13 +69,8 @@ const config = merge(baseConfig("node"), {
     // really handle. We replace it with a noop javascript object, since we don't really need
     // it. See https://github.com/matthew-andrews/isomorphic-fetch/pull/58. I think mocking it
     // is a better solution than disabling all warnings, as suggested in that issue.
-    new NormalModuleReplacementPlugin(
-      /iconv-loader$/,
-      "node-noop"
-    )
-
+    new NormalModuleReplacementPlugin(/iconv-loader$/, "node-noop")
   ]
-
 });
 
 export default config;

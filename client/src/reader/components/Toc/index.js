@@ -6,6 +6,7 @@ import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
 import Drawer from "global/components/drawer";
+import IconComposer from "global/components/utility/IconComposer";
 
 class Toc extends PureComponent {
   static propTypes = {
@@ -140,11 +141,13 @@ class Toc extends PureComponent {
           {this.renderContents(text)}
           {!isEmpty(metadata) ? (
             <div className="toc-footer">
-              <button onClick={this.showMeta}>
-                <h4>
-                  <i className="manicon manicon-i-round" aria-hidden="true" />
-                  About This Text
-                </h4>
+              <button onClick={this.showMeta} className="toc-footer__button">
+                <IconComposer
+                  icon="info16"
+                  size={32}
+                  iconClass="toc-footer__icon"
+                />
+                <h4 className="toc-footer__text">About This Text</h4>
               </button>
             </div>
           ) : null}

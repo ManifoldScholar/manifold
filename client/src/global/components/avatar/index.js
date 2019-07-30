@@ -37,7 +37,11 @@ export default class Avatar extends Component {
         className="avatar"
         aria-hidden={this.props.ariaHidden}
       >
-        <Utility.IconComposer className="manicon-person" icon="Avatar64" />
+        <Utility.IconComposer
+          icon="Avatar64"
+          size="default"
+          iconClass="avatar__icon"
+        />
         <span className="screen-reader-text">Avatar</span>
       </figure>
     );

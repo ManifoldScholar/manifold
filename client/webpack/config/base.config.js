@@ -6,10 +6,8 @@ import paths from "../helpers/paths";
 
 const nameTemplate = environment.production ? "[name]-[hash]" : "[name]";
 
-
 /* eslint-disable  global-require */
 export default function buildWebpackConfiguration(target = "web") {
-
   function styleLoader() {
     if (target !== "web") return null;
     if (environment.isBuild) return MiniCssExtractPlugin.loader;
@@ -33,25 +31,6 @@ export default function buildWebpackConfiguration(target = "web") {
 
     module: {
       rules: [
-        // Icon Font loader
-        {
-          test: /\.font.js/,
-          include: [paths.src, paths.plugins],
-          use: [
-            styleLoader(),
-            {
-              loader: "css-loader",
-              options: "importLoaders=2"
-            },
-            {
-              loader: "./webpack/loaders/icon-font-loader",
-              options: {
-                fileName: `build/assets/${nameTemplate}[ext]`
-              }
-            }
-          ].filter(loader => loader !== null)
-        },
-
         // Javascript loader
         {
           test: /\.js$/,

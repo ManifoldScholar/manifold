@@ -202,21 +202,6 @@
     }
   }
 
-  .manicon-caret-down {
-    position: absolute;
-    top: 50%;
-    right: 30px;
-    margin-top: -7px;
-    font-size: $type40;
-    color: $neutral70;
-    pointer-events: none;
-
-    // Use native dropdown arrow in IE9
-    .ie9 & {
-      display: none;
-    }
-  }
-
   select {
     @include formInputSecondary;
     display: inline-block;
@@ -324,14 +309,6 @@
       width: 1.563em;
       height: 1.563em;
       padding: 0.438em 0.375em;
-
-      // If check icon exists, hide it until selected
-      .manicon-check {
-        font-size: 0.688em;
-        color: $neutralOffBlack;
-        opacity: 0;
-        transition: opacity $duration $timing;
-      }
     }
   }
 
@@ -418,11 +395,6 @@
   }
 
   &.checked .toggle-indicator {
-    // For checkboxes
-    .manicon-check {
-      opacity: 1;
-    }
-
     // For radio buttons
     &::before {
       opacity: 1;
@@ -579,13 +551,6 @@
     @include formLabelPrimary;
     padding-bottom: 53px;
     text-align: center;
-
-    .manicon {
-      display: block;
-      padding-bottom: 26px;
-      font-size: 33px;
-      color: $neutral50;
-    }
   }
 
   + .form-input {

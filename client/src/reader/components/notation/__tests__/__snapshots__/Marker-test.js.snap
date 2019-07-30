@@ -11,10 +11,24 @@ exports[`Reader.Notation.Marker component renders correctly 1`] = `
     role="presentation"
     title="1"
   >
-    <i
-      aria-hidden="true"
-      className="manicon manicon-cube-fill"
-    />
+    <svg
+      aria-hidden={true}
+      className="manicon-svg notation-marker__icon svg-icon--resourceFilled24"
+      height={28}
+      viewBox="0 0 24 24"
+      width={28}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        fill="none"
+        fillRule="evenodd"
+      >
+        <path
+          d="M3.99999997,16.9932801 L3.99999997,7.87106258 L11.4287306,11.8777824 L11.4287306,21 L3.99999997,16.9932801 Z M12.5712694,11.8774225 L20,7.87070259 L20,16.9929201 L12.5712694,20.99964 L12.5712694,11.8774225 Z M12.0004,3 L19.319414,6.92272155 L12.0004,10.8694426 L4.681386,6.92272155 L12.0004,3 Z"
+          fill="currentColor"
+        />
+      </g>
+    </svg>
   </span>
 </span>
 `;

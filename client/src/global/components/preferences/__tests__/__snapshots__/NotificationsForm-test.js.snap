@@ -68,11 +68,7 @@ exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = 
           />
           <span
             className="toggle-indicator"
-          >
-            <i
-              className="manicon"
-            />
-          </span>
+          />
           <span
             className="toggle-label"
           >
@@ -139,11 +135,7 @@ exports[`Global.Preferences.NotificationsForm component renders correctly 1`] = 
           />
           <span
             className="toggle-indicator"
-          >
-            <i
-              className="manicon"
-            />
-          </span>
+          />
           <span
             className="toggle-label"
           >
