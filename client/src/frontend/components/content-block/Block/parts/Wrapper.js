@@ -18,7 +18,7 @@ export default class ProjectContentBlockWrapper extends PureComponent {
           this.props.additionalClasses
         )}
       >
-        <div className="container entity-section-wrapper">
+        <div className="container flush entity-section-wrapper">
           {this.props.children}
         </div>
       </section>
