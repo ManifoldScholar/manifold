@@ -12,7 +12,7 @@ module ManifoldEnv
       @client_secret = client_secret
       @name          = name.to_sym
       @host          = host
-      @protocol      = protocol =~ /https/i ? :https : :http
+      @protocol      = protocol.match?(/https/i) ? :https : :http
       @endpoints     = parse_endpoints endpoints
       @descriptive_name = descriptive_name.presence || @name.to_s.titleize
       @email_key     = email_key.to_s
