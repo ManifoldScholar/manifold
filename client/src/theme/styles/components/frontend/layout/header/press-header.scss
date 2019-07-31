@@ -27,9 +27,12 @@
 
   &__text {
     @include templateHead;
+    position: relative;
+    top: -2px;
     display: block;
     font-size: 16px;
     font-weight: $semibold;
+    line-height: 1.35;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
