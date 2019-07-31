@@ -1,0 +1,524 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend ResourceDetail Container renders correctly 1`] = `
+<div>
+  <div>
+    <section>
+      <section
+        className="resource-detail"
+      >
+        <div
+          className="container flush-top flush-bottom"
+        >
+          <div
+            className="resource-title"
+          >
+            <div>
+              <h1
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "Image",
+                  }
+                }
+              />
+              <span
+                className="resource-date"
+              >
+                Resource added 
+                <time
+                  dateTime="2017-04-24"
+                >
+                  April, 2017
+                </time>
+              </span>
+            </div>
+          </div>
+        </div>
+        <section
+          className="resource-hero-container"
+        >
+          <div
+            className="resource-hero"
+          >
+            <div
+              className="resource-slide-figure"
+            >
+              <figure>
+                <div
+                  className="resource-link-wrapper"
+                >
+                  <span />
+                  <div
+                    className="resource-preview-wrapper"
+                    onClick={[Function]}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <div
+                      className="zoom-indicator"
+                    >
+                      <span
+                        className="zoom-indicator__text"
+                      >
+                        Zoom
+                      </span>
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg zoom-indicator__icon svg-icon--zoomIn16"
+                        height={21.333}
+                        viewBox="0 0 16 16"
+                        width={21.333}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g
+                          fill="none"
+                          fillRule="evenodd"
+                        >
+                          <path
+                            d="M7.00000001,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7 C3.00000001,9.20913903 4.79086102,11 7.00000001,11 C9.20912238,11 11,9.20916605 11,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000001,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247363,11.5768008 8.20065856,12 7,12 C4.23857626,12 2,9.76142379 2,7 C2,4.23857625 4.23857626,2 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12,6.99990005 C12,8.20055769 11.5768321,9.30236027 10.8715096,10.1643028 Z M4.5,7.5 L4.500132,6.5 L9.500132,6.5 L9.5,7.5 L4.5,7.5 Z M7.5,9.5 L6.5,9.500132 L6.5,4.500132 L7.5,4.5 L7.5,9.5 Z"
+                            fill="currentColor"
+                            fillRule="nonzero"
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="figure-image"
+                  style={
+                    Object {
+                      "backgroundImage": "url(null)",
+                    }
+                  }
+                />
+              </figure>
+            </div>
+          </div>
+        </section>
+        <div
+          className="container flush-top"
+        >
+          <aside>
+            <a
+              className="button-primary"
+              href="original-image.mock"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span
+                className="button-primary__text"
+              >
+                Download
+              </span>
+              <svg
+                aria-hidden={true}
+                className="manicon-svg button-primary__icon svg-icon--arrowDown16"
+                fill="currentColor"
+                height={16}
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L11.9183709,7.49848233 L6.66539051,2.76142495 L7.34860956,2 L14.0012062,7.99920999 L7.36512848,14 L6.68087158,13.2395122 L11.9210555,8.50098377 Z"
+                  transform="rotate(90 8 8)"
+                />
+              </svg>
+            </a>
+            <nav
+              aria-label="Share"
+              className="share-nav-primary"
+            >
+              <span
+                className="share-nav-primary__label"
+              >
+                Share
+              </span>
+              <ul
+                className="share-nav-primary__list"
+              >
+                <li
+                  className="share-nav-primary__item"
+                >
+                  <button
+                    className="share-nav-primary__link"
+                    onClick={[Function]}
+                    target="_blank"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg svg-icon--socialTwitter32"
+                      fill="currentColor"
+                      height={20}
+                      viewBox="0 0 32 32"
+                      width={20}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M30,7.31619997 C28.9515228,7.78072545 27.8393881,8.0856069 26.7006,8.22069998 C27.9003003,7.50286885 28.798046,6.37328518 29.2265,5.04249997 C28.0989009,5.71176382 26.8651508,6.18326004 25.5786,6.43659997 C23.7976636,4.54435699 20.9689701,4.0817104 18.6779871,5.30797114 C16.3870042,6.53423188 15.2031629,9.14460899 15.79,11.676 C11.1708147,11.4447105 6.86706167,9.26302756 3.94999996,5.67399997 C2.42561389,8.29903306 3.20400896,11.6568278 5.72789997,13.3434 C4.81566995,13.3148893 3.92350112,13.0685314 3.12589996,12.6249 L3.12539996,12.6971 C3.12573033,15.4316379 5.05254245,17.7873646 7.73269997,18.33 C6.8867092,18.5599269 5.99937697,18.5935827 5.13839997,18.4284 C5.8907162,20.7684358 8.04713954,22.3715983 10.5047,22.4179 C8.46977147,24.0149399 5.95678428,24.8810499 3.36999996,24.8769 C2.91216116,24.877069 2.45470735,24.8503564 1.99999996,24.7969 C4.62662885,26.4847185 7.68363698,27.3806651 10.8058,27.3777 C21.3722,27.3777 27.1502,18.6244 27.1502,11.0332 C27.1502,10.7842 27.1446667,10.5365 27.1336,10.2901 C28.2582178,9.47703381 29.2288714,8.46997741 30,7.31619997 L30,7.31619997 Z"
+                      />
+                    </svg>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Share on Twitter
+                    </span>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+            <section
+              className="resource-meta"
+            >
+              <figure
+                aria-hidden="true"
+                className="resource-type"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg svg-icon--resourceImage64"
+                  fill="currentColor"
+                  height={48}
+                  viewBox="0 0 64 64"
+                  width={48}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5.99999996,13 L5.99999996,51 L58,51 L58,13 L5.99999996,13 Z M60,11 L60,53 L3.99999996,53 L3.99999996,11 L60,11 Z M45.114319,36.7052772 C46.0891538,35.776283 47.4070852,35.2956435 48.7511053,35.3789689 C50.0951254,35.4622943 51.3435959,36.1020435 52.2251484,37.1814515 L59.8029485,47.3896515 L58.1970516,48.5817485 L50.6481834,38.4106653 C50.1480528,37.7992777 49.4157245,37.4240133 48.6273486,37.3751363 C47.8389728,37.3262592 47.0659001,37.608193 46.5124285,38.1351833 L39.6414917,45.0279719 L38.9387682,44.1921171 L25.4012973,28.0888039 C24.8721474,27.5066301 24.1255162,27.1696052 23.3388857,27.1578435 C22.5522552,27.1460819 21.7958816,27.4606339 21.2723966,28.0022606 L5.74239658,45.2113607 L4.25760333,43.8714394 L19.8104371,26.6378727 C20.7408786,25.6737527 22.029067,25.1380356 23.3687863,25.1580671 C24.7085055,25.1780985 25.9801016,25.7520894 26.9067318,26.7726829 L39.7669351,42.06926 L45.114319,36.7052772 Z M45.0127,29.9813 C41.6989915,29.9813 39.0127,27.2950085 39.0127,23.9813 C39.0127,20.6675915 41.6989915,17.9813 45.0127,17.9813 C48.3264085,17.9813 51.0127,20.6675915 51.0127,23.9813 C51.0127,27.2950085 48.3264085,29.9813 45.0127,29.9813 Z M45.0127,27.9813 C47.221839,27.9813 49.0127,26.190439 49.0127,23.9813 C49.0127,21.772161 47.221839,19.9813 45.0127,19.9813 C42.803561,19.9813 41.0127,21.772161 41.0127,23.9813 C41.0127,26.190439 42.803561,27.9813 45.0127,27.9813 Z"
+                  />
+                </svg>
+              </figure>
+              <ul
+                className="meta-list-secondary"
+              >
+                <li>
+                  <span
+                    className="meta-label"
+                  >
+                    type
+                  </span>
+                  <div
+                    className="meta-value"
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Image",
+                      }
+                    }
+                  />
+                </li>
+                <li>
+                  <span
+                    className="meta-label"
+                  >
+                    created on
+                  </span>
+                  <div
+                    className="meta-value"
+                  >
+                    <time
+                      dateTime="2017-04-24"
+                    >
+                      April 24, 2017
+                    </time>
+                  </div>
+                </li>
+                <li>
+                  <span
+                    className="meta-label"
+                  >
+                    doi
+                  </span>
+                  <div
+                    className="meta-value"
+                  >
+                    <a
+                      href="https://doi.org/10.12345.6789"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      https://doi.org/10.12345.6789
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              <nav
+                className="resource-tag-list"
+                onClick={[Function]}
+                onMouseOver={[Function]}
+                role="presentation"
+              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Tags list
+                </span>
+                <ul>
+                  <li>
+                    <a
+                      className={null}
+                      href="/projects/slug-1/resources/?tag=dog"
+                      onClick={[Function]}
+                    >
+                      dog
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={null}
+                      href="/projects/slug-1/resources/?tag=puppy"
+                      onClick={[Function]}
+                    >
+                      puppy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={null}
+                      href="/projects/slug-1/resources/?tag=goat"
+                      onClick={[Function]}
+                    >
+                      GOAT
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </section>
+          </aside>
+          <div
+            className="resource-meta-mobile"
+          >
+            <section
+              className="resource-meta"
+            >
+              <figure
+                aria-hidden="true"
+                className="resource-type"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg svg-icon--resourceImage64"
+                  fill="currentColor"
+                  height={48}
+                  viewBox="0 0 64 64"
+                  width={48}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5.99999996,13 L5.99999996,51 L58,51 L58,13 L5.99999996,13 Z M60,11 L60,53 L3.99999996,53 L3.99999996,11 L60,11 Z M45.114319,36.7052772 C46.0891538,35.776283 47.4070852,35.2956435 48.7511053,35.3789689 C50.0951254,35.4622943 51.3435959,36.1020435 52.2251484,37.1814515 L59.8029485,47.3896515 L58.1970516,48.5817485 L50.6481834,38.4106653 C50.1480528,37.7992777 49.4157245,37.4240133 48.6273486,37.3751363 C47.8389728,37.3262592 47.0659001,37.608193 46.5124285,38.1351833 L39.6414917,45.0279719 L38.9387682,44.1921171 L25.4012973,28.0888039 C24.8721474,27.5066301 24.1255162,27.1696052 23.3388857,27.1578435 C22.5522552,27.1460819 21.7958816,27.4606339 21.2723966,28.0022606 L5.74239658,45.2113607 L4.25760333,43.8714394 L19.8104371,26.6378727 C20.7408786,25.6737527 22.029067,25.1380356 23.3687863,25.1580671 C24.7085055,25.1780985 25.9801016,25.7520894 26.9067318,26.7726829 L39.7669351,42.06926 L45.114319,36.7052772 Z M45.0127,29.9813 C41.6989915,29.9813 39.0127,27.2950085 39.0127,23.9813 C39.0127,20.6675915 41.6989915,17.9813 45.0127,17.9813 C48.3264085,17.9813 51.0127,20.6675915 51.0127,23.9813 C51.0127,27.2950085 48.3264085,29.9813 45.0127,29.9813 Z M45.0127,27.9813 C47.221839,27.9813 49.0127,26.190439 49.0127,23.9813 C49.0127,21.772161 47.221839,19.9813 45.0127,19.9813 C42.803561,19.9813 41.0127,21.772161 41.0127,23.9813 C41.0127,26.190439 42.803561,27.9813 45.0127,27.9813 Z"
+                  />
+                </svg>
+              </figure>
+              <ul
+                className="meta-list-secondary"
+              >
+                <li>
+                  <span
+                    className="meta-label"
+                  >
+                    type
+                  </span>
+                  <div
+                    className="meta-value"
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Image",
+                      }
+                    }
+                  />
+                </li>
+                <li>
+                  <span
+                    className="meta-label"
+                  >
+                    created on
+                  </span>
+                  <div
+                    className="meta-value"
+                  >
+                    <time
+                      dateTime="2017-04-24"
+                    >
+                      April 24, 2017
+                    </time>
+                  </div>
+                </li>
+                <li>
+                  <span
+                    className="meta-label"
+                  >
+                    doi
+                  </span>
+                  <div
+                    className="meta-value"
+                  >
+                    <a
+                      href="https://doi.org/10.12345.6789"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      https://doi.org/10.12345.6789
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              <nav
+                className="resource-tag-list"
+                onClick={[Function]}
+                onMouseOver={[Function]}
+                role="presentation"
+              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Tags list
+                </span>
+                <ul>
+                  <li>
+                    <a
+                      className={null}
+                      href="/projects/slug-1/resources/?tag=dog"
+                      onClick={[Function]}
+                    >
+                      dog
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={null}
+                      href="/projects/slug-1/resources/?tag=puppy"
+                      onClick={[Function]}
+                    >
+                      puppy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={null}
+                      href="/projects/slug-1/resources/?tag=goat"
+                      onClick={[Function]}
+                    >
+                      GOAT
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </section>
+          </div>
+          <div
+            className="resource-variants-mobile"
+          />
+          <div
+            className="resource-content left"
+          >
+            <div
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "World's Greatest Dog",
+                }
+              }
+            />
+            <h2
+              className="attribute-header"
+            >
+              Full Description
+            </h2>
+            <div
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Black and white freckles",
+                }
+              }
+            />
+            <div
+              className="resource-comments"
+            >
+              <div
+                className="comment-editor"
+              >
+                <h2
+                  className="comment-editor__editor-label"
+                >
+                  <svg
+                    aria-hidden={true}
+                    className="manicon-svg comment-editor__label-icon svg-icon--commentPencil32"
+                    height={42}
+                    viewBox="0 0 32 32"
+                    width={42}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      fill="none"
+                      fillRule="evenodd"
+                    >
+                      <path
+                        d="M30.4221932,14.9873 L30.4221932,18.2023 C30.4221932,19.4714424 29.3933356,20.5003 28.1241932,20.5003 L24.4221932,20.5003 L24.4221932,12.5003 L27.9351932,12.5003 C29.3043356,12.5003 30.4221932,13.6181576 30.4221932,14.9873 Z M28.1241932,19.5003 C28.8410508,19.5003 29.4221932,18.9191576 29.4221932,18.2023 L29.4221932,14.9873 C29.4221932,14.1704424 28.7520508,13.5003 27.9351932,13.5003 L25.4221932,13.5003 L25.4221932,19.5003 L28.1241932,19.5003 Z M6.42219321,19.4567941 L6.42219321,13.5432059 L1.84338641,16.5 L6.42219321,19.4567941 Z M7.42219321,19.5 L24.4426932,19.5 L24.4426932,20.5 L6.19428571,20.5 L-3.73034936e-14,16.5 L6.19428571,12.5 L24.4426932,12.5 L24.4426932,13.5 L7.42219321,13.5 L7.42219321,19.5 Z M22.4221932,16 L22.4221932,17 L9.42219321,17 L9.42219321,16 L22.4221932,16 Z"
+                        fill="currentColor"
+                        fillRule="nonzero"
+                        transform="rotate(-45 15.211 16.5)"
+                      />
+                    </g>
+                  </svg>
+                  <span
+                    className="comment-editor__label-text"
+                  >
+                    Add Comment
+                  </span>
+                </h2>
+                <div
+                  className="placeholder"
+                >
+                  <button
+                    onClick={[Function]}
+                  >
+                    Login to post a comment
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+  <section
+    className="bg-neutral05"
+  >
+    <a
+      className="back-link-secondary"
+      href="/projects/slug-1/resources"
+      onClick={[Function]}
+    >
+      <div
+        className="container flush back-link-secondary__container"
+      >
+        <svg
+          aria-hidden={true}
+          className="manicon-svg back-link-secondary__icon svg-icon--circleArrowLeft64"
+          fill="currentColor"
+          height={56}
+          viewBox="0 0 64 64"
+          width={56}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M32,58 C17.6405965,58 5.99999996,46.3594035 5.99999996,32 C5.99999996,17.6405965 17.6405965,5.99999996 32,5.99999996 C46.3594035,5.99999996 58,17.6405965 58,32 C58,46.3594035 46.3594035,58 32,58 Z M32,56 C45.254834,56 56,45.254834 56,32 C56,18.745166 45.254834,7.99999996 32,7.99999996 C18.745166,7.99999996 7.99999996,18.745166 7.99999996,32 C7.99999996,45.254834 18.745166,56 32,56 Z M19.6388077,32.9918997 L19.6403922,30.9919003 L44.0007923,31.0112003 L43.9992077,33.0111997 L19.6388077,32.9918997 Z M21.019947,32 L35.2169617,44.5045804 L33.8950383,46.0054197 L17.994053,32 L33.8950383,17.9945803 L35.2169617,19.4954196 L21.019947,32 Z"
+          />
+        </svg>
+        <div
+          className="back-link-secondary__text"
+        >
+          <span
+            className="back-link-secondary__back-text"
+          >
+            Back to Project Resources
+          </span>
+          <span
+            className="back-link-secondary__project-title"
+          />
+        </div>
+      </div>
+    </a>
+  </section>
+</div>
+`;

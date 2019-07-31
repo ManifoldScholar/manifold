@@ -4,6 +4,8 @@ import Detail from "../Detail";
 import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
+import { FrontendModeContext } from "helpers/contexts";
+import BackLink from "../../back-link";
 
 describe("Frontend.Project.Detail component", () => {
   const project = build.entity.project("1");
@@ -21,14 +23,18 @@ describe("Frontend.Project.Detail component", () => {
   const store = build.store();
 
   const refMock = element => {
-    return { style: { objectFit: "" }};
-  }
+    return { style: { objectFit: "" } };
+  };
 
   it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <Detail dispatch={dispatchMock} project={project} />
+          <FrontendModeContext.Provider
+            value={{ isLibrary: true, isStandalone: false }}
+          >
+            <Detail dispatch={dispatchMock} project={project} />
+          </FrontendModeContext.Provider>
         </Provider>
       ),
       { createNodeMock: refMock }
@@ -41,7 +47,11 @@ describe("Frontend.Project.Detail component", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <Detail dispatch={dispatchMock} project={activityProject} />
+          <FrontendModeContext.Provider
+            value={{ isLibrary: true, isStandalone: false }}
+          >
+            <Detail dispatch={dispatchMock} project={activityProject} />
+          </FrontendModeContext.Provider>
         </Provider>
       )
     );

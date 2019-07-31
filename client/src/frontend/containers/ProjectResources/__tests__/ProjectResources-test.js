@@ -4,6 +4,7 @@ import ProjectResources from "../";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
+import BackLink from "frontend/components/back-link";
 
 describe("Frontend ProjectResources Container", () => {
   const pagination = build.pagination();
@@ -28,7 +29,9 @@ describe("Frontend ProjectResources Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <ProjectResources {...props} />
+        <BackLink.Provider>
+          <ProjectResources {...props} />
+        </BackLink.Provider>
       </Provider>
     )
   );

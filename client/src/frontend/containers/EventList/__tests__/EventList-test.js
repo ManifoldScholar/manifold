@@ -4,6 +4,8 @@ import { ProjectEventsContainer } from "../";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
+import BackLink from "frontend/components/back-link";
+import { FrontendModeContext } from "helpers/contexts";
 
 describe("Frontend EventList Container", () => {
   const pagination = build.pagination();
@@ -19,7 +21,18 @@ describe("Frontend EventList Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <ProjectEventsContainer project={project} events={events} meta={meta} />
+        <BackLink.Provider>
+          <FrontendModeContext.Provider
+            value={{ isLibrary: true, isStandalone: false }}
+          >
+            <ProjectEventsContainer
+              dispatch={store.dispatch}
+              project={project}
+              events={events}
+              meta={meta}
+            />
+          </FrontendModeContext.Provider>
+        </BackLink.Provider>
       </Provider>
     )
   );

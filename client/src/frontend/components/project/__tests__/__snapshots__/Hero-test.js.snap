@@ -10,21 +10,43 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
     <div
       className="project-hero__left-top-block"
     >
-      <div
-        className="project-hero__meta-block"
-      >
+      <div>
         <header
           className="project-hero__heading"
         >
-          <h1
-            className="project-hero__title"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "Rowan Test",
+          <div
+            className="project-hero__heading-inner"
+          >
+            <h1
+              className="project-hero__title"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Rowan Test",
+                }
               }
-            }
-          />
+            />
+            <div
+              className="project-hero__subtitle"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": undefined,
+                }
+              }
+            />
+          </div>
         </header>
+      </div>
+      <div
+        className="project-hero__meta-block"
+      >
+        <div
+          className="project-hero__description"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+            }
+          }
+        />
       </div>
       <div
         className="project-hero__callout-block project-hero__callout-block--desktop"
@@ -75,11 +97,11 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
       >
         <a
           className="project-hero__hashtag"
-          href="https://twitter.com/hashtag/#cute_dog"
+          href="https://twitter.com/hashtag/cute_dog"
           rel="noopener noreferrer"
           target="_blank"
         >
-          ##cute_dog
+          #cute_dog
         </a>
       </div>
     </div>
@@ -281,21 +303,43 @@ exports[`Frontend.Project.Hero component renders correctly when object-fit is un
     <div
       className="project-hero__left-top-block"
     >
-      <div
-        className="project-hero__meta-block"
-      >
+      <div>
         <header
           className="project-hero__heading"
         >
-          <h1
-            className="project-hero__title"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "Rowan Test",
+          <div
+            className="project-hero__heading-inner"
+          >
+            <h1
+              className="project-hero__title"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Rowan Test",
+                }
               }
-            }
-          />
+            />
+            <div
+              className="project-hero__subtitle"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": undefined,
+                }
+              }
+            />
+          </div>
         </header>
+      </div>
+      <div
+        className="project-hero__meta-block"
+      >
+        <div
+          className="project-hero__description"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
+            }
+          }
+        />
       </div>
       <div
         className="project-hero__callout-block project-hero__callout-block--desktop"
@@ -346,11 +390,11 @@ exports[`Frontend.Project.Hero component renders correctly when object-fit is un
       >
         <a
           className="project-hero__hashtag"
-          href="https://twitter.com/hashtag/#cute_dog"
+          href="https://twitter.com/hashtag/cute_dog"
           rel="noopener noreferrer"
           target="_blank"
         >
-          ##cute_dog
+          #cute_dog
         </a>
       </div>
     </div>

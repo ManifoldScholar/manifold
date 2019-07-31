@@ -4,6 +4,7 @@ import { FrontendContainer } from "../";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
+import { FrontendModeContext } from "helpers/contexts";
 
 describe("Frontend Frontend Container", () => {
   const store = build.store();
@@ -29,7 +30,11 @@ describe("Frontend Frontend Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <FrontendContainer {...props} />
+        <FrontendModeContext.Provider
+          value={{ isLibrary: true, isStandalone: false }}
+        >
+          <FrontendContainer {...props} />
+        </FrontendModeContext.Provider>
       </Provider>
     )
   );
