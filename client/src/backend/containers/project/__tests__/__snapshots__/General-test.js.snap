@@ -20,7 +20,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           <h2
             id="1-header"
           >
-            Title
+            General Attributes
           </h2>
         </header>
         <div
@@ -64,180 +64,6 @@ exports[`Backend Project General Container renders correctly 1`] = `
               value="World's Greatest Dog"
             />
           </div>
-          <div
-            className="form-input wide"
-            style={Object {}}
-          >
-            <label
-              className=""
-              htmlFor="text-input-1"
-            >
-              Slug
-            </label>
-            <input
-              aria-describedby="text-input-error-1 text-input-instructions-1"
-              id="text-input-1"
-              onChange={[Function]}
-              placeholder="Enter Project Slug"
-              type="text"
-              value=""
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        aria-describedby="1-instructions"
-        aria-labelledby="1-header"
-        className="form-section"
-        role="group"
-      >
-        <header
-          className="form-section-label"
-        >
-          <h2
-            id="1-header"
-          >
-            Visibility
-          </h2>
-        </header>
-        <div
-          className="form-input-group"
-        >
-          <div
-            className="form-input form-toggle-secondary"
-          >
-            <label
-              className="form-input-heading toggle above"
-              htmlFor="switch-input-1"
-            >
-              Draft Mode
-            </label>
-            <div
-              className="toggle-indicator"
-            >
-              <div
-                aria-describedby="switch-input-instructions-1"
-                aria-pressed={false}
-                className="boolean-primary"
-                id="switch-input-1"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                role="button"
-                tabIndex="0"
-              >
-                <span
-                  className="screen-reader-text"
-                >
-                  Draft Mode
-                </span>
-              </div>
-            </div>
-            <span
-              className="instructions"
-              id="switch-input-instructions-1"
-            >
-              A draft project is only visible to users who are able to modify it.
-            </span>
-          </div>
-          <div
-            className="form-input form-toggle-secondary"
-          >
-            <label
-              className="form-input-heading toggle above"
-              htmlFor="switch-input-1"
-            >
-              Featured
-            </label>
-            <div
-              className="toggle-indicator"
-            >
-              <div
-                aria-describedby="switch-input-instructions-1"
-                aria-pressed={false}
-                className="boolean-primary"
-                id="switch-input-1"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                role="button"
-                tabIndex="0"
-              >
-                <span
-                  className="screen-reader-text"
-                >
-                  Featured
-                </span>
-              </div>
-            </div>
-            <span
-              className="instructions"
-              id="switch-input-instructions-1"
-            >
-              Featured projects are highlighted on the home page.
-            </span>
-          </div>
-          <div
-            className="form-input"
-          >
-            <div
-              className="form-input"
-              style={Object {}}
-            >
-              <label>
-                Standalone Mode
-              </label>
-              <div
-                className="form-select"
-              >
-                <i
-                  aria-hidden="true"
-                  className="manicon manicon-caret-down"
-                />
-                <select
-                  aria-describedby="select-error-1"
-                  onChange={[Function]}
-                  value=""
-                >
-                  <option
-                    value="disabled"
-                  >
-                    Disabled
-                  </option>
-                  <option
-                    value="enabled"
-                  >
-                    Enabled
-                  </option>
-                  <option
-                    value="enforced"
-                  >
-                    Enforced
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        aria-describedby="1-instructions"
-        aria-labelledby="1-header"
-        className="form-section"
-        role="group"
-      >
-        <header
-          className="form-section-label"
-        >
-          <h2
-            id="1-header"
-          >
-            Other
-          </h2>
-        </header>
-        <div
-          className="form-input-group"
-        >
           <div
             className="form-input"
             style={Object {}}
@@ -492,216 +318,20 @@ exports[`Backend Project General Container renders correctly 1`] = `
             className="form-input wide"
             style={Object {}}
           >
-            <div
-              className="form-input-heading"
-            >
-              Subjects
-            </div>
-            <div
-              className="has-many-list"
-            >
-              <div
-                aria-atomic={true}
-                aria-live="polite"
-                className="screen-reader-text"
-                role="status"
-              />
-              <div
-                className="input-predictive"
-              >
-                <div
-                  aria-expanded={false}
-                  aria-haspopup="listbox"
-                  aria-owns="1-listbox"
-                  className="input-predictive__input"
-                  role="combobox"
-                >
-                  <input
-                    aria-activedescendant={null}
-                    aria-autocomplete="list"
-                    aria-controls="1-listbox"
-                    aria-describedby="predictive-text-belongs-to-error-1 predictive-text-belongs-to-instructions-1"
-                    className="input-predictive__text-input text-input"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
-                    onKeyDown={[Function]}
-                    onKeyPress={[Function]}
-                    placeholder="Add a Subject"
-                    type="text"
-                    value=""
-                  />
-                  <button
-                    aria-hidden="true"
-                    className="input-predictive__button"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg input-predictive__icon svg-icon--plus16"
-                      fill="currentColor"
-                      height={20}
-                      viewBox="0 0 16 16"
-                      width={20}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <ul
-                  aria-label="Add a Subject"
-                  className="input-predictive__results"
-                  id="1-listbox"
-                  role="listbox"
-                />
-              </div>
-              <div
-                aria-atomic={true}
-                aria-live="polite"
-                className="screen-reader-text"
-                role="status"
-              />
-              <ul
-                aria-label="Active Subjects"
-                className="bucket"
-                role="group"
-              >
-                <li>
-                  <div
-                    className="association"
-                  >
-                    <div
-                      className="association-name"
-                    >
-                      Hip Hop
-                    </div>
-                  </div>
-                  <div
-                    className="utility"
-                  >
-                    <button
-                      className="utility__button"
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      <span
-                        className="screen-reader-text"
-                      >
-                        Remove Hip Hop from the Subjects list.
-                      </span>
-                      <svg
-                        aria-hidden={true}
-                        className="manicon-svg utility__icon utility__icon--close svg-icon--close32"
-                        fill="currentColor"
-                        height={26}
-                        viewBox="0 0 32 32"
-                        width={26}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M7.00007316,7.70847994 L7.70712678,7.00132 L24.9999268,24.2915201 L24.2928732,24.99868 L7.00007316,7.70847994 Z M7.70712678,24.99868 L7.00007316,24.2915201 L24.2928732,7.00132 L24.9999268,7.70847994 L7.70712678,24.99868 Z"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div
-            className="form-input wide"
-            style={Object {}}
-          >
             <label
               className=""
-              htmlFor="tag-list-1"
+              htmlFor="text-input-1"
             >
-              Tags
+              Slug
             </label>
-            <div
-              className="has-many-list"
-            >
-              <div
-                aria-atomic={true}
-                aria-live="polite"
-                className="screen-reader-text"
-                role="status"
-              />
-              <div
-                className="input-predictive"
-              >
-                <div
-                  aria-expanded={false}
-                  aria-haspopup="listbox"
-                  aria-owns="1-listbox"
-                  className="input-predictive__input"
-                  role="combobox"
-                >
-                  <input
-                    aria-activedescendant={null}
-                    aria-autocomplete="list"
-                    aria-controls="1-listbox"
-                    aria-describedby="tag-list-error-1 tag-list-instructions-1"
-                    className="input-predictive__text-input text-input"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
-                    onKeyDown={[Function]}
-                    onKeyPress={[Function]}
-                    placeholder="Enter a Tag"
-                    type="text"
-                    value=""
-                  />
-                  <button
-                    aria-hidden="true"
-                    className="input-predictive__button"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <svg
-                      aria-hidden={true}
-                      className="manicon-svg input-predictive__icon svg-icon--plus16"
-                      fill="currentColor"
-                      height={20}
-                      viewBox="0 0 16 16"
-                      width={20}
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <ul
-                  aria-label="Enter a Tag"
-                  className="input-predictive__results"
-                  id="1-listbox"
-                  role="listbox"
-                />
-              </div>
-              <div
-                aria-atomic={true}
-                aria-live="polite"
-                className="screen-reader-text"
-                role="status"
-              />
-              <ul
-                aria-label="Active Tags"
-                className="bucket empty"
-                role="group"
-              >
-                <div
-                  className="placeholder"
-                >
-                  None added
-                </div>
-              </ul>
-            </div>
+            <input
+              aria-describedby="text-input-error-1 text-input-instructions-1"
+              id="text-input-1"
+              onChange={[Function]}
+              placeholder="Enter Project Slug"
+              type="text"
+              value=""
+            />
           </div>
           <div
             className="form-input avatar-builder wide"
@@ -1166,6 +796,470 @@ exports[`Backend Project General Container renders correctly 1`] = `
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div
+        aria-describedby="1-instructions"
+        aria-labelledby="1-header"
+        className="form-section"
+        role="group"
+      >
+        <header
+          className="form-section-label"
+        >
+          <h2
+            id="1-header"
+          >
+            Visibility
+          </h2>
+        </header>
+        <div
+          className="form-input-group"
+        >
+          <div
+            className="form-input form-toggle-secondary"
+          >
+            <label
+              className="form-input-heading toggle above"
+              htmlFor="switch-input-1"
+            >
+              Draft Mode
+            </label>
+            <div
+              className="toggle-indicator"
+            >
+              <div
+                aria-describedby="switch-input-instructions-1"
+                aria-pressed={false}
+                className="boolean-primary"
+                id="switch-input-1"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Draft Mode
+                </span>
+              </div>
+            </div>
+            <span
+              className="instructions"
+              id="switch-input-instructions-1"
+            >
+              A draft project is only visible to users who are able to modify it.
+            </span>
+          </div>
+          <div
+            className="form-input form-toggle-secondary"
+          >
+            <label
+              className="form-input-heading toggle above"
+              htmlFor="switch-input-1"
+            >
+              Featured
+            </label>
+            <div
+              className="toggle-indicator"
+            >
+              <div
+                aria-describedby="switch-input-instructions-1"
+                aria-pressed={false}
+                className="boolean-primary"
+                id="switch-input-1"
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Featured
+                </span>
+              </div>
+            </div>
+            <span
+              className="instructions"
+              id="switch-input-instructions-1"
+            >
+              Featured projects are highlighted on the home page.
+            </span>
+          </div>
+          <div
+            className="form-input"
+          >
+            <div
+              className="form-input"
+              style={Object {}}
+            >
+              <label
+                htmlFor="select-1"
+              >
+                Standalone Mode
+              </label>
+              <div
+                className="form-select"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg form-select__icon svg-icon--disclosureDown16"
+                  fill="currentColor"
+                  height={20}
+                  viewBox="0 0 16 16"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon
+                    points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+                  />
+                </svg>
+                <select
+                  aria-describedby="select-error-1 select-instructions-1"
+                  id="select-1"
+                  onChange={[Function]}
+                  value=""
+                >
+                  <option
+                    value="disabled"
+                  >
+                    Disabled
+                  </option>
+                  <option
+                    value="enabled"
+                  >
+                    Enabled
+                  </option>
+                  <option
+                    value="enforced"
+                  >
+                    Enforced
+                  </option>
+                </select>
+              </div>
+              <span
+                className="instructions"
+                id="select-instructions-1"
+              >
+                If enabled, this project will always render in standalone
+                mode when "&mode=standalone" is appended to the URL. If standalone mode
+                is enforced, this project will always render in standalone mode
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        aria-describedby="1-instructions"
+        aria-labelledby="1-header"
+        className="form-section"
+        role="group"
+      >
+        <header
+          className="form-section-label"
+        >
+          <h2
+            id="1-header"
+          >
+            Taxonomy
+          </h2>
+        </header>
+        <div
+          className="form-input-group"
+        >
+          <div
+            className="form-input wide"
+            style={Object {}}
+          >
+            <div
+              className="form-input-heading"
+            >
+              Subjects
+            </div>
+            <div
+              className="has-many-list"
+            >
+              <div
+                aria-atomic={true}
+                aria-live="polite"
+                className="screen-reader-text"
+                role="status"
+              />
+              <div
+                className="input-predictive"
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup="listbox"
+                  aria-owns="1-listbox"
+                  className="input-predictive__input"
+                  role="combobox"
+                >
+                  <input
+                    aria-activedescendant={null}
+                    aria-autocomplete="list"
+                    aria-controls="1-listbox"
+                    aria-describedby="predictive-text-belongs-to-error-1 predictive-text-belongs-to-instructions-1"
+                    className="input-predictive__text-input text-input"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyPress={[Function]}
+                    placeholder="Add a Subject"
+                    type="text"
+                    value=""
+                  />
+                  <button
+                    aria-hidden="true"
+                    className="input-predictive__button"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg input-predictive__icon svg-icon--plus16"
+                      fill="currentColor"
+                      height={20}
+                      viewBox="0 0 16 16"
+                      width={20}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <ul
+                  aria-label="Add a Subject"
+                  className="input-predictive__results"
+                  id="1-listbox"
+                  role="listbox"
+                />
+              </div>
+              <div
+                aria-atomic={true}
+                aria-live="polite"
+                className="screen-reader-text"
+                role="status"
+              />
+              <ul
+                aria-label="Active Subjects"
+                className="bucket"
+                role="group"
+              >
+                <li>
+                  <div
+                    className="association"
+                  >
+                    <div
+                      className="association-name"
+                    >
+                      Hip Hop
+                    </div>
+                  </div>
+                  <div
+                    className="utility"
+                  >
+                    <button
+                      className="utility__button"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Remove Hip Hop from the Subjects list.
+                      </span>
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg utility__icon utility__icon--close svg-icon--close32"
+                        fill="currentColor"
+                        height={26}
+                        viewBox="0 0 32 32"
+                        width={26}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.00007316,7.70847994 L7.70712678,7.00132 L24.9999268,24.2915201 L24.2928732,24.99868 L7.00007316,7.70847994 Z M7.70712678,24.99868 L7.00007316,24.2915201 L24.2928732,7.00132 L24.9999268,7.70847994 L7.70712678,24.99868 Z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            className="form-input wide"
+            style={Object {}}
+          >
+            <label
+              className=""
+              htmlFor="tag-list-1"
+            >
+              Tags
+            </label>
+            <div
+              className="has-many-list"
+            >
+              <div
+                aria-atomic={true}
+                aria-live="polite"
+                className="screen-reader-text"
+                role="status"
+              />
+              <div
+                className="input-predictive"
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup="listbox"
+                  aria-owns="1-listbox"
+                  className="input-predictive__input"
+                  role="combobox"
+                >
+                  <input
+                    aria-activedescendant={null}
+                    aria-autocomplete="list"
+                    aria-controls="1-listbox"
+                    aria-describedby="tag-list-error-1 tag-list-instructions-1"
+                    className="input-predictive__text-input text-input"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyPress={[Function]}
+                    placeholder="Enter a Tag"
+                    type="text"
+                    value=""
+                  />
+                  <button
+                    aria-hidden="true"
+                    className="input-predictive__button"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg input-predictive__icon svg-icon--plus16"
+                      fill="currentColor"
+                      height={20}
+                      viewBox="0 0 16 16"
+                      width={20}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2.01435,8.5138 L2.014482,7.5138 L14.01435,7.5149 L14.014218,8.5149 L2.01435,8.5138 Z M8.5149,14.014218 L7.5149,14.01435 L7.5138,2.014482 L8.5138,2.01435 L8.5149,14.014218 Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <ul
+                  aria-label="Enter a Tag"
+                  className="input-predictive__results"
+                  id="1-listbox"
+                  role="listbox"
+                />
+              </div>
+              <div
+                aria-atomic={true}
+                aria-live="polite"
+                className="screen-reader-text"
+                role="status"
+              />
+              <ul
+                aria-label="Active Tags"
+                className="bucket empty"
+                role="group"
+              >
+                <div
+                  className="placeholder"
+                >
+                  None added
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        aria-describedby="1-instructions"
+        aria-labelledby="1-header"
+        className="form-section"
+        role="group"
+      >
+        <header
+          className="form-section-label"
+        >
+          <h2
+            id="1-header"
+          >
+            Press Header Bar
+          </h2>
+        </header>
+        <span
+          className="instructions"
+          id="1-instructions"
+        >
+          Admin users can enabled the press bar for your installation on the settings / theme panel.
+        </span>
+        <div
+          className="form-input-group"
+        >
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className="has-instructions"
+              htmlFor="text-input-1"
+            >
+              Press Header Bar Text
+            </label>
+            <input
+              aria-describedby="text-input-error-1 text-input-instructions-1"
+              id="text-input-1"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+              id="text-input-instructions-1"
+            >
+              If the top bar is visible, this text will override the installation's top bar text
+            </span>
+          </div>
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className="has-instructions"
+              htmlFor="text-input-1"
+            >
+              Press Header Bar URL
+            </label>
+            <input
+              aria-describedby="text-input-error-1 text-input-instructions-1"
+              id="text-input-1"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+            <span
+              className="instructions"
+              id="text-input-instructions-1"
+            >
+              If the top bar is visible, this text will override the top bar link URL
+            </span>
           </div>
         </div>
       </div>

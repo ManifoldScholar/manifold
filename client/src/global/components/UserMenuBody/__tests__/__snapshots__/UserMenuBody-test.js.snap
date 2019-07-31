@@ -22,9 +22,9 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
           aria-hidden={true}
           className="manicon-svg user-menu__icon svg-icon--editProfile24"
           fill="currentColor"
-          height={53.3}
+          height={32}
           viewBox="0 0 24 24"
-          width={53.3}
+          width={32}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -57,9 +57,9 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
           aria-hidden={true}
           className="manicon-svg user-menu__icon svg-icon--notifications24"
           fill="currentColor"
-          height={53.3}
+          height={32}
           viewBox="0 0 24 24"
-          width={53.3}
+          width={32}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -91,9 +91,9 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
           aria-hidden={true}
           className="manicon-svg user-menu__icon svg-icon--logout24"
           fill="currentColor"
-          height={53.3}
+          height={32}
           viewBox="0 0 24 24"
-          width={53.3}
+          width={32}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path

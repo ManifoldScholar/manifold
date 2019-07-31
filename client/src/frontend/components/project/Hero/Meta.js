@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import some from "lodash/some";
 import isEmpty from "lodash/isEmpty";
 import Maker from "frontend/components/maker";
-import Heading from "./Heading";
 
 export default class ProjectHeroMeta extends PureComponent {
   static displayName = "ProjectHero.Meta";
@@ -86,7 +85,7 @@ export default class ProjectHeroMeta extends PureComponent {
   }
 
   render() {
-    const { blockClass, project } = this.props;
+    const { blockClass } = this.props;
     return (
       <div className={`${blockClass}__meta-block`}>
         {this.creators && this.renderCreatorList(blockClass)}

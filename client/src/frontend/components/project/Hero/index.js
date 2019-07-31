@@ -67,7 +67,7 @@ export default class ProjectHero extends PureComponent {
     this.resizeId = window.requestAnimationFrame(() => {
       this.addMarginToCoverIfStandalone();
     });
-  }
+  };
 
   detectObjectFit(prevState) {
     // only need to test for objectFit once, so if state.objectFit is already

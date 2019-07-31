@@ -2,32 +2,6 @@ import React from "react";
 import lh from "helpers/linkHandler";
 import compact from "lodash/compact";
 
-
-export function manifoldLinks() {
-  let links = [
-    {
-      to: lh.link("frontendProjectsAll"),
-      title: "Projects"
-    },
-    {
-      to: lh.link("frontend"),
-      title: "Home"
-    }
-  ];
-  return links;
-}
-
-export function pageLinks({ pages }) {
-  const collection = sortedPages(visiblePages(pages || []));
-  return collection.map(page => (
-    {
-      to: lh.link("frontendPage", page.attributes.slug),
-      title: page.attributes.navTitle || page.attributes.title,
-      openInNewTab: page.attributes.openInNewTab
-    }
-  ));
-}
-
 function visiblePages(pages = []) {
   return pages.filter(p => {
     return p.attributes.showInFooter && !p.attributes.hidden;
@@ -44,16 +18,42 @@ function sortedPages(pages = []) {
   return out;
 }
 
+export function manifoldLinks() {
+  const links = [
+    {
+      to: lh.link("frontendProjectsAll"),
+      title: "Projects"
+    },
+    {
+      to: lh.link("frontend"),
+      title: "Home"
+    }
+  ];
+  return links;
+}
 
-export function authenticationLink ({ authentication: { authenticated }, commonActions}) {
-  if (authenticated) return {
-    onClick: commonActions.logout,
-    title: "Log Out"
-  };
+export function pageLinks({ pages }) {
+  const collection = sortedPages(visiblePages(pages || []));
+  return collection.map(page => ({
+    to: lh.link("frontendPage", page.attributes.slug),
+    title: page.attributes.navTitle || page.attributes.title,
+    openInNewTab: page.attributes.openInNewTab
+  }));
+}
+
+export function authenticationLink({
+  authentication: { authenticated },
+  commonActions
+}) {
+  if (authenticated)
+    return {
+      onClick: commonActions.logout,
+      title: "Log Out"
+    };
   return {
     onClick: commonActions.toggleSignInUpOverlay,
     title: "Log In"
-  }
+  };
 }
 
 export function emailLink({ settings }) {
@@ -62,7 +62,7 @@ export function emailLink({ settings }) {
     title: "Email",
     to: lh.link("frontendContact"),
     icon: "socialEmail32"
-  }
+  };
 }
 
 export function twitterLink({ settings }) {
@@ -74,7 +74,7 @@ export function twitterLink({ settings }) {
     rel: "noopener noreferrer",
     title: "Twitter",
     icon: "socialTwitter32"
-  }
+  };
 }
 
 export function facebookLink({ settings }) {
@@ -86,7 +86,7 @@ export function facebookLink({ settings }) {
     rel: "noopener noreferrer",
     title: "Facebook",
     icon: "socialFacebook32"
-  }
+  };
 }
 
 export function socialLinks({ settings }) {
@@ -99,10 +99,9 @@ export function socialLinks({ settings }) {
 
 export default function defaultLinks(props) {
   const { pages } = props;
-  let links = [
-    authenticationLink(props)
-  ];
-  return links.concat(manifoldLinks())
+  const links = [authenticationLink(props)];
+  return links
+    .concat(manifoldLinks())
     .concat(pageLinks({ pages }))
-    .concat(socialLinks(props))
+    .concat(socialLinks(props));
 }

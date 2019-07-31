@@ -4,7 +4,6 @@ import withPluginReplacement from "hoc/with-plugin-replacement";
 import FooterParts from "./Parts";
 
 class ReaderFooter extends Component {
-
   get text() {
     return this.props.text;
   }
@@ -28,8 +27,11 @@ class ReaderFooter extends Component {
           {this.copyright}
         </FooterParts.PoweredBy>
       </footer>
-    )
+    );
   }
 }
 
-export default withPluginReplacement(ReaderFooter, "Global.Components.Footers.ReaderFooter");
+export default withPluginReplacement(
+  ReaderFooter,
+  "Global.Components.Footers.ReaderFooter"
+);

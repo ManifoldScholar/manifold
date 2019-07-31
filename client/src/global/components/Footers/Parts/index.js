@@ -8,5 +8,12 @@ import PressLogo from "./PressLogo";
 import Socials from "./Socials";
 
 export default {
-  Column, Columns, Search, Navigation, Copyright, PoweredBy, PressLogo, Socials
-}
+  Column,
+  Columns,
+  Search,
+  Navigation,
+  Copyright,
+  PoweredBy,
+  PressLogo,
+  Socials
+};

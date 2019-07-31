@@ -5,6 +5,7 @@ import Layout from "frontend/components/layout";
 import Hero from "./Hero";
 import ContentBlock from "frontend/components/content-block";
 import { FrontendModeContext } from "helpers/contexts";
+
 class Detail extends Component {
   static displayName = "Project.Detail";
 

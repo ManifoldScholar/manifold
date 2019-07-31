@@ -11,7 +11,6 @@ import entityUtils from "utils/entityUtils";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 import BodyClass from "hoc/body-class";
-import { FrontendModeContext } from "../../../helpers/contexts";
 
 const { request } = entityStoreActions;
 

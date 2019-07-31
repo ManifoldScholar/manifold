@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { BackLinkContext } from "helpers/contexts";
 
 export default class BackLinkRegister extends PureComponent {
-
   static contextType = BackLinkContext;
 
   componentDidMount() {
@@ -20,5 +19,4 @@ export default class BackLinkRegister extends PureComponent {
   render() {
     return null;
   }
-
 }

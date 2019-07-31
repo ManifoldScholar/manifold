@@ -489,6 +489,142 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
               </div>
             </div>
             <div
+              aria-describedby="1-instructions"
+              aria-labelledby="1-header"
+              className="form-section"
+              role="group"
+            >
+              <header
+                className="form-section-label"
+              >
+                <h2
+                  id="1-header"
+                >
+                  Press Header Bar
+                </h2>
+              </header>
+              <div
+                className="form-input-group"
+              >
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="text-input-1"
+                  >
+                    Text
+                  </label>
+                  <input
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
+                    id="text-input-1"
+                    onChange={[Function]}
+                    placeholder="Enter Press Bar Text"
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className="has-instructions"
+                    htmlFor="text-input-1"
+                  >
+                    Color
+                  </label>
+                  <input
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
+                    id="text-input-1"
+                    onChange={[Function]}
+                    placeholder="Enter Press Bar Color"
+                    type="text"
+                    value=""
+                  />
+                  <span
+                    className="instructions"
+                    id="text-input-instructions-1"
+                  >
+                    Enter a hex code beginning with #
+                  </span>
+                </div>
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label
+                    className=""
+                    htmlFor="text-input-1"
+                  >
+                    URL
+                  </label>
+                  <input
+                    aria-describedby="text-input-error-1 text-input-instructions-1"
+                    id="text-input-1"
+                    onChange={[Function]}
+                    placeholder="Enter Press Bar Link URL"
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-input"
+                >
+                  <div
+                    className="form-input"
+                    style={Object {}}
+                  >
+                    <label
+                      htmlFor="select-1"
+                    >
+                      Press Bar Display Mode
+                    </label>
+                    <div
+                      className="form-select"
+                    >
+                      <svg
+                        aria-hidden={true}
+                        className="manicon-svg form-select__icon svg-icon--disclosureDown16"
+                        fill="currentColor"
+                        height={20}
+                        viewBox="0 0 16 16"
+                        width={20}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <polygon
+                          points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
+                        />
+                      </svg>
+                      <select
+                        aria-describedby="select-error-1 select-instructions-1"
+                        id="select-1"
+                        onChange={[Function]}
+                        value=""
+                      >
+                        <option
+                          value="disabled"
+                        >
+                          Disabled
+                        </option>
+                        <option
+                          value="enforced"
+                        >
+                          Always Visible
+                        </option>
+                        <option
+                          value="enabled"
+                        >
+                          Only Visible in Standalone Mode
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
               className="form-input submit wide"
             >
               <input

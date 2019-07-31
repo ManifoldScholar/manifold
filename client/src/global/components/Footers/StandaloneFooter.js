@@ -5,14 +5,11 @@ import FooterParts from "./Parts";
 import { socialLinks } from "./Parts/helpers/links";
 
 class StandaloneFooter extends Component {
-
   render() {
     return (
       <footer className="app-footer app-footer--standalone">
         <div className="container">
-          <FooterParts.Socials
-            links={socialLinks(this.props)}
-          />
+          <FooterParts.Socials links={socialLinks(this.props)} />
         </div>
         <FooterParts.PoweredBy type="standalone">
           <FooterParts.Copyright
@@ -21,8 +18,11 @@ class StandaloneFooter extends Component {
           />
         </FooterParts.PoweredBy>
       </footer>
-    )
+    );
   }
 }
 
-export default withPluginReplacement(StandaloneFooter, "Global.Components.Footers.StandaloneFooter");
+export default withPluginReplacement(
+  StandaloneFooter,
+  "Global.Components.Footers.StandaloneFooter"
+);

@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import ResourceCollection from "frontend/components/resource-collection";
-import Utility from "frontend/components/utility";
 import { entityStoreActions, uiFrontendModeActions } from "actions";
 import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
 import { resourceCollectionsAPI, requests } from "api";

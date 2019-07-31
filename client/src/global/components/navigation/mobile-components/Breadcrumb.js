@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { matchPath } from 'react-router-dom';
+import { matchPath } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";

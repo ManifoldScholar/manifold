@@ -10,7 +10,6 @@ export default class RemoveMemberButton extends React.PureComponent {
 
   removeMember = event => {
     event.preventDefault();
-    console.log("Remove member");
   };
 
   render() {

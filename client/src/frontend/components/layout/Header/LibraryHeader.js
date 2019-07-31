@@ -1,6 +1,4 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
 import { Link } from "react-router-dom";
@@ -8,13 +6,11 @@ import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import BackLink from "frontend/components/back-link";
-import BlurOnLocationChange from "../../../../hoc/blur-on-location-change";
 
 export default class LayoutLibraryHeader extends PureComponent {
   static displayName = "Layout.LibraryHeader";
 
-  static propTypes = {
-  };
+  static propTypes = {};
 
   static defaultProps = {
     pages: []
@@ -74,10 +70,7 @@ export default class LayoutLibraryHeader extends PureComponent {
               <PressLogo
                 url={logoUrl}
                 mobileUrl={mobileLogoUrl}
-                styles={get(
-                  this.props.settings,
-                  "attributes.theme.logoStyles"
-                )}
+                styles={get(this.props.settings, "attributes.theme.logoStyles")}
                 aria-hidden="true"
               />
             </Link>

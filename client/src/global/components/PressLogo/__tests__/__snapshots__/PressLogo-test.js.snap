@@ -6,7 +6,7 @@ exports[`Global.PressLogo component renders correctly 1`] = `
 >
   <img
     alt="Publisher Logo: Click to return to the browse page"
-    className="image"
+    className="custom-logo__image"
     src="some/url"
     style={Object {}}
   />

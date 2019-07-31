@@ -1,9 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import HeaderNotifications from "global/components/HeaderNotifications";
-import get from "lodash/get";
-import BodyClass from "hoc/body-class";
 import BlurOnLocationChange from "hoc/blur-on-location-change";
 import Utility from "global/components/utility";
 import { FrontendModeContext } from "helpers/contexts";

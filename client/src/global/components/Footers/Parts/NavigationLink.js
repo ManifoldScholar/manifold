@@ -3,62 +3,63 @@ import { Link } from "react-router-dom";
 import Utility from "global/components/utility";
 import has from "lodash/has";
 
-export default function FooterPartsNavigationLink ({ item, hideLabel, className }) {
-
-  const icon = (item) => {
-    if (!item.icon) return null;
+export default function FooterPartsNavigationLink({
+  item,
+  hideLabel,
+  className
+}) {
+  const icon = theItem => {
+    if (!theItem.icon) return null;
     return (
       <Utility.IconComposer
-        icon={item.icon}
+        icon={theItem.icon}
         size={24}
         iconClass="app-footer-navigation__icon"
       />
-    )
+    );
   };
 
-  if (has(item, "href")) return (
-    <a
-      target={item.target}
-      rel={item.rel}
-      href={item.href}
-      className={className}
-    >
-      {icon(item)}
-      {!hideLabel && item.title}
-    </a>
-  );
+  if (has(item, "href"))
+    return (
+      <a
+        target={item.target}
+        rel={item.rel}
+        href={item.href}
+        className={className}
+      >
+        {icon(item)}
+        {!hideLabel && item.title}
+      </a>
+    );
 
-  if (has(item, "onClick")) return (
-    <span
-      role="button"
-      tabIndex="0"
-      onClick={item.onClick}
-      className={className}
-    >
-      {icon(item)}
-      {!hideLabel &&
-        <span className="app-footer-navigation__link-text">
-          {item.title}
-        </span>
-      }
-    </span>
-  );
+  if (has(item, "onClick"))
+    return (
+      <span
+        role="button"
+        tabIndex="0"
+        onClick={item.onClick}
+        className={className}
+      >
+        {icon(item)}
+        {!hideLabel && (
+          <span className="app-footer-navigation__link-text">{item.title}</span>
+        )}
+      </span>
+    );
 
-  if (item.to) return (
-    <Link
-      to={item.to}
-      target={item.openInNewTab ? "_blank" : null}
-      className={className}
-    >
-      {icon(item)}
-      {!hideLabel &&
-        <span className="app-footer-navigation__link-text">
-          {item.title}
-        </span>
-      }
-    </Link>
-  );
+  if (item.to)
+    return (
+      <Link
+        to={item.to}
+        target={item.openInNewTab ? "_blank" : null}
+        className={className}
+      >
+        {icon(item)}
+        {!hideLabel && (
+          <span className="app-footer-navigation__link-text">{item.title}</span>
+        )}
+      </Link>
+    );
 
   return null;
-
 }

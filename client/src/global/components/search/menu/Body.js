@@ -38,7 +38,6 @@ export class SearchMenuBody extends PureComponent {
   };
 
   doSearch = () => {
-    console.log(this.props.searchType, "st");
     if (this.props.searchType === "reader") return this.doReaderSearch();
     if (this.props.searchType === "project") return this.doProjectSearch();
     if (this.props.onSubmit) this.props.onSubmit();

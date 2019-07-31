@@ -7,7 +7,6 @@ import connectAndFetch from "utils/connectAndFetch";
 import Navigation from "global/components/navigation";
 import HeaderNotifications from "global/components/HeaderNotifications";
 import { FrontendModeContext } from "helpers/contexts";
-import ScrollAware from "hoc/scroll-aware";
 import { throttle } from "lodash";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
@@ -129,7 +128,7 @@ class StandaloneHeader extends PureComponent {
     this.resizeId = window.requestAnimationFrame(() => {
       this.setState({ mobile: window.innerWidth <= this.breakpoint });
     });
-  }
+  };
 
   get darkMode() {
     return this.context.project.darkMode;
@@ -176,11 +175,10 @@ class StandaloneHeader extends PureComponent {
   render() {
     const { sticky, mobile } = this.state;
     const visible = (sticky && !this.alwaysVisible) || mobile;
-    const hidden = (!sticky && !this.alwaysVisible) && !mobile;
+    const hidden = !sticky && !this.alwaysVisible && !mobile;
 
     const wrapperClasses = classNames({
       "standalone-header": true,
-
       "standalone-header--visible": visible,
       "standalone-header--hidden": hidden,
       "standalone-header--light": this.lightTheme,
@@ -195,10 +193,6 @@ class StandaloneHeader extends PureComponent {
       "standalone-header__header": true
     });
 
-    const navClasses = classNames({
-      "standalone-header__nav": true
-    });
-
     const offset = get(this.props, "settings.attributes.theme.headerOffset");
     const navStyle = offset
       ? { position: "relative", top: parseInt(offset, 10) }
@@ -207,7 +201,10 @@ class StandaloneHeader extends PureComponent {
     return (
       <React.Fragment>
         <div className={wrapperClasses}>
-          <SetCSSProperty measurement="height" propertyName="--standalone-header-height">
+          <SetCSSProperty
+            measurement="height"
+            propertyName="--standalone-header-height"
+          >
             <div className={innerClasses} ref={this.fixedRef}>
               <div className={headingClasses} aria-hidden={hidden}>
                 <Link

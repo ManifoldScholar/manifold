@@ -6,7 +6,6 @@ import StandaloneFooter from "./StandaloneFooter";
 import { FrontendModeContext } from "helpers/contexts";
 
 class FrontendFooter extends Component {
-
   static contextType = FrontendModeContext;
 
   get isBranded() {
@@ -15,10 +14,14 @@ class FrontendFooter extends Component {
   }
 
   render() {
-    if (this.context && this.context.isStandalone) return <StandaloneFooter {...this.props} />
-    if (this.isBranded) return <BrandedFooter {...this.props} />
-    return <DefaultFooter{...this.props} />
+    if (this.context && this.context.isStandalone)
+      return <StandaloneFooter {...this.props} />;
+    if (this.isBranded) return <BrandedFooter {...this.props} />;
+    return <DefaultFooter {...this.props} />;
   }
 }
 
-export default withPluginReplacement(FrontendFooter, "Global.Components.Footers.FrontendFooter");
+export default withPluginReplacement(
+  FrontendFooter,
+  "Global.Components.Footers.FrontendFooter"
+);

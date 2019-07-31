@@ -40,18 +40,21 @@ export default class ReturnMenuBody extends PureComponent {
               </span>
             </Link>
           </li>
-          {this.context.isLibrary &&
+          {this.context.isLibrary && (
             <React.Fragment>
               <li className="reader-return-menu__item">
-                <Link to={lh.link("frontend")} className="reader-return-menu__link">
+                <Link
+                  to={lh.link("frontend")}
+                  className="reader-return-menu__link"
+                >
                   <IconComposer
                     icon="projects64"
                     size={36.923}
                     iconClass="reader-return-menu__link-icon"
                   />
                   <span className="reader-return-menu__link-text">
-                  {"Projects"}
-                </span>
+                    {"Projects"}
+                  </span>
                 </Link>
               </li>
               <Authorize kind="any">
@@ -66,13 +69,13 @@ export default class ReturnMenuBody extends PureComponent {
                       iconClass="reader-return-menu__link-icon"
                     />
                     <span className="reader-return-menu__link-text">
-                  {"Following"}
-                </span>
+                      {"Following"}
+                    </span>
                   </Link>
                 </li>
               </Authorize>
             </React.Fragment>
-          }
+          )}
           <Authorize kind="unauthenticated">
             <li className="reader-return-menu__item">
               <button

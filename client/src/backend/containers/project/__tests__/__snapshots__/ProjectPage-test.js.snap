@@ -91,7 +91,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                     "height": 100,
                   }
                 }
-                value=""
+                value="The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew."
               />
             </div>
           </div>
