@@ -58,6 +58,7 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
               aria-hidden={true}
               className="form-dropzone__inline-button"
               tabIndex="-1"
+              type="button"
             >
               Upload a file
             </button>
@@ -118,7 +119,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
               className="form-dropzone__inline-button"
               data-id="remove"
               onClick={[Function]}
-              tabIndex="0"
+              type="button"
             >
               Remove this image
             </button>
@@ -129,6 +130,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
               aria-hidden={true}
               className="form-dropzone__inline-button"
               tabIndex="-1"
+              type="button"
             >
               Upload an image
             </button>
@@ -190,7 +192,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
               className="form-dropzone__inline-button"
               data-id="remove"
               onClick={[Function]}
-              tabIndex="0"
+              type="button"
             >
               Remove this image
             </button>
@@ -201,6 +203,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
               aria-hidden={true}
               className="form-dropzone__inline-button"
               tabIndex="-1"
+              type="button"
             >
               Upload an image
             </button>
@@ -262,7 +265,7 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
               className="form-dropzone__inline-button"
               data-id="remove"
               onClick={[Function]}
-              tabIndex="0"
+              type="button"
             >
               Remove this image
             </button>
@@ -273,6 +276,7 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
               aria-hidden={true}
               className="form-dropzone__inline-button"
               tabIndex="-1"
+              type="button"
             >
               Upload an image
             </button>

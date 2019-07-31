@@ -39,6 +39,7 @@ export default class FormUploadEmpty extends PureComponent {
             ) : (
               <React.Fragment>
                 <button
+                  type="button"
                   className="form-dropzone__inline-button"
                   aria-hidden
                   tabIndex="-1"
