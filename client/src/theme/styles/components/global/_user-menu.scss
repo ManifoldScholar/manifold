@@ -36,7 +36,7 @@
   $tailHeight: 17px;
 
   min-width: $menuWidth;
-  background-color: $neutral05;
+  background-color: $neutral10;
 
   .header-app & {
     @include boxShadow(5px, 15px, 35px, 8px);
@@ -44,7 +44,7 @@
   }
 
   &__tail {
-    @include tailUp($neutral05, $tailHeight);
+    @include tailUp($neutral10, $tailHeight);
     position: absolute;
     top: -$tailHeight;
     right: 25px;
