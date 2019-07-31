@@ -142,7 +142,6 @@ export class ReaderContainer extends Component {
     this.props.dispatch(flush(requests.rText));
     this.props.dispatch(flush(requests.rMyAnnotationsForText));
     this.props.dispatch(flush(requests.rMyFilteredAnnotationsForText));
-    this.props.dispatch(uiFrontendModeActions.setFrontendModeToLibrary());
   }
 
   get bodyClass() {
