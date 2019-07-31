@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
   DisplayCopNames: true
   Exclude:
       - 'vendor/**/*'
@@ -7,6 +7,11 @@ AllCops:
       - 'bin/**/*'
       - 'spec/**/*'
       - 'lib/patches/**/*'
+      - 'api/vendor/**/*'
+      - 'api/db/**/*'
+      - 'api/bin/**/*'
+      - 'api/spec/**/*'
+      - 'api/lib/patches/**/*'
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
