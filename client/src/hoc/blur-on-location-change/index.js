@@ -29,7 +29,6 @@ export default class BlurOnLocationChange extends PureComponent {
   }
 
   render() {
-
     const Tag = this.props.tag;
 
     return (

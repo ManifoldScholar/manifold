@@ -5,7 +5,7 @@ import { isFunction } from "lodash";
 import { isPromise } from "utils/promise";
 import ch from "helpers/consoleHelpers";
 import config from "config";
-import { ReactReduxContext } from 'react-redux'
+import { ReactReduxContext } from "react-redux";
 
 function getDisplayName(WrappedComponent) {
   let Wrapped = WrappedComponent;

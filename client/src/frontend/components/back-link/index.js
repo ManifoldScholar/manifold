@@ -6,4 +6,4 @@ export default {
   Register,
   Render,
   Provider
-}
+};

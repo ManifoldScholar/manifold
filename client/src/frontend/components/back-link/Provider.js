@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { BackLinkContext } from "helpers/contexts";
 
 export default class BackLinkProvider extends PureComponent {
-
   static contextType = BackLinkContext;
 
   constructor(props) {
@@ -10,10 +9,10 @@ export default class BackLinkProvider extends PureComponent {
 
     this.state = {
       backLink: null
-    }
+    };
   }
 
-  setBackLink = (backLink) => {
+  setBackLink = backLink => {
     this.setState({ backLink });
   };
 
@@ -29,7 +28,6 @@ export default class BackLinkProvider extends PureComponent {
       <BackLinkContext.Provider value={this.contextValue}>
         {this.props.children}
       </BackLinkContext.Provider>
-    )
+    );
   }
-
 }

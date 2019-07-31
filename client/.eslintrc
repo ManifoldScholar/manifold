@@ -56,7 +56,7 @@
     "import/no-absolute-path": 0,
 
     // We're not including the .js extensions on imports.
-    "import/extensions": [2, { "js": "never" }],
+    "import/extensions": [2, { "js": "never", "jpg": "always" }],
 
     // Sometimes braces are added so the arrow function can wrap
     "arrow-body-style": 0,
@@ -183,5 +183,13 @@
     "__API_URL__": true,
     "__CABLE_URL__": true,
     "socket": true
-  }
+  },
+  "overrides": [
+    {
+      "files": [ "*.stories.js" ],
+      "rules": {
+        "no-console": 0
+      }
+    }
+  ]
 }

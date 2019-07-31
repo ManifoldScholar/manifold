@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 export default class Search extends PureComponent {
-
   static displayName = "Global.Footers.Parts.Search";
 
   static propTypes = {
@@ -33,7 +32,6 @@ export default class Search extends PureComponent {
   };
 
   render() {
-
     const containerClasses = classNames(
       "app-footer-search-form",
       "search-form",
@@ -41,7 +39,6 @@ export default class Search extends PureComponent {
         "app-footer-search-form--with-top-margin": this.props.withTopMargin
       }
     );
-
 
     return (
       <form className={containerClasses} onSubmit={this.doSearch}>

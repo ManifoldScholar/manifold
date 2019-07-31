@@ -10,7 +10,7 @@ export default class SetCSSProperty extends PureComponent {
     ]),
     measurement: PropTypes.oneOf(["width", "height"]),
     propertyName: PropTypes.string.isRequired
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -33,13 +33,14 @@ export default class SetCSSProperty extends PureComponent {
   }
 
   setMeasuredProperty = () => {
-    const measurement =
-      this.measuredRef.current.getBoundingClientRect()[this.props.measurement];
+    const measurement = this.measuredRef.current.getBoundingClientRect()[
+      this.props.measurement
+    ];
     document.documentElement.style.setProperty(
       this.props.propertyName,
       `${measurement}px`
     );
-  }
+  };
 
   render() {
     return <div ref={this.measuredRef}>{this.props.children}</div>;

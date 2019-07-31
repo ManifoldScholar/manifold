@@ -20,8 +20,8 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                 </p>
               </div>
               <div className=\\"buttons-icon-horizontal maintain\\">
-                <Link className=\\"buttons-icon-horizontal__button button-icon-secondary\\" to=\\"/backend/projects/text/1/styles/new\\" replace={false}>
-                  <a className=\\"buttons-icon-horizontal__button button-icon-secondary\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/new\\">
+                <Link className=\\"buttons-icon-horizontal__button button-icon-secondary\\" to=\\"/backend/projects/text/1/styles/new\\">
+                  <a className=\\"buttons-icon-horizontal__button button-icon-secondary\\" onClick={[Function: onClick]} href=\\"/backend/projects/text/1/styles/new\\">
                     <IconComposer icon=\\"plus16\\" size={18} iconClass=\\"button-icon-secondary__icon button-icon-secondary__icon--large\\" fill=\\"currentColor\\" svgProps={{...}}>
                       <Plus svgProps={{...}} iconClass=\\"button-icon-secondary__icon button-icon-secondary__icon--large svg-icon--plus16\\" icon=\\"plus16\\" size={18} fill=\\"currentColor\\" stroke=\\"currentColor\\">
                         <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg button-icon-secondary__icon button-icon-secondary__icon--large svg-icon--plus16\\" width={18} height={18} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
@@ -51,8 +51,8 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                         <DragHandle draggableId=\\"2\\" isDragging={false} direction={{...}} isEnabled={true} callbacks={{...}} getDraggableRef={[Function]} canDragInteractiveElements={false}>
                                           <div className=\\"ordered-records-item\\">
                                             <div data-react-beautiful-dnd-draggable=\\"0\\" style={{...}} className=\\"ordered-records-item__inner\\">
-                                              <Link className=\\"ordered-records-item__details\\" to=\\"/backend/projects/text/1/styles/2\\" replace={false}>
-                                                <a className=\\"ordered-records-item__details\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/2\\">
+                                              <Link className=\\"ordered-records-item__details\\" to=\\"/backend/projects/text/1/styles/2\\">
+                                                <a className=\\"ordered-records-item__details\\" onClick={[Function: onClick]} href=\\"/backend/projects/text/1/styles/2\\">
                                                   <div className=\\"ordered-records-item__icon\\">
                                                     <IconComposer icon=\\"resourceDocument64\\" size={50} fill=\\"currentColor\\" svgProps={{...}}>
                                                       <ResourceDocument svgProps={{...}} iconClass=\\"svg-icon--resourceDocument64\\" icon=\\"resourceDocument64\\" size={50} fill=\\"currentColor\\" stroke=\\"currentColor\\">
@@ -88,8 +88,8 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                                     Delete Stylesheet
                                                   </span>
                                                 </button>
-                                                <Link className=\\"ordered-records-item__button\\" to=\\"/backend/projects/text/1/styles/2\\" replace={false}>
-                                                  <a className=\\"ordered-records-item__button\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/2\\">
+                                                <Link className=\\"ordered-records-item__button\\" to=\\"/backend/projects/text/1/styles/2\\">
+                                                  <a className=\\"ordered-records-item__button\\" onClick={[Function: onClick]} href=\\"/backend/projects/text/1/styles/2\\">
                                                     <IconComposer icon=\\"annotate32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
                                                       <Annotate svgProps={{...}} iconClass=\\"svg-icon--annotate32\\" icon=\\"annotate32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
                                                         <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--annotate32\\" width={26} height={26} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
@@ -130,8 +130,8 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                         <DragHandle draggableId=\\"3\\" isDragging={false} direction={{...}} isEnabled={true} callbacks={{...}} getDraggableRef={[Function]} canDragInteractiveElements={false}>
                                           <div className=\\"ordered-records-item\\">
                                             <div data-react-beautiful-dnd-draggable=\\"0\\" style={{...}} className=\\"ordered-records-item__inner\\">
-                                              <Link className=\\"ordered-records-item__details\\" to=\\"/backend/projects/text/1/styles/3\\" replace={false}>
-                                                <a className=\\"ordered-records-item__details\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/3\\">
+                                              <Link className=\\"ordered-records-item__details\\" to=\\"/backend/projects/text/1/styles/3\\">
+                                                <a className=\\"ordered-records-item__details\\" onClick={[Function: onClick]} href=\\"/backend/projects/text/1/styles/3\\">
                                                   <div className=\\"ordered-records-item__icon\\">
                                                     <IconComposer icon=\\"resourceDocument64\\" size={50} fill=\\"currentColor\\" svgProps={{...}}>
                                                       <ResourceDocument svgProps={{...}} iconClass=\\"svg-icon--resourceDocument64\\" icon=\\"resourceDocument64\\" size={50} fill=\\"currentColor\\" stroke=\\"currentColor\\">
@@ -167,8 +167,8 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                                                     Delete Stylesheet
                                                   </span>
                                                 </button>
-                                                <Link className=\\"ordered-records-item__button\\" to=\\"/backend/projects/text/1/styles/3\\" replace={false}>
-                                                  <a className=\\"ordered-records-item__button\\" onClick={[Function]} href=\\"/backend/projects/text/1/styles/3\\">
+                                                <Link className=\\"ordered-records-item__button\\" to=\\"/backend/projects/text/1/styles/3\\">
+                                                  <a className=\\"ordered-records-item__button\\" onClick={[Function: onClick]} href=\\"/backend/projects/text/1/styles/3\\">
                                                     <IconComposer icon=\\"annotate32\\" size={26} fill=\\"currentColor\\" svgProps={{...}}>
                                                       <Annotate svgProps={{...}} iconClass=\\"svg-icon--annotate32\\" icon=\\"annotate32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
                                                         <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--annotate32\\" width={26} height={26} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>

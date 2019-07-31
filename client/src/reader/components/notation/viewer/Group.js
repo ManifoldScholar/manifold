@@ -66,6 +66,11 @@ export default class NotationViewerGroup extends PureComponent {
     const thumbClasses = classNames("group-thumbnails", {
       overflow: entries.length > 8
     });
+
+    /* eslint-disable jsx-a11y/anchor-is-valid                                          */
+    /* jsx-a11y sees the link in this component as missing a href attribute, but it's a */
+    /* false positive, as the child Link component does in fact render an a tag with a  */
+    /* href.                                                                            */
     return (
       <div
         ref={r => {
@@ -148,5 +153,6 @@ export default class NotationViewerGroup extends PureComponent {
         </h4>
       </div>
     );
+    /* eslint-enable jsx-a11y/anchor-is-valid */
   }
 }

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Layout from "frontend/components/layout";
 import Event from "frontend/components/event";
-import Utility from "frontend/components/utility";
-import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import IconComposer from "global/components/utility/IconComposer";
 import { FrontendModeContext } from "helpers/contexts";

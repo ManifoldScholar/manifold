@@ -45,7 +45,6 @@ export default class JoinBox extends Component {
 
   handleJoinButton = event => {
     event.stopPropagation();
-    console.log("Join button clicked");
   };
 
   render() {

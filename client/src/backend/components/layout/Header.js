@@ -30,10 +30,10 @@ export default class LayoutHeader extends Component {
         className="header-app header-app--sticky"
         location={this.props.location}
       >
-      <Utility.SetCSSProperty
-        measurement="height"
-        propertyName="--header-height"
-      >
+        <Utility.SetCSSProperty
+          measurement="height"
+          propertyName="--header-height"
+        >
           <Utility.SkipLink />
           <div className="library-header library-header--dark">
             <div className="library-header__inner">

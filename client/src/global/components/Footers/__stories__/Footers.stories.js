@@ -4,18 +4,16 @@ import Footers from "../index";
 import logo from "./logo.jpg";
 
 const pages = build.arrayOf.pages(3);
-const text = build.entity.text(
-  null,
-  {
-    metadataFormatted: {
-      rights: "Copyright 2012 by the some press, somewhere."
-    }
+const text = build.entity.text(null, {
+  metadataFormatted: {
+    rights: "Copyright 2012 by the some press, somewhere."
   }
-);
+});
 
 const settings = {
   attributes: {
-    copyrightFormatted: "© 2018 Press Name Goes Here. Vestibulum id ligula porta felis euismod semper.",
+    copyrightFormatted:
+      "© 2018 Press Name Goes Here. Vestibulum id ligula porta felis euismod semper.",
     general: {
       contactEmail: "manifold@manifold.com",
       twitter: "manifoldscholar",
@@ -26,7 +24,8 @@ const settings = {
 
 const brandedSettings = {
   attributes: {
-    copyrightFormatted: "© 2018 Press Name Goes Here. Vestibulum id ligula porta felis euismod semper.",
+    copyrightFormatted:
+      "© 2018 Press Name Goes Here. Vestibulum id ligula porta felis euismod semper.",
     pressLogoFooterStyles: {
       original: `/${logo}`
     },
@@ -47,7 +46,7 @@ storiesOf("Global/Footers", module)
         commonActions={{}}
         settings={settings}
       />
-    )
+    );
   })
   .add("FE Footer (Branded)", () => {
     return (
@@ -57,14 +56,10 @@ storiesOf("Global/Footers", module)
         commonActions={{}}
         settings={brandedSettings}
       />
-    )
+    );
   })
   .add("Reader Footer", () => {
-    return (
-      <Footers.ReaderFooter
-        text={text}
-      />
-    )
+    return <Footers.ReaderFooter text={text} />;
   })
   .add("Standalone Footer", () => {
     return (
@@ -74,8 +69,5 @@ storiesOf("Global/Footers", module)
         commonActions={{}}
         settings={brandedSettings}
       />
-    )
-  })
-
-
-
+    );
+  });

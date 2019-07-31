@@ -7,319 +7,358 @@ exports[`Backend Backend Container renders correctly 1`] = `
       <BackendContainer history={{...}} notifications={{...}} authentication={{...}} route={{...}} visibility={{...}} settings={{...}}>
         <SideEffect(BodyClass) className=\\"backend bg-neutral90\\">
           <BodyClass className=\\"backend bg-neutral90\\">
-            <div>
-              <withRouter(Connect(RedirectToFirstMatch)) from=\\"/backend\\" candidates={{...}}>
-                <Route>
-                  <Connect(RedirectToFirstMatch) from=\\"/backend\\" candidates={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
-                    <RedirectToFirstMatch from=\\"/backend\\" candidates={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} authentication={{...}} dispatch={[Function]} />
-                  </Connect(RedirectToFirstMatch)>
-                </Route>
-              </withRouter(Connect(RedirectToFirstMatch))>
-              <withRouter(ScrollToTop)>
-                <Route>
-                  <ScrollToTop match={{...}} location={{...}} history={{...}} staticContext={[undefined]} />
-                </Route>
-              </withRouter(ScrollToTop)>
-              <ScrollAware threshold={200} topClass=\\"top\\" notTopClass=\\"not-top\\" startPinned={true} pinnedClass=\\"pinned\\" notPinnedClass=\\"not-pinned\\" pinThreshold={50}>
-                <div className=\\"scroll-aware top pinned\\">
-                  <Layout.Header visibility={{...}} match={[undefined]} location={[undefined]} authentication={{...}} commonActions={{...}} scrollAware={{...}}>
-                    <BlurOnLocationChange location={[undefined]}>
-                      <div>
-                        <header className=\\"header-app dark\\">
-                          <SkipLink skipId=\\"skip-to-main\\" skipLinkText=\\"Skip to main content\\" skipMessage=\\"Skipped to Main Content\\">
-                            <a className=\\"skip-to-main screen-reader-text\\" href=\\"#skip-to-main\\" onClick={[Function]}>
-                              Skip to main content
+            <withRouter(Connect(RedirectToFirstMatch)) from=\\"/backend\\" candidates={{...}}>
+              <Connect(RedirectToFirstMatch) from=\\"/backend\\" candidates={{...}} history={{...}} location={{...}} match={{...}} staticContext={[undefined]}>
+                <RedirectToFirstMatch from=\\"/backend\\" candidates={{...}} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} authentication={{...}} dispatch={[Function]} />
+              </Connect(RedirectToFirstMatch)>
+            </withRouter(Connect(RedirectToFirstMatch))>
+            <withRouter(ScrollToTop)>
+              <ScrollToTop history={{...}} location={{...}} match={{...}} staticContext={[undefined]} />
+            </withRouter(ScrollToTop)>
+            <Layout.Header visibility={{...}} match={[undefined]} location={[undefined]} authentication={{...}} commonActions={{...}}>
+              <BlurOnLocationChange tag=\\"header\\" className=\\"header-app header-app--sticky\\" location={[undefined]}>
+                <header className=\\"header-app header-app--sticky\\">
+                  <SetCSSProperty measurement=\\"height\\" propertyName=\\"--header-height\\">
+                    <div>
+                      <SkipLink skipId=\\"skip-to-main\\" skipLinkText=\\"Skip to main content\\" skipMessage=\\"Skipped to Main Content\\">
+                        <a className=\\"skip-to-main screen-reader-text\\" href=\\"#skip-to-main\\" onClick={[Function]}>
+                          Skip to main content
+                        </a>
+                      </SkipLink>
+                      <div className=\\"library-header library-header--dark\\">
+                        <div className=\\"library-header__inner\\">
+                          <Link to=\\"/\\" className=\\"header-logo\\">
+                            <a className=\\"header-logo\\" onClick={[Function: onClick]} href=\\"/\\">
+                              <span className=\\"screen-reader-text\\">
+                                Return to home
+                              </span>
+                              <PressLogo aria-hidden=\\"true\\">
+                                <figure className=\\"\\">
+                                  <IconComposer size={26} icon=\\"manifoldLogo32\\" fill=\\"currentColor\\" svgProps={{...}}>
+                                    <ManifoldLogo svgProps={{...}} iconClass=\\"svg-icon--manifoldLogo32\\" icon=\\"manifoldLogo32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                      <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--manifoldLogo32\\" width={26} height={26} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                        <polygon fillRule=\\"evenodd\\" points=\\"29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22\\" />
+                                      </svg>
+                                    </ManifoldLogo>
+                                  </IconComposer>
+                                  <span className=\\"screen-reader-text\\">
+                                    Manifold Logo
+                                  </span>
+                                </figure>
+                              </PressLogo>
                             </a>
-                          </SkipLink>
-                          <div className=\\"header-container\\">
-                            <Link to=\\"/\\" className=\\"header-logo\\" replace={false}>
-                              <a className=\\"header-logo\\" onClick={[Function]} href=\\"/\\">
-                                <span className=\\"screen-reader-text\\">
-                                  Return to home
-                                </span>
-                                <PressLogo aria-hidden=\\"true\\">
-                                  <figure className=\\"\\">
-                                    <IconComposer size={26} icon=\\"manifoldLogo32\\" fill=\\"currentColor\\" svgProps={{...}}>
-                                      <ManifoldLogo svgProps={{...}} iconClass=\\"svg-icon--manifoldLogo32\\" icon=\\"manifoldLogo32\\" size={26} fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                                        <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--manifoldLogo32\\" width={26} height={26} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
-                                          <polygon fillRule=\\"evenodd\\" points=\\"29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22\\" />
-                                        </svg>
-                                      </ManifoldLogo>
-                                    </IconComposer>
-                                    <span className=\\"screen-reader-text\\">
-                                      Manifold Logo
-                                    </span>
-                                  </figure>
-                                </PressLogo>
-                              </a>
-                            </Link>
-                            <withRouter(Navigation.Primary) links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\">
-                              <Route>
-                                <Navigation.Primary links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false}>
-                                  <withRouter(Navigation.Static) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
-                                    <Route>
-                                      <Navigation.Static backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
-                                        <nav className=\\"page-nav show-75\\" aria-label=\\"Primary Navigation\\">
-                                          <ul aria-label=\\"Page Links\\" style={[undefined]} className=\\"links\\">
-                                            <li>
-                                              <NavLink to=\\"/backend/dashboard\\" exact={false} target={{...}} activeClassName=\\"active\\" aria-current=\\"page\\">
-                                                <Route path=\\"\\\\\\\\/backend\\\\\\\\/dashboard\\" exact={false} strict={[undefined]} location={[undefined]}>
-                                                  <Link to=\\"/backend/dashboard\\" className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} replace={false}>
-                                                    <a className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} onClick={[Function]} href=\\"/backend/dashboard\\">
-                                                      Dashboard
-                                                    </a>
-                                                  </Link>
-                                                </Route>
-                                              </NavLink>
-                                            </li>
-                                            <li>
-                                              <NavLink to=\\"/backend/projects\\" exact={false} target={{...}} activeClassName=\\"active\\" aria-current=\\"page\\">
-                                                <Route path=\\"\\\\\\\\/backend\\\\\\\\/projects\\" exact={false} strict={[undefined]} location={[undefined]}>
-                                                  <Link to=\\"/backend/projects\\" className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} replace={false}>
-                                                    <a className={[undefined]} style={[undefined]} aria-current={{...}} target={{...}} onClick={[Function]} href=\\"/backend/projects\\">
-                                                      Projects
-                                                    </a>
-                                                  </Link>
-                                                </Route>
-                                              </NavLink>
-                                            </li>
-                                            <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
-                                              <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                                            </Connect(AuthorizeComponent)>
-                                            <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
-                                              <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
-                                            </Connect(AuthorizeComponent)>
-                                          </ul>
-                                        </nav>
-                                        <nav className=\\"user-links show-75\\">
-                                          <ul aria-label=\\"User Links\\" style={[undefined]}>
-                                            <li>
-                                              <Link className=\\"header-app__mode-button\\" to=\\"/\\" replace={false}>
-                                                <a className=\\"header-app__mode-button\\" onClick={[Function]} href=\\"/\\">
-                                                  Exit Admin Mode
-                                                </a>
-                                              </Link>
-                                            </li>
-                                            <li>
-                                              <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
-                                                <button onClick={[Function]} className=\\"button-avatar\\" aria-haspopup={true} aria-expanded={[undefined]}>
-                                                  <span className=\\"screen-reader-text\\">
-                                                    User settings
-                                                  </span>
-                                                  <Avatar url={[undefined]} ariaHidden={true}>
-                                                    <figure style={[undefined]} className=\\"avatar\\" aria-hidden={true}>
-                                                      <IconComposer icon=\\"Avatar64\\" size=\\"default\\" iconClass=\\"avatar__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
-                                                        <Avatar svgProps={{...}} iconClass=\\"avatar__icon svg-icon--Avatar64\\" icon=\\"Avatar64\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                                                          <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg avatar__icon svg-icon--Avatar64\\" width={64} height={64} viewBox=\\"0 0 64 64\\" fill=\\"currentColor\\" aria-hidden={true}>
-                                                            <path fillRule=\\"evenodd\\" d=\\"M48.204,49.686 L48.109,49.118 C47.436,45.082 43.979,42.153 39.889,42.153 L24.108,42.153 C20.017,42.153 16.56,45.082 15.889,49.118 L15.794,49.684 C11.007,45.294 8,38.993 8,32 C8,18.767 18.767,8 32,8 C45.233,8 56,18.767 56,32 C56,38.994 52.992,45.295 48.204,49.686 M17.574,51.167 L17.861,49.446 C18.372,46.379 20.999,44.153 24.108,44.153 L39.889,44.153 C42.997,44.153 45.625,46.379 46.137,49.446 L46.424,51.168 C42.405,54.2 37.409,56 32,56 C26.59,56 21.593,54.2 17.574,51.167 M32,6 C17.663,6 6,17.664 6,32 C6,46.337 17.663,58 32,58 C46.337,58 58,46.337 58,32 C58,17.664 46.337,6 32,6 M31.9989,35.6704 C27.0359,35.6704 22.9989,31.6324 22.9989,26.6694 C22.9989,21.7054 27.0359,17.6674 31.9989,17.6674 C36.9619,17.6674 40.9989,21.7054 40.9989,26.6694 C40.9989,31.6324 36.9619,35.6704 31.9989,35.6704 M31.9989,15.6674 C25.9339,15.6674 20.9989,20.6034 20.9989,26.6694 C20.9989,32.7354 25.9339,37.6704 31.9989,37.6704 C38.0639,37.6704 42.9989,32.7354 42.9989,26.6694 C42.9989,20.6034 38.0639,15.6674 31.9989,15.6674\\" />
-                                                          </svg>
-                                                        </Avatar>
-                                                      </IconComposer>
-                                                      <span className=\\"screen-reader-text\\">
-                                                        Avatar
-                                                      </span>
-                                                    </figure>
+                          </Link>
+                          <withRouter(Navigation.Primary) links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" darkTheme={true}>
+                            <Navigation.Primary links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" darkTheme={true} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} exact={false}>
+                              <withRouter(Navigation.Static) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" darkTheme={true} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
+                                <Navigation.Static backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" darkTheme={true} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
+                                  <nav className=\\"site-nav show-75 site-nav--backend\\" aria-label=\\"Primary Navigation\\">
+                                    <ul aria-label=\\"Page Links\\" style={[undefined]} className=\\"site-nav__list\\">
+                                      <li className=\\"site-nav__item\\">
+                                        <NavLink to=\\"/backend/dashboard\\" exact={false} target={{...}} className=\\"site-nav__link\\" activeClassName=\\"site-nav__link--active\\">
+                                          <Link aria-current={{...}} className=\\"site-nav__link\\" style={[undefined]} to=\\"/backend/dashboard\\" target={{...}}>
+                                            <a aria-current={{...}} className=\\"site-nav__link\\" style={[undefined]} target={{...}} onClick={[Function: onClick]} href=\\"/backend/dashboard\\">
+                                              Dashboard
+                                            </a>
+                                          </Link>
+                                        </NavLink>
+                                      </li>
+                                      <li className=\\"site-nav__item\\">
+                                        <NavLink to=\\"/backend/projects\\" exact={false} target={{...}} className=\\"site-nav__link\\" activeClassName=\\"site-nav__link--active\\">
+                                          <Link aria-current={{...}} className=\\"site-nav__link\\" style={[undefined]} to=\\"/backend/projects\\" target={{...}}>
+                                            <a aria-current={{...}} className=\\"site-nav__link\\" style={[undefined]} target={{...}} onClick={[Function: onClick]} href=\\"/backend/projects\\">
+                                              Projects
+                                            </a>
+                                          </Link>
+                                        </NavLink>
+                                      </li>
+                                      <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
+                                        <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                      </Connect(AuthorizeComponent)>
+                                      <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
+                                        <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                                      </Connect(AuthorizeComponent)>
+                                    </ul>
+                                  </nav>
+                                  <nav className=\\"user-nav show-75 user-nav--dark\\">
+                                    <ul aria-label=\\"User Links\\" style={[undefined]} className=\\"user-nav__list\\">
+                                      <li className=\\"user-nav__item\\">
+                                        <Link className=\\"mode-button\\" to=\\"/\\">
+                                          <a className=\\"mode-button\\" onClick={[Function: onClick]} href=\\"/\\">
+                                            Exit Admin Mode
+                                          </a>
+                                        </Link>
+                                      </li>
+                                      <li className=\\"user-nav__item\\">
+                                        <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]} darkTheme={true}>
+                                          <button onClick={[Function]} className=\\"button-avatar\\" aria-haspopup={true} aria-expanded={[undefined]}>
+                                            <span className=\\"screen-reader-text\\">
+                                              User settings
+                                            </span>
+                                            <Avatar url={[undefined]} ariaHidden={true}>
+                                              <figure style={[undefined]} className=\\"avatar\\" aria-hidden={true}>
+                                                <IconComposer icon=\\"Avatar64\\" size=\\"default\\" iconClass=\\"avatar__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
+                                                  <Avatar svgProps={{...}} iconClass=\\"avatar__icon svg-icon--Avatar64\\" icon=\\"Avatar64\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                    <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg avatar__icon svg-icon--Avatar64\\" width={64} height={64} viewBox=\\"0 0 64 64\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                                      <path fillRule=\\"evenodd\\" d=\\"M48.204,49.686 L48.109,49.118 C47.436,45.082 43.979,42.153 39.889,42.153 L24.108,42.153 C20.017,42.153 16.56,45.082 15.889,49.118 L15.794,49.684 C11.007,45.294 8,38.993 8,32 C8,18.767 18.767,8 32,8 C45.233,8 56,18.767 56,32 C56,38.994 52.992,45.295 48.204,49.686 M17.574,51.167 L17.861,49.446 C18.372,46.379 20.999,44.153 24.108,44.153 L39.889,44.153 C42.997,44.153 45.625,46.379 46.137,49.446 L46.424,51.168 C42.405,54.2 37.409,56 32,56 C26.59,56 21.593,54.2 17.574,51.167 M32,6 C17.663,6 6,17.664 6,32 C6,46.337 17.663,58 32,58 C46.337,58 58,46.337 58,32 C58,17.664 46.337,6 32,6 M31.9989,35.6704 C27.0359,35.6704 22.9989,31.6324 22.9989,26.6694 C22.9989,21.7054 27.0359,17.6674 31.9989,17.6674 C36.9619,17.6674 40.9989,21.7054 40.9989,26.6694 C40.9989,31.6324 36.9619,35.6704 31.9989,35.6704 M31.9989,15.6674 C25.9339,15.6674 20.9989,20.6034 20.9989,26.6694 C20.9989,32.7354 25.9339,37.6704 31.9989,37.6704 C38.0639,37.6704 42.9989,32.7354 42.9989,26.6694 C42.9989,20.6034 38.0639,15.6674 31.9989,15.6674\\" />
+                                                    </svg>
                                                   </Avatar>
-                                                </button>
-                                              </UserMenuButton>
-                                              <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: C]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
-                                                <CSSTransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true}>
-                                                  <TransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                                                    <span />
-                                                  </TransitionGroup>
-                                                </CSSTransitionGroup>
-                                              </UIPanel>
-                                            </li>
-                                          </ul>
-                                        </nav>
-                                      </Navigation.Static>
-                                    </Route>
-                                  </withRouter(Navigation.Static)>
-                                  <withRouter(Navigation.Mobile) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
-                                    <Route>
-                                      <Navigation.Mobile backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
-                                        <MobileBreadcrumb links={{...}} location={{...}}>
-                                          <nav className=\\"breadcrumb-list hide-75\\" />
-                                        </MobileBreadcrumb>
-                                        <nav className=\\"hide-75 nested-nav\\" aria-label=\\"Mobile Navigation\\" />
-                                        <button onClick={[Function]} className=\\"mobile-nav-trigger\\" aria-haspopup={true} aria-expanded={false}>
-                                          <span className=\\"screen-reader-text\\">
-                                            Open mobile navigation menu
-                                          </span>
-                                          <IconComposer icon=\\"menu32\\" size=\\"default\\" iconClass=\\"mobile-nav-trigger__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
-                                            <Menu svgProps={{...}} iconClass=\\"mobile-nav-trigger__icon svg-icon--menu32\\" icon=\\"menu32\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                                              <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg mobile-nav-trigger__icon svg-icon--menu32\\" width={32} height={32} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
-                                                <path d=\\"M25,15.5 L25,16.5 L6.99999997,16.5 L6.99999997,15.5 L25,15.5 Z M25,8.49999998 L25,9.49999998 L6.99999997,9.49999998 L6.99999997,8.49999998 L25,8.49999998 Z M25,22.5 L25,23.5 L6.99999997,23.5 L6.99999997,22.5 L25,22.5 Z\\" />
-                                              </svg>
-                                            </Menu>
-                                          </IconComposer>
-                                        </button>
-                                      </Navigation.Mobile>
-                                    </Route>
-                                  </withRouter(Navigation.Mobile)>
-                                </Navigation.Primary>
-                              </Route>
-                            </withRouter(Navigation.Primary)>
-                          </div>
-                          <div className=\\"header-border\\" />
-                          <HeaderNotification scope=\\"global\\">
-                            <Connect(NotificationsComponent) scope=\\"global\\">
-                              <NotificationsComponent scope=\\"global\\" notifications={{...}} dispatch={[Function]} animate={true} style=\\"header\\">
-                                <section className=\\"notifications-container\\" role=\\"alert\\">
-                                  <div className=\\"notifications-list-header notifications-list\\">
-                                    <CSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-                                      <TransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                                        <span />
-                                      </TransitionGroup>
-                                    </CSSTransitionGroup>
-                                  </div>
-                                </section>
-                              </NotificationsComponent>
-                            </Connect(NotificationsComponent)>
-                          </HeaderNotification>
-                        </header>
+                                                </IconComposer>
+                                                <span className=\\"screen-reader-text\\">
+                                                  Avatar
+                                                </span>
+                                              </figure>
+                                            </Avatar>
+                                          </button>
+                                        </UserMenuButton>
+                                        <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: C]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
+                                          <CSSTransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true}>
+                                            <TransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                                              <span />
+                                            </TransitionGroup>
+                                          </CSSTransitionGroup>
+                                        </UIPanel>
+                                      </li>
+                                    </ul>
+                                  </nav>
+                                </Navigation.Static>
+                              </withRouter(Navigation.Static)>
+                              <withRouter(Navigation.Mobile) backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" darkTheme={true} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
+                                <Navigation.Mobile backendButton={{...}} links={{...}} commonActions={{...}} authentication={{...}} visibility={{...}} mode=\\"backend\\" darkTheme={true} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} exact={false} style={[undefined]}>
+                                  <MobileBreadcrumb links={{...}} location={{...}}>
+                                    <nav className=\\"breadcrumb-list hide-75\\" />
+                                  </MobileBreadcrumb>
+                                  <nav className=\\"hide-75 nested-nav nested-nav--dark\\" aria-label=\\"Mobile Navigation\\" />
+                                  <button onClick={[Function]} className=\\"mobile-nav-toggle\\" aria-haspopup={true} aria-expanded={false}>
+                                    <span className=\\"screen-reader-text\\">
+                                      Open mobile navigation menu
+                                    </span>
+                                    <IconComposer icon=\\"menu32\\" size=\\"default\\" iconClass=\\"mobile-nav-trigger__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
+                                      <Menu svgProps={{...}} iconClass=\\"mobile-nav-trigger__icon svg-icon--menu32\\" icon=\\"menu32\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                        <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg mobile-nav-trigger__icon svg-icon--menu32\\" width={32} height={32} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                          <path d=\\"M25,15.5 L25,16.5 L6.99999997,16.5 L6.99999997,15.5 L25,15.5 Z M25,8.49999998 L25,9.49999998 L6.99999997,9.49999998 L6.99999997,8.49999998 L25,8.49999998 Z M25,22.5 L25,23.5 L6.99999997,23.5 L6.99999997,22.5 L25,22.5 Z\\" />
+                                        </svg>
+                                      </Menu>
+                                    </IconComposer>
+                                  </button>
+                                </Navigation.Mobile>
+                              </withRouter(Navigation.Mobile)>
+                            </Navigation.Primary>
+                          </withRouter(Navigation.Primary)>
+                        </div>
                       </div>
-                    </BlurOnLocationChange>
-                  </Layout.Header>
-                </div>
-              </ScrollAware>
-              <main id=\\"skip-to-main\\">
-                <withRouter(ChildSwitch) parentRoute={{...}}>
-                  <Route>
-                    <ChildSwitch parentRoute={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
-                      <Connect(NotFound)>
-                        <NotFound dispatch={[Function]} />
-                      </Connect(NotFound)>
-                    </ChildSwitch>
-                  </Route>
-                </withRouter(ChildSwitch)>
-              </main>
-              <withRouter(Connect(withPluginReplacement('Layout.Footer))) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}}>
-                <Route>
-                  <Connect(withPluginReplacement('Layout.Footer)) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
-                    <withPluginReplacement('Layout.Footer) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} dispatch={[Function]}>
-                      <Layout.Footer pages={{...}} authentication={{...}} commonActions={{...}} settings={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} dispatch={[Function]}>
-                        <BlurOnLocationChange location={{...}}>
-                          <div>
-                            <footer className=\\"footer-browse\\">
-                              <Connect(withPluginReplacement('Layout.Footer.FooterLogic)) pressLogo={[undefined]}>
-                                <withPluginReplacement('Layout.Footer.FooterLogic) pressLogo={[undefined]} dispatch={[Function]}>
-                                  <Layout.Footer.FooterLogic pressLogo={[undefined]} dispatch={[Function]}>
-                                    <section className=\\"footer-primary\\">
-                                      <div className=\\"container flush\\">
-                                        <div className=\\"flex-row\\">
-                                          <div className=\\"right\\">
-                                            <Layout.Footer.Search push={[Function: push]}>
-                                              <form className=\\"search-form\\" onSubmit={[Function]}>
-                                                <div className=\\"search-button-inline\\">
-                                                  <label htmlFor=\\"footer-search\\" className=\\"screen-reader-text\\">
-                                                    Site Search
-                                                  </label>
-                                                  <input type=\\"text\\" id=\\"footer-search\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
-                                                  <button className=\\"icon\\">
-                                                    <IconComposer className=\\"search-icon\\" icon=\\"search16\\" size={20} fill=\\"currentColor\\" svgProps={{...}}>
-                                                      <Search svgProps={{...}} iconClass=\\"svg-icon--search16\\" icon=\\"search16\\" size={20} fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                                                        <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--search16\\" width={20} height={20} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
-                                                          <path d=\\"M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z\\" />
-                                                        </svg>
-                                                      </Search>
-                                                    </IconComposer>
-                                                    <span className=\\"screen-reader-text\\">
-                                                      Search
-                                                    </span>
-                                                  </button>
-                                                </div>
-                                              </form>
-                                            </Layout.Footer.Search>
+                      <div className=\\"header-border\\" />
+                    </div>
+                  </SetCSSProperty>
+                  <HeaderNotification scope=\\"global\\">
+                    <Connect(NotificationsComponent) scope=\\"global\\">
+                      <NotificationsComponent scope=\\"global\\" notifications={{...}} dispatch={[Function]} animate={true} style=\\"header\\">
+                        <section className=\\"notifications-container\\" role=\\"alert\\">
+                          <div className=\\"notifications-list-header notifications-list\\">
+                            <CSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+                              <TransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                                <span />
+                              </TransitionGroup>
+                            </CSSTransitionGroup>
+                          </div>
+                        </section>
+                      </NotificationsComponent>
+                    </Connect(NotificationsComponent)>
+                  </HeaderNotification>
+                </header>
+              </BlurOnLocationChange>
+            </Layout.Header>
+            <main id=\\"skip-to-main\\">
+              <withRouter(ChildSwitch) parentRoute={{...}}>
+                <ChildSwitch parentRoute={{...}} history={{...}} location={{...}} match={{...}} staticContext={[undefined]}>
+                  <Connect(NotFound)>
+                    <NotFound dispatch={[Function]} />
+                  </Connect(NotFound)>
+                </ChildSwitch>
+              </withRouter(ChildSwitch)>
+            </main>
+            <Connect(withPluginReplacement('FrontendFooter)) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}}>
+              <withPluginReplacement('FrontendFooter) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} dispatch={[Function]}>
+                <FrontendFooter pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} dispatch={[Function]}>
+                  <withRouter(Connect(withPluginReplacement('DefaultFooter))) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} dispatch={[Function]}>
+                    <Connect(withPluginReplacement('DefaultFooter)) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]}>
+                      <withPluginReplacement('DefaultFooter) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]}>
+                        <DefaultFooter pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]}>
+                          <footer className=\\"app-footer app-footer--default\\">
+                            <FooterPartsColumns>
+                              <div className=\\"app-footer__columns container\\">
+                                <div className=\\"app-footer__row\\">
+                                  <FooterColumn position=\\"right\\">
+                                    <div className=\\"app-footer__column app-footer__column--right\\">
+                                      <Global.Footers.Parts.Search push={[Function: push]}>
+                                        <form className=\\"app-footer-search-form search-form\\" onSubmit={[Function]}>
+                                          <div className=\\"search-button-inline\\">
+                                            <label htmlFor=\\"app-footer-search\\" className=\\"screen-reader-text\\">
+                                              Site Search
+                                            </label>
+                                            <input type=\\"text\\" id=\\"app-footer-search\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
+                                            <button className=\\"icon\\">
+                                              <IconComposer className=\\"search-icon\\" icon=\\"search16\\" size={20} fill=\\"currentColor\\" svgProps={{...}}>
+                                                <Search svgProps={{...}} iconClass=\\"svg-icon--search16\\" icon=\\"search16\\" size={20} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                                  <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--search16\\" width={20} height={20} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                                    <path d=\\"M7.00000003,3 C4.79086102,3 3.00000001,4.79086101 3.00000001,7.00000002 C3.00000001,9.20913903 4.79086102,11 7.00000003,11 C9.20912238,11 10.999973,9.20916605 11.0000001,7.00005001 C10.9995314,4.79106172 9.20889466,3.00044165 7.00000003,3 Z M10.8715096,10.1643028 L13.9971535,13.2899467 L13.2900467,13.9970535 L10.1644164,10.8714232 C9.30247365,11.5768009 8.20065857,12.0000001 7.00000003,12.0000001 C4.23857626,12.0000001 2,9.76142379 2,7.00000002 C2,4.23857625 4.23857626,1.99999999 7.0001,2 C9.76123985,2.00055206 11.999448,4.23876021 12.0000001,6.99990005 C12.0000001,8.2005577 11.5768322,9.30236028 10.8715096,10.1643028 Z\\" />
+                                                  </svg>
+                                                </Search>
+                                              </IconComposer>
+                                              <span className=\\"screen-reader-text\\">
+                                                Search
+                                              </span>
+                                            </button>
                                           </div>
-                                          <div className=\\"rel left\\">
-                                            <Layout.Footer.Navigation commonActions={{...}} pages={{...}} settings={{...}} authentication={{...}}>
-                                              <nav className=\\"text-nav\\" aria-label=\\"Footer Navigation\\">
-                                                <ul className=\\"text-nav__list\\">
-                                                  <li className=\\"text-nav__link-group\\">
-                                                    <ul className=\\"footer-nav-list\\">
-                                                      <li className=\\"footer-nav-list__item\\">
-                                                        <span role=\\"button\\" tabIndex=\\"0\\" onClick={[Function]} className=\\"footer-nav-list__link\\">
+                                        </form>
+                                      </Global.Footers.Parts.Search>
+                                    </div>
+                                  </FooterColumn>
+                                  <FooterColumn position=\\"left\\">
+                                    <div className=\\"app-footer__column app-footer__column--left\\">
+                                      <FooterPartNavigation>
+                                        <div>
+                                          <nav className=\\"app-footer-navigation app-footer-navigation--mobile\\" aria-hidden=\\"true\\">
+                                            <ul className=\\"app-footer-navigation__list\\">
+                                              <li>
+                                                <ul className=\\"app-footer-navigation__group\\">
+                                                  <li className=\\"app-footer-navigation__item\\">
+                                                    <FooterPartsNavigationLink className=\\"app-footer-navigation__link\\" item={{...}}>
+                                                      <span role=\\"button\\" tabIndex=\\"0\\" onClick={[Function]} className=\\"app-footer-navigation__link\\">
+                                                        <span className=\\"app-footer-navigation__link-text\\">
                                                           Log Out
                                                         </span>
-                                                      </li>
-                                                      <li className=\\"footer-nav-list__item\\">
-                                                        <Link to=\\"/\\" className=\\"footer-nav-list__link\\" replace={false}>
-                                                          <a className=\\"footer-nav-list__link\\" onClick={[Function]} href=\\"/\\">
-                                                            Home
-                                                          </a>
-                                                        </Link>
-                                                      </li>
-                                                      <li className=\\"footer-nav-list__item\\">
-                                                        <Link to=\\"/projects/all\\" className=\\"footer-nav-list__link\\" replace={false}>
-                                                          <a className=\\"footer-nav-list__link\\" onClick={[Function]} href=\\"/projects/all\\">
-                                                            Projects
-                                                          </a>
-                                                        </Link>
-                                                      </li>
-                                                    </ul>
+                                                      </span>
+                                                    </FooterPartsNavigationLink>
                                                   </li>
-                                                  <li className=\\"text-nav__link-group\\" />
+                                                  <li className=\\"app-footer-navigation__item\\">
+                                                    <FooterPartsNavigationLink className=\\"app-footer-navigation__link\\" item={{...}}>
+                                                      <Link to=\\"/projects/all\\" target={{...}} className=\\"app-footer-navigation__link\\">
+                                                        <a target={{...}} className=\\"app-footer-navigation__link\\" onClick={[Function: onClick]} href=\\"/projects/all\\">
+                                                          <span className=\\"app-footer-navigation__link-text\\">
+                                                            Projects
+                                                          </span>
+                                                        </a>
+                                                      </Link>
+                                                    </FooterPartsNavigationLink>
+                                                  </li>
+                                                  <li className=\\"app-footer-navigation__item\\">
+                                                    <FooterPartsNavigationLink className=\\"app-footer-navigation__link\\" item={{...}}>
+                                                      <Link to=\\"/\\" target={{...}} className=\\"app-footer-navigation__link\\">
+                                                        <a target={{...}} className=\\"app-footer-navigation__link\\" onClick={[Function: onClick]} href=\\"/\\">
+                                                          <span className=\\"app-footer-navigation__link-text\\">
+                                                            Home
+                                                          </span>
+                                                        </a>
+                                                      </Link>
+                                                    </FooterPartsNavigationLink>
+                                                  </li>
                                                 </ul>
-                                              </nav>
-                                            </Layout.Footer.Navigation>
-                                          </div>
+                                              </li>
+                                              <li>
+                                                <ul className=\\"app-footer-navigation__group\\" />
+                                              </li>
+                                            </ul>
+                                          </nav>
+                                          <nav className=\\"app-footer-navigation app-footer-navigation--desktop\\" aria-label=\\"Footer Navigation\\">
+                                            <ul className=\\"app-footer-navigation__list\\">
+                                              <li>
+                                                <ul className=\\"app-footer-navigation__group\\">
+                                                  <li className=\\"app-footer-navigation__item\\">
+                                                    <FooterPartsNavigationLink className=\\"app-footer-navigation__link\\" item={{...}}>
+                                                      <span role=\\"button\\" tabIndex=\\"0\\" onClick={[Function]} className=\\"app-footer-navigation__link\\">
+                                                        <span className=\\"app-footer-navigation__link-text\\">
+                                                          Log Out
+                                                        </span>
+                                                      </span>
+                                                    </FooterPartsNavigationLink>
+                                                  </li>
+                                                  <li className=\\"app-footer-navigation__item\\">
+                                                    <FooterPartsNavigationLink className=\\"app-footer-navigation__link\\" item={{...}}>
+                                                      <Link to=\\"/projects/all\\" target={{...}} className=\\"app-footer-navigation__link\\">
+                                                        <a target={{...}} className=\\"app-footer-navigation__link\\" onClick={[Function: onClick]} href=\\"/projects/all\\">
+                                                          <span className=\\"app-footer-navigation__link-text\\">
+                                                            Projects
+                                                          </span>
+                                                        </a>
+                                                      </Link>
+                                                    </FooterPartsNavigationLink>
+                                                  </li>
+                                                  <li className=\\"app-footer-navigation__item\\">
+                                                    <FooterPartsNavigationLink className=\\"app-footer-navigation__link\\" item={{...}}>
+                                                      <Link to=\\"/\\" target={{...}} className=\\"app-footer-navigation__link\\">
+                                                        <a target={{...}} className=\\"app-footer-navigation__link\\" onClick={[Function: onClick]} href=\\"/\\">
+                                                          <span className=\\"app-footer-navigation__link-text\\">
+                                                            Home
+                                                          </span>
+                                                        </a>
+                                                      </Link>
+                                                    </FooterPartsNavigationLink>
+                                                  </li>
+                                                </ul>
+                                              </li>
+                                              <li>
+                                                <ul className=\\"app-footer-navigation__group\\" />
+                                              </li>
+                                            </ul>
+                                          </nav>
                                         </div>
+                                      </FooterPartNavigation>
+                                    </div>
+                                  </FooterColumn>
+                                </div>
+                              </div>
+                            </FooterPartsColumns>
+                            <Global.Footers.Parts.Copyright settings={{...}} type=\\"library\\">
+                              <section className=\\"app-footer__copyright app-footer__copyright\\">
+                                <div className=\\"container flush\\">
+                                  <div className=\\"app-footer__colophone\\">
+                                    <div dangerouslySetInnerHTML={{...}} />
+                                  </div>
+                                </div>
+                              </section>
+                            </Global.Footers.Parts.Copyright>
+                            <Connect(withPluginReplacement('Global.Footers.Parts.PoweredBy)) type=\\"library\\" dull={false}>
+                              <withPluginReplacement('Global.Footers.Parts.PoweredBy) type=\\"library\\" dull={false} dispatch={[Function]}>
+                                <Global.Footers.Parts.PoweredBy type=\\"library\\" dull={false} dispatch={[Function]}>
+                                  <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"app-footer-powered-by app-footer-powered-by--with-hover\\">
+                                    <section aria-hidden=\\"true\\">
+                                      <div className=\\"container flush\\">
+                                        <span className=\\"app-footer-powered-by__logo\\">
+                                          <IconComposer icon=\\"manifoldLogo32\\" size=\\"default\\" iconClass=\\"app-footer-powered-by__logo-icon\\" fill=\\"currentColor\\" svgProps={{...}}>
+                                            <ManifoldLogo svgProps={{...}} iconClass=\\"app-footer-powered-by__logo-icon svg-icon--manifoldLogo32\\" icon=\\"manifoldLogo32\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                              <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg app-footer-powered-by__logo-icon svg-icon--manifoldLogo32\\" width={32} height={32} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                                <polygon fillRule=\\"evenodd\\" points=\\"29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22\\" />
+                                              </svg>
+                                            </ManifoldLogo>
+                                          </IconComposer>
+                                          <span className=\\"app-footer-powered-by__logo-text\\">
+                                            <span className=\\"app-footer-powered-by__logo-text--neutral\\">
+                                              Powered by
+                                            </span>
+                                             
+                                            <span className=\\"app-footer-powered-by__logo-text--white\\">
+                                              Manifold
+                                            </span>
+                                          </span>
+                                        </span>
                                       </div>
                                     </section>
-                                    <Layout.Footer.Copyright settings={{...}}>
-                                      <section className=\\"footer-secondary\\">
-                                        <div className=\\"container flush\\">
-                                          <div className=\\"colophon\\">
-                                            <div dangerouslySetInnerHTML={{...}} />
-                                          </div>
-                                        </div>
-                                      </section>
-                                    </Layout.Footer.Copyright>
-                                    <Connect(withPluginReplacement('Layout.Footer.PostFooter)) searchPosition=\\"right\\">
-                                      <withPluginReplacement('Layout.Footer.PostFooter) searchPosition=\\"right\\" dispatch={[Function]}>
-                                        <Layout.Footer.PostFooter searchPosition=\\"right\\" dispatch={[Function]}>
-                                          <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"footer-tertiary\\">
-                                            <section aria-hidden=\\"true\\">
-                                              <div className=\\"container flush\\">
-                                                <span className=\\"logo\\">
-                                                  <IconComposer icon=\\"manifoldLogo32\\" size=\\"default\\" iconClass=\\"footer-tertiary__manifold-logo footer-tertiary__manifold-logo--dull\\" fill=\\"currentColor\\" svgProps={{...}}>
-                                                    <ManifoldLogo svgProps={{...}} iconClass=\\"footer-tertiary__manifold-logo footer-tertiary__manifold-logo--dull svg-icon--manifoldLogo32\\" icon=\\"manifoldLogo32\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                                                      <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg footer-tertiary__manifold-logo footer-tertiary__manifold-logo--dull svg-icon--manifoldLogo32\\" width={32} height={32} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
-                                                        <polygon fillRule=\\"evenodd\\" points=\\"29.995 10.305 27.851 10.983 24.581 9.72 29.995 8.007 29.995 6.182 21.983 8.718 18.712 7.454 29.995 3.884 29.995 2.059 16.114 6.45 2 1 2.036 12.73 15.131 8.587 15.131 10.886 2.036 15.029 2.036 16.854 15.131 12.71 15.131 15.009 2.036 19.152 2.036 20.977 15.131 16.834 15.131 19.132 2.036 23.275 2.036 25.1 15.131 20.958 15.131 23.256 2.036 27.399 2.036 29.224 15.989 24.809 30 30.22\\" />
-                                                      </svg>
-                                                    </ManifoldLogo>
-                                                  </IconComposer>
-                                                  <span className=\\"text\\">
-                                                    <span className=\\"neutral-text\\">
-                                                      Powered by
-                                                    </span>
-                                                    <span className=\\"white-text\\">
-                                                       Manifold
-                                                    </span>
-                                                  </span>
-                                                </span>
-                                              </div>
-                                            </section>
-                                            <span className=\\"screen-reader-text\\">
-                                              Learn more about the Manifold App
-                                            </span>
-                                          </a>
-                                        </Layout.Footer.PostFooter>
-                                      </withPluginReplacement('Layout.Footer.PostFooter)>
-                                    </Connect(withPluginReplacement('Layout.Footer.PostFooter))>
-                                  </Layout.Footer.FooterLogic>
-                                </withPluginReplacement('Layout.Footer.FooterLogic)>
-                              </Connect(withPluginReplacement('Layout.Footer.FooterLogic))>
-                            </footer>
-                          </div>
-                        </BlurOnLocationChange>
-                      </Layout.Footer>
-                    </withPluginReplacement('Layout.Footer)>
-                  </Connect(withPluginReplacement('Layout.Footer))>
-                </Route>
-              </withRouter(Connect(withPluginReplacement('Layout.Footer)))>
-            </div>
+                                    <span className=\\"screen-reader-text\\">
+                                      Learn more about the Manifold App
+                                    </span>
+                                  </a>
+                                </Global.Footers.Parts.PoweredBy>
+                              </withPluginReplacement('Global.Footers.Parts.PoweredBy)>
+                            </Connect(withPluginReplacement('Global.Footers.Parts.PoweredBy))>
+                          </footer>
+                        </DefaultFooter>
+                      </withPluginReplacement('DefaultFooter)>
+                    </Connect(withPluginReplacement('DefaultFooter))>
+                  </withRouter(Connect(withPluginReplacement('DefaultFooter)))>
+                </FrontendFooter>
+              </withPluginReplacement('FrontendFooter)>
+            </Connect(withPluginReplacement('FrontendFooter))>
           </BodyClass>
         </SideEffect(BodyClass)>
       </BackendContainer>

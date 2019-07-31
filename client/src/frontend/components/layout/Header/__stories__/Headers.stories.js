@@ -77,8 +77,8 @@ const contextFactory = project =>
   });
 
 const adjustSettings = (dispatch, showPressHeader) => {
-  let settings = entity.settings("0");
-  let baseTheme = settings.attributes.theme;
+  const settings = entity.settings("0");
+  const baseTheme = settings.attributes.theme;
   settings.meta = { partial: false };
 
   if (showPressHeader) {
@@ -153,14 +153,14 @@ storiesOf("Integration/Project Detail", module).add(
     const hasBg = boolean("Project hero has bg image", true);
     const hasCover = boolean("Project hero has cover image", true);
     const darkMode = boolean("Project dark mode", true);
-    const project = projectFactory(hasBg, darkMode, hasCover);
-    const contextProject = contextFactory(project);
+    const projectWithKnobs = projectFactory(hasBg, darkMode, hasCover);
+    const contextProjectWithKnobs = contextFactory(projectWithKnobs);
     adjustSettings(dispatch, showPressHeader);
 
     return (
       <FrontendModeContext.Provider
         value={{
-          project: contextProject,
+          project: contextProjectWithKnobs,
           isLibrary: !standalone,
           isStandalone: standalone
         }}
@@ -173,7 +173,7 @@ storiesOf("Integration/Project Detail", module).add(
             location={{ pathname: "" }}
             alwaysVisible={alwaysVisible}
           />
-          <ProjectHero project={project} />
+          <ProjectHero project={projectWithKnobs} />
           <div style={{ height: 600 }}>&nbsp;</div>
         </BackLink.Provider>
       </FrontendModeContext.Provider>

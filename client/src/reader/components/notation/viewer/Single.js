@@ -40,6 +40,10 @@ export default class NotationViewerSingle extends PureComponent {
     });
     const height = entry.height ? entry.height + "px" : "auto";
 
+    /* eslint-disable jsx-a11y/anchor-is-valid                                          */
+    /* jsx-a11y sees the link in this component as missing a href attribute, but it's a */
+    /* false positive, as the child Link component does in fact render an a tag with a  */
+    /* href.                                                                            */
     return (
       <div className="notation-preview-single">
         <Authorize entity={annotation} ability="delete">
@@ -80,5 +84,6 @@ export default class NotationViewerSingle extends PureComponent {
         </Link>
       </div>
     );
+    /* eslint-enable jsx-a11y/anchor-is-valid */
   }
 }

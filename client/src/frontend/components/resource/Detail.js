@@ -37,6 +37,10 @@ export default class ResourceDetail extends Component {
     if (!resource) return null;
     const attr = resource.attributes;
 
+    /* eslint-disable jsx-a11y/anchor-is-valid                                          */
+    /* jsx-a11y sees the link in this component as missing a href attribute, but it's a */
+    /* false positive, as the child Link component does in fact render an a tag with a  */
+    /* href.                                                                            */
     return (
       <div>
         <section>
@@ -86,5 +90,6 @@ export default class ResourceDetail extends Component {
         </section>
       </div>
     );
+    /* eslint-enable jsx-a11y/anchor-is-valid */
   }
 }

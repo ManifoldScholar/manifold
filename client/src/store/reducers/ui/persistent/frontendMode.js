@@ -38,6 +38,14 @@ const buildState = (
   };
 };
 
+function setModeLibrary(state) {
+  return buildState("library", state);
+}
+
+function setModeStandalone(state, action) {
+  return buildState("standalone", state, action.payload);
+}
+
 function setMode(state, action) {
   const { mode, search } = action.payload;
   const query = queryString.parse(search);
@@ -49,19 +57,11 @@ function setMode(state, action) {
   return setModeLibrary(state);
 }
 
-function setModeLibrary(state) {
-  return buildState("library", state);
-}
-
-function setModeStandalone(state, action) {
-  return buildState("standalone", state, action.payload);
-}
-
-function setIsProjectSubpage(state, action) {
+function setIsProjectSubpage(state) {
   return Object.assign({}, state, { isProjectHomepage: false });
 }
 
-function setIsProjectHomepage(state, action) {
+function setIsProjectHomepage(state) {
   return Object.assign({}, state, { isProjectHomepage: true });
 }
 
