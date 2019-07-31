@@ -1,5 +1,9 @@
 /* stylelint-disable property-no-vendor-prefix */
 .library-header {
+  @supports (position: sticky) {
+    @include boxShadow(0px, -10px, 20px, 7px, $neutralBlack, 0.25);
+  }
+
   &--light {
     background-color: $neutralWhite;
   }
