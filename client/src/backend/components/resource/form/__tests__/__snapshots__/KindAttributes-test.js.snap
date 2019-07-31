@@ -58,6 +58,7 @@ exports[`Backend.Resource.Form.KindAttributes component when kind is audio rende
               aria-hidden={true}
               className="form-dropzone__inline-button"
               tabIndex="-1"
+              type="button"
             >
               Upload a file
             </button>

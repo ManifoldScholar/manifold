@@ -22,7 +22,7 @@ export default class FormUploadFilePreview extends PureComponent {
           <p className="primary">{this.props.fileName}</p>
           <p className="secondary">
             <button
-              tabIndex="0"
+              type="button"
               className="form-dropzone__inline-button"
               onClick={this.props.handleRemove}
             >
@@ -31,6 +31,7 @@ export default class FormUploadFilePreview extends PureComponent {
             <br />
             or{" "}
             <button
+              type="button"
               className="form-dropzone__inline-button"
               aria-hidden
               tabIndex="-1"

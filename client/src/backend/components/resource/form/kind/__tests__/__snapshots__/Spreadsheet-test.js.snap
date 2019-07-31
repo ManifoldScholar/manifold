@@ -58,6 +58,7 @@ exports[`Backend.Resource.Form.Spreadsheet component renders correctly 1`] = `
               aria-hidden={true}
               className="form-dropzone__inline-button"
               tabIndex="-1"
+              type="button"
             >
               Upload a file
             </button>

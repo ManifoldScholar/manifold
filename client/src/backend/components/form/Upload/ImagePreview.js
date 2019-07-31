@@ -22,7 +22,7 @@ export default class FormUploadImagePreview extends PureComponent {
         <div className="message">
           <p className="secondary">
             <button
-              tabIndex="0"
+              type="button"
               data-id="remove"
               className="form-dropzone__inline-button"
               onClick={this.props.handleRemove}
@@ -32,6 +32,7 @@ export default class FormUploadImagePreview extends PureComponent {
             <br />
             or{" "}
             <button
+              type="button"
               className="form-dropzone__inline-button"
               aria-hidden
               tabIndex="-1"
