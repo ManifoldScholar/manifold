@@ -3,7 +3,8 @@ import renderer from "react-test-renderer";
 import Events from "../Events";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import { wrapWithRouter } from "test/helpers/routing";
+import { FrontendModeContext } from "helpers/contexts";
 
 describe("Frontend.Project.Events component", () => {
   const store = build.store();
@@ -22,7 +23,11 @@ describe("Frontend.Project.Events component", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <Events project={project} events={events} pagination={pagination} />
+          <FrontendModeContext.Provider
+            value={{ isLibrary: true, isStandalone: false }}
+          >
+            <Events project={project} events={events} pagination={pagination} />
+          </FrontendModeContext.Provider>
         </Provider>
       )
     );

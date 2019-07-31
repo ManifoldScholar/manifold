@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.Project.Events component renders correctly 1`] = `
+exports[`Frontend EventList Container renders correctly 1`] = `
 <div>
   <section>
     <div

@@ -4,10 +4,16 @@ import Hero from "../Hero";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
+import { FrontendModeContext } from "helpers/contexts";
+import BackLink from "../../back-link";
 
 describe("Frontend.Project.Hero component", () => {
   const actionCallout = build.entity.actionCallout("1");
-  const project = build.entity.project("1", {}, {actionCallouts: [actionCallout]});
+  const project = build.entity.project(
+    "1",
+    {},
+    { actionCallouts: [actionCallout] }
+  );
   const store = build.store();
 
   const refMock = element => {
@@ -15,11 +21,18 @@ describe("Frontend.Project.Hero component", () => {
   };
 
   it("renders correctly", () => {
-    const component = renderer.create(wrapWithRouter(
-      <Provider store={store}>
-        <Hero project={project} />
-      </Provider>
-    ), { createNodeMock: refMock });
+    const component = renderer.create(
+      wrapWithRouter(
+        <Provider store={store}>
+          <FrontendModeContext.Provider
+            value={{ isLibrary: true, isStandalone: false }}
+          >
+            <Hero project={project} />
+          </FrontendModeContext.Provider>
+        </Provider>
+      ),
+      { createNodeMock: refMock }
+    );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -28,9 +41,19 @@ describe("Frontend.Project.Hero component", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <Hero project={project} />
+          <FrontendModeContext.Provider
+            value={{ isLibrary: true, isStandalone: false }}
+          >
+            <Hero project={project} />
+          </FrontendModeContext.Provider>
         </Provider>
-      ), { createNodeMock: element => { return { style: {} } } });
+      ),
+      {
+        createNodeMock: element => {
+          return { style: {} };
+        }
+      }
+    );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

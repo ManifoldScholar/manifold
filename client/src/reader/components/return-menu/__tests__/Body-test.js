@@ -3,8 +3,10 @@ import Body from "../Body";
 import renderer from "react-test-renderer";
 import { mount } from "enzyme";
 import build from "test/fixtures/build";
-import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
+import BackLink from "frontend/components/back-link";
+import { FrontendModeContext } from "helpers/contexts";
 
 describe("Reader.ReturnMenu.Body component", () => {
   const project = build.entity.project("1");
@@ -13,11 +15,17 @@ describe("Reader.ReturnMenu.Body component", () => {
 
   const root = wrapWithRouter(
     <Provider store={store}>
-      <Body
-        returnUrl="/some/back/url"
-        projectTitle={project.attributes.title}
-        toggleSignInUpOverlay={toggleMock}
-      />
+      <BackLink.Provider>
+        <FrontendModeContext.Provider
+          value={{ isLibrary: true, isStandalone: false }}
+        >
+          <Body
+            returnUrl="/some/back/url"
+            projectTitle={project.attributes.title}
+            toggleSignInUpOverlay={toggleMock}
+          />
+        </FrontendModeContext.Provider>
+      </BackLink.Provider>
     </Provider>
   );
 
