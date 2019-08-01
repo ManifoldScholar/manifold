@@ -41,7 +41,8 @@ exports[`Reader.Notes.DetailedList Component renders correctly 1`] = `
                 Harry Henderson
               </i>
                highlighted 
-              "Title Page" in 
+              “Title Page”
+               in 
               <i>
                 Hail Seitan
               </i>
@@ -107,7 +108,8 @@ exports[`Reader.Notes.DetailedList Component renders correctly 1`] = `
                 Harry Henderson
               </i>
                highlighted 
-              "Title Page" in 
+              “Title Page”
+               in 
               <i>
                 Hail Seitan
               </i>

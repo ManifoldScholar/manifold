@@ -53,12 +53,18 @@ class HighlightDetail extends PureComponent {
     });
   }
 
+  get textSection() {
+    return this.props.annotation.relationships.textSection;
+  }
+
   get projectTitle() {
-    return this.props.annotation.relationships.textSection.attributes.textTitle;
+    if (!this.textSection || !this.textSection.attributes) return null;
+    return this.textSection.attributes.textTitle;
   }
 
   get sectionTitle() {
-    return this.props.annotation.relationships.textSection.attributes.name;
+    if (!this.textSection || !this.textSection.attributes) return null;
+    return this.textSection.attributes.name;
   }
 
   get user() {
@@ -83,14 +89,13 @@ class HighlightDetail extends PureComponent {
         <span className="annotation-selection__highlight-text">
           {annotation.attributes.subject}
         </span>
-        {this.viewable && (
-          <SourceSummary
-            user={this.user}
-            projectTitle={this.projectTitle}
-            sectionTitle={this.sectionTitle}
-            highlightDate={this.highlightDate}
-          />
-        )}
+        <SourceSummary
+          user={this.user}
+          projectTitle={this.projectTitle}
+          sectionTitle={this.sectionTitle}
+          highlightDate={this.highlightDate}
+          viewable={this.viewable}
+        />
         <Authorize entity={annotation} ability={"delete"}>
           <div className="annotation-selection__action-buttons">
             <Utility.ConfirmableButton

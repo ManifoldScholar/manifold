@@ -13,11 +13,17 @@ export default class Annotation extends PureComponent {
     });
   }
 
+  get textSection() {
+    return this.props.annotation.relationships.textSection;
+  }
+
   get projectTitle() {
+    if (!this.textSection || !this.textSection.attributes) return null;
     return this.props.annotation.relationships.textSection.attributes.textTitle;
   }
 
   get sectionTitle() {
+    if (!this.textSection || !this.textSection.attributes) return null;
     return this.props.annotation.relationships.textSection.attributes.name;
   }
 
