@@ -6,6 +6,8 @@ import paths from "../helpers/paths";
 
 const nameTemplate = environment.production ? "[name]-[hash]" : "[name]";
 
+const postcssFocusVisible = require('postcss-focus-visible');
+
 /* eslint-disable  global-require */
 export default function buildWebpackConfiguration(target = "web") {
   function styleLoader() {
@@ -61,7 +63,11 @@ export default function buildWebpackConfiguration(target = "web") {
                 syntax: "postcss-scss",
                 plugins: () => [
                   require("autoprefixer"),
-                  require("postcss-focus-visible")
+                  postcssFocusVisible({
+                    // don't preserve `:focus-visible` selector until wider browser support exists
+                    // https://github.com/jonathantneal/postcss-focus-visible/issues/6
+                    preserve: false
+                  })
                 ]
               }
             },
