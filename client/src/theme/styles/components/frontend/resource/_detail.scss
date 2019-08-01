@@ -85,6 +85,7 @@
       font-size: 26px;
       font-weight: $medium;
       color: $neutral75;
+      hyphens: none;
 
       @include respond($break60) {
         width: auto;

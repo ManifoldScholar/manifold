@@ -44,6 +44,7 @@
     @include templateHead;
     margin: 0;
     font-weight: $semibold;
+    hyphens: none;
   }
 
   .deleted-notification {

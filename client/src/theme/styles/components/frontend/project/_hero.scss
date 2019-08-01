@@ -234,6 +234,7 @@
     position: relative;
     z-index: 50;
     margin-bottom: 24px;
+    hyphens: none;
 
     @include respond($break60) {
       display: block;
