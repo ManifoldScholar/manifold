@@ -5,44 +5,72 @@ import FormattedDate from "global/components/FormattedDate";
 
 export default class SourceSummary extends React.PureComponent {
   static propTypes = {
+    user: PropTypes.string,
     projectTitle: PropTypes.string,
-    sectionTitle: PropTypes.string
+    sectionTitle: PropTypes.string,
+    highlightDate: PropTypes.string,
+    viewable: PropTypes.bool
   };
 
-  renderUser(user) {
+  renderUser() {
+    if (!this.props.user) return null;
     return (
       <React.Fragment>
-        <i>{user}</i>
+        <i>{this.props.user}</i>
         {" highlighted "}
       </React.Fragment>
     );
   }
 
-  renderDate(highlightDate) {
+  renderSectionAndTitle() {
+    const { user, projectTitle, sectionTitle } = this.props;
+    if (!projectTitle && !sectionTitle) return null;
+
+    return (
+      <React.Fragment>
+        {!user && "from "}
+        {sectionTitle && `“${sectionTitle}”`}
+        {(sectionTitle && projectTitle) && " in "}
+        {projectTitle && <i>{projectTitle}</i>}
+      </React.Fragment>
+    );
+  }
+
+  renderDate() {
+    if (!this.props.highlightDate) return null;
     return (
       <React.Fragment>
         {" on "}
-        <FormattedDate date={highlightDate} />
+        <FormattedDate date={this.props.highlightDate} />
       </React.Fragment>
     );
   }
 
   render() {
-    const { projectTitle, sectionTitle, user, highlightDate } = this.props;
+    const {
+      user,
+      projectTitle,
+      sectionTitle,
+      highlightDate,
+      viewable
+    } = this.props;
+
+    if (!user && !projectTitle && !sectionTitle && !highlightDate) return null;
 
     return (
       <div className="annotation-selection__source-summary">
         <span className="annotation-selection__source-summary-text">
-          {user ? this.renderUser(user) : "from "}
-          {`"${sectionTitle}" in `}
-          <i>{projectTitle}</i>
-          {highlightDate && this.renderDate(highlightDate)}
+          {this.renderUser()}
+          {this.renderSectionAndTitle()}
+          {this.renderDate()}
         </span>
-        <Utility.IconComposer
-          icon="arrowLongRight16"
-          size={24}
-          iconClass="annotation-selection__hover-arrow"
-        />
+        {viewable && (
+          <Utility.IconComposer
+            icon="arrowLongRight16"
+            size={24}
+            iconClass="annotation-selection__hover-arrow"
+          />
+        )}
       </div>
     );
   }

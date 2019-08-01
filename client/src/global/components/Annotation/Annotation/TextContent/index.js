@@ -15,7 +15,9 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     subject: PropTypes.string,
     onViewInText: PropTypes.func,
     onAnnotate: PropTypes.func,
-    onLogin: PropTypes.func
+    onLogin: PropTypes.func,
+    projectTitle: PropTypes.string,
+    sectionTitle: PropTypes.string
   };
 
   constructor(props) {
@@ -98,12 +100,11 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             iconClass={this.iconClassNames}
           />
           {this.maybeTruncateSelection()}
-          {this.viewable && (
-            <SourceSummary
-              projectTitle={projectTitle}
-              sectionTitle={sectionTitle}
-            />
-          )}
+          <SourceSummary
+            projectTitle={projectTitle}
+            sectionTitle={sectionTitle}
+            viewable={this.viewable}
+          />
         </div>
         {this.annotatable && (
           <Fragment>
