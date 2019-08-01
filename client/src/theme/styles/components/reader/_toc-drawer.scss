@@ -44,6 +44,7 @@
         line-height: 1.2;
         color: $neutral90;
         text-decoration: none;
+        hyphens: none;
         border-bottom: 1px solid $neutral40;
         transition: color $duration $timing,
           background-color $duration $timing;

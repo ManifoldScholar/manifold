@@ -93,6 +93,7 @@
     font-size: 17px;
     color: $neutral50;
     text-decoration: underline;
+    hyphens: none;
     transition: color $duration $timing;
 
     .reader-return-menu__link:hover &,

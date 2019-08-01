@@ -145,6 +145,7 @@
       line-height: 29px;
       color: $neutral40;
       vertical-align: middle;
+      hyphens: none;
 
       @include respond($break60) {
         font-size: 20px;

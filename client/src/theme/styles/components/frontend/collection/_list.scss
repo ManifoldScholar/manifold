@@ -54,6 +54,7 @@
     width: 100%;
     background-color: transparentize($neutralBlack, 0.5);
     border-radius: 0 0 8px 8px;
+    hyphens: none;
     transition: background-color $duration ease-out;
 
     @include respond($break80) {

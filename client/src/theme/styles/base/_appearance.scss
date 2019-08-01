@@ -457,6 +457,7 @@
     font-weight: $semibold;
     line-height: 1.188;
     white-space: normal;
+    hyphens: none;
     transition: color $duration $timing;
 
     .title-text {
@@ -490,6 +491,7 @@
   .relations-list {
     @include templateCopy;
     line-height: 1.25;
+    hyphens: none;
     transition: color $duration $timing;
   }
 
