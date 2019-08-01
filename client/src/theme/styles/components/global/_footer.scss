@@ -27,6 +27,8 @@
   }
 
   &--standalone {
+    --default-focus-color: #{$accentPrimary};
+
     padding-top: 0;
   }
 
@@ -389,4 +391,3 @@
   }
 
 }
-
