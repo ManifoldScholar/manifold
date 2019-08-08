@@ -4,8 +4,6 @@
 .user-nav {
   --button-color: #{$neutral70};
 
-  height: 100%;
-
   &--dark {
     --button-color: #{$accentPrimary};
   }
