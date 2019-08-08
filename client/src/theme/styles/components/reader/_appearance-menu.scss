@@ -178,12 +178,12 @@
 
   // Set of buttons for setting font-size
   &__font-size-button {
-
       @include buttonUnstyled;
       width: 44px;
       height: 44px;
       vertical-align: top;
-      background-color: $neutral05;
+      color: $neutral80;
+      background-color: $neutralWhite;
       border-radius: 100%;
       transition: color $durationFast $timing, background-color $durationFast $timing;
 
@@ -234,7 +234,7 @@
     justify-content: center;
     width: calc(50% - 10px);
     height: 39px;
-    border: 4px solid transparent;
+    border: 3px solid transparent;
     transition: border-color $durationFast $timing;
 
     @include respond($break50) {
@@ -325,6 +325,7 @@
     font-size: 13px;
     text-transform: uppercase;
     font-weight: $semibold;
+    letter-spacing: 0.077em;
     width: 100%;
     padding: 12px 45px 10px;
     color: $neutral75;
