@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { TableHeaderContext } from "helpers/contexts";
+import Cell from "./Cell";
 
 export default class TableRow extends React.PureComponent {
   static propTypes = {
@@ -38,16 +39,23 @@ export default class TableRow extends React.PureComponent {
   }
 
   render() {
-    const RowComponent = this.props.rowComponent;
-    const row = <RowComponent model={this.props.model} />;
-    if (this.isTable) return <tr className={this.rowClassNames}>{row}</tr>;
+    const { children } = this.props;
+
+    const cells = React.Children.map(children, child => {
+      const { children, ...childProps } = child.props;
+      return (
+        <Cell {...childProps}>{children({ model: this.props.model })}</Cell>
+      );
+    });
+
+    if (this.isTable) return <tr className={this.rowClassNames}>{cells}</tr>;
     return (
       <li>
         <dl className={this.rowClassNames}>
           <a href={this.rowLink} className={this.rowLinkClassNames}>
             <span className="screen-reader-text">Visit detail view</span>
           </a>
-          {row}
+          {cells}
         </dl>
       </li>
     );

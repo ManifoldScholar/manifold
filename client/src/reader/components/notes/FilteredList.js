@@ -29,7 +29,7 @@ export default class FilteredList extends PureComponent {
 
   renderHeading() {
     return (
-      <div className="drawer-bar">
+      <div className="drawer-bar drawer-bar--pad-lateral">
         <h2 className="drawer-bar__title drawer-bar__title--large">
           <div
             className="drawer-bar__title-button"

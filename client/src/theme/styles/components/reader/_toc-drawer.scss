@@ -1,10 +1,7 @@
 .toc-drawer {
-  .drawer-reader {
-    $drawerWidth: 565px;
-    width: $drawerWidth;
+  .drawer {
+    width: 565px;
     max-width: 90vw;
-    height: 100%;
-    padding: 47px 0 0;
   }
 
   .no-scroll.overlay & {

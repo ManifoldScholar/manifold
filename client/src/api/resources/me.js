@@ -25,5 +25,15 @@ export default {
         params: { filter, page }
       }
     };
+  },
+
+  readingGroups(filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/me/relationships/reading_groups`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
   }
 };

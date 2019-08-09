@@ -1,6 +1,4 @@
 .annotation-editor {
-  @include drawerPadding(padding-right);
-  @include drawerPadding(padding-left);
   padding-top: 32px;
 
   @include respond($break90) {

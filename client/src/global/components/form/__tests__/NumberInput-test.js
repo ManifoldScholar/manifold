@@ -1,16 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Form from "backend/components/form";
-import { shallow, mount, render } from "enzyme";
+import Form from "global/components/form";
 
-describe("Backend.Form.TextInput component", () => {
+describe("Backend.Form.NumberInput component", () => {
   const onChange = jest.fn();
 
   const element = (
-    <Form.TextInput
+    <Form.NumberInput
       label="A form label"
       name="attributes[property]"
-      mask="hashtag"
       onChange={onChange}
     />
   );

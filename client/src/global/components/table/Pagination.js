@@ -17,7 +17,7 @@ export default class TablePagination extends React.PureComponent {
         <Utility.Pagination
           pagination={pagination}
           paginationTarget={paginationTarget}
-          paginationClickHandler={() => onPageClick()}
+          paginationClickHandler={onPageClick}
         />
       </div>
     );

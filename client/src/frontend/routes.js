@@ -1,5 +1,6 @@
 import queryString from "query-string";
 import NotFound from "global/containers/NotFound";
+import ReadingGroupsNew from "./containers/ReadingGroups/New";
 
 const routes = {
   component: "Frontend",
@@ -144,32 +145,44 @@ const routes = {
       ]
     },
     {
-      name: "groups",
+      name: "readingGroups",
       exact: false,
-      component: "GroupsContainer",
+      component: "ReadingGroups",
       path: "/my/groups",
       helper: () => "/my/groups",
       routes: [
         {
-          name: "group",
           exact: true,
-          component: "GroupWrapper",
-          path: "/my/groups/:groupId",
-          helper: () => "/my/groups/:groupId",
+          component: "ReadingGroupsList",
+          path: "/my/groups/:new(new)?",
           routes: [
             {
-              name: "groupMembers",
+              name: "readingGroupsNew",
               exact: true,
-              component: "GroupMembersList",
-              path: "/my/groups/:groupId/members",
-              helper: () => "/my/groups/:groupId/members"
+              path: "/my/groups/new",
+              component: "ReadingGroupsNew",
+              helper: () => "/my/groups/new"
+            }
+          ]
+        },
+        {
+          name: "readingGroupDetail",
+          exact: false,
+          component: "ReadingGroup",
+          path: "/my/groups/:groupId",
+          helper: rg => `/my/groups/${rg}`,
+          routes: [
+            {
+              exact: true,
+              component: "ReadingGroupDetail",
+              path: "/my/groups/:groupId"
             },
             {
-              name: "groupDetail",
+              name: "readingGroupMembers",
               exact: true,
-              component: "GroupDetail",
-              path: "/my/groups/:groupId",
-              helper: () => "/my/groups/:groupId"
+              component: "ReadingGroupMembers",
+              path: "/my/groups/:id/members",
+              helper: rg => `/my/groups/${rg}/members`
             }
           ]
         }

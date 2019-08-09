@@ -33,7 +33,7 @@ export default class TableHeaders extends React.PureComponent {
           {headers.map(header => {
             return (
               <td
-                key={header.name}
+                key={header.label}
                 className={this.cellClassNames(header.cellPadding)}
               >
                 <Utility.LabelWithIcon

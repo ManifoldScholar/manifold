@@ -9,21 +9,13 @@ export default class TableBody extends React.PureComponent {
     rows: PropTypes.array
   };
 
-  get rowComponentHeaders() {
-    return this.props.rowComponent.headers();
-  }
-
   get tableClassNames() {
     return "table__table";
   }
 
   render() {
-    const headers = this.rowComponentHeaders;
     const label = this.props.label;
     const context = {
-      getHeader: index => {
-        return headers[index];
-      },
       markup: this.props.markup
     };
 
@@ -35,8 +27,17 @@ export default class TableBody extends React.PureComponent {
           headers={this.headers}
           rowComponent={this.props.rowComponent}
           renderLabel={this.renderLabel}
-        />
+        >
+          {this.props.children}
+        </Row>
       );
+    });
+
+    const headers = React.Children.map(this.props.children, child => {
+      return {
+        label: child.props.header,
+        icon: child.props.headerIcon
+      };
     });
 
     return (

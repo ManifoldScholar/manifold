@@ -38,6 +38,14 @@ module Validation
   end
   # rubocop:enable Metrics/MethodLength
 
+  def reading_group_params
+    params.require(:data)
+    attributes = [:privcay, :name, :code]
+    relationships = [:users]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def project_params
     params.require(:data)
     attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,

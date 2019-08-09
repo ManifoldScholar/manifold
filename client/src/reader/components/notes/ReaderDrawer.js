@@ -23,7 +23,9 @@ export default class ReaderDrawer extends PureComponent {
   render() {
     const drawerProps = {
       open: this.props.visible,
-      style: "reader",
+      context: "reader",
+      size: "wide",
+      padding: "none",
       identifier: "notes-drawer",
       lockScroll: "always",
       includeDrawerFrontMatter: false,

@@ -46,7 +46,9 @@ export default class AnnotatableDrawer extends PureComponent {
     const DrawerContents = Drawers[this.componentKey];
 
     let drawerProps = {
-      style: "frontend",
+      context: "reader",
+      size: "wide",
+      position: "overlay",
       open: this.isOpen,
       closeCallback: this.closeDrawer,
       lockScroll: "always"

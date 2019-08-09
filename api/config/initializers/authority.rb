@@ -46,6 +46,7 @@ Authority.configure do |config|
     destroy: "deleteable",
     read_deleted: "deleted_readable",
     read_drafts: "drafts_readable",
+    list: "listable",
     manage_resources: "resources_manageable",
     create_resources: "resources_creatable",
     manage_resource_collections: "resource_collections_manageable",

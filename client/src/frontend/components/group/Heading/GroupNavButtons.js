@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export default class GroupNavButtons extends React.PureComponent {
   static propTypes = {
-    memberListLink: PropTypes.string,
-    openEditDrawer: PropTypes.func
+    links: PropTypes.array
   };
 
   get buttonClassNames() {
@@ -12,18 +12,15 @@ export default class GroupNavButtons extends React.PureComponent {
   }
 
   render() {
-    const { memberListLink, openEditDrawer } = this.props;
+    const { links } = this.props;
+    if (!links || links.length === 0) return null;
     return (
       <div className={"group-page-heading__button-container"}>
-        <a className={this.buttonClassNames} href={memberListLink}>
-          {"See All Members"}
-        </a>
-        <button
-          className={this.buttonClassNames}
-          onClick={() => openEditDrawer()}
-        >
-          {"Edit Group"}
-        </button>
+        {links.map(link => (
+          <Link key={link.to} className={this.buttonClassNames} to={link.to}>
+            {link.text}
+          </Link>
+        ))}
       </div>
     );
   }

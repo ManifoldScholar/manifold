@@ -1,6 +1,7 @@
 import React from "react";
 import Utility from "global/components/utility";
 import PropTypes from "prop-types";
+import lh from "helpers/linkHandler";
 import classNames from "classnames";
 import GroupNavButtons from "./GroupNavButtons";
 
@@ -50,6 +51,17 @@ export default class Heading extends React.PureComponent {
             {this.pageTitle}
           </h2>
         </div>
+        {this.pageType === "groupList" && (
+          <GroupNavButtons
+            links={[
+              {
+                to: lh.link("readingGroupsNew"),
+                text: "Create New Annotation Group"
+              }
+            ]}
+          />
+        )}
+
         {this.pageType === "groupDetail" && (
           <GroupNavButtons
             memberListLink={memberListLink}

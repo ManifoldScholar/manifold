@@ -115,7 +115,7 @@ export default class Builder extends PureComponent {
           lockScrollClickCloses={false}
           closeCallback={this.onDrawerClose}
           open={this.isDrawerOpen}
-          style="backend"
+          context="backend"
         >
           {this.isDrawerOpen ? <DrawerContents project={this.project} /> : null}
         </Drawer.Wrapper>

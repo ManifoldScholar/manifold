@@ -1,0 +1,105 @@
+.drawer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 18px;
+
+  @include respond($break50) {
+    padding-bottom: 26px;
+  }
+
+  &--pad-lateral {
+    padding-right: 20px;
+    padding-left: 20px;
+
+    @include respond($break65) {
+      padding-right: 32px;
+      padding-left: 32px;
+    }
+  }
+
+  &__title {
+    @include utilityPrimary;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    font-size: 14px;
+    color: $neutral50;
+  }
+
+  &__title-button {
+    color: $neutral90;
+    cursor: pointer;
+    border: 0;
+    transition: color $duration $timing;
+
+    &:hover {
+      color: $neutral70;
+    }
+  }
+
+  &__title-icon {
+    position: relative;
+    top: 2px;
+    margin-right: 10px;
+  }
+
+  &__close-button {
+    @include buttonUnstyled;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    transition: color $duration $timing;
+
+    &--light {
+      color: $neutral70;
+      cursor: pointer;
+
+      &:hover {
+        color: $accentPrimary;
+        outline: 0;
+      }
+
+      &:focus-visible {
+        color: $focusPrimary;
+      }
+    }
+
+    &--dark {
+      font-size: 17px;
+      color: $neutral50;
+      cursor: pointer;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $neutral75;
+      }
+    }
+  }
+
+  &__close-text {
+    @include utilityPrimary;
+    margin-right: 12px;
+    font-size: 12px;
+    font-weight: $semibold;
+    letter-spacing: 0.125em;
+  }
+
+  &__close-icon {
+    &--large {
+      // display: none;
+    }
+  }
+
+  &__close-icon {
+    &--large {
+      margin-right: -9px;
+
+      @include respond($break50) {
+        width: 56.889px;
+        height: 56.889px;
+        margin-right: -12px;
+      }
+    }
+  }
+}

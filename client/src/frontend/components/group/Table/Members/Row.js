@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Cell from "global/components/table/Cell";
-import TableAvatar from "global/components/table/Avatar";
+import Cell from "global/components/Table/Cell";
+import TableAvatar from "global/components/Table/Avatar";
 import RemoveMemberButton from "./RemoveMember";
-import NameWithArrow from "global/components/table/NameWithArrow";
+import NameWithArrow from "global/components/Table/NameWithArrow";
 
 export default class MemberRow extends Component {
   static headers = () => [

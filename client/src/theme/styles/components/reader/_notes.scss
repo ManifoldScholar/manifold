@@ -21,7 +21,6 @@
   }
 
   .drawer-overlay {
-    z-index: 150;
     opacity: 0;
     animation: drawerOverlayFade $duration $timing forwards;
 
@@ -39,183 +38,129 @@
     }
   }
 
-  @keyframes notesSlideMobile {
+  @keyframes notesSlide {
     from {
-      right: -100%;
+      transform: translateX(100%);
     }
 
     to {
-      right: 0;
+      transform: translateX(0);
     }
   }
 
-  @keyframes notesSlideTablet {
-    from {
-      right: -70vw;
-    }
-
-    to {
-      right: 0;
-    }
-  }
-
-  @keyframes notesSlideDesktop {
-    from {
-      right: -850px;
-    }
-
-    to {
-      right: 0;
-    }
-  }
-
-  .drawer-reader {
-    right: -100%;
-    padding-top: 47px;
+  .drawer {
     background-color: $neutral10;
-    transition: right $duration $timing;
-
-    @include respond($break75) {
-      right: -70vw;
-    }
-
-    @include respond($break120) {
-      right: -850px;
-      width: 50%;
-    }
 
     .panel-visible & {
-      animation: notesSlideMobile $duration $timing forwards;
-
-      @include respond($break75) {
-        animation: notesSlideTablet $duration $timing forwards;
-      }
-
-      @include respond($break120) {
-        animation: notesSlideDesktop $duration $timing forwards;
-      }
+      animation: notesSlide $duration $timing forwards;
     }
 
     .panel-leave & {
-      right: 0;
+      transform: translateX(0);
 
-      animation: slideUpMobile $duration $timing backwards;
-
-      @include respond($break75) {
-        animation: notesSlideTablet $duration $timing backwards;
-      }
-
-      @include respond($break120) {
-        animation: notesSlideDesktop $duration $timing backwards;
-      }
+      animation: notesSlide $duration $timing backwards;
     }
 
     .panel-leave.panel-leave-active & {
-      right: -100%;
-
-      @include respond($break75) {
-        right: -70vw;
-      }
-
-      @include respond($break120) {
-        right: -850px;
-        width: 50%;
-      }
+      transform: translateX(100%);
     }
+  }
 
-    .drawer-bar {
-      padding: 6px 20px;
+  ul {
+    @include listUnstyled;
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      max-height: 52px;
+      padding: 18px 20px;
+      color: $neutral90;
       border-bottom: 2px solid $neutral40;
+      transition: color $duration $timing,
+        background-color $duration $timing;
 
       @include respond($break65) {
-        padding: 6px 32px;
+        padding: 18px 32px;
       }
 
-      .button-primary {
-        font-size: 14px;
+      &.open {
+        .item__disclosure-icon {
+          transform: rotate(0);
+        }
       }
-    }
 
-    ul {
-      @include listUnstyled;
+      &__disclosure-icon {
+        margin-left: -3px;
+        transition: transform $duration $timing;
+        transform: rotate(-0.25turn);
+      }
 
-      .item {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        max-height: 52px;
-        padding: 18px 20px;
-        color: $neutral90;
-        border-bottom: 2px solid $neutral40;
-        transition: color $duration $timing,
-          background-color $duration $timing;
+      label, span, .item-label {
+        @include utilityPrimary;
+        margin-top: -2px;
+        margin-bottom: 0;
+        margin-left: 15px;
+        font-size: 16px;
+        color: inherit;
+        text-transform: none;
+        letter-spacing: 0;
+        cursor: inherit;
 
-        @include respond($break65) {
-          padding: 18px 32px;
+        @include respond($break50) {
+          font-size: 18px;
         }
+      }
 
-        &.open {
-          .item__disclosure-icon {
-            transform: rotate(0);
-          }
-        }
-
-        &__disclosure-icon {
-          margin-left: -3px;
-          transition: transform $duration $timing;
-          transform: rotate(-0.25turn);
-        }
-
-        label, span, .item-label {
-          @include utilityPrimary;
-          margin-top: -2px;
-          margin-bottom: 0;
-          margin-left: 15px;
-          font-size: 16px;
-          color: inherit;
-          text-transform: none;
-          letter-spacing: 0;
-          cursor: inherit;
-
-          @include respond($break50) {
-            font-size: 18px;
-          }
-        }
-
-        &:hover, &:focus-visible {
-          color: $neutral75;
-          cursor: pointer;
-          background-color: $accentPrimaryLight;
-          outline: 0;
-        }
+      &:hover, &:focus-visible {
+        color: $neutral75;
+        cursor: pointer;
+        background-color: $accentPrimaryLight;
+        outline: 0;
       }
     }
+  }
 
-    ul ul {
-      overflow: hidden;
+  ul ul {
+    overflow: hidden;
 
-      .item {
-        justify-content: flex-start;
-        padding: 18px 20px;
-        color: $neutral90;
-        border-bottom: none;
-        transition: color $duration $timing,
-          background-color $duration $timing;
+    .item {
+      justify-content: flex-start;
+      padding: 18px 20px;
+      color: $neutral90;
+      border-bottom: none;
+      transition: color $duration $timing,
+        background-color $duration $timing;
 
-        @include respond($break65) {
-          padding: 18px 32px 18px 60px;
-        }
+      @include respond($break65) {
+        padding: 18px 32px 18px 60px;
+      }
 
-        &__icon {
-          color: $neutral50;
-        }
+      &__icon {
+        color: $neutral50;
+      }
 
-        span {
-          font-weight: 400;
-        }
+      span {
+        font-weight: 400;
+      }
+
+      &:hover {
+        color: $neutral75;
+      }
+
+      &:focus-visible {
+        color: $neutral75;
+        background-color: $accentPrimaryLight;
+        border: 0;
+        outline: 0;
+      }
+
+      &:nth-child(odd) {
+        background-color: $neutral20;
 
         &:hover {
-          color: $neutral75;
+          background-color: $accentPrimaryLight;
+          border: 0;
         }
 
         &:focus-visible {
@@ -224,96 +169,81 @@
           border: 0;
           outline: 0;
         }
+      }
 
-        &:nth-child(odd) {
-          background-color: $neutral20;
+      &:last-child {
+        border-bottom: 2px solid $neutral40;
 
-          &:hover {
-            background-color: $accentPrimaryLight;
-            border: 0;
-          }
-
-          &:focus-visible {
-            color: $neutral75;
-            background-color: $accentPrimaryLight;
-            border: 0;
-            outline: 0;
-          }
-        }
-
-        &:last-child {
+        &:hover, &:focus-visible {
           border-bottom: 2px solid $neutral40;
-
-          &:hover, &:focus-visible {
-            border-bottom: 2px solid $neutral40;
-          }
         }
       }
     }
+  }
 
-    .filters {
-      padding: 0;
-      margin: 0;
-      background-color: $neutral20;
-      border: 0;
-      border-bottom: 2px solid $neutral40;
+  .filters {
+    padding: 0;
+    margin: 0;
+    background-color: $neutral20;
+    border: 0;
+    border-top: 2px solid $neutral40;
+    border-bottom: 2px solid $neutral40;
 
-      label {
-        @include utilityPrimary;
-        font-size: 14px;
+    label {
+      @include utilityPrimary;
+      font-size: 14px;
+    }
+
+    .label {
+      @include utilityPrimary;
+      display: inline-block;
+      padding-right: 18px;
+      margin-top: -2px;
+      margin-bottom: 0;
+      font-size: 14px;
+      color: $neutral70;
+    }
+
+    .checkbox-group {
+      padding-top: 8px;
+
+      @include respond($break50) {
+        display: flex;
       }
 
-      .label {
-        @include utilityPrimary;
-        display: inline-block;
-        padding-right: 18px;
-        margin-top: -2px;
-        margin-bottom: 0;
-        font-size: 14px;
-        color: $neutral70;
+      .checkbox {
+        display: block;
+
+        &__indicator {
+          margin-top: -3px;
+        }
       }
 
-      .checkbox-group {
-        padding-top: 8px;
+      .checkbox + .checkbox {
+        margin-top: 8px;
+        margin-left: 0;
 
         @include respond($break50) {
-          display: flex;
+          margin-top: 0;
+          margin-left: 28px;
         }
 
-        .checkbox {
-          display: block;
-
-          &__indicator {
-            margin-top: -3px;
-          }
-        }
-
-        .checkbox + .checkbox {
-          margin-top: 8px;
-          margin-left: 0;
-
-          @include respond($break50) {
-            margin-top: 0;
-            margin-left: 28px;
-          }
-
-          @include respond($break65) {
-            margin-left: 32px;
-          }
-        }
-
-        @include respond($break90) {
-          padding-top: 0;
+        @include respond($break65) {
+          margin-left: 32px;
         }
       }
-    }
 
-    .drawer-list-horizontal {
-      @include listUnstyled;
-      display: flex;
-      flex-grow: 1;
-      justify-content: space-between;
+      @include respond($break90) {
+        padding-top: 0;
+      }
     }
+  }
+
+  .drawer-list-horizontal {
+    @include listUnstyled;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
   }
 
   &__filters-inner {

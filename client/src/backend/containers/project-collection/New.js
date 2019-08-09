@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import ProjectCollection from "backend/components/project-collection";
-import Form from "backend/components/form";
-import FormContainer from "backend/containers/form";
+import Form from "global/components/form";
+import FormContainer from "global/containers/form";
 import { projectCollectionsAPI } from "api";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";

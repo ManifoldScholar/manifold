@@ -86,6 +86,8 @@ export default {
   beActionCalloutUpdate: "backend-action-callout-update",
   feProject: "frontend-project",
   tmpProject: "project-detail",
+  feMyReadingGroups: "frontend-my-reading-groups",
+  feNewReadingGroup: "frontend-new-reading-group",
   feProjectsFiltered: "frontend-projects-filtered",
   feProjectsFeatured: "frontend-projects-featured",
   feProjectsFollowed: "frontend-projects-followed",

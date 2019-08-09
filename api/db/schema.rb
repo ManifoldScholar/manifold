@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_30_220353) do
+ActiveRecord::Schema.define(version: 2019_08_08_201859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_trgm"
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
@@ -460,6 +461,30 @@ ActiveRecord::Schema.define(version: 2019_07_30_220353) do
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
+  create_table "reading_group_memberships", force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "reading_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reading_group_id"], name: "index_reading_group_memberships_on_reading_group_id"
+    t.index ["user_id", "reading_group_id"], name: "index_reading_group_memberships_on_user_id_and_reading_group_id", unique: true
+    t.index ["user_id"], name: "index_reading_group_memberships_on_user_id"
+  end
+
+  create_table "reading_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "privacy", default: "private"
+    t.string "invitation_code"
+    t.boolean "notify_on_join", default: true
+    t.integer "memberships_count"
+    t.integer "annotations_count"
+    t.integer "highlights_count"
+    t.uuid "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_reading_groups_on_creator_id"
+  end
+
   create_table "resource_collections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -862,6 +887,9 @@ ActiveRecord::Schema.define(version: 2019_07_30_220353) do
   add_foreign_key "ingestions", "texts", on_delete: :nullify
   add_foreign_key "ingestions", "users", column: "creator_id", on_delete: :restrict
   add_foreign_key "notification_preferences", "users", on_delete: :cascade
+  add_foreign_key "reading_group_memberships", "reading_groups", on_delete: :cascade
+  add_foreign_key "reading_group_memberships", "users", on_delete: :cascade
+  add_foreign_key "reading_groups", "users", column: "creator_id", on_delete: :nullify
   add_foreign_key "resource_import_row_transitions", "resource_import_rows"
   add_foreign_key "resource_import_rows", "resource_imports", on_delete: :cascade
   add_foreign_key "resource_import_transitions", "resource_imports"

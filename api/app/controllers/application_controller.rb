@@ -107,6 +107,16 @@ class ApplicationController < ActionController::API
     render json: { errors: build_api_error(options) }, status: :forbidden
   end
 
+  def respond_with_forbidden(resource, action)
+    vars = { resource: resource, action: action }
+    options = {
+      status: 403,
+      title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
+      detail: I18n.t("controllers.errors.forbidden.instance.detail", vars)
+    }
+    render json: { errors: build_api_error(options) }, status: :forbidden
+  end
+
   def resource_not_found
     options = {
       status: 404,

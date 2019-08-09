@@ -1,11 +1,11 @@
 import { build, storiesOf } from "helpers/storybook/exports";
 import React from "react";
-import GroupsTable from "../Table/Groups/index";
-import MembersTable from "../Table/Members/index";
-import JoinBox from "../JoinBox/index";
-import Heading from "../Heading/index";
-import GroupSummaryBox from "../GroupSummaryBox/index";
-import NoteFilter from "../NoteFilter/index";
+import GroupsTable from "../Table/Groups";
+import MembersTable from "../Table/Members";
+import JoinBox from "../JoinBox";
+import Heading from "../Heading";
+import GroupSummaryBox from "../GroupSummaryBox";
+import NoteFilter from "../NoteFilter";
 
 const groups = build.arrayOf.groups(8);
 const members = build.arrayOf.members(8);

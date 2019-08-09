@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import FormContainer from "backend/containers/form";
-import Form from "backend/components/form";
+import FormContainer from "global/containers/form";
+import Form from "global/components/form";
 import config from "config";
 import humps from "humps";
 import intersection from "lodash/intersection";

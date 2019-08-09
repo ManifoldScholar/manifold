@@ -4,12 +4,18 @@ import Utility from "global/components/utility";
 import classNames from "classnames";
 import TablePagination from "./Pagination";
 import TableBody from "./Body";
+import Column from "./Column";
 
 export default class Table extends PureComponent {
   static propTypes = {
-    rowComponent: PropTypes.func.isRequired,
-    groups: PropTypes.array,
-    pagination: PropTypes.object
+    pagination: PropTypes.object.isRequired,
+    onPageClick: PropTypes.func.isRequired,
+    countLabel: PropTypes.string.isRequired,
+    children: (props, propName, componentName) => {
+      React.Children.toArray(props.children).every(
+        child => child.type === Column
+      );
+    }
   };
 
   get containerClassNames() {

@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Form from "backend/components/form";
+import Form from "global/components/form";
+import setter from "global/components/form/setter";
 import IconComposer from "global/components/utility/IconComposer";
 
 class IngestionFormUpload extends PureComponent {
@@ -132,4 +133,4 @@ class IngestionFormUpload extends PureComponent {
   }
 }
 
-export default Form.setter(IngestionFormUpload);
+export default setter(IngestionFormUpload);

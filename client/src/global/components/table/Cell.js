@@ -79,7 +79,7 @@ export default class TableCell extends React.PureComponent {
   }
 
   render() {
-    const header = this.context.getHeader(this.props.index);
+    const { header, headerIcon } = this.props;
 
     if (this.isTable)
       return (
@@ -95,7 +95,7 @@ export default class TableCell extends React.PureComponent {
       <div className={this.listItemContainerClassNames}>
         {this.textStyle !== "valueLarge" && (
           <dt>
-            <Utility.LabelWithIcon label={header.label} icon={header.icon} />
+            <Utility.LabelWithIcon label={header} icon={headerIcon} />
           </dt>
         )}
         <dd className={this.cellClassNames}>{this.props.children}</dd>
