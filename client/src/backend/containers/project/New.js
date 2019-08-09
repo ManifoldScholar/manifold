@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
-import Form from "backend/components/form";
-import FormContainer from "backend/containers/form";
+import Form from "global/components/form";
+import FormContainer from "global/containers/form";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 

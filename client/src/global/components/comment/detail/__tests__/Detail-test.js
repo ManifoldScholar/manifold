@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import Detail from "../";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Global.Comment.Detail component", () => {
   const store = build.store();
@@ -16,7 +17,7 @@ describe("Global.Comment.Detail component", () => {
   comment.relationships.creator = build.entity.user("3");
 
   it("renders correctly", () => {
-    const component = renderer.create(
+    const component = renderer.create(wrapWithRouter(
       <Provider store={store}>
         <Detail
           handleDelete={handleDeleteMock}
@@ -27,7 +28,7 @@ describe("Global.Comment.Detail component", () => {
           comment={comment}
         />
       </Provider>
-    );
+    ));
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

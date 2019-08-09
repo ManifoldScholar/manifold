@@ -2,9 +2,8 @@
 // -------------------------
 
 @import 'ui-panel-menu';
-@import 'annotation-markers';
-@import 'annotation-popup';
-@import 'appearance-menu';
+@import 'annotations/index';
+@import 'control-menus/index';
 @import 'footer-menu';
 @import 'footer-reader';
 @import 'header-reader';
@@ -16,10 +15,7 @@
 @import 'text-meta';
 @import 'text-section';
 @import 'toc-drawer';
-@import 'visibility-menu';
-@import 'notes';
-@import 'notes-message';
+@import 'notes/index';
 @import 'search/index';
 @import 'responsive-iframe';
-@import 'notes-list';
 @import 'selection-list';

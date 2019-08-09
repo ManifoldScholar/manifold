@@ -4,10 +4,10 @@ import connectAndFetch from "utils/connectAndFetch";
 import { stylesheetsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
 import Stylesheet from "backend/components/stylesheet";
-import Form from "backend/components/form";
+import Form from "global/components/form";
 import lh from "helpers/linkHandler";
 import { Redirect } from "react-router-dom";
-import FormContainer from "backend/containers/form";
+import FormContainer from "global/containers/form";
 import { entityStoreActions } from "actions";
 import has from "lodash/has";
 
@@ -67,7 +67,7 @@ export class StylesheetEditContainer extends PureComponent {
       : requests.beStylesheetCreate;
 
     return (
-      <section className="form-section">
+      <section className="form-section form-section--primary">
         <FormContainer.Form
           model={stylesheet}
           name={name}

@@ -7,7 +7,8 @@ export const initialState = {
   visibilityFilters: {
     highlight: { yours: true, others: true },
     annotation: { yours: true, others: true },
-    resource: { all: true }
+    resource: { all: true },
+    readingGroups: { all: true }
   },
   uiPanels: {
     tocDrawer: false,

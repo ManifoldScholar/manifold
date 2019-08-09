@@ -31,6 +31,13 @@ class NotificationMailer < ApplicationMailer
     mail(to: @user.email, subject: subject)
   end
 
+  def reading_group_join_notification(user, reading_group_membership)
+    user_assignment user
+    @reading_group_membership = reading_group_membership.decorate
+    subject = "Someone joined your reading group \"#{@reading_group_membership.reading_group_name}\""
+    mail(to: @user.email, subject: subject)
+  end
+
   private
 
   def user_assignment(user)

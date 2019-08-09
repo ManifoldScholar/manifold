@@ -240,7 +240,7 @@ export default class AnnotationPopupPositioner extends PureComponent {
   render() {
     const popupClass = classNames({
       "annotation-popup": true,
-      visible: this.visible
+      "annotation-popup--visible": this.visible
     });
 
     return (

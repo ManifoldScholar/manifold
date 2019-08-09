@@ -1,0 +1,214 @@
+.notes-filtered-list {
+  $iconSize: 24px;
+  $columnGapMobile: 10px;
+  $columnGapDesktop: 16px;
+
+  /* stylelint-disable property-no-vendor-prefix */
+  &__header {
+    @include drawerPadding(padding-right, narrow);
+    @include drawerPadding(padding-left, narrow);
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    @include respond($break50) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__see-all {
+    padding-top: 9px;
+    padding-bottom: 11px;
+    margin-top: 20px;
+
+    @include respond($break50) {
+      margin-top: 0;
+    }
+  }
+
+  &__section-list {
+    @include listUnstyled;
+    @include templateHead;
+  }
+
+  &__section {}
+
+  &__section-button {
+    @include buttonUnstyled;
+    @include drawerPadding(padding-right, narrow);
+    @include drawerPadding(padding-left, narrow);
+    display: block;
+    width: 100%;
+    padding-top: 11px;
+    padding-bottom: 13px;
+    color: $neutral90;
+    text-align: left;
+    background-color: $neutral05;
+    transition: background-color $duration $timing;
+
+    &:hover, &:focus-visible {
+      background-color: $neutral10;
+      outline: 0;
+    }
+  }
+
+  &__section-button-inner {
+    display: flex;
+    display: -ms-grid;
+    display: grid;
+    align-items: center;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: $iconSize $columnGapMobile 1fr;
+    grid-template: 'icon label' auto / $iconSize 1fr;
+    column-gap: $columnGapMobile;
+
+    @include respond($break50) {
+      -ms-grid-columns: $iconSize $columnGapDesktop 1fr;
+      column-gap: $columnGapDesktop;
+    }
+  }
+
+  &__section-label {
+    display: block;
+    grid-area: label;
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    overflow: hidden;
+    font-size: 18px;
+    font-weight: $medium;
+    line-height: 1.4;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: inherit;
+
+    @include respond($break50) {
+      font-size: 21px;
+    }
+  }
+
+  &__disclosure-icon {
+    position: relative;
+    top: 2px;
+    grid-area: icon;
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    transition: transform $duration $timing;
+    transform: rotate(-0.25turn);
+
+    &--expanded {
+      transform: rotate(0);
+    }
+  }
+
+  &__group {
+    @include listUnstyled;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    &--expanded {}
+  }
+
+  &__item {}
+
+  &__item-button {
+    @include buttonUnstyled;
+    @include drawerPadding(padding-right, narrow);
+    @include drawerPadding(padding-left, narrow);
+    display: block;
+    width: 100%;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    font-size: 16px;
+    color: $neutral90;
+    text-align: left;
+    transition:
+      color $duration $timing,
+      background-color $duration $timing;
+
+    &:hover, &:focus-visible {
+      background-color: $neutral10;
+      outline: 0;
+    }
+  }
+
+  &__item-button-inner {
+    display: flex;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: $iconSize $columnGapMobile 1fr;
+    grid-template: 'icon inner' auto / $iconSize 1fr;
+    column-gap: $columnGapMobile;
+
+    @include respond($break50) {
+      -ms-grid-columns: $iconSize $columnGapDesktop 1fr;
+      column-gap: $columnGapDesktop;
+    }
+
+    @include respond($break95) {
+      -ms-grid-columns: $iconSize $columnGapDesktop $iconSize $columnGapDesktop 1fr;
+      grid-template: '. icon inner' auto / $iconSize $iconSize 1fr;
+    }
+  }
+
+  &__item-icon {
+    grid-area: icon;
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    color: $neutral70;
+  }
+
+  &__item-inner {
+    display: flex;
+    flex-direction: column;
+    grid-area: inner;
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    min-width: 0;
+
+    @include respond($break95) {
+      flex-direction: row;
+      -ms-grid-column: 5;
+    }
+  }
+
+  &__item-text {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__tag {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    max-width: 65%;
+    padding: 2px 15px 3px;
+    margin-top: 12px;
+    line-height: 1.4;
+    color: $neutral75;
+    background-color: $neutral05;
+    border-radius: 12px;
+
+    @include respond($break95) {
+      flex-shrink: 0;
+      max-width: 225px;
+      margin-top: -3px;
+      margin-left: 40px;
+    }
+  }
+
+  &__tag-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__tag-icon {
+    flex-shrink: 0;
+    margin-left: 6px;
+  }
+  /* stylelint-enable property-no-vendor-prefix */
+}

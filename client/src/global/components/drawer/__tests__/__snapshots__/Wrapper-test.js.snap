@@ -3,7 +3,7 @@
 exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
-    <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} connected={false} lockScroll=\\"hover\\" lockScrollClickCloses={true} wide={false} entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true} focusTrap={true} includeSRCloseButton={false}>
+    <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} connected={false} lockScroll=\\"hover\\" lockScrollClickCloses={true} context=\\"backend\\" size=\\"default\\" padding=\\"default\\" position=\\"default\\" entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true} focusTrap={true} includeSRCloseButton={false}>
       <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
         <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
           <span>
@@ -11,28 +11,21 @@ exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
               <div className={[undefined]}>
                 <Utility.EdgeLockScroll>
                   <div className=\\"edge-lock-scroll\\">
-                    <div className=\\"drawer-backend\\">
+                    <div className=\\"drawer drawer--backend drawer--right drawer--default drawer--pad-default drawer--pos-default\\">
                       <focus-trap-react active={false} focusTrapOptions={{...}}>
-                        <div className=\\"drawer-bar\\">
+                        <div className=\\"drawer-bar drawer-bar--default\\">
                           <div className=\\"drawer-bar__title\\">
                             <span className=\\"drawer-bar__title-text\\">
                               wrapper
                             </span>
                           </div>
-                          <button onClick={[Function]} tabIndex=\\"0\\" className=\\"drawer-bar__close-button\\">
+                          <button onClick={[Function]} tabIndex=\\"0\\" className=\\"drawer-bar__close-button drawer-bar__close-button--light\\">
                             <span className=\\"drawer-bar__close-text\\">
                               Close
                             </span>
-                            <IconComposer icon=\\"close32\\" size={46.222} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--large\\" fill=\\"currentColor\\" svgProps={{...}}>
-                              <Close svgProps={{...}} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--large svg-icon--close32\\" icon=\\"close32\\" size={46.222} fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                                <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg drawer-bar__close-icon drawer-bar__close-icon--large svg-icon--close32\\" width={46.222} height={46.222} viewBox=\\"0 0 32 32\\" fill=\\"currentColor\\" aria-hidden={true}>
-                                  <path d=\\"M7.00007316,7.70847994 L7.70712678,7.00132 L24.9999268,24.2915201 L24.2928732,24.99868 L7.00007316,7.70847994 Z M7.70712678,24.99868 L7.00007316,24.2915201 L24.2928732,7.00132 L24.9999268,7.70847994 L7.70712678,24.99868 Z\\" />
-                                </svg>
-                              </Close>
-                            </IconComposer>
-                            <IconComposer icon=\\"close16\\" size=\\"default\\" iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--small\\" fill=\\"currentColor\\" svgProps={{...}}>
-                              <Close svgProps={{...}} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--small svg-icon--close16\\" icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                                <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg drawer-bar__close-icon drawer-bar__close-icon--small svg-icon--close16\\" width={16} height={16} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
+                            <IconComposer icon=\\"close16\\" size={24} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--small\\" fill=\\"currentColor\\" svgProps={{...}}>
+                              <Close svgProps={{...}} iconClass=\\"drawer-bar__close-icon drawer-bar__close-icon--small svg-icon--close16\\" icon=\\"close16\\" size={24} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg drawer-bar__close-icon drawer-bar__close-icon--small svg-icon--close16\\" width={24} height={24} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
                                   <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
                                 </svg>
                               </Close>

@@ -22,7 +22,7 @@ module Api
             render_multiple_resources(
               @annotations,
               each_serializer: AnnotationSerializer,
-              include: [:creator],
+              include: [:creator, :reading_group],
               location: location
             )
           end

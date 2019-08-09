@@ -4,8 +4,8 @@
 
   @include respond($break65) {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   }
 
   &__heading-text, &__button, &__input {
@@ -14,14 +14,14 @@
   }
 
   &__heading-text {
-    color: $neutral75;
     display: block;
     padding-bottom: 15px;
+    color: $neutral75;
 
     @include respond($break65) {
       display: inline-block;
-      padding-bottom: 0;
       padding-right: 12px;
+      padding-bottom: 0;
     }
   }
 
@@ -31,9 +31,9 @@
 
   &__instructions {
     @include subtitlePrimary;
-    font-size: 18px;
     display: inline-block;
     padding-bottom: 25px;
+    font-size: 18px;
 
     @include respond($break65) {
       padding-bottom: 0;
@@ -41,23 +41,24 @@
   }
 
   &__form {
+    display: flex;
+
     @include respond($break65) {
       min-width: 302px;
       padding-left: 20px;
     }
   }
 
-  &__input {
-    border: 1px solid $neutralWhite;
-    background-color: $neutralWhite;
-    padding: 9px 14px;
-    border-radius: 4px;
-    width: calc(100% - 90px);
+  &__label {
+    flex-grow: 1;
+  }
 
-    @include respond($break65) {
-      min-width: 192px;
-      width: auto;
-    }
+  &__input {
+    width: 100%;
+    padding: 9px 14px;
+    background-color: $neutralWhite;
+    border: 1px solid $neutralWhite;
+    border-radius: 4px;
 
     &::placeholder {
       color: $neutral50;
@@ -66,10 +67,10 @@
 
   &__button {
     @include buttonUnstyled;
-    background-color: $neutral20;
     padding: 12px 22px;
-    border-radius: 4px;
     margin-left: 12px;
+    background-color: $neutral20;
+    border-radius: 4px;
     transition:
       color $duration $timing,
       background-color $duration $timing;

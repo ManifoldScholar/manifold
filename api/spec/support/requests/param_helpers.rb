@@ -58,7 +58,7 @@ RSpec.shared_context "param helpers" do
         filename: filename,
         size: io.size,
         mime_type: mime_type
-      }      
+      }
     }
   end
 

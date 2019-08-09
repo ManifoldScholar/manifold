@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import FormContainer from "backend/containers/form";
+import FormContainer from "global/containers/form";
 import Layout from "backend/components/layout";
-import Form from "backend/components/form";
+import Form from "global/components/form";
 import Navigation from "backend/components/navigation";
 import Resource from "backend/components/resource";
 import GlobalForm from "global/components/form";

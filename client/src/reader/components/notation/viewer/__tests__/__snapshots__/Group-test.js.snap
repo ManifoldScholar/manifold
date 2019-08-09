@@ -13,22 +13,24 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                   <CSSTransitionGroupChild name=\\"highlight\\" appear={false} enter={true} leave={true} appearTimeout={[undefined]} enterTimeout={200} leaveTimeout={200}>
                     <NotationViewer.Single entry={{...}} params={{...}} actions={{...}} showTitle={false} active={false}>
                       <div className=\\"notation-preview-single\\">
-                        <Connect(AuthorizeComponent) entity={{...}} ability=\\"delete\\">
-                          <AuthorizeComponent entity={{...}} ability=\\"delete\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}}>
-                            <button onClick={[Function: onClick]} className=\\"notation-delete\\">
-                              <span className=\\"screen-reader-text\\">
-                                Delete Notation
-                              </span>
-                              <IconComposer icon=\\"close16\\" size=\\"default\\" iconClass=\\"notation-delete__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
-                                <Close svgProps={{...}} iconClass=\\"notation-delete__icon svg-icon--close16\\" icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                                  <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg notation-delete__icon svg-icon--close16\\" width={16} height={16} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
-                                    <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
-                                  </svg>
-                                </Close>
-                              </IconComposer>
-                            </button>
-                          </AuthorizeComponent>
-                        </Connect(AuthorizeComponent)>
+                        <Connect(withRouter(AuthorizeComponent)) entity={{...}} ability=\\"delete\\">
+                          <withRouter(AuthorizeComponent) entity={{...}} ability=\\"delete\\" authentication={{...}} dispatch={[Function]}>
+                            <AuthorizeComponent entity={{...}} ability=\\"delete\\" authentication={{...}} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}}>
+                              <button onClick={[Function: onClick]} className=\\"notation-delete\\">
+                                <span className=\\"screen-reader-text\\">
+                                  Delete Notation
+                                </span>
+                                <IconComposer icon=\\"close16\\" size=\\"default\\" iconClass=\\"notation-delete__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
+                                  <Close svgProps={{...}} iconClass=\\"notation-delete__icon svg-icon--close16\\" icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                    <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg notation-delete__icon svg-icon--close16\\" width={16} height={16} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                      <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
+                                    </svg>
+                                  </Close>
+                                </IconComposer>
+                              </button>
+                            </AuthorizeComponent>
+                          </withRouter(AuthorizeComponent)>
+                        </Connect(withRouter(AuthorizeComponent))>
                         <NotationViewerLink notation={{...}} params={{...}} className=\\"notation-single-link\\">
                           <Link className=\\"notation-single-link\\" to={{...}}>
                             <a className=\\"notation-single-link\\" onClick={[Function: onClick]} href=\\"/read/5/section/6/resource/2\\">

@@ -11,7 +11,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -24,44 +24,40 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           </h2>
         </header>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input wide"
           >
             <label
-              className="form-input-heading toggle above"
+              className="form-switch"
               htmlFor="switch-input-1"
             >
-              Hide Project Activity
-            </label>
-            <div
-              className="toggle-indicator"
-            >
-              <div
-                aria-describedby="switch-input-instructions-1"
-                aria-pressed={false}
-                className="boolean-primary"
+              <span
+                className="form-input-heading toggle above"
+              >
+                Hide Project Activity
+              </span>
+              <input
+                checked={false}
                 id="switch-input-1"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                role="button"
-                tabIndex="0"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <span
+                className="toggle-indicator"
               >
                 <span
-                  className="screen-reader-text"
-                >
-                  Hide Project Activity
-                </span>
-              </div>
-            </div>
-            <span
-              className="instructions"
-              id="switch-input-instructions-1"
-            >
-              If set, project activity will not be shown on the project page.
-            </span>
+                  aria-hidden="true"
+                  className="boolean-primary"
+                />
+              </span>
+              <span
+                className="instructions"
+              >
+                If set, project activity will not be shown on the project page.
+              </span>
+            </label>
           </div>
           <div
             className="form-input wide"
@@ -264,7 +260,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -277,7 +273,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           </h2>
         </header>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input wide"
@@ -383,7 +379,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -402,7 +398,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           If a URL or file is provided, a button to download the file will appear on the project page.  A file takes precedence over a URL.
         </span>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input wide"

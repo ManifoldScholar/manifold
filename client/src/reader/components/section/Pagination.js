@@ -38,7 +38,7 @@ export default class Pagination extends Component {
         >
           <IconComposer
             icon="circleArrowLeft64"
-            size={46.77}
+            size={48}
             iconClass="section-pagination__icon section-pagination__icon--previous"
           />
           <span className="section-pagination__text">Previous</span>
@@ -61,7 +61,7 @@ export default class Pagination extends Component {
           <span className="section-pagination__text">Next</span>
           <IconComposer
             icon="circleArrowRight64"
-            size={46.77}
+            size={48}
             iconClass="section-pagination__icon section-pagination__icon--next"
           />
         </Link>

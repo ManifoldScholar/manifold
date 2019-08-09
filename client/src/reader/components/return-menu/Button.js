@@ -19,7 +19,7 @@ export default class ReturnMenuButton extends Component {
     // to set a classname here.
     return (
       <button
-        className="button-menu"
+        className="reader-header__button reader-header__button--pad-default"
         onClick={this.clickHandler}
         data-id="toggle-menu"
         aria-haspopup

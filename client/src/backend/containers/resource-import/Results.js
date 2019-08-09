@@ -59,7 +59,7 @@ export class ResourceImportResults extends PureComponent {
     return (
       <div>
         <div className="form-secondary">
-          <div className="form-section">
+          <div className="form-section form-section--primary">
             <ResourceImport.Control
               resourceImport={resourceImport}
               updateImportState={this.updateImportState}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Form from "backend/components/form";
+import Form from "global/components/form";
 import { subjectsAPI } from "api";
 import FormContext from "helpers/contexts/FormContext";
 

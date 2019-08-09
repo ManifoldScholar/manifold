@@ -38,11 +38,17 @@
 .backend .header-app {
   z-index: 500;
 }
+
 .nested-nav--open {
   z-index: 425;
 }
 
-.drawer-backend, .drawer-frontend, .drawer-overlay {
+.drawer--backend,
+.drawer--frontend,
+.drawer--pos-overlay,
+.drawer-overlay--backend,
+.drawer-overlay--frontend,
+.drawer-overlay--pos-overlay {
   z-index: 400;
 }
 
@@ -58,10 +64,11 @@
   z-index: 200;
 }
 
-.header-reader {
+.reader-header {
   z-index: 200;
 
-  .container-banner {
+  &__inner,
+  &__options-button {
     z-index: 200;
   }
 }
@@ -70,7 +77,8 @@
   z-index: 200;
 }
 
-.drawer-reader {
+.drawer--reader.drawer--pos-default,
+.drawer-overlay--reader.drawer-overlay--pos-default {
   z-index: 150;
 }
 
@@ -84,10 +92,6 @@
 
 .annotation-popup {
   z-index: 100;
-}
-
-.truncated__expand-button {
-  z-index: 75;
 }
 
 .annotation-selection__action-buttons {

@@ -11,7 +11,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -24,7 +24,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           </h2>
         </header>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input wide"
@@ -809,7 +809,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -822,81 +822,73 @@ exports[`Backend Project General Container renders correctly 1`] = `
           </h2>
         </header>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input form-toggle-secondary"
           >
             <label
-              className="form-input-heading toggle above"
+              className="form-switch"
               htmlFor="switch-input-1"
             >
-              Draft Mode
-            </label>
-            <div
-              className="toggle-indicator"
-            >
-              <div
-                aria-describedby="switch-input-instructions-1"
-                aria-pressed={false}
-                className="boolean-primary"
+              <span
+                className="form-input-heading toggle above"
+              >
+                Draft Mode
+              </span>
+              <input
+                checked={false}
                 id="switch-input-1"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                role="button"
-                tabIndex="0"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <span
+                className="toggle-indicator"
               >
                 <span
-                  className="screen-reader-text"
-                >
-                  Draft Mode
-                </span>
-              </div>
-            </div>
-            <span
-              className="instructions"
-              id="switch-input-instructions-1"
-            >
-              A draft project is only visible to users who are able to modify it.
-            </span>
+                  aria-hidden="true"
+                  className="boolean-primary"
+                />
+              </span>
+              <span
+                className="instructions"
+              >
+                A draft project is only visible to users who are able to modify it.
+              </span>
+            </label>
           </div>
           <div
             className="form-input form-toggle-secondary"
           >
             <label
-              className="form-input-heading toggle above"
+              className="form-switch"
               htmlFor="switch-input-1"
             >
-              Featured
-            </label>
-            <div
-              className="toggle-indicator"
-            >
-              <div
-                aria-describedby="switch-input-instructions-1"
-                aria-pressed={false}
-                className="boolean-primary"
+              <span
+                className="form-input-heading toggle above"
+              >
+                Featured
+              </span>
+              <input
+                checked={false}
                 id="switch-input-1"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                role="button"
-                tabIndex="0"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <span
+                className="toggle-indicator"
               >
                 <span
-                  className="screen-reader-text"
-                >
-                  Featured
-                </span>
-              </div>
-            </div>
-            <span
-              className="instructions"
-              id="switch-input-instructions-1"
-            >
-              Featured projects are highlighted on the home page.
-            </span>
+                  aria-hidden="true"
+                  className="boolean-primary"
+                />
+              </span>
+              <span
+                className="instructions"
+              >
+                Featured projects are highlighted on the home page.
+              </span>
+            </label>
           </div>
           <div
             className="form-input"
@@ -964,7 +956,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -977,7 +969,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           </h2>
         </header>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input wide"
@@ -1199,7 +1191,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -1218,7 +1210,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
           Admin users can enabled the press bar for your installation on the settings / theme panel.
         </span>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input"

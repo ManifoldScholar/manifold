@@ -22,9 +22,9 @@ exports[`Reader.Section.Pagination component renders correctly 1`] = `
         aria-hidden={true}
         className="manicon-svg section-pagination__icon section-pagination__icon--next svg-icon--circleArrowRight64"
         fill="currentColor"
-        height={46.77}
+        height={48}
         viewBox="0 0 64 64"
-        width={46.77}
+        width={48}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
@@ -59,9 +59,9 @@ exports[`Reader.Section.Pagination component renders correctly with text section
         aria-hidden={true}
         className="manicon-svg section-pagination__icon section-pagination__icon--next svg-icon--circleArrowRight64"
         fill="currentColor"
-        height={46.77}
+        height={48}
         viewBox="0 0 64 64"
-        width={46.77}
+        width={48}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path

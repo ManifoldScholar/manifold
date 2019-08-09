@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_30_220353) do
+ActiveRecord::Schema.define(version: 2019_08_30_185652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_trgm"
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
@@ -53,9 +54,11 @@ ActiveRecord::Schema.define(version: 2019_07_30_220353) do
     t.integer "events_count", default: 0
     t.boolean "orphaned", default: false, null: false
     t.integer "flags_count", default: 0
+    t.uuid "reading_group_id"
     t.index ["created_at"], name: "index_annotations_on_created_at", using: :brin
     t.index ["creator_id"], name: "index_annotations_on_creator_id"
     t.index ["format"], name: "index_annotations_on_format"
+    t.index ["reading_group_id"], name: "index_annotations_on_reading_group_id"
     t.index ["resource_id"], name: "index_annotations_on_resource_id"
     t.index ["text_section_id"], name: "index_annotations_on_text_section_id"
   end
@@ -460,6 +463,34 @@ ActiveRecord::Schema.define(version: 2019_07_30_220353) do
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
+  create_table "reading_group_memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "reading_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "anonymous_label"
+    t.index ["reading_group_id", "anonymous_label"], name: "anonymous_label_index", unique: true
+    t.index ["reading_group_id"], name: "index_reading_group_memberships_on_reading_group_id"
+    t.index ["user_id", "reading_group_id"], name: "index_reading_group_memberships_on_user_id_and_reading_group_id", unique: true
+    t.index ["user_id"], name: "index_reading_group_memberships_on_user_id"
+  end
+
+  create_table "reading_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "privacy", default: "private"
+    t.string "invitation_code"
+    t.boolean "notify_on_join", default: true
+    t.integer "memberships_count", default: 0, null: false
+    t.integer "all_annotations_count", default: 0, null: false
+    t.integer "annotations_count", default: 0, null: false
+    t.integer "highlights_count", default: 0, null: false
+    t.uuid "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_reading_groups_on_creator_id"
+    t.index ["invitation_code"], name: "index_reading_groups_on_invitation_code", unique: true
+  end
+
   create_table "resource_collections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -853,6 +884,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_220353) do
     t.index ["parent_item_type", "parent_item_id"], name: "index_versions_on_parent_item_type_and_parent_item_id"
   end
 
+  add_foreign_key "annotations", "reading_groups", on_delete: :nullify
   add_foreign_key "identities", "users", on_delete: :cascade
   add_foreign_key "import_selection_matches", "annotations", on_delete: :nullify
   add_foreign_key "import_selection_matches", "import_selections", on_delete: :cascade
@@ -862,6 +894,9 @@ ActiveRecord::Schema.define(version: 2019_07_30_220353) do
   add_foreign_key "ingestions", "texts", on_delete: :nullify
   add_foreign_key "ingestions", "users", column: "creator_id", on_delete: :restrict
   add_foreign_key "notification_preferences", "users", on_delete: :cascade
+  add_foreign_key "reading_group_memberships", "reading_groups", on_delete: :cascade
+  add_foreign_key "reading_group_memberships", "users", on_delete: :cascade
+  add_foreign_key "reading_groups", "users", column: "creator_id", on_delete: :nullify
   add_foreign_key "resource_import_row_transitions", "resource_import_rows"
   add_foreign_key "resource_import_rows", "resource_imports", on_delete: :cascade
   add_foreign_key "resource_import_transitions", "resource_imports"
@@ -957,6 +992,24 @@ ActiveRecord::Schema.define(version: 2019_07_30_220353) do
               WHEN sv.ascending THEN dsv.dynamic_sort_value
               ELSE NULL::character varying
           END);
+  SQL
+
+  create_view "reading_group_membership_counts",  sql_definition: <<-SQL
+      SELECT rgm.id AS reading_group_membership_id,
+      count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
+      count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
+     FROM (reading_group_memberships rgm
+       LEFT JOIN annotations a ON (((a.creator_id = rgm.user_id) AND (a.reading_group_id = rgm.reading_group_id))))
+    GROUP BY rgm.id;
+  SQL
+
+  create_view "reading_group_counts",  sql_definition: <<-SQL
+      SELECT rg.id AS reading_group_id,
+      count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
+      count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
+     FROM (reading_groups rg
+       LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
+    GROUP BY rg.id;
   SQL
 
 end

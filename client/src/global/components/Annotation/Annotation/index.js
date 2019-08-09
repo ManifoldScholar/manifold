@@ -2,9 +2,37 @@ import React, { PureComponent } from "react";
 import TextContent from "./TextContent";
 import UserContent from "./UserContent";
 import classNames from "classnames";
+import lh from "helpers/linkHandler";
+import { withRouter } from "react-router-dom";
 
-export default class Annotation extends PureComponent {
+class Annotation extends PureComponent {
   static displayName = "Annotation.Annotation";
+
+  defaultVisitHandler(annotation) {
+    const {
+      relationships: {
+        textSection: {
+          id,
+          attributes: { textSlug }
+        }
+      }
+    } = annotation;
+    const { history } = this.props;
+    const url = lh.link(
+      "readerSection",
+      textSlug,
+      id,
+      `#annotation-${annotation.id}`
+    );
+    return history.push(url);
+  }
+
+  visitHandler = event => {
+    event.preventDefault();
+    const { annotation, visitHandler } = this.props;
+    if (visitHandler) return visitHandler(annotation);
+    this.defaultVisitHandler(annotation);
+  };
 
   get annotationListClassNames() {
     return classNames({
@@ -28,7 +56,7 @@ export default class Annotation extends PureComponent {
   }
 
   render() {
-    const { annotation, visitHandler, displayFormat } = this.props;
+    const { annotation, displayFormat } = this.props;
     return (
       <React.Fragment>
         <div className="annotation-selection">
@@ -37,7 +65,7 @@ export default class Annotation extends PureComponent {
             projectTitle={this.projectTitle}
             sectionTitle={this.sectionTitle}
             truncate={250}
-            onViewInText={() => visitHandler(annotation)}
+            onViewInText={this.visitHandler}
             displayFormat={displayFormat}
           />
         </div>
@@ -52,3 +80,5 @@ export default class Annotation extends PureComponent {
     );
   }
 }
+
+export default withRouter(Annotation);

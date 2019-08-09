@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Form from "backend/components/form";
+import Form from "global/components/form";
 
 export default class ResourceFormKindDocument extends PureComponent {
   static displayName = "Resource.Form.Kind.Document";

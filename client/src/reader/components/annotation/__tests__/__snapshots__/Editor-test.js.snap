@@ -19,6 +19,7 @@ exports[`Reader.Annotation.Editor component renders correctly 1`] = `
       </label>
       <textarea
         aria-describedby="annotation-textarea-error"
+        className="annotation-editor__textarea"
         id="annotation-textarea"
         onChange={[Function]}
         placeholder="Annotate this passage..."
@@ -31,54 +32,194 @@ exports[`Reader.Annotation.Editor component renders correctly 1`] = `
       />
     </div>
     <div
-      className="utility"
+      className="annotation-editor__actions"
     >
       <div
-        className="form-input"
+        className="annotation-editor__action"
       >
-        <label
-          className="form-toggle checkbox"
-          htmlFor="private-annotation"
+        <div
+          className="annotation-editor__action-label"
         >
-          <input
-            checked={false}
-            id="private-annotation"
-            name="private"
-            onChange={[Function]}
-            type="checkbox"
-            value="1"
-          />
-          <span
-            aria-hidden="true"
-            className="checkbox__indicator"
+          <svg
+            aria-hidden={true}
+            className="manicon-svg annotation-editor__action-icon svg-icon--readingGroup24"
+            height={24}
+            viewBox="0 0 24 24"
+            width={24}
+            xmlns="http://www.w3.org/2000/svg"
           >
+            <path
+              d="M18.0001,3 C16.8971,3 16.0001,3.897 16.0001,5 C16.0001,6.103 16.8971,7 18.0001,7 C19.1031,7 20.0001,6.103 20.0001,5 C20.0001,3.897 19.1031,3 18.0001,3 Z M18.0001,8 C16.3461,8 15.0001,6.654 15.0001,5 C15.0001,3.346 16.3461,2 18.0001,2 C19.6541,2 21.0001,3.346 21.0001,5 C21.0001,6.654 19.6541,8 18.0001,8 Z M6.0001,3 C4.8971,3 4.0001,3.897 4.0001,5 C4.0001,6.103 4.8971,7 6.0001,7 C7.1031,7 8.0001,6.103 8.0001,5 C8.0001,3.897 7.1031,3 6.0001,3 Z M6.0001,8 C4.3461,8 3.0001,6.654 3.0001,5 C3.0001,3.346 4.3461,2 6.0001,2 C7.6541,2 9.0001,3.346 9.0001,5 C9.0001,6.654 7.6541,8 6.0001,8 Z M20.5054,9 C21.8804,9 23.0004,10.119 23.0004,11.495 L23.0004,13 L22.0004,13 L22.0004,11.495 C22.0004,10.671 21.3294,10 20.5054,10 L15.9584,10 L15.9584,9 L20.5054,9 Z M8.0206,10 L3.4946,10 C2.6706,10 1.9996,10.671 1.9996,11.495 L1.9996,13 L0.9996,13 L0.9996,11.495 C0.9996,10.119 2.1196,9 3.4946,9 L8.0206,9 L8.0206,10 Z M8.0001,15.9951 L8.0001,16.3661 L12.0001,17.4771 L16.0001,16.3661 L16.0001,15.9951 C16.0001,15.1711 15.3301,14.5001 14.5051,14.5001 L9.4951,14.5001 C8.6701,14.5001 8.0001,15.1711 8.0001,15.9951 Z M17.0001,15.9951 L17.0001,16.0881 L21.5001,14.8381 L21.5001,22.0001 L20.5001,22.0001 L20.5001,16.1541 L12.5001,18.3761 L12.5001,22.0001 L11.5001,22.0001 L11.5001,18.3761 L3.5001,16.1541 L3.5001,22.0001 L2.5001,22.0001 L2.5001,14.8381 L7.0001,16.0881 L7.0001,15.9951 C7.0001,14.6191 8.1191,13.5001 9.4951,13.5001 L14.5051,13.5001 C15.8811,13.5001 17.0001,14.6191 17.0001,15.9951 Z M12.0001,7.5 C10.8971,7.5 10.0001,8.397 10.0001,9.5 C10.0001,10.603 10.8971,11.5 12.0001,11.5 C13.1031,11.5 14.0001,10.603 14.0001,9.5 C14.0001,8.397 13.1031,7.5 12.0001,7.5 Z M12.0001,12.5 C10.3461,12.5 9.0001,11.154 9.0001,9.5 C9.0001,7.846 10.3461,6.5 12.0001,6.5 C13.6541,6.5 15.0001,7.846 15.0001,9.5 C15.0001,11.154 13.6541,12.5 12.0001,12.5 Z"
+              fill="currentColor"
+            />
+          </svg>
+          <span
+            id="1-label"
+          >
+            Reading Group:
+          </span>
+        </div>
+        <div
+          aria-hidden={true}
+          className="annotation-editor__group-picker"
+        >
+          <button
+            className="annotation-editor__group-picker-toggle"
+            onClick={[Function]}
+            tabIndex={-1}
+            type="button"
+          >
+            <span
+              className="annotation-editor__group-picker-toggle-text"
+            >
+              My Public Annotations
+            </span>
             <svg
               aria-hidden={true}
-              className="manicon-svg checkbox__icon svg-icon--checkmark16"
-              height={16}
+              className="manicon-svg svg-icon--disclosureDown16"
+              fill="currentColor"
+              height={22}
               viewBox="0 0 16 16"
-              width={16}
+              width={22}
               xmlns="http://www.w3.org/2000/svg"
             >
               <polygon
-                fill="currentColor"
-                fillRule="nonzero"
-                points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
+                points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
               />
             </svg>
-          </span>
-          <span
-            className="toggle-label"
+          </button>
+          <div
+            className="annotation-group-options annotation-group-options--popup annotation-group-options--light annotation-group-options--hidden"
+            tabIndex="-1"
           >
-            This Annotation is Private
-          </span>
-        </label>
+            <ul
+              className="annotation-group-options__list"
+            >
+              <li
+                className="annotation-group-options__option"
+              >
+                <button
+                  className="annotation-group-options__button"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <div
+                    className="annotation-group-options__button-inner"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg annotation-group-options__icon annotation-group-options__icon--selected svg-icon--checkmark16"
+                      height={22}
+                      viewBox="0 0 16 16"
+                      width={22}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <polygon
+                        fill="currentColor"
+                        fillRule="nonzero"
+                        points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
+                      />
+                    </svg>
+                    <span
+                      className="annotation-group-options__button-text"
+                    >
+                      My Public Annotations
+                    </span>
+                  </div>
+                </button>
+              </li>
+              <li
+                className="annotation-group-options__option"
+              >
+                <button
+                  className="annotation-group-options__button"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <div
+                    className="annotation-group-options__button-inner"
+                  >
+                    <span
+                      className="annotation-group-options__button-text"
+                    >
+                      My Private Annotations
+                    </span>
+                    <svg
+                      aria-hidden={true}
+                      className="manicon-svg annotation-group-options__icon annotation-group-options__icon--private svg-icon--lock16"
+                      height={18}
+                      viewBox="0 0 16 16"
+                      width={18}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g
+                        fill="none"
+                        fillRule="evenodd"
+                      >
+                        <path
+                          d="M2.98990292,7.47282624 L12.9899029,7.47282624 L13.0100971,15.0271738 L3.01009708,15.0271738 L2.98990292,7.47282624 Z M6.00228021,6.50729808 L5.00229284,6.51232269 C4.99923925,5.90460349 4.99771347,5.0752385 4.99771347,4.02403374 C4.99771347,2.19534242 6.20259598,1.00981038 8.00228653,1.00981038 C9.7784289,1.00981038 11.0022865,2.23366801 11.0022865,4.00981038 C11.0022865,5.42647705 11.0022865,5.42647705 11.0022865,6.50981038 L10.0022865,6.50981038 C10.0022865,5.42647705 10.0022865,5.42647705 10.0022865,4.00981038 C10.0022865,2.78595276 9.22614415,2.00981038 8.00228653,2.00981038 C6.75128917,2.00981038 5.99771347,2.75128362 5.99771347,4.02403374 C5.99771347,5.07370586 5.9992364,5.9015253 6.00228021,6.50729808 Z"
+                          fill="currentColor"
+                          fillRule="nonzero"
+                        />
+                      </g>
+                    </svg>
+                  </div>
+                </button>
+              </li>
+            </ul>
+            <div
+              className="annotation-group-options__footer"
+            >
+              <a
+                className="annotation-group-options__link"
+                href="/my/groups"
+                onClick={[Function]}
+              >
+                <span
+                  className="annotation-group-options__link-text"
+                >
+                  Manage Groups
+                </span>
+                <svg
+                  aria-hidden={true}
+                  className="manicon-svg annotation-group-options__icon annotation-group-options__icon--link svg-icon--link24"
+                  height={24}
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15.9993,19.0001 L15.9993,13.0591 L16.9993,13.0591 L16.9993,20.0001 L3.9993,20.0001 L3.9993,7.0001 L10.9993,7.0001 L10.9993,8.0001 L4.9993,8.0001 L4.9993,19.0001 L15.9993,19.0001 Z M11.9993,4.0001 L19.9993,4.0001 L19.9993,12.0001 L18.9993,12.0001 L18.9993,5.7071 L10.8533,13.8541 L10.1453,13.1461 L18.2923,5.0001 L11.9993,5.0001 L11.9993,4.0001 Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <select
+          aria-labelledby="1-label"
+          className="screen-reader-text"
+          onChange={[Function]}
+          value="public"
+        >
+          <option
+            value="public"
+          >
+            My Public Annotations
+          </option>
+          <option
+            value="private"
+          >
+            My Private Annotations
+          </option>
+        </select>
       </div>
       <div
-        className="buttons"
+        className="annotation-editor__buttons"
       >
         <button
-          className="button-primary button-primary--dull"
+          className="button-primary button-primary--gray"
           onClick={[Function]}
         >
           <span

@@ -31,7 +31,10 @@ export default class Filters extends Component {
     const checkboxId = format + "-checkbox";
 
     return (
-      <label htmlFor={checkboxId} className="checkbox">
+      <label
+        htmlFor={checkboxId}
+        className="notes-filters__checkbox checkbox checkbox--gray"
+      >
         <input
           type="checkbox"
           id={checkboxId}
@@ -52,10 +55,10 @@ export default class Filters extends Component {
 
   render() {
     return (
-      <fieldset className="filters">
-        <div className="notes-drawer__filters-inner">
-          <legend className="label">Show your:</legend>
-          <div className="checkbox-group">
+      <fieldset className="notes-filters">
+        <div className="notes-filters__inner">
+          <legend className="notes-filters__label">Show my:</legend>
+          <div className="notes-filters__checkbox-group">
             {this.renderCheckBox("Highlights", "highlight")}
             {this.renderCheckBox("Annotations", "annotation")}
           </div>

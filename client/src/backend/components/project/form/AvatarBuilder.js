@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import withConfirmation from "hoc/with-confirmation";
-import Form from "backend/components/form";
+import Form from "global/components/form";
+import setter from "global/components/form/setter";
 import GlobalForm from "global/components/form";
 import ColorPicker from "./ColorPicker";
 import UniqueIcons from "global/components/icon/unique";
@@ -161,4 +162,4 @@ class AvatarBuilder extends Component {
   }
 }
 
-export default withConfirmation(Form.setter(AvatarBuilder));
+export default withConfirmation(setter(AvatarBuilder));

@@ -53,21 +53,19 @@ export default class GroupedList extends PureComponent {
                     saveAnnotation={attr => saveAnnotation(attr, group)}
                   />
                 )}
-                <div className="container">
-                  <ul className="annotation-list">
-                    {group.annotations.map(annotation => {
-                      return (
-                        <UserContent
-                          dispatch={dispatch}
-                          key={annotation.id}
-                          creator={annotation.relationships.creator}
-                          showLogin={loginHandler}
-                          annotation={annotation}
-                        />
-                      );
-                    })}
-                  </ul>
-                </div>
+                <ul className="annotation-list">
+                  {group.annotations.map(annotation => {
+                    return (
+                      <UserContent
+                        dispatch={dispatch}
+                        key={annotation.id}
+                        creator={annotation.relationships.creator}
+                        showLogin={loginHandler}
+                        annotation={annotation}
+                      />
+                    );
+                  })}
+                </ul>
               </li>
             )}
           />

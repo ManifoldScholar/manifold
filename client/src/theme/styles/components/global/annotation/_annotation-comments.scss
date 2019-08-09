@@ -33,8 +33,12 @@
     @include buttonUnstyled;
     @include utilityPrimary;
     font-size: 12px;
-    color: $neutral70;
+    color: $neutral45;
     transition: color $duration $timing;
+
+    &--active {
+      margin-bottom: 15px;
+    }
 
     &:hover, &--active {
       color: $accentPrimary;
@@ -42,6 +46,7 @@
 
     &--secondary {
       color: $sp40Tertiary;
+
       &--active, &:focus-visible {
         color: $sp40Tertiary;
       }

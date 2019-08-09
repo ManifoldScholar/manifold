@@ -33,7 +33,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
             <div
               aria-describedby="1-instructions"
               aria-labelledby="1-header"
-              className="form-section"
+              className="form-section form-section--primary"
               role="group"
             >
               <header
@@ -46,7 +46,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
                 </h2>
               </header>
               <div
-                className="form-input-group"
+                className="form-input-group form-input-group--primary"
               >
                 <div
                   className="form-input"
@@ -186,7 +186,7 @@ The Manifold Team"
             <div
               aria-describedby="1-instructions"
               aria-labelledby="1-header"
-              className="form-section"
+              className="form-section form-section--primary"
               role="group"
             >
               <header
@@ -199,7 +199,7 @@ The Manifold Team"
                 </h2>
               </header>
               <div
-                className="form-input-group"
+                className="form-input-group form-input-group--primary"
               >
                 <div
                   className="form-input"
@@ -259,7 +259,7 @@ The Manifold Team"
             <div
               aria-describedby="1-instructions"
               aria-labelledby="1-header"
-              className="form-section"
+              className="form-section form-section--primary"
               role="group"
             >
               <header
@@ -272,7 +272,7 @@ The Manifold Team"
                 </h2>
               </header>
               <div
-                className="form-input-group"
+                className="form-input-group form-input-group--primary"
               >
                 <div
                   className="form-input"
@@ -382,7 +382,7 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
             <div
               aria-describedby="1-instructions"
               aria-labelledby="1-header"
-              className="form-section"
+              className="form-section form-section--primary"
               role="group"
             >
               <header
@@ -395,7 +395,7 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
                 </h2>
               </header>
               <div
-                className="form-input-group"
+                className="form-input-group form-input-group--primary"
               >
                 <div
                   className="form-input"
@@ -535,7 +535,7 @@ The Manifold Team"
             <div
               aria-describedby="1-instructions"
               aria-labelledby="1-header"
-              className="form-section"
+              className="form-section form-section--primary"
               role="group"
             >
               <header
@@ -548,7 +548,7 @@ The Manifold Team"
                 </h2>
               </header>
               <div
-                className="form-input-group"
+                className="form-input-group form-input-group--primary"
               >
                 <div
                   className="form-input"
@@ -608,7 +608,7 @@ The Manifold Team"
             <div
               aria-describedby="1-instructions"
               aria-labelledby="1-header"
-              className="form-section"
+              className="form-section form-section--primary"
               role="group"
             >
               <header
@@ -621,7 +621,7 @@ The Manifold Team"
                 </h2>
               </header>
               <div
-                className="form-input-group"
+                className="form-input-group form-input-group--primary"
               >
                 <div
                   className="form-input"

@@ -160,8 +160,8 @@
 
       select {
         @include filterSelectBase;
-        height: $inputHeight;
         width: 100%;
+        height: $inputHeight;
         font-size: 14px;
         color: $neutral50;
         border: 2px solid $neutral30;

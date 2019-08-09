@@ -4,7 +4,7 @@ exports[`Reader.ReturnMenu.Button component renders correctly 1`] = `
 <button
   aria-expanded={false}
   aria-haspopup={true}
-  className="button-menu"
+  className="reader-header__button reader-header__button--pad-default"
   data-id="toggle-menu"
   onClick={[Function]}
 >

@@ -6,9 +6,12 @@ class AnnotationAuthorizer < ApplicationAuthorizer
   end
 
   def creatable_by?(user, _options = {})
-    return known_user?(user) unless Annotation::NOTATION_TYPES.include?(resource.format)
+    return false unless known_user?(user)
 
-    resource&.text&.notatable_by? user || false
+    allowed = true
+    allowed = false if annotation_in_reading_group? && user_is_not_in_reading_group?(user)
+    allowed = false if annotation_is_resource_annotation? && !user_can_notate_text?(user)
+    allowed
   end
 
   def deletable_by?(user, _options = {})
@@ -27,8 +30,36 @@ class AnnotationAuthorizer < ApplicationAuthorizer
   end
 
   def readable_by?(user, _options = {})
-    return true if user.created?(resource)
+    return true if user&.created?(resource)
+    return user_is_in_reading_group?(user) if annotation_in_reading_group? && reading_group_is_private?
 
     resource.public?
   end
+
+  private
+
+  def user_can_notate_text?(user)
+    resource&.text&.notatable_by? user
+  end
+
+  def annotation_is_resource_annotation?
+    Annotation::NOTATION_TYPES.include?(resource.format)
+  end
+
+  def annotation_in_reading_group?
+    resource.reading_group_id.present?
+  end
+
+  def reading_group_is_private?
+    resource.reading_group.private?
+  end
+
+  def user_is_in_reading_group?(user)
+    !user_is_not_in_reading_group?(user)
+  end
+
+  def user_is_not_in_reading_group?(user)
+    resource.reading_group.users.exclude? user
+  end
+
 end

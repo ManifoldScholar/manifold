@@ -1,24 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
-<div>
+<div
+  className="notes-filtered-list"
+>
   <div
-    className="drawer-bar"
+    className="notes-filtered-list__header"
   >
-    <h2
-      className="drawer-bar__title drawer-bar__title--large"
+    <fieldset
+      className="notes-filters"
     >
       <div
-        className="drawer-bar__title-button"
-        onClick={[MockFunction]}
-        role="button"
-        tabIndex="0"
+        className="notes-filters__inner"
       >
-        Your Notes
+        <legend
+          className="notes-filters__label"
+        >
+          Show my:
+        </legend>
+        <div
+          className="notes-filters__checkbox-group"
+        >
+          <label
+            className="notes-filters__checkbox checkbox checkbox--gray"
+            htmlFor="highlight-checkbox"
+          >
+            <input
+              checked={true}
+              id="highlight-checkbox"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <div
+              aria-hidden="true"
+              className="checkbox__indicator"
+            >
+              <svg
+                aria-hidden={true}
+                className="manicon-svg checkbox__icon svg-icon--checkmark16"
+                height={16}
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <polygon
+                  fill="currentColor"
+                  fillRule="nonzero"
+                  points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
+                />
+              </svg>
+            </div>
+            Highlights
+          </label>
+          <label
+            className="notes-filters__checkbox checkbox checkbox--gray"
+            htmlFor="annotation-checkbox"
+          >
+            <input
+              checked={true}
+              id="annotation-checkbox"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <div
+              aria-hidden="true"
+              className="checkbox__indicator"
+            >
+              <svg
+                aria-hidden={true}
+                className="manicon-svg checkbox__icon svg-icon--checkmark16"
+                height={16}
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <polygon
+                  fill="currentColor"
+                  fillRule="nonzero"
+                  points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
+                />
+              </svg>
+            </div>
+            Annotations
+          </label>
+        </div>
       </div>
-    </h2>
+    </fieldset>
     <button
-      className="button-primary"
+      className="notes-filtered-list__see-all button-primary"
       onClick={[MockFunction]}
     >
       <span
@@ -28,114 +97,41 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
       </span>
     </button>
   </div>
-  <fieldset
-    className="filters"
-  >
-    <div
-      className="notes-drawer__filters-inner"
-    >
-      <legend
-        className="label"
-      >
-        Show your:
-      </legend>
-      <div
-        className="checkbox-group"
-      >
-        <label
-          className="checkbox"
-          htmlFor="highlight-checkbox"
-        >
-          <input
-            checked={true}
-            id="highlight-checkbox"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          <div
-            aria-hidden="true"
-            className="checkbox__indicator"
-          >
-            <svg
-              aria-hidden={true}
-              className="manicon-svg checkbox__icon svg-icon--checkmark16"
-              height={16}
-              viewBox="0 0 16 16"
-              width={16}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polygon
-                fill="currentColor"
-                fillRule="nonzero"
-                points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-              />
-            </svg>
-          </div>
-          Highlights
-        </label>
-        <label
-          className="checkbox"
-          htmlFor="annotation-checkbox"
-        >
-          <input
-            checked={true}
-            id="annotation-checkbox"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          <div
-            aria-hidden="true"
-            className="checkbox__indicator"
-          >
-            <svg
-              aria-hidden={true}
-              className="manicon-svg checkbox__icon svg-icon--checkmark16"
-              height={16}
-              viewBox="0 0 16 16"
-              width={16}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polygon
-                fill="currentColor"
-                fillRule="nonzero"
-                points="14.204 2.5 6.411 12.011 1.721 7.432 1 8.135 6.495 13.5 15 3.122"
-              />
-            </svg>
-          </div>
-          Annotations
-        </label>
-      </div>
-    </div>
-  </fieldset>
   <div>
-    <ul>
-      <li>
-        <div
+    <ul
+      className="notes-filtered-list__section-list"
+    >
+      <li
+        className="notes-filtered-list__section"
+      >
+        <button
           aria-expanded={false}
-          className="item"
+          className="notes-filtered-list__section-button"
           onClick={[Function]}
-          role="button"
-          tabIndex="0"
         >
-          <svg
-            aria-hidden={true}
-            className="manicon-svg item__disclosure-icon svg-icon--disclosureDown16"
-            fill="currentColor"
-            height={18}
-            viewBox="0 0 16 16"
-            width={18}
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            className="notes-filtered-list__section-button-inner"
           >
-            <polygon
-              points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-            />
-          </svg>
-          <h3
-            className="item-label"
-          >
-            Test
-          </h3>
-        </div>
+            <svg
+              aria-hidden={true}
+              className="manicon-svg notes-filtered-list__disclosure-icon svg-icon--disclosureDown24"
+              fill="currentColor"
+              height={24}
+              viewBox="0 0 24 24"
+              width={24}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+              />
+            </svg>
+            <span
+              className="notes-filtered-list__section-label"
+            >
+              Test
+            </span>
+          </div>
+        </button>
       </li>
     </ul>
   </div>

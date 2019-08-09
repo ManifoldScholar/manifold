@@ -184,6 +184,110 @@ exports[`Frontend Subscriptions Container renders correctly 1`] = `
                 </span>
               </label>
             </fieldset>
+            <fieldset
+              className="subscriptions__radio-group form-input"
+            >
+              <legend
+                className="subscriptions__legend"
+              >
+                Notify you of all Comments and Annotations?
+              </legend>
+              <span
+                className="instructions"
+              >
+                Manifold will send you an email anytime a comment or annotation is created
+              </span>
+              <label
+                className="form-toggle radio inline"
+              >
+                <input
+                  checked={false}
+                  name="projectCommentsAndAnnotations"
+                  onChange={[Function]}
+                  type="radio"
+                  value="never"
+                />
+                <span
+                  className="toggle-indicator"
+                />
+                <span
+                  className="toggle-label"
+                >
+                  No
+                </span>
+              </label>
+              <label
+                className="form-toggle radio inline"
+              >
+                <input
+                  checked={false}
+                  name="projectCommentsAndAnnotations"
+                  onChange={[Function]}
+                  type="radio"
+                  value="always"
+                />
+                <span
+                  className="toggle-indicator"
+                />
+                <span
+                  className="toggle-label"
+                >
+                  Yes
+                </span>
+              </label>
+            </fieldset>
+            <fieldset
+              className="subscriptions__radio-group form-input"
+            >
+              <legend
+                className="subscriptions__legend"
+              >
+                Notify me when comments are flagged.
+              </legend>
+              <span
+                className="instructions"
+              >
+                Anytime a user flags a comment, you will receive email notification.
+              </span>
+              <label
+                className="form-toggle radio inline"
+              >
+                <input
+                  checked={false}
+                  name="flaggedResources"
+                  onChange={[Function]}
+                  type="radio"
+                  value="never"
+                />
+                <span
+                  className="toggle-indicator"
+                />
+                <span
+                  className="toggle-label"
+                >
+                  No
+                </span>
+              </label>
+              <label
+                className="form-toggle radio inline"
+              >
+                <input
+                  checked={false}
+                  name="flaggedResources"
+                  onChange={[Function]}
+                  type="radio"
+                  value="always"
+                />
+                <span
+                  className="toggle-indicator"
+                />
+                <span
+                  className="toggle-label"
+                >
+                  Yes
+                </span>
+              </label>
+            </fieldset>
           </div>
         </div>
         <button

@@ -37,6 +37,12 @@
     }
   }
 
+  &__button {
+    &--search {
+      // padding: 10px;
+    }
+  }
+
   .mode-button {
     margin-right: 4px;
   }
@@ -84,7 +90,7 @@
 
   .panel-leave.panel-leave-active .search-menu,
   .panel-leave.panel-leave-active .user-menu {
-     opacity: 0;
-     transform: translateY(-1 * header-layout(menu-slide-distance));
+    opacity: 0;
+    transform: translateY(-1 * header-layout(menu-slide-distance));
   }
 }

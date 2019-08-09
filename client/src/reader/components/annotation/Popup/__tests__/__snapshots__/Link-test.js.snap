@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Annotation.Popup.Menu.Link Component renders correctly 1`] = `
+<section
+  className="annotation-popup__panel annotation-popup__panel--top"
+>
+  <button
+    className="annotation-popup__button"
+    onClick={[Function]}
+  >
+    <svg
+      aria-hidden={true}
+      className="manicon-svg annotation-popup__button-icon svg-icon--arrowRight32"
+      fill="currentColor"
+      height={24}
+      viewBox="0 0 32 32"
+      width={24}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14.0744069,7.75197978 L14.7335931,7 L25.0005111,15.9999899 L14.7335931,24.9999798 L14.0744069,24.2480001 L23.483489,15.9999899 L14.0744069,7.75197978 Z M24.1022001,15.4999899 L24.1022001,16.4999899 L7,16.4999899 L7,15.4999899 L24.1022001,15.4999899 Z"
+      />
+    </svg>
+    <span
+      className="annotation-popup__button-text"
+    >
+      Follow Link
+    </span>
+  </button>
+  <button
+    className="annotation-popup__button"
+    onClick={[Function]}
+  >
+    <svg
+      aria-hidden={true}
+      className="manicon-svg annotation-popup__button-icon svg-icon--comment32"
+      fill="currentColor"
+      height={24}
+      viewBox="0 0 32 32"
+      width={24}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12.109,20.319 L5.99999997,20.319 L5.99999997,7.00999997 L26,7.00999997 L26,20.319 L18.8529849,20.319 L12.109,26.9658287 L12.109,20.319 Z M25,8.00999998 L6.99999997,8.00999998 L6.99999997,19.319 L13.109,19.319 L13.109,24.5761714 L18.4430151,19.319 L25,19.319 L25,8.00999998 Z"
+      />
+    </svg>
+    <span
+      className="annotation-popup__button-text"
+    >
+      View Annotation
+    </span>
+  </button>
+  <div
+    className="annotation-popup__tail annotation-popup__tail--up"
+  />
+</section>
+`;

@@ -11,7 +11,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -24,7 +24,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
           </h2>
         </header>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input"
@@ -69,7 +69,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -82,7 +82,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
           </h2>
         </header>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input"
@@ -171,7 +171,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -184,7 +184,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
           </h2>
         </header>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input"
@@ -329,7 +329,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
       <div
         aria-describedby="1-instructions"
         aria-labelledby="1-header"
-        className="form-section"
+        className="form-section form-section--primary"
         role="group"
       >
         <header
@@ -342,7 +342,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
           </h2>
         </header>
         <div
-          className="form-input-group"
+          className="form-input-group form-input-group--primary"
         >
           <div
             className="form-input"

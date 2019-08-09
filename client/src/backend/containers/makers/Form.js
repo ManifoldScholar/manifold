@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Form from "backend/components/form";
-import FormContainer from "backend/containers/form";
+import Form from "global/components/form";
+import FormContainer from "global/containers/form";
 import { makersAPI, requests } from "api";
 
 export default class MakersFormContainer extends PureComponent {
@@ -23,7 +23,7 @@ export default class MakersFormContainer extends PureComponent {
     const requestName = maker ? requests.beMakerUpdate : requests.beMakerCreate;
 
     return (
-      <section className="form-section">
+      <section className="form-section form-section--primary">
         <FormContainer.Form
           model={maker}
           modelName="Maker"

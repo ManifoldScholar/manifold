@@ -16,7 +16,7 @@ exports[`Backend People Makers New Container renders correctly 1`] = `
     </h2>
   </header>
   <section
-    className="form-section"
+    className="form-section form-section--primary"
   >
     <div>
       <form

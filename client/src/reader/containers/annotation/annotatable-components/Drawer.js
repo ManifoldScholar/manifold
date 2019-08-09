@@ -19,7 +19,7 @@ export default class AnnotatableDrawer extends PureComponent {
   get initialState() {
     return {
       drawerWrapperProps: {
-        style: "frontend"
+        context: "reader"
       }
     };
   }
@@ -46,10 +46,14 @@ export default class AnnotatableDrawer extends PureComponent {
     const DrawerContents = Drawers[this.componentKey];
 
     let drawerProps = {
-      style: "frontend",
+      context: "reader",
+      size: "wide",
+      position: "overlay",
+      padding: "none",
       open: this.isOpen,
       closeCallback: this.closeDrawer,
-      lockScroll: "always"
+      lockScroll: "always",
+      identifier: "annotations-drawer"
     };
     if (DrawerContents && isFunction(DrawerContents.drawerProps)) {
       drawerProps = Object.assign(drawerProps, DrawerContents.drawerProps());

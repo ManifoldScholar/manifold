@@ -76,8 +76,7 @@
 }
 
 .notifications-list.notifications-list-drawer {
-
-  margin-bottom: 26px;
+  // margin-bottom: 26px;
 
   .notification-container {
     transition: transform $duration ease-out;
@@ -97,7 +96,7 @@
 
   .notification {
     .container {
-      padding: 18px;
+      padding: 18px 18px 12px;
       background-color: $neutral90;
     }
 
@@ -125,8 +124,10 @@
       @include headingTertiary;
       padding-right: 0;
       margin-top: 8px;
+      margin-bottom: 16px;
       font-size: 16px;
       font-weight: normal;
+      line-height: 1.4em;
       color: $neutral30;
     }
 
@@ -135,7 +136,7 @@
       position: relative;
       top: auto;
       right: auto;
-      margin: 8px 0 0;
+      margin: 10px 0 0;
       font-size: inherit;
 
       &__icon {

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import Form from "backend/components/form";
+import Form from "global/components/form";
 import PropTypes from "prop-types";
 
 export default class ProjectContentTypeFormResources extends PureComponent {

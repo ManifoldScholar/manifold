@@ -3,15 +3,17 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Wrapper from "./Wrapper";
 import isString from "lodash/isString";
+import isFunction from "lodash/isFunction";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class DialogConfirm extends PureComponent {
   static displayName = "Dialog.Confirm";
 
   static propTypes = {
-    resolve: PropTypes.func.isRequired,
+    resolve: PropTypes.func,
     reject: PropTypes.func.isRequired,
     heading: PropTypes.string,
+    options: PropTypes.object,
     message: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
@@ -21,7 +23,11 @@ export default class DialogConfirm extends PureComponent {
   };
 
   static defaultProps = {
-    heading: "Are you sure?"
+    heading: "Are you sure?",
+    options: {
+      resolveLabel: "Yes",
+      rejectLabel: "No"
+    }
   };
 
   componentDidMount() {
@@ -40,6 +46,22 @@ export default class DialogConfirm extends PureComponent {
       "buttons-icon-horizontal__button",
       "button-icon-secondary"
     );
+  }
+
+  get canHandleResolve() {
+    return isFunction(this.props.resolve);
+  }
+
+  get resolveLabel() {
+    if (this.props.options && this.props.options.resolveLabel)
+      return this.props.options.resolveLabel;
+    return "Yes";
+  }
+
+  get rejectLabel() {
+    if (this.props.options && this.props.options.rejectLabel)
+      return this.props.options.rejectLabel;
+    return this.canHandleResolve ? "No" : "OK";
   }
 
   handleKeyPress = event => {
@@ -77,18 +99,20 @@ export default class DialogConfirm extends PureComponent {
         )}
 
         <div className="buttons-icon-horizontal">
-          <button
-            onClick={this.handleResolveClick}
-            className={this.buttonClasses}
-            data-id="accept"
-          >
-            <IconComposer
-              icon="checkmark16"
-              size="default"
-              iconClass="button-icon-secondary__icon"
-            />
-            <span>Yes</span>
-          </button>
+          {this.canHandleResolve && (
+            <button
+              onClick={this.handleResolveClick}
+              className={this.buttonClasses}
+              data-id="accept"
+            >
+              <IconComposer
+                icon="checkmark16"
+                size="default"
+                iconClass="button-icon-secondary__icon"
+              />
+              <span>{this.resolveLabel}</span>
+            </button>
+          )}
           <button
             className={classNames(
               this.buttonClasses,
@@ -102,7 +126,7 @@ export default class DialogConfirm extends PureComponent {
               size="default"
               iconClass="button-icon-secondary__icon"
             />
-            <span>No</span>
+            <span>{this.rejectLabel}</span>
           </button>
         </div>
       </Wrapper>

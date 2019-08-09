@@ -37,6 +37,7 @@
 
 @mixin booleanPrimary($height) {
   position: relative;
+  display: block;
   width: $height * 2;
   height: $height;
   cursor: pointer;
@@ -55,10 +56,6 @@
     &::before {
       left: calc(100% - #{$height});
     }
-  }
-
-  &:focus-visible {
-    outline-offset: 2px;
   }
 
   &::before {
@@ -99,7 +96,7 @@
 @mixin filterSelectBase {
   @include unstyledSelect;
   @include utilityPrimary;
-  padding-right: 32px;
+  padding-right: 36px;
   padding-left: 13px;
   overflow: hidden;
   text-overflow: ellipsis;

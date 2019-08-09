@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import isString from "lodash/isString";
 import isPlainObject from "lodash/isPlainObject";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { fatalErrorActions, notificationActions } from "actions";
 import Authorization from "helpers/authorization";
+import get from "lodash/get";
 
 export class AuthorizeComponent extends PureComponent {
   static mapStateToProps = state => {
@@ -66,6 +67,10 @@ export class AuthorizeComponent extends PureComponent {
     if (this.maybeRedirect(this.props)) this.setState({ redirect: true });
   }
 
+  get isAuthenticated() {
+    return get(this.props, "authentication.authenticated");
+  }
+
   maybeRedirect(props) {
     if (!isString(props.failureRedirect)) return false;
     if (props.failureFatalError) return false;
@@ -119,8 +124,18 @@ export class AuthorizeComponent extends PureComponent {
   }
 
   render() {
-    if (this.state.redirect)
-      return <Redirect to={this.props.failureRedirect} />;
+    if (this.state.redirect) {
+      const to = {
+        pathName: this.props.failureRedirect,
+        state: {
+          showLogin: !this.isAuthenticated,
+          postLoginRedirect: `${this.props.location.pathname}${
+            this.props.location.search
+          }`
+        }
+      };
+      return <Redirect to={to} />;
+    }
     if (!this.props.children) return false;
     const successBehavior = this.successBehavior(this.props);
     if (successBehavior === "hide") return this.renderHide(this.props);
@@ -129,4 +144,6 @@ export class AuthorizeComponent extends PureComponent {
   }
 }
 
-export default connect(AuthorizeComponent.mapStateToProps)(AuthorizeComponent);
+export default connect(AuthorizeComponent.mapStateToProps)(
+  withRouter(AuthorizeComponent)
+);

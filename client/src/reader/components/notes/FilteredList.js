@@ -27,37 +27,34 @@ export default class FilteredList extends PureComponent {
     annotations: []
   };
 
+  get hasAnnotations() {
+    return this.props.sortedAnnotations.length > 0;
+  }
+
   renderHeading() {
+    const { handleSeeAllClick, handleFilterChange, filter } = this.props;
     return (
-      <div className="drawer-bar">
-        <h2 className="drawer-bar__title drawer-bar__title--large">
-          <div
-            className="drawer-bar__title-button"
-            role="button"
-            tabIndex="0"
-            onClick={this.props.handleSeeAllClick}
-          >
-            Your Notes
-          </div>
-        </h2>
-        {this.props.sortedAnnotations.length > 0 ? (
-          <button
-            onClick={this.props.handleSeeAllClick}
-            className="button-primary"
-          >
-            <span className="button-primary__text">See all</span>
-          </button>
-        ) : null}
+      <div className="notes-filtered-list__header">
+        <Partial.Filters
+          filterChangeHandler={handleFilterChange}
+          filter={filter}
+        />
+        <button
+          onClick={handleSeeAllClick}
+          className="notes-filtered-list__see-all button-primary"
+        >
+          <span className="button-primary__text">See all</span>
+        </button>
       </div>
     );
   }
 
   renderList() {
-    if (this.props.sortedAnnotations.length === 0) {
+    if (!this.hasAnnotations) {
       return <EmptyMessage annotated={this.props.annotated} />;
     }
     return (
-      <ul>
+      <ul className="notes-filtered-list__section-list">
         {this.props.sortedAnnotations.map(group => {
           return (
             <Partial.Group
@@ -75,12 +72,8 @@ export default class FilteredList extends PureComponent {
 
   render() {
     return (
-      <div>
-        {this.renderHeading()}
-        <Partial.Filters
-          filterChangeHandler={this.props.handleFilterChange}
-          filter={this.props.filter}
-        />
+      <div className="notes-filtered-list">
+        {this.hasAnnotations && this.renderHeading()}
         <div>{this.props.loaded ? this.renderList() : null}</div>
       </div>
     );

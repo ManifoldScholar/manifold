@@ -25,9 +25,11 @@ function withConfirmation(WrappedComponent) {
       this.setState({ confirmation: null });
     }
 
-    confirm = (heading, message, callback) => {
+    confirm = (heading, message, callback = null, options = {}) => {
       new Promise((resolve, reject) => {
-        this.setState({ confirmation: { resolve, reject, heading, message } });
+        const confirmation = { reject, heading, message, options };
+        if (callback) confirmation.resolve = resolve;
+        this.setState({ confirmation });
       }).then(
         () => {
           callback();

@@ -2,7 +2,7 @@
 
 exports[`Reader.TextTitles Component renders correctly 1`] = `
 <div
-  className="title show-section"
+  className="reader-header__title-bar reader-header__title-bar--show-section"
   onClick={[Function]}
 >
   <h1
@@ -12,18 +12,26 @@ exports[`Reader.TextTitles Component renders correctly 1`] = `
   </h1>
   <h1
     aria-hidden="true"
-    className="text-title"
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "Rowan: Greatest Dog",
+    className="reader-header__title-bar-text"
+  >
+    <span
+      className="reader-header__title-inner-text"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Rowan: Greatest Dog",
+        }
       }
-    }
-  />
+    />
+  </h1>
   <h1
     aria-hidden="true"
-    className="section-title"
+    className="reader-header__title-bar-text"
   >
-    Chapter 1
+    <span
+      className="reader-header__title-inner-text"
+    >
+      Chapter 1
+    </span>
   </h1>
 </div>
 `;

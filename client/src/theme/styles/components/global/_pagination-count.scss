@@ -1,8 +1,8 @@
 .pagination-count {
   @include formLabelPrimary;
-  color: $neutral75;
-  font-size: 13px;
   margin: 0;
+  font-size: 13px;
+  color: $neutral75;
 
   &__figure {
     color: $neutral90;

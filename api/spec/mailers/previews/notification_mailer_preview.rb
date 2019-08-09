@@ -24,6 +24,12 @@ class NotificationMailerPreview < ActionMailer::Preview
     NotificationMailer.reply_notification(user, reply)
   end
 
+  # Accessible from http://manifold.lvh/rails/mailers/notification_mailer/reading_group_join_notification.html
+  def reading_group_join_notification
+    NotificationMailer.reading_group_join_notification(user, reading_group_membership)
+  end
+
+
   private
 
   def user
@@ -34,6 +40,10 @@ class NotificationMailerPreview < ActionMailer::Preview
       email: "bilbo@bagend.com",
       password: SecureRandom.hex[0, 10 ]
     })
+  end
+
+  def reading_group_membership
+    FactoryBot.create(:reading_group_membership)
   end
 
   def comment

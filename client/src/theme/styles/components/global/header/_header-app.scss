@@ -1,10 +1,14 @@
 .header-app {
-  width: 100%;
-  top: 0;
   position: relative;
+  top: 0;
+  width: 100%;
 
   &--sticky {
     position: sticky;
+
+    @supports (position: sticky) {
+      @include boxShadow(0, -10px, 20px, 7px, $neutralBlack, 0.25);
+    }
   }
 
   &--static {}

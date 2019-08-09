@@ -30,16 +30,16 @@
     @include pageContentHeading;
     font-size: 32px;
     font-weight: $semibold;
-    line-height: 1.188;
     hyphens: none;
+    line-height: 1.188;
   }
 
   h2 {
     @include pageContentHeading;
     font-size: 30px;
     font-weight: $medium;
-    line-height: 1.233;
     hyphens: none;
+    line-height: 1.233;
   }
 
   h3 {

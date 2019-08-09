@@ -1,10 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import GlobalForm from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
+import { Link } from "react-router-dom";
+import lh from "helpers/linkHandler";
+import { UID } from "react-uid";
+import classNames from "classnames";
+import ReadingGroupOption from "reader/components/annotation/Popup/parts/ReadingGroupOption";
+import withReadingGroups from "hoc/with-reading-groups";
 
-export default class AnnotationEditor extends PureComponent {
+class AnnotationEditor extends PureComponent {
   static displayName = "Annotation.Editor";
 
   static propTypes = {
@@ -24,24 +29,69 @@ export default class AnnotationEditor extends PureComponent {
     this.state = {
       format: "annotation",
       body: props.annotation.attributes.body || "",
-      private: props.annotation.attributes.private || false,
-      errors: []
+      errors: [],
+      pickerOpen: false
     };
   }
 
   componentDidMount() {
     if (this.ci) this.ci.focus();
+    document.addEventListener("mouseup", this.handleClick, false);
   }
 
   componentWillUnmount() {
     clearTimeout(this.focusTimeout);
+    document.removeEventListener("mouseup", this.handleClick, false);
+  }
+
+  get readingGroups() {
+    return this.props.readingGroups;
+  }
+
+  get hasReadingGroups() {
+    return this.readingGroups && this.readingGroups.length > 0;
+  }
+
+  get idPrefix() {
+    return "annotation-picker";
+  }
+
+  get publicLabel() {
+    return "My Public Annotations";
+  }
+
+  get privateLabel() {
+    return "My Private Annotations";
+  }
+
+  get currentGroupName() {
+    if (this.props.currentReadingGroup === "public") return this.publicLabel;
+    if (this.props.currentReadingGroup === "private") return this.privateLabel;
+
+    const currentGroup = this.readingGroups.find(
+      group => group.id === this.props.currentReadingGroup
+    );
+    return currentGroup.attributes.name;
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    const { closeOnSave, saveAnnotation, annotation } = this.props;
+    const {
+      currentReadingGroup,
+      closeOnSave,
+      saveAnnotation,
+      annotation
+    } = this.props;
     const { errorsIgnored, ...attributes } = this.state;
-    const updatedAnnotation = Object.assign({}, annotation, { attributes });
+    const mutableAttributes = Object.assign({}, attributes);
+    mutableAttributes.private = currentReadingGroup === "private";
+    if (currentReadingGroup !== "private" && currentReadingGroup !== "public") {
+      mutableAttributes.readingGroupId = currentReadingGroup;
+    }
+    const updatedAnnotation = Object.assign({}, annotation, {
+      attributes: mutableAttributes
+    });
+
     const promise = saveAnnotation(updatedAnnotation);
     if (closeOnSave && promise) {
       promise.then(
@@ -67,20 +117,125 @@ export default class AnnotationEditor extends PureComponent {
     }
   };
 
-  handlePrivacyChange = eventIgnored => {
-    const value = !this.state.private;
-    this.setState({ private: value });
+  handleClick = event => {
+    if (
+      this.picker.contains(event.target) ||
+      this.pickerToggle.contains(event.target) ||
+      !this.state.pickerOpen
+    )
+      return;
+    this.setState({ pickerOpen: false });
+  };
+
+  setReadingGroup = id => {
+    this.setState({ pickerOpen: false });
+    this.props.setReadingGroup(id);
   };
 
   handleErrors(errors) {
     this.setState({ errors });
   }
 
-  render() {
-    const checkClass = classNames("form-toggle", "checkbox", {
-      checked: this.state.private
-    });
+  isSelected(option) {
+    if (option === this.props.currentReadingGroup) return true;
+    return false;
+  }
 
+  renderSRSelect(id) {
+    return (
+      <select
+        aria-labelledby={`${id}-label`}
+        className="screen-reader-text"
+        onChange={event => this.setReadingGroup(event.target.value)}
+        value={this.props.currentReadingGroup}
+      >
+        <option value="public">{this.publicLabel}</option>
+        <option value="private">{this.privateLabel}</option>
+        {this.hasReadingGroups &&
+          this.readingGroups.map(option => (
+            <option key={option.id} value={option.id}>
+              {option.attributes.name}
+            </option>
+          ))}
+      </select>
+    );
+  }
+
+  renderOptions() {
+    return (
+      <div
+        ref={picker => (this.picker = picker)}
+        tabIndex="-1"
+        className={classNames({
+          "annotation-group-options": true,
+          "annotation-group-options--popup": true,
+          "annotation-group-options--light": true,
+          "annotation-group-options--hidden": !this.state.pickerOpen
+        })}
+      >
+        <ul className="annotation-group-options__list">
+          <ReadingGroupOption
+            label={this.publicLabel}
+            onClick={() => this.setReadingGroup("public")}
+            selected={this.isSelected("public")}
+          />
+          <ReadingGroupOption
+            label={this.privateLabel}
+            onClick={() => this.setReadingGroup("private")}
+            privateGroup
+            selected={this.isSelected("private")}
+          />
+          {this.hasReadingGroups &&
+            this.readingGroups.map(rg => (
+              <ReadingGroupOption
+                key={rg.id}
+                label={rg.attributes.name}
+                onClick={() => this.setReadingGroup(rg.id)}
+                privateGroup={rg.attributes.privacy === "private"}
+                selected={this.isSelected(rg.id)}
+              />
+            ))}
+        </ul>
+        <div className="annotation-group-options__footer">
+          <Link
+            to={lh.link("frontendReadingGroups")}
+            className="annotation-group-options__link"
+          >
+            <span className="annotation-group-options__link-text">
+              Manage Groups
+            </span>
+            <IconComposer
+              icon="link24"
+              size="default"
+              iconClass="annotation-group-options__icon annotation-group-options__icon--link"
+            />
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  renderGroupPicker() {
+    return (
+      <div className="annotation-editor__group-picker" aria-hidden>
+        <button
+          ref={pickerToggle => (this.pickerToggle = pickerToggle)}
+          tabIndex={-1}
+          type="button"
+          onClick={() => this.setState({ pickerOpen: !this.state.pickerOpen })}
+          className="annotation-editor__group-picker-toggle"
+        >
+          <span className="annotation-editor__group-picker-toggle-text">
+            {this.currentGroupName}
+          </span>
+          <IconComposer icon="disclosureDown16" size={22} />
+        </button>
+        {this.renderOptions()}
+      </div>
+    );
+  }
+
+  render() {
     return (
       <div className="annotation-editor">
         <form onSubmit={this.handleSubmit}>
@@ -102,33 +257,31 @@ export default class AnnotationEditor extends PureComponent {
               placeholder={"Annotate this passage..."}
               onChange={this.handleBodyChange}
               value={this.state.body}
+              className="annotation-editor__textarea"
             />
           </GlobalForm.Errorable>
-          <div className="utility">
-            <div className="form-input">
-              <label htmlFor="private-annotation" className={checkClass}>
-                <input
-                  type="checkbox"
-                  id="private-annotation"
-                  name="private"
-                  value="1"
-                  checked={this.state.private}
-                  onChange={this.handlePrivacyChange}
-                />
-                <span className="checkbox__indicator" aria-hidden="true">
-                  <IconComposer
-                    icon="checkmark16"
-                    size="default"
-                    iconClass="checkbox__icon"
-                  />
-                </span>
-                <span className="toggle-label">This Annotation is Private</span>
-              </label>
-            </div>
-            <div className="buttons">
+
+          <div className="annotation-editor__actions">
+            <UID name={id => `${this.idPrefix}-${id}`}>
+              {id => (
+                <div className="annotation-editor__action">
+                  <div className="annotation-editor__action-label">
+                    <IconComposer
+                      icon="readingGroup24"
+                      size="default"
+                      iconClass="annotation-editor__action-icon"
+                    />
+                    <span id={`${id}-label`}>Reading Group:</span>
+                  </div>
+                  {this.renderGroupPicker()}
+                  {this.renderSRSelect(id)}
+                </div>
+              )}
+            </UID>
+            <div className="annotation-editor__buttons">
               <button
                 onClick={this.handleCancel}
-                className="button-primary button-primary--dull"
+                className="button-primary button-primary--gray"
               >
                 <span className="button-primary__text">Cancel</span>
               </button>
@@ -142,3 +295,5 @@ export default class AnnotationEditor extends PureComponent {
     );
   }
 }
+
+export default withReadingGroups(AnnotationEditor);

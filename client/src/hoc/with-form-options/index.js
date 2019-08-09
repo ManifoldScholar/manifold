@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import isNumber from "lodash/isNumber";
 import isString from "lodash/isString";
 import isBoolean from "lodash/isBoolean";
-import setter from "backend/components/form/setter";
+import setter from "global/components/form/setter";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";

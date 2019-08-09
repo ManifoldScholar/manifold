@@ -5,7 +5,7 @@ import build from "test/fixtures/build";
 import { Provider } from "react-redux";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";
-
+import { wrapWithRouter } from "test/helpers/routing";
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("Global.SignInUp.Overlay component", () => {
@@ -18,7 +18,7 @@ describe("Global.SignInUp.Overlay component", () => {
   const hideOverlayMock = jest.fn();
   const user = build.entity.user("1");
 
-  const root = (
+  const root = wrapWithRouter(
     <Provider store={store}>
       <Overlay
         dispatch={store.dispatch}

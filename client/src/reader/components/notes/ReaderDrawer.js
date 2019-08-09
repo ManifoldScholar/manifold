@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FilteredList from "./FilteredList";
 import ReaderNotes from "reader/containers/ReaderNotes";
-import BackendDrawer from "global/containers/drawer";
+import GlobalDrawer from "global/containers/drawer";
 
 export default class ReaderDrawer extends PureComponent {
   static displayName = "Notes.ReaderDrawer";
@@ -23,17 +23,20 @@ export default class ReaderDrawer extends PureComponent {
   render() {
     const drawerProps = {
       open: this.props.visible,
-      style: "reader",
+      context: "reader",
+      size: "wide",
+      padding: "none",
       identifier: "notes-drawer",
       lockScroll: "always",
-      includeDrawerFrontMatter: false,
-      focusTrap: false
+      includeDrawerFrontMatter: true,
+      focusTrap: false,
+      title: "My Notes"
     };
 
     return (
-      <BackendDrawer.Wrapper {...drawerProps}>
+      <GlobalDrawer.Wrapper {...drawerProps}>
         {this.renderNotesDrawerContents(this.props)}
-      </BackendDrawer.Wrapper>
+      </GlobalDrawer.Wrapper>
     );
   }
 }

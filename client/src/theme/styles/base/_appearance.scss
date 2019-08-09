@@ -29,7 +29,7 @@
   outline: solid 2px;
 }
 
-@mixin focusVisible($property: "outline", $value: "solid 2px") {
+@mixin focusVisible($property: 'outline', $value: 'solid 2px') {
   &:focus:not(:focus-visible) {
     outline: 0;
   }
@@ -40,11 +40,11 @@
 }
 
 @mixin focusVisibleOutline($color: var(--default-focus-color, $accentPrimary)) {
-  @include focusVisible("outline", "solid 2px #{$color}");
+  @include focusVisible('outline', 'solid 2px #{$color}');
 }
 
 @mixin focusVisibleFill($color: $accentPrimary) {
-  @include focusVisible("background-color", $color);
+  @include focusVisible('background-color', $color);
 
   &:focus-visible {
     outline: 0;
@@ -455,9 +455,9 @@
     margin: 0;
     font-size: 16px;
     font-weight: $semibold;
+    hyphens: none;
     line-height: 1.188;
     white-space: normal;
-    hyphens: none;
     transition: color $duration $timing;
 
     .title-text {
@@ -490,8 +490,8 @@
 
   .relations-list {
     @include templateCopy;
-    line-height: 1.25;
     hyphens: none;
+    line-height: 1.25;
     transition: color $duration $timing;
   }
 

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Reader Section Container renders correctly 1`] = `
-<div>
+Array [
   <div>
     <section
       className="reader-window"
@@ -47,7 +47,7 @@ exports[`Reader Section Container renders correctly 1`] = `
       <span />
     </section>
     <span />
-  </div>
+  </div>,
   <div>
     <section
       className="section-next-section"
@@ -64,6 +64,6 @@ exports[`Reader Section Container renders correctly 1`] = `
         className="section-pagination__inner container"
       />
     </nav>
-  </div>
-</div>
+  </div>,
+]
 `;

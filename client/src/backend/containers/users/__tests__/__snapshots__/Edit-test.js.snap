@@ -93,7 +93,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
     </div>
   </header>
   <section
-    className="form-section"
+    className="form-section form-section--primary"
   >
     <div>
       <form

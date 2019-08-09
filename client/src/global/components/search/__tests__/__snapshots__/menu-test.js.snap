@@ -18,7 +18,7 @@ exports[`Reader.Search.Menu component renders correctly when search is visible 1
       onSubmit={[Function]}
     >
       <div
-        className="input-magnify"
+        className="search-query__input-magnify"
       >
         <label
           className="screen-reader-text"
@@ -28,6 +28,7 @@ exports[`Reader.Search.Menu component renders correctly when search is visible 1
         </label>
         <input
           autoFocus={true}
+          className="search-query__input"
           id={1}
           onChange={[Function]}
           placeholder="Search…"
@@ -35,12 +36,12 @@ exports[`Reader.Search.Menu component renders correctly when search is visible 1
           value=""
         />
         <button
-          className="search-submit"
+          className="search-query__submit"
           type="submit"
         >
           <svg
             aria-hidden={true}
-            className="manicon-svg search-icon svg-icon--search16"
+            className="manicon-svg search-query__search-icon svg-icon--search16"
             fill="currentColor"
             height={22}
             viewBox="0 0 16 16"

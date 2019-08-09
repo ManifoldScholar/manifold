@@ -52,10 +52,10 @@
   &__preview-text {
     @include utilityPrimary;
     position: relative; // Required to rise above overlay
-    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 44px;
     // Padded relative to font-size
     padding: 1em 6px;
     font-size: 12px;
@@ -171,8 +171,8 @@
     margin-bottom: 6px;
     font-size: 16px;
     font-weight: $regular;
-    color: $neutral75;
     hyphens: none;
+    color: $neutral75;
 
     @include respond($break85) {
       font-size: 17px;

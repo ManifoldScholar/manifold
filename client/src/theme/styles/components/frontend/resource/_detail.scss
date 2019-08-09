@@ -84,8 +84,8 @@
       margin-bottom: 5px;
       font-size: 26px;
       font-weight: $medium;
-      color: $neutral75;
       hyphens: none;
+      color: $neutral75;
 
       @include respond($break60) {
         width: auto;
@@ -217,7 +217,7 @@
     color: $neutral20;
     border-top: 1px solid $neutral30;
 
-    .author-name, .body, textarea {
+    .author-name, .body {
       color: $neutral80;
     }
 
@@ -225,28 +225,9 @@
       padding-left: 0;
     }
 
-    .annotation-comment-thread + .comment-editor {
-      padding-top: 27px;
-    }
-
-    > .comment-editor {
+    > .annotation-editor {
       padding-top: 16px;
       padding-left: 0;
-
-      .button-secondary--dull {
-        display: none;
-      }
-    }
-
-    .comment-editor {
-      textarea {
-        border: 1px solid $neutral10;
-        border-bottom: 0;
-
-        &:focus-visible::placeholder {
-          color: $accentPrimary;
-        }
-      }
     }
   }
 }

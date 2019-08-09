@@ -113,7 +113,8 @@ export class ProjectCollectionDetail extends PureComponent {
   drawerProps(props) {
     return {
       lockScroll: "always",
-      style: "backend flexible",
+      size: "flexible",
+      padding: "large",
       closeUrl: lh.link("backendProjectCollection", props.projectCollection.id)
     };
   }

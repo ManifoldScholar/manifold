@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Form from "backend/components/form";
+import Form from "global/components/form";
 
 export default class ResourceFormKindInteractive extends PureComponent {
   static displayName = "Resource.Form.Kind.Interactive";
@@ -11,7 +11,7 @@ export default class ResourceFormKindInteractive extends PureComponent {
 
   render() {
     return (
-      <div className="form-section">
+      <div className="form-section form-section--primary">
         <Form.TextInput
           label="Minimum Width"
           placeholder="The minimum display width"

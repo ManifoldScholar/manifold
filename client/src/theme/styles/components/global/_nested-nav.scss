@@ -248,8 +248,8 @@
     font-weight: $semibold;
 
     @include respond($break40) {
-      font-size: 21px;
       margin-right: 12px;
+      font-size: 21px;
     }
   }
 

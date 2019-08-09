@@ -33,6 +33,39 @@ export default {
           "Pressing yes will remove the notation from this spot in the text. " +
           "It will not remove it from the project."
       }
+    },
+    readingGroupMembership: {
+      destroy: {
+        heading: "Are you sure you want to remove this user from the group?",
+        message:
+          "Pressing yes will remove the user from this group. The user's annotations will remain in the group."
+      },
+      leave: {
+        heading: "Are you sure you want to leave this reading group?",
+        message:
+          "Pressing yes will remove you from this group. Your annotations will remain in the group until you edit and save them."
+      }
+    },
+    readingGroup: {
+      join: {
+        heading: "Please Confirm",
+        message: `You are about to join the "<%= readingGroup.attributes.name %>" reading group. Please press yes to confirm.`
+      },
+      joinNotFound: {
+        heading: "Reading group not found",
+        message:
+          "No reading groups match the code you entered. Please double check it and try again"
+      },
+      joinFailure: {
+        heading: "Join Failed",
+        message:
+          "Manifold couldn't add you to the reading group. Check and make sure you do not already belong to the group."
+      },
+      destroy: {
+        heading: "Are you sure you want to delete this reading group?",
+        message:
+          "If the reading group is anonymous or private, all annotations within the group will be made private and only visible to the annotation creator. If the group is public, annotations will be public. This action can not be undone."
+      }
     }
   },
   notificationPreferences: {

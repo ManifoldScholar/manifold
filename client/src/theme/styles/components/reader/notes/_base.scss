@@ -1,0 +1,71 @@
+.button-notes {
+  @include buttonUnstyled;
+  height: 100%;
+  color: $neutral50;
+  transition: background-color $duration $timing;
+
+  &.button-active {
+    background-color: $neutral10;
+  }
+}
+
+.notes-drawer {
+  @keyframes drawerOverlayFade {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .drawer-overlay {
+    opacity: 0;
+    animation: drawerOverlayFade $duration $timing forwards;
+
+    .panel-visible & {
+      opacity: 1;
+    }
+
+    .panel-leave & {
+      opaicty: 1;
+      animation: drawerOverlayFade $duration $timing backwards;
+    }
+
+    .panel-leave.panel-leave-active & {
+      opacity: 0;
+    }
+  }
+
+  @keyframes notesSlide {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .drawer {
+    .panel-visible & {
+      animation: notesSlide $duration $timing forwards;
+    }
+
+    .panel-leave & {
+      transform: translateX(0);
+
+      animation: notesSlide $duration $timing backwards;
+    }
+
+    .panel-leave.panel-leave-active & {
+      transform: translateX(100%);
+    }
+  }
+
+  .drawer-bar {
+    @include drawerPadding(padding-right, narrow);
+    @include drawerPadding(padding-left, narrow);
+  }
+}
