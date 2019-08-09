@@ -158,25 +158,18 @@
 
         @supports (grid-auto-columns: min-content) {
           display: grid;
-          grid-template-columns:repeat(3, 1fr);
-
-          li {
-            min-width: $grid-item-min-width;
-          }
+          grid-template-columns:repeat(auto-fill, minmax($grid-item-min-width, 1fr));
         }
 
         li {
           flex-basis: 33.333%;
           flex-grow: 1;
+          min-width: $grid-item-min-width;
           border-bottom: none;
         }
       }
 
       @include respond($break85) {
-        @supports (grid-auto-columns: min-content) {
-          grid-template-columns:repeat(4, 1fr);
-        }
-
         li {
           flex-basis: 25%;
         }
