@@ -10,6 +10,7 @@ import has from "lodash/has";
 import classNames from "classnames";
 import { notificationActions } from "actions";
 import IconComposer from "global/components/utility/IconComposer";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 export default class DrawerWrapper extends PureComponent {
   static mapStateToProps() {
@@ -75,6 +76,7 @@ export default class DrawerWrapper extends PureComponent {
       focusable: false
     };
     this.focusTrapNode = React.createRef();
+    this.scrollableNode = React.createRef();
     if (props.open) {
       this.onOpen();
     }
@@ -97,11 +99,17 @@ export default class DrawerWrapper extends PureComponent {
 
   componentDidMount() {
     document.addEventListener("keyup", this.handleLeaveKey);
+    this.enableScrollLock();
   }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.open && this.props.open) {
       this.onOpen();
+      this.enableScrollLock();
+    }
+
+    if (prevProps.open && !this.props.open) {
+      this.disableScrollLock();
     }
 
     if (this.props.open && has(this.focusTrapNode, "current.node")) {
@@ -113,10 +121,21 @@ export default class DrawerWrapper extends PureComponent {
 
   componentWillUnmount() {
     document.removeEventListener("keyup", this.handleLeaveKey);
+    this.disableScrollLock();
   }
 
   onOpen() {
     this.clearGlobalNotifications();
+  }
+
+  enableScrollLock() {
+    if (!this.canLockScroll) return;
+    disableBodyScroll(this.scrollableNode.current);
+  }
+
+  disableScrollLock() {
+    if (!this.canLockScroll) return;
+    enableBodyScroll(this.scrollableNode.current);
   }
 
   clearDrawerNotifications() {
@@ -164,6 +183,10 @@ export default class DrawerWrapper extends PureComponent {
       }, 200);
     }
   };
+
+  get canLockScroll() {
+    return this.props.lockScroll === "always" && this.scrollableNode.current;
+  }
 
   renderDrawerFrontMatter(props) {
     const hasTitle = props.title || props.icon;
@@ -228,7 +251,7 @@ export default class DrawerWrapper extends PureComponent {
     );
 
     return (
-      <div key="drawer" className={drawerClasses}>
+      <div key="drawer" className={drawerClasses} ref={this.scrollableNode}>
         <FocusTrap
           ref={this.focusTrapNode}
           active={this.state.focusable && this.props.focusTrap}
@@ -267,13 +290,9 @@ export default class DrawerWrapper extends PureComponent {
     }
     if (this.props.lockScroll === "always") {
       return (
-        <div>
-          <Utility.LockBodyScroll>
-            <div className={this.props.identifier}>
-              <div className="drawer-overlay" />
-              {this.renderDrawer()}
-            </div>
-          </Utility.LockBodyScroll>
+        <div className={this.props.identifier}>
+          <div className="drawer-overlay" />
+          {this.renderDrawer()}
         </div>
       );
     }

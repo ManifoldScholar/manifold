@@ -79,6 +79,7 @@
     "autolinker": "^1.2.1",
     "autoprefixer": "^9.0",
     "babel-polyfill": "^6.23.0",
+    "body-scroll-lock": "^2.6.4",
     "brackets2dots": "^1.1.0",
     "classnames": "^2.2.1",
     "cli-spinner": "^0.2.8",
