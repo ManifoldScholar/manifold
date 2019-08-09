@@ -19,7 +19,8 @@ export default class FormTextInput extends Component {
     errors: PropTypes.array,
     password: PropTypes.bool,
     join: PropTypes.func,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    buttons: PropTypes.array
   };
 
   static defaultProps = {
@@ -59,6 +60,7 @@ export default class FormTextInput extends Component {
             idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
             inputType={inputType}
             renderValue={this.renderValue}
+            buttons={this.props.buttons}
           />
         )}
       </UID>

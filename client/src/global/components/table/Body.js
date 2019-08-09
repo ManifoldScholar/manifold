@@ -5,8 +5,11 @@ import Row from "./Row";
 import { TableHeaderContext } from "helpers/contexts";
 
 export default class TableBody extends React.PureComponent {
+  static displayName = "GenericTable.Body";
+
   static propTypes = {
-    rows: PropTypes.array
+    rows: PropTypes.array,
+    linkCreator: PropTypes.func
   };
 
   get tableClassNames() {
@@ -24,17 +27,18 @@ export default class TableBody extends React.PureComponent {
         <Row
           key={model.id}
           model={model}
-          headers={this.headers}
           rowComponent={this.props.rowComponent}
-          renderLabel={this.renderLabel}
+          linkCreator={this.props.linkCreator}
         >
           {this.props.children}
         </Row>
       );
     });
 
+    let i = 0;
     const headers = React.Children.map(this.props.children, child => {
       return {
+        key: i++,
         label: child.props.header,
         icon: child.props.headerIcon
       };

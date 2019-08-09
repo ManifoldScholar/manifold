@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UID } from "react-uid";
 import setter from "./setter";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import isString from "lodash/isString";
 import classnames from "classnames";
 import Instructions from "./Instructions";
@@ -51,7 +51,7 @@ class FormTextArea extends Component {
       <UID>
         {id => (
           <div className={inputClasses}>
-            <GlobalForm.Errorable
+            <Errorable
               className="form-input"
               name={this.props.name}
               errors={this.props.errors}
@@ -75,7 +75,7 @@ class FormTextArea extends Component {
                 onChange={this.props.onChange}
                 value={this.props.value || ""}
               />
-            </GlobalForm.Errorable>
+            </Errorable>
           </div>
         )}
       </UID>

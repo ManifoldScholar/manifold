@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "../setter";
 import withDispatch from "hoc/with-dispatch";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import isString from "lodash/isString";
 import Loadable from "react-loadable";
 
@@ -15,7 +15,7 @@ const CodeAreaInput = Loadable({
   render(Editor, props) {
     return (
       <div className="form-input">
-        <GlobalForm.Errorable
+        <Errorable
           className="form-input"
           name={props.name}
           errors={props.errors}
@@ -26,7 +26,7 @@ const CodeAreaInput = Loadable({
             <span className="instructions">{props.instructions}</span>
           ) : null}
           <Editor {...props} />
-        </GlobalForm.Errorable>
+        </Errorable>
       </div>
     );
   },

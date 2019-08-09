@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
 import OptionsList from "./OptionsList";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import get from "lodash/get";
 
 class FormBelongsTo extends PureComponent {
@@ -38,7 +38,7 @@ class FormBelongsTo extends PureComponent {
 
   render() {
     return (
-      <GlobalForm.Errorable
+      <Errorable
         className="form-input"
         name={`attributes[${this.props.relationName}]`}
         errors={this.props.errors}
@@ -50,7 +50,7 @@ class FormBelongsTo extends PureComponent {
           mode="single"
           {...this.props}
         />
-      </GlobalForm.Errorable>
+      </Errorable>
     );
   }
 }

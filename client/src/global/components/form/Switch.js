@@ -4,6 +4,7 @@ import classnames from "classnames";
 import { UID } from "react-uid";
 import setter from "./setter";
 import Instructions from "./Instructions";
+import IconComposer from "global/components/utility/IconComposer";
 
 class FormSwitch extends Component {
   static displayName = "Form.Switch";
@@ -21,31 +22,19 @@ class FormSwitch extends Component {
       false: PropTypes.string
     }),
     focusOnMount: PropTypes.bool,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    theme: PropTypes.oneOf(["default", "checkbox"])
   };
 
   static defaultProps = {
     labelPos: "above",
-    focusOnMount: false
+    theme: "default"
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { focused: false };
-  }
-
   componentDidMount() {
-    if (this.props.focusOnMount) {
-      this.focus();
+    if (this.props.focusOnMount && this.checkbox) {
+      this.checkbox.focus();
     }
-
-    window.addEventListener("keydown", event => {
-      this.handleKeyPress(event);
-    });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("keydown", this.handleKeyPress);
   }
 
   get labelClasses() {
@@ -57,9 +46,10 @@ class FormSwitch extends Component {
     );
   }
 
-  get switchClasses() {
+  get themeClasses() {
     return classnames({
-      "boolean-primary": true,
+      "form-switch": this.showSwitch,
+      "checkbox checkbox--gray": this.showCheckbox,
       checked: this.checked
     });
   }
@@ -74,6 +64,19 @@ class FormSwitch extends Component {
     );
   }
 
+  get switchClasses() {
+    return classnames({
+      "boolean-primary": this.showSwitch,
+      checked: this.checked
+    });
+  }
+
+  get instructionClasses() {
+    return classnames({
+      "instructions--inline": this.showCheckbox
+    });
+  }
+
   get checked() {
     return this.determineChecked(this.props.value);
   }
@@ -86,24 +89,21 @@ class FormSwitch extends Component {
     return "switch-input-instructions";
   }
 
+  get showSwitch() {
+    return this.props.theme === "default";
+  }
+
+  get showCheckbox() {
+    return this.props.theme === "checkbox";
+  }
+
   truthy(value) {
     return value === true || value === "true";
   }
 
-  handleClick = event => {
-    event.preventDefault();
+  handleChange = () => {
     if (this.props.customValues) return this.handleCustomValues();
     return this.handleBooleans();
-  };
-
-  handleKeyPress = event => {
-    const spaceOrEnter = event.keyCode === 32 || event.keyCode === 13;
-    if (spaceOrEnter && this.state.focused) {
-      event.preventDefault();
-      event.stopPropagation();
-      if (this.props.customValues) return this.handleCustomValues();
-      return this.handleBooleans();
-    }
   };
 
   handleCustomValues() {
@@ -122,23 +122,28 @@ class FormSwitch extends Component {
     return this.truthy(value);
   }
 
-  focus = () => {
-    this.setState({ focused: true });
-    if (this.button) {
-      this.button.focus();
-    }
-  };
-
-  blur = () => {
-    this.setState({ focused: false });
-  };
-
-  renderLabel(id) {
+  renderSwitchIndicator() {
     return (
-      <label className={this.labelClasses} htmlFor={id}>
-        {this.props.label}
-      </label>
+      <span className="toggle-indicator">
+        <span className={this.switchClasses} aria-hidden="true" />
+      </span>
     );
+  }
+
+  renderCheckboxIndicator() {
+    return (
+      <span className="checkbox__indicator" aria-hidden="true">
+        <IconComposer
+          icon="checkmark16"
+          size="default"
+          iconClass="checkbox__icon"
+        />
+      </span>
+    );
+  }
+
+  renderLabelText() {
+    return <span className={this.labelClasses}>{this.props.label}</span>;
   }
 
   render() {
@@ -146,33 +151,28 @@ class FormSwitch extends Component {
       <UID>
         {id => (
           <div className={this.wrapperClasses}>
-            {this.props.labelPos === "above" &&
-              this.renderLabel(`${this.idPrefix}-${id}`)}
-            <div className="toggle-indicator">
-              {/* Add .checked to .boolean-primary to change visual state */}
-              <div
-                ref={b => {
-                  this.button = b;
+            <label
+              htmlFor={`${this.idPrefix}-${id}`}
+              className={this.themeClasses}
+            >
+              {this.props.labelPos === "above" && this.renderLabelText()}
+              <input
+                ref={c => {
+                  this.checkbox = c;
                 }}
-                onFocus={this.focus}
-                onBlur={this.blur}
-                onClick={this.handleClick}
-                className={this.switchClasses}
-                role="button"
-                tabIndex="0"
-                aria-pressed={this.checked}
+                type="checkbox"
                 id={`${this.idPrefix}-${id}`}
-                aria-describedby={`${this.idForInstructionsPrefix}-${id}`}
-              >
-                <span className="screen-reader-text">{this.props.label}</span>
-              </div>
-            </div>
-            {this.props.labelPos === "below" &&
-              this.renderLabel(`${this.idPrefix}-${id}`)}
-            <Instructions
-              instructions={this.props.instructions}
-              id={`${this.idForInstructionsPrefix}-${id}`}
-            />
+                checked={this.checked}
+                onChange={event => this.handleChange()}
+              />
+              {this.props.labelPos === "below" && this.renderLabelText()}
+              {this.showCheckbox && this.renderCheckboxIndicator()}
+              {this.showSwitch && this.renderSwitchIndicator()}
+              <Instructions
+                instructions={this.props.instructions}
+                className={this.instructionClasses}
+              />
+            </label>
           </div>
         )}
       </UID>

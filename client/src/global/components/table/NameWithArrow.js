@@ -5,6 +5,8 @@ import Utility from "global/components/utility";
 export default class NameWithArrow extends React.PureComponent {
   static propTypes = {};
 
+  static displayName = "GenericTable.NameWithArrow";
+
   get name() {
     return this.props.name;
   }

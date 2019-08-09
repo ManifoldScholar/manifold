@@ -79,8 +79,16 @@
       margin-bottom: 2em;
     }
 
-    + .form-input-group {
+    &--inline {
+      display: inline;
+    }
+
+    + .form-input-group--primary {
       margin-top: 32px;
+    }
+
+    + .form-input-group--secondary {
+      margin-top: 24px;
     }
 
     a, a:visited {
@@ -89,7 +97,7 @@
   }
 
   .form-input {
-    .form-input-heading, .column-heading, label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker) {
+    .form-input-heading, .column-heading, label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker):not(.form-switch) {
       @include formLabelPrimary;
       display: block;
       margin-top: 0;
@@ -154,7 +162,7 @@
         transition: color $duration $timing;
       }
 
-      input:checked ~ .toggle-label {
+      &.checked .toggle-label {
         color: $accentPrimary;
       }
     }
@@ -447,6 +455,28 @@
       display: table-cell;
       padding-left: 10px;
       vertical-align: middle;
+    }
+  }
+
+  .checkbox {
+    margin-top: 5px;
+  }
+
+  // Contextual color variations
+  .browse & {
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='number'],
+    .instructions {
+      color: $neutral90;
+    }
+
+    .form-toggle,
+    .form-toggle.checked {
+      .toggle-label {
+        color: $neutral90;
+      }
     }
   }
 }

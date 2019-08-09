@@ -409,7 +409,7 @@ const defaults = {
   },
 
   group: {
-    type: "group",
+    type: "reading-group",
     attributes: {
       abilities
     }
@@ -673,7 +673,7 @@ const page = (id = null, attributes = {}, relationships = {}) => {
 };
 
 const group = (id = null, attributes = {}, relationships = {}) => {
-  return buildEntity("group", id, attributes, relationships);
+  return buildEntity("reading-group", id, attributes, relationships);
 };
 
 const member = (id = null, attributes = {}, relationships = {}) => {

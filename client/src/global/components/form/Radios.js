@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UID } from "react-uid";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import Option from "./Radio/Option";
 import RadioLabel from "./Radio/Label";
 import classnames from "classnames";
@@ -77,7 +77,7 @@ class FormRadios extends Component {
     return (
       <UID>
         {id => (
-          <GlobalForm.Errorable
+          <Errorable
             className={this.inputClasses}
             name={this.props.name}
             errors={this.props.errors}
@@ -108,7 +108,7 @@ class FormRadios extends Component {
                 />
               ))}
             </fieldset>
-          </GlobalForm.Errorable>
+          </Errorable>
         )}
       </UID>
     );

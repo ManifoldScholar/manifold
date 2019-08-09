@@ -30,7 +30,7 @@ export default class SourceSummary extends React.PureComponent {
       <React.Fragment>
         {!user && "from "}
         {sectionTitle && `“${sectionTitle}”`}
-        {(sectionTitle && projectTitle) && " in "}
+        {sectionTitle && projectTitle && " in "}
         {projectTitle && <i>{projectTitle}</i>}
       </React.Fragment>
     );

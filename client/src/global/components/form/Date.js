@@ -10,7 +10,7 @@ import getDate from "date-fns/get_date";
 import getYear from "date-fns/get_year";
 import isEqual from "date-fns/is_equal";
 import getDaysInMonth from "date-fns/get_days_in_month";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import MaskedInput from "react-text-mask";
 import isNull from "lodash/isNull";
 import IconComposer from "global/components/utility/IconComposer";
@@ -199,7 +199,7 @@ class FormDate extends Component {
     return (
       <UID>
         {id => (
-          <GlobalForm.Errorable
+          <Errorable
             className={inputClasses}
             name={this.props.name}
             errors={this.props.errors}
@@ -269,7 +269,7 @@ class FormDate extends Component {
                 </div>
               </div>
             </fieldset>
-          </GlobalForm.Errorable>
+          </Errorable>
         )}
       </UID>
     );

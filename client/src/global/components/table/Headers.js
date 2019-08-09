@@ -6,6 +6,8 @@ import Utility from "global/components/utility";
 export default class TableHeaders extends React.PureComponent {
   static propTypes = {};
 
+  static displayName = "GenericTable.Headers";
+
   get headers() {
     return this.props.headers;
   }
@@ -21,10 +23,6 @@ export default class TableHeaders extends React.PureComponent {
     });
   }
 
-  get renderLabel() {
-    return this.props.renderLabel;
-  }
-
   render() {
     const headers = this.headers;
     return (
@@ -33,7 +31,7 @@ export default class TableHeaders extends React.PureComponent {
           {headers.map(header => {
             return (
               <td
-                key={header.label}
+                key={header.key || header.label}
                 className={this.cellClassNames(header.cellPadding)}
               >
                 <Utility.LabelWithIcon

@@ -1,26 +1,68 @@
 import React, { Component } from "react";
 import { childRoutes } from "helpers/router";
+import connectAndFetch from "utils/connectAndFetch";
+import { entityStoreActions } from "actions";
+import { grab } from "utils/entityUtils";
+import { meAPI, requests } from "api";
+import get from "lodash/get";
+const { request } = entityStoreActions;
 
-export default class ReadingGroup extends Component {
+class ReadingGroup extends Component {
+  static fetchData = (getState, dispatch, location, match) => {
+    const readingGroupsFetch = meAPI.readingGroups();
+    const readingGroupsAction = request(
+      readingGroupsFetch,
+      requests.feMyReadingGroups
+    );
+    const { promise: one } = dispatch(readingGroupsAction);
+    const promises = [one];
+    return Promise.all(promises);
+  };
+
+  static mapStateToProps = (state, ownProps) => {
+    return {
+      readingGroup: grab(
+        "readingGroups",
+        ownProps.match.params.id,
+        state.entityStore
+      ),
+      readingGroupResponse: get(
+        state.entityStore.responses,
+        requests.feReadingGroup
+      )
+    };
+  };
+
   renderRoutes() {
-    const { route, settings, dispatch, fetchData } = this.props;
+    const {
+      readingGroup,
+      readingGroupMembers,
+      route,
+      settings,
+      dispatch,
+      fetchData
+    } = this.props;
 
     return childRoutes(route, {
       childProps: {
         settings,
         dispatch,
-        fetchData
+        fetchData,
+        readingGroup,
+        readingGroupMembers
       }
     });
   }
 
   render() {
+    if (!this.props.readingGroup) return null;
+
     return (
-      <React.Fragment>
-        Reading Group Wrapper...
-        <br />
-        {this.renderRoutes()}
-      </React.Fragment>
+      <section>
+        <div className="container">{this.renderRoutes()}</div>
+      </section>
     );
   }
 }
+
+export default connectAndFetch(ReadingGroup);

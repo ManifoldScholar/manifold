@@ -20,6 +20,7 @@ gem "cleanroom"
 gem "clockwork", "~> 2.0.0"
 gem "closure_tree", "~> 7.0"
 gem "colorize", "~> 0.8.0"
+gem 'counter_culture', '~> 2.0'
 gem "csl-styles", "~> 1.0"
 gem "css_parser", "~> 1.0"
 gem "cssbeautify"

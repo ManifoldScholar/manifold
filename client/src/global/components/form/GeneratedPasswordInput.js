@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UID } from "react-uid";
 import setter from "./setter";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import generatePassword from "helpers/passwordGenerator";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -93,7 +93,7 @@ class FormGeneratedPasswordInput extends Component {
     return (
       <UID>
         {id => (
-          <GlobalForm.Errorable
+          <Errorable
             className="form-input password-input"
             name={this.props.name}
             errors={this.props.errors}
@@ -117,7 +117,7 @@ class FormGeneratedPasswordInput extends Component {
               </span>
             </span>
             {this.renderInput(id)}
-          </GlobalForm.Errorable>
+          </Errorable>
         )}
       </UID>
     );

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_201859) do
+ActiveRecord::Schema.define(version: 2019_08_14_235054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -54,9 +54,11 @@ ActiveRecord::Schema.define(version: 2019_08_08_201859) do
     t.integer "events_count", default: 0
     t.boolean "orphaned", default: false, null: false
     t.integer "flags_count", default: 0
+    t.uuid "reading_group_id"
     t.index ["created_at"], name: "index_annotations_on_created_at", using: :brin
     t.index ["creator_id"], name: "index_annotations_on_creator_id"
     t.index ["format"], name: "index_annotations_on_format"
+    t.index ["reading_group_id"], name: "index_annotations_on_reading_group_id"
     t.index ["resource_id"], name: "index_annotations_on_resource_id"
     t.index ["text_section_id"], name: "index_annotations_on_text_section_id"
   end
@@ -476,9 +478,10 @@ ActiveRecord::Schema.define(version: 2019_08_08_201859) do
     t.string "privacy", default: "private"
     t.string "invitation_code"
     t.boolean "notify_on_join", default: true
-    t.integer "memberships_count"
-    t.integer "annotations_count"
-    t.integer "highlights_count"
+    t.integer "memberships_count", default: 0, null: false
+    t.integer "all_annotations_count", default: 0, null: false
+    t.integer "annotations_count", default: 0, null: false
+    t.integer "highlights_count", default: 0, null: false
     t.uuid "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -878,6 +881,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_201859) do
     t.index ["parent_item_type", "parent_item_id"], name: "index_versions_on_parent_item_type_and_parent_item_id"
   end
 
+  add_foreign_key "annotations", "reading_groups", on_delete: :nullify
   add_foreign_key "identities", "users", on_delete: :cascade
   add_foreign_key "import_selection_matches", "annotations", on_delete: :nullify
   add_foreign_key "import_selection_matches", "import_selections", on_delete: :cascade
@@ -985,6 +989,24 @@ ActiveRecord::Schema.define(version: 2019_08_08_201859) do
               WHEN sv.ascending THEN dsv.dynamic_sort_value
               ELSE NULL::character varying
           END);
+  SQL
+
+  create_view "reading_group_membership_counts",  sql_definition: <<-SQL
+      SELECT rgm.id AS reading_group_membership_id,
+      count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
+      count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
+     FROM (reading_group_memberships rgm
+       LEFT JOIN annotations a ON (((a.creator_id = rgm.user_id) AND (a.reading_group_id = rgm.reading_group_id))))
+    GROUP BY rgm.id;
+  SQL
+
+  create_view "reading_group_counts",  sql_definition: <<-SQL
+      SELECT rg.id AS reading_group_id,
+      count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
+      count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
+     FROM (reading_groups rg
+       LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
+    GROUP BY rg.id;
   SQL
 
 end

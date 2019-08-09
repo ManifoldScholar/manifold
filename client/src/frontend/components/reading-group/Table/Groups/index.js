@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Table from "global/components/Table";
-import Column from "global/components/Table/Column";
-import NestedLink from "global/components/Table/NestedLink";
-import NameWithArrow from "global/components/Table/NameWithArrow";
+import Table from "global/components/table";
+import Column from "global/components/table/Column";
+import NestedLink from "global/components/table/NestedLink";
+import NameWithArrow from "global/components/table/NameWithArrow";
 import Utility from "global/components/utility";
+import lh from "helpers/linkHandler";
 
 export default class GroupsTable extends PureComponent {
   static propTypes = {
@@ -37,10 +38,6 @@ export default class GroupsTable extends PureComponent {
     return "cellMedium";
   }
 
-  get groupMembersLink() {
-    return "/test";
-  }
-
   render() {
     return (
       <Table
@@ -48,6 +45,7 @@ export default class GroupsTable extends PureComponent {
         pagination={this.pagination}
         onPageClick={this.onPageClick}
         countLabel={"Groups"}
+        linkCreator={group => lh.link("readingGroupDetail", group.id)}
       >
         <Column header="Name" textStyle={"valueLarge"} columnPosition={"all"}>
           {({ model }) => {
@@ -62,8 +60,8 @@ export default class GroupsTable extends PureComponent {
         >
           {({ model }) => (
             <React.Fragment>
-              {model.attributes.type}
-              {model.attributes.type === "private" && (
+              {model.attributes.privacy}
+              {model.attributes.privacy === "private" && (
                 <Utility.IconComposer
                   icon="lock16"
                   size={16}
@@ -90,8 +88,8 @@ export default class GroupsTable extends PureComponent {
           rowPosition={2}
         >
           {({ model }) => (
-            <NestedLink link={this.groupMembersLink}>
-              {model.attributes.memberCount}
+            <NestedLink link={lh.link("readingGroupMembers", model.id)}>
+              {model.attributes.membershipsCount}
             </NestedLink>
           )}
         </Column>
@@ -102,7 +100,7 @@ export default class GroupsTable extends PureComponent {
           align={this.alignCenter}
           columnPosition={"right"}
         >
-          {({ model }) => model.attributes.annotationCount}
+          {({ model }) => model.attributes.annotationsCount}
         </Column>
 
         <Column
@@ -111,7 +109,7 @@ export default class GroupsTable extends PureComponent {
           align={this.alignCenter}
           columnPosition={"right"}
         >
-          {({ model }) => model.attributes.highlightCount}
+          {({ model }) => model.attributes.highlightsCount}
         </Column>
       </Table>
     );

@@ -40,7 +40,7 @@ module Validation
 
   def reading_group_params
     params.require(:data)
-    attributes = [:privcay, :name, :code]
+    attributes = [:privacy, :name, :invitation_code, :notify_on_join]
     relationships = [:users]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -379,6 +379,10 @@ module Validation
 
   def favoritable_params
     structure_params
+  end
+
+  def reading_group_membership_filter_params
+    params.permit(filter: [:order])[:filter]
   end
 
   def resource_collection_filter_params

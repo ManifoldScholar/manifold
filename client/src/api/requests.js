@@ -88,6 +88,8 @@ export default {
   tmpProject: "project-detail",
   feMyReadingGroups: "frontend-my-reading-groups",
   feNewReadingGroup: "frontend-new-reading-group",
+  feReadingGroup: "frontend-reading-group",
+  feReadingGroupMembers: "frontend-reading-group-members",
   feProjectsFiltered: "frontend-projects-filtered",
   feProjectsFeatured: "frontend-projects-featured",
   feProjectsFollowed: "frontend-projects-followed",

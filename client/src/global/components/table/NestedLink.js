@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import Utility from "global/components/utility";
 
 export default class NestedLink extends React.PureComponent {
   static propTypes = {};
+
+  static displayName = "GenericTable.NestedLink";
 
   get nestedLinkArrowClassNames() {
     return "table__nested-link-arrow";
@@ -19,14 +22,14 @@ export default class NestedLink extends React.PureComponent {
 
   render() {
     return (
-      <a className={this.nestedLinkClassNames} href={this.nestedLink}>
+      <Link className={this.nestedLinkClassNames} to={this.nestedLink}>
         <span>{this.props.children}</span>
         <Utility.IconComposer
           icon="arrowRight16"
           size={14}
           iconClass={this.nestedLinkArrowClassNames}
         />
-      </a>
+      </Link>
     );
   }
 }

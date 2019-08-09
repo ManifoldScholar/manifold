@@ -159,7 +159,7 @@ export class UsersEditContainer extends PureComponent {
           ]}
         />
 
-        <section className="form-section">
+        <section className="form-section form-section--primary">
           <FormContainer.Form
             model={this.user}
             name={requests.beUserUpdate}

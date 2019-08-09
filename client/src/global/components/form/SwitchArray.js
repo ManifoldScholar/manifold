@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Switch from "./Switch";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import FieldGroup from "./FieldGroup";
 import setter from "./setter";
 
@@ -49,7 +49,7 @@ class FormSwitchArray extends Component {
 
   render() {
     return (
-      <GlobalForm.Errorable
+      <Errorable
         className="form-input"
         name={this.props.name}
         nameForError={this.props.label}
@@ -60,7 +60,7 @@ class FormSwitchArray extends Component {
             return this.renderSwitch(option, index);
           })}
         </FieldGroup>
-      </GlobalForm.Errorable>
+      </Errorable>
     );
   }
 }

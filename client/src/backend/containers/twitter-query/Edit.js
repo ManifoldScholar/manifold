@@ -133,7 +133,7 @@ export class TwitterQueryEditContainer extends PureComponent {
           icon="activityTweet64"
           buttons={buttons}
         />
-        <section className="form-section">
+        <section className="form-section form-section--primary">
           <TwitterQuery.Form
             name={requests.beTwitterQueryUpdate}
             twitterQuery={twitterQuery}

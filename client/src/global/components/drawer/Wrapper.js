@@ -206,7 +206,7 @@ export default class DrawerWrapper extends PureComponent {
     return classNames({
       "drawer-bar": true,
       "drawer-bar--pad-lateral": this.props.padding === "none"
-    })
+    });
   }
 
   get closeButtonClasses() {
@@ -222,7 +222,7 @@ export default class DrawerWrapper extends PureComponent {
       "drawer-overlay",
       [`drawer-overlay--${this.props.context}`],
       [`drawer-overlay--pos-${this.props.position}`]
-    )
+    );
   }
 
   renderDrawerFrontMatter(props) {

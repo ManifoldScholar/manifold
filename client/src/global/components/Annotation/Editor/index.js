@@ -3,9 +3,34 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import GlobalForm from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
+import connectAndFetch from "utils/connectAndFetch";
+import { meAPI, requests } from "api";
+import { select } from "utils/entityUtils";
+import { entityStoreActions } from "actions";
+const { request } = entityStoreActions;
+import Developer from "global/components/developer";
+import isNil from "lodash/isNil";
 
-export default class AnnotationEditor extends PureComponent {
+class AnnotationEditor extends PureComponent {
   static displayName = "Annotation.Editor";
+
+  static fetchData = (getState, dispatch, location, match) => {
+    const readingGroupsFetch = meAPI.readingGroups();
+    const readingGroupsAction = request(
+      readingGroupsFetch,
+      requests.feMyReadingGroups
+    );
+    console.log("test test test");
+    const { promise: one } = dispatch(readingGroupsAction);
+    const promises = [one];
+    return Promise.all(promises);
+  };
+
+  static mapStateToProps = (state, ownProps) => {
+    return {
+      readingGroups: select(requests.feMyReadingGroups, state.entityStore)
+    };
+  };
 
   static propTypes = {
     saveAnnotation: PropTypes.func.isRequired,
@@ -22,6 +47,7 @@ export default class AnnotationEditor extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      readingGroupId: props.annotation.attributes.readingGroupId || null,
       format: "annotation",
       body: props.annotation.attributes.body || "",
       private: props.annotation.attributes.private || false,
@@ -67,13 +93,28 @@ export default class AnnotationEditor extends PureComponent {
     }
   };
 
-  handlePrivacyChange = eventIgnored => {
-    const value = !this.state.private;
-    this.setState({ private: value });
+  setPrivacyPublic = eventIgnored => {
+    this.setState({ private: false, readingGroupId: null });
+  };
+
+  setPrivacyPrivate = eventIgnored => {
+    this.setState({ private: true, readingGroupId: null });
+  };
+
+  setReadingGroup = (eventIgnored, readingGroup) => {
+    this.setState({ readingGroupId: readingGroup.id, private: false });
   };
 
   handleErrors(errors) {
     this.setState({ errors });
+  }
+
+  isSelected(option) {
+    const { private: isPrivate, readingGroupId } = this.state;
+    if (option === "public" && isNil(readingGroupId) && !isPrivate) return true;
+    if (option === "private" && isNil(readingGroupId) && isPrivate) return true;
+    if (option === readingGroupId) return true;
+    return false;
   }
 
   render() {
@@ -81,8 +122,17 @@ export default class AnnotationEditor extends PureComponent {
       checked: this.state.private
     });
 
+    const privateIcon = (
+      <IconComposer
+        icon="lock16"
+        size={16}
+        iconClass={this.lockIconClassNames}
+      />
+    );
+
     return (
       <div className="annotation-editor">
+        <Developer.Debugger object={this.state} />
         <form onSubmit={this.handleSubmit}>
           <GlobalForm.Errorable
             name="attributes[body]"
@@ -104,27 +154,34 @@ export default class AnnotationEditor extends PureComponent {
               value={this.state.body}
             />
           </GlobalForm.Errorable>
+
           <div className="utility">
-            <div className="form-input">
-              <label htmlFor="private-annotation" className={checkClass}>
-                <input
-                  type="checkbox"
-                  id="private-annotation"
-                  name="private"
-                  value="1"
-                  checked={this.state.private}
-                  onChange={this.handlePrivacyChange}
-                />
-                <span className="checkbox__indicator" aria-hidden="true">
-                  <IconComposer
-                    icon="checkmark16"
-                    size="default"
-                    iconClass="checkbox__icon"
-                  />
-                </span>
-                <span className="toggle-label">This Annotation is Private</span>
-              </label>
-            </div>
+            {this.props.readingGroups && (
+              <ul>
+                <li
+                  style={this.isSelected("public") ? { color: "red" } : null}
+                  onClick={this.setPrivacyPublic}
+                >
+                  My Public Annotations
+                </li>
+                <li
+                  style={this.isSelected("private") ? { color: "red" } : null}
+                  onClick={this.setPrivacyPrivate}
+                >
+                  My Private Annotations {privateIcon}
+                </li>
+                {this.props.readingGroups.map(rg => (
+                  <li
+                    style={this.isSelected(rg.id) ? { color: "red" } : null}
+                    onClick={event => this.setReadingGroup(event, rg)}
+                    key={rg.id}
+                  >
+                    {rg.attributes.name}
+                    {rg.attributes.privacy === "private" && privateIcon}
+                  </li>
+                ))}
+              </ul>
+            )}
             <div className="buttons">
               <button
                 onClick={this.handleCancel}
@@ -142,3 +199,5 @@ export default class AnnotationEditor extends PureComponent {
     );
   }
 }
+
+export default connectAndFetch(AnnotationEditor);

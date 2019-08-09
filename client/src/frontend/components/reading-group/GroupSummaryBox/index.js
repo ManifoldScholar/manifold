@@ -4,6 +4,10 @@ import Utility from "global/components/utility";
 import GroupSummaryItem from "./Item";
 
 export default class GroupSummaryBox extends React.Component {
+  static propTypes = {
+    readingGroup: PropTypes.object.isRequired
+  };
+
   get containerClassNames() {
     return "group-summary";
   }
@@ -16,57 +20,26 @@ export default class GroupSummaryBox extends React.Component {
     return "group-summary__private-icon";
   }
 
-  get group() {
-    return this.props.group.attributes;
-  }
-
-  get annotationCount() {
-    return this.group.annotationCount;
-  }
-
-  get memberCount() {
-    return this.group.memberCount;
-  }
-
-  get role() {
-    return this.group.role;
-  }
-
-  get type() {
-    return this.group.type;
-  }
-
-  get highlightCount() {
-    return this.group.highlightCount;
-  }
-
-  get columnLeft() {
-    return "left";
-  }
-
-  get columnRight() {
-    return "right";
-  }
-
-  get rowTop() {
-    return "top";
-  }
-
-  get rowBottom() {
-    return "bottom";
-  }
-
   render() {
+    const { attributes } = this.props.readingGroup;
+    const {
+      privacy,
+      highlightsCount,
+      annotationsCount,
+      membershipsCount,
+      role
+    } = attributes;
+
     return (
       <div className={this.containerClassNames}>
         <dl className={this.listClassNames}>
           <GroupSummaryItem
             labelText={"Type"}
-            mobileColumn={this.columnLeft}
-            desktopRow={this.rowTop}
+            mobileColumn="left"
+            desktopRow="top"
           >
-            {this.type}
-            {this.type === "private" && (
+            {privacy}
+            {privacy === "private" && (
               <Utility.IconComposer
                 icon="lock16"
                 size={16}
@@ -76,38 +49,38 @@ export default class GroupSummaryBox extends React.Component {
           </GroupSummaryItem>
           <GroupSummaryItem
             labelText={"Your Role"}
-            mobileColumn={this.columnLeft}
-            desktopRow={this.rowTop}
+            mobileColumn="left"
+            desktopRow="top"
           >
-            {this.role}
+            {role}
           </GroupSummaryItem>
           <GroupSummaryItem
             labelText={"Members"}
             icon={"avatar24"}
-            mobileColumn={this.columnRight}
-            desktopRow={this.rowBottom}
-            mobileRow={this.rowTop}
+            mobileColumn="right"
+            desktopRow="bottom"
+            mobileRow="top"
             mobileIndent
           >
-            {this.memberCount}
+            {membershipsCount}
           </GroupSummaryItem>
           <GroupSummaryItem
             labelText={"Annotations"}
             icon={"comment24"}
             mobileIndent
-            mobileColumn={this.columnRight}
-            desktopRow={this.rowBottom}
+            mobileColumn="right"
+            desktopRow="bottom"
           >
-            {this.annotationCount}
+            {annotationsCount}
           </GroupSummaryItem>
           <GroupSummaryItem
             labelText={"Highlights"}
             icon={"annotate24"}
             mobileIndent
-            mobileColumn={this.columnRight}
-            desktopRow={this.rowBottom}
+            mobileColumn="right"
+            desktopRow="bottom"
           >
-            {this.highlightCount}
+            {highlightsCount}
           </GroupSummaryItem>
         </dl>
       </div>

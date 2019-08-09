@@ -9,7 +9,7 @@ export default class ResourceFormKindAudio extends PureComponent {
 
   render() {
     return (
-      <div className="form-section">
+      <div className="form-section form-section--primary">
         <Form.Upload
           layout="square"
           label="Audio File"

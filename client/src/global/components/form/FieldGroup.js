@@ -11,15 +11,23 @@ export default class FieldGroup extends PureComponent {
     horizontal: PropTypes.bool,
     wide: PropTypes.bool,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    label: PropTypes.string
+    label: PropTypes.string,
+    labelTag: PropTypes.oneOf(["h2", "span"]),
+    theme: PropTypes.oneOf(["primary", "secondary"])
   };
 
   static defaultProps = {
     disabled: false,
     horizontal: false,
     wide: false,
-    instructions: null
+    instructions: null,
+    labelTag: "h2",
+    theme: "primary"
   };
+
+  get labelTag() {
+    return this.props.labelTag;
+  }
 
   renderChildren(props) {
     return React.Children.map(props.children, child => {
@@ -32,6 +40,7 @@ export default class FieldGroup extends PureComponent {
         wide,
         label,
         instructions,
+        theme,
         ...childProps
       } = this.props;
       return React.cloneElement(child, childProps);
@@ -39,17 +48,22 @@ export default class FieldGroup extends PureComponent {
   }
 
   render() {
-    const classes = classNames({
+    const sectionClasses = classNames({
       "form-section": true,
       disabled: this.props.disabled,
-      horizontal: this.props.horizontal
+      horizontal: this.props.horizontal,
+      [`form-section--${this.props.theme}`]: true
+    });
+    const groupClasses = classNames({
+      "form-input-group": true,
+      [`form-input-group--${this.props.theme}`]: true
     });
 
     return (
       <UID name={id => `field-group-${id}`}>
         {id => (
           <div
-            className={classes}
+            className={sectionClasses}
             key="group"
             role="group"
             aria-labelledby={`${id}-header`}
@@ -57,14 +71,16 @@ export default class FieldGroup extends PureComponent {
           >
             {isString(this.props.label) ? (
               <header className="form-section-label">
-                <h2 id={`${id}-header`}>{this.props.label}</h2>
+                <this.labelTag id={`${id}-header`}>
+                  {this.props.label}
+                </this.labelTag>
               </header>
             ) : null}
             <Instructions
               id={`${id}-instructions`}
               instructions={this.props.instructions}
             />
-            <div className="form-input-group">
+            <div className={groupClasses}>
               {this.renderChildren(this.props)}
             </div>
           </div>

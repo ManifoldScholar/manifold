@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import classnames from "classnames";
 import isString from "lodash/isString";
 import Instructions from "./Instructions";
@@ -35,23 +35,48 @@ class FormBaseInput extends Component {
     }
   }
 
+  renderButtons(buttons) {
+    return (
+      <div className="form-input__action-group">
+        {buttons.map(button => (
+          <button
+            type="button"
+            key={button.label}
+            onClick={button.onClick}
+            className="form-input__action"
+          >
+            {button.label}
+          </button>
+        ))}
+      </div>
+    );
+  }
+
   renderValue(props) {
     if (!props.renderValue) return props.value;
     return props.renderValue(props.value);
   }
 
   render() {
+    const {
+      id,
+      idForError,
+      idForInstructions,
+      buttons,
+      instructions,
+      wide
+    } = this.props;
     const labelClass = classnames({
-      "has-instructions": isString(this.props.instructions)
+      "has-instructions": isString(instructions)
     });
     const inputClasses = classnames(this.props.inputClasses, {
       "form-input": true,
-      wide: this.props.wide
+      wide,
+      "form-input--with-actions": buttons
     });
-    const { id, idForError, idForInstructions } = this.props;
 
     return (
-      <GlobalForm.Errorable
+      <Errorable
         className={inputClasses}
         name={this.props.name}
         errors={this.props.errors}
@@ -72,11 +97,12 @@ class FormBaseInput extends Component {
           value={this.renderValue(this.props)}
           aria-describedby={`${idForError} ${idForInstructions}`}
         />
+        {buttons && this.renderButtons(buttons)}
         <Instructions
           instructions={this.props.instructions}
           id={idForInstructions}
         />
-      </GlobalForm.Errorable>
+      </Errorable>
     );
   }
 }

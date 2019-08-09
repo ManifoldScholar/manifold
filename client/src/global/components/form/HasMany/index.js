@@ -2,11 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { UID } from "react-uid";
-import GlobalForm from "global/components/form";
 import List from "./List";
 import Header from "./Header";
 import setter from "../setter";
 import OptionsList from "../OptionsList";
+import Errorable from "../Errorable";
 import isArray from "lodash/isArray";
 
 export class FormHasMany extends PureComponent {
@@ -119,7 +119,7 @@ export class FormHasMany extends PureComponent {
     return (
       <UID>
         {id => (
-          <GlobalForm.Errorable
+          <Errorable
             className={inputClasses}
             name={this.props.name}
             errors={this.props.errors}
@@ -155,7 +155,7 @@ export class FormHasMany extends PureComponent {
                 this.props
               )}
             </div>
-          </GlobalForm.Errorable>
+          </Errorable>
         )}
       </UID>
     );

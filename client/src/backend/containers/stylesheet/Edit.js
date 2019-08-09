@@ -67,7 +67,7 @@ export class StylesheetEditContainer extends PureComponent {
       : requests.beStylesheetCreate;
 
     return (
-      <section className="form-section">
+      <section className="form-section form-section--primary">
         <FormContainer.Form
           model={stylesheet}
           name={name}

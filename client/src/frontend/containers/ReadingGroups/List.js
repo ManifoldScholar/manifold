@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import GroupsTable from "frontend/components/group/Table/Groups";
-import Heading from "frontend/components/group/Heading";
-import JoinBox from "frontend/components/group/JoinBox";
+import GroupsTable from "frontend/components/reading-group/Table/Groups";
+import Heading from "frontend/components/reading-group/Heading";
+import JoinBox from "frontend/components/reading-group/JoinBox";
 import queryString from "query-string";
 import { meAPI, requests } from "api";
 import connectAndFetch from "utils/connectAndFetch";
@@ -10,6 +10,7 @@ import { meta, select } from "utils/entityUtils";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
+
 const { request } = entityStoreActions;
 
 const defaultPage = 1;
@@ -68,6 +69,7 @@ class ReadingGroupsListContainer extends Component {
       },
       childProps: {
         settings,
+        closeUrl,
         dispatch,
         fetchData
       }
@@ -89,7 +91,16 @@ class ReadingGroupsListContainer extends Component {
         <section>
           <div className="container">
             {this.renderRoutes()}
-            <Heading pageType={"groupList"} />
+            <Heading
+              buttons={[
+                {
+                  to: lh.link("readingGroupsNew"),
+                  text: "Create New Annotation Group"
+                }
+              ]}
+            >
+              Manage Annotation Groups
+            </Heading>
             <div style={{ marginTop: 50, marginBottom: 50 }}>
               <JoinBox />
             </div>

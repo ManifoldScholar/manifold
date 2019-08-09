@@ -56,6 +56,7 @@ class Annotation < ApplicationRecord
   # Associations
   # Annotations can become orphaned when the text section is deleted.
   belongs_to :text_section, optional: true
+  belongs_to :reading_group, optional: true
   belongs_to :resource, optional: true
   belongs_to :resource_collection, optional: true
   has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject,
@@ -99,6 +100,11 @@ class Annotation < ApplicationRecord
 
   # Callbacks
   after_commit :trigger_event_creation, on: [:create]
+
+  def reading_group_membership
+    return nil unless reading_group_id
+    ReadingGroupMembership.find_by(user: creator, reading_group: reading_group)
+  end
 
   def search_data
     {

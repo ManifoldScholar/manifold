@@ -30,8 +30,8 @@ export default class ProjectContentTypeFormTexts extends PureComponent {
       <React.Fragment>
         <Form.TextInput label="Title" name="attributes[title]" focusOnMount />
         <Form.TextArea label="Description" name="attributes[description]" />
-        <div className="form-section">
-          <div className="form-input-group">
+        <div className="form-section form-section--primary">
+          <div className="form-input-group form-input-group--primary">
             <Form.Switch
               label="Show Author Names?"
               name="attributes[showAuthors]"

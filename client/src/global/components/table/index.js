@@ -2,16 +2,18 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import classNames from "classnames";
-import TablePagination from "./Pagination";
-import TableBody from "./Body";
+import Pagination from "./Pagination";
+import Body from "./Body";
 import Column from "./Column";
 
 export default class Table extends PureComponent {
+  static displayName = "GenericTable";
+
   static propTypes = {
     pagination: PropTypes.object.isRequired,
     onPageClick: PropTypes.func.isRequired,
     countLabel: PropTypes.string.isRequired,
-    children: (props, propName, componentName) => {
+    children: props => {
       React.Children.toArray(props.children).every(
         child => child.type === Column
       );
@@ -36,9 +38,9 @@ export default class Table extends PureComponent {
         <div className={"table__count-container"}>
           <Utility.Count pagination={pagination} countLabel={countLabel} />
         </div>
-        <TableBody {...this.props} markup="table" label={countLabel} />
-        <TableBody {...this.props} markup="dl" label={countLabel} />
-        <TablePagination
+        <Body {...this.props} markup="table" label={countLabel} />
+        <Body {...this.props} markup="dl" label={countLabel} />
+        <Pagination
           pagination={pagination}
           paginationTarget={this.paginationTarget}
           onPageClick={onPageClick}

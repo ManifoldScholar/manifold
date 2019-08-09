@@ -80,6 +80,9 @@ GEM
       activerecord (>= 3.0)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    after_commit_action (1.1.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     arel (9.0.0)
     ast (2.4.0)
     authority (3.3.0)
@@ -109,6 +112,10 @@ GEM
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     content_disposition (1.0.0)
+    counter_culture (2.2.3)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      after_commit_action (~> 1.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
@@ -537,6 +544,7 @@ DEPENDENCIES
   clockwork (~> 2.0.0)
   closure_tree (~> 7.0)
   colorize (~> 0.8.0)
+  counter_culture (~> 2.0)
   csl-styles (~> 1.0)
   css_parser (~> 1.0)
   cssbeautify
@@ -625,4 +633,4 @@ DEPENDENCIES
   with_model (~> 2.1)
 
 BUNDLED WITH
-   1.17.2
+   2.0.2

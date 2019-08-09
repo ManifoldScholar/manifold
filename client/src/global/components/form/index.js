@@ -27,6 +27,7 @@ import Upload from "./Upload";
 import CoverUploadPlaceholder from "./CoverUploadPlaceholder";
 import InputError from "./InputError";
 import Errorable from "./Errorable";
+import Divider from "./Divider";
 
 export default {
   CoverUploadPlaceholder,
@@ -57,5 +58,6 @@ export default {
   TextArea,
   TextInput,
   TusUpload,
-  Upload
+  Upload,
+  Divider
 };

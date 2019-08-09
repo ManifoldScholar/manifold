@@ -86,7 +86,7 @@ export class SettingsSubjectsEditContainer extends PureComponent {
             }
           ]}
         />
-        <section className="form-section">
+        <section className="form-section form-section--primary">
           <FormContainer.Form
             model={subject}
             name="backend-edit-subject"

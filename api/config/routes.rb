@@ -25,13 +25,15 @@ Rails.application.routes.draw do
       resources :content_blocks, only: [:show, :update, :destroy]
       resources :test_mails, only: [:create]
       resources :pages
+
       resources :reading_groups do
-        scope :reading_groups do
+        scope module: :reading_groups do
           namespace :relationships do
             resources :reading_group_memberships
           end
         end
       end
+
       resources :features
       resources :subjects
       resources :categories, except: [:create, :index]

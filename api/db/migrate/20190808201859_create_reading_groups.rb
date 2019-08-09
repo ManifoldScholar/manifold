@@ -6,12 +6,15 @@ class CreateReadingGroups < ActiveRecord::Migration[5.2]
       t.string :privacy, default: "private"
       t.string :invitation_code
       t.boolean :notify_on_join, default: true
-      t.integer :memberships_count
-      t.integer :annotations_count
-      t.integer :highlights_count
-      t.references :creator, type: :uuid,foreign_key: { on_delete: :nullify, to_table: :users }
+      t.integer :memberships_count, default: 0, null: false
+      t.integer :all_annotations_count, default: 0, null: false
+      t.integer :annotations_count, default: 0, null: false
+      t.integer :highlights_count, default: 0, null: false
+      t.references :creator, type: :uuid, foreign_key: { on_delete: :nullify, to_table: :users }
       t.timestamps
     end
+
+    add_reference :annotations, :reading_group, type: :uuid, foreign_key: { on_delete: :nullify, to_table: :reading_groups }
 
     create_table :reading_group_memberships do |t|
       t.references :user, type: :uuid,foreign_key: { on_delete: :cascade }

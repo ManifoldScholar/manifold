@@ -13,9 +13,13 @@
   }
 
   @include respond($break50) {
-    + .checkbox {
+    & + & {
       margin-left: 32px;
     }
+  }
+
+  + .instructions {
+    display: inline-block;
   }
 
   &__indicator {
@@ -27,11 +31,25 @@
     vertical-align: middle;
     background-color: $neutralWhite;
     border-radius: 3px;
+
+    .checkbox--gray & {
+      background-color: $neutral20;
+    }
   }
 
   &__icon {
+    position: relative;
+    top: 1px;
     color: $neutralWhite;
     visibility: hidden;
+
+    .checkbox--gray & {
+      color: $neutral90;
+    }
+
+    .checkbox.checked & {
+      visibility: visible;
+    }
   }
 
   input {
@@ -48,6 +66,12 @@
     }
   }
 
+  &--gray {
+    input:checked ~ .checkbox__indicator {
+      background-color: $neutral20;
+    }
+  }
+
   input:focus-visible {
     outline: 0;
 
@@ -58,5 +82,11 @@
         color: $neutral90;
       }
     }
+  }
+}
+
+.checkbox-wrapper {
+  &--inline {
+    display: inline;
   }
 }

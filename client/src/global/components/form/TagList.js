@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import ConnectedFormInputs from "backend/containers/form-inputs/connected-inputs";
 import List from "./HasMany/List";
 import classnames from "classnames";
@@ -104,7 +104,7 @@ class FormTagList extends Component {
     return (
       <UID>
         {id => (
-          <GlobalForm.Errorable
+          <Errorable
             className={inputClasses}
             name={this.props.name}
             errors={this.props.errors}
@@ -131,7 +131,7 @@ class FormTagList extends Component {
               />
               {this.renderList(this.props.value)}
             </div>
-          </GlobalForm.Errorable>
+          </Errorable>
         )}
       </UID>
     );

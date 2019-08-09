@@ -11,7 +11,7 @@ export default class ResourceFormKindVariantsInteractive extends PureComponent {
 
   render() {
     return (
-      <div className="form-section">
+      <div className="form-section form-section--primary">
         <Form.Upload
           layout="landscape"
           label="Poster Image"

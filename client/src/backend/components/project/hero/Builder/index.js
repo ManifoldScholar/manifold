@@ -67,7 +67,7 @@ export default class Builder extends PureComponent {
           <UID name={id => `hero-builder-${id}`}>
             {id => (
               <div
-                className="form-section"
+                className="form-section form-section--primary"
                 role="group"
                 aria-labelledby={`${id}-header`}
                 aria-describedby={`${id}-instructions`}

@@ -39,6 +39,7 @@
   position: relative;
   width: $height * 2;
   height: $height;
+  display: block;
   cursor: pointer;
   // Disabled to use built-in function
   // scss-lint:disable NameFormat
@@ -55,10 +56,6 @@
     &::before {
       left: calc(100% - #{$height});
     }
-  }
-
-  &:focus-visible {
-    outline-offset: 2px;
   }
 
   &::before {

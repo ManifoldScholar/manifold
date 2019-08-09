@@ -1,6 +1,5 @@
 import queryString from "query-string";
 import NotFound from "global/containers/NotFound";
-import ReadingGroupsNew from "./containers/ReadingGroups/New";
 
 const routes = {
   component: "Frontend",
@@ -169,13 +168,21 @@ const routes = {
           name: "readingGroupDetail",
           exact: false,
           component: "ReadingGroup",
-          path: "/my/groups/:groupId",
+          path: "/my/groups/:id",
           helper: rg => `/my/groups/${rg}`,
           routes: [
             {
+              name: "readingGroupEdit",
+              exact: true,
+              component: "ReadingGroupEdit",
+              path: "/my/groups/:id/edit",
+              helper: rg => `/my/groups/${rg}/edit`
+            },
+            {
               exact: true,
               component: "ReadingGroupDetail",
-              path: "/my/groups/:groupId"
+              path: "/my/groups/:id",
+              helper: rg => `/my/groups/${rg}`
             },
             {
               name: "readingGroupMembers",

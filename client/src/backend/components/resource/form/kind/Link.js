@@ -9,7 +9,7 @@ export default class ResourceFormKindLink extends PureComponent {
 
   render() {
     return (
-      <div className="form-section">
+      <div className="form-section form-section--primary">
         <Form.TextInput
           label="Link URL"
           name="attributes[externalUrl]"

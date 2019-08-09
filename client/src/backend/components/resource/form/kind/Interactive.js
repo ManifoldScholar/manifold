@@ -11,7 +11,7 @@ export default class ResourceFormKindInteractive extends PureComponent {
 
   render() {
     return (
-      <div className="form-section">
+      <div className="form-section form-section--primary">
         <Form.TextInput
           label="Minimum Width"
           placeholder="The minimum display width"

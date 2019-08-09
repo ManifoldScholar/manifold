@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UID } from "react-uid";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import Instructions from "./Instructions";
 import withFormOptions from "hoc/with-form-options";
 import IconComposer from "global/components/utility/IconComposer";
@@ -57,7 +57,7 @@ class FormSelect extends Component {
       <UID>
         {id => (
           <div className="form-input">
-            <GlobalForm.Errorable
+            <Errorable
               className="form-input"
               name={this.props.name}
               errors={this.props.errors}
@@ -91,7 +91,7 @@ class FormSelect extends Component {
                 instructions={this.props.instructions}
                 id={`${this.idForInstructionsPrefix}-${id}`}
               />
-            </GlobalForm.Errorable>
+            </Errorable>
           </div>
         )}
       </UID>

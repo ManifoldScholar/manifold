@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Dropzone from "react-dropzone";
-import GlobalForm from "global/components/form";
+import Errorable from "global/components/form/Errorable";
 import classnames from "classnames";
 import isString from "lodash/isString";
 import Instructions from "../Instructions";
@@ -106,7 +106,7 @@ export default class FormUpload extends Component {
     };
     return (
       <div className={inputClasses}>
-        <GlobalForm.Errorable
+        <Errorable
           className="form-input"
           name={this.props.name}
           errors={this.props.errors}
@@ -148,7 +148,7 @@ export default class FormUpload extends Component {
             instructions={this.props.instructions}
             id={this.props.idForInstructions}
           />
-        </GlobalForm.Errorable>
+        </Errorable>
       </div>
     );
   }
