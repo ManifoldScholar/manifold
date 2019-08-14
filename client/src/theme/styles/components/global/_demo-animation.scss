@@ -1,0 +1,8 @@
+.demo-animation {
+  width: 150px;
+  height: auto;
+
+  @include respond($break80) {
+    width: 180px;
+  }
+}

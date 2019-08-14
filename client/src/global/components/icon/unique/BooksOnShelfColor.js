@@ -1,13 +1,35 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classnames from "classnames";
 
 export default class SVGBooksOnShelfColor extends Component {
   static displayName = "SVG.BooksOnShelfColor";
 
+  static propTypes = {
+    iconClass: PropTypes.string,
+    size: PropTypes.number
+  };
+
+  get width() {
+    return this.props.size || null;
+  }
+
+  get height() {
+    return this.props.size * 0.52 || null;
+  }
+
   render() {
+    const classes = classnames("manicon-svg", this.props.iconClass);
+
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.6 63.8">
-        <title>Books on a Shelf</title>
+      <svg
+        className={classes}
+        xmlns="http://www.w3.org/2000/svg"
+        width={this.width}
+        height={this.height}
+        viewBox="0 0 122.6 63.8"
+        aria-hidden="true"
+      >
         <path
           fill="#cbf7e6"
           d="M28.5 10.6h14.3v44.7H28.5V10.6zm0 46.4h14.3v5.1H28.5V57zm0-53.2h14.3v5.1H28.5V3.8zm64.4 55.9L83.9 2 69.8 4.2l8.9 57.7 14.2-2.2zm-16.4-27c-.4-2.7 1.4-5.2 4.1-5.6s5.2 1.4 5.6 4.1-1.4 5.2-4.1 5.6c-.3 0-.5.1-.8.1-2.4-.1-4.5-1.8-4.8-4.2zM50 52.3h14.3v3H50v-3zm0 4.7h14.3v5.1H50V57zm0-53.2h14.3v5.1H50V3.8zm0 6.8h14.3v3H50v-3zm0 4.8h14.3v35.2H50V15.4z"

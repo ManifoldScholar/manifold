@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ButtonNavigation from "./ButtonNavigation";
+import { Link } from "react-router-dom";
+import lh from "helpers/linkHandler";
+import ContentPlaceholder from "global/components/ContentPlaceholder";
+import IconComposer from "global/components/utility/IconComposer";
 
 export default class NoFollow extends Component {
   static displayName = "Layout.NoFollow";
@@ -11,21 +14,22 @@ export default class NoFollow extends Component {
 
   render() {
     return (
-      <div>
-        <section className="bg-neutral05">
-          <div className="container flush-bottom">
-            <section className="no-follow">
-              <h3 className="heading-primary">
-                {"You're not following any projects yet"}
-              </h3>
-              <p>
-                {"But don't fret, it's easy to start following projects. " +
-                  "Just browse through the available projects, and when you find" +
-                  " one you like, select the green plus symbol. When the green " +
-                  "plus is replaced with a blue checkmark, you're done!"}
-              </p>
-              <figure className="demo-animation">
+      <section className="bg-neutral05">
+        <div className="container">
+          <ContentPlaceholder.Wrapper context="frontend">
+            <ContentPlaceholder.Title>
+              You’re not following any projects yet
+            </ContentPlaceholder.Title>
+            <ContentPlaceholder.Body>
+              <React.Fragment>
+                <p>
+                  {"But don't fret, it's easy to start following projects. " +
+                    "Just browse through the available projects, and when you find" +
+                    " one you like, select the green plus symbol. When the green " +
+                    "plus is replaced with a blue checkmark, you're done!"}
+                </p>
                 <img
+                  className="demo-animation"
                   src="/static/images/browse_no-follow-animation.gif"
                   alt={
                     "A cursor icon hovers over a project thumbnail " +
@@ -36,12 +40,26 @@ export default class NoFollow extends Component {
                     " blue checkmark."
                   }
                 />
-              </figure>
-            </section>
-          </div>
-        </section>
-        <ButtonNavigation grayBg showFollowing={false} />
-      </div>
+              </React.Fragment>
+            </ContentPlaceholder.Body>
+            <ContentPlaceholder.Actions>
+              <Link
+                to={lh.link("frontendProjectsAll")}
+                className="button-icon-primary"
+              >
+                <IconComposer
+                  icon="projects64"
+                  size={48}
+                  iconClass="button-icon-primary__icon"
+                />
+                <span className="button-icon-primary__text">
+                  See All Projects
+                </span>
+              </Link>
+            </ContentPlaceholder.Actions>
+          </ContentPlaceholder.Wrapper>
+        </div>
+      </section>
     );
   }
 }

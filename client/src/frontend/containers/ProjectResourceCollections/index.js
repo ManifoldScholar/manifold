@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions, uiFrontendModeActions } from "actions";
 import { projectsAPI, requests } from "api";
@@ -10,7 +11,9 @@ import GlobalUtility from "global/components/utility";
 import HeadContent from "global/components/HeadContent";
 import ResourceCollectionList from "frontend/components/resource-collection-list";
 import BackLink from "frontend/components/back-link";
+import ContentPlaceholder from "global/components/ContentPlaceholder";
 import withSettings from "hoc/with-settings";
+import Authorize from "hoc/authorize";
 
 const { request, flush } = entityStoreActions;
 const page = 1;
@@ -75,6 +78,54 @@ class ProjectResourceCollectionsContainer extends Component {
     };
   };
 
+  get hasCollections() {
+    return (
+      this.props.resourceCollections &&
+      this.props.resourceCollections.length > 0
+    );
+  }
+
+  renderPlaceholder(id) {
+    return (
+      <ContentPlaceholder.Wrapper context="frontend">
+        <ContentPlaceholder.Title icon="resourceCollection64">
+          <Authorize entity="projectCollection" ability="create">
+            Uh-oh. This project doesn’t have any collections yet.
+          </Authorize>
+          <Authorize entity="project" ability="create" successBehavior="hide">
+            This project doesn’t have any collections yet.
+          </Authorize>
+        </ContentPlaceholder.Title>
+        <ContentPlaceholder.Body>
+          <React.Fragment>
+            <Authorize entity="project" ability="create">
+              <p>
+                Resource collections are groupings of resources that can be used
+                to orient a reader around certain themes or as a means to place
+                a series of resources onto a text with one insertion.
+              </p>
+            </Authorize>
+            <Authorize entity="project" ability="create" successBehavior="hide">
+              <p>Please check back soon!</p>
+            </Authorize>
+          </React.Fragment>
+        </ContentPlaceholder.Body>
+        <ContentPlaceholder.Actions>
+          <Authorize entity="project" ability="create">
+            <Link
+              to={lh.link("backendProjectResourceCollectionsNew", id)}
+              className="button-icon-primary"
+            >
+              <span className="button-icon-primary__text">
+                {"Create a Collection"}
+              </span>
+            </Link>
+          </Authorize>
+        </ContentPlaceholder.Actions>
+      </ContentPlaceholder.Wrapper>
+    );
+  }
+
   render() {
     const { project, settings } = this.props;
     if (!project) return <LoadingBlock />;
@@ -99,7 +150,9 @@ class ProjectResourceCollectionsContainer extends Component {
         />
         <section>
           <div className="container">
-            {this.props.resourceCollections && (
+            {!this.hasCollections ? (
+              this.renderPlaceholder(project.id)
+            ) : (
               <ResourceCollectionList.Grid
                 project={this.props.project}
                 resourceCollections={this.props.resourceCollections}
