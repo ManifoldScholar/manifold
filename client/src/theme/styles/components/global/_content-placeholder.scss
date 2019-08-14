@@ -1,0 +1,110 @@
+.content-placeholder {
+  text-align: center;
+
+  &--frontend {}
+
+  &--backend {}
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__icon {
+    width: 80px;
+    height: 80px;
+    padding: 11px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+
+    @include respond($break110) {
+      width: 120px;
+      height: 120px;
+      padding: 17px;
+    }
+
+    .content-placeholder--backend & {
+      color: $accentPrimary;
+      background-color: $neutral95;
+    }
+
+    .content-placeholder--frontend & {
+      color: $neutral75;
+      background-color: $neutral10;
+    }
+  }
+
+  &__title {
+    @include headingPrimary;
+    margin-bottom: 0;
+
+    .content-placeholder--backend & {
+      color: $neutral30;
+    }
+
+    .content-placeholder--frontend & {
+      color: $neutral75;
+    }
+  }
+
+  &__body,
+  &__ext-link {
+    margin: 0 auto 35px;
+
+    .content-placeholder--backend & {
+      @include templateHead;
+      font-size: 16px;
+      line-height: 1.5;
+      color: $neutral50;
+    }
+
+    .content-placeholder--frontend & {
+      @include templateCopy;
+      font-size: 19px;
+      line-height: 1.3;
+      color: $neutral75;
+    }
+
+    a {
+      color: $accentPrimaryMedium;
+      transition: color $durationFast $timing;
+
+      &:visited {
+        color: $accentPrimaryMedium;
+      }
+
+      &:hover {
+        color: $accentPrimaryDark;
+      }
+    }
+  }
+
+  &__body {
+    width: 90%;
+
+    @include respond($break90) {
+      width: 60%;
+    }
+
+    > * + * {
+      margin-top: 35px;
+    }
+  }
+
+  &__actions {
+    display: inline-flex;
+    flex-direction: column;
+
+    > * + * {
+      margin-top: 20px;
+    }
+  }
+
+  &__ext-link-wrapper {
+    margin-top: 40px;
+  }
+
+  &__ext-link {}
+}

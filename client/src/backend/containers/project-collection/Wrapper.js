@@ -11,6 +11,8 @@ import { childRoutes } from "helpers/router";
 import size from "lodash/size";
 import lh from "helpers/linkHandler";
 import classnames from "classnames";
+import ContentPlaceholder from "global/components/ContentPlaceholder";
+import IconComposer from "global/components/utility/IconComposer";
 
 import Authorize from "hoc/authorize";
 
@@ -123,9 +125,35 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   renderChildRoutes(active, projectCollections) {
     if (size(projectCollections) === 0)
       return (
-        <ProjectCollection.Placeholder
-          createClickHandler={this.handleShowNew}
-        />
+        <ContentPlaceholder.Wrapper context="backend">
+          <ContentPlaceholder.Title icon="booksOnShelfStrokeUnique">
+            Ready to create a Project Collection?
+          </ContentPlaceholder.Title>
+          <ContentPlaceholder.Body>
+            With Project Collections, you can take control of what appears on
+            your Manifold Library homepage. Create custom groupings of Projects
+            and change their order and visibility. You can handpick your
+            collections and order them manually, or you can create Smart
+            Collections that automatically update based on your filtering
+            criteria.
+          </ContentPlaceholder.Body>
+          <ContentPlaceholder.Actions>
+            <button
+              className="button-icon-secondary"
+              onClick={this.handleShowNew}
+            >
+              <IconComposer
+                icon="plus16"
+                size={20}
+                iconClass={classnames(
+                  "button-icon-secondary__icon",
+                  "button-icon-secondary__icon--large"
+                )}
+              />
+              <span>{"Create a Collection"}</span>
+            </button>
+          </ContentPlaceholder.Actions>
+        </ContentPlaceholder.Wrapper>
       );
     const drawerProps = { closeUrl: lh.link("backendProjectCollections") };
 
