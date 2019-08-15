@@ -1,8 +1,10 @@
 .annotation-list {
   @include listUnstyled;
+  @include drawerPadding(padding-left);
   padding-bottom: 37px;
 
   &--dark {
+    @include drawerPadding(padding-right);
     background-color: $neutral05;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;

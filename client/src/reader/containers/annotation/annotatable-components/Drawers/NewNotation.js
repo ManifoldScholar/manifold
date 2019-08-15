@@ -6,7 +6,9 @@ import humps from "humps";
 export default class NewNotation extends PureComponent {
   static drawerProps = () => {
     return {
-      style: "backend"
+      context: "backend",
+      size: "default",
+      padding: "default"
     };
   };
 

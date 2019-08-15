@@ -241,7 +241,7 @@ $readerContainerWidths: (1063px, 916px, 790px, 680px, 500px);
   float: right;
 }
 
-@mixin drawerPadding() {
+@mixin drawerPadding($parameter) {
   #{$parameter}: 0;
 
   @include respond($break95) {

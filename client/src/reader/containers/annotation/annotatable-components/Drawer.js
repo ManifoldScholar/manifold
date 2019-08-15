@@ -19,7 +19,7 @@ export default class AnnotatableDrawer extends PureComponent {
   get initialState() {
     return {
       drawerWrapperProps: {
-        style: "frontend"
+        context: "reader"
       }
     };
   }
@@ -49,6 +49,7 @@ export default class AnnotatableDrawer extends PureComponent {
       context: "reader",
       size: "wide",
       position: "overlay",
+      padding: "none",
       open: this.isOpen,
       closeCallback: this.closeDrawer,
       lockScroll: "always"

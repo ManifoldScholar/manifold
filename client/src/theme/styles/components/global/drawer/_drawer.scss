@@ -17,6 +17,10 @@
 
   &--backend {
     background-color: $neutral100;
+
+    .button-switch-primary {
+      margin-bottom: 28px;
+    }
   }
 
   &--frontend {

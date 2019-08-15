@@ -79,33 +79,31 @@ class HighlightDetail extends PureComponent {
     const annotation = this.props.annotation;
     return (
       <div className={this.containerClassNames}>
-        <div className="annotation-selection__container">
-          {this.viewable && (
-            <button
-              className="annotation-selection__button-absolute"
-              onClick={this.handleVisitHighlight}
-              aria-label="View selection within text."
-            />
-          )}
-          <span className="annotation-selection__highlight-text">
-            {annotation.attributes.subject}
-          </span>
-          <SourceSummary
-            user={this.user}
-            projectTitle={this.projectTitle}
-            sectionTitle={this.sectionTitle}
-            highlightDate={this.highlightDate}
-            viewable={this.viewable}
+        {this.viewable && (
+          <button
+            className="annotation-selection__button-absolute"
+            onClick={this.handleVisitHighlight}
+            aria-label="View selection within text."
           />
-          <Authorize entity={annotation} ability={"delete"}>
-            <div className="annotation-selection__action-buttons">
-              <Utility.ConfirmableButton
-                label="Delete"
-                confirmHandler={this.deleteAnnotation}
-              />
-            </div>
-          </Authorize>
-        </div>
+        )}
+        <span className="annotation-selection__highlight-text">
+          {annotation.attributes.subject}
+        </span>
+        <SourceSummary
+          user={this.user}
+          projectTitle={this.projectTitle}
+          sectionTitle={this.sectionTitle}
+          highlightDate={this.highlightDate}
+          viewable={this.viewable}
+        />
+        <Authorize entity={annotation} ability={"delete"}>
+          <div className="annotation-selection__action-buttons">
+            <Utility.ConfirmableButton
+              label="Delete"
+              confirmHandler={this.deleteAnnotation}
+            />
+          </div>
+        </Authorize>
       </div>
     );
   }
