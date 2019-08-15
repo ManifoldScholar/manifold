@@ -29,7 +29,8 @@ Rails.application.routes.draw do
       resources :reading_groups do
         scope module: :reading_groups do
           namespace :relationships do
-            resources :reading_group_memberships
+            resources :reading_group_memberships, only: [:index]
+            resources :annotations, only: [:index]
           end
         end
       end

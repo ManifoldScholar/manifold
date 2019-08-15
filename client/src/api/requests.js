@@ -90,6 +90,7 @@ export default {
   feNewReadingGroup: "frontend-new-reading-group",
   feReadingGroup: "frontend-reading-group",
   feReadingGroupMembers: "frontend-reading-group-members",
+  feReadingGroupAnnotations: "frontend-reading-group-annotations",
   feProjectsFiltered: "frontend-projects-filtered",
   feProjectsFeatured: "frontend-projects-featured",
   feProjectsFollowed: "frontend-projects-followed",

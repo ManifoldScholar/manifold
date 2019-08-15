@@ -4,7 +4,6 @@ module Api
       module Relationships
         class ReadingGroupMembershipsController < ApplicationController
 
-          before_action :set_reading_group_membership, only: [:update, :destroy]
           before_action :set_reading_group
 
           resourceful! ReadingGroupMembership do

@@ -4,14 +4,10 @@ class ReadingGroupSerializer < ApplicationSerializer
 
   attributes :name, :privacy, :invitation_code, :notify_on_join, :memberships_count,
              :all_annotations_count, :annotations_count, :highlights_count, :created_at,
-             :role
+             :current_user_role, :current_user_is_creator, :creator_id
 
-  def role
-    return "owner" if object.creator == current_user
-    return "member"
+  def current_user_role
+    current_user_is_creator ? "owner" : "members"
   end
-
-
-
 
 end

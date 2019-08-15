@@ -17,6 +17,10 @@ class ReadingGroup < ApplicationRecord
 
   before_save :ensure_creator_membership
 
+  def private?
+    privacy === "private"
+  end
+
   private
 
   def ensure_creator_membership

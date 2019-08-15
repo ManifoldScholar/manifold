@@ -45,6 +45,7 @@ class AnnotationEditor extends PureComponent {
   };
 
   constructor(props) {
+    console.log(props.annotation);
     super(props);
     this.state = {
       readingGroupId: props.annotation.attributes.readingGroupId || null,

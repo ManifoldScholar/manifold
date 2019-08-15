@@ -5,10 +5,12 @@ import Column from "global/components/table/Column";
 import TableAvatar from "global/components/table/Avatar";
 import NameWithArrow from "global/components/table/NameWithArrow";
 import RemoveMemberButton from "./RemoveMember";
+import get from "lodash/get";
 
 export default class MembersTable extends PureComponent {
   static propTypes = {
-    members: PropTypes.array.isRequired
+    members: PropTypes.array.isRequired,
+    readingGroup: PropTypes.object.isRequired
   };
 
   get members() {
@@ -23,7 +25,17 @@ export default class MembersTable extends PureComponent {
     return this.props.onPageClick;
   }
 
+  roleFor(readingGroupMembership) {
+    const { readingGroup } = this.props;
+    return readingGroupMembership.relationships.user.id ===
+      readingGroup.attributes.creatorId
+      ? "creator"
+      : "member";
+  }
+
   render() {
+    const { readingGroup } = this.props;
+
     return (
       <Table
         models={this.members}
@@ -39,9 +51,10 @@ export default class MembersTable extends PureComponent {
         >
           {({ model }) => (
             <TableAvatar
-              avatar={
-                model.relationships.user.attributes.avatarStyles.mediumSquare
-              }
+              avatar={get(
+                model,
+                "relationships.user.attributes.avatarStyles.mediumSquare"
+              )}
             />
           )}
         </Column>
@@ -60,7 +73,7 @@ export default class MembersTable extends PureComponent {
                   viewportVisibility="hideDesktop"
                 />
                 <NameWithArrow
-                  name={model.relationships.user.attributes.fullName}
+                  name={get(model, "relationships.user.attributes.fullName")}
                 />
               </React.Fragment>
             );
@@ -72,7 +85,7 @@ export default class MembersTable extends PureComponent {
           columnPosition={"left"}
           cellSize={"cellMedium"}
         >
-          {({ model }) => model.relationships.user.attributes.role}
+          {({ model }) => this.roleFor(model)}
         </Column>
         <Column
           header="Annotations"

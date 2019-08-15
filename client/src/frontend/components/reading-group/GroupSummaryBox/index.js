@@ -27,7 +27,7 @@ export default class GroupSummaryBox extends React.Component {
       highlightsCount,
       annotationsCount,
       membershipsCount,
-      role
+      currentUserRole
     } = attributes;
 
     return (
@@ -52,7 +52,7 @@ export default class GroupSummaryBox extends React.Component {
             mobileColumn="left"
             desktopRow="top"
           >
-            {role}
+            {currentUserRole}
           </GroupSummaryItem>
           <GroupSummaryItem
             labelText={"Members"}

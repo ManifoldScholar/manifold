@@ -7,7 +7,7 @@ import queryString from "query-string";
 import connectAndFetch from "utils/connectAndFetch";
 import BackLink from "frontend/components/back-link";
 import { entityStoreActions } from "actions";
-import lh from "../../../helpers/linkHandler";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;
@@ -56,6 +56,7 @@ class ReadingGroupsMembersContainer extends Component {
         <Heading subtitle="Members">{readingGroup.attributes.name}</Heading>
         <div style={{ marginTop: 50, marginBottom: 50 }}>
           <MembersTable
+            readingGroup={readingGroup}
             members={readingGroupMembers}
             pagination={meta.pagination}
             onPageClick={() => console.log("Pagination clicked")}

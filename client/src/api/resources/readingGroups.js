@@ -17,6 +17,16 @@ export default {
     };
   },
 
+  annotations(id, filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/reading_groups/${id}/relationships/annotations`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   create(readingGroup) {
     return {
       endpoint: `/api/v1/reading_groups`,
