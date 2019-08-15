@@ -11,13 +11,6 @@ export default class Panel extends PureComponent {
     name: PropTypes.string
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      tailHighlight: false
-    };
-  }
-
   componentDidUpdate() {
     if (this.isPrimary && this.isHidden) {
       this.wrapperRef.style.marginLeft = -this.wrapperRef.offsetWidth + "px";
@@ -42,34 +35,10 @@ export default class Panel extends PureComponent {
     this.wrapperRef = el;
   };
 
-  handleTailHighlight = condition => {
-    if (condition) {
-      this.setState({
-        tailHighlight: true
-      });
-    }
-  };
-
-  handleTailBlur = condition => {
-    if (condition) {
-      this.setState({
-        tailHighlight: false
-      });
-    }
-  };
-
   renderChild(child, position) {
     const additionalProps = {
       key: position
     };
-    if (position === 0) {
-      additionalProps.onMouseEnter = () => {
-        this.handleTailHighlight(this.props.direction === "down");
-      };
-      additionalProps.onMouseLeave = () => {
-        this.handleTailBlur(true);
-      };
-    }
     return React.cloneElement(child, additionalProps);
   }
 
@@ -85,18 +54,17 @@ export default class Panel extends PureComponent {
 
   render() {
     const pageClass = classNames({
-      "popup-page": !this.isSecondary,
-      "popup-page-secondary": this.isSecondary,
-      hidden: this.isHidden,
-      bottom: this.props.direction === "up",
-      top: this.props.direction === "down"
+      "annotation-popup__panel": true,
+      "annotation-popup__panel--secondary": this.isSecondary,
+      "annotation-popup__panel--hidden": this.isHidden,
+      "annotation-popup__panel--bottom": this.props.direction === "up",
+      "annotation-popup__panel--top": this.props.direction === "down"
     });
 
     const tailClass = classNames({
-      tail: true,
-      "tail-down": this.props.direction === "up",
-      "tail-up": this.props.direction === "down",
-      highlight: this.state.tailHighlight
+      "annotation-popup__tail": true,
+      "annotation-popup__tail--down": this.props.direction === "up",
+      "annotation-popup__tail--up": this.props.direction === "down"
     });
 
     return (

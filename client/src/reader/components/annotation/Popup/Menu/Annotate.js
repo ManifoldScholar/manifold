@@ -36,13 +36,18 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     );
   }
 
-  rowHighlighted() {
+  rowHighlighted(direction) {
     if (!this.hasActiveAnnotation) return null;
     const isCreator = this.props.activeAnnotation.attributes
       .currentUserIsCreator;
     const label = isCreator ? "You Highlighted" : "A Reader Highlighted";
+    const className= classNames({
+      "annotation-popup__note": true,
+      "annotation-popup__note--top": direction === "up",
+      "annotation-popup__note--bottom": direction === "down"
+    });
     return (
-      <div key="notice" className="note">
+      <div key="notice" className={className}>
         {label}
       </div>
     );
@@ -50,7 +55,9 @@ export default class AnnotationPopupAnnotate extends PureComponent {
 
   rowHighlight() {
     const highlighted = this.hasActiveAnnotation;
-    const className = classNames({ selected: highlighted });
+    const className = classNames({
+      "annotation-popup__button--selected": highlighted
+    });
     const onClick = highlighted
       ? () => this.actions.destroyAnnotation(this.props.activeAnnotation)
       : this.actions.createHighlight;
@@ -118,7 +125,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
 
   rows(direction = "up") {
     const rows = [];
-    rows.push(this.rowHighlighted());
+    rows.push(this.rowHighlighted(direction));
     rows.push(this.rowHighlight());
     rows.push(this.rowAnnotate());
     rows.push(this.rowNotate());

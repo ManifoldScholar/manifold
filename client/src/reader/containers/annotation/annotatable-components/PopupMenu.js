@@ -69,7 +69,7 @@ export default class AnnotatablePopup extends PureComponent {
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}
           component="div"
-          className="popup-page-secondary-group"
+          className="annotation-popup__panel--secondary-group"
         >
           {this.state.activePanel === "secondary" ? (
             <Menu.Share

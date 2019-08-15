@@ -3,73 +3,91 @@
 
 // Just for components that deal with selecting an action to create an annotation
 .annotation-popup {
+  $panelBgColor: $neutral85;
+  $tailSize: 16px;
+
   position: absolute;
   margin-top: -30px;
   white-space: nowrap;
   visibility: hidden;
   user-select: none;
   opacity: 0;
-  transition: top $duration $timing, left $duration $timing,
+  transition:
+    top $duration $timing,
+    left $duration $timing,
     opacity $duration $timing;
 
-  &.visible {
+  &--visible {
     visibility: visible;
     opacity: 1;
   }
 
-  .popup-page {
-    transition: margin $duration $timing,
-      opacity $duration $timing,
-      visibility $duration $timing;
-
-    &.hidden {
-      visibility: hidden;
-      opacity: 0;
-    }
-  }
-
-  .popup-page, .popup-page-secondary {
+  &__panel {
+    @include boxShadow(0px, 12px, 22px, -3px, $neutralBlack, 0.39);
     position: relative;
     display: inline-block;
     vertical-align: top;
+    background-color: $panelBgColor;
+    border-radius: $panelRoundedRadius;
+    transition:
+      margin-left $duration $timing,
+      opacity $duration $timing,
+      visibility $duration $timing;
 
-    &.bottom {
+    &--hidden {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    &--secondary {
+      &.page-enter {
+        opacity: 0.01;
+
+        &.page-enter-active {
+          opacity: 1;
+          transition: opacity $durationFast $timing;
+        }
+      }
+
+      &.page-leave {
+        opacity: 1;
+
+        &.page-leave-active {
+          opacity: 0;
+          transition: opacity $duration $timing;
+        }
+      }
+    }
+
+    &--secondary-group {
+      display: inline-block;
+    }
+
+    &--bottom {
       vertical-align: bottom;
     }
+
+    &--top {}
   }
 
-  .popup-page-secondary-group {
-    display: inline-block;
-  }
-
-  .popup-page-secondary {
-    &.page-enter {
-      opacity: 0.01;
-
-      &.page-enter-active {
-        opacity: 1;
-        transition: opacity $durationFast $timing;
-      }
-    }
-
-    &.page-leave {
-      opacity: 1;
-
-      &.page-leave-active {
-        opacity: 0;
-        transition: opacity $duration $timing;
-      }
-    }
-  }
-
-  .note {
+  &__note {
     @include templateHead;
     padding: 1em 17px 1.063em;
     font-size: 16px;
     color: $neutralWhite;
     text-align: center;
     letter-spacing: 0.005em;
-    background-color: $neutral90;
+    background-color: $neutral95;
+
+    &--top {
+      border-top-left-radius: $panelRoundedRadius;
+      border-top-right-radius: $panelRoundedRadius;
+    }
+
+    &--bottom {
+      border-bottom-left-radius: $panelRoundedRadius;
+      border-bottom-right-radius: $panelRoundedRadius;
+    }
   }
 
   &__button {
@@ -78,35 +96,41 @@
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 8.5px 22px 8.5px 17px;
+    padding: 11px 24px 11px 15px;
     font-size: 14px;
     line-height: 23px;
     color: $neutralWhite;
     text-align: left;
-    background-color: $neutral80;
     transition: color $duration $timing, background-color $duration $timing;
 
     &--dark {
       color: $neutral70;
-      background-color: $neutral90;
+      background-color: $panelBgColor;
 
-      + .tail-down {
+      + .annotation-popup__tail--down {
         border-color: $neutral90 transparent transparent;
       }
     }
 
-    &:hover, &.selected {
-      color: $neutral80;
-      background-color: $accentPrimary;
+    &:first-of-type:not(.annotation-popup__button--selected) {
+      border-top-left-radius: $panelRoundedRadius;
+      border-top-right-radius: $panelRoundedRadius;
     }
 
-    & + &, + .button-group {
-      border-top: 1.5px $neutral90 solid;
+    &:last-of-type:not(.annotation-popup__button--selected) {
+      border-bottom-left-radius: $panelRoundedRadius;
+      border-bottom-right-radius: $panelRoundedRadius;
+    }
+
+    &:hover,
+    &--selected {
+      color: $panelBgColor;
+      background-color: $accentPrimary;
     }
   }
 
   &__button-icon {
-    margin-right: 8px;
+    margin-right: 13px;
   }
 
   .button-group {
@@ -115,34 +139,34 @@
     }
   }
 
-  .tail {
+  &__tail {
     position: absolute;
     left: 50%;
     display: block;
     width: 0;
     height: 0;
-    margin-left: -16px;
+    margin-left: -$tailSize;
     border-style: solid;
     transition: border-color $duration $timing;
 
-    &.tail-down {
+    &--down {
       top: 100%;
-      border-color: $neutral80 transparent transparent;
-      border-width: 16px 16px 0;
+      border-color: $panelBgColor transparent transparent;
+      border-width: $tailSize $tailSize 0;
+
+      &.annotation-popup__tail--highlight {
+        border-color: $accentPrimary transparent transparent;
+      }
     }
 
-    &.tail-up {
-      top: -16px;
-      border-color: transparent transparent $neutral80;
-      border-width: 0 16px 16px;
+    &--up {
+      top: -$tailSize;
+      border-color: transparent transparent $panelBgColor;
+      border-width: 0 $tailSize $tailSize;
+
+      &.annotation-popup__tail--highlight {
+        border-color: transparent transparent $accentPrimary;
+      }
     }
-  }
-
-  .tail-down.highlight, button:hover + .tail-down {
-    border-color: $accentPrimary transparent transparent;
-  }
-
-  .tail-up.highlight, button:first-child:hover ~ .tail-up {
-    border-color: transparent transparent $accentPrimary;
   }
 }

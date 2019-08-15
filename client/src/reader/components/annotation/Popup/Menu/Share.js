@@ -109,7 +109,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
         >
           <IconComposer
             icon="socialTwitter32"
-            size="default"
+            size={24}
             iconClass="annotation-popup__button-icon"
           />
           <span className="annotation-popup__button-text">{"Twitter"}</span>
@@ -124,7 +124,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
           >
             <IconComposer
               icon="socialFacebook32"
-              size="default"
+              size={24}
               iconClass="annotation-popup__button-icon"
             />
             <span className="annotation-popup__button-text">{"Facebook"}</span>

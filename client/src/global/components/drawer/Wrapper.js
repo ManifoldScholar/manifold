@@ -329,7 +329,7 @@ export default class DrawerWrapper extends PureComponent {
     if (this.props.lockScroll === "always") {
       return (
         <div className={this.props.identifier}>
-          <div className="drawer-overlay" />
+          <div className={this.overlayClasses} />
           {this.renderDrawer()}
         </div>
       );
