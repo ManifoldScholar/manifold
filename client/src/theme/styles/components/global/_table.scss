@@ -61,6 +61,8 @@
   }
 
   &__hover-arrow {
+    position: relative;
+    top: 2px;
     margin-left: 20px;
     opacity: 0;
     transition: opacity $duration $timing;
@@ -75,7 +77,8 @@
   }
 
   &__private-icon {
-    margin-bottom: 5px;
+    position: relative;
+    top: -2.5px;
     margin-left: 10px;
     color: $neutral70;
   }
@@ -127,6 +130,7 @@
     @include templateHead;
     position: relative;
     color: $neutral90;
+    vertical-align: baseline;
 
     @include respond($break85) {
       max-width: 245px;
@@ -157,7 +161,7 @@
       display: inline-block;
       max-width: calc(100% - 38px);
       height: 26px;
-      overflow-x: hidden;
+      overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -221,10 +225,41 @@
 
   &__right-unpadded {
     padding-right: 0;
+    vertical-align: middle;
   }
 
   &__pagination {
     padding-top: 30px;
+  }
+
+  &__avatar {
+    &--image {
+      position: relative;
+      top: 2px;
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+      border: 1px solid $neutral50;
+      border-radius: 100%;
+
+      @include respond($break85) {
+        margin-right: 0;
+      }
+    }
+
+    &--placeholder {
+      margin-right: 6px;
+      margin-left: -3px;
+
+      @include respond($break85) {
+        margin-right: -3px;
+      }
+
+      svg {
+        width: 37px;
+        height: 37px;
+      }
+    }
   }
 
   &__avatar-placeholder-container {
@@ -232,19 +267,6 @@
     margin-right: 8px;
     margin-left: -2px;
     color: $neutral50;
-  }
-
-  &__avatar-image-container {
-    width: 32px;
-    margin-right: 10px;
-    border: 1px solid $neutral50;
-    border-radius: 100%;
-  }
-
-  &__avatar-base-container {
-    @include respond($break85) {
-      margin-right: 0;
-    }
   }
 
   &__hide-desktop {

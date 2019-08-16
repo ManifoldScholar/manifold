@@ -2,10 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Table from "global/components/table/index";
 import Column from "global/components/table/Column";
-import TableAvatar from "global/components/table/Avatar";
+import Avatar from "global/components/avatar";
 import NameWithArrow from "global/components/table/NameWithArrow";
 import RemoveMemberButton from "./RemoveMember";
 import get from "lodash/get";
+import classNames from "classnames";
 
 export default class MembersTable extends PureComponent {
   static propTypes = {
@@ -23,6 +24,14 @@ export default class MembersTable extends PureComponent {
 
   get onPageClick() {
     return this.props.onPageClick;
+  }
+
+  get alignCenter() {
+    return "center";
+  }
+
+  avatarUrl(model) {
+    return get(model, "relationships.user.attributes.avatarStyles.mediumSquare");
   }
 
   roleFor(readingGroupMembership) {
@@ -50,11 +59,16 @@ export default class MembersTable extends PureComponent {
           cellSize="cellSmall"
         >
           {({ model }) => (
-            <TableAvatar
-              avatar={get(
-                model,
-                "relationships.user.attributes.avatarStyles.mediumSquare"
-              )}
+            <Avatar
+              url={this.avatarUrl(model)}
+              className={
+                classNames({
+                  "table__avatar": true,
+                  "table__hide-mobile": true,
+                  "table__avatar--image": this.avatarUrl(model),
+                  "table__avatar--placeholder": !this.avatarUrl(model)
+                })
+              }
             />
           )}
         </Column>
@@ -68,9 +82,16 @@ export default class MembersTable extends PureComponent {
           {({ model }) => {
             return (
               <React.Fragment>
-                <TableAvatar
-                  avatar={this.avatarUrl}
-                  viewportVisibility="hideDesktop"
+                <Avatar
+                  url={this.avatarUrl(model)}
+                  className={
+                    classNames({
+                      "table__avatar": true,
+                      "table__hide-desktop": true,
+                      "table__avatar--image": this.avatarUrl(model),
+                      "table__avatar--placeholder": !this.avatarUrl(model)
+                    })
+                  }
                 />
                 <NameWithArrow
                   name={get(model, "relationships.user.attributes.fullName")}

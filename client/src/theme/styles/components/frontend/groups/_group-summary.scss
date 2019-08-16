@@ -3,19 +3,31 @@
   padding: 20px;
 
   @include respond($break85) {
-    padding: 30px;
+    padding: 24px 30px;
   }
 
   &__list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-row-gap: 8px;
+    margin-top: 0;
+    margin-bottom: 0;
 
     @include respond($break85) {
       display: inline-grid;
       grid-template-columns: auto auto auto;
       grid-column-gap: 64px;
       grid-row-gap: 18px;
+    }
+  }
+
+  &__item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include respond($break85) {
+      display: block;
     }
   }
 
@@ -78,13 +90,14 @@
     padding-left: 32px;
 
     @include respond($break85) {
-      padding-left: 0;
+      padding-left: 10px;
     }
   }
 
   &__private-icon {
+    position: relative;
+    top: -2.5px;
     color: $neutral70;
     margin-left: 10px;
-    margin-bottom: 5px;
   }
 }
