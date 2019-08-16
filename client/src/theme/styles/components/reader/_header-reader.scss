@@ -253,8 +253,8 @@
 
     .reader-return-menu {
       position: absolute;
-      transform: translateX(-100%);
       transition: transform $duration $timing;
+      transform: translateX(-100%);
     }
 
     .panel-visible .reader-return-menu {
@@ -313,8 +313,8 @@
 
     .user-menu {
       position: absolute;
-      transform: translateX(100%);
       transition: transform $duration $timing;
+      transform: translateX(100%);
 
       &__link {
         @include respond($break40) {

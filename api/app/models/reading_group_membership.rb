@@ -8,7 +8,9 @@ class ReadingGroupMembership < ApplicationRecord
   belongs_to :user, optional: false
   belongs_to :reading_group, optional: false, counter_cache: :memberships_count
 
+  # rubocop:disable Rails/HasManyOrHasOneDependent
   has_one :reading_group_membership_count
+  # rubocop:enable Rails/HasManyOrHasOneDependent
 
   delegate :annotations_count, to: :reading_group_membership_count
   delegate :highlights_count, to: :reading_group_membership_count

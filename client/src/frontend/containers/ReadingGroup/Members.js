@@ -32,18 +32,26 @@ class ReadingGroupsMembersContainer extends Component {
     return Promise.all([one]);
   };
 
-  static mapStateToProps = (state, ownProps) => {
+  static mapStateToProps = state => {
     return {
       readingGroupMembers: select(
         requests.feReadingGroupMembers,
         state.entityStore
       ),
-      meta: meta(requests.feReadingGroupMembers, state.entityStore)
+      readingGroupMembersMeta: meta(
+        requests.feReadingGroupMembers,
+        state.entityStore
+      )
     };
   };
 
+  /* eslint-disable no-console */
   render() {
-    const { readingGroup, readingGroupMembers, meta } = this.props;
+    const {
+      readingGroup,
+      readingGroupMembers,
+      readingGroupMembersMeta
+    } = this.props;
     if (!readingGroupMembers) return null;
 
     return (
@@ -58,13 +66,14 @@ class ReadingGroupsMembersContainer extends Component {
           <MembersTable
             readingGroup={readingGroup}
             members={readingGroupMembers}
-            pagination={meta.pagination}
+            pagination={readingGroupMembersMeta.pagination}
             onPageClick={() => console.log("Pagination clicked")}
           />
         </div>
       </React.Fragment>
     );
   }
+  /* eslint-enable no-console */
 }
 
 export default connectAndFetch(ReadingGroupsMembersContainer);

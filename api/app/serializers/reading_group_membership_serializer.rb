@@ -5,6 +5,4 @@ class ReadingGroupMembershipSerializer < ApplicationSerializer
   attributes :id, :annotations_count, :highlights_count
   has_one :user, serializer: UserSerializer
 
-
-
 end

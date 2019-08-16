@@ -41,7 +41,7 @@ export default class ReadingGroupForm extends React.PureComponent {
           prompt="Set privacy for all annotations from this group."
           name="attributes[privacy]"
           defaultValue={"private"}
-          instructions={`Annotations in public groups can be viewed by everyone. Annotations in 
+          instructions={`Annotations in public groups can be viewed by everyone. Annotations in
               private groups can only be viewed by group members. Annotations in anonymous
               groups are anonymous to everyone except the group creator.`}
           options={[
@@ -67,13 +67,17 @@ export default class ReadingGroupForm extends React.PureComponent {
                 {
                   label: "regenerate",
                   onClick: () => {
+                    /* eslint-disable no-console */
                     console.log("regenerate");
+                    /* eslint-enable no-console */
                   }
                 },
                 {
                   label: "copy",
                   onClick: () => {
+                    /* eslint-disable no-console */
                     console.log("copied");
+                    /* eslint-enable no-console */
                   }
                 }
               ]}
@@ -86,7 +90,9 @@ export default class ReadingGroupForm extends React.PureComponent {
                 {
                   label: "copy",
                   onClick: () => {
+                    /* eslint-disable no-console */
                     console.log("copied");
+                    /* eslint-enable no-console */
                   }
                 }
               ]}

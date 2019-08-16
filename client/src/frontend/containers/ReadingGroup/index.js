@@ -5,10 +5,11 @@ import { entityStoreActions } from "actions";
 import { grab } from "utils/entityUtils";
 import { meAPI, requests } from "api";
 import get from "lodash/get";
+
 const { request } = entityStoreActions;
 
 class ReadingGroup extends Component {
-  static fetchData = (getState, dispatch, location, match) => {
+  static fetchData = (getState, dispatch) => {
     const readingGroupsFetch = meAPI.readingGroups();
     const readingGroupsAction = request(
       readingGroupsFetch,

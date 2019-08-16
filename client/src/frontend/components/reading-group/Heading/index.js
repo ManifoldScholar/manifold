@@ -1,10 +1,8 @@
 import React from "react";
 import Utility from "global/components/utility";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import classNames from "classnames";
 import GroupNavButtons from "./GroupNavButtons";
-import isNull from "lodash/isNull";
 
 export default class Heading extends React.PureComponent {
   static propTypes = {

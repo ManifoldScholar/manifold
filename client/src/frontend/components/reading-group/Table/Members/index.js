@@ -31,7 +31,10 @@ export default class MembersTable extends PureComponent {
   }
 
   avatarUrl(model) {
-    return get(model, "relationships.user.attributes.avatarStyles.mediumSquare");
+    return get(
+      model,
+      "relationships.user.attributes.avatarStyles.mediumSquare"
+    );
   }
 
   roleFor(readingGroupMembership) {
@@ -43,8 +46,6 @@ export default class MembersTable extends PureComponent {
   }
 
   render() {
-    const { readingGroup } = this.props;
-
     return (
       <Table
         models={this.members}
@@ -61,14 +62,12 @@ export default class MembersTable extends PureComponent {
           {({ model }) => (
             <Avatar
               url={this.avatarUrl(model)}
-              className={
-                classNames({
-                  "table__avatar": true,
-                  "table__hide-mobile": true,
-                  "table__avatar--image": this.avatarUrl(model),
-                  "table__avatar--placeholder": !this.avatarUrl(model)
-                })
-              }
+              className={classNames({
+                table__avatar: true,
+                "table__hide-mobile": true,
+                "table__avatar--image": this.avatarUrl(model),
+                "table__avatar--placeholder": !this.avatarUrl(model)
+              })}
             />
           )}
         </Column>
@@ -84,14 +83,12 @@ export default class MembersTable extends PureComponent {
               <React.Fragment>
                 <Avatar
                   url={this.avatarUrl(model)}
-                  className={
-                    classNames({
-                      "table__avatar": true,
-                      "table__hide-desktop": true,
-                      "table__avatar--image": this.avatarUrl(model),
-                      "table__avatar--placeholder": !this.avatarUrl(model)
-                    })
-                  }
+                  className={classNames({
+                    table__avatar: true,
+                    "table__hide-desktop": true,
+                    "table__avatar--image": this.avatarUrl(model),
+                    "table__avatar--placeholder": !this.avatarUrl(model)
+                  })}
                 />
                 <NameWithArrow
                   name={get(model, "relationships.user.attributes.fullName")}
@@ -132,7 +129,7 @@ export default class MembersTable extends PureComponent {
           rowPosition={3}
           cellSize={"cellMedium"}
         >
-          {({ model }) => <RemoveMemberButton />}
+          {({ model }) => <RemoveMemberButton readingGroupMembership={model} />}
         </Column>
       </Table>
     );

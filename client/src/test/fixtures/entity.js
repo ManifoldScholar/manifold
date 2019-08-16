@@ -575,7 +575,6 @@ const defaults = {
 
 const buildEntity = (entityType, id = null, attributes, relationships) => {
   const entity = defaults[entityType];
-  console.log(entityType, "type");
   const out = {
     type: entity.type,
     id: id || uuid.v1(),

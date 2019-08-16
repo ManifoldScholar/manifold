@@ -35,7 +35,12 @@
   $menuWidth: 235px;
   $tailHeight: 17px;
 
+  // browse styles
+  position: absolute;
+  right: -20px;
+
   min-width: $menuWidth;
+  white-space: nowrap;
   background-color: $neutral10;
 
   .header-app & {
@@ -86,11 +91,6 @@
       color: $accentPrimary;
     }
   }
-
-  // browse styles
-  position: absolute;
-  right: -20px;
-  white-space: nowrap;
 
   @include respond($break40) {
     right: -24px;

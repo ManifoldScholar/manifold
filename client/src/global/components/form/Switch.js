@@ -163,7 +163,7 @@ class FormSwitch extends Component {
                 type="checkbox"
                 id={`${this.idPrefix}-${id}`}
                 checked={this.checked}
-                onChange={event => this.handleChange()}
+                onChange={eventIgnored => this.handleChange()}
               />
               {this.props.labelPos === "below" && this.renderLabelText()}
               {this.showCheckbox && this.renderCheckboxIndicator()}

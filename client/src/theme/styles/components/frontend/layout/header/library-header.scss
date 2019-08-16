@@ -1,7 +1,7 @@
 /* stylelint-disable property-no-vendor-prefix */
 .library-header {
   @supports (position: sticky) {
-    @include boxShadow(0px, -10px, 20px, 7px, $neutralBlack, 0.25);
+    @include boxShadow(0, -10px, 20px, 7px, $neutralBlack, 0.25);
   }
 
   &--light {
@@ -14,19 +14,19 @@
 
   &__inner {
     @include headerContainerPrimary;
-    width: 100%;
     display: -ms-grid;
     display: grid;
-    -ms-grid-rows: auto;
-    -ms-grid-columns: 1fr auto 1fr;
     grid-template:
       // logo is in _header-logo.scss
       'logo breadcrumbs hamburger' / 1fr auto 1fr;
+    width: 100%;
     height: 100%;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 1fr auto 1fr;
 
     @include respond($break75) {
-      -ms-grid-columns: max-content max-content 1fr max-content;
       grid-template: 'logo site-nav . user-nav' / max-content max-content 1fr max-content;
+      -ms-grid-columns: max-content max-content 1fr max-content;
     }
   }
 

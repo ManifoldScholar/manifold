@@ -7,26 +7,30 @@ class UserSerializer < ApplicationSerializer
 
   def include_private_data?
     return false unless authenticated?
-    current_user.updatable_by?(object) || is_current_user?
+    current_user.updatable_by?(object) || current_user_is_creator?
   end
 
   def email
     return nil unless include_private_data?
+
     object.email
   end
 
   def created_at
     return nil unless include_private_data?
+
     object.created_at
   end
 
   def role
     return nil unless include_private_data?
+
     object.role
   end
 
   def kind
     return nil unless include_private_data?
+
     object.kind
   end
 

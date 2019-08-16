@@ -37,9 +37,9 @@
 
 @mixin booleanPrimary($height) {
   position: relative;
+  display: block;
   width: $height * 2;
   height: $height;
-  display: block;
   cursor: pointer;
   // Disabled to use built-in function
   // scss-lint:disable NameFormat

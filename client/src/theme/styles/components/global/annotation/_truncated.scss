@@ -31,15 +31,15 @@
   &__expand-button {
     @include buttonTrimPrimary;
     position: relative;
-    margin-top: -8px;
-    color: $neutralOffBlack;
-    font-size: 13px;
-    visibility: visible;
-    opacity: 1;
     padding-top: 11px;
     padding-bottom: 0;
+    margin-top: -8px;
+    font-size: 13px;
+    color: $neutralOffBlack;
+    visibility: visible;
     border: 0; // OD
     border-top: 1px solid $neutral90;
+    opacity: 1;
     transition: margin $duration linear,
       color $duration $timing,
       border-color $duration $timing,

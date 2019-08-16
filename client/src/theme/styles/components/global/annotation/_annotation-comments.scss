@@ -42,6 +42,7 @@
 
     &--secondary {
       color: $sp40Tertiary;
+
       &--active, &:focus-visible {
         color: $sp40Tertiary;
       }

@@ -5,7 +5,7 @@ class ReadingGroupMembershipAuthorizer < ApplicationAuthorizer
     true
   end
 
-  def self.readable_by?(user, _options = {})
+  def self.readable_by?(_user, _options = {})
     true
   end
 

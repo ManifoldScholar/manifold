@@ -3,10 +3,10 @@
     @include templateHead;
     @include drawerPadding(padding-right);
     @include drawerPadding(padding-left);
-    color: $neutral90;
-    line-height: 1.3;
-    word-wrap: break-word;
     font-size: 16px;
+    line-height: 1.3;
+    color: $neutral90;
+    word-wrap: break-word;
 
     @include respond($break95) {
       padding-right: 2.38vw;
@@ -23,11 +23,11 @@
     }
 
     &--dark {
+      padding-top: 23px;
+      padding-bottom: 23px;
       background-color: $neutral10;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
-      padding-top: 23px;
-      padding-bottom: 23px;
 
       @include respond($break80) {
         padding-top: 31px;
@@ -36,9 +36,9 @@
     }
 
     &--light {
-      background-color: $neutral05;
       padding-top: 30px;
       padding-bottom: 26px;
+      background-color: $neutral05;
 
       @include respond($break80) {
         padding-top: 41px;
@@ -53,8 +53,8 @@
 
   &__highlight-text {
     width: 100%;
-    background-color: $sp20PrimaryPale;
     line-height: 1.6;
+    background-color: $sp20PrimaryPale;
   }
 
   &__hover-link {
@@ -106,10 +106,10 @@
   &__button-absolute {
     @include buttonUnstyled;
     position: absolute;
-    width: 100%;
-    height: 100%;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   &__source-summary {
@@ -118,7 +118,7 @@
 
   &__source-summary-text {
     @include templateCopy
-    font-size: 14px;
+      font-size: 14px;
 
     @include respond($break80) {
       font-size: 16px;
@@ -132,7 +132,7 @@
   }
 
   &__action-buttons {
-    color: $neutral70;
     position: relative;
+    color: $neutral70;
   }
 }

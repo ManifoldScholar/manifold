@@ -23,7 +23,7 @@
   }
 
   &__panel {
-    @include boxShadow(0px, 12px, 22px, -3px, $neutralBlack, 0.39);
+    @include boxShadow(0, 12px, 22px, -3px, $neutralBlack, 0.39);
     position: relative;
     display: inline-block;
     vertical-align: top;
@@ -85,8 +85,8 @@
     }
 
     &--bottom {
-      border-bottom-left-radius: $panelRoundedRadius;
       border-bottom-right-radius: $panelRoundedRadius;
+      border-bottom-left-radius: $panelRoundedRadius;
     }
   }
 
@@ -118,8 +118,8 @@
     }
 
     &:last-of-type:not(.annotation-popup__button--selected) {
-      border-bottom-left-radius: $panelRoundedRadius;
       border-bottom-right-radius: $panelRoundedRadius;
+      border-bottom-left-radius: $panelRoundedRadius;
     }
 
     &:hover,

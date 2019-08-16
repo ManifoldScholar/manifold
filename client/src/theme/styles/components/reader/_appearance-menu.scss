@@ -23,10 +23,10 @@
 
   &__heading {
     @include templateHead;
-    font-size: 15px;
-    color: $neutral75;
-    font-weight: $medium;
     margin: 0;
+    font-size: 15px;
+    font-weight: $medium;
+    color: $neutral75;
   }
 
   &__list {
@@ -43,7 +43,6 @@
       border-top: none;
 
       @include respond($break50) {
-
         &:last-child {
           padding: 0;
           border-top: none;
@@ -64,10 +63,10 @@
   }
 
   &__radio-stack {
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
   }
 
   &__radio-input {
@@ -106,19 +105,19 @@
   &__primary-hover-button {
     transition: all $durationFast $timing;
 
-    &:hover:not(:disabled):not([aria-disabled="true"]) {
-      background-color: $accentPrimary;
+    &:hover:not(:disabled):not([aria-disabled='true']) {
       color: $neutralWhite;
+      background-color: $accentPrimary;
     }
   }
 
   &__font-control-group {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-row-gap: 23px;
     grid-template-rows: auto auto;
+    grid-template-columns: 1fr auto;
     padding-top: 16px;
     padding-bottom: 16px;
-    grid-row-gap: 23px;
 
     @include respond($break50) {
       grid-row-gap: 29px;
@@ -178,30 +177,30 @@
 
   // Set of buttons for setting font-size
   &__font-size-button {
-      @include buttonUnstyled;
-      width: 44px;
-      height: 44px;
-      vertical-align: top;
-      color: $neutral80;
-      background-color: $neutralWhite;
-      border-radius: 100%;
-      transition: color $durationFast $timing, background-color $durationFast $timing;
+    @include buttonUnstyled;
+    width: 44px;
+    height: 44px;
+    color: $neutral80;
+    vertical-align: top;
+    background-color: $neutralWhite;
+    border-radius: 100%;
+    transition: color $durationFast $timing, background-color $durationFast $timing;
 
-      @include respond($break50) {
-        width: 35px;
-        height: 35px;
-      }
+    @include respond($break50) {
+      width: 35px;
+      height: 35px;
+    }
 
-      &:hover, &:focus-visible {
-        color: $neutralWhite;
-        background-color: $accentPrimary;
-        outline: 0;
-      }
+    &:hover, &:focus-visible {
+      color: $neutralWhite;
+      background-color: $accentPrimary;
+      outline: 0;
+    }
 
-      &:disabled {
-        color: $neutral40;
-        background-color: $neutral20;
-      }
+    &:disabled {
+      color: $neutral40;
+      background-color: $neutral20;
+    }
 
     @include respond($break50) {
       width: 35px;
@@ -213,10 +212,10 @@
     }
 
     &:disabled,
-    &[aria-disabled="true"] {
+    &[aria-disabled='true'] {
       color: $neutral40;
-      background-color: $neutral20;
       cursor: default;
+      background-color: $neutral20;
     }
 
     &:not(:first-child) {
@@ -302,7 +301,7 @@
     background-color: $neutralWhite;
 
     &:hover {
-      &:not([aria-disabled="true"]) {
+      &:not([aria-disabled='true']) {
         outline: 0;
 
         > svg path {
@@ -311,9 +310,10 @@
       }
     }
 
-    &[aria-disabled="true"] {
-      background-color: $neutral20;
+    &[aria-disabled='true'] {
       cursor: default;
+      background-color: $neutral20;
+
       > svg {
         opacity: 0.5;
       }
@@ -322,13 +322,13 @@
 
   &__reset-button {
     @include templateHead;
-    font-size: 13px;
-    text-transform: uppercase;
-    font-weight: $semibold;
-    letter-spacing: 0.077em;
     width: 100%;
     padding: 12px 45px 10px;
+    font-size: 13px;
+    font-weight: $semibold;
     color: $neutral75;
+    text-transform: uppercase;
+    letter-spacing: 0.077em;
     background-color: $neutral05;
     transition: all $timing $duration;
 
@@ -337,7 +337,7 @@
     }
 
     &:disabled {
-      color: transparentize($neutral75, .5);
+      color: transparentize($neutral75, 0.5);
     }
   }
 

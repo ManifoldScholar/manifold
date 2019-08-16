@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import GlobalForm from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
 import connectAndFetch from "utils/connectAndFetch";
 import { meAPI, requests } from "api";
 import { select } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
+
 const { request } = entityStoreActions;
 import Developer from "global/components/developer";
 import isNil from "lodash/isNil";
@@ -14,19 +14,18 @@ import isNil from "lodash/isNil";
 class AnnotationEditor extends PureComponent {
   static displayName = "Annotation.Editor";
 
-  static fetchData = (getState, dispatch, location, match) => {
+  static fetchData = (getState, dispatch) => {
     const readingGroupsFetch = meAPI.readingGroups();
     const readingGroupsAction = request(
       readingGroupsFetch,
       requests.feMyReadingGroups
     );
-    console.log("test test test");
     const { promise: one } = dispatch(readingGroupsAction);
     const promises = [one];
     return Promise.all(promises);
   };
 
-  static mapStateToProps = (state, ownProps) => {
+  static mapStateToProps = state => {
     return {
       readingGroups: select(requests.feMyReadingGroups, state.entityStore)
     };
@@ -45,7 +44,6 @@ class AnnotationEditor extends PureComponent {
   };
 
   constructor(props) {
-    console.log(props.annotation);
     super(props);
     this.state = {
       readingGroupId: props.annotation.attributes.readingGroupId || null,
@@ -119,10 +117,6 @@ class AnnotationEditor extends PureComponent {
   }
 
   render() {
-    const checkClass = classNames("form-toggle", "checkbox", {
-      checked: this.state.private
-    });
-
     const privateIcon = (
       <IconComposer
         icon="lock16"
@@ -159,26 +153,30 @@ class AnnotationEditor extends PureComponent {
           <div className="utility">
             {this.props.readingGroups && (
               <ul>
-                <li
-                  style={this.isSelected("public") ? { color: "red" } : null}
-                  onClick={this.setPrivacyPublic}
-                >
-                  My Public Annotations
+                <li style={this.isSelected("public") ? { color: "red" } : null}>
+                  <button type="button" onClick={this.setPrivacyPublic}>
+                    My Public Annotations
+                  </button>
                 </li>
                 <li
                   style={this.isSelected("private") ? { color: "red" } : null}
-                  onClick={this.setPrivacyPrivate}
                 >
-                  My Private Annotations {privateIcon}
+                  <button type="button" onClick={this.setPrivacyPrivate}>
+                    My Private Annotations {privateIcon}
+                  </button>
                 </li>
                 {this.props.readingGroups.map(rg => (
                   <li
                     style={this.isSelected(rg.id) ? { color: "red" } : null}
-                    onClick={event => this.setReadingGroup(event, rg)}
                     key={rg.id}
                   >
-                    {rg.attributes.name}
-                    {rg.attributes.privacy === "private" && privateIcon}
+                    <button
+                      type="button"
+                      onClick={event => this.setReadingGroup(event, rg)}
+                    >
+                      {rg.attributes.name}
+                      {rg.attributes.privacy === "private" && privateIcon}
+                    </button>
                   </li>
                 ))}
               </ul>

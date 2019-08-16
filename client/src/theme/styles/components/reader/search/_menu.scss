@@ -24,8 +24,8 @@
     &::after {
       @include tailUp($neutral10, $tailHeight);
       position: absolute;
-      bottom: 14px;
       top: calc(100% - #{$tailHeight});
+      bottom: 14px;
       left: 50%;
       display: block;
       margin-left: -15px;
@@ -36,15 +36,21 @@
     }
 
     &.button-active::after {
-      opacity: 1;
-      transform: translateY(0px);
       z-index: 1;
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
 
 .search-menu {
+
+  // browse styles
+  position: absolute;
+  right: -$containerPaddingRespGlobal;
   width: 100vw;
+  max-width: 100vw;
+  white-space: nowrap;
   background-color: $neutral10;
 
   .header-app & {
@@ -73,12 +79,6 @@
   @include respond($break70) {
     width: auto;
   }
-
-  // browse styles
-  position: absolute;
-  right: -$containerPaddingRespGlobal;
-  max-width: 100vw;
-  white-space: nowrap;
 
   @include respond($break120) {
     right: -$containerPaddingFull;

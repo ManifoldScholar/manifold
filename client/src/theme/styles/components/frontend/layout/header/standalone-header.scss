@@ -1,14 +1,14 @@
 /* stylelint-disable property-no-vendor-prefix */
 .standalone-header {
-  background-color: $neutral100;
   position: fixed;
   left: 0;
   width: 100%;
+  background-color: $neutral100;
 
   &--visible {
-    transition: background-color $duration $timing;
     position: fixed;
     background-color: $neutral100;
+    transition: background-color $duration $timing;
   }
 
   &--dark {
@@ -16,14 +16,14 @@
   }
 
   &--light:not(.standalone-header--hidden) {
-    @include boxShadow(0px, -10px, 20px, 7px, $neutralBlack, 0.25);
+    @include boxShadow(0, -10px, 20px, 7px, $neutralBlack, 0.25);
     background-color: $neutral10;
   }
 
   &--hidden {
-    transition: background-color $duration $timing;
-    background-color: transparent;
     position: fixed;
+    background-color: transparent;
+    transition: background-color $duration $timing;
   }
 
   &__shim {
@@ -32,27 +32,27 @@
 
   &__inner {
     @include headerContainerPrimary;
+
+    display: -ms-grid;
+    display: grid;
+    grid-template:
+      'heading . hamburger' / auto minmax(75px, 1fr) max-content;
+    padding-top: standalone-header-layout(padding-top-mobile);
+    padding-bottom: standalone-header-layout(padding-top-mobile);
     color: $neutralWhite;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: auto minmax(25px, 1fr) max-content;
 
 
     .standalone-header--light & {
       color: $neutral80;
     }
 
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-rows: auto;
-    -ms-grid-columns: auto minmax(25px, 1fr) max-content;
-    grid-template:
-      'heading . hamburger' / auto minmax(75px, 1fr) max-content;
-    padding-top: standalone-header-layout(padding-top-mobile);
-    padding-bottom: standalone-header-layout(padding-top-mobile);
-
     @include respond($break75) {
-      -ms-grid-columns: auto minmax(75px, 1fr) max-content;
       grid-template:
         'heading . user-nav' / auto minmax(75px, 1fr) max-content;
       padding-bottom: 0;
+      -ms-grid-columns: auto minmax(75px, 1fr) max-content;
     }
 
     &--hidden {
@@ -69,10 +69,10 @@
     @include templateCopy;
     position: relative;
     top: 3px;
-    transition: opacity $duration $timing;
-    opacity: 1;
     grid-area: heading;
     line-height: 1.188;
+    opacity: 1;
+    transition: opacity $duration $timing;
 
     @include respond($break75) {
     }
@@ -84,8 +84,8 @@
   }
 
   &__title-link {
-    line-height: 1.45;
     hyphens: none;
+    line-height: 1.45;
   }
 
   &__title {
@@ -120,12 +120,12 @@
   }
 
   .mobile-nav-toggle {
+    align-self: baseline;
     grid-area: hamburger;
     -ms-grid-row: 1;
     -ms-grid-column: 3;
     -ms-grid-column-align: end;
     justify-self: flex-end;
     -ms-grid-row-align: baseline;
-    align-self: baseline;
   }
 }

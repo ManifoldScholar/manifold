@@ -12,10 +12,10 @@
 
   &:hover,
   &:focus-visible {
-    outline: 0;
     color: $neutral90;
     /* stylelint-disable-next-line declaration-no-important */
     background-color: $accentPrimary !important; // overrides component's inline value
+    outline: 0;
   }
 
   &__inner {
@@ -30,11 +30,11 @@
     position: relative;
     top: -2px;
     display: block;
+    overflow: hidden;
     font-size: 16px;
     font-weight: $semibold;
     line-height: 1.35;
-    white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }

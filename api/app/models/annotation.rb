@@ -103,6 +103,7 @@ class Annotation < ApplicationRecord
 
   def reading_group_membership
     return nil unless reading_group_id
+
     ReadingGroupMembership.find_by(user: creator, reading_group: reading_group)
   end
 

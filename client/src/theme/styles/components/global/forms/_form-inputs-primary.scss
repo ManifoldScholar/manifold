@@ -15,22 +15,22 @@
     }
 
     label {
+      grid-area: label;
       -ms-grid-row: 1;
       -ms-grid-column: 1;
       -ms-grid-column-span: 2;
-      grid-area: label;
     }
 
     input {
+      grid-area: input;
       -ms-grid-row: 2;
       -ms-grid-column: 1;
-      grid-area: input;
     }
 
     .form-input__action-group {
+      grid-area: actions;
       -ms-grid-row: 2;
       -ms-grid-column: 2;
-      grid-area: actions;
     }
   }
 
@@ -66,9 +66,9 @@
     font-size: 12px;
     font-weight: $semibold;
     color: $neutral75;
-    background-color: $neutral10;
     text-decoration: none;
     letter-spacing: 0.125em;
+    background-color: $neutral10;
     border: 1px solid $neutral10;
     border-radius: 16px;
     transition:

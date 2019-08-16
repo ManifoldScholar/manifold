@@ -61,10 +61,6 @@ export default class TableCell extends React.PureComponent {
     return "table__row-link";
   }
 
-  get link() {
-    return this.props.link;
-  }
-
   get isTable() {
     return this.context.markup === "table";
   }

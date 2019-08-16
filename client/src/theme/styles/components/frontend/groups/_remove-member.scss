@@ -2,10 +2,10 @@
   @include buttonUnstyled;
   @include formLabelPrimary;
   position: relative;
-  border: 1px solid $sp40Tertiary;
-  color: $sp40Tertiary;
-  border-radius: 12px;
   padding: 4px 15px 5px;
+  color: $sp40Tertiary;
+  border: 1px solid $sp40Tertiary;
+  border-radius: 12px;
   transition: all $duration $timing;
 
   &:hover,

@@ -8,7 +8,9 @@ class ReadingGroup < ApplicationRecord
   has_many :reading_group_memberships, dependent: :destroy
   has_many :users, through: :reading_group_memberships
   has_many :annotations, dependent: :nullify
+  # rubocop:disable Rails/HasManyOrHasOneDependent
   has_one :reading_group_count
+  # rubocop:enable Rails/HasManyOrHasOneDependent
 
   delegate :annotations_count, to: :reading_group_count
   delegate :highlights_count, to: :reading_group_count
@@ -18,7 +20,7 @@ class ReadingGroup < ApplicationRecord
   before_save :ensure_creator_membership
 
   def private?
-    privacy === "private"
+    privacy == "private"
   end
 
   private

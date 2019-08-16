@@ -9,7 +9,6 @@ import queryString from "query-string";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import Annotation from "global/components/Annotation";
-import { build } from "../../../helpers/storybook/exports";
 
 const { request } = entityStoreActions;
 const defaultPage = 1;
@@ -34,7 +33,7 @@ class ReadingGroupsDetailContainer extends Component {
     return Promise.all([one]);
   };
 
-  static mapStateToProps = (state, ownProps) => {
+  static mapStateToProps = state => {
     return {
       annotations: select(
         requests.feReadingGroupAnnotations,
@@ -43,8 +42,9 @@ class ReadingGroupsDetailContainer extends Component {
       meta: meta(requests.feReadingGroupAnnotations, state.entityStore)
     };
   };
+
   render() {
-    const { readingGroup, annotations } = this.props;
+    const { readingGroup, annotations, dispatch } = this.props;
 
     return (
       <React.Fragment>
@@ -72,7 +72,7 @@ class ReadingGroupsDetailContainer extends Component {
         {annotations && (
           <Annotation.List.Default
             annotations={annotations}
-            dispatch={() => console.log("dispatched")}
+            dispatch={dispatch}
           />
         )}
       </React.Fragment>

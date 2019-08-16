@@ -7,6 +7,7 @@ class AnnotationAuthorizer < ApplicationAuthorizer
 
   def creatable_by?(user, _options = {})
     return false unless known_user?(user)
+
     allowed = true
     allowed = false if annotation_in_reading_group? && user_is_not_in_reading_group?(user)
     allowed = false if annotation_is_resource_annotation? && !user_can_notate_text?(user)
@@ -31,6 +32,7 @@ class AnnotationAuthorizer < ApplicationAuthorizer
   def readable_by?(user, _options = {})
     return true if user&.created?(resource)
     return user_is_in_reading_group?(user) if annotation_in_reading_group? && reading_group_is_private?
+
     resource.public?
   end
 

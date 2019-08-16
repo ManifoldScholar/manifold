@@ -12,8 +12,8 @@ export default class Avatar extends Component {
   };
 
   get baseClass() {
-    return "avatar"
-  };
+    return "avatar";
+  }
 
   get className() {
     return classNames(this.baseClass, this.props.className);

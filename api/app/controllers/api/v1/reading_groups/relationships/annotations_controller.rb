@@ -26,8 +26,7 @@ module Api
 
           private
 
-          def location
-          end
+          def location; end
 
           def set_reading_group
             @reading_group = ReadingGroup.find(params[:reading_group_id])

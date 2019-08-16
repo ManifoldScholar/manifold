@@ -41,7 +41,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     const isCreator = this.props.activeAnnotation.attributes
       .currentUserIsCreator;
     const label = isCreator ? "You Highlighted" : "A Reader Highlighted";
-    const className= classNames({
+    const className = classNames({
       "annotation-popup__note": true,
       "annotation-popup__note--top": direction === "up",
       "annotation-popup__note--bottom": direction === "down"

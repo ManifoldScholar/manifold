@@ -37,7 +37,7 @@ class User < ApplicationRecord
            dependent: :nullify, inverse_of: :creator
   has_many :created_flags, class_name: "Flag", foreign_key: "creator_id",
            dependent: :destroy, inverse_of: :creator
-  has_many :reading_group_memberships
+  has_many :reading_group_memberships, dependent: :destroy
   has_many :reading_groups, through: :reading_group_memberships
 
   # rubocop:disable Rails/HasManyOrHasOneDependent

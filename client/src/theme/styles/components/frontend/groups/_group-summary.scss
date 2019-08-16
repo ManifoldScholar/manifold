@@ -8,16 +8,16 @@
 
   &__list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     grid-row-gap: 8px;
+    grid-template-columns: 1fr 1fr;
     margin-top: 0;
     margin-bottom: 0;
 
     @include respond($break85) {
       display: inline-grid;
-      grid-template-columns: auto auto auto;
-      grid-column-gap: 64px;
       grid-row-gap: 18px;
+      grid-column-gap: 64px;
+      grid-template-columns: auto auto auto;
     }
   }
 
@@ -97,7 +97,7 @@
   &__private-icon {
     position: relative;
     top: -2.5px;
-    color: $neutral70;
     margin-left: 10px;
+    color: $neutral70;
   }
 }

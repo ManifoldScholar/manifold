@@ -143,8 +143,8 @@
     margin-bottom: 0.2em;
     font-size: 20px;
     font-weight: $regular;
-    color: $neutralOffBlack;
     hyphens: none;
+    color: $neutralOffBlack;
 
     @include respond($break60) {
       margin-bottom: 0.364em;

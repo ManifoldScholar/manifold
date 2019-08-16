@@ -95,6 +95,7 @@ function readingGroups(count = defaultCount) {
 function readingGroupMemberships(count = defaultCount) {
   const readingGroup = readingGroups(1)[0];
   return arrayOf("readingGroupMemberships", count, rgm => {
+    /* eslint-disable no-param-reassign */
     rgm.relationships.user = users(1)[0];
     rgm.relationships.readingGroup = readingGroup;
     rgm.attributes.annotationsCount = random(0, 10);

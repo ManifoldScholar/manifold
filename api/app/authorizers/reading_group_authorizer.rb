@@ -5,7 +5,7 @@ class ReadingGroupAuthorizer < ApplicationAuthorizer
     true
   end
 
-  def self.readable_by?(user, _options = {})
+  def self.readable_by?(_user, _options = {})
     true
   end
 
@@ -14,20 +14,21 @@ class ReadingGroupAuthorizer < ApplicationAuthorizer
   end
 
   def deletable_by?(user, _options = {})
-    return creator_or_has_admin_permissions?(user, resource)
+    creator_or_has_admin_permissions?(user, resource)
   end
 
   def updatable_by?(user, _options = {})
-    return creator_or_has_admin_permissions?(user, resource)
+    creator_or_has_admin_permissions?(user, resource)
   end
 
   def readable_by?(user, _options = {})
     return false unless known_user?(user)
-    return creator_or_has_admin_permissions?(user, resource) || resource.users.include?(user)
+
+    creator_or_has_admin_permissions?(user, resource) || resource.users.include?(user)
   end
 
   def self.listable_by?(user, _options = {})
-    self.admin_permissions?(user)
+    admin_permissions?(user)
   end
 
 end

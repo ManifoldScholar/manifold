@@ -36,7 +36,6 @@ module Api
         @reading_group.destroy
       end
 
-
     end
   end
 end
