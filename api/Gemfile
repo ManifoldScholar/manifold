@@ -48,7 +48,7 @@ gem "metadown", git: "https://github.com/steveklabnik/metadown.git", tag: "v1.1.
 gem "money", "~> 6.0"
 gem "namae", "~>1.0"
 gem "naught", "~> 1.0"
-gem "nokogiri", "~> 1.0"
+gem "nokogiri", "~> 1.10"
 gem "paleta", "~> 0.3.0"
 gem "pandoc-ruby", "~> 2.0"
 gem "paper_trail", "~> 8.0"
