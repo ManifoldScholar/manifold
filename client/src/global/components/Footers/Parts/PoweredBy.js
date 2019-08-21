@@ -65,7 +65,8 @@ class PoweredBy extends PureComponent {
         className={classNames({
           "app-footer-powered-by": true,
           "app-footer-powered-by--with-hover": this.isLibraryFooter,
-          "app-footer-powered-by--standalone": this.isStandaloneFooter
+          "app-footer-powered-by--standalone": this.isStandaloneFooter,
+          "app-footer-powered-by--reader": this.isReaderFooter
         })}
       >
         <section aria-hidden="true">
@@ -76,7 +77,8 @@ class PoweredBy extends PureComponent {
                 "app-footer-powered-by__logo": true,
                 "app-footer-powered-by__logo--with-hover": this
                   .isStandaloneFooter,
-                "app-footer-powered-by__logo--dull": this.dull
+                "app-footer-powered-by__logo--dull": this.dull,
+                "app-footer-powered-by__logo--w-copyright": this.isReaderFooter
               })}
             >
               <Utility.IconComposer
