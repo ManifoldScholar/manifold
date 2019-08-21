@@ -268,7 +268,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
     className="app-footer app-footer--reader"
   >
     <div
-      className="app-footer-powered-by"
+      className="app-footer-powered-by app-footer-powered-by--reader"
     >
       <section
         aria-hidden="true"
@@ -277,7 +277,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
           className="container flush"
         >
           <span
-            className="app-footer-powered-by__logo"
+            className="app-footer-powered-by__logo app-footer-powered-by__logo--w-copyright"
           >
             <svg
               aria-hidden={true}

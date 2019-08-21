@@ -246,7 +246,6 @@
 }
 
 .app-footer-powered-by {
-
   display: block;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -255,6 +254,11 @@
 
   &--standalone {
     background-color: $neutral90;
+  }
+
+  &--reader {
+    padding-top: 42px;
+    padding-bottom: 42px;
   }
 
   &--with-hover {
@@ -271,15 +275,15 @@
     line-height: 1.4em;
     font-weight: normal;
     display: inline-block;
-    margin-top: 13px;
+    margin-top: 10px;
+    margin-left: 0;
     font-size: 15px;
 
     @include respond($break65) {
       margin-top: -6px;
+      margin-left: 6px;
       font-size: 17px;
-
     }
-
   }
 
   &__logo {
@@ -296,11 +300,21 @@
         color: $neutral30;
       }
     }
+
+    &--w-copyright {
+      display: flex;
+      flex-direction: column;
+
+      @include respond($break65) {
+        flex-direction: row;
+      }
+    }
   }
 
   &__logo-icon {
     position: relative;
     top: -2px;
+    flex-shrink: 0;
     margin-right: 14px;
     color: $accentPrimary;
     transition: color $duration $timing;
@@ -315,7 +329,6 @@
         color: $neutral70;
       }
     }
-
   }
 
   &__logo-text {
