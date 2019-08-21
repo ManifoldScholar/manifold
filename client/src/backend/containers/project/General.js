@@ -86,7 +86,7 @@ export default class ProjectGeneralContainer extends PureComponent {
                   { value: "enforced", label: "Enforced" }
                 ]}
                 instructions={`If enabled, this project will always render in standalone
-                mode when "&mode=standalone" is appended to the URL. If standalone mode
+                mode when "?mode=standalone" is appended to the URL. If standalone mode
                 is enforced, this project will always render in standalone mode`}
               />
             </Form.FieldGroup>
