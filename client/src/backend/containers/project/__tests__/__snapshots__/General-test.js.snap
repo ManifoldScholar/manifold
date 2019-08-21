@@ -954,7 +954,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                 id="select-instructions-1"
               >
                 If enabled, this project will always render in standalone
-                mode when "&mode=standalone" is appended to the URL. If standalone mode
+                mode when "?mode=standalone" is appended to the URL. If standalone mode
                 is enforced, this project will always render in standalone mode
               </span>
             </div>
