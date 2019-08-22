@@ -45,7 +45,7 @@ export default class Toggle extends Component {
     this.props.handleToggle();
   };
 
-  renderOption(option, id) {
+  renderOption(option, id, index) {
     const selected = this.props.selected === option.label;
     const optionClasses = classNames({
       radio: true,
@@ -70,11 +70,12 @@ export default class Toggle extends Component {
         <input
           type="radio"
           id={`${id}-${option.label}`}
-          name={this.props.label}
+          name={id}
           value={option.label}
           checked={selected}
           onChange={this.props.handleToggle}
           className="button-switch-primary__input"
+          tabIndex={index === 0 ? 0 : -1}
         />
       </label>
     );
@@ -92,7 +93,7 @@ export default class Toggle extends Component {
             aria-describedby={id}
             className="button-switch-primary"
           >
-            {options.map(option => this.renderOption(option, id))}
+            {options.map((option, index) => this.renderOption(option, id, index))}
             <span id={id} className="aria-describedby">
               {`Toggle ${this.props.label} to ${this.unselected}`}
             </span>

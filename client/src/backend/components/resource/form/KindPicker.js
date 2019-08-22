@@ -87,6 +87,7 @@ class KindPicker extends PureComponent {
                 type="radio"
                 value={safeKind}
                 id={`${id}-${safeKind}`}
+                name={id}
                 checked={isActive}
                 onChange={() => this.props.set(safeKind)}
                 className="resource-kind-picker__input"

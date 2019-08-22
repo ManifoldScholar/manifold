@@ -29,8 +29,9 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
     >
       <input
         checked={false}
-        name="option-1"
+        name="radios-1"
         onChange={[Function]}
+        tabIndex={0}
         type="radio"
         value="1"
       />
@@ -54,8 +55,9 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
     >
       <input
         checked={false}
-        name="option-2"
+        name="radios-1"
         onChange={[Function]}
+        tabIndex={-1}
         type="radio"
         value="2"
       />

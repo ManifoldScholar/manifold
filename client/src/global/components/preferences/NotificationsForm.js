@@ -107,7 +107,7 @@ export default class NotificationsForm extends Component {
               >
                 <input
                   type="radio"
-                  name={option.key}
+                  name="digest-projects"
                   value="always"
                   checked={checked}
                   onChange={this.props.digestProjectsChangeHandler}

@@ -104,6 +104,8 @@ class FormRadios extends Component {
                   key={`${this.idPrefix}-${id}-${option.internalValue}`}
                   option={option}
                   focusOnMount={this.focusOnMount && index === 0}
+                  tabIndex={index === 0 ? 0 : -1}
+                  groupName={`${this.idPrefix}-${id}`}
                   {...this.optionProps}
                 />
               ))}

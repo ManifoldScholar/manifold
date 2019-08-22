@@ -51,8 +51,9 @@ Array [
       >
         <input
           checked={false}
-          name="Normal"
+          name="radios-1"
           onChange={[Function]}
+          tabIndex={0}
           type="radio"
           value="normal"
         />
@@ -71,8 +72,9 @@ Array [
       >
         <input
           checked={false}
-          name="Shaded"
+          name="radios-1"
           onChange={[Function]}
+          tabIndex={-1}
           type="radio"
           value="shaded"
         />

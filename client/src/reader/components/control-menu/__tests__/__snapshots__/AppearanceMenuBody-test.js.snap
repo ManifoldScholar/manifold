@@ -51,6 +51,7 @@ Array [
                     className="appearance-menu__radio-input"
                     name="font-style-radios"
                     onChange={[Function]}
+                    tabIndex={0}
                     type="radio"
                     value="serif"
                   />
@@ -68,6 +69,7 @@ Array [
                     className="appearance-menu__radio-input"
                     name="font-style-radios"
                     onChange={[Function]}
+                    tabIndex={-1}
                     type="radio"
                     value="sans-serif"
                   />
@@ -243,6 +245,7 @@ Array [
                 className="appearance-menu__radio-input"
                 name="color-scheme-radios"
                 onChange={[Function]}
+                tabIndex={0}
                 type="radio"
                 value="light"
               />
@@ -273,6 +276,7 @@ Array [
                 className="appearance-menu__radio-input"
                 name="color-scheme-radios"
                 onChange={[Function]}
+                tabIndex={-1}
                 type="radio"
                 value="dark"
               />
