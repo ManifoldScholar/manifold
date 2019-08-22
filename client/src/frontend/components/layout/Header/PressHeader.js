@@ -17,10 +17,53 @@ class PressHeader extends PureComponent {
 
   static contextType = FrontendModeContext;
 
-  get color() {
+  get bgColor() {
     return (
-      this.props.bgColor || this.props.settings.attributes.theme.topBarColor
+      this.props.bgColor ||
+      this.props.settings.attributes.theme.topBarColor ||
+      "#52e3ac"
     );
+  }
+
+  get white() {
+    return "#ffffff";
+  }
+
+  get black() {
+    return "#2e2e2e";
+  }
+
+  get color() {
+    /*
+     * Get a contrasting color based on value of `this.bgColor`
+     * (c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
+     * Derived from work by Brian Suda, https://24ways.org/2010/calculating-color-contrast/
+     */
+    let bgColor = this.bgColor;
+
+    // If a leading # is provided, remove it
+    if (bgColor.slice(0, 1) === "#") {
+      bgColor = bgColor.slice(1);
+    }
+
+    // If a three-character hexcode, make six-character
+    if (bgColor.length === 3) {
+      bgColor = bgColor
+        .split("")
+        .map(hex => hex + hex)
+        .join("");
+    }
+
+    // Convert to RGB value
+    const r = parseInt(bgColor.substr(0, 2), 16);
+    const g = parseInt(bgColor.substr(2, 2), 16);
+    const b = parseInt(bgColor.substr(4, 2), 16);
+
+    // Get YIQ ratio
+    const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+
+    // Check contrast
+    return yiq >= 128 ? this.black : this.white;
   }
 
   get url() {
@@ -57,7 +100,8 @@ class PressHeader extends PureComponent {
 
   get styles() {
     return {
-      backgroundColor: this.color
+      color: this.color,
+      backgroundColor: this.bgColor
     };
   }
 
