@@ -15,7 +15,9 @@ export default class FormRadioOption extends PureComponent {
       instructions: PropTypes.string,
       label: PropTypes.string.isRequired
     }),
-    focusOnMount: PropTypes.bool
+    focusOnMount: PropTypes.bool,
+    tabIndex: PropTypes.number,
+    groupName: PropTypes.string.isRequired
   };
 
   componentDidMount() {
@@ -40,6 +42,10 @@ export default class FormRadioOption extends PureComponent {
     return this.props.inline;
   }
 
+  get tabIndex() {
+    return this.props.tabIndex || 0;
+  }
+
   get inputClassNames() {
     return classnames("form-toggle", "radio", {
       checked: this.checked,
@@ -53,13 +59,14 @@ export default class FormRadioOption extends PureComponent {
         <label className={this.inputClassNames}>
           <input
             type="radio"
-            name={this.option.label}
+            name={this.props.groupName}
             value={this.option.internalValue}
             checked={this.checked}
             onChange={this.props.onChange}
             ref={input => {
               this.inputElement = input;
             }}
+            tabIndex={this.tabIndex}
           />
           <span className="toggle-indicator" aria-hidden="true" />
           <span className="toggle-label">{this.option.label}</span>

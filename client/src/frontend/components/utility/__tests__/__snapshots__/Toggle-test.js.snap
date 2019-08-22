@@ -32,8 +32,9 @@ exports[`Frontend.Utility.Toggle component renders correctly 1`] = `
       checked={true}
       className="button-switch-primary__input"
       id="1-resources"
-      name="options"
+      name={1}
       onChange={[MockFunction]}
+      tabIndex={0}
       type="radio"
       value="resources"
     />
@@ -64,8 +65,9 @@ exports[`Frontend.Utility.Toggle component renders correctly 1`] = `
       checked={false}
       className="button-switch-primary__input"
       id="1-collection"
-      name="options"
+      name={1}
       onChange={[MockFunction]}
+      tabIndex={-1}
       type="radio"
       value="collection"
     />

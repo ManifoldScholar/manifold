@@ -288,8 +288,9 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     >
                       <input
                         checked={true}
-                        name="Yes"
+                        name="radios-1"
                         onChange={[Function]}
+                        tabIndex={0}
                         type="radio"
                         value={true}
                       />
@@ -308,8 +309,9 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     >
                       <input
                         checked={false}
-                        name="No"
+                        name="radios-1"
                         onChange={[Function]}
+                        tabIndex={-1}
                         type="radio"
                         value=""
                       />
@@ -359,8 +361,9 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     >
                       <input
                         checked={true}
-                        name="Yes"
+                        name="radios-1"
                         onChange={[Function]}
+                        tabIndex={0}
                         type="radio"
                         value={true}
                       />
@@ -379,8 +382,9 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     >
                       <input
                         checked={false}
-                        name="No"
+                        name="radios-1"
                         onChange={[Function]}
+                        tabIndex={-1}
                         type="radio"
                         value=""
                       />
@@ -430,8 +434,9 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     >
                       <input
                         checked={true}
-                        name="Yes"
+                        name="radios-1"
                         onChange={[Function]}
+                        tabIndex={0}
                         type="radio"
                         value={true}
                       />
@@ -450,8 +455,9 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     >
                       <input
                         checked={false}
-                        name="No"
+                        name="radios-1"
                         onChange={[Function]}
+                        tabIndex={-1}
                         type="radio"
                         value=""
                       />
@@ -501,8 +507,9 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     >
                       <input
                         checked={true}
-                        name="Yes"
+                        name="radios-1"
                         onChange={[Function]}
+                        tabIndex={0}
                         type="radio"
                         value={true}
                       />
@@ -521,8 +528,9 @@ exports[`Backend Project New Container renders correctly 1`] = `
                     >
                       <input
                         checked={false}
-                        name="No"
+                        name="radios-1"
                         onChange={[Function]}
+                        tabIndex={-1}
                         type="radio"
                         value=""
                       />

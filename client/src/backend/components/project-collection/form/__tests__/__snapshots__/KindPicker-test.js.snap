@@ -41,8 +41,9 @@ exports[`Backend.ProjectCollection.Form.KindPicker component renders correctly 1
           checked={true}
           className="button-switch-primary__input"
           id="1-Manual"
-          name="kind"
+          name={1}
           onChange={[Function]}
+          tabIndex={0}
           type="radio"
           value="Manual"
         />
@@ -73,8 +74,9 @@ exports[`Backend.ProjectCollection.Form.KindPicker component renders correctly 1
           checked={false}
           className="button-switch-primary__input"
           id="1-Smart"
-          name="kind"
+          name={1}
           onChange={[Function]}
+          tabIndex={-1}
           type="radio"
           value="Smart"
         />

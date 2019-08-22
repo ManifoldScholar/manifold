@@ -46,8 +46,9 @@ Array [
             checked={true}
             className="button-switch-primary__input"
             id="1-resources"
-            name="options"
+            name={1}
             onChange={[Function]}
+            tabIndex={0}
             type="radio"
             value="resources"
           />
@@ -78,8 +79,9 @@ Array [
             checked={false}
             className="button-switch-primary__input"
             id="1-collections"
-            name="options"
+            name={1}
             onChange={[Function]}
+            tabIndex={-1}
             type="radio"
             value="collections"
           />

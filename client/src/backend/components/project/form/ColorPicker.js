@@ -81,6 +81,7 @@ export default class ColorPicker extends Component {
                     type="radio"
                     value={color.value}
                     id={`${id}-${color.value}`}
+                    name={id}
                     checked={checked}
                     onChange={() => this.props.onChange(color)}
                     className="color-picker__input"
