@@ -298,6 +298,14 @@ exports[`Frontend ProjectDetail Container renders correctly in library mode 1`] 
       </div>
     </section>
   </div>
+  <script
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"WebPage\\",\\"mainEntity\\":{\\"@type\\":\\"Book\\",\\"@id\\":\\"https://doi.org/10.12345.6789\\",\\"name\\":\\"Rowan Test\\",\\"url\\":\\"/projects/slug-1\\",\\"author\\":null,\\"contributor\\":null,\\"bookFormat\\":\\"EBook\\"}}",
+      }
+    }
+    type="application/ld+json"
+  />
 </div>
 `;
 
@@ -557,5 +565,13 @@ exports[`Frontend ProjectDetail Container renders correctly in standalone mode 1
       </div>
     </section>
   </div>
+  <script
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"WebPage\\",\\"mainEntity\\":{\\"@type\\":\\"Book\\",\\"@id\\":\\"https://doi.org/10.12345.6789\\",\\"name\\":\\"Rowan Test\\",\\"url\\":\\"/projects/slug-1\\",\\"author\\":null,\\"contributor\\":null,\\"bookFormat\\":\\"EBook\\"}}",
+      }
+    }
+    type="application/ld+json"
+  />
 </div>
 `;
