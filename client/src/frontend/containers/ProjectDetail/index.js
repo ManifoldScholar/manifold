@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import { uiFrontendModeActions } from "actions";
+import Schema from "global/components/schema";
 
 export default class ProjectDetailContainer extends Component {
   static propTypes = {
@@ -38,6 +39,10 @@ export default class ProjectDetailContainer extends Component {
         <Project.Detail
           project={this.props.project}
           dispatch={this.props.dispatch}
+        />
+        <Schema.Project
+          attributes={project.attributes}
+          relationships={project.relationships}
         />
       </div>
     );
