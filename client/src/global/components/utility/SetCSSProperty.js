@@ -29,7 +29,17 @@ export default class SetCSSProperty extends PureComponent {
 
   componentWillUnmount() {
     if (!this.measuredRef || !this.measuredRef.current) return null;
+
+    this.resetMeasuredProperty();
+
     window.removeEventListener("resize", this.debouncedResize);
+  }
+
+  resetMeasuredProperty = () => {
+    document.documentElement.style.setProperty(
+      this.props.propertyName,
+      `0px`
+    );
   }
 
   setMeasuredProperty = () => {

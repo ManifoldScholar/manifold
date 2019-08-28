@@ -2,10 +2,10 @@
 
 exports[`Global.HeaderNotification component renders correctly 1`] = `
 <div
-  className="notification error"
+  className="notification notification--error"
 >
   <div
-    className="container"
+    className="notification__container"
   >
     <header
       aria-atomic="true"
@@ -13,26 +13,26 @@ exports[`Global.HeaderNotification component renders correctly 1`] = `
       role="status"
     >
       <h5
-        className="notification-heading"
+        className="notification__heading"
       >
         Welcome to the Terrordome
       </h5>
     </header>
     <p
       aria-live="polite"
-      className="notification-body"
+      className="notification__body"
       role="status"
     >
       Here's your ticket.  Every time I get wicked.
     </p>
     <button
-      className="notification-close"
+      className="notification__button"
       data-id="close"
       onClick={[Function]}
     >
       <svg
         aria-hidden={true}
-        className="manicon-svg notification-close__icon svg-icon--close32"
+        className="manicon-svg notification__button-icon svg-icon--close32"
         fill="currentColor"
         height={42.667}
         viewBox="0 0 32 32"

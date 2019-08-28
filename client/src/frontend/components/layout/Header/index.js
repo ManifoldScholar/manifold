@@ -50,15 +50,10 @@ export default class LayoutHeader extends PureComponent {
           className="header-app header-app--sticky"
           location={this.props.location}
         >
-          <Utility.SetCSSProperty
-            measurement="height"
-            propertyName="--header-height"
-          >
-            <Utility.SkipLink />
-            <CustomHeader />
-            <PressHeader />
-            {this.context.isLibrary && <LibraryHeader {...this.props} />}
-          </Utility.SetCSSProperty>
+          <Utility.SkipLink />
+          <CustomHeader />
+          <PressHeader />
+          {this.context.isLibrary && <LibraryHeader {...this.props} />}
           <HeaderNotifications scope="global" />
         </BlurOnLocationChange>
         {this.context.isStandalone && (

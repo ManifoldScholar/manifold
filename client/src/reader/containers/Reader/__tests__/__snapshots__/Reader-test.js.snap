@@ -249,7 +249,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
           role="alert"
         >
           <div
-            className="notifications-list-header notifications-list"
+            className="notifications-list--context-header notifications-list"
           >
             <span />
           </div>

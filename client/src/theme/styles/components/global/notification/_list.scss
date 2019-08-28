@@ -1,0 +1,59 @@
+.notifications-list {
+  top: 100px;
+  width: 100%;
+
+  &--updating {
+    transition: transform $duration ease-out;
+  }
+
+  &--context-drawer {
+    margin-bottom: 26px;
+  }
+
+  &--context-header {
+    position: fixed;
+    top: calc(var(--library-header-height, 50px) + var(--press-header-height, 0px));
+
+    @include respond($break40) {
+      top: calc(var(--library-header-height, 72px) + var(--press-header-height, 0px));
+    }
+
+    @include respond($break75) {
+      top: calc(var(--library-header-height, 82px) + var(--press-header-height, 0px));
+    }
+  }
+
+  &__inner {
+    .notifications-list--context-drawer & {
+      transition: transform $duration ease-out;
+
+      &.notification-leave {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0s linear;
+      }
+
+      &.notification-leave-active {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 0.5s, opacity 0.5s linear;
+      }
+    }
+
+    .notifications-list--context-header & {
+      & + .notifications-list__inner {
+        border-top: 1px solid $neutral50;
+      }
+
+      &.notification-leave {
+        max-height: 200px;
+        transition: transform 0.3s ease-in-out, max-height 0.2s ease-out 0.15s;
+      }
+
+      &.notification-leave-active {
+        max-height: 0;
+        transform: translate3d(-100%, 0, 0);
+      }
+    }
+  }
+}

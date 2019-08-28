@@ -32,7 +32,7 @@ export default class LayoutHeader extends Component {
       >
         <Utility.SetCSSProperty
           measurement="height"
-          propertyName="--header-height"
+          propertyName="--library-header-height"
         >
           <Utility.SkipLink />
           <div className="library-header library-header--dark">
