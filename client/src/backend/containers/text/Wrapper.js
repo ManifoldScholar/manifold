@@ -97,6 +97,7 @@ export class TextWrapperContainer extends PureComponent {
   };
 
   renderUtility() {
+    const { text } = this.props;
     return (
       <div className="utility-button-group utility-button-group--inline">
         <button onClick={this.doPreview} className="utility-button">
@@ -115,6 +116,36 @@ export class TextWrapperContainer extends PureComponent {
           />
           <span className="utility-button__text">Delete</span>
         </button>
+        {text.attributes.ingestionSourceDownloadUrl && (
+          <a
+            href={text.attributes.ingestionSourceDownloadUrl}
+            download
+            className="utility-button"
+          >
+            <IconComposer
+              icon="arrowDown32"
+              size={26}
+              iconClass="utility-button__icon utility-button__icon--download"
+            />
+            <span className="utility-button__text">Download Source</span>
+          </a>
+        )}
+        {text.attributes.ingestionExternalSourceUrl && (
+          <a
+            href={text.attributes.ingestionExternalSourceUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+            download
+            className="utility-button"
+          >
+            <IconComposer
+              icon="link24"
+              size={26}
+              iconClass="utility-button__icon utility-button__icon--download"
+            />
+            <span className="utility-button__text">Visit Source</span>
+          </a>
+        )}
       </div>
     );
   }

@@ -22,7 +22,7 @@ export default class IngestionHeader extends Component {
       this.ingestion.attributes.sourceFileName ||
       this.ingestion.attributes.externalSourceUrl;
     if (!title) return "";
-    return truncate(title, { length: 40 });
+    return truncate(title, { length: 30 });
   }
 
   get currentState() {
