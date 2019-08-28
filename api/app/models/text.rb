@@ -72,6 +72,7 @@ class Text < ApplicationRecord
           -> { where(kind: TextSection::KIND_NAVIGATION) },
           class_name: "TextSection",
           inverse_of: :text
+  has_one :last_finished_ingestion, -> { where(state: "finished").order(updated_at: :desc) }, class_name: "Ingestion"
 
   # Delegations
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true

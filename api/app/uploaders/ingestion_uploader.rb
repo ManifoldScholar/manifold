@@ -1,9 +1,15 @@
 class IngestionUploader < TusUploader
+  MANIFOLD_CONFIG = Rails.configuration.manifold
+
   plugin :add_metadata
   plugin :determine_mime_type, analyzer: :marcel
   plugin :module_include
   plugin :moving
   plugin :validation_helpers
+  shared_options = {
+    host: MANIFOLD_CONFIG.api_url&.sub(%r{\/\z}, "") || ""
+  }
+  plugin :default_url_options, cache: shared_options, store: shared_options
 
   add_metadata :sha256 do |io, context|
     calculate_signature(io, :sha256, format: :hex) if context[:action] == :cache

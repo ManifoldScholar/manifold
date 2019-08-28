@@ -42,11 +42,8 @@
     "storybook": "start-storybook -p 3030"
   },
   "lint-staged": {
-    "relative": true,
-    "linters": {
-      "*.js": "yarn fix",
-      "*.scss": "yarn fix"
-    }
+    "*.js": "yarn fix",
+    "*.scss": "yarn fix"
   },
   "jest": {
     "moduleFileExtensions": [
