@@ -18,7 +18,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
             <Layout.Header visibility={{...}} match={[undefined]} location={[undefined]} authentication={{...}} commonActions={{...}}>
               <BlurOnLocationChange tag=\\"header\\" className=\\"header-app header-app--sticky\\" location={[undefined]}>
                 <header className=\\"header-app header-app--sticky\\">
-                  <SetCSSProperty measurement=\\"height\\" propertyName=\\"--header-height\\">
+                  <SetCSSProperty measurement=\\"height\\" propertyName=\\"--library-header-height\\">
                     <div>
                       <SkipLink skipId=\\"skip-to-main\\" skipLinkText=\\"Skip to main content\\" skipMessage=\\"Skipped to Main Content\\">
                         <a className=\\"skip-to-main screen-reader-text\\" href=\\"#skip-to-main\\" onClick={[Function]}>
@@ -154,7 +154,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                     <Connect(NotificationsComponent) scope=\\"global\\">
                       <NotificationsComponent scope=\\"global\\" notifications={{...}} dispatch={[Function]} animate={true} style=\\"header\\">
                         <section className=\\"notifications-container\\" role=\\"alert\\">
-                          <div className=\\"notifications-list-header notifications-list\\">
+                          <div className=\\"notifications-list--context-header notifications-list\\">
                             <CSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
                               <TransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
                                 <span />

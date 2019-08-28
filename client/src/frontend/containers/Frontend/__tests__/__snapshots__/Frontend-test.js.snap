@@ -5,17 +5,17 @@ Array [
   <header
     className="header-app header-app--sticky"
   >
-    <div>
-      <a
-        className="skip-to-main screen-reader-text"
-        href="#skip-to-main"
-        onClick={[Function]}
-      >
-        Skip to main content
-      </a>
-      <div
-        className="library-header library-header--light"
-      >
+    <a
+      className="skip-to-main screen-reader-text"
+      href="#skip-to-main"
+      onClick={[Function]}
+    >
+      Skip to main content
+    </a>
+    <div
+      className="library-header library-header--light"
+    >
+      <div>
         <div
           className="library-header__inner"
         >
@@ -241,16 +241,16 @@ Array [
           </button>
         </div>
       </div>
-      <div
-        className="header-border"
-      />
     </div>
+    <div
+      className="header-border"
+    />
     <section
       className="notifications-container"
       role="alert"
     >
       <div
-        className="notifications-list-header notifications-list"
+        className="notifications-list--context-header notifications-list"
       >
         <span />
       </div>

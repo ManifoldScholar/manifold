@@ -6,6 +6,7 @@ import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import BackLink from "frontend/components/back-link";
+import SetCSSProperty from "global/components/utility/SetCSSProperty";
 
 export default class LayoutLibraryHeader extends PureComponent {
   static displayName = "Layout.LibraryHeader";
@@ -64,25 +65,30 @@ export default class LayoutLibraryHeader extends PureComponent {
     return (
       <React.Fragment>
         <div className="library-header library-header--light">
-          <div className="library-header__inner">
-            <Link to={lh.link("frontend")} className="header-logo">
-              <span className="screen-reader-text">Return to home</span>
-              <PressLogo
-                url={logoUrl}
-                mobileUrl={mobileLogoUrl}
-                styles={get(this.props.settings, "attributes.theme.logoStyles")}
-                aria-hidden="true"
+          <SetCSSProperty
+            measurement="height"
+            propertyName="--library-header-height"
+          >
+            <div className="library-header__inner">
+              <Link to={lh.link("frontend")} className="header-logo">
+                <span className="screen-reader-text">Return to home</span>
+                <PressLogo
+                  url={logoUrl}
+                  mobileUrl={mobileLogoUrl}
+                  styles={get(this.props.settings, "attributes.theme.logoStyles")}
+                  aria-hidden="true"
+                />
+              </Link>
+              <Navigation.Primary
+                desktopStyle={navStyle}
+                links={links}
+                commonActions={this.props.commonActions}
+                authentication={this.props.authentication}
+                visibility={this.props.visibility}
+                mode="frontend"
               />
-            </Link>
-            <Navigation.Primary
-              desktopStyle={navStyle}
-              links={links}
-              commonActions={this.props.commonActions}
-              authentication={this.props.authentication}
-              visibility={this.props.visibility}
-              mode="frontend"
-            />
-          </div>
+            </div>
+          </SetCSSProperty>
         </div>
         <div className="header-border" />
         <BackLink.Render />

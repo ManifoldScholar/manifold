@@ -129,9 +129,9 @@ export class NotificationsComponent extends Component {
   };
 
   listClass() {
-    return classNames(`notifications-list-${this.props.style}`, {
+    return classNames(`notifications-list--context-${this.props.style}`, {
       "notifications-list": true,
-      updating: this.state.updating
+      "notifications-list--updating": this.state.updating
     });
   }
 
@@ -152,7 +152,7 @@ export class NotificationsComponent extends Component {
     if (this.props.notifications.notifications.length > 0) {
       notificationList = this.filteredNotifications().map(notification => {
         return (
-          <div key={notification.id} className="notification-container">
+          <div key={notification.id} className="notifications-list__inner">
             <Notification
               style={this.props.style}
               id={notification.id}

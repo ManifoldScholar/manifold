@@ -9,7 +9,8 @@ export default class Notification extends Component {
     heading: PropTypes.string,
     body: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     level: PropTypes.number,
-    removeNotification: PropTypes.func
+    removeNotification: PropTypes.func,
+    style: PropTypes.string
   };
 
   // Close notification in handler in case event access is required
@@ -17,11 +18,22 @@ export default class Notification extends Component {
     this.props.removeNotification(this.props.id);
   };
 
+  get wrapperClass() {
+    return classNames({
+      notification: true,
+      "notification--notice": this.props.level === 0,
+      "notification--warning": this.props.level === 1,
+      "notification--error": this.props.level === 2,
+      "notification--context-drawer": this.props.style === "drawer",
+      "notification--context-header": this.props.style === "header"
+    });
+  }
+
   bodyCopy() {
     let output = null;
     if (this.props.body) {
       output = (
-        <p className="notification-body" role="status" aria-live="polite">
+        <p className="notification__body" role="status" aria-live="polite">
           {this.props.body}
         </p>
       );
@@ -31,30 +43,24 @@ export default class Notification extends Component {
   }
 
   render() {
-    const notificationClass = classNames({
-      notification: true,
-      notice: this.props.level === 0,
-      warning: this.props.level === 1,
-      error: this.props.level === 2
-    });
 
     return (
-      <div className={notificationClass} key={this.props.id}>
-        <div className="container">
+      <div className={this.wrapperClass} key={this.props.id}>
+        <div className="notification__container">
           <header role="status" aria-live="polite" aria-atomic="true">
-            <h5 className="notification-heading">{this.props.heading}</h5>
+            <h5 className="notification__heading">{this.props.heading}</h5>
           </header>
           {this.bodyCopy()}
 
           <button
-            className="notification-close"
+            className="notification__button"
             onClick={this.handleClose}
             data-id="close"
           >
             <IconComposer
               icon="close32"
               size={42.667}
-              iconClass="notification-close__icon"
+              iconClass="notification__button-icon"
             />
             <span className="screen-reader-text">{"Dismiss"}</span>
           </button>

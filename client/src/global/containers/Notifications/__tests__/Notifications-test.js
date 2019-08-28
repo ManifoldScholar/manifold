@@ -47,7 +47,7 @@ describe("Global.Notifications component", () => {
 
   it("should not render out-of-scope notifications", () => {
     const rendered = mount(component);
-    const list = rendered.find(".notification-container");
+    const list = rendered.find(".notifications-list__inner");
     expect(list.length).toBe(1);
   });
 });
