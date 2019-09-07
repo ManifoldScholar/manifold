@@ -37,7 +37,7 @@
       padding-top: 160px;
     };
 
-  &:hover, &:focus-visible {
+    &:hover, &:focus-visible {
       @include boxShadow(0, 20px, 30px, 2px);
       outline: 0;
 
@@ -52,9 +52,9 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    hyphens: none;
     background-color: transparentize($neutralBlack, 0.5);
     border-radius: 0 0 8px 8px;
-    hyphens: none;
     transition: background-color $duration ease-out;
 
     @include respond($break80) {

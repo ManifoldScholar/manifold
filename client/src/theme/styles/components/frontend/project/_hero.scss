@@ -84,10 +84,10 @@
 
     @include respond($layout-breakpoint) {
 
-      padding-left: 20px;
+      grid-template-columns: 1fr minmax(220px, $right-column-width);
       padding-right: 20px;
 
-      grid-template-columns: 1fr minmax(220px, $right-column-width);
+      padding-left: 20px;
       row-gap: $row-gap-medium;
       column-gap: $column-gap-medium;
       -ms-grid-rows: auto $row-gap-medium auto;
@@ -230,11 +230,11 @@
 
   // Meta elements
   &__heading {
-    line-height: 1.188;
     position: relative;
     z-index: 50;
     margin-bottom: 24px;
     hyphens: none;
+    line-height: 1.188;
 
     .project-hero--standalone & {
       display: none;
@@ -367,9 +367,9 @@
   // Social elements
   &__social-link,
   &__hashtag {
+    color: inherit;
     text-decoration: none;
     transition: color $duration $timing;
-    color: inherit;
 
     &:hover {
       color: $accentPrimary;

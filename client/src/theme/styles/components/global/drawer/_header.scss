@@ -1,0 +1,70 @@
+.drawer-header {
+  padding-bottom: 21px;
+
+  @include respond($break50) {
+    padding-bottom: 33px;
+  }
+
+  @include respond($break50) {
+    padding-bottom: 48px;
+  }
+
+  @include respond($break90) {
+    padding-bottom: 53px;
+  }
+
+  &__title {
+    @include headingQuaternary;
+    display: flex;
+    min-width: 0;
+    color: $neutralWhite;
+
+    .browse & {
+      color: $neutral80;
+    }
+  }
+
+  &__title-icon {
+    margin-right: 10px;
+    margin-left: -8px;
+    color: $neutral75;
+  }
+
+  &__title-text {
+    padding-top: 2px;
+  }
+
+  &__utility {
+    margin-top: 24px;
+  }
+
+  &__instructions {
+    @include templateCopy;
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-size: 17px;
+    font-style: italic;
+    color: $neutral50;
+    text-transform: none;
+  }
+
+  .subtitle {
+    @include subtitlePrimary;
+    padding: 5px 0;
+    color: $neutralWhite;
+  }
+
+  .form-input {
+    input[type='text'] {
+      height: auto;
+      padding: 0 0 0.4em;
+      font-size: 24px;
+
+      @include respond($break90) {
+        padding: 0 0 0.25em;
+        font-size: 30px;
+      }
+    }
+  }
+}

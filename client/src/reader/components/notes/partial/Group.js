@@ -41,7 +41,8 @@ export default class Group extends Component {
 
   renderGroupItems(annotations) {
     const classes = classNames({
-      open: this.state.expanded
+      "notes-filtered-list__group": true,
+      "notes-filtered-list__group--expanded": this.state.expanded
     });
 
     return (
@@ -65,26 +66,28 @@ export default class Group extends Component {
   }
 
   render() {
-    const classes = classNames({
-      item: true,
-      open: this.state.expanded
+    const iconClasses = classNames({
+      "notes-filtered-list__disclosure-icon": true,
+      "notes-filtered-list__disclosure-icon--expanded": this.state.expanded
     });
     return (
-      <li>
-        <div
-          className={classes}
+      <li className="notes-filtered-list__section">
+        <button
+          className="notes-filtered-list__section-button"
           onClick={this.handleClick}
-          role="button"
-          tabIndex="0"
           aria-expanded={this.state.expanded}
         >
-          <IconComposer
-            icon="disclosureDown16"
-            size={18}
-            iconClass="item__disclosure-icon"
-          />
-          <h3 className="item-label">{this.props.sectionName}</h3>
-        </div>
+          <div className="notes-filtered-list__section-button-inner">
+            <IconComposer
+              icon="disclosureDown24"
+              size="default"
+              iconClass={iconClasses}
+            />
+            <span className="notes-filtered-list__section-label">
+              {this.props.sectionName}
+            </span>
+          </div>
+        </button>
         {this.renderGroupItems(this.props.annotations)}
       </li>
     );

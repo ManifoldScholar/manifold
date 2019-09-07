@@ -1,21 +1,51 @@
 .group-summary {
+  $rowGapMobile: 8px;
+  $rowGapDesktop: 18px;
+
   @include panelRoundedLight;
   padding: 20px;
 
   @include respond($break85) {
-    padding: 30px;
+    padding: 24px 30px;
   }
 
   &__list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row-gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -$rowGapMobile;
+    margin-bottom: 0;
 
     @include respond($break85) {
-      display: inline-grid;
-      grid-template-columns: auto auto auto;
-      grid-column-gap: 64px;
-      grid-row-gap: 18px;
+      margin-top: -$rowGapDesktop;
+    }
+
+    @supports (display: grid) {
+      display: grid;
+      grid-row-gap: $rowGapMobile;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 0;
+
+      @include respond($break85) {
+        display: inline-grid;
+        grid-gap: $rowGapDesktop 64px;
+        grid-template-columns: auto auto auto;
+      }
+    }
+  }
+
+  &__item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: $rowGapMobile;
+
+    @include respond($break85) {
+      display: block;
+      margin-top: $rowGapDesktop;
+    }
+
+    @supports (display: grid) {
+      margin-top: 0;
     }
   }
 
@@ -44,12 +74,16 @@
   }
 
   &__desktop-top {
+    flex-basis: 50%;
+
     @include respond($break85) {
       grid-row-start: 1;
     }
   }
 
   &__desktop-bottom {
+    flex-basis: 33.333%;
+
     @include respond($break85) {
       grid-row-start: 2;
     }
@@ -57,7 +91,7 @@
 
   &__item {
     display: block;
-    margin-inline-start: 0;
+    margin: 0;
 
     @include respond($break85) {
       display: inline-block;
@@ -78,13 +112,14 @@
     padding-left: 32px;
 
     @include respond($break85) {
-      padding-left: 0;
+      padding-left: 10px;
     }
   }
 
   &__private-icon {
-    color: $neutral70;
+    position: relative;
+    top: -2.5px;
     margin-left: 10px;
-    margin-bottom: 5px;
+    color: $neutral70;
   }
 }

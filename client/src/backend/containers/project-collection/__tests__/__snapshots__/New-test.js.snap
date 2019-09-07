@@ -170,63 +170,57 @@ exports[`Backend.ProjectCollection.New container renders correctly 1`] = `
         className="form-input form-toggle-secondary"
       >
         <label
-          className="form-input-heading toggle above"
+          className="form-switch"
           htmlFor="switch-input-1"
         >
-          Visible:
-        </label>
-        <div
-          className="toggle-indicator"
-        >
-          <div
-            aria-describedby="switch-input-instructions-1"
-            aria-pressed={false}
-            className="boolean-primary"
+          <span
+            className="form-input-heading toggle above"
+          >
+            Visible:
+          </span>
+          <input
+            checked={false}
             id="switch-input-1"
-            onBlur={[Function]}
-            onClick={[Function]}
-            onFocus={[Function]}
-            role="button"
-            tabIndex="0"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="toggle-indicator"
           >
             <span
-              className="screen-reader-text"
-            >
-              Visible:
-            </span>
-          </div>
-        </div>
+              aria-hidden="true"
+              className="boolean-primary"
+            />
+          </span>
+        </label>
       </div>
       <div
         className="form-input form-toggle-secondary"
       >
         <label
-          className="form-input-heading toggle above"
+          className="form-switch"
           htmlFor="switch-input-1"
         >
-          Show on homepage:
-        </label>
-        <div
-          className="toggle-indicator"
-        >
-          <div
-            aria-describedby="switch-input-instructions-1"
-            aria-pressed={false}
-            className="boolean-primary"
+          <span
+            className="form-input-heading toggle above"
+          >
+            Show on homepage:
+          </span>
+          <input
+            checked={false}
             id="switch-input-1"
-            onBlur={[Function]}
-            onClick={[Function]}
-            onFocus={[Function]}
-            role="button"
-            tabIndex="0"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="toggle-indicator"
           >
             <span
-              className="screen-reader-text"
-            >
-              Show on homepage:
-            </span>
-          </div>
-        </div>
+              aria-hidden="true"
+              className="boolean-primary"
+            />
+          </span>
+        </label>
       </div>
       <div
         className="form-input icon-picker"

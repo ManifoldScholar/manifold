@@ -146,54 +146,6 @@ class AppearanceMenuBody extends Component {
     return this.typography.margins.current > this.typography.margins.min;
   }
 
-  get containerClassNames() {
-    return "appearance-menu";
-  }
-
-  get headerClassNames() {
-    return "appearance-menu__header";
-  }
-
-  get headingClassNames() {
-    return "appearance-menu__heading";
-  }
-
-  get sectionClassNames() {
-    return "appearance-menu__section";
-  }
-
-  get listClassNames() {
-    return "appearance-menu__list";
-  }
-
-  get controlFontWrapperClassNames() {
-    return "appearance-menu__font-control-group";
-  }
-
-  get controlFontStyleClassNames() {
-    return "appearance-menu__font-style-control";
-  }
-
-  get controlFontClassNames() {
-    return "appearance-menu__font-size-control";
-  }
-
-  get fontSizeButtonClassNames() {
-    return classNames({
-      "appearance-menu__font-size-button": true,
-      "appearance-menu__primary-hover-button": true,
-      "appearance-menu__button-base": true
-    });
-  }
-
-  get screenReaderTextClassNames() {
-    return "screen-reader-text";
-  }
-
-  get colorButtonContainerClassNames() {
-    return "appearance-menu__color-buttons-container";
-  }
-
   get lightSchemeButtonClassNames() {
     return classNames({
       "appearance-menu__color-scheme": true,
@@ -210,34 +162,6 @@ class AppearanceMenuBody extends Component {
       "appearance-menu__color-scheme--active": this.colorScheme === "dark",
       "appearance-menu__button-base": true
     });
-  }
-
-  get controlMarginsClassNames() {
-    return "appearance-menu__control-margins";
-  }
-
-  get marginButtonClassNames() {
-    return classNames({
-      "appearance-menu__margin-button": true,
-      "appearance-menu__button-base": true,
-      "appearance-menu__primary-hover-button": true
-    });
-  }
-
-  get resetButtonClassNames() {
-    return classNames({
-      "appearance-menu__reset-button": true,
-      "appearance-menu__primary-hover-button": true,
-      "appearance-menu__button-base": true
-    });
-  }
-
-  get marginIconClassNames() {
-    return "appearance-menu__menu-icon";
-  }
-
-  get reloadIconClassNames() {
-    return "appearance-menu__reload-icon";
   }
 
   get fontStyleOptions() {
@@ -266,14 +190,6 @@ class AppearanceMenuBody extends Component {
     ];
   }
 
-  get fontStyleControlName() {
-    return "font-style-radios";
-  }
-
-  get colorSchemeControlName() {
-    return "color-scheme-radios";
-  }
-
   renderFontStyleControl() {
     const labelClassName = option =>
       classNames({
@@ -294,7 +210,7 @@ class AppearanceMenuBody extends Component {
             <label key={option.value} className={labelClassName(option)}>
               <input
                 value={option.value}
-                name={this.fontStyleControlName}
+                name="font-style-radios"
                 type="radio"
                 checked={option.value === this.typography.font}
                 onChange={this.handleFontStyleControl}
@@ -330,7 +246,7 @@ class AppearanceMenuBody extends Component {
           <label key={option.value} className={labelClassName(option)}>
             <input
               value={option.value}
-              name={this.colorSchemeControlName}
+              name="color-scheme-radios"
               type="radio"
               checked={option.value === this.colorScheme}
               onChange={this.handleColorSchemeControl}
@@ -350,16 +266,22 @@ class AppearanceMenuBody extends Component {
   }
 
   renderFontControls() {
+    const fontSizeButtonClass = classNames(
+      "appearance-menu__font-size-button",
+      "appearance-menu__primary-hover-button",
+      "appearance-menu__button-base"
+    );
+
     return (
-      <li className={this.sectionClassNames}>
-        <div className={this.controlFontWrapperClassNames}>
-          <div className={this.controlFontStyleClassNames}>
+      <li className="appearance-menu__section control-menu__section">
+        <div className="appearance-menu__font-control-group">
+          <div className="appearance-menu__font-style-control">
             {this.renderFontStyleControl()}
           </div>
-          <div className={this.controlFontClassNames}>
+          <div className="appearance-menu__font-size-control appearance-menu__font-size-control--serif">
             <div role="group" aria-label="Adjust font size">
               <button
-                className={this.fontSizeButtonClassNames}
+                className={fontSizeButtonClass}
                 disabled={this.serifDisabled}
                 aria-disabled={!this.fontSizeDecreasable}
                 onClick={event => {
@@ -367,12 +289,12 @@ class AppearanceMenuBody extends Component {
                 }}
               >
                 <Utility.IconComposer icon="MinusUnique" size={30} />
-                <span className={this.screenReaderTextClassNames}>
+                <span className="screen-reader-text">
                   {"Decrease font size"}
                 </span>
               </button>
               <button
-                className={this.fontSizeButtonClassNames}
+                className={fontSizeButtonClass}
                 disabled={this.serifDisabled}
                 aria-disabled={!this.fontSizeIncreasable}
                 onClick={event => {
@@ -380,16 +302,16 @@ class AppearanceMenuBody extends Component {
                 }}
               >
                 <Utility.IconComposer icon="PlusUnique" size={30} />
-                <span className={this.screenReaderTextClassNames}>
+                <span className="screen-reader-text">
                   {"Increase font size"}
                 </span>
               </button>
             </div>
           </div>
-          <div className={this.controlFontClassNames}>
+          <div className="appearance-menu__font-size-control appearance-menu__font-size-control--sans">
             <div>
               <button
-                className={this.fontSizeButtonClassNames}
+                className={fontSizeButtonClass}
                 disabled={this.sansDisabled}
                 aria-disabled={!this.fontSizeDecreasable}
                 onClick={event => {
@@ -397,12 +319,12 @@ class AppearanceMenuBody extends Component {
                 }}
               >
                 <Utility.IconComposer icon="MinusUnique" size={30} />
-                <span className={this.screenReaderTextClassNames}>
+                <span className="screen-reader-text">
                   {"Decrease font size"}
                 </span>
               </button>
               <button
-                className={this.fontSizeButtonClassNames}
+                className={fontSizeButtonClass}
                 disabled={this.sansDisabled}
                 aria-disabled={!this.fontSizeIncreasable}
                 onClick={event => {
@@ -410,7 +332,7 @@ class AppearanceMenuBody extends Component {
                 }}
               >
                 <Utility.IconComposer icon="PlusUnique" size={30} />
-                <span className={this.screenReaderTextClassNames}>
+                <span className="screen-reader-text">
                   {"Increase font size"}
                 </span>
               </button>
@@ -423,8 +345,8 @@ class AppearanceMenuBody extends Component {
 
   renderColorSchemeControls() {
     return (
-      <li className={this.sectionClassNames}>
-        <div className={this.colorButtonContainerClassNames}>
+      <li className="appearance-menu__section control-menu__section">
+        <div className="appearance-menu__color-buttons-container">
           {this.renderColorSchemeControl()}
         </div>
       </li>
@@ -432,36 +354,42 @@ class AppearanceMenuBody extends Component {
   }
 
   renderMarginControls() {
+    const buttonClass = classNames(
+      "appearance-menu__margin-button",
+      "appearance-menu__button-base",
+      "appearance-menu__primary-hover-button"
+    );
+
     return (
-      <li className={this.sectionClassNames}>
+      <li className="appearance-menu__section control-menu__section">
         <div
           role="group"
           aria-label="Adjust text margins"
-          className={this.controlMarginsClassNames}
+          className="appearance-menu__control-margins"
         >
           <button
-            className={this.marginButtonClassNames}
+            className={buttonClass}
             aria-disabled={!this.marginIncreaseable}
             onClick={this.incrementMarginsHandler}
           >
             <Utility.IconComposer
               icon="MarginIncreaseUnique"
-              iconClass={this.marginIconClassNames}
+              iconClass="appearance-menu__menu-icon"
             />
-            <span className={this.screenReaderTextClassNames}>
+            <span className="screen-reader-text">
               {"Increase text margins"}
             </span>
           </button>
           <button
-            className={this.marginButtonClassNames}
+            className={buttonClass}
             aria-disabled={!this.marginDecreasable}
             onClick={this.decrementMarginsHandler}
           >
             <Utility.IconComposer
               icon="MarginDecreaseUnique"
-              iconClass={this.marginIconClassNames}
+              iconClass="appearance-menu__menu-icon"
             />
-            <span className={this.screenReaderTextClassNames}>
+            <span className="screen-reader-text">
               {"Decrease text margins"}
             </span>
           </button>
@@ -472,25 +400,25 @@ class AppearanceMenuBody extends Component {
 
   render() {
     return (
-      <div className={this.containerClassNames}>
-        <header className={this.headerClassNames}>
-          <h4 className={this.headingClassNames}>{"Adjust Appearance:"}</h4>
-        </header>
-        <ul className={this.listClassNames}>
+      <div className="appearance-menu control-menu">
+        <div className="control-menu__header">
+          <div className="control-menu__heading">{"Adjust appearance:"}</div>
+        </div>
+        <ul className="appearance-menu__list">
           {this.renderFontControls()}
           {this.renderColorSchemeControls()}
           {this.renderMarginControls()}
         </ul>
         <div>
           <button
-            className={this.resetButtonClassNames}
+            className="control-menu__button"
             disabled={this.resetDisabled}
             onClick={this.resetHandler}
           >
             <Utility.IconComposer
               icon="reload24"
               size={32}
-              iconClass={this.reloadIconClassNames}
+              iconClass="appearance-menu__reload-icon"
             />
             <span>{"Reset to Defaults"}</span>
           </button>

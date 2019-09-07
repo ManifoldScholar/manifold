@@ -17,7 +17,7 @@
 
 .reader-window {
   @include resetWordWrap;
-  padding: 60px 0 120px;
+  padding: 60px 0;
   overflow: hidden;
   color: $neutralOffBlack;
   background-color: $neutralWhite;
@@ -38,7 +38,6 @@
   font-family: 'freight-text-pro', serif;
   font-weight: $regular;
   line-height: 1.761;
-  letter-spacing: 0.01em;
 
   *::selection, .annotation-locked-selected {
     background: $sp20Quaternary;

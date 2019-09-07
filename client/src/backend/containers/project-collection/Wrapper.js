@@ -203,7 +203,9 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
                 <Drawer.Wrapper
                   closeCallback={this.handleHideNew}
                   open={this.state.showNew}
-                  style="backend flexible"
+                  context="backend"
+                  size="flexible"
+                  padding="large"
                   lockScroll="always"
                 >
                   <New successHandler={this.handleNewSuccess} />

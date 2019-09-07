@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import FormContainer from "backend/containers/form";
-import Form from "backend/components/form";
+import FormContainer from "global/containers/form";
+import Form from "global/components/form";
 import connectAndFetch from "utils/connectAndFetch";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";

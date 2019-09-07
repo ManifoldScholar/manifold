@@ -25,7 +25,7 @@ export default class SubjectRow extends PureComponent {
     return (
       <React.Fragment>
         {this.isCurrentUser(this.id)}
-        {this.attributes.role.replace(/_/g, " ")}
+        {this.attributes.role ? this.attributes.role.replace(/_/g, " ") : null}
       </React.Fragment>
     );
   }

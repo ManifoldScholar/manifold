@@ -9,7 +9,7 @@ exports[`Reader.Toc Component renders correctly 1`] = `
       className="edge-lock-scroll"
     >
       <div
-        className="drawer-reader left"
+        className="drawer drawer--reader drawer--left drawer--default drawer--pad-none drawer--pos-default"
       >
         <focus-trap-react
           active={false}
@@ -102,7 +102,7 @@ exports[`Reader.Toc Component renders correctly with empty toc 1`] = `
       className="edge-lock-scroll"
     >
       <div
-        className="drawer-reader left"
+        className="drawer drawer--reader drawer--left drawer--default drawer--pad-none drawer--pos-default"
       >
         <focus-trap-react
           active={false}

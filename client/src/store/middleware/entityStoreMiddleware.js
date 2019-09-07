@@ -17,6 +17,8 @@ function buildResponseAction(requestAction, payload, meta, error) {
   if (payload) {
     payload.notificationScope =
       get(requestAction, "payload.notificationScope") || "global";
+    payload.suppressErrors =
+      get(requestAction, "payload.suppressErrors") || false;
     payload.noTouch = get(requestAction, "payload.noTouch") || false;
     payload.force = get(requestAction, "payload.force") || false;
   }

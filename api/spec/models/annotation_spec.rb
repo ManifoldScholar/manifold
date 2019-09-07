@@ -115,4 +115,31 @@ RSpec.describe Annotation, type: :model do
       expect(@annotation).to be_valid
     end
   end
+
+
+  context "when part of a reading group" do
+
+    before(:each) do
+      @reading_group = FactoryBot.create(:reading_group)
+      @creator = FactoryBot.create(:user)
+      @reading_group_membership = FactoryBot.create(:reading_group_membership, reading_group: @reading_group, user: @creator)
+    end
+
+    it "increments the reading group's annotations_count" do
+      expect { FactoryBot.create(:annotation, creator: @creator, reading_group: @reading_group) }
+        .to change { @reading_group.reload.annotations_count }.from(0).to(1)
+    end
+
+    it "increments the reading group's highlights_count" do
+      expect { FactoryBot.create(:annotation, format: "highlight", creator: @creator, reading_group: @reading_group) }
+        .to change { @reading_group.reload.highlights_count }.from(0).to(1)
+    end
+
+    it "increments the reading group memberships highlights_count" do
+      expect { FactoryBot.create(:annotation, creator: @creator, reading_group: @reading_group) }
+        .to change { @reading_group_membership.reload.annotations_count}.from(0).to(1)
+    end
+
+  end
+
 end

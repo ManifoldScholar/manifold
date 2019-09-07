@@ -16,11 +16,11 @@
     }
 
     &--light::after {
-      background: linear-gradient(to top, $neutral05 10%, transparentize($accentPrimary, 1) 100%);
+      background: linear-gradient(to top, $neutral05 10%, transparentize($neutral05, 1) 100%);
     }
 
     &--dark::after {
-      background: linear-gradient(to top, $neutral10 10%, transparentize($accentPrimary, 1) 100%);
+      background: linear-gradient(to top, $neutral10 10%, transparentize($neutral10, 1) 100%);
     }
 
     &--blur::after {
@@ -31,18 +31,19 @@
   &__expand-button {
     @include buttonTrimPrimary;
     position: relative;
-    margin-top: -8px;
-    color: $neutralOffBlack;
-    font-size: 13px;
-    visibility: visible;
-    opacity: 1;
     padding-top: 11px;
     padding-bottom: 0;
+    margin-top: -8px;
+    font-size: 13px;
+    color: $neutralOffBlack;
+    visibility: visible;
     border: 0; // OD
     border-top: 1px solid $neutral90;
+    opacity: 1;
     transition: margin $duration linear,
       color $duration $timing,
       border-color $duration $timing,
+      padding-top $duration $timing $durationFast,
       opacity $duration $timing $durationFast,
       visibility $duration $timing $durationFast;
 
@@ -52,7 +53,7 @@
     }
 
     &--hidden {
-      margin-top: -38px;
+      padding-top: 0;
       visibility: hidden;
       opacity: 0;
     }

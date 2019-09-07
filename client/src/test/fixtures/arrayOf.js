@@ -75,8 +75,8 @@ function users(count = defaultCount) {
   });
 }
 
-function groups(count = defaultCount) {
-  return arrayOf("groups", count, () => {
+function readingGroups(count = defaultCount) {
+  return arrayOf("readingGroups", count, () => {
     const name = faker.company.catchPhrase();
     const type = "private";
     const role = "member";
@@ -92,25 +92,14 @@ function groups(count = defaultCount) {
   });
 }
 
-function members(count = defaultCount) {
-  return arrayOf("members", count, () => {
-    const firstName = faker.name.firstName();
-    const lastName = faker.name.lastName();
-    const fullName = `${firstName} ${lastName}`;
-    const role = "member";
-    const number = 17;
-    const out = {
-      firstName,
-      lastName,
-      fullName,
-      role,
-      annotationCount: number,
-      highlightCount: number
-    };
-    if (random(0, 100) > 50) {
-      out.avatarStyles = image();
-    }
-    return out;
+function readingGroupMemberships(count = defaultCount) {
+  const readingGroup = readingGroups(1)[0];
+  return arrayOf("readingGroupMemberships", count, rgm => {
+    /* eslint-disable no-param-reassign */
+    rgm.relationships.user = users(1)[0];
+    rgm.relationships.readingGroup = readingGroup;
+    rgm.attributes.annotationsCount = random(0, 10);
+    rgm.attributes.highlightsCount = random(0, 10);
   });
 }
 
@@ -241,8 +230,8 @@ export default {
   resourceCollections,
   resources,
   permissions,
-  groups,
-  members,
+  readingGroups,
+  readingGroupMemberships,
   pages,
   annotations
 };

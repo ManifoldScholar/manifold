@@ -3,90 +3,75 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import { TableHeaderContext } from "helpers/contexts";
+import isNil from "lodash/isNil";
 
 export default class TableCell extends React.PureComponent {
-  static propTypes = {};
+  static propTypes = {
+    align: PropTypes.oneOf(["center", "right", "left"]),
+    textStyle: PropTypes.oneOf(["valueLarge"]),
+    cellPadding: PropTypes.oneOf(["rightUnpadded", "leftSmall"]),
+    cellSize: PropTypes.oneOf(["cellSmall", "cellMedium"]),
+    columnPosition: PropTypes.oneOf(["all", "left", "right"]),
+    viewportVisibility: PropTypes.oneOf(["hideMobile"]),
+    maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  };
+
+  static displayName = "GenericTable.Cell";
 
   static contextType = TableHeaderContext;
 
-  get alignment() {
-    return this.props.align;
-  }
-
-  get textStyle() {
-    return this.props.textStyle;
-  }
-
-  get columnPosition() {
-    return this.props.columnPosition;
-  }
-
-  get rowPosition() {
-    return this.props.rowPosition;
-  }
-
-  get cellPadding() {
-    return this.props.cellPadding;
-  }
-
-  get viewportVisibility() {
-    return this.props.viewportVisibility;
-  }
-
-  get cellSize() {
-    return this.props.cellSize;
-  }
-
   get cellClassNames() {
+    const { align, textStyle, cellPadding, cellSize, headerIcon } = this.props;
     return classNames({
       "table__body-text": true,
-      table__centered: this.alignment === "center",
-      table__right: this.alignment === "right",
-      "table__value-large": this.textStyle === "valueLarge",
-      "table__right-unpadded": this.cellPadding === "rightUnpadded",
-      "table__small-padding-left": this.cellPadding === "leftSmall",
-      "table__value-standard": !this.textStyle,
+      table__centered: align === "center",
+      table__right: align === "right",
+      "table__value-large": textStyle === "valueLarge",
+      "table__right-unpadded": cellPadding === "rightUnpadded",
+      "table__small-padding-left": cellPadding === "leftSmall",
+      "table__value-standard": !textStyle,
       "table__padded-cell": this.isTable,
       "table__list-value": !this.isTable,
-      "table__cell-small": this.cellSize === "cellSmall",
-      "table__cell-medium": this.cellSize === "cellMedium"
+      "table__cell--small": cellSize === "cellSmall",
+      "table__cell--medium": cellSize === "cellMedium",
+      "table__cell--header-has-icon": !isNil(headerIcon)
     });
   }
 
   get listItemContainerClassNames() {
+    const {
+      columnPosition,
+      rowPosition,
+      textStyle,
+      viewportVisibility
+    } = this.props;
     return classNames({
-      "table__list-item-container": !this.textStyle,
-      "table__list-header-container": this.textStyle,
-      "table__grid-item-right": this.columnPosition === "right",
-      "table__grid-item-left": this.columnPosition === "left",
-      "table__grid-item-colspan": this.columnPosition === "all",
-      "table__grid-item-row-2": this.rowPosition === 2,
-      "table__grid-item-row-3": this.rowPosition === 3,
-      "table__hide-mobile": this.viewportVisibility === "hideMobile"
+      "table__list-item-container": !textStyle,
+      "table__list-header-container": textStyle,
+      "table__grid-item-right": columnPosition === "right",
+      "table__grid-item-left": columnPosition === "left",
+      "table__grid-item-colspan": columnPosition === "all",
+      "table__grid-item-row-2": rowPosition === 2,
+      "table__grid-item-row-3": rowPosition === 3,
+      "table__hide-mobile": viewportVisibility === "hideMobile"
     });
-  }
-
-  get rowLinkClassNames() {
-    return "table__row-link";
-  }
-
-  get link() {
-    return "/";
   }
 
   get isTable() {
     return this.context.markup === "table";
   }
 
+  get tdStyle() {
+    const { maxWidth } = this.props;
+    return maxWidth ? { maxWidth } : {};
+  }
+
   render() {
-    const header = this.context.getHeader(this.props.index);
+    const { header, headerIcon } = this.props;
 
     if (this.isTable)
       return (
-        <td className={this.cellClassNames}>
-          <a href={this.link} className={this.rowLinkClassNames}>
-            <span className="screen-reader-text">Visit detail view</span>
-          </a>
+        <td className={this.cellClassNames} style={this.tdStyle}>
           {this.props.children}
         </td>
       );
@@ -95,7 +80,7 @@ export default class TableCell extends React.PureComponent {
       <div className={this.listItemContainerClassNames}>
         {this.textStyle !== "valueLarge" && (
           <dt>
-            <Utility.LabelWithIcon label={header.label} icon={header.icon} />
+            <Utility.LabelWithIcon label={header} icon={headerIcon} />
           </dt>
         )}
         <dd className={this.cellClassNames}>{this.props.children}</dd>

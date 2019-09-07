@@ -12,10 +12,10 @@
     margin-bottom: 20px;
   }
 
-  &__icon {
+  &__icon-wrapper {
     width: 80px;
     height: 80px;
-    padding: 11px;
+    padding: 15px;
     margin-bottom: 30px;
     border-radius: 50%;
 
@@ -34,6 +34,11 @@
       color: $neutral75;
       background-color: $neutral10;
     }
+  }
+
+  &__icon {
+    width: 100%;
+    height: 100%;
   }
 
   &__title {

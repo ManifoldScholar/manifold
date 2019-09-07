@@ -41,6 +41,24 @@ export default class Header extends Component {
     match: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+
+    this.resizeId = null;
+    this.breakpoint = 560;
+    this.state = {
+      mobileOptionsExpanded: false
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+  }
+
   get projectId() {
     if (!this.props.text) return null;
     return this.props.text.relationships.project.id;
@@ -75,96 +93,161 @@ export default class Header extends Component {
     };
   });
 
+  handleOptionsToggleClick = () => {
+    this.setState({
+      mobileOptionsExpanded: !this.state.mobileOptionsExpanded
+    });
+  };
+
+  handleResize = () => {
+    if (this.resizeId) {
+      window.cancelAnimationFrame(this.resizeId);
+    }
+
+    this.resizeId = window.requestAnimationFrame(() => {
+      if (
+        window.innerWidth < this.breakpoint ||
+        !this.state.mobileOptionsExpanded
+      )
+        return null;
+
+      this.setState({ mobileOptionsExpanded: false });
+    });
+  };
+
+  renderOptionsToggle() {
+    const { mobileOptionsExpanded } = this.state;
+
+    return (
+      <button
+        onClick={this.handleOptionsToggleClick}
+        aria-hidden
+        tabIndex={-1}
+        className="reader-header__button reader-header__button--pad-default reader-header__options-button"
+      >
+        {mobileOptionsExpanded ? "Close" : "Options"}
+        {mobileOptionsExpanded && (
+          <Utility.IconComposer
+            icon="close32"
+            size="default"
+            iconClass="reader-header__options-button-icon"
+          />
+        )}
+      </button>
+    );
+  }
+
   renderContentsButton = textAttrs => {
     if (textAttrs.toc.length <= 0 && isEmpty(textAttrs.metadata)) {
       return null;
     }
 
-    const buttonIndexClass = classNames({
-      "button-index": true,
-      active: this.props.visibility.uiPanels.tocDrawer
+    const buttonClassName = classNames({
+      "reader-header__button": true,
+      "reader-header__button--gray": true,
+      "reader-header__button--pad-default": true,
+      "reader-header__button--active": this.props.visibility.uiPanels.tocDrawer
     });
 
     return (
       <button
-        className={buttonIndexClass}
+        className={buttonClassName}
         onClick={this.handleContentsButtonClick}
         aria-haspopup
         aria-expanded={this.props.visibility.uiPanels.tocDrawer}
       >
-        <span className="button-index__text">Contents</span>
+        <span className="reader-header__button-text">Contents</span>
         <Utility.IconComposer
           icon="disclosureDown24"
           size="default"
-          iconClass="button-index__icon"
+          iconClass="reader-header__button-icon reader-header__button-icon--large"
+        />
+        <Utility.IconComposer
+          icon="disclosureDown16"
+          size={20}
+          iconClass="reader-header__button-icon reader-header__button-icon--small"
         />
       </button>
     );
   };
 
   render() {
-    const containerClass = classNames("container-banner", {
-      border: this.props.scrollAware && !this.props.scrollAware.top
+    const innerClassName = classNames({
+      "reader-header__inner": true,
+      "reader-header__inner--shifted": this.state.mobileOptionsExpanded
     });
-
     return (
       <BlurOnLocationChange location={this.props.location}>
-        <header className="header-reader">
+        <header className="reader-header">
           <Utility.SkipLink />
           <Layout.PreHeader />
-          <nav className={containerClass}>
-            <ReturnMenu.Button
-              toggleReaderMenu={this.panelToggleHandler("readerReturn")}
-              expanded={this.props.visibility.uiPanels.readerReturn}
-            />
-            {this.renderContentsButton(this.props.text.attributes)}
-            {this.props.section ? (
+          <nav className={innerClassName}>
+            <div className="reader-header__menu-group reader-header__menu-group--left">
+              <ReturnMenu.Button
+                toggleReaderMenu={this.panelToggleHandler("readerReturn")}
+                expanded={this.props.visibility.uiPanels.readerReturn}
+              />
+              {this.renderContentsButton(this.props.text.attributes)}
+            </div>
+            {this.props.section && (
               <TextTitles
                 textTitle={this.props.text.attributes.titleFormatted}
                 sectionTitle={this.props.section.attributes.name}
                 showSection={!this.props.scrollAware.top}
               />
-            ) : null}
-            <div className="menu-buttons">
-              <ul aria-label="Reader Settings and Search">
+            )}
+            <div className="reader-header__menu-group reader-header__menu-group--right">
+              <ul
+                aria-label="Reader Settings and Search"
+                className="reader-header__nav-list"
+              >
                 <Authorize kind={"any"}>
-                  <li>
-                    <ControlMenu.NotesButton
-                      toggle={this.panelToggleHandler("notes")}
+                  <li className="reader-header__nav-item">
+                    <ControlMenu.Button
+                      onClick={this.panelToggleHandler("notes")}
+                      icon="notes24"
+                      label="Notes"
                       active={this.props.visibility.uiPanels.notes}
                     />
                   </li>
                 </Authorize>
-                <li>
-                  <ControlMenu.VisibilityMenuButton
-                    toggle={this.panelToggleHandler("visibility")}
+                <li className="reader-header__nav-item">
+                  <ControlMenu.Button
+                    onClick={this.panelToggleHandler("visibility")}
+                    icon="eyeball24"
+                    label="Visibility"
                     active={this.props.visibility.uiPanels.visibility}
                   />
                 </li>
-                <li>
-                  <ControlMenu.AppearanceMenuButton
-                    toggleAppearanceMenu={this.panelToggleHandler("appearance")}
+                <li className="reader-header__nav-item">
+                  <ControlMenu.Button
+                    onClick={this.panelToggleHandler("appearance")}
+                    icon="text24"
+                    label="Reader appearance"
                     active={this.props.visibility.uiPanels.appearance}
                   />
                 </li>
-                <li>
+                <li className="reader-header__nav-item">
                   <SearchMenu.Button
                     toggleSearchMenu={this.panelToggleHandler("search")}
                     active={this.props.visibility.uiPanels.search}
+                    className="reader-header__button reader-header__button--pad-narrow"
                   />
                 </li>
-                <li>
+                <li className="reader-header__nav-item">
                   <UserMenuButton
                     authentication={this.props.authentication}
                     active={this.props.visibility.uiPanels.user}
                     showLoginOverlay={this.triggerShowSignInUpOverlay}
                     toggleUserMenu={this.panelToggleHandler("user")}
+                    context="reader"
+                    className="reader-header__button reader-header__button--pad-narrow"
                   />
                 </li>
               </ul>
             </div>
           </nav>
-          <div className="menu-panels-left">
+          <div className="reader-header__panels reader-header__panels--left">
             <UIPanel
               id="readerReturn"
               visibility={this.props.visibility.uiPanels}
@@ -186,7 +269,7 @@ export default class Header extends Component {
             />
           </div>
 
-          <div className="menu-panels-right">
+          <div className="reader-header__panels reader-header__panels--right">
             <UIPanel
               id="notes"
               visibility={this.props.visibility.uiPanels}
@@ -242,8 +325,10 @@ export default class Header extends Component {
               startLogout={this.props.commonActions.logout}
               hideUserMenu={this.props.commonActions.toggleUserPanel}
               hidePanel={this.props.commonActions.hideUserPanel}
+              context="reader"
             />
           </div>
+          {this.renderOptionsToggle()}
           <HeaderNotifications />
         </header>
       </BlurOnLocationChange>

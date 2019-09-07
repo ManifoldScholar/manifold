@@ -5,46 +5,13 @@ import classNames from "classnames";
 import Body from "./Body";
 import Annotation from "reader/containers/annotation";
 import locationHelper from "helpers/location";
+import filterAnnotations from "./helpers/filter-annotations";
 
 import HtmlClass from "hoc/html-class";
 
 export default class Text extends Component {
   static filterAnnotations(visibilityFilters, annotations) {
-    if (!visibilityFilters) return annotations;
-
-    const filterEntity = (list, format) => {
-      return Text.filterBy(list, visibilityFilters, format);
-    };
-
-    return Object.keys(visibilityFilters).reduce(filterEntity, annotations);
-  }
-
-  static filterBy(list, visibilityFilters, format) {
-    const filter = visibilityFilters[format];
-    let filtered = list;
-
-    Object.keys(filter).forEach(key => {
-      switch (key) {
-        case "all": {
-          if (filter[key] === true) return filtered;
-          return (filtered = filtered.filter(a => {
-            return a.attributes.format !== format;
-          }));
-        }
-        default: {
-          if (filter[key] === true) return filtered;
-          const value = key === "yours" ? filter[key] : !filter[key];
-          return (filtered = filtered.filter(a => {
-            return (
-              a.attributes.format !== format ||
-              a.attributes.currentUserIsCreator === value
-            );
-          }));
-        }
-      }
-    });
-
-    return filtered;
+    return filterAnnotations(annotations, visibilityFilters);
   }
 
   static propTypes = {
@@ -68,9 +35,8 @@ export default class Text extends Component {
       visibilityFiltersMemo: props.visibility.visibilityFilters,
       annotationsMemo: props.annotations,
       filteredAnnotations: Text.filterAnnotations(
-        props.visibility.annotation,
-        props.annotations,
-        props.authentication.currentUser
+        props.visibility.visibilityFilters,
+        props.annotations
       )
     };
   }

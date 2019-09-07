@@ -17,7 +17,7 @@ exports[`Reader ReaderNotes Container renders correctly 1`] = `
     >
       <li>
         <div
-          className="annotation-selection__text-container annotation-selection__text-container--light annotation-selection__text-container--rounded-corners annotation-selection__hover-link"
+          className="annotation-selection__text-container annotation-selection__text-container--light annotation-selection__text-container--rounded-corners"
         >
           <button
             aria-label="View selection within text."
@@ -51,19 +51,6 @@ exports[`Reader ReaderNotes Container renders correctly 1`] = `
                 April 24, 2017
               </time>
             </span>
-            <svg
-              aria-hidden={true}
-              className="manicon-svg annotation-selection__hover-arrow svg-icon--arrowLongRight16"
-              fill="currentColor"
-              height={24}
-              viewBox="0 0 24 16"
-              width={24}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-              />
-            </svg>
           </div>
           <div
             className="annotation-selection__action-buttons"
@@ -84,7 +71,7 @@ exports[`Reader ReaderNotes Container renders correctly 1`] = `
       </li>
       <li>
         <div
-          className="annotation-selection__text-container annotation-selection__text-container--light annotation-selection__text-container--rounded-corners annotation-selection__hover-link"
+          className="annotation-selection__text-container annotation-selection__text-container--light annotation-selection__text-container--rounded-corners"
         >
           <button
             aria-label="View selection within text."
@@ -118,19 +105,6 @@ exports[`Reader ReaderNotes Container renders correctly 1`] = `
                 April 24, 2017
               </time>
             </span>
-            <svg
-              aria-hidden={true}
-              className="manicon-svg annotation-selection__hover-arrow svg-icon--arrowLongRight16"
-              fill="currentColor"
-              height={24}
-              viewBox="0 0 24 16"
-              width={24}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M19.9210555,8.50098377 L2,8.50098377 L2,7.49848233 L19.9183709,7.49848233 L14.6653905,2.76142495 L15.3486096,2 L22.0012062,7.99920999 L15.3651285,14 L14.6808716,13.2395122 L19.9210555,8.50098377 Z"
-              />
-            </svg>
           </div>
           <div
             className="annotation-selection__action-buttons"

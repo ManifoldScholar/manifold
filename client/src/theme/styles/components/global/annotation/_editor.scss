@@ -1,4 +1,7 @@
 .annotation-editor {
+  $actionMarginTop: 18px;
+  $buttonMarginLeft: 15px;
+
   @include drawerPadding(padding-right);
   @include drawerPadding(padding-left);
   padding-top: 32px;
@@ -7,24 +10,54 @@
     padding-top: 48px;
   }
 
-  .annotation-comments & {
+  .annotation-comments &,
+  .resource-comments & {
     @include drawerIndent(padding-left);
     padding-top: 5px;
     padding-right: 0;
     padding-bottom: 5px;
+    margin-top: 10px;
 
-    textarea {
+    .annotation-editor__textarea {
       font-size: 16px;
     }
   }
 
-  textarea {
+  &__editor-label {
+    @include utilityPrimary;
+    display: flex;
+    align-items: center;
+    margin: 0; // OD
+    margin-bottom: 1.313em;
+    font-size: 14px;
+    color: $neutral70;
+
+    @include respond($break60) {
+      font-size: 16px;
+    }
+  }
+
+  &__label-icon {
+    margin-right: 7px;
+    margin-left: -3px;
+    color: $neutral40;
+
+    @include respond($break60) {
+      width: 54px;
+      height: 54px;
+      margin-right: 9px;
+    }
+  }
+
+  &__textarea {
     @include templateHead;
-    padding: 1.7em 2.15em;
+    width: 100%;
+    padding: 1em 1.5em;
     font-size: 16px;
     resize: vertical;
-    background-color: $neutralWhite;
+    background-color: $neutral10;
     border: 0;
+    border-radius: $panelRoundedRadius;
     outline: 0;
 
     @include respond($break60) {
@@ -36,7 +69,7 @@
     }
 
     &::placeholder {
-      color: $neutral40;
+      color: $neutral75;
     }
 
     &:focus-visible::placeholder {
@@ -44,15 +77,15 @@
     }
   }
 
-  .utility {
+  &__actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 10px - $actionMarginTop;
 
     @include respond($break90) {
-      margin-top: 20px;
+      margin-top: 20px - $actionMarginTop;
     }
 
     .form-input {
@@ -97,34 +130,114 @@
         background-color: $accentPrimaryLight;
       }
     }
+  }
 
-    .buttons {
-      display: flex;
+  &__action {
+    display: flex;
+    flex-direction: column;
+    margin-top: $actionMarginTop;
+
+    @include respond($break60) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__action-label {
+    @include utilityPrimary;
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    letter-spacing: 0.125em;
+
+    @include respond($break60) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__action-icon {
+    margin-right: 12px;
+  }
+
+  &__group-picker {
+    position: relative;
+  }
+
+  &__group-picker-toggle {
+    @include buttonUnstyled;
+    @include templateHead;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+    padding: 7.5px 16px 9.5px 18px;
+    font-size: 17px;
+    color: $neutral90;
+    background-color: $neutral10;
+    border-radius: 20px;
+    transition: background-color $duration $timing;
+
+    &:hover {
+      background-color: $neutral10;
+    }
+
+    &:focus-visible {
+      background-color: $neutral20;
+      outline: 0;
+    }
+
+    svg {
+      position: relative;
+      top: 2px;
+      flex-shrink: 0;
+      margin-left: 3px;
+    }
+  }
+
+  &__group-picker-toggle-text {
+    overflow: hidden;
+    line-height: 1.4;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__buttons {
+    display: flex;
+    width: 100%;
+    margin-top: $actionMarginTop;
+    margin-left: -$buttonMarginLeft;
+
+    @include respond($containerWidthFull) {
+      width: auto;
+    }
+
+    &--end {
+      width: auto;
+    }
+
+    &:only-child {
       justify-content: flex-end;
       width: 100%;
-      margin-top: 18px;
+      margin-left: 0;
+    }
 
-      @include respond($break95) {
-        width: auto;
-        margin-top: 0;
+    .button-primary, .button-secondary {
+      min-width: 100px;
+      padding: 9px 0 11px;
+      margin-left: $buttonMarginLeft;
+      font-size: 14px;
+    }
+
+    .button-secondary {
+      &[disabled='disabled'],
+      &.button-secondary:disabled {
+        background-color: $accentPrimaryDull;
       }
 
-      .button-primary, .button-secondary {
-        min-width: 100px;
-        padding: 12px 0 13px;
-        margin-left: 15px;
-        font-size: 14px;
-      }
-
-      .button-secondary {
-        &[disabled='disabled'],
-        &.button-secondary:disabled {
-          background-color: $accentPrimaryDull;
-        }
-
-        &:active {
-          color: inherit;
-        }
+      &:active {
+        color: inherit;
       }
     }
   }

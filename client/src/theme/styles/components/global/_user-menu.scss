@@ -4,24 +4,32 @@
   height: 100%;
   vertical-align: middle;
 
-  .header-app & {
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-
   .avatar {
     color: $neutral70; // fallback
     @include buttonAvatar(32, var(--button-color, $neutral70));
-    transition: color $duration $duration $timing;
   }
 
-  &:hover,
-  &.button-active {
-    outline: 0;
+  &--frontend,
+  &--backend {
+    padding-top: 5px;
+    padding-bottom: 5px;
 
     .avatar {
-      color: $accentPrimary;
-      transition: color $duration $timing;
+      transition: color $duration $duration $timing;
+    }
+
+    &:hover,
+    &.button-active {
+      .avatar {
+        color: $accentPrimary;
+        transition: color $duration $timing;
+      }
+    }
+  }
+
+  &--reader {
+    .avatar {
+      color: inherit;
     }
   }
 
@@ -35,12 +43,26 @@
   $menuWidth: 235px;
   $tailHeight: 17px;
 
-  min-width: $menuWidth;
+  // browse styles
+  position: absolute;
+  right: -20px;
+  white-space: nowrap;
   background-color: $neutral10;
 
-  .header-app & {
-    @include boxShadow(5px, 15px, 35px, 8px);
+  &--frontend,
+  &--backend {
+    z-index: 1; // ensure menu is on top of .header-app
+    min-width: $menuWidth;
     border-radius: $panelRoundedRadius;
+    @include boxShadow(5px, 15px, 35px, 8px);
+  }
+
+  &--reader {
+    width: 100%;
+
+    @include respond($break50) {
+      width: auto;
+    }
   }
 
   &__tail {
@@ -64,12 +86,25 @@
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 14px 25px;
-    color: $neutral80;
+    padding: 9px 20px;
+    color: $neutral75;
     text-decoration: none;
+    transition:
+      color $duration $timing,
+      background-color $duration $timing;
 
-    &:hover, &:focus-visible {
-      color: $accentPrimary;
+    &:hover,
+    &:focus-visible {
+      color: $neutral90;
+
+      .user-menu--reader & {
+        background-color: $neutral30;
+      }
+    }
+
+    &:focus-visible {
+      background-color: $neutral30;
+      outline: 0;
     }
   }
 
@@ -79,18 +114,18 @@
     position: relative;
     top: 2px;
     margin-right: 10px;
-    color: $neutral50;
+    transition: color $duration $timing;
+
+    .user-menu--frontend &,
+    .user-menu--backend & {
+      color: $neutral50;
+    }
 
     .user-menu__link:hover &,
     .user-menu__link:focus-visible & {
-      color: $accentPrimary;
+      color: $neutral90;
     }
   }
-
-  // browse styles
-  position: absolute;
-  right: -20px;
-  white-space: nowrap;
 
   @include respond($break40) {
     right: -24px;

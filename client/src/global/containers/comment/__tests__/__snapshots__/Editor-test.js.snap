@@ -2,7 +2,7 @@
 
 exports[`Global Comment Editor Container renders correctly when logged in 1`] = `
 <div
-  className="comment-editor"
+  className="annotation-editor"
 >
   <form
     onSubmit={[Function]}
@@ -19,7 +19,7 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
       </label>
       <textarea
         aria-describedby="comment-textarea-error-1"
-        className="expanded"
+        className="annotation-editor__textarea annotation-editor__textarea--expanded"
         id="comment-textarea-1"
         onChange={[Function]}
         onKeyDown={[Function]}
@@ -27,13 +27,13 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
         value="Plaid clash with polka dots, I hope you ain't mad."
       />
       <div
-        className="utility"
+        className="annotation-editor__actions"
       >
         <div
-          className="buttons"
+          className="annotation-editor__buttons"
         >
           <button
-            className="button-secondary button-secondary--dull"
+            className="button-primary button-primary--gray"
             onClick={[MockFunction]}
             type="button"
           >
@@ -43,30 +43,7 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
             className="button-secondary"
             disabled={false}
           >
-            <svg
-              aria-hidden={true}
-              className="manicon-svg button-secondary__icon svg-icon--commentPost32"
-              height={32}
-              viewBox="0 0 32 32"
-              width={32}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g
-                fill="none"
-                fillRule="evenodd"
-              >
-                <path
-                  d="M9.5,22.9824561 L4,22.9824561 L4,4 L28,4 L28,22.9824561 L16.0161821,22.9824561 L9.5,29.3843192 L9.5,22.9824561 Z M27,21.9824561 L27,5 L5,5 L5,21.9824561 L10.5,21.9824561 L10.5,27 L15.6071429,21.9824561 L27,21.9824561 Z M23,9 L23,10 L9,10 L9,9 L23,9 Z M23,13 L23,14 L9,14 L9,13 L23,13 Z M23,17 L23,18 L9,18 L9,17 L23,17 Z"
-                  fill="currentColor"
-                  fillRule="nonzero"
-                />
-              </g>
-            </svg>
-            <span
-              className="button-secondary__text"
-            >
-              Update
-            </span>
+            Update
           </button>
         </div>
       </div>
@@ -77,7 +54,7 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
 
 exports[`Global Comment Editor Container renders correctly when logged out 1`] = `
 <div
-  className="comment-editor"
+  className="annotation-editor"
 >
   <div
     className="placeholder"

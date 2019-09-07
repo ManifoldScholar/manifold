@@ -1,9 +1,18 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 import Annotation from "../Annotation";
 import Highlight from "../Highlight";
+import Utility from "global/components/utility";
 
-export default class Default extends PureComponent {
-  static displayName = "Annotation.List.Ungrouped";
+export default class AnnotationListDefault extends PureComponent {
+  static displayName = "Annotation.List.Default";
+
+  static propTypes = {
+    pagination: PropTypes.object,
+    paginationClickHandler: PropTypes.func,
+    annotations: PropTypes.array,
+    handleVisitAnnotation: PropTypes.func
+  };
 
   renderHighlight(annotation) {
     return (
@@ -34,19 +43,27 @@ export default class Default extends PureComponent {
   }
 
   render() {
-    const { annotations } = this.props;
+    const { annotations, pagination, paginationClickHandler } = this.props;
     return (
-      <ul className={this.notesListClassNames}>
-        {annotations.map(annotation => {
-          return (
-            <li key={annotation.id} className={this.selectionListClassNames}>
-              {annotation.attributes.format === "annotation"
-                ? this.renderAnnotation(annotation)
-                : this.renderHighlight(annotation)}
-            </li>
-          );
-        })}
-      </ul>
+      <React.Fragment>
+        <ul className={this.notesListClassNames}>
+          {annotations.map(annotation => {
+            return (
+              <li key={annotation.id} className={this.selectionListClassNames}>
+                {annotation.attributes.format === "annotation"
+                  ? this.renderAnnotation(annotation)
+                  : this.renderHighlight(annotation)}
+              </li>
+            );
+          })}
+        </ul>
+        {pagination && (
+          <Utility.Pagination
+            paginationClickHandler={paginationClickHandler}
+            pagination={pagination}
+          />
+        )}
+      </React.Fragment>
     );
   }
 }

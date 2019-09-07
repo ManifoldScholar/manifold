@@ -67,7 +67,7 @@ export default class Builder extends PureComponent {
           <UID name={id => `hero-builder-${id}`}>
             {id => (
               <div
-                className="form-section"
+                className="form-section form-section--primary"
                 role="group"
                 aria-labelledby={`${id}-header`}
                 aria-describedby={`${id}-instructions`}
@@ -115,7 +115,7 @@ export default class Builder extends PureComponent {
           lockScrollClickCloses={false}
           closeCallback={this.onDrawerClose}
           open={this.isDrawerOpen}
-          style="backend"
+          context="backend"
         >
           {this.isDrawerOpen ? <DrawerContents project={this.project} /> : null}
         </Drawer.Wrapper>

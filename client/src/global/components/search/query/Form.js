@@ -137,6 +137,10 @@ export default class SearchQueryForm extends PureComponent {
     return "query-search";
   }
 
+  get checkboxClasses() {
+    return "search-query__checkbox checkbox checkbox--white";
+  }
+
   internalStateFromIncomingState(initialState) {
     let newState = Object.assign(
       { facets: [], scope: null, keyword: "" },
@@ -224,12 +228,17 @@ export default class SearchQueryForm extends PureComponent {
       return false;
 
     return (
-      <div className="footer">
+      <div className="search-query__footer">
         {this.props.description ? (
-          <div className="description">{this.props.description}</div>
+          <div className="search-query__description">
+            {this.props.description}
+          </div>
         ) : null}
         {this.props.searchType === "frontend" ? (
-          <button type="submit" className="button-primary">
+          <button
+            type="submit"
+            className="search-query__button-primary button-primary"
+          >
             <span className="button-primary__text">Search</span>
           </button>
         ) : null}
@@ -240,7 +249,7 @@ export default class SearchQueryForm extends PureComponent {
   render() {
     return (
       <form className="search-query" onSubmit={this.doSearch}>
-        <div className="input-magnify">
+        <div className="search-query__input-magnify">
           <UID name={id => `${this.searchIdPrefix}-${id}`}>
             {id => (
               <React.Fragment>
@@ -254,13 +263,14 @@ export default class SearchQueryForm extends PureComponent {
                   onChange={this.setKeyword}
                   value={this.state.keyword}
                   placeholder={"Search…"}
+                  className="search-query__input"
                 />
               </React.Fragment>
             )}
           </UID>
-          <button type="submit" className="search-submit">
+          <button type="submit" className="search-query__submit">
             <Utility.IconComposer
-              iconClass="search-icon"
+              iconClass="search-query__search-icon"
               icon="search16"
               size={22}
             />
@@ -271,16 +281,22 @@ export default class SearchQueryForm extends PureComponent {
           <div
             role="group"
             aria-labelledby="search-within-header"
-            className="filters"
+            className="search-query__filters"
           >
             {this.props.searchType !== "reader" ? (
-              <h4 id="search-within-header" className="group-label">
+              <h4
+                id="search-within-header"
+                className="search-query__group-label"
+              >
                 {"Search within:"}
               </h4>
             ) : null}
-            <div className="checkbox-group">
+            <div className="search-query__checkbox-group">
               {this.props.searchType === "reader" ? (
-                <h4 id="search-within-header" className="group-label">
+                <h4
+                  id="search-within-header"
+                  className="search-query__group-label"
+                >
                   {"Search within:"}
                 </h4>
               ) : null}
@@ -291,7 +307,7 @@ export default class SearchQueryForm extends PureComponent {
                   <label
                     htmlFor={filterCheckboxId}
                     key={scope.value}
-                    className="checkbox"
+                    className={this.checkboxClasses}
                   >
                     <input
                       type="checkbox"
@@ -318,13 +334,20 @@ export default class SearchQueryForm extends PureComponent {
           <div
             role="group"
             aria-labelledby="show-results-for-header"
-            className="filters"
+            className="search-query__filters"
           >
-            <h4 id="show-results-for-header" className="group-label">
+            <h4
+              id="show-results-for-header"
+              className="search-query__group-label"
+            >
               {"Show Results For:"}
             </h4>
-            <div className="checkbox-group">
-              <label htmlFor="all-filters" key={"all"} className="checkbox">
+            <div className="search-query__checkbox-group">
+              <label
+                htmlFor="all-filters"
+                key={"all"}
+                className={this.checkboxClasses}
+              >
                 <input
                   type="checkbox"
                   id="all-filters"
@@ -348,7 +371,7 @@ export default class SearchQueryForm extends PureComponent {
                   <label
                     htmlFor={facetCheckboxId}
                     key={facet.value}
-                    className="checkbox"
+                    className={this.checkboxClasses}
                   >
                     <input
                       type="checkbox"

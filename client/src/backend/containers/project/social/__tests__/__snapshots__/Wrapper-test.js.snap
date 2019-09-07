@@ -5,32 +5,34 @@ exports[`Backend Project Social Wrapper Container renders correctly 1`] = `
   <Router history={{...}}>
     <Provider store={{...}}>
       <Project.Social.Wrapper route={{...}} project={{...}}>
-        <Connect(AuthorizeComponent) entity={{...}} ability=\\"manageSocials\\" failureNotification={true} failureRedirect=\\"/backend/projects/1\\">
-          <AuthorizeComponent entity={{...}} ability=\\"manageSocials\\" failureNotification={true} failureRedirect=\\"/backend/projects/1\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureFatalError={{...}}>
-            <section>
-              <withRouter(Router.Switch('DrawerSwitch)) parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\">
-                <Router.Switch('DrawerSwitch) parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" history={{...}} location={{...}} match={{...}} staticContext={[undefined]}>
-                  <DrawerSwitch parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" history={{...}} location={{...}} match={[undefined]} staticContext={[undefined]} wrapperProps={{...}}>
-                    <Connect(withRouter(Drawer.Wrapper)) open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\">
-                      <withRouter(Drawer.Wrapper) open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" connected={true} dispatch={[Function]}>
-                        <Drawer.Wrapper open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" connected={true} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" lockScrollClickCloses={true} style=\\"backend\\" wide={false} entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true} focusTrap={true} includeSRCloseButton={false}>
-                          <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-                            <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                              <span />
-                            </TransitionGroup>
-                          </CSSTransitionGroup>
-                        </Drawer.Wrapper>
-                      </withRouter(Drawer.Wrapper)>
-                    </Connect(withRouter(Drawer.Wrapper))>
-                  </DrawerSwitch>
-                </Router.Switch('DrawerSwitch)>
-              </withRouter(Router.Switch('DrawerSwitch))>
-              <Connect(Project.Social.TwitterQueries) project={{...}} match={[undefined]}>
-                <Project.Social.TwitterQueries project={{...}} match={[undefined]} twitterQueries={{...}} twitterQueriesMeta={[undefined]} dispatch={[Function]} />
-              </Connect(Project.Social.TwitterQueries)>
-            </section>
-          </AuthorizeComponent>
-        </Connect(AuthorizeComponent)>
+        <Connect(withRouter(AuthorizeComponent)) entity={{...}} ability=\\"manageSocials\\" failureNotification={true} failureRedirect=\\"/backend/projects/1\\">
+          <withRouter(AuthorizeComponent) entity={{...}} ability=\\"manageSocials\\" failureNotification={true} failureRedirect=\\"/backend/projects/1\\" authentication={{...}} dispatch={[Function]}>
+            <AuthorizeComponent entity={{...}} ability=\\"manageSocials\\" failureNotification={true} failureRedirect=\\"/backend/projects/1\\" authentication={{...}} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} successBehavior=\\"show\\" failureFatalError={{...}}>
+              <section>
+                <withRouter(Router.Switch('DrawerSwitch)) parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\">
+                  <Router.Switch('DrawerSwitch) parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" history={{...}} location={{...}} match={{...}} staticContext={[undefined]}>
+                    <DrawerSwitch parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" history={{...}} location={{...}} match={[undefined]} staticContext={[undefined]} wrapperProps={{...}}>
+                      <Connect(withRouter(Drawer.Wrapper)) open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\">
+                        <withRouter(Drawer.Wrapper) open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" connected={true} dispatch={[Function]}>
+                          <Drawer.Wrapper open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" connected={true} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" lockScrollClickCloses={true} context=\\"backend\\" size=\\"default\\" padding=\\"default\\" position=\\"default\\" entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true} focusTrap={true} includeSRCloseButton={false}>
+                            <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+                              <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                                <span />
+                              </TransitionGroup>
+                            </CSSTransitionGroup>
+                          </Drawer.Wrapper>
+                        </withRouter(Drawer.Wrapper)>
+                      </Connect(withRouter(Drawer.Wrapper))>
+                    </DrawerSwitch>
+                  </Router.Switch('DrawerSwitch)>
+                </withRouter(Router.Switch('DrawerSwitch))>
+                <Connect(Project.Social.TwitterQueries) project={{...}} match={[undefined]}>
+                  <Project.Social.TwitterQueries project={{...}} match={[undefined]} twitterQueries={{...}} twitterQueriesMeta={[undefined]} dispatch={[Function]} />
+                </Connect(Project.Social.TwitterQueries)>
+              </section>
+            </AuthorizeComponent>
+          </withRouter(AuthorizeComponent)>
+        </Connect(withRouter(AuthorizeComponent))>
       </Project.Social.Wrapper>
     </Provider>
   </Router>

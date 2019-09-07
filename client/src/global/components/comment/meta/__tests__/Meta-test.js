@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import Meta from "../";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Global.Comment.Detail component", () => {
   const store = build.store();
@@ -11,11 +12,11 @@ describe("Global.Comment.Detail component", () => {
   const comment = build.entity.comment("2");
 
   it("renders correctly", () => {
-    const component = renderer.create(
+    const component = renderer.create(wrapWithRouter(
       <Provider store={store}>
         <Meta creator={creator} comment={comment} />
       </Provider>
-    );
+    ));
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

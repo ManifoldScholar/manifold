@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Form from "backend/components/form";
+import Form from "global/components/form";
+import setter from "global/components/form/setter";
 import PropTypes from "prop-types";
 import KindPicker from "./KindPicker";
 import IconPicker from "./IconPicker";
@@ -97,4 +98,4 @@ class Fields extends Component {
   }
 }
 
-export default Form.setter(Fields);
+export default setter(Fields);

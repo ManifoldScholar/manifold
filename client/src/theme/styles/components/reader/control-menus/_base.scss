@@ -1,0 +1,50 @@
+.control-menu {
+  &__header,
+  &__section {
+    padding: 15px 30px;
+  }
+
+  &__header {
+    display: block;
+    width: 100%;
+    background-color: $neutral10;
+
+    &--with-icon {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+  }
+
+  &__heading {
+    @include templateHead;
+    margin: 0;
+    font-size: 15px;
+    font-weight: $medium;
+    color: $neutral75;
+  }
+
+  &__button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 10px 10px;
+    font-size: 13px;
+    color: $neutral75;
+    background-color: $neutral10;
+    transition:
+      color $duration $timing,
+      background-color $duration $timing;
+
+    &:hover:not(:disabled):not([aria-disabled='true']),
+    &:focus-visible {
+      color: $neutralWhite;
+      background-color: $accentPrimary;
+      outline: 0;
+    }
+
+    &:disabled {
+      color: transparentize($neutral75, 0.5);
+    }
+  }
+}

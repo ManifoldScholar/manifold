@@ -4,6 +4,7 @@ import { currentUserActions } from "actions";
 import { get } from "lodash";
 import classNames from "classnames";
 import LoginExternal from "./LoginExternal";
+import Notifications from "global/containers/Notifications";
 
 export default class Login extends Component {
   static propTypes = {
@@ -58,6 +59,11 @@ export default class Login extends Component {
 
     return (
       <div>
+        {this.props.willRedirect && (
+          <div style={{ marginBottom: 25 }}>
+            <Notifications scope="global" style="drawer" animate={false} />
+          </div>
+        )}
         <form method="post" onSubmit={this.handleLogin}>
           <div className="row-1-p">
             <div className="form-input form-error">

@@ -10,7 +10,11 @@ import SignInUp from "global/components/sign-in-up";
 import has from "lodash/has";
 import get from "lodash/get";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
-import { uiVisibilityActions, routingActions } from "actions";
+import {
+  uiVisibilityActions,
+  routingActions,
+  notificationActions
+} from "actions";
 import { requests } from "api";
 import { select } from "utils/entityUtils";
 import { closest } from "utils/domUtils";
@@ -66,7 +70,8 @@ class ManifoldContainer extends PureComponent {
     }
 
     if (this.routeChanged(prevProps.location, this.props.location)) {
-      this.props.dispatch(routingActions.update(this.props.location.state));
+      this.dispatchRouteUpdate();
+      if (this.routeStateRequestsLogin) this.maybeShowLogin();
     }
 
     if (
@@ -76,6 +81,29 @@ class ManifoldContainer extends PureComponent {
       )
     )
       this.doPostLogout();
+
+    if (
+      this.userJustLoggedIn(prevProps.authentication, this.props.authentication)
+    )
+      this.doPostLogin();
+  }
+
+  get routeStateRequestsLogin() {
+    if (this.props.location.state)
+      return Boolean(this.props.location.state.showLogin);
+  }
+
+  get routeStateRequestsPostLoginRedirect() {
+    if (this.props.location.state)
+      return Boolean(this.props.location.state.postLoginRedirect);
+  }
+
+  maybeShowLogin() {
+    this.props.dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
+  }
+
+  dispatchRouteUpdate() {
+    this.props.dispatch(routingActions.update(this.props.location.state));
   }
 
   routeChanged(prevLocation, location) {
@@ -91,8 +119,19 @@ class ManifoldContainer extends PureComponent {
     return auth.authenticated === false && prevAuth.authenticated === true;
   }
 
+  userJustLoggedIn(prevAuth, auth) {
+    return auth.authenticated === true && prevAuth.authenticated === false;
+  }
+
   doPostLogout() {
     this.redirectToHome();
+  }
+
+  doPostLogin() {
+    if (this.routeStateRequestsPostLoginRedirect) {
+      this.props.dispatch(notificationActions.removeAllNotifications());
+      this.props.history.push(this.props.location.state.postLoginRedirect);
+    }
   }
 
   redirectToHome() {

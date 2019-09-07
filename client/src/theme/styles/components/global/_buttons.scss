@@ -134,6 +134,22 @@
     background-color: $accentPrimary;
   }
 
+  &--gray {
+    color: $neutral75;
+    background-color: $neutral10;
+    border-color: $neutral10;
+
+    &:hover {
+      background-color: $neutral20;
+      border-color: $neutral20;
+    }
+
+    &:focus-visible {
+      background-color: $neutral30;
+      border-color: $neutral30;
+    }
+  }
+
   &--dull {
     color: $neutral50;
     border-color: $neutral50;
@@ -654,8 +670,8 @@
 @mixin listButtonSimple {
   @include buttonUnstyled;
   @include utilityPrimary;
-  color: $neutral40;
   font-size: 14px;
+  color: $neutral40;
   border: 0;
   transition: color $duration $timing;
 
@@ -906,9 +922,9 @@
 
   &__container {
     position: relative;
-    width: 100%;
     display: flex;
     align-items: center;
+    width: 100%;
     padding-top: 31px;
     padding-bottom: 28px;
   }

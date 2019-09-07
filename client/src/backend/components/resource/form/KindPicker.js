@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { UID } from "react-uid";
 import classNames from "classnames";
 import IconComputed from "global/components/icon-computed";
-import Form from "backend/components/form";
+import setter from "global/components/form/setter";
 import IconComposer from "global/components/utility/IconComposer";
 
 class KindPicker extends PureComponent {
@@ -136,4 +136,4 @@ class KindPicker extends PureComponent {
   }
 }
 
-export default Form.setter(KindPicker);
+export default setter(KindPicker);

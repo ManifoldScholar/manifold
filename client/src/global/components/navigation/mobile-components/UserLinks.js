@@ -38,18 +38,26 @@ export default class UserLinks extends PureComponent {
     this.props.closeNavigation();
   };
 
+  handleReadingGroupsClick = event => {
+    event.preventDefault();
+    this.props.history.push(lh.link("frontendReadingGroups"));
+    this.props.closeNavigation();
+  };
+
   render() {
     if (!this.props.authentication.authenticated)
       return (
         <ul className="nested-nav__list nested-nav__list--user-links">
           <li className="nested-nav__item">
             <button
-              className="nested-nav__button nested-nav__grid-item"
+              className="nested-nav__button"
               onClick={this.handleLoginClick}
               aria-describedby="user-menu-login-mobile"
             >
-              <Avatar />
-              <span className="nested-nav__button-text">Login</span>
+              <div className="nested-nav__grid-item">
+                <Avatar />
+                <span className="nested-nav__button-text">Login</span>
+              </div>
             </button>
             <span id="user-menu-login-mobile" className="aria-describedby">
               Login to Manifold
@@ -120,6 +128,25 @@ export default class UserLinks extends PureComponent {
             className="aria-describedby"
           >
             Edit your notification settings
+          </span>
+        </li>
+        <li className="nested-nav__item">
+          <button
+            className="nested-nav__button"
+            onClick={this.handleReadingGroupsClick}
+            aria-describedby="user-menu-groups-mobile"
+          >
+            <div className="nested-nav__grid-item">
+              <IconComposer
+                icon="annotationGroup24"
+                size={32}
+                iconClass="nested-nav__button-icon"
+              />
+              <span className="nested-nav__button-text">Manage Groups</span>
+            </div>
+          </button>
+          <span id="user-menu-groups-mobile" className="aria-describedby">
+            Manage your Reading Groups
           </span>
         </li>
         <li className="nested-nav__item">

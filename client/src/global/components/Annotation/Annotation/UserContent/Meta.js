@@ -4,20 +4,22 @@ import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import Authorize from "hoc/authorize";
 import Avatar from "global/components/avatar/index";
+import lh from "helpers/linkHandler";
+import { Link } from "react-router-dom";
 
-export default class AnnotationDetail extends PureComponent {
+export default class AnnotationMeta extends PureComponent {
   static displayName = "Annotation.Meta";
 
   static propTypes = {
-    creator: PropTypes.object.isRequired,
+    creator: PropTypes.object,
     annotation: PropTypes.object.isRequired,
-    showAnnotationLabel: PropTypes.bool,
     subject: PropTypes.string
   };
 
-  static defaultProps = {
-    showAnnotationLabel: false
-  };
+  get isAnonymous() {
+    const { creator } = this.props;
+    if (!creator) return true;
+  }
 
   get subtitle() {
     if (!this.props.subject) return this.dateSubtitle;
@@ -26,10 +28,9 @@ export default class AnnotationDetail extends PureComponent {
 
   get name() {
     const { creator, annotation } = this.props;
-    const isCreator = annotation.attributes.currentUserIsCreator;
-    let name = creator.attributes.fullName;
-    if (isCreator) name = "Me";
-    return <h4 className="annotation-meta__author-name">{name}</h4>;
+    if (annotation.attributes.currentUserIsCreator) return "Me";
+    if (this.isAnonymous) return "Anonymous";
+    return creator.attributes.fullName;
   }
 
   get subjectSubtitle() {
@@ -54,57 +55,53 @@ export default class AnnotationDetail extends PureComponent {
     );
   }
 
-  get label() {
-    const { annotation, showAnnotationLabel } = this.props;
-    let label = null;
-    if (showAnnotationLabel) {
-      label = "Annotation";
-    } else if (annotation.attributes.authorCreated) {
-      label = "Author";
-    }
-
-    if (!label) return null;
-  }
-
   get avatarUrl() {
-    if (this.props.creator.attributes.avatarStyles) {
-      return this.props.creator.attributes.avatarStyles.smallSquare;
-    } else return null;
+    if (this.isAnonymous) return null;
+    return this.props.creator.attributes.avatarStyles.smallSquare;
   }
 
   get avatarClassNames() {
     return classNames({
       "annotation-meta__avatar": true,
-      "annotation-meta__avatar--dull": !this.props.creator.attributes
-        .isCurrentUser,
+      "annotation-meta__avatar--dull":
+        !this.isAnonymous && !this.props.creator.attributes.isCurrentUser,
       "annotation-meta__avatar-placeholder-container": !this.avatarUrl,
       "annotation-meta__avatar-image-container": this.avatarUrl
     });
   }
 
   renderMarkers(annotation) {
-    if (this.props.showAnnotationLabel) {
-      return <div className="marker tertiary">Annotation</div>;
-    }
     return (
       <div className="markers">
-        {annotation.attributes.authorCreated ? (
+        {annotation.attributes.authorCreated && (
           <div className="marker tertiary">Author</div>
-        ) : null}
-        {annotation.attributes.private ? (
+        )}
+        {annotation.attributes.private && (
           <div className="marker secondary">{"Private"}</div>
-        ) : null}
-        <Authorize kind="admin">
-          {annotation.attributes.flagsCount > 0 ? (
+        )}
+        {annotation.attributes.flagsCount > 0 && (
+          <Authorize kind="admin">
             <div className="marker secondary">
               {annotation.attributes.flagsCount}
               {annotation.attributes.flagsCount === 1 ? " flag" : " flags"}
             </div>
-          ) : null}
-        </Authorize>
-        {this.props.showAnnotationLabel ? (
-          <div className="marker tertiary">{"Annotation"}</div>
-        ) : null}
+          </Authorize>
+        )}
+        {annotation.relationships.readingGroup && (
+          <div className="marker tertiary">
+            <Link
+              to={lh.link(
+                "frontendReadingGroupDetail",
+                annotation.relationships.readingGroup.id,
+                {
+                  text: annotation.attributes.textId
+                }
+              )}
+            >
+              {annotation.relationships.readingGroup.attributes.name}
+            </Link>
+          </div>
+        )}
       </div>
     );
   }
@@ -119,7 +116,7 @@ export default class AnnotationDetail extends PureComponent {
           <div className={this.avatarClassNames}>
             <Avatar url={this.avatarUrl} />
           </div>
-          {this.name}
+          <h4 className="annotation-meta__author-name">{this.name}</h4>
           {this.subtitle}
         </div>
         {this.renderMarkers(annotation)}

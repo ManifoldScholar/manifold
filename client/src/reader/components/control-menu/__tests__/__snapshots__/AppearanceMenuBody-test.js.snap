@@ -9,22 +9,22 @@ Array [
     role="status"
   />,
   <div
-    className="appearance-menu"
+    className="appearance-menu control-menu"
   >
-    <header
-      className="appearance-menu__header"
+    <div
+      className="control-menu__header"
     >
-      <h4
-        className="appearance-menu__heading"
+      <div
+        className="control-menu__heading"
       >
-        Adjust Appearance:
-      </h4>
-    </header>
+        Adjust appearance:
+      </div>
+    </div>
     <ul
       className="appearance-menu__list"
     >
       <li
-        className="appearance-menu__section"
+        className="appearance-menu__section control-menu__section"
       >
         <div
           className="appearance-menu__font-control-group"
@@ -83,7 +83,7 @@ Array [
             </fieldset>
           </div>
           <div
-            className="appearance-menu__font-size-control"
+            className="appearance-menu__font-size-control appearance-menu__font-size-control--serif"
           >
             <div
               aria-label="Adjust font size"
@@ -154,7 +154,7 @@ Array [
             </div>
           </div>
           <div
-            className="appearance-menu__font-size-control"
+            className="appearance-menu__font-size-control appearance-menu__font-size-control--sans"
           >
             <div>
               <button
@@ -224,7 +224,7 @@ Array [
         </div>
       </li>
       <li
-        className="appearance-menu__section"
+        className="appearance-menu__section control-menu__section"
       >
         <div
           className="appearance-menu__color-buttons-container"
@@ -303,7 +303,7 @@ Array [
         </div>
       </li>
       <li
-        className="appearance-menu__section"
+        className="appearance-menu__section control-menu__section"
       >
         <div
           aria-label="Adjust text margins"
@@ -377,7 +377,7 @@ Array [
     </ul>
     <div>
       <button
-        className="appearance-menu__reset-button appearance-menu__primary-hover-button appearance-menu__button-base"
+        className="control-menu__button"
         disabled={false}
         onClick={[Function]}
       >

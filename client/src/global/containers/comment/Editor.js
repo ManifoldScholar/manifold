@@ -163,8 +163,9 @@ export class CommentEditor extends PureComponent {
   }
 
   render() {
-    const textClass = classNames({
-      expanded: this.state.body
+    const textareaClass = classNames({
+      "annotation-editor__textarea": true,
+      "annotation-editor__textarea--expanded": this.state.body
     });
     const showLogin = bindActionCreators(
       () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
@@ -172,15 +173,15 @@ export class CommentEditor extends PureComponent {
     );
 
     return (
-      <div className="comment-editor">
+      <div className="annotation-editor">
         {this.props.label ? (
-          <h2 className="comment-editor__editor-label">
+          <h2 className="annotation-editor__editor-label">
             <IconComposer
               icon="commentPencil32"
               size={42}
-              iconClass="comment-editor__label-icon"
+              iconClass="annotation-editor__label-icon"
             />
-            <span className="comment-editor__label-text">
+            <span className="annotation-editor__label-text">
               {this.props.label}
             </span>
           </h2>
@@ -211,18 +212,18 @@ export class CommentEditor extends PureComponent {
                     }}
                     id={`${this.idPrefix}-${id}`}
                     onKeyDown={this.submitOnReturnKey}
-                    className={textClass}
+                    className={textareaClass}
                     placeholder={this.placeholder(this.props)}
                     onChange={this.handleBodyChange}
                     value={this.state.body}
                     aria-describedby={`${this.idForErrorPrefix}-${id}`}
                   />
-                  <div className="utility">
-                    <div className="buttons">
+                  <div className="annotation-editor__actions">
+                    <div className="annotation-editor__buttons">
                       <button
                         type="button"
                         onClick={this.props.cancel}
-                        className="button-secondary button-secondary--dull"
+                        className="button-primary button-primary--gray"
                       >
                         Cancel
                       </button>
@@ -230,14 +231,7 @@ export class CommentEditor extends PureComponent {
                         className="button-secondary"
                         disabled={!this.state.body}
                       >
-                        <IconComposer
-                          icon="commentPost32"
-                          size="default"
-                          iconClass="button-secondary__icon"
-                        />
-                        <span className="button-secondary__text">
-                          {this.buttonLabel(this.props)}
-                        </span>
+                        {this.buttonLabel(this.props)}
                       </button>
                     </div>
                   </div>

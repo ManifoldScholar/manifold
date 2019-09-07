@@ -1,376 +1,242 @@
-.header-reader {
+.reader-header {
+  $paddingLateral: $containerPaddingNarrow;
+  $paddingLateralNarrow: 11px;
+
+  --button-color: #{$neutral75};
+
+  @include reactSlideTransition('left', '.reader-return-menu');
+  @include reactSlideTransition('right', '.user-menu');
+  @include reactSlideTransition('right', '.search-menu');
+
   position: fixed;
   top: 0;
   width: 100%;
 
-  .scheme-dark & {
-    .container-banner {
-      background-color: $neutral100;
-
-      button:focus-visible {
-        color: $neutral40;
-        background-color: $neutral85;
-        outline: 0;
-      }
-
-      &::after {
-        display: none;
-      }
-    }
-
-    .button-menu {
-      color: $neutral40;
-      background-color: $neutral100;
-    }
-
-    .button-index {
-      color: $neutral20;
-      background-color: $neutral95;
-    }
-
-    .menu-buttons ul li button.button-active {
-      background-color: $neutral90;
-    }
-  }
-
-  .container-banner {
-    @include clearfix;
+  /* stylelint-disable property-no-vendor-prefix */
+  &__inner {
     position: relative;
-    height: 47px;
-    background-color: $neutralWhite;
-    transition: background-color $duration $timing;
+    display: -ms-grid;
+    display: grid;
+    grid-template: 'menu-group-left title-bar menu-group-right' 46px / max-content 1fr max-content;
+    width: 200vw;
+    color: $neutral75;
+    background-color: $neutral05;
+    transition: transform $duration ease-out;
+    -ms-grid-rows: 46px;
+    -ms-grid-columns: max-content 1fr max-content;
 
-    &::after {
-      display: block;
+    &--shifted {
+      transform: translateX(-100vw);
+    }
+
+    @include respond($break50) {
       width: 100%;
-      height: 1px;
-      content: '';
-      background-color: $neutral50;
-      opacity: 1; // Let's make the border permanently visible --ZD
-      transition: opacity $duration $timing;
     }
   }
 
-  // Navigation-Dropdown
-  .button-menu {
-    @include buttonUnstyled;
-    @include utilityPrimary;
-    float: left;
+  &__menu-group {
+    display: flex;
+
+    &--left {
+      grid-area: menu-group-left;
+      -ms-grid-row: 1;
+      -ms-grid-column: 1;
+      width: 100vw;
+
+      @include respond($break50) {
+        width: auto;
+      }
+    }
+
+    &--right {
+      grid-area: menu-group-right;
+      -ms-grid-row: 1;
+      -ms-grid-column: 3;
+      width: 100vw;
+
+      @include respond($break50) {
+        width: auto;
+      }
+    }
+  }
+
+  &__title-bar {
+    @include templateHead;
+    position: relative;
+    display: none;
+    grid-area: title-bar;
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
     height: 100%;
-    padding: 0 18px 1px;
-    font-size: 14px;
-    color: $neutral70;
-    background-color: $neutral10;
-    transition: color $duration $timing, background-color $duration $timing;
+    overflow: hidden;
 
-    @include respond($break60) {
-      padding: 0 25px 1px;
+    @include respond($break75) {
+      display: block;
     }
+  }
+  /* stylelint-enable property-no-vendor-prefix */
 
-    &:focus-visible {
-      color: $neutral80;
-      background-color: $focusTertiary;
-      outline: 0;
-    }
+  &__title-bar-text {
+    @include templateHead;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-right: $paddingLateral;
+    padding-left: $paddingLateral;
+    margin: 0;
+    overflow: hidden;
+    font-size: 18px;
+    font-weight: $medium; // OD
+    transition: transform 0.4s $timing;
 
-    &:hover {
-      color: $neutralWhite;
-      background-color: $accentPrimary;
-      outline: 0;
+    .reader-header__title-bar--show-section & {
+      transform: translateY(-100%);
     }
   }
 
-  .button-index {
+  &__title-inner-text {
+    position: relative;
+    top: -2px;
+    overflow: hidden;
+    line-height: 1.5;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__button {
     @include buttonUnstyled;
     @include utilityPrimary;
     position: relative;
     display: flex;
     align-items: center;
-    float: left;
     height: 100%;
-    padding: 0 18px 1px 30px;
-    font-size: 14px;
-    font-weight: $semibold;
-    color: $neutral70;
-    background-color: $neutral05;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 13px;
     transition: color $duration $timing,
       background-color $duration $timing;
 
-    &:focus-visible {
-      color: $neutral80;
-      background-color: $focusTertiary;
-      outline: 0;
-
-      &:active {
-        color: $neutral70;
-        background-color: $neutral05;
-      }
+    @include respond($break50) {
+      font-size: 14px;
     }
 
-    &:hover {
+    &:active,
+    &.button-active,
+    &:hover,
+    &:focus-visible {
       color: $neutralWhite;
       background-color: $accentPrimaryLight;
       outline: 0;
     }
 
-    &__text {}
+    &--pad-default {
+      padding-right: $paddingLateral;
+      padding-left: $paddingLateral;
+    }
 
-    &__icon {
-      margin-left: 14px;
+    &--pad-narrow {
+      padding-right: $paddingLateralNarrow;
+      padding-left: $paddingLateralNarrow;
+    }
+
+    &--gray {
+      background-color: $neutral10;
+
+      &:hover {
+        background-color: $accentPrimary;
+      }
     }
   }
 
-  // <header>
-  .title {
-    @include templateHead;
-    position: relative;
-    display: none;
-    height: 100%;
-    overflow: hidden;
+  &__button-icon {
+    margin-left: 1em;
 
-    @include respond($break85) {
-      display: block;
-    }
-
-    .text-title, .section-title {
-      @include templateHead;
-      position: relative;
-      height: 100%;
-      padding: 10px 287px 0 18px;
-      margin: 0;
-      overflow: hidden;
-      font-size: $type70;
-      font-weight: $medium; // OD
-      color: $neutral50;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      transition: transform 0.4s $timing;
-    }
-
-    &.show-section .text-title, &.show-section .section-title {
-      transform: translateY(-100%);
-    }
-  }
-
-  .menu-buttons {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-
-    ul {
-      @include listHorizontal;
-      position: relative;
+    &--large {
       display: none;
-      height: 100%;
 
       @include respond($break50) {
         display: block;
       }
-
-      li {
-        position: relative;
-        height: 100%;
-        vertical-align: middle;
-
-        button {
-          display: inline-block;
-          padding: 0 10px;
-
-          &.button-active {
-            background-color: $neutral10;
-          }
-
-          &:focus-visible {
-            color: $neutral70;
-            background-color: $neutral20;
-            outline: 0;
-          }
-        }
-      }
     }
 
-    .button-search {
-      @include respond($break70) {
-        padding: 0 18px;
-      }
-    }
-
-    .button-visibility {
-      @include respond($break70) {
-        padding: 0 13px;
-      }
-    }
-
-    .button-appearance {
-      @include respond($break70) {
-        padding: 0 13px;
-      }
-    }
-
-    .button-notes {
-      @include respond($break70) {
-        padding: 0 13px;
-      }
-    }
-
-    .button-avatar {
+    &--small {
       position: relative;
-      height: 100%;
-      padding-right: 16px;
-      padding-left: 10px;
+      top: 1px;
 
-      @include respond($break70) {
-        padding-right: 16px;
-        padding-left: 16px;
-      }
-
-      &.button-active {
-        background-color: $neutral10;
-      }
-
-      .avatar {
-        @include buttonAvatar(32);
-        height: 31px;
+      @include respond($break50) {
+        display: none;
       }
     }
   }
 
-  .menu-panels-left {
+  &__options-button {
     position: absolute;
-    left: 0;
-    width: 100%;
-
-    @keyframes readerReturnSlide {
-      from {
-        left: -390px;
-      }
-
-      to {
-        left: 0;
-      }
-    }
-
-    .reader-return-menu {
-      position: absolute;
-      left: -390px;
-      transition: left $duration $timing;
-    }
-
-    .panel-visible .reader-return-menu {
-      animation: readerReturnSlide $duration $timing forwards;
-    }
-
-    .panel-leave .reader-return-menu {
-      left: 0;
-      animation: readerReturnSlide $duration $timing backwards;
-    }
-
-    .panel-leave.panel-leave-active .reader-return-menu {
-      left: -390px;
-    }
-  }
-
-
-  .menu-panels-right {
-    position: absolute;
+    top: 0;
     right: 0;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 110px;
+    color: $neutral75;
 
-    @keyframes searchSlideMobile {
-      from {
-        right: -100vw;
-      }
-
-      to {
-        right: 0;
-      }
-    }
-
-    @keyframes searchSlideDesktop {
-      from {
-        right: -687px;
-      }
-
-      to {
-        right: 0;
-      }
-    }
-
-    // Reader specific menu layout/transition
-    .search-menu {
-      position: absolute;
-      right: -100vw;
-      transition: right $duration $timing;
-
-      @include respond($break70) {
-        right: -687px;
-      }
-    }
-
-    .panel-visible .search-menu {
-      animation: searchSlideMobile $duration $timing forwards;
-
-      @include respond($break70) {
-        animation: searchSlideDesktop $duration $timing forwards;
-      }
-    }
-
-    .panel-leave .search-menu {
-      right: 0;
-      animation: searchSlideMobile $duration $timing backwards;
-
-      @include respond($break70) {
-        animation: searchSlideDesktop $duration $timing backwards;
-      }
-    }
-
-    .panel-leave.panel-leave-active .search-menu {
-      right: -100vw;
-
-      @include respond($break70) {
-        right: -687px;
-      }
-    }
-
-    @keyframes userSlide {
-      from {
-        right: -300px;
-      }
-
-      to {
-        right: 0;
-      }
-    }
-
-    .user-menu {
-      position: absolute;
-      right: -300px;
-      transition: right $duration $timing;
-
-      &__link {
-        @include respond($break40) {
-          padding-right: 76px;
-        }
-      }
-    }
-
-    .panel-visible .user-menu {
-      animation: userSlide $duration $timing forwards;
-    }
-
-    .panel-leave .user-menu {
-      right: 0;
-      animation: userSlide $duration $timing backwards;
-    }
-
-    .panel-leave.panel-leave-active .user-menu {
-      right: -300px;
+    @include respond($break50) {
+      display: none;
     }
   }
-}
 
-// Header bump
-.reader main {
-  //padding-top: $readerHeaderHeight;
+  &__options-button-icon {
+    margin-right: -10px;
+    margin-left: 3px;
+  }
+
+  &__nav-list {
+    @include listHorizontal;
+    position: relative;
+    display: block;
+    height: 100%;
+  }
+
+  &__nav-item {
+    position: relative;
+    height: 100%;
+    vertical-align: middle;
+
+    svg {
+      width: 28px;
+      height: 28px;
+
+      @include respond($break50) {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  &__panels {
+    position: absolute;
+    width: 100%;
+
+    &--left {
+      left: 0;
+    }
+
+    &--right {
+      right: 0;
+    }
+  }
+
+  .reader-return-menu,
+  .search-menu,
+  .user-menu {
+    position: absolute;
+    top: 0;
+    transition: transform $duration $timing;
+  }
+
+  .search-menu,
+  .user-menu {
+    right: 0;
+  }
 }

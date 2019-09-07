@@ -12,7 +12,7 @@
     @include buttonUnstyled;
     @include utilityPrimary;
     font-size: 12px;
-    color: $neutral70;
+    color: $neutral45;
     transition: color $duration $timing;
 
     &--delete:not(:disabled):hover {

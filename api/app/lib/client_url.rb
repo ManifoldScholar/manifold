@@ -16,6 +16,7 @@ module ClientURL
   map.add :resource_collection_show,
           "/projects/{project_slug}/resource-collection/{resource_collection_slug}"
   map.add :resource_show, "/projects/{project_slug}/resource/{resource_slug}"
+  map.add :join_reading_group, "/my/groups/?join={invitation_code}"
 
   # Usage:
   # ClientURL.call(:text_show, text_slug: 'foo')

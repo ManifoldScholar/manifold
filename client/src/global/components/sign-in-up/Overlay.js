@@ -7,10 +7,11 @@ import Login from "./Login";
 import CreateUpdate from "./CreateUpdate";
 import Update from "./Update";
 import Create from "./Create";
+import { withRouter } from "react-router-dom";
 
 import BodyClass from "hoc/body-class";
 
-export default class Overlay extends Component {
+class Overlay extends Component {
   static propTypes = {
     hideSignInUpOverlay: PropTypes.func,
     authentication: PropTypes.object,
@@ -32,10 +33,18 @@ export default class Overlay extends Component {
       this.props.authentication.authenticated &&
       !prevProps.authentication.authenticated
     ) {
-      if (this.state.view !== "account-create-update") {
+      if (
+        (this.props.authentication.authenticated && this.willRedirect) ||
+        this.state.view !== "account-create-update"
+      ) {
         this.props.hideSignInUpOverlay();
       }
     }
+  }
+
+  get willRedirect() {
+    if (!this.props.location || !this.props.location.state) return false;
+    return Boolean(this.props.location.state.postLoginRedirect);
   }
 
   updateView = (view, event = null) => {
@@ -48,6 +57,8 @@ export default class Overlay extends Component {
       handleViewChange: this.updateView,
       settings: this.props.settings,
       dispatch: this.props.dispatch,
+      location: this.props.location,
+      willRedirect: this.willRedirect,
       hideSignInUpOverlay: this.props.hideSignInUpOverlay,
       authentication: this.props.authentication
     };
@@ -120,3 +131,5 @@ export default class Overlay extends Component {
     );
   }
 }
+
+export default withRouter(Overlay);

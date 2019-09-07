@@ -1,0 +1,66 @@
+.button-visibility {
+  @include buttonUnstyled;
+  position: relative;
+  height: 100%;
+  padding: 0 14px;
+  color: $neutral50;
+  transition: color $durationFast $timing;
+}
+
+.visibility-menu {
+  @include templateHead;
+  @include uiPanelMenu;
+  color: $neutral75;
+
+  @include respond($break50) {
+    min-width: 286px;
+    max-width: 286px;
+  }
+
+  &__section-list {
+    @include listUnstyled;
+  }
+
+  &__group {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  &__group-icon {
+    margin-right: 12px;
+    margin-left: -2px;
+    color: $neutral75;
+  }
+
+  &__group-name {
+    position: relative;
+    top: 1px;
+  }
+
+  &__legend {
+    @include utilityPrimary;
+    font-size: 13px;
+  }
+
+  &__filters {}
+
+  &__checkbox {
+    & + & {
+      margin-left: 32px;
+    }
+
+    &--block {
+      display: block;
+
+      & + & {
+        margin-top: 14px;
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+  }
+}

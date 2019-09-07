@@ -2,21 +2,21 @@
 
 exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
 <fieldset
-  className="filters"
+  className="notes-filters"
 >
   <div
-    className="notes-drawer__filters-inner"
+    className="notes-filters__inner"
   >
     <legend
-      className="label"
+      className="notes-filters__label"
     >
-      Show your:
+      Show my:
     </legend>
     <div
-      className="checkbox-group"
+      className="notes-filters__checkbox-group"
     >
       <label
-        className="checkbox"
+        className="notes-filters__checkbox checkbox checkbox--gray"
         htmlFor="highlight-checkbox"
       >
         <input
@@ -47,7 +47,7 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
         Highlights
       </label>
       <label
-        className="checkbox"
+        className="notes-filters__checkbox checkbox checkbox--gray"
         htmlFor="annotation-checkbox"
       >
         <input

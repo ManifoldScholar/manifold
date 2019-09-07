@@ -2,7 +2,7 @@
 
 exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
 <nav
-  className="user-menu menu-hidden"
+  className="user-menu user-menu--frontend menu-hidden"
 >
   <i
     className="user-menu__tail tail"
@@ -77,6 +77,45 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
         id="user-menu-notifications"
       >
         Edit your notification settings
+      </span>
+    </li>
+    <li
+      className="user-menu__item"
+    >
+      <button
+        aria-describedby="user-menu-groups"
+        className="user-menu__link"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden={true}
+          className="manicon-svg user-menu__icon svg-icon--annotationGroup24"
+          height={32}
+          viewBox="0 0 24 24"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            fill="none"
+            fillRule="evenodd"
+          >
+            <path
+              d="M2,3 L2,13 L5,13 L5,17.046 L9.478,13 L16,13 L16,3 L2,3 Z M3,4 L15,4 L15,12 L9.093,12 L6,14.794 L6,12 L3,12 L3,4 Z M17.5003,7.9995 L21.9993,7.9995 L21.9993,16.9995 L19.0003,16.9995 L19.0003,21.2575 L14.8993,16.9995 L10.0003,16.9995 L10.0003,14.4995 L11.0003,14.4995 L11.0003,15.9995 L15.3253,15.9995 L18.0003,18.7775 L18.0003,15.9995 L21.0003,15.9995 L21.0003,8.9995 L17.5003,8.9995 L17.5003,7.9995 Z"
+              fill="currentColor"
+            />
+          </g>
+        </svg>
+        <span
+          className="user-menu__link-text"
+        >
+          Manage Groups
+        </span>
+      </button>
+      <span
+        className="aria-describedby"
+        id="user-menu-groups"
+      >
+        Manage your Reading Groups
       </span>
     </li>
     <li

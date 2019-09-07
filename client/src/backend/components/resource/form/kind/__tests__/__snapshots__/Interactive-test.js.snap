@@ -2,7 +2,7 @@
 
 exports[`Backend.Resource.Form.Interactive component when sub kind is embed renders correctly 1`] = `
 <div
-  className="form-section"
+  className="form-section form-section--primary"
 >
   <div
     className="form-input"
@@ -66,7 +66,7 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
 
 exports[`Backend.Resource.Form.Interactive component when sub kind is iframe renders correctly 1`] = `
 <div
-  className="form-section"
+  className="form-section form-section--primary"
 >
   <div
     className="form-input"

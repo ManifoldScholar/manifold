@@ -2,7 +2,7 @@
 
 exports[`Backend.Resource.Form.Audio component renders correctly 1`] = `
 <div
-  className="form-section"
+  className="form-section form-section--primary"
 >
   <div
     className="form-input"

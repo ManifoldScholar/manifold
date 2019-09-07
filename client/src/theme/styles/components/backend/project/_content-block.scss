@@ -36,8 +36,8 @@
     }
 
     &:focus-visible {
-      outline: 0;
       border-color: $accentPrimary;
+      outline: 0;
 
       .content-block--available.content-block--active & {
         .content-block__heading {

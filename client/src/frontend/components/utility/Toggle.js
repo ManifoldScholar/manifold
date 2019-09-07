@@ -93,7 +93,9 @@ export default class Toggle extends Component {
             aria-describedby={id}
             className="button-switch-primary"
           >
-            {options.map((option, index) => this.renderOption(option, id, index))}
+            {options.map((option, index) =>
+              this.renderOption(option, id, index)
+            )}
             <span id={id} className="aria-describedby">
               {`Toggle ${this.props.label} to ${this.unselected}`}
             </span>

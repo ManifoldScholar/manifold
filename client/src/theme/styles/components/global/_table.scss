@@ -1,4 +1,6 @@
 .table {
+  $layoutBreakpoint: $break65;
+
   &__count-container {
     @include panelRoundedLight;
     padding: 15px 22px;
@@ -16,13 +18,11 @@
     border-bottom: 1px solid $neutral45;
     transition: background-color $duration $timing;
 
-    &--body {
-      &:hover {
-        background-color:$neutral05;
+    &--is-link {
+      cursor: pointer;
 
-        .table__hover-arrow {
-          opacity: 1;
-        }
+      &.table__row--is-hovering {
+        background-color: $neutral05;
       }
     }
   }
@@ -30,13 +30,13 @@
   &__list {
     display: grid;
 
-    @include respond($break85) {
+    @include respond($layoutBreakpoint) {
       @include screenReaderText;
     }
   }
 
   &__list-item-container {
-    padding-bottom:  15px;
+    padding-bottom: 15px;
   }
 
   &__list-value {
@@ -45,25 +45,23 @@
 
   &__table {
     display: none;
+    width: 100%;
 
-    @include respond($break85) {
+    @include respond($layoutBreakpoint) {
       display: table;
-      width: 100%;
     }
+  }
+
+  &__th {
+    text-align: left;
   }
 
   &__ordered-list {
     @include listUnstyled
 
-      @include respond($break85) {
+      @include respond($layoutBreakpoint) {
       display: none;
     }
-  }
-
-  &__hover-arrow {
-    margin-left: 20px;
-    opacity: 0;
-    transition: opacity $duration $timing;
   }
 
   &__nested-link-arrow {
@@ -75,7 +73,8 @@
   }
 
   &__private-icon {
-    margin-bottom: 5px;
+    position: relative;
+    top: -2.5px;
     margin-left: 10px;
     color: $neutral70;
   }
@@ -88,15 +87,42 @@
     border-radius: 15px;
     transition: background-color $duration $timing;
 
-    @include respond($break85) {
+    @include respond($layoutBreakpoint) {
       margin-left: 17px;
     }
 
-    &:hover {
-      background-color: $neutralWhite;
+    &:hover,
+    &:focus-visible {
+      background-color: $neutral05;
 
       .table__nested-link-arrow {
         opacity: 1;
+      }
+    }
+  }
+
+  &__name {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    text-decoration: none;
+
+    &--with-link {
+      &:hover,
+      &:focus-visible {
+        outline: 0;
+      }
+    }
+  }
+
+  &__sr-link {
+    @include screenReaderText;
+
+    &:focus-visible {
+      outline: 0;
+
+      ~ .table__name-container {
+        @include defaultFocusStyle;
       }
     }
   }
@@ -111,7 +137,7 @@
   }
 
   &__padded-cell {
-    padding: 16px 22px;
+    padding: 13px 20px;
   }
 
   &__row-link {
@@ -126,41 +152,65 @@
   &__body-text {
     @include templateHead;
     position: relative;
+    margin: 0;
     color: $neutral90;
-
-    @include respond($break85) {
-      max-width: 245px;
-    }
-
-    @include respond($break95) {
-      max-width: 360px;
-    }
+    vertical-align: baseline;
   }
 
   &__value-large {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    width: 100%;
     padding: 10px 0 20px;
     margin: 0;
     font-size: 18px;
     font-weight: $medium;
-    background-color: inherit;
 
-    @include respond($break85) {
-      padding: 21px 22px;
+    @include respond($layoutBreakpoint) {
+      padding: 17px 22px 18px;
       font-size: 21px;
     }
   }
 
+  &__inline-value {
+    display: inline-block;
+    margin-right: 6px;
+    margin-left: 6px;
+  }
+
+  &__inline-icon {
+    position: relative;
+    top: -1px;
+    margin-right: 5px;
+    color: $neutral70;
+  }
+
   &__name-container {
-    @include respond($break85) {
-      display: inline-block;
-      max-width: calc(100% - 38px);
-      height: 26px;
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    overflow: hidden;
+    line-height: 1.4;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include respond($layoutBreakpoint) {
+      overflow: visible;
+      line-height: inherit;
+      white-space: normal;
     }
+  }
+
+  &__tag {
+    @include blockLabelRound;
+    position: relative;
+    top: -2px;
+    display: inline-block;
+    flex-shrink: 0;
+    padding: 0.273em 5px 0.364em;
+    margin-left: 1em;
+    font-size: 11px;
+    line-height: 1.2em;
+    color: $neutral85;
+    vertical-align: middle;
+    background-color: $neutral20;
   }
 
   &__no-left-padding {
@@ -185,6 +235,7 @@
 
   &__grid-item-colspan {
     grid-column-end: span 2;
+    min-width: 0;
   }
 
   &__value-standard {
@@ -193,10 +244,7 @@
   }
 
   &__centered {
-    padding-left: 32px;
-
-    @include respond($break85) {
-      padding-left: 0;
+    @include respond($layoutBreakpoint) {
       text-align: center;
     }
   }
@@ -205,26 +253,68 @@
     text-align: right;
   }
 
-  &__cell-small {
-    width: 55px;
-  }
+  &__cell {
+    &--small {
+      width: 55px;
+    }
 
-  &__cell-medium {
-    width: 135px;
+    &--medium {
+      width: 135px;
+    }
+
+    &--header-has-icon {
+      padding-left: 32px;
+
+      @include respond($layoutBreakpoint) {
+        padding-left: 20px;
+      }
+    }
   }
 
   &__small-padding-left {
-    @include respond($break85) {
+    @include respond($layoutBreakpoint) {
       padding-left: 10px;
     }
   }
 
   &__right-unpadded {
     padding-right: 0;
+    vertical-align: middle;
   }
 
   &__pagination {
     padding-top: 30px;
+  }
+
+  &__avatar {
+    &--image {
+      position: relative;
+      top: 2px;
+      width: 32px;
+      height: 32px;
+      margin-right: 12px;
+      border: 1px solid $neutral50;
+      border-radius: 100%;
+
+      @include respond($layoutBreakpoint) {
+        margin-right: 0;
+      }
+    }
+
+    &--placeholder {
+      margin-right: 6px;
+      margin-left: -3px;
+      color: $neutral50;
+
+      @include respond($layoutBreakpoint) {
+        margin-right: -3px;
+      }
+
+      svg {
+        width: 37px;
+        height: 37px;
+      }
+    }
   }
 
   &__avatar-placeholder-container {
@@ -234,21 +324,8 @@
     color: $neutral50;
   }
 
-  &__avatar-image-container {
-    width: 32px;
-    margin-right: 10px;
-    border: 1px solid $neutral50;
-    border-radius: 100%;
-  }
-
-  &__avatar-base-container {
-    @include respond($break85) {
-      margin-right: 0;
-    }
-  }
-
   &__hide-desktop {
-    @include respond($break85) {
+    @include respond($layoutBreakpoint) {
       display: none;
     }
   }
@@ -256,7 +333,7 @@
   &__hide-mobile {
     display: none;
 
-    @include respond($break85) {
+    @include respond($layoutBreakpoint) {
       display: inline-block;
     }
   }

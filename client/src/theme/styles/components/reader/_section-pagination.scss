@@ -1,6 +1,6 @@
 .section-pagination {
   @include clearfix;
-  background-color: $neutral20;
+  background-color: $neutral05;
   transition: background-color $duration $timing;
 
   .scheme-dark & {
@@ -21,13 +21,13 @@
     align-items: center;
     padding: 20px 0;
     font-size: 14px;
-    color: $neutral40;
+    color: $neutral50;
     text-decoration: none;
     vertical-align: middle;
+    transition: color $duration $timing;
 
     @include respond($break40) {
       padding: 28px 0;
-      font-size: 18px;
     }
 
     @include respond($break75) {
@@ -48,30 +48,12 @@
   }
 
   &__icon {
-    @include respond($break40) {
-      width: 59.08px;
-      height: 59.08px;
-    }
-
-    @include respond($break75) {
-      width: 81.231px;
-      height: 81.231px;
-    }
-
     &--previous {
-      margin-right: 5px;
-
-      @include respond($break40) {
-        margin-right: 24px;
-      }
+      margin-right: 16px;
     }
 
     &--next {
-      margin-left: 5px;
-
-      @include respond($break40) {
-        margin-left: 24px;
-      }
+      margin-left: 16px;
     }
   }
 }

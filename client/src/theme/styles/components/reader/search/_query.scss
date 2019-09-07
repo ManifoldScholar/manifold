@@ -1,6 +1,6 @@
 .search-query {
   // Input defaults
-  input[type='text'] {
+  &__input {
     @include templateHead;
     width: 100%;
     padding: 0.444em 0.889em;
@@ -11,8 +11,12 @@
     outline: none;
     appearance: none;
 
-    &:focus-visible::placeholder {
-      color: $accentPrimary;
+    &:focus-visible {
+      outline: 0;
+
+      &::placeholder {
+        color: $accentPrimary;
+      }
     }
 
     .search-menu & {
@@ -25,7 +29,7 @@
   }
 
   // Can be abstracted to shared if used elsewhere
-  .input-magnify {
+  &__input-magnify {
     position: relative;
     width: 100%;
 
@@ -33,170 +37,96 @@
       min-width: 380px;
     }
 
-    input {
+    .search-query__input {
       padding-left: 56px;
       border-radius: 8px;
     }
+  }
 
-    // Can be button or a simple icon
-    .search-submit {
-      @include buttonUnstyled;
-      position: absolute;
-      top: 50%;
-      left: 20px;
-      margin-top: -9px;
-      line-height: 0;
-      color: $neutral50;
-      transition: color $duration $timing;
+  // Can be button or a simple icon
+  &__submit {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    margin-top: -9px;
+    line-height: 0;
+    color: $neutral50;
+    transition: color $duration $timing;
 
-      &:hover,
-      &:focus-visible {
-        color: $accentPrimary;
-      }
+    &:hover,
+    &:focus-visible {
+      color: $accentPrimary;
     }
   }
 
-  .filters {
+  &__filters {
     padding-top: 36px;
+  }
 
-    label {
-      @include utilityPrimary;
-      font-size: 13px;
-      font-weight: $semibold;
-      color: $neutral70;
-      text-transform: uppercase;
+  &__checkbox {
+    @include utilityPrimary;
+    font-size: 13px;
+    color: $neutral75;
+  }
 
-      @include respond($break40) {
-        font-size: 14px;
-      }
+  &__checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-      &.group-label {
-        display: block;
-        padding-bottom: 10px;
-        margin-bottom: 17px;
-        border-bottom: 1px solid $neutral40;
+  &__group-label {
+    @include utilityPrimary;
+    position: relative;
+    display: block;
+    padding-top: 2px;
+    margin-top:  0;
+    margin-right: 30px;
+    margin-bottom: 13px;
+    font-size: 13px;
+    color: $neutral75;
+  }
 
-        .search-menu & {
-          display: inline;
-          padding-bottom: 0;
-          border-bottom: none;
-        }
-      }
+  &__checkbox {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-right: 36px;
+    margin-bottom: 10px;
+
+    & + & {
+      margin-left: 0;
     }
 
-    .checkbox-group {
-      display: flex;
-      flex-wrap: wrap;
-
-      .search-menu & {
-        padding-top: 8px;
-        padding-left: 0;
-      }
-
-      @include respond($break70) {
-        .search-menu & {
-          padding-left: 0;
-        }
-      }
+    @include respond($break50) {
+      width: auto;
+      margin-bottom: 14px;
     }
 
-    .group-label {
-      @include utilityPrimary;
-      position: relative;
-      display: block;
-      padding-top: 2px;
-      margin-top:  0;
-      margin-right: 36px;
-      margin-bottom: 17px;
-      font-size: 13px;
-      font-weight: $semibold;
-      color: $neutral70;
-      text-transform: uppercase;
-
-      @include respond($break40) {
-        font-size: 14px;
-      }
-    }
-
-    .checkbox {
-      position: relative;
-      display: block;
-      width: 100%;
-      margin-right: 36px;
-      margin-bottom: 10px;
-      cursor: pointer;
-
-      @include respond($break50) {
-        width: auto;
-        margin-bottom: 14px;
-      }
-
-      @include respond($break70) {
-        margin-right: 30px;
-        margin-bottom: 14px;
-      }
-
-      &__indicator {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        margin-right: 12px;
-        text-align: center;
-        vertical-align: middle;
-        background-color: $neutral20;
-
-        .search-menu & {
-          background-color: $neutralWhite;
-        }
-      }
-
-      // Styled, but hidden until checked
-      &__icon {
-        font-size: 11px;
-        color: $neutralOffBlack;
-        visibility: hidden;
-      }
-
-      input {
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-      }
-
-      input:checked ~ .checkbox__indicator {
-        .checkbox__icon {
-          visibility: visible;
-        }
-      }
-
-      input:focus-visible ~ .checkbox__indicator {
-        background-color:  $focusPrimary;
-      }
-
-      + .checkbox {
-        margin-left: 0;
-      }
-    }
-
-    + .filters {
-      padding-top: 40px;
+    @include respond($break70) {
+      margin-right: 30px;
+      margin-bottom: 14px;
     }
   }
 
-  .footer {
+  + .search-query__filters {
+    padding-top: 40px;
+  }
+
+  &__footer {
     display: flex;
     justify-content: space-between;
     padding-top: 11px;
+  }
 
-    .description {
-      @include templateCopy;
-      font-size: 14px;
-      font-style: italic;
-      color: $neutral80;
-    }
+  &__description {
+    @include templateCopy;
+    font-size: 14px;
+    font-style: italic;
+    color: $neutral80;
+  }
 
-    .button-primary {
-      font-size: 15px;
-    }
+  &__button-primary {
+    font-size: 15px;
   }
 }

@@ -23,4 +23,5 @@ class ApplicationSerializer < ActiveModel::Serializer
 
     object.creator == current_user
   end
+  alias :current_user_is_creator? current_user_is_creator
 end

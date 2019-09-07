@@ -18,7 +18,7 @@ $neutral50: #9a9a9a;
 $neutral70: #828282;
 $neutral75: #696969;
 $neutral80: #555555;
-$neutral85: #414042;
+$neutral85: #424242;
 $neutral90: #363636;
 $neutral95: #2e2e2e;
 $neutral100: #262626;
@@ -35,8 +35,8 @@ $accentPrimary: #52e3ac !default;
 $accentPrimaryDark: darken(desaturate($accentPrimary, 20.97), 18.82) !default; // #34a178
 $accentPrimaryMedium: darken(desaturate($accentPrimary, 20.94), 11.57) !default; // #3dbd8c
 $accentPrimaryLight: lighten(saturate($accentPrimary, 0.36), 8.04) !default; // #75e9bd
-$accentPrimaryDull: lighten(desaturate(adjust-hue($accentPrimary, -3), 14.56), 20.00) !default; // #b1ead2
-$accentPrimaryPale: lighten(saturate(adjust-hue($accentPrimary, 2), 5.00), 25.69) !default; // #c1f7e4
+$accentPrimaryDull: lighten(desaturate(adjust-hue($accentPrimary, -3), 14.56), 20) !default; // #b1ead2
+$accentPrimaryPale: lighten(saturate(adjust-hue($accentPrimary, 2), 5), 25.69) !default; // #c1f7e4
 $accentPrimaryOffWhite: lighten(desaturate(adjust-hue($accentPrimary, 5), 22.14), 35.49) !default; // #f0faf7
 
 $focusPrimary: lighten(saturate(adjust-hue($accentPrimary, 2), 7.86), 25.69) !default; // #c0f8e5
@@ -53,7 +53,7 @@ $accentPrimaryHex: str-slice(#{$accentPrimary}, 2);
 $sp20Primary: #2bd1fa !default; // #2bd1fa;
 $sp20PrimaryLight: lighten(desaturate($sp20Primary, 13.25), 20.59); // #99e3f5;
 $sp20PrimaryPale: lighten(desaturate(adjust-hue($sp20Primary, -1), 14.44), 34.31); // #d9f5fb;
-$sp20PrimaryPaleLowContrast: darken(desaturate(adjust-hue($sp20Primary, 15), 83.50), 1.96); // #808f9b;
+$sp20PrimaryPaleLowContrast: darken(desaturate(adjust-hue($sp20Primary, 15), 83.5), 1.96); // #808f9b;
 
 $sp20Secondary: #70c930;
 $sp20SecondaryLight: #c6eaac;
@@ -126,7 +126,7 @@ $containerWidthInner: $containerWidthFull - ($containerPaddingFull * 2);
 $containerWidthFocus: 680px; // Narrow container width for reading
 $containerPaddingMin: 15px; // Minimum gutter padding
 
-$readerHeaderHeight: 47px;
+$readerHeaderHeight: 46px;
 
 // Font Weights
 // These are convenience variables to keep font weight declarations consistent

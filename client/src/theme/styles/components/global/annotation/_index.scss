@@ -1,7 +1,6 @@
 // Reader Annotation Component Manifest
 // -------------------------
 
-@import './comment/index';
 @import './annotation-comments';
 @import './editor';
 @import './list';
@@ -10,3 +9,4 @@
 @import './meta';
 @import './annotation-list';
 @import './truncated';
+@import 'group-options';

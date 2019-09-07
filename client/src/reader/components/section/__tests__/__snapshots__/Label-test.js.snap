@@ -1,31 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Reader.Section.Label component renders correctly 1`] = `
-<div>
+<div
+  className="section-category-label"
+>
   <div
-    className="section-category-label fixed hidden"
+    className="container"
   >
     <div
-      className="container"
+      className="section-category-label__label"
     >
-      <div
-        className="label"
-      >
-        Hip Hop Classics
-      </div>
-    </div>
-  </div>
-  <div
-    className="section-category-label"
-  >
-    <div
-      className="container"
-    >
-      <div
-        className="label"
-      >
-        Hip Hop Classics
-      </div>
+      Hip Hop Classics
     </div>
   </div>
 </div>
