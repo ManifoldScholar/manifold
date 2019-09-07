@@ -144,9 +144,8 @@ export default class NotificationsForm extends Component {
 
   renderNotificationContent(preferences) {
     const items = config.app.locale.notificationPreferences.notifications;
-
     return items.map(item => {
-      const checked = preferences[item.key];
+      const checked = preferences[item.key] || false;
       return this.renderContentOption(item, checked);
     });
   }
@@ -157,8 +156,7 @@ export default class NotificationsForm extends Component {
     options = this.defaultOptions,
     disabled
   ) {
-    if (!preference || !value) return null;
-
+    if (!preference) return null;
     return (
       <fieldset
         className="subscriptions__radio-group form-input"

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Form from "backend/components/form";
-import FormContainer from "backend/containers/form";
+import Form from "global/components/form";
+import FormContainer from "global/containers/form";
 import { pagesAPI } from "api";
 import { select } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";

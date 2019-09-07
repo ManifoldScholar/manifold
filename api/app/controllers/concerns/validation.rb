@@ -38,6 +38,22 @@ module Validation
   end
   # rubocop:enable Metrics/MethodLength
 
+  def reading_group_membership_params
+    params.require(:data)
+    attributes = []
+    relationships = [:reading_group, :user]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def reading_group_params
+    params.require(:data)
+    attributes = [:privacy, :name, :invitation_code, :notify_on_join]
+    relationships = [:users]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def project_params
     params.require(:data)
     attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,
@@ -201,7 +217,7 @@ module Validation
   def annotation_params
     params.require(:data)
     attributes = [:start_node, :end_node, :start_char, :end_char, :section_id, :format,
-                  :subject, :body, :private]
+                  :subject, :body, :private, :reading_group_id]
     relationships = [:resource, :resource_collection]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -373,6 +389,10 @@ module Validation
     structure_params
   end
 
+  def reading_group_membership_filter_params
+    params.permit(filter: [:order])[:filter]
+  end
+
   def resource_collection_filter_params
     params.permit(filter: [:keyword, :order])[:filter]
   end
@@ -431,8 +451,9 @@ module Validation
     coerce_filter_to_hash(:filter, :ids)
     coerce_filter_to_hash(:filter, :formats)
     params.permit(filter: [:orphaned,
+                           :text, :text_section, :reading_group_membership,
                            { ids: [] },
-                           [{ formats: [] }], :text, :text_section])[:filter]
+                           [{ formats: [] }]])[:filter]
   end
 
   def subject_filter_params

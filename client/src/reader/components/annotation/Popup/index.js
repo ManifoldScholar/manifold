@@ -1,9 +1,11 @@
-import Button from "./Button";
-import Link from "./Menu/Link";
-import Panel from "./Panel";
+import Annotate from "./Annotate";
+import Link from "./Link";
+import ReadingGroups from "./ReadingGroups";
+import Share from "./Share";
 
 export default {
-  Button,
+  Annotate,
   Link,
-  Panel
+  ReadingGroups,
+  Share
 };

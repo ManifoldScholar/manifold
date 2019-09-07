@@ -7,7 +7,6 @@ import TextMeta from "reader/components/TextMeta";
 import Layout from "reader/components/layout";
 import Notes from "reader/components/notes";
 import Toc from "reader/components/Toc";
-import FooterMenu from "reader/components/FooterMenu";
 import Footers from "global/components/Footers";
 import Header from "reader/components/Header";
 import ReaderNotes from "reader/containers/ReaderNotes";
@@ -211,7 +210,7 @@ export class ReaderContainer extends Component {
       <Authorize kind="any">
         <Overlay
           closeCallback={this.props.history.goBack}
-          title={"Your Notes"}
+          title={"My Notes"}
           icon="notes24"
           contentWidth={850}
         >
@@ -283,11 +282,6 @@ export class ReaderContainer extends Component {
             {this.renderRoutes()}
           </main>
           <Footers.ReaderFooter text={this.props.text} />
-          <FooterMenu
-            visibility={this.props.visibility}
-            commonActions={this.commonActions}
-            {...this.readerActions}
-          />
           <Layout.PostFooter />
         </div>
       </BodyClass>

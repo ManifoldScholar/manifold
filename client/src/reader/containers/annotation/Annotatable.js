@@ -11,6 +11,7 @@ import CaptureClick from "./annotatable-components/CaptureClick";
 import AnnotationNotationViewer from "./annotatable-components/NotationViewer";
 import selectionHelpers from "./annotatable-components/selectionHelpers";
 import locationHelper from "helpers/location";
+import withReadingGroups from "hoc/with-reading-groups";
 
 const { request } = entityStoreActions;
 
@@ -21,6 +22,7 @@ export class Annotatable extends Component {
 
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    currentReadingGroup: PropTypes.string,
     debug: PropTypes.bool.isRequired,
     text: PropTypes.object.isRequired,
     textId: PropTypes.string.isRequired,
@@ -164,10 +166,18 @@ export class Annotatable extends Component {
   };
 
   createHighlight = () => {
+    const { currentReadingGroup } = this.props;
     const attributes = Object.assign(
       {},
       this.state.selectionState.selectionAnnotation,
-      { format: "highlight" }
+      {
+        format: "highlight",
+        private: currentReadingGroup === "private",
+        readingGroupId:
+          currentReadingGroup !== "private" && currentReadingGroup !== "public"
+            ? currentReadingGroup
+            : null
+      }
     );
     this.createAnnotation({ attributes });
   };
@@ -337,4 +347,6 @@ export class Annotatable extends Component {
   }
 }
 
-export default connect(Annotatable.mapStateToProps)(Annotatable);
+export default connect(Annotatable.mapStateToProps)(
+  withReadingGroups(Annotatable)
+);

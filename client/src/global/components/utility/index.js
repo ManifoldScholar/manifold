@@ -7,7 +7,6 @@ import ScrollToTop from "./ScrollToTop";
 import SetCSSProperty from "./SetCSSProperty";
 import SkipLink from "./SkipLink";
 import LabelWithIcon from "./LabelWithIcon";
-import Count from "./Count";
 
 export default {
   Pagination,
@@ -18,6 +17,5 @@ export default {
   ScrollToTop,
   SkipLink,
   LabelWithIcon,
-  Count,
   SetCSSProperty
 };

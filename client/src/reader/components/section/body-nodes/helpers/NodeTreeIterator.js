@@ -103,7 +103,7 @@ export default class NodeTreeIterator {
       "script",
       "col",
       "colgroup",
-      "table",
+      "Table",
       "tbody",
       "tfoot",
       "thead",

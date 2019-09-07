@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import Citation from "./Citation";
 import TruncatedTextContent from "global/components/Annotation/Annotation/TextContent/Truncated";
 import IconComposer from "global/components/utility/IconComposer";
@@ -26,6 +27,13 @@ export default class AnnotationShareWrapper extends PureComponent {
     };
   }
 
+  get selectionTextClassNames() {
+    return classNames(
+      "annotation-selection__text-container",
+      "annotation-selection__text-container--light"
+    );
+  }
+
   maybeTruncateSelection() {
     const {
       annotation: { subject }
@@ -49,12 +57,12 @@ export default class AnnotationShareWrapper extends PureComponent {
   render() {
     return (
       <div className="annotation-selection">
-        <div className="selection-text">
-          <div className="container">
+        <div className={this.selectionTextClassNames}>
+          <div className="annotation-selection__container">
             <IconComposer
               icon="socialCite32"
               size="default"
-              iconClass="selection-text__icon"
+              iconClass="annotation-selection__icon"
             />
             {this.maybeTruncateSelection()}
           </div>

@@ -1,0 +1,187 @@
+.annotation-group-options {
+  $lightBgColor: $neutral10;
+  $darkBgColor: $neutral85;
+
+  width: 290px;
+  padding-bottom: 20px;
+  background-color: $lightBgColor;
+  border-radius: $panelRoundedRadius;
+
+  &--light {
+    padding-top: 30px;
+    background-color: $lightBgColor;
+  }
+
+  &--dark {
+    padding-top: 14px;
+    background-color: $darkBgColor;
+  }
+
+  &--popup {
+    $tailSize: 16px;
+
+    @include boxShadow(5px, 15px, 35px, 8px);
+    position: absolute;
+    top: calc(100% + #{$tailSize} * 2);
+    left: 50%;
+    z-index: 1;
+    outline: 0;
+    transition:
+      opacity $duration $timing,
+      visibility $duration $timing;
+    transform: translateX(-50%);
+
+    &::after {
+      position: absolute;
+      top: -$tailSize;
+      left: 50%;
+      display: block;
+      width: 0;
+      height: 0;
+      margin-left: -$tailSize;
+      content: '';
+      border-color: transparent transparent $lightBgColor;
+      border-style: solid;
+      border-width: 0 $tailSize $tailSize;
+    }
+  }
+
+  &--hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &__list {
+    @include listUnstyled;
+    max-height: 336px; // equals 8 items
+    overflow: auto;
+  }
+
+  &__option {}
+
+  &__button {
+    @include buttonUnstyled;
+    width: 100%;
+    text-align: left;
+    transition:
+      color $duration $timing,
+      background-color $duration $timing;
+
+    .annotation-group-options--light & {
+      color: $neutral90;
+
+      &:hover,
+      &:focus-visible {
+        background-color: $neutral30;
+        outline: 0;
+      }
+    }
+
+    .annotation-group-options--dark & {
+      color: $neutralWhite;
+
+      &:hover,
+      &:focus-visible {
+        color: $darkBgColor;
+        background-color: $accentPrimary;
+        outline: 0;
+      }
+    }
+  }
+
+  /* stylelint-disable property-no-vendor-prefix */
+  &__button-inner {
+    $columnGap: 14px;
+
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 22px $columnGap 1fr $columnGap 18px;
+    grid-template: 'selected label private' auto / 22px 1fr 18px;
+    column-gap: $columnGap;
+    padding: 10px 20px;
+  }
+
+  &__button-text {
+    @include templateHead;
+    display: block;
+    grid-area: label;
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    min-height: 22px;
+    overflow: hidden;
+    font-size: 17px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__icon {
+    &--selected {
+      grid-area: selected;
+      -ms-grid-row: 1;
+      -ms-grid-column: 1;
+    }
+
+    &--private {
+      grid-area: private;
+      -ms-grid-row: 1;
+      -ms-grid-column: 5;
+      margin-top: 2px;
+      transition: color $duration $timing;
+
+      .annotation-group-options--light & {
+        color: $neutral50;
+      }
+
+      .annotation-group-options--dark & {
+        color: $neutral45;
+      }
+
+      .annotation-group-options--dark .annotation-group-options__button:hover &,
+      .annotation-group-options--dark .annotation-group-options__button:focus-visible & {
+        color: $darkBgColor;
+      }
+    }
+
+    &--link {
+      margin-left: 8px;
+    }
+  }
+  /* stylelint-enable property-no-vendor-prefix */
+
+  &__link {
+    @include utilityPrimary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    font-size: 12px;
+    text-decoration: none;
+    border: 1px solid;
+    border-radius: 4px;
+    transition:
+      color $duration $timing,
+      background-color $duration $timing,
+      border-color $duration $timing;
+
+    .annotation-group-options--light & {
+      color: #5c5c5c;
+    }
+
+    .annotation-group-options--dark & {
+      color: $neutral45;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: $neutral85;
+      background-color: $accentPrimary;
+      border-color: $accentPrimary;
+      outline: 0;
+    }
+  }
+
+  &__footer {
+    margin: 20px 20px 0;
+  }
+}

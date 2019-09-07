@@ -2,38 +2,35 @@
 
 exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
 <div
-  className="form-section"
+  className="form-section form-section--primary"
 >
   <div
     className="form-input"
   >
     <label
-      className="form-input-heading toggle above"
+      className="form-switch"
       htmlFor="switch-input-1"
     >
-      Is this an externally linked video?
-    </label>
-    <div
-      className="toggle-indicator"
-    >
-      <div
-        aria-describedby="switch-input-instructions-1"
-        aria-pressed={false}
-        className="boolean-primary"
+      <span
+        className="form-input-heading toggle above"
+      >
+        Is this an externally linked video?
+      </span>
+      <input
+        checked={false}
         id="switch-input-1"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        role="button"
-        tabIndex="0"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="toggle-indicator"
       >
         <span
-          className="screen-reader-text"
-        >
-          Is this an externally linked video?
-        </span>
-      </div>
-    </div>
+          aria-hidden="true"
+          className="boolean-primary"
+        />
+      </span>
+    </label>
   </div>
   <div
     className="form-input"
@@ -116,41 +113,38 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
 
 exports[`Backend.Resource.Form.Video component when sub kind is external_video renders correctly 1`] = `
 <div
-  className="form-section"
+  className="form-section form-section--primary"
 >
   <div
     className="form-input"
   >
     <label
-      className="form-input-heading toggle above"
+      className="form-switch"
       htmlFor="switch-input-1"
     >
-      Is this an externally linked video?
-    </label>
-    <div
-      className="toggle-indicator"
-    >
-      <div
-        aria-describedby="switch-input-instructions-1"
-        aria-pressed={false}
-        className="boolean-primary"
+      <span
+        className="form-input-heading toggle above"
+      >
+        Is this an externally linked video?
+      </span>
+      <input
+        checked={false}
         id="switch-input-1"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        role="button"
-        tabIndex="0"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="toggle-indicator"
       >
         <span
-          className="screen-reader-text"
-        >
-          Is this an externally linked video?
-        </span>
-      </div>
-    </div>
+          aria-hidden="true"
+          className="boolean-primary"
+        />
+      </span>
+    </label>
   </div>
   <div
-    className="form-section"
+    className="form-section form-section--primary"
   >
     <div
       className="form-input"

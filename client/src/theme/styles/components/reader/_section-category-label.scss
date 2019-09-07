@@ -1,4 +1,6 @@
 .section-category-label {
+  position: sticky;
+  bottom: 0;
   padding: 20px 0 18px;
   text-align: center;
   background-color: $sp20Quinary;
@@ -8,14 +10,9 @@
 
   .scheme-dark & {
     background-color: $neutral75;
-
-    .label {
-      color: $neutral30;
-      border: 1px solid $neutral30;
-    }
   }
 
-  .label {
+  &__label {
     @include utilityPrimary;
     display: inline-block;
     padding: 0.786em 0.8em;
@@ -24,21 +21,10 @@
     color: $neutral80;
     border: 1px solid $neutral80;
     transition: color $duration $timing, border $duration $timing;
-  }
 
-  &.fixed {
-    position: fixed;
-    bottom: 44px;
-    left: 0;
-    width: 100%;
-
-    @include respond($break50) {
-      bottom: 0;
+    .scheme-dark & {
+      color: $neutral30;
+      border: 1px solid $neutral30;
     }
-  }
-
-  &.hidden {
-    visibility: hidden;
-    opacity: 0;
   }
 }

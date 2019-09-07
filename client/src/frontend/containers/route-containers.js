@@ -21,10 +21,13 @@ import Page from "frontend/containers/Page";
 import Subscriptions from "frontend/containers/Subscriptions";
 import Unsubscribe from "frontend/containers/Unsubscribe";
 import Home from "frontend/containers/Home";
-import GroupMembersList from "frontend/containers/GroupMembersList";
-import GroupsContainer from "frontend/containers/GroupsContainer";
-import GroupWrapper from "frontend/containers/GroupWrapper";
-import GroupDetail from "frontend/containers/GroupDetail";
+import ReadingGroups from "frontend/containers/ReadingGroups";
+import ReadingGroupsList from "frontend/containers/ReadingGroups/List";
+import ReadingGroupsNew from "frontend/containers/ReadingGroups/New";
+import ReadingGroup from "frontend/containers/ReadingGroup";
+import ReadingGroupDetail from "frontend/containers/ReadingGroup/Detail";
+import ReadingGroupMembers from "frontend/containers/ReadingGroup/Members";
+import ReadingGroupEdit from "frontend/containers/ReadingGroup/Edit";
 
 export default {
   NotFound,
@@ -50,8 +53,11 @@ export default {
   Subscriptions,
   Unsubscribe,
   Home,
-  GroupMembersList,
-  GroupsContainer,
-  GroupWrapper,
-  GroupDetail
+  ReadingGroups,
+  ReadingGroupsList,
+  ReadingGroupsNew,
+  ReadingGroup,
+  ReadingGroupDetail,
+  ReadingGroupEdit,
+  ReadingGroupMembers
 };

@@ -1,10 +1,11 @@
 .label-with-icon {
   @include formLabelPrimary;
   color: $neutral70;
+  white-space: nowrap;
 
   &__icon {
-    margin-right: 8px;
     align-self: center;
+    margin-right: 8px;
   }
 
   &__text-large {

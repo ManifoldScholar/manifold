@@ -32,7 +32,12 @@ describe("Reader Section Container", () => {
       pathname: `/read/1/section/2`
     },
     visibility: {
-      uiPanels: {}
+      visibilityFilters: {
+        highlight: { yours: true, others: true },
+        annotation: { yours: true, others: true },
+        resource: { all: true },
+        readingGroups: { all: true }
+      }
     },
     appearance: {
       colors: {},

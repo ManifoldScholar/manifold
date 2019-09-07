@@ -97,7 +97,8 @@ export class CreateContainer extends Component {
         )
       )
       .promise.then(() => {
-        this.props.handleViewChange("account-create-update");
+        if (!this.props.willRedirect)
+          this.props.handleViewChange("account-create-update");
       });
   };
 

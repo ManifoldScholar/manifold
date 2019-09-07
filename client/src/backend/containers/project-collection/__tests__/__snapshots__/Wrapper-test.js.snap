@@ -21,22 +21,26 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
             <header
               className="content-placeholder__header"
             >
-              <svg
-                aria-hidden="true"
-                className="manicon-svg content-placeholder__icon svg-icon--booksOnShelfStrokeUnique"
-                fill="currentColor"
-                height={120}
-                stroke="currentColor"
-                viewBox="0 0 60 60"
-                width={120}
-                xmlns="http://www.w3.org/2000/svg"
+              <div
+                className="content-placeholder__icon-wrapper"
               >
-                <path
-                  d="M45.9 28.4c.2 1.2-.6 2.3-1.8 2.5-1.2.2-2.3-.6-2.5-1.8-.2-1.2.6-2.3 1.8-2.5 1.2-.1 2.3.7 2.5 1.8zm-39 19.9H17V12.2H6.9v36.1zm44.8-2.9l-10.1 1.4-5.8-34.7 10.1-1.4 5.8 34.7zM17 43.9H6.9M17 16.5H6.9m14.4 31.8h10.1V12.2H21.3v36.1zm10.1-4.4H21.3m10.1-4.3H21.3m10.1-23.1H21.3m10.1 4.3H21.3M4 48.3h52"
-                  fill="none"
-                  strokeLinecap="square"
-                />
-              </svg>
+                <svg
+                  aria-hidden="true"
+                  className="manicon-svg content-placeholder__icon svg-icon--booksOnShelfStrokeUnique"
+                  fill="currentColor"
+                  height={120}
+                  stroke="currentColor"
+                  viewBox="0 0 60 60"
+                  width={120}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M45.9 28.4c.2 1.2-.6 2.3-1.8 2.5-1.2.2-2.3-.6-2.5-1.8-.2-1.2.6-2.3 1.8-2.5 1.2-.1 2.3.7 2.5 1.8zm-39 19.9H17V12.2H6.9v36.1zm44.8-2.9l-10.1 1.4-5.8-34.7 10.1-1.4 5.8 34.7zM17 43.9H6.9M17 16.5H6.9m14.4 31.8h10.1V12.2H21.3v36.1zm10.1-4.4H21.3m10.1-4.3H21.3m10.1-23.1H21.3m10.1 4.3H21.3M4 48.3h52"
+                    fill="none"
+                    strokeLinecap="square"
+                  />
+                </svg>
+              </div>
               <h2
                 className="content-placeholder__title"
               >

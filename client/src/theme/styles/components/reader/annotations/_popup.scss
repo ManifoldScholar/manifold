@@ -1,0 +1,241 @@
+// Annotation Popup Components
+// ---------------------------
+
+// Just for components that deal with selecting an action to create an annotation
+.annotation-popup {
+  $panelBgColor: $neutral85;
+  $tailSize: 16px;
+
+  position: absolute;
+  margin-top: -30px;
+  white-space: nowrap;
+  visibility: hidden;
+  user-select: none;
+  opacity: 0;
+  transition:
+    top $duration $timing,
+    left $duration $timing,
+    opacity $duration $timing;
+
+  &--visible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__panel {
+    @include boxShadow(0, 12px, 22px, -3px, $neutralBlack, 0.39);
+    position: absolute;
+    left: 50%;
+    background-color: $panelBgColor;
+    border-radius: $panelRoundedRadius;
+    transition:
+      opacity $duration $timing,
+      transform $duration $timing;
+    transform: translateX(-50%);
+
+    &--secondary {}
+
+    &--secondary-group {
+      position: relative;
+    }
+
+    &--top {
+      top: 0;
+    }
+
+    &--bottom {
+      bottom: 0;
+    }
+
+    &.panel-enter {
+      opacity: 0.01;
+      transform: translateX(25%);
+
+      &.panel-enter-active {
+        opacity: 1;
+        transition:
+          opacity $duration $timing,
+          transform $duration $timing;
+        transform: translateX(-50%);
+      }
+    }
+
+    &.panel-leave {
+      opacity: 1;
+      transform: translateX(-50%);
+
+      &.panel-leave-active {
+        opacity: 0;
+        transition:
+          opacity $durationSlow $timing,
+          transform $durationSlow $timing;
+        transform: translateX(25%);
+      }
+    }
+  }
+
+  &__note {
+    @include templateHead;
+    padding: 1em 17px 1.063em;
+    font-size: 16px;
+    color: $neutralWhite;
+    text-align: center;
+    letter-spacing: 0.005em;
+    background-color: $neutral95;
+
+    &--top {
+      border-top-left-radius: $panelRoundedRadius;
+      border-top-right-radius: $panelRoundedRadius;
+    }
+
+    &--bottom {
+      border-bottom-right-radius: $panelRoundedRadius;
+      border-bottom-left-radius: $panelRoundedRadius;
+    }
+  }
+
+  &__header {
+    @include utilityPrimary;
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    font-size: 14px;
+    color: $neutral45;
+    background-color: $neutral95;
+    border-top-left-radius: $panelRoundedRadius;
+    border-top-right-radius: $panelRoundedRadius;
+  }
+
+  &__heading {
+    margin-left: 1em;
+  }
+
+  &__button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 11px 24px 11px 15px;
+    font-size: 14px;
+    line-height: 23px;
+    color: $neutralWhite;
+    text-align: left;
+    transition: color $duration $timing, background-color $duration $timing;
+
+    &--dark {
+      color: $neutral70;
+      background-color: $panelBgColor;
+
+      + .annotation-popup__tail--down {
+        border-color: $neutral90 transparent transparent;
+      }
+    }
+
+    &--secondary-dark {
+      padding-right: 20px;
+      padding-left: 20px;
+      color: $neutral45;
+      background-color: $neutral95;
+    }
+
+    &--stacked {
+      display: block;
+    }
+
+    &:first-of-type:not(:last-of-type):not(.annotation-popup__button--selected) {
+      border-top-left-radius: $panelRoundedRadius;
+      border-top-right-radius: $panelRoundedRadius;
+    }
+
+    &:last-of-type:not(.annotation-popup__button--selected) {
+      border-bottom-right-radius: $panelRoundedRadius;
+      border-bottom-left-radius: $panelRoundedRadius;
+    }
+
+    &:hover,
+    &--selected {
+      color: $panelBgColor;
+      background-color: $accentPrimary;
+    }
+  }
+
+  &__button-icon {
+    margin-right: 13px;
+
+    &--disclosure {
+      margin-right: -5px;
+      margin-left: 13px;
+      transform: rotate(90deg);
+    }
+  }
+
+  &__button-text {
+    position: relative;
+    top: -1px;
+
+    &--small {
+      overflow: hidden;
+      font-size: 17px;
+      font-weight: $regular;
+      text-overflow: ellipsis;
+      text-transform: none;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+  }
+
+  &__button-inner-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 175px;
+  }
+
+  .button-group {
+    + .annotation-popup__button, + .button-group {
+      border-top: 1.5px $neutral90 solid;
+    }
+  }
+
+  &__tail {
+    --tail-color: #{$panelBgColor};
+
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left: -$tailSize;
+    border-style: solid;
+    transition: border-color $duration $timing;
+
+    &--down {
+      top: 100%;
+      border-color: var(--tail-color, $panelBgColor) transparent transparent;
+      border-width: $tailSize $tailSize 0;
+
+      &.annotation-popup__tail--highlight {
+        border-color: $accentPrimary transparent transparent;
+      }
+
+      .annotation-popup__button--secondary-dark + & {
+        --tail-color: #{$neutral95};
+      }
+    }
+
+    &--up {
+      top: -$tailSize;
+      border-color: transparent transparent var(--tail-color, $panelBgColor);
+      border-width: 0 $tailSize $tailSize;
+
+      &.annotation-popup__tail--highlight {
+        border-color: transparent transparent $accentPrimary;
+      }
+    }
+
+    &--dark {
+      --tail-color: #{$neutral95};
+    }
+  }
+}

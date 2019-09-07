@@ -35,7 +35,7 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
     </div>
   </header>
   <section
-    className="form-section"
+    className="form-section form-section--primary"
   >
     <div>
       <form
@@ -128,32 +128,29 @@ exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
           className="form-input"
         >
           <label
-            className="form-input-heading toggle above"
+            className="form-switch checked"
             htmlFor="switch-input-1"
           >
-            Active
-          </label>
-          <div
-            className="toggle-indicator"
-          >
-            <div
-              aria-describedby="switch-input-instructions-1"
-              aria-pressed={true}
-              className="boolean-primary checked"
+            <span
+              className="form-input-heading toggle above"
+            >
+              Active
+            </span>
+            <input
+              checked={true}
               id="switch-input-1"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onFocus={[Function]}
-              role="button"
-              tabIndex="0"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <span
+              className="toggle-indicator"
             >
               <span
-                className="screen-reader-text"
-              >
-                Active
-              </span>
-            </div>
-          </div>
+                aria-hidden="true"
+                className="boolean-primary checked"
+              />
+            </span>
+          </label>
         </div>
         <div
           className="form-input submit wide"

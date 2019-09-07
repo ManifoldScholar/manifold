@@ -11,7 +11,12 @@ export class UserMenuBodyComponent extends Component {
     history: PropTypes.object.isRequired,
     startLogout: PropTypes.func.isRequired,
     showLoginOverlay: PropTypes.func.isRequired,
-    visible: PropTypes.bool
+    visible: PropTypes.bool,
+    context: PropTypes.oneOf(["frontend", "backend", "reader"])
+  };
+
+  static defaultProps = {
+    context: "frontend"
   };
 
   logout = () => {
@@ -31,16 +36,25 @@ export class UserMenuBodyComponent extends Component {
     this.props.history.push(lh.link("subscriptions"));
   };
 
+  handleReadingGroupsClick = event => {
+    event.preventDefault();
+    this.props.hideUserMenu();
+    this.props.history.push(lh.link("frontendReadingGroups"));
+  };
+
   render() {
     const menuClass = classNames({
       "user-menu": true,
+      [`user-menu--${this.props.context}`]: true,
       "menu-hidden": !this.props.visible,
       "menu-visible": this.props.visible
     });
 
     return (
       <nav className={menuClass}>
-        <i className="user-menu__tail tail" />
+        {this.props.context !== "reader" && (
+          <i className="user-menu__tail tail" />
+        )}
         <ul className="user-menu__list">
           <li className="user-menu__item">
             <button
@@ -74,6 +88,23 @@ export class UserMenuBodyComponent extends Component {
             </button>
             <span id="user-menu-notifications" className="aria-describedby">
               Edit your notification settings
+            </span>
+          </li>
+          <li className="user-menu__item">
+            <button
+              className="user-menu__link"
+              onClick={this.handleReadingGroupsClick}
+              aria-describedby="user-menu-groups"
+            >
+              <IconComposer
+                icon="annotationGroup24"
+                size={32}
+                iconClass="user-menu__icon"
+              />
+              <span className="user-menu__link-text">Manage Groups</span>
+            </button>
+            <span id="user-menu-groups" className="aria-describedby">
+              Manage your Reading Groups
             </span>
           </li>
           <li className="user-menu__item">

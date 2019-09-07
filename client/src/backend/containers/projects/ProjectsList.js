@@ -6,7 +6,6 @@ import Layout from "backend/components/layout";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import Authorization from "helpers/authorization";
 import EntitiesList, {
   Button,
   Search,
@@ -37,11 +36,6 @@ class ProjectsListContainerImplementation extends PureComponent {
     savedSearchPaginationState: PropTypes.func.isRequired,
     entitiesListSearchParams: PropTypes.object
   };
-
-  constructor(props) {
-    super(props);
-    this.authorization = new Authorization();
-  }
 
   componentDidMount() {
     const pagination = this.props.savedSearchPaginationState("projectsList");

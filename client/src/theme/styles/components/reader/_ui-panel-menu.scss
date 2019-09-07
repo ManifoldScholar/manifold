@@ -1,66 +1,14 @@
-@keyframes slideUpMobile {
-  from {
-    bottom: -420px;
-  }
-
-  to {
-    bottom: 45px;
-  }
-}
-
-@keyframes slideOverDesktop {
-  from {
-    right: -350px;
-  }
-
-  to {
-    right: 0;
-  }
-}
-
 @mixin uiPanelMenu {
-  position: fixed;
+  @include reactSlideTransition;
+  position: absolute;
+  top: 0;
   right: 0;
-  bottom: -420px;
   width: 100%;
   background-color: $neutral05;
-  transition: right $duration $timing,
-    bottom $duration $timing;
+  transition: transform $duration $timing;
 
   @include respond($break50) {
-    position: absolute;
-    right: -350px;
-    bottom: auto;
     width: auto;
-  }
-
-  .panel-visible & {
-    animation: slideUpMobile $duration $timing forwards;
-
-    @include respond($break50) {
-      animation: slideOverDesktop $duration $timing forwards;
-    }
-  }
-
-  .panel-leave & {
-    bottom: 44px;
-    animation: slideUpMobile $duration $timing backwards;
-
-    @include respond($break50) {
-      right: 0;
-      bottom: auto;
-      animation: slideOverDesktop $duration $timing backwards;
-    }
-  }
-
-  .panel-leave.panel-leave-active & {
-    right: 0;
-    bottom: -420px;
-
-    @include respond($break50) {
-      right: -350px;
-      bottom: auto;
-    }
   }
 }
 

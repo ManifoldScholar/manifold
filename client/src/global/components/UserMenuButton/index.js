@@ -9,7 +9,13 @@ export default class UserMenuButton extends Component {
     authentication: PropTypes.object,
     active: PropTypes.bool,
     toggleUserMenu: PropTypes.func,
-    showLoginOverlay: PropTypes.func
+    showLoginOverlay: PropTypes.func,
+    className: PropTypes.string,
+    context: PropTypes.oneOf(["frontend", "backend", "reader"])
+  };
+
+  static defaultProps = {
+    context: "frontend"
   };
 
   clickHandler = event => {
@@ -22,8 +28,9 @@ export default class UserMenuButton extends Component {
   };
 
   render() {
-    const buttonClass = classNames({
+    const buttonClass = classNames(this.props.className, {
       "button-avatar": true,
+      [`button-avatar--${this.props.context}`]: true,
       "button-active": this.props.active
     });
     return (
@@ -39,6 +46,7 @@ export default class UserMenuButton extends Component {
             this.props.authentication,
             "currentUser.attributes.avatarStyles.smallSquare"
           )}
+          iconSize={24}
           ariaHidden
         />
       </button>

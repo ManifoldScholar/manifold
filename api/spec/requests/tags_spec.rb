@@ -5,7 +5,7 @@ RSpec.describe "Tag API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  before(:each) { 5.times { FactoryBot.create(:tag, name: Faker::Dog.unique.breed) } }
+  before(:each) { 5.times { FactoryBot.create(:tag, name: Faker::Creature::Dog.unique.breed) } }
 
   describe "responds with a list of tags" do
     describe "the response" do

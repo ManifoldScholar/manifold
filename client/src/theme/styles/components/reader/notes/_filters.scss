@@ -1,0 +1,54 @@
+.notes-filters {
+  @include utilityPrimary;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  border: 0;
+
+  &__inner {
+    padding: 0;
+
+    @include respond($break90) {
+      display: flex;
+      align-items: baseline;
+    }
+  }
+
+  &__label {
+    display: inline-block;
+    padding-right: 18px;
+    color: $neutral70;
+  }
+
+  &__checkbox-group {
+    padding-top: 8px;
+
+    @include respond($break50) {
+      display: flex;
+    }
+
+    @include respond($break90) {
+      padding-top: 0;
+    }
+  }
+
+  &__checkbox {
+    display: block;
+
+    & + & {
+      margin-top: 8px;
+      margin-left: 0;
+
+      @include respond($break50) {
+        margin-top: 0;
+        margin-left: 28px;
+      }
+    }
+  }
+
+  .checkbox__indicator {
+    position: relative;
+    top: -1px;
+    background-color: $neutral10;
+  }
+}

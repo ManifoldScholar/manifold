@@ -408,14 +408,19 @@ const defaults = {
     }
   },
 
-  group: {
-    type: "group",
+  readingGroup: {
+    type: "readingGroup",
     attributes: {
+      privacy: "private",
+      currentUserRole: "owner",
+      annotationsCount: 5,
+      highlightsCount: 5,
+      membershipsCount: 10,
       abilities
     }
   },
 
-  member: {
+  readingGroupMembership: {
     type: "member",
     attributes: {
       abilities
@@ -672,12 +677,16 @@ const page = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("page", id, attributes, relationships);
 };
 
-const group = (id = null, attributes = {}, relationships = {}) => {
-  return buildEntity("group", id, attributes, relationships);
+const readingGroup = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("readingGroup", id, attributes, relationships);
 };
 
-const member = (id = null, attributes = {}, relationships = {}) => {
-  return buildEntity("member", id, attributes, relationships);
+const readingGroupMembership = (
+  id = null,
+  attributes = {},
+  relationships = {}
+) => {
+  return buildEntity("readingGroupMembership", id, attributes, relationships);
 };
 
 const projectCollection = (id = null, attributes = {}, relationships = {}) => {
@@ -716,8 +725,8 @@ export default {
   projectCollection,
   version,
   page,
-  group,
-  member,
+  readingGroup,
+  readingGroupMembership,
   actionCallout,
   contentBlock
 };

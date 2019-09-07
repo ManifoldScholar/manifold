@@ -76,6 +76,7 @@ function checkForFatalErrors(dispatch, action) {
 export default function entityStoreMiddleware({ dispatch, getStateIgnored }) {
   return next => action => {
     if (!isApiResponse(action)) return next(action);
+    if (get(action, "payload.suppressErrors")) return next(action);
     notifyApiErrors(dispatch, action);
     checkForFatalErrors(dispatch, action);
     return next(action);

@@ -110,6 +110,7 @@ export class NavigationStatic extends PureComponent {
         <SearchMenu.Button
           toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
           active={this.props.visibility.uiPanels.search}
+          className="user-nav__button user-nav__button--search"
         />
         <UIPanel
           id="search"
@@ -147,7 +148,6 @@ export class NavigationStatic extends PureComponent {
               active={props.visibility.uiPanels.user}
               showLoginOverlay={props.commonActions.toggleSignInUpOverlay}
               toggleUserMenu={props.commonActions.toggleUserPanel}
-              darkTheme={props.darkTheme}
             />
             <UIPanel
               id="user"

@@ -38,8 +38,9 @@ export default class TextTitles extends Component {
 
   render() {
     const titleClass = classNames({
-      title: true,
-      "show-section": this.props.showSection && this.state.showSection
+      "reader-header__title-bar": true,
+      "reader-header__title-bar--show-section":
+        this.props.showSection && this.state.showSection
     });
 
     return (
@@ -48,13 +49,16 @@ export default class TextTitles extends Component {
         <h1 className="screen-reader-text">
           {`${this.props.textTitle}: ${this.props.sectionTitle}`}
         </h1>
-        <h1
-          className="text-title"
-          aria-hidden="true"
-          dangerouslySetInnerHTML={{ __html: this.props.textTitle }}
-        />
-        <h1 className="section-title" aria-hidden="true">
-          {this.props.sectionTitle}
+        <h1 className="reader-header__title-bar-text" aria-hidden="true">
+          <span
+            className="reader-header__title-inner-text"
+            dangerouslySetInnerHTML={{ __html: this.props.textTitle }}
+          />
+        </h1>
+        <h1 className="reader-header__title-bar-text" aria-hidden="true">
+          <span className="reader-header__title-inner-text">
+            {this.props.sectionTitle}
+          </span>
         </h1>
       </div>
       /* eslint-enable jsx-a11y/no-static-element-interactions */

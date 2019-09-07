@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Form from "backend/components/form";
+import Form from "global/components/form";
 
 export default class ResourceFormKindVideo extends PureComponent {
   static displayName = "Resource.Form.Kind.Video";
@@ -12,7 +12,7 @@ export default class ResourceFormKindVideo extends PureComponent {
 
   renderExternalVideoForm() {
     return (
-      <div className="form-section">
+      <div className="form-section form-section--primary">
         <Form.TextInput
           label="Video ID"
           name="attributes[externalId]"
@@ -53,7 +53,7 @@ export default class ResourceFormKindVideo extends PureComponent {
 
   render() {
     return (
-      <div className="form-section">
+      <div className="form-section form-section--primary">
         <Form.Switch
           label="Is this an externally linked video?"
           name="attributes[subKind]"

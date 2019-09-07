@@ -3,7 +3,38 @@
 
 // <div> wrapper around form fields
 .form-input {
-  + .form-input {
+  &--with-actions {
+    @include respond($break60) {
+      display: -ms-grid;
+      display: grid;
+      -ms-grid-rows: auto auto;
+      -ms-grid-columns: 1fr auto;
+      grid-template:
+        'label label' auto
+        'input actions' auto / 1fr auto;
+    }
+
+    label {
+      grid-area: label;
+      -ms-grid-row: 1;
+      -ms-grid-column: 1;
+      -ms-grid-column-span: 2;
+    }
+
+    input {
+      grid-area: input;
+      -ms-grid-row: 2;
+      -ms-grid-column: 1;
+    }
+
+    .form-input__action-group {
+      grid-area: actions;
+      -ms-grid-row: 2;
+      -ms-grid-column: 2;
+    }
+  }
+
+  & + & {
     margin-top: 40px;
   }
 
@@ -13,8 +44,48 @@
     border: none;
   }
 
+  &__action-group {
+    margin-top: 18px;
+
+    @include respond($break60) {
+      margin-top: 0;
+      border-bottom: 1px solid $neutral80;
+      transition: border-color $duration $timing;
+
+      input:focus-visible + & {
+        border-color: $accentPrimary;
+      }
+    }
+  }
+
+  &__action {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    @include focusVisibleFill(rgba($accentPrimary, 0.35));
+    padding: 0.333em 1em;
+    font-size: 12px;
+    font-weight: $semibold;
+    color: $neutral75;
+    text-decoration: none;
+    letter-spacing: 0.125em;
+    background-color: $neutral10;
+    border: 1px solid $neutral10;
+    border-radius: 16px;
+    transition:
+      color $duration ease-out,
+      background-color $duration ease-out;
+
+    &:hover {
+      background-color: $neutral20;
+    }
+
+    & + & {
+      margin-left: 8px;
+    }
+  }
+
   // Avoid styling checkbox/radio labels
-  label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker) {
+  label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker):not(.form-switch) {
     @include formLabelPrimary;
     display: block;
     margin-bottom: 1em;
@@ -45,7 +116,6 @@
     &.space-bottom {
       margin-bottom: 2em;
     }
-
   }
 
   input[type='text'], input[type='email'], input[type='password'] {
@@ -151,6 +221,10 @@
       color: $neutral30;
       text-transform: none;
       letter-spacing: 0;
+
+      .browse & {
+        color: $neutral80;
+      }
     }
   }
 
@@ -398,6 +472,24 @@
     // For radio buttons
     &::before {
       opacity: 1;
+    }
+  }
+}
+
+.form-switch {
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:focus-visible ~ .toggle-indicator {
+      @include defaultFocusStyle;
+      outline-color: var(--default-focus-color, $accentPrimary);
+      outline-offset: 2px;
     }
   }
 }

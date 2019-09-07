@@ -55,7 +55,7 @@ export default class ProjectContentSectionsCurrent extends PureComponent {
 
   render() {
     return (
-      <div className="form-section">
+      <div className="form-section form-section--primary">
         <Header subtitle="Layout:" />
         {Object.keys(this.zones).map(zone => (
           <Droppable

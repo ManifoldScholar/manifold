@@ -68,6 +68,7 @@ import GrabberInactive32 from "./32/GrabberInactive";
 import Info16 from "./16/Info";
 import Key32 from "./32/Key";
 import Lamp64 from "./64/Lamp";
+import Link24 from "./24/Link";
 import Lock16 from "./16/Lock";
 import Lock32 from "./32/Lock";
 import Logout24 from "./24/Logout";
@@ -88,6 +89,7 @@ import Plus16 from "./16/Plus";
 import Plus24 from "./24/Plus";
 import ProjectCollections64 from "./64/ProjectCollections";
 import Projects64 from "./64/Projects";
+import ReadingGroup24 from "./24/ReadingGroup";
 import RecentActivity64 from "./64/RecentActivity";
 import Reload24 from "./24/Reload";
 import Reload32 from "./32/Reload";
@@ -207,6 +209,7 @@ export default {
   Info16,
   Key32,
   Lamp64,
+  Link24,
   Lock16,
   Lock32,
   Logout24,
@@ -227,6 +230,7 @@ export default {
   Plus24,
   ProjectCollections64,
   Projects64,
+  ReadingGroup24,
   RecentActivity64,
   Reload24,
   Reload32,

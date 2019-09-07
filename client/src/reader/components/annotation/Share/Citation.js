@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class AnnotationShareEditor extends PureComponent {
@@ -26,9 +27,9 @@ export default class AnnotationShareEditor extends PureComponent {
     this.ci.focus();
   }
 
-  setStyle(_event, style) {
-    this.setState({ style, copied: false });
-  }
+  setStyle = event => {
+    this.setState({ style: event.target.value, copied: false });
+  };
 
   handleCancel = event => {
     event.preventDefault();
@@ -55,18 +56,32 @@ export default class AnnotationShareEditor extends PureComponent {
     const citations = this.props.section.attributes.citations;
     const styles = Object.keys(citations);
     const selected = this.state.style;
-    return styles.map(style => {
-      return (
-        <li key={style}>
-          <button
-            className={selected === style ? "active" : null}
-            onClick={event => this.setStyle(event, style)}
+
+    return (
+      <fieldset className="citation__radios">
+        <legend className="citation__legend">Citation style:</legend>
+        {styles.map((style, index) => (
+          <label
+            key={style}
+            className={classNames({
+              citation__radio: true,
+              "citation__radio--active": style === selected
+            })}
           >
-            {style}
-          </button>
-        </li>
-      );
-    });
+            <input
+              value={style}
+              name="citation-style"
+              type="radio"
+              checked={style === selected}
+              onChange={this.setStyle}
+              tabIndex={index === 0 ? 0 : -1}
+              className="citation__input"
+            />
+            <span className="citation__label">{style}</span>
+          </label>
+        ))}
+      </fieldset>
+    );
   }
 
   render() {
@@ -76,23 +91,18 @@ export default class AnnotationShareEditor extends PureComponent {
     return (
       <div className="annotation-editor citation">
         <div>
-          <nav className="utility styles">
-            {/* eslint-disable jsx-a11y/label-has-for */}
-            <label>Citation Style:</label>
-            {/* eslint-enable jsx-a11y/label-has-for */}
-            <ul>{this.renderStyleButtons()}</ul>
-          </nav>
+          {this.renderStyleButtons()}
           <div
-            className="copyable"
+            className="citation__copyable"
             ref={ci => {
               this.ci = ci;
             }}
             style={{ width: "100%" }}
             dangerouslySetInnerHTML={{ __html: citations[this.state.style] }}
           />
-          <div className="utility">
-            <span className="notice">{copiedText}</span>
-            <div className="buttons">
+          <div className="annotation-editor__actions">
+            <span className="citation__notice">{copiedText}</span>
+            <div className="annotation-editor__buttons annotation-editor__buttons--end">
               <button
                 onClick={this.handleCancel}
                 className="button-primary button-primary--dull"

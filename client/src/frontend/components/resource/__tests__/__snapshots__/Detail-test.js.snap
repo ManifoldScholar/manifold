@@ -433,14 +433,14 @@ exports[`Frontend.Resource.Detail component renders correctly 1`] = `
             className="resource-comments"
           >
             <div
-              className="comment-editor"
+              className="annotation-editor"
             >
               <h2
-                className="comment-editor__editor-label"
+                className="annotation-editor__editor-label"
               >
                 <svg
                   aria-hidden={true}
-                  className="manicon-svg comment-editor__label-icon svg-icon--commentPencil32"
+                  className="manicon-svg annotation-editor__label-icon svg-icon--commentPencil32"
                   height={42}
                   viewBox="0 0 32 32"
                   width={42}
@@ -459,7 +459,7 @@ exports[`Frontend.Resource.Detail component renders correctly 1`] = `
                   </g>
                 </svg>
                 <span
-                  className="comment-editor__label-text"
+                  className="annotation-editor__label-text"
                 >
                   Add Comment
                 </span>

@@ -4,7 +4,7 @@ import Enzyme from "enzyme/build";
 import Adapter from "enzyme-adapter-react-16/build";
 Enzyme.configure({ adapter: new Adapter() });
 
-jest.mock("backend/components/form/setter", () => {
+jest.mock("global/components/form/setter", () => {
   return (wrappedComponent) => wrappedComponent;
 });
 

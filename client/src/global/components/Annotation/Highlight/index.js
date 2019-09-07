@@ -6,8 +6,9 @@ import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import classNames from "classnames";
 import SourceSummary from "../SourceSummary/index";
-
 import Authorize from "hoc/authorize";
+import lh from "helpers/linkHandler";
+import { withRouter } from "react-router";
 
 const { request } = entityStoreActions;
 
@@ -30,17 +31,34 @@ class HighlightDetail extends PureComponent {
     return res.promise;
   };
 
-  handleVisitHighlight = event => {
+  defaultVisitHandler(annotation) {
+    const {
+      relationships: {
+        textSection: {
+          id,
+          attributes: { textSlug }
+        }
+      }
+    } = annotation;
+    const { history } = this.props;
+    const url = lh.link(
+      "readerSection",
+      textSlug,
+      id,
+      `#annotation-${annotation.id}`
+    );
+    return history.push(url);
+  }
+
+  visitHandler = event => {
     event.preventDefault();
-    this.props.visitHandler(this.props.annotation);
+    const { annotation, visitHandler } = this.props;
+    if (visitHandler) return visitHandler(annotation);
+    this.defaultVisitHandler(annotation);
   };
 
   get displayFormat() {
     return this.props.displayFormat;
-  }
-
-  get viewable() {
-    return !!this.props.visitHandler;
   }
 
   get containerClassNames() {
@@ -79,13 +97,11 @@ class HighlightDetail extends PureComponent {
     const annotation = this.props.annotation;
     return (
       <div className={this.containerClassNames}>
-        {this.viewable && (
-          <button
-            className="annotation-selection__button-absolute"
-            onClick={this.handleVisitHighlight}
-            aria-label="View selection within text."
-          />
-        )}
+        <button
+          className="annotation-selection__button-absolute"
+          onClick={this.visitHandler}
+          aria-label="View selection within text."
+        />
         <span className="annotation-selection__highlight-text">
           {annotation.attributes.subject}
         </span>
@@ -109,4 +125,4 @@ class HighlightDetail extends PureComponent {
   }
 }
 
-export default connect()(HighlightDetail);
+export default connect()(withRouter(HighlightDetail));

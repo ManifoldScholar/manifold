@@ -3,7 +3,7 @@
 exports[`Backend.Dialog.Confirm Component renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
-    <Dialog.Confirm heading=\\"Player\\\\'s Ball\\" message=\\"All the players came from far and wide\\" reject={[Function: mockConstructor]} resolve={[Function: mockConstructor]}>
+    <Dialog.Confirm heading=\\"Player\\\\'s Ball\\" message=\\"All the players came from far and wide\\" reject={[Function: mockConstructor]} resolve={[Function: mockConstructor]} options={{...}}>
       <withRouter(Dialog.Wrapper) className=\\"dialog-confirm\\" maxWidth={400} showCloseButton={false} closeOnOverlayClick={false}>
         <Dialog.Wrapper className=\\"dialog-confirm\\" maxWidth={400} showCloseButton={false} closeOnOverlayClick={false} history={{...}} location={{...}} match={{...}} staticContext={[undefined]}>
           <CSSTransitionGroup transitionName=\\"dialog\\" transitionAppear={true} transitionEnter={false} transitionAppearTimeout={1} transitionLeaveTimeout={200} transitionLeave={true}>

@@ -91,9 +91,9 @@
     padding-bottom: 10px;
     padding-left: 51px;
     font-size: 17px;
+    hyphens: none;
     color: $neutral50;
     text-decoration: underline;
-    hyphens: none;
     transition: color $duration $timing;
 
     .reader-return-menu__link:hover &,

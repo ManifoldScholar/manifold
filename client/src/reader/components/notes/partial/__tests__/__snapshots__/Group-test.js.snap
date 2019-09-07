@@ -1,32 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
-<li>
-  <div
+<li
+  className="notes-filtered-list__section"
+>
+  <button
     aria-expanded={false}
-    className="item"
+    className="notes-filtered-list__section-button"
     onClick={[Function]}
-    role="button"
-    tabIndex="0"
   >
-    <svg
-      aria-hidden={true}
-      className="manicon-svg item__disclosure-icon svg-icon--disclosureDown16"
-      fill="currentColor"
-      height={18}
-      viewBox="0 0 16 16"
-      width={18}
-      xmlns="http://www.w3.org/2000/svg"
+    <div
+      className="notes-filtered-list__section-button-inner"
     >
-      <polygon
-        points="8 9.702 13.356 5 13.999 5.733 8 10.999 2 5.733 2.643 5"
-      />
-    </svg>
-    <h3
-      className="item-label"
-    >
-      Test
-    </h3>
-  </div>
+      <svg
+        aria-hidden={true}
+        className="manicon-svg notes-filtered-list__disclosure-icon svg-icon--disclosureDown24"
+        fill="currentColor"
+        height={24}
+        viewBox="0 0 24 24"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon
+          points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+        />
+      </svg>
+      <span
+        className="notes-filtered-list__section-label"
+      >
+        Test
+      </span>
+    </div>
+  </button>
 </li>
 `;

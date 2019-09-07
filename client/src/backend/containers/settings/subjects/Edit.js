@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { subjectsAPI, requests } from "api";
-import Form from "backend/components/form";
-import FormContainer from "backend/containers/form";
+import Form from "global/components/form";
+import FormContainer from "global/containers/form";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
@@ -86,7 +86,7 @@ export class SettingsSubjectsEditContainer extends PureComponent {
             }
           ]}
         />
-        <section className="form-section">
+        <section className="form-section form-section--primary">
           <FormContainer.Form
             model={subject}
             name="backend-edit-subject"

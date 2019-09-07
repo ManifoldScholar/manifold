@@ -1,0 +1,38 @@
+@keyframes slide-from-left {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slide-from-right {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@mixin reactSlideTransition($from: 'right', $selector: '&', $prefix: 'panel') {
+  .#{$prefix}-visible #{$selector} {
+    animation: slide-from-#{$from} $duration $timing forwards;
+  }
+
+  .#{$prefix}-leave #{$selector} {
+    transform: translateX(0);
+    animation: slide-from-#{$from} $duration $timing backwards;
+  }
+
+  .#{$prefix}-leave.#{$prefix}-leave-active #{$selector} {
+    @if ($from == 'right') {
+      transform: translateX(100%);
+    } @else {
+      transform: translateX(-100%);
+    }
+  }
+}

@@ -33,14 +33,15 @@ export default class DrawerWrapper extends PureComponent {
     closeCallback: PropTypes.func,
     lockScroll: PropTypes.string,
     lockScrollClickCloses: PropTypes.bool,
-    entrySide: PropTypes.string,
-    style: PropTypes.string,
+    entrySide: PropTypes.oneOf(["right", "left"]),
+    context: PropTypes.oneOf(["backend", "frontend", "reader"]),
+    size: PropTypes.oneOf(["default", "wide", "flexible"]),
+    position: PropTypes.oneOf(["default", "overlay"]),
+    padding: PropTypes.oneOf(["none", "default", "large"]),
     history: PropTypes.object,
     includeDrawerFrontMatter: PropTypes.bool,
     returnFocusOnDeactivate: PropTypes.bool,
     focusTrap: PropTypes.bool,
-    wide: PropTypes.bool,
-    extraClasses: PropTypes.string,
     includeSRCloseButton: PropTypes.bool
   };
 
@@ -59,8 +60,10 @@ export default class DrawerWrapper extends PureComponent {
     lockScroll: "hover",
     lockScrollClickCloses: true,
     open: false,
-    style: "backend",
-    wide: false,
+    context: "backend",
+    size: "default",
+    padding: "default",
+    position: "default",
     entrySide: "right",
     includeDrawerFrontMatter: true,
     returnFocusOnDeactivate: true,
@@ -188,19 +191,56 @@ export default class DrawerWrapper extends PureComponent {
     return this.props.lockScroll === "always" && this.scrollableNode.current;
   }
 
+  get drawerClasses() {
+    return classNames(
+      "drawer",
+      [`drawer--${this.props.context}`],
+      [`drawer--${this.props.entrySide}`],
+      [`drawer--${this.props.size}`],
+      [`drawer--pad-${this.props.padding}`],
+      [`drawer--pos-${this.props.position}`]
+    );
+  }
+
+  get drawerBarClasses() {
+    return classNames({
+      "drawer-bar": true,
+      "drawer-bar--pad-lateral": this.props.padding === "none",
+      "drawer-bar--default": this.props.context !== "reader",
+      "drawer-bar--reader": this.props.context === "reader"
+    });
+  }
+
+  get closeButtonClasses() {
+    return classNames({
+      "drawer-bar__close-button": true,
+      "drawer-bar__close-button--light": this.props.context === "backend",
+      "drawer-bar__close-button--dark": this.props.context !== "backend"
+    });
+  }
+
+  get overlayClasses() {
+    return classNames(
+      "drawer-overlay",
+      [`drawer-overlay--${this.props.context}`],
+      [`drawer-overlay--pos-${this.props.position}`]
+    );
+  }
+
   renderDrawerFrontMatter(props) {
     const hasTitle = props.title || props.icon;
     const hasClose = props.closeCallback || props.closeUrl;
+
     return (
       <React.Fragment>
         {props.includeDrawerFrontMatter && (
-          <div className="drawer-bar">
+          <div className={this.drawerBarClasses}>
             {hasTitle ? (
               <div className="drawer-bar__title">
                 {props.icon && (
                   <IconComposer
                     icon={props.icon}
-                    size={32}
+                    size={24}
                     iconClass="drawer-bar__title-icon"
                   />
                 )}
@@ -213,17 +253,19 @@ export default class DrawerWrapper extends PureComponent {
               <button
                 onClick={this.handleLeaveEvent}
                 tabIndex="0"
-                className="drawer-bar__close-button"
+                className={this.closeButtonClasses}
               >
                 <span className="drawer-bar__close-text">Close</span>
+                {/*
                 <Utility.IconComposer
                   icon="close32"
                   size={46.222}
                   iconClass="drawer-bar__close-icon drawer-bar__close-icon--large"
                 />
+                */}
                 <Utility.IconComposer
                   icon="close16"
-                  size="default"
+                  size={24}
                   iconClass="drawer-bar__close-icon drawer-bar__close-icon--small"
                 />
               </button>
@@ -244,14 +286,12 @@ export default class DrawerWrapper extends PureComponent {
   }
 
   renderDrawer() {
-    const drawerClasses = classNames(
-      `drawer-${this.props.style}`,
-      { left: this.props.entrySide === "left" },
-      { wide: this.props.wide }
-    );
-
     return (
-      <div key="drawer" className={drawerClasses} ref={this.scrollableNode}>
+      <div
+        key="drawer"
+        className={this.drawerClasses}
+        ref={this.scrollableNode}
+      >
         <FocusTrap
           ref={this.focusTrapNode}
           active={this.state.focusable && this.props.focusTrap}
@@ -291,7 +331,7 @@ export default class DrawerWrapper extends PureComponent {
     if (this.props.lockScroll === "always") {
       return (
         <div className={this.props.identifier}>
-          <div className="drawer-overlay" />
+          <div className={this.overlayClasses} />
           {this.renderDrawer()}
         </div>
       );

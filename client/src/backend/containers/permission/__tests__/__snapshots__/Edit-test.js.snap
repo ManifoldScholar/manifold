@@ -57,7 +57,7 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
           <div
             aria-describedby="1-instructions"
             aria-labelledby="1-header"
-            className="form-section horizontal"
+            className="form-section horizontal form-section--primary"
             role="group"
           >
             <header
@@ -70,100 +70,91 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
               </h2>
             </header>
             <div
-              className="form-input-group"
+              className="form-input-group form-input-group--primary"
             >
               <div
                 className="form-input"
               >
                 <label
-                  className="form-input-heading toggle above"
+                  className="form-switch"
                   htmlFor="switch-input-1"
                 >
-                  Can modify project?
-                </label>
-                <div
-                  className="toggle-indicator"
-                >
-                  <div
-                    aria-describedby="switch-input-instructions-1"
-                    aria-pressed={false}
-                    className="boolean-primary"
+                  <span
+                    className="form-input-heading toggle above"
+                  >
+                    Can modify project?
+                  </span>
+                  <input
+                    checked={false}
                     id="switch-input-1"
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    role="button"
-                    tabIndex="0"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="toggle-indicator"
                   >
                     <span
-                      className="screen-reader-text"
-                    >
-                      Can modify project?
-                    </span>
-                  </div>
-                </div>
+                      aria-hidden="true"
+                      className="boolean-primary"
+                    />
+                  </span>
+                </label>
               </div>
               <div
                 className="form-input"
               >
                 <label
-                  className="form-input-heading toggle above"
+                  className="form-switch"
                   htmlFor="switch-input-1"
                 >
-                  Can modify resource metadata?
-                </label>
-                <div
-                  className="toggle-indicator"
-                >
-                  <div
-                    aria-describedby="switch-input-instructions-1"
-                    aria-pressed={false}
-                    className="boolean-primary"
+                  <span
+                    className="form-input-heading toggle above"
+                  >
+                    Can modify resource metadata?
+                  </span>
+                  <input
+                    checked={false}
                     id="switch-input-1"
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    role="button"
-                    tabIndex="0"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="toggle-indicator"
                   >
                     <span
-                      className="screen-reader-text"
-                    >
-                      Can modify resource metadata?
-                    </span>
-                  </div>
-                </div>
+                      aria-hidden="true"
+                      className="boolean-primary"
+                    />
+                  </span>
+                </label>
               </div>
               <div
                 className="form-input"
               >
                 <label
-                  className="form-input-heading toggle above"
+                  className="form-switch"
                   htmlFor="switch-input-1"
                 >
-                  Is a project author?
-                </label>
-                <div
-                  className="toggle-indicator"
-                >
-                  <div
-                    aria-describedby="switch-input-instructions-1"
-                    aria-pressed={false}
-                    className="boolean-primary"
+                  <span
+                    className="form-input-heading toggle above"
+                  >
+                    Is a project author?
+                  </span>
+                  <input
+                    checked={false}
                     id="switch-input-1"
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    role="button"
-                    tabIndex="0"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="toggle-indicator"
                   >
                     <span
-                      className="screen-reader-text"
-                    >
-                      Is a project author?
-                    </span>
-                  </div>
-                </div>
+                      aria-hidden="true"
+                      className="boolean-primary"
+                    />
+                  </span>
+                </label>
               </div>
             </div>
           </div>

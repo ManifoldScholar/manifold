@@ -35,7 +35,10 @@ const setAuthToken = (state, action) => {
 };
 
 const endLogin = state => {
-  return Object.assign({}, state, { authenticating: false });
+  return Object.assign({}, state, {
+    authenticating: false,
+    authenticated: true
+  });
 };
 
 const startLogin = state => {
@@ -58,8 +61,8 @@ const updateStateFromUser = (state, payload) => {
   delete adjustedUser.relationships;
   adjustedUser.favorites = favorites;
   const newState = {
-    currentUser: adjustedUser,
     authenticated: true,
+    currentUser: adjustedUser,
     error: null
   };
   return Object.assign({}, state, newState);

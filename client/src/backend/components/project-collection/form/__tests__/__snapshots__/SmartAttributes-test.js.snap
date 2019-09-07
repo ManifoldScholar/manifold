@@ -30,38 +30,34 @@ Array [
     className="form-input form-toggle-secondary"
   >
     <label
-      className="form-input-heading toggle above"
+      className="form-switch"
       htmlFor="switch-input-1"
     >
-      Featured Projects:
-    </label>
-    <div
-      className="toggle-indicator"
-    >
-      <div
-        aria-describedby="switch-input-instructions-1"
-        aria-pressed={false}
-        className="boolean-primary"
+      <span
+        className="form-input-heading toggle above"
+      >
+        Featured Projects:
+      </span>
+      <input
+        checked={false}
         id="switch-input-1"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        role="button"
-        tabIndex="0"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="toggle-indicator"
       >
         <span
-          className="screen-reader-text"
-        >
-          Featured Projects:
-        </span>
-      </div>
-    </div>
-    <span
-      className="instructions"
-      id="switch-input-instructions-1"
-    >
-      Include only featured projects in this Collection.
-    </span>
+          aria-hidden="true"
+          className="boolean-primary"
+        />
+      </span>
+      <span
+        className="instructions"
+      >
+        Include only featured projects in this Collection.
+      </span>
+    </label>
   </div>,
   <div
     className="form-input"

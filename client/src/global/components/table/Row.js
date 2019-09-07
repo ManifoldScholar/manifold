@@ -1,55 +1,95 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { withRouter } from "react-router-dom";
 import { TableHeaderContext } from "helpers/contexts";
+import Cell from "./Cell";
+import isFunction from "lodash/isFunction";
+import isPlainObject from "lodash/isPlainObject";
 
-export default class TableRow extends React.PureComponent {
+class TableRow extends React.PureComponent {
+  static displayName = "GenericTable.Row";
+
   static propTypes = {
-    cells: PropTypes.array
+    linkCreator: PropTypes.func,
+    model: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
   };
 
   static contextType = TableHeaderContext;
 
-  get rowClassNames() {
-    return classNames({
-      table__row: true,
-      "table__row--body": true,
-      table__list: !this.isTable
-    });
-  }
+  constructor(props) {
+    super(props);
 
-  get rowLinkClassNames() {
-    return "table__row-link";
-  }
-
-  get itemHeadingClassNames() {
-    return classNames({
-      "table__body-text": true,
-      "table__value-large": true
-    });
-  }
-
-  get rowLink() {
-    return "/";
+    this.state = { hovering: false };
   }
 
   get isTable() {
     return this.context.markup === "table";
   }
 
+  get hasRowLink() {
+    const { linkCreator, model } = this.props;
+    return isFunction(linkCreator) && isPlainObject(model);
+  }
+
+  get link() {
+    if (!this.hasRowLink) return null;
+    const { linkCreator, model } = this.props;
+    return linkCreator(model);
+  }
+
+  rowProps = () => {
+    const rowClassNames = classNames({
+      table__row: true,
+      "table__row--is-link": this.hasRowLink,
+      "table__row--is-hovering": this.state.hovering,
+      table__list: !this.isTable
+    });
+
+    if (!this.hasRowLink) return { className: rowClassNames };
+    return {
+      onClick: event => {
+        // do nothing if clicking nested link or button
+        if (event.target.closest("a") || event.target.closest("button")) return;
+        this.props.history.push(this.link);
+      },
+      onMouseOver: event => {
+        // do nothing if hovering over nested link or button
+        if (event.target.closest("a") || event.target.closest("button")) return;
+        this.setState({ hovering: true });
+      },
+      onMouseOut: () => this.setState({ hovering: false }),
+      className: rowClassNames
+    };
+  };
+
+  cellProps(child) {
+    const { _children, ...childProps } = child.props;
+    return childProps;
+  }
+
   render() {
-    const RowComponent = this.props.rowComponent;
-    const row = <RowComponent model={this.props.model} />;
-    if (this.isTable) return <tr className={this.rowClassNames}>{row}</tr>;
+    const { children, model } = this.props;
+
+    const cells = React.Children.map(children, child => {
+      return (
+        <Cell {...this.cellProps(child)}>
+          {isFunction(child.props.children)
+            ? child.props.children({ model })
+            : null}
+        </Cell>
+      );
+    });
+
+    if (this.isTable) return <tr {...this.rowProps()}>{cells}</tr>;
+
     return (
       <li>
-        <dl className={this.rowClassNames}>
-          <a href={this.rowLink} className={this.rowLinkClassNames}>
-            <span className="screen-reader-text">Visit detail view</span>
-          </a>
-          {row}
-        </dl>
+        <dl {...this.rowProps()}>{cells}</dl>
       </li>
     );
   }
 }
+
+export default withRouter(TableRow);

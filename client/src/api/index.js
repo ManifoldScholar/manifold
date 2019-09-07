@@ -35,3 +35,5 @@ export projectCollectionsAPI from "./resources/projectCollections";
 export tagsAPI from "./resources/tags";
 export contentBlocksAPI from "./resources/contentBlocks";
 export actionCalloutsAPI from "./resources/actionCallouts";
+export readingGroupsAPI from "./resources/readingGroups";
+export readingGroupMembershipsAPI from "./resources/readingGroupMemberships";

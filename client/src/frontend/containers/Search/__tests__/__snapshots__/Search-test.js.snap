@@ -23,7 +23,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
         onSubmit={[Function]}
       >
         <div
-          className="input-magnify"
+          className="search-query__input-magnify"
         >
           <label
             className="screen-reader-text"
@@ -33,6 +33,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
           </label>
           <input
             autoFocus={true}
+            className="search-query__input"
             id={1}
             onChange={[Function]}
             placeholder="Search…"
@@ -40,12 +41,12 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
             value=""
           />
           <button
-            className="search-submit"
+            className="search-query__submit"
             type="submit"
           >
             <svg
               aria-hidden={true}
-              className="manicon-svg search-icon svg-icon--search16"
+              className="manicon-svg search-query__search-icon svg-icon--search16"
               fill="currentColor"
               height={22}
               viewBox="0 0 16 16"
@@ -65,20 +66,20 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
         </div>
         <div
           aria-labelledby="show-results-for-header"
-          className="filters"
+          className="search-query__filters"
           role="group"
         >
           <h4
-            className="group-label"
+            className="search-query__group-label"
             id="show-results-for-header"
           >
             Show Results For:
           </h4>
           <div
-            className="checkbox-group"
+            className="search-query__checkbox-group"
           >
             <label
-              className="checkbox"
+              className="search-query__checkbox checkbox checkbox--white"
               htmlFor="all-filters"
             >
               <input
@@ -109,7 +110,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               Everything
             </label>
             <label
-              className="checkbox"
+              className="search-query__checkbox checkbox checkbox--white"
               htmlFor="Project-0"
             >
               <input
@@ -140,7 +141,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               Projects
             </label>
             <label
-              className="checkbox"
+              className="search-query__checkbox checkbox checkbox--white"
               htmlFor="Resource-1"
             >
               <input
@@ -171,7 +172,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               Resources
             </label>
             <label
-              className="checkbox"
+              className="search-query__checkbox checkbox checkbox--white"
               htmlFor="Text-2"
             >
               <input
@@ -202,7 +203,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               Texts
             </label>
             <label
-              className="checkbox"
+              className="search-query__checkbox checkbox checkbox--white"
               htmlFor="Annotation-3"
             >
               <input
@@ -233,7 +234,7 @@ exports[`Frontend SearchContainer renders correctly 1`] = `
               Annotations
             </label>
             <label
-              className="checkbox"
+              className="search-query__checkbox checkbox checkbox--white"
               htmlFor="TextSection-4"
             >
               <input

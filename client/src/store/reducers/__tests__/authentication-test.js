@@ -65,10 +65,12 @@ describe("store/reducers/authentication", () => {
       type: "UPDATE_CURRENT_USER",
       payload: { data: user }
     };
-    const state = authenticationReducer(initialState, action);
+
+    const startState = Object.assign({}, initialState, { authenticated: true });
+
+    const state = authenticationReducer(startState, action);
     expect(state).toEqual(
-      Object.assign({}, initialState, {
-        authenticated: true,
+      Object.assign({}, startState, {
         currentUser: {
           id: user.id,
           type: user.type,

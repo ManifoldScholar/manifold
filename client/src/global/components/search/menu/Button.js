@@ -6,7 +6,8 @@ import Utility from "global/components/utility";
 export default class SearchMenuButton extends PureComponent {
   static propTypes = {
     toggleSearchMenu: PropTypes.func,
-    active: PropTypes.bool
+    active: PropTypes.bool,
+    className: PropTypes.string
   };
 
   clickHandler = event => {
@@ -15,7 +16,7 @@ export default class SearchMenuButton extends PureComponent {
   };
 
   render() {
-    const buttonClass = classNames({
+    const buttonClass = classNames(this.props.className, {
       "button-search": true,
       "button-active": this.props.active
     });
@@ -29,8 +30,8 @@ export default class SearchMenuButton extends PureComponent {
       >
         <Utility.IconComposer
           iconClass="search-icon"
-          icon="search16"
-          size={22}
+          icon="search24"
+          size={32}
         />
         <span className="screen-reader-text">{"Search"}</span>
       </button>

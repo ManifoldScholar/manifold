@@ -1,9 +1,11 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
-import Menu from "reader/components/annotation/Popup/Menu";
+import Popup from "reader/components/annotation/Popup";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 
-export default class AnnotatablePopup extends PureComponent {
+import withReadingGroups from "hoc/with-reading-groups";
+
+class AnnotatablePopup extends PureComponent {
   static displayName = "Annotation.Popup.Menu";
 
   static propTypes = {
@@ -20,7 +22,6 @@ export default class AnnotatablePopup extends PureComponent {
     super(props);
 
     this.state = {
-      contents: "annotation",
       activePanel: "primary"
     };
   }
@@ -33,6 +34,17 @@ export default class AnnotatablePopup extends PureComponent {
     this.setState({ activePanel: "secondary" });
   };
 
+  openReadingGroups = () => {
+    this.setState({ activePanel: "readingGroups" });
+  };
+
+  handleReadingGroupSelect = id => {
+    if (id !== this.props.currentReadingGroup) {
+      this.props.setReadingGroup(id);
+    }
+    this.closeSecondary();
+  };
+
   showLinkMenu() {
     const { activeEvent } = this.props;
     if (!activeEvent) return false;
@@ -41,7 +53,7 @@ export default class AnnotatablePopup extends PureComponent {
 
   renderLinkMenu() {
     return (
-      <Menu.Link
+      <Popup.Link
         direction={this.props.direction}
         showAnnotationsInDrawer={this.props.actions.openViewAnnotationsDrawer}
         annotations={this.props.activeEvent.annotationIds}
@@ -53,26 +65,33 @@ export default class AnnotatablePopup extends PureComponent {
   render() {
     if (this.showLinkMenu()) return this.renderLinkMenu();
 
+    const { activePanel } = this.state;
+
     return (
       <Fragment>
-        <Menu.Annotate
-          primary
-          direction={this.props.direction}
-          visible={this.state.activePanel === "primary"}
-          actions={this.props.actions}
-          showShare={this.openSecondary}
-          activeAnnotation={this.props.activeAnnotation}
-          text={this.props.text}
-        />
         <ReactCSSTransitionGroup
-          transitionName="page"
+          transitionName="panel"
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}
           component="div"
-          className="popup-page-secondary-group"
+          className="annotation-popup__panel--secondary-group"
         >
-          {this.state.activePanel === "secondary" ? (
-            <Menu.Share
+          {activePanel === "primary" && (
+            <Popup.Annotate
+              primary
+              direction={this.props.direction}
+              visible
+              actions={this.props.actions}
+              showShare={this.openSecondary}
+              showReadingGroups={this.openReadingGroups}
+              activeAnnotation={this.props.activeAnnotation}
+              text={this.props.text}
+              readingGroups={this.props.readingGroups}
+              currentReadingGroup={this.props.currentReadingGroup}
+            />
+          )}
+          {activePanel === "secondary" && (
+            <Popup.Share
               visible
               direction={this.props.direction}
               onBackClick={this.closeSecondary}
@@ -81,9 +100,21 @@ export default class AnnotatablePopup extends PureComponent {
               text={this.props.text}
               section={this.props.section}
             />
-          ) : null}
+          )}
+          {activePanel === "readingGroups" && (
+            <Popup.ReadingGroups
+              visible
+              direction={this.props.direction}
+              onBackClick={this.closeSecondary}
+              onSelect={this.handleReadingGroupSelect}
+              readingGroups={this.props.readingGroups}
+              currentReadingGroup={this.props.currentReadingGroup}
+            />
+          )}
         </ReactCSSTransitionGroup>
       </Fragment>
     );
   }
 }
+
+export default withReadingGroups(AnnotatablePopup);

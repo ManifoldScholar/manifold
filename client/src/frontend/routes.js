@@ -144,32 +144,58 @@ const routes = {
       ]
     },
     {
-      name: "groups",
+      name: "frontendReadingGroups",
       exact: false,
-      component: "GroupsContainer",
+      component: "ReadingGroups",
       path: "/my/groups",
       helper: () => "/my/groups",
       routes: [
         {
-          name: "group",
           exact: true,
-          component: "GroupWrapper",
-          path: "/my/groups/:groupId",
-          helper: () => "/my/groups/:groupId",
+          component: "ReadingGroupsList",
+          path: "/my/groups/:new(new)?",
           routes: [
             {
-              name: "groupMembers",
+              name: "frontendReadingGroupsNew",
               exact: true,
-              component: "GroupMembersList",
-              path: "/my/groups/:groupId/members",
-              helper: () => "/my/groups/:groupId/members"
+              path: "/my/groups/new",
+              component: "ReadingGroupsNew",
+              helper: () => "/my/groups/new"
+            }
+          ]
+        },
+        {
+          name: "frontendReadingGroupDetail",
+          exact: false,
+          component: "ReadingGroup",
+          path: "/my/groups/:id",
+          helper: (rg, params = {}) => {
+            const query = queryString.stringify(params);
+            const base = `/my/groups/${rg}`;
+            if (!query) return base;
+            return `${base}/?${query}`;
+          },
+          routes: [
+            {
+              name: "frontendReadingGroupMembers",
+              exact: true,
+              component: "ReadingGroupMembers",
+              path: "/my/groups/:id/members",
+              helper: rg => `/my/groups/${rg}/members`
             },
             {
-              name: "groupDetail",
-              exact: true,
-              component: "GroupDetail",
-              path: "/my/groups/:groupId",
-              helper: () => "/my/groups/:groupId"
+              exact: false,
+              component: "ReadingGroupDetail",
+              path: "/my/groups/:id",
+              routes: [
+                {
+                  name: "frontendReadingGroupEdit",
+                  exact: true,
+                  component: "ReadingGroupEdit",
+                  path: "/my/groups/:id/edit",
+                  helper: rg => `/my/groups/${rg}/edit`
+                }
+              ]
             }
           ]
         }

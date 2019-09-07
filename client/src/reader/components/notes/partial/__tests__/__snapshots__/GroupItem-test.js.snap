@@ -2,18 +2,30 @@
 
 exports[`Reader.Notes.Partial.GroupItem Component renders correctly 1`] = `
 <li
-  className="item"
-  onClick={[Function]}
-  role="button"
-  tabIndex="0"
+  className="notes-filtered-list__item"
 >
-  <span
-    className="screen-reader-text"
+  <button
+    className="notes-filtered-list__item-button"
+    onClick={[Function]}
   >
-    undefined.
-  </span>
-  <span>
-    Gods, Earths, and 85ers
-  </span>
+    <span
+      className="screen-reader-text"
+    >
+      undefined.
+    </span>
+    <div
+      className="notes-filtered-list__item-button-inner"
+    >
+      <span
+        className="notes-filtered-list__item-inner"
+      >
+        <span
+          className="notes-filtered-list__item-text"
+        >
+          Gods, Earths, and 85ers
+        </span>
+      </span>
+    </div>
+  </button>
 </li>
 `;

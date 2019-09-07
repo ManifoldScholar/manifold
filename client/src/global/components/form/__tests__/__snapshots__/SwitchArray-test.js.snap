@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.SwitchArray component renders correctly 1`] = `
+<div
+  className="form-input"
+  style={Object {}}
+>
+  <div
+    aria-describedby="1-instructions"
+    aria-labelledby="1-header"
+    className="form-section horizontal form-section--primary"
+    role="group"
+  >
+    <header
+      className="form-section-label"
+    >
+      <h2
+        id="1-header"
+      >
+        Label this
+      </h2>
+    </header>
+    <div
+      className="form-input-group form-input-group--primary"
+    >
+      <div
+        className="form-input"
+      >
+        <label
+          className="form-switch"
+          htmlFor="switch-input-1"
+        >
+          <span
+            className="form-input-heading toggle above"
+          >
+            Option one
+          </span>
+          <input
+            checked={false}
+            id="switch-input-1"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="toggle-indicator"
+          >
+            <span
+              aria-hidden="true"
+              className="boolean-primary"
+            />
+          </span>
+        </label>
+      </div>
+      <div
+        className="form-input"
+      >
+        <label
+          className="form-switch"
+          htmlFor="switch-input-1"
+        >
+          <span
+            className="form-input-heading toggle above"
+          >
+            Option two
+          </span>
+          <input
+            checked={false}
+            id="switch-input-1"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="toggle-indicator"
+          >
+            <span
+              aria-hidden="true"
+              className="boolean-primary"
+            />
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;

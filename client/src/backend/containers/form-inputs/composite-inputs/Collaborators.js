@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Form from "backend/components/form";
+import Form from "global/components/form";
 import { makersAPI } from "api";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
