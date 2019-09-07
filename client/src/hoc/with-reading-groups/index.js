@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { meAPI, requests } from "api";
-import { select } from "utils/entityUtils";
+import { select, loaded } from "utils/entityUtils";
 import hoistStatics from "hoist-non-react-statics";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions, uiReadingGroupActions } from "actions";
@@ -19,13 +19,17 @@ export default function withReadingGroups(WrappedComponent) {
 
   class WithReadingGroups extends React.PureComponent {
     static fetchData = (getState, dispatch) => {
-      const readingGroupsFetch = meAPI.readingGroups();
-      const readingGroupsAction = request(
-        readingGroupsFetch,
-        requests.feMyReadingGroups
-      );
-      const { promise: one } = dispatch(readingGroupsAction);
-      const promises = [one];
+      const promises = [];
+      const state = getState();
+      if (!loaded(requests.feMyReadingGroups, state.entityStore)) {
+        const readingGroupsFetch = meAPI.readingGroups();
+        const readingGroupsAction = request(
+          readingGroupsFetch,
+          requests.feMyReadingGroups
+        );
+        const { promise } = dispatch(readingGroupsAction);
+        promises.push(promise);
+      }
       return Promise.all(promises);
     };
 
