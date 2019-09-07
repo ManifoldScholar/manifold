@@ -145,7 +145,6 @@ export default class ReadingGroupForm extends React.PureComponent {
                 value={this.urlForToken(
                   getModelValue("attributes[invitationCode]")
                 )}
-                name="attributes[invitationUrl]"
                 instructions="Share the invitation URL with users so they can join the group. Share the invitation URL with users so they can join the group."
                 buttons={[
                   {
