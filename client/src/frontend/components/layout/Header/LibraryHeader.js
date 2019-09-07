@@ -75,7 +75,10 @@ export default class LayoutLibraryHeader extends PureComponent {
                 <PressLogo
                   url={logoUrl}
                   mobileUrl={mobileLogoUrl}
-                  styles={get(this.props.settings, "attributes.theme.logoStyles")}
+                  styles={get(
+                    this.props.settings,
+                    "attributes.theme.logoStyles"
+                  )}
                   aria-hidden="true"
                 />
               </Link>

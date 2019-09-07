@@ -43,7 +43,6 @@ export default class Notification extends Component {
   }
 
   render() {
-
     return (
       <div className={this.wrapperClass} key={this.props.id}>
         <div className="notification__container">

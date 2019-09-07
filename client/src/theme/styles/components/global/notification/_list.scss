@@ -12,14 +12,14 @@
 
   &--context-header {
     position: fixed;
-    top: calc(var(--library-header-height, 50px) + var(--press-header-height, 0px));
+    top: calc(var(--library-header-height, 50px) + var(--press-header-height, 0));
 
     @include respond($break40) {
-      top: calc(var(--library-header-height, 72px) + var(--press-header-height, 0px));
+      top: calc(var(--library-header-height, 72px) + var(--press-header-height, 0));
     }
 
     @include respond($break75) {
-      top: calc(var(--library-header-height, 82px) + var(--press-header-height, 0px));
+      top: calc(var(--library-header-height, 82px) + var(--press-header-height, 0));
     }
   }
 
