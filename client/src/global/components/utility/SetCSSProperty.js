@@ -36,11 +36,8 @@ export default class SetCSSProperty extends PureComponent {
   }
 
   resetMeasuredProperty = () => {
-    document.documentElement.style.setProperty(
-      this.props.propertyName,
-      `0px`
-    );
-  }
+    document.documentElement.style.setProperty(this.props.propertyName, `0px`);
+  };
 
   setMeasuredProperty = () => {
     const measurement = this.measuredRef.current.getBoundingClientRect()[
