@@ -86,13 +86,6 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     const { projectTitle, sectionTitle } = this.props;
     return (
       <div className={this.selectionTextClassNames}>
-        {this.viewable && (
-          <button
-            className={this.wholeSelectionButtonClassNames}
-            onClick={this.props.onViewInText}
-            aria-label="View selection within text."
-          />
-        )}
         <div className={this.selectionContainerClassNames}>
           <IconComposer
             icon="socialCite32"
@@ -104,6 +97,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             projectTitle={projectTitle}
             sectionTitle={sectionTitle}
             viewable={this.viewable}
+            onClick={this.props.onViewInText}
           />
         </div>
         {this.annotatable && (

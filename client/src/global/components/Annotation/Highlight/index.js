@@ -97,11 +97,6 @@ class HighlightDetail extends PureComponent {
     const annotation = this.props.annotation;
     return (
       <div className={this.containerClassNames}>
-        <button
-          className="annotation-selection__button-absolute"
-          onClick={this.visitHandler}
-          aria-label="View selection within text."
-        />
         <span className="annotation-selection__highlight-text">
           {annotation.attributes.subject}
         </span>
@@ -110,6 +105,7 @@ class HighlightDetail extends PureComponent {
           projectTitle={this.projectTitle}
           sectionTitle={this.sectionTitle}
           highlightDate={this.highlightDate}
+          onClick={this.visitHandler}
           viewable={this.viewable}
         />
         <Authorize entity={annotation} ability={"delete"}>

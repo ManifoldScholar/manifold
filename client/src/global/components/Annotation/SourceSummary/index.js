@@ -9,7 +9,8 @@ export default class SourceSummary extends React.PureComponent {
     projectTitle: PropTypes.string,
     sectionTitle: PropTypes.string,
     highlightDate: PropTypes.string,
-    viewable: PropTypes.bool
+    viewable: PropTypes.bool,
+    viewInText: PropTypes.func
   };
 
   renderUser() {
@@ -52,26 +53,30 @@ export default class SourceSummary extends React.PureComponent {
       projectTitle,
       sectionTitle,
       highlightDate,
-      viewable
+      onClick
     } = this.props;
 
     if (!user && !projectTitle && !sectionTitle && !highlightDate) return null;
 
+    /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
       <div className="annotation-selection__source-summary">
-        <span className="annotation-selection__source-summary-text">
-          {this.renderUser()}
-          {this.renderSectionAndTitle()}
-          {this.renderDate()}
-        </span>
-        {viewable && (
-          <Utility.IconComposer
-            icon="arrowLongRight16"
-            size={24}
-            iconClass="annotation-selection__hover-arrow"
-          />
-        )}
+        <a href="#" style={{ textDecoration: "none" }} onClick={onClick}>
+          <span className="annotation-selection__source-summary-text">
+            {this.renderUser()}
+            {this.renderSectionAndTitle()}
+            {this.renderDate()}
+          </span>
+          {onClick && (
+            <Utility.IconComposer
+              icon="arrowLongRight16"
+              size={24}
+              iconClass="annotation-selection__hover-arrow"
+            />
+          )}
+        </a>
       </div>
     );
+    /* eslint-enable jsx-a11y/anchor-is-valid */
   }
 }
