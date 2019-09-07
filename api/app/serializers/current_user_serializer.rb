@@ -17,6 +17,14 @@ class CurrentUserSerializer < UserSerializer
     object.notification_preferences_by_kind
   end
 
+  def current_user?
+    true
+  end
+
+  def include_private_data?
+    true
+  end
+
   private
 
   def the_user
