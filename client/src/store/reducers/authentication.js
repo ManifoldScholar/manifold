@@ -37,7 +37,7 @@ const setAuthToken = (state, action) => {
 const endLogin = state => {
   return Object.assign({}, state, {
     authenticating: false,
-    authenticated: true
+    authenticated: Boolean(state.authToken)
   });
 };
 
