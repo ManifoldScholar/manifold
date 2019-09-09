@@ -58,9 +58,9 @@ module Api
       def render_single_resource(model, ok_status: default_ok_status, error_status: :unprocessable_entity, **options)
         options[:serializer] ||= model_serializer
         options[:serializer] = error_serializer if (action_name == "update" || action_name == "create") && !model.valid?
-        options[:location]    ||= build_location_for model
-        options[:meta]        ||= build_meta_for(model)
-        options[:status]      ||= build_status_for model, ok_status, error_status
+        options[:location] ||= build_location_for model
+        options[:meta] ||= build_meta_for(model)
+        options[:status] ||= build_status_for model, ok_status, error_status
         options[:json] = model
         render options
       end

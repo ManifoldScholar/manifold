@@ -9,16 +9,16 @@ module Importer
       @logger = logger
       @path = path
       @project_json = read_json("project.json")
-    rescue StandardError => error
+    rescue StandardError => e
       @logger.error "Unable to import project at #{@path}"
-      @logger.error(error)
+      @logger.error(e)
     end
 
     def import(include_texts = true)
       ApplicationRecord.transaction { upsert_project(include_texts) } if @project_json
-    rescue StandardError => error
+    rescue StandardError => e
       @logger.error "Unable to import project at #{@path}"
-      @logger.error(error)
+      @logger.error(e)
     end
 
     def resource_import_options
@@ -79,9 +79,9 @@ module Importer
       importer = Importer::DriveResources.new(project.id, drive_sheet, drive_dir,
                                               @creator, @logger)
       importer.import
-    rescue StandardError => error
+    rescue StandardError => e
       @logger.error "Unable to import resources for #{project.title}"
-      @logger.error(error)
+      @logger.error(e)
     end
 
     def assign_project_attachments(project)

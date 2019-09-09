@@ -11,10 +11,10 @@ module ResourceImportRows
         set_creator
         set_project
         errors.merge!(resource.errors) unless resource.save
-      rescue StandardError => error
+      rescue StandardError => e
         errors.add(
           :base,
-          "Unexpected import error: #{error}"
+          "Unexpected import error: #{e}"
         )
       end
       {

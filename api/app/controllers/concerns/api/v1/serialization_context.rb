@@ -9,8 +9,8 @@ module Api
       def initialize(controller:, current_user:)
         @data = {}
         @data[:authenticated_as] = @authenticated_as = current_user
-        @data[:controller]       = @controller   = controller
-        @data[:url_options]      = @url_options  = controller.url_options
+        @data[:controller]       = @controller = controller
+        @data[:url_options]      = @url_options = controller.url_options
       end
     end
   end

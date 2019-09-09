@@ -10,8 +10,8 @@ module ResourceImports
           compose ResourceImports::ParseGoogleSheet, inputs
         end
         compose ResourceImports::Automap, inputs
-      rescue StandardError => error
-        handle_parse_error(error)
+      rescue StandardError => e
+        handle_parse_error(e)
       end
       save_and_reload
     end

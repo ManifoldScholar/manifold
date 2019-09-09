@@ -15,10 +15,10 @@ module ManifoldEnv
       @protocol      = protocol.match?(/https/i) ? :https : :http
       @endpoints     = parse_endpoints endpoints
       @descriptive_name = descriptive_name.presence || @name.to_s.titleize
-      @email_key     = email_key.to_s
-      @name_key      = name_key.to_s
-      @nickname_key  = nickname_key.to_s
-      @uid_key       = uid_key.to_s
+      @email_key = email_key.to_s
+      @name_key = name_key.to_s
+      @nickname_key = nickname_key.to_s
+      @uid_key = uid_key.to_s
     end
 
     # @!group Attributes
