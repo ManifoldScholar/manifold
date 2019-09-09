@@ -116,7 +116,6 @@ RSpec.describe Annotation, type: :model do
     end
   end
 
-
   context "when part of a reading group" do
 
     before(:each) do
@@ -138,6 +137,118 @@ RSpec.describe Annotation, type: :model do
     it "increments the reading group memberships highlights_count" do
       expect { FactoryBot.create(:annotation, creator: @creator, reading_group: @reading_group) }
         .to change { @reading_group_membership.reload.annotations_count}.from(0).to(1)
+    end
+
+  end
+
+  describe "the with_read_ability scope" do
+
+
+    let(:private_group) { FactoryBot.create(:reading_group, privacy: "private") }
+    let(:private_group_member) do
+      user = FactoryBot.create(:user)
+      FactoryBot.create(:reading_group_membership, user: user, reading_group: private_group)
+      user
+    end
+
+    let(:public_group) { FactoryBot.create(:reading_group, privacy: "public") }
+    let(:public_group_member) do
+      user = FactoryBot.create(:user)
+      FactoryBot.create(:reading_group_membership, user: user, reading_group: public_group)
+      user
+    end
+
+    let(:anonymous_group) { FactoryBot.create(:reading_group, privacy: "anonymous") }
+    let(:anonymous_group_member) do
+      user = FactoryBot.create(:user)
+      FactoryBot.create(:reading_group_membership, user: user, reading_group: anonymous_group)
+      user
+    end
+
+    let(:all_groups_member) do
+      all_groups_member = FactoryBot.create(:user)
+      FactoryBot.create(:reading_group_membership, user: all_groups_member, reading_group: private_group)
+      FactoryBot.create(:reading_group_membership, user: all_groups_member, reading_group: public_group)
+      FactoryBot.create(:reading_group_membership, user: all_groups_member, reading_group: anonymous_group)
+      all_groups_member
+    end
+
+    let(:private_group_annotation) { FactoryBot.create(:annotation, private: false, reading_group: private_group) }
+    let(:public_group_annotation) { FactoryBot.create(:annotation, private: false, reading_group: public_group) }
+    let(:anonymous_group_annotation) { FactoryBot.create(:annotation, private: false, reading_group: anonymous_group) }
+    let(:public_annotation) { FactoryBot.create(:annotation, private: false, reading_group: nil) }
+    let(:private_annotation) { FactoryBot.create(:annotation, private: true, reading_group: nil) }
+    let(:all_groups_member_private_annotation) { FactoryBot.create(:annotation, private: true, reading_group: nil, creator: all_groups_member) }
+
+    let(:reader) { FactoryBot.create(:user) }
+
+    shared_examples_for "a readable annotation" do |label, annotation_sym|
+
+      it "when the annotation is a #{label}" do
+        annotation = send(annotation_sym)
+        expect(Annotation.with_read_ability(user).pluck(:id)).to include annotation.id
+      end
+    end
+
+    shared_examples_for "a non-readable annotation" do |label, annotation_sym|
+      it "when the annotation is a #{label}" do
+        annotation = send(annotation_sym)
+        expect(Annotation.with_read_ability(user).pluck(:id)).to_not include annotation.id
+      end
+    end
+
+    context "when filtering, the annotation" do
+
+      context "when the user is not in any groups" do
+        let(:user) { reader }
+        it_behaves_like "a readable annotation", "public annotation", :public_annotation
+        it_behaves_like "a readable annotation", "public group annotation", :public_group_annotation
+        it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
+        it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation
+        it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation
+      end
+
+      context "when the user is the creator of the annotation" do
+        let(:user) { all_groups_member }
+        it_behaves_like "a readable annotation", "private annotation", :all_groups_member_private_annotation
+      end
+
+      context "when the user is nil" do
+        let(:user) { nil }
+        it_behaves_like "a readable annotation", "public annotation", :public_annotation
+        it_behaves_like "a readable annotation", "public group annotation", :public_group_annotation
+        it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
+        it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation
+        it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation
+      end
+
+      context "when the user is only in the private group" do
+        let(:user) { private_group_member }
+        it_behaves_like "a readable annotation", "public annotation", :public_annotation
+        it_behaves_like "a readable annotation", "public group annotation", :public_group_annotation
+        it_behaves_like "a readable annotation", "private group annotation", :private_group_annotation
+        it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
+        it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation
+      end
+
+      context "when the user is only in the anonymous group" do
+        let(:user) { anonymous_group_member }
+        it_behaves_like "a readable annotation", "public annotation", :public_annotation
+        it_behaves_like "a readable annotation", "public group annotation", :public_group_annotation
+        it_behaves_like "a readable annotation", "anonymous group annotation", :anonymous_group_annotation
+        it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
+        it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation
+      end
+
+      context "when the user is in all groups" do
+        let(:user) { all_groups_member }
+        it_behaves_like "a readable annotation", "public annotation", :public_annotation
+        it_behaves_like "a readable annotation", "public group annotation", :public_group_annotation
+        it_behaves_like "a readable annotation", "anonymous group annotation", :anonymous_group_annotation
+        it_behaves_like "a readable annotation", "private group annotation", :private_group_annotation
+        it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
+      end
+
     end
 
   end

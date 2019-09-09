@@ -13,8 +13,8 @@ RSpec.describe "My Reading Groups API", type: :request do
 
     context "when the user is not authenticated" do
       before(:each) { get path }
-      it "has a 401 status code" do
-        expect(response).to have_http_status(401)
+      it "has a 200 status code" do
+        expect(response).to have_http_status(200)
       end
     end
 

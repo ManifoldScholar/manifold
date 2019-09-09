@@ -12,42 +12,6 @@ class Annotation < ApplicationRecord
   include Filterable
   include Concerns::FlaggableResource
 
-  # Scopes
-  scope :only_annotations, -> { where(format: "annotation") }
-  scope :only_highlights, -> { where(format: "highlight") }
-  scope :created_by, ->(user) { where(creator: user) }
-  scope :by_text, lambda { |text|
-    joins(:text_section).where(text_sections: { text: text }) if text.present?
-  }
-  scope :by_reading_group, lambda { |reading_group|
-    where(reading_group: reading_group) if reading_group.present?
-  }
-  scope :by_reading_group_membership, lambda { |reading_group_membership|
-    rgm = if reading_group_membership.instance_of?(ActiveRecord::Base)
-            reading_group_membership
-          else
-            ReadingGroupMembership.find(reading_group_membership)
-          end
-    where(reading_group: rgm.reading_group_id, creator: rgm.user_id) if rgm.present?
-  }
-  scope :by_text_section, lambda { |text_section|
-    where(text_section: text_section) if text_section.present?
-  }
-  scope :by_ids, lambda { |ids|
-    where(id: ids) if ids.present?
-  }
-  scope :with_read_ability, lambda { |creator|
-    next where(private: false) unless creator.present?
-
-    where(creator: creator).or(where(private: false))
-  }
-  scope :by_formats, lambda { |formats|
-    where(format: formats) if formats.present?
-  }
-  scope :with_orphaned, lambda { |orphaned|
-    where.not(text_section: nil).where(orphaned: orphaned) unless orphaned.blank?
-  }
-
   # Constants
   TYPE_ANNOTATION = "annotation".freeze
   TYPE_HIGHLIGHT = "highlight".freeze
@@ -70,6 +34,7 @@ class Annotation < ApplicationRecord
   belongs_to :reading_group, optional: true
   belongs_to :resource, optional: true
   belongs_to :resource_collection, optional: true
+  has_many :reading_group_memberships, through: :reading_group
   has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject,
                       counter_cache: :comments_count
   has_one :text, through: :text_section
@@ -107,10 +72,63 @@ class Annotation < ApplicationRecord
              batch_size: 500,
              highlight: [:title, :body])
 
+  # Scopes
   scope :search_import, -> { includes(:creator, text_section: { text: :project }) }
+  scope :only_annotations, -> { where(format: "annotation") }
+  scope :only_highlights, -> { where(format: "highlight") }
+  scope :created_by, ->(user) { where(creator: user) }
+  scope :by_text, lambda { |text|
+    joins(:text_section).where(text_sections: { text: text }) if text.present?
+  }
+  scope :by_reading_group, lambda { |reading_group|
+    where(reading_group: reading_group) if reading_group.present?
+  }
+  scope :by_reading_group_membership, lambda { |reading_group_membership|
+    rgm = if reading_group_membership.instance_of?(ActiveRecord::Base)
+            reading_group_membership
+          else
+            ReadingGroupMembership.find(reading_group_membership)
+          end
+    where(reading_group: rgm.reading_group_id, creator: rgm.user_id) if rgm.present?
+  }
+  scope :by_text_section, lambda { |text_section|
+    where(text_section: text_section) if text_section.present?
+  }
+  scope :by_ids, lambda { |ids|
+    where(id: ids) if ids.present?
+  }
+  scope :with_read_ability, lambda { |user|
+    # Exclude annotations that are private and not created by the user.
+    # Exclude annotations that have a non-public reading group that the user does not belong to.
+    if user.present?
+      left_outer_joins(:reading_group)
+        .sans_private_annotations_not_owned_by(user)
+        .where(reading_groups: { id: [nil, ReadingGroupMembership.visible_reading_group_ids_for(user)] })
+    else
+      left_outer_joins(:reading_group)
+        .non_private
+        .where(reading_groups: { id: [nil, ReadingGroup.visible_to_public] })
+    end
+  }
+  scope :by_formats, lambda { |formats|
+    where(format: formats) if formats.present?
+  }
+  scope :with_orphaned, lambda { |orphaned|
+    where.not(text_section: nil).where(orphaned: orphaned) unless orphaned.blank?
+  }
+  scope :sans_private_annotations_not_owned_by, ->(user) { where(arel_exclude_private_annotations_not_owned_by(user)) }
+  scope :non_private, -> { where(private: false) }
 
   # Callbacks
   after_commit :trigger_event_creation, on: [:create]
+
+  class << self
+    # @param [User, nil] user
+    # @return [Arel::Nodes::Not]
+    def arel_exclude_private_annotations_not_owned_by(user)
+      Arel::Nodes::Not.new(arel_table[:creator_id].not_eq(user&.id).and(arel_table[:private].eq(true)))
+    end
+  end
 
   def reading_group_membership
     return nil unless reading_group_id
@@ -134,7 +152,7 @@ class Annotation < ApplicationRecord
   end
 
   def should_index?
-    !(private || project&.draft? || format != "annotation")
+    !(private? || project&.draft? || format != "annotation")
   end
 
   def to_s
@@ -177,7 +195,7 @@ class Annotation < ApplicationRecord
   end
 
   def public?
-    !private
+    !private?
   end
 
   private

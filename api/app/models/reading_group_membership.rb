@@ -21,6 +21,18 @@ class ReadingGroupMembership < ApplicationRecord
   before_validation :ensure_anonymous_label
   after_commit :enqueue_notification, on: [:create]
 
+  class << self
+
+    def visible_reading_group_ids_for(user)
+      return none if user.blank?
+
+      joins(:reading_group).where(user: user)
+        .or(joins(:reading_group)
+          .merge(ReadingGroup.visible_to_public))
+        .select(:reading_group_id)
+    end
+  end
+
   def creator?
     reading_group.creator_id == user_id
   end
