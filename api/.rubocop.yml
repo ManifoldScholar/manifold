@@ -40,9 +40,6 @@ Layout/DotPosition:
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
-Rails:
-  Enabled: true
-
 Naming/HeredocDelimiterNaming:
   Enabled: false
 
@@ -62,12 +59,6 @@ Style/SymbolArray:
   Enabled: false
 
 Style/AccessModifierDeclarations:
-  Enabled: false
-
-Rails/Blank:
-  Enabled: false
-
-Rails/Present:
   Enabled: false
 
 Lint/ScriptPermission:
