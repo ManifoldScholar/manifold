@@ -13,7 +13,8 @@ module Validation
             :font,
             { font_size: [:current, :max, :min] },
             { margins: [:current, :max, :min] }
-          ]
+          ],
+          reading_groups: [:current_reading_group]
         }
       }
     }
