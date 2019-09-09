@@ -29,7 +29,7 @@ module Api
         @resource_name    = model_name.singular_route_key.to_sym
         @collection_name  = model_name.route_key.to_sym
 
-        @method_names     = build_method_names
+        @method_names = build_method_names
 
         define_methods!
       end
