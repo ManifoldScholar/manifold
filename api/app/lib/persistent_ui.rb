@@ -12,7 +12,7 @@ class PersistentUI
     @preferences = new_preferences.with_indifferent_access
 
     @preferences.reverse_merge!(
-      reader: { colors: {}, typography: {} }
+      reader: { colors: {}, typography: {}, readingGroups: {} }
     )
   end
 

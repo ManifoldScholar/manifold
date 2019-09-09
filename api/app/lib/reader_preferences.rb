@@ -8,7 +8,7 @@ class ReaderPreferences
   def preferences=(new_preferences = {}.with_indifferent_access)
     @preferences = new_preferences.with_indifferent_access
 
-    @preferences.reverse_merge!(colors: {}, typography: {})
+    @preferences.reverse_merge!(colors: {}, typography: {}, readingGroups: {})
   end
 
   def as_json(options = nil)
