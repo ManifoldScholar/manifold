@@ -58,11 +58,11 @@ class AnnotationsFilter {
     return !this.enabledGroups.includes(readingGroupId);
   }
 
-  hideYourPublicAnnotations() {
+  get hideYourPublicAnnotations() {
     return !this.showYourPublicAnnotations;
   }
 
-  hideYourPrivateAnnotations() {
+  get hideYourPrivateAnnotations() {
     return !this.showYourPrivateAnnotations;
   }
 
