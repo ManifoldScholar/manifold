@@ -5,8 +5,6 @@ module Api
         # Reading groups controller
         class ReadingGroupsController < ApplicationController
 
-          before_action :authenticate_request!
-
           resourceful! ReadingGroup do
             base = current_user.nil? ? ReadingGroup.none : current_user.reading_groups
             base.with_order.page(page_number).per(page_size)

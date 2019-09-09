@@ -33,6 +33,8 @@ class ReadingGroup < ApplicationRecord
   before_destroy :update_annotations_privacy
 
   scope :with_order, ->(by = nil) { by.present? ? order(by) : order(created_at: :desc) }
+  scope :non_public, -> { where.not(privacy: "public") }
+  scope :visible_to_public, -> { where(privacy: "public") }
 
   def private?
     privacy == "private"
@@ -52,7 +54,7 @@ class ReadingGroup < ApplicationRecord
     ReadingGroup.find_by(invitation_code: code.upcase)
   end
 
-  private
+  # private
 
   def update_annotations_privacy
     # rubocop:disable Rails/SkipsModelValidations
