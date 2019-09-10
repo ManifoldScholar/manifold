@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_30_185652) do
+ActiveRecord::Schema.define(version: 2019_09_10_144954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -481,9 +481,6 @@ ActiveRecord::Schema.define(version: 2019_08_30_185652) do
     t.string "invitation_code"
     t.boolean "notify_on_join", default: true
     t.integer "memberships_count", default: 0, null: false
-    t.integer "all_annotations_count", default: 0, null: false
-    t.integer "annotations_count", default: 0, null: false
-    t.integer "highlights_count", default: 0, null: false
     t.uuid "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -905,7 +902,7 @@ ActiveRecord::Schema.define(version: 2019_08_30_185652) do
   add_foreign_key "users_roles", "roles", on_delete: :cascade
   add_foreign_key "users_roles", "users", on_delete: :cascade
 
-  create_view "permissions",  sql_definition: <<-SQL
+  create_view "permissions", sql_definition: <<-SQL
       SELECT ((((ur.user_id || ':'::text) || r.resource_id) || ':'::text) || (r.resource_type)::text) AS id,
       ur.user_id,
       r.resource_id,
@@ -916,8 +913,7 @@ ActiveRecord::Schema.define(version: 2019_08_30_185652) do
     GROUP BY ur.user_id, r.resource_id, r.resource_type
    HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
   SQL
-
-  create_view "project_collection_sort_orders", materialized: true,  sql_definition: <<-SQL
+  create_view "project_collection_sort_orders", materialized: true, sql_definition: <<-SQL
       WITH allowed_columns AS (
            SELECT t.column_name
              FROM ( VALUES ('created_at'::text), ('updated_at'::text), ('publication_date'::text), ('title'::text)) t(column_name)
@@ -940,10 +936,9 @@ ActiveRecord::Schema.define(version: 2019_08_30_185652) do
       allowed_sort_orders.descending
      FROM allowed_sort_orders;
   SQL
-
   add_index "project_collection_sort_orders", ["sort_order"], name: "project_collection_sort_orders_pkey", unique: true
 
-  create_view "collection_project_rankings",  sql_definition: <<-SQL
+  create_view "collection_project_rankings", sql_definition: <<-SQL
       SELECT cp.id AS collection_project_id,
       cp.project_collection_id,
       cp.project_id,
@@ -993,8 +988,7 @@ ActiveRecord::Schema.define(version: 2019_08_30_185652) do
               ELSE NULL::character varying
           END);
   SQL
-
-  create_view "reading_group_membership_counts",  sql_definition: <<-SQL
+  create_view "reading_group_membership_counts", sql_definition: <<-SQL
       SELECT rgm.id AS reading_group_membership_id,
       count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
       count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
@@ -1002,8 +996,7 @@ ActiveRecord::Schema.define(version: 2019_08_30_185652) do
        LEFT JOIN annotations a ON (((a.creator_id = rgm.user_id) AND (a.reading_group_id = rgm.reading_group_id))))
     GROUP BY rgm.id;
   SQL
-
-  create_view "reading_group_counts",  sql_definition: <<-SQL
+  create_view "reading_group_counts", sql_definition: <<-SQL
       SELECT rg.id AS reading_group_id,
       count(*) FILTER (WHERE ((a.format)::text = 'annotation'::text)) AS annotations_count,
       count(*) FILTER (WHERE ((a.format)::text = 'highlight'::text)) AS highlights_count
@@ -1011,5 +1004,4 @@ ActiveRecord::Schema.define(version: 2019_08_30_185652) do
        LEFT JOIN annotations a ON ((a.reading_group_id = rg.id)))
     GROUP BY rg.id;
   SQL
-
 end

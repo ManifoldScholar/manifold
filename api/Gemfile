@@ -114,6 +114,7 @@ group :development do
   gem "pry-remote"
   gem "rubocop", "~> 0.60"
   gem "rubocop-rspec", "~> 1.32"
+  gem "simplecov", require: false
   gem "spring", "~> 2.0"
   gem "spring-commands-rspec", "~> 1.0"
   gem "webmock", "~> 3.0"
