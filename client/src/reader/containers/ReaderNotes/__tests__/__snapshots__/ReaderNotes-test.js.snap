@@ -28,13 +28,11 @@ exports[`Reader ReaderNotes Container renders correctly 1`] = `
             className="annotation-selection__source-summary"
           >
             <a
+              className="annotation-selection__source-summary-link"
               href="#"
               onClick={[Function]}
-              style={
-                Object {
-                  "textDecoration": "none",
-                }
-              }
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
             >
               <span
                 className="annotation-selection__source-summary-text"
@@ -100,13 +98,11 @@ exports[`Reader ReaderNotes Container renders correctly 1`] = `
             className="annotation-selection__source-summary"
           >
             <a
+              className="annotation-selection__source-summary-link"
               href="#"
               onClick={[Function]}
-              style={
-                Object {
-                  "textDecoration": "none",
-                }
-              }
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
             >
               <span
                 className="annotation-selection__source-summary-text"

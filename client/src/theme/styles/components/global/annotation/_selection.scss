@@ -7,6 +7,7 @@
     line-height: 1.3;
     color: $neutral90;
     word-wrap: break-word;
+    transition: background-color $duration $timing;
 
     @include respond($break80) {
       font-size: 18px;
@@ -23,6 +24,10 @@
         padding-top: 31px;
         padding-bottom: 25px;
       }
+
+      &.annotation-selection__text-container--hovering {
+        background-color: $neutral20;
+      }
     }
 
     &--light {
@@ -34,10 +39,28 @@
         padding-top: 41px;
         padding-bottom: 34px;
       }
+
+      &.annotation-selection__text-container--hovering {
+        background-color: $neutral10;
+      }
     }
 
     &--rounded-corners {
       border-radius: 8px;
+    }
+
+    &--hovering {
+      position: relative;
+
+      .annotation-selection__hover-arrow {
+        opacity: 1;
+      }
+
+      .truncated__wrapper--blur {
+        &::after {
+          opacity: 1;
+        }
+      }
     }
   }
 
@@ -45,23 +68,6 @@
     width: 100%;
     line-height: 1.6;
     background-color: $sp20PrimaryPale;
-  }
-
-  &__hover-link {
-    position: relative;
-    transition: background-color $duration $timing;
-
-    &:hover {
-      background-color: $neutral20;
-
-      .annotation-selection__hover-arrow {
-        opacity: 1;
-      }
-
-      .truncated__wrapper::after {
-        background: linear-gradient(to top, $neutral20 10%, transparentize($neutral20, 1) 100%);
-      }
-    }
   }
 
   &__container {
@@ -104,8 +110,12 @@
   }
 
   &__source-summary {
-    display: flex;
     padding-top: 10px;
+  }
+
+  &__source-summary-link {
+    display: flex;
+    text-decoration: none;
   }
 
   &__source-summary-text {
@@ -118,6 +128,8 @@
   }
 
   &__hover-arrow {
+    position: relative;
+    top: -2px;
     flex-shrink: 0;
     margin-left: 12px;
     opacity: 0;

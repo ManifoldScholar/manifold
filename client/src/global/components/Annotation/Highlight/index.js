@@ -21,6 +21,13 @@ class HighlightDetail extends PureComponent {
     visitHandler: PropTypes.func
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      hovering: false
+    };
+  }
+
   deleteAnnotation = () => {
     const { annotation } = this.props;
     const call = annotationsAPI.destroy(annotation.id);
@@ -57,18 +64,12 @@ class HighlightDetail extends PureComponent {
     this.defaultVisitHandler(annotation);
   };
 
+  hoverHandler = hovering => {
+    this.setState({ hovering });
+  };
+
   get displayFormat() {
     return this.props.displayFormat;
-  }
-
-  get containerClassNames() {
-    return classNames({
-      "annotation-selection__text-container": true,
-      "annotation-selection__text-container--light": true,
-      "annotation-selection__text-container--rounded-corners":
-        this.displayFormat === "fullPage",
-      "annotation-selection__hover-link": this.viewable
-    });
   }
 
   get textSection() {
@@ -95,8 +96,16 @@ class HighlightDetail extends PureComponent {
 
   render() {
     const annotation = this.props.annotation;
+    const wrapperClasses = classNames({
+      "annotation-selection__text-container": true,
+      "annotation-selection__text-container--light": true,
+      "annotation-selection__text-container--rounded-corners":
+        this.displayFormat === "fullPage",
+      "annotation-selection__text-container--hovering": this.state.hovering
+    });
+
     return (
-      <div className={this.containerClassNames}>
+      <div className={wrapperClasses}>
         <span className="annotation-selection__highlight-text">
           {annotation.attributes.subject}
         </span>
@@ -106,7 +115,7 @@ class HighlightDetail extends PureComponent {
           sectionTitle={this.sectionTitle}
           highlightDate={this.highlightDate}
           onClick={this.visitHandler}
-          viewable={this.viewable}
+          onHover={this.hoverHandler}
         />
         <Authorize entity={annotation} ability={"delete"}>
           <div className="annotation-selection__action-buttons">

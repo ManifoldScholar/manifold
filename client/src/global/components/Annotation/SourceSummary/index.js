@@ -53,7 +53,8 @@ export default class SourceSummary extends React.PureComponent {
       projectTitle,
       sectionTitle,
       highlightDate,
-      onClick
+      onClick,
+      onHover
     } = this.props;
 
     if (!user && !projectTitle && !sectionTitle && !highlightDate) return null;
@@ -61,7 +62,13 @@ export default class SourceSummary extends React.PureComponent {
     /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
       <div className="annotation-selection__source-summary">
-        <a href="#" style={{ textDecoration: "none" }} onClick={onClick}>
+        <a
+          href="#"
+          onClick={onClick}
+          onMouseOver={() => onHover(true)}
+          onMouseOut={() => onHover(false)}
+          className="annotation-selection__source-summary-link"
+        >
           <span className="annotation-selection__source-summary-text">
             {this.renderUser()}
             {this.renderSectionAndTitle()}
