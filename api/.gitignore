@@ -31,3 +31,5 @@ config/oauth.yml
 data/*
 !data/.gitkeep
 examples.txt
+
+coverage
