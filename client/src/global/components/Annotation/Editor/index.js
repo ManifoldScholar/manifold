@@ -34,6 +34,13 @@ class AnnotationEditor extends PureComponent {
     };
   }
 
+  componentWillMount() {
+    const { annotation } = this.props;
+    if (annotation.id) {
+      this.setReadingGroupFromAnnotationEdit();
+    }
+  }
+
   componentDidMount() {
     if (this.ci) this.ci.focus();
     document.addEventListener("mouseup", this.handleClick, false);
@@ -72,6 +79,17 @@ class AnnotationEditor extends PureComponent {
       group => group.id === this.props.currentReadingGroup
     );
     return currentGroup.attributes.name;
+  }
+
+  setReadingGroupFromAnnotationEdit() {
+    const { annotation } = this.props;
+    if (annotation.attributes.readingGroupId) {
+      this.props.setReadingGroup(annotation.attributes.readingGroupId);
+    } else if (annotation.attributes.private) {
+      this.props.setReadingGroup("private");
+    } else {
+      this.props.setReadingGroup("public");
+    }
   }
 
   handleSubmit = event => {
