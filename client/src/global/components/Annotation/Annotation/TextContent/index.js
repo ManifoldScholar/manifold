@@ -23,12 +23,9 @@ export default class AnnotationSelectionWrapper extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      editorOpen: false
+      editorOpen: false,
+      hovering: false
     };
-  }
-
-  get viewable() {
-    return !!this.props.onViewInText;
   }
 
   get annotatable() {
@@ -43,30 +40,9 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     return this.props.displayFormat === "fullPage";
   }
 
-  get selectionTextClassNames() {
-    return classNames({
-      "annotation-selection__text-container": true,
-      "annotation-selection__text-container--dark": this.fullPageFormat,
-      "annotation-selection__text-container--light": !this.fullPageFormat,
-      "annotation-selection__hover-link": this.viewable
-    });
-  }
-
-  get iconClassNames() {
-    return "annotation-selection__icon";
-  }
-
-  get selectionContainerClassNames() {
-    return "annotation-selection__container";
-  }
-
-  get buttonClassNames() {
-    return "annotation-selection__button";
-  }
-
-  get wholeSelectionButtonClassNames() {
-    return "annotation-selection__button-absolute";
-  }
+  hoverHandler = hovering => {
+    this.setState({ hovering });
+  };
 
   maybeTruncateSelection() {
     const { subject, truncate, displayFormat } = this.props;
@@ -84,27 +60,34 @@ export default class AnnotationSelectionWrapper extends PureComponent {
 
   render() {
     const { projectTitle, sectionTitle } = this.props;
+    const wrapperClasses = classNames({
+      "annotation-selection__text-container": true,
+      "annotation-selection__text-container--dark": this.fullPageFormat,
+      "annotation-selection__text-container--light": !this.fullPageFormat,
+      "annotation-selection__text-container--hovering": this.state.hovering
+    });
+
     return (
-      <div className={this.selectionTextClassNames}>
-        <div className={this.selectionContainerClassNames}>
+      <div className={wrapperClasses}>
+        <div className="annotation-selection__container">
           <IconComposer
             icon="socialCite32"
             size="default"
-            iconClass={this.iconClassNames}
+            iconClass="annotation-selection__icon"
           />
           {this.maybeTruncateSelection()}
           <SourceSummary
             projectTitle={projectTitle}
             sectionTitle={sectionTitle}
-            viewable={this.viewable}
             onClick={this.props.onViewInText}
+            onHover={this.hoverHandler}
           />
         </div>
         {this.annotatable && (
           <Fragment>
             <Authorize kind="any">
               <button
-                className={this.buttonClassNames}
+                className="annotation-selection__button"
                 onClick={this.props.onAnnotate}
               >
                 {"Annotate"}
@@ -113,7 +96,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             {this.canLogin && (
               <Authorize kind="unauthenticated">
                 <button
-                  className={this.buttonClassNames}
+                  className="annotation-selection__button"
                   onClick={this.props.onLogin}
                 >
                   {"Login to annotate"}

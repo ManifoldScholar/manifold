@@ -4,6 +4,7 @@
     overflow: hidden;
     transition: height $duration $timing;
 
+    &::before,
     &::after {
       position: absolute;
       bottom: 0;
@@ -12,19 +13,28 @@
       height: 4em;
       content: '';
       opacity: 0;
+    }
+
+    &::before {
       transition: opacity $durationSlow $timing $duration;
     }
 
-    &--light::after {
+    &--light::before {
       background: linear-gradient(to top, $neutral05 10%, transparentize($neutral05, 1) 100%);
     }
 
-    &--dark::after {
+    &--dark::before {
       background: linear-gradient(to top, $neutral10 10%, transparentize($neutral10, 1) 100%);
     }
 
-    &--blur::after {
+    &--blur::before {
       opacity: 1;
+    }
+
+    &::after {
+      // hover effect (approximates bumping gradient to $neutral20)
+      background: linear-gradient(to top, transparentize($neutral30, 0.8) 10%, transparentize($neutral30, 1) 100%);
+      transition: opacity $duration $timing;
     }
   }
 
