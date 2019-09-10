@@ -1,13 +1,8 @@
 .notifications-list {
-  top: 100px;
   width: 100%;
 
   &--updating {
     transition: transform $duration ease-out;
-  }
-
-  &--context-drawer {
-    margin-bottom: 26px;
   }
 
   &--context-header {
@@ -25,6 +20,7 @@
 
   &__inner {
     .notifications-list--context-drawer & {
+      margin-bottom: 26px;
       transition: transform $duration ease-out;
 
       &.notification-leave {
