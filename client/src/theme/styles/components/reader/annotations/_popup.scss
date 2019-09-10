@@ -4,6 +4,7 @@
 // Just for components that deal with selecting an action to create an annotation
 .annotation-popup {
   $panelBgColor: $neutral85;
+  $panelBgColorLight: $neutralWhite;
   $tailSize: 16px;
 
   position: absolute;
@@ -72,6 +73,10 @@
         transform: translateX(25%);
       }
     }
+
+    .scheme-dark & {
+      background-color: $panelBgColorLight;
+    }
   }
 
   &__note {
@@ -92,6 +97,11 @@
       border-bottom-right-radius: $panelRoundedRadius;
       border-bottom-left-radius: $panelRoundedRadius;
     }
+
+    .scheme-dark & {
+      color: $neutral85;
+      background-color: $neutralWhite;
+    }
   }
 
   &__header {
@@ -104,6 +114,11 @@
     background-color: $neutral95;
     border-top-left-radius: $panelRoundedRadius;
     border-top-right-radius: $panelRoundedRadius;
+
+    .scheme-dark & {
+      color: $neutral85;
+      background-color: $neutral10;
+    }
   }
 
   &__heading {
@@ -123,12 +138,21 @@
     text-align: left;
     transition: color $duration $timing, background-color $duration $timing;
 
+    .scheme-dark & {
+      color: $neutral85;
+    }
+
     &--dark {
       color: $neutral70;
       background-color: $panelBgColor;
 
       + .annotation-popup__tail--down {
         border-color: $neutral90 transparent transparent;
+      }
+
+      .scheme-dark & {
+        color: $panelBgColor;
+        background-color: $neutral70;
       }
     }
 
@@ -137,6 +161,11 @@
       padding-left: 20px;
       color: $neutral45;
       background-color: $neutral95;
+
+      .scheme-dark & {
+        color: $neutral85;
+        background-color: $neutral10;
+      }
     }
 
     &--stacked {
@@ -234,8 +263,16 @@
       }
     }
 
+    .scheme-dark & {
+      --tail-color: #{$neutralWhite};
+    }
+
     &--dark {
       --tail-color: #{$neutral95};
+
+      .scheme-dark & {
+        --tail-color: #{$neutral10};
+      }
     }
   }
 }
