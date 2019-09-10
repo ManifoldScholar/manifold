@@ -10,6 +10,10 @@ class ReadingGroupSerializer < ApplicationSerializer
   has_many :texts, serializer: TextOptionsSerializer
   has_many :reading_group_memberships
 
+  def all_annotations_count
+    object.annotations_count + object.highlights_count
+  end
+
   def current_user_role
     current_user_is_creator ? "owner" : "member"
   end
