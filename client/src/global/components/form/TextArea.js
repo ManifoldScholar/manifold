@@ -67,9 +67,7 @@ class FormTextArea extends Component {
               />
               <textarea
                 id={`${this.idPrefix}-${id}`}
-                aria-describedby={`${this.idForErrorPrefix}-${id} ${
-                  this.idForInstructionsPrefix
-                }-${id}`}
+                aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
                 style={{ height: this.props.height }}
                 placeholder={this.props.placeholder}
                 onChange={this.props.onChange}

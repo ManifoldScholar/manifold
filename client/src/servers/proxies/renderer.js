@@ -6,9 +6,7 @@ import exceptionRenderer from "../../helpers/exceptionRenderer";
 import manifoldBootstrap from "bootstrap";
 import CookieHelper from "helpers/cookie/Server";
 
-const ssrRenderUrl = `http://${config.services.client.domain}:${
-  config.services.client.sparePort
-}`;
+const ssrRenderUrl = `http://${config.services.client.domain}:${config.services.client.sparePort}`;
 
 export default function makeRendererProxy(stats, requestHandler) {
   const reactServerProxy = proxy({

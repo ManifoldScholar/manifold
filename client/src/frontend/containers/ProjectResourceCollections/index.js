@@ -133,11 +133,7 @@ class ProjectResourceCollectionsContainer extends Component {
     return (
       <div>
         <HeadContent
-          title={`View \u201c${
-            project.attributes.titlePlaintext
-          }\u201d Resource Collections on ${
-            settings.attributes.general.installationName
-          }`}
+          title={`View \u201c${project.attributes.titlePlaintext}\u201d Resource Collections on ${settings.attributes.general.installationName}`}
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />

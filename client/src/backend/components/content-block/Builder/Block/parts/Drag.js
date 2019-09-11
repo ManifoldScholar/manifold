@@ -13,15 +13,11 @@ export default class ProjectContentBlockInListPartsDrag extends PureComponent {
 
   render() {
     if (!this.props.visible) return null;
-    const iconClass = `${this.props.baseClass}__icon ${
-      this.props.baseClass
-    }__icon--light`;
+    const iconClass = `${this.props.baseClass}__icon ${this.props.baseClass}__icon--light`;
 
     return (
       <div
-        className={`${this.props.baseClass}__button ${
-          this.props.baseClass
-        }__button--draggable`}
+        className={`${this.props.baseClass}__button ${this.props.baseClass}__button--draggable`}
         {...this.props.dragHandleProps}
         role="button"
         tabIndex="0"

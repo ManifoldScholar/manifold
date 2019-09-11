@@ -96,9 +96,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
       level: 0,
       id: `RESOURCE_COLLECTION_DESTROYED_${this.props.resourceCollection.id}`,
       heading: "The resource collection has been destroyed.",
-      body: `${
-        this.props.resourceCollection.attributes.title
-      } has passed into the endless night.`,
+      body: `${this.props.resourceCollection.attributes.title} has passed into the endless night.`,
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));

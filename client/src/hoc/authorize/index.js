@@ -129,9 +129,7 @@ export class AuthorizeComponent extends PureComponent {
         pathName: this.props.failureRedirect,
         state: {
           showLogin: !this.isAuthenticated,
-          postLoginRedirect: `${this.props.location.pathname}${
-            this.props.location.search
-          }`
+          postLoginRedirect: `${this.props.location.pathname}${this.props.location.search}`
         }
       };
       return <Redirect to={to} />;

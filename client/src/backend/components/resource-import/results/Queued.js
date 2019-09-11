@@ -35,9 +35,7 @@ export default class ResourceImportResultsQueued extends PureComponent {
     }
     return (
       <span>
-        {`Row #${
-          resourceImportRow.lineNumber
-        } is queued to create a new resource.`}
+        {`Row #${resourceImportRow.lineNumber} is queued to create a new resource.`}
       </span>
     );
   }
