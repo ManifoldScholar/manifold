@@ -3,10 +3,9 @@ jest.mock("react-collapse");
 import React from "react";
 import renderer from "react-test-renderer";
 import { ResourceCollectionDetailContainer } from "../";
-import { Provider } from "react-redux";
 import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
 import BackLink from "frontend/components/back-link";
+import wrapWithContext from "test/helpers/wrapWithContext";
 
 describe("Frontend ResourceCollectionDetail Container", () => {
   const pagination = build.pagination();
@@ -44,21 +43,18 @@ describe("Frontend ResourceCollectionDetail Container", () => {
     collectionResources: resources,
     resourceCollectionPagination: pagination,
     resourceCollectionPaginationHandler: pageChangeMock,
-    resourceCollectionUrl: `/browse/project/${project.id}/collection/${
-      resourceCollection.id
-    }`,
+    resourceCollectionUrl: `/browse/project/${project.id}/collection/${resourceCollection.id}`,
     filterChange: filterChangeMock,
     initialFilterState: null,
     location: { query: null }
   };
 
   const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <BackLink.Provider>
-          <ResourceCollectionDetailContainer {...props} />
-        </BackLink.Provider>
-      </Provider>
+    wrapWithContext(
+      <BackLink.Provider>
+        <ResourceCollectionDetailContainer {...props} />
+      </BackLink.Provider>,
+      store
     )
   );
 

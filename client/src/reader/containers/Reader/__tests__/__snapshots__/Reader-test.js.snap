@@ -268,18 +268,10 @@ exports[`Reader Reader Container renders correctly 1`] = `
         </nav>
         <div
           className="reader-header__panels reader-header__panels--left"
-        >
-          <span />
-        </div>
+        />
         <div
           className="reader-header__panels reader-header__panels--right"
-        >
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
+        />
         <button
           aria-hidden={true}
           className="reader-header__button reader-header__button--pad-default reader-header__options-button"
@@ -295,17 +287,15 @@ exports[`Reader Reader Container renders correctly 1`] = `
           <div
             className="notifications-list--context-header notifications-list"
           >
-            <span />
+            <div />
           </div>
         </section>
       </header>
     </div>
   </div>
-  <span />
   <main
     id="skip-to-main"
   >
-    <span />
     <span />
   </main>
   <footer

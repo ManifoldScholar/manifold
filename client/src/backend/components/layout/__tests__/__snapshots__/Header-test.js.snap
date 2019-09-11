@@ -170,7 +170,6 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
                   </span>
                 </figure>
               </button>
-              <span />
             </li>
           </ul>
         </nav>

@@ -1,9 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { FeaturedContainer } from "../";
-import { Provider } from "react-redux";
 import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
+import wrapWithContext from "test/helpers/wrapWithContext";
 
 describe("Frontend Featured Container", () => {
   const store = build.store();
@@ -15,13 +14,12 @@ describe("Frontend Featured Container", () => {
   };
 
   const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <FeaturedContainer
-          authentication={authentication}
-          featuredProjects={projects}
-        />
-      </Provider>
+    wrapWithContext(
+      <FeaturedContainer
+        authentication={authentication}
+        featuredProjects={projects}
+      />,
+      store
     )
   );
 

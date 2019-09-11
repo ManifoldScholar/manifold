@@ -96,16 +96,11 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
             <div
               className="slide"
             >
-              <div
-                onMouseDown={[Function]}
-                onTouchEnd={[Function]}
-                onTouchMove={[Function]}
-                onTouchStart={[Function]}
-              >
+              <div>
                 <div
                   className="resource-slide-figure"
                 >
-                  <span>
+                  <div>
                     <div>
                       <figure>
                         <div
@@ -118,7 +113,7 @@ exports[`Reader Notation ResourceCollection Detail Container renders correctly 1
                         />
                       </figure>
                     </div>
-                  </span>
+                  </div>
                 </div>
               </div>
               <div

@@ -1,27 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Global.UIPanel component renders correctly 1`] = `
-<span>
-  <div
-    className="panel-visible"
-  >
-    <focus-trap-react
-      focusTrapOptions={
-        Object {
-          "clickOutsideDeactivates": true,
-          "escapeDeactivate": false,
-        }
+<div
+  className="panel-visible"
+>
+  <focus-trap-react
+    focusTrapOptions={
+      Object {
+        "clickOutsideDeactivates": true,
+        "escapeDeactivate": false,
       }
+    }
+  >
+    <button
+      className="screen-reader-text"
     >
-      <button
-        className="screen-reader-text"
-      >
-        Close Panel
-      </button>
-      <div>
-        Render me
-      </div>
-    </focus-trap-react>
-  </div>
-</span>
+      Close Panel
+    </button>
+    <div>
+      Render me
+    </div>
+  </focus-trap-react>
+</div>
 `;

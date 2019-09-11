@@ -344,6 +344,5 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
       </div>
     </form>
   </section>
-  <span />
 </section>
 `;

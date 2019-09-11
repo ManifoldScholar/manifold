@@ -71,6 +71,5 @@ exports[`Backend.ProjectCollection.Detail container renders correctly 1`] = `
       />
     </div>
   </div>
-  <span />
 </div>
 `;

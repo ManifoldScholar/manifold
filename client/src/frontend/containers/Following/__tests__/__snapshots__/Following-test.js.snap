@@ -170,7 +170,9 @@ exports[`Frontend Following Container renders correctly 1`] = `
       <div
         className="project-list grid entity-section-wrapper__body"
       >
-        <ul>
+        <ul
+          className="project-list grid"
+        >
           <li
             className="project-list__item--pos-rel"
           >
@@ -435,13 +437,13 @@ exports[`Frontend Following Container renders correctly 1`] = `
                       />
                     </svg>
                   </div>
-                  <span>
+                  <div>
                     <span
                       className="action-text"
                     >
                       Follow
                     </span>
-                  </span>
+                  </div>
                 </div>
               </button>
             </div>
@@ -710,13 +712,13 @@ exports[`Frontend Following Container renders correctly 1`] = `
                       />
                     </svg>
                   </div>
-                  <span>
+                  <div>
                     <span
                       className="action-text"
                     >
                       Follow
                     </span>
-                  </span>
+                  </div>
                 </div>
               </button>
             </div>
@@ -762,7 +764,9 @@ exports[`Frontend Following Container renders correctly 1`] = `
       <div
         className="project-list grid entity-section-wrapper__body"
       >
-        <ul>
+        <ul
+          className="project-list grid"
+        >
           <li
             className="project-list__item--pos-rel"
           >
@@ -1027,13 +1031,13 @@ exports[`Frontend Following Container renders correctly 1`] = `
                       />
                     </svg>
                   </div>
-                  <span>
+                  <div>
                     <span
                       className="action-text"
                     >
                       Follow
                     </span>
-                  </span>
+                  </div>
                 </div>
               </button>
             </div>
@@ -1302,13 +1306,13 @@ exports[`Frontend Following Container renders correctly 1`] = `
                       />
                     </svg>
                   </div>
-                  <span>
+                  <div>
                     <span
                       className="action-text"
                     >
                       Follow
                     </span>
-                  </span>
+                  </div>
                 </div>
               </button>
             </div>

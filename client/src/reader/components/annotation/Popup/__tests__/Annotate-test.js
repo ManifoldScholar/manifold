@@ -10,23 +10,26 @@ describe("Reader.Annotation.Popup.Menu.Annotate Component", () => {
   const text = build.entity.text("1");
 
   it("renders correctly when not logged in", () => {
-    const component = renderer.create(wrapWithRouter(
-      <Provider store={store}>
-        <Annotate
-          readingGroups={[]}
-          currentReadingGroup="public"
-          actions={{
-            openNewAnnotationDrawer: jest.fn(),
-            openNewNotationDrawer: jest.fn(),
-            destroyAnnotation: jest.fn(),
-            showLogin: jest.fn(),
-            createHighlight: jest.fn()
-          }}
-          showShare={() => {}}
-          text={text}
-        />
-      </Provider>
-    ));
+    const component = renderer.create(
+      wrapWithRouter(
+        <Provider store={store}>
+          <Annotate
+            readingGroups={[]}
+            showReadingGroups={jest.fn()}
+            currentReadingGroup="public"
+            actions={{
+              openNewAnnotationDrawer: jest.fn(),
+              openNewNotationDrawer: jest.fn(),
+              destroyAnnotation: jest.fn(),
+              showLogin: jest.fn(),
+              createHighlight: jest.fn()
+            }}
+            showShare={() => {}}
+            text={text}
+          />
+        </Provider>
+      )
+    );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

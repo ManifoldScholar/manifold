@@ -28,6 +28,5 @@ Array [
     className="annotation-popup"
     role="presentation"
   />,
-  <span />,
 ]
 `;
