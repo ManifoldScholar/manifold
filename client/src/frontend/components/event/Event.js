@@ -9,7 +9,7 @@ const autolinkTweet = props => {
   const Loaded = Loadable({
     loader: () => import(/* webpackChunkName: "autolinker" */ "autolinker"),
     render(Autolinker) {
-      const excerpt = Autolinker.link(props.excerpt, props.options);
+      const excerpt = Autolinker.default.link(props.excerpt, props.options);
       return <p dangerouslySetInnerHTML={{ __html: excerpt }} />;
     },
     loading: () => <p dangerouslySetInnerHTML={{ __html: props.excerpt }} />
