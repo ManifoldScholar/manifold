@@ -209,7 +209,7 @@
     "node-sass": "^4.0",
     "nodemon": "^1.11.0",
     "null-loader": "^0.1.1",
-    "pluralize": "^7.0.0",
+    "pluralize": "^8.x",
     "postcss-focus-visible": "^4.0.0",
     "postcss-loader": "^3.x",
     "postcss-scss": "^2.0",
