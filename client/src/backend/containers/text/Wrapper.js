@@ -69,9 +69,7 @@ export class TextWrapperContainer extends PureComponent {
       level: 0,
       id: `TEXT_DESTROYED_${this.props.text.id}`,
       heading: "The text has been destroyed.",
-      body: `${
-        this.props.text.attributes.titlePlaintext
-      } has passed into the endless night.`,
+      body: `${this.props.text.attributes.titlePlaintext} has passed into the endless night.`,
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));

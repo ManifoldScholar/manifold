@@ -218,9 +218,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
     return (
       <div>
         <HeadContent
-          title={`\u201c${resourceCollection.attributes.title}\u201d on ${
-            settings.attributes.general.installationName
-          }`}
+          title={`\u201c${resourceCollection.attributes.title}\u201d on ${settings.attributes.general.installationName}`}
           description={resourceCollection.attributes.description}
           image={resourceCollection.attributes.thumbnailStyles.medium}
         />

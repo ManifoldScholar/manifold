@@ -11,15 +11,11 @@ export default class ProjectContentBlockInListPartsDelete extends PureComponent 
   };
 
   render() {
-    const iconClass = `${this.props.baseClass}__icon ${
-      this.props.baseClass
-    }__icon--light`;
+    const iconClass = `${this.props.baseClass}__icon ${this.props.baseClass}__icon--light`;
 
     return (
       <button
-        className={`${this.props.baseClass}__button ${
-          this.props.baseClass
-        }__button--delete`}
+        className={`${this.props.baseClass}__button ${this.props.baseClass}__button--delete`}
         onClick={this.props.clickHandler}
         title="Delete content block"
       >

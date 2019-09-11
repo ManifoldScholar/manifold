@@ -86,9 +86,7 @@ class FormRadios extends Component {
           >
             <fieldset
               className="form-input-radios__wrapper"
-              aria-describedby={`${this.idForErrorPrefix}-${id} ${
-                this.idForInstructionsPrefix
-              }-${id}`}
+              aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
             >
               <RadioLabel
                 label={this.props.label}

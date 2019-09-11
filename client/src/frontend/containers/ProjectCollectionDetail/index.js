@@ -168,9 +168,7 @@ export class ProjectCollectionDetailContainer extends Component {
           backText={"Back to Project Collections"}
         />
         <HeadContent
-          title={`\u201c${
-            this.props.projectCollection.attributes.title
-          }\u201d on ${settings.attributes.general.installationName}`}
+          title={`\u201c${this.props.projectCollection.attributes.title}\u201d on ${settings.attributes.general.installationName}`}
           description={
             this.props.projectCollection.attributes.descriptionPlaintext
           }

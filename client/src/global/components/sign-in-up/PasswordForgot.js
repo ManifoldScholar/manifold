@@ -63,9 +63,7 @@ class PasswordForgotContainer extends Component {
     const notification = {
       level: 0,
       id: "PASSWORD_RESET_SENT",
-      heading: `Email sent to ${
-        this.state.email
-      } with instructions to reset your password.`
+      heading: `Email sent to ${this.state.email} with instructions to reset your password.`
     };
     this.props.dispatch(notificationActions.addNotification(notification));
     setTimeout(() => {

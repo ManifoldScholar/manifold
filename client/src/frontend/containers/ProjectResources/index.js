@@ -146,9 +146,7 @@ class ProjectResourcesContainer extends Component {
     return (
       <div>
         <HeadContent
-          title={`View \u201c${
-            project.attributes.titlePlaintext
-          }\u201d Resources on ${settings.attributes.general.installationName}`}
+          title={`View \u201c${project.attributes.titlePlaintext}\u201d Resources on ${settings.attributes.general.installationName}`}
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />

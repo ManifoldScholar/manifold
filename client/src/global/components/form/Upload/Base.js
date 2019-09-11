@@ -100,9 +100,7 @@ export default class FormUpload extends Component {
     });
     const inputProps = {
       id: this.props.inputId,
-      "aria-describedby": `${this.props.idForError} ${
-        this.props.idForInstructions
-      }`
+      "aria-describedby": `${this.props.idForError} ${this.props.idForInstructions}`
     };
     return (
       <div className={inputClasses}>

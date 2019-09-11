@@ -43,9 +43,7 @@ export default class ResourceImportResult extends PureComponent {
       case "skipped":
         return <Results.Skipped resourceImportRow={resourceImportRow} />;
       default:
-        return `Row #${resourceImportRow.lineNumber}: ${
-          resourceImportRow.state
-        }`;
+        return `Row #${resourceImportRow.lineNumber}: ${resourceImportRow.state}`;
     }
   }
 

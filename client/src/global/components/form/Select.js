@@ -75,9 +75,7 @@ class FormSelect extends Component {
                 />
                 <select
                   id={`${this.idPrefix}-${id}`}
-                  aria-describedby={`${this.idForErrorPrefix}-${id} ${
-                    this.idForInstructionsPrefix
-                  }-${id}`}
+                  aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
                   onChange={this.props.onChange}
                   value={this.props.value}
                   ref={input => {
