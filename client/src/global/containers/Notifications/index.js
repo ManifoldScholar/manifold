@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Notification from "global/components/Notification";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import {
+  TransitionGroup as ReactTransitionGroup,
+  CSSTransition
+} from "react-transition-group";
 import { connect } from "react-redux";
 import classNames from "classnames";
 import { commonActions } from "actions/helpers";
@@ -152,29 +155,29 @@ export class NotificationsComponent extends Component {
     if (this.props.notifications.notifications.length > 0) {
       notificationList = this.filteredNotifications().map(notification => {
         return (
-          <div key={notification.id} className="notifications-list__inner">
-            <Notification
-              style={this.props.style}
-              id={notification.id}
-              level={notification.level}
-              heading={notification.heading}
-              body={notification.body}
-              removeNotification={this.removeNotification}
-            />
-          </div>
+          <CSSTransition
+            mountOnEnter
+            key={notification.id}
+            classNames="notification"
+            timeout={{ enter: 500, exit: 500 }}
+            unmountOnExit
+          >
+            <div className="notifications-list__inner">
+              <Notification
+                style={this.props.style}
+                id={notification.id}
+                level={notification.level}
+                heading={notification.heading}
+                body={notification.body}
+                removeNotification={this.removeNotification}
+              />
+            </div>
+          </CSSTransition>
         );
       });
     }
 
-    return (
-      <ReactCSSTransitionGroup
-        transitionName="notification"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}
-      >
-        {notificationList}
-      </ReactCSSTransitionGroup>
-    );
+    return <ReactTransitionGroup>{notificationList}</ReactTransitionGroup>;
   }
 
   render() {

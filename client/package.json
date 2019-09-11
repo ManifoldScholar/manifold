@@ -140,7 +140,7 @@
     "react-sortable-hoc": "^1.8.3",
     "react-swipeable": "^5.x",
     "react-text-mask": "5.x",
-    "react-transition-group": "1.x",
+    "react-transition-group": "^4.3.0",
     "react-typekit": "^1.0.8",
     "react-uid": "^2.2.0",
     "redux": "^4.0",

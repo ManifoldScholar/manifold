@@ -25,7 +25,7 @@ import {
   uiFrontendModeActions
 } from "actions";
 import { setPersistentUI } from "actions/ui/persistentUi";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import get from "lodash/get";
 import ScrollAware from "hoc/scroll-aware";
 import BodyClass from "hoc/body-class";
@@ -149,6 +149,13 @@ export class ReaderContainer extends Component {
     return `reader ${colorScheme}`;
   }
 
+  get transitionProps() {
+    return {
+      classNames: "overlay-full",
+      timeout: { enter: 200, exit: 200 }
+    };
+  }
+
   setPersistentUI = props => {
     const user = props.authentication.currentUser;
     if (!user) return null;
@@ -195,29 +202,33 @@ export class ReaderContainer extends Component {
   renderTextMetaOverlay() {
     const text = this.props.text;
     return (
-      <Overlay closeCallback={this.toggleMeta} appearance="overlay-full">
-        <TextMeta
-          title={text.attributes.titlePlaintext}
-          subtitle={text.attributes.subtitle}
-          meta={text.attributes.metadataFormatted}
-        />
-      </Overlay>
+      <CSSTransition {...this.transitionProps}>
+        <Overlay closeCallback={this.toggleMeta} appearance="overlay-full">
+          <TextMeta
+            title={text.attributes.titlePlaintext}
+            subtitle={text.attributes.subtitle}
+            meta={text.attributes.metadataFormatted}
+          />
+        </Overlay>
+      </CSSTransition>
     );
   }
 
   renderNotesOverlay() {
     return (
       <Authorize kind="any">
-        <Overlay
-          closeCallback={this.props.history.goBack}
-          title={"My Notes"}
-          icon="notes24"
-          contentWidth={850}
-        >
-          <ReaderNotes>
-            <Notes.DetailedList />
-          </ReaderNotes>
-        </Overlay>
+        <CSSTransition {...this.transitionProps}>
+          <Overlay
+            closeCallback={this.props.history.goBack}
+            title={"My Notes"}
+            icon="notes24"
+            contentWidth={850}
+          >
+            <ReaderNotes>
+              <Notes.DetailedList />
+            </ReaderNotes>
+          </Overlay>
+        </CSSTransition>
       </Authorize>
     );
   }
@@ -272,13 +283,7 @@ export class ReaderContainer extends Component {
             showMeta={this.toggleMeta}
           />
           <main id="skip-to-main">
-            <ReactCSSTransitionGroup
-              transitionName="overlay-full"
-              transitionEnterTimeout={200}
-              transitionLeaveTimeout={200}
-            >
-              {this.maybeRenderOverlay(this.props)}
-            </ReactCSSTransitionGroup>
+            {this.maybeRenderOverlay(this.props)}
             {this.renderRoutes()}
           </main>
           <Footers.ReaderFooter text={this.props.text} />

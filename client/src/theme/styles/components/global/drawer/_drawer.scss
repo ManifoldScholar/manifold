@@ -44,7 +44,7 @@
   &--right,
   &--left {
     .drawer-enter.drawer-enter-active &,
-    .drawer-leave & {
+    .drawer-exit & {
       transform: translateX(0);
     }
   }
@@ -54,7 +54,7 @@
     left: auto;
 
     .drawer-enter &,
-    .drawer-leave.drawer-leave-active & {
+    .drawer-exit.drawer-exit-active & {
       transform: translateX(100%);
     }
   }
@@ -64,7 +64,7 @@
     left: 0;
 
     .drawer-enter &,
-    .drawer-leave.drawer-leave-active & {
+    .drawer-exit.drawer-exit-active & {
       transform: translateX(-100%);
     }
   }

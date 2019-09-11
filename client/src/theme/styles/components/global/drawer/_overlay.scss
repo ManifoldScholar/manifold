@@ -15,11 +15,11 @@
     transition: opacity $duration $timing;
   }
 
-  .drawer-leave & {
+  .drawer-exit & {
     opacity: 1;
   }
 
-  .drawer-leave.drawer-leave-active & {
+  .drawer-exit.drawer-exit-active & {
     opacity: 0.01;
     transition: opacity $duration $timing;
   }

@@ -44,11 +44,11 @@
     transform: translate3d(0, 0, 0);
   }
 
-  .slide-left-leave figure {
+  .slide-left-exit figure {
     transform: translate3d(0, 0, 0);
   }
 
-  .slide-left-leave-active figure {
+  .slide-left-exit-active figure {
     transition: transform 0.4s $timing;
     transform: translate3d(-100%, 0, 0);
   }
@@ -62,11 +62,11 @@
     transform: translate3d(0, 0, 0);
   }
 
-  .slide-right-leave figure {
+  .slide-right-exit figure {
     transform: translate3d(0, 0, 0);
   }
 
-  .slide-right-leave-active figure {
+  .slide-right-exit-active figure {
     transition: transform 0.4s $timing;
     transform: translate3d(100%, 0, 0);
   }

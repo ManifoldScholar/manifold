@@ -9,7 +9,7 @@ import FatalError from "global/components/FatalError";
 import SignInUp from "global/components/sign-in-up";
 import has from "lodash/has";
 import get from "lodash/get";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import {
   uiVisibilityActions,
   routingActions,
@@ -174,22 +174,21 @@ class ManifoldContainer extends PureComponent {
           {this.props.confirm}
           <HeadContent />
           <LoadingBar loading={this.props.loading} />
-          <ReactCSSTransitionGroup
-            transitionName={"overlay-login"}
-            transitionEnterTimeout={300}
-            transitionLeaveTimeout={300}
+          <CSSTransition
+            in={this.props.visibility.signInUpOverlay}
+            classNames={"overlay-login"}
+            timeout={{ enter: 300, exit: 300 }}
+            unmountOnExit
           >
-            {this.props.visibility.signInUpOverlay ? (
-              <SignInUp.Overlay
-                key="signInUpOverlay"
-                hideSignInUpOverlay={hideSignInUpOverlay}
-                authentication={this.props.authentication}
-                settings={this.props.settings}
-                dispatch={this.props.dispatch}
-                hash={get(this, "props.routing.locationBeforeTransitions.hash")}
-              />
-            ) : null}
-          </ReactCSSTransitionGroup>
+            <SignInUp.Overlay
+              key="signInUpOverlay"
+              hideSignInUpOverlay={hideSignInUpOverlay}
+              authentication={this.props.authentication}
+              settings={this.props.settings}
+              dispatch={this.props.dispatch}
+              hash={get(this, "props.routing.locationBeforeTransitions.hash")}
+            />
+          </CSSTransition>
           {fatalError.error ? (
             <div className="global-container">
               <FatalError fatalError={fatalError} />

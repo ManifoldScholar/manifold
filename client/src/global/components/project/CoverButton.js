@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import startsWith from "lodash/startsWith";
 import classNames from "classnames";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import {
+  TransitionGroup as ReactTransitionGroup,
+  CSSTransition
+} from "react-transition-group";
 import Utility from "global/components/utility";
 
 export default class CoverButton extends Component {
@@ -34,6 +37,14 @@ export default class CoverButton extends Component {
     const view = props.selected ? "remove" : "add";
     if (startsWith(state.view, view)) return null;
     return { view };
+  }
+
+  get transitionProps() {
+    return {
+      mountOnEnter: true,
+      classNames: "button",
+      timeout: { enter: 300, exit: 300 }
+    };
   }
 
   setView(view) {
@@ -113,38 +124,46 @@ export default class CoverButton extends Component {
     }
   };
 
-  renderButton(view) {
-    switch (view) {
-      case "add":
-      case "add-active":
-        return (
-          <span key="add" className="action-text">
-            {this.props.addText}
-          </span>
-        );
-      case "remove":
-      case "remove-active":
-        return (
-          <span
-            key="remove"
-            className="action-text action-text-hide-immediately"
-          >
-            {this.props.removeText}
-          </span>
-        );
-      case "remove-confirm":
-      case "remove-confirm-active":
-        return (
-          <span
-            key="remove-confirm"
-            className="action-text action-text-show-immediately"
-          >
-            Are You Sure?
-          </span>
-        );
-      default:
-        return null;
-    }
+  renderRemove() {
+    return (
+      <CSSTransition key="remove" {...this.transitionProps}>
+        <span className="action-text action-text-hide-immediately">
+          {this.props.removeText}
+        </span>
+      </CSSTransition>
+    );
+  }
+
+  renderRemoveConfirm() {
+    return (
+      <CSSTransition key="remove-confirm" {...this.transitionProps}>
+        <span className="action-text action-text-show-immediately">
+          Are You Sure?
+        </span>
+      </CSSTransition>
+    );
+  }
+
+  renderAdd() {
+    return (
+      <CSSTransition key="add" {...this.transitionProps}>
+        <span className="action-text">{this.props.addText}</span>
+      </CSSTransition>
+    );
+  }
+
+  renderButtonGroup(view) {
+    const showRemove = view === "remove" || view === "remove-active";
+    const showRemoveConfirm =
+      view === "remove-confirm" || view === "remove-confirm-active";
+    const showAdd = view === "add" || view === "add-active";
+    return (
+      <ReactTransitionGroup>
+        {showRemove && this.renderRemove()}
+        {showRemoveConfirm && this.renderRemoveConfirm()}
+        {showAdd && this.renderAdd()}
+      </ReactTransitionGroup>
+    );
   }
 
   render() {
@@ -187,13 +206,7 @@ export default class CoverButton extends Component {
                 iconClass="plus"
               />
             </div>
-            <ReactCSSTransitionGroup
-              transitionName="button"
-              transitionEnterTimeout={300}
-              transitionLeaveTimeout={300}
-            >
-              {this.renderButton(this.state.view)}
-            </ReactCSSTransitionGroup>
+            {this.renderButtonGroup(this.state.view)}
           </div>
         </button>
       </div>

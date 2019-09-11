@@ -6,12 +6,13 @@ import Single from "./Single";
 import Preview from "./Preview";
 
 import { connect } from "react-redux";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import { uiReaderActions, entityStoreActions } from "actions";
 import { annotationsAPI, requests } from "api";
 import { bindActionCreators } from "redux";
 import config from "config";
 import throttle from "lodash/throttle";
+import isNil from "lodash/isNil";
 import { scrollOptions } from "utils/domUtils";
 import withConfirmation from "hoc/with-confirmation";
 
@@ -323,19 +324,18 @@ class NotationViewerList extends PureComponent {
             );
           })}
         </ul>
-        <ReactCSSTransitionGroup
-          transitionName="notation"
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}
+        <CSSTransition
+          in={!isNil(this.state.previewEntry)}
+          classNames="notation"
+          timeout={{ enter: 300, exit: 300 }}
+          unmountOnExit
         >
-          {this.state.previewEntry ? (
-            <Preview
-              entry={this.state.previewEntry}
-              actions={this.actions}
-              params={{ textId, sectionId }}
-            />
-          ) : null}
-        </ReactCSSTransitionGroup>
+          <Preview
+            entry={this.state.previewEntry}
+            actions={this.actions}
+            params={{ textId, sectionId }}
+          />
+        </CSSTransition>
       </nav>
     );
   }

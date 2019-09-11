@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import FocusTrap from "focus-trap-react";
@@ -105,47 +105,43 @@ class DialogWrapper extends PureComponent {
 
   render() {
     const output = (
-      <ReactCSSTransitionGroup
-        transitionName="dialog"
-        // True value required to enable transform
-        /* eslint-disable */
-        transitionAppear={true}
-        /* eslint-enable */
-        transitionEnter={false}
-        transitionAppearTimeout={1}
-        transitionLeaveTimeout={200}
+      <CSSTransition
+        in={this.state.leaving}
+        classNames="dialog"
+        appear
+        enter={false}
+        timeout={{ enter: 1, exit: 200 }}
+        unmountOnExit
       >
-        {this.state.leaving ? null : (
-          <FocusTrap key="dialog" className="dialog-primary dialog-appear">
-            <div
-              className="dialog-overlay"
-              onClick={this.handleOverlayClick}
-              role="button"
-            />
-            <div
-              className={classnames(
-                "dialog-box",
-                this.props.className,
-                this.state.additionalClassNames
-              )}
-              style={this.style()}
-            >
-              {this.props.showCloseButton ? (
-                <div
-                  onClick={this.handleCloseClick}
-                  className="close-button-primary"
-                  role="button"
-                  tabIndex="0"
-                >
-                  <IconComposer icon="close16" size="default" />
-                  <span className="screen-reader-text">Close Dialog</span>
-                </div>
-              ) : null}
-              {this.renderChildren()}
-            </div>
-          </FocusTrap>
-        )}
-      </ReactCSSTransitionGroup>
+        <FocusTrap className="dialog-primary dialog-appear">
+          <div
+            className="dialog-overlay"
+            onClick={this.handleOverlayClick}
+            role="button"
+          />
+          <div
+            className={classnames(
+              "dialog-box",
+              this.props.className,
+              this.state.additionalClassNames
+            )}
+            style={this.style()}
+          >
+            {this.props.showCloseButton ? (
+              <div
+                onClick={this.handleCloseClick}
+                className="close-button-primary"
+                role="button"
+                tabIndex="0"
+              >
+                <IconComposer icon="close16" size="default" />
+                <span className="screen-reader-text">Close Dialog</span>
+              </div>
+            ) : null}
+            {this.renderChildren()}
+          </div>
+        </FocusTrap>
+      </CSSTransition>
     );
 
     // Because this renders in a portal, it cannot render on the server. We probably never

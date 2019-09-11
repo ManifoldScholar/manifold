@@ -34,7 +34,7 @@
     transition: opacity, $duration, $timing;
   }
 
-  &.overlay-full-leave {
+  &.overlay-full-exit {
     opacity: 0;
     transition: opacity, $duration, $timing;
   }
