@@ -41,10 +41,10 @@
   }
 
   .site-nav {
-    align-self: center;
     grid-area: site-nav;
     -ms-grid-row: 1;
     -ms-grid-column: 2;
+    align-self: center;
     -ms-grid-row-align: center;
 
     @include respond($break75) {
@@ -53,10 +53,10 @@
   }
 
   .user-nav {
-    align-self: center;
     grid-area: user-nav;
     -ms-grid-row: 1;
     -ms-grid-column: 3;
+    align-self: center;
     -ms-grid-row-align: center;
 
     @include respond($break75) {
@@ -66,10 +66,10 @@
   }
 
   .breadcrumb-list {
-    align-self: center;
     grid-area: breadcrumbs;
     -ms-grid-row: 1;
     -ms-grid-column: 2;
+    align-self: center;
 
     @include respond($break75) {
       display: none;
