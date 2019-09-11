@@ -4,7 +4,8 @@ const presets = [
     "@babel/preset-env",
     {
       targets: "> 0.25%, not dead",
-      useBuiltIns: "entry"
+      useBuiltIns: "entry",
+      corejs: "2.6.9"
     }
   ]
 ];
