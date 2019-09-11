@@ -178,7 +178,7 @@
     "@storybook/react": "^5.1",
     "@storybook/theming": "^5.1",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^8.x",
+    "babel-eslint": "^10",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-dynamic-import-node": "^2.2",
