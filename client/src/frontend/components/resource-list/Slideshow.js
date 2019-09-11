@@ -4,7 +4,7 @@ import {
   TransitionGroup as ReactTransitionGroup,
   CSSTransition
 } from "react-transition-group";
-import Swipeable from "react-swipeable";
+import { Swipeable } from "react-swipeable";
 import includes from "lodash/includes";
 import classNames from "classnames";
 import ResourceSlide from "frontend/components/resource-slide";
