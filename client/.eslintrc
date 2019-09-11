@@ -19,6 +19,7 @@
       "enforceForRenamedProperties": false
     }],
 
+    "react-hooks/rules-of-hooks": 0,
     "react/jsx-curly-newline": 0,
     "react/static-property-placement": 0,
     "react/jsx-props-no-spreading": 0,
@@ -43,7 +44,7 @@
 
     ///////// END NEW //////////////////
 
-    "camelcase": ['error', {
+    "camelcase": [1, {
       "properties": "never",
       "ignoreDestructuring": false,
       "allow": [
@@ -181,7 +182,7 @@
     "jsx-a11y/scope": 0,
   },
   "plugins": [
-    "react", "import", "prettier", "jsx-a11y"
+    "react", "import", "prettier", "jsx-a11y", "react-hooks"
   ],
   "settings": {
     "import/parser": "babel-eslint",
