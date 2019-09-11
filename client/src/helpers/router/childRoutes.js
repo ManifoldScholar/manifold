@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import ChildSwitch from "./ChildSwitch";
 import DrawerSwitch from "./DrawerSwitch";
 import Passthrough from "./Passthrough";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 const renderChildRoutes = (route, renderOptions) => {
   const defaultOptions = {
@@ -43,15 +43,13 @@ const renderChildRoutes = (route, renderOptions) => {
 
     if (childRoute.transition) {
       rendered = (
-        <ReactCSSTransitionGroup
-          transitionName={childRoute.transition}
-          transitionAppear
-          transitionAppearTimeout={500}
-          transitionLeaveTimeout={500}
-          transitionEnterTimeout={250}
+        <CSSTransition
+          classNames={childRoute.transition}
+          appear
+          timeout={{ appear: 500, enter: 250, exit: 500 }}
         >
           {rendered}
-        </ReactCSSTransitionGroup>
+        </CSSTransition>
       );
     }
     return rendered;

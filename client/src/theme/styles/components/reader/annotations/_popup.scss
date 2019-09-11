@@ -61,11 +61,11 @@
       }
     }
 
-    &.panel-leave {
+    &.panel-exit {
       opacity: 1;
       transform: translateX(-50%);
 
-      &.panel-leave-active {
+      &.panel-exit-active {
         opacity: 0;
         transition:
           opacity $durationSlow $timing,

@@ -8,7 +8,7 @@ export default class NotationViewerPreview extends PureComponent {
   static displayName = "NotationViewer.Preview";
 
   static propTypes = {
-    entry: PropTypes.object.isRequired,
+    entry: PropTypes.object,
     params: PropTypes.object,
     actions: PropTypes.shape({
       startDestroy: PropTypes.func,
@@ -18,6 +18,9 @@ export default class NotationViewerPreview extends PureComponent {
 
   render() {
     const { entry, params } = this.props;
+
+    if (!entry) return null;
+
     const { notation } = entry;
 
     /* eslint-disable jsx-a11y/anchor-is-valid                                          */

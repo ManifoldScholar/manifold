@@ -47,11 +47,11 @@
     transition: opacity $duration $timing;
   }
 
-  .overlay-full-leave & {
+  .overlay-full-exit & {
     opacity: 1;
   }
 
-  .overlay-full-leave.overlay-full-leave-active & {
+  .overlay-full-exit.overlay-full-exit-active & {
     opacity: 0.01;
     transition: opacity $duration $timing;
   }

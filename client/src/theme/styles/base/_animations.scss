@@ -23,12 +23,12 @@
     animation: slide-from-#{$from} $duration $timing forwards;
   }
 
-  .#{$prefix}-leave #{$selector} {
+  .#{$prefix}-exit #{$selector} {
     transform: translateX(0);
     animation: slide-from-#{$from} $duration $timing backwards;
   }
 
-  .#{$prefix}-leave.#{$prefix}-leave-active #{$selector} {
+  .#{$prefix}-exit.#{$prefix}-exit-active #{$selector} {
     @if ($from == 'right') {
       transform: translateX(100%);
     } @else {

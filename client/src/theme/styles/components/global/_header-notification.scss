@@ -11,12 +11,12 @@
 
 .header-notification-container {
   // React Animation classes
-  &.notification-leave {
+  &.notification-exit {
     max-height: 200px;
     transition: transform 0.3s ease-in-out, max-height 0.2s ease-out 0.15s;
   }
 
-  &.notification-leave-active {
+  &.notification-exit-active {
     max-height: 0;
     transform: translate3d(-100%, 0, 0);
   }

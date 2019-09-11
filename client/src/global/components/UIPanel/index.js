@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import FocusTrap from "focus-trap-react";
 
 export default class UIPanel extends Component {
@@ -34,32 +34,32 @@ export default class UIPanel extends Component {
     });
 
     return (
-      /* eslint-disable react/jsx-boolean-value */
-      <ReactCSSTransitionGroup
-        transitionName="panel"
-        transitionEnter={false}
-        transitionLeaveTimeout={200}
+      <CSSTransition
+        key={this.props.id}
+        in={visibility}
+        classNames="panel"
+        enter={false}
+        timeout={{ enter: 0, exit: 200 }}
+        unmountOnExit
       >
-        {visibility ? (
-          <div className={visibilityClass} key={this.props.id}>
-            <FocusTrap
-              focusTrapOptions={{
-                clickOutsideDeactivates: true,
-                escapeDeactivate: false
-              }}
+        <div className={visibilityClass}>
+          <FocusTrap
+            focusTrapOptions={{
+              clickOutsideDeactivates: true,
+              escapeDeactivate: false
+            }}
+          >
+            <button
+              className="screen-reader-text"
+              onClick={this.props.hidePanel}
             >
-              <button
-                className="screen-reader-text"
-                onClick={this.props.hidePanel}
-              >
-                Close Panel
-              </button>
-              {/* Second argument as props */}
-              {React.createElement(this.props.bodyComponent, { ...this.props })}
-            </FocusTrap>
-          </div>
-        ) : null}
-      </ReactCSSTransitionGroup>
+              Close Panel
+            </button>
+            {/* Second argument as props */}
+            {React.createElement(this.props.bodyComponent, { ...this.props })}
+          </FocusTrap>
+        </div>
+      </CSSTransition>
     );
     /* eslint-enable react/jsx-boolean-value */
   }

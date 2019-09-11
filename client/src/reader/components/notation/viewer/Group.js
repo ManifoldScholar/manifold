@@ -1,6 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import {
+  TransitionGroup as ReactTransitionGroup,
+  CSSTransition
+} from "react-transition-group";
 import classNames from "classnames";
 import Single from "./Single";
 import Notation from "./Notation";
@@ -79,10 +82,9 @@ export default class NotationViewerGroup extends PureComponent {
         className="notation-preview-group"
       >
         <div className="group-highlighted-notation-wrapper">
-          <ReactCSSTransitionGroup
-            transitionName="highlight"
-            transitionEnterTimeout={200}
-            transitionLeaveTimeout={200}
+          <CSSTransition
+            classNames="highlight"
+            timeout={{ enter: 200, exit: 200 }}
           >
             <Single
               entry={activeEntry}
@@ -91,7 +93,7 @@ export default class NotationViewerGroup extends PureComponent {
               showTitle={false}
               active={activeAnnotation === activeEntry.annotation.id}
             />
-          </ReactCSSTransitionGroup>
+          </CSSTransition>
         </div>
 
         <ul className={thumbClasses}>

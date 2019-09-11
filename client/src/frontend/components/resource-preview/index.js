@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Preview from "./Types";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import GlobalOverlay from "global/components/Overlay";
 import has from "lodash/has";
 import capitalize from "lodash/capitalize";
@@ -85,20 +85,19 @@ export default class ResourcePreview extends Component {
 
     return (
       <div className={linkWrapperClass}>
-        <ReactCSSTransitionGroup
-          transitionName={"overlay-full"}
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}
+        <CSSTransition
+          in={this.state.overlayOpen}
+          classNames="overlay-full"
+          timeout={{ enter: 300, exit: 300 }}
+          unmountOnExit
         >
-          {this.state.overlayOpen ? (
-            <GlobalOverlay
-              appearance="overlay-full bg-neutral90"
-              closeCallback={this.closeOverlay}
-            >
-              <PreviewComponent resource={this.props.resource} />
-            </GlobalOverlay>
-          ) : null}
-        </ReactCSSTransitionGroup>
+          <GlobalOverlay
+            appearance="overlay-full bg-neutral90"
+            closeCallback={this.closeOverlay}
+          >
+            <PreviewComponent resource={this.props.resource} />
+          </GlobalOverlay>
+        </CSSTransition>
         <div
           className="resource-preview-wrapper"
           onClick={this.handleOpenPreviewClick}
