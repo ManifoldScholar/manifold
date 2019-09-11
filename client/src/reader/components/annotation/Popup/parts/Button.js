@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
-
 import Authorize from "hoc/authorize";
 
 export default class DefaultButton extends PureComponent {
