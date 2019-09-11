@@ -16,7 +16,7 @@ export default class ProjectDetailContainer extends Component {
     fetchData: PropTypes.func
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.dispatch(uiFrontendModeActions.isProjectHomepage());
   }
 
@@ -30,9 +30,7 @@ export default class ProjectDetailContainer extends Component {
     return (
       <div className="project-detail">
         <HeadContent
-          title={`\u201c${
-            this.props.project.attributes.titlePlaintext
-          }\u201d on ${settings.attributes.general.installationName}`}
+          title={`\u201c${this.props.project.attributes.titlePlaintext}\u201d on ${settings.attributes.general.installationName}`}
           description={this.props.project.attributes.description}
           image={this.props.project.attributes.heroStyles.medium}
         />

@@ -63,7 +63,7 @@ export class ResourceDetailContainer extends PureComponent {
     this.props.dispatch(uiFrontendModeActions.isProjectSubpage());
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.props.resource && this.props.resourceCollection) {
       if (
         !this.collectionIncludesResource(
@@ -119,9 +119,7 @@ export class ResourceDetailContainer extends PureComponent {
     return (
       <div>
         <HeadContent
-          title={`\u201c${
-            resource.attributes.titlePlaintext
-          }\u201d Resource on ${settings.attributes.general.installationName}`}
+          title={`\u201c${resource.attributes.titlePlaintext}\u201d Resource on ${settings.attributes.general.installationName}`}
           description={resource.attributes.captionPlaintext}
           image={
             resource.attributes.attachmentStyles.mediumSquare ||

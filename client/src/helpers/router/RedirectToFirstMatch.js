@@ -25,7 +25,7 @@ class RedirectToFirstMatch extends React.PureComponent {
     this.authorization = new Authorization();
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.maybeRedirect();
   }
 
