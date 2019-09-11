@@ -7,12 +7,18 @@ import Manifold from "global/containers/Manifold";
 import get from "lodash/get";
 import { hot } from "react-hot-loader/root";
 import Analytics from "hoc/analytics";
+import { HelmetProvider } from "react-helmet-async";
 
 class App extends Component {
   static propTypes = {
     store: PropTypes.object,
     staticContext: PropTypes.object,
-    staticRequest: PropTypes.object
+    staticRequest: PropTypes.object,
+    helmetContext: PropTypes.object
+  };
+
+  static defaultProps = {
+    helmetContext: {}
   };
 
   constructor(props) {
@@ -86,7 +92,9 @@ class App extends Component {
       <Provider store={this.props.store} key="provider">
         <Router {...routerProps}>
           <Analytics settings={this.settings()}>
-            <Manifold confirm={this.renderConfirm()} />
+            <HelmetProvider context={this.props.helmetContext}>
+              <Manifold confirm={this.renderConfirm()} />
+            </HelmetProvider>
           </Analytics>
         </Router>
       </Provider>
