@@ -26,7 +26,11 @@ const config = merge.smart(baseConfig, {
         "X-Requested-With, content-type, Authorization"
     }
   },
-
+  resolve: {
+    alias: {
+      "react-dom": "@hot-loader/react-dom"
+    }
+  },
   plugins: [new HotModuleReplacementPlugin(), new NamedModulesPlugin()]
 });
 

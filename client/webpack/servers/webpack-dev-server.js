@@ -1,7 +1,7 @@
 import environment from "../helpers/environment";
 import webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
-import webpackConfig from "../config/browser-dev.config"
+import webpackConfig from "../config/browser-dev.config";
 import ch from "../../src/helpers/consoleHelpers";
 
 const compiler = webpack(webpackConfig);
@@ -12,7 +12,9 @@ compiler.hooks.done.tap("ManifoldWebpackDevServer", stats => {
   const ms = end - timer;
   setTimeout(() => {
     ch.background(`Browser assets have finished building (${ms}ms).`);
-    ch.header(`Browser assets available at: ${environment.devUrl}/webpack-dev-server`);
+    ch.header(
+      `Browser assets available at: ${environment.devUrl}/webpack-dev-server`
+    );
   }, 250);
 });
 
@@ -30,9 +32,11 @@ const serverOptions = {
   allowedHosts,
   quiet: false,
   noInfo: false,
-  inline: true,
+  inline: false,
   lazy: false,
   headers: { "Access-Control-Allow-Origin": "*" },
+  sockHost: process.env.DOMAIN || "localhost",
+  sockPort: environment.devPort,
   stats: {
     modules: false,
     colors: true
