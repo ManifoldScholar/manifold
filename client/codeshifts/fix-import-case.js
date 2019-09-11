@@ -3,7 +3,7 @@ import startsWith from "lodash/startsWith";
 import endsWith from "lodash/endsWith";
 import path from "path";
 import fs from "fs";
-import trueCasePathSync from "true-case-path";
+import { trueCasePathSync } from "true-case-path";
 
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
