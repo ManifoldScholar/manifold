@@ -162,11 +162,11 @@
     grid-column: 1;
 
     @include respond($layout-breakpoint) {
-      align-self: end;
       -ms-grid-row: 3;
       grid-row: 2;
       -ms-grid-column: 3;
       grid-column: 2;
+      align-self: end;
       -ms-flex-item-align: end;
       -ms-grid-row-align: end;
     }

@@ -57,10 +57,10 @@
     display: flex;
     display: -ms-grid;
     display: grid;
+    grid-template: 'icon label' auto / $iconSize 1fr;
     align-items: center;
     -ms-grid-rows: auto;
     -ms-grid-columns: $iconSize $columnGapMobile 1fr;
-    grid-template: 'icon label' auto / $iconSize 1fr;
     column-gap: $columnGapMobile;
 
     @include respond($break50) {

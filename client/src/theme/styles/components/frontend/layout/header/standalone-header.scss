@@ -119,12 +119,12 @@
   }
 
   .mobile-nav-toggle {
-    align-self: baseline;
     grid-area: hamburger;
     -ms-grid-row: 1;
     -ms-grid-column: 3;
-    -ms-grid-column-align: end;
+    align-self: baseline;
     justify-self: flex-end;
+    -ms-grid-column-align: end;
     -ms-grid-row-align: baseline;
   }
 }
