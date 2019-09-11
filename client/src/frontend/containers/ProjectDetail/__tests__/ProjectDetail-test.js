@@ -1,10 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import ProjectDetailContainer from "../";
-import { wrapWithRouter } from "test/helpers/routing";
-import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { FrontendModeContext } from "helpers/contexts";
+import wrapWithContext from "test/helpers/wrapWithContext";
 
 describe("Frontend ProjectDetail Container", () => {
   const store = build.store();
@@ -13,38 +12,36 @@ describe("Frontend ProjectDetail Container", () => {
 
   const libraryTree = renderer
     .create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <FrontendModeContext.Provider
-            value={{ isLibrary: true, isStandalone: false }}
-          >
-            <ProjectDetailContainer
-              dispatch={store.dispatch}
-              project={project}
-              settings={settings}
-              projectResponse={{}}
-            />
-          </FrontendModeContext.Provider>
-        </Provider>
+      wrapWithContext(
+        <FrontendModeContext.Provider
+          value={{ isLibrary: true, isStandalone: false }}
+        >
+          <ProjectDetailContainer
+            dispatch={store.dispatch}
+            project={project}
+            settings={settings}
+            projectResponse={{}}
+          />
+        </FrontendModeContext.Provider>,
+        store
       )
     )
     .toJSON();
 
   const standaloneTree = renderer
     .create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <FrontendModeContext.Provider
-            value={{ isLibrary: false, isStandalone: true, project: {} }}
-          >
-            <ProjectDetailContainer
-              dispatch={store.dispatch}
-              project={project}
-              settings={settings}
-              projectResponse={{}}
-            />
-          </FrontendModeContext.Provider>
-        </Provider>
+      wrapWithContext(
+        <FrontendModeContext.Provider
+          value={{ isLibrary: false, isStandalone: true, project: {} }}
+        >
+          <ProjectDetailContainer
+            dispatch={store.dispatch}
+            project={project}
+            settings={settings}
+            projectResponse={{}}
+          />
+        </FrontendModeContext.Provider>,
+        store
       )
     )
     .toJSON();

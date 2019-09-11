@@ -7,65 +7,61 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
       <NotationViewer.Group group={{...}} actions={{...}} params={{...}}>
         <div className=\\"notation-preview-group\\">
           <div className=\\"group-highlighted-notation-wrapper\\">
-            <CSSTransitionGroup transitionName=\\"highlight\\" transitionEnterTimeout={200} transitionLeaveTimeout={200} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-              <TransitionGroup transitionName=\\"highlight\\" transitionEnterTimeout={200} transitionLeaveTimeout={200} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                <span>
-                  <CSSTransitionGroupChild name=\\"highlight\\" appear={false} enter={true} leave={true} appearTimeout={[undefined]} enterTimeout={200} leaveTimeout={200}>
-                    <NotationViewer.Single entry={{...}} params={{...}} actions={{...}} showTitle={false} active={false}>
-                      <div className=\\"notation-preview-single\\">
-                        <Connect(withRouter(AuthorizeComponent)) entity={{...}} ability=\\"delete\\">
-                          <withRouter(AuthorizeComponent) entity={{...}} ability=\\"delete\\" authentication={{...}} dispatch={[Function]}>
-                            <AuthorizeComponent entity={{...}} ability=\\"delete\\" authentication={{...}} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}}>
-                              <button onClick={[Function: onClick]} className=\\"notation-delete\\">
-                                <span className=\\"screen-reader-text\\">
-                                  Delete Notation
-                                </span>
-                                <IconComposer icon=\\"close16\\" size=\\"default\\" iconClass=\\"notation-delete__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
-                                  <Close svgProps={{...}} iconClass=\\"notation-delete__icon svg-icon--close16\\" icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                                    <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg notation-delete__icon svg-icon--close16\\" width={16} height={16} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
-                                      <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
-                                    </svg>
-                                  </Close>
-                                </IconComposer>
-                              </button>
-                            </AuthorizeComponent>
-                          </withRouter(AuthorizeComponent)>
-                        </Connect(withRouter(AuthorizeComponent))>
-                        <NotationViewerLink notation={{...}} params={{...}} className=\\"notation-single-link\\">
-                          <Link className=\\"notation-single-link\\" to={{...}}>
-                            <a className=\\"notation-single-link\\" onClick={[Function: onClick]} href=\\"/read/5/section/6/resource/2\\">
-                              <div style={{...}} onMouseOver={[Function: onMouseOver]} onMouseLeave={[Function: onMouseLeave]}>
-                                <NotationViewer.Notation notation={{...}} additionalClasses=\\"minimal right\\" showTitle={false} neverCrop={false}>
-                                  <Resourceish.Thumbnail resourceish={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal right\\">
-                                    <div className=\\"icon-thumbnail-primary minimal right\\" style={{...}}>
-                                      <div className=\\"wrapper\\">
-                                        <figure className=\\"icon-thumbnail-type\\">
-                                          <i className=\\"icon-thumbnail-icon image\\">
-                                            <IconComputed.Resource icon=\\"image\\" size={56}>
-                                              <IconComposer icon=\\"resourceImage64\\" size={56} fill=\\"currentColor\\" svgProps={{...}}>
-                                                <ResourceImage svgProps={{...}} iconClass=\\"svg-icon--resourceImage64\\" icon=\\"resourceImage64\\" size={56} fill=\\"currentColor\\" stroke=\\"currentColor\\">
-                                                  <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--resourceImage64\\" width={56} height={56} viewBox=\\"0 0 64 64\\" fill=\\"currentColor\\" aria-hidden={true}>
-                                                    <path d=\\"M5.99999996,13 L5.99999996,51 L58,51 L58,13 L5.99999996,13 Z M60,11 L60,53 L3.99999996,53 L3.99999996,11 L60,11 Z M45.114319,36.7052772 C46.0891538,35.776283 47.4070852,35.2956435 48.7511053,35.3789689 C50.0951254,35.4622943 51.3435959,36.1020435 52.2251484,37.1814515 L59.8029485,47.3896515 L58.1970516,48.5817485 L50.6481834,38.4106653 C50.1480528,37.7992777 49.4157245,37.4240133 48.6273486,37.3751363 C47.8389728,37.3262592 47.0659001,37.608193 46.5124285,38.1351833 L39.6414917,45.0279719 L38.9387682,44.1921171 L25.4012973,28.0888039 C24.8721474,27.5066301 24.1255162,27.1696052 23.3388857,27.1578435 C22.5522552,27.1460819 21.7958816,27.4606339 21.2723966,28.0022606 L5.74239658,45.2113607 L4.25760333,43.8714394 L19.8104371,26.6378727 C20.7408786,25.6737527 22.029067,25.1380356 23.3687863,25.1580671 C24.7085055,25.1780985 25.9801016,25.7520894 26.9067318,26.7726829 L39.7669351,42.06926 L45.114319,36.7052772 Z M45.0127,29.9813 C41.6989915,29.9813 39.0127,27.2950085 39.0127,23.9813 C39.0127,20.6675915 41.6989915,17.9813 45.0127,17.9813 C48.3264085,17.9813 51.0127,20.6675915 51.0127,23.9813 C51.0127,27.2950085 48.3264085,29.9813 45.0127,29.9813 Z M45.0127,27.9813 C47.221839,27.9813 49.0127,26.190439 49.0127,23.9813 C49.0127,21.772161 47.221839,19.9813 45.0127,19.9813 C42.803561,19.9813 41.0127,21.772161 41.0127,23.9813 C41.0127,26.190439 42.803561,27.9813 45.0127,27.9813 Z\\" />
-                                                  </svg>
-                                                </ResourceImage>
-                                              </IconComposer>
-                                            </IconComputed.Resource>
-                                          </i>
-                                        </figure>
-                                      </div>
-                                    </div>
-                                  </Resourceish.Thumbnail>
-                                </NotationViewer.Notation>
-                              </div>
-                            </a>
-                          </Link>
-                        </NotationViewerLink>
-                      </div>
-                    </NotationViewer.Single>
-                  </CSSTransitionGroupChild>
-                </span>
-              </TransitionGroup>
-            </CSSTransitionGroup>
+            <CSSTransition classNames=\\"highlight\\" timeout={{...}}>
+              <Transition timeout={{...}} onEnter={[Function]} onEntered={[Function]} onEntering={[Function]} onExit={[Function]} onExiting={[Function]} onExited={[Function]} in={false} mountOnEnter={false} unmountOnExit={false} appear={false} enter={true} exit={true}>
+                <NotationViewer.Single entry={{...}} params={{...}} actions={{...}} showTitle={false} active={false}>
+                  <div className=\\"notation-preview-single\\">
+                    <Connect(withRouter(AuthorizeComponent)) entity={{...}} ability=\\"delete\\">
+                      <withRouter(AuthorizeComponent) entity={{...}} ability=\\"delete\\" authentication={{...}} dispatch={[Function]}>
+                        <AuthorizeComponent entity={{...}} ability=\\"delete\\" authentication={{...}} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}}>
+                          <button onClick={[Function: onClick]} className=\\"notation-delete\\">
+                            <span className=\\"screen-reader-text\\">
+                              Delete Notation
+                            </span>
+                            <IconComposer icon=\\"close16\\" size=\\"default\\" iconClass=\\"notation-delete__icon\\" fill=\\"currentColor\\" svgProps={{...}}>
+                              <Close svgProps={{...}} iconClass=\\"notation-delete__icon svg-icon--close16\\" icon=\\"close16\\" size=\\"default\\" fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg notation-delete__icon svg-icon--close16\\" width={16} height={16} viewBox=\\"0 0 16 16\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                  <path d=\\"M2.00050275,2.70620953 L2.70769718,1.9991904 L13.9994973,13.2937905 L13.2923028,14.0008096 L2.00050275,2.70620953 Z M2.70769718,14.0008096 L2.00050275,13.2937905 L13.2923028,1.9991904 L13.9994973,2.70620953 L2.70769718,14.0008096 Z\\" />
+                                </svg>
+                              </Close>
+                            </IconComposer>
+                          </button>
+                        </AuthorizeComponent>
+                      </withRouter(AuthorizeComponent)>
+                    </Connect(withRouter(AuthorizeComponent))>
+                    <NotationViewerLink notation={{...}} params={{...}} className=\\"notation-single-link\\">
+                      <Link className=\\"notation-single-link\\" to={{...}}>
+                        <a className=\\"notation-single-link\\" onClick={[Function: onClick]} href=\\"/read/5/section/6/resource/2\\">
+                          <div style={{...}} onMouseOver={[Function: onMouseOver]} onMouseLeave={[Function: onMouseLeave]}>
+                            <NotationViewer.Notation notation={{...}} additionalClasses=\\"minimal right\\" showTitle={false} neverCrop={false}>
+                              <Resourceish.Thumbnail resourceish={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal right\\">
+                                <div className=\\"icon-thumbnail-primary minimal right\\" style={{...}}>
+                                  <div className=\\"wrapper\\">
+                                    <figure className=\\"icon-thumbnail-type\\">
+                                      <i className=\\"icon-thumbnail-icon image\\">
+                                        <IconComputed.Resource icon=\\"image\\" size={56}>
+                                          <IconComposer icon=\\"resourceImage64\\" size={56} fill=\\"currentColor\\" svgProps={{...}}>
+                                            <ResourceImage svgProps={{...}} iconClass=\\"svg-icon--resourceImage64\\" icon=\\"resourceImage64\\" size={56} fill=\\"currentColor\\" stroke=\\"currentColor\\">
+                                              <svg xmlns=\\"http://www.w3.org/2000/svg\\" className=\\"manicon-svg svg-icon--resourceImage64\\" width={56} height={56} viewBox=\\"0 0 64 64\\" fill=\\"currentColor\\" aria-hidden={true}>
+                                                <path d=\\"M5.99999996,13 L5.99999996,51 L58,51 L58,13 L5.99999996,13 Z M60,11 L60,53 L3.99999996,53 L3.99999996,11 L60,11 Z M45.114319,36.7052772 C46.0891538,35.776283 47.4070852,35.2956435 48.7511053,35.3789689 C50.0951254,35.4622943 51.3435959,36.1020435 52.2251484,37.1814515 L59.8029485,47.3896515 L58.1970516,48.5817485 L50.6481834,38.4106653 C50.1480528,37.7992777 49.4157245,37.4240133 48.6273486,37.3751363 C47.8389728,37.3262592 47.0659001,37.608193 46.5124285,38.1351833 L39.6414917,45.0279719 L38.9387682,44.1921171 L25.4012973,28.0888039 C24.8721474,27.5066301 24.1255162,27.1696052 23.3388857,27.1578435 C22.5522552,27.1460819 21.7958816,27.4606339 21.2723966,28.0022606 L5.74239658,45.2113607 L4.25760333,43.8714394 L19.8104371,26.6378727 C20.7408786,25.6737527 22.029067,25.1380356 23.3687863,25.1580671 C24.7085055,25.1780985 25.9801016,25.7520894 26.9067318,26.7726829 L39.7669351,42.06926 L45.114319,36.7052772 Z M45.0127,29.9813 C41.6989915,29.9813 39.0127,27.2950085 39.0127,23.9813 C39.0127,20.6675915 41.6989915,17.9813 45.0127,17.9813 C48.3264085,17.9813 51.0127,20.6675915 51.0127,23.9813 C51.0127,27.2950085 48.3264085,29.9813 45.0127,29.9813 Z M45.0127,27.9813 C47.221839,27.9813 49.0127,26.190439 49.0127,23.9813 C49.0127,21.772161 47.221839,19.9813 45.0127,19.9813 C42.803561,19.9813 41.0127,21.772161 41.0127,23.9813 C41.0127,26.190439 42.803561,27.9813 45.0127,27.9813 Z\\" />
+                                              </svg>
+                                            </ResourceImage>
+                                          </IconComposer>
+                                        </IconComputed.Resource>
+                                      </i>
+                                    </figure>
+                                  </div>
+                                </div>
+                              </Resourceish.Thumbnail>
+                            </NotationViewer.Notation>
+                          </div>
+                        </a>
+                      </Link>
+                    </NotationViewerLink>
+                  </div>
+                </NotationViewer.Single>
+              </Transition>
+            </CSSTransition>
           </div>
           <ul className=\\"group-thumbnails\\">
             <li>

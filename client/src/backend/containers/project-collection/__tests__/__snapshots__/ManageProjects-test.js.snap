@@ -394,13 +394,13 @@ Array [
                           />
                         </svg>
                       </div>
-                      <span>
+                      <div>
                         <span
                           className="action-text action-text-hide-immediately"
                         >
                           Exclude
                         </span>
-                      </span>
+                      </div>
                     </div>
                   </button>
                 </div>
@@ -683,13 +683,13 @@ Array [
                           />
                         </svg>
                       </div>
-                      <span>
+                      <div>
                         <span
                           className="action-text action-text-hide-immediately"
                         >
                           Exclude
                         </span>
-                      </span>
+                      </div>
                     </div>
                   </button>
                 </div>

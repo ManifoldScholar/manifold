@@ -8,7 +8,6 @@ Array [
     className="screen-reader-text"
     role="status"
   />,
-  <span />,
   <div
     className="entity-list"
     id="entities-list-1"

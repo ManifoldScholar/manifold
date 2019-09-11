@@ -151,7 +151,6 @@ Array [
                     Search
                   </span>
                 </button>
-                <span />
               </li>
               <li
                 className="user-nav__item"
@@ -191,7 +190,6 @@ Array [
                     </span>
                   </figure>
                 </button>
-                <span />
               </li>
             </ul>
           </nav>
@@ -252,7 +250,7 @@ Array [
       <div
         className="notifications-list--context-header notifications-list"
       >
-        <span />
+        <div />
       </div>
     </section>
   </header>,
