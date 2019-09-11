@@ -88,7 +88,7 @@
     "cookie": "^0.x",
     "core-js": "2.6.9",
     "date-fns": "^1.29.0",
-    "dotenv": "^6.0",
+    "dotenv": "^8.x",
     "entities": "^2.x",
     "es6-promise": "^4.0.5",
     "express-session": "^1.12.1",
