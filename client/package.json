@@ -218,7 +218,7 @@
     "react-test-renderer": "^16.8",
     "regenerator-runtime": "^0.13.1",
     "rimraf": "^2.6.1",
-    "sass-loader": "^6.0.6",
+    "sass-loader": "^8.x",
     "storybook-addon-jsx": "^7.1.1",
     "storybook-react-router": "^1.0.3",
     "style-loader": "^1.x",
