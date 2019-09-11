@@ -61,7 +61,7 @@ const updateStateFromUser = (state, payload) => {
   delete adjustedUser.relationships;
   adjustedUser.favorites = favorites;
   const newState = {
-    authenticated: true,
+    authenticated: !state.authenticating,
     currentUser: adjustedUser,
     error: null
   };
