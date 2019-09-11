@@ -89,7 +89,7 @@
     "core-js": "2.6.9",
     "date-fns": "^1.29.0",
     "dotenv": "^6.0",
-    "entities": "^1.1.1",
+    "entities": "^2.x",
     "es6-promise": "^4.0.5",
     "express-session": "^1.12.1",
     "filesize": "^4.x",
