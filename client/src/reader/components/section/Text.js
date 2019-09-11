@@ -154,15 +154,16 @@ export default class Text extends Component {
               )}
             />
           </section>
+          {/* eslint-disable no-unused-vars */}
           <CSSTransition
             appear
             classNames="text-child"
             timeout={{ enter: 500, exit: 500 }}
             unmountOnExit
           >
-            /* eslint-disable-next-line no-unused-vars */
             {state => React.cloneElement(this.props.children, { key: page })}
           </CSSTransition>
+          {/* eslint-enable no-unused-vars */}
         </div>
       </HtmlClass>
     );
