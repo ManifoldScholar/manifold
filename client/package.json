@@ -37,7 +37,7 @@
     "_serve:ssr:rescue:render": "SSR_RESCUE=TRUE nodemon -q dist/manifold/ssr/manifold-client-ssr.js --watch dist/manifold/ssr/manifold-client-ssr.js",
     "_watch:banner": "node ./script/banner.js",
     "_watch:ssr": "IS_BUILD=true node -r @babel/register node_modules/.bin/webpack --color --watch --config ./webpack/config/ssr-dev.config.js",
-    "_watch:browser": "node -r @babel/register webpack/servers/webpack-dev-server",
+    "_watch:browser": "node -r @babel/register webpack/servers/webpack-dev-server --no-inline",
     "_wait:builds": "node script/wait.js --name=\"SSR\" --base=dist/manifold/ --on=ssr/manifold-client-ssr-rescue.js,ssr/manifold-client-ssr.js,manifest.json",
     "storybook": "start-storybook -p 3030"
   },
@@ -215,6 +215,7 @@
     "postcss-scss": "^2.0",
     "prettier": "^1.5.2",
     "react-hot-loader": "^4.12",
+    "@hot-loader/react-dom": "^16.8",
     "react-test-renderer": "^16.8",
     "regenerator-runtime": "^0.13.1",
     "rimraf": "^3.x",
