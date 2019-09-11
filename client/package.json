@@ -211,7 +211,7 @@
     "null-loader": "^0.1.1",
     "pluralize": "^7.0.0",
     "postcss-focus-visible": "^4.0.0",
-    "postcss-loader": "^2.0.6",
+    "postcss-loader": "^3.x",
     "postcss-scss": "^2.0",
     "prettier": "^1.5.2",
     "react-hot-loader": "^4.12",
