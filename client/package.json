@@ -204,7 +204,7 @@
     "file-loader": "^1.1",
     "jest": "^23.x",
     "jscodeshift": "^0.6.0",
-    "lint-staged": "^8.0",
+    "lint-staged": "^9.x",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.0",
     "nodemon": "^1.11.0",
@@ -238,6 +238,6 @@
     "webpack-node-externals": "^1.6.0"
   },
   "engines": {
-    "node": ">=6.11.5 <9.0.0"
+    "node": ">=8.0.0 <9.0.0"
   }
 }
