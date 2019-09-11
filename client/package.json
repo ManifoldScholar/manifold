@@ -208,7 +208,7 @@
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.0",
     "nodemon": "^1.11.0",
-    "null-loader": "^0.1.1",
+    "null-loader": "^3.x",
     "pluralize": "^8.x",
     "postcss-focus-visible": "^4.0.0",
     "postcss-loader": "^3.x",
