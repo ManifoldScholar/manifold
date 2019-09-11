@@ -92,7 +92,7 @@
     "entities": "^1.1.1",
     "es6-promise": "^4.0.5",
     "express-session": "^1.12.1",
-    "filesize": "^3.3.0",
+    "filesize": "^4.x",
     "focus-trap-react": "^3.1.2",
     "focus-visible": "^5.0.1",
     "glob": "^7.0.0",
