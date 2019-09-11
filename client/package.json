@@ -226,7 +226,7 @@
     "stylelint-config-recess-order": "^1.2.2",
     "stylelint-scss": "^2.1.0",
     "transform-imports": "^2.0.0",
-    "true-case-path": "^1.0.3",
+    "true-case-path": "^2",
     "uglifyjs-webpack-plugin": "^2.2",
     "url-loader": "^2.1",
     "wait-on": "^3",
