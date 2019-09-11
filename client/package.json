@@ -138,7 +138,7 @@
     "react-side-effect": "^2.1",
     "react-sociable": "^0.x",
     "react-sortable-hoc": "^1.8.3",
-    "react-swipeable": "^4.1.0",
+    "react-swipeable": "^5.x",
     "react-text-mask": "5.x",
     "react-transition-group": "1.x",
     "react-typekit": "^1.0.8",
