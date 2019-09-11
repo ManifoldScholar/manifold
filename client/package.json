@@ -187,7 +187,7 @@
     "babel-plugin-react-require": "^3.1.1",
     "cfonts": "^2.3.0",
     "circular-dependency-plugin": "^5.0.2",
-    "copy-webpack-plugin": "^4.0.1",
+    "copy-webpack-plugin": "^5.x",
     "css-loader": "^0.28.4",
     "enzyme": "^3.x",
     "enzyme-adapter-react-16": "^1.x",
