@@ -228,7 +228,7 @@
     "transform-imports": "^2.0.0",
     "true-case-path": "^1.0.3",
     "uglifyjs-webpack-plugin": "^1.x",
-    "url-loader": "^0.x",
+    "url-loader": "^2.1",
     "wait-on": "^3",
     "webpack": "^4.0.0",
     "webpack-bundle-analyzer": "^3.3.2",
