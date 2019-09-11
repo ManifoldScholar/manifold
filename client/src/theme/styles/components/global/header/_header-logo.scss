@@ -1,9 +1,9 @@
 .header-logo {
-  /* stylelint-disable property-no-vendor-prefix */
-  align-self: center;
   grid-area: logo;
   -ms-grid-row: 1;
   -ms-grid-column: 1;
+  /* stylelint-disable property-no-vendor-prefix */
+  align-self: center;
   max-width: 300px;
   color: $accentPrimary;
   text-decoration: none;

@@ -21,14 +21,14 @@
 
     @supports (display: grid) {
       display: grid;
-      grid-row-gap: $rowGapMobile;
       grid-template-columns: 1fr 1fr;
+      grid-row-gap: $rowGapMobile;
       margin-top: 0;
 
       @include respond($break85) {
         display: inline-grid;
-        grid-gap: $rowGapDesktop 64px;
         grid-template-columns: auto auto auto;
+        grid-gap: $rowGapDesktop 64px;
       }
     }
   }

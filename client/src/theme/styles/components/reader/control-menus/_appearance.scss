@@ -98,18 +98,18 @@
   &__font-control-group {
     display: -ms-grid;
     display: grid;
-    grid-row-gap: 23px;
-    -ms-grid-rows: auto 23px auto;
-    -ms-grid-columns: 1fr auto;
     grid-template:
       'font-style size-serif' auto
       'font-style size-sans' auto / 1fr auto;
+    grid-row-gap: 23px;
     padding-top: 16px;
     padding-bottom: 16px;
+    -ms-grid-rows: auto 23px auto;
+    -ms-grid-columns: 1fr auto;
 
     @include respond($break50) {
-      -ms-grid-rows: auto 29px auto;
       grid-row-gap: 29px;
+      -ms-grid-rows: auto 29px auto;
     }
   }
 
