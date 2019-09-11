@@ -2,7 +2,6 @@
 
 exports[`Backend Project Texts Container renders correctly 1`] = `
 Array [
-  <span />,
   <div
     className="buttons-icon-horizontal maintain"
   >

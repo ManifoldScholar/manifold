@@ -13,7 +13,6 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
       <div
         className="panel"
       >
-        <span />
         <section>
           <div
             className="content-placeholder content-placeholder--backend"
@@ -441,7 +440,6 @@ exports[`Backend.ProjectCollection.Wrapper container renders correctly when no p
             </header>
           </div>
         </section>
-        <span />
       </div>
     </div>
   </div>

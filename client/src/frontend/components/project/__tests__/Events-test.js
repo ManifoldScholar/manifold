@@ -2,9 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Events from "../Events";
 import build from "test/fixtures/build";
-import { Provider } from "react-redux";
-import { wrapWithRouter } from "test/helpers/routing";
 import { FrontendModeContext } from "helpers/contexts";
+import wrapWithContext from "test/helpers/wrapWithContext";
 
 describe("Frontend.Project.Events component", () => {
   const store = build.store();
@@ -21,14 +20,13 @@ describe("Frontend.Project.Events component", () => {
 
   it("renders correctly", () => {
     const component = renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <FrontendModeContext.Provider
-            value={{ isLibrary: true, isStandalone: false }}
-          >
-            <Events project={project} events={events} pagination={pagination} />
-          </FrontendModeContext.Provider>
-        </Provider>
+      wrapWithContext(
+        <FrontendModeContext.Provider
+          value={{ isLibrary: true, isStandalone: false }}
+        >
+          <Events project={project} events={events} pagination={pagination} />
+        </FrontendModeContext.Provider>,
+        store
       )
     );
     let tree = component.toJSON();

@@ -220,7 +220,6 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
             <div
               className="resource-link-wrapper"
             >
-              <span />
               <div
                 className="resource-preview-wrapper"
                 onClick={[Function]}
@@ -396,7 +395,6 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
             <div
               className="resource-link-wrapper"
             >
-              <span />
               <div
                 className="resource-preview-wrapper"
                 onClick={[Function]}

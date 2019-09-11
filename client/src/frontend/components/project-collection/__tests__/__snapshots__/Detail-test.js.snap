@@ -147,7 +147,9 @@ exports[`Frontend.ProjectCollection.Detail component renders correctly 1`] = `
     <div
       className="project-list grid entity-section-wrapper__body"
     >
-      <ul>
+      <ul
+        className="project-list grid"
+      >
         <li
           className="project-list__item--pos-rel"
         >

@@ -1,11 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import ProjectResources from "../";
-import { Provider } from "react-redux";
 import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
 import BackLink from "frontend/components/back-link";
-
+import wrapWithContext from "test/helpers/wrapWithContext";
 describe("Frontend ProjectResources Container", () => {
   const pagination = build.pagination();
   const store = build.store();
@@ -27,12 +25,11 @@ describe("Frontend ProjectResources Container", () => {
   };
 
   const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <BackLink.Provider>
-          <ProjectResources {...props} />
-        </BackLink.Provider>
-      </Provider>
+    wrapWithContext(
+      <BackLink.Provider>
+        <ProjectResources {...props} />
+      </BackLink.Provider>,
+      store
     )
   );
 

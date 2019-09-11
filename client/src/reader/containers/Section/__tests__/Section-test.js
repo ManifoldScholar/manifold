@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import { SectionContainer } from "../";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
+import wrapWithContext from "test/helpers/wrapWithContext";
 
 describe("Reader Section Container", () => {
   const store = build.store();
@@ -63,11 +63,7 @@ describe("Reader Section Container", () => {
   };
 
   const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <SectionContainer {...props} />
-      </Provider>
-    )
+    wrapWithContext(<SectionContainer {...props} />, store)
   );
 
   it("renders correctly", () => {

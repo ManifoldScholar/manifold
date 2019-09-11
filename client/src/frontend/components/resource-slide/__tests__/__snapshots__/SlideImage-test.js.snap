@@ -5,7 +5,6 @@ exports[`Frontend.ResourceList.Slide.SlideImage component renders correctly 1`] 
   <div
     className="resource-link-wrapper"
   >
-    <span />
     <div
       className="resource-preview-wrapper"
       onClick={[Function]}

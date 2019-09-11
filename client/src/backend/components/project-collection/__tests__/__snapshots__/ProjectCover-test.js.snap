@@ -234,13 +234,13 @@ exports[`Backend.ProjectCollection.ProjectCover component renders correctly 1`] 
             />
           </svg>
         </div>
-        <span>
+        <div>
           <span
             className="action-text"
           >
             Include
           </span>
-        </span>
+        </div>
       </div>
     </button>
   </div>

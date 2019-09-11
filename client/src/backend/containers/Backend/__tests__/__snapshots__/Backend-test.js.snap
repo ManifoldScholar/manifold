@@ -116,11 +116,9 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                           </button>
                                         </UserMenuButton>
                                         <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: C]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]} hidePanel={[Function]}>
-                                          <CSSTransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true}>
-                                            <TransitionGroup transitionName=\\"panel\\" transitionEnter={false} transitionLeaveTimeout={200} transitionAppear={false} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                                              <span />
-                                            </TransitionGroup>
-                                          </CSSTransitionGroup>
+                                          <CSSTransition in={[undefined]} classNames=\\"panel\\" enter={false} timeout={{...}} unmountOnExit={true}>
+                                            <Transition in={false} enter={false} timeout={{...}} unmountOnExit={true} onEnter={[Function]} onEntered={[Function]} onEntering={[Function]} onExit={[Function]} onExiting={[Function]} onExited={[Function]} mountOnEnter={false} appear={false} exit={true} />
+                                          </CSSTransition>
                                         </UIPanel>
                                       </li>
                                     </ul>
@@ -159,11 +157,9 @@ exports[`Backend Backend Container renders correctly 1`] = `
                       <NotificationsComponent scope=\\"global\\" notifications={{...}} dispatch={[Function]} animate={true} style=\\"header\\">
                         <section className=\\"notifications-container\\" role=\\"alert\\">
                           <div className=\\"notifications-list--context-header notifications-list\\">
-                            <CSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-                              <TransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                                <span />
-                              </TransitionGroup>
-                            </CSSTransitionGroup>
+                            <TransitionGroup component=\\"div\\" childFactory={[Function: childFactory]}>
+                              <div />
+                            </TransitionGroup>
                           </div>
                         </section>
                       </NotificationsComponent>

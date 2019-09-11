@@ -15,11 +15,9 @@ exports[`Backend Project Social Wrapper Container renders correctly 1`] = `
                       <Connect(withRouter(Drawer.Wrapper)) open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\">
                         <withRouter(Drawer.Wrapper) open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" connected={true} dispatch={[Function]}>
                           <Drawer.Wrapper open={false} parentRoute={{...}} closeUrl=\\"/backend/projects/1/social\\" connected={true} dispatch={[Function]} history={{...}} location={{...}} match={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" lockScrollClickCloses={true} context=\\"backend\\" size=\\"default\\" padding=\\"default\\" position=\\"default\\" entrySide=\\"right\\" includeDrawerFrontMatter={true} returnFocusOnDeactivate={true} focusTrap={true} includeSRCloseButton={false}>
-                            <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-                              <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                                <span />
-                              </TransitionGroup>
-                            </CSSTransitionGroup>
+                            <CSSTransition in={false} classNames=\\"drawer\\" timeout={{...}} unmountOnExit={true}>
+                              <Transition in={false} timeout={{...}} unmountOnExit={true} onEnter={[Function]} onEntered={[Function]} onEntering={[Function]} onExit={[Function]} onExiting={[Function]} onExited={[Function]} mountOnEnter={false} appear={false} enter={true} exit={true} />
+                            </CSSTransition>
                           </Drawer.Wrapper>
                         </withRouter(Drawer.Wrapper)>
                       </Connect(withRouter(Drawer.Wrapper))>

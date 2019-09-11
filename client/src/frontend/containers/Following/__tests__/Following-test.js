@@ -1,10 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { FollowingContainer } from "../";
-import { Provider } from "react-redux";
 import build from "test/fixtures/build";
-import { wrapWithRouter } from "test/helpers/routing";
 import auth from "test/helpers/auth";
+import wrapWithContext from "test/helpers/wrapWithContext";
 
 describe("Frontend Following Container", () => {
   const store = build.store();
@@ -28,15 +27,14 @@ describe("Frontend Following Container", () => {
 
   const component = () =>
     renderer.create(
-      wrapWithRouter(
-        <Provider store={store}>
-          <FollowingContainer
-            authentication={authentication}
-            featuredProjects={featuredProjects}
-            followedProjects={followedProjects}
-            dispatch={store.dispatch}
-          />
-        </Provider>
+      wrapWithContext(
+        <FollowingContainer
+          authentication={authentication}
+          featuredProjects={featuredProjects}
+          followedProjects={followedProjects}
+          dispatch={store.dispatch}
+        />,
+        store
       )
     );
 

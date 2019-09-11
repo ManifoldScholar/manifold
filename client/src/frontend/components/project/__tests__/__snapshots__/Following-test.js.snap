@@ -82,13 +82,13 @@ Array [
             />
           </svg>
         </div>
-        <span>
+        <div>
           <span
             className="action-text"
           >
             Follow
           </span>
-        </span>
+        </div>
       </div>
     </button>
   </div>,

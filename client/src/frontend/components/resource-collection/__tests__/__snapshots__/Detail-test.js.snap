@@ -104,22 +104,16 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
     <div
       className="slide"
     >
-      <div
-        onMouseDown={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-      >
+      <div>
         <div
           className="resource-slide-figure"
         >
-          <span>
+          <div>
             <div>
               <figure>
                 <div
                   className="resource-link-wrapper"
                 >
-                  <span />
                   <div
                     className="resource-preview-wrapper"
                     onClick={[Function]}
@@ -166,7 +160,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                 />
               </figure>
             </div>
-          </span>
+          </div>
         </div>
       </div>
       <div
@@ -592,7 +586,6 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
             <div
               className="resource-link-wrapper"
             >
-              <span />
               <div
                 className="resource-preview-wrapper"
                 onClick={[Function]}

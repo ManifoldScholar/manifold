@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend Project Permissions Container renders correctly 1`] = `
-<Connect(withRouter(AuthorizeComponent))
+<UNDEFINED
   ability="managePermissions"
   entity={
     Object {
@@ -227,5 +227,5 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
       }
     />
   </section>
-</Connect(withRouter(AuthorizeComponent))>
+</UNDEFINED>
 `;

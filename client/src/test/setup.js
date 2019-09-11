@@ -1,4 +1,7 @@
 import "@babel/polyfill";
+import { HelmetProvider } from "react-helmet-async";
+
+HelmetProvider.canUseDOM = false;
 
 // We mock 3rd party libraries that depend on the refs because react-test-renderer doesn't
 // support DOM refs, which breaks our tests.
